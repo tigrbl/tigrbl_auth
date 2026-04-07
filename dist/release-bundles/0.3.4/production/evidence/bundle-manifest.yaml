@@ -208,10 +208,10 @@ deployment:
 copied_artifacts:
 - path: compliance\claims\effective-target-claims.production.yaml
   present: true
-  sha256: 394974838efeca5d4d2f9227efa057de2b9c02f000bf380ae2775fb89e150ed3
+  sha256: 88bf275627933bd97bb74956c918bfabee21b34f16c8ad07fdf7931d81c8b975
 - path: compliance\evidence\effective-release-evidence.production.yaml
   present: true
-  sha256: b51cfbd87eca0ebb64a9d12e77221e66323b0acd34737466791d2664f3a7a7da
+  sha256: db28cd1fdf28c1e7ef43df964f8e6583a980b9299f3f2189f3889b5b27003d2e
 - path: specs\openapi\profiles\production\tigrbl_auth.public.openapi.json
   present: true
   sha256: 53d6553aefbc9925a41e07572ffb1c125edce2a736c18ba60a3d132915402534

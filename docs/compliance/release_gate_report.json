@@ -3,7 +3,7 @@
   "failures": [],
   "warnings": [],
   "summary": {
-    "gate_count": 23,
+    "gate_count": 24,
     "failed_gate_count": 0,
     "validated_execution_artifact_count": 33,
     "required_validated_inventory_count": 30,
@@ -22,6 +22,11 @@
     },
     {
       "gate": "gate-05-governance",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-08-claim-registry-sync",
       "passed": true,
       "rc": 0
     },

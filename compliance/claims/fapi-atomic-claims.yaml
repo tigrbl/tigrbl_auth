@@ -1,0 +1,48 @@
+schema_version: 1
+package: tigrbl_auth
+profile: fapi2-security
+claims:
+- id: fapi2-security.par-required
+  title: FAPI 2.0 Security profile requires PAR
+  description: Pushed authorization requests are part of the first-class FAPI 2.0 security posture.
+  targets:
+  - RFC 9126
+  required_flags:
+  - enable_rfc9126
+- id: fapi2-security.jar-required
+  title: FAPI 2.0 Security profile requires JAR
+  description: JWT-secured authorization requests are part of the first-class FAPI 2.0 security posture.
+  targets:
+  - RFC 9101
+  required_flags:
+  - enable_rfc9101
+- id: fapi2-security.rar-required
+  title: FAPI 2.0 Security profile requires RAR
+  description: Rich authorization requests are part of the first-class FAPI 2.0 security posture.
+  targets:
+  - RFC 9396
+  required_flags:
+  - enable_rfc9396
+- id: fapi2-security.issuer-identification
+  title: FAPI 2.0 Security profile requires issuer identification
+  description: Authorization responses and discovery metadata must remain issuer-aware.
+  targets:
+  - RFC 9207
+  required_flags:
+  - enable_rfc9207
+- id: fapi2-security.sender-constrained-tokens
+  title: FAPI 2.0 Security profile requires sender-constrained tokens
+  description: Sender constraint support is modeled through the hardening token posture.
+  targets:
+  - RFC 8705
+  - RFC 9449
+  required_flags:
+  - enable_rfc8705
+  - enable_rfc9449
+- id: fapi2-security.security-bcp
+  title: FAPI 2.0 Security profile requires security BCP posture
+  description: The profile inherits the hardened security recommendations already tracked in the repo.
+  targets:
+  - RFC 9700
+  required_flags:
+  - enable_rfc9700

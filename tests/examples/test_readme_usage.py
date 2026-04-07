@@ -67,7 +67,8 @@ def test_refresh_token_flow_in_readme():
         },
     ).json()
     refreshed = client.post(
-        "/token/refresh", json={"refresh_token": tokens["refresh_token"]}
+        "/token",
+        data={"grant_type": "refresh_token", "refresh_token": tokens["refresh_token"], "client_id": tokens.get("client_id", "")},
     ).json()
     assert "access_token" in refreshed
 

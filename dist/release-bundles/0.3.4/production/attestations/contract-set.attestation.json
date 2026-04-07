@@ -3,14 +3,14 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-artifact/v1",
-    "issued_at": "2026-04-07T09:16:07Z",
+    "issued_at": "2026-04-07T22:39:50Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
-      "key_id": "ed25519:d733db3b20c5e52d3acddfa8",
+      "key_id": "ed25519:b91a2b82040d55388dec560b",
       "algorithm": "Ed25519",
       "identity_kind": "repository-release-attestor",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAvb7ZzItHWRNMZZKKYDtabzK5TakYu2FOfIATr14hAgo=\n-----END PUBLIC KEY-----\n",
-      "public_key_sha256": "d733db3b20c5e52d3acddfa862ea5546e8a142c96d285bdff5864233cf17ce71",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
+      "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
       "source": "inline-pem"
     },
     "subject": {
@@ -20,14 +20,14 @@
       "artifact_label": "contract-set",
       "artifact_kind": "contract-set-manifest",
       "artifact_path": "attestations/contract-set.manifest.json",
-      "artifact_sha256": "f19740a6bb1248d2a8966603ad06ae55db799825bd8ba150f1900fdecb2d5916",
+      "artifact_sha256": "ffeda5e074c3cab168163015a794ab8304765efb7e69204b0c927ab5ccb63fa3",
       "media_type": "application/json"
     }
   },
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "admQCma9Vh1BqW0b0Vj91BVBZwmrBkwnD7D4mO9bMniVYZjEoi-1SSLqYm5RsRodHOdheqDhTET2Cqtfou2SAA",
-    "payload_sha256": "c67aa43777f4a804bc4edb34a20dc501f6fc58bcf719903fd229dd775c1cb7b2"
+    "value": "pyWwjl5WfVcYPudLhgQnhQbWibnx38oq_UhqWMSGgIFs_d8rekh738-hGmvnmI3ZI3mvqXaJW_OU49eToPDLBg",
+    "payload_sha256": "0e3f173b483e69ee218c49daf90cedb618deb51ff3e63e25237d4305a78f9935"
   }
 }

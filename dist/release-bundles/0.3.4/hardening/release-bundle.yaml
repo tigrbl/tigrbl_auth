@@ -284,7 +284,7 @@ documentation_scope:
 release_classification: candidate-checkpoint-not-certified
 current_state_summary:
   repository_tier: 3
-  phase: P10
+  phase: P14
   authoritative_scope_manifest: compliance\targets\certification_scope.yaml
   boundary_freeze_active: true
   boundary_freeze_passed: true
@@ -301,12 +301,12 @@ current_state_summary:
   authoritative_current_doc_count: 21
   archived_historical_root_count: 1
   archived_reference_doc_count: 17
-  certification_bundle_current_state_doc_count: 20
+  certification_bundle_current_state_doc_count: 22
   declared_claim_count: 48
   mapped_module_count: 48
   mapped_test_count: 48
   mapped_evidence_count: 48
-  effective_baseline_count: 23
+  effective_baseline_count: 22
   effective_production_count: 36
   effective_hardening_count: 46
   tier_0_claim_count: 0
@@ -324,7 +324,7 @@ current_state_summary:
   tier4_invalid_external_bundle_count: 0
   tier4_missing_external_bundle_count: 16
   tier4_external_handoff_template_present: true
-  signed_release_bundle_count: 9
+  signed_release_bundle_count: 13
   release_attestation_verifiable: true
   base_dependency_count: 22
   base_exact_pinned_dependency_count: 22
@@ -377,7 +377,7 @@ current_state_summary:
   operator_plane_backend: sqlite-authoritative
   operator_plane_repo_mutation_dependency: false
   operator_plane_tenancy_enforced: true
-  operator_plane_database_present: false
+  operator_plane_database_present: true
   operator_plane_state_root: C:\Users\bigman\.local\state\tigrbl_auth\operator-plane\tigrbl_auth-9a06a2e3bfb81899
   operator_plane_portability_schema_version: 3
   pyproject_requires_python: '>=3.10,<3.13'
@@ -520,8 +520,8 @@ certification_state_summary:
   - One or more operator-visible package capabilities still lacks end-to-end verification
     in the current environment.
 release_gate_summary:
-  gate_count: 20
-  failed_gate_count: 0
+  gate_count: 24
+  failed_gate_count: 3
   validated_execution_artifact_count: 33
   required_validated_inventory_count: 30
   validated_inventory_present_count: 30
@@ -546,7 +546,7 @@ final_release_status:
   fully_rfc_compliant_now: false
   fully_non_rfc_spec_compliant_now: false
   strict_independent_claims_ready: false
-  release_gates_passed: true
+  release_gates_passed: false
   final_release_gate_passed: true
 validated_execution_summary:
   validated_artifact_count: 33
@@ -566,10 +566,10 @@ validated_execution_summary:
 artifacts:
 - path: compliance/claims/effective-target-claims.hardening.yaml
   present: true
-  sha256: 7e607abf7c83a029344ff9cc3a831da79fbd8d9a30d13e2ee1786e23964d511c
+  sha256: 332217cf667f04374e65d654bd5d4d7e5d6aaee009fbb61dd620ffd88ae07586
 - path: compliance/evidence/effective-release-evidence.hardening.yaml
   present: true
-  sha256: 84f0605715a5ec699d572febf436814fe77c57d25d6cb9355f0c35ecbf2ae1a0
+  sha256: c2e785253a06267919593a6dcd0ed34a5172ac13644026b8812c5f74f5fbcb04
 - path: specs\openapi\profiles\hardening\tigrbl_auth.public.openapi.json
   present: true
   sha256: 27fd63b508d6d2ea20e17d09792a4d1f53f9f16eb7edb292ab82067044efbdda
@@ -629,22 +629,22 @@ artifacts:
   sha256: 1f8479939ed2775b3529a3fdc756672a1df6c278247baff7107bf0ed47e3701b
 - path: docs/compliance/truth_chain.json
   present: true
-  sha256: cee3f1b840cb7c272b917abb2687a997155010e67847a989a19e6c1218f9e22c
+  sha256: 7cb292af53d9e53719cb8dbc918829b6319faecb74c302ab15ab0dd422c52dba
 - path: docs/compliance/truth_chain.md
   present: true
-  sha256: ae1ad421f3dfcc91fc540ba10a1d3312938b269291ac0a630cdf490dca3f1bfb
+  sha256: 1d2eb4a86198431d008647bac30195cbda42b6e0b413490c023864dedb78ad47
 - path: docs/compliance/current_state_report.json
   present: true
-  sha256: 00c0985ce6a8b0ba611cac12529f673b90856f42c681486931385cbfaca8ae36
+  sha256: 7462fe3deb4cf505cc96743acbb03e1fd56484766510e2f93b29fdc9a0ef1339
 - path: docs/compliance/current_state_report.md
   present: true
-  sha256: 82c20fcbbcae84fc87ea79be680a4519650de21304d0e1b8666026d4f4ee9559
+  sha256: 3eb347e3f1c03b2269de5594998c74a1dfec7676a8997c7f81dc9c1f9e2e9cd7
 - path: docs/compliance/install_substrate_report.json
   present: true
-  sha256: 19939aecb4380af0bc44a0f0d5fa3269d31e3d06a02df15e8b76b150793756d9
+  sha256: 7eeb5018c12a93ce7dcf07ea23ba1fd773acc71655fdf71f682e09bd6af5dc6d
 - path: docs/compliance/install_substrate_report.md
   present: true
-  sha256: b4ff180dcc9c5a2a7f2eef1ccbd788b9058e15bdc116e356f4fff115910ea722
+  sha256: a1d3aeb6b3ee7a153fccf63779e9097d5231a726933300a372b050803fbd8c39
 - path: docs/compliance/certification_state_report.json
   present: true
   sha256: 07e3769474f7a48b580438585e47be4516ad307eb60548dc33e9820ba542151a
@@ -653,16 +653,16 @@ artifacts:
   sha256: c6ab0585907cfbb7d2a7e363895cd96f48cd188260cccab9dc1573beb302908c
 - path: docs/compliance/runtime_profile_report.json
   present: true
-  sha256: 572cb9cd6640f2cc761dc840fb503530bac32021e29a0d7dde879b87bfeb8765
+  sha256: 2d6863460d51a119ebe9090a6225b767139d73c09f30646d551288a7c6762a61
 - path: docs/compliance/runtime_profile_report.md
   present: true
-  sha256: 42dacd5fb54eaa60c769041bd5f9f3841106f514b049f67b5225ccc59c0db3aa
+  sha256: 0a9ae82b96bf3db3f8533cf02fac9b8e87a05c89d39ec314a2467e722d3c9147
 - path: docs/compliance/release_gate_report.json
   present: true
-  sha256: b035380cb6bea50cd4f064f766791e7046e2b9452830f9bbe0b1fc1fa59b62f6
+  sha256: 2c9c3d0dce4d70c9c053511ff3f8b7c2fe4e3165849f6691eeefb196a6e91881
 - path: docs/compliance/release_gate_report.md
   present: true
-  sha256: 476f852ca4b00b7af5274bebbef4d892c5c9369363a756e08357c4a4255dc845
+  sha256: bca467144b2dd5a01ac7168d7bdffd03c7540d9488be5746371837b57aa91fba
 - path: docs/compliance/final_release_gate_report.json
   present: true
   sha256: 962c816ec203068cebee517504d43cb6c7191e303852d22f0c9be1fd05e859f7
@@ -677,79 +677,79 @@ artifacts:
   sha256: 8bb87ab43c0c5780004200e408bd6dd373650738fa2f66f21c42265da616f181
 - path: docs/compliance/release_signing_report.json
   present: true
-  sha256: bd68b61b9f8a02031c2ace4a165ff0279667522bacfe17595c5d001bbda66def
+  sha256: 5ee937899b991deb6071bf48a191fc20b92266d2fc9aa8724035f1d544cd0295
 - path: docs/compliance/release_signing_report.md
   present: true
-  sha256: 5870432d7a1f7bd7b611bcce71c87ca6db91fc6b890f1d6c86876e543b8d7743
+  sha256: d0e1087fca299dcd0c2b504b3721e67a5bd9d2343c776a3a53fbfdd6b8a75472
 - path: docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json
   present: true
-  sha256: 64029f83399254598c928370167d2b899862b5e9f07f8dee8be8b8d38981b514
+  sha256: ac379cbf729cdd24f4197df5c655b28f87c1f0c9d5932f112d6480e7ec67d90f
 - path: docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md
   present: true
-  sha256: 5449f591dcf54c6450b2956b0fa01f6b652ef2b332ca4cb5930d3a4aaabab7dc
+  sha256: 1deea2d5ac92629715d1c0feded72f806e236ceded8de4a47035c44d21576e93
 - path: specs/cli/cli_contract.json
   present: true
-  sha256: 84bf409c8ae8c0b3229fb6ddc28a174dfae5f6c89a5c97728ba9f0f28955c90d
+  sha256: 9ee1d3a3dace4eed4caa6ae08238d3e7652cb96b47e744b9330770d3efff78c4
 - path: specs/cli/cli_contract.yaml
   present: true
-  sha256: 2644fd0144c474012a33ef76e141a902a017a7fb332fc0c663c237606601dcc7
+  sha256: bde6f111aae66f37c399c9c1c740697b4373d6d74725dd35ebd8ce470345bacb
 - path: specs\discovery\profiles\hardening\jwks.json
   present: true
-  sha256: 05ccde0b38745fb5af6b5c5fca0dccd1a4de971d5fc728a67fd63d1ea4de44e2
+  sha256: e8d390774bea0b3c4fa9883a4d988634968adb0183f0d01a33ebc489399db74c
 - path: specs\discovery\profiles\hardening\oauth-authorization-server.json
   present: true
-  sha256: d5e33a0fae956721d254f612c8ac944c7505968d6710ff11a97670b84afd10f5
+  sha256: 27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6
 - path: specs\discovery\profiles\hardening\oauth-protected-resource.json
   present: true
   sha256: 16547f623ba74d66c12271d9a0e84909079065f09a7094061948544e0a990374
 - path: specs\discovery\profiles\hardening\openid-configuration.json
   present: true
-  sha256: d5e33a0fae956721d254f612c8ac944c7505968d6710ff11a97670b84afd10f5
+  sha256: 27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6
 - path: compliance\evidence\tier4\executions\assertion-client.hardening.yaml
   present: true
-  sha256: 149b4fdea11f0079fac4e3566fa945be9410b88e4c2874626037a42d4328291e
+  sha256: 9391b9f1f185fb11d95585282b8faa881527801b6d5f980321d4d924743405ab
 - path: compliance\evidence\tier4\executions\browser.hardening.yaml
   present: true
-  sha256: b682ce1125dbc0395a99304f121906d7d20ef3956ea966adcc96088ff1957170
+  sha256: d81fed3bd6e43737943cc0a807b86e5465da50ccb211ff410346d5fd18331bd4
 - path: compliance\evidence\tier4\executions\client-mgmt.hardening.yaml
   present: true
-  sha256: cb06d7c9f5a5687fbf3c6fcbf83777c5cdff4e0bc627abaaed80415e43b6e80f
+  sha256: c4fa93fa7edcff2b5f3a81011e81006b39f1bdd0d6f95cb7099e388ec281a257
 - path: compliance\evidence\tier4\executions\device.hardening.yaml
   present: true
-  sha256: 51ab0cf6e98ce1f7ea04ce1555791e131c5975851c13d863dbd9a964129ed6be
+  sha256: 17d0ab376591201ae0152c0857e1c13f5e0789befe601aeaf2053c9c6ed0ffa9
 - path: compliance\evidence\tier4\executions\dpop.hardening.yaml
   present: true
-  sha256: 2d322bc91c251e181f21b957b5db74ba52ddbc25028dc9b5eb8b0a1905954764
+  sha256: b9ba7734901755aa13b559be3fad3a63e7cc31fa95ef26e3ef28ca251c276348
 - path: compliance\evidence\tier4\executions\gateway.hardening.yaml
   present: true
-  sha256: 80c7a9ee503cd17bb409f190daf14c2ccd701fa9d0068df505401fea13880d8f
+  sha256: 55369d9d1ea47a9925837be8c0b2ad9ed123cc0020186d1f6cda514107052e1b
 - path: compliance\evidence\tier4\executions\mtls.hardening.yaml
   present: true
-  sha256: 3be645401744bd3684f736146fa014318a248fd5d18144163ce29dcfd2c3ce56
+  sha256: b4248029e22fb97b837f099617413c1926264c7bcfb3f351632379914d19b5e2
 - path: compliance\evidence\tier4\executions\native.hardening.yaml
   present: true
-  sha256: 2b4c631c819e77e7337fe455e667a5bd78df7e570f3efd55b91ca9025d70ebf5
+  sha256: 067500fbb29265ad3784fb85a9fcb35a11370d2cadec13b67cd5321081f243e0
 - path: compliance\evidence\tier4\executions\ops-cli.hardening.yaml
   present: true
-  sha256: c46766eb9dfe25be625564ab5bfd31a4b394b82389c579e83f4374d9c3d16310
+  sha256: 7d5d4c521c6dcd6a960c322b5c900ba9ca307783683aab74ae5bc1c4c9a6a496
 - path: compliance\evidence\tier4\executions\par-jar-rar.hardening.yaml
   present: true
-  sha256: 6a162e341057d38d7d13251a4241ec06f96cd5cc5ead921d30484ceabb083daa
+  sha256: ef3ab0f54cfd94fa4aa51b5770b4f395f865dca4f05a9798b53ca012c2a32afb
 - path: compliance\evidence\tier4\executions\resource-server.hardening.yaml
   present: true
-  sha256: 145aacb4a01698cc954aa75fc2b66c6c893c568bdb52a6594296ffe93ff56bb7
+  sha256: c81bc285ad9b9d33748c1a25f83604a1fd8821a73521093e7f36f64d73f5fa17
 - path: compliance\evidence\tier4\executions\rp-session-logout.hardening.yaml
   present: true
-  sha256: cb0cddd425a6f780b115c656d9c2a7cb46f7b1c792d4852b85c3fdd197ee5dbd
+  sha256: 9a5cf9a7a008cfe79966245ae38b706da1f48109c8c9a8d3472e7e5f0a08a5c8
 - path: compliance\evidence\tier4\executions\runner-hypercorn.hardening.yaml
   present: true
-  sha256: e71459266147f3c285b8ebbbd65020e7bb11e5d31481ae8e3050baae8b6c35e2
+  sha256: 9505741d2691d07f8483c44e4b98d121ea223ac3dfd80526a7114bf4fb1f6ddc
 - path: compliance\evidence\tier4\executions\runner-tigrcorn.hardening.yaml
   present: true
-  sha256: 32ec9ad40200d7feba601ab9faf795d67f3597b0493dd236cad043723ecd3642
+  sha256: e211e02b2b7521d507642620065b8523e8928107d41a7650e09b6fc700c7be66
 - path: compliance\evidence\tier4\executions\runner-uvicorn.hardening.yaml
   present: true
-  sha256: a8fb17ed7882e2fd289d9c6d051e36505f69f6386e921e68b3c84b8c36ee6b30
+  sha256: 86ef7a644e50150fa960a2e451c42031f11d347acb16a1708f8ceca00bdc8759
 - path: compliance\evidence\tier4\executions\spa.hardening.yaml
   present: true
-  sha256: e83fe188ad27ab789926e5d1022d9c53e1e861104e71abd986fe191bf99730d5
+  sha256: 9729a3087e08b915096e1053e7af5be3e8d2c45a5b175fcd7d694d5010ae7eac

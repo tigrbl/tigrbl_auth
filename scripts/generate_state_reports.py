@@ -8,11 +8,13 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from tigrbl_auth.cli.claim_registry import generate_claim_registries
 from tigrbl_auth.cli.reports import generate_state_reports, summarize_evidence_status
 from tigrbl_auth.cli.truth import materialize_truth_chain
 
 
 def main() -> int:
+    generate_claim_registries(ROOT)
     payload = generate_state_reports(ROOT)
     summarize_evidence_status(ROOT)
     materialize_truth_chain(ROOT)

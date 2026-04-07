@@ -75,6 +75,34 @@ profiles:
     runtime_styles:
     - plugin
     - standalone
+  fapi2-security:
+    description: FAPI 2.0 security profile with hardened request channels, sender-constrained
+      tokens, and issuer-aware authorization responses.
+    phase: P3
+    minimum_claim_tier: 3
+    claimable: true
+    scope: core
+    target_sets:
+    - rfc-targets
+    - oidc-targets
+    - openapi-targets
+    - openrpc-targets
+    excludes:
+    - extension-targets
+    - alignment-targets
+    surface_sets:
+    - public-rest
+    - admin-rpc
+    - diagnostics
+    protocol_slices:
+    - par
+    - jar
+    - rar
+    - dpop
+    - mtls
+    runtime_styles:
+    - plugin
+    - standalone
   peer-claim:
     description: Independent peer-supported promotion profile for fully evidenced
       targets.

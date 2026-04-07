@@ -97,6 +97,15 @@ DEFAULT_VALUES: Final[dict[str, Any]] = {
     "enable_rfc8523": False,
 }
 
+PROFILE_DEFAULT_OVERRIDES: Final[dict[str, dict[str, Any]]] = {
+    "fapi2-security": {
+        "enable_rfc8705": True,
+        "enable_id_token_encryption": True,
+        "require_tls": True,
+        "strict_boundary_enforcement": True,
+    },
+}
+
 SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
     "public-rest": {
         "surface_public_enabled": True,
@@ -245,7 +254,7 @@ TARGET_FLAG_REQUIREMENTS: Final[dict[str, tuple[str, ...]]] = {
 }
 
 
-VALID_PROFILES: Final[tuple[str, ...]] = ("baseline", "production", "hardening", "peer-claim")
+VALID_PROFILES: Final[tuple[str, ...]] = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 VALID_PLUGIN_MODES: Final[tuple[str, ...]] = tuple(PLUGIN_MODE_TO_SURFACE_SETS)
 VALID_RUNTIME_STYLES: Final[tuple[str, ...]] = ("plugin", "standalone")
 
@@ -346,7 +355,7 @@ def _settings_dict(settings_obj: object | None) -> dict[str, Any]:
 
 def _all_profile_flags() -> set[str]:
     names: set[str] = set()
-    for profile in ("baseline", "production", "hardening"):
+    for profile in ("baseline", "production", "hardening", "fapi2-security"):
         names.update(flags_for_profile(profile))
     return names
 
@@ -410,6 +419,7 @@ def resolve_deployment(
         raw.update(flag_overrides)
 
     profile_name = _valid_or_default(profile or str(raw.get("deployment_profile", "baseline")), VALID_PROFILES, "baseline")
+    raw.update(PROFILE_DEFAULT_OVERRIDES.get(profile_name, {}))
     plugin_mode_name = _valid_or_default(plugin_mode or str(raw.get("surface_plugin_mode", "mixed")), VALID_PLUGIN_MODES, "mixed")
     runtime_style_name = _valid_or_default(runtime_style or str(raw.get("runtime_style", "standalone")), VALID_RUNTIME_STYLES, "standalone")
 

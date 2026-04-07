@@ -3,7 +3,7 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-artifact/v1",
-    "issued_at": "2026-04-07T09:16:19Z",
+    "issued_at": "2026-04-07T22:40:02Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
       "key_id": "ed25519:47cff9cbdf9030464a7095e6",
@@ -20,14 +20,14 @@
       "artifact_label": "contract-set",
       "artifact_kind": "contract-set-manifest",
       "artifact_path": "attestations/contract-set.manifest.json",
-      "artifact_sha256": "e871e9787fb8f3188134462e0cc0055b72aeced1b2f43345673fdeddf343a5f2",
+      "artifact_sha256": "b6fc020de3d2a2d8b9efd5a3e9db316b12c02f86f7585a7d8399cc21d67fcc59",
       "media_type": "application/json"
     }
   },
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "x7ueSSqEEze2qMXsnijBqHU97CGkKl9bqXmes3XLuZK_KoGvdoPj019Mft-12P2AJR41_HTU1IptYLcOfx2CDg",
-    "payload_sha256": "c587ba527d2adc34b3c42ec6e73eba299eb01d97f6d4bb9610a8721fc31e19e8"
+    "value": "C_99bVHAw3kNhKg7l8unPZGvK43lrMhdVmBxSUK-PYFd2ZG3tY06vvhWB8kU-oMb04jnJFl5FghgAl-5yYHcCw",
+    "payload_sha256": "561841ca7116e00b2675e5ddbf27dcc705243fbd7b607061fff2f1ea89550b39"
   }
 }

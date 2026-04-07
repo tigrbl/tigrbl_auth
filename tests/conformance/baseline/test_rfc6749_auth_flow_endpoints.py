@@ -22,7 +22,6 @@ def test_rfc6749_core_endpoints_present() -> None:
     paths = _collect_paths(app)
     assert {
         "/token",
-        "/token/refresh",
         "/introspect",
     } <= paths
 

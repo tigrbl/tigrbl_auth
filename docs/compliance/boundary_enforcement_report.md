@@ -10,7 +10,7 @@
 - baseline_route_count: `6`
 - production_route_count: `13`
 - hardening_route_count: `16`
-- baseline_claim_count: `23`
+- baseline_claim_count: `22`
 - production_claim_count: `36`
 - hardening_claim_count: `46`
 - scope_freeze_present: `True`

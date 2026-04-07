@@ -248,12 +248,12 @@
     {
       "path": "compliance\\claims\\effective-target-claims.peer-claim.yaml",
       "present": true,
-      "sha256": "c473dcadcc6fca6a318ceba5a5bd8b9a3e79649527dda497f057b20e19c5dffc"
+      "sha256": "22d5439ac8dea94586afd7772b0ab12c402f64a1a912affe8269a851a254cddd"
     },
     {
       "path": "compliance\\evidence\\effective-release-evidence.peer-claim.yaml",
       "present": true,
-      "sha256": "a3ef67792b2cf6537d5e2ab4ef3e790faa1c0d014a0015a7d2cb8f3195659d0a"
+      "sha256": "2f716d45151d36c0fb0466f33bb509d56c51652f9093dac7bf293e3e45186404"
     },
     {
       "path": "specs\\openapi\\profiles\\peer-claim\\tigrbl_auth.public.openapi.json",

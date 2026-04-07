@@ -1,0 +1,13 @@
+schema_version: 1
+package: tigrbl_auth
+summary:
+  risk_count: 2
+risks:
+- id: risk.truthful-release-positioning
+  status: active
+  description: Certification messaging must remain checkpoint-only until the truth
+    chain reports final_release_ready=true.
+- id: risk.claim-registry-drift
+  status: mitigated
+  description: Legacy maps and atomic claim rows can drift unless generated from canonical
+    source metadata.

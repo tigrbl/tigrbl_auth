@@ -1,6 +1,7 @@
 ordered_gates:
 - gate-00-structure
 - gate-05-governance
+- gate-08-claim-registry-sync
 - gate-10-static
 - gate-12-project-tree-layout
 - gate-15-boundary-enforcement

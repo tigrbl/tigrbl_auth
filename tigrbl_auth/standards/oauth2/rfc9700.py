@@ -1,6 +1,6 @@
 """Executable security-BCP posture helpers for RFC 9700-aligned deployments.
 
-This module converts hardening and peer profiles from declarative target sets
+This module converts hardening, FAPI 2.0 security, and peer profiles from declarative target sets
 into runtime-enforceable policy.  The authoritative release path uses these
 helpers from the authorization endpoint, token endpoint, contract generation,
 and discovery metadata generation so the published posture matches runtime
@@ -107,7 +107,7 @@ def _as_deployment(
 
 
 def _is_hardened_profile(deployment: ResolvedDeployment) -> bool:
-    return deployment.profile in {"hardening", "peer-claim"}
+    return deployment.profile in {"hardening", "fapi2-security", "peer-claim"}
 
 
 def _base_response_types(deployment: ResolvedDeployment) -> tuple[str, ...]:
@@ -133,7 +133,7 @@ def _base_response_modes(deployment: ResolvedDeployment) -> tuple[str, ...]:
 
 
 def _base_grant_types(deployment: ResolvedDeployment) -> tuple[str, ...]:
-    grants: list[str] = ["authorization_code", "client_credentials"]
+    grants: list[str] = ["authorization_code", "client_credentials", "refresh_token"]
     if not _is_hardened_profile(deployment):
         grants.append("password")
     if deployment.flag_enabled("enable_rfc7521") or deployment.flag_enabled("enable_rfc7523"):
@@ -186,7 +186,7 @@ def security_bcp_profile(settings_obj: object | ResolvedDeployment | None = None
 
 
 def authorization_enforcement_matrix(
-    profiles: Sequence[str] = ("baseline", "production", "hardening", "peer-claim"),
+    profiles: Sequence[str] = ("baseline", "production", "hardening", "fapi2-security", "peer-claim"),
 ) -> list[dict[str, object]]:
     return [runtime_security_profile(profile=profile_name).as_dict() for profile_name in profiles]
 
@@ -211,12 +211,12 @@ def assert_authorization_request_allowed(
     if policy.pkce_required_for_all_clients and response_type == "code" and not params.get("code_challenge"):
         raise OAuthPolicyViolation(
             "invalid_request",
-            "PKCE is mandatory for authorization_code flows in hardening and peer profiles",
+            "PKCE is mandatory for authorization_code flows in hardening, FAPI, and peer profiles",
         )
     if policy.par_required and not params.get("request_uri"):
         raise OAuthPolicyViolation(
             "invalid_request",
-            "Pushed authorization requests are mandatory in hardening and peer profiles when RFC 9126 is enabled",
+            "Pushed authorization requests are mandatory in hardening, FAPI, and peer profiles when RFC 9126 is enabled",
         )
 
 
@@ -234,7 +234,7 @@ def assert_token_request_allowed(
     if not policy.password_grant_allowed and grant_type == "password":
         raise OAuthPolicyViolation(
             "unsupported_grant_type",
-            "resource owner password credentials grant is disabled in hardening and peer profiles",
+            "resource owner password credentials grant is disabled in hardening, FAPI, and peer profiles",
         )
 
 
@@ -287,7 +287,7 @@ def validate_sender_constraint(
         detail = " or ".join(allowed) if allowed else "sender-constrained token proof"
         raise OAuthPolicyViolation(
             "invalid_request",
-            f"hardening and peer profiles require {detail} at the token issuance boundary",
+            f"hardening, FAPI, and peer profiles require {detail} at the token issuance boundary",
         )
     return SenderConstraintResult()
 
@@ -398,7 +398,7 @@ def discovery_policy_metadata(deployment: ResolvedDeployment) -> dict[str, objec
         payload["resource_parameter_supported"] = True
     if policy.rich_authorization_requests_supported:
         payload["authorization_details_types_supported"] = ["*"]
-    if deployment.flag_enabled("enable_rfc9068") or deployment.profile in {"production", "hardening", "peer-claim"}:
+    if deployment.flag_enabled("enable_rfc9068") or deployment.profile in {"production", "hardening", "fapi2-security", "peer-claim"}:
         payload["access_token_signing_alg_values_supported"] = ["EdDSA"]
     return payload
 

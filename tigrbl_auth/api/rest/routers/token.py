@@ -30,11 +30,4 @@ async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)):
         details=payload,
     )
     return result
-
-
-@api.route('/token/refresh', methods=['POST'], response_model=TokenPair)
-async def token_refresh(request: Request, db: AsyncSession = TigrblDepends(get_db)):
-    return await token(request=request, db=db)
-
-
 __all__ = ['router', 'api']

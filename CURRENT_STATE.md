@@ -23,6 +23,12 @@ The current package state is a blocked certification checkpoint. It is not certi
 - profile-scope mismatch set empty: `True`
 - clean-room executor matrix declared complete: `True`
 - validated manifest identity contract installed: `True`
+- claim registry canonical complete: `True`
+- FAPI 2.0 security profile declared complete: `True`
+- release claims machine-derivable: `True`
+- core targets missing from feature map: `0`
+- extension targets missing from feature map: `0`
+- settings-backed flags missing from flag map: `0`
 - validated inventory complete: `True`
 - validated runtime matrix green: `True`
 - validated test lanes green: `True`

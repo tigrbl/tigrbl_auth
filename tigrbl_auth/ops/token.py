@@ -10,6 +10,12 @@ from uuid import UUID
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_auth.services.token_service import (
+    InvalidRefreshTokenError,
+    RefreshTokenReuseError,
+    issue_persisted_token_pair,
+    redeem_refresh_token,
+)
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth.oidc_id_token import mint_id_token, oidc_hash
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
@@ -138,7 +144,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
         return None
 
     def allowed_grant_types(_settings):
-        return ['client_credentials', 'password', 'authorization_code', JWT_BEARER_GRANT_TYPE, DEVICE_CODE_GRANT_TYPE]
+        return ['client_credentials', 'password', 'authorization_code', 'refresh_token', JWT_BEARER_GRANT_TYPE, DEVICE_CODE_GRANT_TYPE]
 
 try:  # pragma: no cover
     from tigrbl_auth.services.persistence import append_audit_event_async
@@ -338,7 +344,7 @@ async def token_request(*, request, db):
     data.pop('client_secret', None)
 
     grant_type = data.get('grant_type')
-    if not settings.enable_rfc6749 and grant_type not in {'client_credentials', 'password', 'authorization_code', JWT_BEARER_GRANT_TYPE, DEVICE_CODE_GRANT_TYPE}:
+    if not settings.enable_rfc6749 and grant_type not in {'client_credentials', 'password', 'authorization_code', 'refresh_token', JWT_BEARER_GRANT_TYPE, DEVICE_CODE_GRANT_TYPE}:
         raise HTTPException(
             status.HTTP_422_UNPROCESSABLE_ENTITY,
             [{"loc": ["body", "grant_type"], "msg": "unsupported grant_type", "type": "value_error"}],
@@ -382,9 +388,11 @@ async def token_request(*, request, db):
         return payload
 
     if grant_type == 'client_credentials':
-        access, refresh = await _jwt.async_sign_pair(
+        access, refresh = await issue_persisted_token_pair(
+            jwt=_jwt,
             sub=str(client_id),
             tid=str(client.tenant_id),
+            client_id=str(client.id),
             cert_thumbprint=sender_constraint.cert_thumbprint,
             **_jwt_kwargs(scope=data.get('scope'), audience=request_audience),
         )
@@ -399,9 +407,11 @@ async def token_request(*, request, db):
         except ValidationError as exc:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, exc.errors())
         user = await _pwd_backend.authenticate(db, parsed.username, parsed.password)
-        access, refresh = await _jwt.async_sign_pair(
+        access, refresh = await issue_persisted_token_pair(
+            jwt=_jwt,
             sub=str(user.id),
             tid=str(user.tenant_id),
+            client_id=str(client.id),
             cert_thumbprint=sender_constraint.cert_thumbprint,
             **_jwt_kwargs(scope='openid profile email', audience=request_audience),
         )
@@ -438,9 +448,11 @@ async def token_request(*, request, db):
             return JSONResponse({'error': 'invalid_target'}, status_code=status.HTTP_400_BAD_REQUEST)
         audience = stored_resource or request_audience
         authorization_details = auth_code_claims.pop('_authorization_details', None)
-        access, refresh = await _jwt.async_sign_pair(
+        access, refresh = await issue_persisted_token_pair(
+            jwt=_jwt,
             sub=str(auth_code.user_id),
             tid=str(auth_code.tenant_id),
+            client_id=str(client.id),
             cert_thumbprint=sender_constraint.cert_thumbprint,
             **_jwt_kwargs(scope=auth_code.scope, audience=audience, extra={'authorization_details': authorization_details} if authorization_details else None),
         )
@@ -459,6 +471,25 @@ async def token_request(*, request, db):
         await db.commit()
         return _token_pair_payload(access, refresh, token_type=sender_constraint.token_type, id_token=id_token)
 
+    if grant_type == 'refresh_token':
+        refresh_token = str(data.get('refresh_token') or '').strip()
+        if not refresh_token:
+            return _json_error('invalid_request', status_code=status.HTTP_400_BAD_REQUEST, description='refresh_token is required')
+        try:
+            payload = await redeem_refresh_token(
+                jwt=_jwt,
+                refresh_token=refresh_token,
+                client_id=str(client.id),
+                cert_thumbprint=sender_constraint.cert_thumbprint,
+                requested_audience=request_audience,
+                token_type=sender_constraint.token_type,
+            )
+        except RefreshTokenReuseError as exc:
+            return _json_error('invalid_grant', status_code=status.HTTP_400_BAD_REQUEST, description=str(exc))
+        except InvalidRefreshTokenError as exc:
+            return _json_error('invalid_grant', status_code=status.HTTP_400_BAD_REQUEST, description=str(exc))
+        return payload
+
     if grant_type == JWT_BEARER_GRANT_TYPE:
         try:
             assertion_claims = validate_assertion_grant_request(data, audience=token_endpoint_audiences)
@@ -469,9 +500,11 @@ async def token_request(*, request, db):
             return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
         scope = str(data.get('scope') or assertion_claims.get('scope') or '') or None
         tenant_id = str(assertion_claims.get('tid') or client.tenant_id)
-        access, refresh = await _jwt.async_sign_pair(
+        access, refresh = await issue_persisted_token_pair(
+            jwt=_jwt,
             sub=subject,
             tid=tenant_id,
+            client_id=str(client.id),
             cert_thumbprint=sender_constraint.cert_thumbprint,
             **_jwt_kwargs(
                 scope=scope,
@@ -547,9 +580,11 @@ async def token_request(*, request, db):
             )
             return _json_error('authorization_pending', status_code=status.HTTP_400_BAD_REQUEST)
         effective_audience = request_audience or getattr(row, 'audience', None) or getattr(row, 'resource', None)
-        access, refresh = await _jwt.async_sign_pair(
+        access, refresh = await issue_persisted_token_pair(
+            jwt=_jwt,
             sub=str(row.user_id),
             tid=str(row.tenant_id),
+            client_id=str(client.id),
             cert_thumbprint=sender_constraint.cert_thumbprint,
             **_jwt_kwargs(scope=row.scope, audience=effective_audience),
         )

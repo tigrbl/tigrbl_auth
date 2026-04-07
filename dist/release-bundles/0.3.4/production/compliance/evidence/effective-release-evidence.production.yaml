@@ -205,6 +205,38 @@ effective_deployment:
   - token.list
 bundle_manifest:
   bundles:
+  - target: ASGI 3 application package
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/asgi-application/
+  - target: Bootstrap and migration lifecycle
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/bootstrap-migration/
+  - target: CLI operator surface
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/cli-operator-surface/
+  - target: Import/export portability
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/import-export-portability/
+  - target: Key lifecycle and JWKS publication
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/key-lifecycle-jwks/
+  - target: OIDC Core 1.0
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-core/
+  - target: OIDC Discovery 1.0
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/discovery/
+  - target: OpenAPI 3.1 / 3.2 compatible public contract
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/contracts/openapi/
   - target: RFC 6749
     tier: 3
     refs:
@@ -213,18 +245,6 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/bearer/
-  - target: RFC 7636
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/pkce/
-  - target: RFC 8414
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/discovery/
-  - target: RFC 8615
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/well-known/
   - target: RFC 7515
     tier: 3
     refs:
@@ -245,10 +265,66 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/jwt/
+  - target: RFC 7636
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/pkce/
+  - target: RFC 8414
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/discovery/
+  - target: RFC 8615
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/well-known/
+  - target: Release bundle and signature verification
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/release-bundle-signing/
+  - target: 'Runner profile: Hypercorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-hypercorn/
+  - target: 'Runner profile: Tigrcorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-tigrcorn/
+  - target: 'Runner profile: Uvicorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-uvicorn/
+  - target: OIDC RP-Initiated Logout
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-rp-initiated-logout/
+  - target: OIDC Session Management
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-session-management/
+  - target: OIDC UserInfo
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-userinfo/
+  - target: OpenRPC 1.4.x admin/control-plane contract
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/contracts/openrpc/
+  - target: RFC 6265
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/cookies/
   - target: RFC 7009
     tier: 3
     refs:
     - compliance/evidence/tier3/revocation/
+  - target: RFC 7521
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/assertion-framework/
+  - target: RFC 7523
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jwt-client-auth/
   - target: RFC 7591
     tier: 3
     refs:
@@ -269,84 +345,8 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/issuer-identification/
-  - target: RFC 6265
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/cookies/
-  - target: RFC 7521
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/assertion-framework/
-  - target: RFC 7523
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/jwt-client-auth/
   - target: RFC 9728
     tier: 3
     refs:
     - compliance/evidence/tier3/protected-resource-metadata/
-  - target: OIDC Core 1.0
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/oidc-core/
-  - target: OIDC Discovery 1.0
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/discovery/
-  - target: OIDC UserInfo
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/oidc-userinfo/
-  - target: OIDC Session Management
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/oidc-session-management/
-  - target: OIDC RP-Initiated Logout
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/oidc-rp-initiated-logout/
-  - target: OpenAPI 3.1 / 3.2 compatible public contract
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/contracts/openapi/
-  - target: OpenRPC 1.4.x admin/control-plane contract
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/contracts/openrpc/
-  - target: ASGI 3 application package
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/asgi-application/
-  - target: 'Runner profile: Uvicorn'
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/runner-uvicorn/
-  - target: 'Runner profile: Hypercorn'
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/runner-hypercorn/
-  - target: 'Runner profile: Tigrcorn'
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/runner-tigrcorn/
-  - target: CLI operator surface
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/cli-operator-surface/
-  - target: Bootstrap and migration lifecycle
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/bootstrap-migration/
-  - target: Key lifecycle and JWKS publication
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/key-lifecycle-jwks/
-  - target: Import/export portability
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/import-export-portability/
-  - target: Release bundle and signature verification
-    tier: 3
-    refs:
-    - compliance/evidence/tier3/release-bundle-signing/
   missing_refs: []

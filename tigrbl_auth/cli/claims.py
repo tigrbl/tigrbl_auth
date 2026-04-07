@@ -6,7 +6,7 @@ from typing import Any
 
 import yaml
 
-EXPECTED_PROFILES = {"baseline", "production", "hardening", "peer-claim"}
+EXPECTED_PROFILES = {"baseline", "production", "hardening", "fapi2-security", "peer-claim"}
 EXPECTED_PHASES = {"P0", "P1", "P2", "P3"}
 EXPECTED_TIERS = {0, 1, 2, 3, 4}
 BANNED_CORE_LABELS = {"RFC 5785", "RFC 8523"}

@@ -195,7 +195,7 @@ ARGUMENT_SPECS: dict[str, FlagSpec] = {
     # Global/shared flags.
     "config": FlagSpec("config", ("--config",), "Path to the runtime/configuration file.", {"default": None}, group="global", family="global"),
     "env_file": FlagSpec("env_file", ("--env-file",), "Optional environment file loaded before resolution.", {"default": None}, group="global", family="global"),
-    "profile": FlagSpec("profile", ("--profile",), "Effective standards/compliance profile.", {"choices": ["baseline", "production", "hardening", "peer-claim"], "default": "baseline"}, group="global", family="global"),
+    "profile": FlagSpec("profile", ("--profile",), "Effective standards/compliance profile.", {"choices": ["baseline", "production", "hardening", "fapi2-security", "peer-claim"], "default": "baseline"}, group="global", family="global"),
     "tenant": FlagSpec("tenant", ("--tenant",), "Tenant identifier for multi-tenant operators.", {"default": None}, group="global", family="global"),
     "issuer": FlagSpec("issuer", ("--issuer",), "Issuer override for discovery and contract generation.", {"default": None}, group="global", family="global"),
     "surface_set": FlagSpec("surface_set", ("--surface-set",), "Installable surface set. May be supplied multiple times.", {"action": "append", "choices": sorted(SURFACE_SET_REGISTRY), "default": []}, group="global", family="global"),

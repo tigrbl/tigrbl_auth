@@ -11,6 +11,7 @@ from ..routers.schemas import CredsIn, TokenPair
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
 from tigrbl_auth.standards.oidc.id_token import mint_id_token
 from ..routers.shared import _jwt, _require_tls
+from tigrbl_auth.services.token_service import issue_persisted_token_pair
 from .authz import router as router
 
 api = router
@@ -39,9 +40,11 @@ async def login(
     }
     session = await AuthSession.handlers.create.core({"payload": payload, "db": db})
     await db.commit()
-    access, refresh = await _jwt.async_sign_pair(
+    access, refresh = await issue_persisted_token_pair(
+        jwt=_jwt,
         sub=str(session.user_id),
         tid=str(session.tenant_id),
+        client_id=None,
         scope="openid profile email",
     )
     id_token = await mint_id_token(

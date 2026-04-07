@@ -55,7 +55,7 @@ class _LazyRuntimeProxy:
 _jwt = _LazyRuntimeProxy(JWTCoder.default)
 _pwd_backend = _LazyRuntimeProxy(PasswordBackend)
 
-_ALLOWED_GRANT_TYPES = {"password", "authorization_code", "client_credentials"}
+_ALLOWED_GRANT_TYPES = {"password", "authorization_code", "client_credentials", "refresh_token"}
 if settings.enable_rfc8628:
     _ALLOWED_GRANT_TYPES.add("urn:ietf:params:oauth:grant-type:device_code")
 

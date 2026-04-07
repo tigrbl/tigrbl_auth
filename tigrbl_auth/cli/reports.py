@@ -47,6 +47,7 @@ from tigrbl_auth.cli.certification_evidence import (
     validated_test_lane_manifest_passed,
 )
 from tigrbl_auth.cli.claims import run_lint
+from tigrbl_auth.cli.claim_registry import verify_claim_registries
 from tigrbl_auth.cli.feature_surface import run_feature_surface_modularity_check
 from tigrbl_auth.cli.governance import run_governance_install_check
 from tigrbl_auth.cli.metadata import (
@@ -2103,6 +2104,7 @@ def _run_release_signing_gate(repo_root: Path) -> int:
 GATE_CALLS = {
     "gate-00-structure": lambda root: run_governance_install_check(root, strict=True),
     "gate-05-governance": lambda root: run_governance_install_check(root, strict=True),
+    "gate-08-claim-registry-sync": lambda root: 0 if verify_claim_registries(root)["passed"] else 1,
     "gate-10-static": lambda root: run_runtime_foundation_check(root, strict=True),
     "gate-12-project-tree-layout": lambda root: run_project_tree_layout_check(root, strict=True),
     "gate-15-boundary-enforcement": lambda root: run_boundary_enforcement_check(root, strict=True),

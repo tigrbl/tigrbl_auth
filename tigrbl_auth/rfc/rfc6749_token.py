@@ -293,13 +293,3 @@ async def token(
             },
         ],
     )
-
-
-@api.route("/token/refresh", methods=["POST"], response_model=TokenPair)
-async def refresh(body: RefreshIn, request: Request):
-    _require_tls(request)
-    try:
-        access, refresh = _jwt.refresh(body.refresh_token)
-    except Exception:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid refresh token")
-    return TokenPair(access_token=access, refresh_token=refresh)

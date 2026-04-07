@@ -110,6 +110,11 @@ async def upsert_token_record_async(
     *,
     token_kind: str | None = None,
     token_type_hint: str | None = None,
+    refresh_family_id: str | None = None,
+    refresh_parent_hash: str | None = None,
+    refresh_successor_hash: str | None = None,
+    used_at: datetime | None = None,
+    reuse_detected_at: datetime | None = None,
 ) -> str:
     claims = dict(claims or {})
     digest = token_hash(token)
@@ -123,6 +128,9 @@ async def upsert_token_record_async(
                 session.add(record)
             record.token_kind = token_kind
             record.token_type_hint = token_type_hint or record.token_type_hint or token_kind
+            record.refresh_family_id = refresh_family_id or record.refresh_family_id
+            record.refresh_parent_hash = refresh_parent_hash or record.refresh_parent_hash
+            record.refresh_successor_hash = refresh_successor_hash or record.refresh_successor_hash
             record.active = True
             record.subject = str(claims.get("sub") or record.subject or "")
             record.tenant_id = _to_uuid(claims.get("tid") or record.tenant_id)
@@ -133,6 +141,8 @@ async def upsert_token_record_async(
             record.claims = claims
             record.issued_at = _to_datetime(claims.get("iat")) or record.issued_at or now
             record.expires_at = _to_datetime(claims.get("exp")) or record.expires_at
+            record.used_at = used_at or record.used_at
+            record.reuse_detected_at = reuse_detected_at or record.reuse_detected_at
             record.revoked_at = None
             record.revoked_reason = None
             await session.commit()
@@ -149,6 +159,15 @@ async def remove_token_record_async(token: str) -> None:
             if record is not None:
                 await session.delete(record)
                 await session.commit()
+    except Exception:
+        return None
+
+
+async def get_token_record_async(token: str) -> TokenRecord | None:
+    digest = token_hash(token)
+    try:
+        async with _session() as session:
+            return await session.scalar(select(TokenRecord).where(TokenRecord.token_hash == digest))
     except Exception:
         return None
 
@@ -183,6 +202,71 @@ async def revoke_token_async(
     except Exception:
         return digest
     return digest
+
+
+async def mark_token_used_async(
+    token: str,
+    *,
+    successor_token: str | None = None,
+    reason: str = "refresh_rotated",
+) -> str:
+    digest = token_hash(token)
+    successor_hash = token_hash(successor_token) if successor_token else None
+    now = datetime.now(timezone.utc)
+    try:
+        async with _session() as session:
+            record = await session.scalar(select(TokenRecord).where(TokenRecord.token_hash == digest))
+            if record is None:
+                return digest
+            record.used_at = now
+            record.active = False
+            record.revoked_at = now
+            record.revoked_reason = reason
+            if successor_hash:
+                record.refresh_successor_hash = successor_hash
+            await session.commit()
+    except Exception:
+        return digest
+    return digest
+
+
+async def revoke_refresh_family_async(
+    family_id: str,
+    *,
+    reason: str = "refresh_token_reuse_detected",
+    reuse_token: str | None = None,
+) -> int:
+    if not family_id:
+        return 0
+    now = datetime.now(timezone.utc)
+    reuse_hash = token_hash(reuse_token) if reuse_token else None
+    revoked_count = 0
+    try:
+        async with _session() as session:
+            rows = (
+                await session.execute(select(TokenRecord).where(TokenRecord.refresh_family_id == family_id))
+            ).scalars().all()
+            for row in rows:
+                row.active = False
+                row.revoked_at = row.revoked_at or now
+                row.revoked_reason = reason
+                if reuse_hash and row.token_hash == reuse_hash:
+                    row.reuse_detected_at = now
+                revoked = await session.scalar(select(RevokedToken).where(RevokedToken.token_hash == row.token_hash))
+                if revoked is None:
+                    revoked = RevokedToken(token_hash=row.token_hash)
+                    session.add(revoked)
+                revoked.subject = row.subject
+                revoked.tenant_id = row.tenant_id
+                revoked.client_id = row.client_id
+                revoked.expires_at = row.expires_at
+                revoked.token_type_hint = row.token_type_hint
+                revoked.revoked_reason = reason
+                revoked_count += 1
+            await session.commit()
+    except Exception:
+        return 0
+    return revoked_count
 
 
 async def is_token_revoked_async(token: str) -> bool:
@@ -593,9 +677,16 @@ async def append_audit_event_async(
 record_token = upsert_token_record = lambda token, claims=None, token_kind=None, token_type_hint=None: _run(
     upsert_token_record_async(token, claims, token_kind=token_kind, token_type_hint=token_type_hint)
 )
+get_token_record = lambda token: _run(get_token_record_async(token))
 unregister_token = lambda token: _run(remove_token_record_async(token))
 revoke_token = lambda token, token_type_hint=None, reason=None: _run(
     revoke_token_async(token, token_type_hint=token_type_hint, reason=reason)
+)
+mark_token_used = lambda token, successor_token=None, reason="refresh_rotated": _run(
+    mark_token_used_async(token, successor_token=successor_token, reason=reason)
+)
+revoke_refresh_family = lambda family_id, reason="refresh_token_reuse_detected", reuse_token=None: _run(
+    revoke_refresh_family_async(family_id, reason=reason, reuse_token=reuse_token)
 )
 is_token_revoked = lambda token: bool(_run(is_token_revoked_async(token)))
 introspect_token = lambda token: _run(introspect_token_async(token))
@@ -655,6 +746,8 @@ __all__ = [
     "append_audit_event_async",
     "create_session",
     "create_session_async",
+    "get_token_record",
+    "get_token_record_async",
     "get_session",
     "get_session_async",
     "get_active_session",
@@ -670,8 +763,12 @@ __all__ = [
     "record_token",
     "reset_token_state",
     "reset_token_state_async",
+    "mark_token_used",
+    "mark_token_used_async",
     "revoke_consent",
     "revoke_consent_async",
+    "revoke_refresh_family",
+    "revoke_refresh_family_async",
     "revoke_token",
     "revoke_token_async",
     "rotate_session_cookie_secret",

@@ -7,6 +7,7 @@ from tigrbl_auth.framework import HTTPException, JSONResponse, select, status
 from tigrbl_auth.api.rest.shared import _jwt, _require_tls
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.services.persistence import append_audit_event_async
+from tigrbl_auth.services.token_service import issue_persisted_token_pair
 from tigrbl_auth.standards.http.cookies import issue_session_cookie, session_cookie_policy
 from tigrbl_auth.oidc_id_token import mint_id_token
 from tigrbl_auth.standards.oidc.session_mgmt import create_browser_session
@@ -29,9 +30,11 @@ async def login_user(*, request, db, identifier: str, password: str) -> JSONResp
         username=row.username,
         expires_at=expires_at,
     )
-    access, refresh = await _jwt.async_sign_pair(
+    access, refresh = await issue_persisted_token_pair(
+        jwt=_jwt,
         sub=str(session_row.user_id),
         tid=str(session_row.tenant_id),
+        client_id=None,
         scope="openid profile email",
         issuer=ISSUER,
         audience=settings.protected_resource_identifier,

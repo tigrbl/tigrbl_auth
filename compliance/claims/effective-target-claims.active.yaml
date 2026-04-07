@@ -34,6 +34,7 @@ effective_deployment:
     enable_rfc7519: true
     enable_oidc_core: true
     enable_oidc_discovery: true
+    enable_oidc_session_management: true
     enable_rfc7009: false
     enable_rfc7521: false
     enable_rfc7523: false
@@ -45,7 +46,6 @@ effective_deployment:
     enable_rfc9207: false
     enable_rfc9728: false
     enable_oidc_userinfo: false
-    enable_oidc_session_management: false
     enable_oidc_rp_initiated_logout: false
     enable_rfc8628: false
     enable_rfc8693: false
@@ -114,8 +114,10 @@ effective_deployment:
   - RFC 7517
   - RFC 7518
   - RFC 7519
+  - RFC 6265
   - OIDC Core 1.0
   - OIDC Discovery 1.0
+  - OIDC Session Management
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   - ASGI 3 application package
@@ -165,25 +167,45 @@ effective_deployment:
   - token.list
 claim_set:
   current_repository_tier: 3
-  phase: P10
+  phase: P14
   claims:
+  - target: ASGI 3 application package
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Bootstrap and migration lifecycle
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: CLI operator surface
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Import/export portability
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Key lifecycle and JWKS publication
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC Core 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC Discovery 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OpenAPI 3.1 / 3.2 compatible public contract
+    tier: 3
+    status: generated-live-from-deployment-metadata
+    profile: baseline
   - target: RFC 6749
     tier: 3
     status: evidenced-release-gated
     profile: baseline
   - target: RFC 6750
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 7636
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 8414
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 8615
     tier: 3
     status: evidenced-release-gated
     profile: baseline
@@ -207,27 +229,19 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: baseline
-  - target: OIDC Core 1.0
+  - target: RFC 7636
     tier: 3
     status: evidenced-release-gated
     profile: baseline
-  - target: OIDC Discovery 1.0
+  - target: RFC 8414
     tier: 3
     status: evidenced-release-gated
     profile: baseline
-  - target: OpenAPI 3.1 / 3.2 compatible public contract
+  - target: RFC 8615
     tier: 3
     status: evidenced-release-gated
     profile: baseline
-  - target: OpenRPC 1.4.x admin/control-plane contract
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: ASGI 3 application package
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: 'Runner profile: Uvicorn'
+  - target: Release bundle and signature verification
     tier: 3
     status: evidenced-release-gated
     profile: baseline
@@ -239,23 +253,7 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: baseline
-  - target: CLI operator surface
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Bootstrap and migration lifecycle
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Key lifecycle and JWKS publication
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Import/export portability
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Release bundle and signature verification
+  - target: 'Runner profile: Uvicorn'
     tier: 3
     status: evidenced-release-gated
     profile: baseline

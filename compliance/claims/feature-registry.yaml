@@ -1,0 +1,4312 @@
+schema_version: 1
+package: tigrbl_auth
+generated_from:
+- compliance/targets/*.yaml
+- tigrbl_auth.config.surfaces
+- tigrbl_auth.api.rpc.registry
+- tigrbl_auth.cli.metadata
+- tigrbl_auth.config.deployment
+summary:
+  feature_count: 370
+  tracked_core_target_count: 48
+  tracked_extension_target_count: 5
+  settings_backed_flag_count: 68
+features:
+- id: cli-flag:access_log
+  kind: cli-flag
+  title: --access-log
+  description: Enable access logging for the selected runtime profile.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:activate
+  kind: cli-flag
+  title: --activate
+  description: Mark a generated or imported key active immediately.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:admin
+  kind: cli-flag
+  title: --admin
+  description: Enable the admin/control plane.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:alg
+  kind: cli-flag
+  title: --alg
+  description: JWA/JOSE algorithm identifier.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:artifact
+  kind: cli-flag
+  title: --artifact
+  description: Release artifact subset.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:baseline_file
+  kind: cli-flag
+  title: --baseline-file
+  description: Optional explicit baseline artifact for diff operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:bundle_dir
+  kind: cli-flag
+  title: --bundle-dir
+  description: Explicit bundle output directory.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:check
+  kind: cli-flag
+  title: --check
+  description: Validate the selected runner profile and application factory without
+    launching runtime.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:checksum
+  kind: cli-flag
+  title: --checksum
+  description: Expected checksum or checksum algorithm for import/export validation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:color
+  kind: cli-flag
+  title: --color
+  description: Color policy for terminal output.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:config
+  kind: cli-flag
+  title: --config
+  description: Path to the runtime/configuration file.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:cookies
+  kind: cli-flag
+  title: --cookies
+  description: Enable cookie/session helpers in serve plans.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:curve
+  kind: cli-flag
+  title: --curve
+  description: Curve for EC/OKP keys.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:db_safe_start
+  kind: cli-flag
+  title: --db-safe-start
+  description: Require a safe database start posture.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:diagnostics
+  kind: cli-flag
+  title: --diagnostics
+  description: Enable diagnostics surfaces.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:dry_run
+  kind: cli-flag
+  title: --dry-run
+  description: Resolve and emit the runtime plan without applying or launching state
+    changes.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:enable_mtls
+  kind: cli-flag
+  title: --enable-mtls
+  description: Enable mTLS slice for the serve plan.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:env_file
+  kind: cli-flag
+  title: --env-file
+  description: Optional environment file loaded before resolution.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:environment
+  kind: cli-flag
+  title: --environment
+  description: Deployment environment label.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:execution_mode
+  kind: cli-flag
+  title: --execution-mode
+  description: Peer execution mode.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:extension
+  kind: cli-flag
+  title: --extension
+  description: Extension boundary slice. May be supplied multiple times.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:filter
+  kind: cli-flag
+  title: --filter
+  description: Simple substring filter applied to identifiers or names.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:format
+  kind: cli-flag
+  title: --format
+  description: Output format.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:from_file
+  kind: cli-flag
+  title: --from-file
+  description: Load mutation input from a JSON or YAML file.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:graceful_timeout
+  kind: cli-flag
+  title: --graceful-timeout
+  description: Graceful shutdown timeout in seconds.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:health
+  kind: cli-flag
+  title: --health
+  description: Enable health endpoints in serve plans.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:host
+  kind: cli-flag
+  title: --host
+  description: Bind host.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:hypercorn_http2
+  kind: cli-flag
+  title: --hypercorn-http2
+  description: Enable HTTP/2 ALPN for Hypercorn.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:hypercorn_worker_class
+  kind: cli-flag
+  title: --hypercorn-worker-class
+  description: Hypercorn worker class.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:id
+  kind: cli-flag
+  title: --id
+  description: Primary identifier for a single record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:if_exists
+  kind: cli-flag
+  title: --if-exists
+  description: Behavior when the target already exists.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:if_missing
+  kind: cli-flag
+  title: --if-missing
+  description: Behavior when the target does not already exist.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:include_secrets
+  kind: cli-flag
+  title: --include-secrets
+  description: Include secret material where the selected surface permits it.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:input_path
+  kind: cli-flag
+  title: --input
+  description: Input path for import, validation, or diff operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:issuer
+  kind: cli-flag
+  title: --issuer
+  description: Issuer override for discovery and contract generation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:jwks_refresh_seconds
+  kind: cli-flag
+  title: --jwks-refresh-seconds
+  description: JWKS refresh cadence in seconds.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:kid
+  kind: cli-flag
+  title: --kid
+  description: Explicit key identifier.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:kind
+  kind: cli-flag
+  title: --kind
+  description: Contract artifact kind.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:kty
+  kind: cli-flag
+  title: --kty
+  description: JWK key type.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:lifespan
+  kind: cli-flag
+  title: --lifespan
+  description: ASGI lifespan policy.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:limit
+  kind: cli-flag
+  title: --limit
+  description: Maximum number of results to return.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:log_level
+  kind: cli-flag
+  title: --log-level
+  description: Operator log level for serve plans.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:metrics
+  kind: cli-flag
+  title: --metrics
+  description: Enable metrics in serve plans.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:name
+  kind: cli-flag
+  title: --name
+  description: Optional named release gate or artifact selector.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:no_strict
+  kind: cli-flag
+  title: --no-strict
+  description: Downgrade failures to warnings for exploratory use.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:offline
+  kind: cli-flag
+  title: --offline
+  description: Avoid network or external peer execution assumptions.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:offset
+  kind: cli-flag
+  title: --offset
+  description: Result offset for list operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:output
+  kind: cli-flag
+  title: --output
+  description: Optional output file path.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:peer_profile
+  kind: cli-flag
+  title: --peer-profile
+  description: Peer profile selector. May be supplied multiple times.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:pid_file
+  kind: cli-flag
+  title: --pid-file
+  description: Optional PID file written for the launched runtime.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:plugin_mode
+  kind: cli-flag
+  title: --plugin-mode
+  description: Plugin composition mode.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:port
+  kind: cli-flag
+  title: --port
+  description: Bind port.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:profile
+  kind: cli-flag
+  title: --profile
+  description: Effective standards/compliance profile.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:proxy_headers
+  kind: cli-flag
+  title: --proxy-headers
+  description: Honor proxy forwarding headers.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:public
+  kind: cli-flag
+  title: --public
+  description: Enable the public REST/auth plane.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:publish
+  kind: cli-flag
+  title: --publish
+  description: Publish JWKS after a successful key mutation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:redact
+  kind: cli-flag
+  title: --redact
+  description: Redact secret material from exported output.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:repo_root
+  kind: cli-flag
+  title: --repo-root
+  description: Repository root for governance automation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:report_dir
+  kind: cli-flag
+  title: --report-dir
+  description: Directory for generated reports.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:require_tls
+  kind: cli-flag
+  title: --require-tls
+  description: Require TLS on the public plane.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags:
+  - require_tls
+- id: cli-flag:retire_after
+  kind: cli-flag
+  title: --retire-after
+  description: Retire-after hint or timestamp recorded with the key.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:rpc
+  kind: cli-flag
+  title: --rpc
+  description: Enable the JSON-RPC control plane.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:runtime_style
+  kind: cli-flag
+  title: --runtime-style
+  description: Runtime style for installation or standalone serving.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - ASGI 3 application package
+  required_flags:
+  - runtime_style
+- id: cli-flag:scope
+  kind: cli-flag
+  title: --scope
+  description: Verification scope.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:server
+  kind: cli-flag
+  title: --server
+  description: Runner profile used to qualify and launch runtime.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:set_item
+  kind: cli-flag
+  title: --set
+  description: Inline mutation field assignment in key=value form. May be supplied
+    multiple times.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:signing_key
+  kind: cli-flag
+  title: --signing-key
+  description: Optional Ed25519 private signing key path or seed.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:slice
+  kind: cli-flag
+  title: --slice
+  description: Protocol slice. May be supplied multiple times.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:sort
+  kind: cli-flag
+  title: --sort
+  description: Sort key for list operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:status_filter
+  kind: cli-flag
+  title: --status
+  description: Status filter for list operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:strict
+  kind: cli-flag
+  title: --strict
+  description: Fail closed when governance or certification checks fail.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:surface_set
+  kind: cli-flag
+  title: --surface-set
+  description: Installable surface set. May be supplied multiple times.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: cli-flag:tenant
+  kind: cli-flag
+  title: --tenant
+  description: Tenant identifier for multi-tenant operators.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:tier
+  kind: cli-flag
+  title: --tier
+  description: Evidence tier selector.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:tigrcorn_contract
+  kind: cli-flag
+  title: --tigrcorn-contract
+  description: Preferred Tigrcorn adapter contract.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:tigrcorn_mode
+  kind: cli-flag
+  title: --tigrcorn-mode
+  description: Preferred Tigrcorn runtime mode hint.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:timeout
+  kind: cli-flag
+  title: --timeout
+  description: Maximum wait time in seconds for supported long-running operations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:title
+  kind: cli-flag
+  title: --title
+  description: Human-readable title.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:trace
+  kind: cli-flag
+  title: --trace
+  description: Emit trace-oriented operator details.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:uds
+  kind: cli-flag
+  title: --uds
+  description: Optional Unix domain socket path.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:use
+  kind: cli-flag
+  title: --use
+  description: JWK use classification.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:uvicorn_http
+  kind: cli-flag
+  title: --uvicorn-http
+  description: Uvicorn HTTP protocol implementation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:uvicorn_loop
+  kind: cli-flag
+  title: --uvicorn-loop
+  description: Uvicorn event-loop implementation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:uvicorn_ws
+  kind: cli-flag
+  title: --uvicorn-ws
+  description: Uvicorn WebSocket implementation.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:verbose
+  kind: cli-flag
+  title: --verbose, -v
+  description: Increase operator verbosity; may be repeated.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:wait
+  kind: cli-flag
+  title: --wait
+  description: Wait for completion when the operation supports asynchronous execution.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:workers
+  kind: cli-flag
+  title: --workers
+  description: Process count for the selected runtime profile.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-flag:yes
+  kind: cli-flag
+  title: --yes
+  description: Assume yes for state-changing confirmations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:adr.index
+  kind: cli-verb
+  title: adr index
+  description: Generate the ADR index markdown and JSON summaries.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:adr.list
+  kind: cli-verb
+  title: adr list
+  description: List ADRs and their titles.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:adr.new
+  kind: cli-verb
+  title: adr new
+  description: Create a new ADR markdown document from a template.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:adr.show
+  kind: cli-verb
+  title: adr show
+  description: Render a selected ADR.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:bootstrap.apply
+  kind: cli-verb
+  title: bootstrap apply
+  description: Materialize bootstrap manifests and record an applied bootstrap checkpoint.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:bootstrap.manifest
+  kind: cli-verb
+  title: bootstrap manifest
+  description: Write deployment, claims, evidence, and contract manifests for the
+    selected profile.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:bootstrap.status
+  kind: cli-verb
+  title: bootstrap status
+  description: Summarize bootstrap readiness for the selected profile and surfaces.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:bootstrap.verify
+  kind: cli-verb
+  title: bootstrap verify
+  description: Verify bootstrap manifests, effective artifacts, and applied checkpoint
+    state.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:claims.lint
+  kind: cli-verb
+  title: claims lint
+  description: Validate declared claims against mappings and boundaries.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:claims.show
+  kind: cli-verb
+  title: claims show
+  description: Materialize the effective claims manifest for the active deployment.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:claims.status
+  kind: cli-verb
+  title: claims status
+  description: Summarize declared, effective, and promotable claims.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.create
+  kind: cli-verb
+  title: client create
+  description: Create a durable operator-plane client record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.delete
+  kind: cli-verb
+  title: client delete
+  description: Delete a durable operator-plane client record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.disable
+  kind: cli-verb
+  title: client disable
+  description: Mark a client record disabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.enable
+  kind: cli-verb
+  title: client enable
+  description: Mark a client record enabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.get
+  kind: cli-verb
+  title: client get
+  description: Return a single durable operator-plane client record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.list
+  kind: cli-verb
+  title: client list
+  description: List durable operator-plane client records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.rotate-secret
+  kind: cli-verb
+  title: client rotate-secret
+  description: Rotate durable operator-plane client secret material.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:client.update
+  kind: cli-verb
+  title: client update
+  description: Update a durable operator-plane client record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:discovery.diff
+  kind: cli-verb
+  title: discovery diff
+  description: Diff active discovery metadata against a provided or published baseline.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:discovery.publish
+  kind: cli-verb
+  title: discovery publish
+  description: Publish discovery metadata into a release-ready output directory.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:discovery.show
+  kind: cli-verb
+  title: discovery show
+  description: Show the active discovery snapshot for the selected profile.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:discovery.validate
+  kind: cli-verb
+  title: discovery validate
+  description: Validate discovery metadata and supporting contracts.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:doctor
+  kind: cli-verb
+  title: doctor
+  description: Aggregate core verification, runtime profile, contracts, evidence,
+    and gate status.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:evidence.bundle
+  kind: cli-verb
+  title: evidence bundle
+  description: Build a release/evidence bundle filtered by the effective deployment.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:evidence.peer-execute
+  kind: cli-verb
+  title: evidence peer-execute
+  description: Materialize peer execution manifests for configured profiles.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:evidence.peer-status
+  kind: cli-verb
+  title: evidence peer-status
+  description: Summarize configured peer execution profiles and bundle refs.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:evidence.status
+  kind: cli-verb
+  title: evidence status
+  description: Summarize Tier 3/Tier 4 evidence readiness.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:evidence.verify
+  kind: cli-verb
+  title: evidence verify
+  description: Run evidence/peer readiness checks.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:export.run
+  kind: cli-verb
+  title: export run
+  description: Export durable operator-plane state to a portable artifact.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:export.status
+  kind: cli-verb
+  title: export status
+  description: Show the last durable operator-plane export status.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:export.validate
+  kind: cli-verb
+  title: export validate
+  description: Validate export configuration and current operator state.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:flow.create
+  kind: cli-verb
+  title: flow create
+  description: Create a durable operator-plane flow record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.delete
+  kind: cli-verb
+  title: flow delete
+  description: Delete a durable operator-plane flow record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.disable
+  kind: cli-verb
+  title: flow disable
+  description: Mark a flow record disabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.enable
+  kind: cli-verb
+  title: flow enable
+  description: Mark a flow record enabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.get
+  kind: cli-verb
+  title: flow get
+  description: Return a single durable operator-plane flow record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.list
+  kind: cli-verb
+  title: flow list
+  description: List durable operator-plane flow records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:flow.update
+  kind: cli-verb
+  title: flow update
+  description: Update a durable operator-plane flow record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:gate
+  kind: cli-verb
+  title: gate
+  description: Run one release gate or the full ordered release gate catalog.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.create
+  kind: cli-verb
+  title: identity create
+  description: Create a durable operator-plane identity record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.delete
+  kind: cli-verb
+  title: identity delete
+  description: Delete a durable operator-plane identity record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.get
+  kind: cli-verb
+  title: identity get
+  description: Return a single durable operator-plane identity record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.list
+  kind: cli-verb
+  title: identity list
+  description: List durable operator-plane identity records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.lock
+  kind: cli-verb
+  title: identity lock
+  description: Mark an identity record locked.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.set-password
+  kind: cli-verb
+  title: identity set-password
+  description: Set or rotate a durable operator-plane identity password hash.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.unlock
+  kind: cli-verb
+  title: identity unlock
+  description: Mark an identity record unlocked.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:identity.update
+  kind: cli-verb
+  title: identity update
+  description: Update a durable operator-plane identity record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:import.run
+  kind: cli-verb
+  title: import run
+  description: Import durable operator-plane state from a portable artifact.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:import.status
+  kind: cli-verb
+  title: import status
+  description: Show the last durable operator-plane import status.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:import.validate
+  kind: cli-verb
+  title: import validate
+  description: Validate an import artifact without mutating state.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Import/export portability
+  required_flags: []
+- id: cli-verb:keys.delete
+  kind: cli-verb
+  title: keys delete
+  description: Delete a durable operator-plane key record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.export
+  kind: cli-verb
+  title: keys export
+  description: Export durable operator-plane key metadata to a JSON or YAML file.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.generate
+  kind: cli-verb
+  title: keys generate
+  description: Generate durable operator-plane key metadata and optional JWKS publication.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.get
+  kind: cli-verb
+  title: keys get
+  description: Return a single durable operator-plane key record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.import
+  kind: cli-verb
+  title: keys import
+  description: Import durable operator-plane key metadata from a JSON or YAML file.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.list
+  kind: cli-verb
+  title: keys list
+  description: List durable operator-plane key records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.publish-jwks
+  kind: cli-verb
+  title: keys publish-jwks
+  description: Publish the current durable operator-plane JWKS document.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.retire
+  kind: cli-verb
+  title: keys retire
+  description: Mark a durable operator-plane key retired.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:keys.rotate
+  kind: cli-verb
+  title: keys rotate
+  description: Generate successor key metadata and retire the previous active key.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Key lifecycle and JWKS publication
+  required_flags: []
+- id: cli-verb:migrate.apply
+  kind: cli-verb
+  title: migrate apply
+  description: Record a migration application checkpoint for the structured plan.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:migrate.plan
+  kind: cli-verb
+  title: migrate plan
+  description: Emit the structured migration plan and replacement order.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:migrate.status
+  kind: cli-verb
+  title: migrate status
+  description: List migration revisions and current-to-target move status.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:migrate.verify
+  kind: cli-verb
+  title: migrate verify
+  description: Run migration-plan and project-tree verification.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  required_flags: []
+- id: cli-verb:release.bundle
+  kind: cli-verb
+  title: release bundle
+  description: Build a release bundle containing claims, evidence, contracts, ADR
+    index, and peer refs.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags: []
+- id: cli-verb:release.recertify
+  kind: cli-verb
+  title: release recertify
+  description: Re-run recertification for Tigrbl and standards-boundary changes.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags: []
+- id: cli-verb:release.sign
+  kind: cli-verb
+  title: release sign
+  description: Create externally verifiable Ed25519 attestations for an existing release
+    bundle.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags: []
+- id: cli-verb:release.status
+  kind: cli-verb
+  title: release status
+  description: Summarize the current release bundle and release-gate posture.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags: []
+- id: cli-verb:release.verify
+  kind: cli-verb
+  title: release verify
+  description: Verify release-bundle attestations and manifest integrity for an existing
+    signed bundle.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags: []
+- id: cli-verb:serve
+  kind: cli-verb
+  title: serve
+  description: Resolve deployment, materialize a runner-qualified runtime plan, validate
+    the selected profile, and optionally launch runtime.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:session.get
+  kind: cli-verb
+  title: session get
+  description: Return a single durable operator-plane session record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:session.list
+  kind: cli-verb
+  title: session list
+  description: List durable operator-plane session records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:session.revoke
+  kind: cli-verb
+  title: session revoke
+  description: Mark a durable operator-plane session revoked.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:session.revoke-all
+  kind: cli-verb
+  title: session revoke-all
+  description: Mark all durable operator-plane sessions revoked.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:spec.diff
+  kind: cli-verb
+  title: spec diff
+  description: Regenerate contracts and compare them to committed artifacts.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: cli-verb:spec.generate
+  kind: cli-verb
+  title: spec generate
+  description: Generate OpenAPI/OpenRPC artifacts for the selected deployment.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: cli-verb:spec.report
+  kind: cli-verb
+  title: spec report
+  description: Summarize active contract contents and profile coverage.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: cli-verb:spec.validate
+  kind: cli-verb
+  title: spec validate
+  description: Validate generated contracts against repository expectations.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: cli-verb:tenant.create
+  kind: cli-verb
+  title: tenant create
+  description: Create a durable operator-plane tenant record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.delete
+  kind: cli-verb
+  title: tenant delete
+  description: Delete a durable operator-plane tenant record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.disable
+  kind: cli-verb
+  title: tenant disable
+  description: Mark a tenant record disabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.enable
+  kind: cli-verb
+  title: tenant enable
+  description: Mark a tenant record enabled.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.get
+  kind: cli-verb
+  title: tenant get
+  description: Return a single durable operator-plane tenant record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.list
+  kind: cli-verb
+  title: tenant list
+  description: List durable operator-plane tenant records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:tenant.update
+  kind: cli-verb
+  title: tenant update
+  description: Update a durable operator-plane tenant record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:token.exchange
+  kind: cli-verb
+  title: token exchange
+  description: Create a derived durable operator-plane token exchange record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:token.get
+  kind: cli-verb
+  title: token get
+  description: Return a single durable operator-plane token record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:token.introspect
+  kind: cli-verb
+  title: token introspect
+  description: Return active/revoked status and metadata for a token record.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:token.list
+  kind: cli-verb
+  title: token list
+  description: List durable operator-plane token records.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:token.revoke
+  kind: cli-verb
+  title: token revoke
+  description: Mark a durable operator-plane token revoked.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: cli-verb:verify
+  kind: cli-verb
+  title: verify
+  description: Execute one or more verification scopes and emit structured results.
+  source: tigrbl_auth.cli.metadata
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+- id: extension:a2a-adapter
+  kind: extension
+  title: a2a-adapter
+  description: a2a-adapter quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - A2A adapter
+  required_flags: []
+  boundary: extension_quarantine
+- id: extension:dns-privacy
+  kind: extension
+  title: dns-privacy
+  description: dns-privacy quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - RFC 8932
+  required_flags:
+  - enable_rfc8932
+  boundary: extension_quarantine
+- id: extension:mcp-adapter
+  kind: extension
+  title: mcp-adapter
+  description: mcp-adapter quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - MCP adapter
+  required_flags: []
+  boundary: extension_quarantine
+- id: extension:set
+  kind: extension
+  title: set
+  description: set quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - RFC 7952
+  required_flags:
+  - enable_rfc7952
+  boundary: extension_quarantine
+- id: extension:webauthn-passkeys
+  kind: extension
+  title: webauthn-passkeys
+  description: webauthn-passkeys quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - RFC 8812
+  required_flags:
+  - enable_rfc8812
+  boundary: extension_quarantine
+- id: extension:webpush
+  kind: extension
+  title: webpush
+  description: webpush quarantined extension
+  source: tigrbl_auth.config.deployment
+  scope: extension
+  targets:
+  - RFC 8291
+  required_flags:
+  - enable_rfc8291
+  boundary: extension_quarantine
+- id: rpc:audit.export
+  kind: openrpc-method
+  title: audit.export
+  description: Export durable audit events.
+  source: tigrbl_auth/api/rpc/methods/audit.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:audit.list
+  kind: openrpc-method
+  title: audit.list
+  description: List durable audit events.
+  source: tigrbl_auth/api/rpc/methods/audit.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:claims.lint
+  kind: openrpc-method
+  title: claims.lint
+  description: Run claims lint against the governance plane.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:claims.show
+  kind: openrpc-method
+  title: claims.show
+  description: Return effective claims for the active deployment profile.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.list
+  kind: openrpc-method
+  title: client.list
+  description: List OAuth/OIDC clients in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.registration.delete
+  kind: openrpc-method
+  title: client.registration.delete
+  description: Delete a durable client-registration record.
+  source: tigrbl_auth/api/rpc/methods/client_registration.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.registration.list
+  kind: openrpc-method
+  title: client.registration.list
+  description: List durable client-registration records.
+  source: tigrbl_auth/api/rpc/methods/client_registration.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.registration.show
+  kind: openrpc-method
+  title: client.registration.show
+  description: Show a durable client-registration record.
+  source: tigrbl_auth/api/rpc/methods/client_registration.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.registration.upsert
+  kind: openrpc-method
+  title: client.registration.upsert
+  description: Create or update a durable client-registration record.
+  source: tigrbl_auth/api/rpc/methods/client_registration.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:client.show
+  kind: openrpc-method
+  title: client.show
+  description: Show a client in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:consent.list
+  kind: openrpc-method
+  title: consent.list
+  description: List durable consent records.
+  source: tigrbl_auth/api/rpc/methods/consent.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:consent.revoke
+  kind: openrpc-method
+  title: consent.revoke
+  description: Revoke a durable consent record.
+  source: tigrbl_auth/api/rpc/methods/consent.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:consent.show
+  kind: openrpc-method
+  title: consent.show
+  description: Show a durable consent record.
+  source: tigrbl_auth/api/rpc/methods/consent.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:discovery.show
+  kind: openrpc-method
+  title: discovery.show
+  description: Show effective OIDC discovery metadata for the deployment.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:evidence.status
+  kind: openrpc-method
+  title: evidence.status
+  description: Summarize evidence-plane status.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:flow.list
+  kind: openrpc-method
+  title: flow.list
+  description: List effective protocol flow slices for the current deployment.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:gate.run
+  kind: openrpc-method
+  title: gate.run
+  description: Run a named release gate.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:identity.list
+  kind: openrpc-method
+  title: identity.list
+  description: List identities in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:identity.show
+  kind: openrpc-method
+  title: identity.show
+  description: Show an identity in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:jwks.show
+  kind: openrpc-method
+  title: jwks.show
+  description: Show the effective JWKS document.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:keys.list
+  kind: openrpc-method
+  title: keys.list
+  description: List durable service keys and key-rotation history.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:keys.rotate
+  kind: openrpc-method
+  title: keys.rotate
+  description: Rotate the signing key and persist a key-rotation event.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:profile.show
+  kind: openrpc-method
+  title: profile.show
+  description: Show the effective deployment/profile posture.
+  source: tigrbl_auth/api/rpc/methods/profile.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:release.bundle
+  kind: openrpc-method
+  title: release.bundle
+  description: Build a release bundle.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:rpc.discover
+  kind: openrpc-method
+  title: rpc.discover
+  description: Return the active implementation-backed RPC method catalog.
+  source: tigrbl_auth/api/rpc/methods/governance.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:session.list
+  kind: openrpc-method
+  title: session.list
+  description: List durable browser and auth sessions.
+  source: tigrbl_auth/api/rpc/methods/session.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:session.show
+  kind: openrpc-method
+  title: session.show
+  description: Show a durable session and its latest logout state.
+  source: tigrbl_auth/api/rpc/methods/session.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:session.terminate
+  kind: openrpc-method
+  title: session.terminate
+  description: Terminate a durable session and persist logout state.
+  source: tigrbl_auth/api/rpc/methods/session.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:target.list
+  kind: openrpc-method
+  title: target.list
+  description: List certification-scope targets.
+  source: tigrbl_auth/api/rpc/methods/profile.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:target.show
+  kind: openrpc-method
+  title: target.show
+  description: Show a certification-scope target.
+  source: tigrbl_auth/api/rpc/methods/profile.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.list
+  kind: openrpc-method
+  title: tenant.list
+  description: List tenants in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.show
+  kind: openrpc-method
+  title: tenant.show
+  description: Show a tenant in the admin plane.
+  source: tigrbl_auth/api/rpc/methods/directory.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:token.exchange
+  kind: openrpc-method
+  title: token.exchange
+  description: Create a durable token exchange record.
+  source: tigrbl_auth/api/rpc/methods/token.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:token.inspect
+  kind: openrpc-method
+  title: token.inspect
+  description: Inspect token posture and current introspection state.
+  source: tigrbl_auth/api/rpc/methods/token.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:token.list
+  kind: openrpc-method
+  title: token.list
+  description: List durable token records.
+  source: tigrbl_auth/api/rpc/methods/token.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: profile:baseline
+  kind: profile
+  title: baseline
+  description: Minimum interoperable OAuth 2.0 / OIDC / JOSE server profile.
+  source: compliance/targets/profiles.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 6265
+  - RFC 7521
+  - RFC 7523
+  - RFC 9728
+  - RFC 9700
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  required_flags:
+  - enable_rfc6749
+  - enable_rfc6750
+  - enable_rfc7636
+  - enable_rfc8414
+  - enable_rfc8615
+  - enable_rfc7515
+  - enable_rfc7516
+  - enable_rfc7517
+  - enable_rfc7518
+  - enable_rfc7519
+  - enable_oidc_core
+  - enable_oidc_discovery
+  - enable_oidc_session_management
+  protocol_slices: []
+- id: profile:fapi2-security
+  kind: profile
+  title: fapi2-security
+  description: FAPI 2.0 security profile with hardened request channels, sender-constrained
+    tokens, and issuer-aware authorization responses.
+  source: compliance/targets/profiles.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 6265
+  - RFC 7521
+  - RFC 7523
+  - RFC 9728
+  - RFC 9700
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - enable_rfc6749
+  - enable_rfc6750
+  - enable_rfc7636
+  - enable_rfc8414
+  - enable_rfc8615
+  - enable_rfc7515
+  - enable_rfc7516
+  - enable_rfc7517
+  - enable_rfc7518
+  - enable_rfc7519
+  - enable_oidc_core
+  - enable_oidc_discovery
+  - enable_oidc_session_management
+  - enable_rfc7009
+  - enable_rfc7521
+  - enable_rfc7523
+  - enable_rfc7662
+  - enable_rfc7591
+  - enable_rfc7592
+  - enable_rfc8252
+  - enable_rfc9068
+  - enable_rfc9207
+  - enable_rfc9728
+  - enable_oidc_userinfo
+  - enable_oidc_session_management
+  - enable_oidc_rp_initiated_logout
+  - enable_rfc8628
+  - enable_rfc8693
+  - enable_rfc8705
+  - enable_rfc8707
+  - enable_rfc9101
+  - enable_rfc9126
+  - enable_rfc9396
+  - enable_rfc9449
+  - enable_rfc9700
+  - enable_oidc_frontchannel_logout
+  - enable_oidc_backchannel_logout
+  protocol_slices:
+  - par
+  - jar
+  - rar
+  - dpop
+  - mtls
+- id: profile:hardening
+  kind: profile
+  title: hardening
+  description: Advanced hardening and interop profile for sender-constrained tokens
+    and hardened request channels.
+  source: compliance/targets/profiles.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 6265
+  - RFC 7521
+  - RFC 7523
+  - RFC 9728
+  - RFC 9700
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - enable_rfc6749
+  - enable_rfc6750
+  - enable_rfc7636
+  - enable_rfc8414
+  - enable_rfc8615
+  - enable_rfc7515
+  - enable_rfc7516
+  - enable_rfc7517
+  - enable_rfc7518
+  - enable_rfc7519
+  - enable_oidc_core
+  - enable_oidc_discovery
+  - enable_oidc_session_management
+  - enable_rfc7009
+  - enable_rfc7521
+  - enable_rfc7523
+  - enable_rfc7662
+  - enable_rfc7591
+  - enable_rfc7592
+  - enable_rfc8252
+  - enable_rfc9068
+  - enable_rfc9207
+  - enable_rfc9728
+  - enable_oidc_userinfo
+  - enable_oidc_session_management
+  - enable_oidc_rp_initiated_logout
+  - enable_rfc8628
+  - enable_rfc8693
+  - enable_rfc8705
+  - enable_rfc8707
+  - enable_rfc9101
+  - enable_rfc9126
+  - enable_rfc9396
+  - enable_rfc9449
+  - enable_rfc9700
+  - enable_oidc_frontchannel_logout
+  - enable_oidc_backchannel_logout
+  protocol_slices:
+  - device
+  - token-exchange
+  - par
+  - jar
+  - rar
+  - dpop
+  - mtls
+- id: profile:peer-claim
+  kind: profile
+  title: peer-claim
+  description: Independent peer-supported promotion profile for fully evidenced targets.
+  source: compliance/targets/profiles.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 6265
+  - RFC 7521
+  - RFC 7523
+  - RFC 9728
+  - RFC 9700
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - enable_rfc6749
+  - enable_rfc6750
+  - enable_rfc7636
+  - enable_rfc8414
+  - enable_rfc8615
+  - enable_rfc7515
+  - enable_rfc7516
+  - enable_rfc7517
+  - enable_rfc7518
+  - enable_rfc7519
+  - enable_oidc_core
+  - enable_oidc_discovery
+  - enable_oidc_session_management
+  - enable_rfc7009
+  - enable_rfc7521
+  - enable_rfc7523
+  - enable_rfc7662
+  - enable_rfc7591
+  - enable_rfc7592
+  - enable_rfc8252
+  - enable_rfc9068
+  - enable_rfc9207
+  - enable_rfc9728
+  - enable_oidc_userinfo
+  - enable_oidc_session_management
+  - enable_oidc_rp_initiated_logout
+  - enable_rfc8628
+  - enable_rfc8693
+  - enable_rfc8705
+  - enable_rfc8707
+  - enable_rfc9101
+  - enable_rfc9126
+  - enable_rfc9396
+  - enable_rfc9449
+  - enable_rfc9700
+  - enable_oidc_frontchannel_logout
+  - enable_oidc_backchannel_logout
+  protocol_slices:
+  - device
+  - token-exchange
+  - par
+  - jar
+  - rar
+  - dpop
+  - mtls
+- id: profile:production
+  kind: profile
+  title: production
+  description: Production-ready authn/z profile with lifecycle, browser, and registration
+    surfaces.
+  source: compliance/targets/profiles.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 6265
+  - RFC 7521
+  - RFC 7523
+  - RFC 9728
+  - RFC 9700
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - enable_rfc6749
+  - enable_rfc6750
+  - enable_rfc7636
+  - enable_rfc8414
+  - enable_rfc8615
+  - enable_rfc7515
+  - enable_rfc7516
+  - enable_rfc7517
+  - enable_rfc7518
+  - enable_rfc7519
+  - enable_oidc_core
+  - enable_oidc_discovery
+  - enable_oidc_session_management
+  - enable_rfc7009
+  - enable_rfc7521
+  - enable_rfc7523
+  - enable_rfc7662
+  - enable_rfc7591
+  - enable_rfc7592
+  - enable_rfc8252
+  - enable_rfc9068
+  - enable_rfc9207
+  - enable_rfc9728
+  - enable_oidc_userinfo
+  - enable_oidc_session_management
+  - enable_oidc_rp_initiated_logout
+  protocol_slices: []
+- id: slice:device
+  kind: protocol-slice
+  title: device
+  description: device protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 8628
+  required_flags:
+  - enable_rfc8628
+  paths:
+  - /device_authorization
+- id: slice:dpop
+  kind: protocol-slice
+  title: dpop
+  description: dpop protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 9449
+  required_flags:
+  - enable_rfc9449
+  paths: []
+- id: slice:jar
+  kind: protocol-slice
+  title: jar
+  description: jar protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 9101
+  required_flags:
+  - enable_rfc9101
+  paths: []
+- id: slice:mtls
+  kind: protocol-slice
+  title: mtls
+  description: mtls protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 8705
+  required_flags:
+  - enable_rfc8705
+  paths: []
+- id: slice:par
+  kind: protocol-slice
+  title: par
+  description: par protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 9126
+  required_flags:
+  - enable_rfc9126
+  paths:
+  - /par
+- id: slice:rar
+  kind: protocol-slice
+  title: rar
+  description: rar protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 9396
+  required_flags:
+  - enable_rfc9396
+  paths: []
+- id: slice:token-exchange
+  kind: protocol-slice
+  title: token-exchange
+  description: token-exchange protocol slice
+  source: tigrbl_auth.config.deployment
+  scope: core
+  targets:
+  - RFC 8693
+  required_flags:
+  - enable_rfc8693
+  paths:
+  - /token/exchange
+- id: route:authorize
+  kind: public-route
+  title: /authorize
+  description: Authorization endpoint
+  source: tigrbl_auth.api.rest.routers.authorize:api
+  scope: core
+  targets:
+  - RFC 6749
+  - OIDC Core 1.0
+  - RFC 8252
+  - RFC 8707
+  - RFC 9101
+  - RFC 9207
+  - RFC 9396
+  - RFC 9700
+  - RFC 6265
+  - OIDC Session Management
+  required_flags:
+  - enable_rfc6749
+  - enable_oidc_core
+  paths:
+  - /authorize
+  methods:
+  - GET
+- id: route:device-authorization
+  kind: public-route
+  title: /device_authorization
+  description: Device authorization endpoint
+  source: tigrbl_auth.api.rest.routers.device_authorization:api
+  scope: core
+  targets:
+  - RFC 8628
+  - RFC 8707
+  required_flags:
+  - enable_rfc8628
+  paths:
+  - /device_authorization
+  methods:
+  - POST
+- id: route:introspect
+  kind: public-route
+  title: /introspect
+  description: Token introspection endpoint
+  source: tigrbl_auth.standards.oauth2.introspection:include_introspection_endpoint
+  scope: core
+  targets:
+  - RFC 7662
+  - RFC 6750
+  required_flags:
+  - enable_rfc7662
+  paths:
+  - /introspect
+  methods:
+  - POST
+- id: route:login
+  kind: public-route
+  title: /login
+  description: Password login helper
+  source: tigrbl_auth.api.rest.routers.login:api
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 9068
+  - RFC 6265
+  - OIDC Session Management
+  required_flags:
+  - enable_rfc6749
+  paths:
+  - /login
+  methods:
+  - POST
+- id: route:logout
+  kind: public-route
+  title: /logout
+  description: OIDC RP-initiated logout endpoint
+  source: tigrbl_auth.api.rest.routers.logout:api
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  required_flags:
+  - enable_oidc_rp_initiated_logout
+  paths:
+  - /logout
+  methods:
+  - GET
+  - POST
+- id: route:par
+  kind: public-route
+  title: /par
+  description: Pushed authorization request endpoint
+  source: tigrbl_auth.api.rest.routers.par:api
+  scope: core
+  targets:
+  - RFC 9126
+  - RFC 9101
+  - RFC 9396
+  - RFC 8707
+  - RFC 9700
+  required_flags:
+  - enable_rfc9126
+  paths:
+  - /par
+  methods:
+  - POST
+- id: route:register
+  kind: public-route
+  title: /register
+  description: Dynamic client registration endpoint
+  source: tigrbl_auth.api.rest.routers.register:api
+  scope: core
+  targets:
+  - RFC 7591
+  - RFC 8252
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - enable_rfc7591
+  paths:
+  - /register
+  methods:
+  - POST
+- id: route:register-client-id
+  kind: public-route
+  title: /register/{client_id}
+  description: Dynamic client registration management endpoint
+  source: tigrbl_auth.api.rest.routers.register:api
+  scope: core
+  targets:
+  - RFC 7592
+  - RFC 8252
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - enable_rfc7592
+  paths:
+  - /register/{client_id}
+  methods:
+  - GET
+  - PUT
+  - DELETE
+- id: route:revoke
+  kind: public-route
+  title: /revoke
+  description: Token revocation endpoint
+  source: tigrbl_auth.api.rest.routers.revoke:api
+  scope: core
+  targets:
+  - RFC 7009
+  required_flags:
+  - enable_rfc7009
+  paths:
+  - /revoke
+  methods:
+  - POST
+- id: route:token
+  kind: public-route
+  title: /token
+  description: Token endpoint
+  source: tigrbl_auth.api.rest.routers.token:api
+  scope: core
+  targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 9068
+  - RFC 9700
+  required_flags:
+  - enable_rfc6749
+  paths:
+  - /token
+  methods:
+  - POST
+- id: route:token-exchange
+  kind: public-route
+  title: /token/exchange
+  description: Token exchange endpoint
+  source: tigrbl_auth.standards.oauth2.token_exchange:include_token_exchange_endpoint
+  scope: core
+  targets:
+  - RFC 8693
+  - RFC 8705
+  - RFC 8707
+  - RFC 9068
+  - RFC 9449
+  required_flags:
+  - enable_rfc8693
+  paths:
+  - /token/exchange
+  methods:
+  - POST
+- id: route:userinfo
+  kind: public-route
+  title: /userinfo
+  description: OIDC UserInfo endpoint
+  source: tigrbl_auth.standards.oidc.userinfo:include_oidc_userinfo
+  scope: core
+  targets:
+  - OIDC UserInfo
+  - RFC 6750
+  required_flags:
+  - enable_oidc_userinfo
+  paths:
+  - /userinfo
+  methods:
+  - GET
+- id: route:well-known-jwks-json
+  kind: public-route
+  title: /.well-known/jwks.json
+  description: JSON Web Key Set
+  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  scope: core
+  targets:
+  - RFC 7517
+  - RFC 8615
+  required_flags:
+  - enable_rfc7517
+  - enable_rfc8615
+  paths:
+  - /.well-known/jwks.json
+  methods:
+  - GET
+- id: route:well-known-oauth-authorization-server
+  kind: public-route
+  title: /.well-known/oauth-authorization-server
+  description: OAuth authorization server metadata
+  source: tigrbl_auth.standards.oauth2.rfc8414:include_rfc8414
+  scope: core
+  targets:
+  - RFC 8414
+  - RFC 8615
+  required_flags:
+  - enable_rfc8414
+  - enable_rfc8615
+  paths:
+  - /.well-known/oauth-authorization-server
+  methods:
+  - GET
+- id: route:well-known-oauth-protected-resource
+  kind: public-route
+  title: /.well-known/oauth-protected-resource
+  description: OAuth protected resource metadata
+  source: tigrbl_auth.standards.oauth2.rfc9728:include_rfc9728
+  scope: core
+  targets:
+  - RFC 9728
+  - RFC 8615
+  required_flags:
+  - enable_rfc9728
+  - enable_rfc8615
+  paths:
+  - /.well-known/oauth-protected-resource
+  methods:
+  - GET
+- id: route:well-known-openid-configuration
+  kind: public-route
+  title: /.well-known/openid-configuration
+  description: OIDC discovery document
+  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  required_flags:
+  - enable_oidc_discovery
+  - enable_rfc8615
+  paths:
+  - /.well-known/openid-configuration
+  methods:
+  - GET
+- id: flag:active_extensions
+  kind: setting-flag
+  title: active_extensions
+  description: Settings-backed governance flag active_extensions
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - ASGI 3 application package
+  required_flags:
+  - active_extensions
+- id: flag:active_protocol_slices
+  kind: setting-flag
+  title: active_protocol_slices
+  description: Settings-backed governance flag active_protocol_slices
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - ASGI 3 application package
+  required_flags:
+  - active_protocol_slices
+- id: flag:active_surface_sets
+  kind: setting-flag
+  title: active_surface_sets
+  description: Settings-backed governance flag active_surface_sets
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - ASGI 3 application package
+  required_flags:
+  - active_surface_sets
+- id: flag:enable_id_token_encryption
+  kind: setting-flag
+  title: enable_id_token_encryption
+  description: Settings-backed governance flag enable_id_token_encryption
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags:
+  - enable_id_token_encryption
+- id: flag:enable_oidc_backchannel_logout
+  kind: setting-flag
+  title: enable_oidc_backchannel_logout
+  description: Settings-backed governance flag enable_oidc_backchannel_logout
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_backchannel_logout
+- id: flag:enable_oidc_core
+  kind: setting-flag
+  title: enable_oidc_core
+  description: Settings-backed governance flag enable_oidc_core
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_core
+- id: flag:enable_oidc_discovery
+  kind: setting-flag
+  title: enable_oidc_discovery
+  description: Settings-backed governance flag enable_oidc_discovery
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_discovery
+- id: flag:enable_oidc_frontchannel_logout
+  kind: setting-flag
+  title: enable_oidc_frontchannel_logout
+  description: Settings-backed governance flag enable_oidc_frontchannel_logout
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_frontchannel_logout
+- id: flag:enable_oidc_rp_initiated_logout
+  kind: setting-flag
+  title: enable_oidc_rp_initiated_logout
+  description: Settings-backed governance flag enable_oidc_rp_initiated_logout
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_rp_initiated_logout
+- id: flag:enable_oidc_session_management
+  kind: setting-flag
+  title: enable_oidc_session_management
+  description: Settings-backed governance flag enable_oidc_session_management
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_session_management
+- id: flag:enable_oidc_userinfo
+  kind: setting-flag
+  title: enable_oidc_userinfo
+  description: Settings-backed governance flag enable_oidc_userinfo
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_oidc_userinfo
+- id: flag:enable_rfc6749
+  kind: setting-flag
+  title: enable_rfc6749
+  description: Settings-backed governance flag enable_rfc6749
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc6749
+- id: flag:enable_rfc6750
+  kind: setting-flag
+  title: enable_rfc6750
+  description: Settings-backed governance flag enable_rfc6750
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc6750
+- id: flag:enable_rfc6750_form
+  kind: setting-flag
+  title: enable_rfc6750_form
+  description: Settings-backed governance flag enable_rfc6750_form
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6750
+  - RFC 9700
+  required_flags:
+  - enable_rfc6750_form
+- id: flag:enable_rfc6750_query
+  kind: setting-flag
+  title: enable_rfc6750_query
+  description: Settings-backed governance flag enable_rfc6750_query
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6750
+  - RFC 9700
+  required_flags:
+  - enable_rfc6750_query
+- id: flag:enable_rfc7009
+  kind: setting-flag
+  title: enable_rfc7009
+  description: Settings-backed governance flag enable_rfc7009
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7009
+- id: flag:enable_rfc7515
+  kind: setting-flag
+  title: enable_rfc7515
+  description: Settings-backed governance flag enable_rfc7515
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7515
+- id: flag:enable_rfc7516
+  kind: setting-flag
+  title: enable_rfc7516
+  description: Settings-backed governance flag enable_rfc7516
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7516
+- id: flag:enable_rfc7517
+  kind: setting-flag
+  title: enable_rfc7517
+  description: Settings-backed governance flag enable_rfc7517
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7517
+- id: flag:enable_rfc7518
+  kind: setting-flag
+  title: enable_rfc7518
+  description: Settings-backed governance flag enable_rfc7518
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7518
+- id: flag:enable_rfc7519
+  kind: setting-flag
+  title: enable_rfc7519
+  description: Settings-backed governance flag enable_rfc7519
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7519
+- id: flag:enable_rfc7521
+  kind: setting-flag
+  title: enable_rfc7521
+  description: Settings-backed governance flag enable_rfc7521
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7521
+- id: flag:enable_rfc7523
+  kind: setting-flag
+  title: enable_rfc7523
+  description: Settings-backed governance flag enable_rfc7523
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7523
+- id: flag:enable_rfc7591
+  kind: setting-flag
+  title: enable_rfc7591
+  description: Settings-backed governance flag enable_rfc7591
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7591
+- id: flag:enable_rfc7592
+  kind: setting-flag
+  title: enable_rfc7592
+  description: Settings-backed governance flag enable_rfc7592
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7592
+- id: flag:enable_rfc7636
+  kind: setting-flag
+  title: enable_rfc7636
+  description: Settings-backed governance flag enable_rfc7636
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7636
+- id: flag:enable_rfc7662
+  kind: setting-flag
+  title: enable_rfc7662
+  description: Settings-backed governance flag enable_rfc7662
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7662
+- id: flag:enable_rfc7800
+  kind: setting-flag
+  title: enable_rfc7800
+  description: Settings-backed governance flag enable_rfc7800
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7800
+- id: flag:enable_rfc7952
+  kind: setting-flag
+  title: enable_rfc7952
+  description: Settings-backed governance flag enable_rfc7952
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc7952
+- id: flag:enable_rfc8252
+  kind: setting-flag
+  title: enable_rfc8252
+  description: Settings-backed governance flag enable_rfc8252
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8252
+- id: flag:enable_rfc8291
+  kind: setting-flag
+  title: enable_rfc8291
+  description: Settings-backed governance flag enable_rfc8291
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8291
+- id: flag:enable_rfc8414
+  kind: setting-flag
+  title: enable_rfc8414
+  description: Settings-backed governance flag enable_rfc8414
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8414
+- id: flag:enable_rfc8523
+  kind: setting-flag
+  title: enable_rfc8523
+  description: Settings-backed governance flag enable_rfc8523
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8523
+- id: flag:enable_rfc8615
+  kind: setting-flag
+  title: enable_rfc8615
+  description: Settings-backed governance flag enable_rfc8615
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8615
+- id: flag:enable_rfc8628
+  kind: setting-flag
+  title: enable_rfc8628
+  description: Settings-backed governance flag enable_rfc8628
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8628
+- id: flag:enable_rfc8693
+  kind: setting-flag
+  title: enable_rfc8693
+  description: Settings-backed governance flag enable_rfc8693
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8693
+- id: flag:enable_rfc8705
+  kind: setting-flag
+  title: enable_rfc8705
+  description: Settings-backed governance flag enable_rfc8705
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8705
+- id: flag:enable_rfc8707
+  kind: setting-flag
+  title: enable_rfc8707
+  description: Settings-backed governance flag enable_rfc8707
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8707
+- id: flag:enable_rfc8812
+  kind: setting-flag
+  title: enable_rfc8812
+  description: Settings-backed governance flag enable_rfc8812
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8812
+- id: flag:enable_rfc8932
+  kind: setting-flag
+  title: enable_rfc8932
+  description: Settings-backed governance flag enable_rfc8932
+  source: tigrbl_auth.config.settings
+  scope: extension
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc8932
+- id: flag:enable_rfc9068
+  kind: setting-flag
+  title: enable_rfc9068
+  description: Settings-backed governance flag enable_rfc9068
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9068
+- id: flag:enable_rfc9101
+  kind: setting-flag
+  title: enable_rfc9101
+  description: Settings-backed governance flag enable_rfc9101
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9101
+- id: flag:enable_rfc9126
+  kind: setting-flag
+  title: enable_rfc9126
+  description: Settings-backed governance flag enable_rfc9126
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9126
+- id: flag:enable_rfc9207
+  kind: setting-flag
+  title: enable_rfc9207
+  description: Settings-backed governance flag enable_rfc9207
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9207
+- id: flag:enable_rfc9396
+  kind: setting-flag
+  title: enable_rfc9396
+  description: Settings-backed governance flag enable_rfc9396
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9396
+- id: flag:enable_rfc9449
+  kind: setting-flag
+  title: enable_rfc9449
+  description: Settings-backed governance flag enable_rfc9449
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9449
+- id: flag:enable_rfc9700
+  kind: setting-flag
+  title: enable_rfc9700
+  description: Settings-backed governance flag enable_rfc9700
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9700
+- id: flag:enable_rfc9728
+  kind: setting-flag
+  title: enable_rfc9728
+  description: Settings-backed governance flag enable_rfc9728
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags:
+  - enable_rfc9728
+- id: flag:enforce_rfc8252
+  kind: setting-flag
+  title: enforce_rfc8252
+  description: Settings-backed governance flag enforce_rfc8252
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 8252
+  required_flags:
+  - enforce_rfc8252
+- id: flag:oauth21_alignment_mode
+  kind: setting-flag
+  title: oauth21_alignment_mode
+  description: Settings-backed governance flag oauth21_alignment_mode
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - OAuth 2.1 alignment profile
+  required_flags:
+  - oauth21_alignment_mode
+- id: flag:require_tls
+  kind: setting-flag
+  title: require_tls
+  description: Settings-backed governance flag require_tls
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags:
+  - require_tls
+- id: flag:rfc8707_enabled
+  kind: setting-flag
+  title: rfc8707_enabled
+  description: Settings-backed governance flag rfc8707_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 8707
+  required_flags:
+  - rfc8707_enabled
+- id: flag:runtime_style
+  kind: setting-flag
+  title: runtime_style
+  description: Settings-backed governance flag runtime_style
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - ASGI 3 application package
+  required_flags:
+  - runtime_style
+- id: flag:session_cookie_cross_site
+  kind: setting-flag
+  title: session_cookie_cross_site
+  description: Settings-backed governance flag session_cookie_cross_site
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_cross_site
+- id: flag:session_cookie_domain
+  kind: setting-flag
+  title: session_cookie_domain
+  description: Settings-backed governance flag session_cookie_domain
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_domain
+- id: flag:session_cookie_force_secure
+  kind: setting-flag
+  title: session_cookie_force_secure
+  description: Settings-backed governance flag session_cookie_force_secure
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_force_secure
+- id: flag:session_cookie_max_age_seconds
+  kind: setting-flag
+  title: session_cookie_max_age_seconds
+  description: Settings-backed governance flag session_cookie_max_age_seconds
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_max_age_seconds
+- id: flag:session_cookie_name
+  kind: setting-flag
+  title: session_cookie_name
+  description: Settings-backed governance flag session_cookie_name
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_name
+- id: flag:session_cookie_path
+  kind: setting-flag
+  title: session_cookie_path
+  description: Settings-backed governance flag session_cookie_path
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_path
+- id: flag:session_cookie_renewal_seconds
+  kind: setting-flag
+  title: session_cookie_renewal_seconds
+  description: Settings-backed governance flag session_cookie_renewal_seconds
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_renewal_seconds
+- id: flag:session_cookie_samesite
+  kind: setting-flag
+  title: session_cookie_samesite
+  description: Settings-backed governance flag session_cookie_samesite
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - session_cookie_samesite
+- id: flag:strict_boundary_enforcement
+  kind: setting-flag
+  title: strict_boundary_enforcement
+  description: Settings-backed governance flag strict_boundary_enforcement
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - Release bundle and signature verification
+  required_flags:
+  - strict_boundary_enforcement
+- id: flag:surface_admin_enabled
+  kind: setting-flag
+  title: surface_admin_enabled
+  description: Settings-backed governance flag surface_admin_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_admin_enabled
+- id: flag:surface_diagnostics_enabled
+  kind: setting-flag
+  title: surface_diagnostics_enabled
+  description: Settings-backed governance flag surface_diagnostics_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_diagnostics_enabled
+- id: flag:surface_operator_enabled
+  kind: setting-flag
+  title: surface_operator_enabled
+  description: Settings-backed governance flag surface_operator_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_operator_enabled
+- id: flag:surface_plugin_mode
+  kind: setting-flag
+  title: surface_plugin_mode
+  description: Settings-backed governance flag surface_plugin_mode
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_plugin_mode
+- id: flag:surface_public_enabled
+  kind: setting-flag
+  title: surface_public_enabled
+  description: Settings-backed governance flag surface_public_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_public_enabled
+- id: flag:surface_rpc_enabled
+  kind: setting-flag
+  title: surface_rpc_enabled
+  description: Settings-backed governance flag surface_rpc_enabled
+  source: tigrbl_auth.config.settings
+  scope: core
+  targets:
+  - CLI operator surface
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_rpc_enabled
+- id: target:asgi-3-application-package
+  kind: target
+  title: ASGI 3 application package
+  description: Server-agnostic ASGI 3 application boundary
+  source: compliance/targets/runtime-targets.yaml
+  scope: core
+  targets:
+  - ASGI 3 application package
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:bootstrap-and-migration-lifecycle
+  kind: target
+  title: Bootstrap and migration lifecycle
+  description: Bootstrap, migration, and repository lifecycle operators
+  source: compliance/targets/operator-targets.yaml
+  scope: core
+  targets:
+  - Bootstrap and migration lifecycle
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:cli-operator-surface
+  kind: target
+  title: CLI operator surface
+  description: Canonical CLI operator command and flag contract
+  source: compliance/targets/operator-targets.yaml
+  scope: core
+  targets:
+  - CLI operator surface
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:import-export-portability
+  kind: target
+  title: Import/export portability
+  description: Import/export operator surface and portability boundary
+  source: compliance/targets/operator-targets.yaml
+  scope: core
+  targets:
+  - Import/export portability
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:key-lifecycle-and-jwks-publication
+  kind: target
+  title: Key lifecycle and JWKS publication
+  description: Key lifecycle, JWKS publication, and rotation surface
+  source: compliance/targets/operator-targets.yaml
+  scope: core
+  targets:
+  - Key lifecycle and JWKS publication
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:oauth-2-1-alignment-profile
+  kind: target
+  title: OAuth 2.1 alignment profile
+  description: Track draft-era alignment only. Do not emit as a final RFC compliance
+    claim.
+  source: compliance/targets/alignment-targets.yaml
+  scope: alignment-only
+  targets:
+  - OAuth 2.1 alignment profile
+  required_flags: []
+  profiles: []
+- id: target:oidc-back-channel-logout
+  kind: target
+  title: OIDC Back-Channel Logout
+  description: OIDC Back-Channel Logout
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC Back-Channel Logout
+  required_flags:
+  - enable_oidc_backchannel_logout
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:oidc-core-1-0
+  kind: target
+  title: OIDC Core 1.0
+  description: OIDC Core 1.0
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  required_flags:
+  - enable_oidc_core
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:oidc-discovery-1-0
+  kind: target
+  title: OIDC Discovery 1.0
+  description: OIDC Discovery 1.0
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  required_flags:
+  - enable_oidc_discovery
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:oidc-front-channel-logout
+  kind: target
+  title: OIDC Front-Channel Logout
+  description: OIDC Front-Channel Logout
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC Front-Channel Logout
+  required_flags:
+  - enable_oidc_frontchannel_logout
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:oidc-rp-initiated-logout
+  kind: target
+  title: OIDC RP-Initiated Logout
+  description: OIDC RP-Initiated Logout
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC RP-Initiated Logout
+  required_flags:
+  - enable_oidc_rp_initiated_logout
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:oidc-session-management
+  kind: target
+  title: OIDC Session Management
+  description: OIDC Session Management
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC Session Management
+  required_flags:
+  - enable_oidc_session_management
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:oidc-userinfo
+  kind: target
+  title: OIDC UserInfo
+  description: OIDC UserInfo
+  source: compliance/targets/oidc-targets.yaml
+  scope: core
+  targets:
+  - OIDC UserInfo
+  required_flags:
+  - enable_oidc_userinfo
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:openapi-3-1-3-2-compatible-public-contract
+  kind: target
+  title: OpenAPI 3.1 / 3.2 compatible public contract
+  description: OpenAPI 3.1 / 3.2 compatible public contract
+  source: compliance/targets/openapi-targets.yaml
+  scope: core
+  targets:
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  required_flags:
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:openrpc-1-4-x-admin-control-plane-contract
+  kind: target
+  title: OpenRPC 1.4.x admin/control-plane contract
+  description: OpenRPC 1.4.x admin/control-plane contract
+  source: compliance/targets/openrpc-targets.yaml
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags:
+  - surface_admin_enabled
+  - surface_rpc_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:release-bundle-and-signature-verification
+  kind: target
+  title: Release bundle and signature verification
+  description: Release bundle construction, signing, and verification
+  source: compliance/targets/operator-targets.yaml
+  scope: core
+  targets:
+  - Release bundle and signature verification
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-6265
+  kind: target
+  title: RFC 6265
+  description: HTTP State Management Mechanism
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 6265
+  required_flags:
+  - enable_oidc_session_management
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-6749
+  kind: target
+  title: RFC 6749
+  description: OAuth 2.0 Authorization Framework
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 6749
+  required_flags:
+  - enable_rfc6749
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-6750
+  kind: target
+  title: RFC 6750
+  description: OAuth 2.0 Bearer Token Usage
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 6750
+  required_flags:
+  - enable_rfc6750
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7009
+  kind: target
+  title: RFC 7009
+  description: OAuth 2.0 Token Revocation
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7009
+  required_flags:
+  - enable_rfc7009
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7515
+  kind: target
+  title: RFC 7515
+  description: JSON Web Signature (JWS)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7515
+  required_flags:
+  - enable_rfc7515
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7516
+  kind: target
+  title: RFC 7516
+  description: JSON Web Encryption (JWE)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7516
+  required_flags:
+  - enable_rfc7516
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7517
+  kind: target
+  title: RFC 7517
+  description: JSON Web Key (JWK)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7517
+  required_flags:
+  - enable_rfc7517
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7518
+  kind: target
+  title: RFC 7518
+  description: JSON Web Algorithms (JWA)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7518
+  required_flags:
+  - enable_rfc7518
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7519
+  kind: target
+  title: RFC 7519
+  description: JSON Web Token (JWT)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7519
+  required_flags:
+  - enable_rfc7519
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7521
+  kind: target
+  title: RFC 7521
+  description: Assertion Framework for OAuth 2.0 Client Authentication and Authorization
+    Grants
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7521
+  required_flags:
+  - enable_rfc7521
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7523
+  kind: target
+  title: RFC 7523
+  description: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and
+    Authorization Grants
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7523
+  required_flags:
+  - enable_rfc7523
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7591
+  kind: target
+  title: RFC 7591
+  description: OAuth 2.0 Dynamic Client Registration Protocol
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7591
+  required_flags:
+  - enable_rfc7591
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7592
+  kind: target
+  title: RFC 7592
+  description: OAuth 2.0 Dynamic Client Registration Management Protocol
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7592
+  required_flags:
+  - enable_rfc7592
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7636
+  kind: target
+  title: RFC 7636
+  description: Proof Key for Code Exchange by OAuth Public Clients
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7636
+  required_flags:
+  - enable_rfc7636
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7662
+  kind: target
+  title: RFC 7662
+  description: OAuth 2.0 Token Introspection
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 7662
+  required_flags:
+  - enable_rfc7662
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-7800
+  kind: target
+  title: RFC 7800
+  description: Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 7800
+  required_flags: []
+  profiles: []
+- id: target:rfc-7952
+  kind: target
+  title: RFC 7952
+  description: Security Event Token (SET)
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 7952
+  required_flags: []
+  profiles: []
+- id: target:rfc-8252
+  kind: target
+  title: RFC 8252
+  description: OAuth 2.0 for Native Apps
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8252
+  required_flags:
+  - enable_rfc8252
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-8291
+  kind: target
+  title: RFC 8291
+  description: Message Encryption for Web Push
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 8291
+  required_flags: []
+  profiles: []
+- id: target:rfc-8414
+  kind: target
+  title: RFC 8414
+  description: OAuth 2.0 Authorization Server Metadata
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8414
+  required_flags:
+  - enable_rfc8414
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-8615
+  kind: target
+  title: RFC 8615
+  description: Well-Known Uniform Resource Identifiers (URIs)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8615
+  required_flags:
+  - enable_rfc8615
+  - surface_public_enabled
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-8628
+  kind: target
+  title: RFC 8628
+  description: OAuth 2.0 Device Authorization Grant
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8628
+  required_flags:
+  - enable_rfc8628
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-8693
+  kind: target
+  title: RFC 8693
+  description: OAuth 2.0 Token Exchange
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8693
+  required_flags:
+  - enable_rfc8693
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-8705
+  kind: target
+  title: RFC 8705
+  description: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access
+    Tokens
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8705
+  required_flags:
+  - enable_rfc8705
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-8707
+  kind: target
+  title: RFC 8707
+  description: Resource Indicators for OAuth 2.0
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 8707
+  required_flags:
+  - enable_rfc8707
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-8812
+  kind: target
+  title: RFC 8812
+  description: Web Authentication (WebAuthn) Cryptographic Algorithms
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 8812
+  required_flags: []
+  profiles: []
+- id: target:rfc-8932
+  kind: target
+  title: RFC 8932
+  description: Recommendations for DNS Privacy Service Operators
+  source: compliance/targets/extension-targets.yaml
+  scope: extension
+  targets:
+  - RFC 8932
+  required_flags: []
+  profiles: []
+- id: target:rfc-9068
+  kind: target
+  title: RFC 9068
+  description: JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9068
+  required_flags:
+  - enable_rfc9068
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-9101
+  kind: target
+  title: RFC 9101
+  description: OAuth 2.0 JWT-Secured Authorization Request (JAR)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9101
+  required_flags:
+  - enable_rfc9101
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-9126
+  kind: target
+  title: RFC 9126
+  description: OAuth 2.0 Pushed Authorization Requests
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9126
+  required_flags:
+  - enable_rfc9126
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-9207
+  kind: target
+  title: RFC 9207
+  description: OAuth 2.0 Authorization Server Issuer Identification
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9207
+  required_flags:
+  - enable_rfc9207
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:rfc-9396
+  kind: target
+  title: RFC 9396
+  description: OAuth 2.0 Rich Authorization Requests
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9396
+  required_flags:
+  - enable_rfc9396
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-9449
+  kind: target
+  title: RFC 9449
+  description: OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer
+    (DPoP)
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9449
+  required_flags:
+  - enable_rfc9449
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-9700
+  kind: target
+  title: RFC 9700
+  description: Best Current Practice for OAuth 2.0 Security
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9700
+  required_flags:
+  - enable_rfc9700
+  - surface_public_enabled
+  profiles:
+  - hardening
+  - peer-claim
+- id: target:rfc-9728
+  kind: target
+  title: RFC 9728
+  description: OAuth 2.0 Protected Resource Metadata
+  source: compliance/targets/rfc-targets.yaml
+  scope: core
+  targets:
+  - RFC 9728
+  required_flags:
+  - enable_rfc9728
+  - surface_public_enabled
+  profiles:
+  - production
+  - hardening
+  - peer-claim
+- id: target:runner-profile-hypercorn
+  kind: target
+  title: 'Runner profile: Hypercorn'
+  description: Hypercorn-backed serving profile
+  source: compliance/targets/runtime-targets.yaml
+  scope: core
+  targets:
+  - 'Runner profile: Hypercorn'
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:runner-profile-tigrcorn
+  kind: target
+  title: 'Runner profile: Tigrcorn'
+  description: Tigrcorn-backed serving profile
+  source: compliance/targets/runtime-targets.yaml
+  scope: core
+  targets:
+  - 'Runner profile: Tigrcorn'
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- id: target:runner-profile-uvicorn
+  kind: target
+  title: 'Runner profile: Uvicorn'
+  description: Uvicorn-backed serving profile
+  source: compliance/targets/runtime-targets.yaml
+  scope: core
+  targets:
+  - 'Runner profile: Uvicorn'
+  required_flags: []
+  profiles:
+  - baseline
+  - production
+  - hardening
+  - peer-claim

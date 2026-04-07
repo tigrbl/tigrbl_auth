@@ -235,10 +235,10 @@ deployment:
 copied_artifacts:
 - path: compliance\claims\effective-target-claims.hardening.yaml
   present: true
-  sha256: 7e607abf7c83a029344ff9cc3a831da79fbd8d9a30d13e2ee1786e23964d511c
+  sha256: 332217cf667f04374e65d654bd5d4d7e5d6aaee009fbb61dd620ffd88ae07586
 - path: compliance\evidence\effective-release-evidence.hardening.yaml
   present: true
-  sha256: 84f0605715a5ec699d572febf436814fe77c57d25d6cb9355f0c35ecbf2ae1a0
+  sha256: c2e785253a06267919593a6dcd0ed34a5172ac13644026b8812c5f74f5fbcb04
 - path: specs\openapi\profiles\hardening\tigrbl_auth.public.openapi.json
   present: true
   sha256: 27fd63b508d6d2ea20e17d09792a4d1f53f9f16eb7edb292ab82067044efbdda

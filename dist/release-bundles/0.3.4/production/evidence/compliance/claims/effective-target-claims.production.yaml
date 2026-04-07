@@ -205,25 +205,45 @@ effective_deployment:
   - token.list
 claim_set:
   current_repository_tier: 3
-  phase: P10
+  phase: P14
   claims:
+  - target: ASGI 3 application package
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Bootstrap and migration lifecycle
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: CLI operator surface
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Import/export portability
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Key lifecycle and JWKS publication
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC Core 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC Discovery 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OpenAPI 3.1 / 3.2 compatible public contract
+    tier: 3
+    status: generated-live-from-deployment-metadata
+    profile: baseline
   - target: RFC 6749
     tier: 3
     status: evidenced-release-gated
     profile: baseline
   - target: RFC 6750
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 7636
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 8414
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 8615
     tier: 3
     status: evidenced-release-gated
     profile: baseline
@@ -247,7 +267,63 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: baseline
+  - target: RFC 7636
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 8414
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 8615
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Release bundle and signature verification
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Hypercorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Tigrcorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Uvicorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC RP-Initiated Logout
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OIDC Session Management
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OIDC UserInfo
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OpenRPC 1.4.x admin/control-plane contract
+    tier: 3
+    status: implementation-backed-generated-from-rpc-registry
+    profile: production
+  - target: RFC 6265
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
   - target: RFC 7009
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7521
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7523
     tier: 3
     status: evidenced-release-gated
     profile: production
@@ -271,83 +347,7 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: production
-  - target: RFC 6265
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
-  - target: RFC 7521
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
-  - target: RFC 7523
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
   - target: RFC 9728
     tier: 3
     status: evidenced-release-gated
     profile: production
-  - target: OIDC Core 1.0
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: OIDC Discovery 1.0
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: OIDC UserInfo
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
-  - target: OIDC Session Management
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
-  - target: OIDC RP-Initiated Logout
-    tier: 3
-    status: evidenced-release-gated
-    profile: production
-  - target: OpenAPI 3.1 / 3.2 compatible public contract
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: OpenRPC 1.4.x admin/control-plane contract
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: ASGI 3 application package
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: 'Runner profile: Uvicorn'
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: 'Runner profile: Hypercorn'
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: 'Runner profile: Tigrcorn'
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: CLI operator surface
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Bootstrap and migration lifecycle
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Key lifecycle and JWKS publication
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Import/export portability
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: Release bundle and signature verification
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline

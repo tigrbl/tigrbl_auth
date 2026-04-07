@@ -7,7 +7,7 @@ Do not cut a final certified release. Publish only a truthful checkpoint/candida
 ## Basis
 
 - release_gates_passed: `True`
-- release_gate_count: `23`
+- release_gate_count: `24`
 - release_gate_failed_count: `0`
 - final_release_gate_passed: `True`
 - fully_certifiable_now: `False`

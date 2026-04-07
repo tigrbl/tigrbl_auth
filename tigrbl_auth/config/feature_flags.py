@@ -189,6 +189,11 @@ PROFILE_FLAG_SETS: Final[dict[str, tuple[str, ...]]] = {
         + list(FEATURE_FLAG_GROUPS["production"]["flags"].keys())
         + list(FEATURE_FLAG_GROUPS["hardening"]["flags"].keys())
     ),
+    "fapi2-security": tuple(
+        list(FEATURE_FLAG_GROUPS["baseline"]["flags"].keys())
+        + list(FEATURE_FLAG_GROUPS["production"]["flags"].keys())
+        + list(FEATURE_FLAG_GROUPS["hardening"]["flags"].keys())
+    ),
     "peer-claim": tuple(
         list(FEATURE_FLAG_GROUPS["baseline"]["flags"].keys())
         + list(FEATURE_FLAG_GROUPS["production"]["flags"].keys())

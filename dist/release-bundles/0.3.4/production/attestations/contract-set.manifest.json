@@ -5,18 +5,18 @@
   "contracts": [
     {
       "path": "specs/cli/cli_contract.json",
-      "sha256": "84bf409c8ae8c0b3229fb6ddc28a174dfae5f6c89a5c97728ba9f0f28955c90d",
-      "bytes": 203409
+      "sha256": "9ee1d3a3dace4eed4caa6ae08238d3e7652cb96b47e744b9330770d3efff78c4",
+      "bytes": 211308
     },
     {
       "path": "specs/cli/cli_contract.yaml",
-      "sha256": "2644fd0144c474012a33ef76e141a902a017a7fb332fc0c663c237606601dcc7",
-      "bytes": 128440
+      "sha256": "bde6f111aae66f37c399c9c1c740697b4373d6d74725dd35ebd8ce470345bacb",
+      "bytes": 134599
     },
     {
       "path": "specs/discovery/profiles/production/jwks.json",
-      "sha256": "65cd414018cc438c6822e5b5cf4ba7e5da97cfa4a560c8fd2dc3584d22df7bfb",
-      "bytes": 193
+      "sha256": "3c83eac8303612e864ac0db54d8db537da5b4eb0fe32df31cfabe626957b9506",
+      "bytes": 200
     },
     {
       "path": "specs/discovery/profiles/production/oauth-authorization-server.json",

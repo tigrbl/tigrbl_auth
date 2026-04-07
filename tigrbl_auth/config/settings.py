@@ -105,7 +105,7 @@ class Settings(BaseSettings):
     # ------------------------------------------------------------------
     deployment_profile: str = Field(
         default=os.environ.get("TIGRBL_AUTH_PROFILE", "baseline"),
-        description="Deployment profile: baseline, production, or hardening.",
+        description="Deployment profile: baseline, production, hardening, or fapi2-security.",
     )
     issuer: str = Field(
         default=os.environ.get("AUTHN_ISSUER", "https://authn.example.com"),

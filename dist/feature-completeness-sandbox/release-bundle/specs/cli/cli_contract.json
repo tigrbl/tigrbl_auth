@@ -7153,6 +7153,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",
@@ -7636,6 +7637,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",

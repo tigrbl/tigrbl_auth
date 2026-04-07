@@ -33,7 +33,7 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - release_gates_passed: `True`
-- release_gate_count: `23`
+- release_gate_count: `24`
 - release_gate_failed_count: `0`
 - final_release_gate_passed: `True`
 - final_release_ready: `False`
@@ -42,6 +42,12 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - profile_scope_mismatch_set_empty: `True`
 - clean_room_executor_matrix_declared_complete: `True`
 - validated_manifest_identity_contract_installed: `True`
+- claim_registry_canonical_complete: `True`
+- fapi2_security_profile_declared_complete: `True`
+- release_claims_machine_derivable: `True`
+- core_targets_missing_from_feature_map: `0`
+- extension_targets_missing_from_feature_map: `0`
+- settings_backed_flags_missing_from_flag_map: `0`
 - tier4_external_bundle_count: `0`
 - tier4_valid_external_bundle_count: `0`
 - tier4_invalid_external_bundle_count: `0`

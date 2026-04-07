@@ -14,6 +14,12 @@
 - validated_runtime_matrix_green: `True`
 - validated_test_lanes_green: `True`
 - migration_portability_passed: `True`
+- claim_registry_canonical_complete: `True`
+- fapi2_security_profile_declared_complete: `True`
+- release_claims_machine_derivable: `True`
+- core_targets_missing_from_feature_map: `0`
+- extension_targets_missing_from_feature_map: `0`
+- settings_backed_flags_missing_from_flag_map: `0`
 
 ## Open gaps blocking final certification
 

@@ -150,6 +150,7 @@ categories:
   - tests/unit/test_phase5_operator_service_layer.py
   - tests/unit/test_boundary_freeze_checkpoint.py
   - tests/unit/test_phase13_truthfulness_alignment.py
+  - tests/unit/test_phase14_claim_registry_alignment.py
   - tests/unit/test_phase6_migration_portability_evidence.py
   - tests/unit/test_phase1_clean_room_install_substrate.py
   - tests/unit/test_phase2_app_factory_materialization.py

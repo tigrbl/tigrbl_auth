@@ -3,7 +3,7 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-bundle/v1",
-    "issued_at": "2026-04-07T09:16:19Z",
+    "issued_at": "2026-04-07T22:40:02Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
       "key_id": "ed25519:47cff9cbdf9030464a7095e6",
@@ -22,25 +22,25 @@
         {
           "label": "release-bundle",
           "artifact_path": "release-bundle.json",
-          "artifact_sha256": "8a0937f43f7b53a388298f4377ccfd547b0625ee3731abcf7d6c7711f985650d",
+          "artifact_sha256": "181d7fbcc43c760f4c727ddd74a3d8c0b4ee1a5a7be1bcbff19648c713963944",
           "attestation_path": "attestations/release-bundle.attestation.json"
         },
         {
           "label": "claim-manifest",
           "artifact_path": "compliance/claims/effective-target-claims.baseline.yaml",
-          "artifact_sha256": "538e44508ab36aea44beb153c8b897c75f9fea08ff810cc0702307df1e045f2f",
+          "artifact_sha256": "7f7beae3fb193e51a1237ac0b5d114c80dcc37d278ebcd4d60e9e0bbf6f07c64",
           "attestation_path": "attestations/claim-manifest.attestation.json"
         },
         {
           "label": "evidence-manifest",
           "artifact_path": "compliance/evidence/effective-release-evidence.baseline.yaml",
-          "artifact_sha256": "ef665744a507bde221e454ff12e4ebc6fbeca128d7bc74cc5c237fce8f5e443c",
+          "artifact_sha256": "f6e6d763c42486c84a9a374ff19205bc864736b097f0bba30f0670aa264bc9bf",
           "attestation_path": "attestations/evidence-manifest.attestation.json"
         },
         {
           "label": "contract-set",
           "artifact_path": "attestations/contract-set.manifest.json",
-          "artifact_sha256": "e871e9787fb8f3188134462e0cc0055b72aeced1b2f43345673fdeddf343a5f2",
+          "artifact_sha256": "b6fc020de3d2a2d8b9efd5a3e9db316b12c02f86f7585a7d8399cc21d67fcc59",
           "attestation_path": "attestations/contract-set.attestation.json"
         }
       ]
@@ -49,7 +49,7 @@
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "YScwGq1JEn78Bsah-fOcpV2LEfUsYFxn5ceoPWe_7f6pwHrQW_k6ZIgEYzc1qr1b7HOcmoAiQwJMOCALAYYKBQ",
-    "payload_sha256": "889479fd41b5ad0f5f771f8610b8dbfd4e86b3e9d948e6e52b978560be7c85c5"
+    "value": "OkDx8jwJAleE_Em-hVI28QfoWI6wOBw3Ln8tjmL-0u-fHgaB3RzI5kwCLJiJaz6UlXzxVgIHD6rvCQI397OhAQ",
+    "payload_sha256": "c4b3bd071aaab3424afbb98fa44802eb9577e933241e8386e262ca138c48928c"
   }
 }

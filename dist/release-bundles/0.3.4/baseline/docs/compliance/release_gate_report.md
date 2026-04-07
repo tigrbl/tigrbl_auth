@@ -1,11 +1,11 @@
 # Release Gate Report
 
-- Passed: `True`
+- Passed: `False`
 
 ## Summary
 
-- gate_count: `20`
-- failed_gate_count: `0`
+- gate_count: `24`
+- failed_gate_count: `3`
 - validated_execution_artifact_count: `33`
 - required_validated_inventory_count: `30`
 - validated_inventory_present_count: `30`
@@ -15,15 +15,22 @@
 - migration_portability_passed: `True`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
 
+## Failures
+
+- Gate failed: gate-15-boundary-enforcement
+- Gate failed: gate-20-tests
+- Gate failed: gate-75-test-classification
+
 ## Details
 
 - {'gate': 'gate-00-structure', 'passed': True, 'rc': 0}
 - {'gate': 'gate-05-governance', 'passed': True, 'rc': 0}
+- {'gate': 'gate-08-claim-registry-sync', 'passed': True, 'rc': 0}
 - {'gate': 'gate-10-static', 'passed': True, 'rc': 0}
 - {'gate': 'gate-12-project-tree-layout', 'passed': True, 'rc': 0}
-- {'gate': 'gate-15-boundary-enforcement', 'passed': True, 'rc': 0}
+- {'gate': 'gate-15-boundary-enforcement', 'passed': False, 'rc': 1}
 - {'gate': 'gate-18-migration-plan', 'passed': True, 'rc': 0}
-- {'gate': 'gate-20-tests', 'passed': True, 'rc': 0}
+- {'gate': 'gate-20-tests', 'passed': False, 'rc': 1}
 - {'gate': 'gate-25-wrapper-hygiene', 'passed': True, 'rc': 0}
 - {'gate': 'gate-30-contracts', 'passed': True, 'rc': 0}
 - {'gate': 'gate-35-contract-sync', 'passed': True, 'rc': 0}
@@ -33,7 +40,10 @@
 - {'gate': 'gate-55-contract-validation', 'passed': True, 'rc': 0}
 - {'gate': 'gate-60-release-signing', 'passed': True, 'rc': 0}
 - {'gate': 'gate-65-state-reports', 'passed': True, 'rc': 0}
-- {'gate': 'gate-75-test-classification', 'passed': True, 'rc': 0}
+- {'gate': 'gate-75-test-classification', 'passed': False, 'rc': 1}
 - {'gate': 'gate-85-peer-profiles', 'passed': True, 'rc': 0}
 - {'gate': 'gate-90-release', 'passed': True, 'rc': 0}
 - {'gate': 'gate-95-recertification', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-current-state', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-release-decision', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-repository-state', 'passed': True, 'rc': 0}

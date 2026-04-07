@@ -1,0 +1,1022 @@
+cli-flag:access_log:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:activate:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:admin:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:alg:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:artifact:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:baseline_file:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:bundle_dir:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:check:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:checksum:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:color:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:config:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:cookies:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:curve:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:db_safe_start:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:diagnostics:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:dry_run:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:enable_mtls:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:env_file:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:environment:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:execution_mode:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:extension:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:filter:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:format:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:from_file:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:graceful_timeout:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:health:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:host:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:hypercorn_http2:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:hypercorn_worker_class:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:id:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:if_exists:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:if_missing:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:include_secrets:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:input_path:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:issuer:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:jwks_refresh_seconds:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:kid:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:kind:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:kty:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:lifespan:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:limit:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:log_level:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:metrics:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:name:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:no_strict:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:offline:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:offset:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:output:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:peer_profile:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:pid_file:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:plugin_mode:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:port:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:profile:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:proxy_headers:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:public:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:publish:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:redact:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:repo_root:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:report_dir:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:require_tls:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-flag:retire_after:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:rpc:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:runtime_style:
+- compliance/evidence/tier3/asgi-application/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:scope:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:server:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:set_item:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:signing_key:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:slice:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:sort:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:status_filter:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:strict:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:surface_set:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+cli-flag:tenant:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:tier:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:tigrcorn_contract:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:tigrcorn_mode:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:timeout:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:title:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:trace:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:uds:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:use:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:uvicorn_http:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:uvicorn_loop:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:uvicorn_ws:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:verbose:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:wait:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:workers:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-flag:yes:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:adr.index:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:adr.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:adr.new:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:adr.show:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:bootstrap.apply:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:bootstrap.manifest:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:bootstrap.status:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:bootstrap.verify:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:claims.lint:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:claims.show:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:claims.status:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.create:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.delete:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.disable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.enable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.rotate-secret:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:client.update:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:discovery.diff:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:discovery.publish:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:discovery.show:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:discovery.validate:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:doctor:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:evidence.bundle:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:evidence.peer-execute:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:evidence.peer-status:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:evidence.status:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:evidence.verify:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:export.run:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:export.status:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:export.validate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:flow.create:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.delete:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.disable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.enable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:flow.update:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:gate:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.create:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.delete:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.lock:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.set-password:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.unlock:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:identity.update:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:import.run:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:import.status:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:import.validate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/import-export-portability/
+cli-verb:keys.delete:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.export:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.generate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.get:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.import:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.list:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.publish-jwks:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.retire:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:keys.rotate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/key-lifecycle-jwks/
+cli-verb:migrate.apply:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:migrate.plan:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:migrate.status:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:migrate.verify:
+- compliance/evidence/tier3/bootstrap-migration/
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:release.bundle:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-verb:release.recertify:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-verb:release.sign:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-verb:release.status:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-verb:release.verify:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+cli-verb:serve:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:session.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:session.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:session.revoke:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:session.revoke-all:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:spec.diff:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+cli-verb:spec.generate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+cli-verb:spec.report:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+cli-verb:spec.validate:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+cli-verb:tenant.create:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.delete:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.disable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.enable:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:tenant.update:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:token.exchange:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:token.get:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:token.introspect:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:token.list:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:token.revoke:
+- compliance/evidence/tier3/cli-operator-surface/
+cli-verb:verify:
+- compliance/evidence/tier3/cli-operator-surface/
+extension:a2a-adapter: []
+extension:dns-privacy: []
+extension:mcp-adapter: []
+extension:set: []
+extension:webauthn-passkeys: []
+extension:webpush: []
+rpc:audit.export:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:audit.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:claims.lint:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:claims.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.registration.delete:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.registration.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.registration.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.registration.upsert:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:client.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:consent.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:consent.revoke:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:consent.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:discovery.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:evidence.status:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:flow.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:gate.run:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:identity.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:identity.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:jwks.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:keys.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:keys.rotate:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:profile.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:release.bundle:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:rpc.discover:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:session.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:session.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:session.terminate:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:target.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:target.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.list:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.show:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:token.exchange:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:token.inspect:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:token.list:
+- compliance/evidence/tier3/contracts/openrpc/
+profile:baseline:
+- compliance/evidence/tier3/assertion-framework/
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/introspection/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/jose/
+- compliance/evidence/tier3/jwe/
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/jwt-client-auth/
+- compliance/evidence/tier3/jwt/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/oidc-userinfo/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/pkce/
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/revocation/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/token-exchange/
+- compliance/evidence/tier3/well-known/
+profile:fapi2-security:
+- compliance/evidence/tier3/assertion-framework/
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/introspection/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/jose/
+- compliance/evidence/tier3/jwe/
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/jwt-client-auth/
+- compliance/evidence/tier3/jwt/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/oidc-userinfo/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/pkce/
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/revocation/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/token-exchange/
+- compliance/evidence/tier3/well-known/
+profile:hardening:
+- compliance/evidence/tier3/assertion-framework/
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/introspection/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/jose/
+- compliance/evidence/tier3/jwe/
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/jwt-client-auth/
+- compliance/evidence/tier3/jwt/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/oidc-userinfo/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/pkce/
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/revocation/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/token-exchange/
+- compliance/evidence/tier3/well-known/
+profile:peer-claim:
+- compliance/evidence/tier3/assertion-framework/
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/introspection/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/jose/
+- compliance/evidence/tier3/jwe/
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/jwt-client-auth/
+- compliance/evidence/tier3/jwt/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/oidc-userinfo/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/pkce/
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/revocation/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/token-exchange/
+- compliance/evidence/tier3/well-known/
+profile:production:
+- compliance/evidence/tier3/assertion-framework/
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/introspection/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/jose/
+- compliance/evidence/tier3/jwe/
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/jwt-client-auth/
+- compliance/evidence/tier3/jwt/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/oidc-userinfo/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/pkce/
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/revocation/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/token-exchange/
+- compliance/evidence/tier3/well-known/
+slice:device:
+- compliance/evidence/tier3/device-flow/
+slice:dpop:
+- compliance/evidence/tier3/dpop/
+slice:jar:
+- compliance/evidence/tier3/jar/
+slice:mtls:
+- compliance/evidence/tier3/mtls/
+slice:par:
+- compliance/evidence/tier3/par/
+slice:rar:
+- compliance/evidence/tier3/rar/
+slice:token-exchange:
+- compliance/evidence/tier3/token-exchange/
+route:authorize:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/issuer-identification/
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-core/
+- compliance/evidence/tier3/oidc-session-management/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/security-bcp/
+route:device-authorization:
+- compliance/evidence/tier3/device-flow/
+- compliance/evidence/tier3/resource-indicators/
+route:introspect:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/introspection/
+route:login:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-session-management/
+route:logout:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-backchannel-logout/
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+route:par:
+- compliance/evidence/tier3/jar/
+- compliance/evidence/tier3/par/
+- compliance/evidence/tier3/rar/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/security-bcp/
+route:register:
+- compliance/evidence/tier3/client-registration/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+route:register-client-id:
+- compliance/evidence/tier3/client-registration-management/
+- compliance/evidence/tier3/native-apps/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+route:revoke:
+- compliance/evidence/tier3/revocation/
+route:token:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/security-bcp/
+route:token-exchange:
+- compliance/evidence/tier3/dpop/
+- compliance/evidence/tier3/jwt-access-token-profile/
+- compliance/evidence/tier3/mtls/
+- compliance/evidence/tier3/resource-indicators/
+- compliance/evidence/tier3/token-exchange/
+route:userinfo:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/oidc-userinfo/
+route:well-known-jwks-json:
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/well-known/
+route:well-known-oauth-authorization-server:
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/well-known/
+route:well-known-oauth-protected-resource:
+- compliance/evidence/tier3/protected-resource-metadata/
+- compliance/evidence/tier3/well-known/
+route:well-known-openid-configuration:
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/well-known/
+flag:active_extensions:
+- compliance/evidence/tier3/asgi-application/
+- compliance/evidence/tier3/cli-operator-surface/
+flag:active_protocol_slices:
+- compliance/evidence/tier3/asgi-application/
+- compliance/evidence/tier3/cli-operator-surface/
+flag:active_surface_sets:
+- compliance/evidence/tier3/asgi-application/
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_id_token_encryption:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+flag:enable_oidc_backchannel_logout:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_core:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_discovery:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_frontchannel_logout:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_rp_initiated_logout:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_session_management:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_oidc_userinfo:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc6749:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc6750:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc6750_form:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/security-bcp/
+flag:enable_rfc6750_query:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/security-bcp/
+flag:enable_rfc7009:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7515:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7516:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7517:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7518:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7519:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7521:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7523:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7591:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7592:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7636:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7662:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7800:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc7952:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8252:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8291:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8414:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8523:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8615:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8628:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8693:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8705:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8707:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8812:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc8932:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9068:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9101:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9126:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9207:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9396:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9449:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9700:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enable_rfc9728:
+- compliance/evidence/tier3/cli-operator-surface/
+flag:enforce_rfc8252:
+- compliance/evidence/tier3/native-apps/
+flag:oauth21_alignment_mode: []
+flag:require_tls:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+flag:rfc8707_enabled:
+- compliance/evidence/tier3/resource-indicators/
+flag:runtime_style:
+- compliance/evidence/tier3/asgi-application/
+- compliance/evidence/tier3/cli-operator-surface/
+flag:session_cookie_cross_site:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_domain:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_force_secure:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_max_age_seconds:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_name:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_path:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_renewal_seconds:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:session_cookie_samesite:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+- compliance/evidence/tier3/oidc-session-management/
+flag:strict_boundary_enforcement:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/release-bundle-signing/
+flag:surface_admin_enabled:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+flag:surface_diagnostics_enabled:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+flag:surface_operator_enabled:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+flag:surface_plugin_mode:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+flag:surface_public_enabled:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+flag:surface_rpc_enabled:
+- compliance/evidence/tier3/cli-operator-surface/
+- compliance/evidence/tier3/contracts/openapi/
+- compliance/evidence/tier3/contracts/openrpc/
+target:asgi-3-application-package:
+- compliance/evidence/tier3/asgi-application/
+target:bootstrap-and-migration-lifecycle:
+- compliance/evidence/tier3/bootstrap-migration/
+target:cli-operator-surface:
+- compliance/evidence/tier3/cli-operator-surface/
+target:import-export-portability:
+- compliance/evidence/tier3/import-export-portability/
+target:key-lifecycle-and-jwks-publication:
+- compliance/evidence/tier3/key-lifecycle-jwks/
+target:oauth-2-1-alignment-profile: []
+target:oidc-back-channel-logout:
+- compliance/evidence/tier3/oidc-backchannel-logout/
+target:oidc-core-1-0:
+- compliance/evidence/tier3/oidc-core/
+target:oidc-discovery-1-0:
+- compliance/evidence/tier3/discovery/
+target:oidc-front-channel-logout:
+- compliance/evidence/tier3/oidc-frontchannel-logout/
+target:oidc-rp-initiated-logout:
+- compliance/evidence/tier3/oidc-rp-initiated-logout/
+target:oidc-session-management:
+- compliance/evidence/tier3/oidc-session-management/
+target:oidc-userinfo:
+- compliance/evidence/tier3/oidc-userinfo/
+target:openapi-3-1-3-2-compatible-public-contract:
+- compliance/evidence/tier3/contracts/openapi/
+target:openrpc-1-4-x-admin-control-plane-contract:
+- compliance/evidence/tier3/contracts/openrpc/
+target:release-bundle-and-signature-verification:
+- compliance/evidence/tier3/release-bundle-signing/
+target:rfc-6265:
+- compliance/evidence/tier3/cookies/
+target:rfc-6749:
+- compliance/evidence/tier3/oauth2-core/
+target:rfc-6750:
+- compliance/evidence/tier3/bearer/
+target:rfc-7009:
+- compliance/evidence/tier3/revocation/
+target:rfc-7515:
+- compliance/evidence/tier3/jose/
+target:rfc-7516:
+- compliance/evidence/tier3/jwe/
+target:rfc-7517:
+- compliance/evidence/tier3/jwks/
+target:rfc-7518:
+- compliance/evidence/tier3/jose/
+target:rfc-7519:
+- compliance/evidence/tier3/jwt/
+target:rfc-7521:
+- compliance/evidence/tier3/assertion-framework/
+target:rfc-7523:
+- compliance/evidence/tier3/jwt-client-auth/
+target:rfc-7591:
+- compliance/evidence/tier3/client-registration/
+target:rfc-7592:
+- compliance/evidence/tier3/client-registration-management/
+target:rfc-7636:
+- compliance/evidence/tier3/pkce/
+target:rfc-7662:
+- compliance/evidence/tier3/introspection/
+target:rfc-7800: []
+target:rfc-7952: []
+target:rfc-8252:
+- compliance/evidence/tier3/native-apps/
+target:rfc-8291: []
+target:rfc-8414:
+- compliance/evidence/tier3/discovery/
+target:rfc-8615:
+- compliance/evidence/tier3/well-known/
+target:rfc-8628:
+- compliance/evidence/tier3/device-flow/
+target:rfc-8693:
+- compliance/evidence/tier3/token-exchange/
+target:rfc-8705:
+- compliance/evidence/tier3/mtls/
+target:rfc-8707:
+- compliance/evidence/tier3/resource-indicators/
+target:rfc-8812: []
+target:rfc-8932: []
+target:rfc-9068:
+- compliance/evidence/tier3/jwt-access-token-profile/
+target:rfc-9101:
+- compliance/evidence/tier3/jar/
+target:rfc-9126:
+- compliance/evidence/tier3/par/
+target:rfc-9207:
+- compliance/evidence/tier3/issuer-identification/
+target:rfc-9396:
+- compliance/evidence/tier3/rar/
+target:rfc-9449:
+- compliance/evidence/tier3/dpop/
+target:rfc-9700:
+- compliance/evidence/tier3/security-bcp/
+target:rfc-9728:
+- compliance/evidence/tier3/protected-resource-metadata/
+target:runner-profile-hypercorn:
+- compliance/evidence/tier3/runner-hypercorn/
+target:runner-profile-tigrcorn:
+- compliance/evidence/tier3/runner-tigrcorn/
+target:runner-profile-uvicorn:
+- compliance/evidence/tier3/runner-uvicorn/

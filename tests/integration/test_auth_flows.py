@@ -10,10 +10,12 @@ from http import HTTPStatus as status
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from uuid import uuid4
 
-from tigrbl_auth.orm import Tenant, User, ApiKey
+from tigrbl_auth.orm import Tenant, User, ApiKey, Client
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.jwtoken import JWTCoder
+from tigrbl_auth.services.persistence import get_token_record_async
+from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 
 
 @pytest.mark.integration
@@ -306,17 +308,31 @@ class TestTokenRefresh:
             password_hash=hash_pw("TestPassword123!"),
         )
         db_session.add(user)
+        client = Client.new(
+            tenant_id=tenant.id,
+            client_id=str(uuid4()),
+            client_secret="refresh-secret",
+            redirects=["https://client.example.com/callback"],
+        )
+        db_session.add(client)
         await db_session.commit()
 
         # Get initial tokens
         jwt_coder = JWTCoder.default()
-        access_token, refresh_token = jwt_coder.sign_pair(
-            sub=str(user.id), tid=str(tenant.id)
+        access_token, refresh_token = await issue_persisted_token_pair(
+            jwt=jwt_coder,
+            sub=str(user.id),
+            tid=str(tenant.id),
+            client_id=str(client.id),
         )
 
-        refresh_data = {"refresh_token": refresh_token}
+        refresh_data = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_id": str(client.id),
+        }
 
-        response = await async_client.post("/token/refresh", json=refresh_data)
+        response = await async_client.post("/token", data=refresh_data)
 
         assert response.status_code == status.HTTP_200_OK
 
@@ -329,14 +345,27 @@ class TestTokenRefresh:
         assert response_data["access_token"] != access_token
         assert response_data["refresh_token"] != refresh_token
 
+        used_record = await get_token_record_async(refresh_token)
+        successor_record = await get_token_record_async(response_data["refresh_token"])
+        assert used_record is not None
+        assert successor_record is not None
+        assert used_record.used_at is not None
+        assert used_record.refresh_successor_hash == successor_record.token_hash
+        assert successor_record.refresh_parent_hash == used_record.token_hash
+        assert successor_record.refresh_family_id == used_record.refresh_family_id
+
     async def test_refresh_with_invalid_token(self, async_client: AsyncClient):
         """Test token refresh with invalid token."""
-        refresh_data = {"refresh_token": "invalid.token.here"}
+        refresh_data = {
+            "grant_type": "refresh_token",
+            "refresh_token": "invalid.token.here",
+            "client_id": str(uuid4()),
+        }
 
-        response = await async_client.post("/token/refresh", json=refresh_data)
+        response = await async_client.post("/token", data=refresh_data)
 
-        assert response.status_code == status.HTTP_401_UNAUTHORIZED
-        assert "invalid refresh token" in response.json()["detail"]
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.json()["error"] == "invalid_grant"
 
     async def test_refresh_with_access_token(
         self, async_client: AsyncClient, db_session: AsyncSession
@@ -356,19 +385,85 @@ class TestTokenRefresh:
             password_hash=hash_pw("TestPassword123!"),
         )
         db_session.add(user)
+        client = Client.new(
+            tenant_id=tenant.id,
+            client_id=str(uuid4()),
+            client_secret="refresh-secret",
+            redirects=["https://client.example.com/callback"],
+        )
+        db_session.add(client)
         await db_session.commit()
 
         # Get tokens and try to refresh with access token
         jwt_coder = JWTCoder.default()
-        access_token, refresh_token = jwt_coder.sign_pair(
-            sub=str(user.id), tid=str(tenant.id)
+        access_token, refresh_token = await issue_persisted_token_pair(
+            jwt=jwt_coder,
+            sub=str(user.id),
+            tid=str(tenant.id),
+            client_id=str(client.id),
         )
 
-        refresh_data = {"refresh_token": access_token}  # Using access token instead
+        refresh_data = {
+            "grant_type": "refresh_token",
+            "refresh_token": access_token,
+            "client_id": str(client.id),
+        }  # Using access token instead
 
-        response = await async_client.post("/token/refresh", json=refresh_data)
+        response = await async_client.post("/token", data=refresh_data)
 
-        assert response.status_code == status.HTTP_401_UNAUTHORIZED
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.json()["error"] == "invalid_grant"
+
+    async def test_refresh_reuse_revokes_the_entire_family(
+        self, async_client: AsyncClient, db_session: AsyncSession
+    ):
+        tenant = Tenant(
+            slug="refresh-family-tenant", name="Test Tenant", email="tenant_test@example.com"
+        )
+        db_session.add(tenant)
+        await db_session.commit()
+
+        user = User(
+            tenant_id=tenant.id,
+            username="family-user",
+            email="family-user@example.com",
+            password_hash=hash_pw("TestPassword123!"),
+        )
+        db_session.add(user)
+        client = Client.new(
+            tenant_id=tenant.id,
+            client_id=str(uuid4()),
+            client_secret="refresh-secret",
+            redirects=["https://client.example.com/callback"],
+        )
+        db_session.add(client)
+        await db_session.commit()
+
+        jwt_coder = JWTCoder.default()
+        _, refresh_token = await issue_persisted_token_pair(
+            jwt=jwt_coder,
+            sub=str(user.id),
+            tid=str(tenant.id),
+            client_id=str(client.id),
+        )
+        refresh_data = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            "client_id": str(client.id),
+        }
+
+        first = await async_client.post("/token", data=refresh_data)
+        assert first.status_code == status.HTTP_200_OK
+
+        replay = await async_client.post("/token", data=refresh_data)
+        assert replay.status_code == status.HTTP_400_BAD_REQUEST
+        assert replay.json()["error"] == "invalid_grant"
+
+        first_child = first.json()["refresh_token"]
+        reused_record = await get_token_record_async(refresh_token)
+        child_record = await get_token_record_async(first_child)
+        assert reused_record is not None and reused_record.reuse_detected_at is not None
+        assert child_record is not None and child_record.revoked_reason == "refresh_token_reuse_detected"
 
 
 @pytest.mark.integration

@@ -1,0 +1,16 @@
+schema_version: 1
+package: tigrbl_auth
+summary:
+  issue_count: 1
+issues:
+- id: release.final-certification-blocked
+  severity: high
+  status: open
+  description: The repository is still a truthful checkpoint and not a final certified
+    release.
+  blockers:
+  - Tier 4 independent peer validation is not complete for the retained boundary.
+  - One or more supported peer profiles still have no preserved external Tier 4 bundle.
+  - Current generated public artifacts still drift from executable reality.
+  - One or more operator-visible package capabilities still lacks end-to-end verification
+    in the current environment.

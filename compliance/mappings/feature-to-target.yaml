@@ -1,40 +1,1045 @@
-authorization endpoint:
-- RFC 6749
+cli-flag:access_log:
+- CLI operator surface
+cli-flag:activate:
+- CLI operator surface
+cli-flag:admin:
+- CLI operator surface
+cli-flag:alg:
+- CLI operator surface
+cli-flag:artifact:
+- CLI operator surface
+cli-flag:baseline_file:
+- CLI operator surface
+cli-flag:bundle_dir:
+- CLI operator surface
+cli-flag:check:
+- CLI operator surface
+cli-flag:checksum:
+- CLI operator surface
+cli-flag:color:
+- CLI operator surface
+cli-flag:config:
+- CLI operator surface
+cli-flag:cookies:
+- CLI operator surface
+cli-flag:curve:
+- CLI operator surface
+cli-flag:db_safe_start:
+- CLI operator surface
+cli-flag:diagnostics:
+- CLI operator surface
+cli-flag:dry_run:
+- CLI operator surface
+cli-flag:enable_mtls:
+- CLI operator surface
+cli-flag:env_file:
+- CLI operator surface
+cli-flag:environment:
+- CLI operator surface
+cli-flag:execution_mode:
+- CLI operator surface
+cli-flag:extension:
+- CLI operator surface
+cli-flag:filter:
+- CLI operator surface
+cli-flag:format:
+- CLI operator surface
+cli-flag:from_file:
+- CLI operator surface
+cli-flag:graceful_timeout:
+- CLI operator surface
+cli-flag:health:
+- CLI operator surface
+cli-flag:host:
+- CLI operator surface
+cli-flag:hypercorn_http2:
+- CLI operator surface
+cli-flag:hypercorn_worker_class:
+- CLI operator surface
+cli-flag:id:
+- CLI operator surface
+cli-flag:if_exists:
+- CLI operator surface
+cli-flag:if_missing:
+- CLI operator surface
+cli-flag:include_secrets:
+- CLI operator surface
+cli-flag:input_path:
+- CLI operator surface
+cli-flag:issuer:
+- CLI operator surface
+cli-flag:jwks_refresh_seconds:
+- CLI operator surface
+cli-flag:kid:
+- CLI operator surface
+cli-flag:kind:
+- CLI operator surface
+cli-flag:kty:
+- CLI operator surface
+cli-flag:lifespan:
+- CLI operator surface
+cli-flag:limit:
+- CLI operator surface
+cli-flag:log_level:
+- CLI operator surface
+cli-flag:metrics:
+- CLI operator surface
+cli-flag:name:
+- CLI operator surface
+cli-flag:no_strict:
+- CLI operator surface
+cli-flag:offline:
+- CLI operator surface
+cli-flag:offset:
+- CLI operator surface
+cli-flag:output:
+- CLI operator surface
+cli-flag:peer_profile:
+- CLI operator surface
+cli-flag:pid_file:
+- CLI operator surface
+cli-flag:plugin_mode:
+- CLI operator surface
+cli-flag:port:
+- CLI operator surface
+cli-flag:profile:
+- CLI operator surface
+cli-flag:proxy_headers:
+- CLI operator surface
+cli-flag:public:
+- CLI operator surface
+cli-flag:publish:
+- CLI operator surface
+cli-flag:redact:
+- CLI operator surface
+cli-flag:repo_root:
+- CLI operator surface
+cli-flag:report_dir:
+- CLI operator surface
+cli-flag:require_tls:
+- CLI operator surface
+- Release bundle and signature verification
+cli-flag:retire_after:
+- CLI operator surface
+cli-flag:rpc:
+- CLI operator surface
+cli-flag:runtime_style:
+- ASGI 3 application package
+- CLI operator surface
+cli-flag:scope:
+- CLI operator surface
+cli-flag:server:
+- CLI operator surface
+cli-flag:set_item:
+- CLI operator surface
+cli-flag:signing_key:
+- CLI operator surface
+cli-flag:slice:
+- CLI operator surface
+cli-flag:sort:
+- CLI operator surface
+cli-flag:status_filter:
+- CLI operator surface
+cli-flag:strict:
+- CLI operator surface
+cli-flag:surface_set:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+cli-flag:tenant:
+- CLI operator surface
+cli-flag:tier:
+- CLI operator surface
+cli-flag:tigrcorn_contract:
+- CLI operator surface
+cli-flag:tigrcorn_mode:
+- CLI operator surface
+cli-flag:timeout:
+- CLI operator surface
+cli-flag:title:
+- CLI operator surface
+cli-flag:trace:
+- CLI operator surface
+cli-flag:uds:
+- CLI operator surface
+cli-flag:use:
+- CLI operator surface
+cli-flag:uvicorn_http:
+- CLI operator surface
+cli-flag:uvicorn_loop:
+- CLI operator surface
+cli-flag:uvicorn_ws:
+- CLI operator surface
+cli-flag:verbose:
+- CLI operator surface
+cli-flag:wait:
+- CLI operator surface
+cli-flag:workers:
+- CLI operator surface
+cli-flag:yes:
+- CLI operator surface
+cli-verb:adr.index:
+- CLI operator surface
+cli-verb:adr.list:
+- CLI operator surface
+cli-verb:adr.new:
+- CLI operator surface
+cli-verb:adr.show:
+- CLI operator surface
+cli-verb:bootstrap.apply:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:bootstrap.manifest:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:bootstrap.status:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:bootstrap.verify:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:claims.lint:
+- CLI operator surface
+cli-verb:claims.show:
+- CLI operator surface
+cli-verb:claims.status:
+- CLI operator surface
+cli-verb:client.create:
+- CLI operator surface
+cli-verb:client.delete:
+- CLI operator surface
+cli-verb:client.disable:
+- CLI operator surface
+cli-verb:client.enable:
+- CLI operator surface
+cli-verb:client.get:
+- CLI operator surface
+cli-verb:client.list:
+- CLI operator surface
+cli-verb:client.rotate-secret:
+- CLI operator surface
+cli-verb:client.update:
+- CLI operator surface
+cli-verb:discovery.diff:
+- CLI operator surface
+cli-verb:discovery.publish:
+- CLI operator surface
+cli-verb:discovery.show:
+- CLI operator surface
+cli-verb:discovery.validate:
+- CLI operator surface
+cli-verb:doctor:
+- CLI operator surface
+cli-verb:evidence.bundle:
+- CLI operator surface
+cli-verb:evidence.peer-execute:
+- CLI operator surface
+cli-verb:evidence.peer-status:
+- CLI operator surface
+cli-verb:evidence.status:
+- CLI operator surface
+cli-verb:evidence.verify:
+- CLI operator surface
+cli-verb:export.run:
+- CLI operator surface
+- Import/export portability
+cli-verb:export.status:
+- CLI operator surface
+- Import/export portability
+cli-verb:export.validate:
+- CLI operator surface
+- Import/export portability
+cli-verb:flow.create:
+- CLI operator surface
+cli-verb:flow.delete:
+- CLI operator surface
+cli-verb:flow.disable:
+- CLI operator surface
+cli-verb:flow.enable:
+- CLI operator surface
+cli-verb:flow.get:
+- CLI operator surface
+cli-verb:flow.list:
+- CLI operator surface
+cli-verb:flow.update:
+- CLI operator surface
+cli-verb:gate:
+- CLI operator surface
+cli-verb:identity.create:
+- CLI operator surface
+cli-verb:identity.delete:
+- CLI operator surface
+cli-verb:identity.get:
+- CLI operator surface
+cli-verb:identity.list:
+- CLI operator surface
+cli-verb:identity.lock:
+- CLI operator surface
+cli-verb:identity.set-password:
+- CLI operator surface
+cli-verb:identity.unlock:
+- CLI operator surface
+cli-verb:identity.update:
+- CLI operator surface
+cli-verb:import.run:
+- CLI operator surface
+- Import/export portability
+cli-verb:import.status:
+- CLI operator surface
+- Import/export portability
+cli-verb:import.validate:
+- CLI operator surface
+- Import/export portability
+cli-verb:keys.delete:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.export:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.generate:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.get:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.import:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.list:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.publish-jwks:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.retire:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:keys.rotate:
+- CLI operator surface
+- Key lifecycle and JWKS publication
+cli-verb:migrate.apply:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:migrate.plan:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:migrate.status:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:migrate.verify:
+- Bootstrap and migration lifecycle
+- CLI operator surface
+cli-verb:release.bundle:
+- CLI operator surface
+- Release bundle and signature verification
+cli-verb:release.recertify:
+- CLI operator surface
+- Release bundle and signature verification
+cli-verb:release.sign:
+- CLI operator surface
+- Release bundle and signature verification
+cli-verb:release.status:
+- CLI operator surface
+- Release bundle and signature verification
+cli-verb:release.verify:
+- CLI operator surface
+- Release bundle and signature verification
+cli-verb:serve:
+- CLI operator surface
+cli-verb:session.get:
+- CLI operator surface
+cli-verb:session.list:
+- CLI operator surface
+cli-verb:session.revoke:
+- CLI operator surface
+cli-verb:session.revoke-all:
+- CLI operator surface
+cli-verb:spec.diff:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+cli-verb:spec.generate:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+cli-verb:spec.report:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+cli-verb:spec.validate:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+cli-verb:tenant.create:
+- CLI operator surface
+cli-verb:tenant.delete:
+- CLI operator surface
+cli-verb:tenant.disable:
+- CLI operator surface
+cli-verb:tenant.enable:
+- CLI operator surface
+cli-verb:tenant.get:
+- CLI operator surface
+cli-verb:tenant.list:
+- CLI operator surface
+cli-verb:tenant.update:
+- CLI operator surface
+cli-verb:token.exchange:
+- CLI operator surface
+cli-verb:token.get:
+- CLI operator surface
+cli-verb:token.introspect:
+- CLI operator surface
+cli-verb:token.list:
+- CLI operator surface
+cli-verb:token.revoke:
+- CLI operator surface
+cli-verb:verify:
+- CLI operator surface
+extension:a2a-adapter:
+- A2A adapter
+extension:dns-privacy:
+- RFC 8932
+extension:mcp-adapter:
+- MCP adapter
+extension:set:
+- RFC 7952
+extension:webauthn-passkeys:
+- RFC 8812
+extension:webpush:
+- RFC 8291
+rpc:audit.export:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:audit.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:claims.lint:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:claims.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.registration.delete:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.registration.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.registration.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.registration.upsert:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:client.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:consent.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:consent.revoke:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:consent.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:discovery.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:evidence.status:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:flow.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:gate.run:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:identity.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:identity.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:jwks.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:keys.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:keys.rotate:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:profile.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:release.bundle:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:rpc.discover:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:session.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:session.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:session.terminate:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:target.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:target.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.list:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.show:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:token.exchange:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:token.inspect:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:token.list:
+- OpenRPC 1.4.x admin/control-plane contract
+profile:baseline:
+- OIDC Back-Channel Logout
 - OIDC Core 1.0
-token endpoint:
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- RFC 6265
 - RFC 6749
 - RFC 6750
-- RFC 7636
-metadata:
-- RFC 8414
-- RFC 8615
-discovery:
-- OIDC Discovery 1.0
-jwks:
-- RFC 7517
-revocation:
 - RFC 7009
-introspection:
-- RFC 7662
-dynamic client registration:
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
 - RFC 7591
 - RFC 7592
-device authorization:
-- RFC 8628
-token exchange:
-- RFC 8693
-dpop:
-- RFC 9449
-mtls:
-- RFC 8705
-browser sessions:
-- RFC 6265
-protected resource metadata:
-- RFC 9728
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
 - RFC 8615
-security bcp posture:
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
 - RFC 9700
-public operator surface:
+- RFC 9728
+profile:fapi2-security:
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
 - OpenAPI 3.1 / 3.2 compatible public contract
-admin control plane:
 - OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+profile:hardening:
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+profile:peer-claim:
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+profile:production:
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+slice:device:
+- RFC 8628
+slice:dpop:
+- RFC 9449
+slice:jar:
+- RFC 9101
+slice:mtls:
+- RFC 8705
+slice:par:
+- RFC 9126
+slice:rar:
+- RFC 9396
+slice:token-exchange:
+- RFC 8693
+route:authorize:
+- OIDC Core 1.0
+- OIDC Session Management
+- RFC 6265
+- RFC 6749
+- RFC 8252
+- RFC 8707
+- RFC 9101
+- RFC 9207
+- RFC 9396
+- RFC 9700
+route:device-authorization:
+- RFC 8628
+- RFC 8707
+route:introspect:
+- RFC 6750
+- RFC 7662
+route:login:
+- OIDC Session Management
+- RFC 6265
+- RFC 6749
+- RFC 9068
+route:logout:
+- OIDC Back-Channel Logout
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+route:par:
+- RFC 8707
+- RFC 9101
+- RFC 9126
+- RFC 9396
+- RFC 9700
+route:register:
+- OIDC RP-Initiated Logout
+- RFC 7591
+- RFC 8252
+route:register-client-id:
+- OIDC RP-Initiated Logout
+- RFC 7592
+- RFC 8252
+route:revoke:
+- RFC 7009
+route:token:
+- RFC 6749
+- RFC 6750
+- RFC 9068
+- RFC 9700
+route:token-exchange:
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9449
+route:userinfo:
+- OIDC UserInfo
+- RFC 6750
+route:well-known-jwks-json:
+- RFC 7517
+- RFC 8615
+route:well-known-oauth-authorization-server:
+- RFC 8414
+- RFC 8615
+route:well-known-oauth-protected-resource:
+- RFC 8615
+- RFC 9728
+route:well-known-openid-configuration:
+- OIDC Discovery 1.0
+- RFC 8615
+- RFC 9700
+flag:active_extensions:
+- ASGI 3 application package
+- CLI operator surface
+flag:active_protocol_slices:
+- ASGI 3 application package
+- CLI operator surface
+flag:active_surface_sets:
+- ASGI 3 application package
+- CLI operator surface
+flag:enable_id_token_encryption:
+- CLI operator surface
+- Release bundle and signature verification
+flag:enable_oidc_backchannel_logout:
+- CLI operator surface
+flag:enable_oidc_core:
+- CLI operator surface
+flag:enable_oidc_discovery:
+- CLI operator surface
+flag:enable_oidc_frontchannel_logout:
+- CLI operator surface
+flag:enable_oidc_rp_initiated_logout:
+- CLI operator surface
+flag:enable_oidc_session_management:
+- CLI operator surface
+flag:enable_oidc_userinfo:
+- CLI operator surface
+flag:enable_rfc6749:
+- CLI operator surface
+flag:enable_rfc6750:
+- CLI operator surface
+flag:enable_rfc6750_form:
+- RFC 6750
+- RFC 9700
+flag:enable_rfc6750_query:
+- RFC 6750
+- RFC 9700
+flag:enable_rfc7009:
+- CLI operator surface
+flag:enable_rfc7515:
+- CLI operator surface
+flag:enable_rfc7516:
+- CLI operator surface
+flag:enable_rfc7517:
+- CLI operator surface
+flag:enable_rfc7518:
+- CLI operator surface
+flag:enable_rfc7519:
+- CLI operator surface
+flag:enable_rfc7521:
+- CLI operator surface
+flag:enable_rfc7523:
+- CLI operator surface
+flag:enable_rfc7591:
+- CLI operator surface
+flag:enable_rfc7592:
+- CLI operator surface
+flag:enable_rfc7636:
+- CLI operator surface
+flag:enable_rfc7662:
+- CLI operator surface
+flag:enable_rfc7800:
+- CLI operator surface
+flag:enable_rfc7952:
+- CLI operator surface
+flag:enable_rfc8252:
+- CLI operator surface
+flag:enable_rfc8291:
+- CLI operator surface
+flag:enable_rfc8414:
+- CLI operator surface
+flag:enable_rfc8523:
+- CLI operator surface
+flag:enable_rfc8615:
+- CLI operator surface
+flag:enable_rfc8628:
+- CLI operator surface
+flag:enable_rfc8693:
+- CLI operator surface
+flag:enable_rfc8705:
+- CLI operator surface
+flag:enable_rfc8707:
+- CLI operator surface
+flag:enable_rfc8812:
+- CLI operator surface
+flag:enable_rfc8932:
+- CLI operator surface
+flag:enable_rfc9068:
+- CLI operator surface
+flag:enable_rfc9101:
+- CLI operator surface
+flag:enable_rfc9126:
+- CLI operator surface
+flag:enable_rfc9207:
+- CLI operator surface
+flag:enable_rfc9396:
+- CLI operator surface
+flag:enable_rfc9449:
+- CLI operator surface
+flag:enable_rfc9700:
+- CLI operator surface
+flag:enable_rfc9728:
+- CLI operator surface
+flag:enforce_rfc8252:
+- RFC 8252
+flag:oauth21_alignment_mode:
+- OAuth 2.1 alignment profile
+flag:require_tls:
+- CLI operator surface
+- Release bundle and signature verification
+flag:rfc8707_enabled:
+- RFC 8707
+flag:runtime_style:
+- ASGI 3 application package
+- CLI operator surface
+flag:session_cookie_cross_site:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_domain:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_force_secure:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_max_age_seconds:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_name:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_path:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_renewal_seconds:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:session_cookie_samesite:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+flag:strict_boundary_enforcement:
+- CLI operator surface
+- Release bundle and signature verification
+flag:surface_admin_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+flag:surface_diagnostics_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+flag:surface_operator_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+flag:surface_plugin_mode:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+flag:surface_public_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+flag:surface_rpc_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+target:asgi-3-application-package:
+- ASGI 3 application package
+target:bootstrap-and-migration-lifecycle:
+- Bootstrap and migration lifecycle
+target:cli-operator-surface:
+- CLI operator surface
+target:import-export-portability:
+- Import/export portability
+target:key-lifecycle-and-jwks-publication:
+- Key lifecycle and JWKS publication
+target:oauth-2-1-alignment-profile:
+- OAuth 2.1 alignment profile
+target:oidc-back-channel-logout:
+- OIDC Back-Channel Logout
+target:oidc-core-1-0:
+- OIDC Core 1.0
+target:oidc-discovery-1-0:
+- OIDC Discovery 1.0
+target:oidc-front-channel-logout:
+- OIDC Front-Channel Logout
+target:oidc-rp-initiated-logout:
+- OIDC RP-Initiated Logout
+target:oidc-session-management:
+- OIDC Session Management
+target:oidc-userinfo:
+- OIDC UserInfo
+target:openapi-3-1-3-2-compatible-public-contract:
+- OpenAPI 3.1 / 3.2 compatible public contract
+target:openrpc-1-4-x-admin-control-plane-contract:
+- OpenRPC 1.4.x admin/control-plane contract
+target:release-bundle-and-signature-verification:
+- Release bundle and signature verification
+target:rfc-6265:
+- RFC 6265
+target:rfc-6749:
+- RFC 6749
+target:rfc-6750:
+- RFC 6750
+target:rfc-7009:
+- RFC 7009
+target:rfc-7515:
+- RFC 7515
+target:rfc-7516:
+- RFC 7516
+target:rfc-7517:
+- RFC 7517
+target:rfc-7518:
+- RFC 7518
+target:rfc-7519:
+- RFC 7519
+target:rfc-7521:
+- RFC 7521
+target:rfc-7523:
+- RFC 7523
+target:rfc-7591:
+- RFC 7591
+target:rfc-7592:
+- RFC 7592
+target:rfc-7636:
+- RFC 7636
+target:rfc-7662:
+- RFC 7662
+target:rfc-7800:
+- RFC 7800
+target:rfc-7952:
+- RFC 7952
+target:rfc-8252:
+- RFC 8252
+target:rfc-8291:
+- RFC 8291
+target:rfc-8414:
+- RFC 8414
+target:rfc-8615:
+- RFC 8615
+target:rfc-8628:
+- RFC 8628
+target:rfc-8693:
+- RFC 8693
+target:rfc-8705:
+- RFC 8705
+target:rfc-8707:
+- RFC 8707
+target:rfc-8812:
+- RFC 8812
+target:rfc-8932:
+- RFC 8932
+target:rfc-9068:
+- RFC 9068
+target:rfc-9101:
+- RFC 9101
+target:rfc-9126:
+- RFC 9126
+target:rfc-9207:
+- RFC 9207
+target:rfc-9396:
+- RFC 9396
+target:rfc-9449:
+- RFC 9449
+target:rfc-9700:
+- RFC 9700
+target:rfc-9728:
+- RFC 9728
+target:runner-profile-hypercorn:
+- 'Runner profile: Hypercorn'
+target:runner-profile-tigrcorn:
+- 'Runner profile: Tigrcorn'
+target:runner-profile-uvicorn:
+- 'Runner profile: Uvicorn'

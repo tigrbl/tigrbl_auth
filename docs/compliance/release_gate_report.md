@@ -4,7 +4,7 @@
 
 ## Summary
 
-- gate_count: `23`
+- gate_count: `24`
 - failed_gate_count: `0`
 - validated_execution_artifact_count: `33`
 - required_validated_inventory_count: `30`
@@ -19,6 +19,7 @@
 
 - {'gate': 'gate-00-structure', 'passed': True, 'rc': 0}
 - {'gate': 'gate-05-governance', 'passed': True, 'rc': 0}
+- {'gate': 'gate-08-claim-registry-sync', 'passed': True, 'rc': 0}
 - {'gate': 'gate-10-static', 'passed': True, 'rc': 0}
 - {'gate': 'gate-12-project-tree-layout', 'passed': True, 'rc': 0}
 - {'gate': 'gate-15-boundary-enforcement', 'passed': True, 'rc': 0}

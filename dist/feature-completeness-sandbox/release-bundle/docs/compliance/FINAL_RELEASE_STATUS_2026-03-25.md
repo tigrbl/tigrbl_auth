@@ -9,7 +9,7 @@
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - strict_independent_claims_ready: `False`
-- release_gates_passed: `True`
+- release_gates_passed: `False`
 - final_release_gate_passed: `True`
 
 ## Remaining blockers

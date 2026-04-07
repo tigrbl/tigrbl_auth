@@ -6,15 +6,15 @@
   "profile": "hardening",
   "signer": {
     "signer_id": "tigrbl_auth.checkpoint.attestor",
-    "key_id": "ed25519:d733db3b20c5e52d3acddfa8",
+    "key_id": "ed25519:b91a2b82040d55388dec560b",
     "algorithm": "Ed25519",
     "identity_kind": "repository-release-attestor",
-    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAvb7ZzItHWRNMZZKKYDtabzK5TakYu2FOfIATr14hAgo=\n-----END PUBLIC KEY-----\n",
-    "public_key_sha256": "d733db3b20c5e52d3acddfa862ea5546e8a142c96d285bdff5864233cf17ce71",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
+    "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
     "source": "inline-pem"
   },
   "verification_material": {
-    "public_key_path": "attestations/keys/ed25519-d733db3b20c5e52d3acddfa8.pub.pem",
+    "public_key_path": "attestations/keys/ed25519-b91a2b82040d55388dec560b.pub.pem",
     "signer_identity_path": "attestations/signer-identity.json"
   },
   "release_attestation": "attestations/release-attestation.json",
@@ -22,25 +22,25 @@
     {
       "label": "release-bundle",
       "artifact_path": "release-bundle.json",
-      "artifact_sha256": "7640af923f414bbe9e805afb507616196abbed91e667867ea6ef8dda39aba1d1",
+      "artifact_sha256": "da5bd9fd6eb136f83fa8ae3f2c76d18a54b4843083ce1702b353ade5b2a29247",
       "attestation_path": "attestations/release-bundle.attestation.json"
     },
     {
       "label": "claim-manifest",
       "artifact_path": "compliance/claims/effective-target-claims.hardening.yaml",
-      "artifact_sha256": "7e607abf7c83a029344ff9cc3a831da79fbd8d9a30d13e2ee1786e23964d511c",
+      "artifact_sha256": "332217cf667f04374e65d654bd5d4d7e5d6aaee009fbb61dd620ffd88ae07586",
       "attestation_path": "attestations/claim-manifest.attestation.json"
     },
     {
       "label": "evidence-manifest",
       "artifact_path": "compliance/evidence/effective-release-evidence.hardening.yaml",
-      "artifact_sha256": "84f0605715a5ec699d572febf436814fe77c57d25d6cb9355f0c35ecbf2ae1a0",
+      "artifact_sha256": "c2e785253a06267919593a6dcd0ed34a5172ac13644026b8812c5f74f5fbcb04",
       "attestation_path": "attestations/evidence-manifest.attestation.json"
     },
     {
       "label": "contract-set",
       "artifact_path": "attestations/contract-set.manifest.json",
-      "artifact_sha256": "f1e71cac39aa60d4a97df1b58ed16a3885288cb2a3c900be415df4b32f44556e",
+      "artifact_sha256": "488b0bf95fa2672ff2c3565d784694e236265027b2fedfefb3d55410aaa7f603",
       "attestation_path": "attestations/contract-set.attestation.json"
     }
   ],
@@ -51,7 +51,7 @@
     "details": {
       "bundle_root": "E:\\swarmauri_github\\tigrbl_auth\\dist\\release-bundles\\0.3.4\\hardening",
       "verified_artifact_count": 4,
-      "signing_key_id": "ed25519:d733db3b20c5e52d3acddfa8",
+      "signing_key_id": "ed25519:b91a2b82040d55388dec560b",
       "artifact_labels": [
         "release-bundle",
         "claim-manifest",

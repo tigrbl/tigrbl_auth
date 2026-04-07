@@ -28,6 +28,9 @@ class TokenRecord(Base, GUIDPk, Timestamped):
     token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True))
     token_kind: Mapped[str] = acol(storage=S(String(32), nullable=False, default="access"))
     token_type_hint: Mapped[str | None] = acol(storage=S(String(64), nullable=True))
+    refresh_family_id: Mapped[str | None] = acol(storage=S(String(64), nullable=True, index=True))
+    refresh_parent_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True, index=True))
+    refresh_successor_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True, index=True))
     active: Mapped[bool] = acol(storage=S(Boolean, nullable=False, default=True))
     subject: Mapped[str] = acol(storage=S(String(255), nullable=False, index=True))
     tenant_id: Mapped[uuid.UUID | None] = acol(
@@ -45,6 +48,8 @@ class TokenRecord(Base, GUIDPk, Timestamped):
     )
     expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     last_introspected_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True))
+    used_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
+    reuse_detected_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     revoked_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     revoked_reason: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
 

@@ -53,7 +53,7 @@ options:
 
 ```text
 usage: tigrbl-auth adr [-h] [--config CONFIG] [--env-file ENV_FILE]
-                       [--profile {baseline,production,hardening,peer-claim}]
+                       [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                        [--tenant TENANT] [--issuer ISSUER]
                        [--surface-set {admin-rpc,diagnostics,public-rest}]
                        [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -77,7 +77,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -104,7 +104,7 @@ options:
 
 ```text
 usage: tigrbl-auth adr index [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -121,7 +121,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -152,7 +152,7 @@ options:
 
 ```text
 usage: tigrbl-auth adr list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -169,7 +169,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -198,7 +198,7 @@ options:
 
 ```text
 usage: tigrbl-auth adr new [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -215,7 +215,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -246,7 +246,7 @@ options:
 
 ```text
 usage: tigrbl-auth adr show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -263,7 +263,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -293,7 +293,7 @@ options:
 
 ```text
 usage: tigrbl-auth bootstrap [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -317,7 +317,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -345,7 +345,7 @@ options:
 ```text
 usage: tigrbl-auth bootstrap apply [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -365,7 +365,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -401,7 +401,7 @@ options:
 ```text
 usage: tigrbl-auth bootstrap manifest [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -420,7 +420,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -452,7 +452,7 @@ options:
 ```text
 usage: tigrbl-auth bootstrap status [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -471,7 +471,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -503,7 +503,7 @@ options:
 ```text
 usage: tigrbl-auth bootstrap verify [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -522,7 +522,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -553,7 +553,7 @@ options:
 
 ```text
 usage: tigrbl-auth claims [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -576,7 +576,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -603,7 +603,7 @@ options:
 
 ```text
 usage: tigrbl-auth claims lint [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -621,7 +621,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -652,7 +652,7 @@ options:
 
 ```text
 usage: tigrbl-auth claims show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -669,7 +669,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -698,7 +698,7 @@ options:
 
 ```text
 usage: tigrbl-auth claims status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -716,7 +716,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -747,7 +747,7 @@ options:
 
 ```text
 usage: tigrbl-auth client [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -776,7 +776,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -803,7 +803,7 @@ options:
 
 ```text
 usage: tigrbl-auth client create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -825,7 +825,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -864,7 +864,7 @@ options:
 
 ```text
 usage: tigrbl-auth client delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -882,7 +882,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -914,7 +914,7 @@ options:
 
 ```text
 usage: tigrbl-auth client disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -933,7 +933,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -965,7 +965,7 @@ options:
 
 ```text
 usage: tigrbl-auth client enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -983,7 +983,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1015,7 +1015,7 @@ options:
 
 ```text
 usage: tigrbl-auth client get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1032,7 +1032,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1062,7 +1062,7 @@ options:
 
 ```text
 usage: tigrbl-auth client list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1083,7 +1083,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1119,7 +1119,7 @@ options:
 ```text
 usage: tigrbl-auth client rotate-secret [-h] [--config CONFIG]
                                         [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,peer-claim}]
+                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                         [--tenant TENANT] [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1138,7 +1138,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1170,7 +1170,7 @@ options:
 
 ```text
 usage: tigrbl-auth client update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1191,7 +1191,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1230,7 +1230,7 @@ options:
 
 ```text
 usage: tigrbl-auth discovery [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1254,7 +1254,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1281,7 +1281,7 @@ options:
 
 ```text
 usage: tigrbl-auth discovery diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1300,7 +1300,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1333,7 +1333,7 @@ options:
 ```text
 usage: tigrbl-auth discovery publish [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1352,7 +1352,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1384,7 +1384,7 @@ options:
 
 ```text
 usage: tigrbl-auth discovery show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1402,7 +1402,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1432,7 +1432,7 @@ options:
 ```text
 usage: tigrbl-auth discovery validate [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1451,7 +1451,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1482,7 +1482,7 @@ options:
 
 ```text
 usage: tigrbl-auth doctor [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1499,7 +1499,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1530,7 +1530,7 @@ options:
 
 ```text
 usage: tigrbl-auth evidence [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1556,7 +1556,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1584,7 +1584,7 @@ options:
 ```text
 usage: tigrbl-auth evidence bundle [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1603,7 +1603,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1636,7 +1636,7 @@ options:
 ```text
 usage: tigrbl-auth evidence peer-execute [-h] [--config CONFIG]
                                          [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,peer-claim}]
+                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                          [--tenant TENANT] [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1657,7 +1657,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1693,7 +1693,7 @@ options:
 ```text
 usage: tigrbl-auth evidence peer-status [-h] [--config CONFIG]
                                         [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,peer-claim}]
+                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                         [--tenant TENANT] [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1712,7 +1712,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1744,7 +1744,7 @@ options:
 ```text
 usage: tigrbl-auth evidence status [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1763,7 +1763,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1796,7 +1796,7 @@ options:
 ```text
 usage: tigrbl-auth evidence verify [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1815,7 +1815,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1846,7 +1846,7 @@ options:
 
 ```text
 usage: tigrbl-auth export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1869,7 +1869,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1896,7 +1896,7 @@ options:
 
 ```text
 usage: tigrbl-auth export run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1915,7 +1915,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1951,7 +1951,7 @@ options:
 
 ```text
 usage: tigrbl-auth export status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1968,7 +1968,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1998,7 +1998,7 @@ options:
 ```text
 usage: tigrbl-auth export validate [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2018,7 +2018,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2052,7 +2052,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2079,7 +2079,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2106,7 +2106,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2127,7 +2127,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2166,7 +2166,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2184,7 +2184,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2216,7 +2216,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2234,7 +2234,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2266,7 +2266,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2284,7 +2284,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2316,7 +2316,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2333,7 +2333,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2363,7 +2363,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2383,7 +2383,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2418,7 +2418,7 @@ options:
 
 ```text
 usage: tigrbl-auth flow update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2439,7 +2439,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2478,7 +2478,7 @@ options:
 
 ```text
 usage: tigrbl-auth gate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2496,7 +2496,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2528,7 +2528,7 @@ options:
 
 ```text
 usage: tigrbl-auth identity [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2557,7 +2557,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2585,7 +2585,7 @@ options:
 ```text
 usage: tigrbl-auth identity create [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2607,7 +2607,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2647,7 +2647,7 @@ options:
 ```text
 usage: tigrbl-auth identity delete [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2666,7 +2666,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2698,7 +2698,7 @@ options:
 
 ```text
 usage: tigrbl-auth identity get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2716,7 +2716,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2746,7 +2746,7 @@ options:
 
 ```text
 usage: tigrbl-auth identity list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2767,7 +2767,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2802,7 +2802,7 @@ options:
 
 ```text
 usage: tigrbl-auth identity lock [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2820,7 +2820,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2853,7 +2853,7 @@ options:
 ```text
 usage: tigrbl-auth identity set-password [-h] [--config CONFIG]
                                          [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,peer-claim}]
+                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                          [--tenant TENANT] [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2873,7 +2873,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2909,7 +2909,7 @@ options:
 ```text
 usage: tigrbl-auth identity unlock [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2928,7 +2928,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2961,7 +2961,7 @@ options:
 ```text
 usage: tigrbl-auth identity update [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2982,7 +2982,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3021,7 +3021,7 @@ options:
 
 ```text
 usage: tigrbl-auth import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3044,7 +3044,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3071,7 +3071,7 @@ options:
 
 ```text
 usage: tigrbl-auth import run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3090,7 +3090,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3125,7 +3125,7 @@ options:
 
 ```text
 usage: tigrbl-auth import status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3142,7 +3142,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3172,7 +3172,7 @@ options:
 ```text
 usage: tigrbl-auth import validate [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3192,7 +3192,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3225,7 +3225,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3255,7 +3255,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3282,7 +3282,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3300,7 +3300,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3332,7 +3332,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3351,7 +3351,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3384,7 +3384,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3406,7 +3406,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3449,7 +3449,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3466,7 +3466,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3496,7 +3496,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3516,7 +3516,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3553,7 +3553,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3573,7 +3573,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3609,7 +3609,7 @@ options:
 ```text
 usage: tigrbl-auth keys publish-jwks [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3629,7 +3629,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3661,7 +3661,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys retire [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3679,7 +3679,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3712,7 +3712,7 @@ options:
 
 ```text
 usage: tigrbl-auth keys rotate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3734,7 +3734,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3777,7 +3777,7 @@ options:
 
 ```text
 usage: tigrbl-auth migrate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3801,7 +3801,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3828,7 +3828,7 @@ options:
 
 ```text
 usage: tigrbl-auth migrate apply [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3847,7 +3847,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3880,7 +3880,7 @@ options:
 
 ```text
 usage: tigrbl-auth migrate plan [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3897,7 +3897,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3926,7 +3926,7 @@ options:
 
 ```text
 usage: tigrbl-auth migrate status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3945,7 +3945,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3976,7 +3976,7 @@ options:
 
 ```text
 usage: tigrbl-auth migrate verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3995,7 +3995,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4026,7 +4026,7 @@ options:
 
 ```text
 usage: tigrbl-auth release [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4051,7 +4051,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4078,7 +4078,7 @@ options:
 
 ```text
 usage: tigrbl-auth release bundle [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4098,7 +4098,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4132,7 +4132,7 @@ options:
 ```text
 usage: tigrbl-auth release recertify [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4151,7 +4151,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4182,7 +4182,7 @@ options:
 
 ```text
 usage: tigrbl-auth release sign [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4201,7 +4201,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4234,7 +4234,7 @@ options:
 
 ```text
 usage: tigrbl-auth release status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4253,7 +4253,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4284,7 +4284,7 @@ options:
 
 ```text
 usage: tigrbl-auth release verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4303,7 +4303,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4334,7 +4334,7 @@ options:
 
 ```text
 usage: tigrbl-auth serve [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,peer-claim}]
+                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4374,7 +4374,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4458,7 +4458,7 @@ options:
 
 ```text
 usage: tigrbl-auth session [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4482,7 +4482,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4509,7 +4509,7 @@ options:
 
 ```text
 usage: tigrbl-auth session get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4527,7 +4527,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4557,7 +4557,7 @@ options:
 
 ```text
 usage: tigrbl-auth session list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4578,7 +4578,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4613,7 +4613,7 @@ options:
 
 ```text
 usage: tigrbl-auth session revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4632,7 +4632,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4665,7 +4665,7 @@ options:
 ```text
 usage: tigrbl-auth session revoke-all [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4685,7 +4685,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4718,7 +4718,7 @@ options:
 
 ```text
 usage: tigrbl-auth spec [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4742,7 +4742,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4769,7 +4769,7 @@ options:
 
 ```text
 usage: tigrbl-auth spec diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4789,7 +4789,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4824,7 +4824,7 @@ options:
 
 ```text
 usage: tigrbl-auth spec generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4843,7 +4843,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4876,7 +4876,7 @@ options:
 
 ```text
 usage: tigrbl-auth spec report [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4895,7 +4895,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4928,7 +4928,7 @@ options:
 
 ```text
 usage: tigrbl-auth spec validate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4947,7 +4947,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4980,7 +4980,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5007,7 +5007,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5034,7 +5034,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5056,7 +5056,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5095,7 +5095,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5113,7 +5113,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5145,7 +5145,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5164,7 +5164,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5196,7 +5196,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5214,7 +5214,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5246,7 +5246,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5263,7 +5263,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5293,7 +5293,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5314,7 +5314,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5349,7 +5349,7 @@ options:
 
 ```text
 usage: tigrbl-auth tenant update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5370,7 +5370,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5409,7 +5409,7 @@ options:
 
 ```text
 usage: tigrbl-auth token [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,peer-claim}]
+                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5434,7 +5434,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5461,7 +5461,7 @@ options:
 
 ```text
 usage: tigrbl-auth token exchange [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5481,7 +5481,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5516,7 +5516,7 @@ options:
 
 ```text
 usage: tigrbl-auth token get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5533,7 +5533,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5564,7 +5564,7 @@ options:
 ```text
 usage: tigrbl-auth token introspect [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5582,7 +5582,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5612,7 +5612,7 @@ options:
 
 ```text
 usage: tigrbl-auth token list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5632,7 +5632,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5667,7 +5667,7 @@ options:
 
 ```text
 usage: tigrbl-auth token revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5685,7 +5685,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5717,7 +5717,7 @@ options:
 
 ```text
 usage: tigrbl-auth verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5735,7 +5735,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.

@@ -1,80 +1,1618 @@
-enable_rfc6749:
+active_extensions:
+- ASGI 3 application package
+- CLI operator surface
+active_protocol_slices:
+- ASGI 3 application package
+- CLI operator surface
+active_surface_sets:
+- ASGI 3 application package
+- CLI operator surface
+enable_id_token_encryption:
+- CLI operator surface
+- Release bundle and signature verification
+enable_oidc_backchannel_logout:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
 - RFC 6749
-enable_rfc6750:
 - RFC 6750
-enable_rfc7636:
-- RFC 7636
-enable_rfc8414:
-- RFC 8414
-enable_rfc8615:
-- RFC 8615
-enable_rfc7515:
-- RFC 7515
-enable_rfc7516:
-- RFC 7516
-enable_rfc7517:
-- RFC 7517
-enable_rfc7518:
-- RFC 7518
-enable_rfc7519:
-- RFC 7519
-enable_rfc7009:
 - RFC 7009
-enable_rfc7662:
-- RFC 7662
-enable_rfc7591:
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
 - RFC 7591
-enable_rfc7592:
 - RFC 7592
-enable_rfc8252:
+- RFC 7636
+- RFC 7662
 - RFC 8252
-enable_rfc9068:
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
 - RFC 9068
-enable_rfc9728:
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_core:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_discovery:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_frontchannel_logout:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_rp_initiated_logout:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_session_management:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_oidc_userinfo:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc6749:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc6750:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc6750_form:
+- RFC 6750
+- RFC 9700
+enable_rfc6750_query:
+- RFC 6750
+- RFC 9700
+enable_rfc7009:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7515:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7516:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7517:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7518:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7519:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7521:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7523:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7591:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7592:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7636:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7662:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc7800:
+- CLI operator surface
+enable_rfc7952:
+- CLI operator surface
+- RFC 7952
+enable_rfc8252:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc8291:
+- CLI operator surface
+- RFC 8291
+enable_rfc8414:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc8523:
+- CLI operator surface
+enable_rfc8615:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
 - RFC 9728
 enable_rfc8628:
-- RFC 8628
-enable_rfc8693:
-- RFC 8693
-enable_rfc8705:
-- RFC 8705
-enable_rfc8707:
-- RFC 8707
-enable_rfc9101:
-- RFC 9101
-enable_rfc9126:
-- RFC 9126
-enable_rfc9396:
-- RFC 9396
-enable_rfc9449:
-- RFC 9449
-enable_rfc9700:
-- RFC 9700
-enable_oidc_core:
-- OIDC Core 1.0
-enable_oidc_discovery:
-- OIDC Discovery 1.0
-enable_oidc_userinfo:
-- OIDC UserInfo
-enable_oidc_session_management:
-- OIDC Session Management
-enable_oidc_rp_initiated_logout:
-- OIDC RP-Initiated Logout
-enable_oidc_frontchannel_logout:
-- OIDC Front-Channel Logout
-enable_oidc_backchannel_logout:
+- CLI operator surface
 - OIDC Back-Channel Logout
-oauth21_alignment_mode:
-- OAuth 2.1 alignment profile
-enable_rfc7800:
-- RFC 7800
-enable_rfc7952:
-- RFC 7952
-enable_rfc8291:
-- RFC 8291
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc8693:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc8705:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc8707:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
 enable_rfc8812:
+- CLI operator surface
 - RFC 8812
 enable_rfc8932:
+- CLI operator surface
 - RFC 8932
-enable_rfc8523:
+enable_rfc9068:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
 - RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9101:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9126:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9207:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9396:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9449:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9700:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enable_rfc9728:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+enforce_rfc8252:
+- RFC 8252
+oauth21_alignment_mode:
+- OAuth 2.1 alignment profile
+require_tls:
+- CLI operator surface
+- Release bundle and signature verification
+rfc8707_enabled:
+- RFC 8707
+runtime_style:
+- ASGI 3 application package
+- CLI operator surface
+session_cookie_cross_site:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_domain:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_force_secure:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_max_age_seconds:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_name:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_path:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_renewal_seconds:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+session_cookie_samesite:
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- RFC 6265
+strict_boundary_enforcement:
+- CLI operator surface
+- Release bundle and signature verification
+surface_admin_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+surface_diagnostics_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+surface_operator_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+surface_plugin_mode:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+surface_public_enabled:
+- CLI operator surface
+- OIDC Back-Channel Logout
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC Front-Channel Logout
+- OIDC RP-Initiated Logout
+- OIDC Session Management
+- OIDC UserInfo
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- RFC 6265
+- RFC 6749
+- RFC 6750
+- RFC 7009
+- RFC 7515
+- RFC 7516
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7591
+- RFC 7592
+- RFC 7636
+- RFC 7662
+- RFC 8252
+- RFC 8414
+- RFC 8615
+- RFC 8628
+- RFC 8693
+- RFC 8705
+- RFC 8707
+- RFC 9068
+- RFC 9101
+- RFC 9126
+- RFC 9207
+- RFC 9396
+- RFC 9449
+- RFC 9700
+- RFC 9728
+surface_rpc_enabled:
+- CLI operator surface
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract

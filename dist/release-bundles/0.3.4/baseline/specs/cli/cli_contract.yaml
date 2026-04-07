@@ -44,6 +44,7 @@ global_flags:
   - baseline
   - production
   - hardening
+  - fapi2-security
   - peer-claim
 - key: tenant
   flags:
