@@ -4,7 +4,7 @@
 
 ## Summary
 
-- gate_count: `20`
+- gate_count: `23`
 - failed_gate_count: `0`
 - validated_execution_artifact_count: `33`
 - required_validated_inventory_count: `30`
@@ -37,3 +37,6 @@
 - {'gate': 'gate-85-peer-profiles', 'passed': True, 'rc': 0}
 - {'gate': 'gate-90-release', 'passed': True, 'rc': 0}
 - {'gate': 'gate-95-recertification', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-current-state', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-release-decision', 'passed': True, 'rc': 0}
+- {'gate': 'gate-truth-repository-state', 'passed': True, 'rc': 0}

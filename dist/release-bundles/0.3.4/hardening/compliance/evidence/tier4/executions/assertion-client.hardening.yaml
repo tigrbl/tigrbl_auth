@@ -1,0 +1,49 @@
+schema_version: 1
+profile: assertion-client
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: assertion-client-harness
+counterpart_class: oauth-client-assertion
+required_targets:
+- RFC 7515
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7009
+required_artifacts:
+- tests/conformance/baseline/test_rfc7515_jws.py
+- tests/conformance/baseline/test_rfc7517_jwk.py
+- tests/conformance/baseline/test_rfc7518_jwa.py
+- tests/conformance/baseline/test_rfc7519_jwt.py
+- tests/unit/test_rfc7521_assertion_framework.py
+- tests/unit/test_rfc7523_jwt_profile.py
+- tests/conformance/production/test_rfc7009_token_revocation.py
+required_peer_artifacts:
+- http-transcript.yaml
+- jwt-assertions.json
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- jwt-client-auth
+- assertion-grant
+- jwt-bearer-claim-validation
+- token-revocation
+- jwks-key-selection
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: production
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

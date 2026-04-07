@@ -18,4 +18,7 @@ ordered_gates:
 - gate-75-test-classification
 - gate-85-peer-profiles
 - gate-90-release
+- gate-truth-current-state
+- gate-truth-release-decision
+- gate-truth-repository-state
 - gate-95-recertification

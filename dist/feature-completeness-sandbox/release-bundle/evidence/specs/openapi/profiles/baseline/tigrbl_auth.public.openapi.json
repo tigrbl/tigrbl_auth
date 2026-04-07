@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "tigrbl_auth public auth server",
-    "version": "0.3.0.dev1",
+    "version": "0.3.4",
     "description": "Generated public contract filtered by the effective deployment boundary."
   },
   "servers": [

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "contract-set",
+  "contract_count": 8,
+  "contracts": [
+    {
+      "path": "specs/cli/cli_contract.json",
+      "sha256": "84bf409c8ae8c0b3229fb6ddc28a174dfae5f6c89a5c97728ba9f0f28955c90d",
+      "bytes": 203409
+    },
+    {
+      "path": "specs/cli/cli_contract.yaml",
+      "sha256": "2644fd0144c474012a33ef76e141a902a017a7fb332fc0c663c237606601dcc7",
+      "bytes": 128440
+    },
+    {
+      "path": "specs/discovery/profiles/production/jwks.json",
+      "sha256": "65cd414018cc438c6822e5b5cf4ba7e5da97cfa4a560c8fd2dc3584d22df7bfb",
+      "bytes": 193
+    },
+    {
+      "path": "specs/discovery/profiles/production/oauth-authorization-server.json",
+      "sha256": "b7374b170afef72b5b973b9e40bddb75ed37d742a9fa3f82137cbd30f2d725cc",
+      "bytes": 2072
+    },
+    {
+      "path": "specs/discovery/profiles/production/oauth-protected-resource.json",
+      "sha256": "f5622802993a0e9de0b7900229a995fb77e813c582b9e11c95ab6bb37e7cc40a",
+      "bytes": 1342
+    },
+    {
+      "path": "specs/discovery/profiles/production/openid-configuration.json",
+      "sha256": "b7374b170afef72b5b973b9e40bddb75ed37d742a9fa3f82137cbd30f2d725cc",
+      "bytes": 2072
+    },
+    {
+      "path": "specs/openapi/profiles/production/tigrbl_auth.public.openapi.json",
+      "sha256": "53d6553aefbc9925a41e07572ffb1c125edce2a736c18ba60a3d132915402534",
+      "bytes": 54722
+    },
+    {
+      "path": "specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json",
+      "sha256": "7d396116a314a9968b7003134545588de5c96e75fded029453d427f0befd3dee",
+      "bytes": 115501
+    }
+  ]
+}

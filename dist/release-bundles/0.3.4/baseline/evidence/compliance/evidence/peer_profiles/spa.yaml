@@ -1,0 +1,34 @@
+schema_version: 1
+id: spa
+title: SPA authorization code + PKCE + discovery interop
+counterpart_id: spa-rp
+required_targets:
+- RFC 6749
+- RFC 7636
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+required_artifacts:
+- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- tests/conformance/baseline/test_rfc7636_pkce.py
+- tests/conformance/baseline/test_openid_configuration.py
+scenario_ids:
+- spa-authz-code-pkce
+- spa-discovery
+- spa-hardening-discovery-truthfulness
+scenario_target_map:
+  spa-authz-code-pkce:
+  - RFC 6749
+  - RFC 7636
+  - OIDC Core 1.0
+  spa-discovery:
+  - OIDC Discovery 1.0
+  spa-hardening-discovery-truthfulness:
+  - OIDC Discovery 1.0
+contract_profiles:
+- baseline
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Focused SPA harness for authorization-code + PKCE and discovery posture.

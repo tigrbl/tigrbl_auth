@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "payload": {
+    "schema_version": 1,
+    "statement_type": "https://tigrbl.dev/attestations/release-artifact/v1",
+    "issued_at": "2026-04-07T09:16:08Z",
+    "signer": {
+      "signer_id": "tigrbl_auth.checkpoint.attestor",
+      "key_id": "ed25519:d733db3b20c5e52d3acddfa8",
+      "algorithm": "Ed25519",
+      "identity_kind": "repository-release-attestor",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAvb7ZzItHWRNMZZKKYDtabzK5TakYu2FOfIATr14hAgo=\n-----END PUBLIC KEY-----\n",
+      "public_key_sha256": "d733db3b20c5e52d3acddfa862ea5546e8a142c96d285bdff5864233cf17ce71",
+      "source": "inline-pem"
+    },
+    "subject": {
+      "package": "tigrbl_auth",
+      "version": "0.3.4",
+      "profile": "hardening",
+      "artifact_label": "claim-manifest",
+      "artifact_kind": "claim-manifest",
+      "artifact_path": "compliance/claims/effective-target-claims.hardening.yaml",
+      "artifact_sha256": "7e607abf7c83a029344ff9cc3a831da79fbd8d9a30d13e2ee1786e23964d511c",
+      "media_type": "application/yaml"
+    }
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "encoding": "base64url",
+    "value": "h1h8K22uFQNZe13ElJoAxpaKGZrwO3kHvZIrkxY6BC2xHslg4G9j8JQgJNcBzYlTy2M4PmTmt0bsKkBSeEpFDQ",
+    "payload_sha256": "882a0667357116c2e7ed0d71f77e32c557fc1a8db4ab72c718035d309517c36f"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "failures": [],
+  "warnings": [],
+  "summary": {
+    "gate_count": 20,
+    "failed_gate_count": 0,
+    "validated_execution_artifact_count": 33,
+    "required_validated_inventory_count": 30,
+    "validated_inventory_present_count": 30,
+    "validated_inventory_complete": true,
+    "clean_room_install_matrix_green": true,
+    "in_scope_test_lanes_green": true,
+    "migration_portability_passed": true,
+    "tier3_evidence_rebuilt_from_validated_runs": true
+  },
+  "details": [
+    {
+      "gate": "gate-00-structure",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-05-governance",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-10-static",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-12-project-tree-layout",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-15-boundary-enforcement",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-18-migration-plan",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-20-tests",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-25-wrapper-hygiene",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-30-contracts",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-35-contract-sync",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-40-evidence",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-45-evidence-peer",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-50-release-bundle",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-55-contract-validation",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-60-release-signing",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-65-state-reports",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-75-test-classification",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-85-peer-profiles",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-90-release",
+      "passed": true,
+      "rc": 0
+    },
+    {
+      "gate": "gate-95-recertification",
+      "passed": true,
+      "rc": 0
+    }
+  ]
+}

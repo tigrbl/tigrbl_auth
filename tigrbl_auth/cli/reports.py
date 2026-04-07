@@ -58,6 +58,7 @@ from tigrbl_auth.cli.metadata import (
 from tigrbl_auth.cli.install_substrate import write_install_substrate_report
 from tigrbl_auth.cli.project_tree import run_migration_plan_check, run_project_tree_layout_check
 from tigrbl_auth.cli.runtime import run_runtime_foundation_check, write_runtime_profile_report
+from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY
 from tigrbl_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 from tigrbl_auth.services._operator_store import OperationContext, operator_state_root, operator_store_summary
@@ -2119,8 +2120,33 @@ GATE_CALLS = {
     "gate-75-test-classification": lambda root: 0 if verify_test_classification(root, strict=True)["passed"] else 1,
     "gate-85-peer-profiles": lambda root: 0 if execute_peer_profiles(root, deployment_from_options(profile="hardening"), execution_mode="self-check")["passed"] else 1,
     "gate-90-release": lambda root: 0 if run_final_release_readiness_gate(root)["passed"] else 1,
+    "gate-truth-current-state": lambda root: 0 if verify_truth_chain(root, mode="current-state")["passed"] else 1,
+    "gate-truth-release-decision": lambda root: 0 if verify_truth_chain(root, mode="release-decision")["passed"] else 1,
+    "gate-truth-repository-state": lambda root: 0 if verify_truth_chain(root, mode="repository-state")["passed"] else 1,
     "gate-95-recertification": lambda root: 0 if run_recertification(root)["passed"] else 1,
 }
+
+
+def _build_release_gate_payload(repo_root: Path, gate_names: list[str], results: list[dict[str, Any]], failures: list[str]) -> dict[str, Any]:
+    validated = load_validated_execution_status(repo_root)
+    return {
+        "passed": not failures,
+        "failures": failures,
+        "warnings": [],
+        "summary": {
+            "gate_count": len(gate_names),
+            "failed_gate_count": len([item for item in results if not item["passed"]]),
+            "validated_execution_artifact_count": int(validated.get("validated_artifact_count", 0)),
+            "required_validated_inventory_count": int(validated.get("required_validated_inventory_count", 0)),
+            "validated_inventory_present_count": int(validated.get("validated_inventory_present_count", 0)),
+            "validated_inventory_complete": bool(validated.get("validated_inventory_complete", False)),
+            "clean_room_install_matrix_green": bool(validated.get("runtime_matrix_green", False)),
+            "in_scope_test_lanes_green": bool(validated.get("in_scope_test_lanes_green", False)),
+            "migration_portability_passed": bool(validated.get("migration_portability_passed", False)),
+            "tier3_evidence_rebuilt_from_validated_runs": bool(validated.get("tier3_evidence_rebuilt_from_validated_runs", False)),
+        },
+        "details": results,
+    }
 
 
 def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: bool = True) -> dict[str, Any]:
@@ -2128,37 +2154,57 @@ def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: 
     gate_dir = repo_root / "compliance" / "gates"
     ordered = _load_yaml(gate_dir / "gate-order.yaml") if (gate_dir / "gate-order.yaml").exists() else {"ordered_gates": sorted(GATE_CALLS)}
     gate_names = [gate_name] if gate_name and gate_name not in {"all", "*"} else list(ordered.get("ordered_gates", sorted(GATE_CALLS)))
-    results: list[dict[str, Any]] = []
-    failures: list[str] = []
-    for name in gate_names:
+    truth_gate_names = [name for name in gate_names if name.startswith("gate-truth-")]
+    primary_gate_names = [name for name in gate_names if name not in truth_gate_names]
+
+    primary_results: list[dict[str, Any]] = []
+    primary_failures: list[str] = []
+    for name in primary_gate_names:
         fn = GATE_CALLS.get(name)
         if fn is None:
-            failures.append(f"Unknown gate: {name}")
+            primary_failures.append(f"Unknown gate: {name}")
             continue
         rc = int(fn(repo_root))
         passed = rc == 0
-        results.append({"gate": name, "passed": passed, "rc": rc})
+        primary_results.append({"gate": name, "passed": passed, "rc": rc})
         if not passed:
-            failures.append(f"Gate failed: {name}")
-    payload = {
-        "passed": not failures,
-        "failures": failures,
-        "warnings": [],
-        "summary": {
-            "gate_count": len(gate_names),
-            "failed_gate_count": len([item for item in results if not item["passed"]]),
-            "validated_execution_artifact_count": int(load_validated_execution_status(repo_root).get("validated_artifact_count", 0)),
-            "required_validated_inventory_count": int(load_validated_execution_status(repo_root).get("required_validated_inventory_count", 0)),
-            "validated_inventory_present_count": int(load_validated_execution_status(repo_root).get("validated_inventory_present_count", 0)),
-            "validated_inventory_complete": bool(load_validated_execution_status(repo_root).get("validated_inventory_complete", False)),
-            "clean_room_install_matrix_green": bool(load_validated_execution_status(repo_root).get("runtime_matrix_green", False)),
-            "in_scope_test_lanes_green": bool(load_validated_execution_status(repo_root).get("in_scope_test_lanes_green", False)),
-            "migration_portability_passed": bool(load_validated_execution_status(repo_root).get("migration_portability_passed", False)),
-            "tier3_evidence_rebuilt_from_validated_runs": bool(load_validated_execution_status(repo_root).get("tier3_evidence_rebuilt_from_validated_runs", False)),
-        },
-        "details": results,
-    }
+            primary_failures.append(f"Gate failed: {name}")
+
+    payload = _build_release_gate_payload(repo_root, primary_gate_names, primary_results, primary_failures)
     _write_report(repo_root / "docs" / "compliance", "release_gate_report", payload, "Release Gate Report")
+    materialize_truth_chain(repo_root)
+
+    if not truth_gate_names:
+        return payload
+
+    def _run_truth_pass() -> tuple[list[dict[str, Any]], list[str]]:
+        truth_results: list[dict[str, Any]] = []
+        truth_failures: list[str] = []
+        for name in truth_gate_names:
+            fn = GATE_CALLS.get(name)
+            if fn is None:
+                truth_failures.append(f"Unknown gate: {name}")
+                continue
+            rc = int(fn(repo_root))
+            passed = rc == 0
+            truth_results.append({"gate": name, "passed": passed, "rc": rc})
+            if not passed:
+                truth_failures.append(f"Gate failed: {name}")
+        return truth_results, truth_failures
+
+    truth_results, truth_failures = _run_truth_pass()
+    combined_results = primary_results + truth_results
+    combined_failures = primary_failures + truth_failures
+    payload = _build_release_gate_payload(repo_root, gate_names, combined_results, combined_failures)
+    _write_report(repo_root / "docs" / "compliance", "release_gate_report", payload, "Release Gate Report")
+    materialize_truth_chain(repo_root)
+
+    truth_results, truth_failures = _run_truth_pass()
+    combined_results = primary_results + truth_results
+    combined_failures = primary_failures + truth_failures
+    payload = _build_release_gate_payload(repo_root, gate_names, combined_results, combined_failures)
+    _write_report(repo_root / "docs" / "compliance", "release_gate_report", payload, "Release Gate Report")
+    materialize_truth_chain(repo_root)
     return payload
 
 

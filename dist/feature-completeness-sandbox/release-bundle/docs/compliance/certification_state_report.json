@@ -6,7 +6,7 @@
     "protocol_boundary_tier3_complete": true,
     "retained_boundary_tier3_complete": true,
     "strict_independent_claims_ready": false,
-    "authoritative_scope_manifest": "compliance/targets/certification_scope.yaml",
+    "authoritative_scope_manifest": "compliance\\targets\\certification_scope.yaml",
     "boundary_freeze_active": true,
     "boundary_freeze_passed": true,
     "boundary_freeze_decision_id": "BND-012",

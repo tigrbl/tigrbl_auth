@@ -1,0 +1,38 @@
+schema_version: 1
+profile: runner-tigrcorn
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: tigrcorn-runner
+counterpart_class: asgi-runner
+required_targets:
+- ASGI 3 application package
+- 'Runner profile: Tigrcorn'
+required_artifacts:
+- tigrbl_auth/api/app.py
+- tigrbl_auth/gateway.py
+- tests/runtime/test_runner_tigrcorn.py
+required_peer_artifacts:
+- http-transcript.yaml
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- runner-launch
+- runner-health
+- runner-contract-hash
+contract_profiles:
+- baseline
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: production
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

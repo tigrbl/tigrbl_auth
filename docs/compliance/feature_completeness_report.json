@@ -43,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae",
-        "database_path": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/operator_plane.sqlite3",
-        "snapshot_root": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/snapshots",
-        "log_root": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/logs",
+        "state_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb",
+        "database_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\operator_plane.sqlite3",
+        "snapshot_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\snapshots",
+        "log_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/logs/audit-events.jsonl",
-        "transaction_log_path": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/logs/transactions.jsonl",
-        "activity_log_path": "/root/.local/state/tigrbl_auth/operator-plane/operator-state-db445cd67d346bae/logs/activity.jsonl"
+        "audit_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\audit-events.jsonl",
+        "transaction_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\transactions.jsonl",
+        "activity_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -113,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox/exports/portable-export.json"
+        "dist\\feature-completeness-sandbox\\exports\\portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -131,8 +131,8 @@
         "docs/reference/CLI_SURFACE.md"
       ],
       "details": {
-        "openapi_path": "specs/openapi/tigrbl_auth.public.openapi.json",
-        "openrpc_path": "specs/openrpc/tigrbl_auth.admin.openrpc.json",
+        "openapi_path": "specs\\openapi\\tigrbl_auth.public.openapi.json",
+        "openrpc_path": "specs\\openrpc\\tigrbl_auth.admin.openrpc.json",
         "discovery_publish_status": "published",
         "discovery_document_count": 3,
         "discovery_changed_count": 4,
@@ -156,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox/release-bundle"
+        "dist\\feature-completeness-sandbox\\release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox/release-bundle",
+        "bundle_dir": "dist\\feature-completeness-sandbox\\release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",

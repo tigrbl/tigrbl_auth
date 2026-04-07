@@ -1,0 +1,41 @@
+schema_version: 1
+profile: native
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: native-client
+counterpart_class: native-client
+required_targets:
+- RFC 7636
+- RFC 8252
+- RFC 7516
+- RFC 9207
+required_artifacts:
+- tests/conformance/production/test_rfc8252_native_apps.py
+- tests/unit/test_oidc_id_token_encryption.py
+- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+required_peer_artifacts:
+- http-transcript.yaml
+- stdout.log
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- native-loopback
+- native-custom-scheme
+- native-jwe-id-token
+- native-issuer-parameter
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

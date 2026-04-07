@@ -1,0 +1,5 @@
+# Published-runner verification checkpoint: uvicorn pin re-verified against PyPI on 2026-03-24.
+# Uvicorn runner profile pins.
+# Use with: pip install -c constraints/base.txt -c constraints/runner-uvicorn.txt '.[uvicorn]'
+
+uvicorn==0.41.0

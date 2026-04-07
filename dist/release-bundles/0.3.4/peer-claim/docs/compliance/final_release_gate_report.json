@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "failures": [],
+  "warnings": [
+    "Tier 4 bundle promotion is not complete for the retained boundary."
+  ],
+  "summary": {
+    "runtime_profiles_truly_ready": true,
+    "validated_inventory_complete": true,
+    "required_validated_inventory_count": 30,
+    "validated_inventory_present_count": 30,
+    "clean_room_install_matrix_green": true,
+    "in_scope_test_lanes_green": true,
+    "migration_portability_passed": true,
+    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "tier4_bundle_promotion_complete": false
+  }
+}

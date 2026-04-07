@@ -1,9 +1,9 @@
 # Runtime Profile Report
 
-- Generated at: `20260331T165740Z`
+- Generated at: `20260407T091615Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
-- Validated artifact source: `dist/validated-runs/collected-artifact-downloads.json`
+- Validated artifact source: `dist\validated-runs\collected-artifact-downloads.json`
 - Application factory probe passed: `True`
 - Ready profiles: `3`
 - Missing profiles: `0`

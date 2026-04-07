@@ -1,0 +1,420 @@
+schema_version: 1
+package: tigrbl_auth
+profile_label: hardening
+effective_deployment:
+  profile: hardening
+  plugin_mode: mixed
+  runtime_style: standalone
+  surface_sets:
+  - public-rest
+  - admin-rpc
+  - diagnostics
+  protocol_slices:
+  - device
+  - token-exchange
+  - par
+  - jar
+  - rar
+  - dpop
+  extensions: []
+  issuer: https://authn.example.com
+  protected_resource_identifier: https://authn.example.com/resource
+  strict_boundary_enforcement: true
+  surfaces:
+    surface_public_enabled: true
+    surface_admin_enabled: true
+    surface_rpc_enabled: true
+    surface_diagnostics_enabled: true
+    surface_operator_enabled: true
+    surface_plugin_mode: mixed
+  flags:
+    enable_rfc6749: true
+    enable_rfc6750: true
+    enable_rfc7636: true
+    enable_rfc8414: true
+    enable_rfc8615: true
+    enable_rfc7515: true
+    enable_rfc7516: true
+    enable_rfc7517: true
+    enable_rfc7518: true
+    enable_rfc7519: true
+    enable_oidc_core: true
+    enable_oidc_discovery: true
+    enable_oidc_session_management: true
+    enable_rfc7009: true
+    enable_rfc7521: true
+    enable_rfc7523: true
+    enable_rfc7662: true
+    enable_rfc7591: true
+    enable_rfc7592: true
+    enable_rfc8252: true
+    enable_rfc9068: false
+    enable_rfc9207: true
+    enable_rfc9728: true
+    enable_oidc_userinfo: true
+    enable_oidc_rp_initiated_logout: true
+    enable_rfc8628: true
+    enable_rfc8693: true
+    enable_rfc8705: false
+    enable_rfc8707: true
+    enable_rfc9101: true
+    enable_rfc9126: true
+    enable_rfc9396: true
+    enable_rfc9449: true
+    enable_rfc9700: true
+    enable_oidc_frontchannel_logout: true
+    enable_oidc_backchannel_logout: true
+    require_tls: true
+    enable_id_token_encryption: false
+    enable_rfc6750_query: false
+    enable_rfc6750_form: false
+    strict_boundary_enforcement: true
+    surface_public_enabled: true
+    surface_admin_enabled: true
+    surface_operator_enabled: true
+    surface_rpc_enabled: true
+    surface_diagnostics_enabled: true
+    surface_plugin_mode: mixed
+    oauth21_alignment_mode: tracked
+    enable_rfc7800: false
+    enable_rfc7952: false
+    enable_rfc8291: false
+    enable_rfc8812: false
+    enable_rfc8932: false
+    enable_rfc8523: false
+  active_capabilities:
+  - login
+  - authorize
+  - token
+  - userinfo
+  - introspection
+  - register
+  - register-management
+  - revoke
+  - logout
+  - device-authorization
+  - par
+  - token-exchange
+  - openid-configuration
+  - oauth-authorization-server-metadata
+  - oauth-protected-resource-metadata
+  - jwks
+  - diagnostics-health
+  active_routes:
+  - /login
+  - /authorize
+  - /token
+  - /userinfo
+  - /introspect
+  - /register
+  - /register/{client_id}
+  - /revoke
+  - /logout
+  - /device_authorization
+  - /par
+  - /token/exchange
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/oauth-protected-resource
+  - /.well-known/jwks.json
+  - /system/health
+  active_contract_routes:
+  - /login
+  - /authorize
+  - /token
+  - /userinfo
+  - /introspect
+  - /register
+  - /register/{client_id}
+  - /revoke
+  - /logout
+  - /device_authorization
+  - /par
+  - /token/exchange
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/oauth-protected-resource
+  - /.well-known/jwks.json
+  active_discovery_routes:
+  - /userinfo
+  - /introspect
+  - /register
+  - /revoke
+  - /logout
+  - /device_authorization
+  - /par
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/oauth-protected-resource
+  - /.well-known/jwks.json
+  active_targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 7009
+  - RFC 7521
+  - RFC 7523
+  - RFC 7591
+  - RFC 7592
+  - RFC 7662
+  - RFC 8252
+  - RFC 8628
+  - RFC 8693
+  - RFC 8707
+  - RFC 9101
+  - RFC 9126
+  - RFC 9207
+  - RFC 9396
+  - RFC 9449
+  - RFC 9700
+  - RFC 9728
+  - RFC 6265
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC UserInfo
+  - OIDC Session Management
+  - OIDC RP-Initiated Logout
+  - OIDC Front-Channel Logout
+  - OIDC Back-Channel Logout
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  - ASGI 3 application package
+  - 'Runner profile: Uvicorn'
+  - 'Runner profile: Hypercorn'
+  - 'Runner profile: Tigrcorn'
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  - Key lifecycle and JWKS publication
+  - Import/export portability
+  - Release bundle and signature verification
+  active_openrpc_methods:
+  - audit.export
+  - audit.list
+  - claims.lint
+  - claims.show
+  - client.list
+  - client.registration.delete
+  - client.registration.list
+  - client.registration.show
+  - client.registration.upsert
+  - client.show
+  - consent.list
+  - consent.revoke
+  - consent.show
+  - discovery.show
+  - evidence.status
+  - flow.list
+  - gate.run
+  - identity.list
+  - identity.show
+  - jwks.show
+  - keys.list
+  - keys.rotate
+  - profile.show
+  - release.bundle
+  - rpc.discover
+  - session.list
+  - session.show
+  - session.terminate
+  - target.list
+  - target.show
+  - tenant.list
+  - tenant.show
+  - token.exchange
+  - token.inspect
+  - token.list
+claim_set:
+  current_repository_tier: 3
+  phase: P10
+  claims:
+  - target: RFC 6749
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 6750
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7636
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 8414
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 8615
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7515
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7516
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7517
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7518
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7519
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 7009
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7591
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7592
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7662
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 8252
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 8628
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 8693
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 8707
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 9101
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 9126
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 9207
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 9396
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 9449
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: RFC 6265
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7521
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 7523
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 9728
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: RFC 9700
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: OIDC Core 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC Discovery 1.0
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OIDC UserInfo
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OIDC Session Management
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OIDC RP-Initiated Logout
+    tier: 3
+    status: evidenced-release-gated
+    profile: production
+  - target: OIDC Front-Channel Logout
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: OIDC Back-Channel Logout
+    tier: 3
+    status: evidenced-release-gated
+    profile: hardening
+  - target: OpenAPI 3.1 / 3.2 compatible public contract
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: OpenRPC 1.4.x admin/control-plane contract
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: ASGI 3 application package
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Uvicorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Hypercorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: 'Runner profile: Tigrcorn'
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: CLI operator surface
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Bootstrap and migration lifecycle
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Key lifecycle and JWKS publication
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Import/export portability
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: Release bundle and signature verification
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline

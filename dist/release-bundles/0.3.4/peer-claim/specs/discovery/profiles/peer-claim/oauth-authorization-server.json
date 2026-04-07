@@ -1,0 +1,98 @@
+{
+  "issuer": "https://authn.example.com",
+  "authorization_endpoint": "https://authn.example.com/authorize",
+  "token_endpoint": "https://authn.example.com/token",
+  "jwks_uri": "https://authn.example.com/.well-known/jwks.json",
+  "subject_types_supported": [
+    "public"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "RS256"
+  ],
+  "scopes_supported": [
+    "openid",
+    "profile",
+    "email",
+    "address",
+    "phone"
+  ],
+  "claims_supported": [
+    "sub",
+    "name",
+    "email",
+    "address",
+    "phone_number"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "client_secret_basic",
+    "client_secret_post",
+    "private_key_jwt",
+    "tls_client_auth",
+    "self_signed_tls_client_auth"
+  ],
+  "token_endpoint_auth_signing_alg_values_supported": [
+    "EdDSA"
+  ],
+  "response_types_supported": [
+    "code"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials",
+    "urn:ietf:params:oauth:grant-type:jwt-bearer",
+    "urn:ietf:params:oauth:grant-type:device_code",
+    "urn:ietf:params:oauth:grant-type:token-exchange"
+  ],
+  "response_modes_supported": [
+    "query",
+    "form_post"
+  ],
+  "code_challenge_methods_supported": [
+    "S256"
+  ],
+  "authorization_response_iss_parameter_supported": true,
+  "dpop_signing_alg_values_supported": [
+    "EdDSA"
+  ],
+  "tls_client_certificate_bound_access_tokens": true,
+  "require_pushed_authorization_requests": true,
+  "request_parameter_supported": true,
+  "request_object_signing_alg_values_supported": [
+    "HS256",
+    "HS384",
+    "HS512"
+  ],
+  "resource_parameter_supported": true,
+  "authorization_details_types_supported": [
+    "*"
+  ],
+  "access_token_signing_alg_values_supported": [
+    "EdDSA"
+  ],
+  "userinfo_endpoint": "https://authn.example.com/userinfo",
+  "registration_endpoint": "https://authn.example.com/register",
+  "revocation_endpoint": "https://authn.example.com/revoke",
+  "revocation_endpoint_auth_methods_supported": [
+    "client_secret_basic",
+    "client_secret_post",
+    "private_key_jwt",
+    "tls_client_auth",
+    "self_signed_tls_client_auth"
+  ],
+  "introspection_endpoint": "https://authn.example.com/introspect",
+  "introspection_endpoint_auth_methods_supported": [
+    "client_secret_basic",
+    "client_secret_post",
+    "private_key_jwt",
+    "tls_client_auth",
+    "self_signed_tls_client_auth"
+  ],
+  "end_session_endpoint": "https://authn.example.com/logout",
+  "frontchannel_logout_supported": true,
+  "frontchannel_logout_session_supported": true,
+  "backchannel_logout_supported": true,
+  "backchannel_logout_session_supported": true,
+  "device_authorization_endpoint": "https://authn.example.com/device_authorization",
+  "pushed_authorization_request_endpoint": "https://authn.example.com/par",
+  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource"
+}

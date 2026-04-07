@@ -6,7 +6,7 @@
 
 - repository_tier: `3`
 - phase: `P10`
-- authoritative_scope_manifest: `compliance/targets/certification_scope.yaml`
+- authoritative_scope_manifest: `compliance\targets\certification_scope.yaml`
 - boundary_freeze_active: `True`
 - boundary_freeze_passed: `True`
 - boundary_freeze_decision_id: `BND-012`
@@ -16,13 +16,13 @@
 - boundary_freeze_non_rfc_target_count: `18`
 - boundary_freeze_deferred_target_count: `13`
 - boundary_freeze_identity_hash_matches: `True`
-- document_authority_manifest: `compliance/targets/document-authority.yaml`
+- document_authority_manifest: `compliance\targets\document-authority.yaml`
 - certification_bundle_current_state_doc_only: `True`
 - certification_bundle_generated_current_docs_only: `True`
-- authoritative_current_doc_count: `25`
+- authoritative_current_doc_count: `21`
 - archived_historical_root_count: `1`
 - archived_reference_doc_count: `17`
-- certification_bundle_current_state_doc_count: `21`
+- certification_bundle_current_state_doc_count: `22`
 - declared_claim_count: `48`
 - mapped_module_count: `48`
 - mapped_test_count: `48`
@@ -45,7 +45,7 @@
 - tier4_invalid_external_bundle_count: `0`
 - tier4_missing_external_bundle_count: `16`
 - tier4_external_handoff_template_present: `True`
-- signed_release_bundle_count: `8`
+- signed_release_bundle_count: `13`
 - release_attestation_verifiable: `True`
 - base_dependency_count: `22`
 - base_exact_pinned_dependency_count: `22`
@@ -60,7 +60,7 @@
 - install_substrate_manifest_passed: `True`
 - install_substrate_current_profile: `base`
 - install_substrate_current_python_supported: `True`
-- install_substrate_detected_supported_python_count: `3`
+- install_substrate_detected_supported_python_count: `1`
 - install_substrate_expected_supported_python_count: `3`
 - install_substrate_tox_env_count: `33`
 - install_substrate_tox_pip_check_complete: `True`
@@ -68,7 +68,7 @@
 - install_substrate_current_profile_import_probe_passed: `True`
 - test_constraints_manifest_present: `True`
 - tox_manifest_present: `True`
-- native_uv_lock_present: `False`
+- native_uv_lock_present: `True`
 - install_profile_workflow_present: `True`
 - release_gate_workflow_present: `True`
 - clean_room_matrix_implemented: `True`
@@ -98,8 +98,8 @@
 - operator_plane_backend: `sqlite-authoritative`
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
-- operator_plane_database_present: `False`
-- operator_plane_state_root: `/root/.local/state/tigrbl_auth/operator-plane/tigrbl_auth-eaa801ad242b716f`
+- operator_plane_database_present: `True`
+- operator_plane_state_root: `C:\Users\bigman\.local\state\tigrbl_auth\operator-plane\tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`

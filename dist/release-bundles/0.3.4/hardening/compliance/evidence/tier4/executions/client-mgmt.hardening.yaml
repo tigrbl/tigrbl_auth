@@ -1,0 +1,38 @@
+schema_version: 1
+profile: client-mgmt
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: client-mgmt-harness
+counterpart_class: client-registration-harness
+required_targets:
+- RFC 7591
+- RFC 7592
+required_artifacts:
+- tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+- tests/conformance/hardening/test_rfc7592_client_registration_management.py
+- tests/unit/test_rfc7592_client_management_endpoint.py
+required_peer_artifacts:
+- http-transcript.yaml
+- client-metadata.json
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- client-register
+- client-read-update-delete
+- client-registration-access-token
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

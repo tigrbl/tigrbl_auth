@@ -1,0 +1,41 @@
+schema_version: 1
+profile: par-jar-rar
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: par-jar-rar-client
+counterpart_class: advanced-oauth-client
+required_targets:
+- RFC 9101
+- RFC 9126
+- RFC 9396
+- RFC 8707
+required_artifacts:
+- tests/conformance/hardening/test_rfc9101_jar.py
+- tests/conformance/hardening/test_rfc9126_par.py
+- tests/conformance/hardening/test_rfc9396_rar.py
+- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+required_peer_artifacts:
+- http-transcript.yaml
+- request-objects/
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- par-submit
+- jar-authorize
+- rar-authorize
+- rar-resource-binding
+contract_profiles:
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

@@ -2,29 +2,18 @@
 
 ## Honest status
 
-`tigrbl_auth` in this checkpoint is **not yet certifiably fully featured**.
-
-`tigrbl_auth` in this checkpoint is **not yet certifiably fully RFC/spec compliant**.
-
-`tigrbl_auth` in this checkpoint is **not yet certifiably fully non-RFC spec/standard compliant**.
-
-## Final-release gate posture
-
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - strict_independent_claims_ready: `False`
-- release_gates_passed: `False`
+- release_gates_passed: `True`
+- final_release_gate_passed: `True`
+- final_release_ready: `False`
 - target_profile_truth_reconciled_complete: `True`
 - profile_scope_mismatch_set_empty: `True`
-- alignment_only_checkpoint_no_new_certification_evidence: `False`
-- clean_room_executor_matrix_declared_complete: `True`
-- validated_manifest_identity_contract_installed: `True`
-- clean_room_install_matrix_green: `False`
-- in_scope_test_lanes_green: `False`
-- migration_portability_passed: `False`
-- tier3_evidence_rebuilt_from_validated_runs: `True`
-- tier4_bundle_promotion_complete: `False`
+- validated_runtime_matrix_green: `True`
+- validated_test_lanes_green: `True`
+- migration_portability_passed: `True`
 
 ## Open gaps blocking final certification
 
@@ -34,4 +23,4 @@
 
 ## Practical recommendation
 
-Use this repository state as a **truthful clean-room executor / validated-evidence checkpoint**, not as a final certified release. The retained profile-scope mismatch set is empty and the stricter validated-manifest contract is now installed, but preserved py3.10/3.11/3.12 runtime/test evidence, PostgreSQL-backed migration portability evidence, and Tier 4 external peer bundles are still required before any final certification claim becomes truthful.
+This repository state must remain labeled as a checkpoint/candidate until Tier 4 independent validation and any remaining package-boundary gaps are closed.

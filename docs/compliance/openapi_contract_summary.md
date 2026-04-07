@@ -1,7 +1,7 @@
 # OpenAPI Contract Summary
 
 - Title: `tigrbl_auth public auth server`
-- Version: `0.3.0`
+- Version: `0.3.4`
 - Profile: `baseline`
 - Surface sets: `public-rest, admin-rpc, diagnostics`
 - Path count: `6`

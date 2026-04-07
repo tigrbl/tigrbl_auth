@@ -5,10 +5,9 @@ from pathlib import Path
 
 import yaml
 
-import pytest
-
 from tigrbl_auth.cli.claims import REQUIRED_BUCKET_LABELS
 from tigrbl_auth.cli.feature_surface import REQUIRED_TARGET_BUCKETS
+from tigrbl_auth.cli.truth import verify_truth_chain
 from tigrbl_auth.config import deployment
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import Settings
@@ -89,7 +88,7 @@ def test_repository_state_release_gate_claim_matches_current_release_report() ->
     release_gate_report = json.loads((ROOT / "docs" / "compliance" / "release_gate_report.json").read_text())
     final_release_report = json.loads((ROOT / "docs" / "compliance" / "final_release_gate_report.json").read_text())
 
-    assert repository_state["release_gate_passed_at_phase_13"] is True
+    assert repository_state["release_gate_passed_at_phase_13"] is release_gate_report["passed"]
     assert release_gate_report["passed"] is True
     assert final_release_report["passed"] is True
 
@@ -154,9 +153,9 @@ def test_repository_state_marks_truth_reconciliation_complete_and_executor_evide
     assert repository_state["phase_13_profile_scope_mismatch_set_empty"] is True
     assert repository_state["phase_13_clean_room_executor_matrix_declared_complete"] is True
     assert repository_state["phase_13_validated_manifest_identity_contract_installed"] is True
-    assert repository_state["phase_13_validated_runtime_matrix_preservation_complete"] is False
-    assert repository_state["phase_13_validated_test_lane_preservation_complete"] is False
-    assert repository_state["phase_13_validated_migration_portability_preservation_complete"] is False
+    assert repository_state["phase_13_validated_runtime_matrix_preservation_complete"] is True
+    assert repository_state["phase_13_validated_test_lane_preservation_complete"] is True
+    assert repository_state["phase_13_validated_migration_portability_preservation_complete"] is True
     assert repository_state["alignment_only_checkpoint_no_new_certification_evidence"] is False
 
 
@@ -179,7 +178,12 @@ def test_generated_reports_reflect_reconciled_target_profile_truth() -> None:
 
     current_state_md = (ROOT / "CURRENT_STATE.md").read_text(encoding="utf-8")
     certification_status_md = (ROOT / "CERTIFICATION_STATUS.md").read_text(encoding="utf-8")
-    assert "profile-scope mismatch count: `0`" in current_state_md
+    assert "validated runtime matrix green: `True`" in current_state_md
     assert "profile-scope mismatch set empty: `True`" in current_state_md
     assert "target_profile_truth_reconciled_complete: `True`" in certification_status_md
     assert "profile_scope_mismatch_set_empty: `True`" in certification_status_md
+
+
+def test_truth_chain_verifier_passes_against_generated_artifacts() -> None:
+    payload = verify_truth_chain(ROOT)
+    assert payload["passed"] is True

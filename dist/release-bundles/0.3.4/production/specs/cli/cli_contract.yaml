@@ -1,0 +1,6139 @@
+schema_version: 1
+package: tigrbl_auth
+generated_from: tigrbl_auth.cli.metadata
+summary:
+  command_count: 21
+  verb_count: 87
+  direct_command_count: 4
+  nested_command_count: 17
+  family_count: 7
+  family_command_counts:
+    runtime: 1
+    governance: 5
+    contracts: 1
+    evidence: 1
+    operator: 2
+    release: 1
+    admin: 10
+  global_flag_count: 16
+  flag_count: 88
+  resource_command_count: 10
+global_flags:
+- key: config
+  flags:
+  - --config
+  help: Path to the runtime/configuration file.
+  group: global
+  family: global
+  default: null
+- key: env_file
+  flags:
+  - --env-file
+  help: Optional environment file loaded before resolution.
+  group: global
+  family: global
+  default: null
+- key: profile
+  flags:
+  - --profile
+  help: Effective standards/compliance profile.
+  group: global
+  family: global
+  default: baseline
+  choices: &id005
+  - baseline
+  - production
+  - hardening
+  - peer-claim
+- key: tenant
+  flags:
+  - --tenant
+  help: Tenant identifier for multi-tenant operators.
+  group: global
+  family: global
+  default: null
+- key: issuer
+  flags:
+  - --issuer
+  help: Issuer override for discovery and contract generation.
+  group: global
+  family: global
+  default: null
+- key: surface_set
+  flags:
+  - --surface-set
+  help: Installable surface set. May be supplied multiple times.
+  group: global
+  family: global
+  default: &id009 []
+  choices: &id010
+  - admin-rpc
+  - diagnostics
+  - public-rest
+  action: append
+- key: slice
+  flags:
+  - --slice
+  help: Protocol slice. May be supplied multiple times.
+  group: global
+  family: global
+  default: &id007 []
+  choices: &id008
+  - device
+  - dpop
+  - jar
+  - mtls
+  - par
+  - rar
+  - token-exchange
+  action: append
+- key: extension
+  flags:
+  - --extension
+  help: Extension boundary slice. May be supplied multiple times.
+  group: global
+  family: global
+  default: &id001 []
+  choices: &id002
+  - a2a-adapter
+  - dns-privacy
+  - mcp-adapter
+  - set
+  - webauthn-passkeys
+  - webpush
+  action: append
+- key: plugin_mode
+  flags:
+  - --plugin-mode
+  help: Plugin composition mode.
+  group: global
+  family: global
+  default: mixed
+  choices: &id004
+  - admin-only
+  - diagnostics-only
+  - mixed
+  - public-only
+- key: runtime_style
+  flags:
+  - --runtime-style
+  help: Runtime style for installation or standalone serving.
+  group: global
+  family: global
+  default: standalone
+  choices: &id006
+  - plugin
+  - standalone
+- key: strict
+  flags:
+  - --strict
+  help: Fail closed when governance or certification checks fail.
+  group: global
+  family: global
+  default: true
+  action: store_true
+- key: no_strict
+  flags:
+  - --no-strict
+  help: Downgrade failures to warnings for exploratory use.
+  group: global
+  family: global
+  action: store_true
+- key: format
+  flags:
+  - --format
+  help: Output format.
+  group: global
+  family: global
+  default: json
+  choices: &id003
+  - json
+  - yaml
+  - text
+- key: output
+  flags:
+  - --output
+  help: Optional output file path.
+  group: global
+  family: global
+  default: null
+- key: verbose
+  flags:
+  - --verbose
+  - -v
+  help: Increase operator verbosity; may be repeated.
+  group: global
+  family: global
+  default: 0
+  action: count
+- key: trace
+  flags:
+  - --trace
+  help: Emit trace-oriented operator details.
+  group: global
+  family: global
+  action: store_true
+flag_catalog:
+  access_log:
+    key: access_log
+    flags:
+    - --access-log
+    help: Enable access logging for the selected runtime profile.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  activate:
+    key: activate
+    flags:
+    - --activate
+    help: Mark a generated or imported key active immediately.
+    group: keys
+    family: key-lifecycle
+    action: store_true
+  admin:
+    key: admin
+    flags:
+    - --admin
+    help: Enable the admin/control plane.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  alg:
+    key: alg
+    flags:
+    - --alg
+    help: JWA/JOSE algorithm identifier.
+    group: keys
+    family: key-lifecycle
+    default: null
+  artifact:
+    key: artifact
+    flags:
+    - --artifact
+    help: Release artifact subset.
+    group: release
+    family: release
+    default: all
+    choices:
+    - claims
+    - evidence
+    - contracts
+    - all
+  baseline_file:
+    key: baseline_file
+    flags:
+    - --baseline-file
+    help: Optional explicit baseline artifact for diff operations.
+    group: contracts
+    family: contracts
+    default: null
+  bundle_dir:
+    key: bundle_dir
+    flags:
+    - --bundle-dir
+    help: Explicit bundle output directory.
+    group: release
+    family: release
+    default: null
+  check:
+    key: check
+    flags:
+    - --check
+    help: Validate the selected runner profile and application factory without launching
+      runtime.
+    group: serve
+    family: serve-portable
+    action: store_true
+  checksum:
+    key: checksum
+    flags:
+    - --checksum
+    help: Expected checksum or checksum algorithm for import/export validation.
+    group: portability
+    family: import-export
+    default: null
+  color:
+    key: color
+    flags:
+    - --color
+    help: Color policy for terminal output.
+    group: global
+    family: global
+    default: auto
+    choices:
+    - auto
+    - always
+    - never
+  config:
+    key: config
+    flags:
+    - --config
+    help: Path to the runtime/configuration file.
+    group: global
+    family: global
+    default: null
+  cookies:
+    key: cookies
+    flags:
+    - --cookies
+    help: Enable cookie/session helpers in serve plans.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  curve:
+    key: curve
+    flags:
+    - --curve
+    help: Curve for EC/OKP keys.
+    group: keys
+    family: key-lifecycle
+    default: Ed25519
+    choices:
+    - Ed25519
+    - P-256
+    - P-384
+    - X25519
+  db_safe_start:
+    key: db_safe_start
+    flags:
+    - --db-safe-start
+    help: Require a safe database start posture.
+    group: serve
+    family: serve-portable
+    action: store_true
+  diagnostics:
+    key: diagnostics
+    flags:
+    - --diagnostics
+    help: Enable diagnostics surfaces.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  dry_run:
+    key: dry_run
+    flags:
+    - --dry-run
+    help: Resolve and emit the runtime plan without applying or launching state changes.
+    group: serve
+    family: serve-portable
+    action: store_true
+  enable_mtls:
+    key: enable_mtls
+    flags:
+    - --enable-mtls
+    help: Enable mTLS slice for the serve plan.
+    group: serve
+    family: serve-portable
+    default: false
+    action: BooleanOptionalAction
+  env_file:
+    key: env_file
+    flags:
+    - --env-file
+    help: Optional environment file loaded before resolution.
+    group: global
+    family: global
+    default: null
+  environment:
+    key: environment
+    flags:
+    - --environment
+    help: Deployment environment label.
+    group: plumbing
+    family: plumbing
+    default: development
+  execution_mode:
+    key: execution_mode
+    flags:
+    - --execution-mode
+    help: Peer execution mode.
+    group: evidence
+    family: evidence
+    default: self-check
+    choices:
+    - self-check
+    - dry-run
+    - record-only
+  extension:
+    key: extension
+    flags:
+    - --extension
+    help: Extension boundary slice. May be supplied multiple times.
+    group: global
+    family: global
+    default: *id001
+    choices: *id002
+    action: append
+  filter:
+    key: filter
+    flags:
+    - --filter
+    help: Simple substring filter applied to identifiers or names.
+    group: selection
+    family: query-selection
+    default: null
+  format:
+    key: format
+    flags:
+    - --format
+    help: Output format.
+    group: global
+    family: global
+    default: json
+    choices: *id003
+  from_file:
+    key: from_file
+    flags:
+    - --from-file
+    help: Load mutation input from a JSON or YAML file.
+    group: mutation
+    family: mutation-input
+    default: null
+  graceful_timeout:
+    key: graceful_timeout
+    flags:
+    - --graceful-timeout
+    help: Graceful shutdown timeout in seconds.
+    group: serve
+    family: serve-portable
+    default: 30
+    type: int
+  health:
+    key: health
+    flags:
+    - --health
+    help: Enable health endpoints in serve plans.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  host:
+    key: host
+    flags:
+    - --host
+    help: Bind host.
+    group: serve
+    family: serve-portable
+    default: 127.0.0.1
+  hypercorn_http2:
+    key: hypercorn_http2
+    flags:
+    - --hypercorn-http2
+    help: Enable HTTP/2 ALPN for Hypercorn.
+    group: serve
+    family: runtime-backend
+    default: true
+    action: BooleanOptionalAction
+  hypercorn_worker_class:
+    key: hypercorn_worker_class
+    flags:
+    - --hypercorn-worker-class
+    help: Hypercorn worker class.
+    group: serve
+    family: runtime-backend
+    default: asyncio
+    choices:
+    - asyncio
+    - trio
+    - uvloop
+  id:
+    key: id
+    flags:
+    - --id
+    help: Primary identifier for a single record.
+    group: selection
+    family: query-selection
+    default: null
+  if_exists:
+    key: if_exists
+    flags:
+    - --if-exists
+    help: Behavior when the target already exists.
+    group: mutation
+    family: mutation-input
+    default: fail
+    choices:
+    - fail
+    - replace
+    - merge
+    - skip
+  if_missing:
+    key: if_missing
+    flags:
+    - --if-missing
+    help: Behavior when the target does not already exist.
+    group: mutation
+    family: mutation-input
+    default: fail
+    choices:
+    - fail
+    - create
+    - skip
+  include_secrets:
+    key: include_secrets
+    flags:
+    - --include-secrets
+    help: Include secret material where the selected surface permits it.
+    group: portability
+    family: import-export
+    action: store_true
+  input_path:
+    key: input_path
+    flags:
+    - --input
+    help: Input path for import, validation, or diff operations.
+    group: portability
+    family: import-export
+    default: null
+  issuer:
+    key: issuer
+    flags:
+    - --issuer
+    help: Issuer override for discovery and contract generation.
+    group: global
+    family: global
+    default: null
+  jwks_refresh_seconds:
+    key: jwks_refresh_seconds
+    flags:
+    - --jwks-refresh-seconds
+    help: JWKS refresh cadence in seconds.
+    group: serve
+    family: serve-portable
+    default: 300
+    type: int
+  kid:
+    key: kid
+    flags:
+    - --kid
+    help: Explicit key identifier.
+    group: keys
+    family: key-lifecycle
+    default: null
+  kind:
+    key: kind
+    flags:
+    - --kind
+    help: Contract artifact kind.
+    group: contracts
+    family: contracts
+    default: all
+    choices:
+    - openapi
+    - openrpc
+    - all
+  kty:
+    key: kty
+    flags:
+    - --kty
+    help: JWK key type.
+    group: keys
+    family: key-lifecycle
+    default: OKP
+    choices:
+    - RSA
+    - EC
+    - OKP
+    - oct
+  lifespan:
+    key: lifespan
+    flags:
+    - --lifespan
+    help: ASGI lifespan policy.
+    group: serve
+    family: serve-portable
+    default: auto
+    choices:
+    - auto
+    - 'on'
+    - 'off'
+  limit:
+    key: limit
+    flags:
+    - --limit
+    help: Maximum number of results to return.
+    group: selection
+    family: query-selection
+    default: 50
+    type: int
+  log_level:
+    key: log_level
+    flags:
+    - --log-level
+    help: Operator log level for serve plans.
+    group: serve
+    family: serve-portable
+    default: INFO
+  metrics:
+    key: metrics
+    flags:
+    - --metrics
+    help: Enable metrics in serve plans.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  name:
+    key: name
+    flags:
+    - --name
+    help: Optional named release gate or artifact selector.
+    group: plumbing
+    family: plumbing
+    default: null
+  no_strict:
+    key: no_strict
+    flags:
+    - --no-strict
+    help: Downgrade failures to warnings for exploratory use.
+    group: global
+    family: global
+    action: store_true
+  offline:
+    key: offline
+    flags:
+    - --offline
+    help: Avoid network or external peer execution assumptions.
+    group: global
+    family: global
+    action: store_true
+  offset:
+    key: offset
+    flags:
+    - --offset
+    help: Result offset for list operations.
+    group: selection
+    family: query-selection
+    default: 0
+    type: int
+  output:
+    key: output
+    flags:
+    - --output
+    help: Optional output file path.
+    group: global
+    family: global
+    default: null
+  peer_profile:
+    key: peer_profile
+    flags:
+    - --peer-profile
+    help: Peer profile selector. May be supplied multiple times.
+    group: evidence
+    family: evidence
+    default: []
+    action: append
+  pid_file:
+    key: pid_file
+    flags:
+    - --pid-file
+    help: Optional PID file written for the launched runtime.
+    group: serve
+    family: serve-portable
+    default: null
+  plugin_mode:
+    key: plugin_mode
+    flags:
+    - --plugin-mode
+    help: Plugin composition mode.
+    group: global
+    family: global
+    default: mixed
+    choices: *id004
+  port:
+    key: port
+    flags:
+    - --port
+    help: Bind port.
+    group: serve
+    family: serve-portable
+    default: 8000
+    type: int
+  profile:
+    key: profile
+    flags:
+    - --profile
+    help: Effective standards/compliance profile.
+    group: global
+    family: global
+    default: baseline
+    choices: *id005
+  proxy_headers:
+    key: proxy_headers
+    flags:
+    - --proxy-headers
+    help: Honor proxy forwarding headers.
+    group: serve
+    family: serve-portable
+    action: store_true
+  public:
+    key: public
+    flags:
+    - --public
+    help: Enable the public REST/auth plane.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  publish:
+    key: publish
+    flags:
+    - --publish
+    help: Publish JWKS after a successful key mutation.
+    group: keys
+    family: key-lifecycle
+    action: store_true
+  redact:
+    key: redact
+    flags:
+    - --redact
+    help: Redact secret material from exported output.
+    group: portability
+    family: import-export
+    action: store_true
+  repo_root:
+    key: repo_root
+    flags:
+    - --repo-root
+    help: Repository root for governance automation.
+    group: plumbing
+    family: plumbing
+    default: null
+  report_dir:
+    key: report_dir
+    flags:
+    - --report-dir
+    help: Directory for generated reports.
+    group: plumbing
+    family: plumbing
+    default: null
+  require_tls:
+    key: require_tls
+    flags:
+    - --require-tls
+    help: Require TLS on the public plane.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  retire_after:
+    key: retire_after
+    flags:
+    - --retire-after
+    help: Retire-after hint or timestamp recorded with the key.
+    group: keys
+    family: key-lifecycle
+    default: null
+  rpc:
+    key: rpc
+    flags:
+    - --rpc
+    help: Enable the JSON-RPC control plane.
+    group: serve
+    family: serve-portable
+    default: true
+    action: BooleanOptionalAction
+  runtime_style:
+    key: runtime_style
+    flags:
+    - --runtime-style
+    help: Runtime style for installation or standalone serving.
+    group: global
+    family: global
+    default: standalone
+    choices: *id006
+  scope:
+    key: scope
+    flags:
+    - --scope
+    help: Verification scope.
+    group: verify
+    family: verify
+    default: all
+    choices:
+    - governance
+    - claims
+    - runtime-foundation
+    - feature-surface-modularity
+    - boundary-enforcement
+    - wrapper-hygiene
+    - contract-sync
+    - contracts
+    - evidence-peer
+    - project-tree-layout
+    - migration-plan
+    - state-reports
+    - test-classification
+    - release-gates
+    - all
+  server:
+    key: server
+    flags:
+    - --server
+    help: Runner profile used to qualify and launch runtime.
+    group: serve
+    family: serve-portable
+    default: uvicorn
+    choices:
+    - hypercorn
+    - tigrcorn
+    - uvicorn
+  set_item:
+    key: set_item
+    flags:
+    - --set
+    help: Inline mutation field assignment in key=value form. May be supplied multiple
+      times.
+    group: mutation
+    family: mutation-input
+    default: []
+    metavar: key=value
+    action: append
+  signing_key:
+    key: signing_key
+    flags:
+    - --signing-key
+    help: Optional Ed25519 private signing key path or seed.
+    group: release
+    family: release
+    default: null
+  slice:
+    key: slice
+    flags:
+    - --slice
+    help: Protocol slice. May be supplied multiple times.
+    group: global
+    family: global
+    default: *id007
+    choices: *id008
+    action: append
+  sort:
+    key: sort
+    flags:
+    - --sort
+    help: Sort key for list operations.
+    group: selection
+    family: query-selection
+    default: id
+    choices:
+    - id
+    - name
+    - status
+    - created_at
+    - updated_at
+  status_filter:
+    key: status_filter
+    flags:
+    - --status
+    help: Status filter for list operations.
+    group: selection
+    family: query-selection
+    default: null
+  strict:
+    key: strict
+    flags:
+    - --strict
+    help: Fail closed when governance or certification checks fail.
+    group: global
+    family: global
+    default: true
+    action: store_true
+  surface_set:
+    key: surface_set
+    flags:
+    - --surface-set
+    help: Installable surface set. May be supplied multiple times.
+    group: global
+    family: global
+    default: *id009
+    choices: *id010
+    action: append
+  tenant:
+    key: tenant
+    flags:
+    - --tenant
+    help: Tenant identifier for multi-tenant operators.
+    group: global
+    family: global
+    default: null
+  tier:
+    key: tier
+    flags:
+    - --tier
+    help: Evidence tier selector.
+    group: evidence
+    family: evidence
+    default: all
+    choices:
+    - '3'
+    - '4'
+    - all
+  tigrcorn_contract:
+    key: tigrcorn_contract
+    flags:
+    - --tigrcorn-contract
+    help: Preferred Tigrcorn adapter contract.
+    group: serve
+    family: runtime-backend
+    default: auto
+    choices:
+    - auto
+    - serve
+    - run
+    - server
+  tigrcorn_mode:
+    key: tigrcorn_mode
+    flags:
+    - --tigrcorn-mode
+    help: Preferred Tigrcorn runtime mode hint.
+    group: serve
+    family: runtime-backend
+    default: asgi
+    choices:
+    - asgi
+    - auto
+  timeout:
+    key: timeout
+    flags:
+    - --timeout
+    help: Maximum wait time in seconds for supported long-running operations.
+    group: mutation
+    family: mutation-input
+    default: 30
+    type: int
+  title:
+    key: title
+    flags:
+    - --title
+    help: Human-readable title.
+    group: governance
+    family: governance
+    default: null
+  trace:
+    key: trace
+    flags:
+    - --trace
+    help: Emit trace-oriented operator details.
+    group: global
+    family: global
+    action: store_true
+  uds:
+    key: uds
+    flags:
+    - --uds
+    help: Optional Unix domain socket path.
+    group: serve
+    family: serve-portable
+    default: null
+  use:
+    key: use
+    flags:
+    - --use
+    help: JWK use classification.
+    group: keys
+    family: key-lifecycle
+    default: sig
+    choices:
+    - sig
+    - enc
+  uvicorn_http:
+    key: uvicorn_http
+    flags:
+    - --uvicorn-http
+    help: Uvicorn HTTP protocol implementation.
+    group: serve
+    family: runtime-backend
+    default: auto
+    choices:
+    - auto
+    - h11
+    - httptools
+  uvicorn_loop:
+    key: uvicorn_loop
+    flags:
+    - --uvicorn-loop
+    help: Uvicorn event-loop implementation.
+    group: serve
+    family: runtime-backend
+    default: auto
+    choices:
+    - auto
+    - asyncio
+    - uvloop
+  uvicorn_ws:
+    key: uvicorn_ws
+    flags:
+    - --uvicorn-ws
+    help: Uvicorn WebSocket implementation.
+    group: serve
+    family: runtime-backend
+    default: auto
+    choices:
+    - auto
+    - websockets
+    - wsproto
+    - none
+  verbose:
+    key: verbose
+    flags:
+    - --verbose
+    - -v
+    help: Increase operator verbosity; may be repeated.
+    group: global
+    family: global
+    default: 0
+    action: count
+  wait:
+    key: wait
+    flags:
+    - --wait
+    help: Wait for completion when the operation supports asynchronous execution.
+    group: mutation
+    family: mutation-input
+    action: store_true
+  workers:
+    key: workers
+    flags:
+    - --workers
+    help: Process count for the selected runtime profile.
+    group: serve
+    family: serve-portable
+    default: 1
+    type: int
+  'yes':
+    key: 'yes'
+    flags:
+    - --yes
+    help: Assume yes for state-changing confirmations.
+    group: mutation
+    family: mutation-input
+    action: store_true
+commands:
+- name: serve
+  help: Launch the selected runner-backed ASGI runtime.
+  description: Resolve deployment, materialize a runner-qualified runtime plan, validate
+    the selected profile, and optionally launch runtime.
+  handler: serve
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags:
+  - repo_root
+  - report_dir
+  - environment
+  - server
+  - host
+  - port
+  - workers
+  - uds
+  - log_level
+  - access_log
+  - proxy_headers
+  - lifespan
+  - graceful_timeout
+  - pid_file
+  - health
+  - metrics
+  - public
+  - admin
+  - rpc
+  - diagnostics
+  - require_tls
+  - enable_mtls
+  - cookies
+  - jwks_refresh_seconds
+  - dry_run
+  - check
+  - db_safe_start
+  - uvicorn_loop
+  - uvicorn_http
+  - uvicorn_ws
+  - hypercorn_worker_class
+  - hypercorn_http2
+  - tigrcorn_contract
+  - tigrcorn_mode
+  verbs: []
+  family: runtime
+  examples:
+  - tigrbl-auth serve --server uvicorn --check
+  - tigrbl-auth serve --server hypercorn --host 0.0.0.0 --port 8443
+  - tigrbl-auth serve --server tigrcorn --dry-run --format yaml
+  output:
+    name: runtime-launch
+    description: Runtime plan, runner diagnostics, and launch/evidence metadata.
+    fields:
+    - command
+    - server
+    - launch_mode
+    - runtime_plan
+    - selected_runner_profile
+    - runner_profile_report_paths
+    media_types:
+    - json
+    - yaml
+    - text
+  exit_codes:
+  - code: 0
+    meaning: Operation completed successfully.
+  - code: 1
+    meaning: Operation failed or verification did not pass.
+  - code: 2
+    meaning: CLI argument or contract validation failed before execution.
+- name: verify
+  help: Run verification scopes against the repository boundary.
+  description: Execute one or more verification scopes and emit structured results.
+  handler: verify
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags:
+  - repo_root
+  - report_dir
+  - scope
+  verbs: []
+  family: governance
+  examples: []
+  output:
+    name: verification-report
+    description: Verification result payload with summary, failures, and warnings.
+    fields:
+    - command
+    - passed
+    - summary
+    - failures
+    media_types:
+    - json
+    - yaml
+    - text
+  exit_codes:
+  - code: 0
+    meaning: Operation completed successfully.
+  - code: 1
+    meaning: Operation failed or verification did not pass.
+  - code: 2
+    meaning: CLI argument or contract validation failed before execution.
+- name: gate
+  help: Run release gate checks.
+  description: Run one release gate or the full ordered release gate catalog.
+  handler: gate
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags:
+  - repo_root
+  - report_dir
+  - name
+  verbs: []
+  family: governance
+  examples: []
+  output:
+    name: verification-report
+    description: Verification result payload with summary, failures, and warnings.
+    fields:
+    - command
+    - passed
+    - summary
+    - failures
+    media_types:
+    - json
+    - yaml
+    - text
+  exit_codes:
+  - code: 0
+    meaning: Operation completed successfully.
+  - code: 1
+    meaning: Operation failed or verification did not pass.
+  - code: 2
+    meaning: CLI argument or contract validation failed before execution.
+- name: spec
+  help: Generate, diff, and validate public contract artifacts.
+  description: Operate on the OpenAPI and OpenRPC contract surfaces.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: generate
+    help: Generate contract artifacts.
+    description: Generate OpenAPI/OpenRPC artifacts for the selected deployment.
+    handler: spec.generate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - kind
+    - report_dir
+    output:
+      name: contract-artifact
+      description: OpenAPI/OpenRPC contract generation or validation payload.
+      fields:
+      - command
+      - generated
+      - reports
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: contracts
+  - name: validate
+    help: Validate generated contracts.
+    description: Validate generated contracts against repository expectations.
+    handler: spec.validate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - kind
+    - report_dir
+    output:
+      name: contract-artifact
+      description: OpenAPI/OpenRPC contract generation or validation payload.
+      fields:
+      - command
+      - generated
+      - reports
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: contracts
+  - name: diff
+    help: Diff generated contracts.
+    description: Regenerate contracts and compare them to committed artifacts.
+    handler: spec.diff
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - kind
+    - baseline_file
+    - report_dir
+    output:
+      name: contract-artifact
+      description: OpenAPI/OpenRPC contract generation or validation payload.
+      fields:
+      - command
+      - generated
+      - reports
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: contracts
+  - name: report
+    help: Write contract summary reports.
+    description: Summarize active contract contents and profile coverage.
+    handler: spec.report
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - kind
+    - report_dir
+    output:
+      name: contract-artifact
+      description: OpenAPI/OpenRPC contract generation or validation payload.
+      fields:
+      - command
+      - generated
+      - reports
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: contracts
+  family: contracts
+  examples: []
+  output: null
+  exit_codes: []
+- name: claims
+  help: Lint and materialize effective claims.
+  description: Operate on the claims plane.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: lint
+    help: Run claims lint.
+    description: Validate declared claims against mappings and boundaries.
+    handler: claims.lint
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  - name: show
+    help: Write the effective claims manifest.
+    description: Materialize the effective claims manifest for the active deployment.
+    handler: claims.show
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: claims-artifact
+      description: Claims/evidence payload describing effective certification state.
+      fields:
+      - command
+      - claims_manifest
+      - evidence_manifest
+      - active_targets
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  - name: status
+    help: Summarize the claims plane.
+    description: Summarize declared, effective, and promotable claims.
+    handler: claims.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: claims-artifact
+      description: Claims/evidence payload describing effective certification state.
+      fields:
+      - command
+      - claims_manifest
+      - evidence_manifest
+      - active_targets
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  family: governance
+  examples: []
+  output: null
+  exit_codes: []
+- name: evidence
+  help: Build evidence manifests and peer profile artifacts.
+  description: Operate on Tier 3/Tier 4 evidence automation.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: bundle
+    help: Build an evidence bundle.
+    description: Build a release/evidence bundle filtered by the effective deployment.
+    handler: evidence.bundle
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - tier
+    - bundle_dir
+    output:
+      name: release-artifact
+      description: Release bundle, signing, or recertification payload.
+      fields:
+      - command
+      - bundle_dir
+      - summary
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: evidence
+  - name: status
+    help: Summarize evidence readiness.
+    description: Summarize Tier 3/Tier 4 evidence readiness.
+    handler: evidence.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - tier
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: evidence
+  - name: verify
+    help: Verify evidence and peer references.
+    description: Run evidence/peer readiness checks.
+    handler: evidence.verify
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: evidence
+  - name: peer-status
+    help: Summarize peer profile execution readiness.
+    description: Summarize configured peer execution profiles and bundle refs.
+    handler: evidence.peer_status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: evidence
+  - name: peer-execute
+    help: Materialize peer execution manifests.
+    description: Materialize peer execution manifests for configured profiles.
+    handler: evidence.peer_execute
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - peer_profile
+    - execution_mode
+    - report_dir
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: evidence
+  family: evidence
+  examples: []
+  output: null
+  exit_codes: []
+- name: adr
+  help: List, inspect, create, and index ADRs.
+  description: Architecture decision record operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: list
+    help: List ADRs.
+    description: List ADRs and their titles.
+    handler: adr.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  - name: show
+    help: Show a single ADR.
+    description: Render a selected ADR.
+    handler: adr.show
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  - name: new
+    help: Create a new ADR template.
+    description: Create a new ADR markdown document from a template.
+    handler: adr.new
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - title
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  - name: index
+    help: Generate the ADR index.
+    description: Generate the ADR index markdown and JSON summaries.
+    handler: adr.index
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: governance
+  family: governance
+  examples: []
+  output: null
+  exit_codes: []
+- name: doctor
+  help: Run an aggregated repository health summary.
+  description: Aggregate core verification, runtime profile, contracts, evidence,
+    and gate status.
+  handler: doctor
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags:
+  - repo_root
+  - report_dir
+  verbs: []
+  family: governance
+  examples: []
+  output:
+    name: verification-report
+    description: Verification result payload with summary, failures, and warnings.
+    fields:
+    - command
+    - passed
+    - summary
+    - failures
+    media_types:
+    - json
+    - yaml
+    - text
+  exit_codes:
+  - code: 0
+    meaning: Operation completed successfully.
+  - code: 1
+    meaning: Operation failed or verification did not pass.
+  - code: 2
+    meaning: CLI argument or contract validation failed before execution.
+- name: bootstrap
+  help: Bootstrap deployment artifacts and checkpoint lifecycle state.
+  description: Materialize and verify baseline bootstrap manifests for deployment
+    or plugin installation.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: status
+    help: Summarize bootstrap readiness.
+    description: Summarize bootstrap readiness for the selected profile and surfaces.
+    handler: bootstrap.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: manifest
+    help: Write bootstrap manifests.
+    description: Write deployment, claims, evidence, and contract manifests for the
+      selected profile.
+    handler: bootstrap.manifest
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - bundle_dir
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: apply
+    help: Apply bootstrap materialization.
+    description: Materialize bootstrap manifests and record an applied bootstrap checkpoint.
+    handler: bootstrap.apply
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - bundle_dir
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: verify
+    help: Verify bootstrap artifacts.
+    description: Verify bootstrap manifests, effective artifacts, and applied checkpoint
+      state.
+    handler: bootstrap.verify
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: operator
+  family: operator
+  examples: []
+  output: null
+  exit_codes: []
+- name: migrate
+  help: Inspect migration readiness and plans.
+  description: Migration-chain status, planning, application, and verification operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: status
+    help: Show migration status.
+    description: List migration revisions and current-to-target move status.
+    handler: migrate.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: plan
+    help: Emit migration plan details.
+    description: Emit the structured migration plan and replacement order.
+    handler: migrate.plan
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: apply
+    help: Apply the migration checkpoint plan.
+    description: Record a migration application checkpoint for the structured plan.
+    handler: migrate.apply
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: operator
+  - name: verify
+    help: Verify migration artifacts.
+    description: Run migration-plan and project-tree verification.
+    handler: migrate.verify
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: operator
+  family: operator
+  examples: []
+  output: null
+  exit_codes: []
+- name: release
+  help: Build release bundles and recertification reports.
+  description: Release automation and recertification operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: bundle
+    help: Build a release bundle.
+    description: Build a release bundle containing claims, evidence, contracts, ADR
+      index, and peer refs.
+    handler: release.bundle
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - bundle_dir
+    - artifact
+    output:
+      name: release-artifact
+      description: Release bundle, signing, or recertification payload.
+      fields:
+      - command
+      - bundle_dir
+      - summary
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: release
+  - name: sign
+    help: Sign a release bundle.
+    description: Create externally verifiable Ed25519 attestations for an existing
+      release bundle.
+    handler: release.sign
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - bundle_dir
+    - signing_key
+    output:
+      name: release-artifact
+      description: Release bundle, signing, or recertification payload.
+      fields:
+      - command
+      - bundle_dir
+      - summary
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: release
+  - name: verify
+    help: Verify a signed release bundle.
+    description: Verify release-bundle attestations and manifest integrity for an
+      existing signed bundle.
+    handler: release.verify
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - bundle_dir
+    output:
+      name: release-artifact
+      description: Release bundle, signing, or recertification payload.
+      fields:
+      - command
+      - bundle_dir
+      - summary
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: release
+  - name: status
+    help: Summarize release bundle status.
+    description: Summarize the current release bundle and release-gate posture.
+    handler: release.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: release-artifact
+      description: Release bundle, signing, or recertification payload.
+      fields:
+      - command
+      - bundle_dir
+      - summary
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: release
+  - name: recertify
+    help: Run recertification checks.
+    description: Re-run recertification for Tigrbl and standards-boundary changes.
+    handler: release.recertify
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: release
+  family: release
+  examples: []
+  output: null
+  exit_codes: []
+- name: tenant
+  help: Manage tenant records.
+  description: Stateful durable operator-plane tenant lifecycle operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: create
+    help: Create a tenant record.
+    description: Create a durable operator-plane tenant record.
+    handler: tenant.create
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_exists
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: update
+    help: Update a tenant record.
+    description: Update a durable operator-plane tenant record.
+    handler: tenant.update
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_missing
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: delete
+    help: Delete a tenant record.
+    description: Delete a durable operator-plane tenant record.
+    handler: tenant.delete
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: get
+    help: Get a tenant record.
+    description: Return a single durable operator-plane tenant record.
+    handler: tenant.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List tenant records.
+    description: List durable operator-plane tenant records.
+    handler: tenant.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: enable
+    help: Enable a tenant.
+    description: Mark a tenant record enabled.
+    handler: tenant.enable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: disable
+    help: Disable a tenant.
+    description: Mark a tenant record disabled.
+    handler: tenant.disable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: client
+  help: Manage client records.
+  description: Stateful durable operator-plane client lifecycle operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: create
+    help: Create a client record.
+    description: Create a durable operator-plane client record.
+    handler: client.create
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_exists
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: update
+    help: Update a client record.
+    description: Update a durable operator-plane client record.
+    handler: client.update
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_missing
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: delete
+    help: Delete a client record.
+    description: Delete a durable operator-plane client record.
+    handler: client.delete
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: get
+    help: Get a client record.
+    description: Return a single durable operator-plane client record.
+    handler: client.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List client records.
+    description: List durable operator-plane client records.
+    handler: client.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: rotate-secret
+    help: Rotate a client secret.
+    description: Rotate durable operator-plane client secret material.
+    handler: client.rotate_secret
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: enable
+    help: Enable a client.
+    description: Mark a client record enabled.
+    handler: client.enable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: disable
+    help: Disable a client.
+    description: Mark a client record disabled.
+    handler: client.disable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: identity
+  help: Manage identity records.
+  description: Stateful durable operator-plane identity lifecycle operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: create
+    help: Create an identity record.
+    description: Create a durable operator-plane identity record.
+    handler: identity.create
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_exists
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: update
+    help: Update an identity record.
+    description: Update a durable operator-plane identity record.
+    handler: identity.update
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_missing
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: delete
+    help: Delete an identity record.
+    description: Delete a durable operator-plane identity record.
+    handler: identity.delete
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: get
+    help: Get an identity record.
+    description: Return a single durable operator-plane identity record.
+    handler: identity.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List identity records.
+    description: List durable operator-plane identity records.
+    handler: identity.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: set-password
+    help: Set an identity password.
+    description: Set or rotate a durable operator-plane identity password hash.
+    handler: identity.set_password
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: lock
+    help: Lock an identity.
+    description: Mark an identity record locked.
+    handler: identity.lock
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: unlock
+    help: Unlock an identity.
+    description: Mark an identity record unlocked.
+    handler: identity.unlock
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: flow
+  help: Manage flow records.
+  description: Stateful durable operator-plane flow lifecycle operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: create
+    help: Create a flow record.
+    description: Create a durable operator-plane flow record.
+    handler: flow.create
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_exists
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: update
+    help: Update a flow record.
+    description: Update a durable operator-plane flow record.
+    handler: flow.update
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - if_missing
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: delete
+    help: Delete a flow record.
+    description: Delete a durable operator-plane flow record.
+    handler: flow.delete
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: get
+    help: Get a flow record.
+    description: Return a single durable operator-plane flow record.
+    handler: flow.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List flow records.
+    description: List durable operator-plane flow records.
+    handler: flow.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: enable
+    help: Enable a flow.
+    description: Mark a flow record enabled.
+    handler: flow.enable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: disable
+    help: Disable a flow.
+    description: Mark a flow record disabled.
+    handler: flow.disable
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: session
+  help: Manage session records.
+  description: Stateful durable operator-plane session control operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: get
+    help: Get a session record.
+    description: Return a single durable operator-plane session record.
+    handler: session.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List session records.
+    description: List durable operator-plane session records.
+    handler: session.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: revoke
+    help: Revoke a session.
+    description: Mark a durable operator-plane session revoked.
+    handler: session.revoke
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: revoke-all
+    help: Revoke all sessions.
+    description: Mark all durable operator-plane sessions revoked.
+    handler: session.revoke_all
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - status_filter
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: token
+  help: Manage token records.
+  description: Stateful durable operator-plane token control operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: get
+    help: Get a token record.
+    description: Return a single durable operator-plane token record.
+    handler: token.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List token records.
+    description: List durable operator-plane token records.
+    handler: token.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: introspect
+    help: Introspect a token.
+    description: Return active/revoked status and metadata for a token record.
+    handler: token.introspect
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: revoke
+    help: Revoke a token.
+    description: Mark a durable operator-plane token revoked.
+    handler: token.revoke
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: exchange
+    help: Exchange a token.
+    description: Create a derived durable operator-plane token exchange record.
+    handler: token.exchange
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - set_item
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: keys
+  help: Manage key lifecycle and JWKS publication.
+  description: Stateful durable operator-plane key lifecycle and JWKS publication
+    operators.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: generate
+    help: Generate a key record.
+    description: Generate durable operator-plane key metadata and optional JWKS publication.
+    handler: keys.generate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - kid
+    - alg
+    - use
+    - kty
+    - curve
+    - activate
+    - retire_after
+    - publish
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: import
+    help: Import key material.
+    description: Import durable operator-plane key metadata from a JSON or YAML file.
+    handler: keys.import
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - from_file
+    - input_path
+    - activate
+    - publish
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: export
+    help: Export key material.
+    description: Export durable operator-plane key metadata to a JSON or YAML file.
+    handler: keys.export
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - output
+    - format
+    - include_secrets
+    - redact
+    - checksum
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: rotate
+    help: Rotate active key material.
+    description: Generate successor key metadata and retire the previous active key.
+    handler: keys.rotate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - kid
+    - alg
+    - use
+    - kty
+    - curve
+    - activate
+    - retire_after
+    - publish
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: retire
+    help: Retire a key.
+    description: Mark a durable operator-plane key retired.
+    handler: keys.retire
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    - publish
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: publish-jwks
+    help: Publish JWKS.
+    description: Publish the current durable operator-plane JWKS document.
+    handler: keys.publish_jwks
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - output
+    - format
+    - include_secrets
+    - redact
+    - checksum
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: get
+    help: Get a key record.
+    description: Return a single durable operator-plane key record.
+    handler: keys.get
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: list
+    help: List key records.
+    description: List durable operator-plane key records.
+    handler: keys.list
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - filter
+    - limit
+    - offset
+    - sort
+    - status_filter
+    output:
+      name: resource-collection
+      description: Collection output for list/status operations.
+      fields:
+      - command
+      - resource
+      - items
+      - total
+      - offset
+      - limit
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: delete
+    help: Delete a key record.
+    description: Delete a durable operator-plane key record.
+    handler: keys.delete
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - id
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: discovery
+  help: Show, validate, publish, and diff discovery artifacts.
+  description: Discovery and metadata operators bound to repository snapshots.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: show
+    help: Show discovery metadata.
+    description: Show the active discovery snapshot for the selected profile.
+    handler: discovery.show
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: validate
+    help: Validate discovery metadata.
+    description: Validate discovery metadata and supporting contracts.
+    handler: discovery.validate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: publish
+    help: Publish discovery metadata.
+    description: Publish discovery metadata into a release-ready output directory.
+    handler: discovery.publish
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - output
+    - format
+    - checksum
+    - 'yes'
+    - dry_run
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: diff
+    help: Diff discovery metadata.
+    description: Diff active discovery metadata against a provided or published baseline.
+    handler: discovery.diff
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - input_path
+    - report_dir
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: import
+  help: Validate and run import portability workflows.
+  description: Import durable operator-plane state from portable artifacts.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: validate
+    help: Validate import input.
+    description: Validate an import artifact without mutating state.
+    handler: import.validate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - input_path
+    - format
+    - checksum
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: run
+    help: Run an import.
+    description: Import durable operator-plane state from a portable artifact.
+    handler: import.run
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - input_path
+    - format
+    - checksum
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: status
+    help: Show import status.
+    description: Show the last durable operator-plane import status.
+    handler: import.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []
+- name: export
+  help: Validate and run export portability workflows.
+  description: Export durable operator-plane state into portable artifacts.
+  handler: null
+  aliases: []
+  include_global: true
+  global_flags:
+  - config
+  - env_file
+  - profile
+  - tenant
+  - issuer
+  - surface_set
+  - slice
+  - extension
+  - plugin_mode
+  - runtime_style
+  - strict
+  - no_strict
+  - format
+  - output
+  - verbose
+  - trace
+  flags: []
+  verbs:
+  - name: validate
+    help: Validate export configuration.
+    description: Validate export configuration and current operator state.
+    handler: export.validate
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - output
+    - format
+    - include_secrets
+    - redact
+    - checksum
+    - report_dir
+    output:
+      name: verification-report
+      description: Verification result payload with summary, failures, and warnings.
+      fields:
+      - command
+      - passed
+      - summary
+      - failures
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  - name: run
+    help: Run an export.
+    description: Export durable operator-plane state to a portable artifact.
+    handler: export.run
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    - output
+    - format
+    - include_secrets
+    - redact
+    - checksum
+    - 'yes'
+    - dry_run
+    - wait
+    - timeout
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    - code: 3
+      meaning: Requested record or dependent resource was not found.
+    examples: []
+    family: admin
+  - name: status
+    help: Show export status.
+    description: Show the last durable operator-plane export status.
+    handler: export.status
+    aliases: []
+    include_global: true
+    global_flags:
+    - config
+    - env_file
+    - profile
+    - tenant
+    - issuer
+    - surface_set
+    - slice
+    - extension
+    - plugin_mode
+    - runtime_style
+    - strict
+    - no_strict
+    - format
+    - output
+    - verbose
+    - trace
+    flags:
+    - repo_root
+    output:
+      name: resource-record
+      description: Single operator resource record with state and metadata.
+      fields:
+      - command
+      - resource
+      - record
+      - state_path
+      media_types:
+      - json
+      - yaml
+      - text
+    exit_codes:
+    - code: 0
+      meaning: Operation completed successfully.
+    - code: 1
+      meaning: Operation failed or verification did not pass.
+    - code: 2
+      meaning: CLI argument or contract validation failed before execution.
+    examples: []
+    family: admin
+  family: admin
+  examples: []
+  output: null
+  exit_codes: []

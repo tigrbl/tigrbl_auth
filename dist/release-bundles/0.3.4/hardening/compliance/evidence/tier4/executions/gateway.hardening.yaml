@@ -1,0 +1,46 @@
+schema_version: 1
+profile: gateway
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: gateway-peer
+counterpart_class: gateway
+required_targets:
+- RFC 6750
+- RFC 8414
+- RFC 8615
+- RFC 7517
+- RFC 9700
+- RFC 9728
+- OIDC Discovery 1.0
+required_artifacts:
+- tigrbl_auth/plugin.py
+- tigrbl_auth/gateway.py
+- tests/unit/test_openid_configuration.py
+- tests/unit/test_rfc9728_metadata_checkpoint.py
+- tests/unit/test_phase6_profile_discovery_runtime.py
+required_peer_artifacts:
+- http-transcript.yaml
+- gateway-config.yaml
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- gateway-discovery
+- gateway-jwks
+- gateway-protected-resource
+- gateway-hardening-discovery-truthfulness
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

@@ -1,13 +1,13 @@
 {
-  "generated_at": "20260331T165741Z",
-  "passed": true,
+  "generated_at": "20260407T091616Z",
+  "passed": false,
   "summary": {
     "static_manifest_passed": true,
-    "passed": true,
+    "passed": false,
     "profile": "base",
     "current_profile_identity": "base@py312",
     "environment_identity_present": true,
-    "current_python": "3.12.12",
+    "current_python": "3.12.5",
     "current_python_supported": true,
     "expected_supported_python_versions": [
       "3.10",
@@ -15,7 +15,7 @@
       "3.12"
     ],
     "expected_supported_python_count": 3,
-    "detected_supported_python_count": 3,
+    "detected_supported_python_count": 1,
     "declared_runtime_matrix_env_count": 14,
     "declared_test_lane_env_count": 15,
     "declared_certification_tox_env_count": 33,
@@ -47,23 +47,27 @@
     "runtime_surface_probe_failed_count": 0,
     "runtime_surface_probe_passed": true
   },
-  "failures": [],
-  "warnings": [],
+  "failures": [
+    "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
+  ],
+  "warnings": [
+    "The current container does not provide supported interpreter binaries for: 3.10, 3.11."
+  ],
   "detected_supported_pythons": [
     {
       "version": "3.10",
-      "available": true,
-      "path": "/root/.pyenv/shims/python3.10"
+      "available": false,
+      "path": null
     },
     {
       "version": "3.11",
-      "available": true,
-      "path": "/root/.pyenv/shims/python3.11"
+      "available": false,
+      "path": null
     },
     {
       "version": "3.12",
       "available": true,
-      "path": "/root/.pyenv/versions/3.12.12/bin/python3.12"
+      "path": "C:\\ProgramData\\chocolatey\\bin\\python3.12.EXE"
     }
   ],
   "dependency_manifest": {
@@ -905,17 +909,17 @@
   "identity": "base@py312",
   "environment_identity": {
     "python_version": "3.12",
-    "python_full_version": "3.12.12",
+    "python_full_version": "3.12.5",
     "python_tag": "py312",
     "implementation": "CPython",
-    "implementation_version": "3.12.12",
-    "executable": "/root/.pyenv/versions/3.12.12/bin/python3.12",
-    "platform": "Linux-6.12.47-x86_64-with-glibc2.39",
-    "platform_system": "Linux",
-    "platform_release": "6.12.47",
-    "platform_version": "#1 SMP Mon Oct 27 10:01:15 UTC 2025",
-    "machine": "x86_64",
-    "processor": "x86_64",
+    "implementation_version": "3.12.5",
+    "executable": ".venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "platform_system": "Windows",
+    "platform_release": "10",
+    "platform_version": "10.0.19045",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
     "tox_env": null,
     "matrix_profile": null,
     "install_profile": "base",
@@ -927,24 +931,24 @@
     "identity": "base@py312",
     "environment_identity": {
       "python_version": "3.12",
-      "python_full_version": "3.12.12",
+      "python_full_version": "3.12.5",
       "python_tag": "py312",
       "implementation": "CPython",
-      "implementation_version": "3.12.12",
-      "executable": "/root/.pyenv/versions/3.12.12/bin/python3.12",
-      "platform": "Linux-6.12.47-x86_64-with-glibc2.39",
-      "platform_system": "Linux",
-      "platform_release": "6.12.47",
-      "platform_version": "#1 SMP Mon Oct 27 10:01:15 UTC 2025",
-      "machine": "x86_64",
-      "processor": "x86_64",
+      "implementation_version": "3.12.5",
+      "executable": ".venv\\Scripts\\python.exe",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "platform_system": "Windows",
+      "platform_release": "10",
+      "platform_version": "10.0.19045",
+      "machine": "AMD64",
+      "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
       "tox_env": null,
       "matrix_profile": null,
       "install_profile": "base",
       "test_lane": null,
       "runner": null
     },
-    "python": "3.12.12",
+    "python": "3.12.5",
     "python_supported": true,
     "module_results": [
       {

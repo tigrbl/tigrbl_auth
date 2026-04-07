@@ -1,0 +1,38 @@
+schema_version: 1
+id: native
+title: Native app redirect, JWE, and issuer-parameter interop
+counterpart_id: native-client
+required_targets:
+- RFC 7636
+- RFC 8252
+- RFC 7516
+- RFC 9207
+required_artifacts:
+- tests/conformance/production/test_rfc8252_native_apps.py
+- tests/unit/test_oidc_id_token_encryption.py
+- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+scenario_ids:
+- native-loopback
+- native-custom-scheme
+- native-jwe-id-token
+- native-issuer-parameter
+scenario_target_map:
+  native-loopback:
+  - RFC 7636
+  - RFC 8252
+  native-custom-scheme:
+  - RFC 7636
+  - RFC 8252
+  native-jwe-id-token:
+  - RFC 7516
+  native-issuer-parameter:
+  - RFC 9207
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Native-app harness must exercise both loopback and custom-scheme redirects with
+  PKCE.

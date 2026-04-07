@@ -234,6 +234,8 @@ jobs:
         env:
           TIGRBL_AUTH_VALIDATED_ARTIFACT_DOWNLOAD_ROOT: .artifacts/validated-downloads
         run: tox -e py311-final-certification
+      - name: Verify truth chain
+        run: python scripts/verify_truth_chain.py --mode all
       - name: Upload compliance artifacts
         if: always()
         uses: actions/upload-artifact@v4

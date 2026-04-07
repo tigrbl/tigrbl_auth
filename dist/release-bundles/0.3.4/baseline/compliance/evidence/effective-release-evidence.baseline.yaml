@@ -1,0 +1,262 @@
+schema_version: 1
+package: tigrbl_auth
+profile_label: baseline
+effective_deployment:
+  profile: baseline
+  plugin_mode: mixed
+  runtime_style: standalone
+  surface_sets:
+  - public-rest
+  - admin-rpc
+  - diagnostics
+  protocol_slices: []
+  extensions: []
+  issuer: https://authn.example.com
+  protected_resource_identifier: https://authn.example.com/resource
+  strict_boundary_enforcement: true
+  surfaces:
+    surface_public_enabled: true
+    surface_admin_enabled: true
+    surface_rpc_enabled: true
+    surface_diagnostics_enabled: true
+    surface_operator_enabled: true
+    surface_plugin_mode: mixed
+  flags:
+    enable_rfc6749: true
+    enable_rfc6750: true
+    enable_rfc7636: true
+    enable_rfc8414: true
+    enable_rfc8615: true
+    enable_rfc7515: true
+    enable_rfc7516: true
+    enable_rfc7517: true
+    enable_rfc7518: true
+    enable_rfc7519: true
+    enable_oidc_core: true
+    enable_oidc_discovery: true
+    enable_oidc_session_management: true
+    enable_rfc7009: false
+    enable_rfc7521: false
+    enable_rfc7523: false
+    enable_rfc7662: false
+    enable_rfc7591: false
+    enable_rfc7592: false
+    enable_rfc8252: false
+    enable_rfc9068: false
+    enable_rfc9207: false
+    enable_rfc9728: false
+    enable_oidc_userinfo: false
+    enable_oidc_rp_initiated_logout: false
+    enable_rfc8628: false
+    enable_rfc8693: false
+    enable_rfc8705: false
+    enable_rfc8707: false
+    enable_rfc9101: false
+    enable_rfc9126: false
+    enable_rfc9396: false
+    enable_rfc9449: false
+    enable_rfc9700: false
+    enable_oidc_frontchannel_logout: false
+    enable_oidc_backchannel_logout: false
+    require_tls: true
+    enable_id_token_encryption: false
+    enable_rfc6750_query: false
+    enable_rfc6750_form: false
+    strict_boundary_enforcement: true
+    surface_public_enabled: true
+    surface_admin_enabled: true
+    surface_operator_enabled: true
+    surface_rpc_enabled: true
+    surface_diagnostics_enabled: true
+    surface_plugin_mode: mixed
+    oauth21_alignment_mode: tracked
+    enable_rfc7800: false
+    enable_rfc7952: false
+    enable_rfc8291: false
+    enable_rfc8812: false
+    enable_rfc8932: false
+    enable_rfc8523: false
+  active_capabilities:
+  - login
+  - authorize
+  - token
+  - openid-configuration
+  - oauth-authorization-server-metadata
+  - jwks
+  - diagnostics-health
+  active_routes:
+  - /login
+  - /authorize
+  - /token
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/jwks.json
+  - /system/health
+  active_contract_routes:
+  - /login
+  - /authorize
+  - /token
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/jwks.json
+  active_discovery_routes:
+  - /.well-known/openid-configuration
+  - /.well-known/oauth-authorization-server
+  - /.well-known/jwks.json
+  active_targets:
+  - RFC 6749
+  - RFC 6750
+  - RFC 7636
+  - RFC 8414
+  - RFC 8615
+  - RFC 7515
+  - RFC 7516
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  - RFC 6265
+  - OIDC Core 1.0
+  - OIDC Discovery 1.0
+  - OIDC Session Management
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  - ASGI 3 application package
+  - 'Runner profile: Uvicorn'
+  - 'Runner profile: Hypercorn'
+  - 'Runner profile: Tigrcorn'
+  - CLI operator surface
+  - Bootstrap and migration lifecycle
+  - Key lifecycle and JWKS publication
+  - Import/export portability
+  - Release bundle and signature verification
+  active_openrpc_methods:
+  - audit.export
+  - audit.list
+  - claims.lint
+  - claims.show
+  - client.list
+  - client.registration.delete
+  - client.registration.list
+  - client.registration.show
+  - client.registration.upsert
+  - client.show
+  - consent.list
+  - consent.revoke
+  - consent.show
+  - discovery.show
+  - evidence.status
+  - flow.list
+  - gate.run
+  - identity.list
+  - identity.show
+  - jwks.show
+  - keys.list
+  - keys.rotate
+  - profile.show
+  - release.bundle
+  - rpc.discover
+  - session.list
+  - session.show
+  - session.terminate
+  - target.list
+  - target.show
+  - tenant.list
+  - tenant.show
+  - token.exchange
+  - token.inspect
+  - token.list
+bundle_manifest:
+  bundles:
+  - target: RFC 6749
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oauth2-core/
+  - target: RFC 6750
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/bearer/
+  - target: RFC 7636
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/pkce/
+  - target: RFC 8414
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/discovery/
+  - target: RFC 8615
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/well-known/
+  - target: RFC 7515
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jose/
+  - target: RFC 7516
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jwe/
+  - target: RFC 7517
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jwks/
+  - target: RFC 7518
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jose/
+  - target: RFC 7519
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/jwt/
+  - target: OIDC Core 1.0
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-core/
+  - target: OIDC Discovery 1.0
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/discovery/
+  - target: OpenAPI 3.1 / 3.2 compatible public contract
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/contracts/openapi/
+  - target: OpenRPC 1.4.x admin/control-plane contract
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/contracts/openrpc/
+  - target: ASGI 3 application package
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/asgi-application/
+  - target: 'Runner profile: Uvicorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-uvicorn/
+  - target: 'Runner profile: Hypercorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-hypercorn/
+  - target: 'Runner profile: Tigrcorn'
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/runner-tigrcorn/
+  - target: CLI operator surface
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/cli-operator-surface/
+  - target: Bootstrap and migration lifecycle
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/bootstrap-migration/
+  - target: Key lifecycle and JWKS publication
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/key-lifecycle-jwks/
+  - target: Import/export portability
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/import-export-portability/
+  - target: Release bundle and signature verification
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/release-bundle-signing/
+  missing_refs: []

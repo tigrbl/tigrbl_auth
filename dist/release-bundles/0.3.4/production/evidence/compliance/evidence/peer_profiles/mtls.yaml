@@ -1,0 +1,31 @@
+schema_version: 1
+id: mtls
+title: mTLS-bound token profile
+counterpart_id: mtls-peer
+required_targets:
+- RFC 8705
+- RFC 9700
+required_artifacts:
+- tests/conformance/hardening/test_rfc8705_mtls.py
+- tests/security/test_phase12_sender_constraint_replay.py
+scenario_ids:
+- mtls-token
+- mtls-bound-resource
+- mtls-token-exchange
+scenario_target_map:
+  mtls-token:
+  - RFC 8705
+  mtls-bound-resource:
+  - RFC 8705
+  - RFC 9700
+  mtls-token-exchange:
+  - RFC 8705
+  - RFC 9700
+contract_profiles:
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Certificate-bound token verification must include peer certificate-chain provenance
+  and replay-safe resource access.

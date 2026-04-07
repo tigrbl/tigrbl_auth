@@ -1,0 +1,47 @@
+schema_version: 1
+profile: rp-session-logout
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: rp-session-logout-rp
+counterpart_class: web-rp-session-logout
+required_targets:
+- RFC 6265
+- OIDC Session Management
+- OIDC RP-Initiated Logout
+- OIDC Front-Channel Logout
+- OIDC Back-Channel Logout
+required_artifacts:
+- tests/conformance/production/test_rfc6265_cookies.py
+- tests/conformance/production/test_oidc_session_management.py
+- tests/conformance/production/test_oidc_rp_initiated_logout.py
+- tests/conformance/hardening/test_oidc_frontchannel_logout.py
+- tests/conformance/hardening/test_oidc_backchannel_logout.py
+- tests/negative/test_cookie_and_logout_abuse_cases.py
+required_peer_artifacts:
+- http-transcript.yaml
+- browser-trace.json
+- logout-tokens.json
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- session-state-check
+- rp-initiated-logout
+- frontchannel-fanout
+- backchannel-delivery
+- cookie-rotation-and-replay
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

@@ -17,6 +17,7 @@ from tigrbl_auth.cli.reports import (
     sign_release_bundle,
     verify_release_bundle_signatures,
 )
+from tigrbl_auth.cli.truth import materialize_truth_chain
 from tigrbl_auth.release_signing import load_signer
 
 PROFILES = ("baseline", "production", "hardening", "peer-claim")
@@ -42,7 +43,7 @@ def _emit(completed: subprocess.CompletedProcess[str]) -> None:
         print(completed.stderr, file=sys.stderr, end="")
 
 
-def _load(path: Path) -> dict:
+def _load(path: Path) -> dict[str, object]:
     if not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
@@ -54,69 +55,6 @@ def _current_version() -> str:
         if line.startswith("version") and "=" in line:
             return line.split("=", 1)[1].strip().strip('"')
     return "0.0.0"
-
-
-def _write_final_status() -> dict:
-    cert = _load(ROOT / "docs" / "compliance" / "certification_state_report.json")
-    gates = _load(ROOT / "docs" / "compliance" / "release_gate_report.json")
-    final_gate = _load(ROOT / "docs" / "compliance" / "final_release_gate_report.json")
-    non_rfc = _load(ROOT / "docs" / "compliance" / "non_rfc_status_report.json")
-    cert_summary = cert.get("summary", {}) if isinstance(cert, dict) else {}
-    non_rfc_summary = non_rfc.get("summary", {}) if isinstance(non_rfc, dict) else {}
-    fully_certifiable_now = bool(cert_summary.get("fully_certifiable_now", False))
-    fully_rfc_compliant_now = bool(cert_summary.get("fully_rfc_compliant_now", False))
-    fully_non_rfc_spec_compliant_now = bool(non_rfc_summary.get("certifiably_fully_non_rfc_spec_compliant_now", False))
-    strict_ready = bool(cert_summary.get("strict_independent_claims_ready", False))
-    final_release_ready = (
-        fully_certifiable_now
-        and fully_rfc_compliant_now
-        and fully_non_rfc_spec_compliant_now
-        and strict_ready
-        and bool(final_gate.get("passed", False))
-    )
-    payload = {
-        "schema_version": 1,
-        "passed": final_release_ready,
-        "summary": {
-            "final_release_ready": final_release_ready,
-            "fully_certifiable_now": fully_certifiable_now,
-            "fully_rfc_compliant_now": fully_rfc_compliant_now,
-            "fully_non_rfc_spec_compliant_now": fully_non_rfc_spec_compliant_now,
-            "strict_independent_claims_ready": strict_ready,
-            "release_gates_passed": bool(gates.get("passed", False)),
-            "final_release_gate_passed": bool(final_gate.get("passed", False)),
-        },
-        "details": list(final_gate.get("failures", []) if isinstance(final_gate.get("failures", []), list) else []),
-    }
-    target_json = ROOT / "docs" / "compliance" / "FINAL_RELEASE_STATUS_2026-03-25.json"
-    target_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    lines = [
-        "# Final Release Status — 2026-03-25",
-        "",
-        f"- Passed: `{payload['passed']}`",
-        "",
-        "## Summary",
-        "",
-    ]
-    lines.extend([f"- {key}: `{value}`" for key, value in payload["summary"].items()])
-    lines.extend([
-        "",
-        "## Honest interpretation",
-        "",
-        (
-            "This repository state is a **truthful final certification release**."
-            if final_release_ready
-            else "This repository state is a **truthful final certification aggregation / blocked certification release checkpoint**. It must not be described as a final certified release while any final-release gate remains closed."
-        ),
-        "",
-    ])
-    if payload["details"]:
-        lines.extend(["## Remaining blockers", ""])
-        lines.extend([f"- {item}" for item in payload["details"]])
-        lines.append("")
-    target_md = ROOT / "docs" / "compliance" / "FINAL_RELEASE_STATUS_2026-03-25.md"
-    target_md.write_text("\n".join(lines), encoding="utf-8")
-    return payload
 
 
 def main() -> int:
@@ -151,9 +89,9 @@ def main() -> int:
         verify_release_bundle_signatures(bundle_dir)
 
     run_final_release_readiness_gate(ROOT)
-    final_status = _write_final_status()
+    materialize_truth_chain(ROOT)
+    final_status = _load(ROOT / "docs" / "compliance" / "FINAL_RELEASE_STATUS_2026-03-25.json")
 
-    # Rebuild after final status docs exist so the signed bundles contain the final status set.
     for profile in PROFILES:
         deployment = deployment_from_options(profile=profile)
         build_release_bundle(ROOT, deployment)
@@ -190,14 +128,14 @@ def main() -> int:
     release_root.mkdir(parents=True, exist_ok=True)
     (release_root / "release-set-status.json").write_text(json.dumps(release_set, indent=2) + "\n", encoding="utf-8")
     lines = [
-        f"# Release Set Status — {version}",
+        f"# Release Set Status - {version}",
         "",
         f"- Passed: `{release_set['passed']}`",
         "",
         "## Summary",
         "",
     ]
-    lines.extend([f"- {k}: `{v}`" for k, v in release_set["summary"].items()])
+    lines.extend(f"- {key}: `{value}`" for key, value in release_set["summary"].items())
     lines.extend(["", "## Profiles", ""])
     for entry in release_set["profiles"]:
         lines.append(

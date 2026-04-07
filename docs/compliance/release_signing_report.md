@@ -9,7 +9,7 @@
 
 ## Details
 
-- {'profile': 'baseline', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/baseline', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'production', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/production', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'hardening', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/hardening', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
-- {'profile': 'peer-claim', 'bundle_dir': 'dist/release-bundles/0.3.0.dev1/peer-claim', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:3075886a4b2cb8ab583c45e4'}
+- {'profile': 'baseline', 'bundle_dir': 'dist\\release-bundles\\0.3.4\\baseline', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:d733db3b20c5e52d3acddfa8'}
+- {'profile': 'production', 'bundle_dir': 'dist\\release-bundles\\0.3.4\\production', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:d733db3b20c5e52d3acddfa8'}
+- {'profile': 'hardening', 'bundle_dir': 'dist\\release-bundles\\0.3.4\\hardening', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:d733db3b20c5e52d3acddfa8'}
+- {'profile': 'peer-claim', 'bundle_dir': 'dist\\release-bundles\\0.3.4\\peer-claim', 'signed': 'signed-ed25519-attested', 'verified': True, 'signing_key_id': 'ed25519:d733db3b20c5e52d3acddfa8'}

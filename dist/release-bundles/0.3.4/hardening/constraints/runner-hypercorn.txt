@@ -1,0 +1,5 @@
+# Published-runner verification checkpoint: hypercorn pin re-verified against PyPI on 2026-03-24.
+# Hypercorn runner profile pins.
+# Use with: pip install -c constraints/base.txt -c constraints/runner-hypercorn.txt '.[hypercorn]'
+
+hypercorn==0.18.0

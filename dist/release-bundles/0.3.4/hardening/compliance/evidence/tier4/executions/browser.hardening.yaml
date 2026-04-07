@@ -1,0 +1,51 @@
+schema_version: 1
+profile: browser
+execution_mode: self-check
+status: internal-self-check-generated
+deployment_profile: hardening
+counterpart_id: browser-rp
+counterpart_class: web-rp
+required_targets:
+- RFC 6749
+- RFC 7636
+- RFC 7516
+- RFC 8414
+- RFC 8615
+- RFC 9207
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC UserInfo
+required_artifacts:
+- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- tests/conformance/baseline/test_rfc7636_pkce.py
+- tests/conformance/baseline/test_openid_configuration.py
+- tests/conformance/baseline/test_openid_userinfo_endpoint.py
+- tests/unit/test_oidc_id_token_encryption.py
+- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+required_peer_artifacts:
+- http-transcript.yaml
+- browser-trace.json
+- result.yaml
+required_identity_fields:
+- peer_name
+- peer_version
+required_container_fields:
+- image_ref
+- image_digest
+scenario_ids:
+- browser-authz-code
+- browser-oidc-discovery
+- browser-userinfo
+- browser-jwe-id-token
+- browser-issuer-parameter
+- browser-hardening-discovery-truthfulness
+contract_profiles:
+- baseline
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+attestation_class_required: independent-external
+external_artifacts_root: null
+independent_peer_validation: false
+notes: Independent external peer artifacts are still required for Tier 4 claims.

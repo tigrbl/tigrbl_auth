@@ -1,17 +1,9 @@
 # Current State
 
-See the authoritative generated reports:
+Use `docs/compliance/truth_chain.md` and the generated report set in this directory.
 
-- `current_state_report.md`
-- `install_substrate_report.md`
-- `certification_state_report.md`
-- `runtime_profile_report.md`
-- `release_gate_report.md`
-- `validated_execution_report.md`
-- `release_signing_report.md`
-
-Archive and document-authority status:
-
-- authoritative current docs manifest present: `True`
-- archive root: `docs/archive/historical`
-- historical docs are non-authoritative: `True`
+- source_of_truth: `docs/compliance/truth_chain.json`
+- current_state_report: `docs/compliance/current_state_report.json`
+- release_gate_report: `docs/compliance/release_gate_report.json`
+- final_release_gate_report: `docs/compliance/final_release_gate_report.json`
+- release_decision_record: `docs/compliance/RELEASE_DECISION_RECORD.md`

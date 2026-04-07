@@ -1,15 +1,15 @@
 # Install Substrate Report
 
-- Generated at: `20260331T165741Z`
-- Passed: `True`
+- Generated at: `20260407T091616Z`
+- Passed: `False`
 - Static manifest passed: `True`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
-- Current Python: `3.12.12`
+- Current Python: `3.12.5`
 - Current Python supported: `True`
 - Expected supported Python versions: `3.10, 3.11, 3.12`
-- Detected supported Python binaries: `3` / `3`
+- Detected supported Python binaries: `1` / `3`
 - Certification tox envs declared: `33`
 - Runtime matrix envs declared: `14`
 - Test lane envs declared: `15`
@@ -17,6 +17,14 @@
 - Tox templates with install probe: `14` / `14`
 - Current profile import probe passed: `True`
 - Runtime surface probe passed: `True`
+
+## Failures
+
+- The current environment does not provide the full supported interpreter matrix required for clean-room certification.
+
+## Warnings
+
+- The current container does not provide supported interpreter binaries for: 3.10, 3.11.
 
 ## Current environment import probe
 
@@ -51,9 +59,9 @@
 
 ## Detected supported interpreters
 
-- `3.10` → available=`True` path=`/root/.pyenv/shims/python3.10`
-- `3.11` → available=`True` path=`/root/.pyenv/shims/python3.11`
-- `3.12` → available=`True` path=`/root/.pyenv/versions/3.12.12/bin/python3.12`
+- `3.10` → available=`False` path=`None`
+- `3.11` → available=`False` path=`None`
+- `3.12` → available=`True` path=`C:\ProgramData\chocolatey\bin\python3.12.EXE`
 
 ## Workflow coverage
 

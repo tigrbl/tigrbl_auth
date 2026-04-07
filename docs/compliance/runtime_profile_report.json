@@ -1,8 +1,8 @@
 {
-  "generated_at": "20260331T165743Z",
+  "generated_at": "20260407T091619Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
-  "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
+  "validated_artifact_source": "dist\\validated-runs\\collected-artifact-downloads.json",
   "application_probe": {
     "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",

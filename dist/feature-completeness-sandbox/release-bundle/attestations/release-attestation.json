@@ -3,7 +3,7 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-bundle/v1",
-    "issued_at": "2026-03-31T16:57:43Z",
+    "issued_at": "2026-04-07T09:16:19Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
       "key_id": "ed25519:47cff9cbdf9030464a7095e6",
@@ -15,32 +15,32 @@
     },
     "subject": {
       "package": "tigrbl_auth",
-      "version": "0.3.0.dev1",
+      "version": "0.3.4",
       "profile": "baseline",
       "bundle_root": "release-bundle",
       "signed_artifacts": [
         {
           "label": "release-bundle",
           "artifact_path": "release-bundle.json",
-          "artifact_sha256": "4d440490873a201c0eea1f027fe73106d832b6db8737598d69d90f98400982d0",
+          "artifact_sha256": "8a0937f43f7b53a388298f4377ccfd547b0625ee3731abcf7d6c7711f985650d",
           "attestation_path": "attestations/release-bundle.attestation.json"
         },
         {
           "label": "claim-manifest",
           "artifact_path": "compliance/claims/effective-target-claims.baseline.yaml",
-          "artifact_sha256": "a0595ce30610c44a9a000fe03d61ab043f6f7ede0bc196cec60c88d1cf43b071",
+          "artifact_sha256": "538e44508ab36aea44beb153c8b897c75f9fea08ff810cc0702307df1e045f2f",
           "attestation_path": "attestations/claim-manifest.attestation.json"
         },
         {
           "label": "evidence-manifest",
           "artifact_path": "compliance/evidence/effective-release-evidence.baseline.yaml",
-          "artifact_sha256": "21fcd7ae6fa2d2903fa0d25145581c62f8bcf370c8a1e748c14e2931d1430bd0",
+          "artifact_sha256": "ef665744a507bde221e454ff12e4ebc6fbeca128d7bc74cc5c237fce8f5e443c",
           "attestation_path": "attestations/evidence-manifest.attestation.json"
         },
         {
           "label": "contract-set",
           "artifact_path": "attestations/contract-set.manifest.json",
-          "artifact_sha256": "65dee2915b518ae8952c67f0cb64d01c8f0becd172ea42245b5fc80cd22d7765",
+          "artifact_sha256": "e871e9787fb8f3188134462e0cc0055b72aeced1b2f43345673fdeddf343a5f2",
           "attestation_path": "attestations/contract-set.attestation.json"
         }
       ]
@@ -49,7 +49,7 @@
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "0SeAePdA4aWPulG_rO99HxzcyAM_4PeUpZqu7LCYMx_BdLcZt9DUtlZ8JItPaiSFepZPBaW5V5O6Y8NnxTB0AA",
-    "payload_sha256": "412201d9c13ad745f16c30ac8ca615dec6b81d8d6149221a304ed9867836ad3e"
+    "value": "YScwGq1JEn78Bsah-fOcpV2LEfUsYFxn5ceoPWe_7f6pwHrQW_k6ZIgEYzc1qr1b7HOcmoAiQwJMOCALAYYKBQ",
+    "payload_sha256": "889479fd41b5ad0f5f771f8610b8dbfd4e86b3e9d948e6e52b978560be7c85c5"
   }
 }
