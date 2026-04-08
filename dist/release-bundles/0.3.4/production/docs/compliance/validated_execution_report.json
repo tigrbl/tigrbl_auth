@@ -1,14 +1,16 @@
 {
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Migration portability validation across SQLite and PostgreSQL is missing."
+  ],
   "warnings": [
     "Unsupported-version or out-of-scope validated manifests are present and excluded from certification counts."
   ],
   "summary": {
     "validated_artifact_count": 33,
     "out_of_scope_validated_artifact_count": 5,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "runtime_matrix_present_count": 14,
     "runtime_matrix_expected_count": 14,
@@ -17,7 +19,7 @@
     "test_lane_expected_count": 15,
     "test_lane_passed_count": 15,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true
   },
   "details": {
@@ -26,8 +28,8 @@
     "test_lane_missing": [],
     "test_lane_present_count": 15,
     "migration_manifest_present": true,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "runtime_evidence": {
       "base@py3.10": {
@@ -479,7 +481,7 @@
       {
         "path": "dist\\validated-runs\\migration-portability-py311.json",
         "manifest_passed": true,
-        "counts_as_passed": true,
+        "counts_as_passed": false,
         "identity": "migration-portability@py311",
         "environment_identity_ready": true,
         "install_evidence_ready": true,
@@ -493,6 +495,22 @@
         ],
         "expected_head_revision": "0007_browser_session_cookie_and_auth_code_linkage",
         "downgrade_target_revision": "0001_initial_identity_tables"
+      },
+      {
+        "path": "dist\\validated-runs\\migration-portability-py312.json",
+        "manifest_passed": false,
+        "counts_as_passed": false,
+        "identity": "migration-portability@py312",
+        "environment_identity_ready": true,
+        "install_evidence_ready": false,
+        "backends": [
+          "sqlite"
+        ],
+        "passed_backends": [
+          "sqlite"
+        ],
+        "expected_head_revision": null,
+        "downgrade_target_revision": null
       },
       {
         "path": "dist\\validated-runs\\migration-portability-py313.json",
@@ -509,11 +527,33 @@
         ],
         "expected_head_revision": null,
         "downgrade_target_revision": null
+      },
+      {
+        "path": "dist\\validated-runs\\migration-portability-postgres-py312.json",
+        "manifest_passed": false,
+        "counts_as_passed": false,
+        "identity": "migration-portability-postgres@py312",
+        "backend": "postgres",
+        "environment_identity_ready": true,
+        "install_evidence_ready": false,
+        "expected_head_revision": null,
+        "downgrade_target_revision": null
+      },
+      {
+        "path": "dist\\validated-runs\\migration-portability-sqlite-py312.json",
+        "manifest_passed": false,
+        "counts_as_passed": false,
+        "identity": "migration-portability-sqlite@py312",
+        "backend": "sqlite",
+        "environment_identity_ready": true,
+        "install_evidence_ready": false,
+        "expected_head_revision": null,
+        "downgrade_target_revision": null
       }
     ],
     "validated_manifests": [
-      "dist\\validated-runs\\migration-portability-py311.json",
-      "dist\\validated-runs\\migration-portability-py313.json",
+      "dist\\validated-runs\\migration-portability-postgres-py312.json",
+      "dist\\validated-runs\\migration-portability-sqlite-py312.json",
       "dist\\validated-runs\\runtime-base-py310.json",
       "dist\\validated-runs\\runtime-base-py311.json",
       "dist\\validated-runs\\runtime-base-py312.json",
@@ -584,8 +624,11 @@
       }
     ],
     "recognized_manifest_paths": [
+      "dist\\validated-runs\\migration-portability-postgres-py312.json",
       "dist\\validated-runs\\migration-portability-py311.json",
+      "dist\\validated-runs\\migration-portability-py312.json",
       "dist\\validated-runs\\migration-portability-py313.json",
+      "dist\\validated-runs\\migration-portability-sqlite-py312.json",
       "dist\\validated-runs\\runtime-base-py310.json",
       "dist\\validated-runs\\runtime-base-py311.json",
       "dist\\validated-runs\\runtime-base-py312.json",

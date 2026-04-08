@@ -1,0 +1,109 @@
+{
+  "schema_version": 4,
+  "kind": "migration-portability",
+  "generated_at": "20260407T230030Z",
+  "python_version": "3.12",
+  "tox_env": null,
+  "matrix_profile": null,
+  "repository_version": "0.3.4",
+  "validated_run_root": "dist\\validated-runs",
+  "identity": "migration-portability@py312",
+  "environment_identity": {
+    "python_version": "3.12",
+    "python_full_version": "3.12.5",
+    "python_tag": "py312",
+    "implementation": "CPython",
+    "implementation_version": "3.12.5",
+    "executable": ".venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "platform_system": "Windows",
+    "platform_release": "10",
+    "platform_version": "10.0.19045",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "tox_env": null,
+    "matrix_profile": null,
+    "install_profile": "migration-portability",
+    "test_lane": null,
+    "runner": null
+  },
+  "install_profile": "migration-portability",
+  "install_substrate_artifact": "dist\\install-substrate\\migration-portability.json",
+  "install_substrate_artifact_sha256": "9354320b6cc408626b5733fba4240045e1957748a4d2e47a3e74eccea34e30dd",
+  "install_substrate_identity": null,
+  "install_substrate_environment_identity": {},
+  "install_substrate_passed": true,
+  "install_substrate_static_manifest_passed": true,
+  "install_substrate_current_profile_import_probe_passed": true,
+  "install_substrate_runtime_surface_probe_passed": true,
+  "report_artifact": "docs\\compliance\\migration_portability_report.json",
+  "report_sha256": "208637d7ad8dcfefb9c3fc392906b1e657018f9f9196ca194ecb7c645b4d61b2",
+  "backends": [
+    "sqlite"
+  ],
+  "required_backends": [
+    "sqlite",
+    "postgres"
+  ],
+  "passed_backends": [
+    "sqlite"
+  ],
+  "backend_results": {
+    "sqlite": {
+      "backend": "sqlite",
+      "available": true,
+      "database_url": "sqlite+aiosqlite:////mnt/data/step6_work/tigrbl_auth_phase13_certification_target_freeze_reconciled_2026-03-24/dist/migration-portability/sqlite/tigrbl_auth_migration_portability.db",
+      "passed": true,
+      "upgrade_passed": true,
+      "downgrade_passed": true,
+      "reapply_passed": true,
+      "downgraded_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+      "artifacts": {
+        "upgrade": "dist/migration-portability/sqlite/upgrade.json",
+        "downgrade": "dist/migration-portability/sqlite/downgrade.json",
+        "reapply": "dist/migration-portability/sqlite/reapply.json"
+      }
+    },
+    "postgres": {
+      "backend": "postgres",
+      "available": false,
+      "passed": false,
+      "upgrade_passed": false,
+      "downgrade_passed": false,
+      "reapply_passed": false,
+      "downgraded_revision": null,
+      "artifacts": {},
+      "failure": "POSTGRES_URL not set in the current environment."
+    }
+  },
+  "pytest_report_artifact": "dist/test-reports/local-migration-portability-py313.json",
+  "pytest_report_sha256": "643e635f2636b8538bed7b23d9c2b3e99a2567c8d4f62c746cb7e49e37d3236b",
+  "pytest_exit_code": 0,
+  "pytest_summary": {
+    "tests_collected": 2,
+    "tests_passed": 2,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "tests_error": 0
+  },
+  "revision_inventory": [],
+  "expected_head_revision": null,
+  "head_revision": null,
+  "downgrade_target_revision": null,
+  "backend_manifests": [
+    {
+      "backend": "sqlite",
+      "path": "dist\\validated-runs\\migration-portability-sqlite-py312.json",
+      "sha256": "a66f9e534b35386a5d7d13f7710fac96284db13ae07bf4934756190d76c380dc",
+      "passed": false
+    },
+    {
+      "backend": "postgres",
+      "path": "dist\\validated-runs\\migration-portability-postgres-py312.json",
+      "sha256": "e67d6fdb66e964d056b9f88e5778a7e41babd3ce72470a8092280134a4495abd",
+      "passed": false
+    }
+  ],
+  "report_passed": false,
+  "passed": false
+}

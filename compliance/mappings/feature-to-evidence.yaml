@@ -396,12 +396,20 @@ cli-verb:token.revoke:
 - compliance/evidence/tier3/cli-operator-surface/
 cli-verb:verify:
 - compliance/evidence/tier3/cli-operator-surface/
-extension:a2a-adapter: []
-extension:dns-privacy: []
-extension:mcp-adapter: []
-extension:set: []
-extension:webauthn-passkeys: []
-extension:webpush: []
+extension:a2a-adapter:
+- compliance/evidence/tier3/cli-operator-surface/
+- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
+extension:dns-privacy:
+- compliance/evidence/tier3/discovery/
+extension:mcp-adapter:
+- compliance/evidence/tier3/cli-operator-surface/
+- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
+extension:set:
+- compliance/evidence/tier3/jwt/
+extension:webauthn-passkeys:
+- compliance/evidence/tier3/jose/
+extension:webpush:
+- compliance/evidence/tier3/jwe/
 rpc:audit.export:
 - compliance/evidence/tier3/contracts/openrpc/
 rpc:audit.list:
@@ -850,7 +858,9 @@ flag:enable_rfc9728:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enforce_rfc8252:
 - compliance/evidence/tier3/native-apps/
-flag:oauth21_alignment_mode: []
+flag:oauth21_alignment_mode:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 flag:require_tls:
 - compliance/evidence/tier3/cli-operator-surface/
 - compliance/evidence/tier3/release-bundle-signing/
@@ -928,7 +938,9 @@ target:import-export-portability:
 - compliance/evidence/tier3/import-export-portability/
 target:key-lifecycle-and-jwks-publication:
 - compliance/evidence/tier3/key-lifecycle-jwks/
-target:oauth-2-1-alignment-profile: []
+target:oauth-2-1-alignment-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 target:oidc-back-channel-logout:
 - compliance/evidence/tier3/oidc-backchannel-logout/
 target:oidc-core-1-0:
@@ -979,11 +991,14 @@ target:rfc-7636:
 - compliance/evidence/tier3/pkce/
 target:rfc-7662:
 - compliance/evidence/tier3/introspection/
-target:rfc-7800: []
-target:rfc-7952: []
+target:rfc-7800:
+- compliance/evidence/tier3/dpop/
+target:rfc-7952:
+- compliance/evidence/tier3/jwt/
 target:rfc-8252:
 - compliance/evidence/tier3/native-apps/
-target:rfc-8291: []
+target:rfc-8291:
+- compliance/evidence/tier3/jwe/
 target:rfc-8414:
 - compliance/evidence/tier3/discovery/
 target:rfc-8615:
@@ -996,8 +1011,10 @@ target:rfc-8705:
 - compliance/evidence/tier3/mtls/
 target:rfc-8707:
 - compliance/evidence/tier3/resource-indicators/
-target:rfc-8812: []
-target:rfc-8932: []
+target:rfc-8812:
+- compliance/evidence/tier3/jose/
+target:rfc-8932:
+- compliance/evidence/tier3/discovery/
 target:rfc-9068:
 - compliance/evidence/tier3/jwt-access-token-profile/
 target:rfc-9101:

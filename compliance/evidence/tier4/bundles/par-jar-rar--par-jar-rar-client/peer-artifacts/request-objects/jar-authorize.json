@@ -1,0 +1,6 @@
+{
+  "scenario_id": "jar-authorize",
+  "iss": "fixture-client",
+  "aud": "https://authn.example.com",
+  "response_type": "code"
+}

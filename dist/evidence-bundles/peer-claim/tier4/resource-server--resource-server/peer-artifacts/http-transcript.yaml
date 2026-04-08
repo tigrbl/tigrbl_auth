@@ -1,0 +1,81 @@
+profile: resource-server
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: bearer-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: bearer-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: introspection-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: introspection-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: jwt-access-token-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: jwt-access-token-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: token-exchange-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: token-exchange-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: resource-indicator-binding
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: resource-indicator-binding
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: hardening-protected-resource-metadata
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: resource-server
+      x-scenario-id: hardening-protected-resource-metadata
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'

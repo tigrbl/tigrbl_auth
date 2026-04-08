@@ -1,0 +1,21 @@
+required_targets:
+- RFC 7591
+- RFC 7592
+target_to_tests:
+  RFC 7591:
+  - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase3_public_route_contracts.py
+  - tests/unit/test_rfc7591_client_registration_endpoint.py
+  RFC 7592:
+  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/conformance/hardening/test_rfc7592_client_registration_management.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+  - tests/unit/test_rfc7592_client_management_endpoint.py
+required_artifacts:
+- tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+- tests/conformance/hardening/test_rfc7592_client_registration_management.py
+- tests/unit/test_rfc7592_client_management_endpoint.py
+counterpart_id: client-mgmt-harness

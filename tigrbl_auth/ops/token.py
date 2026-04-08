@@ -53,6 +53,7 @@ from tigrbl_auth.standards.oauth2.rfc9700 import (
     OAuthPolicyViolation,
     assert_token_request_allowed,
     dpop_proof_from_request,
+    runtime_security_profile,
     validate_sender_constraint,
 )
 
@@ -303,6 +304,13 @@ async def token_request(*, request, db):
         raw_registration_metadata = getattr(registration, 'registration_metadata', None)
         if isinstance(raw_registration_metadata, dict):
             registration_metadata = dict(raw_registration_metadata)
+    policy = runtime_security_profile(deployment)
+    if policy.fapi_mode and registered_auth_method not in set(policy.allowed_client_auth_methods):
+        return _json_error(
+            'invalid_client',
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            description='FAPI clients must authenticate with private_key_jwt or mTLS',
+        )
     if registered_auth_method == PRIVATE_KEY_JWT_AUTH_METHOD:
         if not client_assertion:
             return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, description='client_assertion required for private_key_jwt clients')
@@ -310,7 +318,7 @@ async def token_request(*, request, db):
             client_assertion_claims = authenticate_client_assertion(
                 client_assertion_type=client_assertion_type,
                 client_assertion=client_assertion,
-                audience=token_endpoint_audiences,
+                audience=str(deployment.issuer or ISSUER) if policy.fapi_mode else token_endpoint_audiences,
                 client_id=str(client.id),
                 token_endpoint_auth_method=registered_auth_method,
             )
@@ -332,6 +340,8 @@ async def token_request(*, request, db):
     elif client_assertion:
         return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, description='client is not configured for JWT client authentication')
     elif client_secret:
+        if policy.fapi_mode:
+            return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, description='FAPI rejects shared-secret client authentication')
         secret_valid = client.verify_secret(client_secret)
         if inspect.isawaitable(secret_valid):
             secret_valid = await secret_valid
@@ -377,8 +387,11 @@ async def token_request(*, request, db):
         payload: dict = {'issuer': ISSUER}
         if scope:
             payload['scope'] = scope
-        if audience is not None:
-            payload['audience'] = audience
+        effective_audience = audience
+        if effective_audience in {None, ''} and policy.fapi_mode:
+            effective_audience = str(deployment.protected_resource_identifier or settings.protected_resource_identifier)
+        if effective_audience is not None:
+            payload['audience'] = effective_audience
         elif settings.enable_rfc9068:
             payload['audience'] = settings.protected_resource_identifier
         if sender_constraint.confirmation_claim:
@@ -444,8 +457,25 @@ async def token_request(*, request, db):
                 return JSONResponse({'error': 'invalid_grant'}, status_code=status.HTTP_400_BAD_REQUEST)
         auth_code_claims = dict(auth_code.claims or {})
         stored_resource = auth_code_claims.pop('_resource', None)
+        initiating_dpop_jkt = auth_code_claims.pop('_dpop_jkt', None)
+        initiating_mtls_thumbprint = auth_code_claims.pop('_mtls_thumbprint', None)
         if request_audience not in {None, '', stored_resource} and stored_resource not in {None, ''}:
             return JSONResponse({'error': 'invalid_target'}, status_code=status.HTTP_400_BAD_REQUEST)
+        if policy.fapi_mode and not (initiating_dpop_jkt or initiating_mtls_thumbprint):
+            return JSONResponse(
+                {'error': 'invalid_grant', 'error_description': 'FAPI authorization codes must remain bound to the initiating sender constraint'},
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+        if initiating_dpop_jkt and sender_constraint.jkt != str(initiating_dpop_jkt):
+            return JSONResponse(
+                {'error': 'invalid_grant', 'error_description': 'DPoP proof key continuity check failed'},
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
+        if initiating_mtls_thumbprint and sender_constraint.cert_thumbprint != str(initiating_mtls_thumbprint):
+            return JSONResponse(
+                {'error': 'invalid_grant', 'error_description': 'mTLS certificate continuity check failed'},
+                status_code=status.HTTP_400_BAD_REQUEST,
+            )
         audience = stored_resource or request_audience
         authorization_details = auth_code_claims.pop('_authorization_details', None)
         access, refresh = await issue_persisted_token_pair(

@@ -1,16 +1,21 @@
 {
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Test classification manifest is invalid.",
+    "Migration portability validation across SQLite and PostgreSQL is missing."
+  ],
   "warnings": [],
   "summary": {
-    "classification_manifest_passed": true,
+    "classification_manifest_passed": false,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "validated_test_lane_count": 15,
     "validated_test_lane_expected_count": 15
   },
   "details": {
-    "classification_failures": [],
+    "classification_failures": [
+      "Unclassified test files present: tests/unit/test_phase18_peer_bundle_completeness.py"
+    ],
     "missing_test_lane_manifests": []
   }
 }

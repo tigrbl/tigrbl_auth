@@ -1,6 +1,12 @@
 # Boundary Enforcement Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- baseline: committed effective claims artifact is out of sync
+- production: committed effective claims artifact is out of sync
+- hardening: committed effective claims artifact is out of sync
 
 ## Summary
 

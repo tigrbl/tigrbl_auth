@@ -289,3 +289,26 @@ Release bundle and signature verification:
 - tests/security/test_release_bundle_signing.py
 - tests/unit/test_phase1_published_dependency_model.py
 - tests/security/test_phase12_sender_constraint_replay.py
+A2A adapter:
+- tests/unit/test_adapters.py
+- tests/unit/test_feature_flag_registry.py
+- tests/unit/test_remote_adapter.py
+MCP adapter:
+- tests/unit/test_adapters.py
+- tests/unit/test_feature_flag_registry.py
+- tests/unit/test_remote_adapter.py
+OAuth 2.1 alignment profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+RFC 7800:
+- tests/unit/test_rfc7800_proof_of_possession.py
+RFC 7952:
+- tests/unit/test_rfc7952_security_event_token.py
+RFC 8291:
+- tests/unit/test_rfc8291_webpush_encryption.py
+RFC 8812:
+- tests/unit/test_rfc8812_webauthn_algorithms.py
+RFC 8932:
+- tests/unit/test_rfc8932_dns_privacy.py
+- tests/unit/test_rfc8932_enhanced_metadata.py

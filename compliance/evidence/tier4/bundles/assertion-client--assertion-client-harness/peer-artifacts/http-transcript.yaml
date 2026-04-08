@@ -1,0 +1,68 @@
+profile: assertion-client
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: jwt-client-auth
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/register
+    headers:
+      accept: application/json
+      x-peer-profile: assertion-client
+      x-scenario-id: jwt-client-auth
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"client_id":"fixture-client"}'
+- scenario_id: assertion-grant
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: assertion-client
+      x-scenario-id: assertion-grant
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: jwt-bearer-claim-validation
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: assertion-client
+      x-scenario-id: jwt-bearer-claim-validation
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: token-revocation
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: assertion-client
+      x-scenario-id: token-revocation
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: jwks-key-selection
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/jwks.json
+    headers:
+      accept: application/json
+      x-peer-profile: assertion-client
+      x-scenario-id: jwks-key-selection
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"keys":[...]}'

@@ -1,0 +1,68 @@
+profile: rp-session-logout
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: session-state-check
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/logout
+    headers:
+      accept: application/json
+      x-peer-profile: rp-session-logout
+      x-scenario-id: session-state-check
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: logout accepted
+- scenario_id: rp-initiated-logout
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/logout
+    headers:
+      accept: application/json
+      x-peer-profile: rp-session-logout
+      x-scenario-id: rp-initiated-logout
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: logout accepted
+- scenario_id: frontchannel-fanout
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: rp-session-logout
+      x-scenario-id: frontchannel-fanout
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: backchannel-delivery
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: rp-session-logout
+      x-scenario-id: backchannel-delivery
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: cookie-rotation-and-replay
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: rp-session-logout
+      x-scenario-id: cookie-rotation-and-replay
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code

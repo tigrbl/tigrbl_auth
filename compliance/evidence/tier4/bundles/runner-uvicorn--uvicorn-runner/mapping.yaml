@@ -1,0 +1,25 @@
+required_targets:
+- ASGI 3 application package
+- 'Runner profile: Uvicorn'
+target_to_tests:
+  ASGI 3 application package:
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_deployment_resolver.py
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/unit/test_phase2_runner_adapter_runtime_layer.py
+  - tests/unit/test_phase3_runtime_launcher.py
+  - tests/runtime/test_runner_invariance.py
+  - tests/conformance/operator/test_cli_serve_runtime.py
+  'Runner profile: Uvicorn':
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/unit/test_phase2_runner_adapter_runtime_layer.py
+  - tests/unit/test_runtime_cfg.py
+  - tests/unit/test_phase3_runtime_launcher.py
+  - tests/runtime/test_runner_uvicorn.py
+  - tests/runtime/test_runner_invariance.py
+  - tests/conformance/operator/test_cli_serve_runtime.py
+required_artifacts:
+- tigrbl_auth/api/app.py
+- tigrbl_auth/gateway.py
+- tests/runtime/test_runner_uvicorn.py
+counterpart_id: uvicorn-runner

@@ -1,0 +1,6 @@
+bearer-resource: 200 OK
+introspection-resource: 200 OK
+jwt-access-token-resource: 200 OK
+token-exchange-resource: 200 OK
+resource-indicator-binding: 200 OK
+hardening-protected-resource-metadata: 200 OK

@@ -15,6 +15,20 @@ from tigrbl_auth.standards.oauth2.jar import merge_request_object_params, parse_
 from tigrbl_auth.standards.oauth2.par import REQUEST_URI_PREFIX
 from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
 from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
+from tigrbl_auth.standards.oauth2.rfc9700 import (
+    client_certificate_thumbprint_from_request,
+    dpop_proof_from_request,
+    runtime_security_profile,
+)
+from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+    PRIVATE_KEY_JWT_AUTH_METHOD,
+    authenticate_client_assertion,
+)
+from tigrbl_auth.standards.oauth2.mtls import (
+    SUPPORTED_MTLS_AUTH_METHODS,
+    authenticate_mtls_client,
+)
+from tigrbl_auth.standards.oauth2.dpop import verify_proof
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth.framework import HTTPException, select, status
@@ -134,15 +148,75 @@ async def _normalized_par_params(params: dict[str, object], deployment) -> dict[
     return normalized
 
 
+def _header(request, name: str) -> str | None:
+    headers = getattr(request, "headers", {}) or {}
+    return headers.get(name) or headers.get(name.lower())
+
+
+async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object], deployment) -> tuple[object, dict[str, object]]:
+    from tigrbl_auth.tables import Client, ClientRegistration
+
+    client_id = str(params.get("client_id") or "").strip()
+    if not client_id:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "client_id parameter required")
+    try:
+        client_uuid = UUID(client_id)
+    except Exception as exc:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid client_id") from exc
+    client = await db.scalar(select(Client).where(Client.id == client_uuid))
+    if client is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "client not found")
+    registration = await db.scalar(select(ClientRegistration).where(ClientRegistration.client_id == client.id))
+    metadata = dict(getattr(registration, "registration_metadata", None) or {})
+    auth_method = str(metadata.get("token_endpoint_auth_method") or "").strip()
+    policy = runtime_security_profile(deployment)
+    if auth_method not in set(policy.allowed_client_auth_methods):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid_client_metadata: FAPI clients must use private_key_jwt or mTLS")
+
+    authz = _header(request, "Authorization")
+    client_assertion = str(params.get("client_assertion") or "").strip()
+    client_assertion_type = str(params.get("client_assertion_type") or "").strip()
+    if authz and authz.startswith("Basic "):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "invalid_client", "error_description": "FAPI PAR rejects HTTP Basic client authentication"})
+    if auth_method == PRIVATE_KEY_JWT_AUTH_METHOD:
+        if not client_assertion:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "invalid_client", "error_description": "client_assertion required for FAPI PAR"})
+        try:
+            authenticate_client_assertion(
+                client_assertion_type=client_assertion_type,
+                client_assertion=client_assertion,
+                audience=str(deployment.issuer or settings.issuer),
+                client_id=str(client.id),
+                token_endpoint_auth_method=auth_method,
+            )
+        except ValueError as exc:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "invalid_client", "error_description": str(exc)}) from exc
+    elif auth_method in SUPPORTED_MTLS_AUTH_METHODS:
+        try:
+            authenticate_mtls_client(
+                metadata,
+                client_certificate_thumbprint_from_request(request),
+                token_endpoint_auth_method=auth_method,
+            )
+        except ValueError as exc:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "invalid_client", "error_description": str(exc)}) from exc
+    else:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, {"error": "invalid_client", "error_description": "unsupported FAPI PAR authentication method"})
+    return client, metadata
+
+
 async def pushed_authorization_request(*, request, db):
     deployment = resolve_deployment(settings)
     if not deployment.flag_enabled('enable_rfc9126'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'PAR disabled')
     params = _body_dict(getattr(request, 'body', b'') or b'')
     params = await _normalized_par_params(params, deployment)
+    policy = runtime_security_profile(deployment)
     client_id = params.get('client_id')
     if not client_id:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, 'client_id parameter required')
+    if policy.par_redirect_uri_required and not params.get("redirect_uri"):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "redirect_uri parameter required")
     try:
         client_uuid = UUID(str(client_id))
     except Exception as exc:
@@ -150,12 +224,29 @@ async def pushed_authorization_request(*, request, db):
     client = await db.scalar(select(Client).where(Client.id == client_uuid))
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'client not found')
+    if policy.par_client_auth_required:
+        client, _ = await _authenticate_fapi_par_client(request=request, db=db, params=params, deployment=deployment)
+
+    dpop_proof = dpop_proof_from_request(request)
+    if dpop_proof:
+        try:
+            params["_dpop_jkt"] = verify_proof(dpop_proof, getattr(request, "method", "POST"), str(getattr(request, "url", "")))
+        except ValueError as exc:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_dpop_proof", "error_description": str(exc)}) from exc
+    cert_thumbprint = client_certificate_thumbprint_from_request(request)
+    if cert_thumbprint:
+        params["_mtls_thumbprint"] = cert_thumbprint
 
     row = PushedAuthorizationRequest(
         client_id=client.id,
         tenant_id=client.tenant_id,
         params=params,
     )
+    if int(getattr(row, "expires_in", 0) or 0) > policy.request_uri_max_lifetime_seconds:
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_request", "error_description": "request_uri lifetime exceeds the active profile limit"},
+        )
     db.add(row)
     await db.commit()
     try:

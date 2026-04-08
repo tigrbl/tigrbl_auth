@@ -2035,12 +2035,23 @@ cli-verb:verify:
 - tests/unit/test_phase3_runtime_launcher.py
 - tests/unit/test_phase4_cli_contract.py
 - tests/unit/test_phase5_operator_service_layer.py
-extension:a2a-adapter: []
-extension:dns-privacy: []
-extension:mcp-adapter: []
-extension:set: []
-extension:webauthn-passkeys: []
-extension:webpush: []
+extension:a2a-adapter:
+- tests/unit/test_adapters.py
+- tests/unit/test_feature_flag_registry.py
+- tests/unit/test_remote_adapter.py
+extension:dns-privacy:
+- tests/unit/test_rfc8932_dns_privacy.py
+- tests/unit/test_rfc8932_enhanced_metadata.py
+extension:mcp-adapter:
+- tests/unit/test_adapters.py
+- tests/unit/test_feature_flag_registry.py
+- tests/unit/test_remote_adapter.py
+extension:set:
+- tests/unit/test_rfc7952_security_event_token.py
+extension:webauthn-passkeys:
+- tests/unit/test_rfc8812_webauthn_algorithms.py
+extension:webpush:
+- tests/unit/test_rfc8291_webpush_encryption.py
 rpc:audit.export:
 - tests/e2e/test_release_gate_catalog.py
 - tests/unit/test_contract_generation_live.py
@@ -3435,7 +3446,10 @@ flag:enforce_rfc8252:
 - tests/interop/test_peer_matrix_artifacts.py
 - tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_rfc8252_native_app_redirects.py
-flag:oauth21_alignment_mode: []
+flag:oauth21_alignment_mode:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 flag:require_tls:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
@@ -3674,7 +3688,10 @@ target:key-lifecycle-and-jwks-publication:
 - tests/unit/test_phase4_cli_contract.py
 - tests/unit/test_phase5_operator_service_layer.py
 - tests/unit/test_rpc_registry_live.py
-target:oauth-2-1-alignment-profile: []
+target:oauth-2-1-alignment-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 target:oidc-back-channel-logout:
 - tests/conformance/hardening/test_oidc_backchannel_logout.py
 - tests/integration/test_persistence_lifecycle_durability.py
@@ -3800,15 +3817,18 @@ target:rfc-7662:
 - tests/integration/test_persistence_lifecycle_durability.py
 - tests/integration/test_rfc7662.py
 - tests/unit/test_phase3_public_route_contracts.py
-target:rfc-7800: []
-target:rfc-7952: []
+target:rfc-7800:
+- tests/unit/test_rfc7800_proof_of_possession.py
+target:rfc-7952:
+- tests/unit/test_rfc7952_security_event_token.py
 target:rfc-8252:
 - tests/conformance/production/test_rfc8252_native_apps.py
 - tests/interop/test_peer_counterpart_catalog.py
 - tests/interop/test_peer_matrix_artifacts.py
 - tests/interop/test_tier4_promotion_fail_closed.py
 - tests/unit/test_rfc8252_native_app_redirects.py
-target:rfc-8291: []
+target:rfc-8291:
+- tests/unit/test_rfc8291_webpush_encryption.py
 target:rfc-8414:
 - tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
 - tests/integration/test_rfc8414_metadata.py
@@ -3849,8 +3869,11 @@ target:rfc-8707:
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_phase7_advanced_surface_contracts.py
 - tests/unit/test_phase8_hardening_cluster_a.py
-target:rfc-8812: []
-target:rfc-8932: []
+target:rfc-8812:
+- tests/unit/test_rfc8812_webauthn_algorithms.py
+target:rfc-8932:
+- tests/unit/test_rfc8932_dns_privacy.py
+- tests/unit/test_rfc8932_enhanced_metadata.py
 target:rfc-9068:
 - tests/conformance/production/test_rfc9068_jwt_profile.py
 - tests/integration/test_profile_surface_and_contract_alignment.py

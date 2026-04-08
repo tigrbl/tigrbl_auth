@@ -36,7 +36,6 @@ from ..rfc.rfc8628 import DeviceGrantForm
 from ..routers.schemas import (
     AuthorizationCodeGrantForm,
     PasswordGrantForm,
-    RefreshIn,
     TokenPair,
 )
 from ..routers.shared import (

@@ -52,7 +52,7 @@ def _write_discovery_reference(repo_root: Path) -> None:
         "The following profile-specific discovery snapshots are committed from executable deployment metadata:",
         "",
     ]
-    for profile_name in ("baseline", "production", "hardening", "peer-claim"):
+    for profile_name in ("baseline", "production", "hardening", "fapi2-security", "peer-claim"):
         lines.append(f"- `{profile_name}`")
         profile_dir = repo_root / "specs" / "discovery" / "profiles" / profile_name
         for name in sorted(path.name for path in profile_dir.glob("*.json")):
@@ -77,7 +77,7 @@ def main() -> int:
     write_openrpc_contract(repo_root, active)
     write_effective_claims_manifest(repo_root, active)
     write_effective_evidence_manifest(repo_root, active)
-    for profile_name in ("baseline", "production", "hardening", "peer-claim"):
+    for profile_name in ("baseline", "production", "hardening", "fapi2-security", "peer-claim"):
         deployment = deployment_from_options(profile=profile_name)
         write_openapi_contract(repo_root, deployment, profile_label=profile_name)
         write_openrpc_contract(repo_root, deployment, profile_label=profile_name)

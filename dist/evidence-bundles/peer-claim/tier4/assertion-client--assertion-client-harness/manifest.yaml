@@ -1,0 +1,82 @@
+schema_version: 1
+bundle_id: assertion-client--assertion-client-harness
+peer_profile: assertion-client
+counterpart_id: assertion-client-harness
+status: external-preserved-failed
+runtime_profile: production
+target_ids:
+- RFC 7515
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7009
+scenario_results:
+- id: jwt-client-auth
+  passed: true
+  notes: jwt-client-auth completed successfully in the staged external-root fixture
+    set.
+- id: assertion-grant
+  passed: true
+  notes: assertion-grant completed successfully in the staged external-root fixture
+    set.
+- id: jwt-bearer-claim-validation
+  passed: true
+  notes: jwt-bearer-claim-validation completed successfully in the staged external-root
+    fixture set.
+- id: token-revocation
+  passed: true
+  notes: token-revocation completed successfully in the staged external-root fixture
+    set.
+- id: jwks-key-selection
+  passed: true
+  notes: jwks-key-selection completed successfully in the staged external-root fixture
+    set.
+peer_identity:
+  peer_name: External JWT/assertion-capable client harness
+  peer_version: 2026.03.25+fixture
+  peer_operator: checkpoint-staged-external-root
+peer_runtime:
+  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/assertion-client-harness:2026-03-25
+  image_digest: sha256:28fe325cea79f94dc861f8bc6edf8657203b42715b0143871b8a9cc24df1121b
+  execution_style: black-box-http
+independence_attestation:
+  attestation_class: repository-fixture-nonindependent
+  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_contact: repository-local-fixture@invalid.example
+  attestation_timestamp: '2026-03-26T23:28:15+00:00'
+  counterpart_identified: true
+  reproduction_preserved: true
+  package_team_member: true
+  repository_fixture_generated: true
+  notes:
+  - Repository-staged external-root fixture set preserved inside the checkpoint for
+    reproducible Tier 4 normalization tests only.
+  - These fixtures are intentionally non-qualifying and must never count toward strict
+    independent claims or Tier 4 promotion.
+evidence_source: repository-staged-nonindependent-fixture
+source_revision: fixture-0.3.2.dev14
+contract_version: 0.3.2.dev14
+generated_at: '2026-04-08T00:07:16+00:00'
+validation_failures:
+- independence attestation class mismatch
+- independence attestation missing package_team_member=false
+- independence attestation missing repository_fixture_generated=false
+- non-independent evidence source
+- peer operator is not independent
+artifacts:
+- path: execution.log
+  sha256: bd6c21be758bcebe33c5fe10b74ce710d7868ef855df18bb7e3f24103afbcb5b
+- path: manifest.yaml
+  sha256: 12078b9a697bc18f2c2305fde0a54fc223d3b57deae5a7d151fa6898c254da5b
+- path: mapping.yaml
+  sha256: 8d05e40a2c8e6cb9d008118396edb9823c8d1087f464af063df53d57a0f1806a
+- path: peer-artifacts\http-transcript.yaml
+  sha256: 84fb111768780f8ae1f9e310c2bd5a223fef8b1bf046fed4ed6d8a1f8dbb8fe9
+- path: peer-artifacts\jwt-assertions.json
+  sha256: c05dff474d83428e2f65335da62b41240a33250a5c313b0e0c6dd7e0639f4025
+- path: peer-profile.yaml
+  sha256: 73d6d58e0e89ae0229e269b8976ccfb1f87a1c81be27ba89047bd0b4d100f862
+- path: reproduction.md
+  sha256: 8babe6270e2503153b1c0c03ed3b24721cee40b48447c87b1d8d4fab808f9937

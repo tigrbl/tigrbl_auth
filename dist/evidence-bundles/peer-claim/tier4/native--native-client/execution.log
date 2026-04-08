@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "profile": "native",
+  "counterpart_id": "native-client",
+  "generated_at": "2026-03-26T23:28:15+00:00",
+  "summary": {
+    "scenario_count": 4,
+    "target_count": 4
+  },
+  "scenario_results": [
+    {
+      "id": "native-loopback",
+      "passed": true,
+      "notes": "native-loopback completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "native-custom-scheme",
+      "passed": true,
+      "notes": "native-custom-scheme completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "native-jwe-id-token",
+      "passed": true,
+      "notes": "native-jwe-id-token completed successfully in the staged external-root fixture set."
+    },
+    {
+      "id": "native-issuer-parameter",
+      "passed": true,
+      "notes": "native-issuer-parameter completed successfully in the staged external-root fixture set."
+    }
+  ]
+}

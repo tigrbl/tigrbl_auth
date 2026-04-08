@@ -1,0 +1,42 @@
+profile: dpop
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: dpop-token
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: dpop
+      x-scenario-id: dpop-token
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: dpop-replay-rejection
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: dpop
+      x-scenario-id: dpop-replay-rejection
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: dpop-nonce-recovery
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: dpop
+      x-scenario-id: dpop-nonce-recovery
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'

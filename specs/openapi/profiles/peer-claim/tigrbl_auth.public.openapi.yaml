@@ -26,6 +26,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -67,6 +68,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -177,6 +179,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -206,6 +209,7 @@ paths:
                   enum:
                   - authorization_code
                   - client_credentials
+                  - refresh_token
                   - urn:ietf:params:oauth:grant-type:jwt-bearer
                   - urn:ietf:params:oauth:grant-type:device_code
                   - urn:ietf:params:oauth:grant-type:token-exchange
@@ -292,6 +296,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -329,6 +334,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -377,6 +383,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -476,6 +483,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -521,6 +529,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -628,6 +637,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -674,6 +684,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -722,6 +733,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -783,6 +795,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -852,6 +865,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -907,6 +921,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -979,6 +994,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -1052,6 +1068,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -1088,6 +1105,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -1124,6 +1142,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange
@@ -1160,6 +1179,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         - urn:ietf:params:oauth:grant-type:device_code
         - urn:ietf:params:oauth:grant-type:token-exchange

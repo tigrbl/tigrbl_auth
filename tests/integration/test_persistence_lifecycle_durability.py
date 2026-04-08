@@ -10,6 +10,7 @@ from tigrbl_auth.framework import select
 from tigrbl_auth.services.persistence import (
     append_audit_event_async,
     create_session_async,
+    get_token_record_async,
     get_active_session_async,
     get_client_registration_async,
     get_latest_logout_for_session_async,
@@ -25,6 +26,12 @@ from tigrbl_auth.services.persistence import (
     touch_session_async,
     upsert_client_registration_async,
     upsert_token_record_async,
+)
+from tigrbl_auth.services.token_service import (
+    JWTCoder,
+    RefreshTokenReuseError,
+    issue_persisted_token_pair,
+    redeem_refresh_token,
 )
 from tigrbl_auth.tables import AuditEvent, Client, Consent, Tenant, User
 
@@ -181,3 +188,50 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
     assert persisted is not None
     assert persisted.software_id == "phase9-client"
     assert persisted.registration_metadata["token_endpoint_auth_method"] == "client_secret_basic"
+
+
+async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session, test_db_engine):
+    tenant, user, client = await _identity_triplet(db_session)
+    jwt = JWTCoder.default()
+
+    _, refresh_token = await issue_persisted_token_pair(
+        jwt=jwt,
+        sub=str(user.id),
+        tid=str(tenant.id),
+        client_id=str(client.id),
+        issuer="https://issuer.example",
+        audience="api://default",
+        scope="openid profile",
+    )
+
+    rotated = await redeem_refresh_token(
+        jwt=jwt,
+        refresh_token=refresh_token,
+        client_id=str(client.id),
+    )
+    assert rotated["refresh_token"] != refresh_token
+
+    original = await get_token_record_async(refresh_token)
+    successor = await get_token_record_async(rotated["refresh_token"])
+    assert original is not None and original.used_at is not None
+    assert successor is not None
+    assert successor.refresh_parent_hash == original.token_hash
+    assert successor.refresh_family_id == original.refresh_family_id
+
+    with pytest.raises(RefreshTokenReuseError):
+        await redeem_refresh_token(
+            jwt=jwt,
+            refresh_token=refresh_token,
+            client_id=str(client.id),
+        )
+
+    replayed = await get_token_record_async(refresh_token)
+    successor_after_replay = await get_token_record_async(rotated["refresh_token"])
+    assert replayed is not None and replayed.reuse_detected_at is not None
+    assert successor_after_replay is not None
+    assert successor_after_replay.revoked_reason == "refresh_token_reuse_detected"
+
+    raw_engine, _ = test_db_engine.provider.ensure()
+    dispose_result = raw_engine.dispose()
+    if hasattr(dispose_result, "__await__"):
+        await dispose_result

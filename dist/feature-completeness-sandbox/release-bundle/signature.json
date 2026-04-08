@@ -22,7 +22,7 @@
     {
       "label": "release-bundle",
       "artifact_path": "release-bundle.json",
-      "artifact_sha256": "181d7fbcc43c760f4c727ddd74a3d8c0b4ee1a5a7be1bcbff19648c713963944",
+      "artifact_sha256": "33f11ad54d80c7a467de7aa65d47442815d85ba13da1296023c0dedcb546bad6",
       "attestation_path": "attestations/release-bundle.attestation.json"
     },
     {
@@ -40,7 +40,7 @@
     {
       "label": "contract-set",
       "artifact_path": "attestations/contract-set.manifest.json",
-      "artifact_sha256": "b6fc020de3d2a2d8b9efd5a3e9db316b12c02f86f7585a7d8399cc21d67fcc59",
+      "artifact_sha256": "4b8a4da48cb65683ad3dae2146b500d15546e871de3240aba3dd1a8ecdc1cf9c",
       "attestation_path": "attestations/contract-set.attestation.json"
     }
   ],

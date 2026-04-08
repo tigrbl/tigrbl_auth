@@ -1,0 +1,79 @@
+schema_version: 1
+repository: Tigrbl/tigrbl_auth
+effective_date: 2026-04-07
+objective: >-
+  Treat GitHub repository settings as enforceable release controls for certification,
+  attestation, and publication.
+
+required_repository_controls:
+  branch_protection_or_rulesets:
+    required: true
+    branches:
+      - main
+      - release/*
+    requirements:
+      - require_pull_request_before_merge
+      - dismiss_stale_reviews
+      - require_code_owner_review
+      - require_last_push_approval
+      - require_conversation_resolution
+      - block_force_pushes
+      - block_branch_deletion
+  required_status_checks:
+    required: true
+    checks:
+      - quality / governance-and-devtest
+      - quality / dependency-review
+      - quality / codeql
+      - contracts / build-contracts
+      - contracts / verify-contract-attestations
+      - certification-matrix / final-certification
+      - evidence / evidence
+      - release-bundle / verify
+  environments:
+    required: true
+    names:
+      - pypi
+      - production-release
+    requirements:
+      - required_reviewers
+      - deployment_branch_policy
+      - wait_timer_optional
+  github_security_features:
+    secret_scanning: true
+    secret_scanning_push_protection: true
+    code_scanning: true
+    dependency_review: true
+    dependabot_alerts: true
+    dependabot_updates: true
+
+repository_enforced_files:
+  codeowners: .github/CODEOWNERS
+  reusable_workflows:
+    - .github/workflows/_quality.yml
+    - .github/workflows/_contracts.yml
+    - .github/workflows/_certification-matrix.yml
+    - .github/workflows/_evidence.yml
+    - .github/workflows/_release-bundle.yml
+    - .github/workflows/_publish.yml
+  entrypoint_workflows:
+    - .github/workflows/pr.yml
+    - .github/workflows/main.yml
+    - .github/workflows/release-candidate.yml
+    - .github/workflows/release.yml
+    - .github/workflows/recertify.yml
+
+current_truth:
+  repository_settings_enforced_from_github_now: false
+  repository_settings_materialized_in_repo_now: true
+  can_merge_around_pipeline_now: true
+  can_publish_around_attestations_now: true
+  blocker: >-
+    GitHub repository settings still need to be applied in the GitHub UI or API.
+
+manual_application_required:
+  reason: >-
+    Branch protection, rulesets, environment protection, secret scanning push
+    protection, and required checks are GitHub platform settings and cannot be
+    enforced by repository contents alone.
+  evidence_doc: docs/runbooks/GITHUB_RELEASE_CONTROLS.md

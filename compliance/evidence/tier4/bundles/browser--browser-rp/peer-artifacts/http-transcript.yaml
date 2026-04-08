@@ -1,0 +1,81 @@
+profile: browser
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: browser-authz-code
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-authz-code
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: browser-oidc-discovery
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-oidc-discovery
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'
+- scenario_id: browser-userinfo
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/userinfo
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-userinfo
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"sub":"fixture-user"}'
+- scenario_id: browser-jwe-id-token
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-jwe-id-token
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: browser-issuer-parameter
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/par
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-issuer-parameter
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"request_uri":"urn:fixture:par"}'
+- scenario_id: browser-hardening-discovery-truthfulness
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: browser
+      x-scenario-id: browser-hardening-discovery-truthfulness
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'

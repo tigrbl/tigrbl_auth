@@ -1,0 +1,42 @@
+profile: runner-uvicorn
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: runner-launch
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/healthz
+    headers:
+      accept: application/json
+      x-peer-profile: runner-uvicorn
+      x-scenario-id: runner-launch
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"status":"ok"}'
+- scenario_id: runner-health
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/healthz
+    headers:
+      accept: application/json
+      x-peer-profile: runner-uvicorn
+      x-scenario-id: runner-health
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"status":"ok"}'
+- scenario_id: runner-contract-hash
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/healthz
+    headers:
+      accept: application/json
+      x-peer-profile: runner-uvicorn
+      x-scenario-id: runner-contract-hash
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"status":"ok"}'

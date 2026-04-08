@@ -1,0 +1,40 @@
+{
+  "profile": "rp-session-logout",
+  "logout_tokens": [
+    {
+      "scenario_id": "session-state-check",
+      "sid": "fixture-sid",
+      "events": {
+        "http://schemas.openid.net/event/backchannel-logout": {}
+      }
+    },
+    {
+      "scenario_id": "rp-initiated-logout",
+      "sid": "fixture-sid",
+      "events": {
+        "http://schemas.openid.net/event/backchannel-logout": {}
+      }
+    },
+    {
+      "scenario_id": "frontchannel-fanout",
+      "sid": "fixture-sid",
+      "events": {
+        "http://schemas.openid.net/event/backchannel-logout": {}
+      }
+    },
+    {
+      "scenario_id": "backchannel-delivery",
+      "sid": "fixture-sid",
+      "events": {
+        "http://schemas.openid.net/event/backchannel-logout": {}
+      }
+    },
+    {
+      "scenario_id": "cookie-rotation-and-replay",
+      "sid": "fixture-sid",
+      "events": {
+        "http://schemas.openid.net/event/backchannel-logout": {}
+      }
+    }
+  ]
+}

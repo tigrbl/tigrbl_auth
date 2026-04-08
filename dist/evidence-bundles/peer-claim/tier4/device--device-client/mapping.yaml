@@ -1,0 +1,17 @@
+required_targets:
+- RFC 8628
+target_to_tests:
+  RFC 8628:
+  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/conformance/hardening/test_rfc8628_device_authorization.py
+  - tests/integration/test_device_code_flow.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/integration/test_rfc8628.py
+  - tests/unit/test_phase3_public_route_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+required_artifacts:
+- tests/conformance/hardening/test_rfc8628_device_authorization.py
+- tests/negative/test_phase12_resource_exchange_abuse.py
+counterpart_id: device-client

@@ -1,0 +1,42 @@
+profile: mtls
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: mtls-token
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: mtls
+      x-scenario-id: mtls-token
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: mtls-bound-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: mtls
+      x-scenario-id: mtls-bound-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: mtls-token-exchange
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: mtls
+      x-scenario-id: mtls-token-exchange
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'

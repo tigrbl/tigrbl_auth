@@ -26,6 +26,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code
@@ -67,6 +68,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code
@@ -188,6 +190,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code
@@ -221,6 +224,7 @@ paths:
                   enum:
                   - authorization_code
                   - client_credentials
+                  - refresh_token
                   - password
                 code:
                   type: string
@@ -295,6 +299,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code
@@ -335,6 +340,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code
@@ -375,6 +381,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         allowed_response_types:
         - code

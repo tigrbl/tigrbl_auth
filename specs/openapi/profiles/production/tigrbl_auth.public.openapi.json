@@ -38,6 +38,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -102,6 +103,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -279,6 +281,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -317,6 +320,7 @@
                     "enum": [
                       "authorization_code",
                       "client_credentials",
+                      "refresh_token",
                       "password",
                       "urn:ietf:params:oauth:grant-type:jwt-bearer"
                     ]
@@ -427,6 +431,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -484,6 +489,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -557,6 +563,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -703,6 +710,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -771,6 +779,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -930,6 +939,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1000,6 +1010,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1073,6 +1084,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1166,6 +1178,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1271,6 +1284,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1324,6 +1338,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1377,6 +1392,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],
@@ -1430,6 +1446,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password",
             "urn:ietf:params:oauth:grant-type:jwt-bearer"
           ],

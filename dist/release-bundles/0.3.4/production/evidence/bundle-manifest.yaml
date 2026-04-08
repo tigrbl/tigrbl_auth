@@ -214,7 +214,7 @@ copied_artifacts:
   sha256: db28cd1fdf28c1e7ef43df964f8e6583a980b9299f3f2189f3889b5b27003d2e
 - path: specs\openapi\profiles\production\tigrbl_auth.public.openapi.json
   present: true
-  sha256: 53d6553aefbc9925a41e07572ffb1c125edce2a736c18ba60a3d132915402534
+  sha256: 10c42855d8a241c97b64b9caec1388325001ab1cb0cf7e4826538af8fb9b027c
 - path: specs\openrpc\profiles\production\tigrbl_auth.admin.openrpc.json
   present: true
   sha256: 7d396116a314a9968b7003134545588de5c96e75fded029453d427f0befd3dee

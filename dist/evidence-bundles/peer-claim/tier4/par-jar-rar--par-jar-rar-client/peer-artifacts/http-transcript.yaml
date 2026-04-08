@@ -1,0 +1,55 @@
+profile: par-jar-rar
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: par-submit
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/par
+    headers:
+      accept: application/json
+      x-peer-profile: par-jar-rar
+      x-scenario-id: par-submit
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"request_uri":"urn:fixture:par"}'
+- scenario_id: jar-authorize
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: par-jar-rar
+      x-scenario-id: jar-authorize
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: rar-authorize
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: par-jar-rar
+      x-scenario-id: rar-authorize
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: rar-resource-binding
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: par-jar-rar
+      x-scenario-id: rar-resource-binding
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'

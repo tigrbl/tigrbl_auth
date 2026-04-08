@@ -2,11 +2,11 @@
 
 ## Summary
 
-- external artifact root: `None`
+- external artifact root: `dist\tier4-external-root-fixtures\2026-03-25`
 - peer profile count: `16`
-- preserved external bundle count: `0`
+- preserved external bundle count: `16`
 - valid independent external bundle count: `0`
-- invalid or rejected preserved bundle count: `0`
+- invalid or rejected preserved bundle count: `16`
 - promoted target count: `0`
 - retained target count: `48`
 - retained boundary promoted: `False`

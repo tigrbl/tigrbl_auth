@@ -13,7 +13,7 @@ from tigrbl_auth.cli.artifacts import deployment_from_options, write_openrpc_con
 def main() -> int:
     repo_root = ROOT
     write_openrpc_contract(repo_root, deployment_from_options())
-    for profile_name in ("baseline", "production", "hardening", "peer-claim"):
+    for profile_name in ("baseline", "production", "hardening", "fapi2-security", "peer-claim"):
         write_openrpc_contract(repo_root, deployment_from_options(profile=profile_name), profile_label=profile_name)
     return 0
 

@@ -1,0 +1,42 @@
+required_targets:
+- RFC 6265
+- OIDC Session Management
+- OIDC RP-Initiated Logout
+- OIDC Front-Channel Logout
+- OIDC Back-Channel Logout
+target_to_tests:
+  RFC 6265:
+  - tests/conformance/production/test_rfc6265_cookies.py
+  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  OIDC Session Management:
+  - tests/conformance/production/test_oidc_session_management.py
+  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - tests/unit/test_phase7_session_logout_cluster_b.py
+  OIDC RP-Initiated Logout:
+  - tests/conformance/production/test_oidc_rp_initiated_logout.py
+  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - tests/unit/test_phase7_session_logout_cluster_b.py
+  OIDC Front-Channel Logout:
+  - tests/conformance/hardening/test_oidc_frontchannel_logout.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - tests/unit/test_phase10_hardening_cluster_c.py
+  OIDC Back-Channel Logout:
+  - tests/conformance/hardening/test_oidc_backchannel_logout.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/negative/test_cookie_and_logout_abuse_cases.py
+  - tests/unit/test_phase10_hardening_cluster_c.py
+required_artifacts:
+- tests/conformance/production/test_rfc6265_cookies.py
+- tests/conformance/production/test_oidc_session_management.py
+- tests/conformance/production/test_oidc_rp_initiated_logout.py
+- tests/conformance/hardening/test_oidc_frontchannel_logout.py
+- tests/conformance/hardening/test_oidc_backchannel_logout.py
+- tests/negative/test_cookie_and_logout_abuse_cases.py
+counterpart_id: rp-session-logout-rp

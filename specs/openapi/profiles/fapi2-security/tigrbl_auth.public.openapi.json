@@ -1,0 +1,2147 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "tigrbl_auth public auth server",
+    "version": "0.3.4",
+    "description": "Generated public contract filtered by the effective deployment boundary."
+  },
+  "servers": [
+    {
+      "url": "https://authn.example.com"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "operationId": "post_login",
+        "summary": "Password login helper",
+        "tags": [
+          "auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc6749"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/authorize": {
+      "get": {
+        "operationId": "get_authorize",
+        "summary": "Authorization endpoint",
+        "tags": [
+          "oauth2",
+          "oidc"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/AuthorizationResponse"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "iss"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc6749",
+          "enable_oidc_core"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "parameters": [
+          {
+            "name": "response_type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "code"
+              ]
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redirect_uri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "response_mode",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "query",
+                "form_post"
+              ]
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nonce",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "request",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code_challenge",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code_challenge_method",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "S256"
+              ]
+            }
+          },
+          {
+            "name": "request_uri",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization_details",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ]
+      }
+    },
+    "/token": {
+      "post": {
+        "operationId": "post_token",
+        "summary": "Token endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc6749"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "grant_type"
+                ],
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "enum": [
+                      "authorization_code",
+                      "client_credentials",
+                      "refresh_token",
+                      "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                      "urn:ietf:params:oauth:grant-type:device_code",
+                      "urn:ietf:params:oauth:grant-type:token-exchange"
+                    ]
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "device_code": {
+                    "type": "string"
+                  },
+                  "redirect_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  },
+                  "client_assertion": {
+                    "type": "string"
+                  },
+                  "client_assertion_type": {
+                    "type": "string"
+                  },
+                  "assertion": {
+                    "type": "string"
+                  },
+                  "code_verifier": {
+                    "type": "string"
+                  },
+                  "refresh_token": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "audience": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "resource": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              },
+              "examples": {
+                "jwt_bearer_grant": {
+                  "summary": "RFC 7521 JWT bearer assertion grant",
+                  "value": {
+                    "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                    "assertion": "<jwt-bearer-assertion>",
+                    "scope": "openid profile email",
+                    "client_id": "<client-id>",
+                    "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+                    "client_assertion": "<client-auth-assertion>",
+                    "audience": "https://authn.example.com/token"
+                  }
+                },
+                "jwt_client_auth": {
+                  "summary": "RFC 7523 private_key_jwt token endpoint authentication",
+                  "value": {
+                    "client_id": "<client-id>",
+                    "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+                    "client_assertion": "<jwt-client-assertion>",
+                    "token_endpoint_auth_method": "private_key_jwt",
+                    "audience": "https://authn.example.com/token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Client-Cert-SHA256",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/userinfo": {
+      "get": {
+        "operationId": "get_userinfo",
+        "summary": "OIDC UserInfo endpoint",
+        "tags": [
+          "oidc"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfoResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_userinfo"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/introspect": {
+      "post": {
+        "operationId": "post_introspect",
+        "summary": "Token introspection endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntrospectionResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7662"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "token_type_hint": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "operationId": "post_register",
+        "summary": "Dynamic client registration endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicClientRegistrationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7591"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "redirect_uris"
+                ],
+                "properties": {
+                  "tenant_slug": {
+                    "type": "string"
+                  },
+                  "redirect_uris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "grant_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "response_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "token_endpoint_auth_method": {
+                    "type": "string"
+                  },
+                  "tls_client_certificate_thumbprint": {
+                    "type": "string"
+                  },
+                  "self_signed_tls_client_certificate_thumbprint": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "client_name": {
+                    "type": "string"
+                  },
+                  "client_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "jwks_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "contacts": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    }
+                  },
+                  "software_id": {
+                    "type": "string"
+                  },
+                  "software_version": {
+                    "type": "string"
+                  },
+                  "post_logout_redirect_uris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "frontchannel_logout_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "frontchannel_logout_session_required": {
+                    "type": "boolean"
+                  },
+                  "backchannel_logout_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "backchannel_logout_session_required": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register/{client_id}": {
+      "get": {
+        "operationId": "get_register_{client_id}",
+        "summary": "Dynamic client registration management endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicClientRegistrationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7592"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "put_register_{client_id}",
+        "summary": "Dynamic client registration management endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicClientRegistrationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7592"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenant_slug": {
+                    "type": "string"
+                  },
+                  "redirect_uris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "grant_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "response_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "token_endpoint_auth_method": {
+                    "type": "string"
+                  },
+                  "tls_client_certificate_thumbprint": {
+                    "type": "string"
+                  },
+                  "self_signed_tls_client_certificate_thumbprint": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "client_name": {
+                    "type": "string"
+                  },
+                  "client_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "jwks_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "contacts": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    }
+                  },
+                  "software_id": {
+                    "type": "string"
+                  },
+                  "software_version": {
+                    "type": "string"
+                  },
+                  "post_logout_redirect_uris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "frontchannel_logout_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "frontchannel_logout_session_required": {
+                    "type": "boolean"
+                  },
+                  "backchannel_logout_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "backchannel_logout_session_required": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete_register_{client_id}",
+        "summary": "Dynamic client registration management endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationManagementDeleteResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7592"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/revoke": {
+      "post": {
+        "operationId": "post_revoke",
+        "summary": "Token revocation endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevocationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7009"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "token_type_hint": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "operationId": "get_logout",
+        "summary": "OIDC RP-initiated logout endpoint",
+        "tags": [
+          "oidc"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_rp_initiated_logout"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "parameters": [
+          {
+            "name": "id_token_hint",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "post_logout_redirect_uri",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "post_logout",
+        "summary": "OIDC RP-initiated logout endpoint",
+        "tags": [
+          "oidc"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_rp_initiated_logout"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_token_hint": {
+                    "type": "string"
+                  },
+                  "post_logout_redirect_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "sid": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "id_token_hint": {
+                    "type": "string"
+                  },
+                  "post_logout_redirect_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "sid": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device_authorization": {
+      "post": {
+        "operationId": "post_device_authorization",
+        "summary": "Device authorization endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceAuthorizationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc8628"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "client_id"
+                ],
+                "properties": {
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "audience": {
+                    "type": "string"
+                  },
+                  "resource": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/par": {
+      "post": {
+        "operationId": "post_par",
+        "summary": "Pushed authorization request endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PushedAuthorizationResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc9126"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "client_id"
+                ],
+                "properties": {
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "request": {
+                    "type": "string"
+                  },
+                  "response_type": {
+                    "type": "string",
+                    "enum": [
+                      "code"
+                    ]
+                  },
+                  "redirect_uri": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "nonce": {
+                    "type": "string"
+                  },
+                  "code_challenge": {
+                    "type": "string"
+                  },
+                  "code_challenge_method": {
+                    "type": "string"
+                  },
+                  "resource": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  },
+                  "authorization_details": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/token/exchange": {
+      "post": {
+        "operationId": "post_token_exchange",
+        "summary": "Token exchange endpoint",
+        "tags": [
+          "oauth2"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc8693"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "grant_type",
+                  "subject_token",
+                  "subject_token_type"
+                ],
+                "properties": {
+                  "grant_type": {
+                    "type": "string"
+                  },
+                  "subject_token": {
+                    "type": "string"
+                  },
+                  "subject_token_type": {
+                    "type": "string"
+                  },
+                  "requested_token_type": {
+                    "type": "string"
+                  },
+                  "audience": {
+                    "type": "string"
+                  },
+                  "resource": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Client-Cert-SHA256",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/.well-known/openid-configuration": {
+      "get": {
+        "operationId": "get__well_known_openid_configuration",
+        "summary": "OIDC discovery document",
+        "tags": [
+          ".well-known"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoveryDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_discovery",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/.well-known/oauth-authorization-server": {
+      "get": {
+        "operationId": "get__well_known_oauth_authorization_server",
+        "summary": "OAuth authorization server metadata",
+        "tags": [
+          ".well-known"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorizationServerMetadata"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc8414",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/.well-known/oauth-protected-resource": {
+      "get": {
+        "operationId": "get__well_known_oauth_protected_resource",
+        "summary": "OAuth protected resource metadata",
+        "tags": [
+          ".well-known"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProtectedResourceMetadata"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc9728",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/.well-known/jwks.json": {
+      "get": {
+        "operationId": "get__well_known_jwks_json",
+        "summary": "JSON Web Key Set",
+        "tags": [
+          ".well-known"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwksDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7517",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://authn.example.com/authorize",
+            "tokenUrl": "https://authn.example.com/token",
+            "scopes": {
+              "openid": "OpenID Connect scope",
+              "profile": "Profile claims"
+            }
+          }
+        }
+      },
+      "openIdConnect": {
+        "type": "openIdConnect",
+        "openIdConnectUrl": "https://authn.example.com/.well-known/openid-configuration"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "error_description": {
+            "type": "string"
+          },
+          "error_uri": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "AuthorizationResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "iss": {
+            "type": "string",
+            "format": "uri"
+          },
+          "session_state": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Bearer for unconstrained or mTLS-bound tokens; DPoP for proof-of-possession tokens."
+          },
+          "expires_in": {
+            "type": "integer"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "id_token": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          }
+        }
+      },
+      "IntrospectionResponse": {
+        "type": "object",
+        "required": [
+          "active"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "sub": {
+            "type": "string"
+          },
+          "iss": {
+            "type": "string",
+            "format": "uri"
+          },
+          "exp": {
+            "type": "integer"
+          }
+        }
+      },
+      "UserInfoResponse": {
+        "type": "object",
+        "required": [
+          "sub"
+        ],
+        "properties": {
+          "sub": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "preferred_username": {
+            "type": "string"
+          }
+        }
+      },
+      "JwksDocument": {
+        "type": "object",
+        "required": [
+          "keys"
+        ],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kid": {
+                  "type": "string"
+                },
+                "kty": {
+                  "type": "string"
+                },
+                "alg": {
+                  "type": "string"
+                },
+                "use": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DiscoveryDocument": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "AuthorizationServerMetadata": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "ProtectedResourceMetadata": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "RevocationResponse": {
+        "type": "object",
+        "properties": {
+          "revoked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DynamicClientRegistrationResponse": {
+        "type": "object",
+        "required": [
+          "client_id",
+          "redirect_uris",
+          "grant_types",
+          "response_types",
+          "token_endpoint_auth_method"
+        ],
+        "properties": {
+          "client_id": {
+            "type": "string"
+          },
+          "client_secret": {
+            "type": "string"
+          },
+          "client_id_issued_at": {
+            "type": "integer"
+          },
+          "client_secret_expires_at": {
+            "type": "integer"
+          },
+          "redirect_uris": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "grant_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "response_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "token_endpoint_auth_method": {
+            "type": "string"
+          },
+          "tls_client_certificate_thumbprint": {
+            "type": "string"
+          },
+          "self_signed_tls_client_certificate_thumbprint": {
+            "type": "string"
+          },
+          "post_logout_redirect_uris": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "frontchannel_logout_uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "frontchannel_logout_session_required": {
+            "type": "boolean"
+          },
+          "backchannel_logout_uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "backchannel_logout_session_required": {
+            "type": "boolean"
+          },
+          "registration_access_token": {
+            "type": "string"
+          },
+          "registration_client_uri": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "RegistrationManagementDeleteResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "client_id"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "client_id": {
+            "type": "string"
+          }
+        }
+      },
+      "LogoutResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          },
+          "logout_id": {
+            "type": "string"
+          },
+          "post_logout_redirect_uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "state": {
+            "type": "string"
+          },
+          "cookie_cleared": {
+            "type": "boolean"
+          },
+          "cookie_policy": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "frontchannel_logout": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "backchannel_logout": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "frontchannel_delivery": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "backchannel_delivery": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "replay_protected": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DeviceAuthorizationResponse": {
+        "type": "object",
+        "required": [
+          "device_code",
+          "user_code",
+          "verification_uri",
+          "verification_uri_complete",
+          "expires_in",
+          "interval"
+        ],
+        "properties": {
+          "device_code": {
+            "type": "string"
+          },
+          "user_code": {
+            "type": "string"
+          },
+          "verification_uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "verification_uri_complete": {
+            "type": "string",
+            "format": "uri"
+          },
+          "expires_in": {
+            "type": "integer"
+          },
+          "interval": {
+            "type": "integer"
+          }
+        }
+      },
+      "PushedAuthorizationResponse": {
+        "type": "object",
+        "required": [
+          "request_uri",
+          "expires_in"
+        ],
+        "properties": {
+          "request_uri": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "integer"
+          }
+        }
+      },
+      "GenericResult": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "x-tigrbl-auth": {
+    "profile": "fapi2-security",
+    "plugin_mode": "mixed",
+    "runtime_style": "standalone",
+    "surface_sets": [
+      "public-rest",
+      "admin-rpc",
+      "diagnostics"
+    ],
+    "protocol_slices": [
+      "device",
+      "token-exchange",
+      "par",
+      "jar",
+      "rar",
+      "dpop",
+      "mtls"
+    ],
+    "extensions": [],
+    "active_targets": [
+      "RFC 6749",
+      "RFC 6750",
+      "RFC 7636",
+      "RFC 8414",
+      "RFC 8615",
+      "RFC 7515",
+      "RFC 7516",
+      "RFC 7517",
+      "RFC 7518",
+      "RFC 7519",
+      "RFC 7009",
+      "RFC 7521",
+      "RFC 7523",
+      "RFC 7591",
+      "RFC 7592",
+      "RFC 7662",
+      "RFC 8252",
+      "RFC 8628",
+      "RFC 8693",
+      "RFC 8705",
+      "RFC 8707",
+      "RFC 9101",
+      "RFC 9126",
+      "RFC 9207",
+      "RFC 9396",
+      "RFC 9449",
+      "RFC 9700",
+      "RFC 9728",
+      "RFC 6265",
+      "OIDC Core 1.0",
+      "OIDC Discovery 1.0",
+      "OIDC UserInfo",
+      "OIDC Session Management",
+      "OIDC RP-Initiated Logout",
+      "OIDC Front-Channel Logout",
+      "OIDC Back-Channel Logout",
+      "OpenAPI 3.1 / 3.2 compatible public contract",
+      "OpenRPC 1.4.x admin/control-plane contract",
+      "ASGI 3 application package",
+      "Runner profile: Uvicorn",
+      "Runner profile: Hypercorn",
+      "Runner profile: Tigrcorn",
+      "CLI operator surface",
+      "Bootstrap and migration lifecycle",
+      "Key lifecycle and JWKS publication",
+      "Import/export portability",
+      "Release bundle and signature verification"
+    ],
+    "strict_boundary_enforcement": true
+  }
+}

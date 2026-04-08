@@ -1,0 +1,42 @@
+profile: client-mgmt
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: client-register
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/register
+    headers:
+      accept: application/json
+      x-peer-profile: client-mgmt
+      x-scenario-id: client-register
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"client_id":"fixture-client"}'
+- scenario_id: client-read-update-delete
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/register
+    headers:
+      accept: application/json
+      x-peer-profile: client-mgmt
+      x-scenario-id: client-read-update-delete
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"client_id":"fixture-client"}'
+- scenario_id: client-registration-access-token
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/connect/register
+    headers:
+      accept: application/json
+      x-peer-profile: client-mgmt
+      x-scenario-id: client-registration-access-token
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"client_id":"fixture-client"}'

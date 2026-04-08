@@ -1,0 +1,20 @@
+{
+  "profile": "dpop",
+  "proofs": [
+    {
+      "scenario_id": "dpop-token",
+      "jti": "dpop-dpop-token",
+      "htu": "https://peer-fixture.example.test/token"
+    },
+    {
+      "scenario_id": "dpop-replay-rejection",
+      "jti": "dpop-dpop-replay-rejection",
+      "htu": "https://peer-fixture.example.test/token"
+    },
+    {
+      "scenario_id": "dpop-nonce-recovery",
+      "jti": "dpop-dpop-nonce-recovery",
+      "htu": "https://peer-fixture.example.test/token"
+    }
+  ]
+}

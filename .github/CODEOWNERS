@@ -1,0 +1,32 @@
+# Global fallback
+* @Tigrbl/platform-admins
+
+# Compliance and certification truth
+/CURRENT_STATE.md @Tigrbl/compliance
+/CERTIFICATION_STATUS.md @Tigrbl/compliance
+/compliance/ @Tigrbl/compliance
+/docs/compliance/ @Tigrbl/compliance
+
+# Standards and protocol implementation
+/tigrbl_auth/standards/ @Tigrbl/standards
+/tigrbl_auth/ops/ @Tigrbl/standards
+/specs/ @Tigrbl/standards
+
+# Security-sensitive code and evidence
+/tigrbl_auth/services/token_service.py @Tigrbl/security
+/tigrbl_auth/ops/token.py @Tigrbl/security
+/tigrbl_auth/release_signing.py @Tigrbl/security
+/tests/security/ @Tigrbl/security
+/tests/negative/ @Tigrbl/security
+
+# Workflow and automation controls
+/.github/ @Tigrbl/platform-admins @Tigrbl/compliance
+/scripts/ @Tigrbl/platform-admins
+
+# Release and publishing controls
+/pyproject.toml @Tigrbl/release
+/tox.ini @Tigrbl/release
+/constraints/ @Tigrbl/release
+/dist/release-bundles/ @Tigrbl/release
+/docs/runbooks/RELEASE_SIGNING_AND_VERIFICATION.md @Tigrbl/release @Tigrbl/security
+/docs/runbooks/GITHUB_ACTIONS_CERTIFICATION_PIPELINE.md @Tigrbl/release @Tigrbl/platform-admins

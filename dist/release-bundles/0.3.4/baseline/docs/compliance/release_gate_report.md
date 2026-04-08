@@ -5,45 +5,36 @@
 ## Summary
 
 - gate_count: `24`
-- failed_gate_count: `3`
-- validated_execution_artifact_count: `33`
-- required_validated_inventory_count: `30`
-- validated_inventory_present_count: `30`
-- validated_inventory_complete: `True`
+- failed_gate_count: `4`
 - clean_room_install_matrix_green: `True`
 - in_scope_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
-
-## Failures
-
-- Gate failed: gate-15-boundary-enforcement
-- Gate failed: gate-20-tests
-- Gate failed: gate-75-test-classification
+- tier4_bundle_promotion_complete: `False`
 
 ## Details
 
-- {'gate': 'gate-00-structure', 'passed': True, 'rc': 0}
-- {'gate': 'gate-05-governance', 'passed': True, 'rc': 0}
-- {'gate': 'gate-08-claim-registry-sync', 'passed': True, 'rc': 0}
-- {'gate': 'gate-10-static', 'passed': True, 'rc': 0}
-- {'gate': 'gate-12-project-tree-layout', 'passed': True, 'rc': 0}
-- {'gate': 'gate-15-boundary-enforcement', 'passed': False, 'rc': 1}
-- {'gate': 'gate-18-migration-plan', 'passed': True, 'rc': 0}
-- {'gate': 'gate-20-tests', 'passed': False, 'rc': 1}
-- {'gate': 'gate-25-wrapper-hygiene', 'passed': True, 'rc': 0}
-- {'gate': 'gate-30-contracts', 'passed': True, 'rc': 0}
-- {'gate': 'gate-35-contract-sync', 'passed': True, 'rc': 0}
-- {'gate': 'gate-40-evidence', 'passed': True, 'rc': 0}
-- {'gate': 'gate-45-evidence-peer', 'passed': True, 'rc': 0}
-- {'gate': 'gate-50-release-bundle', 'passed': True, 'rc': 0}
-- {'gate': 'gate-55-contract-validation', 'passed': True, 'rc': 0}
-- {'gate': 'gate-60-release-signing', 'passed': True, 'rc': 0}
-- {'gate': 'gate-65-state-reports', 'passed': True, 'rc': 0}
-- {'gate': 'gate-75-test-classification', 'passed': False, 'rc': 1}
-- {'gate': 'gate-85-peer-profiles', 'passed': True, 'rc': 0}
-- {'gate': 'gate-90-release', 'passed': True, 'rc': 0}
-- {'gate': 'gate-95-recertification', 'passed': True, 'rc': 0}
-- {'gate': 'gate-truth-current-state', 'passed': True, 'rc': 0}
-- {'gate': 'gate-truth-release-decision', 'passed': True, 'rc': 0}
-- {'gate': 'gate-truth-repository-state', 'passed': True, 'rc': 0}
+- gate-00-structure: passed
+- gate-05-governance: passed
+- gate-08-claim-registry-sync: passed
+- gate-10-static: passed
+- gate-12-project-tree-layout: passed
+- gate-15-boundary-enforcement: passed
+- gate-18-migration-plan: passed
+- gate-20-tests: failed
+- gate-25-wrapper-hygiene: passed
+- gate-30-contracts: passed
+- gate-35-contract-sync: passed
+- gate-40-evidence: passed
+- gate-45-evidence-peer: failed
+- gate-50-release-bundle: passed
+- gate-55-contract-validation: passed
+- gate-60-release-signing: failed
+- gate-65-state-reports: passed
+- gate-75-test-classification: passed
+- gate-85-peer-profiles: passed
+- gate-90-release: failed
+- gate-95-recertification: passed
+- gate-truth-current-state: passed
+- gate-truth-release-decision: passed
+- gate-truth-repository-state: passed

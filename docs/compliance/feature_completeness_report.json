@@ -43,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb",
-        "database_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\operator_plane.sqlite3",
-        "snapshot_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\snapshots",
-        "log_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs",
+        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb",
+        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\operator_plane.sqlite3",
+        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\snapshots",
+        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\audit-events.jsonl",
-        "transaction_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\transactions.jsonl",
-        "activity_log_path": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\operator-state-370c7fcf4504dbfb\\logs\\activity.jsonl"
+        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\audit-events.jsonl",
+        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\transactions.jsonl",
+        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\activity.jsonl"
       }
     },
     "register_manage_clients": {

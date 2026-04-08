@@ -1,0 +1,55 @@
+profile: native
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: native-loopback
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: native
+      x-scenario-id: native-loopback
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: native-custom-scheme
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: native
+      x-scenario-id: native-custom-scheme
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: native-jwe-id-token
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/token
+    headers:
+      accept: application/json
+      x-peer-profile: native
+      x-scenario-id: native-jwe-id-token
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"access_token":"fixture-token"}'
+- scenario_id: native-issuer-parameter
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/par
+    headers:
+      accept: application/json
+      x-peer-profile: native
+      x-scenario-id: native-issuer-parameter
+  response:
+    status: 201
+    headers:
+      content-type: text/plain
+    body_excerpt: '{"request_uri":"urn:fixture:par"}'

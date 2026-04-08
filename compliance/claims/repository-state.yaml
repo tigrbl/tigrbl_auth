@@ -64,12 +64,12 @@ repository_state:
   phase_11_external_peer_framework_complete: true
   tier4_peer_runner_framework_installed: true
   tier4_candidate_bundle_layouts_present: true
-  tier4_external_bundle_count: 0
+  tier4_external_bundle_count: 16
   tier4_peer_matrix_generated: true
   tier4_last_matrix_profile_count: 16
   phase_13_final_release_decision_complete: true
   phase_13_release_decision_record_present: true
-  release_gate_passed_at_phase_13: true
+  release_gate_passed_at_phase_13: false
   full_release_claim_still_partial: true
   last_release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
   phase_0_claim_boundary_rebaseline_complete: true
@@ -88,15 +88,15 @@ repository_state:
   tier4_retained_boundary_complete: false
   strict_independent_claims_ready: false
   tier4_valid_external_bundle_count: 0
-  tier4_invalid_external_bundle_count: 0
-  tier4_missing_external_bundle_count: 16
+  tier4_invalid_external_bundle_count: 16
+  tier4_missing_external_bundle_count: 0
   phase_13_target_profile_truth_reconciled_complete: true
   phase_13_profile_scope_mismatch_set_empty: true
   phase_13_clean_room_executor_matrix_declared_complete: true
   phase_13_validated_manifest_identity_contract_installed: true
   phase_13_validated_runtime_matrix_preservation_complete: true
   phase_13_validated_test_lane_preservation_complete: true
-  phase_13_validated_migration_portability_preservation_complete: true
+  phase_13_validated_migration_portability_preservation_complete: false
   alignment_only_checkpoint_no_new_certification_evidence: false
   last_truth_chain_manifest: docs/compliance/truth_chain.json
   last_truth_chain_generated_at: '2026-04-07'

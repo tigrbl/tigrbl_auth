@@ -14,7 +14,7 @@ from tigrbl_auth.cli.reports import build_release_bundle, sign_release_bundle
 from tigrbl_auth.release_signing import load_signer
 
 
-PROFILES = ("baseline", "production", "hardening", "peer-claim")
+PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 
 
 def _version(repo_root: Path) -> str:

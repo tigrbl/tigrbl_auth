@@ -7,19 +7,19 @@
 - gate_count: `24`
 - failed_gate_count: `3`
 - validated_execution_artifact_count: `33`
-- required_validated_inventory_count: `30`
-- validated_inventory_present_count: `30`
+- required_validated_inventory_count: `31`
+- validated_inventory_present_count: `31`
 - validated_inventory_complete: `True`
 - clean_room_install_matrix_green: `True`
 - in_scope_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
 
 ## Failures
 
-- Gate failed: gate-15-boundary-enforcement
 - Gate failed: gate-20-tests
 - Gate failed: gate-75-test-classification
+- Gate failed: gate-90-release
 
 ## Details
 
@@ -28,7 +28,7 @@
 - {'gate': 'gate-08-claim-registry-sync', 'passed': True, 'rc': 0}
 - {'gate': 'gate-10-static', 'passed': True, 'rc': 0}
 - {'gate': 'gate-12-project-tree-layout', 'passed': True, 'rc': 0}
-- {'gate': 'gate-15-boundary-enforcement', 'passed': False, 'rc': 1}
+- {'gate': 'gate-15-boundary-enforcement', 'passed': True, 'rc': 0}
 - {'gate': 'gate-18-migration-plan', 'passed': True, 'rc': 0}
 - {'gate': 'gate-20-tests', 'passed': False, 'rc': 1}
 - {'gate': 'gate-25-wrapper-hygiene', 'passed': True, 'rc': 0}
@@ -42,7 +42,7 @@
 - {'gate': 'gate-65-state-reports', 'passed': True, 'rc': 0}
 - {'gate': 'gate-75-test-classification', 'passed': False, 'rc': 1}
 - {'gate': 'gate-85-peer-profiles', 'passed': True, 'rc': 0}
-- {'gate': 'gate-90-release', 'passed': True, 'rc': 0}
+- {'gate': 'gate-90-release', 'passed': False, 'rc': 1}
 - {'gate': 'gate-95-recertification', 'passed': True, 'rc': 0}
 - {'gate': 'gate-truth-current-state', 'passed': True, 'rc': 0}
 - {'gate': 'gate-truth-release-decision', 'passed': True, 'rc': 0}

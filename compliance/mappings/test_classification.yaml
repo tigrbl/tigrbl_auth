@@ -9,6 +9,9 @@ allowed_categories:
 - e2e
 - security
 - negative
+- security-negative
+- migration-portability
+- peer
 - perf
 category_descriptions:
   unit: Single-module, low-dependency correctness checks.
@@ -19,6 +22,9 @@ category_descriptions:
   e2e: Release-path and documentation-driven end-to-end flows.
   security: Release trust, signing, and security-control checks.
   negative: Abuse, rejection, and deny-path assertions.
+  security-negative: Certification-grade security abuse and deny-path replay assertions.
+  migration-portability: Deterministic migration upgrade, downgrade, and backend portability assertions.
+  peer: Independent peer-validation and external counterpart evidence assertions.
   perf: Artifact and release-footprint budget checks.
 auxiliary_directory_aliases:
   tests/examples: e2e
@@ -163,6 +169,8 @@ categories:
   - tests/unit/test_phase9_feature_completeness_checkpoint.py
   - tests/unit/test_phase11_tier4_checkpoint.py
   - tests/unit/test_phase12_final_aggregation.py
+  - tests/unit/test_phase15_retained_target_test_evidence.py
+  - tests/unit/test_phase16_fapi_runtime_profile.py
   integration:
   - tests/integration/test_auth_flows.py
   - tests/integration/test_authorization_code_flow.py
@@ -254,5 +262,6 @@ categories:
   - tests/negative/test_phase6_hardening_runtime_enforcement.py
   - tests/negative/test_phase12_invalid_artifact_inputs.py
   - tests/negative/test_phase12_resource_exchange_abuse.py
+  - tests/negative/test_phase17_certification_attack_paths.py
   perf:
   - tests/perf/test_bundle_manifest_size.py

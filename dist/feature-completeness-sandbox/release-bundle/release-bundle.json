@@ -270,12 +270,12 @@
     "strict_independent_claims_ready": false,
     "tier4_supported_peer_profile_count": 16,
     "tier4_required_external_bundle_count": 16,
-    "tier4_external_bundle_count": 0,
+    "tier4_external_bundle_count": 16,
     "tier4_valid_external_bundle_count": 0,
-    "tier4_invalid_external_bundle_count": 0,
-    "tier4_missing_external_bundle_count": 16,
+    "tier4_invalid_external_bundle_count": 16,
+    "tier4_missing_external_bundle_count": 0,
     "tier4_external_handoff_template_present": true,
-    "signed_release_bundle_count": 13,
+    "signed_release_bundle_count": 12,
     "release_attestation_verifiable": true,
     "base_dependency_count": 22,
     "base_exact_pinned_dependency_count": 22,
@@ -329,7 +329,7 @@
     "operator_plane_repo_mutation_dependency": false,
     "operator_plane_tenancy_enforced": true,
     "operator_plane_database_present": true,
-    "operator_plane_state_root": "C:\\Users\\bigman\\.local\\state\\tigrbl_auth\\operator-plane\\tigrbl_auth-9a06a2e3bfb81899",
+    "operator_plane_state_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\tigrbl_auth-9a06a2e3bfb81899",
     "operator_plane_portability_schema_version": 3,
     "pyproject_requires_python": ">=3.10,<3.13",
     "serve_runtime_launcher_present": true,
@@ -354,13 +354,20 @@
     "feature_completeness_failed_capability_count": 1,
     "fully_featured_package_boundary_now": false,
     "feature_release_verify_verb_present": true,
+    "certification_evidence_index_passed": true,
+    "certification_evidence_claim_count": 376,
+    "certification_evidence_partition_count": 7,
+    "certification_evidence_target_profile_bundle_count": 197,
+    "release_evidence_clean_checkout_required": true,
+    "release_evidence_clean_checkout_now": false,
+    "release_evidence_dirty_checkout_path_count": 342,
     "authoritative_current_doc_stale_ref_count": 0,
     "historical_doc_stale_ref_count": 0,
     "derived_current_doc_count": 11,
     "historical_archive_present": true,
     "validated_execution_artifact_count": 33,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "validated_runtime_matrix_expected_count": 14,
     "validated_runtime_matrix_passed_count": 14,
@@ -368,14 +375,16 @@
     "validated_test_lane_expected_count": 15,
     "validated_test_lane_passed_count": 15,
     "validated_in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true,
     "baseline_certifiable_now_count": 13,
     "production_completion_required_count": 0,
     "hardening_completion_required_count": 0,
     "runtime_completion_required_count": 0,
     "operator_completion_required_count": 0,
-    "retained_targets_below_tier3_count": 0
+    "retained_targets_below_tier3_count": 0,
+    "retained_boundary_tier4_complete": false,
+    "tier4_promoted_target_count": 0
   },
   "certification_state_summary": {
     "fully_certifiable_now": false,
@@ -403,10 +412,10 @@
     "operator_plane_tenancy_enforced": true,
     "tier4_supported_peer_profile_count": 16,
     "tier4_required_external_bundle_count": 16,
-    "tier4_external_bundle_count": 0,
+    "tier4_external_bundle_count": 16,
     "tier4_valid_external_bundle_count": 0,
-    "tier4_invalid_external_bundle_count": 0,
-    "tier4_missing_external_bundle_count": 16,
+    "tier4_invalid_external_bundle_count": 16,
+    "tier4_missing_external_bundle_count": 0,
     "tier4_external_handoff_template_present": true,
     "tier3_ready_targets": [
       "ASGI 3 application package",
@@ -460,39 +469,41 @@
     ],
     "tier4_ready_targets": [],
     "validated_execution_artifact_count": 33,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "clean_room_matrix_green": true,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true,
     "open_gaps": [
-      "Tier 4 independent peer validation is not complete for the retained boundary.",
-      "One or more supported peer profiles still have no preserved external Tier 4 bundle.",
-      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment."
-    ]
+      "Tier 4 independent peer validation is not complete for the full retained boundary.",
+      "One or more preserved external bundle submissions were rejected as incomplete, non-independent, or otherwise invalid.",
+      "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL."
+    ],
+    "tier4_bundle_promotion_complete": false
   },
   "release_gate_summary": {
     "gate_count": 24,
-    "failed_gate_count": 3,
+    "failed_gate_count": 4,
     "validated_execution_artifact_count": 33,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "clean_room_install_matrix_green": true,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
-    "tier3_evidence_rebuilt_from_validated_runs": true
+    "migration_portability_passed": false,
+    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "tier4_bundle_promotion_complete": false
   },
   "final_release_gate_summary": {
     "runtime_profiles_truly_ready": true,
     "validated_inventory_complete": true,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "clean_room_install_matrix_green": true,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true,
     "tier4_bundle_promotion_complete": false
   },
@@ -503,13 +514,13 @@
     "fully_non_rfc_spec_compliant_now": false,
     "strict_independent_claims_ready": false,
     "release_gates_passed": false,
-    "final_release_gate_passed": true
+    "final_release_gate_passed": false
   },
   "validated_execution_summary": {
     "validated_artifact_count": 33,
     "out_of_scope_validated_artifact_count": 5,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "runtime_matrix_present_count": 14,
     "runtime_matrix_expected_count": 14,
@@ -518,8 +529,216 @@
     "test_lane_expected_count": 15,
     "test_lane_passed_count": 15,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true
+  },
+  "clean_checkout_required": false,
+  "clean_checkout": {
+    "git_available": true,
+    "clean": false,
+    "changed_path_count": 518,
+    "changed_paths": [
+      "CERTIFICATION_STATUS.md",
+      "CURRENT_STATE.md",
+      "compliance/claims/issue-registry.yaml",
+      "compliance/claims/repository-state.yaml",
+      "compliance/evidence/manifest.yaml",
+      "compliance/evidence/tier4/bundles/README.md",
+      "compliance/evidence/tier4/candidates/assertion-client/execution.log",
+      "compliance/evidence/tier4/candidates/assertion-client/manifest.yaml",
+      "compliance/evidence/tier4/candidates/assertion-client/mapping.yaml",
+      "compliance/evidence/tier4/candidates/assertion-client/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/assertion-client/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/assertion-client/reproduction.md",
+      "compliance/evidence/tier4/candidates/browser/execution.log",
+      "compliance/evidence/tier4/candidates/browser/manifest.yaml",
+      "compliance/evidence/tier4/candidates/browser/mapping.yaml",
+      "compliance/evidence/tier4/candidates/browser/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/browser/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/browser/reproduction.md",
+      "compliance/evidence/tier4/candidates/client-mgmt/execution.log",
+      "compliance/evidence/tier4/candidates/client-mgmt/manifest.yaml",
+      "compliance/evidence/tier4/candidates/client-mgmt/mapping.yaml",
+      "compliance/evidence/tier4/candidates/client-mgmt/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/client-mgmt/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/client-mgmt/reproduction.md",
+      "compliance/evidence/tier4/candidates/device/execution.log",
+      "compliance/evidence/tier4/candidates/device/manifest.yaml",
+      "compliance/evidence/tier4/candidates/device/mapping.yaml",
+      "compliance/evidence/tier4/candidates/device/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/device/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/device/reproduction.md",
+      "compliance/evidence/tier4/candidates/dpop/execution.log",
+      "compliance/evidence/tier4/candidates/dpop/manifest.yaml",
+      "compliance/evidence/tier4/candidates/dpop/mapping.yaml",
+      "compliance/evidence/tier4/candidates/dpop/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/dpop/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/dpop/reproduction.md",
+      "compliance/evidence/tier4/candidates/gateway/execution.log",
+      "compliance/evidence/tier4/candidates/gateway/manifest.yaml",
+      "compliance/evidence/tier4/candidates/gateway/mapping.yaml",
+      "compliance/evidence/tier4/candidates/gateway/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/gateway/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/gateway/reproduction.md",
+      "compliance/evidence/tier4/candidates/mtls/execution.log",
+      "compliance/evidence/tier4/candidates/mtls/manifest.yaml",
+      "compliance/evidence/tier4/candidates/mtls/mapping.yaml",
+      "compliance/evidence/tier4/candidates/mtls/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/mtls/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/mtls/reproduction.md",
+      "compliance/evidence/tier4/candidates/native/execution.log",
+      "compliance/evidence/tier4/candidates/native/manifest.yaml",
+      "compliance/evidence/tier4/candidates/native/mapping.yaml",
+      "compliance/evidence/tier4/candidates/native/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/native/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/native/reproduction.md",
+      "compliance/evidence/tier4/candidates/ops-cli/execution.log",
+      "compliance/evidence/tier4/candidates/ops-cli/manifest.yaml",
+      "compliance/evidence/tier4/candidates/ops-cli/mapping.yaml",
+      "compliance/evidence/tier4/candidates/ops-cli/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/ops-cli/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/ops-cli/reproduction.md",
+      "compliance/evidence/tier4/candidates/par-jar-rar/execution.log",
+      "compliance/evidence/tier4/candidates/par-jar-rar/manifest.yaml",
+      "compliance/evidence/tier4/candidates/par-jar-rar/mapping.yaml",
+      "compliance/evidence/tier4/candidates/par-jar-rar/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/par-jar-rar/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/par-jar-rar/reproduction.md",
+      "compliance/evidence/tier4/candidates/resource-server/execution.log",
+      "compliance/evidence/tier4/candidates/resource-server/manifest.yaml",
+      "compliance/evidence/tier4/candidates/resource-server/mapping.yaml",
+      "compliance/evidence/tier4/candidates/resource-server/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/resource-server/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/resource-server/reproduction.md",
+      "compliance/evidence/tier4/candidates/rp-session-logout/execution.log",
+      "compliance/evidence/tier4/candidates/rp-session-logout/manifest.yaml",
+      "compliance/evidence/tier4/candidates/rp-session-logout/mapping.yaml",
+      "compliance/evidence/tier4/candidates/rp-session-logout/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/rp-session-logout/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/rp-session-logout/reproduction.md",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/execution.log",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/manifest.yaml",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/mapping.yaml",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/runner-hypercorn/reproduction.md",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/execution.log",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/manifest.yaml",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/mapping.yaml",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/runner-tigrcorn/reproduction.md",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/execution.log",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/manifest.yaml",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/mapping.yaml",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/runner-uvicorn/reproduction.md",
+      "compliance/evidence/tier4/candidates/spa/execution.log",
+      "compliance/evidence/tier4/candidates/spa/manifest.yaml",
+      "compliance/evidence/tier4/candidates/spa/mapping.yaml",
+      "compliance/evidence/tier4/candidates/spa/peer-artifacts/README.md",
+      "compliance/evidence/tier4/candidates/spa/peer-profile.yaml",
+      "compliance/evidence/tier4/candidates/spa/reproduction.md",
+      "compliance/gates/gate-order.yaml",
+      "compliance/mappings/feature-to-evidence.yaml",
+      "compliance/mappings/feature-to-test.yaml",
+      "compliance/mappings/target-to-evidence.yaml",
+      "compliance/mappings/target-to-test.yaml",
+      "compliance/mappings/test-classification.yaml",
+      "compliance/mappings/test_classification.yaml",
+      "dist/feature-completeness-sandbox/discovery/manifest.json",
+      "dist/feature-completeness-sandbox/discovery/oauth-authorization-server.json",
+      "dist/feature-completeness-sandbox/discovery/openid-configuration.json",
+      "dist/feature-completeness-sandbox/exports/portable-export.json",
+      "dist/feature-completeness-sandbox/release-bundle/.github/workflows/ci-install-profiles.yml",
+      "dist/feature-completeness-sandbox/release-bundle/.github/workflows/ci-release-gates.yml",
+      "dist/feature-completeness-sandbox/release-bundle/Dockerfile",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/claim-manifest.attestation.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/contract-set.attestation.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/contract-set.manifest.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/evidence-manifest.attestation.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/keys/ed25519-47cff9cbdf9030464a7095e6.pub.pem",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/release-attestation.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/release-bundle.attestation.json",
+      "dist/feature-completeness-sandbox/release-bundle/attestations/signer-identity.json",
+      "dist/feature-completeness-sandbox/release-bundle/compliance/claims/effective-target-claims.baseline.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/compliance/evidence/effective-release-evidence.baseline.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/base.txt",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/dependency-lock.json",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/runner-hypercorn.txt",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/runner-tigrcorn.txt",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/runner-uvicorn.txt",
+      "dist/feature-completeness-sandbox/release-bundle/constraints/test.txt",
+      "dist/feature-completeness-sandbox/release-bundle/digests.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/certification_state_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/certification_state_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/current_state_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/current_state_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/final_release_gate_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/final_release_gate_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/install_substrate_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/install_substrate_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/release_gate_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/release_gate_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/release_signing_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/release_signing_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/runtime_profile_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/runtime_profile_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/truth_chain.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/truth_chain.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/validated_execution_report.json",
+      "dist/feature-completeness-sandbox/release-bundle/docs/compliance/validated_execution_report.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/runbooks/CLEAN_CHECKOUT_REPRO.md",
+      "dist/feature-completeness-sandbox/release-bundle/docs/runbooks/INSTALLATION_PROFILES.md",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/bundle-manifest.json",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/bundle-manifest.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/claims/effective-target-claims.baseline.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/effective-release-evidence.baseline.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/assertion-client.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/browser.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/client-mgmt.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/device.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/dpop.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/gateway.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/mtls.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/native.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/ops-cli.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/par-jar-rar.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/resource-server.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/rp-session-logout.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/runner-hypercorn.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/runner-tigrcorn.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/runner-uvicorn.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/compliance/evidence/peer_profiles/spa.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json",
+      "dist/feature-completeness-sandbox/release-bundle/evidence/specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+      "dist/feature-completeness-sandbox/release-bundle/pyproject.toml",
+      "dist/feature-completeness-sandbox/release-bundle/release-bundle.json",
+      "dist/feature-completeness-sandbox/release-bundle/release-bundle.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/scripts/run_certification_lane.py",
+      "dist/feature-completeness-sandbox/release-bundle/scripts/verify_clean_room_install_substrate.py",
+      "dist/feature-completeness-sandbox/release-bundle/signature.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/cli/cli_contract.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/cli/cli_contract.yaml",
+      "dist/feature-completeness-sandbox/release-bundle/specs/discovery/profiles/baseline/jwks.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/discovery/profiles/baseline/oauth-authorization-server.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/discovery/profiles/baseline/openid-configuration.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json",
+      "dist/feature-completeness-sandbox/release-bundle/specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+      "dist/feature-completeness-sandbox/release-bundle/tox.ini",
+      "dist/feature-completeness-sandbox/release-bundle/verification.json",
+      "dist/feature-completeness-sandbox/release-bundle/verification.md",
+      "dist/release-bundles/0.3.4/baseline/attestations/claim-manifest.attestation.json",
+      "dist/release-bundles/0.3.4/baseline/attestations/contract-set.attestation.json",
+      "dist/release-bundles/0.3.4/baseline/attestations/contract-set.manifest.json",
+      "dist/release-bundles/0.3.4/baseline/attestations/evidence-manifest.attestation.json",
+      "dist/release-bundles/0.3.4/baseline/attestations/keys/ed25519-b91a2b82040d55388dec560b.pub.pem"
+    ]
   },
   "artifacts": [
     {
@@ -535,7 +754,7 @@
     {
       "path": "specs\\openapi\\profiles\\baseline\\tigrbl_auth.public.openapi.json",
       "present": true,
-      "sha256": "f99cbb694599ed1c6ee77ba341f0078d9a50210f9fabada7f4517b104db32faa"
+      "sha256": "d6622e4a4868f77b4f53931e4a32fcca488701c189c32c6455cb706c90ebe9ac"
     },
     {
       "path": "specs\\openrpc\\profiles\\baseline\\tigrbl_auth.admin.openrpc.json",
@@ -630,102 +849,102 @@
     {
       "path": "docs/compliance/truth_chain.json",
       "present": true,
-      "sha256": "7cb292af53d9e53719cb8dbc918829b6319faecb74c302ab15ab0dd422c52dba"
+      "sha256": "1adc15830b82dbd6b0e026b31684f3dc51d92ed5d985181b9cc58d4344c2a66b"
     },
     {
       "path": "docs/compliance/truth_chain.md",
       "present": true,
-      "sha256": "1d2eb4a86198431d008647bac30195cbda42b6e0b413490c023864dedb78ad47"
+      "sha256": "324b0aad64363bf3df569d79552359059459c343578dd87f3773c3c72a8f9604"
     },
     {
       "path": "docs/compliance/current_state_report.json",
       "present": true,
-      "sha256": "7462fe3deb4cf505cc96743acbb03e1fd56484766510e2f93b29fdc9a0ef1339"
+      "sha256": "611be453e00ca8c2600c30ad6eabefd9f994b85c0a62da7f760a90d6dd640916"
     },
     {
       "path": "docs/compliance/current_state_report.md",
       "present": true,
-      "sha256": "3eb347e3f1c03b2269de5594998c74a1dfec7676a8997c7f81dc9c1f9e2e9cd7"
+      "sha256": "5a3ba1dc67186a6974ddee4a5f4f406c2a9166967bf310eca23bf97c2bdd4a8c"
     },
     {
       "path": "docs/compliance/install_substrate_report.json",
       "present": true,
-      "sha256": "97aed9c19e41933507bef1ff0cee1d1f8f7d0adf80ac6322d98a0b8f9a488ad6"
+      "sha256": "17e1639056ede9fd13cbd00d500d759959956ad131afd9a6ce9fa5edfcc478a9"
     },
     {
       "path": "docs/compliance/install_substrate_report.md",
       "present": true,
-      "sha256": "ca80c7db0ba5fec6a93e705dce9f65f42eed4810280210a8573e1842386d29b7"
+      "sha256": "3f441ff84f73bd2c3ed3aa9e84a841c8f860cce7017e55a49f3ce66e8101c149"
     },
     {
       "path": "docs/compliance/certification_state_report.json",
       "present": true,
-      "sha256": "07e3769474f7a48b580438585e47be4516ad307eb60548dc33e9820ba542151a"
+      "sha256": "63fcc5ff83419e4b934afa293c55a15d9b3719c87c8725812569fb31369efb93"
     },
     {
       "path": "docs/compliance/certification_state_report.md",
       "present": true,
-      "sha256": "c6ab0585907cfbb7d2a7e363895cd96f48cd188260cccab9dc1573beb302908c"
+      "sha256": "1983a23d3907cae91dd2f82bbccd3fbd0dc03119b61edcc20ebb3035a06ec869"
     },
     {
       "path": "docs/compliance/runtime_profile_report.json",
       "present": true,
-      "sha256": "3a2d5b49875da49d4afdcbb92d78edac29f91063eeaa11a51ab9e9b4bae1ea8c"
+      "sha256": "9b30a82ed2af95e87e914b774e50aed6cb94b12d7eca8dd3f3c8340d36420eb7"
     },
     {
       "path": "docs/compliance/runtime_profile_report.md",
       "present": true,
-      "sha256": "1f74248bc568b343607ab3cc2f0a735346aeeb4140d0345bc91fa19f2d754ab0"
+      "sha256": "9ded16db3c0de25a932ac9a3162f4a125a946b1473d6744895485e862d167d9c"
     },
     {
       "path": "docs/compliance/release_gate_report.json",
       "present": true,
-      "sha256": "2c9c3d0dce4d70c9c053511ff3f8b7c2fe4e3165849f6691eeefb196a6e91881"
+      "sha256": "7e9123f952dc5c860a05fff4a07b467889a507defab635385d3cc08b90d11339"
     },
     {
       "path": "docs/compliance/release_gate_report.md",
       "present": true,
-      "sha256": "bca467144b2dd5a01ac7168d7bdffd03c7540d9488be5746371837b57aa91fba"
+      "sha256": "5979a5f458a6980fbcf060e319a7384e3f3c668bf1de560e39c2c801a9bd70aa"
     },
     {
       "path": "docs/compliance/final_release_gate_report.json",
       "present": true,
-      "sha256": "962c816ec203068cebee517504d43cb6c7191e303852d22f0c9be1fd05e859f7"
+      "sha256": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019"
     },
     {
       "path": "docs/compliance/final_release_gate_report.md",
       "present": true,
-      "sha256": "fc8987c0baebc4616ea4ba4738db018d220dfc595d7a0f8fd68575fbf1a5da7a"
+      "sha256": "e9e927e36285c634f91209a2b62ca7fc0d1feaaa94afe329f28ab2f42a5f2796"
     },
     {
       "path": "docs/compliance/validated_execution_report.json",
       "present": true,
-      "sha256": "81b21bb337b1861f10e292a6a82c2d43c03f325822fd4daf32f14db105bff255"
+      "sha256": "d5117451e2310104ab60055704706dfe5f491b9cdf633d6d6203bda2533d8be7"
     },
     {
       "path": "docs/compliance/validated_execution_report.md",
       "present": true,
-      "sha256": "8bb87ab43c0c5780004200e408bd6dd373650738fa2f66f21c42265da616f181"
+      "sha256": "5e38596e1506df13b76b8c773c02fd1fddd057d89083dce339919bd75960608b"
     },
     {
       "path": "docs/compliance/release_signing_report.json",
       "present": true,
-      "sha256": "163278c3a844c6d18007e31739dc76225cc84104d2694907ecfff92f69417e9f"
+      "sha256": "61c5d4633c333e340560ed4b3363af379726394fc4d4dcaac81b624b46caf51e"
     },
     {
       "path": "docs/compliance/release_signing_report.md",
       "present": true,
-      "sha256": "51d6f69f0baf578f52389c5cfa6fdb43bb95d499f98299a7a152dd8a181847a7"
+      "sha256": "c3683269a46359673bf8273f8a06c4fa3da07e02f410bed23465d82722b09a37"
     },
     {
       "path": "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
       "present": true,
-      "sha256": "ac379cbf729cdd24f4197df5c655b28f87c1f0c9d5932f112d6480e7ec67d90f"
+      "sha256": "0e195c4351e26451f179ac207b4f5932a02aeba2f233666fac5bcf667b8baf1c"
     },
     {
       "path": "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
       "present": true,
-      "sha256": "1deea2d5ac92629715d1c0feded72f806e236ceded8de4a47035c44d21576e93"
+      "sha256": "345f9d6bfaf5cc079989abd931c056ef3cd337dae576b3491d1ec7ab904a8890"
     },
     {
       "path": "specs/cli/cli_contract.json",
@@ -745,12 +964,12 @@
     {
       "path": "specs\\discovery\\profiles\\baseline\\oauth-authorization-server.json",
       "present": true,
-      "sha256": "b84369f3bdc9dc9b5805945448d95d42ae47af8560eabe04e4b87bd919d458f6"
+      "sha256": "a4ec8b22a2e8397a2c4959363532085842ac7dc3441e4e0be450ade4405d59b6"
     },
     {
       "path": "specs\\discovery\\profiles\\baseline\\openid-configuration.json",
       "present": true,
-      "sha256": "b84369f3bdc9dc9b5805945448d95d42ae47af8560eabe04e4b87bd919d458f6"
+      "sha256": "a4ec8b22a2e8397a2c4959363532085842ac7dc3441e4e0be450ade4405d59b6"
     }
   ]
 }

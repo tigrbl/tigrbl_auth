@@ -16,6 +16,11 @@ The following profile-specific discovery snapshots are committed from executable
   - `specs/discovery/profiles/hardening/oauth-authorization-server.json`
   - `specs/discovery/profiles/hardening/oauth-protected-resource.json`
   - `specs/discovery/profiles/hardening/openid-configuration.json`
+- `fapi2-security`
+  - `specs/discovery/profiles/fapi2-security/jwks.json`
+  - `specs/discovery/profiles/fapi2-security/oauth-authorization-server.json`
+  - `specs/discovery/profiles/fapi2-security/oauth-protected-resource.json`
+  - `specs/discovery/profiles/fapi2-security/openid-configuration.json`
 - `peer-claim`
   - `specs/discovery/profiles/peer-claim/jwks.json`
   - `specs/discovery/profiles/peer-claim/oauth-authorization-server.json`

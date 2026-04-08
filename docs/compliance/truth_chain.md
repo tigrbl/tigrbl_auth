@@ -5,8 +5,8 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - generated_at: `2026-04-07`
 - final_release_ready: `False`
 - checkpoint_only: `True`
-- release_gates_passed: `True`
-- final_release_gate_passed: `True`
+- release_gates_passed: `False`
+- final_release_gate_passed: `False`
 
 ## Source of truth
 
@@ -25,17 +25,17 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - validated_inventory_complete: `True`
 - validated_runtime_matrix_green: `True`
 - validated_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
 - fully_featured_package_boundary_now: `False`
 - strict_independent_claims_ready: `False`
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
-- release_gates_passed: `True`
-- release_gate_count: `24`
-- release_gate_failed_count: `0`
-- final_release_gate_passed: `True`
+- release_gates_passed: `False`
+- release_gate_count: `25`
+- release_gate_failed_count: `7`
+- final_release_gate_passed: `False`
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - target_profile_truth_reconciled_complete: `True`
@@ -48,12 +48,12 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - core_targets_missing_from_feature_map: `0`
 - extension_targets_missing_from_feature_map: `0`
 - settings_backed_flags_missing_from_flag_map: `0`
-- tier4_external_bundle_count: `0`
+- tier4_external_bundle_count: `16`
 - tier4_valid_external_bundle_count: `0`
-- tier4_invalid_external_bundle_count: `0`
-- tier4_missing_external_bundle_count: `16`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles still have no preserved external Tier 4 bundle.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.']`
-- final_release_failures: `[]`
+- tier4_invalid_external_bundle_count: `16`
+- tier4_missing_external_bundle_count: `0`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- final_release_failures: `['Migration portability validation is not preserved for both SQLite and PostgreSQL.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `8`
 

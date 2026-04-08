@@ -3,14 +3,14 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-bundle/v1",
-    "issued_at": "2026-04-07T22:39:51Z",
+    "issued_at": "2026-04-07T23:24:04Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
-      "key_id": "ed25519:b91a2b82040d55388dec560b",
+      "key_id": "ed25519:8ecf65051dde467b43f688b4",
       "algorithm": "Ed25519",
       "identity_kind": "repository-release-attestor",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
-      "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEANlOQ+e7M4Wd3r4vL20KCzzJ55rpldcDOIE3xOp5sg6I=\n-----END PUBLIC KEY-----\n",
+      "public_key_sha256": "8ecf65051dde467b43f688b4ca7a1e26d40d8fb3ac267c07c7c6177946696e02",
       "source": "inline-pem"
     },
     "subject": {
@@ -22,7 +22,7 @@
         {
           "label": "release-bundle",
           "artifact_path": "release-bundle.json",
-          "artifact_sha256": "da5bd9fd6eb136f83fa8ae3f2c76d18a54b4843083ce1702b353ade5b2a29247",
+          "artifact_sha256": "79b8d6bbf2e5dfff3f0c49c0de36e064758ce4e856cff079046b75e800c4610c",
           "attestation_path": "attestations/release-bundle.attestation.json"
         },
         {
@@ -40,7 +40,7 @@
         {
           "label": "contract-set",
           "artifact_path": "attestations/contract-set.manifest.json",
-          "artifact_sha256": "488b0bf95fa2672ff2c3565d784694e236265027b2fedfefb3d55410aaa7f603",
+          "artifact_sha256": "6fa57684760c402d7cf719c0d8ce3270f6100dc5ce4bb9ace0f45858d2796efe",
           "attestation_path": "attestations/contract-set.attestation.json"
         }
       ]
@@ -49,7 +49,7 @@
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "-k-h1SDxv6JIll6s2HX4YdWSQiXcqK_Aa-MRrGSd8yn3zzAS5PX6qrY7YzSp_3mRMO8bDZsRa1geJrRkoHm1BA",
-    "payload_sha256": "de956f221145ec02baebb6136254c1b0e752ebf88afed6a3ba22b8b5802c2c4d"
+    "value": "oj9lom9Fs_xjxFlDDCZf84MG_dLtCATQ2b7o97Fe8P1tpgJuGG98miYOjyNXJCvVkxzTjaPirb9FWjXZpNRLDg",
+    "payload_sha256": "9a6d4b27c7538014bbba43e53491bed06c95a23690713ddfea36143ebbb02365"
   }
 }

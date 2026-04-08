@@ -1,0 +1,77 @@
+[
+  {
+    "scenario_id": "session-state-check",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "session-state-check",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "session-state-check",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "rp-initiated-logout",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "rp-initiated-logout",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "rp-initiated-logout",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "frontchannel-fanout",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "frontchannel-fanout",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "frontchannel-fanout",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "backchannel-delivery",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "backchannel-delivery",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "backchannel-delivery",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "cookie-rotation-and-replay",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "cookie-rotation-and-replay",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "cookie-rotation-and-replay",
+    "event": "assert",
+    "result": "passed"
+  }
+]

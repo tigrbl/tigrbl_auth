@@ -1,0 +1,62 @@
+required_targets:
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- CLI operator surface
+- Bootstrap and migration lifecycle
+- Key lifecycle and JWKS publication
+- Import/export portability
+- Release bundle and signature verification
+target_to_tests:
+  OpenAPI 3.1 / 3.2 compatible public contract:
+  - tests/e2e/test_release_gate_catalog.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_contract_generation_live.py
+  OpenRPC 1.4.x admin/control-plane contract:
+  - tests/e2e/test_release_gate_catalog.py
+  - tests/unit/test_contract_generation_live.py
+  - tests/unit/test_rpc_registry_live.py
+  CLI operator surface:
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/unit/test_cli_surface_checkpoint.py
+  - tests/unit/test_phase3_runtime_launcher.py
+  - tests/unit/test_phase4_cli_contract.py
+  - tests/unit/test_phase5_operator_service_layer.py
+  - tests/conformance/operator/test_cli_serve_runtime.py
+  - tests/conformance/operator/test_cli_resource_lifecycle.py
+  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  - tests/conformance/operator/test_cli_import_export.py
+  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  Bootstrap and migration lifecycle:
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/e2e/test_release_gate_catalog.py
+  - tests/unit/test_phase4_cli_contract.py
+  - tests/conformance/operator/test_cli_bootstrap_migrate.py
+  Key lifecycle and JWKS publication:
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/unit/test_jwks_rotation.py
+  - tests/unit/test_rpc_registry_live.py
+  - tests/unit/test_phase4_cli_contract.py
+  - tests/unit/test_phase5_operator_service_layer.py
+  - tests/conformance/operator/test_cli_keys_lifecycle.py
+  Import/export portability:
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/unit/test_phase4_cli_contract.py
+  - tests/unit/test_phase5_operator_service_layer.py
+  - tests/conformance/operator/test_cli_import_export.py
+  Release bundle and signature verification:
+  - tests/unit/test_phase0_claim_boundary_rebaseline.py
+  - tests/security/test_release_bundle_signing.py
+  - tests/unit/test_phase1_published_dependency_model.py
+  - tests/security/test_phase12_sender_constraint_replay.py
+required_artifacts:
+- docs/reference/CLI_SURFACE.md
+- specs/cli/cli_contract.json
+- specs/openapi/profiles/peer-claim/tigrbl_auth.public.openapi.json
+- specs/openrpc/profiles/peer-claim/tigrbl_auth.admin.openrpc.json
+- tests/conformance/operator/test_cli_serve_runtime.py
+- tests/conformance/operator/test_cli_resource_lifecycle.py
+- tests/conformance/operator/test_cli_keys_lifecycle.py
+- tests/conformance/operator/test_cli_import_export.py
+- tests/conformance/operator/test_cli_bootstrap_migrate.py
+- tests/security/test_release_bundle_signing.py
+counterpart_id: ops-cli-harness

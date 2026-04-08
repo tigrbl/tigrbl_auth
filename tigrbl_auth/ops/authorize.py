@@ -25,7 +25,11 @@ from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
 from tigrbl_auth.standards.oauth2.resource_indicators import extract_resource
 from tigrbl_auth.standards.oauth2.issuer_identification import authorization_response_issuer
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oauth2.rfc9700 import OAuthPolicyViolation, assert_authorization_request_allowed
+from tigrbl_auth.standards.oauth2.rfc9700 import (
+    OAuthPolicyViolation,
+    assert_authorization_request_allowed,
+    runtime_security_profile,
+)
 from tigrbl_auth.tables import AuthCode, Client, PushedAuthorizationRequest, User
 
 
@@ -89,8 +93,10 @@ async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[st
 async def authorize_request(*, request, db, params: dict[str, Any]):
     _require_tls(request)
     deployment = resolve_deployment(settings)
+    policy = runtime_security_profile(deployment)
 
     params = dict(params)
+    params["_frontchannel_request"] = True
     params, par_row = await _resolve_pushed_authorization_request(db, params)
     params = await _resolve_request_object(params, deployment)
 
@@ -175,6 +181,11 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request", "error_description": str(exc)}) from exc
     if code_challenge_method and code_challenge_method != "S256":
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
+    if policy.pkce_s256_required and (not code_challenge or code_challenge_method != "S256"):
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_request", "error_description": "FAPI authorization requests require PKCE S256"},
+        )
 
     mode = response_mode or ("fragment" if rts & {"token", "id_token"} else "query")
     if mode not in {"query", "fragment", "form_post"}:
@@ -229,6 +240,10 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
         auth_code_claims["_resource"] = resource_audience
     if parsed_authorization_details is not None:
         auth_code_claims["_authorization_details"] = parsed_authorization_details
+    if params.get("_dpop_jkt"):
+        auth_code_claims["_dpop_jkt"] = str(params["_dpop_jkt"])
+    if params.get("_mtls_thumbprint"):
+        auth_code_claims["_mtls_thumbprint"] = str(params["_mtls_thumbprint"])
 
     if "code" in rts:
         code_uuid = uuid4()
@@ -282,7 +297,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     session_state = session_state_for_client(session, client_id=str(client_id), redirect_uri=str(redirect_uri))
     if session_state:
         params_out.append(("session_state", session_state))
-    if deployment.flag_enabled("enable_rfc9207"):
+    if policy.authorization_response_iss_required:
         params_out.append(authorization_response_issuer(str(deployment.issuer or ISSUER)))
     if state:
         params_out.append(("state", str(state)))

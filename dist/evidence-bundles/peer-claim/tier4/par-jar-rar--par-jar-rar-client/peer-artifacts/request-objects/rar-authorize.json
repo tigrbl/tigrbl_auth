@@ -1,0 +1,6 @@
+{
+  "scenario_id": "rar-authorize",
+  "iss": "fixture-client",
+  "aud": "https://authn.example.com",
+  "response_type": "code"
+}

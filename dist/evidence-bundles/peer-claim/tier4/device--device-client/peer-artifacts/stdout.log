@@ -1,0 +1,4 @@
+[device-authorization] PASS
+[device-token-poll] PASS
+[device-slow-down] PASS
+[device-denial-replay] PASS

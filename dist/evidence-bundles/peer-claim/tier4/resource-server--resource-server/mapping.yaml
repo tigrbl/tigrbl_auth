@@ -1,0 +1,66 @@
+required_targets:
+- RFC 6750
+- RFC 7662
+- RFC 8693
+- RFC 8707
+- RFC 9068
+- RFC 9728
+- RFC 9700
+target_to_tests:
+  RFC 6750:
+  - tests/conformance/baseline/test_rfc6750_bearer_token.py
+  - tests/integration/test_auth_flows.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  RFC 7662:
+  - tests/conformance/production/test_rfc7662_introspection.py
+  - tests/integration/test_migration_upgrade_downgrade_safety.py
+  - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/integration/test_rfc7662.py
+  - tests/unit/test_phase3_public_route_contracts.py
+  RFC 8693:
+  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/conformance/hardening/test_rfc8693_token_exchange.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/integration/test_rfc8693_token_exchange_endpoint.py
+  - tests/integration/test_token_exchange_flow.py
+  - tests/unit/test_phase3_public_route_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  RFC 8707:
+  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/conformance/hardening/test_rfc8707_resource_indicators.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+  RFC 9068:
+  - tests/conformance/production/test_rfc9068_jwt_profile.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  RFC 9728:
+  - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/integration/test_rfc8414_metadata.py
+  - tests/unit/test_rfc9728_metadata_checkpoint.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  RFC 9700:
+  - tests/conformance/hardening/test_rfc9700_security_bcp.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/negative/test_phase6_hardening_runtime_enforcement.py
+  - tests/unit/test_phase6_profile_discovery_runtime.py
+  - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+  - tests/unit/test_phase10_hardening_cluster_c.py
+required_artifacts:
+- tests/conformance/production/test_rfc7662_introspection.py
+- tests/conformance/production/test_rfc9068_jwt_profile.py
+- tests/conformance/hardening/test_rfc8693_token_exchange.py
+- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+- tests/unit/test_rfc9728_metadata_checkpoint.py
+- tests/security/test_phase12_sender_constraint_replay.py
+counterpart_id: resource-server

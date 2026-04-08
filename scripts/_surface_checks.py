@@ -7,11 +7,12 @@ from typing import Any
 
 import yaml
 
-PROFILE_SEQUENCE = ("baseline", "production", "hardening", "peer-claim")
+PROFILE_SEQUENCE = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 PROFILE_GROUPS = {
     "baseline": ("baseline",),
     "production": ("baseline", "production"),
     "hardening": ("baseline", "production", "hardening"),
+    "fapi2-security": ("baseline", "production", "hardening", "fapi2-security"),
     "peer-claim": ("baseline", "production", "hardening"),
 }
 PUBLIC_ROUTE_SEARCH_ROOTS = (

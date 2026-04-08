@@ -1,0 +1,42 @@
+profile: spa
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: spa-authz-code-pkce
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/authorize
+    headers:
+      accept: application/json
+      x-peer-profile: spa
+      x-scenario-id: spa-authz-code-pkce
+  response:
+    status: 302
+    headers:
+      content-type: text/plain
+    body_excerpt: redirect with code
+- scenario_id: spa-discovery
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: spa
+      x-scenario-id: spa-discovery
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'
+- scenario_id: spa-hardening-discovery-truthfulness
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: spa
+      x-scenario-id: spa-hardening-discovery-truthfulness
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'

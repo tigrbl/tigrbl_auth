@@ -1,0 +1,8 @@
+name: tigrbl_auth-codeql
+paths:
+  - tigrbl_auth
+  - scripts
+paths-ignore:
+  - docs
+  - dist
+  - tests

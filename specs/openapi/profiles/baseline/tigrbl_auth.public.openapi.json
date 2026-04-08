@@ -38,6 +38,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -91,6 +92,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -267,6 +269,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -304,6 +307,7 @@
                     "enum": [
                       "authorization_code",
                       "client_credentials",
+                      "refresh_token",
                       "password"
                     ]
                   },
@@ -414,6 +418,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -466,6 +471,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -518,6 +524,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [

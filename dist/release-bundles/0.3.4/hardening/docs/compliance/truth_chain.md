@@ -6,7 +6,7 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - release_gates_passed: `False`
-- final_release_gate_passed: `True`
+- final_release_gate_passed: `False`
 
 ## Source of truth
 
@@ -25,7 +25,7 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - validated_inventory_complete: `True`
 - validated_runtime_matrix_green: `True`
 - validated_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
 - fully_featured_package_boundary_now: `False`
 - strict_independent_claims_ready: `False`
@@ -35,7 +35,7 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - release_gates_passed: `False`
 - release_gate_count: `24`
 - release_gate_failed_count: `3`
-- final_release_gate_passed: `True`
+- final_release_gate_passed: `False`
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - target_profile_truth_reconciled_complete: `True`
@@ -52,8 +52,8 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - tier4_valid_external_bundle_count: `0`
 - tier4_invalid_external_bundle_count: `0`
 - tier4_missing_external_bundle_count: `16`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles still have no preserved external Tier 4 bundle.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.']`
-- final_release_failures: `[]`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles still have no preserved external Tier 4 bundle.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.']`
+- final_release_failures: `['Migration portability validation is not preserved for both SQLite and PostgreSQL.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `8`
 

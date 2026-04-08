@@ -14,12 +14,12 @@ This checkpoint extends the independent peer program for `tigrbl_auth`, installs
 ## Current result
 
 - peer profiles in catalog: `16`
-- preserved external Tier 4 bundles normalized: `0`
+- preserved external Tier 4 bundles normalized: `16`
 - valid independent external bundles: `0`
-- invalid or non-qualifying preserved bundles: `0`
+- invalid or non-qualifying preserved bundles: `16`
 - promoted Tier 4 targets: `0`
 - retained boundary fully promoted to Tier 4: `False`
-- external artifact root used for this checkpoint: `None`
+- external artifact root used for this checkpoint: `dist\tier4-external-root-fixtures\2026-03-25`
 
 ## Current provenance note
 

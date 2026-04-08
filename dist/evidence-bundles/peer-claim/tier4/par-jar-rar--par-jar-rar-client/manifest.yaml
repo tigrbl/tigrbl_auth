@@ -1,0 +1,80 @@
+schema_version: 1
+bundle_id: par-jar-rar--par-jar-rar-client
+peer_profile: par-jar-rar
+counterpart_id: par-jar-rar-client
+status: external-preserved-failed
+runtime_profile: hardening
+target_ids:
+- RFC 9101
+- RFC 9126
+- RFC 9396
+- RFC 8707
+scenario_results:
+- id: par-submit
+  passed: true
+  notes: par-submit completed successfully in the staged external-root fixture set.
+- id: jar-authorize
+  passed: true
+  notes: jar-authorize completed successfully in the staged external-root fixture
+    set.
+- id: rar-authorize
+  passed: true
+  notes: rar-authorize completed successfully in the staged external-root fixture
+    set.
+- id: rar-resource-binding
+  passed: true
+  notes: rar-resource-binding completed successfully in the staged external-root fixture
+    set.
+peer_identity:
+  peer_name: External advanced authorization request client harness
+  peer_version: 2026.03.25+fixture
+  peer_operator: checkpoint-staged-external-root
+peer_runtime:
+  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/par-jar-rar-client:2026-03-25
+  image_digest: sha256:b7e7e02fe90e0a84b2be8c9e5525afd80b1d694552151e384c70bc53b9cfb33c
+  execution_style: black-box-http
+independence_attestation:
+  attestation_class: repository-fixture-nonindependent
+  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_contact: repository-local-fixture@invalid.example
+  attestation_timestamp: '2026-03-26T23:28:15+00:00'
+  counterpart_identified: true
+  reproduction_preserved: true
+  package_team_member: true
+  repository_fixture_generated: true
+  notes:
+  - Repository-staged external-root fixture set preserved inside the checkpoint for
+    reproducible Tier 4 normalization tests only.
+  - These fixtures are intentionally non-qualifying and must never count toward strict
+    independent claims or Tier 4 promotion.
+evidence_source: repository-staged-nonindependent-fixture
+source_revision: fixture-0.3.2.dev14
+contract_version: 0.3.2.dev14
+generated_at: '2026-04-08T00:07:17+00:00'
+validation_failures:
+- independence attestation class mismatch
+- independence attestation missing package_team_member=false
+- independence attestation missing repository_fixture_generated=false
+- non-independent evidence source
+- peer operator is not independent
+artifacts:
+- path: execution.log
+  sha256: 2737785f250fc67d01b501360abd20b1ecff6b95aa37638fe11c1c3f812ef212
+- path: manifest.yaml
+  sha256: cae7e5f79e7d6f53711fd7d6244e8268cb499638e7f17c3cb7864afa78f2ab6b
+- path: mapping.yaml
+  sha256: 4e2eb7e618262aeac17c42f42898c6c9a8785d6edd7fb5d50bc4ceb89ca00ab7
+- path: peer-artifacts\http-transcript.yaml
+  sha256: f6fd10f86f37ac3e9bbf088f2f2559088a6e2abfc072adfb20301279dd5c6742
+- path: peer-artifacts\request-objects\jar-authorize.json
+  sha256: fdf565df125878df19ce0b46138ee039c9644af62bd2717ec0a24fe66e742943
+- path: peer-artifacts\request-objects\par-submit.json
+  sha256: 3a5cb761b32a04a1af975337a29efad522f7c14480b4b84f09ffc220251bccc1
+- path: peer-artifacts\request-objects\rar-authorize.json
+  sha256: 26c696d864ed868054f5d8373ee90b6b9a92f7c1952f322c0debcf851a1813a0
+- path: peer-artifacts\request-objects\rar-resource-binding.json
+  sha256: d4a2c4181410ca27c50da1768aa2a7faa0c12a1ff14fec9837d7209796ab4dbd
+- path: peer-profile.yaml
+  sha256: 2664d9b8ebdab986c01af7eab5a18db2e10c5255bafe2c3e057917180fea65ad
+- path: reproduction.md
+  sha256: ec59a7df0d43454cb030d4c46e08fd525d576e0ae981b684c8f1a4177e7c4445

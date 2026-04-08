@@ -20,7 +20,7 @@ from tigrbl_auth.cli.reports import (
 from tigrbl_auth.cli.truth import materialize_truth_chain
 from tigrbl_auth.release_signing import load_signer
 
-PROFILES = ("baseline", "production", "hardening", "peer-claim")
+PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 
 
 def _run(script_name: str, *, check: bool = True) -> subprocess.CompletedProcess[str]:

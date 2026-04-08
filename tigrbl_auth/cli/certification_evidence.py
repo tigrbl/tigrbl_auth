@@ -202,6 +202,45 @@ def validated_test_lane_manifest_passed(payload: Mapping[str, Any]) -> bool:
     )
 
 
+def validated_migration_backend_manifest_passed(payload: Mapping[str, Any]) -> bool:
+    python_version = _payload_python_version(payload)
+    backend = str(payload.get("backend") or "").strip()
+    if not python_version or backend not in {"sqlite", "postgres"}:
+        return False
+    expected_identity = migration_identity(f"migration-portability-{backend}", python_version)
+    if str(payload.get("identity", "")).strip() != expected_identity:
+        return False
+    if not install_evidence_ready(payload):
+        return False
+    artifacts = _mapping(payload.get("artifacts"))
+    artifact_shas = _mapping(payload.get("artifact_sha256"))
+    if not {"upgrade", "downgrade", "reapply"}.issubset(set(artifacts)):
+        return False
+    if not {"upgrade", "downgrade", "reapply"}.issubset(set(artifact_shas)):
+        return False
+    if not bool(
+        payload.get("available", False)
+        and payload.get("passed", False)
+        and payload.get("upgrade_passed", False)
+        and payload.get("downgrade_passed", False)
+        and payload.get("reapply_passed", False)
+    ):
+        return False
+    expected_head_revision = str(payload.get("expected_head_revision") or "").strip()
+    downgrade_target_revision = str(payload.get("downgrade_target_revision") or "").strip()
+    if not expected_head_revision or not downgrade_target_revision:
+        return False
+    if str(payload.get("head_revision_after_upgrade") or "").strip() != expected_head_revision:
+        return False
+    if str(payload.get("downgraded_revision") or "").strip() != expected_head_revision:
+        return False
+    if str(payload.get("head_revision_after_downgrade") or "").strip() != downgrade_target_revision:
+        return False
+    if str(payload.get("head_revision_after_reapply") or "").strip() != expected_head_revision:
+        return False
+    return True
+
+
 def validated_migration_manifest_passed(payload: Mapping[str, Any]) -> bool:
     python_version = _payload_python_version(payload)
     if not python_version:
@@ -216,6 +255,17 @@ def validated_migration_manifest_passed(payload: Mapping[str, Any]) -> bool:
     passed_backends = {str(item) for item in (payload.get("passed_backends") or []) if str(item)}
     if not required_backends or not required_backends.issubset(backends) or not required_backends.issubset(passed_backends):
         return False
+    backend_manifests = payload.get("backend_manifests") or []
+    manifest_backends = {str(item.get("backend")) for item in backend_manifests if isinstance(item, Mapping)}
+    if not required_backends.issubset(manifest_backends):
+        return False
+    for item in backend_manifests:
+        if not isinstance(item, Mapping):
+            return False
+        if not str(item.get("path") or "").strip():
+            return False
+        if not str(item.get("sha256") or "").strip():
+            return False
     revision_inventory = payload.get("revision_inventory") or []
     expected_head_revision = str(payload.get("expected_head_revision") or payload.get("head_revision") or "").strip()
     downgrade_target_revision = str(payload.get("downgrade_target_revision") or "").strip()
@@ -268,6 +318,7 @@ __all__ = [
     "python_version_string",
     "runtime_identity",
     "runtime_surface_probe_ready",
+    "validated_migration_backend_manifest_passed",
     "validated_migration_manifest_passed",
     "validated_runtime_manifest_passed",
     "validated_test_lane_manifest_passed",

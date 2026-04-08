@@ -94,3 +94,22 @@ Import/export portability:
 - compliance/evidence/tier3/import-export-portability/
 Release bundle and signature verification:
 - compliance/evidence/tier3/release-bundle-signing/
+A2A adapter:
+- compliance/evidence/tier3/cli-operator-surface/
+- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
+MCP adapter:
+- compliance/evidence/tier3/cli-operator-surface/
+- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
+OAuth 2.1 alignment profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+RFC 7800:
+- compliance/evidence/tier3/dpop/
+RFC 7952:
+- compliance/evidence/tier3/jwt/
+RFC 8291:
+- compliance/evidence/tier3/jwe/
+RFC 8812:
+- compliance/evidence/tier3/jose/
+RFC 8932:
+- compliance/evidence/tier3/discovery/

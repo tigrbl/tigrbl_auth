@@ -1,0 +1,47 @@
+[
+  {
+    "scenario_id": "spa-authz-code-pkce",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "spa-authz-code-pkce",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "spa-authz-code-pkce",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "spa-discovery",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "spa-discovery",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "spa-discovery",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "spa-hardening-discovery-truthfulness",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "spa-hardening-discovery-truthfulness",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "spa-hardening-discovery-truthfulness",
+    "event": "assert",
+    "result": "passed"
+  }
+]

@@ -1,0 +1,55 @@
+profile: gateway
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: gateway-discovery
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: gateway
+      x-scenario-id: gateway-discovery
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'
+- scenario_id: gateway-jwks
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/jwks.json
+    headers:
+      accept: application/json
+      x-peer-profile: gateway
+      x-scenario-id: gateway-jwks
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"keys":[...]}'
+- scenario_id: gateway-protected-resource
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/resource
+    headers:
+      accept: application/json
+      x-peer-profile: gateway
+      x-scenario-id: gateway-protected-resource
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"resource":"fixture"}'
+- scenario_id: gateway-hardening-discovery-truthfulness
+  request:
+    method: GET
+    url: https://peer-fixture.example.test/.well-known/openid-configuration
+    headers:
+      accept: application/json
+      x-peer-profile: gateway
+      x-scenario-id: gateway-hardening-discovery-truthfulness
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"issuer":"https://authn.example.com"}'

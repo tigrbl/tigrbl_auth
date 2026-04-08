@@ -3,14 +3,14 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-artifact/v1",
-    "issued_at": "2026-04-07T22:39:51Z",
+    "issued_at": "2026-04-07T23:24:04Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
-      "key_id": "ed25519:b91a2b82040d55388dec560b",
+      "key_id": "ed25519:8ecf65051dde467b43f688b4",
       "algorithm": "Ed25519",
       "identity_kind": "repository-release-attestor",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
-      "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEANlOQ+e7M4Wd3r4vL20KCzzJ55rpldcDOIE3xOp5sg6I=\n-----END PUBLIC KEY-----\n",
+      "public_key_sha256": "8ecf65051dde467b43f688b4ca7a1e26d40d8fb3ac267c07c7c6177946696e02",
       "source": "inline-pem"
     },
     "subject": {
@@ -27,7 +27,7 @@
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "nC3kgthDFu4HVdFR_pwH6ZcqXB9bfoBFRiS2J70j2bhO7sDNeqW63zwOJJnFah0qz7fzDvdV8QyJlHxqk8rVCw",
-    "payload_sha256": "2420d8d31e8ae5cb46b2c5b9c75ab06a57e191e3f57884690165e25c1f84616c"
+    "value": "wswhhLaF0SlyFg5FVGUIkch5z5bCg20q8p-O1XK-cmZ8FIzWbOfUR7kuj5LjoCqN2QWlXNEplNiJrEM9VI9oBA",
+    "payload_sha256": "a94b4ed7558feb7ca1c0460a9f5bfccb3e4e7b211fa44eeee0203b6bd871da32"
   }
 }

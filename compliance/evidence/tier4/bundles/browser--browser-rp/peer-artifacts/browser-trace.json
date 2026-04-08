@@ -1,0 +1,92 @@
+[
+  {
+    "scenario_id": "browser-authz-code",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-authz-code",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-authz-code",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "browser-oidc-discovery",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-oidc-discovery",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-oidc-discovery",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "browser-userinfo",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-userinfo",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-userinfo",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "browser-jwe-id-token",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-jwe-id-token",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-jwe-id-token",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "browser-issuer-parameter",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-issuer-parameter",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-issuer-parameter",
+    "event": "assert",
+    "result": "passed"
+  },
+  {
+    "scenario_id": "browser-hardening-discovery-truthfulness",
+    "event": "navigate",
+    "url": "https://peer-fixture.example.test/authorize"
+  },
+  {
+    "scenario_id": "browser-hardening-discovery-truthfulness",
+    "event": "redirect",
+    "url": "app://callback?code=fixture-code&state=fixture-state"
+  },
+  {
+    "scenario_id": "browser-hardening-discovery-truthfulness",
+    "event": "assert",
+    "result": "passed"
+  }
+]

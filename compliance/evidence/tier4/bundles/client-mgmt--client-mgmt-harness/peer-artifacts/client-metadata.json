@@ -1,0 +1,11 @@
+{
+  "profile": "client-mgmt",
+  "client_id": "fixture-client",
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "redirect_uris": [
+    "https://fixture.example.test/callback"
+  ]
+}

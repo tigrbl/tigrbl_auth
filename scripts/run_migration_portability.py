@@ -24,6 +24,7 @@ from tigrbl_auth.cli.certification_evidence import current_environment_identity
 REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
+TOKEN_RECORD_COLUMNS = {"refresh_family_id", "refresh_parent_hash", "refresh_successor_hash", "used_at", "reuse_detected_at"}
 SUPPORTED_BACKENDS = ("sqlite", "postgres")
 
 
@@ -48,6 +49,7 @@ async def _column_snapshot() -> dict[str, list[str]]:
     return {
         "sessions": sorted(await column_names_async("sessions")),
         "auth_codes": sorted(await column_names_async("auth_codes")),
+        "token_records": sorted(await column_names_async("token_records")),
     }
 
 
@@ -193,6 +195,7 @@ async def _exercise_backend(
                 upgrade.passed
                 and SESSION_COLUMNS <= set(upgrade_columns["sessions"])
                 and AUTH_CODE_COLUMNS <= set(upgrade_columns["auth_codes"])
+                and TOKEN_RECORD_COLUMNS <= set(upgrade_columns["token_records"])
                 and bool(upgrade_schema.get("passed", False))
                 and head_revision_after_upgrade == expected_head_revision
             )
@@ -222,6 +225,7 @@ async def _exercise_backend(
                 and bool(downgrade_schema.get("passed", False))
                 and SESSION_COLUMNS.isdisjoint(downgrade_columns["sessions"])
                 and AUTH_CODE_COLUMNS.isdisjoint(downgrade_columns["auth_codes"])
+                and TOKEN_RECORD_COLUMNS.isdisjoint(downgrade_columns["token_records"])
                 and head_revision_after_downgrade == downgrade_target_revision
             )
 
@@ -248,6 +252,7 @@ async def _exercise_backend(
                 reapply.passed
                 and SESSION_COLUMNS <= set(reapply_columns["sessions"])
                 and AUTH_CODE_COLUMNS <= set(reapply_columns["auth_codes"])
+                and TOKEN_RECORD_COLUMNS <= set(reapply_columns["token_records"])
                 and bool(reapply_schema.get("passed", False))
                 and head_revision_after_reapply == expected_head_revision
             )

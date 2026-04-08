@@ -1,0 +1,71 @@
+schema_version: 1
+bundle_id: spa--spa-rp
+peer_profile: spa
+counterpart_id: spa-rp
+status: external-preserved-failed
+runtime_profile: hardening
+target_ids:
+- RFC 6749
+- RFC 7636
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+scenario_results:
+- id: spa-authz-code-pkce
+  passed: true
+  notes: spa-authz-code-pkce completed successfully in the staged external-root fixture
+    set.
+- id: spa-discovery
+  passed: true
+  notes: spa-discovery completed successfully in the staged external-root fixture
+    set.
+- id: spa-hardening-discovery-truthfulness
+  passed: true
+  notes: spa-hardening-discovery-truthfulness completed successfully in the staged
+    external-root fixture set.
+peer_identity:
+  peer_name: External SPA relying-party harness
+  peer_version: 2026.03.25+fixture
+  peer_operator: checkpoint-staged-external-root
+peer_runtime:
+  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/spa-rp:2026-03-25
+  image_digest: sha256:c752643ce990cacd5ecf81392a508395248776c0310fc145d995140af3ba3752
+  execution_style: black-box-browser
+independence_attestation:
+  attestation_class: repository-fixture-nonindependent
+  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_contact: repository-local-fixture@invalid.example
+  attestation_timestamp: '2026-03-26T23:28:15+00:00'
+  counterpart_identified: true
+  reproduction_preserved: true
+  package_team_member: true
+  repository_fixture_generated: true
+  notes:
+  - Repository-staged external-root fixture set preserved inside the checkpoint for
+    reproducible Tier 4 normalization tests only.
+  - These fixtures are intentionally non-qualifying and must never count toward strict
+    independent claims or Tier 4 promotion.
+evidence_source: repository-staged-nonindependent-fixture
+source_revision: fixture-0.3.2.dev14
+contract_version: 0.3.2.dev14
+generated_at: '2026-04-08T00:07:18+00:00'
+validation_failures:
+- independence attestation class mismatch
+- independence attestation missing package_team_member=false
+- independence attestation missing repository_fixture_generated=false
+- non-independent evidence source
+- peer operator is not independent
+artifacts:
+- path: execution.log
+  sha256: 6cf91bcf87d048ca5f5493ed5090bf5e9ecc17b63532098f86397c83dc5ea4e6
+- path: manifest.yaml
+  sha256: 23a5ee51a25df415d4c6211a77f025ae3b15775da1fd4dc863e8f55792b32bd8
+- path: mapping.yaml
+  sha256: 6212d8e49ac42fc3a11074db0e23bcc142b414ab2fc8892ee1177cc78962fb9a
+- path: peer-artifacts\browser-trace.json
+  sha256: 302c91bb8e4516374da697233b38b94729a4a193378716ab200014c273c3a405
+- path: peer-artifacts\http-transcript.yaml
+  sha256: 2cff39b850319591872081735bbe0f5622f4cdfad28d648a850d3d76096a1bd1
+- path: peer-profile.yaml
+  sha256: 48a9b92224fa04f2c4bd06544488c9a35428eb9e02e008329de627c32a9225a2
+- path: reproduction.md
+  sha256: 3c0a2e6f8c7ddbde67a398d26d25f83c41bb1666962496ba88a328c458b2ab52

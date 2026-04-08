@@ -1,0 +1,50 @@
+{
+  "profile": "assertion-client",
+  "assertions": [
+    {
+      "scenario_id": "jwt-client-auth",
+      "alg": "RS256",
+      "kid": "assertion-client-kid",
+      "claims": {
+        "iss": "assertion-client",
+        "sub": "fixture-client"
+      }
+    },
+    {
+      "scenario_id": "assertion-grant",
+      "alg": "RS256",
+      "kid": "assertion-client-kid",
+      "claims": {
+        "iss": "assertion-client",
+        "sub": "fixture-client"
+      }
+    },
+    {
+      "scenario_id": "jwt-bearer-claim-validation",
+      "alg": "RS256",
+      "kid": "assertion-client-kid",
+      "claims": {
+        "iss": "assertion-client",
+        "sub": "fixture-client"
+      }
+    },
+    {
+      "scenario_id": "token-revocation",
+      "alg": "RS256",
+      "kid": "assertion-client-kid",
+      "claims": {
+        "iss": "assertion-client",
+        "sub": "fixture-client"
+      }
+    },
+    {
+      "scenario_id": "jwks-key-selection",
+      "alg": "RS256",
+      "kid": "assertion-client-kid",
+      "claims": {
+        "iss": "assertion-client",
+        "sub": "fixture-client"
+      }
+    }
+  ]
+}

@@ -99,7 +99,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `True`
-- operator_plane_state_root: `C:\Users\bigman\.local\state\tigrbl_auth\operator-plane\tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.operator-state\tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -129,8 +129,8 @@
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
 - validated_execution_artifact_count: `33`
-- required_validated_inventory_count: `30`
-- validated_inventory_present_count: `30`
+- required_validated_inventory_count: `31`
+- validated_inventory_present_count: `31`
 - validated_inventory_complete: `True`
 - validated_runtime_matrix_expected_count: `14`
 - validated_runtime_matrix_passed_count: `14`
@@ -138,7 +138,7 @@
 - validated_test_lane_expected_count: `15`
 - validated_test_lane_passed_count: `15`
 - validated_in_scope_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
 - baseline_certifiable_now_count: `13`
 - production_completion_required_count: `0`

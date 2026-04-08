@@ -1,0 +1,5 @@
+[cli-surface] PASS
+[bootstrap-migration] PASS
+[release-bundle-signing] PASS
+[contract-export-verify] PASS
+[operator-lifecycle-roundtrip] PASS

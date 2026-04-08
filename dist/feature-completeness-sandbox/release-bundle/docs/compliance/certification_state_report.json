@@ -26,10 +26,10 @@
     "operator_plane_tenancy_enforced": true,
     "tier4_supported_peer_profile_count": 16,
     "tier4_required_external_bundle_count": 16,
-    "tier4_external_bundle_count": 0,
+    "tier4_external_bundle_count": 16,
     "tier4_valid_external_bundle_count": 0,
-    "tier4_invalid_external_bundle_count": 0,
-    "tier4_missing_external_bundle_count": 16,
+    "tier4_invalid_external_bundle_count": 16,
+    "tier4_missing_external_bundle_count": 0,
     "tier4_external_handoff_template_present": true,
     "tier3_ready_targets": [
       "ASGI 3 application package",
@@ -83,22 +83,23 @@
     ],
     "tier4_ready_targets": [],
     "validated_execution_artifact_count": 33,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "clean_room_matrix_green": true,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
+    "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": true,
     "open_gaps": [
-      "Tier 4 independent peer validation is not complete for the retained boundary.",
-      "One or more supported peer profiles still have no preserved external Tier 4 bundle.",
-      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment."
-    ]
+      "Tier 4 independent peer validation is not complete for the full retained boundary.",
+      "One or more preserved external bundle submissions were rejected as incomplete, non-independent, or otherwise invalid.",
+      "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL."
+    ],
+    "tier4_bundle_promotion_complete": false
   },
   "details": [
-    "Tier 4 independent peer validation is not complete for the retained boundary.",
-    "One or more supported peer profiles still have no preserved external Tier 4 bundle.",
-    "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment."
+    "Tier 4 independent peer validation is not complete for the full retained boundary.",
+    "One or more preserved external bundle submissions were rejected as incomplete, non-independent, or otherwise invalid.",
+    "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL."
   ]
 }

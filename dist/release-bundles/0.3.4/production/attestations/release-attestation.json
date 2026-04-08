@@ -3,14 +3,14 @@
   "payload": {
     "schema_version": 1,
     "statement_type": "https://tigrbl.dev/attestations/release-bundle/v1",
-    "issued_at": "2026-04-07T22:39:50Z",
+    "issued_at": "2026-04-07T23:24:03Z",
     "signer": {
       "signer_id": "tigrbl_auth.checkpoint.attestor",
-      "key_id": "ed25519:b91a2b82040d55388dec560b",
+      "key_id": "ed25519:8ecf65051dde467b43f688b4",
       "algorithm": "Ed25519",
       "identity_kind": "repository-release-attestor",
-      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
-      "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
+      "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEANlOQ+e7M4Wd3r4vL20KCzzJ55rpldcDOIE3xOp5sg6I=\n-----END PUBLIC KEY-----\n",
+      "public_key_sha256": "8ecf65051dde467b43f688b4ca7a1e26d40d8fb3ac267c07c7c6177946696e02",
       "source": "inline-pem"
     },
     "subject": {
@@ -22,7 +22,7 @@
         {
           "label": "release-bundle",
           "artifact_path": "release-bundle.json",
-          "artifact_sha256": "3153a77b67b83f3bc2e0d6d0373b5b648c27e3c1feae9fced849549b560503d7",
+          "artifact_sha256": "3e46f4e4efebc6ece88113667c2beff7aea34f90a672cb3f7e806f56b3fef37d",
           "attestation_path": "attestations/release-bundle.attestation.json"
         },
         {
@@ -40,7 +40,7 @@
         {
           "label": "contract-set",
           "artifact_path": "attestations/contract-set.manifest.json",
-          "artifact_sha256": "ffeda5e074c3cab168163015a794ab8304765efb7e69204b0c927ab5ccb63fa3",
+          "artifact_sha256": "98cfd961f415141775e8d2da8edda3364e4e792a1a9b609309b9230b59d168e6",
           "attestation_path": "attestations/contract-set.attestation.json"
         }
       ]
@@ -49,7 +49,7 @@
   "signature": {
     "algorithm": "Ed25519",
     "encoding": "base64url",
-    "value": "HUBXU-emx7lHQhHT2d_sDTB90R7JM2wW88zqbCEs5__9Jlyx11EuqnhN_ihbJGb3Dsf7ZkDYjnhxeMhj1BzACA",
-    "payload_sha256": "7c397a35ecf5712e3aeaedb3c3e1493e88a13af7aa59ee9a8a3dfed070bd080f"
+    "value": "Ydwt3SjFhdBiSRKQX-eXg1SGf2wbDnaZbC1BeNo5Kfx20pzYQelldii6rxE5hkwQj6xZd5f8f7nVeh4OE--iAQ",
+    "payload_sha256": "bb0dd841103fb8fab57ae0b9cc296ece6098c9e1444a0d71764f061a62dc0ad1"
   }
 }

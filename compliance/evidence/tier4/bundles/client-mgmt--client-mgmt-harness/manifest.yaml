@@ -1,0 +1,69 @@
+schema_version: 1
+bundle_id: client-mgmt--client-mgmt-harness
+peer_profile: client-mgmt
+counterpart_id: client-mgmt-harness
+status: external-preserved-failed
+runtime_profile: hardening
+target_ids:
+- RFC 7591
+- RFC 7592
+scenario_results:
+- id: client-register
+  passed: true
+  notes: client-register completed successfully in the staged external-root fixture
+    set.
+- id: client-read-update-delete
+  passed: true
+  notes: client-read-update-delete completed successfully in the staged external-root
+    fixture set.
+- id: client-registration-access-token
+  passed: true
+  notes: client-registration-access-token completed successfully in the staged external-root
+    fixture set.
+peer_identity:
+  peer_name: External client-registration-management harness
+  peer_version: 2026.03.25+fixture
+  peer_operator: checkpoint-staged-external-root
+peer_runtime:
+  image_ref: ghcr.io/tigrbl-auth/peer-fixtures/client-mgmt-harness:2026-03-25
+  image_digest: sha256:0150240fd5f48df7d272069906492a27f5d77b80978bd4f45aabb23ef98e31bd
+  execution_style: black-box-http
+independence_attestation:
+  attestation_class: repository-fixture-nonindependent
+  attesting_organization: tigrbl_auth checkpoint fixture generator
+  attesting_contact: repository-local-fixture@invalid.example
+  attestation_timestamp: '2026-03-26T23:28:15+00:00'
+  counterpart_identified: true
+  reproduction_preserved: true
+  package_team_member: true
+  repository_fixture_generated: true
+  notes:
+  - Repository-staged external-root fixture set preserved inside the checkpoint for
+    reproducible Tier 4 normalization tests only.
+  - These fixtures are intentionally non-qualifying and must never count toward strict
+    independent claims or Tier 4 promotion.
+evidence_source: repository-staged-nonindependent-fixture
+source_revision: fixture-0.3.2.dev14
+contract_version: 0.3.2.dev14
+generated_at: '2026-04-08T00:07:16+00:00'
+validation_failures:
+- independence attestation class mismatch
+- independence attestation missing package_team_member=false
+- independence attestation missing repository_fixture_generated=false
+- non-independent evidence source
+- peer operator is not independent
+artifacts:
+- path: execution.log
+  sha256: d3679a9cfeffb70d69c1f9c6426e7d0481a6ea17efd7fdeebb85cfd58443175c
+- path: manifest.yaml
+  sha256: 4f01820469d7e71ed2fd51db1cbb3dbdb40373a55d2c80f337df23e26ae1d71c
+- path: mapping.yaml
+  sha256: 906c5ff3c1e9510ead316230e0d88337192ea11faf0fb2c8dd022dec81900647
+- path: peer-artifacts\client-metadata.json
+  sha256: 52802bd4bc9f94858d764190cc72bfaf623382680ba7fbb2b6db55d56899547e
+- path: peer-artifacts\http-transcript.yaml
+  sha256: fdea188e4a36fdd396e934b0503b5019b93d6f4ff32bb09c4b18354e8e36252a
+- path: peer-profile.yaml
+  sha256: 2fb7320a679ea75e6e7a0c986dc250d4c619f0fc4e8d92b92a591cb50b65ca2c
+- path: reproduction.md
+  sha256: 1f0f8c35bfb954edc6884bf9eed6ed6faac6cff04d2797076b944a0d7cf23f87

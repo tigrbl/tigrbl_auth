@@ -20,8 +20,8 @@
     },
     {
       "path": "specs/discovery/profiles/peer-claim/oauth-authorization-server.json",
-      "sha256": "27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6",
-      "bytes": 2956
+      "sha256": "e1003610bda038e9e692b12b84b7e6f5f55ff933a079fd44e8ab46b483d00472",
+      "bytes": 2978
     },
     {
       "path": "specs/discovery/profiles/peer-claim/oauth-protected-resource.json",
@@ -30,13 +30,13 @@
     },
     {
       "path": "specs/discovery/profiles/peer-claim/openid-configuration.json",
-      "sha256": "27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6",
-      "bytes": 2956
+      "sha256": "e1003610bda038e9e692b12b84b7e6f5f55ff933a079fd44e8ab46b483d00472",
+      "bytes": 2978
     },
     {
       "path": "specs/openapi/profiles/peer-claim/tigrbl_auth.public.openapi.json",
-      "sha256": "e2d3fa69cb31d8514702040bf395188f4ee9961eb259f413092a99f8b9be28c1",
-      "bytes": 62815
+      "sha256": "5e317c3ca4faeddd2c87933e0bbb9cff391e4f34b8630d00945d63b93b12ef0a",
+      "bytes": 63425
     },
     {
       "path": "specs/openrpc/profiles/peer-claim/tigrbl_auth.admin.openrpc.json",

@@ -1,0 +1,41 @@
+required_targets:
+- RFC 9101
+- RFC 9126
+- RFC 9396
+- RFC 8707
+target_to_tests:
+  RFC 9101:
+  - tests/conformance/hardening/test_rfc9101_jar.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  - tests/unit/test_phase9_hardening_cluster_b.py
+  RFC 9126:
+  - tests/conformance/hardening/test_rfc9126_par.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase3_public_route_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  - tests/unit/test_phase9_hardening_cluster_b.py
+  RFC 9396:
+  - tests/conformance/hardening/test_rfc9396_rar.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  - tests/unit/test_phase9_hardening_cluster_b.py
+  RFC 8707:
+  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/conformance/hardening/test_rfc8707_resource_indicators.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_phase7_advanced_surface_contracts.py
+required_artifacts:
+- tests/conformance/hardening/test_rfc9101_jar.py
+- tests/conformance/hardening/test_rfc9126_par.py
+- tests/conformance/hardening/test_rfc9396_rar.py
+- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+counterpart_id: par-jar-rar-client

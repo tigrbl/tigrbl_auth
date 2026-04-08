@@ -1,22 +1,24 @@
 {
   "passed": false,
   "failures": [
-    "Gate failed: gate-15-boundary-enforcement",
     "Gate failed: gate-20-tests",
-    "Gate failed: gate-75-test-classification"
+    "Gate failed: gate-45-evidence-peer",
+    "Gate failed: gate-60-release-signing",
+    "Gate failed: gate-90-release"
   ],
   "warnings": [],
   "summary": {
     "gate_count": 24,
-    "failed_gate_count": 3,
+    "failed_gate_count": 4,
     "validated_execution_artifact_count": 33,
-    "required_validated_inventory_count": 30,
-    "validated_inventory_present_count": 30,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
     "validated_inventory_complete": true,
     "clean_room_install_matrix_green": true,
     "in_scope_test_lanes_green": true,
-    "migration_portability_passed": true,
-    "tier3_evidence_rebuilt_from_validated_runs": true
+    "migration_portability_passed": false,
+    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "tier4_bundle_promotion_complete": false
   },
   "details": [
     {
@@ -46,8 +48,8 @@
     },
     {
       "gate": "gate-15-boundary-enforcement",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-18-migration-plan",
@@ -81,8 +83,8 @@
     },
     {
       "gate": "gate-45-evidence-peer",
-      "passed": true,
-      "rc": 0
+      "passed": false,
+      "rc": 1
     },
     {
       "gate": "gate-50-release-bundle",
@@ -96,8 +98,9 @@
     },
     {
       "gate": "gate-60-release-signing",
-      "passed": true,
-      "rc": 0
+      "passed": false,
+      "rc": 1,
+      "error": "release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/issue-registry.yaml, compliance/claims/repository-state.yaml, compliance/mappings/test-classification.yaml, compliance/mappings/test_classification.yaml, dist/feature-completeness-sandbox/discovery/manifest.json, dist/feature-completeness-sandbox/discovery/oauth-authorization-server.json, dist/feature-completeness-sandbox/discovery/openid-configuration.json, dist/feature-completeness-sandbox/exports/portable-export.json"
     },
     {
       "gate": "gate-65-state-reports",
@@ -106,8 +109,8 @@
     },
     {
       "gate": "gate-75-test-classification",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-85-peer-profiles",
@@ -116,8 +119,8 @@
     },
     {
       "gate": "gate-90-release",
-      "passed": true,
-      "rc": 0
+      "passed": false,
+      "rc": 1
     },
     {
       "gate": "gate-95-recertification",

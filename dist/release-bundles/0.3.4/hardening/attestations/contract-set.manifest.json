@@ -20,8 +20,8 @@
     },
     {
       "path": "specs/discovery/profiles/hardening/oauth-authorization-server.json",
-      "sha256": "27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6",
-      "bytes": 2956
+      "sha256": "e1003610bda038e9e692b12b84b7e6f5f55ff933a079fd44e8ab46b483d00472",
+      "bytes": 2978
     },
     {
       "path": "specs/discovery/profiles/hardening/oauth-protected-resource.json",
@@ -30,13 +30,13 @@
     },
     {
       "path": "specs/discovery/profiles/hardening/openid-configuration.json",
-      "sha256": "27b72187cca57fe3443e8431b9069ac1f942f44c02461f7b082760edf0cc0fe6",
-      "bytes": 2956
+      "sha256": "e1003610bda038e9e692b12b84b7e6f5f55ff933a079fd44e8ab46b483d00472",
+      "bytes": 2978
     },
     {
       "path": "specs/openapi/profiles/hardening/tigrbl_auth.public.openapi.json",
-      "sha256": "27fd63b508d6d2ea20e17d09792a4d1f53f9f16eb7edb292ab82067044efbdda",
-      "bytes": 62795
+      "sha256": "8fabe04e10e53fef7d3d545a4123f278b3161044d4e161888b56366f4259b21c",
+      "bytes": 63405
     },
     {
       "path": "specs/openrpc/profiles/hardening/tigrbl_auth.admin.openrpc.json",

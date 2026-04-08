@@ -18,6 +18,7 @@ from tigrbl_auth.cli.certification_evidence import (
     lane_identity,
     migration_identity,
     runtime_identity,
+    validated_migration_backend_manifest_passed,
     validated_migration_manifest_passed,
     validated_runtime_manifest_passed,
     validated_test_lane_manifest_passed,
@@ -366,6 +367,59 @@ def _cmd_migration_portability(args: argparse.Namespace) -> int:
     environment_identity = _environment_identity(install_profile=install_profile, preferred=install_env_identity)
 
     pytest_report_path = ROOT / str(report.get("pytest_report_artifact")) if report.get("pytest_report_artifact") else None
+    backend_manifests: list[dict[str, Any]] = []
+    for backend in ("sqlite", "postgres"):
+        backend_result = report.get("backend_results", {}).get(backend, {})
+        artifact_map = backend_result.get("artifacts", {}) if isinstance(backend_result, dict) else {}
+        backend_payload = {
+            "schema_version": 5,
+            "kind": "migration-portability-backend",
+            "generated_at": payload["generated_at"],
+            "python_version": payload["python_version"],
+            "tox_env": payload.get("tox_env"),
+            "matrix_profile": payload.get("matrix_profile"),
+            "repository_version": payload.get("repository_version"),
+            "validated_run_root": payload.get("validated_run_root"),
+            "identity": migration_identity(f"migration-portability-{backend}", payload["python_version"]),
+            "environment_identity": environment_identity,
+            "install_profile": install_profile,
+            "install_substrate_artifact": _relative(install_path),
+            "install_substrate_artifact_sha256": _sha256_file(install_path),
+            "install_substrate_identity": install_payload.get("identity"),
+            "install_substrate_environment_identity": install_env_identity,
+            "install_substrate_passed": bool(install_payload.get("passed", False)),
+            "install_substrate_static_manifest_passed": bool(install_summary.get("static_manifest_passed", False)),
+            "install_substrate_current_profile_import_probe_passed": bool(install_summary.get("current_profile_import_probe_passed", False)),
+            "install_substrate_runtime_surface_probe_passed": bool(install_summary.get("runtime_surface_probe_passed", False)),
+            "backend": backend,
+            "available": bool(backend_result.get("available", False)),
+            "passed": bool(backend_result.get("passed", False)),
+            "upgrade_passed": bool(backend_result.get("upgrade_passed", False)),
+            "downgrade_passed": bool(backend_result.get("downgrade_passed", False)),
+            "reapply_passed": bool(backend_result.get("reapply_passed", False)),
+            "artifacts": artifact_map,
+            "artifact_sha256": {name: _sha256_file(ROOT / str(path)) for name, path in artifact_map.items()},
+            "expected_head_revision": backend_result.get("expected_head_revision") or report.get("expected_head_revision"),
+            "downgrade_target_revision": backend_result.get("downgrade_target_revision") or report.get("downgrade_target_revision"),
+            "downgraded_revision": backend_result.get("downgraded_revision"),
+            "head_revision_after_upgrade": backend_result.get("head_revision_after_upgrade"),
+            "head_revision_after_downgrade": backend_result.get("head_revision_after_downgrade"),
+            "head_revision_after_reapply": backend_result.get("head_revision_after_reapply"),
+            "pytest_report_artifact": report.get("pytest_report_artifact"),
+            "pytest_report_sha256": _sha256_file(pytest_report_path),
+            "pytest_exit_code": _coerce_int(report.get("pytest_exit_code")),
+        }
+        backend_payload["passed"] = validated_migration_backend_manifest_passed(backend_payload)
+        backend_stem = f"migration-portability-{backend}-py{payload['python_version'].replace('.', '')}"
+        _write_manifest(backend_stem, backend_payload)
+        backend_manifests.append(
+            {
+                "backend": backend,
+                "path": _relative(_out_root() / f"{backend_stem}.json"),
+                "sha256": _sha256_file(_out_root() / f"{backend_stem}.json"),
+                "passed": backend_payload["passed"],
+            }
+        )
     payload.update(
         {
             "identity": migration_identity("migration-portability", payload["python_version"]),
@@ -393,6 +447,7 @@ def _cmd_migration_portability(args: argparse.Namespace) -> int:
             "expected_head_revision": report.get("expected_head_revision"),
             "head_revision": report.get("head_revision"),
             "downgrade_target_revision": report.get("downgrade_target_revision"),
+            "backend_manifests": backend_manifests,
             "report_passed": bool(report.get("passed", False)),
         }
     )
@@ -423,7 +478,7 @@ def _cmd_tier3_evidence(args: argparse.Namespace) -> int:
     ]
     required_runtime_count = int((validated.get("summary") or {}).get("runtime_matrix_expected_count", 0))
     required_test_lane_count = int((validated.get("summary") or {}).get("test_lane_expected_count", 0))
-    required_inventory_count = required_runtime_count + required_test_lane_count + 1
+    required_inventory_count = required_runtime_count + required_test_lane_count + 2
     runtime_report_generated_from_validated_runs = bool(
         runtime.get("report_mode") == "validated-runs"
         or (runtime.get("summary") or {}).get("source_mode") == "validated-runs"
@@ -448,7 +503,7 @@ def _cmd_tier3_evidence(args: argparse.Namespace) -> int:
     if out_of_scope_manifest_paths:
         warnings.append("Out-of-scope validated manifests are present and were excluded from certification counts.")
     if not minimum_inventory_complete:
-        warnings.append("Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.")
+        warnings.append("Validated artifact inventory is below the required 14 runtime + 15 test lanes + 2 backend-distinct migration threshold.")
 
     report_payload = {
         "passed": not failures,

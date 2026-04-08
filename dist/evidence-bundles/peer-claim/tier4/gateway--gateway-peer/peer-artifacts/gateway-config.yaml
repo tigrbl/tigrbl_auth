@@ -1,0 +1,7 @@
+profile: gateway
+upstreams:
+- https://authn.example.com
+routes:
+- /resource
+- /.well-known/openid-configuration
+- /.well-known/jwks.json

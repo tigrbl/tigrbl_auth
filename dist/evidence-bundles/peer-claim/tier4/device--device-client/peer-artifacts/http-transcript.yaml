@@ -1,0 +1,55 @@
+profile: device
+captured_at: '2026-03-26T23:28:15+00:00'
+transactions:
+- scenario_id: device-authorization
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/device_authorization
+    headers:
+      accept: application/json
+      x-peer-profile: device
+      x-scenario-id: device-authorization
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"device_code":"fixture-device-code"}'
+- scenario_id: device-token-poll
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/device_authorization
+    headers:
+      accept: application/json
+      x-peer-profile: device
+      x-scenario-id: device-token-poll
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"device_code":"fixture-device-code"}'
+- scenario_id: device-slow-down
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/device_authorization
+    headers:
+      accept: application/json
+      x-peer-profile: device
+      x-scenario-id: device-slow-down
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"device_code":"fixture-device-code"}'
+- scenario_id: device-denial-replay
+  request:
+    method: POST
+    url: https://peer-fixture.example.test/device_authorization
+    headers:
+      accept: application/json
+      x-peer-profile: device
+      x-scenario-id: device-denial-replay
+  response:
+    status: 200
+    headers:
+      content-type: application/json
+    body_excerpt: '{"device_code":"fixture-device-code"}'

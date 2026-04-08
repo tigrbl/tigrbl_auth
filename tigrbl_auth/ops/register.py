@@ -55,10 +55,15 @@ def _bearer_token(request) -> str | None:
 
 
 
-def _validated_token_endpoint_auth_method(payload: DynamicClientRegistrationIn) -> None:
+def _validated_token_endpoint_auth_method(payload: DynamicClientRegistrationIn, *, policy) -> None:
     method = str(payload.token_endpoint_auth_method or 'client_secret_basic')
     if method not in DEFAULT_TOKEN_ENDPOINT_AUTH_METHODS:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f'invalid_client_metadata: unsupported token_endpoint_auth_method {method!r}')
+    if policy.fapi_mode and method not in set(policy.allowed_client_auth_methods):
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            'invalid_client_metadata: FAPI clients must use private_key_jwt, tls_client_auth, or self_signed_tls_client_auth',
+        )
     if method == PRIVATE_KEY_JWT_AUTH_METHOD:
         if not payload.jwks_uri:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid_client_metadata: private_key_jwt requires jwks_uri')
@@ -128,7 +133,7 @@ async def _validated_registration_payload(
     except ValueError as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f'invalid_client_metadata: {exc}') from exc
 
-    _validated_token_endpoint_auth_method(payload)
+    _validated_token_endpoint_auth_method(payload, policy=policy)
 
     for uri in payload.post_logout_redirect_uris or []:
         _require_https_uri(uri, field='post_logout_redirect_uris')
@@ -223,6 +228,8 @@ async def register_client(*, request, db, payload: DynamicClientRegistrationIn |
         payload = DynamicClientRegistrationIn(**body)
 
     tenant, derived_metadata = await _validated_registration_payload(db=db, payload=payload)
+    deployment = resolve_deployment(settings)
+    policy = runtime_security_profile(deployment)
 
     client_id = str(uuid4())
     client_secret = secrets.token_urlsafe(32)
@@ -283,7 +290,7 @@ async def register_client(*, request, db, payload: DynamicClientRegistrationIn |
         client=client,
         registration=registration,
         registration_access_token=registration_access_token,
-        client_secret=client_secret,
+        client_secret=None if policy.fapi_mode and payload.token_endpoint_auth_method in set(policy.allowed_client_auth_methods) else client_secret,
     )
 
 

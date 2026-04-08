@@ -14,13 +14,6 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
 from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.services.persistence import (
-    get_token_record_async,
-    mark_token_used_async,
-    revoke_refresh_family_async,
-    token_hash,
-    upsert_token_record_async,
-)
 
 from .key_management import _DEFAULT_KEY_PATH, _provider
 from .session_service import (
@@ -172,6 +165,7 @@ class JWTCoder:
             "typ": typ,
             "iat": int(now.timestamp()),
             "exp": int((now + ttl).timestamp()),
+            "jti": str(uuid4()),
             **extra,
         }
         if tid is not None:
@@ -268,6 +262,8 @@ async def issue_persisted_token_pair(
     refresh_parent_token: str | None = None,
     **extra: Any,
 ) -> tuple[str, str]:
+    from tigrbl_auth.services.persistence import token_hash, upsert_token_record_async
+
     access_token, refresh_token = await jwt.async_sign_pair(
         sub=sub,
         tid=tid,
@@ -319,6 +315,12 @@ async def redeem_refresh_token(
     requested_audience: str | None = None,
     token_type: str = "bearer",
 ) -> dict[str, Any]:
+    from tigrbl_auth.services.persistence import (
+        get_token_record_async,
+        mark_token_used_async,
+        revoke_refresh_family_async,
+    )
+
     record = await get_token_record_async(refresh_token)
     if record is None:
         raise InvalidRefreshTokenError("refresh token was not issued by this repository")

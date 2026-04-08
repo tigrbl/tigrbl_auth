@@ -6,15 +6,15 @@
   "profile": "hardening",
   "signer": {
     "signer_id": "tigrbl_auth.checkpoint.attestor",
-    "key_id": "ed25519:b91a2b82040d55388dec560b",
+    "key_id": "ed25519:8ecf65051dde467b43f688b4",
     "algorithm": "Ed25519",
     "identity_kind": "repository-release-attestor",
-    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAd/uWboLabIhcY3kWIIAoMahFuyb5KuCV3Wd1H5KeLdY=\n-----END PUBLIC KEY-----\n",
-    "public_key_sha256": "b91a2b82040d55388dec560b53b77183b21f6566988a4a0ce743730d322988a2",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEANlOQ+e7M4Wd3r4vL20KCzzJ55rpldcDOIE3xOp5sg6I=\n-----END PUBLIC KEY-----\n",
+    "public_key_sha256": "8ecf65051dde467b43f688b4ca7a1e26d40d8fb3ac267c07c7c6177946696e02",
     "source": "inline-pem"
   },
   "verification_material": {
-    "public_key_path": "attestations/keys/ed25519-b91a2b82040d55388dec560b.pub.pem",
+    "public_key_path": "attestations/keys/ed25519-8ecf65051dde467b43f688b4.pub.pem",
     "signer_identity_path": "attestations/signer-identity.json"
   },
   "release_attestation": "attestations/release-attestation.json",
@@ -22,7 +22,7 @@
     {
       "label": "release-bundle",
       "artifact_path": "release-bundle.json",
-      "artifact_sha256": "da5bd9fd6eb136f83fa8ae3f2c76d18a54b4843083ce1702b353ade5b2a29247",
+      "artifact_sha256": "79b8d6bbf2e5dfff3f0c49c0de36e064758ce4e856cff079046b75e800c4610c",
       "attestation_path": "attestations/release-bundle.attestation.json"
     },
     {
@@ -40,7 +40,7 @@
     {
       "label": "contract-set",
       "artifact_path": "attestations/contract-set.manifest.json",
-      "artifact_sha256": "488b0bf95fa2672ff2c3565d784694e236265027b2fedfefb3d55410aaa7f603",
+      "artifact_sha256": "6fa57684760c402d7cf719c0d8ce3270f6100dc5ce4bb9ace0f45858d2796efe",
       "attestation_path": "attestations/contract-set.attestation.json"
     }
   ],
@@ -51,7 +51,7 @@
     "details": {
       "bundle_root": "E:\\swarmauri_github\\tigrbl_auth\\dist\\release-bundles\\0.3.4\\hardening",
       "verified_artifact_count": 4,
-      "signing_key_id": "ed25519:b91a2b82040d55388dec560b",
+      "signing_key_id": "ed25519:8ecf65051dde467b43f688b4",
       "artifact_labels": [
         "release-bundle",
         "claim-manifest",

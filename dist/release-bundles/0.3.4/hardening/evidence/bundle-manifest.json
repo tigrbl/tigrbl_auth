@@ -258,7 +258,7 @@
     {
       "path": "specs\\openapi\\profiles\\hardening\\tigrbl_auth.public.openapi.json",
       "present": true,
-      "sha256": "27fd63b508d6d2ea20e17d09792a4d1f53f9f16eb7edb292ab82067044efbdda"
+      "sha256": "8fabe04e10e53fef7d3d545a4123f278b3161044d4e161888b56366f4259b21c"
     },
     {
       "path": "specs\\openrpc\\profiles\\hardening\\tigrbl_auth.admin.openrpc.json",

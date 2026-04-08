@@ -45,6 +45,9 @@ def build_openid_config(
     auth_methods = token_endpoint_auth_methods_supported()
     if deployment.flag_enabled("enable_rfc8705") or deployment.profile in {"hardening", "fapi2-security", "peer-claim"}:
         auth_methods = list(dict.fromkeys([*auth_methods, *SUPPORTED_MTLS_AUTH_METHODS]))
+    policy_metadata = discovery_policy_metadata(deployment)
+    if "token_endpoint_auth_methods_supported" in policy_metadata:
+        auth_methods = list(policy_metadata["token_endpoint_auth_methods_supported"])
     auth_signing_algs = token_endpoint_auth_signing_alg_values_supported()
     config: dict[str, Any] = {
         "issuer": issuer,
@@ -59,7 +62,7 @@ def build_openid_config(
     }
     if auth_signing_algs:
         config["token_endpoint_auth_signing_alg_values_supported"] = auth_signing_algs
-    config.update(discovery_policy_metadata(deployment))
+    config.update(policy_metadata)
     if bool(deployment.flags.get("enable_oidc_userinfo", False)) and deployment.route_enabled("/userinfo"):
         config["userinfo_endpoint"] = f"{issuer}/userinfo"
     if bool(deployment.flags.get("enable_id_token_encryption", False)):
@@ -86,6 +89,13 @@ def build_openid_config(
         config["pushed_authorization_request_endpoint"] = f"{issuer}/par"
     if bool(deployment.flags.get("enable_rfc9728", False)) and deployment.route_enabled(WELL_KNOWN_ENDPOINTS["oauth_protected_resource"]):
         config["protected_resource_metadata"] = f"{issuer}{WELL_KNOWN_ENDPOINTS['oauth_protected_resource']}"
+    if deployment.flag_enabled("enable_rfc8705") or deployment.profile == "fapi2-security":
+        config["mtls_endpoint_aliases"] = {
+            "token_endpoint": f"{issuer}/token",
+            "revocation_endpoint": f"{issuer}/revoke",
+            "introspection_endpoint": f"{issuer}/introspect",
+            "registration_endpoint": f"{issuer}/register",
+        }
     return config
 
 

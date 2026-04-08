@@ -1,8 +1,12 @@
 {
   "scope": "boundary-enforcement",
   "strict": true,
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "baseline: committed effective claims artifact is out of sync",
+    "production: committed effective claims artifact is out of sync",
+    "hardening: committed effective claims artifact is out of sync"
+  ],
   "warnings": [],
   "summary": {
     "certified_core_file_count": 132,

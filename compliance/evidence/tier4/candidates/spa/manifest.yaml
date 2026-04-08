@@ -30,18 +30,18 @@ contract_profiles:
 - peer-claim
 contract_snapshot_refs:
   baseline:
-  - specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json
-  - specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json
-  - compliance/claims/effective-target-claims.baseline.yaml
-  - compliance/evidence/effective-release-evidence.baseline.yaml
+  - specs\openapi\profiles\baseline\tigrbl_auth.public.openapi.json
+  - specs\openrpc\profiles\baseline\tigrbl_auth.admin.openrpc.json
+  - compliance\claims\effective-target-claims.baseline.yaml
+  - compliance\evidence\effective-release-evidence.baseline.yaml
   hardening:
-  - specs/openapi/profiles/hardening/tigrbl_auth.public.openapi.json
-  - specs/openrpc/profiles/hardening/tigrbl_auth.admin.openrpc.json
-  - compliance/claims/effective-target-claims.hardening.yaml
-  - compliance/evidence/effective-release-evidence.hardening.yaml
+  - specs\openapi\profiles\hardening\tigrbl_auth.public.openapi.json
+  - specs\openrpc\profiles\hardening\tigrbl_auth.admin.openrpc.json
+  - compliance\claims\effective-target-claims.hardening.yaml
+  - compliance\evidence\effective-release-evidence.hardening.yaml
   peer-claim:
-  - specs/openapi/profiles/peer-claim/tigrbl_auth.public.openapi.json
-  - specs/openrpc/profiles/peer-claim/tigrbl_auth.admin.openrpc.json
-  - compliance/claims/effective-target-claims.peer-claim.yaml
-  - compliance/evidence/effective-release-evidence.peer-claim.yaml
-generated_at: '2026-03-26T23:32:33+00:00'
+  - specs\openapi\profiles\peer-claim\tigrbl_auth.public.openapi.json
+  - specs\openrpc\profiles\peer-claim\tigrbl_auth.admin.openrpc.json
+  - compliance\claims\effective-target-claims.peer-claim.yaml
+  - compliance\evidence\effective-release-evidence.peer-claim.yaml
+generated_at: '2026-04-08T00:07:18+00:00'

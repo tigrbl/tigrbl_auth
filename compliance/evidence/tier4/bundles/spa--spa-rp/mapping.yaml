@@ -1,0 +1,40 @@
+required_targets:
+- RFC 6749
+- RFC 7636
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+target_to_tests:
+  RFC 6749:
+  - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+  - tests/conformance/baseline/test_rfc6749_token_endpoint.py
+  - tests/integration/test_auth_flows.py
+  - tests/integration/test_authorization_code_flow.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  RFC 7636:
+  - tests/conformance/baseline/test_rfc7636_pkce.py
+  - tests/integration/test_authorization_code_flow.py
+  - tests/unit/test_auth_code_exchange_pkce.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  OIDC Core 1.0:
+  - tests/conformance/baseline/test_oidc_id_token.py
+  - tests/conformance/baseline/test_openid_userinfo_endpoint.py
+  - tests/integration/test_authorization_response_types.py
+  - tests/integration/test_oidc_endpoints.py
+  OIDC Discovery 1.0:
+  - tests/conformance/baseline/test_openid_configuration.py
+  - tests/integration/test_oidc_endpoints.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/integration/test_rfc8414_metadata.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+required_artifacts:
+- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- tests/conformance/baseline/test_rfc7636_pkce.py
+- tests/conformance/baseline/test_openid_configuration.py
+counterpart_id: spa-rp

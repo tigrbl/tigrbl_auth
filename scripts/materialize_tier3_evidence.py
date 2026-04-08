@@ -308,7 +308,7 @@ def update_claims() -> None:
 
 
 def regenerate_effective_manifests() -> None:
-    profiles = ["baseline", "production", "hardening", "peer-claim"]
+    profiles = ["baseline", "production", "hardening", "fapi2-security", "peer-claim"]
     for profile in profiles:
         deployment = deployment_from_options(profile=profile)
         write_effective_claims_manifest(ROOT, deployment, profile_label=profile)
@@ -345,7 +345,7 @@ def run_checks() -> list[dict[str, Any]]:
 
 def build_profile_bundles() -> dict[str, Path]:
     bundles: dict[str, Path] = {}
-    for profile in ("baseline", "production"):
+    for profile in ("baseline", "production", "hardening", "fapi2-security"):
         deployment = deployment_from_options(profile=profile)
         bundle_path = build_evidence_bundle(ROOT, deployment, tier="3", profile_label=profile)
         bundles[profile] = bundle_path

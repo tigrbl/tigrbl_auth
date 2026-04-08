@@ -12,7 +12,7 @@ from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.cli.reports import verify_release_bundle_signatures
 
 
-PROFILES = ("baseline", "production", "hardening", "peer-claim")
+PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 
 
 def _version(repo_root: Path) -> str:

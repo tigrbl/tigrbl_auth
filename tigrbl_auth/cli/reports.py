@@ -8,6 +8,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+import tempfile
 from dataclasses import dataclass
 
 try:
@@ -15,7 +17,7 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - Python < 3.11 fallback
     tomllib = None
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 import yaml
 
@@ -42,6 +44,7 @@ from tigrbl_auth.cli.boundary import (
 from tigrbl_auth.cli.certification_evidence import (
     environment_identity_ready,
     install_evidence_ready,
+    validated_migration_backend_manifest_passed,
     validated_migration_manifest_passed,
     validated_runtime_manifest_passed,
     validated_test_lane_manifest_passed,
@@ -388,7 +391,7 @@ def diff_contracts(repo_root: Path, kind: str = "all", profile_label: str = "act
     return {"passed": not failures, "failures": failures, "warnings": warnings, "details": details}
 
 
-PROFILE_LABELS = ("baseline", "production", "hardening", "peer-claim")
+PROFILE_LABELS = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 PUBLIC_ROUTE_SEARCH_ROOTS = (
     "tigrbl_auth/api/rest/routers",
     "tigrbl_auth/standards/oauth2",
@@ -786,10 +789,12 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         details_payload={"project_tree_layout_passed": project_tree_rc == 0, "bootstrap_verbs": sorted(bootstrap_verbs)},
     )
 
-    sandbox_root = repo_root / "dist" / "feature-completeness-sandbox"
-    if sandbox_root.exists():
-        shutil.rmtree(sandbox_root)
-    sandbox_root.mkdir(parents=True, exist_ok=True)
+    sandbox_root = Path(
+        tempfile.mkdtemp(
+            prefix="feature-completeness-sandbox-",
+            dir=str((repo_root / "dist").resolve()),
+        )
+    )
 
     def _ctx(root: Path, resource: str, command: str, *, profile: str = "baseline", tenant: str | None = None) -> OperationContext:
         return OperationContext(repo_root=root, command=command, resource=resource, actor="feature-completeness", profile=profile, tenant=tenant)
@@ -1072,6 +1077,8 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     no_fastapi_report = _load_json_if_exists(repo_root / "docs" / "compliance" / "no_fastapi_starlette_report.json") or {}
     artifact_truthfulness = generate_artifact_truthfulness_report(repo_root)
     feature_completeness = build_feature_completeness_report(repo_root, report_dir=repo_root / "docs" / "compliance")
+    certification_evidence_index = generate_certification_evidence_index(repo_root)
+    peer_bundle_completeness = verify_peer_bundle_completeness(repo_root, strict=False)
     operator_plane = operator_plane_status(repo_root)
     validated_execution = load_validated_execution_status(repo_root)
     peer_matrix_report_path = repo_root / "docs" / "compliance" / "peer_matrix_report.json"
@@ -1113,6 +1120,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "protocol_boundary_tier3_complete": all_protocol_tier3,
         "retained_boundary_tier3_complete": all_retained_tier3,
         "strict_independent_claims_ready": strict_independent_claims_ready,
+        "tier4_peer_bundle_completeness_passed": bool(peer_bundle_completeness.get("passed", False)),
         "tier4_supported_peer_profile_count": int(peer_matrix_summary.get("candidate_profile_count", peer_matrix_summary.get("profile_count", 0))),
         "tier4_required_external_bundle_count": int(peer_matrix_summary.get("candidate_profile_count", peer_matrix_summary.get("profile_count", 0))),
         "tier4_external_bundle_count": int(peer_matrix_summary.get("external_bundle_count", 0)),
@@ -1199,6 +1207,13 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "feature_completeness_failed_capability_count": int(feature_completeness.get("summary", {}).get("failed_capability_count", 0)),
         "fully_featured_package_boundary_now": bool(feature_completeness.get("summary", {}).get("fully_featured_package_boundary_now", False)),
         "feature_release_verify_verb_present": bool(feature_completeness.get("summary", {}).get("required_release_verify_verb_present", False)),
+        "certification_evidence_index_passed": bool(certification_evidence_index.get("passed", False)),
+        "certification_evidence_claim_count": int(certification_evidence_index.get("summary", {}).get("claim_count", 0)),
+        "certification_evidence_partition_count": int(certification_evidence_index.get("summary", {}).get("partition_count", 0)),
+        "certification_evidence_target_profile_bundle_count": int(certification_evidence_index.get("summary", {}).get("target_profile_bundle_count", 0)),
+        "release_evidence_clean_checkout_required": True,
+        "release_evidence_clean_checkout_now": bool(certification_evidence_index.get("summary", {}).get("clean_checkout", {}).get("clean", False)),
+        "release_evidence_dirty_checkout_path_count": int(certification_evidence_index.get("summary", {}).get("clean_checkout", {}).get("changed_path_count", 0)),
         "authoritative_current_doc_stale_ref_count": int(artifact_truthfulness.get("summary", {}).get("authoritative_current_doc_stale_ref_count", 0)),
         "historical_doc_stale_ref_count": int(artifact_truthfulness.get("summary", {}).get("historical_doc_stale_ref_count", 0)),
         "authoritative_current_doc_count": len(authoritative_docs_manifest.get("authoritative_current_docs", [])),
@@ -1249,6 +1264,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "tier4_valid_external_bundle_count": int(current_state.get("tier4_valid_external_bundle_count", 0)),
         "tier4_invalid_external_bundle_count": int(current_state.get("tier4_invalid_external_bundle_count", 0)),
         "tier4_missing_external_bundle_count": int(current_state.get("tier4_missing_external_bundle_count", 0)),
+        "tier4_peer_bundle_completeness_passed": bool(current_state.get("tier4_peer_bundle_completeness_passed", False)),
         "tier4_external_handoff_template_present": bool(current_state.get("tier4_external_handoff_template_present", False)),
         "tier3_ready_targets": sorted(str(entry.get("target")) for entry in claim_entries if int(entry.get("tier", 0)) >= 3),
         "tier4_ready_targets": sorted(str(entry.get("target")) for entry in claim_entries if int(entry.get("tier", 0)) >= 4),
@@ -1272,6 +1288,8 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         certification_state["open_gaps"].append("The fill-in external handoff template package is not present for the full supported peer-profile set.")
     if int(current_state.get("tier4_missing_external_bundle_count", 0)) > 0:
         certification_state["open_gaps"].append("One or more supported peer profiles still have no preserved external Tier 4 bundle.")
+    if not bool(current_state.get("tier4_peer_bundle_completeness_passed", False)):
+        certification_state["open_gaps"].append("The peer-bundle completeness gate is not satisfied for the declared peer-profile set.")
     if int(current_state.get("tier4_invalid_external_bundle_count", 0)) > 0:
         certification_state["open_gaps"].append("One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.")
     if bool(current_state.get("operator_plane_repo_mutation_dependency", True)):
@@ -1321,6 +1339,10 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         certification_state["open_gaps"].append("Current generated public artifacts still drift from executable reality.")
     if not bool(current_state.get("fully_featured_package_boundary_now", False)):
         certification_state["open_gaps"].append("One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.")
+    if not bool(current_state.get("certification_evidence_index_passed", False)):
+        certification_state["open_gaps"].append("At least one claim row is still missing a machine-derived certification proof binding.")
+    if not bool(current_state.get("release_evidence_clean_checkout_now", False)):
+        certification_state["open_gaps"].append("Release evidence can now be built only from a clean checkout, and the current workspace is dirty.")
     if not bool(current_state.get("feature_release_verify_verb_present", False)):
         certification_state["open_gaps"].append("The CLI release surface is still missing an explicit verify verb for signed bundle verification.")
     if int(artifact_truthfulness.get("summary", {}).get("authoritative_current_doc_stale_ref_count", 0)) > 0:
@@ -1414,6 +1436,7 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
     runtime_manifests: dict[tuple[str, str], dict[str, Any]] = {}
     lane_manifests: dict[tuple[str, str], dict[str, Any]] = {}
     migration_manifests: list[dict[str, Any]] = []
+    migration_backend_manifests: dict[str, dict[str, Any]] = {}
     tier3_evidence_manifests: list[dict[str, Any]] = []
     recognized_manifests: list[dict[str, Any]] = []
     in_scope_manifests: list[dict[str, Any]] = []
@@ -1454,6 +1477,10 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
         elif kind == "migration-portability":
             migration_manifests.append(payload)
             recognized_manifests.append(payload)
+        elif kind == "migration-portability-backend":
+            backend = str(payload.get("backend", "unknown"))
+            migration_backend_manifests[backend] = payload
+            recognized_manifests.append(payload)
             in_scope_manifests.append(payload)
         elif kind == "tier3-evidence":
             tier3_evidence_manifests.append(payload)
@@ -1486,11 +1513,22 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
 
     runtime_present_count = sum(1 for profile, version in required_runtime if (profile, version) in runtime_manifests)
     lane_present_count = sum(1 for lane, version in required_lanes if (lane, version) in lane_manifests)
-    migration_manifest_present = bool(migration_manifests)
-    migration_portability_passed = any(validated_migration_manifest_passed(item) for item in migration_manifests)
+    required_migration_backends = ("sqlite", "postgres")
+    migration_manifest_present = bool(migration_manifests) and all(
+        backend in migration_backend_manifests for backend in required_migration_backends
+    )
+    migration_portability_passed = bool(
+        any(validated_migration_manifest_passed(item) for item in migration_manifests)
+        and all(
+            validated_migration_backend_manifest_passed(migration_backend_manifests.get(backend, {}))
+            for backend in required_migration_backends
+        )
+    )
     tier3_evidence_rebuilt_from_validated_runs = any(_tier3_evidence_manifest_counts_as_passed(item) for item in tier3_evidence_manifests)
-    required_validated_inventory_count = len(required_runtime) + len(required_lanes) + 1
-    validated_inventory_present_count = runtime_present_count + lane_present_count + (1 if migration_manifest_present else 0)
+    required_validated_inventory_count = len(required_runtime) + len(required_lanes) + len(required_migration_backends)
+    validated_inventory_present_count = runtime_present_count + lane_present_count + sum(
+        1 for backend in required_migration_backends if backend in migration_backend_manifests
+    )
     validated_inventory_complete = validated_inventory_present_count >= required_validated_inventory_count
 
     payload = {
@@ -1522,7 +1560,7 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
     report = {
         "passed": payload["runtime_matrix_green"] and payload["in_scope_test_lanes_green"] and payload["migration_portability_passed"],
         "failures": [
-            *(["Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold."] if not payload["validated_inventory_complete"] else []),
+            *(["Validated artifact inventory is below the required 14 runtime + 15 test lanes + 2 backend-distinct migration threshold."] if not payload["validated_inventory_complete"] else []),
             *(["Validated clean-room runtime matrix is incomplete."] if not payload["runtime_matrix_green"] else []),
             *(["Validated in-scope certification lane execution is incomplete."] if not payload["in_scope_test_lanes_green"] else []),
             *(["Migration portability validation across SQLite and PostgreSQL is missing."] if not payload["migration_portability_passed"] else []),
@@ -1606,6 +1644,19 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
                     "downgrade_target_revision": item.get("downgrade_target_revision"),
                 }
                 for item in migration_manifests
+            ] + [
+                {
+                    "path": item.get("_path"),
+                    "manifest_passed": bool(item.get("passed", False)),
+                    "counts_as_passed": validated_migration_backend_manifest_passed(item),
+                    "identity": item.get("identity"),
+                    "backend": item.get("backend"),
+                    "environment_identity_ready": environment_identity_ready(item),
+                    "install_evidence_ready": install_evidence_ready(item),
+                    "expected_head_revision": item.get("expected_head_revision"),
+                    "downgrade_target_revision": item.get("downgrade_target_revision"),
+                }
+                for _, item in sorted(migration_backend_manifests.items())
             ],
             "validated_manifests": [item.get("_path") for item in in_scope_manifests],
             "out_of_scope_validated_manifests": out_of_scope_manifests,
@@ -1711,7 +1762,19 @@ def verify_test_classification(repo_root: Path, *, strict: bool = True) -> dict[
     warnings: list[str] = []
     mapping = _load_yaml(mapping_path) if mapping_path.exists() else {"categories": {}}
     categories = mapping.get("categories", {}) or {}
-    allowed_categories = {"unit", "integration", "conformance", "interop", "e2e", "security", "negative", "perf"}
+    allowed_categories = {
+        "unit",
+        "integration",
+        "conformance",
+        "interop",
+        "e2e",
+        "security",
+        "negative",
+        "perf",
+        "security-negative",
+        "migration-portability",
+        "peer",
+    }
     if not categories:
         failures.append("Missing test classification categories")
     if not preferred.exists():
@@ -1773,6 +1836,196 @@ def verify_test_classification(repo_root: Path, *, strict: bool = True) -> dict[
     return payload
 
 
+def _certification_partition_for_test(path: str) -> str:
+    normalized = path.replace("\\", "/")
+    if "tests/interop/" in normalized:
+        return "peer" if "peer_" in normalized or "tier4_" in normalized else "interop"
+    if "migration" in normalized:
+        return "migration-portability"
+    if "/security/" in normalized or "/negative/" in normalized:
+        return "security-negative"
+    if "/integration/" in normalized or "/runtime/" in normalized:
+        return "integration"
+    if "/conformance/" in normalized:
+        return "conformance"
+    return "unit"
+
+
+def _security_sensitive_claim(claim: Mapping[str, Any]) -> bool:
+    claim_id = str(claim.get("id", "")).lower()
+    title = str(claim.get("title", "")).lower()
+    targets = [str(item).lower() for item in claim.get("targets", []) or []]
+    keywords = (
+        "fapi",
+        "security",
+        "sender-constrained",
+        "dpop",
+        "mtls",
+        "issuer",
+        "mix-up",
+        "par",
+        "password",
+        "implicit",
+        "hybrid",
+    )
+    return any(keyword in claim_id or keyword in title for keyword in keywords) or any(
+        target in {"rfc 8705", "rfc 9126", "rfc 9207", "rfc 9449", "rfc 9700"} for target in targets
+    )
+
+
+def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mapping[str, list[str]]) -> list[str]:
+    claim_id = str(claim.get("id", "")).lower()
+    negatives = list(partitioned_tests.get("security-negative", []))
+    selected: list[str] = []
+
+    def _match(*patterns: str) -> None:
+        for path in negatives:
+            lower = path.lower()
+            if any(pattern in lower for pattern in patterns) and path not in selected:
+                selected.append(path)
+
+    if "sender-constrained" in claim_id or "dpop" in claim_id or "mtls" in claim_id:
+        _match("sender_constraint", "phase17_certification_attack_paths")
+    if "par" in claim_id:
+        _match("phase17_certification_attack_paths", "phase6_hardening_runtime_enforcement")
+    if "issuer" in claim_id or "mix" in claim_id:
+        _match("phase17_certification_attack_paths", "phase9_hardening_cluster_b")
+    if "security-bcp" in claim_id or "rfc 9700" in str(claim.get("targets", [])).lower():
+        _match("phase6_hardening_runtime_enforcement", "phase17_certification_attack_paths")
+    if not selected and _security_sensitive_claim(claim):
+        _match("phase17_certification_attack_paths", "phase6_hardening_runtime_enforcement", "phase12_sender_constraint_replay")
+    return selected
+
+
+def _git_checkout_summary(repo_root: Path) -> dict[str, Any]:
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except Exception as exc:
+        return {"git_available": False, "clean": False, "failure": str(exc), "changed_paths": []}
+    if result.returncode != 0:
+        return {"git_available": True, "clean": False, "failure": result.stderr.strip() or "git status failed", "changed_paths": []}
+    changed_paths = [line[3:] for line in result.stdout.splitlines() if line.strip()]
+    return {
+        "git_available": True,
+        "clean": not changed_paths,
+        "changed_path_count": len(changed_paths),
+        "changed_paths": changed_paths[:200],
+    }
+
+
+def generate_certification_evidence_index(repo_root: Path) -> dict[str, Any]:
+    repo_root = repo_root.resolve()
+    claim_registry = _load_yaml(repo_root / "compliance" / "claims" / "claim-registry.yaml")
+    target_to_test = _load_yaml(repo_root / "compliance" / "mappings" / "target-to-test.yaml")
+    target_to_evidence = _load_yaml(repo_root / "compliance" / "mappings" / "target-to-evidence.yaml")
+    feature_to_test = _load_yaml(repo_root / "compliance" / "mappings" / "feature-to-test.yaml")
+    feature_to_evidence = _load_yaml(repo_root / "compliance" / "mappings" / "feature-to-evidence.yaml")
+    classification = _load_yaml(repo_root / "compliance" / "mappings" / "test_classification.yaml")
+    profiles = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
+    discovered_tests = sorted(str(path.relative_to(repo_root)).replace("\\", "/") for path in (repo_root / "tests").rglob("test_*.py"))
+    partitioned_tests: dict[str, list[str]] = {}
+    for path in discovered_tests:
+        partitioned_tests.setdefault(_certification_partition_for_test(path), []).append(path)
+
+    claims = list(claim_registry.get("claims", []))
+    claim_bindings: list[dict[str, Any]] = []
+    missing_positive: list[str] = []
+    missing_negative: list[str] = []
+    for claim in claims:
+        feature_id = str(claim.get("feature_id", ""))
+        targets = [str(item) for item in claim.get("targets", []) or []]
+        positive_tests = list(dict.fromkeys(
+            list(feature_to_test.get(feature_id, []) or [])
+            + [test for target in targets for test in (target_to_test.get(target, []) or [])]
+        ))
+        evidence_refs = list(dict.fromkeys(
+            list(feature_to_evidence.get(feature_id, []) or [])
+            + [ref for target in targets for ref in (target_to_evidence.get(target, []) or [])]
+        ))
+        negative_tests = _negative_tests_for_claim(claim, partitioned_tests)
+        binding = {
+            "claim_id": str(claim.get("id")),
+            "feature_id": feature_id,
+            "targets": targets,
+            "profile": claim.get("profile"),
+            "positive_tests": positive_tests,
+            "negative_tests": negative_tests,
+            "evidence_refs": evidence_refs,
+            "security_sensitive": _security_sensitive_claim(claim),
+        }
+        claim_bindings.append(binding)
+        if not positive_tests or not evidence_refs:
+            missing_positive.append(str(claim.get("id")))
+        if binding["security_sensitive"] and not negative_tests:
+            missing_negative.append(str(claim.get("id")))
+
+    target_profile_bundles: list[dict[str, Any]] = []
+    scope = _load_yaml(repo_root / "compliance" / "targets" / "certification_scope.yaml")
+    retained_targets = [
+        str(entry.get("label"))
+        for entry in scope.get("targets", [])
+        if str(entry.get("scope_bucket")) != "out-of-scope/deferred"
+    ]
+    for profile in profiles:
+        effective_claims_path = write_effective_claims_manifest(
+            repo_root,
+            deployment_from_options(profile=profile),
+            profile_label=profile,
+        )
+        effective_claims = _load_yaml(effective_claims_path)
+        profile_targets = {
+            str(entry.get("target"))
+            for entry in effective_claims.get("claim_set", {}).get("claims", [])
+        }
+        for target in sorted(profile_targets & set(retained_targets)):
+            target_profile_bundles.append(
+                {
+                    "profile": profile,
+                    "target": target,
+                    "tests": list(target_to_test.get(target, []) or []),
+                    "evidence_refs": list(target_to_evidence.get(target, []) or []),
+                }
+            )
+
+    failures: list[str] = []
+    if missing_positive:
+        failures.append(f"Claims missing positive proof or evidence refs: {', '.join(missing_positive[:25])}")
+    if missing_negative:
+        failures.append(f"Security-sensitive claims missing negative proof: {', '.join(missing_negative[:25])}")
+    payload = {
+        "passed": not missing_positive and not missing_negative,
+        "failures": failures,
+        "warnings": [],
+        "summary": {
+            "claim_count": len(claim_bindings),
+            "fapi_claim_count": sum(1 for item in claim_bindings if item.get("profile") == "fapi2-security"),
+            "security_sensitive_claim_count": sum(1 for item in claim_bindings if item.get("security_sensitive")),
+            "partition_count": len(partitioned_tests),
+            "target_profile_bundle_count": len(target_profile_bundles),
+            "clean_checkout": _git_checkout_summary(repo_root),
+        },
+        "test_partitions": partitioned_tests,
+        "claim_bindings": claim_bindings,
+        "target_profile_bundles": target_profile_bundles,
+        "classification_profiles": classification.get("profiles", {}),
+    }
+    out_root = repo_root / "docs" / "compliance"
+    _write_report(out_root, "certification_evidence_index", payload, "Certification Evidence Index")
+    _write_json(repo_root / "compliance" / "evidence" / "certification_test_partitions.json", {"partitions": partitioned_tests})
+    _write_yaml(repo_root / "compliance" / "evidence" / "certification_test_partitions.yaml", {"partitions": partitioned_tests})
+    _write_json(repo_root / "compliance" / "evidence" / "claim_proof_bindings.json", {"bindings": claim_bindings})
+    _write_yaml(repo_root / "compliance" / "evidence" / "claim_proof_bindings.yaml", {"bindings": claim_bindings})
+    _write_json(repo_root / "compliance" / "evidence" / "target_profile_evidence.json", {"bundles": target_profile_bundles})
+    _write_yaml(repo_root / "compliance" / "evidence" / "target_profile_evidence.yaml", {"bundles": target_profile_bundles})
+    return payload
+
+
 def _copy_rel_artifact(repo_root: Path, rel_path: str, bundle_root: Path) -> dict[str, Any]:
     src = repo_root / rel_path
     if not src.exists():
@@ -1797,6 +2050,7 @@ def build_evidence_bundle(
     if out_dir.exists():
         shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    evidence_index = generate_certification_evidence_index(repo_root)
     claims_path = write_effective_claims_manifest(repo_root, deployment, profile_label=profile_label)
     evidence_path = write_effective_evidence_manifest(repo_root, deployment, profile_label=profile_label)
     openapi_path = write_openapi_contract(repo_root, deployment, profile_label=profile_label)
@@ -1810,7 +2064,27 @@ def build_evidence_bundle(
         _copy_rel_artifact(repo_root, str(evidence_path.relative_to(repo_root)), out_dir),
         _copy_rel_artifact(repo_root, str(openapi_path.relative_to(repo_root)), out_dir),
         _copy_rel_artifact(repo_root, str(openrpc_path.relative_to(repo_root)), out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/certification_test_partitions.json", out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/certification_test_partitions.yaml", out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/claim_proof_bindings.json", out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/claim_proof_bindings.yaml", out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/target_profile_evidence.json", out_dir),
+        _copy_rel_artifact(repo_root, "compliance/evidence/target_profile_evidence.yaml", out_dir),
     ]
+    for item in evidence_index.get("target_profile_bundles", []):
+        if str(item.get("profile")) != profile_name:
+            continue
+        target_slug = re.sub(r"[^a-z0-9]+", "-", str(item.get("target", "")).lower()).strip("-")
+        target_dir = out_dir / "targets" / target_slug
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target_manifest = {
+            "profile": profile_name,
+            "target": item.get("target"),
+            "tests": item.get("tests", []),
+            "evidence_refs": item.get("evidence_refs", []),
+        }
+        _write_json(target_dir / "bundle-manifest.json", target_manifest)
+        _write_yaml(target_dir / "bundle-manifest.yaml", target_manifest)
     peer_profiles = sorted(str(path.relative_to(repo_root)) for path in (repo_root / "compliance" / "evidence" / "peer_profiles").glob("*.yaml"))
     for rel in peer_profiles:
         copied.append(_copy_rel_artifact(repo_root, rel, out_dir))
@@ -1823,6 +2097,12 @@ def build_evidence_bundle(
         "deployment": deployment.to_manifest(),
         "copied_artifacts": copied,
         "adr_index": adr_index,
+        "clean_checkout": evidence_index.get("summary", {}).get("clean_checkout", {}),
+        "claim_binding_summary": {
+            "claim_count": evidence_index.get("summary", {}).get("claim_count", 0),
+            "fapi_claim_count": evidence_index.get("summary", {}).get("fapi_claim_count", 0),
+            "security_sensitive_claim_count": evidence_index.get("summary", {}).get("security_sensitive_claim_count", 0),
+        },
         "documentation_policy": {
             "bundle_docs_policy": "generated-current-state-only",
             "historical_archive_root": "docs/archive/historical",
@@ -1929,8 +2209,8 @@ def execute_peer_profiles(
         "preferred_runtime_profile",
         "peer_verification_class",
     }
-    allowed_contract_profiles = {"baseline", "production", "hardening", "peer-claim"}
-    allowed_runtime_profiles = {"baseline", "production", "hardening"}
+    allowed_contract_profiles = {"baseline", "production", "hardening", "fapi2-security", "peer-claim"}
+    allowed_runtime_profiles = {"baseline", "production", "hardening", "fapi2-security"}
     profile_targets: dict[str, set[str]] = {}
     for stem, payload in peer_profiles.items():
         name = str(payload.get("id", stem))
@@ -2067,14 +2347,14 @@ def execute_peer_profiles(
 
 def _run_release_signing_gate(repo_root: Path) -> int:
     repo_root = repo_root.resolve()
-    profiles = ("baseline", "production", "hardening", "peer-claim")
+    profiles = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
     failures: list[str] = []
     details: list[dict[str, Any]] = []
     shared_signer = load_signer(signing_key=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNING_KEY"), signer_id=os.environ.get("TIGRBL_AUTH_RELEASE_SIGNER_ID"))
     shared_signing_key = shared_signer.private_key_pem()
     for profile in profiles:
         deployment = deployment_from_options(profile=profile)
-        bundle = build_release_bundle(repo_root, deployment)
+        bundle = build_release_bundle(repo_root, deployment, require_clean_checkout=True)
         signed = sign_release_bundle(bundle, signing_key=shared_signing_key, signer_id=shared_signer.identity.signer_id)
         verified = verify_release_bundle_signatures(bundle)
         passed = bool(signed.get("verification", {}).get("passed", False)) and bool(verified.get("passed", False))
@@ -2101,6 +2381,71 @@ def _run_release_signing_gate(repo_root: Path) -> int:
     return 0 if payload["passed"] else 1
 
 
+def verify_peer_bundle_completeness(repo_root: Path, *, strict: bool = True) -> dict[str, Any]:
+    repo_root = repo_root.resolve()
+    profile_dir = repo_root / "compliance" / "evidence" / "peer_profiles"
+    bundle_dir = repo_root / "compliance" / "evidence" / "tier4" / "bundles"
+    declared_profiles = sorted(path.stem for path in profile_dir.glob("*.yaml"))
+    bundle_rows: dict[str, dict[str, Any]] = {}
+    invalid_bundle_dirs: list[str] = []
+
+    for path in sorted(bundle_dir.iterdir()) if bundle_dir.exists() else []:
+        if not path.is_dir():
+            continue
+        manifest_path = path / "manifest.yaml"
+        if not manifest_path.exists():
+            continue
+        manifest = _load_yaml(manifest_path) or {}
+        profile = str(manifest.get("peer_profile", "")).strip()
+        if not profile:
+            invalid_bundle_dirs.append(str(path.relative_to(repo_root)))
+            continue
+        independence = manifest.get("independence_attestation") or {}
+        peer_identity = manifest.get("peer_identity") or {}
+        peer_runtime = manifest.get("peer_runtime") or {}
+        bundle_rows[profile] = {
+            "bundle_dir": str(path.relative_to(repo_root)),
+            "status": str(manifest.get("status", "")),
+            "attestation_class": str(independence.get("attestation_class", "")),
+            "peer_operator": str(peer_identity.get("peer_operator", "")),
+            "peer_version": str(peer_runtime.get("counterpart_version", "")),
+            "scenario_result_count": len(list(manifest.get("scenario_results") or [])),
+            "has_reproduction": (path / "reproduction.md").exists(),
+            "validation_failure_count": len(list(manifest.get("validation_failures") or [])),
+        }
+
+    missing_profiles = [profile for profile in declared_profiles if profile not in bundle_rows]
+    failures = [f"Missing preserved external bundle for declared peer profile: {profile}" for profile in missing_profiles]
+    failures.extend(f"Invalid preserved bundle manifest missing peer_profile: {path}" for path in invalid_bundle_dirs)
+    payload = {
+        "passed": not failures,
+        "failures": failures,
+        "warnings": [],
+        "summary": {
+            "declared_peer_profile_count": len(declared_profiles),
+            "preserved_bundle_count": len(bundle_rows),
+            "missing_bundle_count": len(missing_profiles),
+            "missing_profiles": missing_profiles,
+            "bundle_dir": str(bundle_dir.relative_to(repo_root)),
+        },
+        "details": [
+            {
+                "profile": profile,
+                "bundle_present": profile in bundle_rows,
+                **(bundle_rows.get(profile) or {}),
+            }
+            for profile in declared_profiles
+        ],
+    }
+    _write_report(
+        repo_root / "docs" / "compliance",
+        "peer_bundle_completeness_report",
+        payload,
+        "Peer Bundle Completeness Report",
+    )
+    return payload
+
+
 GATE_CALLS = {
     "gate-00-structure": lambda root: run_governance_install_check(root, strict=True),
     "gate-05-governance": lambda root: run_governance_install_check(root, strict=True),
@@ -2121,6 +2466,7 @@ GATE_CALLS = {
     "gate-65-state-reports": lambda root: 0 if generate_state_reports(root) else 1,
     "gate-75-test-classification": lambda root: 0 if verify_test_classification(root, strict=True)["passed"] else 1,
     "gate-85-peer-profiles": lambda root: 0 if execute_peer_profiles(root, deployment_from_options(profile="hardening"), execution_mode="self-check")["passed"] else 1,
+    "gate-87-peer-bundle-completeness": lambda root: 0 if verify_peer_bundle_completeness(root, strict=True)["passed"] else 1,
     "gate-90-release": lambda root: 0 if run_final_release_readiness_gate(root)["passed"] else 1,
     "gate-truth-current-state": lambda root: 0 if verify_truth_chain(root, mode="current-state")["passed"] else 1,
     "gate-truth-release-decision": lambda root: 0 if verify_truth_chain(root, mode="release-decision")["passed"] else 1,
@@ -2166,11 +2512,19 @@ def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: 
         if fn is None:
             primary_failures.append(f"Unknown gate: {name}")
             continue
-        rc = int(fn(repo_root))
+        try:
+            rc = int(fn(repo_root))
+            error: str | None = None
+        except Exception as exc:
+            rc = 1
+            error = str(exc)
         passed = rc == 0
-        primary_results.append({"gate": name, "passed": passed, "rc": rc})
+        result = {"gate": name, "passed": passed, "rc": rc}
+        if error:
+            result["error"] = error
+        primary_results.append(result)
         if not passed:
-            primary_failures.append(f"Gate failed: {name}")
+            primary_failures.append(f"Gate failed: {name}" + (f" ({error})" if error else ""))
 
     payload = _build_release_gate_payload(repo_root, primary_gate_names, primary_results, primary_failures)
     _write_report(repo_root / "docs" / "compliance", "release_gate_report", payload, "Release Gate Report")
@@ -2187,11 +2541,19 @@ def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: 
             if fn is None:
                 truth_failures.append(f"Unknown gate: {name}")
                 continue
-            rc = int(fn(repo_root))
+            try:
+                rc = int(fn(repo_root))
+                error: str | None = None
+            except Exception as exc:
+                rc = 1
+                error = str(exc)
             passed = rc == 0
-            truth_results.append({"gate": name, "passed": passed, "rc": rc})
+            result = {"gate": name, "passed": passed, "rc": rc}
+            if error:
+                result["error"] = error
+            truth_results.append(result)
             if not passed:
-                truth_failures.append(f"Gate failed: {name}")
+                truth_failures.append(f"Gate failed: {name}" + (f" ({error})" if error else ""))
         return truth_results, truth_failures
 
     truth_results, truth_failures = _run_truth_pass()
@@ -2216,8 +2578,13 @@ def build_release_bundle(
     *,
     bundle_dir: Path | None = None,
     artifact: str = "all",
+    require_clean_checkout: bool = False,
 ) -> Path:
     repo_root = repo_root.resolve()
+    clean_checkout = _git_checkout_summary(repo_root)
+    if require_clean_checkout and not bool(clean_checkout.get("clean", False)):
+        changed = ", ".join(clean_checkout.get("changed_paths", [])[:10]) or "unknown paths"
+        raise RuntimeError(f"release evidence requires a clean checkout; dirty paths detected: {changed}")
     version = _current_version(repo_root)
     bundle_root = bundle_dir or (repo_root / "dist" / "release-bundles" / version / deployment.profile)
     if bundle_root.exists():
@@ -2288,6 +2655,8 @@ def build_release_bundle(
         "final_release_gate_summary": final_gate_report.get("summary", {}) if isinstance(final_gate_report, dict) else {},
         "final_release_status": final_release_status.get("summary", {}) if isinstance(final_release_status, dict) else {},
         "validated_execution_summary": validated_report.get("summary", {}) if isinstance(validated_report, dict) else {},
+        "clean_checkout_required": bool(require_clean_checkout),
+        "clean_checkout": clean_checkout,
         "artifacts": copied,
     }
     _write_json(bundle_root / "release-bundle.json", manifest)
@@ -2488,6 +2857,7 @@ __all__ = [
     "run_recertification",
     "sign_release_bundle",
     "verify_release_bundle_signatures",
+    "verify_peer_bundle_completeness",
     "summarize_evidence_status",
     "validate_openapi_contract",
     "validate_openrpc_contract",

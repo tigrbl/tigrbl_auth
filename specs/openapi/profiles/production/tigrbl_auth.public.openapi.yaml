@@ -26,6 +26,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -72,6 +73,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -194,6 +196,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -228,6 +231,7 @@ paths:
                   enum:
                   - authorization_code
                   - client_credentials
+                  - refresh_token
                   - password
                   - urn:ietf:params:oauth:grant-type:jwt-bearer
                 code:
@@ -302,6 +306,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -344,6 +349,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -397,6 +403,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -501,6 +508,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -551,6 +559,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -663,6 +672,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -714,6 +724,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -767,6 +778,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -833,6 +845,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -908,6 +921,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -949,6 +963,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -990,6 +1005,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
@@ -1031,6 +1047,7 @@ paths:
         allowed_grant_types:
         - authorization_code
         - client_credentials
+        - refresh_token
         - password
         - urn:ietf:params:oauth:grant-type:jwt-bearer
         allowed_response_types:
