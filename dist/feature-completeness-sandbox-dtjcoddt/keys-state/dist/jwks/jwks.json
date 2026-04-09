@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "alg": "EdDSA",
+      "crv": "Ed25519",
+      "kid": "feature-key",
+      "kty": "OKP",
+      "status": "active",
+      "use": "sig"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+schema_version: 1
+id: rp-session-logout
+title: Browser RP session, cookies, and logout fan-out interop
+counterpart_id: rp-session-logout-rp
+required_targets:
+- RFC 6265
+- OIDC Session Management
+- OIDC RP-Initiated Logout
+- OIDC Front-Channel Logout
+- OIDC Back-Channel Logout
+required_artifacts:
+- tests/conformance/production/test_rfc6265_cookies.py
+- tests/conformance/production/test_oidc_session_management.py
+- tests/conformance/production/test_oidc_rp_initiated_logout.py
+- tests/conformance/hardening/test_oidc_frontchannel_logout.py
+- tests/conformance/hardening/test_oidc_backchannel_logout.py
+- tests/negative/test_cookie_and_logout_abuse_cases.py
+scenario_ids:
+- session-state-check
+- rp-initiated-logout
+- frontchannel-fanout
+- backchannel-delivery
+- cookie-rotation-and-replay
+scenario_target_map:
+  session-state-check:
+  - OIDC Session Management
+  - RFC 6265
+  rp-initiated-logout:
+  - OIDC RP-Initiated Logout
+  frontchannel-fanout:
+  - OIDC Front-Channel Logout
+  backchannel-delivery:
+  - OIDC Back-Channel Logout
+  cookie-rotation-and-replay:
+  - RFC 6265
+  - OIDC RP-Initiated Logout
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- RP harness must preserve browser traces, logout tokens, and cookie/session transitions
+  for fan-out and replay-resistance analysis.

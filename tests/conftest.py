@@ -7,6 +7,7 @@ import os
 import shutil
 import sys
 import tempfile
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncGenerator, Generator
@@ -259,9 +260,13 @@ async def test_db_engine() -> AsyncGenerator[Any, None]:
         try:
             yield engine
         finally:
-            db_path.unlink(missing_ok=True)
-            db_path.with_suffix(".db-shm").unlink(missing_ok=True)
-            db_path.with_suffix(".db-wal").unlink(missing_ok=True)
+            for artifact in (db_path, db_path.with_suffix(".db-shm"), db_path.with_suffix(".db-wal")):
+                for _ in range(10):
+                    try:
+                        artifact.unlink(missing_ok=True)
+                        break
+                    except PermissionError:
+                        time.sleep(0.1)
             shutil.rmtree(db_path.parent, ignore_errors=True)
 
 

@@ -1,0 +1,31 @@
+schema_version: 1
+id: client-mgmt
+title: Dynamic client registration and management interop
+counterpart_id: client-mgmt-harness
+required_targets:
+- RFC 7591
+- RFC 7592
+required_artifacts:
+- tests/conformance/production/test_rfc7591_dynamic_client_registration.py
+- tests/conformance/hardening/test_rfc7592_client_registration_management.py
+- tests/unit/test_rfc7592_client_management_endpoint.py
+scenario_ids:
+- client-register
+- client-read-update-delete
+- client-registration-access-token
+scenario_target_map:
+  client-register:
+  - RFC 7591
+  client-read-update-delete:
+  - RFC 7592
+  client-registration-access-token:
+  - RFC 7592
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Registration-management peer must preserve registration access token semantics,
+  metadata update rules, and delete/read flows.

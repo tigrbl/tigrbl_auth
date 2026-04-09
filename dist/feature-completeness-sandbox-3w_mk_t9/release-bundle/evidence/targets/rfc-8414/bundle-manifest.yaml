@@ -1,0 +1,7 @@
+profile: baseline
+target: RFC 8414
+tests:
+- tests/conformance/baseline/test_rfc8414_authorization_server_metadata.py
+- tests/integration/test_rfc8414_metadata.py
+evidence_refs:
+- compliance/evidence/tier3/discovery/

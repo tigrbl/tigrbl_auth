@@ -1,0 +1,16 @@
+{
+  "profile": "baseline",
+  "target": "ASGI 3 application package",
+  "tests": [
+    "tests/integration/test_profile_surface_and_contract_alignment.py",
+    "tests/unit/test_deployment_resolver.py",
+    "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+    "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+    "tests/unit/test_phase3_runtime_launcher.py",
+    "tests/runtime/test_runner_invariance.py",
+    "tests/conformance/operator/test_cli_serve_runtime.py"
+  ],
+  "evidence_refs": [
+    "compliance/evidence/tier3/asgi-application/"
+  ]
+}

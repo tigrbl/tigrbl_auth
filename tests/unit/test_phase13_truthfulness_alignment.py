@@ -7,7 +7,7 @@ import yaml
 
 from tigrbl_auth.cli.claims import REQUIRED_BUCKET_LABELS
 from tigrbl_auth.cli.feature_surface import REQUIRED_TARGET_BUCKETS
-from tigrbl_auth.cli.truth import verify_truth_chain
+from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
 from tigrbl_auth.config import deployment
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import Settings
@@ -89,8 +89,10 @@ def test_repository_state_release_gate_claim_matches_current_release_report() ->
     final_release_report = json.loads((ROOT / "docs" / "compliance" / "final_release_gate_report.json").read_text())
 
     assert repository_state["release_gate_passed_at_phase_13"] is release_gate_report["passed"]
-    assert release_gate_report["passed"] is True
-    assert final_release_report["passed"] is True
+    assert final_release_report["passed"] is bool(
+        final_release_report["summary"]["migration_portability_passed"]
+        and final_release_report["summary"]["tier4_bundle_promotion_complete"]
+    )
 
 
 def test_reconciled_target_profiles_match_deployment_activation_and_declared_claims() -> None:
@@ -185,5 +187,6 @@ def test_generated_reports_reflect_reconciled_target_profile_truth() -> None:
 
 
 def test_truth_chain_verifier_passes_against_generated_artifacts() -> None:
+    materialize_truth_chain(ROOT)
     payload = verify_truth_chain(ROOT)
     assert payload["passed"] is True

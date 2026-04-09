@@ -5,6 +5,7 @@ Tests password hashing, JWT key management, and security functions.
 """
 
 import asyncio
+import os
 from unittest.mock import patch
 
 import pytest
@@ -93,7 +94,10 @@ class TestJWTKeyCrypto:
 
         # Verify file was created with correct permissions
         assert key_path.exists()
-        assert oct(key_path.stat().st_mode)[-3:] == "600"
+        if os.name == "nt":
+            assert key_path.stat().st_mode & 0o200
+        else:
+            assert oct(key_path.stat().st_mode)[-3:] == "600"
         assert key_path.read_text().strip() == kid
 
         # Verify keys are valid Ed25519 format
@@ -197,7 +201,10 @@ class TestJWTKeyCrypto:
         # Check file permissions are 0o600 (readable/writable by owner only)
         file_mode = key_path.stat().st_mode
         permissions = oct(file_mode)[-3:]
-        assert permissions == "600"
+        if os.name == "nt":
+            assert file_mode & 0o200
+        else:
+            assert permissions == "600"
 
     def test_invalid_key_format_raises_error(self, tmp_path):
         """Test that invalid key format raises appropriate error."""

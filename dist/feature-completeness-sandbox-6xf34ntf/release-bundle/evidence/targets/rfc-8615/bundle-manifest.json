@@ -1,0 +1,12 @@
+{
+  "profile": "baseline",
+  "target": "RFC 8615",
+  "tests": [
+    "tests/conformance/production/test_rfc8615_well_known_uris.py",
+    "tests/integration/test_profile_surface_and_contract_alignment.py",
+    "tests/unit/test_well_known_endpoints_behavior.py"
+  ],
+  "evidence_refs": [
+    "compliance/evidence/tier3/well-known/"
+  ]
+}

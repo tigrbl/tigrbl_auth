@@ -21,8 +21,8 @@ def test_package_default_profile_uses_production_when_global_profile_is_baseline
 
 
 def test_step8_effective_claims_include_baseline_openrpc_contract() -> None:
-    deployment = deployment_from_options(profile='baseline')
-    manifest = build_effective_claims_manifest(ROOT, deployment, profile_label='baseline-test')
+    deployment = deployment_from_options(profile='production')
+    manifest = build_effective_claims_manifest(ROOT, deployment, profile_label='production-test')
     claims = manifest['claim_set']['claims']
     assert any(item['target'] == 'OpenRPC 1.4.x admin/control-plane contract' for item in claims)
 

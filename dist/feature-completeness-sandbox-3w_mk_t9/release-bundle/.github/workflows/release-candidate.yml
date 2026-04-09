@@ -1,0 +1,70 @@
+name: release-candidate
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*rc*'
+      - 'rc-*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-candidate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    uses: ./.github/workflows/_quality.yml
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    with:
+      python-version: '3.11'
+      run-codeql: true
+
+  contracts:
+    needs: quality
+    uses: ./.github/workflows/_contracts.yml
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    with:
+      python-version: '3.11'
+      artifact-name: generated-contracts
+      attest: true
+
+  certification-matrix:
+    needs: contracts
+    uses: ./.github/workflows/_certification-matrix.yml
+    permissions:
+      contents: read
+
+  evidence:
+    needs: certification-matrix
+    uses: ./.github/workflows/_evidence.yml
+    permissions:
+      contents: read
+    with:
+      python-version: '3.11'
+      artifact-name: compliance-evidence
+
+  release-bundle:
+    needs:
+      - contracts
+      - evidence
+    uses: ./.github/workflows/_release-bundle.yml
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    with:
+      python-version: '3.11'
+      contracts-artifact-name: generated-contracts
+      evidence-artifact-name: compliance-evidence
+      release-bundle-artifact-name: release-bundles
+      dist-artifact-name: python-dist
+      sbom-artifact-name: sbom

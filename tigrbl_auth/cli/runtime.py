@@ -525,7 +525,7 @@ def build_validated_runner_profile_report(repo_root: Path, *, deployment: Any) -
         "generated_at": _utc_timestamp(),
         "deployment_profile": getattr(deployment, "profile", "baseline"),
         "report_mode": "validated-runs",
-        "validated_artifact_source": str(validated_source.relative_to(repo_root)) if validated_source.exists() else None,
+        "validated_artifact_source": validated_source.relative_to(repo_root).as_posix() if validated_source.exists() else None,
         "application_probe": {
             "passed": application_probe_passed,
             "app_factory": "tigrbl_auth.api.app.build_app",

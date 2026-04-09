@@ -43,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7",
-        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\operator_plane.sqlite3",
-        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\snapshots",
-        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\logs",
+        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0",
+        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\operator_plane.sqlite3",
+        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\snapshots",
+        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\logs\\audit-events.jsonl",
-        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\logs\\transactions.jsonl",
-        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-2\\operator-plane-state245\\operator-state-d238fa03b609a0a7\\logs\\activity.jsonl"
+        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\logs\\audit-events.jsonl",
+        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\logs\\transactions.jsonl",
+        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\full-run-3\\operator-plane-state245\\operator-state-edba7057178b6ab0\\logs\\activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -113,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist\\feature-completeness-sandbox-l9pmvgip\\exports\\portable-export.json"
+        "dist\\feature-completeness-sandbox-6xf34ntf\\exports\\portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -156,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist\\feature-completeness-sandbox-l9pmvgip\\release-bundle"
+        "dist\\feature-completeness-sandbox-6xf34ntf\\release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist\\feature-completeness-sandbox-l9pmvgip\\release-bundle",
+        "bundle_dir": "dist\\feature-completeness-sandbox-6xf34ntf\\release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",

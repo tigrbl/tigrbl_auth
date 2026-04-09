@@ -51,19 +51,19 @@ def test_validate_client_jwt_bearer_missing_required_claim() -> None:
 
 @pytest.mark.unit
 def test_validate_client_jwt_bearer_missing_strict_jti() -> None:
-    token = encode_jwt(
-        iss="client",
-        sub="client",
-        aud="https://issuer.example/token",
-        exp=int(time.time()) + 60,
-        iat=int(time.time()),
-    )
     with pytest.raises(ValueError):
         validate_client_jwt_bearer(
-            token,
+            "unused-token",
             audience="https://issuer.example/token",
             client_id="client",
             require_strict_claims=True,
+            decoder=lambda _: {
+                "iss": "client",
+                "sub": "client",
+                "aud": "https://issuer.example/token",
+                "exp": int(time.time()) + 60,
+                "iat": int(time.time()),
+            },
         )
 
 
