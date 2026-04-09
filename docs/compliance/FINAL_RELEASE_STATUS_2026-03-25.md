@@ -16,6 +16,7 @@
 
 - Tier 4 independent peer validation is not complete for the retained boundary.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
+- At least one kept runner is missing declared clean-room CI install/probe coverage.
 - Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
 - One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.

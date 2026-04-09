@@ -6,7 +6,26 @@ from typing import Any
 
 import yaml
 
-EXPECTED_PROFILES = {"baseline", "production", "hardening", "fapi2-security", "peer-claim"}
+EXPECTED_PROFILES = {
+    "baseline",
+    "production",
+    "hardening",
+    "fapi2-security",
+    "peer-claim",
+    "fapi2-message-signing",
+    "smart-app-launch",
+    "smart-backend-services",
+    "fast-udap-security",
+    "ihe-iua",
+    "nist-sp-800-63b-4",
+    "nist-sp-800-63c-4",
+    "camara-security-interoperability",
+    "fdx-csdf-security-model",
+    "gnap-core-rs",
+    "oauth-2-1",
+    "webauthn-passkey-oauth-patterns",
+    "confidential-spa-pattern",
+}
 EXPECTED_PHASES = {"P0", "P1", "P2", "P3"}
 EXPECTED_TIERS = {0, 1, 2, 3, 4}
 BANNED_CORE_LABELS = {"RFC 5785", "RFC 8523"}

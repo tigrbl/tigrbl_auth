@@ -396,12 +396,8 @@ cli-verb:token.revoke:
 - CLI operator surface
 cli-verb:verify:
 - CLI operator surface
-extension:a2a-adapter:
-- A2A adapter
 extension:dns-privacy:
 - RFC 8932
-extension:mcp-adapter:
-- MCP adapter
 extension:set:
 - RFC 7952
 extension:webauthn-passkeys:
@@ -517,6 +513,12 @@ profile:baseline:
 - RFC 9449
 - RFC 9700
 - RFC 9728
+profile:camara-security-interoperability:
+- CAMARA Security and Interoperability profile
+profile:confidential-spa-pattern:
+- Confidential SPA profile pattern
+profile:fapi2-message-signing:
+- FAPI 2.0 Message Signing profile
 profile:fapi2-security:
 - OIDC Back-Channel Logout
 - OIDC Core 1.0
@@ -557,6 +559,12 @@ profile:fapi2-security:
 - RFC 9449
 - RFC 9700
 - RFC 9728
+profile:fast-udap-security:
+- FAST / UDAP Security profile
+profile:fdx-csdf-security-model:
+- FDX CSDF Security Model and Profile
+profile:gnap-core-rs:
+- GNAP Core + Resource Server profile
 profile:hardening:
 - OIDC Back-Channel Logout
 - OIDC Core 1.0
@@ -597,6 +605,14 @@ profile:hardening:
 - RFC 9449
 - RFC 9700
 - RFC 9728
+profile:ihe-iua:
+- IHE IUA profile
+profile:nist-sp-800-63b-4:
+- NIST SP 800-63B-4 profile
+profile:nist-sp-800-63c-4:
+- NIST SP 800-63C-4 profile
+profile:oauth-2-1:
+- OAuth 2.1 alignment profile
 profile:peer-claim:
 - OIDC Back-Channel Logout
 - OIDC Core 1.0
@@ -677,6 +693,12 @@ profile:production:
 - RFC 9449
 - RFC 9700
 - RFC 9728
+profile:smart-app-launch:
+- SMART App Launch profile
+profile:smart-backend-services:
+- SMART Backend Services profile
+profile:webauthn-passkey-oauth-patterns:
+- WebAuthn and passkey-bound OAuth patterns
 slice:device:
 - RFC 8628
 slice:dpop:
@@ -939,12 +961,30 @@ target:asgi-3-application-package:
 - ASGI 3 application package
 target:bootstrap-and-migration-lifecycle:
 - Bootstrap and migration lifecycle
+target:camara-security-and-interoperability-profile:
+- CAMARA Security and Interoperability profile
 target:cli-operator-surface:
 - CLI operator surface
+target:confidential-spa-profile-pattern:
+- Confidential SPA profile pattern
+target:fapi-2-0-message-signing-profile:
+- FAPI 2.0 Message Signing profile
+target:fast-udap-security-profile:
+- FAST / UDAP Security profile
+target:fdx-csdf-security-model-and-profile:
+- FDX CSDF Security Model and Profile
+target:gnap-core-resource-server-profile:
+- GNAP Core + Resource Server profile
+target:ihe-iua-profile:
+- IHE IUA profile
 target:import-export-portability:
 - Import/export portability
 target:key-lifecycle-and-jwks-publication:
 - Key lifecycle and JWKS publication
+target:nist-sp-800-63b-4-profile:
+- NIST SP 800-63B-4 profile
+target:nist-sp-800-63c-4-profile:
+- NIST SP 800-63C-4 profile
 target:oauth-2-1-alignment-profile:
 - OAuth 2.1 alignment profile
 target:oidc-back-channel-logout:
@@ -1043,3 +1083,9 @@ target:runner-profile-tigrcorn:
 - 'Runner profile: Tigrcorn'
 target:runner-profile-uvicorn:
 - 'Runner profile: Uvicorn'
+target:smart-app-launch-profile:
+- SMART App Launch profile
+target:smart-backend-services-profile:
+- SMART Backend Services profile
+target:webauthn-and-passkey-bound-oauth-patterns:
+- WebAuthn and passkey-bound OAuth patterns

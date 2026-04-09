@@ -21,8 +21,6 @@ downstream_consumption:
     - mtls
   extensions:
     - webauthn-passkeys
-    - a2a-adapter
-    - mcp-adapter
     - set
     - webpush
     - dns-privacy

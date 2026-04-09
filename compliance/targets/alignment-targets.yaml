@@ -9,3 +9,75 @@ targets:
   quarantine_reason: Track draft-era alignment only. Do not emit as a final RFC compliance
     claim.
   status: tracked-draft-alignment-only
+- id: fapi2.message-signing-profile
+  label: FAPI 2.0 Message Signing profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external sector profile coverage only. Do not emit as a retained
+    core certification claim.
+  status: tracked-external-profile
+- id: smart.app-launch-profile
+  label: SMART App Launch profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external healthcare profile coverage only. Do not emit as
+    a retained core certification claim.
+  status: tracked-external-profile
+- id: smart.backend-services-profile
+  label: SMART Backend Services profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external healthcare backend profile coverage only. Do not
+    emit as a retained core certification claim.
+  status: tracked-external-profile
+- id: fast.udap-security-profile
+  label: FAST / UDAP Security profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external trust-community profile coverage only. Do not emit
+    as a retained core certification claim.
+  status: tracked-external-profile
+- id: ihe.iua-profile
+  label: IHE IUA profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external healthcare authorization profile coverage only.
+    Do not emit as a retained core certification claim.
+  status: tracked-external-profile
+- id: nist.800-63b-4-profile
+  label: NIST SP 800-63B-4 profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external assurance profile coverage only. Do not emit as
+    a retained core certification claim.
+  status: tracked-external-profile
+- id: nist.800-63c-4-profile
+  label: NIST SP 800-63C-4 profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external federation assurance profile coverage only. Do not
+    emit as a retained core certification claim.
+  status: tracked-external-profile
+- id: camara.security-interoperability-profile
+  label: CAMARA Security and Interoperability profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external telecom profile coverage only. Do not emit as a
+    retained core certification claim.
+  status: tracked-external-profile
+- id: fdx.csdf-security-model-profile
+  label: FDX CSDF Security Model and Profile
+  claimable_as_rfc: false
+  quarantine_reason: Track external financial-data profile coverage only. Do not emit
+    as a retained core certification claim.
+  status: tracked-external-profile
+- id: gnap.core-rs-profile
+  label: GNAP Core + Resource Server profile
+  claimable_as_rfc: false
+  quarantine_reason: Track adjacent authorization profile coverage only. Do not emit
+    as a retained core certification claim.
+  status: tracked-external-profile
+- id: webauthn.passkey-oauth-patterns
+  label: WebAuthn and passkey-bound OAuth patterns
+  claimable_as_rfc: false
+  quarantine_reason: Track external pattern coverage only. Do not emit as a retained
+    core certification claim.
+  status: tracked-external-profile
+- id: confidential-spa-pattern
+  label: Confidential SPA profile pattern
+  claimable_as_rfc: false
+  quarantine_reason: Track external browser-architecture pattern coverage only. Do not
+    emit as a retained core certification claim.
+  status: tracked-external-profile

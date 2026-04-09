@@ -43,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb",
-        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\operator_plane.sqlite3",
-        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\snapshots",
-        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs",
+        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af",
+        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\operator_plane.sqlite3",
+        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\snapshots",
+        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\audit-events.jsonl",
-        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\transactions.jsonl",
-        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-370c7fcf4504dbfb\\logs\\activity.jsonl"
+        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\logs\\audit-events.jsonl",
+        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\logs\\transactions.jsonl",
+        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\operator-state-9909b7d8059162af\\logs\\activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -113,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist\\feature-completeness-sandbox\\exports\\portable-export.json"
+        "dist\\feature-completeness-sandbox-w0hd_xcv\\exports\\portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -156,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist\\feature-completeness-sandbox\\release-bundle"
+        "dist\\feature-completeness-sandbox-w0hd_xcv\\release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist\\feature-completeness-sandbox\\release-bundle",
+        "bundle_dir": "dist\\feature-completeness-sandbox-w0hd_xcv\\release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -199,13 +199,9 @@
           ],
           "placeholder_supported_runner_count": 0,
           "placeholder_supported_runner_names": [],
-          "declared_ci_installable_runner_count": 3,
-          "declared_ci_installable_runner_names": [
-            "hypercorn",
-            "tigrcorn",
-            "uvicorn"
-          ],
-          "declared_ci_install_probe_complete": true,
+          "declared_ci_installable_runner_count": 0,
+          "declared_ci_installable_runner_names": [],
+          "declared_ci_install_probe_complete": false,
           "execution_probes_enabled": true,
           "surface_probe_passed": true,
           "surface_probe_endpoint_count": 3,

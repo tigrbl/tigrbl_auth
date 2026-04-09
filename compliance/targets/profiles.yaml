@@ -133,3 +133,172 @@ profiles:
     runtime_styles:
     - plugin
     - standalone
+  fapi2-message-signing:
+    description: External tracked profile for FAPI 2.0 Message Signing.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FAPI 2.0 Message Signing profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  smart-app-launch:
+    description: External tracked profile for SMART App Launch.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - SMART App Launch profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  smart-backend-services:
+    description: External tracked profile for SMART Backend Services.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - SMART Backend Services profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  fast-udap-security:
+    description: External tracked profile for FAST Security and UDAP Security IG.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FAST / UDAP Security profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  ihe-iua:
+    description: External tracked profile for IHE Internet User Authorization.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - IHE IUA profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  nist-sp-800-63b-4:
+    description: External tracked profile for NIST SP 800-63B-4.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - NIST SP 800-63B-4 profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  nist-sp-800-63c-4:
+    description: External tracked profile for NIST SP 800-63C-4.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - NIST SP 800-63C-4 profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  camara-security-interoperability:
+    description: External tracked profile for CAMARA Security and Interoperability.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - CAMARA Security and Interoperability profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  fdx-csdf-security-model:
+    description: External tracked profile for the FDX CSDF Security Model and Profile.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - FDX CSDF Security Model and Profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  gnap-core-rs:
+    description: External tracked profile for GNAP Core and Resource Server.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - GNAP Core + Resource Server profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  oauth-2-1:
+    description: External tracked profile for OAuth 2.1.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - OAuth 2.1 alignment profile
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  webauthn-passkey-oauth-patterns:
+    description: External tracked profile for WebAuthn and passkey-bound OAuth patterns.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - WebAuthn and passkey-bound OAuth patterns
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []
+  confidential-spa-pattern:
+    description: External tracked profile for confidential SPA security pattern.
+    phase: P3
+    minimum_claim_tier: 0
+    claimable: false
+    scope: external
+    targets:
+    - Confidential SPA profile pattern
+    target_sets: []
+    excludes: []
+    surface_sets: []
+    protocol_slices: []
+    runtime_styles: []

@@ -19,7 +19,7 @@
 - boundary_freeze_non_rfc_target_count: `18`
 - boundary_freeze_deferred_target_count: `13`
 - boundary_freeze_identity_hash_matches: `True`
-- clean_room_matrix_implemented: `True`
+- clean_room_matrix_implemented: `False`
 - clean_room_matrix_executed_in_this_container: `False`
 - tox_manifest_present: `True`
 - test_constraints_manifest_present: `True`
@@ -45,12 +45,13 @@
 - in_scope_test_lanes_green: `True`
 - migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `True`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'At least one kept runner is missing declared clean-room CI install/probe coverage.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
 
 ## Details
 
 - Tier 4 independent peer validation is not complete for the retained boundary.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
+- At least one kept runner is missing declared clean-room CI install/probe coverage.
 - Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
 - One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.

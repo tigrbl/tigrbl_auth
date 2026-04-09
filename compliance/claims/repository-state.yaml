@@ -99,7 +99,7 @@ repository_state:
   phase_13_validated_migration_portability_preservation_complete: false
   alignment_only_checkpoint_no_new_certification_evidence: false
   last_truth_chain_manifest: docs/compliance/truth_chain.json
-  last_truth_chain_generated_at: '2026-04-07'
+  last_truth_chain_generated_at: '2026-04-09'
   phase_14_claim_registry_canonical_complete: true
   phase_14_fapi2_security_profile_declared_complete: true
   phase_14_public_route_atomic_claims_complete: true

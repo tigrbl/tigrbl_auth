@@ -94,13 +94,43 @@ Import/export portability:
 - compliance/evidence/tier3/import-export-portability/
 Release bundle and signature verification:
 - compliance/evidence/tier3/release-bundle-signing/
-A2A adapter:
-- compliance/evidence/tier3/cli-operator-surface/
-- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
-MCP adapter:
-- compliance/evidence/tier3/cli-operator-surface/
-- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
 OAuth 2.1 alignment profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+FAPI 2.0 Message Signing profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+SMART App Launch profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+SMART Backend Services profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+FAST / UDAP Security profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+IHE IUA profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+NIST SP 800-63B-4 profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+NIST SP 800-63C-4 profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+CAMARA Security and Interoperability profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+FDX CSDF Security Model and Profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+GNAP Core + Resource Server profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+WebAuthn and passkey-bound OAuth patterns:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+Confidential SPA profile pattern:
 - docs/compliance/CERTIFICATION_BOUNDARY.md
 - docs/compliance/TARGET_REALITY_MATRIX.md
 RFC 7800:

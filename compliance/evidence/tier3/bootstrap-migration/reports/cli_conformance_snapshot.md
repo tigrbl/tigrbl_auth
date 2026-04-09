@@ -3,9 +3,9 @@
 > Generated from `tigrbl_auth.cli.metadata` and argparse parser snapshots.
 
 - Command count: `21`
-- Verb count: `86`
+- Verb count: `87`
 - Global flag count: `16`
-- Help snapshot count: `108`
+- Help snapshot count: `109`
 - Required command families present: `True`
 - Retired certified aliases absent: `True`
 - Passed: `True`
@@ -16,7 +16,8 @@
 
 ```text
 usage: tigrbl-auth [-h]
-                   {serve,verify,gate,spec,claims,evidence,adr,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export} ...
+                   {serve,verify,gate,spec,claims,evidence,adr,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
+                   ...
 
 Tigrbl-native operator CLI for the tigrbl_auth package.
 
@@ -52,11 +53,11 @@ options:
 
 ```text
 usage: tigrbl-auth adr [-h] [--config CONFIG] [--env-file ENV_FILE]
-                       [--profile {baseline,production,hardening,peer-claim}]
+                       [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                        [--tenant TENANT] [--issuer ISSUER]
                        [--surface-set {admin-rpc,diagnostics,public-rest}]
                        [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                       [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                        [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                        [--runtime-style {plugin,standalone}] [--strict]
                        [--no-strict] [--format {json,yaml,text}]
@@ -76,7 +77,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -84,7 +85,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -103,11 +104,11 @@ options:
 
 ```text
 usage: tigrbl-auth adr index [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -120,7 +121,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -128,7 +129,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -151,11 +152,11 @@ options:
 
 ```text
 usage: tigrbl-auth adr list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
@@ -168,7 +169,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -176,7 +177,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -197,11 +198,11 @@ options:
 
 ```text
 usage: tigrbl-auth adr new [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                           [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                            [--runtime-style {plugin,standalone}] [--strict]
                            [--no-strict] [--format {json,yaml,text}]
@@ -214,7 +215,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -222,7 +223,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -245,11 +246,11 @@ options:
 
 ```text
 usage: tigrbl-auth adr show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
@@ -262,7 +263,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -270,7 +271,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -292,11 +293,11 @@ options:
 
 ```text
 usage: tigrbl-auth bootstrap [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -316,7 +317,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -324,7 +325,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -344,11 +345,11 @@ options:
 ```text
 usage: tigrbl-auth bootstrap apply [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -364,7 +365,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -372,7 +373,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -400,11 +401,11 @@ options:
 ```text
 usage: tigrbl-auth bootstrap manifest [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                      [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                       [--runtime-style {plugin,standalone}]
                                       [--strict] [--no-strict]
@@ -419,7 +420,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -427,7 +428,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -451,11 +452,11 @@ options:
 ```text
 usage: tigrbl-auth bootstrap status [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                    [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                     [--runtime-style {plugin,standalone}]
                                     [--strict] [--no-strict]
@@ -470,7 +471,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -478,7 +479,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -502,11 +503,11 @@ options:
 ```text
 usage: tigrbl-auth bootstrap verify [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                    [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                     [--runtime-style {plugin,standalone}]
                                     [--strict] [--no-strict]
@@ -521,7 +522,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -529,7 +530,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -552,11 +553,11 @@ options:
 
 ```text
 usage: tigrbl-auth claims [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
@@ -575,7 +576,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -583,7 +584,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -602,11 +603,11 @@ options:
 
 ```text
 usage: tigrbl-auth claims lint [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -620,7 +621,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -628,7 +629,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -651,11 +652,11 @@ options:
 
 ```text
 usage: tigrbl-auth claims show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -668,7 +669,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -676,7 +677,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -697,11 +698,11 @@ options:
 
 ```text
 usage: tigrbl-auth claims status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -715,7 +716,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -723,7 +724,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -746,18 +747,19 @@ options:
 
 ```text
 usage: tigrbl-auth client [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
                           [--output OUTPUT] [--verbose] [--trace]
-                          {create,update,delete,get,list,rotate-secret,enable,disable} ...
+                          {create,update,delete,get,list,rotate-secret,enable,disable}
+                          ...
 
-Stateful repository-backed client lifecycle operators.
+Stateful durable operator-plane client lifecycle operators.
 
 positional arguments:
   {create,update,delete,get,list,rotate-secret,enable,disable}
@@ -774,7 +776,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -782,7 +784,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -801,11 +803,11 @@ options:
 
 ```text
 usage: tigrbl-auth client create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -817,13 +819,13 @@ usage: tigrbl-auth client create [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--yes] [--dry-run] [--wait]
                                  [--timeout TIMEOUT]
 
-Create a repository-backed client checkpoint record.
+Create a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -831,7 +833,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -862,11 +864,11 @@ options:
 
 ```text
 usage: tigrbl-auth client delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -874,13 +876,13 @@ usage: tigrbl-auth client delete [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
                                  [--id ID] [--yes] [--dry-run]
 
-Delete a repository-backed client checkpoint record.
+Delete a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -888,7 +890,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -912,11 +914,11 @@ options:
 
 ```text
 usage: tigrbl-auth client disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -931,7 +933,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -939,7 +941,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -963,11 +965,11 @@ options:
 
 ```text
 usage: tigrbl-auth client enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -981,7 +983,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -989,7 +991,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1013,24 +1015,24 @@ options:
 
 ```text
 usage: tigrbl-auth client get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                              [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                               [--runtime-style {plugin,standalone}] [--strict]
                               [--no-strict] [--format {json,yaml,text}]
                               [--output OUTPUT] [--verbose] [--trace]
                               [--repo-root REPO_ROOT] [--id ID]
 
-Return a single repository-backed client record.
+Return a single durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1038,7 +1040,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1060,11 +1062,11 @@ options:
 
 ```text
 usage: tigrbl-auth client list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -1075,13 +1077,13 @@ usage: tigrbl-auth client list [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--sort {id,name,status,created_at,updated_at}]
                                [--status STATUS]
 
-List repository-backed client records.
+List durable operator-plane client records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1089,7 +1091,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1117,11 +1119,11 @@ options:
 ```text
 usage: tigrbl-auth client rotate-secret [-h] [--config CONFIG]
                                         [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,peer-claim}]
+                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                         [--tenant TENANT] [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                         [--runtime-style {plugin,standalone}]
                                         [--strict] [--no-strict]
@@ -1130,13 +1132,13 @@ usage: tigrbl-auth client rotate-secret [-h] [--config CONFIG]
                                         [--trace] [--repo-root REPO_ROOT]
                                         [--id ID] [--yes] [--dry-run]
 
-Rotate repository-backed client secret material.
+Rotate durable operator-plane client secret material.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1144,7 +1146,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1168,11 +1170,11 @@ options:
 
 ```text
 usage: tigrbl-auth client update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -1183,13 +1185,13 @@ usage: tigrbl-auth client update [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--if-missing {fail,create,skip}] [--yes]
                                  [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a repository-backed client checkpoint record.
+Update a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1197,7 +1199,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1228,11 +1230,11 @@ options:
 
 ```text
 usage: tigrbl-auth discovery [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -1252,7 +1254,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1260,7 +1262,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1279,11 +1281,11 @@ options:
 
 ```text
 usage: tigrbl-auth discovery diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -1298,7 +1300,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1306,7 +1308,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1331,11 +1333,11 @@ options:
 ```text
 usage: tigrbl-auth discovery publish [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                     [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                      [--runtime-style {plugin,standalone}]
                                      [--strict] [--no-strict]
@@ -1350,7 +1352,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1358,7 +1360,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1382,11 +1384,11 @@ options:
 
 ```text
 usage: tigrbl-auth discovery show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -1400,7 +1402,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1408,7 +1410,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1430,11 +1432,11 @@ options:
 ```text
 usage: tigrbl-auth discovery validate [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                      [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                       [--runtime-style {plugin,standalone}]
                                       [--strict] [--no-strict]
@@ -1449,7 +1451,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1457,7 +1459,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1480,11 +1482,11 @@ options:
 
 ```text
 usage: tigrbl-auth doctor [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
@@ -1497,7 +1499,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1505,7 +1507,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1528,16 +1530,17 @@ options:
 
 ```text
 usage: tigrbl-auth evidence [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
                             [--output OUTPUT] [--verbose] [--trace]
-                            {bundle,status,verify,peer-status,peer-execute} ...
+                            {bundle,status,verify,peer-status,peer-execute}
+                            ...
 
 Operate on Tier 3/Tier 4 evidence automation.
 
@@ -1553,7 +1556,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1561,7 +1564,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1581,11 +1584,11 @@ options:
 ```text
 usage: tigrbl-auth evidence bundle [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -1600,7 +1603,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1608,7 +1611,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1633,11 +1636,11 @@ options:
 ```text
 usage: tigrbl-auth evidence peer-execute [-h] [--config CONFIG]
                                          [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,peer-claim}]
+                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                          [--tenant TENANT] [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                         [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                          [--runtime-style {plugin,standalone}]
                                          [--strict] [--no-strict]
@@ -1654,7 +1657,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1662,7 +1665,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1690,11 +1693,11 @@ options:
 ```text
 usage: tigrbl-auth evidence peer-status [-h] [--config CONFIG]
                                         [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,peer-claim}]
+                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                         [--tenant TENANT] [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                         [--runtime-style {plugin,standalone}]
                                         [--strict] [--no-strict]
@@ -1709,7 +1712,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1717,7 +1720,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1741,11 +1744,11 @@ options:
 ```text
 usage: tigrbl-auth evidence status [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -1760,7 +1763,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1768,7 +1771,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1793,11 +1796,11 @@ options:
 ```text
 usage: tigrbl-auth evidence verify [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -1812,7 +1815,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1820,7 +1823,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1843,18 +1846,18 @@ options:
 
 ```text
 usage: tigrbl-auth export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
                           [--output OUTPUT] [--verbose] [--trace]
                           {validate,run,status} ...
 
-Export repository-backed operator state into portable artifacts.
+Export durable operator-plane state into portable artifacts.
 
 positional arguments:
   {validate,run,status}
@@ -1866,7 +1869,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1874,7 +1877,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1893,11 +1896,11 @@ options:
 
 ```text
 usage: tigrbl-auth export run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                              [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                               [--runtime-style {plugin,standalone}] [--strict]
                               [--no-strict] [--format {json,yaml,text}]
@@ -1906,13 +1909,13 @@ usage: tigrbl-auth export run [-h] [--config CONFIG] [--env-file ENV_FILE]
                               [--redact] [--checksum CHECKSUM] [--yes]
                               [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Export repository-backed operator state to a portable artifact.
+Export durable operator-plane state to a portable artifact.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1920,7 +1923,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1948,24 +1951,24 @@ options:
 
 ```text
 usage: tigrbl-auth export status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
                                  [--format {json,yaml,text}] [--output OUTPUT]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
 
-Show the last repository-backed export checkpoint status.
+Show the last durable operator-plane export status.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -1973,7 +1976,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -1995,11 +1998,11 @@ options:
 ```text
 usage: tigrbl-auth export validate [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -2015,7 +2018,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2023,7 +2026,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2049,18 +2052,18 @@ options:
 
 ```text
 usage: tigrbl-auth flow [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                         [--runtime-style {plugin,standalone}] [--strict]
                         [--no-strict] [--format {json,yaml,text}]
                         [--output OUTPUT] [--verbose] [--trace]
                         {create,update,delete,get,list,enable,disable} ...
 
-Stateful repository-backed flow lifecycle operators.
+Stateful durable operator-plane flow lifecycle operators.
 
 positional arguments:
   {create,update,delete,get,list,enable,disable}
@@ -2076,7 +2079,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2084,7 +2087,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2103,11 +2106,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -2118,13 +2121,13 @@ usage: tigrbl-auth flow create [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--if-exists {fail,replace,merge,skip}] [--yes]
                                [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Create a repository-backed flow checkpoint record.
+Create a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2132,7 +2135,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2163,11 +2166,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -2175,13 +2178,13 @@ usage: tigrbl-auth flow delete [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run]
 
-Delete a repository-backed flow checkpoint record.
+Delete a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2189,7 +2192,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2213,11 +2216,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -2231,7 +2234,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2239,7 +2242,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2263,11 +2266,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -2281,7 +2284,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2289,7 +2292,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2313,24 +2316,24 @@ options:
 
 ```text
 usage: tigrbl-auth flow get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
                             [--output OUTPUT] [--verbose] [--trace]
                             [--repo-root REPO_ROOT] [--id ID]
 
-Return a single repository-backed flow record.
+Return a single durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2338,7 +2341,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2360,11 +2363,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -2374,13 +2377,13 @@ usage: tigrbl-auth flow list [-h] [--config CONFIG] [--env-file ENV_FILE]
                              [--sort {id,name,status,created_at,updated_at}]
                              [--status STATUS]
 
-List repository-backed flow records.
+List durable operator-plane flow records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2388,7 +2391,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2415,11 +2418,11 @@ options:
 
 ```text
 usage: tigrbl-auth flow update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -2430,13 +2433,13 @@ usage: tigrbl-auth flow update [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--if-missing {fail,create,skip}] [--yes]
                                [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a repository-backed flow checkpoint record.
+Update a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2444,7 +2447,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2475,11 +2478,11 @@ options:
 
 ```text
 usage: tigrbl-auth gate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                         [--runtime-style {plugin,standalone}] [--strict]
                         [--no-strict] [--format {json,yaml,text}]
@@ -2493,7 +2496,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2501,7 +2504,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2525,18 +2528,19 @@ options:
 
 ```text
 usage: tigrbl-auth identity [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
                             [--output OUTPUT] [--verbose] [--trace]
-                            {create,update,delete,get,list,set-password,lock,unlock} ...
+                            {create,update,delete,get,list,set-password,lock,unlock}
+                            ...
 
-Stateful repository-backed identity lifecycle operators.
+Stateful durable operator-plane identity lifecycle operators.
 
 positional arguments:
   {create,update,delete,get,list,set-password,lock,unlock}
@@ -2553,7 +2557,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2561,7 +2565,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2581,11 +2585,11 @@ options:
 ```text
 usage: tigrbl-auth identity create [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -2597,13 +2601,13 @@ usage: tigrbl-auth identity create [-h] [--config CONFIG]
                                    [--yes] [--dry-run] [--wait]
                                    [--timeout TIMEOUT]
 
-Create a repository-backed identity checkpoint record.
+Create a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2611,7 +2615,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2643,11 +2647,11 @@ options:
 ```text
 usage: tigrbl-auth identity delete [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -2656,13 +2660,13 @@ usage: tigrbl-auth identity delete [-h] [--config CONFIG]
                                    [--repo-root REPO_ROOT] [--id ID] [--yes]
                                    [--dry-run]
 
-Delete a repository-backed identity checkpoint record.
+Delete a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2670,7 +2674,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2694,11 +2698,11 @@ options:
 
 ```text
 usage: tigrbl-auth identity get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -2706,13 +2710,13 @@ usage: tigrbl-auth identity get [-h] [--config CONFIG] [--env-file ENV_FILE]
                                 [--verbose] [--trace] [--repo-root REPO_ROOT]
                                 [--id ID]
 
-Return a single repository-backed identity record.
+Return a single durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2720,7 +2724,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2742,11 +2746,11 @@ options:
 
 ```text
 usage: tigrbl-auth identity list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -2757,13 +2761,13 @@ usage: tigrbl-auth identity list [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--sort {id,name,status,created_at,updated_at}]
                                  [--status STATUS]
 
-List repository-backed identity records.
+List durable operator-plane identity records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2771,7 +2775,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2798,11 +2802,11 @@ options:
 
 ```text
 usage: tigrbl-auth identity lock [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -2816,7 +2820,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2824,7 +2828,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2849,11 +2853,11 @@ options:
 ```text
 usage: tigrbl-auth identity set-password [-h] [--config CONFIG]
                                          [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,peer-claim}]
+                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                          [--tenant TENANT] [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                         [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                          [--runtime-style {plugin,standalone}]
                                          [--strict] [--no-strict]
@@ -2863,13 +2867,13 @@ usage: tigrbl-auth identity set-password [-h] [--config CONFIG]
                                          [--id ID] [--from-file FROM_FILE]
                                          [--set key=value] [--yes] [--dry-run]
 
-Set or rotate a repository-backed identity password hash.
+Set or rotate a durable operator-plane identity password hash.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2877,7 +2881,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2905,11 +2909,11 @@ options:
 ```text
 usage: tigrbl-auth identity unlock [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -2924,7 +2928,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2932,7 +2936,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -2957,11 +2961,11 @@ options:
 ```text
 usage: tigrbl-auth identity update [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -2972,13 +2976,13 @@ usage: tigrbl-auth identity update [-h] [--config CONFIG]
                                    [--if-missing {fail,create,skip}] [--yes]
                                    [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a repository-backed identity checkpoint record.
+Update a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -2986,7 +2990,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3017,18 +3021,18 @@ options:
 
 ```text
 usage: tigrbl-auth import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
                           [--output OUTPUT] [--verbose] [--trace]
                           {validate,run,status} ...
 
-Import repository-backed operator state from portable artifacts.
+Import durable operator-plane state from portable artifacts.
 
 positional arguments:
   {validate,run,status}
@@ -3040,7 +3044,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3048,7 +3052,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3067,11 +3071,11 @@ options:
 
 ```text
 usage: tigrbl-auth import run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                              [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                               [--runtime-style {plugin,standalone}] [--strict]
                               [--no-strict] [--format {json,yaml,text}]
@@ -3080,13 +3084,13 @@ usage: tigrbl-auth import run [-h] [--config CONFIG] [--env-file ENV_FILE]
                               [--checksum CHECKSUM] [--yes] [--dry-run]
                               [--wait] [--timeout TIMEOUT]
 
-Import repository-backed operator state from a portable artifact.
+Import durable operator-plane state from a portable artifact.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3094,7 +3098,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3121,24 +3125,24 @@ options:
 
 ```text
 usage: tigrbl-auth import status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
                                  [--format {json,yaml,text}] [--output OUTPUT]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
 
-Show the last repository-backed import checkpoint status.
+Show the last durable operator-plane import status.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3146,7 +3150,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3168,11 +3172,11 @@ options:
 ```text
 usage: tigrbl-auth import validate [-h] [--config CONFIG]
                                    [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,peer-claim}]
+                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                    [--tenant TENANT] [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                   [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                    [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                    [--runtime-style {plugin,standalone}]
                                    [--strict] [--no-strict]
@@ -3188,7 +3192,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3196,7 +3200,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3221,18 +3225,19 @@ options:
 
 ```text
 usage: tigrbl-auth keys [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                         [--runtime-style {plugin,standalone}] [--strict]
                         [--no-strict] [--format {json,yaml,text}]
                         [--output OUTPUT] [--verbose] [--trace]
-                        {generate,import,export,rotate,retire,publish-jwks,get,list,delete} ...
+                        {generate,import,export,rotate,retire,publish-jwks,get,list,delete}
+                        ...
 
-Stateful repository-backed key lifecycle and JWKS publication operators.
+Stateful durable operator-plane key lifecycle and JWKS publication operators.
 
 positional arguments:
   {generate,import,export,rotate,retire,publish-jwks,get,list,delete}
@@ -3250,7 +3255,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3258,7 +3263,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3277,11 +3282,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -3289,13 +3294,13 @@ usage: tigrbl-auth keys delete [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run]
 
-Delete a repository-backed key record.
+Delete a durable operator-plane key record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3303,7 +3308,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3327,11 +3332,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -3340,13 +3345,13 @@ usage: tigrbl-auth keys export [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--id ID] [--include-secrets] [--redact]
                                [--checksum CHECKSUM]
 
-Export repository-backed key metadata to a JSON or YAML file.
+Export durable operator-plane key metadata to a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3354,7 +3359,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3379,11 +3384,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -3395,13 +3400,13 @@ usage: tigrbl-auth keys generate [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--activate] [--retire-after RETIRE_AFTER]
                                  [--publish] [--yes] [--dry-run]
 
-Generate repository-backed key metadata and optional JWKS publication.
+Generate durable operator-plane key metadata and optional JWKS publication.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3409,7 +3414,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3444,24 +3449,24 @@ options:
 
 ```text
 usage: tigrbl-auth keys get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,peer-claim}]
+                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                             [--runtime-style {plugin,standalone}] [--strict]
                             [--no-strict] [--format {json,yaml,text}]
                             [--output OUTPUT] [--verbose] [--trace]
                             [--repo-root REPO_ROOT] [--id ID]
 
-Return a single repository-backed key record.
+Return a single durable operator-plane key record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3469,7 +3474,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3491,11 +3496,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -3505,13 +3510,13 @@ usage: tigrbl-auth keys import [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--input INPUT] [--activate] [--publish]
                                [--yes] [--dry-run]
 
-Import repository-backed key metadata from a JSON or YAML file.
+Import durable operator-plane key metadata from a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3519,7 +3524,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3548,11 +3553,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -3562,13 +3567,13 @@ usage: tigrbl-auth keys list [-h] [--config CONFIG] [--env-file ENV_FILE]
                              [--sort {id,name,status,created_at,updated_at}]
                              [--status STATUS]
 
-List repository-backed key records.
+List durable operator-plane key records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3576,7 +3581,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3604,11 +3609,11 @@ options:
 ```text
 usage: tigrbl-auth keys publish-jwks [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                     [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                      [--runtime-style {plugin,standalone}]
                                      [--strict] [--no-strict]
@@ -3618,13 +3623,13 @@ usage: tigrbl-auth keys publish-jwks [-h] [--config CONFIG]
                                      [--include-secrets] [--redact]
                                      [--checksum CHECKSUM]
 
-Publish the current repository-backed JWKS document.
+Publish the current durable operator-plane JWKS document.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3632,7 +3637,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3656,11 +3661,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys retire [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -3668,13 +3673,13 @@ usage: tigrbl-auth keys retire [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run] [--publish]
 
-Mark a repository-backed key retired.
+Mark a durable operator-plane key retired.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3682,7 +3687,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3707,11 +3712,11 @@ options:
 
 ```text
 usage: tigrbl-auth keys rotate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -3729,7 +3734,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3737,7 +3742,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3772,11 +3777,11 @@ options:
 
 ```text
 usage: tigrbl-auth migrate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                           [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                            [--runtime-style {plugin,standalone}] [--strict]
                            [--no-strict] [--format {json,yaml,text}]
@@ -3796,7 +3801,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3804,7 +3809,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3823,11 +3828,11 @@ options:
 
 ```text
 usage: tigrbl-auth migrate apply [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -3842,7 +3847,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3850,7 +3855,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3875,11 +3880,11 @@ options:
 
 ```text
 usage: tigrbl-auth migrate plan [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -3892,7 +3897,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3900,7 +3905,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3921,11 +3926,11 @@ options:
 
 ```text
 usage: tigrbl-auth migrate status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -3940,7 +3945,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3948,7 +3953,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -3971,11 +3976,11 @@ options:
 
 ```text
 usage: tigrbl-auth migrate verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -3990,7 +3995,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -3998,7 +4003,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4021,23 +4026,24 @@ options:
 
 ```text
 usage: tigrbl-auth release [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                           [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                            [--runtime-style {plugin,standalone}] [--strict]
                            [--no-strict] [--format {json,yaml,text}]
                            [--output OUTPUT] [--verbose] [--trace]
-                           {bundle,sign,status,recertify} ...
+                           {bundle,sign,verify,status,recertify} ...
 
 Release automation and recertification operators.
 
 positional arguments:
-  {bundle,sign,status,recertify}
+  {bundle,sign,verify,status,recertify}
     bundle              Build a release bundle.
     sign                Sign a release bundle.
+    verify              Verify a signed release bundle.
     status              Summarize release bundle status.
     recertify           Run recertification checks.
 
@@ -4045,7 +4051,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4053,7 +4059,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4072,11 +4078,11 @@ options:
 
 ```text
 usage: tigrbl-auth release bundle [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -4092,7 +4098,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4100,7 +4106,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4126,11 +4132,11 @@ options:
 ```text
 usage: tigrbl-auth release recertify [-h] [--config CONFIG]
                                      [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,peer-claim}]
+                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                      [--tenant TENANT] [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                     [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                      [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                      [--runtime-style {plugin,standalone}]
                                      [--strict] [--no-strict]
@@ -4145,7 +4151,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4153,7 +4159,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4176,11 +4182,11 @@ options:
 
 ```text
 usage: tigrbl-auth release sign [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -4195,7 +4201,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4203,7 +4209,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4228,11 +4234,11 @@ options:
 
 ```text
 usage: tigrbl-auth release status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -4247,7 +4253,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4255,7 +4261,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4274,15 +4280,65 @@ options:
                         Directory for generated reports.
 ```
 
+### `tigrbl-auth release verify`
+
+```text
+usage: tigrbl-auth release verify [-h] [--config CONFIG] [--env-file ENV_FILE]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+                                  [--tenant TENANT] [--issuer ISSUER]
+                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
+                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
+                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
+                                  [--runtime-style {plugin,standalone}]
+                                  [--strict] [--no-strict]
+                                  [--format {json,yaml,text}]
+                                  [--output OUTPUT] [--verbose] [--trace]
+                                  [--repo-root REPO_ROOT]
+                                  [--bundle-dir BUNDLE_DIR]
+
+Verify release-bundle attestations and manifest integrity for an existing signed bundle.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG       Path to the runtime/configuration file.
+  --env-file ENV_FILE   Optional environment file loaded before resolution.
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
+                        Effective standards/compliance profile.
+  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --issuer ISSUER       Issuer override for discovery and contract generation.
+  --surface-set {admin-rpc,diagnostics,public-rest}
+                        Installable surface set. May be supplied multiple times.
+  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
+                        Protocol slice. May be supplied multiple times.
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
+                        Extension boundary slice. May be supplied multiple times.
+  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
+                        Plugin composition mode.
+  --runtime-style {plugin,standalone}
+                        Runtime style for installation or standalone serving.
+  --strict              Fail closed when governance or certification checks fail.
+  --no-strict           Downgrade failures to warnings for exploratory use.
+  --format {json,yaml,text}
+                        Output format.
+  --output OUTPUT       Optional output file path.
+  --verbose, -v         Increase operator verbosity; may be repeated.
+  --trace               Emit trace-oriented operator details.
+  --repo-root REPO_ROOT
+                        Repository root for governance automation.
+  --bundle-dir BUNDLE_DIR
+                        Explicit bundle output directory.
+```
+
 ### `tigrbl-auth serve`
 
 ```text
 usage: tigrbl-auth serve [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,peer-claim}]
+                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                         [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                          [--runtime-style {plugin,standalone}] [--strict]
                          [--no-strict] [--format {json,yaml,text}]
@@ -4318,7 +4374,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4326,7 +4382,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4402,18 +4458,18 @@ options:
 
 ```text
 usage: tigrbl-auth session [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,peer-claim}]
+                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                           [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                            [--runtime-style {plugin,standalone}] [--strict]
                            [--no-strict] [--format {json,yaml,text}]
                            [--output OUTPUT] [--verbose] [--trace]
                            {get,list,revoke,revoke-all} ...
 
-Stateful repository-backed session control operators.
+Stateful durable operator-plane session control operators.
 
 positional arguments:
   {get,list,revoke,revoke-all}
@@ -4426,7 +4482,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4434,7 +4490,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4453,11 +4509,11 @@ options:
 
 ```text
 usage: tigrbl-auth session get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -4465,13 +4521,13 @@ usage: tigrbl-auth session get [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID]
 
-Return a single repository-backed session record.
+Return a single durable operator-plane session record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4479,7 +4535,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4501,11 +4557,11 @@ options:
 
 ```text
 usage: tigrbl-auth session list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -4516,13 +4572,13 @@ usage: tigrbl-auth session list [-h] [--config CONFIG] [--env-file ENV_FILE]
                                 [--sort {id,name,status,created_at,updated_at}]
                                 [--status STATUS]
 
-List repository-backed session records.
+List durable operator-plane session records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4530,7 +4586,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4557,11 +4613,11 @@ options:
 
 ```text
 usage: tigrbl-auth session revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -4570,13 +4626,13 @@ usage: tigrbl-auth session revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
                                   [--repo-root REPO_ROOT] [--id ID] [--yes]
                                   [--dry-run]
 
-Mark a repository-backed session revoked.
+Mark a durable operator-plane session revoked.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4584,7 +4640,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4609,11 +4665,11 @@ options:
 ```text
 usage: tigrbl-auth session revoke-all [-h] [--config CONFIG]
                                       [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,peer-claim}]
+                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                       [--tenant TENANT] [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                      [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                       [--runtime-style {plugin,standalone}]
                                       [--strict] [--no-strict]
@@ -4623,13 +4679,13 @@ usage: tigrbl-auth session revoke-all [-h] [--config CONFIG]
                                       [--filter FILTER] [--status STATUS]
                                       [--yes] [--dry-run]
 
-Mark all repository-backed sessions revoked.
+Mark all durable operator-plane sessions revoked.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4637,7 +4693,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4662,11 +4718,11 @@ options:
 
 ```text
 usage: tigrbl-auth spec [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,peer-claim}]
+                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                        [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                        [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                         [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                         [--runtime-style {plugin,standalone}] [--strict]
                         [--no-strict] [--format {json,yaml,text}]
@@ -4686,7 +4742,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4694,7 +4750,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4713,11 +4769,11 @@ options:
 
 ```text
 usage: tigrbl-auth spec diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
@@ -4733,7 +4789,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4741,7 +4797,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4768,11 +4824,11 @@ options:
 
 ```text
 usage: tigrbl-auth spec generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -4787,7 +4843,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4795,7 +4851,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4820,11 +4876,11 @@ options:
 
 ```text
 usage: tigrbl-auth spec report [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -4839,7 +4895,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4847,7 +4903,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4872,11 +4928,11 @@ options:
 
 ```text
 usage: tigrbl-auth spec validate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -4891,7 +4947,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4899,7 +4955,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4924,18 +4980,18 @@ options:
 
 ```text
 usage: tigrbl-auth tenant [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
                           [--output OUTPUT] [--verbose] [--trace]
                           {create,update,delete,get,list,enable,disable} ...
 
-Stateful repository-backed tenant lifecycle operators.
+Stateful durable operator-plane tenant lifecycle operators.
 
 positional arguments:
   {create,update,delete,get,list,enable,disable}
@@ -4951,7 +5007,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -4959,7 +5015,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -4978,11 +5034,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -4994,13 +5050,13 @@ usage: tigrbl-auth tenant create [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--yes] [--dry-run] [--wait]
                                  [--timeout TIMEOUT]
 
-Create a repository-backed tenant checkpoint record.
+Create a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5008,7 +5064,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5039,11 +5095,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -5051,13 +5107,13 @@ usage: tigrbl-auth tenant delete [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
                                  [--id ID] [--yes] [--dry-run]
 
-Delete a repository-backed tenant checkpoint record.
+Delete a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5065,7 +5121,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5089,11 +5145,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -5108,7 +5164,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5116,7 +5172,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5140,11 +5196,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -5158,7 +5214,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5166,7 +5222,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5190,24 +5246,24 @@ options:
 
 ```text
 usage: tigrbl-auth tenant get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                              [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                               [--runtime-style {plugin,standalone}] [--strict]
                               [--no-strict] [--format {json,yaml,text}]
                               [--output OUTPUT] [--verbose] [--trace]
                               [--repo-root REPO_ROOT] [--id ID]
 
-Return a single repository-backed tenant record.
+Return a single durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5215,7 +5271,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5237,11 +5293,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,peer-claim}]
+                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                               [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                               [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                [--runtime-style {plugin,standalone}]
                                [--strict] [--no-strict]
@@ -5252,13 +5308,13 @@ usage: tigrbl-auth tenant list [-h] [--config CONFIG] [--env-file ENV_FILE]
                                [--sort {id,name,status,created_at,updated_at}]
                                [--status STATUS]
 
-List repository-backed tenant records.
+List durable operator-plane tenant records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5266,7 +5322,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5293,11 +5349,11 @@ options:
 
 ```text
 usage: tigrbl-auth tenant update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,peer-claim}]
+                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                  [--tenant TENANT] [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                 [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                 [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                  [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                  [--runtime-style {plugin,standalone}]
                                  [--strict] [--no-strict]
@@ -5308,13 +5364,13 @@ usage: tigrbl-auth tenant update [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--if-missing {fail,create,skip}] [--yes]
                                  [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a repository-backed tenant checkpoint record.
+Update a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5322,7 +5378,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5353,18 +5409,18 @@ options:
 
 ```text
 usage: tigrbl-auth token [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,peer-claim}]
+                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                         [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                          [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                          [--runtime-style {plugin,standalone}] [--strict]
                          [--no-strict] [--format {json,yaml,text}]
                          [--output OUTPUT] [--verbose] [--trace]
                          {get,list,introspect,revoke,exchange} ...
 
-Stateful repository-backed token control operators.
+Stateful durable operator-plane token control operators.
 
 positional arguments:
   {get,list,introspect,revoke,exchange}
@@ -5378,7 +5434,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5386,7 +5442,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5405,11 +5461,11 @@ options:
 
 ```text
 usage: tigrbl-auth token exchange [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,peer-claim}]
+                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                   [--tenant TENANT] [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                  [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                   [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                   [--runtime-style {plugin,standalone}]
                                   [--strict] [--no-strict]
@@ -5419,13 +5475,13 @@ usage: tigrbl-auth token exchange [-h] [--config CONFIG] [--env-file ENV_FILE]
                                   [--from-file FROM_FILE] [--set key=value]
                                   [--yes] [--dry-run]
 
-Create a derived repository-backed token exchange record.
+Create a derived durable operator-plane token exchange record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5433,7 +5489,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5460,24 +5516,24 @@ options:
 
 ```text
 usage: tigrbl-auth token get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,peer-claim}]
+                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                              [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                              [--runtime-style {plugin,standalone}] [--strict]
                              [--no-strict] [--format {json,yaml,text}]
                              [--output OUTPUT] [--verbose] [--trace]
                              [--repo-root REPO_ROOT] [--id ID]
 
-Return a single repository-backed token record.
+Return a single durable operator-plane token record.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5485,7 +5541,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5508,11 +5564,11 @@ options:
 ```text
 usage: tigrbl-auth token introspect [-h] [--config CONFIG]
                                     [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,peer-claim}]
+                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                     [--tenant TENANT] [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                    [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                     [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                     [--runtime-style {plugin,standalone}]
                                     [--strict] [--no-strict]
@@ -5526,7 +5582,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5534,7 +5590,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5556,11 +5612,11 @@ options:
 
 ```text
 usage: tigrbl-auth token list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,peer-claim}]
+                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                              [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                              [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                               [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                               [--runtime-style {plugin,standalone}] [--strict]
                               [--no-strict] [--format {json,yaml,text}]
@@ -5570,13 +5626,13 @@ usage: tigrbl-auth token list [-h] [--config CONFIG] [--env-file ENV_FILE]
                               [--sort {id,name,status,created_at,updated_at}]
                               [--status STATUS]
 
-List repository-backed token records.
+List durable operator-plane token records.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5584,7 +5640,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5611,11 +5667,11 @@ options:
 
 ```text
 usage: tigrbl-auth token revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,peer-claim}]
+                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                                [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                                [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                                 [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                                 [--runtime-style {plugin,standalone}]
                                 [--strict] [--no-strict]
@@ -5623,13 +5679,13 @@ usage: tigrbl-auth token revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
                                 [--verbose] [--trace] [--repo-root REPO_ROOT]
                                 [--id ID] [--yes] [--dry-run]
 
-Mark a repository-backed token revoked.
+Mark a durable operator-plane token revoked.
 
 options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5637,7 +5693,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.
@@ -5661,11 +5717,11 @@ options:
 
 ```text
 usage: tigrbl-auth verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,peer-claim}]
+                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                          [--extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}]
+                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
                           [--runtime-style {plugin,standalone}] [--strict]
                           [--no-strict] [--format {json,yaml,text}]
@@ -5679,7 +5735,7 @@ options:
   -h, --help            show this help message and exit
   --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,peer-claim}
+  --profile {baseline,production,hardening,fapi2-security,peer-claim}
                         Effective standards/compliance profile.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
@@ -5687,7 +5743,7 @@ options:
                         Installable surface set. May be supplied multiple times.
   --slice {device,dpop,jar,mtls,par,rar,token-exchange}
                         Protocol slice. May be supplied multiple times.
-  --extension {a2a-adapter,dns-privacy,mcp-adapter,set,webauthn-passkeys,webpush}
+  --extension {dns-privacy,set,webauthn-passkeys,webpush}
                         Extension boundary slice. May be supplied multiple times.
   --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
                         Plugin composition mode.

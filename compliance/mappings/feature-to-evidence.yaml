@@ -396,14 +396,8 @@ cli-verb:token.revoke:
 - compliance/evidence/tier3/cli-operator-surface/
 cli-verb:verify:
 - compliance/evidence/tier3/cli-operator-surface/
-extension:a2a-adapter:
-- compliance/evidence/tier3/cli-operator-surface/
-- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
 extension:dns-privacy:
 - compliance/evidence/tier3/discovery/
-extension:mcp-adapter:
-- compliance/evidence/tier3/cli-operator-surface/
-- docs/architecture/FEATURE_FLAGS_AND_SURFACES.md
 extension:set:
 - compliance/evidence/tier3/jwt/
 extension:webauthn-passkeys:
@@ -517,6 +511,15 @@ profile:baseline:
 - compliance/evidence/tier3/security-bcp/
 - compliance/evidence/tier3/token-exchange/
 - compliance/evidence/tier3/well-known/
+profile:camara-security-interoperability:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:confidential-spa-pattern:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:fapi2-message-signing:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 profile:fapi2-security:
 - compliance/evidence/tier3/assertion-framework/
 - compliance/evidence/tier3/bearer/
@@ -555,6 +558,15 @@ profile:fapi2-security:
 - compliance/evidence/tier3/security-bcp/
 - compliance/evidence/tier3/token-exchange/
 - compliance/evidence/tier3/well-known/
+profile:fast-udap-security:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:fdx-csdf-security-model:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:gnap-core-rs:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 profile:hardening:
 - compliance/evidence/tier3/assertion-framework/
 - compliance/evidence/tier3/bearer/
@@ -593,6 +605,18 @@ profile:hardening:
 - compliance/evidence/tier3/security-bcp/
 - compliance/evidence/tier3/token-exchange/
 - compliance/evidence/tier3/well-known/
+profile:ihe-iua:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:nist-sp-800-63b-4:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:nist-sp-800-63c-4:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:oauth-2-1:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 profile:peer-claim:
 - compliance/evidence/tier3/assertion-framework/
 - compliance/evidence/tier3/bearer/
@@ -669,6 +693,15 @@ profile:production:
 - compliance/evidence/tier3/security-bcp/
 - compliance/evidence/tier3/token-exchange/
 - compliance/evidence/tier3/well-known/
+profile:smart-app-launch:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:smart-backend-services:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+profile:webauthn-passkey-oauth-patterns:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 slice:device:
 - compliance/evidence/tier3/device-flow/
 slice:dpop:
@@ -932,12 +965,39 @@ target:asgi-3-application-package:
 - compliance/evidence/tier3/asgi-application/
 target:bootstrap-and-migration-lifecycle:
 - compliance/evidence/tier3/bootstrap-migration/
+target:camara-security-and-interoperability-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 target:cli-operator-surface:
 - compliance/evidence/tier3/cli-operator-surface/
+target:confidential-spa-profile-pattern:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:fapi-2-0-message-signing-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:fast-udap-security-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:fdx-csdf-security-model-and-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:gnap-core-resource-server-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:ihe-iua-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 target:import-export-portability:
 - compliance/evidence/tier3/import-export-portability/
 target:key-lifecycle-and-jwks-publication:
 - compliance/evidence/tier3/key-lifecycle-jwks/
+target:nist-sp-800-63b-4-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:nist-sp-800-63c-4-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
 target:oauth-2-1-alignment-profile:
 - docs/compliance/CERTIFICATION_BOUNDARY.md
 - docs/compliance/TARGET_REALITY_MATRIX.md
@@ -1037,3 +1097,12 @@ target:runner-profile-tigrcorn:
 - compliance/evidence/tier3/runner-tigrcorn/
 target:runner-profile-uvicorn:
 - compliance/evidence/tier3/runner-uvicorn/
+target:smart-app-launch-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:smart-backend-services-profile:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md
+target:webauthn-and-passkey-bound-oauth-patterns:
+- docs/compliance/CERTIFICATION_BOUNDARY.md
+- docs/compliance/TARGET_REALITY_MATRIX.md

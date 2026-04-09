@@ -6770,9 +6770,7 @@
     "extension": {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7708,9 +7706,7 @@
     {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"

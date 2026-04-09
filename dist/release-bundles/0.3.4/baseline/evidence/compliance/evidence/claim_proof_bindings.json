@@ -4633,25 +4633,6 @@
       "security_sensitive": false
     },
     {
-      "claim_id": "extension:a2a-adapter",
-      "feature_id": "extension:a2a-adapter",
-      "targets": [
-        "A2A adapter"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/unit/test_adapters.py",
-        "tests/unit/test_feature_flag_registry.py",
-        "tests/unit/test_remote_adapter.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/",
-        "docs/architecture/FEATURE_FLAGS_AND_SURFACES.md"
-      ],
-      "security_sensitive": false
-    },
-    {
       "claim_id": "extension:dns-privacy",
       "feature_id": "extension:dns-privacy",
       "targets": [
@@ -4665,25 +4646,6 @@
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
-      ],
-      "security_sensitive": false
-    },
-    {
-      "claim_id": "extension:mcp-adapter",
-      "feature_id": "extension:mcp-adapter",
-      "targets": [
-        "MCP adapter"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/unit/test_adapters.py",
-        "tests/unit/test_feature_flag_registry.py",
-        "tests/unit/test_remote_adapter.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/",
-        "docs/architecture/FEATURE_FLAGS_AND_SURFACES.md"
       ],
       "security_sensitive": false
     },

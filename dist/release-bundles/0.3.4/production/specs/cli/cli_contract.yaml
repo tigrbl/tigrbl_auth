@@ -96,9 +96,7 @@ global_flags:
   family: global
   default: &id001 []
   choices: &id002
-  - a2a-adapter
   - dns-privacy
-  - mcp-adapter
   - set
   - webauthn-passkeys
   - webpush

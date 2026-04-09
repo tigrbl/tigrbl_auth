@@ -289,15 +289,55 @@ Release bundle and signature verification:
 - tests/security/test_release_bundle_signing.py
 - tests/unit/test_phase1_published_dependency_model.py
 - tests/security/test_phase12_sender_constraint_replay.py
-A2A adapter:
-- tests/unit/test_adapters.py
-- tests/unit/test_feature_flag_registry.py
-- tests/unit/test_remote_adapter.py
-MCP adapter:
-- tests/unit/test_adapters.py
-- tests/unit/test_feature_flag_registry.py
-- tests/unit/test_remote_adapter.py
 OAuth 2.1 alignment profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+FAPI 2.0 Message Signing profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+SMART App Launch profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+SMART Backend Services profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+FAST / UDAP Security profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+IHE IUA profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+NIST SP 800-63B-4 profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+NIST SP 800-63C-4 profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+CAMARA Security and Interoperability profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+FDX CSDF Security Model and Profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+GNAP Core + Resource Server profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+WebAuthn and passkey-bound OAuth patterns:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+Confidential SPA profile pattern:
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_boundary_freeze_checkpoint.py
 - tests/unit/test_feature_flag_registry.py

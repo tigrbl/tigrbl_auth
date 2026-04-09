@@ -193,16 +193,6 @@ EXTENSION_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "targets": ("RFC 8932",),
         "boundary": "extension_quarantine",
     },
-    "a2a-adapter": {
-        "flags": (),
-        "targets": ("A2A adapter",),
-        "boundary": "extension_quarantine",
-    },
-    "mcp-adapter": {
-        "flags": (),
-        "targets": ("MCP adapter",),
-        "boundary": "extension_quarantine",
-    },
 }
 
 SURFACE_CAPABILITY_REGISTRY: Final[dict[str, dict[str, Any]]] = all_surface_capability_registry()

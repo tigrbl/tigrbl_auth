@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-07",
+  "generated_at": "2026-04-09",
   "source_of_truth": [
     "docs/compliance/current_state_report.json",
     "docs/compliance/certification_state_report.json",
@@ -46,6 +46,7 @@
     "open_gaps": [
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "At least one kept runner is missing declared clean-room CI install/probe coverage.",
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
       "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
@@ -59,8 +60,8 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 8
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "26a1497425107a0ef9c63ac4728ee3c60e8bae7d151d5f95e71147e8d8602a1a",
-    "docs/compliance/certification_state_report.json": "61e2b65d2b3f02edc1b745e89cfcc461bef5fd374fc98e40ef89a0043654d18a",
+    "docs/compliance/current_state_report.json": "11c68dfe884fc0df023f4dc1349c2ae1bc218025f74ddf4e6dcb63ed00a917d5",
+    "docs/compliance/certification_state_report.json": "38f042c91c5868c2fa61a50ddc4d667edc4669a9a860f311ce9de642b1fa712b",
     "docs/compliance/release_gate_report.json": "caa248c71e5362125eafc8898506374de69864297e358c4d24c426763bc8fa34",
     "docs/compliance/final_release_gate_report.json": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019",
     "docs/compliance/non_rfc_status_report.json": "2ad0ce3c3626df778f087d8370894e8a14acfff1fda548fbe9df585dd8f497c6"

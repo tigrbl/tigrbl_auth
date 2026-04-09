@@ -1,8 +1,8 @@
 # Install Substrate Report
 
-- Generated at: `20260408T000847Z`
+- Generated at: `20260409T054925Z`
 - Passed: `False`
-- Static manifest passed: `True`
+- Static manifest passed: `False`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
@@ -20,6 +20,8 @@
 
 ## Failures
 
+- ci-install-profiles workflow does not cover the full retained runtime matrix
+- ci-release-gates workflow does not cover the retained certification lanes and promotion jobs
 - The current environment does not provide the full supported interpreter matrix required for clean-room certification.
 
 ## Warnings
@@ -65,11 +67,11 @@
 
 ## Workflow coverage
 
-- install_profiles_workflow_present: `True`
-- release_gates_workflow_present: `True`
-- install_profiles_runtime_env_present_count: `14`
-- release_gates_runtime_env_present_count: `14`
-- release_gates_test_lane_env_present_count: `15`
-- release_gates_extra_env_present_count: `2`
-- install_profiles_artifact_upload_present: `True`
-- release_gates_artifact_upload_present: `True`
+- install_profiles_workflow_present: `False`
+- release_gates_workflow_present: `False`
+- install_profiles_runtime_env_present_count: `0`
+- release_gates_runtime_env_present_count: `0`
+- release_gates_test_lane_env_present_count: `0`
+- release_gates_extra_env_present_count: `0`
+- install_profiles_artifact_upload_present: `False`
+- release_gates_artifact_upload_present: `False`

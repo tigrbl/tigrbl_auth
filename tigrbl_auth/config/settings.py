@@ -164,7 +164,7 @@ class Settings(BaseSettings):
     )
     active_extensions: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ACTIVE_EXTENSIONS", ""),
-        description="Comma-separated quarantined extension features: webauthn-passkeys, set, webpush, dns-privacy, a2a-adapter, mcp-adapter.",
+        description="Comma-separated quarantined extension features: webauthn-passkeys, set, webpush, dns-privacy.",
     )
 
     # ------------------------------------------------------------------

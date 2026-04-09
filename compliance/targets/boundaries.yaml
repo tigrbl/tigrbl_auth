@@ -67,6 +67,18 @@ boundaries:
     scope: alignment-only
     includes:
     - OAuth 2.1 alignment profile
+    - FAPI 2.0 Message Signing profile
+    - SMART App Launch profile
+    - SMART Backend Services profile
+    - FAST / UDAP Security profile
+    - IHE IUA profile
+    - NIST SP 800-63B-4 profile
+    - NIST SP 800-63C-4 profile
+    - CAMARA Security and Interoperability profile
+    - FDX CSDF Security Model and Profile
+    - GNAP Core + Resource Server profile
+    - WebAuthn and passkey-bound OAuth patterns
+    - Confidential SPA profile pattern
   out_of_scope_baseline:
     description: Capabilities explicitly excluded from the baseline boundary and certification
       target set.

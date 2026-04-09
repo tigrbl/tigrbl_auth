@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260408T000852Z`
+- Generated at: `20260409T054930Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
 - Validated artifact source: `dist\validated-runs\collected-artifact-downloads.json`
@@ -12,8 +12,8 @@
 - Pyproject requires-python: `>=3.10,<3.13`
 - Supported Python versions: `3.10, 3.11, 3.12`
 - Placeholder-supported runners: `0`
-- Declared CI-installable runners: `3`
-- Declared CI install/probe complete: `True`
+- Declared CI-installable runners: `0`
+- Declared CI install/probe complete: `False`
 - Execution probes enabled: `True`
 - Surface probe passed: `True`
 - Surface probe endpoints: `3`
@@ -46,7 +46,7 @@
 - Installed: `True`
 - Module: `None`
 - Placeholder-supported: `False`
-- Declared CI-installable: `True`
+- Declared CI-installable: `False`
 - Serve check passed: `True`
 - Serve check message: Validated manifests confirm serve-check success for 3/3 required cells.
 - Validated matrix profile: `postgres-hypercorn`
@@ -62,7 +62,7 @@
 - Installed: `True`
 - Module: `None`
 - Placeholder-supported: `False`
-- Declared CI-installable: `True`
+- Declared CI-installable: `False`
 - Serve check passed: `True`
 - Serve check message: Validated manifests confirm serve-check success for 2/2 required cells.
 - Validated matrix profile: `tigrcorn`
@@ -78,7 +78,7 @@
 - Installed: `True`
 - Module: `uvicorn`
 - Placeholder-supported: `False`
-- Declared CI-installable: `True`
+- Declared CI-installable: `False`
 - Serve check passed: `True`
 - Serve check message: Validated manifests confirm serve-check success for 3/3 required cells.
 - Validated matrix profile: `sqlite-uvicorn`

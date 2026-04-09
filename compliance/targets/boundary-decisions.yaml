@@ -138,7 +138,6 @@ extension_boundary:
 - WebAuthn/passkeys
 - SET
 - Web Push
-- optional A2A/MCP adapters
 - optional trust/federation work
 out_of_scope_baseline:
 - SAML IdP/SP

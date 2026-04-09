@@ -6770,9 +6770,7 @@
     "extension": {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7153,6 +7151,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",
@@ -7636,6 +7635,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",
@@ -7706,9 +7706,7 @@
     {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"

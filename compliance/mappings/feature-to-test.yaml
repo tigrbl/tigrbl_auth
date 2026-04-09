@@ -2035,17 +2035,9 @@ cli-verb:verify:
 - tests/unit/test_phase3_runtime_launcher.py
 - tests/unit/test_phase4_cli_contract.py
 - tests/unit/test_phase5_operator_service_layer.py
-extension:a2a-adapter:
-- tests/unit/test_adapters.py
-- tests/unit/test_feature_flag_registry.py
-- tests/unit/test_remote_adapter.py
 extension:dns-privacy:
 - tests/unit/test_rfc8932_dns_privacy.py
 - tests/unit/test_rfc8932_enhanced_metadata.py
-extension:mcp-adapter:
-- tests/unit/test_adapters.py
-- tests/unit/test_feature_flag_registry.py
-- tests/unit/test_remote_adapter.py
 extension:set:
 - tests/unit/test_rfc7952_security_event_token.py
 extension:webauthn-passkeys:
@@ -2276,6 +2268,18 @@ profile:baseline:
 - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
 - tests/unit/test_rfc9728_metadata_checkpoint.py
 - tests/unit/test_well_known_endpoints_behavior.py
+profile:camara-security-interoperability:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:confidential-spa-pattern:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:fapi2-message-signing:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 profile:fapi2-security:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_configuration.py
@@ -2361,6 +2365,18 @@ profile:fapi2-security:
 - tests/unit/test_rfc9728_metadata_checkpoint.py
 - tests/unit/test_rpc_registry_live.py
 - tests/unit/test_well_known_endpoints_behavior.py
+profile:fast-udap-security:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:fdx-csdf-security-model:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:gnap-core-rs:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 profile:hardening:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_configuration.py
@@ -2446,6 +2462,22 @@ profile:hardening:
 - tests/unit/test_rfc9728_metadata_checkpoint.py
 - tests/unit/test_rpc_registry_live.py
 - tests/unit/test_well_known_endpoints_behavior.py
+profile:ihe-iua:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:nist-sp-800-63b-4:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:nist-sp-800-63c-4:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:oauth-2-1:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 profile:peer-claim:
 - tests/conformance/baseline/test_oidc_id_token.py
 - tests/conformance/baseline/test_openid_configuration.py
@@ -2616,6 +2648,18 @@ profile:production:
 - tests/unit/test_rfc9728_metadata_checkpoint.py
 - tests/unit/test_rpc_registry_live.py
 - tests/unit/test_well_known_endpoints_behavior.py
+profile:smart-app-launch:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:smart-backend-services:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+profile:webauthn-passkey-oauth-patterns:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 slice:device:
 - tests/conformance/hardening/test_rfc8628_device_authorization.py
 - tests/integration/test_device_code_flow.py
@@ -3665,6 +3709,10 @@ target:bootstrap-and-migration-lifecycle:
 - tests/e2e/test_release_gate_catalog.py
 - tests/unit/test_phase0_claim_boundary_rebaseline.py
 - tests/unit/test_phase4_cli_contract.py
+target:camara-security-and-interoperability-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 target:cli-operator-surface:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
@@ -3676,6 +3724,30 @@ target:cli-operator-surface:
 - tests/unit/test_phase3_runtime_launcher.py
 - tests/unit/test_phase4_cli_contract.py
 - tests/unit/test_phase5_operator_service_layer.py
+target:confidential-spa-profile-pattern:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:fapi-2-0-message-signing-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:fast-udap-security-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:fdx-csdf-security-model-and-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:gnap-core-resource-server-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:ihe-iua-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 target:import-export-portability:
 - tests/conformance/operator/test_cli_import_export.py
 - tests/unit/test_phase0_claim_boundary_rebaseline.py
@@ -3688,6 +3760,14 @@ target:key-lifecycle-and-jwks-publication:
 - tests/unit/test_phase4_cli_contract.py
 - tests/unit/test_phase5_operator_service_layer.py
 - tests/unit/test_rpc_registry_live.py
+target:nist-sp-800-63b-4-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:nist-sp-800-63c-4-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
 target:oauth-2-1-alignment-profile:
 - tests/integration/test_profile_surface_and_contract_alignment.py
 - tests/unit/test_boundary_freeze_checkpoint.py
@@ -3958,3 +4038,15 @@ target:runner-profile-uvicorn:
 - tests/unit/test_phase2_runner_adapter_runtime_layer.py
 - tests/unit/test_phase3_runtime_launcher.py
 - tests/unit/test_runtime_cfg.py
+target:smart-app-launch-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:smart-backend-services-profile:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py
+target:webauthn-and-passkey-bound-oauth-patterns:
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_boundary_freeze_checkpoint.py
+- tests/unit/test_feature_flag_registry.py

@@ -16,7 +16,26 @@ from tigrbl_auth.config.deployment import (
 )
 from tigrbl_auth.config.feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
 
-PROFILE_ORDER = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
+PROFILE_ORDER = (
+    "baseline",
+    "production",
+    "hardening",
+    "fapi2-security",
+    "peer-claim",
+    "fapi2-message-signing",
+    "smart-app-launch",
+    "smart-backend-services",
+    "fast-udap-security",
+    "ihe-iua",
+    "nist-sp-800-63b-4",
+    "nist-sp-800-63c-4",
+    "camara-security-interoperability",
+    "fdx-csdf-security-model",
+    "gnap-core-rs",
+    "oauth-2-1",
+    "webauthn-passkey-oauth-patterns",
+    "confidential-spa-pattern",
+)
 CORE_TARGET_FILES = (
     "rfc-targets.yaml",
     "oidc-targets.yaml",
@@ -99,6 +118,9 @@ def _target_sets(repo_root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, 
 def _profile_target_labels(repo_root: Path, profile_name: str) -> list[str]:
     profiles = _load_yaml(repo_root / "compliance" / "targets" / "profiles.yaml").get("profiles", {})
     profile = profiles.get(profile_name, {})
+    explicit_targets = [str(item) for item in profile.get("targets", []) if str(item).strip()]
+    if explicit_targets:
+        return list(dict.fromkeys(explicit_targets))
     manifest_names = list(profile.get("target_sets", []))
     excluded = {str(item) for item in profile.get("excludes", [])}
     labels: list[str] = []

@@ -8,8 +8,8 @@ generated_from:
 - tigrbl_auth.config.deployment
 - compliance/claims/fapi-atomic-claims.yaml
 summary:
-  claim_count: 376
-  atomic_feature_claim_count: 370
+  claim_count: 399
+  atomic_feature_claim_count: 393
   fapi_atomic_claim_count: 6
 claims:
 - id: cli-flag:access_log
@@ -1854,16 +1854,6 @@ claims:
   - CLI operator surface
   required_flags: []
   source: tigrbl_auth.cli.metadata
-- id: extension:a2a-adapter
-  feature_id: extension:a2a-adapter
-  kind: extension
-  title: a2a-adapter
-  description: a2a-adapter quarantined extension
-  scope: extension
-  targets:
-  - A2A adapter
-  required_flags: []
-  source: tigrbl_auth.config.deployment
 - id: extension:dns-privacy
   feature_id: extension:dns-privacy
   kind: extension
@@ -1874,16 +1864,6 @@ claims:
   - RFC 8932
   required_flags:
   - enable_rfc8932
-  source: tigrbl_auth.config.deployment
-- id: extension:mcp-adapter
-  feature_id: extension:mcp-adapter
-  kind: extension
-  title: mcp-adapter
-  description: mcp-adapter quarantined extension
-  scope: extension
-  targets:
-  - MCP adapter
-  required_flags: []
   source: tigrbl_auth.config.deployment
 - id: extension:set
   feature_id: extension:set
@@ -2841,6 +2821,36 @@ claims:
   - enable_oidc_discovery
   - enable_oidc_session_management
   source: compliance/targets/profiles.yaml
+- id: profile:camara-security-interoperability
+  feature_id: profile:camara-security-interoperability
+  kind: profile
+  title: camara-security-interoperability
+  description: External tracked profile for CAMARA Security and Interoperability.
+  scope: external
+  targets:
+  - CAMARA Security and Interoperability profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:confidential-spa-pattern
+  feature_id: profile:confidential-spa-pattern
+  kind: profile
+  title: confidential-spa-pattern
+  description: External tracked profile for confidential SPA security pattern.
+  scope: external
+  targets:
+  - Confidential SPA profile pattern
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:fapi2-message-signing
+  feature_id: profile:fapi2-message-signing
+  kind: profile
+  title: fapi2-message-signing
+  description: External tracked profile for FAPI 2.0 Message Signing.
+  scope: external
+  targets:
+  - FAPI 2.0 Message Signing profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
 - id: profile:fapi2-security
   feature_id: profile:fapi2-security
   kind: profile
@@ -2927,6 +2937,36 @@ claims:
   - enable_oidc_frontchannel_logout
   - enable_oidc_backchannel_logout
   source: compliance/targets/profiles.yaml
+- id: profile:fast-udap-security
+  feature_id: profile:fast-udap-security
+  kind: profile
+  title: fast-udap-security
+  description: External tracked profile for FAST Security and UDAP Security IG.
+  scope: external
+  targets:
+  - FAST / UDAP Security profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:fdx-csdf-security-model
+  feature_id: profile:fdx-csdf-security-model
+  kind: profile
+  title: fdx-csdf-security-model
+  description: External tracked profile for the FDX CSDF Security Model and Profile.
+  scope: external
+  targets:
+  - FDX CSDF Security Model and Profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:gnap-core-rs
+  feature_id: profile:gnap-core-rs
+  kind: profile
+  title: gnap-core-rs
+  description: External tracked profile for GNAP Core and Resource Server.
+  scope: external
+  targets:
+  - GNAP Core + Resource Server profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
 - id: profile:hardening
   feature_id: profile:hardening
   kind: profile
@@ -3012,6 +3052,46 @@ claims:
   - enable_rfc9700
   - enable_oidc_frontchannel_logout
   - enable_oidc_backchannel_logout
+  source: compliance/targets/profiles.yaml
+- id: profile:ihe-iua
+  feature_id: profile:ihe-iua
+  kind: profile
+  title: ihe-iua
+  description: External tracked profile for IHE Internet User Authorization.
+  scope: external
+  targets:
+  - IHE IUA profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:nist-sp-800-63b-4
+  feature_id: profile:nist-sp-800-63b-4
+  kind: profile
+  title: nist-sp-800-63b-4
+  description: External tracked profile for NIST SP 800-63B-4.
+  scope: external
+  targets:
+  - NIST SP 800-63B-4 profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:nist-sp-800-63c-4
+  feature_id: profile:nist-sp-800-63c-4
+  kind: profile
+  title: nist-sp-800-63c-4
+  description: External tracked profile for NIST SP 800-63C-4.
+  scope: external
+  targets:
+  - NIST SP 800-63C-4 profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:oauth-2-1
+  feature_id: profile:oauth-2-1
+  kind: profile
+  title: oauth-2-1
+  description: External tracked profile for OAuth 2.1.
+  scope: external
+  targets:
+  - OAuth 2.1 alignment profile
+  required_flags: []
   source: compliance/targets/profiles.yaml
 - id: profile:peer-claim
   feature_id: profile:peer-claim
@@ -3172,6 +3252,36 @@ claims:
   - enable_oidc_userinfo
   - enable_oidc_session_management
   - enable_oidc_rp_initiated_logout
+  source: compliance/targets/profiles.yaml
+- id: profile:smart-app-launch
+  feature_id: profile:smart-app-launch
+  kind: profile
+  title: smart-app-launch
+  description: External tracked profile for SMART App Launch.
+  scope: external
+  targets:
+  - SMART App Launch profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:smart-backend-services
+  feature_id: profile:smart-backend-services
+  kind: profile
+  title: smart-backend-services
+  description: External tracked profile for SMART Backend Services.
+  scope: external
+  targets:
+  - SMART Backend Services profile
+  required_flags: []
+  source: compliance/targets/profiles.yaml
+- id: profile:webauthn-passkey-oauth-patterns
+  feature_id: profile:webauthn-passkey-oauth-patterns
+  kind: profile
+  title: webauthn-passkey-oauth-patterns
+  description: External tracked profile for WebAuthn and passkey-bound OAuth patterns.
+  scope: external
+  targets:
+  - WebAuthn and passkey-bound OAuth patterns
+  required_flags: []
   source: compliance/targets/profiles.yaml
 - id: route:authorize
   feature_id: route:authorize
@@ -3840,6 +3950,17 @@ claims:
   - Bootstrap and migration lifecycle
   required_flags: []
   source: compliance/targets/operator-targets.yaml
+- id: target:camara-security-and-interoperability-profile
+  feature_id: target:camara-security-and-interoperability-profile
+  kind: target
+  title: CAMARA Security and Interoperability profile
+  description: Track external telecom profile coverage only. Do not emit as a retained
+    core certification claim.
+  scope: alignment-only
+  targets:
+  - CAMARA Security and Interoperability profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
 - id: target:cli-operator-surface
   feature_id: target:cli-operator-surface
   kind: target
@@ -3850,6 +3971,72 @@ claims:
   - CLI operator surface
   required_flags: []
   source: compliance/targets/operator-targets.yaml
+- id: target:confidential-spa-profile-pattern
+  feature_id: target:confidential-spa-profile-pattern
+  kind: target
+  title: Confidential SPA profile pattern
+  description: Track external browser-architecture pattern coverage only. Do not emit
+    as a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - Confidential SPA profile pattern
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:fapi-2-0-message-signing-profile
+  feature_id: target:fapi-2-0-message-signing-profile
+  kind: target
+  title: FAPI 2.0 Message Signing profile
+  description: Track external sector profile coverage only. Do not emit as a retained
+    core certification claim.
+  scope: alignment-only
+  targets:
+  - FAPI 2.0 Message Signing profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:fast-udap-security-profile
+  feature_id: target:fast-udap-security-profile
+  kind: target
+  title: FAST / UDAP Security profile
+  description: Track external trust-community profile coverage only. Do not emit as
+    a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - FAST / UDAP Security profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:fdx-csdf-security-model-and-profile
+  feature_id: target:fdx-csdf-security-model-and-profile
+  kind: target
+  title: FDX CSDF Security Model and Profile
+  description: Track external financial-data profile coverage only. Do not emit as
+    a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - FDX CSDF Security Model and Profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:gnap-core-resource-server-profile
+  feature_id: target:gnap-core-resource-server-profile
+  kind: target
+  title: GNAP Core + Resource Server profile
+  description: Track adjacent authorization profile coverage only. Do not emit as
+    a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - GNAP Core + Resource Server profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:ihe-iua-profile
+  feature_id: target:ihe-iua-profile
+  kind: target
+  title: IHE IUA profile
+  description: Track external healthcare authorization profile coverage only. Do not
+    emit as a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - IHE IUA profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
 - id: target:import-export-portability
   feature_id: target:import-export-portability
   kind: target
@@ -3870,6 +4057,28 @@ claims:
   - Key lifecycle and JWKS publication
   required_flags: []
   source: compliance/targets/operator-targets.yaml
+- id: target:nist-sp-800-63b-4-profile
+  feature_id: target:nist-sp-800-63b-4-profile
+  kind: target
+  title: NIST SP 800-63B-4 profile
+  description: Track external assurance profile coverage only. Do not emit as a retained
+    core certification claim.
+  scope: alignment-only
+  targets:
+  - NIST SP 800-63B-4 profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:nist-sp-800-63c-4-profile
+  feature_id: target:nist-sp-800-63c-4-profile
+  kind: target
+  title: NIST SP 800-63C-4 profile
+  description: Track external federation assurance profile coverage only. Do not emit
+    as a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - NIST SP 800-63C-4 profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
 - id: target:oauth-2-1-alignment-profile
   feature_id: target:oauth-2-1-alignment-profile
   kind: target
@@ -4442,3 +4651,36 @@ claims:
   - 'Runner profile: Uvicorn'
   required_flags: []
   source: compliance/targets/runtime-targets.yaml
+- id: target:smart-app-launch-profile
+  feature_id: target:smart-app-launch-profile
+  kind: target
+  title: SMART App Launch profile
+  description: Track external healthcare profile coverage only. Do not emit as a retained
+    core certification claim.
+  scope: alignment-only
+  targets:
+  - SMART App Launch profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:smart-backend-services-profile
+  feature_id: target:smart-backend-services-profile
+  kind: target
+  title: SMART Backend Services profile
+  description: Track external healthcare backend profile coverage only. Do not emit
+    as a retained core certification claim.
+  scope: alignment-only
+  targets:
+  - SMART Backend Services profile
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml
+- id: target:webauthn-and-passkey-bound-oauth-patterns
+  feature_id: target:webauthn-and-passkey-bound-oauth-patterns
+  kind: target
+  title: WebAuthn and passkey-bound OAuth patterns
+  description: Track external pattern coverage only. Do not emit as a retained core
+    certification claim.
+  scope: alignment-only
+  targets:
+  - WebAuthn and passkey-bound OAuth patterns
+  required_flags: []
+  source: compliance/targets/alignment-targets.yaml

@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260408T000852Z",
+  "generated_at": "20260409T054930Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": "dist\\validated-runs\\collected-artifact-downloads.json",
@@ -32,13 +32,9 @@
     ],
     "placeholder_supported_runner_count": 0,
     "placeholder_supported_runner_names": [],
-    "declared_ci_installable_runner_count": 3,
-    "declared_ci_installable_runner_names": [
-      "hypercorn",
-      "tigrcorn",
-      "uvicorn"
-    ],
-    "declared_ci_install_probe_complete": true,
+    "declared_ci_installable_runner_count": 0,
+    "declared_ci_installable_runner_names": [],
+    "declared_ci_install_probe_complete": false,
     "execution_probes_enabled": true,
     "surface_probe_passed": true,
     "surface_probe_endpoint_count": 3,
@@ -237,10 +233,10 @@
         "py312-postgres-hypercorn"
       ],
       "ci_install_job": "postgres-hypercorn",
-      "ci_install_job_present": true,
+      "ci_install_job_present": false,
       "ci_release_gate_probe_present": true,
       "placeholder_supported": false,
-      "declared_installable_from_repository": true
+      "declared_installable_from_repository": false
     },
     {
       "name": "tigrcorn",
@@ -422,10 +418,10 @@
         "py312-tigrcorn"
       ],
       "ci_install_job": "tigrcorn",
-      "ci_install_job_present": true,
+      "ci_install_job_present": false,
       "ci_release_gate_probe_present": true,
       "placeholder_supported": false,
-      "declared_installable_from_repository": true
+      "declared_installable_from_repository": false
     },
     {
       "name": "uvicorn",
@@ -639,10 +635,10 @@
         "py312-sqlite-uvicorn"
       ],
       "ci_install_job": "sqlite-uvicorn",
-      "ci_install_job_present": true,
+      "ci_install_job_present": false,
       "ci_release_gate_probe_present": true,
       "placeholder_supported": false,
-      "declared_installable_from_repository": true
+      "declared_installable_from_repository": false
     }
   ]
 }

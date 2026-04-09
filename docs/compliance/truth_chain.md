@@ -2,7 +2,7 @@
 
 This manifest is the single generated checkpoint truth for current-state and release-decision artifacts.
 
-- generated_at: `2026-04-07`
+- generated_at: `2026-04-09`
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - release_gates_passed: `False`
@@ -52,7 +52,7 @@ This manifest is the single generated checkpoint truth for current-state and rel
 - tier4_valid_external_bundle_count: `0`
 - tier4_invalid_external_bundle_count: `16`
 - tier4_missing_external_bundle_count: `0`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'At least one kept runner is missing declared clean-room CI install/probe coverage.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
 - final_release_failures: `['Migration portability validation is not preserved for both SQLite and PostgreSQL.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `8`

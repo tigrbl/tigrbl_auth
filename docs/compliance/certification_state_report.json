@@ -16,7 +16,7 @@
     "boundary_freeze_non_rfc_target_count": 18,
     "boundary_freeze_deferred_target_count": 13,
     "boundary_freeze_identity_hash_matches": true,
-    "clean_room_matrix_implemented": true,
+    "clean_room_matrix_implemented": false,
     "clean_room_matrix_executed_in_this_container": false,
     "tox_manifest_present": true,
     "test_constraints_manifest_present": true,
@@ -94,6 +94,7 @@
     "open_gaps": [
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "At least one kept runner is missing declared clean-room CI install/probe coverage.",
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
       "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
@@ -102,6 +103,7 @@
   "details": [
     "Tier 4 independent peer validation is not complete for the retained boundary.",
     "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+    "At least one kept runner is missing declared clean-room CI install/probe coverage.",
     "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
     "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
     "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."

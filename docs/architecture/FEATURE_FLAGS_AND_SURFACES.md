@@ -83,8 +83,6 @@ Downstream consumers may adopt only the capabilities they need.
 
 ### Quarantined extensions
 - `webauthn-passkeys`
-- `a2a-adapter`
-- `mcp-adapter`
 - `set`
 - `webpush`
 - `dns-privacy`

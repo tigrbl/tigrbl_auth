@@ -2150,6 +2150,66 @@
         },
         {
           "aliases": [],
+          "description": "Verify release-bundle attestations and manifest integrity for an existing signed bundle.",
+          "examples": [],
+          "exit_codes": [
+            {
+              "code": 0,
+              "meaning": "Operation completed successfully."
+            },
+            {
+              "code": 1,
+              "meaning": "Operation failed or verification did not pass."
+            },
+            {
+              "code": 2,
+              "meaning": "CLI argument or contract validation failed before execution."
+            }
+          ],
+          "family": "release",
+          "flags": [
+            "repo_root",
+            "bundle_dir"
+          ],
+          "global_flags": [
+            "config",
+            "env_file",
+            "profile",
+            "tenant",
+            "issuer",
+            "surface_set",
+            "slice",
+            "extension",
+            "plugin_mode",
+            "runtime_style",
+            "strict",
+            "no_strict",
+            "format",
+            "output",
+            "verbose",
+            "trace"
+          ],
+          "handler": "release.verify",
+          "help": "Verify a signed release bundle.",
+          "include_global": true,
+          "name": "verify",
+          "output": {
+            "description": "Release bundle, signing, or recertification payload.",
+            "fields": [
+              "command",
+              "bundle_dir",
+              "summary"
+            ],
+            "media_types": [
+              "json",
+              "yaml",
+              "text"
+            ],
+            "name": "release-artifact"
+          }
+        },
+        {
+          "aliases": [],
           "description": "Summarize the current release bundle and release-gate posture.",
           "examples": [],
           "exit_codes": [
@@ -2273,7 +2333,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed tenant lifecycle operators.",
+      "description": "Stateful durable operator-plane tenant lifecycle operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -2304,7 +2364,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a repository-backed tenant checkpoint record.",
+          "description": "Create a durable operator-plane tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2376,7 +2436,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a repository-backed tenant checkpoint record.",
+          "description": "Update a durable operator-plane tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2448,7 +2508,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a repository-backed tenant checkpoint record.",
+          "description": "Delete a durable operator-plane tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2515,7 +2575,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single repository-backed tenant record.",
+          "description": "Return a single durable operator-plane tenant record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2576,7 +2636,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed tenant records.",
+          "description": "List durable operator-plane tenant records.",
           "examples": [],
           "exit_codes": [
             {
@@ -2779,7 +2839,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed client lifecycle operators.",
+      "description": "Stateful durable operator-plane client lifecycle operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -2810,7 +2870,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a repository-backed client checkpoint record.",
+          "description": "Create a durable operator-plane client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2882,7 +2942,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a repository-backed client checkpoint record.",
+          "description": "Update a durable operator-plane client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -2954,7 +3014,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a repository-backed client checkpoint record.",
+          "description": "Delete a durable operator-plane client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3021,7 +3081,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single repository-backed client record.",
+          "description": "Return a single durable operator-plane client record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3082,7 +3142,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed client records.",
+          "description": "List durable operator-plane client records.",
           "examples": [],
           "exit_codes": [
             {
@@ -3149,7 +3209,7 @@
         },
         {
           "aliases": [],
-          "description": "Rotate repository-backed client secret material.",
+          "description": "Rotate durable operator-plane client secret material.",
           "examples": [],
           "exit_codes": [
             {
@@ -3352,7 +3412,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed identity lifecycle operators.",
+      "description": "Stateful durable operator-plane identity lifecycle operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -3383,7 +3443,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a repository-backed identity checkpoint record.",
+          "description": "Create a durable operator-plane identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3455,7 +3515,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a repository-backed identity checkpoint record.",
+          "description": "Update a durable operator-plane identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3527,7 +3587,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a repository-backed identity checkpoint record.",
+          "description": "Delete a durable operator-plane identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3594,7 +3654,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single repository-backed identity record.",
+          "description": "Return a single durable operator-plane identity record.",
           "examples": [],
           "exit_codes": [
             {
@@ -3655,7 +3715,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed identity records.",
+          "description": "List durable operator-plane identity records.",
           "examples": [],
           "exit_codes": [
             {
@@ -3722,7 +3782,7 @@
         },
         {
           "aliases": [],
-          "description": "Set or rotate a repository-backed identity password hash.",
+          "description": "Set or rotate a durable operator-plane identity password hash.",
           "examples": [],
           "exit_codes": [
             {
@@ -3927,7 +3987,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed flow lifecycle operators.",
+      "description": "Stateful durable operator-plane flow lifecycle operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -3958,7 +4018,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Create a repository-backed flow checkpoint record.",
+          "description": "Create a durable operator-plane flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4030,7 +4090,7 @@
         },
         {
           "aliases": [],
-          "description": "Update a repository-backed flow checkpoint record.",
+          "description": "Update a durable operator-plane flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4102,7 +4162,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a repository-backed flow checkpoint record.",
+          "description": "Delete a durable operator-plane flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4169,7 +4229,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single repository-backed flow record.",
+          "description": "Return a single durable operator-plane flow record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4230,7 +4290,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed flow records.",
+          "description": "List durable operator-plane flow records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4433,7 +4493,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed session control operators.",
+      "description": "Stateful durable operator-plane session control operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -4464,7 +4524,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Return a single repository-backed session record.",
+          "description": "Return a single durable operator-plane session record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4525,7 +4585,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed session records.",
+          "description": "List durable operator-plane session records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4592,7 +4652,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a repository-backed session revoked.",
+          "description": "Mark a durable operator-plane session revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -4659,7 +4719,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark all repository-backed sessions revoked.",
+          "description": "Mark all durable operator-plane sessions revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -4729,7 +4789,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed token control operators.",
+      "description": "Stateful durable operator-plane token control operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -4760,7 +4820,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Return a single repository-backed token record.",
+          "description": "Return a single durable operator-plane token record.",
           "examples": [],
           "exit_codes": [
             {
@@ -4821,7 +4881,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed token records.",
+          "description": "List durable operator-plane token records.",
           "examples": [],
           "exit_codes": [
             {
@@ -4949,7 +5009,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a repository-backed token revoked.",
+          "description": "Mark a durable operator-plane token revoked.",
           "examples": [],
           "exit_codes": [
             {
@@ -5016,7 +5076,7 @@
         },
         {
           "aliases": [],
-          "description": "Create a derived repository-backed token exchange record.",
+          "description": "Create a derived durable operator-plane token exchange record.",
           "examples": [],
           "exit_codes": [
             {
@@ -5087,7 +5147,7 @@
     },
     {
       "aliases": [],
-      "description": "Stateful repository-backed key lifecycle and JWKS publication operators.",
+      "description": "Stateful durable operator-plane key lifecycle and JWKS publication operators.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -5118,7 +5178,7 @@
       "verbs": [
         {
           "aliases": [],
-          "description": "Generate repository-backed key metadata and optional JWKS publication.",
+          "description": "Generate durable operator-plane key metadata and optional JWKS publication.",
           "examples": [],
           "exit_codes": [
             {
@@ -5193,7 +5253,7 @@
         },
         {
           "aliases": [],
-          "description": "Import repository-backed key metadata from a JSON or YAML file.",
+          "description": "Import durable operator-plane key metadata from a JSON or YAML file.",
           "examples": [],
           "exit_codes": [
             {
@@ -5264,7 +5324,7 @@
         },
         {
           "aliases": [],
-          "description": "Export repository-backed key metadata to a JSON or YAML file.",
+          "description": "Export durable operator-plane key metadata to a JSON or YAML file.",
           "examples": [],
           "exit_codes": [
             {
@@ -5405,7 +5465,7 @@
         },
         {
           "aliases": [],
-          "description": "Mark a repository-backed key retired.",
+          "description": "Mark a durable operator-plane key retired.",
           "examples": [],
           "exit_codes": [
             {
@@ -5473,7 +5533,7 @@
         },
         {
           "aliases": [],
-          "description": "Publish the current repository-backed JWKS document.",
+          "description": "Publish the current durable operator-plane JWKS document.",
           "examples": [],
           "exit_codes": [
             {
@@ -5538,7 +5598,7 @@
         },
         {
           "aliases": [],
-          "description": "Return a single repository-backed key record.",
+          "description": "Return a single durable operator-plane key record.",
           "examples": [],
           "exit_codes": [
             {
@@ -5599,7 +5659,7 @@
         },
         {
           "aliases": [],
-          "description": "List repository-backed key records.",
+          "description": "List durable operator-plane key records.",
           "examples": [],
           "exit_codes": [
             {
@@ -5666,7 +5726,7 @@
         },
         {
           "aliases": [],
-          "description": "Delete a repository-backed key record.",
+          "description": "Delete a durable operator-plane key record.",
           "examples": [],
           "exit_codes": [
             {
@@ -6020,7 +6080,7 @@
     },
     {
       "aliases": [],
-      "description": "Import repository-backed operator state from portable artifacts.",
+      "description": "Import durable operator-plane state from portable artifacts.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -6115,7 +6175,7 @@
         },
         {
           "aliases": [],
-          "description": "Import repository-backed operator state from a portable artifact.",
+          "description": "Import durable operator-plane state from a portable artifact.",
           "examples": [],
           "exit_codes": [
             {
@@ -6186,7 +6246,7 @@
         },
         {
           "aliases": [],
-          "description": "Show the last repository-backed import checkpoint status.",
+          "description": "Show the last durable operator-plane import status.",
           "examples": [],
           "exit_codes": [
             {
@@ -6248,7 +6308,7 @@
     },
     {
       "aliases": [],
-      "description": "Export repository-backed operator state into portable artifacts.",
+      "description": "Export durable operator-plane state into portable artifacts.",
       "examples": [],
       "exit_codes": [],
       "family": "admin",
@@ -6345,7 +6405,7 @@
         },
         {
           "aliases": [],
-          "description": "Export repository-backed operator state to a portable artifact.",
+          "description": "Export durable operator-plane state to a portable artifact.",
           "examples": [],
           "exit_codes": [
             {
@@ -6418,7 +6478,7 @@
         },
         {
           "aliases": [],
-          "description": "Show the last repository-backed export checkpoint status.",
+          "description": "Show the last durable operator-plane export status.",
           "examples": [],
           "exit_codes": [
             {
@@ -6710,9 +6770,7 @@
     "extension": {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7093,6 +7151,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",
@@ -7576,6 +7635,7 @@
         "baseline",
         "production",
         "hardening",
+        "fapi2-security",
         "peer-claim"
       ],
       "default": "baseline",
@@ -7646,9 +7706,7 @@
     {
       "action": "append",
       "choices": [
-        "a2a-adapter",
         "dns-privacy",
-        "mcp-adapter",
         "set",
         "webauthn-passkeys",
         "webpush"
@@ -7780,6 +7838,6 @@
     "global_flag_count": 16,
     "nested_command_count": 17,
     "resource_command_count": 10,
-    "verb_count": 86
+    "verb_count": 87
   }
 }
