@@ -1,0 +1,31 @@
+schema_version: 1
+id: dpop
+title: Sender-constrained DPoP proof profile
+counterpart_id: dpop-client
+required_targets:
+- RFC 9449
+- RFC 9700
+required_artifacts:
+- tests/conformance/hardening/test_rfc9449_dpop.py
+- tests/security/test_phase12_sender_constraint_replay.py
+scenario_ids:
+- dpop-token
+- dpop-replay-rejection
+- dpop-nonce-recovery
+scenario_target_map:
+  dpop-token:
+  - RFC 9449
+  dpop-replay-rejection:
+  - RFC 9449
+  - RFC 9700
+  dpop-nonce-recovery:
+  - RFC 9449
+  - RFC 9700
+contract_profiles:
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Proof-generating client must capture DPoP JWTs, nonce retries, and replay rejection
+  outcomes.

@@ -1,0 +1,24 @@
+name: ci-install-profiles
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  TIGRBL_AUTH_RUNTIME_MATRIX_ENVS: >-
+    py310-base py311-base py312-base
+    py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn
+    py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn
+    py311-tigrcorn py312-tigrcorn
+    py310-devtest py311-devtest py312-devtest
+  TIGRBL_AUTH_RUNTIME_ARTIFACT_PATHS: >-
+    dist/install-substrate dist/runtime-smoke
+
+jobs:
+  certification-matrix:
+    uses: ./.github/workflows/_certification-matrix.yml
+    permissions:
+      contents: read

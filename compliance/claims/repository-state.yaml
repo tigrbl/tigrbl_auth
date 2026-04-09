@@ -96,7 +96,7 @@ repository_state:
   phase_13_validated_manifest_identity_contract_installed: true
   phase_13_validated_runtime_matrix_preservation_complete: true
   phase_13_validated_test_lane_preservation_complete: true
-  phase_13_validated_migration_portability_preservation_complete: false
+  phase_13_validated_migration_portability_preservation_complete: true
   alignment_only_checkpoint_no_new_certification_evidence: false
   last_truth_chain_manifest: docs/compliance/truth_chain.json
   last_truth_chain_generated_at: '2026-04-09'

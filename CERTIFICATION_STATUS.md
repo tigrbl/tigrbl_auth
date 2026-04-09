@@ -13,7 +13,7 @@
 - profile_scope_mismatch_set_empty: `True`
 - validated_runtime_matrix_green: `True`
 - validated_test_lanes_green: `True`
-- migration_portability_passed: `False`
+- migration_portability_passed: `True`
 - claim_registry_canonical_complete: `True`
 - fapi2_security_profile_declared_complete: `True`
 - release_claims_machine_derivable: `True`
@@ -24,9 +24,8 @@
 ## Open gaps blocking final certification
 
 - Tier 4 independent peer validation is not complete for the retained boundary.
+- The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
-- At least one kept runner is missing declared clean-room CI install/probe coverage.
-- Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
 - One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.
 

@@ -1,0 +1,37 @@
+schema_version: 1
+id: par-jar-rar
+title: PAR/JAR/RAR advanced authorization profile
+counterpart_id: par-jar-rar-client
+required_targets:
+- RFC 9101
+- RFC 9126
+- RFC 9396
+- RFC 8707
+required_artifacts:
+- tests/conformance/hardening/test_rfc9101_jar.py
+- tests/conformance/hardening/test_rfc9126_par.py
+- tests/conformance/hardening/test_rfc9396_rar.py
+- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+scenario_ids:
+- par-submit
+- jar-authorize
+- rar-authorize
+- rar-resource-binding
+scenario_target_map:
+  par-submit:
+  - RFC 9126
+  jar-authorize:
+  - RFC 9101
+  rar-authorize:
+  - RFC 9396
+  rar-resource-binding:
+  - RFC 8707
+  - RFC 9396
+contract_profiles:
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Advanced OAuth client must preserve request objects, PAR request URIs, authorization_details,
+  and resource binding transcripts.

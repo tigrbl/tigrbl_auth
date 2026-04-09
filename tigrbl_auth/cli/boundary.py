@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from tigrbl_auth.repo_truth import evaluate_tier4_bundle
+
 from tigrbl_auth.cli.artifacts import (
     build_effective_claims_manifest,
     build_effective_evidence_manifest,
@@ -671,26 +673,14 @@ def _ref_exists(repo_root: Path, ref: str) -> bool:
 
 def _tier4_bundle_valid(repo_root: Path, rel: str) -> tuple[bool, list[str]]:
     bundle_root = repo_root / str(rel)
-    failures: list[str] = []
     if bundle_root.is_file():
         return False, [f"Tier 4 evidence ref must be a directory bundle: {rel}"]
-    required = ["manifest.yaml", "mapping.yaml", "execution.log", "peer-profile.yaml", "peer-artifacts", "reproduction.md"]
-    for name in required:
-        if not (bundle_root / name).exists():
-            failures.append(f"Tier 4 bundle missing required artifact: {rel}/{name}")
     manifest_path = bundle_root / "manifest.yaml"
-    if manifest_path.exists():
-        manifest = _load_yaml(manifest_path)
-        status = str(manifest.get("status", ""))
-        peer_identity = manifest.get("peer_identity") or {}
-        peer_runtime = manifest.get("peer_runtime") or {}
-        if status not in {"external-preserved-passed", "passed", "peer-validated"}:
-            failures.append(f"Tier 4 bundle is not preserved as a passing independent run: {rel} status={status}")
-        if not str(peer_identity.get("peer_name", "")).strip() or not str(peer_identity.get("peer_version", "")).strip():
-            failures.append(f"Tier 4 bundle missing peer identity/version: {rel}")
-        if not str(peer_runtime.get("image_ref", "")).strip() or not str(peer_runtime.get("image_digest", "")).strip():
-            failures.append(f"Tier 4 bundle missing peer runtime/container provenance: {rel}")
-    return not failures, failures
+    if not manifest_path.exists():
+        return False, [f"Tier 4 bundle missing manifest: {rel}/manifest.yaml"]
+    manifest = _load_yaml(manifest_path) or {}
+    ok, failures, _details = evaluate_tier4_bundle(bundle_root, manifest)
+    return ok, [f"Tier 4 bundle {rel}: {failure}" for failure in failures]
 
 
 def run_evidence_peer_check(repo_root: Path, *, strict: bool = True, report_dir: Path | None = None) -> int:

@@ -137,3 +137,19 @@ def test_validated_execution_uses_strict_migration_manifest_contract(tmp_path: P
     _write_json(validated_root / "migration-portability-postgres-py311.json", _migration_backend_manifest("postgres", passed=False))
     payload = load_validated_execution_status(repo_root)
     assert payload["migration_portability_passed"] is False
+
+
+def test_validated_execution_prefers_strongest_backend_manifest_per_backend(tmp_path: Path) -> None:
+    repo_root = tmp_path
+    validated_root = repo_root / "dist" / "validated-runs"
+    (repo_root / "docs" / "compliance").mkdir(parents=True, exist_ok=True)
+
+    _write_json(validated_root / "migration-portability-py311.json", _migration_manifest())
+    _write_json(validated_root / "migration-portability-sqlite-py311.json", _migration_backend_manifest("sqlite"))
+    _write_json(validated_root / "migration-portability-postgres-py311.json", _migration_backend_manifest("postgres"))
+    _write_json(validated_root / "migration-portability-sqlite-py312.json", _migration_backend_manifest("sqlite", python_version="3.12", passed=False))
+    _write_json(validated_root / "migration-portability-postgres-py312.json", _migration_backend_manifest("postgres", python_version="3.12", passed=False))
+
+    payload = load_validated_execution_status(repo_root)
+
+    assert payload["migration_portability_passed"] is True

@@ -75,5 +75,6 @@ def test_phase1_state_report_tracks_dependency_model_checkpoint():
     assert summary["install_substrate_manifest_passed"] is True
     assert summary["install_substrate_tox_pip_check_complete"] is True
     assert summary["install_substrate_tox_import_probe_complete"] is True
+    assert summary["migration_portability_passed"] is True
     assert summary["base_dependency_count"] >= 12
     assert summary["base_exact_pinned_dependency_count"] == summary["base_dependency_count"]

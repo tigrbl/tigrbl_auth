@@ -1,0 +1,49 @@
+schema_version: 1
+id: resource-server
+title: Protected resource / RS bearer, introspection, exchange, and resource binding
+counterpart_id: resource-server
+required_targets:
+- RFC 6750
+- RFC 7662
+- RFC 8693
+- RFC 8707
+- RFC 9068
+- RFC 9728
+- RFC 9700
+required_artifacts:
+- tests/conformance/production/test_rfc7662_introspection.py
+- tests/conformance/production/test_rfc9068_jwt_profile.py
+- tests/conformance/hardening/test_rfc8693_token_exchange.py
+- tests/conformance/hardening/test_rfc8707_resource_indicators.py
+- tests/unit/test_rfc9728_metadata_checkpoint.py
+- tests/security/test_phase12_sender_constraint_replay.py
+scenario_ids:
+- bearer-resource
+- introspection-resource
+- jwt-access-token-resource
+- token-exchange-resource
+- resource-indicator-binding
+- hardening-protected-resource-metadata
+scenario_target_map:
+  bearer-resource:
+  - RFC 6750
+  introspection-resource:
+  - RFC 7662
+  jwt-access-token-resource:
+  - RFC 9068
+  token-exchange-resource:
+  - RFC 8693
+  resource-indicator-binding:
+  - RFC 8707
+  hardening-protected-resource-metadata:
+  - RFC 9728
+  - RFC 9700
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Covers advanced RS-side validation for bearer, introspection, JWT access tokens,
+  token exchange, and resource indicators.

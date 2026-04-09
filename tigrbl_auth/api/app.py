@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from importlib.metadata import PackageNotFoundError, version as installed_package_version
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_auth.repo_truth import package_version as repository_package_version
 from tigrbl_auth.runtime import LazyASGIApplication, RuntimePlan, build_runtime_plan
 
 if TYPE_CHECKING:
@@ -13,6 +16,13 @@ def _load_default_settings() -> object:
     from tigrbl_auth.config.settings import settings as default_settings
 
     return default_settings
+
+
+def _runtime_package_version() -> str:
+    try:
+        return installed_package_version("tigrbl_auth")
+    except PackageNotFoundError:
+        return repository_package_version(Path(__file__).resolve().parents[2])
 
 
 def build_app(
@@ -31,7 +41,7 @@ def build_app(
 
     app = TigrblApp(
         title="tigrbl_auth",
-        version="0.0.0-checkpoint-phase8",
+        version=_runtime_package_version(),
         openapi_url="/openapi.json",
         docs_url="/docs",
         engine=dsn,

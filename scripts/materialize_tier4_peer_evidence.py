@@ -11,6 +11,8 @@ from typing import Any
 
 import yaml
 
+from tigrbl_auth.repo_truth import package_version
+
 ROOT = Path(__file__).resolve().parents[1]
 PEER_PROFILE_DIR = ROOT / 'compliance' / 'evidence' / 'peer_profiles'
 COUNTERPART_DIR = ROOT / 'compliance' / 'evidence' / 'peer_counterparts'
@@ -78,14 +80,8 @@ def sha256_file(path: Path) -> str:
 
 
 def repo_version() -> str:
-    pyproject = ROOT / 'pyproject.toml'
-    if not pyproject.exists():
-        return '0.0.0-checkpoint'
-    for line in pyproject.read_text(encoding='utf-8').splitlines():
-        stripped = line.strip()
-        if stripped.startswith('version') and '=' in stripped:
-            return stripped.split('=', 1)[1].strip().strip('"')
-    return '0.0.0-checkpoint'
+    version = package_version(ROOT)
+    return version or '0.0.0-checkpoint'
 
 
 def listify(value: Any) -> list[str]:

@@ -1,0 +1,33 @@
+schema_version: 1
+id: runner-uvicorn
+title: External Uvicorn runner profile
+counterpart_id: uvicorn-runner
+required_targets:
+- ASGI 3 application package
+- 'Runner profile: Uvicorn'
+required_artifacts:
+- tigrbl_auth/api/app.py
+- tigrbl_auth/gateway.py
+- tests/runtime/test_runner_uvicorn.py
+scenario_ids:
+- runner-launch
+- runner-health
+- runner-contract-hash
+scenario_target_map:
+  runner-launch:
+  - ASGI 3 application package
+  - 'Runner profile: Uvicorn'
+  runner-health:
+  - 'Runner profile: Uvicorn'
+  runner-contract-hash:
+  - ASGI 3 application package
+contract_profiles:
+- baseline
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: production
+peer_verification_class: external-independent
+notes:
+- Validated independently with a Uvicorn-based runner harness and preserved launch/health
+  transcripts.

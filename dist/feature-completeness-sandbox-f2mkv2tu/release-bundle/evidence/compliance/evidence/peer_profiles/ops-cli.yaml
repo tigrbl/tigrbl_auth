@@ -1,0 +1,52 @@
+schema_version: 1
+id: ops-cli
+title: External CLI/operator and contract harness
+counterpart_id: ops-cli-harness
+required_targets:
+- OpenAPI 3.1 / 3.2 compatible public contract
+- OpenRPC 1.4.x admin/control-plane contract
+- CLI operator surface
+- Bootstrap and migration lifecycle
+- Key lifecycle and JWKS publication
+- Import/export portability
+- Release bundle and signature verification
+required_artifacts:
+- docs/reference/CLI_SURFACE.md
+- specs/cli/cli_contract.json
+- specs/openapi/profiles/peer-claim/tigrbl_auth.public.openapi.json
+- specs/openrpc/profiles/peer-claim/tigrbl_auth.admin.openrpc.json
+- tests/conformance/operator/test_cli_serve_runtime.py
+- tests/conformance/operator/test_cli_resource_lifecycle.py
+- tests/conformance/operator/test_cli_keys_lifecycle.py
+- tests/conformance/operator/test_cli_import_export.py
+- tests/conformance/operator/test_cli_bootstrap_migrate.py
+- tests/security/test_release_bundle_signing.py
+scenario_ids:
+- cli-surface
+- bootstrap-migration
+- release-bundle-signing
+- contract-export-verify
+- operator-lifecycle-roundtrip
+scenario_target_map:
+  cli-surface:
+  - CLI operator surface
+  bootstrap-migration:
+  - Bootstrap and migration lifecycle
+  release-bundle-signing:
+  - Release bundle and signature verification
+  contract-export-verify:
+  - OpenAPI 3.1 / 3.2 compatible public contract
+  - OpenRPC 1.4.x admin/control-plane contract
+  operator-lifecycle-roundtrip:
+  - Key lifecycle and JWKS publication
+  - Import/export portability
+contract_profiles:
+- baseline
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: production
+peer_verification_class: external-independent
+notes:
+- External operator harness validates CLI lifecycle verbs, exported contracts, and
+  signed release bundles against the published package surface.

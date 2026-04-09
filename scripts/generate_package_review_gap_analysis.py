@@ -15,6 +15,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from tigrbl_auth.repo_truth import (
+    has_install_matrix_workflow,
+    has_release_gate_workflow,
+    workflow_paths,
+    workflow_role_paths,
+)
+
 DOCS_DIR = REPO_ROOT / "docs" / "compliance"
 MD_OUT = DOCS_DIR / "PACKAGE_REVIEW_GAP_ANALYSIS.md"
 JSON_OUT = DOCS_DIR / "PACKAGE_REVIEW_GAP_ANALYSIS.json"
@@ -81,8 +88,9 @@ def build_review() -> dict[str, Any]:
         "clean_room_matrix": {
             "implemented": bool(current.get("summary", {}).get("clean_room_matrix_implemented", False)),
             "tox_manifest": "tox.ini",
-            "install_workflow": ".github/workflows/ci-install-profiles.yml",
-            "release_gate_workflow": ".github/workflows/ci-release-gates.yml",
+            "install_workflow": next(iter(workflow_role_paths(REPO_ROOT, "install-matrix")), None) if has_install_matrix_workflow(REPO_ROOT) else None,
+            "release_gate_workflow": next(iter(workflow_role_paths(REPO_ROOT, "release-gates")), None) if has_release_gate_workflow(REPO_ROOT) else None,
+            "recognized_workflows": workflow_paths(REPO_ROOT),
             "tigrcorn_pin_committed": bool(current.get("summary", {}).get("tigrcorn_pin_committed", False)),
             "executed_in_this_container": bool(current.get("summary", {}).get("clean_room_matrix_executed_in_this_container", False)),
         },

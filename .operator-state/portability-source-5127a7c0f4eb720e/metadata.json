@@ -1,0 +1,12 @@
+{
+  "backend": "sqlite-authoritative",
+  "concurrency_model": "sqlite-wal-begin-immediate",
+  "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\portability-source-5127a7c0f4eb720e\\operator_plane.sqlite3",
+  "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\portability-source-5127a7c0f4eb720e\\logs",
+  "portability_schema_version": 3,
+  "repo_mutation_dependency": false,
+  "schema_version": 1,
+  "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\portability-source-5127a7c0f4eb720e\\snapshots",
+  "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.operator-state\\portability-source-5127a7c0f4eb720e",
+  "tenancy_enforced": true
+}

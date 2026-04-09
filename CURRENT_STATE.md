@@ -32,7 +32,7 @@ The current package state is a blocked certification checkpoint. It is not certi
 - validated inventory complete: `True`
 - validated runtime matrix green: `True`
 - validated test lanes green: `True`
-- migration portability passed: `False`
+- migration portability passed: `True`
 - Tier 4 missing external bundle count: `0`
 
 ## Key artifacts

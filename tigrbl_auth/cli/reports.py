@@ -64,6 +64,13 @@ from tigrbl_auth.cli.project_tree import run_migration_plan_check, run_project_t
 from tigrbl_auth.cli.runtime import run_runtime_foundation_check, write_runtime_profile_report
 from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY
+from tigrbl_auth.repo_truth import (
+    evaluate_tier4_bundle,
+    has_install_matrix_workflow,
+    has_release_gate_workflow,
+    package_version,
+    workflow_paths,
+)
 from tigrbl_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 from tigrbl_auth.services._operator_store import OperationContext, operator_state_root, operator_store_summary
 from tigrbl_auth.services.discovery_service import diff_discovery, publish_discovery, validate_discovery
@@ -118,14 +125,7 @@ def _write_json(path: Path, payload: Any) -> None:
 
 
 def _current_version(repo_root: Path) -> str:
-    pyproject = repo_root / "pyproject.toml"
-    if not pyproject.exists():
-        return "0.0.0"
-    for line in pyproject.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line.startswith("version") and "=" in line:
-            return line.split("=", 1)[1].strip().strip('"')
-    return "0.0.0"
+    return package_version(repo_root)
 
 
 def _load_pyproject_manifest(repo_root: Path) -> dict[str, Any]:
@@ -158,7 +158,7 @@ def _dependency_artifact_paths(repo_root: Path) -> list[str]:
         "scripts/verify_clean_room_install_substrate.py",
         "scripts/run_certification_lane.py",
     ]
-    return [rel for rel in candidates if (repo_root / rel).exists()]
+    return sorted({*workflow_paths(repo_root), *(rel for rel in candidates if (repo_root / rel).exists())})
 
 
 def _profile_deployment(profile_label: str) -> Any:
@@ -1152,9 +1152,9 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "test_constraints_manifest_present": test_constraints_manifest.exists(),
         "tox_manifest_present": tox_manifest.exists(),
         "native_uv_lock_present": (repo_root / "uv.lock").exists(),
-        "install_profile_workflow_present": (repo_root / ".github" / "workflows" / "ci-install-profiles.yml").exists(),
-        "release_gate_workflow_present": (repo_root / ".github" / "workflows" / "ci-release-gates.yml").exists(),
-        "clean_room_matrix_implemented": tox_manifest.exists() and (repo_root / ".github" / "workflows" / "ci-install-profiles.yml").exists() and (repo_root / ".github" / "workflows" / "ci-release-gates.yml").exists(),
+        "install_profile_workflow_present": has_install_matrix_workflow(repo_root),
+        "release_gate_workflow_present": has_release_gate_workflow(repo_root),
+        "clean_room_matrix_implemented": tox_manifest.exists() and has_install_matrix_workflow(repo_root) and has_release_gate_workflow(repo_root),
         "clean_room_matrix_executed_in_this_container": False,
         "tigrcorn_extra_placeholder": len(tigrcorn_extra) == 0 and "tigrcorn" in runner_extras,
         "tigrcorn_pin_committed": len(tigrcorn_extra) > 0,
@@ -1436,7 +1436,7 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
     runtime_manifests: dict[tuple[str, str], dict[str, Any]] = {}
     lane_manifests: dict[tuple[str, str], dict[str, Any]] = {}
     migration_manifests: list[dict[str, Any]] = []
-    migration_backend_manifests: dict[str, dict[str, Any]] = {}
+    migration_backend_manifests: dict[str, list[dict[str, Any]]] = {}
     tier3_evidence_manifests: list[dict[str, Any]] = []
     recognized_manifests: list[dict[str, Any]] = []
     in_scope_manifests: list[dict[str, Any]] = []
@@ -1479,7 +1479,7 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
             recognized_manifests.append(payload)
         elif kind == "migration-portability-backend":
             backend = str(payload.get("backend", "unknown"))
-            migration_backend_manifests[backend] = payload
+            migration_backend_manifests.setdefault(backend, []).append(payload)
             recognized_manifests.append(payload)
             in_scope_manifests.append(payload)
         elif kind == "tier3-evidence":
@@ -1517,12 +1517,16 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
     migration_manifest_present = bool(migration_manifests) and all(
         backend in migration_backend_manifests for backend in required_migration_backends
     )
+
+    def _migration_backend_group_passed(backend: str) -> bool:
+        return any(
+            validated_migration_backend_manifest_passed(item)
+            for item in migration_backend_manifests.get(backend, [])
+        )
+
     migration_portability_passed = bool(
         any(validated_migration_manifest_passed(item) for item in migration_manifests)
-        and all(
-            validated_migration_backend_manifest_passed(migration_backend_manifests.get(backend, {}))
-            for backend in required_migration_backends
-        )
+        and all(_migration_backend_group_passed(backend) for backend in required_migration_backends)
     )
     tier3_evidence_rebuilt_from_validated_runs = any(_tier3_evidence_manifest_counts_as_passed(item) for item in tier3_evidence_manifests)
     required_validated_inventory_count = len(required_runtime) + len(required_lanes) + len(required_migration_backends)
@@ -1646,17 +1650,27 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
                 for item in migration_manifests
             ] + [
                 {
-                    "path": item.get("_path"),
-                    "manifest_passed": bool(item.get("passed", False)),
-                    "counts_as_passed": validated_migration_backend_manifest_passed(item),
-                    "identity": item.get("identity"),
-                    "backend": item.get("backend"),
-                    "environment_identity_ready": environment_identity_ready(item),
-                    "install_evidence_ready": install_evidence_ready(item),
-                    "expected_head_revision": item.get("expected_head_revision"),
-                    "downgrade_target_revision": item.get("downgrade_target_revision"),
+                    "backend": backend,
+                    "counts_as_passed": any(
+                        validated_migration_backend_manifest_passed(item)
+                        for item in items
+                    ),
+                    "manifests": [
+                        {
+                            "path": item.get("_path"),
+                            "manifest_passed": bool(item.get("passed", False)),
+                            "counts_as_passed": validated_migration_backend_manifest_passed(item),
+                            "identity": item.get("identity"),
+                            "backend": item.get("backend"),
+                            "environment_identity_ready": environment_identity_ready(item),
+                            "install_evidence_ready": install_evidence_ready(item),
+                            "expected_head_revision": item.get("expected_head_revision"),
+                            "downgrade_target_revision": item.get("downgrade_target_revision"),
+                        }
+                        for item in items
+                    ],
                 }
-                for _, item in sorted(migration_backend_manifests.items())
+                for backend, items in sorted(migration_backend_manifests.items())
             ],
             "validated_manifests": [item.get("_path") for item in in_scope_manifests],
             "out_of_scope_validated_manifests": out_of_scope_manifests,
@@ -2387,6 +2401,7 @@ def verify_peer_bundle_completeness(repo_root: Path, *, strict: bool = True) -> 
     bundle_dir = repo_root / "compliance" / "evidence" / "tier4" / "bundles"
     declared_profiles = sorted(path.stem for path in profile_dir.glob("*.yaml"))
     bundle_rows: dict[str, dict[str, Any]] = {}
+    invalid_profiles: list[str] = []
     invalid_bundle_dirs: list[str] = []
 
     for path in sorted(bundle_dir.iterdir()) if bundle_dir.exists() else []:
@@ -2400,23 +2415,26 @@ def verify_peer_bundle_completeness(repo_root: Path, *, strict: bool = True) -> 
         if not profile:
             invalid_bundle_dirs.append(str(path.relative_to(repo_root)))
             continue
-        independence = manifest.get("independence_attestation") or {}
-        peer_identity = manifest.get("peer_identity") or {}
-        peer_runtime = manifest.get("peer_runtime") or {}
+        qualifies, bundle_failures, details = evaluate_tier4_bundle(path, manifest)
         bundle_rows[profile] = {
             "bundle_dir": str(path.relative_to(repo_root)),
-            "status": str(manifest.get("status", "")),
-            "attestation_class": str(independence.get("attestation_class", "")),
-            "peer_operator": str(peer_identity.get("peer_operator", "")),
-            "peer_version": str(peer_runtime.get("counterpart_version", "")),
+            "status": details["status"],
+            "attestation_class": details["attestation_class"],
+            "peer_operator": details["peer_operator"],
+            "peer_version": details["peer_version"],
             "scenario_result_count": len(list(manifest.get("scenario_results") or [])),
-            "has_reproduction": (path / "reproduction.md").exists(),
-            "validation_failure_count": len(list(manifest.get("validation_failures") or [])),
+            "has_reproduction": details["has_reproduction"],
+            "validation_failure_count": details["validation_failure_count"],
+            "qualifies_for_promotion": qualifies,
+            "qualification_failures": bundle_failures,
         }
+        if not qualifies:
+            invalid_profiles.append(profile)
 
     missing_profiles = [profile for profile in declared_profiles if profile not in bundle_rows]
     failures = [f"Missing preserved external bundle for declared peer profile: {profile}" for profile in missing_profiles]
     failures.extend(f"Invalid preserved bundle manifest missing peer_profile: {path}" for path in invalid_bundle_dirs)
+    failures.extend(f"Preserved external bundle is present but not promotion-qualifying: {profile}" for profile in sorted(invalid_profiles))
     payload = {
         "passed": not failures,
         "failures": failures,
@@ -2424,8 +2442,11 @@ def verify_peer_bundle_completeness(repo_root: Path, *, strict: bool = True) -> 
         "summary": {
             "declared_peer_profile_count": len(declared_profiles),
             "preserved_bundle_count": len(bundle_rows),
+            "valid_bundle_count": len(bundle_rows) - len(invalid_profiles),
+            "invalid_bundle_count": len(invalid_profiles),
             "missing_bundle_count": len(missing_profiles),
             "missing_profiles": missing_profiles,
+            "invalid_profiles": sorted(invalid_profiles),
             "bundle_dir": str(bundle_dir.relative_to(repo_root)),
         },
         "details": [

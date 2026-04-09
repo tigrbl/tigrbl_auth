@@ -1,0 +1,3 @@
+{"id": "client-a", "kind": "client.create", "resource": "client", "status": "created", "transaction_id": "txn-b15ce1341c39", "ts": "2026-04-09T07:22:30Z"}
+{"id": "client-a", "kind": "client.update", "resource": "client", "status": "updated", "transaction_id": "txn-c5aac0b42935", "ts": "2026-04-09T07:22:30Z"}
+{"id": "client-a", "kind": "client.delete", "resource": "client", "status": "deleted", "transaction_id": "txn-c3eac3d4f0f8", "ts": "2026-04-09T07:22:30Z"}

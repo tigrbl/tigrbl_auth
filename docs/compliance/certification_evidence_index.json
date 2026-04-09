@@ -3,48 +3,88 @@
   "failures": [],
   "warnings": [],
   "summary": {
-    "claim_count": 374,
+    "claim_count": 399,
     "fapi_claim_count": 6,
-    "security_sensitive_claim_count": 29,
+    "security_sensitive_claim_count": 37,
     "partition_count": 7,
     "target_profile_bundle_count": 197,
     "clean_checkout": {
       "git_available": true,
       "clean": false,
-      "changed_path_count": 32,
+      "changed_path_count": 72,
       "changed_paths": [
-        "compliance/claims/claim-registry.yaml",
-        "compliance/claims/feature-registry.yaml",
+        ".operator-state/tigrbl_auth-9a06a2e3bfb81899/operator_plane.sqlite3",
+        "CERTIFICATION_STATUS.md",
+        "CURRENT_STATE.md",
         "compliance/claims/issue-registry.yaml",
+        "compliance/claims/repository-state.yaml",
+        "compliance/evidence/certification_test_partitions.json",
+        "compliance/evidence/certification_test_partitions.yaml",
         "compliance/evidence/claim_proof_bindings.json",
         "compliance/evidence/claim_proof_bindings.yaml",
-        "compliance/mappings/extension-to-boundary.yaml",
-        "compliance/mappings/feature-to-evidence.yaml",
-        "compliance/mappings/feature-to-target.yaml",
-        "compliance/mappings/feature-to-test.yaml",
-        "compliance/mappings/target-to-evidence.yaml",
-        "compliance/mappings/target-to-test.yaml",
-        "compliance/targets/boundary-decisions.yaml",
-        "compliance/targets/partial-feature-consumption.yaml",
+        "dist/validated-runs/migration-portability-py311.json",
+        "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
+        "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
+        "docs/compliance/RELEASE_DECISION_RECORD.md",
         "docs/compliance/certification_evidence_index.json",
         "docs/compliance/certification_evidence_index.md",
-        "docs/compliance/cli_conformance_snapshot.json",
-        "docs/compliance/cli_conformance_snapshot.md",
+        "docs/compliance/certification_state_report.json",
+        "docs/compliance/certification_state_report.md",
+        "docs/compliance/current_state_report.json",
+        "docs/compliance/current_state_report.md",
         "docs/compliance/feature_completeness_report.json",
         "docs/compliance/feature_completeness_report.md",
         "docs/compliance/install_substrate_report.json",
         "docs/compliance/install_substrate_report.md",
+        "docs/compliance/peer_bundle_completeness_report.json",
+        "docs/compliance/peer_bundle_completeness_report.md",
         "docs/compliance/runtime_profile_report.json",
         "docs/compliance/runtime_profile_report.md",
-        "specs/cli/cli_contract.json",
-        "specs/cli/cli_contract.yaml",
-        "tigrbl_auth/config/deployment.py",
-        "tigrbl_auth/config/settings.py",
-        ".operator-state/keys-state-b3e5c9a98c751f6f/",
-        ".operator-state/operator-state-9909b7d8059162af/",
-        ".operator-state/portability-import-999554bc1caed721/",
-        ".operator-state/portability-source-0ffa42d2d0363f8a/",
-        "dist/feature-completeness-sandbox-w0hd_xcv/"
+        "docs/compliance/truth_chain.json",
+        "docs/compliance/truth_chain.md",
+        "docs/compliance/validated_execution_report.json",
+        "docs/compliance/validated_execution_report.md",
+        "pyproject.toml",
+        "scripts/generate_package_review_gap_analysis.py",
+        "scripts/materialize_tier4_peer_evidence.py",
+        "tests/interop/test_peer_matrix_external_status.py",
+        "tests/unit/test_phase11_tier4_checkpoint.py",
+        "tests/unit/test_phase18_peer_bundle_completeness.py",
+        "tests/unit/test_phase1_published_dependency_model.py",
+        "tests/unit/test_phase6_migration_portability_evidence.py",
+        "tigrbl_auth/api/app.py",
+        "tigrbl_auth/cli/boundary.py",
+        "tigrbl_auth/cli/install_substrate.py",
+        "tigrbl_auth/cli/reports.py",
+        "tigrbl_auth/cli/runtime.py",
+        ".codex",
+        ".github/workflows/ci-install-profiles.yml",
+        ".github/workflows/ci-release-gates.yml",
+        ".operator-state-test/",
+        ".operator-state/keys-state-04e0f014f785100b/",
+        ".operator-state/operator-state-deb4cbe2c2b353fd/",
+        ".operator-state/portability-import-1c13a3f777d04d82/",
+        ".operator-state/portability-source-5127a7c0f4eb720e/",
+        "dist/feature-completeness-sandbox-1g7z93fs/",
+        "dist/feature-completeness-sandbox-_4pppidc/",
+        "dist/feature-completeness-sandbox-bcfe4nkq/",
+        "dist/feature-completeness-sandbox-bv8wkqjb/",
+        "dist/feature-completeness-sandbox-conoby0b/",
+        "dist/feature-completeness-sandbox-f1t8716a/",
+        "dist/feature-completeness-sandbox-f2mkv2tu/",
+        "dist/feature-completeness-sandbox-j4evcjjo/",
+        "dist/feature-completeness-sandbox-l9pmvgip/",
+        "dist/feature-completeness-sandbox-myab7fkx/",
+        "dist/feature-completeness-sandbox-osiiss8k/",
+        "dist/feature-completeness-sandbox-u4bxq93l/",
+        "dist/feature-completeness-sandbox-yo2i9wju/",
+        "dist/feature-completeness-sandbox-zb244bow/",
+        "dist/validated-runs/migration-portability-postgres-py311.json",
+        "dist/validated-runs/migration-portability-sqlite-py311.json",
+        "runtime_secrets/",
+        "tests/unit/test_repo_truth_helpers.py",
+        "tests/unit/test_runtime_version_truthfulness.py",
+        "tigrbl_auth/repo_truth.py"
       ]
     }
   },
@@ -155,6 +195,7 @@
       "tests/unit/test_phase9_feature_completeness_checkpoint.py",
       "tests/unit/test_phase9_hardening_cluster_b.py",
       "tests/unit/test_remote_adapter.py",
+      "tests/unit/test_repo_truth_helpers.py",
       "tests/unit/test_rfc6749_auth_flow_endpoints.py",
       "tests/unit/test_rfc6749_token_endpoint.py",
       "tests/unit/test_rfc6749_validators.py",
@@ -202,6 +243,7 @@
       "tests/unit/test_rfc9728_metadata_checkpoint.py",
       "tests/unit/test_rpc_registry_live.py",
       "tests/unit/test_runtime_cfg.py",
+      "tests/unit/test_runtime_version_truthfulness.py",
       "tests/unit/test_security_deps.py",
       "tests/unit/test_user_register_schema.py",
       "tests/unit/test_well_known_endpoints_behavior.py"
@@ -7750,6 +7792,71 @@
       "security_sensitive": true
     },
     {
+      "claim_id": "profile:camara-security-interoperability",
+      "feature_id": "profile:camara-security-interoperability",
+      "targets": [
+        "CAMARA Security and Interoperability profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "profile:confidential-spa-pattern",
+      "feature_id": "profile:confidential-spa-pattern",
+      "targets": [
+        "Confidential SPA profile pattern"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:fapi2-message-signing",
+      "feature_id": "profile:fapi2-message-signing",
+      "targets": [
+        "FAPI 2.0 Message Signing profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
       "claim_id": "profile:fapi2-security",
       "feature_id": "profile:fapi2-security",
       "targets": [
@@ -7926,6 +8033,71 @@
       "security_sensitive": true
     },
     {
+      "claim_id": "profile:fast-udap-security",
+      "feature_id": "profile:fast-udap-security",
+      "targets": [
+        "FAST / UDAP Security profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "profile:fdx-csdf-security-model",
+      "feature_id": "profile:fdx-csdf-security-model",
+      "targets": [
+        "FDX CSDF Security Model and Profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "profile:gnap-core-rs",
+      "feature_id": "profile:gnap-core-rs",
+      "targets": [
+        "GNAP Core + Resource Server profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
       "claim_id": "profile:hardening",
       "feature_id": "profile:hardening",
       "targets": [
@@ -8100,6 +8272,82 @@
         "compliance/evidence/tier3/well-known/"
       ],
       "security_sensitive": true
+    },
+    {
+      "claim_id": "profile:ihe-iua",
+      "feature_id": "profile:ihe-iua",
+      "targets": [
+        "IHE IUA profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:nist-sp-800-63b-4",
+      "feature_id": "profile:nist-sp-800-63b-4",
+      "targets": [
+        "NIST SP 800-63B-4 profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:nist-sp-800-63c-4",
+      "feature_id": "profile:nist-sp-800-63c-4",
+      "targets": [
+        "NIST SP 800-63C-4 profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:oauth-2-1",
+      "feature_id": "profile:oauth-2-1",
+      "targets": [
+        "OAuth 2.1 alignment profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
     },
     {
       "claim_id": "profile:peer-claim",
@@ -8452,6 +8700,63 @@
         "compliance/evidence/tier3/well-known/"
       ],
       "security_sensitive": true
+    },
+    {
+      "claim_id": "profile:smart-app-launch",
+      "feature_id": "profile:smart-app-launch",
+      "targets": [
+        "SMART App Launch profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:smart-backend-services",
+      "feature_id": "profile:smart-backend-services",
+      "targets": [
+        "SMART Backend Services profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "profile:webauthn-passkey-oauth-patterns",
+      "feature_id": "profile:webauthn-passkey-oauth-patterns",
+      "targets": [
+        "WebAuthn and passkey-bound OAuth patterns"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
     },
     {
       "claim_id": "route:authorize",
@@ -9829,6 +10134,29 @@
       "security_sensitive": false
     },
     {
+      "claim_id": "target:camara-security-and-interoperability-profile",
+      "feature_id": "target:camara-security-and-interoperability-profile",
+      "targets": [
+        "CAMARA Security and Interoperability profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
       "claim_id": "target:cli-operator-surface",
       "feature_id": "target:cli-operator-surface",
       "targets": [
@@ -9850,6 +10178,132 @@
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:confidential-spa-profile-pattern",
+      "feature_id": "target:confidential-spa-profile-pattern",
+      "targets": [
+        "Confidential SPA profile pattern"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:fapi-2-0-message-signing-profile",
+      "feature_id": "target:fapi-2-0-message-signing-profile",
+      "targets": [
+        "FAPI 2.0 Message Signing profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "target:fast-udap-security-profile",
+      "feature_id": "target:fast-udap-security-profile",
+      "targets": [
+        "FAST / UDAP Security profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "target:fdx-csdf-security-model-and-profile",
+      "feature_id": "target:fdx-csdf-security-model-and-profile",
+      "targets": [
+        "FDX CSDF Security Model and Profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [
+        "tests/negative/test_phase17_certification_attack_paths.py",
+        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
+        "tests/security/test_phase12_sender_constraint_replay.py"
+      ],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": true
+    },
+    {
+      "claim_id": "target:gnap-core-resource-server-profile",
+      "feature_id": "target:gnap-core-resource-server-profile",
+      "targets": [
+        "GNAP Core + Resource Server profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:ihe-iua-profile",
+      "feature_id": "target:ihe-iua-profile",
+      "targets": [
+        "IHE IUA profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
       ],
       "security_sensitive": false
     },
@@ -9890,6 +10344,44 @@
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/key-lifecycle-jwks/"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:nist-sp-800-63b-4-profile",
+      "feature_id": "target:nist-sp-800-63b-4-profile",
+      "targets": [
+        "NIST SP 800-63B-4 profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:nist-sp-800-63c-4-profile",
+      "feature_id": "target:nist-sp-800-63c-4-profile",
+      "targets": [
+        "NIST SP 800-63C-4 profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
       ],
       "security_sensitive": false
     },
@@ -10866,6 +11358,63 @@
       "negative_tests": [],
       "evidence_refs": [
         "compliance/evidence/tier3/runner-uvicorn/"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:smart-app-launch-profile",
+      "feature_id": "target:smart-app-launch-profile",
+      "targets": [
+        "SMART App Launch profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:smart-backend-services-profile",
+      "feature_id": "target:smart-backend-services-profile",
+      "targets": [
+        "SMART Backend Services profile"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
+      ],
+      "security_sensitive": false
+    },
+    {
+      "claim_id": "target:webauthn-and-passkey-bound-oauth-patterns",
+      "feature_id": "target:webauthn-and-passkey-bound-oauth-patterns",
+      "targets": [
+        "WebAuthn and passkey-bound OAuth patterns"
+      ],
+      "profile": null,
+      "positive_tests": [
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_boundary_freeze_checkpoint.py",
+        "tests/unit/test_feature_flag_registry.py"
+      ],
+      "negative_tests": [],
+      "evidence_refs": [
+        "docs/compliance/CERTIFICATION_BOUNDARY.md",
+        "docs/compliance/TARGET_REALITY_MATRIX.md"
       ],
       "security_sensitive": false
     }

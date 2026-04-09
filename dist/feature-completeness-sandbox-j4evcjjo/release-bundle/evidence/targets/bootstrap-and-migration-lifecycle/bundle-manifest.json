@@ -1,0 +1,13 @@
+{
+  "profile": "baseline",
+  "target": "Bootstrap and migration lifecycle",
+  "tests": [
+    "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+    "tests/e2e/test_release_gate_catalog.py",
+    "tests/unit/test_phase4_cli_contract.py",
+    "tests/conformance/operator/test_cli_bootstrap_migrate.py"
+  ],
+  "evidence_refs": [
+    "compliance/evidence/tier3/bootstrap-migration/"
+  ]
+}

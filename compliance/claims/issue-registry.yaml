@@ -10,9 +10,10 @@ issues:
     release.
   blockers:
   - Tier 4 independent peer validation is not complete for the retained boundary.
+  - The peer-bundle completeness gate is not satisfied for the declared peer-profile
+    set.
   - One or more supported peer profiles have incomplete or invalid preserved external
     evidence bundles.
-  - At least one kept runner is missing declared clean-room CI install/probe coverage.
   - "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved\
     \ for both SQLite and PostgreSQL."
   - One or more operator-visible package capabilities still lacks end-to-end verification

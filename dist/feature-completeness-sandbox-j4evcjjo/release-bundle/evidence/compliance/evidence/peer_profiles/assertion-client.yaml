@@ -1,0 +1,55 @@
+schema_version: 1
+id: assertion-client
+title: JWT/assertion-capable client interop
+counterpart_id: assertion-client-harness
+required_targets:
+- RFC 7515
+- RFC 7517
+- RFC 7518
+- RFC 7519
+- RFC 7521
+- RFC 7523
+- RFC 7009
+required_artifacts:
+- tests/conformance/baseline/test_rfc7515_jws.py
+- tests/conformance/baseline/test_rfc7517_jwk.py
+- tests/conformance/baseline/test_rfc7518_jwa.py
+- tests/conformance/baseline/test_rfc7519_jwt.py
+- tests/unit/test_rfc7521_assertion_framework.py
+- tests/unit/test_rfc7523_jwt_profile.py
+- tests/conformance/production/test_rfc7009_token_revocation.py
+scenario_ids:
+- jwt-client-auth
+- assertion-grant
+- jwt-bearer-claim-validation
+- token-revocation
+- jwks-key-selection
+scenario_target_map:
+  jwt-client-auth:
+  - RFC 7523
+  - RFC 7515
+  - RFC 7517
+  - RFC 7518
+  - RFC 7519
+  assertion-grant:
+  - RFC 7521
+  - RFC 7515
+  - RFC 7518
+  - RFC 7519
+  jwt-bearer-claim-validation:
+  - RFC 7521
+  - RFC 7523
+  - RFC 7519
+  token-revocation:
+  - RFC 7009
+  jwks-key-selection:
+  - RFC 7517
+contract_profiles:
+- production
+- hardening
+- peer-claim
+preferred_runtime_profile: production
+peer_verification_class: external-independent
+notes:
+- External client must validate assertion grants, private_key_jwt authentication,
+  and JWT/JWK algorithm posture with preserved request transcripts.

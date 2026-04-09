@@ -46,6 +46,20 @@
     "sqlite",
     "postgres"
   ],
+  "backend_manifests": [
+    {
+      "backend": "sqlite",
+      "path": "dist/validated-runs/migration-portability-sqlite-py311.json",
+      "sha256": "ce6fafa6dd3e631f4e8645100bb1880ade12f5eef95f10c29e72cd608e5875c1",
+      "passed": true
+    },
+    {
+      "backend": "postgres",
+      "path": "dist/validated-runs/migration-portability-postgres-py311.json",
+      "sha256": "abfedc4e00b9af2424ec41df32dc20268fb2b7e2a06e556ede1bef1a6286707d",
+      "passed": true
+    }
+  ],
   "backend_results": {
     "sqlite": {
       "available": true,

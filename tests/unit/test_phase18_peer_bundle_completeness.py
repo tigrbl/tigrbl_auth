@@ -36,12 +36,15 @@ def test_peer_bundle_completeness_requires_preserved_bundle_for_every_declared_p
 
     _copy_tree(ROOT / "compliance" / "evidence" / "tier4" / "bundles", bundle_dir)
     complete = verify_peer_bundle_completeness(repo_root)
-    assert complete["passed"] is True
+    assert complete["passed"] is False
     assert complete["summary"]["declared_peer_profile_count"] == 16
     assert complete["summary"]["preserved_bundle_count"] == 16
+    assert complete["summary"]["valid_bundle_count"] == 0
+    assert complete["summary"]["invalid_bundle_count"] == 16
     assert complete["summary"]["missing_bundle_count"] == 0
     details = {row["profile"]: row for row in complete["details"]}
     assert details["browser"]["bundle_present"] is True
     assert details["browser"]["status"] == "external-preserved-failed"
+    assert details["browser"]["qualifies_for_promotion"] is False
     assert details["browser"]["has_reproduction"] is True
     assert details["browser"]["validation_failure_count"] > 0

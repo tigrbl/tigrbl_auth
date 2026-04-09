@@ -25,6 +25,7 @@ from tigrbl_auth.cli.certification_evidence import (
     runtime_surface_probe_ready,
     validated_runtime_manifest_passed,
 )
+from tigrbl_auth.repo_truth import workflow_role_text
 from tigrbl_auth.runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, iter_runner_adapters
 from tigrbl_auth.runtime.types import ApplicationProbeResult, CommandProbeResult, HttpEndpointProbeResult
 
@@ -176,8 +177,8 @@ def _build_runner_support_manifest(repo_root: Path) -> dict[str, Any]:
     optional_dependencies = project.get("optional-dependencies", {}) or {}
     requires_python = str(project.get("requires-python", "unspecified"))
     tox_text = (repo_root / "tox.ini").read_text(encoding="utf-8") if (repo_root / "tox.ini").exists() else ""
-    install_workflow_text = (repo_root / ".github" / "workflows" / "ci-install-profiles.yml").read_text(encoding="utf-8") if (repo_root / ".github" / "workflows" / "ci-install-profiles.yml").exists() else ""
-    release_workflow_text = (repo_root / ".github" / "workflows" / "ci-release-gates.yml").read_text(encoding="utf-8") if (repo_root / ".github" / "workflows" / "ci-release-gates.yml").exists() else ""
+    install_workflow_text = workflow_role_text(repo_root, "install-matrix")
+    release_workflow_text = workflow_role_text(repo_root, "release-gates")
 
     profiles: dict[str, Any] = {}
     for runner, config in RUNNER_CERTIFICATION_MATRIX.items():

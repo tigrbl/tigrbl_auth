@@ -1,0 +1,16 @@
+{
+  "profile": "baseline",
+  "target": "Runner profile: Tigrcorn",
+  "tests": [
+    "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+    "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+    "tests/unit/test_runtime_cfg.py",
+    "tests/unit/test_phase3_runtime_launcher.py",
+    "tests/runtime/test_runner_tigrcorn.py",
+    "tests/runtime/test_runner_invariance.py",
+    "tests/conformance/operator/test_cli_serve_runtime.py"
+  ],
+  "evidence_refs": [
+    "compliance/evidence/tier3/runner-tigrcorn/"
+  ]
+}

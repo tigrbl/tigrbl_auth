@@ -1,0 +1,13 @@
+{
+  "profile": "baseline",
+  "target": "Release bundle and signature verification",
+  "tests": [
+    "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+    "tests/security/test_release_bundle_signing.py",
+    "tests/unit/test_phase1_published_dependency_model.py",
+    "tests/security/test_phase12_sender_constraint_replay.py"
+  ],
+  "evidence_refs": [
+    "compliance/evidence/tier3/release-bundle-signing/"
+  ]
+}

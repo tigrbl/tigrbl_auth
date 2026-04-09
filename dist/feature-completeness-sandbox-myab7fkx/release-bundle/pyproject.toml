@@ -1,0 +1,131 @@
+[project]
+name = "tigrbl_auth"
+version = "0.3.4"
+description = "A Tigrbl multi-tenant OpenID Connect / OAuth 2.0 identity-provider package by Swarmauri."
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
+keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
+dependencies = [
+    "tigrbl==0.3.15",
+    "swarmauri_core==0.9.2",
+    "swarmauri_base==0.9.2",
+    "swarmauri_standard==0.9.2",
+    "swarmauri_tokens_jwt==0.3.0.dev31",
+    "swarmauri_signing_jws==0.3.0.dev31",
+    "swarmauri_signing_ed25519==0.2.0.dev32",
+    "swarmauri_signing_dpop==0.1.1",
+    "swarmauri_crypto_jwe==0.2.0.dev40",
+    "swarmauri_crypto_paramiko==0.3.0.dev41",
+    "swarmauri_keyprovider_file==0.2.0",
+    "swarmauri_keyprovider_local==0.2.0",
+    "python-multipart==0.0.22",
+    "sqlalchemy[asyncio]==2.0.48",
+    "pydantic[email]==2.12.5",
+    "pydantic-settings==2.12.0",
+    "python-dotenv==1.2.2",
+    "PyYAML==6.0.3",
+    "bcrypt==5.0.0",
+    "httpx==0.28.1",
+    "aiosqlite==0.22.1",
+    "tomli==2.4.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==8.4.1",
+    "pytest-xdist==3.6.1",
+    "pytest-json-report==1.5.0",
+    "pytest-timeout==2.3.1",
+    "pytest-benchmark==4.0.0",
+    "pytest-asyncio==1.2.0",
+    "requests==2.32.3",
+]
+postgres = [
+    "asyncpg==0.31.0",
+    "psycopg2-binary==2.9.10",
+]
+sqlite = [
+    "aiosqlite==0.22.1",
+]
+uvicorn = [
+    "uvicorn[standard]==0.41.0",
+]
+hypercorn = [
+    "hypercorn==0.18.0",
+]
+tigrcorn = [
+    "tigrcorn==0.3.8; python_version >= '3.11'",
+]
+# Aggregate runner extra used by release-gate and clean-room certification jobs.
+servers = [
+    "uvicorn[standard]==0.41.0",
+    "hypercorn==0.18.0",
+    "tigrcorn==0.3.8; python_version >= '3.11'",
+]
+
+[project.urls]
+Repository = "https://github.com/swarmauri/swarmauri-sdk"
+Homepage = "https://github.com/swarmauri/swarmauri-sdk"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__"]
+markers = [
+    "test: standard test",
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "negative: Negative-path rejection tests",
+    "security: Security and abuse-case tests",
+    "interop: Interoperability and peer-profile catalog tests",
+    "conformance: Certification/conformance tests",
+    "r8n: Regression tests",
+    "timeout: mark test to timeout after X seconds",
+    "extension: optional extension-lane tests outside the default certification boundary",
+    "deferred: quarantined or out-of-scope tests excluded from the core certification lane",
+    "runtime_heavy: tests that require the full runtime dependency stack",
+    "xpass: Expected passes",
+    "xfail: Expected failures",
+    "acceptance: Acceptance tests",
+    "perf: Performance tests that measure execution time and resource usage",
+    "example: Usage examples from documentation",
+]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)s] %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+asyncio_default_fixture_loop_scope = "function"
+asyncio_mode = "auto"
+addopts = "--import-mode=importlib"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-xdist>=3.6.1",
+    "pytest-json-report>=1.5.0",
+    "requests>=2.32.3",
+    "flake8>=7.0",
+    "pytest-timeout>=2.3.1",
+    "ruff>=0.9.9",
+    "pytest-benchmark>=4.0.0",
+    "tox>=4.23.2",
+]
+
+[project.scripts]
+tigrbl-auth = "tigrbl_auth.cli.main:main"

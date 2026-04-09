@@ -1,0 +1,31 @@
+schema_version: 1
+id: device
+title: Device authorization flow interop
+counterpart_id: device-client
+required_targets:
+- RFC 8628
+required_artifacts:
+- tests/conformance/hardening/test_rfc8628_device_authorization.py
+- tests/negative/test_phase12_resource_exchange_abuse.py
+scenario_ids:
+- device-authorization
+- device-token-poll
+- device-slow-down
+- device-denial-replay
+scenario_target_map:
+  device-authorization:
+  - RFC 8628
+  device-token-poll:
+  - RFC 8628
+  device-slow-down:
+  - RFC 8628
+  device-denial-replay:
+  - RFC 8628
+contract_profiles:
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Device-flow peer harness must record polling cadence, slow_down behavior, denial,
+  and replay rejection.

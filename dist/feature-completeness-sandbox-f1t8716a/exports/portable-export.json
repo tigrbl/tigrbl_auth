@@ -1,0 +1,75 @@
+{
+  "checksum": "867aaafeb165dfb384bad34fd2cd9908103d321c72e34e727b2072f978dcdf3d",
+  "generated_at": "2026-04-09T07:22:31Z",
+  "resource_checksums": {
+    "client": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "flow": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "identity": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "keys": "fc18b2b2d1fd8810987a81e5838f54a418d1a69c3ceaf5c3adfcb51153ac706d",
+    "session": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "tenant": "f280ca74ef04b2ca71cef9b353745eca969847bcb7b194107b7ec26452a8c1bd",
+    "token": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "resource_versions": {
+    "client": 0,
+    "flow": 0,
+    "identity": 0,
+    "keys": 1,
+    "session": 0,
+    "tenant": 1,
+    "token": 0
+  },
+  "resources": {
+    "client": [],
+    "flow": [],
+    "identity": [],
+    "keys": [
+      {
+        "actor": "feature-completeness",
+        "created_at": "2026-04-09T07:22:31Z",
+        "data": {
+          "alg": "EdDSA",
+          "curve": "Ed25519",
+          "kid": "portable-key",
+          "kty": "OKP",
+          "label": "portable",
+          "tenant": "tenant-a",
+          "use": "sig"
+        },
+        "enabled": true,
+        "id": "portable-key",
+        "issuer": null,
+        "profile": "baseline",
+        "resource": "keys",
+        "revision": 1,
+        "status": "staged",
+        "tenant": "tenant-a",
+        "updated_at": "2026-04-09T07:22:31Z"
+      }
+    ],
+    "session": [],
+    "tenant": [
+      {
+        "actor": "feature-completeness",
+        "created_at": "2026-04-09T07:22:31Z",
+        "data": {
+          "name": "Portable Tenant",
+          "tenant": "tenant-a"
+        },
+        "enabled": true,
+        "id": "tenant-a",
+        "issuer": null,
+        "profile": "baseline",
+        "resource": "tenant",
+        "revision": 1,
+        "status": "active",
+        "tenant": "tenant-a",
+        "updated_at": "2026-04-09T07:22:31Z"
+      }
+    ],
+    "token": []
+  },
+  "schema_version": 3,
+  "storage_backend": "sqlite-authoritative",
+  "tenant_scope": "tenant-a"
+}

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_auth.cli.certification_evidence import current_environment_identity, runtime_identity
+from tigrbl_auth.repo_truth import has_install_matrix_workflow, has_release_gate_workflow, workflow_role_text
 
 try:
     import tomllib
@@ -335,8 +336,8 @@ def _envs_present_in_text(envs: set[str], text: str) -> tuple[list[str], list[st
 
 
 def _build_workflow_coverage(repo_root: Path) -> dict[str, Any]:
-    install_workflow = _workflow_text(repo_root / ".github" / "workflows" / "ci-install-profiles.yml")
-    release_workflow = _workflow_text(repo_root / ".github" / "workflows" / "ci-release-gates.yml")
+    install_workflow = workflow_role_text(repo_root, "install-matrix")
+    release_workflow = workflow_role_text(repo_root, "release-gates")
 
     install_present, install_missing = _envs_present_in_text(INSTALL_WORKFLOW_RUNTIME_ENVS, install_workflow)
     release_runtime_present, release_runtime_missing = _envs_present_in_text(RELEASE_WORKFLOW_RUNTIME_ENVS, release_workflow)
@@ -344,8 +345,8 @@ def _build_workflow_coverage(repo_root: Path) -> dict[str, Any]:
     release_extra_present, release_extra_missing = _envs_present_in_text(RELEASE_WORKFLOW_EXTRA_ENVS, release_workflow)
 
     return {
-        "install_profiles_workflow_present": bool(install_workflow),
-        "release_gates_workflow_present": bool(release_workflow),
+        "install_profiles_workflow_present": has_install_matrix_workflow(repo_root),
+        "release_gates_workflow_present": has_release_gate_workflow(repo_root),
         "install_profiles_artifact_upload_present": "dist/install-substrate" in install_workflow,
         "release_gates_artifact_upload_present": "dist/install-substrate" in release_workflow,
         "install_profiles_runtime_env_present_count": len(install_present),
@@ -356,8 +357,8 @@ def _build_workflow_coverage(repo_root: Path) -> dict[str, Any]:
         "release_gates_test_lane_env_missing": release_lane_missing,
         "release_gates_extra_env_present_count": len(release_extra_present),
         "release_gates_extra_env_missing": release_extra_missing,
-        "install_profiles_workflow_passed": not install_missing and bool(install_workflow) and "dist/install-substrate" in install_workflow,
-        "release_gates_workflow_passed": not release_runtime_missing and not release_lane_missing and not release_extra_missing and bool(release_workflow) and "dist/install-substrate" in release_workflow,
+        "install_profiles_workflow_passed": not install_missing and has_install_matrix_workflow(repo_root) and "dist/install-substrate" in install_workflow,
+        "release_gates_workflow_passed": not release_runtime_missing and not release_lane_missing and not release_extra_missing and has_release_gate_workflow(repo_root) and "dist/install-substrate" in release_workflow,
     }
 
 

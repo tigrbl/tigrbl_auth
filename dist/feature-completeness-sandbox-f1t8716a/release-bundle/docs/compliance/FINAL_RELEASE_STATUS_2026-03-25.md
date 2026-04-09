@@ -1,0 +1,23 @@
+# FINAL RELEASE STATUS 2026-03-25
+
+- Passed: `False`
+
+## Summary
+
+- final_release_ready: `False`
+- fully_certifiable_now: `False`
+- fully_rfc_compliant_now: `False`
+- fully_non_rfc_spec_compliant_now: `False`
+- strict_independent_claims_ready: `False`
+- release_gates_passed: `False`
+- final_release_gate_passed: `False`
+
+## Remaining blockers
+
+- Tier 4 independent peer validation is not complete for the retained boundary.
+- The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
+- One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
+- Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
+- One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
+- Release evidence can now be built only from a clean checkout, and the current workspace is dirty.
+- Migration portability validation is not preserved for both SQLite and PostgreSQL.

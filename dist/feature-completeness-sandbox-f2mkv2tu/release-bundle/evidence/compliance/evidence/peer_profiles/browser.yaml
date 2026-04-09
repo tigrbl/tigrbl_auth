@@ -1,0 +1,58 @@
+schema_version: 1
+id: browser
+title: Browser-based authorization code + OIDC/JWE hardening interop
+counterpart_id: browser-rp
+required_targets:
+- RFC 6749
+- RFC 7636
+- RFC 7516
+- RFC 8414
+- RFC 8615
+- RFC 9207
+- OIDC Core 1.0
+- OIDC Discovery 1.0
+- OIDC UserInfo
+required_artifacts:
+- tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
+- tests/conformance/baseline/test_rfc7636_pkce.py
+- tests/conformance/baseline/test_openid_configuration.py
+- tests/conformance/baseline/test_openid_userinfo_endpoint.py
+- tests/unit/test_oidc_id_token_encryption.py
+- tests/conformance/hardening/test_rfc9207_issuer_identification.py
+scenario_ids:
+- browser-authz-code
+- browser-oidc-discovery
+- browser-userinfo
+- browser-jwe-id-token
+- browser-issuer-parameter
+- browser-hardening-discovery-truthfulness
+scenario_target_map:
+  browser-authz-code:
+  - RFC 6749
+  - RFC 7636
+  - OIDC Core 1.0
+  browser-oidc-discovery:
+  - RFC 8414
+  - RFC 8615
+  - OIDC Discovery 1.0
+  browser-userinfo:
+  - OIDC UserInfo
+  browser-jwe-id-token:
+  - RFC 7516
+  browser-issuer-parameter:
+  - RFC 9207
+  browser-hardening-discovery-truthfulness:
+  - RFC 8414
+  - RFC 8615
+  - OIDC Discovery 1.0
+contract_profiles:
+- baseline
+- hardening
+- peer-claim
+preferred_runtime_profile: hardening
+peer_verification_class: external-independent
+notes:
+- Covers browser-visible discovery truthfulness, encrypted ID-token handling, issuer-parameter
+  validation, and userinfo behavior.
+- Tier 4 promotion requires externally supplied browser traces and HTTP transcripts
+  from a non-package relying-party harness.

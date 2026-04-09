@@ -1,0 +1,28 @@
+# Published-runtime verification checkpoint: all direct runtime pins in this file were re-verified against PyPI on 2026-03-24.
+# Base reproducible dependency pins for the clean-room certification matrix.
+# Use with: pip install -c constraints/base.txt .
+# The project metadata carries the same pins, including the default local SQLite
+# driver required for base import and report-generation smoke checks.
+
+tigrbl==0.3.15
+swarmauri_core==0.9.2
+swarmauri_base==0.9.2
+swarmauri_standard==0.9.2
+swarmauri_tokens_jwt==0.3.0.dev31
+swarmauri_signing_jws==0.3.0.dev31
+swarmauri_signing_ed25519==0.2.0.dev32
+swarmauri_signing_dpop==0.1.1
+swarmauri_crypto_jwe==0.2.0.dev40
+swarmauri_crypto_paramiko==0.3.0.dev41
+swarmauri_keyprovider_file==0.2.0
+swarmauri_keyprovider_local==0.2.0
+python-multipart==0.0.22
+sqlalchemy==2.0.48
+pydantic==2.12.5
+pydantic-settings==2.12.0
+python-dotenv==1.2.2
+PyYAML==6.0.3
+bcrypt==5.0.0
+aiosqlite==0.22.1
+httpx==0.28.1
+tomli==2.4.0 ; python_version < '3.11'

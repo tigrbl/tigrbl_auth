@@ -16,7 +16,7 @@ Do not cut a final certified release. Publish only a truthful checkpoint/candida
 - strict_independent_claims_ready: `False`
 - validated_runtime_matrix_green: `True`
 - validated_test_lanes_green: `True`
-- migration_portability_passed: `False`
+- migration_portability_passed: `True`
 
 ## Explicitly deauthorized current-adjacent docs
 

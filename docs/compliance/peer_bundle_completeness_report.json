@@ -1,12 +1,49 @@
 {
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Preserved external bundle is present but not promotion-qualifying: assertion-client",
+    "Preserved external bundle is present but not promotion-qualifying: browser",
+    "Preserved external bundle is present but not promotion-qualifying: client-mgmt",
+    "Preserved external bundle is present but not promotion-qualifying: device",
+    "Preserved external bundle is present but not promotion-qualifying: dpop",
+    "Preserved external bundle is present but not promotion-qualifying: gateway",
+    "Preserved external bundle is present but not promotion-qualifying: mtls",
+    "Preserved external bundle is present but not promotion-qualifying: native",
+    "Preserved external bundle is present but not promotion-qualifying: ops-cli",
+    "Preserved external bundle is present but not promotion-qualifying: par-jar-rar",
+    "Preserved external bundle is present but not promotion-qualifying: resource-server",
+    "Preserved external bundle is present but not promotion-qualifying: rp-session-logout",
+    "Preserved external bundle is present but not promotion-qualifying: runner-hypercorn",
+    "Preserved external bundle is present but not promotion-qualifying: runner-tigrcorn",
+    "Preserved external bundle is present but not promotion-qualifying: runner-uvicorn",
+    "Preserved external bundle is present but not promotion-qualifying: spa"
+  ],
   "warnings": [],
   "summary": {
     "declared_peer_profile_count": 16,
     "preserved_bundle_count": 16,
+    "valid_bundle_count": 0,
+    "invalid_bundle_count": 16,
     "missing_bundle_count": 0,
     "missing_profiles": [],
+    "invalid_profiles": [
+      "assertion-client",
+      "browser",
+      "client-mgmt",
+      "device",
+      "dpop",
+      "gateway",
+      "mtls",
+      "native",
+      "ops-cli",
+      "par-jar-rar",
+      "resource-server",
+      "rp-session-logout",
+      "runner-hypercorn",
+      "runner-tigrcorn",
+      "runner-uvicorn",
+      "spa"
+    ],
     "bundle_dir": "compliance\\evidence\\tier4\\bundles"
   },
   "details": [
@@ -17,10 +54,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 5,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "browser",
@@ -29,10 +74,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 6,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "client-mgmt",
@@ -41,10 +94,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "device",
@@ -53,10 +114,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 4,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "dpop",
@@ -65,10 +134,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "gateway",
@@ -77,10 +154,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 4,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "mtls",
@@ -89,10 +174,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "native",
@@ -101,10 +194,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 4,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "ops-cli",
@@ -113,10 +214,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 5,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "par-jar-rar",
@@ -125,10 +234,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 4,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "resource-server",
@@ -137,10 +254,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 6,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "rp-session-logout",
@@ -149,10 +274,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 5,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-hypercorn",
@@ -161,10 +294,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-tigrcorn",
@@ -173,10 +314,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "runner-uvicorn",
@@ -185,10 +334,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     },
     {
       "profile": "spa",
@@ -197,10 +354,18 @@
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
-      "peer_version": "",
+      "peer_version": "2026.03.25+fixture",
       "scenario_result_count": 3,
       "has_reproduction": true,
-      "validation_failure_count": 5
+      "validation_failure_count": 5,
+      "qualifies_for_promotion": false,
+      "qualification_failures": [
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
+      ]
     }
   ]
 }
