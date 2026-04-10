@@ -27,7 +27,9 @@ jobs:
   contracts:
     uses: ./.github/workflows/_contracts.yml
     permissions:
+      attestations: write
       contents: read
+      id-token: write
     with:
       python-version: '3.11'
       artifact-name: generated-contracts
