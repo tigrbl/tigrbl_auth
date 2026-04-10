@@ -122,22 +122,22 @@ jobs:
           name: ${{ inputs.release-bundle-artifact-name }}
           path: release-bundle-artifacts
       - name: Attest wheels
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ github.event.repository.name }}-wheel
           subject-path: dist-artifacts/*.whl
       - name: Attest sdists
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ github.event.repository.name }}-sdist
           subject-path: sdist-artifacts/*.tar.gz
       - name: Attest SBOMs
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ github.event.repository.name }}-sbom
           subject-path: sbom-artifacts/*.json
       - name: Attest release bundle manifests
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ github.event.repository.name }}-release-bundle
           subject-path: |
