@@ -44,7 +44,7 @@ jobs:
           uv run python scripts/run_release_gates.py
           uv run python scripts/verify_truth_chain.py --mode all
       - name: Upload evidence artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.artifact-name }}
           if-no-files-found: error
