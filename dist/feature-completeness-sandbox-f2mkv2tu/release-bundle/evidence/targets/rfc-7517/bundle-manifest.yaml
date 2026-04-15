@@ -1,7 +1,0 @@
-profile: baseline
-target: RFC 7517
-tests:
-- tests/conformance/baseline/test_rfc7517_jwk.py
-- tests/unit/test_jwks_rotation.py
-evidence_refs:
-- compliance/evidence/tier3/jwks/

@@ -1,1 +1,0 @@
-Replace this placeholder with the preserved external artifact at `browser-trace.json` in the real external root for `browser`.

@@ -1,7 +1,0 @@
-profile: baseline
-target: RFC 7515
-tests:
-- tests/conformance/baseline/test_rfc7515_jws.py
-- tests/unit/test_rfc7515_jws.py
-evidence_refs:
-- compliance/evidence/tier3/jose/

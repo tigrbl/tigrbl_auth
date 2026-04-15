@@ -1,1 +1,0 @@
-Replace this placeholder with the preserved external artifact at `logout-tokens.json` in the real external root for `rp-session-logout`.

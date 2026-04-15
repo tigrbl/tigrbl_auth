@@ -1,6 +1,0 @@
-{
-  "scenario_id": "par-submit",
-  "iss": "fixture-client",
-  "aud": "https://authn.example.com",
-  "response_type": "code"
-}

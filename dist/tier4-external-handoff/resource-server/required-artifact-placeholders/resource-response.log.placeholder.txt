@@ -1,1 +1,0 @@
-Replace this placeholder with the preserved external artifact at `resource-response.log` in the real external root for `resource-server`.
