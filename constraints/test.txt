@@ -1,7 +1,7 @@
 # Test/dev tooling pins for the clean-room certification matrix.
 # Use with: pip install -c constraints/base.txt -c constraints/test.txt '.[test]'
 
-pytest==8.4.1
+pytest==9.0.3
 pytest-xdist==3.6.1
 pytest-json-report==1.5.0
 pytest-timeout==2.3.1
