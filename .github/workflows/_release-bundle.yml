@@ -42,12 +42,12 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
       - name: Download contracts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.contracts-artifact-name }}
           path: .
       - name: Download evidence
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.evidence-artifact-name }}
           path: .
@@ -101,23 +101,23 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.contracts-artifact-name }}
           path: contracts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.dist-artifact-name }}
           path: dist-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.dist-artifact-name }}-sdist
           path: sdist-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.sbom-artifact-name }}
           path: sbom-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.release-bundle-artifact-name }}
           path: release-bundle-artifacts
@@ -151,23 +151,23 @@ jobs:
       attestations: read
       contents: read
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.contracts-artifact-name }}
           path: contracts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.dist-artifact-name }}
           path: dist-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.dist-artifact-name }}-sdist
           path: sdist-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.sbom-artifact-name }}
           path: sbom-artifacts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.release-bundle-artifact-name }}
           path: release-bundle-artifacts
