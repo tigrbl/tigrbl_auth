@@ -1,3 +1,0 @@
-{"id": "feature-key", "kind": "keys.generate", "resource": "keys", "status": "created", "transaction_id": "txn-fc22cd0f2a52", "ts": "2026-04-09T07:22:30Z"}
-{"id": "feature-key", "kind": "keys.rotate", "resource": "keys", "status": "updated", "transaction_id": "txn-8743d2fb7069", "ts": "2026-04-09T07:22:30Z"}
-{"id": "feature-key", "kind": "keys.retire", "resource": "keys", "status": "retired", "transaction_id": "txn-4ffdc6f441f8", "ts": "2026-04-09T07:22:30Z"}
