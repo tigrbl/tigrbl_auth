@@ -1,7 +1,0 @@
-profile: baseline
-target: RFC 7519
-tests:
-- tests/conformance/baseline/test_rfc7519_jwt.py
-- tests/unit/test_jwtoken.py
-evidence_refs:
-- compliance/evidence/tier3/jwt/

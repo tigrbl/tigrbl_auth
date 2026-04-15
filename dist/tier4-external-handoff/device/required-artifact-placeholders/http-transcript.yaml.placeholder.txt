@@ -1,1 +1,0 @@
-Replace this placeholder with the preserved external artifact at `http-transcript.yaml` in the real external root for `device`.

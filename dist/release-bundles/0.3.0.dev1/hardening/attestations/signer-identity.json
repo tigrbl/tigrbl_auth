@@ -1,9 +1,0 @@
-{
-  "signer_id": "tigrbl_auth.checkpoint.attestor",
-  "key_id": "ed25519:3075886a4b2cb8ab583c45e4",
-  "algorithm": "Ed25519",
-  "identity_kind": "repository-release-attestor",
-  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA1Xex+kKOzrhG9ySXr2A/WnF3bYRRLDZIzhvwaASwjCM=\n-----END PUBLIC KEY-----\n",
-  "public_key_sha256": "3075886a4b2cb8ab583c45e4530c27cd04adef9c0556fe5c86b8f20add43c62e",
-  "source": "inline-pem"
-}
