@@ -69,25 +69,25 @@ jobs:
           uv run python scripts/sign_release_bundle.py
           uv run python scripts/verify_release_signing.py
       - name: Upload Python wheels
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.dist-artifact-name }}
           if-no-files-found: error
           path: dist/*.whl
       - name: Upload Python sdist
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.dist-artifact-name }}-sdist
           if-no-files-found: error
           path: dist/*.tar.gz
       - name: Upload SBOM
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.sbom-artifact-name }}
           if-no-files-found: error
           path: dist/sbom/*.json
       - name: Upload release bundles
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.release-bundle-artifact-name }}
           if-no-files-found: error
