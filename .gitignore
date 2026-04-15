@@ -1,2 +1,4 @@
 /.pytest-tmp
 *.pyc
+
+/.operator*
