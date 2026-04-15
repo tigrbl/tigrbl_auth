@@ -1,0 +1,32 @@
+# Repo spec: specs/jsonschema/openid-configuration.schema.json
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://authn.example.com/schemas/openid-configuration.schema.json",
+  "type": "object",
+  "required": [
+    "issuer",
+    "authorization_endpoint",
+    "token_endpoint",
+    "jwks_uri"
+  ],
+  "properties": {
+    "issuer": {
+      "type": "string",
+      "format": "uri"
+    },
+    "authorization_endpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "token_endpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "jwks_uri": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "additionalProperties": true
+}

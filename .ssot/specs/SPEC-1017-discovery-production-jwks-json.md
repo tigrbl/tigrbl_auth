@@ -1,0 +1,9 @@
+# Repo spec: specs/discovery/profiles/production/jwks.json
+
+{
+  "keys": [],
+  "profile": "production",
+  "profile_label": "production",
+  "issuer": "https://authn.example.com",
+  "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
+}

@@ -1,0 +1,43 @@
+# ADR-1025: ADR-0026 Browser Session, Cookie, and Logout Semantics
+
+> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+
+> **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+> Do **not** use it to determine the current certification state, executable surface, or release readiness.
+> Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+
+# ADR-0026 Browser Session, Cookie, and Logout Semantics
+
+## Status
+
+Accepted
+
+## Context
+
+The prior checkpoint mounted `/logout` but still relied on a thin browser-session model: the runtime stored raw session identifiers in cookies, session ownership was not domain-owned, cookie rotation was absent, and logout fanout was not planned from registered client metadata. That shape was insufficient for a repository that intends to become certifiably browser-capable and fully observable.
+
+## Decision
+
+The repository now treats the browser session as a first-class durable domain:
+
+- the browser cookie is opaque and server-validated
+- the durable session row stores `cookie_secret_hash`, `cookie_issued_at`, `cookie_rotated_at`, and `session_state_salt`
+- the authorization endpoint computes `session_state` when OIDC session management is enabled
+- the login and authorize surfaces rotate session-cookie secrets according to repository policy
+- `/logout` validates `post_logout_redirect_uri` against registered client metadata
+- `/logout` persists front-channel and back-channel fanout plans in `logout_state.logout_metadata`
+- repeated logout requests for the same session reuse the durable logout record to provide replay-safe idempotence
+
+## Consequences
+
+Positive:
+
+- browser-session behavior is now domain-owned and auditable
+- cookie behavior is explicit in configuration and documentation
+- logout is observable and testable without inventing new public callback routes
+
+Trade-offs:
+
+- a dedicated `check_session_iframe` endpoint is still deferred
+- front-channel and back-channel delivery are planned and persisted, but not yet executed by an external dispatcher in this checkpoint
+- hardening posture still needs later-phase runtime tightening
