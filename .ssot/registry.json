@@ -7326,7 +7326,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-phase16-fapi-runtime-profile-py"
       ],
       "requires": []
     },
@@ -7722,7 +7723,14 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-interop-test-peer-matrix-external-status-py",
+        "tst:tests-interop-test-peer-profile-catalog-py",
+        "tst:tests-interop-test-phase13-peer-target-coverage-py",
+        "tst:tests-interop-test-tier4-external-handoff-templates-py",
+        "tst:tests-interop-test-tier4-fixture-rejection-py",
+        "tst:tests-unit-test-phase11-tier4-checkpoint-py",
+        "tst:tests-unit-test-phase18-peer-bundle-completeness-py"
       ],
       "requires": []
     },
@@ -10975,7 +10983,50 @@
         "tst:tests-unit-test-deployment-resolver-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
         "tst:tests-unit-test-phase2-runner-adapter-runtime-layer-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py"
+        "tst:tests-unit-test-phase3-runtime-launcher-py",
+        "tst:tests-examples-test-readme-usage-py",
+        "tst:tests-integration-test-crud-api-py",
+        "tst:tests-integration-test-long-lived-worker-flow-py",
+        "tst:tests-integration-test-service-key-creation-py",
+        "tst:tests-integration-test-service-key-introspection-flow-py",
+        "tst:tests-interop-test-runner-profile-catalog-completeness-py",
+        "tst:tests-negative-test-phase12-invalid-artifact-inputs-py",
+        "tst:tests-negative-test-phase12-resource-exchange-abuse-py",
+        "tst:tests-unit-test-adapters-py",
+        "tst:tests-unit-test-authorize-id-token-hashes-py",
+        "tst:tests-unit-test-authorize-response-modes-py",
+        "tst:tests-unit-test-backends-py",
+        "tst:tests-unit-test-bulk-schema-fields-py",
+        "tst:tests-unit-test-crypto-py",
+        "tst:tests-unit-test-deps-imports-py",
+        "tst:tests-unit-test-effective-artifacts-py",
+        "tst:tests-unit-test-engine-initialization-py",
+        "tst:tests-unit-test-models-py",
+        "tst:tests-unit-test-oidc-authorize-scope-nonce-py",
+        "tst:tests-unit-test-phase10-tier3-validated-rebuild-py",
+        "tst:tests-unit-test-phase12-final-aggregation-py",
+        "tst:tests-unit-test-phase13-truthfulness-alignment-py",
+        "tst:tests-unit-test-phase14-claim-registry-alignment-py",
+        "tst:tests-unit-test-phase15-retained-target-test-evidence-py",
+        "tst:tests-unit-test-phase1-clean-room-install-substrate-py",
+        "tst:tests-unit-test-phase2-app-factory-materialization-py",
+        "tst:tests-unit-test-phase4-collect-validated-artifact-downloads-py",
+        "tst:tests-unit-test-phase4-runtime-validation-matrix-py",
+        "tst:tests-unit-test-phase4-validated-execution-runtime-matrix-py",
+        "tst:tests-unit-test-phase5-certification-lane-evidence-py",
+        "tst:tests-unit-test-phase8-non-rfc-track-checkpoint-py",
+        "tst:tests-unit-test-phase9-feature-completeness-checkpoint-py",
+        "tst:tests-unit-test-remote-adapter-py",
+        "tst:tests-unit-test-repo-truth-helpers-py",
+        "tst:tests-unit-test-rfc7520-examples-py",
+        "tst:tests-unit-test-rfc7638-jwk-thumbprint-py",
+        "tst:tests-unit-test-rfc8037-eddsa-py",
+        "tst:tests-unit-test-rfc8176-amr-py",
+        "tst:tests-unit-test-rfc8523-jwt-client-auth-py",
+        "tst:tests-unit-test-rfc8725-jwt-best-practices-py",
+        "tst:tests-unit-test-runtime-version-truthfulness-py",
+        "tst:tests-unit-test-security-deps-py",
+        "tst:tests-unit-test-user-register-schema-py"
       ],
       "requires": []
     },
@@ -11002,7 +11053,8 @@
         "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase4-cli-contract-py"
+        "tst:tests-unit-test-phase4-cli-contract-py",
+        "tst:tests-unit-test-phase6-migration-portability-evidence-py"
       ],
       "requires": []
     },
@@ -11061,7 +11113,9 @@
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-phase5-operator-service-layer-py",
+        "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
+        "tst:tests-interop-test-operator-profile-catalog-completeness-py"
       ],
       "requires": []
     },
@@ -11405,7 +11459,8 @@
         "tst:tests-conformance-baseline-test-oidc-id-token-py",
         "tst:tests-conformance-baseline-test-openid-userinfo-endpoint-py",
         "tst:tests-integration-test-authorization-response-types-py",
-        "tst:tests-integration-test-oidc-endpoints-py"
+        "tst:tests-integration-test-oidc-endpoints-py",
+        "tst:tests-unit-test-oidc-id-token-py"
       ],
       "requires": []
     },
@@ -11435,7 +11490,8 @@
         "tst:tests-integration-test-rfc8414-metadata-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-openid-configuration-py"
       ],
       "requires": []
     },
@@ -11570,7 +11626,10 @@
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
-        "tst:tests-unit-test-contract-generation-live-py"
+        "tst:tests-unit-test-contract-generation-live-py",
+        "tst:tests-negative-test-contract-diff-detects-drift-py",
+        "tst:tests-unit-test-openapi-examples-py",
+        "tst:tests-unit-test-openapi-well-known-endpoints-py"
       ],
       "requires": []
     },
@@ -11596,7 +11655,8 @@
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-unit-test-contract-generation-live-py",
-        "tst:tests-unit-test-rpc-registry-live-py"
+        "tst:tests-unit-test-rpc-registry-live-py",
+        "tst:tests-unit-test-phase6-operator-control-plane-py"
       ],
       "requires": []
     },
@@ -11623,7 +11683,8 @@
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-security-test-release-bundle-signing-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase1-published-dependency-model-py"
+        "tst:tests-unit-test-phase1-published-dependency-model-py",
+        "tst:tests-perf-test-bundle-manifest-size-py"
       ],
       "requires": []
     },
@@ -11681,7 +11742,10 @@
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-rfc6749-auth-flow-endpoints-py",
+        "tst:tests-unit-test-rfc6749-token-endpoint-py",
+        "tst:tests-unit-test-rfc6749-validators-py"
       ],
       "requires": []
     },
@@ -11709,7 +11773,8 @@
         "tst:tests-integration-test-auth-flows-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-rfc6750-bearer-token-py"
       ],
       "requires": []
     },
@@ -11737,7 +11802,8 @@
         "tst:tests-integration-test-full-workflow-py",
         "tst:tests-integration-test-migration-upgrade-downgrade-safety-py",
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
-        "tst:tests-unit-test-phase3-public-route-contracts-py"
+        "tst:tests-unit-test-phase3-public-route-contracts-py",
+        "tst:tests-unit-test-rfc7009-token-revocation-py"
       ],
       "requires": []
     },
@@ -11813,7 +11879,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc7517-jwk-py",
-        "tst:tests-unit-test-jwks-rotation-py"
+        "tst:tests-unit-test-jwks-rotation-py",
+        "tst:tests-unit-test-rfc7517-jwk-py"
       ],
       "requires": []
     },
@@ -11863,7 +11930,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc7519-jwt-py",
-        "tst:tests-unit-test-jwtoken-py"
+        "tst:tests-unit-test-jwtoken-py",
+        "tst:tests-unit-test-rfc7519-jwt-py"
       ],
       "requires": []
     },
@@ -11941,7 +12009,8 @@
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-rfc7591-client-registration-endpoint-py"
+        "tst:tests-unit-test-rfc7591-client-registration-endpoint-py",
+        "tst:tests-unit-test-rfc7591-dynamic-client-registration-py"
       ],
       "requires": []
     },
@@ -11969,7 +12038,8 @@
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py",
-        "tst:tests-unit-test-rfc7592-client-management-endpoint-py"
+        "tst:tests-unit-test-rfc7592-client-management-endpoint-py",
+        "tst:tests-unit-test-rfc7592-client-registration-management-py"
       ],
       "requires": []
     },
@@ -11998,7 +12068,8 @@
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
-        "tst:tests-unit-test-auth-code-exchange-pkce-py"
+        "tst:tests-unit-test-auth-code-exchange-pkce-py",
+        "tst:tests-unit-test-rfc7636-pkce-py"
       ],
       "requires": []
     },
@@ -12026,7 +12097,9 @@
         "tst:tests-integration-test-migration-upgrade-downgrade-safety-py",
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-integration-test-rfc7662-py",
-        "tst:tests-unit-test-phase3-public-route-contracts-py"
+        "tst:tests-unit-test-phase3-public-route-contracts-py",
+        "tst:tests-unit-test-rfc7662-token-introspection-py",
+        "tst:tests-unit-test-rfc7662-unit-py"
       ],
       "requires": []
     },
@@ -12151,7 +12224,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc8414-authorization-server-metadata-py",
-        "tst:tests-integration-test-rfc8414-metadata-py"
+        "tst:tests-integration-test-rfc8414-metadata-py",
+        "tst:tests-unit-test-rfc8414-authorization-server-metadata-py"
       ],
       "requires": []
     },
@@ -12209,7 +12283,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8628-device-authorization-py"
       ],
       "requires": []
     },
@@ -12241,7 +12316,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8693-token-exchange-py"
       ],
       "requires": []
     },
@@ -12271,7 +12347,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc8705-compliance-py"
       ],
       "requires": []
     },
@@ -12298,7 +12375,8 @@
         "tst:tests-conformance-hardening-test-rfc8707-resource-indicators-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8707-resource-indicators-py"
       ],
       "requires": []
     },
@@ -12376,7 +12454,8 @@
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc9068-jwt-profile-py"
       ],
       "requires": []
     },
@@ -12406,7 +12485,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9101-jwt-secured-authorization-request-py"
       ],
       "requires": []
     },
@@ -12436,7 +12516,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9126-pushed-authorization-requests-py"
       ],
       "requires": []
     },
@@ -12494,7 +12575,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9396-authorization-details-py"
       ],
       "requires": []
     },
@@ -12524,7 +12606,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc9449-dpop-py"
       ],
       "requires": []
     },
@@ -25474,6 +25557,1334 @@
         "evd:compliance-evidence-tier3-token-exchange",
         "evd:compliance-evidence-tier3-well-known"
       ]
+    },
+    {
+      "id": "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
+      "title": "cli release lifecycle",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/conformance/operator/test_cli_release_lifecycle.py",
+      "feature_ids": [
+        "feat:target-cli-operator-surface"
+      ],
+      "claim_ids": [
+        "clm:target-cli-operator-surface"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
+    },
+    {
+      "id": "tst:tests-examples-test-readme-usage-py",
+      "title": "readme usage",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/examples/test_readme_usage.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-integration-test-crud-api-py",
+      "title": "crud api",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/integration/test_crud_api.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-integration-test-long-lived-worker-flow-py",
+      "title": "long lived worker flow",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/integration/test_long_lived_worker_flow.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-integration-test-service-key-creation-py",
+      "title": "service key creation",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/integration/test_service_key_creation.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-integration-test-service-key-introspection-flow-py",
+      "title": "service key introspection flow",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/integration/test_service_key_introspection_flow.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-operator-profile-catalog-completeness-py",
+      "title": "operator profile catalog completeness",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_operator_profile_catalog_completeness.py",
+      "feature_ids": [
+        "feat:target-cli-operator-surface"
+      ],
+      "claim_ids": [
+        "clm:target-cli-operator-surface"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-peer-matrix-external-status-py",
+      "title": "peer matrix external status",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_peer_matrix_external_status.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-peer-profile-catalog-py",
+      "title": "peer profile catalog",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_peer_profile_catalog.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-phase13-peer-target-coverage-py",
+      "title": "phase13 peer target coverage",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_phase13_peer_target_coverage.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-runner-profile-catalog-completeness-py",
+      "title": "runner profile catalog completeness",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_runner_profile_catalog_completeness.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-tier4-external-handoff-templates-py",
+      "title": "tier4 external handoff templates",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_tier4_external_handoff_templates.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-interop-test-tier4-fixture-rejection-py",
+      "title": "tier4 fixture rejection",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/interop/test_tier4_fixture_rejection.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-negative-test-contract-diff-detects-drift-py",
+      "title": "contract diff detects drift",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/negative/test_contract_diff_detects_drift.py",
+      "feature_ids": [
+        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openapi"
+      ]
+    },
+    {
+      "id": "tst:tests-negative-test-phase12-invalid-artifact-inputs-py",
+      "title": "phase12 invalid artifact inputs",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/negative/test_phase12_invalid_artifact_inputs.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-negative-test-phase12-resource-exchange-abuse-py",
+      "title": "phase12 resource exchange abuse",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/negative/test_phase12_resource_exchange_abuse.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-perf-test-bundle-manifest-size-py",
+      "title": "bundle manifest size",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/perf/test_bundle_manifest_size.py",
+      "feature_ids": [
+        "feat:target-release-bundle-and-signature-verification"
+      ],
+      "claim_ids": [
+        "clm:target-release-bundle-and-signature-verification"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-release-bundle-signing"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-adapters-py",
+      "title": "adapters",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_adapters.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-authorize-id-token-hashes-py",
+      "title": "authorize id token hashes",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_authorize_id_token_hashes.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-authorize-response-modes-py",
+      "title": "authorize response modes",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_authorize_response_modes.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-backends-py",
+      "title": "backends",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_backends.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-bulk-schema-fields-py",
+      "title": "bulk schema fields",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_bulk_schema_fields.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-crypto-py",
+      "title": "crypto",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_crypto.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-deps-imports-py",
+      "title": "deps imports",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_deps_imports.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-effective-artifacts-py",
+      "title": "effective artifacts",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_effective_artifacts.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-engine-initialization-py",
+      "title": "engine initialization",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_engine_initialization.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-models-py",
+      "title": "models",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_models.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-oidc-authorize-scope-nonce-py",
+      "title": "oidc authorize scope nonce",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_oidc_authorize_scope_nonce.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-oidc-id-token-py",
+      "title": "oidc id token",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_oidc_id_token.py",
+      "feature_ids": [
+        "feat:target-oidc-core-1-0"
+      ],
+      "claim_ids": [
+        "clm:target-oidc-core-1-0"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-oidc-core"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-openapi-examples-py",
+      "title": "openapi examples",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_openapi_examples.py",
+      "feature_ids": [
+        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openapi"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-openapi-well-known-endpoints-py",
+      "title": "openapi well known endpoints",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_openapi_well_known_endpoints.py",
+      "feature_ids": [
+        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openapi"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-openid-configuration-py",
+      "title": "openid configuration",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_openid_configuration.py",
+      "feature_ids": [
+        "feat:target-oidc-discovery-1-0"
+      ],
+      "claim_ids": [
+        "clm:target-oidc-discovery-1-0"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-discovery"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase10-tier3-validated-rebuild-py",
+      "title": "phase10 tier3 validated rebuild",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase10_tier3_validated_rebuild.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase11-tier4-checkpoint-py",
+      "title": "phase11 tier4 checkpoint",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase11_tier4_checkpoint.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase12-final-aggregation-py",
+      "title": "phase12 final aggregation",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase12_final_aggregation.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase13-truthfulness-alignment-py",
+      "title": "phase13 truthfulness alignment",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase13_truthfulness_alignment.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase14-claim-registry-alignment-py",
+      "title": "phase14 claim registry alignment",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase14_claim_registry_alignment.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase15-retained-target-test-evidence-py",
+      "title": "phase15 retained target test evidence",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase15_retained_target_test_evidence.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase16-fapi-runtime-profile-py",
+      "title": "phase16 fapi runtime profile",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase16_fapi_runtime_profile.py",
+      "feature_ids": [
+        "feat:profile-fapi2-security"
+      ],
+      "claim_ids": [
+        "clm:profile-fapi2-security"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-security-bcp"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase18-peer-bundle-completeness-py",
+      "title": "phase18 peer bundle completeness",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase18_peer_bundle_completeness.py",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "claim_ids": [
+        "clm:profile-peer-claim"
+      ],
+      "evidence_ids": [
+        "evd:docs-compliance-target-reality-matrix-md"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase1-clean-room-install-substrate-py",
+      "title": "phase1 clean room install substrate",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase1_clean_room_install_substrate.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase2-app-factory-materialization-py",
+      "title": "phase2 app factory materialization",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase2_app_factory_materialization.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase4-collect-validated-artifact-downloads-py",
+      "title": "phase4 collect validated artifact downloads",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase4_collect_validated_artifact_downloads.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase4-runtime-validation-matrix-py",
+      "title": "phase4 runtime validation matrix",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase4_runtime_validation_matrix.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase4-validated-execution-runtime-matrix-py",
+      "title": "phase4 validated execution runtime matrix",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase4_validated_execution_runtime_matrix.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase5-certification-lane-evidence-py",
+      "title": "phase5 certification lane evidence",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase5_certification_lane_evidence.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase6-migration-portability-evidence-py",
+      "title": "phase6 migration portability evidence",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase6_migration_portability_evidence.py",
+      "feature_ids": [
+        "feat:target-bootstrap-and-migration-lifecycle"
+      ],
+      "claim_ids": [
+        "clm:target-bootstrap-and-migration-lifecycle"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-bootstrap-migration"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase6-operator-control-plane-py",
+      "title": "phase6 operator control plane",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase6_operator_control_plane.py",
+      "feature_ids": [
+        "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+      ],
+      "claim_ids": [
+        "clm:target-openrpc-1-4-x-admin-control-plane-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openrpc"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase8-non-rfc-track-checkpoint-py",
+      "title": "phase8 non rfc track checkpoint",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase8_non_rfc_track_checkpoint.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase9-feature-completeness-checkpoint-py",
+      "title": "phase9 feature completeness checkpoint",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase9_feature_completeness_checkpoint.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-remote-adapter-py",
+      "title": "remote adapter",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_remote_adapter.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-repo-truth-helpers-py",
+      "title": "repo truth helpers",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_repo_truth_helpers.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc6749-auth-flow-endpoints-py",
+      "title": "rfc6749 auth flow endpoints",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc6749_auth_flow_endpoints.py",
+      "feature_ids": [
+        "feat:target-rfc-6749"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-6749"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-oauth2-core"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc6749-token-endpoint-py",
+      "title": "rfc6749 token endpoint",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc6749_token_endpoint.py",
+      "feature_ids": [
+        "feat:target-rfc-6749"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-6749"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-oauth2-core"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc6749-validators-py",
+      "title": "rfc6749 validators",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc6749_validators.py",
+      "feature_ids": [
+        "feat:target-rfc-6749"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-6749"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-oauth2-core"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc6750-bearer-token-py",
+      "title": "rfc6750 bearer token",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc6750_bearer_token.py",
+      "feature_ids": [
+        "feat:target-rfc-6750"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-6750"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-bearer"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7009-token-revocation-py",
+      "title": "rfc7009 token revocation",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7009_token_revocation.py",
+      "feature_ids": [
+        "feat:target-rfc-7009"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7009"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-revocation"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7517-jwk-py",
+      "title": "rfc7517 jwk",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7517_jwk.py",
+      "feature_ids": [
+        "feat:target-rfc-7517"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7517"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-jwks"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7519-jwt-py",
+      "title": "rfc7519 jwt",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7519_jwt.py",
+      "feature_ids": [
+        "feat:target-rfc-7519"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7519"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-jwt"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7520-examples-py",
+      "title": "rfc7520 examples",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7520_examples.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7591-dynamic-client-registration-py",
+      "title": "rfc7591 dynamic client registration",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7591_dynamic_client_registration.py",
+      "feature_ids": [
+        "feat:target-rfc-7591"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7591"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-client-registration"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7592-client-registration-management-py",
+      "title": "rfc7592 client registration management",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7592_client_registration_management.py",
+      "feature_ids": [
+        "feat:target-rfc-7592"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7592"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-client-registration-management"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7636-pkce-py",
+      "title": "rfc7636 pkce",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7636_pkce.py",
+      "feature_ids": [
+        "feat:target-rfc-7636"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7636"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-pkce"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7638-jwk-thumbprint-py",
+      "title": "rfc7638 jwk thumbprint",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7638_jwk_thumbprint.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7662-token-introspection-py",
+      "title": "rfc7662 token introspection",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7662_token_introspection.py",
+      "feature_ids": [
+        "feat:target-rfc-7662"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7662"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-introspection"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc7662-unit-py",
+      "title": "rfc7662 unit",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc7662_unit.py",
+      "feature_ids": [
+        "feat:target-rfc-7662"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-7662"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-introspection"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8037-eddsa-py",
+      "title": "rfc8037 eddsa",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8037_eddsa.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8176-amr-py",
+      "title": "rfc8176 amr",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8176_amr.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8414-authorization-server-metadata-py",
+      "title": "rfc8414 authorization server metadata",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8414_authorization_server_metadata.py",
+      "feature_ids": [
+        "feat:target-rfc-8414"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8414"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-discovery"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8523-jwt-client-auth-py",
+      "title": "rfc8523 jwt client auth",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8523_jwt_client_auth.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8628-device-authorization-py",
+      "title": "rfc8628 device authorization",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8628_device_authorization.py",
+      "feature_ids": [
+        "feat:target-rfc-8628"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8628"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-device-flow"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8693-token-exchange-py",
+      "title": "rfc8693 token exchange",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8693_token_exchange.py",
+      "feature_ids": [
+        "feat:target-rfc-8693"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8693"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-token-exchange"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8705-compliance-py",
+      "title": "rfc8705 compliance",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8705_compliance.py",
+      "feature_ids": [
+        "feat:target-rfc-8705"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8705"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-mtls"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8707-resource-indicators-py",
+      "title": "rfc8707 resource indicators",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8707_resource_indicators.py",
+      "feature_ids": [
+        "feat:target-rfc-8707"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8707"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-resource-indicators"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc8725-jwt-best-practices-py",
+      "title": "rfc8725 jwt best practices",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc8725_jwt_best_practices.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc9068-jwt-profile-py",
+      "title": "rfc9068 jwt profile",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc9068_jwt_profile.py",
+      "feature_ids": [
+        "feat:target-rfc-9068"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-9068"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-jwt-access-token-profile"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc9101-jwt-secured-authorization-request-py",
+      "title": "rfc9101 jwt secured authorization request",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+      "feature_ids": [
+        "feat:target-rfc-9101"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-9101"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-jar"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc9126-pushed-authorization-requests-py",
+      "title": "rfc9126 pushed authorization requests",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+      "feature_ids": [
+        "feat:target-rfc-9126"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-9126"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-par"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc9396-authorization-details-py",
+      "title": "rfc9396 authorization details",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc9396_authorization_details.py",
+      "feature_ids": [
+        "feat:target-rfc-9396"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-9396"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-rar"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-rfc9449-dpop-py",
+      "title": "rfc9449 dpop",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_rfc9449_dpop.py",
+      "feature_ids": [
+        "feat:target-rfc-9449"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-9449"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-dpop"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-runtime-version-truthfulness-py",
+      "title": "runtime version truthfulness",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_version_truthfulness.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-security-deps-py",
+      "title": "security deps",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_security_deps.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-user-register-schema-py",
+      "title": "user register schema",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_user_register_schema.py",
+      "feature_ids": [
+        "feat:target-asgi-3-application-package"
+      ],
+      "claim_ids": [
+        "clm:target-asgi-3-application-package"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application"
+      ]
     }
   ],
   "claims": [
@@ -33252,7 +34663,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-phase16-fapi-runtime-profile-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-assertion-framework",
@@ -33672,7 +35084,14 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-interop-test-peer-matrix-external-status-py",
+        "tst:tests-interop-test-peer-profile-catalog-py",
+        "tst:tests-interop-test-phase13-peer-target-coverage-py",
+        "tst:tests-interop-test-tier4-external-handoff-templates-py",
+        "tst:tests-interop-test-tier4-fixture-rejection-py",
+        "tst:tests-unit-test-phase11-tier4-checkpoint-py",
+        "tst:tests-unit-test-phase18-peer-bundle-completeness-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-assertion-framework",
@@ -35269,7 +36688,50 @@
         "tst:tests-unit-test-deployment-resolver-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
         "tst:tests-unit-test-phase2-runner-adapter-runtime-layer-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py"
+        "tst:tests-unit-test-phase3-runtime-launcher-py",
+        "tst:tests-examples-test-readme-usage-py",
+        "tst:tests-integration-test-crud-api-py",
+        "tst:tests-integration-test-long-lived-worker-flow-py",
+        "tst:tests-integration-test-service-key-creation-py",
+        "tst:tests-integration-test-service-key-introspection-flow-py",
+        "tst:tests-interop-test-runner-profile-catalog-completeness-py",
+        "tst:tests-negative-test-phase12-invalid-artifact-inputs-py",
+        "tst:tests-negative-test-phase12-resource-exchange-abuse-py",
+        "tst:tests-unit-test-adapters-py",
+        "tst:tests-unit-test-authorize-id-token-hashes-py",
+        "tst:tests-unit-test-authorize-response-modes-py",
+        "tst:tests-unit-test-backends-py",
+        "tst:tests-unit-test-bulk-schema-fields-py",
+        "tst:tests-unit-test-crypto-py",
+        "tst:tests-unit-test-deps-imports-py",
+        "tst:tests-unit-test-effective-artifacts-py",
+        "tst:tests-unit-test-engine-initialization-py",
+        "tst:tests-unit-test-models-py",
+        "tst:tests-unit-test-oidc-authorize-scope-nonce-py",
+        "tst:tests-unit-test-phase10-tier3-validated-rebuild-py",
+        "tst:tests-unit-test-phase12-final-aggregation-py",
+        "tst:tests-unit-test-phase13-truthfulness-alignment-py",
+        "tst:tests-unit-test-phase14-claim-registry-alignment-py",
+        "tst:tests-unit-test-phase15-retained-target-test-evidence-py",
+        "tst:tests-unit-test-phase1-clean-room-install-substrate-py",
+        "tst:tests-unit-test-phase2-app-factory-materialization-py",
+        "tst:tests-unit-test-phase4-collect-validated-artifact-downloads-py",
+        "tst:tests-unit-test-phase4-runtime-validation-matrix-py",
+        "tst:tests-unit-test-phase4-validated-execution-runtime-matrix-py",
+        "tst:tests-unit-test-phase5-certification-lane-evidence-py",
+        "tst:tests-unit-test-phase8-non-rfc-track-checkpoint-py",
+        "tst:tests-unit-test-phase9-feature-completeness-checkpoint-py",
+        "tst:tests-unit-test-remote-adapter-py",
+        "tst:tests-unit-test-repo-truth-helpers-py",
+        "tst:tests-unit-test-rfc7520-examples-py",
+        "tst:tests-unit-test-rfc7638-jwk-thumbprint-py",
+        "tst:tests-unit-test-rfc8037-eddsa-py",
+        "tst:tests-unit-test-rfc8176-amr-py",
+        "tst:tests-unit-test-rfc8523-jwt-client-auth-py",
+        "tst:tests-unit-test-rfc8725-jwt-best-practices-py",
+        "tst:tests-unit-test-runtime-version-truthfulness-py",
+        "tst:tests-unit-test-security-deps-py",
+        "tst:tests-unit-test-user-register-schema-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-asgi-application"
@@ -35289,7 +36751,8 @@
         "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase4-cli-contract-py"
+        "tst:tests-unit-test-phase4-cli-contract-py",
+        "tst:tests-unit-test-phase6-migration-portability-evidence-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-bootstrap-migration"
@@ -35338,7 +36801,9 @@
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-phase5-operator-service-layer-py",
+        "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
+        "tst:tests-interop-test-operator-profile-catalog-completeness-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -35609,7 +37074,8 @@
         "tst:tests-conformance-baseline-test-oidc-id-token-py",
         "tst:tests-conformance-baseline-test-openid-userinfo-endpoint-py",
         "tst:tests-integration-test-authorization-response-types-py",
-        "tst:tests-integration-test-oidc-endpoints-py"
+        "tst:tests-integration-test-oidc-endpoints-py",
+        "tst:tests-unit-test-oidc-id-token-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-oidc-core"
@@ -35632,7 +37098,8 @@
         "tst:tests-integration-test-rfc8414-metadata-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-openid-configuration-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-discovery"
@@ -35732,7 +37199,10 @@
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
-        "tst:tests-unit-test-contract-generation-live-py"
+        "tst:tests-unit-test-contract-generation-live-py",
+        "tst:tests-negative-test-contract-diff-detects-drift-py",
+        "tst:tests-unit-test-openapi-examples-py",
+        "tst:tests-unit-test-openapi-well-known-endpoints-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-contracts-openapi"
@@ -35751,7 +37221,8 @@
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-unit-test-contract-generation-live-py",
-        "tst:tests-unit-test-rpc-registry-live-py"
+        "tst:tests-unit-test-rpc-registry-live-py",
+        "tst:tests-unit-test-phase6-operator-control-plane-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-contracts-openrpc"
@@ -35771,7 +37242,8 @@
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-security-test-release-bundle-signing-py",
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase1-published-dependency-model-py"
+        "tst:tests-unit-test-phase1-published-dependency-model-py",
+        "tst:tests-perf-test-bundle-manifest-size-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-release-bundle-signing"
@@ -35815,7 +37287,10 @@
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-rfc6749-auth-flow-endpoints-py",
+        "tst:tests-unit-test-rfc6749-token-endpoint-py",
+        "tst:tests-unit-test-rfc6749-validators-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-oauth2-core"
@@ -35836,7 +37311,8 @@
         "tst:tests-integration-test-auth-flows-py",
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
-        "tst:tests-interop-test-tier4-promotion-fail-closed-py"
+        "tst:tests-interop-test-tier4-promotion-fail-closed-py",
+        "tst:tests-unit-test-rfc6750-bearer-token-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-bearer"
@@ -35857,7 +37333,8 @@
         "tst:tests-integration-test-full-workflow-py",
         "tst:tests-integration-test-migration-upgrade-downgrade-safety-py",
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
-        "tst:tests-unit-test-phase3-public-route-contracts-py"
+        "tst:tests-unit-test-phase3-public-route-contracts-py",
+        "tst:tests-unit-test-rfc7009-token-revocation-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-revocation"
@@ -35912,7 +37389,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc7517-jwk-py",
-        "tst:tests-unit-test-jwks-rotation-py"
+        "tst:tests-unit-test-jwks-rotation-py",
+        "tst:tests-unit-test-rfc7517-jwk-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-jwks"
@@ -35948,7 +37426,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc7519-jwt-py",
-        "tst:tests-unit-test-jwtoken-py"
+        "tst:tests-unit-test-jwtoken-py",
+        "tst:tests-unit-test-rfc7519-jwt-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-jwt"
@@ -36005,7 +37484,8 @@
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-rfc7591-client-registration-endpoint-py"
+        "tst:tests-unit-test-rfc7591-client-registration-endpoint-py",
+        "tst:tests-unit-test-rfc7591-dynamic-client-registration-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-client-registration"
@@ -36026,7 +37506,8 @@
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py",
-        "tst:tests-unit-test-rfc7592-client-management-endpoint-py"
+        "tst:tests-unit-test-rfc7592-client-management-endpoint-py",
+        "tst:tests-unit-test-rfc7592-client-registration-management-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-client-registration-management"
@@ -36048,7 +37529,8 @@
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
-        "tst:tests-unit-test-auth-code-exchange-pkce-py"
+        "tst:tests-unit-test-auth-code-exchange-pkce-py",
+        "tst:tests-unit-test-rfc7636-pkce-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-pkce"
@@ -36069,7 +37551,9 @@
         "tst:tests-integration-test-migration-upgrade-downgrade-safety-py",
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-integration-test-rfc7662-py",
-        "tst:tests-unit-test-phase3-public-route-contracts-py"
+        "tst:tests-unit-test-phase3-public-route-contracts-py",
+        "tst:tests-unit-test-rfc7662-token-introspection-py",
+        "tst:tests-unit-test-rfc7662-unit-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-introspection"
@@ -36159,7 +37643,8 @@
       ],
       "test_ids": [
         "tst:tests-conformance-baseline-test-rfc8414-authorization-server-metadata-py",
-        "tst:tests-integration-test-rfc8414-metadata-py"
+        "tst:tests-integration-test-rfc8414-metadata-py",
+        "tst:tests-unit-test-rfc8414-authorization-server-metadata-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-discovery"
@@ -36203,7 +37688,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8628-device-authorization-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-device-flow"
@@ -36228,7 +37714,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8693-token-exchange-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-token-exchange"
@@ -36254,7 +37741,8 @@
         "tst:tests-negative-test-phase6-hardening-runtime-enforcement-py",
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc8705-compliance-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-mtls"
@@ -36274,7 +37762,8 @@
         "tst:tests-conformance-hardening-test-rfc8707-resource-indicators-py",
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase8-hardening-cluster-a-py"
+        "tst:tests-unit-test-phase8-hardening-cluster-a-py",
+        "tst:tests-unit-test-rfc8707-resource-indicators-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-resource-indicators"
@@ -36331,7 +37820,8 @@
         "tst:tests-interop-test-peer-counterpart-catalog-py",
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc9068-jwt-profile-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-jwt-access-token-profile"
@@ -36354,7 +37844,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9101-jwt-secured-authorization-request-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-jar"
@@ -36380,7 +37871,8 @@
         "tst:tests-negative-test-phase6-hardening-runtime-enforcement-py",
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9126-pushed-authorization-requests-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-par"
@@ -36427,7 +37919,8 @@
         "tst:tests-interop-test-peer-matrix-artifacts-py",
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
-        "tst:tests-unit-test-phase9-hardening-cluster-b-py"
+        "tst:tests-unit-test-phase9-hardening-cluster-b-py",
+        "tst:tests-unit-test-rfc9396-authorization-details-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-rar"
@@ -36453,7 +37946,8 @@
         "tst:tests-negative-test-phase6-hardening-runtime-enforcement-py",
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
-        "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
+        "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
+        "tst:tests-unit-test-rfc9449-dpop-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-dpop"
@@ -36665,7 +38159,50 @@
         "tst:tests-unit-test-phase2-runner-adapter-runtime-layer-py",
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-phase5-operator-service-layer-py",
+        "tst:tests-examples-test-readme-usage-py",
+        "tst:tests-integration-test-crud-api-py",
+        "tst:tests-integration-test-long-lived-worker-flow-py",
+        "tst:tests-integration-test-service-key-creation-py",
+        "tst:tests-integration-test-service-key-introspection-flow-py",
+        "tst:tests-interop-test-runner-profile-catalog-completeness-py",
+        "tst:tests-negative-test-phase12-invalid-artifact-inputs-py",
+        "tst:tests-negative-test-phase12-resource-exchange-abuse-py",
+        "tst:tests-unit-test-adapters-py",
+        "tst:tests-unit-test-authorize-id-token-hashes-py",
+        "tst:tests-unit-test-authorize-response-modes-py",
+        "tst:tests-unit-test-backends-py",
+        "tst:tests-unit-test-bulk-schema-fields-py",
+        "tst:tests-unit-test-crypto-py",
+        "tst:tests-unit-test-deps-imports-py",
+        "tst:tests-unit-test-effective-artifacts-py",
+        "tst:tests-unit-test-engine-initialization-py",
+        "tst:tests-unit-test-models-py",
+        "tst:tests-unit-test-oidc-authorize-scope-nonce-py",
+        "tst:tests-unit-test-phase10-tier3-validated-rebuild-py",
+        "tst:tests-unit-test-phase12-final-aggregation-py",
+        "tst:tests-unit-test-phase13-truthfulness-alignment-py",
+        "tst:tests-unit-test-phase14-claim-registry-alignment-py",
+        "tst:tests-unit-test-phase15-retained-target-test-evidence-py",
+        "tst:tests-unit-test-phase1-clean-room-install-substrate-py",
+        "tst:tests-unit-test-phase2-app-factory-materialization-py",
+        "tst:tests-unit-test-phase4-collect-validated-artifact-downloads-py",
+        "tst:tests-unit-test-phase4-runtime-validation-matrix-py",
+        "tst:tests-unit-test-phase4-validated-execution-runtime-matrix-py",
+        "tst:tests-unit-test-phase5-certification-lane-evidence-py",
+        "tst:tests-unit-test-phase8-non-rfc-track-checkpoint-py",
+        "tst:tests-unit-test-phase9-feature-completeness-checkpoint-py",
+        "tst:tests-unit-test-remote-adapter-py",
+        "tst:tests-unit-test-repo-truth-helpers-py",
+        "tst:tests-unit-test-rfc7520-examples-py",
+        "tst:tests-unit-test-rfc7638-jwk-thumbprint-py",
+        "tst:tests-unit-test-rfc8037-eddsa-py",
+        "tst:tests-unit-test-rfc8176-amr-py",
+        "tst:tests-unit-test-rfc8523-jwt-client-auth-py",
+        "tst:tests-unit-test-rfc8725-jwt-best-practices-py",
+        "tst:tests-unit-test-runtime-version-truthfulness-py",
+        "tst:tests-unit-test-security-deps-py",
+        "tst:tests-unit-test-user-register-schema-py"
       ]
     },
     {
@@ -36890,7 +38427,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc6750-bearer-token-py"
       ]
     },
     {
@@ -36922,7 +38460,8 @@
         "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-phase5-operator-service-layer-py",
+        "tst:tests-unit-test-phase6-migration-portability-evidence-py"
       ]
     },
     {
@@ -37192,7 +38731,9 @@
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py",
-        "tst:tests-unit-test-rpc-registry-live-py"
+        "tst:tests-unit-test-rpc-registry-live-py",
+        "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
+        "tst:tests-interop-test-operator-profile-catalog-completeness-py"
       ]
     },
     {
@@ -37303,7 +38844,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7592-client-registration-management-py"
       ]
     },
     {
@@ -37414,7 +38956,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7591-dynamic-client-registration-py"
       ]
     },
     {
@@ -37545,7 +39088,10 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-negative-test-contract-diff-detects-drift-py",
+        "tst:tests-unit-test-openapi-examples-py",
+        "tst:tests-unit-test-openapi-well-known-endpoints-py"
       ]
     },
     {
@@ -37710,7 +39256,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-phase6-operator-control-plane-py"
       ]
     },
     {
@@ -37943,7 +39490,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc8628-device-authorization-py"
       ]
     },
     {
@@ -38060,7 +39608,9 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-openid-configuration-py",
+        "tst:tests-unit-test-rfc8414-authorization-server-metadata-py"
       ]
     },
     {
@@ -38174,7 +39724,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc9449-dpop-py"
       ]
     },
     {
@@ -38314,7 +39865,9 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7662-token-introspection-py",
+        "tst:tests-unit-test-rfc7662-unit-py"
       ]
     },
     {
@@ -38538,7 +40091,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc9101-jwt-secured-authorization-request-py"
       ]
     },
     {
@@ -38876,7 +40430,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7517-jwk-py"
       ]
     },
     {
@@ -38989,7 +40544,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc9068-jwt-profile-py"
       ]
     },
     {
@@ -39212,7 +40768,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7519-jwt-py"
       ]
     },
     {
@@ -39358,7 +40915,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc8705-compliance-py"
       ]
     },
     {
@@ -39585,7 +41143,10 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc6749-auth-flow-endpoints-py",
+        "tst:tests-unit-test-rfc6749-token-endpoint-py",
+        "tst:tests-unit-test-rfc6749-validators-py"
       ]
     },
     {
@@ -39807,7 +41368,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-oidc-id-token-py"
       ]
     },
     {
@@ -40383,7 +41945,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc9126-pushed-authorization-requests-py"
       ]
     },
     {
@@ -40493,7 +42056,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7636-pkce-py"
       ]
     },
     {
@@ -40717,7 +42281,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc9396-authorization-details-py"
       ]
     },
     {
@@ -40752,7 +42317,8 @@
         "tst:tests-unit-test-phase1-published-dependency-model-py",
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-phase5-operator-service-layer-py",
+        "tst:tests-perf-test-bundle-manifest-size-py"
       ]
     },
     {
@@ -40867,7 +42433,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc8707-resource-indicators-py"
       ]
     },
     {
@@ -40978,7 +42545,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc7009-token-revocation-py"
       ]
     },
     {
@@ -41154,7 +42722,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-phase16-fapi-runtime-profile-py"
       ]
     },
     {
@@ -41266,7 +42835,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-well-known-endpoints-behavior-py"
+        "tst:tests-unit-test-well-known-endpoints-behavior-py",
+        "tst:tests-unit-test-rfc8693-token-exchange-py"
       ]
     },
     {
@@ -41470,7 +43040,14 @@
         "tst:tests-negative-test-phase6-hardening-runtime-enforcement-py",
         "tst:tests-security-test-phase12-sender-constraint-replay-py",
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
-        "tst:tests-unit-test-feature-flag-registry-py"
+        "tst:tests-unit-test-feature-flag-registry-py",
+        "tst:tests-interop-test-peer-matrix-external-status-py",
+        "tst:tests-interop-test-peer-profile-catalog-py",
+        "tst:tests-interop-test-phase13-peer-target-coverage-py",
+        "tst:tests-interop-test-tier4-external-handoff-templates-py",
+        "tst:tests-interop-test-tier4-fixture-rejection-py",
+        "tst:tests-unit-test-phase11-tier4-checkpoint-py",
+        "tst:tests-unit-test-phase18-peer-bundle-completeness-py"
       ]
     }
   ],
@@ -41729,7 +43306,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7b2d95570f21fef66166d92456d172d61a9ef5d055a47fca7893eec3c6883fc8",
+      "content_sha256": "2739a8af6bb44597bc0001ea56fb03c19210015761dbb80e782a3c3b030d9057",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41744,7 +43321,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1344839f2e00bb87d41aefe6b201f64bc759f531787b3743dd8285daaa3ad2a0",
+      "content_sha256": "55203014758239f33136bba6d6e26ab600724455e6054b2a744b3ab79a62549d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41759,7 +43336,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "64887f1bca9a9f89234090ad58e5cb7a9ef4c45cd99906c3b23369a90406f756",
+      "content_sha256": "c3701fa8e29b618c46e3d2f43595b6900100a156f47d70439ae7e7bbc43c9ebc",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41774,7 +43351,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "efba267ada2d77a8fb227dbf427b7b0c4ffdc7a187845f5c3626ee40a2aa6d35",
+      "content_sha256": "d2e0d7330d9b779962d94a886e587906fc00e18673fc763c74b8415aaee0b6a7",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41789,7 +43366,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "0eb373b21100f73cf2816b1dacecb6a6f149004cbd564bf7394e20e3bafd182f",
+      "content_sha256": "e2b6050f0b7ede977936d07cb9960fd309a0b8b6cb96939380ce296f52820ba1",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41804,7 +43381,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "b80ddd9c39ae5b90f3ed07ad9e2b1c647cbdea9e6110f7798123766f4f48f467",
+      "content_sha256": "ed25da297ac8c169b1e04452d07a789de2c3c9d868c4bfab858a066329ed0be5",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41819,7 +43396,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "dc8223adad437c31cd10364d248c0f2d1aacc454b78d0576f002948005e38b14",
+      "content_sha256": "f6db80d1ea309fa3ddb40b813eefd8e45a4c6e7990a09f35826cf30baa403fc4",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41834,7 +43411,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "837d4744911c613502a0135e843ac4c5f99c343d86b5da50168413fb467b16f6",
+      "content_sha256": "15260d38bdfefccd162524971df276080e0114e87d14f2e156ddcc81645aaf6c",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41849,7 +43426,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "74807b48c3abeb5c3e129dcfec64b82b7b2ade030e67ef3327ea51a4d3b5f3fb",
+      "content_sha256": "fc5fd7bbc04d9fc0ea9783ad9f070437d6aeb479db3a23391493e8f9c6a93692",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41864,7 +43441,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "b88ffe5f70ee6b3fa797ba64bcbb83286e8d1cce4941260e04a892a49d3a9803",
+      "content_sha256": "740b3a751cf9d447ade2cb892de3a04705a19e8e00e4898bb9afbde52aa979c0",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41879,7 +43456,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "830ef0a7286561b782e97ada728dc4cc795efcc0fc9ebc2b60cbe5151eed8a2c",
+      "content_sha256": "352ebc8ea1603e803cd3daf5ff7f0bff3f5821900b5cd739d7264ddd240ff789",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41894,7 +43471,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7037f89bcdf7f42a78863f3a65ea91c4daa7a57159d75c1762a5888513465d31",
+      "content_sha256": "db09cd3da22898f3642774f4fc3aaab5f62d98123d1aed7ed8317ac4e247b82b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41909,7 +43486,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "ccd1249b38ad020ebd4b7ebf1ce20fdcc1d0d534eb00299546b0542f0ef27231",
+      "content_sha256": "e2b0d1beab032dab30c42e5cac41cde5fbc23c23549e5c0d0251ee3c82163bbd",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41924,7 +43501,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "221bdc9de8124744778a2846f35ee69cab783ea9d7db2c86ec0017f858180af5",
+      "content_sha256": "c415b19017df6b7b58c710d2f07f6cd1a0fe0005221d9b5cacce94e33d81c3fc",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41939,7 +43516,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "c2f5ea47f85de530b37a0836af2d4e6005607369e56925b91e79abd554a01ff5",
+      "content_sha256": "de8e5911630673375e8ede62526399041c999ac4a804ebddc9e57ecaff3ff00f",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41954,7 +43531,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "949f5f3d4d987ff517f2436344fe808cac84f0df91dc142155807300df3d1dce",
+      "content_sha256": "cfe762897907f72974d64f9d2e63b3a12affd1fb2fdc35c18e9e2a1164458862",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41969,7 +43546,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "486a5e60829e5fbf7ace03466686f14756eb6111880f6c265e015ba0592ba6c3",
+      "content_sha256": "4e49e28d667abeb83ac3eeab002004cc4af45194bf429ffd84e12764bc960d47",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41984,7 +43561,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "5ad1a56824d57f9d94f78f48de680e723ec5ad7c1bc2b89949f70d5575052660",
+      "content_sha256": "794f5bf0fb087f8daacc2ae9feffbc85093ff87505c201642a8c5d49c55098cb",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -41999,7 +43576,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1301161a062bcef907fadc8ae1ac6e4b42da500f88e902d89705a016b859f812",
+      "content_sha256": "271b4a942483536bca47e8f581b7b39461357b9a59769564b5ebe83b6a0f3c5e",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42014,7 +43591,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "97354bfd1f87d01b270414b79a6ac3f471f89d9cc75859bd9496822f6e59e69e",
+      "content_sha256": "6fa63550dcecf711dd73030a1c6cb3c94df3d80ac8ed3fbd50f022b79f1edc64",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42029,7 +43606,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6ffe7b69421181dffd61245b8b3adac115e27c7e287e2ff7a97dba51cc56afbb",
+      "content_sha256": "35bd4db09e9d3d0f33043af19985fbe2e3f43f57eaf0534ddd1839dec543db1d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42044,7 +43621,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "084f232918efd96cf420844561d3818fd6508ea7d5f9a78417028b1b3b3a1348",
+      "content_sha256": "c06d5488e8987741b3496ca60f5dec4a8623cabca6b18ee912a2fad276af0a16",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42059,7 +43636,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1ced42c5be66caaa773fe2b7c72cb650136763324f7b310e5464a26255ce2cdd",
+      "content_sha256": "0b18048ab529f670a97b55f995fac7f88a449b865fd026ae18e8ea91efef026d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42074,7 +43651,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4b2efce9464abcec82f3e464f4de3ae32f104e6a9c9612fe06d9fb592dc92d4d",
+      "content_sha256": "8eddf6c75d94ec0dcae250a8386e855728e880254eddded164e1a43b767458d9",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42089,7 +43666,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "3cb931cb6c4fc4bc42939a57b344cf931171aadfee8dbd6a13b8767da81ffc08",
+      "content_sha256": "c08db614201a7a1656be98d16033362f7d0d8fc92e6eaed9f98ccba417c230e8",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42104,7 +43681,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7d8ea3fc0809900098add54cad72feb4ac07ae7789c0948d68a2c067f95bc6aa",
+      "content_sha256": "d378e16baf946367e463b8ce2be71d1e49e82f86440aad910fa4b5b493f830a7",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42119,7 +43696,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "531ef19ebc6c6df3f3f6348d6040f315044eced89c9cef3ffa98d7897d4e07c7",
+      "content_sha256": "b304789d365bf99561a8eb95578f339e21e3ec22403faff1e1b6ad82aea03f6f",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42134,7 +43711,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bcfdcbdf1b660783af0a25e8d934f867b198746d44058d931b338b5c971cf4ce",
+      "content_sha256": "c80be89db2aaf832a47c21c5b44b20e1a2bd68e0ebc1e59c61ca0e814732bf1d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42149,7 +43726,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6de385256bfa962120f65c403b561904814cf9bb53aaae965649a19e8f4e0f85",
+      "content_sha256": "b50ab3126e2afb60432d23830c8f1038efbec5b4580e04687ceacaa8bdd701e8",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": []
@@ -42335,7 +43912,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "52cf55bbb995c4927c8b013f8f7cb57ebfdb1b148c778b6b97fbd76023969470",
+      "content_sha256": "10ad0c84d706aceff65c29c42d155c65d5982a540790dbc7fe127a1f7172325e",
       "kind": "repo-local"
     },
     {
@@ -42348,7 +43925,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6df546aa1429f63f68c6a50db75bcf9807a269010b8d63bc1927b12a838f67cb",
+      "content_sha256": "bb48f59c5c239c7887b1aeb99e0ee6048e087cc47ae9133c0b7275fc3873e8f6",
       "kind": "repo-local"
     },
     {
@@ -42361,7 +43938,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4e2b86d4e9d1fdd4b9e360d4f5db733c28018232d0a4831be8f649e01e9137a4",
+      "content_sha256": "31eafbf41e0bfddea402303169f2789036d84832ae8cec0ee36f590b32d8d651",
       "kind": "repo-local"
     },
     {
@@ -42374,7 +43951,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "90c3e98faecb4313ee6dad826d9af32527d143cfc89a162f769c66f85c82fb2d",
+      "content_sha256": "bf97651a7e384e58eee0bbaa10f44072aa6bed635f455fc65882c806b64947e1",
       "kind": "repo-local"
     },
     {
@@ -42387,7 +43964,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "3d4d335bb4dcc202e7e2c394408dab1c14e79230283c386f898e9e1eb64ec09b",
+      "content_sha256": "39b057c509260fc1873d5508c70c33ad7e0a12f8865199e29af62801c16cabdc",
       "kind": "repo-local"
     },
     {
@@ -42400,7 +43977,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "9f9fa273eab28449a40f6cef1dd7ce309754782a42a45374e969ad5f9c5e0c4a",
+      "content_sha256": "aa1e82c4befe350ea943a44bd61ffcb3dbb8aff45f97c5f0a53fdf6792066f27",
       "kind": "repo-local"
     },
     {
@@ -42413,7 +43990,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "ab8513ca24766db275e868ca38218858d65170664d88d25d881d21a16fe191ff",
+      "content_sha256": "6e0ec72baa151fb2dfd44f4c8f01a292cc20b92898b1443078363631d66c571b",
       "kind": "repo-local"
     },
     {
@@ -42426,7 +44003,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "401a16ce5d734b9a7f0c9537653ef4b738ebe0ed24fdac8f86a4e965be54d15c",
+      "content_sha256": "9c85f878d85e35b44308c4e17f006d6d3c9a381428877b8697462e1a373c98d4",
       "kind": "repo-local"
     },
     {
@@ -42439,7 +44016,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "f6797230923d3520e097d2f7340706bf835d6764185fa9ee9dd4a0a130dbb0c8",
+      "content_sha256": "2ae436283fa7498c8279462bc9c6a7cffda10c36184b71b413d6d55b06516b29",
       "kind": "repo-local"
     },
     {
@@ -42452,7 +44029,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "513ca8455bbedb55da230ad71df903780c2ac7507f38665309f100c8330c879d",
+      "content_sha256": "14c80740e6446375b506480b5138c35d135792d2d4b015d34396f79e147a2334",
       "kind": "repo-local"
     },
     {
@@ -42465,7 +44042,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "db344d6be95e4f4210a66108ebc40476741f62546f15f327068d7431234fc26b",
+      "content_sha256": "b656f3c7163c18bcb3e69adde96df47cce9f47cf69b5df04da4b6195e77991c9",
       "kind": "repo-local"
     },
     {
@@ -42478,7 +44055,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "eaa67dd40e813e7647958f08c94c8f72f94370585d3d22b500a5beae5439d8f0",
+      "content_sha256": "0807595919c43c9d6e3463aeade53602d67a0ba97826d07a7e18d3939ba3c3a1",
       "kind": "repo-local"
     },
     {
@@ -42491,7 +44068,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "435bf6dbc4ce58199c9d776ec4943e76538ab46573b55435e6e291a6f10052ba",
+      "content_sha256": "69707c2779538761960a37c0c99cdfdc0908bd52c843c7bfb9c1f4a77d89a6d9",
       "kind": "repo-local"
     },
     {
@@ -42504,7 +44081,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e8f7c7bdc58035643afd7bff0533de7de6b187d115c505f3908c31b696db41ed",
+      "content_sha256": "ba336f3de9701d4d88b8e6499b491cda46a4293e0ff412ef4b1269a6b781b794",
       "kind": "repo-local"
     },
     {
@@ -42517,7 +44094,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "299afefc539dfbe7da0e7b1a0ead6f2374faa5804a0c466d581ae1ff563d065d",
+      "content_sha256": "8b702ebb1855eb340964a93c672d7d771fc0052edf3076d0f4249129ac1df3c8",
       "kind": "repo-local"
     },
     {
@@ -42530,7 +44107,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "95121a5e3923991c8b81b0e685eebc22c2b8db37cf57ce83b5218e55ca16c25b",
+      "content_sha256": "bf8a3edcb5acad34a57a8b8d3babd2d111910ebdcd1115142808e470d7b81a44",
       "kind": "repo-local"
     },
     {
@@ -42543,7 +44120,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "c14bfc92f2e44a4639b5afbae406e35ce5048b07fd798dea6a64a442bcb7cd0e",
+      "content_sha256": "d6f0fb36b98d99b0d8d3001a2739fb3cba66eb9be4913b8cbc971e48f87bee51",
       "kind": "repo-local"
     },
     {
@@ -42556,7 +44133,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8d24a6be3e60124dd67da2bb4a98d373816d1106ebe5cba9499b37d188f57f17",
+      "content_sha256": "ec576dff06e345107bf6b1c10eece9bb5e85a5d0b2f1f6ad21a13861334caab1",
       "kind": "repo-local"
     },
     {
@@ -42569,7 +44146,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "198ef98f1936469d1133ddc28c264d7ae0af59e37a9bb4b9fd8f0da9fb0ebc4e",
+      "content_sha256": "de231595a7b381c5712ca8364b4cb2391ee3be4f213b14390cd4fa61025e1774",
       "kind": "repo-local"
     },
     {
@@ -42582,7 +44159,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "29644df80ead593f9a6253eb4cfe1170cce83251782f0e01d70b2ba7f1a01d97",
+      "content_sha256": "013793f15a1aaefac084310ad4c6636e3e6eee2a68b64cbc4ee8b52b0febf7e8",
       "kind": "repo-local"
     },
     {
@@ -42595,7 +44172,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d7fac0a6d149f8a6737022acc8ac9ab0eb4ac778f41e9cc964cfcf1abe7185d6",
+      "content_sha256": "d4cdcddfff929b838c0602e820786e8f109246b9214789a2b36762ebd2541875",
       "kind": "repo-local"
     },
     {
@@ -42608,7 +44185,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "f8591b24f5d62639c2e60864f081b682e130176e34d797a9cea779e87c5b0b0d",
+      "content_sha256": "1cf238311c88431a3449497c8400f10194fc714182cab1c8b74b43d1c0194e87",
       "kind": "repo-local"
     },
     {
@@ -42621,7 +44198,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "aa8fea5009f8bea0a99ae7becdcc20c8662e962146b366f410bde0ffbb68957f",
+      "content_sha256": "ca99f6f67183179eb13d40743e2c1d4d93a0c3b75212268e904d49ae4d1e83d3",
       "kind": "repo-local"
     },
     {
@@ -42634,7 +44211,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "ab24eb046d37da175c2b71ed654edf3bb52891f8a8c06942e3556b0469c9f827",
+      "content_sha256": "6bb5a004d951553b294ec3008349b4f26f9a8a12c8482f050fb6e82e47722c95",
       "kind": "repo-local"
     },
     {
@@ -42647,7 +44224,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8038b75f0b21a32702f4b7c18c659fa8107b833ef6a33176877134456f7cb25d",
+      "content_sha256": "2bab012c04f9eafe2cb26fca9c1ba4e7434e16706b368633ad4907d2c6553699",
       "kind": "repo-local"
     },
     {
@@ -42660,7 +44237,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7f8375b15833290d5fbd0dad63f5fc5e6602d502da1260be2287197768643448",
+      "content_sha256": "5a98da2bde4ece1d273af17cc660445b8c8291350f93280c5a5657d54bfb988e",
       "kind": "repo-local"
     },
     {
@@ -42673,7 +44250,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "457a16cb04401d536cc01393ba6c20868281f942b4784db64c268ae88de163ab",
+      "content_sha256": "663ab007ac5f7a8755c18435f3876fc826efb4327eb9b30685389137052c4422",
       "kind": "repo-local"
     },
     {
@@ -42686,7 +44263,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "16cfa9b16cc9be6b309a55bd3b2d1812e9daf16a3541b2f4044cbcaf676e5973",
+      "content_sha256": "ac424e1f01aebded296d70107bde174b3558158258dd7bdb8cfbf09959261620",
       "kind": "repo-local"
     },
     {
@@ -42699,7 +44276,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "92367da29f28c6e29493db5b276aea62f200a61083596275a89b61bd0e7340a3",
+      "content_sha256": "395322bfc1d8561af532f367ffdf401ee3e029bb7e56eeb0f5bf6a512a536837",
       "kind": "repo-local"
     },
     {
@@ -42712,7 +44289,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "34d77d19b648631aa10169022bbf2f398bb3603295bbc5893228f0bdbedbd765",
+      "content_sha256": "d239c330fb5f3deb5a5e0c13c75c6d900e24bf50e73ae221ac11fe58eed8b675",
       "kind": "repo-local"
     },
     {
@@ -42725,7 +44302,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e42e795c749e5086fb14dcad12416432c3457681770a6b830f1870a6d2873e05",
+      "content_sha256": "fa9c577e57b21b3a20410dba798e9449c858d4f6e79c6481b412378a4aed7afc",
       "kind": "repo-local"
     },
     {
@@ -42738,7 +44315,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1f73e8c89c502109c0a60450f12fd307cc09c0bad9e8667ead09f665eb52a640",
+      "content_sha256": "3439457c229ba477a1650163caa57163055bc5013bf4524989fd0a822b60d3b6",
       "kind": "repo-local"
     },
     {
@@ -42751,7 +44328,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4ea12eb8d8408100e3990a910cb11be59d1bf73dd785e2fb2c40ee04b0f3e3d3",
+      "content_sha256": "b1ef60612fcb71faeada4e00799472bdf30fa0d5e712a9ddc3a472e4bbcaa88c",
       "kind": "repo-local"
     },
     {
@@ -42764,7 +44341,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d632347deb6ae8782e2e5fdd6a0c9daa8829df2ad13339660335d0adaf36ea58",
+      "content_sha256": "df410e23b1376b6b04083198406005f35a0e2a38fabe55eae82a5a3d86e96d4d",
       "kind": "repo-local"
     },
     {
@@ -42777,7 +44354,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a9543f88a547cd1b50ab23dd6a7afc53a8d657ee7bf916938b1a4c79152356b5",
+      "content_sha256": "ea59c4fe03ec06961f2ff5064f264f05d936d92095538446a99ab45446d09bc6",
       "kind": "repo-local"
     },
     {
@@ -42790,7 +44367,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "548c7793f0774aed05aa625fd3623eb8cb58ab6a118cc121c2ac468750943aa1",
+      "content_sha256": "a3be31942749d4392e8f8e0178f23fdb1fd9dbcb7cc6d473559f68a9cf4bcce6",
       "kind": "repo-local"
     },
     {
@@ -42803,7 +44380,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d4b957d836aed5e289bd85478d6a4045148086f78d6748b304ecf9f51ea1ade3",
+      "content_sha256": "bf6855456e388caa61c81c405b7e00c3df129832cee16cfeace6efc16022dab5",
       "kind": "repo-local"
     },
     {
@@ -42816,7 +44393,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "3884491f7d97fc40e3d0dfbbc7e136f1c7767a1417e9774ccfea75d31b2d1821",
+      "content_sha256": "eda287e61371bf70efcf7fb9ee4d805bc03d6d621129af38552f2485fcea77bf",
       "kind": "repo-local"
     },
     {
@@ -42829,7 +44406,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "29425be7d65c5a082416e79c97e830504d4cbebf35867418a82d9b0480b91ed0",
+      "content_sha256": "925e6980c7a8e90e7070c3436a33be9c016d24a1c68cb202175b6aef015b8fe9",
       "kind": "repo-local"
     },
     {
@@ -42842,7 +44419,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "dc77821d6362af346ed422db441f8603d744daa80ca2a14983b2fe1ab00b596c",
+      "content_sha256": "93fd77f0951f64a7741163af1501f89caa39b44028eb269341776e0eba493bba",
       "kind": "repo-local"
     },
     {
@@ -42855,7 +44432,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "ca84db7152c50a7c70bb31bdbe199c6c3f61cd69a68f527a62ded4c286683546",
+      "content_sha256": "c4a52aa9ee7f6807674d2c00e05fecf16a0aabd7a88dc161715f5979b7f88c0d",
       "kind": "repo-local"
     },
     {
@@ -42868,7 +44445,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "ea3031be608076167207a6cb7a649bdfe5f6dbf5e8656219992a5de690154c6e",
+      "content_sha256": "372c7f02d528850c6d4a94dacd7d1f0364d4060b04a93ce1dfb72ce4dc54d892",
       "kind": "repo-local"
     },
     {
@@ -42881,7 +44458,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "c280c690afbb2328f361316f4ca9c466939bdaea5f35b3fa351fc9be19cdbe6e",
+      "content_sha256": "bdef47b9b01324cc3b8cc5cfa4bbedf270f5eaf7c703be6c9979283121cfd3fc",
       "kind": "repo-local"
     },
     {
@@ -42894,7 +44471,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7e8d12e680cb60f4d30fee3e452c380fcc8154bbd803248df342323a7c360c1c",
+      "content_sha256": "2a9c486ee490d6e89e5adb8c57d88ea01d17bd8c0d96efc184573c730f43f8f0",
       "kind": "repo-local"
     },
     {
@@ -42907,7 +44484,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "12841b7f194cbfd049b823714624611dba7880ef2c5a33c05b982f0f2f5bbbf4",
+      "content_sha256": "90af6d4552d6a05d64c521288a2e11a0b170bcdac1f338a46f28026edffead58",
       "kind": "repo-local"
     },
     {
@@ -42920,7 +44497,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "dbe52b66a448906a887a5dc497f2699e6eef547fc6572eb3f910fec7f1354fe7",
+      "content_sha256": "c21b5f473325d72ece14fb000e34819b57fc91929ccef877b076e650cbc25361",
       "kind": "repo-local"
     },
     {
@@ -42933,7 +44510,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "2e29a06034194d8345b2f886fcd1c14982f1edebb911bf7168847ee0dfea5185",
+      "content_sha256": "6df9b445507cda4896b0f83c7758afc7b35a1c5dc8423c86a1025021bfc571a9",
       "kind": "repo-local"
     },
     {
@@ -42946,7 +44523,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6ff8a96c10a3c58cbfb5e5e1f7d644f5ee87560570e4037593b2d74ef73d4755",
+      "content_sha256": "8f651d0f81491d2d79ae94508da418d6544265a0744bb05c4221019eaf522572",
       "kind": "repo-local"
     },
     {
@@ -42959,7 +44536,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e7a7648c59314ffb2c778d5593b8c449c8fb4de3cbd62dd7d21da612682992d7",
+      "content_sha256": "3b814b478ea6e193957c3176f1fb3aef1ebb95ce75f9d6ad486a0583f888fc80",
       "kind": "repo-local"
     },
     {
@@ -42972,7 +44549,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "77293eb02bc621f88f5bb89fe660b9d1b864033e94dc06bd653d57fdd35a1f57",
+      "content_sha256": "d4b1a078e1643d725d5335ffdf4252bcdc6290295a82e8820804dce77a58c73d",
       "kind": "repo-local"
     }
   ]

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "registry_path": ".ssot/registry.json",
+  "failures": [],
+  "warnings": [],
+  "summary": {
+    "counts": {
+      "features": 393,
+      "tests": 196,
+      "claims": 399,
+      "evidence": 48,
+      "issues": 0,
+      "risks": 0,
+      "boundaries": 1,
+      "releases": 1,
+      "adrs": 41,
+      "specs": 63
+    }
+  }
+}
