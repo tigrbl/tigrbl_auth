@@ -20,7 +20,7 @@ keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk
 dependencies = [
     "tigrbl==0.3.15",
     "swarmauri_core==0.10.0",
-    "swarmauri_base==0.9.2",
+    "swarmauri_base==0.10.0",
     "swarmauri_standard==0.9.2",
     "swarmauri_tokens_jwt==0.3.0.dev31",
     "swarmauri_signing_jws==0.3.0.dev31",
