@@ -1,0 +1,23 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1031"
+number: 1031
+slug: "ssot-is-the-authoritative-active-document"
+title: "SSOT is the authoritative active document"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "SSOT is the authoritative active document"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  - Status: accepted
+  - Date: 2026-04-20
+  - Decision: the authoritative active document for repository truth, document authority, and release-governance policy lives in SSOT-authored artifacts under `.ssot/`.
+  - Consequences:
+    - `.ssot/registry.json` plus repo-local ADR/spec files under `.ssot/adr/` and `.ssot/specs/` remain canonical for governance and release truth;
+    - generated compliance docs, current-state reports, and release-status docs are projections that must agree with SSOT and must not replace it as the canonical source;
+    - compatibility manifests outside `.ssot/` may mirror document-authority policy, but they cannot independently redefine what is authoritative.

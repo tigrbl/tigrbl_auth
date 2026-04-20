@@ -36,6 +36,21 @@ body: |-
   - explicit promotion approval captured in the compliance plane
   
   Peer claims are additive. They do not relax Tier 3 evidence requirements.
+
+  Promotion-qualifying preserved peer evidence MUST satisfy all of the following:
+  - the peer operator is operationally independent from the repository authoring environment;
+  - the evidence source is independent from repository-fixture or checkpoint-staged material;
+  - the attestation class is explicitly allowed for Tier 4 promotion;
+  - the preserved bundle status is promotion-qualifying;
+  - the bundle manifest passes validation without unresolved evidence errors.
+
+  The following definitions apply:
+  - an **independent peer operator** is a peer executor, reviewer, or interoperability environment that is not a repository fixture, not a checkpoint-staged internal surrogate, and not controlled as part of the same release-materialization workflow;
+  - an **independent evidence source** is evidence produced from that independent operator context, with preserved reproduction material and without reliance on repository-owned fixture assertions as the certifying basis;
+  - an **allowed attestation class** is a class explicitly designated for Tier 4 promotion by the compliance plane; repository-fixture and other explicitly non-independent classes are not allowed for promotion;
+  - a **non-promotion-qualifying preserved bundle** is a bundle that may be retained for traceability, rehearsal, or gap analysis but SHALL NOT support public independent wording, Tier 4 promotion, or final certified-release claims.
+
+  `repository-fixture-nonindependent` evidence and similarly non-independent preserved bundles MAY be retained for historical provenance and operator diagnostics, but they SHALL remain below Tier 4 and SHALL NOT be treated as independent peer support.
   
   ## Context
   

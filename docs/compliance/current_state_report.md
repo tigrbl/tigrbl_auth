@@ -17,6 +17,9 @@
 - boundary_freeze_deferred_target_count: `13`
 - boundary_freeze_identity_hash_matches: `True`
 - document_authority_manifest: `compliance\targets\document-authority.yaml`
+- document_authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
+- document_authority_projection_manifest: `compliance\targets\document-authority.yaml`
+- canonical_ssot_root_count: `3`
 - certification_bundle_current_state_doc_only: `True`
 - certification_bundle_generated_current_docs_only: `True`
 - authoritative_current_doc_count: `21`

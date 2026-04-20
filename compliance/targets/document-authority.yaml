@@ -1,27 +1,32 @@
 schema_version: 1
-generated_at: '2026-04-07'
+generated_at: '2026-04-20'
+projection_of: .ssot/specs/SPEC-1052-ssot-document-authority.yaml
+canonical_ssot_roots:
+- .ssot/registry.json
+- .ssot/adr
+- .ssot/specs
 authoritative_current_docs:
-- README.md
-- CURRENT_STATE.md
 - CERTIFICATION_STATUS.md
-- docs/compliance/README.md
+- CURRENT_STATE.md
+- README.md
 - docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md
-- docs/compliance/truth_chain.md
-- docs/compliance/current_state_report.md
-- docs/compliance/install_substrate_report.md
-- docs/compliance/certification_state_report.md
-- docs/compliance/runtime_profile_report.md
-- docs/compliance/release_gate_report.md
-- docs/compliance/final_release_gate_report.md
-- docs/compliance/validated_execution_report.md
-- docs/compliance/release_signing_report.md
 - docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md
+- docs/compliance/README.md
 - docs/compliance/RELEASE_DECISION_RECORD.md
-- docs/reference/README.md
+- docs/compliance/certification_state_report.md
+- docs/compliance/current_state_report.md
+- docs/compliance/final_release_gate_report.md
+- docs/compliance/install_substrate_report.md
+- docs/compliance/release_gate_report.md
+- docs/compliance/release_signing_report.md
+- docs/compliance/runtime_profile_report.md
+- docs/compliance/truth_chain.md
+- docs/compliance/validated_execution_report.md
 - docs/reference/CLI_SURFACE.md
-- docs/reference/PUBLIC_ROUTE_SURFACE.md
-- docs/reference/RPC_OPERATOR_SURFACE.md
 - docs/reference/DISCOVERY_PROFILE_SNAPSHOTS.md
+- docs/reference/PUBLIC_ROUTE_SURFACE.md
+- docs/reference/README.md
+- docs/reference/RPC_OPERATOR_SURFACE.md
 archived_historical_roots:
 - docs/archive/historical
 explicitly_deauthorized_current_adjacent_docs:

@@ -64,6 +64,11 @@ from tigrbl_auth.cli.project_tree import run_migration_plan_check, run_project_t
 from tigrbl_auth.cli.runtime import run_runtime_foundation_check, write_runtime_profile_report
 from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY
+from tigrbl_auth.document_authority import (
+    DEFAULT_GENERATED_CURRENT_STATE_DOCS,
+    load_document_authority,
+    render_document_authority_projection,
+)
 from tigrbl_auth.repo_truth import (
     evaluate_tier4_bundle,
     has_install_matrix_workflow,
@@ -217,17 +222,20 @@ def _write_report(report_dir: Path, stem: str, payload: dict[str, Any], title: s
 
 
 def _docs_for_certification_bundle(repo_root: Path) -> list[str]:
-    authority = _load_document_authority_manifest(repo_root)
-    docs = authority.get("current_release_bundle_docs", list(GENERATED_CURRENT_STATE_DOCS))
+    authority = load_document_authority(repo_root)
+    docs = authority.get("current_release_bundle_docs", list(DEFAULT_GENERATED_CURRENT_STATE_DOCS))
     return [rel for rel in docs if (repo_root / rel).exists()]
 
 
 def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
-    authority = _load_document_authority_manifest(repo_root)
+    authority = load_document_authority(repo_root)
+    _write_yaml(repo_root / authority["projection_path"], render_document_authority_projection(authority))
     payload = {
         "schema_version": 1,
-        "authority_manifest": authority.get("path"),
+        "authority_spec": authority.get("path"),
+        "projection_manifest": authority.get("projection_path"),
+        "canonical_ssot_roots": list(authority.get("canonical_ssot_roots", ())),
         "authoritative_current_docs": sorted(authority.get("authoritative_current_docs", set())),
         "derived_current_docs": sorted(DERIVED_CURRENT_DOCS),
         "archive_roots": list(authority.get("archived_historical_roots", ())),
@@ -240,13 +248,20 @@ def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]
     lines = [
         "# Authoritative current docs",
         "",
-        "These are the current certification and release truth artifacts for this repository state.",
+        "These are the current certification and release truth projections derived from the SSOT authority spec.",
         "",
-        f"- authority_manifest: `{payload['authority_manifest']}`",
+        f"- authority_spec: `{payload['authority_spec']}`",
+        f"- projection_manifest: `{payload['projection_manifest']}`",
+        "",
+        "## Canonical SSOT roots",
+        "",
+    ]
+    lines.extend([f"- `{item}`" for item in payload["canonical_ssot_roots"]])
+    lines.extend([
         "",
         "## Authoritative current docs",
         "",
-    ]
+    ])
     lines.extend([f"- `{item}`" for item in payload["authoritative_current_docs"]])
     lines.extend(["", "## Derived current docs", ""])
     lines.extend([f"- `{item}`" for item in payload["derived_current_docs"]])
@@ -437,46 +452,10 @@ DERIVED_CURRENT_DOCS = {
     "docs/compliance/final_target_decision_matrix.json",
     "docs/compliance/peer_matrix_report.json",
 }
-GENERATED_CURRENT_STATE_DOCS = (
-    "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json",
-    "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md",
-    "docs/compliance/current_state_report.json",
-    "docs/compliance/current_state_report.md",
-    "docs/compliance/certification_state_report.json",
-    "docs/compliance/certification_state_report.md",
-    "docs/compliance/runtime_profile_report.json",
-    "docs/compliance/runtime_profile_report.md",
-    "docs/compliance/release_gate_report.json",
-    "docs/compliance/release_gate_report.md",
-    "docs/compliance/final_release_gate_report.json",
-    "docs/compliance/final_release_gate_report.md",
-    "docs/compliance/validated_execution_report.json",
-    "docs/compliance/validated_execution_report.md",
-    "docs/compliance/release_signing_report.json",
-    "docs/compliance/release_signing_report.md",
-    "docs/compliance/PEER_MATRIX_REPORT.md",
-    "docs/compliance/peer_matrix_report.json",
-    "docs/compliance/TIER4_PROMOTION_MATRIX.md",
-    "docs/compliance/final_target_decision_matrix.json",
-    "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
-    "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
-)
 DOC_REF_SCAN_EXCLUDE = {
     "docs/compliance/artifact_truthfulness_report.md",
     "docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md",
 }
-
-
-def _load_document_authority_manifest(repo_root: Path) -> dict[str, Any]:
-    path = repo_root / "compliance" / "targets" / "document-authority.yaml"
-    payload = _load_yaml(path) if path.exists() else {}
-    return {
-        "path": str(path.relative_to(repo_root)) if path.exists() else None,
-        "authoritative_current_docs": set(str(item) for item in payload.get("authoritative_current_docs", []) or AUTHORITATIVE_DOCS),
-        "archived_historical_roots": tuple(str(item).rstrip("/") for item in payload.get("archived_historical_roots", []) or ("docs/archive/historical",)),
-        "current_release_bundle_docs": [str(item) for item in payload.get("current_release_bundle_docs", []) or list(GENERATED_CURRENT_STATE_DOCS)],
-        "supporting_current_non_doc_artifacts": [str(item) for item in payload.get("supporting_current_non_doc_artifacts", []) or []],
-    }
 ROUTE_CONSTANTS = {"JWKS_PATH": "/.well-known/jwks.json"}
 WELL_KNOWN_ROUTE_CONSTANTS = {"oauth_protected_resource": "/.well-known/oauth-protected-resource"}
 
@@ -562,7 +541,7 @@ def _extract_route_definitions(repo_root: Path) -> dict[str, dict[str, Any]]:
 
 def _scan_stale_doc_refs(repo_root: Path) -> dict[str, dict[str, list[str]]]:
     buckets: dict[str, dict[str, list[str]]] = {"authoritative": {}, "historical": {}}
-    authority = _load_document_authority_manifest(repo_root)
+    authority = load_document_authority(repo_root)
     doc_paths = list((repo_root / "docs").rglob("*.md")) + [repo_root / "README.md", repo_root / "CURRENT_STATE.md", repo_root / "CERTIFICATION_STATUS.md"]
     for doc in sorted(doc_paths):
         rel_doc = str(doc.relative_to(repo_root)).replace("\\", "/")
@@ -1098,7 +1077,10 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "boundary_freeze_non_rfc_target_count": int(scope.get("boundary_freeze", {}).get("retained_non_rfc_target_count", 0) or 0),
         "boundary_freeze_deferred_target_count": int(scope.get("boundary_freeze", {}).get("deferred_target_count", 0) or 0),
         "boundary_freeze_identity_hash_matches": bool(scope_freeze_summary.get("scope_freeze_retained_target_identity_hash_matches", False)),
-        "document_authority_manifest": authoritative_docs_manifest.get("authority_manifest"),
+        "document_authority_manifest": authoritative_docs_manifest.get("projection_manifest"),
+        "document_authority_spec": authoritative_docs_manifest.get("authority_spec"),
+        "document_authority_projection_manifest": authoritative_docs_manifest.get("projection_manifest"),
+        "canonical_ssot_root_count": len(authoritative_docs_manifest.get("canonical_ssot_roots", [])),
         "certification_bundle_current_state_doc_only": True,
         "certification_bundle_generated_current_docs_only": True,
         "authoritative_current_doc_count": len(authoritative_docs_manifest.get("authoritative_current_docs", [])),
@@ -2623,7 +2605,7 @@ def build_release_bundle(
     for rel_path in _dependency_artifact_paths(repo_root):
         copied.append(_copy_rel_artifact(repo_root, rel_path, bundle_root))
     write_authoritative_current_docs_manifest(repo_root)
-    authority = _load_document_authority_manifest(repo_root)
+    authority = load_document_authority(repo_root)
     generated_doc_paths = list(dict.fromkeys(_docs_for_certification_bundle(repo_root)))
     supporting_non_doc_paths = list(dict.fromkeys(authority.get("supporting_current_non_doc_artifacts", [])))
     for rel_path in generated_doc_paths + supporting_non_doc_paths:
@@ -2657,6 +2639,8 @@ def build_release_bundle(
         },
         "documentation_scope": {
             "generated_current_state_docs_only": True,
+            "authoritative_current_docs_spec": authority.get("path"),
+            "document_authority_projection_manifest": authority.get("projection_path"),
             "authoritative_current_docs_manifest": "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json",
             "copied_generated_doc_paths": generated_doc_paths,
             "copied_supporting_non_doc_paths": supporting_non_doc_paths,

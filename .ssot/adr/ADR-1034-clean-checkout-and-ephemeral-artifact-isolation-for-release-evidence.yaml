@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1034"
+number: 1034
+slug: "clean-checkout-and-ephemeral-artifact-isolation-for-release-evidence"
+title: "Clean checkout and ephemeral artifact isolation for release evidence"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Final release evidence must be produced from a clean checkout, and ephemeral artifacts must not contaminate governance inputs."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "adr:1005"
+  - "adr:1024"
+body: |-
+  - Status: accepted
+  - Date: 2026-04-20
+  - Decision: release-signing and final certification evidence SHALL be produced only from a clean checkout, and temporary bundle/staging artifacts SHALL remain isolated from governance inputs and tracked release state.
+
+  The clean-checkout rule means:
+  - tracked governance inputs used for release evidence must not be dirty at signing time;
+  - current-state, certification-state, truth, and bundle-selection artifacts used for final certification must represent a reproducible repository snapshot;
+  - a dirty checkout blocks final certified release even if checkpoint or candidate evidence can still be generated for operator review.
+
+  Ephemeral artifact isolation means:
+  - temporary bundle, sandbox, staging, and cleanup-sensitive paths SHALL be treated as disposable runtime artifacts;
+  - those paths SHALL NOT be used as authoritative governance inputs;
+  - failures while cleaning or rotating ephemeral paths are tooling/runtime failures that must be reported distinctly from substantive certification-policy failures.
+
+  On platforms such as Windows, directory-removal or file-lock errors in ephemeral output paths SHALL be surfaced as operational release-tooling failures. They do not redefine certification policy, but they do block successful release execution until resolved.

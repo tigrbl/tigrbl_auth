@@ -2,7 +2,7 @@
 
 ## Summary
 
-This repository is governed by the generated truth chain in `docs/compliance/truth_chain.json`.
+This repository is governed by the SSOT authority policy in `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`, projected through `docs/compliance/truth_chain.json`.
 
 The current package state is a blocked certification checkpoint. It is not certifiably fully featured and it is not certifiably fully RFC/spec compliant.
 

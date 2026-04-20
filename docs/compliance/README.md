@@ -4,11 +4,13 @@ This directory contains generated current-state and release-decision artifacts.
 
 ## Current authoritative docs
 
-Use `docs/compliance/truth_chain.json` as the canonical generated checkpoint truth.
+Use `.ssot/specs/SPEC-1052-ssot-document-authority.yaml` as the authoritative active document for current document authority.
 
-Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` to identify the current authoritative document set.
+Use `docs/compliance/truth_chain.json` as the canonical generated checkpoint projection derived from that SSOT policy.
 
-The repository-root `CURRENT_STATE.md` and `CERTIFICATION_STATUS.md`, plus the generated report set listed in the authority manifest, are derived artifacts and must agree with `truth_chain.json`.
+Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` to inspect the current human-readable active doc set projected from SSOT.
+
+The repository-root `CURRENT_STATE.md` and `CERTIFICATION_STATUS.md`, plus the generated report set listed in the compatibility projection manifest, are derived artifacts and must agree with `truth_chain.json` and the SSOT authority spec.
 
 ## Historical / non-authoritative docs
 

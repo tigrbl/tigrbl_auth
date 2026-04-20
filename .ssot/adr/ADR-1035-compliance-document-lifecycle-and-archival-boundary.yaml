@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1035"
+number: 1035
+slug: "compliance-document-lifecycle-and-archival-boundary"
+title: "Compliance document lifecycle and archival boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Current compliance surfaces stay in `docs/compliance`; superseded and checkpoint-only narratives move to archive boundaries."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "adr:1032"
+body: |-
+  - Status: accepted
+  - Date: 2026-04-20
+  - Decision: `docs/compliance/` is reserved for current generated compliance surfaces and explicitly current release-decision records; superseded, checkpoint-only, and explicitly deauthorized narratives belong in archive locations.
+
+  The lifecycle policy is:
+  - current generated reports, truth projections, and current release-decision records may remain in `docs/compliance/`;
+  - a document that is superseded, explicitly deauthorized, or retained only for checkpoint/history value SHALL move to the configured archive boundary when compatibility no longer requires current adjacency;
+  - if a historical document must temporarily remain adjacent for compatibility, it MUST be marked non-authoritative and MUST be excluded from authoritative-current-doc manifests and certification-bundle documentation scope.
+
+  The archival trigger occurs when any of the following becomes true:
+  - a newer authoritative projection or decision record replaces the document;
+  - the document is listed as explicitly deauthorized for current release claims;
+  - the document is retained only for provenance, rehearsal, or checkpoint history rather than current release truth.

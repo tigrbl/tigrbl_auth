@@ -31,3 +31,14 @@ body: |-
     - catalog-only or list/show-only admin families remain partial and MUST stay below full-featured claims;
     - `key` is removed from the certified public operator surface in favor of the canonical `keys` command family;
     - public "independent" wording requires Tier 4 preserved peer evidence and manifest-backed promotion.
+
+  Operator-visible/package-boundary feature completeness is a release gate for final certification.
+  A release MAY retain partial operator functionality in checkpoint or candidate form, but it SHALL NOT claim a fully featured certified operator surface until the current certified command families and release-facing lifecycle operations are end-to-end verified in the current environment.
+
+  End-to-end verification for the operator boundary MUST cover:
+  - operator invocation through the supported public CLI surface;
+  - underlying runtime or control-plane behavior for the claimed feature;
+  - preserved evidence showing the feature works within the active certified package boundary;
+  - current release-state reports reflecting that the feature counts as complete for the active environment.
+
+  A missing operator-visible capability, or a capability present only as a catalog/list/show/report surface without the claimed lifecycle behavior, blocks final certified release for the full-featured package boundary even when protocol conformance remains green.

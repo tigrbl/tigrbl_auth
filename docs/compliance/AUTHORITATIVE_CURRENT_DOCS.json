@@ -1,6 +1,12 @@
 {
   "schema_version": 1,
-  "authority_manifest": "compliance\\targets\\document-authority.yaml",
+  "authority_spec": ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
+  "projection_manifest": "compliance/targets/document-authority.yaml",
+  "canonical_ssot_roots": [
+    ".ssot/registry.json",
+    ".ssot/adr",
+    ".ssot/specs"
+  ],
   "authoritative_current_docs": [
     "CERTIFICATION_STATUS.md",
     "CURRENT_STATE.md",

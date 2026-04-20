@@ -26,6 +26,9 @@ This update keeps the retained target/profile mismatch set empty for **RFC 7516*
 
 Start with:
 
+- `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
+- `.ssot/registry.json`
+- `docs/compliance/truth_chain.md`
 - `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
 - `CURRENT_STATE.md`
 - `CERTIFICATION_STATUS.md`
@@ -37,7 +40,6 @@ Start with:
 - `docs/compliance/PEER_MATRIX_REPORT.md`
 - `docs/compliance/TIER4_PROMOTION_MATRIX.md`
 - `docs/compliance/RELEASE_DECISION_RECORD.md`
-- `docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md`
 
 Historical planning and scaffold-layout documents are retained under `docs/archive/` and are **non-authoritative** for the current repository state.
 
@@ -109,7 +111,7 @@ plugin.install(app)
 - public "independent" wording remains disallowed until preserved Tier 4 external peer bundles exist and promote the retained boundary.
 - The authoritative executable CLI surface is `tigrbl_auth/cli/metadata.py` plus the generated `docs/reference/CLI_SURFACE.md`.
 - A current checkpoint gap review remains published at `docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md`.
-- Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the current authoritative truth is in the generated reports and top-level current-state docs.
+- Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the authoritative active document is the SSOT, and the generated reports and top-level current-state docs are its current projections.
 - Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `constraints/*.txt`, and `constraints/dependency-lock.json`.
 
 ## Known current blockers

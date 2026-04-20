@@ -1,8 +1,8 @@
 # Truth Chain
 
-This manifest is the single generated checkpoint truth for current-state and release-decision artifacts.
+This manifest is a generated checkpoint projection derived from the SSOT authority policy.
 
-- generated_at: `2026-04-09`
+- generated_at: `2026-04-20`
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - release_gates_passed: `False`
@@ -10,12 +10,13 @@ This manifest is the single generated checkpoint truth for current-state and rel
 
 ## Source of truth
 
+- `.ssot/registry.json`
+- `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
 - `docs/compliance/current_state_report.json`
 - `docs/compliance/certification_state_report.json`
 - `docs/compliance/release_gate_report.json`
 - `docs/compliance/final_release_gate_report.json`
 - `docs/compliance/non_rfc_status_report.json`
-- `compliance/targets/document-authority.yaml`
 
 ## Summary
 

@@ -25,3 +25,29 @@ body: |-
   - Status: accepted
   - Decision: release bundles SHALL contain claims, evidence, contracts, ADR index, and peer refs; recertification SHALL track standards-boundary and Tigrbl changes.
   - Consequences: releases fail closed when governance inputs drift.
+
+  Release governance uses the following state model:
+  - `checkpoint`: truthful progress snapshot that may retain open release blockers and incomplete promotion inputs;
+  - `candidate`: pre-release checkpoint with validated Tier 3 evidence and current release material, but not yet eligible to claim final certified status;
+  - `final certified release`: release state allowed only when certification, gate, and documentation prerequisites all pass together.
+
+  Transition to `candidate` requires:
+  - current authoritative documents and release projections materialized from SSOT;
+  - validated execution inputs current for the supported certification matrix;
+  - release bundle contents derived from current claims, evidence, contracts, ADR material, and peer references;
+  - no unresolved contradiction among gate-authoritative input reports.
+
+  Transition to `final certified release` requires:
+  - clean-checkout release evidence materialization;
+  - final release gates passing;
+  - feature-complete operator/package-boundary claims for the certified surface;
+  - Tier 4 independent wording enabled only where independent peer evidence has been promoted;
+  - release-bundle classification and certification-state reports agreeing that the release is certifiable now.
+
+  The following conditions block final certified release and force the repository to remain at checkpoint or candidate status:
+  - dirty governance inputs or release evidence generated from a non-clean checkout;
+  - contradictory gate-authoritative inputs;
+  - incomplete operator-visible/package-boundary feature verification;
+  - non-promotion-qualifying preserved peer bundles being used in place of independent peer promotion evidence.
+
+  Clean-checkout requirements and release-gate input precedence are governed further by ADR-1033 and ADR-1034.

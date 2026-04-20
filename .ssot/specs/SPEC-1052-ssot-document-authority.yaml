@@ -1,0 +1,98 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1052"
+number: 1052
+slug: "ssot-document-authority"
+title: "SSOT document authority"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "SSOT is the authoritative active document and current compliance docs are derived projections."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+
+  SSOT is the authoritative active document for repository truth and document-authority policy.
+
+  ## Requirements
+
+  - Canonical authored authority content lives under `.ssot/`.
+  - `.ssot/registry.json` plus repo-local ADR/spec files under `.ssot/adr/` and `.ssot/specs/` are the authoritative active document set for repository governance and release truth.
+  - `docs/compliance/*`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` are derived projections and must not redefine authority independently.
+  - `compliance/targets/document-authority.yaml` is a derived compatibility projection emitted from SSOT policy.
+  - Generated projections must agree with SSOT and may be regenerated at any time.
+
+  ## Verification
+
+  - `tests/unit/test_phase13_truthfulness_alignment.py`
+  - `tests/unit/test_phase19_ssot_document_authority.py`
+spec_kind: "governance"
+document_authority:
+  projection_manifest: "compliance/targets/document-authority.yaml"
+  canonical_ssot_roots:
+    - ".ssot/registry.json"
+    - ".ssot/adr"
+    - ".ssot/specs"
+  authoritative_current_docs:
+    - "README.md"
+    - "CURRENT_STATE.md"
+    - "CERTIFICATION_STATUS.md"
+    - "docs/compliance/README.md"
+    - "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md"
+    - "docs/compliance/truth_chain.md"
+    - "docs/compliance/current_state_report.md"
+    - "docs/compliance/install_substrate_report.md"
+    - "docs/compliance/certification_state_report.md"
+    - "docs/compliance/runtime_profile_report.md"
+    - "docs/compliance/release_gate_report.md"
+    - "docs/compliance/final_release_gate_report.md"
+    - "docs/compliance/validated_execution_report.md"
+    - "docs/compliance/release_signing_report.md"
+    - "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md"
+    - "docs/compliance/RELEASE_DECISION_RECORD.md"
+    - "docs/reference/README.md"
+    - "docs/reference/CLI_SURFACE.md"
+    - "docs/reference/PUBLIC_ROUTE_SURFACE.md"
+    - "docs/reference/RPC_OPERATOR_SURFACE.md"
+    - "docs/reference/DISCOVERY_PROFILE_SNAPSHOTS.md"
+  archived_historical_roots:
+    - "docs/archive/historical"
+  explicitly_deauthorized_current_adjacent_docs:
+    - "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md"
+    - "docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md"
+    - "docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md"
+    - "docs/compliance/PEER_MATRIX_REPORT.md"
+    - "docs/compliance/TIER4_PROMOTION_MATRIX.md"
+    - "docs/compliance/CERTIFIABLE_COMPLETION_PLAN_2026-03-26.md"
+    - "docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md"
+    - "docs/compliance/TARGET_REALITY_MATRIX.md"
+  current_release_bundle_docs:
+    - "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json"
+    - "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md"
+    - "docs/compliance/truth_chain.json"
+    - "docs/compliance/truth_chain.md"
+    - "docs/compliance/current_state_report.json"
+    - "docs/compliance/current_state_report.md"
+    - "docs/compliance/install_substrate_report.json"
+    - "docs/compliance/install_substrate_report.md"
+    - "docs/compliance/certification_state_report.json"
+    - "docs/compliance/certification_state_report.md"
+    - "docs/compliance/runtime_profile_report.json"
+    - "docs/compliance/runtime_profile_report.md"
+    - "docs/compliance/release_gate_report.json"
+    - "docs/compliance/release_gate_report.md"
+    - "docs/compliance/final_release_gate_report.json"
+    - "docs/compliance/final_release_gate_report.md"
+    - "docs/compliance/validated_execution_report.json"
+    - "docs/compliance/validated_execution_report.md"
+    - "docs/compliance/release_signing_report.json"
+    - "docs/compliance/release_signing_report.md"
+    - "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json"
+    - "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md"
+  supporting_current_non_doc_artifacts:
+    - "specs/cli/cli_contract.json"
+    - "specs/cli/cli_contract.yaml"

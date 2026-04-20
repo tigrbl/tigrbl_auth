@@ -1,8 +1,15 @@
 # Authoritative current docs
 
-These are the current certification and release truth artifacts for this repository state.
+These are the current certification and release truth projections derived from the SSOT authority spec.
 
-- authority_manifest: `compliance\targets\document-authority.yaml`
+- authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
+- projection_manifest: `compliance/targets/document-authority.yaml`
+
+## Canonical SSOT roots
+
+- `.ssot/registry.json`
+- `.ssot/adr`
+- `.ssot/specs`
 
 ## Authoritative current docs
 

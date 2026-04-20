@@ -13282,6 +13282,31 @@
       ],
       "requires": [],
       "spec_ids": []
+    },
+    {
+      "id": "feat:governance-ssot-document-authority",
+      "title": "SSOT document authority",
+      "description": "Document authority for current release truth is defined in SSOT and projected into compliance docs.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "claim_ids": [
+        "clm:governance-ssot-document-authority"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-phase19-ssot-document-authority-py"
+      ],
+      "requires": [],
+      "spec_ids": []
     }
   ],
   "tests": [
@@ -27364,6 +27389,22 @@
       "evidence_ids": [
         "evd:ssot-governance-dependency-compatibility-maintenance"
       ]
+    },
+    {
+      "id": "tst:tests-unit-test-phase19-ssot-document-authority-py",
+      "title": "test ssot document authority",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_phase19_ssot_document_authority.py",
+      "feature_ids": [
+        "feat:governance-ssot-document-authority"
+      ],
+      "claim_ids": [
+        "clm:governance-ssot-document-authority"
+      ],
+      "evidence_ids": [
+        "evd:ssot-governance-document-authority"
+      ]
     }
   ],
   "claims": [
@@ -38641,6 +38682,23 @@
       "evidence_ids": [
         "evd:ssot-governance-dependency-compatibility-maintenance"
       ]
+    },
+    {
+      "id": "clm:governance-ssot-document-authority",
+      "title": "SSOT document authority",
+      "status": "implemented",
+      "tier": "T1",
+      "kind": "governance",
+      "description": "SSOT defines document authority for current release truth and derived projections cannot redefine it independently.",
+      "feature_ids": [
+        "feat:governance-ssot-document-authority"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-phase19-ssot-document-authority-py"
+      ],
+      "evidence_ids": [
+        "evd:ssot-governance-document-authority"
+      ]
     }
   ],
   "evidence": [
@@ -43591,6 +43649,20 @@
       "test_ids": [
         "tst:tests-unit-test-phase19-ssot-dependency-maintenance-traceability-py"
       ]
+    },
+    {
+      "id": "evd:ssot-governance-document-authority",
+      "title": "SSOT document authority",
+      "status": "passed",
+      "kind": "artifact",
+      "tier": "T1",
+      "path": ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
+      "claim_ids": [
+        "clm:governance-ssot-document-authority"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-phase19-ssot-document-authority-py"
+      ]
     }
   ],
   "issues": [],
@@ -44390,6 +44462,22 @@
       "immutable": false,
       "package_version": "0.2.6",
       "content_sha256": "eb3e5d5a6824a8cb6b6cc24c64b0c887057ffc18b49694f682da31e79dc83117",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1031",
+      "number": 1031,
+      "slug": "ssot-is-the-authoritative-active-document",
+      "title": "SSOT is the authoritative active document",
+      "path": ".ssot/adr/ADR-1031-ssot-is-the-authoritative-active-document.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.6",
+      "content_sha256": "8454b557e738e612908af2b53b6808a50411014c43897b24f73651da2c569a1f",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -45530,6 +45618,23 @@
       "immutable": false,
       "package_version": "0.2.6",
       "content_sha256": "7dd8ffb47096390d5e594d9d3c4ae25fc2ca2677071c189afc66e13055090da1",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "governance"
+    },
+    {
+      "id": "spc:1052",
+      "number": 1052,
+      "slug": "ssot-document-authority",
+      "title": "SSOT document authority",
+      "path": ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.6",
+      "content_sha256": "777068180af6f05fb41db09d6f2c8a75ad2c882dc842fba57ed90752121957f7",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],

@@ -3,6 +3,7 @@
 This repository uses [`ssot-registry`](https://pypi.org/project/ssot-registry/) as the canonical system-of-record for planning, verification, certification gating, and release readiness.
 
 **Effective immediately: agents are required to use the `ssot-registry` CLI command for SSOT operations.**
+**Effective immediately: agents are also required to use `uv` for Python/package execution.**
 
 ## Why this is mandatory
 
@@ -25,9 +26,22 @@ The canonical machine-readable artifact is `.ssot/registry.json` and all downstr
 - Run from repository root unless a subcommand explicitly targets a different path.
 - Canonical registry path: `.ssot/registry.json`.
 - Validate after any mutation.
+- Use `uv` for Python execution, dependency operations, and Python-backed CLIs in this repository.
+- Prefer `uv run ...` for project commands and `uv tool run ...` for tool entrypoints instead of raw `python`, `pip`, or direct shim executables when an equivalent `uv` form exists.
+- Do not invoke `pip install`, `python -m pip`, or bare `python` for normal repository workflows when `uv` can perform the same operation.
 - Prefer machine-readable output when integrating with automation:
   - `--output-format json`
   - optional `--output-file <path>`
+
+## Python and tool invocation policy
+
+- Project-local Python commands should use `uv run`, for example:
+  - `uv run pytest ...`
+  - `uv run python -m ...`
+- Tool-style commands should use `uv tool run` when they are not provided by the project environment.
+- SSOT commands should prefer `uv run ssot ...` or another `uv`-managed entrypoint over bare `ssot`, `ssot-cli`, or `ssot-registry` shims when possible.
+- If a command fails outside `uv`, retry with an equivalent `uv` invocation before falling back to manual intervention.
+- Any deviation from `uv` should be treated as an exception and explained in agent output.
 
 ## Core daily workflow
 

@@ -8,6 +8,8 @@ from typing import Any
 
 import yaml
 
+from tigrbl_auth.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC, load_document_authority
+
 ROOT_CURRENT_STATE = "CURRENT_STATE.md"
 ROOT_CERTIFICATION_STATUS = "CERTIFICATION_STATUS.md"
 TRUTH_CHAIN_JSON = "docs/compliance/truth_chain.json"
@@ -22,7 +24,6 @@ FINAL_RELEASE_GATE_REPORT_JSON = "docs/compliance/final_release_gate_report.json
 FINAL_RELEASE_GATE_REPORT_MD = "docs/compliance/final_release_gate_report.md"
 RELEASE_DECISION_RECORD_MD = "docs/compliance/RELEASE_DECISION_RECORD.md"
 REPOSITORY_STATE_YAML = "compliance/claims/repository-state.yaml"
-DOCUMENT_AUTHORITY_YAML = "compliance/targets/document-authority.yaml"
 DEFAULT_FINAL_RELEASE_STATUS_STEM = "FINAL_RELEASE_STATUS_2026-03-25"
 
 
@@ -113,7 +114,7 @@ def _truth_inputs(repo_root: Path) -> dict[str, Any]:
     final_release_gate = _read_json(repo_root / FINAL_RELEASE_GATE_REPORT_JSON)
     non_rfc = _read_json(repo_root / "docs" / "compliance" / "non_rfc_status_report.json")
     repository_state = _read_yaml(repo_root / REPOSITORY_STATE_YAML).get("repository_state", {})
-    authority = _read_yaml(repo_root / DOCUMENT_AUTHORITY_YAML)
+    authority = load_document_authority(repo_root)
     return {
         "current": current,
         "certification": certification,
@@ -175,12 +176,13 @@ def build_truth_chain_payload(repo_root: Path) -> dict[str, Any]:
         "schema_version": 1,
         "generated_at": date.today().isoformat(),
         "source_of_truth": [
+            ".ssot/registry.json",
+            SSOT_DOCUMENT_AUTHORITY_SPEC,
             CURRENT_STATE_REPORT_JSON,
             CERTIFICATION_STATE_REPORT_JSON,
             RELEASE_GATE_REPORT_JSON,
             FINAL_RELEASE_GATE_REPORT_JSON,
             "docs/compliance/non_rfc_status_report.json",
-            DOCUMENT_AUTHORITY_YAML,
         ],
         "summary": {
             "declared_claim_count": int(current_summary.get("declared_claim_count", 0)),
@@ -270,7 +272,7 @@ def render_truth_chain_markdown(truth: dict[str, Any]) -> str:
     lines = [
         "# Truth Chain",
         "",
-        "This manifest is the single generated checkpoint truth for current-state and release-decision artifacts.",
+        "This manifest is a generated checkpoint projection derived from the SSOT authority policy.",
         "",
         f"- generated_at: `{truth['generated_at']}`",
         f"- final_release_ready: `{summary['final_release_ready']}`",
@@ -301,7 +303,7 @@ def render_current_state_markdown(truth: dict[str, Any]) -> str:
         "",
         "## Summary",
         "",
-        "This repository is governed by the generated truth chain in `docs/compliance/truth_chain.json`.",
+        "This repository is governed by the SSOT authority policy in `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`, projected through `docs/compliance/truth_chain.json`.",
         "",
         (
             "The current package state is certifiably fully featured, certifiably fully RFC/spec compliant, and ready for a final certified release."
@@ -459,8 +461,9 @@ def render_compliance_current_state_markdown() -> str:
         [
             "# Current State",
             "",
-            "Use `docs/compliance/truth_chain.md` and the generated report set in this directory.",
+            "Use `.ssot/specs/SPEC-1052-ssot-document-authority.yaml` as the authoritative active document, with `docs/compliance/truth_chain.md` and the generated report set in this directory as projections.",
             "",
+            "- authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`",
             "- source_of_truth: `docs/compliance/truth_chain.json`",
             "- current_state_report: `docs/compliance/current_state_report.json`",
             "- release_gate_report: `docs/compliance/release_gate_report.json`",
