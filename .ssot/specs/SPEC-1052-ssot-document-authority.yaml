@@ -23,6 +23,7 @@ body: |-
   - Canonical authored authority content lives under `.ssot/`.
   - `.ssot/registry.json` plus repo-local ADR/spec files under `.ssot/adr/` and `.ssot/specs/` are the authoritative active document set for repository governance and release truth.
   - `docs/compliance/*`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` are derived projections and must not redefine authority independently.
+  - `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.*` is a compatibility projection that enumerates current release-facing docs; it is not itself an authoritative source.
   - `compliance/targets/document-authority.yaml` is a derived compatibility projection emitted from SSOT policy.
   - Generated projections must agree with SSOT and may be regenerated at any time.
 
@@ -42,7 +43,6 @@ document_authority:
     - "CURRENT_STATE.md"
     - "CERTIFICATION_STATUS.md"
     - "docs/compliance/README.md"
-    - "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md"
     - "docs/compliance/truth_chain.md"
     - "docs/compliance/current_state_report.md"
     - "docs/compliance/install_substrate_report.md"

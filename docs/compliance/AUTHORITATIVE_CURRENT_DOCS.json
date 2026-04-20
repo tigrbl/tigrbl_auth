@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "authority_spec": ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
+  "authority_spec": ".ssot\\specs\\SPEC-1052-ssot-document-authority.yaml",
   "projection_manifest": "compliance/targets/document-authority.yaml",
   "canonical_ssot_roots": [
     ".ssot/registry.json",
@@ -11,7 +11,6 @@
     "CERTIFICATION_STATUS.md",
     "CURRENT_STATE.md",
     "README.md",
-    "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md",
     "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md",
     "docs/compliance/README.md",
     "docs/compliance/RELEASE_DECISION_RECORD.md",

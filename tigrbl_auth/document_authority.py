@@ -20,7 +20,6 @@ DEFAULT_AUTHORITATIVE_DOCS = {
     "CURRENT_STATE.md",
     "CERTIFICATION_STATUS.md",
     "docs/compliance/README.md",
-    "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md",
     "docs/compliance/truth_chain.md",
     "docs/compliance/current_state_report.md",
     "docs/compliance/install_substrate_report.md",
@@ -140,5 +139,6 @@ def render_document_authority_projection(authority: dict[str, Any]) -> dict[str,
         "notes": {
             "bundle_policy": "Only generated current-state and release-decision docs in this manifest are copied into certification release bundles.",
             "archive_policy": "Historical planning, checkpoint, and static matrix docs outside the authoritative set are non-authoritative and must not be used for current release claims.",
+            "projection_policy": "`docs/compliance/AUTHORITATIVE_CURRENT_DOCS.*` is a compatibility projection and must not be treated as the authoritative source; SSOT-authored content under `.ssot/` remains authoritative.",
         },
     }

@@ -1,6 +1,6 @@
 schema_version: 1
 generated_at: '2026-04-20'
-projection_of: .ssot/specs/SPEC-1052-ssot-document-authority.yaml
+projection_of: .ssot\specs\SPEC-1052-ssot-document-authority.yaml
 canonical_ssot_roots:
 - .ssot/registry.json
 - .ssot/adr
@@ -9,7 +9,6 @@ authoritative_current_docs:
 - CERTIFICATION_STATUS.md
 - CURRENT_STATE.md
 - README.md
-- docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md
 - docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md
 - docs/compliance/README.md
 - docs/compliance/RELEASE_DECISION_RECORD.md
@@ -67,6 +66,9 @@ supporting_current_non_doc_artifacts:
 notes:
   bundle_policy: Only generated current-state and release-decision docs in this manifest
     are copied into certification release bundles.
-  archive_policy: Historical planning, checkpoint, and static matrix docs outside the
-    authoritative set are non-authoritative and must not be used for current release
+  archive_policy: Historical planning, checkpoint, and static matrix docs outside
+    the authoritative set are non-authoritative and must not be used for current release
     claims.
+  projection_policy: '`docs/compliance/AUTHORITATIVE_CURRENT_DOCS.*` is a compatibility
+    projection and must not be treated as the authoritative source; SSOT-authored
+    content under `.ssot/` remains authoritative.'

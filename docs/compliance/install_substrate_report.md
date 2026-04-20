@@ -1,8 +1,8 @@
 # Install Substrate Report
 
-- Generated at: `20260409T110226Z`
+- Generated at: `20260420T082636Z`
 - Passed: `False`
-- Static manifest passed: `True`
+- Static manifest passed: `False`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
@@ -20,6 +20,11 @@
 
 ## Failures
 
+- constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form
+- constraints/test.txt does not match pyproject optional-dependencies.test
+- dependency lock base set drifts from pyproject runtime dependencies
+- dependency lock extra 'test' drifts from pyproject optional dependencies
+- dependency lock extra 'postgres' drifts from pyproject optional dependencies
 - The current environment does not provide the full supported interpreter matrix required for clean-room certification.
 
 ## Warnings

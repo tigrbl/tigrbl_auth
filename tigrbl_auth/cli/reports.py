@@ -248,10 +248,11 @@ def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]
     lines = [
         "# Authoritative current docs",
         "",
-        "These are the current certification and release truth projections derived from the SSOT authority spec.",
+        "This file is a compatibility projection of the current certification and release-facing docs derived from the SSOT authority spec.",
         "",
         f"- authority_spec: `{payload['authority_spec']}`",
         f"- projection_manifest: `{payload['projection_manifest']}`",
+        "- authority_note: `.ssot/` is authoritative; this file is not.",
         "",
         "## Canonical SSOT roots",
         "",
@@ -259,7 +260,7 @@ def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]
     lines.extend([f"- `{item}`" for item in payload["canonical_ssot_roots"]])
     lines.extend([
         "",
-        "## Authoritative current docs",
+        "## Current release-facing docs",
         "",
     ])
     lines.extend([f"- `{item}`" for item in payload["authoritative_current_docs"]])
@@ -272,6 +273,7 @@ def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]
     lines.extend(["", "## Archive policy", ""])
     lines.extend([f"- archive_root: `{item}`" for item in payload["archive_roots"]])
     lines.append(f"- policy: {payload['historical_docs_policy']}")
+    lines.append("- projection_policy: `.ssot/` remains authoritative; this manifest is informational compatibility output.")
     lines.append("")
     (report_dir / "AUTHORITATIVE_CURRENT_DOCS.md").write_text("\n".join(lines), encoding="utf-8")
     return payload

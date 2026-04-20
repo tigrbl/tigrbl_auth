@@ -1,9 +1,10 @@
 # Authoritative current docs
 
-These are the current certification and release truth projections derived from the SSOT authority spec.
+This file is a compatibility projection of the current certification and release-facing docs derived from the SSOT authority spec.
 
-- authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
+- authority_spec: `.ssot\specs\SPEC-1052-ssot-document-authority.yaml`
 - projection_manifest: `compliance/targets/document-authority.yaml`
+- authority_note: `.ssot/` is authoritative; this file is not.
 
 ## Canonical SSOT roots
 
@@ -11,12 +12,11 @@ These are the current certification and release truth projections derived from t
 - `.ssot/adr`
 - `.ssot/specs`
 
-## Authoritative current docs
+## Current release-facing docs
 
 - `CERTIFICATION_STATUS.md`
 - `CURRENT_STATE.md`
 - `README.md`
-- `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
 - `docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.md`
 - `docs/compliance/README.md`
 - `docs/compliance/RELEASE_DECISION_RECORD.md`
@@ -83,3 +83,4 @@ These are the current certification and release truth projections derived from t
 
 - archive_root: `docs/archive/historical`
 - policy: Historical and archived docs are non-authoritative and excluded from the certification bundle documentation scope.
+- projection_policy: `.ssot/` remains authoritative; this manifest is informational compatibility output.

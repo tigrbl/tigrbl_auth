@@ -8,7 +8,7 @@ Use `.ssot/specs/SPEC-1052-ssot-document-authority.yaml` as the authoritative ac
 
 Use `docs/compliance/truth_chain.json` as the canonical generated checkpoint projection derived from that SSOT policy.
 
-Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` to inspect the current human-readable active doc set projected from SSOT.
+Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` only as a human-readable compatibility projection of the current doc set projected from SSOT. It is not authoritative.
 
 The repository-root `CURRENT_STATE.md` and `CERTIFICATION_STATUS.md`, plus the generated report set listed in the compatibility projection manifest, are derived artifacts and must agree with `truth_chain.json` and the SSOT authority spec.
 
