@@ -1,0 +1,44 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1009"
+number: 1009
+slug: "standards-boundary-and-label-hygiene"
+title: "Normalize standards labels and quarantine mis-scoped targets"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Normalize standards labels and quarantine mis-scoped targets
+  
+  - Status: Accepted
+  - Date: 2026-03-19
+  - Supersedes: none
+  
+  The certification plane uses normalized labels only:
+  - `.well-known` claims use **RFC 8615**.
+  - JWT client-auth and authorization-grant claims use **RFC 7523**.
+  - RFC 8932 remains extension-quarantined and is not part of the auth-core claim
+    boundary.
+  - Extension RFCs are documented under `compliance/targets/extension-targets.yaml`
+    and are excluded from core certification manifests.
+  
+  ## Context
+  
+  The repository inherited stale or wrong standards labels, including a legacy
+  `RFC 8523` label where the relevant OAuth JWT client-auth claim belongs to
+  RFC 7523, and repository material that treated RFC 8932 as if it were part of
+  authorization-server metadata rather than a quarantined non-auth-core target.

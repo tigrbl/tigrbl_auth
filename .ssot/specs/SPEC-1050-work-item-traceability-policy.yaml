@@ -1,0 +1,34 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1050"
+number: 1050
+slug: "work-item-traceability-policy"
+title: "Work item traceability policy"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "SSOT must represent release-impacting repository work items in a way that can be planned, linked, and validated."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  SSOT must represent release-impacting repository work items in a way that can be planned, linked, and validated.
+  
+  ## Requirements
+  
+  - Each release-impacting GitHub issue or pull request maps to an SSOT work item entry.
+  - Each SSOT work item links to one or more affected features.
+  - Release-blocking work items set `release_blocking: true`.
+  - Governance-only work still links to governance features and claims.
+  - Work items must be visible to release and certification guard policies without depending on GitHub state at evaluation time.
+  
+  ## Validation Expectations
+  
+  - No release candidate may pass with open release-blocking work items.
+  - Planned work items must not be orphaned from features.
+  - Work-item traceability must be verified by repository tests.
+spec_kind: "governance"

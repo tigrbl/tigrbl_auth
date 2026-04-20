@@ -1,0 +1,20 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1021"
+number: 1021
+slug: "jsonschema-readme-md"
+title: "Repo spec: specs/jsonschema/README.md"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Canonical JSON Schema artifacts for discovery documents, metadata documents, and admin/control-plane envelopes."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  # JSON Schemas
+  
+  Canonical JSON Schema artifacts for discovery documents, metadata documents, and admin/control-plane envelopes.
+spec_kind: "local-policy"

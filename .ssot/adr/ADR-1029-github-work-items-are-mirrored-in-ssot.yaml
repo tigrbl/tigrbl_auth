@@ -1,0 +1,23 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1029"
+number: 1029
+slug: "github-work-items-are-mirrored-in-ssot"
+title: "GitHub work items are mirrored in SSOT"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "GitHub work items are mirrored in SSOT"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  - Status: accepted
+  - Date: 2026-04-18
+  - Decision: release-impacting GitHub issues and pull requests must be mirrored into the SSOT registry as planned work items before they are treated as governed or certifiable work.
+  - Consequences:
+    - GitHub remains the execution and review surface, but SSOT remains the canonical planning and traceability plane;
+    - release-blocking work can be evaluated through SSOT guard policies instead of inferred from repository activity;
+    - work that changes governed behavior but is not mirrored into SSOT is a governance gap.

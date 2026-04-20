@@ -1,9 +1,0 @@
-# Repo spec: specs/discovery/profiles/baseline/jwks.json
-
-{
-  "keys": [],
-  "profile": "baseline",
-  "profile_label": "baseline",
-  "issuer": "https://authn.example.com",
-  "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
-}

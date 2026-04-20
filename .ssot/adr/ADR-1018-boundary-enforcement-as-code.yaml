@@ -1,0 +1,28 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1018"
+number: 1018
+slug: "boundary-enforcement-as-code"
+title: "ADR-0019: Boundary Enforcement as Code"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # ADR-0019: Boundary Enforcement as Code
+  
+  Boundary decisions shall be enforced by machine-checkable reports and release
+  gates. At minimum, the repository shall maintain checks for claims hygiene,
+  framework leakage, wrapper hygiene, contract synchronization, evidence
+  readiness, and peer-readiness.

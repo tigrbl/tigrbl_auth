@@ -1,0 +1,36 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1002"
+number: 1002
+slug: "tigrbl-native-shape"
+title: "Adopt the Tigrbl-native package shape"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Adopt the Tigrbl-native package shape
+  
+  - Status: Accepted
+  - Date: 2026-03-19
+  
+  This ADR is accepted for the current repository checkpoint.
+  
+  ## Context
+  
+  Runtime code is organized around `api`, `tables`, `ops`, `services`,
+  `standards`, `security`, `config`, `cli`, `plugin`, and `gateway`. The
+  package is Tigrbl-native and avoids ad-hoc framework routing.

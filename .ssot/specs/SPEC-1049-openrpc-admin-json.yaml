@@ -1,0 +1,4602 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1049"
+number: 1049
+slug: "openrpc-admin-json"
+title: "Repo spec: specs/openrpc/tigrbl_auth.admin.openrpc.json"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "{"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  {
+    "openrpc": "1.4.2",
+    "info": {
+      "title": "tigrbl_auth admin/control-plane",
+      "version": "0.3.4",
+      "description": "Generated admin/control-plane contract derived from implementation-backed RPC registration and filtered by the effective deployment boundary."
+    },
+    "servers": [
+      {
+        "name": "admin-rpc",
+        "url": "https://authn.example.com/rpc"
+      }
+    ],
+    "methods": [
+      {
+        "name": "audit.export",
+        "summary": "Export durable audit events.",
+        "description": "Exports the filtered audit result set as JSON, NDJSON, or CSV content.",
+        "tags": [
+          "audit",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "event_type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Event Type"
+            }
+          },
+          {
+            "name": "outcome",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Outcome"
+            }
+          },
+          {
+            "name": "export_format",
+            "required": false,
+            "schema": {
+              "default": "json",
+              "title": "Export Format",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/AuditExportResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/audit.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "audit.list",
+        "summary": "List durable audit events.",
+        "description": "Returns persisted audit events for operator search and review.",
+        "tags": [
+          "audit",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "event_type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Event Type"
+            }
+          },
+          {
+            "name": "outcome",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Outcome"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/AuditListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/audit.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "claims.lint",
+        "summary": "Run claims lint against the governance plane.",
+        "description": "Executes the claims lint pipeline and returns the summarized result.",
+        "tags": [
+          "governance",
+          "claims"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClaimsLintResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "claims.show",
+        "summary": "Return effective claims for the active deployment profile.",
+        "description": "Builds and returns the effective target-claims manifest.",
+        "tags": [
+          "governance",
+          "claims"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClaimsShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.list",
+        "summary": "List OAuth/OIDC clients in the admin plane.",
+        "description": "Returns client rows from the admin control plane.",
+        "tags": [
+          "directory",
+          "client"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.registration.delete",
+        "summary": "Delete a durable client-registration record.",
+        "description": "Deletes RFC 7592 registration state through the shared operator service layer.",
+        "tags": [
+          "client",
+          "registration",
+          "rfc7592"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "client_id",
+            "required": true,
+            "schema": {
+              "title": "Client Id",
+              "type": "string"
+            }
+          },
+          {
+            "name": "if_missing",
+            "required": false,
+            "schema": {
+              "default": "error",
+              "title": "If Missing",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientRegistrationDeleteResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.registration.list",
+        "summary": "List durable client-registration records.",
+        "description": "Returns RFC 7591/7592 registration state from the shared operator service layer.",
+        "tags": [
+          "client",
+          "registration",
+          "rfc7591",
+          "rfc7592"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "client_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientRegistrationListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.registration.show",
+        "summary": "Show a durable client-registration record.",
+        "description": "Returns a single registration record from the shared operator service layer.",
+        "tags": [
+          "client",
+          "registration",
+          "rfc7591",
+          "rfc7592"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "client_id",
+            "required": true,
+            "schema": {
+              "title": "Client Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientRegistrationShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.registration.upsert",
+        "summary": "Create or update a durable client-registration record.",
+        "description": "Persists registration state through the same service layer used by the CLI surface.",
+        "tags": [
+          "client",
+          "registration",
+          "rfc7591",
+          "rfc7592"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "client_id",
+            "required": true,
+            "schema": {
+              "title": "Client Id",
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          },
+          {
+            "name": "metadata",
+            "required": false,
+            "schema": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          {
+            "name": "contacts",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Contacts",
+              "type": "array"
+            }
+          },
+          {
+            "name": "software_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Id"
+            }
+          },
+          {
+            "name": "software_version",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Version"
+            }
+          },
+          {
+            "name": "registration_access_token_hash",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Access Token Hash"
+            }
+          },
+          {
+            "name": "registration_client_uri",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Client Uri"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientRegistrationUpsertResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "client.show",
+        "summary": "Show a client in the admin plane.",
+        "description": "Returns a single client record by identifier.",
+        "tags": [
+          "directory",
+          "client"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ClientShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "consent.list",
+        "summary": "List durable consent records.",
+        "description": "Returns persisted consent grants for operator inspection.",
+        "tags": [
+          "consent",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "user_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            }
+          },
+          {
+            "name": "client_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            }
+          },
+          {
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "State"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ConsentListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "consent.revoke",
+        "summary": "Revoke a durable consent record.",
+        "description": "Administratively revokes a consent grant and returns the resulting persisted state.",
+        "tags": [
+          "consent",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "consent_id",
+            "required": true,
+            "schema": {
+              "title": "Consent Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ConsentRevokeResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "consent.show",
+        "summary": "Show a durable consent record.",
+        "description": "Returns a single consent grant by identifier.",
+        "tags": [
+          "consent",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "consent_id",
+            "required": true,
+            "schema": {
+              "title": "Consent Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ConsentShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "discovery.show",
+        "summary": "Show effective OIDC discovery metadata for the deployment.",
+        "description": "Returns the effective discovery document as currently configured.",
+        "tags": [
+          "discovery",
+          "oidc"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/DiscoveryShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "evidence.status",
+        "summary": "Summarize evidence-plane status.",
+        "description": "Returns the evidence readiness summary, failures, and warnings.",
+        "tags": [
+          "governance",
+          "evidence"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/EvidenceStatusResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "flow.list",
+        "summary": "List effective protocol flow slices for the current deployment.",
+        "description": "Summarizes active protocol slices, routes, required flags, and mapped targets.",
+        "tags": [
+          "deployment",
+          "flows"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/FlowListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "gate.run",
+        "summary": "Run a named release gate.",
+        "description": "Executes a configured release gate and returns pass/fail status with details.",
+        "tags": [
+          "governance",
+          "release"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "gate",
+            "required": true,
+            "schema": {
+              "title": "Gate",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/GateRunResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "identity.list",
+        "summary": "List identities in the admin plane.",
+        "description": "Returns user/identity rows from the admin control plane.",
+        "tags": [
+          "directory",
+          "identity"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/IdentityListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "identity.show",
+        "summary": "Show an identity in the admin plane.",
+        "description": "Returns a single user/identity record by identifier.",
+        "tags": [
+          "directory",
+          "identity"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/IdentityShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "jwks.show",
+        "summary": "Show the effective JWKS document.",
+        "description": "Returns the effective JWKS publication payload generated by the shared service layer.",
+        "tags": [
+          "keys",
+          "jwks"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/JwksShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "keys.list",
+        "summary": "List durable service keys and key-rotation history.",
+        "description": "Returns key rows and key-rotation audit rows from the shared operator service layer.",
+        "tags": [
+          "keys",
+          "jwks"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/KeysListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "keys.rotate",
+        "summary": "Rotate the signing key and persist a key-rotation event.",
+        "description": "Performs an operator key rotation through the same service layer used by the CLI surface.",
+        "tags": [
+          "keys",
+          "jwks"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "reason",
+            "required": false,
+            "schema": {
+              "default": "operator_rotation",
+              "title": "Reason",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/KeysRotateResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "profile.show",
+        "summary": "Show the effective deployment/profile posture.",
+        "description": "Returns the effective deployment manifest together with current and certification state summaries.",
+        "tags": [
+          "profile",
+          "operator"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ProfileShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "release.bundle",
+        "summary": "Build a release bundle.",
+        "description": "Builds the current release bundle and returns its path and digest.",
+        "tags": [
+          "governance",
+          "release"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "artifact",
+            "required": false,
+            "schema": {
+              "default": "all",
+              "title": "Artifact",
+              "type": "string"
+            }
+          },
+          {
+            "name": "bundle_dir",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Bundle Dir"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/ReleaseBundleResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "rpc.discover",
+        "summary": "Return the active implementation-backed RPC method catalog.",
+        "description": "Discovers the operator/admin RPC methods derived from executable registration.",
+        "tags": [
+          "discovery",
+          "rpc"
+        ],
+        "paramStructure": "by-name",
+        "params": [],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/RpcDiscoverResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "session.list",
+        "summary": "List durable browser and auth sessions.",
+        "description": "Returns session records from the shared operator service layer.",
+        "tags": [
+          "session",
+          "oidc"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "active_only",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Active Only",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "user_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            }
+          },
+          {
+            "name": "client_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            }
+          },
+          {
+            "name": "tenant_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/SessionListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "session.show",
+        "summary": "Show a durable session and its latest logout state.",
+        "description": "Returns a single session together with its latest logout propagation state.",
+        "tags": [
+          "session",
+          "oidc"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/SessionShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "session.terminate",
+        "summary": "Terminate a durable session and persist logout state.",
+        "description": "Administratively ends a session through the same service layer used by the CLI surface.",
+        "tags": [
+          "session",
+          "logout",
+          "oidc"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          {
+            "name": "initiated_by",
+            "required": false,
+            "schema": {
+              "default": "operator",
+              "title": "Initiated By",
+              "type": "string"
+            }
+          },
+          {
+            "name": "reason",
+            "required": false,
+            "schema": {
+              "default": "administrative_logout",
+              "title": "Reason",
+              "type": "string"
+            }
+          },
+          {
+            "name": "frontchannel_required",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Frontchannel Required",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "backchannel_required",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Backchannel Required",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "metadata",
+            "required": false,
+            "schema": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/SessionTerminateResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "target.list",
+        "summary": "List certification-scope targets.",
+        "description": "Returns the authoritative certification-scope target entries and their reality metadata.",
+        "tags": [
+          "profile",
+          "certification"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "scope_bucket",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Scope Bucket"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TargetListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "target.show",
+        "summary": "Show a certification-scope target.",
+        "description": "Returns a single certification-scope target entry by label.",
+        "tags": [
+          "profile",
+          "certification"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "label",
+            "required": true,
+            "schema": {
+              "title": "Label",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TargetShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "tenant.list",
+        "summary": "List tenants in the admin plane.",
+        "description": "Returns tenant records from the durable admin control plane.",
+        "tags": [
+          "directory",
+          "tenant"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TenantListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "tenant.show",
+        "summary": "Show a tenant in the admin plane.",
+        "description": "Returns a single tenant record by identifier.",
+        "tags": [
+          "directory",
+          "tenant"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "id",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TenantShowResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "token.exchange",
+        "summary": "Create a durable token exchange record.",
+        "description": "Persists RFC 8693 token-exchange lineage through the shared operator service layer.",
+        "tags": [
+          "token",
+          "rfc8693"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "subject_token",
+            "required": true,
+            "schema": {
+              "title": "Subject Token",
+              "type": "string"
+            }
+          },
+          {
+            "name": "requested_token_type",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Requested Token Type"
+            }
+          },
+          {
+            "name": "audience",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Audience"
+            }
+          },
+          {
+            "name": "resource",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Resource"
+            }
+          },
+          {
+            "name": "actor_token",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor Token"
+            }
+          },
+          {
+            "name": "extras",
+            "required": false,
+            "schema": {
+              "additionalProperties": true,
+              "title": "Extras",
+              "type": "object"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TokenExchangeResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "token.inspect",
+        "summary": "Inspect token posture and current introspection state.",
+        "description": "Returns token hash, active state, revocation state, and the introspection payload.",
+        "tags": [
+          "token",
+          "rfc7662",
+          "rfc7009"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "token",
+            "required": true,
+            "schema": {
+              "title": "Token",
+              "type": "string"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TokenInspectResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      },
+      {
+        "name": "token.list",
+        "summary": "List durable token records.",
+        "description": "Returns token status records from the shared operator service layer.",
+        "tags": [
+          "token",
+          "rfc7662"
+        ],
+        "paramStructure": "by-name",
+        "params": [
+          {
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "active_only",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Active Only",
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Subject"
+            }
+          },
+          {
+            "name": "client_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            }
+          }
+        ],
+        "result": {
+          "name": "result",
+          "schema": {
+            "$ref": "#/components/schemas/TokenListResult"
+          }
+        },
+        "x-tigrbl-auth": {
+          "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
+          "required_flags": [],
+          "surface_set": "admin-rpc",
+          "since_phase": "phase5"
+        }
+      }
+    ],
+    "x-tigrbl-auth": {
+      "profile": "baseline",
+      "plugin_mode": "mixed",
+      "runtime_style": "standalone",
+      "surface_sets": [
+        "public-rest",
+        "admin-rpc",
+        "diagnostics"
+      ],
+      "strict_boundary_enforcement": true,
+      "generation_mode": "implementation-backed-rpc-registry"
+    },
+    "components": {
+      "schemas": {
+        "AuditExportParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "event_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Event Type"
+            },
+            "outcome": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Outcome"
+            },
+            "export_format": {
+              "default": "json",
+              "title": "Export Format",
+              "type": "string"
+            }
+          },
+          "title": "AuditExportParams",
+          "type": "object"
+        },
+        "AuditEventRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "actor_user_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor User Id"
+            },
+            "actor_client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor Client Id"
+            },
+            "session_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Session Id"
+            },
+            "event_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Event Type"
+            },
+            "target_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target Type"
+            },
+            "target_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Target Id"
+            },
+            "outcome": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Outcome"
+            },
+            "request_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Request Id"
+            },
+            "occurred_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Occurred At"
+            },
+            "details": {
+              "additionalProperties": true,
+              "title": "Details",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "AuditEventRecord",
+          "type": "object"
+        },
+        "AuditExportResult": {
+          "additionalProperties": false,
+          "properties": {
+            "export_format": {
+              "title": "Export Format",
+              "type": "string"
+            },
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/AuditEventRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "export_format",
+            "count",
+            "content"
+          ],
+          "title": "AuditExportResult",
+          "type": "object"
+        },
+        "AuditListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "event_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Event Type"
+            },
+            "outcome": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Outcome"
+            }
+          },
+          "title": "AuditListParams",
+          "type": "object"
+        },
+        "AuditListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/AuditEventRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "AuditListResult",
+          "type": "object"
+        },
+        "ClaimsLintResult": {
+          "additionalProperties": false,
+          "properties": {
+            "passed": {
+              "title": "Passed",
+              "type": "boolean"
+            },
+            "failures": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Failures",
+              "type": "array"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            },
+            "report_path": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Report Path"
+            }
+          },
+          "required": [
+            "passed"
+          ],
+          "title": "ClaimsLintResult",
+          "type": "object"
+        },
+        "ClaimsShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "title": "Profile",
+              "type": "string"
+            },
+            "active_targets": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Active Targets",
+              "type": "array"
+            },
+            "manifest": {
+              "additionalProperties": true,
+              "title": "Manifest",
+              "type": "object"
+            },
+            "manifest_path": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Manifest Path"
+            }
+          },
+          "required": [
+            "profile"
+          ],
+          "title": "ClaimsShowResult",
+          "type": "object"
+        },
+        "ClientListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          },
+          "title": "ClientListParams",
+          "type": "object"
+        },
+        "ClientRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "redirect_uris": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Redirect Uris"
+            },
+            "grant_types": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Grant Types"
+            },
+            "response_types": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Response Types"
+            },
+            "active": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Active"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "ClientRecord",
+          "type": "object"
+        },
+        "ClientListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/ClientRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "ClientListResult",
+          "type": "object"
+        },
+        "ClientRegistrationDeleteParams": {
+          "additionalProperties": false,
+          "properties": {
+            "client_id": {
+              "title": "Client Id",
+              "type": "string"
+            },
+            "if_missing": {
+              "default": "error",
+              "title": "If Missing",
+              "type": "string"
+            }
+          },
+          "required": [
+            "client_id"
+          ],
+          "title": "ClientRegistrationDeleteParams",
+          "type": "object"
+        },
+        "ClientRegistrationRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "client_id": {
+              "title": "Client Id",
+              "type": "string"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "software_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Id"
+            },
+            "software_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Version"
+            },
+            "contacts": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Contacts",
+              "type": "array"
+            },
+            "registration_client_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Client Uri"
+            },
+            "registration_access_token_hash": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Access Token Hash"
+            },
+            "issued_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Issued At"
+            },
+            "rotated_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rotated At"
+            },
+            "disabled_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Disabled At"
+            },
+            "registration_metadata": {
+              "additionalProperties": true,
+              "title": "Registration Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id",
+            "client_id"
+          ],
+          "title": "ClientRegistrationRecord",
+          "type": "object"
+        },
+        "ClientRegistrationDeleteResult": {
+          "additionalProperties": false,
+          "properties": {
+            "deleted": {
+              "title": "Deleted",
+              "type": "boolean"
+            },
+            "registration": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClientRegistrationRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "status": {
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": [
+            "deleted",
+            "status"
+          ],
+          "title": "ClientRegistrationDeleteResult",
+          "type": "object"
+        },
+        "ClientRegistrationListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          },
+          "title": "ClientRegistrationListParams",
+          "type": "object"
+        },
+        "ClientRegistrationListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/ClientRegistrationRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "ClientRegistrationListResult",
+          "type": "object"
+        },
+        "ClientRegistrationShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "client_id": {
+              "title": "Client Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "client_id"
+          ],
+          "title": "ClientRegistrationShowParams",
+          "type": "object"
+        },
+        "ClientRegistrationShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "registration": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClientRegistrationRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "ClientRegistrationShowResult",
+          "type": "object"
+        },
+        "ClientRegistrationUpsertParams": {
+          "additionalProperties": false,
+          "properties": {
+            "client_id": {
+              "title": "Client Id",
+              "type": "string"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            },
+            "contacts": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Contacts",
+              "type": "array"
+            },
+            "software_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Id"
+            },
+            "software_version": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Software Version"
+            },
+            "registration_access_token_hash": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Access Token Hash"
+            },
+            "registration_client_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Registration Client Uri"
+            }
+          },
+          "required": [
+            "client_id"
+          ],
+          "title": "ClientRegistrationUpsertParams",
+          "type": "object"
+        },
+        "ClientRegistrationUpsertResult": {
+          "additionalProperties": false,
+          "properties": {
+            "registration": {
+              "$ref": "#/components/schemas/ClientRegistrationRecord"
+            }
+          },
+          "required": [
+            "registration"
+          ],
+          "title": "ClientRegistrationUpsertResult",
+          "type": "object"
+        },
+        "ClientShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "ClientShowParams",
+          "type": "object"
+        },
+        "ClientShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "client": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ClientRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "ClientShowResult",
+          "type": "object"
+        },
+        "ConsentListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "user_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "state": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "State"
+            }
+          },
+          "title": "ConsentListParams",
+          "type": "object"
+        },
+        "ConsentRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "user_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "scope": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Scope"
+            },
+            "state": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "State"
+            },
+            "granted_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Granted At"
+            },
+            "expires_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Expires At"
+            },
+            "revoked_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Revoked At"
+            },
+            "claims": {
+              "additionalProperties": true,
+              "title": "Claims",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "ConsentRecord",
+          "type": "object"
+        },
+        "ConsentListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/ConsentRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "ConsentListResult",
+          "type": "object"
+        },
+        "ConsentRevokeParams": {
+          "additionalProperties": false,
+          "properties": {
+            "consent_id": {
+              "title": "Consent Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "consent_id"
+          ],
+          "title": "ConsentRevokeParams",
+          "type": "object"
+        },
+        "ConsentRevokeResult": {
+          "additionalProperties": false,
+          "properties": {
+            "consent": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ConsentRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "ConsentRevokeResult",
+          "type": "object"
+        },
+        "ConsentShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "consent_id": {
+              "title": "Consent Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "consent_id"
+          ],
+          "title": "ConsentShowParams",
+          "type": "object"
+        },
+        "ConsentShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "consent": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ConsentRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "ConsentShowResult",
+          "type": "object"
+        },
+        "DeploymentSummary": {
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "title": "Profile",
+              "type": "string"
+            },
+            "plugin_mode": {
+              "title": "Plugin Mode",
+              "type": "string"
+            },
+            "runtime_style": {
+              "title": "Runtime Style",
+              "type": "string"
+            },
+            "surface_sets": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Surface Sets",
+              "type": "array"
+            },
+            "protocol_slices": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Protocol Slices",
+              "type": "array"
+            },
+            "active_routes": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Active Routes",
+              "type": "array"
+            },
+            "active_targets": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Active Targets",
+              "type": "array"
+            },
+            "active_openrpc_methods": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Active Openrpc Methods",
+              "type": "array"
+            }
+          },
+          "required": [
+            "profile",
+            "plugin_mode",
+            "runtime_style"
+          ],
+          "title": "DeploymentSummary",
+          "type": "object"
+        },
+        "DiscoveryShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "deployment": {
+              "$ref": "#/components/schemas/DeploymentSummary"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "deployment"
+          ],
+          "title": "DiscoveryShowResult",
+          "type": "object"
+        },
+        "EvidenceStatusResult": {
+          "additionalProperties": false,
+          "properties": {
+            "passed": {
+              "title": "Passed",
+              "type": "boolean"
+            },
+            "summary": {
+              "additionalProperties": true,
+              "title": "Summary",
+              "type": "object"
+            },
+            "failures": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Failures",
+              "type": "array"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            }
+          },
+          "required": [
+            "passed"
+          ],
+          "title": "EvidenceStatusResult",
+          "type": "object"
+        },
+        "FlowRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "active": {
+              "title": "Active",
+              "type": "boolean"
+            },
+            "routes": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Routes",
+              "type": "array"
+            },
+            "targets": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Targets",
+              "type": "array"
+            },
+            "required_flags": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Required Flags",
+              "type": "array"
+            }
+          },
+          "required": [
+            "name",
+            "active"
+          ],
+          "title": "FlowRecord",
+          "type": "object"
+        },
+        "FlowListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "deployment": {
+              "$ref": "#/components/schemas/DeploymentSummary"
+            },
+            "flows": {
+              "items": {
+                "$ref": "#/components/schemas/FlowRecord"
+              },
+              "title": "Flows",
+              "type": "array"
+            }
+          },
+          "required": [
+            "deployment"
+          ],
+          "title": "FlowListResult",
+          "type": "object"
+        },
+        "GateRunParams": {
+          "additionalProperties": false,
+          "properties": {
+            "gate": {
+              "title": "Gate",
+              "type": "string"
+            }
+          },
+          "required": [
+            "gate"
+          ],
+          "title": "GateRunParams",
+          "type": "object"
+        },
+        "GateRunResult": {
+          "additionalProperties": false,
+          "properties": {
+            "passed": {
+              "title": "Passed",
+              "type": "boolean"
+            },
+            "failures": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Failures",
+              "type": "array"
+            },
+            "warnings": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Warnings",
+              "type": "array"
+            },
+            "details": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "title": "Details",
+              "type": "array"
+            }
+          },
+          "required": [
+            "passed"
+          ],
+          "title": "GateRunResult",
+          "type": "object"
+        },
+        "IdentityListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          },
+          "title": "IdentityListParams",
+          "type": "object"
+        },
+        "IdentityRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "username": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Username"
+            },
+            "email": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Email"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "IdentityRecord",
+          "type": "object"
+        },
+        "IdentityListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/IdentityRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "IdentityListResult",
+          "type": "object"
+        },
+        "IdentityShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "IdentityShowParams",
+          "type": "object"
+        },
+        "IdentityShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "identity": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/IdentityRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "IdentityShowResult",
+          "type": "object"
+        },
+        "JwksShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "jwks": {
+              "additionalProperties": true,
+              "title": "Jwks",
+              "type": "object"
+            }
+          },
+          "title": "JwksShowResult",
+          "type": "object"
+        },
+        "KeyRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "kind": {
+              "title": "Kind",
+              "type": "string"
+            },
+            "kid": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Kid"
+            },
+            "label": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Label"
+            },
+            "service_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Service Id"
+            },
+            "digest": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Digest"
+            },
+            "created_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Created At"
+            },
+            "valid_from": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Valid From"
+            },
+            "valid_to": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Valid To"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id",
+            "kind"
+          ],
+          "title": "KeyRecord",
+          "type": "object"
+        },
+        "KeysListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "key_count": {
+              "title": "Key Count",
+              "type": "integer"
+            },
+            "rotation_event_count": {
+              "title": "Rotation Event Count",
+              "type": "integer"
+            },
+            "keys": {
+              "items": {
+                "$ref": "#/components/schemas/KeyRecord"
+              },
+              "title": "Keys",
+              "type": "array"
+            },
+            "rotation_events": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "title": "Rotation Events",
+              "type": "array"
+            }
+          },
+          "required": [
+            "key_count",
+            "rotation_event_count"
+          ],
+          "title": "KeysListResult",
+          "type": "object"
+        },
+        "KeysRotateParams": {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "default": "operator_rotation",
+              "title": "Reason",
+              "type": "string"
+            }
+          },
+          "title": "KeysRotateParams",
+          "type": "object"
+        },
+        "KeysRotateResult": {
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "default": "rotated",
+              "title": "Status",
+              "type": "string"
+            },
+            "new_kid": {
+              "title": "New Kid",
+              "type": "string"
+            },
+            "rotation_event": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Rotation Event"
+            }
+          },
+          "required": [
+            "new_kid"
+          ],
+          "title": "KeysRotateResult",
+          "type": "object"
+        },
+        "ProfileShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "deployment": {
+              "$ref": "#/components/schemas/DeploymentSummary"
+            },
+            "current_state": {
+              "additionalProperties": true,
+              "title": "Current State",
+              "type": "object"
+            },
+            "certification_state": {
+              "additionalProperties": true,
+              "title": "Certification State",
+              "type": "object"
+            }
+          },
+          "required": [
+            "deployment"
+          ],
+          "title": "ProfileShowResult",
+          "type": "object"
+        },
+        "ReleaseBundleParams": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact": {
+              "default": "all",
+              "title": "Artifact",
+              "type": "string"
+            },
+            "bundle_dir": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Bundle Dir"
+            }
+          },
+          "title": "ReleaseBundleParams",
+          "type": "object"
+        },
+        "ReleaseBundleResult": {
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "default": "ok",
+              "title": "Status",
+              "type": "string"
+            },
+            "message": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Message"
+            },
+            "bundle_path": {
+              "title": "Bundle Path",
+              "type": "string"
+            },
+            "sha256": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sha256"
+            }
+          },
+          "required": [
+            "bundle_path"
+          ],
+          "title": "ReleaseBundleResult",
+          "type": "object"
+        },
+        "MethodSummary": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "owner_module": {
+              "title": "Owner Module",
+              "type": "string"
+            },
+            "required_flags": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Required Flags",
+              "type": "array"
+            },
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Tags",
+              "type": "array"
+            }
+          },
+          "required": [
+            "name",
+            "summary",
+            "description",
+            "owner_module"
+          ],
+          "title": "MethodSummary",
+          "type": "object"
+        },
+        "RpcDiscoverResult": {
+          "additionalProperties": false,
+          "properties": {
+            "deployment": {
+              "$ref": "#/components/schemas/DeploymentSummary"
+            },
+            "method_count": {
+              "title": "Method Count",
+              "type": "integer"
+            },
+            "methods": {
+              "items": {
+                "$ref": "#/components/schemas/MethodSummary"
+              },
+              "title": "Methods",
+              "type": "array"
+            }
+          },
+          "required": [
+            "deployment",
+            "method_count"
+          ],
+          "title": "RpcDiscoverResult",
+          "type": "object"
+        },
+        "SessionListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "active_only": {
+              "default": false,
+              "title": "Active Only",
+              "type": "boolean"
+            },
+            "user_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            }
+          },
+          "title": "SessionListParams",
+          "type": "object"
+        },
+        "SessionRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "user_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "User Id"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "username": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Username"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "auth_time": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Auth Time"
+            },
+            "session_state": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Session State"
+            },
+            "expires_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Expires At"
+            },
+            "last_seen_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Last Seen At"
+            },
+            "ended_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Ended At"
+            },
+            "logout_reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Logout Reason"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "SessionRecord",
+          "type": "object"
+        },
+        "SessionListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/SessionRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "SessionListResult",
+          "type": "object"
+        },
+        "SessionShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "session_id": {
+              "title": "Session Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "title": "SessionShowParams",
+          "type": "object"
+        },
+        "SessionShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "session": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/SessionRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "latest_logout": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Latest Logout"
+            }
+          },
+          "title": "SessionShowResult",
+          "type": "object"
+        },
+        "SessionTerminateParams": {
+          "additionalProperties": false,
+          "properties": {
+            "session_id": {
+              "title": "Session Id",
+              "type": "string"
+            },
+            "initiated_by": {
+              "default": "operator",
+              "title": "Initiated By",
+              "type": "string"
+            },
+            "reason": {
+              "default": "administrative_logout",
+              "title": "Reason",
+              "type": "string"
+            },
+            "frontchannel_required": {
+              "default": false,
+              "title": "Frontchannel Required",
+              "type": "boolean"
+            },
+            "backchannel_required": {
+              "default": false,
+              "title": "Backchannel Required",
+              "type": "boolean"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "title": "SessionTerminateParams",
+          "type": "object"
+        },
+        "SessionTerminateResult": {
+          "additionalProperties": false,
+          "properties": {
+            "session": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/SessionRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "logout_state": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Logout State"
+            }
+          },
+          "title": "SessionTerminateResult",
+          "type": "object"
+        },
+        "TargetListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "scope_bucket": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Scope Bucket"
+            }
+          },
+          "title": "TargetListParams",
+          "type": "object"
+        },
+        "TargetSummary": {
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Id"
+            },
+            "scope_bucket": {
+              "title": "Scope Bucket",
+              "type": "string"
+            },
+            "owner_modules": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Owner Modules",
+              "type": "array"
+            },
+            "endpoint_surface": {
+              "additionalProperties": true,
+              "title": "Endpoint Surface",
+              "type": "object"
+            },
+            "test_classes": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Test Classes",
+              "type": "array"
+            },
+            "evidence_refs": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Evidence Refs",
+              "type": "array"
+            },
+            "profile_reality": {
+              "additionalProperties": true,
+              "title": "Profile Reality",
+              "type": "object"
+            },
+            "discrepancies": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Discrepancies",
+              "type": "array"
+            }
+          },
+          "required": [
+            "label",
+            "scope_bucket"
+          ],
+          "title": "TargetSummary",
+          "type": "object"
+        },
+        "TargetListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "targets": {
+              "items": {
+                "$ref": "#/components/schemas/TargetSummary"
+              },
+              "title": "Targets",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "TargetListResult",
+          "type": "object"
+        },
+        "TargetShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "title": "Label",
+              "type": "string"
+            }
+          },
+          "required": [
+            "label"
+          ],
+          "title": "TargetShowParams",
+          "type": "object"
+        },
+        "TargetShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "target": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TargetSummary"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "TargetShowResult",
+          "type": "object"
+        },
+        "TenantListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          "title": "TenantListParams",
+          "type": "object"
+        },
+        "TenantRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Name"
+            },
+            "email": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Email"
+            },
+            "slug": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Slug"
+            },
+            "metadata": {
+              "additionalProperties": true,
+              "title": "Metadata",
+              "type": "object"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "TenantRecord",
+          "type": "object"
+        },
+        "TenantListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/TenantRecord"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "TenantListResult",
+          "type": "object"
+        },
+        "TenantShowParams": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "title": "TenantShowParams",
+          "type": "object"
+        },
+        "TenantShowResult": {
+          "additionalProperties": false,
+          "properties": {
+            "tenant": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TenantRecord"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "title": "TenantShowResult",
+          "type": "object"
+        },
+        "TokenExchangeParams": {
+          "additionalProperties": false,
+          "properties": {
+            "subject_token": {
+              "title": "Subject Token",
+              "type": "string"
+            },
+            "requested_token_type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Requested Token Type"
+            },
+            "audience": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Audience"
+            },
+            "resource": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Resource"
+            },
+            "actor_token": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Actor Token"
+            },
+            "extras": {
+              "additionalProperties": true,
+              "title": "Extras",
+              "type": "object"
+            }
+          },
+          "required": [
+            "subject_token"
+          ],
+          "title": "TokenExchangeParams",
+          "type": "object"
+        },
+        "TokenRecordView": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Id"
+            },
+            "token_hash": {
+              "title": "Token Hash",
+              "type": "string"
+            },
+            "token_kind": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Token Kind"
+            },
+            "token_type_hint": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Token Type Hint"
+            },
+            "active": {
+              "title": "Active",
+              "type": "boolean"
+            },
+            "subject": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Subject"
+            },
+            "tenant_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tenant Id"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            },
+            "scope": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Scope"
+            },
+            "issuer": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Issuer"
+            },
+            "audience": {
+              "default": null,
+              "title": "Audience"
+            },
+            "issued_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Issued At"
+            },
+            "expires_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Expires At"
+            },
+            "revoked_at": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Revoked At"
+            },
+            "revoked_reason": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Revoked Reason"
+            },
+            "claims": {
+              "additionalProperties": true,
+              "title": "Claims",
+              "type": "object"
+            }
+          },
+          "required": [
+            "token_hash",
+            "active"
+          ],
+          "title": "TokenRecordView",
+          "type": "object"
+        },
+        "TokenExchangeResult": {
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "title": "Status",
+              "type": "string"
+            },
+            "token": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/TokenRecordView"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "title": "TokenExchangeResult",
+          "type": "object"
+        },
+        "TokenInspectParams": {
+          "additionalProperties": false,
+          "properties": {
+            "token": {
+              "title": "Token",
+              "type": "string"
+            }
+          },
+          "required": [
+            "token"
+          ],
+          "title": "TokenInspectParams",
+          "type": "object"
+        },
+        "TokenInspectResult": {
+          "additionalProperties": false,
+          "properties": {
+            "token_hash": {
+              "title": "Token Hash",
+              "type": "string"
+            },
+            "active": {
+              "title": "Active",
+              "type": "boolean"
+            },
+            "revoked": {
+              "title": "Revoked",
+              "type": "boolean"
+            },
+            "introspection": {
+              "additionalProperties": true,
+              "title": "Introspection",
+              "type": "object"
+            }
+          },
+          "required": [
+            "token_hash",
+            "active",
+            "revoked"
+          ],
+          "title": "TokenInspectResult",
+          "type": "object"
+        },
+        "TokenListParams": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            },
+            "active_only": {
+              "default": false,
+              "title": "Active Only",
+              "type": "boolean"
+            },
+            "subject": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Subject"
+            },
+            "client_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Client Id"
+            }
+          },
+          "title": "TokenListParams",
+          "type": "object"
+        },
+        "TokenListResult": {
+          "additionalProperties": false,
+          "properties": {
+            "count": {
+              "title": "Count",
+              "type": "integer"
+            },
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/TokenRecordView"
+              },
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "count"
+          ],
+          "title": "TokenListResult",
+          "type": "object"
+        }
+      }
+    }
+  }
+spec_kind: "local-policy"

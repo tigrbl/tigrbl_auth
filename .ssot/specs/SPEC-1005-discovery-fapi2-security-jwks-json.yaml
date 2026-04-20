@@ -1,0 +1,24 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1005"
+number: 1005
+slug: "discovery-fapi2-security-jwks-json"
+title: "Repo spec: specs/discovery/profiles/fapi2-security/jwks.json"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "{"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  {
+    "keys": [],
+    "profile": "fapi2-security",
+    "profile_label": "fapi2-security",
+    "issuer": "https://authn.example.com",
+    "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
+  }
+spec_kind: "local-policy"

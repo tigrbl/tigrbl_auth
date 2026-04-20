@@ -1,0 +1,44 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1013"
+number: 1013
+slug: "tigrbl-public-api-only-composition"
+title: "Tigrbl public-API-only composition is mandatory in release paths"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Tigrbl public-API-only composition is mandatory in release paths
+  
+  - Status: Accepted
+  - Date: 2026-03-20
+  
+  Release-path composition code in `framework.py`, `plugin.py`, `gateway.py`,
+  `api/app.py`, `api/lifecycle.py`, and `app.py` shall:
+  
+  - import Tigrbl only through public modules and documented public surfaces,
+  - avoid private `tigrbl._*` imports,
+  - avoid `tigrbl_core` imports,
+  - avoid release-path `hasattr(...)` framework capability fallbacks,
+  - remain free of direct FastAPI and Starlette imports and dependencies.
+  
+  ## Context
+  
+  `tigrbl_auth` is intended to be a Tigrbl-native authn/z package. Release paths
+  must therefore compose the runtime through Tigrbl's documented public API rather
+  than private Tigrbl modules, alternate framework fallbacks, or ad-hoc framework
+  capability checks.

@@ -1,0 +1,23 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1030"
+number: 1030
+slug: "dependency-maintenance-is-governed-work"
+title: "Dependency maintenance is governed work"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Dependency maintenance is governed work"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  - Status: accepted
+  - Date: 2026-04-18
+  - Decision: dependency upgrades that can change runtime behavior, contracts, evidence, or certification lanes are modeled as explicit governance work rather than implicit housekeeping.
+  - Consequences:
+    - dependency pull requests can be mapped to named features, claims, and tests;
+    - runtime and test-toolchain compatibility expectations remain auditable;
+    - untracked dependency drift is treated as missing governance coverage.

@@ -1,0 +1,28 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1017"
+number: 1017
+slug: "strict-partial-feature-disappearance"
+title: "ADR-0018: Strict Partial Feature Disappearance"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # ADR-0018: Strict Partial Feature Disappearance
+  
+  When a downstream deployment disables a profile feature, protocol slice,
+  surface set, or quarantined extension, that feature shall disappear from the
+  mounted runtime surface, discovery/metadata output, generated contracts,
+  claim manifests, and release evidence manifests.

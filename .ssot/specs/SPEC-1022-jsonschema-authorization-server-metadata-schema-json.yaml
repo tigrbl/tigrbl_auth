@@ -1,0 +1,46 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1022"
+number: 1022
+slug: "jsonschema-authorization-server-metadata-schema-json"
+title: "Repo spec: specs/jsonschema/authorization-server-metadata.schema.json"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "{"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://authn.example.com/schemas/authorization-server-metadata.schema.json",
+    "type": "object",
+    "required": [
+      "issuer",
+      "authorization_endpoint",
+      "token_endpoint"
+    ],
+    "properties": {
+      "issuer": {
+        "type": "string",
+        "format": "uri"
+      },
+      "authorization_endpoint": {
+        "type": "string",
+        "format": "uri"
+      },
+      "token_endpoint": {
+        "type": "string",
+        "format": "uri"
+      },
+      "jwks_uri": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "additionalProperties": true
+  }
+spec_kind: "local-policy"

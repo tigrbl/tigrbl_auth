@@ -1,0 +1,33 @@
+schema_version: 9
+kind: "spec"
+id: "spc:1051"
+number: 1051
+slug: "dependency-compatibility-maintenance"
+title: "Dependency compatibility maintenance"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Dependency maintenance is a governed capability covering runtime dependency compatibility and test-lane compatibility."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  Dependency maintenance is a governed capability covering runtime dependency compatibility and test-lane compatibility.
+  
+  ## Requirements
+  
+  - Runtime dependency changes that can affect auth, signing, contracts, schemas, or persistence map to explicit governance features and claims.
+  - Test and tooling dependency changes that can affect certification or release validation map to explicit governance features and claims.
+  - Compatibility work is backed by repository tests that verify dependency declarations and SSOT traceability.
+  - Dependency updates must not be treated as no-op housekeeping when they can change governed behavior.
+  
+  ## Verification
+  
+  - `tests/unit/test_phase1_published_dependency_model.py`
+  - `tests/unit/test_phase19_ssot_work_item_traceability.py`
+  - `tests/unit/test_phase19_ssot_dependency_maintenance_traceability.py`
+spec_kind: "governance"

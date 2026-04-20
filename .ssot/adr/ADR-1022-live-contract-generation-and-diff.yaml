@@ -1,0 +1,27 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1022"
+number: 1022
+slug: "live-contract-generation-and-diff"
+title: "Live contract generation and diff"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Live contract generation and diff
+  
+  - Status: accepted
+  - Decision: OpenAPI and OpenRPC SHALL be generated from live deployment metadata and validated/diffed in CI.
+  - Consequences: placeholder or drifting contracts fail release gates.

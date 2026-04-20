@@ -1,0 +1,48 @@
+schema_version: 9
+kind: "adr"
+id: "adr:1010"
+number: 1010
+slug: "evidence-model-and-tier-promotion"
+title: "Evidence bundles are required for tier promotion"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
+  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  
+  # Evidence bundles are required for tier promotion
+  
+  - Status: Accepted
+  - Date: 2026-03-19
+  - Supersedes: none
+  
+  Tier promotion is governed as follows:
+  - Tier 1: target declared
+  - Tier 2: target implemented and internally asserted
+  - Tier 3: target evidenced, mapped, and release-gated
+  - Tier 4: target independently peer-supported
+  
+  Every target promoted beyond Tier 1 must map to:
+  - code modules
+  - operator surface
+  - tests
+  - contracts where applicable
+  - evidence artifacts
+  
+  ## Context
+  
+  A standards target is not certifiable merely because code exists. Promotion from
+  intent to implementation to certification requires preserved evidence with clear
+  traceability.

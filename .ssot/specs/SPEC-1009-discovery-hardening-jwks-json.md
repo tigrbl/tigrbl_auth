@@ -1,9 +1,0 @@
-# Repo spec: specs/discovery/profiles/hardening/jwks.json
-
-{
-  "keys": [],
-  "profile": "hardening",
-  "profile_label": "hardening",
-  "issuer": "https://authn.example.com",
-  "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
-}
