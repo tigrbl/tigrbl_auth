@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": "0.1.0",
   "repo": {
     "id": "repo:tigrbl-auth",
     "name": "tigrbl_auth",
@@ -83,7 +83,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-activate",
@@ -116,7 +117,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-admin",
@@ -149,7 +151,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-alg",
@@ -182,7 +185,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-artifact",
@@ -215,7 +219,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-baseline-file",
@@ -248,7 +253,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-bundle-dir",
@@ -281,7 +287,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-check",
@@ -314,7 +321,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-checksum",
@@ -347,7 +355,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-color",
@@ -380,7 +389,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-config",
@@ -413,7 +423,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-cookies",
@@ -446,7 +457,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-curve",
@@ -479,7 +491,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-db-safe-start",
@@ -512,7 +525,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-diagnostics",
@@ -545,7 +559,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-dry-run",
@@ -578,7 +593,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-enable-mtls",
@@ -611,7 +627,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-env-file",
@@ -644,7 +661,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-environment",
@@ -677,7 +695,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-execution-mode",
@@ -710,7 +729,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-extension",
@@ -743,7 +763,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-filter",
@@ -776,7 +797,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-format",
@@ -809,7 +831,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-from-file",
@@ -842,7 +865,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-graceful-timeout",
@@ -875,7 +899,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-health",
@@ -908,7 +933,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-host",
@@ -941,7 +967,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-hypercorn-http2",
@@ -974,7 +1001,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-hypercorn-worker-class",
@@ -1007,7 +1035,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-id",
@@ -1040,7 +1069,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-if-exists",
@@ -1073,7 +1103,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-if-missing",
@@ -1106,7 +1137,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-include-secrets",
@@ -1139,7 +1171,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-input-path",
@@ -1172,7 +1205,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-issuer",
@@ -1205,7 +1239,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-jwks-refresh-seconds",
@@ -1238,7 +1273,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-kid",
@@ -1271,7 +1307,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-kind",
@@ -1304,7 +1341,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-kty",
@@ -1337,7 +1375,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-lifespan",
@@ -1370,7 +1409,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-limit",
@@ -1403,7 +1443,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-log-level",
@@ -1436,7 +1477,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-metrics",
@@ -1469,7 +1511,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-name",
@@ -1502,7 +1545,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-no-strict",
@@ -1535,7 +1579,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-offline",
@@ -1568,7 +1613,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-offset",
@@ -1601,7 +1647,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-output",
@@ -1634,7 +1681,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-peer-profile",
@@ -1667,7 +1715,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-pid-file",
@@ -1700,7 +1749,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-plugin-mode",
@@ -1733,7 +1783,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-port",
@@ -1766,7 +1817,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-profile",
@@ -1799,7 +1851,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-proxy-headers",
@@ -1832,7 +1885,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-public",
@@ -1865,7 +1919,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-publish",
@@ -1898,7 +1953,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-redact",
@@ -1931,7 +1987,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-repo-root",
@@ -1964,7 +2021,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-report-dir",
@@ -1997,7 +2055,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-require-tls",
@@ -2033,7 +2092,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-retire-after",
@@ -2066,7 +2126,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-rpc",
@@ -2099,7 +2160,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-runtime-style",
@@ -2136,7 +2198,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-scope",
@@ -2169,7 +2232,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-server",
@@ -2202,7 +2266,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-set-item",
@@ -2235,7 +2300,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-signing-key",
@@ -2268,7 +2334,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-slice",
@@ -2301,7 +2368,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-sort",
@@ -2334,7 +2402,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-status-filter",
@@ -2367,7 +2436,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-strict",
@@ -2400,7 +2470,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-surface-set",
@@ -2437,7 +2508,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-tenant",
@@ -2470,7 +2542,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-tier",
@@ -2503,7 +2576,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-tigrcorn-contract",
@@ -2536,7 +2610,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-tigrcorn-mode",
@@ -2569,7 +2644,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-timeout",
@@ -2602,7 +2678,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-title",
@@ -2635,7 +2712,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-trace",
@@ -2668,7 +2746,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-uds",
@@ -2701,7 +2780,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-use",
@@ -2734,7 +2814,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-uvicorn-http",
@@ -2767,7 +2848,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-uvicorn-loop",
@@ -2800,7 +2882,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-uvicorn-ws",
@@ -2833,7 +2916,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-verbose",
@@ -2866,7 +2950,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-wait",
@@ -2899,7 +2984,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-workers",
@@ -2932,7 +3018,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-flag-yes",
@@ -2965,7 +3052,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-index",
@@ -2998,7 +3086,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-list",
@@ -3031,7 +3120,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-new",
@@ -3064,7 +3154,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-show",
@@ -3097,7 +3188,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-bootstrap-apply",
@@ -3131,7 +3223,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-bootstrap-manifest",
@@ -3165,7 +3258,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-bootstrap-status",
@@ -3199,7 +3293,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-bootstrap-verify",
@@ -3233,7 +3328,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-claims-lint",
@@ -3266,7 +3362,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-claims-show",
@@ -3299,7 +3396,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-claims-status",
@@ -3332,7 +3430,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-create",
@@ -3365,7 +3464,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-delete",
@@ -3398,7 +3498,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-disable",
@@ -3431,7 +3532,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-enable",
@@ -3464,7 +3566,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-get",
@@ -3497,7 +3600,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-list",
@@ -3530,7 +3634,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-rotate-secret",
@@ -3563,7 +3668,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-client-update",
@@ -3596,7 +3702,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-discovery-diff",
@@ -3629,7 +3736,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-discovery-publish",
@@ -3662,7 +3770,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-discovery-show",
@@ -3695,7 +3804,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-discovery-validate",
@@ -3728,7 +3838,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-doctor",
@@ -3761,7 +3872,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-evidence-bundle",
@@ -3794,7 +3906,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-evidence-peer-execute",
@@ -3827,7 +3940,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-evidence-peer-status",
@@ -3860,7 +3974,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-evidence-status",
@@ -3893,7 +4008,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-evidence-verify",
@@ -3926,7 +4042,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-export-run",
@@ -3959,7 +4076,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-export-status",
@@ -3992,7 +4110,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-export-validate",
@@ -4025,7 +4144,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-create",
@@ -4058,7 +4178,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-delete",
@@ -4091,7 +4212,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-disable",
@@ -4124,7 +4246,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-enable",
@@ -4157,7 +4280,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-get",
@@ -4190,7 +4314,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-list",
@@ -4223,7 +4348,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-flow-update",
@@ -4256,7 +4382,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-gate",
@@ -4289,7 +4416,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-create",
@@ -4322,7 +4450,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-delete",
@@ -4355,7 +4484,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-get",
@@ -4388,7 +4518,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-list",
@@ -4421,7 +4552,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-lock",
@@ -4454,7 +4586,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-set-password",
@@ -4487,7 +4620,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-unlock",
@@ -4520,7 +4654,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-identity-update",
@@ -4553,7 +4688,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-import-run",
@@ -4586,7 +4722,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-import-status",
@@ -4619,7 +4756,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-import-validate",
@@ -4652,7 +4790,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-delete",
@@ -4687,7 +4826,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-export",
@@ -4722,7 +4862,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-generate",
@@ -4757,7 +4898,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-get",
@@ -4792,7 +4934,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-import",
@@ -4827,7 +4970,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-list",
@@ -4862,7 +5006,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-publish-jwks",
@@ -4897,7 +5042,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-retire",
@@ -4932,7 +5078,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-keys-rotate",
@@ -4967,7 +5114,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-migrate-apply",
@@ -5001,7 +5149,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-migrate-plan",
@@ -5035,7 +5184,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-migrate-status",
@@ -5069,7 +5219,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-migrate-verify",
@@ -5103,7 +5254,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-release-bundle",
@@ -5139,7 +5291,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-release-recertify",
@@ -5175,7 +5328,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-release-sign",
@@ -5211,7 +5365,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-release-status",
@@ -5247,7 +5402,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-release-verify",
@@ -5283,7 +5439,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-serve",
@@ -5316,7 +5473,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-session-get",
@@ -5349,7 +5507,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-session-list",
@@ -5382,7 +5541,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-session-revoke",
@@ -5415,7 +5575,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-session-revoke-all",
@@ -5448,7 +5609,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-spec-diff",
@@ -5485,7 +5647,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-spec-generate",
@@ -5522,7 +5685,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-spec-report",
@@ -5559,7 +5723,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-spec-validate",
@@ -5596,7 +5761,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-create",
@@ -5629,7 +5795,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-delete",
@@ -5662,7 +5829,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-disable",
@@ -5695,7 +5863,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-enable",
@@ -5728,7 +5897,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-get",
@@ -5761,7 +5931,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-list",
@@ -5794,7 +5965,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-tenant-update",
@@ -5827,7 +5999,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-token-exchange",
@@ -5860,7 +6033,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-token-get",
@@ -5893,7 +6067,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-token-introspect",
@@ -5926,7 +6101,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-token-list",
@@ -5959,7 +6135,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-token-revoke",
@@ -5992,7 +6169,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:cli-verb-verify",
@@ -6025,7 +6203,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:extension-dns-privacy",
@@ -6050,7 +6229,8 @@
         "tst:tests-unit-test-rfc8932-dns-privacy-py",
         "tst:tests-unit-test-rfc8932-enhanced-metadata-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:extension-set",
@@ -6074,7 +6254,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc7952-security-event-token-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:extension-webauthn-passkeys",
@@ -6098,7 +6279,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc8812-webauthn-algorithms-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:extension-webpush",
@@ -6122,7 +6304,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc8291-webpush-encryption-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-audit-export",
@@ -6148,7 +6331,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-audit-list",
@@ -6174,7 +6358,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-claims-lint",
@@ -6200,7 +6385,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-claims-show",
@@ -6226,7 +6412,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-list",
@@ -6252,7 +6439,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-registration-delete",
@@ -6278,7 +6466,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-registration-list",
@@ -6304,7 +6493,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-registration-show",
@@ -6330,7 +6520,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-registration-upsert",
@@ -6356,7 +6547,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-client-show",
@@ -6382,7 +6574,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-consent-list",
@@ -6408,7 +6601,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-consent-revoke",
@@ -6434,7 +6628,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-consent-show",
@@ -6460,7 +6655,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-discovery-show",
@@ -6486,7 +6682,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-evidence-status",
@@ -6512,7 +6709,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-flow-list",
@@ -6538,7 +6736,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-gate-run",
@@ -6564,7 +6763,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-identity-list",
@@ -6590,7 +6790,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-identity-show",
@@ -6616,7 +6817,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-jwks-show",
@@ -6642,7 +6844,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-keys-list",
@@ -6668,7 +6871,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-keys-rotate",
@@ -6694,7 +6898,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-profile-show",
@@ -6720,7 +6925,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-release-bundle",
@@ -6746,7 +6952,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-rpc-discover",
@@ -6772,7 +6979,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-session-list",
@@ -6798,7 +7006,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-session-show",
@@ -6824,7 +7033,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-session-terminate",
@@ -6850,7 +7060,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-target-list",
@@ -6876,7 +7087,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-target-show",
@@ -6902,7 +7114,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-tenant-list",
@@ -6928,7 +7141,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-tenant-show",
@@ -6954,7 +7168,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-token-exchange",
@@ -6980,7 +7195,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-token-inspect",
@@ -7006,7 +7222,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:rpc-token-list",
@@ -7032,7 +7249,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-baseline",
@@ -7138,7 +7356,8 @@
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-camara-security-interoperability",
@@ -7164,7 +7383,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-confidential-spa-pattern",
@@ -7190,7 +7410,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-fapi2-message-signing",
@@ -7216,7 +7437,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-fapi2-security",
@@ -7330,7 +7552,8 @@
         "tst:tests-unit-test-well-known-endpoints-behavior-py",
         "tst:tests-unit-test-phase16-fapi-runtime-profile-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-fast-udap-security",
@@ -7356,7 +7579,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-fdx-csdf-security-model",
@@ -7382,7 +7606,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-gnap-core-rs",
@@ -7408,7 +7633,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-hardening",
@@ -7515,7 +7741,8 @@
         "tst:tests-unit-test-rpc-registry-live-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-ihe-iua",
@@ -7541,7 +7768,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-nist-sp-800-63b-4",
@@ -7567,7 +7795,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-nist-sp-800-63c-4",
@@ -7593,7 +7822,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-oauth-2-1",
@@ -7619,7 +7849,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-peer-claim",
@@ -7733,7 +7964,8 @@
         "tst:tests-unit-test-phase11-tier4-checkpoint-py",
         "tst:tests-unit-test-phase18-peer-bundle-completeness-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-production",
@@ -7840,7 +8072,8 @@
         "tst:tests-unit-test-rpc-registry-live-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-smart-app-launch",
@@ -7866,7 +8099,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-smart-backend-services",
@@ -7892,7 +8126,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:profile-webauthn-passkey-oauth-patterns",
@@ -7918,7 +8153,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-device",
@@ -7950,7 +8186,8 @@
         "tst:tests-unit-test-phase3-public-route-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-dpop",
@@ -7980,7 +8217,8 @@
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-jar",
@@ -8010,7 +8248,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase9-hardening-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-mtls",
@@ -8040,7 +8279,8 @@
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-par",
@@ -8070,7 +8310,8 @@
         "tst:tests-unit-test-phase3-public-route-contracts-py",
         "tst:tests-unit-test-phase9-hardening-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-rar",
@@ -8100,7 +8341,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase9-hardening-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:slice-token-exchange",
@@ -8132,7 +8374,8 @@
         "tst:tests-unit-test-phase3-public-route-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-authorize",
@@ -8188,7 +8431,8 @@
         "tst:tests-unit-test-rfc9207-issuer-identification-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-device-authorization",
@@ -8222,7 +8466,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-introspect",
@@ -8255,7 +8500,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-login",
@@ -8294,7 +8540,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-logout",
@@ -8327,7 +8574,8 @@
         "tst:tests-unit-test-phase10-hardening-cluster-c-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-par",
@@ -8367,7 +8615,8 @@
         "tst:tests-unit-test-phase9-hardening-cluster-b-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-register",
@@ -8404,7 +8653,8 @@
         "tst:tests-unit-test-rfc7591-client-registration-endpoint-py",
         "tst:tests-unit-test-rfc8252-native-app-redirects-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-register-client-id",
@@ -8442,7 +8692,8 @@
         "tst:tests-unit-test-rfc7592-client-management-endpoint-py",
         "tst:tests-unit-test-rfc8252-native-app-redirects-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-revoke",
@@ -8470,7 +8721,8 @@
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-unit-test-phase3-public-route-contracts-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-token",
@@ -8509,7 +8761,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-token-exchange",
@@ -8547,7 +8800,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-userinfo",
@@ -8578,7 +8832,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-openid-userinfo-endpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-well-known-jwks-json",
@@ -8606,7 +8861,8 @@
         "tst:tests-unit-test-jwks-rotation-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-well-known-oauth-authorization-server",
@@ -8634,7 +8890,8 @@
         "tst:tests-integration-test-rfc8414-metadata-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-well-known-oauth-protected-resource",
@@ -8666,7 +8923,8 @@
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:route-well-known-openid-configuration",
@@ -8703,7 +8961,8 @@
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-active-extensions",
@@ -8740,7 +8999,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-active-protocol-slices",
@@ -8777,7 +9037,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-active-surface-sets",
@@ -8814,7 +9075,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-id-token-encryption",
@@ -8850,7 +9112,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-backchannel-logout",
@@ -8883,7 +9146,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-core",
@@ -8916,7 +9180,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-discovery",
@@ -8949,7 +9214,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-frontchannel-logout",
@@ -8982,7 +9248,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-rp-initiated-logout",
@@ -9015,7 +9282,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-session-management",
@@ -9048,7 +9316,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-oidc-userinfo",
@@ -9081,7 +9350,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc6749",
@@ -9114,7 +9384,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc6750",
@@ -9147,7 +9418,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc6750-form",
@@ -9181,7 +9453,8 @@
         "tst:tests-unit-test-phase6-profile-discovery-runtime-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc6750-query",
@@ -9215,7 +9488,8 @@
         "tst:tests-unit-test-phase6-profile-discovery-runtime-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7009",
@@ -9248,7 +9522,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7515",
@@ -9281,7 +9556,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7516",
@@ -9314,7 +9590,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7517",
@@ -9347,7 +9624,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7518",
@@ -9380,7 +9658,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7519",
@@ -9413,7 +9692,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7521",
@@ -9446,7 +9726,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7523",
@@ -9479,7 +9760,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7591",
@@ -9512,7 +9794,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7592",
@@ -9545,7 +9828,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7636",
@@ -9578,7 +9862,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7662",
@@ -9611,7 +9896,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7800",
@@ -9644,7 +9930,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc7952",
@@ -9677,7 +9964,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8252",
@@ -9710,7 +9998,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8291",
@@ -9743,7 +10032,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8414",
@@ -9776,7 +10066,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8523",
@@ -9809,7 +10100,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8615",
@@ -9842,7 +10134,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8628",
@@ -9875,7 +10168,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8693",
@@ -9908,7 +10202,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8705",
@@ -9941,7 +10236,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8707",
@@ -9974,7 +10270,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8812",
@@ -10007,7 +10304,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc8932",
@@ -10040,7 +10338,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9068",
@@ -10073,7 +10372,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9101",
@@ -10106,7 +10406,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9126",
@@ -10139,7 +10440,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9207",
@@ -10172,7 +10474,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9396",
@@ -10205,7 +10508,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9449",
@@ -10238,7 +10542,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9700",
@@ -10271,7 +10576,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enable-rfc9728",
@@ -10304,7 +10610,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-enforce-rfc8252",
@@ -10332,7 +10639,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-rfc8252-native-app-redirects-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-oauth21-alignment-mode",
@@ -10358,7 +10666,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-require-tls",
@@ -10394,7 +10703,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-rfc8707-enabled",
@@ -10421,7 +10731,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-phase8-hardening-cluster-a-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-runtime-style",
@@ -10458,7 +10769,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-cross-site",
@@ -10488,7 +10800,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-domain",
@@ -10518,7 +10831,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-force-secure",
@@ -10548,7 +10862,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-max-age-seconds",
@@ -10578,7 +10893,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-name",
@@ -10608,7 +10924,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-path",
@@ -10638,7 +10955,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-renewal-seconds",
@@ -10668,7 +10986,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-session-cookie-samesite",
@@ -10698,7 +11017,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-strict-boundary-enforcement",
@@ -10734,7 +11054,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-admin-enabled",
@@ -10771,7 +11092,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-diagnostics-enabled",
@@ -10808,7 +11130,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-operator-enabled",
@@ -10845,7 +11168,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-plugin-mode",
@@ -10882,7 +11206,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-public-enabled",
@@ -10919,7 +11244,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:flag-surface-rpc-enabled",
@@ -10956,7 +11282,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-asgi-3-application-package",
@@ -11029,7 +11356,8 @@
         "tst:tests-unit-test-security-deps-py",
         "tst:tests-unit-test-user-register-schema-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-bootstrap-and-migration-lifecycle",
@@ -11057,7 +11385,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase6-migration-portability-evidence-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-camara-security-and-interoperability-profile",
@@ -11083,7 +11412,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-cli-operator-surface",
@@ -11118,7 +11448,8 @@
         "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
         "tst:tests-interop-test-operator-profile-catalog-completeness-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-confidential-spa-profile-pattern",
@@ -11144,7 +11475,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-fapi-2-0-message-signing-profile",
@@ -11170,7 +11502,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-fast-udap-security-profile",
@@ -11196,7 +11529,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-fdx-csdf-security-model-and-profile",
@@ -11222,7 +11556,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-gnap-core-resource-server-profile",
@@ -11248,7 +11583,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-ihe-iua-profile",
@@ -11274,7 +11610,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-import-export-portability",
@@ -11301,7 +11638,8 @@
         "tst:tests-unit-test-phase4-cli-contract-py",
         "tst:tests-unit-test-phase5-operator-service-layer-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-key-lifecycle-and-jwks-publication",
@@ -11330,7 +11668,8 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-nist-sp-800-63b-4-profile",
@@ -11356,7 +11695,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-nist-sp-800-63c-4-profile",
@@ -11382,7 +11722,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oauth-2-1-alignment-profile",
@@ -11408,7 +11749,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-back-channel-logout",
@@ -11435,7 +11777,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-core-1-0",
@@ -11463,7 +11806,8 @@
         "tst:tests-integration-test-oidc-endpoints-py",
         "tst:tests-unit-test-oidc-id-token-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-discovery-1-0",
@@ -11494,7 +11838,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-openid-configuration-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-front-channel-logout",
@@ -11521,7 +11866,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase10-hardening-cluster-c-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-rp-initiated-logout",
@@ -11549,7 +11895,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-session-management",
@@ -11577,7 +11924,8 @@
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py",
         "tst:tests-unit-test-phase7-session-logout-cluster-b-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-oidc-userinfo",
@@ -11603,7 +11951,8 @@
         "tst:tests-integration-test-oidc-endpoints-py",
         "tst:tests-unit-test-openid-userinfo-endpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-openapi-3-1-3-2-compatible-public-contract",
@@ -11632,7 +11981,8 @@
         "tst:tests-unit-test-openapi-examples-py",
         "tst:tests-unit-test-openapi-well-known-endpoints-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-openrpc-1-4-x-admin-control-plane-contract",
@@ -11659,7 +12009,8 @@
         "tst:tests-unit-test-rpc-registry-live-py",
         "tst:tests-unit-test-phase6-operator-control-plane-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-release-bundle-and-signature-verification",
@@ -11687,7 +12038,8 @@
         "tst:tests-unit-test-phase1-published-dependency-model-py",
         "tst:tests-perf-test-bundle-manifest-size-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-6265",
@@ -11714,7 +12066,8 @@
         "tst:tests-integration-test-persistence-lifecycle-durability-py",
         "tst:tests-negative-test-cookie-and-logout-abuse-cases-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-6749",
@@ -11748,7 +12101,8 @@
         "tst:tests-unit-test-rfc6749-token-endpoint-py",
         "tst:tests-unit-test-rfc6749-validators-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-6750",
@@ -11777,7 +12131,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-rfc6750-bearer-token-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7009",
@@ -11806,7 +12161,8 @@
         "tst:tests-unit-test-phase3-public-route-contracts-py",
         "tst:tests-unit-test-rfc7009-token-revocation-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7515",
@@ -11831,7 +12187,8 @@
         "tst:tests-conformance-baseline-test-rfc7515-jws-py",
         "tst:tests-unit-test-rfc7515-jws-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7516",
@@ -11857,7 +12214,8 @@
         "tst:tests-unit-test-oidc-id-token-encryption-py",
         "tst:tests-unit-test-rfc7516-jwe-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7517",
@@ -11883,7 +12241,8 @@
         "tst:tests-unit-test-jwks-rotation-py",
         "tst:tests-unit-test-rfc7517-jwk-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7518",
@@ -11908,7 +12267,8 @@
         "tst:tests-conformance-baseline-test-rfc7518-jwa-py",
         "tst:tests-unit-test-rfc7518-jwa-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7519",
@@ -11934,7 +12294,8 @@
         "tst:tests-unit-test-jwtoken-py",
         "tst:tests-unit-test-rfc7519-jwt-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7521",
@@ -11959,7 +12320,8 @@
         "tst:tests-conformance-production-test-rfc7521-assertion-framework-py",
         "tst:tests-unit-test-rfc7521-assertion-framework-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7523",
@@ -11984,7 +12346,8 @@
         "tst:tests-conformance-production-test-rfc7523-jwt-profile-py",
         "tst:tests-unit-test-rfc7523-jwt-profile-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7591",
@@ -12013,7 +12376,8 @@
         "tst:tests-unit-test-rfc7591-client-registration-endpoint-py",
         "tst:tests-unit-test-rfc7591-dynamic-client-registration-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7592",
@@ -12042,7 +12406,8 @@
         "tst:tests-unit-test-rfc7592-client-management-endpoint-py",
         "tst:tests-unit-test-rfc7592-client-registration-management-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7636",
@@ -12072,7 +12437,8 @@
         "tst:tests-unit-test-auth-code-exchange-pkce-py",
         "tst:tests-unit-test-rfc7636-pkce-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7662",
@@ -12102,7 +12468,8 @@
         "tst:tests-unit-test-rfc7662-token-introspection-py",
         "tst:tests-unit-test-rfc7662-unit-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7800",
@@ -12126,7 +12493,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc7800-proof-of-possession-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-7952",
@@ -12150,7 +12518,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc7952-security-event-token-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8252",
@@ -12178,7 +12547,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-rfc8252-native-app-redirects-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8291",
@@ -12202,7 +12572,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc8291-webpush-encryption-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8414",
@@ -12228,7 +12599,8 @@
         "tst:tests-integration-test-rfc8414-metadata-py",
         "tst:tests-unit-test-rfc8414-authorization-server-metadata-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8615",
@@ -12254,7 +12626,8 @@
         "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8628",
@@ -12287,7 +12660,8 @@
         "tst:tests-unit-test-phase8-hardening-cluster-a-py",
         "tst:tests-unit-test-rfc8628-device-authorization-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8693",
@@ -12320,7 +12694,8 @@
         "tst:tests-unit-test-phase8-hardening-cluster-a-py",
         "tst:tests-unit-test-rfc8693-token-exchange-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8705",
@@ -12351,7 +12726,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-rfc8705-compliance-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8707",
@@ -12379,7 +12755,8 @@
         "tst:tests-unit-test-phase8-hardening-cluster-a-py",
         "tst:tests-unit-test-rfc8707-resource-indicators-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8812",
@@ -12403,7 +12780,8 @@
       "test_ids": [
         "tst:tests-unit-test-rfc8812-webauthn-algorithms-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-8932",
@@ -12428,7 +12806,8 @@
         "tst:tests-unit-test-rfc8932-dns-privacy-py",
         "tst:tests-unit-test-rfc8932-enhanced-metadata-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9068",
@@ -12458,7 +12837,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-rfc9068-jwt-profile-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9101",
@@ -12489,7 +12869,8 @@
         "tst:tests-unit-test-phase9-hardening-cluster-b-py",
         "tst:tests-unit-test-rfc9101-jwt-secured-authorization-request-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9126",
@@ -12520,7 +12901,8 @@
         "tst:tests-unit-test-phase9-hardening-cluster-b-py",
         "tst:tests-unit-test-rfc9126-pushed-authorization-requests-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9207",
@@ -12548,7 +12930,8 @@
         "tst:tests-unit-test-phase9-hardening-cluster-b-py",
         "tst:tests-unit-test-rfc9207-issuer-identification-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9396",
@@ -12579,7 +12962,8 @@
         "tst:tests-unit-test-phase9-hardening-cluster-b-py",
         "tst:tests-unit-test-rfc9396-authorization-details-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9449",
@@ -12610,7 +12994,8 @@
         "tst:tests-unit-test-phase7-advanced-surface-contracts-py",
         "tst:tests-unit-test-rfc9449-dpop-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9700",
@@ -12639,7 +13024,8 @@
         "tst:tests-unit-test-phase6-profile-discovery-runtime-py",
         "tst:tests-unit-test-rfc9700-security-bcp-profile-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-rfc-9728",
@@ -12669,7 +13055,8 @@
         "tst:tests-interop-test-tier4-promotion-fail-closed-py",
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-runner-profile-hypercorn",
@@ -12699,7 +13086,8 @@
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-runtime-cfg-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-runner-profile-tigrcorn",
@@ -12729,7 +13117,8 @@
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-runtime-cfg-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-runner-profile-uvicorn",
@@ -12759,7 +13148,8 @@
         "tst:tests-unit-test-phase3-runtime-launcher-py",
         "tst:tests-unit-test-runtime-cfg-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-smart-app-launch-profile",
@@ -12785,7 +13175,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-smart-backend-services-profile",
@@ -12811,7 +13202,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:target-webauthn-and-passkey-bound-oauth-patterns",
@@ -12837,7 +13229,8 @@
         "tst:tests-unit-test-boundary-freeze-checkpoint-py",
         "tst:tests-unit-test-feature-flag-registry-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:governance-work-item-traceability",
@@ -12861,7 +13254,8 @@
       "test_ids": [
         "tst:tests-unit-test-phase19-ssot-work-item-traceability-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     },
     {
       "id": "feat:governance-dependency-compatibility-maintenance",
@@ -12886,7 +13280,8 @@
         "tst:tests-unit-test-phase1-published-dependency-model-py",
         "tst:tests-unit-test-phase19-ssot-dependency-maintenance-traceability-py"
       ],
-      "requires": []
+      "requires": [],
+      "spec_ids": []
     }
   ],
   "tests": [
@@ -43221,9 +43616,9 @@
     }
   ],
   "tooling": {
-    "ssot_registry_version": "0.2.6",
+    "ssot_registry_version": "0.2.8",
     "initialized_with_version": "0.1.2",
-    "last_upgraded_from_version": "0.2.2"
+    "last_upgraded_from_version": "0.2.6"
   },
   "document_id_reservations": {
     "adr": [
@@ -43290,7 +43685,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "9d4559fee395ae732dbd6c6d7acd30f60ac2564ab634c465b9f77007b6b8ba2c",
+      "content_sha256": "e7bd19665fa1a92520ee9b21da493bd5e3e026209ac31fd64e344fcb1710bba5",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43306,7 +43701,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "d0f88f8b3a56f10a1be402a12c911624bc79b5211399ec33ad6d423bb8c10904",
+      "content_sha256": "29b6b133e5ecd059c90da8ab7ef931f940ac566cb955a9f4b36a8d6b5f1e2ef7",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43322,7 +43717,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "2e4f2ff23d7494283df650ffb00767f67667dff875899e3d005c5805f8cd1fea",
+      "content_sha256": "761ffd5988667d68d1ed70d24b1c15946c69c1143115b0230a0a6ccb5cfa4238",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43338,7 +43733,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "e8eb076466f63c19ac1f27a09fc252195b36447cf17f37607c61f262904786d9",
+      "content_sha256": "f8b91bbe54942b2157744e0419b7f6c4b6bb84d02497a391ca1a088114c3c3da",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43354,7 +43749,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "14e8f2e75b05a2354e444613b10e78ba661bb025fbf70de358345e310c9025f5",
+      "content_sha256": "3e8243fe57d04a67d2eb94c02f100a466b7dd20566d292fd336979a35abdc6a2",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43370,7 +43765,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "8a9b64d4250cdb1fcb9d965dba156738761d92a0e823d559e3324a274b75bd0f",
+      "content_sha256": "4aef17bb539ad05e48b04b70ee69119dc973ee4e16be407bc5d2d11fba0af607",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43386,7 +43781,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "a835cb5afcbad76060e2625ebdadb420d33e373d95f108645e3fabdb58f389f9",
+      "content_sha256": "a2331253dabab9dc3e407adb55b25f0febb6c16ad590a515d97ac19f33a9b962",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43402,7 +43797,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "8c9bbfdb99bdac1238ee04832e59f74633af0ff8b4dcf8589aa748d34f5d7d7c",
+      "content_sha256": "2145618a72dff6597602ca96df720776b7ac13023fe8ff5462be021621446940",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43418,7 +43813,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "354247cebe6a72d3ff237ed719ef00d7e4420a96f74baaea3dd0e7b7289c9a97",
+      "content_sha256": "3026817d03ed825e1435612c08557b01dfa1fcadd5d1db32172169b79c7a27b1",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43434,7 +43829,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "ae54390825b4ec7d43751c430332aeb7e66654b2f520fa4dc40dd3893bcc18c1",
+      "content_sha256": "400819479d8e5036da5fd39e30b768f82785aecd3f06fc18738cd1a2b0cce079",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43450,7 +43845,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "292c74ed694752c1c030dacfda8823a6e8d560852a10d12aa7d57c6de9b7ce22",
+      "content_sha256": "c138f93e130f63857a2777dd40f3856fdceba7f4768d61dd0f2d0e5a9c7fe4cc",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43466,7 +43861,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "b4b2edfc60f175e333a654bf806392a480c8625fc86aeec029b9508194feaded",
+      "content_sha256": "87fd1773ace8f82b7707dda6e8b633e285da493e8b29ea17c0dc776da3b4d8b9",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43482,7 +43877,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "a6fc0a01e2743d428644a208c2b93ad35184cdac16841097868587e5a0f39052",
+      "content_sha256": "c3534a8ae8a38bdd1328cc652b750530fdd8c84e00ecf8e19c81301030da822f",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -43498,7 +43893,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "59ef0b1bd8975e91afc6cfcf8ceebcf9944704f456538fd340c970d915e1bf49",
+      "content_sha256": "52047d10ab6538e7423e6233490be2eb699cd31e374f5b81d3daeeeda8eab98d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43514,7 +43909,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7971f7fc7159e951074d23977e0603ddf76306ec4cf6e8c242fbe5e2302d0114",
+      "content_sha256": "d8bc8e6ff8398357184eae358c1cb3e356b09e2807bdc6a7fcead13e7ef286ed",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43530,7 +43925,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4bade04ff74be06b8f4b29f378a3f5952583ed198ccad9255af5e54f518a12e5",
+      "content_sha256": "3ce43e70f11c44a6ac6f910cf4729fb39dacb5f219f91bdbd844edbf6df68608",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43546,7 +43941,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "b4b00edfb23766299d2fc9d57cd50568f8f0dc95da910d1f102372dc42096957",
+      "content_sha256": "a23046cd159b8922dc514f1805d4f7216de2a6c6a7bcc5ab6518e7debcd3f6a4",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43562,7 +43957,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "9c2010359489ce899d3bb56bd557033f17b6ebabb30ab1ebe15aeefe8db13b80",
+      "content_sha256": "57ece5e71c47855bfa7014ba7b22c1d40d2c1665bc900efecea705f0cf13cdb6",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43578,7 +43973,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a806a6795775e93ffca2330eda0261079464493cda55faa25cb385baabbe2039",
+      "content_sha256": "85838c16d5206368566b488d347d842f476b93f3c47f8b45640d96c8acbb5f56",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43594,7 +43989,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e95ab020ab70e3428daede2113f6c27720dd9a955ed8b2eee75d72de02d1a36a",
+      "content_sha256": "4c3bde014559f9e325e1aba87cb55bc3ed8611aa71df1a131e6e538e2db2b844",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43610,7 +44005,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "40c52184467f1373128c2f8a7a3d0a6440194dab3948467f8ebe734c06015b32",
+      "content_sha256": "3346cbd81a3934fe216944b96ca8755a1892e5a98c3c89c8e2aa0a322e405ce6",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43626,7 +44021,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "298568d75c24dabcd815919b0da2cce1474f2dac16534c341c5c98eb761bc100",
+      "content_sha256": "dc23107439a22f86e030d62f6f65783abb29965248a40731ec27bccfec9954d1",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43642,7 +44037,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "76d7186eb714e753a7a4c1d002805b786964886203050140a8f156058e069c0e",
+      "content_sha256": "05795394a9dcb4662b8afbb90d73eb132235ded3d0e6e21faf7ad69cb46a6003",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43658,7 +44053,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6f8c964f77210f50f734aacac65ebfd27339b3540769dfa90c6fbdc190185d90",
+      "content_sha256": "eff1d38851e9b89a076bbcca004e2dd9a80539ebf146f1b7573397d57d2fbecd",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43674,7 +44069,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "2f58abaa480d1ded1e22bfa40ac1dd7a2dfdaa9a634f4b8a94c1772dd2f4f0ff",
+      "content_sha256": "8902368b5c646aa1c96af2b1e2326c020e198071fdce2c3982a64ce2544c9264",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43690,7 +44085,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "0a027a3588d1eda7113ea9dac9baf8f52de1fef7392a729e95ec9c863945a1d4",
+      "content_sha256": "028e780717c7cb663edc49ae55fec35dee6f5ea2f300f7478b49fd056f5b2c72",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43706,7 +44101,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4655d22d4c8a69c77284d5404f22cbb3595049886362ccbbf96e57e754a4b41c",
+      "content_sha256": "201be307225deb59d55b7c6b9b0acb916f59e9a00d0a50141db183cb3cf51ed5",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43722,7 +44117,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8584161ee6ca8c7f6127a010019e68feb1e760375c677f9d03003a2a079daf6b",
+      "content_sha256": "bc2ab471e379f217d0faeb68354d2089140e67abfac4b8605389edbdfb5c2d0f",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43738,7 +44133,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bae39221979eb65633e75b67c36caa47500ae390d8898cdae7d0c5173fc02986",
+      "content_sha256": "f5ada7781a7a7d696778ec7af86ea721c8097b77d38c13cb4c124c994aca5ddb",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43754,7 +44149,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "59a68125fde855eac9b8c91e92b5effb5027a7544f4f26645d66aedaf664ad20",
+      "content_sha256": "fe2f190093d4670870aa1757ff8fc3948b5846f08c245f350e01dbe4edd4ddf2",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43770,7 +44165,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "56493d04acec678491f44961a65765afcb2a2b82074d78eeb77efa3ffc323ca8",
+      "content_sha256": "8994d0ac07d521a3b859042b3f9c5afcd6051809d89525def3b31d445a35295c",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43786,7 +44181,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "3739f18c09df1a6d06bbfa04f4f0389aac553994307ced2ef635c7cc37900959",
+      "content_sha256": "7e5e6f46b11b7689e2d8ebe80c68965400c136c321142311de6ea44949adbb3d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43802,7 +44197,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "dcd2cb81873d813a5e2e015a0742a9feee282b65a35ceddf8dae4a2e5f18e278",
+      "content_sha256": "73195a29cf6bd7f21ee69cfb2268f5f0c737881b0e91e9b8bc6393d2929f0ef4",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43818,7 +44213,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "aa466d0e65c425acbdf97917f78cff559195db9002428cbf95c488eb6d64cec0",
+      "content_sha256": "dd765a1c9316ad6626af4f03e9f63484829404b626d1f400fda09222232ba267",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43834,7 +44229,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a83dcbad13b14929d0211a23371a9dd520ffb1d86cbe2d49516f7a52c878ce9f",
+      "content_sha256": "3c2a8577294f71a06dee400dc59bcb2dd3f67f1fcfa22342329e74151c51bfc0",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43850,7 +44245,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "96801120f531896025d2bb481c045ed2c5a23332d92631a87c8637237997d61c",
+      "content_sha256": "bb216aea669b7ef098bdcd0bb1247dc92c3e50abd34149e9dd5407953b2927e4",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43866,7 +44261,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "76d33c4b5149c6d9ce4f8591a957141610557f3ee4e25e7fea574015d1a9617c",
+      "content_sha256": "e93036a784772a8ae0413b61fbdb268f02e3576ac2773935620d04690e666185",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43882,7 +44277,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bb27bdbcf012b11a723bb34d2bfdfa215eec54b46afd7dcb4ea078cf76d9be6c",
+      "content_sha256": "6bce2faa7cc14142400763e5fb17136c45aa213f7ff51941dbbf1beb3d6ac9d2",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43898,7 +44293,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d17bf3c69fd2c4f529571d4692dd5a942d8f6dd4d4a40dcc4ce897a397cd1b72",
+      "content_sha256": "edd05f25f2dd8840dbcadb5b353ad3607a5e9a1f65d047561fc82b5e7b8dbf98",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43914,7 +44309,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "2a8aaf9da1de59eca40aa928296471738cfa631413578e1ca309043333f56cd8",
+      "content_sha256": "eed30612754baeb3090c72e41870de013111f3cd5847824064a2b2eed33a64c9",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43930,7 +44325,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4d0e61c52067342c4e46440dfc51e8ccf85cb24082e4966e55bd439109a29b4a",
+      "content_sha256": "bed5b83e1e02faaef5b4704c2d833ec9d303abb240cb8311f8fa9481a3e26d66",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43946,7 +44341,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "937c94f077d2ac5e0d0e6cb4ad15c9840925a2b13efe5c034c1ab78ac203d6e3",
+      "content_sha256": "9be07a47c2f4e3cf87833f4f8333fd1f7eca376e95e9907fdaa98f5a2aa5ae35",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43962,7 +44357,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7bb5be7967fe0f09e5f291f08f256672f06a2c6a87695b328d46c38238d7bb20",
+      "content_sha256": "becf72c524ee6a1fa843c4d1533fbcddd57d53e7392d63102f93b16d87bb5f5a",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43978,7 +44373,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.6",
-      "content_sha256": "8d1f1ad9f0da1183ed79811abe5a97daca0118631be197f3942a7bc074f859a7",
+      "content_sha256": "a5600ae200810536e34173caebaaa97b7e656abff4de85a19f88e3263c8714e9",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -43994,7 +44389,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.6",
-      "content_sha256": "fc6e368bef1ad8c7b55157ce61fdcb96e5013437410f2705cbad224054ba9c2c",
+      "content_sha256": "eb3e5d5a6824a8cb6b6cc24c64b0c887057ffc18b49694f682da31e79dc83117",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -44012,7 +44407,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "ad2dd542956a22663105d8effd21036990b198f911d038e77da499882e67a331",
+      "content_sha256": "d03d461a32d1cbc5798cd33fbda66589010b8d082b65bf989f18f761d273b587",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44029,7 +44424,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "485ff4a815e85fa64742d7e0fcd3acb3ada655fcf0193b8687e4aa6a99c99725",
+      "content_sha256": "bacd750fcaee57277115e2bd61c5fde308624798839a34bce0bc8f1320de3287",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44046,7 +44441,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "c59709574807cbee7a24932f28457d62cad23ff3f9846952b49aa32534779440",
+      "content_sha256": "c2f9addf6a50ccbfc020c40327de93027ec984bebd0dc12feb1f4febfa816293",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44063,7 +44458,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "59fee673b5e996e8006ba754a9bb3011e80058530113131993cbb2eb3eaf91cc",
+      "content_sha256": "fe3ff8e895162ae90359401bac69bc8e8e5c98b2b31447fea3b6e1ae76516c79",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44080,7 +44475,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "5fa31fc6765df3a28da79c2a79828569cb275ecaa2d131fd0034905c330ee7e8",
+      "content_sha256": "d789748eb6dd262134c80baf77a8c44dd85f6ca0ce1ab53586d25dcb576e32a1",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44097,7 +44492,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "2dac3715f16ad5273e7090f543e6b899bf5e9ddf0a6d765c73ea8745fbf148e7",
+      "content_sha256": "7b350ed11cad9d9be5fce31e10f0f4350d6a071049a01c950af8694d5f0630d7",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44114,7 +44509,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "10ca43d9005ec80dc8ac0a86aa89cd58b2bf328fca97bec9157321c1d5bdc116",
+      "content_sha256": "6952e1ae415375b4dbe46c92537f6c6cd3dce5709a2507d906197bf8043fd6d6",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44131,7 +44526,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "d8ad7e550a9f9398a681154a61049146e2f82e60c6db35404c1422eb2812fe70",
+      "content_sha256": "63b5056e142d551afb5a7c8e119b4e02913371771bb54c56c52464b1615893c2",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44148,7 +44543,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "1d2c6efaecab6c918976cb016f9806987eb4b4b7738d397ab8264ef785c2dea9",
+      "content_sha256": "ab8ef1311b825d7474f24a8b2eeff2fee19183804746cbccd7234f9f5e2166a9",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44165,7 +44560,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "201fdc85d032123c5ece91ea8bb858de869cd04c404f34075eaa2cf73aa54292",
+      "content_sha256": "ce9b9a9cd22703419af6d37aaf3e7da815291deb6bf493a16689f41d9019233e",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44182,7 +44577,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "8719621710b0215429ab31a3677498cc119c4494abeae19c64b95b3dd136f081",
+      "content_sha256": "e821e3c072a3973300b6c91eb2f6ce504cf4f34f4c6b49ed7c742a4315b7d5fc",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44199,7 +44594,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "68d22f3df30273de1d81c096fa0d4d32b5d0fe36780e17d94a9678d64cfb6217",
+      "content_sha256": "fa4fab0acc1175f202b36fe1770cbe076332bf33e7bccf5eb539c477c9215b7d",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44216,7 +44611,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "e46c5a61e648cd36d7bcaec9d2be62e9ca4020d9fd44fed13b17cc6f177116b6",
+      "content_sha256": "bbea37ab830073ee6309011ee7aa9b13aa490e660bdf01448cd50f1d42a32993",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44233,7 +44628,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "a87f42c91635be8d9cf1f7f0a7c684bc318ba6c92bed23003d3233d9f86ce51b",
+      "content_sha256": "9e7523c7f8fe3f5cad8bd05aa42796e96794c7427cb774639ef9c5dfc4082c8a",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44250,7 +44645,7 @@
       "managed": true,
       "immutable": true,
       "package_version": "0.2.6",
-      "content_sha256": "c195c092aa178a076e7bcfaedbda1b047dd6bdb6c722178a7b95bf955a295e9d",
+      "content_sha256": "38914181571d8d366258bc4cce8837a9857b2e480e03687db9d811555b807f77",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
@@ -44267,7 +44662,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d5169c695965aca509e91f14a94b3d7655933831850e1cee894148931a6a86cc",
+      "content_sha256": "664d101030f7f532e88711f3ad2b7db8093264623b6b837936126d9e22302542",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44284,7 +44679,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "0a8aa7c73dfff9491978c8f3a3a9098b18c33a225dba031a2b9544b0894757e7",
+      "content_sha256": "b2b0f3f4910c6f1a56ca7241242f89e611bd82ae45ba84a4148d2bffe5e256d2",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44301,7 +44696,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "aab41ae4b97361e9476c5e83836f77dae6579f853afbd08f2d58d837851f23e6",
+      "content_sha256": "1ffa30b93af10c30ab0113cf14b22e2d712e34be31c15d20bf4fae01d70f2d6f",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44318,7 +44713,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "63d7b5ed9446aeb3c47cf631e6e2d86fecbf0fa687aa7560d59e53b070e02d66",
+      "content_sha256": "9ea0d206cb761592ad3526be70dd1abd5b5281b86ac98d4c1b0ac5cd233a99a9",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44335,7 +44730,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "f1e0adafc221511a66e85c84814b750ef1f07ac1af47af60624d728385e575ce",
+      "content_sha256": "f0472de341223f9a9f8355cfb4d3cce29bce0e0710f2b678d4804aa0642bb80e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44352,7 +44747,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "918663d8cfb2b76f51b37632c177fe578a2b29b91aa53cdc65b9ccd1674e7171",
+      "content_sha256": "dce3b08f6006cdd2b5c82c17f7fd30f27f1aefeefe134eefe05354fe6fe3e206",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44369,7 +44764,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "db304a920a9975e829a1412e1a18aa78e37bb877573cccfba9ab8fd865004327",
+      "content_sha256": "3373e6dd2e72836176443483a796c4fbd6fa2b33c537f49c37dd583ddd8d8360",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44386,7 +44781,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "dab0615cdf932f2a8ee4756be7de096219b6f38a6dc4e309f7ce4e539f802f50",
+      "content_sha256": "a23e00ed9def36671c72f8c8f2355df966b12b8487c665fa040117b1dd257c14",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44403,7 +44798,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "2d65806c53e16c547ef3b509820598fe1ecf5af82270c98c7e5aaa1233d2077a",
+      "content_sha256": "b70e9727d3b48fc779d8ddcaf8e67e071d992f6f4c094552064b010d8239e30e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44420,7 +44815,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "6268b261363f43f98a1fd718a1de24a82b578c1982f302758c130f732ee0d988",
+      "content_sha256": "72ee5d3fd227b31b0fcc918b7a04ce85ea8195245ee91ca31d07d4ecdcbd0651",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44437,7 +44832,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1de4e37dc4c8fa439a7433eb27ad75b20ca184a343a79b79a481fb92a79df7e0",
+      "content_sha256": "3a9b3fbfacf21a2bf2a8f0f3b4997bf224b12af8dcc70b6b65171a02afc3ddf1",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44454,7 +44849,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "42421c9752053e53b244696c009f11927b8f7333cb5d9ec6727c9a118958f21a",
+      "content_sha256": "a798807a80bb4220eda062ed86d827af9055d3238a8db5f2e2f94e42637f2b1e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44471,7 +44866,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "1bf3240b13ef92f08fa3e1655fe50b29db302af4e46197cb396b84346492a8ba",
+      "content_sha256": "2b40d8601d7f9716edf99bfccf6270e1c97ecacb420407da4c785f201612be4f",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44488,7 +44883,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "4b8dc30ae07eb6adb0f5b713121d408cd96c67d1bff8ebc43ad5ad66f7b6dbab",
+      "content_sha256": "e1dc1d61483b2e7a8b1b33433e6b0694b88122f86763ade5555450b0435864a3",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44505,7 +44900,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bf3267b61ccb6cb159111289e4b2bca632af9ee42d04c947fb7b6b10304c5705",
+      "content_sha256": "81247820db02940a91a28b10fec3392d9e1001594cfe687e0dfe7f5831bec27d",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44522,7 +44917,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "70ec5880941af36de04c3ae148c863b8029f8af0a8840dc53fece99b347c8eea",
+      "content_sha256": "38bf4d2f2ee82b63c753db7a03a7edad15d32013e92701741c34ddeca24afa7b",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44539,7 +44934,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a3e68ba9f3549db505c4748c547c85f53d5e999c2111b800ca3800351583036b",
+      "content_sha256": "94ba17402eee9c542c5921662aa7fbad62379536aefc336e530e2984475ba69f",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44556,7 +44951,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "b1dbafe6027e1f960225220d06f4b65a1b280869478c3ff31064e2cc8ecb9ef6",
+      "content_sha256": "4c52dbe4f7cf6ba91dd45d1d7986a239cb4e468f8dda282edc440551fbc182bd",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44573,7 +44968,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "951dc990d52cd67eb9f4c647d39138d100eabaeb2d29fb0cedd5354473005b18",
+      "content_sha256": "8a70955ea6dde5e0cf0ee57e083f7557f79a577fa367e9881e675f113811e551",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44590,7 +44985,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "41945212f8e752c748ed09d602045cd110fb368346c0eb8209c5053235ebad0b",
+      "content_sha256": "d07d7e17fc4f1cd01d339b7805f7c1e03adb68121fd36af308b98720c8224a00",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44607,7 +45002,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "88a0922b2bfd4207145523703b89a2db95a94e050889e4409d1a4eb834294a3a",
+      "content_sha256": "3e4740d4a22f44095736326b6b4500a33b10bdd41a6904b6d25373f4aea8628e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44624,7 +45019,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d6fafe92d5705aa2de5d43eb3bedee3298a7451db01f80d254095a11a39402e5",
+      "content_sha256": "15ca4ca9a7359abc509162bbdce0c16dadc1b76b6f93812333ea54f25e752d8b",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44641,7 +45036,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e3de66bec3ab5df754e22feb4baba58106a0737b8261bd784c8cfaa00c4c0d41",
+      "content_sha256": "72108f4803fb5c37854b48fa475a47e357bfb1d51a57f8c35f14c9eb2fe0a942",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44658,7 +45053,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "7b8519a19aae1fdcadc1d44cf5248fcd1e97145d19c98451ba79ac4e338f722e",
+      "content_sha256": "ea87272cb488e38142d7310f6e57ed81f5c3333b11df941a7f88a6d4d5fc0647",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44675,7 +45070,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "69e63e1968712413d3be6b38822ca98901e48c399e2881be3aae20096722aa1e",
+      "content_sha256": "c96b575b84dbb8602bc9bc6050c4cfaa9127dc774a0a797f5edc15316a33ccb6",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44692,7 +45087,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8c3f9699c1e354dc40acf138f5b9fda85b73bbb0c0656ddf14daac38784c850a",
+      "content_sha256": "31d4afbc278a84755899054f49d6097b27b9a74e16a1099660b05f7150d3754d",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44709,7 +45104,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "b708c8c6adc3de6634593e896f65857aec111e2ec2f4824b68284aa5344656b2",
+      "content_sha256": "707edb20a0a5a1c2097635c12ea4d5a64c7567502b364af62ff222dbc26abf0f",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44726,7 +45121,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "f5665a1f37fec5641254e6023538f74a65028bb27287b6fa01f5fdd30410de74",
+      "content_sha256": "fb68998750011612bd14e311a7d18b480588192ccd42487cadffcc66e65e883d",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44743,7 +45138,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8b0db24d0c2bb082174e5f1dfe60ca71cc7998b2dedd77fbc0e077b6b2cec32f",
+      "content_sha256": "6e24b309b29789c524b8d7eb6940b7aae802acf636104be9b1d6e572683b595b",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44760,7 +45155,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "e82ae8dc12a427483c4c734d5b3a08b08946acad251dfb29170f55d2071aeeea",
+      "content_sha256": "20f51cc03bf2620d3622473f0397c21bab510c41a14dfc87a2a6367c3d0f6193",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44777,7 +45172,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "eaa1016029b1763f01f14a52a522d53242f62e1fc5a5e052f5bd9d98d9eeb033",
+      "content_sha256": "a9477d6a36ddf68009dc234754ac663cb9f8ddd438d4ae145c138d67fd92ca9e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44794,7 +45189,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "77aa001cd39c1dd86b06b614745bd7b2fbd1021dac4221db87dd9b52c093ab5c",
+      "content_sha256": "ef3a4a67dcd11d0e6839abf64fba8f582c0c6c0034304c2fbc0dde0e91020b16",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44811,7 +45206,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a9a5a875c92fa639401830ea2a8157465d62879420987b0883874e941e758562",
+      "content_sha256": "1412b4fe98d91cda3608f480c4c7c5c1f2a0390c4f2418d79d1588fd962d01ff",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44828,7 +45223,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "47e448377f4eb470f7789f1e50c28822e4123c49792713b3f0066e65dc46c992",
+      "content_sha256": "2fea851c975a736fbd32c92e028c431194863488812f360785b6a2a506886cce",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44845,7 +45240,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8eb68d1fe1245021c640246f54bf77776c887eb2adb2d8de698f0ffa25358d69",
+      "content_sha256": "09d8889c9f9af46b26e62658a1cdc7cb95c2f2c39bfefe989836a5fd26bd8c80",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44862,7 +45257,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "f91c36580d037b7436020a46526c1c6314e92949300a86876d2f803186998ab6",
+      "content_sha256": "3d2a0baf64c23098ddaca5e5d1662d6946d1853a3acc82b48a59d8c359a6411e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44879,7 +45274,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "a6936e50b9fa70b3f02ea56ed75e4db25e00fbacf7d7039f78aafc7875a0a1a3",
+      "content_sha256": "9072201127a4a11e1fa7151faaf48163eaa56316319ecc3f0a527b05f1fb7103",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44896,7 +45291,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "8a31c614944c738d47da9143a410e861caaa70e58f7fcb6f41f662b9f17e4003",
+      "content_sha256": "1bfe8ea09a8f1dd56a8219b4ab6c6a86fcb98ca8c42bdf78f32e650bebe1418e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44913,7 +45308,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "96f93a64fce1d807f13a9769dbe803ccf145deac7f26e46cee64d96cbf389f28",
+      "content_sha256": "b5fbcf336c4bc21aefc229c788376245516b59059db425209d1dc1ee75becc2b",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44930,7 +45325,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "00a4ab56d78b0589225f4a2b9c370685bda2dc1953a87dc6d78dd41b13621c84",
+      "content_sha256": "36d9c765d9c1ac93639dc761dc301e81ed9bc17617d1ee276201e91dad78a6f3",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44947,7 +45342,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "76307f84efac512f85837c5a8a9240e4df5b1a5ad4c5c3d6bd41c3cf9b881a66",
+      "content_sha256": "9537dda0e4bb6694116a8b8138971728c8465834978aaecb5598b51ca78e6440",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44964,7 +45359,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "d1356d9c8f59483d4bcec084e3547eb054986e6ba78a7f5efd614c78c3c8de25",
+      "content_sha256": "d8ebb040833a7250ed1a42eeb240eb1d1ceee4d682c63cd27bf073913823a68d",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44981,7 +45376,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bf8e1ce928665f5c1197647fd1404bdeb95a3fd00ad65933bc4bd28fce2f392a",
+      "content_sha256": "f75acd1d1d563f95d6196cb1a605aad49cf905b4557f27048792d65c60ceadce",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -44998,7 +45393,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "42bb7d6ae967b10d4b3ebbc7aaacb38276d98e73eeddf203ee99fff8656c8cf4",
+      "content_sha256": "882606e06cfb4c88b8fc7991a5daf42829185c222a4b9e503fb9ae119d85817f",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45015,7 +45410,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "226a859d5f51e22e09495bdebe89a2734f0aa082360ca718ac5e2c0c81492060",
+      "content_sha256": "a75e0e8cf62a7ca83f9ab7cbd292a80261ad3df7bbfb45fed419a45b645e8605",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45032,7 +45427,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "0a1001c8649cc7e3aebe02038ef035308d2ece02fdf82b01c11b6c5adcae0355",
+      "content_sha256": "eca73350cfae84671268c91d4092d6b096c587397c219a587f0b97edf53945ea",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45049,7 +45444,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "851f2912a9b16dae184d660931564645cd7e4bf639ca74e963c1a33f08e5608b",
+      "content_sha256": "c70ab1bc28b793cf7ad877fa83805212c1dabfcdd6dd1299a538d18b3b02678e",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45066,7 +45461,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "bbd9631e10dd80fcdd0275d4a0f91ebd34e381d410a62fc8c84c15d848468c21",
+      "content_sha256": "0a6dad84f18fe9359de327d1889b96325937d991d5dde6ce8889cf2273443183",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45083,7 +45478,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "71b2b8311d6a75c071f2a0942e1645db8d13302090a92f368069c79b07e74619",
+      "content_sha256": "64048085f1c8c5fefade420e0d06546fd37eb2d516f65301aae59917f55cbbd8",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45100,7 +45495,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "9a72599d0cc1042d3ba6a2ea95c6f34435c0459e07d95777d2478edd776798ba",
+      "content_sha256": "6bd3c0447bf9472135a27f4c43faa9b702f7fbe88625a1e249b637ae5b6231c1",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
@@ -45117,7 +45512,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.6",
-      "content_sha256": "9910d29d7479526861ab9b4ca4cce15ca65da3a5d63bfd2125dbe821b4a950b9",
+      "content_sha256": "0b30b7547220e6962aae127715396eaf747a1ddc7a83233902fdf2c52f569dfc",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -45134,7 +45529,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.6",
-      "content_sha256": "350ea758917ca0d4785d20e11520e73a67eb7a611c6d15eedc3f48714919dd3e",
+      "content_sha256": "7dd8ffb47096390d5e594d9d3c4ae25fc2ca2677071c189afc66e13055090da1",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
