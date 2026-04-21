@@ -13307,6 +13307,52 @@
       ],
       "requires": [],
       "spec_ids": []
+    },
+    {
+      "id": "feat:target-rfc-8785",
+      "title": "RFC 8785",
+      "description": "JSON Canonicalization Scheme (JCS) for deterministic JSON bytes.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Tracked as a governed backlog target until implementation and evidence are linked."
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": "T2",
+        "target_lifecycle_stage": "active"
+      },
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": [],
+      "spec_ids": [
+        "spc:1053"
+      ]
+    },
+    {
+      "id": "feat:jcs-canonical-json",
+      "title": "JCS canonical JSON",
+      "description": "Repository capability for RFC 8785-compliant canonical JSON generation and validation.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Tracked as a governed backlog capability until a conformant API and test vectors are linked."
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": "T2",
+        "target_lifecycle_stage": "active"
+      },
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": [],
+      "spec_ids": [
+        "spc:1053"
+      ]
     }
   ],
   "tests": [
@@ -44546,6 +44592,22 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": []
+    },
+    {
+      "id": "adr:1036",
+      "number": 1036,
+      "slug": "adopt-rfc-8785-json-canonicalization-scheme",
+      "title": "Adopt RFC 8785 JSON Canonicalization Scheme",
+      "path": ".ssot/adr/ADR-1036-adopt-rfc-8785-json-canonicalization-scheme.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.6",
+      "content_sha256": "decc29f3d159f024509048a295a8482819da547768a94ec6e881b95b869b9057",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
     }
   ],
   "specs": [
@@ -45704,6 +45766,23 @@
       "superseded_by": [],
       "status_notes": [],
       "kind": "governance"
+    },
+    {
+      "id": "spc:1053",
+      "number": 1053,
+      "slug": "rfc-8785-json-canonicalization-scheme",
+      "title": "RFC 8785 JSON Canonicalization Scheme",
+      "path": ".ssot/specs/SPEC-1053-rfc-8785-json-canonicalization-scheme.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.6",
+      "content_sha256": "5a09e81177d21e5dfc39d6b635f4e70d54098595d2623db064af921b1d30ad75",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
     }
   ],
   "profiles": []

@@ -1,0 +1,34 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1036"
+number: 1036
+slug: "adopt-rfc-8785-json-canonicalization-scheme"
+title: "Adopt RFC 8785 JSON Canonicalization Scheme"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "RFC 8785 JCS is the governed canonical JSON profile for deterministic JSON bytes used by signing, hashing, and comparable evidence surfaces."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "spc:1053"
+body: |-
+  - Status: accepted
+  - Date: 2026-04-21
+  - Decision: RFC 8785 JSON Canonicalization Scheme (JCS) is the repository's governed canonical JSON profile for new deterministic JSON bytes used by signing, hashing, digest comparison, release evidence, and other cryptographic or reproducibility-sensitive surfaces.
+
+  The repository already contains JSON serialization helpers for some existing surfaces. Those helpers are not automatically considered RFC 8785 conformant unless they satisfy the JCS constraints captured by SPEC-1053.
+
+  New JCS-sensitive code MUST treat canonicalization as a named capability rather than ad hoc `json.dumps(..., sort_keys=True)` usage. The implementation boundary MUST cover:
+  - I-JSON input constraints, including duplicate-property rejection where JSON text is parsed for JCS use;
+  - ECMAScript-compatible primitive serialization semantics required by RFC 8785;
+  - lexicographic object-member ordering by property name;
+  - no emitted whitespace between JSON tokens;
+  - UTF-8 output bytes;
+  - explicit failure for non-representable numeric or Unicode inputs.
+
+  Existing non-JCS helpers MAY remain in place for compatibility when their callers do not require RFC 8785 semantics, but they MUST NOT be documented as JCS evidence.
+
+  This decision does not by itself certify implementation. Feature and claim rows for RFC 8785 remain evidence-gated until conformant tests and implementation are linked.
