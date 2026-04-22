@@ -8,8 +8,8 @@ generated_from:
 - tigrbl_auth.config.deployment
 - compliance/claims/fapi-atomic-claims.yaml
 summary:
-  claim_count: 399
-  atomic_feature_claim_count: 393
+  claim_count: 395
+  atomic_feature_claim_count: 389
   fapi_atomic_claim_count: 6
 claims:
 - id: cli-flag:access_log
@@ -896,46 +896,6 @@ claims:
   kind: cli-flag
   title: --yes
   description: Assume yes for state-changing confirmations.
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-  source: tigrbl_auth.cli.metadata
-- id: cli-verb:adr.index
-  feature_id: cli-verb:adr.index
-  kind: cli-verb
-  title: adr index
-  description: Generate the ADR index markdown and JSON summaries.
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-  source: tigrbl_auth.cli.metadata
-- id: cli-verb:adr.list
-  feature_id: cli-verb:adr.list
-  kind: cli-verb
-  title: adr list
-  description: List ADRs and their titles.
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-  source: tigrbl_auth.cli.metadata
-- id: cli-verb:adr.new
-  feature_id: cli-verb:adr.new
-  kind: cli-verb
-  title: adr new
-  description: Create a new ADR markdown document from a template.
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-  source: tigrbl_auth.cli.metadata
-- id: cli-verb:adr.show
-  feature_id: cli-verb:adr.show
-  kind: cli-verb
-  title: adr show
-  description: Render a selected ADR.
   scope: core
   targets:
   - CLI operator surface

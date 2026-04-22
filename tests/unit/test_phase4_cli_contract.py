@@ -36,8 +36,8 @@ def test_phase4_cli_contract_manifest_includes_outputs_exit_codes_and_help_snaps
     contract = build_cli_contract_manifest()
     summary = contract["summary"]
 
-    assert summary["command_count"] >= 21
-    assert summary["verb_count"] >= 86
+    assert summary["command_count"] >= 20
+    assert summary["verb_count"] >= 82
     assert summary["global_flag_count"] >= 16
 
     tenant = next(item for item in contract["commands"] if item["name"] == "tenant")
@@ -105,8 +105,8 @@ def test_phase4_state_report_tracks_cli_contract_checkpoint():
     summary = payload["current_state"]
     gaps = payload["certification_state"]["open_gaps"]
 
-    assert summary["cli_command_count"] >= 21
-    assert summary["cli_verb_count"] >= 86
+    assert summary["cli_command_count"] >= 20
+    assert summary["cli_verb_count"] >= 82
     assert summary["cli_catalog_only_resource_command_count"] == 0
     assert summary["cli_required_verbs_missing"] is False
     assert summary["cli_metadata_to_docs_sync_passed"] is True

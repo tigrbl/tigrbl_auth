@@ -54,7 +54,7 @@ REQUIRED_TARGET_BUCKETS = {
 }
 REQUIRED_PLANES = {"api", "tables", "ops", "services", "standards", "security", "config", "adapters", "cli", "plugin", "gateway"}
 REQUIRED_SURFACES = {"public_auth_plane", "admin_control_plane", "operator_plane", "rpc_control_plane", "diagnostics_plane", "plugin_plane"}
-REQUIRED_SCOPE = {"evidence", "claims", "adr", "tenant", "client", "identity", "flow", "session", "token", "keys", "discovery", "import", "export"}
+REQUIRED_SCOPE = {"evidence", "claims", "tenant", "client", "identity", "flow", "session", "token", "keys", "discovery", "import", "export"}
 
 
 def _load_yaml(path: Path) -> Any:

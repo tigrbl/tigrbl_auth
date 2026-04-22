@@ -1,0 +1,56 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1054"
+number: 1054
+slug: "jcs-current-authority-and-obsolete-rfc-quarantine"
+title: "JCS current authority and obsolete RFC quarantine"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines how `tigrbl_auth` treats JCS authority, successor standards, and obsolete JSON RFC references."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "adr:1036"
+  - "adr:1037"
+  - "spc:1053"
+body: |-
+  ## Overview
+  
+  This specification defines how `tigrbl_auth` treats JCS authority, successor standards, and obsolete JSON RFC references.
+  
+  ## Current Authority
+  
+  RFC 8785 is the current repository authority for JSON Canonicalization Scheme (JCS) behavior. JCS implementation, tests, claims, and evidence MUST use RFC 8785 as the named JCS source unless a later authoritative successor explicitly obsoletes or replaces it.
+  
+  JCS-sensitive code MUST also honor the dependencies incorporated by RFC 8785:
+  
+  - JSON syntax and data model expectations from RFC 8259;
+  - I-JSON constraints from RFC 7493;
+  - ECMAScript primitive serialization semantics incorporated by RFC 8785;
+  - deterministic recursive object-member ordering by UTF-16 code-unit order;
+  - UTF-8 output bytes and no emitted whitespace between JSON tokens.
+  
+  ## Obsolete RFC Quarantine
+  
+  RFC 4627 and RFC 7159 are obsolete JSON RFCs for this repository's JCS purpose and MUST NOT be used as normative JCS anchors.
+  
+  Rows, documents, comments, tests, or evidence MAY mention obsolete JSON RFCs only as historical context. Any such mention MUST also identify the current authority used by the implementation. A claim that relies only on an obsolete JSON RFC, sorted-key JSON, compact JSON, or local digest stability is not a JCS claim.
+  
+  ## Successor Rule
+  
+  If a future RFC, formal erratum disposition, or standards-track successor explicitly updates or obsoletes RFC 8785 for JCS, the repository MUST add a new ADR/SPEC pair before changing JCS behavior. That pair MUST identify:
+  
+  - the successor document;
+  - which JCS feature rows are affected;
+  - whether existing evidence remains valid;
+  - which obsolete references must be retired or retained as historical context.
+  
+  ## Verification
+  
+  JCS verification MUST include RFC 8785 sample vectors, duplicate-member rejection, invalid Unicode rejection, no-whitespace output checks, UTF-8 bytes checks, recursive object ordering checks, unsafe-number failure paths, and evidence that non-JCS helpers are not mislabeled as JCS.
+  
+  The current primary conformance file is `tests/conformance/backlog/test_rfc8785_jcs.py`.
+spec_kind: "normative"

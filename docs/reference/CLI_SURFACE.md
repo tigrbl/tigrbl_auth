@@ -131,44 +131,6 @@ Operate on the claims plane.
       - `1` — Operation failed or verification did not pass.
       - `2` — CLI argument or contract validation failed before execution.
 
-### `adr`
-
-Architecture decision record operators.
-
-- Verbs:
-  - `list` — List ADRs.
-    - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-collection` — Collection output for list/status operations.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `show` — Show a single ADR.
-    - `--repo-root` — Repository root for governance automation.
-    - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `new` — Create a new ADR template.
-    - `--repo-root` — Repository root for governance automation.
-    - `--id` — Primary identifier for a single record.
-    - `--title` — Human-readable title.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `index` — Generate the ADR index.
-    - `--repo-root` — Repository root for governance automation.
-    - `--report-dir` — Directory for generated reports.
-    - Output: `resource-collection` — Collection output for list/status operations.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-
 ### `doctor`
 
 Aggregate core verification, runtime profile, contracts, evidence, and gate status.

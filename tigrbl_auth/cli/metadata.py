@@ -513,18 +513,6 @@ COMMAND_SPECS: tuple[CommandSpec, ...] = (
         family="evidence",
     ),
     CommandSpec(
-        name="adr",
-        help="List, inspect, create, and index ADRs.",
-        description="Architecture decision record operators.",
-        verbs=(
-            _verb("list", "List ADRs.", "List ADRs and their titles.", "adr.list", ("repo_root",), family="governance", output=OUTPUT_COLLECTION, exit_codes=PORTABLE_EXIT_CODES),
-            _verb("show", "Show a single ADR.", "Render a selected ADR.", "adr.show", ("repo_root", "id"), family="governance", output=OUTPUT_RECORD, exit_codes=PORTABLE_EXIT_CODES),
-            _verb("new", "Create a new ADR template.", "Create a new ADR markdown document from a template.", "adr.new", ("repo_root", "id", "title"), family="governance", output=OUTPUT_RECORD, exit_codes=PORTABLE_EXIT_CODES),
-            _verb("index", "Generate the ADR index.", "Generate the ADR index markdown and JSON summaries.", "adr.index", ("repo_root", "report_dir"), family="governance", output=OUTPUT_COLLECTION, exit_codes=PORTABLE_EXIT_CODES),
-        ),
-        family="governance",
-    ),
-    CommandSpec(
         name="doctor",
         help="Run an aggregated repository health summary.",
         description="Aggregate core verification, runtime profile, contracts, evidence, and gate status.",
@@ -888,7 +876,7 @@ def build_cli_conformance_snapshot() -> dict[str, Any]:
             **contract["summary"],
             "help_snapshot_count": len(help_snapshots),
             "required_command_families_present": all(name in {spec.name for spec in COMMAND_SPECS} for name in [
-                "serve", "bootstrap", "migrate", "verify", "gate", "spec", "claims", "evidence", "adr", "doctor", "release",
+                "serve", "bootstrap", "migrate", "verify", "gate", "spec", "claims", "evidence", "doctor", "release",
                 "tenant", "client", "identity", "flow", "session", "token", "keys", "discovery", "import", "export",
             ]),
             "missing_required_verbs": missing,

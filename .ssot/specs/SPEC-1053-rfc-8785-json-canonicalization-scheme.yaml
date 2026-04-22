@@ -14,6 +14,8 @@ superseded_by: []
 status_notes: []
 references:
   - "adr:1036"
+  - "adr:1037"
+  - "spc:1054"
 body: |-
   ## Overview
 

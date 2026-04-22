@@ -13,7 +13,9 @@ supersedes: []
 superseded_by: []
 status_notes: []
 references:
+  - "adr:1037"
   - "spc:1053"
+  - "spc:1054"
 body: |-
   - Status: accepted
   - Date: 2026-04-21

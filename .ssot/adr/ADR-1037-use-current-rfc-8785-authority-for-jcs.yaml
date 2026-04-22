@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1037"
+number: 1037
+slug: "use-current-rfc-8785-authority-for-jcs"
+title: "Use current RFC 8785 authority for JCS"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The RFC Editor currently lists RFC 8785, JSON Canonicalization Scheme (JCS), as Informational and does not mark it obsolete. Repository JCS claims MUST therefore cite RFC 8785, SPEC-1053, and SPEC-1054 rather than older JSON RFCs or ad hoc stable-JSON conventions."
+supersedes: []
+superseded_by: []
+status_notes: []
+references:
+  - "adr:1036"
+  - "spc:1053"
+  - "spc:1054"
+body: |-
+  - Status: accepted
+  - Date: 2026-04-22
+  - Decision: RFC 8785 is the repository authority for JSON Canonicalization Scheme (JCS) behavior until the RFC Editor or a successor standards body publishes an explicit successor that obsoletes or replaces it.
+  
+  The RFC Editor currently lists RFC 8785, JSON Canonicalization Scheme (JCS), as Informational and does not mark it obsolete. Repository JCS claims MUST therefore cite RFC 8785, SPEC-1053, and SPEC-1054 rather than older JSON RFCs or ad hoc stable-JSON conventions.
+  
+  Obsolete or superseded JSON RFCs, including RFC 4627 and RFC 7159, are not valid normative anchors for JCS claims. They MAY appear only as historical context. The current JSON grammar reference for JCS remains RFC 8259 through RFC 8785, with I-JSON constraints from RFC 7493 and ECMAScript primitive serialization requirements as incorporated by RFC 8785.
+  
+  Code that uses sorted keys, compact separators, or local digest stability without satisfying RFC 8785 MUST remain outside the JCS feature and claim set. Such helpers MUST NOT be promoted to `feat:target-rfc-8785`, `feat:jcs-canonical-json`, or related claims unless they satisfy the JCS conformance requirements and are linked to passing evidence.
+  
+  This ADR extends ADR-1036. ADR-1036 adopted RFC 8785 JCS; this ADR fixes the precedence rule for current-vs-obsolete references and makes old JSON RFCs non-authoritative for JCS certification.

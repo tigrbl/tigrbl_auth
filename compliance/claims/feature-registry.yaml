@@ -7,7 +7,7 @@ generated_from:
 - tigrbl_auth.cli.metadata
 - tigrbl_auth.config.deployment
 summary:
-  feature_count: 393
+  feature_count: 389
   tracked_core_target_count: 48
   tracked_extension_target_count: 5
   settings_backed_flag_count: 68
@@ -808,42 +808,6 @@ features:
   kind: cli-flag
   title: --yes
   description: Assume yes for state-changing confirmations.
-  source: tigrbl_auth.cli.metadata
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-- id: cli-verb:adr.index
-  kind: cli-verb
-  title: adr index
-  description: Generate the ADR index markdown and JSON summaries.
-  source: tigrbl_auth.cli.metadata
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-- id: cli-verb:adr.list
-  kind: cli-verb
-  title: adr list
-  description: List ADRs and their titles.
-  source: tigrbl_auth.cli.metadata
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-- id: cli-verb:adr.new
-  kind: cli-verb
-  title: adr new
-  description: Create a new ADR markdown document from a template.
-  source: tigrbl_auth.cli.metadata
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-- id: cli-verb:adr.show
-  kind: cli-verb
-  title: adr show
-  description: Render a selected ADR.
   source: tigrbl_auth.cli.metadata
   scope: core
   targets:

@@ -178,14 +178,6 @@ cli-flag:workers:
 - compliance/evidence/tier3/cli-operator-surface/
 cli-flag:yes:
 - compliance/evidence/tier3/cli-operator-surface/
-cli-verb:adr.index:
-- compliance/evidence/tier3/cli-operator-surface/
-cli-verb:adr.list:
-- compliance/evidence/tier3/cli-operator-surface/
-cli-verb:adr.new:
-- compliance/evidence/tier3/cli-operator-surface/
-cli-verb:adr.show:
-- compliance/evidence/tier3/cli-operator-surface/
 cli-verb:bootstrap.apply:
 - compliance/evidence/tier3/bootstrap-migration/
 - compliance/evidence/tier3/cli-operator-surface/

@@ -178,14 +178,6 @@ cli-flag:workers:
 - CLI operator surface
 cli-flag:yes:
 - CLI operator surface
-cli-verb:adr.index:
-- CLI operator surface
-cli-verb:adr.list:
-- CLI operator surface
-cli-verb:adr.new:
-- CLI operator surface
-cli-verb:adr.show:
-- CLI operator surface
 cli-verb:bootstrap.apply:
 - Bootstrap and migration lifecycle
 - CLI operator surface

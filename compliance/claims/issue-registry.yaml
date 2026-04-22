@@ -14,8 +14,6 @@ issues:
     set.
   - One or more supported peer profiles have incomplete or invalid preserved external
     evidence bundles.
-  - "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved\
-    \ for both SQLite and PostgreSQL."
   - One or more operator-visible package capabilities still lacks end-to-end verification
     in the current environment.
   - Release evidence can now be built only from a clean checkout, and the current
