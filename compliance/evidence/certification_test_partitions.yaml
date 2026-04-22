@@ -1,5 +1,6 @@
 partitions:
   conformance:
+  - tests/conformance/backlog/test_rfc8785_jcs.py
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_configuration.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py

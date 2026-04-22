@@ -11,21 +11,25 @@ tags: []
 summary: "schema_version: 1"
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Refresh CLI contract YAML after rejecting tigrbl-auth ADR command surfaces."
+    at: "2026-04-22T09:49:40Z"
 references: []
 body: |-
   schema_version: 1
   package: tigrbl_auth
   generated_from: tigrbl_auth.cli.metadata
   summary:
-    command_count: 21
-    verb_count: 87
+    command_count: 20
+    verb_count: 83
     direct_command_count: 4
-    nested_command_count: 17
+    nested_command_count: 16
     family_count: 7
     family_command_counts:
       runtime: 1
-      governance: 5
+      governance: 4
       contracts: 1
       evidence: 1
       operator: 2
@@ -1867,227 +1871,6 @@ body: |-
       examples: []
       family: evidence
     family: evidence
-    examples: []
-    output: null
-    exit_codes: []
-  - name: adr
-    help: List, inspect, create, and index ADRs.
-    description: Architecture decision record operators.
-    handler: null
-    aliases: []
-    include_global: true
-    global_flags:
-    - config
-    - env_file
-    - profile
-    - tenant
-    - issuer
-    - surface_set
-    - slice
-    - extension
-    - plugin_mode
-    - runtime_style
-    - strict
-    - no_strict
-    - format
-    - output
-    - verbose
-    - trace
-    flags: []
-    verbs:
-    - name: list
-      help: List ADRs.
-      description: List ADRs and their titles.
-      handler: adr.list
-      aliases: []
-      include_global: true
-      global_flags:
-      - config
-      - env_file
-      - profile
-      - tenant
-      - issuer
-      - surface_set
-      - slice
-      - extension
-      - plugin_mode
-      - runtime_style
-      - strict
-      - no_strict
-      - format
-      - output
-      - verbose
-      - trace
-      flags:
-      - repo_root
-      output:
-        name: resource-collection
-        description: Collection output for list/status operations.
-        fields:
-        - command
-        - resource
-        - items
-        - total
-        - offset
-        - limit
-        media_types:
-        - json
-        - yaml
-        - text
-      exit_codes:
-      - code: 0
-        meaning: Operation completed successfully.
-      - code: 1
-        meaning: Operation failed or verification did not pass.
-      - code: 2
-        meaning: CLI argument or contract validation failed before execution.
-      examples: []
-      family: governance
-    - name: show
-      help: Show a single ADR.
-      description: Render a selected ADR.
-      handler: adr.show
-      aliases: []
-      include_global: true
-      global_flags:
-      - config
-      - env_file
-      - profile
-      - tenant
-      - issuer
-      - surface_set
-      - slice
-      - extension
-      - plugin_mode
-      - runtime_style
-      - strict
-      - no_strict
-      - format
-      - output
-      - verbose
-      - trace
-      flags:
-      - repo_root
-      - id
-      output:
-        name: resource-record
-        description: Single operator resource record with state and metadata.
-        fields:
-        - command
-        - resource
-        - record
-        - state_path
-        media_types:
-        - json
-        - yaml
-        - text
-      exit_codes:
-      - code: 0
-        meaning: Operation completed successfully.
-      - code: 1
-        meaning: Operation failed or verification did not pass.
-      - code: 2
-        meaning: CLI argument or contract validation failed before execution.
-      examples: []
-      family: governance
-    - name: new
-      help: Create a new ADR template.
-      description: Create a new ADR markdown document from a template.
-      handler: adr.new
-      aliases: []
-      include_global: true
-      global_flags:
-      - config
-      - env_file
-      - profile
-      - tenant
-      - issuer
-      - surface_set
-      - slice
-      - extension
-      - plugin_mode
-      - runtime_style
-      - strict
-      - no_strict
-      - format
-      - output
-      - verbose
-      - trace
-      flags:
-      - repo_root
-      - id
-      - title
-      output:
-        name: resource-record
-        description: Single operator resource record with state and metadata.
-        fields:
-        - command
-        - resource
-        - record
-        - state_path
-        media_types:
-        - json
-        - yaml
-        - text
-      exit_codes:
-      - code: 0
-        meaning: Operation completed successfully.
-      - code: 1
-        meaning: Operation failed or verification did not pass.
-      - code: 2
-        meaning: CLI argument or contract validation failed before execution.
-      examples: []
-      family: governance
-    - name: index
-      help: Generate the ADR index.
-      description: Generate the ADR index markdown and JSON summaries.
-      handler: adr.index
-      aliases: []
-      include_global: true
-      global_flags:
-      - config
-      - env_file
-      - profile
-      - tenant
-      - issuer
-      - surface_set
-      - slice
-      - extension
-      - plugin_mode
-      - runtime_style
-      - strict
-      - no_strict
-      - format
-      - output
-      - verbose
-      - trace
-      flags:
-      - repo_root
-      - report_dir
-      output:
-        name: resource-collection
-        description: Collection output for list/status operations.
-        fields:
-        - command
-        - resource
-        - items
-        - total
-        - offset
-        - limit
-        media_types:
-        - json
-        - yaml
-        - text
-      exit_codes:
-      - code: 0
-        meaning: Operation completed successfully.
-      - code: 1
-        meaning: Operation failed or verification did not pass.
-      - code: 2
-        meaning: CLI argument or contract validation failed before execution.
-      examples: []
-      family: governance
-    family: governance
     examples: []
     output: null
     exit_codes: []

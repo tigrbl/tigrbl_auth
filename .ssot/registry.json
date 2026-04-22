@@ -3057,136 +3057,100 @@
     },
     {
       "id": "feat:cli-verb-adr-index",
-      "title": "adr index",
-      "description": "Generate the ADR index markdown and JSON summaries.",
-      "implementation_status": "implemented",
+      "title": "Rejected out-of-scope ADR CLI surface: adr index",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
+      "implementation_status": "absent",
       "lifecycle": {
-        "stage": "active",
+        "stage": "removed",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
       },
       "plan": {
-        "horizon": "current",
+        "horizon": "out_of_bounds",
         "slot": null,
-        "target_claim_tier": "T2",
-        "target_lifecycle_stage": "active"
+        "target_claim_tier": "T0",
+        "target_lifecycle_stage": "removed"
       },
       "claim_ids": [
         "clm:cli-verb-adr-index"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "requires": [],
       "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-list",
-      "title": "adr list",
-      "description": "List ADRs and their titles.",
-      "implementation_status": "implemented",
+      "title": "Rejected out-of-scope ADR CLI surface: adr list",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
+      "implementation_status": "absent",
       "lifecycle": {
-        "stage": "active",
+        "stage": "removed",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
       },
       "plan": {
-        "horizon": "current",
+        "horizon": "out_of_bounds",
         "slot": null,
-        "target_claim_tier": "T2",
-        "target_lifecycle_stage": "active"
+        "target_claim_tier": "T0",
+        "target_lifecycle_stage": "removed"
       },
       "claim_ids": [
         "clm:cli-verb-adr-list"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "requires": [],
       "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-new",
-      "title": "adr new",
-      "description": "Create a new ADR markdown document from a template.",
-      "implementation_status": "implemented",
+      "title": "Rejected out-of-scope ADR CLI surface: adr new",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
+      "implementation_status": "absent",
       "lifecycle": {
-        "stage": "active",
+        "stage": "removed",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
       },
       "plan": {
-        "horizon": "current",
+        "horizon": "out_of_bounds",
         "slot": null,
-        "target_claim_tier": "T2",
-        "target_lifecycle_stage": "active"
+        "target_claim_tier": "T0",
+        "target_lifecycle_stage": "removed"
       },
       "claim_ids": [
         "clm:cli-verb-adr-new"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "requires": [],
       "spec_ids": []
     },
     {
       "id": "feat:cli-verb-adr-show",
-      "title": "adr show",
-      "description": "Render a selected ADR.",
-      "implementation_status": "implemented",
+      "title": "Rejected out-of-scope ADR CLI surface: adr show",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
+      "implementation_status": "absent",
       "lifecycle": {
-        "stage": "active",
+        "stage": "removed",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
       },
       "plan": {
-        "horizon": "current",
+        "horizon": "out_of_bounds",
         "slot": null,
-        "target_claim_tier": "T2",
-        "target_lifecycle_stage": "active"
+        "target_claim_tier": "T0",
+        "target_lifecycle_stage": "removed"
       },
       "claim_ids": [
         "clm:cli-verb-adr-show"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "requires": [],
       "spec_ids": []
@@ -15257,10 +15221,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -15495,10 +15455,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -15750,10 +15706,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -15988,10 +15940,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -16243,10 +16191,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -16481,10 +16425,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -16736,10 +16676,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -16973,10 +16909,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -17227,10 +17159,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -17468,10 +17396,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -21246,10 +21170,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -21392,7 +21312,11 @@
         "feat:flag-surface-plugin-mode",
         "feat:flag-surface-public-enabled",
         "feat:flag-surface-rpc-enabled",
-        "feat:target-cli-operator-surface"
+        "feat:target-cli-operator-surface",
+        "feat:cli-verb-adr-index",
+        "feat:cli-verb-adr-list",
+        "feat:cli-verb-adr-new",
+        "feat:cli-verb-adr-show"
       ],
       "claim_ids": [
         "clm:cli-flag-access-log",
@@ -21483,10 +21407,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -21629,7 +21549,11 @@
         "clm:flag-surface-plugin-mode",
         "clm:flag-surface-public-enabled",
         "clm:flag-surface-rpc-enabled",
-        "clm:target-cli-operator-surface"
+        "clm:target-cli-operator-surface",
+        "clm:cli-verb-adr-index",
+        "clm:cli-verb-adr-list",
+        "clm:cli-verb-adr-new",
+        "clm:cli-verb-adr-show"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-asgi-application",
@@ -22294,10 +22218,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -22539,10 +22459,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -23069,10 +22985,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -23310,10 +23222,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -23571,10 +23479,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -23811,10 +23715,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -24068,10 +23968,6 @@
         "feat:cli-flag-wait",
         "feat:cli-flag-workers",
         "feat:cli-flag-yes",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show",
         "feat:cli-verb-bootstrap-apply",
         "feat:cli-verb-bootstrap-manifest",
         "feat:cli-verb-bootstrap-status",
@@ -24307,10 +24203,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -29788,25 +29680,16 @@
     },
     {
       "id": "clm:cli-verb-adr-index",
-      "title": "adr index",
-      "status": "implemented",
-      "tier": "T2",
+      "title": "Rejected out-of-scope ADR CLI surface: adr index",
+      "status": "retired",
+      "tier": "T0",
       "kind": "cli-verb",
-      "description": "Generate the ADR index markdown and JSON summaries.",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
       "feature_ids": [
         "feat:cli-verb-adr-index"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -29814,25 +29697,16 @@
     },
     {
       "id": "clm:cli-verb-adr-list",
-      "title": "adr list",
-      "status": "implemented",
-      "tier": "T2",
+      "title": "Rejected out-of-scope ADR CLI surface: adr list",
+      "status": "retired",
+      "tier": "T0",
       "kind": "cli-verb",
-      "description": "List ADRs and their titles.",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
       "feature_ids": [
         "feat:cli-verb-adr-list"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -29840,25 +29714,16 @@
     },
     {
       "id": "clm:cli-verb-adr-new",
-      "title": "adr new",
-      "status": "implemented",
-      "tier": "T2",
+      "title": "Rejected out-of-scope ADR CLI surface: adr new",
+      "status": "retired",
+      "tier": "T0",
       "kind": "cli-verb",
-      "description": "Create a new ADR markdown document from a template.",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
       "feature_ids": [
         "feat:cli-verb-adr-new"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -29866,25 +29731,16 @@
     },
     {
       "id": "clm:cli-verb-adr-show",
-      "title": "adr show",
-      "status": "implemented",
-      "tier": "T2",
+      "title": "Rejected out-of-scope ADR CLI surface: adr show",
+      "status": "retired",
+      "tier": "T0",
       "kind": "cli-verb",
-      "description": "Render a selected ADR.",
+      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
       "feature_ids": [
         "feat:cli-verb-adr-show"
       ],
       "test_ids": [
-        "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
-        "tst:tests-conformance-operator-test-cli-import-export-py",
-        "tst:tests-conformance-operator-test-cli-keys-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-resource-lifecycle-py",
-        "tst:tests-conformance-operator-test-cli-serve-runtime-py",
-        "tst:tests-unit-test-cli-surface-checkpoint-py",
-        "tst:tests-unit-test-phase0-claim-boundary-rebaseline-py",
-        "tst:tests-unit-test-phase3-runtime-launcher-py",
-        "tst:tests-unit-test-phase4-cli-contract-py",
-        "tst:tests-unit-test-phase5-operator-service-layer-py"
+        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -39238,10 +39094,6 @@
         "clm:cli-flag-wait",
         "clm:cli-flag-workers",
         "clm:cli-flag-yes",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:cli-verb-bootstrap-apply",
         "clm:cli-verb-bootstrap-manifest",
         "clm:cli-verb-bootstrap-status",
@@ -39384,7 +39236,11 @@
         "clm:flag-surface-plugin-mode",
         "clm:flag-surface-public-enabled",
         "clm:flag-surface-rpc-enabled",
-        "clm:target-cli-operator-surface"
+        "clm:target-cli-operator-surface",
+        "clm:cli-verb-adr-index",
+        "clm:cli-verb-adr-list",
+        "clm:cli-verb-adr-new",
+        "clm:cli-verb-adr-show"
       ],
       "test_ids": [
         "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
@@ -44533,12 +44389,18 @@
       "origin": "repo-local",
       "managed": false,
       "immutable": false,
-      "package_version": "0.2.2",
-      "content_sha256": "61eef0ecfce9a5fc2a3e688e8d6a4b0d46bde41268ef0138048fb0e973e58756",
+      "package_version": "0.2.8",
+      "content_sha256": "72f1385409d5a2ac19a7ef9d13a91e6f582db0e44f588bf636465b2403e594ae",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
-      "status_notes": []
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Clarify that tigrbl-auth ADR CLI command surfaces are rejected and out-of-bounds/out-of-scope; ADR CRUD belongs to the SSOT registry CLI.",
+          "at": "2026-04-22T09:49:39Z"
+        }
+      ]
     },
     {
       "id": "adr:1028",
@@ -44966,13 +44828,19 @@
       "origin": "repo-local",
       "managed": false,
       "immutable": false,
-      "package_version": "0.2.2",
-      "content_sha256": "664d101030f7f532e88711f3ad2b7db8093264623b6b837936126d9e22302542",
+      "package_version": "0.2.8",
+      "content_sha256": "a05cced97c424df38d1b86aad7b094d76be51ce51e80487597c7c09eaf74a1dd",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
-      "status_notes": []
+      "status_notes": [
+        {
+          "status": "draft",
+          "note": "Refresh CLI contract JSON after rejecting tigrbl-auth ADR command surfaces.",
+          "at": "2026-04-22T09:49:40Z"
+        }
+      ]
     },
     {
       "id": "spc:1001",
@@ -44983,13 +44851,19 @@
       "origin": "repo-local",
       "managed": false,
       "immutable": false,
-      "package_version": "0.2.2",
-      "content_sha256": "b2b0f3f4910c6f1a56ca7241242f89e611bd82ae45ba84a4148d2bffe5e256d2",
+      "package_version": "0.2.8",
+      "content_sha256": "e031d3d17e9a42f79884da44a8c122dc0a1b1dbe59ed1a003ce579037fde81aa",
       "kind": "local-policy",
       "status": "draft",
       "supersedes": [],
       "superseded_by": [],
-      "status_notes": []
+      "status_notes": [
+        {
+          "status": "draft",
+          "note": "Refresh CLI contract YAML after rejecting tigrbl-auth ADR command surfaces.",
+          "at": "2026-04-22T09:49:40Z"
+        }
+      ]
     },
     {
       "id": "spc:1002",

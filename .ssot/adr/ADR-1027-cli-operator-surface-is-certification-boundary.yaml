@@ -11,12 +11,16 @@ tags: []
 summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Clarify that tigrbl-auth ADR CLI command surfaces are rejected and out-of-bounds/out-of-scope; ADR CRUD belongs to the SSOT registry CLI."
+    at: "2026-04-22T09:49:39Z"
 references: []
 body: |-
   > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
   
-  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > **Historical / non-authoritative** - This document is retained for planning, provenance, or operator guidance only.
   > Do **not** use it to determine the current certification state, executable surface, or release readiness.
   > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
   
@@ -25,20 +29,22 @@ body: |-
   - Status: accepted
   - Date: 2026-03-22
   - Decision: the CLI operator plane is a first-class certification boundary. `serve` MUST launch runtime, `keys` is the canonical command family, and no public strict independent wording is allowed without Tier 4 promotion.
+  - Rejected/out-of-scope decision: `tigrbl-auth adr ...` command surfaces are explicitly rejected for the `tigrbl_auth` operator CLI. ADR CRUD is governed by the SSOT registry CLI (`ssot adr ...`) and remains out-of-bounds/out-of-scope for `tigrbl_auth` package certification.
   - Consequences:
     - "fully featured" package claims include runtime, CLI, lifecycle, and release surfaces, not only RFC/OIDC protocol behavior;
     - plan-only `serve` behavior must be documented as incomplete until runtime launch is implemented;
     - catalog-only or list/show-only admin families remain partial and MUST stay below full-featured claims;
     - `key` is removed from the certified public operator surface in favor of the canonical `keys` command family;
+    - `adr` is removed from the certified public operator surface because ADR/SPEC document CRUD is an SSOT toolchain responsibility, not a `tigrbl_auth` runtime/operator responsibility;
     - public "independent" wording requires Tier 4 preserved peer evidence and manifest-backed promotion.
-
+  
   Operator-visible/package-boundary feature completeness is a release gate for final certification.
   A release MAY retain partial operator functionality in checkpoint or candidate form, but it SHALL NOT claim a fully featured certified operator surface until the current certified command families and release-facing lifecycle operations are end-to-end verified in the current environment.
-
+  
   End-to-end verification for the operator boundary MUST cover:
   - operator invocation through the supported public CLI surface;
   - underlying runtime or control-plane behavior for the claimed feature;
   - preserved evidence showing the feature works within the active certified package boundary;
   - current release-state reports reflecting that the feature counts as complete for the active environment.
-
+  
   A missing operator-visible capability, or a capability present only as a catalog/list/show/report surface without the claimed lifecycle behavior, blocks final certified release for the full-featured package boundary even when protocol conformance remains green.

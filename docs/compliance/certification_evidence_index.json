@@ -3,37 +3,21 @@
   "failures": [],
   "warnings": [],
   "summary": {
-    "claim_count": 399,
+    "claim_count": 395,
     "fapi_claim_count": 6,
     "security_sensitive_claim_count": 37,
     "partition_count": 7,
     "target_profile_bundle_count": 197,
     "clean_checkout": {
       "git_available": true,
-      "clean": false,
-      "changed_path_count": 16,
-      "changed_paths": [
-        ".ssot/registry.json",
-        "compliance/evidence/certification_test_partitions.json",
-        "compliance/evidence/certification_test_partitions.yaml",
-        "compliance/targets/document-authority.yaml",
-        "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json",
-        "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md",
-        "docs/compliance/certification_evidence_index.json",
-        "docs/compliance/certification_evidence_index.md",
-        "docs/compliance/feature_completeness_report.json",
-        "docs/compliance/feature_completeness_report.md",
-        "docs/compliance/install_substrate_report.json",
-        "docs/compliance/install_substrate_report.md",
-        "docs/compliance/runtime_profile_report.json",
-        "docs/compliance/runtime_profile_report.md",
-        "dist/",
-        "runtime_secrets/"
-      ]
+      "clean": true,
+      "changed_path_count": 0,
+      "changed_paths": []
     }
   },
   "test_partitions": {
     "conformance": [
+      "tests/conformance/backlog/test_rfc8785_jcs.py",
       "tests/conformance/baseline/test_oidc_id_token.py",
       "tests/conformance/baseline/test_openid_configuration.py",
       "tests/conformance/baseline/test_openid_userinfo_endpoint.py",
@@ -2450,106 +2434,6 @@
     {
       "claim_id": "cli-flag:yes",
       "feature_id": "cli-flag:yes",
-      "targets": [
-        "CLI operator surface"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/conformance/operator/test_cli_bootstrap_migrate.py",
-        "tests/conformance/operator/test_cli_import_export.py",
-        "tests/conformance/operator/test_cli_keys_lifecycle.py",
-        "tests/conformance/operator/test_cli_resource_lifecycle.py",
-        "tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/"
-      ],
-      "security_sensitive": false
-    },
-    {
-      "claim_id": "cli-verb:adr.index",
-      "feature_id": "cli-verb:adr.index",
-      "targets": [
-        "CLI operator surface"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/conformance/operator/test_cli_bootstrap_migrate.py",
-        "tests/conformance/operator/test_cli_import_export.py",
-        "tests/conformance/operator/test_cli_keys_lifecycle.py",
-        "tests/conformance/operator/test_cli_resource_lifecycle.py",
-        "tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/"
-      ],
-      "security_sensitive": false
-    },
-    {
-      "claim_id": "cli-verb:adr.list",
-      "feature_id": "cli-verb:adr.list",
-      "targets": [
-        "CLI operator surface"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/conformance/operator/test_cli_bootstrap_migrate.py",
-        "tests/conformance/operator/test_cli_import_export.py",
-        "tests/conformance/operator/test_cli_keys_lifecycle.py",
-        "tests/conformance/operator/test_cli_resource_lifecycle.py",
-        "tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/"
-      ],
-      "security_sensitive": false
-    },
-    {
-      "claim_id": "cli-verb:adr.new",
-      "feature_id": "cli-verb:adr.new",
-      "targets": [
-        "CLI operator surface"
-      ],
-      "profile": null,
-      "positive_tests": [
-        "tests/conformance/operator/test_cli_bootstrap_migrate.py",
-        "tests/conformance/operator/test_cli_import_export.py",
-        "tests/conformance/operator/test_cli_keys_lifecycle.py",
-        "tests/conformance/operator/test_cli_resource_lifecycle.py",
-        "tests/conformance/operator/test_cli_serve_runtime.py",
-        "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py"
-      ],
-      "negative_tests": [],
-      "evidence_refs": [
-        "compliance/evidence/tier3/cli-operator-surface/"
-      ],
-      "security_sensitive": false
-    },
-    {
-      "claim_id": "cli-verb:adr.show",
-      "feature_id": "cli-verb:adr.show",
       "targets": [
         "CLI operator surface"
       ],
