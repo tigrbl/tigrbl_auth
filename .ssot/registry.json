@@ -13312,20 +13312,24 @@
       "id": "feat:target-rfc-8785",
       "title": "RFC 8785",
       "description": "JSON Canonicalization Scheme (JCS) for deterministic JSON bytes.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": "Tracked as a governed backlog target until implementation and evidence are linked."
+        "note": "Implemented with dedicated RFC 8785 JCS API and conformance tests."
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
         "target_claim_tier": "T2",
         "target_lifecycle_stage": "active"
       },
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:target-rfc-8785"
+      ],
+      "test_ids": [
+        "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
+      ],
       "requires": [],
       "spec_ids": [
         "spc:1053"
@@ -13335,20 +13339,24 @@
       "id": "feat:jcs-canonical-json",
       "title": "JCS canonical JSON",
       "description": "Repository capability for RFC 8785-compliant canonical JSON generation and validation.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": "Tracked as a governed backlog capability until a conformant API and test vectors are linked."
+        "note": "Implemented with dedicated RFC 8785 JCS API and conformance tests."
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
         "target_claim_tier": "T2",
         "target_lifecycle_stage": "active"
       },
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:jcs-canonical-json"
+      ],
+      "test_ids": [
+        "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
+      ],
       "requires": [],
       "spec_ids": [
         "spc:1053"
@@ -27451,6 +27459,24 @@
       "evidence_ids": [
         "evd:ssot-governance-document-authority"
       ]
+    },
+    {
+      "id": "tst:tests-conformance-backlog-test-rfc8785-jcs-py",
+      "title": "test rfc8785 jcs",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/conformance/backlog/test_rfc8785_jcs.py",
+      "feature_ids": [
+        "feat:target-rfc-8785",
+        "feat:jcs-canonical-json"
+      ],
+      "claim_ids": [
+        "clm:target-rfc-8785",
+        "clm:jcs-canonical-json"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier2-rfc8785-jcs"
+      ]
     }
   ],
   "claims": [
@@ -38745,6 +38771,40 @@
       "evidence_ids": [
         "evd:ssot-governance-document-authority"
       ]
+    },
+    {
+      "id": "clm:target-rfc-8785",
+      "title": "RFC 8785",
+      "status": "evidenced",
+      "tier": "T2",
+      "kind": "conformance",
+      "description": "RFC 8785 JCS canonicalization is implemented and covered by conformance tests.",
+      "feature_ids": [
+        "feat:target-rfc-8785"
+      ],
+      "test_ids": [
+        "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier2-rfc8785-jcs"
+      ]
+    },
+    {
+      "id": "clm:jcs-canonical-json",
+      "title": "JCS canonical JSON",
+      "status": "evidenced",
+      "tier": "T2",
+      "kind": "conformance",
+      "description": "The repository exposes deterministic JCS canonical JSON bytes with explicit failure paths.",
+      "feature_ids": [
+        "feat:jcs-canonical-json"
+      ],
+      "test_ids": [
+        "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier2-rfc8785-jcs"
+      ]
     }
   ],
   "evidence": [
@@ -43709,6 +43769,21 @@
       "test_ids": [
         "tst:tests-unit-test-phase19-ssot-document-authority-py"
       ]
+    },
+    {
+      "id": "evd:compliance-evidence-tier2-rfc8785-jcs",
+      "title": "RFC 8785 JCS conformance pytest evidence",
+      "status": "passed",
+      "tier": "T2",
+      "kind": "pytest",
+      "path": "compliance/evidence/tier2/rfc8785-jcs/",
+      "claim_ids": [
+        "clm:target-rfc-8785",
+        "clm:jcs-canonical-json"
+      ],
+      "test_ids": [
+        "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
+      ]
     }
   ],
   "issues": [],
@@ -44203,7 +44278,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "95c8aca4bea5bbbb7d66842521294881b22ebbf10d9519fe20443c31da83a327",
+      "content_sha256": "a53f07f049f1d22d33dea5e8592141ec0312707b8d55525b9af0ab24cd9c229d",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -44411,7 +44486,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "43ad94bb205505fea2e663f18b9349cf8e82e594c59ee2418a02e28ff1b43963",
+      "content_sha256": "b01d80bcb661c9cd9b800c89be9154bbe1b3207bcc66290b3f6c596d64a9b59f",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -44459,7 +44534,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.2",
-      "content_sha256": "05a7bc4addf5aae8e144c501aca615dd025aeae7183c85b43b6e94f02df33a63",
+      "content_sha256": "61eef0ecfce9a5fc2a3e688e8d6a4b0d46bde41268ef0138048fb0e973e58756",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -45760,7 +45835,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.6",
-      "content_sha256": "777068180af6f05fb41db09d6f2c8a75ad2c882dc842fba57ed90752121957f7",
+      "content_sha256": "85e0499b19b7730e45ff7239121cbe834c3efaf723b32db9bbca4a0e5c4166f1",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
