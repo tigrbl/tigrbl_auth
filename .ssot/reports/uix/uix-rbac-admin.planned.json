@@ -1,0 +1,6 @@
+{
+  "status": "planned",
+  "test_id": "tst:uix-rbac-admin",
+  "test_path": "tests/uix/test_rbac_admin.py",
+  "notes": "Planned evidence placeholder for the governed Admin UIX implementation."
+}

@@ -16,11 +16,32 @@ from pydantic import AnyHttpUrl, ConfigDict, EmailStr, constr, field_validator
 from sqlalchemy import Select, delete, or_, select
 from sqlalchemy.exc import IntegrityError
 
-from tigrbl import Base, TigrblApi, TigrblApp, engine_ctx, hook_ctx, op_ctx
-from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
-from tigrbl.column.storage_spec import ForeignKeySpec
+try:
+    from tigrbl import Base
+except ImportError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl.orm.tables._base import Base
+
+try:
+    from tigrbl import TigrblApi
+except ImportError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl import TigrblRouter as TigrblApi
+
+from tigrbl import TigrblApp, engine_ctx, hook_ctx, op_ctx
+try:
+    from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
+except ModuleNotFoundError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl.shortcuts.column import ColumnSpec, F, IO, S, acol
+
+try:
+    from tigrbl.column.storage_spec import ForeignKeySpec
+except ModuleNotFoundError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl import ForeignKeySpec
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
-from tigrbl.core.crud.params import Header
+try:
+    from tigrbl.core.crud.params import Header
+except ModuleNotFoundError:  # tigrbl >= 0.3.24.dev1
+    def Header(default=None, alias: str | None = None):
+        return default
 from tigrbl.engine import HybridSession as AsyncSession, engine as build_engine
 from tigrbl.orm.mixins import (
     ActiveToggle,
@@ -39,10 +60,19 @@ from tigrbl.orm.mixins import (
 from tigrbl.orm.tables import Client as ClientBase
 from tigrbl.orm.tables import Tenant as TenantBase
 from tigrbl.orm.tables import User as UserBase
-from tigrbl.requests import Request
-from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+try:
+    from tigrbl.requests import Request
+    from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+except ModuleNotFoundError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl import HTMLResponse, JSONResponse, RedirectResponse, Request, Response
 from tigrbl.runtime.status import HTTPException
-from tigrbl.security import APIKey, Depends, Security
+try:
+    from tigrbl.security import APIKey, Depends, Security
+except ImportError:  # tigrbl >= 0.3.24.dev1
+    from tigrbl import APIKey, Depends
+
+    def Security(dependency):
+        return Depends(dependency)
 from tigrbl.types import (
     AuthNProvider,
     BaseModel,
@@ -91,7 +121,7 @@ class TigrblRouter(TigrblApi):
             self._routes[:] = [route for route in self._routes if getattr(route, "path", None) != _RPC_DISABLED_SENTINEL]
 
     def include_tables(self, models, **kwargs):
-        return self.include_models(models, **kwargs)
+        return super().include_tables(models, **kwargs)
 
 __all__ = [
     "AnyHttpUrl",

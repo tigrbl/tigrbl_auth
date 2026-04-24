@@ -5,16 +5,22 @@
   "warnings": [],
   "summary": {
     "counts": {
-      "features": 393,
-      "tests": 196,
-      "claims": 399,
-      "evidence": 48,
+      "features": 424,
+      "profiles": 0,
+      "tests": 210,
+      "claims": 430,
+      "evidence": 62,
       "issues": 0,
       "risks": 0,
-      "boundaries": 1,
+      "boundaries": 2,
       "releases": 1,
-      "adrs": 41,
-      "specs": 63
+      "adrs": 55,
+      "specs": 75
+    },
+    "profile_status": {
+      "passing": 0,
+      "failing": 0,
+      "draft": 0
     }
   }
 }

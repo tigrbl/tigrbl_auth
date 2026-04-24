@@ -1,0 +1,21 @@
+services:
+  tigrbl-auth:
+    build:
+      context: .
+    image: tigrbl-auth-local:latest
+    container_name: tigrbl-auth-local
+    ports:
+      - "8000:8000"
+    environment:
+      TIGRBL_AUTH_INSTALL_PROFILE: sqlite+uvicorn
+      AUTHN_ISSUER: http://localhost:8000
+      TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER: http://localhost:8000/resource
+      TIGRBL_AUTH_REQUIRE_TLS: "false"
+      PG_HOST: ""
+      PG_PORT: "5432"
+      PG_DB: ""
+      PG_USER: ""
+      PG_PASS: ""
+      REDIS_HOST: ""
+      REDIS_PASSWORD: ""
+    restart: unless-stopped

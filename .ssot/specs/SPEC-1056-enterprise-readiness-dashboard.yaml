@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1056"
+number: 1056
+slug: "enterprise-readiness-dashboard"
+title: "Enterprise Readiness Dashboard"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The Enterprise Readiness Dashboard defines the first administrator UIX screen for deployment health and production readiness."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  The Enterprise Readiness Dashboard defines the first administrator UIX screen for deployment health and production readiness.
+  
+  ## Required Behavior
+  
+  - The dashboard MUST show runtime status, runner profile, app factory status, health/readiness state, and diagnostics availability.
+  - The dashboard MUST show database connectivity, migration state, and schema drift status.
+  - The dashboard MUST show issuer, discovery, OpenAPI, OpenRPC, public route, admin RPC, key/JWKS, and surface enablement status.
+  - The dashboard MUST show doctor, serve-check, release gate, and certification/readiness state when available.
+  - The dashboard MUST distinguish healthy, degraded, blocked, unknown, and unavailable states.
+  - The dashboard MUST link each blocked or degraded item to the responsible detail view or remediation surface when available.
+  
+  ## Verification
+  
+  Verification MUST cover healthy, degraded, blocked, unknown, and unavailable dashboard states with contract-backed input data.
+spec_kind: "local-policy"

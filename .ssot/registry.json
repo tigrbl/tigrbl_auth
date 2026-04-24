@@ -13325,6 +13325,743 @@
       "spec_ids": [
         "spc:1053"
       ]
+    },
+    {
+      "id": "feat:uix-admin-console-shell",
+      "title": "Admin console shell",
+      "description": "Enterprise admin UIX target: Admin console shell.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-console-shell"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-component",
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-auth-session",
+      "title": "Admin UIX auth session",
+      "description": "Enterprise admin UIX target: Admin UIX auth session.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-tenant-profile-selector",
+      "title": "Tenant and profile selector",
+      "description": "Enterprise admin UIX target: Tenant and profile selector.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-profile-selector"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-component",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-enterprise-readiness-dashboard",
+      "title": "Enterprise readiness dashboard",
+      "description": "Enterprise admin UIX target: Enterprise readiness dashboard.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1056"
+      ],
+      "claim_ids": [
+        "clm:uix-enterprise-readiness-dashboard"
+      ],
+      "test_ids": [
+        "tst:uix-readiness-dashboard-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-redacted-config-viewer",
+      "title": "Redacted configuration viewer",
+      "description": "Enterprise admin UIX target: Redacted configuration viewer.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1056"
+      ],
+      "claim_ids": [
+        "clm:uix-redacted-config-viewer"
+      ],
+      "test_ids": [
+        "tst:uix-readiness-dashboard-states",
+        "tst:uix-admin-shell-security"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-tenant-admin-view",
+      "title": "Tenant administrator view",
+      "description": "Enterprise admin UIX target: Tenant administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-client-admin-view",
+      "title": "Client administrator view",
+      "description": "Enterprise admin UIX target: Client administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-client-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-identity-admin-view",
+      "title": "Identity administrator view",
+      "description": "Enterprise admin UIX target: Identity administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-identity-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-session-admin-view",
+      "title": "Session administrator view",
+      "description": "Enterprise admin UIX target: Session administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-session-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-token-admin-view",
+      "title": "Token administrator view",
+      "description": "Enterprise admin UIX target: Token administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-token-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-consent-admin-view",
+      "title": "Consent administrator view",
+      "description": "Enterprise admin UIX target: Consent administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-consent-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-audit-admin-view",
+      "title": "Audit event administrator view",
+      "description": "Enterprise admin UIX target: Audit event administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-audit-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-keys-jwks-admin-view",
+      "title": "Keys and JWKS administrator view",
+      "description": "Enterprise admin UIX target: Keys and JWKS administrator view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-keys-jwks-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-profile-certification-view",
+      "title": "Profile and certification view",
+      "description": "Enterprise admin UIX target: Profile and certification view.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057"
+      ],
+      "claim_ids": [
+        "clm:uix-profile-certification-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-revoke-session",
+      "title": "UIX revoke session",
+      "description": "Enterprise admin UIX target: UIX revoke session.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-revoke-session"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-revoke-token",
+      "title": "UIX revoke token",
+      "description": "Enterprise admin UIX target: UIX revoke token.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-revoke-token"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-revoke-consent",
+      "title": "UIX revoke consent",
+      "description": "Enterprise admin UIX target: UIX revoke consent.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-revoke-consent"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-lock-identity",
+      "title": "UIX lock and unlock identity",
+      "description": "Enterprise admin UIX target: UIX lock and unlock identity.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-lock-identity"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-toggle-tenant",
+      "title": "UIX enable and disable tenant",
+      "description": "Enterprise admin UIX target: UIX enable and disable tenant.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-toggle-tenant"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-toggle-client",
+      "title": "UIX enable and disable client",
+      "description": "Enterprise admin UIX target: UIX enable and disable client.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-toggle-client"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-rotate-key",
+      "title": "UIX rotate key",
+      "description": "Enterprise admin UIX target: UIX rotate key.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-rotate-key"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-publish-jwks",
+      "title": "UIX publish JWKS",
+      "description": "Enterprise admin UIX target: UIX publish JWKS.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-publish-jwks"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-safe-mutation-update-client-registration",
+      "title": "UIX update client registration",
+      "description": "Enterprise admin UIX target: UIX update client registration.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-update-client-registration"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-rbac-administration",
+      "title": "RBAC administration UIX",
+      "description": "Enterprise admin UIX target: RBAC administration UIX.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1059"
+      ],
+      "claim_ids": [
+        "clm:uix-rbac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-rbac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-abac-administration",
+      "title": "ABAC administration UIX",
+      "description": "Enterprise admin UIX target: ABAC administration UIX.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1059"
+      ],
+      "claim_ids": [
+        "clm:uix-abac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-policy-simulation",
+      "title": "Policy simulation UIX",
+      "description": "Enterprise admin UIX target: Policy simulation UIX.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1059"
+      ],
+      "claim_ids": [
+        "clm:uix-policy-simulation"
+      ],
+      "test_ids": [
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
     }
   ],
   "tests": [
@@ -27369,6 +28106,268 @@
       "evidence_ids": [
         "evd:compliance-evidence-tier2-rfc8785-jcs"
       ]
+    },
+    {
+      "id": "tst:uix-admin-shell-component",
+      "title": "Admin shell renders authenticated enterprise navigation",
+      "status": "planned",
+      "kind": "component",
+      "path": "tests/uix/test_admin_shell.py",
+      "feature_ids": [
+        "feat:uix-admin-console-shell",
+        "feat:uix-tenant-profile-selector"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-tenant-profile-selector"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-shell-component"
+      ]
+    },
+    {
+      "id": "tst:uix-admin-shell-security",
+      "title": "Admin shell denies unauthenticated or unauthorized users",
+      "status": "planned",
+      "kind": "security",
+      "path": "tests/uix/test_admin_shell_security.py",
+      "feature_ids": [
+        "feat:uix-admin-console-shell",
+        "feat:uix-admin-auth-session",
+        "feat:uix-redacted-config-viewer"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-admin-auth-session",
+        "clm:uix-redacted-config-viewer"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-shell-security"
+      ]
+    },
+    {
+      "id": "tst:uix-readiness-dashboard-states",
+      "title": "Readiness dashboard renders healthy degraded and blocked states",
+      "status": "planned",
+      "kind": "component",
+      "path": "tests/uix/test_readiness_dashboard.py",
+      "feature_ids": [
+        "feat:uix-enterprise-readiness-dashboard",
+        "feat:uix-redacted-config-viewer"
+      ],
+      "claim_ids": [
+        "clm:uix-enterprise-readiness-dashboard",
+        "clm:uix-redacted-config-viewer"
+      ],
+      "evidence_ids": [
+        "evd:uix-readiness-dashboard-states"
+      ]
+    },
+    {
+      "id": "tst:uix-resource-views-contract",
+      "title": "Resource views are backed by required OpenRPC methods",
+      "status": "planned",
+      "kind": "contract",
+      "path": "tests/uix/test_resource_views_contract.py",
+      "feature_ids": [
+        "feat:uix-tenant-admin-view",
+        "feat:uix-client-admin-view",
+        "feat:uix-identity-admin-view",
+        "feat:uix-session-admin-view",
+        "feat:uix-token-admin-view",
+        "feat:uix-consent-admin-view",
+        "feat:uix-audit-admin-view",
+        "feat:uix-keys-jwks-admin-view",
+        "feat:uix-profile-certification-view"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract"
+      ]
+    },
+    {
+      "id": "tst:uix-resource-views-states",
+      "title": "Resource views handle empty loading error filtered and detail states",
+      "status": "planned",
+      "kind": "component",
+      "path": "tests/uix/test_resource_views_states.py",
+      "feature_ids": [
+        "feat:uix-tenant-admin-view",
+        "feat:uix-client-admin-view",
+        "feat:uix-identity-admin-view",
+        "feat:uix-session-admin-view",
+        "feat:uix-token-admin-view",
+        "feat:uix-consent-admin-view",
+        "feat:uix-audit-admin-view",
+        "feat:uix-keys-jwks-admin-view",
+        "feat:uix-profile-certification-view"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-states"
+      ]
+    },
+    {
+      "id": "tst:uix-safe-mutations",
+      "title": "Safe mutations confirm execute report failure and expose audit outcome",
+      "status": "planned",
+      "kind": "integration",
+      "path": "tests/uix/test_safe_mutations.py",
+      "feature_ids": [
+        "feat:uix-safe-mutation-revoke-session",
+        "feat:uix-safe-mutation-revoke-token",
+        "feat:uix-safe-mutation-revoke-consent",
+        "feat:uix-safe-mutation-lock-identity",
+        "feat:uix-safe-mutation-toggle-tenant",
+        "feat:uix-safe-mutation-toggle-client",
+        "feat:uix-safe-mutation-rotate-key",
+        "feat:uix-safe-mutation-publish-jwks",
+        "feat:uix-safe-mutation-update-client-registration"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-mutation-revoke-session",
+        "clm:uix-safe-mutation-revoke-token",
+        "clm:uix-safe-mutation-revoke-consent",
+        "clm:uix-safe-mutation-lock-identity",
+        "clm:uix-safe-mutation-toggle-tenant",
+        "clm:uix-safe-mutation-toggle-client",
+        "clm:uix-safe-mutation-rotate-key",
+        "clm:uix-safe-mutation-publish-jwks",
+        "clm:uix-safe-mutation-update-client-registration"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations"
+      ]
+    },
+    {
+      "id": "tst:uix-rbac-admin",
+      "title": "RBAC administration supports roles permissions assignments and denials",
+      "status": "planned",
+      "kind": "integration",
+      "path": "tests/uix/test_rbac_admin.py",
+      "feature_ids": [
+        "feat:uix-rbac-administration"
+      ],
+      "claim_ids": [
+        "clm:uix-rbac-administration"
+      ],
+      "evidence_ids": [
+        "evd:uix-rbac-admin"
+      ]
+    },
+    {
+      "id": "tst:uix-abac-admin",
+      "title": "ABAC administration supports policies attributes and denials",
+      "status": "planned",
+      "kind": "integration",
+      "path": "tests/uix/test_abac_admin.py",
+      "feature_ids": [
+        "feat:uix-abac-administration"
+      ],
+      "claim_ids": [
+        "clm:uix-abac-administration"
+      ],
+      "evidence_ids": [
+        "evd:uix-abac-admin"
+      ]
+    },
+    {
+      "id": "tst:uix-policy-simulation",
+      "title": "Policy simulation returns allow deny and explanation output",
+      "status": "planned",
+      "kind": "integration",
+      "path": "tests/uix/test_policy_simulation.py",
+      "feature_ids": [
+        "feat:uix-rbac-administration",
+        "feat:uix-abac-administration",
+        "feat:uix-policy-simulation"
+      ],
+      "claim_ids": [
+        "clm:uix-rbac-administration",
+        "clm:uix-abac-administration",
+        "clm:uix-policy-simulation"
+      ],
+      "evidence_ids": [
+        "evd:uix-policy-simulation"
+      ]
+    },
+    {
+      "id": "tst:uix-admin-e2e-golden-path",
+      "title": "Admin UIX golden path from login to dashboard to mutation audit",
+      "status": "planned",
+      "kind": "e2e",
+      "path": "tests/uix/test_admin_golden_path.py",
+      "feature_ids": [
+        "feat:uix-admin-console-shell",
+        "feat:uix-admin-auth-session",
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-enterprise-readiness-dashboard",
+        "feat:uix-tenant-admin-view",
+        "feat:uix-client-admin-view",
+        "feat:uix-identity-admin-view",
+        "feat:uix-session-admin-view",
+        "feat:uix-token-admin-view",
+        "feat:uix-consent-admin-view",
+        "feat:uix-audit-admin-view",
+        "feat:uix-keys-jwks-admin-view",
+        "feat:uix-profile-certification-view",
+        "feat:uix-safe-mutation-revoke-session",
+        "feat:uix-safe-mutation-revoke-token",
+        "feat:uix-safe-mutation-revoke-consent",
+        "feat:uix-safe-mutation-lock-identity",
+        "feat:uix-safe-mutation-toggle-tenant",
+        "feat:uix-safe-mutation-toggle-client",
+        "feat:uix-safe-mutation-rotate-key",
+        "feat:uix-safe-mutation-publish-jwks",
+        "feat:uix-safe-mutation-update-client-registration"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-admin-auth-session",
+        "clm:uix-tenant-profile-selector",
+        "clm:uix-enterprise-readiness-dashboard",
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view",
+        "clm:uix-safe-mutation-revoke-session",
+        "clm:uix-safe-mutation-revoke-token",
+        "clm:uix-safe-mutation-revoke-consent",
+        "clm:uix-safe-mutation-lock-identity",
+        "clm:uix-safe-mutation-toggle-tenant",
+        "clm:uix-safe-mutation-toggle-client",
+        "clm:uix-safe-mutation-rotate-key",
+        "clm:uix-safe-mutation-publish-jwks",
+        "clm:uix-safe-mutation-update-client-registration"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-e2e-golden-path"
+      ]
     }
   ],
   "claims": [
@@ -38661,6 +39660,518 @@
       "evidence_ids": [
         "evd:compliance-evidence-tier2-rfc8785-jcs"
       ]
+    },
+    {
+      "id": "clm:uix-admin-console-shell",
+      "title": "Admin console shell expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Admin console shell before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-admin-console-shell"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-component",
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-shell-component",
+        "evd:uix-admin-shell-security",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-admin-auth-session",
+      "title": "Admin UIX auth session expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Admin UIX auth session before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-shell-security",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-tenant-profile-selector",
+      "title": "Tenant and profile selector expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Tenant and profile selector before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-tenant-profile-selector"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-component",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-shell-component",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-enterprise-readiness-dashboard",
+      "title": "Enterprise readiness dashboard expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Enterprise readiness dashboard before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-enterprise-readiness-dashboard"
+      ],
+      "test_ids": [
+        "tst:uix-readiness-dashboard-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-readiness-dashboard-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-redacted-config-viewer",
+      "title": "Redacted configuration viewer expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Redacted configuration viewer before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-redacted-config-viewer"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-readiness-dashboard-states"
+      ],
+      "evidence_ids": [
+        "evd:uix-readiness-dashboard-states",
+        "evd:uix-admin-shell-security"
+      ]
+    },
+    {
+      "id": "clm:uix-tenant-admin-view",
+      "title": "Tenant administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Tenant administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-tenant-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-client-admin-view",
+      "title": "Client administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Client administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-client-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-identity-admin-view",
+      "title": "Identity administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Identity administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-identity-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-session-admin-view",
+      "title": "Session administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Session administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-session-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-token-admin-view",
+      "title": "Token administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Token administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-token-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-consent-admin-view",
+      "title": "Consent administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Consent administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-consent-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-audit-admin-view",
+      "title": "Audit event administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Audit event administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-audit-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-keys-jwks-admin-view",
+      "title": "Keys and JWKS administrator view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Keys and JWKS administrator view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-keys-jwks-admin-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-profile-certification-view",
+      "title": "Profile and certification view expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Profile and certification view before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-profile-certification-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-resource-views-contract",
+        "evd:uix-resource-views-states",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-revoke-session",
+      "title": "UIX revoke session expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX revoke session before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-revoke-session"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-revoke-token",
+      "title": "UIX revoke token expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX revoke token before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-revoke-token"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-revoke-consent",
+      "title": "UIX revoke consent expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX revoke consent before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-revoke-consent"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-lock-identity",
+      "title": "UIX lock and unlock identity expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX lock and unlock identity before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-lock-identity"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-toggle-tenant",
+      "title": "UIX enable and disable tenant expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX enable and disable tenant before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-toggle-tenant"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-toggle-client",
+      "title": "UIX enable and disable client expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX enable and disable client before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-toggle-client"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-rotate-key",
+      "title": "UIX rotate key expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX rotate key before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-rotate-key"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-publish-jwks",
+      "title": "UIX publish JWKS expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX publish JWKS before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-publish-jwks"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-safe-mutation-update-client-registration",
+      "title": "UIX update client registration expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for UIX update client registration before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-safe-mutation-update-client-registration"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "evidence_ids": [
+        "evd:uix-safe-mutations",
+        "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "clm:uix-rbac-administration",
+      "title": "RBAC administration UIX expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for RBAC administration UIX before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-rbac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-rbac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "evidence_ids": [
+        "evd:uix-rbac-admin",
+        "evd:uix-policy-simulation"
+      ]
+    },
+    {
+      "id": "clm:uix-abac-administration",
+      "title": "ABAC administration UIX expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for ABAC administration UIX before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-abac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "evidence_ids": [
+        "evd:uix-abac-admin",
+        "evd:uix-policy-simulation"
+      ]
+    },
+    {
+      "id": "clm:uix-policy-simulation",
+      "title": "Policy simulation UIX expected behavior",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-expected-behavior",
+      "description": "Declared expected behavior for Policy simulation UIX before UI implementation lands.",
+      "feature_ids": [
+        "feat:uix-policy-simulation"
+      ],
+      "test_ids": [
+        "tst:uix-policy-simulation"
+      ],
+      "evidence_ids": [
+        "evd:uix-policy-simulation"
+      ]
     }
   ],
   "evidence": [
@@ -43640,6 +45151,197 @@
       "test_ids": [
         "tst:tests-conformance-backlog-test-rfc8785-jcs-py"
       ]
+    },
+    {
+      "id": "evd:uix-admin-shell-component",
+      "title": "Planned evidence for Admin shell renders authenticated enterprise navigation",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-admin-shell-component.planned.json",
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-tenant-profile-selector"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-component"
+      ]
+    },
+    {
+      "id": "evd:uix-admin-shell-security",
+      "title": "Planned evidence for Admin shell denies unauthenticated or unauthorized users",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-admin-shell-security.planned.json",
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-admin-auth-session",
+        "clm:uix-redacted-config-viewer"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security"
+      ]
+    },
+    {
+      "id": "evd:uix-readiness-dashboard-states",
+      "title": "Planned evidence for Readiness dashboard renders healthy degraded and blocked states",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-readiness-dashboard-states.planned.json",
+      "claim_ids": [
+        "clm:uix-enterprise-readiness-dashboard",
+        "clm:uix-redacted-config-viewer"
+      ],
+      "test_ids": [
+        "tst:uix-readiness-dashboard-states"
+      ]
+    },
+    {
+      "id": "evd:uix-resource-views-contract",
+      "title": "Planned evidence for Resource views are backed by required OpenRPC methods",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-resource-views-contract.planned.json",
+      "claim_ids": [
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract"
+      ]
+    },
+    {
+      "id": "evd:uix-resource-views-states",
+      "title": "Planned evidence for Resource views handle empty loading error filtered and detail states",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-resource-views-states.planned.json",
+      "claim_ids": [
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-states"
+      ]
+    },
+    {
+      "id": "evd:uix-safe-mutations",
+      "title": "Planned evidence for Safe mutations confirm execute report failure and expose audit outcome",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-safe-mutations.planned.json",
+      "claim_ids": [
+        "clm:uix-safe-mutation-revoke-session",
+        "clm:uix-safe-mutation-revoke-token",
+        "clm:uix-safe-mutation-revoke-consent",
+        "clm:uix-safe-mutation-lock-identity",
+        "clm:uix-safe-mutation-toggle-tenant",
+        "clm:uix-safe-mutation-toggle-client",
+        "clm:uix-safe-mutation-rotate-key",
+        "clm:uix-safe-mutation-publish-jwks",
+        "clm:uix-safe-mutation-update-client-registration"
+      ],
+      "test_ids": [
+        "tst:uix-safe-mutations"
+      ]
+    },
+    {
+      "id": "evd:uix-rbac-admin",
+      "title": "Planned evidence for RBAC administration supports roles permissions assignments and denials",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-rbac-admin.planned.json",
+      "claim_ids": [
+        "clm:uix-rbac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-rbac-admin"
+      ]
+    },
+    {
+      "id": "evd:uix-abac-admin",
+      "title": "Planned evidence for ABAC administration supports policies attributes and denials",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-abac-admin.planned.json",
+      "claim_ids": [
+        "clm:uix-abac-administration"
+      ],
+      "test_ids": [
+        "tst:uix-abac-admin"
+      ]
+    },
+    {
+      "id": "evd:uix-policy-simulation",
+      "title": "Planned evidence for Policy simulation returns allow deny and explanation output",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-policy-simulation.planned.json",
+      "claim_ids": [
+        "clm:uix-rbac-administration",
+        "clm:uix-abac-administration",
+        "clm:uix-policy-simulation"
+      ],
+      "test_ids": [
+        "tst:uix-policy-simulation"
+      ]
+    },
+    {
+      "id": "evd:uix-admin-e2e-golden-path",
+      "title": "Planned evidence for Admin UIX golden path from login to dashboard to mutation audit",
+      "status": "planned",
+      "kind": "planned-test-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-admin-e2e-golden-path.planned.json",
+      "claim_ids": [
+        "clm:uix-admin-console-shell",
+        "clm:uix-admin-auth-session",
+        "clm:uix-tenant-profile-selector",
+        "clm:uix-enterprise-readiness-dashboard",
+        "clm:uix-tenant-admin-view",
+        "clm:uix-client-admin-view",
+        "clm:uix-identity-admin-view",
+        "clm:uix-session-admin-view",
+        "clm:uix-token-admin-view",
+        "clm:uix-consent-admin-view",
+        "clm:uix-audit-admin-view",
+        "clm:uix-keys-jwks-admin-view",
+        "clm:uix-profile-certification-view",
+        "clm:uix-safe-mutation-revoke-session",
+        "clm:uix-safe-mutation-revoke-token",
+        "clm:uix-safe-mutation-revoke-consent",
+        "clm:uix-safe-mutation-lock-identity",
+        "clm:uix-safe-mutation-toggle-tenant",
+        "clm:uix-safe-mutation-toggle-client",
+        "clm:uix-safe-mutation-rotate-key",
+        "clm:uix-safe-mutation-publish-jwks",
+        "clm:uix-safe-mutation-update-client-registration"
+      ],
+      "test_ids": [
+        "tst:uix-admin-e2e-golden-path"
+      ]
     }
   ],
   "issues": [],
@@ -43651,6 +45353,41 @@
       "status": "draft",
       "frozen": false,
       "feature_ids": [],
+      "profile_ids": []
+    },
+    {
+      "id": "bnd:admin-uix-enterprise-control-plane",
+      "title": "Admin UIX Enterprise Control Plane",
+      "status": "frozen",
+      "frozen": true,
+      "feature_ids": [
+        "feat:uix-admin-console-shell",
+        "feat:uix-admin-auth-session",
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-enterprise-readiness-dashboard",
+        "feat:uix-redacted-config-viewer",
+        "feat:uix-tenant-admin-view",
+        "feat:uix-client-admin-view",
+        "feat:uix-identity-admin-view",
+        "feat:uix-session-admin-view",
+        "feat:uix-token-admin-view",
+        "feat:uix-consent-admin-view",
+        "feat:uix-audit-admin-view",
+        "feat:uix-keys-jwks-admin-view",
+        "feat:uix-profile-certification-view",
+        "feat:uix-safe-mutation-revoke-session",
+        "feat:uix-safe-mutation-revoke-token",
+        "feat:uix-safe-mutation-revoke-consent",
+        "feat:uix-safe-mutation-lock-identity",
+        "feat:uix-safe-mutation-toggle-tenant",
+        "feat:uix-safe-mutation-toggle-client",
+        "feat:uix-safe-mutation-rotate-key",
+        "feat:uix-safe-mutation-publish-jwks",
+        "feat:uix-safe-mutation-update-client-registration",
+        "feat:uix-rbac-administration",
+        "feat:uix-abac-administration",
+        "feat:uix-policy-simulation"
+      ],
       "profile_ids": []
     }
   ],
@@ -43733,7 +45470,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "e7bd19665fa1a92520ee9b21da493bd5e3e026209ac31fd64e344fcb1710bba5",
       "status": "draft",
       "supersedes": [],
@@ -43749,7 +45486,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "29b6b133e5ecd059c90da8ab7ef931f940ac566cb955a9f4b36a8d6b5f1e2ef7",
       "status": "draft",
       "supersedes": [],
@@ -43765,7 +45502,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "761ffd5988667d68d1ed70d24b1c15946c69c1143115b0230a0a6ccb5cfa4238",
       "status": "draft",
       "supersedes": [],
@@ -43781,7 +45518,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "f8b91bbe54942b2157744e0419b7f6c4b6bb84d02497a391ca1a088114c3c3da",
       "status": "draft",
       "supersedes": [],
@@ -43797,7 +45534,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "3e8243fe57d04a67d2eb94c02f100a466b7dd20566d292fd336979a35abdc6a2",
       "status": "draft",
       "supersedes": [],
@@ -43813,7 +45550,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "4aef17bb539ad05e48b04b70ee69119dc973ee4e16be407bc5d2d11fba0af607",
       "status": "draft",
       "supersedes": [],
@@ -43829,7 +45566,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "a2331253dabab9dc3e407adb55b25f0febb6c16ad590a515d97ac19f33a9b962",
       "status": "draft",
       "supersedes": [],
@@ -43845,7 +45582,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "2145618a72dff6597602ca96df720776b7ac13023fe8ff5462be021621446940",
       "status": "draft",
       "supersedes": [],
@@ -43861,7 +45598,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "3026817d03ed825e1435612c08557b01dfa1fcadd5d1db32172169b79c7a27b1",
       "status": "draft",
       "supersedes": [],
@@ -43877,7 +45614,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "400819479d8e5036da5fd39e30b768f82785aecd3f06fc18738cd1a2b0cce079",
       "status": "draft",
       "supersedes": [],
@@ -43893,7 +45630,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "c138f93e130f63857a2777dd40f3856fdceba7f4768d61dd0f2d0e5a9c7fe4cc",
       "status": "draft",
       "supersedes": [],
@@ -43909,7 +45646,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "87fd1773ace8f82b7707dda6e8b633e285da493e8b29ea17c0dc776da3b4d8b9",
       "status": "draft",
       "supersedes": [],
@@ -43925,7 +45662,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "c3534a8ae8a38bdd1328cc652b750530fdd8c84e00ecf8e19c81301030da822f",
       "status": "draft",
       "supersedes": [],
@@ -43941,7 +45678,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "52047d10ab6538e7423e6233490be2eb699cd31e374f5b81d3daeeeda8eab98d",
       "status": "accepted",
       "supersedes": [],
@@ -44561,6 +46298,54 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": []
+    },
+    {
+      "id": "adr:1038",
+      "number": 1038,
+      "slug": "administrator-uix-enterprise-control-plane",
+      "title": "Administrator UIX as Enterprise Control Plane",
+      "path": ".ssot/adr/ADR-1038-administrator-uix-enterprise-control-plane.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "b63a65b7b75970274642bc09b29f43a8dbd74288820da3b4071e05b705a3fda3",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1039",
+      "number": 1039,
+      "slug": "openrpc-backed-admin-uix-contract",
+      "title": "OpenRPC-Backed Admin UIX Contract",
+      "path": ".ssot/adr/ADR-1039-openrpc-backed-admin-uix-contract.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "ed098af0b7d6293bfc33960dabca1f002385342e4ebd2c4bbd6e45c5c5bd1602",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1040",
+      "number": 1040,
+      "slug": "admin-uix-security-boundary",
+      "title": "Admin UIX Security Boundary",
+      "path": ".ssot/adr/ADR-1040-admin-uix-security-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "4211b6c70afeedee3de9531080b972228ee112a807316c68a69a4c9cec3db4ef",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
     }
   ],
   "specs": [
@@ -44573,7 +46358,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "d03d461a32d1cbc5798cd33fbda66589010b8d082b65bf989f18f761d273b587",
       "status": "draft",
       "supersedes": [],
@@ -44590,7 +46375,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "bacd750fcaee57277115e2bd61c5fde308624798839a34bce0bc8f1320de3287",
       "status": "draft",
       "supersedes": [],
@@ -44607,7 +46392,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "c2f9addf6a50ccbfc020c40327de93027ec984bebd0dc12feb1f4febfa816293",
       "status": "draft",
       "supersedes": [],
@@ -44624,7 +46409,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "fe3ff8e895162ae90359401bac69bc8e8e5c98b2b31447fea3b6e1ae76516c79",
       "status": "draft",
       "supersedes": [],
@@ -44641,7 +46426,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "d789748eb6dd262134c80baf77a8c44dd85f6ca0ce1ab53586d25dcb576e32a1",
       "status": "draft",
       "supersedes": [],
@@ -44658,7 +46443,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "7b350ed11cad9d9be5fce31e10f0f4350d6a071049a01c950af8694d5f0630d7",
       "status": "draft",
       "supersedes": [],
@@ -44675,7 +46460,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "6952e1ae415375b4dbe46c92537f6c6cd3dce5709a2507d906197bf8043fd6d6",
       "status": "draft",
       "supersedes": [],
@@ -44692,7 +46477,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "63b5056e142d551afb5a7c8e119b4e02913371771bb54c56c52464b1615893c2",
       "status": "draft",
       "supersedes": [],
@@ -44709,7 +46494,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "ab8ef1311b825d7474f24a8b2eeff2fee19183804746cbccd7234f9f5e2166a9",
       "status": "draft",
       "supersedes": [],
@@ -44726,7 +46511,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "ce9b9a9cd22703419af6d37aaf3e7da815291deb6bf493a16689f41d9019233e",
       "status": "draft",
       "supersedes": [],
@@ -44743,7 +46528,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "e821e3c072a3973300b6c91eb2f6ce504cf4f34f4c6b49ed7c742a4315b7d5fc",
       "status": "draft",
       "supersedes": [],
@@ -44760,7 +46545,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "fa4fab0acc1175f202b36fe1770cbe076332bf33e7bccf5eb539c477c9215b7d",
       "status": "draft",
       "supersedes": [],
@@ -44777,7 +46562,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "bbea37ab830073ee6309011ee7aa9b13aa490e660bdf01448cd50f1d42a32993",
       "status": "draft",
       "supersedes": [],
@@ -44794,7 +46579,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "9e7523c7f8fe3f5cad8bd05aa42796e96794c7427cb774639ef9c5dfc4082c8a",
       "status": "draft",
       "supersedes": [],
@@ -44811,7 +46596,7 @@
       "origin": "ssot-origin",
       "managed": true,
       "immutable": true,
-      "package_version": "0.2.6",
+      "package_version": "0.2.8",
       "content_sha256": "38914181571d8d366258bc4cce8837a9857b2e480e03687db9d811555b807f77",
       "status": "draft",
       "supersedes": [],
@@ -45765,6 +47550,91 @@
       "superseded_by": [],
       "status_notes": [],
       "kind": "normative"
+    },
+    {
+      "id": "spc:1055",
+      "number": 1055,
+      "slug": "admin-console-shell",
+      "title": "Admin Console Shell",
+      "path": ".ssot/specs/SPEC-1055-admin-console-shell.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "0486b7d05422692c4aded5d972f4818ab749eacce411ffaa5994539e0fa56fd9",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "local-policy"
+    },
+    {
+      "id": "spc:1056",
+      "number": 1056,
+      "slug": "enterprise-readiness-dashboard",
+      "title": "Enterprise Readiness Dashboard",
+      "path": ".ssot/specs/SPEC-1056-enterprise-readiness-dashboard.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "2ad2d8ac128cbc879fd57693f239f4b6ec9140ae5f3f3963eae1e016e55f11a8",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "local-policy"
+    },
+    {
+      "id": "spc:1057",
+      "number": 1057,
+      "slug": "administrative-resource-views",
+      "title": "Administrative Resource Views",
+      "path": ".ssot/specs/SPEC-1057-administrative-resource-views.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "71a8f4454c2cdd39d2e95eaab8555fba225c1ec59e60c469b8377ad614969b10",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "local-policy"
+    },
+    {
+      "id": "spc:1058",
+      "number": 1058,
+      "slug": "administrative-safe-mutations",
+      "title": "Administrative Safe Mutations",
+      "path": ".ssot/specs/SPEC-1058-administrative-safe-mutations.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "3c9aaba5e6e49bbc7910f32caf2b7190ac7db334c74c6485a6755939ae9beb5e",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "local-policy"
+    },
+    {
+      "id": "spc:1059",
+      "number": 1059,
+      "slug": "policy-administration-uix",
+      "title": "Policy Administration UIX",
+      "path": ".ssot/specs/SPEC-1059-policy-administration-uix.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "1dbb6d55f388cb95558f304155a796a359802166ee9f143081076f303f193efc",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "local-policy"
     }
   ],
   "profiles": []

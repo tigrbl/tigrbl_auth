@@ -1,0 +1,6 @@
+{
+  "status": "planned",
+  "test_id": "tst:uix-resource-views-states",
+  "test_path": "tests/uix/test_resource_views_states.py",
+  "notes": "Planned evidence placeholder for the governed Admin UIX implementation."
+}

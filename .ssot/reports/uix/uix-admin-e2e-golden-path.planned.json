@@ -1,0 +1,6 @@
+{
+  "status": "planned",
+  "test_id": "tst:uix-admin-e2e-golden-path",
+  "test_path": "tests/uix/test_admin_golden_path.py",
+  "notes": "Planned evidence placeholder for the governed Admin UIX implementation."
+}

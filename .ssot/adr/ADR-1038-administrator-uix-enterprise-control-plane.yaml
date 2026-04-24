@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1038"
+number: 1038
+slug: "administrator-uix-enterprise-control-plane"
+title: "Administrator UIX as Enterprise Control Plane"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: accepted"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: accepted
+  Date: 2026-04-24
+  
+  `tigrbl_auth` MUST provide an enterprise administrator browser UIX as a governed product surface. The command-line and OpenRPC planes remain required operator surfaces, but they are not sufficient by themselves for enterprise deployment, configuration, and day-to-day administration.
+  
+  ## Rationale
+  
+  Enterprise deployers need a visual control plane for readiness, configuration review, tenant and client management, identity/session/token inspection, key state, audit trails, and policy administration. These workflows must be discoverable, observable, and safe for operators who should not need repository-local knowledge to administer a deployed service.
+  
+  ## Scope
+  
+  The UIX is an administrator console, not a public end-user login application. It MUST expose deployment readiness, administrative resource views, safe mutation workflows, and policy administration. It MUST reuse governed backend contracts rather than inventing an untracked API surface.

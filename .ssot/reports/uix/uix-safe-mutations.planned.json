@@ -1,0 +1,6 @@
+{
+  "status": "planned",
+  "test_id": "tst:uix-safe-mutations",
+  "test_path": "tests/uix/test_safe_mutations.py",
+  "notes": "Planned evidence placeholder for the governed Admin UIX implementation."
+}

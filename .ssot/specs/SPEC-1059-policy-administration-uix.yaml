@@ -1,0 +1,32 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1059"
+number: 1059
+slug: "policy-administration-uix"
+title: "Policy Administration UIX"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Policy Administration UIX defines administrator workflows for RBAC, ABAC, and policy simulation."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  Policy Administration UIX defines administrator workflows for RBAC, ABAC, and policy simulation.
+  
+  ## Required Behavior
+  
+  - RBAC UIX MUST expose roles, permissions, assignments, and authorization denial states.
+  - ABAC UIX MUST expose policies, attributes, subject/resource/action/environment context, and authorization denial states.
+  - Policy simulation MUST accept subject, action, resource, tenant, and relevant attributes, then return allow or deny with an explanation.
+  - Policy administration MUST be available only to authorized administrators.
+  - Policy changes and simulations MUST be auditable.
+  
+  ## Verification
+  
+  Verification MUST cover RBAC allow/deny, ABAC allow/deny, missing policy data, authorization denial, simulation explanation output, and audit visibility.
+spec_kind: "local-policy"

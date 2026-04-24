@@ -1,0 +1,17 @@
+.git
+.venv
+.uv-cache
+.uv-cache-local
+.uv-project-env
+.pytest_cache
+.pytest-tmp
+.benchmarks
+.tmp
+dist
+__pycache__
+*.py[cod]
+*.db
+*.sqlite
+*.sqlite3
+.operator*
+compliance/evidence

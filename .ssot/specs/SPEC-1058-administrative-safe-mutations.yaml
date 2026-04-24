@@ -1,0 +1,32 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1058"
+number: 1058
+slug: "administrative-safe-mutations"
+title: "Administrative Safe Mutations"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Administrative Safe Mutations define UIX workflows for protected administrator actions that change deployed state."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  Administrative Safe Mutations define UIX workflows for protected administrator actions that change deployed state.
+  
+  ## Required Behavior
+  
+  - The UIX MUST require confirmation before revoking sessions, revoking tokens, revoking consents, locking or unlocking identities, enabling or disabling tenants, enabling or disabling clients, rotating keys, publishing JWKS, or updating client registration.
+  - Each mutation MUST show success, failure, authorization denial, validation failure, and audit-pending or audit-complete states.
+  - Each mutation MUST call an implementation-backed OpenRPC operation or be blocked with a missing-operation error.
+  - Each mutation MUST produce or expose an audit result that the administrator can inspect.
+  - Destructive or security-sensitive actions MUST be visibly scoped to the active tenant/resource.
+  
+  ## Verification
+  
+  Verification MUST cover confirmation, execution, success, failure, authorization denial, audit visibility, and resource scoping.
+spec_kind: "local-policy"

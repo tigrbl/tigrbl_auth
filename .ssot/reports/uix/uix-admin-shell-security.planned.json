@@ -1,0 +1,6 @@
+{
+  "status": "planned",
+  "test_id": "tst:uix-admin-shell-security",
+  "test_path": "tests/uix/test_admin_shell_security.py",
+  "notes": "Planned evidence placeholder for the governed Admin UIX implementation."
+}

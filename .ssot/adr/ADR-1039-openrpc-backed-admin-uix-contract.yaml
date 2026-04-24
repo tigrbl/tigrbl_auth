@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1039"
+number: 1039
+slug: "openrpc-backed-admin-uix-contract"
+title: "OpenRPC-Backed Admin UIX Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: accepted"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: accepted
+  Date: 2026-04-24
+  
+  The administrator UIX MUST consume the implementation-backed OpenRPC admin contract as its primary backend API. New backend methods MAY be added only when a required UI behavior has no existing OpenRPC operation.
+  
+  ## Rationale
+  
+  The repository already treats the admin/control-plane OpenRPC registry as implementation-backed. Using that contract keeps UI behavior aligned with executable admin methods, generated schemas, and contract drift checks.
+  
+  ## Scope
+  
+  The UIX client adapter MUST derive method names, request shapes, and response handling from the committed/generated OpenRPC contract. OpenAPI remains the public auth route contract and may be displayed or inspected by the console, but OpenRPC is the administrator action contract.

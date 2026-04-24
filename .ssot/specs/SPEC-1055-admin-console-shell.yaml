@@ -1,0 +1,32 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1055"
+number: 1055
+slug: "admin-console-shell"
+title: "Admin Console Shell"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The Admin Console Shell defines the administrator UIX entrypoint, layout, navigation, authentication state, tenant/profile context, and unsafe-state signaling."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  The Admin Console Shell defines the administrator UIX entrypoint, layout, navigation, authentication state, tenant/profile context, and unsafe-state signaling.
+  
+  ## Required Behavior
+  
+  - The console MUST require an authenticated administrator session before rendering protected routes.
+  - The shell MUST expose stable navigation for dashboard, configuration, tenants, clients, identities, sessions, tokens, consents, audit, keys/JWKS, profile/certification, RBAC, ABAC, and policy simulation.
+  - The shell MUST show the selected tenant, selected deployment profile, issuer/environment label, and active surface set.
+  - The shell MUST display unsafe-state warnings for missing admin authorization, degraded readiness, failed contract checks, migration drift, unsafe cookie/TLS posture, or unavailable OpenRPC methods.
+  - The shell MUST redact secrets and sensitive values in all header, navigation, status, and diagnostic areas.
+  
+  ## Verification
+  
+  Verification MUST cover authenticated rendering, unauthenticated denial, navigation availability, tenant/profile selector behavior, unsafe-state banners, and redaction.
+spec_kind: "local-policy"

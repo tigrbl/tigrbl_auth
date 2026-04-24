@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1040"
+number: 1040
+slug: "admin-uix-security-boundary"
+title: "Admin UIX Security Boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: accepted"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: accepted
+  Date: 2026-04-24
+  
+  The administrator UIX MUST be inside a strict security boundary: admin surface enablement, authenticated admin sessions, RBAC/ABAC authorization, audit logging, cross-tenant isolation, and secret redaction are mandatory.
+  
+  ## Rationale
+  
+  The admin UIX can expose sensitive operational state and destructive actions. Enterprise deployments require fail-closed controls so visual administration does not bypass CLI/RPC security expectations.
+  
+  ## Scope
+  
+  The boundary applies to console shell access, resource views, safe mutations, policy administration, readiness diagnostics, and configuration display. Secrets, private key material, database credentials, signing secrets, tokens, and raw credentials MUST NOT be rendered.

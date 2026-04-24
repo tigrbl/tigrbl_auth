@@ -1,0 +1,32 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1057"
+number: 1057
+slug: "administrative-resource-views"
+title: "Administrative Resource Views"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Administrative Resource Views define the read-oriented enterprise administration screens for deployed `tigrbl_auth` resources."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  Administrative Resource Views define the read-oriented enterprise administration screens for deployed `tigrbl_auth` resources.
+  
+  ## Required Behavior
+  
+  - The console MUST provide views for tenants, clients, identities, sessions, tokens, consents, audit events, keys/JWKS, and profile/certification state.
+  - Each view MUST support empty, loading, error, filtered, list, and detail states.
+  - Each view MUST use OpenRPC-backed data where an admin method exists.
+  - Each view MUST preserve tenant isolation and must not expose cross-tenant records without explicit authorization.
+  - Sensitive values MUST be redacted by default.
+  
+  ## Verification
+  
+  Verification MUST cover required OpenRPC method availability, list/detail rendering, empty/loading/error states, filtering, redaction, and tenant isolation expectations.
+spec_kind: "local-policy"
