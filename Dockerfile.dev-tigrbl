@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1.4
+
+FROM python:3.12-slim
+
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends build-essential curl gcc pkg-config && \
+    pip install --no-cache-dir uv && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY . .
+
+RUN uv pip install --system \
+    -c constraints/base.txt \
+    -c constraints/runner-uvicorn.txt \
+    ".[sqlite,uvicorn]" && \
+    uv pip install --system --prerelease=allow --reinstall \
+    "tigrbl==0.3.30.dev1" \
+    "httpx<1" \
+    "pydantic<2.13" \
+    "sqlalchemy<2.1" \
+    "uvicorn<0.42"
+
+EXPOSE 8000
+
+ENV \
+    TIGRBL_AUTH_INSTALL_PROFILE="sqlite+uvicorn" \
+    PG_HOST="" \
+    PG_PORT="5432" \
+    PG_DB="" \
+    PG_USER="" \
+    PG_PASS="" \
+    REDIS_HOST="" \
+    REDIS_PASSWORD=""
+
+CMD ["python", "-m", "uvicorn", "tigrbl_auth.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]

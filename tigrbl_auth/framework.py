@@ -121,7 +121,11 @@ class TigrblRouter(TigrblApi):
             self._routes[:] = [route for route in self._routes if getattr(route, "path", None) != _RPC_DISABLED_SENTINEL]
 
     def include_tables(self, models, **kwargs):
-        return super().include_tables(models, **kwargs)
+        include_tables = getattr(super(), "include_tables", None)
+        if include_tables is not None:
+            return include_tables(models, **kwargs)
+        kwargs.setdefault("base_prefix", "")
+        return self.include_models(models, **kwargs)
 
 __all__ = [
     "AnyHttpUrl",
