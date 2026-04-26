@@ -14128,7 +14128,11 @@
         "clm:runtime-profile-configuration-contract"
       ],
       "test_ids": [
-        "tst:tests-unit-test-deployment-resolver-py"
+        "tst:tests-unit-test-deployment-resolver-py",
+        "tst:runtime-profile-files-load-and-validate",
+        "tst:runtime-profile-loader-fail-closed",
+        "tst:runtime-profile-resolver-overrides",
+        "tst:runtime-profile-contract-and-surface-derivation"
       ],
       "requires": [
         "feat:profile-baseline",
@@ -28468,6 +28472,70 @@
       "evidence_ids": [
         "evd:secure-default-admin-gate-runtime-contract-tests"
       ]
+    },
+    {
+      "id": "tst:runtime-profile-files-load-and-validate",
+      "title": "Packaged runtime profiles load and validate",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_profile_configuration.py",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
+    },
+    {
+      "id": "tst:runtime-profile-loader-fail-closed",
+      "title": "Runtime profile loader fails closed for invalid profiles",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_profile_configuration.py",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
+    },
+    {
+      "id": "tst:runtime-profile-resolver-overrides",
+      "title": "Runtime profile resolver applies operator overrides",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_profile_configuration.py",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
+    },
+    {
+      "id": "tst:runtime-profile-contract-and-surface-derivation",
+      "title": "Runtime profile outputs drive contracts and surfaces",
+      "status": "planned",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_profile_configuration.py",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
     }
   ],
   "claims": [
@@ -40301,7 +40369,11 @@
         "feat:runtime-profile-configuration-contract"
       ],
       "test_ids": [
-        "tst:tests-unit-test-deployment-resolver-py"
+        "tst:tests-unit-test-deployment-resolver-py",
+        "tst:runtime-profile-files-load-and-validate",
+        "tst:runtime-profile-loader-fail-closed",
+        "tst:runtime-profile-resolver-overrides",
+        "tst:runtime-profile-contract-and-surface-derivation"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -40913,7 +40985,11 @@
         "tst:tests-unit-test-phase5-operator-service-layer-py",
         "tst:tests-unit-test-rpc-registry-live-py",
         "tst:tests-conformance-operator-test-cli-release-lifecycle-py",
-        "tst:tests-interop-test-operator-profile-catalog-completeness-py"
+        "tst:tests-interop-test-operator-profile-catalog-completeness-py",
+        "tst:runtime-profile-files-load-and-validate",
+        "tst:runtime-profile-loader-fail-closed",
+        "tst:runtime-profile-resolver-overrides",
+        "tst:runtime-profile-contract-and-surface-derivation"
       ]
     },
     {
@@ -47869,5 +47945,95 @@
       "kind": "normative"
     }
   ],
-  "profiles": []
+  "profiles": [
+    {
+      "id": "prf:baseline",
+      "title": "baseline",
+      "description": "Minimum public OAuth/OIDC/JOSE deployment profile with secure public-only default surfaces.",
+      "status": "active",
+      "kind": "deployment",
+      "feature_ids": [
+        "feat:profile-baseline",
+        "feat:secure-default-baseline-admin-gate"
+      ],
+      "profile_ids": [],
+      "claim_tier": "T2",
+      "evaluation": {
+        "mode": "all_features_must_pass",
+        "allow_feature_override_tier": true
+      }
+    },
+    {
+      "id": "prf:production",
+      "title": "production",
+      "description": "Production deployment profile extending baseline with lifecycle, browser, metadata, registration, revocation, introspection, and userinfo targets.",
+      "status": "active",
+      "kind": "deployment",
+      "feature_ids": [
+        "feat:profile-production"
+      ],
+      "profile_ids": [
+        "prf:baseline"
+      ],
+      "claim_tier": "T2",
+      "evaluation": {
+        "mode": "all_features_must_pass",
+        "allow_feature_override_tier": true
+      }
+    },
+    {
+      "id": "prf:hardening",
+      "title": "hardening",
+      "description": "Hardening deployment profile extending production with sender-constrained tokens, PAR/JAR/RAR, device, token-exchange, DPoP, and security BCP behavior.",
+      "status": "active",
+      "kind": "deployment",
+      "feature_ids": [
+        "feat:profile-hardening"
+      ],
+      "profile_ids": [
+        "prf:production"
+      ],
+      "claim_tier": "T2",
+      "evaluation": {
+        "mode": "all_features_must_pass",
+        "allow_feature_override_tier": true
+      }
+    },
+    {
+      "id": "prf:fapi2-security",
+      "title": "fapi2-security",
+      "description": "FAPI 2.0 security deployment profile extending hardening with FAPI-specific issuer, sender-constrained token, PAR/JAR/RAR, TLS, and encrypted ID token requirements.",
+      "status": "active",
+      "kind": "certification",
+      "feature_ids": [
+        "feat:profile-fapi2-security"
+      ],
+      "profile_ids": [
+        "prf:hardening"
+      ],
+      "claim_tier": "T2",
+      "evaluation": {
+        "mode": "all_features_must_pass",
+        "allow_feature_override_tier": true
+      }
+    },
+    {
+      "id": "prf:peer-claim",
+      "title": "peer-claim",
+      "description": "Peer-supported promotion profile extending hardening for independently evidenced target claims and external profile bundle alignment.",
+      "status": "draft",
+      "kind": "certification",
+      "feature_ids": [
+        "feat:profile-peer-claim"
+      ],
+      "profile_ids": [
+        "prf:hardening"
+      ],
+      "claim_tier": "T2",
+      "evaluation": {
+        "mode": "all_features_must_pass",
+        "allow_feature_override_tier": true
+      }
+    }
+  ]
 }
