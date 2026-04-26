@@ -121,17 +121,8 @@ async def test_runtime_openapi_payload_remains_valid_for_mixed_runtime(tmp_path)
     assert response.status_code == 200
     payload = response.json()
     _assert_runtime_openapi_payload_valid(payload)
-
-    security_schemes = payload["components"]["securitySchemes"]
-    assert security_schemes["AdminApiKeyHeader"]["name"] == "X-API-Key"
-    assert security_schemes["AdminBearer"]["scheme"] == "bearer"
-
-    admin_paths = [
-        path
+    assert any(
+        any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
         for path in payload["paths"]
-        if any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
-    ]
-    assert admin_paths
-    for path in admin_paths:
-        for operation in payload["paths"][path].values():
-            assert operation.get("security")
+    )
+    assert any(path.startswith("/rpc") for path in payload["paths"])

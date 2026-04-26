@@ -12006,6 +12006,60 @@
         ]
       },
       {
+        "id": "feat:admin-gate-does-not-mutate-openapi-json",
+        "title": "Admin gate does not mutate openapi.json",
+        "description": "tigrbl_auth security admin gate forwards live /openapi.json payloads without downstream mutation.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1065"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
+        ],
+        "requires": [
+          "feat:openapi-contract-always-valid"
+        ]
+      },
+      {
+        "id": "feat:openapi-runtime-payload-deferred-to-tigrbl",
+        "title": "OpenAPI runtime payload deferred to tigrbl",
+        "description": "Live /openapi.json payload generation and metadata responsibility are deferred upstream to tigrbl.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1065"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
+        ],
+        "requires": [
+          "feat:admin-gate-does-not-mutate-openapi-json"
+        ]
+      },
+      {
         "id": "feat:target-openrpc-1-4-x-admin-control-plane-contract",
         "title": "OpenRPC 1.4.x admin/control-plane contract",
         "description": "OpenRPC 1.4.x admin/control-plane contract",
@@ -12060,6 +12114,60 @@
         "requires": [
           "feat:target-openrpc-1-4-x-admin-control-plane-contract",
           "feat:secure-default-baseline-admin-gate"
+        ]
+      },
+      {
+        "id": "feat:admin-gate-does-not-mutate-openrpc-json",
+        "title": "Admin gate does not mutate openrpc.json",
+        "description": "tigrbl_auth security admin gate forwards live /openrpc.json payloads without downstream mutation.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1065"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
+        ],
+        "requires": [
+          "feat:openrpc-contract-always-valid"
+        ]
+      },
+      {
+        "id": "feat:openrpc-runtime-payload-deferred-to-tigrbl",
+        "title": "OpenRPC runtime payload deferred to tigrbl",
+        "description": "Live /openrpc.json payload generation and metadata responsibility are deferred upstream to tigrbl.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1065"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
+        ],
+        "requires": [
+          "feat:admin-gate-does-not-mutate-openrpc-json"
         ]
       },
       {
@@ -26837,6 +26945,21 @@
         "evidence_ids": [
           "evd:compliance-evidence-tier3-contracts-openrpc"
         ]
+      },
+      {
+        "id": "tst:tests-unit-test-contract-payloads-deferred-upstream-py",
+        "title": "contract payloads deferred upstream",
+        "status": "passing",
+        "kind": "pytest",
+        "path": "tests/unit/test_contract_payloads_deferred_upstream.py",
+        "feature_ids": [
+          "feat:admin-gate-does-not-mutate-openapi-json",
+          "feat:openapi-runtime-payload-deferred-to-tigrbl",
+          "feat:admin-gate-does-not-mutate-openrpc-json",
+          "feat:openrpc-runtime-payload-deferred-to-tigrbl"
+        ],
+        "claim_ids": [],
+        "evidence_ids": []
       },
       {
         "id": "tst:tests-unit-test-runtime-cfg-py",
@@ -45748,6 +45871,30 @@
       ],
       "risk_ids": [],
       "release_blocking": false
+    },
+    {
+      "id": "iss:admin-gate-must-defer-runtime-contract-payloads-upstream-001",
+      "title": "Admin gate must defer runtime contract payloads upstream",
+      "status": "resolved",
+      "severity": "medium",
+      "description": "tigrbl_auth security admin gate previously mutated live /openapi.json and /openrpc.json payloads by injecting security metadata and filtering payload content. Runtime contract payload responsibility is now deferred upstream to tigrbl, and the wrapper is proven by equality tests to forward those payloads without mutation.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [
+        "feat:admin-gate-does-not-mutate-openapi-json",
+        "feat:openapi-runtime-payload-deferred-to-tigrbl",
+        "feat:admin-gate-does-not-mutate-openrpc-json",
+        "feat:openrpc-runtime-payload-deferred-to-tigrbl"
+      ],
+      "claim_ids": [],
+      "test_ids": [
+        "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
+      ],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": false
     }
   ],
   "risks": [],
@@ -46836,6 +46983,28 @@
             "status": "accepted",
             "note": "Separates contract validity from endpoint exposure for OpenAPI and OpenRPC outputs.",
             "at": "2026-04-26T08:16:00Z"
+          }
+        ]
+      },
+      {
+        "id": "adr:1045",
+        "number": 1045,
+        "slug": "runtime-contract-payloads-defer-to-tigrbl",
+        "title": "Runtime contract payloads defer to tigrbl",
+        "path": ".ssot/adr/ADR-1045-runtime-contract-payloads-defer-to-tigrbl.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "1beb226fc9e75b81c86f426c45ced9c3903478691ab7466eff26851b0a85ccc8",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defers live OpenAPI and OpenRPC payload responsibility to tigrbl rather than downstream mutation in tigrbl_auth.",
+            "at": "2026-04-26T10:20:00Z"
           }
         ]
       }
@@ -48201,7 +48370,7 @@
         "managed": false,
         "immutable": false,
         "package_version": "0.2.8",
-        "content_sha256": "f52823dbd997e54372626a7b633ec1ab46c0017bb43c385c3525a3713f2539f4",
+        "content_sha256": "329b1bd700787aead6a3e35fdc93e0f038cb49ac021582c47b6afb6960f8a7a5",
         "status": "accepted",
         "supersedes": [],
         "superseded_by": [],
@@ -48224,7 +48393,7 @@
         "managed": false,
         "immutable": false,
         "package_version": "0.2.8",
-        "content_sha256": "4a2cbda90642e9f3f3c031327b51c3a69a33bac854a7c1e3bcfe4635804c15c8",
+        "content_sha256": "dcbcadf656d38490dc29e2e497af625dd18b718fe40f1c97067fd0a4d3f0c06a",
         "status": "accepted",
         "supersedes": [],
         "superseded_by": [],
@@ -48233,6 +48402,29 @@
             "status": "accepted",
             "note": "Defines validity invariants for generated and exposed OpenRPC outputs.",
             "at": "2026-04-26T08:18:00Z"
+          }
+        ],
+        "kind": "normative"
+      },
+      {
+        "id": "spc:1065",
+        "number": 1065,
+        "slug": "deferred-runtime-contract-responsibilities",
+        "title": "Deferred runtime contract responsibilities",
+        "path": ".ssot/specs/SPEC-1065-deferred-runtime-contract-responsibilities.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "aca8246cc590513b18eb08b2bb079ced023fc0e2a67cb73c9cd2b5dcf64e193b",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defines runtime contract payload responsibilities that tigrbl_auth must defer upstream to tigrbl.",
+            "at": "2026-04-26T10:21:00Z"
           }
         ],
         "kind": "normative"

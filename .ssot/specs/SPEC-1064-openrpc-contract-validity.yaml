@@ -48,7 +48,7 @@ body: |-
 
   If the endpoint is hidden, the generated OpenRPC artifact must still satisfy this specification through the builder and committed artifact paths.
 
-  If the endpoint is exposed, the HTTP payload must satisfy the same validity requirements after any runtime mutation or filtering.
+  If the endpoint is exposed, the HTTP payload must satisfy the same validity requirements without downstream mutation by `tigrbl_auth`.
 
   ## Verification
 

@@ -54,18 +54,29 @@ async def test_admin_enabled_runtime_requires_local_admin_key(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_admin_enabled_runtime_marks_protected_contract_surfaces(tmp_path):
+async def test_admin_enabled_runtime_defers_openapi_payload_to_upstream_app(tmp_path):
     deployment = resolve_deployment(plugin_mode="mixed")
-    app = build_app(_settings(tmp_path), deployment=deployment)
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
-        openapi = (await client.get("/openapi.json")).json()
-        openrpc = (await client.get("/openrpc.json")).json()
+    wrapped = build_app(_settings(tmp_path), deployment=deployment)
+    inner = wrapped.app
+    async with AsyncClient(transport=ASGITransport(app=wrapped), base_url="http://test") as wrapped_client:
+        wrapped_openapi = (await wrapped_client.get("/openapi.json")).json()
+    async with AsyncClient(transport=ASGITransport(app=inner), base_url="http://test") as inner_client:
+        inner_openapi = (await inner_client.get("/openapi.json")).json()
 
-    assert openapi["components"]["securitySchemes"]["AdminApiKeyHeader"]["name"] == "X-API-Key"
-    assert openapi["paths"]["/tenant"]["get"]["security"]
-    assert "security" not in openapi["paths"]["/.well-known/openid-configuration"]["get"]
-    assert openrpc["components"]["securitySchemes"]["AdminBearer"]["scheme"] == "bearer"
-    assert all(method.get("security") for method in openrpc["methods"])
+    assert wrapped_openapi == inner_openapi
+
+
+@pytest.mark.asyncio
+async def test_admin_enabled_runtime_defers_openrpc_payload_to_upstream_app(tmp_path):
+    deployment = resolve_deployment(plugin_mode="mixed")
+    wrapped = build_app(_settings(tmp_path), deployment=deployment)
+    inner = wrapped.app
+    async with AsyncClient(transport=ASGITransport(app=wrapped), base_url="http://test") as wrapped_client:
+        wrapped_openrpc = (await wrapped_client.get("/openrpc.json")).json()
+    async with AsyncClient(transport=ASGITransport(app=inner), base_url="http://test") as inner_client:
+        inner_openrpc = (await inner_client.get("/openrpc.json")).json()
+
+    assert wrapped_openrpc == inner_openrpc
 
 
 def test_openrpc_artifact_marks_admin_methods_with_security():

@@ -101,41 +101,6 @@ def _path_has_prefix(path: str, prefix: str) -> bool:
     return path == prefix or path.startswith(f"{prefix}/")
 
 
-def _merge_admin_openapi_security(payload: dict[str, Any], admin_prefixes: tuple[str, ...]) -> dict[str, Any]:
-    components = payload.setdefault("components", {})
-    schemes = components.setdefault("securitySchemes", {})
-    schemes.update(ADMIN_SECURITY_SCHEMES)
-    for path, operations in (payload.get("paths") or {}).items():
-        if not isinstance(path, str) or not any(_path_has_prefix(path, prefix) for prefix in admin_prefixes):
-            continue
-        if not isinstance(operations, dict):
-            continue
-        for operation in operations.values():
-            if isinstance(operation, dict):
-                operation.setdefault("security", ADMIN_SECURITY_REQUIREMENT)
-    return payload
-
-
-def _remove_path_prefixes(payload: dict[str, Any], prefixes: tuple[str, ...]) -> dict[str, Any]:
-    paths = payload.get("paths")
-    if not isinstance(paths, dict):
-        return payload
-    for path in list(paths):
-        if any(isinstance(path, str) and _path_has_prefix(path, prefix) for prefix in prefixes):
-            paths.pop(path, None)
-    return payload
-
-
-def _merge_admin_openrpc_security(payload: dict[str, Any]) -> dict[str, Any]:
-    components = payload.setdefault("components", {})
-    schemes = components.setdefault("securitySchemes", {})
-    schemes.update(ADMIN_SECURITY_SCHEMES)
-    for method in payload.get("methods") or []:
-        if isinstance(method, dict):
-            method.setdefault("security", ADMIN_SECURITY_REQUIREMENT)
-    return payload
-
-
 class AdminGate:
     """ASGI gate for generated local control-plane surfaces."""
 
@@ -179,20 +144,6 @@ class AdminGate:
             return True
         return False
 
-    def _openapi_admin_prefixes(self) -> tuple[str, ...]:
-        prefixes = list(self.admin_path_prefixes)
-        if self.deployment.flag_enabled("surface_diagnostics_enabled"):
-            prefixes.append(self.diagnostics_prefix)
-        return tuple(prefixes)
-
-    def _openapi_disabled_prefixes(self) -> tuple[str, ...]:
-        prefixes: list[str] = []
-        if not self.deployment.flag_enabled("surface_diagnostics_enabled"):
-            prefixes.append(self.diagnostics_prefix)
-        if not self.deployment.flag_enabled("surface_rpc_enabled"):
-            prefixes.append(self.rpc_prefix)
-        return tuple(prefixes)
-
     async def __call__(self, scope: dict[str, Any], receive: Any, send: Any) -> None:
         if scope.get("type") != "http":
             await self.app(scope, receive, send)
@@ -218,51 +169,7 @@ class AdminGate:
                 await send({"type": "http.response.body", "body": body})
                 return
 
-        if path == "/openapi.json":
-            await self._mutate_json_response(scope, receive, send, "openapi")
-            return
-        if path == "/openrpc.json" and self.enabled and self.deployment.flag_enabled("surface_rpc_enabled"):
-            await self._mutate_json_response(scope, receive, send, "openrpc")
-            return
-
         await self.app(scope, receive, send)
-
-    async def _mutate_json_response(self, scope: dict[str, Any], receive: Any, send: Any, kind: str) -> None:
-        started: dict[str, Any] | None = None
-        chunks: list[bytes] = []
-
-        async def capture(message: dict[str, Any]) -> None:
-            nonlocal started
-            if message["type"] == "http.response.start":
-                started = dict(message)
-                return
-            if message["type"] == "http.response.body":
-                chunks.append(message.get("body", b""))
-                if message.get("more_body", False):
-                    return
-                body = b"".join(chunks)
-                headers = list(started.get("headers", [])) if started else []
-                status = int(started.get("status", 200)) if started else 200
-                content_type = dict(headers).get(b"content-type", b"").lower()
-                if status == 200 and b"json" in content_type:
-                    try:
-                        payload = json.loads(body.decode("utf-8"))
-                        if isinstance(payload, dict):
-                            if kind == "openapi":
-                                payload = _remove_path_prefixes(payload, self._openapi_disabled_prefixes())
-                                if self.enabled:
-                                    payload = _merge_admin_openapi_security(payload, self._openapi_admin_prefixes())
-                            else:
-                                payload = _merge_admin_openrpc_security(payload)
-                            body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
-                    except (UnicodeDecodeError, json.JSONDecodeError):
-                        pass
-                filtered = [(key, value) for key, value in headers if key.lower() != b"content-length"]
-                filtered.append((b"content-length", str(len(body)).encode("ascii")))
-                await send({"type": "http.response.start", "status": status, "headers": filtered})
-                await send({"type": "http.response.body", "body": body})
-
-        await self.app(scope, receive, capture)
 
 
 __all__ = [

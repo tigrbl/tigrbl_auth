@@ -52,7 +52,7 @@ body: |-
 
   If the endpoint is hidden, the generated OpenAPI artifact must still satisfy this specification through the builder and committed artifact paths.
 
-  If the endpoint is exposed, the HTTP payload must satisfy the same conformance requirements after any runtime mutation or filtering.
+  If the endpoint is exposed, the HTTP payload must satisfy the same conformance requirements without downstream mutation by `tigrbl_auth`.
 
   ## Verification
 

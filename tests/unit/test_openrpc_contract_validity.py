@@ -109,7 +109,4 @@ async def test_exposed_openrpc_payload_remains_valid(tmp_path) -> None:
     assert response.status_code == 200
     payload = response.json()
     _assert_runtime_openrpc_payload_valid(payload)
-    assert payload["components"]["securitySchemes"]["AdminApiKeyHeader"]["name"] == "X-API-Key"
-    assert payload["components"]["securitySchemes"]["AdminBearer"]["scheme"] == "bearer"
     assert payload["methods"]
-    assert all(method.get("security") for method in payload["methods"])

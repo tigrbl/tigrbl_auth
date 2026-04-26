@@ -1,0 +1,63 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1045"
+number: 1045
+slug: "runtime-contract-payloads-defer-to-tigrbl"
+title: "Runtime contract payloads defer to tigrbl"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "tigrbl_auth runtime wrappers MUST defer live OpenAPI and OpenRPC payload generation to tigrbl rather than mutating those payloads downstream."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST treat `tigrbl` as the authoritative runtime source for live `/openapi.json` and `/openrpc.json` payloads.
+
+  Specifically:
+
+  - `tigrbl_auth/security/admin_gate.py` SHALL NOT mutate live OpenAPI payloads,
+  - `tigrbl_auth/security/admin_gate.py` SHALL NOT mutate live OpenRPC payloads,
+  - route filtering, schema dialect behavior, and contract-surface metadata in those runtime payloads MUST be deferred upstream to `tigrbl`,
+  - `tigrbl_auth` MAY still govern committed contract artifacts and builder outputs through its own contract-generation surfaces,
+  - runtime wrappers in `tigrbl_auth` MUST preserve upstream contract payloads byte-for-byte at the JSON-object level.
+
+  ## Rationale
+
+  Runtime contract mutation inside `tigrbl_auth` creates a split authority:
+
+  - committed and builder-generated artifacts come from `tigrbl_auth`,
+  - live runtime payloads are modified again at response time,
+  - consumers then observe behavior that is not owned by the upstream runtime contract generator.
+
+  That split makes warnings and payload defects harder to trace, especially when the runtime wrapper changes top-level fields or injects security metadata not present in the upstream source document.
+
+  ## Deferred Responsibilities
+
+  The following runtime responsibilities are deferred to `tigrbl`:
+
+  - live OpenAPI payload generation,
+  - live OpenRPC payload generation,
+  - live contract-path inclusion and exclusion decisions,
+  - live contract security metadata included in upstream payloads.
+
+  ## Non-Deferred Responsibilities
+
+  This decision does not remove `tigrbl_auth` responsibility for:
+
+  - admin access control for protected business endpoints,
+  - builder-generated contract artifacts committed under `specs/`,
+  - contract validation, governance, and proof obligations in SSOT,
+  - filing issues when upstream runtime payloads are incorrect.
+
+  ## Operational Consequences
+
+  This decision requires:
+
+  - a specification for deferred runtime contract responsibilities,
+  - first-class feature rows for each deferred contract payload responsibility,
+  - test proofs that wrapped runtime payloads equal upstream payloads for both public-only and mixed runtime postures.
