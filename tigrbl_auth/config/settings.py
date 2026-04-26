@@ -131,7 +131,7 @@ class Settings(BaseSettings):
         description="Enable the public auth plane.",
     )
     surface_admin_enabled: bool = Field(
-        default=_env_bool("TIGRBL_AUTH_SURFACE_ADMIN", "true"),
+        default=_env_bool("TIGRBL_AUTH_SURFACE_ADMIN", "false"),
         description="Enable table-backed admin/control-plane resources.",
     )
     surface_operator_enabled: bool = Field(
@@ -139,15 +139,15 @@ class Settings(BaseSettings):
         description="Enable operator CLI and governance surfaces.",
     )
     surface_rpc_enabled: bool = Field(
-        default=_env_bool("TIGRBL_AUTH_SURFACE_RPC", "true"),
+        default=_env_bool("TIGRBL_AUTH_SURFACE_RPC", "false"),
         description="Enable the JSON-RPC control-plane surface.",
     )
     surface_diagnostics_enabled: bool = Field(
-        default=_env_bool("TIGRBL_AUTH_SURFACE_DIAGNOSTICS", "true"),
+        default=_env_bool("TIGRBL_AUTH_SURFACE_DIAGNOSTICS", "false"),
         description="Enable diagnostics attachment on the composed Tigrbl surface.",
     )
     surface_plugin_mode: str = Field(
-        default=os.environ.get("TIGRBL_AUTH_PLUGIN_MODE", "mixed"),
+        default=os.environ.get("TIGRBL_AUTH_PLUGIN_MODE", "public-only"),
         description="Install profile: public-only, admin-only, mixed, or diagnostics-only.",
     )
     runtime_style: str = Field(
@@ -171,6 +171,14 @@ class Settings(BaseSettings):
     # Operational and security controls
     # ------------------------------------------------------------------
     jwt_secret: str = Field(default=os.environ.get("JWT_SECRET", "insecure-dev-secret"))
+    admin_api_key: Optional[str] = Field(
+        default=os.environ.get("TIGRBL_AUTH_ADMIN_API_KEY"),
+        description="Local control-plane API key for generated admin, RPC, and diagnostics surfaces.",
+    )
+    admin_api_key_dir: str = Field(
+        default=os.environ.get("TIGRBL_AUTH_ADMIN_API_KEY_DIR", "runtime_secrets"),
+        description="Directory used for the generated local bootstrap admin API key digest.",
+    )
     log_level: str = Field(default=os.environ.get("LOG_LEVEL", "INFO"))
     id_token_encryption_key: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ID_TOKEN_ENC_KEY", "0" * 32),

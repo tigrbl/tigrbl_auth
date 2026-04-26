@@ -36,7 +36,8 @@ def build_app(
     from tigrbl import TigrblApp
 
     from tigrbl_auth.api.lifecycle import register_lifecycle
-    from tigrbl_auth.api.surfaces import attach_runtime_surfaces
+    from tigrbl_auth.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
+    from tigrbl_auth.security.admin_gate import AdminGate
     from tigrbl_auth.tables.engine import dsn
 
     app = TigrblApp(
@@ -58,7 +59,14 @@ def build_app(
         diagnostics_prefix="/system",
     )
     register_lifecycle(app)
-    return app
+    return AdminGate(
+        app,
+        deployment=resolved_deployment,
+        settings_obj=resolved_settings,
+        admin_path_prefixes=admin_resource_path_prefixes(),
+        rpc_prefix="/rpc",
+        diagnostics_prefix="/system",
+    )
 
 
 

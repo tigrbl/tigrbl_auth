@@ -1,0 +1,272 @@
+from __future__ import annotations
+
+import hashlib
+import hmac
+import json
+import logging
+import os
+import secrets
+from pathlib import Path
+from typing import Any, Iterable
+
+from tigrbl_auth.config.deployment import ResolvedDeployment
+
+ADMIN_API_KEY_ENV = "TIGRBL_AUTH_ADMIN_API_KEY"
+ADMIN_API_KEY_HEADER = "x-api-key"
+ADMIN_BEARER_SCHEME = "AdminBearer"
+ADMIN_HEADER_SCHEME = "AdminApiKeyHeader"
+ADMIN_SECURITY_SCHEMES: dict[str, dict[str, Any]] = {
+    ADMIN_HEADER_SCHEME: {"type": "apiKey", "in": "header", "name": "X-API-Key"},
+    ADMIN_BEARER_SCHEME: {"type": "http", "scheme": "bearer"},
+}
+ADMIN_SECURITY_REQUIREMENT: list[dict[str, list[Any]]] = [
+    {ADMIN_HEADER_SCHEME: []},
+    {ADMIN_BEARER_SCHEME: []},
+]
+logger = logging.getLogger(__name__)
+
+
+def _digest(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _json_response(status: int, payload: dict[str, Any]) -> tuple[int, list[tuple[bytes, bytes]], bytes]:
+    body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+    headers = [
+        (b"content-type", b"application/json"),
+        (b"content-length", str(len(body)).encode("ascii")),
+    ]
+    if status == 401:
+        headers.append((b"www-authenticate", b"Bearer"))
+    return status, headers, body
+
+
+def _headers(scope: dict[str, Any]) -> dict[str, str]:
+    return {
+        key.decode("latin-1").lower(): value.decode("latin-1")
+        for key, value in scope.get("headers", [])
+    }
+
+
+def _extract_credential(scope: dict[str, Any]) -> str | None:
+    headers = _headers(scope)
+    api_key = headers.get(ADMIN_API_KEY_HEADER)
+    if api_key:
+        return api_key
+    authorization = headers.get("authorization", "")
+    prefix = "bearer "
+    if authorization.lower().startswith(prefix):
+        token = authorization[len(prefix) :].strip()
+        return token or None
+    return None
+
+
+def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
+    return any(
+        bool(deployment.surfaces.get(name, False))
+        for name in (
+            "surface_admin_enabled",
+            "surface_rpc_enabled",
+            "surface_diagnostics_enabled",
+        )
+    )
+
+
+def _bootstrap_digest(settings_obj: object | None, enabled: bool) -> str | None:
+    configured = os.environ.get(ADMIN_API_KEY_ENV) or getattr(settings_obj, "admin_api_key", None)
+    if configured:
+        return _digest(str(configured))
+    if not enabled:
+        return None
+
+    key = secrets.token_urlsafe(32)
+    digest = _digest(key)
+    secret_dir = Path(str(getattr(settings_obj, "admin_api_key_dir", "runtime_secrets")))
+    secret_dir.mkdir(parents=True, exist_ok=True)
+    digest_path = secret_dir / "admin_api_key.sha256"
+    digest_path.write_text(digest + "\n", encoding="utf-8")
+    try:
+        digest_path.chmod(0o600)
+    except OSError:
+        pass
+    logger.warning(
+        "Generated bootstrap admin API key for local control-plane surfaces. "
+        "Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=%s",
+        key,
+    )
+    return digest
+
+
+def _path_has_prefix(path: str, prefix: str) -> bool:
+    return path == prefix or path.startswith(f"{prefix}/")
+
+
+def _merge_admin_openapi_security(payload: dict[str, Any], admin_prefixes: tuple[str, ...]) -> dict[str, Any]:
+    components = payload.setdefault("components", {})
+    schemes = components.setdefault("securitySchemes", {})
+    schemes.update(ADMIN_SECURITY_SCHEMES)
+    for path, operations in (payload.get("paths") or {}).items():
+        if not isinstance(path, str) or not any(_path_has_prefix(path, prefix) for prefix in admin_prefixes):
+            continue
+        if not isinstance(operations, dict):
+            continue
+        for operation in operations.values():
+            if isinstance(operation, dict):
+                operation.setdefault("security", ADMIN_SECURITY_REQUIREMENT)
+    return payload
+
+
+def _remove_path_prefixes(payload: dict[str, Any], prefixes: tuple[str, ...]) -> dict[str, Any]:
+    paths = payload.get("paths")
+    if not isinstance(paths, dict):
+        return payload
+    for path in list(paths):
+        if any(isinstance(path, str) and _path_has_prefix(path, prefix) for prefix in prefixes):
+            paths.pop(path, None)
+    return payload
+
+
+def _merge_admin_openrpc_security(payload: dict[str, Any]) -> dict[str, Any]:
+    components = payload.setdefault("components", {})
+    schemes = components.setdefault("securitySchemes", {})
+    schemes.update(ADMIN_SECURITY_SCHEMES)
+    for method in payload.get("methods") or []:
+        if isinstance(method, dict):
+            method.setdefault("security", ADMIN_SECURITY_REQUIREMENT)
+    return payload
+
+
+class AdminGate:
+    """ASGI gate for generated local control-plane surfaces."""
+
+    def __init__(
+        self,
+        app: Any,
+        *,
+        deployment: ResolvedDeployment,
+        settings_obj: object | None = None,
+        admin_path_prefixes: Iterable[str] = (),
+        rpc_prefix: str = "/rpc",
+        diagnostics_prefix: str = "/system",
+    ) -> None:
+        self.app = app
+        self.deployment = deployment
+        self.settings_obj = settings_obj
+        self.admin_path_prefixes = tuple(dict.fromkeys(admin_path_prefixes))
+        self.rpc_prefix = rpc_prefix
+        self.diagnostics_prefix = diagnostics_prefix
+        self.enabled = _control_plane_enabled(deployment)
+        self._digest = _bootstrap_digest(settings_obj, self.enabled)
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self.app, name)
+
+    def _requires_admin(self, path: str) -> bool:
+        if not self.enabled:
+            return False
+        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+            return True
+        if self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
+            return True
+        if self.deployment.surface_enabled("admin-rpc"):
+            return any(_path_has_prefix(path, prefix) for prefix in self.admin_path_prefixes)
+        return False
+
+    def _disabled_control_plane_path(self, path: str) -> bool:
+        if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+            return True
+        if not self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
+            return True
+        return False
+
+    def _openapi_admin_prefixes(self) -> tuple[str, ...]:
+        prefixes = list(self.admin_path_prefixes)
+        if self.deployment.flag_enabled("surface_diagnostics_enabled"):
+            prefixes.append(self.diagnostics_prefix)
+        return tuple(prefixes)
+
+    def _openapi_disabled_prefixes(self) -> tuple[str, ...]:
+        prefixes: list[str] = []
+        if not self.deployment.flag_enabled("surface_diagnostics_enabled"):
+            prefixes.append(self.diagnostics_prefix)
+        if not self.deployment.flag_enabled("surface_rpc_enabled"):
+            prefixes.append(self.rpc_prefix)
+        return tuple(prefixes)
+
+    async def __call__(self, scope: dict[str, Any], receive: Any, send: Any) -> None:
+        if scope.get("type") != "http":
+            await self.app(scope, receive, send)
+            return
+
+        path = str(scope.get("path") or "")
+        if self._disabled_control_plane_path(path):
+            status, headers, body = _json_response(404, {"detail": "Not Found"})
+            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send({"type": "http.response.body", "body": body})
+            return
+
+        if self._requires_admin(path):
+            credential = _extract_credential(scope)
+            if not credential:
+                status, headers, body = _json_response(401, {"error": "missing_admin_api_key"})
+                await send({"type": "http.response.start", "status": status, "headers": headers})
+                await send({"type": "http.response.body", "body": body})
+                return
+            if not self._digest or not hmac.compare_digest(_digest(credential), self._digest):
+                status, headers, body = _json_response(403, {"error": "invalid_admin_api_key"})
+                await send({"type": "http.response.start", "status": status, "headers": headers})
+                await send({"type": "http.response.body", "body": body})
+                return
+
+        if path == "/openapi.json":
+            await self._mutate_json_response(scope, receive, send, "openapi")
+            return
+        if path == "/openrpc.json" and self.enabled and self.deployment.flag_enabled("surface_rpc_enabled"):
+            await self._mutate_json_response(scope, receive, send, "openrpc")
+            return
+
+        await self.app(scope, receive, send)
+
+    async def _mutate_json_response(self, scope: dict[str, Any], receive: Any, send: Any, kind: str) -> None:
+        started: dict[str, Any] | None = None
+        chunks: list[bytes] = []
+
+        async def capture(message: dict[str, Any]) -> None:
+            nonlocal started
+            if message["type"] == "http.response.start":
+                started = dict(message)
+                return
+            if message["type"] == "http.response.body":
+                chunks.append(message.get("body", b""))
+                if message.get("more_body", False):
+                    return
+                body = b"".join(chunks)
+                headers = list(started.get("headers", [])) if started else []
+                status = int(started.get("status", 200)) if started else 200
+                content_type = dict(headers).get(b"content-type", b"").lower()
+                if status == 200 and b"json" in content_type:
+                    try:
+                        payload = json.loads(body.decode("utf-8"))
+                        if isinstance(payload, dict):
+                            if kind == "openapi":
+                                payload = _remove_path_prefixes(payload, self._openapi_disabled_prefixes())
+                                if self.enabled:
+                                    payload = _merge_admin_openapi_security(payload, self._openapi_admin_prefixes())
+                            else:
+                                payload = _merge_admin_openrpc_security(payload)
+                            body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
+                    except (UnicodeDecodeError, json.JSONDecodeError):
+                        pass
+                filtered = [(key, value) for key, value in headers if key.lower() != b"content-length"]
+                filtered.append((b"content-length", str(len(body)).encode("ascii")))
+                await send({"type": "http.response.start", "status": status, "headers": filtered})
+                await send({"type": "http.response.body", "body": body})
+
+        await self.app(scope, receive, capture)
+
+
+__all__ = [
+    "ADMIN_SECURITY_REQUIREMENT",
+    "ADMIN_SECURITY_SCHEMES",
+    "AdminGate",
+]

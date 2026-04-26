@@ -9,6 +9,7 @@ from pydantic.version import VERSION as PYDANTIC_VERSION
 
 from tigrbl_auth.api.rpc import iter_active_rpc_methods
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
+from tigrbl_auth.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.oauth2.assertion_framework import build_assertion_contract_examples
@@ -619,6 +620,7 @@ def build_openrpc_contract(deployment: Any, *, version: str) -> dict[str, Any]:
                         "name": "result",
                         "schema": _collect_model_schema(definition.result_model, components),
                     },
+                    "security": ADMIN_SECURITY_REQUIREMENT,
                     "x-tigrbl-auth": {
                         "owner_module": definition.owner_module,
                         "required_flags": list(definition.required_flags),
@@ -645,8 +647,13 @@ def build_openrpc_contract(deployment: Any, *, version: str) -> dict[str, Any]:
             "generation_mode": "implementation-backed-rpc-registry",
         },
     }
+    contract_components: dict[str, Any] = {}
     if components:
-        contract["components"] = {"schemas": components}
+        contract_components["schemas"] = components
+    if deployment.surface_enabled("admin-rpc"):
+        contract_components["securitySchemes"] = ADMIN_SECURITY_SCHEMES
+    if contract_components:
+        contract["components"] = contract_components
     return contract
 
 

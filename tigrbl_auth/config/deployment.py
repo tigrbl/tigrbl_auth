@@ -23,11 +23,11 @@ DEFAULT_VALUES: Final[dict[str, Any]] = {
     "protected_resource_identifier": "https://authn.example.com/resource",
     "strict_boundary_enforcement": True,
     "surface_public_enabled": True,
-    "surface_admin_enabled": True,
+    "surface_admin_enabled": False,
     "surface_operator_enabled": True,
-    "surface_rpc_enabled": True,
-    "surface_diagnostics_enabled": True,
-    "surface_plugin_mode": "mixed",
+    "surface_rpc_enabled": False,
+    "surface_diagnostics_enabled": False,
+    "surface_plugin_mode": "public-only",
     "runtime_style": "standalone",
     "active_surface_sets": "",
     "active_protocol_slices": "",
@@ -355,10 +355,12 @@ def _valid_or_default(value: str, allowed: tuple[str, ...], default: str) -> str
 
 
 def _derive_surface_sets(raw: dict[str, Any], plugin_mode: str, requested: tuple[str, ...]) -> tuple[str, ...]:
-    if plugin_mode != "mixed":
-        return PLUGIN_MODE_TO_SURFACE_SETS[plugin_mode]
     if requested:
         return tuple(name for name in requested if name in SURFACE_SET_REGISTRY)
+    if plugin_mode != "mixed":
+        return PLUGIN_MODE_TO_SURFACE_SETS[plugin_mode]
+    if str(raw.get("surface_plugin_mode", "")) == "mixed":
+        return PLUGIN_MODE_TO_SURFACE_SETS["mixed"]
     derived: list[str] = []
     if raw.get("surface_public_enabled", True):
         derived.append("public-rest")
@@ -412,6 +414,8 @@ def resolve_deployment(
     raw.update(PROFILE_DEFAULT_OVERRIDES.get(profile_name, {}))
     plugin_mode_name = _valid_or_default(plugin_mode or str(raw.get("surface_plugin_mode", "mixed")), VALID_PLUGIN_MODES, "mixed")
     runtime_style_name = _valid_or_default(runtime_style or str(raw.get("runtime_style", "standalone")), VALID_RUNTIME_STYLES, "standalone")
+    if plugin_mode is not None:
+        raw["surface_plugin_mode"] = plugin_mode_name
 
     allowed_profile_flags = set(flags_for_profile(profile_name))
     requested_surface_sets = _csv_items(surface_sets if surface_sets is not None else raw.get("active_surface_sets"))

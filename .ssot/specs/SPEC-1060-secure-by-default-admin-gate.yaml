@@ -1,0 +1,63 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1060"
+number: 1060
+slug: "secure-by-default-admin-gate"
+title: "Secure-by-default admin gate"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The secure-by-default admin gate defines the baseline tigrbl_auth deployment posture and the local control-plane authentication contract used when generated admin surfaces are enabled."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  The secure-by-default admin gate defines the baseline tigrbl_auth deployment posture and the local control-plane authentication contract used when generated admin surfaces are enabled.
+  
+  Decision source: `adr:1041`.
+  Feature owner: `feat:secure-default-baseline-admin-gate`.
+  
+  ## Default Baseline Posture
+  
+  - Baseline/default deployments MUST resolve to `surface_plugin_mode="public-only"`.
+  - Baseline/default deployments MUST set `surface_public_enabled=true`.
+  - Baseline/default deployments MUST set `surface_admin_enabled=false`, `surface_rpc_enabled=false`, and `surface_diagnostics_enabled=false`.
+  - Public OAuth/OIDC routes such as discovery, JWKS, authorize, token, register, revoke, logout, and userinfo remain available according to their protocol-specific enablement and checks.
+  
+  ## Admin Surface Opt In
+  
+  - `admin-only`, `mixed`, `--admin`, `--rpc`, `--diagnostics`, and `--surface-set admin-rpc` MAY enable generated control-plane surfaces.
+  - Explicit admin/RPC/diagnostics enablement MUST NOT weaken public OAuth/OIDC protocol-specific checks.
+  
+  ## Bootstrap Admin Api Key
+  
+  - Deployments MAY provide `TIGRBL_AUTH_ADMIN_API_KEY`.
+  - If admin, RPC, or diagnostics surfaces are enabled without `TIGRBL_AUTH_ADMIN_API_KEY`, tigrbl_auth MUST generate a local bootstrap admin API key.
+  - Runtime comparison MUST use a digest, not raw key comparison.
+  - Requests MAY present the credential as `Authorization: Bearer <key>` or `X-API-Key: <key>`.
+  
+  ## Enforcement Semantics
+  
+  - Generated table CRUD MUST require the admin API key when the admin surface is enabled.
+  - Generated JSON-RPC methods MUST require the admin API key when RPC is enabled.
+  - Diagnostics under `/system/*` MUST require the admin API key when diagnostics are enabled.
+  - Missing credentials MUST return `401`.
+  - Invalid credentials MUST return `403`.
+  - Invalid generated RPC params MUST return structured invalid-params responses and MUST NOT leak SQL/SQLite internals.
+  
+  ## Contract Requirements
+  
+  - Runtime OpenAPI documents MUST include `AdminApiKeyHeader` and `AdminBearer` security schemes when protected generated REST operations are exposed.
+  - Protected generated REST operations MUST include a security requirement referencing those schemes.
+  - Runtime OpenRPC documents MUST include equivalent admin security metadata when protected generated JSON-RPC methods are exposed.
+  - Protected generated JSON-RPC methods MUST include security metadata.
+  - Public OAuth/OIDC routes MUST NOT be incorrectly marked as admin-gated.
+  
+  ## Verification
+  
+  Verification MUST cover default public-only exposure, admin-enabled missing/invalid/valid credential behavior, OpenAPI security metadata, OpenRPC security metadata, public route exclusions, duplicate route regression, and structured invalid-params behavior for generated RPC methods.
+spec_kind: "normative"

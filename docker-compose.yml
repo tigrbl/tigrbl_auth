@@ -2,6 +2,7 @@ services:
   tigrbl-auth:
     build:
       context: .
+      dockerfile: Dockerfile.dev-tigrbl
     image: tigrbl-auth-local:latest
     container_name: tigrbl-auth-local
     ports:

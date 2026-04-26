@@ -1,8 +1,10 @@
 import pytest_asyncio
 
 import asyncio
+from types import SimpleNamespace
 
-from tigrbl_auth.app import app
+from tigrbl_auth.api.app import build_app
+from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.routers.surface import surface_api
 
 ORM_MODELS = [
@@ -19,11 +21,16 @@ ORM_MODELS = [
 
 
 @pytest_asyncio.fixture()
-async def openapi_spec() -> dict:
+async def openapi_spec(tmp_path) -> dict:
     """Initialize the API surface once and return its OpenAPI spec."""
     init = surface_api.initialize()
     if asyncio.iscoroutine(init):
         await init
+    deployment = resolve_deployment(plugin_mode="mixed")
+    app = build_app(
+        SimpleNamespace(admin_api_key="test-admin-key", admin_api_key_dir=str(tmp_path)),
+        deployment=deployment,
+    )
     return app.openapi()
 
 

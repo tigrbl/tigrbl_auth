@@ -36,7 +36,7 @@ def test_rpc_registry_contains_required_operator_methods():
 
 
 def test_openrpc_contract_is_derived_from_live_registry():
-    deployment = deployment_from_options(profile="production")
+    deployment = deployment_from_options(profile="production", plugin_mode="mixed")
     contract = build_openrpc_contract(deployment, version="0.0.0-test")
     method_names = {item["name"] for item in contract["methods"]}
     expected = {item.name for item in iter_active_rpc_methods(deployment)}

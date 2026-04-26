@@ -1,0 +1,32 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1041"
+number: 1041
+slug: "secure-by-default-baseline-posture"
+title: "Secure-by-default baseline posture"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Fresh tigrbl_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Fresh tigrbl_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in.
+  
+  When admin, RPC, or diagnostics surfaces are explicitly enabled, tigrbl_auth MUST require a local admin API key before allowing access to generated control-plane REST, generated JSON-RPC, or diagnostics endpoints.
+  
+  ## Rationale
+  
+  Generated CRUD and RPC surfaces can expose tenants, users, clients, keys, sessions, tokens, audit records, and operational diagnostics. A baseline auth server should publish discovery, JWKS, and intentional OAuth/OIDC protocol endpoints without also publishing an unauthenticated administrative API.
+  
+  The local admin API key is a lightweight commercially-free control-plane credential. It avoids requiring a hosted identity provider, paid gateway, or enterprise-only dependency while still making accidental exposure fail closed.
+  
+  ## Ssot Links
+  
+  - Feature: `feat:secure-default-baseline-admin-gate`
+  - Specification: `spc:1060`

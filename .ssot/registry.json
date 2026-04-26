@@ -14062,6 +14062,48 @@
         "tst:uix-policy-simulation"
       ],
       "requires": []
+    },
+    {
+      "id": "feat:secure-default-baseline-admin-gate",
+      "title": "Secure-by-default baseline admin gate",
+      "description": "Baseline defaults expose only public OAuth/OIDC routes and require a local admin API key for explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T2",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1060"
+      ],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract"
+      ],
+      "requires": [
+        "feat:profile-baseline",
+        "feat:flag-surface-public-enabled",
+        "feat:flag-surface-admin-enabled",
+        "feat:flag-surface-rpc-enabled",
+        "feat:flag-surface-diagnostics-enabled",
+        "feat:flag-surface-plugin-mode",
+        "feat:flag-active-surface-sets",
+        "feat:cli-flag-public",
+        "feat:cli-flag-admin",
+        "feat:cli-flag-rpc",
+        "feat:cli-flag-diagnostics",
+        "feat:cli-flag-surface-set",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+      ]
     }
   ],
   "tests": [
@@ -26924,7 +26966,7 @@
     {
       "id": "tst:tests-negative-test-contract-diff-detects-drift-py",
       "title": "contract diff detects drift",
-      "status": "planned",
+      "status": "passing",
       "kind": "pytest",
       "path": "tests/negative/test_contract_diff_detects_drift.py",
       "feature_ids": [
@@ -27180,7 +27222,7 @@
     {
       "id": "tst:tests-unit-test-openapi-examples-py",
       "title": "openapi examples",
-      "status": "planned",
+      "status": "passing",
       "kind": "pytest",
       "path": "tests/unit/test_openapi_examples.py",
       "feature_ids": [
@@ -27196,7 +27238,7 @@
     {
       "id": "tst:tests-unit-test-openapi-well-known-endpoints-py",
       "title": "openapi well known endpoints",
-      "status": "planned",
+      "status": "passing",
       "kind": "pytest",
       "path": "tests/unit/test_openapi_well_known_endpoints.py",
       "feature_ids": [
@@ -27468,7 +27510,7 @@
     {
       "id": "tst:tests-unit-test-phase6-operator-control-plane-py",
       "title": "phase6 operator control plane",
-      "status": "planned",
+      "status": "passing",
       "kind": "pytest",
       "path": "tests/unit/test_phase6_operator_control_plane.py",
       "feature_ids": [
@@ -28367,6 +28409,22 @@
       ],
       "evidence_ids": [
         "evd:uix-admin-e2e-golden-path"
+      ]
+    },
+    {
+      "id": "tst:secure-default-admin-gate-runtime-contract",
+      "title": "Secure default admin gate runtime and contract behavior",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_secure_default_admin_gate.py",
+      "feature_ids": [
+        "feat:secure-default-baseline-admin-gate"
+      ],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "evidence_ids": [
+        "evd:secure-default-admin-gate-runtime-contract-tests"
       ]
     }
   ],
@@ -40172,6 +40230,23 @@
       "evidence_ids": [
         "evd:uix-policy-simulation"
       ]
+    },
+    {
+      "id": "clm:secure-default-baseline-admin-gate",
+      "title": "Secure default baseline admin gate is enforced",
+      "status": "implemented",
+      "tier": "T2",
+      "kind": "runtime-security",
+      "description": "Baseline installs expose only public OAuth/OIDC endpoints, and explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics require the local admin API key.",
+      "feature_ids": [
+        "feat:secure-default-baseline-admin-gate"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract"
+      ],
+      "evidence_ids": [
+        "evd:secure-default-admin-gate-runtime-contract-tests"
+      ]
     }
   ],
   "evidence": [
@@ -45342,6 +45417,20 @@
       "test_ids": [
         "tst:uix-admin-e2e-golden-path"
       ]
+    },
+    {
+      "id": "evd:secure-default-admin-gate-runtime-contract-tests",
+      "title": "Secure default admin gate runtime contract pytest evidence",
+      "status": "passed",
+      "kind": "pytest",
+      "tier": "T2",
+      "path": "tests/unit/test_secure_default_admin_gate.py",
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract"
+      ]
     }
   ],
   "issues": [],
@@ -46342,6 +46431,22 @@
       "immutable": false,
       "package_version": "0.2.8",
       "content_sha256": "4211b6c70afeedee3de9531080b972228ee112a807316c68a69a4c9cec3db4ef",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1041",
+      "number": 1041,
+      "slug": "secure-by-default-baseline-posture",
+      "title": "Secure-by-default baseline posture",
+      "path": ".ssot/adr/ADR-1041-secure-by-default-baseline-posture.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "53d66425f6bec8c2cbda897a9614c662da7f2d9aaad6dd41b6db00eecc499f81",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -47635,6 +47740,23 @@
       "superseded_by": [],
       "status_notes": [],
       "kind": "local-policy"
+    },
+    {
+      "id": "spc:1060",
+      "number": 1060,
+      "slug": "secure-by-default-admin-gate",
+      "title": "Secure-by-default admin gate",
+      "path": ".ssot/specs/SPEC-1060-secure-by-default-admin-gate.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "22934551e86c93801d35b41880313ffb7111494d9f59717b02dc1bc2d5a0eacf",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
     }
   ],
   "profiles": []

@@ -65,6 +65,10 @@ TABLE_RESOURCES = [
     PushedAuthorizationRequest,
 ]
 
+
+def admin_resource_path_prefixes() -> tuple[str, ...]:
+    return tuple(f"/{resource.__name__.lower()}" for resource in TABLE_RESOURCES)
+
 PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
     {"mount_group": "login", "capabilities": ("login",), "router": login_api},
     {"mount_group": "authorize", "capabilities": ("authorize",), "router": authorize_api},
@@ -216,6 +220,7 @@ __all__ = [
     "PUBLIC_ROUTER_BINDINGS",
     "PUBLIC_PUBLISHER_BINDINGS",
     "attach_runtime_surfaces",
+    "admin_resource_path_prefixes",
     "build_surface_api",
     "include_public_runtime_publishers",
     "runtime_surface_binding_manifest",
