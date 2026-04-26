@@ -1,0 +1,77 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1062"
+number: 1062
+slug: "baseline-development-profile"
+title: "Baseline development profile"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The baseline development profile extends baseline with development-only documentation, contract, and inspection surfaces."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+
+  The baseline development profile defines the development-facing pair for the baseline runtime profile.
+
+  Decision source: `adr:1043`.
+
+  ## Scope
+
+  This specification applies to the governed `baseline-development` profile concept, its SSOT profile row, its implementation-tracking feature row, and any future packaged runtime profile file that materializes it.
+
+  This specification does not redefine baseline production posture. It defines the additional local-development posture that may be layered on top of baseline.
+
+  ## Profile Relationship
+
+  - `baseline-development` MUST extend `baseline`.
+  - `baseline-development` MUST preserve baseline protocol and security behavior unless a development-only override is explicitly declared.
+  - `baseline-development` MUST remain distinct from production and certification profiles.
+
+  ## Required Development Surfaces
+
+  The baseline development profile MUST expose the following development-facing surfaces:
+
+  - `/docs`,
+  - `/openapi.json`,
+  - `/openrpc.json`,
+  - lens endpoints,
+  - diagnostics or equivalent local inspection surfaces required to understand the active runtime posture.
+
+  Where the current codebase does not yet implement a dedicated lens surface, the implementation-tracking feature MUST remain non-implemented until a concrete lens-capable surface is defined and mounted.
+
+  ## Boundary Rules
+
+  - Development-facing docs, contract, and inspection surfaces MUST be treated as development-only posture unless separately governed for production.
+  - Enabling `baseline-development` MUST NOT silently weaken baseline secure defaults for production traffic.
+  - Admin, RPC, diagnostics, and lens surfaces enabled by `baseline-development` MUST remain explicit in the resolved deployment posture.
+
+  ## Contract Alignment
+
+  - `/openapi.json` output MUST remain derived from the resolved deployment.
+  - `/openrpc.json` output MUST remain derived from the resolved deployment.
+  - Development docs and lens surfaces MUST reflect the same resolved deployment posture rather than an independent configuration path.
+
+  ## Governance Tracking
+
+  SSOT must contain:
+
+  - a profile row for `prf:baseline-development`,
+  - a feature row for `feat:profile-baseline-development`,
+  - explicit composition from `prf:baseline`,
+  - implementation status that matches real code behavior.
+
+  ## Verification
+
+  Verification for the eventual implementation MUST cover:
+
+  - `baseline-development` composes from `baseline`,
+  - `/docs`, `/openapi.json`, and `/openrpc.json` are enabled under the development profile,
+  - the active diagnostics and lens surfaces are present under the development profile,
+  - the same surfaces remain disabled or gated according to non-development profile rules,
+  - generated contracts and inspection surfaces derive from the resolved deployment object.
+spec_kind: "local-policy"

@@ -1,0 +1,74 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1044"
+number: 1044
+slug: "contract-artifacts-must-remain-valid-when-hidden"
+title: "Contract artifacts must remain valid when hidden"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "OpenAPI and OpenRPC contract artifacts must remain valid outputs of the resolved deployment whether or not their HTTP endpoints are exposed."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST treat generated contract artifacts as first-class deployment outputs independent of route exposure.
+
+  Specifically:
+
+  - OpenAPI output for the resolved deployment MUST remain valid whether `/openapi.json` is exposed or not.
+  - OpenRPC output for the resolved deployment MUST remain valid whether `/openrpc.json` is exposed or not.
+
+  Route exposure is an operator-facing delivery choice. Contract validity is a generation-time invariant.
+
+  ## Meaning Of "Valid"
+
+  For this repository, "valid" means at minimum:
+
+  - the generated output is structurally conformant to the contract family expected by the repository,
+  - the output is JSON-serializable,
+  - required top-level metadata is present,
+  - contract content reflects the resolved deployment rather than a stale or unrelated surface set,
+  - route or method inventories align with the implementation-backed deployment boundary that generated them.
+
+  Hidden endpoints are allowed. Invalid hidden artifacts are not.
+
+  ## Rationale
+
+  Contract generation is already used for:
+
+  - committed repository artifacts,
+  - compliance evidence,
+  - profile-surface verification,
+  - local developer inspection,
+  - deployment planning and release gates.
+
+  If validity depends on whether the endpoint is mounted, the repository can silently drift into an invalid committed or generated state while still passing operational checks for deployments that hide the endpoint.
+
+  The contract builder must therefore be authoritative for validity, and endpoint exposure must be a separate concern.
+
+  ## Operational Consequences
+
+  This decision requires:
+
+  - an OpenAPI validity specification,
+  - an OpenRPC validity specification,
+  - a first-class feature row for each validity invariant,
+  - strict comprehensive tests for OpenAPI validity,
+  - strict comprehensive tests for OpenRPC validity.
+
+  The tests must cover both:
+
+  - builder-level validity when the endpoint is not exposed, and
+  - runtime endpoint payload validity when the endpoint is exposed.
+
+  ## Related Decisions
+
+  - `adr:1039` governs OpenRPC-backed admin contracts.
+  - `adr:1041` governs secure-by-default baseline posture.
+  - `adr:1042` governs runtime profile configuration as package input.
+  - `adr:1043` governs development-profile pairing for visibility surfaces.

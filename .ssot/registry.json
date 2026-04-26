@@ -11937,21 +11937,78 @@
       "claim_ids": [
         "clm:target-openapi-3-1-3-2-compatible-public-contract"
       ],
-      "test_ids": [
-        "tst:tests-e2e-test-release-gate-catalog-py",
-        "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
-        "tst:tests-unit-test-contract-generation-live-py",
-        "tst:tests-negative-test-contract-diff-detects-drift-py",
-        "tst:tests-unit-test-openapi-examples-py",
-        "tst:tests-unit-test-openapi-well-known-endpoints-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:target-openrpc-1-4-x-admin-control-plane-contract",
-      "title": "OpenRPC 1.4.x admin/control-plane contract",
-      "description": "OpenRPC 1.4.x admin/control-plane contract",
+        "test_ids": [
+          "tst:tests-e2e-test-release-gate-catalog-py",
+          "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
+          "tst:tests-unit-test-contract-generation-live-py",
+          "tst:tests-negative-test-contract-diff-detects-drift-py",
+          "tst:tests-unit-test-openapi-examples-py",
+          "tst:tests-unit-test-openapi-well-known-endpoints-py",
+          "tst:tests-unit-test-openapi-contract-validity-py"
+        ],
+        "requires": [],
+        "spec_ids": []
+      },
+      {
+        "id": "feat:openapi-contract-always-valid",
+        "title": "OpenAPI contract always valid",
+        "description": "Generated and exposed OpenAPI outputs remain valid whether or not /openapi.json is exposed.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1063"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-openapi-contract-validity-py"
+        ],
+        "requires": [
+          "feat:target-openapi-3-1-3-2-compatible-public-contract",
+          "feat:secure-default-baseline-admin-gate"
+        ]
+      },
+      {
+        "id": "feat:openapi-jsonschema-dialect-default-or-omitted",
+        "title": "OpenAPI jsonSchemaDialect default or omitted",
+        "description": "Generated and exposed OpenAPI outputs omit jsonSchemaDialect or set it to the OpenAPI 3.1 base dialect.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1063"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-openapi-contract-validity-py"
+        ],
+        "requires": [
+          "feat:openapi-contract-always-valid",
+          "feat:target-openapi-3-1-3-2-compatible-public-contract"
+        ]
+      },
+      {
+        "id": "feat:target-openrpc-1-4-x-admin-control-plane-contract",
+        "title": "OpenRPC 1.4.x admin/control-plane contract",
+        "description": "OpenRPC 1.4.x admin/control-plane contract",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -11967,17 +12024,46 @@
       "claim_ids": [
         "clm:target-openrpc-1-4-x-admin-control-plane-contract"
       ],
-      "test_ids": [
-        "tst:tests-e2e-test-release-gate-catalog-py",
-        "tst:tests-unit-test-contract-generation-live-py",
-        "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-phase6-operator-control-plane-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:target-release-bundle-and-signature-verification",
+        "test_ids": [
+          "tst:tests-e2e-test-release-gate-catalog-py",
+          "tst:tests-unit-test-contract-generation-live-py",
+          "tst:tests-unit-test-rpc-registry-live-py",
+          "tst:tests-unit-test-phase6-operator-control-plane-py",
+          "tst:tests-unit-test-openrpc-contract-validity-py"
+        ],
+        "requires": [],
+        "spec_ids": []
+      },
+      {
+        "id": "feat:openrpc-contract-always-valid",
+        "title": "OpenRPC contract always valid",
+        "description": "Generated and exposed OpenRPC outputs remain valid whether or not /openrpc.json is exposed.",
+        "implementation_status": "implemented",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1064"
+        ],
+        "claim_ids": [],
+        "test_ids": [
+          "tst:tests-unit-test-openrpc-contract-validity-py"
+        ],
+        "requires": [
+          "feat:target-openrpc-1-4-x-admin-control-plane-contract",
+          "feat:secure-default-baseline-admin-gate"
+        ]
+      },
+      {
+        "id": "feat:target-release-bundle-and-signature-verification",
       "title": "Release bundle and signature verification",
       "description": "Release bundle construction, signing, and verification",
       "implementation_status": "implemented",
@@ -14063,11 +14149,11 @@
       ],
       "requires": []
     },
-    {
-      "id": "feat:secure-default-baseline-admin-gate",
-      "title": "Secure-by-default baseline admin gate",
-      "description": "Baseline defaults expose only public OAuth/OIDC routes and require a local admin API key for explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces.",
-      "implementation_status": "implemented",
+      {
+        "id": "feat:secure-default-baseline-admin-gate",
+        "title": "Secure-by-default baseline admin gate",
+        "description": "Baseline defaults expose only public OAuth/OIDC routes and require a local admin API key for explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces.",
+        "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -14088,11 +14174,11 @@
       "test_ids": [
         "tst:secure-default-admin-gate-runtime-contract"
       ],
-      "requires": [
-        "feat:profile-baseline",
-        "feat:flag-surface-public-enabled",
-        "feat:flag-surface-admin-enabled",
-        "feat:flag-surface-rpc-enabled",
+        "requires": [
+          "feat:profile-baseline",
+          "feat:flag-surface-public-enabled",
+          "feat:flag-surface-admin-enabled",
+          "feat:flag-surface-rpc-enabled",
         "feat:flag-surface-diagnostics-enabled",
         "feat:flag-surface-plugin-mode",
         "feat:flag-active-surface-sets",
@@ -14101,15 +14187,47 @@
         "feat:cli-flag-rpc",
         "feat:cli-flag-diagnostics",
         "feat:cli-flag-surface-set",
-        "feat:target-openapi-3-1-3-2-compatible-public-contract",
-        "feat:target-openrpc-1-4-x-admin-control-plane-contract"
-      ]
-    },
-    {
-      "id": "feat:runtime-profile-configuration-contract",
-      "title": "Runtime profile configuration contract",
-      "description": "Packaged runtime profile YAML files and loader/resolver semantics used to configure tigrbl_auth deployment posture from human-readable profile inputs.",
-      "implementation_status": "absent",
+          "feat:target-openapi-3-1-3-2-compatible-public-contract",
+          "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+        ]
+      },
+      {
+        "id": "feat:profile-baseline-development",
+        "title": "baseline-development",
+        "description": "Development pairing for the baseline deployment profile that exposes docs, OpenAPI, OpenRPC, and lens or diagnostic inspection surfaces for local development.",
+        "implementation_status": "absent",
+        "lifecycle": {
+          "stage": "active",
+          "replacement_feature_ids": [],
+          "note": null
+        },
+        "plan": {
+          "horizon": "current",
+          "slot": null,
+          "target_claim_tier": "T2",
+          "target_lifecycle_stage": "active"
+        },
+        "spec_ids": [
+          "spc:1062"
+        ],
+        "claim_ids": [],
+        "test_ids": [],
+        "requires": [
+          "feat:profile-baseline",
+          "feat:flag-surface-public-enabled",
+          "feat:flag-surface-rpc-enabled",
+          "feat:flag-surface-diagnostics-enabled",
+          "feat:secure-default-baseline-admin-gate",
+          "feat:target-openapi-3-1-3-2-compatible-public-contract",
+          "feat:target-openrpc-1-4-x-admin-control-plane-contract",
+          "feat:runtime-profile-configuration-contract"
+        ]
+      },
+      {
+        "id": "feat:runtime-profile-configuration-contract",
+        "title": "Runtime profile configuration contract",
+        "description": "Packaged runtime profile YAML files and loader/resolver semantics used to configure tigrbl_auth deployment posture from human-readable profile inputs.",
+        "implementation_status": "absent",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -26523,11 +26641,11 @@
         "evd:compliance-evidence-tier3-well-known"
       ]
     },
-    {
-      "id": "tst:tests-unit-test-rpc-registry-live-py",
-      "title": "test rpc registry live",
-      "status": "passing",
-      "kind": "pytest",
+      {
+        "id": "tst:tests-unit-test-rpc-registry-live-py",
+        "title": "test rpc registry live",
+        "status": "passing",
+        "kind": "pytest",
       "path": "tests/unit/test_rpc_registry_live.py",
       "feature_ids": [
         "feat:cli-flag-surface-set",
@@ -26661,11 +26779,11 @@
         "clm:target-key-lifecycle-and-jwks-publication",
         "clm:target-openrpc-1-4-x-admin-control-plane-contract"
       ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-assertion-framework",
-        "evd:compliance-evidence-tier3-bearer",
-        "evd:compliance-evidence-tier3-cli-operator-surface",
-        "evd:compliance-evidence-tier3-client-registration",
+        "evidence_ids": [
+          "evd:compliance-evidence-tier3-assertion-framework",
+          "evd:compliance-evidence-tier3-bearer",
+          "evd:compliance-evidence-tier3-cli-operator-surface",
+          "evd:compliance-evidence-tier3-client-registration",
         "evd:compliance-evidence-tier3-client-registration-management",
         "evd:compliance-evidence-tier3-contracts-openapi",
         "evd:compliance-evidence-tier3-contracts-openrpc",
@@ -26699,14 +26817,31 @@
         "evd:compliance-evidence-tier3-resource-indicators",
         "evd:compliance-evidence-tier3-revocation",
         "evd:compliance-evidence-tier3-security-bcp",
-        "evd:compliance-evidence-tier3-token-exchange",
-        "evd:compliance-evidence-tier3-well-known"
-      ]
-    },
-    {
-      "id": "tst:tests-unit-test-runtime-cfg-py",
-      "title": "test runtime cfg",
-      "status": "passing",
+          "evd:compliance-evidence-tier3-token-exchange",
+          "evd:compliance-evidence-tier3-well-known"
+        ]
+      },
+      {
+        "id": "tst:tests-unit-test-openrpc-contract-validity-py",
+        "title": "openrpc contract validity",
+        "status": "passing",
+        "kind": "pytest",
+        "path": "tests/unit/test_openrpc_contract_validity.py",
+        "feature_ids": [
+          "feat:openrpc-contract-always-valid",
+          "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+        ],
+        "claim_ids": [
+          "clm:target-openrpc-1-4-x-admin-control-plane-contract"
+        ],
+        "evidence_ids": [
+          "evd:compliance-evidence-tier3-contracts-openrpc"
+        ]
+      },
+      {
+        "id": "tst:tests-unit-test-runtime-cfg-py",
+        "title": "test runtime cfg",
+        "status": "passing",
       "kind": "pytest",
       "path": "tests/unit/test_runtime_cfg.py",
       "feature_ids": [
@@ -27281,11 +27416,11 @@
         "evd:compliance-evidence-tier3-contracts-openapi"
       ]
     },
-    {
-      "id": "tst:tests-unit-test-openapi-well-known-endpoints-py",
-      "title": "openapi well known endpoints",
-      "status": "passing",
-      "kind": "pytest",
+      {
+        "id": "tst:tests-unit-test-openapi-well-known-endpoints-py",
+        "title": "openapi well known endpoints",
+        "status": "passing",
+        "kind": "pytest",
       "path": "tests/unit/test_openapi_well_known_endpoints.py",
       "feature_ids": [
         "feat:target-openapi-3-1-3-2-compatible-public-contract"
@@ -27293,14 +27428,32 @@
       "claim_ids": [
         "clm:target-openapi-3-1-3-2-compatible-public-contract"
       ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-contracts-openapi"
-      ]
-    },
-    {
-      "id": "tst:tests-unit-test-openid-configuration-py",
-      "title": "openid configuration",
-      "status": "planned",
+        "evidence_ids": [
+          "evd:compliance-evidence-tier3-contracts-openapi"
+        ]
+      },
+      {
+        "id": "tst:tests-unit-test-openapi-contract-validity-py",
+        "title": "openapi contract validity",
+        "status": "passing",
+        "kind": "pytest",
+        "path": "tests/unit/test_openapi_contract_validity.py",
+        "feature_ids": [
+          "feat:openapi-contract-always-valid",
+          "feat:openapi-jsonschema-dialect-default-or-omitted",
+          "feat:target-openapi-3-1-3-2-compatible-public-contract"
+        ],
+        "claim_ids": [
+          "clm:target-openapi-3-1-3-2-compatible-public-contract"
+        ],
+        "evidence_ids": [
+          "evd:compliance-evidence-tier3-contracts-openapi"
+        ]
+      },
+      {
+        "id": "tst:tests-unit-test-openid-configuration-py",
+        "title": "openid configuration",
+        "status": "planned",
       "kind": "pytest",
       "path": "tests/unit/test_openid_configuration.py",
       "feature_ids": [
@@ -45569,7 +45722,34 @@
       ]
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
+      "title": "OpenAPI jsonSchemaDialect must be default or omitted",
+      "status": "open",
+      "severity": "medium",
+      "description": "Some consumers warn when OpenAPI jsonSchemaDialect is set to a non-default value. Tigrbl Auth contract outputs must omit jsonSchemaDialect or set it to https://spec.openapis.org/oas/3.1/dialect/base. The warning was reported externally; current runtime and committed artifacts in this checkout do not reproduce it, so the invariant is now explicitly tracked and tested.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [
+        "feat:openapi-jsonschema-dialect-default-or-omitted",
+        "feat:openapi-contract-always-valid"
+      ],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openapi"
+      ],
+      "risk_ids": [],
+      "release_blocking": false
+    }
+  ],
   "risks": [],
   "boundaries": [
     {
@@ -46588,11 +46768,11 @@
       "superseded_by": [],
       "status_notes": []
     },
-    {
-      "id": "adr:1042",
-      "number": 1042,
-      "slug": "runtime-profile-configuration-as-package-input",
-      "title": "Runtime profile configuration as package input",
+      {
+        "id": "adr:1042",
+        "number": 1042,
+        "slug": "runtime-profile-configuration-as-package-input",
+        "title": "Runtime profile configuration as package input",
       "path": ".ssot/adr/ADR-1042-runtime-profile-configuration-as-package-input.yaml",
       "origin": "repo-local",
       "managed": false,
@@ -46608,15 +46788,59 @@
           "note": "Defines packaged runtime profile files as executable deployment input while preserving SSOT as governance truth.",
           "at": "2026-04-26T05:41:03Z"
         },
-        {
-          "status": "accepted",
-          "note": "Restore operational consequences in ADR body after create normalization.",
-          "at": "2026-04-26T05:41:53Z"
-        }
-      ]
-    }
-  ],
-  "specs": [
+          {
+            "status": "accepted",
+            "note": "Restore operational consequences in ADR body after create normalization.",
+            "at": "2026-04-26T05:41:53Z"
+          }
+        ]
+      },
+      {
+        "id": "adr:1043",
+        "number": 1043,
+        "slug": "development-profiles-pair-with-production-profiles",
+        "title": "Development profiles pair with production-facing profiles",
+        "path": ".ssot/adr/ADR-1043-development-profiles-pair-with-production-profiles.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "a996d8bced59b2e71e90b6255190bfb005f5027cf1c2b261c4c5e6f01b2df633",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defines the governance split between production-facing profiles and paired development profiles.",
+            "at": "2026-04-26T06:35:00Z"
+          }
+        ]
+      },
+      {
+        "id": "adr:1044",
+        "number": 1044,
+        "slug": "contract-artifacts-must-remain-valid-when-hidden",
+        "title": "Contract artifacts must remain valid when hidden",
+        "path": ".ssot/adr/ADR-1044-contract-artifacts-must-remain-valid-when-hidden.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "6bf724785ab2c3acf59e151ea987bdb5b0d13c2caa8efff8956db4cd51318f2c",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Separates contract validity from endpoint exposure for OpenAPI and OpenRPC outputs.",
+            "at": "2026-04-26T08:16:00Z"
+          }
+        ]
+      }
+    ],
+    "specs": [
     {
       "id": "spc:0600",
       "number": 600,
@@ -47921,11 +48145,11 @@
       "status_notes": [],
       "kind": "normative"
     },
-    {
-      "id": "spc:1061",
-      "number": 1061,
-      "slug": "runtime-profile-configuration-contract",
-      "title": "Runtime profile configuration contract",
+      {
+        "id": "spc:1061",
+        "number": 1061,
+        "slug": "runtime-profile-configuration-contract",
+        "title": "Runtime profile configuration contract",
       "path": ".ssot/specs/SPEC-1061-runtime-profile-configuration-contract.yaml",
       "origin": "repo-local",
       "managed": false,
@@ -47940,14 +48164,83 @@
           "status": "accepted",
           "note": "Defines packaged runtime profile files and resolver semantics for executable deployment configuration.",
           "at": "2026-04-26T05:43:45Z"
-        }
-      ],
-      "kind": "normative"
-    }
-  ],
-  "profiles": [
-    {
-      "id": "prf:baseline",
+          }
+        ],
+        "kind": "normative"
+      },
+      {
+        "id": "spc:1062",
+        "number": 1062,
+        "slug": "baseline-development-profile",
+        "title": "Baseline development profile",
+        "path": ".ssot/specs/SPEC-1062-baseline-development-profile.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "f888a0325128cf0436edbb1d2a7dcb8a69006cfab12c5df015c6b67a1cae815c",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defines the baseline-development profile contract for docs and contract-oriented development surfaces.",
+            "at": "2026-04-26T06:36:00Z"
+          }
+        ],
+        "kind": "local-policy"
+      },
+      {
+        "id": "spc:1063",
+        "number": 1063,
+        "slug": "openapi-contract-validity",
+        "title": "OpenAPI contract validity",
+        "path": ".ssot/specs/SPEC-1063-openapi-contract-validity.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "f52823dbd997e54372626a7b633ec1ab46c0017bb43c385c3525a3713f2539f4",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defines validity invariants for generated and exposed OpenAPI outputs.",
+            "at": "2026-04-26T08:17:00Z"
+          }
+        ],
+        "kind": "normative"
+      },
+      {
+        "id": "spc:1064",
+        "number": 1064,
+        "slug": "openrpc-contract-validity",
+        "title": "OpenRPC contract validity",
+        "path": ".ssot/specs/SPEC-1064-openrpc-contract-validity.yaml",
+        "origin": "repo-local",
+        "managed": false,
+        "immutable": false,
+        "package_version": "0.2.8",
+        "content_sha256": "4a2cbda90642e9f3f3c031327b51c3a69a33bac854a7c1e3bcfe4635804c15c8",
+        "status": "accepted",
+        "supersedes": [],
+        "superseded_by": [],
+        "status_notes": [
+          {
+            "status": "accepted",
+            "note": "Defines validity invariants for generated and exposed OpenRPC outputs.",
+            "at": "2026-04-26T08:18:00Z"
+          }
+        ],
+        "kind": "normative"
+      }
+    ],
+    "profiles": [
+      {
+        "id": "prf:baseline",
       "title": "baseline",
       "description": "Minimum public OAuth/OIDC/JOSE deployment profile with secure public-only default surfaces.",
       "status": "active",
@@ -47958,15 +48251,33 @@
       ],
       "profile_ids": [],
       "claim_tier": "T2",
-      "evaluation": {
-        "mode": "all_features_must_pass",
-        "allow_feature_override_tier": true
-      }
-    },
-    {
-      "id": "prf:production",
-      "title": "production",
-      "description": "Production deployment profile extending baseline with lifecycle, browser, metadata, registration, revocation, introspection, and userinfo targets.",
+        "evaluation": {
+          "mode": "all_features_must_pass",
+          "allow_feature_override_tier": true
+        }
+      },
+      {
+        "id": "prf:baseline-development",
+        "title": "baseline-development",
+        "description": "Development deployment profile extending baseline with docs, OpenAPI, OpenRPC, and lens or diagnostic inspection surfaces for local development.",
+        "status": "draft",
+        "kind": "deployment",
+        "feature_ids": [
+          "feat:profile-baseline-development"
+        ],
+        "profile_ids": [
+          "prf:baseline"
+        ],
+        "claim_tier": "T2",
+        "evaluation": {
+          "mode": "all_features_must_pass",
+          "allow_feature_override_tier": true
+        }
+      },
+      {
+        "id": "prf:production",
+        "title": "production",
+        "description": "Production deployment profile extending baseline with lifecycle, browser, metadata, registration, revocation, introspection, and userinfo targets.",
       "status": "active",
       "kind": "deployment",
       "feature_ids": [

@@ -1,0 +1,69 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1043"
+number: 1043
+slug: "development-profiles-pair-with-production-profiles"
+title: "Development profiles pair with production-facing profiles"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Production-facing and certification-facing profiles may define paired development profiles that enable local documentation, contract, and inspection surfaces without redefining production posture."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` may define paired development profiles for production-facing and certification-facing runtime profiles.
+
+  A development profile is a local-operator and developer-support posture derived from an existing governed runtime profile. It exists to expose development-only visibility surfaces such as:
+
+  - `/docs`,
+  - `/openapi.json`,
+  - `/openrpc.json`,
+  - lens and diagnostics endpoints used for local inspection and debugging.
+
+  The first required pairing is `baseline-development`, which extends the baseline profile and enables these development-facing surfaces while preserving the baseline protocol and security defaults unless an explicit development override is documented.
+
+  Every production-facing or certification-facing profile may define a corresponding `*-development` pair when local development, debugging, or contract inspection requires additional surfaces that are not intended to be enabled in production by default.
+
+  Development profiles are not production profiles, are not certification claims by themselves, and must not be used to weaken the meaning of the production or certification profile they extend.
+
+  ## Rationale
+
+  The repository already distinguishes secure baseline behavior from richer operational and control-plane behavior. Developers still need a governed way to inspect the active app, contracts, and local introspection surfaces without redefining the production profile itself.
+
+  A paired development profile keeps those concerns explicit:
+
+  - the production or certification profile remains the source for real deployment posture,
+  - the development profile becomes the source for local visibility and inspection posture,
+  - SSOT can track whether the development pairing exists and whether it is actually implemented.
+
+  This avoids overloading baseline or production with implicit development-only behavior and creates a repeatable pattern for other profiles.
+
+  ## Operational Consequences
+
+  When a paired development profile exists, it must explicitly declare:
+
+  - which base profile it extends,
+  - which docs, contract, RPC, diagnostics, and lens surfaces it enables,
+  - which of those surfaces are development-only and must remain disabled in production by default.
+
+  The existence of a development profile does not imply that the runtime loader, route mounting, or contract generation already supports it. SSOT must track those implementation gaps explicitly.
+
+  Development profile creation should add:
+
+  - an ADR when the pairing rule changes,
+  - a SPEC for the concrete paired profile contract,
+  - a feature row for implementation tracking,
+  - a profile row for governance and composition.
+
+  ## Related Decisions
+
+  - `adr:1014` governs feature flags and profile gating.
+  - `adr:1015` governs installable surfaces and partial feature consumption.
+  - `adr:1019` governs plugin and gateway composition profiles.
+  - `adr:1041` governs the secure-by-default baseline posture.
+  - `adr:1042` governs packaged runtime profile files as executable input.
