@@ -1,0 +1,75 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1042"
+number: 1042
+slug: "runtime-profile-configuration-as-package-input"
+title: "Runtime profile configuration as package input"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` shall maintain human-readable runtime profile configuration files as packaged repository inputs under `tigrbl_auth/profiles/*.yaml`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines packaged runtime profile files as executable deployment input while preserving SSOT as governance truth."
+    at: "2026-04-26T05:41:03Z"
+  -
+    status: "accepted"
+    note: "Restore operational consequences in ADR body after create normalization."
+    at: "2026-04-26T05:41:53Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl_auth` shall maintain human-readable runtime profile configuration files as packaged repository inputs under `tigrbl_auth/profiles/*.yaml`.
+  
+  These files are executable product configuration. The deployment/profile resolver shall load and validate them, compose them with environment and CLI overrides, and produce the effective `ResolvedDeployment` used by app assembly, route mounting, JSON-RPC registration, diagnostics exposure, discovery metadata, and generated contracts.
+  
+  SSOT profile entities remain the governance truth for profile lifecycle, feature links, claim targets, test links, evidence, and release readiness. Runtime profile files are the package-level input truth for how `tigrbl_auth` configures itself at startup. Generated compliance documents, generated profile catalogs, and release reports remain projections and may not redefine either SSOT governance truth or executable runtime behavior.
+  
+  Profile files shall include stable references to the matching SSOT profile or feature identifiers, plus the deployment instructions needed by the runtime, including:
+  
+  - enabled feature flags and target groups,
+  - public/admin/RPC/diagnostics surface settings,
+  - plugin composition mode,
+  - protocol slices and extension policy,
+  - security posture requirements,
+  - contract and evidence output expectations.
+  
+  The resolver is the only supported place for profile-name branching. Runtime code shall depend on the resolved deployment object rather than independently special-casing profile names.
+  
+  Existing in-code profile flag mappings may remain temporarily as compatibility indexes or generated cache data, but they shall not become a second independent source of profile truth.
+  
+  ## Rationale
+  
+  The repository needs three separate authorities that serve different purposes:
+  
+  - `.ssot/` defines governed intent, lifecycle state, release claims, and evidence.
+  - `tigrbl_auth/profiles/*.yaml` defines packaged runtime configuration that the product can actually ingest.
+  - generated compliance and contract artifacts project the active state for consumers and audits.
+  
+  Keeping runtime profile instructions only in code makes profile behavior difficult to inspect and harder to align with SSOT. Keeping them only in SSOT would make normal package startup depend on governance documents instead of a deliberately packaged runtime input. Human-readable runtime profile files give operators and maintainers an auditable configuration layer while preserving SSOT as the governance authority.
+  
+  ## Operational Consequences
+  
+  Profile changes must update the SSOT profile or feature records, the packaged runtime profile file, and any generated projections that reflect the profile.
+  
+  The package must include runtime profile files in distribution artifacts and must test that the resolver can load every packaged profile.
+  
+  The deployment resolver must fail closed on malformed, unknown, or internally inconsistent profile files.
+  
+  Contract generation, mounted routes, RPC method registration, diagnostics, discovery metadata, and evidence manifests must derive their effective posture from the resolved deployment.
+  
+  Environment variables and CLI flags remain valid operator overrides, but they must compose through the resolver and remain visible in deployment manifests or equivalent introspection output.
+  
+  ## Related Decisions
+  
+  - `adr:1014` governs feature flags and profile gating.
+  - `adr:1015` governs installable surface boundaries.
+  - `adr:1017` governs disappearance of disabled partial features.
+  - `adr:1019` governs plugin and gateway composition profiles.
+  - `adr:1031` and `adr:1032` govern SSOT authority and projection precedence.
+  - `adr:1041` governs the secure-by-default baseline posture.

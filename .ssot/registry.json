@@ -14104,6 +14104,46 @@
         "feat:target-openapi-3-1-3-2-compatible-public-contract",
         "feat:target-openrpc-1-4-x-admin-control-plane-contract"
       ]
+    },
+    {
+      "id": "feat:runtime-profile-configuration-contract",
+      "title": "Runtime profile configuration contract",
+      "description": "Packaged runtime profile YAML files and loader/resolver semantics used to configure tigrbl_auth deployment posture from human-readable profile inputs.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T2",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1061"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-deployment-resolver-py"
+      ],
+      "requires": [
+        "feat:profile-baseline",
+        "feat:cli-flag-profile",
+        "feat:cli-flag-config",
+        "feat:flag-surface-plugin-mode",
+        "feat:flag-surface-public-enabled",
+        "feat:flag-surface-admin-enabled",
+        "feat:flag-surface-rpc-enabled",
+        "feat:flag-surface-diagnostics-enabled",
+        "feat:flag-active-surface-sets",
+        "feat:secure-default-baseline-admin-gate",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+      ]
     }
   ],
   "tests": [
@@ -22520,7 +22560,8 @@
         "feat:flag-active-protocol-slices",
         "feat:flag-active-surface-sets",
         "feat:flag-runtime-style",
-        "feat:target-asgi-3-application-package"
+        "feat:target-asgi-3-application-package",
+        "feat:runtime-profile-configuration-contract"
       ],
       "claim_ids": [
         "clm:cli-flag-runtime-style",
@@ -22528,7 +22569,8 @@
         "clm:flag-active-protocol-slices",
         "clm:flag-active-surface-sets",
         "clm:flag-runtime-style",
-        "clm:target-asgi-3-application-package"
+        "clm:target-asgi-3-application-package",
+        "clm:runtime-profile-configuration-contract"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-asgi-application",
@@ -40247,6 +40289,23 @@
       "evidence_ids": [
         "evd:secure-default-admin-gate-runtime-contract-tests"
       ]
+    },
+    {
+      "id": "clm:runtime-profile-configuration-contract",
+      "title": "Runtime profile configuration contract is declared",
+      "status": "declared",
+      "tier": "T2",
+      "kind": "runtime-configuration",
+      "description": "Packaged runtime profile YAML files, loader validation, resolver composition, and resolved deployment metadata are governed by the runtime profile configuration contract.",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-deployment-resolver-py"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface"
+      ]
     }
   ],
   "evidence": [
@@ -40826,7 +40885,8 @@
         "clm:cli-verb-adr-index",
         "clm:cli-verb-adr-list",
         "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show"
+        "clm:cli-verb-adr-show",
+        "clm:runtime-profile-configuration-contract"
       ],
       "test_ids": [
         "tst:tests-conformance-operator-test-cli-bootstrap-migrate-py",
@@ -46451,6 +46511,33 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": []
+    },
+    {
+      "id": "adr:1042",
+      "number": 1042,
+      "slug": "runtime-profile-configuration-as-package-input",
+      "title": "Runtime profile configuration as package input",
+      "path": ".ssot/adr/ADR-1042-runtime-profile-configuration-as-package-input.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "416fa1366d19ff373ceb204b7356dc6074025e835b12954a62d13b2c0287780e",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines packaged runtime profile files as executable deployment input while preserving SSOT as governance truth.",
+          "at": "2026-04-26T05:41:03Z"
+        },
+        {
+          "status": "accepted",
+          "note": "Restore operational consequences in ADR body after create normalization.",
+          "at": "2026-04-26T05:41:53Z"
+        }
+      ]
     }
   ],
   "specs": [
@@ -47756,6 +47843,29 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1061",
+      "number": 1061,
+      "slug": "runtime-profile-configuration-contract",
+      "title": "Runtime profile configuration contract",
+      "path": ".ssot/specs/SPEC-1061-runtime-profile-configuration-contract.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "94b109d93d28c3aef52e79ea7a95e6d9d92b81227fe20c11fb36e196a8159eae",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines packaged runtime profile files and resolver semantics for executable deployment configuration.",
+          "at": "2026-04-26T05:43:45Z"
+        }
+      ],
       "kind": "normative"
     }
   ],
