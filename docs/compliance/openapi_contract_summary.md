@@ -3,7 +3,7 @@
 - Title: `tigrbl_auth public auth server`
 - Version: `0.3.4`
 - Profile: `baseline`
-- Surface sets: `public-rest, admin-rpc, diagnostics`
+- Surface sets: `public-rest`
 - Path count: `6`
 - Schema count: `16`
 

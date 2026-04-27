@@ -9,7 +9,7 @@ import secrets
 from pathlib import Path
 from typing import Any, Iterable
 
-from tigrbl.security import Security
+from tigrbl.security import APIKey, HTTPBearer, Security
 
 from tigrbl_auth.config.deployment import ResolvedDeployment
 
@@ -27,37 +27,18 @@ ADMIN_SECURITY_REQUIREMENT: list[dict[str, list[Any]]] = [
 ]
 
 
-class AdminOpenAPISecurityDependency:
-    def __init__(
-        self,
-        *,
-        scheme_name: str,
-        scheme: dict[str, Any],
-    ) -> None:
-        self.scheme_name = scheme_name
-        self._scheme = dict(scheme)
-
-    def openapi_security_scheme(self) -> dict[str, Any]:
-        return dict(self._scheme)
-
-    def openapi_security_requirement(self) -> dict[str, list[Any]]:
-        return {self.scheme_name: []}
-
-    def __call__(self, request: Any) -> None:
-        return None
-
-
 ADMIN_OPENAPI_SECURITY_DEPENDENCIES = (
     Security(
-        AdminOpenAPISecurityDependency(
+        APIKey(
             scheme_name=ADMIN_HEADER_SCHEME,
-            scheme=ADMIN_SECURITY_SCHEMES[ADMIN_HEADER_SCHEME],
+            name="X-API-Key",
+            auto_error=False,
         )
     ),
     Security(
-        AdminOpenAPISecurityDependency(
+        HTTPBearer(
             scheme_name=ADMIN_BEARER_SCHEME,
-            scheme=ADMIN_SECURITY_SCHEMES[ADMIN_BEARER_SCHEME],
+            auto_error=False,
         )
     ),
 )

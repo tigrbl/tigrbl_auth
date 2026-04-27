@@ -14,6 +14,7 @@ from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 DEFAULT_OPENAPI_DIALECT = "https://spec.openapis.org/oas/3.1/dialect/base"
+JSON_SCHEMA_2020_12_DIALECT = "https://json-schema.org/draft/2020-12/schema"
 
 
 def _expected_public_routes(deployment: object) -> set[str]:
@@ -30,7 +31,7 @@ def _assert_openapi_contract_valid(contract: dict, deployment: object) -> None:
 
     assert str(contract.get("openapi", "")).startswith("3.")
     dialect = contract.get("jsonSchemaDialect")
-    assert dialect in {None, DEFAULT_OPENAPI_DIALECT}
+    assert dialect in {None, DEFAULT_OPENAPI_DIALECT, JSON_SCHEMA_2020_12_DIALECT}
     assert contract.get("info", {}).get("title")
     assert contract.get("info", {}).get("version")
     assert contract.get("servers") == [{"url": getattr(deployment, "issuer")}]
@@ -67,7 +68,7 @@ def _assert_runtime_openapi_payload_valid(payload: dict) -> None:
 
     assert str(payload.get("openapi", "")).startswith("3.")
     dialect = payload.get("jsonSchemaDialect")
-    assert dialect in {None, DEFAULT_OPENAPI_DIALECT}
+    assert dialect in {None, DEFAULT_OPENAPI_DIALECT, JSON_SCHEMA_2020_12_DIALECT}
     assert payload.get("info", {}).get("title")
     assert payload.get("info", {}).get("version")
     assert payload.get("paths")
@@ -125,4 +126,4 @@ async def test_runtime_openapi_payload_remains_valid_for_mixed_runtime(tmp_path)
         any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
         for path in payload["paths"]
     )
-    assert any(path.startswith("/rpc") for path in payload["paths"])
+    assert not any(path.startswith("/rpc") for path in payload["paths"])

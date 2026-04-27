@@ -34,7 +34,7 @@ body: |-
 
   - be JSON-serializable,
   - declare an OpenAPI 3.x version,
-  - conform to OpenAPI 3.1 expectations for `jsonSchemaDialect` by omitting the field or setting it to `https://spec.openapis.org/oas/3.1/dialect/base`,
+  - conform to OpenAPI 3.1 expectations for `jsonSchemaDialect` by omitting the field, setting it to `https://spec.openapis.org/oas/3.1/dialect/base`, or preserving an upstream Tigrbl-supported JSON Schema dialect such as `https://json-schema.org/draft/2020-12/schema`,
   - include non-empty `info.title` and `info.version`,
   - include `x-tigrbl-auth.profile` matching the resolved deployment profile,
   - include only public REST routes that are active for the resolved deployment,
@@ -42,7 +42,7 @@ body: |-
   - include security schemes required by the resolved deployment flags,
   - preserve per-operation metadata derived from the resolved deployment boundary.
 
-  Non-default `jsonSchemaDialect` values SHALL NOT be emitted.
+  Non-default `jsonSchemaDialect` values SHALL NOT be emitted unless they are emitted by the upstream Tigrbl runtime generator and remain OpenAPI 3.1 compatible.
 
   Contract generation and runtime exposure SHALL conform rather than merely serialize or appear viable to tolerant consumers.
 
@@ -60,7 +60,7 @@ body: |-
 
   - profile-parameterized builder tests,
   - runtime endpoint tests for exposed payloads,
-  - explicit checks that no non-default `jsonSchemaDialect` value is emitted,
+  - explicit checks that `jsonSchemaDialect` is omitted, OpenAPI-base, or an upstream Tigrbl-supported OpenAPI 3.1 dialect,
   - explicit checks for route-set alignment with the resolved deployment,
   - explicit checks for JSON-serializability and required metadata.
 spec_kind: "normative"

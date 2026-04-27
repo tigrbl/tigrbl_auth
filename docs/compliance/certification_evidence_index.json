@@ -7,12 +7,67 @@
     "fapi_claim_count": 6,
     "security_sensitive_claim_count": 37,
     "partition_count": 7,
-    "target_profile_bundle_count": 197,
+    "target_profile_bundle_count": 193,
     "clean_checkout": {
       "git_available": true,
-      "clean": true,
-      "changed_path_count": 0,
-      "changed_paths": []
+      "clean": false,
+      "changed_path_count": 54,
+      "changed_paths": [
+        ".ssot/registry.json",
+        ".ssot/reports/security/secure-default-admin-gate-runtime-contract-tests.passed.json",
+        ".ssot/specs/SPEC-1063-openapi-contract-validity.yaml",
+        "Dockerfile.dev-tigrbl",
+        "compliance/claims/effective-target-claims.baseline.yaml",
+        "compliance/claims/effective-target-claims.fapi2-security.yaml",
+        "compliance/claims/effective-target-claims.hardening.yaml",
+        "compliance/claims/effective-target-claims.peer-claim.yaml",
+        "compliance/claims/effective-target-claims.production.yaml",
+        "compliance/evidence/certification_test_partitions.json",
+        "compliance/evidence/certification_test_partitions.yaml",
+        "compliance/evidence/effective-release-evidence.baseline.yaml",
+        "compliance/evidence/target_profile_evidence.json",
+        "compliance/evidence/target_profile_evidence.yaml",
+        "compliance/targets/document-authority.yaml",
+        "constraints/base.txt",
+        "constraints/dependency-lock.json",
+        "constraints/test.txt",
+        "docs/compliance/artifact_truthfulness_report.json",
+        "docs/compliance/artifact_truthfulness_report.md",
+        "docs/compliance/certification_evidence_index.json",
+        "docs/compliance/certification_evidence_index.md",
+        "docs/compliance/certification_state_report.json",
+        "docs/compliance/certification_state_report.md",
+        "docs/compliance/contract_sync_report.json",
+        "docs/compliance/contract_sync_report.md",
+        "docs/compliance/current_state_report.json",
+        "docs/compliance/current_state_report.md",
+        "docs/compliance/feature_completeness_report.json",
+        "docs/compliance/feature_completeness_report.md",
+        "docs/compliance/install_substrate_report.json",
+        "docs/compliance/install_substrate_report.md",
+        "docs/compliance/openapi_contract_summary.md",
+        "docs/compliance/openrpc_contract_summary.md",
+        "docs/compliance/runtime_profile_report.json",
+        "docs/compliance/runtime_profile_report.md",
+        "pyproject.toml",
+        "specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.json",
+        "specs/openapi/profiles/baseline/tigrbl_auth.public.openapi.yaml",
+        "specs/openapi/tigrbl_auth.public.openapi.json",
+        "specs/openapi/tigrbl_auth.public.openapi.yaml",
+        "specs/openrpc/profiles/baseline/tigrbl_auth.admin.openrpc.json",
+        "specs/openrpc/tigrbl_auth.admin.openrpc.json",
+        "tests/unit/test_openapi_contract_validity.py",
+        "tests/unit/test_phase19_ssot_dependency_maintenance_traceability.py",
+        "tests/unit/test_phase1_published_dependency_model.py",
+        "tigrbl_auth/__init__.py",
+        "tigrbl_auth/api/app.py",
+        "tigrbl_auth/framework.py",
+        "tigrbl_auth/security/admin_gate.py",
+        "tigrbl_auth/security/openapi.py",
+        "uv.lock",
+        ".ssot/reports/security/upstream-tigrbl-abstractions-dependency-compatibility.passed.json",
+        "dist/"
+      ]
     }
   },
   "test_partitions": {
@@ -67,6 +122,16 @@
       "tests/e2e/test_release_gate_catalog.py",
       "tests/examples/test_readme_usage.py",
       "tests/perf/test_bundle_manifest_size.py",
+      "tests/uix/test_abac_admin.py",
+      "tests/uix/test_admin_golden_path.py",
+      "tests/uix/test_admin_shell.py",
+      "tests/uix/test_admin_shell_security.py",
+      "tests/uix/test_policy_simulation.py",
+      "tests/uix/test_rbac_admin.py",
+      "tests/uix/test_readiness_dashboard.py",
+      "tests/uix/test_resource_views_contract.py",
+      "tests/uix/test_resource_views_states.py",
+      "tests/uix/test_safe_mutations.py",
       "tests/unit/test_adapters.py",
       "tests/unit/test_auth_code_exchange_pkce.py",
       "tests/unit/test_authorize_id_token_hashes.py",
@@ -76,6 +141,7 @@
       "tests/unit/test_bulk_schema_fields.py",
       "tests/unit/test_cli_surface_checkpoint.py",
       "tests/unit/test_contract_generation_live.py",
+      "tests/unit/test_contract_payloads_deferred_upstream.py",
       "tests/unit/test_crypto.py",
       "tests/unit/test_deployment_resolver.py",
       "tests/unit/test_deps_imports.py",
@@ -88,10 +154,12 @@
       "tests/unit/test_oidc_authorize_scope_nonce.py",
       "tests/unit/test_oidc_id_token.py",
       "tests/unit/test_oidc_id_token_encryption.py",
+      "tests/unit/test_openapi_contract_validity.py",
       "tests/unit/test_openapi_examples.py",
       "tests/unit/test_openapi_well_known_endpoints.py",
       "tests/unit/test_openid_configuration.py",
       "tests/unit/test_openid_userinfo_endpoint.py",
+      "tests/unit/test_openrpc_contract_validity.py",
       "tests/unit/test_phase0_claim_boundary_rebaseline.py",
       "tests/unit/test_phase10_hardening_cluster_c.py",
       "tests/unit/test_phase10_tier3_validated_rebuild.py",
@@ -174,7 +242,9 @@
       "tests/unit/test_rfc9728_metadata_checkpoint.py",
       "tests/unit/test_rpc_registry_live.py",
       "tests/unit/test_runtime_cfg.py",
+      "tests/unit/test_runtime_profile_configuration.py",
       "tests/unit/test_runtime_version_truthfulness.py",
+      "tests/unit/test_secure_default_admin_gate.py",
       "tests/unit/test_security_deps.py",
       "tests/unit/test_user_register_schema.py",
       "tests/unit/test_well_known_endpoints_behavior.py"
@@ -11713,18 +11783,6 @@
     },
     {
       "profile": "production",
-      "target": "OpenRPC 1.4.x admin/control-plane contract",
-      "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_contract_generation_live.py",
-        "tests/unit/test_rpc_registry_live.py"
-      ],
-      "evidence_refs": [
-        "compliance/evidence/tier3/contracts/openrpc/"
-      ]
-    },
-    {
-      "profile": "production",
       "target": "RFC 6265",
       "tests": [
         "tests/conformance/production/test_rfc6265_cookies.py",
@@ -12225,18 +12283,6 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
-      ]
-    },
-    {
-      "profile": "hardening",
-      "target": "OpenRPC 1.4.x admin/control-plane contract",
-      "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_contract_generation_live.py",
-        "tests/unit/test_rpc_registry_live.py"
-      ],
-      "evidence_refs": [
-        "compliance/evidence/tier3/contracts/openrpc/"
       ]
     },
     {
@@ -12869,18 +12915,6 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
-      ]
-    },
-    {
-      "profile": "fapi2-security",
-      "target": "OpenRPC 1.4.x admin/control-plane contract",
-      "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_contract_generation_live.py",
-        "tests/unit/test_rpc_registry_live.py"
-      ],
-      "evidence_refs": [
-        "compliance/evidence/tier3/contracts/openrpc/"
       ]
     },
     {
@@ -13529,18 +13563,6 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
-      ]
-    },
-    {
-      "profile": "peer-claim",
-      "target": "OpenRPC 1.4.x admin/control-plane contract",
-      "tests": [
-        "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_contract_generation_live.py",
-        "tests/unit/test_rpc_registry_live.py"
-      ],
-      "evidence_refs": [
-        "compliance/evidence/tier3/contracts/openrpc/"
       ]
     },
     {

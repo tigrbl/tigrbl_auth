@@ -2,8 +2,8 @@
   "evidence_id": "evd:secure-default-admin-gate-runtime-contract-tests",
   "test_id": "tst:secure-default-admin-gate-runtime-contract",
   "test_path": "tests/unit/test_secure_default_admin_gate.py",
-  "command": ".uv-project-env\\Scripts\\python.exe -m pytest tests\\unit\\test_secure_default_admin_gate.py tests\\unit\\test_openapi_contract_validity.py tests\\unit\\test_contract_payloads_deferred_upstream.py --basetemp .pytest-tmp\\admin-gate-security",
-  "result": "22 passed",
+  "command": ".venv\\Scripts\\python.exe -m pytest tests\\unit\\test_secure_default_admin_gate.py tests\\unit\\test_openapi_contract_validity.py tests\\unit\\test_contract_payloads_deferred_upstream.py tests\\unit\\test_phase1_published_dependency_model.py tests\\unit\\test_phase19_ssot_dependency_maintenance_traceability.py --basetemp .pytest-tmp\\upstream-abstractions",
+  "result": "27 passed",
   "status": "passed",
   "feature_ids": [
     "feat:secure-default-baseline-admin-gate"
@@ -19,6 +19,7 @@
     "Admin-enabled runtime OpenAPI declares AdminBearer as an HTTP bearer security scheme.",
     "Protected generated REST operations include AdminApiKeyHeader or AdminBearer security requirements.",
     "Public OAuth/OIDC discovery routes are not marked as admin-gated.",
-    "AdminGate continues to defer live OpenAPI and OpenRPC payload generation to the upstream Tigrbl app."
+    "AdminGate continues to defer live OpenAPI and OpenRPC payload generation to the upstream Tigrbl app.",
+    "AdminGate OpenAPI metadata uses upstream Tigrbl APIKey and HTTPBearer security abstractions."
   ]
 }

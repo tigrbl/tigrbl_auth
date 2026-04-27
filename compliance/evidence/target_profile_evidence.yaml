@@ -328,14 +328,6 @@ bundles:
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
 - profile: production
-  target: OpenRPC 1.4.x admin/control-plane contract
-  tests:
-  - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_contract_generation_live.py
-  - tests/unit/test_rpc_registry_live.py
-  evidence_refs:
-  - compliance/evidence/tier3/contracts/openrpc/
-- profile: production
   target: RFC 6265
   tests:
   - tests/conformance/production/test_rfc6265_cookies.py
@@ -691,14 +683,6 @@ bundles:
   - tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
-- profile: hardening
-  target: OpenRPC 1.4.x admin/control-plane contract
-  tests:
-  - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_contract_generation_live.py
-  - tests/unit/test_rpc_registry_live.py
-  evidence_refs:
-  - compliance/evidence/tier3/contracts/openrpc/
 - profile: hardening
   target: RFC 6265
   tests:
@@ -1151,14 +1135,6 @@ bundles:
   - tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
-- profile: fapi2-security
-  target: OpenRPC 1.4.x admin/control-plane contract
-  tests:
-  - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_contract_generation_live.py
-  - tests/unit/test_rpc_registry_live.py
-  evidence_refs:
-  - compliance/evidence/tier3/contracts/openrpc/
 - profile: fapi2-security
   target: RFC 6265
   tests:
@@ -1623,14 +1599,6 @@ bundles:
   - tests/unit/test_contract_generation_live.py
   evidence_refs:
   - compliance/evidence/tier3/contracts/openapi/
-- profile: peer-claim
-  target: OpenRPC 1.4.x admin/control-plane contract
-  tests:
-  - tests/e2e/test_release_gate_catalog.py
-  - tests/unit/test_contract_generation_live.py
-  - tests/unit/test_rpc_registry_live.py
-  evidence_refs:
-  - compliance/evidence/tier3/contracts/openrpc/
 - profile: peer-claim
   target: RFC 6265
   tests:

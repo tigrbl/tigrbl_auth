@@ -44,33 +44,8 @@ def _install_http_status_aliases() -> None:
         if not hasattr(_HTTPStatus, alias):
             setattr(_HTTPStatus, alias, int(item))
 
-def _install_request_ctor_compat() -> None:
-    """Accept legacy ``Request(scope=...)`` construction without ``method``."""
-
-    try:
-        from tigrbl.requests import Request as _Request
-    except Exception:
-        return
-
-    init = getattr(_Request, "__init__", None)
-    if init is None or getattr(init, "_tigrbl_auth_compat", False):
-        return
-
-    def _compat_init(self, *args, **kwargs):
-        if args:
-            return init(self, *args, **kwargs)
-        if "method" not in kwargs and "scope" in kwargs:
-            scope = kwargs.pop("scope")
-            return init(self, scope, **kwargs)
-        return init(self, **kwargs)
-
-    setattr(_compat_init, "_tigrbl_auth_compat", True)
-    _Request.__init__ = _compat_init
-
-
 _install_tomllib_alias()
 _install_http_status_aliases()
-_install_request_ctor_compat()
 
 _MODULE_EXPORTS = {
     "framework": "tigrbl_auth.framework",

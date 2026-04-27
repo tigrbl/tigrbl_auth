@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260420T082634Z`
+- Generated at: `20260427T165418Z`
 - Deployment profile: `baseline`
 - Report mode: `live-probe`
 - Validated artifact source: `None`
@@ -27,7 +27,7 @@
 ## Application Probe
 
 - App factory: `tigrbl_auth.api.app.build_app`
-- Message: Application factory materialized successfully with 7 active routes and 25 active targets.
+- Message: Application factory materialized successfully with 6 active routes and 24 active targets.
 
 ## Surface Probe
 

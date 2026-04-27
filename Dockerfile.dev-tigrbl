@@ -14,13 +14,7 @@ COPY . .
 RUN uv pip install --system \
     -c constraints/base.txt \
     -c constraints/runner-uvicorn.txt \
-    ".[sqlite,uvicorn]" && \
-    uv pip install --system --prerelease=allow --reinstall \
-    "tigrbl==0.3.30.dev1" \
-    "httpx<1" \
-    "pydantic<2.13" \
-    "sqlalchemy<2.1" \
-    "uvicorn<0.42"
+    ".[sqlite,uvicorn]"
 
 EXPOSE 8000
 

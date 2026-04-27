@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from importlib.metadata import PackageNotFoundError, version as installed_package_version
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -25,6 +26,38 @@ def _runtime_package_version() -> str:
         return repository_package_version(Path(__file__).resolve().parents[2])
 
 
+def _path_has_prefix(path: str, prefix: str) -> bool:
+    return path == prefix or path.startswith(f"{prefix}/")
+
+
+def _hide_disabled_control_plane_docs(
+    app: object,
+    deployment: ResolvedDeployment,
+    *,
+    rpc_prefix: str,
+    diagnostics_prefix: str,
+) -> None:
+    routes = getattr(app, "_routes", None)
+    if not isinstance(routes, list):
+        return
+
+    hidden = []
+    for route in routes:
+        path = str(getattr(route, "path_template", None) or getattr(route, "path", ""))
+        hide = (
+            (not deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, rpc_prefix))
+            or (
+                not deployment.flag_enabled("surface_diagnostics_enabled")
+                and _path_has_prefix(path, diagnostics_prefix)
+            )
+        )
+        if hide and hasattr(route, "include_in_schema"):
+            hidden.append(replace(route, include_in_schema=False))
+        else:
+            hidden.append(route)
+    routes[:] = hidden
+
+
 def build_app(
     settings_obj: object | None = None,
     *,
@@ -38,10 +71,8 @@ def build_app(
     from tigrbl_auth.api.lifecycle import register_lifecycle
     from tigrbl_auth.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
     from tigrbl_auth.security.admin_gate import AdminGate
-    from tigrbl_auth.security.openapi import install_tigrbl_openapi_security_compat
     from tigrbl_auth.tables.engine import dsn
 
-    install_tigrbl_openapi_security_compat()
     app = TigrblApp(
         title="tigrbl_auth",
         version=_runtime_package_version(),
@@ -57,6 +88,12 @@ def build_app(
         app,
         resolved_settings,
         deployment=resolved_deployment,
+        rpc_prefix="/rpc",
+        diagnostics_prefix="/system",
+    )
+    _hide_disabled_control_plane_docs(
+        app,
+        resolved_deployment,
         rpc_prefix="/rpc",
         diagnostics_prefix="/system",
     )

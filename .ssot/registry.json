@@ -11968,7 +11968,9 @@
       "spec_ids": [
         "spc:1063"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
       "test_ids": [
         "tst:tests-unit-test-openapi-contract-validity-py"
       ],
@@ -11979,8 +11981,8 @@
     },
     {
       "id": "feat:openapi-jsonschema-dialect-default-or-omitted",
-      "title": "OpenAPI jsonSchemaDialect default or omitted",
-      "description": "Generated and exposed OpenAPI outputs omit jsonSchemaDialect or set it to the OpenAPI 3.1 base dialect.",
+      "title": "OpenAPI jsonSchemaDialect compatible with upstream Tigrbl",
+      "description": "Generated and exposed OpenAPI outputs omit jsonSchemaDialect, set it to the OpenAPI 3.1 base dialect, or preserve an upstream Tigrbl-supported OpenAPI 3.1 compatible JSON Schema dialect.",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -11996,7 +11998,9 @@
       "spec_ids": [
         "spc:1063"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract"
+      ],
       "test_ids": [
         "tst:tests-unit-test-openapi-contract-validity-py"
       ],
@@ -12024,7 +12028,9 @@
       "spec_ids": [
         "spc:1065"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
       "test_ids": [
         "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ],
@@ -12051,7 +12057,9 @@
       "spec_ids": [
         "spc:1065"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
       "test_ids": [
         "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ],
@@ -12107,7 +12115,9 @@
       "spec_ids": [
         "spc:1064"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:target-openrpc-1-4-x-admin-control-plane-contract"
+      ],
       "test_ids": [
         "tst:tests-unit-test-openrpc-contract-validity-py"
       ],
@@ -12135,7 +12145,9 @@
       "spec_ids": [
         "spc:1065"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
       "test_ids": [
         "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ],
@@ -12162,7 +12174,9 @@
       "spec_ids": [
         "spc:1065"
       ],
-      "claim_ids": [],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
       "test_ids": [
         "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ],
@@ -26938,8 +26952,12 @@
         "feat:admin-gate-does-not-mutate-openrpc-json",
         "feat:openrpc-runtime-payload-deferred-to-tigrbl"
       ],
-      "claim_ids": [],
-      "evidence_ids": []
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "evidence_ids": [
+        "evd:secure-default-admin-gate-runtime-contract-tests"
+      ]
     },
     {
       "id": "tst:tests-unit-test-runtime-cfg-py",
@@ -27254,7 +27272,9 @@
       "kind": "pytest",
       "path": "tests/negative/test_contract_diff_detects_drift.py",
       "feature_ids": [
-        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:openapi-contract-always-valid",
+        "feat:openapi-jsonschema-dialect-default-or-omitted"
       ],
       "claim_ids": [
         "clm:target-openapi-3-1-3-2-compatible-public-contract"
@@ -27510,7 +27530,9 @@
       "kind": "pytest",
       "path": "tests/unit/test_openapi_examples.py",
       "feature_ids": [
-        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:openapi-contract-always-valid",
+        "feat:openapi-jsonschema-dialect-default-or-omitted"
       ],
       "claim_ids": [
         "clm:target-openapi-3-1-3-2-compatible-public-contract"
@@ -39025,7 +39047,9 @@
       "kind": "target",
       "description": "OpenAPI 3.1 / 3.2 compatible public contract",
       "feature_ids": [
-        "feat:target-openapi-3-1-3-2-compatible-public-contract"
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:openapi-contract-always-valid",
+        "feat:openapi-jsonschema-dialect-default-or-omitted"
       ],
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
@@ -39033,7 +39057,8 @@
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-negative-test-contract-diff-detects-drift-py",
         "tst:tests-unit-test-openapi-examples-py",
-        "tst:tests-unit-test-openapi-well-known-endpoints-py"
+        "tst:tests-unit-test-openapi-well-known-endpoints-py",
+        "tst:tests-unit-test-openapi-contract-validity-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-contracts-openapi"
@@ -39047,13 +39072,15 @@
       "kind": "target",
       "description": "OpenRPC 1.4.x admin/control-plane contract",
       "feature_ids": [
-        "feat:target-openrpc-1-4-x-admin-control-plane-contract"
+        "feat:target-openrpc-1-4-x-admin-control-plane-contract",
+        "feat:openrpc-contract-always-valid"
       ],
       "test_ids": [
         "tst:tests-e2e-test-release-gate-catalog-py",
         "tst:tests-unit-test-contract-generation-live-py",
         "tst:tests-unit-test-rpc-registry-live-py",
-        "tst:tests-unit-test-phase6-operator-control-plane-py"
+        "tst:tests-unit-test-phase6-operator-control-plane-py",
+        "tst:tests-unit-test-openrpc-contract-validity-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-contracts-openrpc"
@@ -40525,10 +40552,15 @@
       "kind": "runtime-security",
       "description": "Baseline installs expose only public OAuth/OIDC endpoints, and explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics require the local admin API key.",
       "feature_ids": [
-        "feat:secure-default-baseline-admin-gate"
+        "feat:secure-default-baseline-admin-gate",
+        "feat:admin-gate-does-not-mutate-openapi-json",
+        "feat:openapi-runtime-payload-deferred-to-tigrbl",
+        "feat:admin-gate-does-not-mutate-openrpc-json",
+        "feat:openrpc-runtime-payload-deferred-to-tigrbl"
       ],
       "test_ids": [
-        "tst:secure-default-admin-gate-runtime-contract"
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ],
       "evidence_ids": [
         "evd:secure-default-admin-gate-runtime-contract-tests"
@@ -41523,7 +41555,8 @@
         "tst:tests-unit-test-well-known-endpoints-behavior-py",
         "tst:tests-negative-test-contract-diff-detects-drift-py",
         "tst:tests-unit-test-openapi-examples-py",
-        "tst:tests-unit-test-openapi-well-known-endpoints-py"
+        "tst:tests-unit-test-openapi-well-known-endpoints-py",
+        "tst:tests-unit-test-openapi-contract-validity-py"
       ]
     },
     {
@@ -41689,7 +41722,8 @@
         "tst:tests-unit-test-rfc9728-metadata-checkpoint-py",
         "tst:tests-unit-test-rpc-registry-live-py",
         "tst:tests-unit-test-well-known-endpoints-behavior-py",
-        "tst:tests-unit-test-phase6-operator-control-plane-py"
+        "tst:tests-unit-test-phase6-operator-control-plane-py",
+        "tst:tests-unit-test-openrpc-contract-validity-py"
       ]
     },
     {
@@ -45502,11 +45536,12 @@
       "status": "passed",
       "kind": "artifact",
       "tier": "T1",
-      "path": ".ssot/specs/SPEC-1051-dependency-compatibility-maintenance.yaml",
+      "path": ".ssot/reports/security/upstream-tigrbl-abstractions-dependency-compatibility.passed.json",
       "claim_ids": [
         "clm:governance-dependency-compatibility-maintenance"
       ],
       "test_ids": [
+        "tst:tests-unit-test-phase1-published-dependency-model-py",
         "tst:tests-unit-test-phase19-ssot-dependency-maintenance-traceability-py"
       ]
     },
@@ -45721,7 +45756,8 @@
         "clm:secure-default-baseline-admin-gate"
       ],
       "test_ids": [
-        "tst:secure-default-admin-gate-runtime-contract"
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:tests-unit-test-contract-payloads-deferred-upstream-py"
       ]
     }
   ],
@@ -45731,7 +45767,7 @@
       "title": "OpenAPI jsonSchemaDialect must be default or omitted",
       "status": "open",
       "severity": "medium",
-      "description": "Some consumers warn when OpenAPI jsonSchemaDialect is set to a non-default value. Tigrbl Auth contract outputs must omit jsonSchemaDialect or set it to https://spec.openapis.org/oas/3.1/dialect/base. The warning was reported externally; current runtime and committed artifacts in this checkout do not reproduce it, so the invariant is now explicitly tracked and tested.",
+      "description": "Some consumers warn when OpenAPI jsonSchemaDialect is set to a non-default value. Tigrbl Auth contract outputs must omit jsonSchemaDialect, set it to https://spec.openapis.org/oas/3.1/dialect/base, or preserve an upstream Tigrbl-supported OpenAPI 3.1 compatible JSON Schema dialect. The invariant is explicitly tracked and tested.",
       "plan": {
         "horizon": "current",
         "slot": null
@@ -48345,7 +48381,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "329b1bd700787aead6a3e35fdc93e0f038cb49ac021582c47b6afb6960f8a7a5",
+      "content_sha256": "66f708c5b05efa967c80f0be54aa1dc80d3182b5590f0581f49f54212986f824",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],

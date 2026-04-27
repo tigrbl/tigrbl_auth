@@ -1,11 +1,11 @@
 {
-  "generated_at": "20260420T082634Z",
+  "generated_at": "20260427T165418Z",
   "deployment_profile": "baseline",
   "report_mode": "live-probe",
   "application_probe": {
     "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",
-    "message": "Application factory materialized successfully with 7 active routes and 25 active targets."
+    "message": "Application factory materialized successfully with 6 active routes and 24 active targets."
   },
   "surface_probe": {
     "executed": true,
@@ -214,8 +214,8 @@
           "runner": "hypercorn"
         }
       ],
-      "application_hash": "7d10308d425f3409b0fe640cd13d644b3551b274c55cc0e73ccf72e722851dee",
-      "runtime_hash": "62a8160de82453576d8770cb3ba5f9ee0dd532542d11b508eb224647784ec7f2",
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "9139893343ce4e583e994f38c8e03af6c1963712b1d068ea785f25d3dba11878",
       "serve_check": {
         "passed": false,
         "executed": false,
@@ -388,8 +388,8 @@
           "runner": "tigrcorn"
         }
       ],
-      "application_hash": "7d10308d425f3409b0fe640cd13d644b3551b274c55cc0e73ccf72e722851dee",
-      "runtime_hash": "6ee00c9b00578de7d4fe4f62b3860f2e9121a069301eef2928f4e29e256af4d7",
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "6419c22ac3642fea2911dcfe6c692b7f848b3d296bda13f096fc6976fc7d9724",
       "serve_check": {
         "passed": false,
         "executed": false,
@@ -578,8 +578,8 @@
         }
       ],
       "diagnostics": [],
-      "application_hash": "7d10308d425f3409b0fe640cd13d644b3551b274c55cc0e73ccf72e722851dee",
-      "runtime_hash": "c0286bff23f08cb24f7c5e44c3c846326cf129c5fb3eb63d487a144030cb6009",
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "424d3d841878d7bec16a1bdf9e065642b6e4207cd837e689d6902a33cb663e36",
       "serve_check": {
         "passed": true,
         "executed": true,
@@ -588,7 +588,7 @@
         "exit_code": 0,
         "launch_ready": true,
         "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs\\\\compliance\\\\runtime_profile_report.json\",\n    \"md\": \"docs\\\\compliance\\\\runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
-        "stderr": ""
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=OcAjs6_1N8ta_kcBXS9jCmyhmGuSmeknyxN6eVjmvjM\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=Kk85GHCp1-486szVULz3Peof8wVYPfJtvCwxXasjd3M"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",

@@ -3,12 +3,10 @@ package: tigrbl_auth
 profile_label: baseline
 effective_deployment:
   profile: baseline
-  plugin_mode: mixed
+  plugin_mode: public-only
   runtime_style: standalone
   surface_sets:
   - public-rest
-  - admin-rpc
-  - diagnostics
   protocol_slices: []
   extensions: []
   issuer: https://authn.example.com
@@ -16,11 +14,11 @@ effective_deployment:
   strict_boundary_enforcement: true
   surfaces:
     surface_public_enabled: true
-    surface_admin_enabled: true
-    surface_rpc_enabled: true
-    surface_diagnostics_enabled: true
+    surface_admin_enabled: false
+    surface_rpc_enabled: false
+    surface_diagnostics_enabled: false
     surface_operator_enabled: true
-    surface_plugin_mode: mixed
+    surface_plugin_mode: public-only
   flags:
     enable_rfc6749: true
     enable_rfc6750: true
@@ -64,11 +62,11 @@ effective_deployment:
     enable_rfc6750_form: false
     strict_boundary_enforcement: true
     surface_public_enabled: true
-    surface_admin_enabled: true
+    surface_admin_enabled: false
     surface_operator_enabled: true
-    surface_rpc_enabled: true
-    surface_diagnostics_enabled: true
-    surface_plugin_mode: mixed
+    surface_rpc_enabled: false
+    surface_diagnostics_enabled: false
+    surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
     enable_rfc7800: false
     enable_rfc7952: false
@@ -83,7 +81,6 @@ effective_deployment:
   - openid-configuration
   - oauth-authorization-server-metadata
   - jwks
-  - diagnostics-health
   active_routes:
   - /login
   - /authorize
@@ -91,7 +88,6 @@ effective_deployment:
   - /.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/jwks.json
-  - /system/health
   active_contract_routes:
   - /login
   - /authorize
@@ -119,7 +115,6 @@ effective_deployment:
   - OIDC Discovery 1.0
   - OIDC Session Management
   - OpenAPI 3.1 / 3.2 compatible public contract
-  - OpenRPC 1.4.x admin/control-plane contract
   - ASGI 3 application package
   - 'Runner profile: Uvicorn'
   - 'Runner profile: Hypercorn'
@@ -129,42 +124,7 @@ effective_deployment:
   - Key lifecycle and JWKS publication
   - Import/export portability
   - Release bundle and signature verification
-  active_openrpc_methods:
-  - audit.export
-  - audit.list
-  - claims.lint
-  - claims.show
-  - client.list
-  - client.registration.delete
-  - client.registration.list
-  - client.registration.show
-  - client.registration.upsert
-  - client.show
-  - consent.list
-  - consent.revoke
-  - consent.show
-  - discovery.show
-  - evidence.status
-  - flow.list
-  - gate.run
-  - identity.list
-  - identity.show
-  - jwks.show
-  - keys.list
-  - keys.rotate
-  - profile.show
-  - release.bundle
-  - rpc.discover
-  - session.list
-  - session.show
-  - session.terminate
-  - target.list
-  - target.show
-  - tenant.list
-  - tenant.show
-  - token.exchange
-  - token.inspect
-  - token.list
+  active_openrpc_methods: []
 claim_set:
   current_repository_tier: 3
   phase: P14

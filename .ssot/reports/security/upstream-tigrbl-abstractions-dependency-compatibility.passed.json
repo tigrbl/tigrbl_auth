@@ -1,0 +1,30 @@
+{
+  "evidence_id": "evd:ssot-governance-dependency-compatibility-maintenance",
+  "test_ids": [
+    "tst:tests-unit-test-phase1-published-dependency-model-py",
+    "tst:tests-unit-test-phase19-ssot-dependency-maintenance-traceability-py"
+  ],
+  "command": ".venv\\Scripts\\python.exe -m pytest tests\\unit\\test_secure_default_admin_gate.py tests\\unit\\test_openapi_contract_validity.py tests\\unit\\test_contract_payloads_deferred_upstream.py tests\\unit\\test_phase1_published_dependency_model.py tests\\unit\\test_phase19_ssot_dependency_maintenance_traceability.py --basetemp .pytest-tmp\\upstream-abstractions",
+  "result": "27 passed",
+  "status": "passed",
+  "feature_ids": [
+    "feat:governance-dependency-compatibility-maintenance",
+    "feat:secure-default-baseline-admin-gate"
+  ],
+  "claim_ids": [
+    "clm:governance-dependency-compatibility-maintenance",
+    "clm:secure-default-baseline-admin-gate"
+  ],
+  "spec_ids": [
+    "spc:1051",
+    "spc:1060",
+    "spc:1063"
+  ],
+  "assertions": [
+    "Project dependency policy pins tigrbl==0.3.30.dev1.",
+    "Docker dev install no longer overrides Tigrbl after project install.",
+    "tigrbl_auth.framework.TigrblRouter is the upstream tigrbl.TigrblRouter class.",
+    "AdminGate contract metadata is represented with upstream Tigrbl security abstractions.",
+    "Runtime OpenAPI preserves upstream Tigrbl payload generation while hiding disabled control-plane docs."
+  ]
+}

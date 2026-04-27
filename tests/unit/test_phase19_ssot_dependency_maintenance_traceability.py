@@ -59,4 +59,4 @@ def test_dependency_maintenance_artifacts_are_registered_and_linked() -> None:
 
     pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert 'pydantic[email]==2.12.5' in pyproject_text
-    assert 'pytest-asyncio==1.2.0' in pyproject_text
+    assert 'pytest-asyncio==1.3.0' in pyproject_text
