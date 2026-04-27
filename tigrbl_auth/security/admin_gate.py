@@ -9,6 +9,8 @@ import secrets
 from pathlib import Path
 from typing import Any, Iterable
 
+from tigrbl.security import Security
+
 from tigrbl_auth.config.deployment import ResolvedDeployment
 
 ADMIN_API_KEY_ENV = "TIGRBL_AUTH_ADMIN_API_KEY"
@@ -23,6 +25,42 @@ ADMIN_SECURITY_REQUIREMENT: list[dict[str, list[Any]]] = [
     {ADMIN_HEADER_SCHEME: []},
     {ADMIN_BEARER_SCHEME: []},
 ]
+
+
+class AdminOpenAPISecurityDependency:
+    def __init__(
+        self,
+        *,
+        scheme_name: str,
+        scheme: dict[str, Any],
+    ) -> None:
+        self.scheme_name = scheme_name
+        self._scheme = dict(scheme)
+
+    def openapi_security_scheme(self) -> dict[str, Any]:
+        return dict(self._scheme)
+
+    def openapi_security_requirement(self) -> dict[str, list[Any]]:
+        return {self.scheme_name: []}
+
+    def __call__(self, request: Any) -> None:
+        return None
+
+
+ADMIN_OPENAPI_SECURITY_DEPENDENCIES = (
+    Security(
+        AdminOpenAPISecurityDependency(
+            scheme_name=ADMIN_HEADER_SCHEME,
+            scheme=ADMIN_SECURITY_SCHEMES[ADMIN_HEADER_SCHEME],
+        )
+    ),
+    Security(
+        AdminOpenAPISecurityDependency(
+            scheme_name=ADMIN_BEARER_SCHEME,
+            scheme=ADMIN_SECURITY_SCHEMES[ADMIN_BEARER_SCHEME],
+        )
+    ),
+)
 logger = logging.getLogger(__name__)
 
 

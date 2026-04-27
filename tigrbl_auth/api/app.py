@@ -38,8 +38,10 @@ def build_app(
     from tigrbl_auth.api.lifecycle import register_lifecycle
     from tigrbl_auth.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
     from tigrbl_auth.security.admin_gate import AdminGate
+    from tigrbl_auth.security.openapi import install_tigrbl_openapi_security_compat
     from tigrbl_auth.tables.engine import dsn
 
+    install_tigrbl_openapi_security_compat()
     app = TigrblApp(
         title="tigrbl_auth",
         version=_runtime_package_version(),

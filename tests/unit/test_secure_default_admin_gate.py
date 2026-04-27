@@ -67,6 +67,29 @@ async def test_admin_enabled_runtime_defers_openapi_payload_to_upstream_app(tmp_
 
 
 @pytest.mark.asyncio
+async def test_admin_enabled_runtime_openapi_declares_tigrbl_security_dependencies(tmp_path):
+    deployment = resolve_deployment(plugin_mode="mixed")
+    app = build_app(_settings(tmp_path), deployment=deployment)
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        openapi = (await client.get("/openapi.json")).json()
+
+    security_schemes = openapi["components"]["securitySchemes"]
+    assert security_schemes["AdminApiKeyHeader"] == {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+    }
+    assert security_schemes["AdminBearer"] == {"type": "http", "scheme": "bearer"}
+
+    tenant_get = openapi["paths"]["/tenant"]["get"]
+    assert tenant_get["security"] == [
+        {"AdminApiKeyHeader": []},
+        {"AdminBearer": []},
+    ]
+    assert "security" not in openapi["paths"]["/.well-known/openid-configuration"]["get"]
+
+
+@pytest.mark.asyncio
 async def test_admin_enabled_runtime_defers_openrpc_payload_to_upstream_app(tmp_path):
     deployment = resolve_deployment(plugin_mode="mixed")
     wrapped = build_app(_settings(tmp_path), deployment=deployment)

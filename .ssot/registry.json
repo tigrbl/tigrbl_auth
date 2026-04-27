@@ -45716,7 +45716,7 @@
       "status": "passed",
       "kind": "pytest",
       "tier": "T2",
-      "path": "tests/unit/test_secure_default_admin_gate.py",
+      "path": ".ssot/reports/security/secure-default-admin-gate-runtime-contract-tests.passed.json",
       "claim_ids": [
         "clm:secure-default-baseline-admin-gate"
       ],
