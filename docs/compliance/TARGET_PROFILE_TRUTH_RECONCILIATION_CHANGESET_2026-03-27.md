@@ -30,7 +30,7 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `scripts/generate_certification_scope.py`
 - `scripts/generate_release_decision_record.py`
 - `scripts/materialize_tier4_peer_evidence.py`
-- `tests/unit/test_phase13_truthfulness_alignment.py`
+- `tests/unit/test_truthfulness_alignment.py`
 - `README.md`
 - `docs/reference/PUBLIC_ROUTE_SURFACE.md`
 - `docs/compliance/README.md`
@@ -46,7 +46,7 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `python -c "from scripts.materialize_tier4_peer_evidence import update_final_target_decision_matrix; update_final_target_decision_matrix()"`
 - `python scripts/generate_release_decision_record.py`
 - `python scripts/generate_package_review_gap_analysis.py`
-- `pytest -q tests/unit/test_phase13_truthfulness_alignment.py`
+- `pytest -q tests/unit/test_truthfulness_alignment.py`
 - strict claims lint
 - strict feature-surface/modularity lint
 

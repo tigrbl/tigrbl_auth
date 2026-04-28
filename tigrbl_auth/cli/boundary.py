@@ -489,7 +489,7 @@ def run_wrapper_hygiene_check(
     *,
     strict: bool = True,
     report_dir: Path | None = None,
-    enforce_phase1_strictness: bool = True,
+    enforce_capability_strictness: bool = True,
 ) -> int:
     repo_root = repo_root.resolve()
     report_dir = report_dir or (repo_root / "docs" / "compliance")
@@ -556,7 +556,7 @@ def run_wrapper_hygiene_check(
     if non_certified_hits:
         warnings.append(f"Wrapper/shim modules remain outside the certified core: {', '.join(sorted(non_certified_hits))}")
 
-    if enforce_phase1_strictness:
+    if enforce_capability_strictness:
         if in_scope_target_wrapper_hits:
             failures.append(
                 "In-scope owner modules still resolve through thin wrapper modules: "
@@ -581,7 +581,7 @@ def run_wrapper_hygiene_check(
     report = {
         "scope": "wrapper-hygiene",
         "strict": strict,
-        "phase1_strict": enforce_phase1_strictness,
+        "capability_strict": enforce_capability_strictness,
         "passed": not failures,
         "failures": failures,
         "warnings": warnings,

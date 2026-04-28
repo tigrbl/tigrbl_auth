@@ -6,9 +6,9 @@
       "tests": [
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_deployment_resolver.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
       ],
@@ -20,9 +20,9 @@
       "profile": "baseline",
       "target": "Bootstrap and migration lifecycle",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_phase4_cli_contract.py",
+        "tests/unit/test_cli_contract.py",
         "tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
       "evidence_refs": [
@@ -33,11 +33,11 @@
       "profile": "baseline",
       "target": "CLI operator surface",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_runtime_launcher.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_serve_runtime.py",
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -52,9 +52,9 @@
       "profile": "baseline",
       "target": "Import/export portability",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_import_export.py"
       ],
       "evidence_refs": [
@@ -65,11 +65,11 @@
       "profile": "baseline",
       "target": "Key lifecycle and JWKS publication",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py"
       ],
       "evidence_refs": [
@@ -246,10 +246,10 @@
       "profile": "baseline",
       "target": "Release bundle and signature verification",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
-        "tests/unit/test_phase1_published_dependency_model.py",
-        "tests/security/test_phase12_sender_constraint_replay.py"
+        "tests/unit/test_published_dependency_model.py",
+        "tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -259,10 +259,10 @@
       "profile": "baseline",
       "target": "Runner profile: Hypercorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_hypercorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -275,10 +275,10 @@
       "profile": "baseline",
       "target": "Runner profile: Tigrcorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_tigrcorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -291,10 +291,10 @@
       "profile": "baseline",
       "target": "Runner profile: Uvicorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_uvicorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -309,9 +309,9 @@
       "tests": [
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_deployment_resolver.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
       ],
@@ -323,9 +323,9 @@
       "profile": "production",
       "target": "Bootstrap and migration lifecycle",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_phase4_cli_contract.py",
+        "tests/unit/test_cli_contract.py",
         "tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
       "evidence_refs": [
@@ -336,11 +336,11 @@
       "profile": "production",
       "target": "CLI operator surface",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_runtime_launcher.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_serve_runtime.py",
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -355,9 +355,9 @@
       "profile": "production",
       "target": "Import/export portability",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_import_export.py"
       ],
       "evidence_refs": [
@@ -368,11 +368,11 @@
       "profile": "production",
       "target": "Key lifecycle and JWKS publication",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py"
       ],
       "evidence_refs": [
@@ -416,7 +416,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
@@ -430,7 +430,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
@@ -512,7 +512,7 @@
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
@@ -603,7 +603,7 @@
         "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
@@ -614,10 +614,10 @@
       "profile": "production",
       "target": "RFC 7592",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
@@ -647,7 +647,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_rfc7662.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
@@ -696,9 +696,9 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
@@ -724,10 +724,10 @@
       "profile": "production",
       "target": "Release bundle and signature verification",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
-        "tests/unit/test_phase1_published_dependency_model.py",
-        "tests/security/test_phase12_sender_constraint_replay.py"
+        "tests/unit/test_published_dependency_model.py",
+        "tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -737,10 +737,10 @@
       "profile": "production",
       "target": "Runner profile: Hypercorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_hypercorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -753,10 +753,10 @@
       "profile": "production",
       "target": "Runner profile: Tigrcorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_tigrcorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -769,10 +769,10 @@
       "profile": "production",
       "target": "Runner profile: Uvicorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_uvicorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -787,9 +787,9 @@
       "tests": [
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_deployment_resolver.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
       ],
@@ -801,9 +801,9 @@
       "profile": "hardening",
       "target": "Bootstrap and migration lifecycle",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_phase4_cli_contract.py",
+        "tests/unit/test_cli_contract.py",
         "tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
       "evidence_refs": [
@@ -814,11 +814,11 @@
       "profile": "hardening",
       "target": "CLI operator surface",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_runtime_launcher.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_serve_runtime.py",
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -833,9 +833,9 @@
       "profile": "hardening",
       "target": "Import/export portability",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_import_export.py"
       ],
       "evidence_refs": [
@@ -846,11 +846,11 @@
       "profile": "hardening",
       "target": "Key lifecycle and JWKS publication",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py"
       ],
       "evidence_refs": [
@@ -864,7 +864,7 @@
         "tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-backchannel-logout/"
@@ -906,7 +906,7 @@
         "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-frontchannel-logout/"
@@ -920,7 +920,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
@@ -934,7 +934,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
@@ -1016,7 +1016,7 @@
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
@@ -1107,7 +1107,7 @@
         "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
@@ -1118,10 +1118,10 @@
       "profile": "hardening",
       "target": "RFC 7592",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
@@ -1151,7 +1151,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_rfc7662.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
@@ -1198,12 +1198,12 @@
       "profile": "hardening",
       "target": "RFC 8628",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8628_device_authorization.py",
         "tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8628.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1216,12 +1216,12 @@
       "profile": "hardening",
       "target": "RFC 8693",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "tests/integration/test_token_exchange_flow.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1234,10 +1234,10 @@
       "profile": "hardening",
       "target": "RFC 8707",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py"
+        "tests/unit/test_advanced_surface_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
@@ -1249,11 +1249,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
@@ -1265,11 +1265,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
@@ -1281,9 +1281,9 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
@@ -1295,11 +1295,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
@@ -1311,11 +1311,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
@@ -1327,10 +1327,10 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
@@ -1356,10 +1356,10 @@
       "profile": "hardening",
       "target": "Release bundle and signature verification",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
-        "tests/unit/test_phase1_published_dependency_model.py",
-        "tests/security/test_phase12_sender_constraint_replay.py"
+        "tests/unit/test_published_dependency_model.py",
+        "tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -1369,10 +1369,10 @@
       "profile": "hardening",
       "target": "Runner profile: Hypercorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_hypercorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -1385,10 +1385,10 @@
       "profile": "hardening",
       "target": "Runner profile: Tigrcorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_tigrcorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -1401,10 +1401,10 @@
       "profile": "hardening",
       "target": "Runner profile: Uvicorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_uvicorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -1419,9 +1419,9 @@
       "tests": [
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_deployment_resolver.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
       ],
@@ -1433,9 +1433,9 @@
       "profile": "fapi2-security",
       "target": "Bootstrap and migration lifecycle",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_phase4_cli_contract.py",
+        "tests/unit/test_cli_contract.py",
         "tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
       "evidence_refs": [
@@ -1446,11 +1446,11 @@
       "profile": "fapi2-security",
       "target": "CLI operator surface",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_runtime_launcher.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_serve_runtime.py",
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -1465,9 +1465,9 @@
       "profile": "fapi2-security",
       "target": "Import/export portability",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_import_export.py"
       ],
       "evidence_refs": [
@@ -1478,11 +1478,11 @@
       "profile": "fapi2-security",
       "target": "Key lifecycle and JWKS publication",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py"
       ],
       "evidence_refs": [
@@ -1496,7 +1496,7 @@
         "tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-backchannel-logout/"
@@ -1538,7 +1538,7 @@
         "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-frontchannel-logout/"
@@ -1552,7 +1552,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
@@ -1566,7 +1566,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
@@ -1648,7 +1648,7 @@
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
@@ -1739,7 +1739,7 @@
         "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
@@ -1750,10 +1750,10 @@
       "profile": "fapi2-security",
       "target": "RFC 7592",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
@@ -1783,7 +1783,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_rfc7662.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
@@ -1830,12 +1830,12 @@
       "profile": "fapi2-security",
       "target": "RFC 8628",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8628_device_authorization.py",
         "tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8628.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1848,12 +1848,12 @@
       "profile": "fapi2-security",
       "target": "RFC 8693",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "tests/integration/test_token_exchange_flow.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -1868,11 +1868,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc8705_mtls.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/mtls/"
@@ -1882,10 +1882,10 @@
       "profile": "fapi2-security",
       "target": "RFC 8707",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py"
+        "tests/unit/test_advanced_surface_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
@@ -1897,11 +1897,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
@@ -1913,11 +1913,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
@@ -1929,9 +1929,9 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
@@ -1943,11 +1943,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
@@ -1959,11 +1959,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
@@ -1975,10 +1975,10 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
@@ -2004,10 +2004,10 @@
       "profile": "fapi2-security",
       "target": "Release bundle and signature verification",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
-        "tests/unit/test_phase1_published_dependency_model.py",
-        "tests/security/test_phase12_sender_constraint_replay.py"
+        "tests/unit/test_published_dependency_model.py",
+        "tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -2017,10 +2017,10 @@
       "profile": "fapi2-security",
       "target": "Runner profile: Hypercorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_hypercorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -2033,10 +2033,10 @@
       "profile": "fapi2-security",
       "target": "Runner profile: Tigrcorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_tigrcorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -2049,10 +2049,10 @@
       "profile": "fapi2-security",
       "target": "Runner profile: Uvicorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_uvicorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -2067,9 +2067,9 @@
       "tests": [
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/unit/test_deployment_resolver.py",
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
       ],
@@ -2081,9 +2081,9 @@
       "profile": "peer-claim",
       "target": "Bootstrap and migration lifecycle",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/e2e/test_release_gate_catalog.py",
-        "tests/unit/test_phase4_cli_contract.py",
+        "tests/unit/test_cli_contract.py",
         "tests/conformance/operator/test_cli_bootstrap_migrate.py"
       ],
       "evidence_refs": [
@@ -2094,11 +2094,11 @@
       "profile": "peer-claim",
       "target": "CLI operator surface",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_cli_surface_checkpoint.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_runtime_launcher.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_serve_runtime.py",
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -2113,9 +2113,9 @@
       "profile": "peer-claim",
       "target": "Import/export portability",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_import_export.py"
       ],
       "evidence_refs": [
@@ -2126,11 +2126,11 @@
       "profile": "peer-claim",
       "target": "Key lifecycle and JWKS publication",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/unit/test_jwks_rotation.py",
         "tests/unit/test_rpc_registry_live.py",
-        "tests/unit/test_phase4_cli_contract.py",
-        "tests/unit/test_phase5_operator_service_layer.py",
+        "tests/unit/test_cli_contract.py",
+        "tests/unit/test_operator_service_layer.py",
         "tests/conformance/operator/test_cli_keys_lifecycle.py"
       ],
       "evidence_refs": [
@@ -2144,7 +2144,7 @@
         "tests/conformance/hardening/test_oidc_backchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-backchannel-logout/"
@@ -2186,7 +2186,7 @@
         "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-frontchannel-logout/"
@@ -2200,7 +2200,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
@@ -2214,7 +2214,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py",
-        "tests/unit/test_phase7_session_logout_cluster_b.py"
+        "tests/unit/test_session_logout_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
@@ -2296,7 +2296,7 @@
         "tests/integration/test_full_workflow.py",
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
@@ -2387,7 +2387,7 @@
         "tests/conformance/production/test_rfc7591_dynamic_client_registration.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/unit/test_rfc7591_client_registration_endpoint.py"
       ],
       "evidence_refs": [
@@ -2398,10 +2398,10 @@
       "profile": "peer-claim",
       "target": "RFC 7592",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc7592_client_registration_management.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_rfc7592_client_management_endpoint.py"
       ],
       "evidence_refs": [
@@ -2431,7 +2431,7 @@
         "tests/integration/test_migration_upgrade_downgrade_safety.py",
         "tests/integration/test_persistence_lifecycle_durability.py",
         "tests/integration/test_rfc7662.py",
-        "tests/unit/test_phase3_public_route_contracts.py"
+        "tests/unit/test_public_route_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
@@ -2478,12 +2478,12 @@
       "profile": "peer-claim",
       "target": "RFC 8628",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8628_device_authorization.py",
         "tests/integration/test_device_code_flow.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8628.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2496,12 +2496,12 @@
       "profile": "peer-claim",
       "target": "RFC 8693",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8693_token_exchange.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
         "tests/integration/test_rfc8693_token_exchange_endpoint.py",
         "tests/integration/test_token_exchange_flow.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
@@ -2514,10 +2514,10 @@
       "profile": "peer-claim",
       "target": "RFC 8707",
       "tests": [
-        "tests/unit/test_phase8_hardening_cluster_a.py",
+        "tests/unit/test_hardening_cluster_a.py",
         "tests/conformance/hardening/test_rfc8707_resource_indicators.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py"
+        "tests/unit/test_advanced_surface_contracts.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
@@ -2529,11 +2529,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9101_jar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
@@ -2545,11 +2545,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9126_par.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase3_public_route_contracts.py",
+        "tests/unit/test_public_route_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
@@ -2561,9 +2561,9 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9207_issuer_identification.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
@@ -2575,11 +2575,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9396_rar.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase9_hardening_cluster_b.py"
+        "tests/unit/test_hardening_cluster_b.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
@@ -2591,11 +2591,11 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9449_dpop.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/unit/test_phase7_advanced_surface_contracts.py",
+        "tests/unit/test_advanced_surface_contracts.py",
         "tests/interop/test_peer_counterpart_catalog.py",
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
@@ -2607,10 +2607,10 @@
       "tests": [
         "tests/conformance/hardening/test_rfc9700_security_bcp.py",
         "tests/integration/test_profile_surface_and_contract_alignment.py",
-        "tests/negative/test_phase6_hardening_runtime_enforcement.py",
-        "tests/unit/test_phase6_profile_discovery_runtime.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
-        "tests/unit/test_phase10_hardening_cluster_c.py"
+        "tests/unit/test_hardening_cluster_c.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
@@ -2636,10 +2636,10 @@
       "profile": "peer-claim",
       "target": "Release bundle and signature verification",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
         "tests/security/test_release_bundle_signing.py",
-        "tests/unit/test_phase1_published_dependency_model.py",
-        "tests/security/test_phase12_sender_constraint_replay.py"
+        "tests/unit/test_published_dependency_model.py",
+        "tests/security/test_sender_constraint_replay.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
@@ -2649,10 +2649,10 @@
       "profile": "peer-claim",
       "target": "Runner profile: Hypercorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_hypercorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -2665,10 +2665,10 @@
       "profile": "peer-claim",
       "target": "Runner profile: Tigrcorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_tigrcorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -2681,10 +2681,10 @@
       "profile": "peer-claim",
       "target": "Runner profile: Uvicorn",
       "tests": [
-        "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-        "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+        "tests/unit/test_claim_boundary_rebaseline.py",
+        "tests/unit/test_runner_adapter_runtime_layer.py",
         "tests/unit/test_runtime_cfg.py",
-        "tests/unit/test_phase3_runtime_launcher.py",
+        "tests/unit/test_runtime_launcher.py",
         "tests/runtime/test_runner_uvicorn.py",
         "tests/runtime/test_runner_invariance.py",
         "tests/conformance/operator/test_cli_serve_runtime.py"

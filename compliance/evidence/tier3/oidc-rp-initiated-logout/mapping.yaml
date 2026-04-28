@@ -8,7 +8,7 @@ modules:
 - tigrbl_auth/tables/client_registration.py
 - tigrbl_auth/services/persistence.py
 tests:
-- tests/unit/test_phase7_session_logout_cluster_b.py
+- tests/unit/test_session_logout_cluster_b.py
 - tests/conformance/production/test_oidc_rp_initiated_logout.py
 - tests/negative/test_cookie_and_logout_abuse_cases.py
 contracts:

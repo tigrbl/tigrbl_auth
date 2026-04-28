@@ -109,14 +109,14 @@ That allows the final certification tox env to work both:
 
 Focused regression set executed in this container:
 
-- `tests/unit/test_phase2_runner_adapter_runtime_layer.py`
+- `tests/unit/test_runner_adapter_runtime_layer.py`
 - `tests/runtime/test_runner_uvicorn.py`
 - `tests/runtime/test_runner_hypercorn.py`
 - `tests/runtime/test_runner_tigrcorn.py`
 - `tests/runtime/test_runner_invariance.py`
 - `tests/conformance/operator/test_cli_serve_runtime.py`
-- `tests/unit/test_phase4_validated_execution_runtime_matrix.py`
-- `tests/unit/test_phase4_collect_validated_artifact_downloads.py`
+- `tests/unit/test_validated_execution_runtime_matrix.py`
+- `tests/unit/test_collect_validated_artifact_downloads.py`
 
 Result: **16 passed**.
 
@@ -150,8 +150,8 @@ Step 4 is **not** exit-complete yet. The remaining work is external execution ev
 - `tigrbl_auth/cli/reports.py`
 - `tox.ini`
 - `.github/workflows/ci-release-gates.yml`
-- `tests/unit/test_phase4_validated_execution_runtime_matrix.py`
-- `tests/unit/test_phase4_collect_validated_artifact_downloads.py`
+- `tests/unit/test_validated_execution_runtime_matrix.py`
+- `tests/unit/test_collect_validated_artifact_downloads.py`
 - `docs/compliance/validated_execution_report.*`
 - `CURRENT_STATE.md`
 - `CERTIFICATION_STATUS.md`

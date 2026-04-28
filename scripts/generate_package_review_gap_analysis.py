@@ -69,7 +69,7 @@ def build_review() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "package": matrix.get("package", "tigrbl_auth"),
-        "phase": matrix.get("phase", "unknown"),
+        "delivery_lifecycle": matrix.get("delivery_lifecycle", matrix.get("phase", "unknown")),
         "version": pyproject.get("project", {}).get("version", "0.0.0"),
         "summary": {
             "fully_certifiable_now": bool(cert.get("summary", {}).get("fully_certifiable_now", False)),
@@ -134,7 +134,7 @@ def render_markdown(review: dict[str, Any]) -> str:
     append("")
     append(f"- package: `{review['package']}`")
     append(f"- version: `{review['version']}`")
-    append(f"- phase: `{review['phase']}`")
+    append(f"- delivery lifecycle: `{review['delivery_lifecycle']}`")
     append(f"- fully certifiable now: `{review['summary']['fully_certifiable_now']}`")
     append(f"- fully RFC compliant now: `{review['summary']['fully_rfc_compliant_now']}`")
     append(f"- release gates passed: `{review['summary']['release_gates_passed']}`")

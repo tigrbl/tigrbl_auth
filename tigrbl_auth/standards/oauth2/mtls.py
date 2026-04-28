@@ -83,7 +83,7 @@ class StandardOwner:
 OWNER = StandardOwner(
     label="RFC 8705",
     title="OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens",
-    runtime_status="phase-10-runtime-integrated",
+    runtime_status="mtls-runtime-integrated",
     public_surface=("/token", "/token/exchange", "/userinfo", "/introspect", "/revoke"),
     notes=(
         "mTLS client authentication, certificate-bound access-token validation, and "

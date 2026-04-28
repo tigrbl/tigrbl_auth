@@ -1,31 +1,26 @@
 {
-  "passed": false,
+  "passed": true,
   "registry_path": ".ssot/registry.json",
-  "failures": [
-    "Feature feat:profile-baseline-development requires feat:runtime-profile-configuration-contract to be passing: Required feature feat:runtime-profile-configuration-contract has non-passing linked tests",
-    "Feature feat:profile-baseline-development requires feat:runtime-profile-configuration-contract to be passing: Required feature feat:runtime-profile-configuration-contract is not implemented",
-    "features.feat:profile-baseline-development is in-bound but has no linked claims",
-    "features.feat:profile-baseline-development is in-bound but has no linked tests"
-  ],
+  "failures": [],
   "warnings": [],
   "summary": {
     "counts": {
-      "features": 434,
+      "features": 438,
       "profiles": 6,
-      "tests": 218,
-      "claims": 432,
-      "evidence": 63,
-      "issues": 2,
-      "risks": 0,
+      "tests": 223,
+      "claims": 437,
+      "evidence": 69,
+      "issues": 3,
+      "risks": 1,
       "boundaries": 8,
       "releases": 1,
       "adrs": 60,
       "specs": 81
     },
     "profile_status": {
-      "passing": 4,
+      "passing": 5,
       "failing": 0,
-      "draft": 2
+      "draft": 1
     }
   }
 }

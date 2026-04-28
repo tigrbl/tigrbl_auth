@@ -1,7 +1,7 @@
 {
   "label": "RFC 7592",
   "title": "OAuth 2.0 Dynamic Client Registration Management Protocol",
-  "runtime_status": "phase-8-persistence-backed-management-runtime",
+  "runtime_status": "persistence-backed-client-management-runtime",
   "public_surface": [
     "/register/{client_id}"
   ],

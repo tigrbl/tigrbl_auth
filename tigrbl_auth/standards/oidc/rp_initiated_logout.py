@@ -29,7 +29,7 @@ except Exception:  # pragma: no cover - exercised in dependency-light tests
 
     status = _FallbackStatus()
 
-STATUS: Final[str] = "phase-7-browser-logout-runtime"
+STATUS: Final[str] = "rp-initiated-logout-runtime"
 
 
 @dataclass(frozen=True, slots=True)

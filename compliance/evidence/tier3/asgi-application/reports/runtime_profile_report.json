@@ -1,26 +1,100 @@
 {
-  "generated_at": "20260324T070429Z",
+  "generated_at": "20260428T041059Z",
   "deployment_profile": "baseline",
+  "report_mode": "live-probe",
   "application_probe": {
-    "passed": false,
+    "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",
-    "message": "No module named 'tigrbl'",
-    "error_type": "ModuleNotFoundError"
+    "message": "Application factory materialized successfully with 6 active routes and 24 active targets."
+  },
+  "surface_probe": {
+    "executed": true,
+    "passed": true,
+    "message": "Runtime HTTP surface probes completed successfully.",
+    "endpoint_count": 4,
+    "passed_count": 4,
+    "failed_count": 0,
+    "probes": [
+      {
+        "name": "openid-configuration",
+        "path": "/.well-known/openid-configuration",
+        "passed": true,
+        "executed": true,
+        "message": "OpenID discovery document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "oauth-authorization-server",
+        "path": "/.well-known/oauth-authorization-server",
+        "passed": true,
+        "executed": true,
+        "message": "OAuth authorization-server metadata is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "jwks",
+        "path": "/.well-known/jwks.json",
+        "passed": true,
+        "executed": true,
+        "message": "JWKS document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "public-contract",
+        "path": "/openapi.json",
+        "passed": true,
+        "executed": true,
+        "message": "Public contract endpoint is available.",
+        "status_code": 200,
+        "expected_status": 200
+      }
+    ]
   },
   "summary": {
     "runner_count": 3,
-    "ready_count": 0,
-    "missing_count": 1,
-    "invalid_count": 2,
-    "application_hash_invariant": true
+    "ready_count": 1,
+    "missing_count": 2,
+    "invalid_count": 0,
+    "application_hash_invariant": true,
+    "pyproject_requires_python": ">=3.10,<3.13",
+    "supported_python_versions": [
+      "3.10",
+      "3.11",
+      "3.12"
+    ],
+    "placeholder_supported_runner_count": 0,
+    "placeholder_supported_runner_names": [],
+    "declared_ci_installable_runner_count": 3,
+    "declared_ci_installable_runner_names": [
+      "hypercorn",
+      "tigrcorn",
+      "uvicorn"
+    ],
+    "declared_ci_install_probe_complete": true,
+    "execution_probes_enabled": true,
+    "surface_probe_passed": true,
+    "surface_probe_endpoint_count": 4,
+    "surface_probe_passed_count": 4,
+    "surface_probe_failed_count": 0,
+    "serve_check_passed_count": 1,
+    "execution_probe_complete": true,
+    "source_mode": "live-probe",
+    "required_runtime_cell_count": 14,
+    "validated_runtime_cell_count": 0,
+    "validated_runtime_cell_passed_count": 0,
+    "validated_runtime_matrix_green": false,
+    "validated_download_collection_present": false
   },
   "profiles": [
     {
       "name": "hypercorn",
       "display_name": "Hypercorn",
-      "status": "invalid",
-      "installed": true,
-      "available_module": "hypercorn",
+      "status": "missing",
+      "installed": false,
+      "available_module": null,
       "capabilities": [
         {
           "name": "http",
@@ -132,9 +206,57 @@
           "default": true
         }
       ],
-      "diagnostics": [],
-      "application_hash": "6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43",
-      "runtime_hash": "c77fd754cbf6743178d8cc51a004988e1c3f146dda9d6b6adf8a33c570dde01e"
+      "diagnostics": [
+        {
+          "code": "runner-not-installed",
+          "level": "warning",
+          "message": "Runner adapter is declared but the backing server package is not installed in this environment.",
+          "runner": "hypercorn"
+        }
+      ],
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "9139893343ce4e583e994f38c8e03af6c1963712b1d068ea785f25d3dba11878",
+      "serve_check": {
+        "passed": false,
+        "executed": false,
+        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server hypercorn --format json --check",
+        "message": "Skipped because the runner is not installed in this environment."
+      },
+      "required_extra": "hypercorn",
+      "profile_name": "postgres-hypercorn",
+      "supported_python_versions": [
+        "3.10",
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "hypercorn==0.18.0"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-hypercorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-hypercorn.txt"
+      ],
+      "tox_envs": [
+        "py310-postgres-hypercorn",
+        "py311-postgres-hypercorn",
+        "py312-postgres-hypercorn"
+      ],
+      "tox_envs_present": [
+        "py310-postgres-hypercorn",
+        "py311-postgres-hypercorn",
+        "py312-postgres-hypercorn"
+      ],
+      "ci_install_job": "postgres-hypercorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
     },
     {
       "name": "tigrcorn",
@@ -266,13 +388,51 @@
           "runner": "tigrcorn"
         }
       ],
-      "application_hash": "6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43",
-      "runtime_hash": "e5c4b6c30a0963fc4d19266bca81a908e98e52ab26fd6f7905b42ab8871f3a90"
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "6419c22ac3642fea2911dcfe6c692b7f848b3d296bda13f096fc6976fc7d9724",
+      "serve_check": {
+        "passed": false,
+        "executed": false,
+        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server tigrcorn --format json --check",
+        "message": "Skipped because the runner is not installed in this environment."
+      },
+      "required_extra": "tigrcorn",
+      "profile_name": "tigrcorn",
+      "supported_python_versions": [
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "tigrcorn==0.3.8; python_version >= '3.11'"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-tigrcorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-tigrcorn.txt"
+      ],
+      "tox_envs": [
+        "py311-tigrcorn",
+        "py312-tigrcorn"
+      ],
+      "tox_envs_present": [
+        "py311-tigrcorn",
+        "py312-tigrcorn"
+      ],
+      "ci_install_job": "tigrcorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
     },
     {
       "name": "uvicorn",
       "display_name": "Uvicorn",
-      "status": "invalid",
+      "status": "ready",
       "installed": true,
       "available_module": "uvicorn",
       "capabilities": [
@@ -418,8 +578,53 @@
         }
       ],
       "diagnostics": [],
-      "application_hash": "6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43",
-      "runtime_hash": "daeb45c2834409d61b8a3c58d8289a003f4d0c14ab5c5335911338217e9c4029"
+      "application_hash": "7b16cb1cf5ca346b211aeac35fb77fd37851e19d96ecb8925bedc21d7c5d95d5",
+      "runtime_hash": "424d3d841878d7bec16a1bdf9e065642b6e4207cd837e689d6902a33cb663e36",
+      "serve_check": {
+        "passed": true,
+        "executed": true,
+        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server uvicorn --format json --check",
+        "message": "Application factory materialized successfully with 7 active routes and 25 active targets.",
+        "exit_code": 0,
+        "launch_ready": true,
+        "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs\\\\compliance\\\\runtime_profile_report.json\",\n    \"md\": \"docs\\\\compliance\\\\runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=8nVYFDitDglWZfNtyM_vJKDLNQdg5Jbv7Hzw9koHhGM\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=Yhil8gLV_40fOHM29Sorvs0oA8PGbedLEXZGSL6Da5c"
+      },
+      "required_extra": "uvicorn",
+      "profile_name": "sqlite-uvicorn",
+      "supported_python_versions": [
+        "3.10",
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "uvicorn[standard]==0.41.0"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-uvicorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-uvicorn.txt"
+      ],
+      "tox_envs": [
+        "py310-sqlite-uvicorn",
+        "py311-sqlite-uvicorn",
+        "py312-sqlite-uvicorn"
+      ],
+      "tox_envs_present": [
+        "py310-sqlite-uvicorn",
+        "py311-sqlite-uvicorn",
+        "py312-sqlite-uvicorn"
+      ],
+      "ci_install_job": "sqlite-uvicorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
     }
   ]
 }

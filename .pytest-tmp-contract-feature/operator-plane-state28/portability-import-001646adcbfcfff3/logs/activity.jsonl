@@ -1,0 +1,7 @@
+{"id": null, "kind": "import.run", "resource": "client", "status": "imported", "transaction_id": "txn-710696f91085", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "flow", "status": "imported", "transaction_id": "txn-1e0658dc24e0", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "identity", "status": "imported", "transaction_id": "txn-2cfec3e76505", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "keys", "status": "imported", "transaction_id": "txn-7f638a50f28b", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "session", "status": "imported", "transaction_id": "txn-98502b82b8bf", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "tenant", "status": "imported", "transaction_id": "txn-0d05a7aedb6c", "ts": "2026-04-28T06:11:00Z"}
+{"id": null, "kind": "import.run", "resource": "token", "status": "imported", "transaction_id": "txn-80e63fff565d", "ts": "2026-04-28T06:11:00Z"}

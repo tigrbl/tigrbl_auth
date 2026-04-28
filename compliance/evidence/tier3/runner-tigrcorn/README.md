@@ -1,6 +1,6 @@
 # Tier 3 evidence bundle — Runner profile: Tigrcorn
 
-This preserved bundle was materialized during the Phase 12 retained-boundary Tier 3 closeout.
+This preserved bundle was materialized during the retained-boundary Tier 3 closeout.
 
 - target: `Runner profile: Tigrcorn`
 - profile: `baseline`

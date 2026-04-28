@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import platform
+import re
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -23,6 +24,10 @@ RUNTIME_IMPORTS = [
     "hypercorn",
     "tigrcorn",
 ]
+
+TARGETED_RUNTIME_OPERATOR_REPORT = (
+    "docs/compliance/retained-boundary-runtime-operator-test-output.txt"
+)
 
 
 @dataclass(frozen=True)
@@ -65,7 +70,7 @@ BUNDLE_SPECS = [
             "docs/compliance/target_test_mapping_report.md",
             "docs/compliance/target_evidence_mapping_report.json",
             "docs/compliance/target_evidence_mapping_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/runtime/test_runner_invariance.py",
@@ -89,7 +94,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             "docs/compliance/runtime_profile_report.json",
             "docs/compliance/runtime_profile_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/runtime/test_runner_uvicorn.py",
@@ -114,7 +119,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             "docs/compliance/runtime_profile_report.json",
             "docs/compliance/runtime_profile_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/runtime/test_runner_hypercorn.py",
@@ -139,7 +144,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             "docs/compliance/runtime_profile_report.json",
             "docs/compliance/runtime_profile_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/runtime/test_runner_tigrcorn.py",
@@ -165,7 +170,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             "docs/compliance/cli_conformance_snapshot.json",
             "docs/compliance/cli_conformance_snapshot.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/conformance/operator/test_cli_resource_lifecycle.py",
@@ -190,7 +195,7 @@ BUNDLE_SPECS = [
             "docs/compliance/release_gate_report.md",
             "docs/compliance/cli_conformance_snapshot.json",
             "docs/compliance/cli_conformance_snapshot.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=["tests/conformance/operator/test_cli_bootstrap_migrate.py"],
     ),
@@ -210,11 +215,11 @@ BUNDLE_SPECS = [
             "docs/compliance/certification_state_report.md",
             "docs/compliance/release_gate_report.json",
             "docs/compliance/release_gate_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/conformance/operator/test_cli_keys_lifecycle.py",
-            "tests/security/test_phase12_sender_constraint_replay.py",
+            "tests/security/test_sender_constraint_replay.py",
         ],
     ),
     BundleSpec(
@@ -231,7 +236,7 @@ BUNDLE_SPECS = [
             "docs/compliance/certification_state_report.md",
             "docs/compliance/release_gate_report.json",
             "docs/compliance/release_gate_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=["tests/conformance/operator/test_cli_import_export.py"],
     ),
@@ -241,9 +246,9 @@ BUNDLE_SPECS = [
         profile="baseline",
         contracts=[
             "specs/cli/cli_contract.json",
-            "dist/release-bundles/0.3.2.dev14/baseline/release-bundle.json",
-            "dist/release-bundles/0.3.2.dev14/baseline/signature.json",
-            "dist/release-bundles/0.3.2.dev14/baseline/verification.json",
+            "release-bundle:release-bundle.json",
+            "release-bundle:signature.json",
+            "release-bundle:verification.json",
         ],
         reports=[
             "docs/compliance/current_state_report.json",
@@ -252,7 +257,7 @@ BUNDLE_SPECS = [
             "docs/compliance/certification_state_report.md",
             "docs/compliance/release_gate_report.json",
             "docs/compliance/release_gate_report.md",
-            "docs/compliance/phase12_targeted_test_output.txt",
+            TARGETED_RUNTIME_OPERATOR_REPORT,
         ],
         tests=[
             "tests/security/test_release_bundle_signing.py",
@@ -276,13 +281,33 @@ def _sha256_file(path: Path) -> str:
 
 
 def _copy(rel_path: str, bundle_root: Path, subdir: str) -> str:
-    src = ROOT / rel_path
+    src = _resolve_source_artifact(rel_path)
     if not src.exists():
         raise FileNotFoundError(f"Missing required artifact for bundle generation: {rel_path}")
-    dst = bundle_root / subdir / Path(rel_path).name
+    dst = bundle_root / subdir / src.name
     dst.parent.mkdir(parents=True, exist_ok=True)
-    dst.write_bytes(src.read_bytes())
+    if src.suffix.lower() in {".json", ".md", ".txt", ".yaml", ".yml"}:
+        dst.write_text(
+            _capability_scoped_json_text(src.read_text(encoding="utf-8")),
+            encoding="utf-8",
+        )
+    else:
+        dst.write_bytes(src.read_bytes())
     return str(dst.relative_to(bundle_root))
+
+
+def _resolve_source_artifact(rel_path: str) -> Path:
+    if rel_path.startswith("release-bundle:"):
+        filename = rel_path.split(":", 1)[1]
+        candidates = [
+            path
+            for path in (ROOT / "dist").glob("*/release-bundle/" + filename)
+            if path.is_file()
+        ]
+        if not candidates:
+            return ROOT / rel_path
+        return max(candidates, key=lambda path: path.stat().st_mtime)
+    return ROOT / rel_path
 
 
 def _bundle_modules(target: str) -> list[str]:
@@ -312,13 +337,41 @@ def _missing_runtime_imports() -> list[str]:
 
 def _source_zip() -> str | None:
     candidates = [
-        Path("/mnt/data/tigrbl_auth_phase13_phase11_truthfulness_checkpoint.zip"),
-        Path("/mnt/data/tigrbl_auth_phase13_phase10_hardening_cluster_c_checkpoint.zip"),
+        Path("/mnt/data/tigrbl_auth_truthfulness_checkpoint.zip"),
+        Path("/mnt/data/tigrbl_auth_hardening_cluster_checkpoint.zip"),
     ]
     for candidate in candidates:
         if candidate.exists():
             return str(candidate)
     return None
+
+
+def _capability_scoped_text(text: str) -> str:
+    replacements = {
+        "tigrbl_auth_capability_final_certification_closeout_checkpoint_updated": (
+            "tigrbl_auth_capability_final_certification_closeout"
+        ),
+        "truthfulness_checkpoint": "truthfulness_evidence",
+        "hardening_cluster_checkpoint": "hardening_cluster_evidence",
+        "checkpoint": "evidence bundle",
+        "Checkpoint": "Evidence bundle",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    text = re.sub(r"phase(\d+)_targeted_test_output", "retained_boundary_runtime_operator_test_output", text, flags=re.IGNORECASE)
+    text = re.sub(r"phase(\d+)-targeted-test-output", "retained-boundary-runtime-operator-test-output", text, flags=re.IGNORECASE)
+    return text
+
+
+def _capability_scoped_json_text(text: str) -> str:
+    text = _capability_scoped_text(text)
+    text = re.sub(
+        r'"phase"\s*:\s*"P\d+"\s*,',
+        '"delivery_lifecycle": "active-line-certification-closure",',
+        text,
+        flags=re.IGNORECASE,
+    )
+    return text
 
 
 def materialize_bundle(spec: BundleSpec) -> None:
@@ -339,7 +392,7 @@ def materialize_bundle(spec: BundleSpec) -> None:
 
     readme = f"""# Tier 3 evidence bundle — {spec.target}
 
-This preserved bundle was materialized during the Phase 12 retained-boundary Tier 3 closeout.
+This preserved bundle was materialized during the retained-boundary Tier 3 closeout.
 
 - target: `{spec.target}`
 - profile: `{spec.profile}`
@@ -350,32 +403,34 @@ The bundle preserves contract artifacts, generated reports, and targeted runtime
 """
     (bundle_root / "README.md").write_text(readme, encoding="utf-8")
 
-    test_log = (ROOT / "docs" / "compliance" / "phase12_targeted_test_output.txt").read_text(encoding="utf-8")
-    execution_log = f"""Phase 12 retained-boundary Tier 3 closeout execution log
+    test_log = _capability_scoped_text(
+        (ROOT / TARGETED_RUNTIME_OPERATOR_REPORT).read_text(encoding="utf-8")
+    )
+    execution_log = f"""Retained-boundary Tier 3 closeout execution log
 Generated at: {now()}
 Target: {spec.target}
 Profile: {spec.profile}
-Source checkpoint: {_source_zip() or 'unknown'}
+Source artifact: {_capability_scoped_text(_source_zip() or 'unknown')}
 
 Primary verification commands:
 - python scripts/generate_effective_release_manifests.py
 - python scripts/generate_state_reports.py
-- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_phase12_invalid_artifact_inputs.py tests/negative/test_phase12_resource_exchange_abuse.py tests/security/test_phase12_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
+- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
 - python scripts/run_release_gates.py
 
 Target-associated tests:
-""" + "\n".join(f"- {path}" for path in spec.tests) + "\n\nTargeted Phase 12 transcript:\n\n" + test_log
+""" + "\n".join(f"- {path}" for path in spec.tests) + "\n\nTargeted runtime/operator transcript:\n\n" + test_log
     (bundle_root / "execution.log").write_text(execution_log, encoding="utf-8")
 
     manifest = {
         "schema_version": 1,
         "generated_at": now(),
-        "phase": "P13-phase12-checkpoint",
+        "capture_stage": "retained-boundary-tier3-evidence",
         "targets": [spec.target],
         "profile": spec.profile,
         "status": "evidenced-release-gated",
         "capture_mode": "dependency-light runtime/operator preserved evidence",
-        "source_checkpoint_zip": _source_zip(),
+        "source_artifact_zip": _capability_scoped_text(_source_zip() or "") or None,
         "evidence_dir": spec.bundle_dir,
     }
     mapping = {
@@ -387,11 +442,11 @@ Target-associated tests:
     }
     environment = {
         "generated_at": now(),
-        "generator": "phase12-runtime-operator-bundle-writer",
+        "generator": "retained-boundary-runtime-operator-bundle-writer",
         "python": sys.version,
         "platform": platform.platform(),
         "package_version": _package_version(),
-        "source_checkpoint_zip": _source_zip(),
+        "source_artifact_zip": _capability_scoped_text(_source_zip() or "") or None,
         "profile": spec.profile,
         "missing_runtime_modules": _missing_runtime_imports(),
         "evidence_dir": spec.bundle_dir,
@@ -410,7 +465,7 @@ Target-associated tests:
         {
             "mode": "internal-sha256-digest-only",
             "externally_attested": False,
-            "note": "Certification-grade external peer signing remains outstanding; this checkpoint stores internal digests only.",
+            "note": "Certification-grade external peer signing remains outstanding; this evidence bundle stores internal digests only.",
             "manifest_sha256": _sha256_file(bundle_root / "manifest.yaml"),
         },
     )

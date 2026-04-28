@@ -1,20 +1,20 @@
-Phase 12 retained-boundary Tier 3 closeout execution log
-Generated at: 2026-03-24T07:05:52+00:00
+Retained-boundary Tier 3 closeout execution log
+Generated at: 2026-04-28T05:06:21+00:00
 Target: Release bundle and signature verification
 Profile: baseline
-Source checkpoint: /mnt/data/tigrbl_auth_phase13_phase11_truthfulness_checkpoint.zip
+Source artifact: unknown
 
 Primary verification commands:
 - python scripts/generate_effective_release_manifests.py
 - python scripts/generate_state_reports.py
-- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_phase12_invalid_artifact_inputs.py tests/negative/test_phase12_resource_exchange_abuse.py tests/security/test_phase12_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
+- pytest -q tests/runtime/test_runner_uvicorn.py tests/runtime/test_runner_hypercorn.py tests/runtime/test_runner_tigrcorn.py tests/runtime/test_runner_invariance.py tests/conformance/operator/test_cli_serve_runtime.py tests/conformance/operator/test_cli_resource_lifecycle.py tests/conformance/operator/test_cli_keys_lifecycle.py tests/conformance/operator/test_cli_import_export.py tests/conformance/operator/test_cli_bootstrap_migrate.py tests/negative/test_invalid_artifact_inputs.py tests/negative/test_resource_exchange_abuse.py tests/security/test_sender_constraint_replay.py tests/interop/test_peer_profile_catalog.py tests/interop/test_runner_profile_catalog_completeness.py tests/interop/test_operator_profile_catalog_completeness.py
 - python scripts/run_release_gates.py
 
 Target-associated tests:
 - tests/security/test_release_bundle_signing.py
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 
-Targeted Phase 12 transcript:
+Targeted runtime/operator transcript:
 
 
 tests/runtime/test_runner_invariance.py::test_runner_profile_hashes_and_registry_are_complete_and_invariant PASSED [  5%]
@@ -27,10 +27,10 @@ tests/conformance/operator/test_cli_resource_lifecycle.py::test_cli_resource_lif
 tests/conformance/operator/test_cli_keys_lifecycle.py::test_cli_keys_lifecycle_and_jwks_publication_are_stateful PASSED [ 47%]
 tests/conformance/operator/test_cli_import_export.py::test_cli_import_export_portability_round_trip PASSED [ 52%]
 tests/conformance/operator/test_cli_bootstrap_migrate.py::test_cli_bootstrap_and_migrate_lifecycle_commands_round_trip PASSED [ 58%]
-tests/negative/test_phase12_invalid_artifact_inputs.py::test_invalid_compact_jwe_and_assertion_inputs_are_rejected PASSED [ 64%]
-tests/negative/test_phase12_invalid_artifact_inputs.py::test_par_request_uri_rejects_expired_consumed_or_mismatched_rows PASSED [ 70%]
-tests/negative/test_phase12_resource_exchange_abuse.py::test_resource_indicator_abuse_cases_are_rejected PASSED [ 76%]
-tests/security/test_phase12_sender_constraint_replay.py::test_sender_constraint_replay_and_binding_fail_closed PASSED [ 82%]
+tests/negative/test_invalid_artifact_inputs.py::test_invalid_compact_jwe_and_assertion_inputs_are_rejected PASSED [ 64%]
+tests/negative/test_invalid_artifact_inputs.py::test_par_request_uri_rejects_expired_consumed_or_mismatched_rows PASSED [ 70%]
+tests/negative/test_resource_exchange_abuse.py::test_resource_indicator_abuse_cases_are_rejected PASSED [ 76%]
+tests/security/test_sender_constraint_replay.py::test_sender_constraint_replay_and_binding_fail_closed PASSED [ 82%]
 tests/interop/test_peer_profile_catalog.py::test_peer_profiles_exist PASSED [ 88%]
 tests/interop/test_runner_profile_catalog_completeness.py::test_runner_peer_profiles_cover_all_supported_runner_targets PASSED [ 94%]
 tests/interop/test_operator_profile_catalog_completeness.py::test_operator_peer_profile_covers_runtime_operator_targets PASSED [100%]
@@ -42,51 +42,51 @@ tests/interop/test_operator_profile_catalog_completeness.py::test_operator_peer_
     self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
 
 tests/conformance/operator/test_cli_serve_runtime.py:21
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_serve_runtime.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_serve_runtime.py:43
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_serve_runtime.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:43: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_serve_runtime.py:61
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_serve_runtime.py:61: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_serve_runtime.py:61: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_resource_lifecycle.py:20
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_resource_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_resource_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_keys_lifecycle.py:20
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_keys_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_keys_lifecycle.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_import_export.py:20
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_import_export.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_import_export.py:20: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
 tests/conformance/operator/test_cli_bootstrap_migrate.py:22
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/conformance/operator/test_cli_bootstrap_migrate.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/conformance/operator/test_cli_bootstrap_migrate.py:22: PytestUnknownMarkWarning: Unknown pytest.mark.conformance - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.conformance
 
-tests/negative/test_phase12_invalid_artifact_inputs.py:13
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/negative/test_phase12_invalid_artifact_inputs.py:13: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+tests/negative/test_invalid_artifact_inputs.py:13
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:13: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
-tests/negative/test_phase12_invalid_artifact_inputs.py:21
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/negative/test_phase12_invalid_artifact_inputs.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+tests/negative/test_invalid_artifact_inputs.py:21
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_invalid_artifact_inputs.py:21: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
-tests/negative/test_phase12_resource_exchange_abuse.py:8
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/negative/test_phase12_resource_exchange_abuse.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+tests/negative/test_resource_exchange_abuse.py:8
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/negative/test_resource_exchange_abuse.py:8: PytestUnknownMarkWarning: Unknown pytest.mark.negative - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.negative
 
-tests/security/test_phase12_sender_constraint_replay.py:27
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tests/security/test_phase12_sender_constraint_replay.py:27: PytestUnknownMarkWarning: Unknown pytest.mark.security - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+tests/security/test_sender_constraint_replay.py:27
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tests/security/test_sender_constraint_replay.py:27: PytestUnknownMarkWarning: Unknown pytest.mark.security - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
     @pytest.mark.security
 
 tests/conformance/operator/test_cli_bootstrap_migrate.py: 18 warnings
-  /mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/tigrbl_auth/cli/artifacts.py:588: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  /mnt/data/capabilitywork/extracted/tigrbl_auth_capability_final_certification_closeout/tigrbl_auth/cli/artifacts.py:588: PydanticDeprecatedSince20: The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
     if not (getattr(model, "model_fields", None) or getattr(model, "__fields__", None)):
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html

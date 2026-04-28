@@ -1,7 +1,7 @@
 {
   "label": "OIDC RP-Initiated Logout",
   "title": "OpenID Connect RP-Initiated Logout",
-  "runtime_status": "phase-7-browser-logout-runtime",
+  "runtime_status": "rp-initiated-logout-runtime",
   "public_surface": [
     "/logout"
   ],

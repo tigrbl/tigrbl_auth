@@ -1,6 +1,6 @@
 # Tier 3 evidence bundle — Key lifecycle and JWKS publication
 
-This preserved bundle was materialized during the Phase 12 retained-boundary Tier 3 closeout.
+This preserved bundle was materialized during the retained-boundary Tier 3 closeout.
 
 - target: `Key lifecycle and JWKS publication`
 - profile: `baseline`

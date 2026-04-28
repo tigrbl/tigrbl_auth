@@ -70,9 +70,9 @@ CATEGORY_TO_LANE = {
 }
 
 FOCUS_REPORTS = (
-    'step8-non-rfc-oidc-contracts-py313.json',
-    'step8-non-rfc-surface-cli-py313.json',
-    'step8-non-rfc-operator-runtime-py313.json',
+    'non-rfc-oidc-contracts-py313.json',
+    'non-rfc-surface-cli-py313.json',
+    'non-rfc-operator-runtime-py313.json',
 )
 
 

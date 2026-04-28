@@ -81,13 +81,13 @@ The retained implementation boundary is materially present at Tier 3 for **48 ta
 - Regenerated CLI reference and conformance artifacts so `docs/reference/CLI_SURFACE.md`, `docs/compliance/cli_conformance_snapshot.*`, and the generated contract artifacts are back in sync with `tigrbl_auth.cli.metadata`.
 - Restored dependency-provenance artifact enumeration so runbooks are included in `_dependency_artifact_paths()` and release/dependency manifests expose the expected install-profile documentation.
 - Added compatibility fields to `docs/compliance/peer_matrix_report.json` and its generator so existing downstream consumers can read both the canonical and compatibility key names.
-- Corrected a stale unit assertion in `tests/unit/test_phase4_cli_contract.py` so the test checks the current report semantics instead of expecting a non-gap message inside `open_gaps`.
+- Corrected a stale unit assertion in `tests/unit/test_cli_contract.py` so the test checks the current report semantics instead of expecting a non-gap message inside `open_gaps`.
 
 ## Files updated in this checkpoint
 
 - `tigrbl_auth/cli/reports.py`
 - `scripts/materialize_tier4_peer_evidence.py`
-- `tests/unit/test_phase4_cli_contract.py`
+- `tests/unit/test_cli_contract.py`
 - `docs/reference/CLI_SURFACE.md`
 - `docs/compliance/cli_conformance_snapshot.json`
 - `docs/compliance/cli_conformance_snapshot.md`

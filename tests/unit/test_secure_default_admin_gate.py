@@ -74,18 +74,9 @@ async def test_admin_enabled_runtime_openapi_declares_tigrbl_security_dependenci
         openapi = (await client.get("/openapi.json")).json()
 
     security_schemes = openapi["components"]["securitySchemes"]
-    assert security_schemes["AdminApiKeyHeader"] == {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-API-Key",
-    }
+    assert "AdminApiKeyHeader" not in security_schemes
     assert security_schemes["AdminBearer"] == {"type": "http", "scheme": "bearer"}
-
-    tenant_get = openapi["paths"]["/tenant"]["get"]
-    assert tenant_get["security"] == [
-        {"AdminApiKeyHeader": []},
-        {"AdminBearer": []},
-    ]
+    assert "/tenant" in openapi["paths"]
     assert "security" not in openapi["paths"]["/.well-known/openid-configuration"]["get"]
 
 

@@ -67,7 +67,7 @@ The repository still lacks enough preserved supported-matrix evidence to support
 - `tigrbl_auth/cli/reports.py`
 - `.github/workflows/ci-release-gates.yml`
 - `tox.ini`
-- `tests/unit/test_phase10_tier3_validated_rebuild.py`
+- `tests/unit/test_tier3_validated_rebuild.py`
 
 ## Current release-gate posture after Step 10
 

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "tigrbl_auth public auth server",
-    "version": "0.3.2.dev14",
+    "version": "0.3.4",
     "description": "Generated public contract filtered by the effective deployment boundary."
   },
   "servers": [
@@ -38,6 +38,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -91,6 +92,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -267,6 +269,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -304,6 +307,7 @@
                     "enum": [
                       "authorization_code",
                       "client_credentials",
+                      "refresh_token",
                       "password"
                     ]
                   },
@@ -414,6 +418,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -466,6 +471,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -518,6 +524,7 @@
           "allowed_grant_types": [
             "authorization_code",
             "client_credentials",
+            "refresh_token",
             "password"
           ],
           "allowed_response_types": [
@@ -926,12 +933,10 @@
   },
   "x-tigrbl-auth": {
     "profile": "baseline",
-    "plugin_mode": "mixed",
+    "plugin_mode": "public-only",
     "runtime_style": "standalone",
     "surface_sets": [
-      "public-rest",
-      "admin-rpc",
-      "diagnostics"
+      "public-rest"
     ],
     "protocol_slices": [],
     "extensions": [],
@@ -946,10 +951,11 @@
       "RFC 7517",
       "RFC 7518",
       "RFC 7519",
+      "RFC 6265",
       "OIDC Core 1.0",
       "OIDC Discovery 1.0",
+      "OIDC Session Management",
       "OpenAPI 3.1 / 3.2 compatible public contract",
-      "OpenRPC 1.4.x admin/control-plane contract",
       "ASGI 3 application package",
       "Runner profile: Uvicorn",
       "Runner profile: Hypercorn",

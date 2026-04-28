@@ -15,7 +15,7 @@ from tigrbl_auth.standards.oauth2.assertion_framework import (
     validate_temporal_claims,
 )
 
-STATUS: Final[str] = "phase-6-runtime-integrated"
+STATUS: Final[str] = "jwt-client-auth-runtime-integrated"
 RFC7523_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7523"
 REQUIRED_CLAIMS: Final[set[str]] = {"iss", "sub", "aud", "exp"}
 STRICT_CLIENT_ASSERTION_CLAIMS: Final[set[str]] = REQUIRED_CLAIMS | {"iat", "jti"}

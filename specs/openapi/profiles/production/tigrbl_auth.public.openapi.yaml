@@ -1332,12 +1332,10 @@ components:
       additionalProperties: true
 x-tigrbl-auth:
   profile: production
-  plugin_mode: mixed
+  plugin_mode: public-only
   runtime_style: standalone
   surface_sets:
   - public-rest
-  - admin-rpc
-  - diagnostics
   protocol_slices: []
   extensions: []
   active_targets:
@@ -1367,7 +1365,6 @@ x-tigrbl-auth:
   - OIDC Session Management
   - OIDC RP-Initiated Logout
   - OpenAPI 3.1 / 3.2 compatible public contract
-  - OpenRPC 1.4.x admin/control-plane contract
   - ASGI 3 application package
   - 'Runner profile: Uvicorn'
   - 'Runner profile: Hypercorn'

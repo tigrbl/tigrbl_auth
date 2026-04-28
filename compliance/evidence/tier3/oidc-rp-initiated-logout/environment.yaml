@@ -3,7 +3,7 @@ generator: phase-7-checkpoint-bundle-writer
 python: 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]
 platform: Linux-4.4.0-x86_64-with-glibc2.41
 package_version: 0.3.2.dev14
-source_checkpoint_zip: /mnt/data/tigrbl_auth_phase13_phase6_production_cluster_a_checkpoint.zip
+source_checkpoint_zip: /mnt/data/tigrbl_auth_capability_capability_production_cluster_a_checkpoint.zip
 profile: production
 missing_runtime_modules:
 - tigrbl

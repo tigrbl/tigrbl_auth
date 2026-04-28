@@ -1,44 +1,71 @@
 # Runtime Profile Report
 
-- Generated at: `20260324T070429Z`
+- Generated at: `20260428T041059Z`
 - Deployment profile: `baseline`
-- Application factory probe passed: `False`
-- Ready profiles: `0`
-- Missing profiles: `1`
-- Invalid profiles: `2`
+- Report mode: `live-probe`
+- Validated artifact source: `None`
+- Application factory probe passed: `True`
+- Ready profiles: `1`
+- Missing profiles: `2`
+- Invalid profiles: `0`
 - Application hash invariant: `True`
+- Pyproject requires-python: `>=3.10,<3.13`
+- Supported Python versions: `3.10, 3.11, 3.12`
+- Placeholder-supported runners: `0`
+- Declared CI-installable runners: `3`
+- Declared CI install/probe complete: `True`
+- Execution probes enabled: `True`
+- Surface probe passed: `True`
+- Surface probe endpoints: `4`
+- Serve-check passes: `1`
+- Execution probe complete: `True`
+- Required runtime cells: `14`
+- Validated runtime cells present: `0`
+- Validated runtime cells passed: `0`
+- Validated runtime matrix green: `False`
 
-## Application probe
+## Application Probe
 
-- Factory: `tigrbl_auth.api.app.build_app`
-- Message: `No module named 'tigrbl'`
+- App factory: `tigrbl_auth.api.app.build_app`
+- Message: Application factory materialized successfully with 6 active routes and 24 active targets.
 
-## Profiles
+## Surface Probe
 
-### `hypercorn`
+- Executed: `True`
+- Passed: `True`
+- Message: Runtime HTTP surface probes completed successfully.
+- Endpoint count: `4`
+- Passed endpoints: `4`
+- Failed endpoints: `0`
 
-- Status: `invalid`
-- Installed: `True`
-- Available module: `hypercorn`
-- Application hash: `6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43`
-- Runtime hash: `c77fd754cbf6743178d8cc51a004988e1c3f146dda9d6b6adf8a33c570dde01e`
-- Diagnostics: none
+## Runner Profiles
 
-### `tigrcorn`
+### Hypercorn (`hypercorn`)
 
 - Status: `missing`
 - Installed: `False`
-- Available module: `None`
-- Application hash: `6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43`
-- Runtime hash: `e5c4b6c30a0963fc4d19266bca81a908e98e52ab26fd6f7905b42ab8871f3a90`
-- Diagnostics:
-  - `warning` `runner-not-installed` — Runner adapter is declared but the backing server package is not installed in this environment.
+- Module: `None`
+- Placeholder-supported: `False`
+- Declared CI-installable: `True`
+- Serve check passed: `False`
+- Serve check message: Skipped because the runner is not installed in this environment.
 
-### `uvicorn`
+### Tigrcorn (`tigrcorn`)
 
-- Status: `invalid`
+- Status: `missing`
+- Installed: `False`
+- Module: `None`
+- Placeholder-supported: `False`
+- Declared CI-installable: `True`
+- Serve check passed: `False`
+- Serve check message: Skipped because the runner is not installed in this environment.
+
+### Uvicorn (`uvicorn`)
+
+- Status: `ready`
 - Installed: `True`
-- Available module: `uvicorn`
-- Application hash: `6bc1a1a15b32c0648a59427ad5d2e68761cd5f5d7ae89bef383842e1dc579b43`
-- Runtime hash: `daeb45c2834409d61b8a3c58d8289a003f4d0c14ab5c5335911338217e9c4029`
-- Diagnostics: none
+- Module: `uvicorn`
+- Placeholder-supported: `False`
+- Declared CI-installable: `True`
+- Serve check passed: `True`
+- Serve check message: Application factory materialized successfully with 7 active routes and 25 active targets.

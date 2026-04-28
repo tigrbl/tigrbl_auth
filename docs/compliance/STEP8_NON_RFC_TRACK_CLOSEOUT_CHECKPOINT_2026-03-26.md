@@ -79,8 +79,8 @@ Combined Step 8 focus total: **52 / 52 passed**.
 
 ### Additional checkpoint regressions
 
-- `tests/unit/test_phase8_non_rfc_track_checkpoint.py`: passed
-- `tests/unit/test_phase6_profile_discovery_runtime.py`: passed
+- `tests/unit/test_non_rfc_track_checkpoint.py`: passed
+- `tests/unit/test_profile_discovery_runtime.py`: passed
 - `tests/unit/test_rpc_registry_live.py`: passed
 
 ## Truthful status after this checkpoint

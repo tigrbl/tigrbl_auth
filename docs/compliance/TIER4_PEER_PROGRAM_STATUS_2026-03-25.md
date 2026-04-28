@@ -2,7 +2,7 @@
 
 ## Summary
 
-- external artifact root: `dist\tier4-external-root-fixtures\2026-03-25`
+- external artifact root: `None`
 - peer profile count: `16`
 - preserved external bundle count: `16`
 - valid independent external bundle count: `0`

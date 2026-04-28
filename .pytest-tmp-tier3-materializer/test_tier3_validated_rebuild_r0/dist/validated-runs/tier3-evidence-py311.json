@@ -1,0 +1,10 @@
+{
+  "kind": "tier3-evidence",
+  "python_version": "3.11",
+  "passed": true,
+  "rebuild_from_validated_runs_only": true,
+  "runtime_report_generated_from_validated_runs": false,
+  "validated_execution_report_present": true,
+  "runtime_profile_report_present": true,
+  "recognized_manifest_count": 6
+}

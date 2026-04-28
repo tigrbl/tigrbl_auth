@@ -10,9 +10,9 @@ from unittest.mock import MagicMock, patch, AsyncMock
 import contextvars
 
 import pytest
-from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
+from tigrbl_auth.framework import Request
 from tigrbl_auth.jwtoken import InvalidTokenError
 
 from tigrbl_auth.security.deps import (

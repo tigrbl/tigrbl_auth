@@ -1,10 +1,10 @@
 {
   "evidence_id": "evd:ssot-governance-dependency-compatibility-maintenance",
   "test_ids": [
-    "tst:tests-unit-test-phase1-published-dependency-model-py",
-    "tst:tests-unit-test-phase19-ssot-dependency-maintenance-traceability-py"
+    "tst:tests-unit-test-published-dependency-model-py",
+    "tst:tests-unit-test-ssot-dependency-maintenance-traceability-py"
   ],
-  "command": ".venv\\Scripts\\python.exe -m pytest tests\\unit\\test_secure_default_admin_gate.py tests\\unit\\test_openapi_contract_validity.py tests\\unit\\test_contract_payloads_deferred_upstream.py tests\\unit\\test_phase1_published_dependency_model.py tests\\unit\\test_phase19_ssot_dependency_maintenance_traceability.py --basetemp .pytest-tmp\\upstream-abstractions",
+  "command": ".venv\\Scripts\\python.exe -m pytest tests\\unit\\test_secure_default_admin_gate.py tests\\unit\\test_openapi_contract_validity.py tests\\unit\\test_contract_payloads_deferred_upstream.py tests\\unit\\test_published_dependency_model.py tests\\unit\\test_ssot_dependency_maintenance_traceability.py --basetemp .pytest-tmp\\upstream-abstractions",
   "result": "27 passed",
   "status": "passed",
   "feature_ids": [

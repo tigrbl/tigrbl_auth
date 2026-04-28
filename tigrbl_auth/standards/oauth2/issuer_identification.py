@@ -8,7 +8,7 @@ from urllib.parse import parse_qs, urlparse
 
 from tigrbl_auth.config.settings import settings
 
-STATUS: Final[str] = 'phase-9-authorization-response-issuer-runtime'
+STATUS: Final[str] = 'authorization-response-issuer-runtime'
 RFC9207_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9207'
 
 

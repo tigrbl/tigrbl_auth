@@ -68,7 +68,7 @@ async def _identity_triplet(db_session):
 async def test_token_revocation_and_introspection_state_is_durable(db_session):
     tenant, user, client = await _identity_triplet(db_session)
     now = datetime.now(timezone.utc)
-    token = "phase9-durable-access-token"
+    token = "capability-durable-access-token"
     claims = {
         "sub": str(user.id),
         "tid": str(tenant.id),
@@ -87,7 +87,7 @@ async def test_token_revocation_and_introspection_state_is_durable(db_session):
     assert active_payload["active"] is True
     assert active_payload["sub"] == str(user.id)
 
-    await revoke_token_async(token, token_type_hint="access_token", reason="phase9-durability")
+    await revoke_token_async(token, token_type_hint="access_token", reason="capability-durability")
     assert await is_token_revoked_async(token) is True
 
     inactive_payload = await introspect_token_async(token)
@@ -129,10 +129,10 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
     logout = await terminate_session_async(
         session.id,
         initiated_by="rp_logout",
-        reason="phase9-test",
+        reason="capability-test",
         frontchannel_required=True,
         backchannel_required=True,
-        metadata={"source": "phase9"},
+        metadata={"source": "capability"},
     )
     assert logout is not None
     assert logout.status == "pending"
@@ -177,7 +177,7 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
             "frontchannel_logout_uri": "https://client.example/frontchannel-logout",
         },
         contacts=["ops@example.com"],
-        software_id="phase9-client",
+        software_id="capability-client",
         software_version="9.0",
         registration_access_token_hash="rat-hash",
         registration_client_uri="https://issuer.example/register/" + str(client.id),
@@ -186,7 +186,7 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
 
     persisted = await get_client_registration_async(client.id)
     assert persisted is not None
-    assert persisted.software_id == "phase9-client"
+    assert persisted.software_id == "capability-client"
     assert persisted.registration_metadata["token_endpoint_auth_method"] == "client_secret_basic"
 
 

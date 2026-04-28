@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "kind": "pytest-guard",
+  "test_path": "tests/unit/test_provenance_naming_guard.py",
+  "summary": "Guards active SSOT test rows, active test sources, Tier 3 evidence report paths, active Tier 3 evidence metadata, retained-boundary generated bundle metadata, runtime status values, current document-authority projections, and active repository-state manifests against chronology-scoped proof names."
+}

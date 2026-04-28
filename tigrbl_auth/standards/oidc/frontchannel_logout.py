@@ -10,7 +10,7 @@ from uuid import UUID
 
 from tigrbl_auth.config.settings import settings
 
-STATUS: Final[str] = "phase-10-frontchannel-fanout-runtime"
+STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 
 

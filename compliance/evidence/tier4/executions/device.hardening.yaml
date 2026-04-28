@@ -9,7 +9,7 @@ required_targets:
 - RFC 8628
 required_artifacts:
 - tests/conformance/hardening/test_rfc8628_device_authorization.py
-- tests/negative/test_phase12_resource_exchange_abuse.py
+- tests/negative/test_resource_exchange_abuse.py
 required_peer_artifacts:
 - http-transcript.yaml
 - stdout.log

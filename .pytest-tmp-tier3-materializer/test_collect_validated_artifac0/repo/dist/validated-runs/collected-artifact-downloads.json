@@ -1,0 +1,30 @@
+{
+  "passed": false,
+  "download_root_present": true,
+  "download_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp-tier3-materializer\\test_collect_validated_artifac0\\downloads",
+  "artifact_count": 1,
+  "validated_manifest_count": 0,
+  "runtime_smoke_file_count": 0,
+  "install_substrate_file_count": 0,
+  "runtime_profile_file_count": 0,
+  "test_report_file_count": 0,
+  "migration_file_count": 0,
+  "compliance_report_file_count": 0,
+  "empty_artifact_count": 1,
+  "empty_artifacts": [
+    "validated-empty-artifact"
+  ],
+  "artifacts": [
+    {
+      "artifact": "validated-empty-artifact",
+      "source": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp-tier3-materializer\\test_collect_validated_artifac0\\downloads\\validated-empty-artifact",
+      "validated_manifests": [],
+      "runtime_smoke_files": [],
+      "install_substrate_files": [],
+      "runtime_profile_files": [],
+      "test_report_files": [],
+      "migration_files": [],
+      "compliance_report_files": []
+    }
+  ]
+}

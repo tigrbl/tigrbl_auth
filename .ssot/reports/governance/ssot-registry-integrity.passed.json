@@ -1,0 +1,9 @@
+{
+    "status":  "passed",
+    "kind":  "pytest",
+    "test_path":  "tests/unit/test_ssot_registry_integrity.py",
+    "command":  ".\\.uv-project-env\\Scripts\\python.exe -m pytest tests/unit/test_ssot_registry_integrity.py -q",
+    "passed":  3,
+    "failed":  0,
+    "generated_at":  "2026-04-28T01:08:40.3847913Z"
+}

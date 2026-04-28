@@ -3,8 +3,8 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 
 import pytest
-from tigrbl.requests import Request
 
+from tigrbl_auth.framework import Request
 from tigrbl_auth.orm import AuthCode
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 

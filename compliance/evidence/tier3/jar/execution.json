@@ -5,9 +5,9 @@
   "validation_date": "2026-03-24",
   "result": "passed",
   "tests": [
-    "tests/unit/test_phase9_hardening_cluster_b.py",
+    "tests/unit/test_hardening_cluster_b.py",
     "tests/conformance/hardening/test_rfc9101_jar.py"
   ],
-  "command": "PYTHONPATH=. pytest --noconftest -q tests/unit/test_phase9_hardening_cluster_b.py tests/conformance/hardening/test_rfc9101_jar.py tests/conformance/hardening/test_rfc9126_par.py tests/conformance/hardening/test_rfc9207_issuer_identification.py tests/conformance/hardening/test_rfc9396_rar.py",
-  "checkpoint_report": "docs/compliance/PHASE9_HARDENING_TARGET_CLUSTER_B.md"
+  "command": "PYTHONPATH=. pytest --noconftest -q tests/unit/test_hardening_cluster_b.py tests/conformance/hardening/test_rfc9101_jar.py tests/conformance/hardening/test_rfc9126_par.py tests/conformance/hardening/test_rfc9207_issuer_identification.py tests/conformance/hardening/test_rfc9396_rar.py",
+  "checkpoint_report": "docs/compliance/capability_HARDENING_TARGET_CLUSTER_B.md"
 }

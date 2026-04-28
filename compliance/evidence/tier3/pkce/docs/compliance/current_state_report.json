@@ -77,7 +77,7 @@
     "operator_plane_repo_mutation_dependency": false,
     "operator_plane_tenancy_enforced": true,
     "operator_plane_database_present": true,
-    "operator_plane_state_root": "/root/.local/state/tigrbl_auth/operator-plane/tigrbl_auth_phase13_certification_target_freeze_reconciled_2026-03-24-fd7da9822f4ba19c",
+    "operator_plane_state_root": "/root/.local/state/tigrbl_auth/operator-plane/tigrbl_auth_capability_certification_target_freeze_reconciled_2026-03-24-fd7da9822f4ba19c",
     "operator_plane_portability_schema_version": 3,
     "pyproject_requires_python": ">=3.10,<3.13",
     "serve_runtime_launcher_present": true,

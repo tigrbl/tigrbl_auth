@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from typing import Final, Iterable, Sequence
 from urllib.parse import urlparse
 
-STATUS: Final[str] = 'phase-8-resource-bound-runtime'
+STATUS: Final[str] = 'resource-bound-runtime'
 RFC8707_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc8707'
 
 

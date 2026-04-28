@@ -86,7 +86,7 @@ class StandardOwner:
 OWNER = StandardOwner(
     label='RFC 8693',
     title='OAuth 2.0 Token Exchange',
-    runtime_status='phase-8-lineage-audited-token-exchange-runtime',
+    runtime_status='lineage-audited-token-exchange-runtime',
     public_surface=('/token/exchange',),
     notes=(
         'Mounted token-exchange endpoint with subject-token validation, optional actor-token '

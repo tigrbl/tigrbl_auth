@@ -4,8 +4,8 @@
     "Gate failed: gate-15-boundary-enforcement",
     "Gate failed: gate-20-tests",
     "Gate failed: gate-45-evidence-peer",
-    "Gate failed: gate-60-release-signing (release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/issue-registry.yaml, compliance/claims/repository-state.yaml, compliance/evidence/manifest.yaml, compliance/evidence/tier4/bundles/README.md, compliance/evidence/tier4/candidates/assertion-client/execution.log, compliance/evidence/tier4/candidates/assertion-client/manifest.yaml, compliance/evidence/tier4/candidates/assertion-client/mapping.yaml, compliance/evidence/tier4/candidates/assertion-client/peer-artifacts/README.md)",
-    "Gate failed: gate-65-state-reports ([WinError 145] The directory is not empty: 'E:\\\\swarmauri_github\\\\tigrbl_auth\\\\dist\\\\feature-completeness-sandbox\\\\release-bundle')",
+    "Gate failed: gate-60-release-signing",
+    "Gate failed: gate-65-state-reports",
     "Gate failed: gate-75-test-classification",
     "Gate failed: gate-90-release"
   ],
@@ -20,7 +20,8 @@
     "clean_room_install_matrix_green": true,
     "in_scope_test_lanes_green": true,
     "migration_portability_passed": false,
-    "tier3_evidence_rebuilt_from_validated_runs": true
+    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "tier4_bundle_promotion_complete": false
   },
   "details": [
     {

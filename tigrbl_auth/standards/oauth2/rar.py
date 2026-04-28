@@ -15,7 +15,7 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel, ValidationError  # type: ignore
 
-STATUS: Final[str] = 'phase-9-rich-authorization-runtime'
+STATUS: Final[str] = 'rich-authorization-runtime'
 RFC9396_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9396'
 
 

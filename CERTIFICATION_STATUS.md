@@ -11,9 +11,9 @@
 - final_release_ready: `False`
 - target_profile_truth_reconciled_complete: `True`
 - profile_scope_mismatch_set_empty: `True`
-- validated_runtime_matrix_green: `True`
-- validated_test_lanes_green: `True`
-- migration_portability_passed: `True`
+- validated_runtime_matrix_green: `False`
+- validated_test_lanes_green: `False`
+- migration_portability_passed: `False`
 - claim_registry_canonical_complete: `True`
 - fapi2_security_profile_declared_complete: `True`
 - release_claims_machine_derivable: `True`
@@ -26,7 +26,14 @@
 - Tier 4 independent peer validation is not complete for the retained boundary.
 - The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
+- The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.
+- Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.
+- Validated clean-room install matrix evidence is incomplete or missing.
+- Validated in-scope certification lane execution evidence is incomplete or missing.
+- Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
+- Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.
 - One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
+- At least one claim row is still missing a machine-derived certification proof binding.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.
 
 ## Practical recommendation

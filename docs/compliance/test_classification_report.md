@@ -12,4 +12,4 @@
 
 ## Failures
 
-- Unclassified test files present: tests/unit/test_phase18_peer_bundle_completeness.py
+- Unclassified test files present: tests/unit/test_peer_bundle_completeness.py

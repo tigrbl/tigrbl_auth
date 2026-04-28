@@ -39,4 +39,4 @@ contract_snapshot_refs:
   - specs\openrpc\profiles\peer-claim\tigrbl_auth.admin.openrpc.json
   - compliance\claims\effective-target-claims.peer-claim.yaml
   - compliance\evidence\effective-release-evidence.peer-claim.yaml
-generated_at: '2026-04-08T00:07:17+00:00'
+generated_at: '2026-04-28T10:08:08+00:00'

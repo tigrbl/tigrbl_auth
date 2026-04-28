@@ -1,10 +1,10 @@
 schema_version: 1
 generated_at: '2026-03-23T21:47:13+00:00'
-phase: P13-phase6-checkpoint
+phase: P13-capability-checkpoint
 targets:
 - RFC 7516
 profile: production
 status: evidenced-release-gated
 capture_mode: dependency-light preserved evidence
-source_checkpoint_zip: /mnt/data/tigrbl_auth_phase13_phase5_operator_service_layer_checkpoint.zip
+source_checkpoint_zip: /mnt/data/tigrbl_auth_capability_capability_operator_service_layer_checkpoint.zip
 evidence_dir: compliance/evidence/tier3/jwe

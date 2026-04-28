@@ -29,10 +29,10 @@ The current package state is a blocked certification checkpoint. It is not certi
 - core targets missing from feature map: `0`
 - extension targets missing from feature map: `0`
 - settings-backed flags missing from flag map: `0`
-- validated inventory complete: `True`
-- validated runtime matrix green: `True`
-- validated test lanes green: `True`
-- migration portability passed: `True`
+- validated inventory complete: `False`
+- validated runtime matrix green: `False`
+- validated test lanes green: `False`
+- migration portability passed: `False`
 - Tier 4 missing external bundle count: `0`
 
 ## Key artifacts

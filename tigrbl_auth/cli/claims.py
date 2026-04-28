@@ -250,7 +250,7 @@ def run_lint(repo_root: Path, *, strict: bool = True, report_dir: Path | None = 
         failures.append(f"Banned legacy label {hit['label']} found in {hit['path']}")
 
     repo_state_info = repo_state.get("repository_state", {})
-    for required_state in ("phase_0_boundary_lock_complete", "phase_0_claim_boundary_rebaseline_complete", "certification_boundary_locked", "extension_rfc_quarantine_active"):
+    for required_state in ("boundary_lock_complete", "claim_boundary_rebaseline_complete", "certification_boundary_locked", "extension_rfc_quarantine_active"):
         if not repo_state_info.get(required_state):
             failures.append(f"Repository state does not declare {required_state}")
     if not repo_state_info.get("feature_flag_surface_modularity_complete"):

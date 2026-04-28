@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Final, Mapping
 
-STATUS: Final[str] = 'phase-9-durable-request-uri-runtime'
+STATUS: Final[str] = 'durable-request-uri-runtime'
 RFC9126_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9126'
 REQUEST_URI_PREFIX: Final[str] = 'urn:ietf:params:oauth:request_uri:'
 PAR_ONE_TIME_USE: Final[bool] = True

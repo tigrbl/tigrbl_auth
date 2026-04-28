@@ -17,5 +17,5 @@
 
 ## Details
 
-- classification_failures: `['Unclassified test files present: tests/unit/test_phase18_peer_bundle_completeness.py']`
+- classification_failures: `['Unclassified test files present: tests/unit/test_peer_bundle_completeness.py']`
 - missing_test_lane_manifests: `[]`

@@ -131,44 +131,6 @@ Operate on the claims plane.
       - `1` — Operation failed or verification did not pass.
       - `2` — CLI argument or contract validation failed before execution.
 
-### `adr`
-
-Architecture decision record operators.
-
-- Verbs:
-  - `list` — List ADRs.
-    - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-collection` — Collection output for list/status operations.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `show` — Show a single ADR.
-    - `--repo-root` — Repository root for governance automation.
-    - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `new` — Create a new ADR template.
-    - `--repo-root` — Repository root for governance automation.
-    - `--id` — Primary identifier for a single record.
-    - `--title` — Human-readable title.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-  - `index` — Generate the ADR index.
-    - `--repo-root` — Repository root for governance automation.
-    - `--report-dir` — Directory for generated reports.
-    - Output: `resource-collection` — Collection output for list/status operations.
-    - Exit codes:
-      - `0` — Operation completed successfully.
-      - `1` — Operation failed or verification did not pass.
-      - `2` — CLI argument or contract validation failed before execution.
-
 ### `doctor`
 
 Aggregate core verification, runtime profile, contracts, evidence, and gate status.
@@ -348,7 +310,7 @@ Migration-chain status, planning, application, and verification operators.
       - `1` — Operation failed or verification did not pass.
       - `2` — CLI argument or contract validation failed before execution.
       - `3` — Requested record or dependent resource was not found.
-  - `apply` — Apply the migration checkpoint plan.
+  - `apply` — Apply the migration evidence bundle plan.
     - `--repo-root` — Repository root for governance automation.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
@@ -394,6 +356,14 @@ Release automation and recertification operators.
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
       - `2` — CLI argument or contract validation failed before execution.
+  - `verify` — Verify a signed release bundle.
+    - `--repo-root` — Repository root for governance automation.
+    - `--bundle-dir` — Explicit bundle output directory.
+    - Output: `release-artifact` — Release bundle, signing, or recertification payload.
+    - Exit codes:
+      - `0` — Operation completed successfully.
+      - `1` — Operation failed or verification did not pass.
+      - `2` — CLI argument or contract validation failed before execution.
   - `status` — Summarize release bundle status.
     - `--repo-root` — Repository root for governance automation.
     - `--report-dir` — Directory for generated reports.
@@ -415,7 +385,7 @@ Release automation and recertification operators.
 
 ### `tenant`
 
-Stateful repository-backed tenant lifecycle operators.
+Stateful durable operator-plane tenant lifecycle operators.
 
 - Verbs:
   - `create` — Create a tenant record.
@@ -506,7 +476,7 @@ Stateful repository-backed tenant lifecycle operators.
 
 ### `client`
 
-Stateful repository-backed client lifecycle operators.
+Stateful durable operator-plane client lifecycle operators.
 
 - Verbs:
   - `create` — Create a client record.
@@ -608,7 +578,7 @@ Stateful repository-backed client lifecycle operators.
 
 ### `identity`
 
-Stateful repository-backed identity lifecycle operators.
+Stateful durable operator-plane identity lifecycle operators.
 
 - Verbs:
   - `create` — Create an identity record.
@@ -712,7 +682,7 @@ Stateful repository-backed identity lifecycle operators.
 
 ### `flow`
 
-Stateful repository-backed flow lifecycle operators.
+Stateful durable operator-plane flow lifecycle operators.
 
 - Verbs:
   - `create` — Create a flow record.
@@ -803,7 +773,7 @@ Stateful repository-backed flow lifecycle operators.
 
 ### `session`
 
-Stateful repository-backed session control operators.
+Stateful durable operator-plane session control operators.
 
 - Verbs:
   - `get` — Get a session record.
@@ -852,7 +822,7 @@ Stateful repository-backed session control operators.
 
 ### `token`
 
-Stateful repository-backed token control operators.
+Stateful durable operator-plane token control operators.
 
 - Verbs:
   - `get` — Get a token record.
@@ -910,7 +880,7 @@ Stateful repository-backed token control operators.
 
 ### `keys`
 
-Stateful repository-backed key lifecycle and JWKS publication operators.
+Stateful durable operator-plane key lifecycle and JWKS publication operators.
 
 - Verbs:
   - `generate` — Generate a key record.
@@ -1080,7 +1050,7 @@ Discovery and metadata operators bound to repository snapshots.
 
 ### `import`
 
-Import repository-backed operator state from portable artifacts.
+Import durable operator-plane state from portable artifacts.
 
 - Verbs:
   - `validate` — Validate import input.
@@ -1119,7 +1089,7 @@ Import repository-backed operator state from portable artifacts.
 
 ### `export`
 
-Export repository-backed operator state into portable artifacts.
+Export durable operator-plane state into portable artifacts.
 
 - Verbs:
   - `validate` — Validate export configuration.

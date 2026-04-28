@@ -8,15 +8,15 @@ tests:
 - tests/security/test_release_bundle_signing.py
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 contracts:
-- contracts/cli_contract.json
-- contracts/release-bundle.json
-- contracts/signature.json
-- contracts/verification.json
+- contracts\cli_contract.json
+- contracts\release-bundle.json
+- contracts\signature.json
+- contracts\verification.json
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\retained-boundary-runtime-operator-test-output.txt

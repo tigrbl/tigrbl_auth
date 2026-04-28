@@ -13,7 +13,7 @@ async def _wait_for_app(base_url: str) -> None:
     async with httpx.AsyncClient() as client:
         for _ in range(50):
             try:
-                resp = await client.get(f"{base_url}/system/healthz")
+                resp = await client.get(f"{base_url}/openapi.json")
                 if resp.status_code == 200:
                     return
             except Exception:

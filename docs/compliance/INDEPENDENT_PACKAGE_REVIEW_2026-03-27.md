@@ -244,7 +244,7 @@ This review checkpoint applies the following concrete fixes:
    - changed `release_gate_passed_at_phase_13` from `true` to `false`;
    - this now matches the red release-gate reports.
 
-3. `tests/unit/test_phase13_truthfulness_alignment.py`
+3. `tests/unit/test_truthfulness_alignment.py`
    - added regression coverage for the RFC 9700 default-alignment fix;
    - added regression coverage for the release-gate truthfulness fix.
 

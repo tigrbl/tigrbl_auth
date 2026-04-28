@@ -171,8 +171,8 @@ That criterion is **engineering-complete in this checkpoint for local dependency
 - `tigrbl_auth/plugin.py`
 - `tigrbl_auth/cli/runtime.py`
 - `scripts/clean_room_profile_smoke.py`
-- `tests/unit/test_phase2_app_factory_materialization.py`
-- `tests/unit/test_phase4_runtime_validation_matrix.py`
+- `tests/unit/test_app_factory_materialization.py`
+- `tests/unit/test_runtime_validation_matrix.py`
 - generated runtime/state documentation under `docs/compliance/`
 - `CURRENT_STATE.md`
 - `CERTIFICATION_STATUS.md`
@@ -181,9 +181,9 @@ That criterion is **engineering-complete in this checkpoint for local dependency
 
 The following focused regression set passed in this checkpoint:
 
-- `tests/unit/test_phase2_app_factory_materialization.py`
-- `tests/unit/test_phase3_public_route_contracts.py`
-- `tests/unit/test_phase4_runtime_validation_matrix.py`
+- `tests/unit/test_app_factory_materialization.py`
+- `tests/unit/test_public_route_contracts.py`
+- `tests/unit/test_runtime_validation_matrix.py`
 - `tests/unit/test_deployment_resolver.py`
 - `tests/unit/test_rfc9728_metadata_checkpoint.py`
 

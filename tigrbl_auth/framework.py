@@ -12,30 +12,19 @@ from __future__ import annotations
 
 from http import HTTPStatus as status
 
+import tigrbl as _tigrbl
 from pydantic import AnyHttpUrl, ConfigDict, EmailStr, constr, field_validator
 from sqlalchemy import Select, delete, or_, select
 from sqlalchemy.exc import IntegrityError
 
-from tigrbl import (
-    APIKey,
-    ColumnSpec,
-    Depends,
-    ForeignKeySpec,
-    HTMLResponse,
-    HTTPBearer,
-    HTTPException,
-    JSONResponse,
-    RedirectResponse,
-    Request,
-    Response,
-    TigrblApp,
-    TigrblRouter,
-    engine_ctx,
-    hook_ctx,
-    op_ctx,
-)
+from tigrbl import APIKey, HTTPBearer, TigrblApi, TigrblApp, engine_ctx, hook_ctx, op_ctx
+from tigrbl.bindings.rest.common import Request as _TigrblRequest
+from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
+from tigrbl.column.storage_spec import ForeignKeySpec
 from tigrbl.orm.tables._base import Base
-from tigrbl.shortcuts.column import F, IO, S, acol
+from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+from tigrbl.runtime.status import HTTPException
+from tigrbl.security import Depends
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
 from tigrbl.core.crud.params import Header
 from tigrbl.engine import HybridSession as AsyncSession, engine as build_engine
@@ -81,6 +70,37 @@ from swarmauri_keyprovider_local import LocalKeyProvider
 from swarmauri_signing_ed25519 import Ed25519EnvelopeSigner
 from swarmauri_signing_jws import JwsSignerVerifier
 from swarmauri_tokens_jwt import JWTTokenService
+
+
+class TigrblRouter(TigrblApi):
+    """Compatibility alias for the current Tigrbl API router facade."""
+
+    def include_tables(self, models: type | list[type] | tuple[type, ...]) -> None:
+        if isinstance(models, type):
+            model_seq = [models]
+        else:
+            model_seq = list(models)
+        self.include_models(model_seq)
+
+
+class Request(_TigrblRequest):
+    """Request facade accepting both current Tigrbl and ASGI-style construction."""
+
+    def __init__(
+        self,
+        method: str | dict[str, Any] | None = None,
+        path: str | None = None,
+        **kwargs: Any,
+    ) -> None:
+        scope = kwargs.pop("scope", None)
+        if method is None and scope is not None:
+            method = scope
+            scope = None
+        super().__init__(method or "GET", path, scope=scope, **kwargs)
+
+
+_tigrbl.TigrblRouter = TigrblRouter
+
 
 __all__ = [
     "AnyHttpUrl",

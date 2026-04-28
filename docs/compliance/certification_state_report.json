@@ -31,7 +31,7 @@
     "tier4_invalid_external_bundle_count": 16,
     "tier4_missing_external_bundle_count": 0,
     "tier4_peer_bundle_completeness_passed": false,
-    "tier4_external_handoff_template_present": false,
+    "tier4_external_handoff_template_present": true,
     "tier3_ready_targets": [
       "ASGI 3 application package",
       "Bootstrap and migration lifecycle",
@@ -93,7 +93,6 @@
     "tier3_evidence_rebuilt_from_validated_runs": false,
     "open_gaps": [
       "Tier 4 independent peer validation is not complete for the retained boundary.",
-      "The fill-in external handoff template package is not present for the full supported peer-profile set.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
       "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.",
@@ -102,14 +101,13 @@
       "Validated in-scope certification lane execution evidence is incomplete or missing.",
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
       "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
-      "Current generated public artifacts still drift from executable reality.",
       "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
+      "At least one claim row is still missing a machine-derived certification proof binding.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ]
   },
   "details": [
     "Tier 4 independent peer validation is not complete for the retained boundary.",
-    "The fill-in external handoff template package is not present for the full supported peer-profile set.",
     "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
     "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
     "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.",
@@ -118,8 +116,8 @@
     "Validated in-scope certification lane execution evidence is incomplete or missing.",
     "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
     "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
-    "Current generated public artifacts still drift from executable reality.",
     "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
+    "At least one claim row is still missing a machine-derived certification proof binding.",
     "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
   ]
 }

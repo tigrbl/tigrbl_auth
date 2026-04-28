@@ -1,21 +1,16 @@
 {
-  "passed": false,
-  "failures": [
-    "production: discovery artifact drifts from executable deployment metadata: oauth-protected-resource.json",
-    "hardening: discovery artifact drifts from executable deployment metadata: oauth-protected-resource.json",
-    "fapi2-security: discovery artifact drifts from executable deployment metadata: oauth-protected-resource.json",
-    "peer-claim: discovery artifact drifts from executable deployment metadata: oauth-protected-resource.json"
-  ],
+  "passed": true,
+  "failures": [],
   "warnings": [],
   "summary": {
     "contract_to_route_sync_passed": true,
     "route_to_contract_sync_passed": true,
     "target_to_contract_sync_passed": true,
     "cli_metadata_to_docs_sync_passed": true,
-    "runtime_plan_to_discovery_sync_passed": false,
+    "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
     "authoritative_current_doc_stale_ref_count": 0,
-    "historical_doc_stale_ref_count": 1,
+    "historical_doc_stale_ref_count": 0,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -487,11 +482,7 @@
     },
     "stale_doc_refs": {
       "authoritative": {},
-      "historical": {
-        "tigrbl_auth/security/openapi.py": [
-          "docs/compliance/certification_evidence_index.md"
-        ]
-      }
+      "historical": {}
     }
   }
 }

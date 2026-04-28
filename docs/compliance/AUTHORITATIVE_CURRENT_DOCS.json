@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "authority_spec": ".ssot\\specs\\SPEC-1052-ssot-document-authority.yaml",
+  "authority_spec": ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
   "projection_manifest": "compliance/targets/document-authority.yaml",
   "canonical_ssot_roots": [
     ".ssot/registry.json",

@@ -9,15 +9,15 @@ modules:
 tests:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 contracts:
-- contracts/cli_contract.json
-- contracts/CLI_SURFACE.md
+- contracts\cli_contract.json
+- contracts\CLI_SURFACE.md
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/cli_conformance_snapshot.json
-- reports/cli_conformance_snapshot.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\cli_conformance_snapshot.json
+- reports\cli_conformance_snapshot.md
+- reports\retained-boundary-runtime-operator-test-output.txt

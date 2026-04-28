@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final
 
-STATUS: Final[str] = "phase-3-mounted-release-path"
+STATUS: Final[str] = "dynamic-client-registration-runtime"
 RFC7591_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7591"
 
 

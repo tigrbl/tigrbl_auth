@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 import httpx
 import pytest
-from tigrbl.requests import Request
+from tigrbl_auth.framework import Request
 from tigrbl.runtime.status import HTTPException
 from http import HTTPStatus as status
 

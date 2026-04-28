@@ -3,9 +3,9 @@
   "failures": [],
   "warnings": [],
   "details": {
-    "bundle_root": "/mnt/data/phase12work/extracted/tigrbl_auth_phase13_final_certification_closeout_checkpoint_updated/dist/release-bundles/0.3.2.dev14/baseline",
+    "bundle_root": "E:\\swarmauri_github\\tigrbl_auth\\dist\\feature-completeness-sandbox-mlbxhr9q\\release-bundle",
     "verified_artifact_count": 4,
-    "signing_key_id": "ed25519:79439999e613a609cddf68b8",
+    "signing_key_id": "ed25519:d810f4f55d73207dd7d0f7aa",
     "artifact_labels": [
       "release-bundle",
       "claim-manifest",

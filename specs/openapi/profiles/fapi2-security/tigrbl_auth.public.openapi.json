@@ -2076,12 +2076,10 @@
   },
   "x-tigrbl-auth": {
     "profile": "fapi2-security",
-    "plugin_mode": "mixed",
+    "plugin_mode": "public-only",
     "runtime_style": "standalone",
     "surface_sets": [
-      "public-rest",
-      "admin-rpc",
-      "diagnostics"
+      "public-rest"
     ],
     "protocol_slices": [
       "device",
@@ -2131,7 +2129,6 @@
       "OIDC Front-Channel Logout",
       "OIDC Back-Channel Logout",
       "OpenAPI 3.1 / 3.2 compatible public contract",
-      "OpenRPC 1.4.x admin/control-plane contract",
       "ASGI 3 application package",
       "Runner profile: Uvicorn",
       "Runner profile: Hypercorn",

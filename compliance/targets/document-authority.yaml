@@ -1,6 +1,6 @@
 schema_version: 1
-generated_at: '2026-04-27'
-projection_of: .ssot\specs\SPEC-1052-ssot-document-authority.yaml
+generated_at: '2026-04-28'
+projection_of: .ssot/specs/SPEC-1052-ssot-document-authority.yaml
 canonical_ssot_roots:
 - .ssot/registry.json
 - .ssot/adr
@@ -31,7 +31,6 @@ archived_historical_roots:
 explicitly_deauthorized_current_adjacent_docs:
 - docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md
 - docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md
-- docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md
 - docs/compliance/PEER_MATRIX_REPORT.md
 - docs/compliance/TIER4_PROMOTION_MATRIX.md
 - docs/compliance/CERTIFIABLE_COMPLETION_PLAN_2026-03-26.md

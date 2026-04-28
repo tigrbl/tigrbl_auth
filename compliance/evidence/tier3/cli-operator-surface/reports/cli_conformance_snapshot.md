@@ -2,10 +2,10 @@
 
 > Generated from `tigrbl_auth.cli.metadata` and argparse parser snapshots.
 
-- Command count: `21`
-- Verb count: `87`
+- Command count: `20`
+- Verb count: `83`
 - Global flag count: `16`
-- Help snapshot count: `109`
+- Help snapshot count: `104`
 - Required command families present: `True`
 - Retired certified aliases absent: `True`
 - Passed: `True`
@@ -16,22 +16,21 @@
 
 ```text
 usage: tigrbl-auth [-h]
-                   {serve,verify,gate,spec,claims,evidence,adr,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
+                   {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
                    ...
 
 Tigrbl-native operator CLI for the tigrbl_auth package.
 
 positional arguments:
-  {serve,verify,gate,spec,claims,evidence,adr,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
+  {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
     serve               Launch the selected runner-backed ASGI runtime.
     verify              Run verification scopes against the repository boundary.
     gate                Run release gate checks.
     spec                Generate, diff, and validate public contract artifacts.
     claims              Lint and materialize effective claims.
     evidence            Build evidence manifests and peer profile artifacts.
-    adr                 List, inspect, create, and index ADRs.
     doctor              Run an aggregated repository health summary.
-    bootstrap           Bootstrap deployment artifacts and checkpoint lifecycle state.
+    bootstrap           Bootstrap deployment artifacts and evidence bundle lifecycle state.
     migrate             Inspect migration readiness and plans.
     release             Build release bundles and recertification reports.
     tenant              Manage tenant records.
@@ -47,246 +46,6 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-```
-
-### `tigrbl-auth adr`
-
-```text
-usage: tigrbl-auth adr [-h] [--config CONFIG] [--env-file ENV_FILE]
-                       [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                       [--tenant TENANT] [--issuer ISSUER]
-                       [--surface-set {admin-rpc,diagnostics,public-rest}]
-                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
-                       [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
-                       [--runtime-style {plugin,standalone}] [--strict]
-                       [--no-strict] [--format {json,yaml,text}]
-                       [--output OUTPUT] [--verbose] [--trace]
-                       {list,show,new,index} ...
-
-Architecture decision record operators.
-
-positional arguments:
-  {list,show,new,index}
-    list                List ADRs.
-    show                Show a single ADR.
-    new                 Create a new ADR template.
-    index               Generate the ADR index.
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
-  --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
-  --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rpc,diagnostics,public-rest}
-                        Installable surface set. May be supplied multiple times.
-  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
-                        Protocol slice. May be supplied multiple times.
-  --extension {dns-privacy,set,webauthn-passkeys,webpush}
-                        Extension boundary slice. May be supplied multiple times.
-  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
-                        Plugin composition mode.
-  --runtime-style {plugin,standalone}
-                        Runtime style for installation or standalone serving.
-  --strict              Fail closed when governance or certification checks fail.
-  --no-strict           Downgrade failures to warnings for exploratory use.
-  --format {json,yaml,text}
-                        Output format.
-  --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
-```
-
-### `tigrbl-auth adr index`
-
-```text
-usage: tigrbl-auth adr index [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                             [--tenant TENANT] [--issuer ISSUER]
-                             [--surface-set {admin-rpc,diagnostics,public-rest}]
-                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                             [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
-                             [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
-                             [--runtime-style {plugin,standalone}] [--strict]
-                             [--no-strict] [--format {json,yaml,text}]
-                             [--output OUTPUT] [--verbose] [--trace]
-                             [--repo-root REPO_ROOT] [--report-dir REPORT_DIR]
-
-Generate the ADR index markdown and JSON summaries.
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
-  --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
-  --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rpc,diagnostics,public-rest}
-                        Installable surface set. May be supplied multiple times.
-  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
-                        Protocol slice. May be supplied multiple times.
-  --extension {dns-privacy,set,webauthn-passkeys,webpush}
-                        Extension boundary slice. May be supplied multiple times.
-  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
-                        Plugin composition mode.
-  --runtime-style {plugin,standalone}
-                        Runtime style for installation or standalone serving.
-  --strict              Fail closed when governance or certification checks fail.
-  --no-strict           Downgrade failures to warnings for exploratory use.
-  --format {json,yaml,text}
-                        Output format.
-  --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
-  --repo-root REPO_ROOT
-                        Repository root for governance automation.
-  --report-dir REPORT_DIR
-                        Directory for generated reports.
-```
-
-### `tigrbl-auth adr list`
-
-```text
-usage: tigrbl-auth adr list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                            [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rpc,diagnostics,public-rest}]
-                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
-                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
-                            [--runtime-style {plugin,standalone}] [--strict]
-                            [--no-strict] [--format {json,yaml,text}]
-                            [--output OUTPUT] [--verbose] [--trace]
-                            [--repo-root REPO_ROOT]
-
-List ADRs and their titles.
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
-  --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
-  --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rpc,diagnostics,public-rest}
-                        Installable surface set. May be supplied multiple times.
-  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
-                        Protocol slice. May be supplied multiple times.
-  --extension {dns-privacy,set,webauthn-passkeys,webpush}
-                        Extension boundary slice. May be supplied multiple times.
-  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
-                        Plugin composition mode.
-  --runtime-style {plugin,standalone}
-                        Runtime style for installation or standalone serving.
-  --strict              Fail closed when governance or certification checks fail.
-  --no-strict           Downgrade failures to warnings for exploratory use.
-  --format {json,yaml,text}
-                        Output format.
-  --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
-  --repo-root REPO_ROOT
-                        Repository root for governance automation.
-```
-
-### `tigrbl-auth adr new`
-
-```text
-usage: tigrbl-auth adr new [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                           [--tenant TENANT] [--issuer ISSUER]
-                           [--surface-set {admin-rpc,diagnostics,public-rest}]
-                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                           [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
-                           [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
-                           [--runtime-style {plugin,standalone}] [--strict]
-                           [--no-strict] [--format {json,yaml,text}]
-                           [--output OUTPUT] [--verbose] [--trace]
-                           [--repo-root REPO_ROOT] [--id ID] [--title TITLE]
-
-Create a new ADR markdown document from a template.
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
-  --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
-  --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rpc,diagnostics,public-rest}
-                        Installable surface set. May be supplied multiple times.
-  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
-                        Protocol slice. May be supplied multiple times.
-  --extension {dns-privacy,set,webauthn-passkeys,webpush}
-                        Extension boundary slice. May be supplied multiple times.
-  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
-                        Plugin composition mode.
-  --runtime-style {plugin,standalone}
-                        Runtime style for installation or standalone serving.
-  --strict              Fail closed when governance or certification checks fail.
-  --no-strict           Downgrade failures to warnings for exploratory use.
-  --format {json,yaml,text}
-                        Output format.
-  --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
-  --repo-root REPO_ROOT
-                        Repository root for governance automation.
-  --id ID               Primary identifier for a single record.
-  --title TITLE         Human-readable title.
-```
-
-### `tigrbl-auth adr show`
-
-```text
-usage: tigrbl-auth adr show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                            [--tenant TENANT] [--issuer ISSUER]
-                            [--surface-set {admin-rpc,diagnostics,public-rest}]
-                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
-                            [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
-                            [--plugin-mode {admin-only,diagnostics-only,mixed,public-only}]
-                            [--runtime-style {plugin,standalone}] [--strict]
-                            [--no-strict] [--format {json,yaml,text}]
-                            [--output OUTPUT] [--verbose] [--trace]
-                            [--repo-root REPO_ROOT] [--id ID]
-
-Render a selected ADR.
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
-  --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
-  --issuer ISSUER       Issuer override for discovery and contract generation.
-  --surface-set {admin-rpc,diagnostics,public-rest}
-                        Installable surface set. May be supplied multiple times.
-  --slice {device,dpop,jar,mtls,par,rar,token-exchange}
-                        Protocol slice. May be supplied multiple times.
-  --extension {dns-privacy,set,webauthn-passkeys,webpush}
-                        Extension boundary slice. May be supplied multiple times.
-  --plugin-mode {admin-only,diagnostics-only,mixed,public-only}
-                        Plugin composition mode.
-  --runtime-style {plugin,standalone}
-                        Runtime style for installation or standalone serving.
-  --strict              Fail closed when governance or certification checks fail.
-  --no-strict           Downgrade failures to warnings for exploratory use.
-  --format {json,yaml,text}
-                        Output format.
-  --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
-  --repo-root REPO_ROOT
-                        Repository root for governance automation.
-  --id ID               Primary identifier for a single record.
 ```
 
 ### `tigrbl-auth bootstrap`
@@ -359,7 +118,7 @@ usage: tigrbl-auth bootstrap apply [-h] [--config CONFIG]
                                    [--bundle-dir BUNDLE_DIR] [--yes]
                                    [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Materialize bootstrap manifests and record an applied bootstrap checkpoint.
+Materialize bootstrap manifests and record an applied bootstrap evidence bundle.
 
 options:
   -h, --help            show this help message and exit
@@ -516,7 +275,7 @@ usage: tigrbl-auth bootstrap verify [-h] [--config CONFIG]
                                     [--repo-root REPO_ROOT]
                                     [--report-dir REPORT_DIR]
 
-Verify bootstrap manifests, effective artifacts, and applied checkpoint state.
+Verify bootstrap manifests, effective artifacts, and applied evidence bundle state.
 
 options:
   -h, --help            show this help message and exit
@@ -3794,7 +3553,7 @@ positional arguments:
   {status,plan,apply,verify}
     status              Show migration status.
     plan                Emit migration plan details.
-    apply               Apply the migration checkpoint plan.
+    apply               Apply the migration evidence bundle plan.
     verify              Verify migration artifacts.
 
 options:
@@ -3841,7 +3600,7 @@ usage: tigrbl-auth migrate apply [-h] [--config CONFIG] [--env-file ENV_FILE]
                                  [--yes] [--dry-run] [--wait]
                                  [--timeout TIMEOUT]
 
-Record a migration application checkpoint for the structured plan.
+Record a migration application evidence bundle for the structured plan.
 
 options:
   -h, --help            show this help message and exit

@@ -119,8 +119,8 @@ That criterion is **not yet certifiably satisfied** in this checkpoint because:
 - `constraints/base.txt`
 - `constraints/runner-uvicorn.txt`
 - `constraints/dependency-lock.json`
-- `tests/unit/test_phase1_published_dependency_model.py`
-- `tests/unit/test_phase2_app_factory_materialization.py`
+- `tests/unit/test_published_dependency_model.py`
+- `tests/unit/test_app_factory_materialization.py`
 - generated current-state/compliance reports under `docs/compliance/`
 - `CURRENT_STATE.md`
 - `CERTIFICATION_STATUS.md`
@@ -129,9 +129,9 @@ That criterion is **not yet certifiably satisfied** in this checkpoint because:
 
 The following focused regression set passed in this checkpoint:
 
-- `tests/unit/test_phase1_published_dependency_model.py`
-- `tests/unit/test_phase1_clean_room_install_substrate.py`
-- `tests/unit/test_phase2_app_factory_materialization.py`
-- `tests/unit/test_phase2_runner_adapter_runtime_layer.py`
+- `tests/unit/test_published_dependency_model.py`
+- `tests/unit/test_clean_room_install_substrate.py`
+- `tests/unit/test_app_factory_materialization.py`
+- `tests/unit/test_runner_adapter_runtime_layer.py`
 
 Total passed in the focused set: **15**.

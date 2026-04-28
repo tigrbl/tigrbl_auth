@@ -22,7 +22,7 @@ from uuid import UUID
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
 
-STATUS: Final[str] = "phase-7-browser-session-runtime"
+STATUS: Final[str] = "browser-session-runtime"
 COOKIE_VALUE_VERSION: Final[str] = "v1"
 DEFAULT_COOKIE_NAME: Final[str] = "sid"
 

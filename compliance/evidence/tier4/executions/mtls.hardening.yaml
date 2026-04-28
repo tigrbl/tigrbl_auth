@@ -10,7 +10,7 @@ required_targets:
 - RFC 9700
 required_artifacts:
 - tests/conformance/hardening/test_rfc8705_mtls.py
-- tests/security/test_phase12_sender_constraint_replay.py
+- tests/security/test_sender_constraint_replay.py
 required_peer_artifacts:
 - http-transcript.yaml
 - certificate-chain.pem

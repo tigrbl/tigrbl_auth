@@ -10,13 +10,13 @@
 - tests/conformance/operator/test_cli_release_lifecycle.py
 - tests/security/test_release_bundle_signing.py
 - tests/e2e/test_release_gate_catalog.py
-- tests/unit/test_phase5_operator_service_layer.py
-- tests/unit/test_phase6_operator_control_plane.py
+- tests/unit/test_operator_service_layer.py
+- tests/unit/test_operator_control_plane.py
 - tests/runtime/test_runner_invariance.py
-- tests/unit/test_phase4_cli_contract.py
+- tests/unit/test_cli_contract.py
 - tests/unit/test_cli_surface_checkpoint.py
 - tests/unit/test_contract_generation_live.py
-- tests/unit/test_phase9_feature_completeness_checkpoint.py
+- tests/unit/test_feature_completeness_checkpoint.py
 
 ## Result
 

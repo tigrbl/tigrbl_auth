@@ -25,7 +25,7 @@ from typing import Any, Final, Iterable, Mapping, Sequence
 
 from tigrbl_auth.config.settings import settings
 
-STATUS: Final[str] = 'phase-9-request-object-runtime'
+STATUS: Final[str] = 'request-object-runtime'
 RFC9101_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9101'
 SUPPORTED_JAR_ALG_VALUES: Final[tuple[str, ...]] = ('HS256', 'HS384', 'HS512')
 DEFAULT_REQUEST_OBJECT_LIFETIME_SECONDS: Final[int] = 300

@@ -95,7 +95,7 @@ The generated surfaces were rebuilt so the repository returned to truthful gate 
 
 Passed locally:
 
-- `tests/unit/test_phase5_certification_lane_evidence.py`
+- `tests/unit/test_certification_lane_evidence.py`
 - `tests/unit/test_rfc9396_authorization_details.py`
 
 Result: **11 passed**.

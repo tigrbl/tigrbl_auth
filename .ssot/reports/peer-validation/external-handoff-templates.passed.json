@@ -1,0 +1,27 @@
+{
+    "schema_version":  1,
+    "status":  "passed",
+    "generated_at":  "2026-04-28T10:05:57Z",
+    "test":  "tests/interop/test_tier4_external_handoff_templates.py",
+    "command":  ".\\\\.uv-project-env\\\\Scripts\\\\python.exe -m pytest tests/interop/test_tier4_external_handoff_templates.py -q",
+    "profile_count":  16,
+    "template_root":  "dist/tier4-external-handoff",
+    "profiles":  [
+                     "assertion-client",
+                     "browser",
+                     "client-mgmt",
+                     "device",
+                     "dpop",
+                     "gateway",
+                     "mtls",
+                     "native",
+                     "ops-cli",
+                     "par-jar-rar",
+                     "resource-server",
+                     "rp-session-logout",
+                     "runner-hypercorn",
+                     "runner-tigrcorn",
+                     "runner-uvicorn",
+                     "spa"
+                 ]
+}

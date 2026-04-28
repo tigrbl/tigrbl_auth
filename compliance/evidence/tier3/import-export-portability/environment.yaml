@@ -1,12 +1,11 @@
-generated_at: '2026-03-24T07:05:52+00:00'
-generator: phase12-runtime-operator-bundle-writer
-python: 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]
-platform: Linux-4.4.0-x86_64-with-glibc2.41
-package_version: 0.3.2.dev14
-source_checkpoint_zip: /mnt/data/tigrbl_auth_phase13_phase11_truthfulness_checkpoint.zip
+generated_at: '2026-04-28T05:06:21+00:00'
+generator: retained-boundary-runtime-operator-bundle-writer
+python: 3.12.5 (tags/v3.12.5:ff3bc82, Aug  6 2024, 20:45:27) [MSC v.1940 64 bit (AMD64)]
+platform: Windows-10-10.0.19045-SP0
+package_version: 0.3.4
+source_artifact_zip: null
 profile: baseline
 missing_runtime_modules:
-- tigrbl
-- sqlalchemy
+- hypercorn
 - tigrcorn
 evidence_dir: compliance/evidence/tier3/import-export-portability

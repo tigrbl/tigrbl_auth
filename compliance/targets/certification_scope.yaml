@@ -778,7 +778,7 @@ targets:
     - tests/integration/test_full_workflow.py
     - tests/integration/test_migration_upgrade_downgrade_safety.py
     - tests/integration/test_persistence_lifecycle_durability.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     classes:
     - conformance
     - integration
@@ -834,7 +834,7 @@ targets:
     - tests/conformance/production/test_rfc7591_dynamic_client_registration.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     - tests/unit/test_rfc7591_client_registration_endpoint.py
     classes:
     - conformance
@@ -890,10 +890,10 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_phase8_hardening_cluster_a.py
+    - tests/unit/test_hardening_cluster_a.py
     - tests/conformance/hardening/test_rfc7592_client_registration_management.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/unit/test_rfc7592_client_management_endpoint.py
     classes:
     - unit
@@ -950,7 +950,7 @@ targets:
     - tests/integration/test_migration_upgrade_downgrade_safety.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/integration/test_rfc7662.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     classes:
     - conformance
     - integration
@@ -1075,12 +1075,12 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_phase8_hardening_cluster_a.py
+    - tests/unit/test_hardening_cluster_a.py
     - tests/conformance/hardening/test_rfc8628_device_authorization.py
     - tests/integration/test_device_code_flow.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
     - tests/integration/test_rfc8628.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1137,12 +1137,12 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_phase8_hardening_cluster_a.py
+    - tests/unit/test_hardening_cluster_a.py
     - tests/conformance/hardening/test_rfc8693_token_exchange.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
     - tests/integration/test_rfc8693_token_exchange_endpoint.py
     - tests/integration/test_token_exchange_flow.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1207,11 +1207,11 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc8705_mtls.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_phase10_hardening_cluster_c.py
+    - tests/unit/test_hardening_cluster_c.py
     classes:
     - conformance
     - integration
@@ -1277,10 +1277,10 @@ targets:
     status: mounted
   tests:
     paths:
-    - tests/unit/test_phase8_hardening_cluster_a.py
+    - tests/unit/test_hardening_cluster_a.py
     - tests/conformance/hardening/test_rfc8707_resource_indicators.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     classes:
     - unit
     - conformance
@@ -1346,7 +1346,7 @@ targets:
     paths:
     - tests/conformance/production/test_rfc9068_jwt_profile.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
@@ -1411,11 +1411,11 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9101_jar.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_phase9_hardening_cluster_b.py
+    - tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1473,11 +1473,11 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9126_par.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase3_public_route_contracts.py
+    - tests/unit/test_public_route_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_phase9_hardening_cluster_b.py
+    - tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1534,9 +1534,9 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9207_issuer_identification.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase6_profile_discovery_runtime.py
+    - tests/unit/test_profile_discovery_runtime.py
     - tests/unit/test_rfc9207_issuer_identification.py
-    - tests/unit/test_phase9_hardening_cluster_b.py
+    - tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1596,11 +1596,11 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9396_rar.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_phase9_hardening_cluster_b.py
+    - tests/unit/test_hardening_cluster_b.py
     classes:
     - conformance
     - integration
@@ -1661,11 +1661,11 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9449_dpop.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/unit/test_phase7_advanced_surface_contracts.py
+    - tests/unit/test_advanced_surface_contracts.py
     - tests/interop/test_peer_counterpart_catalog.py
     - tests/interop/test_peer_matrix_artifacts.py
     - tests/interop/test_tier4_promotion_fail_closed.py
-    - tests/unit/test_phase10_hardening_cluster_c.py
+    - tests/unit/test_hardening_cluster_c.py
     classes:
     - conformance
     - integration
@@ -1967,10 +1967,10 @@ targets:
     paths:
     - tests/conformance/hardening/test_rfc9700_security_bcp.py
     - tests/integration/test_profile_surface_and_contract_alignment.py
-    - tests/negative/test_phase6_hardening_runtime_enforcement.py
-    - tests/unit/test_phase6_profile_discovery_runtime.py
+    - tests/negative/test_hardening_runtime_enforcement.py
+    - tests/unit/test_profile_discovery_runtime.py
     - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
-    - tests/unit/test_phase10_hardening_cluster_c.py
+    - tests/unit/test_hardening_cluster_c.py
     classes:
     - conformance
     - integration
@@ -2197,7 +2197,7 @@ targets:
     - tests/integration/test_migration_upgrade_downgrade_safety.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_phase7_session_logout_cluster_b.py
+    - tests/unit/test_session_logout_cluster_b.py
     classes:
     - conformance
     - integration
@@ -2262,7 +2262,7 @@ targets:
     - tests/integration/test_migration_upgrade_downgrade_safety.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_phase7_session_logout_cluster_b.py
+    - tests/unit/test_session_logout_cluster_b.py
     classes:
     - conformance
     - integration
@@ -2323,7 +2323,7 @@ targets:
     - tests/conformance/hardening/test_oidc_frontchannel_logout.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_phase10_hardening_cluster_c.py
+    - tests/unit/test_hardening_cluster_c.py
     classes:
     - conformance
     - integration
@@ -2384,7 +2384,7 @@ targets:
     - tests/conformance/hardening/test_oidc_backchannel_logout.py
     - tests/integration/test_persistence_lifecycle_durability.py
     - tests/negative/test_cookie_and_logout_abuse_cases.py
-    - tests/unit/test_phase10_hardening_cluster_c.py
+    - tests/unit/test_hardening_cluster_c.py
     classes:
     - conformance
     - integration
@@ -2547,9 +2547,9 @@ targets:
     paths:
     - tests/integration/test_profile_surface_and_contract_alignment.py
     - tests/unit/test_deployment_resolver.py
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
-    - tests/unit/test_phase2_runner_adapter_runtime_layer.py
-    - tests/unit/test_phase3_runtime_launcher.py
+    - tests/unit/test_claim_boundary_rebaseline.py
+    - tests/unit/test_runner_adapter_runtime_layer.py
+    - tests/unit/test_runtime_launcher.py
     - tests/runtime/test_runner_invariance.py
     - tests/conformance/operator/test_cli_serve_runtime.py
     classes:
@@ -2604,10 +2604,10 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
-    - tests/unit/test_phase2_runner_adapter_runtime_layer.py
+    - tests/unit/test_claim_boundary_rebaseline.py
+    - tests/unit/test_runner_adapter_runtime_layer.py
     - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_phase3_runtime_launcher.py
+    - tests/unit/test_runtime_launcher.py
     - tests/runtime/test_runner_uvicorn.py
     - tests/runtime/test_runner_invariance.py
     - tests/conformance/operator/test_cli_serve_runtime.py
@@ -2663,10 +2663,10 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
-    - tests/unit/test_phase2_runner_adapter_runtime_layer.py
+    - tests/unit/test_claim_boundary_rebaseline.py
+    - tests/unit/test_runner_adapter_runtime_layer.py
     - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_phase3_runtime_launcher.py
+    - tests/unit/test_runtime_launcher.py
     - tests/runtime/test_runner_hypercorn.py
     - tests/runtime/test_runner_invariance.py
     - tests/conformance/operator/test_cli_serve_runtime.py
@@ -2722,10 +2722,10 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
-    - tests/unit/test_phase2_runner_adapter_runtime_layer.py
+    - tests/unit/test_claim_boundary_rebaseline.py
+    - tests/unit/test_runner_adapter_runtime_layer.py
     - tests/unit/test_runtime_cfg.py
-    - tests/unit/test_phase3_runtime_launcher.py
+    - tests/unit/test_runtime_launcher.py
     - tests/runtime/test_runner_tigrcorn.py
     - tests/runtime/test_runner_invariance.py
     - tests/conformance/operator/test_cli_serve_runtime.py
@@ -2782,11 +2782,11 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
+    - tests/unit/test_claim_boundary_rebaseline.py
     - tests/unit/test_cli_surface_checkpoint.py
-    - tests/unit/test_phase3_runtime_launcher.py
-    - tests/unit/test_phase4_cli_contract.py
-    - tests/unit/test_phase5_operator_service_layer.py
+    - tests/unit/test_runtime_launcher.py
+    - tests/unit/test_cli_contract.py
+    - tests/unit/test_operator_service_layer.py
     - tests/conformance/operator/test_cli_serve_runtime.py
     - tests/conformance/operator/test_cli_resource_lifecycle.py
     - tests/conformance/operator/test_cli_keys_lifecycle.py
@@ -2839,9 +2839,9 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
+    - tests/unit/test_claim_boundary_rebaseline.py
     - tests/e2e/test_release_gate_catalog.py
-    - tests/unit/test_phase4_cli_contract.py
+    - tests/unit/test_cli_contract.py
     - tests/conformance/operator/test_cli_bootstrap_migrate.py
     classes:
     - unit
@@ -2892,11 +2892,11 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
+    - tests/unit/test_claim_boundary_rebaseline.py
     - tests/unit/test_jwks_rotation.py
     - tests/unit/test_rpc_registry_live.py
-    - tests/unit/test_phase4_cli_contract.py
-    - tests/unit/test_phase5_operator_service_layer.py
+    - tests/unit/test_cli_contract.py
+    - tests/unit/test_operator_service_layer.py
     - tests/conformance/operator/test_cli_keys_lifecycle.py
     classes:
     - unit
@@ -2944,9 +2944,9 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
-    - tests/unit/test_phase4_cli_contract.py
-    - tests/unit/test_phase5_operator_service_layer.py
+    - tests/unit/test_claim_boundary_rebaseline.py
+    - tests/unit/test_cli_contract.py
+    - tests/unit/test_operator_service_layer.py
     - tests/conformance/operator/test_cli_import_export.py
     classes:
     - unit
@@ -2993,10 +2993,10 @@ targets:
     status: tracked
   tests:
     paths:
-    - tests/unit/test_phase0_claim_boundary_rebaseline.py
+    - tests/unit/test_claim_boundary_rebaseline.py
     - tests/security/test_release_bundle_signing.py
-    - tests/unit/test_phase1_published_dependency_model.py
-    - tests/security/test_phase12_sender_constraint_replay.py
+    - tests/unit/test_published_dependency_model.py
+    - tests/security/test_sender_constraint_replay.py
     classes:
     - unit
     - security

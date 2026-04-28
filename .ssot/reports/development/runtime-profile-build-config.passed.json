@@ -1,0 +1,15 @@
+{
+  "command": "python -m pytest -q tests/unit/test_runtime_profile_configuration.py tests/unit/test_ssot_registry_integrity.py --basetemp=<repo-local-unique-temp>",
+  "generated_at": "2026-04-28T08:06:45Z",
+  "package": "tigrbl_auth",
+  "passed": true,
+  "proof": {
+    "passed": 9,
+    "skipped": 0
+  },
+  "scope": [
+    "runtime profile YAML package-resource inclusion",
+    "runtime profile loader and resolver behavior",
+    "SSOT registry JSON integrity"
+  ]
+}

@@ -52,11 +52,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\assertion-client--assertion-client-harness",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -78,11 +78,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\browser--browser-rp",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -97,11 +97,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\client-mgmt--client-mgmt-harness",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -115,11 +115,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\device--device-client",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -134,11 +134,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\dpop--dpop-client",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -158,11 +158,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\gateway--gateway-peer",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -177,11 +177,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\mtls--mtls-peer",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -198,11 +198,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\native--native-client",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -222,11 +222,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\ops-cli--ops-cli-harness",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -243,11 +243,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\par-jar-rar--par-jar-rar-client",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -267,11 +267,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\resource-server--resource-server",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -289,11 +289,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\rp-session-logout--rp-session-logout-rp",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -308,11 +308,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-hypercorn--hypercorn-runner",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -327,11 +327,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-tigrcorn--tigrcorn-runner",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -346,11 +346,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-uvicorn--uvicorn-runner",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     },
     {
@@ -367,11 +367,11 @@
       "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\spa--spa-rp",
       "promotable_targets": [],
       "validation_failures": [
-        "independence attestation class mismatch",
-        "independence attestation missing package_team_member=false",
-        "independence attestation missing repository_fixture_generated=false",
-        "non-independent evidence source",
-        "peer operator is not independent"
+        "non-qualifying bundle status: external-preserved-failed",
+        "non-independent attestation class: repository-fixture-nonindependent",
+        "peer operator is not independent",
+        "evidence source is not independent",
+        "bundle manifest contains validation failures"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-20",
+  "generated_at": "2026-04-28",
   "source_of_truth": [
     ".ssot/registry.json",
     ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
@@ -14,11 +14,11 @@
     "declared_claim_count": 48,
     "tier_3_claim_count": 48,
     "tier_4_claim_count": 0,
-    "validated_inventory_complete": true,
-    "validated_runtime_matrix_green": true,
-    "validated_test_lanes_green": true,
-    "migration_portability_passed": true,
-    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "validated_inventory_complete": false,
+    "validated_runtime_matrix_green": false,
+    "validated_test_lanes_green": false,
+    "migration_portability_passed": false,
+    "tier3_evidence_rebuilt_from_validated_runs": false,
     "fully_featured_package_boundary_now": false,
     "strict_independent_claims_ready": false,
     "fully_certifiable_now": false,
@@ -48,7 +48,14 @@
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.",
+      "Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.",
+      "Validated clean-room install matrix evidence is incomplete or missing.",
+      "Validated in-scope certification lane execution evidence is incomplete or missing.",
+      "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
+      "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
       "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
+      "At least one claim row is still missing a machine-derived certification proof binding.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ],
     "final_release_failures": [
@@ -57,19 +64,18 @@
     "final_release_warnings": [
       "Tier 4 bundle promotion is not complete for the retained boundary."
     ],
-    "explicitly_deauthorized_current_adjacent_doc_count": 8
+    "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "ec37a89d6ea78b56643bf77bcb4a66e1417bf076968be6ab6096d31e6dd94f7d",
-    "docs/compliance/certification_state_report.json": "a37870760dab8e6ccf4e0e46e28972542c0c01038194b26880130b332a72f0bf",
-    "docs/compliance/release_gate_report.json": "caa248c71e5362125eafc8898506374de69864297e358c4d24c426763bc8fa34",
+    "docs/compliance/current_state_report.json": "d688cb0cadb7d87474205dad0b377f33d9309dc7e56a843a125717a4f2bd70a2",
+    "docs/compliance/certification_state_report.json": "402208d0cb4b919f171f111d6b16e95a615afbe25d451c83cc61e0bbe0909e17",
+    "docs/compliance/release_gate_report.json": "4ebab1e9fc57416e17c450e5d5e44e9d370a83924a5b26057779aea36870247a",
     "docs/compliance/final_release_gate_report.json": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019",
-    "docs/compliance/non_rfc_status_report.json": "2ad0ce3c3626df778f087d8370894e8a14acfff1fda548fbe9df585dd8f497c6"
+    "docs/compliance/non_rfc_status_report.json": "55fcc69c50cc195fdb335b109e1f99081760089176df35f8688ed11154ec5bf7"
   },
   "explicitly_deauthorized_current_adjacent_docs": [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",
     "docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md",
-    "docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md",
     "docs/compliance/PEER_MATRIX_REPORT.md",
     "docs/compliance/TIER4_PROMOTION_MATRIX.md",
     "docs/compliance/CERTIFIABLE_COMPLETION_PLAN_2026-03-26.md",

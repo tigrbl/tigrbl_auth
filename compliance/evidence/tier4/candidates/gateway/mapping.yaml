@@ -20,10 +20,10 @@ target_to_tests:
   RFC 9700:
   - tests/conformance/hardening/test_rfc9700_security_bcp.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
-  - tests/negative/test_phase6_hardening_runtime_enforcement.py
-  - tests/unit/test_phase6_profile_discovery_runtime.py
+  - tests/negative/test_hardening_runtime_enforcement.py
+  - tests/unit/test_profile_discovery_runtime.py
   - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
-  - tests/unit/test_phase10_hardening_cluster_c.py
+  - tests/unit/test_hardening_cluster_c.py
   RFC 9728:
   - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
@@ -53,4 +53,4 @@ required_artifacts:
 - tigrbl_auth/gateway.py
 - tests/unit/test_openid_configuration.py
 - tests/unit/test_rfc9728_metadata_checkpoint.py
-- tests/unit/test_phase6_profile_discovery_runtime.py
+- tests/unit/test_profile_discovery_runtime.py

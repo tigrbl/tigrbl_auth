@@ -24,7 +24,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
         return decorator
 
 
-STATUS: Final[str] = "phase-8-persistence-backed-device-flow"
+STATUS: Final[str] = "persistence-backed-device-flow-runtime"
 RFC8628_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8628"
 DEVICE_VERIFICATION_URI: Final[str] = "https://example.com/device"
 DEVICE_CODE_GRANT_TYPE: Final[str] = "urn:ietf:params:oauth:grant-type:device_code"

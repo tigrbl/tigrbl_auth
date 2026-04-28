@@ -5,11 +5,11 @@
     "non_rfc_family_count": 4,
     "non_rfc_targets_with_scope_discrepancies": 0,
     "non_rfc_targets_internally_backed_now": 18,
-    "focus_py313_report_count": 3,
-    "focus_py313_passed_tests": 52,
-    "focus_py313_collected_tests": 52,
-    "focus_py313_all_passed": true,
-    "supported_py311_lane_count_green": 5,
+    "focus_py313_report_count": 0,
+    "focus_py313_passed_tests": 0,
+    "focus_py313_collected_tests": 0,
+    "focus_py313_all_passed": false,
+    "supported_py311_lane_count_green": 0,
     "validated_runtime_matrix_green": false,
     "validated_in_scope_test_lanes_green": false,
     "migration_portability_passed": false,
@@ -25,35 +25,13 @@
   "warnings": [],
   "details": {
     "focus_test_reports": {
-      "report_count": 3,
-      "reports": [
-        {
-          "path": "dist/test-reports/step8-non-rfc-oidc-contracts-py313.json",
-          "passed": 22,
-          "collected": 22
-        },
-        {
-          "path": "dist/test-reports/step8-non-rfc-surface-cli-py313.json",
-          "passed": 9,
-          "collected": 9
-        },
-        {
-          "path": "dist/test-reports/step8-non-rfc-operator-runtime-py313.json",
-          "passed": 21,
-          "collected": 21
-        }
-      ],
-      "passed": 52,
-      "collected": 52,
-      "all_passed": true
+      "report_count": 0,
+      "reports": [],
+      "passed": 0,
+      "collected": 0,
+      "all_passed": false
     },
-    "py311_supported_green_lanes": [
-      "conformance",
-      "core",
-      "integration",
-      "interop",
-      "security-negative"
-    ],
+    "py311_supported_green_lanes": [],
     "family_summaries": [
       {
         "family": "oidc",
@@ -146,10 +124,7 @@
           "conformance",
           "integration"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -219,11 +194,7 @@
           "integration",
           "interop"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -300,11 +271,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -379,7 +346,7 @@
           "tests/integration/test_migration_upgrade_downgrade_safety.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
           "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase7_session_logout_cluster_b.py"
+          "tests/unit/test_session_logout_cluster_b.py"
         ],
         "test_categories": [
           "conformance",
@@ -387,12 +354,7 @@
           "negative",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": true,
@@ -476,7 +438,7 @@
           "tests/integration/test_migration_upgrade_downgrade_safety.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
           "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase7_session_logout_cluster_b.py"
+          "tests/unit/test_session_logout_cluster_b.py"
         ],
         "test_categories": [
           "conformance",
@@ -484,12 +446,7 @@
           "negative",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": true,
@@ -564,7 +521,7 @@
           "tests/conformance/hardening/test_oidc_frontchannel_logout.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
           "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "tests/unit/test_hardening_cluster_c.py"
         ],
         "test_categories": [
           "conformance",
@@ -572,12 +529,7 @@
           "negative",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": true,
@@ -652,7 +604,7 @@
           "tests/conformance/hardening/test_oidc_backchannel_logout.py",
           "tests/integration/test_persistence_lifecycle_durability.py",
           "tests/negative/test_cookie_and_logout_abuse_cases.py",
-          "tests/unit/test_phase10_hardening_cluster_c.py"
+          "tests/unit/test_hardening_cluster_c.py"
         ],
         "test_categories": [
           "conformance",
@@ -660,12 +612,7 @@
           "negative",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": true,
@@ -739,10 +686,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": false,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -813,9 +757,7 @@
           "e2e",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": false,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -887,9 +829,9 @@
         "tests": [
           "tests/integration/test_profile_surface_and_contract_alignment.py",
           "tests/unit/test_deployment_resolver.py",
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
+          "tests/unit/test_runner_adapter_runtime_layer.py",
+          "tests/unit/test_runtime_launcher.py",
           "tests/runtime/test_runner_invariance.py",
           "tests/conformance/operator/test_cli_serve_runtime.py"
         ],
@@ -898,11 +840,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -968,10 +906,10 @@
           "tigrbl_auth/cli/reports.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
+          "tests/unit/test_runner_adapter_runtime_layer.py",
           "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
+          "tests/unit/test_runtime_launcher.py",
           "tests/runtime/test_runner_uvicorn.py",
           "tests/runtime/test_runner_invariance.py",
           "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -981,11 +919,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1049,10 +983,10 @@
           "tigrbl_auth/cli/reports.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
+          "tests/unit/test_runner_adapter_runtime_layer.py",
           "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
+          "tests/unit/test_runtime_launcher.py",
           "tests/runtime/test_runner_hypercorn.py",
           "tests/runtime/test_runner_invariance.py",
           "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -1062,11 +996,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1130,10 +1060,10 @@
           "tigrbl_auth/cli/reports.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase2_runner_adapter_runtime_layer.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
+          "tests/unit/test_runner_adapter_runtime_layer.py",
           "tests/unit/test_runtime_cfg.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
+          "tests/unit/test_runtime_launcher.py",
           "tests/runtime/test_runner_tigrcorn.py",
           "tests/runtime/test_runner_invariance.py",
           "tests/conformance/operator/test_cli_serve_runtime.py"
@@ -1143,11 +1073,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1212,11 +1138,11 @@
           "tigrbl_auth/services/session_service.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/unit/test_cli_surface_checkpoint.py",
-          "tests/unit/test_phase3_runtime_launcher.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
+          "tests/unit/test_runtime_launcher.py",
+          "tests/unit/test_cli_contract.py",
+          "tests/unit/test_operator_service_layer.py",
           "tests/conformance/operator/test_cli_serve_runtime.py",
           "tests/conformance/operator/test_cli_resource_lifecycle.py",
           "tests/conformance/operator/test_cli_keys_lifecycle.py",
@@ -1227,10 +1153,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1290,9 +1213,9 @@
           "tigrbl_auth/services/persistence.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/e2e/test_release_gate_catalog.py",
-          "tests/unit/test_phase4_cli_contract.py",
+          "tests/unit/test_cli_contract.py",
           "tests/conformance/operator/test_cli_bootstrap_migrate.py"
         ],
         "test_categories": [
@@ -1300,10 +1223,7 @@
           "e2e",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1364,21 +1284,18 @@
           "tigrbl_auth/services/operator_service.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/unit/test_jwks_rotation.py",
           "tests/unit/test_rpc_registry_live.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
+          "tests/unit/test_cli_contract.py",
+          "tests/unit/test_operator_service_layer.py",
           "tests/conformance/operator/test_cli_keys_lifecycle.py"
         ],
         "test_categories": [
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1437,19 +1354,16 @@
           "tigrbl_auth/services/operator_service.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
-          "tests/unit/test_phase4_cli_contract.py",
-          "tests/unit/test_phase5_operator_service_layer.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
+          "tests/unit/test_cli_contract.py",
+          "tests/unit/test_operator_service_layer.py",
           "tests/conformance/operator/test_cli_import_export.py"
         ],
         "test_categories": [
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": false,
@@ -1507,19 +1421,16 @@
           "tigrbl_auth/cli/artifacts.py"
         ],
         "tests": [
-          "tests/unit/test_phase0_claim_boundary_rebaseline.py",
+          "tests/unit/test_claim_boundary_rebaseline.py",
           "tests/security/test_release_bundle_signing.py",
-          "tests/unit/test_phase1_published_dependency_model.py",
-          "tests/security/test_phase12_sender_constraint_replay.py"
+          "tests/unit/test_published_dependency_model.py",
+          "tests/security/test_sender_constraint_replay.py"
         ],
         "test_categories": [
           "security",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "core",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": false,
         "has_unit_or_integration_coverage": true,
         "has_security_coverage": true,

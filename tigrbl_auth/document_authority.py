@@ -41,7 +41,6 @@ DEFAULT_AUTHORITATIVE_DOCS = {
 DEFAULT_EXPLICITLY_DEAUTHORIZED_CURRENT_ADJACENT_DOCS = [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",
     "docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md",
-    "docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md",
     "docs/compliance/PEER_MATRIX_REPORT.md",
     "docs/compliance/TIER4_PROMOTION_MATRIX.md",
     "docs/compliance/CERTIFIABLE_COMPLETION_PLAN_2026-03-26.md",
@@ -93,7 +92,7 @@ def load_document_authority(repo_root: Path) -> dict[str, Any]:
     payload = _load_yaml(path)
     authority = payload.get("document_authority", {}) if isinstance(payload, dict) else {}
     return {
-        "path": str(path.relative_to(repo_root)) if path.exists() else SSOT_DOCUMENT_AUTHORITY_SPEC,
+        "path": path.relative_to(repo_root).as_posix() if path.exists() else SSOT_DOCUMENT_AUTHORITY_SPEC,
         "projection_path": str(authority.get("projection_manifest", DOCUMENT_AUTHORITY_PROJECTION_YAML)),
         "canonical_ssot_roots": tuple(
             str(item) for item in authority.get("canonical_ssot_roots", []) or DEFAULT_CANONICAL_SSOT_ROOTS

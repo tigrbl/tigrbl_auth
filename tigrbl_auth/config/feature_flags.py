@@ -180,6 +180,7 @@ CLI_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
 
 PROFILE_FLAG_SETS: Final[dict[str, tuple[str, ...]]] = {
     "baseline": tuple(FEATURE_FLAG_GROUPS["baseline"]["flags"].keys()),
+    "baseline-development": tuple(FEATURE_FLAG_GROUPS["baseline"]["flags"].keys()),
     "production": tuple(
         list(FEATURE_FLAG_GROUPS["baseline"]["flags"].keys())
         + list(FEATURE_FLAG_GROUPS["production"]["flags"].keys())

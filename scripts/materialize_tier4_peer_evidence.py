@@ -11,7 +11,7 @@ from typing import Any
 
 import yaml
 
-from tigrbl_auth.repo_truth import package_version
+from tigrbl_auth.repo_truth import evaluate_tier4_bundle, package_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PEER_PROFILE_DIR = ROOT / 'compliance' / 'evidence' / 'peer_profiles'
@@ -20,6 +20,7 @@ TIER4_ROOT = ROOT / 'compliance' / 'evidence' / 'tier4'
 CANDIDATE_ROOT = TIER4_ROOT / 'candidates'
 BUNDLE_ROOT = TIER4_ROOT / 'bundles'
 DIST_TIER4_ROOT = ROOT / 'dist' / 'evidence-bundles' / 'peer-claim' / 'tier4'
+HANDOFF_ROOT = ROOT / 'dist' / 'tier4-external-handoff'
 
 NON_INDEPENDENT_EVIDENCE_SOURCES = {
     'staged-external-root-fixture',
@@ -259,6 +260,141 @@ def ensure_candidate_layout(
     }
 
 
+def materialize_external_handoff_templates(
+    peer_profiles: dict[str, dict[str, Any]],
+    counterparts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if HANDOFF_ROOT.exists():
+        shutil.rmtree(HANDOFF_ROOT)
+    HANDOFF_ROOT.mkdir(parents=True, exist_ok=True)
+
+    manifest_profiles: list[dict[str, Any]] = []
+    for profile_id, profile in sorted(peer_profiles.items()):
+        counterpart_id = str(profile.get('counterpart_id', '')).strip()
+        counterpart = counterparts[counterpart_id]
+        profile_root = HANDOFF_ROOT / profile_id
+        placeholders_root = profile_root / 'required-artifact-placeholders'
+        placeholders_root.mkdir(parents=True, exist_ok=True)
+
+        scenario_results = [
+            {
+                'id': scenario_id,
+                'passed': False,
+                'evidence': [],
+                'notes': 'Fill with externally generated result evidence.',
+            }
+            for scenario_id in listify(profile.get('scenario_ids'))
+        ]
+        write_yaml(
+            profile_root / 'manifest.template.yaml',
+            {
+                'schema_version': 1,
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'evidence_source': 'Fill with independent external source name.',
+                'source_revision': 'Fill with immutable source revision.',
+                'peer_identity': {
+                    'peer_operator': 'Fill with independent organization or operator.',
+                    **{
+                        field: f'Fill with {field}.'
+                        for field in listify(counterpart.get('required_identity_fields'))
+                    },
+                },
+                'peer_runtime': {
+                    'execution_style': counterpart.get('execution_style'),
+                    **{
+                        field: f'Fill with {field}.'
+                        for field in listify(counterpart.get('required_container_fields'))
+                    },
+                },
+                'independence_attestation': {
+                    'attestation_class': counterpart.get('attestation_class_required'),
+                    'attesting_organization': 'Fill with attesting organization.',
+                    'attesting_contact': 'Fill with attesting contact.',
+                    'attestation_timestamp': 'Fill with RFC 3339 timestamp.',
+                    'counterpart_identified': True,
+                    'reproduction_preserved': True,
+                    'package_team_member': False,
+                    'repository_fixture_generated': False,
+                },
+                'reproduction': 'Fill with reproduction summary or include reproduction.md.',
+            },
+        )
+        write_yaml(
+            profile_root / 'result.template.yaml',
+            {
+                'schema_version': 1,
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'passed': False,
+                'scenario_results': scenario_results,
+            },
+        )
+        write_text(
+            profile_root / 'reproduction.template.md',
+            '\n'.join(
+                [
+                    '# External Reproduction',
+                    '',
+                    f'- Peer profile: `{profile_id}`',
+                    f'- Counterpart: `{counterpart_id}`',
+                    f'- Runtime profile: `{profile.get("preferred_runtime_profile", "hardening")}`',
+                    '',
+                    'Record exact commands, container image digests, endpoint URLs, timestamps, and transcript locations used by the independent peer harness.',
+                ]
+            ),
+        )
+        write_text(
+            profile_root / 'CHECKLIST.md',
+            '\n'.join(
+                [
+                    '# External Handoff Checklist',
+                    '',
+                    '- Complete `manifest.yaml` from `manifest.template.yaml`.',
+                    '- Complete `result.yaml` from `result.template.yaml` with one result per required scenario.',
+                    '- Provide `reproduction.md` with exact independent execution instructions.',
+                    '- Replace every file under `required-artifact-placeholders/` with externally generated evidence.',
+                    '- Preserve immutable peer runtime metadata, including image digest where a container is used.',
+                ]
+            ),
+        )
+
+        for artifact in listify(counterpart.get('required_artifacts')):
+            artifact_name = artifact.rstrip('/').replace('\\', '/')
+            if not artifact_name:
+                continue
+            placeholder_path = placeholders_root / f'{artifact_name.replace("/", "__")}.placeholder.txt'
+            write_text(
+                placeholder_path,
+                f'Provide independent external artifact `{artifact_name}` for profile `{profile_id}`.',
+            )
+
+        manifest_profiles.append(
+            {
+                'profile': profile_id,
+                'counterpart_id': counterpart_id,
+                'template_dir': str(profile_root.relative_to(ROOT)),
+                'required_artifacts': listify(counterpart.get('required_artifacts')),
+                'scenario_ids': listify(profile.get('scenario_ids')),
+            }
+        )
+
+    write_json(
+        HANDOFF_ROOT / 'external-root-template.json',
+        {
+            'schema_version': 1,
+            'template_kind': 'tier4-external-peer-handoff',
+            'profile_count': len(manifest_profiles),
+            'profiles': manifest_profiles,
+        },
+    )
+    write_text(
+        HANDOFF_ROOT / 'README.md',
+        'This tree is a fill-in package for independent external Tier 4 peer evidence. It is not itself qualifying peer evidence.',
+    )
+    return manifest_profiles
+
+
 def _load_external_result(ext_dir: Path) -> dict[str, Any] | None:
     result_yaml = ext_dir / 'result.yaml'
     result_json = ext_dir / 'result.json'
@@ -457,6 +593,28 @@ def materialize_external_bundle(
         'passed': passed,
         'promotable_targets': listify(profile.get('required_targets')) if passed else [],
         'validation_failures': validation_failures,
+    }
+
+
+def load_preserved_bundle_status(
+    profile_id: str,
+    counterpart_id: str,
+    profile: dict[str, Any],
+) -> dict[str, Any] | None:
+    bundle_id = f'{profile_id}--{counterpart_id}'
+    bundle_dir = BUNDLE_ROOT / bundle_id
+    manifest_path = bundle_dir / 'manifest.yaml'
+    if not manifest_path.exists():
+        return None
+    manifest = load_yaml(manifest_path) or {}
+    passed, failures, _details = evaluate_tier4_bundle(bundle_dir, manifest)
+    return {
+        'profile': profile_id,
+        'bundle_dir': str(bundle_dir.relative_to(ROOT)),
+        'dist_bundle_dir': None,
+        'passed': passed,
+        'promotable_targets': listify(profile.get('required_targets')) if passed else [],
+        'validation_failures': failures,
     }
 
 
@@ -996,6 +1154,7 @@ def main(argv: list[str] | None = None) -> int:
     if external_root is not None:
         os.environ['TIGRBL_AUTH_PEER_ARTIFACTS_ROOT'] = str(external_root)
 
+    materialize_external_handoff_templates(peer_profiles, counterparts)
     write_peer_profile_execution_reports(peer_profiles, external_root, retained_targets)
 
     peer_matrix: list[dict[str, Any]] = []
@@ -1025,17 +1184,19 @@ def main(argv: list[str] | None = None) -> int:
         }
         if external_root is not None:
             bundle = materialize_external_bundle(profile_id, profile, counterpart, external_root, target_tests)
-            if bundle is not None:
-                row['external_bundle_dir'] = bundle['bundle_dir']
-                row['promotable_targets'] = bundle['promotable_targets']
-                row['validation_failures'] = bundle.get('validation_failures', [])
-                preserved_bundles.append(bundle['bundle_dir'])
-                if bundle.get('passed'):
-                    valid_preserved_bundles.append(bundle['bundle_dir'])
-                    if not args.no_promote:
-                        promoted_targets.update(bundle['promotable_targets'])
-                else:
-                    invalid_preserved_bundles.append(bundle['bundle_dir'])
+        else:
+            bundle = load_preserved_bundle_status(profile_id, counterpart_id, profile)
+        if bundle is not None:
+            row['external_bundle_dir'] = bundle['bundle_dir']
+            row['promotable_targets'] = bundle['promotable_targets']
+            row['validation_failures'] = bundle.get('validation_failures', [])
+            preserved_bundles.append(bundle['bundle_dir'])
+            if bundle.get('passed'):
+                valid_preserved_bundles.append(bundle['bundle_dir'])
+                if not args.no_promote:
+                    promoted_targets.update(bundle['promotable_targets'])
+            else:
+                invalid_preserved_bundles.append(bundle['bundle_dir'])
         peer_matrix.append(row)
 
     claims_doc = update_claims(promoted_targets, retained_targets)

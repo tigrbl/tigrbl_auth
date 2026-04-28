@@ -15,15 +15,15 @@ tests:
 - tests/conformance/operator/test_cli_serve_runtime.py
 - tests/interop/test_runner_profile_catalog_completeness.py
 contracts:
-- contracts/runtime_profile_report.json
-- contracts/cli_contract.json
+- contracts\runtime_profile_report.json
+- contracts\cli_contract.json
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/runtime_profile_report.json
-- reports/runtime_profile_report.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\runtime_profile_report.json
+- reports\runtime_profile_report.md
+- reports\retained-boundary-runtime-operator-test-output.txt

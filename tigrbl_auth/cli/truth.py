@@ -4,7 +4,7 @@ import hashlib
 import json
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 import yaml
 
@@ -25,6 +25,54 @@ FINAL_RELEASE_GATE_REPORT_MD = "docs/compliance/final_release_gate_report.md"
 RELEASE_DECISION_RECORD_MD = "docs/compliance/RELEASE_DECISION_RECORD.md"
 REPOSITORY_STATE_YAML = "compliance/claims/repository-state.yaml"
 DEFAULT_FINAL_RELEASE_STATUS_STEM = "FINAL_RELEASE_STATUS_2026-03-25"
+REPOSITORY_STATE_KEY_ALIASES = {
+    "target_profile_truth_reconciled_complete": ("phase_13_target_profile_truth_reconciled_complete",),
+    "profile_scope_mismatch_set_empty": ("phase_13_profile_scope_mismatch_set_empty",),
+    "clean_room_executor_matrix_declared_complete": ("phase_13_clean_room_executor_matrix_declared_complete",),
+    "validated_manifest_identity_contract_installed": ("phase_13_validated_manifest_identity_contract_installed",),
+    "claim_registry_canonical_complete": ("phase_14_claim_registry_canonical_complete",),
+    "fapi2_security_profile_declared_complete": ("phase_14_fapi2_security_profile_declared_complete",),
+    "release_claims_machine_derivable": ("phase_14_release_claims_machine_derivable",),
+    "core_targets_missing_from_feature_map": ("phase_14_core_targets_missing_from_feature_map",),
+    "extension_targets_missing_from_feature_map": ("phase_14_extension_targets_missing_from_feature_map",),
+    "settings_backed_flags_missing_from_flag_map": ("phase_14_settings_backed_flags_missing_from_flag_map",),
+    "release_gate_passed_for_final_decision": ("release_gate_passed_at_phase_13",),
+    "final_release_decision_complete": ("phase_13_final_release_decision_complete",),
+    "release_decision_record_present": ("phase_13_release_decision_record_present",),
+    "validated_runtime_matrix_preservation_complete": ("phase_13_validated_runtime_matrix_preservation_complete",),
+    "validated_test_lane_preservation_complete": ("phase_13_validated_test_lane_preservation_complete",),
+    "validated_migration_portability_preservation_complete": ("phase_13_validated_migration_portability_preservation_complete",),
+}
+CHRONOLOGY_SCOPED_REPOSITORY_STATE_KEYS = {
+    "phase_0_boundary_lock_complete",
+    "phase_0_claim_boundary_rebaseline_complete",
+    "phase_1_tigrbl_runtime_foundation_complete",
+    "phase_2_persistence_domain_split_complete",
+    "phase_3_baseline_interoperable_auth_server_complete",
+    "phase_5_partial_feature_boundary_enforcement_complete",
+    "phase_6_boundary_decisions_enforcement_complete",
+    "phase_7_rfc_family_runtime_completion_checkpoint",
+    "phase_10_tier3_evidence_subset_complete",
+    "phase_11_external_peer_framework_complete",
+    "phase_13_independent_peer_program_extended_complete",
+    "phase_13_target_to_peer_mapping_complete",
+    "phase_13_peer_counterpart_catalog_complete",
+    "phase_13_peer_schema_and_tooling_extended",
+    *{
+        alias
+        for aliases in REPOSITORY_STATE_KEY_ALIASES.values()
+        for alias in aliases
+    },
+}
+
+
+def _state_value(repository_state: Mapping[str, Any], key: str, default: Any = False) -> Any:
+    if key in repository_state:
+        return repository_state[key]
+    for alias in REPOSITORY_STATE_KEY_ALIASES.get(key, ()):
+        if alias in repository_state:
+            return repository_state[alias]
+    return default
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -204,16 +252,16 @@ def build_truth_chain_payload(repo_root: Path) -> dict[str, Any]:
             "final_release_gate_passed": final_release_gate_passed,
             "final_release_ready": final_release_ready,
             "checkpoint_only": not final_release_ready,
-            "target_profile_truth_reconciled_complete": bool(inputs["repository_state"].get("phase_13_target_profile_truth_reconciled_complete", False)),
-            "profile_scope_mismatch_set_empty": bool(inputs["repository_state"].get("phase_13_profile_scope_mismatch_set_empty", False)),
-            "clean_room_executor_matrix_declared_complete": bool(inputs["repository_state"].get("phase_13_clean_room_executor_matrix_declared_complete", False)),
-            "validated_manifest_identity_contract_installed": bool(inputs["repository_state"].get("phase_13_validated_manifest_identity_contract_installed", False)),
-            "claim_registry_canonical_complete": bool(inputs["repository_state"].get("phase_14_claim_registry_canonical_complete", False)),
-            "fapi2_security_profile_declared_complete": bool(inputs["repository_state"].get("phase_14_fapi2_security_profile_declared_complete", False)),
-            "release_claims_machine_derivable": bool(inputs["repository_state"].get("phase_14_release_claims_machine_derivable", False)),
-            "core_targets_missing_from_feature_map": int(inputs["repository_state"].get("phase_14_core_targets_missing_from_feature_map", 0)),
-            "extension_targets_missing_from_feature_map": int(inputs["repository_state"].get("phase_14_extension_targets_missing_from_feature_map", 0)),
-            "settings_backed_flags_missing_from_flag_map": int(inputs["repository_state"].get("phase_14_settings_backed_flags_missing_from_flag_map", 0)),
+            "target_profile_truth_reconciled_complete": bool(_state_value(inputs["repository_state"], "target_profile_truth_reconciled_complete", False)),
+            "profile_scope_mismatch_set_empty": bool(_state_value(inputs["repository_state"], "profile_scope_mismatch_set_empty", False)),
+            "clean_room_executor_matrix_declared_complete": bool(_state_value(inputs["repository_state"], "clean_room_executor_matrix_declared_complete", False)),
+            "validated_manifest_identity_contract_installed": bool(_state_value(inputs["repository_state"], "validated_manifest_identity_contract_installed", False)),
+            "claim_registry_canonical_complete": bool(_state_value(inputs["repository_state"], "claim_registry_canonical_complete", False)),
+            "fapi2_security_profile_declared_complete": bool(_state_value(inputs["repository_state"], "fapi2_security_profile_declared_complete", False)),
+            "release_claims_machine_derivable": bool(_state_value(inputs["repository_state"], "release_claims_machine_derivable", False)),
+            "core_targets_missing_from_feature_map": int(_state_value(inputs["repository_state"], "core_targets_missing_from_feature_map", 0)),
+            "extension_targets_missing_from_feature_map": int(_state_value(inputs["repository_state"], "extension_targets_missing_from_feature_map", 0)),
+            "settings_backed_flags_missing_from_flag_map": int(_state_value(inputs["repository_state"], "settings_backed_flags_missing_from_flag_map", 0)),
             "tier4_external_bundle_count": int(cert_summary.get("tier4_external_bundle_count", current_summary.get("tier4_external_bundle_count", 0))),
             "tier4_valid_external_bundle_count": int(cert_summary.get("tier4_valid_external_bundle_count", current_summary.get("tier4_valid_external_bundle_count", 0))),
             "tier4_invalid_external_bundle_count": int(cert_summary.get("tier4_invalid_external_bundle_count", current_summary.get("tier4_invalid_external_bundle_count", 0))),
@@ -239,6 +287,8 @@ def build_repository_state_payload(repo_root: Path, truth: dict[str, Any]) -> di
     payload = _read_yaml(repo_root / REPOSITORY_STATE_YAML) or {"schema_version": 1, "repository_state": {}}
     state = dict(payload.get("repository_state", {}) or {})
     summary = truth["summary"]
+    for key in CHRONOLOGY_SCOPED_REPOSITORY_STATE_KEYS:
+        state.pop(key, None)
     state.update(
         {
             "fully_certifiable": bool(summary["fully_certifiable_now"]),
@@ -250,13 +300,13 @@ def build_repository_state_payload(repo_root: Path, truth: dict[str, Any]) -> di
             "tier4_invalid_external_bundle_count": int(summary["tier4_invalid_external_bundle_count"]),
             "tier4_missing_external_bundle_count": int(summary["tier4_missing_external_bundle_count"]),
             "tier4_retained_boundary_complete": bool(summary["strict_independent_claims_ready"]),
-            "release_gate_passed_at_phase_13": bool(summary["release_gates_passed"]),
+            "release_gate_passed_for_final_decision": bool(summary["release_gates_passed"]),
             "full_release_claim_still_partial": bool(not summary["final_release_ready"]),
-            "phase_13_final_release_decision_complete": True,
-            "phase_13_release_decision_record_present": True,
-            "phase_13_validated_runtime_matrix_preservation_complete": bool(summary["validated_runtime_matrix_green"]),
-            "phase_13_validated_test_lane_preservation_complete": bool(summary["validated_test_lanes_green"]),
-            "phase_13_validated_migration_portability_preservation_complete": bool(summary["migration_portability_passed"]),
+            "final_release_decision_complete": True,
+            "release_decision_record_present": True,
+            "validated_runtime_matrix_preservation_complete": bool(summary["validated_runtime_matrix_green"]),
+            "validated_test_lane_preservation_complete": bool(summary["validated_test_lanes_green"]),
+            "validated_migration_portability_preservation_complete": bool(summary["migration_portability_passed"]),
             "last_release_decision_record": RELEASE_DECISION_RECORD_MD,
             "last_truth_chain_manifest": TRUTH_CHAIN_JSON,
             "last_truth_chain_generated_at": truth["generated_at"],

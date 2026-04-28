@@ -638,7 +638,7 @@ def run_runtime_foundation_check(
         failures.append("Release-path framework fallbacks remain in active runtime files.")
 
     report: dict[str, Any] = {
-        "scope": "phase-1-tigrbl-runtime-foundation",
+        "scope": "tigrbl-runtime-foundation",
         "strict": strict,
         "passed": not failures,
         "summary": {

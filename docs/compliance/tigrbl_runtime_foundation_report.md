@@ -1,6 +1,6 @@
 # Tigrbl Runtime Foundation Report
 
-- Scope: `phase-1-tigrbl-runtime-foundation`
+- Scope: `tigrbl-runtime-foundation`
 - Strict: `False`
 - Passed: `True`
 - Runtime FastAPI/Starlette hits: `0`

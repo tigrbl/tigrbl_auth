@@ -244,7 +244,14 @@ TARGET_FLAG_REQUIREMENTS: Final[dict[str, tuple[str, ...]]] = {
 }
 
 
-VALID_PROFILES: Final[tuple[str, ...]] = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
+VALID_PROFILES: Final[tuple[str, ...]] = (
+    "baseline",
+    "baseline-development",
+    "production",
+    "hardening",
+    "fapi2-security",
+    "peer-claim",
+)
 VALID_PLUGIN_MODES: Final[tuple[str, ...]] = tuple(PLUGIN_MODE_TO_SURFACE_SETS)
 VALID_RUNTIME_STYLES: Final[tuple[str, ...]] = ("plugin", "standalone")
 

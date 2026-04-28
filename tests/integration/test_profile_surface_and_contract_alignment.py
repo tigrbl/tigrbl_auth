@@ -20,7 +20,7 @@ def _discovery(profile: str) -> dict:
     return json.loads((ROOT / 'specs' / 'discovery' / 'profiles' / profile / 'openid-configuration.json').read_text(encoding='utf-8'))
 
 
-def test_profile_openapi_snapshots_publish_phase3_and_phase7_routes():
+def test_profile_openapi_snapshots_publish_capability_and_capability_routes():
     baseline_paths = set(_openapi('baseline').get('paths', {}))
     production_paths = set(_openapi('production').get('paths', {}))
     hardening_paths = set(_openapi('hardening').get('paths', {}))

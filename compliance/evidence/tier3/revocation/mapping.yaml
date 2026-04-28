@@ -18,7 +18,7 @@ targets:
   - tests/integration/test_full_workflow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_persistence_lifecycle_durability.py
-  - tests/unit/test_phase3_public_route_contracts.py
+  - tests/unit/test_public_route_contracts.py
   endpoint_mapping:
     current:
     - /revoke

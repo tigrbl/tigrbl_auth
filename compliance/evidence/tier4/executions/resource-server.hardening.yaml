@@ -19,7 +19,7 @@ required_artifacts:
 - tests/conformance/hardening/test_rfc8693_token_exchange.py
 - tests/conformance/hardening/test_rfc8707_resource_indicators.py
 - tests/unit/test_rfc9728_metadata_checkpoint.py
-- tests/security/test_phase12_sender_constraint_replay.py
+- tests/security/test_sender_constraint_replay.py
 required_peer_artifacts:
 - http-transcript.yaml
 - resource-response.log

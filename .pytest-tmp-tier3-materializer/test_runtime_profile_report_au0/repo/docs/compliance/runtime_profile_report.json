@@ -1,0 +1,669 @@
+{
+  "generated_at": "20260428T050737Z",
+  "deployment_profile": "baseline",
+  "report_mode": "validated-runs",
+  "validated_artifact_source": null,
+  "application_probe": {
+    "passed": false,
+    "app_factory": "tigrbl_auth.api.app.build_app",
+    "message": "Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.11, base@py3.12, base@py3.10",
+    "error_type": "ValidatedRuntimeEvidenceMissing"
+  },
+  "surface_probe": {
+    "executed": true,
+    "passed": false,
+    "message": "Validated runtime manifests are missing or failing for the base surface-probe environments: base@py3.11, base@py3.12, base@py3.10",
+    "endpoint_count": 4,
+    "passed_count": 4,
+    "failed_count": 0,
+    "probes": []
+  },
+  "summary": {
+    "runner_count": 3,
+    "ready_count": 0,
+    "missing_count": 3,
+    "invalid_count": 0,
+    "application_hash_invariant": false,
+    "pyproject_requires_python": ">=3.10,<3.13",
+    "supported_python_versions": [
+      "3.10",
+      "3.11",
+      "3.12"
+    ],
+    "placeholder_supported_runner_count": 0,
+    "placeholder_supported_runner_names": [],
+    "declared_ci_installable_runner_count": 3,
+    "declared_ci_installable_runner_names": [
+      "hypercorn",
+      "tigrcorn",
+      "uvicorn"
+    ],
+    "declared_ci_install_probe_complete": true,
+    "execution_probes_enabled": true,
+    "surface_probe_passed": false,
+    "surface_probe_endpoint_count": 4,
+    "surface_probe_passed_count": 4,
+    "surface_probe_failed_count": 0,
+    "serve_check_passed_count": 0,
+    "execution_probe_complete": false,
+    "source_mode": "validated-runs",
+    "required_runtime_cell_count": 14,
+    "validated_runtime_cell_count": 1,
+    "validated_runtime_cell_passed_count": 0,
+    "validated_runtime_matrix_green": false,
+    "validated_runtime_identity_ready_count": 0,
+    "validated_runtime_install_evidence_ready_count": 0,
+    "validated_download_collection_present": false
+  },
+  "profiles": [
+    {
+      "name": "hypercorn",
+      "display_name": "Hypercorn",
+      "status": "missing",
+      "installed": false,
+      "available_module": null,
+      "capabilities": [
+        {
+          "name": "http",
+          "description": "HTTP ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "websocket",
+          "description": "WebSocket ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "lifespan",
+          "description": "ASGI lifespan integration",
+          "portable": true
+        },
+        {
+          "name": "uds",
+          "description": "Unix domain socket binding",
+          "portable": true
+        },
+        {
+          "name": "workers",
+          "description": "Worker configuration",
+          "portable": true
+        },
+        {
+          "name": "http2",
+          "description": "HTTP/2 support where configured",
+          "portable": false
+        }
+      ],
+      "flag_metadata": [
+        {
+          "name": "server",
+          "flags": [
+            "--server"
+          ],
+          "description": "Select the Hypercorn runner profile.",
+          "portable": true,
+          "value_type": "choice",
+          "default": "hypercorn",
+          "choices": [
+            "hypercorn"
+          ]
+        },
+        {
+          "name": "host",
+          "flags": [
+            "--host"
+          ],
+          "description": "Bind host.",
+          "portable": true,
+          "value_type": "string",
+          "default": "127.0.0.1"
+        },
+        {
+          "name": "port",
+          "flags": [
+            "--port"
+          ],
+          "description": "Bind port.",
+          "portable": true,
+          "value_type": "int",
+          "default": 8000
+        },
+        {
+          "name": "workers",
+          "flags": [
+            "--workers"
+          ],
+          "description": "Worker count.",
+          "portable": true,
+          "value_type": "int",
+          "default": 1
+        },
+        {
+          "name": "uds",
+          "flags": [
+            "--uds"
+          ],
+          "description": "Unix domain socket path.",
+          "portable": true,
+          "value_type": "string"
+        },
+        {
+          "name": "hypercorn_worker_class",
+          "flags": [
+            "--hypercorn-worker-class"
+          ],
+          "description": "Hypercorn worker class.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "asyncio",
+          "choices": [
+            "asyncio",
+            "trio",
+            "uvloop"
+          ]
+        },
+        {
+          "name": "hypercorn_http2",
+          "flags": [
+            "--hypercorn-http2"
+          ],
+          "description": "Enable HTTP/2 ALPN for Hypercorn.",
+          "portable": false,
+          "value_type": "bool",
+          "default": true
+        }
+      ],
+      "diagnostics": [
+        {
+          "level": "warning",
+          "code": "validated-manifest-missing",
+          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
+          "identities": [
+            "postgres-hypercorn@py3.10",
+            "postgres-hypercorn@py3.11",
+            "postgres-hypercorn@py3.12"
+          ]
+        }
+      ],
+      "application_hash": null,
+      "runtime_hash": null,
+      "serve_check": {
+        "executed": false,
+        "passed": false,
+        "command": "tigrbl-auth serve --check --server hypercorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12",
+        "exit_code": null
+      },
+      "validated_matrix": {
+        "matrix_profile": "postgres-hypercorn",
+        "expected_identities": [
+          "postgres-hypercorn@py3.10",
+          "postgres-hypercorn@py3.11",
+          "postgres-hypercorn@py3.12"
+        ],
+        "present_identities": [],
+        "passed_identities": [],
+        "missing_identities": [
+          "postgres-hypercorn@py3.10",
+          "postgres-hypercorn@py3.11",
+          "postgres-hypercorn@py3.12"
+        ],
+        "failed_identities": [],
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
+        "failure_reasons": {}
+      },
+      "required_extra": "hypercorn",
+      "profile_name": "postgres-hypercorn",
+      "supported_python_versions": [
+        "3.10",
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "hypercorn==0.18.0"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-hypercorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-hypercorn.txt"
+      ],
+      "tox_envs": [
+        "py310-postgres-hypercorn",
+        "py311-postgres-hypercorn",
+        "py312-postgres-hypercorn"
+      ],
+      "tox_envs_present": [
+        "py310-postgres-hypercorn",
+        "py311-postgres-hypercorn",
+        "py312-postgres-hypercorn"
+      ],
+      "ci_install_job": "postgres-hypercorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
+    },
+    {
+      "name": "tigrcorn",
+      "display_name": "Tigrcorn",
+      "status": "missing",
+      "installed": false,
+      "available_module": null,
+      "capabilities": [
+        {
+          "name": "http",
+          "description": "HTTP ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "websocket",
+          "description": "WebSocket ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "lifespan",
+          "description": "ASGI lifespan integration",
+          "portable": true
+        },
+        {
+          "name": "uds",
+          "description": "Unix domain socket binding",
+          "portable": true
+        },
+        {
+          "name": "workers",
+          "description": "Worker model",
+          "portable": true
+        },
+        {
+          "name": "runner-contract",
+          "description": "External Tigrcorn adapter contract",
+          "portable": false
+        }
+      ],
+      "flag_metadata": [
+        {
+          "name": "server",
+          "flags": [
+            "--server"
+          ],
+          "description": "Select the Tigrcorn runner profile.",
+          "portable": true,
+          "value_type": "choice",
+          "default": "tigrcorn",
+          "choices": [
+            "tigrcorn"
+          ]
+        },
+        {
+          "name": "host",
+          "flags": [
+            "--host"
+          ],
+          "description": "Bind host.",
+          "portable": true,
+          "value_type": "string",
+          "default": "127.0.0.1"
+        },
+        {
+          "name": "port",
+          "flags": [
+            "--port"
+          ],
+          "description": "Bind port.",
+          "portable": true,
+          "value_type": "int",
+          "default": 8000
+        },
+        {
+          "name": "workers",
+          "flags": [
+            "--workers"
+          ],
+          "description": "Worker count.",
+          "portable": true,
+          "value_type": "int",
+          "default": 1
+        },
+        {
+          "name": "uds",
+          "flags": [
+            "--uds"
+          ],
+          "description": "Unix domain socket path.",
+          "portable": true,
+          "value_type": "string"
+        },
+        {
+          "name": "tigrcorn_contract",
+          "flags": [
+            "--tigrcorn-contract"
+          ],
+          "description": "Preferred Tigrcorn adapter contract.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "auto",
+          "choices": [
+            "auto",
+            "serve",
+            "run",
+            "server"
+          ]
+        },
+        {
+          "name": "tigrcorn_mode",
+          "flags": [
+            "--tigrcorn-mode"
+          ],
+          "description": "Preferred Tigrcorn runtime mode hint.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "asgi",
+          "choices": [
+            "asgi",
+            "auto"
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "level": "warning",
+          "code": "validated-manifest-missing",
+          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
+          "identities": [
+            "tigrcorn@py3.11",
+            "tigrcorn@py3.12"
+          ]
+        }
+      ],
+      "application_hash": null,
+      "runtime_hash": null,
+      "serve_check": {
+        "executed": false,
+        "passed": false,
+        "command": "tigrbl-auth serve --check --server tigrcorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.11, tigrcorn@py3.12",
+        "exit_code": null
+      },
+      "validated_matrix": {
+        "matrix_profile": "tigrcorn",
+        "expected_identities": [
+          "tigrcorn@py3.11",
+          "tigrcorn@py3.12"
+        ],
+        "present_identities": [],
+        "passed_identities": [],
+        "missing_identities": [
+          "tigrcorn@py3.11",
+          "tigrcorn@py3.12"
+        ],
+        "failed_identities": [],
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
+        "failure_reasons": {}
+      },
+      "required_extra": "tigrcorn",
+      "profile_name": "tigrcorn",
+      "supported_python_versions": [
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "tigrcorn==0.3.8; python_version >= '3.11'"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-tigrcorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-tigrcorn.txt"
+      ],
+      "tox_envs": [
+        "py311-tigrcorn",
+        "py312-tigrcorn"
+      ],
+      "tox_envs_present": [
+        "py311-tigrcorn",
+        "py312-tigrcorn"
+      ],
+      "ci_install_job": "tigrcorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
+    },
+    {
+      "name": "uvicorn",
+      "display_name": "Uvicorn",
+      "status": "missing",
+      "installed": false,
+      "available_module": "uvicorn",
+      "capabilities": [
+        {
+          "name": "http",
+          "description": "HTTP/1.1 ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "websocket",
+          "description": "WebSocket ASGI serving",
+          "portable": true
+        },
+        {
+          "name": "lifespan",
+          "description": "ASGI lifespan integration",
+          "portable": true
+        },
+        {
+          "name": "uds",
+          "description": "Unix domain socket binding",
+          "portable": true
+        },
+        {
+          "name": "workers",
+          "description": "Process workers",
+          "portable": true
+        },
+        {
+          "name": "proxy-headers",
+          "description": "Proxy header processing",
+          "portable": true
+        }
+      ],
+      "flag_metadata": [
+        {
+          "name": "server",
+          "flags": [
+            "--server"
+          ],
+          "description": "Select the Uvicorn runner profile.",
+          "portable": true,
+          "value_type": "choice",
+          "default": "uvicorn",
+          "choices": [
+            "uvicorn"
+          ]
+        },
+        {
+          "name": "host",
+          "flags": [
+            "--host"
+          ],
+          "description": "Bind host.",
+          "portable": true,
+          "value_type": "string",
+          "default": "127.0.0.1"
+        },
+        {
+          "name": "port",
+          "flags": [
+            "--port"
+          ],
+          "description": "Bind port.",
+          "portable": true,
+          "value_type": "int",
+          "default": 8000
+        },
+        {
+          "name": "workers",
+          "flags": [
+            "--workers"
+          ],
+          "description": "Worker count.",
+          "portable": true,
+          "value_type": "int",
+          "default": 1
+        },
+        {
+          "name": "uds",
+          "flags": [
+            "--uds"
+          ],
+          "description": "Unix domain socket path.",
+          "portable": true,
+          "value_type": "string"
+        },
+        {
+          "name": "proxy_headers",
+          "flags": [
+            "--proxy-headers"
+          ],
+          "description": "Honor forwarded proxy headers.",
+          "portable": true,
+          "value_type": "bool",
+          "default": false
+        },
+        {
+          "name": "uvicorn_loop",
+          "flags": [
+            "--uvicorn-loop"
+          ],
+          "description": "Uvicorn event-loop implementation.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "auto",
+          "choices": [
+            "auto",
+            "asyncio",
+            "uvloop"
+          ]
+        },
+        {
+          "name": "uvicorn_http",
+          "flags": [
+            "--uvicorn-http"
+          ],
+          "description": "Uvicorn HTTP protocol implementation.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "auto",
+          "choices": [
+            "auto",
+            "h11",
+            "httptools"
+          ]
+        },
+        {
+          "name": "uvicorn_ws",
+          "flags": [
+            "--uvicorn-ws"
+          ],
+          "description": "Uvicorn WebSocket implementation.",
+          "portable": false,
+          "value_type": "choice",
+          "default": "auto",
+          "choices": [
+            "auto",
+            "websockets",
+            "wsproto",
+            "none"
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "level": "warning",
+          "code": "validated-manifest-missing",
+          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
+          "identities": [
+            "sqlite-uvicorn@py3.10",
+            "sqlite-uvicorn@py3.11",
+            "sqlite-uvicorn@py3.12"
+          ]
+        }
+      ],
+      "application_hash": null,
+      "runtime_hash": null,
+      "serve_check": {
+        "executed": false,
+        "passed": false,
+        "command": "tigrbl-auth serve --check --server uvicorn --format json",
+        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12",
+        "exit_code": null
+      },
+      "validated_matrix": {
+        "matrix_profile": "sqlite-uvicorn",
+        "expected_identities": [
+          "sqlite-uvicorn@py3.10",
+          "sqlite-uvicorn@py3.11",
+          "sqlite-uvicorn@py3.12"
+        ],
+        "present_identities": [],
+        "passed_identities": [],
+        "missing_identities": [
+          "sqlite-uvicorn@py3.10",
+          "sqlite-uvicorn@py3.11",
+          "sqlite-uvicorn@py3.12"
+        ],
+        "failed_identities": [],
+        "identity_ready_count": 0,
+        "install_evidence_ready_count": 0,
+        "failure_reasons": {}
+      },
+      "required_extra": "uvicorn",
+      "profile_name": "sqlite-uvicorn",
+      "supported_python_versions": [
+        "3.10",
+        "3.11",
+        "3.12"
+      ],
+      "pyproject_extra_present": true,
+      "pyproject_extra_values": [
+        "uvicorn[standard]==0.41.0"
+      ],
+      "aggregate_runner_extra_present": true,
+      "constraints": [
+        "constraints/base.txt",
+        "constraints/runner-uvicorn.txt"
+      ],
+      "constraints_present": [
+        "constraints/base.txt",
+        "constraints/runner-uvicorn.txt"
+      ],
+      "tox_envs": [
+        "py310-sqlite-uvicorn",
+        "py311-sqlite-uvicorn",
+        "py312-sqlite-uvicorn"
+      ],
+      "tox_envs_present": [
+        "py310-sqlite-uvicorn",
+        "py311-sqlite-uvicorn",
+        "py312-sqlite-uvicorn"
+      ],
+      "ci_install_job": "sqlite-uvicorn",
+      "ci_install_job_present": true,
+      "ci_release_gate_probe_present": true,
+      "placeholder_supported": false,
+      "declared_installable_from_repository": true
+    }
+  ]
+}

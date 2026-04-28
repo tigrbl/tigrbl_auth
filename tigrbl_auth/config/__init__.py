@@ -13,6 +13,7 @@ from .deployment import (
     resolve_deployment,
 )
 from .feature_flags import feature_flag_registry, cli_flag_registry, flags_for_profile
+from .profile_loader import load_packaged_runtime_profiles, load_runtime_profile
 from .surfaces import surface_registry, enabled_surface_summary, surface_set_registry
 
 __all__ = [
@@ -21,6 +22,8 @@ __all__ = [
     "feature_flag_registry",
     "cli_flag_registry",
     "flags_for_profile",
+    "load_packaged_runtime_profiles",
+    "load_runtime_profile",
     "surface_registry",
     "enabled_surface_summary",
     "surface_set_registry",

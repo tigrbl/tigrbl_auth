@@ -5,10 +5,10 @@
   "validation_date": "2026-03-24",
   "result": "passed",
   "tests": [
-    "tests/unit/test_phase10_hardening_cluster_c.py",
+    "tests/unit/test_hardening_cluster_c.py",
     "tests/conformance/hardening/test_oidc_backchannel_logout.py"
   ],
-  "command": "PYTHONPATH=. pytest --noconftest -q tests/unit/test_phase10_hardening_cluster_c.py tests/conformance/hardening/test_rfc8705_mtls.py tests/conformance/hardening/test_rfc9449_dpop.py tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py tests/negative/test_phase6_hardening_runtime_enforcement.py tests/conformance/hardening/test_oidc_frontchannel_logout.py tests/conformance/hardening/test_oidc_backchannel_logout.py",
-  "checkpoint_report": "docs/compliance/PHASE10_HARDENING_TARGET_CLUSTER_C.md",
-  "targeted_test_output": "docs/compliance/phase10_targeted_test_output.txt"
+  "command": "PYTHONPATH=. pytest --noconftest -q tests/unit/test_hardening_cluster_c.py tests/conformance/hardening/test_rfc8705_mtls.py tests/conformance/hardening/test_rfc9449_dpop.py tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py tests/negative/test_hardening_runtime_enforcement.py tests/conformance/hardening/test_oidc_frontchannel_logout.py tests/conformance/hardening/test_oidc_backchannel_logout.py",
+  "checkpoint_report": "docs/compliance/capability_HARDENING_TARGET_CLUSTER_C.md",
+  "targeted_test_output": "docs/compliance/capability_targeted_test_output.txt"
 }

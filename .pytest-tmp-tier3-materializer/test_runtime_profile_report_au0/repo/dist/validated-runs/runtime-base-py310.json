@@ -1,0 +1,12 @@
+{
+  "kind": "runtime-profile",
+  "matrix_profile": "base",
+  "python_version": "3.10",
+  "passed": true,
+  "runtime_smoke_passed": true,
+  "application_probe_passed": true,
+  "surface_probe_passed": true,
+  "surface_probe_endpoint_count": 4,
+  "surface_probe_passed_count": 4,
+  "surface_probe_failed_count": 0
+}

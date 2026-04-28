@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final
 
-STATUS: Final[str] = 'phase-8-persistence-backed-management-runtime'
+STATUS: Final[str] = 'persistence-backed-client-management-runtime'
 RFC7592_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc7592'
 
 

@@ -1066,287 +1066,6 @@
     },
     {
       "aliases": [],
-      "description": "Architecture decision record operators.",
-      "examples": [],
-      "exit_codes": [],
-      "family": "governance",
-      "flags": [],
-      "global_flags": [
-        "config",
-        "env_file",
-        "profile",
-        "tenant",
-        "issuer",
-        "surface_set",
-        "slice",
-        "extension",
-        "plugin_mode",
-        "runtime_style",
-        "strict",
-        "no_strict",
-        "format",
-        "output",
-        "verbose",
-        "trace"
-      ],
-      "handler": null,
-      "help": "List, inspect, create, and index ADRs.",
-      "include_global": true,
-      "name": "adr",
-      "output": null,
-      "verbs": [
-        {
-          "aliases": [],
-          "description": "List ADRs and their titles.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.list",
-          "help": "List ADRs.",
-          "include_global": true,
-          "name": "list",
-          "output": {
-            "description": "Collection output for list/status operations.",
-            "fields": [
-              "command",
-              "resource",
-              "items",
-              "total",
-              "offset",
-              "limit"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-collection"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Render a selected ADR.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "id"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.show",
-          "help": "Show a single ADR.",
-          "include_global": true,
-          "name": "show",
-          "output": {
-            "description": "Single operator resource record with state and metadata.",
-            "fields": [
-              "command",
-              "resource",
-              "record",
-              "state_path"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-record"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Create a new ADR markdown document from a template.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "id",
-            "title"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.new",
-          "help": "Create a new ADR template.",
-          "include_global": true,
-          "name": "new",
-          "output": {
-            "description": "Single operator resource record with state and metadata.",
-            "fields": [
-              "command",
-              "resource",
-              "record",
-              "state_path"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-record"
-          }
-        },
-        {
-          "aliases": [],
-          "description": "Generate the ADR index markdown and JSON summaries.",
-          "examples": [],
-          "exit_codes": [
-            {
-              "code": 0,
-              "meaning": "Operation completed successfully."
-            },
-            {
-              "code": 1,
-              "meaning": "Operation failed or verification did not pass."
-            },
-            {
-              "code": 2,
-              "meaning": "CLI argument or contract validation failed before execution."
-            }
-          ],
-          "family": "governance",
-          "flags": [
-            "repo_root",
-            "report_dir"
-          ],
-          "global_flags": [
-            "config",
-            "env_file",
-            "profile",
-            "tenant",
-            "issuer",
-            "surface_set",
-            "slice",
-            "extension",
-            "plugin_mode",
-            "runtime_style",
-            "strict",
-            "no_strict",
-            "format",
-            "output",
-            "verbose",
-            "trace"
-          ],
-          "handler": "adr.index",
-          "help": "Generate the ADR index.",
-          "include_global": true,
-          "name": "index",
-          "output": {
-            "description": "Collection output for list/status operations.",
-            "fields": [
-              "command",
-              "resource",
-              "items",
-              "total",
-              "offset",
-              "limit"
-            ],
-            "media_types": [
-              "json",
-              "yaml",
-              "text"
-            ],
-            "name": "resource-collection"
-          }
-        }
-      ]
-    },
-    {
-      "aliases": [],
       "description": "Aggregate core verification, runtime profile, contracts, evidence, and gate status.",
       "examples": [],
       "exit_codes": [
@@ -1433,7 +1152,7 @@
         "trace"
       ],
       "handler": null,
-      "help": "Bootstrap deployment artifacts and checkpoint lifecycle state.",
+      "help": "Bootstrap deployment artifacts and evidence bundle lifecycle state.",
       "include_global": true,
       "name": "bootstrap",
       "output": null,
@@ -1572,7 +1291,7 @@
         },
         {
           "aliases": [],
-          "description": "Materialize bootstrap manifests and record an applied bootstrap checkpoint.",
+          "description": "Materialize bootstrap manifests and record an applied bootstrap evidence bundle.",
           "examples": [],
           "exit_codes": [
             {
@@ -1641,7 +1360,7 @@
         },
         {
           "aliases": [],
-          "description": "Verify bootstrap manifests, effective artifacts, and applied checkpoint state.",
+          "description": "Verify bootstrap manifests, effective artifacts, and applied evidence bundle state.",
           "examples": [],
           "exit_codes": [
             {
@@ -1866,7 +1585,7 @@
         },
         {
           "aliases": [],
-          "description": "Record a migration application checkpoint for the structured plan.",
+          "description": "Record a migration application evidence bundle for the structured plan.",
           "examples": [],
           "exit_codes": [
             {
@@ -1913,7 +1632,7 @@
             "trace"
           ],
           "handler": "migrate.apply",
-          "help": "Apply the migration checkpoint plan.",
+          "help": "Apply the migration evidence bundle plan.",
           "include_global": true,
           "name": "apply",
           "output": {
@@ -7822,13 +7541,13 @@
   "package": "tigrbl_auth",
   "schema_version": 1,
   "summary": {
-    "command_count": 21,
+    "command_count": 20,
     "direct_command_count": 4,
     "family_command_counts": {
       "admin": 10,
       "contracts": 1,
       "evidence": 1,
-      "governance": 5,
+      "governance": 4,
       "operator": 2,
       "release": 1,
       "runtime": 1
@@ -7836,8 +7555,8 @@
     "family_count": 7,
     "flag_count": 88,
     "global_flag_count": 16,
-    "nested_command_count": 17,
+    "nested_command_count": 16,
     "resource_command_count": 10,
-    "verb_count": 87
+    "verb_count": 83
   }
 }

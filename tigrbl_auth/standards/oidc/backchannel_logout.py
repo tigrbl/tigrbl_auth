@@ -14,7 +14,7 @@ from uuid import UUID, uuid4
 
 from tigrbl_auth.config.settings import settings
 
-STATUS: Final[str] = "phase-10-backchannel-fanout-runtime"
+STATUS: Final[str] = "backchannel-logout-fanout-runtime"
 _BACKCHANNEL_EVENT: Final[str] = "http://schemas.openid.net/event/backchannel-logout"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 _ALLOWED_CLOCK_SKEW: Final[int] = 300
@@ -94,7 +94,7 @@ def _encode_checkpoint_logout_token(claims: dict[str, Any]) -> str:
             _b64url(json.dumps(claims, separators=(",", ":"), sort_keys=True).encode("utf-8")),
         )
     )
-    secret = str(getattr(settings, "jwt_secret", "phase10-backchannel-secret")).encode("utf-8")
+    secret = str(getattr(settings, "jwt_secret", "capability-backchannel-secret")).encode("utf-8")
     signature = hmac.new(secret, signing_input.encode("ascii"), hashlib.sha256).digest()
     return f"{signing_input}.{_b64url(signature)}"
 
@@ -104,7 +104,7 @@ def _decode_checkpoint_logout_token(token: str) -> dict[str, Any]:
     if len(parts) != 3:
         raise ValueError("malformed logout token")
     signing_input = f"{parts[0]}.{parts[1]}"
-    secret = str(getattr(settings, "jwt_secret", "phase10-backchannel-secret")).encode("utf-8")
+    secret = str(getattr(settings, "jwt_secret", "capability-backchannel-secret")).encode("utf-8")
     expected = hmac.new(secret, signing_input.encode("ascii"), hashlib.sha256).digest()
     if not hmac.compare_digest(expected, _b64url_decode(parts[2])):
         raise ValueError("logout token signature mismatch")

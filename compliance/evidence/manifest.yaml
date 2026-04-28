@@ -64,7 +64,7 @@ state:
   - dist/release-bundles/0.3.2.dev14/peer-claim
   signed_release_profile_count: 4
   release_attestation_algorithm: Ed25519
-  phase_13_release_decision_complete: true
+  release_decision_complete: true
   release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
   retained_boundary_tier3_complete: true
   strict_independent_claims_ready: false
@@ -152,10 +152,14 @@ promoted_target_subsets:
   - OpenRPC 1.4.x admin/control-plane contract
   tier4: []
 notes:
-- Phase 10 promotes the full baseline target bucket and a selected production subset
+- The retained baseline target bucket and selected production subset are promoted
   to Tier 3 using preserved gate, mapping, and contract bundles.
 - Full-boundary Tier 3 promotion is still incomplete.
 - Tier 4 peer bundles remain absent.
+- The independent peer program installs full retained target-to-peer mapping, counterpart
+  catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets
+  are promoted to Tier 4 in this checkpoint because preserved qualifying independent
+  external artifacts were not supplied.
 - Phase 13 installs the independent peer program, full retained target-to-peer mapping,
   counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion
   logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying

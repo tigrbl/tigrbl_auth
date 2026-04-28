@@ -65,9 +65,9 @@ profiles:
   - tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
-  - tests/unit/test_phase10_tier3_validated_rebuild.py
-  - tests/unit/test_phase4_runtime_validation_matrix.py
-  - tests/unit/test_phase6_operator_control_plane.py
+  - tests/unit/test_tier3_validated_rebuild.py
+  - tests/unit/test_runtime_validation_matrix.py
+  - tests/unit/test_operator_control_plane.py
   - tests/unit/test_adapters.py
   - tests/unit/test_auth_code_exchange_pkce.py
   - tests/unit/test_authorize_id_token_hashes.py
@@ -92,14 +92,14 @@ categories:
   - tests/unit/test_openapi_well_known_endpoints.py
   - tests/unit/test_openid_configuration.py
   - tests/unit/test_openid_userinfo_endpoint.py
-  - tests/unit/test_phase0_claim_boundary_rebaseline.py
-  - tests/unit/test_phase1_published_dependency_model.py
-  - tests/unit/test_phase2_runner_adapter_runtime_layer.py
-  - tests/unit/test_phase3_public_route_contracts.py
-  - tests/unit/test_phase6_profile_discovery_runtime.py
-  - tests/unit/test_phase7_advanced_surface_contracts.py
-  - tests/unit/test_phase7_session_logout_cluster_b.py
-  - tests/unit/test_phase8_hardening_cluster_a.py
+  - tests/unit/test_claim_boundary_rebaseline.py
+  - tests/unit/test_published_dependency_model.py
+  - tests/unit/test_runner_adapter_runtime_layer.py
+  - tests/unit/test_public_route_contracts.py
+  - tests/unit/test_profile_discovery_runtime.py
+  - tests/unit/test_advanced_surface_contracts.py
+  - tests/unit/test_session_logout_cluster_b.py
+  - tests/unit/test_hardening_cluster_a.py
   - tests/unit/test_remote_adapter.py
   - tests/unit/test_rfc6749_auth_flow_endpoints.py
   - tests/unit/test_rfc6749_token_endpoint.py
@@ -151,26 +151,26 @@ categories:
   - tests/unit/test_security_deps.py
   - tests/unit/test_user_register_schema.py
   - tests/unit/test_well_known_endpoints_behavior.py
-  - tests/unit/test_phase3_runtime_launcher.py
-  - tests/unit/test_phase4_cli_contract.py
-  - tests/unit/test_phase5_operator_service_layer.py
+  - tests/unit/test_runtime_launcher.py
+  - tests/unit/test_cli_contract.py
+  - tests/unit/test_operator_service_layer.py
   - tests/unit/test_boundary_freeze_checkpoint.py
-  - tests/unit/test_phase13_truthfulness_alignment.py
-  - tests/unit/test_phase14_claim_registry_alignment.py
-  - tests/unit/test_phase6_migration_portability_evidence.py
-  - tests/unit/test_phase1_clean_room_install_substrate.py
-  - tests/unit/test_phase2_app_factory_materialization.py
-  - tests/unit/test_phase4_collect_validated_artifact_downloads.py
-  - tests/unit/test_phase4_validated_execution_runtime_matrix.py
-  - tests/unit/test_phase5_certification_lane_evidence.py
-  - tests/unit/test_phase9_hardening_cluster_b.py
-  - tests/unit/test_phase10_hardening_cluster_c.py
-  - tests/unit/test_phase8_non_rfc_track_checkpoint.py
-  - tests/unit/test_phase9_feature_completeness_checkpoint.py
-  - tests/unit/test_phase11_tier4_checkpoint.py
-  - tests/unit/test_phase12_final_aggregation.py
-  - tests/unit/test_phase15_retained_target_test_evidence.py
-  - tests/unit/test_phase16_fapi_runtime_profile.py
+  - tests/unit/test_truthfulness_alignment.py
+  - tests/unit/test_claim_registry_alignment.py
+  - tests/unit/test_migration_portability_evidence.py
+  - tests/unit/test_clean_room_install_substrate.py
+  - tests/unit/test_app_factory_materialization.py
+  - tests/unit/test_collect_validated_artifact_downloads.py
+  - tests/unit/test_validated_execution_runtime_matrix.py
+  - tests/unit/test_certification_lane_evidence.py
+  - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_non_rfc_track_checkpoint.py
+  - tests/unit/test_feature_completeness_checkpoint.py
+  - tests/unit/test_tier4_checkpoint.py
+  - tests/unit/test_final_aggregation.py
+  - tests/unit/test_retained_target_test_evidence.py
+  - tests/unit/test_fapi_runtime_profile.py
   integration:
   - tests/integration/test_auth_flows.py
   - tests/integration/test_authorization_code_flow.py
@@ -248,20 +248,20 @@ categories:
   - tests/interop/test_tier4_promotion_fail_closed.py
   - tests/interop/test_runner_profile_catalog_completeness.py
   - tests/interop/test_operator_profile_catalog_completeness.py
-  - tests/interop/test_phase13_peer_target_coverage.py
+  - tests/interop/test_peer_target_coverage.py
   - tests/interop/test_tier4_fixture_rejection.py
   e2e:
   - tests/e2e/test_release_gate_catalog.py
   - tests/examples/test_readme_usage.py
   security:
   - tests/security/test_release_bundle_signing.py
-  - tests/security/test_phase12_sender_constraint_replay.py
+  - tests/security/test_sender_constraint_replay.py
   negative:
   - tests/negative/test_contract_diff_detects_drift.py
   - tests/negative/test_cookie_and_logout_abuse_cases.py
-  - tests/negative/test_phase6_hardening_runtime_enforcement.py
-  - tests/negative/test_phase12_invalid_artifact_inputs.py
-  - tests/negative/test_phase12_resource_exchange_abuse.py
-  - tests/negative/test_phase17_certification_attack_paths.py
+  - tests/negative/test_hardening_runtime_enforcement.py
+  - tests/negative/test_invalid_artifact_inputs.py
+  - tests/negative/test_resource_exchange_abuse.py
+  - tests/negative/test_certification_attack_paths.py
   perf:
   - tests/perf/test_bundle_manifest_size.py

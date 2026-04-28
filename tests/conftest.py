@@ -6,7 +6,6 @@ import inspect
 import os
 import shutil
 import sys
-import tempfile
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -252,9 +251,9 @@ def postgres_database_url() -> str | None:
 
 
 @pytest_asyncio.fixture
-async def test_db_engine() -> AsyncGenerator[Any, None]:
+async def test_db_engine(tmp_path_factory: pytest.TempPathFactory) -> AsyncGenerator[Any, None]:
     """Create and initialize a test database engine."""
-    db_path = Path(tempfile.mkdtemp()) / "tigrbl_auth_test.db"
+    db_path = tmp_path_factory.mktemp("runtime-db") / "tigrbl_auth_test.db"
     test_database_url = f"sqlite+aiosqlite:///{db_path}"
     async with _runtime_engine_context(test_database_url) as engine:
         try:
@@ -393,17 +392,19 @@ async def enable_rfc9126(db_session):
 
 
 @pytest.fixture
-def temp_key_file():
+def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     """Create a temporary key directory for testing."""
-    temp_dir = Path(tempfile.mkdtemp())
+    temp_dir = tmp_path_factory.mktemp("runtime-keys")
     temp_kid = temp_dir / "jwt_ed25519.kid"
 
     import tigrbl_auth.crypto as crypto_module
     import tigrbl_auth.oidc_id_token as oidc_module
+    import tigrbl_auth.standards.oidc.id_token as canonical_oidc_module
 
     original_dir = crypto_module._DEFAULT_KEY_DIR
     original_path = crypto_module._DEFAULT_KEY_PATH
     original_rsa_path = oidc_module._RSA_KEY_PATH
+    original_canonical_rsa_path = canonical_oidc_module._RSA_KEY_PATH
 
     crypto_module._DEFAULT_KEY_DIR = temp_dir
     crypto_module._DEFAULT_KEY_PATH = temp_kid
@@ -413,6 +414,9 @@ def temp_key_file():
     oidc_module._RSA_KEY_PATH = temp_dir / "jwt_rs256.kid"
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
+    canonical_oidc_module._RSA_KEY_PATH = oidc_module._RSA_KEY_PATH
+    canonical_oidc_module._provider.cache_clear()
+    canonical_oidc_module._service_cache = None
 
     yield temp_kid
 
@@ -425,6 +429,9 @@ def temp_key_file():
     oidc_module._RSA_KEY_PATH = original_rsa_path
     oidc_module._provider.cache_clear()
     oidc_module._service_cache = None
+    canonical_oidc_module._RSA_KEY_PATH = original_canonical_rsa_path
+    canonical_oidc_module._provider.cache_clear()
+    canonical_oidc_module._service_cache = None
 
 
 @pytest.fixture

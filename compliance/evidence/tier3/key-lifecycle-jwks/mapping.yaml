@@ -9,16 +9,16 @@ modules:
 - tigrbl_auth/services/operator_service.py
 tests:
 - tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/security/test_phase12_sender_constraint_replay.py
+- tests/security/test_sender_constraint_replay.py
 contracts:
-- contracts/cli_contract.json
-- contracts/jwks.json
-- contracts/oauth-authorization-server.json
+- contracts\cli_contract.json
+- contracts\jwks.json
+- contracts\oauth-authorization-server.json
 reports:
-- reports/current_state_report.json
-- reports/current_state_report.md
-- reports/certification_state_report.json
-- reports/certification_state_report.md
-- reports/release_gate_report.json
-- reports/release_gate_report.md
-- reports/phase12_targeted_test_output.txt
+- reports\current_state_report.json
+- reports\current_state_report.md
+- reports\certification_state_report.json
+- reports\certification_state_report.md
+- reports\release_gate_report.json
+- reports\release_gate_report.md
+- reports\retained-boundary-runtime-operator-test-output.txt

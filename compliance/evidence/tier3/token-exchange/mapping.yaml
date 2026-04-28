@@ -8,7 +8,7 @@ modules:
 - tigrbl_auth/api/rpc/methods/token.py
 - tigrbl_auth/api/rpc/schemas/token.py
 tests:
-- tests/unit/test_phase8_hardening_cluster_a.py
+- tests/unit/test_hardening_cluster_a.py
 - tests/conformance/hardening/test_rfc8693_token_exchange.py
 contracts:
 - contracts/openid-configuration.json

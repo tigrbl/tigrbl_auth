@@ -4,3 +4,8 @@
 
 /.operator*
 /runtime_secrets
+/.pytest-tmp-focused-final
+/.pytest-tmp-full-automakegooder
+/.pytest-tmp-late-suite
+/.pytest-tmp-tier4-checkpoint
+/dist

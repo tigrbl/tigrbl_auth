@@ -33,7 +33,7 @@ A critical fail-closed gap existed before this checkpoint: repository-generated 
 Targeted regression and evidence-hardening validation passed:
 
 - `tests/interop/test_tier4_fixture_rejection.py`
-- `tests/unit/test_phase11_tier4_checkpoint.py`
+- `tests/unit/test_tier4_checkpoint.py`
 - `tests/interop/test_tier4_external_handoff_templates.py`
 - `tests/interop/test_peer_matrix_external_status.py`
 - `tests/interop/test_tier4_promotion_fail_closed.py`

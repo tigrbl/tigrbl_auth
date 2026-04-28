@@ -15,7 +15,7 @@ required_artifacts:
 - tigrbl_auth/gateway.py
 - tests/unit/test_openid_configuration.py
 - tests/unit/test_rfc9728_metadata_checkpoint.py
-- tests/unit/test_phase6_profile_discovery_runtime.py
+- tests/unit/test_profile_discovery_runtime.py
 scenario_ids:
 - gateway-discovery
 - gateway-jwks

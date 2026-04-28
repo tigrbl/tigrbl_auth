@@ -58,6 +58,17 @@ LEGACY_FLAG_TO_TARGET_PATH = "compliance/mappings/feature-flag-to-target.yaml"
 DECLARED_TARGET_CLAIMS_PATH = "compliance/claims/declared-target-claims.yaml"
 REPOSITORY_STATE_PATH = "compliance/claims/repository-state.yaml"
 FAPI_ATOMIC_CLAIMS_PATH = "compliance/claims/fapi-atomic-claims.yaml"
+LEGACY_CLAIM_MODEL_STATE_KEYS = {
+    "phase_14_claim_registry_canonical_complete",
+    "phase_14_fapi2_security_profile_declared_complete",
+    "phase_14_public_route_atomic_claims_complete",
+    "phase_14_openrpc_atomic_claims_complete",
+    "phase_14_cli_atomic_claims_complete",
+    "phase_14_core_targets_missing_from_feature_map",
+    "phase_14_extension_targets_missing_from_feature_map",
+    "phase_14_settings_backed_flags_missing_from_flag_map",
+    "phase_14_release_claims_machine_derivable",
+}
 
 
 def _load_yaml(path: Path) -> Any:
@@ -670,17 +681,19 @@ def generate_claim_registries(repo_root: Path) -> dict[str, Any]:
 
     repository_state_payload = _load_yaml(repo_root / REPOSITORY_STATE_PATH)
     repository_state = dict(repository_state_payload.get("repository_state", {}))
+    for key in LEGACY_CLAIM_MODEL_STATE_KEYS:
+        repository_state.pop(key, None)
     repository_state.update(
         {
-            "phase_14_claim_registry_canonical_complete": verification["passed"],
-            "phase_14_fapi2_security_profile_declared_complete": True,
-            "phase_14_public_route_atomic_claims_complete": verification["public_route_claim_count"] == len([path for path, meta in ROUTE_REGISTRY.items() if str(meta.get("surface_set")) == "public-rest"]),
-            "phase_14_openrpc_atomic_claims_complete": verification["openrpc_method_claim_count"] == len(get_rpc_method_registry()),
-            "phase_14_cli_atomic_claims_complete": verification["cli_flag_claim_count"] == len(ARGUMENT_SPECS) and verification["cli_verb_claim_count"] >= 1,
-            "phase_14_core_targets_missing_from_feature_map": verification["core_targets_missing_from_feature_map"],
-            "phase_14_extension_targets_missing_from_feature_map": verification["extension_targets_missing_from_feature_map"],
-            "phase_14_settings_backed_flags_missing_from_flag_map": verification["settings_backed_flags_missing_from_flag_map"],
-            "phase_14_release_claims_machine_derivable": verification["passed"],
+            "claim_registry_canonical_complete": verification["passed"],
+            "fapi2_security_profile_declared_complete": True,
+            "public_route_atomic_claims_complete": verification["public_route_claim_count"] == len([path for path, meta in ROUTE_REGISTRY.items() if str(meta.get("surface_set")) == "public-rest"]),
+            "openrpc_atomic_claims_complete": verification["openrpc_method_claim_count"] == len(get_rpc_method_registry()),
+            "cli_atomic_claims_complete": verification["cli_flag_claim_count"] == len(ARGUMENT_SPECS) and verification["cli_verb_claim_count"] >= 1,
+            "core_targets_missing_from_feature_map": verification["core_targets_missing_from_feature_map"],
+            "extension_targets_missing_from_feature_map": verification["extension_targets_missing_from_feature_map"],
+            "settings_backed_flags_missing_from_flag_map": verification["settings_backed_flags_missing_from_flag_map"],
+            "release_claims_machine_derivable": verification["passed"],
         }
     )
     repository_state_payload["schema_version"] = int(repository_state_payload.get("schema_version", 1) or 1)

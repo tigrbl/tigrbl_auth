@@ -94,7 +94,7 @@ class StandardOwner:
 OWNER = StandardOwner(
     label="RFC 9449",
     title="OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer",
-    runtime_status="phase-10-runtime-integrated",
+    runtime_status="dpop-runtime-integrated",
     public_surface=("/token", "/token/exchange", "/userinfo", "/introspect", "/revoke"),
     notes=(
         "DPoP proof verification is runtime-integrated with jkt binding, ath binding, optional nonce validation, "

@@ -14,7 +14,7 @@ from tigrbl_auth.config.settings import settings
 from tigrbl_auth.errors import InvalidTokenError
 from tigrbl_auth.standards.jose.rfc7519 import decode_jwt
 
-STATUS: Final[str] = "phase-6-runtime-integrated"
+STATUS: Final[str] = "assertion-framework-runtime-integrated"
 RFC7521_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7521"
 JWT_BEARER_GRANT_TYPE: Final[str] = "urn:ietf:params:oauth:grant-type:jwt-bearer"
 JWT_BEARER_ASSERTION_TYPE: Final[str] = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"

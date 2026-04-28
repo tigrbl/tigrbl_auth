@@ -1,0 +1,27 @@
+{
+  "kind": "runtime-profile",
+  "matrix_profile": "base",
+  "python_version": "3.10",
+  "identity": "base@py310",
+  "environment_identity": {
+    "python_version": "3.10",
+    "python_tag": "py310"
+  },
+  "install_substrate_artifact": "dist/install-substrate/base-py310.json",
+  "install_substrate_artifact_sha256": "install-sha",
+  "install_substrate_environment_identity": {
+    "python_version": "3.10"
+  },
+  "install_substrate_static_manifest_passed": true,
+  "install_substrate_current_profile_import_probe_passed": true,
+  "install_substrate_runtime_surface_probe_passed": true,
+  "runtime_smoke_artifact": "dist/runtime-smoke/base-py310.json",
+  "runtime_smoke_artifact_sha256": "smoke-sha",
+  "runtime_smoke_passed": true,
+  "application_probe_passed": true,
+  "surface_probe_passed": true,
+  "surface_probe_endpoint_count": 4,
+  "surface_probe_passed_count": 4,
+  "surface_probe_failed_count": 0,
+  "passed": true
+}

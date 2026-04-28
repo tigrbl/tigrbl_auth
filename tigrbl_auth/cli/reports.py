@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Contracts, evidence, release, signing, and reporting automation for checkpoint phases 6-12."""
+"""Contracts, evidence, release, signing, and reporting automation."""
 
 import ast
 import hashlib
@@ -434,7 +434,6 @@ AUTHORITATIVE_DOCS = {
     "docs/compliance/TIER4_PROMOTION_MATRIX.md",
     "docs/compliance/RELEASE_DECISION_RECORD.md",
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",
-    "docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md",
     "docs/reference/README.md",
     "docs/reference/CLI_SURFACE.md",
     "docs/reference/PUBLIC_ROUTE_SURFACE.md",
@@ -806,14 +805,14 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "bootstrap storage",
         passed=operator_summary.get("backend") == "sqlite-authoritative" and operator_summary.get("repo_mutation_dependency") is False,
         summary="The operator plane materializes durable sqlite-backed storage outside the repository tree.",
-        evidence=["tigrbl_auth/services/_operator_store.py", "tests/unit/test_phase6_operator_control_plane.py"],
+        evidence=["tigrbl_auth/services/_operator_store.py", "tests/unit/test_operator_control_plane.py"],
         details_payload=operator_summary,
     )
     capabilities["register_manage_clients"] = _capability(
         "register/manage clients",
         passed=client_passed,
         summary="Client records can be created, updated, listed, fetched, and deleted through the durable operator plane.",
-        evidence=["tests/conformance/operator/test_cli_resource_lifecycle.py", "tests/unit/test_phase6_operator_control_plane.py"],
+        evidence=["tests/conformance/operator/test_cli_resource_lifecycle.py", "tests/unit/test_operator_control_plane.py"],
         details_payload={"create_status": client_create.status, "update_status": client_update.status, "delete_status": client_delete.status, "client_verbs": sorted(client_verbs)},
     )
 
@@ -898,7 +897,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
     release_verbs = verb_index.get("release", set())
     release_bundle_dir = sandbox_root / "release-bundle"
     bundle = build_release_bundle(repo_root, deployment, bundle_dir=release_bundle_dir)
-    signed = sign_release_bundle(bundle, signing_key="step9-feature-key")
+    signed = sign_release_bundle(bundle, signing_key="capability-feature-key")
     verified = verify_release_bundle_signatures(bundle)
     capabilities["build_sign_verify_release_bundles"] = _capability(
         "build, sign, and verify release bundles",
@@ -1883,15 +1882,15 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
                 selected.append(path)
 
     if "sender-constrained" in claim_id or "dpop" in claim_id or "mtls" in claim_id:
-        _match("sender_constraint", "phase17_certification_attack_paths")
+        _match("sender_constraint", "capability_certification_attack_paths")
     if "par" in claim_id:
-        _match("phase17_certification_attack_paths", "phase6_hardening_runtime_enforcement")
+        _match("capability_certification_attack_paths", "capability_hardening_runtime_enforcement")
     if "issuer" in claim_id or "mix" in claim_id:
-        _match("phase17_certification_attack_paths", "phase9_hardening_cluster_b")
+        _match("capability_certification_attack_paths", "capability_hardening_cluster_b")
     if "security-bcp" in claim_id or "rfc 9700" in str(claim.get("targets", [])).lower():
-        _match("phase6_hardening_runtime_enforcement", "phase17_certification_attack_paths")
+        _match("capability_hardening_runtime_enforcement", "capability_certification_attack_paths")
     if not selected and _security_sensitive_claim(claim):
-        _match("phase17_certification_attack_paths", "phase6_hardening_runtime_enforcement", "phase12_sender_constraint_replay")
+        _match("capability_certification_attack_paths", "capability_hardening_runtime_enforcement", "capability_sender_constraint_replay")
     return selected
 
 

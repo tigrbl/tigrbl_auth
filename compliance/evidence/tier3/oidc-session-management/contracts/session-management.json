@@ -1,7 +1,7 @@
 {
   "label": "OIDC Session Management",
   "title": "OpenID Connect Session Management",
-  "runtime_status": "phase-7-browser-session-runtime",
+  "runtime_status": "browser-session-runtime",
   "public_surface": [
     "/login",
     "/authorize",

@@ -28,7 +28,7 @@ from tigrbl_auth.standards.http.cookies import (
     parse_session_cookie_value,
 )
 
-STATUS: Final[str] = "phase-7-browser-session-runtime"
+STATUS: Final[str] = "browser-session-runtime"
 
 
 @dataclass(frozen=True, slots=True)
