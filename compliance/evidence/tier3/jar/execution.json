@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target": "RFC 9101",
-  "checkpoint_phase": "Phase 9",
+  "checkpoint_label": "test-plane checkpoint",
   "validation_date": "2026-03-24",
   "result": "passed",
   "tests": [

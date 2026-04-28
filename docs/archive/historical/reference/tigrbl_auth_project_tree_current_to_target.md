@@ -13,7 +13,7 @@ This document is based on:
 - the requirement to adhere to the Swarmauri monorepo and Tigrbl framework model,
 - the requirement to introduce ADRs, release gates, and certifiable standards evidence.
 
-The standards matrix requires explicit certification tiers through an **independent peer claim** tier and separates implementation phases from claim maturity. That means the package tree cannot be runtime-only; it needs governance, gate, spec, and evidence planes as first-class repository structure.
+The standards matrix requires explicit certification tiers through an **independent peer claim** tier and separates implementation s from claim maturity. That means the package tree cannot be runtime-only; it needs governance, gate, spec, and evidence planes as first-class repository structure.
 
 ---
 
@@ -314,7 +314,7 @@ pkgs/standards/tigrbl_auth/
 │   │   ├── standards-matrix.yaml
 │   │   ├── target-set.yaml
 │   │   ├── certification-tiers.yaml
-│   │   └── implementation-phases.yaml
+│   │   └── implementation-s.yaml
 │   ├── mappings/
 │   │   ├── feature-to-target.yaml
 │   │   ├── target-to-endpoint.yaml
@@ -554,45 +554,45 @@ target:   pkgs/standards/tigrbl_auth/
 
 ## 7. Ordered migration plan
 
-### Step 1 — Freeze claims
+### Device-code request item — Freeze claims
 
 - declare the target standards set,
 - remove or quarantine non-core RFCs that are not part of the certifiable auth-server boundary,
 - define which claims are Tier 2, Tier 3, and Tier 4.
 
-### Step 2 — Install governance
+### Device-code polling item — Install governance
 
 - create `docs/adr/`,
 - create `compliance/targets/`,
 - create `compliance/mappings/`,
 - create `compliance/gates/`.
 
-### Step 3 — Reshape runtime package
+### Item 3 — Reshape runtime package
 
 - rename `orm` to `tables`,
 - move `routers` to `api`,
 - split transport handlers from operational logic into `ops/`,
 - split protocol logic into `standards/`.
 
-### Step 4 — Remove `vendor/`
+### Item 4 — Remove `vendor/`
 
 - convert to direct imports,
 - keep compatibility shims only if temporary and clearly deprecated.
 
-### Step 5 — Materialize contracts
+### Item 5 — Materialize contracts
 
 - generate and check in OpenAPI artifacts,
 - generate and check in OpenRPC artifacts,
 - gate diffs in CI.
 
-### Step 6 — Reshape tests
+### Item 6 — Reshape tests
 
 - keep pure unit tests in `tests/unit/`,
 - move standards compliance tests to `tests/conformance/`,
 - move wire-level and third-party checks to `tests/interop/`,
 - move exploit-style and invalid-input coverage to `tests/negative/`.
 
-### Step 7 — Install evidence and release gates
+### Item 7 — Install evidence and release gates
 
 - create evidence bundle generation,
 - create release attestation manifest,

@@ -630,7 +630,7 @@ def build_openrpc_contract(deployment: Any, *, version: str) -> dict[str, Any]:
                         "owner_module": definition.owner_module,
                         "required_flags": list(definition.required_flags),
                         "surface_set": definition.surface_set,
-                        "since_phase": definition.since_phase,
+                        "introduced_in": definition.introduced_in,
                     },
                 }
             )
@@ -770,7 +770,7 @@ def build_effective_claims_manifest(repo_root: Path, deployment: Any, *, profile
         "effective_deployment": deployment.to_manifest(),
         "claim_set": {
             "current_repository_tier": claim_set.get("current_repository_tier", 0),
-            "phase": claim_set.get("phase", "P3"),
+            "delivery_track": claim_set.get("delivery_track", "hardening-interop"),
             "claims": claims,
         },
     }

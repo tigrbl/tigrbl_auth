@@ -622,7 +622,7 @@ def update_claims(promoted_targets: set[str], retained_targets: list[str]) -> di
     claims_doc = load_claims()
     claim_set = claims_doc.setdefault('claim_set', {})
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
-    claim_set['phase'] = 'P13'
+    claim_set['delivery_track'] = 'independent-peer-evidence'
     claim_set['current_repository_tier'] = 4 if full_boundary_promoted else 3
     for claim in claim_set.get('claims', []):
         target = str(claim.get('target'))
@@ -641,10 +641,10 @@ def update_repository_state(promoted_targets: set[str], peer_matrix: list[dict[s
     state = state_doc.setdefault('repository_state', {})
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
     bundle_stats = summarize_peer_matrix(peer_matrix)
-    state['phase_13_independent_peer_program_extended_complete'] = True
-    state['phase_13_target_to_peer_mapping_complete'] = True
-    state['phase_13_peer_counterpart_catalog_complete'] = True
-    state['phase_13_peer_schema_and_tooling_extended'] = True
+    state['independent_peer_program_extended_complete'] = True
+    state['target_to_peer_mapping_complete'] = True
+    state['peer_counterpart_catalog_complete'] = True
+    state['peer_schema_and_tooling_extended'] = True
     state['tier4_candidate_bundle_layouts_present'] = True
     state['tier4_external_bundle_count'] = bundle_stats['preserved_bundle_count']
     state['tier4_valid_external_bundle_count'] = bundle_stats['valid_external_bundle_count']
@@ -691,13 +691,13 @@ def update_evidence_manifest(
     paths['tier4_bundle_root'] = 'compliance/evidence/tier4/bundles'
     promoted = doc.setdefault('promoted_target_subsets', {})
     promoted['tier4'] = sorted(promoted_targets)
-    notes = [note for note in list(doc.get('notes', [])) if not str(note).startswith('Phase 13 installs the independent peer program')]
+    notes = [note for note in list(doc.get('notes', [])) if not str(note).startswith('runtime-foundation checkpoint3 installs the independent peer program')]
     if promoted_targets and set(retained_targets) <= promoted_targets:
-        notes.append('Phase 13 installs the independent peer program and preserves validated external Tier 4 bundles for the full retained boundary.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program and preserves validated external Tier 4 bundles for the full retained boundary.')
     elif promoted_targets:
-        notes.append('Phase 13 installs the independent peer program and preserves validated external Tier 4 bundles for a subset of retained targets. Package-level strict independent claims remain blocked until the full retained boundary is promoted.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program and preserves validated external Tier 4 bundles for a subset of retained targets. Package-level strict independent claims remain blocked until the full retained boundary is promoted.')
     else:
-        notes.append('Phase 13 installs the independent peer program, full retained target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying independent external artifacts were not supplied.')
+        notes.append('runtime-foundation checkpoint3 installs the independent peer program, full retained target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying independent external artifacts were not supplied.')
     doc['notes'] = notes
     write_yaml(manifest_path, doc)
     return doc
@@ -789,7 +789,7 @@ def write_peer_matrix_reports(peer_matrix: list[dict[str, Any]], promoted_target
         write_text(report_dir / 'TIER4_PROMOTION_MATRIX.md', '# Tier 4 Promotion Matrix\n\n' + promo_body)
 
 
-def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, Any]], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None) -> None:
+def write_peer_program_docs(promoted_targets: set[str], peer_matrix: list[dict[str, Any]], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None) -> None:
     report_dir = ROOT / 'docs' / 'archive' / 'historical' / 'compliance'
     report_dir.mkdir(parents=True, exist_ok=True)
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
@@ -805,7 +805,7 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
             'Repository-staged fixture roots remain useful for fail-closed pipeline exercises, but they are explicitly rejected for Tier 4 promotion and package-level strict independent claims remain blocked until real external bundles are preserved and validated.'
         )
     lines = [
-        '# Phase 13 Independent Peer Program and Strict Public Claims',
+        '# runtime-foundation checkpoint3 Independent Peer Program and Strict Public Claims',
         '',
         'This checkpoint extends the independent peer program for `tigrbl_auth`, installs full retained target-to-peer coverage, and preserves Tier 4 bundle normalization logic that fails closed when external artifacts are absent, incomplete, self-attested, or repository-staged.',
         '',
@@ -837,7 +837,7 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
     ]
     for row in peer_matrix:
         lines.append(f"- `{row['profile']}` -> counterpart `{row['counterpart_id']}` -> targets `{', '.join(row['required_targets'])}`")
-    write_text(report_dir / 'PHASE13_INDEPENDENT_PEER_PROGRAM.md', '\n'.join(lines))
+    write_text(report_dir / 'INDEPENDENT_PEER_PROGRAM.md', '\n'.join(lines))
 
     runbook = (
         '# External Interop and Tier 4 Promotion\n\n'
@@ -853,7 +853,7 @@ def write_phase13_docs(promoted_targets: set[str], peer_matrix: list[dict[str, A
     write_text(ROOT / 'docs' / 'runbooks' / 'EXTERNAL_INTEROP_AND_TIER4_PROMOTION.md', runbook)
 
 
-def write_phase13_materialization_report(promoted_targets: set[str], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None, profile_count: int) -> None:
+def write_peer_materialization_report(promoted_targets: set[str], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None, profile_count: int) -> None:
     payload = {
         'passed': True,
         'external_root': str(external_root.relative_to(ROOT)) if external_root else None,
@@ -865,14 +865,14 @@ def write_phase13_materialization_report(promoted_targets: set[str], preserved_b
         'missing_retained_target_coverage': [],
         'retained_boundary_promoted': bool(retained_targets) and set(retained_targets) <= promoted_targets,
     }
-    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.json', payload)
-    lines = ['# Phase 13 Peer Materialization Report', '', f"- passed: `{payload['passed']}`", '', '## Summary', '']
+    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.json', payload)
+    lines = ['# runtime-foundation checkpoint3 Peer Materialization Report', '', f"- passed: `{payload['passed']}`", '', '## Summary', '']
     for key in ('external_root', 'preserved_bundle_count', 'candidate_profile_count', 'promoted_target_count', 'retained_target_count', 'retained_boundary_promoted'):
         lines.append(f"- {key}: `{payload[key]}`")
     lines.extend(['', '## Promoted targets', ''])
     for target in sorted(promoted_targets):
         lines.append(f'- `{target}`')
-    write_text(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.md', '\n'.join(lines))
+    write_text(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.md', '\n'.join(lines))
 
 
 def write_evidence_peer_readiness_report(promoted_targets: set[str], preserved_bundle_count: int, claims_doc: dict[str, Any]) -> None:
@@ -1138,7 +1138,7 @@ def write_status_doc(promoted_targets: set[str], retained_targets: list[str], pr
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description='Materialize Phase 13 independent peer-program artifacts.')
+    parser = argparse.ArgumentParser(description='Materialize runtime-foundation checkpoint3 independent peer-program artifacts.')
     parser.add_argument('--external-root', type=Path, default=None, help='Optional root containing externally generated peer artifacts by profile id.')
     parser.add_argument('--no-promote', action='store_true', help='Do not promote claims even when valid external bundles are present.')
     parser.add_argument('--require-full-boundary', action='store_true', help='Return a non-zero exit status unless the full retained boundary is covered by valid independent external bundles.')
@@ -1211,8 +1211,8 @@ def main(argv: list[str] | None = None) -> int:
         len(peer_profiles),
     )
     write_peer_matrix_reports(peer_matrix, promoted_targets, retained_targets)
-    write_phase13_docs(promoted_targets, peer_matrix, len(preserved_bundles), retained_targets, external_root)
-    write_phase13_materialization_report(promoted_targets, len(preserved_bundles), retained_targets, external_root, len(peer_profiles))
+    write_peer_program_docs(promoted_targets, peer_matrix, len(preserved_bundles), retained_targets, external_root)
+    write_peer_materialization_report(promoted_targets, len(preserved_bundles), retained_targets, external_root, len(peer_profiles))
     write_evidence_peer_readiness_report(promoted_targets, len(preserved_bundles), claims_doc)
     update_current_and_certification_state_reports(promoted_targets, retained_targets, len(preserved_bundles))
     update_release_gate_report(promoted_targets, retained_targets)
@@ -1235,7 +1235,7 @@ def main(argv: list[str] | None = None) -> int:
         'retained_boundary_promoted': full_boundary_promoted,
         'require_full_boundary': bool(args.require_full_boundary),
     }
-    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'phase13_peer_materialization_report.json', payload)
+    write_json(ROOT / 'docs' / 'archive' / 'historical' / 'compliance' / 'independent_peer_materialization_report.json', payload)
     if args.require_full_boundary and not full_boundary_promoted:
         return 1
     if missing_coverage:

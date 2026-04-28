@@ -4,7 +4,7 @@
 
 # Hardening Runtime Enforcement Matrix
 
-This matrix captures the executable Phase 6 runtime policy derived from `tigrbl_auth/standards/oauth2/rfc9700.py`.
+This matrix captures the executable runtime-hardening checkpoint runtime policy derived from `tigrbl_auth/standards/oauth2/rfc9700.py`.
 
 | Profile | PKCE required for all clients | Implicit/hybrid allowed | Password grant allowed | PAR required | Sender constraint required | DPoP supported | mTLS supported | Allowed response types | Allowed grant types |
 |---|---:|---:|---:|---:|---:|---:|---:|---|---|

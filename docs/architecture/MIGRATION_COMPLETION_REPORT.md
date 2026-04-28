@@ -16,17 +16,17 @@
 
 ## Scope
 
-This report records the Phase 1 architectural migration work completed on top of
-the Phase 0 certification-boundary checkpoint.
+This report records the runtime-foundation checkpoint architectural migration work completed on top of
+the boundary-lock checkpoint certification-boundary checkpoint.
 
-The goal of this phase was not to claim full feature or full RFC completion.
+The goal of this track was not to claim full feature or full RFC completion.
 The goal was to finish the **authoritative migration** so that in-scope release
 behavior resolves through domain-owned modules in the standards-oriented tree,
 not through the legacy flat RFC tree or thin wrapper modules.
 
-## Phase 1 completion statement
+## runtime-foundation checkpoint completion statement
 
-Phase 1 is complete for the authoritative release path.
+runtime-foundation checkpoint is complete for the authoritative release path.
 
 That statement is supported by the following repository conditions:
 
@@ -132,7 +132,7 @@ legacy facades or the flat RFC tree:
 - `tigrbl_auth/routers/surface.py`
 
 The active certified/core release path was already largely canonical before this
-checkpoint; this phase removes the remaining migration leaks and closes the
+checkpoint; this track removes the remaining migration leaks and closes the
 import-path story.
 
 ### 5. Standards aggregation cleanup
@@ -153,14 +153,14 @@ The following governance artifacts were updated to match repository reality:
   - promoted the migrated secondary JOSE modules into `certified_core`
   - promoted `tigrbl_auth/security/deps.py` into `certified_core`
 - `scripts/verify_wrapper_hygiene.py`
-  - now runs the stricter Phase 1 hygiene mode
+  - now runs the stricter runtime-foundation checkpoint hygiene mode
 - `tigrbl_auth/cli/boundary.py`
   - now enforces stricter wrapper hygiene checks for in-scope owner modules,
     standards-tree legacy proxies, and release-path entrypoint imports
 
 ## Exit-criteria results
 
-The Phase 1 exit criteria are now satisfied.
+The runtime-foundation checkpoint exit criteria are now satisfied.
 
 ### Exit criterion: No in-scope production/hardening RFC resolves through legacy tree or thin wrapper
 
@@ -198,9 +198,9 @@ certification or release-path ownership:
 These retained modules serve backward-compatibility and test-preservation
 purposes only.
 
-## Remaining work outside Phase 1
+## Remaining work outside runtime-foundation checkpoint
 
-Phase 1 migration completion does **not** mean the package is already
+runtime-foundation checkpoint migration completion does **not** mean the package is already
 certifiably fully featured or certifiably fully RFC compliant.
 
 Outstanding work remains in later phases, including:
@@ -218,5 +218,5 @@ Outstanding work remains in later phases, including:
 
 The repository now has a **completed authoritative architectural migration** for
 its in-scope release path. Legacy compatibility surfaces remain available, but
-Phase 1 no longer depends on them for certified-core ownership or release-path
+runtime-foundation checkpoint no longer depends on them for certified-core ownership or release-path
 resolution.

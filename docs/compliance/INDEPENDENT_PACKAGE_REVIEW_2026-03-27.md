@@ -21,7 +21,7 @@ The decisive blockers are not primarily missing source files for the retained bo
 This review also identified two truthfulness/alignment issues that were fixed directly in this checkpoint update:
 
 1. `tigrbl_auth/config/settings.py` defaulted `enable_rfc9700` to `False` while `tigrbl_auth/config/deployment.py` defaulted the same capability to `True`. That caused a settings-driven hardening deployment to disagree with the deployment resolver's own default model.
-2. `compliance/claims/repository-state.yaml` still said `release_gate_passed_at_phase_13: true` even though the release-gate reports are currently red.
+2. `compliance/claims/repository-state.yaml` still said `release_gate_passed_for_final_decision: true` even though the release-gate reports are currently red.
 
 ## What is complete now
 
@@ -241,7 +241,7 @@ This review checkpoint applies the following concrete fixes:
    - this now matches `tigrbl_auth/config/deployment.py` and eliminates a hardening-profile truth mismatch.
 
 2. `compliance/claims/repository-state.yaml`
-   - changed `release_gate_passed_at_phase_13` from `true` to `false`;
+   - changed `release_gate_passed_for_final_decision` from `true` to `false`;
    - this now matches the red release-gate reports.
 
 3. `tests/unit/test_truthfulness_alignment.py`

@@ -20,7 +20,7 @@ This document declares the authoritative certification boundary for the current 
 - Retained targets: `48`
 - Retained RFC targets: `30`
 - Retained non-RFC targets: `18`
-- Deferred / excluded targets tracked: `13`
+- Deferred / excluded targets tracked: `25`
 - No target-count drift during closeout: `True`
 - Separate scope-expansion program required for wider claims: `True`
 
@@ -63,7 +63,7 @@ The repository uses this artifact to keep targets, claims, active routes, contra
 
 ## Most common discrepancies
 
-- none
+- `active-without-effective-claim:baseline`: `2` targets
 
 ## Required boundary outputs present in this checkpoint
 

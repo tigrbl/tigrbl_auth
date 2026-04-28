@@ -194,7 +194,7 @@ effective_deployment:
   active_openrpc_methods: []
 claim_set:
   current_repository_tier: 3
-  phase: P14
+  delivery_track: release-claim-canonicalization
   claims:
   - target: ASGI 3 application package
     tier: 3

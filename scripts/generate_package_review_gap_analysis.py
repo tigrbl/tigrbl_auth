@@ -69,7 +69,7 @@ def build_review() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "package": matrix.get("package", "tigrbl_auth"),
-        "delivery_lifecycle": matrix.get("delivery_lifecycle", matrix.get("phase", "unknown")),
+        "delivery_lifecycle": matrix.get("delivery_lifecycle", matrix.get("delivery_track", "unknown")),
         "version": pyproject.get("project", {}).get("version", "0.0.0"),
         "summary": {
             "fully_certifiable_now": bool(cert.get("summary", {}).get("fully_certifiable_now", False)),

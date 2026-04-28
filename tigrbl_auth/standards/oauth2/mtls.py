@@ -1,6 +1,6 @@
 """Domain-organized RFC 8705 mTLS helpers.
 
-This module is intentionally dependency-light so Phase 10 evidence can execute
+This module is intentionally dependency-light so Tier 3 evidence checkpoint evidence can execute
 without the full runtime stack.  It covers three distinct concerns:
 
 - certificate thumbprint extraction and confirmation-claim construction

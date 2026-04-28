@@ -25,7 +25,7 @@ The goal is not to copy any one product. The goal is to produce a **certifiable,
 | **Keycloak** | Full OAuth2/OIDC AS and IdP, admin/runtime ops | Device Flow, DPoP, PAR, token exchange, passkeys/WebAuthn, CIBA, admin bootstrap, realm import/export, OpenAPI endpoint toggles, health/metrics/proxy/TLS controls | Rich runtime flags and feature toggles | Feature toggles, start vs start-dev, bootstrap-admin, import/export, operational flags | Realm-centric semantics and Java/Quarkus-specific runtime model |
 | **ORY Hydra** | Strong OAuth2/OIDC AS boundary | Client CRUD, JWK/JWKS CRUD, introspection, revocation, device code, token exchange, migration commands, separate public/admin/all serving | Deep resource-oriented CLI with per-command flags | Resource-centric commands (`client`, `jwk`, `serve`, `migrate`, `perform`) and precise protocol flags | Hydra does not cover the full self-service identity surface alone |
 | **ORY Kratos** | Identity lifecycle adjacent to AS boundary | Registration, login, recovery, verification, MFA, WebAuthn/passkeys, identity schema, self-service flows | Serve/config/migrate plus identity-oriented APIs | Identity and session/credential command shape | Kratos is not a replacement for the AS boundary by itself |
-| **ZITADEL** | Full CIAM / workforce / machine auth platform | Bootstrap lifecycle, multi-tenancy, OIDC/OAuth2/SAML, machine users, config layering, masterkey controls, TLS mode, init/setup/start sequencing | Lifecycle-oriented server command model + strong config/env options | `init/setup/start` thinking, masterkey/config/steps flags, operational phase modeling | Product-specific deployment sequencing and internal service topology |
+| **ZITADEL** | Full CIAM / workforce / machine auth platform | Bootstrap lifecycle, multi-tenancy, OIDC/OAuth2/SAML, machine users, config layering, masterkey controls, TLS mode, init/setup/start sequencing | Lifecycle-oriented server command model + strong config/env options | `init/setup/start` thinking, masterkey/config/steps flags, operational modeling | Product-specific deployment sequencing and internal service topology |
 | **Dex** | Federated OIDC provider / broker | Upstream OIDC/SAML/LDAP/OAuth2 connectors, scopes/claims modeling, local password DB option | Mostly config-driven, very small CLI | Connector-oriented configuration and issuer/discovery fidelity | Too little CLI surface for a certifiable auth platform |
 | **authentik** | Broad identity and federation platform | OIDC/SAML logout, health/ready endpoints, admin recovery commands, provider/session behavior, extensibility/outposts | Mixture of config, UI, and small admin CLI | Health/doctor commands, recovery/admin actions, session/logout emphasis | Heavier UI-first posture than we want for certification workflows |
 
@@ -689,7 +689,7 @@ Run standards, conformance, contract, and interoperability checks.
 
 ### Flags
 - `--target`
-- `--phase`
+- `--`
 - `--tier`
 - `--matrix`
 - `--evidence-dir`
@@ -714,7 +714,7 @@ Evaluate release and certification gates.
 - `attest`
 
 ### Flags
-- `--phase`
+- `--`
 - `--tier`
 - `--gate-file`
 - `--waiver-file`
@@ -791,7 +791,7 @@ Create and validate Architecture Decision Records.
 - `--title`
 - `--status`
 - `--target`
-- `--phase`
+- `--`
 - `--tier`
 - `--link-target`
 - `--enforce-target-links`
@@ -1038,7 +1038,7 @@ This section deduplicates all flags into one normalized feature catalog.
 
 | Flag | Feature family | Meaning |
 |---|---|---|
-| `--phase` | certification | Implementation phase |
+| `--` | certification | Implementation |
 | `--tier` | certification | Certification tier |
 | `--matrix` | compliance | Target matrix file |
 | `--evidence-dir` | evidence | Evidence directory |
@@ -1077,7 +1077,7 @@ This section deduplicates all flags into one normalized feature catalog.
 
 ## 5. Recommended implementation priorities
 
-## Phase 1 — minimum viable CLI
+## runtime-foundation checkpoint — minimum viable CLI
 Implement first:
 - `serve`
 - `bootstrap`
@@ -1090,7 +1090,7 @@ Implement first:
 - `verify`
 - `gate`
 
-## Phase 2 — production CLI
+## persistence-domain checkpoint — production CLI
 Add:
 - `tenant`
 - `identity`
@@ -1100,7 +1100,7 @@ Add:
 - `export`
 - `doctor`
 
-## Phase 3 — certification / governance completion
+## public-route checkpoint — certification / governance completion
 Add:
 - `evidence`
 - `claims`

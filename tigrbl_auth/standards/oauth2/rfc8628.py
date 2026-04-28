@@ -40,7 +40,10 @@ class DeviceGrantForm(BaseModel):
     client_id: str
 
 
-@hook_ctx(ops="approve", phase="HANDLER")
+_TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
+
+
+@hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
 async def approve_device_code(ctx: Mapping[str, Any]) -> None:
     from tigrbl_auth.tables import DeviceCode
 

@@ -6,7 +6,7 @@ targets:
 - id: operator.cli-surface
   label: CLI operator surface
   title: Canonical CLI operator command and flag contract
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   profiles:
   - baseline
@@ -21,7 +21,7 @@ targets:
 - id: operator.bootstrap-migration
   label: Bootstrap and migration lifecycle
   title: Bootstrap, migration, and repository lifecycle operators
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   profiles:
   - baseline
@@ -37,7 +37,7 @@ targets:
 - id: operator.keys-jwks
   label: Key lifecycle and JWKS publication
   title: Key lifecycle, JWKS publication, and rotation surface
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   profiles:
   - baseline
@@ -53,7 +53,7 @@ targets:
 - id: operator.import-export
   label: Import/export portability
   title: Import/export operator surface and portability boundary
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   profiles:
   - baseline
@@ -67,7 +67,7 @@ targets:
 - id: operator.release-bundle-signing
   label: Release bundle and signature verification
   title: Release bundle construction, signing, and verification
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   profiles:
   - baseline

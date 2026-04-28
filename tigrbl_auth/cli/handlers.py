@@ -1483,7 +1483,7 @@ for action in ("get", "list", "delete"):
 __all__ = ["HANDLER_MAP"]
 
 # -----------------------------------------------------------------------------
-# Phase 5 service-layer overrides
+# Service-layer overrides
 # -----------------------------------------------------------------------------
 
 from tigrbl_auth.services._operator_store import OperationContext, TransactionResult, ArtifactResult

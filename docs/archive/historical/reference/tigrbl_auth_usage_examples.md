@@ -102,12 +102,12 @@ Typical use:
 ## 7. Run the device-code flow
 
 ```bash
-# Step 1: request a device code
+# Device-code request item: request a device code
 curl -X POST http://localhost:8000/device_codes/device_authorization \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'client_id=test-client&scope=openid'
 
-# Step 2: poll the token endpoint after approval
+# Device-code polling item: poll the token endpoint after approval
 curl -X POST http://localhost:8000/token \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=DEVICE_CODE&client_id=test-client'
@@ -170,7 +170,7 @@ python scripts/verify_claims.py \
 
 # run the release gate for a production claim
 python scripts/run_release_gates.py \
-  --gate gates/release/p2-production.yaml \
+  --gate gates/release/production-readiness-production.yaml \
   --claims compliance/targets/release-claims.yaml \
   --evidence compliance/evidence/
 ```

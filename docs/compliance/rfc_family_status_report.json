@@ -127,7 +127,7 @@
       {
         "label": "RFC 6749",
         "title": "OAuth 2.0 Authorization Framework",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -184,7 +184,7 @@
       {
         "label": "RFC 6750",
         "title": "OAuth 2.0 Bearer Token Usage",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -239,7 +239,7 @@
       {
         "label": "RFC 7636",
         "title": "Proof Key for Code Exchange by OAuth Public Clients",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -296,7 +296,7 @@
       {
         "label": "RFC 8414",
         "title": "OAuth 2.0 Authorization Server Metadata",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -343,7 +343,7 @@
       {
         "label": "RFC 8615",
         "title": "Well-Known Uniform Resource Identifiers (URIs)",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -398,7 +398,7 @@
       {
         "label": "RFC 7515",
         "title": "JSON Web Signature (JWS)",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -439,7 +439,7 @@
       {
         "label": "RFC 7516",
         "title": "JSON Web Encryption (JWE)",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "baseline",
           "production",
@@ -484,7 +484,7 @@
       {
         "label": "RFC 7517",
         "title": "JSON Web Key (JWK)",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -530,7 +530,7 @@
       {
         "label": "RFC 7518",
         "title": "JSON Web Algorithms (JWA)",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -571,7 +571,7 @@
       {
         "label": "RFC 7519",
         "title": "JSON Web Token (JWT)",
-        "phase": "P1",
+        "delivery_track": "baseline-interoperability",
         "profiles": [
           "baseline",
           "production",
@@ -612,7 +612,7 @@
       {
         "label": "RFC 7009",
         "title": "OAuth 2.0 Token Revocation",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -666,7 +666,7 @@
       {
         "label": "RFC 7591",
         "title": "OAuth 2.0 Dynamic Client Registration Protocol",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -719,7 +719,7 @@
       {
         "label": "RFC 7592",
         "title": "OAuth 2.0 Dynamic Client Registration Management Protocol",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "production",
           "hardening",
@@ -774,7 +774,7 @@
       {
         "label": "RFC 7662",
         "title": "OAuth 2.0 Token Introspection",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -826,7 +826,7 @@
       {
         "label": "RFC 8252",
         "title": "OAuth 2.0 for Native Apps",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -885,7 +885,7 @@
       {
         "label": "RFC 8628",
         "title": "OAuth 2.0 Device Authorization Grant",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -944,7 +944,7 @@
       {
         "label": "RFC 8693",
         "title": "OAuth 2.0 Token Exchange",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1003,7 +1003,7 @@
       {
         "label": "RFC 8705",
         "title": "OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1066,7 +1066,7 @@
       {
         "label": "RFC 8707",
         "title": "Resource Indicators for OAuth 2.0",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1128,7 +1128,7 @@
       {
         "label": "RFC 9068",
         "title": "JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -1188,7 +1188,7 @@
       {
         "label": "RFC 9101",
         "title": "OAuth 2.0 JWT-Secured Authorization Request (JAR)",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1245,7 +1245,7 @@
       {
         "label": "RFC 9126",
         "title": "OAuth 2.0 Pushed Authorization Requests",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1301,7 +1301,7 @@
       {
         "label": "RFC 9207",
         "title": "OAuth 2.0 Authorization Server Issuer Identification",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "production",
           "hardening",
@@ -1357,7 +1357,7 @@
       {
         "label": "RFC 9396",
         "title": "OAuth 2.0 Rich Authorization Requests",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1414,7 +1414,7 @@
       {
         "label": "RFC 9449",
         "title": "OAuth 2.0 Demonstrating Proof-of-Possession at the Application Layer (DPoP)",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"
@@ -1473,7 +1473,7 @@
       {
         "label": "RFC 6265",
         "title": "HTTP State Management Mechanism",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -1530,7 +1530,7 @@
       {
         "label": "RFC 7521",
         "title": "Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -1576,7 +1576,7 @@
       {
         "label": "RFC 7523",
         "title": "JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -1628,7 +1628,7 @@
       {
         "label": "RFC 9728",
         "title": "OAuth 2.0 Protected Resource Metadata",
-        "phase": "P2",
+        "delivery_track": "production-readiness",
         "profiles": [
           "production",
           "hardening",
@@ -1682,7 +1682,7 @@
       {
         "label": "RFC 9700",
         "title": "Best Current Practice for OAuth 2.0 Security",
-        "phase": "P3",
+        "delivery_track": "hardening-interop",
         "profiles": [
           "hardening",
           "peer-claim"

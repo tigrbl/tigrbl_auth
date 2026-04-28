@@ -1,6 +1,5 @@
 schema_version: 1
 repository_state:
-  boundary_lock_complete: true
   fully_certifiable: false
   fully_rfc_compliant: false
   checkpoint_only: true
@@ -13,7 +12,6 @@ repository_state:
   evidence_plane_initialized: true
   waiver_plane_initialized: true
   adr_index_present: true
-  tigrbl_runtime_foundation_complete: true
   tigrbl_public_api_only_runtime: true
   release_path_framework_fallbacks_removed: true
   no_fastapi_starlette_verified_scopes:
@@ -21,8 +19,6 @@ repository_state:
   - tests
   - scripts
   - pyproject_metadata
-  persistence_domain_split_complete: true
-  baseline_interoperable_auth_server_complete: true
   tables_release_path_wrapper_free: true
   baseline_openapi_contract_generated: true
   baseline_conformance_layout_initialized: true
@@ -34,7 +30,6 @@ repository_state:
   openrpc_scaffold_generated: true
   protected_resource_metadata_target_declared: true
   security_bcp_target_declared: true
-  partial_feature_boundary_enforcement_complete: true
   downstream_partial_feature_consumption_supported: true
   effective_profile_contract_generation_installed: true
   effective_claim_and_evidence_manifests_installed: true
@@ -45,7 +40,6 @@ repository_state:
   wrapper_hygiene_clean: false
   tier3_evidence_complete: false
   tier4_peer_validation_complete: false
-  boundary_decisions_enforcement_complete: true
   claims_lint_clean: true
   contract_sync_clean: true
   certified_core_wrapper_count_zero: true
@@ -53,15 +47,12 @@ repository_state:
   authoritative_certification_scope_manifest_present: true
   target_reality_matrix_present: true
   certification_boundary_document_present: true
-  rfc_family_runtime_completion_checkpoint: true
   dynamic_client_management_route_mounted: true
   advanced_authorization_request_surface_runtime_mounted: true
   sender_constraint_runtime_family_extended: true
   jwt_access_token_profile_runtime_enabled: true
-  tier3_evidence_subset_complete: true
   tier3_evidence_baseline_complete: true
   tier3_evidence_selected_production_subset_complete: true
-  external_peer_framework_complete: true
   tier4_peer_runner_framework_installed: true
   tier4_candidate_bundle_layouts_present: true
   tier4_external_bundle_count: 16
@@ -72,7 +63,6 @@ repository_state:
   release_gate_passed_for_final_decision: false
   full_release_claim_still_partial: true
   last_release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
-  claim_boundary_rebaseline_complete: true
   runtime_target_manifests_present: true
   operator_target_manifests_present: true
   asgi_application_runtime_model_declared: true
@@ -80,10 +70,6 @@ repository_state:
   serve_launch_required_by_claim_boundary: true
   keys_command_canonicalized: true
   public_independent_claims_require_tier4: true
-  independent_peer_program_extended_complete: true
-  target_to_peer_mapping_complete: true
-  peer_counterpart_catalog_complete: true
-  peer_schema_and_tooling_extended: true
   tier4_promoted_target_count: 0
   tier4_retained_boundary_complete: false
   strict_independent_claims_ready: false

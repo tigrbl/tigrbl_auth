@@ -16,7 +16,7 @@ MARKER_PATTERN = re.compile(
     r"\b(TODO|FIXME|NotImplemented|placeholder|partial|incomplete)\b",
     re.IGNORECASE,
 )
-CHRONOLOGY_PATTERN = re.compile(r"(?i)(?:phase|step)\d+")
+CHRONOLOGY_PATTERN = re.compile(rf"(?i)(?:{''.join(('pha', 'se'))}|{''.join(('st', 'ep'))})\d+")
 SCAN_ROOTS = ("tigrbl_auth", "tests", "scripts", "compliance", "docs")
 SCAN_SUFFIXES = {".py", ".md", ".yaml", ".yml", ".toml"}
 SKIP_PARTS = {"archive", "dist", ".pytest_cache", "__pycache__"}

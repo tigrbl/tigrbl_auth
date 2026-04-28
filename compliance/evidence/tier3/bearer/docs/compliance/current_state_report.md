@@ -5,7 +5,7 @@
 ## Summary
 
 - repository_tier: `3`
-- phase: `P10`
+- delivery track: `tier3-evidence`
 - authoritative_scope_manifest: `compliance/targets/certification_scope.yaml`
 - document_authority_manifest: `compliance/targets/document-authority.yaml`
 - certification_bundle_current_state_doc_only: `True`

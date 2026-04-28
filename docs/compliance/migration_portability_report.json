@@ -20,7 +20,7 @@
     "sqlite": {
       "backend": "sqlite",
       "available": true,
-      "database_url": "sqlite+aiosqlite:////mnt/data/step6_work/tigrbl_auth_phase13_certification_target_freeze_reconciled_2026-03-24/dist/migration-portability/sqlite/tigrbl_auth_migration_portability.db",
+      "database_url": "sqlite+aiosqlite:////mnt/data/migration_portability_work/tigrbl_auth_certification_target_freeze_reconciled_2026-03-24/dist/migration-portability/sqlite/tigrbl_auth_migration_portability.db",
       "passed": true,
       "upgrade_passed": true,
       "downgrade_passed": true,

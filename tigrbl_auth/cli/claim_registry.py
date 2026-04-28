@@ -59,15 +59,15 @@ DECLARED_TARGET_CLAIMS_PATH = "compliance/claims/declared-target-claims.yaml"
 REPOSITORY_STATE_PATH = "compliance/claims/repository-state.yaml"
 FAPI_ATOMIC_CLAIMS_PATH = "compliance/claims/fapi-atomic-claims.yaml"
 LEGACY_CLAIM_MODEL_STATE_KEYS = {
-    "phase_14_claim_registry_canonical_complete",
-    "phase_14_fapi2_security_profile_declared_complete",
-    "phase_14_public_route_atomic_claims_complete",
-    "phase_14_openrpc_atomic_claims_complete",
-    "phase_14_cli_atomic_claims_complete",
-    "phase_14_core_targets_missing_from_feature_map",
-    "phase_14_extension_targets_missing_from_feature_map",
-    "phase_14_settings_backed_flags_missing_from_flag_map",
-    "phase_14_release_claims_machine_derivable",
+    "claim_registry_canonical_complete",
+    "fapi2_security_profile_declared_complete",
+    "public_route_atomic_claims_complete",
+    "openrpc_atomic_claims_complete",
+    "cli_atomic_claims_complete",
+    "core_targets_missing_from_feature_map",
+    "extension_targets_missing_from_feature_map",
+    "settings_backed_flags_missing_from_flag_map",
+    "release_claims_machine_derivable",
 }
 
 
@@ -431,7 +431,7 @@ def _target_claims(repo_root: Path, core_targets: dict[str, dict[str, Any]]) -> 
         "package": "tigrbl_auth",
         "claim_set": {
             "current_repository_tier": 3,
-            "phase": "P14",
+            "delivery_track": "release-claim-canonicalization",
             "authoritative_scope_manifest": "compliance/targets/certification_scope.yaml",
             "claims": claims,
             "governance_status": "installed",

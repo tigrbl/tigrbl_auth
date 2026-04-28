@@ -8,7 +8,7 @@
 
 This repository state is a **truthful final-release candidate checkpoint**, not a final certified release.
 
-## Step 10 — Historical drift and document authority
+## Tier 3 evidence rebuild — Historical drift and document authority
 
 Completed in this checkpoint:
 
@@ -16,9 +16,9 @@ Completed in this checkpoint:
 - the current authoritative document set is explicitly enumerated in `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`
 - `artifact_truthfulness_report` now shows `historical_doc_stale_ref_count = 0` outside the archive tree
 - certification bundle documentation scope is limited to generated current-state docs only
-- rebuilt release bundles no longer copy archived docs, runbooks, or earlier phase/planning docs into the certification bundle docs
+- rebuilt release bundles no longer copy archived docs, runbooks, or earlier planning docs into the certification bundle docs
 
-## Step 11 — Final release cut posture
+## Tier 4 external validation — Final release cut posture
 
 Completed in this checkpoint:
 

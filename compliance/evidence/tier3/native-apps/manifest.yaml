@@ -1,6 +1,6 @@
 schema_version: 1
 generated_at: '2026-03-23T21:47:13+00:00'
-phase: P13-capability-checkpoint
+delivery_track: independent-peer-evidence
 targets:
 - RFC 8252
 profile: production

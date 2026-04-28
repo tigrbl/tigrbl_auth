@@ -23,4 +23,4 @@ Persistence-backed device authorization with issuance, polling, slow_down, acces
 
 ## Honest note
 
-This bundle preserves targeted phase-8 evidence for the selected hardening targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.
+This bundle preserves targeted capability-wiring evidence for the selected hardening targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.

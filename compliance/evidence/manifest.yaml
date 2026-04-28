@@ -160,7 +160,7 @@ notes:
   catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets
   are promoted to Tier 4 in this checkpoint because preserved qualifying independent
   external artifacts were not supplied.
-- Phase 13 installs the independent peer program, full retained target-to-peer mapping,
+- runtime-foundation checkpoint3 installs the independent peer program, full retained target-to-peer mapping,
   counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion
   logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying
   independent external artifacts were not supplied.

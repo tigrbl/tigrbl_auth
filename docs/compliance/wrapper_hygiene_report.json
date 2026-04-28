@@ -1,7 +1,7 @@
 {
   "scope": "wrapper-hygiene",
   "strict": true,
-  "phase1_strict": true,
+  "capability_strict": true,
   "passed": true,
   "failures": [],
   "warnings": [

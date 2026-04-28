@@ -5,7 +5,7 @@
 ## Summary
 
 - repository_tier: `3`
-- phase: `P14`
+- delivery track: `release-claim-canonicalization`
 - authoritative_scope_manifest: `compliance\targets\certification_scope.yaml`
 - boundary_freeze_active: `True`
 - boundary_freeze_passed: `True`

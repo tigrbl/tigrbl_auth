@@ -17,7 +17,7 @@
 ## Purpose
 
 This note describes the governed runtime and operator flag model and, as of the
-Phase 8 checkpoint, the executable capability registry that drives route
+capability-wiring checkpoint checkpoint, the executable capability registry that drives route
 publication, discovery publication, and contract generation.
 
 ## Runtime flag groups
@@ -51,7 +51,7 @@ That registry is consumed by:
 - `tigrbl_auth/config/deployment.py` to derive `active_capabilities` and `active_routes`
 - `tigrbl_auth/api/surfaces.py` to mount routers and standards-owned publishers
 - OpenAPI/discovery snapshot generation
-- Phase 8 target/module/route/contract/test/evidence cross-check scripts
+- capability-wiring checkpoint target/module/route/contract/test/evidence cross-check scripts
 
 The release path therefore no longer relies on one set of route lists for
 contracts and a different hand-maintained set for runtime mounting.
@@ -109,9 +109,9 @@ disabled feature must disappear from:
 - `mixed`
 - `diagnostics-only`
 
-## Phase 8 reality checks
+## capability-wiring checkpoint reality checks
 
-The Phase 8 checkpoint adds dependency-light cross-checks so executable reality
+The capability-wiring checkpoint checkpoint adds dependency-light cross-checks so executable reality
 can be validated without importing the full external Tigrbl workspace:
 
 - `scripts/verify_target_module_mapping.py`

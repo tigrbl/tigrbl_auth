@@ -1,7 +1,7 @@
 schema_version: 1
 package: tigrbl_auth
 plan:
-  phase: phase-7-tree-layout-and-migration
+  delivery_track: tree-layout-and-migration
   objective: Make the strict certified-core boundary machine-checkable and release-gated
     while documenting remaining violations honestly.
   deliverables:

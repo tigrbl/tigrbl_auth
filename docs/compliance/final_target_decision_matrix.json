@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "tigrbl_auth",
-  "phase": "P13",
+  "delivery_track": "independent-peer-evidence",
   "fully_certifiable_now": false,
   "fully_rfc_compliant_now": false,
   "release_gates_passed": false,

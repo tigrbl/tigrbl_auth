@@ -87,7 +87,9 @@ def test_active_tier3_evidence_metadata_uses_capability_scoped_names() -> None:
 def test_retained_boundary_bundle_metadata_uses_capability_scoped_names() -> None:
     offenders = []
     tier3_root = ROOT / "compliance" / "evidence" / "tier3"
-    forbidden = re.compile(r"(?i)(?:checkpoint|source_checkpoint|phase\d+|step\d+)")
+    forbidden = re.compile(
+        rf"(?i)(?:checkpoint|source_checkpoint|{FORBIDDEN_FRAGMENTS[0]}\d+|{FORBIDDEN_FRAGMENTS[1]}\d+)"
+    )
 
     for bundle in RETAINED_BOUNDARY_BUNDLES:
         bundle_root = tier3_root / bundle

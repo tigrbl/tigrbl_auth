@@ -124,6 +124,6 @@ Because of that, this checkpoint can tighten the evidence model, reports, tests,
 - `README.md`
 - unit tests under `tests/unit/`
 
-## Recommended next execution step in a real certification environment
+## Recommended next execution action in a real certification environment
 
 Run the declared GitHub Actions matrix or an equivalent clean-room executor pool that provides Python `3.10`, `3.11`, `3.12`, and PostgreSQL, then re-collect and normalize the resulting artifacts into `dist/validated-runs/` before re-running the release gates.

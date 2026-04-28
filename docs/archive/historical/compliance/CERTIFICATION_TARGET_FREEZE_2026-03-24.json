@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "tigrbl_auth",
-  "phase": "P13",
+  "": "independent-peer-evidence",
   "effective_date": "2026-03-24",
   "boundary_mode": "retained-48-target-package-boundary-with-production-grade-operator-control-plane",
   "stronger_production_grade_control_plane_boundary_selected": true,
@@ -27,7 +27,7 @@
   "rationale": {
     "boundary_mode": "Keep the retained 48-target package boundary for certification closeout and select the stronger production-grade operator/control-plane interpretation inside that boundary because the authoritative operator surface now uses a durable SQLite-backed external state backend with tenant-scoped records, transactional mutation/audit logs, and versioned portability artifacts.",
     "python_support": "Do not extend the certification boundary to Python 3.13 until validation and support metadata change together.",
-    "tigrcorn": "Keep Tigrcorn in the retained boundary for continuity with Phase 13 catalogs, but treat it as unresolved and blocking final certification."
+    "tigrcorn": "Keep Tigrcorn in the retained boundary for continuity with independent peer checkpoint catalogs, but treat it as unresolved and blocking final certification."
   },
   "operator_plane": {
     "backend": "sqlite-authoritative",

@@ -30,11 +30,11 @@ This checkpoint is a truth-alignment and certification-target-freeze update. It 
 
 The stronger production-grade durable control-plane boundary is now selected inside the retained 48-target package boundary because the authoritative operator surface routes through a durable SQLite-backed external state backend with tenant scoping, transactional mutation/audit durability, and versioned portability artifacts. The certified operator plane no longer depends on repository file mutation.
 
-Tigrcorn remains in the retained boundary for continuity with the existing Phase 13 target catalog and peer-profile matrix. This checkpoint now commits a published Tigrcorn runner pin and a clean-room CI/tox matrix for Python 3.11 and 3.12. That continuity choice still does **not** make Tigrcorn independently validated. It remains a blocker until preserved execution evidence and independent validation artifacts exist.
+Tigrcorn remains in the retained boundary for continuity with the existing independent peer checkpoint target catalog and peer-profile matrix. This checkpoint now commits a published Tigrcorn runner pin and a clean-room CI/tox matrix for Python 3.11 and 3.12. That continuity choice still does **not** make Tigrcorn independently validated. It remains a blocker until preserved execution evidence and independent validation artifacts exist.
 
 Python 3.13 is explicitly **not** part of the current certification boundary because `pyproject.toml` still declares `>=3.10,<3.13` and the package has not yet been fully validated on 3.13.
 
-## Operator/control-plane posture after Step 6
+## Operator/control-plane posture after Item 6
 
 - authoritative backend: `sqlite-authoritative`
 - repository file mutation required for certified operator surface: `False`
@@ -71,9 +71,9 @@ Python 3.13 is explicitly **not** part of the current certification boundary bec
 
 ## Interpretation rule
 
-If any historical phase artifact disagrees with the files listed above, treat the historical artifact as archival context rather than as the authoritative current repository state.
+If any historical artifact disagrees with the files listed above, treat the historical artifact as archival context rather than as the authoritative current repository state.
 
-## Added for Step 2
+## Added for Device-code polling item
 
 - clean-room matrix manifest: `tox.ini`
 - install workflow: `.github/workflows/ci-install-profiles.yml`

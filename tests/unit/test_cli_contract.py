@@ -64,7 +64,7 @@ def test_stateful_resource_handlers_are_durable_and_not_catalog_only(tmp_path: P
         "--id",
         "tenant-capability",
         "--set",
-        "name=Tenant Phase 4",
+        "name=Tenant browser-session checkpoint",
         "--yes",
     ])
     list_rc = main([

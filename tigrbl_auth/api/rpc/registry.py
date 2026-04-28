@@ -33,7 +33,7 @@ class RpcMethodDefinition:
     surface_set: str = "admin-rpc"
     required_flags: tuple[str, ...] = ()
     tags: tuple[str, ...] = ()
-    since_phase: str = "capability"
+    introduced_in: str = "capability"
 
     def to_registry_metadata(self) -> dict[str, Any]:
         return {
@@ -43,7 +43,7 @@ class RpcMethodDefinition:
             "owner_module": self.owner_module,
             "required_flags": list(self.required_flags),
             "tags": list(self.tags),
-            "since_phase": self.since_phase,
+            "introduced_in": self.introduced_in,
         }
 
 

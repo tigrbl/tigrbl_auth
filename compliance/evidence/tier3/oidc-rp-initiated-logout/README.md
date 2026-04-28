@@ -23,4 +23,4 @@ RP-initiated logout now validates id_token_hint and registered post-logout redir
 
 ## Honest note
 
-This bundle preserves targeted Phase 7 evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.
+This bundle preserves targeted RFC-family runtime checkpoint evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.

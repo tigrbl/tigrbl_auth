@@ -39,5 +39,5 @@
     "docs/compliance/CERTIFICATION_TARGET_FREEZE_2026-03-24.json",
     "docs/compliance/PRODUCTION_GRADE_OPERATOR_CONTROL_PLANE_STATUS_2026-03-24.md"
   ],
-  "note": "Historical phase artifacts may still contain earlier values. Treat the files listed here as the authoritative current-state set for this checkpoint."
+  "note": "Historical artifacts may still contain earlier values. Treat the files listed here as the authoritative current-state set for this checkpoint."
 }

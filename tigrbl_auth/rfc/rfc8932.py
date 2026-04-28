@@ -1,7 +1,7 @@
 """Quarantined extension target outside the certified auth-core boundary.
 
 Legacy repository material associated RFC 8932 with authorization-server
-metadata. In the Phase 0 certification boundary, RFC 8932 is treated as a
+metadata. In the boundary-lock checkpoint certification boundary, RFC 8932 is treated as a
 non-core DNS privacy extension and is not part of the default OAuth 2.0 / OIDC
 claim surface.
 """

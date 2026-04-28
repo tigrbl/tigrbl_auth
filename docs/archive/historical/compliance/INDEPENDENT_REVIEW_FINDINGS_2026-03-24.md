@@ -12,11 +12,11 @@
 
 # Independent Review Findings — 2026-03-24
 
-> Note: parts of this review were superseded by the later Phase 2/Phase 3 follow-on checkpoints. The published-dependency and runner-gap items now close the Tigrcorn placeholder issue, but they do not close Tier 4 independent validation.
+> Note: parts of this review were superseded by the later persistence-domain checkpoint/public-route checkpoint follow-on checkpoints. The published-dependency and runner-gap items now close the Tigrcorn placeholder issue, but they do not close Tier 4 independent validation.
 
 ## Scope
 
-This document records a fresh repository review of the Phase 13 checkpoint delivered in this zip, plus the corrective changes applied during the review.
+This document records a fresh repository review of the independent peer checkpoint checkpoint delivered in this zip, plus the corrective changes applied during the review.
 
 ## Executive summary
 
@@ -216,7 +216,7 @@ The executable CLI surface is broad and present: `serve`, `verify`, `gate`, `spe
 However, certifiable operational maturity is still limited by the facts above:
 
 - runtime launch depends on missing external runtime packages in a clean checkout
-- Superseded by the Phase 3 follow-on checkpoint: Tigrcorn is now pinned to a published runner package in packaging terms, but independent validation is still incomplete
+- Superseded by the public-route checkpoint follow-on checkpoint: Tigrcorn is now pinned to a published runner package in packaging terms, but independent validation is still incomplete
 - some admin/control-plane actions are repository-backed checkpoint operations rather than fully integrated production control-plane behavior
 
 ## Specific review observations from the current container

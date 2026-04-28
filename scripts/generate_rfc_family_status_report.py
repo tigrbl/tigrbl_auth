@@ -88,7 +88,7 @@ def main() -> int:
         row = {
             'label': label,
             'title': str(item.get('title')),
-            'phase': str(item.get('phase')),
+            'delivery_track': str(item.get('delivery_track')),
             'profiles': list(item.get('profiles', [])),
             'scope_bucket': str(scope_item.get('scope_bucket', 'unknown')),
             'modules': modules,

@@ -5,7 +5,7 @@
 ## Summary
 
 - repository_tier: `3`
-- phase: `P14`
+- delivery_track: `release-claim-canonicalization`
 - authoritative_scope_manifest: `compliance\targets\certification_scope.yaml`
 - boundary_freeze_active: `True`
 - boundary_freeze_passed: `True`
@@ -14,7 +14,7 @@
 - boundary_freeze_retained_target_count: `48`
 - boundary_freeze_rfc_target_count: `30`
 - boundary_freeze_non_rfc_target_count: `18`
-- boundary_freeze_deferred_target_count: `13`
+- boundary_freeze_deferred_target_count: `25`
 - boundary_freeze_identity_hash_matches: `True`
 - document_authority_manifest: `compliance/targets/document-authority.yaml`
 - document_authority_spec: `.ssot/specs/SPEC-1052-ssot-document-authority.yaml`
@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.pytest-tmp\operator-plane-state498\tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.pytest-tmp\operator-state\tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `193`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `21`
+- release_evidence_dirty_checkout_path_count: `288`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`

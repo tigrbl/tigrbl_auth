@@ -103,7 +103,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/audit.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -188,7 +188,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/audit.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -219,7 +219,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -250,7 +250,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -319,7 +319,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -369,7 +369,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -456,7 +456,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -498,7 +498,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -640,7 +640,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/client_registration.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -680,7 +680,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -781,7 +781,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -821,7 +821,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -861,7 +861,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/consent.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -892,7 +892,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -923,7 +923,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -954,7 +954,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -994,7 +994,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1063,7 +1063,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1103,7 +1103,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1134,7 +1134,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1165,7 +1165,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1206,7 +1206,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/keys.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1237,7 +1237,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1294,7 +1294,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1325,7 +1325,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/governance.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1435,7 +1435,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1475,7 +1475,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1561,7 +1561,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/session.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1609,7 +1609,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1649,7 +1649,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/profile.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1702,7 +1702,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1742,7 +1742,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/directory.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1855,7 +1855,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1896,7 +1896,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     },
     {
@@ -1990,7 +1990,7 @@
         "owner_module": "tigrbl_auth/api/rpc/methods/token.py",
         "required_flags": [],
         "surface_set": "admin-rpc",
-        "since_phase": "capability"
+        "introduced_in": "capability"
       }
     }
   ],

@@ -7,7 +7,7 @@
 
 ## Summary
 
-Session-state generation and validation, durable browser-session linkage, and cookie lifecycle semantics backed by dependency-light Phase 7 tests.
+Session-state generation and validation, durable browser-session linkage, and cookie lifecycle semantics backed by dependency-light RFC-family runtime checkpoint tests.
 
 ## Contents
 
@@ -23,4 +23,4 @@ Session-state generation and validation, durable browser-session linkage, and co
 
 ## Honest note
 
-This bundle preserves targeted Phase 7 evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.
+This bundle preserves targeted RFC-family runtime checkpoint evidence for the selected production targets. It does not claim full-boundary certification and it does not replace the still-missing Tier 4 peer-validation work.

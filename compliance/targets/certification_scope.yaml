@@ -1,6 +1,6 @@
 schema_version: 1
 package: tigrbl_auth
-phase: P10
+delivery_track: release-claim-canonicalization
 authoritative: true
 repository_tier: 3
 authoritative_sources:
@@ -133,11 +133,11 @@ boundary_freeze:
     hardening-completion-required: 11
     runtime-completion-required: 4
     operator-completion-required: 5
-  deferred_target_count: 13
+  deferred_target_count: 25
   retained_target_identity_hash: b5caac77a8e8bc398c8d4679049f525d94ad701cd345eaa51498567972ce9f60
   retained_rfc_target_identity_hash: 0ad8e089ffb79da0729f5553d27762810d5e2819b43b6de2c6646f96e25ee60f
   retained_non_rfc_target_identity_hash: ed5c67dd36ad0698c670540dd5ad267b21ce46fe5e1ab97269539bca3d40b3be
-  deferred_target_identity_hash: 2a017f3e33fdf309a3652fbe2aa8a21eb66340787e6752692ded535a68aba6f2
+  deferred_target_identity_hash: e2352a870e3197dfd75cd0eb85e5d047ddc475e29801207414aada02d10e4e5f
   no_target_count_drift_during_closeout: true
   closeout_scope_expansion_requires_separate_program: true
   fully_featured_claim_boundary_fixed: true
@@ -189,6 +189,66 @@ deferred_targets:
   kind: alignment-only
   reason: Track draft-era alignment only. Do not emit as a final RFC compliance claim.
   claimable_as_rfc: false
+- label: FAPI 2.0 Message Signing profile
+  kind: alignment-only
+  reason: Track external sector profile coverage only. Do not emit as a retained core
+    certification claim.
+  claimable_as_rfc: false
+- label: SMART App Launch profile
+  kind: alignment-only
+  reason: Track external healthcare profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: SMART Backend Services profile
+  kind: alignment-only
+  reason: Track external healthcare backend profile coverage only. Do not emit as
+    a retained core certification claim.
+  claimable_as_rfc: false
+- label: FAST / UDAP Security profile
+  kind: alignment-only
+  reason: Track external trust-community profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: IHE IUA profile
+  kind: alignment-only
+  reason: Track external healthcare authorization profile coverage only. Do not emit
+    as a retained core certification claim.
+  claimable_as_rfc: false
+- label: NIST SP 800-63B-4 profile
+  kind: alignment-only
+  reason: Track external assurance profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: NIST SP 800-63C-4 profile
+  kind: alignment-only
+  reason: Track external federation assurance profile coverage only. Do not emit as
+    a retained core certification claim.
+  claimable_as_rfc: false
+- label: CAMARA Security and Interoperability profile
+  kind: alignment-only
+  reason: Track external telecom profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: FDX CSDF Security Model and Profile
+  kind: alignment-only
+  reason: Track external financial-data profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: GNAP Core + Resource Server profile
+  kind: alignment-only
+  reason: Track adjacent authorization profile coverage only. Do not emit as a retained
+    core certification claim.
+  claimable_as_rfc: false
+- label: WebAuthn and passkey-bound OAuth patterns
+  kind: alignment-only
+  reason: Track external pattern coverage only. Do not emit as a retained core certification
+    claim.
+  claimable_as_rfc: false
+- label: Confidential SPA profile pattern
+  kind: alignment-only
+  reason: Track external browser-architecture pattern coverage only. Do not emit as
+    a retained core certification claim.
+  claimable_as_rfc: false
 - label: SAML IdP/SP
   kind: out-of-scope-baseline
   reason: explicitly excluded from the default certification boundary
@@ -215,7 +275,7 @@ targets:
   id: oauth2.core
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -278,7 +338,7 @@ targets:
   id: oauth2.bearer
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -340,7 +400,7 @@ targets:
   id: oauth2.pkce
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -401,7 +461,7 @@ targets:
   id: oauth2.metadata
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -452,7 +512,7 @@ targets:
   id: http.well-known
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -518,7 +578,7 @@ targets:
   id: jose.jws
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -563,7 +623,7 @@ targets:
   id: jose.jwe
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -611,7 +671,7 @@ targets:
   id: jose.jwk
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -661,7 +721,7 @@ targets:
   id: jose.jwa
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -706,7 +766,7 @@ targets:
   id: jose.jwt
   family: rfc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -751,7 +811,7 @@ targets:
   id: oauth2.revocation
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -809,7 +869,7 @@ targets:
   id: oauth2.dynamic-registration
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -866,7 +926,7 @@ targets:
   id: oauth2.registration-management
   family: rfc
   scope_bucket: production-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -925,7 +985,7 @@ targets:
   id: oauth2.introspection
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -981,7 +1041,7 @@ targets:
   id: oauth2.native-apps
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1052,7 +1112,7 @@ targets:
   id: oauth2.device
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1114,7 +1174,7 @@ targets:
   id: oauth2.token-exchange
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1176,7 +1236,7 @@ targets:
   id: oauth2.mtls
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1234,8 +1294,8 @@ targets:
       - /token
       openrpc_present: false
     hardening:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present:
       - /token
       - /token/exchange
@@ -1245,7 +1305,7 @@ targets:
   id: oauth2.resource-indicators
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1318,7 +1378,7 @@ targets:
   id: oauth2.jwt-access-tokens
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1367,15 +1427,15 @@ targets:
       - /token
       openrpc_present: false
     production:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present:
       - /login
       - /token
       openrpc_present: false
     hardening:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present:
       - /login
       - /token
@@ -1386,7 +1446,7 @@ targets:
   id: oauth2.jar
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1449,7 +1509,7 @@ targets:
   id: oauth2.par
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1508,7 +1568,7 @@ targets:
   id: oauth2.issuer-identification
   family: rfc
   scope_bucket: production-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1571,7 +1631,7 @@ targets:
   id: oauth2.rar
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1634,7 +1694,7 @@ targets:
   id: oauth2.dpop
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -1699,7 +1759,7 @@ targets:
   id: http.cookies
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1739,7 +1799,7 @@ targets:
     - compliance/evidence/tier3/cookies/
   profile_reality:
     baseline:
-      active_target: false
+      active_target: true
       effective_claim: false
       openapi_paths_present:
       - /login
@@ -1761,12 +1821,13 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - active-without-effective-claim:baseline
 - label: RFC 7521
   id: oauth2.jwt-bearer-assertions
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1818,7 +1879,7 @@ targets:
   id: oauth2.jwt-client-auth
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1880,7 +1941,7 @@ targets:
   id: oauth2.protected-resource-metadata
   family: rfc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -1936,7 +1997,7 @@ targets:
   id: oauth2.security-bcp
   family: rfc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -2009,7 +2070,7 @@ targets:
   id: oidc.core
   family: oidc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -2057,7 +2118,7 @@ targets:
   id: oidc.discovery
   family: oidc
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
@@ -2113,7 +2174,7 @@ targets:
   id: oidc.userinfo
   family: oidc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -2164,7 +2225,7 @@ targets:
   id: oidc.session-management
   family: oidc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -2208,7 +2269,7 @@ targets:
     - compliance/evidence/tier3/oidc-session-management/
   profile_reality:
     baseline:
-      active_target: false
+      active_target: true
       effective_claim: false
       openapi_paths_present:
       - /login
@@ -2230,12 +2291,13 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - active-without-effective-claim:baseline
 - label: OIDC RP-Initiated Logout
   id: oidc.rp-initiated-logout
   family: oidc
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
@@ -2294,7 +2356,7 @@ targets:
   id: oidc.front-channel-logout
   family: oidc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -2355,7 +2417,7 @@ targets:
   id: oidc.back-channel-logout
   family: oidc
   scope_bucket: hardening-completion-required
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   first_claimable_profile: hardening
   claim:
@@ -2416,13 +2478,13 @@ targets:
   id: openapi.public-http
   family: contract
   scope_bucket: baseline-certifiable-now
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   first_claimable_profile: baseline
   claim:
     target: OpenAPI 3.1 / 3.2 compatible public contract
     tier: 3
-    status: evidenced-release-gated
+    status: generated-live-from-deployment-metadata
     profile: baseline
   owner_modules:
   - tigrbl_auth/api/rest
@@ -2464,14 +2526,14 @@ targets:
   id: openrpc.admin-plane
   family: contract
   scope_bucket: production-completion-required
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   first_claimable_profile: production
   claim:
     target: OpenRPC 1.4.x admin/control-plane contract
     tier: 3
-    status: evidenced-release-gated
-    profile: baseline
+    status: implementation-backed-generated-from-rpc-registry
+    profile: production
   owner_modules:
   - tigrbl_auth/api/rpc/__init__.py
   - tigrbl_auth/api/rpc/registry.py
@@ -2500,26 +2562,26 @@ targets:
     - compliance/evidence/tier3/contracts/openrpc/
   profile_reality:
     baseline:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present: []
-      openrpc_present: true
+      openrpc_present: false
     production:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present: []
-      openrpc_present: true
+      openrpc_present: false
     hardening:
-      active_target: true
-      effective_claim: true
+      active_target: false
+      effective_claim: false
       openapi_paths_present: []
-      openrpc_present: true
+      openrpc_present: false
   discrepancies: []
 - label: ASGI 3 application package
   id: runtime.asgi3-application
   family: runtime
   scope_bucket: runtime-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2580,7 +2642,7 @@ targets:
   id: runtime.runner-uvicorn
   family: runtime
   scope_bucket: runtime-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2639,7 +2701,7 @@ targets:
   id: runtime.runner-hypercorn
   family: runtime
   scope_bucket: runtime-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2698,7 +2760,7 @@ targets:
   id: runtime.runner-tigrcorn
   family: runtime
   scope_bucket: runtime-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2757,7 +2819,7 @@ targets:
   id: operator.cli-surface
   family: operator
   scope_bucket: operator-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2819,7 +2881,7 @@ targets:
   id: operator.bootstrap-migration
   family: operator
   scope_bucket: operator-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2871,7 +2933,7 @@ targets:
   id: operator.keys-jwks
   family: operator
   scope_bucket: operator-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2925,7 +2987,7 @@ targets:
   id: operator.import-export
   family: operator
   scope_bucket: operator-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -2975,7 +3037,7 @@ targets:
   id: operator.release-bundle-signing
   family: operator
   scope_bucket: operator-completion-required
-  phase: P0
+  delivery_track: foundation-boundary
   minimum_claim_tier: 3
   first_claimable_profile: baseline
   claim:
@@ -3020,7 +3082,8 @@ targets:
       openapi_paths_present: []
       openrpc_present: false
   discrepancies: []
-discrepancy_summary: {}
+discrepancy_summary:
+  active-without-effective-claim:baseline: 2
 truthful_status:
   fully_certifiable: false
   fully_rfc_compliant: false

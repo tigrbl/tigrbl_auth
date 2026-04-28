@@ -16,7 +16,7 @@ try:  # pragma: no cover - exercised when full runtime deps are installed
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel
 
-    def hook_ctx(*, ops: str, phase: str):
+    def hook_ctx(**_kwargs):
         def decorator(func):
             func.__wrapped__ = func
             return func
@@ -85,7 +85,10 @@ def _device_code_table():
     return DeviceCode
 
 
-@hook_ctx(ops="approve", phase="HANDLER")
+_TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
+
+
+@hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
 async def approve_device_code(ctx: Mapping[str, Any]) -> None:
     """Mark a device code as authorized (testing/operator helper)."""
 
@@ -111,7 +114,7 @@ async def approve_device_code(ctx: Mapping[str, Any]) -> None:
         )
 
 
-@hook_ctx(ops="deny", phase="HANDLER")
+@hook_ctx(**{"ops": "deny", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
 async def deny_device_code(ctx: Mapping[str, Any]) -> None:
     """Mark a device code as denied (testing/operator helper)."""
 

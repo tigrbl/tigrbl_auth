@@ -253,8 +253,8 @@ def sha256_file(path: Path) -> str:
 
 def find_source_zip() -> Path | None:
     candidates = [
-        ROOT.parent / "tigrbl_auth_phase9_test_plane_checkpoint_updated.zip",
-        Path("/mnt/data/tigrbl_auth_phase9_test_plane_checkpoint_updated.zip"),
+        ROOT.parent / "tigrbl_auth_test_plane_checkpoint_updated.zip",
+        Path("/mnt/data/tigrbl_auth_test_plane_checkpoint_updated.zip"),
     ]
     for candidate in candidates:
         if candidate.exists():
@@ -284,7 +284,7 @@ def update_claims() -> None:
     claims_path = ROOT / "compliance/claims/declared-target-claims.yaml"
     payload = load_yaml(claims_path)
     claim_set = payload.setdefault("claim_set", {})
-    claim_set["phase"] = "P10"
+    claim_set["delivery_track"] = "tier3-evidence"
     claim_set["current_repository_tier"] = 3
     for claim in claim_set.get("claims", []):
         target = str(claim.get("target"))
@@ -299,7 +299,7 @@ def update_claims() -> None:
     state["checkpoint_only"] = True
     state["fully_certifiable"] = False
     state["fully_rfc_compliant"] = False
-    state["phase_10_tier3_evidence_subset_complete"] = True
+    state["tier3_evidence_subset_complete"] = True
     state["tier3_evidence_baseline_complete"] = True
     state["tier3_evidence_selected_production_subset_complete"] = True
     state["tier3_evidence_complete"] = False
@@ -736,7 +736,7 @@ def update_evidence_manifest(promoted_dirs: list[str], promoted_targets: list[st
         "production": PROMOTED_PRODUCTION_TARGETS,
     }
     payload["notes"] = [
-        "Phase 10 promotes the full baseline target bucket and a selected production subset to Tier 3 using preserved gate, mapping, and contract bundles.",
+        "Tier 3 evidence checkpoint promotes the full baseline target bucket and a selected production subset to Tier 3 using preserved gate, mapping, and contract bundles.",
         "Full-boundary Tier 3 promotion is still incomplete.",
         "Tier 4 peer bundles remain absent.",
     ]
@@ -753,11 +753,11 @@ def update_current_state_docs() -> None:
         "",
         "## Summary",
         "",
-        "This repository is now a **Tigrbl-native, governance-installed, boundary-locked Phase 10 checkpoint** for `tigrbl_auth` with preserved Tier 3 evidence promoted for the full baseline target bucket and a selected production subset.",
+        "This repository is now a **Tigrbl-native, governance-installed, boundary-locked Tier 3 evidence checkpoint** for `tigrbl_auth` with preserved Tier 3 evidence promoted for the full baseline target bucket and a selected production subset.",
         "",
         "## What changed in this checkpoint",
         "",
-        "Phase 10 work is now present in the repository release path:",
+        "Tier 3 evidence checkpoint work is now present in the repository release path:",
         "",
         "- preserved Tier 3 evidence bundles now exist for the full baseline target bucket",
         "- preserved Tier 3 evidence bundles now exist for a selected production subset (`RFC 7009`, `RFC 7591`, `RFC 7662`, `RFC 9068`, `RFC 6265`, `RFC 9728`, `OIDC UserInfo`, `OpenRPC 1.4.x admin/control-plane contract`)",
@@ -795,7 +795,7 @@ def update_current_state_docs() -> None:
         "",
         "## Key artifacts to inspect",
         "",
-        "- `docs/compliance/PHASE10_TIER3_EVIDENCE_COMPLETION.md`",
+        "- `docs/compliance/TIER3_EVIDENCE_COMPLETION.md`",
         "- `docs/compliance/TIER3_PROMOTION_MATRIX.md`",
         "- `compliance/evidence/manifest.yaml`",
         "- `docs/compliance/evidence_peer_readiness_report.md`",
@@ -815,7 +815,7 @@ def update_current_state_docs() -> None:
         "",
         "`tigrbl_auth` in this checkpoint is **not yet certifiably fully RFC/spec compliant across the entire declared certification boundary**.",
         "",
-        "## What Phase 10 achieved",
+        "## What Tier 3 evidence checkpoint achieved",
         "",
         "This checkpoint closes the preserved-evidence gap for the baseline bucket and a selected production subset:",
         "",
@@ -841,7 +841,7 @@ def update_current_state_docs() -> None:
         "",
         "## Practical recommendation",
         "",
-        "Use this checkpoint as the Phase 10 handoff for preserved Tier 3 evidence on the baseline bucket and the selected production subset. It is stronger and more truthful than the Phase 9 zip, but it still does not support a final truthful claim that `tigrbl_auth` is certifiably fully featured or certifiably fully RFC/spec compliant across its full declared target boundary.",
+        "Use this checkpoint as the Tier 3 evidence checkpoint handoff for preserved Tier 3 evidence on the baseline bucket and the selected production subset. It is stronger and more truthful than the test-plane checkpoint zip, but it still does not support a final truthful claim that `tigrbl_auth` is certifiably fully featured or certifiably fully RFC/spec compliant across its full declared target boundary.",
         "",
     ]
     write_text(ROOT / "CERTIFICATION_STATUS.md", "\n".join(cert_lines))
@@ -849,19 +849,19 @@ def update_current_state_docs() -> None:
     docs_current_lines = [
         "# Current State",
         "",
-        "`tigrbl_auth` is now a governed, boundary-locked Phase 10 checkpoint with:",
+        "`tigrbl_auth` is now a governed, boundary-locked Tier 3 evidence checkpoint with:",
         "",
-        "- Phase 0 certification-boundary freeze completed",
-        "- Phase 1 authoritative migration to standards-owned modules completed for the release path",
-        "- Phase 2 durable persistence and executable migration ownership implemented in repository shape",
-        "- Phase 3 canonical public auth surface completed for the authoritative release path",
-        "- Phase 4 browser session, cookie, and logout semantics implemented in the release path",
-        "- Phase 5 implementation-backed operator/admin RPC generation and registry completed",
-        "- Phase 6 executable hardening/runtime enforcement implemented for the core authorization, token, discovery, and contract paths",
-        "- Phase 7 retained RFC-family runtime completion materially implemented across client lifecycle, PAR/JAR/RAR/resource indicators, sender-constrained issuance, token exchange, native apps, and device flow",
-        "- Phase 8 executable capability wiring and dependency-light surface verification implemented",
-        "- Phase 9 certification-usable test-plane normalization completed",
-        "- Phase 10 preserved Tier 3 evidence promoted for the full baseline bucket and a selected production subset",
+        "- boundary-lock checkpoint certification-boundary freeze completed",
+        "- runtime-foundation checkpoint authoritative migration to standards-owned modules completed for the release path",
+        "- persistence-domain checkpoint durable persistence and executable migration ownership implemented in repository shape",
+        "- public-route checkpoint canonical public auth surface completed for the authoritative release path",
+        "- browser-session checkpoint browser session, cookie, and logout semantics implemented in the release path",
+        "- operator-service checkpoint implementation-backed operator/admin RPC generation and registry completed",
+        "- runtime-hardening checkpoint executable hardening/runtime enforcement implemented for the core authorization, token, discovery, and contract paths",
+        "- RFC-family runtime checkpoint retained RFC-family runtime completion materially implemented across client lifecycle, PAR/JAR/RAR/resource indicators, sender-constrained issuance, token exchange, native apps, and device flow",
+        "- capability-wiring checkpoint executable capability wiring and dependency-light surface verification implemented",
+        "- test-plane checkpoint certification-usable test-plane normalization completed",
+        "- Tier 3 evidence checkpoint preserved Tier 3 evidence promoted for the full baseline bucket and a selected production subset",
         "",
         "It now has:",
         "",
@@ -881,22 +881,22 @@ def update_current_state_docs() -> None:
     ]
     write_text(ROOT / "docs/compliance/current_state.md", "\n".join(docs_current_lines))
 
-    phase_doc = [
-        "# Phase 10 Tier 3 Evidence Completion",
+    evidence_doc = [
+        "# Tier 3 evidence checkpoint Tier 3 Evidence Completion",
         "",
         "This checkpoint promotes the full baseline target bucket and a selected production subset to Tier 3 using preserved bundle directories committed under `compliance/evidence/tier3/` and profile bundles committed under `dist/evidence-bundles/`.",
         "",
         "## Promoted baseline targets",
         "",
     ]
-    phase_doc.extend([f"- `{target}`" for target in PROMOTED_BASELINE_TARGETS])
-    phase_doc.extend([
+    evidence_doc.extend([f"- `{target}`" for target in PROMOTED_BASELINE_TARGETS])
+    evidence_doc.extend([
         "",
         "## Promoted production subset",
         "",
     ])
-    phase_doc.extend([f"- `{target}`" for target in PROMOTED_PRODUCTION_TARGETS])
-    phase_doc.extend([
+    evidence_doc.extend([f"- `{target}`" for target in PROMOTED_PRODUCTION_TARGETS])
+    evidence_doc.extend([
         "",
         "## Preservation model",
         "",
@@ -917,7 +917,7 @@ def update_current_state_docs() -> None:
         "- Tier 4 peer validation remains absent",
         "",
     ])
-    write_text(ROOT / "docs/compliance/PHASE10_TIER3_EVIDENCE_COMPLETION.md", "\n".join(phase_doc))
+    write_text(ROOT / "docs/compliance/TIER3_EVIDENCE_COMPLETION.md", "\n".join(evidence_doc))
 
     matrix_lines = [
         "# Tier 3 Promotion Matrix",
@@ -927,7 +927,7 @@ def update_current_state_docs() -> None:
     ]
     for group in EVIDENCE_GROUPS:
         for target in group["targets"]:
-            matrix_lines.append(f"| {target} | {group['profile']} | {group['dir']} | 3 | promoted in Phase 10 |")
+            matrix_lines.append(f"| {target} | {group['profile']} | {group['dir']} | 3 | promoted in Tier 3 evidence checkpoint |")
     matrix_lines.extend([
         "",
         "## Not promoted in this checkpoint",
@@ -942,7 +942,7 @@ def main() -> int:
     update_claims()
     regenerate_effective_manifests()
     scope = build_scope(ROOT)
-    scope["phase"] = "P10"
+    scope["delivery_track"] = "tier3-evidence"
     scope["repository_tier"] = 3
     scope.setdefault("truthful_status", {})["note"] = "The authoritative scope manifest improves truthfulness and traceability, but this checkpoint still leaves full-boundary evidence, peer validation, and bounded helper targets incomplete."
     write_scope_yaml(ROOT / "compliance/targets/certification_scope.yaml", scope)
@@ -969,7 +969,7 @@ def main() -> int:
     update_evidence_manifest(promoted_dirs, sorted(PROMOTED_TARGETS))
     regenerate_effective_manifests()
     scope = build_scope(ROOT)
-    scope["phase"] = "P10"
+    scope["delivery_track"] = "tier3-evidence"
     scope["repository_tier"] = 3
     scope.setdefault("truthful_status", {})["note"] = "The authoritative scope manifest improves truthfulness and traceability, but this checkpoint still leaves full-boundary evidence, peer validation, and bounded helper targets incomplete."
     write_scope_yaml(ROOT / "compliance/targets/certification_scope.yaml", scope)
@@ -979,7 +979,7 @@ def main() -> int:
     run_release_gates(ROOT, strict=True)
     update_current_state_docs()
     print(json.dumps({
-        "phase": "P10",
+        "delivery_track": "tier3-evidence",
         "repository_tier": 3,
         "promoted_baseline_targets": PROMOTED_BASELINE_TARGETS,
         "promoted_production_targets": PROMOTED_PRODUCTION_TARGETS,

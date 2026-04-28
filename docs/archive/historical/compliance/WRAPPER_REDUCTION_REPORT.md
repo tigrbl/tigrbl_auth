@@ -14,13 +14,13 @@
 
 ## Scope
 
-This report documents the wrapper/shim reduction work completed during Phase 1.
-It compares the Phase 0 scope-lock checkpoint against the current repository
+This report documents the wrapper/shim reduction work completed during runtime-foundation checkpoint.
+It compares the boundary-lock checkpoint scope-lock checkpoint against the current repository
 state after migration cleanup and stricter wrapper hygiene enforcement.
 
 ## Baseline versus current state
 
-| Metric | Phase 0 checkpoint | Phase 1 checkpoint |
+| Metric | boundary-lock checkpoint checkpoint | runtime-foundation checkpoint checkpoint |
 |---|---:|---:|
 | certified-core wrapper count | 0 | 0 |
 | non-certified wrapper count | 45 | 4 |
@@ -137,5 +137,5 @@ truthful claim that the in-scope release path had been migrated away from the
 legacy flat RFC tree.
 
 It does **not** by itself establish full feature completion or full RFC
-compliance. Those remain blocked by later-phase runtime, persistence, public
+compliance. Those remain blocked by later-runtime, persistence, public
 surface, hardening, and evidence work.

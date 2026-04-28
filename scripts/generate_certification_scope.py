@@ -207,7 +207,7 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
             "id": target.get("id"),
             "family": target.get("family"),
             "scope_bucket": bucket,
-            "phase": target.get("phase"),
+            "delivery_track": target.get("delivery_track"),
             "minimum_claim_tier": target.get("minimum_claim_tier"),
             "first_claimable_profile": first_profile(target.get("profiles")),
             "claim": claim,
@@ -284,7 +284,7 @@ def build_scope(repo_root: Path) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "package": "tigrbl_auth",
-        "phase": declared.get("claim_set", {}).get("phase", "P0"),
+        "delivery_track": declared.get("claim_set", {}).get("delivery_track", "foundation-boundary"),
         "authoritative": True,
         "repository_tier": declared.get("claim_set", {}).get("current_repository_tier", 0),
         "authoritative_sources": {

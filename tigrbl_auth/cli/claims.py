@@ -26,7 +26,12 @@ EXPECTED_PROFILES = {
     "webauthn-passkey-oauth-patterns",
     "confidential-spa-pattern",
 }
-EXPECTED_PHASES = {"P0", "P1", "P2", "P3"}
+EXPECTED_DELIVERY_TRACKS = {
+    "foundation-boundary",
+    "baseline-interoperability",
+    "production-readiness",
+    "hardening-interop",
+}
 EXPECTED_TIERS = {0, 1, 2, 3, 4}
 BANNED_CORE_LABELS = {"RFC 5785", "RFC 8523"}
 REQUIRED_CORRECTIONS = {
@@ -113,10 +118,10 @@ def run_lint(repo_root: Path, *, strict: bool = True, report_dir: Path | None = 
         failures.append(f"Missing required profiles: {', '.join(sorted(missing_profiles))}")
 
     for profile_name, profile in profiles.get("profiles", {}).items():
-        phase = profile.get("phase")
+        delivery_track = profile.get("delivery_track")
         tier = int(profile.get("minimum_claim_tier", -1))
-        if phase not in EXPECTED_PHASES:
-            failures.append(f"Profile {profile_name} has invalid phase: {phase}")
+        if delivery_track not in EXPECTED_DELIVERY_TRACKS:
+            failures.append(f"Profile {profile_name} has invalid delivery_track: {delivery_track}")
         if tier not in EXPECTED_TIERS:
             failures.append(f"Profile {profile_name} has invalid minimum_claim_tier: {tier}")
 

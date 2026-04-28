@@ -5,7 +5,7 @@ scope: core
 targets:
 - id: openrpc.admin-plane
   label: OpenRPC 1.4.x admin/control-plane contract
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production

@@ -46,6 +46,6 @@ The clean-room matrix now performs real runtime validation in supported environm
 
 The release-gate tox environment runs the same serve-check and HTTP-surface probes for `uvicorn`, `hypercorn`, and `tigrcorn` so the generated `docs/compliance/runtime_profile_report.json` can be built from executable checks in a supported interpreter environment.
 
-## Install-substrate proof step
+## Install-substrate proof action
 
 Before treating a clean checkout as valid, run `python scripts/verify_clean_room_install_substrate.py --profile <profile> --strict-manifest` in the selected environment and preserve the resulting `docs/compliance/install_substrate_report.json` plus the per-profile `dist/install-substrate/<profile>.json` artifact.

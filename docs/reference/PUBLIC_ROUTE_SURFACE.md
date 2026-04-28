@@ -3,7 +3,7 @@
 ## Summary
 
 This checkpoint completes the missing canonical public auth routes required by
-Phase 3 for the authoritative release path.
+public-route checkpoint for the authoritative release path.
 
 The public route plane is now owned by explicit route modules under
 `tigrbl_auth/api/rest/routers/`, with corresponding operation modules under
@@ -72,7 +72,7 @@ OpenAPI generation pipeline.
 
 ## Test and contract mapping
 
-Phase 3 adds contract-visible checks for the canonical route set:
+public-route checkpoint adds contract-visible checks for the canonical route set:
 
 - `tests/unit/test_public_route_contracts.py`
 - `tests/conformance/production/test_oidc_rp_initiated_logout.py`
@@ -96,14 +96,14 @@ Expanded RFC-targeted conformance coverage is now mapped for:
 
 ## Honest status
 
-The public-route plane now includes the Phase 3 canonical route inventory together with the Phase 7 advanced authorization and management surfaces required by the retained production and hardening RFC families.
+The public-route plane now includes the public-route checkpoint canonical route inventory together with the RFC-family runtime checkpoint advanced authorization and management surfaces required by the retained production and hardening RFC families.
 
 It still does **not** by itself make the repository certifiably fully featured or certifiably fully RFC/spec compliant across the full declared certification boundary. Remaining blockers are now concentrated in evidence promotion, peer validation, release attestation, and broader certification-grade interop breadth.
 
 
-## Phase 4 browser/logout semantics layered onto the public route plane
+## browser-session checkpoint browser/logout semantics layered onto the public route plane
 
-The Phase 4 checkpoint keeps the Phase 3 route inventory intact and deepens the browser-facing semantics behind those routes:
+The browser-session checkpoint checkpoint keeps the public-route checkpoint route inventory intact and deepens the browser-facing semantics behind those routes:
 
 - `/login` now establishes a durable browser session and issues an opaque RFC 6265 cookie
 - `/authorize` resolves browser sessions through the domain-owned cookie subsystem and emits `session_state`
@@ -113,7 +113,7 @@ The Phase 4 checkpoint keeps the Phase 3 route inventory intact and deepens the 
 This still does not make the package fully certifiable, but it makes the browser/logout behavior materially more implementation-backed and observable.
 
 
-## Phase 8 executable surface registry
+## capability-wiring checkpoint executable surface registry
 
 The route inventory above is now driven by a single capability registry in
 ` tigrbl_auth/config/surfaces.py ` and mounted through

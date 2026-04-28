@@ -34,112 +34,112 @@ This revised model separates:
 | Tier 3 | Evidence-Backed Certified | Preserved artifacts, conformance suites, negative tests, and release-gate evidence support the claim. |
 | Tier 4 | Independent Peer Claim | Claim has external review, peer validation, independent interoperability confirmation, or equivalent third-party evidence. |
 
-## Implementation phase model
+## Implementation model
 
-| Phase | Meaning |
+| | Meaning |
 |---|---|
-| P0 | Foundation / boundary definition |
-| P1 | Interoperable baseline |
-| P2 | Production completion |
-| P3 | Hardening / advanced interop |
+| foundation-boundary | Foundation / boundary definition |
+| baseline-interoperability | Interoperable baseline |
+| production-readiness | Production completion |
+| hardening-interop | Hardening / advanced interop |
 
 ---
 
 ## Consolidated standards / compliance matrix
 
-| Feature | Target / Standard | Certification Tier | Implementation Phase |
+| Feature | Target / Standard | Certification Tier | Implementation |
 |---|---|---:|---:|
-| HTTP auth framework semantics | RFC 9110 / HTTP Semantics; RFC 7235 legacy auth framework context | 2 | P0 |
-| TLS-only auth transport boundary | TLS operational requirement across OAuth/OIDC endpoints | 2 | P0 |
-| Authorization server core | RFC 6749 OAuth 2.0 Authorization Framework | 2 | P1 |
-| Bearer token usage | RFC 6750 Bearer Token Usage | 2 | P1 |
-| PKCE for public clients | RFC 7636 | 2 | P1 |
-| Authorization server metadata | RFC 8414 | 2 | P1 |
-| `.well-known` path conventions | RFC 5785 | 2 | P1 |
-| JWT token envelope | RFC 7519 JWT | 2 | P1 |
-| Signed token objects | RFC 7515 JWS | 2 | P1 |
-| Encrypted token objects | RFC 7516 JWE | 3 | P2 |
-| JSON Web Keys | RFC 7517 JWK | 2 | P1 |
-| JOSE algorithm registry | RFC 7518 JWA | 2 | P1 |
-| JWT access token profile | RFC 9068 | 3 | P2 |
-| Token revocation | RFC 7009 | 3 | P2 |
-| Token introspection | RFC 7662 | 3 | P2 |
-| Resource indicators / audience partitioning | RFC 8707 | 3 | P2 |
-| Token exchange / delegation | RFC 8693 | 3 | P3 |
-| Device authorization flow | RFC 8628 | 3 | P3 |
-| Native app login profile | RFC 8252 | 3 | P2 |
-| Dynamic client registration | RFC 7591 | 3 | P2 |
-| Dynamic client registration management | RFC 7592 | 3 | P3 |
-| OAuth request object signing | RFC 9101 JAR | 3 | P3 |
-| Pushed authorization requests | RFC 9126 PAR | 3 | P3 |
-| Rich authorization requests | RFC 9396 RAR | 3 | P3 |
-| Sender-constrained tokens via mTLS | RFC 8705 | 4 | P3 |
-| Sender-constrained tokens via DPoP | RFC 9449 | 4 | P3 |
-| OAuth threat guidance baseline | RFC 6819 historical threat model guidance | 3 | P2 |
-| OAuth modern hardening profile | OAuth 2.0 Security BCP alignment | 4 | P3 |
-| OIDC identity/authentication layer | OpenID Connect Core 1.0 | 2 | P1 |
-| OIDC discovery | OpenID Connect Discovery 1.0 | 2 | P1 |
-| OIDC userinfo | OpenID Connect Core 1.0 UserInfo surface | 3 | P2 |
-| OIDC ID token validation | OIDC Core 1.0 | 2 | P1 |
-| OIDC session management | OpenID Connect Session Management 1.0 | 3 | P2 |
-| OIDC RP-initiated logout | OpenID Connect RP-Initiated Logout 1.0 | 3 | P2 |
-| OIDC front-channel logout | OpenID Connect Front-Channel Logout 1.0 | 4 | P3 |
-| OIDC back-channel logout | OpenID Connect Back-Channel Logout 1.0 | 4 | P3 |
-| Browser cookie sessions | RFC 6265 | 3 | P2 |
-| Cookie security policy | RFC 6265 + Secure/HttpOnly/SameSite implementation policy | 3 | P2 |
-| CSRF protection on browser auth flows | Web security hardening requirement, not a single RFC target here | 3 | P2 |
-| State/nonce replay defense | OIDC Core + OAuth hardening profile | 3 | P1 |
-| Redirect URI strict validation | OAuth 2.0 / Security BCP / native app profile | 3 | P1 |
-| Refresh token rotation | Security BCP alignment | 4 | P3 |
-| Key rotation / JWKS rollover | JWK/JWS operational compliance | 3 | P2 |
-| Issuer / audience / subject validation rules | JWT + OIDC validation profile | 3 | P1 |
-| Multi-tenant issuer partitioning | deployment/interoperability profile, not single RFC | 3 | P2 |
-| Local account login | product feature; not standardized by one core RFC | 1 | P2 |
-| End-user registration / signup | product feature; not standardized by one core RFC | 1 | P2 |
-| Password-based local auth | implementation feature; standards-adjacent only | 1 | P2 |
-| WebAuthn / passkeys | WebAuthn / FIDO2 family, outside RFC-only core set | 4 | P3 |
-| HTTP authorization endpoint | RFC 6749 / OIDC Core | 2 | P1 |
-| HTTP token endpoint | RFC 6749 / RFC 6750 / RFC 7636 | 2 | P1 |
-| HTTP revocation endpoint | RFC 7009 | 3 | P2 |
-| HTTP introspection endpoint | RFC 7662 | 3 | P2 |
-| HTTP JWKS endpoint | RFC 7517 / OIDC Discovery / RFC 8414 metadata linkage | 2 | P1 |
-| HTTP metadata endpoint | RFC 8414 | 2 | P1 |
-| OIDC discovery endpoint | OIDC Discovery 1.0 | 2 | P1 |
-| OIDC userinfo endpoint | OIDC Core 1.0 | 3 | P2 |
-| OIDC logout endpoint | OIDC logout specs | 3 | P2 |
-| Device authorization endpoint | RFC 8628 | 3 | P3 |
-| Client registration endpoint | RFC 7591 / 7592 | 3 | P2 |
-| Access token validation for resource servers | RFC 6750 / RFC 7662 / RFC 9068 | 3 | P2 |
-| Scope semantics | RFC 6749 / application profile | 2 | P1 |
-| Claims-based authorization | JWT / OIDC / application policy layer | 3 | P2 |
-| RBAC / ABAC / ReBAC policy engine | product/policy feature, not governed by a single core RFC | 1 | P2 |
-| OpenAPI HTTP contract | OpenAPI 3.1 | 2 | P1 |
-| OpenAPI bearer security scheme | OpenAPI 3.1 `http` bearer scheme | 2 | P1 |
-| OpenAPI OAuth2 scheme declaration | OpenAPI 3.1 `oauth2` security scheme | 2 | P1 |
-| OpenAPI OpenID Connect scheme | OpenAPI 3.1 `openIdConnect` security scheme | 2 | P1 |
-| OpenAPI standard error schemas | OpenAPI 3.1 implementation target for OAuth/OIDC errors | 3 | P2 |
-| OpenAPI callback / redirect documentation | OpenAPI 3.1 documentation target | 3 | P2 |
-| OpenRPC control-plane surface | OpenRPC 1.x for internal/admin RPC only | 2 | P2 |
-| OpenRPC token/session admin methods | OpenRPC internal control-plane documentation target | 2 | P2 |
-| OAuth/OIDC over JSON-RPC | Not a normative interop target; should not be claimed as standards-equivalent | 0 | P0 |
-| JSON-RPC auth for internal admin | JSON-RPC / OpenRPC internal feature only | 2 | P2 |
-| Audit event logging | production hardening / compliance feature | 3 | P2 |
-| Security event logging | production hardening / compliance feature | 4 | P3 |
-| Deterministic config / metadata emission | production interop / operability target | 3 | P2 |
-| Conformance / interoperability test suite | certification evidence requirement | 3 | P3 |
-| RFC-targeted negative tests | certification evidence requirement | 3 | P3 |
-| Cryptographic algorithm allowlists | JOSE hardening / Security BCP alignment | 4 | P3 |
-| Algorithm confusion resistance | JOSE hardening | 4 | P3 |
-| Clock skew tolerance rules | JWT/OIDC operational profile | 3 | P2 |
-| Tenant-scoped key material isolation | production hardening target | 4 | P3 |
-| Back-channel service-to-service interop | OAuth token exchange / mTLS / JWT profiles | 4 | P3 |
-| CLI login interop | RFC 8628 device flow | 3 | P3 |
-| SPA login interop | OIDC Core + Auth Code + PKCE + Security BCP direction | 3 | P2 |
-| Confidential web app interop | OAuth 2.0 + OIDC Core + cookie/session profile | 3 | P2 |
-| Resource server interop | RFC 6750 + RFC 7662 and/or RFC 9068 | 3 | P2 |
-| Gateway / proxy interop | metadata/JWKS/introspection/revocation exposure | 3 | P2 |
-| OAuth 2.1 alignment | draft-era profile direction: PKCE-by-default, no implicit, hardened redirects | 3 | P2 |
-| OAuth 2.1 formal RFC claim | Do not claim unless a final RFC is verified | 0 | P0 |
+| HTTP auth framework semantics | RFC 9110 / HTTP Semantics; RFC 7235 legacy auth framework context | 2 | foundation-boundary |
+| TLS-only auth transport boundary | TLS operational requirement across OAuth/OIDC endpoints | 2 | foundation-boundary |
+| Authorization server core | RFC 6749 OAuth 2.0 Authorization Framework | 2 | baseline-interoperability |
+| Bearer token usage | RFC 6750 Bearer Token Usage | 2 | baseline-interoperability |
+| PKCE for public clients | RFC 7636 | 2 | baseline-interoperability |
+| Authorization server metadata | RFC 8414 | 2 | baseline-interoperability |
+| `.well-known` path conventions | RFC 5785 | 2 | baseline-interoperability |
+| JWT token envelope | RFC 7519 JWT | 2 | baseline-interoperability |
+| Signed token objects | RFC 7515 JWS | 2 | baseline-interoperability |
+| Encrypted token objects | RFC 7516 JWE | 3 | production-readiness |
+| JSON Web Keys | RFC 7517 JWK | 2 | baseline-interoperability |
+| JOSE algorithm registry | RFC 7518 JWA | 2 | baseline-interoperability |
+| JWT access token profile | RFC 9068 | 3 | production-readiness |
+| Token revocation | RFC 7009 | 3 | production-readiness |
+| Token introspection | RFC 7662 | 3 | production-readiness |
+| Resource indicators / audience partitioning | RFC 8707 | 3 | production-readiness |
+| Token exchange / delegation | RFC 8693 | 3 | hardening-interop |
+| Device authorization flow | RFC 8628 | 3 | hardening-interop |
+| Native app login profile | RFC 8252 | 3 | production-readiness |
+| Dynamic client registration | RFC 7591 | 3 | production-readiness |
+| Dynamic client registration management | RFC 7592 | 3 | hardening-interop |
+| OAuth request object signing | RFC 9101 JAR | 3 | hardening-interop |
+| Pushed authorization requests | RFC 9126 PAR | 3 | hardening-interop |
+| Rich authorization requests | RFC 9396 RAR | 3 | hardening-interop |
+| Sender-constrained tokens via mTLS | RFC 8705 | 4 | hardening-interop |
+| Sender-constrained tokens via DPoP | RFC 9449 | 4 | hardening-interop |
+| OAuth threat guidance baseline | RFC 6819 historical threat model guidance | 3 | production-readiness |
+| OAuth modern hardening profile | OAuth 2.0 Security BCP alignment | 4 | hardening-interop |
+| OIDC identity/authentication layer | OpenID Connect Core 1.0 | 2 | baseline-interoperability |
+| OIDC discovery | OpenID Connect Discovery 1.0 | 2 | baseline-interoperability |
+| OIDC userinfo | OpenID Connect Core 1.0 UserInfo surface | 3 | production-readiness |
+| OIDC ID token validation | OIDC Core 1.0 | 2 | baseline-interoperability |
+| OIDC session management | OpenID Connect Session Management 1.0 | 3 | production-readiness |
+| OIDC RP-initiated logout | OpenID Connect RP-Initiated Logout 1.0 | 3 | production-readiness |
+| OIDC front-channel logout | OpenID Connect Front-Channel Logout 1.0 | 4 | hardening-interop |
+| OIDC back-channel logout | OpenID Connect Back-Channel Logout 1.0 | 4 | hardening-interop |
+| Browser cookie sessions | RFC 6265 | 3 | production-readiness |
+| Cookie security policy | RFC 6265 + Secure/HttpOnly/SameSite implementation policy | 3 | production-readiness |
+| CSRF protection on browser auth flows | Web security hardening requirement, not a single RFC target here | 3 | production-readiness |
+| State/nonce replay defense | OIDC Core + OAuth hardening profile | 3 | baseline-interoperability |
+| Redirect URI strict validation | OAuth 2.0 / Security BCP / native app profile | 3 | baseline-interoperability |
+| Refresh token rotation | Security BCP alignment | 4 | hardening-interop |
+| Key rotation / JWKS rollover | JWK/JWS operational compliance | 3 | production-readiness |
+| Issuer / audience / subject validation rules | JWT + OIDC validation profile | 3 | baseline-interoperability |
+| Multi-tenant issuer partitioning | deployment/interoperability profile, not single RFC | 3 | production-readiness |
+| Local account login | product feature; not standardized by one core RFC | 1 | production-readiness |
+| End-user registration / signup | product feature; not standardized by one core RFC | 1 | production-readiness |
+| Password-based local auth | implementation feature; standards-adjacent only | 1 | production-readiness |
+| WebAuthn / passkeys | WebAuthn / FIDO2 family, outside RFC-only core set | 4 | hardening-interop |
+| HTTP authorization endpoint | RFC 6749 / OIDC Core | 2 | baseline-interoperability |
+| HTTP token endpoint | RFC 6749 / RFC 6750 / RFC 7636 | 2 | baseline-interoperability |
+| HTTP revocation endpoint | RFC 7009 | 3 | production-readiness |
+| HTTP introspection endpoint | RFC 7662 | 3 | production-readiness |
+| HTTP JWKS endpoint | RFC 7517 / OIDC Discovery / RFC 8414 metadata linkage | 2 | baseline-interoperability |
+| HTTP metadata endpoint | RFC 8414 | 2 | baseline-interoperability |
+| OIDC discovery endpoint | OIDC Discovery 1.0 | 2 | baseline-interoperability |
+| OIDC userinfo endpoint | OIDC Core 1.0 | 3 | production-readiness |
+| OIDC logout endpoint | OIDC logout specs | 3 | production-readiness |
+| Device authorization endpoint | RFC 8628 | 3 | hardening-interop |
+| Client registration endpoint | RFC 7591 / 7592 | 3 | production-readiness |
+| Access token validation for resource servers | RFC 6750 / RFC 7662 / RFC 9068 | 3 | production-readiness |
+| Scope semantics | RFC 6749 / application profile | 2 | baseline-interoperability |
+| Claims-based authorization | JWT / OIDC / application policy layer | 3 | production-readiness |
+| RBAC / ABAC / ReBAC policy engine | product/policy feature, not governed by a single core RFC | 1 | production-readiness |
+| OpenAPI HTTP contract | OpenAPI 3.1 | 2 | baseline-interoperability |
+| OpenAPI bearer security scheme | OpenAPI 3.1 `http` bearer scheme | 2 | baseline-interoperability |
+| OpenAPI OAuth2 scheme declaration | OpenAPI 3.1 `oauth2` security scheme | 2 | baseline-interoperability |
+| OpenAPI OpenID Connect scheme | OpenAPI 3.1 `openIdConnect` security scheme | 2 | baseline-interoperability |
+| OpenAPI standard error schemas | OpenAPI 3.1 implementation target for OAuth/OIDC errors | 3 | production-readiness |
+| OpenAPI callback / redirect documentation | OpenAPI 3.1 documentation target | 3 | production-readiness |
+| OpenRPC control-plane surface | OpenRPC 1.x for internal/admin RPC only | 2 | production-readiness |
+| OpenRPC token/session admin methods | OpenRPC internal control-plane documentation target | 2 | production-readiness |
+| OAuth/OIDC over JSON-RPC | Not a normative interop target; should not be claimed as standards-equivalent | 0 | foundation-boundary |
+| JSON-RPC auth for internal admin | JSON-RPC / OpenRPC internal feature only | 2 | production-readiness |
+| Audit event logging | production hardening / compliance feature | 3 | production-readiness |
+| Security event logging | production hardening / compliance feature | 4 | hardening-interop |
+| Deterministic config / metadata emission | production interop / operability target | 3 | production-readiness |
+| Conformance / interoperability test suite | certification evidence requirement | 3 | hardening-interop |
+| RFC-targeted negative tests | certification evidence requirement | 3 | hardening-interop |
+| Cryptographic algorithm allowlists | JOSE hardening / Security BCP alignment | 4 | hardening-interop |
+| Algorithm confusion resistance | JOSE hardening | 4 | hardening-interop |
+| Clock skew tolerance rules | JWT/OIDC operational profile | 3 | production-readiness |
+| Tenant-scoped key material isolation | production hardening target | 4 | hardening-interop |
+| Back-channel service-to-service interop | OAuth token exchange / mTLS / JWT profiles | 4 | hardening-interop |
+| CLI login interop | RFC 8628 device flow | 3 | hardening-interop |
+| SPA login interop | OIDC Core + Auth Code + PKCE + Security BCP direction | 3 | production-readiness |
+| Confidential web app interop | OAuth 2.0 + OIDC Core + cookie/session profile | 3 | production-readiness |
+| Resource server interop | RFC 6750 + RFC 7662 and/or RFC 9068 | 3 | production-readiness |
+| Gateway / proxy interop | metadata/JWKS/introspection/revocation exposure | 3 | production-readiness |
+| OAuth 2.1 alignment | draft-era profile direction: PKCE-by-default, no implicit, hardened redirects | 3 | production-readiness |
+| OAuth 2.1 formal RFC claim | Do not claim unless a final RFC is verified | 0 | foundation-boundary |
 
 ---
 
@@ -167,12 +167,12 @@ A feature should not be placed in **Tier 4** merely because it is difficult or s
 
 ## Recommended implementation ordering
 
-| Phase | Objective | Core targets |
+| | Objective | Core targets |
 |---|---|---|
-| P0 | Foundation / boundary definition | HTTP semantics, TLS-only boundary, accurate standards claims, no false OpenRPC-over-OAuth claim |
-| P1 | Minimum interoperable identity server | RFC 6749, RFC 6750, RFC 7636, RFC 8414, RFC 7515/7517/7518/7519, OIDC Core, OIDC Discovery, authorization/token/JWKS/metadata |
-| P2 | Production-grade auth platform | RFC 7009, RFC 7662, RFC 9068, RFC 7591, RFC 6265, OIDC userinfo/session/logout, OpenAPI 3.1 complete contract, RFC 8252 |
-| P3 | Hardened / enterprise | RFC 8705 or RFC 9449, RFC 8693, RFC 8628, RFC 9101, RFC 9126, RFC 9396, RFC 7592, front/back-channel logout, conformance evidence, independent interop validation preparation |
+| foundation-boundary | Foundation / boundary definition | HTTP semantics, TLS-only boundary, accurate standards claims, no false OpenRPC-over-OAuth claim |
+| baseline-interoperability | Minimum interoperable identity server | RFC 6749, RFC 6750, RFC 7636, RFC 8414, RFC 7515/7517/7518/7519, OIDC Core, OIDC Discovery, authorization/token/JWKS/metadata |
+| production-readiness | Production-grade auth platform | RFC 7009, RFC 7662, RFC 9068, RFC 7591, RFC 6265, OIDC userinfo/session/logout, OpenAPI 3.1 complete contract, RFC 8252 |
+| hardening-interop | Hardened / enterprise | RFC 8705 or RFC 9449, RFC 8693, RFC 8628, RFC 9101, RFC 9126, RFC 9396, RFC 7592, front/back-channel logout, conformance evidence, independent interop validation preparation |
 
 ---
 

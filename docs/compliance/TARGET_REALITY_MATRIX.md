@@ -20,7 +20,7 @@ This matrix reconciles declared scope, current claims, owner modules, public sur
 | RFC 7519 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/jose/rfc7519.py | current: ∅<br>target: ∅ | conformance, unit | compliance/evidence/tier3/jwt/ | none |
 | OIDC Core 1.0 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/core.py<br>tigrbl_auth/standards/oidc/id_token.py | current: ∅<br>target: ∅ | conformance, integration | compliance/evidence/tier3/oidc-core/ | none |
 | OIDC Discovery 1.0 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/discovery.py | current: /.well-known/openid-configuration<br>target: /.well-known/openid-configuration | conformance, integration, interop | compliance/evidence/tier3/discovery/ | none |
-| OpenAPI 3.1 / 3.2 compatible public contract | tier 3 / evidenced-release-gated | tigrbl_auth/api/rest<br>tigrbl_auth/api/surfaces.py | current: ∅<br>target: ∅ | e2e, integration, unit | compliance/evidence/tier3/contracts/openapi/ | none |
+| OpenAPI 3.1 / 3.2 compatible public contract | tier 3 / generated-live-from-deployment-metadata | tigrbl_auth/api/rest<br>tigrbl_auth/api/surfaces.py | current: ∅<br>target: ∅ | e2e, integration, unit | compliance/evidence/tier3/contracts/openapi/ | none |
 
 ## production-completion-required
 
@@ -33,14 +33,14 @@ This matrix reconciles declared scope, current claims, owner modules, public sur
 | RFC 8252 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/native_apps.py<br>tigrbl_auth/tables/client.py | current: /authorize, /token, /register, /register/{client_id}<br>target: /authorize, /token, /register, /register/{client_id} | unit, conformance, interop | compliance/evidence/tier3/native-apps/ | none |
 | RFC 9068 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/jwt_access_tokens.py<br>tigrbl_auth/services/token_service.py | current: /login, /token, /token/exchange<br>target: /login, /token, /token/exchange | conformance, integration, unit, interop | compliance/evidence/tier3/jwt-access-token-profile/ | none |
 | RFC 9207 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/issuer_identification.py<br>tigrbl_auth/config/deployment.py | current: /authorize, /.well-known/openid-configuration<br>target: /authorize, /.well-known/openid-configuration | conformance, integration, unit | compliance/evidence/tier3/issuer-identification/ | none |
-| RFC 6265 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/http/cookies.py<br>tigrbl_auth/standards/oidc/session_mgmt.py | current: /login, /authorize, /logout<br>target: /login, /authorize, /logout | conformance, integration, negative | compliance/evidence/tier3/cookies/ | none |
+| RFC 6265 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/http/cookies.py<br>tigrbl_auth/standards/oidc/session_mgmt.py | current: /login, /authorize, /logout<br>target: /login, /authorize, /logout | conformance, integration, negative | compliance/evidence/tier3/cookies/ | active-without-effective-claim:baseline |
 | RFC 7521 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/assertion_framework.py<br>tigrbl_auth/ops/token.py | current: /token<br>target: /token | conformance, unit | compliance/evidence/tier3/assertion-framework/ | none |
 | RFC 7523 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/jwt_client_auth.py<br>tigrbl_auth/ops/token.py | current: /token, /register, /register/{client_id}<br>target: /token, /register, /register/{client_id} | conformance, unit | compliance/evidence/tier3/jwt-client-auth/ | none |
 | RFC 9728 | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oauth2/rfc9728.py | current: /.well-known/oauth-protected-resource<br>target: /.well-known/oauth-protected-resource | conformance, integration, unit, interop | compliance/evidence/tier3/protected-resource-metadata/ | none |
 | OIDC UserInfo | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/userinfo.py | current: /userinfo<br>target: /userinfo | conformance, integration, unit | compliance/evidence/tier3/oidc-userinfo/ | none |
-| OIDC Session Management | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/session_mgmt.py<br>tigrbl_auth/standards/http/cookies.py | current: /login, /authorize, /logout<br>target: /login, /authorize, /logout | conformance, integration, negative, unit | compliance/evidence/tier3/oidc-session-management/ | none |
+| OIDC Session Management | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/session_mgmt.py<br>tigrbl_auth/standards/http/cookies.py | current: /login, /authorize, /logout<br>target: /login, /authorize, /logout | conformance, integration, negative, unit | compliance/evidence/tier3/oidc-session-management/ | active-without-effective-claim:baseline |
 | OIDC RP-Initiated Logout | tier 3 / evidenced-release-gated | tigrbl_auth/standards/oidc/rp_initiated_logout.py<br>tigrbl_auth/api/rest/routers/logout.py | current: /logout<br>target: /logout | conformance, integration, negative, unit | compliance/evidence/tier3/oidc-rp-initiated-logout/ | none |
-| OpenRPC 1.4.x admin/control-plane contract | tier 3 / evidenced-release-gated | tigrbl_auth/api/rpc/__init__.py<br>tigrbl_auth/api/rpc/registry.py | current: /rpc<br>target: /rpc | e2e, unit | compliance/evidence/tier3/contracts/openrpc/ | none |
+| OpenRPC 1.4.x admin/control-plane contract | tier 3 / implementation-backed-generated-from-rpc-registry | tigrbl_auth/api/rpc/__init__.py<br>tigrbl_auth/api/rpc/registry.py | current: /rpc<br>target: /rpc | e2e, unit | compliance/evidence/tier3/contracts/openrpc/ | none |
 
 ## hardening-completion-required
 
@@ -87,6 +87,18 @@ This matrix reconciles declared scope, current claims, owner modules, public sur
 | RFC 8812 | extension-quarantine | WebAuthn is extension work and not part of the default certified boundary. |
 | RFC 8932 | extension-quarantine | RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from certification claims. |
 | OAuth 2.1 alignment profile | alignment-only | Track draft-era alignment only. Do not emit as a final RFC compliance claim. |
+| FAPI 2.0 Message Signing profile | alignment-only | Track external sector profile coverage only. Do not emit as a retained core certification claim. |
+| SMART App Launch profile | alignment-only | Track external healthcare profile coverage only. Do not emit as a retained core certification claim. |
+| SMART Backend Services profile | alignment-only | Track external healthcare backend profile coverage only. Do not emit as a retained core certification claim. |
+| FAST / UDAP Security profile | alignment-only | Track external trust-community profile coverage only. Do not emit as a retained core certification claim. |
+| IHE IUA profile | alignment-only | Track external healthcare authorization profile coverage only. Do not emit as a retained core certification claim. |
+| NIST SP 800-63B-4 profile | alignment-only | Track external assurance profile coverage only. Do not emit as a retained core certification claim. |
+| NIST SP 800-63C-4 profile | alignment-only | Track external federation assurance profile coverage only. Do not emit as a retained core certification claim. |
+| CAMARA Security and Interoperability profile | alignment-only | Track external telecom profile coverage only. Do not emit as a retained core certification claim. |
+| FDX CSDF Security Model and Profile | alignment-only | Track external financial-data profile coverage only. Do not emit as a retained core certification claim. |
+| GNAP Core + Resource Server profile | alignment-only | Track adjacent authorization profile coverage only. Do not emit as a retained core certification claim. |
+| WebAuthn and passkey-bound OAuth patterns | alignment-only | Track external pattern coverage only. Do not emit as a retained core certification claim. |
+| Confidential SPA profile pattern | alignment-only | Track external browser-architecture pattern coverage only. Do not emit as a retained core certification claim. |
 | SAML IdP/SP | out-of-scope-baseline | explicitly excluded from the default certification boundary |
 | LDAP/AD federation | out-of-scope-baseline | explicitly excluded from the default certification boundary |
 | SCIM | out-of-scope-baseline | explicitly excluded from the default certification boundary |

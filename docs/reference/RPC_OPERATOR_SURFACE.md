@@ -21,7 +21,7 @@ per-method metadata identifying:
 - owner module
 - required flags
 - surface set
-- phase provenance
+- chronology provenance
 
 This removes the prior detached catalog-only posture.
 
@@ -102,7 +102,7 @@ The repository now fails contract validation when:
 
 ## Current honest status
 
-This checkpoint completes the Phase 5 objective of replacing the catalog-only
+This checkpoint completes the operator-service checkpoint objective of replacing the catalog-only
 OpenRPC surface with an implementation-backed operator/admin plane.
 
 It does **not** mean the repository is already certifiably fully featured or

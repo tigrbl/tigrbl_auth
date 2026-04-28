@@ -15,7 +15,7 @@ from tigrbl_auth.cli.reports import execute_peer_profiles
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Emit Phase 13 peer-profile execution manifests and coverage checks.")
+    parser = argparse.ArgumentParser(description="Emit runtime-foundation checkpoint3 peer-profile execution manifests and coverage checks.")
     parser.add_argument("--profile", default="hardening", help="Deployment profile to bind into execution manifests.")
     parser.add_argument(
         "--execution-mode",

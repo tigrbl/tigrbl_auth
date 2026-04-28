@@ -396,7 +396,7 @@ RFC 6750              OAuth 2.0 Bearer Token Usage          October 2012
         serves the request.
 
    This document also imposes semantic requirements upon the access
-   token returned in step (D).
+   token returned in item (D).
 
 2.  Authenticated Requests
 

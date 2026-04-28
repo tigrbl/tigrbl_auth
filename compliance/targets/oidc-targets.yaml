@@ -5,7 +5,7 @@ scope: core
 targets:
 - id: oidc.core
   label: OIDC Core 1.0
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -17,7 +17,7 @@ targets:
   - tigrbl_auth/standards/oidc/id_token.py
 - id: oidc.discovery
   label: OIDC Discovery 1.0
-  phase: P1
+  delivery_track: baseline-interoperability
   minimum_claim_tier: 2
   profiles:
   - baseline
@@ -30,7 +30,7 @@ targets:
   - /.well-known/openid-configuration
 - id: oidc.userinfo
   label: OIDC UserInfo
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
@@ -42,7 +42,7 @@ targets:
   - /userinfo
 - id: oidc.session-management
   label: OIDC Session Management
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
@@ -52,7 +52,7 @@ targets:
   - tigrbl_auth/standards/oidc/session_mgmt.py
 - id: oidc.rp-initiated-logout
   label: OIDC RP-Initiated Logout
-  phase: P2
+  delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
   - production
@@ -64,7 +64,7 @@ targets:
   - /logout
 - id: oidc.front-channel-logout
   label: OIDC Front-Channel Logout
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening
@@ -73,7 +73,7 @@ targets:
   - tigrbl_auth/standards/oidc/frontchannel_logout.py
 - id: oidc.back-channel-logout
   label: OIDC Back-Channel Logout
-  phase: P3
+  delivery_track: hardening-interop
   minimum_claim_tier: 3
   profiles:
   - hardening

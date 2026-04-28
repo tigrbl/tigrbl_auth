@@ -1,0 +1,14 @@
+{
+  "declared_targets": 48,
+  "tier3_targets": 48,
+  "tier4_targets": 0,
+  "retained_boundary_tier3_complete": true,
+  "strict_independent_claims_ready": false,
+  "fully_rfc_compliant_now": true,
+  "release_gates_passed": true,
+  "release_gate_count": 20,
+  "runtime_profiles_ready": 0,
+  "runtime_profiles_invalid": 2,
+  "runtime_profiles_missing": 1,
+  "12_targeted_tests": "17 passed, 3 deselected"
+}

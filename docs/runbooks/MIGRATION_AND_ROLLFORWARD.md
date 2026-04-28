@@ -17,7 +17,7 @@
 ## Purpose
 
 This runbook describes how to apply, verify, and advance the repository-owned
-migration chain introduced in the Phase 2 persistence checkpoint.
+migration chain introduced in the persistence-domain checkpoint persistence checkpoint.
 
 The migration system is owned by the repository and is implemented under:
 
@@ -152,7 +152,7 @@ If migration verification fails:
 ## Current limitations
 
 This runbook covers the persistence and schema lifecycle foundation only. The
-full certification program still requires later-phase work, including:
+full certification program still requires later lifecycle work, including:
 
 - canonical route completion
 - browser/logout public surface completion

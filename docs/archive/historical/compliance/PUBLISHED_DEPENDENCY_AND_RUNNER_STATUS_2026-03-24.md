@@ -12,7 +12,7 @@
 
 # Published Dependency and Runner Status — 2026-03-24
 
-- checkpoint kind: `Phase 3 published dependency and runner gap closeout`
+- checkpoint kind: `public-route checkpoint published dependency and runner gap closeout`
 - certifiably fully featured now: `False`
 - certifiably fully RFC compliant now: `False`
 

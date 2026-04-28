@@ -5,7 +5,7 @@
 
 ## Status update
 
-The Phase 1 target/profile truth-normalization step for `RFC 7516`, `RFC 7592`, and `RFC 9207` is now complete in the current checkpoint. No new certification evidence was collected during that alignment-only update. The remaining phases below are still open.
+The runtime-foundation checkpoint target/profile truth-normalization action for `RFC 7516`, `RFC 7592`, and `RFC 9207` is now complete in the current checkpoint. No new certification evidence was collected during that alignment-only update. The remaining tracks below are still open.
 
 ## Objective
 
@@ -16,9 +16,9 @@ Deliver a package that can truthfully claim all of the following at once:
 - certifiably fully non-RFC spec/standard compliant for the retained non-RFC boundary
 - strict independent/public claim readiness
 
-## Step-by-step execution plan
+## Ordered execution plan
 
-### Phase 1 — eliminate claim-boundary ambiguity before new evidence is recorded
+### runtime-foundation checkpoint — eliminate claim-boundary ambiguity before new evidence is recorded
 
 1. **Completed.** Normalize target/profile scope for the three previously reported discrepancies:
    - RFC 7516
@@ -40,7 +40,7 @@ Deliver a package that can truthfully claim all of the following at once:
    - claims/effective-target manifests
 5. **Completed and now enforced by repository truth.** No new certification evidence is collected until the scope discrepancies report is empty.
 
-### Phase 2 — make the clean-room install substrate genuinely reproducible
+### persistence-domain checkpoint — make the clean-room install substrate genuinely reproducible
 
 1. Provision clean-room executors for Python `3.10`, `3.11`, and `3.12`.
 2. Ensure every profile in `tox.ini` is installable only from pinned published dependencies and constraints.
@@ -53,7 +53,7 @@ Deliver a package that can truthfully claim all of the following at once:
 4. Require preserved install manifests for every supported interpreter/profile cell.
 5. Reject any matrix run that depends on the current container's ad hoc dependency availability.
 
-### Phase 3 — close the runtime matrix with preserved serve-check evidence
+### public-route checkpoint — close the runtime matrix with preserved serve-check evidence
 
 1. Run the required runtime cells:
    - `base@py3.10`
@@ -77,13 +77,13 @@ Deliver a package that can truthfully claim all of the following at once:
    - HTTP surface probe result
    - environment identity and runner identity
 3. Record every passing run via `scripts/record_validated_run.py runtime-profile`.
-4. Fail the phase unless `docs/compliance/runtime_profile_report.md` shows:
+4. Fail the track unless `docs/compliance/runtime_profile_report.md` shows:
    - ready profiles > 0 for all kept runners,
    - validated runtime matrix green = true,
    - surface probe passed = true,
    - execution probe complete = true.
 
-### Phase 4 — close the in-scope certification lanes across the supported interpreter matrix
+### browser-session checkpoint — close the in-scope certification lanes across the supported interpreter matrix
 
 1. Run and preserve these in-scope lanes:
    - core on py310 / py311 / py312
@@ -94,9 +94,9 @@ Deliver a package that can truthfully claim all of the following at once:
 2. Preserve JSON manifests and pytest reports for each lane.
 3. Record them into `dist/validated-runs/` using the supported identities only.
 4. Exclude py313 evidence from certification counts, but keep it as supplemental evidence if useful.
-5. Fail the phase unless `docs/compliance/validated_execution_report.md` shows `in_scope_test_lanes_green: True`.
+5. Fail the track unless `docs/compliance/validated_execution_report.md` shows `in_scope_test_lanes_green: True`.
 
-### Phase 5 — close migration portability for both supported backends
+### operator-service checkpoint — close migration portability for both supported backends
 
 1. Provision PostgreSQL in the clean-room matrix.
 2. Execute migration portability runs on both:
@@ -108,9 +108,9 @@ Deliver a package that can truthfully claim all of the following at once:
    - reapply artifact
    - exact revision identifiers
 4. Record the run via `scripts/record_validated_run.py migration-portability`.
-5. Fail the phase unless `docs/compliance/migration_portability_report.md` shows both backends passing.
+5. Fail the track unless `docs/compliance/migration_portability_report.md` shows both backends passing.
 
-### Phase 6 — rebuild Tier 3 from validated evidence only
+### runtime-hardening checkpoint — rebuild Tier 3 from validated evidence only
 
 1. Re-run Tier 3 evidence materialization from the now-complete validated-run inventory.
 2. Remove any residual dependency on older, non-validated, or out-of-scope manifests.
@@ -120,9 +120,9 @@ Deliver a package that can truthfully claim all of the following at once:
    - release decision record
    - release gate report
 4. Confirm every retained target still has complete Tier 3 evidence after the rebuild.
-5. Fail the phase unless the Tier 3 rebuild is demonstrably sourced from preserved validated runs only.
+5. Fail the track unless the Tier 3 rebuild is demonstrably sourced from preserved validated runs only.
 
-### Phase 7 — execute the Tier 4 peer program for the retained boundary
+### RFC-family runtime checkpoint — execute the Tier 4 peer program for the retained boundary
 
 1. For each retained peer profile in the peer matrix, produce preserved external bundles.
 2. Replace every placeholder under:
@@ -131,13 +131,13 @@ Deliver a package that can truthfully claim all of the following at once:
 3. Preserve peer identity, runtime identity, independence assertions, and reproduction instructions.
 4. Validate bundle structure and completeness using the Tier 4 tooling.
 5. Promote only when every required bundle is both present and valid.
-6. Fail the phase unless:
+6. Fail the track unless:
    - Tier 4 external bundle count equals required bundle count,
    - missing count is zero,
    - invalid count is zero,
    - strict independent claims ready becomes true.
 
-### Phase 8 — final release gate aggregation
+### capability-wiring checkpoint — final release gate aggregation
 
 1. Re-run release-gate aggregation after Phases 1–7 are green.
 2. Ensure these are all true simultaneously:

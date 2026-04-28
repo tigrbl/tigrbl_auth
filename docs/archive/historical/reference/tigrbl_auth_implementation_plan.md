@@ -8,7 +8,7 @@
 
 This plan is grounded in two inputs:
 
-1. the unified package planning markdown and current-to-target architectural markdown, which define the certification tiers, implementation phases, Tigrbl-native target tree, ADR requirement, release-gate requirement, and CLI/governance surfaces; and
+1. the unified package planning markdown and current-to-target architectural markdown, which define the certification tiers, implementation s, Tigrbl-native target tree, ADR requirement, release-gate requirement, and CLI/governance surfaces; and
 2. the attached `tigrbl_auth.zip` archive, which shows the package is already functionally substantial but architecturally flat.
 
 ## Current package findings
@@ -103,11 +103,11 @@ It does **not** mean “claim every adjacent auth/security RFC currently represe
 
 ## Program structure
 
-The implementation is organized into nine workstreams executed in four certification phases.
+The implementation is organized into nine workstreams executed in four certification s.
 
 ---
 
-# Phase P0 — Boundary definition and governance installation
+# foundation-boundary — Boundary definition and governance installation
 
 ## Workstream 0 — Freeze certification boundary
 
@@ -231,7 +231,7 @@ Create the governance plane before further runtime refactoring.
 
 ---
 
-# Phase P1 — Tigrbl-native structural reshape and interoperable baseline
+# baseline-interoperability — Tigrbl-native structural reshape and interoperable baseline
 
 ## Workstream 2 — Reshape the runtime package to the target tree
 
@@ -341,7 +341,7 @@ Make the package conform to the Tigrbl integration model.
 ## Workstream 4 — Establish the interoperable baseline standards surface
 
 ### Objective
-Ship the P1 baseline using the new structure.
+Ship the baseline-interoperability baseline using the new structure.
 
 ### Tasks
 #### HTTP / well-known
@@ -377,7 +377,7 @@ Ship the P1 baseline using the new structure.
 - JWKS endpoint
 
 ### Deliverables
-- working P1 runtime surface
+- working baseline-interoperability runtime surface
 - initial OpenAPI 3.1 generation
 - initial claim manifests at Tier 2
 
@@ -385,11 +385,11 @@ Ship the P1 baseline using the new structure.
 - Authorization code + PKCE works.
 - Discovery and JWKS validate.
 - OpenAPI 3.1 builds and validates.
-- Gate levels up through P1/Tier 2 pass.
+- Gate levels up through baseline-interoperability/Tier 2 pass.
 
 ---
 
-# Phase P2 — Production completion
+# production-readiness — Production completion
 
 ## Workstream 5 — Persistence, migrations, and data-model hardening
 
@@ -450,7 +450,7 @@ Bring the package to evidence-backed production certification.
 ### Deliverables
 - production-ready standards modules
 - production OpenAPI coverage
-- Tier 3 evidence-backed internal claims for P2 targets
+- Tier 3 evidence-backed internal claims for production-readiness targets
 
 ### Exit criteria
 - Revocation and introspection produce preserved evidence.
@@ -502,7 +502,7 @@ tigrbl-auth = "tigrbl_auth.cli:app"
 
 ---
 
-# Phase P3 — Hardening, advanced interop, and peer claims
+# hardening-interop — Hardening, advanced interop, and peer claims
 
 ## Workstream 8 — Hardening standards tranche
 
@@ -656,16 +656,16 @@ Move flat `rfc/` modules into `standards/` and `extensions/`. Delete the flat `r
 ## PR-06 — REST/RPC surface split
 Move transport code into `api/rest/` and `api/rpc/`. Split operations into `ops/`.
 
-## PR-07 — P1 baseline certification
+## PR-07 — baseline-interoperability baseline certification
 Complete discovery, metadata, JOSE/JWT, OAuth core, PKCE, OIDC baseline, and OpenAPI 3.1 baseline.
 
-## PR-08 — P2 production tranche
+## PR-08 — production-readiness production tranche
 Complete revocation, introspection, client registration, native apps, sessions, logout, JWT access-token profile.
 
 ## PR-09 — CLI and contract toolchain
 Add CLI, OpenAPI/OpenRPC generation, contract validation, and claim inspection tooling.
 
-## PR-10 — P3 hardening tranche
+## PR-10 — hardening-interop hardening tranche
 Complete device flow, token exchange, resource indicators, JAR, PAR, RAR, sender-constrained tokens, replay and rotation controls.
 
 ## PR-11 — Evidence and gate enforcement
@@ -676,27 +676,25 @@ Add external interop suites and promote selected targets to Tier 4.
 
 ---
 
-# Acceptance criteria by phase
-
-## P0 accepted when
+# Acceptance criteria by ## foundation-boundary accepted when
 - certification boundary is frozen
 - ADR system exists
 - compliance manifests exist
 - target mappings exist
 
-## P1 accepted when
+## baseline-interoperability accepted when
 - target tree is complete
 - app/plugin/gateway shape is live
-- P1 standards baseline works
+- baseline-interoperability standards baseline works
 - OpenAPI 3.1 baseline is generated and validated
 
-## P2 accepted when
+## production-readiness accepted when
 - migrations are live
 - production standards tranche passes conformance
 - session/logout and registration are evidence-backed
 - contracts and CLI are live
 
-## P3 accepted when
+## hardening-interop accepted when
 - hardening tranche passes security gate
 - interop suites pass
 - evidence bundle and attestation are generated automatically
@@ -758,4 +756,4 @@ Sequence DPoP and mTLS after baseline, token service stabilization, and key rota
 5. Split `runtime_cfg.py`, `db.py`, `backends.py`, `crypto.py`, and `jwtoken.py` by responsibility.
 6. Regroup `rfc/*` into `standards/*` and `extensions/*`.
 7. Bring up `plugin.py`, `gateway.py`, and the CLI root.
-8. Start P1 certification with discovery, metadata, JOSE/JWT, OAuth core, PKCE, and OIDC baseline.
+8. Start baseline-interoperability certification with discovery, metadata, JOSE/JWT, OAuth core, PKCE, and OIDC baseline.

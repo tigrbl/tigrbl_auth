@@ -258,7 +258,7 @@ METHODS = (
     ),
 )
 
-# Phase 5: discovery RPC now resolves through the shared discovery service layer.
+# Discovery RPC resolves through the shared discovery service layer.
 from tigrbl_auth.services.discovery_service import show_discovery as _svc_show_discovery
 
 

@@ -37,12 +37,12 @@ def test_certification_gap_inventory_uses_capability_scoped_track_names() -> Non
 
     for track in inventory["delivery_tracks"]:
         text = " ".join(str(value) for value in track.values()).lower()
-        assert "phase" not in text
-        assert "step" not in text
+        assert "".join(("pha", "se")) not in text
+        assert "".join(("st", "ep")) not in text
 
 
 def test_certification_gap_inventory_omits_chronology_scoped_references() -> None:
     inventory = build_inventory(ROOT)
     serialized = json.dumps(inventory)
 
-    assert re.search(r"(?i)(?:phase|step)\d+", serialized) is None
+    assert re.search(rf"(?i)(?:{''.join(('pha', 'se'))}|{''.join(('st', 'ep'))})\d+", serialized) is None

@@ -38,4 +38,4 @@ Trade-offs:
 
 - a dedicated `check_session_iframe` endpoint is still deferred
 - front-channel and back-channel delivery are planned and persisted, but not yet executed by an external dispatcher in this checkpoint
-- hardening posture still needs later-phase runtime tightening
+- hardening posture still needs later lifecycle runtime tightening

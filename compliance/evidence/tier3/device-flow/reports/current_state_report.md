@@ -5,7 +5,7 @@
 ## Summary
 
 - repository_tier: `3`
-- phase: `P13`
+- delivery track: `independent-peer-evidence`
 - authoritative_scope_manifest: `compliance/targets/certification_scope.yaml`
 - declared_claim_count: `48`
 - mapped_module_count: `48`

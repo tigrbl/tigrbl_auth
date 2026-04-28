@@ -94,7 +94,7 @@ Goal: make the SSOT registry itself certifiable before downstream feature, claim
 - Keep all registry entity sections parseable and non-empty.
 - Keep entity ids unique within each section.
 - Validate with the SSOT CLI after every registry mutation.
-- Gate this phase with `tests/unit/test_ssot_registry_integrity.py`, `scripts/generate_claim_registries.py`, full pytest, and SSOT validation.
+- Gate this track with `tests/unit/test_ssot_registry_integrity.py`, `scripts/generate_claim_registries.py`, full pytest, and SSOT validation.
 
 ### Runtime And Contract Closure
 
@@ -104,7 +104,7 @@ Goal: keep the package executable surfaces aligned with generated public artifac
 - Keep diagnostics and admin resources absent from public-only OpenAPI.
 - Keep admin OpenRPC claims scoped to mixed and admin-only plugin modes.
 - Regenerate discovery snapshots whenever deployment target composition changes.
-- Gate this phase with full pytest, artifact truthfulness report generation, and SSOT validation.
+- Gate this track with full pytest, artifact truthfulness report generation, and SSOT validation.
 
 ### Evidence Inventory Closure
 
@@ -114,7 +114,7 @@ Goal: preserve machine-derived evidence for every retained target.
 - Preserve in-scope lane execution manifests for the current test taxonomy.
 - Rebuild Tier 3 evidence from validated-run manifests instead of ad hoc local runs.
 - Link all generated evidence back to tests and claims through the SSOT CLI.
-- Gate this phase with `validated_inventory_complete`, `runtime_matrix_green`, `in_scope_test_lanes_green`, and `tier3_evidence_rebuilt_from_validated_runs`.
+- Gate this track with `validated_inventory_complete`, `runtime_matrix_green`, `in_scope_test_lanes_green`, and `tier3_evidence_rebuilt_from_validated_runs`.
 
 ### Portability Closure
 
@@ -124,7 +124,7 @@ Goal: prove migration portability across declared storage targets.
 - Run upgrade, downgrade, and reapply flows for PostgreSQL.
 - Preserve logs, manifests, and checksums as evidence rows.
 - Link storage portability evidence to the migration and bootstrap claims.
-- Gate this phase with `migration_portability_passed`.
+- Gate this track with `migration_portability_passed`.
 
 ### Provenance Naming Closure
 
@@ -144,7 +144,7 @@ Goal: finish independent certification for the retained boundary.
 - Validate each preserved peer bundle.
 - Promote valid peer bundles into Tier 4 evidence.
 - Move the peer-claim profile out of draft only after all bundle checks pass.
-- Gate this phase with peer bundle completeness, zero invalid peer bundles, and strict independent claims readiness.
+- Gate this track with peer bundle completeness, zero invalid peer bundles, and strict independent claims readiness.
 
 ### Release Certification Closure
 

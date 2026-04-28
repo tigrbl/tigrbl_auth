@@ -8,7 +8,7 @@
 
 ## Purpose
 
-Phase 12 replaces digest-only and HMAC checkpoint signing with asymmetric, externally verifiable release attestations.
+runtime-foundation checkpoint2 replaces digest-only and HMAC checkpoint signing with asymmetric, externally verifiable release attestations.
 
 ## What is signed
 
@@ -72,7 +72,7 @@ If no key material is supplied, the tooling generates an ephemeral checkpoint si
 
 ## CI integration
 
-The Phase 12 gate is installed as `gate-60-release-signing` and is executed as part of the release-gate pipeline.
+The runtime-foundation checkpoint2 gate is installed as `gate-60-release-signing` and is executed as part of the release-gate pipeline.
 
 The release-bundle workflow now:
 

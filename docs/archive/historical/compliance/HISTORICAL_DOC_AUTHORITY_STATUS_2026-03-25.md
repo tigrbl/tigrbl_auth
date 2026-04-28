@@ -4,7 +4,7 @@
 
 # Historical doc authority status — 2026-03-25
 
-This note summarizes the Step 10 historical-drift cleanup and documentation-authority policy.
+This note summarizes the Item 10 historical-drift cleanup and documentation-authority policy.
 
 ## Current authority model
 

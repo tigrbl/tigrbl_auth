@@ -14,11 +14,11 @@
 
 ## Objective
 
-Phase 9 turns the repository test corpus into a certification-usable matrix with a canonical classification manifest, explicit target mappings, and a heatmap that shows the mix of unit, integration, conformance, interop, end-to-end, security, negative, and performance coverage per in-scope target.
+test-plane checkpoint turns the repository test corpus into a certification-usable matrix with a canonical classification manifest, explicit target mappings, and a heatmap that shows the mix of unit, integration, conformance, interop, end-to-end, security, negative, and performance coverage per in-scope target.
 
 ## Canonical manifests
 
-The authoritative Phase 9 test-plane artifacts are:
+The authoritative test-plane checkpoint test-plane artifacts are:
 
 - `compliance/mappings/test_classification.yaml`
 - `compliance/mappings/target-to-test.yaml`
@@ -50,9 +50,9 @@ A test is considered certification-usable only when all of the following are tru
 1. it exists under `tests/**/test_*.py`
 2. it is present in `compliance/mappings/test_classification.yaml`
 3. any in-scope target that depends on it lists it in `compliance/mappings/target-to-test.yaml`
-4. it remains within the canonical Phase 9 category set
+4. it remains within the canonical test-plane checkpoint category set
 
-Phase 9 verification now fails closed on:
+test-plane checkpoint verification now fails closed on:
 
 - unclassified test files
 - classified files that do not exist
@@ -60,9 +60,9 @@ Phase 9 verification now fails closed on:
 - in-scope targets missing explicit test mappings
 - target mappings that reference tests outside the canonical classification manifest
 
-## Coverage families addressed explicitly in Phase 9
+## Coverage families addressed explicitly in test-plane checkpoint
 
-Phase 9 adds or formalizes explicit coverage for:
+test-plane checkpoint adds or formalizes explicit coverage for:
 
 - new public routes and profile-visible surfaces
 - durable persistence and lifecycle state
@@ -93,9 +93,9 @@ The categories are used differently in certification evidence:
 - `e2e` supports release-path and documentation-driven flows
 - `perf` supports artifact and footprint controls, not feature completeness by itself
 
-## What Phase 9 completes
+## What test-plane checkpoint completes
 
-Phase 9 completes the structural test-plane work required before Tier 3 evidence promotion can be done honestly:
+test-plane checkpoint completes the structural test-plane work required before Tier 3 evidence promotion can be done honestly:
 
 - legacy integration tests are migrated from `tests/i9n/` to `tests/integration/`
 - the classification manifest is complete for the current corpus
@@ -103,9 +103,9 @@ Phase 9 completes the structural test-plane work required before Tier 3 evidence
 - a target-by-category heatmap is committed
 - dependency-light static checks confirm the matrix is internally consistent
 
-## What Phase 9 does not claim
+## What test-plane checkpoint does not claim
 
-Phase 9 does not by itself prove certification-grade execution. The repository still needs:
+test-plane checkpoint does not by itself prove certification-grade execution. The repository still needs:
 
 - executed Tier 3 preserved evidence across the retained boundary
 - Tier 4 independent peer validation

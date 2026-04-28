@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target": "RFC 8705",
-  "checkpoint_phase": "Phase 10",
+  "checkpoint_label": "Tier 3 evidence checkpoint",
   "validation_date": "2026-03-24",
   "result": "passed",
   "tests": [

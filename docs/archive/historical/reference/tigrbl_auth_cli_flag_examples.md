@@ -344,7 +344,7 @@ tigrbl-auth spec publish \
 | Flag | Example |
 |---|---|
 | `--target` | `tigrbl-auth verify all --target oauth2` |
-| `--phase` | `tigrbl-auth verify all --phase P2` |
+| `--` | `tigrbl-auth verify all --production-readiness` |
 | `--tier` | `tigrbl-auth verify all --tier 3` |
 | `--matrix` | `tigrbl-auth verify all --matrix compliance/targets/standards-matrix.yaml` |
 | `--evidence-dir` | `tigrbl-auth verify all --evidence-dir compliance/evidence/` |
@@ -359,7 +359,7 @@ tigrbl-auth spec publish \
 ```bash
 tigrbl-auth verify targets \
   --target oauth2 \
-  --phase P1 \
+  --baseline-interoperability \
   --tier 2 \
   --matrix compliance/targets/standards-matrix.yaml \
   --evidence-dir compliance/evidence/ \
@@ -481,7 +481,7 @@ tigrbl-auth verify security \
 ```bash
 tigrbl-auth verify all \
   --target all \
-  --phase P3 \
+  --hardening-interop \
   --tier 4 \
   --matrix compliance/targets/standards-matrix.yaml \
   --evidence-dir compliance/evidence/ \
@@ -500,8 +500,8 @@ tigrbl-auth verify all \
 
 ```bash
 tigrbl-auth gate run \
-  --gate-file gates/release/p2-production.yaml \
-  --phase P2 \
+  --gate-file gates/release/production-readiness-production.yaml \
+  --production-readiness \
   --tier 3 \
   --release 1.2.3 \
   --blocking \
@@ -513,28 +513,28 @@ tigrbl-auth gate run \
 
 | Flag | Example |
 |---|---|
-| `--gate-file` | `tigrbl-auth gate run --gate-file gates/release/p1-interoperable.yaml --phase P1` |
-| `--phase` | `tigrbl-auth gate run --phase P2` |
-| `--tier` | `tigrbl-auth gate run --phase P2 --tier 3` |
-| `--release` | `tigrbl-auth gate run --phase P2 --release 1.2.3` |
-| `--blocking` | `tigrbl-auth gate run --phase P2 --blocking` |
-| `--advisory` | `tigrbl-auth gate run --phase P2 --advisory` |
-| `--waiver-file` | `tigrbl-auth gate run --phase P2 --waiver-file compliance/waivers/release.yaml` |
-| `--evidence-dir` | `tigrbl-auth gate run --phase P2 --evidence-dir compliance/evidence/` |
-| `--attest-out` | `tigrbl-auth gate run --phase P2 --attest-out reports/release.attestation.json` |
-| `--dry-run` | `tigrbl-auth gate run --phase P2 --dry-run` |
+| `--gate-file` | `tigrbl-auth gate run --gate-file gates/release/baseline-interoperability-interoperable.yaml --baseline-interoperability` |
+| `--` | `tigrbl-auth gate run --production-readiness` |
+| `--tier` | `tigrbl-auth gate run --production-readiness --tier 3` |
+| `--release` | `tigrbl-auth gate run --production-readiness --release 1.2.3` |
+| `--blocking` | `tigrbl-auth gate run --production-readiness --blocking` |
+| `--advisory` | `tigrbl-auth gate run --production-readiness --advisory` |
+| `--waiver-file` | `tigrbl-auth gate run --production-readiness --waiver-file compliance/waivers/release.yaml` |
+| `--evidence-dir` | `tigrbl-auth gate run --production-readiness --evidence-dir compliance/evidence/` |
+| `--attest-out` | `tigrbl-auth gate run --production-readiness --attest-out reports/release.attestation.json` |
+| `--dry-run` | `tigrbl-auth gate run --production-readiness --dry-run` |
 
 ### `gate explain`
 
 ```bash
-tigrbl-auth gate explain --phase P3 --tier 4 --format yaml
+tigrbl-auth gate explain --hardening-interop --tier 4 --format yaml
 ```
 
 | Flag | Example |
 |---|---|
-| `--phase` | `tigrbl-auth gate explain --phase P3` |
-| `--tier` | `tigrbl-auth gate explain --phase P3 --tier 4` |
-| `--format` | `tigrbl-auth gate explain --phase P3 --format json` |
+| `--` | `tigrbl-auth gate explain --hardening-interop` |
+| `--tier` | `tigrbl-auth gate explain --hardening-interop --tier 4` |
+| `--format` | `tigrbl-auth gate explain --hardening-interop --format json` |
 
 ### `gate status`
 
@@ -664,13 +664,13 @@ tigrbl-auth evidence publish \
 ### `claims list`
 
 ```bash
-tigrbl-auth claims list --tier 3 --phase P2 --status certified --target oidc --format json
+tigrbl-auth claims list --tier 3 --production-readiness --status certified --target oidc --format json
 ```
 
 | Flag | Example |
 |---|---|
 | `--tier` | `tigrbl-auth claims list --tier 4` |
-| `--phase` | `tigrbl-auth claims list --phase P3` |
+| `--` | `tigrbl-auth claims list --hardening-interop` |
 | `--status` | `tigrbl-auth claims list --status peer-reviewed` |
 | `--target` | `tigrbl-auth claims list --target oauth2` |
 | `--format` | `tigrbl-auth claims list --format yaml` |
@@ -750,7 +750,7 @@ tigrbl-auth adr new \
   --owners 'security-team,platform-team' \
   --template default \
   --target oauth2.par \
-  --phase P3 \
+  --hardening-interop \
   --tier 4
 ```
 
@@ -763,7 +763,7 @@ tigrbl-auth adr new \
 | `--owners` | `tigrbl-auth adr new --title 'Adopt PAR' --owners 'security-team,platform-team'` |
 | `--template` | `tigrbl-auth adr new --title 'Adopt PAR' --template default` |
 | `--target` | `tigrbl-auth adr new --title 'Adopt PAR' --target oauth2.par` |
-| `--phase` | `tigrbl-auth adr new --title 'Adopt PAR' --phase P3` |
+| `--` | `tigrbl-auth adr new --title 'Adopt PAR' --hardening-interop` |
 | `--tier` | `tigrbl-auth adr new --title 'Adopt PAR' --tier 4` |
 
 ### `adr list`
@@ -915,8 +915,8 @@ tigrbl-auth spec build --target all --kind all && \
 tigrbl-auth spec validate --input specs/
 
 # run production gate
-tigrbl-auth verify all --phase P2 --tier 3 && \
-tigrbl-auth gate run --phase P2 --tier 3 --release 1.2.3
+tigrbl-auth verify all --production-readiness --tier 3 && \
+tigrbl-auth gate run --production-readiness --tier 3 --release 1.2.3
 
 # build peer-claim bundle
 tigrbl-auth verify interop --profile all --record-wire --publish-report && \

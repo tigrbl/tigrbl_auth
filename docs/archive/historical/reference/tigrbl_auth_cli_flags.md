@@ -275,7 +275,7 @@ Verify standards targets, contracts, conformance, interop, and security.
 | Flag | Type | Default | Purpose |
 |---|---:|---|---|
 | `--target` | string | `all` | Standards target selector |
-| `--phase` | enum | all | `P0`, `P1`, `P2`, `P3` |
+| `--` | enum | all | `foundation-boundary`, `baseline-interoperability`, `production-readiness`, `hardening-interop` |
 | `--tier` | enum | all | `0`, `1`, `2`, `3`, `4` |
 | `--matrix` | path | `compliance/targets/standards-matrix.yaml` | Standards matrix |
 | `--evidence-dir` | path | `compliance/evidence/` | Evidence root |
@@ -380,7 +380,7 @@ tigrbl-auth gate run [FLAGS]
 | Flag | Type | Default | Purpose |
 |---|---:|---|---|
 | `--gate-file` | path | auto | Specific gate manifest |
-| `--phase` | enum | required | `P0`, `P1`, `P2`, `P3` |
+| `--` | enum | required | `foundation-boundary`, `baseline-interoperability`, `production-readiness`, `hardening-interop` |
 | `--tier` | enum | all applicable | `1`, `2`, `3`, `4` |
 | `--release` | string | current | Release identifier |
 | `--blocking` / `--advisory` | bool | `--blocking` | Gate severity |
@@ -397,7 +397,7 @@ tigrbl-auth gate explain [FLAGS]
 
 | Flag | Type | Default | Purpose |
 |---|---:|---|---|
-| `--phase` | enum | required | `P0`, `P1`, `P2`, `P3` |
+| `--` | enum | required | `foundation-boundary`, `baseline-interoperability`, `production-readiness`, `hardening-interop` |
 | `--tier` | enum | none | Restrict to tier |
 | `--format` | enum | `table` | Output format |
 
@@ -504,7 +504,7 @@ tigrbl-auth claims list [FLAGS]
 | Flag | Type | Default | Purpose |
 |---|---:|---|---|
 | `--tier` | enum | all | Filter by tier |
-| `--phase` | enum | all | Filter by phase |
+| `--` | enum | all | Filter by |
 | `--status` | enum | all | `planned`, `implemented`, `asserted`, `certified`, `peer-reviewed` |
 | `--target` | string | all | Standards target selector |
 | `--format` | enum | `table` | Output format |
@@ -581,7 +581,7 @@ tigrbl-auth adr new [FLAGS]
 | `--owners` | string | none | Comma-separated owners |
 | `--template` | string | `default` | ADR template |
 | `--target` | string | none | Linked standards target |
-| `--phase` | enum | none | Linked phase |
+| `--` | enum | none | Linked |
 | `--tier` | enum | none | Linked tier |
 
 ### `adr list`

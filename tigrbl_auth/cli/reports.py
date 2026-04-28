@@ -1067,7 +1067,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
 
     current_state = {
         "repository_tier": claims.get("claim_set", {}).get("current_repository_tier", 0),
-        "phase": claims.get("claim_set", {}).get("phase", "unknown"),
+        "delivery_track": claims.get("claim_set", {}).get("delivery_track", "unknown"),
         "authoritative_scope_manifest": str(scope_path.relative_to(repo_root)) if scope_path.exists() else None,
         "boundary_freeze_active": bool(scope.get("boundary_freeze")),
         "boundary_freeze_passed": not scope_freeze_failures,

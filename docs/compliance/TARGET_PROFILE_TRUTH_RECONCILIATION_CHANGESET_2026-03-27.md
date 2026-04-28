@@ -34,7 +34,7 @@ No new certification evidence was collected in this changeset. The purpose of th
 - `README.md`
 - `docs/reference/PUBLIC_ROUTE_SURFACE.md`
 - `docs/compliance/README.md`
-- `docs/compliance/STEP12_FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md`
+- `docs/compliance/FINAL_CERTIFICATION_AGGREGATION_CHECKPOINT_2026-03-27.md`
 - regenerated current-state and scope reports under `docs/compliance/`
 
 ## Validation executed in this checkpoint

@@ -17,7 +17,7 @@
 - boundary_freeze_retained_target_count: `48`
 - boundary_freeze_rfc_target_count: `30`
 - boundary_freeze_non_rfc_target_count: `18`
-- boundary_freeze_deferred_target_count: `13`
+- boundary_freeze_deferred_target_count: `25`
 - boundary_freeze_identity_hash_matches: `True`
 - clean_room_matrix_implemented: `True`
 - clean_room_matrix_executed_in_this_container: `False`
