@@ -8,9 +8,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tigrbl_auth.cli.artifacts import deployment_from_options, write_discovery_artifacts
+from tigrbl_auth.config.deployment import VALID_PROFILES
 
 
-PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
+PROFILES = VALID_PROFILES
 
 
 def write_discovery_reference(repo_root: Path) -> None:

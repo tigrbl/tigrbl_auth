@@ -8,12 +8,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tigrbl_auth.cli.artifacts import deployment_from_options, write_openapi_contract
+from tigrbl_auth.config.deployment import VALID_PROFILES
 
 
 def main() -> int:
     repo_root = ROOT
     write_openapi_contract(repo_root, deployment_from_options())
-    for profile_name in ("baseline", "production", "hardening", "fapi2-security", "peer-claim"):
+    for profile_name in VALID_PROFILES:
         write_openapi_contract(repo_root, deployment_from_options(profile=profile_name), profile_label=profile_name)
     return 0
 

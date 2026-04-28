@@ -5,7 +5,7 @@ from tigrbl_auth.uix import RESOURCE_VIEW_METHODS, build_resource_views
 
 def test_resource_views_are_backed_by_required_openrpc_methods():
     contract = json.loads(
-        open("specs/openrpc/profiles/production/tigrbl_auth.admin.openrpc.json", encoding="utf-8").read()
+        open("specs/openrpc/profiles/baseline-development/tigrbl_auth.admin.openrpc.json", encoding="utf-8").read()
     )
     available_methods = {method["name"] for method in contract["methods"]}
     views = build_resource_views(available_methods)

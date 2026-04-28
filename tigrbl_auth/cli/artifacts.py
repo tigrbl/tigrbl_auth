@@ -55,13 +55,18 @@ def deployment_from_options(
         overrides["issuer"] = issuer
     if strict is not None:
         overrides["strict_boundary_enforcement"] = strict
+    profile_defaults = None
+    if profile and not any((surface_sets, protocol_slices, extensions, plugin_mode)):
+        from tigrbl_auth.config.profile_loader import load_runtime_profile
+
+        profile_defaults = load_runtime_profile(profile)
     return resolve_deployment(
         None,
         profile=profile,
-        surface_sets=tuple(surface_sets or ()),
-        protocol_slices=tuple(protocol_slices or ()),
-        extensions=tuple(extensions or ()),
-        plugin_mode=plugin_mode,
+        surface_sets=tuple(surface_sets or (profile_defaults.surface_sets if profile_defaults else ())),
+        protocol_slices=tuple(protocol_slices or (profile_defaults.protocol_slices if profile_defaults else ())),
+        extensions=tuple(extensions or (profile_defaults.extensions if profile_defaults else ())),
+        plugin_mode=plugin_mode or (profile_defaults.surface_plugin_mode if profile_defaults else None),
         runtime_style=runtime_style,
         flag_overrides=overrides,
     )
