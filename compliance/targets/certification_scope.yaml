@@ -49,7 +49,7 @@ bucket_interpretation:
     capabilities that are excluded from the default certification claim boundary.
 scope_buckets:
   baseline-certifiable-now:
-    count: 13
+    count: 15
     targets:
     - RFC 6749
     - RFC 6750
@@ -61,11 +61,13 @@ scope_buckets:
     - RFC 7517
     - RFC 7518
     - RFC 7519
+    - RFC 6265
     - OIDC Core 1.0
     - OIDC Discovery 1.0
+    - OIDC Session Management
     - OpenAPI 3.1 / 3.2 compatible public contract
   production-completion-required:
-    count: 15
+    count: 13
     targets:
     - RFC 7009
     - RFC 7591
@@ -74,12 +76,10 @@ scope_buckets:
     - RFC 8252
     - RFC 9068
     - RFC 9207
-    - RFC 6265
     - RFC 7521
     - RFC 7523
     - RFC 9728
     - OIDC UserInfo
-    - OIDC Session Management
     - OIDC RP-Initiated Logout
     - OpenRPC 1.4.x admin/control-plane contract
   hardening-completion-required:
@@ -128,8 +128,8 @@ boundary_freeze:
   retained_rfc_target_count: 30
   retained_non_rfc_target_count: 18
   retained_bucket_counts:
-    baseline-certifiable-now: 13
-    production-completion-required: 15
+    baseline-certifiable-now: 15
+    production-completion-required: 13
     hardening-completion-required: 11
     runtime-completion-required: 4
     operator-completion-required: 5
@@ -1758,15 +1758,15 @@ targets:
 - label: RFC 6265
   id: http.cookies
   family: rfc
-  scope_bucket: production-completion-required
+  scope_bucket: baseline-certifiable-now
   delivery_track: production-readiness
   minimum_claim_tier: 3
-  first_claimable_profile: production
+  first_claimable_profile: baseline
   claim:
     target: RFC 6265
     tier: 3
     status: evidenced-release-gated
-    profile: production
+    profile: baseline
   owner_modules:
   - tigrbl_auth/standards/http/cookies.py
   - tigrbl_auth/standards/oidc/session_mgmt.py
@@ -1800,7 +1800,7 @@ targets:
   profile_reality:
     baseline:
       active_target: true
-      effective_claim: false
+      effective_claim: true
       openapi_paths_present:
       - /login
       - /authorize
@@ -1821,8 +1821,7 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies:
-  - active-without-effective-claim:baseline
+  discrepancies: []
 - label: RFC 7521
   id: oauth2.jwt-bearer-assertions
   family: rfc
@@ -2224,15 +2223,15 @@ targets:
 - label: OIDC Session Management
   id: oidc.session-management
   family: oidc
-  scope_bucket: production-completion-required
+  scope_bucket: baseline-certifiable-now
   delivery_track: production-readiness
   minimum_claim_tier: 3
-  first_claimable_profile: production
+  first_claimable_profile: baseline
   claim:
     target: OIDC Session Management
     tier: 3
     status: evidenced-release-gated
-    profile: production
+    profile: baseline
   owner_modules:
   - tigrbl_auth/standards/oidc/session_mgmt.py
   - tigrbl_auth/standards/http/cookies.py
@@ -2270,7 +2269,7 @@ targets:
   profile_reality:
     baseline:
       active_target: true
-      effective_claim: false
+      effective_claim: true
       openapi_paths_present:
       - /login
       - /authorize
@@ -2291,8 +2290,7 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies:
-  - active-without-effective-claim:baseline
+  discrepancies: []
 - label: OIDC RP-Initiated Logout
   id: oidc.rp-initiated-logout
   family: oidc
@@ -3082,8 +3080,7 @@ targets:
       openapi_paths_present: []
       openrpc_present: false
   discrepancies: []
-discrepancy_summary:
-  active-without-effective-claim:baseline: 2
+discrepancy_summary: {}
 truthful_status:
   fully_certifiable: false
   fully_rfc_compliant: false

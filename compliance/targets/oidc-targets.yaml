@@ -45,6 +45,7 @@ targets:
   delivery_track: production-readiness
   minimum_claim_tier: 3
   profiles:
+  - baseline
   - production
   - hardening
   - peer-claim

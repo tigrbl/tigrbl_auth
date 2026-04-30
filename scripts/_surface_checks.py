@@ -325,9 +325,22 @@ def target_evidence_mappings(repo_root: Path) -> dict[str, Any]:
     return load_yaml(repo_root / "compliance" / "mappings" / "target-to-evidence.yaml") or {}
 
 
-ALLOWED_TEST_CATEGORIES = ("unit", "integration", "conformance", "interop", "e2e", "security", "negative", "perf")
+ALLOWED_TEST_CATEGORIES = (
+    "unit",
+    "integration",
+    "conformance",
+    "interop",
+    "e2e",
+    "security",
+    "negative",
+    "security-negative",
+    "migration-portability",
+    "peer",
+    "perf",
+)
 _AUXILIARY_TEST_CATEGORY_BY_PREFIX = {
     "tests/examples/": "e2e",
+    "tests/uix/": "e2e",
 }
 
 

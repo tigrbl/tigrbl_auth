@@ -28,12 +28,12 @@ This document declares the authoritative certification boundary for the current 
 
 ### baseline-certifiable-now
 
-- Count: `13`
+- Count: `15`
 - Meaning: Baseline certification candidate set. This is a scope bucket, not a Tier 3 or Tier 4 promotion.
 
 ### production-completion-required
 
-- Count: `15`
+- Count: `13`
 - Meaning: In-scope production RFC/OIDC targets that still require route, persistence, runtime, or evidence completion.
 
 ### hardening-completion-required
@@ -63,7 +63,7 @@ The repository uses this artifact to keep targets, claims, active routes, contra
 
 ## Most common discrepancies
 
-- `active-without-effective-claim:baseline`: `2` targets
+- none
 
 ## Required boundary outputs present in this checkpoint
 

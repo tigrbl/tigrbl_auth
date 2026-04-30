@@ -215,4 +215,12 @@ bundle_manifest:
     tier: 3
     refs:
     - compliance/evidence/tier3/runner-uvicorn/
+  - target: OIDC Session Management
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/oidc-session-management/
+  - target: RFC 6265
+    tier: 3
+    refs:
+    - compliance/evidence/tier3/cookies/
   missing_refs: []

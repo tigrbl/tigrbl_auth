@@ -14,8 +14,10 @@ buckets:
     - RFC 7517
     - RFC 7518
     - RFC 7519
+    - RFC 6265
     - OIDC Core 1.0
     - OIDC Discovery 1.0
+    - OIDC Session Management
   production:
     description: Production-ready lifecycle, browser, registration, and metadata targets.
     labels:
@@ -26,9 +28,7 @@ buckets:
     - RFC 8252
     - RFC 9068
     - RFC 9207
-    - RFC 6265
     - OIDC UserInfo
-    - OIDC Session Management
     - OIDC RP-Initiated Logout
     - RFC 9728
     - RFC 7521

@@ -100,7 +100,7 @@ claim_set:
   - target: OIDC Session Management
     tier: 3
     status: evidenced-release-gated
-    profile: production
+    profile: baseline
   - target: OIDC UserInfo
     tier: 3
     status: evidenced-release-gated
@@ -112,7 +112,7 @@ claim_set:
   - target: RFC 6265
     tier: 3
     status: evidenced-release-gated
-    profile: production
+    profile: baseline
   - target: RFC 7009
     tier: 3
     status: evidenced-release-gated

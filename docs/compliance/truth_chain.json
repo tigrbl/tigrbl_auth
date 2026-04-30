@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-28",
+  "generated_at": "2026-04-30",
   "source_of_truth": [
     ".ssot/registry.json",
     ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
@@ -24,9 +24,9 @@
     "fully_certifiable_now": false,
     "fully_rfc_compliant_now": false,
     "fully_non_rfc_spec_compliant_now": false,
-    "release_gates_passed": false,
-    "release_gate_count": 25,
-    "release_gate_failed_count": 7,
+    "release_gates_passed": true,
+    "release_gate_count": 1,
+    "release_gate_failed_count": 0,
     "final_release_gate_passed": false,
     "final_release_ready": false,
     "checkpoint_only": true,
@@ -48,8 +48,11 @@
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
-      "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.",
+      "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not yet preserved in the validated-run inventory.",
       "Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.",
+      "The runtime HTTP surface probe is not yet proven green across the preserved validated base-environment manifests.",
+      "The application factory is not yet proven materialized across the preserved validated base-environment manifests.",
+      "Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.",
       "Validated clean-room install matrix evidence is incomplete or missing.",
       "Validated in-scope certification lane execution evidence is incomplete or missing.",
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
@@ -67,9 +70,9 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "c94ac2cea11dddf05e60e541aaa790e0166fad14528166dc1cf9ee6853f22dad",
-    "docs/compliance/certification_state_report.json": "c72c9228cfb67a9c1279488e881577bd88e3d2a318c16bfd6aa86d575eec8ec8",
-    "docs/compliance/release_gate_report.json": "4ebab1e9fc57416e17c450e5d5e44e9d370a83924a5b26057779aea36870247a",
+    "docs/compliance/current_state_report.json": "c4d81c614638e87af425a3b4977e2c100c34a0735bdbee52b89c25ce74d910b4",
+    "docs/compliance/certification_state_report.json": "470eb0c160fd8625669caeccb7c9852acaee4d972e9a32f71fce7fb45a357d15",
+    "docs/compliance/release_gate_report.json": "f06e89e3de6e0afd64ff4e2dfa1d05733b39246900452a7145f27444daa9abdc",
     "docs/compliance/final_release_gate_report.json": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019",
     "docs/compliance/non_rfc_status_report.json": "55fcc69c50cc195fdb335b109e1f99081760089176df35f8688ed11154ec5bf7"
   },

@@ -171,6 +171,20 @@ categories:
   - tests/unit/test_final_aggregation.py
   - tests/unit/test_retained_target_test_evidence.py
   - tests/unit/test_fapi_runtime_profile.py
+  - tests/unit/test_certification_gap_inventory.py
+  - tests/unit/test_contract_payloads_deferred_upstream.py
+  - tests/unit/test_openapi_contract_validity.py
+  - tests/unit/test_openrpc_contract_validity.py
+  - tests/unit/test_provenance_naming_guard.py
+  - tests/unit/test_pytest_workspace_temp_root.py
+  - tests/unit/test_repo_truth_helpers.py
+  - tests/unit/test_runtime_profile_configuration.py
+  - tests/unit/test_runtime_version_truthfulness.py
+  - tests/unit/test_secure_default_admin_gate.py
+  - tests/unit/test_ssot_dependency_maintenance_traceability.py
+  - tests/unit/test_ssot_document_authority.py
+  - tests/unit/test_ssot_registry_integrity.py
+  - tests/unit/test_ssot_work_item_traceability.py
   integration:
   - tests/integration/test_auth_flows.py
   - tests/integration/test_authorization_code_flow.py
@@ -239,6 +253,7 @@ categories:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
+  - tests/conformance/backlog/test_rfc8785_jcs.py
   interop:
   - tests/interop/test_peer_matrix_external_status.py
   - tests/interop/test_tier4_external_handoff_templates.py
@@ -250,9 +265,20 @@ categories:
   - tests/interop/test_operator_profile_catalog_completeness.py
   - tests/interop/test_peer_target_coverage.py
   - tests/interop/test_tier4_fixture_rejection.py
+  - tests/unit/test_peer_bundle_completeness.py
   e2e:
   - tests/e2e/test_release_gate_catalog.py
   - tests/examples/test_readme_usage.py
+  - tests/uix/test_abac_admin.py
+  - tests/uix/test_admin_golden_path.py
+  - tests/uix/test_admin_shell.py
+  - tests/uix/test_admin_shell_security.py
+  - tests/uix/test_policy_simulation.py
+  - tests/uix/test_rbac_admin.py
+  - tests/uix/test_readiness_dashboard.py
+  - tests/uix/test_resource_views_contract.py
+  - tests/uix/test_resource_views_states.py
+  - tests/uix/test_safe_mutations.py
   security:
   - tests/security/test_release_bundle_signing.py
   - tests/security/test_sender_constraint_replay.py

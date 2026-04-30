@@ -6,7 +6,7 @@
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - strict_independent_claims_ready: `False`
-- release_gates_passed: `False`
+- release_gates_passed: `True`
 - final_release_gate_passed: `False`
 - final_release_ready: `False`
 - target_profile_truth_reconciled_complete: `True`
@@ -26,8 +26,11 @@
 - Tier 4 independent peer validation is not complete for the retained boundary.
 - The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
-- The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.
+- The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not yet preserved in the validated-run inventory.
 - Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.
+- The runtime HTTP surface probe is not yet proven green across the preserved validated base-environment manifests.
+- The application factory is not yet proven materialized across the preserved validated base-environment manifests.
+- Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.
 - Validated clean-room install matrix evidence is incomplete or missing.
 - Validated in-scope certification lane execution evidence is incomplete or missing.
 - Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.

@@ -10,14 +10,14 @@
     "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests."
   ],
   "summary": {
-    "validated_artifact_count": 0,
+    "validated_artifact_count": 1,
     "out_of_scope_validated_artifact_count": 0,
     "required_validated_inventory_count": 31,
-    "validated_inventory_present_count": 0,
+    "validated_inventory_present_count": 1,
     "validated_inventory_complete": false,
-    "runtime_matrix_present_count": 0,
+    "runtime_matrix_present_count": 1,
     "runtime_matrix_expected_count": 14,
-    "runtime_matrix_passed_count": 0,
+    "runtime_matrix_passed_count": 1,
     "runtime_matrix_green": false,
     "test_lane_expected_count": 15,
     "test_lane_passed_count": 0,
@@ -29,7 +29,6 @@
     "runtime_matrix_missing": [
       "base@py3.10",
       "base@py3.11",
-      "base@py3.12",
       "sqlite-uvicorn@py3.10",
       "sqlite-uvicorn@py3.11",
       "sqlite-uvicorn@py3.12",
@@ -42,7 +41,7 @@
       "devtest@py3.11",
       "devtest@py3.12"
     ],
-    "runtime_matrix_present_count": 0,
+    "runtime_matrix_present_count": 1,
     "test_lane_missing": [
       "core@py3.10",
       "core@py3.11",
@@ -63,14 +62,32 @@
     "test_lane_present_count": 0,
     "migration_manifest_present": false,
     "required_validated_inventory_count": 31,
-    "validated_inventory_present_count": 0,
+    "validated_inventory_present_count": 1,
     "validated_inventory_complete": false,
-    "runtime_evidence": {},
+    "runtime_evidence": {
+      "base@py3.12": {
+        "path": "dist\\validated-runs\\runtime-base-py312.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "base@py312",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "runtime_smoke_passed": true,
+        "application_probe_passed": true,
+        "surface_probe_passed": true,
+        "runner_available": null,
+        "serve_check_passed": null
+      }
+    },
     "test_lane_evidence": {},
     "migration_evidence": [],
-    "validated_manifests": [],
+    "validated_manifests": [
+      "dist\\validated-runs\\runtime-base-py312.json"
+    ],
     "out_of_scope_validated_manifests": [],
-    "recognized_manifest_paths": [],
+    "recognized_manifest_paths": [
+      "dist\\validated-runs\\runtime-base-py312.json"
+    ],
     "ignored_json_paths": []
   }
 }

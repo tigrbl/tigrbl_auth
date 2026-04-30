@@ -20,8 +20,9 @@ def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
 
 def test_framework_uses_published_tigrbl_api_surface_names() -> None:
     text = (ROOT / "tigrbl_auth" / "framework.py").read_text(encoding="utf-8")
-    assert "from tigrbl import APIKey, HTTPBearer, TigrblApi, TigrblApp, engine_ctx, hook_ctx, op_ctx" in text
-    assert "class TigrblRouter(TigrblApi)" in text
+    assert "from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx" in text
+    assert 'getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")' in text
+    assert "class TigrblRouter(_BaseTigrblRouter)" in text
     assert "from tigrbl.core.crud.params import Header" in text
 
 

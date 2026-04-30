@@ -1,12 +1,12 @@
 {
   "scope": "tigrbl-runtime-foundation",
   "strict": false,
-  "passed": true,
+  "passed": false,
   "summary": {
     "runtime_fastapi_starlette_hits": 0,
     "tests_fastapi_starlette_hits": 0,
     "scripts_fastapi_starlette_hits": 0,
-    "runtime_non_public_tigrbl_hits": 0,
+    "runtime_non_public_tigrbl_hits": 1,
     "pyproject_forbidden_dependency_hits": 0,
     "release_path_fallback_hits": 0
   },
@@ -16,9 +16,17 @@
       "tests": [],
       "scripts": []
     },
-    "runtime_non_public_tigrbl": [],
+    "runtime_non_public_tigrbl": [
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 27,
+        "match": "from tigrbl_core"
+      }
+    ],
     "pyproject_forbidden_dependencies": [],
     "release_path_fallbacks": []
   },
-  "failures": []
+  "failures": [
+    "Non-public Tigrbl imports remain in the active runtime package."
+  ]
 }

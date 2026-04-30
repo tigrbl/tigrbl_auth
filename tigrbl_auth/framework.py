@@ -17,12 +17,43 @@ from pydantic import AnyHttpUrl, ConfigDict, EmailStr, constr, field_validator
 from sqlalchemy import Select, delete, or_, select
 from sqlalchemy.exc import IntegrityError
 
-from tigrbl import APIKey, HTTPBearer, TigrblApi, TigrblApp, engine_ctx, hook_ctx, op_ctx
-from tigrbl.bindings.rest.common import Request as _TigrblRequest
-from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
-from tigrbl.column.storage_spec import ForeignKeySpec
+from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx
+from tigrbl.requests import Request as _TigrblRequest
+try:
+    from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
+    from tigrbl.column.storage_spec import ForeignKeySpec
+except ModuleNotFoundError:
+    from tigrbl import Column as _TigrblColumn
+    from tigrbl_core._spec import ColumnSpec, F, IO, S, ForeignKeySpec
+
+    def acol(
+        *,
+        storage: S | None = None,
+        field: F | None = None,
+        io: IO | None = None,
+        default_factory: Any | None = None,
+        read_producer: Any | None = None,
+        spec: ColumnSpec | None = None,
+        **kw: Any,
+    ) -> _TigrblColumn:
+        if spec is not None and any(
+            x is not None for x in (storage, field, io, default_factory, read_producer)
+        ):
+            raise ValueError("Provide either spec or individual components, not both.")
+        if spec is None:
+            spec = ColumnSpec(
+                storage=storage,
+                field=field,
+                io=io,
+                default_factory=default_factory,
+                read_producer=read_producer,
+            )
+        return _TigrblColumn(spec=spec, **kw)
 from tigrbl.orm.tables._base import Base
-from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+try:
+    from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+except ModuleNotFoundError:
+    from tigrbl import HTMLResponse, JSONResponse, RedirectResponse, Response
 from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
@@ -71,8 +102,10 @@ from swarmauri_signing_ed25519 import Ed25519EnvelopeSigner
 from swarmauri_signing_jws import JwsSignerVerifier
 from swarmauri_tokens_jwt import JWTTokenService
 
+_BaseTigrblRouter = getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")
 
-class TigrblRouter(TigrblApi):
+
+class TigrblRouter(_BaseTigrblRouter):
     """Compatibility alias for the current Tigrbl API router facade."""
 
     def include_tables(self, models: type | list[type] | tuple[type, ...]) -> None:

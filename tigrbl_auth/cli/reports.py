@@ -976,8 +976,16 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
     return payload
 
 
+def _ensure_repo_local_operator_state(repo_root: Path) -> Path:
+    state_root = repo_root / ".pytest-tmp" / "operator-state" / "certification-closure"
+    state_root.mkdir(parents=True, exist_ok=True)
+    os.environ.setdefault("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(state_root))
+    return state_root
+
+
 def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
+    _ensure_repo_local_operator_state(repo_root)
     claims = _load_yaml(repo_root / "compliance" / "claims" / "declared-target-claims.yaml")
     target_to_module = _load_yaml(repo_root / "compliance" / "mappings" / "target-to-module.yaml")
     target_to_test = _load_yaml(repo_root / "compliance" / "mappings" / "target-to-test.yaml")
@@ -1668,6 +1676,7 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
 
 def run_test_execution_gate(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
+    _ensure_repo_local_operator_state(repo_root)
     classification = verify_test_classification(repo_root, strict=True)
     validated = load_validated_execution_status(repo_root)
     failures: list[str] = []
@@ -1699,6 +1708,7 @@ def run_test_execution_gate(repo_root: Path) -> dict[str, Any]:
 
 def run_final_release_readiness_gate(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
+    _ensure_repo_local_operator_state(repo_root)
     generate_state_reports(repo_root)
     validated = load_validated_execution_status(repo_root)
     runtime_profile = json.loads((repo_root / "docs" / "compliance" / "runtime_profile_report.json").read_text(encoding="utf-8")) if (repo_root / "docs" / "compliance" / "runtime_profile_report.json").exists() else {}
@@ -2503,6 +2513,7 @@ def _build_release_gate_payload(repo_root: Path, gate_names: list[str], results:
 
 def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: bool = True) -> dict[str, Any]:
     repo_root = repo_root.resolve()
+    _ensure_repo_local_operator_state(repo_root)
     gate_dir = repo_root / "compliance" / "gates"
     ordered = _load_yaml(gate_dir / "gate-order.yaml") if (gate_dir / "gate-order.yaml").exists() else {"ordered_gates": sorted(GATE_CALLS)}
     gate_names = [gate_name] if gate_name and gate_name not in {"all", "*"} else list(ordered.get("ordered_gates", sorted(GATE_CALLS)))

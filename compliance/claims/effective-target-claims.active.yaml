@@ -217,3 +217,11 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: baseline
+  - target: OIDC Session Management
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
+  - target: RFC 6265
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline

@@ -4,18 +4,18 @@
 
 ## Summary
 
-- classification_manifest_passed: `False`
-- in_scope_test_lanes_green: `True`
+- classification_manifest_passed: `True`
+- in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
-- validated_test_lane_count: `15`
+- validated_test_lane_count: `0`
 - validated_test_lane_expected_count: `15`
 
 ## Failures
 
-- Test classification manifest is invalid.
+- Validated in-scope certification lane execution is incomplete.
 - Migration portability validation across SQLite and PostgreSQL is missing.
 
 ## Details
 
-- classification_failures: `['Unclassified test files present: tests/unit/test_peer_bundle_completeness.py']`
-- missing_test_lane_manifests: `[]`
+- classification_failures: `[]`
+- missing_test_lane_manifests: `['core@py3.10', 'core@py3.11', 'core@py3.12', 'integration@py3.10', 'integration@py3.11', 'integration@py3.12', 'conformance@py3.10', 'conformance@py3.11', 'conformance@py3.12', 'security-negative@py3.10', 'security-negative@py3.11', 'security-negative@py3.12', 'interop@py3.10', 'interop@py3.11', 'interop@py3.12']`

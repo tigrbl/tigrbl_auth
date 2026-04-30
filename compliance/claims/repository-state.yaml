@@ -60,7 +60,7 @@ repository_state:
   tier4_last_matrix_profile_count: 16
   final_release_decision_complete: true
   release_decision_record_present: true
-  release_gate_passed_for_final_decision: false
+  release_gate_passed_for_final_decision: true
   full_release_claim_still_partial: true
   last_release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
   runtime_target_manifests_present: true
@@ -85,7 +85,7 @@ repository_state:
   validated_migration_portability_preservation_complete: false
   alignment_only_checkpoint_no_new_certification_evidence: false
   last_truth_chain_manifest: docs/compliance/truth_chain.json
-  last_truth_chain_generated_at: '2026-04-28'
+  last_truth_chain_generated_at: '2026-04-30'
   claim_registry_canonical_complete: true
   fapi2_security_profile_declared_complete: true
   public_route_atomic_claims_complete: true

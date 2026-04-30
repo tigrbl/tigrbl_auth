@@ -107,6 +107,20 @@
     },
     {
       "profile": "baseline",
+      "target": "OIDC Session Management",
+      "tests": [
+        "tests/conformance/production/test_oidc_session_management.py",
+        "tests/integration/test_migration_upgrade_downgrade_safety.py",
+        "tests/integration/test_persistence_lifecycle_durability.py",
+        "tests/negative/test_cookie_and_logout_abuse_cases.py",
+        "tests/unit/test_session_logout_cluster_b.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/oidc-session-management/"
+      ]
+    },
+    {
+      "profile": "baseline",
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
       "tests": [
         "tests/e2e/test_release_gate_catalog.py",
@@ -115,6 +129,19 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
+      ]
+    },
+    {
+      "profile": "baseline",
+      "target": "RFC 6265",
+      "tests": [
+        "tests/conformance/production/test_rfc6265_cookies.py",
+        "tests/integration/test_migration_upgrade_downgrade_safety.py",
+        "tests/integration/test_persistence_lifecycle_durability.py",
+        "tests/negative/test_cookie_and_logout_abuse_cases.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/cookies/"
       ]
     },
     {

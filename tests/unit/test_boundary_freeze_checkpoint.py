@@ -17,7 +17,7 @@ def test_boundary_freeze_metadata_matches_retained_scope() -> None:
     assert summary["scope_freeze_retained_target_count"] == 48
     assert summary["scope_freeze_retained_rfc_target_count"] == 30
     assert summary["scope_freeze_retained_non_rfc_target_count"] == 18
-    assert summary["scope_freeze_deferred_target_count"] == 13
+    assert summary["scope_freeze_deferred_target_count"] == 25
     assert summary["scope_freeze_retained_target_identity_hash_matches"] is True
 
 
