@@ -1,0 +1,71 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1067"
+number: 1067
+slug: "advanced-authentication-and-adaptive-auth-requirements"
+title: "Advanced authentication and adaptive auth requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for advanced authentication and adaptive authentication capabilities in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines advanced authentication and adaptive auth requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:48Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for advanced authentication and adaptive authentication capabilities in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1047`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F05 Authentication - passwordless` with current implementation status: `absent`.
+  - `F06 MFA` with current implementation status: `absent`.
+  - `F07 WebAuthn` with current implementation status: `absent`.
+  - `F10 Social login` with current implementation status: `absent`.
+  - `F26 Contextual auth - time / location` with current implementation status: `absent`.
+  
+  ## Normative Requirements
+  
+  Passwordless authentication MUST define credential enrollment, assertion, recovery, revocation, and audit semantics before `F05` can be considered implemented.
+  
+  MFA MUST define factor enrollment, factor challenge, step-up policy, recovery, revocation, and authenticator binding before `F06` can be considered implemented.
+  
+  WebAuthn MUST implement registration and authentication ceremonies, challenge binding, relying-party scoping, authenticator metadata handling, replay protection, and phishing-resistant assurance semantics before `F07` can be considered implemented.
+  
+  Social login MUST define external provider registration, issuer trust, account linking, claim normalization, tenant policy, and failure handling before `F10` can be considered implemented.
+  
+  Contextual authentication MUST treat time, location, device posture, and network context as bounded policy inputs with auditable decision explanations before `F26` can be considered implemented.
+  
+  ## Standards / Specs
+  
+  - WebAuthn and FIDO2/CTAP for phishing-resistant authentication.
+  - OIDC Core for external identity provider sign-in.
+  - OIDC `acr` and `amr` claims for authentication context and method expression.
+  - RFC 8176 for authentication method reference values.
+  - NIST SP 800-63B for authenticator assurance and lifecycle controls.
+  - OAuth 2.0 RFC 6749 where social login or delegated authorization flows depend on OAuth behavior.
+  
+  ## Out Of Scope
+  
+  This specification does not require risk scoring, trust federation graphs, or implementation of policy engines beyond adaptive authentication inputs.
+  
+  ## Verification
+  
+  Verification MUST include positive, negative, replay, tenant-boundary, recovery, revocation, and audit evidence for each implemented authentication capability.
+  
+  ## Traceability
+  
+  This specification governs `F05`, `F06`, `F07`, `F10`, and `F26`.
+spec_kind: "normative"

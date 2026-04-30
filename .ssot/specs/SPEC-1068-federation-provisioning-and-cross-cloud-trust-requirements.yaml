@@ -1,0 +1,75 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1068"
+number: 1068
+slug: "federation-provisioning-and-cross-cloud-trust-requirements"
+title: "Federation, provisioning, and cross-cloud trust requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for federation, provisioning, and cross-cloud trust capabilities in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines federation, provisioning, and cross-cloud trust requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:49Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for federation, provisioning, and cross-cloud trust capabilities in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1048`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F08 SSO` with current implementation status: `partial`.
+  - `F09 Federation` with current implementation status: `absent`.
+  - `F33 SCIM provisioning` with current implementation status: `absent`.
+  - `F46 Trust federation graphs` with current implementation status: `absent`.
+  - `F47 Cross-cloud identity` with current implementation status: `absent`.
+  
+  ## Normative Requirements
+  
+  SSO MUST define provider configuration, tenant binding, issuer trust, session binding, claim normalization, and logout semantics before `F08` can be considered implemented.
+  
+  Federation MUST define trust establishment, metadata discovery, key rotation, issuer validation, audience binding, and failure handling before `F09` can be considered implemented.
+  
+  SCIM provisioning MUST define user and group resource schemas, create/update/delete behavior, filtering, pagination, idempotency, tenant scoping, and audit evidence before `F33` can be considered implemented.
+  
+  Trust federation graphs MUST model issuers, trust domains, token exchange edges, key material, constraints, and revocation semantics before `F46` can be considered implemented.
+  
+  Cross-cloud identity MUST define cloud issuer trust, workload identity mapping, credential exchange, and tenant-safe trust boundaries before `F47` can be considered implemented.
+  
+  ## Standards / Specs
+  
+  - OIDC Core and OIDC Discovery for provider trust and discovery.
+  - OIDC Federation 1.0 for federated trust chains where applicable.
+  - SAML 2.0 for enterprise federation compatibility where SAML is supported.
+  - RFC 8414 for OAuth authorization server metadata.
+  - RFC 7521 and RFC 7523 for assertion-based authorization grants.
+  - RFC 7643 and RFC 7644 for SCIM schemas and protocol behavior.
+  - RFC 8693 for token exchange.
+  - RFC 8705 for mutual TLS client authentication.
+  - RFC 9449 for DPoP proof-of-possession semantics where applicable.
+  - SPIFFE/SPIRE for workload trust domains.
+  
+  ## Out Of Scope
+  
+  This specification does not require authorization graph implementation, risk scoring, or implementation of every possible cloud provider adapter.
+  
+  ## Verification
+  
+  Verification MUST prove metadata validation, issuer trust enforcement, tenant isolation, lifecycle behavior, revocation behavior, and audit evidence for each implemented federation or provisioning capability.
+  
+  ## Traceability
+  
+  This specification governs `F08`, `F09`, `F33`, `F46`, and `F47`.
+spec_kind: "normative"

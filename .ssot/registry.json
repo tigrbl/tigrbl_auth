@@ -49027,6 +49027,190 @@
         }
       ],
       "kind": "normative"
+    },
+    {
+      "id": "spc:1066",
+      "number": 1066,
+      "slug": "non-human-and-device-identity-boundary-requirements",
+      "title": "Non-human and device identity boundary requirements",
+      "path": ".ssot/specs/SPEC-1066-non-human-and-device-identity-boundary-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "0028ee02d3436115f46af70ba29013b16268d2698c38a29ece50007e9962f16f",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines non-human and device identity capability requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:47Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1067",
+      "number": 1067,
+      "slug": "advanced-authentication-and-adaptive-auth-requirements",
+      "title": "Advanced authentication and adaptive auth requirements",
+      "path": ".ssot/specs/SPEC-1067-advanced-authentication-and-adaptive-auth-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "a011874cc6a448c2f9c543d31471f3379fe874529cd3d13604beb7acea622812",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines advanced authentication and adaptive auth requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:48Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1068",
+      "number": 1068,
+      "slug": "federation-provisioning-and-cross-cloud-trust-requirements",
+      "title": "Federation, provisioning, and cross-cloud trust requirements",
+      "path": ".ssot/specs/SPEC-1068-federation-provisioning-and-cross-cloud-trust-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "b98d4d0a778400e98d89ef988bf24723b47c045d8e1aedf5b8dec6817ed57b20",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines federation, provisioning, and cross-cloud trust requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:49Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1069",
+      "number": 1069,
+      "slug": "authorization-model-and-relationship-graph-requirements",
+      "title": "Authorization model and relationship graph requirements",
+      "path": ".ssot/specs/SPEC-1069-authorization-model-and-relationship-graph-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "055496c52b4fa3f478af0cd18b8e253372d648e6f12b9a5462f99a695f4630a0",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines authorization model and relationship graph requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:49Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1070",
+      "number": 1070,
+      "slug": "policy-control-plane-requirements",
+      "title": "Policy control-plane requirements",
+      "path": ".ssot/specs/SPEC-1070-policy-control-plane-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "88db40331c3dc94e9cdd18a96a65a5e64f9d8ec715557027a970ae81c33f7d8b",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines policy control-plane requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:50Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1071",
+      "number": 1071,
+      "slug": "auth-detection-telemetry-requirements",
+      "title": "Auth detection telemetry requirements",
+      "path": ".ssot/specs/SPEC-1071-auth-detection-telemetry-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "7d6c638aaa9fa03932e58e81e0a20902bdaa6e1080021a8c04c818f2f9c83d22",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines authentication anomaly detection telemetry requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:50Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1072",
+      "number": 1072,
+      "slug": "access-governance-compliance-and-delegated-administration-requirements",
+      "title": "Access governance, compliance, and delegated administration requirements",
+      "path": ".ssot/specs/SPEC-1072-access-governance-compliance-and-delegated-administration-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "4874cada026fa0818271ba124bd8aeffbca1b9fa4611f70a8deb739eaa901654",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines access governance, compliance, and delegated administration requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:51Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1073",
+      "number": 1073,
+      "slug": "sdk-and-plugin-extensibility-requirements",
+      "title": "SDK and plugin extensibility requirements",
+      "path": ".ssot/specs/SPEC-1073-sdk-and-plugin-extensibility-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "fcbc880eb614533e361244786deebce9364b39ab35e53c0f705453f2192492a8",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Defines SDK and plugin extensibility requirements for less-than-implemented features.",
+          "at": "2026-04-30T18:40:51Z"
+        }
+      ],
+      "kind": "normative"
     }
   ],
   "profiles": [

@@ -1,0 +1,73 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1070"
+number: 1070
+slug: "policy-control-plane-requirements"
+title: "Policy control-plane requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for policy control-plane decisioning, language, lifecycle, simulation, audit, and decision APIs in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines policy control-plane requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:50Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for policy control-plane decisioning, language, lifecycle, simulation, audit, and decision APIs in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1050`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F16 Policy engine` with current implementation status: `partial`.
+  - `F17 Policy language` with current implementation status: `absent`.
+  - `F18 Policy versioning` with current implementation status: `absent`.
+  - `F19 Policy simulation` with current implementation status: `partial`.
+  - `F20 Policy audit` with current implementation status: `partial`.
+  - `F21 Access decision API` with current implementation status: `absent`.
+  
+  ## Normative Requirements
+  
+  The policy engine MUST provide deterministic decisioning, explicit inputs, explicit outputs, tenant isolation, failure behavior, and audit evidence before `F16` can be considered implemented.
+  
+  The policy language MUST define syntax, semantics, validation, compatibility, determinism constraints, and unsafe construct handling before `F17` can be considered implemented.
+  
+  Policy versioning MUST define immutable versions, promotion rules, rollback behavior, compatibility checks, and audit history before `F18` can be considered implemented.
+  
+  Policy simulation MUST evaluate proposed policy changes against representative requests and explain decision deltas before `F19` can be considered implemented.
+  
+  Policy audit MUST record policy changes, decision inputs, decision outputs, actor identity, tenant, timestamp, and correlation identifiers before `F20` can be considered implemented.
+  
+  The access decision API MUST define request shape, response shape, error semantics, explainability, idempotency expectations, and authorization around decision invocation before `F21` can be considered implemented.
+  
+  ## Standards / Specs
+  
+  - XACML 3.0 for policy decisioning concepts.
+  - OPA/Rego, Cedar, and CEL for policy language reference points.
+  - Envoy external authorization for PDP/API surface integration patterns.
+  - NIST SP 800-162 for ABAC policy inputs.
+  - NIST SP 800-53 AC and AU controls for access control and audit accountability.
+  
+  ## Out Of Scope
+  
+  This specification does not require selecting a single external policy engine, graph database, or runtime enforcement proxy.
+  
+  ## Verification
+  
+  Verification MUST prove deterministic evaluation, policy version immutability, simulation correctness, rollback behavior, API contract validity, tenant isolation, and audit evidence.
+  
+  ## Traceability
+  
+  This specification governs `F16`, `F17`, `F18`, `F19`, `F20`, and `F21`.
+spec_kind: "normative"

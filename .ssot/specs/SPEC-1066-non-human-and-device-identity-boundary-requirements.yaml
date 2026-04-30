@@ -1,0 +1,68 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1066"
+number: 1066
+slug: "non-human-and-device-identity-boundary-requirements"
+title: "Non-human and device identity boundary requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative boundary requirements for non-human and device identity capabilities in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines non-human and device identity capability requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:47Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative boundary requirements for non-human and device identity capabilities in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1046`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F03 Service identities` with current implementation status: `partial`.
+  - `F11 Device identity` with current implementation status: `absent`.
+  - `F12 Workload identity` with current implementation status: `absent`.
+  
+  ## Normative Requirements
+  
+  `tigrbl_auth` MUST distinguish human users, service identities, device identities, and workload identities as separate identity classes.
+  
+  Service identities MUST have lifecycle semantics for creation, rotation, revocation, auditability, and tenant scoping before `F03` can be considered implemented.
+  
+  Device identities MUST define registration, binding, revocation, credential posture, and tenant boundary semantics before `F11` can be considered implemented.
+  
+  Workload identities MUST define workload attestation, credential issuance, rotation, trust-domain scoping, and revocation semantics before `F12` can be considered implemented.
+  
+  Non-human identity credentials MUST NOT be treated as ordinary user passwords or unscoped static secrets.
+  
+  ## Standards / Specs
+  
+  - SPIFFE/SPIRE for workload identity and trust-domain semantics.
+  - OAuth 2.0 client authentication where service identity credentials bind to token issuance.
+  - RFC 8705 for certificate-bound client authentication where mutual TLS is used.
+  - RFC 7523 for JWT bearer assertions where service or workload assertion flows are used.
+  - NIST SP 800-63B for authenticator lifecycle and binding constraints.
+  
+  ## Out Of Scope
+  
+  This specification does not require implementation of SCIM provisioning, federation graphs, passwordless user authentication, or risk scoring.
+  
+  ## Verification
+  
+  Verification MUST prove identity type separation, tenant isolation, credential lifecycle controls, revocation behavior, and audit evidence for each implemented non-human identity class.
+  
+  ## Traceability
+  
+  This specification governs `F03`, `F11`, and `F12`.
+spec_kind: "normative"

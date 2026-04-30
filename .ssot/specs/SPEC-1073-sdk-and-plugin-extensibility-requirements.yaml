@@ -1,0 +1,66 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1073"
+number: 1073
+slug: "sdk-and-plugin-extensibility-requirements"
+title: "SDK and plugin extensibility requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for SDK ecosystem and plugin extensibility capabilities in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines SDK and plugin extensibility requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:51Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for SDK ecosystem and plugin extensibility capabilities in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1053`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F39 SDK ecosystem` with current implementation status: `partial`.
+  - `F40 Extensibility / plugins` with current implementation status: `partial`.
+  
+  ## Normative Requirements
+  
+  The SDK ecosystem MUST define supported languages or packages, version compatibility, authentication helpers, error handling, release compatibility, and generated contract alignment before `F39` can be considered implemented.
+  
+  Extensibility and plugins MUST define extension points, registration semantics, lifecycle hooks, compatibility rules, isolation expectations, failure behavior, and operator controls before `F40` can be considered implemented.
+  
+  Plugin execution MUST be bounded and auditable. When sandboxing is intended, sandbox capabilities and host interface limits MUST be explicit.
+  
+  SDK and plugin surfaces MUST preserve stable API contracts through semantic versioning and contract tests.
+  
+  ## Standards / Specs
+  
+  - OpenAPI for HTTP API contract generation and SDK generation.
+  - OpenRPC for JSON-RPC contract generation and SDK generation where applicable.
+  - Semantic Versioning for compatibility commitments.
+  - CloudEvents for event envelope compatibility where plugins consume or emit events.
+  - OpenAPI Extensions for extension metadata where contract annotations are required.
+  - WASI and the WASM component model where sandboxed plugin execution is intended.
+  
+  ## Out Of Scope
+  
+  This specification does not require implementing a plugin marketplace, every language SDK, or sandboxed WASM execution unless a future feature implementation chooses that runtime.
+  
+  ## Verification
+  
+  Verification MUST prove contract alignment, compatibility behavior, extension registration, failure isolation, operator controls, and audit evidence for each implemented SDK or plugin surface.
+  
+  ## Traceability
+  
+  This specification governs `F39` and `F40`.
+spec_kind: "normative"

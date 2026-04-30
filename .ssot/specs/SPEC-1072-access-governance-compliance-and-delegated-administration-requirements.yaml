@@ -1,0 +1,66 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1072"
+number: 1072
+slug: "access-governance-compliance-and-delegated-administration-requirements"
+title: "Access governance, compliance, and delegated administration requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for access governance, compliance reporting, entitlement management, and delegated administration in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines access governance, compliance, and delegated administration requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:51Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for access governance, compliance reporting, entitlement management, and delegated administration in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1052`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F42 Compliance reporting` with current implementation status: `partial`.
+  - `F43 Access review workflows` with current implementation status: `absent`.
+  - `F44 Entitlement management` with current implementation status: `absent`.
+  - `F45 Delegated admin` with current implementation status: `partial`.
+  
+  ## Normative Requirements
+  
+  Compliance reporting MUST define report scope, evidence inputs, timestamping, tenant boundaries, reproducibility, and export semantics before `F42` can be considered implemented.
+  
+  Access review workflows MUST define campaign creation, reviewer assignment, entitlement snapshots, approval or revocation decisions, escalation, closure, and audit evidence before `F43` can be considered implemented.
+  
+  Entitlement management MUST define entitlement inventory, ownership, assignment, revocation, justification, expiration, and tenant scoping before `F44` can be considered implemented.
+  
+  Delegated administration MUST define administrator scopes, delegation boundaries, least-privilege enforcement, tenant isolation, revocation, and audit evidence before `F45` can be considered implemented.
+  
+  ## Standards / Specs
+  
+  - NIST SP 800-53 AC and AU controls for access governance and audit accountability.
+  - ISO/IEC 27001 access control and audit evidence controls.
+  - SOC 2 logical access and audit evidence criteria.
+  - SCIM RFC 7643 and RFC 7644 where governance workflows depend on provisioned identity or group data.
+  
+  ## Out Of Scope
+  
+  This specification does not require implementation of a full GRC product, external ticketing integration, or risk scoring.
+  
+  ## Verification
+  
+  Verification MUST prove report reproducibility, entitlement snapshot integrity, workflow state transitions, delegated scope enforcement, tenant isolation, and audit evidence.
+  
+  ## Traceability
+  
+  This specification governs `F42`, `F43`, `F44`, and `F45`.
+spec_kind: "normative"

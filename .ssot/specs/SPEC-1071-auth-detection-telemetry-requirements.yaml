@@ -1,0 +1,63 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1071"
+number: 1071
+slug: "auth-detection-telemetry-requirements"
+title: "Auth detection telemetry requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines normative requirements for authentication anomaly detection telemetry in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Defines authentication anomaly detection telemetry requirements for less-than-implemented features."
+    at: "2026-04-30T18:40:50Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines normative requirements for authentication anomaly detection telemetry in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1051`.
+  
+  ## Scope
+  
+  This specification governs:
+  
+  - `F35 Anomaly detection - auth` with current implementation status: `absent`.
+  
+  ## Normative Requirements
+  
+  Authentication anomaly detection MUST define event sources, normalized event shape, tenant scoping, actor identifiers, correlation identifiers, detection outputs, auditability, and retention expectations before `F35` can be considered implemented.
+  
+  Detection outputs MUST be explainable and MUST NOT be treated as deterministic authorization decisions unless explicitly bound through a governed policy rule.
+  
+  Telemetry MUST preserve enough context to support investigation without logging secrets, bearer tokens, password material, or private key material.
+  
+  Detection pipelines MUST define failure behavior, backpressure expectations, and operator visibility for dropped or delayed events.
+  
+  ## Standards / Specs
+  
+  - NIST SP 800-53 AU, SI, and IR control families for audit, system integrity, and incident response evidence.
+  - MITRE ATT&CK for adversary behavior taxonomy.
+  - MITRE D3FEND for defensive technique mapping.
+  - OpenTelemetry for structured telemetry and correlation conventions.
+  
+  ## Out Of Scope
+  
+  This specification does not require machine-learning risk models and does not make anomaly signals authoritative authorization decisions.
+  
+  ## Verification
+  
+  Verification MUST prove event production, normalization, tenant isolation, secret redaction, correlation behavior, detection output explainability, and failure handling.
+  
+  ## Traceability
+  
+  This specification governs `F35`.
+spec_kind: "normative"
