@@ -1,0 +1,51 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1053"
+number: 1053
+slug: "govern-sdk-and-plugin-extensibility-boundaries"
+title: "Govern SDK and plugin extensibility boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "SDK ecosystem and plugin extensibility require stable contracts, lifecycle expectations, and compatibility evidence."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern SDK ecosystem and plugin extensibility as developer/operator capabilities with stable contracts, lifecycle expectations, and compatibility evidence.
+
+  ## Current Implementation Status
+
+  - F39 SDK ecosystem: partial.
+  - F40 Extensibility / plugins: partial.
+
+  ## Impacted Features
+
+  - F39 SDK ecosystem.
+  - F40 Extensibility / plugins.
+
+  ## Standards / Specs
+
+  - OpenAPI.
+  - OpenRPC.
+  - Semantic Versioning.
+  - Language package ecosystem conventions.
+  - OpenAPI Extensions.
+  - CloudEvents.
+  - WASI/WASM component model where sandboxed plugins are intended.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide stable SDK surfaces or generated clients, versioning policy, plugin lifecycle semantics, extension registration, compatibility tests, security boundaries, documentation, and evidence.
+
+  ## Out of Scope
+
+  This ADR does not create generated SDKs, third-party plugin APIs, a plugin registry, sandboxing, or extension permission models.
+
+  ## Operational Consequences
+
+  The existing Python helpers and `TigrblAuthPlugin` installation surface remain partial implementation evidence until broader SDK and plugin lifecycle guarantees exist.

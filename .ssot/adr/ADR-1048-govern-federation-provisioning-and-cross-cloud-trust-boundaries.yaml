@@ -1,0 +1,61 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1048"
+number: 1048
+slug: "govern-federation-provisioning-and-cross-cloud-trust-boundaries"
+title: "Govern federation, provisioning, and cross-cloud trust boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Enterprise SSO, federation, SCIM, trust graphs, and cross-cloud identity are trust-plane features distinct from baseline OIDC provider behavior."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern enterprise SSO, federation, SCIM provisioning, trust federation graphs, and cross-cloud identity as trust-plane capabilities distinct from baseline OIDC provider behavior.
+
+  ## Current Implementation Status
+
+  - F08 SSO: partial.
+  - F09 Federation: absent.
+  - F33 SCIM provisioning: absent.
+  - F46 Trust federation graphs: absent.
+  - F47 Cross-cloud identity: absent.
+
+  ## Impacted Features
+
+  - F08 SSO.
+  - F09 Federation.
+  - F33 SCIM provisioning.
+  - F46 Trust federation graphs.
+  - F47 Cross-cloud identity.
+
+  ## Standards / Specs
+
+  - OIDC Core.
+  - OIDC Discovery.
+  - OIDC Federation 1.0.
+  - SAML 2.0.
+  - RFC 8414.
+  - SCIM RFC 7643.
+  - SCIM RFC 7644.
+  - RFC 7523.
+  - RFC 8693.
+  - RFC 8705.
+  - SPIFFE/SPIRE and cloud workload identity federation patterns where deployed.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide durable trust configuration, external provider metadata, provisioning lifecycle, cross-domain trust validation, operator controls, tenant isolation, audit events, tests, and evidence.
+
+  ## Out of Scope
+
+  This ADR does not implement SAML, SCIM endpoints, federation metadata exchange, trust graph storage, or cloud workload identity federation.
+
+  ## Operational Consequences
+
+  OIDC provider routes and discovery documents MAY support SSO-adjacent flows, but they MUST NOT be treated as full federation, SCIM, trust graph, or cross-cloud identity implementation.

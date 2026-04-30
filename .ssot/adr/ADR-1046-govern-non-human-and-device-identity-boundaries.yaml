@@ -1,0 +1,55 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1046"
+number: 1046
+slug: "govern-non-human-and-device-identity-boundaries"
+title: "Govern non-human and device identity boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Non-human, device, and workload identity capabilities must remain below implemented until durable lifecycle, enforcement, operator, and proof surfaces exist."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern non-human, device, and workload identity as explicit identity-plane boundaries until each feature has a durable lifecycle, operator surface, runtime enforcement model, tests, claims, and evidence.
+
+  Partial model-only support is not sufficient to classify these features as implemented.
+
+  ## Current Implementation Status
+
+  - F03 Service identities: partial.
+  - F11 Device identity: absent.
+  - F12 Workload identity: absent.
+
+  ## Impacted Features
+
+  - F03 Service identities.
+  - F11 Device identity.
+  - F12 Workload identity.
+
+  ## Standards / Specs
+
+  - RFC 7521.
+  - RFC 7523.
+  - RFC 8693.
+  - RFC 8705.
+  - RFC 9449.
+  - RFC 7800 where proof-of-possession identity binding is used.
+  - SPIFFE/SPIRE for workload identity where deployed.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide durable lifecycle operations, tenant-scoped records, key or credential binding, audit events, operator/API visibility, and conformance evidence for each non-human identity type.
+
+  ## Out of Scope
+
+  This ADR does not implement service identity lifecycle commands, device enrollment, workload federation, SPIFFE issuance, or token exchange policy.
+
+  ## Operational Consequences
+
+  Release and certification reports MUST keep these features below implemented until the required runtime, operator, and proof surfaces exist.

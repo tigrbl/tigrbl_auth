@@ -1,0 +1,61 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1050"
+number: 1050
+slug: "govern-policy-control-plane-decisioning-language-lifecycle-and-audit"
+title: "Govern policy control-plane decisioning, language, lifecycle, and audit"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Policy control-plane features require durable policy, decision, language, simulation, API, and audit semantics."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern policy decisioning, policy language, policy versioning, policy simulation, policy audit, and access decision APIs as a policy control-plane boundary.
+
+  ## Current Implementation Status
+
+  - F16 Policy engine: partial.
+  - F17 Policy language: absent.
+  - F18 Policy versioning: absent.
+  - F19 Policy simulation: partial.
+  - F20 Policy audit: partial.
+  - F21 Access decision API: absent.
+
+  ## Impacted Features
+
+  - F16 Policy engine.
+  - F17 Policy language.
+  - F18 Policy versioning.
+  - F19 Policy simulation.
+  - F20 Policy audit.
+  - F21 Access decision API.
+
+  ## Standards / Specs
+
+  - XACML 3.0.
+  - OPA/Rego.
+  - Cedar.
+  - CEL.
+  - XACML PDP/PEP architecture.
+  - OPA decision API.
+  - Envoy external authorization API.
+  - NIST SP 800-53 audit and configuration controls.
+  - ISO/IEC 27001 logging, audit, and change management controls.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide durable policies, authoring language semantics, version lifecycle, deterministic decision APIs, simulation inputs and outputs, decision/audit trails, tests, and evidence.
+
+  ## Out of Scope
+
+  This ADR does not choose a final policy language, implement a PDP, or expose an access decision API.
+
+  ## Operational Consequences
+
+  Generic audit logging and UIX policy simulation helpers MUST remain classified as partial until policy-specific lifecycle, decisioning, and audit evidence exists.

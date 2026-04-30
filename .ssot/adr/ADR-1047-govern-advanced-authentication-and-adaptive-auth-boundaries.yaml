@@ -1,0 +1,58 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1047"
+number: 1047
+slug: "govern-advanced-authentication-and-adaptive-auth-boundaries"
+title: "Govern advanced authentication and adaptive auth boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Advanced authentication features must be governed separately from password authentication and protocol metadata support."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern passwordless authentication, MFA, WebAuthn, social login, and contextual authentication as separate authentication capabilities, not as incidental effects of OAuth/OIDC support.
+
+  ## Current Implementation Status
+
+  - F05 Authentication: passwordless: absent.
+  - F06 MFA: absent.
+  - F07 WebAuthn: absent as an authentication ceremony.
+  - F10 Social login: absent.
+  - F26 Contextual auth: time/location: absent.
+
+  ## Impacted Features
+
+  - F05 Authentication: passwordless.
+  - F06 MFA.
+  - F07 WebAuthn.
+  - F10 Social login.
+  - F26 Contextual auth: time/location.
+
+  ## Standards / Specs
+
+  - WebAuthn.
+  - FIDO2/CTAP.
+  - OIDC `acr` and `amr`.
+  - RFC 8176.
+  - NIST SP 800-63B.
+  - OAuth 2.0 / RFC 6749 for social-login protocol flow participation.
+  - OIDC Core for external identity-provider login.
+  - CAEP / Shared Signals Framework where contextual signals are event-driven.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide user-facing authentication ceremonies, credential enrollment and recovery rules, step-up policy hooks, session binding, audit events, tests, and evidence for each authentication capability.
+
+  ## Out of Scope
+
+  This ADR does not add end-user UI, MFA factor enrollment, WebAuthn registration/authentication endpoints, social identity-provider connectors, or adaptive-auth policy evaluation.
+
+  ## Operational Consequences
+
+  WebAuthn algorithm support, OIDC metadata, and password authentication MUST NOT be reported as full implementation of these advanced authentication features.

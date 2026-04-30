@@ -1,0 +1,63 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1049"
+number: 1049
+slug: "govern-authorization-models-and-relationship-graph-boundaries"
+title: "Govern authorization models and relationship graph boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authorization models and graph features require explicit runtime semantics beyond admin helper primitives."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics.
+
+  ## Current Implementation Status
+
+  - F13 RBAC: partial.
+  - F14 ABAC: partial.
+  - F15 ReBAC: absent.
+  - F22 Graph-based authorization: absent.
+  - F23 Relationship modeling: absent.
+  - F24 Fine-grained permissions: partial.
+  - F25 Dynamic conditions: partial.
+
+  ## Impacted Features
+
+  - F13 RBAC.
+  - F14 ABAC.
+  - F15 ReBAC.
+  - F22 Graph-based authorization.
+  - F23 Relationship modeling.
+  - F24 Fine-grained permissions.
+  - F25 Dynamic conditions.
+
+  ## Standards / Specs
+
+  - ANSI/INCITS 359 RBAC.
+  - NIST RBAC model.
+  - NIST SP 800-162.
+  - XACML 3.0.
+  - Zanzibar model.
+  - OpenFGA.
+  - SpiceDB/Authzed.
+  - OAuth scopes / RFC 6749 where scopes represent permissions.
+  - RAR / RFC 9396 where request-bound authorization details are used.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide durable model storage, schema validation, policy attachment, runtime enforcement, decision traces, operator/API surfaces, tests, and evidence for each supported authorization model.
+
+  ## Out of Scope
+
+  This ADR does not implement a relationship tuple store, graph traversal, a complete permission enforcement engine, or generalized condition evaluation.
+
+  ## Operational Consequences
+
+  Admin UIX role and attribute helpers are useful partial surfaces, but they MUST NOT be promoted to complete authorization-model implementation without durable runtime enforcement and proof.

@@ -1,0 +1,48 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1051"
+number: 1051
+slug: "govern-auth-detection-and-risk-signal-telemetry-boundaries"
+title: "Govern auth detection and risk-signal telemetry boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authentication anomaly detection is a detection and telemetry capability, not release-governance risk tracking."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+
+  `tigrbl_auth` MUST govern authentication anomaly detection as a detection and telemetry capability, separate from release-governance risk tracking or protocol security checks.
+
+  ## Current Implementation Status
+
+  - F35 Anomaly detection: auth: absent.
+
+  ## Impacted Features
+
+  - F35 Anomaly detection: auth.
+
+  ## Standards / Specs
+
+  - NIST SP 800-53 AU controls.
+  - NIST SP 800-53 SI controls.
+  - NIST SP 800-53 IR controls.
+  - MITRE ATT&CK.
+  - MITRE D3FEND.
+  - OpenTelemetry.
+
+  ## Required Future Capability
+
+  Future implementation MUST provide authentication telemetry collection, detection rules or models, explainable findings, tenant-scoped evidence, operator visibility, alert/audit integration, tests, and evidence.
+
+  ## Out of Scope
+
+  This ADR does not implement anomaly scoring, risk scoring, alert routing, or detection models.
+
+  ## Operational Consequences
+
+  Security protocol tests, DPoP replay checks, and governance risk rows MUST NOT be reported as authentication anomaly detection.
