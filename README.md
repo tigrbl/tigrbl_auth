@@ -93,6 +93,21 @@ The `tigrcorn` extra is pinned to a published Tigrcorn runner package for Python
 tigrbl-auth claims lint
 ```
 
+Launch the standalone app on Tigrcorn through `uv`:
+
+```bash
+uv run tigrbl-auth serve --server tigrcorn --profile production --host 127.0.0.1 --port 8000 --no-require-tls
+```
+
+Or bring up the checked-in Docker example:
+
+```bash
+docker compose up -d --build
+```
+
+The compose example publishes the service on `http://127.0.0.1:8001` to avoid
+clobbering an existing local listener on `8000`.
+
 or embed as a plugin:
 
 ```python

@@ -11,21 +11,19 @@ WORKDIR /app
 
 COPY . .
 
-RUN uv pip install --system \
-    -c constraints/base.txt \
-    -c constraints/runner-uvicorn.txt \
-    ".[sqlite,uvicorn]"
+RUN uv sync --frozen --extra tigrcorn --no-dev
 
 EXPOSE 8000
 
 ENV \
-    TIGRBL_AUTH_INSTALL_PROFILE="sqlite+uvicorn" \
+    TIGRBL_AUTH_INSTALL_PROFILE="tigrcorn" \
     PG_HOST="" \
     PG_PORT="5432" \
     PG_DB="" \
     PG_USER="" \
     PG_PASS="" \
     REDIS_HOST="" \
-    REDIS_PASSWORD=""
+    REDIS_PASSWORD="" \
+    UV_PROJECT_ENVIRONMENT="/app/.venv"
 
-CMD ["python", "-m", "uvicorn", "tigrbl_auth.app:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info", "--proxy-headers"]
+CMD ["uv", "run", "tigrbl-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]

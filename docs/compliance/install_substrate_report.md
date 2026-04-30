@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260430T100459Z`
+- Generated at: `20260430T220507Z`
 - Passed: `False`
 - Static manifest passed: `True`
 - Profile: `base`

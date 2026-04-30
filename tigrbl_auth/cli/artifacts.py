@@ -41,6 +41,7 @@ def _current_version(repo_root: Path) -> str:
 
 def deployment_from_options(
     *,
+    settings_obj: object | None = None,
     profile: str | None = None,
     surface_sets: list[str] | tuple[str, ...] | None = None,
     protocol_slices: list[str] | tuple[str, ...] | None = None,
@@ -60,8 +61,12 @@ def deployment_from_options(
         from tigrbl_auth.config.profile_loader import load_runtime_profile
 
         profile_defaults = load_runtime_profile(profile)
+    if settings_obj is None:
+        from tigrbl_auth.config.settings import settings as active_settings
+
+        settings_obj = active_settings
     return resolve_deployment(
-        None,
+        settings_obj,
         profile=profile,
         surface_sets=tuple(surface_sets or (profile_defaults.surface_sets if profile_defaults else ())),
         protocol_slices=tuple(protocol_slices or (profile_defaults.protocol_slices if profile_defaults else ())),

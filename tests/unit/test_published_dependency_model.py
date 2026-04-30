@@ -5,6 +5,7 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
     import tomli as tomllib
 from pathlib import Path
+from types import SimpleNamespace
 
 from tigrbl_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
 
@@ -42,6 +43,38 @@ def test_framework_router_uses_upstream_tigrbl_router():
     from tigrbl_auth import framework
 
     assert framework.TigrblRouter is tigrbl.TigrblRouter
+
+
+def test_framework_router_include_tables_falls_back_to_upstream_include_tables(monkeypatch):
+    from tigrbl_auth import framework
+
+    sentinel = object()
+    calls: list[list[object]] = []
+
+    def fake_parent_include_tables(self, models):
+        calls.append(list(models))
+
+    monkeypatch.setattr(framework._BaseTigrblRouter, "include_tables", fake_parent_include_tables)
+
+    router = object.__new__(framework.TigrblRouter)
+    router.include_tables((sentinel,))
+
+    assert calls == [[sentinel]]
+
+
+def test_deployment_from_options_uses_active_settings_values():
+    from tigrbl_auth.cli.artifacts import deployment_from_options
+
+    deployment = deployment_from_options(
+        settings_obj=SimpleNamespace(
+            issuer="http://localhost:8001",
+            protected_resource_identifier="http://localhost:8001/resource",
+        ),
+        profile="production",
+    )
+
+    assert deployment.issuer == "http://localhost:8001"
+    assert deployment.protected_resource_identifier == "http://localhost:8001/resource"
 
 
 def test_workspace_sources_removed_and_provenance_artifacts_exist():

@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260430T100459Z",
+  "generated_at": "20260430T220507Z",
   "passed": false,
   "summary": {
     "static_manifest_passed": true,
@@ -913,7 +913,7 @@
     "python_tag": "py312",
     "implementation": "CPython",
     "implementation_version": "3.12.5",
-    "executable": ".uv-project-env\\Scripts\\python.exe",
+    "executable": ".venv\\Scripts\\python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
     "platform_release": "10",
@@ -935,7 +935,7 @@
       "python_tag": "py312",
       "implementation": "CPython",
       "implementation_version": "3.12.5",
-      "executable": ".uv-project-env\\Scripts\\python.exe",
+      "executable": ".venv\\Scripts\\python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
       "platform_release": "10",

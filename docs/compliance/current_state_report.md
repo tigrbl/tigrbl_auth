@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.pytest-tmp\full\operator-plane-state498\tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.pytest-tmp\operator-plane-state5\tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `195`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `62`
+- release_evidence_dirty_checkout_path_count: `23`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`

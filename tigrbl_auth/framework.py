@@ -113,7 +113,23 @@ class TigrblRouter(_BaseTigrblRouter):
             model_seq = [models]
         else:
             model_seq = list(models)
-        self.include_models(model_seq)
+        include_models = getattr(self, "include_models", None)
+        if callable(include_models):
+            include_models(model_seq)
+            return
+
+        parent_include_tables = getattr(super(), "include_tables", None)
+        if callable(parent_include_tables):
+            parent_include_tables(model_seq)
+            return
+
+        include_table = getattr(self, "include_table", None)
+        if callable(include_table):
+            for model in model_seq:
+                include_table(model)
+            return
+
+        raise AttributeError("Tigrbl router does not expose include_models, include_tables, or include_table")
 
 
 class Request(_TigrblRequest):
