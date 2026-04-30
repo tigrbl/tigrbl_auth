@@ -14511,6 +14511,765 @@
         "tst:tests-unit-test-certification-gap-inventory-py"
       ],
       "requires": []
+    },
+    {
+      "id": "feat:f03-service-identities",
+      "title": "F03 Service identities",
+      "description": "Canonical feature F03: Service identities. Current implementation status: partial. Governed by SPEC-1066.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1066"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f11-device-identity",
+      "title": "F11 Device identity",
+      "description": "Canonical feature F11: Device identity. Current implementation status: absent. Governed by SPEC-1066.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1066"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f12-workload-identity",
+      "title": "F12 Workload identity",
+      "description": "Canonical feature F12: Workload identity. Current implementation status: absent. Governed by SPEC-1066.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1066"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f05-passwordless-authentication",
+      "title": "F05 Authentication - passwordless",
+      "description": "Canonical feature F05: Authentication - passwordless. Current implementation status: absent. Governed by SPEC-1067.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1067"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f06-mfa",
+      "title": "F06 MFA",
+      "description": "Canonical feature F06: MFA. Current implementation status: absent. Governed by SPEC-1067.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1067"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f07-webauthn",
+      "title": "F07 WebAuthn",
+      "description": "Canonical feature F07: WebAuthn. Current implementation status: absent. Governed by SPEC-1067.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1067"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f10-social-login",
+      "title": "F10 Social login",
+      "description": "Canonical feature F10: Social login. Current implementation status: absent. Governed by SPEC-1067.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1067"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f26-contextual-auth-time-location",
+      "title": "F26 Contextual auth - time / location",
+      "description": "Canonical feature F26: Contextual auth - time / location. Current implementation status: absent. Governed by SPEC-1067.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1067"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f08-sso",
+      "title": "F08 SSO",
+      "description": "Canonical feature F08: SSO. Current implementation status: partial. Governed by SPEC-1068.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1068"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f09-federation",
+      "title": "F09 Federation",
+      "description": "Canonical feature F09: Federation. Current implementation status: absent. Governed by SPEC-1068.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1068"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f33-scim-provisioning",
+      "title": "F33 SCIM provisioning",
+      "description": "Canonical feature F33: SCIM provisioning. Current implementation status: absent. Governed by SPEC-1068.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1068"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f46-trust-federation-graphs",
+      "title": "F46 Trust federation graphs",
+      "description": "Canonical feature F46: Trust federation graphs. Current implementation status: absent. Governed by SPEC-1068.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1068"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f47-cross-cloud-identity",
+      "title": "F47 Cross-cloud identity",
+      "description": "Canonical feature F47: Cross-cloud identity. Current implementation status: absent. Governed by SPEC-1068.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1068"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f13-rbac",
+      "title": "F13 RBAC",
+      "description": "Canonical feature F13: RBAC. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f14-abac",
+      "title": "F14 ABAC",
+      "description": "Canonical feature F14: ABAC. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f15-rebac",
+      "title": "F15 ReBAC",
+      "description": "Canonical feature F15: ReBAC. Current implementation status: absent. Governed by SPEC-1069.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f22-graph-based-authorization",
+      "title": "F22 Graph-based authorization",
+      "description": "Canonical feature F22: Graph-based authorization. Current implementation status: absent. Governed by SPEC-1069.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f23-relationship-modeling",
+      "title": "F23 Relationship modeling",
+      "description": "Canonical feature F23: Relationship modeling. Current implementation status: absent. Governed by SPEC-1069.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f24-fine-grained-permissions",
+      "title": "F24 Fine-grained permissions",
+      "description": "Canonical feature F24: Fine-grained permissions. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f25-dynamic-conditions",
+      "title": "F25 Dynamic conditions",
+      "description": "Canonical feature F25: Dynamic conditions. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f16-policy-engine",
+      "title": "F16 Policy engine",
+      "description": "Canonical feature F16: Policy engine. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f17-policy-language",
+      "title": "F17 Policy language",
+      "description": "Canonical feature F17: Policy language. Current implementation status: absent. Governed by SPEC-1070.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f18-policy-versioning",
+      "title": "F18 Policy versioning",
+      "description": "Canonical feature F18: Policy versioning. Current implementation status: absent. Governed by SPEC-1070.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f19-policy-simulation",
+      "title": "F19 Policy simulation",
+      "description": "Canonical feature F19: Policy simulation. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f20-policy-audit",
+      "title": "F20 Policy audit",
+      "description": "Canonical feature F20: Policy audit. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f21-access-decision-api",
+      "title": "F21 Access decision API",
+      "description": "Canonical feature F21: Access decision API. Current implementation status: absent. Governed by SPEC-1070.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f35-anomaly-detection-auth",
+      "title": "F35 Anomaly detection - auth",
+      "description": "Canonical feature F35: Anomaly detection - auth. Current implementation status: absent. Governed by SPEC-1071.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1071"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f42-compliance-reporting",
+      "title": "F42 Compliance reporting",
+      "description": "Canonical feature F42: Compliance reporting. Current implementation status: partial. Governed by SPEC-1072.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f43-access-review-workflows",
+      "title": "F43 Access review workflows",
+      "description": "Canonical feature F43: Access review workflows. Current implementation status: absent. Governed by SPEC-1072.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f44-entitlement-management",
+      "title": "F44 Entitlement management",
+      "description": "Canonical feature F44: Entitlement management. Current implementation status: absent. Governed by SPEC-1072.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f45-delegated-admin",
+      "title": "F45 Delegated admin",
+      "description": "Canonical feature F45: Delegated admin. Current implementation status: partial. Governed by SPEC-1072.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f39-sdk-ecosystem",
+      "title": "F39 SDK ecosystem",
+      "description": "Canonical feature F39: SDK ecosystem. Current implementation status: partial. Governed by SPEC-1073.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1073"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:f40-extensibility-plugins",
+      "title": "F40 Extensibility / plugins",
+      "description": "Canonical feature F40: Extensibility / plugins. Current implementation status: partial. Governed by SPEC-1073.",
+      "implementation_status": "partial",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1073"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
     }
   ],
   "tests": [
@@ -49038,7 +49797,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "0028ee02d3436115f46af70ba29013b16268d2698c38a29ece50007e9962f16f",
+      "content_sha256": "f231de7a4af3cb47c58d203df247086e88f1156f8943f41109840fe431727bb1",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49061,7 +49820,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "a011874cc6a448c2f9c543d31471f3379fe874529cd3d13604beb7acea622812",
+      "content_sha256": "437a7162c16ef54b2d5e279cd48a64ff0f747feae18ab74669fa70d3b458e192",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49084,7 +49843,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "b98d4d0a778400e98d89ef988bf24723b47c045d8e1aedf5b8dec6817ed57b20",
+      "content_sha256": "9c99f7bb5a339d9670ac19832fb9d797d9f64a50670c01dd9e64095c92a6f603",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49107,7 +49866,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "055496c52b4fa3f478af0cd18b8e253372d648e6f12b9a5462f99a695f4630a0",
+      "content_sha256": "0226d905876e211215fe35b6c91a2f4f96ce65d1615fb798f121241d4c5570e8",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49130,7 +49889,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "88db40331c3dc94e9cdd18a96a65a5e64f9d8ec715557027a970ae81c33f7d8b",
+      "content_sha256": "376c33f7ca0cadf06518fdc083cd9d0944b51a2a66fc53850ff994598ce9978b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49153,7 +49912,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "7d6c638aaa9fa03932e58e81e0a20902bdaa6e1080021a8c04c818f2f9c83d22",
+      "content_sha256": "0aa1d12dc1625e3fec147d316173da67cae85ae6076cd1749acdcecf5de80808",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49176,7 +49935,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "4874cada026fa0818271ba124bd8aeffbca1b9fa4611f70a8deb739eaa901654",
+      "content_sha256": "c4a42838c7e4eeaa53f05b2a31d1538934cd292d5b8470ec825acc3d4c6c79c5",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -49199,7 +49958,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "fcbc880eb614533e361244786deebce9364b39ab35e53c0f705453f2192492a8",
+      "content_sha256": "25148076bc1bdc1c056514e25ec7852e961920929763ab84d2c15ae9e5b04116",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
