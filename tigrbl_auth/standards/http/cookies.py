@@ -169,7 +169,35 @@ def issue_session_cookie(
 
 def clear_session_cookie(response, *, cross_site: bool | None = None) -> None:
     policy = session_cookie_policy(cross_site=cross_site)
-    response.delete_cookie(policy.name, path=policy.path, domain=policy.domain)
+    if hasattr(response, "delete_cookie"):
+        response.delete_cookie(policy.name, path=policy.path, domain=policy.domain)
+        return
+    if hasattr(response, "set_cookie"):
+        response.set_cookie(
+            policy.name,
+            "",
+            max_age=0,
+            path=policy.path,
+            domain=policy.domain,
+            secure=policy.secure,
+            httponly=policy.http_only,
+            samesite=policy.same_site,
+        )
+        return
+    cookie_bits = [
+        f"{policy.name}=",
+        "Max-Age=0",
+        f"Path={policy.path}",
+        "HttpOnly",
+        f"SameSite={policy.same_site}",
+    ]
+    if policy.domain:
+        cookie_bits.append(f"Domain={policy.domain}")
+    if policy.secure:
+        cookie_bits.append("Secure")
+    headers = getattr(response, "headers", None)
+    if headers is not None:
+        headers["set-cookie"] = "; ".join(cookie_bits)
 
 
 def describe_runtime_policy() -> dict[str, object]:

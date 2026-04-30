@@ -278,18 +278,29 @@ async def db_session(test_db_engine: Any) -> AsyncGenerator[Any, None]:
         await session.rollback()
 
 
-@pytest.fixture
-def override_get_db(test_db_engine: Any):
+@pytest_asyncio.fixture
+async def override_get_db(test_db_engine: Any):
     """Override database dependencies and tigrbl engine for tests."""
     runtime = _import_runtime_objects()
     app = runtime["app"]
     get_db = runtime["get_db"]
+    from tigrbl_auth.db import get_db as legacy_get_db
+    from tigrbl_auth.tables import get_db as tables_get_db
+    from tigrbl_auth.tables.engine import get_db as engine_get_db
 
-    app.router.dependency_overrides[get_db] = test_db_engine.provider.get_db
-    try:
-        yield
-    finally:
-        app.router.dependency_overrides.clear()
+    _, maker = test_db_engine.provider.ensure()
+    async with maker() as session:
+        def _override_db():
+            return session
+
+        for dependency in {get_db, legacy_get_db, tables_get_db, engine_get_db}:
+            app.router.dependency_overrides[dependency] = _override_db
+            app.dependency_overrides[dependency] = _override_db
+        try:
+            yield
+        finally:
+            app.router.dependency_overrides.clear()
+            app.dependency_overrides.clear()
 
 
 @pytest.fixture

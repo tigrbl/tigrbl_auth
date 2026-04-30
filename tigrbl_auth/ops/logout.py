@@ -4,7 +4,7 @@ import json
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.framework import HTTPException, JSONResponse, RedirectResponse, status
 from tigrbl_auth.services.persistence import append_audit_event_async, get_session_async
@@ -53,7 +53,7 @@ def _cookie_session_id(request) -> UUID | None:
 
 
 async def logout_request(*, request, db):
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled('enable_oidc_rp_initiated_logout'):
         return JSONResponse({'error': 'logout disabled'}, status_code=status.HTTP_404_NOT_FOUND)
 

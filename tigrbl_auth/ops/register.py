@@ -361,14 +361,14 @@ async def update_registered_client(*, request, db, client_id: str, payload: Dyna
 async def delete_registered_client(*, request, db, client_id: str):
     _, client, registration, _ = await _require_registration_access(request=request, db=db, client_id=client_id)
     registration.disabled_at = datetime.now(timezone.utc)
+    client.is_active = False
     await append_audit_event_async(
         tenant_id=client.tenant_id,
-        actor_client_id=client.id,
+        actor_client_id=None,
         event_type='client.registration.deleted',
         target_type='client',
         target_id=str(client.id),
         details={'registration_client_uri': registration.registration_client_uri},
     )
-    await db.delete(client)
     await db.commit()
     return {'status': 'deleted', 'client_id': str(client.id)}

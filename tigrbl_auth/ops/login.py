@@ -20,7 +20,7 @@ async def login_user(*, request, db, identifier: str, password: str) -> JSONResp
     row = await db.scalar(select(User).where(User.username == identifier))
     if row is None:
         row = await db.scalar(select(User).where(User.email == identifier))
-    if row is None or not row.verify_password(password):
+    if row is None or not getattr(row, "is_active", True) or not row.verify_password(password):
         raise HTTPException(status_code=400, detail="invalid credentials")
 
     expires_at = datetime.now(timezone.utc) + timedelta(seconds=max(int(session_cookie_policy().max_age_seconds), 60))

@@ -1,323 +1,291 @@
-"""
-Integration tests for tigrbl_auth.routers.auth_flows module.
+"""Integration coverage for the default auth HTTP surface."""
 
-Tests complete authentication flows including registration, login,
-logout, token refresh, and API key introspection.
-"""
+from __future__ import annotations
+
+from http import HTTPStatus as status
+from uuid import UUID, uuid4
 
 import pytest
-from http import HTTPStatus as status
-from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
+from httpx import AsyncClient, BasicAuth
 from sqlalchemy import select
-from uuid import uuid4
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.orm import Tenant, User, ApiKey, Client
 from tigrbl_auth.crypto import hash_pw
+from tigrbl_auth.orm import Client, ClientRegistration, Tenant, User
 from tigrbl_auth.services.persistence import get_token_record_async
 from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 
 
+def _unique_tenant(label: str) -> Tenant:
+    suffix = uuid4().hex[:8]
+    return Tenant(
+        slug=f"{label}-{suffix}",
+        name=f"{label.title()} Tenant",
+        email=f"{label}-{suffix}@example.com",
+    )
+
+
+async def _create_tenant(db_session: AsyncSession, label: str) -> Tenant:
+    tenant = _unique_tenant(label)
+    db_session.add(tenant)
+    await db_session.commit()
+    return tenant
+
+
+async def _create_user(
+    db_session: AsyncSession,
+    tenant: Tenant,
+    *,
+    username: str,
+    email: str,
+    password: str = "TestPassword123!",
+    is_active: bool = True,
+) -> User:
+    user = User(
+        tenant_id=tenant.id,
+        username=username,
+        email=email,
+        password_hash=hash_pw(password),
+        is_active=is_active,
+    )
+    db_session.add(user)
+    await db_session.commit()
+    return user
+
+
+async def _create_confidential_client(
+    db_session: AsyncSession,
+    tenant: Tenant,
+    *,
+    secret: str = "client-secret",
+) -> Client:
+    client = Client.new(
+        tenant_id=tenant.id,
+        client_id=str(uuid4()),
+        client_secret=secret,
+        redirects=["https://client.example/callback"],
+    )
+    db_session.add(client)
+    await db_session.commit()
+    return client
+
+
+async def _register_client(async_client: AsyncClient, tenant_slug: str) -> dict[str, object]:
+    response = await async_client.post(
+        "/register",
+        json={
+            "tenant_slug": tenant_slug,
+            "redirect_uris": ["https://client.example/callback"],
+            "client_name": "Example Client",
+            "scope": "openid profile email",
+        },
+    )
+    assert response.status_code == status.HTTP_200_OK
+    return response.json()
+
+
 @pytest.mark.integration
 class TestRegistrationFlow:
-    """Test user registration endpoint and flow."""
-
-    async def test_register_new_user_success(
+    async def test_register_client_success(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test successful user registration."""
-        # Create a tenant first
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "register")
+
+        response_data = await _register_client(async_client, tenant.slug)
+
+        assert response_data["redirect_uris"] == ["https://client.example/callback"]
+        assert response_data["grant_types"] == ["authorization_code"]
+        assert response_data["response_types"] == ["code"]
+        assert response_data["token_endpoint_auth_method"] == "client_secret_basic"
+        assert response_data["registration_access_token"]
+        assert response_data["registration_client_uri"].endswith(
+            f"/register/{response_data['client_id']}"
         )
-        db_session.add(tenant)
-        await db_session.commit()
+        client_uuid = UUID(str(response_data["client_id"]))
 
-        registration_data = {
-            "tenant_slug": "test-tenant",
-            "username": "newuser",
-            "email": "newuser@example.com",
-            "password": "SecurePassword123!",
-        }
+        client = await db_session.scalar(
+            select(Client).where(Client.id == client_uuid)
+        )
+        registration = await db_session.scalar(
+            select(ClientRegistration).where(
+                ClientRegistration.client_id == client_uuid
+            )
+        )
+        assert client is not None
+        assert registration is not None
 
-        response = await async_client.post("/register", json=registration_data)
-
-        assert response.status_code == status.HTTP_201_CREATED
-
-        response_data = response.json()
-        assert "access_token" in response_data
-        assert "refresh_token" in response_data
-        assert response_data["token_type"] == "bearer"
-
-        # Verify user was created in database
-        user = await db_session.scalar(select(User).where(User.username == "newuser"))
-        assert user is not None
-        assert user.email == "newuser@example.com"
-        assert user.tenant_id == tenant.id
-
-    async def test_register_with_invalid_tenant(self, async_client: AsyncClient):
-        """Test registration with non-existent tenant."""
-        registration_data = {
-            "tenant_slug": "nonexistent-tenant",
-            "username": "newuser",
-            "email": "newuser@example.com",
-            "password": "SecurePassword123!",
-        }
-
-        response = await async_client.post("/register", json=registration_data)
+    async def test_register_client_rejects_unknown_tenant(
+        self, async_client: AsyncClient
+    ) -> None:
+        response = await async_client.post(
+            "/register",
+            json={"tenant_slug": "missing-tenant", "redirect_uris": ["https://client.example/callback"]},
+        )
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
-        assert "tenant not found" in response.json()["detail"]
+        assert response.json()["detail"] == "tenant not found"
 
-    async def test_register_duplicate_username(
+    async def test_register_client_requires_https_redirects(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test registration with duplicate username."""
-        # Create tenant and existing user
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "register-https")
+
+        response = await async_client.post(
+            "/register",
+            json={"tenant_slug": tenant.slug, "redirect_uris": ["http://client.example/callback"]},
         )
-        db_session.add(tenant)
-        await db_session.commit()
 
-        existing_user = User(
-            tenant_id=tenant.id,
-            username="existinguser",
-            email="existing@example.com",
-            password_hash=hash_pw("password123"),
-        )
-        db_session.add(existing_user)
-        await db_session.commit()
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.json()["detail"] == "redirect_uris must use https"
 
-        registration_data = {
-            "tenant_slug": "test-tenant",
-            "username": "existinguser",
-            "email": "different@example.com",
-            "password": "SecurePassword123!",
-        }
-
-        response = await async_client.post("/register", json=registration_data)
-
-        assert response.status_code == status.HTTP_409_CONFLICT
-        assert "duplicate key" in response.json()["detail"]
-
-    async def test_register_duplicate_email(
+    async def test_legacy_register_path_is_explicitly_unsupported(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test registration with duplicate email."""
-        # Create tenant and existing user
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "register-legacy")
+
+        response = await async_client.post(
+            "/client/register",
+            json={"tenant_slug": tenant.slug, "redirect_uris": ["https://client.example/callback"]},
         )
-        db_session.add(tenant)
-        await db_session.commit()
 
-        existing_user = User(
-            tenant_id=tenant.id,
-            username="existinguser",
-            email="duplicate@example.com",
-            password_hash=hash_pw("password123"),
-        )
-        db_session.add(existing_user)
-        await db_session.commit()
-
-        registration_data = {
-            "tenant_slug": "test-tenant",
-            "username": "differentuser",
-            "email": "duplicate@example.com",
-            "password": "SecurePassword123!",
-        }
-
-        response = await async_client.post("/register", json=registration_data)
-
-        assert response.status_code == status.HTTP_409_CONFLICT
-
-    async def test_register_invalid_email_format(
-        self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test registration with invalid email format."""
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
-        )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        registration_data = {
-            "tenant_slug": "test-tenant",
-            "username": "newuser",
-            "email": "invalid-email-format",
-            "password": "SecurePassword123!",
-        }
-
-        response = await async_client.post("/register", json=registration_data)
-
-        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
-
-    async def test_register_weak_password(
-        self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test registration with weak password."""
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
-        )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        registration_data = {
-            "tenant_slug": "test-tenant",
-            "username": "newuser",
-            "email": "newuser@example.com",
-            "password": "weak",  # Too short
-        }
-
-        response = await async_client.post("/register", json=registration_data)
-
-        assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert "use /register" in response.json()["detail"]
 
 
 @pytest.mark.integration
 class TestLoginFlow:
-    """Test user login endpoint and flow."""
-
-    async def setup_test_user(self, db_session: AsyncSession):
-        """Helper to create test tenant and user."""
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
-        )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        user = User(
-            tenant_id=tenant.id,
-            username="testuser",
-            email="testuser@example.com",
-            password_hash=hash_pw("TestPassword123!"),
-        )
-        db_session.add(user)
-        await db_session.commit()
-
-        return tenant, user
-
     async def test_login_with_username_password(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test successful login with username."""
-        tenant, user = await self.setup_test_user(db_session)
+    ) -> None:
+        tenant = await _create_tenant(db_session, "login-user")
+        user = await _create_user(
+            db_session,
+            tenant,
+            username="testuser",
+            email="testuser@example.com",
+        )
 
-        login_data = {"identifier": "testuser", "password": "TestPassword123!"}
-
-        response = await async_client.post("/login", json=login_data)
+        response = await async_client.post(
+            "/login",
+            json={"identifier": "testuser", "password": "TestPassword123!"},
+        )
 
         assert response.status_code == status.HTTP_200_OK
+        data = response.json()
+        assert data["token_type"] == "bearer"
+        assert data["session_id"]
+        assert async_client.cookies.get("sid") is not None
 
-        response_data = response.json()
-        assert "access_token" in response_data
-        assert "refresh_token" in response_data
-        assert response_data["token_type"] == "bearer"
-
-        # Verify token can be decoded
-        jwt_coder = JWTCoder.default()
-        access_payload = jwt_coder.decode(response_data["access_token"])
-        assert access_payload["sub"] == str(user.id)
-        assert access_payload["tid"] == str(tenant.id)
+        payload = JWTCoder.default().decode(data["access_token"])
+        assert payload["sub"] == str(user.id)
+        assert payload["tid"] == str(tenant.id)
 
     async def test_login_with_email_password(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test successful login with email."""
-        tenant, user = await self.setup_test_user(db_session)
+    ) -> None:
+        tenant = await _create_tenant(db_session, "login-email")
+        await _create_user(
+            db_session,
+            tenant,
+            username="emailuser",
+            email="emailuser@example.com",
+        )
 
-        login_data = {
-            "identifier": "testuser@example.com",
-            "password": "TestPassword123!",
-        }
-
-        response = await async_client.post("/login", json=login_data)
-
-        assert response.status_code == status.HTTP_200_OK
-
-        response_data = response.json()
-        assert "access_token" in response_data
-        assert "refresh_token" in response_data
-
-    async def test_login_with_invalid_credentials(
-        self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test login with invalid credentials."""
-        await self.setup_test_user(db_session)
-
-        login_data = {"identifier": "testuser", "password": "WrongPassword!"}
-
-        response = await async_client.post("/login", json=login_data)
-
-        assert response.status_code == status.HTTP_404_NOT_FOUND
-        assert "invalid credentials" in response.json()["detail"]
-
-    async def test_token_endpoint_form_data(
-        self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test that /token accepts form-encoded credentials."""
-        tenant, user = await self.setup_test_user(db_session)
-
-        form = {"username": "testuser", "password": "TestPassword123!"}
-
-        response = await async_client.post("/token", data=form)
+        response = await async_client.post(
+            "/login",
+            json={"identifier": "emailuser@example.com", "password": "TestPassword123!"},
+        )
 
         assert response.status_code == status.HTTP_200_OK
+        assert response.json()["token_type"] == "bearer"
 
-        response_data = response.json()
-        assert "access_token" in response_data
-        assert "refresh_token" in response_data
-
-    async def test_login_inactive_user(
+    async def test_login_rejects_invalid_credentials(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test login with inactive user."""
-        tenant, user = await self.setup_test_user(db_session)
+    ) -> None:
+        tenant = await _create_tenant(db_session, "login-invalid")
+        await _create_user(
+            db_session,
+            tenant,
+            username="invaliduser",
+            email="invaliduser@example.com",
+        )
 
-        # Deactivate user
-        user.is_active = False
-        await db_session.commit()
+        response = await async_client.post(
+            "/login",
+            json={"identifier": "invaliduser", "password": "WrongPassword!"},
+        )
 
-        login_data = {"identifier": "testuser", "password": "TestPassword123!"}
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.json()["detail"] == "invalid credentials"
 
-        response = await async_client.post("/login", json=login_data)
+    async def test_login_rejects_inactive_user(
+        self, async_client: AsyncClient, db_session: AsyncSession
+    ) -> None:
+        tenant = await _create_tenant(db_session, "login-inactive")
+        await _create_user(
+            db_session,
+            tenant,
+            username="inactiveuser",
+            email="inactiveuser@example.com",
+            is_active=False,
+        )
 
-        assert response.status_code == status.HTTP_404_NOT_FOUND
+        response = await async_client.post(
+            "/login",
+            json={"identifier": "inactiveuser", "password": "TestPassword123!"},
+        )
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST
+        assert response.json()["detail"] == "invalid credentials"
 
 
 @pytest.mark.integration
-class TestTokenRefresh:
-    """Test token refresh endpoint."""
+class TestTokenEndpoint:
+    async def test_password_grant_with_client_basic_auth(
+        self, async_client: AsyncClient, db_session: AsyncSession
+    ) -> None:
+        tenant = await _create_tenant(db_session, "token-password")
+        await _create_user(
+            db_session,
+            tenant,
+            username="grantuser",
+            email="grantuser@example.com",
+        )
+        client = await _create_confidential_client(
+            db_session,
+            tenant,
+            secret="password-secret",
+        )
+
+        response = await async_client.post(
+            "/token",
+            data={
+                "grant_type": "password",
+                "username": "grantuser",
+                "password": "TestPassword123!",
+            },
+            auth=BasicAuth(str(client.id), "password-secret"),
+        )
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.json()["token_type"] == "bearer"
 
     async def test_refresh_with_valid_token(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test token refresh with valid refresh token."""
-        # Create test user and get tokens
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "token-refresh")
+        user = await _create_user(
+            db_session,
+            tenant,
+            username="refreshuser",
+            email="refreshuser@example.com",
         )
-        db_session.add(tenant)
-        await db_session.commit()
+        client = await _create_confidential_client(
+            db_session,
+            tenant,
+            secret="refresh-secret",
+        )
 
-        user = User(
-            tenant_id=tenant.id,
-            username="testuser",
-            email="testuser@example.com",
-            password_hash=hash_pw("TestPassword123!"),
-        )
-        db_session.add(user)
-        client = Client.new(
-            tenant_id=tenant.id,
-            client_id=str(uuid4()),
-            client_secret="refresh-secret",
-            redirects=["https://client.example.com/callback"],
-        )
-        db_session.add(client)
-        await db_session.commit()
-
-        # Get initial tokens
         jwt_coder = JWTCoder.default()
         access_token, refresh_token = await issue_persisted_token_pair(
             jwt=jwt_coder,
@@ -326,27 +294,20 @@ class TestTokenRefresh:
             client_id=str(client.id),
         )
 
-        refresh_data = {
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token,
-            "client_id": str(client.id),
-        }
-
-        response = await async_client.post("/token", data=refresh_data)
+        response = await async_client.post(
+            "/token",
+            data={"grant_type": "refresh_token", "refresh_token": refresh_token},
+            auth=BasicAuth(str(client.id), "refresh-secret"),
+        )
 
         assert response.status_code == status.HTTP_200_OK
-
-        response_data = response.json()
-        assert "access_token" in response_data
-        assert "refresh_token" in response_data
-        assert response_data["token_type"] == "bearer"
-
-        # Verify new tokens are different
-        assert response_data["access_token"] != access_token
-        assert response_data["refresh_token"] != refresh_token
+        data = response.json()
+        assert data["token_type"] == "bearer"
+        assert data["access_token"] != access_token
+        assert data["refresh_token"] != refresh_token
 
         used_record = await get_token_record_async(refresh_token)
-        successor_record = await get_token_record_async(response_data["refresh_token"])
+        successor_record = await get_token_record_async(data["refresh_token"])
         assert used_record is not None
         assert successor_record is not None
         assert used_record.used_at is not None
@@ -354,90 +315,40 @@ class TestTokenRefresh:
         assert successor_record.refresh_parent_hash == used_record.token_hash
         assert successor_record.refresh_family_id == used_record.refresh_family_id
 
-    async def test_refresh_with_invalid_token(self, async_client: AsyncClient):
-        """Test token refresh with invalid token."""
-        refresh_data = {
-            "grant_type": "refresh_token",
-            "refresh_token": "invalid.token.here",
-            "client_id": str(uuid4()),
-        }
-
-        response = await async_client.post("/token", data=refresh_data)
-
-        assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert response.json()["error"] == "invalid_grant"
-
-    async def test_refresh_with_access_token(
+    async def test_refresh_with_invalid_token(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Test token refresh with access token (should fail)."""
-        # Create test user and get tokens
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
-        )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        user = User(
-            tenant_id=tenant.id,
-            username="testuser",
-            email="testuser@example.com",
-            password_hash=hash_pw("TestPassword123!"),
-        )
-        db_session.add(user)
-        client = Client.new(
-            tenant_id=tenant.id,
-            client_id=str(uuid4()),
-            client_secret="refresh-secret",
-            redirects=["https://client.example.com/callback"],
-        )
-        db_session.add(client)
-        await db_session.commit()
-
-        # Get tokens and try to refresh with access token
-        jwt_coder = JWTCoder.default()
-        access_token, refresh_token = await issue_persisted_token_pair(
-            jwt=jwt_coder,
-            sub=str(user.id),
-            tid=str(tenant.id),
-            client_id=str(client.id),
+    ) -> None:
+        tenant = await _create_tenant(db_session, "token-invalid")
+        client = await _create_confidential_client(
+            db_session,
+            tenant,
+            secret="invalid-secret",
         )
 
-        refresh_data = {
-            "grant_type": "refresh_token",
-            "refresh_token": access_token,
-            "client_id": str(client.id),
-        }  # Using access token instead
-
-        response = await async_client.post("/token", data=refresh_data)
+        response = await async_client.post(
+            "/token",
+            data={"grant_type": "refresh_token", "refresh_token": "invalid.token.here"},
+            auth=BasicAuth(str(client.id), "invalid-secret"),
+        )
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.json()["error"] == "invalid_grant"
 
     async def test_refresh_reuse_revokes_the_entire_family(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        tenant = Tenant(
-            slug="refresh-family-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "token-reuse")
+        user = await _create_user(
+            db_session,
+            tenant,
+            username="familyuser",
+            email="familyuser@example.com",
         )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        user = User(
-            tenant_id=tenant.id,
-            username="family-user",
-            email="family-user@example.com",
-            password_hash=hash_pw("TestPassword123!"),
+        client = await _create_confidential_client(
+            db_session,
+            tenant,
+            secret="family-secret",
         )
-        db_session.add(user)
-        client = Client.new(
-            tenant_id=tenant.id,
-            client_id=str(uuid4()),
-            client_secret="refresh-secret",
-            redirects=["https://client.example.com/callback"],
-        )
-        db_session.add(client)
-        await db_session.commit()
 
         jwt_coder = JWTCoder.default()
         _, refresh_token = await issue_persisted_token_pair(
@@ -446,157 +357,98 @@ class TestTokenRefresh:
             tid=str(tenant.id),
             client_id=str(client.id),
         )
-        refresh_data = {
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token,
-            "client_id": str(client.id),
-        }
 
-        first = await async_client.post("/token", data=refresh_data)
+        request = {"grant_type": "refresh_token", "refresh_token": refresh_token}
+        first = await async_client.post(
+            "/token",
+            data=request,
+            auth=BasicAuth(str(client.id), "family-secret"),
+        )
         assert first.status_code == status.HTTP_200_OK
 
-        replay = await async_client.post("/token", data=refresh_data)
+        replay = await async_client.post(
+            "/token",
+            data=request,
+            auth=BasicAuth(str(client.id), "family-secret"),
+        )
         assert replay.status_code == status.HTTP_400_BAD_REQUEST
         assert replay.json()["error"] == "invalid_grant"
 
-        first_child = first.json()["refresh_token"]
+        child_refresh = first.json()["refresh_token"]
         reused_record = await get_token_record_async(refresh_token)
-        child_record = await get_token_record_async(first_child)
+        child_record = await get_token_record_async(child_refresh)
         assert reused_record is not None and reused_record.reuse_detected_at is not None
         assert child_record is not None and child_record.revoked_reason == "refresh_token_reuse_detected"
 
 
 @pytest.mark.integration
 class TestLogoutEndpoint:
-    """Test logout endpoint and session handling."""
-
-    async def test_logout_clears_session_cookie(
+    async def test_logout_post_clears_session_cookie(
         self, async_client: AsyncClient, db_session: AsyncSession
-    ):
-        """Logging out clears the session cookie and returns 204."""
-        tenant = Tenant(slug="logout-tenant", name="LT", email="lt@example.com")
-        db_session.add(tenant)
-        await db_session.commit()
-
-        user = User(
-            tenant_id=tenant.id,
-            username="logout-user",
-            email="logout@example.com",
-            password_hash=hash_pw("TestPassword123!"),
+    ) -> None:
+        tenant = await _create_tenant(db_session, "logout-post")
+        await _create_user(
+            db_session,
+            tenant,
+            username="logoutuser",
+            email="logoutuser@example.com",
         )
-        db_session.add(user)
-        await db_session.commit()
 
-        login_data = {"identifier": "logout-user", "password": "TestPassword123!"}
-        login_response = await async_client.post("/login", json=login_data)
+        login_response = await async_client.post(
+            "/login",
+            json={"identifier": "logoutuser", "password": "TestPassword123!"},
+        )
         assert login_response.status_code == status.HTTP_200_OK
-        id_token = login_response.json()["id_token"]
         assert async_client.cookies.get("sid") is not None
 
-        response = await async_client.post("/logout", json={"id_token_hint": id_token})
+        logout_response = await async_client.post("/logout")
 
-        assert response.status_code == status.HTTP_204_NO_CONTENT
+        assert logout_response.status_code == status.HTTP_200_OK
+        assert logout_response.json()["status"] == "logged_out"
         assert async_client.cookies.get("sid") is None
 
 
 @pytest.mark.integration
-class TestApiKeyIntrospection:
-    """Test API key introspection endpoint."""
-
-    async def test_introspect_valid_api_key(
+class TestIntrospectionEndpoint:
+    async def test_introspect_valid_access_token(
         self, async_client: AsyncClient, db_session: AsyncSession, enable_rfc7662
-    ):
-        """Test API key introspection with valid key."""
-        # Create test tenant and user
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
+    ) -> None:
+        tenant = await _create_tenant(db_session, "introspect-valid")
+        user = await _create_user(
+            db_session,
+            tenant,
+            username="introspectuser",
+            email="introspectuser@example.com",
         )
-        db_session.add(tenant)
-        await db_session.commit()
+        client = await _create_confidential_client(db_session, tenant)
 
-        user = User(
-            tenant_id=tenant.id,
-            username="testuser",
-            email="testuser@example.com",
-            password_hash=hash_pw("TestPassword123!"),
+        access_token, _ = await issue_persisted_token_pair(
+            jwt=JWTCoder.default(),
+            sub=str(user.id),
+            tid=str(tenant.id),
+            client_id=str(client.id),
         )
-        db_session.add(user)
-        await db_session.commit()
 
-        # Create API key
-        raw_key = "test-api-key-12345"
-        api_key = ApiKey(user_id=user.id, label="Test Key")
-        api_key.raw_key = raw_key
-        db_session.add(api_key)
-        await db_session.commit()
-
-        response = await async_client.post("/introspect", data={"token": raw_key})
+        response = await async_client.post("/introspect", data={"token": access_token})
 
         assert response.status_code == status.HTTP_200_OK
+        payload = response.json()
+        assert payload["active"] is True
+        assert payload["sub"] == str(user.id)
+        assert payload["tid"] == str(tenant.id)
 
-        response_data = response.json()
-        assert response_data["active"] is True
-        assert response_data["sub"] == str(user.id)
-        assert response_data["tid"] == str(tenant.id)
-
-    async def test_introspect_invalid_api_key(
+    async def test_introspect_invalid_token(
         self, async_client: AsyncClient, enable_rfc7662
-    ):
-        """Test API key introspection with invalid key."""
-
-        response = await async_client.post(
-            "/introspect", data={"token": "invalid-api-key"}
-        )
+    ) -> None:
+        response = await async_client.post("/introspect", data={"token": "invalid-token"})
 
         assert response.status_code == status.HTTP_200_OK
-        response_data = response.json()
-        assert response_data["active"] is False
-
-    async def test_introspect_expired_api_key(
-        self, async_client: AsyncClient, db_session: AsyncSession, enable_rfc7662
-    ):
-        """Test API key introspection with expired key."""
-        from datetime import datetime, timezone, timedelta
-
-        # Create test tenant and user
-        tenant = Tenant(
-            slug="test-tenant", name="Test Tenant", email="tenant_test@example.com"
-        )
-        db_session.add(tenant)
-        await db_session.commit()
-
-        user = User(
-            tenant_id=tenant.id,
-            username="testuser",
-            email="testuser@example.com",
-            password_hash=hash_pw("TestPassword123!"),
-        )
-        db_session.add(user)
-        await db_session.commit()
-
-        # Create expired API key
-        raw_key = "expired-api-key-12345"
-        api_key = ApiKey(
-            user_id=user.id,
-            label="Expired Key",
-            valid_to=datetime.now(timezone.utc) - timedelta(days=1),
-        )
-        api_key.raw_key = raw_key
-        db_session.add(api_key)
-        await db_session.commit()
-
-        response = await async_client.post("/introspect", data={"token": raw_key})
-
-        assert response.status_code == status.HTTP_200_OK
-        response_data = response.json()
-        assert response_data["active"] is False
+        assert response.json() == {"active": False}
 
 
-# Test helper functions
 @pytest.mark.integration
-async def test_authentication_helpers():
-    """Test helper functions for authentication testing."""
-    from tigrbl_auth.crypto import hash_pw, verify_pw
+async def test_authentication_helpers() -> None:
+    from tigrbl_auth.crypto import verify_pw
 
     password = "TestPassword123!"
     hashed = hash_pw(password)

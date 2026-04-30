@@ -126,4 +126,4 @@ async def test_runtime_openapi_payload_remains_valid_for_mixed_runtime(tmp_path)
         any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
         for path in payload["paths"]
     )
-    assert "/rpc" in payload["paths"]
+    assert not any(path == "/rpc" or path.startswith("/rpc/") for path in payload["paths"])

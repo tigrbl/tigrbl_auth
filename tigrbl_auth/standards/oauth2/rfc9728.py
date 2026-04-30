@@ -42,7 +42,7 @@ def build_protected_resource_metadata(deployment: ResolvedDeployment | None = No
     }
 
 
-@api.route(WELL_KNOWN_ENDPOINTS["oauth_protected_resource"], methods=["GET"], include_in_schema=False, tags=[".well-known"])
+@api.route(WELL_KNOWN_ENDPOINTS["oauth_protected_resource"], methods=["GET"], include_in_schema=True, tags=[".well-known"])
 async def oauth_protected_resource_metadata(request: Request):
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled(WELL_KNOWN_ENDPOINTS["oauth_protected_resource"]):
