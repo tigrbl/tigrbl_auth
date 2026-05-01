@@ -47006,6 +47006,159 @@
         "rsk:legacy-provenance-evidence-ambiguity"
       ],
       "release_blocking": true
+    },
+    {
+      "id": "iss:client-jsonrpc-clear-internal-error-001",
+      "title": "Client JSON-RPC clear returns internal error",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin JSON-RPC table surface method Client.clear returns JSON-RPC error -32603 Internal error even after retrying with schema-shaped params. This is a runtime defect in the generated clear path rather than an expected invalid-params rejection.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:logoutstate-rest-replace-500-001",
+      "title": "LogoutState REST replace returns 500",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin REST table endpoint PUT /logoutstate/{item_id} returns HTTP 500 Internal Server Error for a synthetic UUID probe where the rest of the table surface fails closed. Replace must return a contract-valid response instead of crashing.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:pushedauthorizationrequest-rest-replace-500-001",
+      "title": "PushedAuthorizationRequest REST replace returns 500",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin REST table endpoint PUT /pushedauthorizationrequest/{item_id} returns HTTP 500 Internal Server Error for a synthetic UUID probe. Replace must fail closed with a contract-valid status instead of crashing.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:pushedauthorizationrequest-jsonrpc-create-empty-response-001",
+      "title": "PushedAuthorizationRequest JSON-RPC create returns empty 204",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin JSON-RPC table surface method PushedAuthorizationRequest.create returns HTTP 204 with an empty body after retry, which violates the expected JSON-RPC response envelope contract.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:revokedtoken-rest-replace-500-001",
+      "title": "RevokedToken REST replace returns 500",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin REST table endpoint PUT /revokedtoken/{item_id} returns HTTP 500 Internal Server Error for a synthetic UUID probe. Replace must fail closed with a contract-valid status instead of crashing.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:tenant-rest-replace-500-001",
+      "title": "Tenant REST replace returns 500",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin REST table endpoint PUT /tenant/{item_id} returns HTTP 500 Internal Server Error for a synthetic UUID probe. Replace must fail closed with a contract-valid status instead of crashing.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:tenant-jsonrpc-clear-internal-error-001",
+      "title": "Tenant JSON-RPC clear returns internal error",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin JSON-RPC table surface method Tenant.clear returns JSON-RPC error -32603 Internal error even after retrying with schema-shaped params. This is a runtime defect in the generated clear path rather than an expected invalid-params rejection.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:tokenrecord-rest-replace-500-001",
+      "title": "TokenRecord REST replace returns 500",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin REST table endpoint PUT /tokenrecord/{item_id} returns HTTP 500 Internal Server Error for a synthetic UUID probe. Replace must fail closed with a contract-valid status instead of crashing.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
+    },
+    {
+      "id": "iss:user-jsonrpc-clear-internal-error-001",
+      "title": "User JSON-RPC clear returns internal error",
+      "status": "open",
+      "severity": "high",
+      "description": "The published admin JSON-RPC table surface method User.clear returns JSON-RPC error -32603 Internal error even after retrying with schema-shaped params. This is a runtime defect in the generated clear path rather than an expected invalid-params rejection.",
+      "plan": {
+        "horizon": "current",
+        "slot": null
+      },
+      "feature_ids": [],
+      "claim_ids": [],
+      "test_ids": [],
+      "evidence_ids": [],
+      "risk_ids": [],
+      "release_blocking": true
     }
   ],
   "risks": [
