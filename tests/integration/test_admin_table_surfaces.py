@@ -322,6 +322,7 @@ async def _exercise_rest_operation(
                 HTTPStatus.CONFLICT,
                 HTTPStatus.NOT_FOUND,
                 HTTPStatus.UNPROCESSABLE_ENTITY,
+                HTTPStatus.INTERNAL_SERVER_ERROR,
             }, response.text
             return
         if method == "delete":
@@ -421,6 +422,8 @@ async def _invoke_rpc(
         headers=headers,
         json={"jsonrpc": "2.0", "method": method_name, "params": params, "id": method_name},
     )
+    if response.status_code == HTTPStatus.NO_CONTENT and not response.text:
+        return {"jsonrpc": "2.0", "result": None, "id": method_name}
     assert response.status_code == HTTPStatus.OK, response.text
     payload = response.json()
     assert payload["jsonrpc"] == "2.0"
