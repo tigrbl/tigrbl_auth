@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "artifact": "public_api_target_ssot_matrix",
+  "source_matrix": "docs/compliance/target_cell_ssot_entity_matrix.json",
+  "cell": "public_api",
+  "authority": [
+    ".ssot/registry.json",
+    ".ssot/adr",
+    ".ssot/specs"
+  ],
+  "rows": [
+    {
+      "target": "RFC 9110 HTTP Semantics",
+      "cell": "public_api",
+      "entities": [
+        "spc:1034-1043",
+        "spc:1060",
+        "spc:1061",
+        "feat:runtime-profile-configuration-contract"
+      ]
+    },
+    {
+      "target": "RFC 9112 HTTP/1.1",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9113 HTTP/2",
+      "cell": "public_api",
+      "entities": [
+        "feat:cli-flag-hypercorn-http2"
+      ]
+    },
+    {
+      "target": "RFC 9114 HTTP/3",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9000 QUIC",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 8446 TLS 1.3",
+      "cell": "public_api",
+      "entities": [
+        "spc:1034-1043",
+        "spc:1060",
+        "spc:1061"
+      ]
+    },
+    {
+      "target": "OpenAPI 3.1",
+      "cell": "public_api",
+      "entities": [
+        "adr:1006",
+        "spc:1034-1043",
+        "spc:1061",
+        "spc:1063",
+        "spc:1065",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:openapi-contract-always-valid",
+        "feat:openapi-runtime-payload-deferred-to-tigrbl"
+      ]
+    },
+    {
+      "target": "JSON Schema 2020-12",
+      "cell": "public_api",
+      "entities": [
+        "spc:1034-1043",
+        "spc:1063",
+        "spc:1065"
+      ]
+    },
+    {
+      "target": "RFC 9457 Problem Details",
+      "cell": "public_api",
+      "entities": [
+        "spc:1034-1043",
+        "spc:1060",
+        "spc:1061"
+      ]
+    },
+    {
+      "target": "JSON-RPC 2.0",
+      "cell": "public_api",
+      "entities": [
+        "spc:1060",
+        "feat:cli-flag-rpc"
+      ]
+    },
+    {
+      "target": "OpenRPC",
+      "cell": "public_api",
+      "entities": [
+        "adr:1006",
+        "spc:1064",
+        "spc:1065"
+      ]
+    },
+    {
+      "target": "RFC 6749 OAuth 2.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-6749",
+        "feat:flag-enable-rfc6749",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "RFC 6750 Bearer Tokens",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-6750",
+        "feat:flag-enable-rfc6750",
+        "feat:flag-enable-rfc6750-form",
+        "feat:flag-enable-rfc6750-query",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "RFC 9700 OAuth Security BCP",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-9700",
+        "feat:flag-enable-rfc9700",
+        "spc:1034",
+        "spc:1035"
+      ]
+    },
+    {
+      "target": "RFC 7009 Token Revocation",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7009",
+        "feat:route-revoke",
+        "feat:flag-enable-rfc7009",
+        "spc:1039-1043"
+      ]
+    },
+    {
+      "target": "RFC 7662 Token Introspection",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7662",
+        "feat:route-introspect",
+        "feat:flag-enable-rfc7662",
+        "spc:1039-1043"
+      ]
+    },
+    {
+      "target": "RFC 8414 OAuth Metadata",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-8414",
+        "feat:route-well-known-oauth-authorization-server",
+        "feat:flag-enable-rfc8414",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "RFC 9207 Issuer Identification",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-9207",
+        "feat:flag-enable-rfc9207",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "RFC 8705 OAuth mTLS",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-8705",
+        "feat:slice-mtls",
+        "feat:flag-enable-rfc8705",
+        "spc:1034",
+        "spc:1039",
+        "spc:1040",
+        "spc:1042",
+        "spc:1043"
+      ]
+    },
+    {
+      "target": "RFC 9449 DPoP",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-9449",
+        "feat:slice-dpop",
+        "feat:flag-enable-rfc9449",
+        "spc:1036",
+        "spc:1037",
+        "spc:1042",
+        "spc:1043"
+      ]
+    },
+    {
+      "target": "RFC 7515 JWS",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7515",
+        "feat:flag-enable-rfc7515"
+      ]
+    },
+    {
+      "target": "RFC 7516 JWE",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7516",
+        "feat:flag-enable-rfc7516"
+      ]
+    },
+    {
+      "target": "RFC 7517 JWK / JWKS",
+      "cell": "public_api",
+      "entities": [
+        "spc:1002",
+        "spc:1005",
+        "spc:1009",
+        "spc:1013",
+        "spc:1017",
+        "feat:target-rfc-7517",
+        "feat:route-well-known-jwks-json"
+      ]
+    },
+    {
+      "target": "RFC 7518 JWA",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7518",
+        "feat:flag-enable-rfc7518"
+      ]
+    },
+    {
+      "target": "RFC 7519 JWT",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7519",
+        "feat:flag-enable-rfc7519"
+      ]
+    },
+    {
+      "target": "RFC 9068 JWT Access Token Profile",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-9068",
+        "feat:flag-enable-rfc9068"
+      ]
+    },
+    {
+      "target": "RFC 7591 Dynamic Client Registration",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7591",
+        "feat:flag-enable-rfc7591",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "RFC 7592 Client Registration Management",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7592",
+        "feat:flag-enable-rfc7592"
+      ]
+    },
+    {
+      "target": "OIDC Discovery 1.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-oidc-discovery-1-0",
+        "spc:1034-1043"
+      ]
+    },
+    {
+      "target": "OIDC Dynamic Client Registration 1.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-rfc-7591",
+        "feat:target-rfc-7592"
+      ]
+    },
+    {
+      "target": "RFC 7643 SCIM Core Schema",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7644 SCIM Protocol",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC RP-Initiated Logout 1.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-oidc-rp-initiated-logout",
+        "feat:route-logout",
+        "spc:1034",
+        "spc:1036",
+        "spc:1037",
+        "spc:1039",
+        "spc:1040"
+      ]
+    },
+    {
+      "target": "OIDC Front-Channel Logout 1.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-oidc-front-channel-logout",
+        "spc:1034",
+        "spc:1036",
+        "spc:1037"
+      ]
+    },
+    {
+      "target": "OIDC Back-Channel Logout 1.0",
+      "cell": "public_api",
+      "entities": [
+        "feat:target-oidc-back-channel-logout",
+        "spc:1034",
+        "spc:1036",
+        "spc:1037"
+      ]
+    },
+    {
+      "target": "NIST SP 800-53",
+      "cell": "public_api",
+      "entities": [
+        "adr:1051",
+        "spc:1070",
+        "spc:1071"
+      ]
+    },
+    {
+      "target": "NIST SP 800-63",
+      "cell": "public_api",
+      "entities": [
+        "spc:1066",
+        "spc:1067",
+        "feat:target-nist-sp-800-63b-4-profile",
+        "feat:target-nist-sp-800-63c-4-profile"
+      ]
+    },
+    {
+      "target": "NIST SP 800-218 SSDF",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "SLSA",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "in-toto",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Sigstore",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "SPDX",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "CycloneDX",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Admin API Profile Spec",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Deployment Profile Spec",
+      "cell": "public_api",
+      "entities": [
+        "spc:1061",
+        "feat:runtime-profile-configuration-contract",
+        "feat:profile-baseline-development"
+      ]
+    },
+    {
+      "target": "Tenant Isolation Spec",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Policy Administration Spec",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Key Lifecycle Spec",
+      "cell": "public_api",
+      "entities": [
+        "spc:1002",
+        "spc:1005",
+        "spc:1009",
+        "spc:1013",
+        "spc:1017",
+        "feat:target-key-lifecycle-and-jwks-publication"
+      ]
+    },
+    {
+      "target": "Audit Event Schema",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Client Policy Spec",
+      "cell": "public_api",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Resource Contract Spec",
+      "cell": "public_api",
+      "entities": [
+        "adr:1006",
+        "spc:1034-1043",
+        "spc:1063",
+        "spc:1065",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:openapi-contract-always-valid"
+      ]
+    }
+  ]
+}

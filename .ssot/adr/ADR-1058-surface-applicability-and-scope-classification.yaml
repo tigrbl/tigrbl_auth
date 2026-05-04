@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1058"
+number: 1058
+slug: "surface-applicability-and-scope-classification"
+title: "Surface Applicability and Scope Classification"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST use a normative applicability and scope classification model for governed surfaces and targets. The authoritative model MUST distinguish implemented, planned, not-applicable, out-of-scope, and adjacent-but-non-authoritative states. Informative reports MAY summarize those states, but they MUST NOT invent ambiguous empty-state semantics.
+  
+  ## Rationale
+  
+  Informative matrices and reports can otherwise collapse true missing governance and intentional non-applicability into the same symptom. That produces false gaps and encourages the wrong remediation work.
+  
+  ## Scope
+  
+  This ADR governs authoritative scope classification in SSOT and the projection rules used by informative reports. It does not make informative reports normative.

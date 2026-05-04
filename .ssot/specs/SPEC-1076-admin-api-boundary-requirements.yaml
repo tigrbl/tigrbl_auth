@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1076"
+number: 1076
+slug: "admin-api-boundary-requirements"
+title: "Admin API Boundary Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The admin API boundary MUST define the authenticated and authorized control-plane API surface for `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The admin API boundary MUST define the authenticated and authorized control-plane API surface for `tigrbl_auth`.
+  
+  Required in-scope capabilities:
+  - implementation-backed admin contract publication
+  - administrative resource management operations
+  - policy administration API operations
+  - authenticated admin-only control-plane actions
+  
+  Required exclusions:
+  - public OAuth/OIDC routes
+  - public browser-facing UX concerns
+  - CLI-only behaviors that are not part of the API contract
+  
+  The admin API boundary MUST remain separate from the public API boundary and MUST fail closed when admin enablement or authorization requirements are not satisfied.
+spec_kind: "normative"

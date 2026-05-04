@@ -4,6 +4,71 @@
 
 This matrix reconciles declared scope, current claims, owner modules, public surface state, test planning, and evidence planning.
 
+## Target x Cell SSOT Entity Matrix
+
+This compatibility projection maps each target row to the strongest current SSOT entities for each surface cell.
+
+- authority: `.ssot/registry.json`, `.ssot/adr`, `.ssot/specs`
+- machine_readable_companion: `docs/compliance/target_cell_ssot_entity_matrix.json`
+- public_api_cell_projection: `docs/compliance/public_api_target_ssot_matrix.json`
+- public_uix_cell_projection: `docs/compliance/public_uix_target_ssot_matrix.json`
+- cell contents: strongest direct or adjacent current ADR, SPEC, and feature entities
+- notation: `none` means no direct current SSOT entity was found for that exact cell
+
+| Target | Admin API | Public API | Admin UIX | Public UIX |
+|---|---|---|---|---|
+| RFC 9110 HTTP Semantics | `spc:1060`, `spc:1061`, `feat:secure-default-baseline-admin-gate`, `feat:runtime-profile-configuration-contract` | `spc:1034-1043`, `spc:1060`, `spc:1061`, `feat:runtime-profile-configuration-contract` | `adr:1038`, `adr:1040`, `spc:1055`, `spc:1057`, `feat:uix-admin-console-shell` | `none` |
+| RFC 9112 HTTP/1.1 | `none` | `none` | `none` | `none` |
+| RFC 9113 HTTP/2 | `feat:cli-flag-hypercorn-http2` | `feat:cli-flag-hypercorn-http2` | `none` | `none` |
+| RFC 9114 HTTP/3 | `none` | `none` | `none` | `none` |
+| RFC 9000 QUIC | `none` | `none` | `none` | `none` |
+| RFC 8446 TLS 1.3 | `spc:1060`, `spc:1061`, `feat:secure-default-baseline-admin-gate` | `spc:1034-1043`, `spc:1060`, `spc:1061` | `adr:1040`, `spc:1055`, `feat:uix-admin-auth-session` | `none` |
+| OpenAPI 3.1 | `adr:1006`, `spc:1060`, `spc:1061`, `spc:1063`, `spc:1065`, `feat:target-openapi-3-1-3-2-compatible-public-contract`, `feat:openapi-contract-always-valid`, `feat:openapi-runtime-payload-deferred-to-tigrbl`, `feat:admin-gate-does-not-mutate-openapi-json` | `adr:1006`, `spc:1034-1043`, `spc:1061`, `spc:1063`, `spc:1065`, `feat:target-openapi-3-1-3-2-compatible-public-contract`, `feat:openapi-contract-always-valid`, `feat:openapi-runtime-payload-deferred-to-tigrbl` | `spc:1056`, `feat:uix-enterprise-readiness-dashboard`, `feat:uix-redacted-config-viewer` | `none` |
+| JSON Schema 2020-12 | `spc:1063`, `spc:1065` | `spc:1034-1043`, `spc:1063`, `spc:1065` | `none` | `none` |
+| RFC 9457 Problem Details | `spc:1060`, `spc:1061` | `spc:1034-1043`, `spc:1060`, `spc:1061` | `adr:1040`, `spc:1055`, `spc:1057`, `feat:uix-admin-console-shell` | `none` |
+| JSON-RPC 2.0 | `spc:1060`, `spc:1061`, `feat:cli-flag-rpc`, `feat:secure-default-baseline-admin-gate` | `spc:1060`, `feat:cli-flag-rpc` | `adr:1039`, `spc:1057`, `spc:1058`, `spc:1059` | `none` |
+| OpenRPC | `adr:1006`, `spc:1024`, `spc:1044-1049`, `spc:1064`, `spc:1065`, `feat:target-openrpc-1-4-x-admin-control-plane-contract`, `feat:openrpc-contract-always-valid`, `feat:openrpc-runtime-payload-deferred-to-tigrbl`, `feat:admin-gate-does-not-mutate-openrpc-json` | `adr:1006`, `spc:1064`, `spc:1065` | `adr:1039`, `spc:1055`, `spc:1056`, `spc:1057`, `spc:1058`, `spc:1059`, `feat:uix-admin-console-shell` | `none` |
+| RFC 6749 OAuth 2.0 | `feat:target-rfc-6749`, `feat:flag-enable-rfc6749` | `feat:target-rfc-6749`, `feat:flag-enable-rfc6749`, `spc:1034-1043` | `spc:1055`, `spc:1056`, `feat:uix-admin-auth-session` | `none` |
+| RFC 6750 Bearer Tokens | `feat:target-rfc-6750`, `feat:flag-enable-rfc6750`, `feat:flag-enable-rfc6750-form`, `feat:flag-enable-rfc6750-query` | `feat:target-rfc-6750`, `feat:flag-enable-rfc6750`, `feat:flag-enable-rfc6750-form`, `feat:flag-enable-rfc6750-query`, `spc:1034-1043` | `spc:1055`, `spc:1057`, `feat:uix-admin-auth-session`, `feat:uix-token-admin-view` | `none` |
+| RFC 9700 OAuth Security BCP | `feat:target-rfc-9700`, `feat:flag-enable-rfc9700` | `feat:target-rfc-9700`, `feat:flag-enable-rfc9700`, `spc:1034`, `spc:1035` | `adr:1040`, `spc:1055` | `none` |
+| RFC 7009 Token Revocation | `feat:target-rfc-7009`, `feat:route-revoke`, `feat:flag-enable-rfc7009` | `feat:target-rfc-7009`, `feat:route-revoke`, `feat:flag-enable-rfc7009`, `spc:1039-1043` | `spc:1057`, `spc:1058`, `feat:uix-token-admin-view`, `feat:uix-safe-mutation-revoke-token`, `feat:uix-safe-mutation-revoke-session`, `feat:uix-safe-mutation-revoke-consent` | `none` |
+| RFC 7662 Token Introspection | `feat:target-rfc-7662`, `feat:route-introspect`, `feat:flag-enable-rfc7662` | `feat:target-rfc-7662`, `feat:route-introspect`, `feat:flag-enable-rfc7662`, `spc:1039-1043` | `spc:1056`, `spc:1057`, `feat:uix-token-admin-view` | `none` |
+| RFC 8414 OAuth Metadata | `feat:target-rfc-8414`, `feat:route-well-known-oauth-authorization-server`, `feat:flag-enable-rfc8414` | `feat:target-rfc-8414`, `feat:route-well-known-oauth-authorization-server`, `feat:flag-enable-rfc8414`, `spc:1034-1043` | `spc:1056`, `feat:uix-enterprise-readiness-dashboard`, `feat:uix-redacted-config-viewer` | `none` |
+| RFC 9207 Issuer Identification | `feat:target-rfc-9207`, `feat:flag-enable-rfc9207` | `feat:target-rfc-9207`, `feat:flag-enable-rfc9207`, `spc:1034-1043` | `spc:1056`, `feat:uix-enterprise-readiness-dashboard`, `feat:uix-redacted-config-viewer` | `none` |
+| RFC 8705 OAuth mTLS | `feat:target-rfc-8705`, `feat:slice-mtls`, `feat:flag-enable-rfc8705`, `feat:cli-flag-enable-mtls` | `feat:target-rfc-8705`, `feat:slice-mtls`, `feat:flag-enable-rfc8705`, `spc:1034`, `spc:1039`, `spc:1040`, `spc:1042`, `spc:1043` | `adr:1040`, `spc:1055`, `spc:1056` | `none` |
+| RFC 9449 DPoP | `feat:target-rfc-9449`, `feat:slice-dpop`, `feat:flag-enable-rfc9449` | `feat:target-rfc-9449`, `feat:slice-dpop`, `feat:flag-enable-rfc9449`, `spc:1036`, `spc:1037`, `spc:1042`, `spc:1043` | `adr:1040`, `spc:1055`, `spc:1056` | `none` |
+| RFC 7515 JWS | `feat:target-rfc-7515`, `feat:flag-enable-rfc7515` | `feat:target-rfc-7515`, `feat:flag-enable-rfc7515` | `none` | `none` |
+| RFC 7516 JWE | `feat:target-rfc-7516`, `feat:flag-enable-rfc7516` | `feat:target-rfc-7516`, `feat:flag-enable-rfc7516` | `none` | `none` |
+| RFC 7517 JWK / JWKS | `spc:1002`, `spc:1005`, `spc:1009`, `spc:1013`, `spc:1017`, `feat:target-rfc-7517`, `feat:target-key-lifecycle-and-jwks-publication`, `feat:route-well-known-jwks-json`, `feat:rpc-jwks-show`, `feat:cli-verb-keys-publish-jwks`, `feat:cli-verb-keys-generate` | `spc:1002`, `spc:1005`, `spc:1009`, `spc:1013`, `spc:1017`, `feat:target-rfc-7517`, `feat:route-well-known-jwks-json` | `spc:1057`, `spc:1058`, `feat:uix-keys-jwks-admin-view`, `feat:uix-safe-mutation-publish-jwks`, `feat:uix-safe-mutation-rotate-key` | `none` |
+| RFC 7518 JWA | `feat:target-rfc-7518`, `feat:flag-enable-rfc7518` | `feat:target-rfc-7518`, `feat:flag-enable-rfc7518` | `spc:1057`, `spc:1058`, `feat:uix-keys-jwks-admin-view`, `feat:uix-safe-mutation-rotate-key` | `none` |
+| RFC 7519 JWT | `feat:target-rfc-7519`, `feat:flag-enable-rfc7519` | `feat:target-rfc-7519`, `feat:flag-enable-rfc7519` | `spc:1057`, `spc:1059`, `feat:uix-token-admin-view`, `feat:uix-policy-simulation` | `none` |
+| RFC 9068 JWT Access Token Profile | `feat:target-rfc-9068`, `feat:flag-enable-rfc9068` | `feat:target-rfc-9068`, `feat:flag-enable-rfc9068` | `spc:1057`, `feat:uix-token-admin-view` | `none` |
+| RFC 7591 Dynamic Client Registration | `feat:target-rfc-7591`, `feat:flag-enable-rfc7591` | `feat:target-rfc-7591`, `feat:flag-enable-rfc7591`, `spc:1034-1043` | `spc:1057`, `spc:1058`, `feat:uix-client-admin-view`, `feat:uix-safe-mutation-update-client-registration` | `none` |
+| RFC 7592 Client Registration Management | `feat:target-rfc-7592`, `feat:flag-enable-rfc7592` | `feat:target-rfc-7592`, `feat:flag-enable-rfc7592` | `spc:1057`, `spc:1058`, `feat:uix-client-admin-view`, `feat:uix-safe-mutation-update-client-registration` | `none` |
+| OIDC Discovery 1.0 | `feat:target-oidc-discovery-1-0` | `feat:target-oidc-discovery-1-0`, `spc:1034-1043` | `spc:1056`, `feat:uix-enterprise-readiness-dashboard`, `feat:uix-redacted-config-viewer` | `none` |
+| OIDC Dynamic Client Registration 1.0 | `feat:target-rfc-7591`, `feat:target-rfc-7592` | `feat:target-rfc-7591`, `feat:target-rfc-7592` | `spc:1057`, `spc:1058`, `feat:uix-client-admin-view`, `feat:uix-safe-mutation-update-client-registration` | `none` |
+| RFC 7643 SCIM Core Schema | `adr:1052`, `spc:1068`, `spc:1072`, `feat:f33-scim-provisioning` | `none` | `adr:1052`, `spc:1072` | `none` |
+| RFC 7644 SCIM Protocol | `adr:1052`, `spc:1068`, `spc:1072`, `feat:f33-scim-provisioning` | `none` | `adr:1052`, `spc:1072` | `none` |
+| OIDC RP-Initiated Logout 1.0 | `feat:target-oidc-rp-initiated-logout`, `feat:route-logout` | `feat:target-oidc-rp-initiated-logout`, `feat:route-logout`, `spc:1034`, `spc:1036`, `spc:1037`, `spc:1039`, `spc:1040` | `spc:1055`, `spc:1057`, `feat:uix-admin-auth-session`, `feat:uix-session-admin-view` | `none` |
+| OIDC Front-Channel Logout 1.0 | `feat:target-oidc-front-channel-logout` | `feat:target-oidc-front-channel-logout`, `spc:1034`, `spc:1036`, `spc:1037` | `spc:1055`, `spc:1057`, `feat:uix-admin-auth-session`, `feat:uix-session-admin-view` | `none` |
+| OIDC Back-Channel Logout 1.0 | `feat:target-oidc-back-channel-logout` | `feat:target-oidc-back-channel-logout`, `spc:1034`, `spc:1036`, `spc:1037` | `spc:1055`, `spc:1057`, `feat:uix-admin-auth-session`, `feat:uix-session-admin-view` | `none` |
+| NIST SP 800-53 | `adr:1051`, `adr:1052`, `spc:1070`, `spc:1071`, `spc:1072` | `adr:1051`, `spc:1070`, `spc:1071` | `adr:1040`, `adr:1051`, `adr:1052` | `none` |
+| NIST SP 800-63 | `spc:1066`, `spc:1067`, `feat:target-nist-sp-800-63b-4-profile`, `feat:target-nist-sp-800-63c-4-profile`, `feat:profile-nist-sp-800-63b-4`, `feat:profile-nist-sp-800-63c-4` | `spc:1066`, `spc:1067`, `feat:target-nist-sp-800-63b-4-profile`, `feat:target-nist-sp-800-63c-4-profile` | `adr:1051`, `adr:1052` | `none` |
+| NIST SP 800-218 SSDF | `none` | `none` | `none` | `none` |
+| SLSA | `none` | `none` | `none` | `none` |
+| in-toto | `none` | `none` | `none` | `none` |
+| Sigstore | `none` | `none` | `none` | `none` |
+| SPDX | `none` | `none` | `none` | `none` |
+| CycloneDX | `none` | `none` | `none` | `none` |
+| Admin API Profile Spec | `spc:1060`, `spc:1061`, `spc:1064`, `feat:target-openrpc-1-4-x-admin-control-plane-contract`, `feat:secure-default-baseline-admin-gate`, `feat:runtime-profile-configuration-contract` | `none` | `adr:1038`, `spc:1055`, `spc:1057`, `spc:1058`, `spc:1059`, all `feat:uix-*` admin rows | `none` |
+| Deployment Profile Spec | `spc:1061`, `feat:runtime-profile-configuration-contract`, `feat:profile-baseline-development` | `spc:1061`, `feat:runtime-profile-configuration-contract`, `feat:profile-baseline-development` | `spc:1055`, `spc:1056`, `feat:uix-admin-console-shell`, `feat:uix-enterprise-readiness-dashboard`, `feat:uix-redacted-config-viewer`, `feat:uix-tenant-profile-selector` | `none` |
+| Tenant Isolation Spec | `none` | `none` | `spc:1055`, `spc:1057`, `feat:uix-tenant-profile-selector`, `feat:uix-tenant-admin-view` | `none` |
+| Policy Administration Spec | `spc:1059`, `spc:1070` | `none` | `spc:1059`, `feat:uix-rbac-administration`, `feat:uix-abac-administration`, `feat:uix-policy-simulation` | `none` |
+| Key Lifecycle Spec | `spc:1002`, `spc:1005`, `spc:1009`, `spc:1013`, `spc:1017`, `feat:target-key-lifecycle-and-jwks-publication` | `spc:1002`, `spc:1005`, `spc:1009`, `spc:1013`, `spc:1017`, `feat:target-key-lifecycle-and-jwks-publication` | `spc:1057`, `spc:1058`, `feat:uix-keys-jwks-admin-view`, `feat:uix-safe-mutation-rotate-key`, `feat:uix-safe-mutation-publish-jwks` | `none` |
+| Audit Event Schema | `feat:rpc-audit-list`, `feat:rpc-audit-export` | `none` | `adr:1040`, `spc:1057`, `feat:uix-audit-admin-view` | `none` |
+| Client Policy Spec | `none` | `none` | `spc:1057`, `spc:1058`, `feat:uix-client-admin-view`, `feat:uix-safe-mutation-update-client-registration`, `feat:uix-safe-mutation-toggle-client` | `none` |
+| Resource Contract Spec | `adr:1006`, `spc:1061`, `spc:1064`, `spc:1065`, `feat:target-openrpc-1-4-x-admin-control-plane-contract`, `feat:openrpc-contract-always-valid`, `feat:openrpc-runtime-payload-deferred-to-tigrbl` | `adr:1006`, `spc:1034-1043`, `spc:1063`, `spc:1065`, `feat:target-openapi-3-1-3-2-compatible-public-contract`, `feat:openapi-contract-always-valid` | `adr:1039`, `spc:1057`, all `feat:uix-*-admin-view` rows | `none` |
+
 ## baseline-certifiable-now
 
 | Target | Claim | Owner | Surface | Tests | Evidence | Gaps |

@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1060"
+number: 1060
+slug: "transport-protocol-posture-across-api-and-uix"
+title: "Transport Protocol Posture Across API and UIX"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST define an explicit posture for HTTP/1.1, HTTP/2, HTTP/3, and QUIC across runtime, admin API, public API, admin UIX, and public UIX surfaces. The repository MUST distinguish backend support, runtime enablement, contract visibility, browser/UIX dependence, and certification claimability for each transport concern.
+  
+  ## Rationale
+  
+  Transport support is currently tracked unevenly across runtime and surface artifacts. A single posture decision is required so support, enablement, and claims do not drift independently.
+  
+  ## Scope
+  
+  This ADR governs transport-related support and applicability semantics across repository surfaces. It does not itself claim full implementation of every transport protocol.

@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1082"
+number: 1082
+slug: "tenant-isolation-and-client-policy-cross-plane-requirements"
+title: "Tenant Isolation and Client Policy Cross-Plane Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The repository MUST define normalized tenant isolation and client policy rules across:"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The repository MUST define normalized tenant isolation and client policy rules across:
+  - admin API
+  - public API
+  - admin UIX
+  - selected public UIX surfaces where tenant or client choices are intentionally user-visible
+  
+  The requirements MUST distinguish:
+  - visibility rules
+  - mutation authority
+  - read-model scope
+  - tenant scoping behavior
+  - public-facing versus admin-only exposure
+  
+  Cross-plane behavior MUST remain consistent so tenant and client concerns are not governed differently by surface accident.
+spec_kind: "normative"

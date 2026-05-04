@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1061"
+number: 1061
+slug: "supply-chain-and-provenance-governance-boundary"
+title: "Supply Chain and Provenance Governance Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST define a governed supply-chain and provenance boundary for release and certification work. That boundary MUST describe how SSDF, SLSA, in-toto, Sigstore, SPDX, and CycloneDX map to required artifacts, generated projections, release-gate obligations, and disclosure expectations.
+  
+  ## Rationale
+  
+  Supply-chain and provenance concerns materially affect certifiability and release posture, but they are not yet expressed as a clear repository-level boundary. An explicit ADR is needed so downstream specs can state concrete obligations rather than rely on ad hoc report conventions.
+  
+  ## Scope
+  
+  In scope: build and release provenance, signed artifacts, SBOM/provenance publication, and related release-facing evidence. Out of scope: arbitrary expansion into unrelated enterprise compliance frameworks beyond the declared boundary.

@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1059"
+number: 1059
+slug: "public-uix-contract-and-security-model"
+title: "Public UIX Contract and Security Model"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  The public UIX MUST consume only governed public HTTP/OpenAPI surfaces and MUST NOT consume admin OpenRPC/control-plane surfaces. Public UIX security requirements MUST include cookie handling, CSRF protection, origin and redirect constraints, browser-facing token handling rules, and safe problem-details rendering.
+  
+  ## Rationale
+  
+  A public browser-facing surface has different security risks and UX obligations than an admin console or backend contract consumer. The repository needs an explicit decision for how public UIX interacts with governed backend surfaces without inventing an untracked contract.
+  
+  ## Scope
+  
+  This ADR applies to browser-facing public authentication UX and its contract/security relationship with the public API. It does not redefine admin UIX or admin API behavior.

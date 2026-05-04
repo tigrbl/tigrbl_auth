@@ -40,7 +40,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, spa"
+      "peer_evidence": "validated preserved bundle present: browser, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 6750",
@@ -69,7 +83,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server, gateway"
+      "peer_evidence": "validated preserved bundle present: resource-server, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7636",
@@ -99,7 +127,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/pkce/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, spa, native"
+      "peer_evidence": "validated preserved bundle present: browser, spa, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8414",
@@ -126,7 +168,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, gateway"
+      "peer_evidence": "validated preserved bundle present: browser, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8615",
@@ -152,7 +208,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/well-known/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, gateway"
+      "peer_evidence": "validated preserved bundle present: browser, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7515",
@@ -179,7 +249,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7516",
@@ -208,7 +292,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jwe/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, native"
+      "peer_evidence": "validated preserved bundle present: browser, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7517",
@@ -235,7 +333,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jwks/"
       ],
-      "peer_evidence": "validated preserved bundle present: gateway, assertion-client"
+      "peer_evidence": "validated preserved bundle present: gateway, assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7518",
@@ -262,7 +374,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jose/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7519",
@@ -288,7 +414,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7009",
@@ -323,7 +463,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/revocation/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7591",
@@ -357,7 +511,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration/"
       ],
-      "peer_evidence": "validated preserved bundle present: client-mgmt"
+      "peer_evidence": "validated preserved bundle present: client-mgmt",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7592",
@@ -393,7 +561,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/client-registration-management/"
       ],
-      "peer_evidence": "validated preserved bundle present: client-mgmt"
+      "peer_evidence": "validated preserved bundle present: client-mgmt",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7662",
@@ -425,7 +607,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/introspection/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8252",
@@ -459,7 +655,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/native-apps/"
       ],
-      "peer_evidence": "validated preserved bundle present: native"
+      "peer_evidence": "validated preserved bundle present: native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8628",
@@ -498,7 +708,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/device-flow/"
       ],
-      "peer_evidence": "validated preserved bundle present: device"
+      "peer_evidence": "validated preserved bundle present: device",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8693",
@@ -536,7 +760,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8705",
@@ -577,7 +815,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/mtls/"
       ],
-      "peer_evidence": "validated preserved bundle present: mtls"
+      "peer_evidence": "validated preserved bundle present: mtls",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8707",
@@ -613,7 +865,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server, par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: resource-server, par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9068",
@@ -647,7 +913,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-access-token-profile/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server"
+      "peer_evidence": "validated preserved bundle present: resource-server",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9101",
@@ -682,7 +962,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
       ],
-      "peer_evidence": "validated preserved bundle present: par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9126",
@@ -717,7 +1011,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
       ],
-      "peer_evidence": "validated preserved bundle present: par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9207",
@@ -751,7 +1059,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, native"
+      "peer_evidence": "validated preserved bundle present: browser, native",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9396",
@@ -786,7 +1108,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
       ],
-      "peer_evidence": "validated preserved bundle present: par-jar-rar"
+      "peer_evidence": "validated preserved bundle present: par-jar-rar",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9449",
@@ -822,7 +1158,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
       ],
-      "peer_evidence": "validated preserved bundle present: dpop"
+      "peer_evidence": "validated preserved bundle present: dpop",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 6265",
@@ -856,7 +1206,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/"
       ],
-      "peer_evidence": "validated preserved bundle present: rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7521",
@@ -884,7 +1248,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7523",
@@ -914,7 +1292,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/jwt-client-auth/"
       ],
-      "peer_evidence": "validated preserved bundle present: assertion-client"
+      "peer_evidence": "validated preserved bundle present: assertion-client",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9728",
@@ -945,7 +1337,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/protected-resource-metadata/"
       ],
-      "peer_evidence": "validated preserved bundle present: resource-server, gateway"
+      "peer_evidence": "validated preserved bundle present: resource-server, gateway",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 9700",
@@ -982,7 +1388,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
       ],
-      "peer_evidence": "validated preserved bundle present: gateway, resource-server, dpop, mtls"
+      "peer_evidence": "validated preserved bundle present: gateway, resource-server, dpop, mtls",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Core 1.0",
@@ -1015,7 +1435,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-core/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, spa"
+      "peer_evidence": "validated preserved bundle present: browser, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Discovery 1.0",
@@ -1046,7 +1480,24 @@
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser, gateway, spa"
+      "peer_evidence": "validated preserved bundle present: browser, gateway, spa",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "feat:target-oidc-discovery-1-0"
+        ],
+        "public_api": [
+          "feat:target-oidc-discovery-1-0",
+          "spc:1034-1043"
+        ],
+        "admin_uix": [
+          "spc:1056",
+          "feat:uix-enterprise-readiness-dashboard",
+          "feat:uix-redacted-config-viewer"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC UserInfo",
@@ -1075,7 +1526,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-userinfo/"
       ],
-      "peer_evidence": "validated preserved bundle present: browser"
+      "peer_evidence": "validated preserved bundle present: browser",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Session Management",
@@ -1112,7 +1577,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-session-management/"
       ],
-      "peer_evidence": "validated preserved bundle present: rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC RP-Initiated Logout",
@@ -1147,7 +1626,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-rp-initiated-logout/"
       ],
-      "peer_evidence": "validated preserved bundle present: rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Front-Channel Logout",
@@ -1184,7 +1677,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-frontchannel-logout/"
       ],
-      "peer_evidence": "validated preserved bundle present: rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OIDC Back-Channel Logout",
@@ -1221,7 +1728,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/oidc-backchannel-logout/"
       ],
-      "peer_evidence": "validated preserved bundle present: rp-session-logout"
+      "peer_evidence": "validated preserved bundle present: rp-session-logout",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OpenAPI 3.1 / 3.2 compatible public contract",
@@ -1249,7 +1770,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openapi/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OpenRPC 1.4.x admin/control-plane contract",
@@ -1283,7 +1818,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/contracts/openrpc/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "ASGI 3 application package",
@@ -1324,7 +1873,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/asgi-application/"
       ],
-      "peer_evidence": "validated preserved bundle present: runner-uvicorn, runner-hypercorn, runner-tigrcorn"
+      "peer_evidence": "validated preserved bundle present: runner-uvicorn, runner-hypercorn, runner-tigrcorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Uvicorn",
@@ -1363,7 +1926,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/runner-uvicorn/"
       ],
-      "peer_evidence": "validated preserved bundle present: runner-uvicorn"
+      "peer_evidence": "validated preserved bundle present: runner-uvicorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Hypercorn",
@@ -1402,7 +1979,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/runner-hypercorn/"
       ],
-      "peer_evidence": "validated preserved bundle present: runner-hypercorn"
+      "peer_evidence": "validated preserved bundle present: runner-hypercorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Runner profile: Tigrcorn",
@@ -1441,7 +2032,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/runner-tigrcorn/"
       ],
-      "peer_evidence": "validated preserved bundle present: runner-tigrcorn"
+      "peer_evidence": "validated preserved bundle present: runner-tigrcorn",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "CLI operator surface",
@@ -1484,7 +2089,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Bootstrap and migration lifecycle",
@@ -1516,7 +2135,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/bootstrap-migration/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Key lifecycle and JWKS publication",
@@ -1551,7 +2184,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/key-lifecycle-jwks/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Import/export portability",
@@ -1582,7 +2229,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/import-export-portability/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Release bundle and signature verification",
@@ -1612,7 +2273,21 @@
       "evidence_refs": [
         "compliance/evidence/tier3/release-bundle-signing/"
       ],
-      "peer_evidence": "validated preserved bundle present: ops-cli"
+      "peer_evidence": "validated preserved bundle present: ops-cli",
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     }
   ],
   "partition": {
@@ -1692,7 +2367,21 @@
       "reason": "Optional hardening extension not yet promoted into the certified core boundary.",
       "implemented_module": [
         "tigrbl_auth/standards/jose/rfc7800.py"
-      ]
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 7952",
@@ -1701,7 +2390,21 @@
       "reason": "Outside the default OAuth 2.0 / OIDC auth-server certification boundary.",
       "implemented_module": [
         "tigrbl_auth/extensions/rfc7952.py"
-      ]
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8291",
@@ -1710,7 +2413,21 @@
       "reason": "Web Push is not part of the certified auth-core boundary.",
       "implemented_module": [
         "tigrbl_auth/extensions/rfc8291.py"
-      ]
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8812",
@@ -1719,7 +2436,21 @@
       "reason": "WebAuthn is extension work and not part of the default certified boundary.",
       "implemented_module": [
         "tigrbl_auth/extensions/rfc8812.py"
-      ]
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "RFC 8932",
@@ -1728,63 +2459,189 @@
       "reason": "RFC 8932 is not an OAuth/OIDC auth-core target and remains quarantined from certification claims.",
       "implemented_module": [
         "tigrbl_auth/extensions/rfc8932.py"
-      ]
+      ],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "OAuth 2.1 alignment profile",
       "status": "out-of-scope",
       "kind": "alignment-only",
       "reason": "Track draft-era alignment only. Do not emit as a final RFC compliance claim.",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "SAML IdP/SP",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "LDAP/AD federation",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "SCIM",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "full authorization-policy platform",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Supabase-style data-plane authorization",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "framework-local auth subsystem",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     },
     {
       "target": "Keycloak-scale federation breadth",
       "status": "out-of-scope",
       "kind": "out-of-scope-baseline",
       "reason": "explicitly excluded from the default certification boundary",
-      "implemented_module": []
+      "implemented_module": [],
+      "ssot_entity_cells": {
+        "admin_api": [
+          "none"
+        ],
+        "public_api": [
+          "none"
+        ],
+        "admin_uix": [
+          "none"
+        ],
+        "public_uix": [
+          "none"
+        ]
+      }
     }
   ],
   "validated_execution_artifact_count": 0,
@@ -1792,5 +2649,6 @@
   "in_scope_test_lanes_green": false,
   "migration_portability_passed": false,
   "tier3_evidence_rebuilt_from_validated_runs": false,
-  "tier4_bundle_promotion_complete": false
+  "tier4_bundle_promotion_complete": false,
+  "ssot_entity_matrix_companion": "docs/compliance/target_cell_ssot_entity_matrix.json"
 }

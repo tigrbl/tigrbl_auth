@@ -1,0 +1,31 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1078"
+number: 1078
+slug: "surface-applicability-and-scope-classification-requirements"
+title: "Surface Applicability and Scope Classification Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The repository MUST define authoritative applicability and scope classifications for governed surfaces and targets."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The repository MUST define authoritative applicability and scope classifications for governed surfaces and targets.
+  
+  The authoritative model MUST support at least:
+  - implemented
+  - planned
+  - not-applicable
+  - out-of-scope
+  - adjacent-but-non-authoritative
+  
+  Informative reports and projections MUST derive their status vocabulary from the authoritative classification model and MUST NOT use ambiguous empty-state placeholders as if they were normative truth.
+  
+  The classification model MUST be usable across admin API, public API, admin UIX, public UIX, runtime, operator, and release-facing surfaces.
+spec_kind: "governance"

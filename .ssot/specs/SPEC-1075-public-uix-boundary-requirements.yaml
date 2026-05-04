@@ -1,0 +1,35 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1075"
+number: 1075
+slug: "public-uix-boundary-requirements"
+title: "Public UIX Boundary Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tigrbl_auth`.
+  
+  Required in-scope capabilities:
+  - login
+  - logout
+  - registration
+  - session continuation
+  - optional consent and recovery flows only when explicitly enabled
+  
+  Required exclusions:
+  - admin control-plane behavior
+  - operator diagnostics
+  - backend-only protocol internals
+  - secret-bearing administrative state
+  
+  The public UIX boundary MUST remain distinct from admin UIX and from backend API-only concerns.
+spec_kind: "normative"

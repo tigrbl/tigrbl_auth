@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1054"
+number: 1054
+slug: "admin-uix-boundary"
+title: "Admin UIX Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST define the administrator UIX as a first-class governed boundary. The admin UIX boundary includes console shell access, authenticated admin entry, readiness and configuration views, administrative resource views, policy administration workflows, and safe mutation workflows. The admin UIX boundary MUST remain separate from the public UIX boundary and MUST NOT become a generic container for backend-only or secret-bearing internals.
+  
+  ## Rationale
+  
+  The repository already governs parts of the admin UIX, but the boundary itself should be stated explicitly as a required surface. A clear boundary prevents scope drift, avoids accidental mixing of public and admin concerns, and gives downstream specs a stable surface to target.
+  
+  ## Scope
+  
+  In scope: admin shell, admin auth session gate, readiness/config, resource views, policy administration, safe mutations. Out of scope: public end-user authentication UX, raw secret exposure, backend-only implementation details, and unrelated CLI-only behaviors.

@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1083"
+number: 1083
+slug: "uix-schema-jose-and-safe-disclosure-requirements"
+title: "UIX Schema, JOSE, and Safe Disclosure Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The repository MUST define UIX disclosure rules for:"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The repository MUST define UIX disclosure rules for:
+  - JSON Schema 2020-12
+  - RFC 7515 JWS
+  - RFC 7516 JWE
+  - selected JWT and JWKS-adjacent presentation concerns
+  
+  The requirements MUST distinguish:
+  - admin diagnostics
+  - public explanations
+  - redacted rendering
+  - implementation-only internals
+  - present-but-non-disclosing patterns
+  
+  Admin UIX and public UIX MUST NOT expose cryptographic material, secret-bearing internals, or unsafe implementation detail under the guise of diagnostics or user explanation.
+spec_kind: "normative"

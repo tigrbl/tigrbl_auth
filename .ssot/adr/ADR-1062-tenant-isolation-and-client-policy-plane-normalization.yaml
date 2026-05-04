@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1062"
+number: 1062
+slug: "tenant-isolation-and-client-policy-plane-normalization"
+title: "Tenant Isolation and Client Policy Plane Normalization"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST normalize tenant isolation and client policy semantics across admin API, public API, admin UIX, and any in-scope public UIX surfaces. The repository MUST distinguish administrative visibility, public-facing exposure, mutation authority, and tenant/client scoping rules per surface.
+  
+  ## Rationale
+  
+  Tenant and client concerns already exist across multiple surfaces, but they are not yet normalized as one cross-plane decision. A single ADR prevents inconsistent scoping rules and reduces surface-specific drift.
+  
+  ## Scope
+  
+  This ADR applies to tenant scoping, client policy visibility, and client-management exposure rules across governed surfaces. It does not by itself define every per-feature policy field.

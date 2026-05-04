@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1055"
+number: 1055
+slug: "public-uix-boundary"
+title: "Public UIX Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST define a first-class public end-user UIX boundary. The public UIX boundary includes login, logout, registration, session continuation, and any in-scope end-user consent or recovery surfaces. The public UIX boundary MUST remain distinct from admin UIX and from backend-only API behavior.
+  
+  ## Rationale
+  
+  Public authentication UX is currently inherited indirectly from public API behavior rather than governed as its own surface. An explicit boundary is required to define what the end-user experience is allowed to expose, what it must consume, and what remains outside the boundary.
+  
+  ## Scope
+  
+  In scope: browser-facing login/logout/registration/session flows and optional account-facing end-user flows where explicitly enabled. Out of scope: admin control-plane behavior, operator diagnostics, and backend-only protocol internals.

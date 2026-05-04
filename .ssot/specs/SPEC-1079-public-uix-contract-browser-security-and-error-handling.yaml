@@ -1,0 +1,34 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1079"
+number: 1079
+slug: "public-uix-contract-browser-security-and-error-handling"
+title: "Public UIX Contract, Browser Security, and Error Handling"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Public UIX MUST consume governed public HTTP/OpenAPI surfaces only and MUST NOT consume admin OpenRPC/control-plane surfaces."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  Public UIX MUST consume governed public HTTP/OpenAPI surfaces only and MUST NOT consume admin OpenRPC/control-plane surfaces.
+  
+  Public UIX security requirements MUST cover:
+  - cookie handling
+  - CSRF protections
+  - redirect and origin constraints
+  - browser-facing token handling
+  - safe session continuity behavior
+  
+  Public UIX error handling MUST define:
+  - problem-details rendering rules
+  - safe user-visible error disclosure
+  - non-disclosure of backend-only or secret-bearing internals
+  
+  Public UIX contract consumption and security behavior MUST remain consistent across supported deployment profiles.
+spec_kind: "normative"

@@ -1,0 +1,30 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1063"
+number: 1063
+slug: "uix-data-schema-and-jose-disclosure-boundary"
+title: "UIX Data, Schema, and JOSE Disclosure Boundary"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Status: proposed"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Decision
+  
+  Status: proposed
+  Date: 2026-05-04
+  
+  `tigrbl_auth` MUST define explicit UIX disclosure rules for schema-driven and JOSE-related artifacts. Admin UIX and public UIX MUST distinguish what may be rendered, what must be redacted, what may be explained without disclosure, and what remains implementation-only for JSON Schema, JWS, JWE, JWT, and JWKS-adjacent concerns.
+  
+  ## Rationale
+  
+  UIX surfaces need clear disclosure boundaries so operator diagnostics and end-user explanations do not accidentally expose unsafe internals or cryptographic material. A dedicated ADR is required because UIX disclosure is narrower than backend implementation and broader than simple secret-redaction rules.
+  
+  ## Scope
+  
+  In scope: admin/public UIX rendering and explanation boundaries for schema and JOSE-related artifacts. Out of scope: backend cryptographic implementation details that are never intended to cross a UIX boundary.

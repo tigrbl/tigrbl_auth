@@ -1,0 +1,33 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1080"
+number: 1080
+slug: "transport-protocol-support-and-applicability-requirements"
+title: "Transport Protocol Support and Applicability Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The repository MUST define support and applicability semantics for:"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The repository MUST define support and applicability semantics for:
+  - RFC 9112 HTTP/1.1
+  - RFC 9113 HTTP/2
+  - RFC 9114 HTTP/3
+  - RFC 9000 QUIC
+  
+  For each transport concern, the repository MUST distinguish:
+  - backend/runtime support
+  - runtime enablement
+  - contract visibility
+  - browser or UIX dependency
+  - certification claimability
+  
+  Transport posture requirements MUST be expressible across runtime, admin API, public API, admin UIX, and public UIX without conflating support with mandatory use.
+spec_kind: "normative"

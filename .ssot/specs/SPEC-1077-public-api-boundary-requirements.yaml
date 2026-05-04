@@ -1,0 +1,34 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1077"
+number: 1077
+slug: "public-api-boundary-requirements"
+title: "Public API Boundary Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public API boundary MUST define the public protocol-facing API surface for `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The public API boundary MUST define the public protocol-facing API surface for `tigrbl_auth`.
+  
+  Required in-scope capabilities:
+  - public OAuth routes
+  - public OIDC routes
+  - public discovery and metadata routes
+  - public registration and logout routes where explicitly enabled
+  
+  Required exclusions:
+  - admin/control-plane operations
+  - admin contract methods
+  - operator-only flows
+  - public UI presentation logic
+  
+  Public contract publication MUST reflect the effective deployment boundary and MUST NOT leak admin-only operations into the public API surface.
+spec_kind: "normative"

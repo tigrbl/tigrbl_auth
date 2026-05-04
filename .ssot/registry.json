@@ -15270,6 +15270,1181 @@
       "claim_ids": [],
       "test_ids": [],
       "requires": []
+    },
+    {
+      "id": "feat:uix-admin-boundary",
+      "title": "Admin UIX boundary",
+      "description": "Boundary feature: define and govern the administrator UIX surface. Current implementation status: absent. Governed by SPEC-1074.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1074"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-boundary",
+      "title": "Public UIX boundary",
+      "description": "Boundary feature: define and govern the public end-user UIX surface. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-boundary",
+      "title": "Admin API boundary",
+      "description": "Boundary feature: define and govern the authenticated administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-boundary",
+      "title": "Public API boundary",
+      "description": "Boundary feature: define and govern the public OAuth, OIDC, and discovery API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:surface-applicability-classification",
+      "title": "Surface applicability and scope classification",
+      "description": "Governed feature for authoritative applicability and scope classification across admin API, public API, admin UIX, public UIX, runtime, operator, and release-facing surfaces. Current implementation status: absent. Governed by SPEC-1078.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1078"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-shell",
+      "title": "Public UIX shell",
+      "description": "Public end-user UIX target: Public UIX shell. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-auth-session",
+      "title": "Public UIX auth session",
+      "description": "Public end-user UIX target: Public UIX auth session. Current implementation status: absent. Governed by SPEC-1075 and SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075",
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-login-view",
+      "title": "Public login view",
+      "description": "Public end-user UIX target: Public login view. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-logout-view",
+      "title": "Public logout view",
+      "description": "Public end-user UIX target: Public logout view. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-registration-view",
+      "title": "Public registration view",
+      "description": "Public end-user UIX target: Public registration view. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-session-continuity",
+      "title": "Public session continuity",
+      "description": "Public end-user UIX target: Public session continuity. Current implementation status: absent. Governed by SPEC-1075 and SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075",
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-consent-view",
+      "title": "Public consent view",
+      "description": "Public end-user UIX target: Public consent view. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-recovery-view",
+      "title": "Public recovery view",
+      "description": "Public end-user UIX target: Public recovery view. Current implementation status: absent. Governed by SPEC-1075.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-openapi-contract-consumption",
+      "title": "Public OpenAPI contract consumption",
+      "description": "Public end-user UIX target: Public OpenAPI contract consumption. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-csrf-protection",
+      "title": "Public CSRF protection",
+      "description": "Public end-user UIX target: Public CSRF protection. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-cookie-session-model",
+      "title": "Public cookie session model",
+      "description": "Public end-user UIX target: Public cookie session model. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-origin-and-redirect-constraints",
+      "title": "Public origin and redirect constraints",
+      "description": "Public end-user UIX target: Public origin and redirect constraints. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-browser-token-handling",
+      "title": "Public browser token handling",
+      "description": "Public end-user UIX target: Public browser token handling. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-problem-details-rendering",
+      "title": "Public problem-details rendering",
+      "description": "Public end-user UIX target: Public problem-details rendering. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-safe-error-disclosure",
+      "title": "Public safe error disclosure",
+      "description": "Public end-user UIX target: Public safe error disclosure. Current implementation status: absent. Governed by SPEC-1079.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1079"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-contract-publication-boundary",
+      "title": "Admin API contract publication boundary",
+      "description": "Admin API boundary and contract feature: define and govern admin contract publication boundaries for the authenticated administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-authz-gate",
+      "title": "Admin API authorization gate",
+      "description": "Admin API boundary and contract feature: define and govern administrator authorization gate behavior for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-resource-management-boundary",
+      "title": "Admin API resource management boundary",
+      "description": "Admin API boundary and contract feature: define and govern administrative resource management boundaries for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-policy-control-plane-boundary",
+      "title": "Admin API policy control-plane boundary",
+      "description": "Admin API boundary and contract feature: define and govern administrative policy control-plane boundaries for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-public-surface-exclusion",
+      "title": "Admin API public surface exclusion",
+      "description": "Admin API boundary and contract feature: define and govern exclusion of public API concerns from the administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-oauth-boundary",
+      "title": "Public API OAuth boundary",
+      "description": "Public API boundary and contract feature: define and govern OAuth route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-oidc-boundary",
+      "title": "Public API OIDC boundary",
+      "description": "Public API boundary and contract feature: define and govern OIDC route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-discovery-boundary",
+      "title": "Public API discovery boundary",
+      "description": "Public API boundary and contract feature: define and govern discovery and metadata route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-registration-boundary",
+      "title": "Public API registration boundary",
+      "description": "Public API boundary and contract feature: define and govern public registration route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-logout-boundary",
+      "title": "Public API logout boundary",
+      "description": "Public API boundary and contract feature: define and govern public logout route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-admin-surface-exclusion",
+      "title": "Public API admin surface exclusion",
+      "description": "Public API boundary and contract feature: define and govern exclusion of admin control-plane concerns from the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-http11-posture",
+      "title": "HTTP/1.1 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9112 HTTP/1.1 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-http2-posture",
+      "title": "HTTP/2 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9113 HTTP/2 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-http3-posture",
+      "title": "HTTP/3 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9114 HTTP/3 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-quic-posture",
+      "title": "QUIC transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9000 QUIC across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-ssdf-requirements",
+      "title": "SSDF release requirements",
+      "description": "Supply chain and provenance feature: define and govern NIST SP 800-218 SSDF release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-slsa-requirements",
+      "title": "SLSA release requirements",
+      "description": "Supply chain and provenance feature: define and govern SLSA release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-in-toto-requirements",
+      "title": "in-toto release requirements",
+      "description": "Supply chain and provenance feature: define and govern in-toto release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-sigstore-requirements",
+      "title": "Sigstore release requirements",
+      "description": "Supply chain and provenance feature: define and govern Sigstore release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-spdx-requirements",
+      "title": "SPDX release requirements",
+      "description": "Supply chain and provenance feature: define and govern SPDX release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:release-cyclonedx-requirements",
+      "title": "CycloneDX release requirements",
+      "description": "Supply chain and provenance feature: define and govern CycloneDX release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-isolation-cross-plane",
+      "title": "Tenant isolation cross-plane",
+      "description": "Tenant and client cross-plane feature: define and govern tenant isolation semantics across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:client-policy-cross-plane",
+      "title": "Client policy cross-plane",
+      "description": "Tenant and client cross-plane feature: define and govern client policy semantics across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-visibility-rules",
+      "title": "Tenant visibility rules",
+      "description": "Tenant and client cross-plane feature: define and govern tenant visibility rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:client-mutation-authority-rules",
+      "title": "Client mutation authority rules",
+      "description": "Tenant and client cross-plane feature: define and govern client mutation authority rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:public-vs-admin-client-exposure",
+      "title": "Public versus admin client exposure",
+      "description": "Tenant and client cross-plane feature: define and govern public-facing versus admin-only client exposure rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-schema-safe-disclosure",
+      "title": "UIX schema safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JSON Schema artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jws-safe-disclosure",
+      "title": "UIX JWS safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWS-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwe-safe-disclosure",
+      "title": "UIX JWE safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWE-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwt-safe-disclosure",
+      "title": "UIX JWT safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWT-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwks-safe-disclosure",
+      "title": "UIX JWKS safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWKS-adjacent artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "backlog",
+        "slot": null,
+        "target_claim_tier": null,
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [],
+      "test_ids": [],
+      "requires": []
     }
   ],
   "tests": [
@@ -48518,6 +49693,166 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": []
+    },
+    {
+      "id": "adr:1054",
+      "number": 1054,
+      "slug": "admin-uix-boundary",
+      "title": "Admin UIX Boundary",
+      "path": ".ssot/adr/ADR-1054-admin-uix-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "efb4c446c68b08f057bb56f57ece67ddbf68f0a111743cf7dda52300105e83ec",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1055",
+      "number": 1055,
+      "slug": "public-uix-boundary",
+      "title": "Public UIX Boundary",
+      "path": ".ssot/adr/ADR-1055-public-uix-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "3584bbb85af4f5e3eb40acc2086033076b9b5ec51a93ea3d8e1940a3a2d57025",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1056",
+      "number": 1056,
+      "slug": "admin-api-boundary",
+      "title": "Admin API Boundary",
+      "path": ".ssot/adr/ADR-1056-admin-api-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "43a262584edb314632b89e8d165691e8b5a31e4b920f9caf9c7fc8e4ad1adc62",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1057",
+      "number": 1057,
+      "slug": "public-api-boundary",
+      "title": "Public API Boundary",
+      "path": ".ssot/adr/ADR-1057-public-api-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "de43827b126eedecf86d3005c722d5c6f792dad0aed2bf25eebcd67c9e59f94f",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1058",
+      "number": 1058,
+      "slug": "surface-applicability-and-scope-classification",
+      "title": "Surface Applicability and Scope Classification",
+      "path": ".ssot/adr/ADR-1058-surface-applicability-and-scope-classification.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "94b3ee70d17768f3fdf1e84364e14f4f440f98f04540c21bde3785fd8b9635a7",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1059",
+      "number": 1059,
+      "slug": "public-uix-contract-and-security-model",
+      "title": "Public UIX Contract and Security Model",
+      "path": ".ssot/adr/ADR-1059-public-uix-contract-and-security-model.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "83f9b507f34a924c1a829fecd281397361c475504e28aeead0f8fdcd4d2569c6",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1060",
+      "number": 1060,
+      "slug": "transport-protocol-posture-across-api-and-uix",
+      "title": "Transport Protocol Posture Across API and UIX",
+      "path": ".ssot/adr/ADR-1060-transport-protocol-posture-across-api-and-uix.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "4964e6f23b6aef623d697cd9ec0e07f0786c22cd5db7601e45b0cddf29e885c4",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1061",
+      "number": 1061,
+      "slug": "supply-chain-and-provenance-governance-boundary",
+      "title": "Supply Chain and Provenance Governance Boundary",
+      "path": ".ssot/adr/ADR-1061-supply-chain-and-provenance-governance-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "91429480b342aeb5ab4cd7dd9342029721e945f38df454362bbff80e41a6feb0",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1062",
+      "number": 1062,
+      "slug": "tenant-isolation-and-client-policy-plane-normalization",
+      "title": "Tenant Isolation and Client Policy Plane Normalization",
+      "path": ".ssot/adr/ADR-1062-tenant-isolation-and-client-policy-plane-normalization.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "f798bbb5c2bba53a62b716a4601e5505053a2e00122e5740c80011c96d636c71",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
+    },
+    {
+      "id": "adr:1063",
+      "number": 1063,
+      "slug": "uix-data-schema-and-jose-disclosure-boundary",
+      "title": "UIX Data, Schema, and JOSE Disclosure Boundary",
+      "path": ".ssot/adr/ADR-1063-uix-data-schema-and-jose-disclosure-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "f985d85e7d4b6a8bf0a5ec538efeff804ace9017a1ad133c91ada9ad4938bae0",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": []
     }
   ],
   "specs": [
@@ -50122,6 +51457,176 @@
           "at": "2026-04-30T18:40:51Z"
         }
       ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1074",
+      "number": 1074,
+      "slug": "admin-uix-boundary-requirements",
+      "title": "Admin UIX Boundary Requirements",
+      "path": ".ssot/specs/SPEC-1074-admin-uix-boundary-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "6a15477530ff72cad497db308e1052eec487988e2073c8fa453ce5071c36f8d3",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1075",
+      "number": 1075,
+      "slug": "public-uix-boundary-requirements",
+      "title": "Public UIX Boundary Requirements",
+      "path": ".ssot/specs/SPEC-1075-public-uix-boundary-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "e7587cf0b277e62984502de76cf7cbccd251f876276d8880eeda2ee5f943a2cb",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1076",
+      "number": 1076,
+      "slug": "admin-api-boundary-requirements",
+      "title": "Admin API Boundary Requirements",
+      "path": ".ssot/specs/SPEC-1076-admin-api-boundary-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "53d7d4ca7eda9c8a91c570addbfbbcf77fba928d2d44315276292ef84dc27515",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1077",
+      "number": 1077,
+      "slug": "public-api-boundary-requirements",
+      "title": "Public API Boundary Requirements",
+      "path": ".ssot/specs/SPEC-1077-public-api-boundary-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "39ff7087bf497e82cfc7ce0c8b822bf6c5246028dd025aec3c73ab310e853f48",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1078",
+      "number": 1078,
+      "slug": "surface-applicability-and-scope-classification-requirements",
+      "title": "Surface Applicability and Scope Classification Requirements",
+      "path": ".ssot/specs/SPEC-1078-surface-applicability-and-scope-classification-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "1e9818441e5c57ef371a49d040206ca72a8ffac7bb7ff67f695ef31dc9558b06",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "governance"
+    },
+    {
+      "id": "spc:1079",
+      "number": 1079,
+      "slug": "public-uix-contract-browser-security-and-error-handling",
+      "title": "Public UIX Contract, Browser Security, and Error Handling",
+      "path": ".ssot/specs/SPEC-1079-public-uix-contract-browser-security-and-error-handling.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "6c752e483411380fe49bf60a80646b531b57177a352f4b30f070dd6d49dd2354",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1080",
+      "number": 1080,
+      "slug": "transport-protocol-support-and-applicability-requirements",
+      "title": "Transport Protocol Support and Applicability Requirements",
+      "path": ".ssot/specs/SPEC-1080-transport-protocol-support-and-applicability-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "5bd120b4f0e2d1d3f2283587669dc9837c92514c773adacebc02851f1d8f167a",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1081",
+      "number": 1081,
+      "slug": "supply-chain-provenance-and-release-artifact-requirements",
+      "title": "Supply Chain, Provenance, and Release Artifact Requirements",
+      "path": ".ssot/specs/SPEC-1081-supply-chain-provenance-and-release-artifact-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "da3c9c1f118b735f21f290afd7faad5c87e26ab34923613eceeb3e20173e9128",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "governance"
+    },
+    {
+      "id": "spc:1082",
+      "number": 1082,
+      "slug": "tenant-isolation-and-client-policy-cross-plane-requirements",
+      "title": "Tenant Isolation and Client Policy Cross-Plane Requirements",
+      "path": ".ssot/specs/SPEC-1082-tenant-isolation-and-client-policy-cross-plane-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "296544b1b9804f6e6affe1ad68963b2948ad05cac65713ff9922dc7f2fcf800e",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1083",
+      "number": 1083,
+      "slug": "uix-schema-jose-and-safe-disclosure-requirements",
+      "title": "UIX Schema, JOSE, and Safe Disclosure Requirements",
+      "path": ".ssot/specs/SPEC-1083-uix-schema-jose-and-safe-disclosure-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "98751a307e8afbb7ba1747766ac971541bcfee8bc19d8ecf523fdb9566b480ed",
+      "status": "draft",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [],
       "kind": "normative"
     }
   ],

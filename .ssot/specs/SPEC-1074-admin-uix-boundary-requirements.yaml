@@ -1,0 +1,36 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1074"
+number: 1074
+slug: "admin-uix-boundary-requirements"
+title: "Admin UIX Boundary Requirements"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The admin UIX boundary MUST define the administrator browser-facing surface for `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Requirements
+  
+  The admin UIX boundary MUST define the administrator browser-facing surface for `tigrbl_auth`.
+  
+  Required in-scope capabilities:
+  - authenticated admin entry and session gate
+  - console shell and governed navigation
+  - readiness and configuration views
+  - administrative resource views
+  - policy administration views
+  - safe mutation workflows
+  
+  Required exclusions:
+  - public end-user authentication UX
+  - raw secret disclosure
+  - backend-only implementation internals
+  - unrelated CLI-only behaviors that are not rendered through the admin UIX
+  
+  The admin UIX boundary MUST remain separate from public UIX and MUST consume governed backend contracts rather than inventing an untracked surface.
+spec_kind: "normative"

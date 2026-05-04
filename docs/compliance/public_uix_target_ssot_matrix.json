@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "artifact": "public_uix_target_ssot_matrix",
+  "source_matrix": "docs/compliance/target_cell_ssot_entity_matrix.json",
+  "cell": "public_uix",
+  "authority": [
+    ".ssot/registry.json",
+    ".ssot/adr",
+    ".ssot/specs"
+  ],
+  "rows": [
+    {
+      "target": "RFC 9110 HTTP Semantics",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9112 HTTP/1.1",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9113 HTTP/2",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9114 HTTP/3",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9000 QUIC",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 8446 TLS 1.3",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OpenAPI 3.1",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "JSON Schema 2020-12",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9457 Problem Details",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "JSON-RPC 2.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OpenRPC",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 6749 OAuth 2.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 6750 Bearer Tokens",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9700 OAuth Security BCP",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7009 Token Revocation",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7662 Token Introspection",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 8414 OAuth Metadata",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9207 Issuer Identification",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 8705 OAuth mTLS",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9449 DPoP",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7515 JWS",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7516 JWE",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7517 JWK / JWKS",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7518 JWA",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7519 JWT",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 9068 JWT Access Token Profile",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7591 Dynamic Client Registration",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7592 Client Registration Management",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC Discovery 1.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC Dynamic Client Registration 1.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7643 SCIM Core Schema",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "RFC 7644 SCIM Protocol",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC RP-Initiated Logout 1.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC Front-Channel Logout 1.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "OIDC Back-Channel Logout 1.0",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "NIST SP 800-53",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "NIST SP 800-63",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "NIST SP 800-218 SSDF",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "SLSA",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "in-toto",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Sigstore",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "SPDX",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "CycloneDX",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Admin API Profile Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Deployment Profile Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Tenant Isolation Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Policy Administration Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Key Lifecycle Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Audit Event Schema",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Client Policy Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    },
+    {
+      "target": "Resource Contract Spec",
+      "cell": "public_uix",
+      "entities": [
+        "none"
+      ]
+    }
+  ]
+}
