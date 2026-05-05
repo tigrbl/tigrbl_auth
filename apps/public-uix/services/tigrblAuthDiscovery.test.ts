@@ -10,10 +10,24 @@ import {
   safeProblemMessage,
 } from "./tigrblAuthDiscovery";
 
+const createStorage = () => {
+  const values = new Map<string, string>();
+  return {
+    getItem: vi.fn((key: string) => values.get(key) ?? null),
+    setItem: vi.fn((key: string, value: string) => {
+      values.set(key, value);
+    }),
+    removeItem: vi.fn((key: string) => {
+      values.delete(key);
+    }),
+  };
+};
+
 describe("tigrblAuthDiscovery", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
+    vi.stubGlobal("sessionStorage", createStorage());
   });
 
   it("loads OIDC discovery from the configured public base URL", async () => {
@@ -22,8 +36,8 @@ describe("tigrblAuthDiscovery", () => {
       status: 200,
       json: async () => ({
         issuer: "https://authn.example.com",
-        authorization_endpoint: "https://authn.example.com/authorize",
-        token_endpoint: "https://authn.example.com/token",
+        authorization_endpoint: "http://localhost:3000/authorize",
+        token_endpoint: "http://localhost:3000/token",
       }),
     }));
 
@@ -33,7 +47,7 @@ describe("tigrblAuthDiscovery", () => {
     expect(discovery.issuer).toBe("https://authn.example.com");
     expect(fetch).toHaveBeenCalledWith(
       "http://localhost:3000/.well-known/openid-configuration",
-      { headers: { Accept: "application/json" } },
+      { credentials: "include", headers: { Accept: "application/json" } },
     );
   });
 
@@ -43,9 +57,9 @@ describe("tigrblAuthDiscovery", () => {
       status: 200,
       json: async () => ({
         issuer: "https://authn.example.com",
-        authorization_endpoint: "https://authn.example.com/authorize",
-        token_endpoint: "https://authn.example.com/token",
-        userinfo_endpoint: "https://authn.example.com/userinfo",
+        authorization_endpoint: "http://localhost:3000/authorize",
+        token_endpoint: "http://localhost:3000/token",
+        userinfo_endpoint: "http://localhost:3000/userinfo",
       }),
     }));
 
@@ -53,8 +67,8 @@ describe("tigrblAuthDiscovery", () => {
 
     expect(config.clientId).toBe("public-uix");
     expect(config.authority).toBe("https://authn.example.com");
-    expect(config.authorizationEndpoint).toBe("https://authn.example.com/authorize");
-    expect(config.tokenEndpoint).toBe("https://authn.example.com/token");
+    expect(config.authorizationEndpoint).toBe("http://localhost:3000/authorize");
+    expect(config.tokenEndpoint).toBe("http://localhost:3000/token");
     expect(config.redirectUri).toBe("http://localhost:3000/#/callback");
   });
 
@@ -70,7 +84,7 @@ describe("tigrblAuthDiscovery", () => {
         status: 200,
         json: async () => ({
           issuer: "https://authn.example.com",
-          registration_endpoint: "https://authn.example.com/register",
+          registration_endpoint: "http://localhost:3000/register",
         }),
       })
       .mockResolvedValueOnce({
@@ -83,8 +97,17 @@ describe("tigrblAuthDiscovery", () => {
     await expect(postDiscoveredJson("registration_endpoint", "registration", { email: "user@example.com" })).resolves.toEqual({ id: "user-1" });
 
     expect(fetchMock).toHaveBeenLastCalledWith(
-      "https://authn.example.com/register",
-      expect.objectContaining({ method: "POST" }),
+      "http://localhost:3000/register",
+      expect.objectContaining({
+        method: "POST",
+        credentials: "include",
+        headers: expect.objectContaining({
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": expect.any(String),
+          "X-Requested-With": "XMLHttpRequest",
+        }),
+      }),
     );
   });
 
@@ -106,18 +129,79 @@ describe("tigrblAuthDiscovery", () => {
     );
   });
 
+  it("reuses a session CSRF token for discovered public POST actions", async () => {
+    const storage = createStorage();
+    vi.stubGlobal("sessionStorage", storage);
+    storage.setItem("tigrbl_auth_public_csrf", "csrf-fixed");
+
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({
+          issuer: "https://authn.example.com",
+          registration_endpoint: "http://localhost:3000/register",
+        }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({ id: "user-1" }),
+      });
+    vi.stubGlobal("fetch", fetchMock);
+
+    await postDiscoveredJson("registration_endpoint", "registration", { email: "user@example.com" });
+
+    expect(fetchMock).toHaveBeenLastCalledWith(
+      "http://localhost:3000/register",
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          "X-CSRF-Token": "csrf-fixed",
+        }),
+      }),
+    );
+  });
+
+  it("rejects cross-origin discovered browser POST targets", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        issuer: "https://authn.example.com",
+        registration_endpoint: "https://admin.example.com/register",
+      }),
+    }));
+
+    await expect(postDiscoveredJson("registration_endpoint", "registration", {})).rejects.toThrow(
+      "registration is not available from the discovered tigrbl_auth endpoints.",
+    );
+  });
+
   it("builds a discovered logout URL when end-session is available", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
       ok: true,
       status: 200,
       json: async () => ({
         issuer: "https://authn.example.com",
-        end_session_endpoint: "https://authn.example.com/logout",
+        end_session_endpoint: "http://localhost:3000/logout",
       }),
     }));
 
     await expect(getDiscoveredLogoutUrl()).resolves.toBe(
-      "https://authn.example.com/logout?post_logout_redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F%23%2Flogin",
+      "http://localhost:3000/logout?post_logout_redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F%23%2Flogin",
     );
+  });
+
+  it("rejects discovered logout endpoints outside the governed public origin", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        issuer: "https://authn.example.com",
+        end_session_endpoint: "https://admin.example.com/logout",
+      }),
+    }));
+
+    await expect(getDiscoveredLogoutUrl()).resolves.toBeNull();
   });
 });

@@ -25,7 +25,20 @@ def test_certification_gap_inventory_reflects_live_registry(tmp_path: Path) -> N
     current_feature_ids = {
         row["id"] for row in inventory["current_gaps"]["current_partial_or_absent_features"]
     }
-    assert current_feature_ids == set()
+    expected_current_feature_ids = {
+        row["id"]
+        for row in registry["features"]
+        if row["implementation_status"] != "implemented"
+        and row.get("plan", {}).get("horizon") != "out_of_bounds"
+    }
+    out_of_bounds_feature_ids = {
+        row["id"]
+        for row in registry["features"]
+        if row.get("plan", {}).get("horizon") == "out_of_bounds"
+    }
+
+    assert current_feature_ids == expected_current_feature_ids
+    assert current_feature_ids.isdisjoint(out_of_bounds_feature_ids)
 
     outputs = write_inventory(inventory, report_dir=tmp_path)
     assert outputs["json"].endswith("certification-gap-inventory.json")

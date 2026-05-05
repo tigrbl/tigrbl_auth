@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "registry_path": ".ssot/registry.json",
+  "release": {
+    "release_id": "rel:phase2-public-uix-browser-security-20260505",
+    "passed": true,
+    "failures": [],
+    "warnings": [],
+    "claims": [
+      {
+        "claim_id": "clm:phase2-public-uix-flows",
+        "passed": true,
+        "failures": [],
+        "checks": {
+          "implemented_features": true,
+          "tests_passing": true,
+          "evidence_passing": true,
+          "no_failed_or_stale_evidence": true,
+          "evidence_tier_alignment": true,
+          "feature_target_alignment": true,
+          "required_features_passing": true
+        },
+        "recommended_status": "certified"
+      },
+      {
+        "claim_id": "clm:phase2-public-uix-browser-security",
+        "passed": true,
+        "failures": [],
+        "checks": {
+          "implemented_features": true,
+          "tests_passing": true,
+          "evidence_passing": true,
+          "no_failed_or_stale_evidence": true,
+          "evidence_tier_alignment": true,
+          "feature_target_alignment": true,
+          "required_features_passing": true
+        },
+        "recommended_status": "certified"
+      },
+      {
+        "claim_id": "clm:phase2-public-uix-contract-and-errors",
+        "passed": true,
+        "failures": [],
+        "checks": {
+          "implemented_features": true,
+          "tests_passing": true,
+          "evidence_passing": true,
+          "no_failed_or_stale_evidence": true,
+          "evidence_tier_alignment": true,
+          "feature_target_alignment": true,
+          "required_features_passing": true
+        },
+        "recommended_status": "certified"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "evd:phase2-public-surface-pytest",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "evidence_id": "evd:phase2-public-uix-build",
+        "passed": true,
+        "failures": []
+      },
+      {
+        "evidence_id": "evd:phase2-public-uix-vitest",
+        "passed": true,
+        "failures": []
+      }
+    ],
+    "profiles": [],
+    "boundary": {
+      "id": "bnd:phase2-public-uix-browser-security-20260505",
+      "profile_ids": [],
+      "resolved_feature_ids": [
+        "feat:uix-public-shell",
+        "feat:uix-public-auth-session",
+        "feat:uix-public-login-view",
+        "feat:uix-public-logout-view",
+        "feat:uix-public-registration-view",
+        "feat:uix-public-recovery-view",
+        "feat:uix-public-session-continuity",
+        "feat:uix-public-openapi-contract-consumption",
+        "feat:uix-public-browser-token-handling",
+        "feat:uix-public-problem-details-rendering",
+        "feat:uix-public-safe-error-disclosure",
+        "feat:uix-public-consent-view",
+        "feat:uix-public-cookie-session-model",
+        "feat:uix-public-csrf-protection",
+        "feat:uix-public-origin-and-redirect-constraints"
+      ]
+    },
+    "summary": {
+      "boundary_id": "bnd:phase2-public-uix-browser-security-20260505",
+      "boundary_feature_count": 15,
+      "boundary_profile_count": 0,
+      "release_claim_count": 3,
+      "release_evidence_count": 3
+    }
+  },
+  "boundary_scope": {
+    "boundary_id": "bnd:phase2-public-uix-browser-security-20260505",
+    "profile_ids": [],
+    "feature_ids": []
+  },
+  "summary": {
+    "counts": {
+      "features": 522,
+      "profiles": 6,
+      "tests": 230,
+      "claims": 447,
+      "evidence": 77,
+      "issues": 12,
+      "risks": 1,
+      "boundaries": 10,
+      "releases": 3,
+      "adrs": 78,
+      "specs": 99
+    },
+    "profile_status": {
+      "passing": 5,
+      "failing": 0,
+      "draft": 1
+    }
+  }
+}

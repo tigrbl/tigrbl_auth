@@ -1,4 +1,9 @@
 import type { OidcConfig, OidcDiscoveryMetadata } from "../types";
+import {
+  buildBrowserJsonRequestInit,
+  getOrCreateCsrfToken,
+  resolveTrustedPublicEndpoint,
+} from "./publicUxPolicy";
 
 const trimTrailingSlash = (value: string): string => value.replace(/\/+$/, "");
 const MAX_SAFE_ERROR_LENGTH = 180;
@@ -15,6 +20,7 @@ export const getDiscoveryUrl = (): string => {
 
 export async function loadTigrblAuthDiscovery(): Promise<OidcDiscoveryMetadata> {
   const response = await fetch(getDiscoveryUrl(), {
+    credentials: "include",
     headers: { Accept: "application/json" },
   });
   if (!response.ok) {
@@ -25,15 +31,28 @@ export async function loadTigrblAuthDiscovery(): Promise<OidcDiscoveryMetadata> 
 
 export async function buildTigrblAuthOidcConfig(clientId: string): Promise<OidcConfig> {
   const metadata = await loadTigrblAuthDiscovery();
-  const authorizationEndpoint = requireDiscoveredEndpoint(metadata, "authorization_endpoint", "login");
-  const tokenEndpoint = requireDiscoveredEndpoint(metadata, "token_endpoint", "callback");
+  const publicBaseUrl = getPublicBaseUrl();
+  const authorizationEndpoint = resolveTrustedPublicEndpoint(
+    requireDiscoveredEndpoint(metadata, "authorization_endpoint", "login"),
+    "login",
+    publicBaseUrl,
+  );
+  const tokenEndpoint = resolveTrustedPublicEndpoint(
+    requireDiscoveredEndpoint(metadata, "token_endpoint", "callback"),
+    "callback",
+    publicBaseUrl,
+  );
   return {
     clientId,
-    authority: trimTrailingSlash(metadata.issuer || getPublicBaseUrl()),
+    authority: trimTrailingSlash(metadata.issuer || publicBaseUrl),
     authorizationEndpoint,
     tokenEndpoint,
-    userinfoEndpoint: metadata.userinfo_endpoint,
-    endSessionEndpoint: metadata.end_session_endpoint,
+    userinfoEndpoint: metadata.userinfo_endpoint
+      ? resolveTrustedPublicEndpoint(metadata.userinfo_endpoint, "userinfo", publicBaseUrl)
+      : undefined,
+    endSessionEndpoint: metadata.end_session_endpoint
+      ? resolveTrustedPublicEndpoint(metadata.end_session_endpoint, "logout", publicBaseUrl)
+      : undefined,
     redirectUri: `${typeof window === "undefined" ? "http://localhost:3000" : window.location.origin}/#/callback`,
     scope: "openid profile email",
   };
@@ -88,15 +107,15 @@ export async function postDiscoveredJson<T = unknown>(
 ): Promise<T | null> {
   try {
     const discovery = await loadTigrblAuthDiscovery();
-    const endpoint = requireDiscoveredEndpoint(discovery, key, action);
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const endpoint = resolveTrustedPublicEndpoint(
+      requireDiscoveredEndpoint(discovery, key, action),
+      action,
+      getPublicBaseUrl(),
+    );
+    const response = await fetch(
+      endpoint,
+      buildBrowserJsonRequestInit(body, getOrCreateCsrfToken()),
+    );
     if (!response.ok) {
       throw new Error(await readProblem(response));
     }
@@ -115,7 +134,11 @@ export async function getDiscoveredLogoutUrl(): Promise<string | null> {
     if (!hasEndpoint(discovery, "end_session_endpoint")) {
       return null;
     }
-    const endpoint = requireDiscoveredEndpoint(discovery, "end_session_endpoint", "logout");
+    const endpoint = resolveTrustedPublicEndpoint(
+      requireDiscoveredEndpoint(discovery, "end_session_endpoint", "logout"),
+      "logout",
+      getPublicBaseUrl(),
+    );
     const redirect = `${typeof window === "undefined" ? "http://localhost:3000" : window.location.origin}/#/login`;
     const url = new URL(endpoint, getPublicBaseUrl());
     url.searchParams.set("post_logout_redirect_uri", redirect);

@@ -7,6 +7,7 @@ export const usePlatform = () => {
   const [platform, setPlatform] = useState<PlatformConfig>(() => {
     const config: any = {};
     const keys = Object.keys(DEFAULT_PLATFORM_CONFIG) as (keyof PlatformConfig)[];
+    const storage = typeof localStorage === 'undefined' ? null : localStorage;
 
     const parseStoredValue = (key: keyof PlatformConfig, value: string | null) => {
       if (value === null) return undefined;
@@ -18,7 +19,7 @@ export const usePlatform = () => {
 
     keys.forEach(key => {
       // Priority: LocalStorage (Runtime Overrides) > defaults.ts (Env or Static)
-      const storedValue = parseStoredValue(key, localStorage.getItem(`tigrbl_auth_platform_${key}`));
+      const storedValue = parseStoredValue(key, storage?.getItem(`tigrbl_auth_platform_${key}`) ?? null);
       config[key] = storedValue !== undefined ? storedValue : DEFAULT_PLATFORM_CONFIG[key];
     });
 
@@ -104,7 +105,9 @@ export const usePlatform = () => {
       Object.entries(updates).forEach(([key, val]) => {
         if (val !== undefined) {
           const serialized = typeof val === 'boolean' ? String(val) : String(val);
-          localStorage.setItem(`tigrbl_auth_platform_${key}`, serialized);
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(`tigrbl_auth_platform_${key}`, serialized);
+          }
         }
       });
       return next;

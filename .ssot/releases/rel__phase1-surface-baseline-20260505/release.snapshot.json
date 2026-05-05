@@ -1,0 +1,1283 @@
+{
+  "schema_version": 1,
+  "kind": "release_snapshot",
+  "generated_at": "2026-05-05T22:05:15Z",
+  "registry_path": ".ssot/registry.json",
+  "registry_sha256": "deb8c41851e6a417296572cf11da06036a5bc16149fb7bc295323e19032f4d3d",
+  "release": {
+    "id": "rel:phase1-surface-baseline-20260505",
+    "version": "0.3.4-phase1-surface-baseline.20260505",
+    "status": "promoted",
+    "boundary_id": "bnd:phase1-surface-baseline-20260505",
+    "claim_ids": [
+      "clm:phase1-uix-admin-boundary",
+      "clm:phase1-uix-public-boundary",
+      "clm:phase1-surface-applicability-classification",
+      "clm:phase1-admin-api-boundary",
+      "clm:phase1-public-api-boundary"
+    ],
+    "evidence_ids": [
+      "evd:phase1-uix-admin-boundary-vitest",
+      "evd:phase1-uix-public-boundary-vitest",
+      "evd:phase1-surface-baseline-pytest"
+    ]
+  },
+  "boundary": {
+    "id": "bnd:phase1-surface-baseline-20260505",
+    "title": "Phase 1 surface boundary and applicability baseline",
+    "status": "frozen",
+    "frozen": true,
+    "feature_ids": [
+      "feat:uix-admin-boundary",
+      "feat:uix-public-boundary",
+      "feat:surface-applicability-classification",
+      "feat:api-admin-boundary",
+      "feat:api-admin-contract-publication-boundary",
+      "feat:api-admin-authz-gate",
+      "feat:api-admin-resource-management-boundary",
+      "feat:api-admin-policy-control-plane-boundary",
+      "feat:api-admin-public-surface-exclusion",
+      "feat:api-public-boundary",
+      "feat:api-public-oauth-boundary",
+      "feat:api-public-oidc-boundary",
+      "feat:api-public-discovery-boundary",
+      "feat:api-public-registration-boundary",
+      "feat:api-public-logout-boundary",
+      "feat:api-public-admin-surface-exclusion"
+    ],
+    "profile_ids": []
+  },
+  "features": [
+    {
+      "id": "feat:uix-admin-boundary",
+      "title": "Admin UIX boundary",
+      "description": "Boundary feature: define and govern the administrator UIX surface. Current implementation status: partial. Governed by SPEC-1074.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1074"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-frontend-adapter",
+        "clm:phase1-uix-admin-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-public-boundary",
+      "title": "Public UIX boundary",
+      "description": "Boundary feature: define and govern the public end-user UIX surface. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1075"
+      ],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter",
+        "clm:phase1-uix-public-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:surface-applicability-classification",
+      "title": "Surface applicability and scope classification",
+      "description": "Governed feature for authoritative applicability and scope classification across admin API, public API, admin UIX, public UIX, runtime, operator, and release-facing surfaces. Current implementation status: absent. Governed by SPEC-1078.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1078"
+      ],
+      "claim_ids": [
+        "clm:phase1-surface-applicability-classification"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-certification-gap-inventory-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-boundary",
+      "title": "Admin API boundary",
+      "description": "Boundary feature: define and govern the authenticated administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:runtime-profile-contract-and-surface-derivation",
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-contract-publication-boundary",
+      "title": "Admin API contract publication boundary",
+      "description": "Admin API boundary and contract feature: define and govern admin contract publication boundaries for the authenticated administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:secure-default-admin-gate-runtime-contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-authz-gate",
+      "title": "Admin API authorization gate",
+      "description": "Admin API boundary and contract feature: define and govern administrator authorization gate behavior for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-resource-management-boundary",
+      "title": "Admin API resource management boundary",
+      "description": "Admin API boundary and contract feature: define and govern administrative resource management boundaries for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-policy-control-plane-boundary",
+      "title": "Admin API policy control-plane boundary",
+      "description": "Admin API boundary and contract feature: define and govern administrative policy control-plane boundaries for the authenticated control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-admin-public-surface-exclusion",
+      "title": "Admin API public surface exclusion",
+      "description": "Admin API boundary and contract feature: define and govern exclusion of public API concerns from the administrator control-plane API surface. Current implementation status: absent. Governed by SPEC-1076.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1076"
+      ],
+      "claim_ids": [
+        "clm:phase1-admin-api-boundary"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:tests-unit-test-openapi-contract-validity-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-boundary",
+      "title": "Public API boundary",
+      "description": "Boundary feature: define and govern the public OAuth, OIDC, and discovery API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:tests-unit-test-public-route-contracts-py",
+        "tst:tests-unit-test-profile-discovery-runtime-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-oauth-boundary",
+      "title": "Public API OAuth boundary",
+      "description": "Public API boundary and contract feature: define and govern OAuth route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:tests-unit-test-public-route-contracts-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-oidc-boundary",
+      "title": "Public API OIDC boundary",
+      "description": "Public API boundary and contract feature: define and govern OIDC route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:tests-unit-test-profile-discovery-runtime-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-discovery-boundary",
+      "title": "Public API discovery boundary",
+      "description": "Public API boundary and contract feature: define and govern discovery and metadata route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-profile-discovery-runtime-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-registration-boundary",
+      "title": "Public API registration boundary",
+      "description": "Public API boundary and contract feature: define and govern public registration route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-public-route-contracts-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-logout-boundary",
+      "title": "Public API logout boundary",
+      "description": "Public API boundary and contract feature: define and govern public logout route boundaries for the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-public-route-contracts-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:api-public-admin-surface-exclusion",
+      "title": "Public API admin surface exclusion",
+      "description": "Public API boundary and contract feature: define and govern exclusion of admin control-plane concerns from the public API surface. Current implementation status: absent. Governed by SPEC-1077.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1077"
+      ],
+      "claim_ids": [
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:secure-default-admin-gate-runtime-contract"
+      ],
+      "requires": []
+    }
+  ],
+  "profiles": [],
+  "profile_evaluations": [],
+  "claims": [
+    {
+      "id": "clm:phase1-uix-admin-boundary",
+      "title": "Phase 1 admin UIX boundary expected behavior",
+      "status": "promoted",
+      "tier": "T1",
+      "kind": "uix-frontend-adapter",
+      "description": "Phase 1 closure claim for the governed admin UIX boundary surface.",
+      "feature_ids": [
+        "feat:uix-admin-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ],
+      "evidence_ids": [
+        "evd:phase1-uix-admin-boundary-vitest"
+      ]
+    },
+    {
+      "id": "clm:phase1-uix-public-boundary",
+      "title": "Phase 1 public UIX boundary expected behavior",
+      "status": "promoted",
+      "tier": "T1",
+      "kind": "uix-frontend-adapter",
+      "description": "Phase 1 closure claim for the governed public UIX boundary surface.",
+      "feature_ids": [
+        "feat:uix-public-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
+      "evidence_ids": [
+        "evd:phase1-uix-public-boundary-vitest"
+      ]
+    },
+    {
+      "id": "clm:phase1-surface-applicability-classification",
+      "title": "Phase 1 surface applicability classification",
+      "status": "promoted",
+      "tier": "T1",
+      "kind": "governance-classification",
+      "description": "Phase 1 closure claim for authoritative in-bounds versus out-of-bounds surface applicability classification.",
+      "feature_ids": [
+        "feat:surface-applicability-classification"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-certification-gap-inventory-py"
+      ],
+      "evidence_ids": [
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "clm:phase1-admin-api-boundary",
+      "title": "Phase 1 admin API boundary and exclusion behavior",
+      "status": "promoted",
+      "tier": "T1",
+      "kind": "api-boundary",
+      "description": "Phase 1 closure claim for admin API boundary scope, contract publication, authorization gate, resource management, policy control-plane scope, and public-surface exclusion behavior.",
+      "feature_ids": [
+        "feat:api-admin-boundary",
+        "feat:api-admin-contract-publication-boundary",
+        "feat:api-admin-authz-gate",
+        "feat:api-admin-resource-management-boundary",
+        "feat:api-admin-policy-control-plane-boundary",
+        "feat:api-admin-public-surface-exclusion"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:runtime-profile-contract-and-surface-derivation",
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "evidence_ids": [
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "clm:phase1-public-api-boundary",
+      "title": "Phase 1 public API boundary and exclusion behavior",
+      "status": "promoted",
+      "tier": "T1",
+      "kind": "api-boundary",
+      "description": "Phase 1 closure claim for public API boundary scope across OAuth, OIDC, discovery, registration, logout, and admin-surface exclusion behavior.",
+      "feature_ids": [
+        "feat:api-public-boundary",
+        "feat:api-public-oauth-boundary",
+        "feat:api-public-oidc-boundary",
+        "feat:api-public-discovery-boundary",
+        "feat:api-public-registration-boundary",
+        "feat:api-public-logout-boundary",
+        "feat:api-public-admin-surface-exclusion"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:tests-unit-test-public-route-contracts-py",
+        "tst:tests-unit-test-profile-discovery-runtime-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ],
+      "evidence_ids": [
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "tst:runtime-profile-contract-and-surface-derivation",
+      "title": "Runtime profile outputs drive contracts and surfaces",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_runtime_profile_configuration.py",
+      "feature_ids": [
+        "feat:runtime-profile-configuration-contract",
+        "feat:profile-baseline-development",
+        "feat:api-admin-boundary"
+      ],
+      "claim_ids": [
+        "clm:runtime-profile-configuration-contract",
+        "clm:profile-baseline-development",
+        "clm:phase1-admin-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-cli-operator-surface",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:secure-default-admin-gate-runtime-contract",
+      "title": "Secure default admin gate runtime and contract behavior",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_secure_default_admin_gate.py",
+      "feature_ids": [
+        "feat:secure-default-baseline-admin-gate",
+        "feat:api-admin-boundary",
+        "feat:api-admin-contract-publication-boundary",
+        "feat:api-admin-authz-gate",
+        "feat:api-admin-public-surface-exclusion",
+        "feat:api-public-admin-surface-exclusion"
+      ],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate",
+        "clm:phase1-admin-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:secure-default-admin-gate-runtime-contract-tests",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-integration-test-profile-surface-and-contract-alignment-py",
+      "title": "test profile surface and contract alignment",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/integration/test_profile_surface_and_contract_alignment.py",
+      "feature_ids": [
+        "feat:cli-flag-runtime-style",
+        "feat:cli-flag-surface-set",
+        "feat:cli-verb-spec-diff",
+        "feat:cli-verb-spec-generate",
+        "feat:cli-verb-spec-report",
+        "feat:cli-verb-spec-validate",
+        "feat:flag-active-extensions",
+        "feat:flag-active-protocol-slices",
+        "feat:flag-active-surface-sets",
+        "feat:flag-enable-rfc6750-form",
+        "feat:flag-enable-rfc6750-query",
+        "feat:flag-oauth21-alignment-mode",
+        "feat:flag-rfc8707-enabled",
+        "feat:flag-runtime-style",
+        "feat:flag-surface-admin-enabled",
+        "feat:flag-surface-diagnostics-enabled",
+        "feat:flag-surface-operator-enabled",
+        "feat:flag-surface-plugin-mode",
+        "feat:flag-surface-public-enabled",
+        "feat:flag-surface-rpc-enabled",
+        "feat:profile-baseline",
+        "feat:profile-camara-security-interoperability",
+        "feat:profile-confidential-spa-pattern",
+        "feat:profile-fapi2-message-signing",
+        "feat:profile-fapi2-security",
+        "feat:profile-fast-udap-security",
+        "feat:profile-fdx-csdf-security-model",
+        "feat:profile-gnap-core-rs",
+        "feat:profile-hardening",
+        "feat:profile-ihe-iua",
+        "feat:profile-nist-sp-800-63b-4",
+        "feat:profile-nist-sp-800-63c-4",
+        "feat:profile-oauth-2-1",
+        "feat:profile-peer-claim",
+        "feat:profile-production",
+        "feat:profile-smart-app-launch",
+        "feat:profile-smart-backend-services",
+        "feat:profile-webauthn-passkey-oauth-patterns",
+        "feat:route-authorize",
+        "feat:route-device-authorization",
+        "feat:route-login",
+        "feat:route-par",
+        "feat:route-register",
+        "feat:route-register-client-id",
+        "feat:route-token",
+        "feat:route-token-exchange",
+        "feat:route-well-known-jwks-json",
+        "feat:route-well-known-oauth-authorization-server",
+        "feat:route-well-known-oauth-protected-resource",
+        "feat:route-well-known-openid-configuration",
+        "feat:slice-device",
+        "feat:slice-dpop",
+        "feat:slice-jar",
+        "feat:slice-mtls",
+        "feat:slice-par",
+        "feat:slice-rar",
+        "feat:slice-token-exchange",
+        "feat:target-asgi-3-application-package",
+        "feat:target-camara-security-and-interoperability-profile",
+        "feat:target-confidential-spa-profile-pattern",
+        "feat:target-fapi-2-0-message-signing-profile",
+        "feat:target-fast-udap-security-profile",
+        "feat:target-fdx-csdf-security-model-and-profile",
+        "feat:target-gnap-core-resource-server-profile",
+        "feat:target-ihe-iua-profile",
+        "feat:target-nist-sp-800-63b-4-profile",
+        "feat:target-nist-sp-800-63c-4-profile",
+        "feat:target-oauth-2-1-alignment-profile",
+        "feat:target-oidc-discovery-1-0",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:target-rfc-6749",
+        "feat:target-rfc-7591",
+        "feat:target-rfc-7592",
+        "feat:target-rfc-8615",
+        "feat:target-rfc-8628",
+        "feat:target-rfc-8693",
+        "feat:target-rfc-8705",
+        "feat:target-rfc-8707",
+        "feat:target-rfc-9068",
+        "feat:target-rfc-9101",
+        "feat:target-rfc-9126",
+        "feat:target-rfc-9207",
+        "feat:target-rfc-9396",
+        "feat:target-rfc-9449",
+        "feat:target-rfc-9700",
+        "feat:target-rfc-9728",
+        "feat:target-smart-app-launch-profile",
+        "feat:target-smart-backend-services-profile",
+        "feat:target-webauthn-and-passkey-bound-oauth-patterns",
+        "feat:api-admin-boundary",
+        "feat:api-admin-resource-management-boundary",
+        "feat:api-admin-policy-control-plane-boundary",
+        "feat:api-public-boundary",
+        "feat:api-public-discovery-boundary",
+        "feat:api-public-registration-boundary",
+        "feat:api-public-logout-boundary"
+      ],
+      "claim_ids": [
+        "clm:cli-flag-runtime-style",
+        "clm:cli-flag-surface-set",
+        "clm:cli-verb-spec-diff",
+        "clm:cli-verb-spec-generate",
+        "clm:cli-verb-spec-report",
+        "clm:cli-verb-spec-validate",
+        "clm:fapi2-security-issuer-identification",
+        "clm:fapi2-security-jar-required",
+        "clm:fapi2-security-par-required",
+        "clm:fapi2-security-rar-required",
+        "clm:fapi2-security-security-bcp",
+        "clm:fapi2-security-sender-constrained-tokens",
+        "clm:flag-active-extensions",
+        "clm:flag-active-protocol-slices",
+        "clm:flag-active-surface-sets",
+        "clm:flag-enable-rfc6750-form",
+        "clm:flag-enable-rfc6750-query",
+        "clm:flag-oauth21-alignment-mode",
+        "clm:flag-rfc8707-enabled",
+        "clm:flag-runtime-style",
+        "clm:flag-surface-admin-enabled",
+        "clm:flag-surface-diagnostics-enabled",
+        "clm:flag-surface-operator-enabled",
+        "clm:flag-surface-plugin-mode",
+        "clm:flag-surface-public-enabled",
+        "clm:flag-surface-rpc-enabled",
+        "clm:profile-baseline",
+        "clm:profile-camara-security-interoperability",
+        "clm:profile-confidential-spa-pattern",
+        "clm:profile-fapi2-message-signing",
+        "clm:profile-fapi2-security",
+        "clm:profile-fast-udap-security",
+        "clm:profile-fdx-csdf-security-model",
+        "clm:profile-gnap-core-rs",
+        "clm:profile-hardening",
+        "clm:profile-ihe-iua",
+        "clm:profile-nist-sp-800-63b-4",
+        "clm:profile-nist-sp-800-63c-4",
+        "clm:profile-oauth-2-1",
+        "clm:profile-peer-claim",
+        "clm:profile-production",
+        "clm:profile-smart-app-launch",
+        "clm:profile-smart-backend-services",
+        "clm:profile-webauthn-passkey-oauth-patterns",
+        "clm:route-authorize",
+        "clm:route-device-authorization",
+        "clm:route-login",
+        "clm:route-par",
+        "clm:route-register",
+        "clm:route-register-client-id",
+        "clm:route-token",
+        "clm:route-token-exchange",
+        "clm:route-well-known-jwks-json",
+        "clm:route-well-known-oauth-authorization-server",
+        "clm:route-well-known-oauth-protected-resource",
+        "clm:route-well-known-openid-configuration",
+        "clm:slice-device",
+        "clm:slice-dpop",
+        "clm:slice-jar",
+        "clm:slice-mtls",
+        "clm:slice-par",
+        "clm:slice-rar",
+        "clm:slice-token-exchange",
+        "clm:target-asgi-3-application-package",
+        "clm:target-camara-security-and-interoperability-profile",
+        "clm:target-confidential-spa-profile-pattern",
+        "clm:target-fapi-2-0-message-signing-profile",
+        "clm:target-fast-udap-security-profile",
+        "clm:target-fdx-csdf-security-model-and-profile",
+        "clm:target-gnap-core-resource-server-profile",
+        "clm:target-ihe-iua-profile",
+        "clm:target-nist-sp-800-63b-4-profile",
+        "clm:target-nist-sp-800-63c-4-profile",
+        "clm:target-oauth-2-1-alignment-profile",
+        "clm:target-oidc-discovery-1-0",
+        "clm:target-openapi-3-1-3-2-compatible-public-contract",
+        "clm:target-rfc-6749",
+        "clm:target-rfc-7591",
+        "clm:target-rfc-7592",
+        "clm:target-rfc-8615",
+        "clm:target-rfc-8628",
+        "clm:target-rfc-8693",
+        "clm:target-rfc-8705",
+        "clm:target-rfc-8707",
+        "clm:target-rfc-9068",
+        "clm:target-rfc-9101",
+        "clm:target-rfc-9126",
+        "clm:target-rfc-9207",
+        "clm:target-rfc-9396",
+        "clm:target-rfc-9449",
+        "clm:target-rfc-9700",
+        "clm:target-rfc-9728",
+        "clm:target-smart-app-launch-profile",
+        "clm:target-smart-backend-services-profile",
+        "clm:target-webauthn-and-passkey-bound-oauth-patterns",
+        "clm:phase1-admin-api-boundary",
+        "clm:phase1-public-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-asgi-application",
+        "evd:compliance-evidence-tier3-assertion-framework",
+        "evd:compliance-evidence-tier3-bearer",
+        "evd:compliance-evidence-tier3-cli-operator-surface",
+        "evd:compliance-evidence-tier3-client-registration",
+        "evd:compliance-evidence-tier3-client-registration-management",
+        "evd:compliance-evidence-tier3-contracts-openapi",
+        "evd:compliance-evidence-tier3-contracts-openrpc",
+        "evd:compliance-evidence-tier3-cookies",
+        "evd:compliance-evidence-tier3-device-flow",
+        "evd:compliance-evidence-tier3-discovery",
+        "evd:compliance-evidence-tier3-dpop",
+        "evd:compliance-evidence-tier3-introspection",
+        "evd:compliance-evidence-tier3-issuer-identification",
+        "evd:compliance-evidence-tier3-jar",
+        "evd:compliance-evidence-tier3-jose",
+        "evd:compliance-evidence-tier3-jwe",
+        "evd:compliance-evidence-tier3-jwks",
+        "evd:compliance-evidence-tier3-jwt",
+        "evd:compliance-evidence-tier3-jwt-access-token-profile",
+        "evd:compliance-evidence-tier3-jwt-client-auth",
+        "evd:compliance-evidence-tier3-mtls",
+        "evd:compliance-evidence-tier3-native-apps",
+        "evd:compliance-evidence-tier3-oauth2-core",
+        "evd:compliance-evidence-tier3-oidc-backchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-core",
+        "evd:compliance-evidence-tier3-oidc-frontchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-rp-initiated-logout",
+        "evd:compliance-evidence-tier3-oidc-session-management",
+        "evd:compliance-evidence-tier3-oidc-userinfo",
+        "evd:compliance-evidence-tier3-par",
+        "evd:compliance-evidence-tier3-pkce",
+        "evd:compliance-evidence-tier3-protected-resource-metadata",
+        "evd:compliance-evidence-tier3-rar",
+        "evd:compliance-evidence-tier3-resource-indicators",
+        "evd:compliance-evidence-tier3-revocation",
+        "evd:compliance-evidence-tier3-security-bcp",
+        "evd:compliance-evidence-tier3-token-exchange",
+        "evd:compliance-evidence-tier3-well-known",
+        "evd:docs-compliance-certification-boundary-md",
+        "evd:docs-compliance-target-reality-matrix-md",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-certification-gap-inventory-py",
+      "title": "Certification gap inventory regression",
+      "status": "passing",
+      "kind": "unit",
+      "path": "tests/unit/test_certification_gap_inventory.py",
+      "feature_ids": [
+        "feat:certification-gap-inventory",
+        "feat:surface-applicability-classification"
+      ],
+      "claim_ids": [
+        "clm:certification-gap-inventory-current",
+        "clm:phase1-surface-applicability-classification"
+      ],
+      "evidence_ids": [
+        "evd:ssot-reports-certification-gap-inventory-json",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-openapi-contract-validity-py",
+      "title": "openapi contract validity",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_openapi_contract_validity.py",
+      "feature_ids": [
+        "feat:openapi-contract-always-valid",
+        "feat:openapi-jsonschema-dialect-default-or-omitted",
+        "feat:target-openapi-3-1-3-2-compatible-public-contract",
+        "feat:api-admin-public-surface-exclusion",
+        "feat:api-public-boundary",
+        "feat:api-public-oauth-boundary",
+        "feat:api-public-oidc-boundary",
+        "feat:api-public-admin-surface-exclusion"
+      ],
+      "claim_ids": [
+        "clm:target-openapi-3-1-3-2-compatible-public-contract",
+        "clm:phase1-public-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openapi",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-openrpc-contract-validity-py",
+      "title": "openrpc contract validity",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_openrpc_contract_validity.py",
+      "feature_ids": [
+        "feat:openrpc-contract-always-valid",
+        "feat:target-openrpc-1-4-x-admin-control-plane-contract",
+        "feat:api-admin-boundary",
+        "feat:api-admin-contract-publication-boundary",
+        "feat:api-admin-resource-management-boundary",
+        "feat:api-admin-policy-control-plane-boundary"
+      ],
+      "claim_ids": [
+        "clm:target-openrpc-1-4-x-admin-control-plane-contract",
+        "clm:phase1-admin-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-contracts-openrpc",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-profile-discovery-runtime-py",
+      "title": "test profile discovery runtime",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_profile_discovery_runtime.py",
+      "feature_ids": [
+        "feat:flag-enable-rfc6750-form",
+        "feat:flag-enable-rfc6750-query",
+        "feat:profile-baseline",
+        "feat:profile-fapi2-security",
+        "feat:profile-hardening",
+        "feat:profile-peer-claim",
+        "feat:profile-production",
+        "feat:route-authorize",
+        "feat:route-par",
+        "feat:route-token",
+        "feat:route-well-known-openid-configuration",
+        "feat:target-rfc-9207",
+        "feat:target-rfc-9700",
+        "feat:api-public-boundary",
+        "feat:api-public-oidc-boundary",
+        "feat:api-public-discovery-boundary"
+      ],
+      "claim_ids": [
+        "clm:fapi2-security-issuer-identification",
+        "clm:fapi2-security-jar-required",
+        "clm:fapi2-security-par-required",
+        "clm:fapi2-security-rar-required",
+        "clm:fapi2-security-security-bcp",
+        "clm:fapi2-security-sender-constrained-tokens",
+        "clm:flag-enable-rfc6750-form",
+        "clm:flag-enable-rfc6750-query",
+        "clm:profile-baseline",
+        "clm:profile-fapi2-security",
+        "clm:profile-hardening",
+        "clm:profile-peer-claim",
+        "clm:profile-production",
+        "clm:route-authorize",
+        "clm:route-par",
+        "clm:route-token",
+        "clm:route-well-known-openid-configuration",
+        "clm:target-rfc-9207",
+        "clm:target-rfc-9700",
+        "clm:phase1-public-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-assertion-framework",
+        "evd:compliance-evidence-tier3-bearer",
+        "evd:compliance-evidence-tier3-client-registration",
+        "evd:compliance-evidence-tier3-client-registration-management",
+        "evd:compliance-evidence-tier3-contracts-openapi",
+        "evd:compliance-evidence-tier3-contracts-openrpc",
+        "evd:compliance-evidence-tier3-cookies",
+        "evd:compliance-evidence-tier3-device-flow",
+        "evd:compliance-evidence-tier3-discovery",
+        "evd:compliance-evidence-tier3-dpop",
+        "evd:compliance-evidence-tier3-introspection",
+        "evd:compliance-evidence-tier3-issuer-identification",
+        "evd:compliance-evidence-tier3-jar",
+        "evd:compliance-evidence-tier3-jose",
+        "evd:compliance-evidence-tier3-jwe",
+        "evd:compliance-evidence-tier3-jwks",
+        "evd:compliance-evidence-tier3-jwt",
+        "evd:compliance-evidence-tier3-jwt-access-token-profile",
+        "evd:compliance-evidence-tier3-jwt-client-auth",
+        "evd:compliance-evidence-tier3-mtls",
+        "evd:compliance-evidence-tier3-native-apps",
+        "evd:compliance-evidence-tier3-oauth2-core",
+        "evd:compliance-evidence-tier3-oidc-backchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-core",
+        "evd:compliance-evidence-tier3-oidc-frontchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-rp-initiated-logout",
+        "evd:compliance-evidence-tier3-oidc-session-management",
+        "evd:compliance-evidence-tier3-oidc-userinfo",
+        "evd:compliance-evidence-tier3-par",
+        "evd:compliance-evidence-tier3-pkce",
+        "evd:compliance-evidence-tier3-protected-resource-metadata",
+        "evd:compliance-evidence-tier3-rar",
+        "evd:compliance-evidence-tier3-resource-indicators",
+        "evd:compliance-evidence-tier3-revocation",
+        "evd:compliance-evidence-tier3-security-bcp",
+        "evd:compliance-evidence-tier3-token-exchange",
+        "evd:compliance-evidence-tier3-well-known",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:tests-unit-test-public-route-contracts-py",
+      "title": "test public route contracts",
+      "status": "passing",
+      "kind": "pytest",
+      "path": "tests/unit/test_public_route_contracts.py",
+      "feature_ids": [
+        "feat:profile-baseline",
+        "feat:profile-fapi2-security",
+        "feat:profile-hardening",
+        "feat:profile-peer-claim",
+        "feat:profile-production",
+        "feat:route-device-authorization",
+        "feat:route-introspect",
+        "feat:route-par",
+        "feat:route-register",
+        "feat:route-revoke",
+        "feat:route-token-exchange",
+        "feat:slice-device",
+        "feat:slice-par",
+        "feat:slice-token-exchange",
+        "feat:target-rfc-7009",
+        "feat:target-rfc-7591",
+        "feat:target-rfc-7662",
+        "feat:target-rfc-8628",
+        "feat:target-rfc-8693",
+        "feat:target-rfc-9126",
+        "feat:api-public-boundary",
+        "feat:api-public-oauth-boundary",
+        "feat:api-public-registration-boundary",
+        "feat:api-public-logout-boundary"
+      ],
+      "claim_ids": [
+        "clm:fapi2-security-issuer-identification",
+        "clm:fapi2-security-jar-required",
+        "clm:fapi2-security-par-required",
+        "clm:fapi2-security-rar-required",
+        "clm:fapi2-security-security-bcp",
+        "clm:fapi2-security-sender-constrained-tokens",
+        "clm:profile-baseline",
+        "clm:profile-fapi2-security",
+        "clm:profile-hardening",
+        "clm:profile-peer-claim",
+        "clm:profile-production",
+        "clm:route-device-authorization",
+        "clm:route-introspect",
+        "clm:route-par",
+        "clm:route-register",
+        "clm:route-revoke",
+        "clm:route-token-exchange",
+        "clm:slice-device",
+        "clm:slice-par",
+        "clm:slice-token-exchange",
+        "clm:target-rfc-7009",
+        "clm:target-rfc-7591",
+        "clm:target-rfc-7662",
+        "clm:target-rfc-8628",
+        "clm:target-rfc-8693",
+        "clm:target-rfc-9126",
+        "clm:phase1-public-api-boundary"
+      ],
+      "evidence_ids": [
+        "evd:compliance-evidence-tier3-assertion-framework",
+        "evd:compliance-evidence-tier3-bearer",
+        "evd:compliance-evidence-tier3-client-registration",
+        "evd:compliance-evidence-tier3-client-registration-management",
+        "evd:compliance-evidence-tier3-contracts-openapi",
+        "evd:compliance-evidence-tier3-contracts-openrpc",
+        "evd:compliance-evidence-tier3-cookies",
+        "evd:compliance-evidence-tier3-device-flow",
+        "evd:compliance-evidence-tier3-discovery",
+        "evd:compliance-evidence-tier3-dpop",
+        "evd:compliance-evidence-tier3-introspection",
+        "evd:compliance-evidence-tier3-issuer-identification",
+        "evd:compliance-evidence-tier3-jar",
+        "evd:compliance-evidence-tier3-jose",
+        "evd:compliance-evidence-tier3-jwe",
+        "evd:compliance-evidence-tier3-jwks",
+        "evd:compliance-evidence-tier3-jwt",
+        "evd:compliance-evidence-tier3-jwt-access-token-profile",
+        "evd:compliance-evidence-tier3-jwt-client-auth",
+        "evd:compliance-evidence-tier3-mtls",
+        "evd:compliance-evidence-tier3-native-apps",
+        "evd:compliance-evidence-tier3-oauth2-core",
+        "evd:compliance-evidence-tier3-oidc-backchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-core",
+        "evd:compliance-evidence-tier3-oidc-frontchannel-logout",
+        "evd:compliance-evidence-tier3-oidc-rp-initiated-logout",
+        "evd:compliance-evidence-tier3-oidc-session-management",
+        "evd:compliance-evidence-tier3-oidc-userinfo",
+        "evd:compliance-evidence-tier3-par",
+        "evd:compliance-evidence-tier3-pkce",
+        "evd:compliance-evidence-tier3-protected-resource-metadata",
+        "evd:compliance-evidence-tier3-rar",
+        "evd:compliance-evidence-tier3-resource-indicators",
+        "evd:compliance-evidence-tier3-revocation",
+        "evd:compliance-evidence-tier3-security-bcp",
+        "evd:compliance-evidence-tier3-token-exchange",
+        "evd:compliance-evidence-tier3-well-known",
+        "evd:phase1-surface-baseline-pytest"
+      ]
+    },
+    {
+      "id": "tst:uix-admin-frontend-adapter",
+      "title": "Admin UIX frontend JSON-RPC adapter checks",
+      "status": "passing",
+      "kind": "vitest",
+      "path": "apps/admin-uix/services/jsonRpcService.test.ts",
+      "feature_ids": [
+        "feat:uix-admin-boundary",
+        "feat:uix-admin-auth-session",
+        "feat:uix-tenant-profile-selector"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-frontend-adapter",
+        "clm:phase1-uix-admin-boundary"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-frontend-copy",
+        "evd:phase1-uix-admin-boundary-vitest"
+      ]
+    },
+    {
+      "id": "tst:uix-public-discovery-adapter",
+      "title": "Public UIX discovery, endpoint gating, and safe error checks",
+      "status": "passing",
+      "kind": "vitest",
+      "path": "apps/public-uix/services/tigrblAuthDiscovery.test.ts",
+      "feature_ids": [
+        "feat:uix-public-boundary",
+        "feat:uix-public-auth-session",
+        "feat:uix-public-login-view",
+        "feat:uix-public-logout-view",
+        "feat:uix-public-registration-view",
+        "feat:uix-public-recovery-view",
+        "feat:uix-public-openapi-contract-consumption",
+        "feat:uix-public-problem-details-rendering",
+        "feat:uix-public-safe-error-disclosure"
+      ],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter",
+        "clm:phase1-uix-public-boundary"
+      ],
+      "evidence_ids": [
+        "evd:uix-public-frontend-copy",
+        "evd:phase1-uix-public-boundary-vitest"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evd:phase1-surface-baseline-pytest",
+      "title": "Phase 1 surface baseline pytest evidence",
+      "status": "passed",
+      "kind": "pytest-report",
+      "tier": "T1",
+      "path": ".ssot/reports/phase1/phase1-surface-baseline-pytest.txt",
+      "claim_ids": [
+        "clm:phase1-surface-applicability-classification",
+        "clm:phase1-admin-api-boundary",
+        "clm:phase1-public-api-boundary"
+      ],
+      "test_ids": [
+        "tst:tests-unit-test-certification-gap-inventory-py",
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:runtime-profile-contract-and-surface-derivation",
+        "tst:tests-unit-test-openrpc-contract-validity-py",
+        "tst:tests-unit-test-openapi-contract-validity-py",
+        "tst:tests-unit-test-public-route-contracts-py",
+        "tst:tests-unit-test-profile-discovery-runtime-py",
+        "tst:tests-integration-test-profile-surface-and-contract-alignment-py"
+      ]
+    },
+    {
+      "id": "evd:phase1-uix-admin-boundary-vitest",
+      "title": "Phase 1 admin UIX boundary vitest evidence",
+      "status": "passed",
+      "kind": "vitest-report",
+      "tier": "T1",
+      "path": ".ssot/reports/phase1/uix-admin-boundary-vitest.txt",
+      "claim_ids": [
+        "clm:phase1-uix-admin-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ]
+    },
+    {
+      "id": "evd:phase1-uix-public-boundary-vitest",
+      "title": "Phase 1 public UIX boundary vitest evidence",
+      "status": "passed",
+      "kind": "vitest-report",
+      "tier": "T1",
+      "path": ".ssot/reports/phase1/uix-public-boundary-vitest.txt",
+      "claim_ids": [
+        "clm:phase1-uix-public-boundary"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ]
+    }
+  ],
+  "file_hashes": {
+    ".ssot/reports/phase1/phase1-surface-baseline-pytest.txt": "19383f8f9b558e51fd78482c2f74c264c4cebb42c001a1af25c0bee888b504a2",
+    ".ssot/reports/phase1/uix-admin-boundary-vitest.txt": "656af144c6e46fac9aafc51fc513f21623c4c1319664c1908ca991c06a4402f4",
+    ".ssot/reports/phase1/uix-public-boundary-vitest.txt": "d3dbf51cf0e8eb2741b8b15ef3f7b75ce55119ef0a5513c9662a8c9778b86b3b",
+    "apps/admin-uix/services/jsonRpcService.test.ts": "4e5515252b997cf0ad41465e2e43fd48ddf3eef092164fc8e6bd04579632f201",
+    "apps/public-uix/services/tigrblAuthDiscovery.test.ts": "3bc43583f8ae4669418e937b5cd6525a3fc2413aed94a4f9a6efc7472da6d75d",
+    "tests/integration/test_profile_surface_and_contract_alignment.py": "3d1867816e61d8f05176d693dedae2deb130fadcc458905a4f9939296bb87ec3",
+    "tests/unit/test_certification_gap_inventory.py": "598c1724080d12feb4afa307a3f1d55dc26a17fe9f46b28b788410b05a472519",
+    "tests/unit/test_openapi_contract_validity.py": "4e2d5f43e6f69c836755ceda614611efbe13e83bdeb0228996f5ac209daf17e0",
+    "tests/unit/test_openrpc_contract_validity.py": "1d24d0a675d5a0f705875250a7282dd9352d02c53b73a0a46fde285004d19fc3",
+    "tests/unit/test_profile_discovery_runtime.py": "f9c5ebc8168607b03be0996e294edecead15848b1ab1dd99a81751b645877ec0",
+    "tests/unit/test_public_route_contracts.py": "b344ada9ba54199ef14a31b884619dcd4a1a4a4eea2055f583b18ac2063dd1f5",
+    "tests/unit/test_runtime_profile_configuration.py": "24e29d6f4a2e8a24676681b253996a3d8a84269d634bd44d22f5a3f44bc282ed",
+    "tests/unit/test_secure_default_admin_gate.py": "8790a6bf813d4a08e166aaa62c207db2cf4797492251422a0034407ea3df0a5f"
+  },
+  "summary": {
+    "release_id": "rel:phase1-surface-baseline-20260505",
+    "version": "0.3.4-phase1-surface-baseline.20260505",
+    "boundary_id": "bnd:phase1-surface-baseline-20260505",
+    "feature_count": 16,
+    "profile_count": 0,
+    "claim_count": 5,
+    "test_count": 10,
+    "evidence_count": 3,
+    "status": "promoted"
+  }
+}

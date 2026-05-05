@@ -1,22 +1,25 @@
 
 import { useState, useCallback } from 'react';
-import { User, AuthState } from '../types';
+import { User } from '../types';
 import { getDiscoveredLogoutUrl } from '../services/tigrblAuthDiscovery';
+import {
+  clearPersistedPublicUser,
+  clearPublicSessionCookie,
+  persistPublicUser,
+  PUBLIC_SESSION_STORAGE_KEY,
+  resolvePublicSessionState,
+  writePublicSessionCookie,
+} from '../services/publicSession';
 
 const getInitialState = (): { user: User | null; isAuthenticated: boolean } => {
-  const savedUser = localStorage.getItem('tigrbl_auth_user');
-  if (savedUser) {
-    try {
-      const user = JSON.parse(savedUser);
-      return {
-        user,
-        isAuthenticated: user.isEmailVerified,
-      };
-    } catch (e) {
-      localStorage.removeItem('tigrbl_auth_user');
-    }
+  const savedUser = typeof localStorage === 'undefined'
+    ? null
+    : localStorage.getItem(PUBLIC_SESSION_STORAGE_KEY);
+  const state = resolvePublicSessionState(savedUser);
+  if (!state.user && typeof localStorage !== 'undefined' && savedUser) {
+    localStorage.removeItem(PUBLIC_SESSION_STORAGE_KEY);
   }
-  return { user: null, isAuthenticated: false };
+  return state;
 };
 
 export const useAuthSession = () => {
@@ -24,10 +27,16 @@ export const useAuthSession = () => {
 
   const updateSession = useCallback((user: User | null) => {
     if (user) {
-      localStorage.setItem('tigrbl_auth_user', JSON.stringify(user));
+      persistPublicUser(typeof localStorage === 'undefined' ? null : localStorage, user);
+      if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+        writePublicSessionCookie(document, window.location.origin);
+      }
       setSession({ user, isAuthenticated: user.isEmailVerified });
     } else {
-      localStorage.removeItem('tigrbl_auth_user');
+      clearPersistedPublicUser(typeof localStorage === 'undefined' ? null : localStorage);
+      if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+        clearPublicSessionCookie(document, window.location.origin);
+      }
       setSession({ user: null, isAuthenticated: false });
     }
   }, []);

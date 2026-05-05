@@ -1,13 +1,19 @@
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { User, AuthProvider } from '../types';
 import { OidcAdapterFactory } from '../services/oidc-adapters';
 import { getTigrblAuthProviderConfig } from './useOidc';
 import { usePlatform } from './usePlatform';
 import { safeProblemMessage } from '../services/tigrblAuthDiscovery';
+import {
+  buildPopupCallbackHash,
+  isTrustedBrowserOrigin,
+  sanitizePublicHashTarget,
+} from '../services/publicUxPolicy';
 
 export const useOidcActions = (onAuthSuccess: (user: User) => void) => {
   const platform = usePlatform();
+  const callbackTarget = sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile');
 
   const handleCallback = useCallback(async (provider?: AuthProvider) => {
     try {
@@ -22,12 +28,32 @@ export const useOidcActions = (onAuthSuccess: (user: User) => void) => {
       onAuthSuccess(fullUser);
 
       // Use whitelabeled redirect URI
-      window.location.hash = platform.postLoginRedirectUri;
+      window.location.hash = callbackTarget;
     } catch (err: any) {
       sessionStorage.setItem('tigrbl_auth_public_error', safeProblemMessage(err));
       window.location.hash = '#/login';
     }
-  }, [onAuthSuccess, platform.postLoginRedirectUri]);
+  }, [callbackTarget, onAuthSuccess]);
+
+  useEffect(() => {
+    const onMessage = (event: MessageEvent<{ type?: string; payload?: { search?: string } }>) => {
+      if (event.data?.type !== 'OIDC_CALLBACK') {
+        return;
+      }
+      if (!isTrustedBrowserOrigin(event.origin, window.location.origin, window.location.origin)) {
+        return;
+      }
+      const callbackHash = buildPopupCallbackHash(event.data.payload?.search);
+      if (!callbackHash) {
+        return;
+      }
+      window.location.hash = callbackHash;
+      void handleCallback(AuthProvider.GENERIC);
+    };
+
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [handleCallback]);
 
   return { handleCallback };
 };

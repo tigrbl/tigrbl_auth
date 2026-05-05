@@ -11,8 +11,10 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { MfaPage } from './pages/MfaPage';
 import { EmailVerificationPage } from './pages/EmailVerificationPage';
 import { TermsOfServicePage } from './pages/TermsOfServicePage';
+import { ConsentPage } from './pages/ConsentPage';
 import { AuthProvider } from './types';
 import { usePlatform } from './hooks/usePlatform';
+import { parseConsentViewModel, sanitizePublicHashTarget } from './services/publicUxPolicy';
 
 const App: React.FC = () => {
   const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
@@ -44,7 +46,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#') {
-      const target = isAuthenticated ? platform.postLoginRedirectUri : '#/login';
+      const target = isAuthenticated
+        ? sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile')
+        : '#/login';
       window.location.hash = target;
       setCurrentHash(target);
     }
@@ -52,7 +56,7 @@ const App: React.FC = () => {
 
   const renderContent = () => {
     const path = currentHash.split('?')[0] || '#/';
-    const callbackTarget = platform.postLoginRedirectUri;
+    const callbackTarget = sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile');
 
     // MFA Flow takes precedence
     if (mfaPending) return <MfaPage onVerify={verifyMfa} isLoading={isLoading} error={error} />;
@@ -69,6 +73,18 @@ const App: React.FC = () => {
 
       case '#/terms':
         return <TermsOfServicePage />;
+
+      case '#/consent': {
+        const consent = parseConsentViewModel(currentHash, callbackTarget, '#/login');
+        return (
+          <ConsentPage
+            approveTarget={consent.approveTarget}
+            cancelTarget={consent.cancelTarget}
+            clientName={consent.clientName}
+            scopes={consent.scopes}
+          />
+        );
+      }
 
       case '#/verify-email':
         return (
