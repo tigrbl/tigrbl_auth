@@ -62,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       attestations: write
+      artifact-metadata: write
       contents: read
       id-token: write
     steps:
@@ -86,6 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       attestations: read
+      artifact-metadata: read
       contents: read
     steps:
       - uses: actions/download-artifact@v8

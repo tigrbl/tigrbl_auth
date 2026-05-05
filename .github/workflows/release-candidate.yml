@@ -30,6 +30,7 @@ jobs:
     uses: ./.github/workflows/_contracts.yml
     permissions:
       attestations: write
+      artifact-metadata: write
       contents: read
       id-token: write
     with:
@@ -59,6 +60,7 @@ jobs:
     uses: ./.github/workflows/_release-bundle.yml
     permissions:
       attestations: write
+      artifact-metadata: write
       contents: read
       id-token: write
     with:
