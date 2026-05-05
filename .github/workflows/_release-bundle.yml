@@ -179,9 +179,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          while IFS= read -r subject; do
+          {
+            find contracts/specs/openapi contracts/specs/openrpc contracts/specs/discovery -type f -name '*.json'
+            find contracts/compliance/claims contracts/compliance/evidence -type f -name '*.yaml'
+          } | sort | while IFS= read -r subject; do
             gh attestation verify "$subject" --repo "$GITHUB_REPOSITORY"
-          done < <(find contracts/specs -type f -name '*.json' | sort)
+          done
       - name: Verify wheel attestations
         shell: bash
         env:
