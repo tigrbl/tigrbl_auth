@@ -1,0 +1,244 @@
+.container {
+  @apply space-y-10;
+  animation: fade-in 0.5s ease-in;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.headerInfo {
+  @apply flex items-center space-x-6;
+}
+
+.backButton {
+  @apply p-3 border transition-all;
+  border-color: var(--stroke-etched);
+  background: #fff;
+  box-shadow: var(--shadow-milled);
+}
+
+.backButton:hover {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.title {
+  @apply text-4xl font-extrabold uppercase;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.headerActions {
+  @apply flex space-x-4;
+}
+
+.buttonBase {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--bg-parian);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.buttonBase:hover {
+  background: var(--stroke-etched);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.buttonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-10;
+}
+
+.leftColumn {
+  @apply lg:col-span-4 space-y-8;
+}
+
+.infoCard {
+  @apply p-8;
+  background: var(--stroke-etched);
+  border: 1px solid var(--stroke-etched);
+  color: #fff;
+  box-shadow: var(--shadow-milled);
+}
+
+.infoTitle {
+  @apply text-[10px] font-bold uppercase tracking-[2px] mb-6;
+  opacity: 0.5;
+}
+
+.infoList {
+  @apply space-y-6;
+}
+
+.infoLabel {
+  @apply text-[9px] font-bold uppercase mb-1;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.infoValue {
+  @apply text-sm font-mono break-all;
+}
+
+.infoValueItalic {
+  @apply text-sm italic;
+}
+
+.infoSection {
+  padding-top: 1rem;
+}
+
+.inventoryCard {
+  @apply p-8;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.inventoryTitle {
+  @apply text-xs font-bold uppercase tracking-[2px] mb-8;
+}
+
+.inventoryGrid {
+  @apply grid grid-cols-1 gap-4;
+}
+
+.inventoryItem {
+  @apply p-6 flex items-center justify-between;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-milled);
+}
+
+.inventoryValue {
+  @apply text-3xl font-bold font-mono;
+}
+
+.inventoryLabel {
+  @apply text-[9px] font-bold uppercase;
+  opacity: 0.5;
+}
+
+.inventoryIcon {
+  color: var(--stroke-etched);
+  opacity: 0.2;
+}
+
+.rightColumn {
+  @apply lg:col-span-8 space-y-8;
+}
+
+.pulseCard {
+  @apply p-8;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.pulseTitle {
+  @apply text-xs font-bold uppercase tracking-[2px] mb-6;
+}
+
+.pulseBody {
+  @apply h-64 border border-dashed flex flex-col items-center justify-center;
+  border-color: var(--stroke-milled);
+  color: var(--text-secondary);
+  background: rgba(244, 244, 240, 0.5);
+}
+
+.pulseIcon {
+  @apply mb-4;
+  animation: pulse 2s infinite;
+}
+
+.pulseText {
+  @apply text-[10px] font-bold uppercase tracking-widest;
+}
+
+.pulseMeta {
+  @apply text-[9px] mt-1 uppercase;
+  opacity: 0.6;
+}
+
+.statsGrid {
+  @apply grid grid-cols-2 gap-8;
+}
+
+.statsCard {
+  @apply p-8 transition-all cursor-pointer;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.statsCard:hover {
+  background: #fff;
+}
+
+.statsTitle {
+  @apply text-xs font-bold uppercase mb-4;
+}
+
+.statsTitleRed:hover {
+  color: var(--accent-arterial);
+}
+
+.statsTitleBlue:hover {
+  color: var(--accent-neural);
+}
+
+.statsList {
+  @apply space-y-2;
+}
+
+.statsRow {
+  @apply text-[10px] font-mono flex justify-between;
+}
+
+.statsMeta {
+  opacity: 0.4;
+}
+
+.statsEmpty {
+  @apply text-[10px];
+  opacity: 0.4;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

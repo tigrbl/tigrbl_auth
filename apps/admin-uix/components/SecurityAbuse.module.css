@@ -1,0 +1,182 @@
+.container {
+  @apply space-y-6;
+}
+
+.header {
+  @apply flex items-center justify-between;
+}
+
+.title {
+  @apply text-2xl font-bold;
+}
+
+.subtitle {
+  @apply text-sm;
+  color: #64748b;
+}
+
+.headerActions {
+  @apply flex space-x-2;
+}
+
+.lockdownButton {
+  @apply px-4 py-2 rounded-lg text-sm font-bold;
+  background: #dc2626;
+  color: #fff;
+}
+
+.lockdownButton:hover {
+  background: #b91c1c;
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+}
+
+.card {
+  @apply p-6 rounded-2xl border shadow-sm;
+  background: #fff;
+  border-color: #e2e8f0;
+}
+
+.cardTitle {
+  @apply text-lg font-bold mb-6;
+}
+
+.eventList {
+  @apply space-y-4;
+}
+
+.eventItem {
+  @apply flex items-start space-x-4 p-4 rounded-xl border;
+  background: #f8fafc;
+  border-color: #f1f5f9;
+}
+
+.eventIcon {
+  @apply mt-1 p-2 rounded-lg;
+}
+
+.eventIconHigh {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.eventIconMedium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.eventIconLow {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.eventBody {
+  @apply flex-1;
+}
+
+.eventMeta {
+  @apply flex justify-between;
+}
+
+.eventSeverity {
+  @apply text-xs font-bold uppercase tracking-widest;
+  color: #94a3b8;
+}
+
+.eventTime {
+  @apply text-[10px] font-mono;
+  color: #94a3b8;
+}
+
+.eventMessage {
+  @apply text-sm font-semibold mt-1;
+  color: #1e293b;
+}
+
+.eventActions {
+  @apply mt-3 flex space-x-2;
+}
+
+.eventAction {
+  @apply text-[10px] font-bold;
+  color: #4f46e5;
+}
+
+.eventAction:hover {
+  text-decoration: underline;
+}
+
+.eventDismiss {
+  color: #64748b;
+}
+
+.sideColumn {
+  @apply space-y-6;
+}
+
+.rateCardTitle {
+  @apply text-lg font-bold mb-4;
+}
+
+.rateList {
+  @apply space-y-4;
+}
+
+.rateItem {
+  @apply flex items-center justify-between p-3 rounded-lg;
+  background: #f8fafc;
+}
+
+.rateLabel {
+  @apply text-xs font-bold uppercase;
+  color: #64748b;
+}
+
+.rateValue {
+  @apply text-sm font-bold mt-1;
+}
+
+.rateMeta {
+  @apply text-right;
+}
+
+.rateLimit {
+  @apply text-[10px] font-mono;
+  color: #94a3b8;
+}
+
+.rateAdjust {
+  @apply text-xs font-bold mt-1;
+  color: #4f46e5;
+}
+
+.rateAdjust:hover {
+  text-decoration: underline;
+}
+
+.rulesCardTitle {
+  @apply text-lg font-bold mb-4;
+}
+
+.ruleList {
+  @apply space-y-2;
+}
+
+.ruleItem {
+  @apply flex items-center justify-between p-3 rounded-lg cursor-pointer;
+}
+
+.ruleItem:hover {
+  background: #f8fafc;
+}
+
+.ruleLabel {
+  @apply text-sm font-medium;
+}
+
+.ruleCheckbox {
+  @apply w-4 h-4 rounded;
+  color: #4f46e5;
+}

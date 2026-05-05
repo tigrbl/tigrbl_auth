@@ -1,0 +1,277 @@
+.container {
+  @apply space-y-10;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.primaryButton {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--stroke-etched);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.primaryButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.card {
+  @apply p-8 flex flex-col transition-all relative;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.card:hover {
+  border-color: var(--stroke-etched);
+}
+
+.cardActions {
+  @apply absolute top-4 right-4 flex space-x-2 transition-opacity;
+  opacity: 0;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+}
+
+.actionButton {
+  @apply p-2 border transition-all;
+  border-color: transparent;
+  background: transparent;
+}
+
+.actionButton:hover {
+  border-color: var(--stroke-etched);
+}
+
+.actionButtonDelete {
+  color: var(--accent-arterial);
+}
+
+.actionButtonDelete:hover {
+  border-color: var(--accent-arterial);
+}
+
+.cardHeader {
+  @apply flex items-center space-x-5 mb-8;
+}
+
+.avatar {
+  @apply w-14 h-14 border flex items-center justify-center font-bold text-2xl uppercase transition-all duration-500;
+  border-color: var(--stroke-etched);
+  background: var(--bg-parian);
+}
+
+.card:hover .avatar {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.cardTitle {
+  @apply text-lg font-extrabold uppercase leading-none;
+  letter-spacing: -0.01em;
+}
+
+.typeBadge {
+  @apply text-[8px] font-bold border px-1.5 py-0.5 uppercase tracking-widest inline-block mt-2;
+  border-color: var(--stroke-etched);
+}
+
+.typeBadgePublic {
+  background: var(--bg-parian-deep);
+}
+
+.typeBadgeConfidential {
+  background: var(--accent-arterial);
+  color: #fff;
+}
+
+.details {
+  @apply space-y-6 flex-1;
+}
+
+.idRow {
+  @apply flex items-center space-x-2;
+}
+
+.label {
+  @apply text-[9px] font-bold uppercase tracking-widest mb-1;
+  color: var(--text-secondary);
+}
+
+.idValue {
+  @apply text-xs font-mono px-3 py-1.5 border flex-1 truncate;
+  background: var(--bg-parian-deep);
+  border-color: var(--stroke-milled);
+}
+
+.secretHeader {
+  @apply flex justify-between items-center mb-1;
+}
+
+.secretToggle {
+  @apply text-[8px] font-bold uppercase underline;
+}
+
+.secretValue {
+  @apply text-xs font-mono px-3 py-1.5 border flex-1 truncate;
+  background: #000;
+  color: #00ffcc;
+  border-color: var(--stroke-etched);
+}
+
+.redirectList {
+  @apply space-y-1;
+}
+
+.redirectItem {
+  @apply text-[10px] font-mono truncate italic;
+  opacity: 0.6;
+}
+
+.redirectEmpty {
+  @apply text-[10px] italic;
+  opacity: 0.3;
+}
+
+.cardFooter {
+  @apply mt-8 pt-6 flex justify-between items-center;
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.cardMeta {
+  @apply text-[9px] font-mono;
+  opacity: 0.4;
+}
+
+.cardDots {
+  @apply flex space-x-1;
+}
+
+.dot {
+  @apply w-1 h-1;
+  background: var(--stroke-etched);
+}
+
+.modalOverlay {
+  @apply fixed inset-0 flex items-center justify-center z-[100] p-4;
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  @apply w-full max-w-lg p-10 shadow-2xl;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-etched);
+  animation: fade-zoom 0.3s ease;
+}
+
+.modalTitle {
+  @apply text-2xl font-extrabold mb-8 uppercase;
+  letter-spacing: -0.02em;
+}
+
+.modalBody {
+  @apply space-y-6;
+}
+
+.formGrid {
+  @apply grid grid-cols-2 gap-6;
+}
+
+.formSpan {
+  @apply col-span-2;
+}
+
+.formLabel {
+  @apply block text-[10px] font-bold uppercase tracking-widest mb-2;
+}
+
+.formInput {
+  @apply w-full px-4 py-3 border outline-none font-medium;
+  background: #fff;
+  border-color: var(--stroke-milled);
+}
+
+.formInput:focus {
+  border-color: var(--stroke-etched);
+}
+
+.formInputMono {
+  @apply font-mono text-xs;
+}
+
+.formSelect {
+  @apply w-full px-4 py-3 border outline-none font-bold text-xs uppercase;
+  background: #fff;
+  border-color: var(--stroke-milled);
+}
+
+.formTextarea {
+  @apply w-full px-4 py-3 border outline-none font-mono text-xs resize-none;
+  background: #fff;
+  border-color: var(--stroke-milled);
+  height: 6rem;
+}
+
+.modalActions {
+  @apply pt-10 flex space-x-4;
+}
+
+.modalButton {
+  @apply flex-1 py-3 text-[10px] font-bold uppercase transition-all;
+  border: 1px solid var(--stroke-etched);
+}
+
+.modalButtonCancel:hover {
+  background: var(--bg-parian-deep);
+}
+
+.modalButtonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modalButtonPrimary:hover {
+  background: #000;
+}
+
+@keyframes fade-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

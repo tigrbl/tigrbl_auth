@@ -1,0 +1,104 @@
+:root {
+  --bg-parian: #f4f4f0;
+  --bg-parian-deep: #ebebe5;
+  --stroke-etched: #1a1a1a;
+  --stroke-milled: #d1d1ca;
+  --accent-arterial: #ff2d00;
+  --accent-neural: #0055ff;
+  --text-primary: #121212;
+  --text-secondary: #55554e;
+  --shadow-milled: 6px 6px 12px #d9d9d1, -6px -6px 12px #ffffff;
+  --shadow-inset: inset 2px 2px 5px #d1d1ca, inset -2px -2px 5px #ffffff;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg-parian);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.lattice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(var(--stroke-milled) 1px, transparent 1px),
+    linear-gradient(90deg, var(--stroke-milled) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.15;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.arterial-pulse {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100vh;
+  background: linear-gradient(to bottom, transparent, var(--accent-arterial), transparent);
+  opacity: 0.3;
+  z-index: -1;
+  animation: pulse-y 8s infinite ease-in-out;
+}
+
+@keyframes pulse-y {
+  0%,
+  100% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+}
+
+.shadow-milled {
+  box-shadow: var(--shadow-milled);
+}
+
+.border-etched {
+  border: 1px solid var(--stroke-etched);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.btn-parian {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--bg-parian);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.btn-parian:hover {
+  background: var(--stroke-etched);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.btn-parian-primary {
+  background: var(--stroke-etched);
+  color: #fff;
+}

@@ -1,0 +1,19 @@
+{
+  "status": "partial",
+  "feature_ids": [
+    "feat:uix-admin-boundary",
+    "feat:uix-admin-console-shell",
+    "feat:uix-admin-auth-session",
+    "feat:uix-tenant-profile-selector",
+    "feat:uix-rbac-administration",
+    "feat:uix-abac-administration",
+    "feat:uix-policy-simulation"
+  ],
+  "source": "authnz_ctrl_plane/admin_client",
+  "target": "apps/admin-uix",
+  "checks": [
+    "npm run build:admin-uix",
+    "npm run test:admin-uix"
+  ],
+  "notes": "Adapted React/Vite admin UIX source exists and passes frontend build/test checks. Runtime OpenRPC method binding remains partial and must continue to defer to tigrbl_auth admin contract discovery."
+}

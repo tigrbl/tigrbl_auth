@@ -15274,8 +15274,8 @@
     {
       "id": "feat:uix-admin-boundary",
       "title": "Admin UIX boundary",
-      "description": "Boundary feature: define and govern the administrator UIX surface. Current implementation status: absent. Governed by SPEC-1074.",
-      "implementation_status": "absent",
+      "description": "Boundary feature: define and govern the administrator UIX surface. Current implementation status: partial. Governed by SPEC-1074.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15297,8 +15297,8 @@
     {
       "id": "feat:uix-public-boundary",
       "title": "Public UIX boundary",
-      "description": "Boundary feature: define and govern the public end-user UIX surface. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Boundary feature: define and govern the public end-user UIX surface. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15389,8 +15389,8 @@
     {
       "id": "feat:uix-public-shell",
       "title": "Public UIX shell",
-      "description": "Public end-user UIX target: Public UIX shell. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public UIX shell. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15412,8 +15412,8 @@
     {
       "id": "feat:uix-public-auth-session",
       "title": "Public UIX auth session",
-      "description": "Public end-user UIX target: Public UIX auth session. Current implementation status: absent. Governed by SPEC-1075 and SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public UIX auth session. Current implementation status: partial. Governed by SPEC-1075 and SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15436,8 +15436,8 @@
     {
       "id": "feat:uix-public-login-view",
       "title": "Public login view",
-      "description": "Public end-user UIX target: Public login view. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public login view. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15459,8 +15459,8 @@
     {
       "id": "feat:uix-public-logout-view",
       "title": "Public logout view",
-      "description": "Public end-user UIX target: Public logout view. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public logout view. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15482,8 +15482,8 @@
     {
       "id": "feat:uix-public-registration-view",
       "title": "Public registration view",
-      "description": "Public end-user UIX target: Public registration view. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public registration view. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15505,8 +15505,8 @@
     {
       "id": "feat:uix-public-session-continuity",
       "title": "Public session continuity",
-      "description": "Public end-user UIX target: Public session continuity. Current implementation status: absent. Governed by SPEC-1075 and SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public session continuity. Current implementation status: partial. Governed by SPEC-1075 and SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15552,8 +15552,8 @@
     {
       "id": "feat:uix-public-recovery-view",
       "title": "Public recovery view",
-      "description": "Public end-user UIX target: Public recovery view. Current implementation status: absent. Governed by SPEC-1075.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public recovery view. Current implementation status: partial. Governed by SPEC-1075.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15575,8 +15575,8 @@
     {
       "id": "feat:uix-public-openapi-contract-consumption",
       "title": "Public OpenAPI contract consumption",
-      "description": "Public end-user UIX target: Public OpenAPI contract consumption. Current implementation status: absent. Governed by SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public OpenAPI contract consumption. Current implementation status: partial. Governed by SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15667,8 +15667,8 @@
     {
       "id": "feat:uix-public-browser-token-handling",
       "title": "Public browser token handling",
-      "description": "Public end-user UIX target: Public browser token handling. Current implementation status: absent. Governed by SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public browser token handling. Current implementation status: partial. Governed by SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15690,8 +15690,8 @@
     {
       "id": "feat:uix-public-problem-details-rendering",
       "title": "Public problem-details rendering",
-      "description": "Public end-user UIX target: Public problem-details rendering. Current implementation status: absent. Governed by SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public problem-details rendering. Current implementation status: partial. Governed by SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -15713,8 +15713,8 @@
     {
       "id": "feat:uix-public-safe-error-disclosure",
       "title": "Public safe error disclosure",
-      "description": "Public end-user UIX target: Public safe error disclosure. Current implementation status: absent. Governed by SPEC-1079.",
-      "implementation_status": "absent",
+      "description": "Public end-user UIX target: Public safe error disclosure. Current implementation status: partial. Governed by SPEC-1079.",
+      "implementation_status": "partial",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],

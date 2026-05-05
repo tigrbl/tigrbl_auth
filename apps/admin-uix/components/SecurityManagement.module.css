@@ -1,0 +1,272 @@
+.container {
+  @apply space-y-10;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.lockdownButton {
+  @apply px-8 py-3 font-extrabold uppercase text-xs transition-all;
+  letter-spacing: 3px;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.lockdownButton:hover {
+  transform: scale(1.05);
+}
+
+.lockdownButton:active {
+  transform: scale(0.95);
+}
+
+.lockdownActive {
+  background: var(--accent-arterial);
+  color: #fff;
+  animation: pulse 2s infinite;
+}
+
+.lockdownInactive {
+  background: #fff;
+  color: var(--accent-arterial);
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-10;
+}
+
+.mainColumn {
+  @apply lg:col-span-8 space-y-8;
+}
+
+.feedCard {
+  @apply overflow-hidden;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.feedHeader {
+  @apply p-6 flex justify-between items-center;
+  border-bottom: 1px solid var(--stroke-etched);
+  background: var(--bg-parian-deep);
+}
+
+.feedTitle {
+  @apply font-bold text-xs uppercase tracking-widest;
+}
+
+.feedStatus {
+  @apply text-[10px] font-mono;
+  color: var(--text-secondary);
+}
+
+.feedList {
+  border-top: 1px solid var(--stroke-milled);
+}
+
+.feedItem {
+  @apply p-8 transition-colors;
+}
+
+.feedItem:hover {
+  background: var(--bg-parian);
+}
+
+.feedItemContent {
+  @apply flex items-start space-x-6;
+}
+
+.feedIcon {
+  @apply p-4 border;
+  border-color: var(--stroke-etched);
+}
+
+.feedIconHigh {
+  background: var(--accent-arterial);
+  color: #fff;
+}
+
+.feedIconMedium {
+  @apply bg-amber-100;
+  color: var(--stroke-etched);
+}
+
+.feedIconLow {
+  background: var(--bg-parian);
+  color: var(--stroke-etched);
+}
+
+.feedBody {
+  @apply flex-1;
+}
+
+.feedMeta {
+  @apply flex justify-between items-center mb-2;
+}
+
+.feedSeverity {
+  @apply text-[10px] font-bold uppercase tracking-widest;
+}
+
+.feedTimestamp {
+  @apply text-[10px] font-mono;
+  color: var(--stroke-milled);
+}
+
+.feedMessage {
+  @apply text-lg font-bold uppercase mb-4;
+  letter-spacing: -0.01em;
+}
+
+.feedActions {
+  @apply flex space-x-4;
+}
+
+.feedAction {
+  @apply text-[10px] font-bold underline;
+}
+
+.feedAction:hover {
+  text-decoration: none;
+}
+
+.feedActionMuted {
+  color: var(--text-secondary);
+}
+
+.sideColumn {
+  @apply lg:col-span-4 space-y-8;
+}
+
+.riskCard {
+  @apply p-8 text-white;
+  background: var(--stroke-etched);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.riskTitle {
+  @apply text-xs font-bold uppercase tracking-[2px] mb-6;
+  opacity: 0.4;
+}
+
+.riskScore {
+  @apply flex items-end space-x-3 mb-4;
+}
+
+.riskValue {
+  @apply text-6xl font-mono font-bold;
+  letter-spacing: -0.02em;
+}
+
+.riskUnit {
+  @apply text-xs font-bold uppercase mb-2;
+}
+
+.riskSummary {
+  @apply text-[11px] font-medium leading-relaxed uppercase;
+  opacity: 0.6;
+}
+
+.riskList {
+  @apply mt-8 pt-8 space-y-4;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.riskRow {
+  @apply flex justify-between items-center;
+}
+
+.riskLabel {
+  @apply text-[10px] font-bold uppercase tracking-widest;
+}
+
+.riskToggle {
+  @apply w-8 h-4 border flex items-center p-0.5;
+  border-color: #fff;
+}
+
+.riskToggleActive {
+  justify-content: flex-end;
+}
+
+.riskToggleInactive {
+  justify-content: flex-start;
+}
+
+.riskDot {
+  @apply w-2 h-2;
+}
+
+.riskDotActive {
+  background: #00ffcc;
+}
+
+.riskDotInactive {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mitigationCard {
+  @apply p-8 relative overflow-hidden;
+  background: var(--bg-parian-deep);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.mitigationIcon {
+  @apply absolute;
+  right: -1rem;
+  bottom: -1rem;
+  opacity: 0.05;
+  transform: scale(1.5) rotate(12deg);
+  transition: transform 0.3s ease;
+}
+
+.mitigationCard:hover .mitigationIcon {
+  transform: scale(1.5) rotate(0deg);
+}
+
+.mitigationTitle {
+  @apply text-xs font-bold uppercase tracking-widest mb-4;
+}
+
+.mitigationList {
+  @apply space-y-4 relative z-10;
+}
+
+.mitigationItem {
+  @apply p-4 border;
+  border-color: var(--stroke-etched);
+  background: #fff;
+}
+
+.mitigationName {
+  @apply text-[10px] font-bold uppercase tracking-tighter;
+}
+
+.mitigationMeta {
+  @apply text-[9px] font-mono mt-1;
+  color: var(--text-secondary);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

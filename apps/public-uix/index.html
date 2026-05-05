@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tigrbl_auth Public UIX</title>
+    <meta name="description" content="Public OAuth and OIDC UIX adapted to the tigrbl_auth public contract and discovery metadata.">
+    <meta property="og:title" content="tigrbl_auth Public UIX">
+    <meta property="og:description" content="Public OAuth and OIDC UIX adapted to the tigrbl_auth public contract and discovery metadata.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/favicon.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="tigrbl_auth Public UIX">
+    <meta name="twitter:description" content="Public OAuth and OIDC UIX adapted to the tigrbl_auth public contract and discovery metadata.">
+    <meta name="twitter:image" content="/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="mask-icon" href="/favicon.svg" color="#4f46e5">
+    <style>
+        :root {
+            --brand-primary: #4f46e5;
+            --brand-primary-rgb: 79, 70, 229;
+            --brand-secondary: #1e1b4b;
+            --bg-app: #f8fafc;
+            --radius-ui: 12px;
+        }
+
+        body {
+          font-family: 'Inter', sans-serif;
+          background-color: var(--bg-app);
+          transition: background-color 0.3s ease;
+        }
+
+        .animate-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Whitelabel Dynamic Classes */
+        .bg-brand { background-color: var(--brand-primary); }
+        .bg-brand-secondary { background-color: var(--brand-secondary); }
+        .bg-brand-soft { background-color: rgba(var(--brand-primary-rgb), 0.1); }
+        .text-brand { color: var(--brand-primary); }
+        .border-brand { border-color: var(--brand-primary); }
+        .rounded-brand { border-radius: var(--radius-ui); }
+
+        /* Interaction States */
+        .hover\:bg-brand:hover { background-color: var(--brand-primary); opacity: 0.9; }
+        .hover\:text-brand:hover { color: var(--brand-primary); opacity: 0.8; }
+
+        button.bg-brand:active { transform: scale(0.98); }
+
+        /* Custom scrollbar matching branding */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+          background: rgba(var(--brand-primary-rgb), 0.2);
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand-primary); }
+    </style>
+</head>
+<body class="text-slate-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

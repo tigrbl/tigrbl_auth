@@ -1,0 +1,20 @@
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm install
+
+COPY . .
+ENV VITE_PLATFORM_ENABLE_BRANDING_SETTINGS="true"
+ENV VITE_PLATFORM_ENABLE_ADAPTER_SETTINGS="true"
+RUN npm run build
+
+FROM nginx:1.27-alpine
+
+ENV ADMIN_KEY=""
+
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+EXPOSE 80

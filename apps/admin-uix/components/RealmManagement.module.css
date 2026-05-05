@@ -1,0 +1,220 @@
+.container {
+  @apply space-y-10;
+  animation: fade-in 0.5s ease-in;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.primaryButton {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--stroke-etched);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.primaryButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.card {
+  @apply p-10 transition-all relative cursor-pointer;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.card:hover {
+  border-color: var(--stroke-etched);
+  transform: translateY(-4px);
+}
+
+.cardActions {
+  @apply absolute top-6 right-6 flex space-x-2 transition-opacity;
+  opacity: 0;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+}
+
+.deleteButton {
+  @apply p-2 border transition-all;
+  border-color: rgba(255, 45, 0, 0.2);
+  color: var(--accent-arterial);
+  background: transparent;
+}
+
+.deleteButton:hover {
+  background: var(--accent-arterial);
+  color: #fff;
+}
+
+.cardHeader {
+  @apply flex items-center space-x-6 mb-8;
+}
+
+.cardAvatar {
+  @apply w-16 h-16 flex items-center justify-center font-extrabold text-3xl transition-colors duration-500;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+}
+
+.card:hover .cardAvatar {
+  background: var(--stroke-etched);
+  color: #fff;
+}
+
+.cardTitle {
+  @apply text-xl font-extrabold uppercase leading-none mb-2;
+  letter-spacing: -0.01em;
+}
+
+.cardMeta {
+  @apply text-[10px] font-mono uppercase tracking-[2px];
+  color: var(--text-secondary);
+}
+
+.cardDescription {
+  @apply text-xs italic mb-8;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2rem;
+}
+
+.cardFooter {
+  @apply flex items-center justify-between pt-6;
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.status {
+  @apply flex items-center space-x-2;
+}
+
+.statusDot {
+  @apply w-2 h-2 rounded-full;
+  background: #00ffcc;
+}
+
+.statusText {
+  @apply text-[9px] font-bold uppercase tracking-widest;
+}
+
+.modalOverlay {
+  @apply fixed inset-0 flex items-center justify-center z-[100] p-4;
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  @apply w-full max-w-md p-10 shadow-2xl;
+  background: var(--bg-parian);
+  border: 1px solid var(--stroke-etched);
+  animation: fade-zoom 0.3s ease;
+}
+
+.modalTitle {
+  @apply text-2xl font-extrabold mb-8 uppercase;
+  letter-spacing: -0.02em;
+}
+
+.modalBody {
+  @apply space-y-6;
+}
+
+.formLabel {
+  @apply block text-[10px] font-bold uppercase tracking-widest mb-2;
+}
+
+.formInput {
+  @apply w-full px-4 py-3 border outline-none font-medium;
+  background: #fff;
+  border-color: var(--stroke-milled);
+}
+
+.formInput:focus {
+  border-color: var(--stroke-etched);
+}
+
+.formInputMono {
+  @apply font-mono text-xs;
+}
+
+.formTextarea {
+  @apply w-full px-4 py-3 border outline-none font-medium resize-none;
+  background: #fff;
+  border-color: var(--stroke-milled);
+  height: 6rem;
+}
+
+.modalActions {
+  @apply pt-8 flex space-x-4;
+}
+
+.modalButton {
+  @apply flex-1 py-3 text-[10px] font-bold uppercase transition-all;
+  border: 1px solid var(--stroke-etched);
+}
+
+.modalButtonCancel:hover {
+  background: var(--bg-parian-deep);
+}
+
+.modalButtonPrimary {
+  background: var(--stroke-etched);
+  color: #fff;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modalButtonPrimary:hover {
+  background: #000;
+}
+
+@keyframes fade-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

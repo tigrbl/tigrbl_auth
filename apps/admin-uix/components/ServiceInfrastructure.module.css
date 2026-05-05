@@ -1,0 +1,123 @@
+.container {
+  @apply space-y-10;
+}
+
+.header {
+  @apply flex justify-between items-end;
+}
+
+.title {
+  @apply text-4xl font-extrabold leading-tight;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  @apply text-lg mt-2 font-medium;
+  color: var(--text-secondary);
+}
+
+.primaryButton {
+  padding: 10px 20px;
+  border: 1px solid var(--stroke-etched);
+  background: var(--stroke-etched);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.primaryButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primaryButton:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-neural);
+}
+
+.layoutGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-10;
+}
+
+.panel {
+  @apply p-8;
+  background: #fff;
+  border: 1px solid var(--stroke-etched);
+  box-shadow: var(--shadow-milled);
+}
+
+.panelTitle {
+  @apply text-xs font-bold uppercase tracking-[2px] mb-8;
+}
+
+.brokerList {
+  @apply space-y-6;
+}
+
+.brokerItem {
+  @apply flex items-center justify-between p-5;
+  border: 1px solid var(--stroke-milled);
+}
+
+.brokerInfo {
+  @apply flex items-center space-x-5;
+}
+
+.brokerIcon {
+  @apply p-3 border;
+  border-color: var(--stroke-milled);
+}
+
+.brokerIconConnected {
+  color: var(--accent-neural);
+}
+
+.brokerIconDisconnected {
+  color: var(--accent-arterial);
+}
+
+.brokerName {
+  @apply text-sm font-bold uppercase tracking-tight;
+}
+
+.brokerId {
+  @apply text-[10px] font-mono uppercase mt-1;
+  color: var(--text-secondary);
+}
+
+.brokerActions {
+  @apply flex items-center space-x-6;
+}
+
+.brokerStatus {
+  @apply flex items-center space-x-2;
+}
+
+.statusDot {
+  @apply w-2 h-2 rounded-full;
+}
+
+.statusDotConnected {
+  background: #00ffcc;
+}
+
+.statusDotDisconnected {
+  background: var(--accent-arterial);
+}
+
+.statusLabel {
+  @apply text-[10px] font-bold uppercase;
+}
+
+.restartButton {
+  @apply text-[10px] font-bold uppercase;
+  border-bottom: 1px solid var(--stroke-etched);
+}

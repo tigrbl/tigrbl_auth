@@ -1,0 +1,24 @@
+{
+  "status": "partial",
+  "feature_ids": [
+    "feat:uix-public-boundary",
+    "feat:uix-public-shell",
+    "feat:uix-public-auth-session",
+    "feat:uix-public-login-view",
+    "feat:uix-public-logout-view",
+    "feat:uix-public-registration-view",
+    "feat:uix-public-session-continuity",
+    "feat:uix-public-recovery-view",
+    "feat:uix-public-openapi-contract-consumption",
+    "feat:uix-public-browser-token-handling",
+    "feat:uix-public-problem-details-rendering",
+    "feat:uix-public-safe-error-disclosure"
+  ],
+  "source": "oidc_auth_client/public_client",
+  "target": "apps/public-uix",
+  "checks": [
+    "npm run build:public-uix",
+    "npm run test:public-uix"
+  ],
+  "notes": "Adapted React/Vite public UIX source exists and passes frontend build/test checks. Runtime OpenAPI/OIDC endpoint binding remains partial and is gated by tigrbl_auth discovery metadata."
+}
