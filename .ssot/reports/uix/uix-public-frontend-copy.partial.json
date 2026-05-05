@@ -20,5 +20,14 @@
     "npm run build:public-uix",
     "npm run test:public-uix"
   ],
-  "notes": "Adapted React/Vite public UIX source exists and passes frontend build/test checks. Runtime OpenAPI/OIDC endpoint binding remains partial and is gated by tigrbl_auth discovery metadata."
+  "check_results": {
+    "npm run build:uix": "passed",
+    "npm run test:uix": "passed: public Vitest 7 tests"
+  },
+  "adaptations": [
+    "Login and callback setup require discovered authorization and token endpoints.",
+    "Registration, recovery, MFA, email verification, and logout are gated by discovered endpoint availability.",
+    "Problem details and callback errors are sanitized before public display."
+  ],
+  "notes": "Adapted React/Vite public UIX source exists and passes frontend build/test checks. Runtime OpenAPI/OIDC binding is improved but remains partial until all public backend endpoints and browser smoke coverage are complete."
 }

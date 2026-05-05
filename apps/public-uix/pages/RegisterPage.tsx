@@ -43,7 +43,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
   };
 
   const navigateToLogin = () => {
-    window.location.hash = '/login';
+    window.location.hash = '#/login';
   };
 
   const strength = getPasswordStrength();
@@ -92,7 +92,7 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
 
           <div className="mt-6 pt-6 border-t border-slate-100 text-center">
             <p className="text-sm text-slate-500">
-              By proceeding, you agree to our <button onClick={() => window.location.hash = '/terms'} className="text-brand font-bold hover:underline">Terms of Service</button>.
+              By proceeding, you agree to our <button onClick={() => window.location.hash = '#/terms'} className="text-brand font-bold hover:underline">Terms of Service</button>.
             </p>
           </div>
         </Card>

@@ -6,12 +6,12 @@ import styles from './ClientManagement.module.css';
 import { backendService } from '../services/backendService';
 
 interface ClientManagementProps {
-  realm_id: string;
+  tenant_id: string;
 }
 
 const is_uuid = (value: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 
-const ClientManagement: React.FC<ClientManagementProps> = ({ realm_id }) => {
+const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
   const [clients, set_clients] = useState<OAuthClient[]>([]);
   const [show_modal, set_show_modal] = useState(false);
   const [editing_client, set_editing_client] = useState<OAuthClient | null>(null);
@@ -24,13 +24,13 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ realm_id }) => {
   });
 
   const load_clients = async () => {
-    const list = await backendService.getClients(realm_id);
+    const list = await backendService.getClients(tenant_id);
     set_clients(list);
   };
 
   useEffect(() => {
     void load_clients();
-  }, [realm_id]);
+  }, [tenant_id]);
 
   const handle_save = async () => {
     if (!form_data.name || !form_data.client_id) return;
@@ -51,7 +51,7 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ realm_id }) => {
     } else {
       const client: OAuthClient = {
         id: crypto.randomUUID(),
-        realm_id,
+        tenant_id,
         name: form_data.name,
         client_id: form_data.client_id,
         type: form_data.type as 'public' | 'confidential',

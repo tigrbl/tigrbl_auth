@@ -10,7 +10,7 @@ const DB_NAME = 'tigrbl_auth_admin_uix_db';
 const DB_VERSION = 1;
 
 const STORE_CONFIG: Record<string, StoreConfig> = {
-  realms: { keyPath: 'id' },
+  tenants: { keyPath: 'id' },
   identities: { keyPath: 'id' },
   users: { keyPath: 'id' },
   clients: { keyPath: 'id' },

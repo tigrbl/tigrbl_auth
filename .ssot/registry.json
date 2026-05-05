@@ -13618,11 +13618,13 @@
         "spc:1055"
       ],
       "claim_ids": [
-        "clm:uix-admin-auth-session"
+        "clm:uix-admin-auth-session",
+        "clm:uix-admin-frontend-adapter"
       ],
       "test_ids": [
         "tst:uix-admin-shell-security",
-        "tst:uix-admin-e2e-golden-path"
+        "tst:uix-admin-e2e-golden-path",
+        "tst:uix-admin-frontend-adapter"
       ],
       "requires": []
     },
@@ -13646,11 +13648,13 @@
         "spc:1055"
       ],
       "claim_ids": [
-        "clm:uix-tenant-profile-selector"
+        "clm:uix-tenant-profile-selector",
+        "clm:uix-admin-frontend-adapter"
       ],
       "test_ids": [
         "tst:uix-admin-shell-component",
-        "tst:uix-admin-e2e-golden-path"
+        "tst:uix-admin-e2e-golden-path",
+        "tst:uix-admin-frontend-adapter"
       ],
       "requires": []
     },
@@ -15290,8 +15294,12 @@
       "spec_ids": [
         "spc:1074"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-admin-frontend-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ],
       "requires": []
     },
     {
@@ -15313,8 +15321,12 @@
       "spec_ids": [
         "spc:1075"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15429,8 +15441,12 @@
         "spc:1075",
         "spc:1079"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15452,8 +15468,12 @@
       "spec_ids": [
         "spc:1075"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15475,8 +15495,12 @@
       "spec_ids": [
         "spc:1075"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15498,8 +15522,12 @@
       "spec_ids": [
         "spc:1075"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15568,8 +15596,12 @@
       "spec_ids": [
         "spc:1075"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15591,8 +15623,12 @@
       "spec_ids": [
         "spc:1079"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15706,8 +15742,12 @@
       "spec_ids": [
         "spc:1079"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -15729,8 +15769,12 @@
       "spec_ids": [
         "spc:1079"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
       "requires": []
     },
     {
@@ -30941,6 +30985,48 @@
       "evidence_ids": [
         "evd:ssot-reports-development-runtime-profile-build-config-passed-json"
       ]
+    },
+    {
+      "id": "tst:uix-admin-frontend-adapter",
+      "title": "Admin UIX frontend JSON-RPC adapter checks",
+      "status": "passing",
+      "kind": "vitest",
+      "path": "apps/admin-uix/services/jsonRpcService.test.ts",
+      "feature_ids": [
+        "feat:uix-admin-boundary",
+        "feat:uix-admin-auth-session",
+        "feat:uix-tenant-profile-selector"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-frontend-adapter"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-frontend-copy"
+      ]
+    },
+    {
+      "id": "tst:uix-public-discovery-adapter",
+      "title": "Public UIX discovery, endpoint gating, and safe error checks",
+      "status": "passing",
+      "kind": "vitest",
+      "path": "apps/public-uix/services/tigrblAuthDiscovery.test.ts",
+      "feature_ids": [
+        "feat:uix-public-boundary",
+        "feat:uix-public-auth-session",
+        "feat:uix-public-login-view",
+        "feat:uix-public-logout-view",
+        "feat:uix-public-registration-view",
+        "feat:uix-public-recovery-view",
+        "feat:uix-public-openapi-contract-consumption",
+        "feat:uix-public-problem-details-rendering",
+        "feat:uix-public-safe-error-disclosure"
+      ],
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "evidence_ids": [
+        "evd:uix-public-frontend-copy"
+      ]
     }
   ],
   "claims": [
@@ -42844,6 +42930,50 @@
       "evidence_ids": [
         "evd:ssot-reports-certification-gap-inventory-json"
       ]
+    },
+    {
+      "id": "clm:uix-admin-frontend-adapter",
+      "title": "Admin UIX frontend adapter expected behavior",
+      "status": "evidenced",
+      "tier": "T1",
+      "kind": "uix-frontend-adapter",
+      "description": "Admin UIX adapter uses runtime rpc.discover, checked-in OpenRPC fallback, tenant semantics, and runtime-only admin credentials.",
+      "feature_ids": [
+        "feat:uix-admin-boundary",
+        "feat:uix-admin-auth-session",
+        "feat:uix-tenant-profile-selector"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ],
+      "evidence_ids": [
+        "evd:uix-admin-frontend-copy"
+      ]
+    },
+    {
+      "id": "clm:uix-public-discovery-adapter",
+      "title": "Public UIX discovery adapter expected behavior",
+      "status": "evidenced",
+      "tier": "T1",
+      "kind": "uix-frontend-adapter",
+      "description": "Public UIX adapter gates browser actions by discovered OIDC/public endpoints and sanitizes problem details before display.",
+      "feature_ids": [
+        "feat:uix-public-boundary",
+        "feat:uix-public-auth-session",
+        "feat:uix-public-login-view",
+        "feat:uix-public-logout-view",
+        "feat:uix-public-registration-view",
+        "feat:uix-public-recovery-view",
+        "feat:uix-public-openapi-contract-consumption",
+        "feat:uix-public-problem-details-rendering",
+        "feat:uix-public-safe-error-disclosure"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
+      ],
+      "evidence_ids": [
+        "evd:uix-public-frontend-copy"
+      ]
     }
   ],
   "evidence": [
@@ -48101,6 +48231,34 @@
       ],
       "test_ids": [
         "tst:tests-interop-test-tier4-external-handoff-templates-py"
+      ]
+    },
+    {
+      "id": "evd:uix-admin-frontend-copy",
+      "title": "Passing frontend evidence for adapted admin UIX copy",
+      "status": "passed",
+      "kind": "vitest-build-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-admin-frontend-copy.partial.json",
+      "claim_ids": [
+        "clm:uix-admin-frontend-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-admin-frontend-adapter"
+      ]
+    },
+    {
+      "id": "evd:uix-public-frontend-copy",
+      "title": "Passing frontend evidence for adapted public UIX copy",
+      "status": "passed",
+      "kind": "vitest-build-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/uix/uix-public-frontend-copy.partial.json",
+      "claim_ids": [
+        "clm:uix-public-discovery-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-public-discovery-adapter"
       ]
     }
   ],

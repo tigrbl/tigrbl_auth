@@ -25,7 +25,7 @@ const ServiceInfrastructure: React.FC = () => {
     };
 
     const init = async () => {
-      add_log("KERNEL: Booting Aegis Service Mesh Orchestrator...");
+      add_log("KERNEL: Booting tigrbl_auth service mesh orchestrator...");
       await global_redis.connect();
       add_log("REDIS: Connection pulse detected.");
       await global_rabbit.connect();

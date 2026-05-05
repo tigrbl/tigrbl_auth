@@ -5,7 +5,7 @@ import { usePlatform } from '../hooks/usePlatform';
 interface LayoutProps {
   children: React.ReactNode;
   user?: any;
-  onLogout?: () => void;
+  onLogout?: () => void | Promise<void>;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
@@ -17,7 +17,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div
             className="text-2xl font-bold text-slate-900 cursor-pointer flex items-center gap-2 group"
-            onClick={() => window.location.hash = '/'}
+            onClick={() => window.location.hash = '#/'}
           >
             <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white transition-transform group-hover:scale-105">
               {platform.logoLetter}
@@ -32,7 +32,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
                   <span className="hidden sm:inline text-sm font-medium text-slate-700">{user.name}</span>
                 </div>
                 <button
-                  onClick={onLogout}
+                  onClick={() => void onLogout?.()}
                   className="text-sm font-semibold text-slate-500 hover:text-brand transition-colors"
                 >
                   Sign Out
@@ -41,13 +41,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
             ) : (
               <div className="flex gap-4">
                 <button
-                  onClick={() => window.location.hash = '/login'}
+                  onClick={() => window.location.hash = '#/login'}
                   className="text-sm font-semibold text-slate-600 hover:text-brand transition-colors"
                 >
                   Sign In
                 </button>
                 <button
-                  onClick={() => window.location.hash = '/register'}
+                  onClick={() => window.location.hash = '#/register'}
                   className="text-sm font-semibold bg-brand text-white px-4 py-2 rounded-lg hover:opacity-90 transition-all shadow-sm"
                 >
                   Join {platform.name}
@@ -67,7 +67,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
           </div>
           <div className="flex gap-6">
             <button
-              onClick={() => window.location.hash = '/terms'}
+              onClick={() => window.location.hash = '#/terms'}
               className="text-xs font-bold text-slate-400 hover:text-brand transition-colors"
             >
               Terms of Service

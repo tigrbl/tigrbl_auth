@@ -15,5 +15,14 @@
     "npm run build:admin-uix",
     "npm run test:admin-uix"
   ],
-  "notes": "Adapted React/Vite admin UIX source exists and passes frontend build/test checks. Runtime OpenRPC method binding remains partial and must continue to defer to tigrbl_auth admin contract discovery."
+  "check_results": {
+    "npm run build:uix": "passed",
+    "npm run test:uix": "passed: admin Vitest 4 tests"
+  },
+  "adaptations": [
+    "Admin resource naming now uses tigrbl_auth tenant semantics instead of source realm semantics.",
+    "Admin RPC discovery uses runtime rpc.discover first and falls back to the checked-in OpenRPC catalog.",
+    "Admin credentials are runtime/session supplied only; no Vite admin API-key value is embedded in built assets."
+  ],
+  "notes": "Adapted React/Vite admin UIX source exists and passes frontend build/test checks. Runtime OpenRPC method binding is improved but remains partial because copied screens still gate unsupported admin mutations by discovered method availability."
 }

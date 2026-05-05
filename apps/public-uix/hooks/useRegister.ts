@@ -1,6 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { User, AuthProvider } from '../types';
+import { postDiscoveredJson, safeProblemMessage } from '../services/tigrblAuthDiscovery';
 
 export const useRegister = (onUserCreated: (user: User) => void) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,21 +12,24 @@ export const useRegister = (onUserCreated: (user: User) => void) => {
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      const user: User = {
-        id: 'nexus-' + Math.random().toString(36).substr(2, 9),
-        email,
+      const response = await postDiscoveredJson<Partial<User>>('registration_endpoint', 'registration', {
         name,
-        picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`,
+        email,
+      });
+      const user: User = {
+        id: String(response?.id || email),
+        email: String(response?.email || email),
+        name: String(response?.name || name),
+        picture: typeof response?.picture === 'string' ? response.picture : undefined,
         provider: AuthProvider.GENERIC,
-        isEmailVerified: false,
-        mfaEnabled: false
+        isEmailVerified: response?.isEmailVerified === true,
+        mfaEnabled: response?.mfaEnabled === true
       };
       onUserCreated(user);
       setVerificationEmailSent(true);
-      window.location.hash = '/verify-email';
+      window.location.hash = '#/verify-email';
     } catch (err: any) {
-      setError(err.message);
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }

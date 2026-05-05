@@ -13,3 +13,8 @@
 /node_modules/
 /apps/*/node_modules/
 /apps/*/dist/
+/*.db
+/*.db-shm
+/*.db-wal
+/*.sqlite
+/*.sqlite3

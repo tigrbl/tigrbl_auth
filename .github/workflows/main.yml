@@ -18,6 +18,7 @@ jobs:
     permissions:
       actions: read
       contents: read
+      pull-requests: read
       security-events: write
     with:
       python-version: '3.11'

@@ -1,9 +1,9 @@
 
-import { AuthProvider, OidcConfig } from '../types';
+import { OidcConfig } from '../types';
 import { buildTigrblAuthOidcConfig } from '../services/tigrblAuthDiscovery';
 
 export const getEnvVar = (key: string): string => {
-  const lsKey = `nexus_env_${key}`;
+  const lsKey = `tigrbl_auth_env_${key}`;
   try {
     const lsVal = localStorage.getItem(lsKey);
     if (lsVal) return lsVal;
@@ -17,17 +17,7 @@ export const getEnvVar = (key: string): string => {
   return '';
 };
 
-export const getProviderConfig = (provider: AuthProvider): OidcConfig => {
-  const configuredRedirectUri = getEnvVar('VITE_OIDC_CALLBACK_URL');
-  return {
-    clientId: getEnvVar(`VITE_${provider.toUpperCase()}_CLIENT_ID`),
-    authority: provider === AuthProvider.GOOGLE ? 'https://accounts.google.com' : getEnvVar(`VITE_${provider.toUpperCase()}_AUTHORITY`),
-    redirectUri: configuredRedirectUri || `${window.location.origin}/#/callback`,
-    scope: provider === AuthProvider.GITHUB ? 'read:user user:email' : 'openid profile email'
-  };
-};
-
 export const getTigrblAuthProviderConfig = async (): Promise<OidcConfig> => {
-  const clientId = getEnvVar('VITE_TIGRBL_AUTH_CLIENT_ID') || getEnvVar('VITE_GENERIC_CLIENT_ID') || 'tigrbl-auth-public-uix';
+  const clientId = getEnvVar('VITE_TIGRBL_AUTH_CLIENT_ID') || 'tigrbl-auth-public-uix';
   return buildTigrblAuthOidcConfig(clientId);
 };

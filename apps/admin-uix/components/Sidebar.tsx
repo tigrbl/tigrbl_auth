@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active_tab, set_active_tab, is_admin 
   const menu_items = [
     { section: 'Core Logic', items: [
       { id: 'dashboard', label: 'Dashboard', icon: Icons.Dashboard },
-      { id: 'realms', label: 'Realms Control', icon: Icons.Settings },
+      { id: 'tenants', label: 'Tenants Control', icon: Icons.Settings },
       { id: 'identities', label: 'Identity Pool', icon: Icons.Users },
     ]},
     { section: 'Infrastructure', items: [
@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active_tab, set_active_tab, is_admin 
            </div>
            <div className={styles.profileDetails}>
               <p className={styles.profileName}>{is_admin ? 'SUPERADMIN.ROOT' : 'ADMIN.ROOT'}</p>
-              <p className={styles.profileMeta}>{is_admin ? 'Aegis Platform' : 'Namespace Access'}</p>
+              <p className={styles.profileMeta}>{is_admin ? 'tigrbl_auth Platform' : 'Namespace Access'}</p>
            </div>
         </div>
       </div>

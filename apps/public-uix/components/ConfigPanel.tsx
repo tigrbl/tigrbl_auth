@@ -19,13 +19,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
 }) => {
   const platform = usePlatform();
   const [config, setConfig] = useState({
-    VITE_GOOGLE_CLIENT_ID: '',
-    VITE_GITHUB_CLIENT_ID: '',
-    VITE_KEYCLOAK_CLIENT_ID: '',
-    VITE_KEYCLOAK_AUTHORITY: '',
-    VITE_GENERIC_CLIENT_ID: '',
-    VITE_GENERIC_AUTHORITY: '',
-    VITE_GENERIC_SCOPE: '',
+    VITE_TIGRBL_AUTH_CLIENT_ID: '',
   });
 
   const [platformConfig, setPlatformConfig] = useState<PlatformConfig>({ ...platform });
@@ -34,7 +28,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
     if (isOpen) {
       const newConfig = { ...config };
       Object.keys(config).forEach(key => {
-        const val = localStorage.getItem(`nexus_env_${key}`);
+        const val = localStorage.getItem(`tigrbl_auth_env_${key}`);
         if (val) (newConfig as any)[key] = val;
       });
       setConfig(newConfig);
@@ -44,8 +38,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
 
   const handleSave = () => {
     Object.entries(config).forEach(([key, value]) => {
-      if (value) localStorage.setItem(`nexus_env_${key}`, value as string);
-      else localStorage.removeItem(`nexus_env_${key}`);
+      if (value) localStorage.setItem(`tigrbl_auth_env_${key}`, value as string);
+      else localStorage.removeItem(`tigrbl_auth_env_${key}`);
     });
     platform.updatePlatform(platformConfig);
     onClose();
@@ -173,10 +167,9 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         {/* OIDC ADAPTERS SECTION */}
         {showAdapterSettings && (
           <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">OIDC Adapter Engine</h3>
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">OIDC Client</h3>
             <div className="space-y-3">
-              <Input label="Google Client ID" value={config.VITE_GOOGLE_CLIENT_ID} onChange={e => setConfig({...config, VITE_GOOGLE_CLIENT_ID: e.target.value})} />
-              <Input label="GitHub Client ID" value={config.VITE_GITHUB_CLIENT_ID} onChange={e => setConfig({...config, VITE_GITHUB_CLIENT_ID: e.target.value})} />
+              <Input label="Client ID" value={config.VITE_TIGRBL_AUTH_CLIENT_ID} onChange={e => setConfig({...config, VITE_TIGRBL_AUTH_CLIENT_ID: e.target.value})} />
             </div>
           </div>
         )}

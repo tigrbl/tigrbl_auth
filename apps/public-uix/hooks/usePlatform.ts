@@ -18,7 +18,7 @@ export const usePlatform = () => {
 
     keys.forEach(key => {
       // Priority: LocalStorage (Runtime Overrides) > defaults.ts (Env or Static)
-      const storedValue = parseStoredValue(key, localStorage.getItem(`nexus_platform_${key}`));
+      const storedValue = parseStoredValue(key, localStorage.getItem(`tigrbl_auth_platform_${key}`));
       config[key] = storedValue !== undefined ? storedValue : DEFAULT_PLATFORM_CONFIG[key];
     });
 
@@ -104,7 +104,7 @@ export const usePlatform = () => {
       Object.entries(updates).forEach(([key, val]) => {
         if (val !== undefined) {
           const serialized = typeof val === 'boolean' ? String(val) : String(val);
-          localStorage.setItem(`nexus_platform_${key}`, serialized);
+          localStorage.setItem(`tigrbl_auth_platform_${key}`, serialized);
         }
       });
       return next;

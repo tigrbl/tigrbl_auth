@@ -1,7 +1,7 @@
 
 export type UUID = string;
 
-export type Realm = {
+export type Tenant = {
   id: UUID;
   name: string;
   slug: string;
@@ -18,7 +18,7 @@ export enum UserStatus {
 
 export type User = {
   id: UUID;
-  realm_id: UUID;
+  tenant_id: UUID;
   username: string;
   email: string;
   roles: string[];
@@ -31,7 +31,7 @@ export type User = {
 
 export type OAuthClient = {
   id: UUID;
-  realm_id: UUID;
+  tenant_id: UUID;
   name: string;
   client_id: UUID;
   client_secret?: string;
@@ -44,7 +44,7 @@ export type PolicyType = 'CEDAR' | 'OPA';
 
 export type PolicyGate = {
   id: UUID;
-  realm_id: UUID;
+  tenant_id: UUID;
   name: string;
   type: PolicyType;
   content: string;

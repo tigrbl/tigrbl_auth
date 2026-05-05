@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
-import { Card, SocialButton, Input, Checkbox } from '../components/UI';
+import { Card, Input, Checkbox } from '../components/UI';
 import { ConfigPanel } from '../components/ConfigPanel';
-import { GOOGLE_ICON, GITHUB_ICON, KEYCLOAK_ICON } from '../constants';
 import { AuthProvider } from '../types';
 import { usePlatform } from '../hooks/usePlatform';
 
@@ -54,7 +53,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
   };
 
   const navigateToRegister = () => {
-    window.location.hash = '/register';
+    window.location.hash = '#/register';
   };
 
   return (
@@ -87,36 +86,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
               </div>
             )}
 
-            <div className="grid grid-cols-1 gap-3">
-              <SocialButton
-                label="Google"
-                icon={GOOGLE_ICON}
-                onClick={() => onLogin(AuthProvider.GOOGLE, remember)}
-                disabled={isLoading}
-              />
-              <SocialButton
-                label="GitHub"
-                icon={GITHUB_ICON}
-                onClick={() => onLogin(AuthProvider.GITHUB, remember)}
-                disabled={isLoading}
-              />
-              <SocialButton
-                label="Keycloak"
-                icon={KEYCLOAK_ICON}
-                onClick={() => onLogin(AuthProvider.KEYCLOAK, remember)}
-                disabled={isLoading}
-              />
-            </div>
-
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-100"></div>
-              </div>
-              <div className="relative flex justify-center text-[10px] uppercase tracking-widest">
-                <span className="bg-white px-3 text-slate-400 font-bold">Identity Credentials</span>
-              </div>
-            </div>
-
             <form className="space-y-5" onSubmit={handleEmailSignIn}>
               <Input
                 label="Identifier"
@@ -144,7 +113,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
                 <Checkbox label="Remember this device" checked={remember} onChange={setRemember} />
                 <button
                   type="button"
-                  onClick={() => window.location.hash = '/forgot-password'}
+                  onClick={() => window.location.hash = '#/forgot-password'}
                   className="text-xs font-bold text-brand hover:opacity-80 transition-colors"
                 >
                   Forgot Secret?

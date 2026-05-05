@@ -36,7 +36,7 @@ export const CallbackPage: React.FC<CallbackPageProps> = ({ onHandleCallback }) 
         setTimeout(() => window.close(), 500);
       } else {
         // Standard redirect flow
-        onHandleCallback(provider || AuthProvider.GOOGLE);
+        onHandleCallback(provider || AuthProvider.GENERIC);
       }
     }
   }, [onHandleCallback]);

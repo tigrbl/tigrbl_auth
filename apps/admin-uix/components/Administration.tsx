@@ -24,7 +24,7 @@ const Administration: React.FC<AdministrationProps> = ({ tab }) => {
             <h3 className={styles.cardTitle}>Global Variables</h3>
             <div className={styles.variableList}>
               {[
-                { key: 'AEGIS_KEY_ROTATION_PERIOD', val: '90d', type: 'SECURE' },
+                { key: 'TIGRBL_AUTH_KEY_ROTATION_PERIOD', val: '90d', type: 'SECURE' },
                 { key: 'FLUX_CONCURRENCY_CAP', val: '50000', type: 'INFRA' },
                 { key: 'AUDIT_RETENTION_DAYS', val: '365', type: 'POLICY' },
               ].map((v, i) => (

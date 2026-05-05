@@ -41,7 +41,7 @@ export const EmailVerificationPage: React.FC<EmailVerificationPageProps> = ({
           )}
 
           <p className="text-sm text-slate-600">
-            Please click the link in the email to activate your Nexus account and complete registration.
+            Please click the link in the email to activate your tigrbl_auth account and complete registration.
           </p>
 
           <button
@@ -67,7 +67,7 @@ export const EmailVerificationPage: React.FC<EmailVerificationPageProps> = ({
         </Card>
 
         <button
-          onClick={() => window.location.hash = '/login'}
+          onClick={() => window.location.hash = '#/login'}
           className="text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors"
         >
           Back to Login

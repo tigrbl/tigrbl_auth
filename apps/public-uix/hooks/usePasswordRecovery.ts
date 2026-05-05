@@ -1,5 +1,6 @@
 
 import { useState, useCallback } from 'react';
+import { postDiscoveredJson, safeProblemMessage } from '../services/tigrblAuthDiscovery';
 
 export const usePasswordRecovery = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,10 +11,10 @@ export const usePasswordRecovery = () => {
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(r => setTimeout(r, 1000));
+      await postDiscoveredJson('password_recovery_endpoint', 'password recovery', { email });
       setResetRequestSent(true);
     } catch (err: any) {
-      setError(err.message);
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }
@@ -23,10 +24,10 @@ export const usePasswordRecovery = () => {
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(r => setTimeout(r, 1000));
-      window.location.hash = '/login';
+      await postDiscoveredJson('password_reset_endpoint', 'password reset', { password, token });
+      window.location.hash = '#/login';
     } catch (err: any) {
-      setError(err.message);
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }

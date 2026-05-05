@@ -37,13 +37,7 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
             </div>
             <div className="pt-4 space-y-3">
               <button
-                onClick={() => window.location.hash = `/reset-password?token=MOCK_TOKEN`}
-                className="w-full py-3 bg-indigo-50 text-indigo-600 font-bold rounded-xl hover:bg-indigo-100 transition-colors"
-              >
-                Simulate clicking email link
-              </button>
-              <button
-                onClick={() => window.location.hash = '/login'}
+                onClick={() => window.location.hash = '#/login'}
                 className="w-full py-3 text-slate-500 font-semibold hover:text-slate-700"
               >
                 Return to Login
@@ -84,7 +78,7 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
             </button>
             <button
               type="button"
-              onClick={() => window.location.hash = '/login'}
+              onClick={() => window.location.hash = '#/login'}
               className="w-full text-sm font-bold text-slate-400 hover:text-indigo-600 transition-colors"
             >
               Wait, I remember it!

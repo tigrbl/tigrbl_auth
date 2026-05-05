@@ -1,6 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { User, AuthProvider } from '../types';
+import { postDiscoveredJson, safeProblemMessage } from '../services/tigrblAuthDiscovery';
 
 export const useMfa = (onMfaSuccess: (user: User) => void) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,24 +11,20 @@ export const useMfa = (onMfaSuccess: (user: User) => void) => {
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(r => setTimeout(r, 1500));
-      if (code === '123456') {
-        const mockUser: User = {
-          id: 'ent-' + Math.random().toString(36).substr(2, 9),
-          email: 'enterprise.user@company.com',
-          name: 'Verified Enterprise User',
-          provider: AuthProvider.GENERIC,
-          isEmailVerified: true,
-          mfaEnabled: true,
-          picture: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Enterprise'
-        };
-        onMfaSuccess(mockUser);
-        window.location.hash = '/profile';
-      } else {
-        throw new Error('Invalid MFA code. Please try again.');
-      }
+      const response = await postDiscoveredJson<Partial<User>>('mfa_verification_endpoint', 'MFA verification', { code });
+      const user: User = {
+        id: String(response?.id || 'tigrbl-auth-user'),
+        email: String(response?.email || ''),
+        name: String(response?.name || 'Verified tigrbl_auth user'),
+        provider: AuthProvider.GENERIC,
+        isEmailVerified: response?.isEmailVerified !== false,
+        mfaEnabled: true,
+        picture: typeof response?.picture === 'string' ? response.picture : undefined,
+      };
+      onMfaSuccess(user);
+      window.location.hash = '#/profile';
     } catch (err: any) {
-      setError(err.message);
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }

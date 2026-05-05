@@ -6,29 +6,29 @@ import styles from './UserManagement.module.css';
 import { backendService } from '../services/backendService';
 
 interface UserManagementProps {
-  realm_id: string;
+  tenant_id: string;
 }
 
-const UserManagement: React.FC<UserManagementProps> = ({ realm_id }) => {
+const UserManagement: React.FC<UserManagementProps> = ({ tenant_id }) => {
   const [users, set_users] = useState<User[]>([]);
   const [show_invite, set_show_invite] = useState(false);
   const [invite_email, set_invite_email] = useState('');
   const [invite_role, set_invite_role] = useState('L1_USER');
 
   const load_users = async () => {
-    const list = await backendService.getUsers(realm_id);
+    const list = await backendService.getUsers(tenant_id);
     set_users(list);
   };
 
   useEffect(() => {
     void load_users();
-  }, [realm_id]);
+  }, [tenant_id]);
 
   const handle_invite = async () => {
     if (!invite_email) return;
     const new_user: User = {
       id: crypto.randomUUID(),
-      realm_id: realm_id,
+      tenant_id: tenant_id,
       username: invite_email.split('@')[0],
       email: invite_email,
       roles: [invite_role.toLowerCase()],
@@ -42,7 +42,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ realm_id }) => {
   };
 
   const handle_delete = async (id: string) => {
-    if (confirm('Evict this entity from the realm? Session tokens will be invalidated.')) {
+    if (confirm('Evict this entity from the tenant? Session tokens will be invalidated.')) {
       await backendService.deleteUser(id);
       await load_users();
     }
@@ -61,7 +61,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ realm_id }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Realm Members</h1>
+          <h1 className={styles.title}>Tenant Members</h1>
           <p className={styles.subtitle}>Onboard, invite, and audit identity access.</p>
         </div>
         <div className={styles.headerActions}>

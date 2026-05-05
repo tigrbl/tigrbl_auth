@@ -1,5 +1,5 @@
 import { gateway_rpc } from './jsonRpcService';
-import type { Alert, OAuthClient, PolicyGate, Realm, TelemetryData, User } from '../types';
+import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, User } from '../types';
 
 const toError = (error: unknown): Error => {
   if (error instanceof Error) {
@@ -29,7 +29,7 @@ async function supportedRpcResult<T>(method: string, params: unknown, fallback: 
 }
 
 export const backendService = {
-  async getRealms(): Promise<Realm[]> {
+  async getTenants(): Promise<Tenant[]> {
     const tenants = await supportedRpcResult<any[]>('tenant.list', {}, []);
     return tenants.map((tenant) => ({
       id: String(tenant.id ?? tenant.tenant_id ?? tenant.slug ?? tenant.name),
@@ -40,22 +40,24 @@ export const backendService = {
     }));
   },
 
-  async createRealm(realm: Pick<Realm, 'name' | 'slug' | 'description'>): Promise<Realm> {
-    return supportedRpcResult<Realm>('tenant.create', realm, {
-      id: realm.slug,
-      name: realm.name,
-      slug: realm.slug,
-      description: realm.description,
+  async createTenant(tenant: Pick<Tenant, 'name' | 'slug' | 'description'>): Promise<Tenant> {
+    return supportedRpcResult<Tenant>('tenant.create', tenant, {
+      id: tenant.slug,
+      name: tenant.name,
+      slug: tenant.slug,
+      description: tenant.description,
     });
   },
 
-  async deleteRealm(id: string): Promise<void> {
+  async deleteTenant(id: string): Promise<void> {
     await supportedRpcResult('tenant.delete', { id }, undefined);
   },
 
-  async getUsers(realmId: string): Promise<User[]> {
-    const users = await supportedRpcResult<User[]>('identity.list', {}, []);
-    return users.filter((user) => user.realm_id === realmId);
+  async getUsers(tenantId: string): Promise<User[]> {
+    const users = await supportedRpcResult<any[]>('identity.list', { tenant_id: tenantId }, []);
+    return users
+      .map((user) => ({ ...user, tenant_id: user.tenant_id }))
+      .filter((user) => user.tenant_id === tenantId);
   },
 
   async createUser(user: User): Promise<User> {
@@ -70,9 +72,11 @@ export const backendService = {
     await supportedRpcResult('identity.delete', { id }, undefined);
   },
 
-  async getClients(realmId: string): Promise<OAuthClient[]> {
-    const clients = await supportedRpcResult<OAuthClient[]>('client.list', {}, []);
-    return clients.filter((client) => client.realm_id === realmId);
+  async getClients(tenantId: string): Promise<OAuthClient[]> {
+    const clients = await supportedRpcResult<any[]>('client.list', { tenant_id: tenantId }, []);
+    return clients
+      .map((client) => ({ ...client, tenant_id: client.tenant_id }))
+      .filter((client) => client.tenant_id === tenantId);
   },
 
   async createClient(client: OAuthClient): Promise<OAuthClient> {
@@ -87,9 +91,11 @@ export const backendService = {
     await supportedRpcResult('client.delete', { id }, undefined);
   },
 
-  async getPolicies(realmId: string): Promise<PolicyGate[]> {
-    const policies = await supportedRpcResult<PolicyGate[]>('policy.list', {}, []);
-    return policies.filter((policy) => policy.realm_id === realmId);
+  async getPolicies(tenantId: string): Promise<PolicyGate[]> {
+    const policies = await supportedRpcResult<any[]>('policy.list', { tenant_id: tenantId }, []);
+    return policies
+      .map((policy) => ({ ...policy, tenant_id: policy.tenant_id }))
+      .filter((policy) => policy.tenant_id === tenantId);
   },
 
   async syncPolicy(policy: PolicyGate): Promise<void> {

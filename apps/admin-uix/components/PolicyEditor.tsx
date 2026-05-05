@@ -7,10 +7,10 @@ import styles from './PolicyEditor.module.css';
 import { backendService } from '../services/backendService';
 
 interface PolicyEditorProps {
-  realm_id: string;
+  tenant_id: string;
 }
 
-const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
+const PolicyEditor: React.FC<PolicyEditorProps> = ({ tenant_id }) => {
   const [policies, set_policies] = useState<PolicyGate[]>([]);
   const [active_policy, set_active_policy] = useState<PolicyGate | null>(null);
   const [editor_content, set_editor_content] = useState('');
@@ -19,7 +19,7 @@ const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
   const [ai_prompt, set_ai_prompt] = useState('');
 
   const load_policies = async () => {
-    const list = await backendService.getPolicies(realm_id);
+    const list = await backendService.getPolicies(tenant_id);
     set_policies(list);
     if (list.length > 0) {
       set_active_policy(list[0]);
@@ -32,7 +32,7 @@ const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
 
   useEffect(() => {
     void load_policies();
-  }, [realm_id]);
+  }, [tenant_id]);
 
   const handle_save = async () => {
     if (!active_policy) return;
@@ -55,7 +55,7 @@ const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
     set_is_pushing(true);
     try {
       await global_redis.publish('GATEWAY_POLICY_PUSH', {
-        realm_id,
+        tenant_id,
         policy_id: active_policy.id,
         version: active_policy.version,
         content: editor_content,
@@ -77,7 +77,7 @@ const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
 
     const new_p: PolicyGate = {
       id: crypto.randomUUID(),
-      realm_id,
+      tenant_id,
       name,
       type,
       content: type === 'CEDAR' ? 'permit(principal, action, resource);' : 'package policy.authz\n\ndefault allow = false',
@@ -114,7 +114,7 @@ const PolicyEditor: React.FC<PolicyEditorProps> = ({ realm_id }) => {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Policy Gates</h1>
-          <p className={styles.subtitle}>Fine-grained ABAC logic for the {realm_id} namespace.</p>
+          <p className={styles.subtitle}>Fine-grained ABAC logic for the {tenant_id} namespace.</p>
         </div>
         <div className={styles.headerActions}>
           <button onClick={() => void handle_delete()} className={`${styles.buttonBase} ${styles.buttonDanger}`} disabled={!active_policy}>Purge</button>

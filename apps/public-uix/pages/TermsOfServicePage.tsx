@@ -16,14 +16,14 @@ export const TermsOfServicePage: React.FC = () => {
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2">1. Acceptance of Terms</h2>
               <p className="text-slate-600 leading-relaxed">
-                By accessing and using Nexus Auth ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We reserve the right to modify these terms at any time, and your continued use of the Service signifies your acceptance of any updated terms.
+                By accessing and using tigrbl_auth Auth ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. We reserve the right to modify these terms at any time, and your continued use of the Service signifies your acceptance of any updated terms.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2">2. User Accounts & Identity</h2>
               <p className="text-slate-600 leading-relaxed">
-                Nexus Auth provides identity federation services via OIDC and OAuth2 protocols. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.
+                tigrbl_auth Auth provides identity federation services via OIDC and OAuth2 protocols. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.
               </p>
               <ul className="list-disc list-inside text-slate-600 space-y-2 ml-4">
                 <li>You must provide accurate and complete registration information.</li>
@@ -48,21 +48,21 @@ export const TermsOfServicePage: React.FC = () => {
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2">4. Privacy and Data Protection</h2>
               <p className="text-slate-600 leading-relaxed">
-                Your privacy is important to us. Our use of your personal information is governed by our Privacy Policy. By using the Service, you consent to the collection and use of information as described therein, including processing by third-party identity providers like Google and GitHub.
+                Your privacy is important to us. Our use of your personal information is governed by our Privacy Policy. By using the Service, you consent to the collection and use of information by the configured tigrbl_auth public identity surface.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2">5. Limitation of Liability</h2>
               <p className="text-slate-600 leading-relaxed">
-                Nexus Auth is provided "as is" without any warranties. In no event shall Nexus Auth, its affiliates, or its partners be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use of the Service.
+                tigrbl_auth Auth is provided "as is" without any warranties. In no event shall tigrbl_auth Auth, its affiliates, or its partners be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use of the Service.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2">6. Governing Law</h2>
               <p className="text-slate-600 leading-relaxed">
-                These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Nexus Auth operates, without regard to its conflict of law provisions.
+                These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which tigrbl_auth Auth operates, without regard to its conflict of law provisions.
               </p>
             </section>
 
@@ -77,7 +77,7 @@ export const TermsOfServicePage: React.FC = () => {
                 Go Back
               </button>
               <button
-                onClick={() => window.location.hash = '/register'}
+                onClick={() => window.location.hash = '#/register'}
                 className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-indigo-700 transition-all"
               >
                 Return to Registration

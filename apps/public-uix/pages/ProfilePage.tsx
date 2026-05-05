@@ -18,7 +18,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
         />
         <div>
           <h1 className="text-3xl font-bold text-slate-900">{user.name}</h1>
-          <p className="text-slate-500 font-medium">Logged in via {user.provider.charAt(0).toUpperCase() + user.provider.slice(1)}</p>
+          <p className="text-slate-500 font-medium">Logged in via tigrbl_auth</p>
         </div>
       </div>
 
@@ -48,9 +48,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
         <div className="p-6">
           <pre className="bg-slate-900 text-indigo-300 p-4 rounded-xl text-sm overflow-x-auto font-mono leading-relaxed">
             {JSON.stringify({
-              iss: user.provider === 'google' ? 'https://accounts.google.com' : 'https://github.com',
+              iss: 'tigrbl_auth',
               sub: user.id,
-              aud: 'nexus-app-client',
+              aud: 'tigrbl-auth-public-uix',
               iat: Math.floor(Date.now() / 1000),
               exp: Math.floor(Date.now() / 1000) + 3600,
               provider: user.provider

@@ -1,6 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { User } from '../types';
+import { postDiscoveredJson, safeProblemMessage } from '../services/tigrblAuthDiscovery';
 
 export const useEmailVerification = (currentUser: User | null, onVerified: (user: User) => void) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,12 +16,15 @@ export const useEmailVerification = (currentUser: User | null, onVerified: (user
     setIsLoading(true);
     setError(null);
     try {
-      await new Promise(r => setTimeout(r, 2000));
+      await postDiscoveredJson('email_verification_endpoint', 'email verification', {
+        user_id: currentUser.id,
+        email: currentUser.email,
+      });
       const updatedUser = { ...currentUser, isEmailVerified: true };
       onVerified(updatedUser);
-      window.location.hash = '/profile';
+      window.location.hash = '#/profile';
     } catch (err: any) {
-      setError(err.message);
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }
@@ -30,14 +34,17 @@ export const useEmailVerification = (currentUser: User | null, onVerified: (user
     setIsLoading(true);
     setResendSuccess(false);
     try {
-      await new Promise(r => setTimeout(r, 1500));
+      await postDiscoveredJson('email_verification_resend_endpoint', 'email verification resend', {
+        user_id: currentUser?.id,
+        email: currentUser?.email,
+      });
       setResendSuccess(true);
     } catch (err: any) {
-      setError('Failed to resend verification email.');
+      setError(safeProblemMessage(err));
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [currentUser]);
 
   return { verifyEmail, resendVerificationEmail, resendSuccess, isLoading, error };
 };

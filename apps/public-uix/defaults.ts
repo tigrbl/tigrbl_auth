@@ -6,7 +6,7 @@ import { PlatformConfig } from './types';
  */
 const resolveEnv = (key: string, fallback: string): string => {
   if (typeof window !== 'undefined') {
-    const local = localStorage.getItem(`nexus_platform_${key.toLowerCase().replace('vite_platform_', '')}`);
+    const local = localStorage.getItem(`tigrbl_auth_platform_${key.toLowerCase().replace('vite_platform_', '')}`);
     if (local) return local;
   }
 

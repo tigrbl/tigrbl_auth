@@ -27,10 +27,13 @@ export type RpcDiscoverResult = {
 };
 
 type JsonRpcHandler = (params: unknown) => Promise<JsonRpcResponse<unknown>> | JsonRpcResponse<unknown>;
+type OpenRpcContract = {
+  methods?: Array<{ name?: string }>;
+};
 
 type PolicySyncRecord = {
   id: string;
-  realm_id: string;
+  tenant_id: string;
   engine: PolicyGate['type'];
   version: number;
   status: 'synced' | 'removed';
@@ -40,7 +43,7 @@ type PolicySyncRecord = {
 
 type ControlPlanePolicy = {
   id: string;
-  realm_id: string;
+  tenant_id: string;
   name: string;
   type: PolicyGate['type'];
   content: string;
@@ -50,6 +53,7 @@ type ControlPlanePolicy = {
 
 const CONTROL_PLANE_KEY = storageKeyFor('policy-control-plane');
 const SYNC_RECORDS_KEY = storageKeyFor('policy-sync');
+const DEFAULT_OPENRPC_CATALOG_URL = "/specs/openrpc/profiles/baseline-development/tigrbl_auth.admin.openrpc.json";
 
 const computeHash = (value: string): string => {
   let hash = 0;
@@ -105,9 +109,7 @@ export class JsonRpcService {
       id: generate_uuid(),
     };
 
-    const admin_token = this.getLocalToken() ?? this.getDevToken();
-
-    console.debug(`[JSON-RPC] Request: ${method}`, params);
+    const admin_token = this.getRuntimeToken();
 
     try {
       const response = await this.requestJsonRpc(request, admin_token);
@@ -137,12 +139,7 @@ export class JsonRpcService {
     }
   }
 
-  private getLocalToken(): string | null {
-    if (typeof localStorage === 'undefined') {
-      return null;
-    }
-
-    const value = localStorage.getItem('tigrbl_auth_admin_api_key');
+  private normalizeToken(value: string | null): string | null {
     if (!value) {
       return null;
     }
@@ -155,10 +152,15 @@ export class JsonRpcService {
     return token;
   }
 
-  private getDevToken(): string | null {
-    const configured_token = import.meta.env.VITE_TIGRBL_AUTH_DEV_ADMIN_API_KEY;
-    if (typeof configured_token === 'string' && configured_token.trim()) {
-      return configured_token.trim();
+  private getRuntimeToken(): string | null {
+    if (typeof sessionStorage !== 'undefined') {
+      const sessionToken = this.normalizeToken(sessionStorage.getItem('tigrbl_auth_admin_api_key'));
+      if (sessionToken) {
+        return sessionToken;
+      }
+    }
+    if (typeof localStorage !== 'undefined') {
+      return this.normalizeToken(localStorage.getItem('tigrbl_auth_admin_api_key'));
     }
     return null;
   }
@@ -182,7 +184,23 @@ export class JsonRpcService {
     if (this.methodCatalog) {
       return this.methodCatalog;
     }
+
+    const discovered = await this.discoverFromRpc();
+    const contract = discovered.size > 0 ? new Set<string>() : await this.discoverFromOpenRpcContract();
+    this.methodCatalog = new Set([...discovered, ...contract]);
+    return this.methodCatalog;
+  }
+
+  async hasMethod(method: string): Promise<boolean> {
+    const catalog = await this.discover();
+    return catalog.has(method);
+  }
+
+  private async discoverFromRpc(): Promise<Set<string>> {
     const response = await this.call<RpcDiscoverResult>("rpc.discover", {});
+    if (response.error) {
+      return new Set();
+    }
     const result = response.result ?? {};
     const fromArrays = [
       ...(result.methods ?? []),
@@ -190,13 +208,36 @@ export class JsonRpcService {
       ...(result.method_names ?? []),
     ];
     const fromRegistry = Object.keys(result.registry ?? {});
-    this.methodCatalog = new Set([...fromArrays, ...fromRegistry]);
-    return this.methodCatalog;
+    return new Set([...fromArrays, ...fromRegistry].filter(Boolean));
   }
 
-  async hasMethod(method: string): Promise<boolean> {
-    const catalog = await this.discover();
-    return catalog.has(method);
+  private async discoverFromOpenRpcContract(): Promise<Set<string>> {
+    const contractUrl = import.meta.env.VITE_TIGRBL_AUTH_ADMIN_OPENRPC_URL || DEFAULT_OPENRPC_CATALOG_URL;
+    try {
+      const response = await fetch(contractUrl, { headers: { Accept: "application/json" } });
+      if (!response.ok) {
+        return new Set();
+      }
+      const contract = (await response.json()) as OpenRpcContract;
+      return new Set((contract.methods ?? []).map((method) => method.name).filter(Boolean) as string[]);
+    } catch {
+      return new Set();
+    }
+  }
+
+  private localResponse<T>(result: T): JsonRpcResponse<T> {
+    return {
+      jsonrpc: "2.0",
+      id: "local",
+      result,
+    };
+  }
+
+  private async callSupported<T>(method: string, params: unknown, fallback: T): Promise<JsonRpcResponse<T>> {
+    if (!(await this.hasMethod(method))) {
+      return this.localResponse(fallback);
+    }
+    return this.call<T>(method, params);
   }
 
   bootstrap(policies: PolicyGate[]): void {
@@ -209,19 +250,19 @@ export class JsonRpcService {
   }
 
   async syncPolicy(policy: PolicyGate): Promise<JsonRpcResponse<PolicySyncRecord>> {
-    return this.call('Policy.sync', { policy });
+    return this.callSupported('policy.sync', { policy }, this.syncLocal(policy));
   }
 
   async removePolicy(policy_id: string): Promise<JsonRpcResponse<PolicySyncRecord>> {
-    return this.call('Policy.remove', { policy_id });
+    return this.callSupported('policy.remove', { policy_id }, this.removeLocal(policy_id));
   }
 
   async bulkSync(policies: PolicyGate[]): Promise<JsonRpcResponse<PolicySyncRecord[]>> {
-    return this.call('Policy.bulk_sync', { policies });
+    return this.callSupported('policy.bulk_sync', { policies }, this.bulkSyncLocal(policies));
   }
 
   async getPolicyStatus(policy_id: string): Promise<JsonRpcResponse<PolicySyncRecord | null>> {
-    return this.call('Policy.status', { policy_id });
+    return this.callSupported('policy.status', { policy_id }, this.getSyncStatus(policy_id));
   }
 
   private updateControlPlane(policies: ControlPlanePolicy[]): void {
@@ -239,7 +280,7 @@ export class JsonRpcService {
     const synced_at = new Date().toISOString();
     const controlPlanePolicy: ControlPlanePolicy = {
       id: policy.id,
-      realm_id: policy.realm_id,
+      tenant_id: policy.tenant_id,
       name: policy.name,
       type: policy.type,
       content: policy.content,
@@ -256,7 +297,7 @@ export class JsonRpcService {
 
     const record: PolicySyncRecord = {
       id: policy.id,
-      realm_id: policy.realm_id,
+      tenant_id: policy.tenant_id,
       engine: policy.type,
       version: policy.version,
       status: 'synced',
@@ -277,7 +318,7 @@ export class JsonRpcService {
     const synced_at = new Date().toISOString();
     const record: PolicySyncRecord = {
       id: policy_id,
-      realm_id: existingPolicy?.realm_id ?? 'unknown',
+      tenant_id: existingPolicy?.tenant_id ?? 'unknown',
       engine: existingPolicy?.type ?? 'CEDAR',
       version: existingPolicy?.version ?? 0,
       status: 'removed',

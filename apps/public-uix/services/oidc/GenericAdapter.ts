@@ -1,5 +1,6 @@
 import { BaseAdapter } from './BaseAdapter';
 import { User, AuthProvider } from '../../types';
+import { safeProblemMessage } from '../tigrblAuthDiscovery';
 
 export class GenericAdapter extends BaseAdapter {
   async authorize(): Promise<void> {
@@ -21,8 +22,10 @@ export class GenericAdapter extends BaseAdapter {
       nonce: nonce
     });
 
-    const authEndpoint = this.config.authorizationEndpoint || `${this.config.authority}/authorize`;
-    this.performRedirect(`${authEndpoint}?${params.toString()}`);
+    if (!this.config.authorizationEndpoint) {
+      throw new Error('login is not available from the discovered tigrbl_auth endpoints.');
+    }
+    this.performRedirect(`${this.config.authorizationEndpoint}?${params.toString()}`);
   }
 
   async handleCallback(): Promise<User> {
@@ -36,8 +39,10 @@ export class GenericAdapter extends BaseAdapter {
     }
 
     try {
-      const tokenEndpoint = this.config.tokenEndpoint || `${this.config.authority}/token`;
-      const tokenResponse = await fetch(tokenEndpoint, {
+      if (!this.config.tokenEndpoint) {
+        throw new Error('callback is not available from the discovered tigrbl_auth endpoints.');
+      }
+      const tokenResponse = await fetch(this.config.tokenEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
@@ -50,28 +55,35 @@ export class GenericAdapter extends BaseAdapter {
       });
 
       const tokens = await tokenResponse.json();
+      if (!tokenResponse.ok) {
+        throw new Error(safeProblemMessage(tokens.error_description || tokens.error || `HTTP ${tokenResponse.status}`));
+      }
       this.clearAuthSession();
 
-      // Fix: Added missing required properties for User interface
+      let profile: Record<string, any> = {};
+      if (this.config.userinfoEndpoint && tokens.access_token) {
+        const userInfoResponse = await fetch(this.config.userinfoEndpoint, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${tokens.access_token}`,
+          },
+        });
+        if (userInfoResponse.ok) {
+          profile = await userInfoResponse.json();
+        }
+      }
+
       return {
-        id: 'gen-' + Math.random().toString(36).substr(2, 9),
-        email: 'user@generic-provider.com',
-        name: 'Enterprise User',
+        id: String(profile.sub || profile.id || 'tigrbl-auth-user'),
+        email: String(profile.email || ''),
+        name: String(profile.name || profile.preferred_username || profile.email || 'tigrbl_auth user'),
         provider: AuthProvider.GENERIC,
-        isEmailVerified: true,
-        mfaEnabled: false
+        isEmailVerified: profile.email_verified !== false,
+        mfaEnabled: false,
+        picture: typeof profile.picture === 'string' ? profile.picture : undefined,
       };
     } catch (e) {
-      console.error('Token exchange failed', e);
-      // Fix: Added missing required properties for User interface
-      return {
-        id: 'demo-generic',
-        email: 'demo@example.com',
-        name: 'Demo Generic User',
-        provider: AuthProvider.GENERIC,
-        isEmailVerified: true,
-        mfaEnabled: false
-      };
+      throw new Error(safeProblemMessage(e));
     }
   }
 }

@@ -4,7 +4,7 @@ export interface User {
   email: string;
   name: string;
   picture?: string;
-  provider: 'google' | 'github' | 'generic' | 'keycloak';
+  provider: 'generic';
   isEmailVerified: boolean;
   mfaEnabled: boolean;
 }
@@ -70,15 +70,18 @@ export interface OidcDiscoveryMetadata {
   token_endpoint?: string;
   userinfo_endpoint?: string;
   registration_endpoint?: string;
+  password_recovery_endpoint?: string;
+  password_reset_endpoint?: string;
+  mfa_verification_endpoint?: string;
+  email_verification_endpoint?: string;
+  email_verification_resend_endpoint?: string;
   revocation_endpoint?: string;
   end_session_endpoint?: string;
+  terms_of_service_uri?: string;
   jwks_uri?: string;
   [key: string]: unknown;
 }
 
 export enum AuthProvider {
-  GOOGLE = 'google',
-  GITHUB = 'github',
-  GENERIC = 'generic',
-  KEYCLOAK = 'keycloak'
+  GENERIC = 'generic'
 }

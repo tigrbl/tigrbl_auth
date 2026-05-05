@@ -1,31 +1,31 @@
 
 import React, { useEffect, useState } from 'react';
 import { Icons } from '../constants';
-import { OAuthClient, PolicyGate, Realm } from '../types';
-import styles from './RealmDetail.module.css';
+import { OAuthClient, PolicyGate, Tenant } from '../types';
+import styles from './TenantDetail.module.css';
 import { backendService } from '../services/backendService';
 
-interface RealmDetailProps {
-  realm: Realm;
+interface TenantDetailProps {
+  tenant: Tenant;
   on_back: () => void;
 }
 
-const RealmDetail: React.FC<RealmDetailProps> = ({ realm, on_back }) => {
+const TenantDetail: React.FC<TenantDetailProps> = ({ tenant, on_back }) => {
   const [clients, set_clients] = useState<OAuthClient[]>([]);
   const [policies, set_policies] = useState<PolicyGate[]>([]);
 
   useEffect(() => {
     const load = async () => {
       const [client_list, policy_list] = await Promise.all([
-        backendService.getClients(realm.id),
-        backendService.getPolicies(realm.id),
+        backendService.getClients(tenant.id),
+        backendService.getPolicies(tenant.id),
       ]);
       set_clients(client_list);
       set_policies(policy_list);
     };
 
     void load();
-  }, [realm.id]);
+  }, [tenant.id]);
 
   return (
     <div className={styles.container}>
@@ -35,8 +35,8 @@ const RealmDetail: React.FC<RealmDetailProps> = ({ realm, on_back }) => {
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           </button>
           <div>
-            <h1 className={styles.title}>{realm.name}</h1>
-            <p className={styles.subtitle}>Namespace Overview: {realm.slug}</p>
+            <h1 className={styles.title}>{tenant.name}</h1>
+            <p className={styles.subtitle}>Namespace Overview: {tenant.slug}</p>
           </div>
         </div>
         <div className={styles.headerActions}>
@@ -51,16 +51,16 @@ const RealmDetail: React.FC<RealmDetailProps> = ({ realm, on_back }) => {
             <h3 className={styles.infoTitle}>Identity Isolation</h3>
             <div className={styles.infoList}>
               <div>
-                <p className={styles.infoLabel}>Realm Unique ID</p>
-                <p className={styles.infoValue}>{realm.id}</p>
+                <p className={styles.infoLabel}>Tenant Unique ID</p>
+                <p className={styles.infoValue}>{tenant.id}</p>
               </div>
               <div>
                 <p className={styles.infoLabel}>Description</p>
-                <p className={styles.infoValueItalic}>"{realm.description || 'No realm manifest provided.'}"</p>
+                <p className={styles.infoValueItalic}>"{tenant.description || 'No tenant manifest provided.'}"</p>
               </div>
               <div className={styles.infoSection}>
                 <p className={styles.infoLabel}>Provisioned Date</p>
-                <p className={styles.infoValue}>{realm.created_at || 'ARCHIVE_DATA'}</p>
+                <p className={styles.infoValue}>{tenant.created_at || 'ARCHIVE_DATA'}</p>
               </div>
             </div>
           </div>
@@ -126,4 +126,4 @@ const RealmDetail: React.FC<RealmDetailProps> = ({ realm, on_back }) => {
   );
 };
 
-export default RealmDetail;
+export default TenantDetail;

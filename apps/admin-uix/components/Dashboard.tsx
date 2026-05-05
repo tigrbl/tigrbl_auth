@@ -7,10 +7,10 @@ import { Alert, TelemetryData } from '../types';
 import { backendService } from '../services/backendService';
 
 interface DashboardProps {
-  realm_id: string;
+  tenant_id: string;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ realm_id }) => {
+const Dashboard: React.FC<DashboardProps> = ({ tenant_id }) => {
   const [telemetry, set_telemetry] = useState<TelemetryData[]>([]);
   const [alerts, set_alerts] = useState<Alert[]>([]);
 
@@ -25,14 +25,14 @@ const Dashboard: React.FC<DashboardProps> = ({ realm_id }) => {
 
   useEffect(() => {
     void refresh();
-  }, [realm_id]);
+  }, [tenant_id]);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Neural Overview</h1>
-          <p className={styles.subtitle}>Real-time gateway flux and cross-realm traffic.</p>
+          <p className={styles.subtitle}>Real-time gateway flux and cross-tenant traffic.</p>
         </div>
         <button className={styles.primaryButton} onClick={() => void refresh()}>Refresh Flux</button>
       </div>

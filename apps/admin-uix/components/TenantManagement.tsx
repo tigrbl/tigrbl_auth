@@ -1,36 +1,36 @@
 
 import React, { useState } from 'react';
 import { Icons } from '../constants';
-import { Realm } from '../types';
-import styles from './RealmManagement.module.css';
+import { Tenant } from '../types';
+import styles from './TenantManagement.module.css';
 import { backendService } from '../services/backendService';
 
-interface RealmManagementProps {
-  realms: Realm[];
+interface TenantManagementProps {
+  tenants: Tenant[];
   on_refresh?: () => Promise<void>;
-  on_select_realm: (realm: Realm) => void;
+  on_select_tenant: (tenant: Tenant) => void;
 }
 
-const RealmManagement: React.FC<RealmManagementProps> = ({ realms, on_refresh, on_select_realm }) => {
+const TenantManagement: React.FC<TenantManagementProps> = ({ tenants, on_refresh, on_select_tenant }) => {
   const [show_create, set_show_create] = useState(false);
-  const [new_realm, set_new_realm] = useState({ name: '', slug: '', description: '' });
+  const [new_tenant, set_new_tenant] = useState({ name: '', slug: '', description: '' });
 
   const handle_create = async () => {
-    if (!new_realm.name || !new_realm.slug) return;
-    await backendService.createRealm({
-      name: new_realm.name,
-      slug: new_realm.slug,
-      description: new_realm.description || undefined,
+    if (!new_tenant.name || !new_tenant.slug) return;
+    await backendService.createTenant({
+      name: new_tenant.name,
+      slug: new_tenant.slug,
+      description: new_tenant.description || undefined,
     });
     set_show_create(false);
-    set_new_realm({ name: '', slug: '', description: '' });
+    set_new_tenant({ name: '', slug: '', description: '' });
     await on_refresh?.();
   };
 
   const handle_delete = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     if (confirm('Permanently purge this namespace and all associated objects? This action cannot be undone.')) {
-      await backendService.deleteRealm(id);
+      await backendService.deleteTenant(id);
       await on_refresh?.();
     }
   };
@@ -39,35 +39,35 @@ const RealmManagement: React.FC<RealmManagementProps> = ({ realms, on_refresh, o
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Realm Control</h1>
+          <h1 className={styles.title}>Tenant Control</h1>
           <p className={styles.subtitle}>Provision, isolate, and architect multi-tenant namespaces.</p>
         </div>
-        <button onClick={() => set_show_create(true)} className={styles.primaryButton}>Provision New Realm</button>
+        <button onClick={() => set_show_create(true)} className={styles.primaryButton}>Provision New Tenant</button>
       </div>
 
       <div className={styles.layoutGrid}>
-        {realms.map(realm => (
+        {tenants.map(tenant => (
           <div
-            key={realm.id}
-            onClick={() => on_select_realm(realm)}
+            key={tenant.id}
+            onClick={() => on_select_tenant(tenant)}
             className={styles.card}
           >
             <div className={styles.cardActions}>
-               <button onClick={(e) => void handle_delete(realm.id, e)} className={styles.deleteButton}>&times;</button>
+               <button onClick={(e) => void handle_delete(tenant.id, e)} className={styles.deleteButton}>&times;</button>
             </div>
 
             <div className={styles.cardHeader}>
               <div className={styles.cardAvatar}>
-                {realm.name[0]}
+                {tenant.name[0]}
               </div>
               <div>
-                 <h3 className={styles.cardTitle}>{realm.name}</h3>
-                 <p className={styles.cardMeta}>NAMESPACE: {realm.slug}</p>
+                 <h3 className={styles.cardTitle}>{tenant.name}</h3>
+                 <p className={styles.cardMeta}>NAMESPACE: {tenant.slug}</p>
               </div>
             </div>
 
             <p className={styles.cardDescription}>
-              {realm.description || 'General purpose security namespace for Aegis infrastructure.'}
+              {tenant.description || 'General purpose security namespace for tigrbl_auth infrastructure.'}
             </p>
 
             <div className={styles.cardFooter}>
@@ -88,15 +88,15 @@ const RealmManagement: React.FC<RealmManagementProps> = ({ realms, on_refresh, o
             <div className={styles.modalBody}>
               <div>
                 <label className={styles.formLabel}>Display Name</label>
-                <input type="text" value={new_realm.name} onChange={e => set_new_realm({...new_realm, name: e.target.value})} className={styles.formInput} placeholder="E.g. Engineering Sandbox" />
+                <input type="text" value={new_tenant.name} onChange={e => set_new_tenant({...new_tenant, name: e.target.value})} className={styles.formInput} placeholder="E.g. Engineering Sandbox" />
               </div>
               <div>
                 <label className={styles.formLabel}>Slug / Identifier</label>
-                <input type="text" value={new_realm.slug} onChange={e => set_new_realm({...new_realm, slug: e.target.value.toLowerCase().replace(/\s+/g, '-')})} className={`${styles.formInput} ${styles.formInputMono}`} placeholder="eng-sandbox" />
+                <input type="text" value={new_tenant.slug} onChange={e => set_new_tenant({...new_tenant, slug: e.target.value.toLowerCase().replace(/\s+/g, '-')})} className={`${styles.formInput} ${styles.formInputMono}`} placeholder="eng-sandbox" />
               </div>
               <div>
                 <label className={styles.formLabel}>Objective Description</label>
-                <textarea value={new_realm.description} onChange={e => set_new_realm({...new_realm, description: e.target.value})} className={styles.formTextarea} placeholder="Primary namespace for development assets." />
+                <textarea value={new_tenant.description} onChange={e => set_new_tenant({...new_tenant, description: e.target.value})} className={styles.formTextarea} placeholder="Primary namespace for development assets." />
               </div>
               <div className={styles.modalActions}>
                 <button onClick={() => set_show_create(false)} className={`${styles.modalButton} ${styles.modalButtonCancel}`}>Abort</button>
@@ -110,4 +110,4 @@ const RealmManagement: React.FC<RealmManagementProps> = ({ realms, on_refresh, o
   );
 };
 
-export default RealmManagement;
+export default TenantManagement;
