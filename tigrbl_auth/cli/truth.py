@@ -104,6 +104,9 @@ def _write_yaml(path: Path, payload: dict[str, Any]) -> None:
 def _hash_file(path: Path) -> str | None:
     if not path.exists():
         return None
+    if path.suffix.lower() in {".json", ".md", ".yaml", ".yml"}:
+        payload = _normalized_text(path.read_text(encoding="utf-8")).encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 

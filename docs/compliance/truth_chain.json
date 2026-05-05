@@ -70,11 +70,11 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "5173bacb2701651a63215e88d02bb7f23de260fda09f0534555d83d4f9f2c150",
-    "docs/compliance/certification_state_report.json": "470eb0c160fd8625669caeccb7c9852acaee4d972e9a32f71fce7fb45a357d15",
-    "docs/compliance/release_gate_report.json": "f06e89e3de6e0afd64ff4e2dfa1d05733b39246900452a7145f27444daa9abdc",
-    "docs/compliance/final_release_gate_report.json": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019",
-    "docs/compliance/non_rfc_status_report.json": "55fcc69c50cc195fdb335b109e1f99081760089176df35f8688ed11154ec5bf7"
+    "docs/compliance/current_state_report.json": "289611452285c4b2f155323a0696593e1ce0f6c854e549fc925d29cbb7aab95a",
+    "docs/compliance/certification_state_report.json": "fe884ff31fc9aba7de5f0ac2fcf3848d977f189126e1e24b20e0f815d0ba54b5",
+    "docs/compliance/release_gate_report.json": "3d670790a7eb2e5f1d0a2b1d2cb6038d1c84c12f0d49a40cfbd1ef1d694f9c2d",
+    "docs/compliance/final_release_gate_report.json": "afb90b1c88e7d1b658467917acfceddd762ed67c3fb7e42acea1bc40c7bed248",
+    "docs/compliance/non_rfc_status_report.json": "76229317f5661e8dfc9af44486905512756216166a75fc094d8226f802bbae1a"
   },
   "explicitly_deauthorized_current_adjacent_docs": [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",
