@@ -8,9 +8,9 @@ This proposal turns the currently observed governance gaps into a small set of A
 
 Informative inputs:
 
-- [target_cell_ssot_entity_matrix.json](/E:/swarmauri_github/tigrbl_auth/docs/compliance/target_cell_ssot_entity_matrix.json)
-- [final_target_decision_matrix.json](/E:/swarmauri_github/tigrbl_auth/docs/compliance/final_target_decision_matrix.json)
-- [TARGET_REALITY_MATRIX.md](/E:/swarmauri_github/tigrbl_auth/docs/compliance/TARGET_REALITY_MATRIX.md)
+- [target_cell_ssot_entity_matrix.json](./docs/compliance/target_cell_ssot_entity_matrix.json)
+- [final_target_decision_matrix.json](./docs/compliance/final_target_decision_matrix.json)
+- [TARGET_REALITY_MATRIX.md](./docs/compliance/TARGET_REALITY_MATRIX.md)
 
 ## Boundary Requirement
 

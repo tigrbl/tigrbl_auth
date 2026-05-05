@@ -67,7 +67,7 @@
     {
       "version": "3.12",
       "available": true,
-      "path": "C:\\ProgramData\\chocolatey\\bin\\python3.12.EXE"
+      "path": "<python-install>\\python3.12.EXE"
     }
   ],
   "dependency_manifest": {

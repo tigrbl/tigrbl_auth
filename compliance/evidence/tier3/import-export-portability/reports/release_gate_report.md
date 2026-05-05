@@ -21,7 +21,7 @@
 - Gate failed: gate-20-tests
 - Gate failed: gate-45-evidence-peer
 - Gate failed: gate-60-release-signing (release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/issue-registry.yaml, compliance/claims/repository-state.yaml, compliance/evidence/manifest.yaml, compliance/evidence/tier4/bundles/README.md, compliance/evidence/tier4/candidates/assertion-client/execution.log, compliance/evidence/tier4/candidates/assertion-client/manifest.yaml, compliance/evidence/tier4/candidates/assertion-client/mapping.yaml, compliance/evidence/tier4/candidates/assertion-client/peer-artifacts/README.md)
-- Gate failed: gate-65-state-reports ([WinError 145] The directory is not empty: 'E:\\swarmauri_github\\tigrbl_auth\\dist\\feature-completeness-sandbox\\release-bundle')
+- Gate failed: gate-65-state-reports ([WinError 145] The directory is not empty: '<repo>\\dist\\feature-completeness-sandbox\\release-bundle')
 - Gate failed: gate-75-test-classification
 - Gate failed: gate-90-release
 
@@ -43,7 +43,7 @@
 - {'gate': 'gate-50-release-bundle', 'passed': True, 'rc': 0}
 - {'gate': 'gate-55-contract-validation', 'passed': True, 'rc': 0}
 - {'gate': 'gate-60-release-signing', 'passed': False, 'rc': 1, 'error': 'release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/issue-registry.yaml, compliance/claims/repository-state.yaml, compliance/evidence/manifest.yaml, compliance/evidence/tier4/bundles/README.md, compliance/evidence/tier4/candidates/assertion-client/execution.log, compliance/evidence/tier4/candidates/assertion-client/manifest.yaml, compliance/evidence/tier4/candidates/assertion-client/mapping.yaml, compliance/evidence/tier4/candidates/assertion-client/peer-artifacts/README.md'}
-- {'gate': 'gate-65-state-reports', 'passed': False, 'rc': 1, 'error': "[WinError 145] The directory is not empty: 'E:\\\\swarmauri_github\\\\tigrbl_auth\\\\dist\\\\feature-completeness-sandbox\\\\release-bundle'"}
+- {'gate': 'gate-65-state-reports', 'passed': False, 'rc': 1, 'error': "[WinError 145] The directory is not empty: '<repo>\\\\dist\\\\feature-completeness-sandbox\\\\release-bundle'"}
 - {'gate': 'gate-75-test-classification', 'passed': False, 'rc': 1}
 - {'gate': 'gate-85-peer-profiles', 'passed': True, 'rc': 0}
 - {'gate': 'gate-87-peer-bundle-completeness', 'passed': True, 'rc': 0}

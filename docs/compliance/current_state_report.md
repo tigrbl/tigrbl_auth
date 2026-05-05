@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `E:\swarmauri_github\tigrbl_auth\.pytest-tmp\operator-plane-state5\tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `<repo>\.pytest-tmp\operator-plane-state5\tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`

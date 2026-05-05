@@ -1,2 +1,0 @@
-{"id": "tenant-a", "kind": "tenant.create", "resource": "tenant", "status": "created", "transaction_id": "txn-ebc208f9c5bf", "ts": "2026-04-28T06:11:00Z"}
-{"id": "portable-key", "kind": "keys.generate", "resource": "keys", "status": "created", "transaction_id": "txn-8f5b259ed37f", "ts": "2026-04-28T06:11:00Z"}

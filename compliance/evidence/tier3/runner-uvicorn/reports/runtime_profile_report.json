@@ -219,7 +219,7 @@
       "serve_check": {
         "passed": false,
         "executed": false,
-        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server hypercorn --format json --check",
+        "command": "tigrbl-auth serve --repo-root <repo> --server hypercorn --format json --check",
         "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "hypercorn",
@@ -393,7 +393,7 @@
       "serve_check": {
         "passed": false,
         "executed": false,
-        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server tigrcorn --format json --check",
+        "command": "tigrbl-auth serve --repo-root <repo> --server tigrcorn --format json --check",
         "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "tigrcorn",
@@ -583,7 +583,7 @@
       "serve_check": {
         "passed": true,
         "executed": true,
-        "command": "tigrbl-auth serve --repo-root E:\\swarmauri_github\\tigrbl_auth --server uvicorn --format json --check",
+        "command": "tigrbl-auth serve --repo-root <repo> --server uvicorn --format json --check",
         "message": "Application factory materialized successfully with 7 active routes and 25 active targets.",
         "exit_code": 0,
         "launch_ready": true,

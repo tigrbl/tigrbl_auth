@@ -3,7 +3,7 @@
   "failures": [],
   "warnings": [],
   "details": {
-    "bundle_root": "E:\\swarmauri_github\\tigrbl_auth\\dist\\feature-completeness-sandbox-mlbxhr9q\\release-bundle",
+    "bundle_root": "<repo>\\dist\\feature-completeness-sandbox-mlbxhr9q\\release-bundle",
     "verified_artifact_count": 4,
     "signing_key_id": "ed25519:d810f4f55d73207dd7d0f7aa",
     "artifact_labels": [

@@ -1,4 +1,5 @@
 /.pytest-tmp
+/.pytest-tmp*/
 /.tmp/
 *.pyc
 

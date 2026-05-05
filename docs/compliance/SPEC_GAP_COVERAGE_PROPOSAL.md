@@ -8,9 +8,9 @@ This proposal translates the ADR gap proposal into a concrete SPEC set. The inte
 
 Informative inputs:
 
-- [ADR_GAP_COVERAGE_PROPOSAL.md](/E:/swarmauri_github/tigrbl_auth/docs/compliance/ADR_GAP_COVERAGE_PROPOSAL.md)
-- [target_cell_ssot_entity_matrix.json](/E:/swarmauri_github/tigrbl_auth/docs/compliance/target_cell_ssot_entity_matrix.json)
-- [final_target_decision_matrix.json](/E:/swarmauri_github/tigrbl_auth/docs/compliance/final_target_decision_matrix.json)
+- [ADR_GAP_COVERAGE_PROPOSAL.md](./docs/compliance/ADR_GAP_COVERAGE_PROPOSAL.md)
+- [target_cell_ssot_entity_matrix.json](./docs/compliance/target_cell_ssot_entity_matrix.json)
+- [final_target_decision_matrix.json](./docs/compliance/final_target_decision_matrix.json)
 
 ## Required Boundary SPEC Coverage
 

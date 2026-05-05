@@ -61,7 +61,7 @@
 
 - `3.10` → available=`False` path=`None`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`True` path=`C:\ProgramData\chocolatey\bin\python3.12.EXE`
+- `3.12` → available=`True` path=`<python-install>\python3.12.EXE`
 
 ## Workflow coverage
 

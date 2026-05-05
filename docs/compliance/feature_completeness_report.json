@@ -44,18 +44,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7",
-        "database_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\operator_plane.sqlite3",
-        "snapshot_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\snapshots",
-        "log_root": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs",
+        "state_root": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7",
+        "database_path": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\operator_plane.sqlite3",
+        "snapshot_root": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\snapshots",
+        "log_root": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\audit-events.jsonl",
-        "transaction_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\transactions.jsonl",
-        "activity_log_path": "E:\\swarmauri_github\\tigrbl_auth\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\activity.jsonl"
+        "audit_log_path": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\audit-events.jsonl",
+        "transaction_log_path": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\transactions.jsonl",
+        "activity_log_path": "<repo>\\.pytest-tmp\\operator-plane-state5\\operator-state-18b5f8ea20de83e7\\logs\\activity.jsonl"
       }
     },
     "register_manage_clients": {
