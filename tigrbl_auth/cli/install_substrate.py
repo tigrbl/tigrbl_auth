@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_auth.cli.certification_evidence import current_environment_identity, runtime_identity
+from tigrbl_auth.path_safety import sanitize_local_paths
 from tigrbl_auth.repo_truth import has_install_matrix_workflow, has_release_gate_workflow, workflow_role_text
 
 try:
@@ -738,6 +739,7 @@ def write_install_substrate_report(
     report_dir = report_dir or (repo_root / "docs" / "compliance")
     report_dir.mkdir(parents=True, exist_ok=True)
     payload = build_install_substrate_report(repo_root, profile=profile, execute_import_probes=execute_import_probes)
+    payload = sanitize_local_paths(payload, repo_root)
     json_path = report_dir / "install_substrate_report.json"
     md_path = report_dir / "install_substrate_report.md"
     json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

@@ -25,6 +25,7 @@ from tigrbl_auth.cli.certification_evidence import (
     runtime_surface_probe_ready,
     validated_runtime_manifest_passed,
 )
+from tigrbl_auth.path_safety import sanitize_local_paths
 from tigrbl_auth.repo_truth import workflow_role_text
 from tigrbl_auth.runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, iter_runner_adapters
 from tigrbl_auth.runtime.types import ApplicationProbeResult, CommandProbeResult, HttpEndpointProbeResult
@@ -1164,6 +1165,7 @@ def write_runtime_profile_report(
         enable_execution_probes=enable_execution_probes,
         report_mode=report_mode,
     )
+    payload = sanitize_local_paths(payload, repo_root)
     _write_json(report_dir / "runtime_profile_report.json", payload)
     lines = [
         "# Runtime Profile Report",

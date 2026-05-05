@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-30",
+  "generated_at": "2026-05-05",
   "source_of_truth": [
     ".ssot/registry.json",
     ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
@@ -70,7 +70,7 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "c4d81c614638e87af425a3b4977e2c100c34a0735bdbee52b89c25ce74d910b4",
+    "docs/compliance/current_state_report.json": "5173bacb2701651a63215e88d02bb7f23de260fda09f0534555d83d4f9f2c150",
     "docs/compliance/certification_state_report.json": "470eb0c160fd8625669caeccb7c9852acaee4d972e9a32f71fce7fb45a357d15",
     "docs/compliance/release_gate_report.json": "f06e89e3de6e0afd64ff4e2dfa1d05733b39246900452a7145f27444daa9abdc",
     "docs/compliance/final_release_gate_report.json": "5630245cbf573240e8cbb7cbccb34d5d04c8034c3db533b8fd9f5e9bd5c0c019",

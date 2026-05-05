@@ -69,6 +69,7 @@ from tigrbl_auth.document_authority import (
     load_document_authority,
     render_document_authority_projection,
 )
+from tigrbl_auth.path_safety import sanitize_local_paths
 from tigrbl_auth.repo_truth import (
     evaluate_tier4_bundle,
     has_install_matrix_workflow,
@@ -193,6 +194,8 @@ def _hash_file(path: Path) -> str:
 
 
 def _write_report(report_dir: Path, stem: str, payload: dict[str, Any], title: str) -> None:
+    if report_dir.name == "compliance" and report_dir.parent.name == "docs":
+        payload = sanitize_local_paths(payload, report_dir.parent.parent)
     _write_json(report_dir / f"{stem}.json", payload)
     lines = [f"# {title}", "", f"- Passed: `{payload.get('passed', False)}`", ""]
     if payload.get("summary"):

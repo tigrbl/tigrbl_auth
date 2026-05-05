@@ -13,6 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
+from tigrbl_auth.path_safety import safe_display_path
+
 try:
     import yaml
 except Exception:  # pragma: no cover
@@ -161,10 +163,7 @@ def activity_log_path(repo_root: Path) -> Path:
 
 
 def display_path(path: Path, repo_root: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(repo_root.resolve()))
-    except Exception:
-        return str(path)
+    return safe_display_path(path, repo_root)
 
 
 def sha256_json(payload: Any) -> str:
@@ -249,10 +248,10 @@ def _metadata_payload(repo_root: Path) -> dict[str, Any]:
     return {
         "schema_version": OPERATOR_STORE_SCHEMA_VERSION,
         "backend": "sqlite-authoritative",
-        "state_root": str(root),
-        "database_path": str(operator_database_path(repo_root)),
-        "snapshot_root": str(root / "snapshots"),
-        "log_root": str(root / "logs"),
+        "state_root": safe_display_path(root, repo_root, external_label="<operator-state>"),
+        "database_path": safe_display_path(operator_database_path(repo_root), repo_root, external_label="<operator-state>"),
+        "snapshot_root": safe_display_path(root / "snapshots", repo_root, external_label="<operator-state>"),
+        "log_root": safe_display_path(root / "logs", repo_root, external_label="<operator-state>"),
         "repo_mutation_dependency": False,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": True,
@@ -848,9 +847,9 @@ def operator_store_summary(repo_root: Path) -> dict[str, Any]:
     payload.update(
         {
             "database_present": operator_database_path(repo_root).exists(),
-            "audit_log_path": str(audit_log_path(repo_root)),
-            "transaction_log_path": str(transaction_log_path(repo_root)),
-            "activity_log_path": str(activity_log_path(repo_root)),
+            "audit_log_path": safe_display_path(audit_log_path(repo_root), repo_root, external_label="<operator-state>"),
+            "transaction_log_path": safe_display_path(transaction_log_path(repo_root), repo_root, external_label="<operator-state>"),
+            "activity_log_path": safe_display_path(activity_log_path(repo_root), repo_root, external_label="<operator-state>"),
         }
     )
     return payload
