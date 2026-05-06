@@ -5,8 +5,8 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import Protocol
 
-from sqlalchemy import Column, ForeignKey, Index, MetaData, Table, inspect, text
-from sqlalchemy.schema import SchemaConst
+from sqlalchemy import Column, ForeignKey, MetaData, Table, inspect, text
+from sqlalchemy.exc import NoSuchTableError
 
 
 class SupportsTable(Protocol):
@@ -56,18 +56,7 @@ def unmark_revision(conn, revision: str) -> None:
 
 
 def _ddl_tables(conn, *models: SupportsTable) -> list[Table]:
-    if conn.dialect.name != "sqlite":
-        return [model.__table__ for model in models]
-    metadata = MetaData()
-    source_tables = list(models[0].__table__.metadata.sorted_tables) if models else []
-    clones: dict[int, Table] = {}
-    for table in source_tables:
-        clones[id(table)] = table.to_metadata(
-            metadata,
-            schema=None,
-            referred_schema_fn=lambda *_args, **_kwargs: SchemaConst.BLANK_SCHEMA,
-        )
-    return [clones[id(model.__table__)] for model in models]
+    return [model.__table__ for model in models]
 
 
 def create_tables(conn, *models: SupportsTable) -> None:
@@ -84,21 +73,30 @@ def drop_tables(conn, *models: SupportsTable) -> None:
 def table_names(conn) -> set[str]:
     inspector = inspect(conn)
     if conn.dialect.name == "sqlite":
-        return set(inspector.get_table_names())
+        return set(inspector.get_table_names(schema=AUTHN_SCHEMA))
     return set(inspector.get_table_names(schema=AUTHN_SCHEMA))
 
 
 def column_names(conn, table: str) -> set[str]:
     inspector = inspect(conn)
-    if conn.dialect.name == "sqlite":
-        cols = inspector.get_columns(table)
-    else:
-        cols = inspector.get_columns(table, schema=AUTHN_SCHEMA)
+    try:
+        cols = inspector.get_columns(
+            table,
+            schema=AUTHN_SCHEMA if conn.dialect.name == "sqlite" else AUTHN_SCHEMA,
+        )
+    except NoSuchTableError:
+        return set()
     return {str(col["name"]) for col in cols}
 
 
 def _table_name(conn, table: str) -> str:
-    return table if conn.dialect.name == "sqlite" else f"{AUTHN_SCHEMA}.{table}"
+    return f'"{AUTHN_SCHEMA}"."{table}"'
+
+
+def _index_name(conn, index: str) -> str:
+    if conn.dialect.name == "sqlite":
+        return f'"{AUTHN_SCHEMA}"."{index}"'
+    return f'"{index}"'
 
 
 def _copy_sqlalchemy_column(column, *, preserve_foreign_keys: bool = True) -> Column:
@@ -139,12 +137,12 @@ def _sqlite_rebuild_without_columns(conn, table: str, columns_to_drop: Iterable[
         return
 
     old_meta = MetaData()
-    old_table = Table(table, old_meta, autoload_with=conn)
+    old_table = Table(table, old_meta, schema=AUTHN_SCHEMA, autoload_with=conn)
     keep_columns = [column for column in old_table.columns if column.name not in drop_set]
     if not keep_columns:
         raise ValueError(f"cannot rebuild SQLite table '{table}' without any remaining columns")
 
-    old_indexes = inspect(conn).get_indexes(table)
+    old_indexes = inspect(conn).get_indexes(table, schema=AUTHN_SCHEMA)
     tmp_table_name = f"__tmp__{table}"
 
     conn.exec_driver_sql("PRAGMA foreign_keys=OFF")
@@ -153,6 +151,7 @@ def _sqlite_rebuild_without_columns(conn, table: str, columns_to_drop: Iterable[
         new_table = Table(
             tmp_table_name,
             new_meta,
+            schema=AUTHN_SCHEMA,
             *(_copy_sqlalchemy_column(column, preserve_foreign_keys=False) for column in keep_columns),
         )
         new_table.create(bind=conn, checkfirst=False)
@@ -160,10 +159,13 @@ def _sqlite_rebuild_without_columns(conn, table: str, columns_to_drop: Iterable[
         keep_names = [column.name for column in keep_columns]
         select_columns = ", ".join(f'"{name}"' for name in keep_names)
         conn.exec_driver_sql(
-            f'INSERT INTO "{tmp_table_name}" ({select_columns}) SELECT {select_columns} FROM "{table}"'
+            f'INSERT INTO {_table_name(conn, tmp_table_name)} ({select_columns}) '
+            f'SELECT {select_columns} FROM {_table_name(conn, table)}'
         )
-        conn.exec_driver_sql(f'DROP TABLE "{table}"')
-        conn.exec_driver_sql(f'ALTER TABLE "{tmp_table_name}" RENAME TO "{table}"')
+        conn.exec_driver_sql(f'DROP TABLE {_table_name(conn, table)}')
+        conn.exec_driver_sql(
+            f'ALTER TABLE {_table_name(conn, tmp_table_name)} RENAME TO "{table}"'
+        )
 
         for index in old_indexes:
             index_columns = list(index.get("column_names") or [])
@@ -172,7 +174,8 @@ def _sqlite_rebuild_without_columns(conn, table: str, columns_to_drop: Iterable[
             unique_sql = "UNIQUE " if bool(index.get("unique", False)) else ""
             rendered = ", ".join(f'"{name}"' for name in index_columns)
             conn.exec_driver_sql(
-                f'CREATE {unique_sql}INDEX IF NOT EXISTS "{index["name"]}" ON "{table}" ({rendered})'
+                f"CREATE {unique_sql}INDEX IF NOT EXISTS {_index_name(conn, index['name'])} "
+                f'ON "{table}" ({rendered})'
             )
     finally:
         conn.exec_driver_sql("PRAGMA foreign_keys=ON")
@@ -186,7 +189,9 @@ def drop_columns(conn, table: str, columns_to_drop: Iterable[str]) -> None:
     if conn.dialect.name == "sqlite":
         try:
             for name in drop_list:
-                conn.exec_driver_sql(f'ALTER TABLE "{table}" DROP COLUMN "{name}"')
+                conn.exec_driver_sql(
+                    f'ALTER TABLE {_table_name(conn, table)} DROP COLUMN "{name}"'
+                )
         except Exception:
             _sqlite_rebuild_without_columns(conn, table, drop_list)
         return

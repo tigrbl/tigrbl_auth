@@ -11,6 +11,7 @@ from tigrbl_auth.migrations import apply_all_async, column_names_async, downgrad
 pytestmark = [pytest.mark.integration, pytest.mark.asyncio]
 
 REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
+REVISION_0008 = "0008_refresh_token_family_state"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
 
@@ -58,6 +59,9 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             assert first.passed is True, backend
             await _assert_upgrade_state()
 
+            downgraded_latest = await downgrade_one_async()
+            assert downgraded_latest == REVISION_0008, backend
+
             downgraded = await downgrade_one_async()
             assert downgraded == REVISION_0007, backend
             await _assert_downgrade_state()
@@ -65,5 +69,6 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             reapplied = await apply_all_async()
             assert reapplied.passed is True, backend
             await _assert_upgrade_state()
+            assert downgraded_latest in set(first.applied) | set(first.pending_before) | {downgraded_latest}
             assert downgraded in set(first.applied) | set(first.pending_before) | {downgraded}
             assert downgraded in set(reapplied.applied) | set(reapplied.pending_before) | {downgraded}

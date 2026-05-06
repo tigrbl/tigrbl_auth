@@ -19,7 +19,7 @@ AUTH_CODE_COLUMNS = ('session_id',)
 
 
 def _table_name(conn, name: str) -> str:
-    return name if conn.dialect.name == 'sqlite' else f"{AUTHN_SCHEMA}.{name}"
+    return f"{AUTHN_SCHEMA}.{name}"
 
 
 def _add_column(conn, table: str, ddl: str) -> None:

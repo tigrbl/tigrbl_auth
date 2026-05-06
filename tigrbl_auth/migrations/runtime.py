@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from tigrbl import bootstrap_dbschema
 from tigrbl_auth.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
+from tigrbl_auth.migrations.helpers import AUTHN_SCHEMA
 from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
 from tigrbl_auth.tables import Base
 from tigrbl_auth.tables.engine import ENGINE
@@ -67,6 +69,13 @@ def expected_table_names() -> list[str]:
     return names
 
 
+def _bootstrap_sqlite_schema(raw_engine: Any) -> None:
+    dialect = getattr(getattr(raw_engine, "dialect", None), "name", "")
+    if dialect != "sqlite":
+        return
+    bootstrap_dbschema(raw_engine, schemas=(AUTHN_SCHEMA,), immediate=True)
+
+
 def verify_schema_sync(conn) -> SchemaVerification:
     expected = expected_table_names()
     actual = sorted(table_names(conn))
@@ -90,16 +99,27 @@ def column_names_sync(conn, table: str) -> list[str]:
 async def apply_all_async() -> MigrationResult:
     provider = _resolve_provider()
     raw_engine, _ = provider.ensure()
+    _bootstrap_sqlite_schema(raw_engine)
 
     def _upgrade(sync_conn):
         modules = iter_migration_modules()
-        pending_before = [module.revision for module in modules if module.revision not in applied_revisions(sync_conn)]
+        current = applied_revisions(sync_conn)
+        needs_sqlite_repair = (
+            sync_conn.dialect.name == "sqlite"
+            and bool(verify_schema_sync(sync_conn).missing_tables)
+        )
+        pending_before = [
+            module.revision
+            for module in modules
+            if needs_sqlite_repair or module.revision not in current
+        ]
         applied_now: list[str] = []
         for module in modules:
-            if module.revision in applied_revisions(sync_conn):
+            if not needs_sqlite_repair and module.revision in current:
                 continue
             module.upgrade(sync_conn)
-            mark_revision(sync_conn, module.revision)
+            if module.revision not in current:
+                mark_revision(sync_conn, module.revision)
             applied_now.append(module.revision)
         verification = verify_schema_sync(sync_conn)
         return MigrationResult(
@@ -122,6 +142,7 @@ async def apply_all_async() -> MigrationResult:
 async def downgrade_one_async() -> str | None:
     provider = _resolve_provider()
     raw_engine, _ = provider.ensure()
+    _bootstrap_sqlite_schema(raw_engine)
 
     def _downgrade(sync_conn):
         modules = iter_migration_modules()
@@ -144,6 +165,7 @@ async def downgrade_one_async() -> str | None:
 async def verify_schema_async() -> SchemaVerification:
     provider = _resolve_provider()
     raw_engine, _ = provider.ensure()
+    _bootstrap_sqlite_schema(raw_engine)
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):
         async with begin_ctx as conn:
@@ -155,6 +177,7 @@ async def verify_schema_async() -> SchemaVerification:
 async def column_names_async(table: str) -> list[str]:
     provider = _resolve_provider()
     raw_engine, _ = provider.ensure()
+    _bootstrap_sqlite_schema(raw_engine)
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):
         async with begin_ctx as conn:

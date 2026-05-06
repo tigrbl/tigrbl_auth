@@ -15,6 +15,8 @@ class TenantRecord(RpcSchema):
     name: str | None = None
     email: str | None = None
     slug: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -42,6 +44,8 @@ class ClientRecord(RpcSchema):
     grant_types: str | None = None
     response_types: str | None = None
     active: bool | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -67,6 +71,8 @@ class IdentityRecord(RpcSchema):
     tenant_id: str | None = None
     username: str | None = None
     email: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
