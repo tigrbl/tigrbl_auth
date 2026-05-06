@@ -3057,6 +3057,14 @@
       "kind": "test"
     },
     {
+      "id": "tst:transport-disclosure-provenance-plane-py",
+      "kind": "test"
+    },
+    {
+      "id": "tst:admin-uix-transport-disclosure-posture",
+      "kind": "test"
+    },
+    {
       "id": "clm:cli-flag-access-log",
       "kind": "claim"
     },
@@ -4893,6 +4901,18 @@
       "kind": "claim"
     },
     {
+      "id": "clm:transport-posture-and-claimability",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:uix-safe-disclosure-boundaries",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:release-provenance-and-artifact-obligations",
+      "kind": "claim"
+    },
+    {
       "id": "evd:compliance-evidence-tier3-asgi-application",
       "kind": "evidence"
     },
@@ -5237,6 +5257,18 @@
       "kind": "evidence"
     },
     {
+      "id": "evd:transport-disclosure-provenance-pytest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:admin-uix-transport-disclosure-vitest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:admin-uix-transport-disclosure-build",
+      "kind": "evidence"
+    },
+    {
       "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "kind": "issue"
     },
@@ -5341,6 +5373,10 @@
       "kind": "boundary"
     },
     {
+      "id": "bnd:transport-disclosure-and-provenance-20260505",
+      "kind": "boundary"
+    },
+    {
       "id": "rel:0.1.0",
       "kind": "release"
     },
@@ -5362,6 +5398,10 @@
     },
     {
       "id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "kind": "release"
+    },
+    {
+      "id": "rel:transport-disclosure-and-provenance-20260505",
       "kind": "release"
     }
   ],
@@ -6002,6 +6042,81 @@
       "to": "feat:f44-entitlement-management"
     },
     {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:transport-http11-posture"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:transport-http2-posture"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:transport-http3-posture"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:transport-quic-posture"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:uix-schema-safe-disclosure"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:uix-jws-safe-disclosure"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:uix-jwe-safe-disclosure"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:uix-jwt-safe-disclosure"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:uix-jwks-safe-disclosure"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-ssdf-requirements"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-slsa-requirements"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-in-toto-requirements"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-sigstore-requirements"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-spdx-requirements"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:transport-disclosure-and-provenance-20260505",
+      "to": "feat:release-cyclonedx-requirements"
+    },
+    {
       "type": "BUNDLES",
       "from": "prf:baseline",
       "to": "feat:profile-baseline"
@@ -6295,6 +6410,41 @@
       "type": "INCLUDES",
       "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
       "to": "evd:phase5-admin-uix-build"
+    },
+    {
+      "type": "USES_BOUNDARY",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "bnd:transport-disclosure-and-provenance-20260505"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "evd:transport-disclosure-provenance-pytest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "evd:admin-uix-transport-disclosure-vitest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:transport-disclosure-and-provenance-20260505",
+      "to": "evd:admin-uix-transport-disclosure-build"
     },
     {
       "type": "COVERED_BY",
@@ -26243,6 +26393,106 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:transport-http11-posture",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-http11-posture",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-http2-posture",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-http2-posture",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-http3-posture",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-http3-posture",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-quic-posture",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:transport-quic-posture",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-ssdf-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-ssdf-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-slsa-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-slsa-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-in-toto-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-in-toto-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-sigstore-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-sigstore-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-spdx-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-spdx-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-cyclonedx-requirements",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:release-cyclonedx-requirements",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:tenant-isolation-cross-plane",
       "to": "tst:phase3-policy-control-plane-py"
     },
@@ -26290,6 +26540,56 @@
       "type": "COVERED_BY",
       "from": "feat:public-vs-admin-client-exposure",
       "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-schema-safe-disclosure",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-schema-safe-disclosure",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jws-safe-disclosure",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jws-safe-disclosure",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwe-safe-disclosure",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwe-safe-disclosure",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwt-safe-disclosure",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwt-safe-disclosure",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwks-safe-disclosure",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-jwks-safe-disclosure",
+      "to": "tst:admin-uix-transport-disclosure-posture"
     },
     {
       "type": "ASSERTS",
@@ -56072,6 +56372,156 @@
       "to": "clm:phase5-access-review-and-entitlement-governance"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:transport-posture-and-claimability",
+      "to": "feat:transport-http11-posture"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:transport-posture-and-claimability",
+      "to": "feat:transport-http2-posture"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:transport-posture-and-claimability",
+      "to": "feat:transport-http3-posture"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:transport-posture-and-claimability",
+      "to": "feat:transport-quic-posture"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:transport-disclosure-provenance-plane-py",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:admin-uix-transport-disclosure-posture",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:transport-disclosure-provenance-pytest",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-vitest",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-build",
+      "to": "clm:transport-posture-and-claimability"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-disclosure-boundaries",
+      "to": "feat:uix-schema-safe-disclosure"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-disclosure-boundaries",
+      "to": "feat:uix-jws-safe-disclosure"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-disclosure-boundaries",
+      "to": "feat:uix-jwe-safe-disclosure"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-disclosure-boundaries",
+      "to": "feat:uix-jwt-safe-disclosure"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-disclosure-boundaries",
+      "to": "feat:uix-jwks-safe-disclosure"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:transport-disclosure-provenance-plane-py",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:admin-uix-transport-disclosure-posture",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:transport-disclosure-provenance-pytest",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-vitest",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-build",
+      "to": "clm:uix-safe-disclosure-boundaries"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-ssdf-requirements"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-slsa-requirements"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-in-toto-requirements"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-sigstore-requirements"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-spdx-requirements"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:release-provenance-and-artifact-obligations",
+      "to": "feat:release-cyclonedx-requirements"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:transport-disclosure-provenance-plane-py",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:admin-uix-transport-disclosure-posture",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:transport-disclosure-provenance-pytest",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-vitest",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:admin-uix-transport-disclosure-build",
+      "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
       "type": "DERIVES_FROM",
       "from": "evd:compliance-evidence-tier3-assertion-framework",
       "to": "tst:tests-conformance-baseline-test-oidc-id-token-py"
@@ -73435,6 +73885,21 @@
       "type": "DERIVES_FROM",
       "from": "evd:phase5-admin-uix-build",
       "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:transport-disclosure-provenance-pytest",
+      "to": "tst:transport-disclosure-provenance-plane-py"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:admin-uix-transport-disclosure-vitest",
+      "to": "tst:admin-uix-transport-disclosure-posture"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:admin-uix-transport-disclosure-build",
+      "to": "tst:admin-uix-transport-disclosure-posture"
     },
     {
       "type": "AFFECTS",

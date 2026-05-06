@@ -2,13 +2,13 @@
   "passed": true,
   "registry_path": ".ssot/registry.json",
   "release": {
-    "release_id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+    "release_id": "rel:transport-disclosure-and-provenance-20260505",
     "passed": true,
     "failures": [],
     "warnings": [],
     "claims": [
       {
-        "claim_id": "clm:phase5-sdk-ecosystem-contract-alignment",
+        "claim_id": "clm:transport-posture-and-claimability",
         "passed": true,
         "failures": [],
         "checks": {
@@ -23,7 +23,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase5-plugin-extensibility-and-operator-controls",
+        "claim_id": "clm:uix-safe-disclosure-boundaries",
         "passed": true,
         "failures": [],
         "checks": {
@@ -38,22 +38,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase5-scim-provisioning-and-group-lifecycle",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:phase5-access-review-and-entitlement-governance",
+        "claim_id": "clm:release-provenance-and-artifact-obligations",
         "passed": true,
         "failures": [],
         "checks": {
@@ -70,43 +55,53 @@
     ],
     "evidence": [
       {
-        "evidence_id": "evd:phase5-admin-uix-build",
+        "evidence_id": "evd:admin-uix-transport-disclosure-build",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase5-admin-uix-vitest",
+        "evidence_id": "evd:admin-uix-transport-disclosure-vitest",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase5-governance-extension-pytest",
+        "evidence_id": "evd:transport-disclosure-provenance-pytest",
         "passed": true,
         "failures": []
       }
     ],
     "profiles": [],
     "boundary": {
-      "id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "id": "bnd:transport-disclosure-and-provenance-20260505",
       "profile_ids": [],
       "resolved_feature_ids": [
-        "feat:f39-sdk-ecosystem",
-        "feat:f40-extensibility-plugins",
-        "feat:f33-scim-provisioning",
-        "feat:f43-access-review-workflows",
-        "feat:f44-entitlement-management"
+        "feat:transport-http11-posture",
+        "feat:transport-http2-posture",
+        "feat:transport-http3-posture",
+        "feat:transport-quic-posture",
+        "feat:uix-schema-safe-disclosure",
+        "feat:uix-jws-safe-disclosure",
+        "feat:uix-jwe-safe-disclosure",
+        "feat:uix-jwt-safe-disclosure",
+        "feat:uix-jwks-safe-disclosure",
+        "feat:release-ssdf-requirements",
+        "feat:release-slsa-requirements",
+        "feat:release-in-toto-requirements",
+        "feat:release-sigstore-requirements",
+        "feat:release-spdx-requirements",
+        "feat:release-cyclonedx-requirements"
       ]
     },
     "summary": {
-      "boundary_id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
-      "boundary_feature_count": 5,
+      "boundary_id": "bnd:transport-disclosure-and-provenance-20260505",
+      "boundary_feature_count": 15,
       "boundary_profile_count": 0,
-      "release_claim_count": 4,
+      "release_claim_count": 3,
       "release_evidence_count": 3
     }
   },
   "boundary_scope": {
-    "boundary_id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+    "boundary_id": "bnd:transport-disclosure-and-provenance-20260505",
     "profile_ids": [],
     "feature_ids": []
   },
@@ -114,13 +109,13 @@
     "counts": {
       "features": 522,
       "profiles": 6,
-      "tests": 236,
-      "claims": 459,
-      "evidence": 86,
+      "tests": 238,
+      "claims": 462,
+      "evidence": 89,
       "issues": 12,
       "risks": 1,
-      "boundaries": 13,
-      "releases": 6,
+      "boundaries": 14,
+      "releases": 7,
       "adrs": 78,
       "specs": 99
     },

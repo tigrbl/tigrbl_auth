@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "kind": "boundary_snapshot",
+  "generated_at": "2026-05-06T03:41:12Z",
+  "registry_path": ".ssot/registry.json",
+  "registry_sha256": "be2e4e46e0a6eead6e8084fed23f4ec5f62a79419641e0e9a8c2560dc460189d",
+  "boundary": {
+    "id": "bnd:transport-disclosure-and-provenance-20260505",
+    "title": "Transport disclosure and provenance boundary",
+    "status": "frozen",
+    "frozen": true,
+    "feature_ids": [
+      "feat:transport-http11-posture",
+      "feat:transport-http2-posture",
+      "feat:transport-http3-posture",
+      "feat:transport-quic-posture",
+      "feat:uix-schema-safe-disclosure",
+      "feat:uix-jws-safe-disclosure",
+      "feat:uix-jwe-safe-disclosure",
+      "feat:uix-jwt-safe-disclosure",
+      "feat:uix-jwks-safe-disclosure",
+      "feat:release-ssdf-requirements",
+      "feat:release-slsa-requirements",
+      "feat:release-in-toto-requirements",
+      "feat:release-sigstore-requirements",
+      "feat:release-spdx-requirements",
+      "feat:release-cyclonedx-requirements"
+    ],
+    "profile_ids": []
+  },
+  "features": [
+    {
+      "id": "feat:transport-http11-posture",
+      "title": "HTTP/1.1 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9112 HTTP/1.1 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [
+        "clm:transport-posture-and-claimability"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-http2-posture",
+      "title": "HTTP/2 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9113 HTTP/2 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [
+        "clm:transport-posture-and-claimability"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-http3-posture",
+      "title": "HTTP/3 transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9114 HTTP/3 across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [
+        "clm:transport-posture-and-claimability"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:transport-quic-posture",
+      "title": "QUIC transport posture",
+      "description": "Transport posture feature: define and govern support and applicability semantics for RFC 9000 QUIC across runtime, admin API, public API, admin UIX, and public UIX. Current implementation status: absent. Governed by SPEC-1080.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1080"
+      ],
+      "claim_ids": [
+        "clm:transport-posture-and-claimability"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-schema-safe-disclosure",
+      "title": "UIX schema safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JSON Schema artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-disclosure-boundaries"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jws-safe-disclosure",
+      "title": "UIX JWS safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWS-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-disclosure-boundaries"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwe-safe-disclosure",
+      "title": "UIX JWE safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWE-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-disclosure-boundaries"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwt-safe-disclosure",
+      "title": "UIX JWT safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWT-related artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-disclosure-boundaries"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-jwks-safe-disclosure",
+      "title": "UIX JWKS safe disclosure",
+      "description": "UIX disclosure feature: define and govern safe disclosure rules for JWKS-adjacent artifacts across admin UIX and public UIX surfaces. Current implementation status: absent. Governed by SPEC-1083.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-safe-disclosure-boundaries"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-ssdf-requirements",
+      "title": "SSDF release requirements",
+      "description": "Supply chain and provenance feature: define and govern NIST SP 800-218 SSDF release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-slsa-requirements",
+      "title": "SLSA release requirements",
+      "description": "Supply chain and provenance feature: define and govern SLSA release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-in-toto-requirements",
+      "title": "in-toto release requirements",
+      "description": "Supply chain and provenance feature: define and govern in-toto release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-sigstore-requirements",
+      "title": "Sigstore release requirements",
+      "description": "Supply chain and provenance feature: define and govern Sigstore release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-spdx-requirements",
+      "title": "SPDX release requirements",
+      "description": "Supply chain and provenance feature: define and govern SPDX release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:release-cyclonedx-requirements",
+      "title": "CycloneDX release requirements",
+      "description": "Supply chain and provenance feature: define and govern CycloneDX release requirements, artifacts, and disclosure obligations. Current implementation status: absent. Governed by SPEC-1081.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Implemented by the transport disclosure and provenance closure slice."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1081"
+      ],
+      "claim_ids": [
+        "clm:release-provenance-and-artifact-obligations"
+      ],
+      "test_ids": [
+        "tst:transport-disclosure-provenance-plane-py",
+        "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    }
+  ],
+  "summary": {
+    "boundary_id": "bnd:transport-disclosure-and-provenance-20260505",
+    "feature_count": 15,
+    "profile_count": 0,
+    "frozen": true,
+    "status": "frozen"
+  }
+}
