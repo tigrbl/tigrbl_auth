@@ -1850,7 +1850,7 @@ wheels = [
 
 [[package]]
 name = "tigrbl"
-version = "0.3.30.dev1"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1869,14 +1869,14 @@ dependencies = [
     { name = "tigrbl-runtime" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8c/8a/3678017a7b19697ee0321bc1b1c02655ec331c8348f553889323896975aa/tigrbl-0.3.30.dev1.tar.gz", hash = "sha256:1a38d4ba068d04e736664fae610ac396720e73482c1b3430c89c13fd02a9e088", size = 39468 }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/15/3ff2ef2ce6029aa33373fc9c5ef2fee64b6ac114f005d77a5a095656386c/tigrbl-0.4.0.tar.gz", hash = "sha256:1f6a6b448e7e263921c884a963745aa423595ddf439ee5e7440a65f6a3d4fc50", size = 53795 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/8d/d8606265c452102625034a7ee6a222c669def78990076a1bc23c6a29e0db/tigrbl-0.3.30.dev1-py3-none-any.whl", hash = "sha256:7c186f3a6ab8f970319d49f635fb5abbc349c564a3aa079b2865f574feea50ae", size = 64999 },
+    { url = "https://files.pythonhosted.org/packages/ec/44/d4515874fffc23689cea7e56ba995c9293b4d3e601219d16a7813a216888/tigrbl-0.4.0-py3-none-any.whl", hash = "sha256:df5e9d619a036710bc59d01a1ad193cea729260356218b27997619bb158554a3", size = 74739 },
 ]
 
 [[package]]
 name = "tigrbl-atoms"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -1888,9 +1888,9 @@ dependencies = [
     { name = "tigrbl-typing" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/02/1c/e4b7bcbd5b17dbb4fad339f44b715def8581ca1f43c02c162c6608354e26/tigrbl_atoms-0.1.11.tar.gz", hash = "sha256:74c4f0c5430460702aa73dd24691090bb62ff89523f04ceacaf42e82b417893b", size = 63954 }
+sdist = { url = "https://files.pythonhosted.org/packages/91/e1/0da38ef59b71a1106af730801913885a976d29799ba5c2d925d29d126b30/tigrbl_atoms-0.4.0.tar.gz", hash = "sha256:924c4a5a8527e4a9b51c66125caec238bd2ccea82b06c1e63634bd030da1c506", size = 77051 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/db/d8/d45d3a7dc49098e6bab5a135746037f8ff8e41da025b61e41f6d7013d868/tigrbl_atoms-0.1.11-py3-none-any.whl", hash = "sha256:45cae026c20693ac27a1bf9b34fe0ca2e8093d4d34f4e3cb1ecdad697befeee6", size = 121201 },
+    { url = "https://files.pythonhosted.org/packages/75/b7/0c8f6d75a87301515fef015b40d73fbcde92336519c752a4f05d6bfab460/tigrbl_atoms-0.4.0-py3-none-any.whl", hash = "sha256:d9fad6ae13a0d9aa6d33d1bb61c2715c6d073144369e1bf7793c686fceaf4f25", size = 135608 },
 ]
 
 [[package]]
@@ -2003,7 +2003,7 @@ requires-dist = [
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-standard", specifier = "==0.9.2" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
-    { name = "tigrbl", specifier = "==0.3.30.dev1" },
+    { name = "tigrbl", specifier = "==0.4.0" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'servers'", specifier = "==0.3.8" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'tigrcorn'", specifier = "==0.3.8" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -2029,7 +2029,7 @@ dev = [
 
 [[package]]
 name = "tigrbl-base"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
@@ -2037,14 +2037,14 @@ dependencies = [
     { name = "tigrbl-atoms" },
     { name = "tigrbl-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/19/ab/8e876c81c73d130af2eb1510988ebd28bbfa56584e7417fc68915bd85afb/tigrbl_base-0.1.11.tar.gz", hash = "sha256:d017eed93bb6f17131be4a3c9a616c1ef8bbcc64b8f1024421cd63a223fc3b0f", size = 24796 }
+sdist = { url = "https://files.pythonhosted.org/packages/3d/63/e2ad19c58b733771ebed852538d696cf67505de95d1f539ed642abd23d75/tigrbl_base-0.4.0.tar.gz", hash = "sha256:418635f04d8f82fc52fe910715a13ae920ef621529c6f013cbda6a3ebd0b5033", size = 28064 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5a/cd/d0a0630c9b06e1130cd3e72abe10e43f26e4ac51072cab50001cd341244f/tigrbl_base-0.1.11-py3-none-any.whl", hash = "sha256:1d46caea88b0f9a09c113993b78a450b927a868186c0337f17b8d03bc721a11a", size = 36374 },
+    { url = "https://files.pythonhosted.org/packages/7d/9b/3b484b94b4d1d857834f12325424d5c4131ecdf607ee1d3c485cd69092d3/tigrbl_base-0.4.0-py3-none-any.whl", hash = "sha256:bde27ccaf8d07b96f1cba3d1d6dd05011e6435e5d8ade35bb509c324d03a8240", size = 38022 },
 ]
 
 [[package]]
 name = "tigrbl-canon"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "tigrbl" },
@@ -2054,14 +2054,14 @@ dependencies = [
     { name = "tigrbl-ops-oltp" },
     { name = "tigrbl-runtime" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7b/88/f5f57ef1274e835ebaf7e59c50fa913c45cf400738706b22820650dcbe59/tigrbl_canon-0.1.11.tar.gz", hash = "sha256:a13d624ce494e47ed7fc8d7ee459c58b0f51a111f4d0ed9f6be79539321de016", size = 51190 }
+sdist = { url = "https://files.pythonhosted.org/packages/19/38/ca487c59278354c0d4fb52e11b2aa93efab77ba3f78bb6f4ea33b3eb7566/tigrbl_canon-0.4.0.tar.gz", hash = "sha256:7d91b330b570a87adddbaa263f9a4b9cedfd7ff66a9e7fa9a852d1c8164843d0", size = 54594 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/ac/65d01d17d3bd30832d3160977c95a9de7322c4c0b576e87d4c73c371f7a8/tigrbl_canon-0.1.11-py3-none-any.whl", hash = "sha256:58ea27abbd43fd221391a3a3135d97d262a864353fd181e9770547682f9328a6", size = 76737 },
+    { url = "https://files.pythonhosted.org/packages/96/5f/2c50779e7c7509a772d1d2775fbb6f43e2cbaff814c5574298c4d657fc73/tigrbl_canon-0.4.0-py3-none-any.whl", hash = "sha256:86c69b6e57c6e5120ee158e67e3c824cf0f7caefc226a23621c929a2840c1dd8", size = 78482 },
 ]
 
 [[package]]
 name = "tigrbl-concrete"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "orjson" },
@@ -2070,19 +2070,21 @@ dependencies = [
     { name = "tigrbl-atoms" },
     { name = "tigrbl-base" },
     { name = "tigrbl-core" },
+    { name = "tigrbl-ops-olap" },
     { name = "tigrbl-ops-oltp" },
+    { name = "tigrbl-ops-realtime" },
     { name = "tigrbl-runtime" },
     { name = "tigrbl-typing" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6c/96/e823e4a1b3cf4f5b20cb0d27f2027ab70567eb42864b2864e2b51e4ec54e/tigrbl_concrete-0.1.11.tar.gz", hash = "sha256:a0282dcbfa07d6dc8e19d4b2472fa3aa8700bf8bdde1022ece711482bd0a5687", size = 100889 }
+sdist = { url = "https://files.pythonhosted.org/packages/5e/8b/bb4566d7f6a68d8426c512a764eda7f47afffb92f6b76fbc23000af18fda/tigrbl_concrete-0.4.0.tar.gz", hash = "sha256:8752d6602ddb8d08a1e46386162d5b3147d6f645b8b2ca18f3ea47010e192d0a", size = 109259 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/12/80beb47ee60ce0766d74a6c0d00d3fa056d6c7bf0adbcead0bf4828e1c7d/tigrbl_concrete-0.1.11-py3-none-any.whl", hash = "sha256:6da0c1531634e8079c5e2b1d903a7f13f419d1a1f175f78676b5cc71b9334587", size = 150378 },
+    { url = "https://files.pythonhosted.org/packages/d9/2d/8488efbf56b6352b0ae75265f5f64537ab753d7dd522409d67174e3a6254/tigrbl_concrete-0.4.0-py3-none-any.whl", hash = "sha256:9a32ba50f0b61536d1e65c39e7b729f524060afdee153ae2cc2a1d58a2e3cece", size = 158178 },
 ]
 
 [[package]]
 name = "tigrbl-core"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
@@ -2091,72 +2093,72 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "tomli-w" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/43/a1/c73b7f384beec315eaa22a18bde14749a6b11751f225d24029354e2f3735/tigrbl_core-0.1.11.tar.gz", hash = "sha256:57b091dc94d6a784ee42bf5df7bdfe122db803daffc4db155d9758a61321f104", size = 50103 }
+sdist = { url = "https://files.pythonhosted.org/packages/e1/cd/f4446b4e7fb282d0f2f972461a7dd23c0cce041e9a762ebe1d09158d83db/tigrbl_core-0.4.0.tar.gz", hash = "sha256:3c1ab528957c34530a1660c958207a4a67a1ed0e331dc5373b89ecdb23a6b8b0", size = 55679 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5f/6d/0273be5d3442ffcb22c29eb85d706dfeea0030491a82c3a00f78430fce8d/tigrbl_core-0.1.11-py3-none-any.whl", hash = "sha256:deefd3f34351b4c93673011488891c5084590638c8c2e7d98efd4c2114b44642", size = 68469 },
+    { url = "https://files.pythonhosted.org/packages/6a/23/c24ce50ef9d72e8a70f130e0e7a3df91d882b17d376c98cd495e029b44a6/tigrbl_core-0.4.0-py3-none-any.whl", hash = "sha256:edb33d4fb3527ace4971f186bf4279a9c4d99f361b5e8bd0a16f64fd3cf6b5c5", size = 72962 },
 ]
 
 [[package]]
 name = "tigrbl-kernel"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "tigrbl-atoms" },
     { name = "tigrbl-core" },
     { name = "tigrbl-typing" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/20/b8/112729fc308bdd9a23b830df803e8eb5cb7f5b106b453b1e41ed3c73478d/tigrbl_kernel-0.1.11.tar.gz", hash = "sha256:f113e6e6207df82fcb5ebda6edc6a0569ca43620c5d20204d0f1f47589469993", size = 26773 }
+sdist = { url = "https://files.pythonhosted.org/packages/05/68/bbbfcd9bb7cf321c62843dcba039acd327483af8733a8973c5dc152694c9/tigrbl_kernel-0.4.0.tar.gz", hash = "sha256:a20c997969a483bb01f684d12281049031b21b3603981c6b2cc59c8451219cee", size = 60712 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/b2/a147dd1275bf6dd7a7cfd1125df6a41f2c272951067b4f7b7eba1b325a35/tigrbl_kernel-0.1.11-py3-none-any.whl", hash = "sha256:0e8a43b074fcc75a8178dd0c239f350fd363700be454c93802c29a6173acd471", size = 34341 },
+    { url = "https://files.pythonhosted.org/packages/3b/a4/4db8724dd1ed0dafe68ca34bb280bfb6abfe0b545612f7c50c4e8bf95b79/tigrbl_kernel-0.4.0-py3-none-any.whl", hash = "sha256:307fec9fe0ff9ef0589062318c77989f72530cd765e4cbceee05506e2161b26d", size = 75162 },
 ]
 
 [[package]]
 name = "tigrbl-ops-olap"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/8c/2b/3e94b82014de941f2c8dd1748548602a69165a273e2ce5316c0500a756a0/tigrbl_ops_olap-0.1.11.tar.gz", hash = "sha256:1c56e9b8390a1a54157e00d2624c997fc0cad3457425d7bf4e7acc42e2ca7537", size = 2309 }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/fd/9068d3d24345f163e6bc1adccd0f2ee1f98b351ebeafc2f5cf71c88f8a0b/tigrbl_ops_olap-0.4.0.tar.gz", hash = "sha256:99ca398c8fa7d3b341b6b38c237d157bfb024deb4510f921479d46577571e126", size = 4147 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/64/c9/6af930fba13ec775ca2d7cec664dd002b6a2efc3b5cdabaed5d3658a54e9/tigrbl_ops_olap-0.1.11-py3-none-any.whl", hash = "sha256:428cfcb00e2856df9f4735d26891b5fea040e11cec8191148a5f65dad84ddca3", size = 2847 },
+    { url = "https://files.pythonhosted.org/packages/31/4b/b688c44f84acd22eb3ee43c01b25861ac2b7b361587009fb722f8a502496/tigrbl_ops_olap-0.4.0-py3-none-any.whl", hash = "sha256:f8a4069b389d13d4bbcceb30fc93b039b2f6d5465b67d3e6dbe121509e984ba3", size = 4568 },
 ]
 
 [[package]]
 name = "tigrbl-ops-oltp"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "tigrbl-base" },
     { name = "tigrbl-core" },
     { name = "tigrbl-orm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/57/2b/0f32b3b0d3964ccf517a174bcd35b87dc639a0d10f0359b2151805cd4db9/tigrbl_ops_oltp-0.1.11.tar.gz", hash = "sha256:71c353ba56a7bcf9622ace26c06695051ebd2b99e68160f6fb186ba459d53a8f", size = 11638 }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/67/371a844f9972c44e90bec6df6a8d0d75580743334b4207048cc754d61829/tigrbl_ops_oltp-0.4.0.tar.gz", hash = "sha256:81a503331ce2b50847f8dcc7d740b82b42b44698b847a53f9c63b765e442a547", size = 15064 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/64/055bf6873050a72a8d10b9c3d2a292f95526336eb8e000d783e887e2cab9/tigrbl_ops_oltp-0.1.11-py3-none-any.whl", hash = "sha256:2bb975c8078c234f396f5e0cd9b1c3672a211d0bbed98eeb783260ddb92e194e", size = 16275 },
+    { url = "https://files.pythonhosted.org/packages/60/6c/435568ba2c63c3b49993d0e2f2a44920efb8504d15122efacf4edbb9a327/tigrbl_ops_oltp-0.4.0-py3-none-any.whl", hash = "sha256:28145498c799c0b7e4cce58594677a253dfd3159dd54955f55765f46f00aab62", size = 18058 },
 ]
 
 [[package]]
 name = "tigrbl-ops-realtime"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ba/29/b121a5f2eb8e5560cee899d770732a3bd80bae07eca14f40b6e5daa13a24/tigrbl_ops_realtime-0.1.11.tar.gz", hash = "sha256:f633cd886462ad4f3109e199498d0c5244a90139ab386c34396c45d03f603571", size = 1777 }
+sdist = { url = "https://files.pythonhosted.org/packages/4f/8a/db5e2c69a3511ecd03fe2b88317cc11eb20cdc9702849cc08beca177731e/tigrbl_ops_realtime-0.4.0.tar.gz", hash = "sha256:12f115ac94778f5bb15c2c0e52cbd09fcaa0159938e2fdb95629506368549bf9", size = 3718 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/48/51/b1f36e5ffb2385c87efabfd7928bc1d3bdc38a0e2897deaaeca5abc6a788/tigrbl_ops_realtime-0.1.11-py3-none-any.whl", hash = "sha256:e2ec81bf9453a94cc3f9b08538b4c9be25b0266eccaf3d3cb31db9205347c1fd", size = 2437 },
+    { url = "https://files.pythonhosted.org/packages/39/57/b725832c3882b7742c302d5ac67fa08bf5fa2b9dd4c6918716ce8fa8e482/tigrbl_ops_realtime-0.4.0-py3-none-any.whl", hash = "sha256:b626a794d744690e2a79fe1ff25ed398e261d77b30ed963df3918a2d425f6031", size = 4194 },
 ]
 
 [[package]]
 name = "tigrbl-orm"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "sqlalchemy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7f/b8/e1f09065f9cc6f0d88d9ff0c9a3453046b18cf59e32d00df672c6a2e9489/tigrbl_orm-0.1.11.tar.gz", hash = "sha256:932211a0a18300e1c59fd83cba66ab170f2d77a2132de9589cf6aa41d08b8bca", size = 15042 }
+sdist = { url = "https://files.pythonhosted.org/packages/cb/5a/8306eab482bca18cf27358f83978c1775608e932117d051a0e68e52bb785/tigrbl_orm-0.4.0.tar.gz", hash = "sha256:d302aba41e69f09a0aef05405ef0de247816a921a7e6961007a48fea9143a144", size = 18195 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1d/ea/75fff737e765ed1967618d61c70da990ff29159152070846f661d2cd95b3/tigrbl_orm-0.1.11-py3-none-any.whl", hash = "sha256:137443befce25ab51000904e693b77aa02b0872c0b86d00a5a96e3f5399df4eb", size = 27194 },
+    { url = "https://files.pythonhosted.org/packages/66/84/9fd6c58b1f0395f46f4617f51dd52297f1d3c48c3a7abe02ca2de0867700/tigrbl_orm-0.4.0-py3-none-any.whl", hash = "sha256:f8b2d1759821ae43e4dfcef3c83c9fabd2bdb82d24edbf6273ce70415e856dcc", size = 28821 },
 ]
 
 [[package]]
 name = "tigrbl-runtime"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numba" },
@@ -2166,18 +2168,18 @@ dependencies = [
     { name = "tigrbl-kernel" },
     { name = "tigrbl-typing" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/58/0a1f4196fd0ffb74d661272ceaa20ed049b9a0495cd34a18cee8318c5b65/tigrbl_runtime-0.1.11.tar.gz", hash = "sha256:203340c47e49d6c16ef817ddeb581cd3d8c82596595ac3413e45ba35239495aa", size = 88303 }
+sdist = { url = "https://files.pythonhosted.org/packages/72/91/5093bd8a318c4e7bcfa901587d93d6078cbee7b81b7419618e91fb3c741b/tigrbl_runtime-0.4.0.tar.gz", hash = "sha256:e965674db2f5d69fd409bf0dabf141b1e777d3553627e7ddf8e6cae602cde673", size = 124357 }
 
 [[package]]
 name = "tigrbl-typing"
-version = "0.1.11"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bc/46/71e1641249cc40ee59e60a96c8fa8e07d0ef170c05e6ee9d198f54c0863a/tigrbl_typing-0.1.11.tar.gz", hash = "sha256:5d6b22214b30a488509d15f48a77e89943c6b89823680b531ea4180256dfdd25", size = 10951 }
+sdist = { url = "https://files.pythonhosted.org/packages/62/b7/151a90b19173921e37d0444d381db0771fa76f952b8e2e007cf493f96173/tigrbl_typing-0.4.0.tar.gz", hash = "sha256:0f7b836e4508dfe8d4623210cc2b96745a625afbc62bfb30004894eddd6030ea", size = 14499 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b4/3c/41c4b771d4a38eaaac8e45571534d0f3fc4e61366c9cf60c1f58a1d07211/tigrbl_typing-0.1.11-py3-none-any.whl", hash = "sha256:c7924c73d3de5d058f75449fd200be1510e787b8feb925a9d8b1f90579df9c9d", size = 16805 },
+    { url = "https://files.pythonhosted.org/packages/6a/79/cf580d7bd036c94833abcc02cbe90e443f7f66d7994447070e542105e1d7/tigrbl_typing-0.4.0-py3-none-any.whl", hash = "sha256:fc6de82187ec81bb717cfbdf6787908eabd6155c34b49c57a3a0869e49d9732e", size = 18935 },
 ]
 
 [[package]]
