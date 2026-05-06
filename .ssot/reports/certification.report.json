@@ -2,13 +2,13 @@
   "passed": true,
   "registry_path": ".ssot/registry.json",
   "release": {
-    "release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+    "release_id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
     "passed": true,
     "failures": [],
     "warnings": [],
     "claims": [
       {
-        "claim_id": "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "claim_id": "clm:phase5-sdk-ecosystem-contract-alignment",
         "passed": true,
         "failures": [],
         "checks": {
@@ -23,7 +23,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase4-federation-and-cross-cloud-trust",
+        "claim_id": "clm:phase5-plugin-extensibility-and-operator-controls",
         "passed": true,
         "failures": [],
         "checks": {
@@ -38,7 +38,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase4-non-human-and-device-identities",
+        "claim_id": "clm:phase5-scim-provisioning-and-group-lifecycle",
         "passed": true,
         "failures": [],
         "checks": {
@@ -53,22 +53,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase4-authorization-relationship-graph",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:phase4-auth-detection-telemetry",
+        "claim_id": "clm:phase5-access-review-and-entitlement-governance",
         "passed": true,
         "failures": [],
         "checks": {
@@ -85,56 +70,43 @@
     ],
     "evidence": [
       {
-        "evidence_id": "evd:phase4-advanced-identity-pytest",
+        "evidence_id": "evd:phase5-admin-uix-build",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase4-public-uix-build",
+        "evidence_id": "evd:phase5-admin-uix-vitest",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase4-public-uix-vitest",
+        "evidence_id": "evd:phase5-governance-extension-pytest",
         "passed": true,
         "failures": []
       }
     ],
     "profiles": [],
     "boundary": {
-      "id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
       "profile_ids": [],
       "resolved_feature_ids": [
-        "feat:f08-sso",
-        "feat:f05-passwordless-authentication",
-        "feat:f06-mfa",
-        "feat:f07-webauthn",
-        "feat:f09-federation",
-        "feat:f10-social-login",
-        "feat:f11-device-identity",
-        "feat:f12-workload-identity",
-        "feat:f15-rebac",
-        "feat:f17-policy-language",
-        "feat:f18-policy-versioning",
-        "feat:f21-access-decision-api",
-        "feat:f22-graph-based-authorization",
-        "feat:f23-relationship-modeling",
-        "feat:f26-contextual-auth-time-location",
-        "feat:f35-anomaly-detection-auth",
-        "feat:f46-trust-federation-graphs",
-        "feat:f47-cross-cloud-identity"
+        "feat:f39-sdk-ecosystem",
+        "feat:f40-extensibility-plugins",
+        "feat:f33-scim-provisioning",
+        "feat:f43-access-review-workflows",
+        "feat:f44-entitlement-management"
       ]
     },
     "summary": {
-      "boundary_id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
-      "boundary_feature_count": 18,
+      "boundary_id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "boundary_feature_count": 5,
       "boundary_profile_count": 0,
-      "release_claim_count": 5,
+      "release_claim_count": 4,
       "release_evidence_count": 3
     }
   },
   "boundary_scope": {
-    "boundary_id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+    "boundary_id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
     "profile_ids": [],
     "feature_ids": []
   },
@@ -142,13 +114,13 @@
     "counts": {
       "features": 522,
       "profiles": 6,
-      "tests": 234,
-      "claims": 455,
-      "evidence": 83,
+      "tests": 236,
+      "claims": 459,
+      "evidence": 86,
       "issues": 12,
       "risks": 1,
-      "boundaries": 12,
-      "releases": 5,
+      "boundaries": 13,
+      "releases": 6,
       "adrs": 78,
       "specs": 99
     },

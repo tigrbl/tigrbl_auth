@@ -26,6 +26,14 @@ from tigrbl_auth.services.policy_control_plane import (
     filter_visible_tenants,
     simulate_policy,
 )
+from tigrbl_auth.services.governance_extension_plane import (
+    AccessReviewWorkflow,
+    EntitlementManager,
+    PluginRuntimeRegistry,
+    SDKEcosystemCatalog,
+    ScimProvisioningPlane,
+    build_phase5_delivery_summary,
+)
 
 
 ADMIN_NAVIGATION: tuple[str, ...] = (

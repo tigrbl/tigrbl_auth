@@ -3049,6 +3049,14 @@
       "kind": "test"
     },
     {
+      "id": "tst:phase5-governance-extension-plane-py",
+      "kind": "test"
+    },
+    {
+      "id": "tst:phase5-admin-uix-governance-workflows",
+      "kind": "test"
+    },
+    {
       "id": "clm:cli-flag-access-log",
       "kind": "claim"
     },
@@ -4869,6 +4877,22 @@
       "kind": "claim"
     },
     {
+      "id": "clm:phase5-sdk-ecosystem-contract-alignment",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase5-plugin-extensibility-and-operator-controls",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase5-scim-provisioning-and-group-lifecycle",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase5-access-review-and-entitlement-governance",
+      "kind": "claim"
+    },
+    {
       "id": "evd:compliance-evidence-tier3-asgi-application",
       "kind": "evidence"
     },
@@ -5201,6 +5225,18 @@
       "kind": "evidence"
     },
     {
+      "id": "evd:phase5-governance-extension-pytest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase5-admin-uix-vitest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase5-admin-uix-build",
+      "kind": "evidence"
+    },
+    {
       "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "kind": "issue"
     },
@@ -5301,6 +5337,10 @@
       "kind": "boundary"
     },
     {
+      "id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "kind": "boundary"
+    },
+    {
       "id": "rel:0.1.0",
       "kind": "release"
     },
@@ -5318,6 +5358,10 @@
     },
     {
       "id": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "kind": "release"
+    },
+    {
+      "id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
       "kind": "release"
     }
   ],
@@ -5933,6 +5977,31 @@
       "to": "feat:f47-cross-cloud-identity"
     },
     {
+      "type": "SCOPES",
+      "from": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "feat:f39-sdk-ecosystem"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "feat:f40-extensibility-plugins"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "feat:f33-scim-provisioning"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "feat:f43-access-review-workflows"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "feat:f44-entitlement-management"
+    },
+    {
       "type": "BUNDLES",
       "from": "prf:baseline",
       "to": "feat:profile-baseline"
@@ -6186,6 +6255,46 @@
       "type": "INCLUDES",
       "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
       "to": "evd:phase4-public-uix-build"
+    },
+    {
+      "type": "USES_BOUNDARY",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "bnd:phase5-provisioning-governance-and-ecosystem-20260505"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "evd:phase5-governance-extension-pytest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "evd:phase5-admin-uix-vitest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+      "to": "evd:phase5-admin-uix-build"
     },
     {
       "type": "COVERED_BY",
@@ -25574,6 +25683,16 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:f33-scim-provisioning",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f33-scim-provisioning",
+      "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:f46-trust-federation-graphs",
       "to": "tst:phase4-advanced-identity-plane-py"
     },
@@ -25779,6 +25898,26 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:f43-access-review-workflows",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f43-access-review-workflows",
+      "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f44-entitlement-management",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f44-entitlement-management",
+      "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:f45-delegated-admin",
       "to": "tst:phase3-policy-control-plane-py"
     },
@@ -25786,6 +25925,26 @@
       "type": "COVERED_BY",
       "from": "feat:f45-delegated-admin",
       "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f39-sdk-ecosystem",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f39-sdk-ecosystem",
+      "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f40-extensibility-plugins",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f40-extensibility-plugins",
+      "to": "tst:phase5-admin-uix-governance-workflows"
     },
     {
       "type": "COVERED_BY",
@@ -55788,6 +55947,131 @@
       "to": "clm:phase4-auth-detection-telemetry"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:phase5-sdk-ecosystem-contract-alignment",
+      "to": "feat:f39-sdk-ecosystem"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-governance-extension-plane-py",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-admin-uix-governance-workflows",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-governance-extension-pytest",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-vitest",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-build",
+      "to": "clm:phase5-sdk-ecosystem-contract-alignment"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase5-plugin-extensibility-and-operator-controls",
+      "to": "feat:f40-extensibility-plugins"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-governance-extension-plane-py",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-admin-uix-governance-workflows",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-vitest",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-build",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-governance-extension-pytest",
+      "to": "clm:phase5-plugin-extensibility-and-operator-controls"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase5-scim-provisioning-and-group-lifecycle",
+      "to": "feat:f33-scim-provisioning"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-governance-extension-plane-py",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-admin-uix-governance-workflows",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-vitest",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-build",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-governance-extension-pytest",
+      "to": "clm:phase5-scim-provisioning-and-group-lifecycle"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase5-access-review-and-entitlement-governance",
+      "to": "feat:f43-access-review-workflows"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase5-access-review-and-entitlement-governance",
+      "to": "feat:f44-entitlement-management"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-governance-extension-plane-py",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase5-admin-uix-governance-workflows",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-vitest",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-admin-uix-build",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase5-governance-extension-pytest",
+      "to": "clm:phase5-access-review-and-entitlement-governance"
+    },
+    {
       "type": "DERIVES_FROM",
       "from": "evd:compliance-evidence-tier3-assertion-framework",
       "to": "tst:tests-conformance-baseline-test-oidc-id-token-py"
@@ -73136,6 +73420,21 @@
       "type": "DERIVES_FROM",
       "from": "evd:phase4-public-uix-build",
       "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase5-governance-extension-pytest",
+      "to": "tst:phase5-governance-extension-plane-py"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase5-admin-uix-vitest",
+      "to": "tst:phase5-admin-uix-governance-workflows"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase5-admin-uix-build",
+      "to": "tst:phase5-admin-uix-governance-workflows"
     },
     {
       "type": "AFFECTS",

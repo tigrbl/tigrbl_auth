@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "kind": "published_snapshot",
+  "generated_at": "2026-05-06T03:22:39Z",
+  "registry_path": ".ssot/registry.json",
+  "registry_sha256": "4e1ff151151ed3a9572480998209ec759d6bb76d117d6f746fe2b6b027381e59",
+  "release": {
+    "id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+    "version": "0.3.4-phase5-provisioning-governance-and-ecosystem.20260505",
+    "status": "published",
+    "boundary_id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+    "claim_ids": [
+      "clm:phase5-sdk-ecosystem-contract-alignment",
+      "clm:phase5-plugin-extensibility-and-operator-controls",
+      "clm:phase5-scim-provisioning-and-group-lifecycle",
+      "clm:phase5-access-review-and-entitlement-governance"
+    ],
+    "evidence_ids": [
+      "evd:phase5-governance-extension-pytest",
+      "evd:phase5-admin-uix-vitest",
+      "evd:phase5-admin-uix-build"
+    ]
+  },
+  "boundary": {
+    "id": "bnd:phase5-provisioning-governance-and-ecosystem-20260505",
+    "title": "Phase 5 provisioning governance and ecosystem extension",
+    "status": "frozen",
+    "frozen": true,
+    "feature_ids": [
+      "feat:f39-sdk-ecosystem",
+      "feat:f40-extensibility-plugins",
+      "feat:f33-scim-provisioning",
+      "feat:f43-access-review-workflows",
+      "feat:f44-entitlement-management"
+    ],
+    "profile_ids": []
+  },
+  "claims": [
+    {
+      "id": "clm:phase5-sdk-ecosystem-contract-alignment",
+      "title": "Phase 5 SDK ecosystem contract alignment",
+      "status": "published",
+      "tier": "T1",
+      "kind": "sdk-ecosystem",
+      "description": "Phase 5 closure claim for SDK language coverage, runtime compatibility, auth helpers, and generated contract alignment.",
+      "feature_ids": [
+        "feat:f39-sdk-ecosystem"
+      ],
+      "test_ids": [
+        "tst:phase5-governance-extension-plane-py",
+        "tst:phase5-admin-uix-governance-workflows"
+      ],
+      "evidence_ids": [
+        "evd:phase5-governance-extension-pytest",
+        "evd:phase5-admin-uix-vitest",
+        "evd:phase5-admin-uix-build"
+      ]
+    },
+    {
+      "id": "clm:phase5-plugin-extensibility-and-operator-controls",
+      "title": "Phase 5 plugin extensibility and operator controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "extensibility",
+      "description": "Phase 5 closure claim for plugin extension points, lifecycle hooks, isolation behavior, failure controls, and operator visibility.",
+      "feature_ids": [
+        "feat:f40-extensibility-plugins"
+      ],
+      "test_ids": [
+        "tst:phase5-governance-extension-plane-py",
+        "tst:phase5-admin-uix-governance-workflows"
+      ],
+      "evidence_ids": [
+        "evd:phase5-admin-uix-vitest",
+        "evd:phase5-admin-uix-build",
+        "evd:phase5-governance-extension-pytest"
+      ]
+    },
+    {
+      "id": "clm:phase5-scim-provisioning-and-group-lifecycle",
+      "title": "Phase 5 SCIM provisioning and group lifecycle",
+      "status": "published",
+      "tier": "T1",
+      "kind": "scim-provisioning",
+      "description": "Phase 5 closure claim for SCIM schema registration, tenant-scoped user provisioning, patch operations, and group lifecycle management.",
+      "feature_ids": [
+        "feat:f33-scim-provisioning"
+      ],
+      "test_ids": [
+        "tst:phase5-governance-extension-plane-py",
+        "tst:phase5-admin-uix-governance-workflows"
+      ],
+      "evidence_ids": [
+        "evd:phase5-admin-uix-vitest",
+        "evd:phase5-admin-uix-build",
+        "evd:phase5-governance-extension-pytest"
+      ]
+    },
+    {
+      "id": "clm:phase5-access-review-and-entitlement-governance",
+      "title": "Phase 5 access review and entitlement governance",
+      "status": "published",
+      "tier": "T1",
+      "kind": "access-governance",
+      "description": "Phase 5 closure claim for entitlement inventory, assignment lifecycle, access review campaigns, escalation, revocation, and closure semantics.",
+      "feature_ids": [
+        "feat:f43-access-review-workflows",
+        "feat:f44-entitlement-management"
+      ],
+      "test_ids": [
+        "tst:phase5-governance-extension-plane-py",
+        "tst:phase5-admin-uix-governance-workflows"
+      ],
+      "evidence_ids": [
+        "evd:phase5-admin-uix-vitest",
+        "evd:phase5-admin-uix-build",
+        "evd:phase5-governance-extension-pytest"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evd:phase5-admin-uix-build",
+      "title": "Phase 5 admin UIX build evidence",
+      "status": "passed",
+      "kind": "build",
+      "tier": "T1",
+      "path": ".ssot/reports/phase5/phase5-admin-uix-build.txt",
+      "claim_ids": [
+        "clm:phase5-sdk-ecosystem-contract-alignment",
+        "clm:phase5-plugin-extensibility-and-operator-controls",
+        "clm:phase5-scim-provisioning-and-group-lifecycle",
+        "clm:phase5-access-review-and-entitlement-governance"
+      ],
+      "test_ids": [
+        "tst:phase5-admin-uix-governance-workflows"
+      ]
+    },
+    {
+      "id": "evd:phase5-admin-uix-vitest",
+      "title": "Phase 5 admin UIX vitest evidence",
+      "status": "passed",
+      "kind": "vitest",
+      "tier": "T1",
+      "path": ".ssot/reports/phase5/phase5-admin-uix-vitest.txt",
+      "claim_ids": [
+        "clm:phase5-sdk-ecosystem-contract-alignment",
+        "clm:phase5-plugin-extensibility-and-operator-controls",
+        "clm:phase5-scim-provisioning-and-group-lifecycle",
+        "clm:phase5-access-review-and-entitlement-governance"
+      ],
+      "test_ids": [
+        "tst:phase5-admin-uix-governance-workflows"
+      ]
+    },
+    {
+      "id": "evd:phase5-governance-extension-pytest",
+      "title": "Phase 5 governance extension pytest evidence",
+      "status": "passed",
+      "kind": "pytest",
+      "tier": "T1",
+      "path": ".ssot/reports/phase5/phase5-governance-extension-pytest.txt",
+      "claim_ids": [
+        "clm:phase5-sdk-ecosystem-contract-alignment",
+        "clm:phase5-plugin-extensibility-and-operator-controls",
+        "clm:phase5-scim-provisioning-and-group-lifecycle",
+        "clm:phase5-access-review-and-entitlement-governance"
+      ],
+      "test_ids": [
+        "tst:phase5-governance-extension-plane-py"
+      ]
+    }
+  ],
+  "summary": {
+    "release_id": "rel:phase5-provisioning-governance-and-ecosystem-20260505",
+    "version": "0.3.4-phase5-provisioning-governance-and-ecosystem.20260505",
+    "status": "published",
+    "claim_count": 4,
+    "evidence_count": 3
+  }
+}
