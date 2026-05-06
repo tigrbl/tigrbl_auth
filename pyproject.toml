@@ -60,7 +60,7 @@ sqlite = [
     "aiosqlite==0.22.1",
 ]
 uvicorn = [
-    "uvicorn[standard]==0.41.0",
+    "uvicorn[standard]==0.46.0",
 ]
 hypercorn = [
     "hypercorn==0.18.0",
@@ -70,7 +70,7 @@ tigrcorn = [
 ]
 # Aggregate runner extra used by release-gate and clean-room certification jobs.
 servers = [
-    "uvicorn[standard]==0.41.0",
+    "uvicorn[standard]==0.46.0",
     "hypercorn==0.18.0",
     "tigrcorn==0.3.8; python_version >= '3.11'",
 ]
