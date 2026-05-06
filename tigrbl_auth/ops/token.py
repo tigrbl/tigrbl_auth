@@ -187,6 +187,12 @@ async def _parse_request_form(request) -> tuple[dict[str, str], list[str]]:
         form = await form_reader()
         resources = list(form.getlist('resource')) if hasattr(form, 'getlist') else []
         data = dict(form)
+        if (not resources or 'grant_type' not in data) and getattr(request, 'body', b''):
+            parsed = parse_qs(request.body.decode('utf-8'), keep_blank_values=True)
+            resources = resources or parsed.get('resource', [])
+            for key, values in parsed.items():
+                if key != 'resource' and values and key not in data:
+                    data[key] = values[-1]
         data.pop('resource', None)
         return data, resources
     body_text = request.body.decode('utf-8') if getattr(request, 'body', b'') else ''

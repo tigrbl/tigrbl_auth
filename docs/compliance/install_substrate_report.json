@@ -1,8 +1,8 @@
 {
-  "generated_at": "20260506T024321Z",
+  "generated_at": "20260506T081553Z",
   "passed": false,
   "summary": {
-    "static_manifest_passed": false,
+    "static_manifest_passed": true,
     "passed": false,
     "profile": "base",
     "current_profile_identity": "base@py312",
@@ -48,8 +48,6 @@
     "runtime_surface_probe_passed": true
   },
   "failures": [
-    "constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form",
-    "dependency lock base set drifts from pyproject runtime dependencies",
     "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
   ],
   "warnings": [
@@ -136,10 +134,8 @@
     "dependency_count": 22
   },
   "constraints_consistency": {
-    "passed": false,
-    "mismatches": [
-      "constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form"
-    ],
+    "passed": true,
+    "mismatches": [],
     "illegal_constraint_extras": {
       "base": [],
       "test": [],
@@ -154,10 +150,8 @@
     "tigrcorn_count": 1
   },
   "dependency_lock_consistency": {
-    "passed": false,
-    "failures": [
-      "dependency lock base set drifts from pyproject runtime dependencies"
-    ],
+    "passed": true,
+    "failures": [],
     "missing_profiles": [],
     "install_profile_count": 14
   },

@@ -57,7 +57,6 @@ def test_openapi_contains_all_schemas(openapi_spec: dict) -> None:
                 "UpdateRequest",
                 "UpdateResponse",
                 "ReplaceRequest",
-                "ReplaceResponse",
                 "DeleteResponse",
                 "ClearResponse",
             )

@@ -1,6 +1,8 @@
 """Persistence models and engine exports for the Tigrbl-native package tree."""
 
-from tigrbl_auth.framework import Base
+from tigrbl import bind
+
+from tigrbl_auth.framework import Base, _install_local_handler_dict_compat
 from tigrbl_auth.config.settings import settings
 
 from .tenant import Tenant
@@ -21,6 +23,37 @@ from .audit_event import AuditEvent
 from .logout_state import LogoutState
 from .key_rotation_event import KeyRotationEvent
 from .engine import ENGINE, dsn, get_db
+
+
+def _ensure_runtime_bindings() -> None:
+    """Materialize model handlers/schemas through Tigrbl's public bind API."""
+
+    for model in (
+        Tenant,
+        User,
+        Client,
+        ClientRegistration,
+        Service,
+        ApiKey,
+        ServiceKey,
+        AuthSession,
+        AuthCode,
+        DeviceCode,
+        RevokedToken,
+        TokenRecord,
+        PushedAuthorizationRequest,
+        Consent,
+        AuditEvent,
+        LogoutState,
+        KeyRotationEvent,
+    ):
+        handlers = getattr(model, "handlers", None)
+        if getattr(handlers, "read", None) is None:
+            bind(model)
+        _install_local_handler_dict_compat(model)
+
+
+_ensure_runtime_bindings()
 
 __all__ = [
     "Base",

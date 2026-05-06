@@ -61,7 +61,7 @@
 - dependency_provenance_artifact_count: `26`
 - dependency_lock_manifest_present: `True`
 - install_substrate_report_present: `True`
-- install_substrate_manifest_passed: `False`
+- install_substrate_manifest_passed: `True`
 - install_substrate_current_profile: `base`
 - install_substrate_current_python_supported: `True`
 - install_substrate_detected_supported_python_count: `1`
@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `.pytest-tmp/operator-plane-state508/tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `.pytest-tmp/operator-plane-state524/tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `195`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `30`
+- release_evidence_dirty_checkout_path_count: `34`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`

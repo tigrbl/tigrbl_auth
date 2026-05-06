@@ -29,20 +29,19 @@ class DummyDB:
     async def scalar(self, stmt):  # pragma: no cover - trivial
         return DummyClient()
 
-
-async def _override_db():
-    yield DummyDB()
-
-
 @pytest_asyncio.fixture()
 async def client(monkeypatch):
     app = TigrblApp()
     app.include_router(router)
-    app.router.dependency_overrides[get_db] = _override_db
+    app.router.dependency_overrides[get_db] = lambda: DummyDB()
     monkeypatch.setattr(
         Client.handlers.read,
         "core",
         AsyncMock(return_value=DummyClient()),
+    )
+    monkeypatch.setattr(
+        "tigrbl_auth.ops.token.issue_persisted_token_pair",
+        AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:

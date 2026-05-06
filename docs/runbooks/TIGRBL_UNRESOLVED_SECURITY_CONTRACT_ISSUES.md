@@ -1,7 +1,7 @@
 # Unresolved Security Contract Issues
 
 This report captures the issues still observable against a service built on
-`tigrbl==0.3.30.dev1`.
+`tigrbl==0.4.0`.
 
 The examples are intentionally small. They do not depend on local application
 internals, Docker layout, or repository-specific terminology. They only require
@@ -17,7 +17,7 @@ an HTTP service exposing:
 Observed package versions in the running service:
 
 ```text
-tigrbl 0.3.30.dev1
+tigrbl 0.4.0
 tigrbl_runtime 0.1.12.dev1
 ```
 

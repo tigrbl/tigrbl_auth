@@ -26,4 +26,4 @@ ENV \
     REDIS_PASSWORD="" \
     UV_PROJECT_ENVIRONMENT="/app/.venv"
 
-CMD ["uv", "run", "tigrbl-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]
+CMD ["/app/.venv/bin/tigrbl-auth", "serve", "--server", "tigrcorn", "--profile", "production", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--no-require-tls"]

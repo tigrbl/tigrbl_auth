@@ -16,6 +16,7 @@ from tigrbl_auth.app import app
 from tigrbl_auth.routers.shared import _jwt
 from tigrbl_auth.security.deps import get_db
 from tigrbl_auth.orm import Client
+from tigrbl_auth.services.token_service import JWTCoder
 
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
@@ -29,6 +30,29 @@ class DummyClient:
         return secret == "secret"
 
 
+@pytest.fixture(autouse=True)
+def token_issue_stub(monkeypatch):
+    issued: dict[str, dict] = {}
+
+    async def _fake_issue_persisted_token_pair(*, sub, tid, client_id, **extra):
+        audience = extra.get("audience")
+        access = f"access:{len(issued) + 1}"
+        refresh = f"refresh:{len(issued) + 1}"
+        claims = {"sub": sub, "tid": tid}
+        if audience is not None:
+            claims["aud"] = audience
+        issued[access] = claims
+        issued[refresh] = {"sub": sub, "tid": tid, "typ": "refresh"}
+        return access, refresh
+
+    async def _fake_decode(self, token, **_kwargs):
+        return issued[token]
+
+    monkeypatch.setattr("tigrbl_auth.ops.token.issue_persisted_token_pair", _fake_issue_persisted_token_pair)
+    monkeypatch.setattr(JWTCoder, "async_decode", _fake_decode)
+    yield
+
+
 @pytest.mark.unit
 @pytest.mark.asyncio
 async def test_token_includes_aud_when_resource_provided(monkeypatch):
@@ -36,7 +60,7 @@ async def test_token_includes_aud_when_resource_provided(monkeypatch):
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.routers.shared._pwd_backend.authenticate",
+        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -69,10 +93,10 @@ async def test_invalid_resource_returns_error(monkeypatch):
     """RFC 8707 §2: invalid resource value results in 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
-        AsyncMock(return_value=DummyClient()),
+        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
+    monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
     app.router.dependency_overrides[get_db] = lambda: AsyncMock()
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -98,7 +122,7 @@ async def test_multiple_resources_uses_first(monkeypatch):
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.routers.shared._pwd_backend.authenticate",
+        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -131,10 +155,10 @@ async def test_multiple_resources_with_invalid_returns_error(monkeypatch):
     """RFC 8707 §2: any invalid resource causes 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
-        AsyncMock(return_value=DummyClient()),
+        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
+    monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
     app.router.dependency_overrides[get_db] = lambda: AsyncMock()
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -160,7 +184,7 @@ async def test_feature_flag_disables_resource(monkeypatch):
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", False)
     monkeypatch.setattr(
-        "tigrbl_auth.routers.shared._pwd_backend.authenticate",
+        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(

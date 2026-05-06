@@ -15,6 +15,7 @@ from datetime import date, datetime, time
 from http import HTTPStatus as status
 from uuid import UUID as UUIDValue
 from typing import Any, Mapping, MutableMapping
+import inspect
 
 import tigrbl as _tigrbl
 from pydantic import AnyHttpUrl, ConfigDict, EmailStr, constr, field_validator
@@ -280,7 +281,7 @@ def _table_payload_without_identifiers(model: type, payload: Any) -> dict[str, A
         pk_name = _single_pk_name(model)
     except Exception:
         pk_name = "id"
-    for key in {pk_name, "id", "item_id", f"{pk_name}_id"}:
+    for key in {pk_name, "id", "ident", "item_id", f"{pk_name}_id"}:
         normalized.pop(key, None)
     return normalized
 
@@ -289,6 +290,127 @@ def _table_replace_payload(model: type, existing: Any, payload: Any) -> dict[str
     merged = _normalize_payload(existing)
     merged.update(_table_payload_without_identifiers(model, payload))
     return merged
+
+
+def _legacy_handler_ident(model: type, payload: Any) -> Any:
+    normalized = _normalize_payload(payload)
+    for key in ("ident", "id", "item_id"):
+        value = normalized.get(key)
+        if value not in {None, ""}:
+            try:
+                from tigrbl_ops_oltp.crud.helpers.model import _coerce_pk_value
+
+                return _coerce_pk_value(model, value)
+            except Exception:
+                return value
+    return None
+
+
+def _legacy_handler_filters(payload: Any) -> Any:
+    normalized = _normalize_payload(payload)
+    filters = normalized.get("filters")
+    if isinstance(filters, Mapping):
+        return dict(filters)
+    return normalized
+
+
+def _install_local_handler_dict_compat(model: type) -> None:
+    handlers_root = getattr(model, "handlers", None)
+    if handlers_root is None:
+        return
+
+    for alias, handler_ns in vars(handlers_root).items():
+        if handler_ns is None:
+            continue
+        raw = getattr(handler_ns, "core_raw", None) or getattr(handler_ns, "raw", None) or getattr(handler_ns, "core", None)
+        if not callable(raw) or getattr(getattr(handler_ns, "core", None), "__tigrbl_auth_dict_style_compat__", False):
+            continue
+
+        def _raw_expects_envelope(callable_obj: Any) -> bool:
+            try:
+                params = list(inspect.signature(callable_obj).parameters.values())
+            except (TypeError, ValueError):
+                return False
+            positional = [
+                param
+                for param in params
+                if param.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+            ]
+            return len(positional) == 1 and not any(
+                param.kind == inspect.Parameter.VAR_POSITIONAL for param in params
+            )
+
+        def _compat_envelope(alias_name: str, payload_obj: Any, db_obj: Any) -> dict[str, Any]:
+            ident = _legacy_handler_ident(model, payload_obj)
+            path_params: dict[str, Any] | None = None
+            if alias_name == "create":
+                next_payload: Any = _normalize_payload(payload_obj)
+            elif alias_name in {"read", "delete", "exists"}:
+                next_payload = {}
+                if ident is not None:
+                    path_params = {"id": ident}
+            elif alias_name in {"update", "merge", "replace"}:
+                next_payload = _table_payload_without_identifiers(model, payload_obj)
+                if ident is not None:
+                    path_params = {"id": ident}
+            elif alias_name in {"list", "count", "clear"}:
+                next_payload = _legacy_handler_filters(payload_obj)
+            elif alias_name.startswith("bulk_"):
+                next_payload = payload_obj or []
+            else:
+                next_payload = payload_obj
+            envelope = {"payload": next_payload, "db": db_obj}
+            if path_params is not None:
+                envelope["path_params"] = path_params
+            return envelope
+
+        async def _compat_core(*args: Any, _alias: str = alias, _raw: Any = raw, **kwargs: Any) -> Any:
+            if len(args) == 1 and isinstance(args[0], Mapping) and not kwargs:
+                envelope = dict(args[0])
+                payload = envelope.get("payload")
+                db = envelope.get("db")
+
+                compat_payload = payload
+                if _alias == "replace":
+                    ident = _legacy_handler_ident(model, payload)
+                    existing = await getattr(getattr(model.handlers, "read"), "core_raw", getattr(model.handlers.read, "raw"))(
+                        _compat_envelope("read", {"id": ident}, db)
+                    )
+                    compat_payload = _table_replace_payload(model, existing, payload)
+                    compat_payload["ident"] = ident
+
+                compat_envelope = _compat_envelope(_alias, compat_payload, db)
+
+                if _raw_expects_envelope(_raw):
+                    call = _raw(compat_envelope)
+                else:
+                    if _alias == "create":
+                        direct_call = lambda: _raw(model, _normalize_payload(payload), db)
+                    elif _alias in {"read", "delete", "exists"}:
+                        direct_call = lambda: _raw(model, _legacy_handler_ident(model, payload), db)
+                    elif _alias in {"update", "merge"}:
+                        direct_call = lambda: _raw(model, _legacy_handler_ident(model, payload), _table_payload_without_identifiers(model, payload), db)
+                    elif _alias == "replace":
+                        direct_call = lambda: _raw(model, ident, _table_replace_payload(model, existing, payload), db)
+                    elif _alias in {"list", "count", "clear"}:
+                        direct_call = lambda: _raw(model, _legacy_handler_filters(payload), db)
+                    elif _alias.startswith("bulk_"):
+                        direct_call = lambda: _raw(model, payload or [], db)
+                    else:
+                        direct_call = lambda: _raw(*args, **kwargs)
+
+                    try:
+                        call = direct_call()
+                    except TypeError:
+                        call = _raw(compat_envelope)
+            else:
+                call = _raw(*args, **kwargs)
+            if inspect.isawaitable(call):
+                return await call
+            return call
+
+        setattr(_compat_core, "__tigrbl_auth_dict_style_compat__", True)
+        setattr(handler_ns, "core", _compat_core)
 
 
 def _install_table_handler_compat() -> None:
@@ -590,6 +712,10 @@ def _install_table_route_compat(router: Any, models: list[type]) -> None:
     from tigrbl_ops_oltp.crud.helpers.model import _coerce_pk_value
     from tigrbl_base._base._rpc_map import _serialize_output
 
+    routes = getattr(router, "_routes", None)
+    if not isinstance(routes, list):
+        return
+
     for model in models:
         rpc_root = getattr(model, "rpc", None)
         if rpc_root is not None and not getattr(getattr(rpc_root, "clear", None), "__tigrbl_auth_table_crud_clear__", False):
@@ -635,7 +761,7 @@ def _install_table_route_compat(router: Any, models: list[type]) -> None:
             setattr(rpc_root, "clear", _rpc_clear)
 
     updated_routes = []
-    for route in list(getattr(router, "_routes", []) or []):
+    for route in list(routes):
         if getattr(route, "tigrbl_alias", None) != "replace":
             updated_routes.append(route)
             continue
@@ -680,15 +806,23 @@ class TigrblRouter(_BaseTigrblRouter):
             model_seq = [models]
         else:
             model_seq = list(models)
+
+        def _install_local_model_compat() -> None:
+            for model in model_seq:
+                if _is_local_table_model(model):
+                    _install_local_handler_dict_compat(model)
+
         include_models = getattr(self, "include_models", None)
         if callable(include_models):
             include_models(model_seq)
+            _install_local_model_compat()
             _install_table_route_compat(self, model_seq)
             return
 
         parent_include_tables = getattr(super(), "include_tables", None)
         if callable(parent_include_tables):
             parent_include_tables(model_seq)
+            _install_local_model_compat()
             _install_table_route_compat(self, model_seq)
             return
 
@@ -696,6 +830,7 @@ class TigrblRouter(_BaseTigrblRouter):
         if callable(include_table):
             for model in model_seq:
                 include_table(model)
+            _install_local_model_compat()
             _install_table_route_compat(self, model_seq)
             return
 

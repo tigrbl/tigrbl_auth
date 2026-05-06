@@ -32,10 +32,10 @@ docker logs --tail 80 tigrbl-auth-local
 Run the packaged operator CLI inside the container:
 
 ```powershell
-docker exec tigrbl-auth-local tigrbl-auth --help
-docker exec tigrbl-auth-local uv run tigrbl-auth serve --server tigrcorn --check --profile production --format json
-docker exec tigrbl-auth-local tigrbl-auth discovery show --repo-root /app --profile production --format json
-docker exec tigrbl-auth-local tigrbl-auth spec validate --kind openrpc --repo-root /app --profile production --format json
+docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth --help
+docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth serve --server tigrcorn --check --profile production --format json
+docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth discovery show --repo-root /app --profile production --format json
+docker exec tigrbl-auth-local /app/.venv/bin/tigrbl-auth spec validate --kind openrpc --repo-root /app --profile production --format json
 ```
 
 ## REST
@@ -54,10 +54,11 @@ The local Docker runtime sets `AUTHN_ISSUER=http://localhost:8001`, so
 package fallback `https://authn.example.com`.
 
 The image installs the published `tigrcorn` runner profile with `uv sync` and
-launches the package through:
+launches the prebuilt virtual environment directly so runtime startup does not
+re-resolve optional extras:
 
 ```powershell
-uv run tigrbl-auth serve --server tigrcorn --profile production --host 0.0.0.0 --port 8000 --proxy-headers --no-require-tls
+/app/.venv/bin/tigrbl-auth serve --server tigrcorn --profile production --host 0.0.0.0 --port 8000 --proxy-headers --no-require-tls
 ```
 
 List the bootstrapped tenants over REST:
