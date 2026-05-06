@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "kind": "boundary_snapshot",
+  "generated_at": "2026-05-05T23:03:55Z",
+  "registry_path": ".ssot/registry.json",
+  "registry_sha256": "739b57c8469aca7b0f2b3e567e3f1c38a06199492bb1455bad9bd623389c6a00",
+  "boundary": {
+    "id": "bnd:phase3-admin-policy-cross-plane-20260505",
+    "title": "Phase 3 admin policy and cross-plane governance",
+    "status": "frozen",
+    "frozen": true,
+    "feature_ids": [
+      "feat:f03-service-identities",
+      "feat:f13-rbac",
+      "feat:f14-abac",
+      "feat:f16-policy-engine",
+      "feat:f19-policy-simulation",
+      "feat:f20-policy-audit",
+      "feat:f24-fine-grained-permissions",
+      "feat:f25-dynamic-conditions",
+      "feat:f42-compliance-reporting",
+      "feat:f45-delegated-admin",
+      "feat:tenant-isolation-cross-plane",
+      "feat:tenant-visibility-rules",
+      "feat:client-policy-cross-plane",
+      "feat:client-mutation-authority-rules",
+      "feat:public-vs-admin-client-exposure"
+    ],
+    "profile_ids": []
+  },
+  "features": [
+    {
+      "id": "feat:f03-service-identities",
+      "title": "F03 Service identities",
+      "description": "Canonical feature F03: Service identities. Current implementation status: partial. Governed by SPEC-1066.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1066"
+      ],
+      "claim_ids": [
+        "clm:phase3-service-identities-and-delegated-admin"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f13-rbac",
+      "title": "F13 RBAC",
+      "description": "Canonical feature F13: RBAC. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f14-abac",
+      "title": "F14 ABAC",
+      "description": "Canonical feature F14: ABAC. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f16-policy-engine",
+      "title": "F16 Policy engine",
+      "description": "Canonical feature F16: Policy engine. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f19-policy-simulation",
+      "title": "F19 Policy simulation",
+      "description": "Canonical feature F19: Policy simulation. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f20-policy-audit",
+      "title": "F20 Policy audit",
+      "description": "Canonical feature F20: Policy audit. Current implementation status: partial. Governed by SPEC-1070.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1070"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f24-fine-grained-permissions",
+      "title": "F24 Fine-grained permissions",
+      "description": "Canonical feature F24: Fine-grained permissions. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f25-dynamic-conditions",
+      "title": "F25 Dynamic conditions",
+      "description": "Canonical feature F25: Dynamic conditions. Current implementation status: partial. Governed by SPEC-1069.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1069"
+      ],
+      "claim_ids": [
+        "clm:phase3-policy-engine-and-simulation"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:uix-rbac-admin",
+        "tst:uix-abac-admin",
+        "tst:uix-policy-simulation"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f42-compliance-reporting",
+      "title": "F42 Compliance reporting",
+      "description": "Canonical feature F42: Compliance reporting. Current implementation status: partial. Governed by SPEC-1072.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:f45-delegated-admin",
+      "title": "F45 Delegated admin",
+      "description": "Canonical feature F45: Delegated admin. Current implementation status: partial. Governed by SPEC-1072.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1072"
+      ],
+      "claim_ids": [
+        "clm:phase3-service-identities-and-delegated-admin",
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-isolation-cross-plane",
+      "title": "Tenant isolation cross-plane",
+      "description": "Tenant and client cross-plane feature: define and govern tenant isolation semantics across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-visibility-rules",
+      "title": "Tenant visibility rules",
+      "description": "Tenant and client cross-plane feature: define and govern tenant visibility rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:client-policy-cross-plane",
+      "title": "Client policy cross-plane",
+      "description": "Tenant and client cross-plane feature: define and govern client policy semantics across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:client-mutation-authority-rules",
+      "title": "Client mutation authority rules",
+      "description": "Tenant and client cross-plane feature: define and govern client mutation authority rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:public-vs-admin-client-exposure",
+      "title": "Public versus admin client exposure",
+      "description": "Tenant and client cross-plane feature: define and govern public-facing versus admin-only client exposure rules across admin API, public API, admin UIX, and selected public UIX surfaces. Current implementation status: absent. Governed by SPEC-1082.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": "Phase 3 admin policy and cross-plane governance release closure."
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1082"
+      ],
+      "claim_ids": [
+        "clm:phase3-cross-plane-tenant-client-governance"
+      ],
+      "test_ids": [
+        "tst:phase3-policy-control-plane-py",
+        "tst:phase3-admin-uix-governance"
+      ],
+      "requires": []
+    }
+  ],
+  "summary": {
+    "boundary_id": "bnd:phase3-admin-policy-cross-plane-20260505",
+    "feature_count": 15,
+    "profile_count": 0,
+    "frozen": true,
+    "status": "frozen"
+  }
+}

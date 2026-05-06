@@ -15,6 +15,7 @@ import { Icons } from './constants';
 import { controlPlaneStateService } from './services/controlPlaneStateService';
 import { Tenant } from './types';
 import { backendService } from './services/backendService';
+import { filterVisibleTenants, loadDelegatedAdminScope } from './services/governancePolicy';
 
 const App: React.FC = () => {
   const [active_tab, set_active_tab] = useState('dashboard');
@@ -24,22 +25,26 @@ const App: React.FC = () => {
   const [loading, set_loading] = useState(true);
   const [bootstrap_error, set_bootstrap_error] = useState<string | null>(null);
   const [is_lockdown, set_is_lockdown] = useState(controlPlaneStateService.get_lockdown());
+  const delegated_scope = loadDelegatedAdminScope();
 
   const refresh_tenants = async () => {
     const fetched_tenants = await backendService.getTenants();
+    const visible_tenants = filterVisibleTenants(fetched_tenants, delegated_scope);
 
     if (fetched_tenants.length === 0) {
       set_bootstrap_error('No tenants were returned by the backend.');
+    } else if (visible_tenants.length === 0) {
+      set_bootstrap_error('Delegated administration scope does not expose any tenants.');
     } else {
       set_bootstrap_error(null);
     }
 
     set_tenants(fetched_tenants);
     set_current_tenant((current) => {
-      if (current && fetched_tenants.find((tenant) => tenant.id === current.id)) {
+      if (current && visible_tenants.find((tenant) => tenant.id === current.id)) {
         return current;
       }
-      return fetched_tenants[0] ?? null;
+      return visible_tenants[0] ?? null;
     });
   };
 
@@ -111,11 +116,20 @@ const App: React.FC = () => {
   }
 
   const is_admin_tenant = current_tenant.slug === 'admin';
+  const visible_tenants = filterVisibleTenants(tenants, delegated_scope);
 
   const render_content = () => {
     switch (active_tab) {
       case 'dashboard': return <Dashboard tenant_id={current_tenant.id} />;
-      case 'tenants': return <TenantManagement tenants={tenants} on_refresh={refresh_tenants} on_select_tenant={handle_select_tenant_for_detail} />;
+      case 'tenants':
+        return (
+          <TenantManagement
+            tenants={visible_tenants}
+            delegated_scope={delegated_scope}
+            on_refresh={refresh_tenants}
+            on_select_tenant={handle_select_tenant_for_detail}
+          />
+        );
       case 'tenant_detail':
         return selected_tenant_detail ? (
           <TenantDetail
@@ -128,7 +142,7 @@ const App: React.FC = () => {
         ) : null;
       case 'identities': return <IdentityManagement />;
       case 'policies': return <PolicyEditor tenant_id={current_tenant.id} />;
-      case 'clients': return <ClientManagement tenant_id={current_tenant.id} />;
+      case 'clients': return <ClientManagement tenant_id={current_tenant.id} delegated_scope={delegated_scope} />;
       case 'security': return <SecurityManagement />;
       case 'abuse': return <AbuseManagement />;
       case 'services': return <ServiceInfrastructure />;
@@ -183,7 +197,7 @@ const App: React.FC = () => {
                   }}
                   className={`text-xs font-bold bg-white border border-[#1a1a1a] px-2 py-1 outline-none transition-all cursor-pointer ${is_admin_tenant ? 'border-[#ff2d00] text-[#ff2d00]' : ''}`}
                 >
-                  {tenants.map(r => (
+                  {visible_tenants.map(r => (
                     <option key={r.id} value={r.id}>{r.name.toUpperCase()}</option>
                   ))}
                 </select>

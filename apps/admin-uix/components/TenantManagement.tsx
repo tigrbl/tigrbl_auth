@@ -4,14 +4,16 @@ import { Icons } from '../constants';
 import { Tenant } from '../types';
 import styles from './TenantManagement.module.css';
 import { backendService } from '../services/backendService';
+import type { DelegatedAdminScope } from '../services/governancePolicy';
 
 interface TenantManagementProps {
   tenants: Tenant[];
+  delegated_scope?: DelegatedAdminScope | null;
   on_refresh?: () => Promise<void>;
   on_select_tenant: (tenant: Tenant) => void;
 }
 
-const TenantManagement: React.FC<TenantManagementProps> = ({ tenants, on_refresh, on_select_tenant }) => {
+const TenantManagement: React.FC<TenantManagementProps> = ({ tenants, delegated_scope, on_refresh, on_select_tenant }) => {
   const [show_create, set_show_create] = useState(false);
   const [new_tenant, set_new_tenant] = useState({ name: '', slug: '', description: '' });
 
@@ -41,6 +43,11 @@ const TenantManagement: React.FC<TenantManagementProps> = ({ tenants, on_refresh
         <div>
           <h1 className={styles.title}>Tenant Control</h1>
           <p className={styles.subtitle}>Provision, isolate, and architect multi-tenant namespaces.</p>
+          {delegated_scope && (
+            <p className={styles.subtitle}>
+              Scoped delegated view for {delegated_scope.subject}: {tenants.length} visible tenant{tenants.length === 1 ? '' : 's'}.
+            </p>
+          )}
         </div>
         <button onClick={() => set_show_create(true)} className={styles.primaryButton}>Provision New Tenant</button>
       </div>

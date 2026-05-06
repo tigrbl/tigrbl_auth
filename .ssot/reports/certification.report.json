@@ -2,13 +2,13 @@
   "passed": true,
   "registry_path": ".ssot/registry.json",
   "release": {
-    "release_id": "rel:phase2-public-uix-browser-security-20260505",
+    "release_id": "rel:phase3-admin-policy-cross-plane-20260505",
     "passed": true,
     "failures": [],
     "warnings": [],
     "claims": [
       {
-        "claim_id": "clm:phase2-public-uix-flows",
+        "claim_id": "clm:phase3-policy-engine-and-simulation",
         "passed": true,
         "failures": [],
         "checks": {
@@ -23,7 +23,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase2-public-uix-browser-security",
+        "claim_id": "clm:phase3-service-identities-and-delegated-admin",
         "passed": true,
         "failures": [],
         "checks": {
@@ -38,7 +38,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase2-public-uix-contract-and-errors",
+        "claim_id": "clm:phase3-cross-plane-tenant-client-governance",
         "passed": true,
         "failures": [],
         "checks": {
@@ -55,45 +55,45 @@
     ],
     "evidence": [
       {
-        "evidence_id": "evd:phase2-public-surface-pytest",
+        "evidence_id": "evd:phase3-admin-uix-build",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase2-public-uix-build",
+        "evidence_id": "evd:phase3-admin-uix-vitest",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase2-public-uix-vitest",
+        "evidence_id": "evd:phase3-policy-control-plane-pytest",
         "passed": true,
         "failures": []
       }
     ],
     "profiles": [],
     "boundary": {
-      "id": "bnd:phase2-public-uix-browser-security-20260505",
+      "id": "bnd:phase3-admin-policy-cross-plane-20260505",
       "profile_ids": [],
       "resolved_feature_ids": [
-        "feat:uix-public-shell",
-        "feat:uix-public-auth-session",
-        "feat:uix-public-login-view",
-        "feat:uix-public-logout-view",
-        "feat:uix-public-registration-view",
-        "feat:uix-public-recovery-view",
-        "feat:uix-public-session-continuity",
-        "feat:uix-public-openapi-contract-consumption",
-        "feat:uix-public-browser-token-handling",
-        "feat:uix-public-problem-details-rendering",
-        "feat:uix-public-safe-error-disclosure",
-        "feat:uix-public-consent-view",
-        "feat:uix-public-cookie-session-model",
-        "feat:uix-public-csrf-protection",
-        "feat:uix-public-origin-and-redirect-constraints"
+        "feat:f03-service-identities",
+        "feat:f13-rbac",
+        "feat:f14-abac",
+        "feat:f16-policy-engine",
+        "feat:f19-policy-simulation",
+        "feat:f20-policy-audit",
+        "feat:f24-fine-grained-permissions",
+        "feat:f25-dynamic-conditions",
+        "feat:f42-compliance-reporting",
+        "feat:f45-delegated-admin",
+        "feat:tenant-isolation-cross-plane",
+        "feat:tenant-visibility-rules",
+        "feat:client-policy-cross-plane",
+        "feat:client-mutation-authority-rules",
+        "feat:public-vs-admin-client-exposure"
       ]
     },
     "summary": {
-      "boundary_id": "bnd:phase2-public-uix-browser-security-20260505",
+      "boundary_id": "bnd:phase3-admin-policy-cross-plane-20260505",
       "boundary_feature_count": 15,
       "boundary_profile_count": 0,
       "release_claim_count": 3,
@@ -101,7 +101,7 @@
     }
   },
   "boundary_scope": {
-    "boundary_id": "bnd:phase2-public-uix-browser-security-20260505",
+    "boundary_id": "bnd:phase3-admin-policy-cross-plane-20260505",
     "profile_ids": [],
     "feature_ids": []
   },
@@ -109,13 +109,13 @@
     "counts": {
       "features": 522,
       "profiles": 6,
-      "tests": 230,
-      "claims": 447,
-      "evidence": 77,
+      "tests": 232,
+      "claims": 450,
+      "evidence": 80,
       "issues": 12,
       "risks": 1,
-      "boundaries": 10,
-      "releases": 3,
+      "boundaries": 11,
+      "releases": 4,
       "adrs": 78,
       "specs": 99
     },

@@ -4,17 +4,25 @@ import { Icons } from '../constants';
 import { OAuthClient } from '../types';
 import styles from './ClientManagement.module.css';
 import { backendService } from '../services/backendService';
+import {
+  authorizeClientMutation,
+  exposeClientRecord,
+  type DelegatedAdminScope,
+} from '../services/governancePolicy';
 
 interface ClientManagementProps {
   tenant_id: string;
+  delegated_scope?: DelegatedAdminScope | null;
 }
 
 const is_uuid = (value: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 
-const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
-  const [clients, set_clients] = useState<OAuthClient[]>([]);
+type ManagedClient = Pick<OAuthClient, 'id' | 'tenant_id' | 'name' | 'client_id' | 'type' | 'redirect_uris'> & Partial<OAuthClient>;
+
+const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id, delegated_scope }) => {
+  const [clients, set_clients] = useState<ManagedClient[]>([]);
   const [show_modal, set_show_modal] = useState(false);
-  const [editing_client, set_editing_client] = useState<OAuthClient | null>(null);
+  const [editing_client, set_editing_client] = useState<ManagedClient | null>(null);
   const [show_secret, set_show_secret] = useState<Record<string, boolean>>({});
   const [form_data, set_form_data] = useState<Partial<OAuthClient>>({
     name: '',
@@ -25,7 +33,12 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
 
   const load_clients = async () => {
     const list = await backendService.getClients(tenant_id);
-    set_clients(list);
+    set_clients(
+      list.map((client) => ({
+        ...client,
+        ...exposeClientRecord(client, 'admin', delegated_scope),
+      })),
+    );
   };
 
   useEffect(() => {
@@ -39,23 +52,37 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
       return;
     }
 
+    const patch: Partial<OAuthClient> = {
+      name: form_data.name,
+      client_id: form_data.client_id,
+      type: form_data.type as 'public' | 'confidential',
+      redirect_uris: form_data.redirect_uris?.filter(u => u !== '') || []
+    };
+
     if (editing_client) {
+      const authorization = authorizeClientMutation(tenant_id, patch, delegated_scope, 'client.update');
+      if (!authorization.allowed) {
+        alert(authorization.reason);
+        return;
+      }
       const updated: OAuthClient = {
         ...editing_client,
-        name: form_data.name,
-        client_id: form_data.client_id,
-        type: form_data.type as 'public' | 'confidential',
-        redirect_uris: form_data.redirect_uris?.filter(u => u !== '') || []
+        ...patch,
       };
       await backendService.updateClient(updated);
     } else {
+      const createAuthorization = authorizeClientMutation(tenant_id, patch, delegated_scope, 'client.create');
+      if (!createAuthorization.allowed) {
+        alert(createAuthorization.reason);
+        return;
+      }
       const client: OAuthClient = {
         id: crypto.randomUUID(),
         tenant_id,
-        name: form_data.name,
-        client_id: form_data.client_id,
-        type: form_data.type as 'public' | 'confidential',
-        redirect_uris: form_data.redirect_uris?.filter(u => u !== '') || [],
+        name: patch.name ?? '',
+        client_id: patch.client_id ?? '',
+        type: patch.type as 'public' | 'confidential',
+        redirect_uris: patch.redirect_uris ?? [],
         client_secret: form_data.type === 'confidential' ? 'sk_live_' + crypto.randomUUID().replace(/-/g, '').slice(0, 16) : undefined
       };
       await backendService.createClient(client);
@@ -68,6 +95,11 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
   };
 
   const handle_delete = async (id: string) => {
+    const authorization = authorizeClientMutation(tenant_id, {}, delegated_scope, 'client.delete');
+    if (!authorization.allowed) {
+      alert(authorization.reason);
+      return;
+    }
     if (confirm('Permanently de-register this OAuth application? All session tokens will be invalidated immediately.')) {
       await backendService.deleteClient(id);
       await load_clients();
@@ -95,6 +127,11 @@ const ClientManagement: React.FC<ClientManagementProps> = ({ tenant_id }) => {
         <div>
           <h1 className={styles.title}>OAuth Clients</h1>
           <p className={styles.subtitle}>Provision OIDC compliant credentials for the namespace flux.</p>
+          {delegated_scope && (
+            <p className={styles.subtitle}>
+              Delegated client scope for {delegated_scope.subject}: secrets and restricted fields remain redacted.
+            </p>
+          )}
         </div>
         <button onClick={() => { set_editing_client(null); set_form_data({ name: '', client_id: '', type: 'public', redirect_uris: [''] }); set_show_modal(true); }} className={styles.primaryButton}>Register Application</button>
       </div>

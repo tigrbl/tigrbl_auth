@@ -3033,6 +3033,14 @@
       "kind": "test"
     },
     {
+      "id": "tst:phase3-policy-control-plane-py",
+      "kind": "test"
+    },
+    {
+      "id": "tst:phase3-admin-uix-governance",
+      "kind": "test"
+    },
+    {
       "id": "clm:cli-flag-access-log",
       "kind": "claim"
     },
@@ -4821,6 +4829,18 @@
       "kind": "claim"
     },
     {
+      "id": "clm:phase3-policy-engine-and-simulation",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase3-service-identities-and-delegated-admin",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase3-cross-plane-tenant-client-governance",
+      "kind": "claim"
+    },
+    {
       "id": "evd:compliance-evidence-tier3-asgi-application",
       "kind": "evidence"
     },
@@ -5129,6 +5149,18 @@
       "kind": "evidence"
     },
     {
+      "id": "evd:phase3-policy-control-plane-pytest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase3-admin-uix-vitest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase3-admin-uix-build",
+      "kind": "evidence"
+    },
+    {
       "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "kind": "issue"
     },
@@ -5221,6 +5253,10 @@
       "kind": "boundary"
     },
     {
+      "id": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "kind": "boundary"
+    },
+    {
       "id": "rel:0.1.0",
       "kind": "release"
     },
@@ -5230,6 +5266,10 @@
     },
     {
       "id": "rel:phase2-public-uix-browser-security-20260505",
+      "kind": "release"
+    },
+    {
+      "id": "rel:phase3-admin-policy-cross-plane-20260505",
       "kind": "release"
     }
   ],
@@ -5680,6 +5720,81 @@
       "to": "feat:uix-public-origin-and-redirect-constraints"
     },
     {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f03-service-identities"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f13-rbac"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f14-abac"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f16-policy-engine"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f19-policy-simulation"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f20-policy-audit"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f24-fine-grained-permissions"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f25-dynamic-conditions"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f42-compliance-reporting"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:f45-delegated-admin"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:tenant-isolation-cross-plane"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:tenant-visibility-rules"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:client-policy-cross-plane"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:client-mutation-authority-rules"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "to": "feat:public-vs-admin-client-exposure"
+    },
+    {
       "type": "BUNDLES",
       "from": "prf:baseline",
       "to": "feat:profile-baseline"
@@ -5853,6 +5968,41 @@
       "type": "INCLUDES",
       "from": "rel:phase2-public-uix-browser-security-20260505",
       "to": "evd:phase2-public-surface-pytest"
+    },
+    {
+      "type": "USES_BOUNDARY",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "bnd:phase3-admin-policy-cross-plane-20260505"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "clm:phase3-service-identities-and-delegated-admin"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "evd:phase3-policy-control-plane-pytest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "evd:phase3-admin-uix-vitest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase3-admin-policy-cross-plane-20260505",
+      "to": "evd:phase3-admin-uix-build"
     },
     {
       "type": "COVERED_BY",
@@ -25146,6 +25296,171 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:f03-service-identities",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f13-rbac",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f13-rbac",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f13-rbac",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f13-rbac",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f14-abac",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f14-abac",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f14-abac",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f14-abac",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f24-fine-grained-permissions",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f24-fine-grained-permissions",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f24-fine-grained-permissions",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f24-fine-grained-permissions",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f25-dynamic-conditions",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f25-dynamic-conditions",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f25-dynamic-conditions",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f25-dynamic-conditions",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f16-policy-engine",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f16-policy-engine",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f16-policy-engine",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f16-policy-engine",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f19-policy-simulation",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f19-policy-simulation",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f19-policy-simulation",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f19-policy-simulation",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f20-policy-audit",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f20-policy-audit",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f20-policy-audit",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f20-policy-audit",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f42-compliance-reporting",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f42-compliance-reporting",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f45-delegated-admin",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f45-delegated-admin",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:uix-admin-boundary",
       "to": "tst:uix-admin-frontend-adapter"
     },
@@ -25438,6 +25753,56 @@
       "type": "COVERED_BY",
       "from": "feat:api-public-admin-surface-exclusion",
       "to": "tst:secure-default-admin-gate-runtime-contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-isolation-cross-plane",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-isolation-cross-plane",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:client-policy-cross-plane",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:client-policy-cross-plane",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-visibility-rules",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-visibility-rules",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:client-mutation-authority-rules",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:client-mutation-authority-rules",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:public-vs-admin-client-exposure",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:public-vs-admin-client-exposure",
+      "to": "tst:phase3-admin-uix-governance"
     },
     {
       "type": "ASSERTS",
@@ -54765,6 +55130,156 @@
       "to": "clm:phase2-public-uix-contract-and-errors"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f13-rbac"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f14-abac"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f16-policy-engine"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f19-policy-simulation"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f20-policy-audit"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f24-fine-grained-permissions"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-policy-engine-and-simulation",
+      "to": "feat:f25-dynamic-conditions"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:uix-rbac-admin",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:uix-abac-admin",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:uix-policy-simulation",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase3-policy-control-plane-py",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "clm:phase3-policy-engine-and-simulation"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-service-identities-and-delegated-admin",
+      "to": "feat:f03-service-identities"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-service-identities-and-delegated-admin",
+      "to": "feat:f45-delegated-admin"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase3-policy-control-plane-py",
+      "to": "clm:phase3-service-identities-and-delegated-admin"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase3-admin-uix-governance",
+      "to": "clm:phase3-service-identities-and-delegated-admin"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "clm:phase3-service-identities-and-delegated-admin"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-admin-uix-vitest",
+      "to": "clm:phase3-service-identities-and-delegated-admin"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:f42-compliance-reporting"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:f45-delegated-admin"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:tenant-isolation-cross-plane"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:tenant-visibility-rules"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:client-policy-cross-plane"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:client-mutation-authority-rules"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase3-cross-plane-tenant-client-governance",
+      "to": "feat:public-vs-admin-client-exposure"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase3-policy-control-plane-py",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase3-admin-uix-governance",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-admin-uix-vitest",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase3-admin-uix-build",
+      "to": "clm:phase3-cross-plane-tenant-client-governance"
+    },
+    {
       "type": "DERIVES_FROM",
       "from": "evd:compliance-evidence-tier3-assertion-framework",
       "to": "tst:tests-conformance-baseline-test-oidc-id-token-py"
@@ -69676,12 +70191,27 @@
     },
     {
       "type": "DERIVES_FROM",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "tst:uix-rbac-admin"
+    },
+    {
+      "type": "DERIVES_FROM",
       "from": "evd:uix-abac-admin",
       "to": "tst:uix-abac-admin"
     },
     {
       "type": "DERIVES_FROM",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "tst:uix-abac-admin"
+    },
+    {
+      "type": "DERIVES_FROM",
       "from": "evd:uix-policy-simulation",
+      "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase3-policy-control-plane-pytest",
       "to": "tst:uix-policy-simulation"
     },
     {
@@ -72068,6 +72598,21 @@
       "type": "DERIVES_FROM",
       "from": "evd:phase2-public-uix-build",
       "to": "tst:uix-public-nginx-boundary"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase3-policy-control-plane-pytest",
+      "to": "tst:phase3-policy-control-plane-py"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase3-admin-uix-vitest",
+      "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase3-admin-uix-build",
+      "to": "tst:phase3-admin-uix-governance"
     },
     {
       "type": "AFFECTS",

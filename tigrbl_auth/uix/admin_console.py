@@ -4,6 +4,29 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any, Callable, Mapping
 
+from tigrbl_auth.services.policy_control_plane import (
+    ABACAdministration,
+    ADMIN_CLIENT_FIELDS,
+    AttributePolicy,
+    DELEGATED_MUTABLE_CLIENT_FIELDS,
+    DELEGATED_VISIBLE_CLIENT_FIELDS,
+    DelegatedAdminScope,
+    DelegatedAdministration,
+    DynamicCondition,
+    PolicyDecision,
+    PolicyEngine,
+    PUBLIC_CLIENT_FIELDS,
+    RBACAdministration,
+    Role,
+    ServiceIdentityAuthentication,
+    ServiceIdentityRegistry,
+    assert_client_mutation_authority,
+    build_compliance_report,
+    expose_client_record,
+    filter_visible_tenants,
+    simulate_policy,
+)
+
 
 ADMIN_NAVIGATION: tuple[str, ...] = (
     "dashboard",
@@ -233,99 +256,6 @@ class SafeMutationResult:
     error: str | None = None
 
 
-@dataclass(frozen=True, slots=True)
-class Role:
-    name: str
-    permissions: tuple[str, ...]
-
-
-@dataclass(frozen=True, slots=True)
-class AttributePolicy:
-    name: str
-    permission: str
-    required_attributes: Mapping[str, Any]
-
-
-@dataclass(frozen=True, slots=True)
-class PolicyDecision:
-    allowed: bool
-    reason: str
-    matched: tuple[str, ...] = ()
-
-
-class RBACAdministration:
-    def __init__(self) -> None:
-        self._roles: dict[str, Role] = {}
-        self._assignments: dict[str, set[str]] = {}
-
-    @property
-    def roles(self) -> Mapping[str, Role]:
-        return dict(self._roles)
-
-    @property
-    def assignments(self) -> Mapping[str, tuple[str, ...]]:
-        return {subject: tuple(sorted(roles)) for subject, roles in self._assignments.items()}
-
-    def upsert_role(self, name: str, permissions: tuple[str, ...]) -> Role:
-        if not name or not permissions:
-            raise ValueError("role name and permissions are required")
-        role = Role(name=name, permissions=tuple(sorted(set(permissions))))
-        self._roles[name] = role
-        return role
-
-    def assign_role(self, subject: str, role_name: str) -> None:
-        if role_name not in self._roles:
-            raise KeyError(f"unknown role {role_name!r}")
-        self._assignments.setdefault(subject, set()).add(role_name)
-
-    def decide(self, subject: str, permission: str) -> PolicyDecision:
-        matched = tuple(
-            role_name
-            for role_name in sorted(self._assignments.get(subject, set()))
-            if permission in self._roles[role_name].permissions
-        )
-        if matched:
-            return PolicyDecision(True, "permission granted by assigned role", matched)
-        return PolicyDecision(False, "permission denied by RBAC role assignments", ())
-
-
-class ABACAdministration:
-    def __init__(self) -> None:
-        self._policies: dict[str, AttributePolicy] = {}
-
-    @property
-    def policies(self) -> Mapping[str, AttributePolicy]:
-        return dict(self._policies)
-
-    def upsert_policy(
-        self,
-        name: str,
-        *,
-        permission: str,
-        required_attributes: Mapping[str, Any],
-    ) -> AttributePolicy:
-        if not name or not permission or not required_attributes:
-            raise ValueError("policy name, permission, and attributes are required")
-        policy = AttributePolicy(
-            name=name,
-            permission=permission,
-            required_attributes=dict(required_attributes),
-        )
-        self._policies[name] = policy
-        return policy
-
-    def decide(self, *, permission: str, attributes: Mapping[str, Any]) -> PolicyDecision:
-        matched: list[str] = []
-        for policy in self._policies.values():
-            if policy.permission != permission:
-                continue
-            if all(attributes.get(key) == value for key, value in policy.required_attributes.items()):
-                matched.append(policy.name)
-        if matched:
-            return PolicyDecision(True, "permission granted by matching attributes", tuple(sorted(matched)))
-        return PolicyDecision(False, "permission denied by ABAC attributes", ())
-
-
 def build_resource_views(available_methods: set[str] | tuple[str, ...] | list[str]) -> dict[str, ResourceView]:
     available = set(available_methods)
     views: dict[str, ResourceView] = {}
@@ -417,26 +347,6 @@ def execute_safe_mutation(
         required_method=required_method,
         audit_event={**audit_event, "outcome": "executed"},
     )
-
-
-def simulate_policy(
-    *,
-    rbac: RBACAdministration,
-    abac: ABACAdministration,
-    subject: str,
-    permission: str,
-    attributes: Mapping[str, Any],
-) -> PolicyDecision:
-    rbac_decision = rbac.decide(subject, permission)
-    abac_decision = abac.decide(permission=permission, attributes=attributes)
-    if rbac_decision.allowed and abac_decision.allowed:
-        return PolicyDecision(
-            True,
-            "permission granted by RBAC assignment and ABAC attributes",
-            rbac_decision.matched + abac_decision.matched,
-        )
-    reasons = [rbac_decision.reason, abac_decision.reason]
-    return PolicyDecision(False, "; ".join(reasons), rbac_decision.matched + abac_decision.matched)
 
 
 def redact_sensitive_values(values: Mapping[str, Any]) -> dict[str, Any]:
