@@ -8,7 +8,7 @@
     "scripts_fastapi_starlette_hits": 0,
     "runtime_non_public_tigrbl_hits": 1,
     "pyproject_forbidden_dependency_hits": 0,
-    "release_path_fallback_hits": 0
+    "release_path_fallback_hits": 5
   },
   "hits": {
     "fastapi_starlette": {
@@ -19,14 +19,41 @@
     "runtime_non_public_tigrbl": [
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 27,
+        "line": 31,
         "match": "from tigrbl_core"
       }
     ],
     "pyproject_forbidden_dependencies": [],
-    "release_path_fallbacks": []
+    "release_path_fallbacks": [
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 258,
+        "match": "if hasattr("
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 194,
+        "match": "except Exception:"
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 281,
+        "match": "except Exception:"
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 338,
+        "match": "except Exception:"
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 529,
+        "match": "except Exception:"
+      }
+    ]
   },
   "failures": [
-    "Non-public Tigrbl imports remain in the active runtime package."
+    "Non-public Tigrbl imports remain in the active runtime package.",
+    "Release-path framework fallbacks remain in active runtime files."
   ]
 }

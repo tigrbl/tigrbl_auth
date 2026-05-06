@@ -8,8 +8,9 @@
 - Script FastAPI/Starlette hits: `0`
 - Runtime non-public Tigrbl hits: `1`
 - Pyproject forbidden dependency hits: `0`
-- Release-path fallback hits: `0`
+- Release-path fallback hits: `5`
 
 ## Failures
 
 - Non-public Tigrbl imports remain in the active runtime package.
+- Release-path framework fallbacks remain in active runtime files.

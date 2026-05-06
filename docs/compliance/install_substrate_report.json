@@ -1,8 +1,8 @@
 {
-  "generated_at": "20260430T220507Z",
+  "generated_at": "20260506T024321Z",
   "passed": false,
   "summary": {
-    "static_manifest_passed": true,
+    "static_manifest_passed": false,
     "passed": false,
     "profile": "base",
     "current_profile_identity": "base@py312",
@@ -48,6 +48,8 @@
     "runtime_surface_probe_passed": true
   },
   "failures": [
+    "constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form",
+    "dependency lock base set drifts from pyproject runtime dependencies",
     "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
   ],
   "warnings": [
@@ -67,13 +69,13 @@
     {
       "version": "3.12",
       "available": true,
-      "path": "<python-install>\\python3.12.EXE"
+      "path": "<local-path>"
     }
   ],
   "dependency_manifest": {
     "requires_python": ">=3.10,<3.13",
     "dependencies": [
-      "tigrbl==0.3.30.dev1",
+      "tigrbl==0.4.0",
       "swarmauri_core==0.10.0",
       "swarmauri_base==0.9.2",
       "swarmauri_standard==0.9.2",
@@ -134,8 +136,10 @@
     "dependency_count": 22
   },
   "constraints_consistency": {
-    "passed": true,
-    "mismatches": [],
+    "passed": false,
+    "mismatches": [
+      "constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form"
+    ],
     "illegal_constraint_extras": {
       "base": [],
       "test": [],
@@ -150,8 +154,10 @@
     "tigrcorn_count": 1
   },
   "dependency_lock_consistency": {
-    "passed": true,
-    "failures": [],
+    "passed": false,
+    "failures": [
+      "dependency lock base set drifts from pyproject runtime dependencies"
+    ],
     "missing_profiles": [],
     "install_profile_count": 14
   },
@@ -913,7 +919,7 @@
     "python_tag": "py312",
     "implementation": "CPython",
     "implementation_version": "3.12.5",
-    "executable": ".venv\\Scripts\\python.exe",
+    "executable": ".venv/Scripts/python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
     "platform_release": "10",
@@ -935,7 +941,7 @@
       "python_tag": "py312",
       "implementation": "CPython",
       "implementation_version": "3.12.5",
-      "executable": ".venv\\Scripts\\python.exe",
+      "executable": ".venv/Scripts/python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
       "platform_release": "10",

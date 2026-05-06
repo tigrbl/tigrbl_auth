@@ -1,39 +1,39 @@
 # Runtime Profile Report
 
-- Generated at: `20260430T220513Z`
+- Generated at: `20260506T024330Z`
 - Deployment profile: `baseline`
-- Report mode: `validated-runs`
+- Report mode: `live-probe`
 - Validated artifact source: `None`
-- Application factory probe passed: `False`
-- Ready profiles: `0`
-- Missing profiles: `3`
+- Application factory probe passed: `True`
+- Ready profiles: `1`
+- Missing profiles: `2`
 - Invalid profiles: `0`
-- Application hash invariant: `False`
+- Application hash invariant: `True`
 - Pyproject requires-python: `>=3.10,<3.13`
 - Supported Python versions: `3.10, 3.11, 3.12`
 - Placeholder-supported runners: `0`
 - Declared CI-installable runners: `3`
 - Declared CI install/probe complete: `True`
 - Execution probes enabled: `True`
-- Surface probe passed: `False`
+- Surface probe passed: `True`
 - Surface probe endpoints: `4`
-- Serve-check passes: `0`
-- Execution probe complete: `False`
+- Serve-check passes: `1`
+- Execution probe complete: `True`
 - Required runtime cells: `14`
-- Validated runtime cells present: `1`
-- Validated runtime cells passed: `1`
+- Validated runtime cells present: `0`
+- Validated runtime cells passed: `0`
 - Validated runtime matrix green: `False`
 
 ## Application Probe
 
 - App factory: `tigrbl_auth.api.app.build_app`
-- Message: Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.10, base@py3.11
+- Message: Application factory materialized successfully with 6 active routes and 24 active targets.
 
 ## Surface Probe
 
 - Executed: `True`
-- Passed: `False`
-- Message: Validated runtime manifests are missing or failing for the base surface-probe environments: base@py3.10, base@py3.11
+- Passed: `True`
+- Message: Runtime HTTP surface probes completed successfully.
 - Endpoint count: `4`
 - Passed endpoints: `4`
 - Failed endpoints: `0`
@@ -48,13 +48,7 @@
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
-- Serve check message: Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12
-- Validated matrix profile: `postgres-hypercorn`
-- Expected identities: `postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12`
-- Present identities: ``
-- Passed identities: ``
-- Missing identities: `postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12`
-- Failed identities: ``
+- Serve check message: Skipped because the runner is not installed in this environment.
 
 ### Tigrcorn (`tigrcorn`)
 
@@ -64,26 +58,14 @@
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
-- Serve check message: Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.11, tigrcorn@py3.12
-- Validated matrix profile: `tigrcorn`
-- Expected identities: `tigrcorn@py3.11, tigrcorn@py3.12`
-- Present identities: ``
-- Passed identities: ``
-- Missing identities: `tigrcorn@py3.11, tigrcorn@py3.12`
-- Failed identities: ``
+- Serve check message: Skipped because the runner is not installed in this environment.
 
 ### Uvicorn (`uvicorn`)
 
-- Status: `missing`
-- Installed: `False`
+- Status: `ready`
+- Installed: `True`
 - Module: `uvicorn`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
-- Serve check passed: `False`
-- Serve check message: Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12
-- Validated matrix profile: `sqlite-uvicorn`
-- Expected identities: `sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12`
-- Present identities: ``
-- Passed identities: ``
-- Missing identities: `sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12`
-- Failed identities: ``
+- Serve check passed: `True`
+- Serve check message: Application factory materialized successfully with 7 active routes and 25 active targets.

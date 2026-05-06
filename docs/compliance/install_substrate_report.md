@@ -1,8 +1,8 @@
 # Install Substrate Report
 
-- Generated at: `20260430T220507Z`
+- Generated at: `20260506T024321Z`
 - Passed: `False`
-- Static manifest passed: `True`
+- Static manifest passed: `False`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
@@ -20,6 +20,8 @@
 
 ## Failures
 
+- constraints/base.txt does not match pyproject runtime dependencies when normalized to pip-legal constraint form
+- dependency lock base set drifts from pyproject runtime dependencies
 - The current environment does not provide the full supported interpreter matrix required for clean-room certification.
 
 ## Warnings
@@ -61,7 +63,7 @@
 
 - `3.10` → available=`False` path=`None`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`True` path=`<python-install>\python3.12.EXE`
+- `3.12` → available=`True` path=`<local-path>`
 
 ## Workflow coverage
 

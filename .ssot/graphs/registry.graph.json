@@ -3041,6 +3041,14 @@
       "kind": "test"
     },
     {
+      "id": "tst:phase4-advanced-identity-plane-py",
+      "kind": "test"
+    },
+    {
+      "id": "tst:phase4-public-uix-advanced-identity",
+      "kind": "test"
+    },
+    {
       "id": "clm:cli-flag-access-log",
       "kind": "claim"
     },
@@ -4841,6 +4849,26 @@
       "kind": "claim"
     },
     {
+      "id": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase4-federation-and-cross-cloud-trust",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase4-non-human-and-device-identities",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase4-authorization-relationship-graph",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:phase4-auth-detection-telemetry",
+      "kind": "claim"
+    },
+    {
       "id": "evd:compliance-evidence-tier3-asgi-application",
       "kind": "evidence"
     },
@@ -5161,6 +5189,18 @@
       "kind": "evidence"
     },
     {
+      "id": "evd:phase4-advanced-identity-pytest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase4-public-uix-vitest",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:phase4-public-uix-build",
+      "kind": "evidence"
+    },
+    {
       "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "kind": "issue"
     },
@@ -5257,6 +5297,10 @@
       "kind": "boundary"
     },
     {
+      "id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "kind": "boundary"
+    },
+    {
       "id": "rel:0.1.0",
       "kind": "release"
     },
@@ -5270,6 +5314,10 @@
     },
     {
       "id": "rel:phase3-admin-policy-cross-plane-20260505",
+      "kind": "release"
+    },
+    {
+      "id": "rel:phase4-advanced-identity-and-graph-auth-20260505",
       "kind": "release"
     }
   ],
@@ -5795,6 +5843,96 @@
       "to": "feat:public-vs-admin-client-exposure"
     },
     {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f08-sso"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f05-passwordless-authentication"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f06-mfa"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f07-webauthn"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f09-federation"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f10-social-login"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f11-device-identity"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f12-workload-identity"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f15-rebac"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f17-policy-language"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f18-policy-versioning"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f21-access-decision-api"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f22-graph-based-authorization"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f23-relationship-modeling"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f26-contextual-auth-time-location"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f35-anomaly-detection-auth"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f46-trust-federation-graphs"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "feat:f47-cross-cloud-identity"
+    },
+    {
       "type": "BUNDLES",
       "from": "prf:baseline",
       "to": "feat:profile-baseline"
@@ -6003,6 +6141,51 @@
       "type": "INCLUDES",
       "from": "rel:phase3-admin-policy-cross-plane-20260505",
       "to": "evd:phase3-admin-uix-build"
+    },
+    {
+      "type": "USES_BOUNDARY",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "bnd:phase4-advanced-identity-and-graph-auth-20260505"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "clm:phase4-non-human-and-device-identities"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "clm:phase4-authorization-relationship-graph"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "clm:phase4-auth-detection-telemetry"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "evd:phase4-advanced-identity-pytest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "evd:phase4-public-uix-vitest"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "to": "evd:phase4-public-uix-build"
     },
     {
       "type": "COVERED_BY",
@@ -25301,6 +25484,116 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:f11-device-identity",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f11-device-identity",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f12-workload-identity",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f12-workload-identity",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f05-passwordless-authentication",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f05-passwordless-authentication",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f06-mfa",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f06-mfa",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f07-webauthn",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f07-webauthn",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f10-social-login",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f10-social-login",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f26-contextual-auth-time-location",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f26-contextual-auth-time-location",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f08-sso",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f08-sso",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f09-federation",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f09-federation",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f46-trust-federation-graphs",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f46-trust-federation-graphs",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f47-cross-cloud-identity",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f47-cross-cloud-identity",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:f13-rbac",
       "to": "tst:phase3-policy-control-plane-py"
     },
@@ -25338,6 +25631,21 @@
       "type": "COVERED_BY",
       "from": "feat:f14-abac",
       "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f15-rebac",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f22-graph-based-authorization",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f23-relationship-modeling",
+      "to": "tst:phase4-advanced-identity-plane-py"
     },
     {
       "type": "COVERED_BY",
@@ -25401,6 +25709,16 @@
     },
     {
       "type": "COVERED_BY",
+      "from": "feat:f17-policy-language",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f18-policy-versioning",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
       "from": "feat:f19-policy-simulation",
       "to": "tst:phase3-policy-control-plane-py"
     },
@@ -25438,6 +25756,16 @@
       "type": "COVERED_BY",
       "from": "feat:f20-policy-audit",
       "to": "tst:uix-policy-simulation"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f21-access-decision-api",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:f35-anomaly-detection-auth",
+      "to": "tst:phase4-advanced-identity-plane-py"
     },
     {
       "type": "COVERED_BY",
@@ -55280,6 +55608,186 @@
       "to": "clm:phase3-cross-plane-tenant-client-governance"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "to": "feat:f05-passwordless-authentication"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "to": "feat:f06-mfa"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "to": "feat:f07-webauthn"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "to": "feat:f10-social-login"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "to": "feat:f26-contextual-auth-time-location"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-advanced-identity-plane-py",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-public-uix-advanced-identity",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-public-uix-vitest",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-public-uix-build",
+      "to": "clm:phase4-advanced-authentication-and-adaptive-auth"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-federation-and-cross-cloud-trust",
+      "to": "feat:f08-sso"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-federation-and-cross-cloud-trust",
+      "to": "feat:f09-federation"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-federation-and-cross-cloud-trust",
+      "to": "feat:f46-trust-federation-graphs"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-federation-and-cross-cloud-trust",
+      "to": "feat:f47-cross-cloud-identity"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-advanced-identity-plane-py",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-public-uix-advanced-identity",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-public-uix-vitest",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-public-uix-build",
+      "to": "clm:phase4-federation-and-cross-cloud-trust"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-non-human-and-device-identities",
+      "to": "feat:f11-device-identity"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-non-human-and-device-identities",
+      "to": "feat:f12-workload-identity"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-advanced-identity-plane-py",
+      "to": "clm:phase4-non-human-and-device-identities"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-public-uix-advanced-identity",
+      "to": "clm:phase4-non-human-and-device-identities"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "clm:phase4-non-human-and-device-identities"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-public-uix-vitest",
+      "to": "clm:phase4-non-human-and-device-identities"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f15-rebac"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f17-policy-language"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f18-policy-versioning"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f21-access-decision-api"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f22-graph-based-authorization"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-authorization-relationship-graph",
+      "to": "feat:f23-relationship-modeling"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-advanced-identity-plane-py",
+      "to": "clm:phase4-authorization-relationship-graph"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "clm:phase4-authorization-relationship-graph"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:phase4-auth-detection-telemetry",
+      "to": "feat:f35-anomaly-detection-auth"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:phase4-advanced-identity-plane-py",
+      "to": "clm:phase4-auth-detection-telemetry"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "clm:phase4-auth-detection-telemetry"
+    },
+    {
       "type": "DERIVES_FROM",
       "from": "evd:compliance-evidence-tier3-assertion-framework",
       "to": "tst:tests-conformance-baseline-test-oidc-id-token-py"
@@ -72613,6 +73121,21 @@
       "type": "DERIVES_FROM",
       "from": "evd:phase3-admin-uix-build",
       "to": "tst:phase3-admin-uix-governance"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase4-advanced-identity-pytest",
+      "to": "tst:phase4-advanced-identity-plane-py"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase4-public-uix-vitest",
+      "to": "tst:phase4-public-uix-advanced-identity"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:phase4-public-uix-build",
+      "to": "tst:phase4-public-uix-advanced-identity"
     },
     {
       "type": "AFFECTS",

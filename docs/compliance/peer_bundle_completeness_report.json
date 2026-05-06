@@ -44,13 +44,13 @@
       "runner-uvicorn",
       "spa"
     ],
-    "bundle_dir": "compliance\\evidence\\tier4\\bundles"
+    "bundle_dir": "compliance/evidence/tier4/bundles"
   },
   "details": [
     {
       "profile": "assertion-client",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\assertion-client--assertion-client-harness",
+      "bundle_dir": "compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -70,7 +70,7 @@
     {
       "profile": "browser",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\browser--browser-rp",
+      "bundle_dir": "compliance/evidence/tier4/bundles/browser--browser-rp",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -90,7 +90,7 @@
     {
       "profile": "client-mgmt",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\client-mgmt--client-mgmt-harness",
+      "bundle_dir": "compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -110,7 +110,7 @@
     {
       "profile": "device",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\device--device-client",
+      "bundle_dir": "compliance/evidence/tier4/bundles/device--device-client",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -130,7 +130,7 @@
     {
       "profile": "dpop",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\dpop--dpop-client",
+      "bundle_dir": "compliance/evidence/tier4/bundles/dpop--dpop-client",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -150,7 +150,7 @@
     {
       "profile": "gateway",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\gateway--gateway-peer",
+      "bundle_dir": "compliance/evidence/tier4/bundles/gateway--gateway-peer",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -170,7 +170,7 @@
     {
       "profile": "mtls",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\mtls--mtls-peer",
+      "bundle_dir": "compliance/evidence/tier4/bundles/mtls--mtls-peer",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -190,7 +190,7 @@
     {
       "profile": "native",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\native--native-client",
+      "bundle_dir": "compliance/evidence/tier4/bundles/native--native-client",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -210,7 +210,7 @@
     {
       "profile": "ops-cli",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\ops-cli--ops-cli-harness",
+      "bundle_dir": "compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -230,7 +230,7 @@
     {
       "profile": "par-jar-rar",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\par-jar-rar--par-jar-rar-client",
+      "bundle_dir": "compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -250,7 +250,7 @@
     {
       "profile": "resource-server",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\resource-server--resource-server",
+      "bundle_dir": "compliance/evidence/tier4/bundles/resource-server--resource-server",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -270,7 +270,7 @@
     {
       "profile": "rp-session-logout",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\rp-session-logout--rp-session-logout-rp",
+      "bundle_dir": "compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -290,7 +290,7 @@
     {
       "profile": "runner-hypercorn",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-hypercorn--hypercorn-runner",
+      "bundle_dir": "compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -310,7 +310,7 @@
     {
       "profile": "runner-tigrcorn",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-tigrcorn--tigrcorn-runner",
+      "bundle_dir": "compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -330,7 +330,7 @@
     {
       "profile": "runner-uvicorn",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-uvicorn--uvicorn-runner",
+      "bundle_dir": "compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",
@@ -350,7 +350,7 @@
     {
       "profile": "spa",
       "bundle_present": true,
-      "bundle_dir": "compliance\\evidence\\tier4\\bundles\\spa--spa-rp",
+      "bundle_dir": "compliance/evidence/tier4/bundles/spa--spa-rp",
       "status": "external-preserved-failed",
       "attestation_class": "repository-fixture-nonindependent",
       "peer_operator": "checkpoint-staged-external-root",

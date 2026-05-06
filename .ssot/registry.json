@@ -14547,207 +14547,261 @@
       "id": "feat:f11-device-identity",
       "title": "F11 Device identity",
       "description": "Canonical feature F11: Device identity. Current implementation status: absent. Governed by SPEC-1066.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1066"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-non-human-and-device-identities"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f12-workload-identity",
       "title": "F12 Workload identity",
       "description": "Canonical feature F12: Workload identity. Current implementation status: absent. Governed by SPEC-1066.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1066"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-non-human-and-device-identities"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f05-passwordless-authentication",
       "title": "F05 Authentication - passwordless",
       "description": "Canonical feature F05: Authentication - passwordless. Current implementation status: absent. Governed by SPEC-1067.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1067"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f06-mfa",
       "title": "F06 MFA",
       "description": "Canonical feature F06: MFA. Current implementation status: absent. Governed by SPEC-1067.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1067"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f07-webauthn",
       "title": "F07 WebAuthn",
       "description": "Canonical feature F07: WebAuthn. Current implementation status: absent. Governed by SPEC-1067.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1067"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f10-social-login",
       "title": "F10 Social login",
       "description": "Canonical feature F10: Social login. Current implementation status: absent. Governed by SPEC-1067.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1067"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f26-contextual-auth-time-location",
       "title": "F26 Contextual auth - time / location",
       "description": "Canonical feature F26: Contextual auth - time / location. Current implementation status: absent. Governed by SPEC-1067.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1067"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f08-sso",
       "title": "F08 SSO",
       "description": "Canonical feature F08: SSO. Current implementation status: partial. Governed by SPEC-1068.",
-      "implementation_status": "partial",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1068"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-federation-and-cross-cloud-trust"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f09-federation",
       "title": "F09 Federation",
       "description": "Canonical feature F09: Federation. Current implementation status: absent. Governed by SPEC-1068.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1068"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-federation-and-cross-cloud-trust"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
@@ -14777,46 +14831,58 @@
       "id": "feat:f46-trust-federation-graphs",
       "title": "F46 Trust federation graphs",
       "description": "Canonical feature F46: Trust federation graphs. Current implementation status: absent. Governed by SPEC-1068.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1068"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-federation-and-cross-cloud-trust"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
       "id": "feat:f47-cross-cloud-identity",
       "title": "F47 Cross-cloud identity",
       "description": "Canonical feature F47: Cross-cloud identity. Current implementation status: absent. Governed by SPEC-1068.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1068"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-federation-and-cross-cloud-trust"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
       "requires": []
     },
     {
@@ -14883,69 +14949,84 @@
       "id": "feat:f15-rebac",
       "title": "F15 ReBAC",
       "description": "Canonical feature F15: ReBAC. Current implementation status: absent. Governed by SPEC-1069.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1069"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
       "id": "feat:f22-graph-based-authorization",
       "title": "F22 Graph-based authorization",
       "description": "Canonical feature F22: Graph-based authorization. Current implementation status: absent. Governed by SPEC-1069.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1069"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
       "id": "feat:f23-relationship-modeling",
       "title": "F23 Relationship modeling",
       "description": "Canonical feature F23: Relationship modeling. Current implementation status: absent. Governed by SPEC-1069.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1069"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
@@ -15042,46 +15123,56 @@
       "id": "feat:f17-policy-language",
       "title": "F17 Policy language",
       "description": "Canonical feature F17: Policy language. Current implementation status: absent. Governed by SPEC-1070.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1070"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
       "id": "feat:f18-policy-versioning",
       "title": "F18 Policy versioning",
       "description": "Canonical feature F18: Policy versioning. Current implementation status: absent. Governed by SPEC-1070.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1070"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
@@ -15148,46 +15239,56 @@
       "id": "feat:f21-access-decision-api",
       "title": "F21 Access decision API",
       "description": "Canonical feature F21: Access decision API. Current implementation status: absent. Governed by SPEC-1070.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1070"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-authorization-relationship-graph"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
       "id": "feat:f35-anomaly-detection-auth",
       "title": "F35 Anomaly detection - auth",
       "description": "Canonical feature F35: Anomaly detection - auth. Current implementation status: absent. Governed by SPEC-1071.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
-        "note": null
+        "note": "Phase 4 advanced identity and graph authorization release closure.",
+        "effective_release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505"
       },
       "plan": {
-        "horizon": "backlog",
+        "horizon": "current",
         "slot": null,
-        "target_claim_tier": null,
+        "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
       "spec_ids": [
         "spc:1071"
       ],
-      "claim_ids": [],
-      "test_ids": [],
+      "claim_ids": [
+        "clm:phase4-auth-detection-telemetry"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
       "requires": []
     },
     {
@@ -31481,6 +31582,72 @@
         "evd:phase3-admin-uix-vitest",
         "evd:phase3-admin-uix-build"
       ]
+    },
+    {
+      "id": "tst:phase4-advanced-identity-plane-py",
+      "title": "Phase 4 advanced identity plane supports advanced auth federation graph and anomaly semantics",
+      "status": "passing",
+      "kind": "unit",
+      "path": "tests/unit/test_advanced_identity_plane_phase4.py",
+      "feature_ids": [
+        "feat:f08-sso",
+        "feat:f05-passwordless-authentication",
+        "feat:f06-mfa",
+        "feat:f07-webauthn",
+        "feat:f09-federation",
+        "feat:f10-social-login",
+        "feat:f11-device-identity",
+        "feat:f12-workload-identity",
+        "feat:f15-rebac",
+        "feat:f17-policy-language",
+        "feat:f18-policy-versioning",
+        "feat:f21-access-decision-api",
+        "feat:f22-graph-based-authorization",
+        "feat:f23-relationship-modeling",
+        "feat:f26-contextual-auth-time-location",
+        "feat:f35-anomaly-detection-auth",
+        "feat:f46-trust-federation-graphs",
+        "feat:f47-cross-cloud-identity"
+      ],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust",
+        "clm:phase4-non-human-and-device-identities",
+        "clm:phase4-authorization-relationship-graph",
+        "clm:phase4-auth-detection-telemetry"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest"
+      ]
+    },
+    {
+      "id": "tst:phase4-public-uix-advanced-identity",
+      "title": "Phase 4 public UIX exposes advanced identity capabilities from discovery metadata",
+      "status": "passing",
+      "kind": "vitest",
+      "path": "apps/public-uix/services/advancedIdentity.test.ts",
+      "feature_ids": [
+        "feat:f05-passwordless-authentication",
+        "feat:f06-mfa",
+        "feat:f07-webauthn",
+        "feat:f08-sso",
+        "feat:f09-federation",
+        "feat:f10-social-login",
+        "feat:f11-device-identity",
+        "feat:f12-workload-identity",
+        "feat:f26-contextual-auth-time-location",
+        "feat:f46-trust-federation-graphs",
+        "feat:f47-cross-cloud-identity"
+      ],
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust",
+        "clm:phase4-non-human-and-device-identities"
+      ],
+      "evidence_ids": [
+        "evd:phase4-public-uix-vitest",
+        "evd:phase4-public-uix-build"
+      ]
     }
   ],
   "claims": [
@@ -43678,6 +43845,112 @@
         "evd:phase3-admin-uix-vitest",
         "evd:phase3-admin-uix-build"
       ]
+    },
+    {
+      "id": "clm:phase4-advanced-authentication-and-adaptive-auth",
+      "title": "Phase 4 advanced authentication and adaptive auth controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "advanced-authentication",
+      "description": "Phase 4 closure claim for passwordless, MFA, WebAuthn, social login, and contextual adaptive authentication semantics.",
+      "feature_ids": [
+        "feat:f05-passwordless-authentication",
+        "feat:f06-mfa",
+        "feat:f07-webauthn",
+        "feat:f10-social-login",
+        "feat:f26-contextual-auth-time-location"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest",
+        "evd:phase4-public-uix-vitest",
+        "evd:phase4-public-uix-build"
+      ]
+    },
+    {
+      "id": "clm:phase4-federation-and-cross-cloud-trust",
+      "title": "Phase 4 federation and cross-cloud trust controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "federation-and-trust",
+      "description": "Phase 4 closure claim for SSO, federation, trust federation graphs, and cross-cloud identity semantics.",
+      "feature_ids": [
+        "feat:f08-sso",
+        "feat:f09-federation",
+        "feat:f46-trust-federation-graphs",
+        "feat:f47-cross-cloud-identity"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest",
+        "evd:phase4-public-uix-vitest",
+        "evd:phase4-public-uix-build"
+      ]
+    },
+    {
+      "id": "clm:phase4-non-human-and-device-identities",
+      "title": "Phase 4 non-human and device identity controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "non-human-identity",
+      "description": "Phase 4 closure claim for device identity and workload identity lifecycle, tenant boundary, and rotation semantics.",
+      "feature_ids": [
+        "feat:f11-device-identity",
+        "feat:f12-workload-identity"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py",
+        "tst:phase4-public-uix-advanced-identity"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest",
+        "evd:phase4-public-uix-vitest"
+      ]
+    },
+    {
+      "id": "clm:phase4-authorization-relationship-graph",
+      "title": "Phase 4 authorization relationship graph and access decision controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "relationship-authorization",
+      "description": "Phase 4 closure claim for ReBAC, relationship modeling, policy language, policy versioning, graph authorization, and access decision API semantics.",
+      "feature_ids": [
+        "feat:f15-rebac",
+        "feat:f17-policy-language",
+        "feat:f18-policy-versioning",
+        "feat:f21-access-decision-api",
+        "feat:f22-graph-based-authorization",
+        "feat:f23-relationship-modeling"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest"
+      ]
+    },
+    {
+      "id": "clm:phase4-auth-detection-telemetry",
+      "title": "Phase 4 authentication anomaly detection telemetry controls",
+      "status": "published",
+      "tier": "T1",
+      "kind": "auth-detection-telemetry",
+      "description": "Phase 4 closure claim for explainable authentication anomaly detection telemetry, correlation, and secret-safe event handling.",
+      "feature_ids": [
+        "feat:f35-anomaly-detection-auth"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest"
+      ]
     }
   ],
   "evidence": [
@@ -49119,6 +49392,55 @@
       "test_ids": [
         "tst:phase3-admin-uix-governance"
       ]
+    },
+    {
+      "id": "evd:phase4-advanced-identity-pytest",
+      "title": "Phase 4 advanced identity pytest evidence",
+      "status": "passed",
+      "kind": "pytest",
+      "tier": "T1",
+      "path": ".ssot/reports/phase4/phase4-advanced-identity-pytest.txt",
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust",
+        "clm:phase4-non-human-and-device-identities",
+        "clm:phase4-authorization-relationship-graph",
+        "clm:phase4-auth-detection-telemetry"
+      ],
+      "test_ids": [
+        "tst:phase4-advanced-identity-plane-py"
+      ]
+    },
+    {
+      "id": "evd:phase4-public-uix-vitest",
+      "title": "Phase 4 public UIX advanced identity Vitest evidence",
+      "status": "passed",
+      "kind": "vitest",
+      "tier": "T1",
+      "path": ".ssot/reports/phase4/phase4-public-uix-vitest.txt",
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust",
+        "clm:phase4-non-human-and-device-identities"
+      ],
+      "test_ids": [
+        "tst:phase4-public-uix-advanced-identity"
+      ]
+    },
+    {
+      "id": "evd:phase4-public-uix-build",
+      "title": "Phase 4 public UIX advanced identity build evidence",
+      "status": "passed",
+      "kind": "build",
+      "tier": "T1",
+      "path": ".ssot/reports/phase4/phase4-public-uix-build.txt",
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust"
+      ],
+      "test_ids": [
+        "tst:phase4-public-uix-advanced-identity"
+      ]
     }
   ],
   "issues": [
@@ -49581,6 +49903,33 @@
         "feat:public-vs-admin-client-exposure"
       ],
       "profile_ids": []
+    },
+    {
+      "id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "title": "Phase 4 advanced identity and graph authorization",
+      "status": "frozen",
+      "frozen": true,
+      "feature_ids": [
+        "feat:f08-sso",
+        "feat:f05-passwordless-authentication",
+        "feat:f06-mfa",
+        "feat:f07-webauthn",
+        "feat:f09-federation",
+        "feat:f10-social-login",
+        "feat:f11-device-identity",
+        "feat:f12-workload-identity",
+        "feat:f15-rebac",
+        "feat:f17-policy-language",
+        "feat:f18-policy-versioning",
+        "feat:f21-access-decision-api",
+        "feat:f22-graph-based-authorization",
+        "feat:f23-relationship-modeling",
+        "feat:f26-contextual-auth-time-location",
+        "feat:f35-anomaly-detection-auth",
+        "feat:f46-trust-federation-graphs",
+        "feat:f47-cross-cloud-identity"
+      ],
+      "profile_ids": []
     }
   ],
   "releases": [
@@ -49648,6 +49997,24 @@
         "evd:phase3-policy-control-plane-pytest",
         "evd:phase3-admin-uix-vitest",
         "evd:phase3-admin-uix-build"
+      ]
+    },
+    {
+      "id": "rel:phase4-advanced-identity-and-graph-auth-20260505",
+      "version": "0.3.4-phase4-advanced-identity-and-graph-auth.20260505",
+      "status": "published",
+      "boundary_id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "claim_ids": [
+        "clm:phase4-advanced-authentication-and-adaptive-auth",
+        "clm:phase4-federation-and-cross-cloud-trust",
+        "clm:phase4-non-human-and-device-identities",
+        "clm:phase4-authorization-relationship-graph",
+        "clm:phase4-auth-detection-telemetry"
+      ],
+      "evidence_ids": [
+        "evd:phase4-advanced-identity-pytest",
+        "evd:phase4-public-uix-vitest",
+        "evd:phase4-public-uix-build"
       ]
     }
   ],

@@ -7,13 +7,13 @@
     "counts": {
       "features": 522,
       "profiles": 6,
-      "tests": 232,
-      "claims": 450,
-      "evidence": 80,
+      "tests": 234,
+      "claims": 455,
+      "evidence": 83,
       "issues": 12,
       "risks": 1,
-      "boundaries": 11,
-      "releases": 4,
+      "boundaries": 12,
+      "releases": 5,
       "adrs": 78,
       "specs": 99
     },

@@ -2,13 +2,13 @@
   "passed": true,
   "registry_path": ".ssot/registry.json",
   "release": {
-    "release_id": "rel:phase3-admin-policy-cross-plane-20260505",
+    "release_id": "rel:phase4-advanced-identity-and-graph-auth-20260505",
     "passed": true,
     "failures": [],
     "warnings": [],
     "claims": [
       {
-        "claim_id": "clm:phase3-policy-engine-and-simulation",
+        "claim_id": "clm:phase4-advanced-authentication-and-adaptive-auth",
         "passed": true,
         "failures": [],
         "checks": {
@@ -23,7 +23,7 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase3-service-identities-and-delegated-admin",
+        "claim_id": "clm:phase4-federation-and-cross-cloud-trust",
         "passed": true,
         "failures": [],
         "checks": {
@@ -38,7 +38,37 @@
         "recommended_status": "certified"
       },
       {
-        "claim_id": "clm:phase3-cross-plane-tenant-client-governance",
+        "claim_id": "clm:phase4-non-human-and-device-identities",
+        "passed": true,
+        "failures": [],
+        "checks": {
+          "implemented_features": true,
+          "tests_passing": true,
+          "evidence_passing": true,
+          "no_failed_or_stale_evidence": true,
+          "evidence_tier_alignment": true,
+          "feature_target_alignment": true,
+          "required_features_passing": true
+        },
+        "recommended_status": "certified"
+      },
+      {
+        "claim_id": "clm:phase4-authorization-relationship-graph",
+        "passed": true,
+        "failures": [],
+        "checks": {
+          "implemented_features": true,
+          "tests_passing": true,
+          "evidence_passing": true,
+          "no_failed_or_stale_evidence": true,
+          "evidence_tier_alignment": true,
+          "feature_target_alignment": true,
+          "required_features_passing": true
+        },
+        "recommended_status": "certified"
+      },
+      {
+        "claim_id": "clm:phase4-auth-detection-telemetry",
         "passed": true,
         "failures": [],
         "checks": {
@@ -55,53 +85,56 @@
     ],
     "evidence": [
       {
-        "evidence_id": "evd:phase3-admin-uix-build",
+        "evidence_id": "evd:phase4-advanced-identity-pytest",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase3-admin-uix-vitest",
+        "evidence_id": "evd:phase4-public-uix-build",
         "passed": true,
         "failures": []
       },
       {
-        "evidence_id": "evd:phase3-policy-control-plane-pytest",
+        "evidence_id": "evd:phase4-public-uix-vitest",
         "passed": true,
         "failures": []
       }
     ],
     "profiles": [],
     "boundary": {
-      "id": "bnd:phase3-admin-policy-cross-plane-20260505",
+      "id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
       "profile_ids": [],
       "resolved_feature_ids": [
-        "feat:f03-service-identities",
-        "feat:f13-rbac",
-        "feat:f14-abac",
-        "feat:f16-policy-engine",
-        "feat:f19-policy-simulation",
-        "feat:f20-policy-audit",
-        "feat:f24-fine-grained-permissions",
-        "feat:f25-dynamic-conditions",
-        "feat:f42-compliance-reporting",
-        "feat:f45-delegated-admin",
-        "feat:tenant-isolation-cross-plane",
-        "feat:tenant-visibility-rules",
-        "feat:client-policy-cross-plane",
-        "feat:client-mutation-authority-rules",
-        "feat:public-vs-admin-client-exposure"
+        "feat:f08-sso",
+        "feat:f05-passwordless-authentication",
+        "feat:f06-mfa",
+        "feat:f07-webauthn",
+        "feat:f09-federation",
+        "feat:f10-social-login",
+        "feat:f11-device-identity",
+        "feat:f12-workload-identity",
+        "feat:f15-rebac",
+        "feat:f17-policy-language",
+        "feat:f18-policy-versioning",
+        "feat:f21-access-decision-api",
+        "feat:f22-graph-based-authorization",
+        "feat:f23-relationship-modeling",
+        "feat:f26-contextual-auth-time-location",
+        "feat:f35-anomaly-detection-auth",
+        "feat:f46-trust-federation-graphs",
+        "feat:f47-cross-cloud-identity"
       ]
     },
     "summary": {
-      "boundary_id": "bnd:phase3-admin-policy-cross-plane-20260505",
-      "boundary_feature_count": 15,
+      "boundary_id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
+      "boundary_feature_count": 18,
       "boundary_profile_count": 0,
-      "release_claim_count": 3,
+      "release_claim_count": 5,
       "release_evidence_count": 3
     }
   },
   "boundary_scope": {
-    "boundary_id": "bnd:phase3-admin-policy-cross-plane-20260505",
+    "boundary_id": "bnd:phase4-advanced-identity-and-graph-auth-20260505",
     "profile_ids": [],
     "feature_ids": []
   },
@@ -109,13 +142,13 @@
     "counts": {
       "features": 522,
       "profiles": 6,
-      "tests": 232,
-      "claims": 450,
-      "evidence": 80,
+      "tests": 234,
+      "claims": 455,
+      "evidence": 83,
       "issues": 12,
       "risks": 1,
-      "boundaries": 11,
-      "releases": 4,
+      "boundaries": 12,
+      "releases": 5,
       "adrs": 78,
       "specs": 99
     },

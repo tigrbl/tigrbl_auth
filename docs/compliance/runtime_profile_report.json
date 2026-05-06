@@ -1,29 +1,64 @@
 {
-  "generated_at": "20260430T220513Z",
+  "generated_at": "20260506T024330Z",
   "deployment_profile": "baseline",
-  "report_mode": "validated-runs",
-  "validated_artifact_source": null,
+  "report_mode": "live-probe",
   "application_probe": {
-    "passed": false,
+    "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",
-    "message": "Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.10, base@py3.11",
-    "error_type": "ValidatedRuntimeEvidenceMissing"
+    "message": "Application factory materialized successfully with 6 active routes and 24 active targets."
   },
   "surface_probe": {
     "executed": true,
-    "passed": false,
-    "message": "Validated runtime manifests are missing or failing for the base surface-probe environments: base@py3.10, base@py3.11",
+    "passed": true,
+    "message": "Runtime HTTP surface probes completed successfully.",
     "endpoint_count": 4,
     "passed_count": 4,
     "failed_count": 0,
-    "probes": []
+    "probes": [
+      {
+        "name": "openid-configuration",
+        "path": "/.well-known/openid-configuration",
+        "passed": true,
+        "executed": true,
+        "message": "OpenID discovery document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "oauth-authorization-server",
+        "path": "/.well-known/oauth-authorization-server",
+        "passed": true,
+        "executed": true,
+        "message": "OAuth authorization-server metadata is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "jwks",
+        "path": "/.well-known/jwks.json",
+        "passed": true,
+        "executed": true,
+        "message": "JWKS document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "public-contract",
+        "path": "/openapi.json",
+        "passed": true,
+        "executed": true,
+        "message": "Public contract endpoint is available.",
+        "status_code": 200,
+        "expected_status": 200
+      }
+    ]
   },
   "summary": {
     "runner_count": 3,
-    "ready_count": 0,
-    "missing_count": 3,
+    "ready_count": 1,
+    "missing_count": 2,
     "invalid_count": 0,
-    "application_hash_invariant": false,
+    "application_hash_invariant": true,
     "pyproject_requires_python": ">=3.10,<3.13",
     "supported_python_versions": [
       "3.10",
@@ -40,19 +75,17 @@
     ],
     "declared_ci_install_probe_complete": true,
     "execution_probes_enabled": true,
-    "surface_probe_passed": false,
+    "surface_probe_passed": true,
     "surface_probe_endpoint_count": 4,
     "surface_probe_passed_count": 4,
     "surface_probe_failed_count": 0,
-    "serve_check_passed_count": 0,
-    "execution_probe_complete": false,
-    "source_mode": "validated-runs",
+    "serve_check_passed_count": 1,
+    "execution_probe_complete": true,
+    "source_mode": "live-probe",
     "required_runtime_cell_count": 14,
-    "validated_runtime_cell_count": 1,
-    "validated_runtime_cell_passed_count": 1,
+    "validated_runtime_cell_count": 0,
+    "validated_runtime_cell_passed_count": 0,
     "validated_runtime_matrix_green": false,
-    "validated_runtime_identity_ready_count": 1,
-    "validated_runtime_install_evidence_ready_count": 1,
     "validated_download_collection_present": false
   },
   "profiles": [
@@ -175,43 +208,19 @@
       ],
       "diagnostics": [
         {
+          "code": "runner-not-installed",
           "level": "warning",
-          "code": "validated-manifest-missing",
-          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
-          "identities": [
-            "postgres-hypercorn@py3.10",
-            "postgres-hypercorn@py3.11",
-            "postgres-hypercorn@py3.12"
-          ]
+          "message": "Runner adapter is declared but the backing server package is not installed in this environment.",
+          "runner": "hypercorn"
         }
       ],
-      "application_hash": null,
-      "runtime_hash": null,
+      "application_hash": "16597f000884f999c47009ffe759382129991562d329449cc795b53a753be15c",
+      "runtime_hash": "0254f7481089ba84deeec0cdd49fe17546fb6c4804853c68e228cc10d7be1230",
       "serve_check": {
-        "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server hypercorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: postgres-hypercorn@py3.10, postgres-hypercorn@py3.11, postgres-hypercorn@py3.12",
-        "exit_code": null
-      },
-      "validated_matrix": {
-        "matrix_profile": "postgres-hypercorn",
-        "expected_identities": [
-          "postgres-hypercorn@py3.10",
-          "postgres-hypercorn@py3.11",
-          "postgres-hypercorn@py3.12"
-        ],
-        "present_identities": [],
-        "passed_identities": [],
-        "missing_identities": [
-          "postgres-hypercorn@py3.10",
-          "postgres-hypercorn@py3.11",
-          "postgres-hypercorn@py3.12"
-        ],
-        "failed_identities": [],
-        "identity_ready_count": 0,
-        "install_evidence_ready_count": 0,
-        "failure_reasons": {}
+        "executed": false,
+        "command": "tigrbl-auth serve --repo-root <repo> --server hypercorn --format json --check",
+        "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "hypercorn",
       "profile_name": "postgres-hypercorn",
@@ -373,40 +382,19 @@
       ],
       "diagnostics": [
         {
+          "code": "runner-not-installed",
           "level": "warning",
-          "code": "validated-manifest-missing",
-          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
-          "identities": [
-            "tigrcorn@py3.11",
-            "tigrcorn@py3.12"
-          ]
+          "message": "Runner adapter is declared but the backing server package is not installed in this environment.",
+          "runner": "tigrcorn"
         }
       ],
-      "application_hash": null,
-      "runtime_hash": null,
+      "application_hash": "16597f000884f999c47009ffe759382129991562d329449cc795b53a753be15c",
+      "runtime_hash": "f7fa2f3c9c9e6ad1b49ba68b92166e6c33655a916f113381762843383d8eef4e",
       "serve_check": {
-        "executed": false,
         "passed": false,
-        "command": "tigrbl-auth serve --check --server tigrcorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: tigrcorn@py3.11, tigrcorn@py3.12",
-        "exit_code": null
-      },
-      "validated_matrix": {
-        "matrix_profile": "tigrcorn",
-        "expected_identities": [
-          "tigrcorn@py3.11",
-          "tigrcorn@py3.12"
-        ],
-        "present_identities": [],
-        "passed_identities": [],
-        "missing_identities": [
-          "tigrcorn@py3.11",
-          "tigrcorn@py3.12"
-        ],
-        "failed_identities": [],
-        "identity_ready_count": 0,
-        "install_evidence_ready_count": 0,
-        "failure_reasons": {}
+        "executed": false,
+        "command": "tigrbl-auth serve --repo-root <repo> --server tigrcorn --format json --check",
+        "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "tigrcorn",
       "profile_name": "tigrcorn",
@@ -444,8 +432,8 @@
     {
       "name": "uvicorn",
       "display_name": "Uvicorn",
-      "status": "missing",
-      "installed": false,
+      "status": "ready",
+      "installed": true,
       "available_module": "uvicorn",
       "capabilities": [
         {
@@ -589,45 +577,18 @@
           ]
         }
       ],
-      "diagnostics": [
-        {
-          "level": "warning",
-          "code": "validated-manifest-missing",
-          "message": "Validated runtime manifests are missing for one or more required matrix cells.",
-          "identities": [
-            "sqlite-uvicorn@py3.10",
-            "sqlite-uvicorn@py3.11",
-            "sqlite-uvicorn@py3.12"
-          ]
-        }
-      ],
-      "application_hash": null,
-      "runtime_hash": null,
+      "diagnostics": [],
+      "application_hash": "16597f000884f999c47009ffe759382129991562d329449cc795b53a753be15c",
+      "runtime_hash": "f09b75183cd07c5f28af2415664402cac3315efc06e3d3ea8359973496214149",
       "serve_check": {
-        "executed": false,
-        "passed": false,
-        "command": "tigrbl-auth serve --check --server uvicorn --format json",
-        "message": "Validated runtime manifests are missing or failing serve-check evidence for required cells: sqlite-uvicorn@py3.10, sqlite-uvicorn@py3.11, sqlite-uvicorn@py3.12",
-        "exit_code": null
-      },
-      "validated_matrix": {
-        "matrix_profile": "sqlite-uvicorn",
-        "expected_identities": [
-          "sqlite-uvicorn@py3.10",
-          "sqlite-uvicorn@py3.11",
-          "sqlite-uvicorn@py3.12"
-        ],
-        "present_identities": [],
-        "passed_identities": [],
-        "missing_identities": [
-          "sqlite-uvicorn@py3.10",
-          "sqlite-uvicorn@py3.11",
-          "sqlite-uvicorn@py3.12"
-        ],
-        "failed_identities": [],
-        "identity_ready_count": 0,
-        "install_evidence_ready_count": 0,
-        "failure_reasons": {}
+        "passed": true,
+        "executed": true,
+        "command": "tigrbl-auth serve --repo-root <repo> --server uvicorn --format json --check",
+        "message": "Application factory materialized successfully with 7 active routes and 25 active targets.",
+        "exit_code": 0,
+        "launch_ready": true,
+        "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs//compliance//runtime_profile_report.json\",\n    \"md\": \"docs//compliance//runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=mNmzv002-g2eEUBb2TJ0rabuTr81SXnNUXVVula7wyQ\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=S9m9G8h4IX_8FqCpMXXgtr-RTF6xIWiMOqdiW3x6veE"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",

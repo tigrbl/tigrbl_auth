@@ -64,6 +64,17 @@ export interface OidcConfig {
   endSessionEndpoint?: string;
 }
 
+export interface DiscoveredIdentityProvider {
+  provider_id: string;
+  kind: "social" | "sso" | "federation";
+  issuer: string;
+  authorization_endpoint: string;
+  display_name?: string;
+  logout_supported?: boolean;
+  scopes?: string[];
+  tenant_id?: string;
+}
+
 export interface OidcDiscoveryMetadata {
   issuer: string;
   authorization_endpoint?: string;
@@ -77,6 +88,15 @@ export interface OidcDiscoveryMetadata {
   email_verification_resend_endpoint?: string;
   revocation_endpoint?: string;
   end_session_endpoint?: string;
+  passwordless_authentication_endpoint?: string;
+  webauthn_registration_endpoint?: string;
+  webauthn_authentication_endpoint?: string;
+  device_identity_endpoint?: string;
+  workload_identity_endpoint?: string;
+  trust_federation_endpoint?: string;
+  amr_values_supported?: string[];
+  acr_values_supported?: string[];
+  identity_providers?: DiscoveredIdentityProvider[];
   terms_of_service_uri?: string;
   jwks_uri?: string;
   [key: string]: unknown;
