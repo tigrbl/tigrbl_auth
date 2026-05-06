@@ -108,6 +108,15 @@ docker compose up -d --build
 The compose example publishes the service on `http://127.0.0.1:8001` to avoid
 clobbering an existing local listener on `8000`.
 
+## CLI device login consumer example
+
+This repo includes a separate sample Python package at `examples/acme_notes_cli/`
+that demonstrates how another CLI can implement a `login` command on top of
+`tigrbl_auth` device authorization. The flow uses issuer discovery plus the
+canonical `POST /device_authorization` and `POST /token` endpoints.
+
+See `docs/examples/python-cli-device-login.md`.
+
 or embed as a plugin:
 
 ```python
