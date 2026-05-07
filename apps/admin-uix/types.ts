@@ -5,6 +5,7 @@ export type Tenant = {
   id: UUID;
   name: string;
   slug: string;
+  email?: string;
   created_at?: string;
   description?: string;
 };

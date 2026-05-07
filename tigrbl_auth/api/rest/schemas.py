@@ -257,3 +257,18 @@ class AdminIdentityUpdateIn(BaseModel):
     is_admin: bool | None = None
     is_superuser: bool | None = None
     must_change_password: bool | None = None
+
+
+class AdminTenantOut(BaseModel):
+    id: str
+    slug: _tenant_slug
+    name: constr(strip_whitespace=True, min_length=1, max_length=120)
+    email: constr(strip_whitespace=True, min_length=3, max_length=120)
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminTenantProvisionIn(BaseModel):
+    slug: _tenant_slug
+    name: constr(strip_whitespace=True, min_length=1, max_length=120)
+    email: constr(strip_whitespace=True, min_length=3, max_length=120)

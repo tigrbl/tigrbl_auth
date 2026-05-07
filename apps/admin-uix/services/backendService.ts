@@ -63,27 +63,37 @@ function normalizeUser(user: any): User {
 
 export const backendService = {
   async getTenants(): Promise<Tenant[]> {
-    const tenants = await supportedRpcResult<any[]>('tenant.list', {}, []);
+    const tenants = await restJson<any[]>('/admin/tenants');
     return tenants.map((tenant) => ({
       id: String(tenant.id ?? tenant.tenant_id ?? tenant.slug ?? tenant.name),
       name: String(tenant.name ?? tenant.title ?? tenant.tenant_id ?? tenant.id),
       slug: String(tenant.slug ?? tenant.tenant_id ?? tenant.id),
+      email: tenant.email ? String(tenant.email) : undefined,
       description: tenant.description,
       created_at: tenant.created_at,
     }));
   },
 
-  async createTenant(tenant: Pick<Tenant, 'name' | 'slug' | 'description'>): Promise<Tenant> {
-    return supportedRpcResult<Tenant>('tenant.create', tenant, {
-      id: tenant.slug,
-      name: tenant.name,
-      slug: tenant.slug,
-      description: tenant.description,
+  async createTenant(tenant: Pick<Tenant, 'name' | 'slug' | 'email'>): Promise<Tenant> {
+    const created = await restJson<any>('/admin/tenants', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(tenant),
     });
+    return {
+      id: String(created.id ?? created.slug),
+      name: String(created.name ?? tenant.name),
+      slug: String(created.slug ?? tenant.slug),
+      email: created.email ? String(created.email) : tenant.email,
+      description: created.description,
+      created_at: created.created_at,
+    };
   },
 
   async deleteTenant(id: string): Promise<void> {
-    await supportedRpcResult('tenant.delete', { id }, undefined);
+    await restJson(`/admin/tenants/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
   },
 
   async getUsers(tenantId: string): Promise<User[]> {

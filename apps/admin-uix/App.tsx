@@ -3,14 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import IdentityManagement from './components/IdentityManagement';
-import PolicyEditor from './components/PolicyEditor';
 import TenantManagement from './components/TenantManagement';
-import TenantDetail from './components/TenantDetail';
-import SecurityManagement from './components/SecurityManagement';
-import AbuseManagement from './components/AbuseManagement';
-import ClientManagement from './components/ClientManagement';
-import ServiceInfrastructure from './components/ServiceInfrastructure';
-import Administration from './components/Administration';
 import { Icons } from './constants';
 import { controlPlaneStateService } from './services/controlPlaneStateService';
 import { Tenant } from './types';
@@ -24,7 +17,6 @@ const App: React.FC = () => {
   const [active_tab, set_active_tab] = useState('dashboard');
   const [tenants, set_tenants] = useState<Tenant[]>([]);
   const [current_tenant, set_current_tenant] = useState<Tenant | null>(null);
-  const [selected_tenant_detail, set_selected_tenant_detail] = useState<Tenant | null>(null);
   const [loading, set_loading] = useState(true);
   const [bootstrap_error, set_bootstrap_error] = useState<string | null>(null);
   const [is_lockdown, set_is_lockdown] = useState(controlPlaneStateService.get_lockdown());
@@ -172,11 +164,6 @@ const App: React.FC = () => {
     set_auth_mode('login');
   };
 
-  const handle_select_tenant_for_detail = (tenant: Tenant) => {
-    set_selected_tenant_detail(tenant);
-    set_active_tab('tenant_detail');
-  };
-
   if (loading) {
     return (
       <div className="fixed inset-0 bg-[#1a1a1a] flex flex-col items-center justify-center">
@@ -261,37 +248,21 @@ const App: React.FC = () => {
             tenants={visible_tenants}
             delegated_scope={delegated_scope}
             on_refresh={refresh_tenants}
-            on_select_tenant={handle_select_tenant_for_detail}
-          />
-        );
-      case 'tenant_detail':
-        return selected_tenant_detail ? (
-          <TenantDetail
-            tenant={selected_tenant_detail}
-            on_back={() => {
-              set_selected_tenant_detail(null);
-              set_active_tab('tenants');
+            on_select_tenant={(tenant) => {
+              set_current_tenant(tenant);
+              set_active_tab('dashboard');
             }}
           />
-        ) : null;
+        );
       case 'identities': return <IdentityManagement tenant={current_tenant} session={session} />;
-      case 'policies': return <PolicyEditor tenant_id={current_tenant.id} />;
-      case 'clients': return <ClientManagement tenant_id={current_tenant.id} delegated_scope={delegated_scope} />;
-      case 'security': return <SecurityManagement />;
-      case 'abuse': return <AbuseManagement />;
-      case 'services': return <ServiceInfrastructure />;
-      case 'platform_settings':
-      case 'audit_logs':
-      case 'tenancy_stats':
-        return <Administration tab={active_tab} />;
       default: return (
         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-20">
           <div className="w-16 h-16 bg-[#ebebe5] border-etched flex items-center justify-center text-[#1a1a1a]">
             <Icons.Settings />
           </div>
-          <h2 className="text-xl font-bold">Module Offline</h2>
-          <p className="text-[#55554e] max-w-sm">This component is currently undergoing architectural synthesis.</p>
-          <button onClick={() => set_active_tab('dashboard')} className="btn-parian">Return to Flux</button>
+          <h2 className="text-xl font-bold">Unsupported Admin Surface</h2>
+          <p className="text-[#55554e] max-w-sm">This control is not part of the current session-backed admin console.</p>
+          <button onClick={() => set_active_tab('dashboard')} className="btn-parian">Return to Dashboard</button>
         </div>
       );
     }
@@ -313,7 +284,7 @@ const App: React.FC = () => {
              <div className={`w-6 h-6 flex items-center justify-center transition-colors ${is_lockdown ? 'bg-[#ff2d00] text-[#1a1a1a]' : 'bg-[#1a1a1a] text-white'}`}>
                 <Icons.Shield />
              </div>
-             <span>TIGRBL_AUTH.GATEWAY {is_lockdown && '[EMERGENCY_LOCKDOWN]'}</span>
+             <span>TIGRBL_AUTH.ADMIN {is_lockdown && '[EMERGENCY_LOCKDOWN]'}</span>
           </div>
 
           <div className="flex items-center space-x-12">
@@ -345,7 +316,7 @@ const App: React.FC = () => {
             </button>
             <div className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest">
                 <div className={`w-2 h-2 rounded-full animate-pulse ${is_lockdown ? 'bg-[#ff2d00]' : 'bg-[#00ffcc]'}`}></div>
-                <span>Sync Status: {is_lockdown ? 'ISOLATED' : '14ms'}</span>
+                <span>Status: {is_lockdown ? 'ISOLATED' : 'SESSION ACTIVE'}</span>
             </div>
           </div>
         </header>

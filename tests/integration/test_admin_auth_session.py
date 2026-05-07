@@ -222,3 +222,34 @@ async def test_superuser_can_onboard_admin_identities(tmp_path, db_session: Asyn
         assert update.status_code == 200, update.text
         assert update.json()["is_active"] is False
         assert update.json()["must_change_password"] is False
+
+
+@pytest.mark.asyncio
+async def test_superuser_can_provision_and_delete_tenants_via_admin_session(tmp_path, db_session: AsyncSession, test_db_engine) -> None:
+    async with _admin_client(tmp_path, db_session, test_db_engine) as (client, settings_obj):
+        await ensure_default_superuser_async(settings_obj)
+
+        login = await client.post("/admin/auth/login", json={"identifier": "admin", "password": "AdminPass123!"})
+        assert login.status_code == 200, login.text
+
+        create = await client.post(
+            "/admin/tenants",
+            json={
+                "slug": f"ops-{uuid4().hex[:8]}",
+                "name": "Operations Tenant",
+                "email": "ops-tenant@example.test",
+            },
+        )
+        assert create.status_code == 200, create.text
+        created = create.json()
+        assert created["slug"].startswith("ops-")
+        assert created["email"] == "ops-tenant@example.test"
+
+        listing = await client.get("/admin/tenants")
+        assert listing.status_code == 200, listing.text
+        payload = listing.json()
+        assert any(item["id"] == created["id"] for item in payload)
+
+        delete = await client.delete(f"/admin/tenants/{created['id']}")
+        assert delete.status_code == 200, delete.text
+        assert delete.json()["id"] == created["id"]
