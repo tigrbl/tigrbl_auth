@@ -20,7 +20,8 @@ body: |-
   
   ## Required Behavior
   
-  - The UIX MUST require confirmation before revoking sessions, revoking tokens, revoking consents, locking or unlocking identities, enabling or disabling tenants, enabling or disabling clients, rotating keys, publishing JWKS, or updating client registration.
+  - The UIX MUST require confirmation before revoking sessions, revoking tokens, revoking consents, locking or unlocking identities, enabling or disabling tenants, enabling or disabling clients, rotating keys, publishing JWKS, updating client registration, or mutating administrator and user identities through onboarding, role change, reset, disable, or delete flows.
+  - Bootstrap superuser creation and first-run administrator recovery flows MUST be governed mutations or governed bootstrap actions, not hidden ad hoc side effects.
   - Each mutation MUST show success, failure, authorization denial, validation failure, and audit-pending or audit-complete states.
   - Each mutation MUST call an implementation-backed OpenRPC operation or be blocked with a missing-operation error.
   - Each mutation MUST produce or expose an audit result that the administrator can inspect.
@@ -28,5 +29,5 @@ body: |-
   
   ## Verification
   
-  Verification MUST cover confirmation, execution, success, failure, authorization denial, audit visibility, and resource scoping.
+  Verification MUST cover confirmation, execution, success, failure, authorization denial, audit visibility, resource scoping, and administrator identity onboarding or mutation flows.
 spec_kind: "local-policy"

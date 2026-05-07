@@ -13601,7 +13601,7 @@
     {
       "id": "feat:uix-admin-auth-session",
       "title": "Admin UIX auth session",
-      "description": "Enterprise admin UIX target: Admin UIX auth session.",
+      "description": "Enterprise admin UIX target: administrator authentication session semantics, including login entry, session establishment, redirect gating, and protected-console access.",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -14293,7 +14293,7 @@
     {
       "id": "feat:secure-default-baseline-admin-gate",
       "title": "Secure-by-default baseline admin gate",
-      "description": "Baseline defaults expose only public OAuth/OIDC routes and require a local admin API key for explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces.",
+      "description": "Baseline defaults expose only public OAuth/OIDC routes, and explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces require authenticated administrator identity and session controls.",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -16899,6 +16899,153 @@
       "test_ids": [
         "tst:transport-disclosure-provenance-plane-py",
         "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-password-change",
+      "title": "Admin UIX password change",
+      "description": "Enterprise admin UIX target: administrator password-change flow, including first-login forced password change.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:admin-bootstrap-superuser",
+      "title": "Bootstrap superuser administrator",
+      "description": "Baseline admin-auth target: materialize and govern a bootstrap superuser administrator identity for first-run control-plane access and forced credential rollover.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1060",
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-identity-onboarding",
+      "title": "Admin UIX identity onboarding",
+      "description": "Enterprise admin UIX target: onboard, mutate, and manage administrator and user identities through the protected control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057",
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-identity-admin-view",
+        "clm:uix-safe-mutation-lock-identity"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-safe-mutations"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-login",
+      "title": "Admin UIX login",
+      "description": "Enterprise admin UIX target: administrator login flow for the protected control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055",
+        "spc:1074"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session",
+        "clm:uix-admin-frontend-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path",
+        "tst:uix-admin-frontend-adapter"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-password-recovery",
+      "title": "Admin UIX password recovery",
+      "description": "Enterprise admin UIX target: administrator forgot-password and reset-password recovery flow for the control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
       ],
       "requires": []
     }
@@ -27724,7 +27871,10 @@
       "path": "tests/uix/test_admin_shell_security.py",
       "feature_ids": [
         "feat:uix-admin-console-shell",
-        "feat:uix-admin-auth-session"
+        "feat:uix-admin-auth-session",
+        "feat:uix-admin-password-change",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "claim_ids": [
         "clm:uix-admin-console-shell",
@@ -27767,7 +27917,8 @@
         "feat:uix-consent-admin-view",
         "feat:uix-audit-admin-view",
         "feat:uix-keys-jwks-admin-view",
-        "feat:uix-profile-certification-view"
+        "feat:uix-profile-certification-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-tenant-admin-view",
@@ -27799,7 +27950,8 @@
         "feat:uix-consent-admin-view",
         "feat:uix-audit-admin-view",
         "feat:uix-keys-jwks-admin-view",
-        "feat:uix-profile-certification-view"
+        "feat:uix-profile-certification-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-tenant-admin-view",
@@ -27831,7 +27983,8 @@
         "feat:uix-safe-mutation-toggle-client",
         "feat:uix-safe-mutation-rotate-key",
         "feat:uix-safe-mutation-publish-jwks",
-        "feat:uix-safe-mutation-update-client-registration"
+        "feat:uix-safe-mutation-update-client-registration",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-safe-mutation-revoke-session",
@@ -27936,7 +28089,11 @@
       "feature_ids": [
         "feat:uix-admin-console-shell",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-password-change",
+        "feat:admin-bootstrap-superuser",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "claim_ids": [
         "clm:uix-admin-console-shell",
@@ -27959,7 +28116,8 @@
         "feat:api-admin-contract-publication-boundary",
         "feat:api-admin-authz-gate",
         "feat:api-admin-public-surface-exclusion",
-        "feat:api-public-admin-surface-exclusion"
+        "feat:api-public-admin-surface-exclusion",
+        "feat:admin-bootstrap-superuser"
       ],
       "claim_ids": [
         "clm:secure-default-baseline-admin-gate",
@@ -31494,7 +31652,8 @@
       "feature_ids": [
         "feat:uix-admin-boundary",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-login"
       ],
       "claim_ids": [
         "clm:uix-admin-frontend-adapter",
@@ -43188,7 +43347,10 @@
       "kind": "uix-expected-behavior",
       "description": "Implemented Admin UIX auth session behavior with executable authorization tests.",
       "feature_ids": [
-        "feat:uix-admin-auth-session"
+        "feat:uix-admin-auth-session",
+        "feat:uix-admin-password-change",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "test_ids": [
         "tst:uix-admin-shell-security",
@@ -43298,7 +43460,8 @@
       "kind": "uix-expected-behavior",
       "description": "Declared expected behavior for Identity administrator view before UI implementation lands.",
       "feature_ids": [
-        "feat:uix-identity-admin-view"
+        "feat:uix-identity-admin-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "test_ids": [
         "tst:uix-resource-views-contract",
@@ -43482,7 +43645,8 @@
       "kind": "uix-expected-behavior",
       "description": "Declared expected behavior for UIX lock and unlock identity before UI implementation lands.",
       "feature_ids": [
-        "feat:uix-safe-mutation-lock-identity"
+        "feat:uix-safe-mutation-lock-identity",
+        "feat:uix-admin-identity-onboarding"
       ],
       "test_ids": [
         "tst:uix-safe-mutations"
@@ -43643,7 +43807,8 @@
         "feat:admin-gate-does-not-mutate-openapi-json",
         "feat:openapi-runtime-payload-deferred-to-tigrbl",
         "feat:admin-gate-does-not-mutate-openrpc-json",
-        "feat:openrpc-runtime-payload-deferred-to-tigrbl"
+        "feat:openrpc-runtime-payload-deferred-to-tigrbl",
+        "feat:admin-bootstrap-superuser"
       ],
       "test_ids": [
         "tst:secure-default-admin-gate-runtime-contract",
@@ -43774,7 +43939,8 @@
       "feature_ids": [
         "feat:uix-admin-boundary",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-login"
       ],
       "test_ids": [
         "tst:uix-admin-frontend-adapter"
@@ -51509,7 +51675,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "53d66425f6bec8c2cbda897a9614c662da7f2d9aaad6dd41b6db00eecc499f81",
+      "content_sha256": "55b9d5d9353aa053d5be5c3c7fa74004ab5cc14d5f55c51490ef105cd373638c",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53110,7 +53276,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "0486b7d05422692c4aded5d972f4818ab749eacce411ffaa5994539e0fa56fd9",
+      "content_sha256": "88888eb6ef78524bd839fd58e46ce1489ac4e58755dfde81b673f5e62eaaf4c6",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53161,7 +53327,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "3c9aaba5e6e49bbc7910f32caf2b7190ac7db334c74c6485a6755939ae9beb5e",
+      "content_sha256": "96f993cd78076f1745af4851faace45256a6f03ac161fa11e435305e672d947b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53195,7 +53361,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "22934551e86c93801d35b41880313ffb7111494d9f59717b02dc1bc2d5a0eacf",
+      "content_sha256": "b2b31c486701b7e852b9dff42a661772d4afa357be82cd0428ae6ab6a8cf363b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],

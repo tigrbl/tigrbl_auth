@@ -18,13 +18,17 @@ body: |-
   
   Fresh tigrbl_auth installs MUST expose the public OAuth/OIDC surface only. Generated table CRUD, generated JSON-RPC, and diagnostics are control-plane surfaces and MUST NOT be installed by the baseline/default posture without explicit operator opt-in.
   
-  When admin, RPC, or diagnostics surfaces are explicitly enabled, tigrbl_auth MUST require a local admin API key before allowing access to generated control-plane REST, generated JSON-RPC, or diagnostics endpoints.
+  When admin, RPC, or diagnostics surfaces are explicitly enabled, tigrbl_auth MUST require an authenticated administrator identity and session before allowing access to generated control-plane REST, generated JSON-RPC, or diagnostics endpoints.
+  
+  The local baseline MUST support bootstrap of at least one superuser administrator identity for first-run control-plane access. Bootstrap credentials MUST flow into a forced password-change and ongoing administrator credential lifecycle rather than relying on a long-lived local admin API key.
   
   ## Rationale
   
   Generated CRUD and RPC surfaces can expose tenants, users, clients, keys, sessions, tokens, audit records, and operational diagnostics. A baseline auth server should publish discovery, JWKS, and intentional OAuth/OIDC protocol endpoints without also publishing an unauthenticated administrative API.
   
-  The local admin API key is a lightweight commercially-free control-plane credential. It avoids requiring a hosted identity provider, paid gateway, or enterprise-only dependency while still making accidental exposure fail closed.
+  Session-backed administrator authentication gives the control plane a production-grade identity boundary with login, password recovery, password change, and auditable onboarding semantics. That is a better fit for administrator UIX and administrator API access than a shared static local API key.
+  
+  Bootstrap of a local superuser keeps first-run installs commercially free and self-contained while still allowing the runtime to fail closed until an operator establishes a real administrator session.
   
   ## Ssot Links
   

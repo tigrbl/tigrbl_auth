@@ -21,6 +21,10 @@ body: |-
   ## Required Behavior
   
   - The console MUST require an authenticated administrator session before rendering protected routes.
+  - Unauthenticated browser entry to the administrator surface MUST present or redirect to an administrator login flow rather than rendering protected console content.
+  - The shell MUST expose administrator login, forgot-password or reset-password recovery, and password-change states as first-class operator flows.
+  - A bootstrap or forced password-change state MUST redirect the operator into the password-change flow and then return the operator to the next valid post-authentication state.
+  - Successful login or password-change completion MUST transition the operator into the protected console and MUST NOT strand the operator in a password-only loop.
   - The shell MUST expose stable navigation for dashboard, configuration, tenants, clients, identities, sessions, tokens, consents, audit, keys/JWKS, profile/certification, RBAC, ABAC, and policy simulation.
   - The shell MUST show the selected tenant, selected deployment profile, issuer/environment label, and active surface set.
   - The shell MUST display unsafe-state warnings for missing admin authorization, degraded readiness, failed contract checks, migration drift, unsafe cookie/TLS posture, or unavailable OpenRPC methods.
@@ -28,5 +32,5 @@ body: |-
   
   ## Verification
   
-  Verification MUST cover authenticated rendering, unauthenticated denial, navigation availability, tenant/profile selector behavior, unsafe-state banners, and redaction.
+  Verification MUST cover login rendering, authenticated rendering, unauthenticated denial or redirect, forgot-password and password-change states, post-authentication redirects, tenant/profile selector behavior, unsafe-state banners, and redaction.
 spec_kind: "local-policy"
