@@ -708,6 +708,14 @@ def _install_dependency_injection_compat() -> None:
             kwargs[name] = await _resolve_param_value(name, param)
 
         resolved = resolver(**kwargs) if kwargs else resolver()
+        if inspect.isasyncgen(resolved):
+            temp = getattr(ctx, "temp", None)
+            if isinstance(temp, dict):
+                temp.setdefault("route_dependency_cleanups", []).append(resolved.aclose)
+            try:
+                resolved = await resolved.__anext__()
+            except StopAsyncIteration:
+                resolved = None
         if inspect.isawaitable(resolved):
             resolved = await resolved
         return resolved
@@ -750,32 +758,42 @@ def _install_dependency_injection_compat() -> None:
                     request = _route_module._route_request(route, ctx, coerce_concrete=False)
                 kwargs[name] = request
 
-        response = route.handler(**kwargs) if kwargs else route.handler()
-        if inspect.isawaitable(response):
-            response = await response
+        try:
+            response = route.handler(**kwargs) if kwargs else route.handler()
+            if inspect.isawaitable(response):
+                response = await response
 
-        if isinstance(response, Response):
-            payload = {
-                "status_code": int(getattr(response, "status_code", 200) or 200),
-                "headers": dict(getattr(response, "headers", ()) or ()),
-                "body": (
-                    response
-                    if hasattr(response, "body_iterator")
-                    else getattr(response, "body", b"")
-                ),
-            }
+            if isinstance(response, Response):
+                payload = {
+                    "status_code": int(getattr(response, "status_code", 200) or 200),
+                    "headers": dict(getattr(response, "headers", ()) or ()),
+                    "body": (
+                        response
+                        if hasattr(response, "body_iterator")
+                        else getattr(response, "body", b"")
+                    ),
+                }
+                temp = getattr(ctx, "temp", None)
+                if isinstance(temp, dict):
+                    temp.setdefault("route", {})["short_circuit"] = True
+                    temp.setdefault("egress", {})["transport_response"] = payload
+                    temp["egress"]["suppress_asgi_send"] = True
+                setattr(ctx, "transport_response", payload)
+                return
+
+            setattr(ctx, "result", response)
             temp = getattr(ctx, "temp", None)
             if isinstance(temp, dict):
-                temp.setdefault("route", {})["short_circuit"] = True
-                temp.setdefault("egress", {})["transport_response"] = payload
-                temp["egress"]["suppress_asgi_send"] = True
-            setattr(ctx, "transport_response", payload)
-            return
-
-        setattr(ctx, "result", response)
-        temp = getattr(ctx, "temp", None)
-        if isinstance(temp, dict):
-            temp.setdefault("egress", {})["result"] = response
+                temp.setdefault("egress", {})["result"] = response
+        finally:
+            temp = getattr(ctx, "temp", None)
+            cleanups = list(temp.get("route_dependency_cleanups", [])) if isinstance(temp, dict) else []
+            for cleanup in reversed(cleanups):
+                result = cleanup()
+                if inspect.isawaitable(result):
+                    await result
+            if isinstance(temp, dict):
+                temp.pop("route_dependency_cleanups", None)
 
     setattr(_compat_invoke_route_handler, "__tigrbl_auth_dependency_injection_compat__", True)
     _route_module._invoke_route_handler = _compat_invoke_route_handler

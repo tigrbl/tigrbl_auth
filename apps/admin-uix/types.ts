@@ -23,10 +23,15 @@ export type User = {
   email: string;
   roles: string[];
   status: UserStatus;
-  last_login: string;
+  last_login?: string;
   mfa_device?: string;
   bio?: string;
   mfa_enabled?: boolean;
+  is_admin?: boolean;
+  is_superuser?: boolean;
+  must_change_password?: boolean;
+  created_at?: string;
+  updated_at?: string;
 };
 
 export type OAuthClient = {

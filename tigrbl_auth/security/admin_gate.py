@@ -12,6 +12,7 @@ from typing import Any, Iterable
 from tigrbl.security import APIKey, HTTPBearer, Security
 
 from tigrbl_auth.config.deployment import ResolvedDeployment
+from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
 
 ADMIN_API_KEY_ENV = "TIGRBL_AUTH_ADMIN_API_KEY"
 ADMIN_API_KEY_HEADER = "x-api-key"
@@ -177,18 +178,46 @@ class AdminGate:
 
         if self._requires_admin(path):
             credential = _extract_credential(scope)
-            if not credential:
-                status, headers, body = _json_response(401, {"error": "missing_admin_api_key"})
-                await send({"type": "http.response.start", "status": status, "headers": headers})
-                await send({"type": "http.response.body", "body": body})
-                return
-            if not self._digest or not hmac.compare_digest(_digest(credential), self._digest):
-                status, headers, body = _json_response(403, {"error": "invalid_admin_api_key"})
+            authorized = False
+            if credential and self._digest and hmac.compare_digest(_digest(credential), self._digest):
+                authorized = True
+            if not authorized:
+                request = _scope_request(scope)
+                try:
+                    authorized = await resolve_admin_user_from_request(request) is not None
+                except Exception:  # pragma: no cover - fail closed on middleware auth errors
+                    authorized = False
+            if not authorized:
+                status, headers, body = _json_response(401, {"error": "authenticated_admin_session_required"})
                 await send({"type": "http.response.start", "status": status, "headers": headers})
                 await send({"type": "http.response.body", "body": body})
                 return
 
         await self.app(scope, receive, send)
+
+
+class _ScopeRequest:
+    def __init__(self, scope: dict[str, Any]) -> None:
+        self.scope = scope
+        self.state = type("State", (), {})()
+        self.cookies = self._parse_cookies()
+
+    def _parse_cookies(self) -> dict[str, str]:
+        parsed: dict[str, str] = {}
+        for key, value in self.scope.get("headers", []):
+            if key.decode("latin-1").lower() != "cookie":
+                continue
+            raw = value.decode("latin-1")
+            for chunk in raw.split(";"):
+                if "=" not in chunk:
+                    continue
+                name, cookie_value = chunk.split("=", 1)
+                parsed[name.strip()] = cookie_value.strip()
+        return parsed
+
+
+def _scope_request(scope: dict[str, Any]) -> Any:
+    return _ScopeRequest(scope)
 
 
 __all__ = [

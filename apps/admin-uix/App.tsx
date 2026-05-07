@@ -16,6 +16,9 @@ import { controlPlaneStateService } from './services/controlPlaneStateService';
 import { Tenant } from './types';
 import { backendService } from './services/backendService';
 import { filterVisibleTenants, loadDelegatedAdminScope } from './services/governancePolicy';
+import { adminAuthService, type AdminSessionState } from './services/adminAuthService';
+
+type AuthMode = 'login' | 'forgot' | 'reset' | 'change-password';
 
 const App: React.FC = () => {
   const [active_tab, set_active_tab] = useState('dashboard');
@@ -25,6 +28,11 @@ const App: React.FC = () => {
   const [loading, set_loading] = useState(true);
   const [bootstrap_error, set_bootstrap_error] = useState<string | null>(null);
   const [is_lockdown, set_is_lockdown] = useState(controlPlaneStateService.get_lockdown());
+  const [session, set_session] = useState<AdminSessionState | null>(null);
+  const [auth_mode, set_auth_mode] = useState<AuthMode>('login');
+  const [auth_error, set_auth_error] = useState<string | null>(null);
+  const [auth_loading, set_auth_loading] = useState(false);
+  const [debug_reset_token, set_debug_reset_token] = useState<string | null>(null);
   const delegated_scope = loadDelegatedAdminScope();
 
   const refresh_tenants = async () => {
@@ -48,13 +56,33 @@ const App: React.FC = () => {
     });
   };
 
+  const establishSession = async () => {
+    const nextSession = await adminAuthService.getSession();
+    set_session(nextSession);
+    if (nextSession.must_change_password) {
+      set_auth_mode('change-password');
+    }
+    return nextSession;
+  };
+
   useEffect(() => {
     const bootstrap = async () => {
       try {
+        const nextSession = await establishSession();
+        if (!nextSession.authenticated) {
+          set_auth_mode('login');
+          return;
+        }
         await refresh_tenants();
       } catch (error) {
-        console.error('Failed to load tenants from backend', error);
-        set_bootstrap_error('Failed to load tenants from backend.');
+        const message = error instanceof Error ? error.message : 'Failed to establish admin session.';
+        if (message.toLowerCase().includes('session') || message.toLowerCase().includes('administrator')) {
+          set_auth_mode('login');
+          set_auth_error(message);
+        } else {
+          console.error('Failed to load tenants from backend', error);
+          set_bootstrap_error('Failed to load tenants from backend.');
+        }
       } finally {
         setTimeout(() => set_loading(false), 1200);
       }
@@ -70,6 +98,76 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const finishLogin = async (identifier: string, password: string) => {
+    set_auth_loading(true);
+    set_auth_error(null);
+    try {
+      const nextSession = await adminAuthService.login(identifier, password);
+      set_session(nextSession);
+      set_debug_reset_token(null);
+      if (nextSession.must_change_password) {
+        set_auth_mode('change-password');
+      } else {
+        await refresh_tenants();
+      }
+    } catch (error) {
+      set_auth_error(error instanceof Error ? error.message : 'Failed to authenticate administrator.');
+    } finally {
+      set_auth_loading(false);
+      set_loading(false);
+    }
+  };
+
+  const requestReset = async (identifier: string) => {
+    set_auth_loading(true);
+    set_auth_error(null);
+    try {
+      const response = await adminAuthService.requestPasswordReset(identifier);
+      set_debug_reset_token(response.debug_reset_token ?? null);
+      set_auth_mode('reset');
+    } catch (error) {
+      set_auth_error(error instanceof Error ? error.message : 'Failed to request password reset.');
+    } finally {
+      set_auth_loading(false);
+    }
+  };
+
+  const completeReset = async (token: string, password: string) => {
+    set_auth_loading(true);
+    set_auth_error(null);
+    try {
+      await adminAuthService.resetPassword(token, password);
+      set_debug_reset_token(null);
+      set_auth_mode('login');
+    } catch (error) {
+      set_auth_error(error instanceof Error ? error.message : 'Failed to reset password.');
+    } finally {
+      set_auth_loading(false);
+    }
+  };
+
+  const completePasswordChange = async (currentPassword: string, newPassword: string) => {
+    set_auth_loading(true);
+    set_auth_error(null);
+    try {
+      const nextSession = await adminAuthService.changePassword(currentPassword, newPassword);
+      set_session(nextSession);
+      await refresh_tenants();
+    } catch (error) {
+      set_auth_error(error instanceof Error ? error.message : 'Failed to change password.');
+    } finally {
+      set_auth_loading(false);
+    }
+  };
+
+  const signOut = async () => {
+    await adminAuthService.logout();
+    set_session(null);
+    set_tenants([]);
+    set_current_tenant(null);
+    set_auth_mode('login');
+  };
+
   const handle_select_tenant_for_detail = (tenant: Tenant) => {
     set_selected_tenant_detail(tenant);
     set_active_tab('tenant_detail');
@@ -81,6 +179,38 @@ const App: React.FC = () => {
         <div className="w-12 h-12 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         <p className="mt-8 text-white font-bold tracking-[4px] text-xs animate-pulse uppercase">Booting TIGRBL_AUTH.CORE</p>
       </div>
+    );
+  }
+
+  if (!session?.authenticated || auth_mode !== 'login' && auth_mode !== 'change-password' && !current_tenant) {
+    return (
+      <AdminAuthShell
+        mode={auth_mode}
+        loading={auth_loading}
+        error={auth_error}
+        debug_reset_token={debug_reset_token}
+        onLogin={finishLogin}
+        onForgotPassword={requestReset}
+        onResetPassword={completeReset}
+        onChangePassword={completePasswordChange}
+        onModeChange={set_auth_mode}
+      />
+    );
+  }
+
+  if (session.must_change_password || auth_mode === 'change-password') {
+    return (
+      <AdminAuthShell
+        mode="change-password"
+        loading={auth_loading}
+        error={auth_error}
+        debug_reset_token={null}
+        onLogin={finishLogin}
+        onForgotPassword={requestReset}
+        onResetPassword={completeReset}
+        onChangePassword={completePasswordChange}
+        onModeChange={set_auth_mode}
+      />
     );
   }
 
@@ -140,7 +270,7 @@ const App: React.FC = () => {
             }}
           />
         ) : null;
-      case 'identities': return <IdentityManagement />;
+      case 'identities': return <IdentityManagement tenant={current_tenant} session={session} />;
       case 'policies': return <PolicyEditor tenant_id={current_tenant.id} />;
       case 'clients': return <ClientManagement tenant_id={current_tenant.id} delegated_scope={delegated_scope} />;
       case 'security': return <SecurityManagement />;
@@ -183,6 +313,9 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-12">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-[#55554e]">
+              {session?.email ?? session?.username ?? 'administrator'}
+            </div>
             {!is_lockdown && (
               <div className="flex items-center space-x-3 cursor-pointer group">
                 <span className="text-[10px] font-bold text-[#55554e] uppercase tracking-widest">Active Tenant:</span>
@@ -203,6 +336,9 @@ const App: React.FC = () => {
                 </select>
               </div>
             )}
+            <button className="text-[10px] font-bold uppercase tracking-widest text-[#55554e]" onClick={() => void signOut()}>
+              Sign Out
+            </button>
             <div className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest">
                 <div className={`w-2 h-2 rounded-full animate-pulse ${is_lockdown ? 'bg-[#ff2d00]' : 'bg-[#00ffcc]'}`}></div>
                 <span>Sync Status: {is_lockdown ? 'ISOLATED' : '14ms'}</span>
@@ -221,3 +357,92 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+type AdminAuthShellProps = {
+  mode: AuthMode;
+  loading: boolean;
+  error: string | null;
+  debug_reset_token: string | null;
+  onLogin: (identifier: string, password: string) => Promise<void>;
+  onForgotPassword: (identifier: string) => Promise<void>;
+  onResetPassword: (token: string, password: string) => Promise<void>;
+  onChangePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  onModeChange: (mode: AuthMode) => void;
+};
+
+const AdminAuthShell: React.FC<AdminAuthShellProps> = ({
+  mode,
+  loading,
+  error,
+  debug_reset_token,
+  onLogin,
+  onForgotPassword,
+  onResetPassword,
+  onChangePassword,
+  onModeChange,
+}) => {
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [resetToken, setResetToken] = useState('');
+
+  return (
+    <div className="fixed inset-0 bg-[#1a1a1a] flex items-center justify-center px-6">
+      <div className="w-full max-w-md bg-[#f4f4f0] border border-[#1a1a1a] shadow-milled p-8 space-y-6">
+        <div className="space-y-2">
+          <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#55554e]">Administrator Access</p>
+          <h1 className="text-2xl font-bold text-[#1a1a1a]">
+            {mode === 'forgot' ? 'Forgot Password' : mode === 'reset' ? 'Reset Password' : mode === 'change-password' ? 'Change Password' : 'Admin Login'}
+          </h1>
+          <p className="text-sm text-[#55554e]">
+            {mode === 'forgot'
+              ? 'Request a one-time reset for an administrator identity.'
+              : mode === 'reset'
+                ? 'Complete the one-time administrator password reset.'
+                : mode === 'change-password'
+                  ? 'A password rotation is required before the admin console can continue.'
+                  : 'Authenticate with your administrator identity to enter the control plane.'}
+          </p>
+        </div>
+        {error && <div className="border border-[#ff2d00] bg-[#fff3f0] px-4 py-3 text-sm text-[#7a1e00]">{error}</div>}
+        {mode === 'login' && (
+          <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); void onLogin(identifier, password); }}>
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="Username or email" value={identifier} onChange={(event) => setIdentifier(event.target.value)} />
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="Password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            <button className="btn-parian w-full" disabled={loading}>{loading ? 'Authorizing...' : 'Enter Control Plane'}</button>
+            <button type="button" className="w-full text-xs font-bold uppercase tracking-widest text-[#55554e]" onClick={() => onModeChange('forgot')}>Forgot Password</button>
+          </form>
+        )}
+        {mode === 'forgot' && (
+          <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); void onForgotPassword(identifier); }}>
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="Username or email" value={identifier} onChange={(event) => setIdentifier(event.target.value)} />
+            <button className="btn-parian w-full" disabled={loading}>{loading ? 'Submitting...' : 'Request Reset'}</button>
+            <button type="button" className="w-full text-xs font-bold uppercase tracking-widest text-[#55554e]" onClick={() => onModeChange('login')}>Return to Login</button>
+          </form>
+        )}
+        {mode === 'reset' && (
+          <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); void onResetPassword(resetToken, newPassword); }}>
+            {debug_reset_token && (
+              <div className="border border-[#1a1a1a] bg-white px-4 py-3 text-xs">
+                <div className="font-bold uppercase tracking-widest mb-2">Local Debug Reset Token</div>
+                <div className="break-all">{debug_reset_token}</div>
+              </div>
+            )}
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="Reset token" value={resetToken} onChange={(event) => setResetToken(event.target.value)} />
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="New password" type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
+            <button className="btn-parian w-full" disabled={loading}>{loading ? 'Resetting...' : 'Reset Password'}</button>
+            <button type="button" className="w-full text-xs font-bold uppercase tracking-widest text-[#55554e]" onClick={() => onModeChange('login')}>Return to Login</button>
+          </form>
+        )}
+        {mode === 'change-password' && (
+          <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); void onChangePassword(currentPassword, newPassword); }}>
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="Current password" type="password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} />
+            <input className="w-full border border-[#1a1a1a] px-3 py-2 bg-white" placeholder="New password" type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
+            <button className="btn-parian w-full" disabled={loading}>{loading ? 'Updating...' : 'Change Password'}</button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+};

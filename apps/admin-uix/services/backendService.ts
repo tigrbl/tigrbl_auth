@@ -1,5 +1,6 @@
 import { gateway_rpc } from './jsonRpcService';
 import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, User } from '../types';
+import { UserStatus } from '../types';
 
 const toError = (error: unknown): Error => {
   if (error instanceof Error) {
@@ -28,6 +29,38 @@ async function supportedRpcResult<T>(method: string, params: unknown, fallback: 
   return rpcResult<T>(method, params);
 }
 
+async function restJson<T>(path: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(path, {
+    headers: {
+      Accept: 'application/json',
+      ...(init?.headers ?? {}),
+    },
+    ...init,
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(String(payload?.detail || payload?.error || `HTTP ${response.status}`));
+  }
+  return payload as T;
+}
+
+function normalizeUser(user: any): User {
+  return {
+    id: String(user.id),
+    tenant_id: String(user.tenant_id),
+    username: String(user.username ?? user.email ?? user.id),
+    email: String(user.email ?? ''),
+    roles: Array.isArray(user.roles) ? user.roles.map(String) : [],
+    status: user.is_active === false ? UserStatus.SUSPENDED : (user.must_change_password ? UserStatus.PENDING : UserStatus.ACTIVE),
+    last_login: user.updated_at ?? user.created_at ?? '',
+    is_admin: Boolean(user.is_admin),
+    is_superuser: Boolean(user.is_superuser),
+    must_change_password: Boolean(user.must_change_password),
+    created_at: user.created_at,
+    updated_at: user.updated_at,
+  };
+}
+
 export const backendService = {
   async getTenants(): Promise<Tenant[]> {
     const tenants = await supportedRpcResult<any[]>('tenant.list', {}, []);
@@ -54,22 +87,45 @@ export const backendService = {
   },
 
   async getUsers(tenantId: string): Promise<User[]> {
-    const users = await supportedRpcResult<any[]>('identity.list', { tenant_id: tenantId }, []);
-    return users
-      .map((user) => ({ ...user, tenant_id: user.tenant_id }))
-      .filter((user) => user.tenant_id === tenantId);
+    const users = await restJson<any[]>(`/admin/identities?tenant_id=${encodeURIComponent(tenantId)}`);
+    return users.map(normalizeUser);
   },
 
-  async createUser(user: User): Promise<User> {
-    return supportedRpcResult<User>('identity.create', user, user);
+  async createUser(
+    payload: Pick<User, 'tenant_id' | 'username' | 'email'> & {
+      password: string;
+      is_admin?: boolean;
+      is_superuser?: boolean;
+      must_change_password?: boolean;
+    },
+  ): Promise<User> {
+    const user = await restJson<any>('/admin/identities', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    return normalizeUser(user);
   },
 
-  async updateUser(user: User): Promise<User> {
-    return supportedRpcResult<User>('identity.update', user, user);
+  async updateUser(
+    id: string,
+    payload: Partial<Pick<User, 'username' | 'email' | 'is_admin' | 'is_superuser' | 'must_change_password'>> & {
+      is_active?: boolean;
+      password?: string;
+    },
+  ): Promise<User> {
+    const user = await restJson<any>(`/admin/identities/${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    return normalizeUser(user);
   },
 
   async deleteUser(id: string): Promise<void> {
-    await supportedRpcResult('identity.delete', { id }, undefined);
+    await restJson(`/admin/identities/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
   },
 
   async getClients(tenantId: string): Promise<OAuthClient[]> {

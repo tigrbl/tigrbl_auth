@@ -179,6 +179,30 @@ class Settings(BaseSettings):
         default=os.environ.get("TIGRBL_AUTH_ADMIN_API_KEY_DIR", "runtime_secrets"),
         description="Directory used for the generated local bootstrap admin API key digest.",
     )
+    bootstrap_admin_username: str = Field(
+        default=os.environ.get("TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME", "admin"),
+        description="Bootstrap super-admin username for first-run initialization.",
+    )
+    bootstrap_admin_email: str = Field(
+        default=os.environ.get("TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL", "admin@example.com"),
+        description="Bootstrap super-admin email for first-run initialization.",
+    )
+    bootstrap_admin_password: Optional[str] = Field(
+        default=os.environ.get("TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD"),
+        description="Optional bootstrap super-admin password. If omitted, a local-only password is generated.",
+    )
+    bootstrap_admin_tenant_slug: str = Field(
+        default=os.environ.get("TIGRBL_AUTH_BOOTSTRAP_ADMIN_TENANT_SLUG", "public"),
+        description="Tenant slug that owns the bootstrap super-admin identity.",
+    )
+    bootstrap_admin_force_password_change: bool = Field(
+        default=_env_bool("TIGRBL_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE", "true"),
+        description="Require the bootstrap super-admin to change their password after first login.",
+    )
+    admin_password_reset_debug_disclosure: bool = Field(
+        default=_env_bool("TIGRBL_AUTH_ADMIN_PASSWORD_RESET_DEBUG_DISCLOSURE", "true"),
+        description="Allow local development reset flows to disclose a one-time reset token in the response when no mail channel exists.",
+    )
     log_level: str = Field(default=os.environ.get("LOG_LEVEL", "INFO"))
     id_token_encryption_key: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ID_TOKEN_ENC_KEY", "0" * 32),

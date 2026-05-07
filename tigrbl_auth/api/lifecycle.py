@@ -6,10 +6,13 @@ from tigrbl import TigrblApp
 
 from tigrbl_auth.api.surfaces import surface_api
 from tigrbl_auth.migrations import apply_all_async
+from tigrbl_auth.config.settings import settings
+from tigrbl_auth.services.admin_identity_bootstrap import ensure_default_superuser_async
 
 
 async def _startup() -> None:
     await apply_all_async()
+    await ensure_default_superuser_async(settings)
     init = surface_api.initialize()
     if inspect.isawaitable(init):
         await init

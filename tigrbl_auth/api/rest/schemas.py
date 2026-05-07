@@ -195,3 +195,65 @@ class AuthorizationCodeGrantForm(BaseModel):
     redirect_uri: str
     client_id: str
     code_verifier: Optional[str] = None
+
+
+class AdminPasswordResetRequestIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminPasswordResetCompleteIn(BaseModel):
+    token: constr(strip_whitespace=True, min_length=16, max_length=256)
+    password: _password
+
+
+class AdminPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class AdminSessionOut(BaseModel):
+    authenticated: bool
+    session_id: str | None = None
+    user_id: str | None = None
+    tenant_id: str | None = None
+    username: str | None = None
+    email: str | None = None
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    debug_reset_token: str | None = None
+
+
+class AdminIdentityOut(BaseModel):
+    id: str
+    tenant_id: str
+    username: str
+    email: str
+    is_active: bool = True
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminIdentityProvisionIn(BaseModel):
+    tenant_id: str
+    username: _username
+    email: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: _password
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = True
+
+
+class AdminIdentityUpdateIn(BaseModel):
+    username: _username | None = None
+    email: constr(strip_whitespace=True, min_length=3, max_length=120) | None = None
+    password: _password | None = None
+    is_active: bool | None = None
+    is_admin: bool | None = None
+    is_superuser: bool | None = None
+    must_change_password: bool | None = None

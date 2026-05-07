@@ -11,6 +11,11 @@ docker run -d --name tigrbl-auth-local -p 8001:8000 `
   -e AUTHN_ISSUER=http://localhost:8001 `
   -e TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER=http://localhost:8001/resource `
   -e TIGRBL_AUTH_REQUIRE_TLS=false `
+  -e TIGRBL_AUTH_SESSION_COOKIE_FORCE_SECURE=false `
+  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME=admin `
+  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL=admin@example.test `
+  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD=AdminPass123! `
+  -e TIGRBL_AUTH_BOOTSTRAP_ADMIN_FORCE_PASSWORD_CHANGE=true `
   tigrbl-auth-local:latest
 ```
 
@@ -19,6 +24,15 @@ Equivalent compose workflow:
 ```powershell
 docker compose up -d --build
 ```
+
+The local compose runtime now bootstraps a default super-admin identity for the
+admin UIX:
+
+- username: `admin`
+- email: `admin@example.test`
+- password: `AdminPass123!`
+
+The first login is expected to force a password rotation.
 
 Useful container checks:
 
@@ -66,6 +80,10 @@ List the bootstrapped tenants over REST:
 ```powershell
 Invoke-RestMethod http://127.0.0.1:8001/tenant
 ```
+
+Admin UIX authentication for the local stack is browser-session based. The local
+compose runtime disables the `Secure` cookie bit so the admin session can be
+tested over `http://127.0.0.1` without weakening the production default.
 
 ## JSON-RPC
 

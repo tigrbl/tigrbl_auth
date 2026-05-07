@@ -38,6 +38,7 @@ from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError
 from tigrbl_auth.tables import User
 from tigrbl_auth.security.context import principal_var
+from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
 from tigrbl_auth.standards.oauth2.rfc9700 import verify_access_token_sender_constraint
 from tigrbl_auth.standards.oauth2.mtls import presented_certificate_thumbprint
@@ -87,6 +88,13 @@ async def _user_from_api_key(raw_key: str, db: AsyncSession) -> Principal | None
         return principal
     except AuthError:
         return None
+
+
+async def _user_from_browser_session(request: Request, db: AsyncSession) -> User | None:
+    session = await resolve_browser_session(request)
+    if session is None:
+        return None
+    return await db.scalar(select(User).where(User.id == session.user_id, User.is_active.is_(True)))
 
 
 # ---------------------------------------------------------------------
@@ -143,6 +151,8 @@ async def get_current_principal(  # type: ignore[override]
     if api_key:
         if user := await _user_from_api_key(api_key, db):
             return user
+    if user := await _user_from_browser_session(request, db):
+        return user
 
     token = await extract_bearer_token(request, authorization)
     if token:
