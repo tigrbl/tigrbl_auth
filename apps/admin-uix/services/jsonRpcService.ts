@@ -53,7 +53,19 @@ type ControlPlanePolicy = {
 
 const CONTROL_PLANE_KEY = storageKeyFor('policy-control-plane');
 const SYNC_RECORDS_KEY = storageKeyFor('policy-sync');
-const DEFAULT_OPENRPC_CATALOG_URL = "/specs/openrpc/profiles/baseline-development/tigrbl_auth.admin.openrpc.json";
+const DEFAULT_OPENRPC_CATALOG_URL = "/openrpc.json";
+const METHOD_ALIASES: Record<string, string> = {
+  'tenant.': 'Tenant.',
+  'identity.': 'User.',
+  'user.': 'User.',
+  'client.': 'Client.',
+  'apikey.': 'ApiKey.',
+  'service.': 'Service.',
+  'session.': 'AuthSession.',
+  'token.': 'TokenRecord.',
+  'audit.': 'AuditEvent.',
+  'consent.': 'Consent.',
+};
 
 const computeHash = (value: string): string => {
   let hash = 0;
@@ -102,9 +114,10 @@ export class JsonRpcService {
   }
 
   async call<T = unknown>(method: string, params: unknown = {}): Promise<JsonRpcResponse<T>> {
+    const resolvedMethod = await this.resolveMethodName(method);
     const request: JsonRpcRequest = {
       jsonrpc: '2.0',
-      method,
+      method: resolvedMethod,
       params,
       id: generate_uuid(),
     };
@@ -192,8 +205,31 @@ export class JsonRpcService {
   }
 
   async hasMethod(method: string): Promise<boolean> {
+    const resolved = await this.resolveMethodName(method);
     const catalog = await this.discover();
-    return catalog.has(method);
+    return catalog.has(resolved);
+  }
+
+  private async resolveMethodName(method: string): Promise<string> {
+    if (method.startsWith('rpc.')) {
+      return method;
+    }
+
+    const catalog = await this.discover();
+    if (catalog.has(method)) {
+      return method;
+    }
+
+    for (const [prefix, aliasPrefix] of Object.entries(METHOD_ALIASES)) {
+      if (method.startsWith(prefix)) {
+        const candidate = `${aliasPrefix}${method.slice(prefix.length)}`;
+        if (catalog.has(candidate)) {
+          return candidate;
+        }
+      }
+    }
+
+    return method;
   }
 
   private async discoverFromRpc(): Promise<Set<string>> {
@@ -213,16 +249,20 @@ export class JsonRpcService {
 
   private async discoverFromOpenRpcContract(): Promise<Set<string>> {
     const contractUrl = import.meta.env.VITE_TIGRBL_AUTH_ADMIN_OPENRPC_URL || DEFAULT_OPENRPC_CATALOG_URL;
-    try {
-      const response = await fetch(contractUrl, { headers: { Accept: "application/json" } });
-      if (!response.ok) {
-        return new Set();
+    const contractUrls = Array.from(new Set([contractUrl, DEFAULT_OPENRPC_CATALOG_URL]));
+    for (const url of contractUrls) {
+      try {
+        const response = await fetch(url, { headers: { Accept: "application/json" } });
+        if (!response.ok) {
+          continue;
+        }
+        const contract = (await response.json()) as OpenRpcContract;
+        return new Set((contract.methods ?? []).map((method) => method.name).filter(Boolean) as string[]);
+      } catch {
+        continue;
       }
-      const contract = (await response.json()) as OpenRpcContract;
-      return new Set((contract.methods ?? []).map((method) => method.name).filter(Boolean) as string[]);
-    } catch {
-      return new Set();
     }
+    return new Set();
   }
 
   private localResponse<T>(result: T): JsonRpcResponse<T> {
