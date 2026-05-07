@@ -13,15 +13,12 @@
     "clean_checkout": {
       "git_available": true,
       "clean": false,
-      "changed_path_count": 34,
+      "changed_path_count": 19,
       "changed_paths": [
-        "Dockerfile.dev-tigrbl",
         "compliance/claims/repository-state.yaml",
         "compliance/evidence/certification_test_partitions.json",
         "compliance/evidence/certification_test_partitions.yaml",
         "compliance/targets/document-authority.yaml",
-        "constraints/base.txt",
-        "constraints/dependency-lock.json",
         "docs/compliance/certification_evidence_index.json",
         "docs/compliance/certification_evidence_index.md",
         "docs/compliance/current_state_report.json",
@@ -36,19 +33,7 @@
         "docs/compliance/tigrbl_runtime_foundation_report.md",
         "docs/compliance/truth_chain.json",
         "docs/compliance/truth_chain.md",
-        "docs/runbooks/DOCKER_LOCAL_RUNTIME.md",
-        "docs/runbooks/TIGRBL_UNRESOLVED_SECURITY_CONTRACT_ISSUES.md",
-        "tests/integration/test_sqlite_attachment_admin_directory.py",
-        "tests/unit/test_openapi_examples.py",
-        "tests/unit/test_provenance_naming_guard.py",
-        "tests/unit/test_published_dependency_model.py",
-        "tests/unit/test_rfc6749_token_endpoint.py",
-        "tests/unit/test_rfc8707_resource_indicators.py",
-        "tigrbl_auth/framework.py",
-        "tigrbl_auth/migrations/runtime.py",
-        "tigrbl_auth/ops/token.py",
-        "tigrbl_auth/rfc/rfc6749_token.py",
-        "tigrbl_auth/tables/__init__.py"
+        "tigrbl_auth/framework.py"
       ]
     }
   },
@@ -102,6 +87,7 @@
     ],
     "unit": [
       "tests/e2e/test_release_gate_catalog.py",
+      "tests/examples/test_python_cli_device_login.py",
       "tests/examples/test_readme_usage.py",
       "tests/perf/test_bundle_manifest_size.py",
       "tests/uix/test_abac_admin.py",

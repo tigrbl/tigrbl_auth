@@ -49,6 +49,7 @@
     ],
     "unit": [
       "tests/e2e/test_release_gate_catalog.py",
+      "tests/examples/test_python_cli_device_login.py",
       "tests/examples/test_readme_usage.py",
       "tests/perf/test_bundle_manifest_size.py",
       "tests/uix/test_abac_admin.py",

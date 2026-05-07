@@ -8,7 +8,7 @@
 - Script FastAPI/Starlette hits: `0`
 - Runtime non-public Tigrbl hits: `1`
 - Pyproject forbidden dependency hits: `0`
-- Release-path fallback hits: `6`
+- Release-path fallback hits: `8`
 
 ## Failures
 

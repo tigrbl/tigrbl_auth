@@ -8,7 +8,7 @@
     "scripts_fastapi_starlette_hits": 0,
     "runtime_non_public_tigrbl_hits": 1,
     "pyproject_forbidden_dependency_hits": 0,
-    "release_path_fallback_hits": 6
+    "release_path_fallback_hits": 8
   },
   "hits": {
     "fastapi_starlette": {
@@ -28,6 +28,11 @@
       {
         "path": "tigrbl_auth\\framework.py",
         "line": 259,
+        "match": "if hasattr("
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 763,
         "match": "if hasattr("
       },
       {
@@ -52,7 +57,12 @@
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 651,
+        "line": 692,
+        "match": "except Exception:"
+      },
+      {
+        "path": "tigrbl_auth\\framework.py",
+        "line": 810,
         "match": "except Exception:"
       }
     ]

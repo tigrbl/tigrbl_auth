@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260506T081602Z",
+  "generated_at": "20260507T060913Z",
   "deployment_profile": "baseline",
   "report_mode": "live-probe",
   "application_probe": {
@@ -588,7 +588,7 @@
         "exit_code": 0,
         "launch_ready": true,
         "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 7 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs//compliance//runtime_profile_report.json\",\n    \"md\": \"docs//compliance//runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
-        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=TY6pHJGBQyGETiRba2DrmgUawhfuDGJBAITm2-O26E8\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=7k9WlhZeMzYN6ondWOvjCvKsAK8AsC0f2llf6cDlCtM"
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=y5-GY3vOa0n8fW9OmSKtzU4w5FPyXYvB3lyNDjpybYI\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=zE7gk8fSjlPg4-7LO0wPvXRqqPkgq6_YD6bpJCAyGqM"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",

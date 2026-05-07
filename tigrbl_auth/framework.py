@@ -622,6 +622,165 @@ def _install_jsonrpc_egress_compat() -> None:
         _asgi_send_module._send_transport_response = _compat_send_transport_response
 
 
+def _install_dependency_injection_compat() -> None:
+    from tigrbl_concrete._concrete import _route as _route_module
+
+    current = getattr(_route_module, "_invoke_route_handler", None)
+    if not callable(current) or getattr(current, "__tigrbl_auth_dependency_injection_compat__", False):
+        return
+
+    async def _resolve_route_dependency(
+        resolver: Any,
+        *,
+        owner: Any,
+        route: Any,
+        ctx: Any,
+        request: Any | None,
+        path_params: Mapping[str, Any],
+    ) -> Any:
+        overrides = getattr(owner, "dependency_overrides", {}) or {}
+        resolver = overrides.get(resolver, resolver)
+        signature = inspect.signature(resolver)
+        params = list(signature.parameters.items())
+        kwargs: dict[str, Any] = {}
+        concrete_request = request
+
+        async def _ensure_request() -> Any:
+            nonlocal concrete_request
+            if concrete_request is None:
+                concrete_request = _route_module._route_request(route, ctx, coerce_concrete=True)
+            return concrete_request
+
+        async def _resolve_param_value(name: str, param: inspect.Parameter) -> Any:
+            default = param.default
+            nested_dep = getattr(default, "dependency", None)
+            if callable(nested_dep):
+                return await _resolve_route_dependency(
+                    nested_dep,
+                    owner=owner,
+                    route=route,
+                    ctx=ctx,
+                    request=await _ensure_request(),
+                    path_params=path_params,
+                )
+
+            annotation = param.annotation
+            if name in path_params:
+                return path_params[name]
+            if name in {"ctx", "_ctx"} or annotation is dict or annotation is Any:
+                return ctx
+            if name in {"request", "_request"} or getattr(annotation, "__name__", None) == "Request":
+                return await _ensure_request()
+
+            location = getattr(default, "location", None)
+            alias = getattr(default, "alias", None) or name
+            request_obj = await _ensure_request()
+            if location == "header":
+                headers = getattr(request_obj, "headers", {}) or {}
+                return headers.get(alias, headers.get(str(alias).lower(), getattr(default, "default", None)))
+            if location == "query":
+                query = getattr(request_obj, "query_params", {}) or {}
+                return query.get(alias, getattr(default, "default", None))
+            if location == "path":
+                return path_params.get(alias, getattr(default, "default", None))
+            if location == "body":
+                form_reader = getattr(request_obj, "form", None)
+                body_data: Any = None
+                if callable(form_reader):
+                    try:
+                        body_data = await form_reader()
+                    except Exception:
+                        body_data = None
+                if isinstance(body_data, Mapping):
+                    return body_data.get(alias, getattr(default, "default", None))
+                payload = getattr(request_obj, "body", None)
+                if isinstance(payload, Mapping):
+                    return payload.get(alias, getattr(default, "default", None))
+                return getattr(default, "default", None)
+
+            if len(params) == 1 and param.default is inspect._empty and not path_params:
+                return await _ensure_request()
+            if param.default is not inspect._empty:
+                return param.default
+            raise TypeError(f"{resolver.__name__}() missing required argument: {name}")
+
+        for name, param in params:
+            kwargs[name] = await _resolve_param_value(name, param)
+
+        resolved = resolver(**kwargs) if kwargs else resolver()
+        if inspect.isawaitable(resolved):
+            resolved = await resolved
+        return resolved
+
+    async def _compat_invoke_route_handler(route: Any, ctx: Any) -> None:
+        request: Any | None = None
+        path_params = _route_module._route_path_params(route, ctx)
+        kwargs: dict[str, Any] = {}
+        signature = inspect.signature(route.handler)
+        params = list(signature.parameters.items())
+
+        for name, param in params:
+            if name in path_params:
+                kwargs[name] = path_params[name]
+                continue
+            default = param.default
+            dep_callable = getattr(default, "dependency", None)
+            if callable(dep_callable):
+                owner = getattr(ctx, "app", None) or getattr(ctx, "router", None)
+                kwargs[name] = await _resolve_route_dependency(
+                    dep_callable,
+                    owner=owner,
+                    route=route,
+                    ctx=ctx,
+                    request=request,
+                    path_params=path_params,
+                )
+                continue
+            annotation = param.annotation
+            if name in {"ctx", "_ctx"} or annotation is dict or annotation is Any:
+                kwargs[name] = ctx
+                continue
+            if name in {"request", "_request"} or getattr(annotation, "__name__", None) == "Request":
+                if request is None:
+                    request = _route_module._route_request(route, ctx, coerce_concrete=True)
+                kwargs[name] = request
+                continue
+            if len(params) == 1 and not path_params and param.default is inspect._empty:
+                if request is None:
+                    request = _route_module._route_request(route, ctx, coerce_concrete=False)
+                kwargs[name] = request
+
+        response = route.handler(**kwargs) if kwargs else route.handler()
+        if inspect.isawaitable(response):
+            response = await response
+
+        if isinstance(response, Response):
+            payload = {
+                "status_code": int(getattr(response, "status_code", 200) or 200),
+                "headers": dict(getattr(response, "headers", ()) or ()),
+                "body": (
+                    response
+                    if hasattr(response, "body_iterator")
+                    else getattr(response, "body", b"")
+                ),
+            }
+            temp = getattr(ctx, "temp", None)
+            if isinstance(temp, dict):
+                temp.setdefault("route", {})["short_circuit"] = True
+                temp.setdefault("egress", {})["transport_response"] = payload
+                temp["egress"]["suppress_asgi_send"] = True
+            setattr(ctx, "transport_response", payload)
+            return
+
+        setattr(ctx, "result", response)
+        temp = getattr(ctx, "temp", None)
+        if isinstance(temp, dict):
+            temp.setdefault("egress", {})["result"] = response
+
+    setattr(_compat_invoke_route_handler, "__tigrbl_auth_dependency_injection_compat__", True)
+    _route_module._invoke_route_handler = _compat_invoke_route_handler
+
+
 def _install_table_rpc_call_compat() -> None:
     from tigrbl_concrete._concrete import tigrbl_app as _tigrbl_app_module
     from tigrbl_concrete._concrete import tigrbl_router as _tigrbl_router_module
@@ -857,6 +1016,7 @@ _tigrbl.TigrblRouter = TigrblRouter
 _install_table_handler_compat()
 _install_table_crud_ops_compat()
 _install_jsonrpc_egress_compat()
+_install_dependency_injection_compat()
 _install_table_rpc_call_compat()
 
 

@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260506T081602Z`
+- Generated at: `20260507T060913Z`
 - Deployment profile: `baseline`
 - Report mode: `live-probe`
 - Validated artifact source: `None`

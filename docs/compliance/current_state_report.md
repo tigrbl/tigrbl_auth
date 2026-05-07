@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `195`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `34`
+- release_evidence_dirty_checkout_path_count: `19`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`
