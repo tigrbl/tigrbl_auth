@@ -61,6 +61,8 @@ const App: React.FC = () => {
     set_session(nextSession);
     if (nextSession.must_change_password) {
       set_auth_mode('change-password');
+    } else {
+      set_auth_mode('login');
     }
     return nextSession;
   };
@@ -108,6 +110,7 @@ const App: React.FC = () => {
       if (nextSession.must_change_password) {
         set_auth_mode('change-password');
       } else {
+        set_auth_mode('login');
         await refresh_tenants();
       }
     } catch (error) {
@@ -152,6 +155,7 @@ const App: React.FC = () => {
     try {
       const nextSession = await adminAuthService.changePassword(currentPassword, newPassword);
       set_session(nextSession);
+      set_auth_mode('login');
       await refresh_tenants();
     } catch (error) {
       set_auth_error(error instanceof Error ? error.message : 'Failed to change password.');

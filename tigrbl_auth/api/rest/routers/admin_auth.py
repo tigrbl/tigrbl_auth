@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, JSONResponse, Request, Response, TigrblRouter, select, status
+from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, TigrblRouter, select, status
 from tigrbl_auth.api.rest.schemas import (
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
@@ -54,6 +54,11 @@ async def admin_login(request: Request, creds: CredsIn | None = None, db: AsyncS
     if set_cookie:
         response.headers["set-cookie"] = set_cookie
     return response
+
+
+@api.route("/admin/auth/login", methods=["GET"])
+async def admin_login_browser_redirect() -> Response:
+    return RedirectResponse(url="/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
 
 @api.route("/admin/auth/session", methods=["GET"], response_model=AdminSessionOut)
