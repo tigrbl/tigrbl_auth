@@ -1,0 +1,60 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1065"
+number: 1065
+slug: "profile-reference-union-for-runtime-configuration"
+title: "Profile reference union for runtime configuration"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` shall treat `--profile` as the single runtime configuration selector."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Use --profile as the single runtime configuration selector for packaged IDs and external YAML profile files."
+    at: "2026-05-08T08:05:29Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl_auth` shall treat `--profile` as the single runtime configuration selector.
+  
+  The `--profile` value shall be a profile reference union:
+  
+  - a packaged runtime profile identifier, such as `baseline`, `production`, `hardening`, `fapi2-security`, or `peer-claim`;
+  - an external YAML profile file path that conforms to the runtime profile schema.
+  
+  `--config` shall not become a second runtime configuration selector. The declared `--config` flag shall be removed or explicitly deprecated as an alias only if compatibility requires it. New profile-based configuration work shall use `--profile`.
+  
+  The deployment resolver remains the single supported composition point. Runtime code shall consume `ResolvedDeployment` and shall not branch independently on profile IDs, file paths, or config-file origins.
+  
+  ## Rationale
+  
+  The repository already governs packaged runtime profile YAMLs as executable configuration input. Adding a separate `--config` path for the same material would create two operator concepts for one responsibility.
+  
+  A profile reference union keeps the operator model simple: select the runtime profile. The selected profile may be packaged or external, but the CLI surface remains coherent and the resolver remains authoritative.
+  
+  This also resolves the current `--config` mismatch: it is declared in the CLI contract but is not wired, tested, or validated. The preferred resolution is not to build a duplicate config-file path, but to move external profile-file support into `--profile`.
+  
+  ## Operational Consequences
+  
+  `--profile production` shall resolve the packaged `production` profile.
+  
+  `--profile ./profiles/prod.yaml` shall resolve an external profile file after schema validation.
+  
+  Profile references must fail closed when the value is unknown, ambiguous, points outside allowed file semantics, has an unsupported extension, or contains malformed YAML.
+  
+  Environment variables and narrower CLI flags may override specific resolved fields only through the deployment resolver.
+  
+  Effective deployment provenance must report whether the profile came from a packaged ID or an external file path, plus any applied overrides.
+  
+  Generated discovery metadata, OpenAPI, OpenRPC, runtime route registration, JSON-RPC registration, diagnostics, and evidence artifacts must derive from the single resolved deployment.
+  
+  ## Related Decisions
+  
+  - `adr:1042` governs packaged runtime profile configuration as package input.
+  - `spc:1061` defines the existing runtime profile configuration contract.
+  - `iss:cli-config-flag-unwired-001` tracks the declared but unwired `--config` flag.

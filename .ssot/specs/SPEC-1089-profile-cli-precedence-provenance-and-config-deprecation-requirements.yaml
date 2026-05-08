@@ -1,0 +1,83 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1089"
+number: 1089
+slug: "profile-cli-precedence-provenance-and-config-deprecation-requirements"
+title: "Profile CLI precedence provenance and config deprecation requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines the CLI and provenance contract for profile reference union support."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define CLI precedence, provenance, validation, and --config removal or deprecation semantics."
+    at: "2026-05-08T08:05:54Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines the CLI and provenance contract for profile reference union support.
+  
+  Decision source: `adr:1065`.
+  
+  ## Scope
+  
+  This specification applies to `--profile`, the declared `--config` surface, validation commands, runtime startup, effective deployment provenance, and generated artifacts.
+  
+  ## Cli Contract
+  
+  `--profile` MUST be the first-class runtime configuration selector.
+  
+  The CLI MUST support:
+  
+  - `--profile <packaged-profile-id>`;
+  - `--profile <external-profile.yaml>`;
+  - `--profile <external-profile.yml>`.
+  
+  `--config` MUST NOT be a second runtime configuration selector. It MUST be removed from the generated CLI contract or explicitly deprecated as a compatibility alias that delegates to `--profile` without changing semantics.
+  
+  If both `--profile` and a compatibility `--config` alias are supplied, the CLI MUST fail closed unless an explicit transition rule exists.
+  
+  ## Precedence
+  
+  Resolution precedence MUST be:
+  
+  1. packaged base profile;
+  2. external profile file fields, when the profile reference is a path;
+  3. environment overrides;
+  4. narrower CLI flag overrides.
+  
+  All overrides MUST compose through the deployment resolver.
+  
+  ## Provenance
+  
+  Effective deployment output MUST report:
+  
+  - profile reference kind;
+  - packaged profile ID;
+  - external profile path when used;
+  - base profile ID when used;
+  - applied environment override keys;
+  - applied CLI override keys;
+  - redaction status for sensitive values.
+  
+  ## Validation Command Behavior
+  
+  The CLI MUST provide a validation path for profile references that can run without starting the server.
+  
+  Validation output MUST identify the selected reference kind, validation status, fail-closed errors, and resolved provenance.
+  
+  ## Generated Artifacts
+  
+  Discovery metadata, OpenAPI, OpenRPC, profile snapshots, and evidence artifacts MUST derive from the resolved deployment produced by the profile reference union.
+  
+  Generated artifacts MUST NOT describe `--config` as a separate configuration authority.
+  
+  ## Verification
+  
+  Verification MUST cover CLI wiring, `--profile` ID usage, `--profile` path usage, deprecated or removed `--config` behavior, precedence ordering, provenance reporting, validation command behavior, and generated artifact alignment.
+spec_kind: "normative"

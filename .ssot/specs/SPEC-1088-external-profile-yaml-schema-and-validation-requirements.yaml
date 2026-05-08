@@ -1,0 +1,78 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1088"
+number: 1088
+slug: "external-profile-yaml-schema-and-validation-requirements"
+title: "External profile YAML schema and validation requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines the external profile YAML schema used when `--profile` points to a profile file path."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define the schema and fail-closed validation model for external profile YAML files selected by --profile."
+    at: "2026-05-08T08:05:42Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines the external profile YAML schema used when `--profile` points to a profile file path.
+  
+  Decision source: `adr:1065`.
+  
+  ## Scope
+  
+  This specification applies only to external profile documents selected through `--profile`.
+  
+  It does not replace packaged runtime profile files or SSOT profile entities. External profile files are runtime inputs and must still resolve through the deployment resolver.
+  
+  ## Required Fields
+  
+  An external profile file MUST declare:
+  
+  - `id`: stable profile identifier for provenance and diagnostics.
+  - `title`: human-readable profile title.
+  - `base_profile`: packaged profile ID used as the base posture.
+  - `surfaces`: public, admin, rpc, and diagnostics surface settings.
+  - `surface_sets`: enabled surface set declarations.
+  - `flags`: standards, protocol, and feature flags.
+  - `protocol_slices`: enabled protocol families and slices.
+  - `security`: runtime security posture requirements.
+  - `contracts`: OpenAPI, OpenRPC, and discovery contract expectations.
+  
+  The schema MAY allow namespaced extension fields under an explicit extension object.
+  
+  ## Base Profile Semantics
+  
+  `base_profile` MUST reference a packaged runtime profile ID.
+  
+  The resolver MUST load the base packaged profile first, then apply the external profile fields as overrides through the same resolver path used for packaged profiles.
+  
+  External profiles MUST NOT bypass secure baseline constraints, admin-gate requirements, or fail-closed route/surface rules.
+  
+  ## Validation Rules
+  
+  The loader MUST fail closed for:
+  
+  - missing required fields;
+  - unknown top-level fields outside the extension namespace;
+  - duplicate profile IDs;
+  - unsupported base profiles;
+  - malformed booleans, arrays, maps, or enum values;
+  - internally inconsistent surface settings;
+  - contract expectations that contradict the resolved surface posture.
+  
+  ## Secret Handling
+  
+  External profile files MUST NOT expose raw secrets through provenance, diagnostics, contract metadata, or evidence snapshots.
+  
+  Secret-like values MUST be redacted or represented through stable non-secret references.
+  
+  ## Verification
+  
+  Verification MUST cover valid external profiles, missing required fields, unsupported base profiles, unknown fields, malformed types, inconsistent surfaces, contract contradictions, and redaction behavior.
+spec_kind: "normative"

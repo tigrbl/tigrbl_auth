@@ -1,0 +1,28 @@
+{
+  "status": "planned",
+  "scope": "profile reference union runtime configuration",
+  "adr_ids": [
+    "adr:1065"
+  ],
+  "spec_ids": [
+    "spc:1087",
+    "spc:1088",
+    "spc:1089"
+  ],
+  "feature_ids": [
+    "feat:profile-reference-union",
+    "feat:profile-id-resolution",
+    "feat:profile-path-resolution",
+    "feat:external-profile-yaml-validation",
+    "feat:profile-reference-fail-closed-errors",
+    "feat:profile-provenance-output",
+    "feat:cli-profile-runtime-wiring",
+    "feat:cli-config-deprecation-or-removal",
+    "feat:profile-reference-negative-coverage",
+    "feat:profile-reference-discovery-contract-alignment"
+  ],
+  "notes": [
+    "--profile is the single runtime configuration selector.",
+    "--config is governed as duplicate intent and must be removed or explicitly deprecated."
+  ]
+}

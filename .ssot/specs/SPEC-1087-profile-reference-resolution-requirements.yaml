@@ -1,0 +1,88 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1087"
+number: 1087
+slug: "profile-reference-resolution-requirements"
+title: "Profile reference resolution requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines how `tigrbl_auth` resolves a `--profile` value into a runtime profile source."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define --profile as a union of packaged profile IDs and external YAML profile paths."
+    at: "2026-05-08T08:05:35Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines how `tigrbl_auth` resolves a `--profile` value into a runtime profile source.
+  
+  Decision source: `adr:1065`.
+  
+  ## Scope
+  
+  This specification applies to CLI profile selection, profile loading, deployment resolution, and fail-closed behavior for packaged profile IDs and external profile YAML paths.
+  
+  ## Profile Reference Union
+  
+  The `--profile` argument MUST accept a profile reference union.
+  
+  Supported reference kinds:
+  
+  - `packaged-profile-id`: a stable packaged profile identifier.
+  - `external-profile-path`: a repository-relative or filesystem path to a YAML profile document.
+  
+  Unsupported reference kinds MUST fail closed until explicitly specified.
+  
+  ## Packaged Profile Resolution
+  
+  When `--profile` matches a packaged runtime profile ID, the resolver MUST load the matching profile from `tigrbl_auth/profiles/*.yaml`.
+  
+  Packaged resolution MUST preserve existing profile IDs and behavior for:
+  
+  - `baseline`
+  - `production`
+  - `hardening`
+  - `fapi2-security`
+  - `peer-claim`
+  
+  Unknown packaged profile IDs MUST fail closed.
+  
+  ## External Path Resolution
+  
+  When `--profile` resolves as a file path, the resolver MUST load the referenced YAML profile file and validate it against the external profile schema.
+  
+  External profile path resolution MUST:
+  
+  - support `.yaml` and `.yml` file extensions;
+  - reject missing files;
+  - reject directories;
+  - reject unsupported extensions;
+  - reject malformed YAML;
+  - reject profile IDs that conflict with packaged IDs unless the schema explicitly declares an override mode;
+  - preserve source path provenance in the resolved deployment.
+  
+  ## Ambiguity Handling
+  
+  If a profile value could be interpreted as both a packaged profile ID and a file path, packaged profile ID resolution MUST win unless the value contains path syntax or a YAML extension.
+  
+  Ambiguous or unsafe values MUST fail closed with a diagnostic that identifies the accepted forms.
+  
+  ## Verification
+  
+  Verification MUST cover:
+  
+  - packaged profile ID resolution;
+  - external YAML path resolution;
+  - unknown profile ID failure;
+  - missing path failure;
+  - malformed YAML failure;
+  - unsupported extension failure;
+  - ambiguous value handling;
+  - resolved deployment provenance for both reference kinds.
+spec_kind: "normative"
