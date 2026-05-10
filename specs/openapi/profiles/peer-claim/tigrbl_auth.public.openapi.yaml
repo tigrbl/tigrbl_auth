@@ -41,7 +41,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
   /authorize:
     get:
       operationId: get_authorize
@@ -83,7 +83,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       parameters:
       - name: response_type
         in: query
@@ -194,7 +194,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -311,7 +311,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       security:
       - bearerAuth: []
   /introspect:
@@ -349,7 +349,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -398,7 +398,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -465,7 +465,7 @@ paths:
                   type: boolean
   /register/{client_id}:
     get:
-      operationId: get_register_{client_id}
+      operationId: get_register_client_id
       summary: Dynamic client registration management endpoint
       tags:
       - oauth2
@@ -498,7 +498,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       parameters:
       - name: client_id
         in: path
@@ -511,7 +511,7 @@ paths:
         schema:
           type: string
     put:
-      operationId: put_register_{client_id}
+      operationId: put_register_client_id
       summary: Dynamic client registration management endpoint
       tags:
       - oauth2
@@ -544,7 +544,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       parameters:
       - name: client_id
         in: path
@@ -619,7 +619,7 @@ paths:
                 backchannel_logout_session_required:
                   type: boolean
     delete:
-      operationId: delete_register_{client_id}
+      operationId: delete_register_client_id
       summary: Dynamic client registration management endpoint
       tags:
       - oauth2
@@ -652,7 +652,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       parameters:
       - name: client_id
         in: path
@@ -699,7 +699,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -748,7 +748,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       parameters:
       - name: id_token_hint
         in: query
@@ -810,7 +810,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: false
         content:
@@ -880,7 +880,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -936,7 +936,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -1009,7 +1009,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
       requestBody:
         required: true
         content:
@@ -1083,7 +1083,51 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
+  /tenants/{tenant_slug}/.well-known/openid-configuration:
+    get:
+      operationId: get_tenants_tenant_slug__well_known_openid_configuration
+      summary: Tenant-scoped OIDC discovery document
+      tags:
+      - .well-known
+      - tenant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoveryDocument'
+      x-required-flags:
+      - enable_oidc_discovery
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: peer-claim
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - urn:ietf:params:oauth:grant-type:jwt-bearer
+        - urn:ietf:params:oauth:grant-type:device_code
+        - urn:ietf:params:oauth:grant-type:token-exchange
+        allowed_response_types:
+        - code
+        par_required: true
+        sender_constraint_required: true
+        dpop_supported: true
+        mtls_supported: true
+        resource_indicators_supported: true
+        request_objects_supported: true
+        rich_authorization_requests_supported: true
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: true
+      parameters:
+      - name: tenant_slug
+        in: path
+        required: true
+        schema:
+          type: string
   /.well-known/oauth-authorization-server:
     get:
       operationId: get__well_known_oauth_authorization_server
@@ -1120,7 +1164,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
   /.well-known/oauth-protected-resource:
     get:
       operationId: get__well_known_oauth_protected_resource
@@ -1157,7 +1201,7 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
   /.well-known/jwks.json:
     get:
       operationId: get__well_known_jwks_json
@@ -1194,7 +1238,51 @@ paths:
         rich_authorization_requests_supported: true
         query_bearer_disabled: true
         form_bearer_disabled: true
-        jwt_access_token_profile_supported: false
+        jwt_access_token_profile_supported: true
+  /tenants/{tenant_slug}/.well-known/jwks.json:
+    get:
+      operationId: get_tenants_tenant_slug__well_known_jwks_json
+      summary: Tenant-scoped JSON Web Key Set
+      tags:
+      - .well-known
+      - tenant
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwksDocument'
+      x-required-flags:
+      - enable_rfc7517
+      - enable_rfc8615
+      x-runtime-profile:
+        profile: peer-claim
+        allowed_grant_types:
+        - authorization_code
+        - client_credentials
+        - refresh_token
+        - urn:ietf:params:oauth:grant-type:jwt-bearer
+        - urn:ietf:params:oauth:grant-type:device_code
+        - urn:ietf:params:oauth:grant-type:token-exchange
+        allowed_response_types:
+        - code
+        par_required: true
+        sender_constraint_required: true
+        dpop_supported: true
+        mtls_supported: true
+        resource_indicators_supported: true
+        request_objects_supported: true
+        rich_authorization_requests_supported: true
+        query_bearer_disabled: true
+        form_bearer_disabled: true
+        jwt_access_token_profile_supported: true
+      parameters:
+      - name: tenant_slug
+        in: path
+        required: true
+        schema:
+          type: string
 components:
   securitySchemes:
     bearerAuth:
@@ -1492,6 +1580,7 @@ x-tigrbl-auth:
   - RFC 8628
   - RFC 8693
   - RFC 8707
+  - RFC 9068
   - RFC 9101
   - RFC 9126
   - RFC 9207

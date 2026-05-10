@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260509T204812Z`
+- Generated at: `20260510T100313Z`
 - Deployment profile: `baseline`
 - Report mode: `live-probe`
 - Validated artifact source: `None`
@@ -14,11 +14,11 @@
 - Placeholder-supported runners: `0`
 - Declared CI-installable runners: `3`
 - Declared CI install/probe complete: `True`
-- Execution probes enabled: `False`
-- Surface probe passed: `False`
-- Surface probe endpoints: `0`
-- Serve-check passes: `0`
-- Execution probe complete: `False`
+- Execution probes enabled: `True`
+- Surface probe passed: `True`
+- Surface probe endpoints: `4`
+- Serve-check passes: `1`
+- Execution probe complete: `True`
 - Required runtime cells: `14`
 - Validated runtime cells present: `0`
 - Validated runtime cells passed: `0`
@@ -27,15 +27,15 @@
 ## Application Probe
 
 - App factory: `tigrbl_auth.api.app.build_app`
-- Message: Application factory materialized successfully with 7 active routes and 25 active targets.
+- Message: Application factory materialized successfully with 8 active routes and 24 active targets.
 
 ## Surface Probe
 
-- Executed: `False`
-- Passed: `False`
-- Message: Execution probes were disabled for this invocation.
-- Endpoint count: `0`
-- Passed endpoints: `0`
+- Executed: `True`
+- Passed: `True`
+- Message: Runtime HTTP surface probes completed successfully.
+- Endpoint count: `4`
+- Passed endpoints: `4`
 - Failed endpoints: `0`
 
 ## Runner Profiles
@@ -48,7 +48,7 @@
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
-- Serve check message: Execution probes were disabled for this invocation.
+- Serve check message: Skipped because the runner is not installed in this environment.
 
 ### Tigrcorn (`tigrcorn`)
 
@@ -58,7 +58,7 @@
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
-- Serve check message: Execution probes were disabled for this invocation.
+- Serve check message: Skipped because the runner is not installed in this environment.
 
 ### Uvicorn (`uvicorn`)
 
@@ -67,5 +67,5 @@
 - Module: `uvicorn`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
-- Serve check passed: `False`
-- Serve check message: Execution probes were disabled for this invocation.
+- Serve check passed: `True`
+- Serve check message: Application factory materialized successfully with 9 active routes and 25 active targets.

@@ -12,6 +12,12 @@ from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
 from tigrbl_auth.config.profile_loader import load_profile_reference
 from tigrbl_auth.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
+from tigrbl_auth.services.tenant_discovery import (
+    TENANT_JWKS_PATH,
+    TENANT_OPENID_CONFIGURATION_PATH,
+    build_tenant_openid_config,
+    tenant_issuer,
+)
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.oauth2.assertion_framework import build_assertion_contract_examples
 from tigrbl_auth.standards.oauth2.jwt_client_auth import build_client_assertion_contract_examples
@@ -237,8 +243,9 @@ def _schema_components() -> dict[str, Any]:
 
 def _openapi_operation(path: str, method: str, meta: dict[str, Any], deployment: Any) -> dict[str, Any]:
     policy = runtime_security_profile(deployment)
+    operation_id = path.strip("/").replace("/", "_").replace(".", "_").replace("-", "_").replace("{", "").replace("}", "")
     op: dict[str, Any] = {
-        "operationId": f"{method}_{path.strip('/').replace('/', '_').replace('.', '_').replace('-', '_') or 'root'}",
+        "operationId": f"{method}_{operation_id or 'root'}",
         "summary": meta.get("summary", path),
         "tags": list(meta.get("tags", [])),
         "responses": {"200": {"description": "Success", "content": _json_content("#/components/schemas/GenericResult")}},
@@ -259,6 +266,10 @@ def _openapi_operation(path: str, method: str, meta: dict[str, Any], deployment:
             "jwt_access_token_profile_supported": deployment.flag_enabled("enable_rfc9068"),
         },
     }
+    if "{tenant_slug}" in path:
+        op["parameters"] = [
+            {"name": "tenant_slug", "in": "path", "required": True, "schema": {"type": "string"}}
+        ]
     if path == "/authorize":
         op["parameters"] = [
             {"name": "response_type", "in": "query", "required": True, "schema": {"type": "string", "enum": list(policy.allowed_response_types)}},
@@ -461,13 +472,13 @@ def _openapi_operation(path: str, method: str, meta: dict[str, Any], deployment:
             parameters.append({"name": "X-Client-Cert-SHA256", "in": "header", "required": False, "schema": {"type": "string"}})
         if parameters:
             op["parameters"] = parameters
-    elif path == "/.well-known/openid-configuration":
+    elif path in {"/.well-known/openid-configuration", TENANT_OPENID_CONFIGURATION_PATH}:
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/DiscoveryDocument")
     elif path == "/.well-known/oauth-authorization-server":
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/AuthorizationServerMetadata")
     elif path == "/.well-known/oauth-protected-resource":
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/ProtectedResourceMetadata")
-    elif path == "/.well-known/jwks.json":
+    elif path in {"/.well-known/jwks.json", TENANT_JWKS_PATH}:
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/JwksDocument")
     return op
 
@@ -705,6 +716,17 @@ def build_jwks_snapshot(deployment: Any, *, profile_label: str = "active") -> di
     }
 
 
+def build_tenant_jwks_snapshot(deployment: Any, *, tenant_slug: str, profile_label: str = "active") -> dict[str, Any]:
+    return {
+        "keys": [],
+        "profile": deployment.profile,
+        "profile_label": profile_label,
+        "tenant_slug": tenant_slug,
+        "issuer": tenant_issuer(deployment.issuer, tenant_slug),
+        "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts",
+    }
+
+
 def build_protected_resource_metadata_snapshot(deployment: Any) -> dict[str, Any]:
     methods = ["header"]
     if bool(deployment.flags.get("enable_rfc6750_form", False)):
@@ -743,6 +765,17 @@ def write_discovery_artifacts(repo_root: Path, deployment: Any, *, profile_label
         path = profile_dir / filename
         path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
         written[filename] = path
+    tenant_slug = "tenant-a"
+    tenant_dir = profile_dir / "tenants" / tenant_slug
+    tenant_dir.mkdir(parents=True, exist_ok=True)
+    tenant_artifacts = {
+        "openid-configuration.json": build_tenant_openid_config(deployment, tenant_slug),
+        "jwks.json": build_tenant_jwks_snapshot(deployment, tenant_slug=tenant_slug, profile_label=profile_label),
+    }
+    for filename, payload in tenant_artifacts.items():
+        path = tenant_dir / filename
+        path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        written[f"tenants/{tenant_slug}/{filename}"] = path
     protected_path = profile_dir / "oauth-protected-resource.json"
     if "oauth-protected-resource.json" not in artifacts and protected_path.exists():
         protected_path.unlink()

@@ -460,7 +460,11 @@ DOC_REF_SCAN_EXCLUDE = {
     "docs/compliance/artifact_truthfulness_report.md",
     "docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md",
 }
-ROUTE_CONSTANTS = {"JWKS_PATH": "/.well-known/jwks.json"}
+ROUTE_CONSTANTS = {
+    "JWKS_PATH": "/.well-known/jwks.json",
+    "TENANT_JWKS_PATH": "/tenants/{tenant_slug}/.well-known/jwks.json",
+    "TENANT_OPENID_CONFIGURATION_PATH": "/tenants/{tenant_slug}/.well-known/openid-configuration",
+}
 WELL_KNOWN_ROUTE_CONSTANTS = {"oauth_protected_resource": "/.well-known/oauth-protected-resource"}
 
 

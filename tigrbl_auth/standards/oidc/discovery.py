@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
@@ -14,6 +15,13 @@ from tigrbl_auth.config.deployment import (
     resolve_deployment,
 )
 from tigrbl_auth.config.settings import settings
+from tigrbl_auth.services.operator_service import build_operator_jwks_payload
+from tigrbl_auth.services.tenant_discovery import (
+    TENANT_JWKS_PATH,
+    TENANT_OPENID_CONFIGURATION_PATH,
+    build_tenant_openid_config,
+    enabled_tenant_record,
+)
 from tigrbl_auth.services.jwks_service import build_jwks_document
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
@@ -71,12 +79,32 @@ async def openid_configuration(request: Request):
     return build_openid_config(deployment)
 
 
+@discovery_api.route(TENANT_OPENID_CONFIGURATION_PATH, methods=["GET"], tags=[".well-known", "tenant"])
+async def tenant_openid_configuration(request: Request, tenant_slug: str):
+    deployment = deployment_from_request(request, settings)
+    if not deployment.route_enabled(TENANT_OPENID_CONFIGURATION_PATH):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant OIDC discovery disabled")
+    if enabled_tenant_record(Path.cwd(), tenant_slug) is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
+    return build_tenant_openid_config(deployment, tenant_slug)
+
+
 @jwks_api.route(JWKS_PATH, methods=["GET"], tags=[".well-known"])
 async def jwks(request: Request):
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled(JWKS_PATH):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "JWKS publication disabled")
     return await build_jwks_document()
+
+
+@jwks_api.route(TENANT_JWKS_PATH, methods=["GET"], tags=[".well-known", "tenant"])
+async def tenant_jwks(request: Request, tenant_slug: str):
+    deployment = deployment_from_request(request, settings)
+    if not deployment.route_enabled(TENANT_JWKS_PATH):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant JWKS publication disabled")
+    if enabled_tenant_record(Path.cwd(), tenant_slug) is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
+    return build_operator_jwks_payload(Path.cwd(), tenant=tenant_slug)
 
 
 def _include_if_missing(app: TigrblApp, router_obj: TigrblRouter, path: str) -> None:

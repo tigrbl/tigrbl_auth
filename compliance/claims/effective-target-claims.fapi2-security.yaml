@@ -95,9 +95,11 @@ effective_deployment:
   - par
   - token-exchange
   - openid-configuration
+  - tenant-openid-configuration
   - oauth-authorization-server-metadata
   - oauth-protected-resource-metadata
   - jwks
+  - tenant-jwks
   active_routes:
   - /login
   - /authorize
@@ -112,9 +114,11 @@ effective_deployment:
   - /par
   - /token/exchange
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_contract_routes:
   - /login
   - /authorize
@@ -129,9 +133,11 @@ effective_deployment:
   - /par
   - /token/exchange
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_discovery_routes:
   - /userinfo
   - /introspect
@@ -141,9 +147,11 @@ effective_deployment:
   - /device_authorization
   - /par
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_targets:
   - RFC 6749
   - RFC 6750

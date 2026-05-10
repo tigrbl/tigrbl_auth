@@ -23,6 +23,8 @@
           "/.well-known/openid-configuration",
           "/authorize",
           "/login",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token"
         ],
         "actual_paths": [
@@ -31,11 +33,13 @@
           "/.well-known/openid-configuration",
           "/authorize",
           "/login",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token"
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 6
+        "path_count": 8
       },
       "production": {
         "expected_paths": [
@@ -50,6 +54,8 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/userinfo"
         ],
@@ -65,12 +71,14 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/userinfo"
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 13
+        "path_count": 15
       },
       "hardening": {
         "expected_paths": [
@@ -87,6 +95,8 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
@@ -105,13 +115,15 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 16
+        "path_count": 18
       },
       "fapi2-security": {
         "expected_paths": [
@@ -128,6 +140,8 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
@@ -146,13 +160,15 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 16
+        "path_count": 18
       },
       "peer-claim": {
         "expected_paths": [
@@ -169,6 +185,8 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
@@ -187,13 +205,15 @@
           "/register",
           "/register/{client_id}",
           "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token",
           "/token/exchange",
           "/userinfo"
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 16
+        "path_count": 18
       }
     },
     "discovery_profiles": {
@@ -279,13 +299,13 @@
     "runner_profiles": {
       "baseline": {
         "application_hashes": {
-          "hypercorn": "6fbc757a0250058cb704ed40581167039d41c994ed1f4f18f45057bb8ca9a8c5",
-          "tigrcorn": "6fbc757a0250058cb704ed40581167039d41c994ed1f4f18f45057bb8ca9a8c5",
-          "uvicorn": "6fbc757a0250058cb704ed40581167039d41c994ed1f4f18f45057bb8ca9a8c5"
+          "hypercorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+          "tigrcorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+          "uvicorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445"
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "2bdc8c8562ff953b1c4844268cfd7508b06b2aea79b23f757492848c709cd1b3",
+            "openapi": "b1af258f4b1b2782f8062bec8a4211420ff9e569ef86e8f876c181a628ec0c07",
             "openrpc": "74dea49c1e44989b32345eb026f6bd11abff3ba3c23b11a3c5fc100c1be1a2c5",
             "discovery": {
               "openid-configuration.json": "2c34ca54e7e4e9917984020fb5d2318a58c1abdeefa91c1b9bf1171fb675a176",
@@ -294,7 +314,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "2bdc8c8562ff953b1c4844268cfd7508b06b2aea79b23f757492848c709cd1b3",
+            "openapi": "b1af258f4b1b2782f8062bec8a4211420ff9e569ef86e8f876c181a628ec0c07",
             "openrpc": "74dea49c1e44989b32345eb026f6bd11abff3ba3c23b11a3c5fc100c1be1a2c5",
             "discovery": {
               "openid-configuration.json": "2c34ca54e7e4e9917984020fb5d2318a58c1abdeefa91c1b9bf1171fb675a176",
@@ -303,7 +323,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "2bdc8c8562ff953b1c4844268cfd7508b06b2aea79b23f757492848c709cd1b3",
+            "openapi": "b1af258f4b1b2782f8062bec8a4211420ff9e569ef86e8f876c181a628ec0c07",
             "openrpc": "74dea49c1e44989b32345eb026f6bd11abff3ba3c23b11a3c5fc100c1be1a2c5",
             "discovery": {
               "openid-configuration.json": "2c34ca54e7e4e9917984020fb5d2318a58c1abdeefa91c1b9bf1171fb675a176",
@@ -317,13 +337,13 @@
       },
       "production": {
         "application_hashes": {
-          "hypercorn": "07d4c96fe6c7d921da544a28db1b49064de13f7f2d40ef11454bdcc80daf9113",
-          "tigrcorn": "07d4c96fe6c7d921da544a28db1b49064de13f7f2d40ef11454bdcc80daf9113",
-          "uvicorn": "07d4c96fe6c7d921da544a28db1b49064de13f7f2d40ef11454bdcc80daf9113"
+          "hypercorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7",
+          "tigrcorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7",
+          "uvicorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7"
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "9278afe4808c192c347fac7719667dee61e7acee77e27910f9cab52d138d4936",
+            "openapi": "bbf608c30144ba874f5ac25fcd3848dea78687760ec52ea2fc02f8608b969c36",
             "openrpc": "97bda7d59baa1a1ffc3fe308c8aac5204f80e063b66778e218178fa5a968062a",
             "discovery": {
               "openid-configuration.json": "800152f289356a1dbc14586fda4ae424a4860c6e4f9a561eee38797e41a7d011",
@@ -333,7 +353,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "9278afe4808c192c347fac7719667dee61e7acee77e27910f9cab52d138d4936",
+            "openapi": "bbf608c30144ba874f5ac25fcd3848dea78687760ec52ea2fc02f8608b969c36",
             "openrpc": "97bda7d59baa1a1ffc3fe308c8aac5204f80e063b66778e218178fa5a968062a",
             "discovery": {
               "openid-configuration.json": "800152f289356a1dbc14586fda4ae424a4860c6e4f9a561eee38797e41a7d011",
@@ -343,7 +363,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "9278afe4808c192c347fac7719667dee61e7acee77e27910f9cab52d138d4936",
+            "openapi": "bbf608c30144ba874f5ac25fcd3848dea78687760ec52ea2fc02f8608b969c36",
             "openrpc": "97bda7d59baa1a1ffc3fe308c8aac5204f80e063b66778e218178fa5a968062a",
             "discovery": {
               "openid-configuration.json": "800152f289356a1dbc14586fda4ae424a4860c6e4f9a561eee38797e41a7d011",
@@ -358,13 +378,13 @@
       },
       "hardening": {
         "application_hashes": {
-          "hypercorn": "e722a311d3bee653fcbb1ab7bf9bb9910c78adde8f0317583a46c187e30f6cb8",
-          "tigrcorn": "e722a311d3bee653fcbb1ab7bf9bb9910c78adde8f0317583a46c187e30f6cb8",
-          "uvicorn": "e722a311d3bee653fcbb1ab7bf9bb9910c78adde8f0317583a46c187e30f6cb8"
+          "hypercorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c",
+          "tigrcorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c",
+          "uvicorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c"
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "904a5aa663df657a84aed773d160f2b24b1d761c612ff10d3e46cff7181c6393",
+            "openapi": "1fcf54b6a9464c52fb0d88880a9910237ef4f2f94cf022c38f4e8c061bc5cba6",
             "openrpc": "c00d50b37c1632457a2ef97efefcb77d7f36a8e6d5069c698142b923e3ca6429",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",
@@ -374,7 +394,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "904a5aa663df657a84aed773d160f2b24b1d761c612ff10d3e46cff7181c6393",
+            "openapi": "1fcf54b6a9464c52fb0d88880a9910237ef4f2f94cf022c38f4e8c061bc5cba6",
             "openrpc": "c00d50b37c1632457a2ef97efefcb77d7f36a8e6d5069c698142b923e3ca6429",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",
@@ -384,7 +404,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "904a5aa663df657a84aed773d160f2b24b1d761c612ff10d3e46cff7181c6393",
+            "openapi": "1fcf54b6a9464c52fb0d88880a9910237ef4f2f94cf022c38f4e8c061bc5cba6",
             "openrpc": "c00d50b37c1632457a2ef97efefcb77d7f36a8e6d5069c698142b923e3ca6429",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",
@@ -399,13 +419,13 @@
       },
       "fapi2-security": {
         "application_hashes": {
-          "hypercorn": "dd5e960dec20e2200aafdd6978307336a13d29c849704f85256a7cf0cc2b4fc9",
-          "tigrcorn": "dd5e960dec20e2200aafdd6978307336a13d29c849704f85256a7cf0cc2b4fc9",
-          "uvicorn": "dd5e960dec20e2200aafdd6978307336a13d29c849704f85256a7cf0cc2b4fc9"
+          "hypercorn": "26bafa2c88ea7f04cba62a7e60b781eee7e2cc55c386a25432c60ade5f1ded43",
+          "tigrcorn": "26bafa2c88ea7f04cba62a7e60b781eee7e2cc55c386a25432c60ade5f1ded43",
+          "uvicorn": "26bafa2c88ea7f04cba62a7e60b781eee7e2cc55c386a25432c60ade5f1ded43"
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "4b993195a74153a43829c3811cf08d0387d6839e20389a8b0decf015828d3ecd",
+            "openapi": "ac10847836e5fac4012a6b0d8d845411abb496058954b9643c9e0e41c821213b",
             "openrpc": "e17b1f43f00261a5ae6fcbc9278eae0c58ade8b334e72770ea1bdce30f5db459",
             "discovery": {
               "openid-configuration.json": "2f21870b99328a06fc6236fc26ff88f9d7c428bae26421cccb19501d9e72dc4f",
@@ -415,7 +435,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "4b993195a74153a43829c3811cf08d0387d6839e20389a8b0decf015828d3ecd",
+            "openapi": "ac10847836e5fac4012a6b0d8d845411abb496058954b9643c9e0e41c821213b",
             "openrpc": "e17b1f43f00261a5ae6fcbc9278eae0c58ade8b334e72770ea1bdce30f5db459",
             "discovery": {
               "openid-configuration.json": "2f21870b99328a06fc6236fc26ff88f9d7c428bae26421cccb19501d9e72dc4f",
@@ -425,7 +445,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "4b993195a74153a43829c3811cf08d0387d6839e20389a8b0decf015828d3ecd",
+            "openapi": "ac10847836e5fac4012a6b0d8d845411abb496058954b9643c9e0e41c821213b",
             "openrpc": "e17b1f43f00261a5ae6fcbc9278eae0c58ade8b334e72770ea1bdce30f5db459",
             "discovery": {
               "openid-configuration.json": "2f21870b99328a06fc6236fc26ff88f9d7c428bae26421cccb19501d9e72dc4f",
@@ -440,13 +460,13 @@
       },
       "peer-claim": {
         "application_hashes": {
-          "hypercorn": "34cf542f330fe8a3a7b663012582d2b582eae063c8abf1d23751527f29b325c6",
-          "tigrcorn": "34cf542f330fe8a3a7b663012582d2b582eae063c8abf1d23751527f29b325c6",
-          "uvicorn": "34cf542f330fe8a3a7b663012582d2b582eae063c8abf1d23751527f29b325c6"
+          "hypercorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787",
+          "tigrcorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787",
+          "uvicorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787"
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "2598036e03affea3df4a514ef7d1befb1632574e04d9f4727243ec0811134262",
+            "openapi": "f5ddf739c25f9dff38b8bfe3abe1326fc200bf40e2137d217c24411acb52a074",
             "openrpc": "24051e8b67d3bf8c841c45fd241903309eb6b160f0ab1a343a51a71930fa6b8b",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",
@@ -456,7 +476,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "2598036e03affea3df4a514ef7d1befb1632574e04d9f4727243ec0811134262",
+            "openapi": "f5ddf739c25f9dff38b8bfe3abe1326fc200bf40e2137d217c24411acb52a074",
             "openrpc": "24051e8b67d3bf8c841c45fd241903309eb6b160f0ab1a343a51a71930fa6b8b",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",
@@ -466,7 +486,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "2598036e03affea3df4a514ef7d1befb1632574e04d9f4727243ec0811134262",
+            "openapi": "f5ddf739c25f9dff38b8bfe3abe1326fc200bf40e2137d217c24411acb52a074",
             "openrpc": "24051e8b67d3bf8c841c45fd241903309eb6b160f0ab1a343a51a71930fa6b8b",
             "discovery": {
               "openid-configuration.json": "734575c975b9172242caccc2fba22551114731b3d1b387c7b2cea303f40c218d",

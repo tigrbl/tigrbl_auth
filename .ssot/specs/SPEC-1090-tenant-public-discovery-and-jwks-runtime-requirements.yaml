@@ -1,0 +1,77 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1090"
+number: 1090
+slug: "tenant-public-discovery-and-jwks-runtime-requirements"
+title: "Tenant public discovery and JWKS runtime requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines runtime/API tenant public discovery and JWKS behavior."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define runtime/API tenant discovery and JWKS requirements."
+    at: "2026-05-10T09:59:17Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines runtime/API tenant public discovery and JWKS behavior.
+  
+  Decision source: `adr:1066`.
+  
+  ## Scope
+  
+  This specification applies to the runtime public routes, generated public OpenAPI contracts, discovery snapshots, operator JWKS publication, tenant token issuer validation, and cross-tenant leakage guards.
+  
+  UIX tenant JWKS presentation is explicitly out of scope.
+  
+  ## Tenant Issuer
+  
+  For an enabled tenant with slug `{tenant_slug}`, the tenant issuer MUST be:
+  
+  `{root_issuer}/tenants/{tenant_slug}`.
+  
+  Tenant-scoped discovery MUST emit that value in `issuer`.
+  
+  ## Public Routes
+  
+  The runtime MUST expose:
+  
+  - `GET /tenants/{tenant_slug}/.well-known/openid-configuration`;
+  - `GET /tenants/{tenant_slug}/.well-known/jwks.json`.
+  
+  Both routes MUST return `404` when the tenant is missing or disabled.
+  
+  ## Discovery Metadata
+  
+  Tenant discovery MUST emit a tenant-specific `jwks_uri`:
+  
+  `{root_issuer}/tenants/{tenant_slug}/.well-known/jwks.json`.
+  
+  It MUST NOT emit the root `/.well-known/jwks.json` for tenant issuer validation.
+  
+  ## Jwks Publication
+  
+  Tenant JWKS MUST include only public key material owned by the requested tenant.
+  
+  Active and next keys MUST be visible. Retired keys MUST be excluded unless the existing key lifecycle explicitly marks them publishable.
+  
+  Operator `keys publish-jwks --tenant X` and runtime `GET /tenants/X/.well-known/jwks.json` MUST use the same selection logic.
+  
+  ## Generated Artifacts
+  
+  Generated OpenAPI contracts MUST include both tenant routes with `tenant_slug` path parameters.
+  
+  Discovery snapshot generation MUST include tenant examples under stable profile paths.
+  
+  ## Validation Contract
+  
+  Tenant token validation MUST require `iss` to match the tenant-scoped issuer and resolve to that tenant's JWKS.
+  
+  Cross-tenant tests MUST prove tenant A routes never expose tenant B keys or tenant B metadata.
+spec_kind: "normative"

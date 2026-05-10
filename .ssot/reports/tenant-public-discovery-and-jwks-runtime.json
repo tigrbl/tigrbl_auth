@@ -1,0 +1,26 @@
+{
+  "id": "evd:tenant-public-discovery-and-jwks-runtime",
+  "title": "Tenant public discovery and JWKS runtime evidence",
+  "status": "passed",
+  "kind": "pytest-runtime-api",
+  "tier": "T1",
+  "generated_at": "2026-05-10T09:57:15Z",
+  "boundary_id": "bnd:tenant-public-discovery-and-jwks-runtime",
+  "commands": [
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/features/test_tenant_jwks_discovery.py",
+      "result": "12 passed, 1 skipped"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/unit/test_cli_contract.py tests/unit/test_runtime_profile_configuration.py",
+      "result": "10 passed"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/conformance/operator/test_cli_keys_lifecycle.py",
+      "result": "1 passed"
+    }
+  ],
+  "excluded_scope": [
+    "feat:uix-tenant-jwks-publication-view"
+  ]
+}

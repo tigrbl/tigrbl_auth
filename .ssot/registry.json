@@ -16956,7 +16956,7 @@
       "id": "feat:tenant-scoped-issuer-boundary",
       "title": "Tenant-scoped issuer boundary",
       "description": "Defines each enabled tenant as its own public issuer boundary with stable issuer URL semantics.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -16968,7 +16968,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-scoped-issuer-boundary"
       ],
@@ -16981,7 +16983,7 @@
       "id": "feat:route-tenant-openid-configuration",
       "title": "Tenant OpenID configuration route",
       "description": "Adds GET /tenants/{tenant_slug}/.well-known/openid-configuration.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -16993,7 +16995,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:route-tenant-openid-configuration"
       ],
@@ -17006,7 +17010,7 @@
       "id": "feat:route-tenant-jwks-json",
       "title": "Tenant JWKS route",
       "description": "Adds GET /tenants/{tenant_slug}/.well-known/jwks.json.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17018,7 +17022,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:route-tenant-jwks-json"
       ],
@@ -17031,7 +17037,7 @@
       "id": "feat:tenant-discovery-jwks-uri",
       "title": "Tenant discovery jwks_uri",
       "description": "Ensures tenant discovery emits a tenant-specific jwks_uri, not the root /.well-known/jwks.json.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17043,7 +17049,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-discovery-jwks-uri"
       ],
@@ -17056,7 +17064,7 @@
       "id": "feat:tenant-jwks-key-filtering",
       "title": "Tenant JWKS key filtering",
       "description": "Ensures tenant JWKS returns only keys owned by that tenant.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17068,7 +17076,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-jwks-key-filtering"
       ],
@@ -17081,7 +17091,7 @@
       "id": "feat:tenant-jwks-rotation-visibility",
       "title": "Tenant JWKS rotation visibility",
       "description": "Defines active, next, and retired publication behavior during tenant key rotation.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17093,7 +17103,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-jwks-rotation-visibility"
       ],
@@ -17106,7 +17118,7 @@
       "id": "feat:tenant-public-discovery-disabled-policy",
       "title": "Tenant public discovery disabled policy",
       "description": "Defines disabled or missing tenant behavior for public discovery routes, with 404 as the expected enumeration-resistant default.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17118,7 +17130,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-public-discovery-disabled-policy"
       ],
@@ -17131,7 +17145,7 @@
       "id": "feat:operator-tenant-jwks-runtime-parity",
       "title": "Operator tenant JWKS runtime parity",
       "description": "Ensures keys publish-jwks --tenant X and runtime GET /tenants/X/.well-known/jwks.json agree on key selection and public material.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17143,7 +17157,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:operator-tenant-jwks-runtime-parity"
       ],
@@ -17156,7 +17172,7 @@
       "id": "feat:openapi-tenant-discovery-routes",
       "title": "OpenAPI tenant discovery routes",
       "description": "Adds tenant discovery and JWKS routes to generated OpenAPI contracts.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17168,7 +17184,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:openapi-tenant-discovery-routes"
       ],
@@ -17181,7 +17199,7 @@
       "id": "feat:discovery-snapshot-tenant-profile-artifacts",
       "title": "Discovery snapshot tenant profile artifacts",
       "description": "Extends discovery snapshot generation to include tenant-scoped examples per profile.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17193,7 +17211,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:discovery-snapshot-tenant-profile-artifacts"
       ],
@@ -17206,7 +17226,7 @@
       "id": "feat:tenant-issuer-token-validation-contract",
       "title": "Tenant issuer token validation contract",
       "description": "Locks the validation invariant that token iss must match the tenant discovery issuer and resolve to that tenant JWKS.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17218,7 +17238,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-issuer-token-validation-contract"
       ],
@@ -17231,7 +17253,7 @@
       "id": "feat:tenant-jwks-cross-tenant-leakage-guard",
       "title": "Tenant JWKS cross-tenant leakage guard",
       "description": "Negative coverage proving tenant A routes never expose tenant B keys or metadata.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17243,7 +17265,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1090"
+      ],
       "claim_ids": [
         "clm:tenant-jwks-cross-tenant-leakage-guard"
       ],
@@ -32519,7 +32543,7 @@
     {
       "id": "tst:tenant-scoped-issuer-boundary.contract",
       "title": "Tenant-scoped issuer boundary contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32529,13 +32553,14 @@
         "clm:tenant-scoped-issuer-boundary"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:route-tenant-openid-configuration.contract",
       "title": "Tenant OpenID configuration route contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32545,13 +32570,14 @@
         "clm:route-tenant-openid-configuration"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:route-tenant-jwks-json.contract",
       "title": "Tenant JWKS route contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32561,13 +32587,14 @@
         "clm:route-tenant-jwks-json"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-discovery-jwks-uri.contract",
       "title": "Tenant discovery jwks_uri contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32577,13 +32604,14 @@
         "clm:tenant-discovery-jwks-uri"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-jwks-key-filtering.contract",
       "title": "Tenant JWKS key filtering contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32593,13 +32621,14 @@
         "clm:tenant-jwks-key-filtering"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-jwks-rotation-visibility.contract",
       "title": "Tenant JWKS rotation visibility contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32609,13 +32638,14 @@
         "clm:tenant-jwks-rotation-visibility"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-public-discovery-disabled-policy.contract",
       "title": "Tenant public discovery disabled policy contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32625,13 +32655,14 @@
         "clm:tenant-public-discovery-disabled-policy"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:operator-tenant-jwks-runtime-parity.contract",
       "title": "Operator tenant JWKS runtime parity contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32641,13 +32672,14 @@
         "clm:operator-tenant-jwks-runtime-parity"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:openapi-tenant-discovery-routes.contract",
       "title": "OpenAPI tenant discovery routes contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32657,13 +32689,14 @@
         "clm:openapi-tenant-discovery-routes"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:discovery-snapshot-tenant-profile-artifacts.contract",
       "title": "Discovery snapshot tenant profile artifacts contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32673,13 +32706,14 @@
         "clm:discovery-snapshot-tenant-profile-artifacts"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-issuer-token-validation-contract.contract",
       "title": "Tenant issuer token validation contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32689,13 +32723,14 @@
         "clm:tenant-issuer-token-validation-contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
       "id": "tst:tenant-jwks-cross-tenant-leakage-guard.contract",
       "title": "Tenant JWKS cross-tenant leakage guard contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -32705,7 +32740,8 @@
         "clm:tenant-jwks-cross-tenant-leakage-guard"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45293,7 +45329,8 @@
         "tst:tenant-scoped-issuer-boundary.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45310,7 +45347,8 @@
         "tst:route-tenant-openid-configuration.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45327,7 +45365,8 @@
         "tst:route-tenant-jwks-json.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45344,7 +45383,8 @@
         "tst:tenant-discovery-jwks-uri.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45361,7 +45401,8 @@
         "tst:tenant-jwks-key-filtering.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45378,7 +45419,8 @@
         "tst:tenant-jwks-rotation-visibility.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45395,7 +45437,8 @@
         "tst:tenant-public-discovery-disabled-policy.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45412,7 +45455,8 @@
         "tst:operator-tenant-jwks-runtime-parity.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45429,7 +45473,8 @@
         "tst:openapi-tenant-discovery-routes.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45446,7 +45491,8 @@
         "tst:discovery-snapshot-tenant-profile-artifacts.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45463,7 +45509,8 @@
         "tst:tenant-issuer-token-validation-contract.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -45480,7 +45527,8 @@
         "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
       ],
       "evidence_ids": [
-        "evd:tenant-jwks-discovery-planned"
+        "evd:tenant-jwks-discovery-planned",
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     },
     {
@@ -51324,6 +51372,42 @@
         "tst:profile-reference-negative-coverage.contract",
         "tst:profile-reference-discovery-contract-alignment.contract"
       ]
+    },
+    {
+      "id": "evd:tenant-public-discovery-and-jwks-runtime",
+      "title": "Tenant public discovery and JWKS runtime evidence",
+      "status": "passed",
+      "kind": "pytest-runtime-api",
+      "tier": "T1",
+      "path": ".ssot/reports/tenant-public-discovery-and-jwks-runtime.json",
+      "claim_ids": [
+        "clm:tenant-scoped-issuer-boundary",
+        "clm:route-tenant-openid-configuration",
+        "clm:route-tenant-jwks-json",
+        "clm:tenant-discovery-jwks-uri",
+        "clm:tenant-jwks-key-filtering",
+        "clm:tenant-jwks-rotation-visibility",
+        "clm:tenant-public-discovery-disabled-policy",
+        "clm:operator-tenant-jwks-runtime-parity",
+        "clm:openapi-tenant-discovery-routes",
+        "clm:discovery-snapshot-tenant-profile-artifacts",
+        "clm:tenant-issuer-token-validation-contract",
+        "clm:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "test_ids": [
+        "tst:tenant-scoped-issuer-boundary.contract",
+        "tst:route-tenant-openid-configuration.contract",
+        "tst:route-tenant-jwks-json.contract",
+        "tst:tenant-discovery-jwks-uri.contract",
+        "tst:tenant-jwks-key-filtering.contract",
+        "tst:tenant-jwks-rotation-visibility.contract",
+        "tst:tenant-public-discovery-disabled-policy.contract",
+        "tst:operator-tenant-jwks-runtime-parity.contract",
+        "tst:openapi-tenant-discovery-routes.contract",
+        "tst:discovery-snapshot-tenant-profile-artifacts.contract",
+        "tst:tenant-issuer-token-validation-contract.contract",
+        "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+      ]
     }
   ],
   "issues": [
@@ -51868,6 +51952,27 @@
         "feat:release-sigstore-requirements",
         "feat:release-spdx-requirements",
         "feat:release-cyclonedx-requirements"
+      ],
+      "profile_ids": []
+    },
+    {
+      "id": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "title": "Tenant public discovery and JWKS runtime",
+      "status": "frozen",
+      "frozen": true,
+      "feature_ids": [
+        "feat:tenant-scoped-issuer-boundary",
+        "feat:route-tenant-openid-configuration",
+        "feat:route-tenant-jwks-json",
+        "feat:tenant-discovery-jwks-uri",
+        "feat:tenant-jwks-key-filtering",
+        "feat:tenant-jwks-rotation-visibility",
+        "feat:tenant-public-discovery-disabled-policy",
+        "feat:operator-tenant-jwks-runtime-parity",
+        "feat:openapi-tenant-discovery-routes",
+        "feat:discovery-snapshot-tenant-profile-artifacts",
+        "feat:tenant-issuer-token-validation-contract",
+        "feat:tenant-jwks-cross-tenant-leakage-guard"
       ],
       "profile_ids": []
     }
@@ -53353,6 +53458,28 @@
           "status": "accepted",
           "note": "Use --profile as the single runtime configuration selector for packaged IDs and external YAML profile files.",
           "at": "2026-05-08T08:05:29Z"
+        }
+      ]
+    },
+    {
+      "id": "adr:1066",
+      "number": 1066,
+      "slug": "tenant-public-discovery-and-jwks-runtime-boundary",
+      "title": "Tenant public discovery and JWKS runtime boundary",
+      "path": ".ssot/adr/ADR-1066-tenant-public-discovery-and-jwks-runtime-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "2125db564a92aef0c2b1cab6fdfceded79260457cf078fb09ae253a5338800d0",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define tenant-scoped public discovery and JWKS runtime boundary.",
+          "at": "2026-05-10T09:59:16Z"
         }
       ]
     }
@@ -55196,6 +55323,29 @@
           "status": "accepted",
           "note": "Define CLI precedence, provenance, validation, and --config removal or deprecation semantics.",
           "at": "2026-05-08T08:05:54Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1090",
+      "number": 1090,
+      "slug": "tenant-public-discovery-and-jwks-runtime-requirements",
+      "title": "Tenant public discovery and JWKS runtime requirements",
+      "path": ".ssot/specs/SPEC-1090-tenant-public-discovery-and-jwks-runtime-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "defa4b0b7695599e0cd3bef9e21b590040998b27e9a86d9f3a0111f2ed2c5f04",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define runtime/API tenant discovery and JWKS requirements.",
+          "at": "2026-05-10T09:59:17Z"
         }
       ],
       "kind": "normative"

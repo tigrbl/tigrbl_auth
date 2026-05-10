@@ -60,7 +60,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         }
       }
     },
@@ -125,7 +125,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "parameters": [
           {
@@ -303,7 +303,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "requestBody": {
           "required": true,
@@ -453,7 +453,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "security": [
           {
@@ -511,7 +511,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "requestBody": {
           "required": true,
@@ -585,7 +585,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "requestBody": {
           "required": true,
@@ -685,7 +685,7 @@
     },
     "/register/{client_id}": {
       "get": {
-        "operationId": "get_register_{client_id}",
+        "operationId": "get_register_client_id",
         "summary": "Dynamic client registration management endpoint",
         "tags": [
           "oauth2"
@@ -732,7 +732,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "parameters": [
           {
@@ -754,7 +754,7 @@
         ]
       },
       "put": {
-        "operationId": "put_register_{client_id}",
+        "operationId": "put_register_client_id",
         "summary": "Dynamic client registration management endpoint",
         "tags": [
           "oauth2"
@@ -801,7 +801,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "parameters": [
           {
@@ -914,7 +914,7 @@
         }
       },
       "delete": {
-        "operationId": "delete_register_{client_id}",
+        "operationId": "delete_register_client_id",
         "summary": "Dynamic client registration management endpoint",
         "tags": [
           "oauth2"
@@ -961,7 +961,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "parameters": [
           {
@@ -1032,7 +1032,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "requestBody": {
           "required": true,
@@ -1106,7 +1106,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "parameters": [
           {
@@ -1200,7 +1200,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         },
         "requestBody": {
           "required": false,
@@ -1306,8 +1306,73 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         }
+      }
+    },
+    "/tenants/{tenant_slug}/.well-known/openid-configuration": {
+      "get": {
+        "operationId": "get_tenants_tenant_slug__well_known_openid_configuration",
+        "summary": "Tenant-scoped OIDC discovery document",
+        "tags": [
+          ".well-known",
+          "tenant"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoveryDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_discovery",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "production",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        },
+        "parameters": [
+          {
+            "name": "tenant_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/.well-known/oauth-authorization-server": {
@@ -1360,7 +1425,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         }
       }
     },
@@ -1414,7 +1479,7 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         }
       }
     },
@@ -1468,8 +1533,73 @@
           "rich_authorization_requests_supported": false,
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
-          "jwt_access_token_profile_supported": false
+          "jwt_access_token_profile_supported": true
         }
+      }
+    },
+    "/tenants/{tenant_slug}/.well-known/jwks.json": {
+      "get": {
+        "operationId": "get_tenants_tenant_slug__well_known_jwks_json",
+        "summary": "Tenant-scoped JSON Web Key Set",
+        "tags": [
+          ".well-known",
+          "tenant"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwksDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7517",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "production",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        },
+        "parameters": [
+          {
+            "name": "tenant_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   },
@@ -1881,6 +2011,7 @@
       "RFC 7592",
       "RFC 7662",
       "RFC 8252",
+      "RFC 9068",
       "RFC 9207",
       "RFC 9728",
       "RFC 6265",

@@ -1,0 +1,8 @@
+{
+  "keys": [],
+  "profile": "fapi2-security",
+  "profile_label": "fapi2-security",
+  "tenant_slug": "tenant-a",
+  "issuer": "https://authn.example.com/tenants/tenant-a",
+  "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
+}

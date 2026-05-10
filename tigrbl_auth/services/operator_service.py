@@ -356,25 +356,64 @@ def retire_key_record(context: OperationContext, *, record_id: str, retire_after
     return TransactionResult(transaction_id, context.command, "keys", "retired", context.dry_run, not context.dry_run, record=patched, changed_ids=[str(record_id)])
 
 
-def publish_jwks_document(context: OperationContext, *, output_path: str | None = None) -> ArtifactResult:
-    keys = _list(context.repo_root, "keys", sort="id", offset=0, limit=1000, tenant=context.tenant)
-    jwks = {
-        "keys": [
-            {
-                "kid": item["id"],
-                "alg": item.get("data", {}).get("alg", "EdDSA"),
-                "use": item.get("data", {}).get("use", "sig"),
-                "kty": item.get("data", {}).get("kty", "OKP"),
-                "crv": item.get("data", {}).get("curve", "Ed25519"),
-                "status": item.get("status"),
-            }
-            for item in keys
-            if item.get("status") != "deleted"
-        ]
+def _key_publication_status(record: Mapping[str, Any]) -> str:
+    data = record.get("data") or {}
+    if isinstance(data, Mapping):
+        explicit = data.get("publication_status")
+        if explicit not in {None, ""}:
+            return str(explicit).lower()
+    return str(record.get("status") or "").lower()
+
+
+def key_is_publicly_publishable(record: Mapping[str, Any], *, include_retired: bool = False) -> bool:
+    data = record.get("data") or {}
+    if not isinstance(data, Mapping):
+        data = {}
+    if data.get("publish") is False:
+        return False
+    if str(record.get("status") or "").lower() in {"deleted", "disabled", "revoked"}:
+        return False
+    status_value = _key_publication_status(record)
+    if status_value in {"active", "next"}:
+        return True
+    if status_value == "retired":
+        return bool(include_retired or data.get("publish_retired") is True or data.get("publish") is True)
+    return bool(data.get("publish") is True or data.get("public") is True)
+
+
+def operator_jwks_key(record: Mapping[str, Any]) -> dict[str, Any]:
+    data = record.get("data") or {}
+    if not isinstance(data, Mapping):
+        data = {}
+    key: dict[str, Any] = {
+        "kid": str(data.get("kid") or record.get("id")),
+        "alg": str(data.get("alg") or "EdDSA"),
+        "use": str(data.get("use") or "sig"),
+        "kty": str(data.get("kty") or "OKP"),
+        "crv": str(data.get("crv") or data.get("curve") or "Ed25519"),
+        "status": _key_publication_status(record),
     }
-    path = Path(output_path) if output_path else context.repo_root / "dist" / "jwks" / "jwks.json"
+    for field in ("x", "n", "e"):
+        if data.get(field) not in {None, ""}:
+            key[field] = str(data[field])
+    return key
+
+
+def build_operator_jwks_payload(repo_root: Path, *, tenant: str | None = None) -> dict[str, Any]:
+    keys = _list(repo_root, "keys", sort="id", offset=0, limit=1000, tenant=tenant)
+    return {"keys": [operator_jwks_key(item) for item in keys if key_is_publicly_publishable(item, include_retired=tenant is None)]}
+
+
+def publish_jwks_document(context: OperationContext, *, output_path: str | None = None) -> ArtifactResult:
+    jwks = build_operator_jwks_payload(context.repo_root, tenant=context.tenant)
+    if output_path:
+        path = Path(output_path)
+    elif context.tenant:
+        path = context.repo_root / "dist" / "jwks" / "tenants" / context.tenant / "jwks.json"
+    else:
+        path = context.repo_root / "dist" / "jwks" / "jwks.json"
     write_structured(path, jwks)
-    return ArtifactResult(command=context.command, resource=context.resource, status="published", path=display_path(path, context.repo_root), checksum=validate_checksum(path), summary={"keys": len(jwks["keys"]), "profile": context.profile})
+    return ArtifactResult(command=context.command, resource=context.resource, status="published", path=display_path(path, context.repo_root), checksum=validate_checksum(path), summary={"keys": len(jwks["keys"]), "profile": context.profile, "tenant": context.tenant})
 
 
 def build_portability_artifact(repo_root: Path, *, include_resources: list[str] | None = None, redact: bool = False, tenant: str | None = None) -> dict[str, Any]:
@@ -494,6 +533,7 @@ __all__ = [
     "OperationContext",
     "OperatorStateError",
     "TransactionResult",
+    "build_operator_jwks_payload",
     "build_portability_artifact",
     "create_resource",
     "delete_resource",

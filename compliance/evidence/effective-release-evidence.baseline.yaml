@@ -79,26 +79,34 @@ effective_deployment:
   - authorize
   - token
   - openid-configuration
+  - tenant-openid-configuration
   - oauth-authorization-server-metadata
   - jwks
+  - tenant-jwks
   active_routes:
   - /login
   - /authorize
   - /token
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_contract_routes:
   - /login
   - /authorize
   - /token
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_discovery_routes:
   - /.well-known/openid-configuration
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/jwks.json
+  - /tenants/{tenant_slug}/.well-known/jwks.json
   active_targets:
   - RFC 6749
   - RFC 6750

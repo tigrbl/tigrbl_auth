@@ -1,20 +1,57 @@
 {
-  "generated_at": "20260509T204812Z",
+  "generated_at": "20260510T100313Z",
   "deployment_profile": "baseline",
   "report_mode": "live-probe",
   "application_probe": {
     "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",
-    "message": "Application factory materialized successfully with 7 active routes and 25 active targets."
+    "message": "Application factory materialized successfully with 8 active routes and 24 active targets."
   },
   "surface_probe": {
-    "executed": false,
-    "passed": false,
-    "message": "Execution probes were disabled for this invocation.",
-    "endpoint_count": 0,
-    "passed_count": 0,
+    "executed": true,
+    "passed": true,
+    "message": "Runtime HTTP surface probes completed successfully.",
+    "endpoint_count": 4,
+    "passed_count": 4,
     "failed_count": 0,
-    "probes": []
+    "probes": [
+      {
+        "name": "openid-configuration",
+        "path": "/.well-known/openid-configuration",
+        "passed": true,
+        "executed": true,
+        "message": "OpenID discovery document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "oauth-authorization-server",
+        "path": "/.well-known/oauth-authorization-server",
+        "passed": true,
+        "executed": true,
+        "message": "OAuth authorization-server metadata is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "jwks",
+        "path": "/.well-known/jwks.json",
+        "passed": true,
+        "executed": true,
+        "message": "JWKS document is available.",
+        "status_code": 200,
+        "expected_status": 200
+      },
+      {
+        "name": "public-contract",
+        "path": "/openapi.json",
+        "passed": true,
+        "executed": true,
+        "message": "Public contract endpoint is available.",
+        "status_code": 200,
+        "expected_status": 200
+      }
+    ]
   },
   "summary": {
     "runner_count": 3,
@@ -37,13 +74,13 @@
       "uvicorn"
     ],
     "declared_ci_install_probe_complete": true,
-    "execution_probes_enabled": false,
-    "surface_probe_passed": false,
-    "surface_probe_endpoint_count": 0,
-    "surface_probe_passed_count": 0,
+    "execution_probes_enabled": true,
+    "surface_probe_passed": true,
+    "surface_probe_endpoint_count": 4,
+    "surface_probe_passed_count": 4,
     "surface_probe_failed_count": 0,
-    "serve_check_passed_count": 0,
-    "execution_probe_complete": false,
+    "serve_check_passed_count": 1,
+    "execution_probe_complete": true,
     "source_mode": "live-probe",
     "required_runtime_cell_count": 14,
     "validated_runtime_cell_count": 0,
@@ -177,13 +214,13 @@
           "runner": "hypercorn"
         }
       ],
-      "application_hash": "87f7f61c47cba0b62c59080dc4536aa231d5edcd8e3d848eabc8d9fd54f2b3a3",
-      "runtime_hash": "1266c4c67ce403a6cce68cce651518f2f475546a9ac9f46243ec7001ec0dc158",
+      "application_hash": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+      "runtime_hash": "8c5a4f8e4322f17594a4a20889aea05e4b83a0d6e1b43fd5bbcba6fd609d1efc",
       "serve_check": {
         "passed": false,
         "executed": false,
         "command": "tigrbl-auth serve --repo-root <repo> --server hypercorn --format json --check",
-        "message": "Execution probes were disabled for this invocation."
+        "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "hypercorn",
       "profile_name": "postgres-hypercorn",
@@ -351,13 +388,13 @@
           "runner": "tigrcorn"
         }
       ],
-      "application_hash": "87f7f61c47cba0b62c59080dc4536aa231d5edcd8e3d848eabc8d9fd54f2b3a3",
-      "runtime_hash": "77f35b609881d9addde3d1888a6719c6e30a0c869f7eb5e61cccc5286e61ba6b",
+      "application_hash": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+      "runtime_hash": "49378d387b659324158a851f04100839a60db8b75957f5d19a444466b03a64a6",
       "serve_check": {
         "passed": false,
         "executed": false,
         "command": "tigrbl-auth serve --repo-root <repo> --server tigrcorn --format json --check",
-        "message": "Execution probes were disabled for this invocation."
+        "message": "Skipped because the runner is not installed in this environment."
       },
       "required_extra": "tigrcorn",
       "profile_name": "tigrcorn",
@@ -541,13 +578,17 @@
         }
       ],
       "diagnostics": [],
-      "application_hash": "87f7f61c47cba0b62c59080dc4536aa231d5edcd8e3d848eabc8d9fd54f2b3a3",
-      "runtime_hash": "76b0ad3a5282a8cb240572c2b36a09a57abe25c9f1f0b6d0f3253d90792431f5",
+      "application_hash": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+      "runtime_hash": "4c183c93fd8b347103d4e531cfaefce659612e052915c13fa9c2a120eed40e79",
       "serve_check": {
-        "passed": false,
-        "executed": false,
+        "passed": true,
+        "executed": true,
         "command": "tigrbl-auth serve --repo-root <repo> --server uvicorn --format json --check",
-        "message": "Execution probes were disabled for this invocation."
+        "message": "Application factory materialized successfully with 9 active routes and 25 active targets.",
+        "exit_code": 0,
+        "launch_ready": true,
+        "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_auth.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 9 active routes and 25 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs//compliance//runtime_profile_report.json\",\n    \"md\": \"docs//compliance//runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\": \"uds\",\n  \u2026",
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=IJDXgnWYxJVfLTcS2pOZkaYUR7vdI_iUm36QX2KSz_A\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=oRy-wIWS9hBK4MiZMJfxwTjz4fjtTUzitA4hg9kH-RA"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",
