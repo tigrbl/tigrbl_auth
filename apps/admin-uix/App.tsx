@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import IdentityManagement from './components/IdentityManagement';
 import TenantManagement from './components/TenantManagement';
+import TenantJwksPublicationView from './components/TenantJwksPublicationView';
 import { Icons } from './constants';
 import { controlPlaneStateService } from './services/controlPlaneStateService';
 import { Tenant } from './types';
@@ -255,6 +256,7 @@ const App: React.FC = () => {
           />
         );
       case 'identities': return <IdentityManagement tenant={current_tenant} session={session} />;
+      case 'tenant-jwks': return <TenantJwksPublicationView tenant={current_tenant} />;
       default: return (
         <div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-20">
           <div className="w-16 h-16 bg-[#ebebe5] border-etched flex items-center justify-center text-[#1a1a1a]">

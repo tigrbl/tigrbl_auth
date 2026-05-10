@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { backendService } from './backendService';
+import { backendService, normalizeTenantJwksPublication } from './backendService';
 
 describe('backendService tenant admin surface', () => {
   beforeEach(() => {
@@ -70,5 +70,32 @@ describe('backendService tenant admin surface', () => {
       email: 'tenant-two@example.test',
     }));
     expect(tenant.email).toBe('tenant-two@example.test');
+  });
+
+  it('normalizes tenant JWKS publication without leaking cross-tenant inventory', () => {
+    const view = normalizeTenantJwksPublication(
+      { id: 'tenant-a-id', name: 'Tenant A', slug: 'tenant-a' },
+      {
+        issuer: 'https://id.example.com/tenants/tenant-a',
+        jwks_uri: 'https://id.example.com/tenants/tenant-a/.well-known/jwks.json',
+      },
+      {
+        keys: [
+          { kid: 'kid-a-active', alg: 'ES256', kty: 'EC', use: 'sig', crv: 'P-256', status: 'active', d: 'private' },
+          { kid: 'kid-a-next', alg: 'ES256', kty: 'EC', use: 'sig', crv: 'P-256', status: 'next' },
+        ],
+      },
+      [
+        { id: 'kid-a-retired', tenant: 'tenant-a', status: 'retired', data: { kid: 'kid-a-retired', alg: 'ES256', kty: 'EC', use: 'sig' } },
+        { id: 'kid-b-active', tenant: 'tenant-b', status: 'active', data: { kid: 'kid-b-active', alg: 'ES256' } },
+      ],
+    );
+
+    expect(view.publication_status).toBe('published');
+    expect(view.keys_by_lifecycle.active.map((key) => key.kid)).toEqual(['kid-a-active']);
+    expect(view.keys_by_lifecycle.next.map((key) => key.kid)).toEqual(['kid-a-next']);
+    expect(view.keys_by_lifecycle.retired.map((key) => key.kid)).toEqual(['kid-a-retired']);
+    expect(JSON.stringify(view)).not.toContain('kid-b-active');
+    expect(JSON.stringify(view)).not.toContain('private');
   });
 });

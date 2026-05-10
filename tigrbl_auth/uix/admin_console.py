@@ -66,6 +66,7 @@ ADMIN_NAVIGATION: tuple[str, ...] = (
     "consents",
     "audit",
     "keys-jwks",
+    "tenant-jwks",
     "profile-certification",
     "rbac",
     "abac",
@@ -266,6 +267,67 @@ class ResourceView:
 
 
 @dataclass(frozen=True, slots=True)
+class TenantJwksPublicationKey:
+    kid: str
+    alg: str
+    kty: str
+    use: str
+    lifecycle: str
+    public: bool
+    crv: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
+    rotated_at: str | None = None
+    retired_at: str | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "kid": self.kid,
+            "alg": self.alg,
+            "kty": self.kty,
+            "use": self.use,
+            "crv": self.crv,
+            "lifecycle": self.lifecycle,
+            "public": self.public,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "rotated_at": self.rotated_at,
+            "retired_at": self.retired_at,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class TenantJwksPublicationView:
+    tenant_slug: str
+    issuer: str
+    jwks_uri: str
+    publication_status: str
+    keys: tuple[TenantJwksPublicationKey, ...]
+    parity_indicator: str
+
+    def keys_by_lifecycle(self) -> dict[str, tuple[TenantJwksPublicationKey, ...]]:
+        return {
+            lifecycle: tuple(key for key in self.keys if key.lifecycle == lifecycle)
+            for lifecycle in ("active", "next", "retired")
+        }
+
+    def to_dict(self) -> dict[str, Any]:
+        grouped = self.keys_by_lifecycle()
+        return {
+            "tenant_slug": self.tenant_slug,
+            "issuer": self.issuer,
+            "jwks_uri": self.jwks_uri,
+            "publication_status": self.publication_status,
+            "parity_indicator": self.parity_indicator,
+            "keys": [key.to_dict() for key in self.keys],
+            "keys_by_lifecycle": {
+                lifecycle: [key.to_dict() for key in keys]
+                for lifecycle, keys in grouped.items()
+            },
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class SafeMutationRequest:
     action: str
     target_id: str
@@ -290,6 +352,77 @@ def build_resource_views(available_methods: set[str] | tuple[str, ...] | list[st
         missing = tuple(method for method in required_methods if method not in available)
         views[name] = ResourceView(name=name, required_methods=required_methods, missing_methods=missing)
     return views
+
+
+def build_tenant_jwks_publication_view(
+    *,
+    root_issuer: str,
+    tenant_slug: str,
+    jwks: Mapping[str, Any],
+    key_records: tuple[Mapping[str, Any], ...] | list[Mapping[str, Any]] = (),
+    tenant_enabled: bool = True,
+) -> TenantJwksPublicationView:
+    issuer = f"{root_issuer.rstrip('/')}/tenants/{tenant_slug}"
+    jwks_uri = f"{root_issuer.rstrip('/')}/tenants/{tenant_slug}/.well-known/jwks.json"
+    public_keys = {
+        str(key.get("kid")): key
+        for key in jwks.get("keys", [])
+        if isinstance(key, Mapping) and key.get("kid") not in {None, ""}
+    }
+    rows: dict[str, TenantJwksPublicationKey] = {}
+
+    for kid, key in public_keys.items():
+        lifecycle = str(key.get("status") or "active").lower()
+        rows[kid] = TenantJwksPublicationKey(
+            kid=kid,
+            alg=str(key.get("alg") or ""),
+            kty=str(key.get("kty") or ""),
+            use=str(key.get("use") or ""),
+            crv=str(key.get("crv")) if key.get("crv") not in {None, ""} else None,
+            lifecycle=lifecycle,
+            public=True,
+        )
+
+    for record in key_records:
+        data = record.get("data") or record.get("metadata") or {}
+        if not isinstance(data, Mapping):
+            data = {}
+        kid = str(data.get("kid") or record.get("kid") or record.get("id") or "")
+        if not kid:
+            continue
+        record_tenant = record.get("tenant") or record.get("tenant_slug") or data.get("tenant") or data.get("tenant_slug")
+        if record_tenant not in {None, ""} and str(record_tenant) != tenant_slug:
+            continue
+        if record_tenant in {None, ""} and kid not in public_keys:
+            continue
+        lifecycle = str(data.get("publication_status") or record.get("status") or data.get("status") or "active").lower()
+        if lifecycle not in {"active", "next", "retired"}:
+            lifecycle = "active" if rows.get(kid, None) and rows[kid].public else lifecycle
+        if lifecycle == "retired" or kid not in rows:
+            rows[kid] = TenantJwksPublicationKey(
+                kid=kid,
+                alg=str(data.get("alg") or record.get("alg") or ""),
+                kty=str(data.get("kty") or record.get("kty") or ""),
+                use=str(data.get("use") or record.get("use") or ""),
+                crv=str(data.get("crv") or data.get("curve")) if (data.get("crv") or data.get("curve")) else None,
+                lifecycle=lifecycle,
+                public=kid in public_keys,
+                created_at=str(record.get("created_at")) if record.get("created_at") else None,
+                updated_at=str(record.get("updated_at")) if record.get("updated_at") else None,
+                rotated_at=str(data.get("rotated_at")) if data.get("rotated_at") else None,
+                retired_at=str(data.get("retired_at")) if data.get("retired_at") else None,
+            )
+
+    ordered = tuple(sorted(rows.values(), key=lambda key: ({"active": 0, "next": 1, "retired": 2}.get(key.lifecycle, 3), key.kid)))
+    status = "published" if tenant_enabled and public_keys else "not_published"
+    return TenantJwksPublicationView(
+        tenant_slug=tenant_slug,
+        issuer=issuer,
+        jwks_uri=jwks_uri,
+        publication_status=status,
+        keys=ordered,
+        parity_indicator=f"Matches GET /tenants/{tenant_slug}/.well-known/jwks.json",
+    )
 
 
 def build_readiness_dashboard(

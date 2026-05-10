@@ -11,10 +11,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ active_tab, set_active_tab, is_admin }) => {
   const menu_items = [
-    { section: 'Admin Workspace', items: [
+      { section: 'Admin Workspace', items: [
       { id: 'dashboard', label: 'Dashboard', icon: Icons.Dashboard },
       { id: 'tenants', label: 'Tenants', icon: Icons.Settings },
       { id: 'identities', label: 'Identities', icon: Icons.Users },
+      { id: 'tenant-jwks', label: 'Tenant JWKS', icon: Icons.Key },
     ]}
   ];
 

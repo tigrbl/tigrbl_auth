@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "registry_path": ".ssot/registry.json",
+  "output_path": ".ssot/exports/registry.json",
+  "format": "json"
+}

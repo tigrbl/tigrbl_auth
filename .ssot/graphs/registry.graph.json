@@ -353,22 +353,6 @@
       "kind": "feature"
     },
     {
-      "id": "feat:cli-verb-adr-index",
-      "kind": "feature"
-    },
-    {
-      "id": "feat:cli-verb-adr-list",
-      "kind": "feature"
-    },
-    {
-      "id": "feat:cli-verb-adr-new",
-      "kind": "feature"
-    },
-    {
-      "id": "feat:cli-verb-adr-show",
-      "kind": "feature"
-    },
-    {
       "id": "feat:cli-verb-bootstrap-apply",
       "kind": "feature"
     },
@@ -2089,6 +2073,118 @@
       "kind": "feature"
     },
     {
+      "id": "feat:uix-admin-password-change",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:admin-bootstrap-superuser",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:uix-admin-identity-onboarding",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:uix-admin-login",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:uix-admin-password-recovery",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-scoped-issuer-boundary",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:route-tenant-openid-configuration",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:route-tenant-jwks-json",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-discovery-jwks-uri",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-jwks-key-filtering",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-jwks-rotation-visibility",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-public-discovery-disabled-policy",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:operator-tenant-jwks-runtime-parity",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:openapi-tenant-discovery-routes",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:discovery-snapshot-tenant-profile-artifacts",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-issuer-token-validation-contract",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:tenant-jwks-cross-tenant-leakage-guard",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:uix-tenant-jwks-publication-view",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-reference-union",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-id-resolution",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-path-resolution",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:external-profile-yaml-validation",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-reference-fail-closed-errors",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-provenance-output",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:cli-profile-runtime-wiring",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:cli-config-deprecation-or-removal",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-reference-negative-coverage",
+      "kind": "feature"
+    },
+    {
+      "id": "feat:profile-reference-discovery-contract-alignment",
+      "kind": "feature"
+    },
+    {
       "id": "prf:baseline",
       "kind": "profile"
     },
@@ -3065,6 +3161,98 @@
       "kind": "test"
     },
     {
+      "id": "tst:tenant-scoped-issuer-boundary.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:route-tenant-openid-configuration.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:route-tenant-jwks-json.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-discovery-jwks-uri.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-jwks-key-filtering.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-jwks-rotation-visibility.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-public-discovery-disabled-policy.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:operator-tenant-jwks-runtime-parity.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:openapi-tenant-discovery-routes.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:discovery-snapshot-tenant-profile-artifacts.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-issuer-token-validation-contract.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:tenant-jwks-cross-tenant-leakage-guard.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:uix-tenant-jwks-publication-view.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-reference-union.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-id-resolution.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-path-resolution.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:external-profile-yaml-validation.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-reference-fail-closed-errors.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-provenance-output.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:cli-profile-runtime-wiring.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:cli-config-deprecation-or-removal.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-reference-negative-coverage.contract",
+      "kind": "test"
+    },
+    {
+      "id": "tst:profile-reference-discovery-contract-alignment.contract",
+      "kind": "test"
+    },
+    {
       "id": "clm:cli-flag-access-log",
       "kind": "claim"
     },
@@ -3414,22 +3602,6 @@
     },
     {
       "id": "clm:cli-flag-yes",
-      "kind": "claim"
-    },
-    {
-      "id": "clm:cli-verb-adr-index",
-      "kind": "claim"
-    },
-    {
-      "id": "clm:cli-verb-adr-list",
-      "kind": "claim"
-    },
-    {
-      "id": "clm:cli-verb-adr-new",
-      "kind": "claim"
-    },
-    {
-      "id": "clm:cli-verb-adr-show",
       "kind": "claim"
     },
     {
@@ -4913,6 +5085,98 @@
       "kind": "claim"
     },
     {
+      "id": "clm:tenant-scoped-issuer-boundary",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:route-tenant-openid-configuration",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:route-tenant-jwks-json",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-discovery-jwks-uri",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-jwks-key-filtering",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-jwks-rotation-visibility",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-public-discovery-disabled-policy",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:operator-tenant-jwks-runtime-parity",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:openapi-tenant-discovery-routes",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:discovery-snapshot-tenant-profile-artifacts",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-issuer-token-validation-contract",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:tenant-jwks-cross-tenant-leakage-guard",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:uix-tenant-jwks-publication-view",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-reference-union",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-id-resolution",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-path-resolution",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:external-profile-yaml-validation",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-reference-fail-closed-errors",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-provenance-output",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:cli-profile-runtime-wiring",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:cli-config-deprecation-or-removal",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-reference-negative-coverage",
+      "kind": "claim"
+    },
+    {
+      "id": "clm:profile-reference-discovery-contract-alignment",
+      "kind": "claim"
+    },
+    {
       "id": "evd:compliance-evidence-tier3-asgi-application",
       "kind": "evidence"
     },
@@ -5269,6 +5533,18 @@
       "kind": "evidence"
     },
     {
+      "id": "evd:tenant-jwks-discovery-planned",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:profile-reference-union-planned",
+      "kind": "evidence"
+    },
+    {
+      "id": "evd:tenant-public-discovery-and-jwks-runtime",
+      "kind": "evidence"
+    },
+    {
       "id": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "kind": "issue"
     },
@@ -5317,6 +5593,10 @@
       "kind": "issue"
     },
     {
+      "id": "iss:cli-config-flag-unwired-001",
+      "kind": "issue"
+    },
+    {
       "id": "rsk:legacy-provenance-evidence-ambiguity",
       "kind": "risk"
     },
@@ -5349,10 +5629,6 @@
       "kind": "boundary"
     },
     {
-      "id": "bnd:priority-3-out-of-bounds-adr-cli",
-      "kind": "boundary"
-    },
-    {
       "id": "bnd:phase1-surface-baseline-20260505",
       "kind": "boundary"
     },
@@ -5374,6 +5650,10 @@
     },
     {
       "id": "bnd:transport-disclosure-and-provenance-20260505",
+      "kind": "boundary"
+    },
+    {
+      "id": "bnd:tenant-public-discovery-and-jwks-runtime",
       "kind": "boundary"
     },
     {
@@ -5402,6 +5682,10 @@
     },
     {
       "id": "rel:transport-disclosure-and-provenance-20260505",
+      "kind": "release"
+    },
+    {
+      "id": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
       "kind": "release"
     }
   ],
@@ -5675,26 +5959,6 @@
       "type": "SCOPES",
       "from": "bnd:priority-2-runtime-profiles",
       "to": "feat:profile-baseline-development"
-    },
-    {
-      "type": "SCOPES",
-      "from": "bnd:priority-3-out-of-bounds-adr-cli",
-      "to": "feat:cli-verb-adr-index"
-    },
-    {
-      "type": "SCOPES",
-      "from": "bnd:priority-3-out-of-bounds-adr-cli",
-      "to": "feat:cli-verb-adr-list"
-    },
-    {
-      "type": "SCOPES",
-      "from": "bnd:priority-3-out-of-bounds-adr-cli",
-      "to": "feat:cli-verb-adr-new"
-    },
-    {
-      "type": "SCOPES",
-      "from": "bnd:priority-3-out-of-bounds-adr-cli",
-      "to": "feat:cli-verb-adr-show"
     },
     {
       "type": "SCOPES",
@@ -6117,6 +6381,66 @@
       "to": "feat:release-cyclonedx-requirements"
     },
     {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-scoped-issuer-boundary"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:route-tenant-openid-configuration"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:route-tenant-jwks-json"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-discovery-jwks-uri"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-jwks-key-filtering"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-jwks-rotation-visibility"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-public-discovery-disabled-policy"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:operator-tenant-jwks-runtime-parity"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:openapi-tenant-discovery-routes"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:discovery-snapshot-tenant-profile-artifacts"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-issuer-token-validation-contract"
+    },
+    {
+      "type": "SCOPES",
+      "from": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "to": "feat:tenant-jwks-cross-tenant-leakage-guard"
+    },
+    {
       "type": "BUNDLES",
       "from": "prf:baseline",
       "to": "feat:profile-baseline"
@@ -6445,6 +6769,76 @@
       "type": "INCLUDES",
       "from": "rel:transport-disclosure-and-provenance-20260505",
       "to": "evd:admin-uix-transport-disclosure-build"
+    },
+    {
+      "type": "USES_BOUNDARY",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "bnd:tenant-public-discovery-and-jwks-runtime"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-scoped-issuer-boundary"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:route-tenant-openid-configuration"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:route-tenant-jwks-json"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-discovery-jwks-uri"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-jwks-key-filtering"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-jwks-rotation-visibility"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-public-discovery-disabled-policy"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:operator-tenant-jwks-runtime-parity"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:openapi-tenant-discovery-routes"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:discovery-snapshot-tenant-profile-artifacts"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-issuer-token-validation-contract"
+    },
+    {
+      "type": "PUBLISHES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "clm:tenant-jwks-cross-tenant-leakage-guard"
+    },
+    {
+      "type": "INCLUDES",
+      "from": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "to": "evd:tenant-public-discovery-and-jwks-runtime"
     },
     {
       "type": "COVERED_BY",
@@ -10910,26 +11304,6 @@
       "type": "COVERED_BY",
       "from": "feat:cli-flag-yes",
       "to": "tst:tests-unit-test-operator-service-layer-py"
-    },
-    {
-      "type": "COVERED_BY",
-      "from": "feat:cli-verb-adr-index",
-      "to": "tst:tests-unit-test-cli-surface-checkpoint-py"
-    },
-    {
-      "type": "COVERED_BY",
-      "from": "feat:cli-verb-adr-list",
-      "to": "tst:tests-unit-test-cli-surface-checkpoint-py"
-    },
-    {
-      "type": "COVERED_BY",
-      "from": "feat:cli-verb-adr-new",
-      "to": "tst:tests-unit-test-cli-surface-checkpoint-py"
-    },
-    {
-      "type": "COVERED_BY",
-      "from": "feat:cli-verb-adr-show",
-      "to": "tst:tests-unit-test-cli-surface-checkpoint-py"
     },
     {
       "type": "COVERED_BY",
@@ -26592,6 +26966,181 @@
       "to": "tst:admin-uix-transport-disclosure-posture"
     },
     {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-password-change",
+      "to": "tst:uix-admin-shell-security"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-password-change",
+      "to": "tst:uix-admin-e2e-golden-path"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:admin-bootstrap-superuser",
+      "to": "tst:secure-default-admin-gate-runtime-contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:admin-bootstrap-superuser",
+      "to": "tst:uix-admin-e2e-golden-path"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-identity-onboarding",
+      "to": "tst:uix-resource-views-contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-identity-onboarding",
+      "to": "tst:uix-resource-views-states"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-identity-onboarding",
+      "to": "tst:uix-safe-mutations"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-login",
+      "to": "tst:uix-admin-shell-security"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-login",
+      "to": "tst:uix-admin-e2e-golden-path"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-login",
+      "to": "tst:uix-admin-frontend-adapter"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-password-recovery",
+      "to": "tst:uix-admin-shell-security"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-admin-password-recovery",
+      "to": "tst:uix-admin-e2e-golden-path"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-scoped-issuer-boundary",
+      "to": "tst:tenant-scoped-issuer-boundary.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:route-tenant-openid-configuration",
+      "to": "tst:route-tenant-openid-configuration.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:route-tenant-jwks-json",
+      "to": "tst:route-tenant-jwks-json.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-discovery-jwks-uri",
+      "to": "tst:tenant-discovery-jwks-uri.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-jwks-key-filtering",
+      "to": "tst:tenant-jwks-key-filtering.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-jwks-rotation-visibility",
+      "to": "tst:tenant-jwks-rotation-visibility.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-public-discovery-disabled-policy",
+      "to": "tst:tenant-public-discovery-disabled-policy.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:operator-tenant-jwks-runtime-parity",
+      "to": "tst:operator-tenant-jwks-runtime-parity.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:openapi-tenant-discovery-routes",
+      "to": "tst:openapi-tenant-discovery-routes.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:discovery-snapshot-tenant-profile-artifacts",
+      "to": "tst:discovery-snapshot-tenant-profile-artifacts.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-issuer-token-validation-contract",
+      "to": "tst:tenant-issuer-token-validation-contract.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:tenant-jwks-cross-tenant-leakage-guard",
+      "to": "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:uix-tenant-jwks-publication-view",
+      "to": "tst:uix-tenant-jwks-publication-view.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-reference-union",
+      "to": "tst:profile-reference-union.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-id-resolution",
+      "to": "tst:profile-id-resolution.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-path-resolution",
+      "to": "tst:profile-path-resolution.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:external-profile-yaml-validation",
+      "to": "tst:external-profile-yaml-validation.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-reference-fail-closed-errors",
+      "to": "tst:profile-reference-fail-closed-errors.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-provenance-output",
+      "to": "tst:profile-provenance-output.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:cli-profile-runtime-wiring",
+      "to": "tst:cli-profile-runtime-wiring.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:cli-config-deprecation-or-removal",
+      "to": "tst:cli-config-deprecation-or-removal.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-reference-negative-coverage",
+      "to": "tst:profile-reference-negative-coverage.contract"
+    },
+    {
+      "type": "COVERED_BY",
+      "from": "feat:profile-reference-discovery-contract-alignment",
+      "to": "tst:profile-reference-discovery-contract-alignment.contract"
+    },
+    {
       "type": "ASSERTS",
       "from": "clm:cli-flag-access-log",
       "to": "feat:cli-flag-access-log"
@@ -31960,66 +32509,6 @@
       "type": "SUPPORTS",
       "from": "evd:compliance-evidence-tier3-cli-operator-surface",
       "to": "clm:cli-flag-yes"
-    },
-    {
-      "type": "ASSERTS",
-      "from": "clm:cli-verb-adr-index",
-      "to": "feat:cli-verb-adr-index"
-    },
-    {
-      "type": "VERIFIES",
-      "from": "tst:tests-unit-test-cli-surface-checkpoint-py",
-      "to": "clm:cli-verb-adr-index"
-    },
-    {
-      "type": "SUPPORTS",
-      "from": "evd:compliance-evidence-tier3-cli-operator-surface",
-      "to": "clm:cli-verb-adr-index"
-    },
-    {
-      "type": "ASSERTS",
-      "from": "clm:cli-verb-adr-list",
-      "to": "feat:cli-verb-adr-list"
-    },
-    {
-      "type": "VERIFIES",
-      "from": "tst:tests-unit-test-cli-surface-checkpoint-py",
-      "to": "clm:cli-verb-adr-list"
-    },
-    {
-      "type": "SUPPORTS",
-      "from": "evd:compliance-evidence-tier3-cli-operator-surface",
-      "to": "clm:cli-verb-adr-list"
-    },
-    {
-      "type": "ASSERTS",
-      "from": "clm:cli-verb-adr-new",
-      "to": "feat:cli-verb-adr-new"
-    },
-    {
-      "type": "VERIFIES",
-      "from": "tst:tests-unit-test-cli-surface-checkpoint-py",
-      "to": "clm:cli-verb-adr-new"
-    },
-    {
-      "type": "SUPPORTS",
-      "from": "evd:compliance-evidence-tier3-cli-operator-surface",
-      "to": "clm:cli-verb-adr-new"
-    },
-    {
-      "type": "ASSERTS",
-      "from": "clm:cli-verb-adr-show",
-      "to": "feat:cli-verb-adr-show"
-    },
-    {
-      "type": "VERIFIES",
-      "from": "tst:tests-unit-test-cli-surface-checkpoint-py",
-      "to": "clm:cli-verb-adr-show"
-    },
-    {
-      "type": "SUPPORTS",
-      "from": "evd:compliance-evidence-tier3-cli-operator-surface",
-      "to": "clm:cli-verb-adr-show"
     },
     {
       "type": "ASSERTS",
@@ -54832,6 +55321,21 @@
       "to": "feat:uix-admin-auth-session"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:uix-admin-auth-session",
+      "to": "feat:uix-admin-password-change"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-admin-auth-session",
+      "to": "feat:uix-admin-login"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-admin-auth-session",
+      "to": "feat:uix-admin-password-recovery"
+    },
+    {
       "type": "VERIFIES",
       "from": "tst:uix-admin-shell-security",
       "to": "clm:uix-admin-auth-session"
@@ -54960,6 +55464,11 @@
       "type": "ASSERTS",
       "from": "clm:uix-identity-admin-view",
       "to": "feat:uix-identity-admin-view"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-identity-admin-view",
+      "to": "feat:uix-admin-identity-onboarding"
     },
     {
       "type": "VERIFIES",
@@ -55182,6 +55691,11 @@
       "to": "feat:uix-safe-mutation-lock-identity"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:uix-safe-mutation-lock-identity",
+      "to": "feat:uix-admin-identity-onboarding"
+    },
+    {
       "type": "VERIFIES",
       "from": "tst:uix-safe-mutations",
       "to": "clm:uix-safe-mutation-lock-identity"
@@ -55357,6 +55871,11 @@
       "to": "feat:openrpc-runtime-payload-deferred-to-tigrbl"
     },
     {
+      "type": "ASSERTS",
+      "from": "clm:secure-default-baseline-admin-gate",
+      "to": "feat:admin-bootstrap-superuser"
+    },
+    {
       "type": "VERIFIES",
       "from": "tst:secure-default-admin-gate-runtime-contract",
       "to": "clm:secure-default-baseline-admin-gate"
@@ -55520,6 +56039,11 @@
       "type": "ASSERTS",
       "from": "clm:uix-admin-frontend-adapter",
       "to": "feat:uix-tenant-profile-selector"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-admin-frontend-adapter",
+      "to": "feat:uix-admin-login"
     },
     {
       "type": "VERIFIES",
@@ -56520,6 +57044,351 @@
       "type": "SUPPORTS",
       "from": "evd:admin-uix-transport-disclosure-build",
       "to": "clm:release-provenance-and-artifact-obligations"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-scoped-issuer-boundary",
+      "to": "feat:tenant-scoped-issuer-boundary"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-scoped-issuer-boundary.contract",
+      "to": "clm:tenant-scoped-issuer-boundary"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-scoped-issuer-boundary"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:route-tenant-openid-configuration",
+      "to": "feat:route-tenant-openid-configuration"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:route-tenant-openid-configuration.contract",
+      "to": "clm:route-tenant-openid-configuration"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:route-tenant-openid-configuration"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:route-tenant-jwks-json",
+      "to": "feat:route-tenant-jwks-json"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:route-tenant-jwks-json.contract",
+      "to": "clm:route-tenant-jwks-json"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:route-tenant-jwks-json"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-discovery-jwks-uri",
+      "to": "feat:tenant-discovery-jwks-uri"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-discovery-jwks-uri.contract",
+      "to": "clm:tenant-discovery-jwks-uri"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-discovery-jwks-uri"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-jwks-key-filtering",
+      "to": "feat:tenant-jwks-key-filtering"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-jwks-key-filtering.contract",
+      "to": "clm:tenant-jwks-key-filtering"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-jwks-key-filtering"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-jwks-rotation-visibility",
+      "to": "feat:tenant-jwks-rotation-visibility"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-jwks-rotation-visibility.contract",
+      "to": "clm:tenant-jwks-rotation-visibility"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-jwks-rotation-visibility"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-public-discovery-disabled-policy",
+      "to": "feat:tenant-public-discovery-disabled-policy"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-public-discovery-disabled-policy.contract",
+      "to": "clm:tenant-public-discovery-disabled-policy"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-public-discovery-disabled-policy"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:operator-tenant-jwks-runtime-parity",
+      "to": "feat:operator-tenant-jwks-runtime-parity"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:operator-tenant-jwks-runtime-parity.contract",
+      "to": "clm:operator-tenant-jwks-runtime-parity"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:operator-tenant-jwks-runtime-parity"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:openapi-tenant-discovery-routes",
+      "to": "feat:openapi-tenant-discovery-routes"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:openapi-tenant-discovery-routes.contract",
+      "to": "clm:openapi-tenant-discovery-routes"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:openapi-tenant-discovery-routes"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:discovery-snapshot-tenant-profile-artifacts",
+      "to": "feat:discovery-snapshot-tenant-profile-artifacts"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:discovery-snapshot-tenant-profile-artifacts.contract",
+      "to": "clm:discovery-snapshot-tenant-profile-artifacts"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:discovery-snapshot-tenant-profile-artifacts"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-issuer-token-validation-contract",
+      "to": "feat:tenant-issuer-token-validation-contract"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-issuer-token-validation-contract.contract",
+      "to": "clm:tenant-issuer-token-validation-contract"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-issuer-token-validation-contract"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:tenant-jwks-cross-tenant-leakage-guard",
+      "to": "feat:tenant-jwks-cross-tenant-leakage-guard"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:tenant-jwks-cross-tenant-leakage-guard.contract",
+      "to": "clm:tenant-jwks-cross-tenant-leakage-guard"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "clm:tenant-jwks-cross-tenant-leakage-guard"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:uix-tenant-jwks-publication-view",
+      "to": "feat:uix-tenant-jwks-publication-view"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:uix-tenant-jwks-publication-view.contract",
+      "to": "clm:uix-tenant-jwks-publication-view"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:tenant-jwks-discovery-planned",
+      "to": "clm:uix-tenant-jwks-publication-view"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-reference-union",
+      "to": "feat:profile-reference-union"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-reference-union.contract",
+      "to": "clm:profile-reference-union"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-reference-union"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-id-resolution",
+      "to": "feat:profile-id-resolution"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-id-resolution.contract",
+      "to": "clm:profile-id-resolution"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-id-resolution"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-path-resolution",
+      "to": "feat:profile-path-resolution"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-path-resolution.contract",
+      "to": "clm:profile-path-resolution"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-path-resolution"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:external-profile-yaml-validation",
+      "to": "feat:external-profile-yaml-validation"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:external-profile-yaml-validation.contract",
+      "to": "clm:external-profile-yaml-validation"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:external-profile-yaml-validation"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-reference-fail-closed-errors",
+      "to": "feat:profile-reference-fail-closed-errors"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-reference-fail-closed-errors.contract",
+      "to": "clm:profile-reference-fail-closed-errors"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-reference-fail-closed-errors"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-provenance-output",
+      "to": "feat:profile-provenance-output"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-provenance-output.contract",
+      "to": "clm:profile-provenance-output"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-provenance-output"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:cli-profile-runtime-wiring",
+      "to": "feat:cli-profile-runtime-wiring"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:cli-profile-runtime-wiring.contract",
+      "to": "clm:cli-profile-runtime-wiring"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:cli-profile-runtime-wiring"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:cli-config-deprecation-or-removal",
+      "to": "feat:cli-config-deprecation-or-removal"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:cli-config-deprecation-or-removal.contract",
+      "to": "clm:cli-config-deprecation-or-removal"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:cli-config-deprecation-or-removal"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-reference-negative-coverage",
+      "to": "feat:profile-reference-negative-coverage"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-reference-negative-coverage.contract",
+      "to": "clm:profile-reference-negative-coverage"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-reference-negative-coverage"
+    },
+    {
+      "type": "ASSERTS",
+      "from": "clm:profile-reference-discovery-contract-alignment",
+      "to": "feat:profile-reference-discovery-contract-alignment"
+    },
+    {
+      "type": "VERIFIES",
+      "from": "tst:profile-reference-discovery-contract-alignment.contract",
+      "to": "clm:profile-reference-discovery-contract-alignment"
+    },
+    {
+      "type": "SUPPORTS",
+      "from": "evd:profile-reference-union-planned",
+      "to": "clm:profile-reference-discovery-contract-alignment"
     },
     {
       "type": "DERIVES_FROM",
@@ -73902,6 +74771,121 @@
       "to": "tst:admin-uix-transport-disclosure-posture"
     },
     {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-scoped-issuer-boundary.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:route-tenant-openid-configuration.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:route-tenant-jwks-json.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-discovery-jwks-uri.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-jwks-key-filtering.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-jwks-rotation-visibility.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-public-discovery-disabled-policy.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:operator-tenant-jwks-runtime-parity.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:openapi-tenant-discovery-routes.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:discovery-snapshot-tenant-profile-artifacts.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-issuer-token-validation-contract.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-public-discovery-and-jwks-runtime",
+      "to": "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:tenant-jwks-discovery-planned",
+      "to": "tst:uix-tenant-jwks-publication-view.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-reference-union.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-id-resolution.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-path-resolution.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:external-profile-yaml-validation.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-reference-fail-closed-errors.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-provenance-output.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:cli-profile-runtime-wiring.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:cli-config-deprecation-or-removal.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-reference-negative-coverage.contract"
+    },
+    {
+      "type": "DERIVES_FROM",
+      "from": "evd:profile-reference-union-planned",
+      "to": "tst:profile-reference-discovery-contract-alignment.contract"
+    },
+    {
       "type": "AFFECTS",
       "from": "iss:openapi-jsonschema-dialect-default-or-omitted-001",
       "to": "feat:openapi-jsonschema-dialect-default-or-omitted"
@@ -73975,6 +74959,61 @@
       "type": "AFFECTS",
       "from": "iss:active-provenance-naming-blocks-certification",
       "to": "rsk:legacy-provenance-evidence-ambiguity"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "feat:cli-flag-config"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "feat:runtime-profile-configuration-contract"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "feat:target-cli-operator-surface"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "feat:profile-reference-union"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "feat:cli-config-deprecation-or-removal"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "clm:cli-flag-config"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "clm:runtime-profile-configuration-contract"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "clm:profile-reference-union"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "clm:cli-config-deprecation-or-removal"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "tst:cli-config-deprecation-or-removal.contract"
+    },
+    {
+      "type": "AFFECTS",
+      "from": "iss:cli-config-flag-unwired-001",
+      "to": "evd:profile-reference-union-planned"
     },
     {
       "type": "AFFECTS",

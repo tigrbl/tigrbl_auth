@@ -1,0 +1,40 @@
+{
+  "id": "evd:tenant-jwks-discovery-planned",
+  "feature_ids": [
+    "feat:uix-tenant-jwks-publication-view"
+  ],
+  "claim_ids": [
+    "clm:uix-tenant-jwks-publication-view"
+  ],
+  "test_ids": [
+    "tst:uix-tenant-jwks-publication-view.contract"
+  ],
+  "status": "passed",
+  "captured_at": "2026-05-10T05:20:49-05:00",
+  "commands": [
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/features/test_tenant_jwks_discovery.py",
+      "result": "13 passed"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/uix/test_admin_shell.py tests/uix/test_resource_views_states.py tests/uix/test_resource_views_contract.py",
+      "result": "6 passed"
+    },
+    {
+      "command": "npm run test:admin-uix",
+      "result": "6 files passed, 25 tests passed"
+    },
+    {
+      "command": "npm run build:admin-uix",
+      "result": "passed with existing Vite large chunk warning"
+    }
+  ],
+  "covered_behavior": [
+    "Tenant JWKS publication view shows tenant issuer and tenant jwks_uri.",
+    "Active, next, and retired key rows are grouped by lifecycle.",
+    "Public runtime JWKS keys are marked public while retired inventory keys remain non-public.",
+    "Cross-tenant and unscoped retired inventory rows are excluded.",
+    "Sensitive private key material is not serialized into the UIX publication view.",
+    "Admin UI exposes the Tenant JWKS tab and builds successfully."
+  ]
+}

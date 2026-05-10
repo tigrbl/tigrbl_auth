@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "boundary_snapshot",
+  "generated_at": "2026-05-10T10:24:29Z",
+  "registry_path": ".ssot/registry.json",
+  "registry_sha256": "cbab5194b11661d6144cd34533e14b5c173b8a9761ff19ddf35f16a860ef2996",
+  "boundary": {
+    "id": "bnd:uix-tenant-jwks-publication-view",
+    "title": "UIX tenant JWKS publication view",
+    "status": "frozen",
+    "frozen": true,
+    "feature_ids": [
+      "feat:uix-tenant-jwks-publication-view"
+    ],
+    "profile_ids": []
+  },
+  "features": [
+    {
+      "id": "feat:uix-tenant-jwks-publication-view",
+      "title": "UIX tenant JWKS publication view",
+      "description": "Shows per-tenant active, next, and retired keys and the tenant jwks_uri as a UIX-facing view separate from runtime/API behavior.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1083"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-jwks-publication-view"
+      ],
+      "test_ids": [
+        "tst:uix-tenant-jwks-publication-view.contract"
+      ],
+      "requires": []
+    }
+  ],
+  "summary": {
+    "boundary_id": "bnd:uix-tenant-jwks-publication-view",
+    "feature_count": 1,
+    "profile_count": 0,
+    "frozen": true,
+    "status": "frozen"
+  }
+}

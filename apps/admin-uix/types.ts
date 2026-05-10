@@ -80,6 +80,32 @@ export type TelemetryData = {
   errors: number;
 };
 
+export type JwksKeyLifecycle = 'active' | 'next' | 'retired' | string;
+
+export type TenantJwksPublicationKey = {
+  kid: string;
+  alg: string;
+  kty: string;
+  use: string;
+  crv?: string;
+  lifecycle: JwksKeyLifecycle;
+  public: boolean;
+  created_at?: string;
+  updated_at?: string;
+  rotated_at?: string;
+  retired_at?: string;
+};
+
+export type TenantJwksPublicationView = {
+  tenant_slug: string;
+  issuer: string;
+  jwks_uri: string;
+  publication_status: 'published' | 'not_published';
+  parity_indicator: string;
+  keys: TenantJwksPublicationKey[];
+  keys_by_lifecycle: Record<string, TenantJwksPublicationKey[]>;
+};
+
 export type PolicyControlPlane = {
   bootstrap: (policies: PolicyGate[]) => void;
   syncPolicy: (policy: PolicyGate) => Promise<unknown>;

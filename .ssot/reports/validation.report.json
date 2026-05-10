@@ -5,17 +5,17 @@
   "warnings": [],
   "summary": {
     "counts": {
-      "features": 527,
+      "features": 546,
       "profiles": 6,
-      "tests": 238,
-      "claims": 462,
-      "evidence": 89,
-      "issues": 12,
+      "tests": 261,
+      "claims": 481,
+      "evidence": 92,
+      "issues": 13,
       "risks": 1,
       "boundaries": 14,
-      "releases": 7,
-      "adrs": 78,
-      "specs": 99
+      "releases": 8,
+      "adrs": 80,
+      "specs": 103
     },
     "profile_status": {
       "passing": 5,

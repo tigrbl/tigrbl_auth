@@ -398,9 +398,12 @@
       "description": "Path to the runtime/configuration file.",
       "implementation_status": "implemented",
       "lifecycle": {
-        "stage": "active",
-        "replacement_feature_ids": [],
-        "note": null
+        "stage": "deprecated",
+        "replacement_feature_ids": [
+          "feat:profile-reference-union",
+          "feat:cli-config-deprecation-or-removal"
+        ],
+        "note": "ADR-1065 makes --profile the single runtime configuration selector; --config duplicates profile intent and must be removed or compatibility-deprecated."
       },
       "plan": {
         "horizon": "current",
@@ -3053,106 +3056,6 @@
         "tst:tests-unit-test-runtime-launcher-py",
         "tst:tests-unit-test-cli-contract-py",
         "tst:tests-unit-test-operator-service-layer-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:cli-verb-adr-index",
-      "title": "Rejected out-of-scope ADR CLI surface: adr index",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "implementation_status": "absent",
-      "lifecycle": {
-        "stage": "removed",
-        "replacement_feature_ids": [],
-        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
-      },
-      "plan": {
-        "horizon": "out_of_bounds",
-        "slot": null,
-        "target_claim_tier": "T0",
-        "target_lifecycle_stage": "removed"
-      },
-      "claim_ids": [
-        "clm:cli-verb-adr-index"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:cli-verb-adr-list",
-      "title": "Rejected out-of-scope ADR CLI surface: adr list",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "implementation_status": "absent",
-      "lifecycle": {
-        "stage": "removed",
-        "replacement_feature_ids": [],
-        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
-      },
-      "plan": {
-        "horizon": "out_of_bounds",
-        "slot": null,
-        "target_claim_tier": "T0",
-        "target_lifecycle_stage": "removed"
-      },
-      "claim_ids": [
-        "clm:cli-verb-adr-list"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:cli-verb-adr-new",
-      "title": "Rejected out-of-scope ADR CLI surface: adr new",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "implementation_status": "absent",
-      "lifecycle": {
-        "stage": "removed",
-        "replacement_feature_ids": [],
-        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
-      },
-      "plan": {
-        "horizon": "out_of_bounds",
-        "slot": null,
-        "target_claim_tier": "T0",
-        "target_lifecycle_stage": "removed"
-      },
-      "claim_ids": [
-        "clm:cli-verb-adr-new"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "requires": [],
-      "spec_ids": []
-    },
-    {
-      "id": "feat:cli-verb-adr-show",
-      "title": "Rejected out-of-scope ADR CLI surface: adr show",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this surface is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "implementation_status": "absent",
-      "lifecycle": {
-        "stage": "removed",
-        "replacement_feature_ids": [],
-        "note": "Rejected as tigrbl_auth CLI surfaces; ADR CRUD is governed by the SSOT registry CLI and is out-of-bounds/out-of-scope for tigrbl_auth certification."
-      },
-      "plan": {
-        "horizon": "out_of_bounds",
-        "slot": null,
-        "target_claim_tier": "T0",
-        "target_lifecycle_stage": "removed"
-      },
-      "claim_ids": [
-        "clm:cli-verb-adr-show"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "requires": [],
       "spec_ids": []
@@ -13601,7 +13504,7 @@
     {
       "id": "feat:uix-admin-auth-session",
       "title": "Admin UIX auth session",
-      "description": "Enterprise admin UIX target: Admin UIX auth session.",
+      "description": "Enterprise admin UIX target: administrator authentication session semantics, including login entry, session establishment, redirect gating, and protected-console access.",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -14293,7 +14196,7 @@
     {
       "id": "feat:secure-default-baseline-admin-gate",
       "title": "Secure-by-default baseline admin gate",
-      "description": "Baseline defaults expose only public OAuth/OIDC routes and require a local admin API key for explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces.",
+      "description": "Baseline defaults expose only public OAuth/OIDC routes, and explicitly enabled generated admin CRUD, JSON-RPC, and diagnostics surfaces require authenticated administrator identity and session controls.",
       "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
@@ -16899,6 +16802,778 @@
       "test_ids": [
         "tst:transport-disclosure-provenance-plane-py",
         "tst:admin-uix-transport-disclosure-posture"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-password-change",
+      "title": "Admin UIX password change",
+      "description": "Enterprise admin UIX target: administrator password-change flow, including first-login forced password change.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:admin-bootstrap-superuser",
+      "title": "Bootstrap superuser administrator",
+      "description": "Baseline admin-auth target: materialize and govern a bootstrap superuser administrator identity for first-run control-plane access and forced credential rollover.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1060",
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:secure-default-baseline-admin-gate"
+      ],
+      "test_ids": [
+        "tst:secure-default-admin-gate-runtime-contract",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-identity-onboarding",
+      "title": "Admin UIX identity onboarding",
+      "description": "Enterprise admin UIX target: onboard, mutate, and manage administrator and user identities through the protected control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1057",
+        "spc:1058"
+      ],
+      "claim_ids": [
+        "clm:uix-identity-admin-view",
+        "clm:uix-safe-mutation-lock-identity"
+      ],
+      "test_ids": [
+        "tst:uix-resource-views-contract",
+        "tst:uix-resource-views-states",
+        "tst:uix-safe-mutations"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-login",
+      "title": "Admin UIX login",
+      "description": "Enterprise admin UIX target: administrator login flow for the protected control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055",
+        "spc:1074"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session",
+        "clm:uix-admin-frontend-adapter"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path",
+        "tst:uix-admin-frontend-adapter"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-admin-password-recovery",
+      "title": "Admin UIX password recovery",
+      "description": "Enterprise admin UIX target: administrator forgot-password and reset-password recovery flow for the control-plane console.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": null,
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1055"
+      ],
+      "claim_ids": [
+        "clm:uix-admin-auth-session"
+      ],
+      "test_ids": [
+        "tst:uix-admin-shell-security",
+        "tst:uix-admin-e2e-golden-path"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-scoped-issuer-boundary",
+      "title": "Tenant-scoped issuer boundary",
+      "description": "Defines each enabled tenant as its own public issuer boundary with stable issuer URL semantics.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-scoped-issuer-boundary"
+      ],
+      "test_ids": [
+        "tst:tenant-scoped-issuer-boundary.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:route-tenant-openid-configuration",
+      "title": "Tenant OpenID configuration route",
+      "description": "Adds GET /tenants/{tenant_slug}/.well-known/openid-configuration.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:route-tenant-openid-configuration"
+      ],
+      "test_ids": [
+        "tst:route-tenant-openid-configuration.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:route-tenant-jwks-json",
+      "title": "Tenant JWKS route",
+      "description": "Adds GET /tenants/{tenant_slug}/.well-known/jwks.json.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:route-tenant-jwks-json"
+      ],
+      "test_ids": [
+        "tst:route-tenant-jwks-json.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-discovery-jwks-uri",
+      "title": "Tenant discovery jwks_uri",
+      "description": "Ensures tenant discovery emits a tenant-specific jwks_uri, not the root /.well-known/jwks.json.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-discovery-jwks-uri"
+      ],
+      "test_ids": [
+        "tst:tenant-discovery-jwks-uri.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-jwks-key-filtering",
+      "title": "Tenant JWKS key filtering",
+      "description": "Ensures tenant JWKS returns only keys owned by that tenant.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-key-filtering"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-key-filtering.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-jwks-rotation-visibility",
+      "title": "Tenant JWKS rotation visibility",
+      "description": "Defines active, next, and retired publication behavior during tenant key rotation.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-rotation-visibility"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-rotation-visibility.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-public-discovery-disabled-policy",
+      "title": "Tenant public discovery disabled policy",
+      "description": "Defines disabled or missing tenant behavior for public discovery routes, with 404 as the expected enumeration-resistant default.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-public-discovery-disabled-policy"
+      ],
+      "test_ids": [
+        "tst:tenant-public-discovery-disabled-policy.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:operator-tenant-jwks-runtime-parity",
+      "title": "Operator tenant JWKS runtime parity",
+      "description": "Ensures keys publish-jwks --tenant X and runtime GET /tenants/X/.well-known/jwks.json agree on key selection and public material.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:operator-tenant-jwks-runtime-parity"
+      ],
+      "test_ids": [
+        "tst:operator-tenant-jwks-runtime-parity.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:openapi-tenant-discovery-routes",
+      "title": "OpenAPI tenant discovery routes",
+      "description": "Adds tenant discovery and JWKS routes to generated OpenAPI contracts.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:openapi-tenant-discovery-routes"
+      ],
+      "test_ids": [
+        "tst:openapi-tenant-discovery-routes.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:discovery-snapshot-tenant-profile-artifacts",
+      "title": "Discovery snapshot tenant profile artifacts",
+      "description": "Extends discovery snapshot generation to include tenant-scoped examples per profile.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:discovery-snapshot-tenant-profile-artifacts"
+      ],
+      "test_ids": [
+        "tst:discovery-snapshot-tenant-profile-artifacts.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-issuer-token-validation-contract",
+      "title": "Tenant issuer token validation contract",
+      "description": "Locks the validation invariant that token iss must match the tenant discovery issuer and resolve to that tenant JWKS.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-issuer-token-validation-contract"
+      ],
+      "test_ids": [
+        "tst:tenant-issuer-token-validation-contract.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:tenant-jwks-cross-tenant-leakage-guard",
+      "title": "Tenant JWKS cross-tenant leakage guard",
+      "description": "Negative coverage proving tenant A routes never expose tenant B keys or metadata.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1090"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:uix-tenant-jwks-publication-view",
+      "title": "UIX tenant JWKS publication view",
+      "description": "Shows per-tenant active, next, and retired keys and the tenant jwks_uri as a UIX-facing view separate from runtime/API behavior.",
+      "implementation_status": "absent",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "tenant-jwks-discovery",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [],
+      "claim_ids": [
+        "clm:uix-tenant-jwks-publication-view"
+      ],
+      "test_ids": [
+        "tst:uix-tenant-jwks-publication-view.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-reference-union",
+      "title": "Profile reference union",
+      "description": "Makes --profile accept either a packaged runtime profile ID or an external YAML profile path as the single runtime configuration selector.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1087",
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-union"
+      ],
+      "test_ids": [
+        "tst:profile-reference-union.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-id-resolution",
+      "title": "Profile ID resolution",
+      "description": "Resolves --profile values such as baseline, production, hardening, fapi2-security, and peer-claim to packaged runtime profile YAML files.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1087"
+      ],
+      "claim_ids": [
+        "clm:profile-id-resolution"
+      ],
+      "test_ids": [
+        "tst:profile-id-resolution.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-path-resolution",
+      "title": "Profile path resolution",
+      "description": "Resolves --profile values that point to .yaml or .yml files as external runtime profile documents.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1087",
+        "spc:1088"
+      ],
+      "claim_ids": [
+        "clm:profile-path-resolution"
+      ],
+      "test_ids": [
+        "tst:profile-path-resolution.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:external-profile-yaml-validation",
+      "title": "External profile YAML validation",
+      "description": "Validates external profile YAML files against required fields, allowed extensions, base profile semantics, and typed runtime configuration values.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1088"
+      ],
+      "claim_ids": [
+        "clm:external-profile-yaml-validation"
+      ],
+      "test_ids": [
+        "tst:external-profile-yaml-validation.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-reference-fail-closed-errors",
+      "title": "Profile reference fail-closed errors",
+      "description": "Fails closed for unknown IDs, missing paths, directories, unsupported extensions, malformed YAML, ambiguous values, and inconsistent external profile content.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1087",
+        "spc:1088",
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-fail-closed-errors"
+      ],
+      "test_ids": [
+        "tst:profile-reference-fail-closed-errors.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-provenance-output",
+      "title": "Profile provenance output",
+      "description": "Reports profile reference kind, packaged profile ID, external profile path, base profile ID, applied overrides, and redaction status in effective deployment output.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:profile-provenance-output"
+      ],
+      "test_ids": [
+        "tst:profile-provenance-output.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:cli-profile-runtime-wiring",
+      "title": "CLI profile runtime wiring",
+      "description": "Wires --profile through CLI dispatch, app assembly, and the deployment resolver so runtime behavior consumes one ResolvedDeployment.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:cli-profile-runtime-wiring"
+      ],
+      "test_ids": [
+        "tst:cli-profile-runtime-wiring.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:cli-config-deprecation-or-removal",
+      "title": "CLI config deprecation or removal",
+      "description": "Removes --config from the generated CLI contract or deprecates it as a compatibility alias that delegates to --profile without separate semantics.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:cli-config-deprecation-or-removal"
+      ],
+      "test_ids": [
+        "tst:cli-config-deprecation-or-removal.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-reference-negative-coverage",
+      "title": "Profile reference negative coverage",
+      "description": "Adds negative tests for invalid profile IDs, invalid paths, malformed profile files, unsupported keys, conflicting declarations, and duplicate selector usage.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1087",
+        "spc:1088",
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-negative-coverage"
+      ],
+      "test_ids": [
+        "tst:profile-reference-negative-coverage.contract"
+      ],
+      "requires": []
+    },
+    {
+      "id": "feat:profile-reference-discovery-contract-alignment",
+      "title": "Profile reference discovery contract alignment",
+      "description": "Ensures OpenID/OAuth discovery, JWKS URI selection, OpenAPI, OpenRPC, profile snapshots, and evidence artifacts derive from the resolved profile reference.",
+      "implementation_status": "implemented",
+      "lifecycle": {
+        "stage": "active",
+        "replacement_feature_ids": [],
+        "note": null
+      },
+      "plan": {
+        "horizon": "current",
+        "slot": "profile-reference-union",
+        "target_claim_tier": "T1",
+        "target_lifecycle_stage": "active"
+      },
+      "spec_ids": [
+        "spc:1089"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-discovery-contract-alignment"
+      ],
+      "test_ids": [
+        "tst:profile-reference-discovery-contract-alignment.contract"
       ],
       "requires": []
     }
@@ -24595,11 +25270,7 @@
         "feat:flag-surface-plugin-mode",
         "feat:flag-surface-public-enabled",
         "feat:flag-surface-rpc-enabled",
-        "feat:target-cli-operator-surface",
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show"
+        "feat:target-cli-operator-surface"
       ],
       "claim_ids": [
         "clm:cli-flag-access-log",
@@ -24832,11 +25503,7 @@
         "clm:flag-surface-plugin-mode",
         "clm:flag-surface-public-enabled",
         "clm:flag-surface-rpc-enabled",
-        "clm:target-cli-operator-surface",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show"
+        "clm:target-cli-operator-surface"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-asgi-application",
@@ -27724,7 +28391,10 @@
       "path": "tests/uix/test_admin_shell_security.py",
       "feature_ids": [
         "feat:uix-admin-console-shell",
-        "feat:uix-admin-auth-session"
+        "feat:uix-admin-auth-session",
+        "feat:uix-admin-password-change",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "claim_ids": [
         "clm:uix-admin-console-shell",
@@ -27767,7 +28437,8 @@
         "feat:uix-consent-admin-view",
         "feat:uix-audit-admin-view",
         "feat:uix-keys-jwks-admin-view",
-        "feat:uix-profile-certification-view"
+        "feat:uix-profile-certification-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-tenant-admin-view",
@@ -27799,7 +28470,8 @@
         "feat:uix-consent-admin-view",
         "feat:uix-audit-admin-view",
         "feat:uix-keys-jwks-admin-view",
-        "feat:uix-profile-certification-view"
+        "feat:uix-profile-certification-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-tenant-admin-view",
@@ -27831,7 +28503,8 @@
         "feat:uix-safe-mutation-toggle-client",
         "feat:uix-safe-mutation-rotate-key",
         "feat:uix-safe-mutation-publish-jwks",
-        "feat:uix-safe-mutation-update-client-registration"
+        "feat:uix-safe-mutation-update-client-registration",
+        "feat:uix-admin-identity-onboarding"
       ],
       "claim_ids": [
         "clm:uix-safe-mutation-revoke-session",
@@ -27936,7 +28609,11 @@
       "feature_ids": [
         "feat:uix-admin-console-shell",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-password-change",
+        "feat:admin-bootstrap-superuser",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "claim_ids": [
         "clm:uix-admin-console-shell",
@@ -27959,7 +28636,8 @@
         "feat:api-admin-contract-publication-boundary",
         "feat:api-admin-authz-gate",
         "feat:api-admin-public-surface-exclusion",
-        "feat:api-public-admin-surface-exclusion"
+        "feat:api-public-admin-surface-exclusion",
+        "feat:admin-bootstrap-superuser"
       ],
       "claim_ids": [
         "clm:secure-default-baseline-admin-gate",
@@ -31494,7 +32172,8 @@
       "feature_ids": [
         "feat:uix-admin-boundary",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-login"
       ],
       "claim_ids": [
         "clm:uix-admin-frontend-adapter",
@@ -31859,6 +32538,374 @@
       "evidence_ids": [
         "evd:admin-uix-transport-disclosure-vitest",
         "evd:admin-uix-transport-disclosure-build"
+      ]
+    },
+    {
+      "id": "tst:tenant-scoped-issuer-boundary.contract",
+      "title": "Tenant-scoped issuer boundary contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-scoped-issuer-boundary"
+      ],
+      "claim_ids": [
+        "clm:tenant-scoped-issuer-boundary"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:route-tenant-openid-configuration.contract",
+      "title": "Tenant OpenID configuration route contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:route-tenant-openid-configuration"
+      ],
+      "claim_ids": [
+        "clm:route-tenant-openid-configuration"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:route-tenant-jwks-json.contract",
+      "title": "Tenant JWKS route contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:route-tenant-jwks-json"
+      ],
+      "claim_ids": [
+        "clm:route-tenant-jwks-json"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-discovery-jwks-uri.contract",
+      "title": "Tenant discovery jwks_uri contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-discovery-jwks-uri"
+      ],
+      "claim_ids": [
+        "clm:tenant-discovery-jwks-uri"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-jwks-key-filtering.contract",
+      "title": "Tenant JWKS key filtering contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-jwks-key-filtering"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-key-filtering"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-jwks-rotation-visibility.contract",
+      "title": "Tenant JWKS rotation visibility contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-jwks-rotation-visibility"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-rotation-visibility"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-public-discovery-disabled-policy.contract",
+      "title": "Tenant public discovery disabled policy contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-public-discovery-disabled-policy"
+      ],
+      "claim_ids": [
+        "clm:tenant-public-discovery-disabled-policy"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:operator-tenant-jwks-runtime-parity.contract",
+      "title": "Operator tenant JWKS runtime parity contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:operator-tenant-jwks-runtime-parity"
+      ],
+      "claim_ids": [
+        "clm:operator-tenant-jwks-runtime-parity"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:openapi-tenant-discovery-routes.contract",
+      "title": "OpenAPI tenant discovery routes contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:openapi-tenant-discovery-routes"
+      ],
+      "claim_ids": [
+        "clm:openapi-tenant-discovery-routes"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:discovery-snapshot-tenant-profile-artifacts.contract",
+      "title": "Discovery snapshot tenant profile artifacts contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:discovery-snapshot-tenant-profile-artifacts"
+      ],
+      "claim_ids": [
+        "clm:discovery-snapshot-tenant-profile-artifacts"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-issuer-token-validation-contract.contract",
+      "title": "Tenant issuer token validation contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-issuer-token-validation-contract"
+      ],
+      "claim_ids": [
+        "clm:tenant-issuer-token-validation-contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:tenant-jwks-cross-tenant-leakage-guard.contract",
+      "title": "Tenant JWKS cross-tenant leakage guard contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "claim_ids": [
+        "clm:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "tst:uix-tenant-jwks-publication-view.contract",
+      "title": "UIX tenant JWKS publication view contract test",
+      "status": "planned",
+      "kind": "contract",
+      "path": "tests/features/test_tenant_jwks_discovery.py",
+      "feature_ids": [
+        "feat:uix-tenant-jwks-publication-view"
+      ],
+      "claim_ids": [
+        "clm:uix-tenant-jwks-publication-view"
+      ],
+      "evidence_ids": [
+        "evd:tenant-jwks-discovery-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-reference-union.contract",
+      "title": "Profile reference union contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-reference-union"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-union"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-id-resolution.contract",
+      "title": "Profile ID resolution contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-id-resolution"
+      ],
+      "claim_ids": [
+        "clm:profile-id-resolution"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-path-resolution.contract",
+      "title": "Profile path resolution contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-path-resolution"
+      ],
+      "claim_ids": [
+        "clm:profile-path-resolution"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:external-profile-yaml-validation.contract",
+      "title": "External profile YAML validation contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:external-profile-yaml-validation"
+      ],
+      "claim_ids": [
+        "clm:external-profile-yaml-validation"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-reference-fail-closed-errors.contract",
+      "title": "Profile reference fail-closed errors contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-reference-fail-closed-errors"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-fail-closed-errors"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-provenance-output.contract",
+      "title": "Profile provenance output contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-provenance-output"
+      ],
+      "claim_ids": [
+        "clm:profile-provenance-output"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:cli-profile-runtime-wiring.contract",
+      "title": "CLI profile runtime wiring contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:cli-profile-runtime-wiring"
+      ],
+      "claim_ids": [
+        "clm:cli-profile-runtime-wiring"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:cli-config-deprecation-or-removal.contract",
+      "title": "CLI config deprecation or removal contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:cli-config-deprecation-or-removal"
+      ],
+      "claim_ids": [
+        "clm:cli-config-deprecation-or-removal"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-reference-negative-coverage.contract",
+      "title": "Profile reference negative coverage contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-reference-negative-coverage"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-negative-coverage"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "tst:profile-reference-discovery-contract-alignment.contract",
+      "title": "Profile reference discovery contract alignment contract test",
+      "status": "passing",
+      "kind": "contract",
+      "path": "tests/features/test_profile_reference_union.py",
+      "feature_ids": [
+        "feat:profile-reference-discovery-contract-alignment"
+      ],
+      "claim_ids": [
+        "clm:profile-reference-discovery-contract-alignment"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
       ]
     }
   ],
@@ -34164,74 +35211,6 @@
         "tst:tests-unit-test-runtime-launcher-py",
         "tst:tests-unit-test-cli-contract-py",
         "tst:tests-unit-test-operator-service-layer-py"
-      ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-cli-operator-surface"
-      ]
-    },
-    {
-      "id": "clm:cli-verb-adr-index",
-      "title": "Rejected out-of-scope ADR CLI surface: adr index",
-      "status": "retired",
-      "tier": "T0",
-      "kind": "cli-verb",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "feature_ids": [
-        "feat:cli-verb-adr-index"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-cli-operator-surface"
-      ]
-    },
-    {
-      "id": "clm:cli-verb-adr-list",
-      "title": "Rejected out-of-scope ADR CLI surface: adr list",
-      "status": "retired",
-      "tier": "T0",
-      "kind": "cli-verb",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "feature_ids": [
-        "feat:cli-verb-adr-list"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-cli-operator-surface"
-      ]
-    },
-    {
-      "id": "clm:cli-verb-adr-new",
-      "title": "Rejected out-of-scope ADR CLI surface: adr new",
-      "status": "retired",
-      "tier": "T0",
-      "kind": "cli-verb",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "feature_ids": [
-        "feat:cli-verb-adr-new"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
-      ],
-      "evidence_ids": [
-        "evd:compliance-evidence-tier3-cli-operator-surface"
-      ]
-    },
-    {
-      "id": "clm:cli-verb-adr-show",
-      "title": "Rejected out-of-scope ADR CLI surface: adr show",
-      "status": "retired",
-      "tier": "T0",
-      "kind": "cli-verb",
-      "description": "Rejected as a tigrbl_auth CLI surface. ADR CRUD belongs to the SSOT registry CLI, not the tigrbl_auth operator CLI; this claim is out-of-bounds/out-of-scope for tigrbl_auth certification.",
-      "feature_ids": [
-        "feat:cli-verb-adr-show"
-      ],
-      "test_ids": [
-        "tst:tests-unit-test-cli-surface-checkpoint-py"
       ],
       "evidence_ids": [
         "evd:compliance-evidence-tier3-cli-operator-surface"
@@ -43188,7 +44167,10 @@
       "kind": "uix-expected-behavior",
       "description": "Implemented Admin UIX auth session behavior with executable authorization tests.",
       "feature_ids": [
-        "feat:uix-admin-auth-session"
+        "feat:uix-admin-auth-session",
+        "feat:uix-admin-password-change",
+        "feat:uix-admin-login",
+        "feat:uix-admin-password-recovery"
       ],
       "test_ids": [
         "tst:uix-admin-shell-security",
@@ -43298,7 +44280,8 @@
       "kind": "uix-expected-behavior",
       "description": "Declared expected behavior for Identity administrator view before UI implementation lands.",
       "feature_ids": [
-        "feat:uix-identity-admin-view"
+        "feat:uix-identity-admin-view",
+        "feat:uix-admin-identity-onboarding"
       ],
       "test_ids": [
         "tst:uix-resource-views-contract",
@@ -43482,7 +44465,8 @@
       "kind": "uix-expected-behavior",
       "description": "Declared expected behavior for UIX lock and unlock identity before UI implementation lands.",
       "feature_ids": [
-        "feat:uix-safe-mutation-lock-identity"
+        "feat:uix-safe-mutation-lock-identity",
+        "feat:uix-admin-identity-onboarding"
       ],
       "test_ids": [
         "tst:uix-safe-mutations"
@@ -43643,7 +44627,8 @@
         "feat:admin-gate-does-not-mutate-openapi-json",
         "feat:openapi-runtime-payload-deferred-to-tigrbl",
         "feat:admin-gate-does-not-mutate-openrpc-json",
-        "feat:openrpc-runtime-payload-deferred-to-tigrbl"
+        "feat:openrpc-runtime-payload-deferred-to-tigrbl",
+        "feat:admin-bootstrap-superuser"
       ],
       "test_ids": [
         "tst:secure-default-admin-gate-runtime-contract",
@@ -43774,7 +44759,8 @@
       "feature_ids": [
         "feat:uix-admin-boundary",
         "feat:uix-admin-auth-session",
-        "feat:uix-tenant-profile-selector"
+        "feat:uix-tenant-profile-selector",
+        "feat:uix-admin-login"
       ],
       "test_ids": [
         "tst:uix-admin-frontend-adapter"
@@ -44315,6 +45301,397 @@
         "evd:transport-disclosure-provenance-pytest",
         "evd:admin-uix-transport-disclosure-vitest",
         "evd:admin-uix-transport-disclosure-build"
+      ]
+    },
+    {
+      "id": "clm:tenant-scoped-issuer-boundary",
+      "title": "Tenant-scoped issuer boundary claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "runtime-contract",
+      "description": "Each enabled tenant has its own public issuer boundary with stable issuer URL semantics.",
+      "feature_ids": [
+        "feat:tenant-scoped-issuer-boundary"
+      ],
+      "test_ids": [
+        "tst:tenant-scoped-issuer-boundary.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:route-tenant-openid-configuration",
+      "title": "Tenant OpenID configuration route claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "runtime-route",
+      "description": "Adds GET /tenants/{tenant_slug}/.well-known/openid-configuration.",
+      "feature_ids": [
+        "feat:route-tenant-openid-configuration"
+      ],
+      "test_ids": [
+        "tst:route-tenant-openid-configuration.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:route-tenant-jwks-json",
+      "title": "Tenant JWKS route claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "runtime-route",
+      "description": "Adds GET /tenants/{tenant_slug}/.well-known/jwks.json.",
+      "feature_ids": [
+        "feat:route-tenant-jwks-json"
+      ],
+      "test_ids": [
+        "tst:route-tenant-jwks-json.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-discovery-jwks-uri",
+      "title": "Tenant discovery jwks_uri claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "metadata-contract",
+      "description": "Ensures tenant discovery emits a tenant-specific jwks_uri, not the root /.well-known/jwks.json.",
+      "feature_ids": [
+        "feat:tenant-discovery-jwks-uri"
+      ],
+      "test_ids": [
+        "tst:tenant-discovery-jwks-uri.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-jwks-key-filtering",
+      "title": "Tenant JWKS key filtering claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "isolation-contract",
+      "description": "Ensures tenant JWKS returns only keys owned by that tenant.",
+      "feature_ids": [
+        "feat:tenant-jwks-key-filtering"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-key-filtering.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-jwks-rotation-visibility",
+      "title": "Tenant JWKS rotation visibility claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "key-lifecycle-contract",
+      "description": "Defines active, next, and retired publication behavior during tenant key rotation.",
+      "feature_ids": [
+        "feat:tenant-jwks-rotation-visibility"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-rotation-visibility.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-public-discovery-disabled-policy",
+      "title": "Tenant public discovery disabled policy claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "security-policy",
+      "description": "Defines disabled or missing tenant behavior for public discovery routes, with 404 as the expected enumeration-resistant default.",
+      "feature_ids": [
+        "feat:tenant-public-discovery-disabled-policy"
+      ],
+      "test_ids": [
+        "tst:tenant-public-discovery-disabled-policy.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:operator-tenant-jwks-runtime-parity",
+      "title": "Operator tenant JWKS runtime parity claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "operator-runtime-parity",
+      "description": "Ensures keys publish-jwks --tenant X and runtime GET /tenants/X/.well-known/jwks.json agree on key selection and public material.",
+      "feature_ids": [
+        "feat:operator-tenant-jwks-runtime-parity"
+      ],
+      "test_ids": [
+        "tst:operator-tenant-jwks-runtime-parity.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:openapi-tenant-discovery-routes",
+      "title": "OpenAPI tenant discovery routes claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "openapi-contract",
+      "description": "Adds tenant discovery and JWKS routes to generated OpenAPI contracts.",
+      "feature_ids": [
+        "feat:openapi-tenant-discovery-routes"
+      ],
+      "test_ids": [
+        "tst:openapi-tenant-discovery-routes.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:discovery-snapshot-tenant-profile-artifacts",
+      "title": "Discovery snapshot tenant profile artifacts claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "snapshot-contract",
+      "description": "Extends discovery snapshot generation to include tenant-scoped examples per profile.",
+      "feature_ids": [
+        "feat:discovery-snapshot-tenant-profile-artifacts"
+      ],
+      "test_ids": [
+        "tst:discovery-snapshot-tenant-profile-artifacts.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-issuer-token-validation-contract",
+      "title": "Tenant issuer token validation contract claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "token-validation-contract",
+      "description": "Locks the validation invariant that token iss must match the tenant discovery issuer and resolve to that tenant JWKS.",
+      "feature_ids": [
+        "feat:tenant-issuer-token-validation-contract"
+      ],
+      "test_ids": [
+        "tst:tenant-issuer-token-validation-contract.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:tenant-jwks-cross-tenant-leakage-guard",
+      "title": "Tenant JWKS cross-tenant leakage guard claim",
+      "status": "published",
+      "tier": "T1",
+      "kind": "negative-isolation",
+      "description": "Negative coverage proving tenant A routes never expose tenant B keys or metadata.",
+      "feature_ids": [
+        "feat:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "test_ids": [
+        "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "clm:uix-tenant-jwks-publication-view",
+      "title": "UIX tenant JWKS publication view claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "uix-contract",
+      "description": "Shows per-tenant active, next, and retired keys and the tenant jwks_uri as a UIX-facing view separate from runtime/API behavior.",
+      "feature_ids": [
+        "feat:uix-tenant-jwks-publication-view"
+      ],
+      "test_ids": [
+        "tst:uix-tenant-jwks-publication-view.contract"
+      ],
+      "evidence_ids": [
+        "evd:tenant-jwks-discovery-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-reference-union",
+      "title": "Profile reference union claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "runtime-configuration",
+      "description": "Makes --profile accept either a packaged runtime profile ID or an external YAML profile path as the single runtime configuration selector.",
+      "feature_ids": [
+        "feat:profile-reference-union"
+      ],
+      "test_ids": [
+        "tst:profile-reference-union.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-id-resolution",
+      "title": "Profile ID resolution claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "runtime-configuration",
+      "description": "Resolves --profile values such as baseline, production, hardening, fapi2-security, and peer-claim to packaged runtime profile YAML files.",
+      "feature_ids": [
+        "feat:profile-id-resolution"
+      ],
+      "test_ids": [
+        "tst:profile-id-resolution.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-path-resolution",
+      "title": "Profile path resolution claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "runtime-configuration",
+      "description": "Resolves --profile values that point to .yaml or .yml files as external runtime profile documents.",
+      "feature_ids": [
+        "feat:profile-path-resolution"
+      ],
+      "test_ids": [
+        "tst:profile-path-resolution.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:external-profile-yaml-validation",
+      "title": "External profile YAML validation claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "validation-contract",
+      "description": "Validates external profile YAML files against required fields, allowed extensions, base profile semantics, and typed runtime configuration values.",
+      "feature_ids": [
+        "feat:external-profile-yaml-validation"
+      ],
+      "test_ids": [
+        "tst:external-profile-yaml-validation.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-reference-fail-closed-errors",
+      "title": "Profile reference fail-closed errors claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "negative-contract",
+      "description": "Fails closed for unknown IDs, missing paths, directories, unsupported extensions, malformed YAML, ambiguous values, and inconsistent external profile content.",
+      "feature_ids": [
+        "feat:profile-reference-fail-closed-errors"
+      ],
+      "test_ids": [
+        "tst:profile-reference-fail-closed-errors.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-provenance-output",
+      "title": "Profile provenance output claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "provenance-contract",
+      "description": "Reports profile reference kind, packaged profile ID, external profile path, base profile ID, applied overrides, and redaction status in effective deployment output.",
+      "feature_ids": [
+        "feat:profile-provenance-output"
+      ],
+      "test_ids": [
+        "tst:profile-provenance-output.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:cli-profile-runtime-wiring",
+      "title": "CLI profile runtime wiring claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "cli-runtime-contract",
+      "description": "Wires --profile through CLI dispatch, app assembly, and the deployment resolver so runtime behavior consumes one ResolvedDeployment.",
+      "feature_ids": [
+        "feat:cli-profile-runtime-wiring"
+      ],
+      "test_ids": [
+        "tst:cli-profile-runtime-wiring.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:cli-config-deprecation-or-removal",
+      "title": "CLI config deprecation or removal claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "cli-surface-contract",
+      "description": "Removes --config from the generated CLI contract or deprecates it as a compatibility alias that delegates to --profile without separate semantics.",
+      "feature_ids": [
+        "feat:cli-config-deprecation-or-removal"
+      ],
+      "test_ids": [
+        "tst:cli-config-deprecation-or-removal.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-reference-negative-coverage",
+      "title": "Profile reference negative coverage claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "negative-testing",
+      "description": "Adds negative tests for invalid profile IDs, invalid paths, malformed profile files, unsupported keys, conflicting declarations, and duplicate selector usage.",
+      "feature_ids": [
+        "feat:profile-reference-negative-coverage"
+      ],
+      "test_ids": [
+        "tst:profile-reference-negative-coverage.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ]
+    },
+    {
+      "id": "clm:profile-reference-discovery-contract-alignment",
+      "title": "Profile reference discovery contract alignment claim",
+      "status": "declared",
+      "tier": "T1",
+      "kind": "contract-alignment",
+      "description": "Ensures OpenID/OAuth discovery, JWKS URI selection, OpenAPI, OpenRPC, profile snapshots, and evidence artifacts derive from the resolved profile reference.",
+      "feature_ids": [
+        "feat:profile-reference-discovery-contract-alignment"
+      ],
+      "test_ids": [
+        "tst:profile-reference-discovery-contract-alignment.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
       ]
     }
   ],
@@ -44892,10 +46269,6 @@
         "clm:flag-surface-public-enabled",
         "clm:flag-surface-rpc-enabled",
         "clm:target-cli-operator-surface",
-        "clm:cli-verb-adr-index",
-        "clm:cli-verb-adr-list",
-        "clm:cli-verb-adr-new",
-        "clm:cli-verb-adr-show",
         "clm:runtime-profile-configuration-contract",
         "clm:profile-baseline-development"
       ],
@@ -49905,6 +51278,88 @@
       "test_ids": [
         "tst:admin-uix-transport-disclosure-posture"
       ]
+    },
+    {
+      "id": "evd:tenant-jwks-discovery-planned",
+      "title": "Tenant JWKS discovery planned evidence",
+      "status": "planned",
+      "kind": "planned-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/tenant-jwks-discovery.planned.json",
+      "claim_ids": [
+        "clm:uix-tenant-jwks-publication-view"
+      ],
+      "test_ids": [
+        "tst:uix-tenant-jwks-publication-view.contract"
+      ]
+    },
+    {
+      "id": "evd:profile-reference-union-planned",
+      "title": "Profile reference union planned evidence",
+      "status": "passed",
+      "kind": "planned-evidence",
+      "tier": "T1",
+      "path": ".ssot/reports/profile-reference-union.planned.json",
+      "claim_ids": [
+        "clm:profile-reference-union",
+        "clm:profile-id-resolution",
+        "clm:profile-path-resolution",
+        "clm:external-profile-yaml-validation",
+        "clm:profile-reference-fail-closed-errors",
+        "clm:profile-provenance-output",
+        "clm:cli-profile-runtime-wiring",
+        "clm:cli-config-deprecation-or-removal",
+        "clm:profile-reference-negative-coverage",
+        "clm:profile-reference-discovery-contract-alignment"
+      ],
+      "test_ids": [
+        "tst:profile-reference-union.contract",
+        "tst:profile-id-resolution.contract",
+        "tst:profile-path-resolution.contract",
+        "tst:external-profile-yaml-validation.contract",
+        "tst:profile-reference-fail-closed-errors.contract",
+        "tst:profile-provenance-output.contract",
+        "tst:cli-profile-runtime-wiring.contract",
+        "tst:cli-config-deprecation-or-removal.contract",
+        "tst:profile-reference-negative-coverage.contract",
+        "tst:profile-reference-discovery-contract-alignment.contract"
+      ]
+    },
+    {
+      "id": "evd:tenant-public-discovery-and-jwks-runtime",
+      "title": "Tenant public discovery and JWKS runtime evidence",
+      "status": "passed",
+      "kind": "pytest-runtime-api",
+      "tier": "T1",
+      "path": ".ssot/reports/tenant-public-discovery-and-jwks-runtime.json",
+      "claim_ids": [
+        "clm:tenant-scoped-issuer-boundary",
+        "clm:route-tenant-openid-configuration",
+        "clm:route-tenant-jwks-json",
+        "clm:tenant-discovery-jwks-uri",
+        "clm:tenant-jwks-key-filtering",
+        "clm:tenant-jwks-rotation-visibility",
+        "clm:tenant-public-discovery-disabled-policy",
+        "clm:operator-tenant-jwks-runtime-parity",
+        "clm:openapi-tenant-discovery-routes",
+        "clm:discovery-snapshot-tenant-profile-artifacts",
+        "clm:tenant-issuer-token-validation-contract",
+        "clm:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "test_ids": [
+        "tst:tenant-scoped-issuer-boundary.contract",
+        "tst:route-tenant-openid-configuration.contract",
+        "tst:route-tenant-jwks-json.contract",
+        "tst:tenant-discovery-jwks-uri.contract",
+        "tst:tenant-jwks-key-filtering.contract",
+        "tst:tenant-jwks-rotation-visibility.contract",
+        "tst:tenant-public-discovery-disabled-policy.contract",
+        "tst:operator-tenant-jwks-runtime-parity.contract",
+        "tst:openapi-tenant-discovery-routes.contract",
+        "tst:discovery-snapshot-tenant-profile-artifacts.contract",
+        "tst:tenant-issuer-token-validation-contract.contract",
+        "tst:tenant-jwks-cross-tenant-leakage-guard.contract"
+      ]
     }
   ],
   "issues": [
@@ -50137,6 +51592,38 @@
       "evidence_ids": [],
       "risk_ids": [],
       "release_blocking": true
+    },
+    {
+      "id": "iss:cli-config-flag-unwired-001",
+      "title": "--config duplicates --profile and is declared without valid semantics",
+      "status": "closed",
+      "severity": "high",
+      "description": "The CLI metadata declares --config as a runtime/configuration file path, but profile YAMLs are the runtime configuration model. ADR-1065 and SPEC-1087 through SPEC-1089 make --profile the single runtime configuration selector, accepting either packaged profile IDs or external YAML profile paths. Close this issue by removing --config from the generated CLI contract or explicitly deprecating it as a compatibility alias that delegates to --profile without separate semantics, then add validation and negative coverage for duplicate selector usage.",
+      "plan": {
+        "horizon": "current",
+        "slot": "config-runtime"
+      },
+      "feature_ids": [
+        "feat:cli-flag-config",
+        "feat:runtime-profile-configuration-contract",
+        "feat:target-cli-operator-surface",
+        "feat:profile-reference-union",
+        "feat:cli-config-deprecation-or-removal"
+      ],
+      "claim_ids": [
+        "clm:cli-flag-config",
+        "clm:runtime-profile-configuration-contract",
+        "clm:profile-reference-union",
+        "clm:cli-config-deprecation-or-removal"
+      ],
+      "test_ids": [
+        "tst:cli-config-deprecation-or-removal.contract"
+      ],
+      "evidence_ids": [
+        "evd:profile-reference-union-planned"
+      ],
+      "risk_ids": [],
+      "release_blocking": true
     }
   ],
   "risks": [
@@ -50283,19 +51770,6 @@
       "profile_ids": []
     },
     {
-      "id": "bnd:priority-3-out-of-bounds-adr-cli",
-      "title": "Priority 3 Out-of-Bounds ADR CLI Tracking",
-      "status": "draft",
-      "frozen": false,
-      "feature_ids": [
-        "feat:cli-verb-adr-index",
-        "feat:cli-verb-adr-list",
-        "feat:cli-verb-adr-new",
-        "feat:cli-verb-adr-show"
-      ],
-      "profile_ids": []
-    },
-    {
       "id": "bnd:phase1-surface-baseline-20260505",
       "title": "Phase 1 surface boundary and applicability baseline",
       "status": "frozen",
@@ -50432,6 +51906,27 @@
         "feat:release-cyclonedx-requirements"
       ],
       "profile_ids": []
+    },
+    {
+      "id": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "title": "Tenant public discovery and JWKS runtime",
+      "status": "frozen",
+      "frozen": true,
+      "feature_ids": [
+        "feat:tenant-scoped-issuer-boundary",
+        "feat:route-tenant-openid-configuration",
+        "feat:route-tenant-jwks-json",
+        "feat:tenant-discovery-jwks-uri",
+        "feat:tenant-jwks-key-filtering",
+        "feat:tenant-jwks-rotation-visibility",
+        "feat:tenant-public-discovery-disabled-policy",
+        "feat:operator-tenant-jwks-runtime-parity",
+        "feat:openapi-tenant-discovery-routes",
+        "feat:discovery-snapshot-tenant-profile-artifacts",
+        "feat:tenant-issuer-token-validation-contract",
+        "feat:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "profile_ids": []
     }
   ],
   "releases": [
@@ -50550,6 +52045,29 @@
         "evd:transport-disclosure-provenance-pytest",
         "evd:admin-uix-transport-disclosure-vitest",
         "evd:admin-uix-transport-disclosure-build"
+      ]
+    },
+    {
+      "id": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+      "version": "0.3.4-tenant-public-discovery-and-jwks-runtime.20260510",
+      "status": "published",
+      "boundary_id": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "claim_ids": [
+        "clm:tenant-scoped-issuer-boundary",
+        "clm:route-tenant-openid-configuration",
+        "clm:route-tenant-jwks-json",
+        "clm:tenant-discovery-jwks-uri",
+        "clm:tenant-jwks-key-filtering",
+        "clm:tenant-jwks-rotation-visibility",
+        "clm:tenant-public-discovery-disabled-policy",
+        "clm:operator-tenant-jwks-runtime-parity",
+        "clm:openapi-tenant-discovery-routes",
+        "clm:discovery-snapshot-tenant-profile-artifacts",
+        "clm:tenant-issuer-token-validation-contract",
+        "clm:tenant-jwks-cross-tenant-leakage-guard"
+      ],
+      "evidence_ids": [
+        "evd:tenant-public-discovery-and-jwks-runtime"
       ]
     }
   ],
@@ -51509,7 +53027,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "53d66425f6bec8c2cbda897a9614c662da7f2d9aaad6dd41b6db00eecc499f81",
+      "content_sha256": "55b9d5d9353aa053d5be5c3c7fa74004ab5cc14d5f55c51490ef105cd373638c",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -51895,6 +53413,50 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": []
+    },
+    {
+      "id": "adr:1065",
+      "number": 1065,
+      "slug": "profile-reference-union-for-runtime-configuration",
+      "title": "Profile reference union for runtime configuration",
+      "path": ".ssot/adr/ADR-1065-profile-reference-union-for-runtime-configuration.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "05468209ae04129a0bbabf274fc5b9f38bcec9955083973af7803f06db50b5d2",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Use --profile as the single runtime configuration selector for packaged IDs and external YAML profile files.",
+          "at": "2026-05-08T08:05:29Z"
+        }
+      ]
+    },
+    {
+      "id": "adr:1066",
+      "number": 1066,
+      "slug": "tenant-public-discovery-and-jwks-runtime-boundary",
+      "title": "Tenant public discovery and JWKS runtime boundary",
+      "path": ".ssot/adr/ADR-1066-tenant-public-discovery-and-jwks-runtime-boundary.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "2125db564a92aef0c2b1cab6fdfceded79260457cf078fb09ae253a5338800d0",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define tenant-scoped public discovery and JWKS runtime boundary.",
+          "at": "2026-05-10T09:59:16Z"
+        }
+      ]
     }
   ],
   "specs": [
@@ -53110,7 +54672,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "0486b7d05422692c4aded5d972f4818ab749eacce411ffaa5994539e0fa56fd9",
+      "content_sha256": "88888eb6ef78524bd839fd58e46ce1489ac4e58755dfde81b673f5e62eaaf4c6",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53161,7 +54723,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "3c9aaba5e6e49bbc7910f32caf2b7190ac7db334c74c6485a6755939ae9beb5e",
+      "content_sha256": "96f993cd78076f1745af4851faace45256a6f03ac161fa11e435305e672d947b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53195,7 +54757,7 @@
       "managed": false,
       "immutable": false,
       "package_version": "0.2.8",
-      "content_sha256": "22934551e86c93801d35b41880313ffb7111494d9f59717b02dc1bc2d5a0eacf",
+      "content_sha256": "b2b31c486701b7e852b9dff42a661772d4afa357be82cd0428ae6ab6a8cf363b",
       "status": "accepted",
       "supersedes": [],
       "superseded_by": [],
@@ -53669,6 +55231,98 @@
       "supersedes": [],
       "superseded_by": [],
       "status_notes": [],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1087",
+      "number": 1087,
+      "slug": "profile-reference-resolution-requirements",
+      "title": "Profile reference resolution requirements",
+      "path": ".ssot/specs/SPEC-1087-profile-reference-resolution-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "e851ceac68b968cfeaeee8248a72abdec16dd48df35ea2094d3e2c6beb2df993",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define --profile as a union of packaged profile IDs and external YAML profile paths.",
+          "at": "2026-05-08T08:05:35Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1088",
+      "number": 1088,
+      "slug": "external-profile-yaml-schema-and-validation-requirements",
+      "title": "External profile YAML schema and validation requirements",
+      "path": ".ssot/specs/SPEC-1088-external-profile-yaml-schema-and-validation-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "a64e1f612f6cdaa3eafb6e568a510e2c1befc65c03a9a66c714492dfd00c689c",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define the schema and fail-closed validation model for external profile YAML files selected by --profile.",
+          "at": "2026-05-08T08:05:42Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1089",
+      "number": 1089,
+      "slug": "profile-cli-precedence-provenance-and-config-deprecation-requirements",
+      "title": "Profile CLI precedence provenance and config deprecation requirements",
+      "path": ".ssot/specs/SPEC-1089-profile-cli-precedence-provenance-and-config-deprecation-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "353b861cfe802a85b97a8d5c90f7d459d6a5fd644d76e199c11a0ea3bbe10bcb",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define CLI precedence, provenance, validation, and --config removal or deprecation semantics.",
+          "at": "2026-05-08T08:05:54Z"
+        }
+      ],
+      "kind": "normative"
+    },
+    {
+      "id": "spc:1090",
+      "number": 1090,
+      "slug": "tenant-public-discovery-and-jwks-runtime-requirements",
+      "title": "Tenant public discovery and JWKS runtime requirements",
+      "path": ".ssot/specs/SPEC-1090-tenant-public-discovery-and-jwks-runtime-requirements.yaml",
+      "origin": "repo-local",
+      "managed": false,
+      "immutable": false,
+      "package_version": "0.2.8",
+      "content_sha256": "defa4b0b7695599e0cd3bef9e21b590040998b27e9a86d9f3a0111f2ed2c5f04",
+      "status": "accepted",
+      "supersedes": [],
+      "superseded_by": [],
+      "status_notes": [
+        {
+          "status": "accepted",
+          "note": "Define runtime/API tenant discovery and JWKS requirements.",
+          "at": "2026-05-10T09:59:17Z"
+        }
+      ],
       "kind": "normative"
     }
   ],

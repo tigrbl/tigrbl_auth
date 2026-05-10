@@ -17,6 +17,7 @@ from tigrbl_auth.services.tenant_discovery import (
     require_tenant_issuer,
     tenant_issuer,
 )
+from tigrbl_auth.uix import build_tenant_jwks_publication_view
 
 ROOT_ISSUER = "https://id.example.com"
 TENANT_A = "tenant-a"
@@ -163,6 +164,40 @@ async def test_tenant_jwks_cross_tenant_leakage_guard_contract(tmp_path: Path, m
     assert f"/tenants/{TENANT_B}" not in combined
 
 
-@pytest.mark.skip(reason="planned UIX boundary; runtime/API boundary intentionally excludes it")
 def test_uix_tenant_jwks_publication_view_contract() -> None:
-    raise AssertionError("planned")
+    view = build_tenant_jwks_publication_view(
+        root_issuer=ROOT_ISSUER,
+        tenant_slug=TENANT_A,
+        jwks={
+            "keys": [
+                {"kid": "kid-a-active", "alg": "ES256", "kty": "EC", "use": "sig", "crv": "P-256", "status": "active", "d": "private"},
+                {"kid": "kid-a-next", "alg": "ES256", "kty": "EC", "use": "sig", "crv": "P-256", "status": "next"},
+            ]
+        },
+        key_records=[
+            {
+                "id": "kid-a-retired",
+                "tenant": TENANT_A,
+                "status": "retired",
+                "data": {"kid": "kid-a-retired", "alg": "ES256", "kty": "EC", "use": "sig", "crv": "P-256", "d": "private"},
+            },
+            {"id": "kid-b-active", "tenant": TENANT_B, "status": "active", "data": {"kid": "kid-b-active", "alg": "ES256"}},
+            {"id": "unowned-retired", "status": "retired", "data": {"kid": "unowned-retired", "alg": "ES256"}},
+        ],
+    )
+
+    payload = view.to_dict()
+    serialized = json.dumps(payload, sort_keys=True).lower()
+    assert payload["tenant_slug"] == TENANT_A
+    assert payload["issuer"] == f"{ROOT_ISSUER}/tenants/{TENANT_A}"
+    assert payload["jwks_uri"] == f"{ROOT_ISSUER}/tenants/{TENANT_A}/.well-known/jwks.json"
+    assert payload["publication_status"] == "published"
+    assert payload["keys_by_lifecycle"]["active"][0]["kid"] == "kid-a-active"
+    assert payload["keys_by_lifecycle"]["next"][0]["kid"] == "kid-a-next"
+    assert payload["keys_by_lifecycle"]["retired"][0]["kid"] == "kid-a-retired"
+    assert payload["keys_by_lifecycle"]["retired"][0]["public"] is False
+    assert f"/tenants/{TENANT_A}/.well-known/jwks.json" in payload["parity_indicator"]
+    assert "kid-b-active" not in serialized
+    assert "unowned-retired" not in serialized
+    assert "private" not in serialized
+    assert "client_secret" not in serialized

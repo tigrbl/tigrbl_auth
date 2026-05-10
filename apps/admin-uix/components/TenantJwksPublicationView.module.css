@@ -1,0 +1,157 @@
+.surface {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.eyebrow {
+  color: #55554e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.title {
+  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-top: 6px;
+}
+
+.status {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #1a1a1a;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 800;
+  gap: 8px;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+  text-transform: uppercase;
+}
+
+.dot {
+  background: #0055ff;
+  border-radius: 999px;
+  height: 8px;
+  width: 8px;
+}
+
+.dotMuted {
+  background: #f59e0b;
+}
+
+.metaGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.metaCell {
+  background: #ffffff;
+  border: 1px solid #1a1a1a;
+  min-width: 0;
+  padding: 14px;
+}
+
+.label {
+  color: #55554e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.value {
+  color: #1a1a1a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.countRow {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.countCell {
+  background: #ebebe5;
+  border: 1px solid #1a1a1a;
+  padding: 14px;
+}
+
+.count {
+  color: #1a1a1a;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.tableWrap {
+  border: 1px solid #1a1a1a;
+  overflow-x: auto;
+}
+
+.table {
+  background: #ffffff;
+  border-collapse: collapse;
+  min-width: 760px;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #d0d0cc;
+  color: #1a1a1a;
+  font-size: 12px;
+  padding: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  background: #ebebe5;
+  color: #55554e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pill {
+  border: 1px solid #1a1a1a;
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 7px;
+  text-transform: uppercase;
+}
+
+.error {
+  background: #fff3f0;
+  border: 1px solid #ff2d00;
+  color: #7a1e00;
+  padding: 14px;
+}
+
+.empty {
+  background: #ffffff;
+  border: 1px solid #1a1a1a;
+  color: #55554e;
+  padding: 24px;
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 import { gateway_rpc } from './jsonRpcService';
-import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, User } from '../types';
+import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, TenantJwksPublicationKey, TenantJwksPublicationView, User } from '../types';
 import { UserStatus } from '../types';
 
 const toError = (error: unknown): Error => {
@@ -58,6 +58,104 @@ function normalizeUser(user: any): User {
     must_change_password: Boolean(user.must_change_password),
     created_at: user.created_at,
     updated_at: user.updated_at,
+  };
+}
+
+type OpenIdTenantDiscovery = {
+  issuer: string;
+  jwks_uri: string;
+};
+
+const lifecycleOrder: Record<string, number> = {
+  active: 0,
+  next: 1,
+  retired: 2,
+};
+
+function sameTenant(record: any, tenant: Tenant): boolean {
+  const scopedTenant = record?.tenant_slug ?? record?.tenant ?? record?.tenant_id ?? record?.metadata?.tenant_slug ?? record?.metadata?.tenant ?? record?.metadata?.tenant_id;
+  return scopedTenant === tenant.slug || scopedTenant === tenant.id;
+}
+
+function normalizePublicJwk(key: any): TenantJwksPublicationKey | null {
+  const kid = key?.kid;
+  if (!kid) {
+    return null;
+  }
+  return {
+    kid: String(kid),
+    alg: String(key?.alg ?? ''),
+    kty: String(key?.kty ?? ''),
+    use: String(key?.use ?? ''),
+    crv: key?.crv ? String(key.crv) : undefined,
+    lifecycle: String(key?.status ?? key?.publication_status ?? 'active').toLowerCase(),
+    public: true,
+  };
+}
+
+function normalizeInventoryKey(record: any, tenant: Tenant, publicKids: Set<string>): TenantJwksPublicationKey | null {
+  if (!sameTenant(record, tenant)) {
+    return null;
+  }
+  const data = record?.data ?? record?.metadata ?? {};
+  const kid = data?.kid ?? record?.kid ?? record?.id;
+  if (!kid) {
+    return null;
+  }
+  return {
+    kid: String(kid),
+    alg: String(data?.alg ?? record?.alg ?? ''),
+    kty: String(data?.kty ?? record?.kty ?? ''),
+    use: String(data?.use ?? record?.use ?? ''),
+    crv: data?.crv || data?.curve ? String(data?.crv ?? data?.curve) : undefined,
+    lifecycle: String(data?.publication_status ?? record?.status ?? data?.status ?? 'active').toLowerCase(),
+    public: publicKids.has(String(kid)),
+    created_at: record?.created_at ? String(record.created_at) : undefined,
+    updated_at: record?.updated_at ? String(record.updated_at) : undefined,
+    rotated_at: data?.rotated_at ? String(data.rotated_at) : undefined,
+    retired_at: data?.retired_at ? String(data.retired_at) : undefined,
+  };
+}
+
+export function normalizeTenantJwksPublication(
+  tenant: Tenant,
+  discovery: OpenIdTenantDiscovery,
+  jwks: { keys?: any[] },
+  keyInventory: any[] = [],
+): TenantJwksPublicationView {
+  const publicKeys = (Array.isArray(jwks.keys) ? jwks.keys : [])
+    .map(normalizePublicJwk)
+    .filter((key): key is TenantJwksPublicationKey => key !== null);
+  const rows = new Map(publicKeys.map((key) => [key.kid, key]));
+  const publicKids = new Set(publicKeys.map((key) => key.kid));
+
+  keyInventory
+    .map((record) => normalizeInventoryKey(record, tenant, publicKids))
+    .filter((key): key is TenantJwksPublicationKey => key !== null)
+    .forEach((key) => {
+      if (key.lifecycle === 'retired' || !rows.has(key.kid)) {
+        rows.set(key.kid, key);
+      }
+    });
+
+  const keys = Array.from(rows.values()).sort((left, right) => {
+    const leftOrder = lifecycleOrder[left.lifecycle] ?? 3;
+    const rightOrder = lifecycleOrder[right.lifecycle] ?? 3;
+    return leftOrder - rightOrder || left.kid.localeCompare(right.kid);
+  });
+  const keys_by_lifecycle = keys.reduce<Record<string, TenantJwksPublicationKey[]>>((grouped, key) => {
+    grouped[key.lifecycle] = [...(grouped[key.lifecycle] ?? []), key];
+    return grouped;
+  }, { active: [], next: [], retired: [] });
+
+  return {
+    tenant_slug: tenant.slug,
+    issuer: discovery.issuer,
+    jwks_uri: discovery.jwks_uri,
+    publication_status: publicKeys.length > 0 ? 'published' : 'not_published',
+    parity_indicator: `Matches GET /tenants/${tenant.slug}/.well-known/jwks.json`,
+    keys,
+    keys_by_lifecycle,
   };
 }
 
@@ -178,5 +276,13 @@ export const backendService = {
 
   async getAlerts(): Promise<Alert[]> {
     return supportedRpcResult<Alert[]>('alert.list', {}, []);
+  },
+
+  async getTenantJwksPublication(tenant: Tenant): Promise<TenantJwksPublicationView> {
+    const discovery = await restJson<OpenIdTenantDiscovery>(`/tenants/${encodeURIComponent(tenant.slug)}/.well-known/openid-configuration`);
+    const jwksPath = new URL(discovery.jwks_uri, window.location.origin).pathname;
+    const jwks = await restJson<{ keys?: any[] }>(jwksPath);
+    const inventory = await supportedRpcResult<any[]>('keys.list', { tenant: tenant.slug, tenant_id: tenant.id }, []);
+    return normalizeTenantJwksPublication(tenant, discovery, jwks, inventory);
   },
 };
