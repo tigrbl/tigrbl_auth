@@ -2,178 +2,13 @@
   "passed": true,
   "registry_path": ".ssot/registry.json",
   "release": {
-    "release_id": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
+    "release_id": "rel:uix-tenant-jwks-publication-view-20260510",
     "passed": true,
     "failures": [],
     "warnings": [],
     "claims": [
       {
-        "claim_id": "clm:tenant-scoped-issuer-boundary",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:route-tenant-openid-configuration",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:route-tenant-jwks-json",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-discovery-jwks-uri",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-jwks-key-filtering",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-jwks-rotation-visibility",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-public-discovery-disabled-policy",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:operator-tenant-jwks-runtime-parity",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:openapi-tenant-discovery-routes",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:discovery-snapshot-tenant-profile-artifacts",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-issuer-token-validation-contract",
-        "passed": true,
-        "failures": [],
-        "checks": {
-          "implemented_features": true,
-          "tests_passing": true,
-          "evidence_passing": true,
-          "no_failed_or_stale_evidence": true,
-          "evidence_tier_alignment": true,
-          "feature_target_alignment": true,
-          "required_features_passing": true
-        },
-        "recommended_status": "certified"
-      },
-      {
-        "claim_id": "clm:tenant-jwks-cross-tenant-leakage-guard",
+        "claim_id": "clm:uix-tenant-jwks-publication-view",
         "passed": true,
         "failures": [],
         "checks": {
@@ -190,40 +25,29 @@
     ],
     "evidence": [
       {
-        "evidence_id": "evd:tenant-public-discovery-and-jwks-runtime",
+        "evidence_id": "evd:tenant-jwks-discovery-planned",
         "passed": true,
         "failures": []
       }
     ],
     "profiles": [],
     "boundary": {
-      "id": "bnd:tenant-public-discovery-and-jwks-runtime",
+      "id": "bnd:uix-tenant-jwks-publication-view",
       "profile_ids": [],
       "resolved_feature_ids": [
-        "feat:tenant-scoped-issuer-boundary",
-        "feat:route-tenant-openid-configuration",
-        "feat:route-tenant-jwks-json",
-        "feat:tenant-discovery-jwks-uri",
-        "feat:tenant-jwks-key-filtering",
-        "feat:tenant-jwks-rotation-visibility",
-        "feat:tenant-public-discovery-disabled-policy",
-        "feat:operator-tenant-jwks-runtime-parity",
-        "feat:openapi-tenant-discovery-routes",
-        "feat:discovery-snapshot-tenant-profile-artifacts",
-        "feat:tenant-issuer-token-validation-contract",
-        "feat:tenant-jwks-cross-tenant-leakage-guard"
+        "feat:uix-tenant-jwks-publication-view"
       ]
     },
     "summary": {
-      "boundary_id": "bnd:tenant-public-discovery-and-jwks-runtime",
-      "boundary_feature_count": 12,
+      "boundary_id": "bnd:uix-tenant-jwks-publication-view",
+      "boundary_feature_count": 1,
       "boundary_profile_count": 0,
-      "release_claim_count": 12,
+      "release_claim_count": 1,
       "release_evidence_count": 1
     }
   },
   "boundary_scope": {
-    "boundary_id": "bnd:tenant-public-discovery-and-jwks-runtime",
+    "boundary_id": "bnd:uix-tenant-jwks-publication-view",
     "profile_ids": [],
     "feature_ids": []
   },
@@ -236,8 +60,8 @@
       "evidence": 92,
       "issues": 13,
       "risks": 1,
-      "boundaries": 14,
-      "releases": 8,
+      "boundaries": 15,
+      "releases": 9,
       "adrs": 80,
       "specs": 103
     },

@@ -17280,7 +17280,7 @@
       "id": "feat:uix-tenant-jwks-publication-view",
       "title": "UIX tenant JWKS publication view",
       "description": "Shows per-tenant active, next, and retired keys and the tenant jwks_uri as a UIX-facing view separate from runtime/API behavior.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17292,7 +17292,9 @@
         "target_claim_tier": "T1",
         "target_lifecycle_stage": "active"
       },
-      "spec_ids": [],
+      "spec_ids": [
+        "spc:1083"
+      ],
       "claim_ids": [
         "clm:uix-tenant-jwks-publication-view"
       ],
@@ -32735,7 +32737,7 @@
     {
       "id": "tst:uix-tenant-jwks-publication-view.contract",
       "title": "UIX tenant JWKS publication view contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_tenant_jwks_discovery.py",
       "feature_ids": [
@@ -45510,7 +45512,7 @@
     {
       "id": "clm:uix-tenant-jwks-publication-view",
       "title": "UIX tenant JWKS publication view claim",
-      "status": "declared",
+      "status": "published",
       "tier": "T1",
       "kind": "uix-contract",
       "description": "Shows per-tenant active, next, and retired keys and the tenant jwks_uri as a UIX-facing view separate from runtime/API behavior.",
@@ -51281,11 +51283,11 @@
     },
     {
       "id": "evd:tenant-jwks-discovery-planned",
-      "title": "Tenant JWKS discovery planned evidence",
-      "status": "planned",
-      "kind": "planned-evidence",
+      "title": "UIX tenant JWKS publication view evidence",
+      "status": "passed",
+      "kind": "implementation-evidence",
       "tier": "T1",
-      "path": ".ssot/reports/tenant-jwks-discovery.planned.json",
+      "path": ".ssot/reports/uix-tenant-jwks-publication-view.json",
       "claim_ids": [
         "clm:uix-tenant-jwks-publication-view"
       ],
@@ -51927,6 +51929,16 @@
         "feat:tenant-jwks-cross-tenant-leakage-guard"
       ],
       "profile_ids": []
+    },
+    {
+      "id": "bnd:uix-tenant-jwks-publication-view",
+      "title": "UIX tenant JWKS publication view",
+      "status": "frozen",
+      "frozen": true,
+      "feature_ids": [
+        "feat:uix-tenant-jwks-publication-view"
+      ],
+      "profile_ids": []
     }
   ],
   "releases": [
@@ -52068,6 +52080,18 @@
       ],
       "evidence_ids": [
         "evd:tenant-public-discovery-and-jwks-runtime"
+      ]
+    },
+    {
+      "id": "rel:uix-tenant-jwks-publication-view-20260510",
+      "version": "2026.05.10-uix-tenant-jwks",
+      "status": "published",
+      "boundary_id": "bnd:uix-tenant-jwks-publication-view",
+      "claim_ids": [
+        "clm:uix-tenant-jwks-publication-view"
+      ],
+      "evidence_ids": [
+        "evd:tenant-jwks-discovery-planned"
       ]
     }
   ],

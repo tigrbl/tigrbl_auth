@@ -12,8 +12,8 @@
       "evidence": 92,
       "issues": 13,
       "risks": 1,
-      "boundaries": 14,
-      "releases": 8,
+      "boundaries": 15,
+      "releases": 9,
       "adrs": 80,
       "specs": 103
     },

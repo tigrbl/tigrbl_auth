@@ -1,5 +1,5 @@
 {
   "passed": true,
-  "release_id": "rel:tenant-public-discovery-and-jwks-runtime-20260510",
-  "output_path": ".ssot/releases/rel__tenant-public-discovery-and-jwks-runtime-20260510/published.snapshot.json"
+  "release_id": "rel:uix-tenant-jwks-publication-view-20260510",
+  "output_path": ".ssot/releases/rel__uix-tenant-jwks-publication-view-20260510/published.snapshot.json"
 }
