@@ -9,6 +9,7 @@ from pydantic.version import VERSION as PYDANTIC_VERSION
 
 from tigrbl_auth.api.rpc import iter_active_rpc_methods
 from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
+from tigrbl_auth.config.profile_loader import load_profile_reference
 from tigrbl_auth.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
@@ -56,24 +57,21 @@ def deployment_from_options(
         overrides["issuer"] = issuer
     if strict is not None:
         overrides["strict_boundary_enforcement"] = strict
-    profile_defaults = None
-    if profile and not any((surface_sets, protocol_slices, extensions, plugin_mode)):
-        from tigrbl_auth.config.profile_loader import load_runtime_profile
-
-        profile_defaults = load_runtime_profile(profile)
+    profile_defaults = load_profile_reference(profile)
     if settings_obj is None:
         from tigrbl_auth.config.settings import settings as active_settings
 
         settings_obj = active_settings
     return resolve_deployment(
         settings_obj,
-        profile=profile,
+        profile=profile_defaults.base_profile,
         surface_sets=tuple(surface_sets or (profile_defaults.surface_sets if profile_defaults else ())),
         protocol_slices=tuple(protocol_slices or (profile_defaults.protocol_slices if profile_defaults else ())),
         extensions=tuple(extensions or (profile_defaults.extensions if profile_defaults else ())),
         plugin_mode=plugin_mode or (profile_defaults.surface_plugin_mode if profile_defaults else None),
         runtime_style=runtime_style,
-        flag_overrides=overrides,
+        flag_overrides={**profile_defaults.flag_overrides(), **overrides},
+        profile_source=profile_defaults.provenance(),
     )
 
 

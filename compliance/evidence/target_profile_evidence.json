@@ -719,6 +719,21 @@
     },
     {
       "profile": "production",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
+      ]
+    },
+    {
+      "profile": "production",
       "target": "RFC 9207",
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
@@ -1268,6 +1283,21 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
+      ]
+    },
+    {
+      "profile": "hardening",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
       ]
     },
     {
@@ -1920,6 +1950,21 @@
     },
     {
       "profile": "fapi2-security",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
+      ]
+    },
+    {
+      "profile": "fapi2-security",
       "target": "RFC 9101",
       "tests": [
         "tests/conformance/hardening/test_rfc9101_jar.py",
@@ -2548,6 +2593,21 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
+      ]
+    },
+    {
+      "profile": "peer-claim",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
       ]
     },
     {

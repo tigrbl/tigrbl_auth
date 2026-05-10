@@ -15,17 +15,10 @@ summary:
     operator: 2
     release: 1
     admin: 10
-  global_flag_count: 16
-  flag_count: 88
+  global_flag_count: 15
+  flag_count: 87
   resource_command_count: 10
 global_flags:
-- key: config
-  flags:
-  - --config
-  help: Path to the runtime/configuration file.
-  group: global
-  family: global
-  default: null
 - key: env_file
   flags:
   - --env-file
@@ -36,16 +29,10 @@ global_flags:
 - key: profile
   flags:
   - --profile
-  help: Effective standards/compliance profile.
+  help: 'Runtime profile reference: packaged profile id or external YAML profile path.'
   group: global
   family: global
   default: baseline
-  choices: &id005
-  - baseline
-  - production
-  - hardening
-  - fapi2-security
-  - peer-claim
 - key: tenant
   flags:
   - --tenant
@@ -66,8 +53,8 @@ global_flags:
   help: Installable surface set. May be supplied multiple times.
   group: global
   family: global
-  default: &id009 []
-  choices: &id010
+  default: &id008 []
+  choices: &id009
   - admin-rpc
   - diagnostics
   - public-rest
@@ -78,8 +65,8 @@ global_flags:
   help: Protocol slice. May be supplied multiple times.
   group: global
   family: global
-  default: &id007 []
-  choices: &id008
+  default: &id006 []
+  choices: &id007
   - device
   - dpop
   - jar
@@ -120,7 +107,7 @@ global_flags:
   group: global
   family: global
   default: standalone
-  choices: &id006
+  choices: &id005
   - plugin
   - standalone
 - key: strict
@@ -265,14 +252,6 @@ flag_catalog:
     - auto
     - always
     - never
-  config:
-    key: config
-    flags:
-    - --config
-    help: Path to the runtime/configuration file.
-    group: global
-    family: global
-    default: null
   cookies:
     key: cookies
     flags:
@@ -656,11 +635,11 @@ flag_catalog:
     key: profile
     flags:
     - --profile
-    help: Effective standards/compliance profile.
+    help: 'Runtime profile reference: packaged profile id or external YAML profile
+      path.'
     group: global
     family: global
     default: baseline
-    choices: *id005
   proxy_headers:
     key: proxy_headers
     flags:
@@ -744,7 +723,7 @@ flag_catalog:
     group: global
     family: global
     default: standalone
-    choices: *id006
+    choices: *id005
   scope:
     key: scope
     flags:
@@ -807,8 +786,8 @@ flag_catalog:
     help: Protocol slice. May be supplied multiple times.
     group: global
     family: global
-    default: *id007
-    choices: *id008
+    default: *id006
+    choices: *id007
     action: append
   sort:
     key: sort
@@ -848,8 +827,8 @@ flag_catalog:
     help: Installable surface set. May be supplied multiple times.
     group: global
     family: global
-    default: *id009
-    choices: *id010
+    default: *id008
+    choices: *id009
     action: append
   tenant:
     key: tenant
@@ -1020,7 +999,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1105,7 +1083,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1154,7 +1131,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1203,7 +1179,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1228,7 +1203,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1275,7 +1249,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1322,7 +1295,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1370,7 +1342,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1421,7 +1392,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1446,7 +1416,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1493,7 +1462,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1539,7 +1507,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1590,7 +1557,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1615,7 +1581,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1662,7 +1627,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1710,7 +1674,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1757,7 +1720,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1806,7 +1768,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1862,7 +1823,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1911,7 +1871,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -1936,7 +1895,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -1988,7 +1946,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2037,7 +1994,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2091,7 +2047,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2142,7 +2097,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -2167,7 +2121,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2218,7 +2171,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2266,7 +2218,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2318,7 +2269,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2369,7 +2319,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -2395,7 +2344,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2443,7 +2391,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2491,7 +2438,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2537,7 +2483,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2583,7 +2528,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2634,7 +2578,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -2659,7 +2602,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2715,7 +2657,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2771,7 +2712,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2822,7 +2762,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2869,7 +2808,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2922,7 +2860,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -2973,7 +2910,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3028,7 +2964,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -3053,7 +2988,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3109,7 +3043,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3165,7 +3098,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3216,7 +3148,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3263,7 +3194,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3316,7 +3246,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3367,7 +3296,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3418,7 +3346,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3473,7 +3400,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -3498,7 +3424,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3554,7 +3479,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3610,7 +3534,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3661,7 +3584,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3708,7 +3630,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3761,7 +3682,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3814,7 +3734,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3865,7 +3784,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -3920,7 +3838,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -3945,7 +3862,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4001,7 +3917,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4057,7 +3972,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4108,7 +4022,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4155,7 +4068,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4208,7 +4120,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4259,7 +4170,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4314,7 +4224,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -4339,7 +4248,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4386,7 +4294,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4439,7 +4346,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4490,7 +4396,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4546,7 +4451,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -4571,7 +4475,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4618,7 +4521,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4671,7 +4573,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4718,7 +4619,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4769,7 +4669,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4827,7 +4726,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -4852,7 +4750,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4911,7 +4808,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -4966,7 +4862,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5018,7 +4913,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5077,7 +4971,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5129,7 +5022,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5180,7 +5072,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5227,7 +5118,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5280,7 +5170,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5335,7 +5224,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -5360,7 +5248,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5406,7 +5293,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5453,7 +5339,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5506,7 +5391,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5558,7 +5442,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -5583,7 +5466,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5633,7 +5515,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5688,7 +5569,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5738,7 +5618,6 @@ commands:
   aliases: []
   include_global: true
   global_flags:
-  - config
   - env_file
   - profile
   - tenant
@@ -5763,7 +5642,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5815,7 +5693,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant
@@ -5872,7 +5749,6 @@ commands:
     aliases: []
     include_global: true
     global_flags:
-    - config
     - env_file
     - profile
     - tenant

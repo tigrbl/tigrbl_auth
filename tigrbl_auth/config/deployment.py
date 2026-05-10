@@ -7,7 +7,7 @@ active deployment shape without initializing the full Tigrbl/SQLAlchemy stack.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Final
 
 from .feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
@@ -275,6 +275,7 @@ class ResolvedDeployment:
     active_discovery_routes: tuple[str, ...]
     active_targets: tuple[str, ...]
     active_openrpc_methods: tuple[str, ...]
+    profile_source: dict[str, Any] = field(default_factory=dict)
 
     def flag_enabled(self, name: str) -> bool:
         return bool(self.flags.get(name, False))
@@ -326,6 +327,7 @@ class ResolvedDeployment:
             "active_discovery_routes": list(self.active_discovery_routes),
             "active_targets": list(self.active_targets),
             "active_openrpc_methods": list(self.active_openrpc_methods),
+            "profile_source": self.profile_source,
         }
 
 
@@ -412,6 +414,7 @@ def resolve_deployment(
     plugin_mode: str | None = None,
     runtime_style: str | None = None,
     flag_overrides: dict[str, Any] | None = None,
+    profile_source: dict[str, Any] | None = None,
 ) -> ResolvedDeployment:
     raw = _settings_dict(settings_obj)
     if flag_overrides:
@@ -539,6 +542,7 @@ def resolve_deployment(
         active_discovery_routes=tuple(active_discovery_routes),
         active_targets=tuple(active_targets),
         active_openrpc_methods=tuple(active_methods),
+        profile_source=dict(profile_source or {"kind": "packaged-profile-id", "profile_id": profile_name}),
     )
 
 

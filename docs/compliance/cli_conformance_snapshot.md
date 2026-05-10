@@ -4,7 +4,7 @@
 
 - Command count: `20`
 - Verb count: `83`
-- Global flag count: `16`
+- Global flag count: `15`
 - Help snapshot count: `104`
 - Required command families present: `True`
 - Retired certified aliases absent: `True`
@@ -51,8 +51,7 @@ options:
 ### `tigrbl-auth bootstrap`
 
 ```text
-usage: tigrbl-auth bootstrap [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth bootstrap [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -74,10 +73,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -102,10 +99,9 @@ options:
 ### `tigrbl-auth bootstrap apply`
 
 ```text
-usage: tigrbl-auth bootstrap apply [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth bootstrap apply [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -122,10 +118,8 @@ Materialize bootstrap manifests and record an applied bootstrap checkpoint.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -158,10 +152,9 @@ options:
 ### `tigrbl-auth bootstrap manifest`
 
 ```text
-usage: tigrbl-auth bootstrap manifest [-h] [--config CONFIG]
-                                      [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                      [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth bootstrap manifest [-h] [--env-file ENV_FILE]
+                                      [--profile PROFILE] [--tenant TENANT]
+                                      [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -177,10 +170,8 @@ Write deployment, claims, evidence, and contract manifests for the selected prof
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -209,10 +200,9 @@ options:
 ### `tigrbl-auth bootstrap status`
 
 ```text
-usage: tigrbl-auth bootstrap status [-h] [--config CONFIG]
-                                    [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                    [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth bootstrap status [-h] [--env-file ENV_FILE]
+                                    [--profile PROFILE] [--tenant TENANT]
+                                    [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -228,10 +218,8 @@ Summarize bootstrap readiness for the selected profile and surfaces.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -260,10 +248,9 @@ options:
 ### `tigrbl-auth bootstrap verify`
 
 ```text
-usage: tigrbl-auth bootstrap verify [-h] [--config CONFIG]
-                                    [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                    [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth bootstrap verify [-h] [--env-file ENV_FILE]
+                                    [--profile PROFILE] [--tenant TENANT]
+                                    [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -279,10 +266,8 @@ Verify bootstrap manifests, effective artifacts, and applied checkpoint state.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -311,8 +296,7 @@ options:
 ### `tigrbl-auth claims`
 
 ```text
-usage: tigrbl-auth claims [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth claims [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -333,10 +317,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -361,8 +343,7 @@ options:
 ### `tigrbl-auth claims lint`
 
 ```text
-usage: tigrbl-auth claims lint [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth claims lint [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -378,10 +359,8 @@ Validate declared claims against mappings and boundaries.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -410,8 +389,7 @@ options:
 ### `tigrbl-auth claims show`
 
 ```text
-usage: tigrbl-auth claims show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth claims show [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -426,10 +404,8 @@ Materialize the effective claims manifest for the active deployment.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -456,9 +432,9 @@ options:
 ### `tigrbl-auth claims status`
 
 ```text
-usage: tigrbl-auth claims status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth claims status [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -473,10 +449,8 @@ Summarize declared, effective, and promotable claims.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -505,8 +479,7 @@ options:
 ### `tigrbl-auth client`
 
 ```text
-usage: tigrbl-auth client [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth client [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -533,10 +506,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -561,9 +532,9 @@ options:
 ### `tigrbl-auth client create`
 
 ```text
-usage: tigrbl-auth client create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client create [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -582,10 +553,8 @@ Create a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -622,9 +591,9 @@ options:
 ### `tigrbl-auth client delete`
 
 ```text
-usage: tigrbl-auth client delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client delete [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -639,10 +608,8 @@ Delete a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -672,9 +639,9 @@ options:
 ### `tigrbl-auth client disable`
 
 ```text
-usage: tigrbl-auth client disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client disable [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -690,10 +657,8 @@ Mark a client record disabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -723,9 +688,9 @@ options:
 ### `tigrbl-auth client enable`
 
 ```text
-usage: tigrbl-auth client enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client enable [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -740,10 +705,8 @@ Mark a client record enabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -773,8 +736,7 @@ options:
 ### `tigrbl-auth client get`
 
 ```text
-usage: tigrbl-auth client get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth client get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -789,10 +751,8 @@ Return a single durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -820,8 +780,7 @@ options:
 ### `tigrbl-auth client list`
 
 ```text
-usage: tigrbl-auth client list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth client list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -840,10 +799,8 @@ List durable operator-plane client records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -876,10 +833,9 @@ options:
 ### `tigrbl-auth client rotate-secret`
 
 ```text
-usage: tigrbl-auth client rotate-secret [-h] [--config CONFIG]
-                                        [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                        [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client rotate-secret [-h] [--env-file ENV_FILE]
+                                        [--profile PROFILE] [--tenant TENANT]
+                                        [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -895,10 +851,8 @@ Rotate durable operator-plane client secret material.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -928,9 +882,9 @@ options:
 ### `tigrbl-auth client update`
 
 ```text
-usage: tigrbl-auth client update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth client update [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -948,10 +902,8 @@ Update a durable operator-plane client record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -988,8 +940,7 @@ options:
 ### `tigrbl-auth discovery`
 
 ```text
-usage: tigrbl-auth discovery [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth discovery [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1011,10 +962,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1039,9 +988,9 @@ options:
 ### `tigrbl-auth discovery diff`
 
 ```text
-usage: tigrbl-auth discovery diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth discovery diff [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1057,10 +1006,8 @@ Diff active discovery metadata against a provided or published baseline.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1090,10 +1037,9 @@ options:
 ### `tigrbl-auth discovery publish`
 
 ```text
-usage: tigrbl-auth discovery publish [-h] [--config CONFIG]
-                                     [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                     [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth discovery publish [-h] [--env-file ENV_FILE]
+                                     [--profile PROFILE] [--tenant TENANT]
+                                     [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1109,10 +1055,8 @@ Publish discovery metadata into a release-ready output directory.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1142,9 +1086,9 @@ options:
 ### `tigrbl-auth discovery show`
 
 ```text
-usage: tigrbl-auth discovery show [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth discovery show [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1159,10 +1103,8 @@ Show the active discovery snapshot for the selected profile.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1189,10 +1131,9 @@ options:
 ### `tigrbl-auth discovery validate`
 
 ```text
-usage: tigrbl-auth discovery validate [-h] [--config CONFIG]
-                                      [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                      [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth discovery validate [-h] [--env-file ENV_FILE]
+                                      [--profile PROFILE] [--tenant TENANT]
+                                      [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1208,10 +1149,8 @@ Validate discovery metadata and supporting contracts.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1240,8 +1179,7 @@ options:
 ### `tigrbl-auth doctor`
 
 ```text
-usage: tigrbl-auth doctor [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth doctor [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1256,10 +1194,8 @@ Aggregate core verification, runtime profile, contracts, evidence, and gate stat
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1288,8 +1224,7 @@ options:
 ### `tigrbl-auth evidence`
 
 ```text
-usage: tigrbl-auth evidence [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth evidence [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1313,10 +1248,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1341,10 +1274,9 @@ options:
 ### `tigrbl-auth evidence bundle`
 
 ```text
-usage: tigrbl-auth evidence bundle [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth evidence bundle [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1360,10 +1292,8 @@ Build a release/evidence bundle filtered by the effective deployment.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1393,10 +1323,9 @@ options:
 ### `tigrbl-auth evidence peer-execute`
 
 ```text
-usage: tigrbl-auth evidence peer-execute [-h] [--config CONFIG]
-                                         [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                         [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth evidence peer-execute [-h] [--env-file ENV_FILE]
+                                         [--profile PROFILE] [--tenant TENANT]
+                                         [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1414,10 +1343,8 @@ Materialize peer execution manifests for configured profiles.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1450,10 +1377,9 @@ options:
 ### `tigrbl-auth evidence peer-status`
 
 ```text
-usage: tigrbl-auth evidence peer-status [-h] [--config CONFIG]
-                                        [--env-file ENV_FILE]
-                                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                        [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth evidence peer-status [-h] [--env-file ENV_FILE]
+                                        [--profile PROFILE] [--tenant TENANT]
+                                        [--issuer ISSUER]
                                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                         [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1469,10 +1395,8 @@ Summarize configured peer execution profiles and bundle refs.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1501,10 +1425,9 @@ options:
 ### `tigrbl-auth evidence status`
 
 ```text
-usage: tigrbl-auth evidence status [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth evidence status [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1520,10 +1443,8 @@ Summarize Tier 3/Tier 4 evidence readiness.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1553,10 +1474,9 @@ options:
 ### `tigrbl-auth evidence verify`
 
 ```text
-usage: tigrbl-auth evidence verify [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth evidence verify [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1572,10 +1492,8 @@ Run evidence/peer readiness checks.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1604,8 +1522,7 @@ options:
 ### `tigrbl-auth export`
 
 ```text
-usage: tigrbl-auth export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1626,10 +1543,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1654,8 +1569,7 @@ options:
 ### `tigrbl-auth export run`
 
 ```text
-usage: tigrbl-auth export run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth export run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1672,10 +1586,8 @@ Export durable operator-plane state to a portable artifact.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1709,9 +1621,9 @@ options:
 ### `tigrbl-auth export status`
 
 ```text
-usage: tigrbl-auth export status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth export status [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1725,10 +1637,8 @@ Show the last durable operator-plane export status.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1755,10 +1665,9 @@ options:
 ### `tigrbl-auth export validate`
 
 ```text
-usage: tigrbl-auth export validate [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth export validate [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -1775,10 +1684,8 @@ Validate export configuration and current operator state.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1810,8 +1717,7 @@ options:
 ### `tigrbl-auth flow`
 
 ```text
-usage: tigrbl-auth flow [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1836,10 +1742,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1864,8 +1768,7 @@ options:
 ### `tigrbl-auth flow create`
 
 ```text
-usage: tigrbl-auth flow create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow create [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1884,10 +1787,8 @@ Create a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1924,8 +1825,7 @@ options:
 ### `tigrbl-auth flow delete`
 
 ```text
-usage: tigrbl-auth flow delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1941,10 +1841,8 @@ Delete a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -1974,8 +1872,7 @@ options:
 ### `tigrbl-auth flow disable`
 
 ```text
-usage: tigrbl-auth flow disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow disable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -1991,10 +1888,8 @@ Mark a flow record disabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2024,8 +1919,7 @@ options:
 ### `tigrbl-auth flow enable`
 
 ```text
-usage: tigrbl-auth flow enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow enable [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2041,10 +1935,8 @@ Mark a flow record enabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2074,8 +1966,7 @@ options:
 ### `tigrbl-auth flow get`
 
 ```text
-usage: tigrbl-auth flow get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2090,10 +1981,8 @@ Return a single durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2121,8 +2010,7 @@ options:
 ### `tigrbl-auth flow list`
 
 ```text
-usage: tigrbl-auth flow list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2140,10 +2028,8 @@ List durable operator-plane flow records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2176,8 +2062,7 @@ options:
 ### `tigrbl-auth flow update`
 
 ```text
-usage: tigrbl-auth flow update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth flow update [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2196,10 +2081,8 @@ Update a durable operator-plane flow record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2236,8 +2119,7 @@ options:
 ### `tigrbl-auth gate`
 
 ```text
-usage: tigrbl-auth gate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth gate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2253,10 +2135,8 @@ Run one release gate or the full ordered release gate catalog.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2286,8 +2166,7 @@ options:
 ### `tigrbl-auth identity`
 
 ```text
-usage: tigrbl-auth identity [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth identity [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2314,10 +2193,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2342,10 +2219,9 @@ options:
 ### `tigrbl-auth identity create`
 
 ```text
-usage: tigrbl-auth identity create [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity create [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2364,10 +2240,8 @@ Create a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2404,10 +2278,9 @@ options:
 ### `tigrbl-auth identity delete`
 
 ```text
-usage: tigrbl-auth identity delete [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity delete [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2423,10 +2296,8 @@ Delete a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2456,8 +2327,7 @@ options:
 ### `tigrbl-auth identity get`
 
 ```text
-usage: tigrbl-auth identity get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth identity get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2473,10 +2343,8 @@ Return a single durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2504,9 +2372,9 @@ options:
 ### `tigrbl-auth identity list`
 
 ```text
-usage: tigrbl-auth identity list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity list [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2524,10 +2392,8 @@ List durable operator-plane identity records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2560,9 +2426,9 @@ options:
 ### `tigrbl-auth identity lock`
 
 ```text
-usage: tigrbl-auth identity lock [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity lock [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2577,10 +2443,8 @@ Mark an identity record locked.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2610,10 +2474,9 @@ options:
 ### `tigrbl-auth identity set-password`
 
 ```text
-usage: tigrbl-auth identity set-password [-h] [--config CONFIG]
-                                         [--env-file ENV_FILE]
-                                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                         [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity set-password [-h] [--env-file ENV_FILE]
+                                         [--profile PROFILE] [--tenant TENANT]
+                                         [--issuer ISSUER]
                                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                          [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2630,10 +2493,8 @@ Set or rotate a durable operator-plane identity password hash.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2666,10 +2527,9 @@ options:
 ### `tigrbl-auth identity unlock`
 
 ```text
-usage: tigrbl-auth identity unlock [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity unlock [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2685,10 +2545,8 @@ Mark an identity record unlocked.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2718,10 +2576,9 @@ options:
 ### `tigrbl-auth identity update`
 
 ```text
-usage: tigrbl-auth identity update [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth identity update [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2739,10 +2596,8 @@ Update a durable operator-plane identity record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2779,8 +2634,7 @@ options:
 ### `tigrbl-auth import`
 
 ```text
-usage: tigrbl-auth import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2801,10 +2655,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2829,8 +2681,7 @@ options:
 ### `tigrbl-auth import run`
 
 ```text
-usage: tigrbl-auth import run [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth import run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -2847,10 +2698,8 @@ Import durable operator-plane state from a portable artifact.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2883,9 +2732,9 @@ options:
 ### `tigrbl-auth import status`
 
 ```text
-usage: tigrbl-auth import status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth import status [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2899,10 +2748,8 @@ Show the last durable operator-plane import status.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2929,10 +2776,9 @@ options:
 ### `tigrbl-auth import validate`
 
 ```text
-usage: tigrbl-auth import validate [-h] [--config CONFIG]
-                                   [--env-file ENV_FILE]
-                                   [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                   [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth import validate [-h] [--env-file ENV_FILE]
+                                   [--profile PROFILE] [--tenant TENANT]
+                                   [--issuer ISSUER]
                                    [--surface-set {admin-rpc,diagnostics,public-rest}]
                                    [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                    [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -2949,10 +2795,8 @@ Validate an import artifact without mutating state.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -2983,8 +2827,7 @@ options:
 ### `tigrbl-auth keys`
 
 ```text
-usage: tigrbl-auth keys [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3012,10 +2855,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3040,8 +2881,7 @@ options:
 ### `tigrbl-auth keys delete`
 
 ```text
-usage: tigrbl-auth keys delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3057,10 +2897,8 @@ Delete a durable operator-plane key record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3090,8 +2928,7 @@ options:
 ### `tigrbl-auth keys export`
 
 ```text
-usage: tigrbl-auth keys export [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3108,10 +2945,8 @@ Export durable operator-plane key metadata to a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3142,9 +2977,9 @@ options:
 ### `tigrbl-auth keys generate`
 
 ```text
-usage: tigrbl-auth keys generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth keys generate [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3163,10 +2998,8 @@ Generate durable operator-plane key metadata and optional JWKS publication.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3207,8 +3040,7 @@ options:
 ### `tigrbl-auth keys get`
 
 ```text
-usage: tigrbl-auth keys get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                            [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--tenant TENANT] [--issuer ISSUER]
                             [--surface-set {admin-rpc,diagnostics,public-rest}]
                             [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3223,10 +3055,8 @@ Return a single durable operator-plane key record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3254,8 +3084,7 @@ options:
 ### `tigrbl-auth keys import`
 
 ```text
-usage: tigrbl-auth keys import [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3273,10 +3102,8 @@ Import durable operator-plane key metadata from a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3311,8 +3138,7 @@ options:
 ### `tigrbl-auth keys list`
 
 ```text
-usage: tigrbl-auth keys list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3330,10 +3156,8 @@ List durable operator-plane key records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3366,10 +3190,9 @@ options:
 ### `tigrbl-auth keys publish-jwks`
 
 ```text
-usage: tigrbl-auth keys publish-jwks [-h] [--config CONFIG]
-                                     [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                     [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth keys publish-jwks [-h] [--env-file ENV_FILE]
+                                     [--profile PROFILE] [--tenant TENANT]
+                                     [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3386,10 +3209,8 @@ Publish the current durable operator-plane JWKS document.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3419,8 +3240,7 @@ options:
 ### `tigrbl-auth keys retire`
 
 ```text
-usage: tigrbl-auth keys retire [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys retire [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3436,10 +3256,8 @@ Mark a durable operator-plane key retired.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3470,8 +3288,7 @@ options:
 ### `tigrbl-auth keys rotate`
 
 ```text
-usage: tigrbl-auth keys rotate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth keys rotate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3491,10 +3308,8 @@ Generate successor key metadata and retire the previous active key.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3535,8 +3350,7 @@ options:
 ### `tigrbl-auth migrate`
 
 ```text
-usage: tigrbl-auth migrate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth migrate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3558,10 +3372,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3586,9 +3398,9 @@ options:
 ### `tigrbl-auth migrate apply`
 
 ```text
-usage: tigrbl-auth migrate apply [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth migrate apply [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3604,10 +3416,8 @@ Record a migration application checkpoint for the structured plan.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3638,8 +3448,7 @@ options:
 ### `tigrbl-auth migrate plan`
 
 ```text
-usage: tigrbl-auth migrate plan [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth migrate plan [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3654,10 +3463,8 @@ Emit the structured migration plan and replacement order.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3684,9 +3491,9 @@ options:
 ### `tigrbl-auth migrate status`
 
 ```text
-usage: tigrbl-auth migrate status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth migrate status [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3702,10 +3509,8 @@ List migration revisions and current-to-target move status.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3734,9 +3539,9 @@ options:
 ### `tigrbl-auth migrate verify`
 
 ```text
-usage: tigrbl-auth migrate verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth migrate verify [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3752,10 +3557,8 @@ Run migration-plan and project-tree verification.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3784,8 +3587,7 @@ options:
 ### `tigrbl-auth release`
 
 ```text
-usage: tigrbl-auth release [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth release [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3808,10 +3610,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3836,9 +3636,9 @@ options:
 ### `tigrbl-auth release bundle`
 
 ```text
-usage: tigrbl-auth release bundle [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth release bundle [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3855,10 +3655,8 @@ Build a release bundle containing claims, evidence, contracts, ADR index, and pe
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3889,10 +3687,9 @@ options:
 ### `tigrbl-auth release recertify`
 
 ```text
-usage: tigrbl-auth release recertify [-h] [--config CONFIG]
-                                     [--env-file ENV_FILE]
-                                     [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                     [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth release recertify [-h] [--env-file ENV_FILE]
+                                     [--profile PROFILE] [--tenant TENANT]
+                                     [--issuer ISSUER]
                                      [--surface-set {admin-rpc,diagnostics,public-rest}]
                                      [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                      [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -3908,10 +3705,8 @@ Re-run recertification for Tigrbl and standards-boundary changes.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3940,8 +3735,7 @@ options:
 ### `tigrbl-auth release sign`
 
 ```text
-usage: tigrbl-auth release sign [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth release sign [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -3958,10 +3752,8 @@ Create externally verifiable Ed25519 attestations for an existing release bundle
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -3992,9 +3784,9 @@ options:
 ### `tigrbl-auth release status`
 
 ```text
-usage: tigrbl-auth release status [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth release status [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4010,10 +3802,8 @@ Summarize the current release bundle and release-gate posture.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4042,9 +3832,9 @@ options:
 ### `tigrbl-auth release verify`
 
 ```text
-usage: tigrbl-auth release verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth release verify [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4060,10 +3850,8 @@ Verify release-bundle attestations and manifest integrity for an existing signed
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4092,8 +3880,7 @@ options:
 ### `tigrbl-auth serve`
 
 ```text
-usage: tigrbl-auth serve [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth serve [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4131,10 +3918,8 @@ Resolve deployment, materialize a runner-qualified runtime plan, validate the se
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4216,8 +4001,7 @@ options:
 ### `tigrbl-auth session`
 
 ```text
-usage: tigrbl-auth session [-h] [--config CONFIG] [--env-file ENV_FILE]
-                           [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth session [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--tenant TENANT] [--issuer ISSUER]
                            [--surface-set {admin-rpc,diagnostics,public-rest}]
                            [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4239,10 +4023,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4267,8 +4049,7 @@ options:
 ### `tigrbl-auth session get`
 
 ```text
-usage: tigrbl-auth session get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth session get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4284,10 +4065,8 @@ Return a single durable operator-plane session record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4315,8 +4094,7 @@ options:
 ### `tigrbl-auth session list`
 
 ```text
-usage: tigrbl-auth session list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth session list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4335,10 +4113,8 @@ List durable operator-plane session records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4371,9 +4147,9 @@ options:
 ### `tigrbl-auth session revoke`
 
 ```text
-usage: tigrbl-auth session revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth session revoke [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4389,10 +4165,8 @@ Mark a durable operator-plane session revoked.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4422,10 +4196,9 @@ options:
 ### `tigrbl-auth session revoke-all`
 
 ```text
-usage: tigrbl-auth session revoke-all [-h] [--config CONFIG]
-                                      [--env-file ENV_FILE]
-                                      [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                      [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth session revoke-all [-h] [--env-file ENV_FILE]
+                                      [--profile PROFILE] [--tenant TENANT]
+                                      [--issuer ISSUER]
                                       [--surface-set {admin-rpc,diagnostics,public-rest}]
                                       [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                       [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4442,10 +4215,8 @@ Mark all durable operator-plane sessions revoked.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4476,8 +4247,7 @@ options:
 ### `tigrbl-auth spec`
 
 ```text
-usage: tigrbl-auth spec [-h] [--config CONFIG] [--env-file ENV_FILE]
-                        [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth spec [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--tenant TENANT] [--issuer ISSUER]
                         [--surface-set {admin-rpc,diagnostics,public-rest}]
                         [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4499,10 +4269,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4527,8 +4295,7 @@ options:
 ### `tigrbl-auth spec diff`
 
 ```text
-usage: tigrbl-auth spec diff [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth spec diff [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4546,10 +4313,8 @@ Regenerate contracts and compare them to committed artifacts.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4582,9 +4347,9 @@ options:
 ### `tigrbl-auth spec generate`
 
 ```text
-usage: tigrbl-auth spec generate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth spec generate [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4600,10 +4365,8 @@ Generate OpenAPI/OpenRPC artifacts for the selected deployment.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4634,8 +4397,7 @@ options:
 ### `tigrbl-auth spec report`
 
 ```text
-usage: tigrbl-auth spec report [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth spec report [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4652,10 +4414,8 @@ Summarize active contract contents and profile coverage.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4686,9 +4446,9 @@ options:
 ### `tigrbl-auth spec validate`
 
 ```text
-usage: tigrbl-auth spec validate [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth spec validate [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4704,10 +4464,8 @@ Validate generated contracts against repository expectations.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4738,8 +4496,7 @@ options:
 ### `tigrbl-auth tenant`
 
 ```text
-usage: tigrbl-auth tenant [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth tenant [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -4764,10 +4521,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4792,9 +4547,9 @@ options:
 ### `tigrbl-auth tenant create`
 
 ```text
-usage: tigrbl-auth tenant create [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth tenant create [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4813,10 +4568,8 @@ Create a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4853,9 +4606,9 @@ options:
 ### `tigrbl-auth tenant delete`
 
 ```text
-usage: tigrbl-auth tenant delete [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth tenant delete [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4870,10 +4623,8 @@ Delete a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4903,9 +4654,9 @@ options:
 ### `tigrbl-auth tenant disable`
 
 ```text
-usage: tigrbl-auth tenant disable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth tenant disable [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4921,10 +4672,8 @@ Mark a tenant record disabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -4954,9 +4703,9 @@ options:
 ### `tigrbl-auth tenant enable`
 
 ```text
-usage: tigrbl-auth tenant enable [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth tenant enable [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -4971,10 +4720,8 @@ Mark a tenant record enabled.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5004,8 +4751,7 @@ options:
 ### `tigrbl-auth tenant get`
 
 ```text
-usage: tigrbl-auth tenant get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth tenant get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5020,10 +4766,8 @@ Return a single durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5051,8 +4795,7 @@ options:
 ### `tigrbl-auth tenant list`
 
 ```text
-usage: tigrbl-auth tenant list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                               [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth tenant list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--tenant TENANT] [--issuer ISSUER]
                                [--surface-set {admin-rpc,diagnostics,public-rest}]
                                [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5071,10 +4814,8 @@ List durable operator-plane tenant records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5107,9 +4848,9 @@ options:
 ### `tigrbl-auth tenant update`
 
 ```text
-usage: tigrbl-auth tenant update [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                 [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                 [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth tenant update [-h] [--env-file ENV_FILE]
+                                 [--profile PROFILE] [--tenant TENANT]
+                                 [--issuer ISSUER]
                                  [--surface-set {admin-rpc,diagnostics,public-rest}]
                                  [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                  [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -5127,10 +4868,8 @@ Update a durable operator-plane tenant record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5167,8 +4906,7 @@ options:
 ### `tigrbl-auth token`
 
 ```text
-usage: tigrbl-auth token [-h] [--config CONFIG] [--env-file ENV_FILE]
-                         [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth token [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--tenant TENANT] [--issuer ISSUER]
                          [--surface-set {admin-rpc,diagnostics,public-rest}]
                          [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5191,10 +4929,8 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5219,9 +4955,9 @@ options:
 ### `tigrbl-auth token exchange`
 
 ```text
-usage: tigrbl-auth token exchange [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                  [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                  [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth token exchange [-h] [--env-file ENV_FILE]
+                                  [--profile PROFILE] [--tenant TENANT]
+                                  [--issuer ISSUER]
                                   [--surface-set {admin-rpc,diagnostics,public-rest}]
                                   [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                   [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -5238,10 +4974,8 @@ Create a derived durable operator-plane token exchange record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5274,8 +5008,7 @@ options:
 ### `tigrbl-auth token get`
 
 ```text
-usage: tigrbl-auth token get [-h] [--config CONFIG] [--env-file ENV_FILE]
-                             [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth token get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--tenant TENANT] [--issuer ISSUER]
                              [--surface-set {admin-rpc,diagnostics,public-rest}]
                              [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5290,10 +5023,8 @@ Return a single durable operator-plane token record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5321,10 +5052,9 @@ options:
 ### `tigrbl-auth token introspect`
 
 ```text
-usage: tigrbl-auth token introspect [-h] [--config CONFIG]
-                                    [--env-file ENV_FILE]
-                                    [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
-                                    [--tenant TENANT] [--issuer ISSUER]
+usage: tigrbl-auth token introspect [-h] [--env-file ENV_FILE]
+                                    [--profile PROFILE] [--tenant TENANT]
+                                    [--issuer ISSUER]
                                     [--surface-set {admin-rpc,diagnostics,public-rest}]
                                     [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
                                     [--extension {dns-privacy,set,webauthn-passkeys,webpush}]
@@ -5339,10 +5069,8 @@ Return active/revoked status and metadata for a token record.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5370,8 +5098,7 @@ options:
 ### `tigrbl-auth token list`
 
 ```text
-usage: tigrbl-auth token list [-h] [--config CONFIG] [--env-file ENV_FILE]
-                              [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth token list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--tenant TENANT] [--issuer ISSUER]
                               [--surface-set {admin-rpc,diagnostics,public-rest}]
                               [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5389,10 +5116,8 @@ List durable operator-plane token records.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5425,8 +5150,7 @@ options:
 ### `tigrbl-auth token revoke`
 
 ```text
-usage: tigrbl-auth token revoke [-h] [--config CONFIG] [--env-file ENV_FILE]
-                                [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth token revoke [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--tenant TENANT] [--issuer ISSUER]
                                 [--surface-set {admin-rpc,diagnostics,public-rest}]
                                 [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5442,10 +5166,8 @@ Mark a durable operator-plane token revoked.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}
@@ -5475,8 +5197,7 @@ options:
 ### `tigrbl-auth verify`
 
 ```text
-usage: tigrbl-auth verify [-h] [--config CONFIG] [--env-file ENV_FILE]
-                          [--profile {baseline,production,hardening,fapi2-security,peer-claim}]
+usage: tigrbl-auth verify [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--tenant TENANT] [--issuer ISSUER]
                           [--surface-set {admin-rpc,diagnostics,public-rest}]
                           [--slice {device,dpop,jar,mtls,par,rar,token-exchange}]
@@ -5492,10 +5213,8 @@ Execute one or more verification scopes and emit structured results.
 
 options:
   -h, --help            show this help message and exit
-  --config CONFIG       Path to the runtime/configuration file.
   --env-file ENV_FILE   Optional environment file loaded before resolution.
-  --profile {baseline,production,hardening,fapi2-security,peer-claim}
-                        Effective standards/compliance profile.
+  --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
   --tenant TENANT       Tenant identifier for multi-tenant operators.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rpc,diagnostics,public-rest}

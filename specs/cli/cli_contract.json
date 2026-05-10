@@ -60,7 +60,6 @@
         "tigrcorn_mode"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -125,7 +124,6 @@
         "scope"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -188,7 +186,6 @@
         "name"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -234,7 +231,6 @@
       "family": "contracts",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -282,7 +278,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -343,7 +338,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -405,7 +399,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -466,7 +459,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -512,7 +504,6 @@
       "family": "governance",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -559,7 +550,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -619,7 +609,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -680,7 +669,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -727,7 +715,6 @@
       "family": "evidence",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -775,7 +762,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -836,7 +822,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -897,7 +882,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -958,7 +942,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1023,7 +1006,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1088,7 +1070,6 @@
         "report_dir"
       ],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1134,7 +1115,6 @@
       "family": "operator",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1185,7 +1165,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1252,7 +1231,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1321,7 +1299,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1382,7 +1359,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1429,7 +1405,6 @@
       "family": "operator",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1480,7 +1455,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1546,7 +1520,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1614,7 +1587,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1675,7 +1647,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1722,7 +1693,6 @@
       "family": "release",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -1770,7 +1740,6 @@
             "artifact"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1831,7 +1800,6 @@
             "signing_key"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1891,7 +1859,6 @@
             "bundle_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -1951,7 +1918,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2011,7 +1977,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2058,7 +2023,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -2116,7 +2080,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2188,7 +2151,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2255,7 +2217,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2316,7 +2277,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2381,7 +2341,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2450,7 +2409,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2517,7 +2475,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2564,7 +2521,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -2622,7 +2578,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2694,7 +2649,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2761,7 +2715,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2822,7 +2775,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2887,7 +2839,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -2956,7 +2907,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3023,7 +2973,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3090,7 +3039,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3137,7 +3085,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -3195,7 +3142,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3267,7 +3213,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3334,7 +3279,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3395,7 +3339,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3460,7 +3403,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3531,7 +3473,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3598,7 +3539,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3665,7 +3605,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3712,7 +3651,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -3770,7 +3708,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3842,7 +3779,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3909,7 +3845,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -3970,7 +3905,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4035,7 +3969,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4104,7 +4037,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4171,7 +4103,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4218,7 +4149,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4265,7 +4195,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4330,7 +4259,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4399,7 +4327,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4467,7 +4394,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4514,7 +4440,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4561,7 +4486,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4626,7 +4550,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4689,7 +4612,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4756,7 +4678,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4825,7 +4746,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -4872,7 +4792,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -4933,7 +4852,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5004,7 +4922,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5070,7 +4987,6 @@
             "checksum"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5145,7 +5061,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5213,7 +5128,6 @@
             "publish"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5278,7 +5192,6 @@
             "checksum"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5339,7 +5252,6 @@
             "id"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5404,7 +5316,6 @@
             "status_filter"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5473,7 +5384,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5520,7 +5430,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -5566,7 +5475,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5627,7 +5535,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5696,7 +5603,6 @@
             "dry_run"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5758,7 +5664,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5805,7 +5710,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -5855,7 +5759,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5926,7 +5829,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -5986,7 +5888,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6033,7 +5934,6 @@
       "family": "admin",
       "flags": [],
       "global_flags": [
-        "config",
         "env_file",
         "profile",
         "tenant",
@@ -6085,7 +5985,6 @@
             "report_dir"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6158,7 +6057,6 @@
             "timeout"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6218,7 +6116,6 @@
             "repo_root"
           ],
           "global_flags": [
-            "config",
             "env_file",
             "profile",
             "tenant",
@@ -6371,16 +6268,6 @@
       "group": "global",
       "help": "Color policy for terminal output.",
       "key": "color"
-    },
-    "config": {
-      "default": null,
-      "family": "global",
-      "flags": [
-        "--config"
-      ],
-      "group": "global",
-      "help": "Path to the runtime/configuration file.",
-      "key": "config"
     },
     "cookies": {
       "action": "BooleanOptionalAction",
@@ -6866,20 +6753,13 @@
       "type": "int"
     },
     "profile": {
-      "choices": [
-        "baseline",
-        "production",
-        "hardening",
-        "fapi2-security",
-        "peer-claim"
-      ],
       "default": "baseline",
       "family": "global",
       "flags": [
         "--profile"
       ],
       "group": "global",
-      "help": "Effective standards/compliance profile.",
+      "help": "Runtime profile reference: packaged profile id or external YAML profile path.",
       "key": "profile"
     },
     "proxy_headers": {
@@ -7333,16 +7213,6 @@
       "default": null,
       "family": "global",
       "flags": [
-        "--config"
-      ],
-      "group": "global",
-      "help": "Path to the runtime/configuration file.",
-      "key": "config"
-    },
-    {
-      "default": null,
-      "family": "global",
-      "flags": [
         "--env-file"
       ],
       "group": "global",
@@ -7350,20 +7220,13 @@
       "key": "env_file"
     },
     {
-      "choices": [
-        "baseline",
-        "production",
-        "hardening",
-        "fapi2-security",
-        "peer-claim"
-      ],
       "default": "baseline",
       "family": "global",
       "flags": [
         "--profile"
       ],
       "group": "global",
-      "help": "Effective standards/compliance profile.",
+      "help": "Runtime profile reference: packaged profile id or external YAML profile path.",
       "key": "profile"
     },
     {
@@ -7553,8 +7416,8 @@
       "runtime": 1
     },
     "family_count": 7,
-    "flag_count": 88,
-    "global_flag_count": 16,
+    "flag_count": 87,
+    "global_flag_count": 15,
     "nested_command_count": 16,
     "resource_command_count": 10,
     "verb_count": 83

@@ -32,7 +32,7 @@
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 763,
+        "line": 772,
         "match": "if hasattr("
       },
       {
@@ -62,7 +62,7 @@
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 810,
+        "line": 828,
         "match": "except Exception:"
       }
     ]

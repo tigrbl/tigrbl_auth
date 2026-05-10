@@ -1,6 +1,11 @@
 # Contract Sync Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- production: committed OpenAPI contract drifts from generated contract
+- hardening: committed OpenAPI contract drifts from generated contract
 
 ## Summary
 

@@ -125,6 +125,25 @@ effective_deployment:
   - Import/export portability
   - Release bundle and signature verification
   active_openrpc_methods: []
+  profile_source:
+    kind: packaged-profile-id
+    profile_id: baseline
+    base_profile: baseline
+    applied_override_keys:
+    - enable_oidc_core
+    - enable_oidc_discovery
+    - enable_oidc_session_management
+    - enable_rfc6749
+    - enable_rfc6750
+    - enable_rfc7515
+    - enable_rfc7516
+    - enable_rfc7517
+    - enable_rfc7518
+    - enable_rfc7519
+    - enable_rfc7636
+    - enable_rfc8414
+    - enable_rfc8615
+    redaction: no-secret-values-emitted
 bundle_manifest:
   bundles:
   - target: ASGI 3 application package

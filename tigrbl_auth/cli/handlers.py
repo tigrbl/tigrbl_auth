@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import secrets
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -106,7 +107,8 @@ def _emit(args: Any, payload: dict[str, Any]) -> int:
         out_path = Path(output).resolve()
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(rendered, encoding="utf-8")
-    print(rendered, end="")
+    stream = getattr(args, "output_stream", sys.stdout)
+    stream.write(rendered)
     return 0
 
 
@@ -1538,13 +1540,14 @@ from tigrbl_auth.services.import_export_service import (
 
 
 def _svc_context(args: Any, resource: str, command: str | None = None) -> OperationContext:
+    deployment = _resolved_from_args(args)
     return OperationContext(
         repo_root=_repo_root(getattr(args, "repo_root", None)),
         command=command or f"{resource}.{getattr(args, 'action', '')}".strip("."),
         resource=resource,
         dry_run=bool(getattr(args, "dry_run", False)),
         actor=getattr(args, "actor", None) or "system",
-        profile=getattr(args, "profile", None),
+        profile=deployment.profile,
         tenant=getattr(args, "tenant", None),
         issuer=getattr(args, "issuer", None),
     )
@@ -1843,12 +1846,14 @@ def handle_keys_publish_jwks(args: Any) -> int:
 
 
 def handle_discovery_show(args: Any) -> int:
-    payload = {"command": "discovery.show", **_svc_show_discovery(_repo_root(getattr(args, "repo_root", None)), profile=getattr(args, "profile", None))}
+    deployment = _resolved_from_args(args)
+    payload = {"command": "discovery.show", "profile_source": deployment.profile_source, **_svc_show_discovery(_repo_root(getattr(args, "repo_root", None)), profile=deployment.profile)}
     return _emit(args, payload)
 
 
 def handle_discovery_validate(args: Any) -> int:
-    payload = {"command": "discovery.validate", **_svc_validate_discovery(_repo_root(getattr(args, "repo_root", None)), profile=getattr(args, "profile", None))}
+    deployment = _resolved_from_args(args)
+    payload = {"command": "discovery.validate", "profile_source": deployment.profile_source, **_svc_validate_discovery(_repo_root(getattr(args, "repo_root", None)), profile=deployment.profile)}
     return _emit(args, payload)
 
 
@@ -1859,7 +1864,8 @@ def handle_discovery_publish(args: Any) -> int:
 
 
 def handle_discovery_diff(args: Any) -> int:
-    payload = {"command": "discovery.diff", **_svc_diff_discovery(_repo_root(getattr(args, "repo_root", None)), left_profile=getattr(args, "left_profile", None) or getattr(args, "profile", None), right_profile=getattr(args, "right_profile", None))}
+    deployment = _resolved_from_args(args)
+    payload = {"command": "discovery.diff", "profile_source": deployment.profile_source, **_svc_diff_discovery(_repo_root(getattr(args, "repo_root", None)), left_profile=getattr(args, "left_profile", None) or deployment.profile, right_profile=getattr(args, "right_profile", None))}
     return _emit(args, payload)
 
 

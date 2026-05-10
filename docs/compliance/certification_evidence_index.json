@@ -9,18 +9,33 @@
     "fapi_claim_count": 6,
     "security_sensitive_claim_count": 37,
     "partition_count": 7,
-    "target_profile_bundle_count": 195,
+    "target_profile_bundle_count": 199,
     "clean_checkout": {
       "git_available": true,
       "clean": false,
-      "changed_path_count": 19,
+      "changed_path_count": 47,
       "changed_paths": [
-        "compliance/claims/repository-state.yaml",
+        ".ssot/registry.json",
+        ".ssot/reports/profile-reference-union.planned.json",
+        "compliance/claims/effective-target-claims.baseline.yaml",
+        "compliance/claims/effective-target-claims.fapi2-security.yaml",
+        "compliance/claims/effective-target-claims.hardening.yaml",
+        "compliance/claims/effective-target-claims.peer-claim.yaml",
+        "compliance/claims/effective-target-claims.production.yaml",
         "compliance/evidence/certification_test_partitions.json",
         "compliance/evidence/certification_test_partitions.yaml",
+        "compliance/evidence/effective-release-evidence.baseline.yaml",
+        "compliance/evidence/target_profile_evidence.json",
+        "compliance/evidence/target_profile_evidence.yaml",
         "compliance/targets/document-authority.yaml",
+        "docs/compliance/artifact_truthfulness_report.json",
+        "docs/compliance/artifact_truthfulness_report.md",
         "docs/compliance/certification_evidence_index.json",
         "docs/compliance/certification_evidence_index.md",
+        "docs/compliance/cli_conformance_snapshot.json",
+        "docs/compliance/cli_conformance_snapshot.md",
+        "docs/compliance/contract_sync_report.json",
+        "docs/compliance/contract_sync_report.md",
         "docs/compliance/current_state_report.json",
         "docs/compliance/current_state_report.md",
         "docs/compliance/feature_completeness_report.json",
@@ -30,10 +45,23 @@
         "docs/compliance/runtime_profile_report.json",
         "docs/compliance/runtime_profile_report.md",
         "docs/compliance/tigrbl_runtime_foundation_report.json",
-        "docs/compliance/tigrbl_runtime_foundation_report.md",
-        "docs/compliance/truth_chain.json",
-        "docs/compliance/truth_chain.md",
-        "tigrbl_auth/framework.py"
+        "docs/reference/CLI_SURFACE.md",
+        "specs/cli/cli_contract.json",
+        "specs/cli/cli_contract.yaml",
+        "specs/discovery/profiles/fapi2-security/oauth-protected-resource.json",
+        "specs/discovery/profiles/hardening/oauth-protected-resource.json",
+        "specs/discovery/profiles/peer-claim/oauth-protected-resource.json",
+        "specs/discovery/profiles/production/oauth-protected-resource.json",
+        "tests/features/test_profile_reference_union.py",
+        "tests/unit/test_cli_contract.py",
+        "tigrbl_auth/cli/artifacts.py",
+        "tigrbl_auth/cli/handlers.py",
+        "tigrbl_auth/cli/main.py",
+        "tigrbl_auth/cli/metadata.py",
+        "tigrbl_auth/config/deployment.py",
+        "tigrbl_auth/config/feature_flags.py",
+        "tigrbl_auth/config/profile_loader.py",
+        "tests/fixtures/"
       ]
     }
   },
@@ -89,6 +117,8 @@
       "tests/e2e/test_release_gate_catalog.py",
       "tests/examples/test_python_cli_device_login.py",
       "tests/examples/test_readme_usage.py",
+      "tests/features/test_profile_reference_union.py",
+      "tests/features/test_tenant_jwks_discovery.py",
       "tests/perf/test_bundle_manifest_size.py",
       "tests/uix/test_abac_admin.py",
       "tests/uix/test_admin_golden_path.py",
@@ -228,6 +258,7 @@
       "tests/unit/test_well_known_endpoints_behavior.py"
     ],
     "integration": [
+      "tests/integration/test_admin_auth_session.py",
       "tests/integration/test_admin_table_issue_regressions.py",
       "tests/integration/test_admin_table_surfaces.py",
       "tests/integration/test_auth_flows.py",
@@ -11906,6 +11937,21 @@
     },
     {
       "profile": "production",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
+      ]
+    },
+    {
+      "profile": "production",
       "target": "RFC 9207",
       "tests": [
         "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
@@ -12455,6 +12501,21 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
+      ]
+    },
+    {
+      "profile": "hardening",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
       ]
     },
     {
@@ -13107,6 +13168,21 @@
     },
     {
       "profile": "fapi2-security",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
+      ]
+    },
+    {
+      "profile": "fapi2-security",
       "target": "RFC 9101",
       "tests": [
         "tests/conformance/hardening/test_rfc9101_jar.py",
@@ -13735,6 +13811,21 @@
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/resource-indicators/"
+      ]
+    },
+    {
+      "profile": "peer-claim",
+      "target": "RFC 9068",
+      "tests": [
+        "tests/conformance/production/test_rfc9068_jwt_profile.py",
+        "tests/integration/test_profile_surface_and_contract_alignment.py",
+        "tests/unit/test_advanced_surface_contracts.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
+      "evidence_refs": [
+        "compliance/evidence/tier3/jwt-access-token-profile/"
       ]
     },
     {

@@ -4,9 +4,8 @@
 
 ## Global flags
 
-- `--config` — Path to the runtime/configuration file.
 - `--env-file` — Optional environment file loaded before resolution.
-- `--profile` — Effective standards/compliance profile.
+- `--profile` — Runtime profile reference: packaged profile id or external YAML profile path.
 - `--tenant` — Tenant identifier for multi-tenant operators.
 - `--issuer` — Issuer override for discovery and contract generation.
 - `--surface-set` — Installable surface set. May be supplied multiple times.

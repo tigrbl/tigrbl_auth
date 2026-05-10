@@ -17281,7 +17281,7 @@
       "id": "feat:profile-reference-union",
       "title": "Profile reference union",
       "description": "Makes --profile accept either a packaged runtime profile ID or an external YAML profile path as the single runtime configuration selector.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17309,7 +17309,7 @@
       "id": "feat:profile-id-resolution",
       "title": "Profile ID resolution",
       "description": "Resolves --profile values such as baseline, production, hardening, fapi2-security, and peer-claim to packaged runtime profile YAML files.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17336,7 +17336,7 @@
       "id": "feat:profile-path-resolution",
       "title": "Profile path resolution",
       "description": "Resolves --profile values that point to .yaml or .yml files as external runtime profile documents.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17364,7 +17364,7 @@
       "id": "feat:external-profile-yaml-validation",
       "title": "External profile YAML validation",
       "description": "Validates external profile YAML files against required fields, allowed extensions, base profile semantics, and typed runtime configuration values.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17391,7 +17391,7 @@
       "id": "feat:profile-reference-fail-closed-errors",
       "title": "Profile reference fail-closed errors",
       "description": "Fails closed for unknown IDs, missing paths, directories, unsupported extensions, malformed YAML, ambiguous values, and inconsistent external profile content.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17420,7 +17420,7 @@
       "id": "feat:profile-provenance-output",
       "title": "Profile provenance output",
       "description": "Reports profile reference kind, packaged profile ID, external profile path, base profile ID, applied overrides, and redaction status in effective deployment output.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17447,7 +17447,7 @@
       "id": "feat:cli-profile-runtime-wiring",
       "title": "CLI profile runtime wiring",
       "description": "Wires --profile through CLI dispatch, app assembly, and the deployment resolver so runtime behavior consumes one ResolvedDeployment.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17474,7 +17474,7 @@
       "id": "feat:cli-config-deprecation-or-removal",
       "title": "CLI config deprecation or removal",
       "description": "Removes --config from the generated CLI contract or deprecates it as a compatibility alias that delegates to --profile without separate semantics.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17501,7 +17501,7 @@
       "id": "feat:profile-reference-negative-coverage",
       "title": "Profile reference negative coverage",
       "description": "Adds negative tests for invalid profile IDs, invalid paths, malformed profile files, unsupported keys, conflicting declarations, and duplicate selector usage.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -17530,7 +17530,7 @@
       "id": "feat:profile-reference-discovery-contract-alignment",
       "title": "Profile reference discovery contract alignment",
       "description": "Ensures OpenID/OAuth discovery, JWKS URI selection, OpenAPI, OpenRPC, profile snapshots, and evidence artifacts derive from the resolved profile reference.",
-      "implementation_status": "absent",
+      "implementation_status": "implemented",
       "lifecycle": {
         "stage": "active",
         "replacement_feature_ids": [],
@@ -32727,7 +32727,7 @@
     {
       "id": "tst:profile-reference-union.contract",
       "title": "Profile reference union contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32743,7 +32743,7 @@
     {
       "id": "tst:profile-id-resolution.contract",
       "title": "Profile ID resolution contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32759,7 +32759,7 @@
     {
       "id": "tst:profile-path-resolution.contract",
       "title": "Profile path resolution contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32775,7 +32775,7 @@
     {
       "id": "tst:external-profile-yaml-validation.contract",
       "title": "External profile YAML validation contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32791,7 +32791,7 @@
     {
       "id": "tst:profile-reference-fail-closed-errors.contract",
       "title": "Profile reference fail-closed errors contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32807,7 +32807,7 @@
     {
       "id": "tst:profile-provenance-output.contract",
       "title": "Profile provenance output contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32823,7 +32823,7 @@
     {
       "id": "tst:cli-profile-runtime-wiring.contract",
       "title": "CLI profile runtime wiring contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32839,7 +32839,7 @@
     {
       "id": "tst:cli-config-deprecation-or-removal.contract",
       "title": "CLI config deprecation or removal contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32855,7 +32855,7 @@
     {
       "id": "tst:profile-reference-negative-coverage.contract",
       "title": "Profile reference negative coverage contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -32871,7 +32871,7 @@
     {
       "id": "tst:profile-reference-discovery-contract-alignment.contract",
       "title": "Profile reference discovery contract alignment contract test",
-      "status": "planned",
+      "status": "passing",
       "kind": "contract",
       "path": "tests/features/test_profile_reference_union.py",
       "feature_ids": [
@@ -51296,7 +51296,7 @@
     {
       "id": "evd:profile-reference-union-planned",
       "title": "Profile reference union planned evidence",
-      "status": "planned",
+      "status": "passed",
       "kind": "planned-evidence",
       "tier": "T1",
       "path": ".ssot/reports/profile-reference-union.planned.json",
@@ -51560,7 +51560,7 @@
     {
       "id": "iss:cli-config-flag-unwired-001",
       "title": "--config duplicates --profile and is declared without valid semantics",
-      "status": "open",
+      "status": "closed",
       "severity": "high",
       "description": "The CLI metadata declares --config as a runtime/configuration file path, but profile YAMLs are the runtime configuration model. ADR-1065 and SPEC-1087 through SPEC-1089 make --profile the single runtime configuration selector, accepting either packaged profile IDs or external YAML profile paths. Close this issue by removing --config from the generated CLI contract or explicitly deprecating it as a compatibility alias that delegates to --profile without separate semantics, then add validation and negative coverage for duplicate selector usage.",
       "plan": {

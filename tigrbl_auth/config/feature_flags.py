@@ -101,7 +101,6 @@ CLI_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
     "global": {
         "description": "Shared operator flags",
         "flags": [
-            "--config",
             "--env-file",
             "--profile",
             "--tenant",

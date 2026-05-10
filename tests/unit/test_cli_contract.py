@@ -38,7 +38,7 @@ def test_cli_contract_manifest_includes_outputs_exit_codes_and_help_snapshots():
 
     assert summary["command_count"] >= 20
     assert summary["verb_count"] >= 82
-    assert summary["global_flag_count"] >= 16
+    assert summary["global_flag_count"] >= 15
 
     tenant = next(item for item in contract["commands"] if item["name"] == "tenant")
     create = next(item for item in tenant["verbs"] if item["name"] == "create")

@@ -1,5 +1,5 @@
 {
-  "status": "planned",
+  "status": "passed",
   "scope": "profile reference union runtime configuration",
   "adr_ids": [
     "adr:1065"
@@ -23,6 +23,41 @@
   ],
   "notes": [
     "--profile is the single runtime configuration selector.",
-    "--config is governed as duplicate intent and must be removed or explicitly deprecated."
+    "--profile accepts packaged profile IDs and external .yaml/.yml profile files.",
+    "--config is removed from the executable CLI metadata, generated contract snapshots, and parser help.",
+    "External profile files validate as YAML mappings, require base_profile, reject unknown top-level keys, and compose through ResolvedDeployment.",
+    "Profile provenance output reports source kind, profile id, base profile, external path when present, applied override keys, and no-secret redaction status."
+  ],
+  "verification": [
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/features/test_profile_reference_union.py tests/unit/test_runtime_profile_configuration.py tests/unit/test_cli_contract.py",
+      "status": "passed",
+      "summary": "19 passed"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/unit/test_runtime_profile_configuration.py tests/unit/test_cli_contract.py tests/unit/test_runtime_launcher.py",
+      "status": "passed",
+      "summary": "14 passed, 1 skipped"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run pytest tests/conformance/operator/test_cli_serve_runtime.py",
+      "status": "passed",
+      "summary": "5 passed"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run python -m tigrbl_auth.cli.main serve --check --profile production --format json",
+      "status": "passed",
+      "summary": "launch_ready true"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run python -m tigrbl_auth.cli.main serve --check --profile .\\tests\\fixtures\\profiles\\external-production.yaml --format json",
+      "status": "passed",
+      "summary": "launch_ready true"
+    },
+    {
+      "command": "uv --cache-dir .uv-cache run python -m tigrbl_auth.cli.main discovery show --profile .\\tests\\fixtures\\profiles\\external-production.yaml --format json",
+      "status": "passed",
+      "summary": "profile_source.kind external-profile-path"
+    }
   ]
 }

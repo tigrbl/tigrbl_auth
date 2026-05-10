@@ -51,6 +51,8 @@
       "tests/e2e/test_release_gate_catalog.py",
       "tests/examples/test_python_cli_device_login.py",
       "tests/examples/test_readme_usage.py",
+      "tests/features/test_profile_reference_union.py",
+      "tests/features/test_tenant_jwks_discovery.py",
       "tests/perf/test_bundle_manifest_size.py",
       "tests/uix/test_abac_admin.py",
       "tests/uix/test_admin_golden_path.py",
@@ -190,6 +192,7 @@
       "tests/unit/test_well_known_endpoints_behavior.py"
     ],
     "integration": [
+      "tests/integration/test_admin_auth_session.py",
       "tests/integration/test_admin_table_issue_regressions.py",
       "tests/integration/test_admin_table_surfaces.py",
       "tests/integration/test_auth_flows.py",
