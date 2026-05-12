@@ -8,59 +8,60 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Runtime OpenAPI and OpenRPC payload responsibilities delegated to tigrbl must not be reimplemented or mutated downstream by tigrbl_auth wrappers."
+summary: "This specification defines runtime contract responsibilities that `tigrbl_auth` MUST defer upstream to `tigrbl`."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Overview
-
+  
   This specification defines runtime contract responsibilities that `tigrbl_auth` MUST defer upstream to `tigrbl`.
-
+  
   Decision source: `adr:1045`.
-
+  
   ## Scope
-
+  
   This specification applies to runtime wrapper and gateway modules in `tigrbl_auth`, including:
-
+  
   - `tigrbl_auth/api/app.py`,
   - `tigrbl_auth/security/admin_gate.py`,
   - live `/openapi.json` responses,
   - live `/openrpc.json` responses.
-
+  
   ## Deferred Responsibilities
-
+  
   `tigrbl_auth` MUST defer the following runtime responsibilities to `tigrbl`:
-
+  
   - generation of the live OpenAPI payload,
   - generation of the live OpenRPC payload,
   - inclusion or exclusion of contract paths and methods inside live contract payloads,
   - security metadata present in live contract payloads.
-
+  
   ## Wrapper Constraints
-
+  
   Wrapper modules in `tigrbl_auth` MUST:
-
+  
   - forward live `/openapi.json` responses without payload mutation,
   - forward live `/openrpc.json` responses without payload mutation,
   - avoid injecting or removing contract paths, methods, components, or security metadata in those live payloads,
   - prove deference by showing that wrapped responses equal upstream `TigrblApp` responses for the same deployment.
-
+  
   ## Allowed Responsibilities
-
+  
   `tigrbl_auth` MAY still:
-
+  
   - protect non-contract admin and RPC business endpoints with access control,
   - generate and validate governed contract artifacts through non-runtime builder surfaces,
   - report upstream contract defects through SSOT issues and tests.
-
+  
   ## Verification
-
+  
   Verification MUST include:
-
+  
   - runtime equality tests for wrapped versus upstream `/openapi.json`,
   - runtime equality tests for wrapped versus upstream `/openrpc.json`,
   - proof coverage for both public-only and mixed runtime postures,
   - proof coverage that the wrapper does not inject admin security metadata into live contract payloads.
 spec_kind: "normative"
+adr_ids: []

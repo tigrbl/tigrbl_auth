@@ -30,3 +30,4 @@ body: |-
   
   Verification MUST cover RBAC allow/deny, ABAC allow/deny, missing policy data, authorization denial, simulation explanation output, and audit visibility.
 spec_kind: "local-policy"
+adr_ids: []

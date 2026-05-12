@@ -31,3 +31,4 @@ body: |-
   
   Verification MUST cover confirmation, execution, success, failure, authorization denial, audit visibility, resource scoping, and administrator identity onboarding or mutation flows.
 spec_kind: "local-policy"
+adr_ids: []

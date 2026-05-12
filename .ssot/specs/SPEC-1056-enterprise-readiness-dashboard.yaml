@@ -31,3 +31,4 @@ body: |-
   
   Verification MUST cover healthy, degraded, blocked, unknown, and unavailable dashboard states with contract-backed input data.
 spec_kind: "local-policy"
+adr_ids: []

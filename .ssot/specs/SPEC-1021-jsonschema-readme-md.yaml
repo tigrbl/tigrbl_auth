@@ -18,3 +18,4 @@ body: |-
   
   Canonical JSON Schema artifacts for discovery documents, metadata documents, and admin/control-plane envelopes.
 spec_kind: "local-policy"
+adr_ids: []

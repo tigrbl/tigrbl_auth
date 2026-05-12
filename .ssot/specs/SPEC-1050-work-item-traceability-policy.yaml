@@ -32,3 +32,4 @@ body: |-
   - Planned work items must not be orphaned from features.
   - Work-item traceability must be verified by repository tests.
 spec_kind: "governance"
+adr_ids: []

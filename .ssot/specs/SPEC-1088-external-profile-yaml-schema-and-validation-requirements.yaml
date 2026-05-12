@@ -76,3 +76,4 @@ body: |-
   
   Verification MUST cover valid external profiles, missing required fields, unsupported base profiles, unknown fields, malformed types, inconsistent surfaces, contract contradictions, and redaction behavior.
 spec_kind: "normative"
+adr_ids: []

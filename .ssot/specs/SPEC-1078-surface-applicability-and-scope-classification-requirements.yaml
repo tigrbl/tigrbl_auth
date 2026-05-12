@@ -29,3 +29,4 @@ body: |-
   
   The classification model MUST be usable across admin API, public API, admin UIX, public UIX, runtime, operator, and release-facing surfaces.
 spec_kind: "governance"
+adr_ids: []

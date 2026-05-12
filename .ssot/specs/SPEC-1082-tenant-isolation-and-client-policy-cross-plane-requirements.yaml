@@ -31,3 +31,4 @@ body: |-
   
   Cross-plane behavior MUST remain consistent so tenant and client concerns are not governed differently by surface accident.
 spec_kind: "normative"
+adr_ids: []

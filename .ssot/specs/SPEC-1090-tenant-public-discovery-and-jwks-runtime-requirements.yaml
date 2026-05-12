@@ -75,3 +75,4 @@ body: |-
   
   Cross-tenant tests MUST prove tenant A routes never expose tenant B keys or tenant B metadata.
 spec_kind: "normative"
+adr_ids: []

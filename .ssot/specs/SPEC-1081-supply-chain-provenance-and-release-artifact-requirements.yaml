@@ -32,3 +32,4 @@ body: |-
   
   Supply-chain and provenance outputs MUST be governable as release-facing repository artifacts and MUST NOT depend on informal or undocumented report conventions.
 spec_kind: "governance"
+adr_ids: []

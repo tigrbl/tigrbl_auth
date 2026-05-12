@@ -31,3 +31,4 @@ body: |-
   
   The admin API boundary MUST remain separate from the public API boundary and MUST fail closed when admin enablement or authorization requirements are not satisfied.
 spec_kind: "normative"
+adr_ids: []

@@ -32,3 +32,4 @@ body: |-
   
   Public contract publication MUST reflect the effective deployment boundary and MUST NOT leak admin-only operations into the public API surface.
 spec_kind: "normative"
+adr_ids: []

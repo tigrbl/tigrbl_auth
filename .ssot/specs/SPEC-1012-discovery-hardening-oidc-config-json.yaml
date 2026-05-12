@@ -114,3 +114,4 @@ body: |-
     "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource"
   }
 spec_kind: "local-policy"
+adr_ids: []

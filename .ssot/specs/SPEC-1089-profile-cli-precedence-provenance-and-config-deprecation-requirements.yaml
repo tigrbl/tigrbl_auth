@@ -81,3 +81,4 @@ body: |-
   
   Verification MUST cover CLI wiring, `--profile` ID usage, `--profile` path usage, deprecated or removed `--config` behavior, precedence ordering, provenance reporting, validation command behavior, and generated artifact alignment.
 spec_kind: "normative"
+adr_ids: []

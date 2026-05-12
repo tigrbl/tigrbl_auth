@@ -5936,3 +5936,4 @@ body: |-
     output: null
     exit_codes: []
 spec_kind: "local-policy"
+adr_ids: []

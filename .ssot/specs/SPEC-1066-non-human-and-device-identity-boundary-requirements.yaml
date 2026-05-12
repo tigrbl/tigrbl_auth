@@ -66,3 +66,4 @@ body: |-
   
   This specification governs `F03`, `F11`, and `F12`.
 spec_kind: "normative"
+adr_ids: []

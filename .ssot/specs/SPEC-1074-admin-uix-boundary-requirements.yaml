@@ -34,3 +34,4 @@ body: |-
   
   The admin UIX boundary MUST remain separate from public UIX and MUST consume governed backend contracts rather than inventing an untracked surface.
 spec_kind: "normative"
+adr_ids: []

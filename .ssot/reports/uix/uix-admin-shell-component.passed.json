@@ -1,12 +1,1 @@
-{
-  "status": "passed",
-  "test_id": "tst:uix-admin-shell-component",
-  "test_path": "tests/uix/test_admin_shell.py",
-  "command": ".uv-project-env\\Scripts\\python.exe -m pytest tests\\uix\\test_admin_shell.py tests\\uix\\test_admin_shell_security.py tests\\uix\\test_admin_golden_path.py --basetemp .pytest-tmp\\uix-admin-shell",
-  "result": "6 passed",
-  "boundary_id": "bnd:priority-1-admin-console-shell",
-  "feature_ids": [
-    "feat:uix-admin-console-shell",
-    "feat:uix-tenant-profile-selector"
-  ]
-}
+{"boundary_id":"bnd:priority-1-admin-console-shell","command":".uv-project-env\\Scripts\\python.exe -m pytest tests\\uix\\test_admin_shell.py tests\\uix\\test_admin_shell_security.py tests\\uix\\test_admin_golden_path.py --basetemp .pytest-tmp\\uix-admin-shell","feature_ids":["feat:uix-admin-console-shell","feat:uix-tenant-profile-selector"],"result":"6 passed","status":"passed","test_id":"tst:uix-admin-shell-component","test_path":"tests/uix/test_admin_shell.py"}

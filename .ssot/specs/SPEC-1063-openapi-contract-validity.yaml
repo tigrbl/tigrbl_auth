@@ -8,30 +8,30 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Generated OpenAPI output must conform for the resolved deployment whether or not the `/openapi.json` endpoint is exposed."
+summary: "This specification defines the conformance contract for generated OpenAPI output in `tigrbl_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Overview
-
+  
   This specification defines the conformance contract for generated OpenAPI output in `tigrbl_auth`.
-
+  
   Decision source: `adr:1044`.
-
+  
   ## Scope
-
+  
   This specification applies to:
-
+  
   - builder-generated OpenAPI contract objects,
   - committed OpenAPI JSON artifacts,
   - exposed `/openapi.json` payloads when the endpoint is mounted.
-
+  
   ## Invariants
-
+  
   Generated OpenAPI output MUST:
-
+  
   - be JSON-serializable,
   - declare an OpenAPI 3.x version,
   - conform to OpenAPI 3.1 expectations for `jsonSchemaDialect` by omitting the field, setting it to `https://spec.openapis.org/oas/3.1/dialect/base`, or preserving an upstream Tigrbl-supported JSON Schema dialect such as `https://json-schema.org/draft/2020-12/schema`,
@@ -41,26 +41,27 @@ body: |-
   - exclude disabled diagnostics and other hidden control-plane path families from public runtime payloads,
   - include security schemes required by the resolved deployment flags,
   - preserve per-operation metadata derived from the resolved deployment boundary.
-
+  
   Non-default `jsonSchemaDialect` values SHALL NOT be emitted unless they are emitted by the upstream Tigrbl runtime generator and remain OpenAPI 3.1 compatible.
-
+  
   Contract generation and runtime exposure SHALL conform rather than merely serialize or appear viable to tolerant consumers.
-
+  
   ## Exposure Independence
-
+  
   Conformance MUST NOT depend on whether `/openapi.json` is exposed.
-
+  
   If the endpoint is hidden, the generated OpenAPI artifact must still satisfy this specification through the builder and committed artifact paths.
-
+  
   If the endpoint is exposed, the HTTP payload must satisfy the same conformance requirements without downstream mutation by `tigrbl_auth`.
-
+  
   ## Verification
-
+  
   Verification MUST include:
-
+  
   - profile-parameterized builder tests,
   - runtime endpoint tests for exposed payloads,
   - explicit checks that `jsonSchemaDialect` is omitted, OpenAPI-base, or an upstream Tigrbl-supported OpenAPI 3.1 dialect,
   - explicit checks for route-set alignment with the resolved deployment,
   - explicit checks for JSON-serializability and required metadata.
 spec_kind: "normative"
+adr_ids: []

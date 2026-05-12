@@ -62,3 +62,4 @@ body: |-
   
   Verification MUST cover default public-only exposure, bootstrap superuser materialization, admin login, forced password change, password recovery, missing or invalid session behavior, OpenAPI security metadata, OpenRPC security metadata, public route exclusions, duplicate route regression, and structured invalid-params behavior for generated RPC methods.
 spec_kind: "normative"
+adr_ids: []

@@ -33,3 +33,4 @@ body: |-
   
   The public UIX boundary MUST remain distinct from admin UIX and from backend API-only concerns.
 spec_kind: "normative"
+adr_ids: []

@@ -42,3 +42,4 @@ body: |-
     "additionalProperties": true
   }
 spec_kind: "local-policy"
+adr_ids: []

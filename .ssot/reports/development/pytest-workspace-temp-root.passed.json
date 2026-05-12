@@ -1,9 +1,1 @@
-{
-  "id": "evd:pytest-workspace-temp-root",
-  "status": "passed",
-  "kind": "pytest",
-  "tier": "T2",
-  "command": ".\\.uv-project-env\\Scripts\\python.exe -m pytest tests/unit/test_pytest_workspace_temp_root.py tests/unit/test_provenance_naming_guard.py tests/unit/test_tier4_checkpoint.py -q",
-  "summary": "Pytest defaults to the repo-local .pytest-tmp base temp root and the focused development-surface guard passed.",
-  "passed": true
-}
+{"command":".\\.uv-project-env\\Scripts\\python.exe -m pytest tests/unit/test_pytest_workspace_temp_root.py tests/unit/test_provenance_naming_guard.py tests/unit/test_tier4_checkpoint.py -q","id":"evd:pytest-workspace-temp-root","kind":"pytest","passed":true,"status":"passed","summary":"Pytest defaults to the repo-local .pytest-tmp base temp root and the focused development-surface guard passed.","tier":"T2"}

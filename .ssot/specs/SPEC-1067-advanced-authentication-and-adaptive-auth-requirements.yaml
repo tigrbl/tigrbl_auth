@@ -69,3 +69,4 @@ body: |-
   
   This specification governs `F05`, `F06`, `F07`, `F10`, and `F26`.
 spec_kind: "normative"
+adr_ids: []

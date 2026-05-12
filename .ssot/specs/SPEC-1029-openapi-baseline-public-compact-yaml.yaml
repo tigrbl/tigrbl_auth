@@ -114,3 +114,4 @@ body: |-
     - OpenRPC 1.4.x admin/control-plane contract
     strict_boundary_enforcement: true
 spec_kind: "local-policy"
+adr_ids: []

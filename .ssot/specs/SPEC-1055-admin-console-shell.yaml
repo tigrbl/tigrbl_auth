@@ -34,3 +34,4 @@ body: |-
   
   Verification MUST cover login rendering, authenticated rendering, unauthenticated denial or redirect, forgot-password and password-change states, post-authentication redirects, tenant/profile selector behavior, unsafe-state banners, and redaction.
 spec_kind: "local-policy"
+adr_ids: []

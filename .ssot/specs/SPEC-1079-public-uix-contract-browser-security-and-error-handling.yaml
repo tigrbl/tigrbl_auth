@@ -32,3 +32,4 @@ body: |-
   
   Public UIX contract consumption and security behavior MUST remain consistent across supported deployment profiles.
 spec_kind: "normative"
+adr_ids: []

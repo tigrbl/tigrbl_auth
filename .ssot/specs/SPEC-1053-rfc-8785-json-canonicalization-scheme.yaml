@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Defines the repository requirements for RFC 8785 JCS canonical JSON generation and evidence linkage."
+summary: "RFC 8785 JSON Canonicalization Scheme (JCS) defines deterministic JSON bytes for cryptographic and reproducibility-sensitive operations. This repository tracks JCS as a governed feature family rather than treating sorted-key JSON serialization as sufficient."
 supersedes: []
 superseded_by: []
 status_notes: []
@@ -18,17 +18,17 @@ references:
   - "spc:1054"
 body: |-
   ## Overview
-
+  
   RFC 8785 JSON Canonicalization Scheme (JCS) defines deterministic JSON bytes for cryptographic and reproducibility-sensitive operations. This repository tracks JCS as a governed feature family rather than treating sorted-key JSON serialization as sufficient.
-
+  
   ## Scope
-
+  
   The JCS capability applies when a repository surface explicitly requires canonical JSON bytes for signing, hashing, digest comparison, release evidence, or interoperable canonical JSON exchange.
-
+  
   Compatibility serializers that only need stable local output are out of scope unless they are promoted to claim RFC 8785 behavior.
-
+  
   ## Requirements
-
+  
   - JCS input MUST be constrained to I-JSON-compatible data.
   - Parsed JSON text used as JCS input MUST reject duplicate object member names.
   - JSON strings MUST preserve Unicode code points as provided by the application; Unicode normalization MUST NOT be applied as part of JCS canonicalization.
@@ -39,9 +39,9 @@ body: |-
   - Object properties MUST be sorted deterministically by property name as required by JCS.
   - Canonical output MUST be UTF-8 bytes.
   - APIs claiming JCS support MUST expose failure paths for unsupported input rather than silently falling back to non-JCS JSON.
-
+  
   ## Verification
-
+  
   Planned verification MUST include:
   - RFC 8785 example vectors and number serialization samples;
   - duplicate-property rejection for parsed JSON text;
@@ -50,7 +50,6 @@ body: |-
   - object-member ordering checks;
   - UTF-8 byte-output checks;
   - regression coverage showing existing non-JCS serializers are not incorrectly labeled as JCS.
-
 spec_kind: "normative"
 rfc:
   number: 8785
@@ -62,3 +61,4 @@ rfc:
 features:
   - "feat:target-rfc-8785"
   - "feat:jcs-canonical-json"
+adr_ids: []

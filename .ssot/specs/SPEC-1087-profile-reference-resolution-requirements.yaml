@@ -86,3 +86,4 @@ body: |-
   - ambiguous value handling;
   - resolved deployment provenance for both reference kinds.
 spec_kind: "normative"
+adr_ids: []

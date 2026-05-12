@@ -32,3 +32,4 @@ body: |-
   - `tests/unit/test_truthfulness_alignment.py`
   - `tests/unit/test_ssot_document_authority.py`
 spec_kind: "governance"
+adr_ids: []

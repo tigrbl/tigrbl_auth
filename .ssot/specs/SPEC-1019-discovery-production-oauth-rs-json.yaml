@@ -69,3 +69,4 @@ body: |-
     ]
   }
 spec_kind: "local-policy"
+adr_ids: []

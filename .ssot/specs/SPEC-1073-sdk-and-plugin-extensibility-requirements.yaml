@@ -64,3 +64,4 @@ body: |-
   
   This specification governs `F39` and `F40`.
 spec_kind: "normative"
+adr_ids: []

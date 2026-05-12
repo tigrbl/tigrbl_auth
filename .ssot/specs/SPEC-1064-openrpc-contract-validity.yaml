@@ -8,30 +8,30 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Generated OpenRPC output must remain valid for the resolved deployment whether or not the `/openrpc.json` endpoint is exposed."
+summary: "This specification defines the validity contract for generated OpenRPC output in `tigrbl_auth`."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Overview
-
+  
   This specification defines the validity contract for generated OpenRPC output in `tigrbl_auth`.
-
+  
   Decision source: `adr:1044`.
-
+  
   ## Scope
-
+  
   This specification applies to:
-
+  
   - builder-generated OpenRPC contract objects,
   - committed OpenRPC JSON artifacts,
   - exposed `/openrpc.json` payloads when the endpoint is mounted.
-
+  
   ## Invariants
-
+  
   Generated OpenRPC output MUST:
-
+  
   - be JSON-serializable,
   - declare an OpenRPC 1.x version,
   - include non-empty `info.title` and `info.version`,
@@ -41,21 +41,22 @@ body: |-
   - include schema components for active methods when admin RPC is enabled,
   - include method-level security metadata for active admin/control-plane methods,
   - preserve owner-module and boundary metadata derived from the resolved deployment and RPC registry.
-
+  
   ## Exposure Independence
-
+  
   Validity MUST NOT depend on whether `/openrpc.json` is exposed.
-
+  
   If the endpoint is hidden, the generated OpenRPC artifact must still satisfy this specification through the builder and committed artifact paths.
-
+  
   If the endpoint is exposed, the HTTP payload must satisfy the same validity requirements without downstream mutation by `tigrbl_auth`.
-
+  
   ## Verification
-
+  
   Verification MUST include:
-
+  
   - builder tests for hidden and exposed control-plane postures,
   - runtime endpoint tests for exposed payloads,
   - explicit checks for method-set alignment with the live RPC registry,
   - explicit checks for JSON-serializability, required metadata, and method security coverage.
 spec_kind: "normative"
+adr_ids: []

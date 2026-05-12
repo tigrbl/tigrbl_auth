@@ -31,3 +31,4 @@ body: |-
   
   Transport posture requirements MUST be expressible across runtime, admin API, public API, admin UIX, and public UIX without conflating support with mandatory use.
 spec_kind: "normative"
+adr_ids: []

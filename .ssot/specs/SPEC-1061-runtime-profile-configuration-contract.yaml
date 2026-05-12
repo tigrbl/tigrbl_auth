@@ -95,3 +95,4 @@ body: |-
   - generated routes, JSON-RPC methods, diagnostics, OpenAPI, OpenRPC, and evidence derive from the resolved deployment,
   - runtime code does not introduce independent profile-name branching outside the loader/resolver path.
 spec_kind: "normative"
+adr_ids: []

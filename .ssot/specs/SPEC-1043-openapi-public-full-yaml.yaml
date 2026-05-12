@@ -717,3 +717,4 @@ body: |-
     - Release bundle and signature verification
     strict_boundary_enforcement: true
 spec_kind: "local-policy"
+adr_ids: []

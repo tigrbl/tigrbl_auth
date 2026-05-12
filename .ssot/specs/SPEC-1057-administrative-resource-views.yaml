@@ -30,3 +30,4 @@ body: |-
   
   Verification MUST cover required OpenRPC method availability, list/detail rendering, empty/loading/error states, filtering, redaction, and tenant isolation expectations.
 spec_kind: "local-policy"
+adr_ids: []

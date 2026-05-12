@@ -31,3 +31,4 @@ body: |-
   
   Admin UIX and public UIX MUST NOT expose cryptographic material, secret-bearing internals, or unsafe implementation detail under the guise of diagnostics or user explanation.
 spec_kind: "normative"
+adr_ids: []

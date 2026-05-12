@@ -31,3 +31,4 @@ body: |-
   - `tests/unit/test_ssot_work_item_traceability.py`
   - `tests/unit/test_ssot_dependency_maintenance_traceability.py`
 spec_kind: "governance"
+adr_ids: []
