@@ -118,7 +118,7 @@ def build_review() -> dict[str, Any]:
             "pytest_local_bootstrap": "Runtime and test generation still depend on external packages that may be missing in isolated containers.",
         },
         "required_changes_for_full_certification": [
-            "Preserve validated clean-room runtime matrix results across Python 3.10, 3.11, and 3.12.",
+            "Preserve validated clean-room runtime matrix results across Python 3.10, 3.11, 3.12, 3.13, and 3.14.",
             "Preserve validated in-scope certification lane execution results and carry them into the validated execution manifest.",
             "Preserve SQLite and PostgreSQL migration portability validation for upgrade → downgrade → reapply.",
             "Rebuild Tier 3 evidence from validated runs before claiming the final certification release.",

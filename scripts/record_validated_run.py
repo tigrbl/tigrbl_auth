@@ -505,7 +505,11 @@ def _cmd_tier3_evidence(args: argparse.Namespace) -> int:
     if out_of_scope_manifest_paths:
         warnings.append("Out-of-scope validated manifests are present and were excluded from certification counts.")
     if not minimum_inventory_complete:
-        warnings.append("Validated artifact inventory is below the required 14 runtime + 15 test lanes + 2 backend-distinct migration threshold.")
+        warnings.append(
+            "Validated artifact inventory is below the required "
+            f"{required_runtime_count} runtime + {required_test_lane_count} test lanes "
+            "+ 2 backend-distinct migration threshold."
+        )
 
     report_payload = {
         "passed": not failures,

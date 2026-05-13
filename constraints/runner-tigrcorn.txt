@@ -2,6 +2,6 @@
 # Tigrcorn runner profile pins.
 # Use with: pip install -c constraints/base.txt -c constraints/runner-tigrcorn.txt '.[tigrcorn]'
 # Tigrcorn upstream requires Python >=3.11, so this profile participates in the
-# certification matrix on Python 3.11 and 3.12 only.
+# certification matrix on Python 3.11, 3.12, 3.13, and 3.14 only.
 
 tigrcorn==0.3.8 ; python_version >= '3.11'

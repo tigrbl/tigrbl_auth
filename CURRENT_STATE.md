@@ -15,7 +15,7 @@ The current package state is a blocked certification checkpoint. It is not certi
 - fully certifiable now: `False`
 - fully RFC/spec compliant now: `False`
 - fully non-RFC spec/standard compliant now: `False`
-- release gates passed: `True`
+- release gates passed: `False`
 - final release gate passed: `False`
 - final release ready: `False`
 - checkpoint only: `True`
@@ -30,9 +30,9 @@ The current package state is a blocked certification checkpoint. It is not certi
 - extension targets missing from feature map: `0`
 - settings-backed flags missing from flag map: `0`
 - validated inventory complete: `False`
-- validated runtime matrix green: `True`
+- validated runtime matrix green: `False`
 - validated test lanes green: `False`
-- migration portability passed: `False`
+- migration portability passed: `True`
 - Tier 4 missing external bundle count: `0`
 
 ## Key artifacts

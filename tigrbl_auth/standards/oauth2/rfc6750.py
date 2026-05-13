@@ -21,6 +21,15 @@ from tigrbl_auth.config.settings import settings
 RFC6750_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc6750"
 
 
+def _active_settings():
+    try:
+        from tigrbl_auth.runtime_cfg import settings as runtime_settings
+
+        return runtime_settings
+    except Exception:  # pragma: no cover - import fallback
+        return settings
+
+
 async def extract_bearer_token(request: Request, authorization: str) -> str | None:
     """Return the bearer token present in *request* if any.
 
@@ -34,20 +43,23 @@ async def extract_bearer_token(request: Request, authorization: str) -> str | No
       field in an ``application/x-www-form-urlencoded`` body is accepted.
     """
 
-    if not settings.enable_rfc6750:
+    active_settings = _active_settings()
+    if not active_settings.enable_rfc6750:
         return None
 
+    if not isinstance(authorization, str) or not authorization.strip():
+        authorization = request.headers.get("Authorization", "")
     parts = authorization.split()
     if len(parts) == 2 and parts[0].lower() == "bearer":
         return parts[1]
 
-    if settings.enable_rfc6750_query:
+    if active_settings.enable_rfc6750_query:
         token = request.query_params.get("access_token")
         if token:
             return token
 
     if (
-        settings.enable_rfc6750_form
+        active_settings.enable_rfc6750_form
         and request.method in {"POST", "PUT", "PATCH"}
         and "application/x-www-form-urlencoded"
         in request.headers.get("Content-Type", "")

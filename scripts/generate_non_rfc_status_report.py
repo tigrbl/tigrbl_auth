@@ -223,6 +223,18 @@ def main() -> int:
             'targets_internally_backed_now': sum(1 for row in rows if row['internally_backed_now']),
         })
 
+    runtime_matrix_green = bool(validated.get('summary', {}).get('runtime_matrix_green', False))
+    in_scope_test_lanes_green = bool(validated.get('summary', {}).get('in_scope_test_lanes_green', False))
+    migration_portability_passed = bool(validated.get('summary', {}).get('migration_portability_passed', False))
+
+    failures = []
+    if not runtime_matrix_green:
+        failures.append('Supported runtime-matrix evidence is still incomplete for ASGI/Uvicorn/Hypercorn/Tigrcorn certification.')
+    if not in_scope_test_lanes_green:
+        failures.append('Supported in-scope certification-lane evidence is still incomplete.')
+    if not migration_portability_passed:
+        failures.append('Migration portability evidence is still incomplete for SQLite and PostgreSQL.')
+
     payload = {
         'passed': False,
         'summary': {
@@ -235,18 +247,14 @@ def main() -> int:
             'focus_py313_collected_tests': focus['collected'],
             'focus_py313_all_passed': focus['all_passed'],
             'supported_py311_lane_count_green': len(py311_passed_lanes),
-            'validated_runtime_matrix_green': bool(validated.get('summary', {}).get('runtime_matrix_green', False)),
-            'validated_in_scope_test_lanes_green': bool(validated.get('summary', {}).get('in_scope_test_lanes_green', False)),
-            'migration_portability_passed': bool(validated.get('summary', {}).get('migration_portability_passed', False)),
+            'validated_runtime_matrix_green': runtime_matrix_green,
+            'validated_in_scope_test_lanes_green': in_scope_test_lanes_green,
+            'migration_portability_passed': migration_portability_passed,
             'fully_certifiable_now': bool(cert_state.get('fully_certifiable_now', False)),
             'strict_independent_claims_ready': bool(cert_state.get('strict_independent_claims_ready', False)),
             'certifiably_fully_non_rfc_spec_compliant_now': False,
         },
-        'failures': [
-            'Supported runtime-matrix evidence is still incomplete for ASGI/Uvicorn/Hypercorn/Tigrcorn certification.',
-            'Supported in-scope certification-lane evidence is still incomplete across Python 3.10 and 3.12.',
-            'Migration portability evidence is still incomplete for PostgreSQL and unsupported for certification in this container.',
-        ],
+        'failures': failures,
         'warnings': sorted(dict.fromkeys(overall_gaps)),
         'details': {
             'focus_test_reports': focus,
@@ -288,7 +296,7 @@ def main() -> int:
         lines.append('')
     lines.extend(['## Remaining non-RFC / package-level blockers', ''])
     lines.extend([
-        '- supported runner-profile certification evidence is still missing for the retained Python 3.10 / 3.11 / 3.12 matrix',
+        '- supported runner-profile certification evidence is still missing for the retained Python 3.10 / 3.11 / 3.12 / 3.13 / 3.14 matrix',
         '- supported certification-lane evidence is still incomplete across all required interpreters',
         '- PostgreSQL migration portability proof is still missing',
         '- Tier 3 rebuild-from-validated-runs and Tier 4 external peer bundles are still incomplete',

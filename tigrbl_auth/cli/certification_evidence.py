@@ -232,7 +232,7 @@ def validated_migration_backend_manifest_passed(payload: Mapping[str, Any]) -> b
         return False
     if str(payload.get("head_revision_after_upgrade") or "").strip() != expected_head_revision:
         return False
-    if str(payload.get("downgraded_revision") or "").strip() != expected_head_revision:
+    if str(payload.get("downgraded_revision") or "").strip() != downgrade_target_revision:
         return False
     if str(payload.get("head_revision_after_downgrade") or "").strip() != downgrade_target_revision:
         return False
@@ -291,7 +291,7 @@ def validated_migration_manifest_passed(payload: Mapping[str, Any]) -> bool:
             return False
         if str(result.get("head_revision_after_upgrade") or "").strip() != expected_head_revision:
             return False
-        if str(result.get("downgraded_revision") or "").strip() != expected_head_revision:
+        if str(result.get("downgraded_revision") or "").strip() != downgrade_target_revision:
             return False
         if str(result.get("head_revision_after_downgrade") or "").strip() != downgrade_target_revision:
             return False

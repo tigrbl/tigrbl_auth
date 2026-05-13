@@ -48,8 +48,8 @@
         "RFC 7523",
         "RFC 7009"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\assertion-client",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\assertion-client--assertion-client-harness",
+      "candidate_dir": "compliance/evidence/tier4/candidates/assertion-client",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -74,8 +74,8 @@
         "OIDC Discovery 1.0",
         "OIDC UserInfo"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\browser",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\browser--browser-rp",
+      "candidate_dir": "compliance/evidence/tier4/candidates/browser",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/browser--browser-rp",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -93,8 +93,8 @@
         "RFC 7591",
         "RFC 7592"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\client-mgmt",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\client-mgmt--client-mgmt-harness",
+      "candidate_dir": "compliance/evidence/tier4/candidates/client-mgmt",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -111,8 +111,8 @@
       "required_targets": [
         "RFC 8628"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\device",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\device--device-client",
+      "candidate_dir": "compliance/evidence/tier4/candidates/device",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/device--device-client",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -130,8 +130,8 @@
         "RFC 9449",
         "RFC 9700"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\dpop",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\dpop--dpop-client",
+      "candidate_dir": "compliance/evidence/tier4/candidates/dpop",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/dpop--dpop-client",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -154,8 +154,8 @@
         "RFC 9728",
         "OIDC Discovery 1.0"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\gateway",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\gateway--gateway-peer",
+      "candidate_dir": "compliance/evidence/tier4/candidates/gateway",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/gateway--gateway-peer",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -173,8 +173,8 @@
         "RFC 8705",
         "RFC 9700"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\mtls",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\mtls--mtls-peer",
+      "candidate_dir": "compliance/evidence/tier4/candidates/mtls",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/mtls--mtls-peer",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -194,8 +194,8 @@
         "RFC 7516",
         "RFC 9207"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\native",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\native--native-client",
+      "candidate_dir": "compliance/evidence/tier4/candidates/native",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/native--native-client",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -218,8 +218,8 @@
         "Import/export portability",
         "Release bundle and signature verification"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\ops-cli",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\ops-cli--ops-cli-harness",
+      "candidate_dir": "compliance/evidence/tier4/candidates/ops-cli",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -239,8 +239,8 @@
         "RFC 9396",
         "RFC 8707"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\par-jar-rar",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\par-jar-rar--par-jar-rar-client",
+      "candidate_dir": "compliance/evidence/tier4/candidates/par-jar-rar",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -263,8 +263,8 @@
         "RFC 9728",
         "RFC 9700"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\resource-server",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\resource-server--resource-server",
+      "candidate_dir": "compliance/evidence/tier4/candidates/resource-server",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/resource-server--resource-server",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -285,8 +285,8 @@
         "OIDC Front-Channel Logout",
         "OIDC Back-Channel Logout"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\rp-session-logout",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\rp-session-logout--rp-session-logout-rp",
+      "candidate_dir": "compliance/evidence/tier4/candidates/rp-session-logout",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -304,8 +304,8 @@
         "ASGI 3 application package",
         "Runner profile: Hypercorn"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\runner-hypercorn",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-hypercorn--hypercorn-runner",
+      "candidate_dir": "compliance/evidence/tier4/candidates/runner-hypercorn",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -323,8 +323,8 @@
         "ASGI 3 application package",
         "Runner profile: Tigrcorn"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\runner-tigrcorn",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-tigrcorn--tigrcorn-runner",
+      "candidate_dir": "compliance/evidence/tier4/candidates/runner-tigrcorn",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -342,8 +342,8 @@
         "ASGI 3 application package",
         "Runner profile: Uvicorn"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\runner-uvicorn",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\runner-uvicorn--uvicorn-runner",
+      "candidate_dir": "compliance/evidence/tier4/candidates/runner-uvicorn",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",
@@ -363,8 +363,8 @@
         "OIDC Core 1.0",
         "OIDC Discovery 1.0"
       ],
-      "candidate_dir": "compliance\\evidence\\tier4\\candidates\\spa",
-      "external_bundle_dir": "compliance\\evidence\\tier4\\bundles\\spa--spa-rp",
+      "candidate_dir": "compliance/evidence/tier4/candidates/spa",
+      "external_bundle_dir": "compliance/evidence/tier4/bundles/spa--spa-rp",
       "promotable_targets": [],
       "validation_failures": [
         "non-qualifying bundle status: external-preserved-failed",

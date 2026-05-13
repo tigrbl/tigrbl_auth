@@ -2,8 +2,10 @@
   "scope": "wrapper-hygiene",
   "strict": true,
   "capability_strict": true,
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "Package entrypoint and certified release-path roots still import legacy compatibility surfaces: tigrbl_auth/services/advanced_identity_plane.py -> tigrbl_auth.rfc.rfc8176, tigrbl_auth.rfc.rfc8812; tigrbl_auth/standards/oauth2/rfc6750.py -> tigrbl_auth.runtime_cfg"
+  ],
   "warnings": [
     "Wrapper/shim modules remain outside the certified core: tigrbl_auth/extensions/rfc7952.py, tigrbl_auth/extensions/rfc8291.py, tigrbl_auth/extensions/rfc8812.py, tigrbl_auth/extensions/rfc8932.py, tigrbl_auth/routers/schemas.py"
   ],
@@ -13,6 +15,6 @@
     "in_scope_target_wrapper_count": 0,
     "in_scope_target_non_core_count": 0,
     "standards_legacy_proxy_count": 0,
-    "entrypoint_legacy_import_count": 0
+    "entrypoint_legacy_import_count": 2
   }
 }

@@ -31,7 +31,7 @@ All clean-room certification installs are now modeled with the same profile voca
 
 - install: `pip install -c constraints/base.txt -c constraints/runner-tigrcorn.txt '.[tigrcorn]'`
 - tox: `tox -e py311-tigrcorn` or `tox -e py312-tigrcorn`
-- support note: Tigrcorn is only included in the clean-room matrix on Python `3.11` and `3.12`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
+- support note: Tigrcorn is only included in the clean-room matrix on Python `3.11`, `3.12`, `3.13`, and `3.14`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
 
 ### Dev/test
 

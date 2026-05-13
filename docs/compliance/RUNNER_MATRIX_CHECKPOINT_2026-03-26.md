@@ -130,7 +130,7 @@ This checkpoint improves the repository’s ability to execute and preserve the 
 - runtime matrix passed count: `0`
 - runtime matrix green: `False`
 
-That remains the correct state because the supported Python 3.10 / 3.11 / 3.12 clean-room matrix was **not executed here** and no preserved runtime-profile manifests for those matrix cells are present in this checkpoint.
+That remains the correct state because the supported Python 3.10 / 3.11 / 3.12 / 3.13 / 3.14 clean-room matrix was **not executed here** and no preserved runtime-profile manifests for those matrix cells are present in this checkpoint.
 
 ## Remaining blockers for Runner matrix exit
 

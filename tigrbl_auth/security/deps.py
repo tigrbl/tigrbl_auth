@@ -40,7 +40,7 @@ from tigrbl_auth.tables import User
 from tigrbl_auth.security.context import principal_var
 from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
-from tigrbl_auth.standards.oauth2.rfc9700 import verify_access_token_sender_constraint
+from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
 from tigrbl_auth.standards.oauth2.mtls import presented_certificate_thumbprint
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.typing import Principal
@@ -160,12 +160,16 @@ async def get_current_principal(  # type: ignore[override]
         user = await _user_from_jwt(token, db, cert_thumbprint=cert_thumbprint)
         if user:
             proof = dpop if isinstance(dpop, str) and dpop.strip() else None
+            deployment = deployment_from_request(request, settings)
+            policy = runtime_security_profile(deployment)
+            if not (policy.sender_constraint_required or proof or cert_thumbprint):
+                return user
             try:
                 payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
                 verify_access_token_sender_constraint(
                     request,
                     payload,
-                    deployment_from_request(request, settings),
+                    deployment,
                     access_token=token,
                     dpop_proof=proof,
                 )

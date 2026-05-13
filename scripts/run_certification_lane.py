@@ -32,6 +32,16 @@ def main() -> int:
     if pytest_args[:1] == ["--"]:
         pytest_args = pytest_args[1:]
 
+    install_env = dict(os.environ)
+    install_env.setdefault("TIGRBL_AUTH_INSTALL_PROFILE", f"test-{args.lane}")
+    install_cmd = [
+        sys.executable,
+        str(ROOT / "scripts" / "verify_clean_room_install_substrate.py"),
+        "--profile",
+        f"test-{args.lane}",
+    ]
+    subprocess.run(install_cmd, cwd=str(ROOT), env=install_env, check=False)
+
     pytest_cmd = [
         sys.executable,
         "-m",

@@ -24,39 +24,39 @@ state:
   - dist/evidence-bundles/baseline/tier3
   - dist/evidence-bundles/production/tier3
   preserved_tier4_bundles:
-  - compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness
-  - compliance\evidence\tier4\bundles\browser--browser-rp
-  - compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness
-  - compliance\evidence\tier4\bundles\device--device-client
-  - compliance\evidence\tier4\bundles\dpop--dpop-client
-  - compliance\evidence\tier4\bundles\gateway--gateway-peer
-  - compliance\evidence\tier4\bundles\mtls--mtls-peer
-  - compliance\evidence\tier4\bundles\native--native-client
-  - compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness
-  - compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client
-  - compliance\evidence\tier4\bundles\resource-server--resource-server
-  - compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp
-  - compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner
-  - compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner
-  - compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner
-  - compliance\evidence\tier4\bundles\spa--spa-rp
+  - compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness
+  - compliance/evidence/tier4/bundles/browser--browser-rp
+  - compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness
+  - compliance/evidence/tier4/bundles/device--device-client
+  - compliance/evidence/tier4/bundles/dpop--dpop-client
+  - compliance/evidence/tier4/bundles/gateway--gateway-peer
+  - compliance/evidence/tier4/bundles/mtls--mtls-peer
+  - compliance/evidence/tier4/bundles/native--native-client
+  - compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness
+  - compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client
+  - compliance/evidence/tier4/bundles/resource-server--resource-server
+  - compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp
+  - compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner
+  - compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner
+  - compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner
+  - compliance/evidence/tier4/bundles/spa--spa-rp
   tier4_candidate_layouts:
-  - compliance\evidence\tier4\candidates\assertion-client
-  - compliance\evidence\tier4\candidates\browser
-  - compliance\evidence\tier4\candidates\client-mgmt
-  - compliance\evidence\tier4\candidates\device
-  - compliance\evidence\tier4\candidates\dpop
-  - compliance\evidence\tier4\candidates\gateway
-  - compliance\evidence\tier4\candidates\mtls
-  - compliance\evidence\tier4\candidates\native
-  - compliance\evidence\tier4\candidates\ops-cli
-  - compliance\evidence\tier4\candidates\par-jar-rar
-  - compliance\evidence\tier4\candidates\resource-server
-  - compliance\evidence\tier4\candidates\rp-session-logout
-  - compliance\evidence\tier4\candidates\runner-hypercorn
-  - compliance\evidence\tier4\candidates\runner-tigrcorn
-  - compliance\evidence\tier4\candidates\runner-uvicorn
-  - compliance\evidence\tier4\candidates\spa
+  - compliance/evidence/tier4/candidates/assertion-client
+  - compliance/evidence/tier4/candidates/browser
+  - compliance/evidence/tier4/candidates/client-mgmt
+  - compliance/evidence/tier4/candidates/device
+  - compliance/evidence/tier4/candidates/dpop
+  - compliance/evidence/tier4/candidates/gateway
+  - compliance/evidence/tier4/candidates/mtls
+  - compliance/evidence/tier4/candidates/native
+  - compliance/evidence/tier4/candidates/ops-cli
+  - compliance/evidence/tier4/candidates/par-jar-rar
+  - compliance/evidence/tier4/candidates/resource-server
+  - compliance/evidence/tier4/candidates/rp-session-logout
+  - compliance/evidence/tier4/candidates/runner-hypercorn
+  - compliance/evidence/tier4/candidates/runner-tigrcorn
+  - compliance/evidence/tier4/candidates/runner-uvicorn
+  - compliance/evidence/tier4/candidates/spa
   signed_release_bundles:
   - dist/release-bundles/0.3.2.dev14/baseline
   - dist/release-bundles/0.3.2.dev14/production
@@ -71,22 +71,22 @@ state:
   tier4_profile_catalog_count: 16
   valid_preserved_tier4_bundles: []
   invalid_preserved_tier4_bundles:
-  - compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness
-  - compliance\evidence\tier4\bundles\browser--browser-rp
-  - compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness
-  - compliance\evidence\tier4\bundles\device--device-client
-  - compliance\evidence\tier4\bundles\dpop--dpop-client
-  - compliance\evidence\tier4\bundles\gateway--gateway-peer
-  - compliance\evidence\tier4\bundles\mtls--mtls-peer
-  - compliance\evidence\tier4\bundles\native--native-client
-  - compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness
-  - compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client
-  - compliance\evidence\tier4\bundles\resource-server--resource-server
-  - compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp
-  - compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner
-  - compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner
-  - compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner
-  - compliance\evidence\tier4\bundles\spa--spa-rp
+  - compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness
+  - compliance/evidence/tier4/bundles/browser--browser-rp
+  - compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness
+  - compliance/evidence/tier4/bundles/device--device-client
+  - compliance/evidence/tier4/bundles/dpop--dpop-client
+  - compliance/evidence/tier4/bundles/gateway--gateway-peer
+  - compliance/evidence/tier4/bundles/mtls--mtls-peer
+  - compliance/evidence/tier4/bundles/native--native-client
+  - compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness
+  - compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client
+  - compliance/evidence/tier4/bundles/resource-server--resource-server
+  - compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp
+  - compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner
+  - compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner
+  - compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner
+  - compliance/evidence/tier4/bundles/spa--spa-rp
   tier4_external_bundle_count: 16
   tier4_valid_external_bundle_count: 0
   tier4_invalid_external_bundle_count: 16
@@ -160,7 +160,7 @@ notes:
   catalog, candidate bundle layouts, and fail-closed Tier 4 promotion logic. No targets
   are promoted to Tier 4 in this checkpoint because preserved qualifying independent
   external artifacts were not supplied.
-- runtime-foundation checkpoint3 installs the independent peer program, full retained target-to-peer mapping,
-  counterpart catalog, candidate bundle layouts, and fail-closed Tier 4 promotion
-  logic. No targets are promoted to Tier 4 in this checkpoint because preserved qualifying
-  independent external artifacts were not supplied.
+- runtime-foundation checkpoint3 installs the independent peer program, full retained
+  target-to-peer mapping, counterpart catalog, candidate bundle layouts, and fail-closed
+  Tier 4 promotion logic. No targets are promoted to Tier 4 in this checkpoint because
+  preserved qualifying independent external artifacts were not supplied.

@@ -15,7 +15,7 @@
 - supported_py311_lane_count_green: `0`
 - validated_runtime_matrix_green: `True`
 - validated_in_scope_test_lanes_green: `False`
-- migration_portability_passed: `False`
+- migration_portability_passed: `True`
 - fully_certifiable_now: `False`
 - strict_independent_claims_ready: `False`
 - certifiably_fully_non_rfc_spec_compliant_now: `False`

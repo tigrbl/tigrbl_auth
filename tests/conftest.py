@@ -87,7 +87,7 @@ def pytest_report_header(config: pytest.Config) -> list[str]:
     header = [f"certification lane: {lane}"]
     if not certification_python_supported():
         header.append(
-            f"certification python boundary: current interpreter {sys.version_info.major}.{sys.version_info.minor} is outside 3.10-3.12"
+            f"certification python boundary: current interpreter {sys.version_info.major}.{sys.version_info.minor} is outside 3.10-3.14"
         )
     missing = missing_optional_runtime_modules()
     if missing:

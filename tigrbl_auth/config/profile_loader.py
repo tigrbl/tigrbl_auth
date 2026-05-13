@@ -56,8 +56,15 @@ class RuntimeProfile:
     def flag_overrides(self) -> dict[str, Any]:
         overrides: dict[str, Any] = {name: True for name in self.flags_enabled}
         security = self.data.get("security")
-        if isinstance(security, Mapping) and "strict_boundary_enforcement" in security:
-            overrides["strict_boundary_enforcement"] = bool(security["strict_boundary_enforcement"])
+        if isinstance(security, Mapping):
+            if "strict_boundary_enforcement" in security:
+                overrides["strict_boundary_enforcement"] = bool(security["strict_boundary_enforcement"])
+            if "require_tls" in security:
+                overrides["require_tls"] = bool(security["require_tls"])
+            if "allow_bearer_query" in security:
+                overrides["enable_rfc6750_query"] = bool(security["allow_bearer_query"])
+            if "allow_bearer_form" in security:
+                overrides["enable_rfc6750_form"] = bool(security["allow_bearer_form"])
         return overrides
 
     def provenance(self) -> dict[str, Any]:

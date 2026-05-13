@@ -22,6 +22,10 @@ BUNDLE_ROOT = TIER4_ROOT / 'bundles'
 DIST_TIER4_ROOT = ROOT / 'dist' / 'evidence-bundles' / 'peer-claim' / 'tier4'
 HANDOFF_ROOT = ROOT / 'dist' / 'tier4-external-handoff'
 
+
+def relpath(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
 NON_INDEPENDENT_EVIDENCE_SOURCES = {
     'staged-external-root-fixture',
     'repository-staged-nonindependent-fixture',
@@ -181,7 +185,7 @@ def canonical_contract_snapshots() -> dict[str, list[str]]:
             ROOT / 'compliance' / 'claims' / f'effective-target-claims.{label}.yaml',
             ROOT / 'compliance' / 'evidence' / f'effective-release-evidence.{label}.yaml',
         ]
-        profile_paths[label] = [str(path.relative_to(ROOT)) for path in candidates if path.exists()]
+        profile_paths[label] = [relpath(path) for path in candidates if path.exists()]
     return profile_paths
 
 
@@ -253,7 +257,7 @@ def ensure_candidate_layout(
     write_text(candidate_dir / 'reproduction.md', reproduction)
     return {
         'profile': profile_id,
-        'candidate_dir': str(candidate_dir.relative_to(ROOT)),
+        'candidate_dir': relpath(candidate_dir),
         'required_targets': required_targets,
         'runtime_profile': profile.get('preferred_runtime_profile', 'hardening'),
         'counterpart_id': counterpart.get('id'),
@@ -373,7 +377,7 @@ def materialize_external_handoff_templates(
             {
                 'profile': profile_id,
                 'counterpart_id': counterpart_id,
-                'template_dir': str(profile_root.relative_to(ROOT)),
+                'template_dir': relpath(profile_root),
                 'required_artifacts': listify(counterpart.get('required_artifacts')),
                 'scenario_ids': listify(profile.get('scenario_ids')),
             }
@@ -588,8 +592,8 @@ def materialize_external_bundle(
     copy_tree(bundle_dir, dist_dir)
     return {
         'profile': profile_id,
-        'bundle_dir': str(bundle_dir.relative_to(ROOT)),
-        'dist_bundle_dir': str(dist_dir.relative_to(ROOT)),
+        'bundle_dir': relpath(bundle_dir),
+        'dist_bundle_dir': relpath(dist_dir),
         'passed': passed,
         'promotable_targets': listify(profile.get('required_targets')) if passed else [],
         'validation_failures': validation_failures,
@@ -610,7 +614,7 @@ def load_preserved_bundle_status(
     passed, failures, _details = evaluate_tier4_bundle(bundle_dir, manifest)
     return {
         'profile': profile_id,
-        'bundle_dir': str(bundle_dir.relative_to(ROOT)),
+        'bundle_dir': relpath(bundle_dir),
         'dist_bundle_dir': None,
         'passed': passed,
         'promotable_targets': listify(profile.get('required_targets')) if passed else [],
@@ -714,7 +718,7 @@ def write_peer_profile_execution_reports(peer_profiles: dict[str, dict[str, Any]
         'retained_target_count': len(retained_targets),
         'mapped_retained_target_count': len(target_coverage(peer_profiles)),
         'retained_target_coverage_complete': True,
-        'external_artifact_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_artifact_root': relpath(external_root) if external_root else None,
     }
     payload = {'passed': True, 'failures': [], 'warnings': [], 'summary': summary, 'details': sorted(peer_profiles)}
     write_json(ROOT / 'docs' / 'compliance' / 'peer_profile_execution_report.json', payload)
@@ -826,7 +830,7 @@ def write_peer_program_docs(promoted_targets: set[str], peer_matrix: list[dict[s
         f'- invalid or non-qualifying preserved bundles: `{bundle_stats["invalid_external_bundle_count"]}`',
         f'- promoted Tier 4 targets: `{len(promoted_targets)}`',
         f'- retained boundary fully promoted to Tier 4: `{full_boundary_promoted}`',
-        f'- external artifact root used for this checkpoint: `{str(external_root.relative_to(ROOT)) if external_root else None}`',
+        f'- external artifact root used for this checkpoint: `{relpath(external_root) if external_root else None}`',
         '',
         '## Current provenance note',
         '',
@@ -856,7 +860,7 @@ def write_peer_program_docs(promoted_targets: set[str], peer_matrix: list[dict[s
 def write_peer_materialization_report(promoted_targets: set[str], preserved_bundle_count: int, retained_targets: list[str], external_root: Path | None, profile_count: int) -> None:
     payload = {
         'passed': True,
-        'external_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_root': relpath(external_root) if external_root else None,
         'preserved_bundle_count': preserved_bundle_count,
         'candidate_profile_count': profile_count,
         'promoted_target_count': len(promoted_targets),
@@ -1105,7 +1109,7 @@ def write_status_doc(promoted_targets: set[str], retained_targets: list[str], pr
         '',
         '## Summary',
         '',
-        f'- external artifact root: `{str(external_root.relative_to(ROOT)) if external_root else None}`',
+        f'- external artifact root: `{relpath(external_root) if external_root else None}`',
         f'- peer profile count: `{len(load_peer_profiles())}`',
         f"- preserved external bundle count: `{bundle_summary.get('external_bundle_count', preserved_bundle_count)}`",
         f"- valid independent external bundle count: `{bundle_summary.get('valid_external_bundle_count', 0)}`",
@@ -1223,7 +1227,7 @@ def main(argv: list[str] | None = None) -> int:
     full_boundary_promoted = bool(retained_targets) and set(retained_targets) <= promoted_targets
     payload = {
         'passed': not missing_coverage and (full_boundary_promoted if args.require_full_boundary else True),
-        'external_root': str(external_root.relative_to(ROOT)) if external_root else None,
+        'external_root': relpath(external_root) if external_root else None,
         'preserved_bundle_count': len(preserved_bundles),
         'valid_external_bundle_count': len(valid_preserved_bundles),
         'invalid_external_bundle_count': len(invalid_preserved_bundles),

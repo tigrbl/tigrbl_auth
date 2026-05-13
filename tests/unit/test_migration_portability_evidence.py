@@ -33,7 +33,7 @@ def _migration_manifest(*, python_version: str = "3.11", passed_backends: list[s
             },
             "expected_head_revision": "0007_browser_session_cookie_and_auth_code_linkage",
             "head_revision_after_upgrade": "0007_browser_session_cookie_and_auth_code_linkage",
-            "downgraded_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+            "downgraded_revision": "0006_previous",
             "head_revision_after_downgrade": "0006_previous",
             "head_revision_after_reapply": "0007_browser_session_cookie_and_auth_code_linkage",
         }
@@ -101,7 +101,7 @@ def _migration_backend_manifest(backend: str, *, python_version: str = "3.11", p
         "artifact_sha256": {"upgrade": "u-sha", "downgrade": "d-sha", "reapply": "r-sha"},
         "expected_head_revision": "0007_browser_session_cookie_and_auth_code_linkage",
         "downgrade_target_revision": "0006_previous",
-        "downgraded_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+        "downgraded_revision": "0006_previous",
         "head_revision_after_upgrade": "0007_browser_session_cookie_and_auth_code_linkage",
         "head_revision_after_downgrade": "0006_previous",
         "head_revision_after_reapply": "0007_browser_session_cookie_and_auth_code_linkage",

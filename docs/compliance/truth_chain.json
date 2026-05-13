@@ -15,18 +15,18 @@
     "tier_3_claim_count": 48,
     "tier_4_claim_count": 0,
     "validated_inventory_complete": false,
-    "validated_runtime_matrix_green": true,
+    "validated_runtime_matrix_green": false,
     "validated_test_lanes_green": false,
-    "migration_portability_passed": false,
-    "tier3_evidence_rebuilt_from_validated_runs": false,
-    "fully_featured_package_boundary_now": true,
+    "migration_portability_passed": true,
+    "tier3_evidence_rebuilt_from_validated_runs": true,
+    "fully_featured_package_boundary_now": false,
     "strict_independent_claims_ready": false,
     "fully_certifiable_now": false,
     "fully_rfc_compliant_now": false,
     "fully_non_rfc_spec_compliant_now": false,
-    "release_gates_passed": true,
-    "release_gate_count": 1,
-    "release_gate_failed_count": 0,
+    "release_gates_passed": false,
+    "release_gate_count": 25,
+    "release_gate_failed_count": 9,
     "final_release_gate_passed": false,
     "final_release_ready": false,
     "checkpoint_only": true,
@@ -46,17 +46,22 @@
     "tier4_missing_external_bundle_count": 0,
     "open_gaps": [
       "Tier 4 independent peer validation is not complete for the retained boundary.",
-      "The fill-in external handoff template package is not present for the full supported peer-profile set.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not yet preserved in the validated-run inventory.",
+      "Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12/3.13/3.14, but preserved independent validation artifacts remain absent.",
+      "The runtime HTTP surface probe is not yet proven green across the preserved validated base-environment manifests.",
+      "The application factory is not yet proven materialized across the preserved validated base-environment manifests.",
+      "Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.",
+      "Validated clean-room install matrix evidence is incomplete or missing.",
       "Validated in-scope certification lane execution evidence is incomplete or missing.",
-      "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
-      "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
+      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "At least one claim row is still missing a machine-derived certification proof binding.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ],
     "final_release_failures": [
-      "Migration portability validation is not preserved for both SQLite and PostgreSQL."
+      "Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.",
+      "In-scope certification test lanes are not green from validated-run evidence."
     ],
     "final_release_warnings": [
       "Tier 4 bundle promotion is not complete for the retained boundary."
@@ -64,11 +69,11 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "049c57e86f20166118db79856460d6e4e38f949cc3c9a209e4c9c1c951ce3a9a",
-    "docs/compliance/certification_state_report.json": "ad4812566f5889b5af18591c7825d0d3115e7ab1bce200327544fcd5d1471e7a",
-    "docs/compliance/release_gate_report.json": "3d670790a7eb2e5f1d0a2b1d2cb6038d1c84c12f0d49a40cfbd1ef1d694f9c2d",
-    "docs/compliance/final_release_gate_report.json": "afb90b1c88e7d1b658467917acfceddd762ed67c3fb7e42acea1bc40c7bed248",
-    "docs/compliance/non_rfc_status_report.json": "dd147fc100ea7b44d4df5aab53c54e8310f96c7dc828aaf333ec15c7906ab302"
+    "docs/compliance/current_state_report.json": "7fae5a6f4bb674daeb6854ccdf5b46c2a8a3af1ea3a8b62958e7041490386a3b",
+    "docs/compliance/certification_state_report.json": "1355ee468722f6ca70559dbca146856a4b2fa198fce65280af1a61ab1fed8f20",
+    "docs/compliance/release_gate_report.json": "c60722a98a571a1800cdb3b06690f433822df1f60572ba0be44a565ad28d8c39",
+    "docs/compliance/final_release_gate_report.json": "43526484a5a25b65668c9a42005bef8c3fd25b502e01d8ce8b9b7197d4e09353",
+    "docs/compliance/non_rfc_status_report.json": "fce26f8e9e6dd4b54c6ed6c3428b5b87b48251e2146d4e4a0205f817d21fb9ee"
   },
   "explicitly_deauthorized_current_adjacent_docs": [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",

@@ -7,6 +7,8 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from ssot_registry.util.jcs import dump_jcs_json
+
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / ".ssot" / "reports"
 JSON_OUT = REPORT_DIR / "certification-gap-inventory.json"
@@ -299,7 +301,7 @@ def write_inventory(inventory: dict[str, Any], report_dir: Path = REPORT_DIR) ->
     report_dir.mkdir(parents=True, exist_ok=True)
     json_out = report_dir / JSON_OUT.name
     md_out = report_dir / MD_OUT.name
-    json_out.write_text(json.dumps(inventory, indent=2, sort_keys=False) + "\n", encoding="utf-8")
+    json_out.write_text(dump_jcs_json(inventory), encoding="utf-8")
     md_out.write_text(render_markdown(inventory) + "\n", encoding="utf-8")
     return {
         "json": json_out.relative_to(ROOT).as_posix(),

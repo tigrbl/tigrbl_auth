@@ -28,7 +28,7 @@ Use `tox.ini` so local reproduction and CI call the same profile names.
 - base: package install, import, and state-report generation on supported interpreters
 - sqlite-uvicorn: runtime-path install plus Uvicorn adapter availability
 - postgres-hypercorn: runtime-path install plus Hypercorn adapter availability against a reachable PostgreSQL DSN
-- tigrcorn: runtime-path install plus Tigrcorn adapter availability on Python `3.11`/`3.12`
+- tigrcorn: runtime-path install plus Tigrcorn adapter availability on Python `3.11`/`3.12`/`3.13`/`3.14`
 - devtest: pytest plugin loading in addition to runtime smoke
 - gates: release-gate environment with all retained runner/storage/test surfaces present via the aggregate `servers` extra and the dedicated test/storage extras
 

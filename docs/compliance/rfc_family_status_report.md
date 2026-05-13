@@ -9,7 +9,7 @@
 - supported_py311_lane_count_green: `0`
 - validated_runtime_matrix_green: `True`
 - validated_in_scope_test_lanes_green: `False`
-- migration_portability_passed: `False`
+- migration_portability_passed: `True`
 - fully_rfc_compliant_now: `False`
 - rfc_targets_with_scope_discrepancies: `0`
 - rfc_targets_with_conformance_coverage: `30`

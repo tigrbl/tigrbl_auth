@@ -4,86 +4,86 @@
 
 ## Failures
 
-- Tier 4 bundle compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\assertion-client--assertion-client-harness: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\browser--browser-rp: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\browser--browser-rp: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\browser--browser-rp: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\browser--browser-rp: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\browser--browser-rp: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\client-mgmt--client-mgmt-harness: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\device--device-client: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\device--device-client: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\device--device-client: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\device--device-client: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\device--device-client: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\dpop--dpop-client: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\dpop--dpop-client: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\dpop--dpop-client: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\dpop--dpop-client: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\dpop--dpop-client: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\gateway--gateway-peer: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\gateway--gateway-peer: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\gateway--gateway-peer: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\gateway--gateway-peer: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\gateway--gateway-peer: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\mtls--mtls-peer: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\mtls--mtls-peer: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\mtls--mtls-peer: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\mtls--mtls-peer: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\mtls--mtls-peer: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\native--native-client: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\native--native-client: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\native--native-client: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\native--native-client: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\native--native-client: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\ops-cli--ops-cli-harness: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\par-jar-rar--par-jar-rar-client: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\resource-server--resource-server: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\resource-server--resource-server: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\resource-server--resource-server: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\resource-server--resource-server: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\resource-server--resource-server: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\rp-session-logout--rp-session-logout-rp: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-hypercorn--hypercorn-runner: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-tigrcorn--tigrcorn-runner: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\runner-uvicorn--uvicorn-runner: bundle manifest contains validation failures
-- Tier 4 bundle compliance\evidence\tier4\bundles\spa--spa-rp: non-qualifying bundle status: external-preserved-failed
-- Tier 4 bundle compliance\evidence\tier4\bundles\spa--spa-rp: non-independent attestation class: repository-fixture-nonindependent
-- Tier 4 bundle compliance\evidence\tier4\bundles\spa--spa-rp: peer operator is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\spa--spa-rp: evidence source is not independent
-- Tier 4 bundle compliance\evidence\tier4\bundles\spa--spa-rp: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/assertion-client--assertion-client-harness: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/browser--browser-rp: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/browser--browser-rp: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/browser--browser-rp: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/browser--browser-rp: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/browser--browser-rp: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/client-mgmt--client-mgmt-harness: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/device--device-client: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/device--device-client: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/device--device-client: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/device--device-client: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/device--device-client: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/dpop--dpop-client: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/dpop--dpop-client: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/dpop--dpop-client: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/dpop--dpop-client: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/dpop--dpop-client: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/gateway--gateway-peer: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/gateway--gateway-peer: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/gateway--gateway-peer: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/gateway--gateway-peer: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/gateway--gateway-peer: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/mtls--mtls-peer: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/mtls--mtls-peer: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/mtls--mtls-peer: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/mtls--mtls-peer: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/mtls--mtls-peer: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/native--native-client: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/native--native-client: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/native--native-client: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/native--native-client: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/native--native-client: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/ops-cli--ops-cli-harness: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/par-jar-rar--par-jar-rar-client: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/resource-server--resource-server: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/resource-server--resource-server: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/resource-server--resource-server: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/resource-server--resource-server: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/resource-server--resource-server: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/rp-session-logout--rp-session-logout-rp: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-hypercorn--hypercorn-runner: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-tigrcorn--tigrcorn-runner: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/runner-uvicorn--uvicorn-runner: bundle manifest contains validation failures
+- Tier 4 bundle compliance/evidence/tier4/bundles/spa--spa-rp: non-qualifying bundle status: external-preserved-failed
+- Tier 4 bundle compliance/evidence/tier4/bundles/spa--spa-rp: non-independent attestation class: repository-fixture-nonindependent
+- Tier 4 bundle compliance/evidence/tier4/bundles/spa--spa-rp: peer operator is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/spa--spa-rp: evidence source is not independent
+- Tier 4 bundle compliance/evidence/tier4/bundles/spa--spa-rp: bundle manifest contains validation failures
 
 ## Warnings
 

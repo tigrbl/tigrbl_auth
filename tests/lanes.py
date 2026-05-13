@@ -10,7 +10,7 @@ from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TESTS_ROOT = REPO_ROOT / "tests"
-SUPPORTED_CERTIFICATION_PYTHONS = {(3, 10), (3, 11), (3, 12)}
+SUPPORTED_CERTIFICATION_PYTHONS = {(3, 10), (3, 11), (3, 12), (3, 13), (3, 14)}
 OPTIONAL_RUNTIME_MODULES = (
     "tigrbl",
     "sqlalchemy",

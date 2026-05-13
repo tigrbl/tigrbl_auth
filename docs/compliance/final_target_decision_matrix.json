@@ -1177,10 +1177,10 @@
     {
       "target": "RFC 6265",
       "status": "complete-but-not-independently-peer-certified",
-      "scope_bucket": "production-completion-required",
+      "scope_bucket": "baseline-certifiable-now",
       "claim_status": "evidenced-release-gated",
       "claim_tier": 3,
-      "profile": "production",
+      "profile": "baseline",
       "implemented_module": [
         "tigrbl_auth/standards/http/cookies.py",
         "tigrbl_auth/standards/oidc/session_mgmt.py",
@@ -1545,10 +1545,10 @@
     {
       "target": "OIDC Session Management",
       "status": "complete-but-not-independently-peer-certified",
-      "scope_bucket": "production-completion-required",
+      "scope_bucket": "baseline-certifiable-now",
       "claim_status": "evidenced-release-gated",
       "claim_tier": 3,
-      "profile": "production",
+      "profile": "baseline",
       "implemented_module": [
         "tigrbl_auth/standards/oidc/session_mgmt.py",
         "tigrbl_auth/standards/http/cookies.py",

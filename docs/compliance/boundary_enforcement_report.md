@@ -1,18 +1,27 @@
 # Boundary Enforcement Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- tigrbl_auth/framework.py imports forbidden root tigrbl_core._spec
+- tigrbl_auth/services/advanced_identity_plane.py imports forbidden root tigrbl_auth.rfc.rfc8176
+- tigrbl_auth/services/advanced_identity_plane.py imports forbidden root tigrbl_auth.rfc.rfc8812
+- tigrbl_auth/standards/oauth2/rfc6750.py imports forbidden root tigrbl_auth.runtime_cfg
+- production: committed effective evidence artifact is out of sync
+- hardening: committed effective evidence artifact is out of sync
 
 ## Summary
 
-- certified_core_file_count: `134`
+- certified_core_file_count: `146`
 - boundary_leak_count: `0`
-- forbidden_import_count: `0`
-- baseline_route_count: `6`
-- production_route_count: `13`
-- hardening_route_count: `16`
-- baseline_claim_count: `22`
-- production_claim_count: `35`
-- hardening_claim_count: `45`
+- forbidden_import_count: `4`
+- baseline_route_count: `8`
+- production_route_count: `15`
+- hardening_route_count: `18`
+- baseline_claim_count: `24`
+- production_claim_count: `36`
+- hardening_claim_count: `46`
 - scope_freeze_present: `True`
 - scope_freeze_decision_id: `BND-012`
 - scope_freeze_effective_date: `2026-03-26`

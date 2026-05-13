@@ -53,10 +53,12 @@ FORBIDDEN_FALLBACK_PATTERNS = [
     re.compile(r"^\s*except\s+Exception:\s*$", re.MULTILINE),
 ]
 FORBIDDEN_DEPENDENCY_NAMES = {"fastapi", "starlette"}
+SUPPORTED_CERTIFICATION_PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+TIGRCORN_CERTIFICATION_PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
 RUNNER_CERTIFICATION_MATRIX = {
     "uvicorn": {
         "profile_name": "sqlite-uvicorn",
-        "supported_python_versions": ["3.10", "3.11", "3.12"],
+        "supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS,
         "constraints": ["constraints/base.txt", "constraints/runner-uvicorn.txt"],
         "ci_install_job": "sqlite-uvicorn",
         "required_extra": "uvicorn",
@@ -64,7 +66,7 @@ RUNNER_CERTIFICATION_MATRIX = {
     },
     "hypercorn": {
         "profile_name": "postgres-hypercorn",
-        "supported_python_versions": ["3.10", "3.11", "3.12"],
+        "supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS,
         "constraints": ["constraints/base.txt", "constraints/runner-hypercorn.txt"],
         "ci_install_job": "postgres-hypercorn",
         "required_extra": "hypercorn",
@@ -72,7 +74,7 @@ RUNNER_CERTIFICATION_MATRIX = {
     },
     "tigrcorn": {
         "profile_name": "tigrcorn",
-        "supported_python_versions": ["3.11", "3.12"],
+        "supported_python_versions": TIGRCORN_CERTIFICATION_PYTHON_VERSIONS,
         "constraints": ["constraints/base.txt", "constraints/runner-tigrcorn.txt"],
         "ci_install_job": "tigrcorn",
         "required_extra": "tigrcorn",
@@ -81,11 +83,11 @@ RUNNER_CERTIFICATION_MATRIX = {
 }
 
 RUNTIME_VALIDATION_GROUPS = {
-    "base": {"supported_python_versions": ["3.10", "3.11", "3.12"]},
-    "sqlite-uvicorn": {"supported_python_versions": ["3.10", "3.11", "3.12"]},
-    "postgres-hypercorn": {"supported_python_versions": ["3.10", "3.11", "3.12"]},
-    "tigrcorn": {"supported_python_versions": ["3.11", "3.12"]},
-    "devtest": {"supported_python_versions": ["3.10", "3.11", "3.12"]},
+    "base": {"supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS},
+    "sqlite-uvicorn": {"supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS},
+    "postgres-hypercorn": {"supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS},
+    "tigrcorn": {"supported_python_versions": TIGRCORN_CERTIFICATION_PYTHON_VERSIONS},
+    "devtest": {"supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS},
 }
 
 
@@ -217,7 +219,7 @@ def _build_runner_support_manifest(repo_root: Path) -> dict[str, Any]:
         }
     return {
         "requires_python": requires_python,
-        "supported_python_versions": ["3.10", "3.11", "3.12"],
+        "supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS,
         "profiles": profiles,
     }
 

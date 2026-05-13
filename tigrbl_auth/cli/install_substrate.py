@@ -20,39 +20,20 @@ try:
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
     import tomli as tomllib  # type: ignore[no-redef]
 
-SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12")
+SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
+_SUPPORTED_PYTHON_TAGS = tuple(version.replace(".", "") for version in SUPPORTED_PYTHON_VERSIONS)
+_TIGRCORN_PYTHON_TAGS = tuple(version.replace(".", "") for version in SUPPORTED_PYTHON_VERSIONS if version != "3.10")
 RUNTIME_MATRIX_ENVS = (
-    "py310-base",
-    "py311-base",
-    "py312-base",
-    "py310-sqlite-uvicorn",
-    "py311-sqlite-uvicorn",
-    "py312-sqlite-uvicorn",
-    "py310-postgres-hypercorn",
-    "py311-postgres-hypercorn",
-    "py312-postgres-hypercorn",
-    "py311-tigrcorn",
-    "py312-tigrcorn",
-    "py310-devtest",
-    "py311-devtest",
-    "py312-devtest",
+    *(f"py{tag}-base" for tag in _SUPPORTED_PYTHON_TAGS),
+    *(f"py{tag}-sqlite-uvicorn" for tag in _SUPPORTED_PYTHON_TAGS),
+    *(f"py{tag}-postgres-hypercorn" for tag in _SUPPORTED_PYTHON_TAGS),
+    *(f"py{tag}-tigrcorn" for tag in _TIGRCORN_PYTHON_TAGS),
+    *(f"py{tag}-devtest" for tag in _SUPPORTED_PYTHON_TAGS),
 )
-TEST_LANE_ENVS = (
-    "py310-test-core",
-    "py311-test-core",
-    "py312-test-core",
-    "py310-test-integration",
-    "py311-test-integration",
-    "py312-test-integration",
-    "py310-test-conformance",
-    "py311-test-conformance",
-    "py312-test-conformance",
-    "py310-test-security-negative",
-    "py311-test-security-negative",
-    "py312-test-security-negative",
-    "py310-test-interop",
-    "py311-test-interop",
-    "py312-test-interop",
+TEST_LANE_ENVS = tuple(
+    f"py{tag}-test-{lane}"
+    for lane in ("core", "integration", "conformance", "security-negative", "interop")
+    for tag in _SUPPORTED_PYTHON_TAGS
 )
 ADDITIONAL_CERTIFICATION_ENVS = (
     "py311-gates",
@@ -126,7 +107,7 @@ _TIGRCORN_MODULES: tuple[dict[str, Any], ...] = (
         "package": "tigrcorn",
         "category": "runner",
         "python_min": (3, 11),
-        "python_max_exclusive": (3, 13),
+        "python_max_exclusive": (3, 15),
     },
 )
 
@@ -171,16 +152,16 @@ RELEASE_WORKFLOW_EXTRA_ENVS = {"py311-migration-portability", "py311-final-certi
 
 TOX_PROFILE_SECTION_EXPECTATIONS = {
     "[testenv]": "base",
-    "[testenv:py{310,311,312}-sqlite-uvicorn]": "sqlite-uvicorn",
-    "[testenv:py{310,311,312}-postgres-hypercorn]": "postgres-hypercorn",
-    "[testenv:py{311,312}-tigrcorn]": "tigrcorn",
-    "[testenv:py{310,311,312}-devtest]": "devtest",
+    "[testenv:py{310,311,312,313,314}-sqlite-uvicorn]": "sqlite-uvicorn",
+    "[testenv:py{310,311,312,313,314}-postgres-hypercorn]": "postgres-hypercorn",
+    "[testenv:py{311,312,313,314}-tigrcorn]": "tigrcorn",
+    "[testenv:py{310,311,312,313,314}-devtest]": "devtest",
     "[testenv:py311-gates]": "release-gates",
-    "[testenv:py{310,311,312}-test-core]": "test-core",
-    "[testenv:py{310,311,312}-test-integration]": "test-integration",
-    "[testenv:py{310,311,312}-test-conformance]": "test-conformance",
-    "[testenv:py{310,311,312}-test-security-negative]": "test-security-negative",
-    "[testenv:py{310,311,312}-test-interop]": "test-interop",
+    "[testenv:py{310,311,312,313,314}-test-core]": "test-core",
+    "[testenv:py{310,311,312,313,314}-test-integration]": "test-integration",
+    "[testenv:py{310,311,312,313,314}-test-conformance]": "test-conformance",
+    "[testenv:py{310,311,312,313,314}-test-security-negative]": "test-security-negative",
+    "[testenv:py{310,311,312,313,314}-test-interop]": "test-interop",
     "[testenv:py311-test-extension]": "test-extension",
     "[testenv:py311-migration-portability]": "migration-portability",
     "[testenv:py311-final-certification]": "final-certification",
@@ -472,6 +453,9 @@ def _dependency_lock_consistency(repo_root: Path, dependency_manifest: dict[str,
     return {
         "passed": not failures,
         "failures": failures,
+        "python_support_blockers": list(
+            (payload.get("published_dependency_verification") or {}).get("python_support_blockers", [])
+        ),
         "missing_profiles": missing_profiles,
         "install_profile_count": len(install_profiles),
     }
@@ -479,7 +463,7 @@ def _dependency_lock_consistency(repo_root: Path, dependency_manifest: dict[str,
 
 def _current_python_supported() -> bool:
     current = sys.version_info[:3]
-    return (3, 10, 0) <= current < (3, 13, 0)
+    return (3, 10, 0) <= current < (3, 15, 0)
 
 
 def _probe_python_version(executable: list[str]) -> tuple[str | None, str | None]:
@@ -697,12 +681,15 @@ def build_install_substrate_report(
 
     warnings: list[str] = []
     if not _current_python_supported():
-        warnings.append("Current container Python is outside the declared certification support range (>=3.10,<3.13).")
+        warnings.append("Current container Python is outside the declared certification support range (>=3.10,<3.15).")
     unavailable_supported = [item["version"] for item in detected_pythons if not item["available"]]
     if unavailable_supported:
         warnings.append(
             f"The current container does not provide supported interpreter binaries for: {', '.join(unavailable_supported)}."
         )
+    dependency_python_blockers = dependency_lock_consistency.get("python_support_blockers", [])
+    if dependency_python_blockers:
+        warnings.extend(str(item) for item in dependency_python_blockers)
 
     failures = list(static_failures)
     if not _current_python_supported():

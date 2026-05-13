@@ -5,9 +5,9 @@
   "generated_at": "2026-03-26",
   "repository": "tigrbl_auth",
   "version": "0.3.2.dev14",
-  "python_requires": ">=3.10,<3.13",
+  "python_requires": ">=3.10,<3.15",
   "native_lockfile": null,
-  "lockfile_note": "This manifest preserves the exact direct dependency pins and the full certification tox install-profile map committed into pyproject.toml, tox.ini, and constraints/*.txt. The pyproject metadata retains extras-bearing requirements where appropriate, while constraints/*.txt normalize those entries to pip-legal constraint form for clean-room installs. It now includes the runtime matrix, certification test lanes, migration portability, and final certification aggregation profiles.",
+  "lockfile_note": "This manifest preserves the exact direct dependency pins and the full certification tox install-profile map committed into pyproject.toml, tox.ini, and constraints/*.txt. The pyproject metadata retains extras-bearing requirements where appropriate, while constraints/*.txt normalize those entries to pip-legal constraint form for clean-room installs. It now includes the Python 3.10 through 3.14 runtime matrix, certification test lanes, migration portability, and final certification aggregation profiles. Current upstream dependency metadata still blocks honest 3.13/3.14 closure until compatible pinned releases are available.",
   "base": [
     "tigrbl==0.4.0",
     "swarmauri_core==0.10.0",
@@ -73,7 +73,9 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12"
+        "3.12",
+        "3.13",
+        "3.14"
       ]
     },
     "sqlite-uvicorn": {
@@ -88,7 +90,9 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12"
+        "3.12",
+        "3.13",
+        "3.14"
       ]
     },
     "postgres-hypercorn": {
@@ -103,7 +107,9 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12"
+        "3.12",
+        "3.13",
+        "3.14"
       ]
     },
     "tigrcorn": {
@@ -116,7 +122,9 @@
       ],
       "supported_python_versions": [
         "3.11",
-        "3.12"
+        "3.12",
+        "3.13",
+        "3.14"
       ],
       "status": "pinned-published-runner"
     },
@@ -134,7 +142,9 @@
       "supported_python_versions": [
         "3.10",
         "3.11",
-        "3.12"
+        "3.12",
+        "3.13",
+        "3.14"
       ]
     },
     "release-gates": {
@@ -271,7 +281,11 @@
   "published_dependency_verification": {
     "verified_at": "2026-03-24",
     "source": "PyPI release metadata",
-    "python_support_boundary": ">=3.10,<3.13 for package certification; tigrcorn profile constrained to Python >=3.11",
+    "python_support_boundary": "target >=3.10,<3.15 for package certification; tigrcorn profile constrained to Python >=3.11",
+    "python_support_blockers": [
+      "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
+      "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
+    ],
     "verified_packages": {
       "tigrbl": {
         "version": "0.4.0",

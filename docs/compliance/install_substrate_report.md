@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260513T112931Z`
+- Generated at: `20260513T121950Z`
 - Passed: `False`
 - Static manifest passed: `True`
 - Profile: `base`
@@ -8,11 +8,11 @@
 - Environment identity present: `True`
 - Current Python: `3.12.5`
 - Current Python supported: `True`
-- Expected supported Python versions: `3.10, 3.11, 3.12`
-- Detected supported Python binaries: `2` / `3`
-- Certification tox envs declared: `33`
-- Runtime matrix envs declared: `14`
-- Test lane envs declared: `15`
+- Expected supported Python versions: `3.10, 3.11, 3.12, 3.13, 3.14`
+- Detected supported Python binaries: `2` / `5`
+- Certification tox envs declared: `53`
+- Runtime matrix envs declared: `24`
+- Test lane envs declared: `25`
 - Tox templates with pip check: `14` / `14`
 - Tox templates with install probe: `14` / `14`
 - Current profile import probe passed: `True`
@@ -24,7 +24,9 @@
 
 ## Warnings
 
-- The current container does not provide supported interpreter binaries for: 3.11.
+- The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.
+- Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.
+- Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14.
 
 ## Current environment import probe
 
@@ -62,14 +64,16 @@
 - `3.10` → available=`True` path=`py -3.10`
 - `3.11` → available=`False` path=`None`
 - `3.12` → available=`True` path=`<repo>/.venv/Scripts/python.exe`
+- `3.13` → available=`False` path=`None`
+- `3.14` → available=`False` path=`None`
 
 ## Workflow coverage
 
 - install_profiles_workflow_present: `True`
 - release_gates_workflow_present: `True`
-- install_profiles_runtime_env_present_count: `14`
-- release_gates_runtime_env_present_count: `14`
-- release_gates_test_lane_env_present_count: `15`
+- install_profiles_runtime_env_present_count: `24`
+- release_gates_runtime_env_present_count: `24`
+- release_gates_test_lane_env_present_count: `25`
 - release_gates_extra_env_present_count: `2`
 - install_profiles_artifact_upload_present: `True`
 - release_gates_artifact_upload_present: `True`

@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260513T112931Z",
+  "generated_at": "20260513T121950Z",
   "passed": false,
   "summary": {
     "static_manifest_passed": true,
@@ -12,14 +12,16 @@
     "expected_supported_python_versions": [
       "3.10",
       "3.11",
-      "3.12"
+      "3.12",
+      "3.13",
+      "3.14"
     ],
-    "expected_supported_python_count": 3,
+    "expected_supported_python_count": 5,
     "detected_supported_python_count": 2,
-    "declared_runtime_matrix_env_count": 14,
-    "declared_test_lane_env_count": 15,
-    "declared_certification_tox_env_count": 33,
-    "tox_env_count": 33,
+    "declared_runtime_matrix_env_count": 24,
+    "declared_test_lane_env_count": 25,
+    "declared_certification_tox_env_count": 53,
+    "tox_env_count": 53,
     "tox_envs_with_pip_check_count": 14,
     "tox_envs_with_install_probe_count": 14,
     "tox_section_template_count": 14,
@@ -33,9 +35,9 @@
     "dependency_lock_install_profile_count": 14,
     "install_profiles_workflow_present": true,
     "release_gates_workflow_present": true,
-    "install_profiles_runtime_env_present_count": 14,
-    "release_gates_runtime_env_present_count": 14,
-    "release_gates_test_lane_env_present_count": 15,
+    "install_profiles_runtime_env_present_count": 24,
+    "release_gates_runtime_env_present_count": 24,
+    "release_gates_test_lane_env_present_count": 25,
     "release_gates_extra_env_present_count": 2,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
@@ -51,7 +53,9 @@
     "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
   ],
   "warnings": [
-    "The current container does not provide supported interpreter binaries for: 3.11."
+    "The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.",
+    "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
+    "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
   ],
   "detected_supported_pythons": [
     {
@@ -72,10 +76,24 @@
       "available": true,
       "path": "<repo>/.venv/Scripts/python.exe",
       "source": "current-interpreter"
+    },
+    {
+      "version": "3.13",
+      "available": false,
+      "path": null,
+      "source": "py-launcher",
+      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
+    },
+    {
+      "version": "3.14",
+      "available": false,
+      "path": null,
+      "source": "py-launcher",
+      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
     }
   ],
   "dependency_manifest": {
-    "requires_python": ">=3.10,<3.13",
+    "requires_python": ">=3.10,<3.15",
     "dependencies": [
       "tigrbl==0.4.0",
       "swarmauri_core==0.10.0",
@@ -156,6 +174,10 @@
   "dependency_lock_consistency": {
     "passed": true,
     "failures": [],
+    "python_support_blockers": [
+      "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
+      "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
+    ],
     "missing_profiles": [],
     "install_profile_count": 14
   },
@@ -164,33 +186,53 @@
       "py310-base",
       "py311-base",
       "py312-base",
+      "py313-base",
+      "py314-base",
       "py310-sqlite-uvicorn",
       "py311-sqlite-uvicorn",
       "py312-sqlite-uvicorn",
+      "py313-sqlite-uvicorn",
+      "py314-sqlite-uvicorn",
       "py310-postgres-hypercorn",
       "py311-postgres-hypercorn",
       "py312-postgres-hypercorn",
+      "py313-postgres-hypercorn",
+      "py314-postgres-hypercorn",
       "py311-tigrcorn",
       "py312-tigrcorn",
+      "py313-tigrcorn",
+      "py314-tigrcorn",
       "py310-devtest",
       "py311-devtest",
       "py312-devtest",
+      "py313-devtest",
+      "py314-devtest",
       "py311-gates",
       "py310-test-core",
       "py311-test-core",
       "py312-test-core",
+      "py313-test-core",
+      "py314-test-core",
       "py310-test-integration",
       "py311-test-integration",
       "py312-test-integration",
+      "py313-test-integration",
+      "py314-test-integration",
       "py310-test-conformance",
       "py311-test-conformance",
       "py312-test-conformance",
+      "py313-test-conformance",
+      "py314-test-conformance",
       "py310-test-security-negative",
       "py311-test-security-negative",
       "py312-test-security-negative",
+      "py313-test-security-negative",
+      "py314-test-security-negative",
       "py310-test-interop",
       "py311-test-interop",
       "py312-test-interop",
+      "py313-test-interop",
+      "py314-test-interop",
       "py311-test-extension",
       "py311-migration-portability",
       "py311-final-certification"
@@ -203,28 +245,28 @@
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-sqlite-uvicorn]": {
+      "[testenv:py{310,311,312,313,314}-sqlite-uvicorn]": {
         "profile": "sqlite-uvicorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-postgres-hypercorn]": {
+      "[testenv:py{310,311,312,313,314}-postgres-hypercorn]": {
         "profile": "postgres-hypercorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{311,312}-tigrcorn]": {
+      "[testenv:py{311,312,313,314}-tigrcorn]": {
         "profile": "tigrcorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-devtest]": {
+      "[testenv:py{310,311,312,313,314}-devtest]": {
         "profile": "devtest",
         "pip_check_present": true,
         "install_probe_present": true,
@@ -238,35 +280,35 @@
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-test-core]": {
+      "[testenv:py{310,311,312,313,314}-test-core]": {
         "profile": "test-core",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-test-integration]": {
+      "[testenv:py{310,311,312,313,314}-test-integration]": {
         "profile": "test-integration",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-test-conformance]": {
+      "[testenv:py{310,311,312,313,314}-test-conformance]": {
         "profile": "test-conformance",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-test-security-negative]": {
+      "[testenv:py{310,311,312,313,314}-test-security-negative]": {
         "profile": "test-security-negative",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312}-test-interop]": {
+      "[testenv:py{310,311,312,313,314}-test-interop]": {
         "profile": "test-interop",
         "pip_check_present": true,
         "install_probe_present": true,
@@ -305,11 +347,11 @@
     "release_gates_workflow_present": true,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
-    "install_profiles_runtime_env_present_count": 14,
+    "install_profiles_runtime_env_present_count": 24,
     "install_profiles_runtime_env_missing": [],
-    "release_gates_runtime_env_present_count": 14,
+    "release_gates_runtime_env_present_count": 24,
     "release_gates_runtime_env_missing": [],
-    "release_gates_test_lane_env_present_count": 15,
+    "release_gates_test_lane_env_present_count": 25,
     "release_gates_test_lane_env_missing": [],
     "release_gates_extra_env_present_count": 2,
     "release_gates_extra_env_missing": [],

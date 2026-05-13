@@ -100,8 +100,8 @@ def test_validated_execution_excludes_out_of_scope_lane_manifests_from_certifica
     (repo_root / "docs" / "compliance").mkdir(parents=True, exist_ok=True)
 
     _write_json(
-        validated_root / "test-core-py313.json",
-        _lane_manifest("core", "3.13", tests_collected=8),
+        validated_root / "test-core-py315.json",
+        _lane_manifest("core", "3.15", tests_collected=8),
     )
     _write_json(
         validated_root / "test-core-py310.json",
@@ -113,7 +113,7 @@ def test_validated_execution_excludes_out_of_scope_lane_manifests_from_certifica
     assert payload["validated_artifact_count"] == 1
     assert payload["out_of_scope_validated_artifact_count"] == 1
     assert payload["test_lane_passed_count"] == 1
-    assert payload["out_of_scope_validated_manifests"][0]["identity"] == "core@py3.13"
+    assert payload["out_of_scope_validated_manifests"][0]["identity"] == "core@py3.15"
 
 
 def test_runtime_stack_detection_catches_dynamic_import_targets(tmp_path: Path) -> None:

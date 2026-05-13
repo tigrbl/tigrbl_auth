@@ -4,7 +4,7 @@ This plan is ordered so every later certification statement is supported by pres
 
 ## 1. Recreate the clean-room dependency environments
 
-1. Provision Python 3.10, 3.11, and 3.12 environments.
+1. Provision Python 3.10, 3.11, 3.12, 3.13, and 3.14 environments.
 2. Install the published dependency stack from `constraints/base.txt` plus the runner/storage extras required by each tox lane.
 3. Verify that `tigrbl`, `swarmauri_*`, SQLAlchemy, bcrypt, and runner packages import in each target environment.
 4. Fail the lane immediately if the app factory still cannot import `tigrbl`.

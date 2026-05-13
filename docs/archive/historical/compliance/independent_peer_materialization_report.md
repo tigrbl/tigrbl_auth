@@ -1,4 +1,4 @@
-# independent peer checkpoint Peer Materialization Report
+# runtime-foundation checkpoint3 Peer Materialization Report
 
 - passed: `True`
 

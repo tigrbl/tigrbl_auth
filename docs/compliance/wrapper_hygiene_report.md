@@ -1,6 +1,10 @@
 # Wrapper Hygiene Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- Package entrypoint and certified release-path roots still import legacy compatibility surfaces: tigrbl_auth/services/advanced_identity_plane.py -> tigrbl_auth.rfc.rfc8176, tigrbl_auth.rfc.rfc8812; tigrbl_auth/standards/oauth2/rfc6750.py -> tigrbl_auth.runtime_cfg
 
 ## Warnings
 
@@ -13,4 +17,4 @@
 - in_scope_target_wrapper_count: `0`
 - in_scope_target_non_core_count: `0`
 - standards_legacy_proxy_count: `0`
-- entrypoint_legacy_import_count: `0`
+- entrypoint_legacy_import_count: `2`

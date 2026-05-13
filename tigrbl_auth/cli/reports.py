@@ -1302,7 +1302,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
             if runtime_report_uses_validated_runs
             else "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container."
         )
-        certification_state["open_gaps"].append("Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.")
+        certification_state["open_gaps"].append("Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12/3.13/3.14, but preserved independent validation artifacts remain absent.")
     if int(runtime_profile_report.get("summary", {}).get("placeholder_supported_runner_count", 0)) > 0:
         certification_state["open_gaps"].append("At least one kept runner is still modeled as a placeholder rather than a published pinned package.")
     if not bool(runtime_profile_report.get("summary", {}).get("declared_ci_install_probe_complete", False)):
@@ -1362,19 +1362,21 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
 
 
 
+EXPECTED_PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+EXPECTED_TIGRCORN_PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
 EXPECTED_RUNTIME_VALIDATION_MATRIX = {
-    "base": ["3.10", "3.11", "3.12"],
-    "sqlite-uvicorn": ["3.10", "3.11", "3.12"],
-    "postgres-hypercorn": ["3.10", "3.11", "3.12"],
-    "tigrcorn": ["3.11", "3.12"],
-    "devtest": ["3.10", "3.11", "3.12"],
+    "base": EXPECTED_PYTHON_VERSIONS,
+    "sqlite-uvicorn": EXPECTED_PYTHON_VERSIONS,
+    "postgres-hypercorn": EXPECTED_PYTHON_VERSIONS,
+    "tigrcorn": EXPECTED_TIGRCORN_PYTHON_VERSIONS,
+    "devtest": EXPECTED_PYTHON_VERSIONS,
 }
 EXPECTED_TEST_LANE_MATRIX = {
-    "core": ["3.10", "3.11", "3.12"],
-    "integration": ["3.10", "3.11", "3.12"],
-    "conformance": ["3.10", "3.11", "3.12"],
-    "security-negative": ["3.10", "3.11", "3.12"],
-    "interop": ["3.10", "3.11", "3.12"],
+    "core": EXPECTED_PYTHON_VERSIONS,
+    "integration": EXPECTED_PYTHON_VERSIONS,
+    "conformance": EXPECTED_PYTHON_VERSIONS,
+    "security-negative": EXPECTED_PYTHON_VERSIONS,
+    "interop": EXPECTED_PYTHON_VERSIONS,
 }
 
 
@@ -1559,10 +1561,14 @@ def load_validated_execution_status(repo_root: Path) -> dict[str, Any]:
         "ignored_json_paths": ignored_json_paths,
         "out_of_scope_validated_manifests": out_of_scope_manifests,
     }
+    inventory_threshold_text = (
+        f"{len(required_runtime)} runtime + {len(required_lanes)} test lanes "
+        f"+ {len(required_migration_backends)} backend-distinct migration threshold"
+    )
     report = {
         "passed": payload["runtime_matrix_green"] and payload["in_scope_test_lanes_green"] and payload["migration_portability_passed"],
         "failures": [
-            *(["Validated artifact inventory is below the required 14 runtime + 15 test lanes + 2 backend-distinct migration threshold."] if not payload["validated_inventory_complete"] else []),
+            *([f"Validated artifact inventory is below the required {inventory_threshold_text}."] if not payload["validated_inventory_complete"] else []),
             *(["Validated clean-room runtime matrix is incomplete."] if not payload["runtime_matrix_green"] else []),
             *(["Validated in-scope certification lane execution is incomplete."] if not payload["in_scope_test_lanes_green"] else []),
             *(["Migration portability validation across SQLite and PostgreSQL is missing."] if not payload["migration_portability_passed"] else []),
@@ -1735,7 +1741,10 @@ def run_final_release_readiness_gate(repo_root: Path) -> dict[str, Any]:
     if int(summary.get("missing_count", 0)) != 0:
         failures.append("At least one kept runner is still missing.")
     if not validated.get("validated_inventory_complete", False):
-        failures.append("Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.")
+        failures.append(
+            "Validated artifact inventory is below the required "
+            f"{validated.get('required_validated_inventory_count', 0)} artifact threshold."
+        )
     if not validated.get("runtime_matrix_green", False):
         failures.append("The clean-room install matrix is not green from validated-run evidence.")
     if not validated.get("in_scope_test_lanes_green", False):
