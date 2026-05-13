@@ -8,14 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class authority objects for protected-resource verification, introspection caller authentication, sender-constrained presentation, and RFC 9728 metadata."
+summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class"
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Elevate verifier-grade resource contracts into accepted runtime authority."
-    at: "2026-05-12T00:00:00Z"
+    note: "Registry row reconciled to accepted document state."
+    at: "2026-05-13T04:06:35Z"
 references: []
 body: |-
   ## Decision

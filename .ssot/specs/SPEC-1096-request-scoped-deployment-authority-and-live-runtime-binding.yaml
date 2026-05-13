@@ -1,0 +1,52 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1096"
+number: 1096
+slug: "request-scoped-deployment-authority-and-live-runtime-binding"
+title: "Request-scoped deployment authority and live runtime binding"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines the live runtime obligation that issuer-bearing artifacts and enabled routes derive from the active resolved deployment."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines the live runtime obligation that issuer-bearing artifacts and enabled routes derive from the active resolved deployment.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1091`.
+  
+  ## Runtime Authority
+  
+  The runtime MUST use one effective `ResolvedDeployment` authority for each live request path.
+  
+  Request handlers, token issuance, discovery publication, metadata publication, diagnostics surfaces, and route enablement decisions MUST derive from that same effective authority.
+  
+  ## Issuer-Bearing Artifact Rule
+  
+  The following artifacts MUST derive issuer and issuer-related posture from the effective runtime authority:
+  
+  - OAuth authorization server metadata;
+  - OIDC discovery metadata;
+  - protected-resource metadata;
+  - access tokens and ID tokens;
+  - token exchange responses;
+  - authorization responses that disclose issuer-derived posture; and
+  - introspection outputs that disclose issuer-derived posture.
+  
+  ## Route Rule
+  
+  Route enablement, route hiding, and contract visibility MUST derive from the same effective runtime authority used by live request handling.
+  
+  ## Verification
+  
+  Verification MUST prove that live request handling, issuer-bearing artifacts, and published runtime surfaces remain aligned for the same effective resolved deployment.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1091"
