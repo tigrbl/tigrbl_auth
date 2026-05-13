@@ -64,7 +64,7 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "2bbe8ca3830f570e8ea4b51f11702c9741dfe851ce4bfa3599e776a7501c1903",
+    "docs/compliance/current_state_report.json": "049c57e86f20166118db79856460d6e4e38f949cc3c9a209e4c9c1c951ce3a9a",
     "docs/compliance/certification_state_report.json": "ad4812566f5889b5af18591c7825d0d3115e7ab1bce200327544fcd5d1471e7a",
     "docs/compliance/release_gate_report.json": "3d670790a7eb2e5f1d0a2b1d2cb6038d1c84c12f0d49a40cfbd1ef1d694f9c2d",
     "docs/compliance/final_release_gate_report.json": "afb90b1c88e7d1b658467917acfceddd762ed67c3fb7e42acea1bc40c7bed248",

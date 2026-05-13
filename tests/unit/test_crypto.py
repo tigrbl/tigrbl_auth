@@ -206,21 +206,21 @@ class TestJWTKeyCrypto:
         else:
             assert permissions == "600"
 
-    def test_invalid_key_format_raises_error(self, tmp_path):
-        """Test that invalid key format raises appropriate error."""
+    def test_stale_key_reference_self_heals(self, tmp_path):
+        """Test that stale key identifiers regenerate a usable signing key."""
         key_path = tmp_path / "invalid_key.pem"
 
-        # Write invalid key content
-        key_path.write_text(
-            "-----BEGIN PRIVATE KEY-----\nINVALID\n-----END PRIVATE KEY-----\n"
-        )
+        key_path.write_text("missing-key-id")
 
         with patch("tigrbl_auth.crypto._DEFAULT_KEY_PATH", key_path):
-            # Clear the cache
             _load_keypair.cache_clear()
 
-            with pytest.raises(ValueError):
-                _load_keypair()
+            kid, priv_pem, pub_pem = _load_keypair()
+
+            assert kid != "missing-key-id"
+            assert key_path.read_text().strip() == kid
+            assert priv_pem.startswith(b"-----BEGIN PRIVATE KEY-----")
+            assert pub_pem.startswith(b"-----BEGIN PUBLIC KEY-----")
 
     def test_non_ed25519_key_raises_error(self, tmp_path):
         """Test that non-Ed25519 keys raise appropriate error."""

@@ -81,15 +81,26 @@ async def _create_key(label: str) -> Any:
     return await provider.create_key(spec)
 
 
+async def _create_and_persist_key(label: str = "jwt_ed25519") -> Any:
+    ref = await _create_key(label)
+    _DEFAULT_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _DEFAULT_KEY_PATH.write_text(ref.kid)
+    return ref
+
+
 async def _ensure_key() -> Tuple[str, bytes, bytes]:
     provider = _provider()
     if _DEFAULT_KEY_PATH.exists():
         kid = _DEFAULT_KEY_PATH.read_text().strip()
-        ref = await provider.get_key(kid, include_secret=True)
+        if kid:
+            try:
+                ref = await provider.get_key(kid, include_secret=True)
+            except Exception:
+                ref = await _create_and_persist_key()
+        else:
+            ref = await _create_and_persist_key()
     else:
-        ref = await _create_key("jwt_ed25519")
-        _DEFAULT_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
-        _DEFAULT_KEY_PATH.write_text(ref.kid)
+        ref = await _create_and_persist_key()
     return ref.kid, ref.material or b"", ref.public or b""
 
 

@@ -15,7 +15,7 @@ from uuid import uuid4
 
 from tigrbl_auth.errors import InvalidTokenError
 
-from .key_management import _DEFAULT_KEY_PATH, _provider
+from .key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 from .session_service import (
     exchange_token_for_context,
     get_token_for_context,
@@ -90,6 +90,13 @@ def _svc() -> Tuple[Any, str]:
     kp = _provider()
     if _DEFAULT_KEY_PATH.exists():
         kid = _DEFAULT_KEY_PATH.read_text().strip()
+        if kid:
+            try:
+                _run(kp.get_key(kid, include_secret=False))
+            except Exception:
+                kid, _, _ = _run(_ensure_key())
+        else:
+            kid, _, _ = _run(_ensure_key())
     else:
         spec = runtime["KeySpec"](
             klass=runtime["KeyClass"].asymmetric,

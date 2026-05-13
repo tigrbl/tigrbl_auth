@@ -255,8 +255,8 @@
         "pytest_report_present": true,
         "pytest_exit_code": 1,
         "pytest_report_exit_code": 1,
-        "tests_collected": 636,
-        "tests_total": 636
+        "tests_collected": 644,
+        "tests_total": 644
       },
       "integration@py3.12": {
         "path": "dist/validated-runs/test-integration-py312.json",

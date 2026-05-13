@@ -53,21 +53,33 @@ async def _ensure_key() -> Tuple[str, bytes, bytes]:
     kp = _provider()
     if _RSA_KEY_PATH.exists():
         kid = _RSA_KEY_PATH.read_text().strip()
-        ref = await kp.get_key(kid, include_secret=True)
+        if kid:
+            try:
+                ref = await kp.get_key(kid, include_secret=True)
+            except Exception:
+                ref = await _create_rsa_key()
+        else:
+            ref = await _create_rsa_key()
     else:
-        spec = KeySpec(
-            klass=KeyClass.asymmetric,
-            alg=KeyAlg.RSA_PSS_SHA256,
-            uses=(KeyUse.SIGN, KeyUse.VERIFY),
-            export_policy=ExportPolicy.SECRET_WHEN_ALLOWED,
-            label="jwt_rs256",
-        )
-        ref = await kp.create_key(spec)
-        _RSA_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
-        _RSA_KEY_PATH.write_text(ref.kid)
+        ref = await _create_rsa_key()
     priv = ref.material or b""
     pub = ref.public or b""
     return ref.kid, priv, pub
+
+
+async def _create_rsa_key():
+    kp = _provider()
+    spec = KeySpec(
+        klass=KeyClass.asymmetric,
+        alg=KeyAlg.RSA_PSS_SHA256,
+        uses=(KeyUse.SIGN, KeyUse.VERIFY),
+        export_policy=ExportPolicy.SECRET_WHEN_ALLOWED,
+        label="jwt_rs256",
+    )
+    ref = await kp.create_key(spec)
+    _RSA_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _RSA_KEY_PATH.write_text(ref.kid)
+    return ref
 
 
 _service_cache: Tuple[JWTTokenService, str] | None = None
@@ -81,6 +93,14 @@ async def _service() -> Tuple[JWTTokenService, str]:
         kid, _, _ = await _ensure_key()
         svc = JWTTokenService(_provider())
         _service_cache = (svc, kid)
+    else:
+        svc, kid = _service_cache
+        try:
+            await _provider().get_key(kid, include_secret=False)
+        except Exception:
+            kid, _, _ = await _ensure_key()
+            svc = JWTTokenService(_provider())
+            _service_cache = (svc, kid)
     return _service_cache
 
 

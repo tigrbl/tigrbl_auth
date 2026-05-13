@@ -874,7 +874,13 @@ def write_install_substrate_report(
         artifact_dir = artifact_dir.resolve()
         artifact_dir.mkdir(parents=True, exist_ok=True)
         profile_name = payload["summary"]["profile"]
-        (artifact_dir / f"{profile_name}.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        py_tag = f"py{sys.version_info.major}{sys.version_info.minor}"
+        tox_env = str(payload.get("environment_identity", {}).get("tox_env") or "").strip()
+        artifacts = [artifact_dir / f"{profile_name}.json", artifact_dir / f"{profile_name}-{py_tag}.json"]
+        if tox_env:
+            artifacts.append(artifact_dir / f"{tox_env}.json")
+        for artifact in artifacts:
+            artifact.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     return payload
 
 

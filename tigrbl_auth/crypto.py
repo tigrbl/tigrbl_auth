@@ -83,28 +83,34 @@ def _generate_keypair(path: pathlib.Path) -> Tuple[str, bytes, bytes]:
     return asyncio.run(_create())
 
 
+async def _create_jwt_key(label: str = "jwt_ed25519"):
+    kp = _provider()
+    spec = KeySpec(
+        klass=KeyClass.asymmetric,
+        alg=KeyAlg.ED25519,
+        uses=(KeyUse.SIGN, KeyUse.VERIFY),
+        export_policy=ExportPolicy.SECRET_WHEN_ALLOWED,
+        label=label,
+    )
+    ref = await kp.create_key(spec)
+    _DEFAULT_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _DEFAULT_KEY_PATH.write_text(ref.kid)
+    return ref
+
+
 async def _ensure_key() -> Tuple[str, bytes, bytes]:
     kp = _provider()
     if _DEFAULT_KEY_PATH.exists():
         kid = _DEFAULT_KEY_PATH.read_text().strip()
-        try:
-            ref = await kp.get_key(kid, include_secret=True)
-        except Exception as exc:  # pragma: no cover - defensive
-            raise ValueError("invalid JWT signing key reference") from exc
+        if kid:
+            try:
+                ref = await kp.get_key(kid, include_secret=True)
+            except Exception:
+                ref = await _create_jwt_key()
+        else:
+            ref = await _create_jwt_key()
     else:
-        spec = KeySpec(
-            klass=KeyClass.asymmetric,
-            alg=KeyAlg.ED25519,
-            uses=(KeyUse.SIGN, KeyUse.VERIFY),
-            export_policy=ExportPolicy.SECRET_WHEN_ALLOWED,
-            label="jwt_ed25519",
-        )
-        # ----------------------------------------------------
-        # ‼ We should not be writing keys to disk
-        ref = await kp.create_key(spec)
-        _DEFAULT_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
-        _DEFAULT_KEY_PATH.write_text(ref.kid)
-        # ----------------------------------------------------
+        ref = await _create_jwt_key()
     alg = ref.tags.get("alg") if ref.tags else None
     if alg != KeyAlg.ED25519.value:
         raise RuntimeError("JWT signing key is not Ed25519")

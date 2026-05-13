@@ -25,7 +25,7 @@ from .framework import (
 )
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.oauth2.mtls import validate_certificate_binding
-from tigrbl_auth.services.key_management import _DEFAULT_KEY_PATH, _provider
+from tigrbl_auth.services.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 from tigrbl_auth.standards.oauth2.revocation import is_revoked
 from tigrbl_auth.standards.oauth2.introspection import register_token
 
@@ -57,6 +57,13 @@ def _svc() -> Tuple[JWTTokenService, str]:
     kp: FileKeyProvider = _provider()
     if _DEFAULT_KEY_PATH.exists():
         kid = _DEFAULT_KEY_PATH.read_text().strip()
+        if kid:
+            try:
+                _run(kp.get_key(kid, include_secret=False))
+            except Exception:
+                kid, _, _ = _run(_ensure_key())
+        else:
+            kid, _, _ = _run(_ensure_key())
     else:
         spec = KeySpec(
             klass=KeyClass.asymmetric,

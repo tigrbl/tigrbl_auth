@@ -101,6 +101,15 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
     evidence = registry.get("evidence", [])
     issues = registry.get("issues", [])
     risks = registry.get("risks", [])
+    registry_counts = {
+        "features": len(features),
+        "profiles": len(profiles),
+        "tests": len(tests),
+        "claims": len(claims),
+        "evidence": len(evidence),
+        "issues": len(issues),
+        "risks": len(risks),
+    }
 
     current_features = [
         row for row in features if row.get("plan", {}).get("horizon") != "out_of_bounds"
@@ -144,7 +153,8 @@ def build_inventory(root: Path = ROOT) -> dict[str, Any]:
         "package": "tigrbl_auth",
         "registry": {
             "validation_passed": bool(validation.get("passed")),
-            "counts": validation.get("summary", {}).get("counts", {}),
+            "counts": registry_counts,
+            "validation_counts": validation.get("summary", {}).get("counts", {}),
             "feature_implementation_status": status_counts(features, "implementation_status"),
             "feature_horizon": status_counts(
                 [
@@ -290,7 +300,7 @@ def write_inventory(inventory: dict[str, Any], report_dir: Path = REPORT_DIR) ->
     json_out = report_dir / JSON_OUT.name
     md_out = report_dir / MD_OUT.name
     json_out.write_text(json.dumps(inventory, indent=2, sort_keys=False) + "\n", encoding="utf-8")
-    md_out.write_text(render_markdown(inventory), encoding="utf-8")
+    md_out.write_text(render_markdown(inventory) + "\n", encoding="utf-8")
     return {
         "json": json_out.relative_to(ROOT).as_posix(),
         "markdown": md_out.relative_to(ROOT).as_posix(),

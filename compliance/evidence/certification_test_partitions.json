@@ -101,6 +101,7 @@
       "tests/unit/test_hardening_cluster_c.py",
       "tests/unit/test_jwks_rotation.py",
       "tests/unit/test_jwtoken.py",
+      "tests/unit/test_key_rotation_policy_governance.py",
       "tests/unit/test_models.py",
       "tests/unit/test_non_rfc_track_checkpoint.py",
       "tests/unit/test_oidc_authorize_scope_nonce.py",
