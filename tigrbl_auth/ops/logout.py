@@ -62,7 +62,7 @@ async def logout_request(*, request, db):
         body = getattr(request, 'body', b'') or b''
         params = _body_params(body)
 
-    session = await resolve_browser_session(request)
+    session = await resolve_browser_session(request, deployment=deployment)
     if session is None and params.get('sid'):
         try:
             session = await get_session_async(UUID(str(params['sid'])))
@@ -78,7 +78,7 @@ async def logout_request(*, request, db):
         post_logout_redirect_uri=params.get('post_logout_redirect_uri'),
         id_token_hint=params.get('id_token_hint'),
         session_row=session,
-        issuer=settings.issuer,
+        issuer=str(deployment.issuer or settings.issuer),
     )
     client_id = context.client_id
     redirect_uri = context.post_logout_redirect_uri
@@ -92,6 +92,7 @@ async def logout_request(*, request, db):
             post_logout_redirect_uri=redirect_uri,
             state=params.get('state'),
             reason='logout',
+            deployment=deployment,
             metadata={
                 'id_token_hint_present': bool(params.get('id_token_hint')),
                 'id_token_hint_sid': hint_claims.get('sid'),

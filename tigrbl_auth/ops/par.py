@@ -4,7 +4,7 @@ import json
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.settings import settings
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth.services.persistence import append_audit_event_async
@@ -206,7 +206,7 @@ async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object
 
 
 async def pushed_authorization_request(*, request, db):
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled('enable_rfc9126'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'PAR disabled')
     params = _body_dict(getattr(request, 'body', b'') or b'')

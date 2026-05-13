@@ -10,7 +10,7 @@ from tigrbl_auth.api.rest.schemas import (
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
 )
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.framework import HTTPException, select, status
 from tigrbl_auth.services.persistence import append_audit_event_async, token_hash, upsert_client_registration_async
@@ -98,8 +98,9 @@ async def _validated_registration_payload(
     *,
     db,
     payload: DynamicClientRegistrationIn,
+    deployment=None,
 ) -> tuple[Tenant, dict[str, object]]:
-    deployment = resolve_deployment(settings)
+    deployment = deployment if deployment is not None else resolve_deployment(settings)
     policy = runtime_security_profile(deployment)
 
     unsupported_grants = sorted(set(payload.grant_types) - set(policy.allowed_grant_types))
@@ -227,8 +228,8 @@ async def register_client(*, request, db, payload: DynamicClientRegistrationIn |
         body = await request.json() if hasattr(request, 'json') else {}
         payload = DynamicClientRegistrationIn(**body)
 
-    tenant, derived_metadata = await _validated_registration_payload(db=db, payload=payload)
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
+    tenant, derived_metadata = await _validated_registration_payload(db=db, payload=payload, deployment=deployment)
     policy = runtime_security_profile(deployment)
 
     client_id = str(uuid4())
@@ -249,7 +250,7 @@ async def register_client(*, request, db, payload: DynamicClientRegistrationIn |
     if settings.enable_rfc7592:
         registration_access_token = secrets.token_urlsafe(32)
         registration_access_token_hash = token_hash(registration_access_token)
-        registration_client_uri = f"{settings.issuer.rstrip('/')}/register/{client_id}"
+        registration_client_uri = f"{str(deployment.issuer or settings.issuer).rstrip('/')}/register/{client_id}"
 
     metadata = _merge_registration_metadata(payload, derived_metadata=derived_metadata)
     registration = await upsert_client_registration_async(
@@ -316,7 +317,8 @@ async def update_registered_client(*, request, db, client_id: str, payload: Dyna
     incoming = payload.model_dump(exclude_none=True)
     current.update(incoming)
     validated = DynamicClientRegistrationIn(**current)
-    _, derived_metadata = await _validated_registration_payload(db=db, payload=validated)
+    deployment = deployment_from_request(request, settings)
+    _, derived_metadata = await _validated_registration_payload(db=db, payload=validated, deployment=deployment)
 
     client.redirect_uris = ' '.join(validated.redirect_uris)
     client.grant_types = ' '.join(validated.grant_types)

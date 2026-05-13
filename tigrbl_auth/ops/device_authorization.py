@@ -5,7 +5,7 @@ from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.settings import settings
 
 try:  # pragma: no cover - exercised with full runtime deps installed
@@ -63,7 +63,7 @@ except Exception:  # pragma: no cover - placeholders for dependency-light tests
 
 
 async def device_authorization_request(*, request, db):
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled('enable_rfc8628'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'device authorization disabled')
     body = getattr(request, 'body', b'') or b''
@@ -117,7 +117,7 @@ async def device_authorization_request(*, request, db):
     except Exception:
         pass
 
-    verification_uri = f"{settings.issuer.rstrip('/')}/device"
+    verification_uri = f"{str(deployment.issuer or settings.issuer).rstrip('/')}/device"
     verification_uri_complete = f"{verification_uri}?user_code={user_code}"
 
     await append_audit_event_async(

@@ -156,7 +156,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     if par_row is not None and par_row.client_id not in {None, client_uuid}:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri"})
 
-    session = await resolve_browser_session(request)
+    session = await resolve_browser_session(request, deployment=deployment)
     if login_hint and session and session.username != login_hint:
         session = None
     prompts = set(str(prompt).split()) if prompt else set()
@@ -295,7 +295,12 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
         id_token = await mint_id_token(sub=user_sub, aud=str(client_id), nonce=nonce, issuer=str(deployment.issuer or ISSUER), **extra_claims)
         params_out.append(("id_token", id_token))
 
-    session_state = session_state_for_client(session, client_id=str(client_id), redirect_uri=str(redirect_uri))
+    session_state = session_state_for_client(
+        session,
+        client_id=str(client_id),
+        redirect_uri=str(redirect_uri),
+        deployment=deployment,
+    )
     if session_state:
         params_out.append(("session_state", session_state))
     if policy.authorization_response_iss_required:

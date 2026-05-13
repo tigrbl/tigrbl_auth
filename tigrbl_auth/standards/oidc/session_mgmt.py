@@ -18,7 +18,7 @@ from typing import Final
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.http.cookies import (
     extract_session_cookie,
@@ -88,9 +88,9 @@ def session_client_origin(redirect_uri: str | None) -> str:
     return _origin(redirect_uri)
 
 
-def compute_session_state(*, client_id: str, redirect_uri: str, session_id: UUID | str, salt: str) -> str:
+def compute_session_state(*, client_id: str, redirect_uri: str, session_id: UUID | str, salt: str, issuer: str | None = None) -> str:
     origin = _origin(redirect_uri)
-    payload = f"{client_id} {origin} {session_id} {salt} {settings.issuer}"
+    payload = f"{client_id} {origin} {session_id} {salt} {issuer or settings.issuer}"
     return f"{sha256(payload.encode('utf-8')).hexdigest()}.{salt}"
 
 
@@ -117,6 +117,7 @@ def validate_session_state(
     session_id: UUID | str,
     salt: str | None = None,
     expected_session_state: str | None = None,
+    issuer: str | None = None,
 ) -> SessionStateValidation:
     origin = _origin(redirect_uri)
     parsed_presented = parse_session_state(presented_session_state)
@@ -135,6 +136,7 @@ def validate_session_state(
         redirect_uri=redirect_uri,
         session_id=session_id,
         salt=effective_salt,
+        issuer=issuer,
     )
     parsed_expected = parse_session_state(effective_expected)
     if parsed_expected is None:
@@ -187,8 +189,8 @@ async def create_browser_session(*, user_id: UUID, tenant_id: UUID, username: st
     return row, secret
 
 
-async def resolve_browser_session(request):
-    deployment = resolve_deployment(settings)
+async def resolve_browser_session(request, *, deployment=None):
+    deployment = deployment if deployment is not None else deployment_from_request(request, settings)
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
     parsed = parse_session_cookie_value(extract_session_cookie(request))
@@ -222,17 +224,31 @@ async def maybe_rotate_browser_session_cookie(session_row):
     return None
 
 
-def session_state_for_client(session_row, *, client_id: str, redirect_uri: str) -> str | None:
+def session_state_for_client(session_row, *, client_id: str, redirect_uri: str, deployment=None, issuer: str | None = None) -> str | None:
     if session_row is None:
         return None
-    deployment = resolve_deployment(settings)
+    deployment = deployment if deployment is not None else resolve_deployment(settings)
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
     salt = getattr(session_row, 'session_state_salt', None) or new_session_state_salt()
-    return compute_session_state(client_id=client_id, redirect_uri=redirect_uri, session_id=session_row.id, salt=salt)
+    return compute_session_state(
+        client_id=client_id,
+        redirect_uri=redirect_uri,
+        session_id=session_row.id,
+        salt=salt,
+        issuer=issuer or getattr(deployment, "issuer", None),
+    )
 
 
-def validate_session_state_for_client(session_row, *, presented_session_state: str | None, client_id: str, redirect_uri: str) -> SessionStateValidation:
+def validate_session_state_for_client(
+    session_row,
+    *,
+    presented_session_state: str | None,
+    client_id: str,
+    redirect_uri: str,
+    deployment=None,
+    issuer: str | None = None,
+) -> SessionStateValidation:
     if session_row is None:
         return SessionStateValidation(
             valid=False,
@@ -247,6 +263,7 @@ def validate_session_state_for_client(session_row, *, presented_session_state: s
         redirect_uri=redirect_uri,
         session_id=session_row.id,
         salt=getattr(session_row, 'session_state_salt', None),
+        issuer=issuer or getattr(deployment, "issuer", None),
     )
 
 
@@ -258,8 +275,9 @@ async def terminate_browser_session(session_id: UUID, **kwargs):
     return await _persistence().terminate_session_async(session_id, **kwargs)
 
 
-def describe() -> dict[str, object]:
-    deployment = resolve_deployment(settings)
+def describe(*, request=None, deployment=None) -> dict[str, object]:
+    if deployment is None:
+        deployment = deployment_from_request(request, settings) if request is not None else resolve_deployment(settings)
     return {
         "label": OWNER.label,
         "title": OWNER.title,

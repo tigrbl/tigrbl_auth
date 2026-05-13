@@ -10,7 +10,7 @@ from typing import Any, Final
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
 
 try:  # dependency-light import path for checkpoint evidence generation
@@ -243,8 +243,17 @@ async def validate_logout_request(
     )
 
 
-async def build_logout_plan(*, session_row, client_id: UUID | None, post_logout_redirect_uri: str | None, state: str | None, reason: str = 'logout', metadata: dict[str, Any] | None = None):
-    deployment = resolve_deployment(settings)
+async def build_logout_plan(
+    *,
+    session_row,
+    client_id: UUID | None,
+    post_logout_redirect_uri: str | None,
+    state: str | None,
+    reason: str = 'logout',
+    metadata: dict[str, Any] | None = None,
+    deployment=None,
+):
+    deployment = deployment if deployment is not None else resolve_deployment(settings)
     persistence = _persistence()
     now = datetime.now(timezone.utc).replace(microsecond=0)
     existing = await persistence.get_latest_logout_for_session_async(session_row.id)
@@ -292,14 +301,14 @@ async def build_logout_plan(*, session_row, client_id: UUID | None, post_logout_
         frontchannel = await _frontchannel_builder()(
             client_id=client_id,
             sid=str(session_row.id),
-            iss=settings.issuer,
+            iss=str(deployment.issuer or settings.issuer),
             logout_id=logout.id,
         )
         backchannel = await _backchannel_builder()(
             client_id=client_id,
             sid=str(session_row.id),
             sub=str(session_row.user_id),
-            iss=settings.issuer,
+            iss=str(deployment.issuer or settings.issuer),
             logout_id=logout.id,
         )
     plan_meta = dict(logout.logout_metadata or {})
@@ -316,7 +325,9 @@ async def build_logout_plan(*, session_row, client_id: UUID | None, post_logout_
     return await persistence.update_logout_metadata_async(logout.id, metadata=plan_meta) or logout
 
 
-def describe() -> dict[str, object]:
+def describe(*, request=None, deployment=None) -> dict[str, object]:
+    if deployment is None and request is not None:
+        deployment = deployment_from_request(request, settings)
     return {
         'label': OWNER.label,
         'title': OWNER.title,
@@ -325,8 +336,8 @@ def describe() -> dict[str, object]:
         'id_token_hint_validation_supported': True,
         'post_logout_redirect_uri_validation_supported': True,
         'idempotent_replay_protection': True,
-        'frontchannel_logout_supported': True,
-        'backchannel_logout_supported': True,
+        'frontchannel_logout_supported': bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_frontchannel_logout")) if deployment is not None else True,
+        'backchannel_logout_supported': bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_backchannel_logout")) if deployment is not None else True,
         'notes': OWNER.notes,
     }
 
