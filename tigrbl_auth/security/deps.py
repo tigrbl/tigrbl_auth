@@ -26,7 +26,7 @@ from tigrbl_auth.framework import (
     AsyncSession,
     select,
 )
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request
 
 from tigrbl_auth.services.auth_backends import (
     ApiKeyBackend,
@@ -160,21 +160,20 @@ async def get_current_principal(  # type: ignore[override]
         user = await _user_from_jwt(token, db, cert_thumbprint=cert_thumbprint)
         if user:
             proof = dpop if isinstance(dpop, str) and dpop.strip() else None
-            if cert_thumbprint or proof:
-                try:
-                    payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
-                    verify_access_token_sender_constraint(
-                        request,
-                        payload,
-                        resolve_deployment(settings),
-                        access_token=token,
-                        dpop_proof=proof,
-                    )
-                except InvalidTokenError:
-                    raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid token")
-                except Exception as exc:
-                    detail = getattr(exc, 'description', 'invalid token')
-                    raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail) from exc
+            try:
+                payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
+                verify_access_token_sender_constraint(
+                    request,
+                    payload,
+                    deployment_from_request(request, settings),
+                    access_token=token,
+                    dpop_proof=proof,
+                )
+            except InvalidTokenError:
+                raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid token")
+            except Exception as exc:
+                detail = getattr(exc, 'description', 'invalid token')
+                raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail) from exc
             return user
 
 

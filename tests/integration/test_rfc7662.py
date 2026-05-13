@@ -1,7 +1,33 @@
 """Tests for RFC 7662 token introspection compliance."""
 
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, BasicAuth
+from uuid import uuid4
+
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from tigrbl_auth.orm import Client, Tenant
+from tigrbl_auth.standards.oauth2.introspection import register_token, reset_tokens
+
+
+async def _create_tenant_and_client(db_session: AsyncSession) -> Client:
+    suffix = uuid4().hex[:8]
+    tenant = Tenant(
+        slug=f"introspect-{suffix}",
+        name=f"Introspect {suffix}",
+        email=f"introspect-{suffix}@example.com",
+    )
+    db_session.add(tenant)
+    await db_session.commit()
+    client = Client.new(
+        tenant_id=tenant.id,
+        client_id=str(uuid4()),
+        client_secret="introspect-secret",
+        redirects=["https://client.example/callback"],
+    )
+    db_session.add(client)
+    await db_session.commit()
+    return client
 
 
 RFC7662_SPEC = """
@@ -22,22 +48,36 @@ RFC 7662 - OAuth 2.0 Token Introspection
 @pytest.mark.integration
 @pytest.mark.asyncio
 async def test_introspect_valid_api_key(
-    async_client: AsyncClient, test_api_key, enable_rfc7662
+    async_client: AsyncClient, enable_rfc7662, db_session: AsyncSession
 ):
     """Valid API key should yield an active introspection response."""
-    response = await async_client.post(
-        "/introspect", data={"token": test_api_key._test_raw_key}
-    )
-    assert response.status_code == 200
-    body = response.json()
-    assert body.get("active") is True
+    client = await _create_tenant_and_client(db_session)
+    register_token("active-introspection-token")
+    try:
+        response = await async_client.post(
+            "/introspect",
+            data={"token": "active-introspection-token"},
+            auth=BasicAuth(str(client.id), "introspect-secret"),
+        )
+        assert response.status_code == 200
+        body = response.json()
+        assert body.get("active") is True
+    finally:
+        reset_tokens()
 
 
 @pytest.mark.integration
 @pytest.mark.asyncio
-async def test_introspect_invalid_api_key(async_client: AsyncClient, enable_rfc7662):
+async def test_introspect_invalid_api_key(
+    async_client: AsyncClient, enable_rfc7662, db_session: AsyncSession
+):
     """Invalid API key should yield inactive response per RFC 7662."""
-    response = await async_client.post("/introspect", data={"token": "does-not-exist"})
+    client = await _create_tenant_and_client(db_session)
+    response = await async_client.post(
+        "/introspect",
+        data={"token": "does-not-exist"},
+        auth=BasicAuth(str(client.id), "introspect-secret"),
+    )
     assert response.status_code == 200
     body = response.json()
     assert body.get("active") is False

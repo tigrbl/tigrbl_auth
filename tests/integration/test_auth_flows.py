@@ -429,7 +429,11 @@ class TestIntrospectionEndpoint:
             client_id=str(client.id),
         )
 
-        response = await async_client.post("/introspect", data={"token": access_token})
+        response = await async_client.post(
+            "/introspect",
+            data={"token": access_token},
+            auth=BasicAuth(str(client.id), "client-secret"),
+        )
 
         assert response.status_code == status.HTTP_200_OK
         payload = response.json()
@@ -438,9 +442,15 @@ class TestIntrospectionEndpoint:
         assert payload["tid"] == str(tenant.id)
 
     async def test_introspect_invalid_token(
-        self, async_client: AsyncClient, enable_rfc7662
+        self, async_client: AsyncClient, db_session: AsyncSession, enable_rfc7662
     ) -> None:
-        response = await async_client.post("/introspect", data={"token": "invalid-token"})
+        tenant = await _create_tenant(db_session, "introspect-invalid")
+        client = await _create_confidential_client(db_session, tenant, secret="invalid-token-secret")
+        response = await async_client.post(
+            "/introspect",
+            data={"token": "invalid-token"},
+            auth=BasicAuth(str(client.id), "invalid-token-secret"),
+        )
 
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == {"active": False}

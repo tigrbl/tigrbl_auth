@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from tigrbl_auth.framework import AsyncSession, Depends, Header, HTTPException, Request, select, status
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.security.context import principal_var
 from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
@@ -87,7 +87,7 @@ async def get_current_principal(
             verify_access_token_sender_constraint(
                 request,
                 payload,
-                resolve_deployment(settings),
+                deployment_from_request(request, settings),
                 access_token=token,
                 dpop_proof=dpop,
             )

@@ -74,6 +74,10 @@ async def test_service_key_introspection_flow(running_app):
         assert key_resp.status_code == 201
         api_key = key_resp.json()["api_key"]
 
-        intro_resp = await client.post(f"{base}/introspect", data={"token": api_key})
+        intro_resp = await client.post(
+            f"{base}/introspect",
+            data={"token": api_key},
+            auth=("clientapp1", "secret"),
+        )
         assert intro_resp.status_code == 200
         assert intro_resp.json().get("active") is True

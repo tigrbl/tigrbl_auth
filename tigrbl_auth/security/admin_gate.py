@@ -111,8 +111,8 @@ def _bootstrap_digest(settings_obj: object | None, enabled: bool) -> str | None:
         pass
     logger.warning(
         "Generated bootstrap admin API key for local control-plane surfaces. "
-        "Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key=%s",
-        key,
+        "Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=%s",
+        digest,
     )
     return digest
 

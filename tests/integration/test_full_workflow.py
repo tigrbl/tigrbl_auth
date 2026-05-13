@@ -66,6 +66,7 @@ async def test_service_key_introspection_flow(running_app, enable_rfc7662):
             headers=headers,
         )
         assert client_resp.status_code == 201
+        client_id = client_resp.json()["id"]
 
         service_resp = await client.post(
             f"{base}/service",
@@ -84,7 +85,9 @@ async def test_service_key_introspection_flow(running_app, enable_rfc7662):
         api_key = key_resp.json()["api_key"]
 
         introspect_resp = await client.post(
-            f"{base}/introspect", data={"token": api_key}
+            f"{base}/introspect",
+            data={"token": api_key},
+            auth=(client_id, "secret"),
         )
         assert introspect_resp.status_code == 200
         data = introspect_resp.json()

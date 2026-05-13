@@ -9,6 +9,8 @@ still execute.
 from __future__ import annotations
 
 from http import HTTPStatus as _HTTPStatus
+import base64
+import inspect
 from typing import Any, Dict, Final
 from urllib.parse import parse_qs
 
@@ -17,7 +19,26 @@ from tigrbl_auth.config.settings import settings
 try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_auth.api.rest.schemas import IntrospectOut
     from tigrbl_auth.api.rest.shared import _require_tls
+    from tigrbl_auth.config.deployment import deployment_from_request
     from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_auth.framework import AsyncSession, Depends
+    from tigrbl_auth.ops.token import _load_client, _registered_token_endpoint_auth_method
+    from tigrbl_auth.services.persistence import (
+        introspect_token as _introspect_token,
+        record_token as _record_token,
+        reset_token_state as _reset_token_state,
+        unregister_token as _unregister_token,
+    )
+    from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+        PRIVATE_KEY_JWT_AUTH_METHOD,
+        authenticate_client_assertion,
+    )
+    from tigrbl_auth.standards.oauth2.mtls import (
+        SUPPORTED_MTLS_AUTH_METHODS,
+        authenticate_mtls_client,
+        presented_certificate_thumbprint,
+    )
+    from tigrbl_auth.tables.engine import get_db
     from tigrbl_auth.services.persistence import (
         introspect_token as _introspect_token,
         record_token as _record_token,
@@ -26,8 +47,36 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
     )
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     IntrospectOut = dict  # type: ignore[assignment]
+    AsyncSession = Any  # type: ignore[assignment]
+
+    def Depends(dep: Any) -> Any:  # type: ignore[misc]
+        return dep
+
+    def get_db() -> Any:
+        return None
 
     def _require_tls(_request: Any) -> None:
+        return None
+
+    def deployment_from_request(_request: Any, _fallback_settings: object | None = None) -> Any:
+        return None
+
+    async def _load_client(_db: Any, _client_id: str) -> tuple[Any, Any]:
+        return None, None
+
+    def _registered_token_endpoint_auth_method(_registration: Any) -> str:
+        return "client_secret_basic"
+
+    PRIVATE_KEY_JWT_AUTH_METHOD = "private_key_jwt"
+    SUPPORTED_MTLS_AUTH_METHODS = ("tls_client_auth", "self_signed_tls_client_auth")
+
+    def authenticate_client_assertion(**_kwargs: Any) -> dict[str, object]:
+        raise ValueError("unsupported client_assertion_type")
+
+    def authenticate_mtls_client(*_args: Any, **_kwargs: Any) -> Any:
+        raise ValueError("client certificate thumbprint required for mTLS client authentication")
+
+    def presented_certificate_thumbprint(_request: Any) -> str | None:
         return None
 
     class HTTPException(Exception):
@@ -103,6 +152,114 @@ router = api
 _FALLBACK_TOKENS: dict[str, dict[str, Any]] = {}
 
 
+def _header(request: Any, name: str) -> str | None:
+    headers = getattr(request, "headers", {}) or {}
+    if hasattr(headers, "get"):
+        return headers.get(name) or headers.get(name.lower())
+    return None
+
+
+def _introspection_endpoint_audiences(request: Any) -> set[str]:
+    deployment = deployment_from_request(request, settings)
+    issuer = str(getattr(deployment, "issuer", None) or settings.issuer).rstrip("/")
+    audiences = {
+        issuer,
+        f"{issuer}/introspect",
+        f"{issuer}/token",
+    }
+    return {value for value in audiences if value}
+
+
+async def _authorize_introspection_caller(
+    request: Any,
+    form_data: dict[str, Any],
+    db: AsyncSession,
+) -> None:
+    auth = _header(request, "Authorization") or ""
+    client_assertion = str(form_data.get("client_assertion") or "").strip()
+    client_assertion_type = str(form_data.get("client_assertion_type") or "").strip()
+    client_id = None
+    client_secret = None
+
+    if auth.startswith("Basic "):
+        try:
+            decoded = base64.b64decode(auth.split()[1]).decode()
+            client_id, client_secret = decoded.split(":", 1)
+        except Exception as exc:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+    else:
+        client_id = str(form_data.get("client_id") or "").strip() or None
+        client_secret = str(form_data.get("client_secret") or "").strip() or None
+
+    if not client_id and not client_assertion:
+        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "authenticated caller required")
+
+    if client_assertion and not client_id:
+        try:
+            claims = authenticate_client_assertion(
+                client_assertion_type=client_assertion_type,
+                client_assertion=client_assertion,
+                audience=_introspection_endpoint_audiences(request),
+                client_id=None,
+            )
+        except ValueError as exc:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+        client_id = str(claims.get("iss") or "").strip() or None
+
+    if not client_id:
+        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "authenticated caller required")
+
+    client, registration = await _load_client(db, str(client_id))
+    if client is None:
+        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+
+    registered_auth_method = _registered_token_endpoint_auth_method(registration)
+    raw_registration_metadata = getattr(registration, "registration_metadata", None) if registration is not None else None
+    registration_metadata = dict(raw_registration_metadata) if isinstance(raw_registration_metadata, dict) else {}
+
+    if client_assertion:
+        if registered_auth_method != PRIVATE_KEY_JWT_AUTH_METHOD:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+        try:
+            authenticate_client_assertion(
+                client_assertion_type=client_assertion_type,
+                client_assertion=client_assertion,
+                audience=_introspection_endpoint_audiences(request),
+                client_id=str(client.id),
+                token_endpoint_auth_method=registered_auth_method,
+            )
+        except ValueError as exc:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+        return None
+
+    if registered_auth_method in SUPPORTED_MTLS_AUTH_METHODS:
+        try:
+            authenticate_mtls_client(
+                registration_metadata,
+                presented_certificate_thumbprint(request),
+                token_endpoint_auth_method=registered_auth_method,
+            )
+        except ValueError as exc:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client") from exc
+        return None
+
+    if registered_auth_method == "client_secret_post":
+        if not client_secret:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+    elif registered_auth_method == "client_secret_basic":
+        if not auth.startswith("Basic ") or not client_secret:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+    else:
+        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+
+    secret_valid = client.verify_secret(client_secret)
+    if inspect.isawaitable(secret_valid):
+        secret_valid = await secret_valid
+    if not secret_valid:
+        raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
+    return None
+
+
 def register_token(token: str, claims: Dict[str, Any] | None = None) -> str:
     payload = dict(claims or {})
     _FALLBACK_TOKENS[token] = payload
@@ -129,8 +286,8 @@ def reset_tokens() -> None:
 
 
 @api.route("/introspect", methods=["POST"], response_model=IntrospectOut)
-async def introspect(request: Request):
-    _require_tls(request)
+async def introspect(request: Request, db: AsyncSession = Depends(get_db)):
+    _require_tls(request, deployment=deployment_from_request(request, settings))
     if not settings.enable_rfc7662:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "introspection disabled")
     body = getattr(request, "body", b"") or b""
@@ -139,6 +296,11 @@ async def introspect(request: Request):
     token = token_values[0] if token_values else None
     if not token:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "token parameter required")
+    normalized_form = {
+        key: values[-1] if isinstance(values, list) and values else values
+        for key, values in form_data.items()
+    }
+    await _authorize_introspection_caller(request, normalized_form, db)
     return introspect_token(token)
 
 

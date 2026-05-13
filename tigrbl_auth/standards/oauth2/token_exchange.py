@@ -8,6 +8,7 @@ from urllib.parse import parse_qs
 
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.errors import InvalidTokenError
 from tigrbl_auth.services.token_service import JWTCoder
 from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
@@ -135,7 +136,7 @@ def _actor_claim(actor_claims: dict[str, Any] | None) -> dict[str, str] | None:
 
 @api.route('/token/exchange', methods=['POST'])
 async def token_exchange(request: Request, dpop: str | None = Header(None, alias='DPoP')) -> dict[str, Any]:
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled('enable_rfc8693'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, f'RFC 8693 disabled: {RFC8693_SPEC_URL}')
     data = _parse_form(request)
@@ -190,7 +191,7 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
         'act': actor,
         'subject_token_type': str(subject_token_type),
         'requested_token_type': requested_token_type,
-        'issuer': ISSUER,
+        'issuer': str(deployment.issuer or ISSUER),
         'audience': audience,
         'exchange_mode': exchange_mode,
         'source_issuer': subject_claims.get('iss'),

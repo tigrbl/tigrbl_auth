@@ -175,7 +175,11 @@ async def test_default_endpoints_cover_runtime_behavior(
     userinfo_response = await async_client.get("/userinfo")
     assert userinfo_response.status_code == status.HTTP_401_UNAUTHORIZED
 
-    introspect_response = await async_client.post("/introspect", data={"token": "unknown-token"})
+    introspect_response = await async_client.post(
+        "/introspect",
+        data={"token": "unknown-token"},
+        auth=(client_id, registration["client_secret"]),
+    )
     assert introspect_response.status_code == status.HTTP_200_OK
     assert introspect_response.json() == {"active": False}
 

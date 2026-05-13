@@ -7,7 +7,7 @@ from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.errors import InvalidTokenError
 from tigrbl_auth.services.token_service import (
@@ -262,8 +262,8 @@ def _token_pair_payload(access: str, refresh: str | None, *, token_type: str, id
 
 
 async def token_request(*, request, db):
-    _require_tls(request)
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
+    _require_tls(request, deployment=deployment)
     data, resources = await _parse_request_form(request)
     auth = _header(request, 'Authorization')
     dpop_proof = dpop_proof_from_request(request)
@@ -390,7 +390,7 @@ async def token_request(*, request, db):
         return _json_error('invalid_dpop_proof', status_code=status.HTTP_400_BAD_REQUEST)
 
     def _jwt_kwargs(*, scope: str | None = None, audience: str | None = None, extra: dict | None = None) -> dict:
-        payload: dict = {'issuer': ISSUER}
+        payload: dict = {'issuer': str(deployment.issuer or ISSUER)}
         if scope:
             payload['scope'] = scope
         effective_audience = audience
@@ -502,7 +502,13 @@ async def token_request(*, request, db):
                 extra_claims['email'] = user_obj.email if user_obj else ''
             if any(k in idc for k in ('name', 'preferred_username')):
                 extra_claims['name'] = user_obj.username if user_obj else ''
-        id_token = await mint_id_token(sub=str(auth_code.user_id), aud=parsed.client_id, nonce=auth_code.nonce or 'nonce', issuer=ISSUER, **extra_claims)
+        id_token = await mint_id_token(
+            sub=str(auth_code.user_id),
+            aud=parsed.client_id,
+            nonce=auth_code.nonce or 'nonce',
+            issuer=str(deployment.issuer or ISSUER),
+            **extra_claims,
+        )
         await db.delete(auth_code)
         await db.commit()
         return _token_pair_payload(access, refresh, token_type=sender_constraint.token_type, id_token=id_token)

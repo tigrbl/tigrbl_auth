@@ -8,7 +8,7 @@ from tigrbl_auth.framework import HTTPException, Request, status
 from tigrbl_auth.services.token_service import JWTCoder
 from tigrbl_auth.services.auth_backends import PasswordBackend
 from tigrbl_auth.config.settings import settings
-from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_auth.standards.oidc.frontchannel_logout import mark_frontchannel_complete
 from tigrbl_auth.standards.oidc.backchannel_logout import mark_backchannel_complete
 from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
@@ -66,7 +66,7 @@ def allowed_grant_types(settings_obj: object | None = None) -> set[str]:
     return set(policy.allowed_grant_types)
 
 
-def _require_tls(request: Request) -> None:
+def _require_tls(request: Request, deployment: ResolvedDeployment | None = None) -> None:
     scope = getattr(request, "scope", {})
     scheme = scope.get("scheme") if isinstance(scope, dict) else None
     if not scheme:
@@ -75,7 +75,8 @@ def _require_tls(request: Request) -> None:
             scheme = url.scheme if hasattr(url, "scheme") else str(url).split(":", 1)[0]
         except Exception:
             scheme = "http"
-    if settings.require_tls and scheme != "https":
+    active_deployment = deployment or resolve_deployment(settings)
+    if active_deployment.flag_enabled("require_tls") and scheme != "https":
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "tls_required"})
 
 

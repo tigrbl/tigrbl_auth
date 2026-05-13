@@ -8,6 +8,7 @@ from uuid import UUID, uuid4
 
 from tigrbl_auth.framework import HTMLResponse, HTTPException, RedirectResponse, select, status
 from tigrbl_auth.api.rest.shared import _jwt, _require_tls
+from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.http.cookies import issue_session_cookie
@@ -91,8 +92,8 @@ async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[st
 
 
 async def authorize_request(*, request, db, params: dict[str, Any]):
-    _require_tls(request)
-    deployment = resolve_deployment(settings)
+    deployment = deployment_from_request(request, settings)
+    _require_tls(request, deployment=deployment)
     policy = runtime_security_profile(deployment)
 
     params = dict(params)

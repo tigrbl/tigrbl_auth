@@ -1,26 +1,29 @@
-from __future__ import annotations
+"""Compatibility facade for canonical RFC 7662 route exports."""
 
-from urllib.parse import parse_qs
+from tigrbl_auth.standards.oauth2.introspection import (
+    RFC7662_SPEC_URL,
+    _authorize_introspection_caller,
+    api,
+    include_introspection_endpoint,
+    include_rfc7662,
+    introspect,
+    introspect_token,
+    register_token,
+    reset_tokens,
+    router,
+    unregister_token,
+)
 
-from tigrbl_auth.framework import TigrblRouter, HTTPException, Request, status
-
-from ..runtime_cfg import settings
-from ..routers.schemas import IntrospectOut
-from ..routers.shared import _require_tls
-from ..rfc.rfc7662 import introspect_token
-
-api = TigrblRouter()
-router = api
-
-
-@api.route("/introspect", methods=["POST"], response_model=IntrospectOut)
-async def introspect(request: Request):
-    _require_tls(request)
-    if not settings.enable_rfc7662:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "introspection disabled")
-    form_data = parse_qs((request.body or b"").decode("utf-8"), keep_blank_values=True)
-    token_values = form_data.get("token") or []
-    token = token_values[0] if token_values else None
-    if not token:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, "token parameter required")
-    return introspect_token(token)
+__all__ = [
+    "RFC7662_SPEC_URL",
+    "api",
+    "router",
+    "register_token",
+    "unregister_token",
+    "introspect_token",
+    "reset_tokens",
+    "introspect",
+    "include_introspection_endpoint",
+    "include_rfc7662",
+    "_authorize_introspection_caller",
+]
