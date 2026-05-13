@@ -8,8 +8,8 @@ generated_from:
 - tigrbl_auth.config.deployment
 - compliance/claims/fapi-atomic-claims.yaml
 summary:
-  claim_count: 395
-  atomic_feature_claim_count: 389
+  claim_count: 396
+  atomic_feature_claim_count: 390
   fapi_atomic_claim_count: 6
 claims:
 - id: cli-flag:access_log
@@ -108,16 +108,6 @@ claims:
   kind: cli-flag
   title: --color
   description: Color policy for terminal output.
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-  source: tigrbl_auth.cli.metadata
-- id: cli-flag:config
-  feature_id: cli-flag:config
-  kind: cli-flag
-  title: --config
-  description: Path to the runtime/configuration file.
   scope: core
   targets:
   - CLI operator surface
@@ -538,7 +528,8 @@ claims:
   feature_id: cli-flag:profile
   kind: cli-flag
   title: --profile
-  description: Effective standards/compliance profile.
+  description: 'Runtime profile reference: packaged profile id or external YAML profile
+    path.'
   scope: core
   targets:
   - CLI operator surface
@@ -3369,6 +3360,33 @@ claims:
   required_flags:
   - enable_rfc7009
   source: tigrbl_auth.api.rest.routers.revoke:api
+- id: route:tenants-tenant-slug-well-known-jwks-json
+  feature_id: route:tenants-tenant-slug-well-known-jwks-json
+  kind: public-route
+  title: /tenants/{tenant_slug}/.well-known/jwks.json
+  description: Tenant-scoped JSON Web Key Set
+  scope: core
+  targets:
+  - RFC 7517
+  - RFC 8615
+  required_flags:
+  - enable_rfc7517
+  - enable_rfc8615
+  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+- id: route:tenants-tenant-slug-well-known-openid-configuration
+  feature_id: route:tenants-tenant-slug-well-known-openid-configuration
+  kind: public-route
+  title: /tenants/{tenant_slug}/.well-known/openid-configuration
+  description: Tenant-scoped OIDC discovery document
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  required_flags:
+  - enable_oidc_discovery
+  - enable_rfc8615
+  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
 - id: route:token
   feature_id: route:token
   kind: public-route

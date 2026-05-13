@@ -86,15 +86,15 @@
 - runtime_application_hash_invariant: `True`
 - runtime_runner_availability_count: `1`
 - runtime_profile_report_present: `True`
-- runtime_profile_ready_count: `1`
-- runtime_profile_missing_count: `2`
+- runtime_profile_ready_count: `3`
+- runtime_profile_missing_count: `0`
 - runtime_profile_invalid_count: `0`
 - runtime_profile_application_probe_passed: `True`
 - runtime_profile_surface_probe_passed: `True`
 - runtime_profile_surface_probe_endpoint_count: `4`
 - runtime_profile_surface_probe_passed_count: `4`
 - runtime_profile_surface_probe_failed_count: `0`
-- runtime_profile_serve_check_passed_count: `1`
+- runtime_profile_serve_check_passed_count: `3`
 - runtime_profile_execution_probe_complete: `True`
 - runtime_profile_placeholder_supported_runner_count: `0`
 - runtime_profile_declared_ci_installable_runner_count: `3`
@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `.pytest-tmp/operator-plane-state3/tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `.pytest-tmp/operator-plane-state165/tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -124,28 +124,28 @@
 - runner_contract_hash_invariance_passed: `True`
 - no_fastapi_starlette_passed: `True`
 - feature_completeness_capability_count: `10`
-- feature_completeness_passed_capability_count: `8`
-- feature_completeness_failed_capability_count: `2`
+- feature_completeness_passed_capability_count: `9`
+- feature_completeness_failed_capability_count: `1`
 - fully_featured_package_boundary_now: `False`
 - feature_release_verify_verb_present: `True`
 - certification_evidence_index_passed: `False`
-- certification_evidence_claim_count: `395`
+- certification_evidence_claim_count: `396`
 - certification_evidence_partition_count: `7`
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `57`
+- release_evidence_dirty_checkout_path_count: `44`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
-- validated_execution_artifact_count: `0`
+- validated_execution_artifact_count: `15`
 - required_validated_inventory_count: `31`
-- validated_inventory_present_count: `0`
+- validated_inventory_present_count: `15`
 - validated_inventory_complete: `False`
 - validated_runtime_matrix_expected_count: `14`
-- validated_runtime_matrix_passed_count: `0`
-- validated_clean_room_matrix_green: `False`
+- validated_runtime_matrix_passed_count: `14`
+- validated_clean_room_matrix_green: `True`
 - validated_test_lane_expected_count: `15`
 - validated_test_lane_passed_count: `0`
 - validated_in_scope_test_lanes_green: `False`
@@ -160,4 +160,4 @@
 
 ## Details
 
-- targets: `ASGI 3 application package, Bootstrap and migration lifecycle, CLI operator surface, Import/export portability, Key lifecycle and JWKS publication, OIDC Core 1.0, OIDC Discovery 1.0, OpenAPI 3.1 / 3.2 compatible public contract, RFC 6749, RFC 6750, RFC 7515, RFC 7516, RFC 7517, RFC 7518, RFC 7519, RFC 7636, RFC 8414, RFC 8615, Release bundle and signature verification, Runner profile: Hypercorn, Runner profile: Tigrcorn, Runner profile: Uvicorn, OIDC RP-Initiated Logout, OIDC Session Management, OIDC UserInfo, OpenRPC 1.4.x admin/control-plane contract, RFC 6265, RFC 7009, RFC 7521, RFC 7523, RFC 7591, RFC 7592, RFC 7662, RFC 8252, RFC 9068, RFC 9207, RFC 9728, OIDC Back-Channel Logout, OIDC Front-Channel Logout, RFC 8628, RFC 8693, RFC 8705, RFC 8707, RFC 9101, RFC 9126, RFC 9396, RFC 9449, RFC 9700`
+- targets: `ASGI 3 application package, Bootstrap and migration lifecycle, CLI operator surface, Import/export portability, Key lifecycle and JWKS publication, OIDC Core 1.0, OIDC Discovery 1.0, OIDC Session Management, OpenAPI 3.1 / 3.2 compatible public contract, RFC 6265, RFC 6749, RFC 6750, RFC 7515, RFC 7516, RFC 7517, RFC 7518, RFC 7519, RFC 7636, RFC 8414, RFC 8615, Release bundle and signature verification, Runner profile: Hypercorn, Runner profile: Tigrcorn, Runner profile: Uvicorn, OIDC RP-Initiated Logout, OIDC UserInfo, OpenRPC 1.4.x admin/control-plane contract, RFC 7009, RFC 7521, RFC 7523, RFC 7591, RFC 7592, RFC 7662, RFC 8252, RFC 9068, RFC 9207, RFC 9728, OIDC Back-Channel Logout, OIDC Front-Channel Logout, RFC 8628, RFC 8693, RFC 8705, RFC 8707, RFC 9101, RFC 9126, RFC 9396, RFC 9449, RFC 9700`

@@ -4,5 +4,8 @@
   "profile_label": "baseline",
   "tenant_slug": "tenant-a",
   "issuer": "https://authn.example.com/tenants/tenant-a",
+  "jwks_uri": "https://authn.example.com/tenants/tenant-a/.well-known/jwks.json",
+  "subject_namespace": "tenant-a:subjects",
+  "signing_scope": "tenant:tenant-a",
   "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts"
 }

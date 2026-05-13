@@ -108,17 +108,6 @@ cli-flag:color:
 - tests/unit/test_cli_surface_checkpoint.py
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_runtime_launcher.py
-cli-flag:config:
-- tests/conformance/operator/test_cli_bootstrap_migrate.py
-- tests/conformance/operator/test_cli_import_export.py
-- tests/conformance/operator/test_cli_keys_lifecycle.py
-- tests/conformance/operator/test_cli_resource_lifecycle.py
-- tests/conformance/operator/test_cli_serve_runtime.py
-- tests/unit/test_claim_boundary_rebaseline.py
-- tests/unit/test_cli_contract.py
-- tests/unit/test_cli_surface_checkpoint.py
-- tests/unit/test_operator_service_layer.py
-- tests/unit/test_runtime_launcher.py
 cli-flag:cookies:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
@@ -2816,6 +2805,27 @@ route:revoke:
 - tests/integration/test_migration_upgrade_downgrade_safety.py
 - tests/integration/test_persistence_lifecycle_durability.py
 - tests/unit/test_public_route_contracts.py
+route:tenants-tenant-slug-well-known-jwks-json:
+- tests/conformance/baseline/test_rfc7517_jwk.py
+- tests/conformance/production/test_rfc8615_well_known_uris.py
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/unit/test_jwks_rotation.py
+- tests/unit/test_well_known_endpoints_behavior.py
+route:tenants-tenant-slug-well-known-openid-configuration:
+- tests/conformance/baseline/test_openid_configuration.py
+- tests/conformance/hardening/test_rfc9700_security_bcp.py
+- tests/conformance/production/test_rfc8615_well_known_uris.py
+- tests/integration/test_oidc_endpoints.py
+- tests/integration/test_profile_surface_and_contract_alignment.py
+- tests/integration/test_rfc8414_metadata.py
+- tests/interop/test_peer_counterpart_catalog.py
+- tests/interop/test_peer_matrix_artifacts.py
+- tests/interop/test_tier4_promotion_fail_closed.py
+- tests/negative/test_hardening_runtime_enforcement.py
+- tests/unit/test_hardening_cluster_c.py
+- tests/unit/test_profile_discovery_runtime.py
+- tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+- tests/unit/test_well_known_endpoints_behavior.py
 route:token:
 - tests/conformance/baseline/test_rfc6749_auth_flow_endpoints.py
 - tests/conformance/baseline/test_rfc6749_token_endpoint.py

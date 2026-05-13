@@ -28,6 +28,7 @@ enable_oidc_discovery:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-openid-configuration
 - target:oidc-discovery-1-0
 enable_oidc_frontchannel_logout:
@@ -115,6 +116,7 @@ enable_rfc7517:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:tenants-tenant-slug-well-known-jwks-json
 - route:well-known-jwks-json
 - target:rfc-7517
 enable_rfc7518:
@@ -212,6 +214,8 @@ enable_rfc8615:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:tenants-tenant-slug-well-known-jwks-json
+- route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-jwks-json
 - route:well-known-oauth-authorization-server
 - route:well-known-oauth-protected-resource

@@ -7,7 +7,7 @@ generated_from:
 - tigrbl_auth.cli.metadata
 - tigrbl_auth.config.deployment
 summary:
-  feature_count: 389
+  feature_count: 390
   tracked_core_target_count: 48
   tracked_extension_target_count: 5
   settings_backed_flag_count: 68
@@ -98,15 +98,6 @@ features:
   kind: cli-flag
   title: --color
   description: Color policy for terminal output.
-  source: tigrbl_auth.cli.metadata
-  scope: core
-  targets:
-  - CLI operator surface
-  required_flags: []
-- id: cli-flag:config
-  kind: cli-flag
-  title: --config
-  description: Path to the runtime/configuration file.
   source: tigrbl_auth.cli.metadata
   scope: core
   targets:
@@ -485,7 +476,8 @@ features:
 - id: cli-flag:profile
   kind: cli-flag
   title: --profile
-  description: Effective standards/compliance profile.
+  description: 'Runtime profile reference: packaged profile id or external YAML profile
+    path.'
   source: tigrbl_auth.cli.metadata
   scope: core
   targets:
@@ -2775,6 +2767,39 @@ features:
   - /revoke
   methods:
   - POST
+- id: route:tenants-tenant-slug-well-known-jwks-json
+  kind: public-route
+  title: /tenants/{tenant_slug}/.well-known/jwks.json
+  description: Tenant-scoped JSON Web Key Set
+  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  scope: core
+  targets:
+  - RFC 7517
+  - RFC 8615
+  required_flags:
+  - enable_rfc7517
+  - enable_rfc8615
+  paths:
+  - /tenants/{tenant_slug}/.well-known/jwks.json
+  methods:
+  - GET
+- id: route:tenants-tenant-slug-well-known-openid-configuration
+  kind: public-route
+  title: /tenants/{tenant_slug}/.well-known/openid-configuration
+  description: Tenant-scoped OIDC discovery document
+  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  required_flags:
+  - enable_oidc_discovery
+  - enable_rfc8615
+  paths:
+  - /tenants/{tenant_slug}/.well-known/openid-configuration
+  methods:
+  - GET
 - id: route:token
   kind: public-route
   title: /token
@@ -3874,6 +3899,7 @@ features:
   - enable_oidc_session_management
   - surface_public_enabled
   profiles:
+  - baseline
   - production
   - hardening
   - peer-claim
@@ -3948,6 +3974,7 @@ features:
   - enable_oidc_session_management
   - surface_public_enabled
   profiles:
+  - baseline
   - production
   - hardening
   - peer-claim

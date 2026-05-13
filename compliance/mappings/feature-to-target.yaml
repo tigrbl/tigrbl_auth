@@ -18,8 +18,6 @@ cli-flag:checksum:
 - CLI operator surface
 cli-flag:color:
 - CLI operator surface
-cli-flag:config:
-- CLI operator surface
 cli-flag:cookies:
 - CLI operator surface
 cli-flag:curve:
@@ -749,6 +747,13 @@ route:register-client-id:
 - RFC 8252
 route:revoke:
 - RFC 7009
+route:tenants-tenant-slug-well-known-jwks-json:
+- RFC 7517
+- RFC 8615
+route:tenants-tenant-slug-well-known-openid-configuration:
+- OIDC Discovery 1.0
+- RFC 8615
+- RFC 9700
 route:token:
 - RFC 6749
 - RFC 6750

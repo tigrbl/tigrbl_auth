@@ -53,5 +53,7 @@
   ],
   "code_challenge_methods_supported": [
     "S256"
-  ]
+  ],
+  "tigrbl_auth_subject_namespace": "tenant-a:subjects",
+  "tigrbl_auth_signing_scope": "tenant:tenant-a"
 }

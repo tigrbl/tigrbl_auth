@@ -1,14 +1,13 @@
 {
   "passed": false,
   "failures": [
-    "serve the app under supported runners: The runtime boundary declares all supported runners, but this checkpoint still requires supported-matrix readiness evidence for a full pass.",
     "migrate up/down/reapply: Migration portability remains blocked until both SQLite and PostgreSQL preserve upgrade/downgrade/reapply evidence."
   ],
   "warnings": [],
   "summary": {
     "capability_count": 10,
-    "passed_capability_count": 8,
-    "failed_capability_count": 2,
+    "passed_capability_count": 9,
+    "failed_capability_count": 1,
     "fully_featured_package_boundary_now": false,
     "cli_metadata_single_source_passed": true,
     "required_release_verify_verb_present": true,
@@ -44,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84",
-        "database_path": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/operator_plane.sqlite3",
-        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/snapshots",
-        "log_root": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/logs",
+        "state_root": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4",
+        "database_path": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/operator_plane.sqlite3",
+        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/snapshots",
+        "log_root": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/logs/audit-events.jsonl",
-        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/logs/transactions.jsonl",
-        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state3/operator-state-01567ac1288ecf84/logs/activity.jsonl"
+        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/logs/audit-events.jsonl",
+        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/logs/transactions.jsonl",
+        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state165/operator-state-54a2db5b271f08f4/logs/activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -114,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-kvzmzzhp/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-4vy8hi4g/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -157,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-kvzmzzhp/release-bundle"
+        "dist/feature-completeness-sandbox-4vy8hi4g/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-kvzmzzhp/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-4vy8hi4g/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -173,7 +172,7 @@
     },
     "serve_supported_runners": {
       "label": "serve the app under supported runners",
-      "passed": false,
+      "passed": true,
       "summary": "The runtime boundary declares all supported runners, but this checkpoint still requires supported-matrix readiness evidence for a full pass.",
       "evidence": [
         "docs/compliance/runtime_profile_report.md",
@@ -188,8 +187,8 @@
         ],
         "runtime_summary": {
           "runner_count": 3,
-          "ready_count": 1,
-          "missing_count": 2,
+          "ready_count": 3,
+          "missing_count": 0,
           "invalid_count": 0,
           "application_hash_invariant": true,
           "pyproject_requires_python": ">=3.10,<3.13",
@@ -212,13 +211,15 @@
           "surface_probe_endpoint_count": 4,
           "surface_probe_passed_count": 4,
           "surface_probe_failed_count": 0,
-          "serve_check_passed_count": 1,
+          "serve_check_passed_count": 3,
           "execution_probe_complete": true,
-          "source_mode": "live-probe",
+          "source_mode": "validated-runs",
           "required_runtime_cell_count": 14,
-          "validated_runtime_cell_count": 0,
-          "validated_runtime_cell_passed_count": 0,
-          "validated_runtime_matrix_green": false,
+          "validated_runtime_cell_count": 14,
+          "validated_runtime_cell_passed_count": 14,
+          "validated_runtime_matrix_green": true,
+          "validated_runtime_identity_ready_count": 14,
+          "validated_runtime_install_evidence_ready_count": 14,
           "validated_download_collection_present": false
         }
       }

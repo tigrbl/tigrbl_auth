@@ -18,8 +18,6 @@ cli-flag:checksum:
 - compliance/evidence/tier3/cli-operator-surface/
 cli-flag:color:
 - compliance/evidence/tier3/cli-operator-surface/
-cli-flag:config:
-- compliance/evidence/tier3/cli-operator-surface/
 cli-flag:cookies:
 - compliance/evidence/tier3/cli-operator-surface/
 cli-flag:curve:
@@ -752,6 +750,13 @@ route:register-client-id:
 - compliance/evidence/tier3/oidc-rp-initiated-logout/
 route:revoke:
 - compliance/evidence/tier3/revocation/
+route:tenants-tenant-slug-well-known-jwks-json:
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/well-known/
+route:tenants-tenant-slug-well-known-openid-configuration:
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/well-known/
 route:token:
 - compliance/evidence/tier3/bearer/
 - compliance/evidence/tier3/jwt-access-token-profile/

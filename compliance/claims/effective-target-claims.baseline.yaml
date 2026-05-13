@@ -184,9 +184,17 @@ claim_set:
     tier: 3
     status: evidenced-release-gated
     profile: baseline
+  - target: OIDC Session Management
+    tier: 3
+    status: evidenced-release-gated
+    profile: baseline
   - target: OpenAPI 3.1 / 3.2 compatible public contract
     tier: 3
     status: generated-live-from-deployment-metadata
+    profile: baseline
+  - target: RFC 6265
+    tier: 3
+    status: evidenced-release-gated
     profile: baseline
   - target: RFC 6749
     tier: 3
@@ -241,14 +249,6 @@ claim_set:
     status: evidenced-release-gated
     profile: baseline
   - target: 'Runner profile: Uvicorn'
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: OIDC Session Management
-    tier: 3
-    status: evidenced-release-gated
-    profile: baseline
-  - target: RFC 6265
     tier: 3
     status: evidenced-release-gated
     profile: baseline

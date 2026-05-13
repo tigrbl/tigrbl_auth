@@ -4,15 +4,15 @@
 
 ## Summary
 
-- validated_artifact_count: `0`
+- validated_artifact_count: `15`
 - out_of_scope_validated_artifact_count: `0`
 - required_validated_inventory_count: `31`
-- validated_inventory_present_count: `0`
+- validated_inventory_present_count: `15`
 - validated_inventory_complete: `False`
-- runtime_matrix_present_count: `0`
+- runtime_matrix_present_count: `14`
 - runtime_matrix_expected_count: `14`
-- runtime_matrix_passed_count: `0`
-- runtime_matrix_green: `False`
+- runtime_matrix_passed_count: `14`
+- runtime_matrix_green: `True`
 - test_lane_expected_count: `15`
 - test_lane_passed_count: `0`
 - in_scope_test_lanes_green: `False`
@@ -22,7 +22,6 @@
 ## Failures
 
 - Validated artifact inventory is below the required 14 runtime + 15 test lanes + 2 backend-distinct migration threshold.
-- Validated clean-room runtime matrix is incomplete.
 - Validated in-scope certification lane execution is incomplete.
 - Migration portability validation across SQLite and PostgreSQL is missing.
 
@@ -32,18 +31,18 @@
 
 ## Details
 
-- runtime_matrix_missing: `['base@py3.10', 'base@py3.11', 'base@py3.12', 'sqlite-uvicorn@py3.10', 'sqlite-uvicorn@py3.11', 'sqlite-uvicorn@py3.12', 'postgres-hypercorn@py3.10', 'postgres-hypercorn@py3.11', 'postgres-hypercorn@py3.12', 'tigrcorn@py3.11', 'tigrcorn@py3.12', 'devtest@py3.10', 'devtest@py3.11', 'devtest@py3.12']`
-- runtime_matrix_present_count: `0`
+- runtime_matrix_missing: `[]`
+- runtime_matrix_present_count: `14`
 - test_lane_missing: `['core@py3.10', 'core@py3.11', 'core@py3.12', 'integration@py3.10', 'integration@py3.11', 'integration@py3.12', 'conformance@py3.10', 'conformance@py3.11', 'conformance@py3.12', 'security-negative@py3.10', 'security-negative@py3.11', 'security-negative@py3.12', 'interop@py3.10', 'interop@py3.11', 'interop@py3.12']`
-- test_lane_present_count: `0`
+- test_lane_present_count: `1`
 - migration_manifest_present: `False`
 - required_validated_inventory_count: `31`
-- validated_inventory_present_count: `0`
+- validated_inventory_present_count: `15`
 - validated_inventory_complete: `False`
-- runtime_evidence: `{}`
-- test_lane_evidence: `{}`
+- runtime_evidence: `{'base@py3.10': {'path': 'dist/validated-runs/runtime-base-py310.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'base@py310', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': None, 'serve_check_passed': None}, 'base@py3.11': {'path': 'dist/validated-runs/runtime-base-py311.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'base@py311', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': None, 'serve_check_passed': None}, 'base@py3.12': {'path': 'dist/validated-runs/runtime-base-py312.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'base@py312', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': None, 'serve_check_passed': None}, 'devtest@py3.10': {'path': 'dist/validated-runs/runtime-devtest-py310.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'devtest@py310', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'devtest@py3.11': {'path': 'dist/validated-runs/runtime-devtest-py311.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'devtest@py311', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'devtest@py3.12': {'path': 'dist/validated-runs/runtime-devtest-py312.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'devtest@py312', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'postgres-hypercorn@py3.10': {'path': 'dist/validated-runs/runtime-postgres-hypercorn-py310.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'postgres-hypercorn@py310', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'postgres-hypercorn@py3.11': {'path': 'dist/validated-runs/runtime-postgres-hypercorn-py311.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'postgres-hypercorn@py311', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'postgres-hypercorn@py3.12': {'path': 'dist/validated-runs/runtime-postgres-hypercorn-py312.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'postgres-hypercorn@py312', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'sqlite-uvicorn@py3.10': {'path': 'dist/validated-runs/runtime-sqlite-uvicorn-py310.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'sqlite-uvicorn@py310', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'sqlite-uvicorn@py3.11': {'path': 'dist/validated-runs/runtime-sqlite-uvicorn-py311.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'sqlite-uvicorn@py311', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'sqlite-uvicorn@py3.12': {'path': 'dist/validated-runs/runtime-sqlite-uvicorn-py312.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'sqlite-uvicorn@py312', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'tigrcorn@py3.11': {'path': 'dist/validated-runs/runtime-tigrcorn-py311.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'tigrcorn@py311', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}, 'tigrcorn@py3.12': {'path': 'dist/validated-runs/runtime-tigrcorn-py312.json', 'manifest_passed': True, 'counts_as_passed': True, 'identity': 'tigrcorn@py312', 'environment_identity_ready': True, 'install_evidence_ready': True, 'runtime_smoke_passed': True, 'application_probe_passed': True, 'surface_probe_passed': True, 'runner_available': True, 'serve_check_passed': True}}`
+- test_lane_evidence: `{'core@py3.10': {'path': 'dist/validated-runs/test-core-py310.json', 'manifest_passed': False, 'counts_as_passed': False, 'identity': 'core@py310', 'environment_identity_ready': True, 'install_evidence_ready': True, 'pytest_report_present': True, 'pytest_exit_code': 2, 'pytest_report_exit_code': 2, 'tests_collected': 585, 'tests_total': 0}}`
 - migration_evidence: `[]`
-- validated_manifests: `[]`
+- validated_manifests: `['dist/validated-runs/runtime-base-py310.json', 'dist/validated-runs/runtime-base-py311.json', 'dist/validated-runs/runtime-base-py312.json', 'dist/validated-runs/runtime-devtest-py310.json', 'dist/validated-runs/runtime-devtest-py311.json', 'dist/validated-runs/runtime-devtest-py312.json', 'dist/validated-runs/runtime-postgres-hypercorn-py310.json', 'dist/validated-runs/runtime-postgres-hypercorn-py311.json', 'dist/validated-runs/runtime-postgres-hypercorn-py312.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py310.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py311.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py312.json', 'dist/validated-runs/runtime-tigrcorn-py311.json', 'dist/validated-runs/runtime-tigrcorn-py312.json', 'dist/validated-runs/test-core-py310.json']`
 - out_of_scope_validated_manifests: `[]`
-- recognized_manifest_paths: `[]`
+- recognized_manifest_paths: `['dist/validated-runs/runtime-base-py310.json', 'dist/validated-runs/runtime-base-py311.json', 'dist/validated-runs/runtime-base-py312.json', 'dist/validated-runs/runtime-devtest-py310.json', 'dist/validated-runs/runtime-devtest-py311.json', 'dist/validated-runs/runtime-devtest-py312.json', 'dist/validated-runs/runtime-postgres-hypercorn-py310.json', 'dist/validated-runs/runtime-postgres-hypercorn-py311.json', 'dist/validated-runs/runtime-postgres-hypercorn-py312.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py310.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py311.json', 'dist/validated-runs/runtime-sqlite-uvicorn-py312.json', 'dist/validated-runs/runtime-tigrcorn-py311.json', 'dist/validated-runs/runtime-tigrcorn-py312.json', 'dist/validated-runs/test-core-py310.json']`
 - ignored_json_paths: `[]`

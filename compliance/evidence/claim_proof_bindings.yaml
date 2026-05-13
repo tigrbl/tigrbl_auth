@@ -199,26 +199,6 @@ bindings:
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
   security_sensitive: false
-- claim_id: cli-flag:config
-  feature_id: cli-flag:config
-  targets:
-  - CLI operator surface
-  profile: null
-  positive_tests:
-  - tests/conformance/operator/test_cli_bootstrap_migrate.py
-  - tests/conformance/operator/test_cli_import_export.py
-  - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
-  - tests/conformance/operator/test_cli_serve_runtime.py
-  - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_cli_contract.py
-  - tests/unit/test_cli_surface_checkpoint.py
-  - tests/unit/test_operator_service_layer.py
-  - tests/unit/test_runtime_launcher.py
-  negative_tests: []
-  evidence_refs:
-  - compliance/evidence/tier3/cli-operator-surface/
-  security_sensitive: false
 - claim_id: cli-flag:cookies
   feature_id: cli-flag:cookies
   targets:
@@ -7211,6 +7191,51 @@ bindings:
   evidence_refs:
   - compliance/evidence/tier3/revocation/
   security_sensitive: false
+- claim_id: route:tenants-tenant-slug-well-known-jwks-json
+  feature_id: route:tenants-tenant-slug-well-known-jwks-json
+  targets:
+  - RFC 7517
+  - RFC 8615
+  profile: null
+  positive_tests:
+  - tests/conformance/baseline/test_rfc7517_jwk.py
+  - tests/conformance/production/test_rfc8615_well_known_uris.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/unit/test_jwks_rotation.py
+  - tests/unit/test_well_known_endpoints_behavior.py
+  negative_tests: []
+  evidence_refs:
+  - compliance/evidence/tier3/jwks/
+  - compliance/evidence/tier3/well-known/
+  security_sensitive: false
+- claim_id: route:tenants-tenant-slug-well-known-openid-configuration
+  feature_id: route:tenants-tenant-slug-well-known-openid-configuration
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  profile: null
+  positive_tests:
+  - tests/conformance/baseline/test_openid_configuration.py
+  - tests/conformance/hardening/test_rfc9700_security_bcp.py
+  - tests/conformance/production/test_rfc8615_well_known_uris.py
+  - tests/integration/test_oidc_endpoints.py
+  - tests/integration/test_profile_surface_and_contract_alignment.py
+  - tests/integration/test_rfc8414_metadata.py
+  - tests/interop/test_peer_counterpart_catalog.py
+  - tests/interop/test_peer_matrix_artifacts.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
+  - tests/negative/test_hardening_runtime_enforcement.py
+  - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_profile_discovery_runtime.py
+  - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
+  - tests/unit/test_well_known_endpoints_behavior.py
+  negative_tests: []
+  evidence_refs:
+  - compliance/evidence/tier3/discovery/
+  - compliance/evidence/tier3/security-bcp/
+  - compliance/evidence/tier3/well-known/
+  security_sensitive: true
 - claim_id: route:token
   feature_id: route:token
   targets:
