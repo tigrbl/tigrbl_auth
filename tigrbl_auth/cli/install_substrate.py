@@ -482,12 +482,78 @@ def _current_python_supported() -> bool:
     return (3, 10, 0) <= current < (3, 13, 0)
 
 
+def _probe_python_version(executable: list[str]) -> tuple[str | None, str | None]:
+    try:
+        completed = subprocess.run(
+            [*executable, "-c", "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (FileNotFoundError, OSError, subprocess.TimeoutExpired) as exc:
+        return None, str(exc)
+    if completed.returncode != 0:
+        return None, (completed.stderr or completed.stdout or "python probe failed").strip()
+    return completed.stdout.strip(), None
+
+
 def _detect_supported_pythons() -> list[dict[str, Any]]:
+    detections: dict[str, dict[str, Any]] = {}
+    if _current_python_supported():
+        current_version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        detections[current_version] = {
+            "version": current_version,
+            "available": True,
+            "path": sys.executable,
+            "source": "current-interpreter",
+        }
+    for version in SUPPORTED_PYTHON_VERSIONS:
+        for executable, source in (
+            ([f"python{version}"], "path"),
+            (["py", f"-{version}"], "py-launcher"),
+        ):
+            if version in detections:
+                break
+            candidate = shutil.which(executable[0])
+            if not candidate:
+                continue
+            detected_version, error = _probe_python_version(executable)
+            if detected_version == version:
+                detections[version] = {
+                    "version": version,
+                    "available": True,
+                    "path": candidate if source == "path" else " ".join(executable),
+                    "source": source,
+                }
+            elif error:
+                detections.setdefault(
+                    version,
+                    {
+                        "version": version,
+                        "available": False,
+                        "path": None,
+                        "source": source,
+                        "message": error,
+                    },
+                )
+
     results: list[dict[str, Any]] = []
     for version in SUPPORTED_PYTHON_VERSIONS:
-        candidate = shutil.which(f"python{version}")
-        results.append({"version": version, "available": bool(candidate), "path": candidate})
+        results.append(
+            detections.get(
+                version,
+                {
+                    "version": version,
+                    "available": False,
+                    "path": None,
+                    "source": None,
+                },
+            )
+        )
     return results
+
+
 
 
 def _module_supported(module: dict[str, Any]) -> bool:

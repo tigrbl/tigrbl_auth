@@ -1,14 +1,12 @@
 {
-  "passed": false,
-  "failures": [
-    "migrate up/down/reapply: Migration portability remains blocked until both SQLite and PostgreSQL preserve upgrade/downgrade/reapply evidence."
-  ],
+  "passed": true,
+  "failures": [],
   "warnings": [],
   "summary": {
     "capability_count": 10,
-    "passed_capability_count": 9,
-    "failed_capability_count": 1,
-    "fully_featured_package_boundary_now": false,
+    "passed_capability_count": 10,
+    "failed_capability_count": 0,
+    "fully_featured_package_boundary_now": true,
     "cli_metadata_single_source_passed": true,
     "required_release_verify_verb_present": true,
     "no_fastapi_starlette_passed": true
@@ -43,18 +41,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0",
-        "database_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/operator_plane.sqlite3",
-        "snapshot_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/snapshots",
-        "log_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/logs",
+        "state_root": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a",
+        "database_path": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/operator_plane.sqlite3",
+        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/snapshots",
+        "log_root": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/logs/audit-events.jsonl",
-        "transaction_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/logs/transactions.jsonl",
-        "activity_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-dbd4dbb5c05b15a0/logs/activity.jsonl"
+        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/logs/audit-events.jsonl",
+        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/logs/transactions.jsonl",
+        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state66/operator-state-3b610e9b73e6072a/logs/activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -113,7 +111,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-i4ukbnhc/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-6d9cf78a/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -156,10 +154,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-i4ukbnhc/release-bundle"
+        "dist/feature-completeness-sandbox-6d9cf78a/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-i4ukbnhc/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-6d9cf78a/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -226,18 +224,22 @@
     },
     "migrate_up_down_reapply": {
       "label": "migrate up/down/reapply",
-      "passed": false,
+      "passed": true,
       "summary": "Migration portability remains blocked until both SQLite and PostgreSQL preserve upgrade/downgrade/reapply evidence.",
       "evidence": [
         "docs/compliance/migration_portability_report.md",
         "tests/integration/test_migration_upgrade_downgrade_safety.py"
       ],
       "details": {
-        "migration_report_passed": false,
+        "migration_report_passed": true,
         "validated_backends": [
-          "sqlite"
+          "sqlite",
+          "postgres"
         ],
-        "passed_backends": [],
+        "passed_backends": [
+          "sqlite",
+          "postgres"
+        ],
         "migrate_verbs": [
           "apply",
           "plan",

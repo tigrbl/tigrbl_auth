@@ -56,7 +56,7 @@ class PushedAuthorizationRequest(Base, GUIDPk, Timestamped):
     tenant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
     )
-    params: Mapped[dict] = acol(storage=S(JSON, nullable=False))
+    params: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
     expires_in: Mapped[int] = acol(storage=S(Integer, nullable=False, default=_default_expires_in))
     expires_at: Mapped[dt.datetime] = acol(storage=S(TZDateTime, nullable=False, default=_default_expires_at))
     consumed_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))

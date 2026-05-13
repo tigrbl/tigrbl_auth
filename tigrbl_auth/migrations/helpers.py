@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from typing import Protocol
 
 from sqlalchemy import Column, ForeignKey, MetaData, Table, inspect, text
-from sqlalchemy.exc import NoSuchTableError
+from sqlalchemy.exc import NoSuchTableError, SQLAlchemyError
 
 
 class SupportsTable(Protocol):
@@ -187,7 +187,15 @@ def drop_columns(conn, table: str, columns_to_drop: Iterable[str]) -> None:
         return
 
     if conn.dialect.name == "sqlite":
-        _sqlite_rebuild_without_columns(conn, table, drop_list)
+        remaining = list(drop_list)
+        for name in drop_list:
+            try:
+                conn.exec_driver_sql(f'ALTER TABLE {_table_name(conn, table)} DROP COLUMN "{name}"')
+                remaining.remove(name)
+            except SQLAlchemyError:
+                continue
+        if remaining:
+            _sqlite_rebuild_without_columns(conn, table, remaining)
         return
 
     rendered_table = _table_name(conn, table)

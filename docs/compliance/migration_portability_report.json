@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "20260513T095142Z",
+  "generated_at": "20260513T104129Z",
   "python_version": "3.12",
   "environment_identity": {
     "python_version": "3.12",
@@ -30,9 +30,13 @@
     "postgres"
   ],
   "validated_backends": [
-    "sqlite"
+    "sqlite",
+    "postgres"
   ],
-  "passed_backends": [],
+  "passed_backends": [
+    "sqlite",
+    "postgres"
+  ],
   "revision_inventory": [
     {
       "revision": "0001_initial_identity_tables",
@@ -97,9 +101,9 @@
       "backend": "sqlite",
       "available": true,
       "database_url": "sqlite+aiosqlite:///E:\\swarmauri_github\\tigrbl_auth\\dist\\migration-portability\\sqlite\\tigrbl_auth_migration_portability.db",
-      "passed": false,
+      "passed": true,
       "upgrade_passed": true,
-      "downgrade_passed": false,
+      "downgrade_passed": true,
       "reapply_passed": true,
       "revision_inventory": [
         {
@@ -217,11 +221,12 @@
     },
     "postgres": {
       "backend": "postgres",
-      "available": false,
-      "passed": false,
-      "upgrade_passed": false,
-      "downgrade_passed": false,
-      "reapply_passed": false,
+      "available": true,
+      "database_url": "postgresql://<redacted>",
+      "passed": true,
+      "upgrade_passed": true,
+      "downgrade_passed": true,
+      "reapply_passed": true,
       "revision_inventory": [
         {
           "revision": "0001_initial_identity_tables",
@@ -280,24 +285,72 @@
       ],
       "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
       "downgrade_target_revision": "0008_refresh_token_family_state",
-      "downgraded_revision": null,
-      "artifacts": {},
-      "failure": "POSTGRES_URL not set in the current environment."
+      "downgraded_revision": "0008_refresh_token_family_state",
+      "head_revision_after_upgrade": "0009_admin_identity_bootstrap_and_password_recovery",
+      "head_revision_after_downgrade": "0008_refresh_token_family_state",
+      "head_revision_after_reapply": "0009_admin_identity_bootstrap_and_password_recovery",
+      "upgrade_applied_revisions": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "reapply_applied_revisions": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "applied_revisions_after_downgrade": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state"
+      ],
+      "upgrade_pending_before": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "reapply_pending_before": [
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "artifacts": {
+        "upgrade": "dist\\migration-portability\\postgres\\upgrade.json",
+        "downgrade": "dist\\migration-portability\\postgres\\downgrade.json",
+        "reapply": "dist\\migration-portability\\postgres\\reapply.json"
+      }
     }
   },
   "pytest_report_artifact": "dist\\test-reports\\migration-portability-py312.json",
-  "pytest_exit_code": 1,
+  "pytest_exit_code": 0,
   "pytest_summary": {
     "tests_collected": 2,
-    "tests_passed": 1,
-    "tests_failed": 1,
+    "tests_passed": 2,
+    "tests_failed": 0,
     "tests_skipped": 0,
     "tests_error": 0
   },
-  "passed": false,
-  "failures": [
-    "sqlite backend did not pass upgrade \u2192 downgrade \u2192 reapply validation.",
-    "postgres backend was not available in the current environment.",
-    "The migration portability pytest lane did not pass."
-  ]
+  "passed": true,
+  "failures": []
 }

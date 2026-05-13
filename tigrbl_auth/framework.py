@@ -203,7 +203,10 @@ def _install_table_crud_invoke_compat() -> None:
                     ident = _coerce_pk_value(model, ident)
 
             if target == "create" and isinstance(payload, Mapping):
-                return await _crud_ops.create(model, dict(payload), db=db)
+                try:
+                    return await _crud_ops.create(model, dict(payload), db=db)
+                except IntegrityError as exc:
+                    raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "invalid table create payload") from exc
             if target == "read" and ident is not None:
                 return await _crud_ops.read(model, ident, db=db)
             if target == "update" and ident is not None and isinstance(payload, Mapping):

@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
+from tigrbl_auth.cli import install_substrate
 from tigrbl_auth.cli.install_substrate import build_install_substrate_report
 from tigrbl_auth.cli.reports import _dependency_artifact_paths, generate_state_reports
 
@@ -55,3 +57,18 @@ def test_dependency_lock_manifest_covers_certification_lane_profiles() -> None:
         "migration-portability",
         "final-certification",
     } <= profiles
+
+
+def test_detect_supported_pythons_counts_current_certification_interpreter(monkeypatch) -> None:
+    current_version = f"{sys.version_info.major}.{sys.version_info.minor}"
+    if current_version not in install_substrate.SUPPORTED_PYTHON_VERSIONS:
+        return
+
+    monkeypatch.setattr(install_substrate.shutil, "which", lambda _name: None)
+
+    detections = install_substrate._detect_supported_pythons()
+    current_detection = next(item for item in detections if item["version"] == current_version)
+
+    assert current_detection["available"] is True
+    assert current_detection["path"] == sys.executable
+    assert current_detection["source"] == "current-interpreter"

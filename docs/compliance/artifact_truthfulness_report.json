@@ -299,9 +299,9 @@
     "runner_profiles": {
       "baseline": {
         "application_hashes": {
-          "hypercorn": "f368f00a507e012c5ad9d8743f9cf944f7bcd9da081b4ac44e946a8ebde5337c",
-          "tigrcorn": "f368f00a507e012c5ad9d8743f9cf944f7bcd9da081b4ac44e946a8ebde5337c",
-          "uvicorn": "f368f00a507e012c5ad9d8743f9cf944f7bcd9da081b4ac44e946a8ebde5337c"
+          "hypercorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+          "tigrcorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445",
+          "uvicorn": "a6b0004bde61cd4729392505cc51e232862185d9e8ed18151a1cf0be5b314445"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -337,9 +337,9 @@
       },
       "production": {
         "application_hashes": {
-          "hypercorn": "db4a33ad84dcd906d65d81ab218b7cb088d268250de26cbfe31cb8d2acfe3212",
-          "tigrcorn": "db4a33ad84dcd906d65d81ab218b7cb088d268250de26cbfe31cb8d2acfe3212",
-          "uvicorn": "db4a33ad84dcd906d65d81ab218b7cb088d268250de26cbfe31cb8d2acfe3212"
+          "hypercorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7",
+          "tigrcorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7",
+          "uvicorn": "d7ec75eac1f227f246a867f8f5c830171e5ccd8bc51fca4843e9d0b96f0929d7"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -378,9 +378,9 @@
       },
       "hardening": {
         "application_hashes": {
-          "hypercorn": "6249cc7e14cbb43bf021f3ba9d317687396fb20b7e59fd42ec3a153c0178d470",
-          "tigrcorn": "6249cc7e14cbb43bf021f3ba9d317687396fb20b7e59fd42ec3a153c0178d470",
-          "uvicorn": "6249cc7e14cbb43bf021f3ba9d317687396fb20b7e59fd42ec3a153c0178d470"
+          "hypercorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c",
+          "tigrcorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c",
+          "uvicorn": "ea1dca00bdea2c4c55ae0fde77dc742ab46ca44b2da85a6f76e4d7ce44202c4c"
         },
         "contract_hashes": {
           "hypercorn": {
@@ -460,9 +460,9 @@
       },
       "peer-claim": {
         "application_hashes": {
-          "hypercorn": "a3958fbe59e1d4f52821fbdcfa1e60865b142cabaa1fc3075089beb701348925",
-          "tigrcorn": "a3958fbe59e1d4f52821fbdcfa1e60865b142cabaa1fc3075089beb701348925",
-          "uvicorn": "a3958fbe59e1d4f52821fbdcfa1e60865b142cabaa1fc3075089beb701348925"
+          "hypercorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787",
+          "tigrcorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787",
+          "uvicorn": "8b0419ded1649026716c65972a0ebe93e19cf3bcae56bd854c13def9238a8787"
         },
         "contract_hashes": {
           "hypercorn": {

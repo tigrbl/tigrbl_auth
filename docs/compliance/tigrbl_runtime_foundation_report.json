@@ -27,12 +27,12 @@
     "release_path_fallbacks": [
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 259,
+        "line": 262,
         "match": "if hasattr("
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 772,
+        "line": 775,
         "match": "if hasattr("
       },
       {
@@ -42,27 +42,27 @@
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 282,
+        "line": 285,
         "match": "except Exception:"
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 304,
+        "line": 307,
         "match": "except Exception:"
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 460,
+        "line": 463,
         "match": "except Exception:"
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 692,
+        "line": 695,
         "match": "except Exception:"
       },
       {
         "path": "tigrbl_auth\\framework.py",
-        "line": 828,
+        "line": 831,
         "match": "except Exception:"
       }
     ]

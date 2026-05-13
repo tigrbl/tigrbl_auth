@@ -19,7 +19,7 @@
     "validated_test_lanes_green": false,
     "migration_portability_passed": false,
     "tier3_evidence_rebuilt_from_validated_runs": false,
-    "fully_featured_package_boundary_now": false,
+    "fully_featured_package_boundary_now": true,
     "strict_independent_claims_ready": false,
     "fully_certifiable_now": false,
     "fully_rfc_compliant_now": false,
@@ -52,7 +52,6 @@
       "Validated in-scope certification lane execution evidence is incomplete or missing.",
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
       "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
-      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "At least one claim row is still missing a machine-derived certification proof binding.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ],
@@ -65,11 +64,11 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "d68fd23a4854cdd0a461295a4126d01fc04e01a3048139b000a6cdbb8e2ee853",
-    "docs/compliance/certification_state_report.json": "8dded15cccbfc73c58008b06031c733c599b1ffe2a53e9bff7be5a630b6c7277",
+    "docs/compliance/current_state_report.json": "2bbe8ca3830f570e8ea4b51f11702c9741dfe851ce4bfa3599e776a7501c1903",
+    "docs/compliance/certification_state_report.json": "ad4812566f5889b5af18591c7825d0d3115e7ab1bce200327544fcd5d1471e7a",
     "docs/compliance/release_gate_report.json": "3d670790a7eb2e5f1d0a2b1d2cb6038d1c84c12f0d49a40cfbd1ef1d694f9c2d",
     "docs/compliance/final_release_gate_report.json": "afb90b1c88e7d1b658467917acfceddd762ed67c3fb7e42acea1bc40c7bed248",
-    "docs/compliance/non_rfc_status_report.json": "76229317f5661e8dfc9af44486905512756216166a75fc094d8226f802bbae1a"
+    "docs/compliance/non_rfc_status_report.json": "dd147fc100ea7b44d4df5aab53c54e8310f96c7dc828aaf333ec15c7906ab302"
   },
   "explicitly_deauthorized_current_adjacent_docs": [
     "docs/compliance/BOUNDARY_FREEZE_DECISION_2026-03-26.md",

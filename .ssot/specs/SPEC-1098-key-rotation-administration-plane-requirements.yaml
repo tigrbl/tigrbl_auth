@@ -1,0 +1,113 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1098"
+number: 1098
+slug: "key-rotation-administration-plane-requirements"
+title: "Key rotation administration plane requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines administration-plane requirements for key rotation"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define admin-plane key rotation workflows without policy ownership overlap."
+    at: "2026-05-13T11:04:36Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines administration-plane requirements for key rotation
+  workflows in `tigrbl_auth` while preserving governance ownership of key
+  rotation policy.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1094`.
+  
+  ## Scope
+  
+  This specification governs administrative and operator workflows that view key
+  state, request rotation, execute rotation, retire keys, and publish JWKS outputs
+  under a governed key rotation policy.
+  
+  The administration plane MAY expose:
+  
+  - effective key rotation policy display;
+  - key state and rotation history display;
+  - rotation request submission;
+  - rotation execution against a published effective policy;
+  - emergency rotation execution when allowed by policy;
+  - key retirement and JWKS publication workflows; and
+  - audit and evidence views for completed rotations.
+  
+  ## Normative Requirements
+  
+  Administration MUST treat the published effective key rotation policy as
+  read-only input for execution workflows.
+  
+  Administration MUST NOT store authoritative key rotation policy truth, cadence,
+  approval rules, overlap windows, retirement windows, or evidence requirements
+  outside the governance policy model.
+  
+  Every administration-plane rotation action MUST reference the effective policy
+  identifier and immutable policy version used to authorize the operation.
+  
+  Every rotation action MUST record actor, tenant or issuer scope, target key,
+  old key identifier, new key identifier, reason, request time, execution time,
+  authorization decision reference, policy version, JWKS publication result, and
+  retirement result when applicable.
+  
+  Administration MUST fail closed when the target key class requires governed
+  rotation and no published effective policy exists.
+  
+  Administration MUST call L1 authorization before policy request submission,
+  policy approval, rotation execution, emergency rotation, key retirement, and
+  JWKS publication.
+  
+  Administrative UIX, CLI, REST, and RPC surfaces MUST share the same service
+  layer semantics for key rotation so that one surface cannot bypass policy,
+  authorization, audit, or evidence rules.
+  
+  ## Cross-Plane Boundaries
+  
+  Governance owns the policy record and policy version lifecycle.
+  
+  Administration owns safe operational workflow execution and operator-facing
+  views.
+  
+  Authorization owns the decision that the actor may perform the requested action.
+  
+  Runtime signing, discovery, and JWKS surfaces consume key state and published
+  policy effects but do not own the policy configuration.
+  
+  ## Out Of Scope
+  
+  This specification does not define the governance policy record schema. That is
+  defined by the key rotation policy governance requirements.
+  
+  This specification does not require a specific UIX layout, storage engine, KMS,
+  HSM, or cryptographic algorithm.
+  
+  ## Verification
+  
+  Verification MUST prove shared CLI/RPC/UIX behavior where applicable, policy
+  version reference on each rotation, fail-closed behavior without effective
+  policy, L1 authorization gates, audit completeness, evidence completeness, and
+  absence of administration-owned policy truth.
+  
+  ## Traceability
+  
+  This specification is governed by `adr:1094`, `adr:1016`, `adr:1038`,
+  `adr:1039`, `adr:1040`, and `adr:1050`.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1094"
+  - "adr:1016"
+  - "adr:1038"
+  - "adr:1039"
+  - "adr:1040"
+  - "adr:1050"

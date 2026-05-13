@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus as status
+from pathlib import Path
 from uuid import uuid4
 
 import pytest
@@ -12,6 +13,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from tigrbl_auth.app import app
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.orm import Tenant, User
+from tigrbl_auth.services._operator_store import OperationContext
+from tigrbl_auth.services.operator_service import create_resource
 
 
 EXPECTED_DEFAULT_OPERATIONS = {
@@ -58,6 +61,19 @@ async def _create_tenant(db_session: AsyncSession, label: str) -> Tenant:
     )
     db_session.add(tenant)
     await db_session.commit()
+    create_resource(
+        OperationContext(
+            repo_root=Path.cwd(),
+            command="tenant.create",
+            resource="tenant",
+            actor="integration-test",
+            profile="integration",
+            tenant=tenant.slug,
+        ),
+        record_id=tenant.slug,
+        patch={"name": tenant.name, "enabled": True, "sql_tenant_id": str(tenant.id)},
+        if_exists="update",
+    )
     return tenant
 
 

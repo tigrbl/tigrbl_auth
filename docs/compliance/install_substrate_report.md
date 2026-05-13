@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260513T095231Z`
+- Generated at: `20260513T111229Z`
 - Passed: `False`
 - Static manifest passed: `True`
 - Profile: `base`
@@ -9,7 +9,7 @@
 - Current Python: `3.12.5`
 - Current Python supported: `True`
 - Expected supported Python versions: `3.10, 3.11, 3.12`
-- Detected supported Python binaries: `1` / `3`
+- Detected supported Python binaries: `2` / `3`
 - Certification tox envs declared: `33`
 - Runtime matrix envs declared: `14`
 - Test lane envs declared: `15`
@@ -24,7 +24,7 @@
 
 ## Warnings
 
-- The current container does not provide supported interpreter binaries for: 3.10, 3.11.
+- The current container does not provide supported interpreter binaries for: 3.11.
 
 ## Current environment import probe
 
@@ -59,9 +59,9 @@
 
 ## Detected supported interpreters
 
-- `3.10` → available=`False` path=`None`
+- `3.10` → available=`True` path=`py -3.10`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`True` path=`<local-path>`
+- `3.12` → available=`True` path=`<repo>/.venv/Scripts/python.exe`
 
 ## Workflow coverage
 

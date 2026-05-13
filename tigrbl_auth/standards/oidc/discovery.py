@@ -7,7 +7,9 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from sqlalchemy.exc import SQLAlchemyError
+
+from tigrbl_auth.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, select, status
 from tigrbl_auth.config.deployment import (
     ResolvedDeployment,
     deployment_from_app,
@@ -27,6 +29,8 @@ from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
 from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
+from tigrbl_auth.tables import Tenant
+from tigrbl_auth.tables.engine import get_db
 
 api = TigrblRouter()
 discovery_api = TigrblRouter()
@@ -79,12 +83,34 @@ async def openid_configuration(request: Request):
     return build_openid_config(deployment)
 
 
+@discovery_api.route(
+    "/.well-known/openid-configuration",
+    methods=["POST", "PUT", "PATCH", "DELETE"],
+    include_in_schema=False,
+    tags=[".well-known"],
+)
+async def openid_configuration_method_not_allowed(request: Request):
+    raise HTTPException(status.HTTP_405_METHOD_NOT_ALLOWED, "method not allowed")
+
+
+async def _tenant_exists(*, db, tenant_slug: str) -> bool:
+    if enabled_tenant_record(Path.cwd(), tenant_slug) is not None:
+        return True
+    if db is None:
+        return False
+    try:
+        tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
+    except SQLAlchemyError:
+        return False
+    return tenant is not None
+
+
 @discovery_api.route(TENANT_OPENID_CONFIGURATION_PATH, methods=["GET"], tags=[".well-known", "tenant"])
-async def tenant_openid_configuration(request: Request, tenant_slug: str):
+async def tenant_openid_configuration(request: Request, tenant_slug: str, db=Depends(get_db)):
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled(TENANT_OPENID_CONFIGURATION_PATH):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant OIDC discovery disabled")
-    if enabled_tenant_record(Path.cwd(), tenant_slug) is None:
+    if not await _tenant_exists(db=db, tenant_slug=tenant_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
     return build_tenant_openid_config(deployment, tenant_slug)
 
@@ -97,12 +123,22 @@ async def jwks(request: Request):
     return await build_jwks_document()
 
 
+@jwks_api.route(
+    JWKS_PATH,
+    methods=["POST", "PUT", "PATCH", "DELETE"],
+    include_in_schema=False,
+    tags=[".well-known"],
+)
+async def jwks_method_not_allowed(request: Request):
+    raise HTTPException(status.HTTP_405_METHOD_NOT_ALLOWED, "method not allowed")
+
+
 @jwks_api.route(TENANT_JWKS_PATH, methods=["GET"], tags=[".well-known", "tenant"])
-async def tenant_jwks(request: Request, tenant_slug: str):
+async def tenant_jwks(request: Request, tenant_slug: str, db=Depends(get_db)):
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled(TENANT_JWKS_PATH):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant JWKS publication disabled")
-    if enabled_tenant_record(Path.cwd(), tenant_slug) is None:
+    if not await _tenant_exists(db=db, tenant_slug=tenant_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
     return build_operator_jwks_payload(Path.cwd(), tenant=tenant_slug)
 

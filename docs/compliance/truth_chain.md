@@ -28,7 +28,7 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - validated_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `False`
-- fully_featured_package_boundary_now: `False`
+- fully_featured_package_boundary_now: `True`
 - strict_independent_claims_ready: `False`
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
@@ -53,7 +53,7 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - tier4_valid_external_bundle_count: `0`
 - tier4_invalid_external_bundle_count: `16`
 - tier4_missing_external_bundle_count: `0`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The fill-in external handoff template package is not present for the full supported peer-profile set.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Validated in-scope certification lane execution evidence is incomplete or missing.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'At least one claim row is still missing a machine-derived certification proof binding.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The fill-in external handoff template package is not present for the full supported peer-profile set.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Validated in-scope certification lane execution evidence is incomplete or missing.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.', 'At least one claim row is still missing a machine-derived certification proof binding.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
 - final_release_failures: `['Migration portability validation is not preserved for both SQLite and PostgreSQL.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `7`

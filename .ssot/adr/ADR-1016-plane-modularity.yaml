@@ -11,7 +11,11 @@ tags: []
 summary: "Runtime planes remain first-class repository boundaries, but the repository"
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Add cross-plane policy ownership rule for governance-owned policy truth."
+    at: "2026-05-13T11:02:36Z"
 references: []
 body: |-
   ## Decision
@@ -29,12 +33,30 @@ body: |-
   Mixed-mode deployments that co-host privileged and public planes MUST be
   classified explicitly as downgraded posture until a hard-isolation tier exists.
   
+  Each plane owns one authoritative concern. Authorization surfaces own
+  permission evaluation and enforcement. Administration surfaces own privileged
+  operational workflows and safe mutations. Governance surfaces own durable
+  policy truth, version lifecycle, approval rules, audit requirements, and
+  published effective-policy projections. Runtime protocol surfaces may consume
+  published effective policy, but they MUST NOT mutate governance policy.
+  
+  Administrative APIs or UIX components MAY present, request, approve, or execute
+  policy-backed operations, but they MUST NOT become the source of truth for
+  governance policy records. Authorization components MAY decide whether an actor
+  can perform a policy or administration action, but they MUST NOT define the
+  policy being governed.
+  
   ## Context
   
   The repository already separates concerns across `api/`, `security/`,
   `services/`, `standards/`, and related modules. That is necessary, but it does
   not by itself prove that the public plane, admin plane, RPC plane, and
   diagnostics plane have separate runtime trust envelopes.
+  
+  Key rotation illustrates the cross-plane boundary. A key rotation operation is
+  an administrative or operator workflow, while the durable rule that defines
+  cadence, approval, emergency triggers, overlap windows, retirement windows,
+  publication requirements, and evidence obligations is governance policy.
   
   ## Consequences
   
@@ -44,3 +66,9 @@ body: |-
   - one-process logical composition;
   - multi-plane runtime composition with downgraded posture; and
   - hard-isolated plane deployment.
+  
+  Cross-plane overlap is nonconformant when one plane persists another plane's
+  authoritative state. Tests and release gates SHOULD fail if authorization code
+  mutates governance policy, if administration stores policy truth outside the
+  governance model, or if runtime protocol code bypasses published effective
+  policy.

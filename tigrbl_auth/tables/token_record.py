@@ -25,14 +25,14 @@ class TokenRecord(Base, GUIDPk, Timestamped):
     __tablename__ = "token_records"
     __table_args__ = ({"schema": "authn"},)
 
-    token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True))
+    token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True, default=lambda: uuid.uuid4().hex))
     token_kind: Mapped[str] = acol(storage=S(String(32), nullable=False, default="access"))
     token_type_hint: Mapped[str | None] = acol(storage=S(String(64), nullable=True))
     refresh_family_id: Mapped[str | None] = acol(storage=S(String(64), nullable=True, index=True))
     refresh_parent_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True, index=True))
     refresh_successor_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True, index=True))
     active: Mapped[bool] = acol(storage=S(Boolean, nullable=False, default=True))
-    subject: Mapped[str] = acol(storage=S(String(255), nullable=False, index=True))
+    subject: Mapped[str] = acol(storage=S(String(255), nullable=False, index=True, default="admin-created-token-record"))
     tenant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
     )

@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import secrets
 from datetime import datetime, timezone
+from pathlib import Path
 from urllib.parse import urlparse
 from uuid import UUID, uuid4
+
+from sqlalchemy.ext.asyncio import async_sessionmaker
 
 from tigrbl_auth.api.rest.schemas import (
     DynamicClientRegistrationIn,
@@ -12,8 +15,9 @@ from tigrbl_auth.api.rest.schemas import (
 )
 from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException, select, status
+from tigrbl_auth.framework import HTTPException, IntegrityError, select, status
 from tigrbl_auth.services.persistence import append_audit_event_async, token_hash, upsert_client_registration_async
+from tigrbl_auth.services.tenant_discovery import enabled_tenant_record
 from tigrbl_auth.standards.oauth2.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,
@@ -33,6 +37,67 @@ from tigrbl_auth.tables import Client, ClientRegistration, Tenant
 
 
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHODS = {"client_secret_basic", "client_secret_post", PRIVATE_KEY_JWT_AUTH_METHOD, *SUPPORTED_MTLS_AUTH_METHODS}
+
+
+async def _fresh_registration_tenant_read(*, db, tenant_slug: str) -> Tenant | None:
+    bind = getattr(db, "bind", None)
+    if bind is None and hasattr(db, "get_bind"):
+        bind = db.get_bind()
+    if bind is None:
+        return None
+    maker = async_sessionmaker(bind=bind, expire_on_commit=False)
+    async with maker() as fresh_db:
+        return await fresh_db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
+
+
+def _tenant_from_operator_record(record: dict[str, object], *, tenant_slug: str) -> Tenant | None:
+    data = record.get("data") if isinstance(record.get("data"), dict) else {}
+    sql_tenant_id = record.get("sql_tenant_id") or data.get("sql_tenant_id")
+    if not sql_tenant_id:
+        return None
+    try:
+        tenant_id = UUID(str(sql_tenant_id))
+    except ValueError:
+        return None
+    base_name = str(record.get("name") or data.get("name") or "Tenant").strip() or "Tenant"
+    return Tenant(
+        id=tenant_id,
+        slug=tenant_slug,
+        name=f"{base_name}-{tenant_slug}"[:120],
+        email=f"{tenant_slug}@tenant.local"[:120],
+    )
+
+
+async def _resolve_registration_tenant(*, db, tenant_slug: str) -> Tenant:
+    tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
+    if tenant is not None:
+        return tenant
+    tenant = await _fresh_registration_tenant_read(db=db, tenant_slug=tenant_slug)
+    if tenant is not None:
+        return tenant
+
+    record = enabled_tenant_record(Path.cwd(), tenant_slug)
+    if record is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, 'tenant not found')
+    tenant = _tenant_from_operator_record(record, tenant_slug=tenant_slug)
+    if tenant is not None:
+        return tenant
+
+    base_name = str(record.get("name") or "Tenant").strip() or "Tenant"
+    name = f"{base_name}-{tenant_slug}"[:120]
+    email = f"{tenant_slug}@tenant.local"[:120]
+    tenant = Tenant(slug=tenant_slug, name=name, email=email)
+    db.add(tenant)
+    try:
+        await db.flush()
+    except IntegrityError:
+        await db.rollback()
+        tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
+        if tenant is None:
+            tenant = await _fresh_registration_tenant_read(db=db, tenant_slug=tenant_slug)
+        if tenant is None:
+            raise HTTPException(status.HTTP_409_CONFLICT, 'tenant materialization conflict')
+    return tenant
 
 
 
@@ -110,9 +175,7 @@ async def _validated_registration_payload(
     if unsupported_response_types:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f'invalid_client_metadata: unsupported response_types {unsupported_response_types}')
 
-    tenant = await db.scalar(select(Tenant).where(Tenant.slug == payload.tenant_slug))
-    if tenant is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, 'tenant not found')
+    tenant = await _resolve_registration_tenant(db=db, tenant_slug=payload.tenant_slug)
 
     redirect_uris = list(payload.redirect_uris or [])
     if not redirect_uris:

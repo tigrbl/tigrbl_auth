@@ -1,0 +1,107 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1097"
+number: 1097
+slug: "key-rotation-policy-governance-requirements"
+title: "Key rotation policy governance requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines the governance-plane requirements for key rotation"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define governance-plane requirements for durable key rotation policy."
+    at: "2026-05-13T11:04:28Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines the governance-plane requirements for key rotation
+  policy in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1094`.
+  
+  ## Scope
+  
+  This specification governs durable policy records that define how signing keys,
+  service keys, tenant JWKS keys, or other governed key classes rotate.
+  
+  The policy governance plane MUST define:
+  
+  - policy identifier and immutable version identifier;
+  - tenant, issuer, deployment profile, key class, key use, and algorithm scope;
+  - rotation cadence and maximum key age;
+  - emergency rotation triggers;
+  - staged-key, overlap, not-before, not-after, and retirement windows;
+  - JWKS publication and discovery propagation requirements;
+  - approval workflow and separation-of-duties requirements;
+  - rollback, revocation, and compromise-handling semantics;
+  - evidence, audit, and release-gate obligations; and
+  - published effective-policy projection semantics.
+  
+  ## Normative Requirements
+  
+  Key rotation policy MUST be authored, versioned, approved, and published by the
+  governance plane.
+  
+  Every policy change MUST produce an immutable version with actor, timestamp,
+  reason, diff, approval state, and supersession relationship.
+  
+  The published effective policy MUST be the only policy input consumed by
+  administration and runtime key/JWKS operations.
+  
+  The governance plane MUST fail closed when no effective policy exists for a key
+  class that requires governed rotation.
+  
+  Emergency rotation policy MUST define the event classes that bypass the normal
+  cadence while preserving audit, evidence, and approval or break-glass records.
+  
+  The policy MUST define how long old keys remain published for token validation
+  and when retired keys are removed from active JWKS outputs.
+  
+  The policy MUST define evidence requirements for rotation completion,
+  including old key retirement, new key availability, JWKS publication, issuer or
+  tenant scope, actor identity, authorization decision, and policy version.
+  
+  ## Cross-Plane Boundaries
+  
+  L1 authorization MAY decide whether an actor can create, approve, publish, or
+  execute policy-backed actions, but it MUST NOT own the policy record.
+  
+  L2 administration MAY present policy state and execute rotation operations, but
+  it MUST NOT persist policy truth outside the governance policy model.
+  
+  Runtime protocol surfaces MAY consume the published effective policy, but they
+  MUST NOT mutate the policy source of truth.
+  
+  ## Out Of Scope
+  
+  This specification does not require a specific cryptographic provider, key
+  storage backend, HSM, KMS, or algorithm beyond the key classes already governed
+  by repository features.
+  
+  This specification does not define the administration API payloads used to
+  request or execute rotation. Those are governed by the administration-plane key
+  rotation requirements.
+  
+  ## Verification
+  
+  Verification MUST prove policy version immutability, approval enforcement,
+  effective-policy publication, fail-closed behavior, emergency trigger handling,
+  audit completeness, evidence completeness, and absence of administration or
+  authorization writes to governance-owned policy truth.
+  
+  ## Traceability
+  
+  This specification is governed by `adr:1094`, `adr:1016`, and `adr:1050`.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1094"
+  - "adr:1016"
+  - "adr:1050"

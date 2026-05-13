@@ -1,0 +1,74 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1094"
+number: 1094
+slug: "key-rotation-policy-belongs-to-governance-plane"
+title: "Key rotation policy belongs to governance plane"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Key rotation policy belongs to the governance plane."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define key rotation policy as governance-plane truth with administration and authz boundaries."
+    at: "2026-05-13T11:04:19Z"
+references: []
+body: |-
+  ## Decision
+  
+  Key rotation policy belongs to the governance plane.
+  
+  `tigrbl_auth` MUST treat key rotation policy as durable governance truth, not
+  as an administration-plane toggle and not as an authorization-plane rule.
+  Administration surfaces may display effective key rotation policy, request
+  policy changes, approve configured workflows, and execute key rotation against a
+  published policy. Authorization surfaces may decide whether an actor can invoke
+  administration or governance actions. Neither plane owns the policy record.
+  
+  The plane ownership rule is:
+  
+  - L1 authorization owns permission evaluation and enforcement.
+  - L2 administration owns privileged operational workflows and safe mutations.
+  - L3 governance owns policy truth, policy version lifecycle, approval rules,
+    audit requirements, evidence requirements, and effective policy publication.
+  
+  No plane may persist another plane's authoritative state.
+  
+  ## Context
+  
+  The repository already exposes executable key rotation behavior through key and
+  operator surfaces. That satisfies part of the operational workflow, but it does
+  not define who owns the rotation cadence, emergency trigger semantics, overlap
+  windows, retirement windows, publication expectations, approval rules, or
+  evidence obligations.
+  
+  Those values are policy. If they are configured directly in administration,
+  administration becomes the policy authority and overlaps the governance plane.
+  If they are configured in authorization, authorization becomes both policy
+  authoring and enforcement. Both designs blur the plane model.
+  
+  ## Consequences
+  
+  Key rotation policy MUST be represented as a governed policy artifact with an
+  immutable version lifecycle and a published effective-policy projection.
+  
+  Administration MAY expose forms, RPC methods, CLI commands, or UIX flows that
+  submit policy changes or execute key rotation, but those surfaces MUST route
+  policy changes through governance and MUST execute rotation only against the
+  published effective policy.
+  
+  Authorization MUST gate access to governance and administration actions, but it
+  MUST NOT define the rotation cadence, emergency criteria, approval path, or
+  retirement semantics.
+  
+  Runtime signing, JWKS publication, discovery, and verifier-facing surfaces MAY
+  consume the published effective policy and key state, but they MUST NOT mutate
+  the policy source of truth.
+  
+  Verification MUST prove that policy truth is stored under governance, admin
+  operations reference a specific policy version, authorization gates the action,
+  and runtime key/JWKS behavior consumes only the published effective policy.

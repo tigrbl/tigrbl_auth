@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260513T095231Z",
+  "generated_at": "20260513T111229Z",
   "passed": false,
   "summary": {
     "static_manifest_passed": true,
@@ -15,7 +15,7 @@
       "3.12"
     ],
     "expected_supported_python_count": 3,
-    "detected_supported_python_count": 1,
+    "detected_supported_python_count": 2,
     "declared_runtime_matrix_env_count": 14,
     "declared_test_lane_env_count": 15,
     "declared_certification_tox_env_count": 33,
@@ -51,23 +51,27 @@
     "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
   ],
   "warnings": [
-    "The current container does not provide supported interpreter binaries for: 3.10, 3.11."
+    "The current container does not provide supported interpreter binaries for: 3.11."
   ],
   "detected_supported_pythons": [
     {
       "version": "3.10",
-      "available": false,
-      "path": null
+      "available": true,
+      "path": "py -3.10",
+      "source": "py-launcher"
     },
     {
       "version": "3.11",
       "available": false,
-      "path": null
+      "path": null,
+      "source": "py-launcher",
+      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
     },
     {
       "version": "3.12",
       "available": true,
-      "path": "<local-path>"
+      "path": "<repo>/.venv/Scripts/python.exe",
+      "source": "current-interpreter"
     }
   ],
   "dependency_manifest": {

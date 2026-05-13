@@ -25,6 +25,13 @@ REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
 TOKEN_RECORD_COLUMNS = {"refresh_family_id", "refresh_parent_hash", "refresh_successor_hash", "used_at", "reuse_detected_at"}
+ADMIN_USER_COLUMNS = {
+    "is_admin",
+    "is_superuser",
+    "must_change_password",
+    "password_reset_token_hash",
+    "password_reset_expires_at",
+}
 SUPPORTED_BACKENDS = ("sqlite", "postgres")
 
 
@@ -50,6 +57,7 @@ async def _column_snapshot() -> dict[str, list[str]]:
         "sessions": sorted(await column_names_async("sessions")),
         "auth_codes": sorted(await column_names_async("auth_codes")),
         "token_records": sorted(await column_names_async("token_records")),
+        "users": sorted(await column_names_async("users")),
     }
 
 
@@ -221,11 +229,12 @@ async def _exercise_backend(
             result["applied_revisions_after_downgrade"] = applied_after_downgrade
             result["head_revision_after_downgrade"] = head_revision_after_downgrade
             result["downgrade_passed"] = bool(
-                downgraded == expected_head_revision
+                downgraded == downgrade_target_revision
                 and bool(downgrade_schema.get("passed", False))
-                and SESSION_COLUMNS.isdisjoint(downgrade_columns["sessions"])
-                and AUTH_CODE_COLUMNS.isdisjoint(downgrade_columns["auth_codes"])
-                and TOKEN_RECORD_COLUMNS.isdisjoint(downgrade_columns["token_records"])
+                and SESSION_COLUMNS <= set(downgrade_columns["sessions"])
+                and AUTH_CODE_COLUMNS <= set(downgrade_columns["auth_codes"])
+                and TOKEN_RECORD_COLUMNS <= set(downgrade_columns["token_records"])
+                and ADMIN_USER_COLUMNS.isdisjoint(downgrade_columns["users"])
                 and head_revision_after_downgrade == downgrade_target_revision
             )
 

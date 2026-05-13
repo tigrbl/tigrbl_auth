@@ -145,6 +145,15 @@ def _actor_claim(actor_claims: dict[str, Any] | None) -> dict[str, str] | None:
     return {'sub': actor_sub}
 
 
+def _header_value(value: Any) -> str | None:
+    if value is None:
+        return None
+    if isinstance(value, str):
+        stripped = value.strip()
+        return stripped or None
+    return None
+
+
 @api.route('/token/exchange', methods=['POST'])
 async def token_exchange(request: Request, dpop: str | None = Header(None, alias='DPoP')) -> dict[str, Any]:
     deployment = deployment_from_request(request, settings)
@@ -175,7 +184,11 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
             raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_request', 'error_description': 'invalid actor_token'}) from exc
 
     try:
-        sender_constraint = validate_sender_constraint(request, deployment, dpop_proof=dpop or dpop_proof_from_request(request))
+        sender_constraint = validate_sender_constraint(
+            request,
+            deployment,
+            dpop_proof=_header_value(dpop) or dpop_proof_from_request(request),
+        )
     except OAuthPolicyViolation as exc:
         raise HTTPException(exc.status_code, {'error': exc.error, 'error_description': exc.description}) from exc
     except ValueError as exc:

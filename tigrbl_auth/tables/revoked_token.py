@@ -23,7 +23,7 @@ class RevokedToken(Base, GUIDPk, Timestamped):
     __tablename__ = "revoked_tokens"
     __table_args__ = ({"schema": "authn"},)
 
-    token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True))
+    token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True, default=lambda: uuid.uuid4().hex))
     token_type_hint: Mapped[str | None] = acol(storage=S(String(64), nullable=True))
     subject: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     tenant_id: Mapped[uuid.UUID | None] = acol(

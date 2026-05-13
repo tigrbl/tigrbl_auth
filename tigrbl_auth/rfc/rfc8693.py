@@ -48,6 +48,15 @@ def include_rfc8693(app: TigrblApp) -> None:
         app.include_router(api)
 
 
+def _header_value(value: object) -> str | None:
+    if value is None:
+        return None
+    if isinstance(value, str):
+        stripped = value.strip()
+        return stripped or None
+    return None
+
+
 # Standard Token Type URIs per RFC 8693 Section 3
 class TokenType(Enum):
     """Standard token type URIs for token exchange."""
@@ -309,9 +318,10 @@ async def token_exchange_endpoint(
         raise HTTPException(status.HTTP_404_NOT_FOUND, "token exchange disabled")
 
     jkt: str | None = None
-    if dpop:
+    dpop_header = _header_value(dpop)
+    if dpop_header:
         try:
-            jkt = verify_proof(dpop, request.method, str(request.url))
+            jkt = verify_proof(dpop_header, request.method, str(request.url))
         except ValueError as exc:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, str(exc)) from exc
 

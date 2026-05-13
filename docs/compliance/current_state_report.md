@@ -64,7 +64,7 @@
 - install_substrate_manifest_passed: `True`
 - install_substrate_current_profile: `base`
 - install_substrate_current_python_supported: `True`
-- install_substrate_detected_supported_python_count: `1`
+- install_substrate_detected_supported_python_count: `2`
 - install_substrate_expected_supported_python_count: `3`
 - install_substrate_tox_env_count: `33`
 - install_substrate_tox_pip_check_complete: `True`
@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `.pytest-tmp/operator-state/certification-closure/tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `.pytest-tmp/operator-plane-state66/tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -124,9 +124,9 @@
 - runner_contract_hash_invariance_passed: `True`
 - no_fastapi_starlette_passed: `True`
 - feature_completeness_capability_count: `10`
-- feature_completeness_passed_capability_count: `9`
-- feature_completeness_failed_capability_count: `1`
-- fully_featured_package_boundary_now: `False`
+- feature_completeness_passed_capability_count: `10`
+- feature_completeness_failed_capability_count: `0`
+- fully_featured_package_boundary_now: `True`
 - feature_release_verify_verb_present: `True`
 - certification_evidence_index_passed: `False`
 - certification_evidence_claim_count: `396`
@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `51`
+- release_evidence_dirty_checkout_path_count: `50`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`
@@ -147,7 +147,7 @@
 - validated_runtime_matrix_passed_count: `14`
 - validated_clean_room_matrix_green: `True`
 - validated_test_lane_expected_count: `15`
-- validated_test_lane_passed_count: `1`
+- validated_test_lane_passed_count: `2`
 - validated_in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `False`
