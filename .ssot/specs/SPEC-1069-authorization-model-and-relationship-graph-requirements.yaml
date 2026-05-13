@@ -19,61 +19,82 @@ status_notes:
 references: []
 body: |-
   ## Overview
-  
-  This specification defines normative requirements for authorization models and relationship graph capabilities in `tigrbl_auth`.
-  
+
+  This specification defines normative requirements for authorization models and
+  relationship graph capabilities in `tigrbl_auth`.
+
   ## Decision Source
-  
+
   Decision source: `adr:1049`.
-  
+
   ## Scope
-  
+
   This specification governs:
-  
-  - `F13 RBAC` with current implementation status: `partial`.
-  - `F14 ABAC` with current implementation status: `partial`.
-  - `F15 ReBAC` with current implementation status: `absent`.
-  - `F22 Graph-based authorization` with current implementation status: `absent`.
-  - `F23 Relationship modeling` with current implementation status: `absent`.
-  - `F24 Fine-grained permissions` with current implementation status: `partial`.
-  - `F25 Dynamic conditions` with current implementation status: `partial`.
-  
+  - `F13 RBAC` with current implementation status: `partial`
+  - `F14 ABAC` with current implementation status: `partial`
+  - `F15 ReBAC` with current implementation status: `absent`
+  - `F22 Graph-based authorization` with current implementation status: `absent`
+  - `F23 Relationship modeling` with current implementation status: `absent`
+  - `F24 Fine-grained permissions` with current implementation status: `partial`
+  - `F25 Dynamic conditions` with current implementation status: `partial`
+
   ## Normative Requirements
-  
-  RBAC MUST define roles, assignments, inheritance or non-inheritance rules, tenant scoping, conflict handling, and audit evidence before `F13` can be considered implemented.
-  
-  ABAC MUST define subject, object, action, environment, and tenant attributes with deterministic evaluation semantics before `F14` can be considered implemented.
-  
-  ReBAC MUST define relationship tuples, relation schemas, traversal limits, caveats, consistency expectations, and explainability before `F15` can be considered implemented.
-  
-  Graph-based authorization MUST define graph storage, query semantics, consistency boundaries, cycle handling, and decision explanations before `F22` can be considered implemented.
-  
-  Relationship modeling MUST define schema authoring, validation, migration, tenant separation, and backward compatibility before `F23` can be considered implemented.
-  
-  Fine-grained permissions MUST bind resource, action, condition, tenant, and principal semantics to auditable decisions before `F24` can be considered implemented.
-  
-  Dynamic conditions MUST be deterministic, bounded, auditable, and safe to evaluate before `F25` can be considered implemented.
-  
+
+  RBAC MUST define roles, assignments, inheritance or non-inheritance rules,
+  tenant scoping, conflict handling, and audit evidence before `F13` can be
+  considered implemented.
+
+  ABAC MUST define subject, object, action, environment, and tenant attributes
+  with deterministic evaluation semantics before `F14` can be considered
+  implemented.
+
+  ReBAC MUST define relationship tuples, relation schemas, traversal limits,
+  caveats, consistency expectations, and explainability before `F15` can be
+  considered implemented.
+
+  Graph-based authorization MUST define graph storage, query semantics,
+  consistency boundaries, cycle handling, and decision explanations before `F22`
+  can be considered implemented.
+
+  Relationship modeling MUST define schema authoring, validation, migration,
+  tenant separation, and backward compatibility before `F23` can be considered
+  implemented.
+
+  Fine-grained permissions MUST bind resource, action, condition, tenant, and
+  principal semantics to auditable decisions before `F24` can be considered
+  implemented.
+
+  Dynamic conditions MUST be deterministic, bounded, auditable, and safe to
+  evaluate before `F25` can be considered implemented.
+
   ## Standards / Specs
-  
-  - ANSI/INCITS 359 RBAC for role-based access control semantics.
-  - NIST RBAC and NIST SP 800-162 for RBAC and ABAC guidance.
-  - XACML 3.0 for policy and attribute decision concepts.
-  - Zanzibar, OpenFGA, and SpiceDB for relationship-based authorization graph models.
-  - OPA/Rego, Cedar, and CEL for policy expression and condition language reference points.
-  - Envoy external authorization for PDP integration patterns.
-  - OAuth 2.0 scopes and RFC 9396 Rich Authorization Requests where token-bound authorization requests are used.
-  
+
+  - ANSI/INCITS 359 RBAC for role-based access control semantics
+  - NIST RBAC and NIST SP 800-162 for RBAC and ABAC guidance
+  - XACML 3.0 for policy and attribute decision concepts
+  - Zanzibar, OpenFGA, and SpiceDB for relationship-based authorization graph
+    models
+  - OPA/Rego, Cedar, and CEL for policy expression and condition language
+    reference points
+  - Envoy external authorization for PDP integration patterns
+  - OAuth 2.0 scopes and RFC 9396 Rich Authorization Requests where token-bound
+    authorization requests are used
+
   ## Out Of Scope
-  
-  This specification does not require a specific graph database, policy language, or external PDP implementation.
-  
+
+  This specification does not require a specific graph database, policy
+  language, or external PDP implementation.
+
   ## Verification
-  
-  Verification MUST prove deterministic decisions, tenant isolation, deny behavior, relationship traversal bounds, migration safety, and audit evidence for each implemented authorization model.
-  
+
+  Verification MUST prove deterministic decisions, tenant isolation, deny
+  behavior, relationship traversal bounds, migration safety, and audit evidence
+  for each implemented authorization model.
+
   ## Traceability
-  
-  This specification governs `F13`, `F14`, `F15`, `F22`, `F23`, `F24`, and `F25`.
+
+  This specification governs `F13`, `F14`, `F15`, `F22`, `F23`, `F24`, and
+  `F25`.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1049"

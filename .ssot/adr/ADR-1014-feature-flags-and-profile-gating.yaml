@@ -8,19 +8,13 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+summary: "Profiles and feature flags are authoritative runtime-governance inputs for mounted surfaces, discovery, contracts, manifests, and release evidence."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Decision
-  
-  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
-  
-  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
-  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
-  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
   
   # Feature flags and profile gating are release-governed surfaces
   
@@ -31,14 +25,32 @@ body: |-
     alignment-only, operational, surface, and extension-quarantine flag groups.
   - Profiles shall gate which targets are mounted, emitted in discovery,
     represented in contracts, and claimable in the compliance plane.
-  - Legacy flag labels may remain only as migration history and may not drive new
-    certification claims.
-  - A disabled feature must disappear from mounted surfaces, contracts, manifests,
-    and release evidence.
+  - Profiles and feature flags are authoritative contract inputs for executable
+    runtime posture. Generated reports may summarize current state, but they do
+    not replace the governing profile and flag semantics defined here and in the
+    accepted runtime profile specifications.
+  - Legacy flag labels may remain only as migration history and may not drive
+    new certification claims.
+  - A disabled feature must disappear from mounted surfaces, contracts,
+    manifests, and release evidence.
+  - A feature, route, metadata field, or contract artifact that is
+    issuer-bearing, surface-gated, or release-claimable must derive from the
+    active resolved deployment rather than an ambient constant or parallel flag
+    table in live request paths.
   
   ## Context
   
-  `tigrbl_auth` needs two explicit flag surfaces: environment-backed standards and
-  surface flags inside the runtime, and operator-facing CLI flags for serving,
-  governance, and control-plane administration. Without a governed registry,
-  downstream partial feature adoption becomes ambiguous and non-certifiable.
+  `tigrbl_auth` needs two explicit flag surfaces: environment-backed standards
+  and surface flags inside the runtime, and operator-facing CLI flags for
+  serving, governance, and control-plane administration. Without a governed
+  registry, downstream partial feature adoption becomes ambiguous and
+  non-certifiable.
+  
+  ## Authoritative Use
+  
+  This ADR is authoritative for profile and feature-flag gating rules.
+  
+  `CURRENT_STATE.md`, `CERTIFICATION_STATUS.md`, and generated compliance
+  reports remain authoritative projections for current release posture and
+  preserved evidence readiness, but they do not supersede the runtime-governing
+  rules defined by accepted ADRs and normative SPECs.

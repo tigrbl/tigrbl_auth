@@ -1,0 +1,91 @@
+schema_version: "0.1.0"
+kind: "spec"
+id: "spc:1094"
+number: 1094
+slug: "tenant-trust-domain-issuance-and-verification-requirements"
+title: "Tenant trust-domain issuance and verification requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines tenant trust-domain requirements for issuer binding, signing-key selection, tenant-scoped issuance, verifier expectations, and cross-tenant rejection."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define tenant trust-domain requirements beyond public discovery and JWKS publication."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines tenant trust-domain requirements for issuer
+  binding, signing-key selection, tenant-scoped issuance, verifier
+  expectations, and cross-tenant rejection.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1092`.
+  
+  ## Scope
+  
+  This specification applies to tenant-scoped token issuance, tenant-scoped key
+  selection, verifier trust expectations, token exchange behavior when tenant
+  identity is preserved, and cross-tenant failure behavior.
+  
+  ## Tenant Trust Domain
+  
+  For an enabled tenant `{tenant_slug}`, the tenant trust domain MUST define at
+  least:
+  
+  - tenant-scoped issuer;
+  - tenant-scoped JWKS URI;
+  - active signing key set;
+  - next or staged key set when rotation is in progress;
+  - allowed signing algorithms for the tenant domain; and
+  - verifier expectations for accepted issuer and key ownership.
+  
+  ## Issuance Rules
+  
+  Tokens issued for a tenant trust domain MUST:
+  
+  - use the tenant-scoped issuer when the token is represented as
+    tenant-scoped;
+  - use signing-key material owned by that tenant trust domain;
+  - remain consistent with tenant discovery and tenant JWKS publication; and
+  - preserve tenant identity semantics through token exchange when tenant
+    context is retained.
+  
+  ## Verifier Rules
+  
+  Tenant token verification MUST:
+  
+  - require issuer match for the expected tenant trust domain;
+  - require key ownership match for the expected tenant trust domain;
+  - reject cross-tenant acceptance even when the root deployment hosts multiple
+    tenants; and
+  - fail closed for unknown tenant issuer, unknown tenant key, or issuer/key
+    mismatch.
+  
+  ## Relationship To Public Discovery
+  
+  `spc:1090` defines the public discovery and JWKS boundary. This specification
+  governs the deeper issuance and verifier obligations that public tenant
+  discovery must reflect.
+  
+  ## Verification
+  
+  Verification MUST prove:
+  
+  - tenant discovery issuer equals issuance issuer for tenant-scoped tokens;
+  - tenant discovery `jwks_uri` equals the verifier key source for that tenant
+    domain;
+  - signing keys selected for tenant-scoped issuance belong to the requested
+    tenant trust domain;
+  - tenant A verifiers reject tenant B issuer or key material; and
+  - cross-tenant leakage and acceptance do not occur in mixed-tenant runtime
+    deployments.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1092"

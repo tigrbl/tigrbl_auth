@@ -1,0 +1,72 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1091"
+number: 1091
+slug: "resource-verifier-contract-requirements"
+title: "Resource verifier contract requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines first-class verifier-grade resource contracts for protected-resource behavior."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accept first-class verifier-grade resource contracts for protected-resource behavior."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines first-class verifier-grade resource contracts for
+  protected-resource behavior in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1067`.
+  
+  ## Contract Model
+  
+  A resource verifier contract MUST define:
+  
+  - verifier logic identity or version;
+  - accepted issuer set;
+  - accepted audience or resource indicators;
+  - accepted token classes;
+  - sender-constraint requirements;
+  - replay and freshness expectations;
+  - required claims and proof material; and
+  - introspection-caller policy when introspection is part of the verifier
+    path.
+  
+  ## Runtime Requirements
+  
+  Protected-resource behavior MUST fail closed when issuer, audience,
+  sender-constraint, or required-claim expectations are not satisfied.
+  
+  DPoP-bound or mTLS-bound token presentation requirements MUST derive from the
+  same contract as unconstrained bearer-token acceptance rules.
+  
+  RFC 7662 introspection caller authentication MUST be governed by the same
+  verifier-grade contract when introspection is enabled for the resource
+  surface.
+  
+  ## Projection Rules
+  
+  RFC 9728 protected-resource metadata MUST be derived from the resource
+  verifier contract. Runtime verifier behavior MUST use the same contract
+  source.
+  
+  Metadata MUST NOT advertise broader acceptance or weaker proof requirements
+  than runtime enforcement actually implements.
+  
+  ## Verification
+  
+  Verification MUST prove that metadata and runtime behavior agree on accepted
+  issuers, audience expectations, proof requirements, introspection-caller
+  policy, and failure semantics.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1067"

@@ -8,27 +8,37 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The repository MUST define normalized tenant isolation and client policy rules across:"
+summary: "The repository MUST define normalized tenant isolation and client policy rules across governed planes."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Requirements
-  
-  The repository MUST define normalized tenant isolation and client policy rules across:
+
+  The repository MUST define normalized tenant isolation and client policy rules
+  across:
   - admin API
   - public API
   - admin UIX
-  - selected public UIX surfaces where tenant or client choices are intentionally user-visible
-  
+  - selected public UIX surfaces where tenant or client choices are
+    intentionally user-visible
+
   The requirements MUST distinguish:
   - visibility rules
   - mutation authority
   - read-model scope
   - tenant scoping behavior
   - public-facing versus admin-only exposure
-  
-  Cross-plane behavior MUST remain consistent so tenant and client concerns are not governed differently by surface accident.
+  - issuer identity source
+  - signing-scope authority
+
+  Cross-plane behavior MUST remain consistent so tenant and client concerns are
+  not governed differently by surface accident.
+
+  Tenant-sensitive behavior MUST resolve from a governed trust-domain authority
+  object or equivalent normalized source rather than from route-local defaults.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1016"
+  - "adr:1062"

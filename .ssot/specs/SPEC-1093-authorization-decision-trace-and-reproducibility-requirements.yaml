@@ -1,0 +1,60 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1093"
+number: 1093
+slug: "authorization-decision-trace-and-reproducibility-requirements"
+title: "Authorization decision trace and reproducibility requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines reproducible pre-token authorization decision artifacts for `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accept reproducible pre-token authorization decision artifacts for OAuth and OIDC issuance."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines reproducible pre-token authorization decision
+  artifacts for `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1069`.
+  
+  ## Decision Artifact
+  
+  The authorization decision artifact MUST be capable of recording:
+  
+  - normalized request inputs;
+  - policy identity or hash;
+  - derivation steps;
+  - resolved scopes or authorization details;
+  - proof-binding context; and
+  - a stable decision hash.
+  
+  ## Determinism Boundary
+  
+  The decision artifact MUST be reproducible from the same normalized inputs
+  and policy state. Final token bytes MAY remain nondeterministic because of
+  timestamps, token identifiers, signatures, or key state.
+  
+  ## Runtime Requirements
+  
+  OAuth and OIDC issuance paths MUST preserve enough deterministic pre-token
+  artifact data to explain why a token was minted even when the final emitted
+  token bytes differ across valid runs.
+  
+  ## Verification
+  
+  Verification MUST prove that repeated evaluation of the same normalized inputs
+  and policy state produces the same decision artifact even when emitted JWTs
+  differ.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1069"

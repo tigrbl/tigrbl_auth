@@ -1,0 +1,50 @@
+schema_version: "0.1.0"
+kind: "adr"
+id: "adr:1092"
+number: 1092
+slug: "tenant-trust-domain-binding"
+title: "Tenant trust-domain binding"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tenant discovery, JWKS publication, token issuance, signing-key selection, and verifier expectations shall remain bound to the same tenant trust domain."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define tenant trust-domain binding for tenant-scoped issuer, key, issuance, and verifier behavior."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Context
+  
+  Tenant-aware public discovery and tenant JWKS publication already establish a
+  tenant issuer boundary. That boundary remains incomplete unless token
+  issuance, signing-key selection, and verifier trust expectations are required
+  to use the same tenant-scoped authority.
+  
+  ## Decision
+  
+  Each enabled tenant is a trust domain for public issuer, key selection, token
+  issuance, and verifier acceptance semantics.
+  
+  The tenant trust domain governs:
+  
+  - tenant-scoped issuer;
+  - tenant-scoped JWKS publication;
+  - active and next signing-key selection for tenant-scoped issuance;
+  - verifier expectations for accepted issuer and key ownership; and
+  - cross-tenant rejection behavior.
+  
+  Tenant discovery and tenant JWKS publication are public projections of this
+  trust domain. They must not drift from issuance or verification behavior.
+  
+  ## Operational Consequences
+  
+  A token advertised as tenant-scoped must be minted with the tenant-scoped
+  issuer and with key material owned by that tenant trust domain.
+  
+  Verifiers must reject cross-tenant issuer or key mismatches even when
+  multiple tenants share one runtime deployment or root hostname.

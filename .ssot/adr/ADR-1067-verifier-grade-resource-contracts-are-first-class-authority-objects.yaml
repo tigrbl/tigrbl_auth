@@ -1,0 +1,49 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1067"
+number: 1067
+slug: "verifier-grade-resource-contracts-are-first-class-authority-objects"
+title: "Verifier-grade resource contracts are first-class authority objects"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class authority objects for protected-resource verification, introspection caller authentication, sender-constrained presentation, and RFC 9728 metadata."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Elevate verifier-grade resource contracts into accepted runtime authority."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl_auth` MUST treat verifier-grade resource contracts as first-class
+  authority objects rather than as metadata side effects of endpoint code.
+  
+  Resource contracts MUST own, at minimum:
+  
+  - accepted issuers;
+  - accepted audience and resource bindings;
+  - accepted token classes;
+  - sender-constraint requirements;
+  - replay and freshness expectations;
+  - required claims or proof material; and
+  - introspection-caller policy when introspection is part of the verifier
+    surface.
+  
+  RFC 9728 publication is a projection of this authority object, not the source
+  of truth.
+  
+  ## Rationale
+  
+  The repository already publishes protected-resource metadata, but verifier
+  behavior is still too distributed to certify as one coherent contract.
+  
+  ## Consequences
+  
+  Runtime verifiers, metadata publication, introspection caller
+  authentication, sender-constrained token presentation, and interoperability
+  evidence should all derive from the same governed resource-contract source.

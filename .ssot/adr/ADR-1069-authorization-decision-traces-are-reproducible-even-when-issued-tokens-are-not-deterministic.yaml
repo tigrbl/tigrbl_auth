@@ -1,0 +1,41 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1069"
+number: 1069
+slug: "authorization-decision-traces-are-reproducible-even-when-issued-tokens-are-not-deterministic"
+title: "Authorization decision traces are reproducible even when issued tokens are not deterministic"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` MUST separate pre-token authorization determinism from final JWT nondeterminism and preserve reproducible decision traces."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accept reproducible authorization-decision trace governance for OAuth and OIDC issuance."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl_auth` MUST separate pre-token authorization determinism from final
+  JWT byte determinism.
+  
+  Issued tokens MAY remain nondeterministic because of `iat`, `exp`, `jti`,
+  signing randomness, or key material changes. However, the pre-token
+  authorization decision MUST be representable as a reproducible governed
+  artifact derived from normalized inputs and policy state.
+  
+  ## Rationale
+  
+  Requiring raw JWT determinism would collapse legitimate issuance semantics.
+  The higher-value invariant is that the server can later show what normalized
+  request, policy, derivation steps, authorization details, and proof bindings
+  led to the issuance decision.
+  
+  ## Consequences
+  
+  The repository should add authorization-decision traces and stable decision
+  hashes rather than mislabel nondeterministic token minting as deterministic.

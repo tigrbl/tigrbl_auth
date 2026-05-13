@@ -1,0 +1,59 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1092"
+number: 1092
+slug: "delegation-graph-and-token-exchange-provenance-requirements"
+title: "Delegation graph and token-exchange provenance requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines durable delegation lineage requirements for token exchange and related authorization flows."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accept durable delegation-lineage requirements for token exchange and related flows."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Overview
+  
+  This specification defines durable delegation lineage requirements for token
+  exchange and related authorization flows in `tigrbl_auth`.
+  
+  ## Decision Source
+  
+  Decision source: `adr:1068`.
+  
+  ## Graph Model
+  
+  The governed delegation model MUST be able to represent:
+  
+  - subjects;
+  - actors;
+  - clients;
+  - resources;
+  - trust domains;
+  - issued-token lineage;
+  - attenuation or narrowing edges; and
+  - proof-binding continuity.
+  
+  ## Runtime Requirements
+  
+  Token exchange and other delegation-bearing flows MUST persist enough
+  governed server-side provenance to reconstruct lineage independently of the
+  final token payload.
+  
+  Provenance MUST preserve parentage, attenuation, actor-subject context,
+  trust-domain context, and proof-binding continuity.
+  
+  ## Verification
+  
+  Verification MUST prove that downstream audit or verifier tooling can recover
+  parentage, attenuation, trust-domain context, and proof continuity from
+  governed artifacts.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1068"

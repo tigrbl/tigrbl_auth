@@ -1,0 +1,81 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1091"
+number: 1091
+slug: "request-scoped-deployment-authority-and-issuer-binding"
+title: "Request-scoped deployment authority and issuer binding"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` already governs packaged profiles, external profile references,"
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Context
+  
+  `tigrbl_auth` already governs packaged profiles, external profile references,
+  and resolver precedence. The remaining risk is not profile selection; it is
+  live runtime drift when individual request handlers, token issuers, discovery
+  publishers, or diagnostics surfaces bypass the active resolved deployment and
+  instead rely on global settings, legacy constants, or parallel decision logic.
+  
+  Issuer-bearing artifacts and enabled routes must not diverge by code path.
+  Otherwise the repository can emit inconsistent `issuer`, `audience`,
+  `jwks_uri`, contract posture, or route enablement for the same effective
+  deployment.
+  
+  ## Decision
+  
+  The active resolved deployment is the only supported authority for live
+  runtime request handling.
+
+  Every issuer-bearing artifact and every enabled route in a live request path
+  shall derive from the same active resolved deployment object, with no global
+  `ISSUER` fallback when a request-scoped deployment is available.
+
+  This resolved deployment object is the canonical runtime authority object for
+  the active request path. When tenant-specific issuer or signing posture
+  applies, that tenant trust-domain posture must be attached to or derived from
+  the same runtime authority object rather than reconstructed in parallel by
+  individual handlers.
+  
+  This rule applies to:
+  
+  - OAuth and OIDC discovery responses;
+  - protected-resource metadata;
+  - token, ID token, authorization response, token exchange, and introspection
+    outputs;
+  - route enablement and fail-closed route hiding;
+  - TLS posture checks for request handling;
+  - diagnostics and contract publication surfaces such as `/docs` and
+    `/openapi.json` when those surfaces are exposed.
+  
+  Packaged profile files, external profile files, environment overrides, and CLI
+  overrides remain valid configuration inputs only through the deployment
+  resolver. Runtime code shall consume resolved deployment fields and shall not
+  recreate issuer or surface decisions independently.
+  
+  ## Operational Consequences
+  
+  Live request paths must obtain deployment posture from the active request or
+  app context.
+  
+  Contract generation, discovery publication, and evidence generation must
+  either:
+  
+  - use the same resolved deployment logic as runtime handling; or
+  - be explicitly labeled as non-runtime fixtures when they intentionally
+    project a static authored snapshot.
+  
+  Any handler that emits `issuer`, `audience`, `jwks_uri`, or route exposure
+  decisions from a global constant rather than the active deployment is out of
+  conformance with this ADR.
+  
+  ## Related Decisions
+  
+  - `adr:1014` governs feature flags and profile gating.
+  - `adr:1042` governs runtime profile configuration as package input.
+  - `adr:1065` governs profile reference union for runtime configuration.

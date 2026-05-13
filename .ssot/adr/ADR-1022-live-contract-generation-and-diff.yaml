@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1022"
 number: 1022
@@ -8,20 +8,29 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+summary: "Authoritative machine-readable contracts MUST be generated from live runtime"
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
-  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  ## Decision
   
-  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
-  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
-  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  Authoritative machine-readable contracts MUST be generated from live runtime
+  resolution and validated against the same resolved deployment semantics.
   
-  # Live contract generation and diff
+  This decision applies not only to OpenAPI and OpenRPC, but also to discovery
+  metadata, JWKS-facing publication semantics, and protected-resource metadata
+  when those artifacts are presented as authoritative.
   
-  - Status: accepted
-  - Decision: OpenAPI and OpenRPC SHALL be generated from live deployment metadata and validated/diffed in CI.
-  - Consequences: placeholder or drifting contracts fail release gates.
+  Preserved snapshots, fixtures, or profile examples MAY exist for testing and
+  documentation, but they MUST be labeled as non-authoritative unless they are
+  regenerated from the same runtime-resolution path.
+  
+  ## Consequences
+  
+  Runtime-derived artifact parity becomes a governed requirement:
+  
+  - live metadata and preserved authoritative artifacts must agree;
+  - stale preserved projections fail truthfulness posture; and
+  - fixture-only artifacts must not be confused with current runtime truth.

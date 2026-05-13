@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1057"
 number: 1057
@@ -19,12 +19,24 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST define the public API as a separate governed boundary. The public API boundary includes public OAuth, OIDC, and discovery routes, public registration and logout surfaces where in scope, and public contract publication derived from the effective deployment boundary. The public API boundary MUST exclude admin/control-plane operations.
+  `tigrbl_auth` MUST define the public API as a separate governed boundary. The
+  public API boundary includes public OAuth, OIDC, and discovery routes, public
+  registration and logout surfaces where in scope, and public contract
+  publication derived from the effective deployment boundary.
+  
+  The public API boundary MUST explicitly exclude admin/control-plane
+  operations, privileged diagnostics, and any metadata that would disclose
+  privileged plane topology or authority.
   
   ## Rationale
   
-  Public contract artifacts already exist, but the repository should state the public API boundary directly rather than only through generated contract outputs. An explicit boundary protects against control-plane leakage and clarifies what downstream public UIX clients may depend on.
+  Public contract artifacts already exist, but public publication must be
+  governed as a plane with explicit leakage rules and runtime-truth obligations.
   
   ## Scope
   
-  In scope: public OAuth/OIDC/discovery behavior and public metadata surfaces. Out of scope: admin operations, admin contract methods, operator-only flows, and public UI presentation concerns.
+  In scope: public OAuth/OIDC/discovery behavior, public metadata surfaces, and
+  public runtime-truth publication.
+  
+  Out of scope: admin operations, admin contract methods, operator-only flows,
+  and public UI presentation concerns.

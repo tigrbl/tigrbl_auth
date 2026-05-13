@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1062"
 number: 1062
@@ -19,12 +19,21 @@ body: |-
   Status: proposed
   Date: 2026-05-04
   
-  `tigrbl_auth` MUST normalize tenant isolation and client policy semantics across admin API, public API, admin UIX, and any in-scope public UIX surfaces. The repository MUST distinguish administrative visibility, public-facing exposure, mutation authority, and tenant/client scoping rules per surface.
+  `tigrbl_auth` MUST normalize tenant isolation and client policy semantics
+  across admin API, public API, admin UIX, and any in-scope public UIX surfaces.
+  The repository MUST distinguish administrative visibility, public-facing
+  exposure, mutation authority, and tenant/client scoping rules per surface.
+  
+  These semantics MUST resolve from a first-class trust-domain authority source
+  rather than from incidental route or service behavior alone.
   
   ## Rationale
   
-  Tenant and client concerns already exist across multiple surfaces, but they are not yet normalized as one cross-plane decision. A single ADR prevents inconsistent scoping rules and reduces surface-specific drift.
+  Tenant and client concerns already exist across multiple surfaces, but they
+  are not yet normalized around one governing trust-domain identity source.
   
   ## Scope
   
-  This ADR applies to tenant scoping, client policy visibility, and client-management exposure rules across governed surfaces. It does not by itself define every per-feature policy field.
+  This ADR applies to tenant scoping, issuer identity, signing scope, client
+  policy visibility, and client-management exposure rules across governed
+  surfaces.

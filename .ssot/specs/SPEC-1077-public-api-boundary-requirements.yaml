@@ -15,21 +15,31 @@ status_notes: []
 references: []
 body: |-
   ## Requirements
-  
-  The public API boundary MUST define the public protocol-facing API surface for `tigrbl_auth`.
-  
+
+  The public API boundary MUST define the public protocol-facing API surface for
+  `tigrbl_auth`.
+
   Required in-scope capabilities:
   - public OAuth routes
   - public OIDC routes
   - public discovery and metadata routes
   - public registration and logout routes where explicitly enabled
-  
+
   Required exclusions:
   - admin/control-plane operations
   - admin contract methods
   - operator-only flows
+  - privileged diagnostics
   - public UI presentation logic
-  
-  Public contract publication MUST reflect the effective deployment boundary and MUST NOT leak admin-only operations into the public API surface.
+
+  Public contract publication MUST reflect the effective deployment boundary.
+  It MUST NOT leak admin-only operations into the public API surface and MUST
+  NOT disclose privileged-plane topology beyond the governed public contract.
+
+  When preserved public artifacts are presented as authoritative, they MUST be
+  runtime-derived from the same deployment-resolution path as the live public
+  surface.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1016"
+  - "adr:1057"

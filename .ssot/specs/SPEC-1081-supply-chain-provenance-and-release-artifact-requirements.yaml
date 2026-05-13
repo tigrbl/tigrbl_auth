@@ -8,14 +8,14 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The repository MUST define release and provenance requirements for:"
+summary: "The repository MUST define release and provenance requirements for governed supply-chain and interoperability evidence artifacts."
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
   ## Requirements
-  
+
   The repository MUST define release and provenance requirements for:
   - NIST SP 800-218 SSDF
   - SLSA
@@ -23,13 +23,23 @@ body: |-
   - Sigstore
   - SPDX
   - CycloneDX
-  
+
   The requirements MUST distinguish:
   - required artifacts
   - generated projections
   - release-gate obligations
   - disclosure obligations
-  
-  Supply-chain and provenance outputs MUST be governable as release-facing repository artifacts and MUST NOT depend on informal or undocumented report conventions.
+  - repo-generated peer fixtures
+  - independently qualifying verifier evidence
+
+  Supply-chain and provenance outputs MUST be governable as release-facing
+  repository artifacts and MUST NOT depend on informal or undocumented report
+  conventions.
+
+  Stronger Tier 4 interoperability wording MUST remain blocked until the
+  corresponding evidence is independently qualifying.
 spec_kind: "governance"
-adr_ids: []
+adr_ids:
+  - "adr:1023"
+  - "adr:1024"
+  - "adr:1061"

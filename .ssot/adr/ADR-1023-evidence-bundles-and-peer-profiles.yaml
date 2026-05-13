@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1023"
 number: 1023
@@ -8,20 +8,30 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
+summary: "Tier 3 bundles, Tier 4 peer manifests, and related release-facing evidence"
 supersedes: []
 superseded_by: []
 status_notes: []
 references: []
 body: |-
-  > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
+  ## Decision
   
-  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
-  > Do **not** use it to determine the current certification state, executable surface, or release readiness.
-  > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
+  Tier 3 bundles, Tier 4 peer manifests, and related release-facing evidence
+  remain machine-generated from governed inputs. However, the repository MUST
+  distinguish:
   
-  # Evidence bundles and peer profiles
+  - repo-generated or repo-staged peer bundles; and
+  - independently qualifying verifier evidence.
   
-  - Status: accepted
-  - Decision: Tier 3 bundles and Tier 4 peer execution manifests SHALL be machine-generated from claims, mappings, and deployment metadata.
-  - Consequences: evidence readiness is observable and reproducible.
+  Repo-staged peer fixtures are useful, but they do not by themselves satisfy
+  the stronger certification wording associated with independent verifier-grade
+  interoperability.
+  
+  ## Consequences
+  
+  Evidence readiness remains observable and reproducible, but promotion language
+  MUST stay fail-closed when:
+  
+  - independent peer execution has not been established;
+  - a resource-server profile has only self-generated peer artifacts; or
+  - retained fixtures are being mistaken for independent proof.

@@ -19,80 +19,133 @@ status_notes:
 references: []
 body: |-
   ## Overview
-  
-  The runtime profile configuration contract defines the human-readable packaged profile files that `tigrbl_auth` loads to resolve deployment posture.
-  
+
+  The runtime profile configuration contract defines the human-readable packaged
+  profile files that `tigrbl_auth` loads to resolve deployment posture.
+
   Decision source: `adr:1042`.
-  
+
   ## Scope
-  
-  This specification applies to packaged runtime profile configuration files under `tigrbl_auth/profiles/*.yaml`, the profile loader, and the deployment resolver that produces the effective runtime deployment.
-  
-  This specification does not replace SSOT profile entities. SSOT remains the governance source for lifecycle state, feature links, claims, tests, evidence, boundaries, and releases.
-  
+
+  This specification applies to packaged runtime profile configuration files
+  under `tigrbl_auth/profiles/*.yaml`, the profile loader, and the deployment
+  resolver that produces the effective runtime deployment.
+
+  This specification does not replace SSOT profile entities. SSOT remains the
+  governance source for lifecycle state, feature links, claims, tests, evidence,
+  boundaries, and releases.
+
   ## Profile File Location
-  
+
   - Runtime profile files MUST live under `tigrbl_auth/profiles/`.
-  - Each runtime profile file MUST be included in source distributions and wheel distributions.
+  - Each runtime profile file MUST be included in source distributions and wheel
+    distributions.
   - Each packaged runtime profile file MUST be loadable without network access.
-  - Generated compliance reports, generated contract snapshots, and external peer-profile evidence MUST NOT be treated as runtime profile input files.
-  
+  - Generated compliance reports, generated contract snapshots, and external
+    peer-profile evidence MUST NOT be treated as runtime profile input files.
+
   ## Required Profile Fields
-  
+
   Each runtime profile file MUST declare:
-  
+
   - `id`: stable runtime profile identifier.
   - `title`: human-readable profile title.
-  - `ssot_profile_id` or `feature_id`: governance identifier that ties the runtime profile to SSOT.
+  - `ssot_profile_id` or `feature_id`: governance identifier that ties the
+    runtime profile to SSOT.
   - `surface_plugin_mode`: one of the supported plugin composition modes.
-  - `surfaces`: explicit public, admin, rpc, and diagnostics enablement booleans.
+  - `surfaces`: explicit public, admin, rpc, and diagnostics enablement
+    booleans.
   - `surface_sets`: named installable surface sets enabled by the profile.
   - `flags`: standards, protocol, and target flags enabled by the profile.
-  - `protocol_slices`: protocol families and extension slices enabled by the profile.
+  - `protocol_slices`: protocol families and extension slices enabled by the
+    profile.
   - `security`: security posture instructions that affect runtime enforcement.
   - `contracts`: contract emission expectations for OpenAPI and OpenRPC.
-  
-  Unknown required fields MUST fail validation. Unknown optional extension fields MAY be accepted only under a namespaced extension key.
-  
+
+  Unknown required fields MUST fail validation. Unknown optional extension
+  fields MAY be accepted only under a namespaced extension key.
+
   ## Loader Semantics
-  
-  - The loader MUST resolve profiles by stable `id`, not by arbitrary file path supplied by a request.
-  - The loader MUST fail closed for missing, malformed, duplicate, or internally inconsistent profile files.
-  - The loader MUST validate all packaged profiles during test and release verification.
-  - The loader MUST expose a deterministic catalog of available runtime profiles.
-  - The loader MUST preserve enough source metadata to explain which packaged profile produced a resolved deployment.
-  
+
+  - The loader MUST resolve profiles by stable `id`, not by arbitrary file path
+    supplied by a request.
+  - The loader MUST fail closed for missing, malformed, duplicate, or
+    internally inconsistent profile files.
+  - The loader MUST validate all packaged profiles during test and release
+    verification.
+  - The loader MUST expose a deterministic catalog of available runtime
+    profiles.
+  - The loader MUST preserve enough source metadata to explain which packaged
+    profile produced a resolved deployment.
+
   ## Deployment Resolution
-  
-  - The deployment resolver MUST load the selected runtime profile file before applying environment variables or CLI overrides.
-  - Environment variables and CLI flags MAY override profile values only through the resolver.
-  - The resolver MUST produce a single effective deployment object used by app assembly, route mounting, JSON-RPC registration, diagnostics exposure, discovery metadata, generated contracts, and evidence manifests.
-  - Runtime code outside the resolver MUST NOT branch directly on profile names when a resolved deployment field can express the behavior.
-  - In-code profile flag mappings MAY exist only as compatibility data or generated indexes and MUST NOT independently redefine profile behavior.
-  
+
+  - The deployment resolver MUST load the selected runtime profile file before
+    applying environment variables or CLI overrides.
+  - Environment variables and CLI flags MAY override profile values only through
+    the resolver.
+  - The resolver MUST produce a single effective deployment object used by app
+    assembly, route mounting, JSON-RPC registration, diagnostics exposure,
+    discovery metadata, generated contracts, and evidence manifests.
+  - Runtime code outside the resolver MUST NOT branch directly on profile names
+    when a resolved deployment field can express the behavior.
+  - In-code profile flag mappings MAY exist only as compatibility data or
+    generated indexes and MUST NOT independently redefine profile behavior.
+
+  ## Live Request Path Binding
+
+  - Live request handlers MUST obtain issuer-bearing runtime posture from the
+    active request-scoped or app-scoped resolved deployment.
+  - Global `ISSUER` constants or legacy settings defaults MUST NOT override the
+    active resolved deployment in live request paths when a request-scoped or
+    app-scoped deployment is available.
+  - Token issuance, ID token issuance, token exchange, introspection responses,
+    authorization responses, protected-resource metadata, and discovery metadata
+    MUST derive issuer and route posture from the active resolved deployment.
+  - TLS enforcement for request handling MUST consume the same active resolved
+    deployment used to decide route and artifact posture.
+
   ## Secure Baseline Alignment
-  
-  - The baseline/default runtime profile MUST resolve to the secure-by-default posture defined by `spc:1060`.
-  - Public-only baseline behavior MUST keep public OAuth/OIDC endpoints available according to protocol-specific checks.
-  - Admin, RPC, and diagnostics surfaces MUST remain disabled unless the selected profile or explicit operator override enables them.
-  - When admin, RPC, or diagnostics are enabled, the resulting deployment MUST preserve the admin gate requirements from `spc:1060`.
-  
+
+  - The baseline/default runtime profile MUST resolve to the secure-by-default
+    posture defined by `spc:1060`.
+  - Public-only baseline behavior MUST keep public OAuth/OIDC endpoints
+    available according to protocol-specific checks.
+  - Admin, RPC, and diagnostics surfaces MUST remain disabled unless the
+    selected profile or explicit operator override enables them.
+  - When admin, RPC, or diagnostics are enabled, the resulting deployment MUST
+    preserve the admin gate requirements from `spc:1060`.
+  - `/docs` and `/openapi.json` MUST be treated as governed diagnostics or
+    contract-publication surfaces and MUST NOT remain unconditional defaults
+    when the effective deployment disables them.
+
   ## Contract And Evidence Alignment
-  
-  - OpenAPI and OpenRPC generation MUST derive profile, surface, and security metadata from the resolved deployment.
-  - Generated contracts MUST reflect disabled surfaces by omission or unavailable status, consistent with strict partial feature disappearance.
-  - Evidence and manifest generation MUST report the selected runtime profile, enabled surfaces, applied overrides, and resolved security posture.
-  
+
+  - OpenAPI and OpenRPC generation MUST derive profile, surface, and security
+    metadata from the resolved deployment.
+  - Generated contracts MUST reflect disabled surfaces by omission or
+    unavailable status, consistent with strict partial feature disappearance.
+  - Evidence and manifest generation MUST report the selected runtime profile,
+    enabled surfaces, applied overrides, and resolved security posture.
+
   ## Verification
-  
+
   Verification MUST cover:
-  
+
   - every packaged runtime profile file loads successfully,
   - malformed profile files fail closed,
   - duplicate profile identifiers fail closed,
   - baseline/default resolves to public-only secure defaults,
   - operator overrides compose through the resolver,
-  - generated routes, JSON-RPC methods, diagnostics, OpenAPI, OpenRPC, and evidence derive from the resolved deployment,
-  - runtime code does not introduce independent profile-name branching outside the loader/resolver path.
+  - generated routes, JSON-RPC methods, diagnostics, OpenAPI, OpenRPC, and
+    evidence derive from the resolved deployment,
+  - runtime code does not introduce independent profile-name branching outside
+    the loader/resolver path,
+  - live request handlers do not emit issuer-bearing artifacts from global
+    constants when request-scoped deployment is available,
+  - `/docs` and `/openapi.json` exposure follows the governed deployment
+    posture.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1042"
+  - "adr:1065"

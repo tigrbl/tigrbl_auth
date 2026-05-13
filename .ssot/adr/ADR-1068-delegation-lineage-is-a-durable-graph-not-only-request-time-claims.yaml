@@ -1,0 +1,44 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1068"
+number: 1068
+slug: "delegation-lineage-is-a-durable-graph-not-only-request-time-claims"
+title: "Delegation lineage is a durable graph, not only request-time claims"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Delegation and token exchange lineage MUST be represented as durable server-side provenance rather than only request-time claims."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accept durable delegation-lineage governance for token exchange and related flows."
+    at: "2026-05-12T00:00:00Z"
+references: []
+body: |-
+  ## Decision
+  
+  Delegation and token exchange lineage MUST be represented as durable
+  server-side provenance, not only as request-time claims or audit log strings.
+  
+  The governed model MUST be capable of expressing:
+  
+  - parent and child delegation edges;
+  - actor and subject relationships;
+  - attenuation and narrowing semantics;
+  - proof-binding continuity;
+  - trust-domain context; and
+  - issued-token lineage.
+  
+  ## Rationale
+  
+  `act` claims and immediate exchange logs capture only a fragment of delegated
+  authority movement. Verifier-grade interoperability and auditability require
+  a durable graph or equivalent governed event chain.
+  
+  ## Consequences
+  
+  Token exchange becomes a provenance-bearing authorization surface rather than
+  a one-shot request transformation.

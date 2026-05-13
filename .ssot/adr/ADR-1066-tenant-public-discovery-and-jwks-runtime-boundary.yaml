@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Tenant-aware deployments need public discovery and JWKS surfaces that do not collapse every tenant into the root issuer boundary. Clients validating tenant-issued tokens need stable issuer URL semantics, a tenant-specific `jwks_uri`, and a JWKS document that cannot expose another tenant's keys."
+summary: "Tenant public discovery and JWKS are trust-domain surfaces and must derive issuer and key authority from the same tenant-bound runtime source."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -19,16 +19,29 @@ status_notes:
 references: []
 body: |-
   ## Context
-  
-  Tenant-aware deployments need public discovery and JWKS surfaces that do not collapse every tenant into the root issuer boundary. Clients validating tenant-issued tokens need stable issuer URL semantics, a tenant-specific `jwks_uri`, and a JWKS document that cannot expose another tenant's keys.
-  
+
+  Tenant-aware deployments need public discovery and JWKS surfaces that do not
+  collapse every tenant into the root issuer boundary. Clients validating
+  tenant-issued tokens need stable issuer URL semantics, a tenant-specific
+  `jwks_uri`, and a JWKS document that cannot expose another tenant's keys.
+
   ## Decision
-  
-  Tenant public discovery and JWKS are runtime/API responsibilities, separate from UIX presentation. Each enabled tenant is its own public issuer boundary at `{root_issuer}/tenants/{tenant_slug}`.
-  
+
+  Tenant public discovery and JWKS are runtime/API responsibilities, separate
+  from UIX presentation. Each enabled tenant is its own public issuer boundary
+  at `{root_issuer}/tenants/{tenant_slug}`.
+
+  Discovery publication, JWKS publication, token issuance, and token validation
+  MUST resolve through the same tenant trust-domain authority source.
+
   The first runtime boundary exposes:
-  
-  - `GET /tenants/{tenant_slug}/.well-known/openid-configuration`;
-  - `GET /tenants/{tenant_slug}/.well-known/jwks.json`.
-  
-  The discovery response MUST emit the tenant-scoped issuer and a tenant-specific JWKS URI. Missing or disabled tenants MUST return `404`. Tenant JWKS publication MUST use the same key-selection logic as operator `keys publish-jwks --tenant`.
+
+  - `GET /tenants/{tenant_slug}/.well-known/openid-configuration`
+  - `GET /tenants/{tenant_slug}/.well-known/jwks.json`
+
+  The discovery response MUST emit the tenant-scoped issuer and a tenant-specific
+  JWKS URI. Missing or disabled tenants MUST return `404`. Tenant JWKS
+  publication MUST use the same key-selection logic as operator
+  `keys publish-jwks --tenant`.
+
+  Root-issuer fallback and cross-tenant key selection MUST remain fail-closed.
