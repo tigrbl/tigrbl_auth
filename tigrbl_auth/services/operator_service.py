@@ -36,6 +36,10 @@ from ._operator_store import (
     audit_log_path,
     activity_log_path,
 )
+from .authorization_provenance import (
+    build_authorization_decision_trace,
+    build_delegation_provenance,
+)
 
 GENERIC_RESOURCES = {"tenant", "client", "identity", "flow", "session", "token", "keys"}
 
@@ -299,6 +303,41 @@ def introspect_token_record(record: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def exchange_token(context: OperationContext, *, subject_token: str | None, requested_token_type: str | None = None, audience: str | None = None, resource: str | None = None, actor_token: str | None = None, extras: Mapping[str, Any] | None = None) -> TransactionResult:
+    extras_dict = dict(extras or {})
+    exchange_mode = str(extras_dict.get("exchange_mode") or ("delegation" if actor_token else "impersonation"))
+    subject_value = str(extras_dict.get("subject") or subject_token or "")
+    actor_subject = str(extras_dict.get("actor_subject") or actor_token or "") or None
+    authorization_trace = build_authorization_decision_trace(
+        tenant_id=str(context.tenant or extras_dict.get("tenant_id") or ""),
+        subject=subject_value,
+        issuer=str(context.issuer or extras_dict.get("issuer") or ""),
+        audience=audience,
+        resource=resource,
+        scope=str(extras_dict.get("scope") or ""),
+        subject_token_type=str(extras_dict.get("subject_token_type") or "urn:ietf:params:oauth:token-type:access_token"),
+        requested_token_type=str(requested_token_type or "urn:ietf:params:oauth:token-type:access_token"),
+        exchange_mode=exchange_mode,
+        actor_subject=actor_subject,
+        source_issuer=str(extras_dict.get("source_issuer") or ""),
+        sender_constraint=str(extras_dict.get("sender_constraint") or "none"),
+        verifier_logic_id=str(extras_dict.get("verifier_logic_id") or "operator-token-exchange"),
+        required_claims=tuple(str(item) for item in extras_dict.get("required_claims", ()) or ()),
+    )
+    delegation_provenance = build_delegation_provenance(
+        subject_token=str(subject_token or ""),
+        actor_token=str(actor_token) if actor_token else None,
+        subject_claims={
+            "sub": subject_value,
+            "iss": str(extras_dict.get("source_issuer") or context.issuer or ""),
+            "aud": audience,
+        },
+        actor_claims={"sub": actor_subject, "iss": str(context.issuer or "")} if actor_subject else None,
+        authorization_trace=authorization_trace,
+        audience=audience,
+        resource=resource,
+        exchange_mode=exchange_mode,
+        sender_constraint=str(extras_dict.get("sender_constraint") or "none"),
+    )
     token_id = synthetic_id("token")
     patch = {
         "subject_token": subject_token,
@@ -307,7 +346,11 @@ def exchange_token(context: OperationContext, *, subject_token: str | None, requ
         "audience": audience,
         "resource": resource,
         "issued_at": utc_now(),
-        **dict(extras or {}),
+        "claims": {
+            "authorization_trace": authorization_trace,
+            "delegation_provenance": delegation_provenance,
+        },
+        **extras_dict,
     }
     return create_resource(context, record_id=token_id, patch=patch, if_exists="error")
 

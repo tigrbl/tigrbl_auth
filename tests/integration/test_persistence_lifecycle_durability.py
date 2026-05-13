@@ -235,3 +235,48 @@ async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session,
     dispose_result = raw_engine.dispose()
     if hasattr(dispose_result, "__await__"):
         await dispose_result
+
+
+async def test_issue_persisted_token_pair_retains_authorization_trace_and_delegation_provenance(db_session):
+    tenant, user, client = await _identity_triplet(db_session)
+    jwt = JWTCoder.default()
+    authorization_trace = {
+        "artifact_type": "authorization_decision_trace",
+        "artifact_version": 1,
+        "decision_key": "decision-key-1",
+        "request_hash": "request-hash-1",
+        "policy_hash": "policy-hash-1",
+        "derivation_hash": "derivation-hash-1",
+        "request": {"issuer": "https://issuer.example", "resource": "api://default"},
+        "derived_grant": {"scope": "openid profile"},
+    }
+    delegation_provenance = {
+        "artifact_type": "delegation_provenance",
+        "artifact_version": 1,
+        "lineage_id": "lineage-1",
+        "subject_token_hash": "subject-hash-1",
+        "actor_token_hash": "actor-hash-1",
+        "nodes": {"subject": {"sub": str(user.id)}, "actor": {"sub": "actor-1"}},
+        "edge": {"exchange_mode": "delegation", "decision_key": "decision-key-1"},
+    }
+
+    access_token, refresh_token = await issue_persisted_token_pair(
+        jwt=jwt,
+        sub=str(user.id),
+        tid=str(tenant.id),
+        client_id=str(client.id),
+        issuer="https://issuer.example",
+        audience="api://default",
+        scope="openid profile",
+        authorization_trace=authorization_trace,
+        delegation_provenance=delegation_provenance,
+    )
+
+    access_record = await get_token_record_async(access_token)
+    refresh_record = await get_token_record_async(refresh_token)
+    assert access_record is not None
+    assert refresh_record is not None
+    assert access_record.claims["authorization_trace"]["decision_key"] == "decision-key-1"
+    assert access_record.claims["delegation_provenance"]["lineage_id"] == "lineage-1"
+    assert refresh_record.claims["authorization_trace"]["request_hash"] == "request-hash-1"
+    assert refresh_record.claims["delegation_provenance"]["edge"]["decision_key"] == "decision-key-1"

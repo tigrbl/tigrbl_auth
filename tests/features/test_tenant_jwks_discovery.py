@@ -15,7 +15,9 @@ from tigrbl_auth.services.tenant_discovery import (
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     require_tenant_issuer,
+    resolve_tenant_trust_domain_authority,
     tenant_issuer,
+    tenant_trust_domain_authority_from_root_issuer,
 )
 from tigrbl_auth.uix import build_tenant_jwks_publication_view
 
@@ -151,6 +153,23 @@ def test_tenant_issuer_token_validation_contract() -> None:
     require_tenant_issuer({"iss": f"{ROOT_ISSUER}/tenants/{TENANT_A}"}, root_issuer=ROOT_ISSUER, tenant_slug=TENANT_A)
     with pytest.raises(ValueError, match="tenant token issuer mismatch"):
         require_tenant_issuer({"iss": ROOT_ISSUER}, root_issuer=ROOT_ISSUER, tenant_slug=TENANT_A)
+
+
+def test_tenant_trust_domain_authority_object_contract() -> None:
+    authority = resolve_tenant_trust_domain_authority(_deployment(), TENANT_A)
+    assert authority.tenant_slug == TENANT_A
+    assert authority.issuer == f"{ROOT_ISSUER}/tenants/{TENANT_A}"
+    assert authority.jwks_uri == f"{ROOT_ISSUER}/tenants/{TENANT_A}/.well-known/jwks.json"
+    assert authority.subject_namespace == f"{TENANT_A}:subjects"
+    assert authority.signing_scope == f"tenant:{TENANT_A}"
+    assert authority.protected_resource_identifier.endswith(f"/tenants/{TENANT_A}")
+    assert authority.accepted_issuers == (authority.issuer,)
+
+
+def test_tenant_trust_domain_authority_root_resolution_contract() -> None:
+    authority = tenant_trust_domain_authority_from_root_issuer(ROOT_ISSUER, TENANT_A)
+    assert authority.issuer == tenant_issuer(ROOT_ISSUER, TENANT_A)
+    assert authority.verification_scope[0] == authority.issuer
 
 
 @pytest.mark.asyncio

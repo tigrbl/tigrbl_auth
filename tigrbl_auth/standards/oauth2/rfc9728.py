@@ -9,6 +9,7 @@ from tigrbl_auth.config.settings import settings
 from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
+from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
 
 RFC9728_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9728"
@@ -20,17 +21,17 @@ router = api
 def build_protected_resource_metadata(deployment: ResolvedDeployment | None = None) -> dict[str, object]:
     active_deployment = deployment or resolve_deployment(settings)
     policy = runtime_security_profile(active_deployment)
+    verifier_contract = build_protected_resource_verifier_contract(active_deployment)
     methods = ["header"]
     if bool(active_deployment.flags.get("enable_rfc6750_form", getattr(settings, "enable_rfc6750_form", False))):
         methods.append("body")
     if bool(active_deployment.flags.get("enable_rfc6750_query", getattr(settings, "enable_rfc6750_query", False))):
         methods.append("query")
 
-    issuer = active_deployment.issuer or ISSUER
-    resource = active_deployment.protected_resource_identifier or settings.protected_resource_identifier
-    return {
-        "resource": resource,
-        "authorization_servers": [issuer],
+    issuer = verifier_contract.issuer or ISSUER
+    metadata = {
+        "resource": verifier_contract.resource,
+        "authorization_servers": list(verifier_contract.accepted_issuers),
         "jwks_uri": f"{issuer}{JWKS_PATH}",
         "bearer_methods_supported": methods,
         "dpop_signing_alg_values_supported": ["EdDSA"] if policy.dpop_supported else [],
@@ -39,7 +40,9 @@ def build_protected_resource_metadata(deployment: ResolvedDeployment | None = No
         "resource_documentation": f"{issuer}/docs/resource-metadata",
         "scopes_supported": ["openid", "profile", "email"],
         "active_targets": list(active_deployment.active_targets),
+        **verifier_contract.as_metadata_projection(),
     }
+    return metadata
 
 
 @api.route(WELL_KNOWN_ENDPOINTS["oauth_protected_resource"], methods=["GET"], include_in_schema=True, tags=[".well-known"])

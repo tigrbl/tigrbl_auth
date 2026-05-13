@@ -152,6 +152,12 @@ router = api
 _FALLBACK_TOKENS: dict[str, dict[str, Any]] = {}
 
 
+def _protected_resource_verifier_contract(request: Any):
+    from tigrbl_auth.standards.oauth2.resource_verifier_contract import protected_resource_verifier_contract_from_request
+
+    return protected_resource_verifier_contract_from_request(request)
+
+
 def _header(request: Any, name: str) -> str | None:
     headers = getattr(request, "headers", {}) or {}
     if hasattr(headers, "get"):
@@ -175,6 +181,8 @@ async def _authorize_introspection_caller(
     form_data: dict[str, Any],
     db: AsyncSession,
 ) -> None:
+    verifier_contract = _protected_resource_verifier_contract(request)
+    allowed_auth_methods = set(verifier_contract.introspection_auth_methods)
     auth = _header(request, "Authorization") or ""
     client_assertion = str(form_data.get("client_assertion") or "").strip()
     client_assertion_type = str(form_data.get("client_assertion_type") or "").strip()
@@ -218,6 +226,8 @@ async def _authorize_introspection_caller(
     registration_metadata = dict(raw_registration_metadata) if isinstance(raw_registration_metadata, dict) else {}
 
     if client_assertion:
+        if PRIVATE_KEY_JWT_AUTH_METHOD not in allowed_auth_methods:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         if registered_auth_method != PRIVATE_KEY_JWT_AUTH_METHOD:
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         try:
@@ -233,6 +243,8 @@ async def _authorize_introspection_caller(
         return None
 
     if registered_auth_method in SUPPORTED_MTLS_AUTH_METHODS:
+        if registered_auth_method not in allowed_auth_methods:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         try:
             authenticate_mtls_client(
                 registration_metadata,
@@ -244,9 +256,13 @@ async def _authorize_introspection_caller(
         return None
 
     if registered_auth_method == "client_secret_post":
+        if registered_auth_method not in allowed_auth_methods:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         if not client_secret:
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
     elif registered_auth_method == "client_secret_basic":
+        if registered_auth_method not in allowed_auth_methods:
+            raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
         if not auth.startswith("Basic ") or not client_secret:
             raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
     else:

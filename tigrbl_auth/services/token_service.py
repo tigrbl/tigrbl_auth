@@ -260,6 +260,8 @@ async def issue_persisted_token_pair(
     cert_thumbprint: str | None = None,
     refresh_family_id: str | None = None,
     refresh_parent_token: str | None = None,
+    authorization_trace: dict[str, Any] | None = None,
+    delegation_provenance: dict[str, Any] | None = None,
     **extra: Any,
 ) -> tuple[str, str]:
     from tigrbl_auth.services.persistence import token_hash, upsert_token_record_async
@@ -272,6 +274,12 @@ async def issue_persisted_token_pair(
     )
     access_claims = await jwt.async_decode(access_token, verify_exp=False)
     refresh_claims = await jwt.async_decode(refresh_token, verify_exp=False)
+    if authorization_trace is not None:
+        access_claims["authorization_trace"] = deepcopy(authorization_trace)
+        refresh_claims["authorization_trace"] = deepcopy(authorization_trace)
+    if delegation_provenance is not None:
+        access_claims["delegation_provenance"] = deepcopy(delegation_provenance)
+        refresh_claims["delegation_provenance"] = deepcopy(delegation_provenance)
     if client_id:
         access_claims["client_id"] = client_id
         refresh_claims["client_id"] = client_id

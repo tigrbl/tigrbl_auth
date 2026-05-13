@@ -10,8 +10,13 @@ from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_auth.services.authorization_provenance import (
+    build_authorization_decision_trace,
+    build_delegation_provenance,
+)
 from tigrbl_auth.services.token_service import JWTCoder
 from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
+from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
 from tigrbl_auth.standards.oauth2.rfc9700 import (
     TOKEN_EXCHANGE_GRANT_TYPE,
@@ -65,6 +70,12 @@ try:  # pragma: no cover
     from tigrbl_auth.services.persistence import append_audit_event_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def append_audit_event_async(**kwargs):
+        return None
+
+try:  # pragma: no cover
+    from tigrbl_auth.services.persistence import upsert_token_record_async
+except Exception:  # pragma: no cover - dependency-light fallback
+    async def upsert_token_record_async(*args, **kwargs):
         return None
 
 
@@ -186,6 +197,34 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
     )
     actor = _actor_claim(actor_claims)
     exchange_mode = 'delegation' if actor and actor.get('sub') != str(subject_claims.get('sub') or '') else 'impersonation'
+    verifier_contract = build_protected_resource_verifier_contract(deployment)
+    authorization_trace = build_authorization_decision_trace(
+        tenant_id=str(subject_claims.get('tid') or ''),
+        subject=str(subject_claims.get('sub') or ''),
+        issuer=str(deployment.issuer or ISSUER),
+        audience=audience,
+        resource=selection.resource if selection is not None else None,
+        scope=scope,
+        subject_token_type=str(subject_token_type),
+        requested_token_type=requested_token_type,
+        exchange_mode=exchange_mode,
+        actor_subject=actor.get('sub') if actor else None,
+        source_issuer=str(subject_claims.get('iss') or ''),
+        sender_constraint=sender_constraint.mechanism,
+        verifier_logic_id=verifier_contract.verifier_logic_id,
+        required_claims=tuple(verifier_contract.required_claims),
+    )
+    delegation_provenance = build_delegation_provenance(
+        subject_token=str(subject_token),
+        actor_token=str(actor_token) if actor_token else None,
+        subject_claims=subject_claims,
+        actor_claims=actor_claims,
+        authorization_trace=authorization_trace,
+        audience=audience,
+        resource=selection.resource if selection is not None else None,
+        exchange_mode=exchange_mode,
+        sender_constraint=sender_constraint.mechanism,
+    )
     jwt_kwargs: Dict[str, Any] = {
         'scope': scope,
         'act': actor,
@@ -204,6 +243,30 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
         cert_thumbprint=sender_constraint.cert_thumbprint,
         **jwt_kwargs,
     )
+    persisted_claims: Dict[str, Any] = {
+        'sub': str(subject_claims.get('sub') or ''),
+        'tid': str(subject_claims.get('tid')) if subject_claims.get('tid') is not None else None,
+        'scope': scope,
+        'iss': str(deployment.issuer or ISSUER),
+        'aud': audience,
+        'kind': 'access',
+        'requested_token_type': requested_token_type,
+        'subject_token_type': str(subject_token_type),
+        'source_issuer': subject_claims.get('iss'),
+        'exchange_mode': exchange_mode,
+        'authorization_trace': authorization_trace,
+        'delegation_provenance': delegation_provenance,
+    }
+    if actor is not None:
+        persisted_claims['act'] = actor
+    if sender_constraint.confirmation_claim:
+        persisted_claims['cnf'] = sender_constraint.confirmation_claim
+    await upsert_token_record_async(
+        access_token,
+        persisted_claims,
+        token_kind='access',
+        token_type_hint='access_token',
+    )
     await append_audit_event_async(
         tenant_id=None,
         actor_client_id=None,
@@ -220,7 +283,11 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
             'actor_subject': actor.get('sub') if actor else None,
             'subject_issuer': subject_claims.get('iss'),
             'sender_constraint': sender_constraint.mechanism,
+            'authorization_trace_decision_key': authorization_trace['decision_key'],
+            'authorization_trace_request_hash': authorization_trace['request_hash'],
+            'delegation_lineage_id': delegation_provenance['lineage_id'],
         },
+        request_id=authorization_trace['request_hash'],
     )
     response: Dict[str, Any] = {
         'access_token': access_token,

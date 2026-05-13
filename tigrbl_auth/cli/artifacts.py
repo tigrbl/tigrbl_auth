@@ -16,7 +16,7 @@ from tigrbl_auth.services.tenant_discovery import (
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     build_tenant_openid_config,
-    tenant_issuer,
+    resolve_tenant_trust_domain_authority,
 )
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.oauth2.assertion_framework import build_assertion_contract_examples
@@ -717,12 +717,16 @@ def build_jwks_snapshot(deployment: Any, *, profile_label: str = "active") -> di
 
 
 def build_tenant_jwks_snapshot(deployment: Any, *, tenant_slug: str, profile_label: str = "active") -> dict[str, Any]:
+    authority = resolve_tenant_trust_domain_authority(deployment, tenant_slug)
     return {
         "keys": [],
         "profile": deployment.profile,
         "profile_label": profile_label,
         "tenant_slug": tenant_slug,
-        "issuer": tenant_issuer(deployment.issuer, tenant_slug),
+        "issuer": authority.issuer,
+        "jwks_uri": authority.jwks_uri,
+        "subject_namespace": authority.subject_namespace,
+        "signing_scope": authority.signing_scope,
         "generated_from": "tigrbl_auth.cli.artifacts.write_discovery_artifacts",
     }
 

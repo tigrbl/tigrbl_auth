@@ -183,6 +183,11 @@ async def test_token_exchange_rpc_persists_lineage(tmp_path) -> None:
     assert stored["data"]["audience"] == "https://rs.example"
     assert stored["data"]["resource"] == "https://rs.example"
     assert stored["data"]["exchange_mode"] == "delegation"
+    claims = stored["data"]["claims"]
+    assert claims["authorization_trace"]["decision_key"]
+    assert claims["authorization_trace"]["derived_grant"]["resource"] == "https://rs.example"
+    assert claims["delegation_provenance"]["lineage_id"]
+    assert claims["delegation_provenance"]["edge"]["exchange_mode"] == "delegation"
 
 
 class _Form(dict):
@@ -220,6 +225,9 @@ class _FakeDB:
 
 
 class _FakeDeployment:
+    issuer = 'https://issuer.example/tenants/test'
+    protected_resource_identifier = 'https://rs.example'
+
     def flag_enabled(self, flag: str) -> bool:
         return True
 
@@ -336,7 +344,7 @@ async def test_device_code_poll_denied_and_expired(monkeypatch) -> None:
 @pytest.mark.asyncio
 @pytest.mark.unit
 async def test_token_exchange_runtime_rejects_conflicting_target(monkeypatch) -> None:
-    monkeypatch.setattr(token_exchange_mod, 'resolve_deployment', lambda _settings: _FakeDeployment())
+    monkeypatch.setattr(token_exchange_mod, 'deployment_from_request', lambda request, settings: _FakeDeployment())
     monkeypatch.setattr(token_exchange_mod, 'validate_sender_constraint', lambda *args, **kwargs: _FakeSenderConstraint())
 
     class _JWT:
@@ -366,8 +374,13 @@ async def test_token_exchange_runtime_rejects_conflicting_target(monkeypatch) ->
 @pytest.mark.asyncio
 @pytest.mark.unit
 async def test_token_exchange_runtime_emits_lineage_audit(monkeypatch) -> None:
-    monkeypatch.setattr(token_exchange_mod, 'resolve_deployment', lambda _settings: _FakeDeployment())
+    monkeypatch.setattr(token_exchange_mod, 'deployment_from_request', lambda request, settings: _FakeDeployment())
     monkeypatch.setattr(token_exchange_mod, 'validate_sender_constraint', lambda *args, **kwargs: _FakeSenderConstraint())
+    monkeypatch.setattr(
+        token_exchange_mod,
+        'build_protected_resource_verifier_contract',
+        lambda deployment: SimpleNamespace(verifier_logic_id='protected-resource-verifier', required_claims=('sub', 'iss', 'aud')),
+    )
     captured = {}
 
     async def _audit(**kwargs):
@@ -405,3 +418,5 @@ async def test_token_exchange_runtime_emits_lineage_audit(monkeypatch) -> None:
     assert captured['details']['exchange_mode'] == 'delegation'
     assert captured['details']['resource'] == 'https://rs.example'
     assert captured['details']['audience'] == 'https://rs.example'
+    assert captured['details']['authorization_trace_decision_key']
+    assert captured['details']['delegation_lineage_id']
