@@ -1,8 +1,8 @@
 {
-  "generated_at": "20260513T060144Z",
+  "generated_at": "20260513T095237Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
-  "validated_artifact_source": null,
+  "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
   "application_probe": {
     "passed": true,
     "app_factory": "tigrbl_auth.api.app.build_app",
@@ -53,7 +53,7 @@
     "validated_runtime_matrix_green": true,
     "validated_runtime_identity_ready_count": 14,
     "validated_runtime_install_evidence_ready_count": 14,
-    "validated_download_collection_present": false
+    "validated_download_collection_present": true
   },
   "profiles": [
     {
@@ -61,7 +61,7 @@
       "display_name": "Hypercorn",
       "status": "ready",
       "installed": true,
-      "available_module": null,
+      "available_module": "hypercorn",
       "capabilities": [
         {
           "name": "http",
@@ -247,7 +247,7 @@
       "display_name": "Tigrcorn",
       "status": "ready",
       "installed": true,
-      "available_module": null,
+      "available_module": "tigrcorn",
       "capabilities": [
         {
           "name": "http",

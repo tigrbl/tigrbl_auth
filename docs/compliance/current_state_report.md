@@ -84,7 +84,7 @@
 - registered_runner_count: `3`
 - registered_runner_names: `hypercorn, tigrcorn, uvicorn`
 - runtime_application_hash_invariant: `True`
-- runtime_runner_availability_count: `1`
+- runtime_runner_availability_count: `3`
 - runtime_profile_report_present: `True`
 - runtime_profile_ready_count: `3`
 - runtime_profile_missing_count: `0`
@@ -103,7 +103,7 @@
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
 - operator_plane_database_present: `False`
-- operator_plane_state_root: `.pytest-tmp/operator-plane-state165/tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_state_root: `.pytest-tmp/operator-state/certification-closure/tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.13`
 - serve_runtime_launcher_present: `True`
@@ -134,20 +134,20 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `44`
+- release_evidence_dirty_checkout_path_count: `51`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
-- validated_execution_artifact_count: `15`
+- validated_execution_artifact_count: `17`
 - required_validated_inventory_count: `31`
-- validated_inventory_present_count: `15`
+- validated_inventory_present_count: `17`
 - validated_inventory_complete: `False`
 - validated_runtime_matrix_expected_count: `14`
 - validated_runtime_matrix_passed_count: `14`
 - validated_clean_room_matrix_green: `True`
 - validated_test_lane_expected_count: `15`
-- validated_test_lane_passed_count: `0`
+- validated_test_lane_passed_count: `1`
 - validated_in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `False`

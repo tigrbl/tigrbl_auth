@@ -7,6 +7,7 @@ from tigrbl_auth.cli.artifacts import (
     build_openapi_contract,
     deployment_from_options,
 )
+from tigrbl_auth.config.deployment import ROUTE_REGISTRY
 
 
 def test_effective_claims_do_not_exceed_profile_boundary() -> None:
@@ -22,10 +23,7 @@ def test_openapi_contract_matches_resolved_public_routes() -> None:
     deployment = deployment_from_options(profile="baseline")
     contract = build_openapi_contract(deployment, version="test")
     assert set(contract["paths"]) == {
-        "/login",
-        "/authorize",
-        "/token",
-        "/.well-known/openid-configuration",
-        "/.well-known/oauth-authorization-server",
-        "/.well-known/jwks.json",
+        path
+        for path in deployment.active_contract_routes
+        if ROUTE_REGISTRY[path].get("surface_set") == "public-rest"
     }

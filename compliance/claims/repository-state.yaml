@@ -80,7 +80,7 @@ repository_state:
   profile_scope_mismatch_set_empty: true
   clean_room_executor_matrix_declared_complete: true
   validated_manifest_identity_contract_installed: true
-  validated_runtime_matrix_preservation_complete: false
+  validated_runtime_matrix_preservation_complete: true
   validated_test_lane_preservation_complete: false
   validated_migration_portability_preservation_complete: false
   alignment_only_checkpoint_no_new_certification_evidence: false

@@ -4,7 +4,7 @@ import json
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request
+from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth.services.persistence import append_audit_event_async
@@ -153,6 +153,12 @@ def _header(request, name: str) -> str | None:
     return headers.get(name) or headers.get(name.lower())
 
 
+def _resolve_request_deployment(request):
+    if getattr(request, "app", None) is not None:
+        return deployment_from_request(request, settings)
+    return resolve_deployment(settings)
+
+
 async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object], deployment) -> tuple[object, dict[str, object]]:
     from tigrbl_auth.tables import Client, ClientRegistration
 
@@ -206,7 +212,7 @@ async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object
 
 
 async def pushed_authorization_request(*, request, db):
-    deployment = deployment_from_request(request, settings)
+    deployment = _resolve_request_deployment(request)
     if not deployment.flag_enabled('enable_rfc9126'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'PAR disabled')
     params = _body_dict(getattr(request, 'body', b'') or b'')

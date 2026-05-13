@@ -68,10 +68,13 @@ def deployment_from_options(
         from tigrbl_auth.config.settings import settings as active_settings
 
         settings_obj = active_settings
+    profile_surface_sets = profile_defaults.surface_sets if profile_defaults else ()
+    if surface_sets is None and plugin_mode is not None and plugin_mode != profile_defaults.surface_plugin_mode:
+        profile_surface_sets = ()
     return resolve_deployment(
         settings_obj,
         profile=profile_defaults.base_profile,
-        surface_sets=tuple(surface_sets or (profile_defaults.surface_sets if profile_defaults else ())),
+        surface_sets=tuple(surface_sets or profile_surface_sets),
         protocol_slices=tuple(protocol_slices or (profile_defaults.protocol_slices if profile_defaults else ())),
         extensions=tuple(extensions or (profile_defaults.extensions if profile_defaults else ())),
         plugin_mode=plugin_mode or (profile_defaults.surface_plugin_mode if profile_defaults else None),

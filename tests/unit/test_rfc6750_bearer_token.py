@@ -51,11 +51,13 @@ async def test_lowercase_bearer_scheme():
     with patch(
         "tigrbl_auth.security.deps._user_from_jwt", AsyncMock(return_value=mock_user)
     ):
-        transport = ASGITransport(app=app)
-        async with AsyncClient(transport=transport, base_url="http://test") as client:
-            resp = await client.get(
-                "/protected", headers={"Authorization": "bearer token"}
-            )
+        with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+            mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
+            transport = ASGITransport(app=app)
+            async with AsyncClient(transport=transport, base_url="http://test") as client:
+                resp = await client.get(
+                    "/protected", headers={"Authorization": "bearer token"}
+                )
     assert resp.status_code == status.HTTP_200_OK
 
 
@@ -100,11 +102,13 @@ async def test_access_token_query_parameter_enabled():
             "tigrbl_auth.security.deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
-            transport = ASGITransport(app=app)
-            async with AsyncClient(
-                transport=transport, base_url="http://test"
-            ) as client:
-                resp = await client.get("/protected?access_token=token")
+            with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+                mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
+                transport = ASGITransport(app=app)
+                async with AsyncClient(
+                    transport=transport, base_url="http://test"
+                ) as client:
+                    resp = await client.get("/protected?access_token=token")
     assert resp.status_code == status.HTTP_200_OK
 
 
@@ -147,15 +151,17 @@ async def test_access_token_form_body_enabled():
             "tigrbl_auth.security.deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
-            transport = ASGITransport(app=app)
-            async with AsyncClient(
-                transport=transport, base_url="http://test"
-            ) as client:
-                resp = await client.post(
-                    "/protected",
-                    data={"access_token": "token"},
-                    headers={"Content-Type": "application/x-www-form-urlencoded"},
-                )
+            with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+                mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
+                transport = ASGITransport(app=app)
+                async with AsyncClient(
+                    transport=transport, base_url="http://test"
+                ) as client:
+                    resp = await client.post(
+                        "/protected",
+                        data={"access_token": "token"},
+                        headers={"Content-Type": "application/x-www-form-urlencoded"},
+                    )
     assert resp.status_code == status.HTTP_200_OK
 
 

@@ -18,8 +18,6 @@
 - The fill-in external handoff template package is not present for the full supported peer-profile set.
 - The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
-- Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.
-- Validated clean-room install matrix evidence is incomplete or missing.
 - Validated in-scope certification lane execution evidence is incomplete or missing.
 - Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
 - Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.

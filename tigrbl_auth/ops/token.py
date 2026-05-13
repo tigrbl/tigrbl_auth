@@ -181,6 +181,19 @@ def _header(request, name: str) -> str | None:
     return getattr(request, 'headers', {}).get(name) or getattr(request, 'headers', {}).get(name.lower())
 
 
+def _resolve_request_deployment(request):
+    if getattr(request, 'app', None) is not None:
+        return deployment_from_request(request, settings)
+    return resolve_deployment(settings)
+
+
+def _enforce_tls(request, deployment) -> None:
+    try:
+        _require_tls(request, deployment=deployment)
+    except TypeError:
+        _require_tls(request)
+
+
 async def _parse_request_form(request) -> tuple[dict[str, str], list[str]]:
     form_reader = getattr(request, 'form', None)
     if callable(form_reader):
@@ -262,8 +275,8 @@ def _token_pair_payload(access: str, refresh: str | None, *, token_type: str, id
 
 
 async def token_request(*, request, db):
-    deployment = deployment_from_request(request, settings)
-    _require_tls(request, deployment=deployment)
+    deployment = _resolve_request_deployment(request)
+    _enforce_tls(request, deployment)
     data, resources = await _parse_request_form(request)
     auth = _header(request, 'Authorization')
     dpop_proof = dpop_proof_from_request(request)

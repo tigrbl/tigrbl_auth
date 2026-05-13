@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any, Callable, Mapping
 
 from tigrbl_auth.services.policy_control_plane import (
@@ -205,7 +205,7 @@ class AdminConsoleShell:
         next_selection: TenantProfileSelection,
     ) -> dict[str, Any]:
         principal = session.require_admin()
-        now = datetime.now(tz=UTC).isoformat()
+        now = datetime.now(tz=timezone.utc).isoformat()
         return {
             "principal_subject": principal.subject,
             "events": [

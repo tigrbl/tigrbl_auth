@@ -1,9 +1,9 @@
 # Runtime Profile Report
 
-- Generated at: `20260513T060144Z`
+- Generated at: `20260513T095237Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
-- Validated artifact source: `None`
+- Validated artifact source: `dist/validated-runs/collected-artifact-downloads.json`
 - Application factory probe passed: `True`
 - Ready profiles: `3`
 - Missing profiles: `0`
@@ -44,7 +44,7 @@
 
 - Status: `ready`
 - Installed: `True`
-- Module: `None`
+- Module: `hypercorn`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `True`
@@ -60,7 +60,7 @@
 
 - Status: `ready`
 - Installed: `True`
-- Module: `None`
+- Module: `tigrcorn`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `True`

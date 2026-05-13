@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from tigrbl_auth.services.governance_extension_plane import (
     AccessReviewWorkflow,
@@ -143,7 +143,7 @@ def test_entitlement_management_and_access_reviews_support_revocation_escalation
         subject_id="alice",
         justification="supports incident response",
         assigned_by="owner:security-team",
-        expires_at=(datetime.now(tz=UTC) + timedelta(days=30)).isoformat(),
+        expires_at=(datetime.now(tz=timezone.utc) + timedelta(days=30)).isoformat(),
     )
     review = AccessReviewWorkflow(entitlement_manager=entitlements)
     campaign = review.create_campaign(
@@ -155,7 +155,7 @@ def test_entitlement_management_and_access_reviews_support_revocation_escalation
         due_in_days=-1,
     )
 
-    escalated = review.escalate_overdue(reference_time=datetime.now(tz=UTC))
+    escalated = review.escalate_overdue(reference_time=datetime.now(tz=timezone.utc))
     assert len(escalated) == 1
 
     item_id = campaign.item_ids[0]

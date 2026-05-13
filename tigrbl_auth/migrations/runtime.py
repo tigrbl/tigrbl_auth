@@ -178,7 +178,11 @@ async def downgrade_one_async() -> str | None:
             if module.revision in applied:
                 module.downgrade(sync_conn)
                 unmark_revision(sync_conn, module.revision)
-                return module.revision
+                remaining = applied_revisions(sync_conn)
+                for candidate in reversed(modules):
+                    if candidate.revision in remaining:
+                        return candidate.revision
+                return None
         return None
 
     begin_ctx = raw_engine.begin()

@@ -188,7 +188,10 @@ class AdminGate:
                 except Exception:  # pragma: no cover - fail closed on middleware auth errors
                     authorized = False
             if not authorized:
-                status, headers, body = _json_response(401, {"error": "authenticated_admin_session_required"})
+                if credential:
+                    status, headers, body = _json_response(403, {"error": "invalid_admin_api_key"})
+                else:
+                    status, headers, body = _json_response(401, {"error": "missing_admin_api_key"})
                 await send({"type": "http.response.start", "status": status, "headers": headers})
                 await send({"type": "http.response.body", "body": body})
                 return

@@ -187,13 +187,7 @@ def drop_columns(conn, table: str, columns_to_drop: Iterable[str]) -> None:
         return
 
     if conn.dialect.name == "sqlite":
-        try:
-            for name in drop_list:
-                conn.exec_driver_sql(
-                    f'ALTER TABLE {_table_name(conn, table)} DROP COLUMN "{name}"'
-                )
-        except Exception:
-            _sqlite_rebuild_without_columns(conn, table, drop_list)
+        _sqlite_rebuild_without_columns(conn, table, drop_list)
         return
 
     rendered_table = _table_name(conn, table)

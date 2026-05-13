@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass, replace
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
@@ -20,7 +20,7 @@ SECRET_FIELD_TOKENS: tuple[str, ...] = (
 
 
 def _utc_now() -> datetime:
-    return datetime.now(tz=UTC)
+    return datetime.now(tz=timezone.utc)
 
 
 def _utc_now_iso() -> str:

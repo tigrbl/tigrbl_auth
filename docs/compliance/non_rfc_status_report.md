@@ -13,7 +13,7 @@
 - focus_py313_collected_tests: `0`
 - focus_py313_all_passed: `False`
 - supported_py311_lane_count_green: `0`
-- validated_runtime_matrix_green: `False`
+- validated_runtime_matrix_green: `True`
 - validated_in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - fully_certifiable_now: `False`

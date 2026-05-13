@@ -6,8 +6,8 @@
 
 - rfc_target_count: `30`
 - rfc_family_count: `5`
-- supported_py311_lane_count_green: `5`
-- validated_runtime_matrix_green: `False`
+- supported_py311_lane_count_green: `0`
+- validated_runtime_matrix_green: `True`
 - validated_in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - fully_rfc_compliant_now: `False`
@@ -74,4 +74,4 @@
 
 ## Detail artifact
 
-- JSON: `docs/compliance/rfc_family_status_report.json`
+- JSON: `docs\compliance\rfc_family_status_report.json`

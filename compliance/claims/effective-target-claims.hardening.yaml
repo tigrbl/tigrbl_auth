@@ -62,7 +62,7 @@ effective_deployment:
     enable_rfc9700: true
     enable_oidc_frontchannel_logout: true
     enable_oidc_backchannel_logout: true
-    require_tls: false
+    require_tls: true
     enable_id_token_encryption: false
     enable_rfc6750_query: false
     enable_rfc6750_form: false

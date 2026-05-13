@@ -76,6 +76,10 @@ def _assert_runtime_openapi_payload_valid(payload: dict) -> None:
     assert "/.well-known/jwks.json" in payload["paths"]
 
 
+def _path_has_prefix(path: str, prefix: str) -> bool:
+    return path == prefix or path.startswith(f"{prefix}/")
+
+
 def _settings(tmp_path) -> SimpleNamespace:
     return SimpleNamespace(admin_api_key="test-admin-key", admin_api_key_dir=str(tmp_path))
 
@@ -107,7 +111,7 @@ async def test_runtime_openapi_payload_remains_valid_for_public_only_runtime(tmp
     assert not any(path.startswith("/system") for path in payload["paths"])
     assert not any(path.startswith("/rpc") for path in payload["paths"])
     assert not any(
-        any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
+        any(_path_has_prefix(path, prefix) for prefix in admin_resource_path_prefixes())
         for path in payload["paths"]
     )
 
@@ -123,7 +127,7 @@ async def test_runtime_openapi_payload_remains_valid_for_mixed_runtime(tmp_path)
     payload = response.json()
     _assert_runtime_openapi_payload_valid(payload)
     assert any(
-        any(path.startswith(prefix) for prefix in admin_resource_path_prefixes())
+        any(_path_has_prefix(path, prefix) for prefix in admin_resource_path_prefixes())
         for path in payload["paths"]
     )
     assert not any(path == "/rpc" or path.startswith("/rpc/") for path in payload["paths"])

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
@@ -37,7 +37,7 @@ DELEGATED_MUTABLE_CLIENT_FIELDS: tuple[str, ...] = (
 
 
 def _utc_now() -> str:
-    return datetime.now(tz=UTC).isoformat()
+    return datetime.now(tz=timezone.utc).isoformat()
 
 
 def _permission_matches(grant: str, permission: str) -> bool:

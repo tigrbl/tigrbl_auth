@@ -3,8 +3,8 @@
   "summary": {
     "rfc_target_count": 30,
     "rfc_family_count": 5,
-    "supported_py311_lane_count_green": 5,
-    "validated_runtime_matrix_green": false,
+    "supported_py311_lane_count_green": 0,
+    "validated_runtime_matrix_green": true,
     "validated_in_scope_test_lanes_green": false,
     "migration_portability_passed": false,
     "fully_rfc_compliant_now": false,
@@ -19,13 +19,7 @@
   ],
   "warnings": [],
   "details": {
-    "py311_supported_green_lanes": [
-      "conformance",
-      "core",
-      "integration",
-      "interop",
-      "security-negative"
-    ],
+    "py311_supported_green_lanes": [],
     "family_summaries": [
       {
         "family": "oauth-core-metadata-discovery",
@@ -154,11 +148,7 @@
           "integration",
           "interop"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -207,11 +197,7 @@
           "integration",
           "interop"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -264,12 +250,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -316,10 +297,7 @@
           "conformance",
           "integration"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -364,11 +342,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -417,10 +391,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -461,10 +432,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -503,10 +471,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -549,10 +514,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -590,10 +552,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -639,11 +598,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -692,11 +647,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -747,11 +698,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -799,11 +746,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -852,11 +795,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": true,
@@ -916,12 +855,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -975,12 +909,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1036,12 +965,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1092,11 +1016,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -1156,12 +1076,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1215,12 +1130,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1273,12 +1183,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1327,11 +1232,7 @@
           "integration",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -1384,12 +1285,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1443,12 +1339,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1475,11 +1366,12 @@
         "title": "HTTP State Management Mechanism",
         "delivery_track": "production-readiness",
         "profiles": [
+          "baseline",
           "production",
           "hardening",
           "peer-claim"
         ],
-        "scope_bucket": "production-completion-required",
+        "scope_bucket": "baseline-certifiable-now",
         "modules": [
           "tigrbl_auth/standards/http/cookies.py",
           "tigrbl_auth/standards/oidc/session_mgmt.py",
@@ -1499,11 +1391,7 @@
           "integration",
           "negative"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,
@@ -1550,10 +1438,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -1598,10 +1483,7 @@
           "conformance",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": false,
         "has_interop_coverage": false,
@@ -1653,12 +1535,7 @@
           "interop",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "interop"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": true,
@@ -1712,12 +1589,7 @@
           "negative",
           "unit"
         ],
-        "supported_py311_lane_classes_green": [
-          "conformance",
-          "core",
-          "integration",
-          "security-negative"
-        ],
+        "supported_py311_lane_classes_green": [],
         "has_conformance_coverage": true,
         "has_integration_or_security_coverage": true,
         "has_interop_coverage": false,

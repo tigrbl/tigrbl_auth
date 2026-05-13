@@ -306,7 +306,11 @@ class TestGetCurrentPrincipal:
         mock_db = AsyncMock(spec=AsyncSession)
         authorization = "Bearer valid.jwt.token"
 
-        with patch("tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user):
+        with (
+            patch("tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user),
+            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+        ):
+            mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
             request = Request(scope={"type": "http"})
             principal = await get_current_principal(
                 request,
@@ -363,7 +367,8 @@ class TestGetCurrentPrincipal:
         with patch("tigrbl_auth.security.deps._user_from_api_key", return_value=None):
             with patch(
                 "tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user
-            ):
+            ), patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+                mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
                 request = Request(scope={"type": "http"})
                 principal = await get_current_principal(
                     request,

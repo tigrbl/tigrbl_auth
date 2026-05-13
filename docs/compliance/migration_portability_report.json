@@ -1,7 +1,26 @@
 {
-  "schema_version": 1,
-  "generated_at": "20260326T162411Z",
-  "python_version": "3.13",
+  "schema_version": 2,
+  "generated_at": "20260513T095142Z",
+  "python_version": "3.12",
+  "environment_identity": {
+    "python_version": "3.12",
+    "python_full_version": "3.12.5",
+    "python_tag": "py312",
+    "implementation": "CPython",
+    "implementation_version": "3.12.5",
+    "executable": ".venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "platform_system": "Windows",
+    "platform_release": "10",
+    "platform_version": "10.0.19045",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "tox_env": null,
+    "matrix_profile": null,
+    "install_profile": "migration-portability",
+    "test_lane": null,
+    "runner": null
+  },
   "supported_backends": [
     "sqlite",
     "postgres"
@@ -13,23 +32,187 @@
   "validated_backends": [
     "sqlite"
   ],
-  "passed_backends": [
-    "sqlite"
+  "passed_backends": [],
+  "revision_inventory": [
+    {
+      "revision": "0001_initial_identity_tables",
+      "down_revision": null,
+      "module": "0001_initial_identity_tables",
+      "doc": "Executable DDL migration for 0001_initial_identity_tables."
+    },
+    {
+      "revision": "0002_client_and_service_tables",
+      "down_revision": "0001_initial_identity_tables",
+      "module": "0002_client_and_service_tables",
+      "doc": "Executable DDL migration for 0002_client_and_service_tables."
+    },
+    {
+      "revision": "0003_authorization_runtime_tables",
+      "down_revision": "0002_client_and_service_tables",
+      "module": "0003_authorization_runtime_tables",
+      "doc": "Executable DDL migration for 0003_authorization_runtime_tables."
+    },
+    {
+      "revision": "0004_device_par_revocation_tables",
+      "down_revision": "0003_authorization_runtime_tables",
+      "module": "0004_device_par_revocation_tables",
+      "doc": "Executable DDL migration for 0004_device_par_revocation_tables."
+    },
+    {
+      "revision": "0005_session_logout_tables",
+      "down_revision": "0004_device_par_revocation_tables",
+      "module": "0005_session_logout_tables",
+      "doc": "Executable DDL migration for 0005_session_logout_tables."
+    },
+    {
+      "revision": "0006_key_rotation_and_audit_tables",
+      "down_revision": "0005_session_logout_tables",
+      "module": "0006_key_rotation_and_audit_tables",
+      "doc": "Executable DDL migration for 0006_key_rotation_and_audit_tables."
+    },
+    {
+      "revision": "0007_browser_session_cookie_and_auth_code_linkage",
+      "down_revision": "0006_key_rotation_and_audit_tables",
+      "module": "0007_browser_session_cookie_and_auth_code_linkage",
+      "doc": "Executable DDL migration for 0007_browser_session_cookie_and_auth_code_linkage."
+    },
+    {
+      "revision": "0008_refresh_token_family_state",
+      "down_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+      "module": "0008_refresh_token_family_state",
+      "doc": "Executable DDL migration for 0008_refresh_token_family_state."
+    },
+    {
+      "revision": "0009_admin_identity_bootstrap_and_password_recovery",
+      "down_revision": "0008_refresh_token_family_state",
+      "module": "0009_admin_identity_bootstrap_and_password_recovery",
+      "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+    }
   ],
+  "head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+  "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+  "downgrade_target_revision": "0008_refresh_token_family_state",
   "backend_results": {
     "sqlite": {
       "backend": "sqlite",
       "available": true,
-      "database_url": "sqlite+aiosqlite:////mnt/data/migration_portability_work/tigrbl_auth_certification_target_freeze_reconciled_2026-03-24/dist/migration-portability/sqlite/tigrbl_auth_migration_portability.db",
-      "passed": true,
+      "database_url": "sqlite+aiosqlite:///E:\\swarmauri_github\\tigrbl_auth\\dist\\migration-portability\\sqlite\\tigrbl_auth_migration_portability.db",
+      "passed": false,
       "upgrade_passed": true,
-      "downgrade_passed": true,
+      "downgrade_passed": false,
       "reapply_passed": true,
-      "downgraded_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+      "revision_inventory": [
+        {
+          "revision": "0001_initial_identity_tables",
+          "down_revision": null,
+          "module": "0001_initial_identity_tables",
+          "doc": "Executable DDL migration for 0001_initial_identity_tables."
+        },
+        {
+          "revision": "0002_client_and_service_tables",
+          "down_revision": "0001_initial_identity_tables",
+          "module": "0002_client_and_service_tables",
+          "doc": "Executable DDL migration for 0002_client_and_service_tables."
+        },
+        {
+          "revision": "0003_authorization_runtime_tables",
+          "down_revision": "0002_client_and_service_tables",
+          "module": "0003_authorization_runtime_tables",
+          "doc": "Executable DDL migration for 0003_authorization_runtime_tables."
+        },
+        {
+          "revision": "0004_device_par_revocation_tables",
+          "down_revision": "0003_authorization_runtime_tables",
+          "module": "0004_device_par_revocation_tables",
+          "doc": "Executable DDL migration for 0004_device_par_revocation_tables."
+        },
+        {
+          "revision": "0005_session_logout_tables",
+          "down_revision": "0004_device_par_revocation_tables",
+          "module": "0005_session_logout_tables",
+          "doc": "Executable DDL migration for 0005_session_logout_tables."
+        },
+        {
+          "revision": "0006_key_rotation_and_audit_tables",
+          "down_revision": "0005_session_logout_tables",
+          "module": "0006_key_rotation_and_audit_tables",
+          "doc": "Executable DDL migration for 0006_key_rotation_and_audit_tables."
+        },
+        {
+          "revision": "0007_browser_session_cookie_and_auth_code_linkage",
+          "down_revision": "0006_key_rotation_and_audit_tables",
+          "module": "0007_browser_session_cookie_and_auth_code_linkage",
+          "doc": "Executable DDL migration for 0007_browser_session_cookie_and_auth_code_linkage."
+        },
+        {
+          "revision": "0008_refresh_token_family_state",
+          "down_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+          "module": "0008_refresh_token_family_state",
+          "doc": "Executable DDL migration for 0008_refresh_token_family_state."
+        },
+        {
+          "revision": "0009_admin_identity_bootstrap_and_password_recovery",
+          "down_revision": "0008_refresh_token_family_state",
+          "module": "0009_admin_identity_bootstrap_and_password_recovery",
+          "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+        }
+      ],
+      "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+      "downgrade_target_revision": "0008_refresh_token_family_state",
+      "downgraded_revision": "0008_refresh_token_family_state",
+      "head_revision_after_upgrade": "0009_admin_identity_bootstrap_and_password_recovery",
+      "head_revision_after_downgrade": "0008_refresh_token_family_state",
+      "head_revision_after_reapply": "0009_admin_identity_bootstrap_and_password_recovery",
+      "upgrade_applied_revisions": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "reapply_applied_revisions": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "applied_revisions_after_downgrade": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state"
+      ],
+      "upgrade_pending_before": [
+        "0001_initial_identity_tables",
+        "0002_client_and_service_tables",
+        "0003_authorization_runtime_tables",
+        "0004_device_par_revocation_tables",
+        "0005_session_logout_tables",
+        "0006_key_rotation_and_audit_tables",
+        "0007_browser_session_cookie_and_auth_code_linkage",
+        "0008_refresh_token_family_state",
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
+      "reapply_pending_before": [
+        "0009_admin_identity_bootstrap_and_password_recovery"
+      ],
       "artifacts": {
-        "upgrade": "dist/migration-portability/sqlite/upgrade.json",
-        "downgrade": "dist/migration-portability/sqlite/downgrade.json",
-        "reapply": "dist/migration-portability/sqlite/reapply.json"
+        "upgrade": "dist\\migration-portability\\sqlite\\upgrade.json",
+        "downgrade": "dist\\migration-portability\\sqlite\\downgrade.json",
+        "reapply": "dist\\migration-portability\\sqlite\\reapply.json"
       }
     },
     "postgres": {
@@ -39,22 +222,82 @@
       "upgrade_passed": false,
       "downgrade_passed": false,
       "reapply_passed": false,
+      "revision_inventory": [
+        {
+          "revision": "0001_initial_identity_tables",
+          "down_revision": null,
+          "module": "0001_initial_identity_tables",
+          "doc": "Executable DDL migration for 0001_initial_identity_tables."
+        },
+        {
+          "revision": "0002_client_and_service_tables",
+          "down_revision": "0001_initial_identity_tables",
+          "module": "0002_client_and_service_tables",
+          "doc": "Executable DDL migration for 0002_client_and_service_tables."
+        },
+        {
+          "revision": "0003_authorization_runtime_tables",
+          "down_revision": "0002_client_and_service_tables",
+          "module": "0003_authorization_runtime_tables",
+          "doc": "Executable DDL migration for 0003_authorization_runtime_tables."
+        },
+        {
+          "revision": "0004_device_par_revocation_tables",
+          "down_revision": "0003_authorization_runtime_tables",
+          "module": "0004_device_par_revocation_tables",
+          "doc": "Executable DDL migration for 0004_device_par_revocation_tables."
+        },
+        {
+          "revision": "0005_session_logout_tables",
+          "down_revision": "0004_device_par_revocation_tables",
+          "module": "0005_session_logout_tables",
+          "doc": "Executable DDL migration for 0005_session_logout_tables."
+        },
+        {
+          "revision": "0006_key_rotation_and_audit_tables",
+          "down_revision": "0005_session_logout_tables",
+          "module": "0006_key_rotation_and_audit_tables",
+          "doc": "Executable DDL migration for 0006_key_rotation_and_audit_tables."
+        },
+        {
+          "revision": "0007_browser_session_cookie_and_auth_code_linkage",
+          "down_revision": "0006_key_rotation_and_audit_tables",
+          "module": "0007_browser_session_cookie_and_auth_code_linkage",
+          "doc": "Executable DDL migration for 0007_browser_session_cookie_and_auth_code_linkage."
+        },
+        {
+          "revision": "0008_refresh_token_family_state",
+          "down_revision": "0007_browser_session_cookie_and_auth_code_linkage",
+          "module": "0008_refresh_token_family_state",
+          "doc": "Executable DDL migration for 0008_refresh_token_family_state."
+        },
+        {
+          "revision": "0009_admin_identity_bootstrap_and_password_recovery",
+          "down_revision": "0008_refresh_token_family_state",
+          "module": "0009_admin_identity_bootstrap_and_password_recovery",
+          "doc": "Executable DDL migration for 0009_admin_identity_bootstrap_and_password_recovery."
+        }
+      ],
+      "expected_head_revision": "0009_admin_identity_bootstrap_and_password_recovery",
+      "downgrade_target_revision": "0008_refresh_token_family_state",
       "downgraded_revision": null,
       "artifacts": {},
       "failure": "POSTGRES_URL not set in the current environment."
     }
   },
-  "pytest_report_artifact": "dist/test-reports/local-migration-portability-py313.json",
-  "pytest_exit_code": 0,
+  "pytest_report_artifact": "dist\\test-reports\\migration-portability-py312.json",
+  "pytest_exit_code": 1,
   "pytest_summary": {
     "tests_collected": 2,
-    "tests_passed": 2,
-    "tests_failed": 0,
+    "tests_passed": 1,
+    "tests_failed": 1,
     "tests_skipped": 0,
     "tests_error": 0
   },
   "passed": false,
   "failures": [
-    "postgres backend was not available in the current environment."
+    "sqlite backend did not pass upgrade \u2192 downgrade \u2192 reapply validation.",
+    "postgres backend was not available in the current environment.",
+    "The migration portability pytest lane did not pass."
   ]
 }
