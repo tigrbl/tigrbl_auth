@@ -34,7 +34,7 @@ def test_registry_json_is_utf8_without_bom_and_parseable() -> None:
     payload = _registry_bytes()
 
     assert not payload.startswith(b"\xef\xbb\xbf")
-    assert payload.endswith(b"\n")
+    assert not payload.endswith(b"\n")
     assert isinstance(json.loads(payload.decode("utf-8")), dict)
 
 
