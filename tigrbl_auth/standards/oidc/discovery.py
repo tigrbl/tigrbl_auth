@@ -94,15 +94,16 @@ async def openid_configuration_method_not_allowed(request: Request):
 
 
 async def _tenant_exists(*, db, tenant_slug: str) -> bool:
-    if enabled_tenant_record(Path.cwd(), tenant_slug) is not None:
-        return True
+    operator_fallback = enabled_tenant_record(Path.cwd(), tenant_slug) is not None
     if db is None:
-        return False
+        return operator_fallback
     try:
         tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
     except SQLAlchemyError:
-        return False
-    return tenant is not None
+        return operator_fallback
+    if tenant is not None:
+        return True
+    return operator_fallback
 
 
 @discovery_api.route(TENANT_OPENID_CONFIGURATION_PATH, methods=["GET"], tags=[".well-known", "tenant"])

@@ -15,8 +15,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES, VALID_PROFILES, resolv
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_auth.orm import Tenant, User
-from tigrbl_auth.services._operator_store import OperationContext
-from tigrbl_auth.services.operator_service import create_resource
+from tigrbl_auth.services.operator_service import get_record
 from tigrbl_auth.tables import get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 
@@ -95,19 +94,6 @@ async def _create_tenant(db_session: AsyncSession, label: str) -> Tenant:
     )
     db_session.add(tenant)
     await db_session.commit()
-    create_resource(
-        OperationContext(
-            repo_root=Path.cwd(),
-            command="tenant.create",
-            resource="tenant",
-            actor="integration-test",
-            profile="integration",
-            tenant=tenant.slug,
-        ),
-        record_id=tenant.slug,
-        patch={"name": tenant.name, "enabled": True, "sql_tenant_id": str(tenant.id)},
-        if_exists="update",
-    )
     return tenant
 
 
@@ -379,6 +365,7 @@ async def test_profile_documented_endpoints_behave_as_expected(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     tenant = await _create_tenant(db_session, f"profile-{profile}")
+    assert get_record(Path.cwd(), "tenant", tenant.slug) is None
     username = f"{profile}-user"
     password = "TestPassword123!"
     await _seed_user(db_session, tenant, username, password)
