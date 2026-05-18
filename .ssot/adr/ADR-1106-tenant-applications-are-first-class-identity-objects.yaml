@@ -1,0 +1,66 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1106"
+number: 1106
+slug: "tenant-applications-are-first-class-identity-objects"
+title: "Tenant applications are first-class identity objects"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`App` SHALL be a first-class identity object owned by"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define App as a tenant-owned product identity distinct from OAuth clients."
+    at: "2026-05-18T08:26:38Z"
+references: []
+body: |-
+  ## Decision
+  
+  `App` SHALL be a first-class identity object owned by
+  `tigrbl-identity-principals`.
+  
+  An app belongs to one tenant and MAY own:
+  
+  - one or more OAuth/OIDC clients;
+  - zero or more services;
+  - zero or more resource servers or APIs;
+  - app-scoped policies;
+  - consent policy;
+  - redirect URI policy;
+  - credential posture rules.
+  
+  OAuth/OIDC clients remain distinct from apps. A client is a protocol-facing
+  registration. An app is a product/application identity.
+  
+  ## Context
+  
+  The current repository has tenants, users, clients, services, service keys,
+  API keys, OAuth/OIDC routes, dynamic client registration, admin concepts, and
+  runtime profiles.
+  
+  The package-boundary proposal describes a platform pattern where tenant admins
+  create apps, apps own one or more OAuth/OIDC clients, users log into those
+  apps, and the apps call protected APIs.
+  
+  Without a first-class app object, tenants must overload OAuth clients as the
+  product identity. That breaks down when one app needs multiple clients,
+  services, resource servers, or policies.
+  
+  ## Consequences
+  
+  `principals` owns app identity semantics.
+  
+  `admin` owns app lifecycle operations.
+  
+  `oauth` owns the client protocol behavior for app-owned clients.
+  
+  `policy` owns app-scoped authority, consent, and authorization rules.
+  
+  `storage-sqlalchemy` owns persisted app mappings.
+  
+  Compatibility MAY allow clients to belong directly to a tenant until the app
+  model is fully migrated.

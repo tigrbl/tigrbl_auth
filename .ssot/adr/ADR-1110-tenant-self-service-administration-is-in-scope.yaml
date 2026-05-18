@@ -1,0 +1,59 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1110"
+number: 1110
+slug: "tenant-self-service-administration-is-in-scope"
+title: "Tenant self-service administration is in scope"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tenant self-service administration SHALL be in scope for the identity suite."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define tenant self-service administration as an in-scope governed product flow."
+    at: "2026-05-18T08:26:42Z"
+references: []
+body: |-
+  ## Decision
+  
+  Tenant self-service administration SHALL be in scope for the identity suite.
+  
+  Tenant admins may manage tenant-scoped:
+  
+  - users and invitations;
+  - memberships;
+  - apps;
+  - OAuth/OIDC clients;
+  - services;
+  - service credentials;
+  - resource servers;
+  - selected policy assignments;
+  - consent and client posture settings;
+  - selected runtime-visible configuration where allowed by policy.
+  
+  Deployment superuser authority remains distinct from tenant admin authority.
+  
+  ## Context
+  
+  The package-boundary proposal describes a Google/GitHub-style platform
+  pattern where tenant admins create apps and clients, users log into those
+  apps, and protected APIs validate issued tokens.
+  
+  The current repo has admin/superuser flags and administrative resource
+  surfaces, but tenant self-service needs a governed boundary so tenant admins
+  do not inherit deployment-wide authority.
+  
+  ## Consequences
+  
+  `admin` owns tenant self-service workflows and safe mutations.
+  
+  `policy` owns whether a tenant admin may perform a given action.
+  
+  `principals` owns tenant memberships and authorities.
+  
+  `operator` remains outside the request path and may bootstrap or inspect
+  tenant admin state, but tenant self-service is not operator-only.

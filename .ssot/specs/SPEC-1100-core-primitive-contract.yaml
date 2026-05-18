@@ -1,0 +1,67 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1100"
+number: 1100
+slug: "core-primitive-contract"
+title: "Core primitive contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-core`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define pure primitives for the core package."
+    at: "2026-05-18T08:20:27Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-core`.
+  
+  ## First-Class Objects
+  
+  `core` MUST define implementation-neutral primitives for:
+  
+  - `TenantId`
+  - `PrincipalId`
+  - `CredentialId`
+  - `ClientId`
+  - `Issuer`
+  - `Subject`
+  - `Audience`
+  - `Scope`
+  - `Permission`
+  - `GrantType`
+  - `ResponseType`
+  - `TokenType`
+  - `Nonce`
+  - `Clock`
+  - `TimeWindow`
+  - `ErrorCode`
+  - `Result`
+  - `CapabilityName`
+  - `FeatureFlagName`
+  - `RuntimeProfileName`
+  
+  ## Requirements
+  
+  Core primitives MUST be pure Python and MUST NOT depend on protocol, storage,
+  server, runtime, operator, or testkit packages.
+  
+  Core objects MAY provide validation, normalization, comparison, and
+  serialization helpers when those helpers are implementation-neutral.
+  
+  Core MUST NOT own Pydantic wire schemas, SQLAlchemy/Tigrbl tables, routers,
+  ASGI app construction, JOSE signing, OAuth/OIDC flows, or persistence.
+  
+  ## Verification
+  
+  Verification MUST prove `core` imports without optional runtime dependencies
+  and does not import higher identity packages.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1097"

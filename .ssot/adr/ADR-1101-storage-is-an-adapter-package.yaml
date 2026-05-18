@@ -1,0 +1,57 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1101"
+number: 1101
+slug: "storage-is-an-adapter-package"
+title: "Storage is an adapter package"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Create `tigrbl-identity-storage-sqlalchemy` as the SQLAlchemy/Tigrbl"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Add storage-sqlalchemy as the SQLAlchemy/Tigrbl persistence boundary."
+    at: "2026-05-18T08:13:05Z"
+references: []
+body: |-
+  ## Decision
+  
+  Create `tigrbl-identity-storage-sqlalchemy` as the SQLAlchemy/Tigrbl
+  persistence adapter package.
+  
+  It owns:
+  
+  - table mappings
+  - ORM integration
+  - migrations
+  - repository implementations
+  - unit-of-work implementations
+  - database bootstrap
+  - SQLite/Postgres portability
+  - migration evidence hooks
+  
+  ## Context
+  
+  The current package includes table resources, ORM models, persistence
+  lifecycle, engine configuration, SQLite support, and Postgres extras. Runtime
+  and surface code currently reach into table resources and engine details.
+  
+  Protocol packages should not know whether state is stored in SQLite,
+  Postgres, Redis, memory, or a test fake.
+  
+  ## Constraints
+  
+  Storage may import semantic/protocol packages to map their objects, but
+  protocol packages MUST NOT import storage.
+  
+  Server may depend on storage as the default adapter. Runtime and operator may
+  use storage through server or explicit adapter boundaries.
+  
+  ## Consequences
+  
+  OAuth, OIDC, JOSE, principals, credentials, and policy stay pure. Alternate
+  storage adapters remain possible later.

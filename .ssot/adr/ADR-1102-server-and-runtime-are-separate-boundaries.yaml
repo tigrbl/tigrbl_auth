@@ -1,0 +1,63 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1102"
+number: 1102
+slug: "server-and-runtime-are-separate-boundaries"
+title: "Server and runtime are separate boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl-identity-server` builds the ASGI/Tigrbl application."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Separate Tigrbl app composition from process and runner execution."
+    at: "2026-05-18T08:13:06Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl-identity-server` builds the ASGI/Tigrbl application.
+  
+  It owns:
+  
+  - app factory
+  - gateway factory
+  - plugin install
+  - Tigrbl route/surface composition
+  - public/admin/diagnostic surface mounting
+  - OpenAPI/OpenRPC projection
+  - protocol publisher binding
+  - server settings
+  
+  `tigrbl-identity-runtime` runs the composed application.
+  
+  It owns:
+  
+  - runner profiles
+  - Uvicorn/Hypercorn/Tigrcorn adapters
+  - lifecycle hooks
+  - runtime manifests
+  - health and diagnostics wiring
+  - serve command plans
+  - runtime state
+  
+  ## Context
+  
+  The system needs both application composition and process execution. These are
+  not the same concern.
+  
+  Application composition decides which Tigrbl routers, REST/RPC surfaces,
+  discovery publishers, protocol endpoints, admin surfaces, and contracts are
+  mounted. Runtime execution decides how the composed ASGI/Tigrbl app is
+  served, profiled, monitored, and diagnosed.
+  
+  ## Consequences
+  
+  Server builds the app. Runtime runs the app. Operator controls and verifies
+  the runtime.
+  
+  This avoids mixing protocol route composition with process runner behavior.

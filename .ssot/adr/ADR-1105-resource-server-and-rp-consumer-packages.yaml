@@ -1,0 +1,65 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1105"
+number: 1105
+slug: "resource-server-and-rp-consumer-packages"
+title: "Resource-server and relying-party consumer packages are first-class"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl_auth` SHALL govern downstream consumer roles as explicit identity"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Govern resource-server and relying-party consumer roles as explicit package boundaries."
+    at: "2026-05-18T08:26:37Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl_auth` SHALL govern downstream consumer roles as explicit identity
+  package boundaries:
+  
+  - `tigrbl-identity-resource-server`
+  - `tigrbl-identity-rp`
+  
+  `tigrbl-identity-resource-server` owns protected API validation and
+  enforcement helpers for downstream APIs.
+  
+  `tigrbl-identity-rp` owns relying-party/client SDK helpers for applications
+  that initiate OAuth/OIDC login and consume login results.
+  
+  These packages are consumer-side packages. They MUST NOT be request-path
+  dependencies of the default authorization-server package.
+  
+  ## Context
+  
+  The base identity package split covers the provider-side implementation:
+  OAuth/OIDC server behavior, admin/control-plane operations, storage, runtime,
+  operator workflows, contracts, and testkit.
+  
+  The package-boundary proposal also identifies two consumer roles:
+  
+  - Resource Server Toolkit: helps downstream APIs validate tokens and enforce
+    scopes, permissions, resource indicators, proof binding, and tenant trust
+    domains.
+  - Relying Party / Client SDK: helps applications initiate OIDC/OAuth login,
+    handle callbacks, exchange codes, validate ID tokens, refresh tokens, call
+    UserInfo, and log out.
+  
+  Those consumer roles should not be hidden inside `server`, `oauth`, or
+  `oidc`.
+  
+  ## Consequences
+  
+  The provider can remain cleanly separated from downstream integration helpers.
+  
+  `server` builds the provider app. `resource-server` helps protected APIs
+  consume provider-issued access tokens. `rp` helps client applications consume
+  provider login flows.
+  
+  The suite can support the full platform pattern without making every consumer
+  install the default server or runtime packages.

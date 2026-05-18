@@ -1,0 +1,50 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1095"
+number: 1095
+slug: "identity-vertical-package-suite"
+title: "Rename the package vertical from auth to identity"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Use `identity` as the vertical name for the split package suite."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Adopt identity as the package-suite vertical and retain tigrbl-auth as the facade."
+    at: "2026-05-18T08:12:36Z"
+references: []
+body: |-
+  ## Decision
+  
+  Use `identity` as the vertical name for the split package suite.
+  
+  Distribution packages MUST use `tigrbl-identity-*` names. Import packages MUST
+  use the `tigrbl_identity.*` namespace unless a later ADR explicitly chooses a
+  different namespace strategy. The existing `tigrbl-auth` distribution remains
+  the product and compatibility facade.
+  
+  ## Context
+  
+  The existing `tigrbl_auth` repository covers more than authentication. It
+  includes OAuth/OIDC protocol behavior, principals, credentials, clients,
+  services, policy controls, tenant boundaries, runtime profiles, operator
+  workflows, contracts, and certification evidence.
+  
+  The term `auth` is ambiguous and can mean authentication, authorization, or
+  both. The package suite needs a name that can truthfully cover users, clients,
+  apps, services, devices, workloads, credentials, protocol flows, and runtime
+  surfaces.
+  
+  ## Consequences
+  
+  The architecture can distinguish authentication, authorization, principals,
+  credentials, policy, protocol standards, storage, server composition, runtime
+  execution, and operator workflows without forcing them under a vague auth
+  bucket.
+  
+  Existing users can continue using `tigrbl-auth` while implementation
+  ownership moves to the identity suite.

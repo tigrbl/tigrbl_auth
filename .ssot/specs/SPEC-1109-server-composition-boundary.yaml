@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1109"
+number: 1109
+slug: "server-composition-boundary"
+title: "Server composition boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-server`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define Tigrbl app composition package ownership."
+    at: "2026-05-18T08:20:36Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-server`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `IdentityApp`
+  - `AppFactory`
+  - `GatewayFactory`
+  - `PluginInstaller`
+  - `RouteManifest`
+  - `SurfaceManifest`
+  - `PublicRestSurface`
+  - `AdminRpcSurface`
+  - `DiagnosticsSurface`
+  - `ProtocolPublisher`
+  - `OpenApiPublisher`
+  - `OpenRpcPublisher`
+  - `DiscoveryPublisher`
+  - `ServerSettings`
+  
+  ## Requirements
+  
+  Server builds the ASGI/Tigrbl app. It owns route/surface mounting, gateway and
+  plugin construction, protocol publisher binding, OpenAPI/OpenRPC projection,
+  and default server settings.
+  
+  Server MUST NOT own process runner behavior, CLI/operator workflows, or
+  testkit fixtures.
+  
+  Server MAY depend on storage as the default persistence adapter, but the
+  composition interface SHOULD allow alternate storage adapters.
+  
+  ## Verification
+  
+  Verification MUST prove the server can build the default app and expose route,
+  surface, and publisher manifests without importing operator or testkit.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1102"

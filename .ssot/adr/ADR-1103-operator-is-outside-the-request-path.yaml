@@ -1,0 +1,56 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1103"
+number: 1103
+slug: "operator-is-outside-the-request-path"
+title: "Operator is outside the request path"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Create `tigrbl-identity-operator` for CLI and operator workflows."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Create an operator package for CLI and evidence workflows outside the request path."
+    at: "2026-05-18T08:13:07Z"
+references: []
+body: |-
+  ## Decision
+  
+  Create `tigrbl-identity-operator` for CLI and operator workflows.
+  
+  It owns:
+  
+  - bootstrap commands
+  - migration commands
+  - import/export commands
+  - tenant/client/service/profile commands
+  - key rotation commands
+  - claims linting
+  - release gate execution
+  - evidence bundle generation
+  - certification reports
+  
+  ## Context
+  
+  The repository includes CLI/operator workflows for bootstrap, migration,
+  import/export, profile inspection, key rotation, claims linting, release
+  gates, evidence bundles, and certification reports.
+  
+  These workflows are essential, but they are not request-path runtime logic.
+  
+  ## Constraints
+  
+  Server and runtime MUST NOT import operator.
+  Production request-path code MUST NOT import operator.
+  Operator MUST NOT be required to serve OAuth/OIDC/admin requests.
+  Operator MUST NOT import testkit unless the command is explicitly
+  non-production conformance tooling or moved to a separate conformance package.
+  
+  ## Consequences
+  
+  CLI and certification workflows remain powerful without polluting runtime
+  imports or production dependency graphs.

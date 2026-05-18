@@ -1,0 +1,68 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1115"
+number: 1115
+slug: "relying-party-package-boundary"
+title: "Relying party package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-rp`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define relying-party package SDK ownership."
+    at: "2026-05-18T08:31:55Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-rp`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `RelyingParty`
+  - `LoginRequest`
+  - `AuthorizationUrlBuilder`
+  - `CallbackHandler`
+  - `PkceVerifier`
+  - `StateNonceStore`
+  - `TokenExchangeClient`
+  - `IdTokenValidator`
+  - `UserInfoClient`
+  - `LogoutClient`
+  - `RpSession`
+  - `RpConfiguration`
+  - `DiscoveryClient`
+  
+  ## Requirements
+  
+  RP owns consumer application behavior for initiating OAuth/OIDC login,
+  generating authorization URLs, handling callbacks, validating state/nonce,
+  exchanging codes, validating ID tokens, refreshing tokens, calling UserInfo,
+  and initiating logout.
+  
+  RP MUST NOT own provider-side OAuth/OIDC endpoint behavior, server app
+  composition, runtime execution, admin mutation workflows, or storage mappings
+  for the provider.
+  
+  ## Dependency Rules
+  
+  RP MAY import `core`, `contracts`, `credentials`, `jose`, `oauth`, and
+  `oidc`.
+  
+  Provider-side server/runtime packages MUST NOT import RP.
+  
+  ## Verification
+  
+  Verification MUST include PKCE login URL construction, callback validation,
+  token exchange client behavior, ID token validation, UserInfo call behavior,
+  logout URL/client behavior, and provider-side import isolation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1105"

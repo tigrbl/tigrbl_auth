@@ -1,0 +1,60 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1121"
+number: 1121
+slug: "tenant-self-service-administration-flow"
+title: "Tenant self-service administration flow"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs tenant self-service administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define tenant-admin self-service workflow requirements."
+    at: "2026-05-18T08:32:01Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs tenant self-service administration.
+  
+  ## First-Class Objects
+  
+  The model MUST define:
+  
+  - `TenantAdminSession`
+  - `TenantAdminOperation`
+  - `TenantUserInvitation`
+  - `TenantMembershipMutation`
+  - `TenantAppMutation`
+  - `TenantClientMutation`
+  - `TenantServiceMutation`
+  - `TenantCredentialMutation`
+  - `TenantResourceServerMutation`
+  - `TenantPolicyAssignment`
+  - `TenantAdminAuditEvent`
+  
+  ## Requirements
+  
+  Tenant admins MAY manage tenant-scoped resources allowed by policy.
+  
+  Tenant admins MUST NOT gain deployment-wide authority by default.
+  
+  Tenant self-service operations MUST be safe mutations with authorization,
+  tenant isolation, validation, idempotency where required, and audit records.
+  
+  Operator bootstrap may create initial tenant admin state, but routine tenant
+  self-service MUST be available through governed admin surfaces.
+  
+  ## Verification
+  
+  Verification MUST prove tenant admin can perform allowed operations, cannot
+  cross tenant boundaries, cannot perform deployment-superuser operations, and
+  produces audit events.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1110"

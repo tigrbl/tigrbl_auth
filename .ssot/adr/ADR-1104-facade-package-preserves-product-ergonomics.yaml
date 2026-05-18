@@ -1,0 +1,58 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1104"
+number: 1104
+slug: "facade-package-preserves-product-ergonomics"
+title: "Facade package preserves product ergonomics"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Keep `tigrbl-auth` as the product and compatibility facade."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Retain tigrbl-auth as a public facade and compatibility package."
+    at: "2026-05-18T08:13:08Z"
+references: []
+body: |-
+  ## Decision
+  
+  Keep `tigrbl-auth` as the product and compatibility facade.
+  
+  It may expose:
+  
+  - `create_app`
+  - `create_gateway`
+  - `install_plugin`
+  - `IdentityServer`
+  - default runtime entrypoints
+  - selected public contracts
+  - install extras for common profiles
+  - compatibility imports during migration
+  
+  ## Context
+  
+  Existing users know the package as `tigrbl-auth` and `tigrbl_auth`. A split
+  package suite improves boundaries, but external consumers still need stable
+  ergonomic entrypoints.
+  
+  A facade also lets the project publish common install profiles without
+  exposing internal package layout as the primary user experience.
+  
+  ## Constraints
+  
+  The facade MUST NOT become an internal module graveyard.
+  
+  Compatibility re-exports MUST be explicit, tested, and staged for deprecation
+  where appropriate.
+  
+  New implementation ownership belongs in the `tigrbl-identity-*` packages.
+  
+  ## Consequences
+  
+  The project can improve internal architecture without forcing immediate
+  consumer churn. The facade remains the public ergonomic layer, not the
+  implementation home.

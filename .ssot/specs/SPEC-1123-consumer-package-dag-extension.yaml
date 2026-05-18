@@ -1,0 +1,68 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1123"
+number: 1123
+slug: "consumer-package-dag-extension"
+title: "Consumer package DAG extension"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification extends the package DAG for second-wave consumer packages."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define consumer package dependency rules and forbidden edges."
+    at: "2026-05-18T08:32:03Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification extends the package DAG for second-wave consumer packages.
+  
+  ## Allowed Edges
+  
+  `tigrbl-identity-resource-server` MAY import:
+  
+  - `tigrbl-identity-core`
+  - `tigrbl-identity-contracts`
+  - `tigrbl-identity-principals`
+  - `tigrbl-identity-credentials`
+  - `tigrbl-identity-jose`
+  - `tigrbl-identity-policy`
+  - `tigrbl-identity-oauth`
+  - selected `tigrbl-identity-oidc` metadata contracts
+  
+  `tigrbl-identity-rp` MAY import:
+  
+  - `tigrbl-identity-core`
+  - `tigrbl-identity-contracts`
+  - `tigrbl-identity-credentials`
+  - `tigrbl-identity-jose`
+  - `tigrbl-identity-oauth`
+  - `tigrbl-identity-oidc`
+  
+  `tigrbl-identity-testkit` MAY import RP and resource-server packages for
+  non-production testing.
+  
+  ## Forbidden Edges
+  
+  Provider-side `server` and `runtime` MUST NOT import RP or resource-server.
+  
+  `oauth`, `oidc`, and `jose` MUST NOT import RP or resource-server.
+  
+  `admin` and `storage-sqlalchemy` MUST NOT require RP or resource-server for
+  provider-side operation.
+  
+  Production request-path provider code MUST NOT import RP or resource-server.
+  
+  ## Verification
+  
+  Verification MUST include import DAG checks for consumer packages and
+  provider-side import isolation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1105"
+  - "adr:1112"

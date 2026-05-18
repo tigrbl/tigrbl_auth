@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1106"
+number: 1106
+slug: "oidc-package-boundary"
+title: "OIDC package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-oidc`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define OIDC package standards ownership."
+    at: "2026-05-18T08:20:33Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-oidc`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `IdToken`
+  - `UserInfo`
+  - `OidcClaims`
+  - `Acr`
+  - `Amr`
+  - `AuthenticationContext`
+  - `OidcProviderMetadata`
+  - `OidcSession`
+  - `SessionState`
+  - `LogoutRequest`
+  - `RpInitiatedLogout`
+  - `FrontChannelLogout`
+  - `BackChannelLogout`
+  - `FederatedLoginResult`
+  
+  ## Standards Coverage
+  
+  The package owns behavior for OIDC Core, OIDC Discovery, OIDC UserInfo, OIDC
+  Session Management, OIDC RP-Initiated Logout, OIDC Front-Channel Logout, and
+  OIDC Back-Channel Logout.
+  
+  ## Requirements
+  
+  OIDC MAY depend on OAuth and JOSE. OIDC MUST NOT own generic OAuth grant
+  behavior, SQLAlchemy/Tigrbl mappings, process runtime adapters, operator
+  workflows, or test-only fixtures.
+  
+  ## Verification
+  
+  Verification MUST map each retained OIDC target to a package-owned object,
+  flow, metadata contract, or explicit dependency.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1100"

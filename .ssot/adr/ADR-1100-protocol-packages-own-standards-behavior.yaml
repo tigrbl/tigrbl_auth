@@ -1,0 +1,58 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1100"
+number: 1100
+slug: "protocol-packages-own-standards-behavior"
+title: "Protocol packages own standards behavior"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Split protocol standards into three packages:"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Split JOSE, OAuth, and OIDC into distinct claimable protocol packages."
+    at: "2026-05-18T08:13:04Z"
+references: []
+body: |-
+  ## Decision
+  
+  Split protocol standards into three packages:
+  
+  - `tigrbl-identity-jose` owns JOSE/JWT/JWK/JWS/JWE/JWKS signing,
+    verification, key selection, publication, rotation primitives, and
+    algorithm policy.
+  - `tigrbl-identity-oauth` owns OAuth 2.x protocol flows, grants, token
+    endpoint behavior, revocation, introspection, dynamic client registration,
+    device flow, token exchange, PAR, JAR, RAR, DPoP, mTLS, and resource
+    indicators.
+  - `tigrbl-identity-oidc` owns OIDC behavior: discovery, ID token claims,
+    UserInfo, session management, RP-initiated logout, front-channel logout,
+    back-channel logout, and federated login result semantics.
+  
+  ## Context
+  
+  The repository tracks retained OAuth, OIDC, and JOSE standards targets as
+  separate conformance surfaces. These targets have different semantics,
+  dependencies, and claim boundaries.
+  
+  Grouping them into one broad standards package blurs RFC/OIDC ownership and
+  makes import direction harder to enforce.
+  
+  ## Constraints
+  
+  JOSE MUST NOT import OAuth or OIDC.
+  OAuth MAY import JOSE.
+  OIDC MAY import OAuth and JOSE.
+  
+  None of the protocol packages may own SQLAlchemy tables, ASGI runners,
+  operator workflows, or testkit fixtures.
+  
+  ## Consequences
+  
+  Standards claims map cleanly to package ownership. Optional or future
+  standards such as WebAuthn, SCIM, SAML, SPIFFE/SPIRE, and OIDC Federation can
+  be added without contaminating core OAuth/OIDC/JOSE packages.

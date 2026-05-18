@@ -1,0 +1,61 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1096"
+number: 1096
+slug: "split-tigrbl-auth-into-identity-package-suite"
+title: "Split tigrbl-auth into an identity package suite"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Split the implementation into a governed package suite:"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Freeze the first-wave package-suite shape and distribution/import naming convention."
+    at: "2026-05-18T08:13:00Z"
+references: []
+body: |-
+  ## Decision
+  
+  Split the implementation into a governed package suite:
+  
+  - `tigrbl-identity-core`
+  - `tigrbl-identity-contracts`
+  - `tigrbl-identity-principals`
+  - `tigrbl-identity-credentials`
+  - `tigrbl-identity-jose`
+  - `tigrbl-identity-policy`
+  - `tigrbl-identity-oauth`
+  - `tigrbl-identity-oidc`
+  - `tigrbl-identity-admin`
+  - `tigrbl-identity-storage-sqlalchemy`
+  - `tigrbl-identity-server`
+  - `tigrbl-identity-runtime`
+  - `tigrbl-identity-operator`
+  - `tigrbl-identity-testkit`
+  - `tigrbl-auth`
+  
+  Distribution names use hyphens. Import names use `tigrbl_identity.*`.
+  `tigrbl-auth` remains the facade and compatibility package.
+  
+  ## Context
+  
+  The current repository combines protocol standards, SQLAlchemy/Tigrbl tables,
+  REST/RPC surfaces, admin operations, runtime profile configuration,
+  CLI/operator workflows, contracts, and conformance evidence in one package.
+  
+  This makes boundaries hard to enforce and makes it difficult to claim exactly
+  which package owns which standards, runtime behavior, storage behavior, or
+  identity surface.
+  
+  ## Consequences
+  
+  Each package has a claimable ownership boundary. Protocol packages can remain
+  pure. Storage, runtime, operator, and testkit dependencies no longer leak into
+  the protocol layer.
+  
+  The split requires a compatibility and migration plan for existing
+  `tigrbl_auth.*` imports.

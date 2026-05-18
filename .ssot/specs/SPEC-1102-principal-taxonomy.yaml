@@ -1,0 +1,82 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1102"
+number: 1102
+slug: "principal-taxonomy"
+title: "Principal taxonomy"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-principals`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define human, client, app, service, device, machine, workload, and federated principals."
+    at: "2026-05-18T08:20:29Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-principals`.
+  
+  ## First-Class Principals
+  
+  The package MUST define the following principal types:
+  
+  - `Principal`
+  - `UserPrincipal`
+  - `ClientPrincipal`
+  - `AppPrincipal`
+  - `ServicePrincipal`
+  - `DevicePrincipal`
+  - `MachinePrincipal`
+  - `WorkloadPrincipal`
+  - `FederatedSubjectPrincipal`
+  
+  ## Related First-Class Objects
+  
+  The package MUST define:
+  
+  - `Tenant`
+  - `Group`
+  - `Role`
+  - `Membership`
+  - `TenantMembership`
+  - `PrincipalAlias`
+  - `Ownership`
+  - `Delegation`
+  - `AdminAuthority`
+  - `OwnerAuthority`
+  - `SuperuserAuthority`
+  
+  ## Requirements
+  
+  Principals are actors that can be authenticated, authorized, audited, or named
+  as subjects.
+  
+  Credentials are not principals. Sessions are not principals. Device codes are
+  not principals. API keys and service keys are credentials.
+  
+  Admin, owner, and superuser MUST be modeled as authorities, roles,
+  entitlements, or relationships attached to a principal unless a later ADR
+  creates separate lifecycle requirements for them.
+  
+  `ClientPrincipal` and `AppPrincipal` MUST remain distinct. A client is a
+  protocol-facing OAuth/OIDC registration. An app is a product/application
+  identity that may own one or more clients, services, or credentials.
+  
+  `DevicePrincipal` MUST remain distinct from the OAuth Device Authorization
+  Grant flow.
+  
+  ## Verification
+  
+  Verification MUST prove that each principal type can be represented without
+  importing credential verification, OAuth flow logic, storage mappings, or
+  server runtime code.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1046"
+  - "adr:1098"

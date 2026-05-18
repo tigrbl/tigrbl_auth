@@ -1,0 +1,65 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1101"
+number: 1101
+slug: "public-contract-model"
+title: "Public contract model"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-contracts`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define external wire and manifest contracts."
+    at: "2026-05-18T08:20:28Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-contracts`.
+  
+  ## First-Class Objects
+  
+  `contracts` MUST define public contract models for:
+  
+  - `AuthorizeRequest`
+  - `AuthorizeResponse`
+  - `TokenRequest`
+  - `TokenResponse`
+  - `IntrospectionRequest`
+  - `IntrospectionResponse`
+  - `RevocationRequest`
+  - `DeviceAuthorizationRequest`
+  - `DeviceAuthorizationResponse`
+  - `OpenIDConfiguration`
+  - `OAuthAuthorizationServerMetadata`
+  - `ProtectedResourceMetadata`
+  - `JwksDocument`
+  - `AdminRequest`
+  - `AdminResponse`
+  - `ErrorResponse`
+  - `CapabilityManifest`
+  - `OpenApiContractInput`
+  - `OpenRpcContractInput`
+  
+  ## Requirements
+  
+  Contract models MUST be suitable for external consumers and generated contract
+  projections.
+  
+  Contracts MAY depend on `core` primitives.
+  
+  Contracts MUST NOT contain business logic, persistence logic, token signing,
+  credential verification, ASGI app construction, or operator workflows.
+  
+  ## Verification
+  
+  Verification MUST prove that public schemas can be imported and serialized
+  without importing storage, server, runtime, or operator packages.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1097"

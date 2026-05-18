@@ -1,0 +1,66 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1107"
+number: 1107
+slug: "jose-package-boundary"
+title: "JOSE package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-jose`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define JOSE package standards ownership."
+    at: "2026-05-18T08:20:34Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-jose`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `Jwk`
+  - `Jwks`
+  - `Jws`
+  - `Jwe`
+  - `Jwt`
+  - `JoseHeader`
+  - `KeyId`
+  - `SigningKey`
+  - `VerificationKey`
+  - `EncryptionKey`
+  - `KeySet`
+  - `KeyRotationPlan`
+  - `KeySelectionPolicy`
+  - `TokenSigner`
+  - `TokenVerifier`
+  - `JwksPublisher`
+  - `JoseAlgorithmPolicy`
+  
+  ## Standards Coverage
+  
+  The package owns JOSE/JWT/JWK/JWA/JWS/JWE behavior for retained JOSE targets,
+  including RFC 7515, RFC 7516, RFC 7517, RFC 7518, and RFC 7519.
+  
+  ## Requirements
+  
+  JOSE MUST NOT import OAuth, OIDC, admin, server, runtime, operator, storage, or
+  testkit.
+  
+  JOSE MAY expose primitives used by OAuth, OIDC, credentials, server, and
+  operator packages.
+  
+  ## Verification
+  
+  Verification MUST prove JOSE can sign, verify, publish, select, and rotate key
+  material without importing OAuth/OIDC/server/runtime/storage packages.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1100"

@@ -1,0 +1,53 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1097"
+number: 1097
+slug: "core-and-contracts-are-separate-package-boundaries"
+title: "Core and contracts are separate package boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl-identity-core` owns pure primitives such as IDs, refs, scopes,"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Separate semantic primitives from wire/API contract models."
+    at: "2026-05-18T08:13:01Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl-identity-core` owns pure primitives such as IDs, refs, scopes,
+  audiences, issuers, subjects, grant types, result types, error codes, clocks,
+  and feature/profile names.
+  
+  `tigrbl-identity-contracts` owns public wire models, request/response schemas,
+  metadata documents, OpenAPI/OpenRPC inputs, capability manifests, and typed
+  error responses.
+  
+  ## Context
+  
+  Core primitives and public wire contracts are both shared, but they serve
+  different purposes.
+  
+  Core objects are semantic and implementation-neutral. Contract objects are
+  API, protocol, OpenAPI, OpenRPC, or schema-facing.
+  
+  ## Constraints
+  
+  `core` may be imported by every package.
+  
+  `contracts` may be imported by external consumers and higher-level packages,
+  but it MUST NOT become an app, storage, or crypto package.
+  
+  Neither package may construct an app, open a DB session, verify a password, or
+  sign a token.
+  
+  ## Consequences
+  
+  The shared base stays stable and safe to import from low-level packages.
+  External consumers can depend on wire contracts without pulling runtime,
+  storage, or server composition dependencies.

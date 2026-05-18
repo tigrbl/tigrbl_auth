@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1111"
+number: 1111
+slug: "operator-workflow-boundary"
+title: "Operator workflow boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-operator`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define operator workflow package ownership."
+    at: "2026-05-18T08:20:38Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-operator`.
+  
+  ## First-Class Objects
+  
+  The package MUST define:
+  
+  - `OperatorCommand`
+  - `BootstrapCommand`
+  - `MigrateCommand`
+  - `ImportCommand`
+  - `ExportCommand`
+  - `KeyRotationCommand`
+  - `ClientCommand`
+  - `ServiceCommand`
+  - `TenantCommand`
+  - `ProfileInspectCommand`
+  - `ClaimsLintCommand`
+  - `ReleaseGateCommand`
+  - `EvidenceBundleCommand`
+  - `CertificationReportCommand`
+  - `OperatorReport`
+  
+  ## Requirements
+  
+  Operator owns CLI and operator workflows. Operator MUST remain outside the
+  request path and MUST NOT be required for serving OAuth/OIDC/admin requests.
+  
+  Server and runtime MUST NOT import operator.
+  
+  Operator MUST NOT import testkit for production commands. If conformance
+  commands need harnesses, those commands MUST be explicitly non-production or
+  moved to a separate conformance package.
+  
+  ## Verification
+  
+  Verification MUST prove request-path packages do not import operator and
+  operator commands can run against server/runtime manifests where applicable.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1103"

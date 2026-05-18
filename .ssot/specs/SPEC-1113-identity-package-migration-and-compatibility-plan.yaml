@@ -1,0 +1,52 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1113"
+number: 1113
+slug: "identity-package-migration-and-compatibility-plan"
+title: "Identity package migration and compatibility plan"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs migration from the current `tigrbl_auth` package to"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define staged migration and compatibility requirements for the package split."
+    at: "2026-05-18T08:20:39Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs migration from the current `tigrbl_auth` package to
+  the split `tigrbl_identity.*` package suite.
+  
+  ## Requirements
+  
+  The migration MUST proceed in stages:
+  
+  1. Create package boundaries and import guards.
+  2. Introduce `tigrbl_identity.*` packages with compatibility re-exports.
+  3. Move pure core/contracts/principals/credentials/policy objects first.
+  4. Move JOSE, OAuth, and OIDC protocol packages.
+  5. Move storage mappings into `storage-sqlalchemy`.
+  6. Move server composition and runtime execution.
+  7. Move operator workflows.
+  8. Keep `tigrbl-auth` as the facade and compatibility distribution.
+  9. Deprecate legacy imports only after replacement imports and tests exist.
+  
+  Compatibility re-exports MUST be explicit, tested, and documented. The facade
+  MUST NOT become an internal module graveyard.
+  
+  ## Verification
+  
+  Verification MUST include legacy import smoke tests, new import smoke tests,
+  package metadata tests, import DAG checks, facade profile tests, and registry
+  validation.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1095"
+  - "adr:1096"
+  - "adr:1104"

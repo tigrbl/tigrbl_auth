@@ -1,0 +1,60 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1112"
+number: 1112
+slug: "consumer-packages-are-second-wave-unless-promoted"
+title: "Consumer packages are second-wave unless promoted by boundary update"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl-identity-resource-server` and `tigrbl-identity-rp` are governed"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Track resource-server and RP as governed second-wave packages unless promoted by package-suite boundary update."
+    at: "2026-05-18T08:26:44Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl-identity-resource-server` and `tigrbl-identity-rp` are governed
+  consumer packages, but they are second-wave packages unless `spc:1099` is
+  updated to include them in the first-wave package set.
+  
+  The base first wave remains provider-side:
+  
+  - core
+  - contracts
+  - principals
+  - credentials
+  - jose
+  - policy
+  - oauth
+  - oidc
+  - admin
+  - storage-sqlalchemy
+  - server
+  - runtime
+  - operator
+  - testkit
+  - facade
+  
+  ## Context
+  
+  The package-boundary proposal includes resource-server and RP packages, but
+  also notes they are important consumer roles that require more work.
+  
+  The first ADR/SPEC wave has already frozen the provider-side package suite.
+  Adding consumer packages to first wave changes the dependency DAG, test scope,
+  and migration plan.
+  
+  ## Consequences
+  
+  Consumer packages can be designed and tracked now without forcing the initial
+  split to implement every downstream SDK/toolkit.
+  
+  Promoting either package into first wave requires updating the package suite
+  boundary SPEC and package DAG verification.

@@ -1,0 +1,71 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1105"
+number: 1105
+slug: "oauth-package-boundary"
+title: "OAuth package boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-oauth`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define OAuth package standards ownership."
+    at: "2026-05-18T08:20:32Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-oauth`.
+  
+  ## First-Class Objects
+  
+  The package MUST define OAuth protocol objects for:
+  
+  - `AuthorizationGrant`
+  - `AuthorizationCode`
+  - `AccessToken`
+  - `RefreshToken`
+  - `ClientRegistration`
+  - `ClientAuthentication`
+  - `TokenExchange`
+  - `DeviceAuthorization`
+  - `DeviceCode`
+  - `UserCode`
+  - `PushedAuthorizationRequest`
+  - `JwtSecuredAuthorizationRequest`
+  - `RichAuthorizationRequest`
+  - `ResourceIndicator`
+  - `DpopProof`
+  - `MtlsClientBinding`
+  - `TokenRevocation`
+  - `TokenIntrospection`
+  - `OAuthError`
+  
+  ## Standards Coverage
+  
+  The package owns behavior for retained OAuth targets including RFC 6749, RFC
+  6750, RFC 7009, RFC 7521, RFC 7523, RFC 7591, RFC 7592, RFC 7636, RFC 7662,
+  RFC 8252, RFC 8628, RFC 8693, RFC 8705, RFC 8707, RFC 9068, RFC 9101, RFC
+  9126, RFC 9207, RFC 9396, RFC 9449, RFC 9700, and RFC 9728.
+  
+  ## Requirements
+  
+  OAuth owns protocol state machines and protocol errors. OAuth MUST NOT own
+  OIDC ID token/userinfo semantics, DB mappings, ASGI runners, operator
+  workflows, or test-only fixtures.
+  
+  OAuth MAY depend on `core`, `contracts`, `principals`, `credentials`, `jose`,
+  and `policy`.
+  
+  ## Verification
+  
+  Verification MUST map each retained OAuth target to a package-owned object,
+  state machine, or explicit out-of-package dependency.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1100"

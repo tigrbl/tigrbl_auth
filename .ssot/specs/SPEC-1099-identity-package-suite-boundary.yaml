@@ -1,0 +1,111 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1099"
+number: 1099
+slug: "identity-package-suite-boundary"
+title: "Identity package suite boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the first-wave `tigrbl-identity-*` package suite"
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define first-wave package-suite boundaries and import rules."
+    at: "2026-05-18T08:20:26Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the first-wave `tigrbl-identity-*` package suite
+  and the `tigrbl-auth` facade.
+  
+  ## Package Set
+  
+  The governed package set is:
+  
+  - `tigrbl-identity-core`
+  - `tigrbl-identity-contracts`
+  - `tigrbl-identity-principals`
+  - `tigrbl-identity-credentials`
+  - `tigrbl-identity-jose`
+  - `tigrbl-identity-policy`
+  - `tigrbl-identity-oauth`
+  - `tigrbl-identity-oidc`
+  - `tigrbl-identity-admin`
+  - `tigrbl-identity-storage-sqlalchemy`
+  - `tigrbl-identity-server`
+  - `tigrbl-identity-runtime`
+  - `tigrbl-identity-operator`
+  - `tigrbl-identity-testkit`
+  - `tigrbl-auth`
+  
+  Distribution names MUST use hyphens. Import names MUST use the
+  `tigrbl_identity.*` namespace.
+  
+  ## Import DAG
+  
+  `core` MUST NOT import any other identity package.
+  
+  `contracts` MAY import `core`.
+  
+  `principals` MAY import `core`.
+  
+  `credentials` MAY import `core`, and MAY depend on principal references.
+  It SHOULD NOT require concrete principal implementations unless needed for
+  lifecycle validation.
+  
+  `jose` MAY import `core` and `contracts`.
+  
+  `policy` MAY import `core`, `contracts`, `principals`, and credential fact
+  contracts. It MUST NOT perform credential verification.
+  
+  `oauth` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
+  and `policy`.
+  
+  `oidc` MAY import `core`, `contracts`, `principals`, `jose`, `oauth`, and
+  `policy`.
+  
+  `admin` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
+  `oauth`, `oidc`, and `policy`.
+  
+  `storage-sqlalchemy` MAY import semantic and protocol packages for mapping
+  purposes. Protocol packages MUST NOT import storage.
+  
+  `server` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
+  `oauth`, `oidc`, `admin`, `policy`, and `storage-sqlalchemy`.
+  
+  `runtime` MAY import `server` and runtime-safe contracts.
+  
+  `operator` MAY import `runtime`, `server`, and storage/admin/operator support
+  APIs. It MUST NOT be required by request-path runtime code.
+  
+  `testkit` MAY import production packages for testing. Production packages MUST
+  NOT import `testkit`.
+  
+  `tigrbl-auth` MAY import selected public entrypoints from `server`, `runtime`,
+  and `contracts`.
+  
+  ## Forbidden Edges
+  
+  - `core` MUST NOT import anything above it.
+  - `contracts` MUST NOT import server, runtime, storage, operator, or testkit.
+  - `jose` MUST NOT import oauth, oidc, admin, server, runtime, or storage.
+  - `oauth` MUST NOT import oidc, admin, server, runtime, operator, or testkit.
+  - `oidc` MUST NOT import admin, server, runtime, operator, or testkit.
+  - `storage` MUST NOT import server, runtime, operator, or testkit.
+  - `server` MUST NOT import operator or testkit.
+  - `runtime` MUST NOT import operator or testkit.
+  - Production code MUST NOT import testkit.
+  
+  ## Verification
+  
+  Verification MUST include static import checks, package metadata checks, and
+  at least one packaging smoke test for the facade and server profiles.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1095"
+  - "adr:1096"
