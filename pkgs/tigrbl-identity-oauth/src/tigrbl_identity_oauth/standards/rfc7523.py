@@ -1,0 +1,43 @@
+"""Compatibility facade for canonical RFC 7523 JWT client-auth helpers."""
+
+from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+    CLIENT_SECRET_JWT_AUTH_METHOD,
+    JWT_BEARER_ASSERTION_TYPE,
+    OWNER,
+    PRIVATE_KEY_JWT_AUTH_METHOD,
+    RFC7523_SPEC_URL,
+    REQUIRED_CLAIMS,
+    STATUS,
+    STRICT_CLIENT_ASSERTION_CLAIMS,
+    SUPPORTED_CLIENT_ASSERTION_AUTH_METHODS,
+    SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,
+    StandardOwner,
+    authenticate_client_assertion,
+    build_client_assertion_contract_examples,
+    describe,
+    make_client_assertion_jwt,
+    token_endpoint_auth_methods_supported,
+    token_endpoint_auth_signing_alg_values_supported,
+    validate_client_jwt_bearer,
+)
+
+__all__ = [
+    "STATUS",
+    "RFC7523_SPEC_URL",
+    "REQUIRED_CLAIMS",
+    "STRICT_CLIENT_ASSERTION_CLAIMS",
+    "PRIVATE_KEY_JWT_AUTH_METHOD",
+    "CLIENT_SECRET_JWT_AUTH_METHOD",
+    "SUPPORTED_CLIENT_ASSERTION_AUTH_METHODS",
+    "SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS",
+    "JWT_BEARER_ASSERTION_TYPE",
+    "StandardOwner",
+    "OWNER",
+    "authenticate_client_assertion",
+    "build_client_assertion_contract_examples",
+    "validate_client_jwt_bearer",
+    "make_client_assertion_jwt",
+    "token_endpoint_auth_methods_supported",
+    "token_endpoint_auth_signing_alg_values_supported",
+    "describe",
+]

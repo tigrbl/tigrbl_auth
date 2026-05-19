@@ -1,0 +1,56 @@
+"""Legacy import facade for canonical persistence models.
+
+The authoritative implementations live in ``tigrbl_auth.tables``.
+"""
+
+from tigrbl_auth.tables import (
+    ENGINE,
+    Base,
+    ApiKey,
+    AuditEvent,
+    AuthCode,
+    AuthSession,
+    Client,
+    ClientRegistration,
+    Consent,
+    DeviceCode,
+    KeyRotationEvent,
+    LogoutState,
+    PushedAuthorizationRequest,
+    RevokedToken,
+    Service,
+    ServiceKey,
+    Tenant,
+    TokenRecord,
+    User,
+    _CLIENT_ID_RE,
+    dsn,
+    get_db,
+    settings,
+)
+
+__all__ = [
+    "ENGINE",
+    "Base",
+    "ApiKey",
+    "AuditEvent",
+    "AuthCode",
+    "AuthSession",
+    "Client",
+    "ClientRegistration",
+    "Consent",
+    "DeviceCode",
+    "KeyRotationEvent",
+    "LogoutState",
+    "PushedAuthorizationRequest",
+    "RevokedToken",
+    "Service",
+    "ServiceKey",
+    "Tenant",
+    "TokenRecord",
+    "User",
+    "_CLIENT_ID_RE",
+    "dsn",
+    "get_db",
+    "settings",
+]

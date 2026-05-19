@@ -31,14 +31,15 @@ body: |-
   - `tigrbl-identity-oauth`
   - `tigrbl-identity-oidc`
   - `tigrbl-identity-admin`
-  - `tigrbl-identity-storage-sqlalchemy`
+  - `tigrbl-identity-storage`
   - `tigrbl-identity-server`
   - `tigrbl-identity-runtime`
   - `tigrbl-identity-operator`
   - `tigrbl-identity-testkit`
   - `tigrbl-auth`
   
-  Distribution names use hyphens. Import names use `tigrbl_identity.*`.
+  Distribution names use hyphens. Import names use independent top-level
+  packages with underscores, such as `tigrbl_identity_oauth`.
   `tigrbl-auth` remains the facade and compatibility package.
   
   ## Context

@@ -37,7 +37,7 @@ roles but require more work.
 | `tigrbl-identity-oauth` | OAuth protocol semantics: authorization, token, revocation, introspection, client registration, device authorization, token exchange, PAR, JAR, RAR, DPoP, mTLS, resource indicators. |
 | `tigrbl-identity-oidc` | OIDC provider semantics: discovery, ID token, UserInfo, sessions, logout, `acr`/`amr` claim emission. |
 | `tigrbl-identity-admin` | Control-plane APIs for tenants, users, apps, clients, services, credentials, policies, key rotation, and governed mutations. |
-| `tigrbl-identity-storage-sqlalchemy` | SQLAlchemy/Tigrbl table mappings, migrations, repositories, SQLite/Postgres support, database bootstrap, migration portability. |
+| `tigrbl-identity-storage` | Tigrbl/SQLAlchemy table mappings, migrations, repositories, SQLite/Postgres support, database bootstrap, migration portability. SQLAlchemy is the default implementation substrate, not part of the package boundary name. |
 | `tigrbl-identity-server` | Default runnable Authorization Server / OIDC Provider / IdP distribution. |
 | `tigrbl-identity-runtime` | Process/runtime layer: runner profiles, ASGI runtime adapters, lifecycle hooks, runtime manifests, health and diagnostics wiring. |
 | `tigrbl-identity-operator` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
@@ -63,7 +63,7 @@ on day one.
 | `tigrbl-identity-oauth` | `AuthorizationGrant`, `AuthorizationCode`, `AccessToken`, `RefreshToken`, `ClientRegistration`, `ClientAuthentication`, `TokenExchange`, `DeviceAuthorization`, `DeviceCode`, `UserCode`, `PushedAuthorizationRequest`, `JwtSecuredAuthorizationRequest`, `RichAuthorizationRequest`, `ResourceIndicator`, `DpopProof`, `MtlsClientBinding`, `TokenRevocation`, `TokenIntrospection`, `OAuthError`. |
 | `tigrbl-identity-oidc` | `IdToken`, `UserInfo`, `OidcClaims`, `Acr`, `Amr`, `AuthenticationContext`, `OidcProviderMetadata`, `OidcSession`, `SessionState`, `LogoutRequest`, `RpInitiatedLogout`, `FrontChannelLogout`, `BackChannelLogout`, `FederatedLoginResult`. |
 | `tigrbl-identity-admin` | `AdminOperation`, `TenantAdminService`, `UserAdminService`, `ClientAdminService`, `AppAdminService`, `ServiceAdminService`, `CredentialAdminService`, `KeyAdminService`, `SessionAdminService`, `TokenAdminService`, `PolicyAdminService`, `DelegatedAdminService`, `SafeMutation`, `AdminAuditEvent`. |
-| `tigrbl-identity-storage-sqlalchemy` | `UserTable`, `ClientTable`, `AppTable`, `ServiceTable`, `DeviceTable`, `MachineTable`, `WorkloadTable`, `CredentialTable`, `ApiKeyTable`, `ServiceKeyTable`, `SessionTable`, `TenantTable`, `AuthorizationCodeTable`, `DeviceCodeTable`, `ConsentTable`, `AuditEventTable`, `Repository`, `UnitOfWork`, `Migration`, `DatabaseBootstrap`, `SqliteProfile`, `PostgresProfile`. |
+| `tigrbl-identity-storage` | `UserTable`, `ClientTable`, `AppTable`, `ServiceTable`, `DeviceTable`, `MachineTable`, `WorkloadTable`, `CredentialTable`, `ApiKeyTable`, `ServiceKeyTable`, `SessionTable`, `TenantTable`, `AuthorizationCodeTable`, `DeviceCodeTable`, `ConsentTable`, `AuditEventTable`, `Repository`, `UnitOfWork`, `Migration`, `DatabaseBootstrap`, `SqliteProfile`, `PostgresProfile`. |
 | `tigrbl-identity-server` | `IdentityApp`, `AppFactory`, `GatewayFactory`, `PluginInstaller`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, `ServerSettings`. |
 | `tigrbl-identity-runtime` | `RuntimeProfile`, `RuntimeConfig`, `RuntimeManifest`, `RunnerProfile`, `UvicornRuntime`, `HypercornRuntime`, `TigrcornRuntime`, `LifecycleHook`, `HealthCheck`, `DiagnosticsEndpoint`, `RuntimeAdapter`, `ServeCommandPlan`, `RuntimeState`. |
 | `tigrbl-identity-operator` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
@@ -88,16 +88,19 @@ operator = CLI/evidence/control workflows
 
 ## Proposed Dependency DAG
 
-Distribution names use hyphens. Import names should use a namespace layout:
+Distribution names use hyphens. Import names should use independent top-level
+packages with underscores:
 
 ```text
 dist:   tigrbl-identity-oauth
-import: tigrbl_identity.oauth
+import: tigrbl_identity_oauth
 ```
 
-Avoid `tigrbl.identity.*` unless the existing `tigrbl` package is deliberately
-converted into a namespace package. The current package depends on `tigrbl`, so
-claiming the `tigrbl` import namespace would create unnecessary collision risk.
+Do not use a shared `tigrbl_identity.*` namespace package. Each distribution
+owns its own import root, such as `tigrbl_identity_core`,
+`tigrbl_identity_oauth`, and `tigrbl_identity_storage`. Also avoid
+`tigrbl.identity.*` unless the existing `tigrbl` package is deliberately
+converted into a namespace package.
 
 `A -> B` means package `A` may import package `B`.
 
@@ -150,7 +153,7 @@ tigrbl-identity-admin
   -> tigrbl-identity-oauth
   -> tigrbl-identity-oidc
 
-tigrbl-identity-storage-sqlalchemy
+tigrbl-identity-storage
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
@@ -169,7 +172,7 @@ tigrbl-identity-server
   -> tigrbl-identity-oauth
   -> tigrbl-identity-oidc
   -> tigrbl-identity-admin
-  -> tigrbl-identity-storage-sqlalchemy
+  -> tigrbl-identity-storage
 
 tigrbl-identity-runtime
   -> tigrbl-identity-core
@@ -180,7 +183,7 @@ tigrbl-identity-operator
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-admin
-  -> tigrbl-identity-storage-sqlalchemy
+  -> tigrbl-identity-storage
   -> tigrbl-identity-server
   -> tigrbl-identity-runtime
 
@@ -212,7 +215,7 @@ tigrbl-identity-testkit
   -> tigrbl-identity-oauth
   -> tigrbl-identity-oidc
   -> tigrbl-identity-admin
-  -> tigrbl-identity-storage-sqlalchemy
+  -> tigrbl-identity-storage
   -> tigrbl-identity-server
   -> tigrbl-identity-resource-server
   -> tigrbl-identity-rp
@@ -237,10 +240,10 @@ policy -> principals/credentials/contracts/core
 oauth -> jose/policy/credentials/principals/contracts/core
 oidc -> oauth/jose/policy/credentials/principals/contracts/core
 admin -> oauth/oidc/jose/policy/credentials/principals/contracts/core
-storage-sqlalchemy -> oauth/oidc/policy/credentials/principals/contracts/core
-server -> admin/storage-sqlalchemy/oauth/oidc/jose/policy/credentials/principals/contracts/core
+storage -> oauth/oidc/policy/credentials/principals/contracts/core
+server -> admin/storage/oauth/oidc/jose/policy/credentials/principals/contracts/core
 runtime -> server/contracts/core
-operator -> runtime/server/storage-sqlalchemy/admin/contracts/core
+operator -> runtime/server/storage/admin/contracts/core
 facade -> server/runtime/contracts/core
 ```
 
@@ -278,7 +281,7 @@ own credential verification implementations.
 OAuth protocol state machines. `oidc` consumes OAuth and JOSE to add OIDC
 identity, discovery, userinfo, session, and logout behavior.
 
-`storage-sqlalchemy` is the default persistence adapter. It may map protocol
+`storage` is the default persistence adapter. It may map protocol
 and identity objects into tables and repositories, but protocol packages must
 not import storage. That keeps OAuth/OIDC portable across SQLite, Postgres,
 test fakes, and future storage adapters.

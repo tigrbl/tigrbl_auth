@@ -23,9 +23,9 @@ body: |-
   Use `identity` as the vertical name for the split package suite.
   
   Distribution packages MUST use `tigrbl-identity-*` names. Import packages MUST
-  use the `tigrbl_identity.*` namespace unless a later ADR explicitly chooses a
-  different namespace strategy. The existing `tigrbl-auth` distribution remains
-  the product and compatibility facade.
+  use independent top-level `tigrbl_identity_*` package names, not a shared
+  namespace package. The existing `tigrbl-auth` distribution remains the product
+  and compatibility facade.
   
   ## Context
   

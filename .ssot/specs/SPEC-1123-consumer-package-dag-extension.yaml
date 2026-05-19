@@ -53,7 +53,7 @@ body: |-
   
   `oauth`, `oidc`, and `jose` MUST NOT import RP or resource-server.
   
-  `admin` and `storage-sqlalchemy` MUST NOT require RP or resource-server for
+  `admin` and `storage` MUST NOT require RP or resource-server for
   provider-side operation.
   
   Production request-path provider code MUST NOT import RP or resource-server.

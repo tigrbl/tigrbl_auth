@@ -60,7 +60,7 @@ body: |-
   
   `policy` owns app-scoped authority, consent, and authorization rules.
   
-  `storage-sqlalchemy` owns persisted app mappings.
+  `storage` owns persisted app mappings.
   
   Compatibility MAY allow clients to belong directly to a tenant until the app
   model is fully migrated.

@@ -1,0 +1,113 @@
+"""Certified-core auth dependency helpers."""
+
+from __future__ import annotations
+
+from tigrbl_auth.framework import AsyncSession, Depends, Header, HTTPException, Request, select, status
+from tigrbl_auth.config.deployment import deployment_from_request
+from tigrbl_auth.config.settings import settings
+from tigrbl_auth.security.context import principal_var
+from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
+from tigrbl_auth.services.auth_backends import ApiKeyBackend, AuthError, PasswordBackend
+from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError
+from tigrbl_auth.standards.oauth2.mtls import presented_certificate_thumbprint
+from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
+from tigrbl_auth.standards.oauth2.rfc9700 import verify_access_token_sender_constraint
+from tigrbl_auth.tables import User
+from tigrbl_auth.tables.engine import get_db
+from tigrbl_auth.typing import Principal
+
+_api_key_backend = ApiKeyBackend()
+_jwt_coder = JWTCoder.default()
+
+
+async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str | None = None) -> User | None:
+    try:
+        payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
+    except InvalidTokenError:
+        return None
+    return await db.scalar(select(User).where(User.id == payload["sub"], User.is_active.is_(True)))
+
+
+async def _user_from_api_key(raw_key: str, db: AsyncSession) -> Principal | None:
+    try:
+        principal, _ = await _api_key_backend.authenticate(db, raw_key)
+        return principal
+    except AuthError:
+        return None
+
+
+async def _user_from_browser_session(request: Request, db: AsyncSession) -> User | None:
+    session = await resolve_browser_session(request)
+    if session is None:
+        return None
+    return await db.scalar(select(User).where(User.id == session.user_id, User.is_active.is_(True)))
+
+
+async def get_principal(
+    request: Request,
+    authorization: str = Header("", alias="Authorization"),
+    api_key: str | None = Header(None, alias="x-api-key"),
+    dpop: str | None = Header(None, alias="DPoP"),
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    user = await get_current_principal(
+        request,
+        authorization=authorization,
+        api_key=api_key,
+        dpop=dpop,
+        db=db,
+    )
+    principal = {"sub": str(user.id), "tid": str(user.tenant_id)}
+    request.state.principal = principal
+    principal_var.set(principal)
+    return principal
+
+
+async def get_current_principal(
+    request: Request,
+    authorization: str = Header("", alias="Authorization"),
+    api_key: str | None = Header(None, alias="x-api-key"),
+    dpop: str | None = Header(None, alias="DPoP"),
+    db: AsyncSession = Depends(get_db),
+) -> Principal:
+    if api_key:
+        if user := await _user_from_api_key(api_key, db):
+            return user
+    if user := await _user_from_browser_session(request, db):
+        return user
+    token = await extract_bearer_token(request, authorization)
+    if token:
+        cert_thumbprint = presented_certificate_thumbprint(request)
+        try:
+            payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
+        except InvalidTokenError as exc:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid token") from exc
+
+        try:
+            verify_access_token_sender_constraint(
+                request,
+                payload,
+                deployment_from_request(request, settings),
+                access_token=token,
+                dpop_proof=dpop,
+            )
+        except Exception as exc:
+            detail = getattr(exc, 'description', 'invalid token')
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail) from exc
+
+        if user := await _user_from_jwt(token, db, cert_thumbprint=cert_thumbprint):
+            return user
+    raise HTTPException(
+        status.HTTP_401_UNAUTHORIZED,
+        "invalid or missing credentials",
+        headers={"WWW-Authenticate": 'Bearer realm="authn"'},
+    )
+
+
+__all__ = [
+    "get_current_principal",
+    "get_principal",
+    "principal_var",
+    "PasswordBackend",
+    "ApiKeyBackend",
+]

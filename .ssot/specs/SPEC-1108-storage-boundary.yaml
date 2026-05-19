@@ -1,0 +1,70 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1108"
+number: 1108
+slug: "storage-boundary"
+title: "Storage boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs `tigrbl-identity-storage`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define SQLAlchemy/Tigrbl storage adapter ownership."
+    at: "2026-05-18T08:20:35Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs `tigrbl-identity-storage`.
+  
+  ## First-Class Objects
+  
+  The package MUST define or own storage mappings for:
+  
+  - `UserTable`
+  - `ClientTable`
+  - `AppTable`
+  - `ServiceTable`
+  - `DeviceTable`
+  - `MachineTable`
+  - `WorkloadTable`
+  - `CredentialTable`
+  - `ApiKeyTable`
+  - `ServiceKeyTable`
+  - `SessionTable`
+  - `TenantTable`
+  - `AuthorizationCodeTable`
+  - `DeviceCodeTable`
+  - `ConsentTable`
+  - `AuditEventTable`
+  - `Repository`
+  - `UnitOfWork`
+  - `Migration`
+  - `DatabaseBootstrap`
+  - `SqliteProfile`
+  - `PostgresProfile`
+  
+  ## Requirements
+  
+  Storage owns Tigrbl/SQLAlchemy table mappings, migrations, repository
+  implementations, unit-of-work implementations, database bootstrap, SQLite and
+  Postgres support, and migration evidence hooks. SQLAlchemy is the default
+  implementation substrate, but the package boundary is storage.
+  
+  Protocol packages MUST NOT import storage.
+  
+  Server may use storage as the default adapter. Alternate storage adapters MUST
+  remain possible.
+  
+  ## Verification
+  
+  Verification MUST prove storage imports do not require server/runtime/operator,
+  and protocol packages do not import storage.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1101"

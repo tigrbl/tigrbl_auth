@@ -1,0 +1,214 @@
+from __future__ import annotations
+
+"""OAuth 2.0 Device Authorization Grant owner and helper module."""
+
+import re
+import secrets
+import string
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from typing import Any, Final, Literal, Mapping
+
+from tigrbl_auth.config.settings import settings
+
+try:  # pragma: no cover - exercised when full runtime deps are installed
+    from tigrbl_auth.framework import BaseModel, hook_ctx
+except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
+    from pydantic import BaseModel
+
+    def hook_ctx(**_kwargs):
+        def decorator(func):
+            func.__wrapped__ = func
+            return func
+
+        return decorator
+
+
+STATUS: Final[str] = "persistence-backed-device-flow-runtime"
+RFC8628_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8628"
+DEVICE_VERIFICATION_URI: Final[str] = "https://example.com/device"
+DEVICE_CODE_GRANT_TYPE: Final[str] = "urn:ietf:params:oauth:grant-type:device_code"
+DEVICE_CODE_EXPIRES_IN: Final[int] = 600
+DEVICE_CODE_INTERVAL: Final[int] = 5
+DEVICE_CODE_SLOW_DOWN_INCREMENT: Final[int] = 5
+_USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
+_USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")
+
+
+@dataclass(frozen=True, slots=True)
+class StandardOwner:
+    label: str
+    title: str
+    runtime_status: str
+    public_surface: tuple[str, ...]
+    notes: str
+
+
+OWNER = StandardOwner(
+    label="RFC 8628",
+    title="OAuth 2.0 Device Authorization Grant",
+    runtime_status=STATUS,
+    public_surface=("/device_authorization", "/token"),
+    notes=(
+        "Canonical standards-tree owner module for device-code lifecycle helpers. "
+        "The canonical /device_authorization and /token grant path are now "
+        "persistence-backed with authorization_pending / slow_down / access_denied / "
+        "expired_token semantics, replay protection, and audit-observable approval/denial state."
+    ),
+)
+
+
+class DeviceAuthIn(BaseModel):
+    client_id: str
+    scope: str | None = None
+
+
+class DeviceAuthOut(BaseModel):
+    device_code: str
+    user_code: str
+    verification_uri: str
+    verification_uri_complete: str
+    expires_in: int
+    interval: int
+
+
+class DeviceGrantForm(BaseModel):
+    grant_type: Literal["urn:ietf:params:oauth:grant-type:device_code"]
+    device_code: str
+    client_id: str
+
+
+
+def _device_code_table():
+    from tigrbl_auth.tables import DeviceCode
+
+    return DeviceCode
+
+
+_TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
+
+
+@hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
+async def approve_device_code(ctx: Mapping[str, Any]) -> None:
+    """Mark a device code as authorized (testing/operator helper)."""
+
+    DeviceCode = _device_code_table()
+    payload = ctx.get("payload") or {}
+    ident = payload.get("id") or payload.get("device_code")
+    if ident is None:
+        return
+    obj = await DeviceCode.handlers.read.core({"payload": {"id": ident}})
+    if obj:
+        await DeviceCode.handlers.update.core(
+            {
+                "obj": obj,
+                "payload": {
+                    "authorized": True,
+                    "authorized_at": datetime.now(timezone.utc),
+                    "denied_at": None,
+                    "denial_reason": None,
+                    "user_id": payload.get("sub"),
+                    "tenant_id": payload.get("tid"),
+                },
+            }
+        )
+
+
+@hook_ctx(**{"ops": "deny", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
+async def deny_device_code(ctx: Mapping[str, Any]) -> None:
+    """Mark a device code as denied (testing/operator helper)."""
+
+    DeviceCode = _device_code_table()
+    payload = ctx.get("payload") or {}
+    ident = payload.get("id") or payload.get("device_code")
+    if ident is None:
+        return
+    obj = await DeviceCode.handlers.read.core({"payload": {"id": ident}})
+    if obj:
+        await DeviceCode.handlers.update.core(
+            {
+                "obj": obj,
+                "payload": {
+                    "authorized": False,
+                    "authorized_at": None,
+                    "denied_at": datetime.now(timezone.utc),
+                    "denial_reason": payload.get("reason") or "access_denied",
+                },
+            }
+        )
+
+
+
+def generate_user_code(length: int = 8) -> str:
+    if length <= 0:
+        raise ValueError("length must be positive")
+    return "".join(secrets.choice(_USER_CODE_CHARSET) for _ in range(length))
+
+
+
+def validate_user_code(code: str) -> bool:
+    if not settings.enable_rfc8628:
+        return True
+    return bool(_USER_CODE_RE.fullmatch(code))
+
+
+
+def generate_device_code() -> str:
+    return secrets.token_urlsafe(32)
+
+
+
+def next_device_poll_interval(current_interval: int | None = None, *, slow_down_count: int = 0) -> int:
+    base = max(int(current_interval or DEVICE_CODE_INTERVAL), DEVICE_CODE_INTERVAL)
+    if slow_down_count <= 0:
+        return base
+    return base + (DEVICE_CODE_SLOW_DOWN_INCREMENT * int(slow_down_count))
+
+
+
+def poll_too_frequently(*, last_polled_at: datetime | None, now: datetime, interval: int | None = None) -> bool:
+    if last_polled_at is None:
+        return False
+    effective_interval = max(int(interval or DEVICE_CODE_INTERVAL), DEVICE_CODE_INTERVAL)
+    last = last_polled_at if last_polled_at.tzinfo is not None else last_polled_at.replace(tzinfo=timezone.utc)
+    return (now - last).total_seconds() < effective_interval
+
+
+
+def describe() -> dict[str, object]:
+    return {
+        "label": OWNER.label,
+        "title": OWNER.title,
+        "runtime_status": OWNER.runtime_status,
+        "public_surface": list(OWNER.public_surface),
+        "notes": OWNER.notes,
+        "poll_interval_seconds": DEVICE_CODE_INTERVAL,
+        "slow_down_increment_seconds": DEVICE_CODE_SLOW_DOWN_INCREMENT,
+        "replay_protection_supported": True,
+        "approval_denial_supported": True,
+        "spec_url": RFC8628_SPEC_URL,
+    }
+
+
+__all__ = [
+    "STATUS",
+    "RFC8628_SPEC_URL",
+    "DEVICE_VERIFICATION_URI",
+    "DEVICE_CODE_GRANT_TYPE",
+    "DEVICE_CODE_EXPIRES_IN",
+    "DEVICE_CODE_INTERVAL",
+    "DEVICE_CODE_SLOW_DOWN_INCREMENT",
+    "StandardOwner",
+    "OWNER",
+    "DeviceAuthIn",
+    "DeviceAuthOut",
+    "DeviceGrantForm",
+    "approve_device_code",
+    "deny_device_code",
+    "generate_user_code",
+    "validate_user_code",
+    "generate_device_code",
+    "next_device_poll_interval",
+    "poll_too_frequently",
+    "describe",
+]

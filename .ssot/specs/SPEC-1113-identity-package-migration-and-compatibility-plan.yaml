@@ -21,17 +21,18 @@ body: |-
   ## Scope
   
   This specification governs migration from the current `tigrbl_auth` package to
-  the split `tigrbl_identity.*` package suite.
+  the split `tigrbl_identity_*` package suite.
   
   ## Requirements
   
   The migration MUST proceed in stages:
   
   1. Create package boundaries and import guards.
-  2. Introduce `tigrbl_identity.*` packages with compatibility re-exports.
+  2. Introduce independent `tigrbl_identity_*` packages with compatibility
+     re-exports.
   3. Move pure core/contracts/principals/credentials/policy objects first.
   4. Move JOSE, OAuth, and OIDC protocol packages.
-  5. Move storage mappings into `storage-sqlalchemy`.
+  5. Move storage mappings into `storage`.
   6. Move server composition and runtime execution.
   7. Move operator workflows.
   8. Keep `tigrbl-auth` as the facade and compatibility distribution.

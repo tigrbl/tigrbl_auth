@@ -8,20 +8,21 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Create `tigrbl-identity-storage-sqlalchemy` as the SQLAlchemy/Tigrbl"
+summary: "Create `tigrbl-identity-storage` as the storage adapter package."
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Add storage-sqlalchemy as the SQLAlchemy/Tigrbl persistence boundary."
+    note: "Add storage as the persistence boundary; SQLAlchemy/Tigrbl is the default implementation substrate."
     at: "2026-05-18T08:13:05Z"
 references: []
 body: |-
   ## Decision
   
-  Create `tigrbl-identity-storage-sqlalchemy` as the SQLAlchemy/Tigrbl
-  persistence adapter package.
+  Create `tigrbl-identity-storage` as the persistence adapter package.
+  SQLAlchemy/Tigrbl tables are the default implementation substrate, but the
+  tracked package boundary is storage.
   
   It owns:
   

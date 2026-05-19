@@ -36,15 +36,16 @@ body: |-
   - `tigrbl-identity-oauth`
   - `tigrbl-identity-oidc`
   - `tigrbl-identity-admin`
-  - `tigrbl-identity-storage-sqlalchemy`
+  - `tigrbl-identity-storage`
   - `tigrbl-identity-server`
   - `tigrbl-identity-runtime`
   - `tigrbl-identity-operator`
   - `tigrbl-identity-testkit`
   - `tigrbl-auth`
   
-  Distribution names MUST use hyphens. Import names MUST use the
-  `tigrbl_identity.*` namespace.
+  Distribution names MUST use hyphens. Import names MUST use independent
+  top-level packages with underscores, not a shared namespace package. For
+  example, `tigrbl-identity-oauth` imports as `tigrbl_identity_oauth`.
   
   ## Import DAG
   
@@ -72,11 +73,11 @@ body: |-
   `admin` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
   `oauth`, `oidc`, and `policy`.
   
-  `storage-sqlalchemy` MAY import semantic and protocol packages for mapping
+  `storage` MAY import semantic and protocol packages for mapping
   purposes. Protocol packages MUST NOT import storage.
   
   `server` MAY import `core`, `contracts`, `principals`, `credentials`, `jose`,
-  `oauth`, `oidc`, `admin`, `policy`, and `storage-sqlalchemy`.
+  `oauth`, `oidc`, `admin`, `policy`, and `storage`.
   
   `runtime` MAY import `server` and runtime-safe contracts.
   
