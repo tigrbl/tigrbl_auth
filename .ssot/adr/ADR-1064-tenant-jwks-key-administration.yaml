@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1064"
+number: 1064
+slug: "tenant-jwks-key-administration"
+title: "Tenant JWKS keys are administered through tenant-scoped control-plane mutations"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Tenant JWKS keys are first-class tenant-scoped key records administered through the authenticated control plane. Runtime public discovery remains read-only, while admin RPC methods own seed, create, update, delete, and list mutation flows. Rationale: tenant JWKS publication cannot be operable if keys can only be observed after out-of-band operator state writes. The same durable operator-state service must back CLI/operator workflows, admin RPC, UIX actions, and public JWKS projection so publication parity is testable. Consequences: key mutations must preserve tenant isolation, never expose private key material, use safe public JWK fields only, and refresh the UI from the public tenant JWKS route after mutation."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Adopt tenant-scoped JWKS seed and CRUD control-plane behavior for current admin UIX and runtime support."
+    at: "2026-05-19T06:37:05Z"
+references: []
+body: |-
+  Decision: Tenant JWKS keys are first-class tenant-scoped key records administered through the authenticated control plane. Runtime public discovery remains read-only, while admin RPC methods own seed, create, update, delete, and list mutation flows. Rationale: tenant JWKS publication cannot be operable if keys can only be observed after out-of-band operator state writes. The same durable operator-state service must back CLI/operator workflows, admin RPC, UIX actions, and public JWKS projection so publication parity is testable. Consequences: key mutations must preserve tenant isolation, never expose private key material, use safe public JWK fields only, and refresh the UI from the public tenant JWKS route after mutation.

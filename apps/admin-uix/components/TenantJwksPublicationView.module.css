@@ -86,6 +86,77 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.actionBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.keyForm {
+  align-items: end;
+  background: #ffffff;
+  border: 1px solid #1a1a1a;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 14px;
+}
+
+.keyForm input,
+.keyForm select {
+  background: #ffffff;
+  border: 1px solid #1a1a1a;
+  color: #1a1a1a;
+  font: inherit;
+  margin-top: 6px;
+  min-height: 36px;
+  padding: 8px;
+  width: 100%;
+}
+
+.checkLabel {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.checkLabel input {
+  min-height: auto;
+  width: auto;
+}
+
+.button,
+.smallButton {
+  background: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  min-height: 36px;
+  padding: 8px 12px;
+  text-transform: uppercase;
+}
+
+.button:disabled,
+.smallButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rowActions {
+  display: flex;
+  gap: 8px;
+}
+
+.smallButton {
+  background: #ffffff;
+  color: #1a1a1a;
+  min-height: 30px;
+  padding: 5px 8px;
+}
+
 .countCell {
   background: #ebebe5;
   border: 1px solid #1a1a1a;

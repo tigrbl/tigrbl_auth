@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { backendService, normalizeTenantJwksPublication } from './backendService';
+import { gateway_rpc } from './jsonRpcService';
 
 describe('backendService tenant admin surface', () => {
   beforeEach(() => {
@@ -11,6 +12,7 @@ describe('backendService tenant admin surface', () => {
   it('lists tenants from the session-backed admin tenant route', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
+      headers: new Headers({ 'content-type': 'application/json' }),
       json: async () => ([
         {
           id: 'tenant-1',
@@ -41,6 +43,7 @@ describe('backendService tenant admin surface', () => {
   it('creates a tenant through the session-backed admin tenant route', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
+      headers: new Headers({ 'content-type': 'application/json' }),
       json: async () => ({
         id: 'tenant-2',
         name: 'Tenant Two',
@@ -70,6 +73,38 @@ describe('backendService tenant admin surface', () => {
       email: 'tenant-two@example.test',
     }));
     expect(tenant.email).toBe('tenant-two@example.test');
+  });
+
+  it('calls tenant JWKS key mutation methods with tenant scope', async () => {
+    vi.spyOn(gateway_rpc, 'hasMethod').mockResolvedValue(true);
+    const callMock = vi.spyOn(gateway_rpc, 'call').mockResolvedValue({ result: { status: 'ok' } } as any);
+    const tenant = { id: 'tenant-a-id', name: 'Tenant A', slug: 'tenant-a' };
+
+    await backendService.seedTenantJwksKey(tenant);
+    await backendService.createTenantJwksKey(tenant, { kid: 'kid-a', status: 'active', x: 'pub-a' });
+    await backendService.updateTenantJwksKey(tenant, { kid: 'kid-a', status: 'retired', publish: false });
+    await backendService.deleteTenantJwksKey(tenant, 'kid-a');
+
+    expect(callMock).toHaveBeenNthCalledWith(1, 'tenant.keys.seed', { tenant: 'tenant-a', tenant_id: 'tenant-a-id' });
+    expect(callMock).toHaveBeenNthCalledWith(2, 'tenant.keys.create', expect.objectContaining({ tenant: 'tenant-a', kid: 'kid-a', x: 'pub-a' }));
+    expect(callMock).toHaveBeenNthCalledWith(3, 'tenant.keys.update', expect.objectContaining({ tenant: 'tenant-a', kid: 'kid-a', status: 'retired', publish: false }));
+    expect(callMock).toHaveBeenNthCalledWith(4, 'tenant.keys.delete', { tenant: 'tenant-a', tenant_id: 'tenant-a-id', kid: 'kid-a' });
+  });
+
+  it('rejects HTML fallback responses for tenant JWKS discovery', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      headers: new Headers({ 'content-type': 'text/html' }),
+      text: async () => '<!doctype html><html><body>Admin UIX</body></html>',
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(backendService.getTenantJwksPublication({
+      id: 'tenant-a-id',
+      name: 'Tenant A',
+      slug: 'tenant-a',
+    })).rejects.toThrow('Expected JSON response from /tenants/tenant-a/.well-known/openid-configuration');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
   it('normalizes tenant JWKS publication without leaking cross-tenant inventory', () => {

@@ -7,7 +7,7 @@ import logging
 import os
 import secrets
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Awaitable, Callable, Iterable
 
 from tigrbl.security import APIKey, HTTPBearer, Security
 
@@ -59,6 +59,43 @@ def _json_response(status: int, payload: dict[str, Any]) -> tuple[int, list[tupl
     if status == 401:
         headers.append((b"www-authenticate", b"Bearer"))
     return status, headers, body
+
+
+async def _read_http_body(receive: Callable[[], Awaitable[dict[str, Any]]]) -> bytes:
+    chunks: list[bytes] = []
+    while True:
+        message = await receive()
+        if message.get("type") != "http.request":
+            continue
+        chunks.append(message.get("body", b""))
+        if not message.get("more_body", False):
+            break
+    return b"".join(chunks)
+
+
+def _replay_http_body(body: bytes) -> Callable[[], Awaitable[dict[str, Any]]]:
+    sent = False
+
+    async def receive() -> dict[str, Any]:
+        nonlocal sent
+        if sent:
+            return {"type": "http.request", "body": b"", "more_body": False}
+        sent = True
+        return {"type": "http.request", "body": body, "more_body": False}
+
+    return receive
+
+
+def _jsonrpc_error(
+    request_id: Any,
+    code: int,
+    message: str,
+    data: Any | None = None,
+) -> dict[str, Any]:
+    error: dict[str, Any] = {"code": code, "message": message}
+    if data is not None:
+        error["data"] = data
+    return {"jsonrpc": "2.0", "id": request_id, "error": error}
 
 
 def _headers(scope: dict[str, Any]) -> dict[str, str]:
@@ -164,6 +201,86 @@ class AdminGate:
             return True
         return False
 
+    async def _dispatch_registry_rpc(
+        self,
+        scope: dict[str, Any],
+        receive: Callable[[], Awaitable[dict[str, Any]]],
+        send: Callable[[dict[str, Any]], Awaitable[None]],
+    ) -> bool:
+        if str(scope.get("method", "")).upper() != "POST":
+            return False
+
+        body = await _read_http_body(receive)
+        try:
+            payload = json.loads(body.decode("utf-8") or "null")
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            status, headers, response_body = _json_response(
+                200,
+                _jsonrpc_error(None, -32700, "Parse error"),
+            )
+            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send({"type": "http.response.body", "body": response_body})
+            return True
+
+        from tigrbl_auth.api.rpc import RpcRequestContext, get_rpc_method, invoke_rpc_method_async
+
+        async def handle_one(request: Any) -> dict[str, Any] | None:
+            if not isinstance(request, dict):
+                return _jsonrpc_error(None, -32600, "Invalid Request")
+            request_id = request.get("id")
+            method = request.get("method")
+            if not isinstance(method, str):
+                return _jsonrpc_error(request_id, -32600, "Invalid Request")
+            try:
+                get_rpc_method(method)
+            except KeyError:
+                return None
+            try:
+                context = RpcRequestContext(
+                    repo_root=Path.cwd(),
+                    deployment=self.deployment,
+                    runtime_metadata={"path": str(scope.get("path") or self.rpc_prefix)},
+                )
+                result = await invoke_rpc_method_async(
+                    method,
+                    request.get("params") or {},
+                    context=context,
+                )
+            except Exception as exc:  # pragma: no cover - surfaced through JSON-RPC
+                return _jsonrpc_error(request_id, -32000, str(exc))
+            return {"jsonrpc": "2.0", "id": request_id, "result": result}
+
+        if isinstance(payload, list):
+            responses: list[dict[str, Any]] = []
+            unknown = False
+            for item in payload:
+                response = await handle_one(item)
+                if response is None:
+                    unknown = True
+                    break
+                responses.append(response)
+            if unknown:
+                await self.app(scope, _replay_http_body(body), send)
+                return True
+            status, headers, response_body = _json_response(200, {"responses": responses})
+            response_body = json.dumps(responses, separators=(",", ":")).encode("utf-8")
+            headers = [
+                (b"content-type", b"application/json"),
+                (b"content-length", str(len(response_body)).encode("ascii")),
+            ]
+            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send({"type": "http.response.body", "body": response_body})
+            return True
+
+        response = await handle_one(payload)
+        if response is None:
+            await self.app(scope, _replay_http_body(body), send)
+            return True
+        status, headers, response_body = _json_response(200, response)
+        await send({"type": "http.response.start", "status": status, "headers": headers})
+        await send({"type": "http.response.body", "body": response_body})
+        return True
+
     async def __call__(self, scope: dict[str, Any], receive: Any, send: Any) -> None:
         if scope.get("type") != "http":
             await self.app(scope, receive, send)
@@ -194,6 +311,10 @@ class AdminGate:
                     status, headers, body = _json_response(401, {"error": "missing_admin_api_key"})
                 await send({"type": "http.response.start", "status": status, "headers": headers})
                 await send({"type": "http.response.body", "body": body})
+                return
+
+        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+            if await self._dispatch_registry_rpc(scope, receive, send):
                 return
 
         await self.app(scope, receive, send)

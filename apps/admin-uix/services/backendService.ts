@@ -1,5 +1,5 @@
 import { gateway_rpc } from './jsonRpcService';
-import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, TenantJwksPublicationKey, TenantJwksPublicationView, User } from '../types';
+import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, TenantJwksKeyInput, TenantJwksPublicationKey, TenantJwksPublicationView, User } from '../types';
 import { UserStatus } from '../types';
 
 const toError = (error: unknown): Error => {
@@ -37,7 +37,19 @@ async function restJson<T>(path: string, init?: RequestInit): Promise<T> {
     },
     ...init,
   });
-  const payload = await response.json().catch(() => ({}));
+  const contentType = response.headers.get('content-type') ?? '';
+  const expectsJson = contentType.toLowerCase().includes('application/json');
+  if (!expectsJson) {
+    const preview = await response.text().catch(() => '');
+    const suffix = preview ? ` Body starts with: ${preview.slice(0, 80)}` : '';
+    throw new Error(`Expected JSON response from ${path}, received ${contentType || 'unknown content type'}.${suffix}`);
+  }
+  let payload: any;
+  try {
+    payload = await response.json();
+  } catch (error) {
+    throw new Error(`Expected JSON response from ${path}, but the JSON payload could not be parsed.`);
+  }
   if (!response.ok) {
     throw new Error(String(payload?.detail || payload?.error || `HTTP ${response.status}`));
   }
@@ -284,5 +296,21 @@ export const backendService = {
     const jwks = await restJson<{ keys?: any[] }>(jwksPath);
     const inventory = await supportedRpcResult<any[]>('keys.list', { tenant: tenant.slug, tenant_id: tenant.id }, []);
     return normalizeTenantJwksPublication(tenant, discovery, jwks, inventory);
+  },
+
+  async seedTenantJwksKey(tenant: Tenant): Promise<void> {
+    await supportedRpcResult('tenant.keys.seed', { tenant: tenant.slug, tenant_id: tenant.id }, undefined);
+  },
+
+  async createTenantJwksKey(tenant: Tenant, key: TenantJwksKeyInput): Promise<void> {
+    await supportedRpcResult('tenant.keys.create', { tenant: tenant.slug, tenant_id: tenant.id, ...key }, undefined);
+  },
+
+  async updateTenantJwksKey(tenant: Tenant, key: TenantJwksKeyInput): Promise<void> {
+    await supportedRpcResult('tenant.keys.update', { tenant: tenant.slug, tenant_id: tenant.id, ...key }, undefined);
+  },
+
+  async deleteTenantJwksKey(tenant: Tenant, kid: string): Promise<void> {
+    await supportedRpcResult('tenant.keys.delete', { tenant: tenant.slug, tenant_id: tenant.id, kid }, undefined);
   },
 };

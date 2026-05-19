@@ -96,6 +96,20 @@ export type TenantJwksPublicationKey = {
   retired_at?: string;
 };
 
+export type TenantJwksKeyInput = {
+  kid: string;
+  label?: string;
+  status?: JwksKeyLifecycle;
+  alg?: string;
+  kty?: string;
+  use?: string;
+  crv?: string;
+  x?: string;
+  n?: string;
+  e?: string;
+  publish?: boolean;
+};
+
 export type TenantJwksPublicationView = {
   tenant_slug: string;
   issuer: string;
