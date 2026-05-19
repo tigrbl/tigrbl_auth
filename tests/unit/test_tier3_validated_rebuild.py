@@ -132,7 +132,7 @@ def test_runtime_profile_report_can_be_rebuilt_from_validated_run_manifests(tmp_
 
     assert payload["report_mode"] == "validated-runs"
     assert payload["summary"]["source_mode"] == "validated-runs"
-    assert payload["summary"]["required_runtime_cell_count"] == 14
+    assert payload["summary"]["required_runtime_cell_count"] == 24
     assert payload["summary"]["validated_runtime_cell_count"] == 2
     assert payload["summary"]["validated_runtime_cell_passed_count"] == 2
     assert payload["validated_artifact_source"] == "dist/validated-runs/collected-artifact-downloads.json"

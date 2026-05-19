@@ -102,8 +102,8 @@
 - operator_plane_backend: `sqlite-authoritative`
 - operator_plane_repo_mutation_dependency: `False`
 - operator_plane_tenancy_enforced: `True`
-- operator_plane_database_present: `True`
-- operator_plane_state_root: `.pytest-tmp/operator-state/certification-closure/tigrbl_auth-9a06a2e3bfb81899`
+- operator_plane_database_present: `False`
+- operator_plane_state_root: `.pytest-tmp/operator-plane-state578/tigrbl_auth-9a06a2e3bfb81899`
 - operator_plane_portability_schema_version: `3`
 - pyproject_requires_python: `>=3.10,<3.15`
 - serve_runtime_launcher_present: `True`
@@ -134,7 +134,7 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `114`
+- release_evidence_dirty_checkout_path_count: `18`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `0`
 - derived_current_doc_count: `11`

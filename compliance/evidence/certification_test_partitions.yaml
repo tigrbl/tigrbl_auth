@@ -50,6 +50,7 @@ partitions:
   - tests/examples/test_python_cli_device_login.py
   - tests/examples/test_readme_usage.py
   - tests/features/test_profile_reference_union.py
+  - tests/features/test_t0_tracked_targets.py
   - tests/features/test_tenant_jwks_discovery.py
   - tests/perf/test_bundle_manifest_size.py
   - tests/uix/test_abac_admin.py
@@ -97,6 +98,7 @@ partitions:
   - tests/unit/test_hardening_cluster_a.py
   - tests/unit/test_hardening_cluster_b.py
   - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_identity_package_split_imports.py
   - tests/unit/test_jwks_rotation.py
   - tests/unit/test_jwtoken.py
   - tests/unit/test_key_rotation_policy_governance.py

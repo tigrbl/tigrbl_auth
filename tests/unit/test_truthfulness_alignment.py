@@ -156,9 +156,9 @@ def test_repository_state_marks_truth_reconciliation_complete_and_executor_evide
     assert repository_state["profile_scope_mismatch_set_empty"] is True
     assert repository_state["clean_room_executor_matrix_declared_complete"] is True
     assert repository_state["validated_manifest_identity_contract_installed"] is True
-    assert repository_state["validated_runtime_matrix_preservation_complete"] is True
+    assert repository_state["validated_runtime_matrix_preservation_complete"] is False
     assert repository_state["validated_test_lane_preservation_complete"] is False
-    assert repository_state["validated_migration_portability_preservation_complete"] is False
+    assert repository_state["validated_migration_portability_preservation_complete"] is True
     assert repository_state["alignment_only_checkpoint_no_new_certification_evidence"] is False
 
 
@@ -181,7 +181,7 @@ def test_generated_reports_reflect_reconciled_target_profile_truth() -> None:
 
     current_state_md = (ROOT / "CURRENT_STATE.md").read_text(encoding="utf-8")
     certification_status_md = (ROOT / "CERTIFICATION_STATUS.md").read_text(encoding="utf-8")
-    assert "validated runtime matrix green: `True`" in current_state_md
+    assert "validated runtime matrix green: `False`" in current_state_md
     assert "profile-scope mismatch set empty: `True`" in current_state_md
     assert "target_profile_truth_reconciled_complete: `True`" in certification_status_md
     assert "profile_scope_mismatch_set_empty: `True`" in certification_status_md

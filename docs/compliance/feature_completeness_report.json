@@ -43,18 +43,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e",
-        "database_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/operator_plane.sqlite3",
-        "snapshot_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/snapshots",
-        "log_root": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/logs",
+        "state_root": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de",
+        "database_path": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/operator_plane.sqlite3",
+        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/snapshots",
+        "log_root": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/logs/audit-events.jsonl",
-        "transaction_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/logs/transactions.jsonl",
-        "activity_log_path": "<repo>/.pytest-tmp/operator-state/certification-closure/operator-state-e75d700a4b8e432e/logs/activity.jsonl"
+        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/logs/audit-events.jsonl",
+        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/logs/transactions.jsonl",
+        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state578/operator-state-5a15fad8d1f119de/logs/activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -113,7 +113,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-bjwc8cp1/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-ybfcpskf/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -156,10 +156,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-bjwc8cp1/release-bundle"
+        "dist/feature-completeness-sandbox-ybfcpskf/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-bjwc8cp1/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-ybfcpskf/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
