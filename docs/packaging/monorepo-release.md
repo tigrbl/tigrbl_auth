@@ -106,6 +106,10 @@ tests/integration
 tests/interop
 ```
 
+Those cells pass `--certification-lane all` through the cobycloud isolated
+package test action so the repo lane filter collects integration and interop
+tests instead of the default core-only lane.
+
 Before running those cross-cutting tests, the isolated cell installs the local
 workspace facade with test/runtime extras into the isolated venv:
 

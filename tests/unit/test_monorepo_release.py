@@ -75,6 +75,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
     assert all("tests/integration" in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all(cell["pytest_args"] == "--certification-lane\nall" for cell in testkit_cells)
 
 
 def test_monorepo_release_filters_package_python_test_matrix() -> None:
@@ -111,6 +112,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "workspace_source_globs": "pkgs/*/src",
             "package_test_paths": "tests/packages/tigrbl-identity-oauth\ntests/packages/tigrbl_identity_oauth",
             "pre_test_command": "",
+            "pytest_args": "",
             "cross_cutting": "false",
         }
     ]

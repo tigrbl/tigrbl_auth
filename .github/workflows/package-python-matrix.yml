@@ -113,3 +113,4 @@ jobs:
           workspace-source-globs: ${{ matrix.package.workspace_source_globs }}
           package-test-paths: ${{ matrix.package.package_test_paths }}
           pre-test-command: ${{ matrix.package.pre_test_command }}
+          pytest-args: ${{ matrix.package.pytest_args }}

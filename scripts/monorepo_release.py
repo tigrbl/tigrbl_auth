@@ -178,10 +178,12 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                 f"tests/packages/{package.import_root}",
             ]
             pre_test_command = ""
+            pytest_args = ""
             cross_cutting = package.name == TESTKIT_PACKAGE_NAME
             if cross_cutting:
                 package_test_paths.extend(["tests/integration", "tests/interop"])
                 pre_test_command = '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
+                pytest_args = "--certification-lane\nall"
             cell = package.as_cell()
             cell.update(
                 {
@@ -191,6 +193,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                     "workspace_source_globs": "pkgs/*/src",
                     "package_test_paths": "\n".join(package_test_paths),
                     "pre_test_command": pre_test_command,
+                    "pytest_args": pytest_args,
                     "cross_cutting": str(cross_cutting).lower(),
                 }
             )
