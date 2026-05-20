@@ -1,0 +1,115 @@
+name: package-python-matrix
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/package-python-matrix.yml"
+      - "pkgs/**"
+      - "scripts/monorepo_release.py"
+      - "tests/packages/**"
+      - "tests/unit/test_monorepo_release.py"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/package-python-matrix.yml"
+      - "pkgs/**"
+      - "scripts/monorepo_release.py"
+      - "tests/packages/**"
+      - "tests/unit/test_monorepo_release.py"
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package name to test, or all.
+        required: false
+        default: all
+      python-version:
+        description: Optional single Python version to test.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+          - "3.14"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: package-python-matrix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover-package-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Discover split Python packages
+        uses: cobycloud/actions/actions/monorepo-discover@main
+        with:
+          package-globs: pkgs/*
+          ecosystem: python
+      - name: Validate split package metadata
+        uses: cobycloud/actions/actions/package-metadata@main
+        with:
+          manifest-globs: |
+            pkgs/*/pyproject.toml
+          require-description: "true"
+          require-license: "true"
+          require-readme: "true"
+          require-url: "false"
+          report-json: reports/package-metadata.json
+          report-md: reports/package-metadata.md
+      - name: Build package x Python matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--package "${{ inputs['package'] || 'all' }}")
+          if [[ "${{ inputs['python-version'] || 'all' }}" != "all" ]]; then
+            args+=(--python-version "${{ inputs['python-version'] }}")
+          fi
+          python scripts/monorepo_release.py test-matrix "${args[@]}"
+
+  isolated-package-tests:
+    needs: discover-package-matrix
+    if: ${{ needs.discover-package-matrix.outputs.count != '0' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.discover-package-matrix.outputs.matrix) }}
+    name: ${{ matrix.package.name }} / Python ${{ matrix.package.python_version }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.package.python_version }}
+      - name: Build target package wheel
+        uses: cobycloud/actions/actions/python-package-build@main
+        with:
+          python-version: ${{ matrix.package.python_version }}
+          project-path: ${{ matrix.package.path }}
+          out-dir: dist/${{ matrix.package.cell_id }}
+          upload-artifact: "false"
+      - name: Run isolated package tests
+        uses: cobycloud/actions/actions/python-isolated-package-test@main
+        with:
+          python-version: ${{ matrix.package.python_version }}
+          package-name: ${{ matrix.package.name }}
+          package-version: ${{ matrix.package.version }}
+          import-root: ${{ matrix.package.import_root }}
+          wheel-dir: dist/${{ matrix.package.cell_id }}
+          workspace-source-globs: ${{ matrix.package.workspace_source_globs }}
+          package-test-paths: ${{ matrix.package.package_test_paths }}
+          pre-test-command: ${{ matrix.package.pre_test_command }}

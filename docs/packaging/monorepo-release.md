@@ -53,3 +53,69 @@ environment: pypi
 
 The legacy root release workflow remains separate from this package-scoped
 monorepo release lane.
+
+## Package Python Matrix
+
+`.github/workflows/package-python-matrix.yml` provides the split package
+test lane.
+
+It expands every package under `pkgs/*` across the supported interpreter range:
+
+```text
+3.10
+3.11
+3.12
+3.13
+3.14
+```
+
+Each matrix cell:
+
+1. discovers `pkgs/*` with `cobycloud/actions/actions/monorepo-discover`;
+2. validates package metadata with `cobycloud/actions/actions/package-metadata`;
+3. builds the target package with `cobycloud/actions/actions/python-package-build`
+   on that cell's Python version;
+4. creates a clean virtual environment;
+5. exposes sibling workspace package members from source through a `.pth` file;
+6. installs the target package from the built wheel with `--no-deps`;
+7. runs `pip check`;
+8. imports the package's declared import root and verifies installed package
+   metadata.
+
+Package-specific pytest suites can be added under either:
+
+```text
+tests/packages/<package-name>/
+tests/packages/<import-root>/
+```
+
+When either path exists for a package, the isolated cell installs `pytest` in
+the clean environment and runs those tests with:
+
+```text
+PACKAGE_UNDER_TEST
+IMPORT_ROOT_UNDER_TEST
+PACKAGE_VERSION_UNDER_TEST
+```
+
+The `tigrbl-identity-testkit` package is the cross-cutting package-test owner.
+Its package matrix cells additionally include:
+
+```text
+tests/integration
+tests/interop
+```
+
+Before running those cross-cutting tests, the isolated cell installs the local
+workspace facade with test/runtime extras into the isolated venv:
+
+```text
+$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"
+```
+
+Manual dispatch supports narrowing the matrix:
+
+```text
+package=tigrbl-identity-oauth
+python-version=3.12
+```
