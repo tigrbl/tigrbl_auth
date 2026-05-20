@@ -1,0 +1,187 @@
+name: monorepo-package-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package name to tag, or all.
+        required: false
+        default: all
+      version:
+        description: Optional version. When set, it must match the package pyproject version.
+        required: false
+        default: ""
+      force:
+        description: Replace existing package tags.
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+  push:
+    tags:
+      - "*==*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monorepo-package-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  create-package-tags:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Create package release tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--package "${{ inputs.package }}")
+          if [[ -n "${{ inputs.version }}" ]]; then
+            args+=(--version "${{ inputs.version }}")
+          fi
+          if [[ "${{ inputs.force }}" == "true" ]]; then
+            args+=(--force)
+          fi
+          python scripts/monorepo_release.py create-tags "${args[@]}"
+
+  validate-package-metadata:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    outputs:
+      package-count: ${{ steps.discover.outputs.package-count }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Discover split Python packages
+        id: discover
+        uses: cobycloud/actions/actions/monorepo-discover@main
+        with:
+          package-globs: pkgs/*
+          ecosystem: python
+      - name: Validate split package metadata
+        uses: cobycloud/actions/actions/package-metadata@main
+        with:
+          manifest-globs: |
+            pkgs/*/pyproject.toml
+          require-description: "true"
+          require-license: "true"
+          require-readme: "true"
+          require-url: "false"
+          report-json: reports/package-metadata.json
+          report-md: reports/package-metadata.md
+
+  resolve-package-tag:
+    if: ${{ github.event_name == 'push' }}
+    needs: validate-package-metadata
+    runs-on: ubuntu-latest
+    outputs:
+      package-name: ${{ steps.resolve.outputs.package_name }}
+      package-version: ${{ steps.resolve.outputs.package_version }}
+      package-path: ${{ steps.resolve.outputs.package_path }}
+      tag: ${{ steps.resolve.outputs.tag }}
+      matrix: ${{ steps.resolve.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Resolve and validate package tag
+        id: resolve
+        shell: bash
+        run: python scripts/monorepo_release.py resolve-tag "${GITHUB_REF_NAME}"
+
+  build-package:
+    if: ${{ github.event_name == 'push' }}
+    needs: resolve-package-tag
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.resolve-package-tag.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build package distribution
+        uses: cobycloud/actions/actions/python-package-build@main
+        with:
+          python-version: "3.12"
+          project-path: ${{ matrix.package.path }}
+          out-dir: dist/${{ matrix.package.name }}
+          upload-artifact: "true"
+          artifact-name: python-dist-${{ matrix.package.name }}
+
+  attest-package:
+    if: ${{ github.event_name == 'push' }}
+    needs:
+      - resolve-package-tag
+      - build-package
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
+          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
+      - name: Attest package distributions
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-name: ${{ needs.resolve-package-tag.outputs.package-name }}
+          subject-path: |
+            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.whl
+            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.tar.gz
+
+  publish-package:
+    if: ${{ github.event_name == 'push' }}
+    needs:
+      - resolve-package-tag
+      - attest-package
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
+          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
+      - name: Publish package to PyPI
+        uses: cobycloud/actions/actions/pypi-publish@main
+        with:
+          packages-dir: dist/${{ needs.resolve-package-tag.outputs.package-name }}
+
+  github-release:
+    if: ${{ github.event_name == 'push' }}
+    needs:
+      - resolve-package-tag
+      - publish-package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
+          path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
+      - name: Create package GitHub release
+        uses: cobycloud/actions/actions/github-release@main
+        with:
+          tag-name: ${{ needs.resolve-package-tag.outputs.tag }}
+          name: ${{ needs.resolve-package-tag.outputs.tag }}
+          body: |
+            Package: `${{ needs.resolve-package-tag.outputs.package-name }}`
+            Version: `${{ needs.resolve-package-tag.outputs.package-version }}`
+            Distribution path: `${{ needs.resolve-package-tag.outputs.package-path }}`
+          files: |
+            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.whl
+            dist/${{ needs.resolve-package-tag.outputs.package-name }}/*.tar.gz
+          draft: "false"
+          prerelease: "false"
+          make-latest: "false"
