@@ -1,0 +1,233 @@
+name: monorepo-npm-package-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: npm package name to tag, or all.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - "@tigrbl-auth/admin-uix"
+          - "@tigrbl-auth/public-uix"
+      version:
+        description: Optional version. When set, it must match package.json.
+        required: false
+        default: ""
+      force:
+        description: Replace existing npm package tags.
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+  push:
+    tags:
+      - "npm/**==*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monorepo-npm-package-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  create-npm-package-tags:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Create npm package release tags
+        shell: bash
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package }}
+          SELECTED_VERSION: ${{ inputs.version }}
+          FORCE_TAG: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require("fs");
+          const cp = require("child_process");
+          const path = require("path");
+
+          const selectedPackage = process.env.SELECTED_PACKAGE || "all";
+          const selectedVersion = process.env.SELECTED_VERSION || "";
+          const force = process.env.FORCE_TAG === "true";
+          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          const created = [];
+
+          function run(args) {
+            cp.execFileSync("git", args, {stdio: "inherit"});
+          }
+
+          function exists(tag) {
+            try {
+              cp.execFileSync("git", ["rev-parse", "-q", "--verify", `refs/tags/${tag}`], {stdio: "ignore"});
+              return true;
+            } catch (_) {
+              return false;
+            }
+          }
+
+          for (const packagePath of packageDirs) {
+            const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
+            if (selectedPackage !== "all" && manifest.name !== selectedPackage) {
+              continue;
+            }
+            const version = selectedVersion || manifest.version;
+            if (version !== manifest.version) {
+              throw new Error(`requested version ${version} does not match ${manifest.name} package.json version ${manifest.version}`);
+            }
+            const tag = `npm/${manifest.name}==${version}`;
+            if (exists(tag) && !force) {
+              console.log(`tag exists, skipping: ${tag}`);
+              continue;
+            }
+            if (exists(tag)) {
+              run(["tag", "-d", tag]);
+              run(["push", "--delete", "origin", tag]);
+            }
+            run(["tag", "-a", tag, "-m", `Release ${tag}`]);
+            run(["push", "origin", tag]);
+            created.push(tag);
+          }
+
+          console.log(JSON.stringify({created}, null, 2));
+          NODE
+
+  resolve-npm-package-tag:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    outputs:
+      package-name: ${{ steps.resolve.outputs.package_name }}
+      package-version: ${{ steps.resolve.outputs.package_version }}
+      package-path: ${{ steps.resolve.outputs.package_path }}
+      release-tag: ${{ steps.resolve.outputs.release_tag }}
+      npm-tag: ${{ steps.resolve.outputs.npm_tag }}
+      scope: ${{ steps.resolve.outputs.scope }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Resolve and validate npm package tag
+        id: resolve
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const ref = process.env.GITHUB_REF_NAME || "";
+          const match = /^npm\/(.+)==(\d+\.\d+\.\d+(?:[-+][A-Za-z0-9_.-]+)?)$/.exec(ref);
+          if (!match) {
+            throw new Error(`tag must match npm/<package>==<version>; got ${ref}`);
+          }
+          const packageName = match[1];
+          const version = match[2];
+          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          let found = null;
+          for (const packagePath of packageDirs) {
+            const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
+            if (manifest.name === packageName) {
+              found = {manifest, packagePath};
+              break;
+            }
+          }
+          if (!found) {
+            throw new Error(`unknown npm package ${packageName}`);
+          }
+          if (found.manifest.version !== version) {
+            throw new Error(`tag version ${version} does not match ${packageName} package.json version ${found.manifest.version}`);
+          }
+          const scope = packageName.startsWith("@") ? packageName.split("/")[0] : "";
+          const out = {
+            package_name: packageName,
+            package_version: version,
+            package_path: found.packagePath,
+            release_tag: ref,
+            npm_tag: "latest",
+            scope
+          };
+          for (const [key, value] of Object.entries(out)) {
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `${key}=${value}\n`);
+          }
+          console.log(JSON.stringify(out, null, 2));
+          NODE
+
+  test-npm-package:
+    if: ${{ github.event_name == 'push' }}
+    needs: resolve-npm-package-tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Test npm package before publication
+        uses: cobycloud/actions/actions/js-framework-ci@main
+        with:
+          framework: vite
+          node-version: "26"
+          working-directory: "."
+          install-command: npm ci
+          lint-command: ""
+          typecheck-command: ""
+          test-command: npm run test -w ${{ needs.resolve-npm-package-tag.outputs.package-name }}
+          build-command: npm run build -w ${{ needs.resolve-npm-package-tag.outputs.package-name }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+  publish-npm-package:
+    if: ${{ github.event_name == 'push' }}
+    needs:
+      - resolve-npm-package-tag
+      - test-npm-package
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Publish npm package
+        uses: cobycloud/actions/actions/npm-publish@main
+        with:
+          node-version: "26"
+          package-directory: ${{ needs.resolve-npm-package-tag.outputs.package-path }}
+          install-directory: "."
+          cache-dependency-path: package-lock.json
+          scope: ${{ needs.resolve-npm-package-tag.outputs.scope }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          install-command: npm ci
+          build-command: npm run build -w ${{ needs.resolve-npm-package-tag.outputs.package-name }}
+          test-command: npm run test -w ${{ needs.resolve-npm-package-tag.outputs.package-name }}
+          tag: ${{ needs.resolve-npm-package-tag.outputs.npm-tag }}
+          access: public
+          provenance: "true"
+
+  github-release:
+    if: ${{ github.event_name == 'push' }}
+    needs:
+      - resolve-npm-package-tag
+      - publish-npm-package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Create npm package GitHub release
+        uses: cobycloud/actions/actions/github-release@main
+        with:
+          tag-name: ${{ needs.resolve-npm-package-tag.outputs.release-tag }}
+          name: ${{ needs.resolve-npm-package-tag.outputs.release-tag }}
+          body: |
+            npm package: `${{ needs.resolve-npm-package-tag.outputs.package-name }}`
+            Version: `${{ needs.resolve-npm-package-tag.outputs.package-version }}`
+            Package path: `${{ needs.resolve-npm-package-tag.outputs.package-path }}`
+          draft: "false"
+          prerelease: "false"
+          make-latest: "false"

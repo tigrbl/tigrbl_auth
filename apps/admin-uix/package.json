@@ -1,8 +1,24 @@
 {
   "name": "@tigrbl-auth/admin-uix",
-  "private": true,
-  "version": "0.3.4",
+  "version": "0.3.5",
+  "description": "Administrative UIX package for Tigrbl Auth identity operations.",
+  "license": "Apache-2.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "apps/admin-uix"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -25,5 +41,8 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

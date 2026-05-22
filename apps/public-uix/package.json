@@ -1,8 +1,24 @@
 {
   "name": "@tigrbl-auth/public-uix",
-  "private": true,
-  "version": "0.3.4",
+  "version": "0.3.5",
+  "description": "Public UIX package for Tigrbl Auth identity flows.",
+  "license": "Apache-2.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
+    "directory": "apps/public-uix"
+  },
+  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -21,5 +37,8 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

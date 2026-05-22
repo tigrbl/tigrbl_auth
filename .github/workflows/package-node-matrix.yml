@@ -1,0 +1,136 @@
+name: package-node-matrix
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/package-node-matrix.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "apps/**"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/package-node-matrix.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "apps/**"
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Node package to test, or all.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - "@tigrbl-auth/admin-uix"
+          - "@tigrbl-auth/public-uix"
+      node-version:
+        description: Optional single Node.js version to test.
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - "22"
+          - "24"
+          - "26"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: package-node-matrix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover-node-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Discover UIX packages
+        uses: cobycloud/actions/actions/monorepo-discover@main
+        with:
+          package-globs: apps/*
+          ecosystem: node
+      - name: Validate UIX package metadata
+        uses: cobycloud/actions/actions/package-metadata@main
+        with:
+          manifest-globs: |
+            apps/*/package.json
+          require-description: "true"
+          require-license: "true"
+          require-readme: "true"
+          require-url: "true"
+          report-json: reports/node-package-metadata.json
+          report-md: reports/node-package-metadata.md
+      - name: Build package x Node matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          selected_package="${{ inputs.package || 'all' }}"
+          selected_node="${{ inputs['node-version'] || 'all' }}"
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const selectedPackage = process.env.SELECTED_PACKAGE || "all";
+          const selectedNode = process.env.SELECTED_NODE || "all";
+          const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
+          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          const cells = [];
+
+          for (const packagePath of packageDirs) {
+            const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
+            if (selectedPackage !== "all" && manifest.name !== selectedPackage) {
+              continue;
+            }
+            for (const nodeVersion of nodeVersions) {
+              cells.push({
+                name: manifest.name,
+                version: manifest.version,
+                path: packagePath,
+                workspace: manifest.name,
+                node_version: nodeVersion,
+                cell_id: `${manifest.name.replace(/^@/, "").replaceAll("/", "-")}-node${nodeVersion}`,
+                test_command: `npm run test -w ${manifest.name}`,
+                build_command: `npm run build -w ${manifest.name}`
+              });
+            }
+          }
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify(cells)}\ncount=${cells.length}\n`);
+          NODE
+        env:
+          SELECTED_PACKAGE: ${{ inputs.package || 'all' }}
+          SELECTED_NODE: ${{ inputs['node-version'] || 'all' }}
+
+  isolated-node-package-tests:
+    needs: discover-node-matrix
+    if: ${{ needs.discover-node-matrix.outputs.count != '0' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.discover-node-matrix.outputs.matrix) }}
+    name: ${{ matrix.package.name }} / Node ${{ matrix.package.node_version }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run isolated UIX package checks
+        uses: cobycloud/actions/actions/js-framework-ci@main
+        with:
+          framework: vite
+          node-version: ${{ matrix.package.node_version }}
+          working-directory: "."
+          install-command: npm ci
+          lint-command: ""
+          typecheck-command: ""
+          test-command: ${{ matrix.package.test_command }}
+          build-command: ${{ matrix.package.build_command }}
+          cache: npm
+          cache-dependency-path: package-lock.json
