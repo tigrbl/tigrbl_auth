@@ -1,10 +1,45 @@
 [project]
 name = "tigrbl-identity-resource-server"
 version = "0.4.0.dev2"
-description = "Protected API resource-server SDK for the Tigrbl identity package suite."
+description = "Resource-server contracts for protected APIs that validate Tigrbl identity access tokens, scopes, audiences, and introspection metadata."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "identity",
+    "resource-server",
+    "protected-api",
+    "access-token",
+    "oauth",
+    "scopes",
+    "audience",
+    "introspection",
+    "iam",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/tigrbl-identity-resource-server"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tigrbl-identity-resource-server/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
