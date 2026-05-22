@@ -1,5 +1,7 @@
 /.pytest-tmp
 /.pytest-tmp*/
+*.pytest
+.artifacts/*
 /.tmp/
 *.pyc
 
