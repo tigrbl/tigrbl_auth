@@ -7,8 +7,17 @@ on:
         description: Package name to tag, or all.
         required: false
         default: all
+      bump_type:
+        description: Semver bump to apply before build, publish, and release.
+        required: false
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - finalize
       version:
-        description: Optional version. When set, it must match the package pyproject version.
+        description: Optional exact version to set before release. Overrides bump_type.
         required: false
         default: ""
       force:
@@ -28,13 +37,86 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  bump-package-versions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+      sha: ${{ steps.revision.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Configure git identity
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Bump selected package versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib
+          import subprocess
+          import sys
+          import tomllib
+
+          root = pathlib.Path(".").resolve()
+          selected = "${{ inputs.package }}"
+          exact_version = "${{ inputs.version }}"
+          bump_type = "${{ inputs.bump_type }}"
+          packages = []
+          for pyproject in sorted((root / "pkgs").glob("*/pyproject.toml")):
+              data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+              name = data["project"]["name"]
+              if selected == "all" or selected == name:
+                  packages.append((name, pyproject))
+          if not packages:
+              raise SystemExit(f"unknown package {selected!r}")
+          for name, pyproject in packages:
+              args = [sys.executable, "scripts/bump_pyproject_version.py"]
+              if exact_version:
+                  args.extend(["--set", exact_version])
+              else:
+                  args.extend(["--bump", bump_type])
+              args.append(str(pyproject))
+              print(f"::notice::Bumping {name} via {' '.join(args)}")
+              subprocess.run(args, check=True)
+          PY
+      - name: Commit and push version bumps
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add pkgs/*/pyproject.toml
+          if git diff --cached --quiet; then
+            echo "::notice::No version changes to commit."
+          else
+            git commit -m "Bump trusted release package versions"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Build bumped package matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/monorepo_release.py test-matrix --package "${{ inputs.package }}" --python-version 3.12
+      - name: Capture bumped revision
+        id: revision
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   create-package-tags:
+    needs: bump-package-versions
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: ${{ needs.bump-package-versions.outputs.sha }}
           fetch-depth: 0
       - name: Configure git identity
         shell: bash
@@ -46,28 +128,23 @@ jobs:
         run: |
           set -euo pipefail
           args=(--package "${{ inputs.package }}")
-          if [[ -n "${{ inputs.version }}" ]]; then
-            args+=(--version "${{ inputs.version }}")
-          fi
           if [[ "${{ inputs.force }}" == "true" ]]; then
             args+=(--force)
           fi
           python scripts/monorepo_release.py create-tags "${args[@]}"
 
   resolve-dispatch-matrix:
-    needs: create-package-tags
+    needs:
+      - bump-package-versions
+      - create-package-tags
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
-      count: ${{ steps.matrix.outputs.count }}
+      matrix: ${{ needs.bump-package-versions.outputs.matrix }}
+      count: ${{ needs.bump-package-versions.outputs.count }}
+      sha: ${{ needs.bump-package-versions.outputs.sha }}
     steps:
-      - uses: actions/checkout@v6
-      - name: Build dispatch package matrix
-        id: matrix
-        shell: bash
-        run: |
-          set -euo pipefail
-          python scripts/monorepo_release.py test-matrix --package "${{ inputs.package }}" --python-version 3.12
+      - name: Use bumped matrix
+        run: echo "Using bumped package matrix."
 
   build-dispatch-package:
     if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
@@ -79,6 +156,8 @@ jobs:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Build package distribution
         uses: cobycloud/actions/actions/python-package-build@main
         with:
@@ -143,5 +222,5 @@ jobs:
             dist/${{ matrix.package.name }}/*.whl
             dist/${{ matrix.package.name }}/*.tar.gz
           draft: "false"
-          prerelease: "true"
+          prerelease: ${{ contains(matrix.package.version, '.dev') && 'true' || 'false' }}
           make-latest: "false"
