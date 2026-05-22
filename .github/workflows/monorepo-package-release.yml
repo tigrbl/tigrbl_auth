@@ -1,4 +1,4 @@
-name: monorepo-package-release
+name: monorepo-package-release-token
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: monorepo-package-release-${{ github.ref }}
+  group: monorepo-package-release-token-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -113,10 +113,10 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-publish@main
+        uses: cobycloud/actions/actions/pypi-token-publish@main
         with:
           packages-dir: dist/${{ matrix.package.name }}
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          token: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: "true"
 
   github-release-dispatch:
@@ -252,10 +252,10 @@ jobs:
           name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
           path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
       - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-publish@main
+        uses: cobycloud/actions/actions/pypi-token-publish@main
         with:
           packages-dir: dist/${{ needs.resolve-package-tag.outputs.package-name }}
-          password: ${{ secrets.PYPI_API_TOKEN }}
+          token: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: "true"
 
   github-release:

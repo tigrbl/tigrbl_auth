@@ -1,0 +1,147 @@
+name: monorepo-package-release-trusted
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package name to tag, or all.
+        required: false
+        default: all
+      version:
+        description: Optional version. When set, it must match the package pyproject version.
+        required: false
+        default: ""
+      force:
+        description: Replace existing package tags.
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: monorepo-package-release-trusted-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  create-package-tags:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Configure git identity
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Create package release tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--package "${{ inputs.package }}")
+          if [[ -n "${{ inputs.version }}" ]]; then
+            args+=(--version "${{ inputs.version }}")
+          fi
+          if [[ "${{ inputs.force }}" == "true" ]]; then
+            args+=(--force)
+          fi
+          python scripts/monorepo_release.py create-tags "${args[@]}"
+
+  resolve-dispatch-matrix:
+    needs: create-package-tags
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      count: ${{ steps.matrix.outputs.count }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dispatch package matrix
+        id: matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/monorepo_release.py test-matrix --package "${{ inputs.package }}" --python-version 3.12
+
+  build-dispatch-package:
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    needs: resolve-dispatch-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build package distribution
+        uses: cobycloud/actions/actions/python-package-build@main
+        with:
+          python-version: "3.12"
+          project-path: ${{ matrix.package.path }}
+          out-dir: dist/${{ matrix.package.name }}
+          upload-artifact: "true"
+          artifact-name: python-dist-${{ matrix.package.name }}
+
+  publish-dispatch-package:
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    needs:
+      - resolve-dispatch-matrix
+      - build-dispatch-package
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-${{ matrix.package.name }}
+          path: dist/${{ matrix.package.name }}
+      - name: Publish package to PyPI with Trusted Publishing
+        uses: cobycloud/actions/actions/pypi-trusted-publish@main
+        with:
+          packages-dir: dist/${{ matrix.package.name }}
+          skip-existing: "true"
+
+  github-release-dispatch:
+    if: ${{ needs.resolve-dispatch-matrix.outputs.count != '0' }}
+    needs:
+      - resolve-dispatch-matrix
+      - publish-dispatch-package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-dist-${{ matrix.package.name }}
+          path: dist/${{ matrix.package.name }}
+      - name: Create package GitHub release
+        uses: cobycloud/actions/actions/github-release@main
+        with:
+          tag-name: ${{ matrix.package.tag }}
+          name: ${{ matrix.package.tag }}
+          body: |
+            Package: `${{ matrix.package.name }}`
+            Version: `${{ matrix.package.version }}`
+            Distribution path: `${{ matrix.package.path }}`
+          files: |
+            dist/${{ matrix.package.name }}/*.whl
+            dist/${{ matrix.package.name }}/*.tar.gz
+          draft: "false"
+          prerelease: "true"
+          make-latest: "false"
