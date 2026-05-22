@@ -116,6 +116,8 @@ jobs:
         uses: cobycloud/actions/actions/pypi-publish@main
         with:
           packages-dir: dist/${{ matrix.package.name }}
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: "true"
 
   github-release-dispatch:
     if: ${{ github.event_name == 'workflow_dispatch' && needs.resolve-dispatch-matrix.outputs.count != '0' }}
@@ -253,6 +255,8 @@ jobs:
         uses: cobycloud/actions/actions/pypi-publish@main
         with:
           packages-dir: dist/${{ needs.resolve-package-tag.outputs.package-name }}
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: "true"
 
   github-release:
     if: ${{ github.event_name == 'push' }}
