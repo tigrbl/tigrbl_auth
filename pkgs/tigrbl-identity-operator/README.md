@@ -1,5 +1,7 @@
 # tigrbl-identity-operator
 
+[![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
+
 Operator CLI and evidence workflows for the Tigrbl identity package suite.
 
 This package uses the independent import root `tigrbl_identity_operator`.
