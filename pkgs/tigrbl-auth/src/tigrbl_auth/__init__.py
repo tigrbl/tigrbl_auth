@@ -14,6 +14,18 @@ from http import HTTPStatus as _HTTPStatus
 from importlib import import_module
 from typing import Any
 
+from .compat import (
+    FACADE_EXTRAS,
+    STABLE_ENTRYPOINTS,
+    FacadeImportError,
+    StableEntrypoint,
+    TigrblAuthFacadeWarning,
+    extras_for,
+    resolve_entrypoint,
+    stable_entrypoints,
+    warn_legacy_import,
+)
+
 
 def _install_tomllib_alias() -> None:
     """Backfill ``tomllib`` on Python 3.10 using ``tomli`` if available."""
@@ -48,6 +60,7 @@ _install_tomllib_alias()
 _install_http_status_aliases()
 
 _MODULE_EXPORTS = {
+    "compat": "tigrbl_auth.compat",
     "framework": "tigrbl_auth.framework",
     "runtime_cfg": "tigrbl_auth.runtime_cfg",
     "rfc7591": "tigrbl_auth.rfc.rfc7591",
@@ -83,6 +96,15 @@ _SYMBOL_EXPORTS = {
     "parse_authorization_details": ("tigrbl_auth.rfc.rfc9396", "parse_authorization_details"),
     "RFC8932_SPEC_URL": ("tigrbl_auth.rfc.rfc8932", "RFC8932_SPEC_URL"),
     "enforce_encrypted_dns": ("tigrbl_auth.rfc.rfc8932", "enforce_encrypted_dns"),
+    "FACADE_EXTRAS": ("tigrbl_auth.compat", "FACADE_EXTRAS"),
+    "STABLE_ENTRYPOINTS": ("tigrbl_auth.compat", "STABLE_ENTRYPOINTS"),
+    "FacadeImportError": ("tigrbl_auth.compat", "FacadeImportError"),
+    "StableEntrypoint": ("tigrbl_auth.compat", "StableEntrypoint"),
+    "TigrblAuthFacadeWarning": ("tigrbl_auth.compat", "TigrblAuthFacadeWarning"),
+    "extras_for": ("tigrbl_auth.compat", "extras_for"),
+    "resolve_entrypoint": ("tigrbl_auth.compat", "resolve_entrypoint"),
+    "stable_entrypoints": ("tigrbl_auth.compat", "stable_entrypoints"),
+    "warn_legacy_import": ("tigrbl_auth.compat", "warn_legacy_import"),
 }
 
 
