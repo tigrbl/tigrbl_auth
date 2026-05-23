@@ -22,6 +22,62 @@ class TenantTrustDomainAuthority:
     verification_scope: tuple[str, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class TenantPublicDiscoveryBoundaryFeature:
+    feature_id: str
+    category: str
+    runtime_objects: tuple[str, ...]
+    guarded_capabilities: tuple[str, ...]
+
+
+TENANT_PUBLIC_DISCOVERY_FEATURES: tuple[TenantPublicDiscoveryBoundaryFeature, ...] = (
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-scoped-issuer-boundary", "tenant-issuer", ("TenantTrustDomainAuthority", "tenant_issuer"), ("issuer-boundary", "tenant-scope")),
+    TenantPublicDiscoveryBoundaryFeature("feat:route-tenant-openid-configuration", "route", ("build_tenant_openid_config", "TENANT_OPENID_CONFIGURATION_PATH"), ("route-enabled", "tenant-exists")),
+    TenantPublicDiscoveryBoundaryFeature("feat:route-tenant-jwks-json", "route", ("TENANT_JWKS_PATH", "tenant_jwks_path"), ("route-enabled", "tenant-exists")),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-discovery-jwks-uri", "discovery-document", ("build_tenant_openid_config", "tenant_jwks_path"), ("jwks-uri", "issuer-root")),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-jwks-key-filtering", "jwks", ("TENANT_JWKS_PATH",), ("tenant-filtering", "public-key-only")),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-jwks-rotation-visibility", "jwks", ("TENANT_JWKS_PATH",), ("active-visible", "next-visible", "retired-hidden")),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-public-discovery-disabled-policy", "route-policy", ("enabled_tenant_record",), ("disabled-tenant-404", "missing-tenant-404")),
+    TenantPublicDiscoveryBoundaryFeature("feat:operator-tenant-jwks-runtime-parity", "operator-parity", ("TENANT_JWKS_PATH",), ("runtime-payload-parity",)),
+    TenantPublicDiscoveryBoundaryFeature("feat:openapi-tenant-discovery-routes", "contract", ("TENANT_OPENID_CONFIGURATION_PATH", "TENANT_JWKS_PATH"), ("openapi-route-parameters",)),
+    TenantPublicDiscoveryBoundaryFeature("feat:discovery-snapshot-tenant-profile-artifacts", "snapshot", ("build_tenant_openid_config",), ("tenant-profile-artifacts",)),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-issuer-token-validation-contract", "validation", ("require_tenant_issuer", "TenantTrustDomainAuthority"), ("accepted-issuer-only",)),
+    TenantPublicDiscoveryBoundaryFeature("feat:tenant-jwks-cross-tenant-leakage-guard", "leakage-guard", ("build_tenant_openid_config",), ("cross-tenant-redaction", "tenant-path-isolation")),
+)
+
+
+def tenant_public_discovery_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature.feature_id: {
+            "category": feature.category,
+            "runtime_objects": list(feature.runtime_objects),
+            "guarded_capabilities": list(feature.guarded_capabilities),
+        }
+        for feature in TENANT_PUBLIC_DISCOVERY_FEATURES
+    }
+
+
+def tenant_public_discovery_boundary_integrity() -> dict[str, Any]:
+    manifest = tenant_public_discovery_boundary_manifest()
+    categories = {row["category"] for row in manifest.values()}
+    failures: list[str] = []
+    if len(manifest) != 12:
+        failures.append("tenant public discovery boundary must track exactly 12 feature rows")
+    if TENANT_OPENID_CONFIGURATION_PATH != "/tenants/{tenant_slug}/.well-known/openid-configuration":
+        failures.append("tenant OpenID configuration path drifted")
+    if TENANT_JWKS_PATH != "/tenants/{tenant_slug}/.well-known/jwks.json":
+        failures.append("tenant JWKS path drifted")
+    for required in ("tenant-issuer", "route", "jwks", "operator-parity", "contract", "snapshot", "validation", "leakage-guard"):
+        if required not in categories:
+            failures.append(f"missing category {required}")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "categories": sorted(categories),
+        "failures": failures,
+    }
+
+
 def tenant_issuer(root_issuer: str, tenant_slug: str) -> str:
     return f"{root_issuer.rstrip('/')}/tenants/{tenant_slug}"
 
@@ -144,12 +200,16 @@ def require_tenant_issuer(payload: Mapping[str, Any], *, root_issuer: str, tenan
 
 __all__ = [
     "TenantTrustDomainAuthority",
+    "TenantPublicDiscoveryBoundaryFeature",
     "TENANT_JWKS_PATH",
     "TENANT_OPENID_CONFIGURATION_PATH",
+    "TENANT_PUBLIC_DISCOVERY_FEATURES",
     "build_tenant_openid_config",
     "enabled_tenant_record",
     "require_tenant_issuer",
     "resolve_tenant_trust_domain_authority",
+    "tenant_public_discovery_boundary_integrity",
+    "tenant_public_discovery_boundary_manifest",
     "tenant_trust_domain_authority_from_root_issuer",
     "tenant_deployment",
     "tenant_issuer",
