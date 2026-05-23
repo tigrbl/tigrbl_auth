@@ -164,6 +164,90 @@ class AccessReviewCampaign:
     status: str = "open"
 
 
+@dataclass(frozen=True, slots=True)
+class GovernanceExtensionBoundaryFeature:
+    feature_id: str
+    category: str
+    runtime_objects: tuple[str, ...]
+    guarded_capabilities: tuple[str, ...]
+
+
+PHASE5_GOVERNANCE_EXTENSION_FEATURES: tuple[GovernanceExtensionBoundaryFeature, ...] = (
+    GovernanceExtensionBoundaryFeature(
+        "feat:f39-sdk-ecosystem",
+        "sdk-ecosystem",
+        ("SDKEcosystemCatalog", "SDKPackage"),
+        ("runtime-compatibility", "contract-alignment", "auth-helper-inventory"),
+    ),
+    GovernanceExtensionBoundaryFeature(
+        "feat:f40-extensibility-plugins",
+        "plugins",
+        ("PluginRuntimeRegistry", "PluginDescriptor", "PluginLifecycleEvent"),
+        ("isolated-hook-execution", "operator-disable", "lifecycle-audit"),
+    ),
+    GovernanceExtensionBoundaryFeature(
+        "feat:f33-scim-provisioning",
+        "scim-provisioning",
+        ("ScimProvisioningPlane", "ScimSchema", "ScimUser", "ScimGroup"),
+        ("schema-required-fields", "tenant-scope", "patch-validation"),
+    ),
+    GovernanceExtensionBoundaryFeature(
+        "feat:f43-access-review-workflows",
+        "access-review",
+        ("AccessReviewWorkflow", "AccessReviewCampaign", "AccessReviewDecision"),
+        ("reviewer-authorization", "overdue-escalation", "pending-close-guard"),
+    ),
+    GovernanceExtensionBoundaryFeature(
+        "feat:f44-entitlement-management",
+        "entitlement-management",
+        ("EntitlementManager", "EntitlementDefinition", "EntitlementAssignment"),
+        ("assignment-inventory", "expiry", "revocation"),
+    ),
+)
+
+
+def phase5_governance_extension_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature.feature_id: {
+            "category": feature.category,
+            "runtime_objects": list(feature.runtime_objects),
+            "guarded_capabilities": list(feature.guarded_capabilities),
+        }
+        for feature in PHASE5_GOVERNANCE_EXTENSION_FEATURES
+    }
+
+
+def phase5_governance_extension_boundary_integrity() -> dict[str, Any]:
+    manifest = phase5_governance_extension_boundary_manifest()
+    categories = {row["category"] for row in manifest.values()}
+    runtime_objects = {
+        runtime_object
+        for row in manifest.values()
+        for runtime_object in row["runtime_objects"]
+    }
+    failures: list[str] = []
+    if len(manifest) != 5:
+        failures.append("phase 5 governance extension boundary must track exactly 5 feature rows")
+    for required in ("sdk-ecosystem", "plugins", "scim-provisioning", "access-review", "entitlement-management"):
+        if required not in categories:
+            failures.append(f"missing category {required}")
+    for required_object in (
+        "SDKEcosystemCatalog",
+        "PluginRuntimeRegistry",
+        "ScimProvisioningPlane",
+        "EntitlementManager",
+        "AccessReviewWorkflow",
+    ):
+        if required_object not in runtime_objects:
+            failures.append(f"missing runtime object {required_object}")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "categories": sorted(categories),
+        "failures": failures,
+    }
+
+
 class SDKEcosystemCatalog:
     def __init__(self) -> None:
         self._packages: dict[str, SDKPackage] = {}
@@ -763,6 +847,8 @@ __all__ = [
     "EntitlementAssignment",
     "EntitlementDefinition",
     "EntitlementManager",
+    "GovernanceExtensionBoundaryFeature",
+    "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
     "PluginDescriptor",
     "PluginLifecycleEvent",
     "PluginRuntimeRegistry",
@@ -774,4 +860,6 @@ __all__ = [
     "ScimSchema",
     "ScimUser",
     "build_phase5_delivery_summary",
+    "phase5_governance_extension_boundary_integrity",
+    "phase5_governance_extension_boundary_manifest",
 ]

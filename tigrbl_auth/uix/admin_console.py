@@ -33,10 +33,15 @@ from tigrbl_auth.services.policy_control_plane import (
 from tigrbl_auth.services.governance_extension_plane import (
     AccessReviewWorkflow,
     EntitlementManager,
+    GovernanceExtensionBoundaryFeature,
+    PHASE5_GOVERNANCE_EXTENSION_FEATURES,
     PluginRuntimeRegistry,
     SDKEcosystemCatalog,
+    ScimPatchOperation,
     ScimProvisioningPlane,
     build_phase5_delivery_summary,
+    phase5_governance_extension_boundary_integrity,
+    phase5_governance_extension_boundary_manifest,
 )
 from tigrbl_auth.services.release_posture_plane import (
     DisclosureRule,
