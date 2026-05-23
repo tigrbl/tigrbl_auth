@@ -17,4 +17,27 @@ class InvalidKeyError(Exception):
     """Raised when a suitable key for JWT processing cannot be found."""
 
 
-__all__ = ["InvalidTokenError", "InvalidKeyError"]
+class IdentityError(Exception):
+    """Base error for identity package primitives."""
+
+
+class IdentityValidationError(IdentityError):
+    """Raised when an identity primitive or contract fails validation."""
+
+
+class IdentityConfigurationError(IdentityError):
+    """Raised when package/runtime configuration is invalid."""
+
+
+class IdentityAuthorizationError(IdentityError):
+    """Raised when a principal is not authorized for an operation."""
+
+
+__all__ = [
+    "IdentityAuthorizationError",
+    "IdentityConfigurationError",
+    "IdentityError",
+    "IdentityValidationError",
+    "InvalidKeyError",
+    "InvalidTokenError",
+]
