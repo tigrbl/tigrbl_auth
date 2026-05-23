@@ -335,6 +335,48 @@ SAFE_MUTATION_METHODS: dict[str, str] = {
     "update-client-registration": "client.registration.upsert",
 }
 
+ADMINISTRATIVE_SAFE_MUTATION_FEATURES: dict[str, str] = {
+    "feat:uix-safe-mutation-revoke-session": "revoke-session",
+    "feat:uix-safe-mutation-revoke-token": "revoke-token",
+    "feat:uix-safe-mutation-revoke-consent": "revoke-consent",
+    "feat:uix-safe-mutation-lock-identity": "lock-identity",
+    "feat:uix-safe-mutation-toggle-tenant": "toggle-tenant",
+    "feat:uix-safe-mutation-toggle-client": "toggle-client",
+    "feat:uix-safe-mutation-rotate-key": "rotate-key",
+    "feat:uix-safe-mutation-publish-jwks": "publish-jwks",
+    "feat:uix-safe-mutation-update-client-registration": "update-client-registration",
+}
+
+
+def administrative_safe_mutations_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature_id: {
+            "action": action,
+            "required_method": SAFE_MUTATION_METHODS[action],
+            "runtime_objects": ["SafeMutationRequest", "SafeMutationResult", "execute_safe_mutation"],
+            "guarded_capabilities": ["explicit-confirmation", "audit-outcome", "executor-failure-reporting"],
+        }
+        for feature_id, action in ADMINISTRATIVE_SAFE_MUTATION_FEATURES.items()
+    }
+
+
+def administrative_safe_mutations_boundary_integrity() -> dict[str, Any]:
+    manifest = administrative_safe_mutations_boundary_manifest()
+    failures: list[str] = []
+    if len(manifest) != 9:
+        failures.append("priority 1 administrative safe mutations boundary must track exactly 9 feature rows")
+    for feature_id, action in ADMINISTRATIVE_SAFE_MUTATION_FEATURES.items():
+        if action not in SAFE_MUTATION_METHODS:
+            failures.append(f"{feature_id} maps to missing safe mutation action {action}")
+        elif not SAFE_MUTATION_METHODS[action]:
+            failures.append(f"{action} has no required OpenRPC method")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "actions": list(ADMINISTRATIVE_SAFE_MUTATION_FEATURES.values()),
+        "failures": failures,
+    }
+
 
 @dataclass(frozen=True, slots=True)
 class ResourceView:
