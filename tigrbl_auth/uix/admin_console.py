@@ -97,6 +97,67 @@ class AdminAuthorizationError(PermissionError):
 
 
 @dataclass(frozen=True, slots=True)
+class AdminConsoleShellBoundaryFeature:
+    feature_id: str
+    category: str
+    runtime_objects: tuple[str, ...]
+    guarded_capabilities: tuple[str, ...]
+
+
+PRIORITY1_ADMIN_CONSOLE_SHELL_FEATURES: tuple[AdminConsoleShellBoundaryFeature, ...] = (
+    AdminConsoleShellBoundaryFeature(
+        "feat:uix-admin-console-shell",
+        "shell",
+        ("AdminConsoleShell", "AdminShellState", "ADMIN_NAVIGATION"),
+        ("navigation", "environment-banner", "diagnostic-redaction"),
+    ),
+    AdminConsoleShellBoundaryFeature(
+        "feat:uix-admin-auth-session",
+        "session",
+        ("AdminSession", "AdminPrincipal", "AdminAuthorizationError"),
+        ("authenticated-admin-required", "scope-or-role-authorization"),
+    ),
+    AdminConsoleShellBoundaryFeature(
+        "feat:uix-tenant-profile-selector",
+        "tenant-profile",
+        ("TenantProfileSelection", "AdminConsoleShell.golden_path"),
+        ("tenant-context", "deployment-profile", "surface-set-selection"),
+    ),
+)
+
+
+def priority1_admin_console_shell_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature.feature_id: {
+            "category": feature.category,
+            "runtime_objects": list(feature.runtime_objects),
+            "guarded_capabilities": list(feature.guarded_capabilities),
+        }
+        for feature in PRIORITY1_ADMIN_CONSOLE_SHELL_FEATURES
+    }
+
+
+def priority1_admin_console_shell_boundary_integrity() -> dict[str, Any]:
+    manifest = priority1_admin_console_shell_boundary_manifest()
+    categories = {row["category"] for row in manifest.values()}
+    failures: list[str] = []
+    if len(manifest) != 3:
+        failures.append("priority 1 admin console shell boundary must track exactly 3 feature rows")
+    for nav_item in ("dashboard", "tenants", "identities", "tenant-jwks"):
+        if nav_item not in ADMIN_NAVIGATION:
+            failures.append(f"missing admin navigation item {nav_item}")
+    for required in ("shell", "session", "tenant-profile"):
+        if required not in categories:
+            failures.append(f"missing category {required}")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "categories": sorted(categories),
+        "failures": failures,
+    }
+
+
+@dataclass(frozen=True, slots=True)
 class AdminPrincipal:
     subject: str
     roles: tuple[str, ...] = ()
