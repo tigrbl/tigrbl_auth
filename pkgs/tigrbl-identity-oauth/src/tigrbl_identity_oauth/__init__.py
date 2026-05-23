@@ -2,4 +2,28 @@
 
 from __future__ import annotations
 
-__all__: list[str] = []
+from .protocol import (
+    DPoPProof,
+    DeviceAuthorization,
+    InMemoryOAuthRepository,
+    OAuthClient,
+    OAuthError,
+    OAuthGrantStatus,
+    OAuthProtocolService,
+    OAuthRepositoryPort,
+    TokenExchangeResult,
+    sha256_thumbprint,
+)
+
+__all__ = [
+    "DPoPProof",
+    "DeviceAuthorization",
+    "InMemoryOAuthRepository",
+    "OAuthClient",
+    "OAuthError",
+    "OAuthGrantStatus",
+    "OAuthProtocolService",
+    "OAuthRepositoryPort",
+    "TokenExchangeResult",
+    "sha256_thumbprint",
+]
