@@ -2,11 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, Mapping
-
-from tigrbl_auth.config.deployment import ResolvedDeployment
-from tigrbl_auth.services.operator_service import get_record
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 
 TENANT_OPENID_CONFIGURATION_PATH = "/tenants/{tenant_slug}/.well-known/openid-configuration"
 TENANT_JWKS_PATH = "/tenants/{tenant_slug}/.well-known/jwks.json"
@@ -37,14 +34,24 @@ def tenant_openid_configuration_path(tenant_slug: str) -> str:
     return TENANT_OPENID_CONFIGURATION_PATH.format(tenant_slug=tenant_slug)
 
 
-def resolve_tenant_trust_domain_authority(deployment: ResolvedDeployment, tenant_slug: str) -> TenantTrustDomainAuthority:
-    issuer = tenant_issuer(deployment.issuer, tenant_slug)
+def _deployment_value(deployment: object, name: str, default: str | None = None) -> str:
+    value = getattr(deployment, name, default)
+    if value is None:
+        raise ValueError(f"deployment.{name} is required")
+    return str(value)
+
+
+def resolve_tenant_trust_domain_authority(deployment: object, tenant_slug: str) -> TenantTrustDomainAuthority:
+    root_issuer = _deployment_value(deployment, "issuer")
+    issuer = tenant_issuer(root_issuer, tenant_slug)
     jwks_path = tenant_jwks_path(tenant_slug)
-    protected_resource_identifier = f"{str(deployment.protected_resource_identifier).rstrip('/')}/tenants/{tenant_slug}"
+    protected_resource_identifier = (
+        f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/tenants/{tenant_slug}"
+    )
     return TenantTrustDomainAuthority(
         tenant_slug=tenant_slug,
         issuer=issuer,
-        jwks_uri=f"{str(deployment.issuer).rstrip('/')}{jwks_path}",
+        jwks_uri=f"{root_issuer.rstrip('/')}{jwks_path}",
         jwks_path=jwks_path,
         subject_namespace=f"{tenant_slug}:subjects",
         protected_resource_identifier=protected_resource_identifier,
@@ -78,7 +85,12 @@ def tenant_trust_domain_authority_from_root_issuer(
 
 
 def enabled_tenant_record(repo_root: Path, tenant_slug: str) -> dict[str, Any] | None:
-    record = get_record(repo_root, "tenant", tenant_slug)
+    record_path = Path(repo_root) / ".operator-state" / "tenant" / f"{tenant_slug}.json"
+    if not record_path.exists():
+        return None
+    import json
+
+    record = json.loads(record_path.read_text(encoding="utf-8"))
     if record is None:
         return None
     status = str(record.get("status") or "").lower()
@@ -89,24 +101,38 @@ def enabled_tenant_record(repo_root: Path, tenant_slug: str) -> dict[str, Any] |
     return record
 
 
-def tenant_deployment(deployment: ResolvedDeployment, tenant_slug: str) -> ResolvedDeployment:
+def tenant_deployment(deployment: object, tenant_slug: str) -> object:
     authority = resolve_tenant_trust_domain_authority(deployment, tenant_slug)
-    return replace(
-        deployment,
-        issuer=authority.issuer,
-        protected_resource_identifier=authority.protected_resource_identifier,
-    )
+    try:
+        return replace(
+            deployment,
+            issuer=authority.issuer,
+            protected_resource_identifier=authority.protected_resource_identifier,
+        )
+    except TypeError:
+        values = dict(getattr(deployment, "__dict__", {}))
+        values["issuer"] = authority.issuer
+        values["protected_resource_identifier"] = authority.protected_resource_identifier
+        return SimpleNamespace(**values)
 
 
-def build_tenant_openid_config(deployment: ResolvedDeployment, tenant_slug: str) -> dict[str, Any]:
+def build_tenant_openid_config(deployment: object, tenant_slug: str) -> dict[str, Any]:
     authority = resolve_tenant_trust_domain_authority(deployment, tenant_slug)
-    tenant_scoped = tenant_deployment(deployment, tenant_slug)
-    config = build_openid_config(tenant_scoped)
-    config["issuer"] = authority.issuer
-    config["jwks_uri"] = authority.jwks_uri
-    config["tigrbl_auth_subject_namespace"] = authority.subject_namespace
-    config["tigrbl_auth_signing_scope"] = authority.signing_scope
-    return config
+    root = _deployment_value(deployment, "issuer")
+    base = root.rstrip("/")
+    return {
+        "issuer": authority.issuer,
+        "authorization_endpoint": f"{base}/authorize",
+        "token_endpoint": f"{base}/token",
+        "jwks_uri": authority.jwks_uri,
+        "userinfo_endpoint": f"{base}/userinfo",
+        "response_types_supported": ["code"],
+        "subject_types_supported": ["public"],
+        "id_token_signing_alg_values_supported": list(getattr(deployment, "id_token_algs", ("ES256",))),
+        "scopes_supported": ["openid", "profile", "email"],
+        "tigrbl_auth_subject_namespace": authority.subject_namespace,
+        "tigrbl_auth_signing_scope": authority.signing_scope,
+    }
 
 
 def require_tenant_issuer(payload: Mapping[str, Any], *, root_issuer: str, tenant_slug: str) -> None:
