@@ -5,14 +5,17 @@
   "type": "module",
   "workspaces": [
     "apps/admin-uix",
-    "apps/public-uix"
+    "apps/public-uix",
+    "apps/rp"
   ],
   "scripts": {
     "build:admin-uix": "npm run build -w @tigrbl-auth/admin-uix",
     "build:public-uix": "npm run build -w @tigrbl-auth/public-uix",
+    "build:rp": "npm run build -w @tigrbl-auth/rp",
     "build:uix": "npm run build:admin-uix && npm run build:public-uix",
     "test:admin-uix": "npm run test -w @tigrbl-auth/admin-uix",
     "test:public-uix": "npm run test -w @tigrbl-auth/public-uix",
+    "test:rp": "npm run test -w @tigrbl-auth/rp",
     "test:uix": "npm run test:admin-uix && npm run test:public-uix"
   },
   "dependencies": {

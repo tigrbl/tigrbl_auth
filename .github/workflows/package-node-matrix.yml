@@ -26,6 +26,7 @@ on:
           - all
           - "@tigrbl-auth/admin-uix"
           - "@tigrbl-auth/public-uix"
+          - "@tigrbl-auth/rp"
       node-version:
         description: Optional single Node.js version to test.
         required: false
@@ -82,7 +83,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedNode = process.env.SELECTED_NODE || "all";
           const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          const packageDirs = ["apps/admin-uix", "apps/public-uix", "apps/rp"];
           const cells = [];
 
           for (const packagePath of packageDirs) {

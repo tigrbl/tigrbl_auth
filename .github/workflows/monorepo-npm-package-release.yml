@@ -12,6 +12,7 @@ on:
           - all
           - "@tigrbl-auth/admin-uix"
           - "@tigrbl-auth/public-uix"
+          - "@tigrbl-auth/rp"
       version:
         description: Optional version. When set, it must match package.json.
         required: false
@@ -61,7 +62,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedVersion = process.env.SELECTED_VERSION || "";
           const force = process.env.FORCE_TAG === "true";
-          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          const packageDirs = ["apps/admin-uix", "apps/public-uix", "apps/rp"];
           const created = [];
 
           function run(args) {
@@ -131,7 +132,7 @@ jobs:
           }
           const packageName = match[1];
           const version = match[2];
-          const packageDirs = ["apps/admin-uix", "apps/public-uix"];
+          const packageDirs = ["apps/admin-uix", "apps/public-uix", "apps/rp"];
           let found = null;
           for (const packagePath of packageDirs) {
             const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));
