@@ -2,6 +2,7 @@
 
 from .admin_console import (
     ABACAdministration,
+    ADMINISTRATIVE_RESOURCE_VIEW_FEATURES,
     ADMIN_CLIENT_FIELDS,
     ADMIN_NAVIGATION,
     PRIORITY1_ADMIN_CONSOLE_SHELL_FEATURES,
@@ -40,6 +41,8 @@ from .admin_console import (
     TenantJwksPublicationView,
     TransportPosture,
     assert_client_mutation_authority,
+    administrative_resource_views_boundary_integrity,
+    administrative_resource_views_boundary_manifest,
     build_disclosure_rules,
     build_readiness_dashboard,
     build_resource_views,
@@ -69,6 +72,7 @@ from .admin_console import (
 
 __all__ = [
     "ABACAdministration",
+    "ADMINISTRATIVE_RESOURCE_VIEW_FEATURES",
     "ADMIN_CLIENT_FIELDS",
     "ADMIN_NAVIGATION",
     "PRIORITY1_ADMIN_CONSOLE_SHELL_FEATURES",
@@ -107,6 +111,8 @@ __all__ = [
     "TenantJwksPublicationView",
     "TransportPosture",
     "assert_client_mutation_authority",
+    "administrative_resource_views_boundary_integrity",
+    "administrative_resource_views_boundary_manifest",
     "build_disclosure_rules",
     "build_readiness_dashboard",
     "build_resource_views",

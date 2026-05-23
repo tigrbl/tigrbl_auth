@@ -294,6 +294,18 @@ RESOURCE_VIEW_METHODS: dict[str, tuple[str, ...]] = {
     "profile-certification": ("profile.show", "target.list", "claims.show", "evidence.status"),
 }
 
+ADMINISTRATIVE_RESOURCE_VIEW_FEATURES: dict[str, str] = {
+    "feat:uix-tenant-admin-view": "tenants",
+    "feat:uix-client-admin-view": "clients",
+    "feat:uix-identity-admin-view": "identities",
+    "feat:uix-session-admin-view": "sessions",
+    "feat:uix-token-admin-view": "tokens",
+    "feat:uix-consent-admin-view": "consents",
+    "feat:uix-audit-admin-view": "audit",
+    "feat:uix-keys-jwks-admin-view": "keys-jwks",
+    "feat:uix-profile-certification-view": "profile-certification",
+}
+
 RESOURCE_VIEW_STATES: tuple[str, ...] = (
     "empty",
     "loading",
@@ -325,6 +337,39 @@ class ResourceView:
     @property
     def backed(self) -> bool:
         return not self.missing_methods
+
+
+def administrative_resource_views_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature_id: {
+            "view": view_name,
+            "runtime_objects": ["ResourceView", "RESOURCE_VIEW_METHODS", "build_resource_views"],
+            "required_methods": list(RESOURCE_VIEW_METHODS[view_name]),
+            "states": list(RESOURCE_VIEW_STATES),
+        }
+        for feature_id, view_name in ADMINISTRATIVE_RESOURCE_VIEW_FEATURES.items()
+    }
+
+
+def administrative_resource_views_boundary_integrity() -> dict[str, Any]:
+    manifest = administrative_resource_views_boundary_manifest()
+    failures: list[str] = []
+    if len(manifest) != 9:
+        failures.append("priority 1 administrative resource views boundary must track exactly 9 feature rows")
+    for feature_id, view_name in ADMINISTRATIVE_RESOURCE_VIEW_FEATURES.items():
+        if view_name not in RESOURCE_VIEW_METHODS:
+            failures.append(f"{feature_id} maps to missing view {view_name}")
+        elif not RESOURCE_VIEW_METHODS[view_name]:
+            failures.append(f"{view_name} has no required OpenRPC methods")
+    for state in ("empty", "loading", "error", "filtered", "detail"):
+        if state not in RESOURCE_VIEW_STATES:
+            failures.append(f"missing resource view state {state}")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "views": list(ADMINISTRATIVE_RESOURCE_VIEW_FEATURES.values()),
+        "failures": failures,
+    }
 
 
 @dataclass(frozen=True, slots=True)
