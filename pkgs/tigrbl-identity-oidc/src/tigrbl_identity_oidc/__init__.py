@@ -5,6 +5,7 @@ from __future__ import annotations
 from .provider import (
     HostedLoginPage,
     HostedLoginRequest,
+    LoginThemeAssetPolicy,
     LogoutPlan,
     LogoutRequest,
     OidcProviderError,
@@ -12,12 +13,15 @@ from .provider import (
     OidcSession,
     OidcSessionStatus,
     TenantBranding,
+    TenantBrandingRegistry,
     new_login_request,
+    render_login_template,
 )
 
 __all__ = [
     "HostedLoginPage",
     "HostedLoginRequest",
+    "LoginThemeAssetPolicy",
     "LogoutPlan",
     "LogoutRequest",
     "OidcProviderError",
@@ -25,5 +29,7 @@ __all__ = [
     "OidcSession",
     "OidcSessionStatus",
     "TenantBranding",
+    "TenantBrandingRegistry",
     "new_login_request",
+    "render_login_template",
 ]
