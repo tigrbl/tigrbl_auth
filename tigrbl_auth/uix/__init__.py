@@ -22,6 +22,7 @@ from .admin_console import (
     DelegatedAdministration,
     DynamicCondition,
     EntitlementManager,
+    ENTERPRISE_READINESS_FEATURES,
     GovernanceExtensionBoundaryFeature,
     PolicyDecision,
     PolicyEngine,
@@ -71,6 +72,8 @@ from .admin_console import (
     execute_safe_mutation,
     explain_schema_publicly,
     expose_client_record,
+    enterprise_readiness_boundary_integrity,
+    enterprise_readiness_boundary_manifest,
     filter_visible_tenants,
     phase3_admin_policy_boundary_integrity,
     phase3_admin_policy_boundary_manifest,
@@ -79,6 +82,7 @@ from .admin_console import (
     priority1_admin_console_shell_boundary_integrity,
     priority1_admin_console_shell_boundary_manifest,
     redact_schema_for_admin,
+    redact_sensitive_values,
     simulate_policy,
 )
 
@@ -104,6 +108,7 @@ __all__ = [
     "DelegatedAdministration",
     "DynamicCondition",
     "EntitlementManager",
+    "ENTERPRISE_READINESS_FEATURES",
     "GovernanceExtensionBoundaryFeature",
     "PolicyDecision",
     "PolicyEngine",
@@ -153,6 +158,8 @@ __all__ = [
     "execute_safe_mutation",
     "explain_schema_publicly",
     "expose_client_record",
+    "enterprise_readiness_boundary_integrity",
+    "enterprise_readiness_boundary_manifest",
     "filter_visible_tenants",
     "phase3_admin_policy_boundary_integrity",
     "phase3_admin_policy_boundary_manifest",
@@ -161,5 +168,6 @@ __all__ = [
     "priority1_admin_console_shell_boundary_integrity",
     "priority1_admin_console_shell_boundary_manifest",
     "redact_schema_for_admin",
+    "redact_sensitive_values",
     "simulate_policy",
 ]

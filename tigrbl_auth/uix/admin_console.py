@@ -204,6 +204,50 @@ class ReadinessDashboard:
     diagnostics: Mapping[str, Any]
 
 
+ENTERPRISE_READINESS_FEATURES: dict[str, dict[str, tuple[str, ...] | str]] = {
+    "feat:uix-enterprise-readiness-dashboard": {
+        "surface": "readiness-dashboard",
+        "runtime_objects": ("ReadinessDashboard", "UnsafeStateWarning", "build_readiness_dashboard"),
+        "guarded_capabilities": ("healthy-degraded-blocked-status", "section-status", "warning-projection"),
+    },
+    "feat:uix-redacted-config-viewer": {
+        "surface": "redacted-config-viewer",
+        "runtime_objects": ("redact_sensitive_values", "SECRET_TOKENS", "ReadinessDashboard.diagnostics"),
+        "guarded_capabilities": ("secret-redaction", "nested-redaction", "non-secret-preservation"),
+    },
+}
+
+
+def enterprise_readiness_boundary_manifest() -> dict[str, dict[str, Any]]:
+    return {
+        feature_id: {
+            "surface": str(row["surface"]),
+            "runtime_objects": list(row["runtime_objects"]),
+            "guarded_capabilities": list(row["guarded_capabilities"]),
+        }
+        for feature_id, row in ENTERPRISE_READINESS_FEATURES.items()
+    }
+
+
+def enterprise_readiness_boundary_integrity() -> dict[str, Any]:
+    manifest = enterprise_readiness_boundary_manifest()
+    failures: list[str] = []
+    if len(manifest) != 2:
+        failures.append("priority 1 enterprise readiness boundary must track exactly 2 feature rows")
+    for token in ("secret", "password", "token", "client_secret", "jwt_secret"):
+        if token not in SECRET_TOKENS:
+            failures.append(f"missing redaction token {token}")
+    for required_surface in ("readiness-dashboard", "redacted-config-viewer"):
+        if required_surface not in {row["surface"] for row in manifest.values()}:
+            failures.append(f"missing surface {required_surface}")
+    return {
+        "passed": not failures,
+        "feature_count": len(manifest),
+        "surfaces": [row["surface"] for row in manifest.values()],
+        "failures": failures,
+    }
+
+
 @dataclass(frozen=True, slots=True)
 class AdminShellState:
     principal_subject: str
@@ -670,13 +714,20 @@ def redact_sensitive_values(values: Mapping[str, Any]) -> dict[str, Any]:
     redacted: dict[str, Any] = {}
     for key, value in values.items():
         key_text = str(key)
-        if any(token in key_text.lower() for token in SECRET_TOKENS):
+        if _is_sensitive_key(key_text):
             redacted[key_text] = "[REDACTED]"
         elif isinstance(value, Mapping):
             redacted[key_text] = redact_sensitive_values(value)
         else:
             redacted[key_text] = value
     return redacted
+
+
+def _is_sensitive_key(key: str) -> bool:
+    normalized = key.lower().replace("-", "_")
+    if normalized.startswith(("not_", "non_")):
+        return False
+    return any(normalized == token or normalized.endswith(f"_{token}") for token in SECRET_TOKENS)
 
 
 def _warnings_for(readiness: Mapping[str, bool]) -> list[UnsafeStateWarning]:
