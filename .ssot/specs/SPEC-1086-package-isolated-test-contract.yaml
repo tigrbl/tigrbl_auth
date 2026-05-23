@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1086"
+number: 1086
+slug: "package-isolated-test-contract"
+title: "Package Isolated Test Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines package-specific isolated tests across supported Python versions, workspace install rules, and allowed dependency directions."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines package-specific isolated tests across supported Python versions, workspace install rules, and allowed dependency directions.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1071"

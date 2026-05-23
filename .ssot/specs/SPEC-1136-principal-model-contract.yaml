@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1136"
+number: 1136
+slug: "principal-model-contract"
+title: "Principal Model Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines principal base objects, human principals, nonhuman principals, tenant memberships, aliases, and authority roles."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines principal base objects, human principals, nonhuman principals, tenant memberships, aliases, and authority roles.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1072"

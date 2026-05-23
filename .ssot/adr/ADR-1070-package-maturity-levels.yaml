@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1070"
+number: 1070
+slug: "package-maturity-levels"
+title: "Define Package Maturity Levels"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Define L0 through L4 maturity for split identity packages so package status is governed by explicit evidence instead of narrative assessment."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Define L0 through L4 maturity for split identity packages so package status is governed by explicit evidence instead of narrative assessment.

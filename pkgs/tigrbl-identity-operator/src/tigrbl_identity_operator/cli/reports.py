@@ -77,6 +77,7 @@ from tigrbl_auth.repo_truth import (
     package_version,
     workflow_paths,
 )
+from tigrbl_identity_operator.package_maturity import evaluate_package_maturity
 from tigrbl_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 from tigrbl_auth.services._operator_store import OperationContext, operator_state_root, operator_store_summary
 from tigrbl_auth.services.discovery_service import diff_discovery, publish_discovery, validate_discovery
@@ -2484,6 +2485,7 @@ GATE_CALLS = {
     "gate-12-project-tree-layout": lambda root: run_project_tree_layout_check(root, strict=True),
     "gate-15-boundary-enforcement": lambda root: run_boundary_enforcement_check(root, strict=True),
     "gate-18-migration-plan": lambda root: run_migration_plan_check(root, strict=True),
+    "gate-19-package-maturity": lambda root: 0 if evaluate_package_maturity(root, target_tier="T2")["passed"] else 1,
     "gate-20-tests": lambda root: 0 if run_test_execution_gate(root)["passed"] else 1,
     "gate-25-wrapper-hygiene": lambda root: run_wrapper_hygiene_check(root, strict=True),
     "gate-30-contracts": lambda root: 0 if validate_openapi_contract(root).passed and validate_openrpc_contract(root).passed else 1,

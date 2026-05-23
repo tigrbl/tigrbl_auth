@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1133"
+number: 1133
+slug: "rp-logout-contract"
+title: "RP Logout Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines local logout, RP-initiated logout URL construction, provider logout redirect handling, and session cleanup expectations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:14Z"
+references: []
+body: |-
+  Defines local logout, RP-initiated logout URL construction, provider logout redirect handling, and session cleanup expectations.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1114"
+  - "adr:1117"

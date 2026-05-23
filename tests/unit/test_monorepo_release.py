@@ -22,7 +22,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
 
 def test_monorepo_release_accepts_package_version_tag() -> None:
     completed = subprocess.run(
-        [sys.executable, str(SCRIPT), "resolve-tag", "tigrbl-auth==0.3.5"],
+        [sys.executable, str(SCRIPT), "resolve-tag", "tigrbl-auth==0.4.0.dev2"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -30,12 +30,12 @@ def test_monorepo_release_accepts_package_version_tag() -> None:
     )
 
     assert '"name": "tigrbl-auth"' in completed.stdout
-    assert '"tag": "tigrbl-auth==0.3.5"' in completed.stdout
+    assert '"tag": "tigrbl-auth==0.4.0.dev2"' in completed.stdout
 
 
 def test_monorepo_release_rejects_stale_version_for_split_package() -> None:
     completed = subprocess.run(
-        [sys.executable, str(SCRIPT), "resolve-tag", "tigrbl-auth==0.3.4"],
+        [sys.executable, str(SCRIPT), "resolve-tag", "tigrbl-auth==0.4.0.dev1"],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -102,10 +102,10 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
     assert matrix == [
         {
             "name": "tigrbl-identity-oauth",
-            "version": "0.3.5",
+            "version": "0.4.0.dev2",
             "path": "pkgs/tigrbl-identity-oauth",
             "import_root": "tigrbl_identity_oauth",
-            "tag": "tigrbl-identity-oauth==0.3.5",
+            "tag": "tigrbl-identity-oauth==0.4.0.dev2",
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tigrbl-identity-oauth-py312",

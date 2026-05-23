@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1071"
+number: 1071
+slug: "package-release-gates-by-maturity"
+title: "Gate Package Releases By Maturity"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Require release and publication gates to scale with package maturity, including import tests, isolated package tests, integration tests, documentation, and SSOT evidence."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Require release and publication gates to scale with package maturity, including import tests, isolated package tests, integration tests, documentation, and SSOT evidence.

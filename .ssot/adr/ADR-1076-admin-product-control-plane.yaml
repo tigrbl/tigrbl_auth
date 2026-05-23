@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1076"
+number: 1076
+slug: "admin-product-control-plane"
+title: "Admin Is The Product Control Plane"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Define admin as the management plane for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Define admin as the management plane for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy.

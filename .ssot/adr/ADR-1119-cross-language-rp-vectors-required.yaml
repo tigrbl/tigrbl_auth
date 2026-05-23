@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1119"
+number: 1119
+slug: "cross-language-rp-vectors-required"
+title: "Cross-Language RP Vectors Are Required"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: shared RP behavior must be proven by common vectors executed against both Python and TypeScript implementations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:44:03Z"
+references: []
+body: |-
+  Decision: shared RP behavior must be proven by common vectors executed against both Python and TypeScript implementations.
+  
+  Rationale: shared semantics are only meaningful if the implementations produce equivalent decisions for the same protocol inputs.
+  
+  Consequences: the testkit owns vector fixtures, Python tests consume them, and npm tests consume the same canonical vector data.

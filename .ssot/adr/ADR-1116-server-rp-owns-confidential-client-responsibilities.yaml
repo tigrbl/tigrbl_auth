@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1116"
+number: 1116
+slug: "server-rp-owns-confidential-client-responsibilities"
+title: "Server RP Owns Confidential Client Responsibilities"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: the Python server RP package owns callback routes, authenticated code exchange, refresh-token handling, secure cookies, and server-side token/session storage."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:44:00Z"
+references: []
+body: |-
+  Decision: the Python server RP package owns callback routes, authenticated code exchange, refresh-token handling, secure cookies, and server-side token/session storage.
+  
+  Rationale: confidential clients need server-only responsibilities that should not be exposed to browser packages.
+  
+  Consequences: server RP helpers may depend on backend storage and HTTP server integration while the browser package remains secret-free.

@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1127"
+number: 1127
+slug: "rp-pkce-state-and-nonce-contract"
+title: "RP PKCE State And Nonce Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines PKCE S256 generation, state and nonce generation, persistence, expiry, one-time consumption, and failure modes for browser and server RP implementations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP/resource-server/provider-login maturity wave proposal."
+    at: "2026-05-23T05:44:07Z"
+references: []
+body: |-
+  Defines PKCE S256 generation, state and nonce generation, persistence, expiry, one-time consumption, and failure modes for browser and server RP implementations.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1114"
+  - "adr:1115"

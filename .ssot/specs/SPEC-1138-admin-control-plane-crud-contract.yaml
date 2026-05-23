@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1138"
+number: 1138
+slug: "admin-control-plane-crud-contract"
+title: "Admin Control Plane CRUD Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines administrative CRUD surfaces for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines administrative CRUD surfaces for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1076"

@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1115"
+number: 1115
+slug: "browser-rp-is-public-client-only"
+title: "Browser RP Is Public-Client Only"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: the browser RP package must be public-client only. It must not support client secrets, private-key client authentication, server token stores, or unsafe persistent token defaults."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:43:59Z"
+references: []
+body: |-
+  Decision: the browser RP package must be public-client only. It must not support client secrets, private-key client authentication, server token stores, or unsafe persistent token defaults.
+  
+  Rationale: browser code cannot protect confidential credentials. The safe browser baseline is Authorization Code with PKCE, state, nonce, constrained storage, and explicit callback replay protection.
+  
+  Consequences: confidential-client behavior moves to the Python server RP package or another server-side adapter.

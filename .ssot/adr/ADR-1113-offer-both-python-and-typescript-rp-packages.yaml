@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1113"
+number: 1113
+slug: "offer-both-python-and-typescript-rp-packages"
+title: "Offer Both Python And TypeScript RP Packages"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: ship both tigrbl-identity-rp for server/confidential RP use and @tigrbl/identity-rp for browser/public-client RP use."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "RP and resource-server maturity wave proposal."
+    at: "2026-05-23T05:43:56Z"
+references: []
+body: |-
+  Decision: ship both tigrbl-identity-rp for server/confidential RP use and @tigrbl/identity-rp for browser/public-client RP use.
+  
+  Rationale: browser/public clients and backend/confidential clients have different security, storage, and client-authentication constraints. One implementation surface would either weaken browser safety or under-serve confidential web apps.
+  
+  Consequences: shared RP semantics are governed in SSOT, while language/runtime-specific packages implement those semantics through appropriate adapters.

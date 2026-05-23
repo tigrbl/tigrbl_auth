@@ -1,0 +1,20 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1141"
+number: 1141
+slug: "typescript-rp-package-contract"
+title: "TypeScript RP Package Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines browser RP package exports, public-client behavior, PKCE, state/nonce storage, token safety, and no-secret guarantees."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Defines browser RP package exports, public-client behavior, PKCE, state/nonce storage, token safety, and no-secret guarantees.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1077"

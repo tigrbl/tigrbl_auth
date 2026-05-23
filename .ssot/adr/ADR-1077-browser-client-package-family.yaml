@@ -1,0 +1,17 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1077"
+number: 1077
+slug: "browser-client-package-family"
+title: "Browser Client Packages Are First Class"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Establish TypeScript and browser-facing packages as first-class deliverables when identity behavior must execute in browser public clients."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  Establish TypeScript and browser-facing packages as first-class deliverables when identity behavior must execute in browser public clients.
