@@ -1,0 +1,32 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1148"
+number: 1148
+slug: "platform-operator-access-contract"
+title: "Platform Operator Access Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Platform operator access MUST be distinct from platform owner and platform administrator access."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft operator and break-glass boundary for platform-admin API."
+    at: "2026-05-25T05:01:43Z"
+references: []
+body: |-
+  ## Requirements
+  
+  Platform operator access MUST be distinct from platform owner and platform administrator access.
+  
+  Operators MAY inspect operational state, run approved recovery workflows, and perform explicitly delegated operational actions.
+  
+  Operators MUST NOT receive default tenant ownership, tenant-local administrative authority, developer app ownership, or service identity ownership unless a separate authority grant exists.
+  
+  Break-glass operations MUST require explicit reason capture, audit event emission, and environment guardrails.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1078"

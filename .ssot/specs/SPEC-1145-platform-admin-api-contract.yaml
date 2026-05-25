@@ -1,0 +1,34 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1145"
+number: 1145
+slug: "platform-admin-api-contract"
+title: "Platform Admin API Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The platform-admin API MUST expose only platform control-plane capabilities for cross-tenant administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for platform-admin API completion."
+    at: "2026-05-25T05:01:18Z"
+references: []
+body: |-
+  ## Requirements
+  
+  The platform-admin API MUST expose only platform control-plane capabilities for cross-tenant administration.
+  
+  It MUST include tenant lifecycle operations, platform authority assignment, platform operator access controls, and platform audit read/export workflows.
+  
+  It MUST exclude public end-user authentication pages, tenant self-service-only workflows, developer-only OIDC/OAuth app management, service-only machine identity workflows, and resource-validation-only surfaces.
+  
+  The API MUST use the `platform-admin-api` product surface and MUST fail closed when a route, resource, or JSON-RPC method is not assigned to that surface.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1078"
+  - "adr:1120"
+  - "adr:1076"

@@ -1,0 +1,31 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1149"
+number: 1149
+slug: "platform-admin-audit-contract"
+title: "Platform Admin Audit Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Platform-admin mutations MUST emit durable audit events for tenant lifecycle changes, authority grants, authority revocations, authority transfers, operator break-glass actions, and failed privileged attempts."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft audit obligations for platform-admin API workflows."
+    at: "2026-05-25T05:01:52Z"
+references: []
+body: |-
+  ## Requirements
+  
+  Platform-admin mutations MUST emit durable audit events for tenant lifecycle changes, authority grants, authority revocations, authority transfers, operator break-glass actions, and failed privileged attempts.
+  
+  Audit events MUST include actor, tenant scope when applicable, target identifier, operation, outcome, timestamp, and reason where required.
+  
+  Audit read/export surfaces MUST be available to platform-authorized principals and MUST NOT leak tenant-local private data beyond the authorized platform audit scope.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1078"
+  - "adr:1120"

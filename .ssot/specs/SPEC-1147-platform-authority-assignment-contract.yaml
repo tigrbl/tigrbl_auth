@@ -1,0 +1,33 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1147"
+number: 1147
+slug: "platform-authority-assignment-contract"
+title: "Platform Authority Assignment Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Platform authority assignment MUST define how platform owners, platform administrators, platform operators, tenant owners, and tenant administrators receive and lose authority."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for issuing and revoking platform/tenant authority."
+    at: "2026-05-25T05:01:34Z"
+references: []
+body: |-
+  ## Requirements
+  
+  Platform authority assignment MUST define how platform owners, platform administrators, platform operators, tenant owners, and tenant administrators receive and lose authority.
+  
+  Tenant ownership issuance MUST be explicit during or after tenant creation and MUST be auditable.
+  
+  Authority grants MUST be scoped by tenant where applicable and MUST distinguish platform-wide authority from tenant-local authority.
+  
+  Revocation, transfer, and downgrade operations MUST preserve at least one valid tenant owner unless a platform break-glass policy explicitly authorizes otherwise.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1078"
+  - "adr:1076"
