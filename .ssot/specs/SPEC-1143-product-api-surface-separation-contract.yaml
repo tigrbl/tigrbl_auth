@@ -17,9 +17,13 @@ status_notes:
     note: "Initial contract for the product-surface packaging slice."
     status: "draft"
   -
-    status: "draft"
-    note: "Linked product-surface separation to the resource-validation public-rest-only contract."
     at: "2026-05-25T05:30:11Z"
+    note: "Linked product-surface separation to the resource-validation public-rest-only contract."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked product-surface separation to the public API hosted-login contract."
+    at: "2026-05-25T05:34:11Z"
 references: []
 body: |-
   ## Scope
@@ -44,3 +48,4 @@ adr_ids:
   - "adr:1120"
   - "adr:1076"
   - "adr:1082"
+  - "adr:1083"

@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1167"
+number: 1167
+slug: "public-uix-composition-contract"
+title: "Public UIX Composition Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public UIX app must consume only the public API base URL and render end-user authentication, consent, registration, password recovery, callback, MFA, profile, and hosted-login support views. It must not call admin, tenant lifecycle, developer, service-admin, diagnostics, system, or RPC endpoints. Tenant branding and white-label presentation must be layered on top of the public API contract without granting control-plane authority to browser clients."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for public UIX composition and public API client boundary."
+    at: "2026-05-25T05:34:00Z"
+references: []
+body: |-
+  The public UIX app must consume only the public API base URL and render end-user authentication, consent, registration, password recovery, callback, MFA, profile, and hosted-login support views. It must not call admin, tenant lifecycle, developer, service-admin, diagnostics, system, or RPC endpoints. Tenant branding and white-label presentation must be layered on top of the public API contract without granting control-plane authority to browser clients.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"

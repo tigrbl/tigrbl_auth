@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1083"
+number: 1083
+slug: "public-api-owns-hosted-login-and-end-user-protocol-flows"
+title: "Public API Owns Hosted Login and End-User Protocol Flows"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public API front door owns browser-facing OAuth/OIDC and white-label hosted-login support for end users. It exposes login, authorization, token, logout, registration, consent, recovery, discovery, JWKS, and public helper routes needed by public UIX and tenant-branded clients. It must not expose admin resources, tenant lifecycle administration, diagnostics, or RPC/control-plane methods."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for public API and public UIX contract completion planning."
+    at: "2026-05-25T05:33:46Z"
+references: []
+body: |-
+  The public API front door owns browser-facing OAuth/OIDC and white-label hosted-login support for end users. It exposes login, authorization, token, logout, registration, consent, recovery, discovery, JWKS, and public helper routes needed by public UIX and tenant-branded clients. It must not expose admin resources, tenant lifecycle administration, diagnostics, or RPC/control-plane methods.

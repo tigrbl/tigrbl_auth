@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1075"
 number: 1075
@@ -11,7 +11,11 @@ tags: []
 summary: "The public UIX boundary MUST define the public end-user browser-facing authentication surface for `tigrbl_auth`."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Linked public UIX boundary to public API hosted-login and surface separation decisions."
+    at: "2026-05-25T05:34:15Z"
 references: []
 body: |-
   ## Requirements
@@ -33,4 +37,6 @@ body: |-
   
   The public UIX boundary MUST remain distinct from admin UIX and from backend API-only concerns.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"
