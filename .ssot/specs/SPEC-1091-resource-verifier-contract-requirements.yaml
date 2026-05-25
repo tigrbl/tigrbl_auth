@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Added resource-validation API surface requirements."
     at: "2026-05-25T02:56:48Z"
+    note: "Added resource-validation API surface requirements."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked verifier contract to the read-only resource-validation API decision."
+    at: "2026-05-25T05:30:01Z"
 references: []
 body: |-
   ## Overview
@@ -43,3 +47,4 @@ spec_kind: "normative"
 adr_ids:
   - "adr:1067"
   - "adr:1120"
+  - "adr:1082"

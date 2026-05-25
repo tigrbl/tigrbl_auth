@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Initial contract for the product-surface packaging slice."
     at: "2026-05-25T02:55:09Z"
+    note: "Initial contract for the product-surface packaging slice."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked product-surface separation to the resource-validation public-rest-only contract."
+    at: "2026-05-25T05:30:11Z"
 references: []
 body: |-
   ## Scope
@@ -39,3 +43,4 @@ spec_kind: "normative"
 adr_ids:
   - "adr:1120"
   - "adr:1076"
+  - "adr:1082"

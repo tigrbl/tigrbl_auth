@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1082"
+number: 1082
+slug: "resource-validation-api-read-only-validation-infrastructure"
+title: "Resource Validation API Is Read-Only Validation Infrastructure"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The resource-validation API front door exists for protected APIs, gateways, middleware, and resource-server adapters that need validation metadata or token introspection. It must remain public-rest-only and must not expose human login, consent, registration, admin resources, diagnostics, or RPC/control-plane methods."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for resource-validation API product completion planning."
+    at: "2026-05-25T05:29:34Z"
+references: []
+body: |-
+  The resource-validation API front door exists for protected APIs, gateways, middleware, and resource-server adapters that need validation metadata or token introspection. It must remain public-rest-only and must not expose human login, consent, registration, admin resources, diagnostics, or RPC/control-plane methods.

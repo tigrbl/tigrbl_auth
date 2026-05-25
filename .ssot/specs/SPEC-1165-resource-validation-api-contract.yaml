@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1165"
+number: 1165
+slug: "resource-validation-api-contract"
+title: "Resource Validation API Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The resource-validation API package must assemble only the resource-validation-api product surface. The surface exposes JWKS, tenant JWKS, OIDC discovery, tenant OIDC discovery, OAuth protected-resource metadata, and token introspection for resource servers and gateways. It must not expose login, authorize, consent, registration, admin resources, diagnostics, or RPC methods. Resource-server packages and middleware consume this front door for issuer metadata, key material, protected-resource metadata, and introspection without gaining control-plane authority."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for resource-validation API completion."
+    at: "2026-05-25T05:29:43Z"
+references: []
+body: |-
+  The resource-validation API package must assemble only the resource-validation-api product surface. The surface exposes JWKS, tenant JWKS, OIDC discovery, tenant OIDC discovery, OAuth protected-resource metadata, and token introspection for resource servers and gateways. It must not expose login, authorize, consent, registration, admin resources, diagnostics, or RPC methods. Resource-server packages and middleware consume this front door for issuer metadata, key material, protected-resource metadata, and introspection without gaining control-plane authority.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1082"
+  - "adr:1120"
+  - "adr:1067"
+  - "adr:1118"

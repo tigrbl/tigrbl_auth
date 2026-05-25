@@ -20,6 +20,10 @@ status_notes:
     at: "2026-05-25T02:56:49Z"
     note: "Bound resource-server validation to resource-validation API surface."
     status: "draft"
+  -
+    status: "draft"
+    note: "Linked resource-server contract to the resource-validation API front door."
+    at: "2026-05-25T05:30:06Z"
 references: []
 body: |-
   Defines protected API access-token validation, issuer/audience/scope checks, JWKS cache, introspection fallback, DPoP validation, mTLS binding validation, and protected-resource metadata responsibilities.
@@ -29,3 +33,4 @@ spec_kind: "normative"
 adr_ids:
   - "adr:1118"
   - "adr:1120"
+  - "adr:1082"
