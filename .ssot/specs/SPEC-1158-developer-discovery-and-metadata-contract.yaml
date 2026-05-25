@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1158"
+number: 1158
+slug: "developer-discovery-and-metadata-contract"
+title: "Developer Discovery and Metadata Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs discovery and metadata helper routes exposed to developer workflows."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines developer-visible discovery and metadata helper boundaries."
+    at: "2026-05-25T05:16:59Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs discovery and metadata helper routes exposed to developer workflows.
+  
+  ## Requirements
+  
+  Developer API MAY expose read-only issuer, tenant, OAuth authorization-server, and JWKS metadata needed to configure apps and clients. These helpers MUST NOT expose login, authorization, token issuance, tenant lifecycle, platform authority, service identity, diagnostics, or private key material.
+  
+  Metadata helper responses MUST be consistent with the effective product surface and must not imply that disabled runtime flows are available.
+  
+  ## Verification
+  
+  Verification MUST prove developer metadata helpers are present where configured, exclude forbidden public and admin surfaces, and do not leak private or cross-tenant material.
+spec_kind: "operational"
+adr_ids:
+  - "adr:1080"
+  - "adr:1120"

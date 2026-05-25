@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1080"
+number: 1080
+slug: "developer-api-app-oauth-client-self-service"
+title: "Developer API Owns App and OAuth Client Self-Service"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Developer API is the delegated developer control plane for tenant-scoped app registration, OAuth/OIDC client registration, client metadata, redirect/logout URI management, client authentication configuration, client secrets, and client JWKS administration."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for developer-api product completion planning."
+    at: "2026-05-25T05:16:23Z"
+references: []
+body: |-
+  ## Decision
+  
+  Developer API is the delegated developer control plane for tenant-scoped app registration, OAuth/OIDC client registration, client metadata, redirect/logout URI management, client authentication configuration, client secrets, and client JWKS administration.
+  
+  ## Consequences
+  
+  Developer API MUST NOT expose platform tenant lifecycle, cross-tenant authority assignment, tenant-admin identity management, service identity administration, or human login/authorization flows. Developer API deployments MUST enforce tenant and app ownership before app/client read or mutation and fail closed for cross-surface operations.

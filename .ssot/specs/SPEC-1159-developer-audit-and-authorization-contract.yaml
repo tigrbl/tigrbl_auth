@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1159"
+number: 1159
+slug: "developer-audit-and-authorization-contract"
+title: "Developer Audit and Authorization Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs developer authorization and audit behavior for developer-api operations."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines developer authority, ownership checks, and audit requirements."
+    at: "2026-05-25T05:17:09Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs developer authorization and audit behavior for developer-api operations.
+  
+  ## Requirements
+  
+  Developer API MUST bind each operation to an actor, tenant namespace, app/client ownership context, and effective developer authority. Mutations and sensitive reads MUST evaluate authorization before disclosure or state change.
+  
+  Developer operations MUST emit audit events that identify actor, tenant, app/client target, operation, authorization decision, request time, result, and failure reason where applicable.
+  
+  ## Verification
+  
+  Verification MUST prove developer operations enforce tenant/app ownership, deny cross-surface operations, produce audit records for allowed and denied sensitive operations, and prevent cross-tenant audit visibility.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1080"
+  - "adr:1076"

@@ -17,9 +17,13 @@ status_notes:
     note: "Define app registration and app-owned client ownership."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Bound app registration workflows to developer product surface."
     at: "2026-05-25T02:56:44Z"
+    note: "Bound app registration workflows to developer product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked app registration and client ownership to developer API self-service decision."
+    at: "2026-05-25T05:17:15Z"
 references: []
 body: |-
   ## Scope
@@ -42,3 +46,4 @@ adr_ids:
   - "adr:1106"
   - "adr:1110"
   - "adr:1120"
+  - "adr:1080"

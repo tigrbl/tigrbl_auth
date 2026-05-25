@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1156"
+number: 1156
+slug: "developer-app-registration-contract"
+title: "Developer App Registration Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs developer self-service application registration and ownership."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines developer app registration and ownership workflows."
+    at: "2026-05-25T05:16:43Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs developer self-service application registration and ownership.
+  
+  ## Requirements
+  
+  Authorized tenant developers MAY create, inspect, update, disable, enable, and retire tenant-scoped application records. App ownership MUST be scoped to a tenant and MUST not imply platform authority.
+  
+  App records SHOULD provide the ownership boundary for OAuth/OIDC clients, redirect URI policy, logout URI policy, display metadata, and app-level audit context.
+  
+  ## Verification
+  
+  Verification MUST prove developer app operations are tenant-scoped, ownership-bound, auditable, and denied across tenant or platform authority boundaries.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1080"
+  - "adr:1106"
