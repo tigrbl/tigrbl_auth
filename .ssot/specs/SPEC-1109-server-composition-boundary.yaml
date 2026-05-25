@@ -8,55 +8,40 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs `tigrbl-identity-server`."
+summary: "This specification governs `tigrbl-identity-server` and shared Tigrbl Auth server composition."
 supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define Tigrbl app composition package ownership."
     at: "2026-05-18T08:20:36Z"
+    note: "Define Tigrbl app composition package ownership."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Extended server composition boundary for product API assembly."
+    at: "2026-05-25T02:56:41Z"
 references: []
 body: |-
   ## Scope
   
-  This specification governs `tigrbl-identity-server`.
+  This specification governs `tigrbl-identity-server` and shared Tigrbl Auth server composition.
   
   ## First-Class Objects
   
-  The package MUST define:
-  
-  - `IdentityApp`
-  - `AppFactory`
-  - `GatewayFactory`
-  - `PluginInstaller`
-  - `RouteManifest`
-  - `SurfaceManifest`
-  - `PublicRestSurface`
-  - `AdminRpcSurface`
-  - `DiagnosticsSurface`
-  - `ProtocolPublisher`
-  - `OpenApiPublisher`
-  - `OpenRpcPublisher`
-  - `DiscoveryPublisher`
-  - `ServerSettings`
+  The package MUST define the app composition abstractions needed for public, admin, diagnostics, and product-specific API assembly, including `ProductSurfaceRegistry`, `ProductApiAssembly`, `IdentityApp`, `AppFactory`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, and `ServerSettings`.
   
   ## Requirements
   
-  Server builds the ASGI/Tigrbl app. It owns route/surface mounting, gateway and
-  plugin construction, protocol publisher binding, OpenAPI/OpenRPC projection,
-  and default server settings.
+  Server composition owns route/surface mounting, gateway and plugin construction, protocol publisher binding, OpenAPI/OpenRPC projection, and default server settings.
   
-  Server MUST NOT own process runner behavior, CLI/operator workflows, or
-  testkit fixtures.
+  Product API packages MAY be thin wrappers over the shared app factory, but the selected product surface MUST filter public capabilities, admin resources, admin router groups, and OpenRPC methods before runtime exposure.
   
-  Server MAY depend on storage as the default persistence adapter, but the
-  composition interface SHOULD allow alternate storage adapters.
+  Server MUST NOT own process runner behavior, CLI/operator workflows, or testkit fixtures.
   
   ## Verification
   
-  Verification MUST prove the server can build the default app and expose route,
-  surface, and publisher manifests without importing operator or testkit.
+  Verification MUST prove the server can build default and product-specific apps and expose route, surface, publisher, and product-surface manifests without importing operator or testkit.
 spec_kind: "normative"
 adr_ids:
   - "adr:1102"
+  - "adr:1120"

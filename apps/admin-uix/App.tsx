@@ -11,6 +11,7 @@ import { Tenant } from './types';
 import { backendService } from './services/backendService';
 import { filterVisibleTenants, loadDelegatedAdminScope } from './services/governancePolicy';
 import { adminAuthService, type AdminSessionState } from './services/adminAuthService';
+import { humanizeError } from './services/errorMessages';
 
 type AuthMode = 'login' | 'forgot' | 'reset' | 'change-password';
 
@@ -70,7 +71,7 @@ const App: React.FC = () => {
         }
         await refresh_tenants();
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to establish admin session.';
+        const message = humanizeError(error, 'Failed to establish admin session.');
         if (message.toLowerCase().includes('session') || message.toLowerCase().includes('administrator')) {
           set_auth_mode('login');
           set_auth_error(message);
@@ -107,7 +108,7 @@ const App: React.FC = () => {
         await refresh_tenants();
       }
     } catch (error) {
-      set_auth_error(error instanceof Error ? error.message : 'Failed to authenticate administrator.');
+      set_auth_error(humanizeError(error, 'Failed to authenticate administrator.'));
     } finally {
       set_auth_loading(false);
       set_loading(false);
@@ -122,7 +123,7 @@ const App: React.FC = () => {
       set_debug_reset_token(response.debug_reset_token ?? null);
       set_auth_mode('reset');
     } catch (error) {
-      set_auth_error(error instanceof Error ? error.message : 'Failed to request password reset.');
+      set_auth_error(humanizeError(error, 'Failed to request password reset.'));
     } finally {
       set_auth_loading(false);
     }
@@ -136,7 +137,7 @@ const App: React.FC = () => {
       set_debug_reset_token(null);
       set_auth_mode('login');
     } catch (error) {
-      set_auth_error(error instanceof Error ? error.message : 'Failed to reset password.');
+      set_auth_error(humanizeError(error, 'Failed to reset password.'));
     } finally {
       set_auth_loading(false);
     }
@@ -151,7 +152,7 @@ const App: React.FC = () => {
       set_auth_mode('login');
       await refresh_tenants();
     } catch (error) {
-      set_auth_error(error instanceof Error ? error.message : 'Failed to change password.');
+      set_auth_error(humanizeError(error, 'Failed to change password.'));
     } finally {
       set_auth_loading(false);
     }
@@ -169,7 +170,7 @@ const App: React.FC = () => {
     return (
       <div className="fixed inset-0 bg-[#1a1a1a] flex flex-col items-center justify-center">
         <div className="w-12 h-12 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-8 text-white font-bold tracking-[4px] text-xs animate-pulse uppercase">Booting TIGRBL_AUTH.CORE</p>
+        <p className="mt-8 text-white font-bold tracking-[4px] text-xs animate-pulse uppercase">Loading admin console</p>
       </div>
     );
   }
@@ -210,7 +211,7 @@ const App: React.FC = () => {
     return (
       <div className="fixed inset-0 bg-[#1a1a1a] flex flex-col items-center justify-center px-8">
         <div className="w-12 h-12 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-8 text-white font-bold tracking-[4px] text-xs animate-pulse uppercase">Boot Sequence Interrupted</p>
+        <p className="mt-8 text-white font-bold tracking-[4px] text-xs animate-pulse uppercase">Admin console unavailable</p>
         <p className="mt-4 text-[#d0d0cc] text-sm text-center max-w-md">
           {bootstrap_error ?? 'A tenant could not be selected. Verify backend authentication and tenant data, then retry.'}
         </p>
@@ -286,7 +287,7 @@ const App: React.FC = () => {
              <div className={`w-6 h-6 flex items-center justify-center transition-colors ${is_lockdown ? 'bg-[#ff2d00] text-[#1a1a1a]' : 'bg-[#1a1a1a] text-white'}`}>
                 <Icons.Shield />
              </div>
-             <span>TIGRBL_AUTH.ADMIN {is_lockdown && '[EMERGENCY_LOCKDOWN]'}</span>
+             <span>Tigrbl Auth Admin {is_lockdown && '[LOCKDOWN]'}</span>
           </div>
 
           <div className="flex items-center space-x-12">
@@ -318,7 +319,7 @@ const App: React.FC = () => {
             </button>
             <div className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest">
                 <div className={`w-2 h-2 rounded-full animate-pulse ${is_lockdown ? 'bg-[#ff2d00]' : 'bg-[#00ffcc]'}`}></div>
-                <span>Status: {is_lockdown ? 'ISOLATED' : 'SESSION ACTIVE'}</span>
+                <span>Status: {is_lockdown ? 'LOCKDOWN' : 'SIGNED IN'}</span>
             </div>
           </div>
         </header>
@@ -374,12 +375,12 @@ const AdminAuthShell: React.FC<AdminAuthShellProps> = ({
           </h1>
           <p className="text-sm text-[#55554e]">
             {mode === 'forgot'
-              ? 'Request a one-time reset for an administrator identity.'
+              ? 'Request a one-time password reset for an administrator account.'
               : mode === 'reset'
-                ? 'Complete the one-time administrator password reset.'
+                ? 'Complete the administrator password reset.'
                 : mode === 'change-password'
-                  ? 'A password rotation is required before the admin console can continue.'
-                  : 'Authenticate with your administrator identity to enter the control plane.'}
+                  ? 'A password change is required before the admin console can continue.'
+                  : 'Sign in with an administrator account.'}
           </p>
         </div>
         {error && <div className="border border-[#ff2d00] bg-[#fff3f0] px-4 py-3 text-sm text-[#7a1e00]">{error}</div>}

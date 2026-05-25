@@ -107,7 +107,13 @@ def get_rpc_method_registry() -> dict[str, dict[str, Any]]:
 def iter_active_rpc_methods(deployment: Any) -> list[RpcMethodDefinition]:
     active: list[RpcMethodDefinition] = []
     for item in list_rpc_methods():
-        if hasattr(deployment, "surface_enabled") and not deployment.surface_enabled(item.surface_set):
+        if hasattr(deployment, "surface_enabled") and not deployment.surface_enabled(
+            item.surface_set
+        ):
+            continue
+        if hasattr(deployment, "method_enabled") and not deployment.method_enabled(
+            item.name
+        ):
             continue
         if item.required_flags and hasattr(deployment, "flag_enabled"):
             if not all(deployment.flag_enabled(flag) for flag in item.required_flags):
@@ -156,7 +162,9 @@ def invoke_rpc_method(
 
     def runner() -> None:
         try:
-            result_box["result"] = asyncio.run(invoke_rpc_method_async(name, params, context=context))
+            result_box["result"] = asyncio.run(
+                invoke_rpc_method_async(name, params, context=context)
+            )
         except BaseException as exc:  # pragma: no cover - defensive surfacing
             error_box["error"] = exc
 

@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1078"
 number: 1078
@@ -11,22 +11,24 @@ tags: []
 summary: "The repository MUST define authoritative applicability and scope classifications for governed surfaces and targets."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Added product API surfaces to applicability classification."
+    at: "2026-05-25T02:56:40Z"
 references: []
 body: |-
   ## Requirements
-  
+
   The repository MUST define authoritative applicability and scope classifications for governed surfaces and targets.
-  
-  The authoritative model MUST support at least:
-  - implemented
-  - planned
-  - not-applicable
-  - out-of-scope
-  - adjacent-but-non-authoritative
-  
-  Informative reports and projections MUST derive their status vocabulary from the authoritative classification model and MUST NOT use ambiguous empty-state placeholders as if they were normative truth.
-  
-  The classification model MUST be usable across admin API, public API, admin UIX, public UIX, runtime, operator, and release-facing surfaces.
+
+  The authoritative model MUST support at least: implemented, planned, not-applicable, out-of-scope, and adjacent-but-non-authoritative.
+
+  The classification model MUST distinguish primitive implementation surfaces such as `public-rest`, `admin-rpc`, and `diagnostics` from deployable product surfaces such as `public-api`, `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, and `resource-validation-api`.
+
+  Informative reports and projections MUST derive status vocabulary from the authoritative classification model and MUST NOT use ambiguous empty-state placeholders as normative truth.
+
+  The model MUST be usable across API packages, UIX packages, runtime, operator, and release-facing surfaces.
 spec_kind: "governance"
-adr_ids: []
+adr_ids:
+  - "adr:1120"

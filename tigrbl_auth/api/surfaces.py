@@ -16,7 +16,9 @@ from tigrbl_auth.api.rest.routers.authorize import api as authorize_api
 from tigrbl_auth.api.rest.routers.admin_auth import api as admin_auth_api
 from tigrbl_auth.api.rest.routers.admin_identities import api as admin_identities_api
 from tigrbl_auth.api.rest.routers.admin_tenants import api as admin_tenants_api
-from tigrbl_auth.api.rest.routers.device_authorization import api as device_authorization_api
+from tigrbl_auth.api.rest.routers.device_authorization import (
+    api as device_authorization_api,
+)
 from tigrbl_auth.api.rest.routers.login import api as login_api
 from tigrbl_auth.api.rest.routers.logout import api as logout_api
 from tigrbl_auth.api.rest.routers.par import api as par_api
@@ -24,7 +26,10 @@ from tigrbl_auth.api.rest.routers.register import api as register_api
 from tigrbl_auth.api.rest.routers.revoke import api as revoke_api
 from tigrbl_auth.api.rest.routers.token import api as token_api
 from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.standards.oidc.discovery import include_jwks, include_openid_configuration
+from tigrbl_auth.standards.oidc.discovery import (
+    include_jwks,
+    include_openid_configuration,
+)
 from tigrbl_auth.standards.oidc.userinfo import include_oidc_userinfo
 from tigrbl_auth.standards.oauth2.introspection import include_introspection_endpoint
 from tigrbl_auth.standards.oauth2.rfc8414 import include_rfc8414
@@ -70,9 +75,32 @@ TABLE_RESOURCES = [
     PushedAuthorizationRequest,
 ]
 
+ADMIN_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
+    {"mount_group": "admin_auth", "router": admin_auth_api},
+    {"mount_group": "admin_tenants", "router": admin_tenants_api},
+    {"mount_group": "admin_identities", "router": admin_identities_api},
+)
 
-def admin_resource_path_prefixes() -> tuple[str, ...]:
-    return tuple(f"/{resource.__name__.lower()}" for resource in TABLE_RESOURCES)
+
+def _admin_table_resources(
+    deployment: ResolvedDeployment | None = None,
+) -> tuple[type[Any], ...]:
+    if deployment is None or getattr(deployment, "product_surface", None) is None:
+        return tuple(TABLE_RESOURCES)
+    return tuple(
+        resource
+        for resource in TABLE_RESOURCES
+        if deployment.admin_resource_enabled(resource.__name__)
+    )
+
+
+def admin_resource_path_prefixes(
+    deployment: ResolvedDeployment | None = None,
+) -> tuple[str, ...]:
+    return tuple(
+        f"/{resource.__name__.lower()}"
+        for resource in _admin_table_resources(deployment)
+    )
 
 
 def _path_has_prefix(path: str, prefix: str) -> bool:
@@ -87,12 +115,17 @@ def _requires_admin_security_metadata(
     diagnostics_prefix: str,
 ) -> bool:
     if deployment.surface_enabled("admin-rpc") and any(
-        _path_has_prefix(path, prefix) for prefix in admin_resource_path_prefixes()
+        _path_has_prefix(path, prefix)
+        for prefix in admin_resource_path_prefixes(deployment)
     ):
         return True
-    if deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, rpc_prefix):
+    if deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
+        path, rpc_prefix
+    ):
         return True
-    if deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, diagnostics_prefix):
+    if deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(
+        path, diagnostics_prefix
+    ):
         return True
     return False
 
@@ -125,12 +158,29 @@ def _attach_admin_security_metadata(
         )
     router._routes[:] = secured_routes
 
+
 PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
-    {"mount_group": "admin_auth", "capabilities": ("admin-auth",), "router": admin_auth_api},
-    {"mount_group": "admin_tenants", "capabilities": ("admin-auth",), "router": admin_tenants_api},
-    {"mount_group": "admin_identities", "capabilities": ("admin-auth",), "router": admin_identities_api},
+    {
+        "mount_group": "admin_auth",
+        "capabilities": ("admin-auth",),
+        "router": admin_auth_api,
+    },
+    {
+        "mount_group": "admin_tenants",
+        "capabilities": ("admin-auth",),
+        "router": admin_tenants_api,
+    },
+    {
+        "mount_group": "admin_identities",
+        "capabilities": ("admin-auth",),
+        "router": admin_identities_api,
+    },
     {"mount_group": "login", "capabilities": ("login",), "router": login_api},
-    {"mount_group": "authorize", "capabilities": ("authorize",), "router": authorize_api},
+    {
+        "mount_group": "authorize",
+        "capabilities": ("authorize",),
+        "router": authorize_api,
+    },
     {"mount_group": "token", "capabilities": ("token",), "router": token_api},
     {
         "mount_group": "register",
@@ -197,16 +247,27 @@ def build_surface_api(
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
-    if deployment.surface_enabled("admin-rpc") or deployment.flag_enabled("surface_rpc_enabled"):
-        router.include_tables(TABLE_RESOURCES)
-        router.include_router(admin_auth_api)
-        router.include_router(admin_tenants_api)
-        router.include_router(admin_identities_api)
+    if deployment.surface_enabled("admin-rpc") or deployment.flag_enabled(
+        "surface_rpc_enabled"
+    ):
+        admin_resources = _admin_table_resources(deployment)
+        if admin_resources:
+            router.include_tables(admin_resources)
+        for entry in ADMIN_ROUTER_BINDINGS:
+            if deployment.admin_rest_group_enabled(str(entry["mount_group"])):
+                router.include_router(entry["router"])
     if deployment.surface_enabled("public-rest"):
         for entry in PUBLIC_ROUTER_BINDINGS:
-            if entry["router"] in {admin_auth_api, admin_tenants_api, admin_identities_api}:
+            if entry["router"] in {
+                admin_auth_api,
+                admin_tenants_api,
+                admin_identities_api,
+            }:
                 continue
-            if any(deployment.capability_enabled(capability) for capability in entry["capabilities"]):
+            if any(
+                deployment.capability_enabled(capability)
+                for capability in entry["capabilities"]
+            ):
                 router.include_router(entry["router"])
     return router
 
@@ -217,6 +278,13 @@ surface_api = build_surface_api()
 def runtime_surface_binding_manifest() -> dict[str, Any]:
     return {
         "table_resources": [resource.__name__ for resource in TABLE_RESOURCES],
+        "admin_router_bindings": [
+            {
+                "mount_group": str(entry["mount_group"]),
+                "router_module": getattr(entry["router"], "__module__", "unknown"),
+            }
+            for entry in ADMIN_ROUTER_BINDINGS
+        ],
         "router_bindings": [
             {
                 "mount_group": str(entry["mount_group"]),
@@ -246,7 +314,10 @@ def include_public_runtime_publishers(
     if not deployment.surface_enabled("public-rest"):
         return
     for entry in PUBLIC_PUBLISHER_BINDINGS:
-        if any(deployment.capability_enabled(capability) for capability in entry["capabilities"]):
+        if any(
+            deployment.capability_enabled(capability)
+            for capability in entry["capabilities"]
+        ):
             include_fn: Callable[[TigrblApp], None] = entry["include"]
             include_fn(app)
 
@@ -286,6 +357,7 @@ def attach_runtime_surfaces(
 
 
 __all__ = [
+    "ADMIN_ROUTER_BINDINGS",
     "TABLE_RESOURCES",
     "PUBLIC_ROUTER_BINDINGS",
     "PUBLIC_PUBLISHER_BINDINGS",

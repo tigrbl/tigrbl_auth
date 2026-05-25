@@ -11,10 +11,19 @@ tags: []
 summary: "Defines administrative CRUD surfaces for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    at: "2026-05-25T02:56:43Z"
+    note: "Assigned admin CRUD ownership to product API surfaces."
+    status: "draft"
 references: []
 body: |-
   Defines administrative CRUD surfaces for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy.
+  
+  Administrative CRUD MUST be assigned to the narrowest product API that owns the workflow. Platform tenant lifecycle belongs to platform-admin API. Tenant identities, tenant admins, tenant JWKS, tenant-local clients, tenant-local policy, consent, sessions, and audit belong to tenant-admin API unless platform authority is required. OIDC/OAuth app and client registration belongs to developer API. Service identities, service keys, API keys, workload credentials, and token validation testing belong to service-admin API.
+  
+  Broad admin CRUD remains a compatibility umbrella only when explicitly deployed.
 spec_kind: "operational"
 adr_ids:
   - "adr:1076"
+  - "adr:1120"

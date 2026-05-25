@@ -11,7 +11,10 @@ from dataclasses import dataclass, field
 from typing import Any, Final
 
 from .feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
-from .surfaces import all_surface_capability_registry, route_registry as surface_route_registry
+from .surfaces import (
+    all_surface_capability_registry,
+    route_registry as surface_route_registry,
+)
 from tigrbl_auth.api.rpc import get_rpc_method_registry
 
 # ---------------------------------------------------------------------------
@@ -125,6 +128,170 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
         "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": True,
     },
+    "public-api": {
+        "surface_public_enabled": True,
+        "surface_admin_enabled": False,
+        "surface_rpc_enabled": False,
+        "surface_diagnostics_enabled": False,
+    },
+    "platform-admin-api": {
+        "surface_public_enabled": False,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": True,
+        "surface_diagnostics_enabled": False,
+    },
+    "tenant-admin-api": {
+        "surface_public_enabled": False,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": True,
+        "surface_diagnostics_enabled": False,
+    },
+    "developer-api": {
+        "surface_public_enabled": True,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": True,
+        "surface_diagnostics_enabled": False,
+    },
+    "service-admin-api": {
+        "surface_public_enabled": True,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": True,
+        "surface_diagnostics_enabled": False,
+    },
+    "resource-validation-api": {
+        "surface_public_enabled": True,
+        "surface_admin_enabled": False,
+        "surface_rpc_enabled": False,
+        "surface_diagnostics_enabled": False,
+    },
+}
+
+PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
+    "public-api": {
+        "surface_sets": ("public-rest",),
+        "allowed_capabilities": None,
+        "admin_resources": (),
+        "admin_rest_groups": (),
+        "rpc_method_prefixes": (),
+    },
+    "platform-admin-api": {
+        "surface_sets": ("admin-rpc",),
+        "allowed_capabilities": (),
+        "admin_resources": (
+            "Tenant",
+            "User",
+            "AuthSession",
+            "AuditEvent",
+            "KeyRotationEvent",
+        ),
+        "admin_rest_groups": ("admin_auth", "admin_tenants", "admin_identities"),
+        "rpc_method_prefixes": (
+            "audit.",
+            "discovery.",
+            "flow.",
+            "identity.",
+            "profile.",
+            "rpc.",
+            "session.",
+            "target.",
+            "tenant.",
+        ),
+    },
+    "tenant-admin-api": {
+        "surface_sets": ("admin-rpc",),
+        "allowed_capabilities": (),
+        "admin_resources": (
+            "User",
+            "Client",
+            "ClientRegistration",
+            "Consent",
+            "AuthSession",
+            "AuditEvent",
+            "KeyRotationEvent",
+        ),
+        "admin_rest_groups": ("admin_auth", "admin_identities"),
+        "rpc_method_prefixes": (
+            "audit.",
+            "client.",
+            "client.registration.",
+            "consent.",
+            "discovery.",
+            "identity.",
+            "jwks.",
+            "keys.",
+            "profile.",
+            "rpc.",
+            "session.",
+            "target.",
+            "tenant.keys.",
+        ),
+    },
+    "developer-api": {
+        "surface_sets": ("public-rest", "admin-rpc"),
+        "allowed_capabilities": (
+            "register",
+            "register-management",
+            "openid-configuration",
+            "tenant-openid-configuration",
+            "oauth-authorization-server-metadata",
+            "jwks",
+            "tenant-jwks",
+        ),
+        "admin_resources": ("Client", "ClientRegistration", "AuditEvent"),
+        "admin_rest_groups": (),
+        "rpc_method_prefixes": (
+            "client.",
+            "client.registration.",
+            "discovery.",
+            "jwks.",
+            "profile.",
+            "rpc.",
+            "target.",
+        ),
+    },
+    "service-admin-api": {
+        "surface_sets": ("public-rest", "admin-rpc"),
+        "allowed_capabilities": (
+            "introspection",
+            "openid-configuration",
+            "tenant-openid-configuration",
+            "oauth-protected-resource-metadata",
+            "jwks",
+            "tenant-jwks",
+        ),
+        "admin_resources": (
+            "ApiKey",
+            "Service",
+            "ServiceKey",
+            "TokenRecord",
+            "AuditEvent",
+        ),
+        "admin_rest_groups": (),
+        "rpc_method_prefixes": (
+            "audit.",
+            "discovery.",
+            "jwks.",
+            "keys.",
+            "profile.",
+            "rpc.",
+            "target.",
+            "token.",
+        ),
+    },
+    "resource-validation-api": {
+        "surface_sets": ("public-rest",),
+        "allowed_capabilities": (
+            "introspection",
+            "openid-configuration",
+            "tenant-openid-configuration",
+            "oauth-protected-resource-metadata",
+            "jwks",
+            "tenant-jwks",
+        ),
+        "admin_resources": (),
+        "admin_rest_groups": (),
+        "rpc_method_prefixes": (),
+    },
 }
 
 PLUGIN_MODE_TO_SURFACE_SETS: Final[dict[str, tuple[str, ...]]] = {
@@ -195,7 +362,9 @@ EXTENSION_REGISTRY: Final[dict[str, dict[str, Any]]] = {
     },
 }
 
-SURFACE_CAPABILITY_REGISTRY: Final[dict[str, dict[str, Any]]] = all_surface_capability_registry()
+SURFACE_CAPABILITY_REGISTRY: Final[dict[str, dict[str, Any]]] = (
+    all_surface_capability_registry()
+)
 ROUTE_REGISTRY: Final[dict[str, dict[str, Any]]] = surface_route_registry()
 
 
@@ -235,12 +404,27 @@ TARGET_FLAG_REQUIREMENTS: Final[dict[str, tuple[str, ...]]] = {
     "OIDC Core 1.0": ("enable_oidc_core", "surface_public_enabled"),
     "OIDC Discovery 1.0": ("enable_oidc_discovery", "surface_public_enabled"),
     "OIDC UserInfo": ("enable_oidc_userinfo", "surface_public_enabled"),
-    "OIDC Session Management": ("enable_oidc_session_management", "surface_public_enabled"),
-    "OIDC RP-Initiated Logout": ("enable_oidc_rp_initiated_logout", "surface_public_enabled"),
-    "OIDC Front-Channel Logout": ("enable_oidc_frontchannel_logout", "surface_public_enabled"),
-    "OIDC Back-Channel Logout": ("enable_oidc_backchannel_logout", "surface_public_enabled"),
+    "OIDC Session Management": (
+        "enable_oidc_session_management",
+        "surface_public_enabled",
+    ),
+    "OIDC RP-Initiated Logout": (
+        "enable_oidc_rp_initiated_logout",
+        "surface_public_enabled",
+    ),
+    "OIDC Front-Channel Logout": (
+        "enable_oidc_frontchannel_logout",
+        "surface_public_enabled",
+    ),
+    "OIDC Back-Channel Logout": (
+        "enable_oidc_backchannel_logout",
+        "surface_public_enabled",
+    ),
     "OpenAPI 3.1 / 3.2 compatible public contract": ("surface_public_enabled",),
-    "OpenRPC 1.4.x admin/control-plane contract": ("surface_admin_enabled", "surface_rpc_enabled"),
+    "OpenRPC 1.4.x admin/control-plane contract": (
+        "surface_admin_enabled",
+        "surface_rpc_enabled",
+    ),
 }
 
 
@@ -254,6 +438,7 @@ VALID_PROFILES: Final[tuple[str, ...]] = (
 )
 VALID_PLUGIN_MODES: Final[tuple[str, ...]] = tuple(PLUGIN_MODE_TO_SURFACE_SETS)
 VALID_RUNTIME_STYLES: Final[tuple[str, ...]] = ("plugin", "standalone")
+VALID_PRODUCT_SURFACES: Final[tuple[str, ...]] = tuple(PRODUCT_SURFACE_REGISTRY)
 
 
 @dataclass(slots=True, frozen=True)
@@ -275,6 +460,9 @@ class ResolvedDeployment:
     active_discovery_routes: tuple[str, ...]
     active_targets: tuple[str, ...]
     active_openrpc_methods: tuple[str, ...]
+    product_surface: str | None = None
+    allowed_admin_resources: tuple[str, ...] = ()
+    allowed_admin_rest_groups: tuple[str, ...] = ()
     profile_source: dict[str, Any] = field(default_factory=dict)
 
     def flag_enabled(self, name: str) -> bool:
@@ -308,6 +496,16 @@ class ResolvedDeployment:
     def method_enabled(self, name: str) -> bool:
         return name in self.active_openrpc_methods
 
+    def admin_resource_enabled(self, name: str) -> bool:
+        if self.product_surface is None:
+            return True
+        return name in self.allowed_admin_resources
+
+    def admin_rest_group_enabled(self, name: str) -> bool:
+        if self.product_surface is None:
+            return True
+        return name in self.allowed_admin_rest_groups
+
     def to_manifest(self) -> dict[str, Any]:
         return {
             "profile": self.profile,
@@ -327,6 +525,9 @@ class ResolvedDeployment:
             "active_discovery_routes": list(self.active_discovery_routes),
             "active_targets": list(self.active_targets),
             "active_openrpc_methods": list(self.active_openrpc_methods),
+            "product_surface": self.product_surface,
+            "allowed_admin_resources": list(self.allowed_admin_resources),
+            "allowed_admin_rest_groups": list(self.allowed_admin_rest_groups),
             "profile_source": self.profile_source,
         }
 
@@ -363,9 +564,61 @@ def _valid_or_default(value: str, allowed: tuple[str, ...], default: str) -> str
     return value if value in allowed else default
 
 
-def _derive_surface_sets(raw: dict[str, Any], plugin_mode: str, requested: tuple[str, ...]) -> tuple[str, ...]:
+def _expand_product_surface_sets(names: tuple[str, ...]) -> tuple[str, ...]:
+    expanded: list[str] = []
+    for name in names:
+        product_meta = PRODUCT_SURFACE_REGISTRY.get(name)
+        if product_meta is not None:
+            expanded.extend(str(item) for item in product_meta.get("surface_sets", ()))
+        elif name in SURFACE_SET_REGISTRY:
+            expanded.append(name)
+    return tuple(dict.fromkeys(expanded))
+
+
+def _product_config(name: str | None) -> dict[str, Any] | None:
+    if name is None:
+        return None
+    try:
+        return PRODUCT_SURFACE_REGISTRY[name]
+    except KeyError as exc:
+        raise ValueError(f"unknown tigrbl_auth product surface: {name}") from exc
+
+
+def _capability_allowed(capability: str, product_meta: dict[str, Any] | None) -> bool:
+    if product_meta is None:
+        return True
+    allowed = product_meta.get("allowed_capabilities")
+    if allowed is None:
+        return True
+    return capability in set(str(item) for item in allowed)
+
+
+def _rpc_method_allowed(name: str, product_meta: dict[str, Any] | None) -> bool:
+    if product_meta is None:
+        return True
+    exact = tuple(str(item) for item in product_meta.get("rpc_methods", ()))
+    prefixes = tuple(str(item) for item in product_meta.get("rpc_method_prefixes", ()))
+    return name in exact or any(name.startswith(prefix) for prefix in prefixes)
+
+
+def _plugin_mode_for_surface_sets(surface_sets: tuple[str, ...]) -> str:
+    surface_set = set(surface_sets)
+    if surface_set == {"public-rest"}:
+        return "public-only"
+    if surface_set == {"admin-rpc"}:
+        return "admin-only"
+    if surface_set == {"diagnostics"}:
+        return "diagnostics-only"
+    return "mixed"
+
+
+def _derive_surface_sets(
+    raw: dict[str, Any], plugin_mode: str, requested: tuple[str, ...]
+) -> tuple[str, ...]:
     if requested:
-        return tuple(name for name in requested if name in SURFACE_SET_REGISTRY)
+        return _expand_product_surface_sets(
+            tuple(name for name in requested if name in SURFACE_SET_REGISTRY)
+        )
     if plugin_mode != "mixed":
         return PLUGIN_MODE_TO_SURFACE_SETS[plugin_mode]
     if str(raw.get("surface_plugin_mode", "")) == "mixed":
@@ -380,18 +633,25 @@ def _derive_surface_sets(raw: dict[str, Any], plugin_mode: str, requested: tuple
     return tuple(dict.fromkeys(derived))
 
 
-def _derive_protocol_slices(raw: dict[str, Any], allowed_profile_flags: set[str], requested: tuple[str, ...]) -> tuple[str, ...]:
+def _derive_protocol_slices(
+    raw: dict[str, Any], allowed_profile_flags: set[str], requested: tuple[str, ...]
+) -> tuple[str, ...]:
     if requested:
         return tuple(name for name in requested if name in PROTOCOL_SLICE_REGISTRY)
     derived: list[str] = []
     for name, meta in PROTOCOL_SLICE_REGISTRY.items():
         flags = tuple(meta.get("flags", ()))
-        if flags and all(flag in allowed_profile_flags and bool(raw.get(flag, False)) for flag in flags):
+        if flags and all(
+            flag in allowed_profile_flags and bool(raw.get(flag, False))
+            for flag in flags
+        ):
             derived.append(name)
     return tuple(derived)
 
 
-def _derive_extensions(raw: dict[str, Any], requested: tuple[str, ...]) -> tuple[str, ...]:
+def _derive_extensions(
+    raw: dict[str, Any], requested: tuple[str, ...]
+) -> tuple[str, ...]:
     if requested:
         return tuple(name for name in requested if name in EXTENSION_REGISTRY)
     derived: list[str] = []
@@ -413,6 +673,7 @@ def resolve_deployment(
     extensions: tuple[str, ...] | list[str] | str | None = None,
     plugin_mode: str | None = None,
     runtime_style: str | None = None,
+    product_surface: str | None = None,
     flag_overrides: dict[str, Any] | None = None,
     profile_source: dict[str, Any] | None = None,
 ) -> ResolvedDeployment:
@@ -420,20 +681,56 @@ def resolve_deployment(
     if flag_overrides:
         raw.update(flag_overrides)
 
-    profile_name = _valid_or_default(profile or str(raw.get("deployment_profile", "baseline")), VALID_PROFILES, "baseline")
+    profile_name = _valid_or_default(
+        profile or str(raw.get("deployment_profile", "baseline")),
+        VALID_PROFILES,
+        "baseline",
+    )
     raw.update(PROFILE_DEFAULT_OVERRIDES.get(profile_name, {}))
-    plugin_mode_name = _valid_or_default(plugin_mode or str(raw.get("surface_plugin_mode", "mixed")), VALID_PLUGIN_MODES, "mixed")
-    runtime_style_name = _valid_or_default(runtime_style or str(raw.get("runtime_style", "standalone")), VALID_RUNTIME_STYLES, "standalone")
+    plugin_mode_name = _valid_or_default(
+        plugin_mode or str(raw.get("surface_plugin_mode", "mixed")),
+        VALID_PLUGIN_MODES,
+        "mixed",
+    )
+    runtime_style_name = _valid_or_default(
+        runtime_style or str(raw.get("runtime_style", "standalone")),
+        VALID_RUNTIME_STYLES,
+        "standalone",
+    )
     if plugin_mode is not None:
         raw["surface_plugin_mode"] = plugin_mode_name
 
     allowed_profile_flags = set(flags_for_profile(profile_name))
-    requested_surface_sets = _csv_items(surface_sets if surface_sets is not None else raw.get("active_surface_sets"))
-    requested_protocol_slices = _csv_items(protocol_slices if protocol_slices is not None else raw.get("active_protocol_slices"))
-    requested_extensions = _csv_items(extensions if extensions is not None else raw.get("active_extensions"))
+    requested_surface_sets = _csv_items(
+        surface_sets if surface_sets is not None else raw.get("active_surface_sets")
+    )
+    requested_protocol_slices = _csv_items(
+        protocol_slices
+        if protocol_slices is not None
+        else raw.get("active_protocol_slices")
+    )
+    requested_extensions = _csv_items(
+        extensions if extensions is not None else raw.get("active_extensions")
+    )
 
-    effective_surface_sets = _derive_surface_sets(raw, plugin_mode_name, requested_surface_sets)
-    effective_protocol_slices = _derive_protocol_slices(raw, allowed_profile_flags, requested_protocol_slices)
+    product_surface_name = product_surface or next(
+        (name for name in requested_surface_sets if name in PRODUCT_SURFACE_REGISTRY),
+        None,
+    )
+    product_meta = _product_config(product_surface_name)
+    if product_meta is not None:
+        effective_surface_sets = tuple(
+            str(item) for item in product_meta.get("surface_sets", ())
+        )
+        plugin_mode_name = _plugin_mode_for_surface_sets(effective_surface_sets)
+        raw["surface_plugin_mode"] = plugin_mode_name
+    else:
+        effective_surface_sets = _derive_surface_sets(
+            raw, plugin_mode_name, requested_surface_sets
+        )
+    effective_protocol_slices = _derive_protocol_slices(
+        raw, allowed_profile_flags, requested_protocol_slices
+    )
     effective_extensions = _derive_extensions(raw, requested_extensions)
 
     flags: dict[str, bool | str] = {}
@@ -457,12 +754,12 @@ def resolve_deployment(
 
     for slice_name, meta in PROTOCOL_SLICE_REGISTRY.items():
         active = slice_name in effective_protocol_slices
-        for flag in meta.get("flags", ()): 
+        for flag in meta.get("flags", ()):
             flags[flag] = bool(flags.get(flag, False)) and active
 
     for extension_name, meta in EXTENSION_REGISTRY.items():
         active = extension_name in effective_extensions
-        for flag in meta.get("flags", ()): 
+        for flag in meta.get("flags", ()):
             if flag in flags:
                 flags[flag] = bool(flags.get(flag, False)) and active
 
@@ -481,6 +778,8 @@ def resolve_deployment(
     for capability_name, meta in SURFACE_CAPABILITY_REGISTRY.items():
         if meta.get("surface_set") not in effective_surface_sets:
             continue
+        if not _capability_allowed(capability_name, product_meta):
+            continue
         required_flags = tuple(meta.get("flags", ()))
         if all(bool(flags.get(name, False)) for name in required_flags):
             active_capabilities.append(capability_name)
@@ -490,10 +789,14 @@ def resolve_deployment(
                     active_routes.append(path_str)
 
     active_contract_routes = [
-        path for path in active_routes if bool(ROUTE_REGISTRY.get(path, {}).get("contract_visible", False))
+        path
+        for path in active_routes
+        if bool(ROUTE_REGISTRY.get(path, {}).get("contract_visible", False))
     ]
     active_discovery_routes = [
-        path for path in active_routes if bool(ROUTE_REGISTRY.get(path, {}).get("discovery_visible", False))
+        path
+        for path in active_routes
+        if bool(ROUTE_REGISTRY.get(path, {}).get("discovery_visible", False))
     ]
 
     active_targets: list[str] = []
@@ -504,24 +807,30 @@ def resolve_deployment(
     if runtime_style_name in {"plugin", "standalone"}:
         active_targets.append("ASGI 3 application package")
     if runtime_style_name == "standalone":
-        active_targets.extend([
-            "Runner profile: Uvicorn",
-            "Runner profile: Hypercorn",
-            "Runner profile: Tigrcorn",
-        ])
+        active_targets.extend(
+            [
+                "Runner profile: Uvicorn",
+                "Runner profile: Hypercorn",
+                "Runner profile: Tigrcorn",
+            ]
+        )
     if surfaces.get("surface_operator_enabled", False):
-        active_targets.extend([
-            "CLI operator surface",
-            "Bootstrap and migration lifecycle",
-            "Key lifecycle and JWKS publication",
-            "Import/export portability",
-            "Release bundle and signature verification",
-        ])
+        active_targets.extend(
+            [
+                "CLI operator surface",
+                "Bootstrap and migration lifecycle",
+                "Key lifecycle and JWKS publication",
+                "Import/export portability",
+                "Release bundle and signature verification",
+            ]
+        )
     active_targets = list(dict.fromkeys(active_targets))
 
     active_methods: list[str] = []
     for name, meta in OPENRPC_METHOD_REGISTRY.items():
         if meta.get("surface_set") in effective_surface_sets:
+            if not _rpc_method_allowed(name, product_meta):
+                continue
             active_methods.append(name)
 
     return ResolvedDeployment(
@@ -532,7 +841,12 @@ def resolve_deployment(
         protocol_slices=tuple(effective_protocol_slices),
         extensions=tuple(effective_extensions),
         issuer=str(raw.get("issuer", DEFAULT_VALUES["issuer"])),
-        protected_resource_identifier=str(raw.get("protected_resource_identifier", DEFAULT_VALUES["protected_resource_identifier"])),
+        protected_resource_identifier=str(
+            raw.get(
+                "protected_resource_identifier",
+                DEFAULT_VALUES["protected_resource_identifier"],
+            )
+        ),
         strict_boundary_enforcement=bool(raw.get("strict_boundary_enforcement", True)),
         surfaces=surfaces,
         flags=flags,
@@ -542,19 +856,35 @@ def resolve_deployment(
         active_discovery_routes=tuple(active_discovery_routes),
         active_targets=tuple(active_targets),
         active_openrpc_methods=tuple(active_methods),
-        profile_source=dict(profile_source or {"kind": "packaged-profile-id", "profile_id": profile_name}),
+        product_surface=product_surface_name,
+        allowed_admin_resources=tuple(
+            str(item) for item in (product_meta or {}).get("admin_resources", ())
+        ),
+        allowed_admin_rest_groups=tuple(
+            str(item) for item in (product_meta or {}).get("admin_rest_groups", ())
+        ),
+        profile_source=dict(
+            profile_source
+            or {"kind": "packaged-profile-id", "profile_id": profile_name}
+        ),
     )
 
 
-def deployment_from_app(app: Any | None, fallback_settings: object | None = None) -> ResolvedDeployment:
+def deployment_from_app(
+    app: Any | None, fallback_settings: object | None = None
+) -> ResolvedDeployment:
     state = getattr(app, "state", None) if app is not None else None
-    deployment = getattr(state, "tigrbl_auth_deployment", None) if state is not None else None
+    deployment = (
+        getattr(state, "tigrbl_auth_deployment", None) if state is not None else None
+    )
     if isinstance(deployment, ResolvedDeployment):
         return deployment
     return resolve_deployment(fallback_settings)
 
 
-def deployment_from_request(request: Any | None, fallback_settings: object | None = None) -> ResolvedDeployment:
+def deployment_from_request(
+    request: Any | None, fallback_settings: object | None = None
+) -> ResolvedDeployment:
     app = getattr(request, "app", None) if request is not None else None
     return deployment_from_app(app, fallback_settings)
 
@@ -564,6 +894,7 @@ __all__ = [
     "EXTENSION_REGISTRY",
     "OPENRPC_METHOD_REGISTRY",
     "PLUGIN_MODE_TO_SURFACE_SETS",
+    "PRODUCT_SURFACE_REGISTRY",
     "PROTOCOL_SLICE_REGISTRY",
     "ROUTE_REGISTRY",
     "ResolvedDeployment",
@@ -571,6 +902,7 @@ __all__ = [
     "TARGET_FLAG_REQUIREMENTS",
     "SURFACE_CAPABILITY_REGISTRY",
     "VALID_PLUGIN_MODES",
+    "VALID_PRODUCT_SURFACES",
     "VALID_PROFILES",
     "VALID_RUNTIME_STYLES",
     "resolve_deployment",

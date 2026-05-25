@@ -1,0 +1,39 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1144"
+number: 1144
+slug: "product-uix-client-boundary-contract"
+title: "Product UIX Client Boundary Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This SPEC governs browser UIX clients that consume the separated Tigrbl Auth product APIs."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Initial UIX split contract for product-specific clients."
+    at: "2026-05-25T02:55:23Z"
+references: []
+body: |-
+  ## Scope
+  
+  This SPEC governs browser UIX clients that consume the separated Tigrbl Auth product APIs.
+  
+  ## Requirements
+  
+  Each product UIX MUST be a separate workspace and MUST consume exactly one product API base URL. `public-uix` consumes the public API. `platform-admin-uix` consumes the platform admin API. `tenant-admin-uix` consumes the tenant admin API. `developer-uix` consumes the developer API. `service-admin-uix` consumes the service admin API.
+  
+  Each UIX MUST define a local backend client boundary that names its API package, declares its required environment variable, and rejects path prefixes outside its product surface. Public UIX MUST NOT reference admin, RPC, or system paths. Admin, developer, and service UIXs MUST NOT mount public human login or consent flows unless explicitly scoped as metadata/discovery.
+  
+  `apps/admin-uix` MAY remain temporarily as a legacy extraction source, but new product workflows SHOULD land in the split UIX workspace that owns the workflow.
+  
+  ## Verification
+  
+  Verification MUST include static boundary tests for each UIX client, workspace build tests, and aggregate UIX tests that exercise all active product UIX workspaces.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1120"
+  - "adr:1077"

@@ -8,58 +8,37 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs tenant app registration and app-owned client"
+summary: "This specification governs tenant app registration and app-owned client ownership."
 supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define app registration and app-owned client ownership."
     at: "2026-05-18T08:31:58Z"
+    note: "Define app registration and app-owned client ownership."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Bound app registration workflows to developer product surface."
+    at: "2026-05-25T02:56:44Z"
 references: []
 body: |-
   ## Scope
   
-  This specification governs tenant app registration and app-owned client
-  ownership.
-  
-  ## First-Class Objects
-  
-  The model MUST define:
-  
-  - `AppRegistration`
-  - `AppPrincipal`
-  - `AppOwner`
-  - `AppClientLink`
-  - `AppServiceLink`
-  - `AppResourceServerLink`
-  - `RedirectUriPolicy`
-  - `ConsentPolicy`
-  - `ClientPosture`
-  - `AppCredentialPolicy`
+  This specification governs tenant app registration and app-owned client ownership.
   
   ## Requirements
   
-  Tenant admins or authorized app owners MAY create and manage apps.
+  Tenant admins or authorized app owners MAY create and manage apps. An app MAY own multiple OAuth/OIDC clients. Each app-owned client MUST define redirect URI policy, allowed grant types, allowed scopes, consent policy, public/confidential posture, and credential posture.
   
-  An app MAY own multiple OAuth/OIDC clients.
+  Developer self-service for app and client registration SHOULD be exposed through the developer API and developer UIX. Dynamic client registration MAY create direct clients for compatibility, but app-owned clients are the target tenant self-service model.
   
-  Each app-owned client MUST define redirect URI policy, allowed grant types,
-  allowed scopes, consent policy, public/confidential posture, and credential
-  posture.
-  
-  Apps MAY own services and resource servers when those actors are part of the
-  same product/application boundary.
-  
-  Dynamic client registration MAY create direct clients for compatibility, but
-  app-owned clients are the target tenant self-service model.
+  Apps MAY own services and resource servers when those actors are part of the same product/application boundary.
   
   ## Verification
   
-  Verification MUST prove app creation, app-owned client creation, redirect URI
-  policy enforcement, consent policy attachment, app owner authority checks, and
-  compatibility for direct client registration.
+  Verification MUST prove app creation, app-owned client creation, redirect URI policy enforcement, consent policy attachment, app owner authority checks, developer API exposure, and compatibility for direct client registration.
 spec_kind: "normative"
 adr_ids:
   - "adr:1106"
   - "adr:1110"
+  - "adr:1120"

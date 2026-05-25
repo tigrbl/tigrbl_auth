@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from importlib.metadata import PackageNotFoundError, version as installed_package_version
+from importlib.metadata import (
+    PackageNotFoundError,
+    version as installed_package_version,
+)
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -45,11 +48,11 @@ def _hide_disabled_control_plane_docs(
     for route in routes:
         path = str(getattr(route, "path_template", None) or getattr(route, "path", ""))
         hide = (
-            (not deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, rpc_prefix))
-            or (
-                not deployment.flag_enabled("surface_diagnostics_enabled")
-                and _path_has_prefix(path, diagnostics_prefix)
-            )
+            not deployment.flag_enabled("surface_rpc_enabled")
+            and _path_has_prefix(path, rpc_prefix)
+        ) or (
+            not deployment.flag_enabled("surface_diagnostics_enabled")
+            and _path_has_prefix(path, diagnostics_prefix)
         )
         if hide and hasattr(route, "include_in_schema"):
             hidden.append(replace(route, include_in_schema=False))
@@ -63,13 +66,18 @@ def build_app(
     *,
     deployment: ResolvedDeployment | None = None,
 ) -> "TigrblApp":
-    resolved_settings = settings_obj if settings_obj is not None else _load_default_settings()
+    resolved_settings = (
+        settings_obj if settings_obj is not None else _load_default_settings()
+    )
     resolved_deployment = deployment or resolve_deployment(resolved_settings)
 
     from tigrbl import TigrblApp
 
     from tigrbl_auth.api.lifecycle import register_lifecycle
-    from tigrbl_auth.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
+    from tigrbl_auth.api.surfaces import (
+        admin_resource_path_prefixes,
+        attach_runtime_surfaces,
+    )
     from tigrbl_auth.security.admin_gate import AdminGate
     from tigrbl_auth.tables.engine import dsn
 
@@ -102,11 +110,10 @@ def build_app(
         app,
         deployment=resolved_deployment,
         settings_obj=resolved_settings,
-        admin_path_prefixes=admin_resource_path_prefixes(),
+        admin_path_prefixes=admin_resource_path_prefixes(resolved_deployment),
         rpc_prefix="/rpc",
         diagnostics_prefix="/system",
     )
-
 
 
 def build_application_runtime_plan(

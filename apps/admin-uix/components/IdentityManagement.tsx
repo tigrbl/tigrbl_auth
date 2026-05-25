@@ -4,6 +4,7 @@ import { Icons } from '../constants';
 import { Tenant, User, UserStatus } from '../types';
 import type { AdminSessionState } from '../services/adminAuthService';
 import styles from './IdentityManagement.module.css';
+import { humanizeError } from '../services/errorMessages';
 
 interface IdentityManagementProps {
   tenant: Tenant;
@@ -47,7 +48,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       set_identities(users);
       set_selected_id((current) => users.find((item) => item.id === current?.id) ?? users[0] ?? null);
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to load identities.');
+      set_error(humanizeError(nextError, 'Failed to load users.'));
     } finally {
       set_loading(false);
     }
@@ -88,7 +89,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       set_form_data(emptyForm());
       await refresh();
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to provision identity.');
+      set_error(humanizeError(nextError, 'Failed to create user.'));
     } finally {
       set_saving(false);
     }
@@ -107,7 +108,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
         set_selected_id(null);
       }
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to delete identity.');
+      set_error(humanizeError(nextError, 'Failed to delete user.'));
     } finally {
       set_saving(false);
     }
@@ -122,7 +123,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       });
       await refresh();
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to update identity status.');
+      set_error(humanizeError(nextError, 'Failed to update user status.'));
     } finally {
       set_saving(false);
     }
@@ -143,7 +144,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       });
       await refresh();
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to update administrative role.');
+      set_error(humanizeError(nextError, 'Failed to update administrative role.'));
     } finally {
       set_saving(false);
     }
@@ -158,7 +159,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       });
       await refresh();
     } catch (nextError) {
-      set_error(nextError instanceof Error ? nextError.message : 'Failed to update password policy.');
+      set_error(humanizeError(nextError, 'Failed to update password policy.'));
     } finally {
       set_saving(false);
     }
@@ -168,12 +169,12 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Identity Pool</h1>
-          <p className={styles.subtitle}>Session-backed administrator onboarding for {tenant.name}.</p>
+          <h1 className={styles.title}>Users</h1>
+          <p className={styles.subtitle}>Create and manage user accounts for {tenant.name}.</p>
         </div>
         <div className={styles.headerActions}>
-          <button onClick={() => void refresh()} className={styles.buttonBase}>Sync Directory</button>
-          <button onClick={() => set_show_add(true)} className={`${styles.buttonBase} ${styles.buttonPrimary}`}>Onboard Identity</button>
+          <button onClick={() => void refresh()} className={styles.buttonBase}>Refresh Users</button>
+          <button onClick={() => set_show_add(true)} className={`${styles.buttonBase} ${styles.buttonPrimary}`}>Create User</button>
         </div>
       </div>
 
@@ -191,8 +192,8 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
               <table className={styles.table}>
                 <thead>
                   <tr className={styles.tableHeaderRow}>
-                    <th className={styles.tableHeaderCell}>Subject Information</th>
-                    <th className={styles.tableHeaderCell}>Access Tier</th>
+                    <th className={styles.tableHeaderCell}>User</th>
+                    <th className={styles.tableHeaderCell}>Role</th>
                     <th className={styles.tableHeaderCell}>Status</th>
                     <th className={`${styles.tableHeaderCell} ${styles.tableHeaderCellRight}`}>Actions</th>
                   </tr>
@@ -303,7 +304,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
                   </div>
                 </div>
                 <div>
-                  <p className={styles.detailLabel}>Last Pulse</p>
+                  <p className={styles.detailLabel}>Last Updated</p>
                   <span className={styles.detailValue}>{selectedSummary.lastPulse}</span>
                 </div>
               </div>
@@ -317,7 +318,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
           ) : (
             <div className={styles.emptyState}>
               <div className={styles.emptyIcon}><Icons.Users /></div>
-              <p className={styles.emptyText}>Select an identity to view administrative controls</p>
+              <p className={styles.emptyText}>Select a user to view administrative controls</p>
             </div>
           )}
         </div>
@@ -326,7 +327,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
       {show_add && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
-            <h3 className={styles.modalTitle}>Onboard Identity</h3>
+            <h3 className={styles.modalTitle}>Create User</h3>
             <div className={styles.modalBody}>
               <div>
                 <label className={styles.formLabel}>Username</label>
@@ -387,7 +388,7 @@ const IdentityManagement: React.FC<IdentityManagementProps> = ({ tenant, session
             <div className={styles.modalActions}>
               <button onClick={() => set_show_add(false)} className={`${styles.modalButton} ${styles.modalButtonCancel}`}>Abort</button>
               <button onClick={() => void handle_add()} className={`${styles.modalButton} ${styles.modalButtonPrimary}`} disabled={saving}>
-                Provision
+                Create
               </button>
             </div>
           </div>

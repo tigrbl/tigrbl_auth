@@ -12,7 +12,9 @@ from typing import Any, Awaitable, Callable, Iterable
 from tigrbl.security import APIKey, HTTPBearer, Security
 
 from tigrbl_auth.config.deployment import ResolvedDeployment
-from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
+from tigrbl_auth.services.admin_identity_bootstrap import (
+    resolve_admin_user_from_request,
+)
 
 ADMIN_API_KEY_ENV = "TIGRBL_AUTH_ADMIN_API_KEY"
 ADMIN_API_KEY_HEADER = "x-api-key"
@@ -50,7 +52,9 @@ def _digest(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
-def _json_response(status: int, payload: dict[str, Any]) -> tuple[int, list[tuple[bytes, bytes]], bytes]:
+def _json_response(
+    status: int, payload: dict[str, Any]
+) -> tuple[int, list[tuple[bytes, bytes]], bytes]:
     body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
     headers = [
         (b"content-type", b"application/json"),
@@ -130,7 +134,9 @@ def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
 
 
 def _bootstrap_digest(settings_obj: object | None, enabled: bool) -> str | None:
-    configured = os.environ.get(ADMIN_API_KEY_ENV) or getattr(settings_obj, "admin_api_key", None)
+    configured = os.environ.get(ADMIN_API_KEY_ENV) or getattr(
+        settings_obj, "admin_api_key", None
+    )
     if configured:
         return _digest(str(configured))
     if not enabled:
@@ -138,7 +144,9 @@ def _bootstrap_digest(settings_obj: object | None, enabled: bool) -> str | None:
 
     key = secrets.token_urlsafe(32)
     digest = _digest(key)
-    secret_dir = Path(str(getattr(settings_obj, "admin_api_key_dir", "runtime_secrets")))
+    secret_dir = Path(
+        str(getattr(settings_obj, "admin_api_key_dir", "runtime_secrets"))
+    )
     secret_dir.mkdir(parents=True, exist_ok=True)
     digest_path = secret_dir / "admin_api_key.sha256"
     digest_path.write_text(digest + "\n", encoding="utf-8")
@@ -186,18 +194,28 @@ class AdminGate:
     def _requires_admin(self, path: str) -> bool:
         if not self.enabled:
             return False
-        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
+            path, self.rpc_prefix
+        ):
             return True
-        if self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
+        if self.deployment.flag_enabled(
+            "surface_diagnostics_enabled"
+        ) and _path_has_prefix(path, self.diagnostics_prefix):
             return True
         if self.deployment.surface_enabled("admin-rpc"):
-            return any(_path_has_prefix(path, prefix) for prefix in self.admin_path_prefixes)
+            return any(
+                _path_has_prefix(path, prefix) for prefix in self.admin_path_prefixes
+            )
         return False
 
     def _disabled_control_plane_path(self, path: str) -> bool:
-        if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+        if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
+            path, self.rpc_prefix
+        ):
             return True
-        if not self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
+        if not self.deployment.flag_enabled(
+            "surface_diagnostics_enabled"
+        ) and _path_has_prefix(path, self.diagnostics_prefix):
             return True
         return False
 
@@ -218,11 +236,17 @@ class AdminGate:
                 200,
                 _jsonrpc_error(None, -32700, "Parse error"),
             )
-            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send(
+                {"type": "http.response.start", "status": status, "headers": headers}
+            )
             await send({"type": "http.response.body", "body": response_body})
             return True
 
-        from tigrbl_auth.api.rpc import RpcRequestContext, get_rpc_method, invoke_rpc_method_async
+        from tigrbl_auth.api.rpc import (
+            RpcRequestContext,
+            get_rpc_method,
+            invoke_rpc_method_async,
+        )
 
         async def handle_one(request: Any) -> dict[str, Any] | None:
             if not isinstance(request, dict):
@@ -235,11 +259,17 @@ class AdminGate:
                 get_rpc_method(method)
             except KeyError:
                 return None
+            if hasattr(
+                self.deployment, "method_enabled"
+            ) and not self.deployment.method_enabled(method):
+                return _jsonrpc_error(request_id, -32601, "Method not found")
             try:
                 context = RpcRequestContext(
                     repo_root=Path.cwd(),
                     deployment=self.deployment,
-                    runtime_metadata={"path": str(scope.get("path") or self.rpc_prefix)},
+                    runtime_metadata={
+                        "path": str(scope.get("path") or self.rpc_prefix)
+                    },
                 )
                 result = await invoke_rpc_method_async(
                     method,
@@ -262,13 +292,17 @@ class AdminGate:
             if unknown:
                 await self.app(scope, _replay_http_body(body), send)
                 return True
-            status, headers, response_body = _json_response(200, {"responses": responses})
+            status, headers, response_body = _json_response(
+                200, {"responses": responses}
+            )
             response_body = json.dumps(responses, separators=(",", ":")).encode("utf-8")
             headers = [
                 (b"content-type", b"application/json"),
                 (b"content-length", str(len(response_body)).encode("ascii")),
             ]
-            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send(
+                {"type": "http.response.start", "status": status, "headers": headers}
+            )
             await send({"type": "http.response.body", "body": response_body})
             return True
 
@@ -277,7 +311,9 @@ class AdminGate:
             await self.app(scope, _replay_http_body(body), send)
             return True
         status, headers, response_body = _json_response(200, response)
-        await send({"type": "http.response.start", "status": status, "headers": headers})
+        await send(
+            {"type": "http.response.start", "status": status, "headers": headers}
+        )
         await send({"type": "http.response.body", "body": response_body})
         return True
 
@@ -289,31 +325,53 @@ class AdminGate:
         path = str(scope.get("path") or "")
         if self._disabled_control_plane_path(path):
             status, headers, body = _json_response(404, {"detail": "Not Found"})
-            await send({"type": "http.response.start", "status": status, "headers": headers})
+            await send(
+                {"type": "http.response.start", "status": status, "headers": headers}
+            )
             await send({"type": "http.response.body", "body": body})
             return
 
         if self._requires_admin(path):
             credential = _extract_credential(scope)
             authorized = False
-            if credential and self._digest and hmac.compare_digest(_digest(credential), self._digest):
+            if (
+                credential
+                and self._digest
+                and hmac.compare_digest(_digest(credential), self._digest)
+            ):
                 authorized = True
             if not authorized:
                 request = _scope_request(scope)
                 try:
-                    authorized = await resolve_admin_user_from_request(request) is not None
-                except Exception:  # pragma: no cover - fail closed on middleware auth errors
+                    authorized = (
+                        await resolve_admin_user_from_request(request) is not None
+                    )
+                except (
+                    Exception
+                ):  # pragma: no cover - fail closed on middleware auth errors
                     authorized = False
             if not authorized:
                 if credential:
-                    status, headers, body = _json_response(403, {"error": "invalid_admin_api_key"})
+                    status, headers, body = _json_response(
+                        403, {"error": "invalid_admin_api_key"}
+                    )
                 else:
-                    status, headers, body = _json_response(401, {"error": "missing_admin_api_key"})
-                await send({"type": "http.response.start", "status": status, "headers": headers})
+                    status, headers, body = _json_response(
+                        401, {"error": "missing_admin_api_key"}
+                    )
+                await send(
+                    {
+                        "type": "http.response.start",
+                        "status": status,
+                        "headers": headers,
+                    }
+                )
                 await send({"type": "http.response.body", "body": body})
                 return
 
-        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
+            path, self.rpc_prefix
+        ):
             if await self._dispatch_registry_rpc(scope, receive, send):
                 return
 

@@ -31,10 +31,10 @@ const Dashboard: React.FC<DashboardProps> = ({ tenant_id }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Neural Overview</h1>
-          <p className={styles.subtitle}>Real-time gateway flux and cross-tenant traffic.</p>
+          <h1 className={styles.title}>Admin Dashboard</h1>
+          <p className={styles.subtitle}>Backend telemetry and recent alerts for the selected tenant.</p>
         </div>
-        <button className={styles.primaryButton} onClick={() => void refresh()}>Refresh Flux</button>
+        <button className={styles.primaryButton} onClick={() => void refresh()}>Refresh Metrics</button>
       </div>
 
       <div className={styles.statsGrid}>
@@ -52,7 +52,7 @@ const Dashboard: React.FC<DashboardProps> = ({ tenant_id }) => {
             <h3 className={styles.statValue}>{stat.value}</h3>
             <div className={styles.statDeltaRow}>
               <span className={stat.delta.startsWith('+') ? styles.statDeltaPositive : styles.statDeltaNegative}>{stat.delta}</span>
-              <span className={styles.statDeltaBaseline}>BACKEND FEED</span>
+              <span className={styles.statDeltaBaseline}>BACKEND DATA</span>
             </div>
           </div>
         ))}
@@ -61,7 +61,7 @@ const Dashboard: React.FC<DashboardProps> = ({ tenant_id }) => {
       <div className={styles.chartGrid}>
         <div className={styles.chartCard}>
           <div className={styles.chartHeader}>
-            <h3 className={styles.chartTitle}>Flux Volume / 24H</h3>
+            <h3 className={styles.chartTitle}>Request Volume / 24H</h3>
             <div className={styles.chartLegend}>
                <div className={styles.legendDot}></div>
                <span className={styles.legendText}>Requests</span>
@@ -81,19 +81,21 @@ const Dashboard: React.FC<DashboardProps> = ({ tenant_id }) => {
         </div>
 
         <div className={styles.securityCard}>
-          <h3 className={styles.securityTitle}>Security Pulse</h3>
+          <h3 className={styles.securityTitle}>Recent Alerts</h3>
           <div className={styles.securityList}>
+            {alerts.length === 0 && (
+              <div className={styles.alertItem}>
+                <p className={styles.alertMessage}>No alerts returned by the backend.</p>
+              </div>
+            )}
             {alerts.map((alert) => (
               <div key={alert.id} className={styles.alertItem}>
                 <div className={`${styles.alertBar} ${alert.severity === 'high' ? styles.alertBarHigh : styles.alertBarMedium}`}></div>
                 <p className={styles.alertMessage}>{alert.message}</p>
-                <p className={styles.alertTime}>T: {new Date(alert.timestamp).toLocaleTimeString()}</p>
+                <p className={styles.alertTime}>{new Date(alert.timestamp).toLocaleTimeString()}</p>
               </div>
             ))}
           </div>
-          <button className={styles.securityButton}>
-            Open Security Vault
-          </button>
         </div>
       </div>
     </div>

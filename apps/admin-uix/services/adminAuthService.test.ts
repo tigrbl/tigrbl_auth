@@ -72,6 +72,6 @@ describe('adminAuthService validation messaging', () => {
 
     await expect(
       adminAuthService.changePassword('wrong-password', 'LongEnough123!'),
-    ).rejects.toThrow('invalid current password');
+    ).rejects.toThrow('Invalid current password');
   });
 });

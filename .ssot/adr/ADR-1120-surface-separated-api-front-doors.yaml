@@ -1,0 +1,31 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1120"
+number: 1120
+slug: "surface-separated-api-front-doors"
+title: "Surface-Separated API Front Doors"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Tigrbl Auth product APIs are deployed as separate API front doors over the shared `tigrbl_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for the product-surface packaging slice."
+    at: "2026-05-25T02:54:52Z"
+references: []
+body: |-
+  ## Decision
+  
+  Tigrbl Auth product APIs are deployed as separate API front doors over the shared `tigrbl_auth` identity foundation. Each product API package selects one named product surface and MUST expose only its allowed public capabilities, admin resources, admin REST router groups, and OpenRPC methods.
+  
+  ## Rationale
+  
+  The platform needs separate blast-radius and audience boundaries for public login, platform administration, tenant administration, developer app registration, service identity administration, and resource validation. A shared runtime keeps identity behavior consistent, while product front doors prevent clients from seeing surfaces they do not need.
+  
+  ## Consequences
+  
+  API packages remain thin assemblies. Runtime filtering and dispatch MUST fail closed when a route, resource, router group, or RPC method is outside the selected product surface. Broad `public-rest` and `admin-rpc` remain implementation primitives, but product surfaces are the deployable contract.

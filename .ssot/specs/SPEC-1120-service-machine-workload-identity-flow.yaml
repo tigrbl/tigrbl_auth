@@ -8,66 +8,37 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification governs service, machine, workload, and device identity"
+summary: "This specification governs service, machine, workload, and device identity flows."
 supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define service, machine, workload, and device identity flow ownership."
     at: "2026-05-18T08:32:00Z"
+    note: "Define service, machine, workload, and device identity flow ownership."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Bound machine identity workflows to service-admin product surface."
+    at: "2026-05-25T02:56:45Z"
 references: []
 body: |-
   ## Scope
   
-  This specification governs service, machine, workload, and device identity
-  flows.
-  
-  ## First-Class Objects
-  
-  The model MUST define:
-  
-  - `ServicePrincipal`
-  - `MachinePrincipal`
-  - `WorkloadPrincipal`
-  - `DevicePrincipal`
-  - `ServiceKeyCredential`
-  - `JwtAssertionCredential`
-  - `MtlsCertificateCredential`
-  - `DpopKeyCredential`
-  - `WorkloadAttestation`
-  - `TrustDomain`
-  - `ProofBinding`
-  - `NonHumanAuthorizationRequest`
+  This specification governs service, machine, workload, and device identity flows.
   
   ## Requirements
   
-  Non-human identities MUST NOT be modeled as users.
+  Non-human identities MUST NOT be modeled as users. Tenant admins or authorized operators MAY create non-human principals according to policy.
   
-  Tenant admins or authorized operators MAY create non-human principals
-  according to policy.
+  Service, machine, workload, API-key, and service-key administration SHOULD be exposed through the service-admin API and service-admin UIX. Credentials MUST be issued, bound, rotated, revoked, and audited according to credential lifecycle rules.
   
-  Credentials MUST be issued, bound, rotated, revoked, and audited according to
-  credential lifecycle rules.
-  
-  JWT assertion use MUST align with RFC 7523 where used.
-  
-  mTLS client authentication and certificate-bound tokens MUST align with RFC
-  8705 where used.
-  
-  Token exchange MUST align with RFC 8693 where used.
-  
-  DPoP proof binding MUST align with RFC 9449 where used.
-  
-  Resource servers MUST validate issued tokens and proof binding before
-  accepting non-human requests.
+  JWT assertion, mTLS, token exchange, and DPoP usage MUST align with their governing protocol requirements where used. Resource servers MUST validate issued tokens and proof binding before accepting non-human requests.
   
   ## Verification
   
-  Verification MUST prove service credential lifecycle, JWT assertion flow,
-  mTLS binding flow, DPoP binding flow, workload trust-domain denial,
-  cross-tenant denial, token issuance, and downstream verifier enforcement.
+  Verification MUST prove service credential lifecycle, service-admin API exposure, JWT assertion flow, mTLS binding flow, DPoP binding flow, workload trust-domain denial, cross-tenant denial, token issuance, and downstream verifier enforcement.
 spec_kind: "normative"
 adr_ids:
   - "adr:1046"
   - "adr:1109"
+  - "adr:1120"

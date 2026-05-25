@@ -3,6 +3,7 @@ import { Icons } from '../constants';
 import { backendService } from '../services/backendService';
 import type { Tenant, TenantJwksKeyInput, TenantJwksPublicationView as TenantJwksPublication } from '../types';
 import styles from './TenantJwksPublicationView.module.css';
+import { humanizeError } from '../services/errorMessages';
 
 type TenantJwksPublicationViewProps = {
   tenant: Tenant;
@@ -45,7 +46,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
       })
       .catch((caught) => {
         if (!cancelled) {
-          setError(caught instanceof Error ? caught.message : 'Tenant JWKS publication is unavailable.');
+          setError(humanizeError(caught, 'Tenant signing key publication is unavailable.'));
         }
       })
       .finally(() => {
@@ -68,7 +69,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
       await action();
       await loadView();
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Tenant JWKS key mutation failed.');
+      setError(humanizeError(caught, 'Tenant signing key update failed.'));
     } finally {
       setMutating(false);
     }
@@ -94,7 +95,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
     <section className={styles.surface}>
       <div className={styles.header}>
         <div>
-          <div className={styles.eyebrow}>Tenant JWKS</div>
+          <div className={styles.eyebrow}>Tenant Signing Keys</div>
           <h1 className={styles.title}>{tenant.name}</h1>
         </div>
         <div className={styles.status}>
@@ -122,11 +123,11 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
 
           <form className={styles.keyForm} onSubmit={(event) => void submitKey(event)}>
             <label>
-              <span className={styles.label}>kid</span>
+              <span className={styles.label}>Key ID</span>
               <input value={draft.kid} onChange={(event) => setDraft({ ...draft, kid: event.target.value })} />
             </label>
             <label>
-              <span className={styles.label}>status</span>
+              <span className={styles.label}>Status</span>
               <select value={draft.status} onChange={(event) => setDraft({ ...draft, status: event.target.value })}>
                 <option value="active">active</option>
                 <option value="next">next</option>
@@ -134,15 +135,15 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
               </select>
             </label>
             <label>
-              <span className={styles.label}>alg</span>
+              <span className={styles.label}>Algorithm</span>
               <input value={draft.alg} onChange={(event) => setDraft({ ...draft, alg: event.target.value })} />
             </label>
             <label>
-              <span className={styles.label}>kty</span>
+              <span className={styles.label}>Key Type</span>
               <input value={draft.kty} onChange={(event) => setDraft({ ...draft, kty: event.target.value })} />
             </label>
             <label>
-              <span className={styles.label}>crv</span>
+              <span className={styles.label}>Curve</span>
               <input value={draft.crv} onChange={(event) => setDraft({ ...draft, crv: event.target.value })} />
             </label>
             <label>
@@ -151,7 +152,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
             </label>
             <label className={styles.checkLabel}>
               <input checked={draft.publish !== false} type="checkbox" onChange={(event) => setDraft({ ...draft, publish: event.target.checked })} />
-              <span>Publish</span>
+              <span>Publish public key</span>
             </label>
             <button className={styles.button} disabled={mutating} type="submit">Create key</button>
           </form>
@@ -182,7 +183,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
           </div>
 
           {view.keys.length === 0 ? (
-            <div className={styles.empty}>No publishable tenant JWKS keys are visible.</div>
+            <div className={styles.empty}>No tenant signing keys are available for publication.</div>
           ) : (
             <div className={styles.tableWrap}>
               <table className={styles.table}>
@@ -242,7 +243,7 @@ const TenantJwksPublicationView: React.FC<TenantJwksPublicationViewProps> = ({ t
       {!loading && !view && !error && (
         <div className={styles.empty}>
           <Icons.Key />
-          Tenant key publication state is unavailable.
+          Tenant signing key state is unavailable.
         </div>
       )}
     </section>

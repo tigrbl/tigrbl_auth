@@ -1,3 +1,5 @@
+import { extractApiErrorMessage, parseResponseBody } from './errorMessages';
+
 export class RestService {
   private base_url: string;
   private routes: Map<string, RestHandler>;
@@ -30,16 +32,17 @@ export class RestService {
       headers,
     });
 
+    const parsed = await parseResponseBody(response);
+
     if (!response.ok) {
-      const error_text = await response.text();
-      throw new Error(`HTTP ${response.status}: ${error_text}`);
+      throw new Error(extractApiErrorMessage(response, parsed.payload, { fallback: `HTTP ${response.status}` }));
     }
 
-    if (response.status === 204) {
+    if (response.status === 204 || parsed.payload === null) {
       return {} as T;
     }
 
-    return (await response.json()) as T;
+    return parsed.payload as T;
   }
 
   async get<T>(path: string): Promise<T> {

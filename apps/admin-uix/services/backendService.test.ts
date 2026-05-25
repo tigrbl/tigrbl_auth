@@ -13,7 +13,7 @@ describe('backendService tenant admin surface', () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       headers: new Headers({ 'content-type': 'application/json' }),
-      json: async () => ([
+      text: async () => JSON.stringify([
         {
           id: 'tenant-1',
           name: 'Tenant One',
@@ -44,7 +44,7 @@ describe('backendService tenant admin surface', () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
       headers: new Headers({ 'content-type': 'application/json' }),
-      json: async () => ({
+      text: async () => JSON.stringify({
         id: 'tenant-2',
         name: 'Tenant Two',
         slug: 'tenant-two',
@@ -73,6 +73,52 @@ describe('backendService tenant admin surface', () => {
       email: 'tenant-two@example.test',
     }));
     expect(tenant.email).toBe('tenant-two@example.test');
+  });
+
+  it('accepts valid JSON tenant responses even when the content type is text/plain', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      headers: new Headers({ 'content-type': 'text/plain; charset=utf-8' }),
+      text: async () => JSON.stringify({
+        id: 'tenant-plain',
+        name: 'Tenant Plain',
+        slug: 'tenant-plain',
+        email: 'tenant-plain@example.test',
+      }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const tenant = await backendService.createTenant({
+      name: 'Tenant Plain',
+      slug: 'tenant-plain',
+      email: 'tenant-plain@example.test',
+    });
+
+    expect(tenant).toEqual({
+      id: 'tenant-plain',
+      name: 'Tenant Plain',
+      slug: 'tenant-plain',
+      email: 'tenant-plain@example.test',
+      description: undefined,
+      created_at: undefined,
+    });
+  });
+
+  it('surfaces tenant provisioning conflicts from the admin tenant route', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      headers: new Headers({ 'content-type': 'application/json' }),
+      text: async () => JSON.stringify({
+        detail: 'tenant slug, name, or email already exists',
+      }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(backendService.createTenant({
+      name: 'Tenant Two',
+      slug: 'tenant-two',
+      email: 'tenant-two@example.test',
+    })).rejects.toThrow('Tenant slug, name, or email already exists');
   });
 
   it('calls tenant JWKS key mutation methods with tenant scope', async () => {

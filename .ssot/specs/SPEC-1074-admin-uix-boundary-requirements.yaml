@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1074"
 number: 1074
@@ -8,30 +8,31 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The admin UIX boundary MUST define the administrator browser-facing surface for `tigrbl_auth`."
+summary: "The admin UIX boundary defines administrator browser-facing surfaces for `tigrbl_auth`."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Updated admin UIX boundary for split product UIXs."
+    at: "2026-05-25T02:56:39Z"
 references: []
 body: |-
   ## Requirements
-  
-  The admin UIX boundary MUST define the administrator browser-facing surface for `tigrbl_auth`.
-  
-  Required in-scope capabilities:
-  - authenticated admin entry and session gate
-  - console shell and governed navigation
-  - readiness and configuration views
-  - administrative resource views
-  - policy administration views
-  - safe mutation workflows
-  
-  Required exclusions:
-  - public end-user authentication UX
-  - raw secret disclosure
-  - backend-only implementation internals
-  - unrelated CLI-only behaviors that are not rendered through the admin UIX
-  
-  The admin UIX boundary MUST remain separate from public UIX and MUST consume governed backend contracts rather than inventing an untracked surface.
+
+  The admin UIX boundary defines administrator browser-facing surfaces for `tigrbl_auth`.
+
+  The historical `apps/admin-uix` package is a compatibility and extraction source while product UIXs are separated. New administrator workflows SHOULD land in the product UIX that owns the workflow:
+
+  - `apps/platform-admin-uix` for tenant lifecycle and platform authority assignment.
+  - `apps/tenant-admin-uix` for tenant identities, tenant admins, tenant JWKS, and tenant-local policy.
+  - `apps/developer-uix` for OIDC/OAuth app and client registration workflows.
+  - `apps/service-admin-uix` for machine, service, workload, API-key, and service-key workflows.
+
+  Required exclusions remain: public end-user authentication UX, raw secret disclosure, backend-only implementation internals, and unrelated CLI-only behaviors.
+
+  Each split UIX MUST consume a governed product API contract rather than inventing an untracked surface.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1077"
+  - "adr:1120"

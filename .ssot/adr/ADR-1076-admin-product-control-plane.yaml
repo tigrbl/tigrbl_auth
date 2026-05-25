@@ -11,7 +11,15 @@ tags: []
 summary: "Define admin as the management plane for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    at: "2026-05-25T02:56:37Z"
+    note: "Refined admin control plane into product-specific surfaces."
+    status: "draft"
 references: []
 body: |-
   Define admin as the management plane for tenants, principals, credentials, clients, apps, services, resource servers, JWKS, and policy.
+  
+  The admin product control plane is segmented into deployable API front doors: platform admin, tenant admin, developer, and service admin. Platform admin owns cross-tenant tenant lifecycle and authority assignment. Tenant admin owns tenant-scoped identity, membership, JWKS, and local policy. Developer owns app and OIDC/OAuth client self-service. Service admin owns machine, service, workload, API-key, and service-key administration.
+  
+  A broad admin surface may remain as a compatibility or extraction source, but production product delivery SHOULD expose only the product-specific surface required by the principal and UIX.

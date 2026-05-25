@@ -1,0 +1,41 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1143"
+number: 1143
+slug: "product-api-surface-separation-contract"
+title: "Product API Surface Separation Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This SPEC governs deployable product API surfaces for Tigrbl Auth."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Initial contract for the product-surface packaging slice."
+    at: "2026-05-25T02:55:09Z"
+references: []
+body: |-
+  ## Scope
+  
+  This SPEC governs deployable product API surfaces for Tigrbl Auth.
+  
+  ## Requirements
+  
+  The deployment resolver MUST define named product surfaces for `public-api`, `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, and `resource-validation-api`.
+  
+  Each product surface MUST declare its underlying primitive surface sets, allowed public capabilities, allowed admin resources, allowed admin REST router groups, and allowed OpenRPC methods or method prefixes.
+  
+  Public and resource-validation APIs MUST NOT expose `/rpc`, diagnostics, or admin table resources. Platform admin APIs MUST own tenant lifecycle and platform authority operations. Tenant admin APIs MUST exclude platform tenant lifecycle operations. Developer APIs MUST expose client registration and client metadata operations without tenant lifecycle authority. Service admin APIs MUST expose service, key, API-key, token-inspection, and validation metadata operations without human login surfaces.
+  
+  Runtime mounting, generated contracts, and JSON-RPC dispatch MUST derive from the same effective product-surface configuration and fail closed for disabled methods.
+  
+  ## Verification
+  
+  Verification MUST prove each API package builds an ASGI app, expected paths/methods are present, forbidden paths/methods are absent, and cross-surface requests fail closed.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1120"
+  - "adr:1076"

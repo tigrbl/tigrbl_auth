@@ -1,10 +1,11 @@
 import { gateway_rpc } from './jsonRpcService';
 import type { Alert, OAuthClient, PolicyGate, Tenant, TelemetryData, TenantJwksKeyInput, TenantJwksPublicationKey, TenantJwksPublicationView, User } from '../types';
 import { UserStatus } from '../types';
+import { expectedJsonErrorMessage, extractApiErrorMessage, humanizeError, parseResponseBody } from './errorMessages';
 
 const toError = (error: unknown): Error => {
   if (error instanceof Error) {
-    return error;
+    return new Error(humanizeError(error));
   }
   return new Error('Unknown backend error');
 };
@@ -13,7 +14,7 @@ async function rpcResult<T>(method: string, params: unknown = {}): Promise<T> {
   try {
     const response = await gateway_rpc.call<T>(method, params);
     if (response.error) {
-      throw new Error(response.error.message);
+      throw new Error(humanizeError(response.error.message));
     }
     return response.result as T;
   } catch (error) {
@@ -39,21 +40,17 @@ async function restJson<T>(path: string, init?: RequestInit): Promise<T> {
   });
   const contentType = response.headers.get('content-type') ?? '';
   const expectsJson = contentType.toLowerCase().includes('application/json');
-  if (!expectsJson) {
-    const preview = await response.text().catch(() => '');
-    const suffix = preview ? ` Body starts with: ${preview.slice(0, 80)}` : '';
-    throw new Error(`Expected JSON response from ${path}, received ${contentType || 'unknown content type'}.${suffix}`);
-  }
-  let payload: any;
-  try {
-    payload = await response.json();
-  } catch (error) {
+  const body = await parseResponseBody(response);
+  if (!body.isJson) {
+    if (!expectsJson) {
+      throw new Error(expectedJsonErrorMessage(path, body, contentType));
+    }
     throw new Error(`Expected JSON response from ${path}, but the JSON payload could not be parsed.`);
   }
   if (!response.ok) {
-    throw new Error(String(payload?.detail || payload?.error || `HTTP ${response.status}`));
+    throw new Error(extractApiErrorMessage(response, body.payload, { fallback: `HTTP ${response.status}` }));
   }
-  return payload as T;
+  return body.payload as T;
 }
 
 function normalizeUser(user: any): User {

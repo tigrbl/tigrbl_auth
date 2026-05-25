@@ -43,6 +43,22 @@
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
 }
 
+.feedback {
+  @apply border px-5 py-4 text-sm font-semibold;
+}
+
+.feedbackSuccess {
+  border-color: #147a52;
+  background: #e9fff4;
+  color: #0b5136;
+}
+
+.feedbackError {
+  border-color: var(--accent-arterial);
+  background: #fff3f0;
+  color: #7a1e00;
+}
+
 .card {
   @apply p-10 transition-all relative cursor-pointer;
   background: var(--bg-parian);
@@ -151,6 +167,13 @@
   @apply space-y-6;
 }
 
+.formError {
+  @apply border px-4 py-3 text-sm font-semibold;
+  border-color: var(--accent-arterial);
+  background: #fff3f0;
+  color: #7a1e00;
+}
+
 .formLabel {
   @apply block text-[10px] font-bold uppercase tracking-widest mb-2;
 }
@@ -183,6 +206,11 @@
 .modalButton {
   @apply flex-1 py-3 text-[10px] font-bold uppercase transition-all;
   border: 1px solid var(--stroke-etched);
+}
+
+.modalButton:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .modalButtonCancel:hover {

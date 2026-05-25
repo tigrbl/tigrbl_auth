@@ -1,0 +1,15 @@
+import { describe, expect, it } from "vitest";
+import { API_BASE_URL_ENV, FORBIDDEN_PATH_PREFIXES, apiUrl, assertSurfacePath } from "./backendSurface";
+
+describe("tenant admin API boundary", () => {
+  it("uses exactly the tenant admin API base URL variable", () => {
+    expect(API_BASE_URL_ENV).toBe("VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL");
+  });
+
+  it("permits tenant-scoped paths and rejects platform tenant lifecycle paths", () => {
+    expect(apiUrl("/user").pathname).toBe("/user");
+    for (const path of FORBIDDEN_PATH_PREFIXES) {
+      expect(() => assertSurfacePath(path)).toThrow(/outside/);
+    }
+  });
+});

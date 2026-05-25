@@ -11,7 +11,13 @@ tags: []
 summary: "Establish TypeScript and browser-facing packages as first-class deliverables when identity behavior must execute in browser public clients."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    at: "2026-05-25T02:56:38Z"
+    note: "Refined browser package family around product-specific UIX clients."
+    status: "draft"
 references: []
 body: |-
   Establish TypeScript and browser-facing packages as first-class deliverables when identity behavior must execute in browser public clients.
+  
+  Browser UIX packages are product clients with explicit API boundaries. Each product UIX MUST configure exactly one backend API base URL and reject paths outside its product surface. Public login, platform administration, tenant administration, developer app registration, and service administration are separate UIX workspaces rather than one browser client with every backend surface available.
