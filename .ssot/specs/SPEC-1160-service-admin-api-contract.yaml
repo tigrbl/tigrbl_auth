@@ -1,0 +1,38 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1160"
+number: 1160
+slug: "service-admin-api-contract"
+title: "Service Admin API Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the \tigrbl-auth-api-service-admin product API surface."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines service-admin product API contract for surface-separated implementation."
+    at: "2026-05-25T05:22:19Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the 	igrbl-auth-api-service-admin product API surface.
+  
+  ## Requirements
+  
+  The service-admin API MUST expose only service, machine, workload, API-key, service-key, token inspection, audit, and validation metadata administration through the service-admin-api product surface. It MAY expose token introspection, protected-resource metadata, issuer and tenant discovery metadata, JWKS helpers, service/admin resources, and token/key/audit RPC method families.
+  
+  The service-admin API MUST NOT expose tenant lifecycle operations, platform authority assignment, tenant-admin human identity management, developer app catalog management, public human login, consent, authorization pages, or diagnostics unless explicitly configured by a separate diagnostics deployment.
+  
+  ## Verification
+  
+  Verification MUST prove the package builds an ASGI app, exposes only configured public capabilities, admin resources, and OpenRPC prefixes, and fails closed for tenant lifecycle, developer, tenant-admin, platform-admin, login, consent, authorization, diagnostics, and disabled RPC methods.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1081"
+  - "adr:1120"
+  - "adr:1076"

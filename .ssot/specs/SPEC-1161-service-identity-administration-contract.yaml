@@ -1,0 +1,37 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1161"
+number: 1161
+slug: "service-identity-administration-contract"
+title: "Service Identity Administration Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs service, machine, and workload identity administration through the service-admin API."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines service and machine identity administration requirements."
+    at: "2026-05-25T05:22:27Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs service, machine, and workload identity administration through the service-admin API.
+  
+  ## Requirements
+  
+  Authorized service admins MAY create, inspect, update, disable, enable, and retire service, machine, and workload identities only within authorized tenant, resource, or trust-domain boundaries. Non-human identities MUST be modeled through principals, credentials, and policy rather than human user accounts.
+  
+  Identity administration MUST preserve ownership context, credential posture, auditability, and separation from tenant-admin human identity workflows.
+  
+  ## Verification
+  
+  Verification MUST prove service identity operations are ownership-scoped, policy-authorized, auditable, and denied across tenant, platform, developer, and tenant-admin boundaries.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1081"
+  - "adr:1109"

@@ -17,9 +17,13 @@ status_notes:
     note: "Define service, machine, workload, and device identity flow ownership."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Bound machine identity workflows to service-admin product surface."
     at: "2026-05-25T02:56:45Z"
+    note: "Bound machine identity workflows to service-admin product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked service machine workload identity flow to service-admin API decision."
+    at: "2026-05-25T05:23:06Z"
 references: []
 body: |-
   ## Scope
@@ -42,3 +46,4 @@ adr_ids:
   - "adr:1046"
   - "adr:1109"
   - "adr:1120"
+  - "adr:1081"
