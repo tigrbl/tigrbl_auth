@@ -1,0 +1,38 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1150"
+number: 1150
+slug: "tenant-admin-api-contract"
+title: "Tenant Admin API Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the \tigrbl-auth-api-tenant-admin product API surface."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines tenant-admin product API contract for surface-separated implementation."
+    at: "2026-05-25T05:08:45Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the 	igrbl-auth-api-tenant-admin product API surface.
+  
+  ## Requirements
+  
+  The tenant-admin API MUST expose only tenant-scoped administration capabilities through the 	enant-admin-api product surface. It MUST use the admin-rpc primitive surface set, MUST require administrative authentication and tenant-scoped authorization, and MUST be consumable by @tigrbl-auth/tenant-admin-uix.
+  
+  The tenant-admin API MAY expose tenant identities, tenant admins, tenant-local clients, consents, sessions, tenant key and JWKS administration, tenant-local audit, and tenant-local policy/configuration. It MUST NOT expose platform tenant creation, deletion, suspension, restoration, or cross-tenant authority assignment.
+  
+  ## Verification
+  
+  Verification MUST prove the package builds an ASGI app, exposes only the configured admin resources and OpenRPC prefixes, excludes public login/register/consent UI routes unless explicitly specified, and fails closed for platform tenant lifecycle paths and methods.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1079"
+  - "adr:1120"
+  - "adr:1076"

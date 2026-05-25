@@ -17,9 +17,13 @@ status_notes:
     note: "Define tenant-admin self-service workflow requirements."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Bound tenant self-service to tenant-admin product surface."
     at: "2026-05-25T02:56:46Z"
+    note: "Bound tenant self-service to tenant-admin product surface."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked tenant self-service flow to tenant-admin authority decision."
+    at: "2026-05-25T05:10:46Z"
 references: []
 body: |-
   ## Scope
@@ -41,3 +45,4 @@ spec_kind: "operational"
 adr_ids:
   - "adr:1110"
   - "adr:1120"
+  - "adr:1079"
