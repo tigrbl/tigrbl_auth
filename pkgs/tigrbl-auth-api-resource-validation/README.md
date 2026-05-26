@@ -16,3 +16,21 @@ Resource-server validation API front door for protected APIs that need issuer me
 ```python
 from tigrbl_auth_api_resource_validation import app, build_app
 ```
+
+## Local dev deployment
+
+Run the isolated validation front door on port `8014`:
+
+```bash
+docker compose -f docker-compose.resource-validation-api.yml up -d --build
+```
+
+Useful endpoints:
+
+| Endpoint | Purpose |
+| --- | --- |
+| `/.well-known/openid-configuration` | Issuer metadata needed by validators. |
+| `/.well-known/oauth-protected-resource` | Protected-resource metadata and verifier contract projection. |
+| `/.well-known/jwks.json` | Issuer key set for local JWT validation. |
+| `/tenants/{tenant_slug}/.well-known/jwks.json` | Tenant-scoped key set. |
+| `/introspect` | RFC 7662 token status checks for authorized callers. |
