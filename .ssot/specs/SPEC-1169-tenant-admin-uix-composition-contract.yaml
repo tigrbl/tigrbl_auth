@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1169"
+number: 1169
+slug: "tenant-admin-uix-composition-contract"
+title: "Tenant Admin UIX Composition Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The tenant-admin UIX app must consume only the tenant-admin API base URL. It owns tenant-scoped administration for tenant users, tenant admins, tenant-local identity settings, tenant JWKS/key publication, tenant-local policy/configuration, audit views, and tenant-scoped session or consent administration. It must not expose platform tenant lifecycle controls, developer app catalog ownership outside tenant authority, service identity administration, public login pages, diagnostics, system, or RPC paths outside the paired tenant-admin API contract."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for tenant-admin UIX composition."
+    at: "2026-05-26T12:18:30Z"
+references: []
+body: |-
+  The tenant-admin UIX app must consume only the tenant-admin API base URL. It owns tenant-scoped administration for tenant users, tenant admins, tenant-local identity settings, tenant JWKS/key publication, tenant-local policy/configuration, audit views, and tenant-scoped session or consent administration. It must not expose platform tenant lifecycle controls, developer app catalog ownership outside tenant authority, service identity administration, public login pages, diagnostics, system, or RPC paths outside the paired tenant-admin API contract.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1084"
+  - "adr:1120"
+  - "adr:1077"

@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1171"
+number: 1171
+slug: "service-admin-uix-composition-contract"
+title: "Service Admin UIX Composition Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The service-admin UIX app must consume only the service-admin API base URL. It owns service identity, workload identity, API key, service key, token inspection, validation metadata helper, and service audit workflows for machine and workload principals. It must not expose platform tenant lifecycle, tenant-local human identity administration, developer OIDC app catalog workflows, public login pages, diagnostics, system, or RPC paths outside the paired service-admin API contract."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for service-admin UIX composition."
+    at: "2026-05-26T12:18:45Z"
+references: []
+body: |-
+  The service-admin UIX app must consume only the service-admin API base URL. It owns service identity, workload identity, API key, service key, token inspection, validation metadata helper, and service audit workflows for machine and workload principals. It must not expose platform tenant lifecycle, tenant-local human identity administration, developer OIDC app catalog workflows, public login pages, diagnostics, system, or RPC paths outside the paired service-admin API contract.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1084"
+  - "adr:1120"
+  - "adr:1081"

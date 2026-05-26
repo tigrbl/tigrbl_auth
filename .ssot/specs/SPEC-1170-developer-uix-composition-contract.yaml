@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1170"
+number: 1170
+slug: "developer-uix-composition-contract"
+title: "Developer UIX Composition Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The developer UIX app must consume only the developer API base URL. It owns OIDC/OAuth app and client registration workflows including redirect URIs, auth method configuration, client metadata, client secrets, client JWKS, dynamic registration visibility, and app lifecycle actions delegated to tenant developers. It must not expose platform tenant lifecycle, tenant identity/JWKS administration outside delegated app authority, service identity administration, public login pages, diagnostics, system, or RPC paths outside the paired developer API contract."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for developer UIX composition."
+    at: "2026-05-26T12:18:38Z"
+references: []
+body: |-
+  The developer UIX app must consume only the developer API base URL. It owns OIDC/OAuth app and client registration workflows including redirect URIs, auth method configuration, client metadata, client secrets, client JWKS, dynamic registration visibility, and app lifecycle actions delegated to tenant developers. It must not expose platform tenant lifecycle, tenant identity/JWKS administration outside delegated app authority, service identity administration, public login pages, diagnostics, system, or RPC paths outside the paired developer API contract.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1084"
+  - "adr:1120"
+  - "adr:1118"

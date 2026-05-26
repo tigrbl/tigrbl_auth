@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Initial UIX split contract for product-specific clients."
     at: "2026-05-25T02:55:23Z"
+    note: "Initial UIX split contract for product-specific clients."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked product UIX client boundary to surface-specific edge-client decision."
+    at: "2026-05-26T12:18:51Z"
 references: []
 body: |-
   ## Scope
@@ -37,3 +41,4 @@ spec_kind: "normative"
 adr_ids:
   - "adr:1120"
   - "adr:1077"
+  - "adr:1084"

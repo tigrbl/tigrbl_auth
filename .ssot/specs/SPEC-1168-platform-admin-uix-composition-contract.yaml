@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1168"
+number: 1168
+slug: "platform-admin-uix-composition-contract"
+title: "Platform Admin UIX Composition Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform operator workflows for tenant creation, tenant lifecycle, platform authority assignment, platform users/operators, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for platform-admin UIX composition."
+    at: "2026-05-26T12:18:23Z"
+references: []
+body: |-
+  The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform operator workflows for tenant creation, tenant lifecycle, platform authority assignment, platform users/operators, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1084"
+  - "adr:1120"
+  - "adr:1076"
