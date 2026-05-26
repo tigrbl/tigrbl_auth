@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1175"
+number: 1175
+slug: "public-discovery-and-jwks-contract"
+title: "Public Discovery and JWKS Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public discovery and JWKS contract defines public OIDC discovery, OAuth authorization-server metadata, JWKS, tenant discovery, and tenant JWKS behavior consumed by public clients and public UIX. It defines tenant visibility, issuer metadata, key publication expectations, and cross-surface exclusions for admin, RPC, diagnostics, tenant lifecycle, developer, and service-admin paths."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for public API discovery and JWKS decomposition."
+    at: "2026-05-26T12:25:56Z"
+references: []
+body: |-
+  The public discovery and JWKS contract defines public OIDC discovery, OAuth authorization-server metadata, JWKS, tenant discovery, and tenant JWKS behavior consumed by public clients and public UIX. It defines tenant visibility, issuer metadata, key publication expectations, and cross-surface exclusions for admin, RPC, diagnostics, tenant lifecycle, developer, and service-admin paths.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"

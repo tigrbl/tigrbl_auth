@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1172"
+number: 1172
+slug: "public-oauth-authorization-flow-contract"
+title: "Public OAuth Authorization Flow Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public API authorization flow contract defines browser-facing authorization behavior for /authorize and related callback handoff. The contract covers PKCE, state, nonce, redirect URI validation, consent handoff, tenant-aware issuer context, and safe OAuth/OIDC error responses. The flow must remain public-rest only and must not expose admin, RPC, diagnostics, tenant lifecycle, developer, or service-admin control-plane capabilities."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for public API authorization endpoint decomposition."
+    at: "2026-05-26T12:25:30Z"
+references: []
+body: |-
+  The public API authorization flow contract defines browser-facing authorization behavior for /authorize and related callback handoff. The contract covers PKCE, state, nonce, redirect URI validation, consent handoff, tenant-aware issuer context, and safe OAuth/OIDC error responses. The flow must remain public-rest only and must not expose admin, RPC, diagnostics, tenant lifecycle, developer, or service-admin control-plane capabilities.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"

@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1173"
+number: 1173
+slug: "public-token-and-session-endpoint-contract"
+title: "Public Token and Session Endpoint Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The public token and session endpoint contract defines token exchange, refresh/session continuity, public logout, and public revocation-adjacent behavior exposed through the public API. The contract covers browser-safe token handling expectations, public route availability, and failure behavior without granting admin, RPC, diagnostics, tenant lifecycle, developer, or service-admin authority."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for public API token and session endpoint decomposition."
+    at: "2026-05-26T12:25:37Z"
+references: []
+body: |-
+  The public token and session endpoint contract defines token exchange, refresh/session continuity, public logout, and public revocation-adjacent behavior exposed through the public API. The contract covers browser-safe token handling expectations, public route availability, and failure behavior without granting admin, RPC, diagnostics, tenant lifecycle, developer, or service-admin authority.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1083"
+  - "adr:1120"
