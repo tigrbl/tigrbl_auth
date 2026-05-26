@@ -1,0 +1,80 @@
+"""Tenant-admin API front-door contract for Tigrbl Auth."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True, slots=True)
+class TenantAdminApiContract:
+    """Machine-readable boundary for the tenant control-plane API package."""
+
+    product_surface: str
+    intended_uix: str
+    admin_resources: tuple[str, ...]
+    admin_rest_groups: tuple[str, ...]
+    rpc_method_prefixes: tuple[str, ...]
+    forbidden_route_prefixes: tuple[str, ...]
+    forbidden_exact_routes: tuple[str, ...]
+    consumed_packages: tuple[str, ...]
+
+
+TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
+    product_surface="tenant-admin-api",
+    intended_uix="@tigrbl-auth/tenant-admin-uix",
+    admin_resources=(
+        "User",
+        "Client",
+        "ClientRegistration",
+        "Consent",
+        "AuthSession",
+        "AuditEvent",
+        "KeyRotationEvent",
+    ),
+    admin_rest_groups=("admin_auth", "admin_identities"),
+    rpc_method_prefixes=(
+        "audit.",
+        "client.",
+        "client.registration.",
+        "consent.",
+        "discovery.",
+        "identity.",
+        "jwks.",
+        "keys.",
+        "profile.",
+        "rpc.",
+        "session.",
+        "target.",
+        "tenant.keys.",
+    ),
+    forbidden_route_prefixes=(
+        "/tenant",
+        "/service",
+        "/servicekey",
+        "/apikey",
+        "/tokenrecord",
+        "/revokedtoken",
+    ),
+    forbidden_exact_routes=(
+        "/login",
+        "/authorize",
+        "/token",
+        "/register",
+        "/logout",
+        "/revoke",
+        "/userinfo",
+        "/introspect",
+        "/.well-known/jwks.json",
+        "/.well-known/openid-configuration",
+    ),
+    consumed_packages=(
+        "tigrbl-auth",
+        "tigrbl-identity-server",
+        "tigrbl-identity-runtime",
+        "tigrbl-identity-admin",
+        "tigrbl-identity-principals",
+        "tigrbl-identity-policy",
+    ),
+)
+
+__all__ = ["TENANT_ADMIN_API_CONTRACT", "TenantAdminApiContract"]
