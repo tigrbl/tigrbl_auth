@@ -16,3 +16,22 @@ Platform-scoped tenant lifecycle and authority-assignment API front door.
 ```python
 from tigrbl_auth_api_platform_admin import app, build_app
 ```
+
+## Local dev deployment
+
+Run the isolated platform control-plane front door on port `8015`:
+
+```bash
+docker compose -f docker-compose.platform-admin-api.yml up -d --build
+```
+
+The dev API key defaults to `dev-platform-admin-key`.
+
+Useful endpoints:
+
+| Endpoint | Purpose |
+| --- | --- |
+| `/openapi.json` | Platform-admin REST/control-plane contract. |
+| `/openrpc.json` | Platform-admin JSON-RPC method contract. |
+| `/rpc` | API-key-protected JSON-RPC dispatch. |
+| `/tenant` | API-key-protected platform tenant lifecycle resource. |
