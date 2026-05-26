@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -38,6 +39,65 @@ def test_public_api_contract_matches_product_surface_registry() -> None:
     assert deployment.surface_enabled("public-rest")
     assert not deployment.surface_enabled("admin-rpc")
     assert deployment.active_openrpc_methods == ()
+
+
+def test_public_api_build_app_uses_environment_backed_default_settings() -> None:
+    with patch.dict("os.environ", {"AUTHN_ISSUER": "http://localhost:8013"}):
+        built = build_app()
+
+    assert built.deployment.issuer == "http://localhost:8013"
+    assert built.deployment.product_surface == PRODUCT_SURFACE
+
+
+def test_public_api_openapi_documents_public_protocol_request_bodies(
+    tmp_path: Path,
+) -> None:
+    public_app = build_app(_settings(tmp_path))
+    openapi = public_app.openapi()
+
+    paths = openapi["paths"]
+    assert (
+        paths["/login"]["post"]["requestBody"]["content"]["application/json"][
+            "schema"
+        ]["$ref"]
+        == "#/components/schemas/CredsIn"
+    )
+    assert (
+        "application/x-www-form-urlencoded"
+        in paths["/token"]["post"]["requestBody"]["content"]
+    )
+    assert (
+        paths["/register"]["post"]["requestBody"]["content"]["application/json"][
+            "schema"
+        ]["$ref"]
+        == "#/components/schemas/DynamicClientRegistrationIn"
+    )
+    authorize_params = {
+        param["name"] for param in paths["/authorize"]["get"]["parameters"]
+    }
+    assert {"response_type", "client_id", "redirect_uri"}.issubset(
+        authorize_params
+    )
+
+
+@pytest.mark.asyncio
+async def test_public_api_served_openapi_uses_public_protocol_request_bodies(
+    tmp_path: Path,
+) -> None:
+    public_app = build_app(_settings(tmp_path))
+
+    async with AsyncClient(
+        transport=ASGITransport(app=public_app), base_url="http://test"
+    ) as client:
+        response = await client.get("/openapi.json")
+
+    assert response.status_code == 200
+    openapi = response.json()
+    assert openapi["paths"]["/login"]["post"]["requestBody"]
+    assert (
+        "application/x-www-form-urlencoded"
+        in openapi["paths"]["/token"]["post"]["requestBody"]["content"]
+    )
 
 
 def test_public_api_contract_routes_are_public_only() -> None:
