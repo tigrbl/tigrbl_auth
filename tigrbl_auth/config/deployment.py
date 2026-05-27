@@ -122,6 +122,12 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
         "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
+    "admin-rest": {
+        "surface_public_enabled": False,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": False,
+        "surface_diagnostics_enabled": False,
+    },
     "diagnostics": {
         "surface_public_enabled": False,
         "surface_admin_enabled": False,
@@ -137,7 +143,7 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
     "platform-admin-api": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": True,
+        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
     "tenant-admin-api": {
@@ -175,16 +181,15 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "rpc_method_prefixes": (),
     },
     "platform-admin-api": {
-        "surface_sets": ("admin-rpc",),
+        "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
             "Tenant",
             "User",
-            "AuthSession",
             "AuditEvent",
             "KeyRotationEvent",
         ),
-        "admin_rest_groups": ("admin_auth", "admin_tenants", "admin_identities"),
+        "admin_rest_groups": ("admin_auth",),
         "rpc_method_prefixes": (
             "audit.",
             "discovery.",
@@ -192,7 +197,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "identity.",
             "profile.",
             "rpc.",
-            "session.",
             "target.",
             "tenant.",
         ),
@@ -205,7 +209,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "Client",
             "ClientRegistration",
             "Consent",
-            "AuthSession",
             "AuditEvent",
             "KeyRotationEvent",
         ),
@@ -221,7 +224,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "keys.",
             "profile.",
             "rpc.",
-            "session.",
             "target.",
             "tenant.keys.",
         ),
@@ -469,9 +471,12 @@ class ResolvedDeployment:
         return bool(self.flags.get(name, False))
 
     def surface_enabled(self, name: str) -> bool:
+        if name in SURFACE_SET_REGISTRY:
+            return name in self.surface_sets
         mapping = {
             "public-rest": "surface_public_enabled",
             "admin-rpc": "surface_admin_enabled",
+            "admin-rest": "surface_admin_enabled",
             "diagnostics": "surface_diagnostics_enabled",
             "rpc": "surface_rpc_enabled",
             "operator": "surface_operator_enabled",
@@ -605,7 +610,7 @@ def _plugin_mode_for_surface_sets(surface_sets: tuple[str, ...]) -> str:
     surface_set = set(surface_sets)
     if surface_set == {"public-rest"}:
         return "public-only"
-    if surface_set == {"admin-rpc"}:
+    if surface_set in ({"admin-rpc"}, {"admin-rest"}):
         return "admin-only"
     if surface_set == {"diagnostics"}:
         return "diagnostics-only"
@@ -765,7 +770,9 @@ def resolve_deployment(
 
     surfaces = {
         "surface_public_enabled": "public-rest" in effective_surface_sets,
-        "surface_admin_enabled": "admin-rpc" in effective_surface_sets,
+        "surface_admin_enabled": bool(
+            {"admin-rest", "admin-rpc"}.intersection(effective_surface_sets)
+        ),
         "surface_rpc_enabled": "admin-rpc" in effective_surface_sets,
         "surface_diagnostics_enabled": "diagnostics" in effective_surface_sets,
         "surface_operator_enabled": bool(raw.get("surface_operator_enabled", True)),
@@ -827,11 +834,12 @@ def resolve_deployment(
     active_targets = list(dict.fromkeys(active_targets))
 
     active_methods: list[str] = []
-    for name, meta in OPENRPC_METHOD_REGISTRY.items():
-        if meta.get("surface_set") in effective_surface_sets:
-            if not _rpc_method_allowed(name, product_meta):
-                continue
-            active_methods.append(name)
+    if bool(surfaces["surface_rpc_enabled"]):
+        for name, meta in OPENRPC_METHOD_REGISTRY.items():
+            if meta.get("surface_set") in effective_surface_sets:
+                if not _rpc_method_allowed(name, product_meta):
+                    continue
+                active_methods.append(name)
 
     return ResolvedDeployment(
         profile=profile_name,

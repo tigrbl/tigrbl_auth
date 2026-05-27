@@ -38,6 +38,7 @@ def _hide_disabled_control_plane_docs(
     deployment: ResolvedDeployment,
     *,
     rpc_prefix: str,
+    openrpc_path: str,
     diagnostics_prefix: str,
 ) -> None:
     routes = getattr(app, "_routes", None)
@@ -49,7 +50,7 @@ def _hide_disabled_control_plane_docs(
         path = str(getattr(route, "path_template", None) or getattr(route, "path", ""))
         hide = (
             not deployment.flag_enabled("surface_rpc_enabled")
-            and _path_has_prefix(path, rpc_prefix)
+            and (_path_has_prefix(path, rpc_prefix) or path == openrpc_path)
         ) or (
             not deployment.flag_enabled("surface_diagnostics_enabled")
             and _path_has_prefix(path, diagnostics_prefix)
@@ -103,6 +104,7 @@ def build_app(
         app,
         resolved_deployment,
         rpc_prefix="/rpc",
+        openrpc_path="/openrpc.json",
         diagnostics_prefix="/system",
     )
     register_lifecycle(app)
@@ -112,6 +114,7 @@ def build_app(
         settings_obj=resolved_settings,
         admin_path_prefixes=admin_resource_path_prefixes(resolved_deployment),
         rpc_prefix="/rpc",
+        openrpc_path="/openrpc.json",
         diagnostics_prefix="/system",
     )
 

@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Draft contract for platform-admin API completion."
     at: "2026-05-25T05:01:18Z"
+    note: "Draft contract for platform-admin API completion."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    at: "2026-05-27T16:58:50Z"
 references: []
 body: |-
   ## Requirements

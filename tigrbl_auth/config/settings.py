@@ -156,7 +156,10 @@ class Settings(BaseSettings):
     )
     active_surface_sets: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ACTIVE_SURFACES", ""),
-        description="Comma-separated installable surface sets: public-rest, admin-rpc, diagnostics.",
+        description=(
+            "Comma-separated installable surface sets: public-rest, admin-rest, "
+            "admin-rpc, diagnostics."
+        ),
     )
     active_protocol_slices: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ACTIVE_PROTOCOL_SLICES", ""),

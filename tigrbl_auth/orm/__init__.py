@@ -1,9 +1,10 @@
-"""Legacy import facade for canonical persistence models.
+"""Compatibility facade for canonical identity storage ORM imports."""
 
-The authoritative implementations live in ``tigrbl_auth.tables``.
-"""
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
-from tigrbl_auth.tables import (
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.orm import (
     ENGINE,
     Base,
     ApiKey,

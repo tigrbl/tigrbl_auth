@@ -1,5 +1,5 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.device_code``."""
+"""ORM import facade for canonical table module."""
 
-from tigrbl_auth.tables.device_code import DeviceCode
+from tigrbl_identity_storage.tables.device_code import DeviceCode
 
 __all__ = ["DeviceCode"]

@@ -166,6 +166,12 @@ def _path_has_prefix(path: str, prefix: str) -> bool:
     return path == prefix or path.startswith(f"{prefix}/")
 
 
+def _platform_admin_raw_table_path(path: str, deployment: ResolvedDeployment) -> bool:
+    if getattr(deployment, "product_surface", None) != "platform-admin-api":
+        return False
+    return _path_has_prefix(path, "/tenant") or _path_has_prefix(path, "/user")
+
+
 class AdminGate:
     """ASGI gate for generated local control-plane surfaces."""
 
@@ -177,6 +183,7 @@ class AdminGate:
         settings_obj: object | None = None,
         admin_path_prefixes: Iterable[str] = (),
         rpc_prefix: str = "/rpc",
+        openrpc_path: str = "/openrpc.json",
         diagnostics_prefix: str = "/system",
     ) -> None:
         self.app = app
@@ -184,6 +191,7 @@ class AdminGate:
         self.settings_obj = settings_obj
         self.admin_path_prefixes = tuple(dict.fromkeys(admin_path_prefixes))
         self.rpc_prefix = rpc_prefix
+        self.openrpc_path = openrpc_path
         self.diagnostics_prefix = diagnostics_prefix
         self.enabled = _control_plane_enabled(deployment)
         self._digest = _bootstrap_digest(settings_obj, self.enabled)
@@ -202,16 +210,20 @@ class AdminGate:
             "surface_diagnostics_enabled"
         ) and _path_has_prefix(path, self.diagnostics_prefix):
             return True
-        if self.deployment.surface_enabled("admin-rpc"):
+        if self.deployment.flag_enabled("surface_admin_enabled"):
             return any(
                 _path_has_prefix(path, prefix) for prefix in self.admin_path_prefixes
             )
         return False
 
     def _disabled_control_plane_path(self, path: str) -> bool:
+        if _platform_admin_raw_table_path(path, self.deployment):
+            return True
         if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
             path, self.rpc_prefix
         ):
+            return True
+        if not self.deployment.flag_enabled("surface_rpc_enabled") and path == self.openrpc_path:
             return True
         if not self.deployment.flag_enabled(
             "surface_diagnostics_enabled"

@@ -12,7 +12,7 @@ from uuid import UUID
 
 from tigrbl_auth.framework import delete, select
 from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
-from tigrbl_auth.tables import (
+from tigrbl_identity_storage.tables import (
     AuditEvent,
     AuthSession,
     ClientRegistration,
@@ -22,7 +22,7 @@ from tigrbl_auth.tables import (
     Tenant,
     TokenRecord,
 )
-from tigrbl_auth.tables.engine import ENGINE
+from tigrbl_identity_storage.tables.engine import ENGINE
 
 
 def _run(coro):

@@ -94,11 +94,13 @@ def test_tenant_admin_contract_routes_are_tenant_scoped_only() -> None:
     assert "/client" in prefixes
     assert "/clientregistration" in prefixes
     assert "/consent" in prefixes
+    assert "/authsession" not in prefixes
     assert "/tenant" not in prefixes
     assert "/service" not in prefixes
     assert "identity.list" in deployment.active_openrpc_methods
     assert "client.registration.upsert" in deployment.active_openrpc_methods
     assert "tenant.keys.create" in deployment.active_openrpc_methods
+    assert "session.list" not in deployment.active_openrpc_methods
     assert "tenant.list" not in deployment.active_openrpc_methods
     assert "token.inspect" not in deployment.active_openrpc_methods
 
@@ -124,7 +126,7 @@ async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
     assert "/client" in paths
     assert "/clientregistration" in paths
     assert "/consent" in paths
-    assert "/authsession" in paths
+    assert "/authsession" not in paths
     assert "/tenant" not in paths
     assert "/service" not in paths
     for route in TENANT_ADMIN_API_CONTRACT.forbidden_exact_routes:
@@ -137,6 +139,7 @@ async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
     )
     assert "Tenant.list" not in methods
     assert "Service.list" not in methods
+    assert "session.list" not in methods
 
 
 @pytest.mark.asyncio

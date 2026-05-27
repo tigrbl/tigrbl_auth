@@ -1,0 +1,43 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1176"
+number: 1176
+slug: "canonical-identity-storage-contract"
+title: "Canonical Identity Storage Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tigrbl_auth` facade package."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Initial contract for canonical storage ownership and permanent compatibility facades."
+    at: "2026-05-27T16:58:10Z"
+references: []
+body: |-
+  ## Scope
+  
+  This SPEC governs canonical persistence ownership for the identity package suite and the compatibility imports retained by the `tigrbl_auth` facade package.
+  
+  ## Requirements
+  
+  `tigrbl_identity_storage.tables` MUST own canonical table classes, `Base`, runtime table binding, engine exports, and table module exports.
+  
+  `tigrbl_identity_storage.orm`, `tigrbl_identity_storage.db`, `tigrbl_identity_storage.persistence`, and `tigrbl_identity_storage.migrations` MUST consume canonical storage tables directly and MUST NOT import `tigrbl_auth.tables` compatibility facades.
+  
+  `tigrbl_auth.tables`, `tigrbl_auth.orm`, `tigrbl_auth.db`, and `tigrbl_auth.services.persistence` MUST remain supported compatibility facades. Compatibility exports MUST preserve object identity with canonical storage symbols.
+  
+  Deployable frontdoor APIs MUST compose route resources from canonical storage table objects and keep product-specific behavior limited to route composition, tags, prefixes, capability filtering, and fail-closed exposure rules.
+  
+  ## Verification
+  
+  Verification MUST assert facade/storage symbol identity, absence of duplicate table class definitions under `tigrbl_auth.tables`, storage-owned migration imports, persistence facade parity, and product API composition over canonical storage table resources.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1121"
+  - "adr:1101"
+  - "adr:1104"
+  - "adr:1096"

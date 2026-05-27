@@ -1,5 +1,9 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.revoked_token``."""
+"""Compatibility facade for canonical identity storage ORM imports."""
 
-from tigrbl_auth.tables.revoked_token import RevokedToken
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.orm.revoked_token import RevokedToken
 
 __all__ = ["RevokedToken"]

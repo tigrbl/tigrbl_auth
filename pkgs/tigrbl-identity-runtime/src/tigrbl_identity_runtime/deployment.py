@@ -119,6 +119,12 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
         "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
+    "admin-rest": {
+        "surface_public_enabled": False,
+        "surface_admin_enabled": True,
+        "surface_rpc_enabled": False,
+        "surface_diagnostics_enabled": False,
+    },
     "diagnostics": {
         "surface_public_enabled": False,
         "surface_admin_enabled": False,
@@ -281,9 +287,12 @@ class ResolvedDeployment:
         return bool(self.flags.get(name, False))
 
     def surface_enabled(self, name: str) -> bool:
+        if name in SURFACE_SET_REGISTRY:
+            return name in self.surface_sets
         mapping = {
             "public-rest": "surface_public_enabled",
             "admin-rpc": "surface_admin_enabled",
+            "admin-rest": "surface_admin_enabled",
             "diagnostics": "surface_diagnostics_enabled",
             "rpc": "surface_rpc_enabled",
             "operator": "surface_operator_enabled",
@@ -468,7 +477,7 @@ def resolve_deployment(
 
     surfaces = {
         "surface_public_enabled": "public-rest" in effective_surface_sets,
-        "surface_admin_enabled": "admin-rpc" in effective_surface_sets,
+        "surface_admin_enabled": bool({"admin-rest", "admin-rpc"}.intersection(effective_surface_sets)),
         "surface_rpc_enabled": "admin-rpc" in effective_surface_sets,
         "surface_diagnostics_enabled": "diagnostics" in effective_surface_sets,
         "surface_operator_enabled": bool(raw.get("surface_operator_enabled", True)),

@@ -1,5 +1,5 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.user``."""
+"""ORM import facade for canonical table module."""
 
-from tigrbl_auth.tables.user import User
+from tigrbl_identity_storage.tables.user import User
 
 __all__ = ["User"]

@@ -233,7 +233,7 @@ async def test_superuser_can_provision_and_delete_tenants_via_admin_session(tmp_
         assert login.status_code == 200, login.text
 
         create = await client.post(
-            "/admin/tenants",
+            "/admin/tenant",
             json={
                 "slug": f"ops-{uuid4().hex[:8]}",
                 "name": "Operations Tenant",
@@ -245,11 +245,11 @@ async def test_superuser_can_provision_and_delete_tenants_via_admin_session(tmp_
         assert created["slug"].startswith("ops-")
         assert created["email"] == "ops-tenant@example.test"
 
-        listing = await client.get("/admin/tenants")
+        listing = await client.get("/admin/tenant")
         assert listing.status_code == 200, listing.text
         payload = listing.json()
         assert any(item["id"] == created["id"] for item in payload)
 
-        delete = await client.delete(f"/admin/tenants/{created['id']}")
+        delete = await client.delete(f"/admin/tenant/{created['id']}")
         assert delete.status_code == 200, delete.text
         assert delete.json()["id"] == created["id"]

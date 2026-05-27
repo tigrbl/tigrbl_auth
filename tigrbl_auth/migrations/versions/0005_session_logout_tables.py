@@ -1,7 +1,11 @@
 """Executable DDL migration for 0005_session_logout_tables."""
 
 from tigrbl_auth.migrations.helpers import create_tables, drop_tables
-from tigrbl_auth.tables import LogoutState
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.tables import LogoutState
 
 revision = '0005_session_logout_tables'
 down_revision = '0004_device_par_revocation_tables'

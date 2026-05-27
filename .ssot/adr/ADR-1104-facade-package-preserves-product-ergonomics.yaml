@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Retain tigrbl-auth as a public facade and compatibility package."
     at: "2026-05-18T08:13:08Z"
+    note: "Retain tigrbl-auth as a public facade and compatibility package."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Clarified by adr:1121: tigrbl_auth.tables, tigrbl_auth.orm, DB helpers, and persistence helpers are permanent compatibility facades over canonical identity storage symbols."
+    at: "2026-05-27T16:58:22Z"
 references: []
 body: |-
   ## Decision

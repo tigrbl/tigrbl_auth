@@ -12,8 +12,8 @@ from tigrbl.ddl import sqlite_default_attach_map
 from tigrbl_auth.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
 from tigrbl_auth.migrations.helpers import AUTHN_SCHEMA
 from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
-from tigrbl_auth.tables import Base
-from tigrbl_auth.tables.engine import ENGINE
+from tigrbl_identity_storage.tables import Base
+from tigrbl_identity_storage.tables.engine import ENGINE
 
 VERSIONS_DIR = Path(__file__).resolve().parent / "versions"
 

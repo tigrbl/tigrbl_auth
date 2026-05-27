@@ -36,7 +36,7 @@ def _uuid(value: str, *, label: str) -> UUID:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, f"invalid {label}") from exc
 
 
-@api.route("/admin/tenants", methods=["GET"], response_model=list[AdminTenantOut])
+@api.route("/admin/tenant", methods=["GET"], response_model=list[AdminTenantOut])
 async def admin_list_tenants(
     request: Request,
     db: AsyncSession = Depends(get_db),
@@ -46,7 +46,7 @@ async def admin_list_tenants(
     return [_tenant_payload(row) for row in rows]
 
 
-@api.route("/admin/tenants", methods=["POST"], response_model=AdminTenantOut)
+@api.route("/admin/tenant", methods=["POST"], response_model=AdminTenantOut)
 async def admin_create_tenant(
     request: Request,
     payload: AdminTenantProvisionIn | None = None,
@@ -73,7 +73,7 @@ async def admin_create_tenant(
     return _tenant_payload(row)
 
 
-@api.route("/admin/tenants/{tenant_id}", methods=["DELETE"], response_model=AdminTenantOut)
+@api.route("/admin/tenant/{tenant_id}", methods=["DELETE"], response_model=AdminTenantOut)
 async def admin_delete_tenant(
     request: Request,
     tenant_id: str,

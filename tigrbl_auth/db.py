@@ -1,8 +1,9 @@
-"""Legacy import facade for canonical database engine wiring.
+"""Compatibility facade for canonical database engine wiring."""
 
-The authoritative implementation lives in ``tigrbl_auth.tables.engine``.
-"""
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
-from tigrbl_auth.tables.engine import ENGINE, dsn, get_db
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.db import ENGINE, dsn, get_db
 
 __all__ = ["ENGINE", "dsn", "get_db"]

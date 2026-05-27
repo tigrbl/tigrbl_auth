@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Draft contract for resource-validation API completion."
     at: "2026-05-25T05:29:43Z"
+    note: "Draft contract for resource-validation API completion."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    at: "2026-05-27T16:58:55Z"
 references: []
 body: |-
   The resource-validation API package must assemble only the resource-validation-api product surface. The surface exposes JWKS, tenant JWKS, OIDC discovery, tenant OIDC discovery, OAuth protected-resource metadata, and token introspection for resource servers and gateways. It must not expose login, authorize, consent, registration, admin resources, diagnostics, or RPC methods. Resource-server packages and middleware consume this front door for issuer metadata, key material, protected-resource metadata, and introspection without gaining control-plane authority.

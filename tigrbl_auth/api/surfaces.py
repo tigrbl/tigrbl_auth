@@ -9,6 +9,7 @@ installed surface shape.
 from __future__ import annotations
 
 from dataclasses import replace
+import re
 from typing import Any, Callable, Final
 
 from tigrbl_auth.framework import TigrblApp, TigrblRouter
@@ -36,7 +37,11 @@ from tigrbl_auth.standards.oauth2.rfc8414 import include_rfc8414
 from tigrbl_auth.standards.oauth2.rfc9728 import include_rfc9728
 from tigrbl_auth.standards.oauth2.token_exchange import include_token_exchange_endpoint
 from tigrbl_auth.security.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
-from tigrbl_auth.tables import (
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.tables import (
     ApiKey,
     AuditEvent,
     AuthCode,
@@ -54,7 +59,7 @@ from tigrbl_auth.tables import (
     TokenRecord,
     User,
 )
-from tigrbl_auth.tables.engine import dsn
+from tigrbl_identity_storage.tables.engine import dsn
 
 TABLE_RESOURCES = [
     Tenant,
@@ -94,11 +99,20 @@ def _admin_table_resources(
     )
 
 
+def _admin_resource_path(resource: type[Any], deployment: ResolvedDeployment | None = None) -> str:
+    if getattr(deployment, "product_surface", None) == "platform-admin-api":
+        if resource.__name__ == "Tenant":
+            return "/admin/tenant"
+        if resource.__name__ == "User":
+            return "/admin/identity"
+    return f"/{resource.__name__.lower()}"
+
+
 def admin_resource_path_prefixes(
     deployment: ResolvedDeployment | None = None,
 ) -> tuple[str, ...]:
     return tuple(
-        f"/{resource.__name__.lower()}"
+        _admin_resource_path(resource, deployment)
         for resource in _admin_table_resources(deployment)
     )
 
@@ -114,7 +128,7 @@ def _requires_admin_security_metadata(
     rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> bool:
-    if deployment.surface_enabled("admin-rpc") and any(
+    if deployment.flag_enabled("surface_admin_enabled") and any(
         _path_has_prefix(path, prefix)
         for prefix in admin_resource_path_prefixes(deployment)
     ):
@@ -157,6 +171,50 @@ def _attach_admin_security_metadata(
             )
         )
     router._routes[:] = secured_routes
+
+
+def _route_pattern(path_template: str, param_names: tuple[str, ...]) -> re.Pattern[str]:
+    pattern = re.escape(path_template)
+    for name in param_names:
+        pattern = pattern.replace(r"\{" + name + r"\}", f"(?P<{name}>[^/]+)")
+    return re.compile(f"^{pattern}/?$")
+
+
+def _rewrite_admin_table_routes(
+    router: TigrblRouter,
+    deployment: ResolvedDeployment,
+) -> None:
+    if deployment.product_surface != "platform-admin-api":
+        return
+    rewrites = {
+        "Tenant": ("/tenant", "/admin/tenant"),
+        "User": ("/user", "/admin/identity"),
+    }
+    rewritten = []
+    for route in getattr(router, "_routes", []):
+        model = getattr(route, "tigrbl_model", None)
+        resource_name = getattr(model, "__name__", "")
+        rewrite = rewrites.get(resource_name)
+        path_template = str(getattr(route, "path_template", "") or "")
+        if rewrite is None or not path_template.startswith(rewrite[0]):
+            rewritten.append(route)
+            continue
+        old_prefix, new_prefix = rewrite
+        next_path = f"{new_prefix}{path_template[len(old_prefix):]}"
+        binding = getattr(route, "tigrbl_binding", None)
+        if binding is not None and hasattr(binding, "path"):
+            binding = replace(binding, path=next_path)
+        rewritten.append(
+            replace(
+                route,
+                path_template=next_path,
+                pattern=_route_pattern(
+                    next_path, tuple(getattr(route, "param_names", ()) or ())
+                ),
+                tigrbl_binding=binding,
+            )
+        )
+    router._routes[:] = rewritten
 
 
 PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
@@ -247,12 +305,11 @@ def build_surface_api(
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
-    if deployment.surface_enabled("admin-rpc") or deployment.flag_enabled(
-        "surface_rpc_enabled"
-    ):
+    if deployment.flag_enabled("surface_admin_enabled"):
         admin_resources = _admin_table_resources(deployment)
         if admin_resources:
             router.include_tables(admin_resources)
+            _rewrite_admin_table_routes(router, deployment)
         for entry in ADMIN_ROUTER_BINDINGS:
             if deployment.admin_rest_group_enabled(str(entry["mount_group"])):
                 router.include_router(entry["router"])

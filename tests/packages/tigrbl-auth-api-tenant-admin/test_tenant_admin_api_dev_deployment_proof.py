@@ -56,7 +56,7 @@ def test_tenant_admin_api_dev_deployment_exposes_tenant_control_plane() -> None:
         assert "/client" in paths
         assert "/clientregistration" in paths
         assert "/consent" in paths
-        assert "/authsession" in paths
+        assert "/authsession" not in paths
         assert "/tenant" not in paths
         assert "/service" not in paths
         for forbidden in ("/login", "/authorize", "/token", "/register"):
@@ -70,6 +70,7 @@ def test_tenant_admin_api_dev_deployment_exposes_tenant_control_plane() -> None:
         )
         assert "Tenant.list" not in methods
         assert "Service.list" not in methods
+        assert "session.list" not in methods
 
         missing_key = client.post(
             "/rpc",

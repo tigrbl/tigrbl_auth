@@ -1,62 +1,9 @@
-"""Tenant model for the authentication service."""
+"""Compatibility facade for ``tigrbl_identity_storage.tables.tenant``."""
 
-from __future__ import annotations
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
-import uuid
+ensure_identity_storage_importable()
 
-from tigrbl_auth.framework import (
-    TenantBase,
-    Bootstrappable,
-    F,
-    IO,
-    S,
-    acol,
-    ColumnSpec,
-    Mapped,
-    String,
-    relationship,
-)
-
-
-class Tenant(TenantBase, Bootstrappable):
-    __table_args__ = ({"extend_existing": True, "schema": "authn"},)
-
-    name: Mapped[str] = acol(
-        spec=ColumnSpec(
-            storage=S(String, nullable=False, unique=True),
-            field=F(constraints={"max_length": 120}, required_in=("create",)),
-            io=IO(
-                in_verbs=("create", "update", "replace"),
-                out_verbs=("read", "list"),
-                filter_ops=("eq", "ilike"),
-                sortable=True,
-            ),
-        )
-    )
-    email: Mapped[str] = acol(
-        spec=ColumnSpec(
-            storage=S(String, nullable=False, unique=True),
-            field=F(constraints={"max_length": 120}, required_in=("create",)),
-            io=IO(
-                in_verbs=("create", "update", "replace"),
-                out_verbs=("read", "list"),
-                filter_ops=("eq", "ilike"),
-                sortable=True,
-            ),
-        )
-    )
-
-    users = relationship("User", back_populates="tenant", cascade="all, delete-orphan")
-    clients = relationship("Client", back_populates="tenant", cascade="all, delete-orphan")
-
-    DEFAULT_ROWS = [
-        {
-            "id": uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
-            "email": "tenant@example.com",
-            "name": "Public",
-            "slug": "public",
-        }
-    ]
-
+from tigrbl_identity_storage.tables.tenant import Tenant
 
 __all__ = ["Tenant"]

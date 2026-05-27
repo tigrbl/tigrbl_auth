@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Defines tenant-admin product API contract for surface-separated implementation."
     at: "2026-05-25T05:08:45Z"
+    note: "Defines tenant-admin product API contract for surface-separated implementation."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    at: "2026-05-27T16:58:51Z"
 references: []
 body: |-
   ## Scope

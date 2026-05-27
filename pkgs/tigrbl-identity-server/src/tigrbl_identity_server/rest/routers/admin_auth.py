@@ -22,6 +22,7 @@ from tigrbl_auth.tables import User
 from tigrbl_auth.tables.engine import get_db
 
 api = router = TigrblRouter()
+ADMIN_AUTH_TAGS = ["Admin Auth"]
 
 
 def _session_payload(user: User | None, *, session_id: str | None = None, debug_reset_token: str | None = None) -> AdminSessionOut:
@@ -40,7 +41,7 @@ def _session_payload(user: User | None, *, session_id: str | None = None, debug_
     )
 
 
-@api.route("/admin/auth/login", methods=["POST"], response_model=AdminSessionOut)
+@api.route("/admin/auth/login", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_login(request: Request, creds: CredsIn | None = None, db: AsyncSession = Depends(get_db)):
     if creds is None:
         body = await request.json() or {}
@@ -56,12 +57,12 @@ async def admin_login(request: Request, creds: CredsIn | None = None, db: AsyncS
     return response
 
 
-@api.route("/admin/auth/login", methods=["GET"])
+@api.route("/admin/auth/login", methods=["GET"], tags=ADMIN_AUTH_TAGS)
 async def admin_login_browser_redirect() -> Response:
     return RedirectResponse(url="/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
 
-@api.route("/admin/auth/session", methods=["GET"], response_model=AdminSessionOut)
+@api.route("/admin/auth/session", methods=["GET"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_session(request: Request):
     session_row = await resolve_browser_session(request)
     user = await resolve_admin_user_from_request(request)
@@ -70,14 +71,14 @@ async def admin_session(request: Request):
     return _session_payload(user, session_id=str(session_row.id))
 
 
-@api.route("/admin/auth/logout", methods=["POST"], response_model=AdminSessionOut)
+@api.route("/admin/auth/logout", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_logout() -> Response:
     response = JSONResponse(AdminSessionOut(authenticated=False).model_dump())
     clear_session_cookie(response)
     return response
 
 
-@api.route("/admin/auth/forgot-password", methods=["POST"], response_model=AdminSessionOut)
+@api.route("/admin/auth/forgot-password", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_forgot_password(
     request: Request,
     payload: AdminPasswordResetRequestIn | None = None,
@@ -97,7 +98,7 @@ async def admin_forgot_password(
     return _session_payload(None, debug_reset_token=debug_token)
 
 
-@api.route("/admin/auth/reset-password", methods=["POST"], response_model=AdminSessionOut)
+@api.route("/admin/auth/reset-password", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_reset_password(request: Request, payload: AdminPasswordResetCompleteIn | None = None):
     if payload is None:
         body = await request.json() or {}
@@ -110,7 +111,7 @@ async def admin_reset_password(request: Request, payload: AdminPasswordResetComp
     return response
 
 
-@api.route("/admin/auth/change-password", methods=["POST"], response_model=AdminSessionOut)
+@api.route("/admin/auth/change-password", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_change_password(
     request: Request,
     payload: AdminPasswordChangeIn | None = None,

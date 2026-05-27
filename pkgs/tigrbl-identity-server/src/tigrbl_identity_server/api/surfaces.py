@@ -31,7 +31,11 @@ from tigrbl_auth.standards.oauth2.rfc8414 import include_rfc8414
 from tigrbl_auth.standards.oauth2.rfc9728 import include_rfc9728
 from tigrbl_auth.standards.oauth2.token_exchange import include_token_exchange_endpoint
 from tigrbl_auth.security.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
-from tigrbl_auth.tables import (
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.tables import (
     ApiKey,
     AuditEvent,
     AuthCode,
@@ -49,7 +53,7 @@ from tigrbl_auth.tables import (
     TokenRecord,
     User,
 )
-from tigrbl_auth.tables.engine import dsn
+from tigrbl_identity_storage.tables.engine import dsn
 
 TABLE_RESOURCES = [
     Tenant,
@@ -86,7 +90,7 @@ def _requires_admin_security_metadata(
     rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> bool:
-    if deployment.surface_enabled("admin-rpc") and any(
+    if deployment.flag_enabled("surface_admin_enabled") and any(
         _path_has_prefix(path, prefix) for prefix in admin_resource_path_prefixes()
     ):
         return True
@@ -197,7 +201,7 @@ def build_surface_api(
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
-    if deployment.surface_enabled("admin-rpc") or deployment.flag_enabled("surface_rpc_enabled"):
+    if deployment.flag_enabled("surface_admin_enabled"):
         router.include_tables(TABLE_RESOURCES)
         router.include_router(admin_auth_api)
         router.include_router(admin_tenants_api)

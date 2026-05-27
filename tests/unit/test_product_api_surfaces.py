@@ -15,6 +15,7 @@ from tigrbl_auth.config.deployment import (
     resolve_deployment,
 )
 from tigrbl_auth.api.surfaces import admin_resource_path_prefixes
+from tigrbl_auth.api import surfaces
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -66,6 +67,11 @@ def test_product_surfaces_are_registered_as_named_surface_sets() -> None:
         assert product_surface in SURFACE_SET_REGISTRY
 
 
+def test_product_api_surface_resources_are_canonical_storage_tables() -> None:
+    for resource in surfaces.TABLE_RESOURCES:
+        assert resource.__module__.startswith("tigrbl_identity_storage.tables.")
+
+
 @pytest.mark.parametrize("product_surface", sorted(API_PACKAGES))
 def test_api_packages_build_surface_constrained_asgi_apps(
     product_surface: str, tmp_path: Path
@@ -109,12 +115,17 @@ def test_platform_admin_surface_owns_tenant_lifecycle_without_public_login_route
 ):
     deployment = resolve_deployment(product_surface="platform-admin-api")
 
-    assert deployment.surface_enabled("admin-rpc")
+    assert deployment.surface_enabled("admin-rest")
+    assert not deployment.surface_enabled("admin-rpc")
+    assert not deployment.flag_enabled("surface_rpc_enabled")
     assert deployment.plugin_mode == "admin-only"
     assert not deployment.surface_enabled("public-rest")
-    assert "/tenant" in admin_resource_path_prefixes(deployment)
-    assert "tenant.list" in deployment.active_openrpc_methods
-    assert "client.registration.upsert" not in deployment.active_openrpc_methods
+    assert "/admin/tenant" in admin_resource_path_prefixes(deployment)
+    assert "/admin/identity" in admin_resource_path_prefixes(deployment)
+    assert "/authsession" not in admin_resource_path_prefixes(deployment)
+    assert "/tenant" not in admin_resource_path_prefixes(deployment)
+    assert "/user" not in admin_resource_path_prefixes(deployment)
+    assert deployment.active_openrpc_methods == ()
     assert "/login" not in deployment.active_routes
     assert "/register" not in deployment.active_routes
 
@@ -126,6 +137,7 @@ def test_tenant_admin_surface_excludes_platform_tenant_lifecycle() -> None:
     assert deployment.plugin_mode == "admin-only"
     assert "/tenant" not in admin_resource_path_prefixes(deployment)
     assert "/user" in admin_resource_path_prefixes(deployment)
+    assert "/authsession" not in admin_resource_path_prefixes(deployment)
     assert "identity.list" in deployment.active_openrpc_methods
     assert "tenant.keys.create" in deployment.active_openrpc_methods
     assert "tenant.list" not in deployment.active_openrpc_methods
@@ -176,6 +188,14 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
     ) as client:
         platform_login = await client.post("/login", json={})
         platform_tenant = await client.get("/tenant")
+        platform_admin_tenants = await client.get("/admin/tenant")
+        platform_user = await client.get("/user")
+        platform_identity = await client.get("/admin/identity")
+        platform_authsession = await client.get(
+            "/authsession", headers={"X-API-Key": "test-admin-key"}
+        )
+        platform_rpc = await client.post("/rpc", json={})
+        platform_openrpc = await client.get("/openrpc.json")
 
     async with AsyncClient(
         transport=ASGITransport(app=tenant), base_url="http://test"
@@ -187,5 +207,11 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
     assert public_rpc.status_code == 404
     assert public_tenant.status_code == 404
     assert platform_login.status_code == 404
-    assert platform_tenant.status_code == 401
+    assert platform_tenant.status_code == 404
+    assert platform_user.status_code == 404
+    assert platform_admin_tenants.status_code == 401
+    assert platform_identity.status_code == 401
+    assert platform_authsession.status_code == 404
+    assert platform_rpc.status_code == 404
+    assert platform_openrpc.status_code == 404
     assert tenant_tenant.status_code == 404

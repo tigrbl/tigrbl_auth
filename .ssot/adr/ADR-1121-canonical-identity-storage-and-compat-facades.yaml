@@ -1,0 +1,35 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1121"
+number: 1121
+slug: "canonical-identity-storage-and-compat-facades"
+title: "Canonical identity storage and compatibility facades"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "`tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted storage canonicalization contract with permanent tigrbl_auth compatibility facades."
+    at: "2026-05-27T16:57:57Z"
+references: []
+body: |-
+  ## Decision
+  
+  `tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers.
+  
+  `tigrbl_auth.tables`, `tigrbl_auth.orm`, `tigrbl_auth.db`, and `tigrbl_auth.services.persistence` remain permanent compatibility facades. They re-export canonical storage symbols and MUST preserve object identity for existing importers.
+  
+  Frontdoor API packages compose product routes and product filters only. They MUST NOT define, fork, or shadow identity table classes.
+  
+  ## Context
+  
+  The identity package split introduced a dedicated storage package while legacy callers still import table and persistence symbols through `tigrbl_auth`. The compatibility surface is product ergonomics, not canonical ownership.
+  
+  ## Consequences
+  
+  Storage owns migrations and runtime table resources. Compatibility facades remain supported indefinitely. Product frontdoors consume canonical storage resources and continue to fail closed by product-surface configuration.

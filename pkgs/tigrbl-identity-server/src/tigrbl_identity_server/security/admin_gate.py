@@ -121,6 +121,12 @@ def _path_has_prefix(path: str, prefix: str) -> bool:
     return path == prefix or path.startswith(f"{prefix}/")
 
 
+def _platform_admin_raw_table_path(path: str, deployment: ResolvedDeployment) -> bool:
+    if getattr(deployment, "product_surface", None) != "platform-admin-api":
+        return False
+    return _path_has_prefix(path, "/tenant") or _path_has_prefix(path, "/user")
+
+
 class AdminGate:
     """ASGI gate for generated local control-plane surfaces."""
 
@@ -153,11 +159,13 @@ class AdminGate:
             return True
         if self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
             return True
-        if self.deployment.surface_enabled("admin-rpc"):
+        if self.deployment.flag_enabled("surface_admin_enabled"):
             return any(_path_has_prefix(path, prefix) for prefix in self.admin_path_prefixes)
         return False
 
     def _disabled_control_plane_path(self, path: str) -> bool:
+        if _platform_admin_raw_table_path(path, self.deployment):
+            return True
         if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
             return True
         if not self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):

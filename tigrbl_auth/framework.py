@@ -110,8 +110,15 @@ from swarmauri_tokens_jwt import JWTTokenService
 _BaseTigrblRouter = getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")
 
 
+_TABLE_MODULE_PREFIXES = ("tigrbl_auth.tables.", "tigrbl_identity_storage.tables.")
+
+
+def _is_local_table_module(module_name: str) -> bool:
+    return module_name.startswith(_TABLE_MODULE_PREFIXES)
+
+
 def _is_local_table_model(model: Any) -> bool:
-    return isinstance(model, type) and getattr(model, "__module__", "").startswith("tigrbl_auth.tables.")
+    return isinstance(model, type) and _is_local_table_module(getattr(model, "__module__", ""))
 
 
 def _deleted_count(result: Any) -> int:
@@ -173,7 +180,7 @@ def _install_table_crud_invoke_compat() -> None:
         target = getattr(target, "target", alias)
         module_name = getattr(model, "__module__", "")
 
-        if db is not None and target in crud_targets and module_name.startswith("tigrbl_auth.tables."):
+        if db is not None and target in crud_targets and _is_local_table_module(module_name):
             payload = ctx_dict.get("payload")
             if payload is None:
                 payload = {}
@@ -844,7 +851,7 @@ def _install_table_rpc_call_compat() -> None:
         module_name = getattr(model, "__module__", "")
         normalized = _normalize_payload(payload)
 
-        if module_name.startswith("tigrbl_auth.tables.") and (
+        if _is_local_table_module(module_name) and (
             target == "clear" or (target == "create" and normalized)
         ):
             release = None
@@ -870,7 +877,7 @@ def _install_table_rpc_call_compat() -> None:
             ctx=ctx,
         )
         if (
-            module_name.startswith("tigrbl_auth.tables.")
+            _is_local_table_module(module_name)
             and target == "clear"
             and normalized
             and _deleted_count(_unwrap_runtime_result(final)) == 0

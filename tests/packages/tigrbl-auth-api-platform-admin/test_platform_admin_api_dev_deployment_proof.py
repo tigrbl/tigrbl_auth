@@ -24,7 +24,7 @@ def _client() -> httpx.Client:
 
 def _require_live_platform_admin_api() -> None:
     try:
-        response = httpx.get(f"{BASE_URL}/openrpc.json", timeout=3.0)
+        response = httpx.get(f"{BASE_URL}/openapi.json", timeout=3.0)
     except httpx.HTTPError as exc:
         pytest.skip(
             f"platform-admin API dev deployment is not reachable at "
@@ -33,65 +33,79 @@ def _require_live_platform_admin_api() -> None:
     if response.status_code != 200:
         pytest.skip(
             f"platform-admin API dev deployment at {BASE_URL} returned "
-            f"{response.status_code} for OpenRPC readiness"
+            f"{response.status_code} for OpenAPI readiness"
         )
 
 
-def _method_names(openrpc: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in openrpc.get("methods", [])}
-
-
-def _rpc_discover_method_names(result: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in result.get("methods", [])}
-
-
-def test_platform_admin_api_dev_deployment_exposes_control_plane_surface() -> None:
+def test_platform_admin_api_dev_deployment_exposes_rest_control_plane_surface() -> None:
     _require_live_platform_admin_api()
 
     with _client() as client:
         openapi = client.get("/openapi.json")
         assert openapi.status_code == 200, openapi.text
         paths = openapi.json()["paths"]
-        assert "/tenant" in paths
-        assert "/user" in paths
-        assert "/authsession" in paths
+        assert "/admin/tenant" in paths
+        assert "/admin/tenant/{item_id}" in paths
+        assert "/admin/identity" in paths
+        assert "/admin/identity/{item_id}" in paths
+        assert "/tenant" not in paths
+        assert "/user" not in paths
+        assert "/authsession" not in paths
+        assert "/authsession/{item_id}" not in paths
         assert "/client" not in paths
-        for forbidden in ("/login", "/authorize", "/token", "/register"):
+        schemas = openapi.json()["components"]["schemas"]
+        assert "TenantCreateRequest" in schemas
+        assert "TenantUpdateRequest" in schemas
+        assert "UserCreateRequest" in schemas
+        assert "UserUpdateRequest" in schemas
+        assert "AdminTenantProvisionIn" not in schemas
+        assert "AdminIdentityProvisionIn" not in schemas
+        assert (
+            paths["/admin/tenant"]["post"]["requestBody"]["content"][
+                "application/json"
+            ]["schema"]["$ref"]
+            == "#/components/schemas/TenantCreateRequest"
+        )
+        assert (
+            paths["/admin/identity"]["post"]["requestBody"]["content"][
+                "application/json"
+            ]["schema"]["$ref"]
+            == "#/components/schemas/UserCreateRequest"
+        )
+        for forbidden in (
+            "/login",
+            "/authorize",
+            "/token",
+            "/register",
+            "/rpc",
+            "/openrpc.json",
+        ):
             assert forbidden not in paths
 
         openrpc = client.get("/openrpc.json")
-        assert openrpc.status_code == 200, openrpc.text
-        methods = _method_names(openrpc.json())
-        assert {"Tenant.list", "Tenant.read", "User.list"}.issubset(methods)
-        assert "client.registration.upsert" not in methods
-        assert "Client.list" not in methods
+        assert openrpc.status_code == 404, openrpc.text
 
-        missing_key = client.post(
-            "/rpc",
-            json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
-        )
-        assert missing_key.status_code == 401
-        assert missing_key.json()["error"] == "missing_admin_api_key"
-
-        valid_key = client.post(
+        rpc = client.post(
             "/rpc",
             headers={"X-API-Key": ADMIN_API_KEY},
-            json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
+            json={},
         )
-        assert valid_key.status_code == 200, valid_key.text
-        result = valid_key.json()["result"]
-        assert result["deployment"]["plugin_mode"] == "admin-only"
-        assert result["deployment"]["surface_sets"] == ["admin-rpc"]
-        assert result["deployment"]["active_routes"] == []
-        assert "tenant.list" in result["deployment"]["active_openrpc_methods"]
-        rpc_methods = _rpc_discover_method_names(result)
-        assert "tenant.list" in rpc_methods
-        assert "tenant.keys.create" in rpc_methods
-        assert "client.registration.upsert" not in rpc_methods
+        assert rpc.status_code == 404, rpc.text
 
-        invalid_key = client.get("/tenant", headers={"X-API-Key": "wrong"})
+        invalid_key = client.get("/admin/tenant", headers={"X-API-Key": "wrong"})
         assert invalid_key.status_code == 403
         assert invalid_key.json()["error"] == "invalid_admin_api_key"
+        raw_tenant = client.get("/tenant", headers={"X-API-Key": ADMIN_API_KEY})
+        assert raw_tenant.status_code == 404, raw_tenant.text
+        raw_user = client.get("/user", headers={"X-API-Key": ADMIN_API_KEY})
+        assert raw_user.status_code == 404, raw_user.text
+        raw_authsession = client.get(
+            "/authsession", headers={"X-API-Key": ADMIN_API_KEY}
+        )
+        assert raw_authsession.status_code == 404, raw_authsession.text
+        identity_missing_key = client.get("/admin/identity")
+        assert identity_missing_key.status_code == 401
+        assert identity_missing_key.json()["error"] == "missing_admin_api_key"
 
         for forbidden in ("/login", "/authorize", "/token", "/register"):
             response = client.post(forbidden)

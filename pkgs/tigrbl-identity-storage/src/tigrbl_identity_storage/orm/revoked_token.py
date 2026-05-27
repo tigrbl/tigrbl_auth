@@ -1,5 +1,5 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.revoked_token``."""
+"""ORM import facade for canonical table module."""
 
-from tigrbl_auth.tables.revoked_token import RevokedToken
+from tigrbl_identity_storage.tables.revoked_token import RevokedToken
 
 __all__ = ["RevokedToken"]

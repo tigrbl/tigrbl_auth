@@ -1,39 +1,9 @@
-"""Durable revoked token registry."""
+"""Compatibility facade for ``tigrbl_identity_storage.tables.revoked_token``."""
 
-from __future__ import annotations
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
-import datetime as dt
-import uuid
+ensure_identity_storage_importable()
 
-from tigrbl_auth.framework import (
-    Base,
-    Timestamped,
-    S,
-    acol,
-    Mapped,
-    String,
-    GUIDPk,
-    TZDateTime,
-    PgUUID,
-    ForeignKeySpec,
-)
-
-
-class RevokedToken(Base, GUIDPk, Timestamped):
-    __tablename__ = "revoked_tokens"
-    __table_args__ = ({"schema": "authn"},)
-
-    token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True, default=lambda: uuid.uuid4().hex))
-    token_type_hint: Mapped[str | None] = acol(storage=S(String(64), nullable=True))
-    subject: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    tenant_id: Mapped[uuid.UUID | None] = acol(
-        storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
-    )
-    client_id: Mapped[uuid.UUID | None] = acol(
-        storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.clients.id"), nullable=True, index=True)
-    )
-    revoked_reason: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
-    expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
-
+from tigrbl_identity_storage.tables.revoked_token import RevokedToken
 
 __all__ = ["RevokedToken"]

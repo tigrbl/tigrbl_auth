@@ -13,7 +13,6 @@ class PlatformAdminApiContract:
     intended_uix: str
     admin_resources: tuple[str, ...]
     admin_rest_groups: tuple[str, ...]
-    rpc_method_prefixes: tuple[str, ...]
     forbidden_route_prefixes: tuple[str, ...]
     forbidden_exact_routes: tuple[str, ...]
     consumed_packages: tuple[str, ...]
@@ -25,22 +24,10 @@ PLATFORM_ADMIN_API_CONTRACT = PlatformAdminApiContract(
     admin_resources=(
         "Tenant",
         "User",
-        "AuthSession",
         "AuditEvent",
         "KeyRotationEvent",
     ),
-    admin_rest_groups=("admin_auth", "admin_tenants", "admin_identities"),
-    rpc_method_prefixes=(
-        "audit.",
-        "discovery.",
-        "flow.",
-        "identity.",
-        "profile.",
-        "rpc.",
-        "session.",
-        "target.",
-        "tenant.",
-    ),
+    admin_rest_groups=("admin_auth",),
     forbidden_route_prefixes=(
         "/client",
         "/clientregistration",
@@ -50,6 +37,9 @@ PLATFORM_ADMIN_API_CONTRACT = PlatformAdminApiContract(
         "/apikey",
         "/tokenrecord",
         "/revokedtoken",
+        "/authsession",
+        "/tenant",
+        "/user",
     ),
     forbidden_exact_routes=(
         "/login",
@@ -60,6 +50,8 @@ PLATFORM_ADMIN_API_CONTRACT = PlatformAdminApiContract(
         "/revoke",
         "/userinfo",
         "/introspect",
+        "/rpc",
+        "/openrpc.json",
         "/.well-known/jwks.json",
         "/.well-known/openid-configuration",
     ),

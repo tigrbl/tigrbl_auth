@@ -27,7 +27,6 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
         "Client",
         "ClientRegistration",
         "Consent",
-        "AuthSession",
         "AuditEvent",
         "KeyRotationEvent",
     ),
@@ -43,7 +42,6 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
         "keys.",
         "profile.",
         "rpc.",
-        "session.",
         "target.",
         "tenant.keys.",
     ),
@@ -54,6 +52,7 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
         "/apikey",
         "/tokenrecord",
         "/revokedtoken",
+        "/authsession",
     ),
     forbidden_exact_routes=(
         "/login",

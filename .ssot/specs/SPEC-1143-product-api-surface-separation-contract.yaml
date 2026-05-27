@@ -21,9 +21,13 @@ status_notes:
     note: "Linked product-surface separation to the resource-validation public-rest-only contract."
     status: "draft"
   -
-    status: "draft"
-    note: "Linked product-surface separation to the public API hosted-login contract."
     at: "2026-05-25T05:34:11Z"
+    note: "Linked product-surface separation to the public API hosted-login contract."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked product API surface separation to canonical identity storage ownership."
+    at: "2026-05-27T16:58:38Z"
 references: []
 body: |-
   ## Scope
@@ -40,12 +44,15 @@ body: |-
   
   Runtime mounting, generated contracts, and JSON-RPC dispatch MUST derive from the same effective product-surface configuration and fail closed for disabled methods.
   
+  Product API frontdoors MUST compose table-backed resources from canonical `tigrbl_identity_storage` table objects as defined by `spc:1176`. Product frontdoors own route composition, tags, prefixes, capability filtering, and product-surface exposure policy; they MUST NOT define or fork identity table classes.
+  
   ## Verification
   
-  Verification MUST prove each API package builds an ASGI app, expected paths/methods are present, forbidden paths/methods are absent, and cross-surface requests fail closed.
+  Verification MUST prove each API package builds an ASGI app, expected paths/methods are present, forbidden paths/methods are absent, cross-surface requests fail closed, and table-backed product resources are canonical storage table objects.
 spec_kind: "normative"
 adr_ids:
   - "adr:1120"
   - "adr:1076"
   - "adr:1082"
   - "adr:1083"
+  - "adr:1121"

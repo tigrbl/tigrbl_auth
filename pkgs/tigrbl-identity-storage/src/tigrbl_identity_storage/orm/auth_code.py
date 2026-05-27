@@ -1,9 +1,9 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.auth_code``."""
+"""ORM import facade for canonical table module."""
 
 from tigrbl_auth.api.rest.shared import _jwt
 from tigrbl_auth.rfc.rfc7636_pkce import verify_code_challenge
 from tigrbl_auth.standards.oidc.id_token import mint_id_token
-from tigrbl_auth.tables.auth_code import AuthCode
+from tigrbl_identity_storage.tables.auth_code import AuthCode
 
 
 async def _exchange(ctx: dict, auth_code: AuthCode):

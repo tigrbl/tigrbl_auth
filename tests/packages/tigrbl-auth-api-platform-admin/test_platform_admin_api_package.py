@@ -37,14 +37,6 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
     return SimpleNamespace(**values)
 
 
-def _method_names(openrpc: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in openrpc.get("methods", [])}
-
-
-def _rpc_discover_method_names(result: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in result.get("methods", [])}
-
-
 def test_platform_admin_contract_matches_product_surface_registry() -> None:
     deployment = resolve_deployment(
         profile="production", product_surface=PRODUCT_SURFACE
@@ -56,8 +48,11 @@ def test_platform_admin_contract_matches_product_surface_registry() -> None:
         "@tigrbl-auth/platform-admin-uix"
     )
     assert deployment.plugin_mode == "admin-only"
-    assert deployment.surface_enabled("admin-rpc")
+    assert deployment.surface_enabled("admin-rest")
+    assert not deployment.surface_enabled("admin-rpc")
+    assert not deployment.flag_enabled("surface_rpc_enabled")
     assert not deployment.surface_enabled("public-rest")
+    assert deployment.active_openrpc_methods == ()
     assert tuple(deployment.allowed_admin_resources) == (
         PLATFORM_ADMIN_API_CONTRACT.admin_resources
     )
@@ -89,19 +84,19 @@ def test_platform_admin_contract_routes_are_platform_control_plane_only() -> Non
         profile="production", product_surface=PRODUCT_SURFACE
     )
 
-    assert "/tenant" in admin_resource_path_prefixes(deployment)
+    assert "/admin/tenant" in admin_resource_path_prefixes(deployment)
+    assert "/admin/identity" in admin_resource_path_prefixes(deployment)
+    assert "/tenant" not in admin_resource_path_prefixes(deployment)
+    assert "/user" not in admin_resource_path_prefixes(deployment)
     assert "/client" not in admin_resource_path_prefixes(deployment)
-    assert "tenant.list" in deployment.active_openrpc_methods
-    assert "tenant.show" in deployment.active_openrpc_methods
-    assert "client.registration.upsert" not in deployment.active_openrpc_methods
-    assert "tenant.keys.create" in deployment.active_openrpc_methods
+    assert deployment.active_openrpc_methods == ()
 
     for route in PLATFORM_ADMIN_API_CONTRACT.forbidden_exact_routes:
         assert route not in deployment.active_routes
 
 
 @pytest.mark.asyncio
-async def test_platform_admin_openapi_and_openrpc_are_surface_constrained(
+async def test_platform_admin_openapi_is_rest_control_plane_only(
     tmp_path: Path,
 ) -> None:
     platform_app = build_app(_settings(tmp_path))
@@ -111,26 +106,52 @@ async def test_platform_admin_openapi_and_openrpc_are_surface_constrained(
     ) as client:
         openapi_response = await client.get("/openapi.json")
         openrpc_response = await client.get("/openrpc.json")
+        rpc_response = await client.post("/rpc", json={})
 
     assert openapi_response.status_code == 200
     paths = openapi_response.json()["paths"]
-    assert "/tenant" in paths
-    assert "/user" in paths
-    assert "/authsession" in paths
+    assert "/tenant" not in paths
+    assert "/user" not in paths
+    assert "/admin/identity" in paths
+    assert "/admin/identity/{item_id}" in paths
+    assert "/authsession" not in paths
+    assert "/authsession/{item_id}" not in paths
     assert "/auditevent" in paths
+    assert "/admin/tenant" in paths
+    assert "/admin/tenant/{item_id}" in paths
     assert "/client" not in paths
+    for path, methods in paths.items():
+        if path.startswith("/admin/auth/"):
+            for operation in methods.values():
+                assert operation["tags"] == ["Admin Auth"]
     for route in PLATFORM_ADMIN_API_CONTRACT.forbidden_exact_routes:
         assert route not in paths
+    schemas = openapi_response.json()["components"]["schemas"]
+    assert "TenantCreateRequest" in schemas
+    assert "TenantUpdateRequest" in schemas
+    assert "UserCreateRequest" in schemas
+    assert "UserUpdateRequest" in schemas
+    assert "AdminTenantProvisionIn" not in schemas
+    assert "AdminIdentityProvisionIn" not in schemas
+    assert (
+        paths["/admin/tenant"]["post"]["requestBody"]["content"][
+            "application/json"
+        ]["schema"]["$ref"]
+        == "#/components/schemas/TenantCreateRequest"
+    )
+    assert (
+        paths["/admin/identity"]["post"]["requestBody"]["content"][
+            "application/json"
+        ]["schema"]["$ref"]
+        == "#/components/schemas/UserCreateRequest"
+    )
 
-    assert openrpc_response.status_code == 200
-    methods = _method_names(openrpc_response.json())
-    assert {"Tenant.list", "Tenant.read", "User.list"}.issubset(methods)
-    assert "client.registration.upsert" not in methods
-    assert "Client.list" not in methods
+    assert openrpc_response.status_code == 404
+    assert rpc_response.status_code == 404
 
 
 @pytest.mark.asyncio
-async def test_platform_admin_rpc_requires_key_and_reports_platform_methods(
+async def test_platform_admin_rest_control_plane_excludes_rpc(
     tmp_path: Path,
 ) -> None:
     platform_app = build_app(_settings(tmp_path))
@@ -138,28 +159,16 @@ async def test_platform_admin_rpc_requires_key_and_reports_platform_methods(
     async with AsyncClient(
         transport=ASGITransport(app=platform_app), base_url="http://test"
     ) as client:
-        missing_key = await client.post(
-            "/rpc",
-            json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
+        rpc = await client.post(
+            "/rpc", headers={"X-API-Key": "test-platform-admin-key"}, json={}
         )
-        valid_key = await client.post(
-            "/rpc",
-            headers={"X-API-Key": "test-platform-admin-key"},
-            json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
-        )
+        openrpc = await client.get("/openrpc.json")
         login = await client.post("/login", json={})
         register = await client.post("/register", json={})
         token = await client.post("/token", data={})
 
-    assert missing_key.status_code == 401
-    assert missing_key.json()["error"] == "missing_admin_api_key"
-    assert valid_key.status_code == 200
-    result = valid_key.json()["result"]
-    assert result["deployment"]["plugin_mode"] == "admin-only"
-    methods = _rpc_discover_method_names(result)
-    assert "tenant.list" in methods
-    assert "tenant.keys.create" in methods
-    assert "client.registration.upsert" not in methods
+    assert rpc.status_code == 404
+    assert openrpc.status_code == 404
     assert login.status_code == 404
     assert register.status_code == 404
     assert token.status_code == 404
@@ -174,10 +183,20 @@ async def test_platform_admin_rest_control_plane_requires_admin_key(
     async with AsyncClient(
         transport=ASGITransport(app=platform_app), base_url="http://test"
     ) as client:
-        missing_key = await client.get("/tenant")
+        missing_key = await client.get("/admin/tenant")
         invalid_key = await client.get(
-            "/tenant", headers={"X-API-Key": "wrong-platform-admin-key"}
+            "/admin/tenant", headers={"X-API-Key": "wrong-platform-admin-key"}
         )
+        raw_tenant = await client.get(
+            "/tenant", headers={"X-API-Key": "test-platform-admin-key"}
+        )
+        raw_user = await client.get(
+            "/user", headers={"X-API-Key": "test-platform-admin-key"}
+        )
+        raw_authsession = await client.get(
+            "/authsession", headers={"X-API-Key": "test-platform-admin-key"}
+        )
+        identity_missing_key = await client.get("/admin/identity")
         login = await client.post("/login", json={})
         token = await client.post("/token", data={})
 
@@ -185,5 +204,10 @@ async def test_platform_admin_rest_control_plane_requires_admin_key(
     assert missing_key.json()["error"] == "missing_admin_api_key"
     assert invalid_key.status_code == 403
     assert invalid_key.json()["error"] == "invalid_admin_api_key"
+    assert raw_tenant.status_code == 404
+    assert raw_user.status_code == 404
+    assert raw_authsession.status_code == 404
+    assert identity_missing_key.status_code == 401
+    assert identity_missing_key.json()["error"] == "missing_admin_api_key"
     assert login.status_code == 404
     assert token.status_code == 404

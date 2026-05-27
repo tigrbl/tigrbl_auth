@@ -1,5 +1,9 @@
-"""Legacy import facade for canonical table module ``tigrbl_auth.tables.device_code``."""
+"""Compatibility facade for canonical identity storage ORM imports."""
 
-from tigrbl_auth.tables.device_code import DeviceCode
+from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+
+ensure_identity_storage_importable()
+
+from tigrbl_identity_storage.orm.device_code import DeviceCode
 
 __all__ = ["DeviceCode"]
