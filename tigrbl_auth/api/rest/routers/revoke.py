@@ -11,8 +11,3 @@ router = api
 @api.route("/revoke", methods=["POST"], response_model=RevocationOut)
 async def revoke(request):
     return await revoke_request(request=request)
-
-
-@api.route("/revoked_tokens/revoke", methods=["POST"], response_model=RevocationOut)
-async def revoke_legacy(request):
-    return await revoke_request(request=request)

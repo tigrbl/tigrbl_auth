@@ -205,17 +205,6 @@ async def _exercise_profile_operations(
         registration = await _register_client(client, tenant, deployment)
         observed.add(("post", "/register"))
 
-    if ("post", "/client/register") in documented_operations:
-        response = await client.post(
-            "/client/register",
-            json={
-                "tenant_slug": tenant.slug,
-                "redirect_uris": [f"https://legacy-{deployment.profile}.example.test/callback"],
-            },
-        )
-        observed.add(("post", "/client/register"))
-        assert response.status_code == HTTPStatus.BAD_REQUEST, response.text
-
     if registration is not None:
         client_id = registration["client_id"]
         headers = {"Authorization": f"Bearer {registration['registration_access_token']}"}
@@ -236,40 +225,6 @@ async def _exercise_profile_operations(
             assert response.status_code == HTTPStatus.OK, response.text
             assert response.json()["client_name"] == f"{deployment.profile} updated client"
 
-        if ("get", "/client/{client_id}") in documented_operations:
-            response = await client.get(f"/client/{client_id}", headers=headers)
-            observed.add(("get", "/client/{client_id}"))
-            assert response.status_code == HTTPStatus.OK, response.text
-            assert response.json()["client_id"] == client_id
-
-        if ("put", "/client/{client_id}") in documented_operations:
-            response = await client.put(
-                f"/client/{client_id}",
-                headers=headers,
-                json={"client_name": f"{deployment.profile} legacy put client"},
-            )
-            observed.add(("put", "/client/{client_id}"))
-            assert response.status_code == HTTPStatus.OK, response.text
-
-        if ("patch", "/client/{client_id}") in documented_operations:
-            response = await client.patch(
-                f"/client/{client_id}",
-                headers=headers,
-                json={"client_name": f"{deployment.profile} legacy patch client"},
-            )
-            observed.add(("patch", "/client/{client_id}"))
-            assert response.status_code == HTTPStatus.OK, response.text
-
-        if ("delete", "/client/{client_id}") in documented_operations:
-            response = await client.delete(f"/client/{client_id}", headers=headers)
-            observed.add(("delete", "/client/{client_id}"))
-            assert response.status_code == HTTPStatus.OK, response.text
-
-            if ("delete", "/register/{client_id}") in documented_operations:
-                registration = await _register_client(client, tenant, deployment)
-                client_id = registration["client_id"]
-                headers = {"Authorization": f"Bearer {registration['registration_access_token']}"}
-
         if ("delete", "/register/{client_id}") in documented_operations:
             response = await client.delete(f"/register/{client_id}", headers=headers)
             observed.add(("delete", "/register/{client_id}"))
@@ -278,12 +233,6 @@ async def _exercise_profile_operations(
     if ("post", "/revoke") in documented_operations:
         response = await client.post("/revoke", data={"token": f"{deployment.profile}-token"})
         observed.add(("post", "/revoke"))
-        assert response.status_code == HTTPStatus.OK, response.text
-        assert response.json() == {"revoked": True}
-
-    if ("post", "/revoked_tokens/revoke") in documented_operations:
-        response = await client.post("/revoked_tokens/revoke", data={"token": f"{deployment.profile}-legacy-token"})
-        observed.add(("post", "/revoked_tokens/revoke"))
         assert response.status_code == HTTPStatus.OK, response.text
         assert response.json() == {"revoked": True}
 

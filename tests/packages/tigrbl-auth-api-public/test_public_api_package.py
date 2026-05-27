@@ -16,7 +16,11 @@ PKG_SRC = ROOT / "pkgs" / "tigrbl-auth-api-public" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
-from tigrbl_auth_api_public import PRODUCT_SURFACE, PUBLIC_API_CONTRACT, build_app
+from tigrbl_auth_api_public import (  # noqa: E402
+    PRODUCT_SURFACE,
+    PUBLIC_API_CONTRACT,
+    build_app,
+)
 
 
 def _settings(tmp_path: Path) -> SimpleNamespace:
@@ -56,6 +60,9 @@ def test_public_api_openapi_documents_public_protocol_request_bodies(
     openapi = public_app.openapi()
 
     paths = openapi["paths"]
+    assert "/client/register" not in paths
+    assert "/client/{client_id}" not in paths
+    assert "/revoked_tokens/revoke" not in paths
     assert (
         paths["/login"]["post"]["requestBody"]["content"]["application/json"][
             "schema"
@@ -93,6 +100,9 @@ async def test_public_api_served_openapi_uses_public_protocol_request_bodies(
 
     assert response.status_code == 200
     openapi = response.json()
+    assert "/client/register" not in openapi["paths"]
+    assert "/client/{client_id}" not in openapi["paths"]
+    assert "/revoked_tokens/revoke" not in openapi["paths"]
     assert openapi["paths"]["/login"]["post"]["requestBody"]
     assert (
         "application/x-www-form-urlencoded"

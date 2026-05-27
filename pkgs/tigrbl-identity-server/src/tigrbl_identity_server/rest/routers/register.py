@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationOut
-from tigrbl_auth.framework import Depends, HTTPException, TigrblRouter, status
+from tigrbl_auth.framework import Depends, TigrblRouter
 from tigrbl_auth.ops.register import delete_registered_client, get_registered_client, register_client, update_registered_client
 from tigrbl_auth.tables import get_db
 
@@ -63,11 +63,6 @@ async def register(request, db=Depends(get_db)):
     return result
 
 
-@api.route('/client/register', methods=['POST'], response_model=DynamicClientRegistrationOut)
-async def register_legacy(request, db=Depends(get_db)):
-    raise HTTPException(status.HTTP_400_BAD_REQUEST, 'legacy client registration path unsupported; use /register')
-
-
 @api.route('/register/{client_id}', methods=['GET'], response_model=DynamicClientRegistrationOut)
 async def register_get(request, client_id: str, db=Depends(get_db)):
     return await get_registered_client(request=request, db=db, client_id=client_id)
@@ -85,23 +80,3 @@ async def register_delete(request, client_id: str, db=Depends(get_db)):
     result = await delete_registered_client(request=request, db=db, client_id=client_id)
     _sync_client_registration('client.registration.delete', {'client_id': client_id})
     return result
-
-
-@api.route('/client/{client_id}', methods=['GET'], response_model=DynamicClientRegistrationOut)
-async def register_get_legacy(request, client_id: str, db=Depends(get_db)):
-    return await register_get(request=request, client_id=client_id, db=db)
-
-
-@api.route('/client/{client_id}', methods=['PUT'], response_model=DynamicClientRegistrationOut)
-async def register_put_legacy(request, client_id: str, db=Depends(get_db)):
-    return await register_put(request=request, client_id=client_id, db=db)
-
-
-@api.route('/client/{client_id}', methods=['PATCH'], response_model=DynamicClientRegistrationOut)
-async def register_patch_legacy(request, client_id: str, db=Depends(get_db)):
-    return await register_put(request=request, client_id=client_id, db=db)
-
-
-@api.route('/client/{client_id}', methods=['DELETE'])
-async def register_delete_legacy(request, client_id: str, db=Depends(get_db)):
-    return await register_delete(request=request, client_id=client_id, db=db)

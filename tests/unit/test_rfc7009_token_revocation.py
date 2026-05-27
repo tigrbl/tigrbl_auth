@@ -23,7 +23,7 @@ async def test_revoke_returns_200_and_marks_token_revoked(
     enable_rfc7009, async_client: AsyncClient
 ):
     """RFC 7009 §2.2: Revocation returns HTTP 200 and token becomes invalid."""
-    resp = await async_client.post("/revoked_tokens/revoke", data={"token": "abc"})
+    resp = await async_client.post("/revoke", data={"token": "abc"})
     assert resp.status_code == status.HTTP_200_OK
     assert is_revoked("abc")
 
@@ -35,7 +35,7 @@ async def test_revoke_returns_200_for_unknown_token(
 ):
     """RFC 7009 §2.2: Endpoint must return HTTP 200 even for unknown tokens."""
     resp = await async_client.post(
-        "/revoked_tokens/revoke", data={"token": "nonexistent"}
+        "/revoke", data={"token": "nonexistent"}
     )
     assert resp.status_code == status.HTTP_200_OK
 
@@ -46,6 +46,6 @@ async def test_revoke_returns_404_when_disabled(monkeypatch, async_client: Async
     """RFC 7009: Revocation endpoint is unavailable when support is disabled."""
     monkeypatch.setattr(settings, "enable_rfc7009", False)
     reset_revocations()
-    resp = await async_client.post("/revoked_tokens/revoke", data={"token": "abc"})
+    resp = await async_client.post("/revoke", data={"token": "abc"})
     assert resp.status_code == status.HTTP_404_NOT_FOUND
     assert not is_revoked("abc")

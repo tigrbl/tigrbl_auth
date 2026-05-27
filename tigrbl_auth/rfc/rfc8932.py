@@ -130,7 +130,7 @@ def get_enhanced_authorization_server_metadata() -> Dict[str, Any]:
 
     # RFC 7009 - Token Revocation
     if settings.enable_rfc7009:
-        enhanced_metadata["revocation_endpoint"] = f"{ISSUER}/revoked_tokens/revoke"
+        enhanced_metadata["revocation_endpoint"] = f"{ISSUER}/revoke"
         enhanced_metadata["revocation_endpoint_auth_methods_supported"] = [
             "client_secret_basic",
             "client_secret_post",
@@ -310,7 +310,7 @@ def get_capability_matrix() -> Dict[str, Dict[str, Any]]:
         "rfc7009": {
             "name": "Token Revocation",
             "enabled": settings.enable_rfc7009,
-            "endpoints": ["/revoked_tokens/revoke"] if settings.enable_rfc7009 else [],
+            "endpoints": ["/revoke"] if settings.enable_rfc7009 else [],
         },
         "rfc7662": {
             "name": "Token Introspection",

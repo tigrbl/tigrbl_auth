@@ -38,7 +38,7 @@ async def running_app(override_get_db, unused_tcp_port):
 
 
 @pytest.mark.asyncio
-async def test_rfc7591_client_registration_endpoint(running_app):
+async def test_legacy_client_registration_endpoint_is_removed(running_app):
     base = running_app
     async with httpx.AsyncClient() as client:
         resp = await client.post(
@@ -48,7 +48,7 @@ async def test_rfc7591_client_registration_endpoint(running_app):
                 "redirect_uris": ["https://a.example/cb"],
             },
         )
-    assert resp.status_code == 400
+    assert resp.status_code == 404
 
 
 @pytest.mark.asyncio
@@ -56,7 +56,7 @@ async def test_rfc7591_redirect_uris_must_use_https(running_app):
     base = running_app
     async with httpx.AsyncClient() as client:
         resp = await client.post(
-            f"{base}/client/register",
+            f"{base}/register",
             json={
                 "tenant_slug": "public",
                 "redirect_uris": ["http://insecure.example/cb"],

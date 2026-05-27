@@ -78,6 +78,9 @@ def test_public_api_dev_deployment_supports_documented_auth_flows() -> None:
         openapi = client.get("/openapi.json")
         assert openapi.status_code == 200, openapi.text
         paths = openapi.json()["paths"]
+        assert "/client/register" not in paths
+        assert "/client/{client_id}" not in paths
+        assert "/revoked_tokens/revoke" not in paths
         assert paths["/login"]["post"]["requestBody"]["content"][
             "application/json"
         ]
@@ -114,6 +117,12 @@ def test_public_api_dev_deployment_supports_documented_auth_flows() -> None:
             grant_types=["authorization_code", "refresh_token", "password"],
             client_name="proof-password-client",
         )
+        legacy_register = client.post("/client/register", json={})
+        assert legacy_register.status_code == 404, legacy_register.text
+        legacy_register_get = client.get(f"/client/{password_client['client_id']}")
+        assert legacy_register_get.status_code == 404, legacy_register_get.text
+        legacy_revoke = client.post("/revoked_tokens/revoke", data={"token": "x"})
+        assert legacy_revoke.status_code == 404, legacy_revoke.text
         password_token = client.post(
             "/token",
             data={

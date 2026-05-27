@@ -15,10 +15,8 @@ from tigrbl_auth.services.persistence import (
 
 RFC7009_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7009"
 CANONICAL_REVOCATION_PATH: Final[str] = "/revoke"
-LEGACY_REVOCATION_PATH: Final[str] = "/revoked_tokens/revoke"
 
 api = TigrblRouter()
-legacy_api = TigrblRouter()
 router = api
 
 
@@ -52,26 +50,12 @@ async def revoke(request: Request) -> dict[str, str]:
     return {}
 
 
-@legacy_api.route(LEGACY_REVOCATION_PATH, methods=["POST"])
-async def revoke_legacy(request: Request) -> dict[str, str]:
-    return await revoke(request)
-
-
-def include_revocation_endpoint(app: TigrblApp, *, include_legacy: bool = False) -> None:
+def include_revocation_endpoint(app: TigrblApp) -> None:
     if settings.enable_rfc7009 and not any(
         (getattr(route, "path", None) or getattr(route, "path_template", None)) == CANONICAL_REVOCATION_PATH
         for route in app.router.routes
     ):
         app.include_router(api)
-    if include_legacy and settings.enable_rfc7009 and not any(
-        (getattr(route, "path", None) or getattr(route, "path_template", None)) == LEGACY_REVOCATION_PATH
-        for route in app.router.routes
-    ):
-        app.include_router(legacy_api)
-
-
-def include_legacy_revocation_endpoint(app: TigrblApp) -> None:
-    include_revocation_endpoint(app, include_legacy=True)
 
 
 include_rfc7009 = include_revocation_endpoint
@@ -80,14 +64,11 @@ include_rfc7009 = include_revocation_endpoint
 __all__ = [
     "RFC7009_SPEC_URL",
     "CANONICAL_REVOCATION_PATH",
-    "LEGACY_REVOCATION_PATH",
     "api",
-    "legacy_api",
     "router",
     "revoke_token",
     "is_revoked",
     "reset_revocations",
     "include_revocation_endpoint",
-    "include_legacy_revocation_endpoint",
     "include_rfc7009",
 ]

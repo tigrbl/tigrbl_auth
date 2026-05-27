@@ -50,10 +50,11 @@ async def test_register_client_via_server(running_app):
     base = running_app
     async with httpx.AsyncClient() as client:
         resp = await client.post(
-            f"{base}/client/register",
+            f"{base}/register",
             json={
                 "tenant_slug": "public",
                 "redirect_uris": ["https://a.example/cb"],
             },
         )
-    assert resp.status_code == 400
+    assert resp.status_code == 200
+    assert resp.json()["client_id"]

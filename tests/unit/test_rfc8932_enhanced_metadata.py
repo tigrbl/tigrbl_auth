@@ -59,9 +59,7 @@ def test_get_enhanced_authorization_server_metadata_with_extensions():
 
                 # RFC 7009 - Token Revocation
                 assert "revocation_endpoint" in metadata
-                assert metadata["revocation_endpoint"].endswith(
-                    "/revoked_tokens/revoke"
-                )
+                assert metadata["revocation_endpoint"].endswith("/revoke")
 
                 # RFC 7662 - Token Introspection
                 assert "introspection_endpoint" in metadata
@@ -306,7 +304,7 @@ def test_get_capability_matrix():
 
             # Check RFC 7009 (enabled in this test)
             assert matrix["rfc7009"]["enabled"] is True
-            assert "/revoked_tokens/revoke" in matrix["rfc7009"]["endpoints"]
+            assert "/revoke" in matrix["rfc7009"]["endpoints"]
 
             # Check RFC 7662 (disabled in this test)
             assert matrix["rfc7662"]["enabled"] is False

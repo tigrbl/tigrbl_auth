@@ -138,7 +138,7 @@ class TestRegistrationFlow:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.json()["detail"] == "redirect_uris must use https"
 
-    async def test_legacy_register_path_is_explicitly_unsupported(
+    async def test_legacy_register_path_is_removed(
         self, async_client: AsyncClient, db_session: AsyncSession
     ) -> None:
         tenant = await _create_tenant(db_session, "register-legacy")
@@ -148,8 +148,7 @@ class TestRegistrationFlow:
             json={"tenant_slug": tenant.slug, "redirect_uris": ["https://client.example/callback"]},
         )
 
-        assert response.status_code == status.HTTP_400_BAD_REQUEST
-        assert "use /register" in response.json()["detail"]
+        assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 @pytest.mark.integration

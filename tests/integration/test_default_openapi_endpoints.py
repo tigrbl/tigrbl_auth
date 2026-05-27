@@ -22,16 +22,10 @@ EXPECTED_DEFAULT_OPERATIONS = {
     ("get", "/authorize"),
     ("post", "/token"),
     ("post", "/register"),
-    ("post", "/client/register"),
     ("get", "/register/{client_id}"),
     ("put", "/register/{client_id}"),
     ("delete", "/register/{client_id}"),
-    ("get", "/client/{client_id}"),
-    ("put", "/client/{client_id}"),
-    ("patch", "/client/{client_id}"),
-    ("delete", "/client/{client_id}"),
     ("post", "/revoke"),
-    ("post", "/revoked_tokens/revoke"),
     ("get", "/logout"),
     ("post", "/logout"),
     ("get", "/userinfo"),
@@ -114,11 +108,8 @@ async def test_default_endpoints_cover_runtime_behavior(
     registration_token = registration["registration_access_token"]
     registration_headers = {"Authorization": f"Bearer {registration_token}"}
 
-    legacy_register = await async_client.post(
-        "/client/register",
-        json={"tenant_slug": tenant.slug, "redirect_uris": ["https://default.example/callback"]},
-    )
-    assert legacy_register.status_code == status.HTTP_400_BAD_REQUEST
+    legacy_register = await async_client.post("/client/register", json={})
+    assert legacy_register.status_code == status.HTTP_404_NOT_FOUND
 
     authorize_response = await async_client.get("/authorize")
     assert authorize_response.status_code == status.HTTP_400_BAD_REQUEST
@@ -141,13 +132,6 @@ async def test_default_endpoints_cover_runtime_behavior(
     assert get_registration.status_code == status.HTTP_200_OK
     assert get_registration.json()["client_id"] == client_id
 
-    legacy_get = await async_client.get(
-        f"/client/{client_id}",
-        headers=registration_headers,
-    )
-    assert legacy_get.status_code == status.HTTP_200_OK
-    assert legacy_get.json()["client_id"] == client_id
-
     update_payload = {"client_name": "Updated Default Coverage Client"}
     put_registration = await async_client.put(
         f"/register/{client_id}",
@@ -157,21 +141,20 @@ async def test_default_endpoints_cover_runtime_behavior(
     assert put_registration.status_code == status.HTTP_200_OK
     assert put_registration.json()["client_name"] == "Updated Default Coverage Client"
 
+    legacy_get = await async_client.get(f"/client/{client_id}", headers=registration_headers)
     legacy_put = await async_client.put(
         f"/client/{client_id}",
         headers=registration_headers,
         json={"client_name": "Legacy Put Client"},
     )
-    assert legacy_put.status_code == status.HTTP_200_OK
-    assert legacy_put.json()["client_name"] == "Legacy Put Client"
-
     legacy_patch = await async_client.patch(
         f"/client/{client_id}",
         headers=registration_headers,
         json={"client_name": "Legacy Patch Client"},
     )
-    assert legacy_patch.status_code == status.HTTP_200_OK
-    assert legacy_patch.json()["client_name"] == "Legacy Patch Client"
+    assert legacy_get.status_code == status.HTTP_404_NOT_FOUND
+    assert legacy_put.status_code == status.HTTP_404_NOT_FOUND
+    assert legacy_patch.status_code == status.HTTP_404_NOT_FOUND
 
     revoke_response = await async_client.post("/revoke", data={"token": "tok-default"})
     assert revoke_response.status_code == status.HTTP_200_OK
@@ -181,8 +164,7 @@ async def test_default_endpoints_cover_runtime_behavior(
         "/revoked_tokens/revoke",
         data={"token": "tok-default-legacy"},
     )
-    assert revoke_legacy_response.status_code == status.HTTP_200_OK
-    assert revoke_legacy_response.json() == {"revoked": True}
+    assert revoke_legacy_response.status_code == status.HTTP_404_NOT_FOUND
 
     logout_get = await async_client.get("/logout")
     assert logout_get.status_code == status.HTTP_200_OK
@@ -206,27 +188,11 @@ async def test_default_endpoints_cover_runtime_behavior(
     assert delete_registration.status_code == status.HTTP_200_OK
     assert delete_registration.json() == {"status": "deleted", "client_id": client_id}
 
-    legacy_delete_response = await async_client.post(
-        "/register",
-        json={
-            "tenant_slug": tenant.slug,
-            "redirect_uris": ["https://legacy-delete.example/callback"],
-            "client_name": "Legacy Delete Client",
-        },
-    )
-    assert legacy_delete_response.status_code == status.HTTP_200_OK
-    legacy_delete_registration = legacy_delete_response.json()
     legacy_delete = await async_client.delete(
-        f"/client/{legacy_delete_registration['client_id']}",
-        headers={
-            "Authorization": f"Bearer {legacy_delete_registration['registration_access_token']}"
-        },
+        f"/client/{client_id}",
+        headers=registration_headers,
     )
-    assert legacy_delete.status_code == status.HTTP_200_OK
-    assert legacy_delete.json() == {
-        "status": "deleted",
-        "client_id": legacy_delete_registration["client_id"],
-    }
+    assert legacy_delete.status_code == status.HTTP_404_NOT_FOUND
 
     relogin_response = await async_client.post(
         "/login",
