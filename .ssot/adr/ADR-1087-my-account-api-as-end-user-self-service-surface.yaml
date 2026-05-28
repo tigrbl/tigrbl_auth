@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for the My Account API and UIX implementation slice."
     at: "2026-05-28T08:29:26Z"
+    note: "Accepted for the My Account API and UIX implementation slice."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Implemented by pkgs/tigrbl-auth-api-my-account, apps/my-account-uix, and tigrbl_auth.api.rest.routers.my_account without adding a new backend domain package."
+    at: "2026-05-28T09:29:19Z"
 references: []
 body: |-
   Decision: add tigrbl-auth-api-my-account as the first-class end-user account self-service frontdoor. The surface is current-subject scoped and does not expose admin, tenant-wide user management, RPC, or table CRUD routes. Backend ownership remains in existing identity packages: principals, credentials, policy, oidc, and storage. Public API remains the OAuth/OIDC issuer and hosted-login surface; My Account owns authenticated profile, session, consent, authorized-app, and credential self-service.

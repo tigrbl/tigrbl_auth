@@ -25,9 +25,13 @@ status_notes:
     note: "Linked product-surface separation to the public API hosted-login contract."
     status: "draft"
   -
-    status: "draft"
-    note: "Linked product API surface separation to canonical identity storage ownership."
     at: "2026-05-27T16:58:38Z"
+    note: "Linked product API surface separation to canonical identity storage ownership."
+    status: "draft"
+  -
+    status: "draft"
+    note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-api, outside admin, RPC, client, tenant, and service surfaces."
+    at: "2026-05-28T09:29:19Z"
 references: []
 body: |-
   ## Scope
