@@ -152,6 +152,33 @@ async def test_my_account_openapi_is_current_subject_only() -> None:
 
 
 @pytest.mark.asyncio
+async def test_my_account_cors_allows_uix_origin_on_error_responses() -> None:
+    my_account_app = build_app(_settings())
+
+    async with AsyncClient(
+        transport=ASGITransport(app=my_account_app), base_url="http://test"
+    ) as client:
+        preflight = await client.options(
+            "/account/profile",
+            headers={
+                "origin": "http://localhost:3019",
+                "access-control-request-method": "GET",
+            },
+        )
+        anonymous = await client.get(
+            "/account/profile",
+            headers={"origin": "http://localhost:3019"},
+        )
+
+    assert preflight.status_code == 204
+    assert preflight.headers["access-control-allow-origin"] == "http://localhost:3019"
+    assert preflight.headers["access-control-allow-credentials"] == "true"
+    assert anonymous.status_code == 401
+    assert anonymous.headers["access-control-allow-origin"] == "http://localhost:3019"
+    assert anonymous.headers["access-control-allow-credentials"] == "true"
+
+
+@pytest.mark.asyncio
 async def test_my_account_handlers_are_current_subject_scoped(
     db_session: AsyncSession,
 ) -> None:

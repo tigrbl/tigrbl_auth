@@ -3,8 +3,10 @@ import type { AccountProfile, AccountSession, AuthorizedApp, Consent } from "../
 
 type Fetcher = typeof fetch;
 
+const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
+
 export class MyAccountClient {
-  constructor(private readonly baseUrl = API_BASE_URL, private readonly fetcher: Fetcher = fetch) {}
+  constructor(private readonly baseUrl = API_BASE_URL, private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const response = await this.fetcher(`${this.baseUrl}${path}`, {
