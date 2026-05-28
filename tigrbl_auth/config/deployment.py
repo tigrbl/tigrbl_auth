@@ -170,6 +170,12 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
         "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
+    "my-account-api": {
+        "surface_public_enabled": True,
+        "surface_admin_enabled": False,
+        "surface_rpc_enabled": False,
+        "surface_diagnostics_enabled": False,
+    },
 }
 
 PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
@@ -289,6 +295,22 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "oauth-protected-resource-metadata",
             "jwks",
             "tenant-jwks",
+        ),
+        "admin_resources": (),
+        "admin_rest_groups": (),
+        "rpc_method_prefixes": (),
+    },
+    "my-account-api": {
+        "surface_sets": ("public-rest",),
+        "allowed_capabilities": (
+            "openid-configuration",
+            "tenant-openid-configuration",
+            "jwks",
+            "tenant-jwks",
+            "account-profile",
+            "account-sessions",
+            "account-consents",
+            "account-credentials",
         ),
         "admin_resources": (),
         "admin_rest_groups": (),

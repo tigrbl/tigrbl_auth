@@ -1,0 +1,23 @@
+server {
+  listen 80;
+  server_name _;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  location /account/ {
+    proxy_pass ${TIGRBL_AUTH_BACKEND_UPSTREAM};
+  }
+
+  location /.well-known/ {
+    proxy_pass ${TIGRBL_AUTH_BACKEND_UPSTREAM};
+  }
+
+  location /tenants/ {
+    proxy_pass ${TIGRBL_AUTH_BACKEND_UPSTREAM};
+  }
+
+  location / {
+    try_files $uri /index.html;
+  }
+}

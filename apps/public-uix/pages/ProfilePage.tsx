@@ -8,6 +8,8 @@ interface ProfilePageProps {
 }
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
+  const myAccountUrl = import.meta.env.VITE_TIGRBL_AUTH_MY_ACCOUNT_UIX_URL || 'http://localhost:3019';
+
   return (
     <div className="max-w-4xl mx-auto py-12 px-6 space-y-8 animate-in fade-in zoom-in-95 duration-500">
       <div className="flex items-center gap-6">
@@ -38,6 +40,16 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
              <p className="text-lg font-semibold text-emerald-600">Verified</p>
           </div>
         </Card>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-white px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div>
+          <h2 className="font-bold text-slate-800">Account self-service</h2>
+          <p className="text-sm text-slate-500">Manage profile details, sessions, credentials, and authorized apps.</p>
+        </div>
+        <a className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white px-4 py-2 font-semibold" href={myAccountUrl}>
+          Open My Account
+        </a>
       </div>
 
       <Card className="overflow-hidden">

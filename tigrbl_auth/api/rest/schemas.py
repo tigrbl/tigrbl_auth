@@ -272,3 +272,65 @@ class AdminTenantProvisionIn(BaseModel):
     slug: _tenant_slug
     name: constr(strip_whitespace=True, min_length=1, max_length=120)
     email: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class MyAccountProfileOut(BaseModel):
+    id: str
+    tenant_id: str
+    username: str
+    email: str
+    is_active: bool = True
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class MyAccountProfileUpdateIn(BaseModel):
+    username: _username | None = None
+    email: constr(strip_whitespace=True, min_length=3, max_length=120) | None = None
+
+
+class MyAccountSessionOut(BaseModel):
+    id: str
+    tenant_id: str
+    user_id: str
+    username: str
+    client_id: str | None = None
+    state: str = "active"
+    auth_time: str | None = None
+    last_seen_at: str | None = None
+    expires_at: str | None = None
+    ended_at: str | None = None
+
+
+class MyAccountConsentOut(BaseModel):
+    id: str
+    tenant_id: str
+    user_id: str
+    client_id: str
+    scope: str
+    claims: dict[str, Any] | None = None
+    state: str = "active"
+    granted_at: str | None = None
+    expires_at: str | None = None
+    revoked_at: str | None = None
+
+
+class MyAccountAuthorizedAppOut(BaseModel):
+    client_id: str
+    tenant_id: str
+    scope: str
+    consent_state: str = "active"
+    granted_at: str | None = None
+    revoked_at: str | None = None
+
+
+class MyAccountPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class MyAccountMutationOut(BaseModel):
+    status: str
+    id: str | None = None

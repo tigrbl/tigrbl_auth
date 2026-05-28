@@ -22,6 +22,7 @@ from tigrbl_auth.api.rest.routers.device_authorization import (
 )
 from tigrbl_auth.api.rest.routers.login import api as login_api
 from tigrbl_auth.api.rest.routers.logout import api as logout_api
+from tigrbl_auth.api.rest.routers.my_account import api as my_account_api
 from tigrbl_auth.api.rest.routers.par import api as par_api
 from tigrbl_auth.api.rest.routers.register import api as register_api
 from tigrbl_auth.api.rest.routers.revoke import api as revoke_api
@@ -253,6 +254,16 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "router": device_authorization_api,
     },
     {"mount_group": "par", "capabilities": ("par",), "router": par_api},
+    {
+        "mount_group": "my_account",
+        "capabilities": (
+            "account-profile",
+            "account-sessions",
+            "account-consents",
+            "account-credentials",
+        ),
+        "router": my_account_api,
+    },
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (

@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1180"
+number: 1180
+slug: "my-account-api-contract"
+title: "My Account API Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The My Account API contract defines tigrbl-auth-api-my-account as an authenticated end-user self-service surface. It exposes /account/profile, /account/sessions, /account/authorized-apps, /account/consents, and /account/password/change. The surface must be scoped to the current authenticated subject and must not expose /admin, /rpc, tenant-wide user management, platform administration, developer client administration, service administration, or raw table CRUD. The matching UIX package is @tigrbl-auth/my-account-uix. Public API remains the OAuth/OIDC issuer and hosted-login surface; My Account consumes existing identity principals, credentials, policy, OIDC, and canonical storage resources."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Defines the My Account API and UIX contract for current-subject account self-service."
+    at: "2026-05-28T08:29:36Z"
+references: []
+body: |-
+  The My Account API contract defines tigrbl-auth-api-my-account as an authenticated end-user self-service surface. It exposes /account/profile, /account/sessions, /account/authorized-apps, /account/consents, and /account/password/change. The surface must be scoped to the current authenticated subject and must not expose /admin, /rpc, tenant-wide user management, platform administration, developer client administration, service administration, or raw table CRUD. The matching UIX package is @tigrbl-auth/my-account-uix. Public API remains the OAuth/OIDC issuer and hosted-login surface; My Account consumes existing identity principals, credentials, policy, OIDC, and canonical storage resources.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1087"
+  - "adr:1120"
+  - "adr:1083"
