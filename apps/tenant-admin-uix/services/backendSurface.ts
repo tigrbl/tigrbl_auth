@@ -1,6 +1,6 @@
 export const PRODUCT_API = "tigrbl-auth-api-tenant-admin";
 export const API_BASE_URL_ENV = "VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL";
-export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL ?? "http://localhost:8102").replace(/\/+$/, "");
+export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL ?? "http://localhost:8016").replace(/\/+$/, "");
 export const SURFACE_PURPOSE = "Tenant-scoped control plane for users, admins, JWKS, and local policy.";
 
 export const FORBIDDEN_PATH_PREFIXES = ["/login", "/authorize", "/token", "/register", "/tenant"];
@@ -12,6 +12,9 @@ export function assertSurfacePath(path: string): void {
   }
   if (FORBIDDEN_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
     throw new Error(`Path is outside ${PRODUCT_API}: ${path}`);
+  }
+  if (!ALLOWED_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
+    throw new Error(`Path is not part of ${PRODUCT_API}: ${path}`);
   }
 }
 

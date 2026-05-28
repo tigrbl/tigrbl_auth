@@ -3,7 +3,7 @@ import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const target = env.VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL || "http://localhost:8102";
+  const target = env.VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL || "http://localhost:8016";
 
   return {
     plugins: [react()],

@@ -1,6 +1,6 @@
 export const PRODUCT_API = "tigrbl-auth-api-service-admin";
 export const API_BASE_URL_ENV = "VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL";
-export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL ?? "http://localhost:8104").replace(/\/+$/, "");
+export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL ?? "http://localhost:8018").replace(/\/+$/, "");
 export const SURFACE_PURPOSE = "Machine and workload identity control plane for service credentials.";
 
 export const FORBIDDEN_PATH_PREFIXES = ["/login", "/authorize", "/consent", "/register", "/tenant", "/user"];
@@ -12,6 +12,9 @@ export function assertSurfacePath(path: string): void {
   }
   if (FORBIDDEN_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
     throw new Error(`Path is outside ${PRODUCT_API}: ${path}`);
+  }
+  if (!ALLOWED_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
+    throw new Error(`Path is not part of ${PRODUCT_API}: ${path}`);
   }
 }
 

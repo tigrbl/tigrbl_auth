@@ -1,29 +1,70 @@
-import { API_BASE_URL, PRODUCT_API, SURFACE_PURPOSE } from "./services/backendSurface";
-
-const workflows = [
-  "Create and suspend tenants",
-  "Assign tenant ownership and platform authority",
-  "Review cross-tenant audit, session, and identity state",
-];
+import { useEffect, useState } from "react";
+import { Layout } from "./components/Layout";
+import { Notice } from "./components/UI";
+import { usePlatformAdmin } from "./hooks/usePlatformAdmin";
+import { AuditPage } from "./pages/AuditPage";
+import { IdentitiesPage } from "./pages/IdentitiesPage";
+import { LoginPage } from "./pages/LoginPage";
+import { TenantsPage } from "./pages/TenantsPage";
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/tenants");
+  const platform = usePlatformAdmin();
+
+  useEffect(() => {
+    const onHashChange = () => setCurrentHash(window.location.hash || "#/tenants");
+    window.addEventListener("hashchange", onHashChange);
+    if (!window.location.hash || window.location.hash === "#/") {
+      window.location.hash = "#/tenants";
+    }
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  if (platform.loading) {
+    return (
+      <Layout currentHash={currentHash} session={platform.session} onLogout={() => void platform.logout()}>
+        <p>Loading platform console...</p>
+      </Layout>
+    );
+  }
+
+  if (!platform.session?.authenticated) {
+    return (
+      <Layout currentHash={currentHash} session={platform.session} onLogout={() => void platform.logout()}>
+        <LoginPage error={platform.error} onLogin={platform.login} />
+      </Layout>
+    );
+  }
+
+  let content = null;
+  if (currentHash.startsWith("#/identities")) {
+    content = (
+      <IdentitiesPage
+        identities={platform.identities}
+        onCreate={platform.createIdentity}
+        onSelectTenant={platform.setSelectedTenantId}
+        selectedTenantId={platform.selectedTenantId}
+        tenants={platform.tenants}
+      />
+    );
+  } else if (currentHash.startsWith("#/audit")) {
+    content = <AuditPage session={platform.session} tenants={platform.tenants} />;
+  } else {
+    content = (
+      <TenantsPage
+        selectedTenantId={platform.selectedTenantId}
+        tenants={platform.tenants}
+        onCreate={platform.createTenant}
+        onDelete={platform.deleteTenant}
+        onSelect={platform.setSelectedTenantId}
+      />
+    );
+  }
+
   return (
-    <main style={{ minHeight: "100vh", padding: "3rem", fontFamily: "Aptos, Segoe UI, sans-serif", background: "#f5f1e8", color: "#1d211c" }}>
-      <section style={{ maxWidth: "860px" }}>
-        <p style={{ margin: 0, letterSpacing: "0.18em", textTransform: "uppercase", color: "#7b4a24" }}>{PRODUCT_API}</p>
-        <h1 style={{ fontSize: "clamp(2.4rem, 7vw, 5rem)", lineHeight: 0.95, margin: "0.7rem 0" }}>Platform Admin Console</h1>
-        <p style={{ fontSize: "1.2rem", maxWidth: "680px" }}>{SURFACE_PURPOSE}</p>
-        <p>
-          API base: <code>{API_BASE_URL}</code>
-        </p>
-        <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", marginTop: "2rem" }}>
-          {workflows.map((workflow) => (
-            <article key={workflow} style={{ border: "1px solid #c9b99e", borderRadius: "18px", padding: "1rem", background: "#fffaf0" }}>
-              {workflow}
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
+    <Layout currentHash={currentHash} session={platform.session} onLogout={() => void platform.logout()}>
+      {platform.error && <div style={{ marginBottom: "16px" }}><Notice tone="error">{platform.error}</Notice></div>}
+      {content}
+    </Layout>
   );
 }
