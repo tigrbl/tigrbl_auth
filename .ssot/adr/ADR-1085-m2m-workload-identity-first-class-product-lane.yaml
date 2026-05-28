@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1085"
+number: 1085
+slug: "m2m-workload-identity-first-class-product-lane"
+title: "M2M and workload identity are a first-class product lane"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Treat machine-to-machine access and workload identity as a first-class product lane rather than a subsection of service administration. Context: the repo already contains client credentials token behavior, service and workload identity planning, API-key and service-key administration, and resource-server validation contracts. Consequences: product docs, specs, tests, and API matrices must name M2M, client credentials, service principals, machine principals, workload principals, credential lifecycle, token issuance, and protected-resource validation handoff explicitly. This ADR clarifies adr:1109 and the service-admin surface without replacing them."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft product-boundary proposal from competitor-surface review and existing non-human identity roadmap."
+    at: "2026-05-27T22:24:04Z"
+references: []
+body: |-
+  Decision: Treat machine-to-machine access and workload identity as a first-class product lane rather than a subsection of service administration. Context: the repo already contains client credentials token behavior, service and workload identity planning, API-key and service-key administration, and resource-server validation contracts. Consequences: product docs, specs, tests, and API matrices must name M2M, client credentials, service principals, machine principals, workload principals, credential lifecycle, token issuance, and protected-resource validation handoff explicitly. This ADR clarifies adr:1109 and the service-admin surface without replacing them.

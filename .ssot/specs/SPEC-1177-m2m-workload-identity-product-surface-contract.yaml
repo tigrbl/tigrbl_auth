@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1177"
+number: 1177
+slug: "m2m-workload-identity-product-surface-contract"
+title: "M2M Workload Identity Product Surface Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Scope: The M2M/workload identity product surface covers machine-to-machine access, client credentials, service principals, machine principals, workload principals, API keys, service keys, credential rotation and revocation, workload trust posture, and protected-resource validation handoff. Requirements: lifecycle administration belongs to service-admin or the Management API service/workload slice; token issuance uses the public token endpoint and OAuth client credentials or assertion grants where enabled; resource consumption is verified through resource-validation and resource-server contracts; docs and tests must not collapse M2M into generic service CRUD. Out of scope: human login, tenant lifecycle, and end-user account self-service."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Draft contract for first-class M2M and workload identity product framing."
+    at: "2026-05-27T22:24:25Z"
+references: []
+body: |-
+  Scope: The M2M/workload identity product surface covers machine-to-machine access, client credentials, service principals, machine principals, workload principals, API keys, service keys, credential rotation and revocation, workload trust posture, and protected-resource validation handoff. Requirements: lifecycle administration belongs to service-admin or the Management API service/workload slice; token issuance uses the public token endpoint and OAuth client credentials or assertion grants where enabled; resource consumption is verified through resource-validation and resource-server contracts; docs and tests must not collapse M2M into generic service CRUD. Out of scope: human login, tenant lifecycle, and end-user account self-service.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1085"
+  - "adr:1109"
+  - "adr:1081"

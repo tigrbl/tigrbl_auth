@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for the product-surface packaging slice."
     at: "2026-05-25T02:54:52Z"
+    note: "Accepted for the product-surface packaging slice."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Clarified by adr:1086 and spc:1178: surface-separated API packages may remain deployable slices while the Management API is framed as one product surface with resource-group segmentation."
+    at: "2026-05-27T22:24:57Z"
 references: []
 body: |-
   ## Decision
