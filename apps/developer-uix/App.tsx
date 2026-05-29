@@ -1,65 +1,93 @@
+import { AppShell, AuthProvider, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
-import { API_BASE_URL, PRODUCT_API, SURFACE_PURPOSE, apiUrl } from "./services/backendSurface";
+import { useDeveloperPortal } from "./hooks/useDeveloperPortal";
+import { ApplicationDetailPage } from "./pages/ApplicationDetailPage";
+import { ApplicationsPage } from "./pages/ApplicationsPage";
+import { ClientCredentialsPage } from "./pages/ClientCredentialsPage";
+import { ClientMetadataPage } from "./pages/ClientMetadataPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { DiscoveryPage } from "./pages/DiscoveryPage";
+import { LoginPage } from "./pages/LoginPage";
+import { OAuthFlowTesterPage } from "./pages/OAuthFlowTesterPage";
+import { RedirectUrisPage } from "./pages/RedirectUrisPage";
+import { ScopesPage } from "./pages/ScopesPage";
+import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
 
-const views = {
-  "#/apps": {
-    title: "Applications",
-    body: "Register OAuth and OIDC applications, review assigned client identifiers, and keep app metadata tenant-scoped.",
-    paths: ["/register", "/client"]
-  },
-  "#/metadata": {
-    title: "Client metadata",
-    body: "Manage redirect URIs, client registration records, JWKS references, and protocol metadata for developer-owned apps.",
-    paths: ["/clientregistration", "/rpc"]
-  },
-  "#/discovery": {
-    title: "Issuer discovery",
-    body: "Inspect issuer metadata needed by app developers without crossing into admin or service workload operations.",
-    paths: ["/.well-known/openid-configuration"]
-  }
-};
+const navigation = [
+  { href: "#/dashboard", label: "Dashboard" },
+  { href: "#/apps", label: "Applications" },
+  { href: "#/app-detail", label: "App Detail" },
+  { href: "#/metadata", label: "Client Metadata" },
+  { href: "#/redirects", label: "Redirect URIs" },
+  { href: "#/credentials", label: "Credentials" },
+  { href: "#/scopes", label: "Scopes" },
+  { href: "#/oauth-test", label: "OAuth Tester" },
+  { href: "#/discovery", label: "Discovery" }
+];
 
 export default function App() {
-  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/apps");
+  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/dashboard");
+  const developer = useDeveloperPortal();
 
   useEffect(() => {
-    const onHashChange = () => setCurrentHash(window.location.hash || "#/apps");
+    const onHashChange = () => setCurrentHash(window.location.hash || "#/dashboard");
     window.addEventListener("hashchange", onHashChange);
     if (!window.location.hash || window.location.hash === "#/") {
-      window.location.hash = "#/apps";
+      window.location.hash = "#/dashboard";
     }
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  const view = views[currentHash as keyof typeof views] || views["#/apps"];
+  const authValue = {
+    loading: developer.loading,
+    logout: developer.logout,
+    refresh: developer.refresh,
+    session: developer.session
+      ? {
+          authenticated: developer.session.authenticated,
+          email: developer.session.email,
+          permissions: developer.session.roles,
+          subject: developer.session.developer_id,
+          tenantId: developer.session.tenant_id,
+          username: developer.session.username
+        }
+      : null
+  };
+
+  const selectedApplication = developer.applications[0] ?? null;
+  const selectedRegistration = developer.registrations[0] ?? null;
 
   return (
-    <main style={{ minHeight: "100vh", fontFamily: "Aptos, Segoe UI, sans-serif", background: "#eef3ff", color: "#131f33" }}>
-      <aside style={{ borderRight: "1px solid #cdd8f0", bottom: 0, left: 0, padding: "24px", position: "fixed", top: 0, width: "260px" }}>
-        <p style={{ color: "#315ca6", fontSize: "0.72rem", letterSpacing: "0.12em", margin: 0, textTransform: "uppercase" }}>{PRODUCT_API}</p>
-        <h1 style={{ fontSize: "1.5rem", margin: "10px 0" }}>Developer Portal</h1>
-        <p style={{ color: "#566985", fontSize: "0.9rem" }}>{SURFACE_PURPOSE}</p>
-        <nav style={{ display: "grid", gap: "8px", marginTop: "22px" }}>
-          {Object.entries(views).map(([href, item]) => (
-            <a key={href} href={href} style={{ background: currentHash === href ? "#315ca6" : "transparent", borderRadius: "6px", color: currentHash === href ? "#fff" : "#203a68", padding: "9px 10px", textDecoration: "none" }}>{item.title}</a>
-          ))}
-        </nav>
-        <p style={{ bottom: "22px", color: "#5c6f8e", fontSize: "0.78rem", left: "24px", position: "absolute", right: "24px" }}>API: <code>{API_BASE_URL}</code></p>
-      </aside>
-      <section style={{ marginLeft: "260px", padding: "32px" }}>
-        <div style={{ maxWidth: "980px" }}>
-          <h2 style={{ fontSize: "2rem", margin: "0 0 8px" }}>{view.title}</h2>
-          <p style={{ color: "#566985", margin: "0 0 22px" }}>{view.body}</p>
-          <div style={{ display: "grid", gap: "12px" }}>
-            {view.paths.map((path) => (
-              <article key={path} style={{ background: "#fff", border: "1px solid #cdd8f0", borderRadius: "8px", padding: "14px" }}>
-                <strong>{path}</strong>
-                <div style={{ color: "#5c6f8e", fontSize: "0.86rem", marginTop: "6px" }}>{apiUrl(path).href}</div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+    <AuthProvider value={authValue}>
+      <AppShell
+        activeHref={currentHash}
+        apiBaseUrl={API_BASE_URL}
+        navigation={navigation}
+        onLogout={developer.session?.authenticated ? () => developer.logout() : undefined}
+        productApi={PRODUCT_API}
+        sessionLabel={describeSession(authValue.session)}
+        title="Developer Portal"
+      >
+        {!developer.session?.authenticated ? (
+          <LoginPage error={developer.error} onLogin={developer.login} />
+        ) : (
+          <RequireAuth>
+            {developer.error && <div style={{ marginBottom: "16px" }}><Toast message={developer.error} tone="danger" /></div>}
+            {currentHash.startsWith("#/apps") && <ApplicationsPage applications={developer.applications} registrations={developer.registrations} />}
+            {currentHash.startsWith("#/app-detail") && <ApplicationDetailPage application={selectedApplication} registration={selectedRegistration} />}
+            {currentHash.startsWith("#/metadata") && <ClientMetadataPage registrations={developer.registrations} />}
+            {currentHash.startsWith("#/redirects") && <RedirectUrisPage registrations={developer.registrations} />}
+            {currentHash.startsWith("#/credentials") && <ClientCredentialsPage application={selectedApplication} registration={selectedRegistration} />}
+            {currentHash.startsWith("#/scopes") && <ScopesPage applications={developer.applications} metadata={developer.metadata} />}
+            {currentHash.startsWith("#/oauth-test") && <OAuthFlowTesterPage application={selectedApplication} metadata={developer.metadata} />}
+            {currentHash.startsWith("#/discovery") && <DiscoveryPage metadata={developer.metadata} />}
+            {(currentHash.startsWith("#/dashboard") || !navigation.some((item) => currentHash.startsWith(item.href))) && (
+              <DashboardPage applications={developer.applications} metadata={developer.metadata} registrations={developer.registrations} session={developer.session} />
+            )}
+          </RequireAuth>
+        )}
+      </AppShell>
+    </AuthProvider>
   );
 }

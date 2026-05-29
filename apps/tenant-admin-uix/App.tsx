@@ -1,65 +1,87 @@
+import { AppShell, AuthProvider, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
-import { API_BASE_URL, PRODUCT_API, SURFACE_PURPOSE, apiUrl } from "./services/backendSurface";
+import { useTenantAdmin } from "./hooks/useTenantAdmin";
+import { AuditPage } from "./pages/AuditPage";
+import { ClientsPage } from "./pages/ClientsPage";
+import { ConsentsPage } from "./pages/ConsentsPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { GroupsRolesPage } from "./pages/GroupsRolesPage";
+import { IdentitiesPage } from "./pages/IdentitiesPage";
+import { KeyEventsPage } from "./pages/KeyEventsPage";
+import { LoginPage } from "./pages/LoginPage";
+import { SessionsPage } from "./pages/SessionsPage";
+import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
 
-const views = {
-  "#/identities": {
-    title: "Tenant identities",
-    body: "Manage tenant users, tenant administrators, activation state, and password reset posture.",
-    paths: ["/user", "/auth/admin/session"]
-  },
-  "#/keys": {
-    title: "Tenant keys",
-    body: "Review tenant JWKS publication and key rotation events without platform-wide tenant lifecycle authority.",
-    paths: ["/keyrotationevent", "/rpc"]
-  },
-  "#/clients": {
-    title: "Tenant clients",
-    body: "Inspect tenant-local clients, consents, and client registration records visible to tenant administrators.",
-    paths: ["/client", "/clientregistration", "/consent"]
-  }
-};
+const navigation = [
+  { href: "#/dashboard", label: "Dashboard" },
+  { href: "#/identities", label: "Identities" },
+  { href: "#/groups", label: "Groups / Roles" },
+  { href: "#/clients", label: "Clients" },
+  { href: "#/consents", label: "Consents" },
+  { href: "#/sessions", label: "Sessions" },
+  { href: "#/keys", label: "Key Events" },
+  { href: "#/audit", label: "Audit" }
+];
 
 export default function App() {
-  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/identities");
+  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/dashboard");
+  const tenant = useTenantAdmin();
 
   useEffect(() => {
-    const onHashChange = () => setCurrentHash(window.location.hash || "#/identities");
+    const onHashChange = () => setCurrentHash(window.location.hash || "#/dashboard");
     window.addEventListener("hashchange", onHashChange);
     if (!window.location.hash || window.location.hash === "#/") {
-      window.location.hash = "#/identities";
+      window.location.hash = "#/dashboard";
     }
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  const view = views[currentHash as keyof typeof views] || views["#/identities"];
+  const authValue = {
+    loading: tenant.loading,
+    logout: tenant.logout,
+    refresh: tenant.refresh,
+    session: tenant.session
+      ? {
+          authenticated: tenant.session.authenticated,
+          email: tenant.session.email ?? undefined,
+          permissions: tenant.session.roles ?? [],
+          subject: tenant.session.user_id ?? undefined,
+          tenantId: tenant.session.tenant_id ?? undefined,
+          username: tenant.session.username ?? undefined
+        }
+      : null
+  };
 
   return (
-    <main style={{ minHeight: "100vh", fontFamily: "Aptos, Segoe UI, sans-serif", background: "#f5f8f2", color: "#17251d" }}>
-      <aside style={{ borderRight: "1px solid #d8e3d5", bottom: 0, left: 0, padding: "24px", position: "fixed", top: 0, width: "260px" }}>
-        <p style={{ color: "#2e704b", fontSize: "0.72rem", letterSpacing: "0.12em", margin: 0, textTransform: "uppercase" }}>{PRODUCT_API}</p>
-        <h1 style={{ fontSize: "1.5rem", margin: "10px 0" }}>Tenant Admin</h1>
-        <p style={{ color: "#536b59", fontSize: "0.9rem" }}>{SURFACE_PURPOSE}</p>
-        <nav style={{ display: "grid", gap: "8px", marginTop: "22px" }}>
-          {Object.entries(views).map(([href, item]) => (
-            <a key={href} href={href} style={{ background: currentHash === href ? "#255d3f" : "transparent", borderRadius: "6px", color: currentHash === href ? "#fff" : "#173622", padding: "9px 10px", textDecoration: "none" }}>{item.title}</a>
-          ))}
-        </nav>
-        <p style={{ bottom: "22px", color: "#607766", fontSize: "0.78rem", left: "24px", position: "absolute", right: "24px" }}>API: <code>{API_BASE_URL}</code></p>
-      </aside>
-      <section style={{ marginLeft: "260px", padding: "32px" }}>
-        <div style={{ maxWidth: "980px" }}>
-          <h2 style={{ fontSize: "2rem", margin: "0 0 8px" }}>{view.title}</h2>
-          <p style={{ color: "#536b59", margin: "0 0 22px" }}>{view.body}</p>
-          <div style={{ display: "grid", gap: "12px" }}>
-            {view.paths.map((path) => (
-              <article key={path} style={{ background: "#fff", border: "1px solid #d8e3d5", borderRadius: "8px", padding: "14px" }}>
-                <strong>{path}</strong>
-                <div style={{ color: "#607766", fontSize: "0.86rem", marginTop: "6px" }}>{apiUrl(path).href}</div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+    <AuthProvider value={authValue}>
+      <AppShell
+        activeHref={currentHash}
+        apiBaseUrl={API_BASE_URL}
+        navigation={navigation}
+        onLogout={tenant.session?.authenticated ? () => void tenant.logout() : undefined}
+        productApi={PRODUCT_API}
+        sessionLabel={describeSession(authValue.session)}
+        title="Tenant Admin"
+      >
+        {!tenant.session?.authenticated ? (
+          <LoginPage error={tenant.error} onLogin={tenant.login} />
+        ) : (
+          <RequireAuth>
+            {tenant.error && <div style={{ marginBottom: "16px" }}><Toast message={tenant.error} tone="danger" /></div>}
+            {currentHash.startsWith("#/identities") && <IdentitiesPage identities={tenant.identities} />}
+            {currentHash.startsWith("#/groups") && <GroupsRolesPage identities={tenant.identities} />}
+            {currentHash.startsWith("#/clients") && <ClientsPage clients={tenant.clients} />}
+            {currentHash.startsWith("#/consents") && <ConsentsPage consents={tenant.consents} />}
+            {currentHash.startsWith("#/sessions") && <SessionsPage session={tenant.session} />}
+            {currentHash.startsWith("#/keys") && <KeyEventsPage keyEvents={tenant.keyEvents} />}
+            {currentHash.startsWith("#/audit") && <AuditPage session={tenant.session} />}
+            {(currentHash.startsWith("#/dashboard") || !navigation.some((item) => currentHash.startsWith(item.href))) && (
+              <DashboardPage clients={tenant.clients} consents={tenant.consents} identities={tenant.identities} keyEvents={tenant.keyEvents} session={tenant.session} />
+            )}
+          </RequireAuth>
+        )}
+      </AppShell>
+    </AuthProvider>
   );
 }
