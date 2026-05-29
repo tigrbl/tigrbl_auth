@@ -1,6 +1,6 @@
+import { Button, DetailPanel, ErrorState, FormField, PageHeader, ResourceForm } from "@tigrbl-auth/uix-core";
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Button, Field, Notice, Panel } from "../components/UI";
 
 export function LoginPage({ error, onLogin }: { error: string; onLogin: (identifier: string, password: string) => Promise<void> }) {
   const [identifier, setIdentifier] = useState("admin");
@@ -23,20 +23,14 @@ export function LoginPage({ error, onLogin }: { error: string; onLogin: (identif
 
   return (
     <div style={{ display: "grid", gap: "18px", maxWidth: "520px" }}>
-      <div>
-        <h1 style={{ fontSize: "2rem", margin: "0 0 8px" }}>Platform operator sign in</h1>
-        <p style={{ color: "#526960", margin: 0 }}>Use an administrator session to manage tenant lifecycle and platform authority.</p>
-      </div>
-      {(localError || error) && <Notice tone="error">{localError || error}</Notice>}
-      <Panel title="Admin credentials">
-        <form onSubmit={submit} style={{ display: "grid", gap: "12px" }}>
-          <Field label="Identifier" value={identifier} onChange={setIdentifier} required />
-          <Field label="Password" value={password} onChange={setPassword} type="password" required />
-          <div>
-            <Button type="submit" disabled={submitting}>{submitting ? "Signing in..." : "Sign in"}</Button>
-          </div>
-        </form>
-      </Panel>
+      <PageHeader title="Platform operator sign in" description="Use an administrator session to manage tenant lifecycle and platform authority." />
+      {(localError || error) && <ErrorState message={localError || error} />}
+      <DetailPanel title="Admin credentials">
+        <ResourceForm onSubmit={submit} footer={<Button type="submit" disabled={submitting}>{submitting ? "Signing in..." : "Sign in"}</Button>}>
+          <FormField label="Identifier" value={identifier} onChange={(event) => setIdentifier(event.target.value)} required />
+          <FormField label="Password" value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />
+        </ResourceForm>
+      </DetailPanel>
     </div>
   );
 }

@@ -4,6 +4,7 @@
   "version": "0.3.5",
   "type": "module",
   "workspaces": [
+    "packages/uix-core",
     "apps/admin-uix",
     "apps/platform-admin-uix",
     "apps/tenant-admin-uix",
@@ -14,6 +15,7 @@
     "apps/rp"
   ],
   "scripts": {
+    "build:uix-core": "npm run build -w @tigrbl-auth/uix-core",
     "build:admin-uix": "npm run build -w @tigrbl-auth/admin-uix",
     "build:platform-admin-uix": "npm run build -w @tigrbl-auth/platform-admin-uix",
     "build:tenant-admin-uix": "npm run build -w @tigrbl-auth/tenant-admin-uix",
@@ -22,7 +24,8 @@
     "build:my-account-uix": "npm run build -w @tigrbl-auth/my-account-uix",
     "build:public-uix": "npm run build -w @tigrbl-auth/public-uix",
     "build:rp": "npm run build -w @tigrbl-auth/rp",
-    "build:uix": "npm run build:admin-uix && npm run build:platform-admin-uix && npm run build:tenant-admin-uix && npm run build:developer-uix && npm run build:service-admin-uix && npm run build:my-account-uix && npm run build:public-uix",
+    "build:uix": "npm run build:uix-core && npm run build:admin-uix && npm run build:platform-admin-uix && npm run build:tenant-admin-uix && npm run build:developer-uix && npm run build:service-admin-uix && npm run build:my-account-uix && npm run build:public-uix",
+    "test:uix-core": "npm run test -w @tigrbl-auth/uix-core",
     "test:admin-uix": "npm run test -w @tigrbl-auth/admin-uix",
     "test:platform-admin-uix": "npm run test -w @tigrbl-auth/platform-admin-uix",
     "test:tenant-admin-uix": "npm run test -w @tigrbl-auth/tenant-admin-uix",
@@ -31,7 +34,7 @@
     "test:my-account-uix": "npm run test -w @tigrbl-auth/my-account-uix",
     "test:public-uix": "npm run test -w @tigrbl-auth/public-uix",
     "test:rp": "npm run test -w @tigrbl-auth/rp",
-    "test:uix": "npm run test:admin-uix && npm run test:platform-admin-uix && npm run test:tenant-admin-uix && npm run test:developer-uix && npm run test:service-admin-uix && npm run test:my-account-uix && npm run test:public-uix"
+    "test:uix": "npm run test:uix-core && npm run test:admin-uix && npm run test:platform-admin-uix && npm run test:tenant-admin-uix && npm run test:developer-uix && npm run test:service-admin-uix && npm run test:my-account-uix && npm run test:public-uix"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

@@ -26,6 +26,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@tigrbl-auth/uix-core": "file:../../packages/uix-core",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",
