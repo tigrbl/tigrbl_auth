@@ -3,7 +3,7 @@ import type { ApiKeyRecord } from "../types";
 
 export function ApiKeysPage({ apiKeys }: { apiKeys: ApiKeyRecord[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="API keys" description="Issue, inspect, and revoke scoped API keys for workload integrations." />
       <DetailPanel title="API key records">
         <DataTable

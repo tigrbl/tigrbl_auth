@@ -3,7 +3,7 @@ import type { KeyRotationEvent } from "../types";
 
 export function KeyEventsPage({ keyEvents }: { keyEvents: KeyRotationEvent[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant key events" description="Review tenant key rotation event records without platform-wide key authority." />
       <DetailPanel title="Key rotation events">
         <DataTable

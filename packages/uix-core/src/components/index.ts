@@ -11,6 +11,7 @@ export * from "./FormField";
 export * from "./IconButton";
 export * from "./Input";
 export * from "./JsonViewer";
+export * from "./MetricCard";
 export * from "./Modal";
 export * from "./SecretField";
 export * from "./SocialButton";

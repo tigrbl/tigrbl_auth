@@ -68,11 +68,11 @@ export class PlatformAdminClient {
 
   identities(tenantId: string) {
     const params = new URLSearchParams({ tenant_id: tenantId });
-    return this.request<Identity[]>(`/admin/identities?${params.toString()}`);
+    return this.request<Identity[]>(`/admin/identity?${params.toString()}`);
   }
 
   createIdentity(payload: CreateIdentityInput) {
-    return this.request<Identity>("/admin/identities", {
+    return this.request<Identity>("/admin/identity", {
       method: "POST",
       body: JSON.stringify(payload)
     });

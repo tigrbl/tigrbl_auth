@@ -4,7 +4,7 @@ import type { ClientRegistration } from "../types";
 export function RedirectUrisPage({ registrations }: { registrations: ClientRegistration[] }) {
   const rows = registrations.flatMap((registration) => (registration.redirect_uris ?? []).map((uri) => ({ client: registration.client_name ?? registration.client_id ?? registration.id, uri })));
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Redirect URIs" description="Inspect callback URLs configured across developer-owned clients." />
       <DetailPanel title="Configured redirect URIs">
         <DataTable

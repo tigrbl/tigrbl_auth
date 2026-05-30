@@ -7,7 +7,7 @@ export function ServiceDetailPage({ apiKeys, service, serviceKeys }: { apiKeys: 
   }
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Service detail" description="Inspect the selected workload principal and related credentials." />
       <DetailPanel title={service.name ?? service.subject ?? service.id}>
         <StatusBadge tone={service.is_active === false ? "warning" : "success"}>{service.is_active === false ? "Inactive" : "Active"}</StatusBadge>

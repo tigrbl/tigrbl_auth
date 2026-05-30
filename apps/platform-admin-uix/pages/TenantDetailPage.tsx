@@ -15,13 +15,13 @@ export function TenantDetailPage({
   tenants: Tenant[];
 }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant detail" description="Inspect tenant metadata, authority context, and tenant-scoped administrators." />
       <DetailPanel title="Tenant context">
         <select
+          className="tigrbl-control"
           value={selectedTenantId}
           onChange={(event) => onSelectTenant(event.target.value)}
-          style={{ border: "1px solid #bccbc5", borderRadius: "6px", font: "inherit", minHeight: "36px", minWidth: "280px", padding: "0 10px" }}
         >
           {tenants.map((tenant) => (
             <option key={tenant.id} value={tenant.id}>{tenant.name}</option>
@@ -30,7 +30,7 @@ export function TenantDetailPage({
       </DetailPanel>
       {selectedTenant ? (
         <DetailPanel title={selectedTenant.name}>
-          <dl style={{ display: "grid", gap: "10px", gridTemplateColumns: "160px 1fr" }}>
+          <dl className="tigrbl-definition-list">
             <dt>Slug</dt><dd>{selectedTenant.slug}</dd>
             <dt>Contact</dt><dd>{selectedTenant.email}</dd>
             <dt>ID</dt><dd><code>{selectedTenant.id}</code></dd>

@@ -9,7 +9,9 @@ describe("platform admin API boundary", () => {
 
   it("permits platform control-plane paths and rejects public login paths", () => {
     expect(apiUrl("/admin/tenant").pathname).toBe("/admin/tenant");
-    expect(apiUrl("/admin/identities").pathname).toBe("/admin/identities");
+    expect(apiUrl("/admin/identity").pathname).toBe("/admin/identity");
+    expect(apiUrl("/admin/identity?tenant_id=public").pathname).toBe("/admin/identity");
+    expect(() => assertSurfacePath("/admin/identities")).toThrow(/not part/);
     for (const path of FORBIDDEN_PATH_PREFIXES) {
       expect(() => assertSurfacePath(path)).toThrow(/outside/);
     }

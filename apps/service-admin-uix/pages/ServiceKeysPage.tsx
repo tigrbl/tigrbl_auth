@@ -3,7 +3,7 @@ import type { ServiceKey } from "../types";
 
 export function ServiceKeysPage({ serviceKeys }: { serviceKeys: ServiceKey[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Service keys" description="Review service key material lifecycle and rotation posture." />
       <DetailPanel title="Keys">
         <DataTable

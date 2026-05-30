@@ -31,7 +31,7 @@ export function TenantsPage({
   }
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant lifecycle" description="Create tenants and select a tenant context for platform administration." />
       {feedback && <Toast tone="success" message={feedback} />}
       <DetailPanel title="Create tenant">

@@ -3,7 +3,7 @@ import type { TenantIdentity } from "../types";
 
 export function IdentitiesPage({ identities }: { identities: TenantIdentity[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant identities" description="Manage tenant users, tenant administrators, activation state, and password posture." />
       <DetailPanel title="Visible identities">
         <DataTable

@@ -3,7 +3,7 @@ import type { ServiceAdminSession } from "../types";
 
 export function AuditPage({ session }: { session: ServiceAdminSession | null }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Service audit" description="Workload administration audit posture." />
       <DetailPanel title="Audit event stream">
         <StatusBadge tone="info">Planned</StatusBadge>

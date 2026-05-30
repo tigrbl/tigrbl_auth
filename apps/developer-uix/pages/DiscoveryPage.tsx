@@ -3,7 +3,7 @@ import type { IssuerMetadata } from "../types";
 
 export function DiscoveryPage({ metadata }: { metadata: IssuerMetadata | null }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Issuer discovery" description="Inspect OIDC issuer metadata used by developer applications." />
       {metadata ? (
         <DetailPanel title={metadata.issuer ?? "Issuer metadata"}>

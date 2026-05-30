@@ -3,7 +3,7 @@ import type { TenantAdminSession } from "../types";
 
 export function AuditPage({ session }: { session: TenantAdminSession | null }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant audit" description="Tenant-scoped operational audit view." />
       <DetailPanel title="Audit event stream">
         <StatusBadge tone="info">Planned</StatusBadge>

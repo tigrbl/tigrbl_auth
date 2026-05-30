@@ -1,4 +1,4 @@
-import { Button, Card, DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import { Button, DataTable, DetailPanel, EmptyState, MetricCard, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import type { AccountSession } from "../types";
 
 export function SessionsPage({
@@ -16,14 +16,8 @@ export function SessionsPage({
     <div className="tigrbl-page-stack">
       <PageHeader title="Sessions" description="Review and revoke active account sessions." />
       <div className="tigrbl-metric-grid">
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Visible sessions</p>
-          <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{sessions.length}</h2>
-        </Card>
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Loading state</p>
-          <StatusBadge tone={loading ? "info" : "success"}>{loading ? "Refreshing" : "Current"}</StatusBadge>
-        </Card>
+        <MetricCard label="Visible sessions" value={sessions.length} description="Sessions scoped to the current subject" />
+        <MetricCard label="Loading state" value={loading ? "Refreshing" : "Current"} description="Account session data freshness" />
       </div>
       {error ? <Toast tone="danger" message={error} /> : null}
       <DetailPanel title="Active sessions">

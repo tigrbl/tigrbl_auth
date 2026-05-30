@@ -3,7 +3,7 @@ import type { ServiceIdentity } from "../types";
 
 export function ServicesPage({ services }: { services: ServiceIdentity[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Service identities" description="Manage non-human service and workload principals." />
       <DetailPanel title="Visible services">
         <DataTable

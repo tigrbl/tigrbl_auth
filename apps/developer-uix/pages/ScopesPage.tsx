@@ -4,7 +4,7 @@ import type { DeveloperApplication, IssuerMetadata } from "../types";
 export function ScopesPage({ applications, metadata }: { applications: DeveloperApplication[]; metadata: IssuerMetadata | null }) {
   const scopes = metadata?.scopes_supported ?? Array.from(new Set(applications.flatMap((app) => app.scopes ?? [])));
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Scopes" description="Review issuer-supported and application-requested scopes." />
       <DetailPanel title="Scope catalogue">
         <DataTable

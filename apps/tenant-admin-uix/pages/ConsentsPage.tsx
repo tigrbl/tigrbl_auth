@@ -3,7 +3,7 @@ import type { TenantConsent } from "../types";
 
 export function ConsentsPage({ consents }: { consents: TenantConsent[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant consents" description="Review user consent records visible to tenant administrators." />
       <DetailPanel title="Consent records">
         <DataTable

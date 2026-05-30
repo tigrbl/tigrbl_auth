@@ -3,7 +3,7 @@ import type { ServiceKey } from "../types";
 
 export function RotationEventsPage({ serviceKeys }: { serviceKeys: ServiceKey[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Rotation events" description="Review service key lifecycle posture. Dedicated rotation event resources can be wired here when exposed." />
       <DetailPanel title="Key rotation posture">
         <DataTable

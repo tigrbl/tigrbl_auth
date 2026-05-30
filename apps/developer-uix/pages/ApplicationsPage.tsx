@@ -10,7 +10,7 @@ export function ApplicationsPage({ applications, registrations }: { applications
   }));
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Applications" description="Register and inspect OAuth/OIDC applications in the current tenant developer context." />
       <DetailPanel title="Developer applications">
         <DataTable

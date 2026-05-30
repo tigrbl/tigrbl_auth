@@ -43,14 +43,14 @@ export function IdentitiesPage({
   }
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Platform identities" description="Review tenant administrators and provision platform-visible identities." />
       {feedback && <Toast tone="success" message={feedback} />}
       <DetailPanel title="Tenant context">
         <select
+          className="tigrbl-control"
           value={selectedTenantId}
           onChange={(event) => onSelectTenant(event.target.value)}
-          style={{ border: "1px solid #bccbc5", borderRadius: "6px", font: "inherit", minHeight: "36px", minWidth: "280px", padding: "0 10px" }}
         >
           {tenants.map((tenant) => (
             <option key={tenant.id} value={tenant.id}>{tenant.name}</option>
@@ -62,15 +62,15 @@ export function IdentitiesPage({
           <FormField label="Username" value={form.username} onChange={(event) => setForm({ ...form, username: event.target.value })} required />
           <FormField label="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} type="email" required />
           <FormField label="Temporary password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} type="password" required />
-          <label style={{ alignItems: "center", display: "flex", gap: "8px" }}>
+          <label className="tigrbl-choice-row">
             <input type="checkbox" checked={form.is_admin} onChange={(event) => setForm({ ...form, is_admin: event.target.checked })} />
             Admin
           </label>
-          <label style={{ alignItems: "center", display: "flex", gap: "8px" }}>
+          <label className="tigrbl-choice-row">
             <input type="checkbox" checked={form.is_superuser} onChange={(event) => setForm({ ...form, is_superuser: event.target.checked })} />
             Superuser
           </label>
-          <label style={{ alignItems: "center", display: "flex", gap: "8px" }}>
+          <label className="tigrbl-choice-row">
             <input type="checkbox" checked={form.must_change_password} onChange={(event) => setForm({ ...form, must_change_password: event.target.checked })} />
             Force password change
           </label>

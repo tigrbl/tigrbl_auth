@@ -145,6 +145,37 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
 
 
 @pytest.mark.asyncio
+async def test_platform_admin_cors_allows_uix_origin_on_error_responses(
+    tmp_path: Path,
+) -> None:
+    platform_app = build_app(_settings(tmp_path))
+
+    async with AsyncClient(
+        transport=ASGITransport(app=platform_app), base_url="http://test"
+    ) as client:
+        preflight = await client.options(
+            "/admin/auth/login",
+            headers={
+                "origin": "http://localhost:3011",
+                "access-control-request-method": "POST",
+                "access-control-request-headers": "content-type",
+            },
+        )
+        anonymous = await client.get(
+            "/admin/tenant",
+            headers={"origin": "http://localhost:3011"},
+        )
+
+    assert preflight.status_code == 204
+    assert preflight.headers["access-control-allow-origin"] == "http://localhost:3011"
+    assert preflight.headers["access-control-allow-credentials"] == "true"
+    assert "content-type" in preflight.headers["access-control-allow-headers"]
+    assert anonymous.status_code == 401
+    assert anonymous.headers["access-control-allow-origin"] == "http://localhost:3011"
+    assert anonymous.headers["access-control-allow-credentials"] == "true"
+
+
+@pytest.mark.asyncio
 async def test_platform_admin_rest_control_plane_excludes_rpc(
     tmp_path: Path,
 ) -> None:

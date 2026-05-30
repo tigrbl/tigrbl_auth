@@ -1,4 +1,4 @@
-import { AppShell, Button, Card, DetailPanel, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import { AppShell, Button, Card, DetailPanel, MetricCard, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
 import { demoFixtures, getSurfaceForStep, journeySteps, type JourneyStep } from "./demoState";
@@ -53,7 +53,7 @@ function WorldView() {
           <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{surfaces.length}</h2>
         </Card>
       </div>
-      <div style={{ display: "grid", gap: "14px", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}>
+      <div className="tigrbl-card-grid">
         {surfaces.map((surface) => <SurfaceCard key={surface.api} surface={surface} />)}
       </div>
     </div>
@@ -167,24 +167,13 @@ function DemoJourney() {
         actions={<Button type="button" onClick={() => void runAllApi()} disabled={runningApi !== null}>Run API demo</Button>}
       />
       <div className="tigrbl-metric-grid">
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Verified steps</p>
-          <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{completeCount}/{journeySteps.length}</h2>
-        </Card>
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Demo tenant</p>
-          <h2 style={{ margin: "8px 0 0" }}>{demoFixtures.tenant.name}</h2>
-          <code>{demoFixtures.tenant.slug}</code>
-        </Card>
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Demo user</p>
-          <h2 style={{ margin: "8px 0 0" }}>{demoFixtures.user.email}</h2>
-          <StatusBadge tone="info">{demoFixtures.user.role}</StatusBadge>
-        </Card>
+        <MetricCard label="Verified steps" value={`${completeCount}/${journeySteps.length}`} description="Proofs completed in this browser" />
+        <MetricCard label="Demo tenant" value={demoFixtures.tenant.name} description={demoFixtures.tenant.slug} />
+        <MetricCard label="Demo user" value={demoFixtures.user.email} description={demoFixtures.user.role} />
       </div>
       {copied ? <Toast tone="success" message={`Copied ${copied}`} /> : null}
       <DetailPanel title="Timeline">
-        <div style={{ display: "grid", gap: "10px", gridTemplateColumns: "repeat(auto-fit, minmax(132px, 1fr))" }}>
+        <div className="tigrbl-timeline-grid">
           {journeySteps.map((step) => {
             const surface = getSurfaceForStep(step);
             const verified = verifiedSteps.has(step.id);
@@ -192,15 +181,7 @@ function DemoJourney() {
               <a
                 href={`#step-${step.id}`}
                 key={step.id}
-                style={{
-                  background: verified ? "var(--tigrbl-primary-soft)" : "#ffffff",
-                  border: "1px solid var(--tigrbl-border)",
-                  borderColor: verified ? "#c7ded5" : "var(--tigrbl-border)",
-                  borderRadius: "8px",
-                  color: "var(--tigrbl-text)",
-                  padding: "12px",
-                  textDecoration: "none"
-                }}
+                className={`tigrbl-timeline-item ${verified ? "tigrbl-timeline-item-active" : ""}`.trim()}
               >
                 <p className="tigrbl-eyebrow">Step {step.order}</p>
                 <strong>{surface?.title ?? step.surfaceId}</strong>

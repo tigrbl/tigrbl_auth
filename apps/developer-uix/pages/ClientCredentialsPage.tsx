@@ -4,7 +4,7 @@ import type { ClientRegistration, DeveloperApplication } from "../types";
 export function ClientCredentialsPage({ application, registration }: { application: DeveloperApplication | null; registration: ClientRegistration | null }) {
   const clientId = application?.client_id ?? registration?.client_id ?? null;
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Client credentials" description="Review client identifiers and planned credential rotation controls." />
       {clientId ? (
         <DetailPanel title="Selected client">

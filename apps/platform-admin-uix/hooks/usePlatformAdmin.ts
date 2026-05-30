@@ -62,7 +62,12 @@ export function usePlatformAdmin() {
       })
       .catch((nextError) => {
         if (!cancelled) {
-          setError(nextError instanceof Error ? nextError.message : "Unable to load identities.");
+          const message = nextError instanceof Error ? nextError.message : "";
+          if (message === "No runtime operation matched request.") {
+            setIdentities([]);
+            return;
+          }
+          setError(message || "Unable to load identities.");
         }
       });
     return () => {

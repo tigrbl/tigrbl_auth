@@ -3,7 +3,7 @@ import type { TokenRecord } from "../types";
 
 export function TokenRecordsPage({ tokenRecords }: { tokenRecords: TokenRecord[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Token records" description="Inspect machine-token lifecycle records visible to service administrators." />
       <DetailPanel title="Tokens">
         <DataTable

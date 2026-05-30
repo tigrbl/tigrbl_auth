@@ -4,16 +4,17 @@ export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API
 export const SURFACE_PURPOSE = "Cross-tenant control plane for tenant lifecycle and platform authority.";
 
 export const FORBIDDEN_PATH_PREFIXES = ["/login", "/authorize", "/token", "/consent", "/register", "/userinfo"];
-export const ALLOWED_PATH_PREFIXES = ["/admin/auth", "/admin/tenant", "/admin/identity", "/admin/identities", "/auditevent"];
+export const ALLOWED_PATH_PREFIXES = ["/admin/auth", "/admin/tenant", "/admin/identity", "/auditevent"];
 
 export function assertSurfacePath(path: string): void {
   if (!path.startsWith("/")) {
     throw new Error(`API paths must be absolute: ${path}`);
   }
-  if (FORBIDDEN_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
+  const pathname = new URL(path, `${API_BASE_URL}/`).pathname;
+  if (FORBIDDEN_PATH_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))) {
     throw new Error(`Path is outside ${PRODUCT_API}: ${path}`);
   }
-  if (!ALLOWED_PATH_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))) {
+  if (!ALLOWED_PATH_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))) {
     throw new Error(`Path is not part of ${PRODUCT_API}: ${path}`);
   }
 }

@@ -3,7 +3,7 @@ import type { TenantClient } from "../types";
 
 export function ClientsPage({ clients }: { clients: TenantClient[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Tenant clients" description="Inspect tenant-local OAuth/OIDC clients and client registration metadata." />
       <DetailPanel title="Client applications">
         <DataTable

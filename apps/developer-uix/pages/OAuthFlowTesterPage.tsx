@@ -7,7 +7,7 @@ export function OAuthFlowTesterPage({ application, metadata }: { application: De
     : null;
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="OAuth flow tester" description="Generate an authorization URL for the selected client and issuer metadata." />
       {authorizeUrl ? (
         <DetailPanel title="Authorization request">

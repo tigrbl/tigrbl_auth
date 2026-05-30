@@ -5,7 +5,7 @@ export function GroupsRolesPage({ identities }: { identities: TenantIdentity[] }
   const rows = identities.flatMap((identity) => (identity.roles ?? []).map((role) => ({ identity, role })));
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Groups and roles" description="Review tenant-local role assignments derived from visible identities." />
       <DetailPanel title="Role assignments">
         <DataTable

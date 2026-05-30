@@ -20,7 +20,7 @@ export function ValidationToolsPage({
   }
 
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Validation tools" description="Inspect protected-resource metadata and test token introspection." />
       <DetailPanel title="Protected resource metadata">
         {metadata ? <JsonViewer value={metadata} /> : <EmptyState title="Metadata unavailable" body="Resource metadata was not returned by the service admin API." />}

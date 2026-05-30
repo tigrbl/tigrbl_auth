@@ -3,7 +3,7 @@ import type { ClientRegistration } from "../types";
 
 export function ClientMetadataPage({ registrations }: { registrations: ClientRegistration[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Client metadata" description="Review registered client metadata, auth method, and redirect configuration." />
       <DetailPanel title="Registration records">
         <DataTable

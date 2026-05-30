@@ -1,4 +1,4 @@
-import { Button, Card, DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import { Button, DataTable, DetailPanel, EmptyState, MetricCard, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import type { AuthorizedApp, Consent } from "../types";
 
 export function AuthorizedAppsPage({
@@ -20,18 +20,9 @@ export function AuthorizedAppsPage({
     <div className="tigrbl-page-stack">
       <PageHeader title="Authorized apps" description="Review applications and consent grants authorized for your account." />
       <div className="tigrbl-metric-grid">
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Applications</p>
-          <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{apps.length}</h2>
-        </Card>
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Consent grants</p>
-          <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{consents.length}</h2>
-        </Card>
-        <Card tone="compact">
-          <p className="tigrbl-eyebrow">Loading state</p>
-          <StatusBadge tone={loading ? "info" : "success"}>{loading ? "Refreshing" : "Current"}</StatusBadge>
-        </Card>
+        <MetricCard label="Applications" value={apps.length} description="Clients authorized by this account" />
+        <MetricCard label="Consent grants" value={consents.length} description="Scope grants visible to the subject" />
+        <MetricCard label="Loading state" value={loading ? "Refreshing" : "Current"} description="Authorization data freshness" />
       </div>
       {error ? <Toast tone="danger" message={error} /> : null}
       <DetailPanel title="Authorized applications">

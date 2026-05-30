@@ -3,7 +3,7 @@ import type { Tenant } from "../types";
 
 export function KeyRotationPage({ selectedTenant, tenants }: { selectedTenant: Tenant | null; tenants: Tenant[] }) {
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Key rotation" description="Platform signing-key posture and rotation front door." />
       <DetailPanel title="Rotation scope">
         {selectedTenant ? (

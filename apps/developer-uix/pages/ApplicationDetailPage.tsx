@@ -4,7 +4,7 @@ import type { ClientRegistration, DeveloperApplication } from "../types";
 export function ApplicationDetailPage({ application, registration }: { application: DeveloperApplication | null; registration: ClientRegistration | null }) {
   const record = application ?? registration;
   return (
-    <div style={{ display: "grid", gap: "18px" }}>
+    <div className="tigrbl-page-stack">
       <PageHeader title="Application detail" description="Inspect the selected application/client record." />
       {record ? (
         <DetailPanel title={application?.name ?? registration?.client_name ?? record.id}>

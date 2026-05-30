@@ -1,9 +1,9 @@
 var y = Object.defineProperty;
 var v = (e, r, t) => r in e ? y(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
 var o = (e, r, t) => v(e, typeof r != "symbol" ? r + "" : r, t);
-import { createContext as w, useContext as S, useState as b, useEffect as A } from "react";
-import { jsx as n, Fragment as f, jsxs as l } from "react/jsx-runtime";
-class $ extends Error {
+import { createContext as w, useContext as S, useState as b, useEffect as $ } from "react";
+import { jsx as n, Fragment as m, jsxs as l } from "react/jsx-runtime";
+class A extends Error {
   constructor(t, a, i = null) {
     super(t);
     o(this, "status");
@@ -14,7 +14,7 @@ class $ extends Error {
 function g(e, r) {
   return e === r || e.startsWith(`${r}/`);
 }
-function k(e, r) {
+function C(e, r) {
   if (!e.startsWith("/"))
     throw new Error(`API paths must be absolute: ${e}`);
   if (r.forbiddenPathPrefixes.some((t) => g(e, t)))
@@ -22,10 +22,10 @@ function k(e, r) {
   if (!r.allowedPathPrefixes.some((t) => g(e, t)))
     throw new Error(`Path is not part of ${r.productApi}: ${e}`);
 }
-function x(e, r, t) {
-  return k(r, t), new URL(r, `${e.replace(/\/+$/, "")}/`);
+function k(e, r, t) {
+  return C(r, t), new URL(r, `${e.replace(/\/+$/, "")}/`);
 }
-class D {
+class M {
   constructor(r) {
     o(this, "baseUrl");
     o(this, "boundary");
@@ -34,7 +34,7 @@ class D {
     this.baseUrl = r.baseUrl.replace(/\/+$/, ""), this.boundary = r.boundary, this.fetcher = r.fetcher ?? globalThis.fetch.bind(globalThis), this.headers = r.headers ?? {};
   }
   async request(r, t = {}) {
-    const a = this.boundary ? x(this.baseUrl, r, this.boundary) : new URL(r, `${this.baseUrl}/`), i = await this.fetcher(a, {
+    const a = this.boundary ? k(this.baseUrl, r, this.boundary) : new URL(r, `${this.baseUrl}/`), i = await this.fetcher(a, {
       method: t.method ?? "GET",
       headers: {
         ...this.headers,
@@ -43,40 +43,40 @@ class D {
       },
       body: t.body === void 0 ? void 0 : JSON.stringify(t.body),
       signal: t.signal
-    }), c = (i.headers.get("content-type") ?? "").includes("application/json") ? await i.json() : await i.text();
+    }), s = (i.headers.get("content-type") ?? "").includes("application/json") ? await i.json() : await i.text();
     if (!i.ok)
-      throw new $(`Request failed with ${i.status}`, i.status, c);
-    return c;
+      throw new A(`Request failed with ${i.status}`, i.status, s);
+    return s;
   }
 }
-function J(e, r) {
+function D(e, r) {
   const t = new URLSearchParams();
   return e && t.set("cursor", e), r !== void 0 && t.set("limit", String(r)), t;
 }
-const p = w({
+const N = w({
   loading: !1,
   session: null
-}), L = p.Provider;
+}), J = N.Provider;
 function u() {
-  return S(p);
+  return S(N);
 }
-function N(e, r) {
+function p(e, r) {
   const t = new Set(e);
   return r.every((a) => t.has(a));
 }
-function C(e, r) {
+function x(e, r) {
   const t = new Set(e);
   return r.some((a) => t.has(a));
 }
-function M({
+function L({
   children: e,
   fallback: r = null,
   permissions: t
 }) {
   const { session: a } = u();
-  return N((a == null ? void 0 : a.permissions) ?? [], t) ? /* @__PURE__ */ n(f, { children: e }) : /* @__PURE__ */ n(f, { children: r });
+  return p((a == null ? void 0 : a.permissions) ?? [], t) ? /* @__PURE__ */ n(m, { children: e }) : /* @__PURE__ */ n(m, { children: r });
 }
-function m({ body: e, title: r }) {
+function f({ body: e, title: r }) {
   return /* @__PURE__ */ l("div", { className: "tigrbl-empty-state", children: [
     /* @__PURE__ */ n("h2", { children: r }),
     e && /* @__PURE__ */ n("p", { children: e })
@@ -87,7 +87,7 @@ function W({
   fallback: r
 }) {
   const { loading: t, session: a } = u();
-  return t ? /* @__PURE__ */ n(m, { title: "Loading session", body: "Checking the current authentication state." }) : a != null && a.authenticated ? /* @__PURE__ */ n(f, { children: e }) : r ?? /* @__PURE__ */ n(m, { title: "Session required", body: "Sign in to continue." });
+  return t ? /* @__PURE__ */ n(f, { title: "Loading session", body: "Checking the current authentication state." }) : a != null && a.authenticated ? /* @__PURE__ */ n(m, { children: e }) : r ?? /* @__PURE__ */ n(f, { title: "Session required", body: "Sign in to continue." });
 }
 function V(e) {
   return e != null && e.authenticated ? e.username ?? e.email ?? e.subject ?? "Authenticated session" : "Unauthenticated";
@@ -147,9 +147,9 @@ function O({
   onCancel: t,
   onConfirm: a,
   open: i,
-  title: s
+  title: c
 }) {
-  return /* @__PURE__ */ l(P, { onClose: t, open: i, title: s, children: [
+  return /* @__PURE__ */ l(P, { onClose: t, open: i, title: c, children: [
     /* @__PURE__ */ n("p", { children: e }),
     /* @__PURE__ */ l("div", { className: "tigrbl-actions", children: [
       /* @__PURE__ */ n(d, { onClick: t, type: "button", variant: "subtle", children: "Cancel" }),
@@ -169,9 +169,9 @@ function Y({
   getRowKey: t,
   items: a
 }) {
-  return a.length === 0 ? /* @__PURE__ */ n(f, { children: r ?? /* @__PURE__ */ n(m, { title: "No records", body: "There are no records to show yet." }) }) : /* @__PURE__ */ n("div", { className: "tigrbl-table-wrap", children: /* @__PURE__ */ l("table", { className: "tigrbl-table", children: [
+  return a.length === 0 ? /* @__PURE__ */ n(m, { children: r ?? /* @__PURE__ */ n(f, { title: "No records", body: "There are no records to show yet." }) }) : /* @__PURE__ */ n("div", { className: "tigrbl-table-wrap", children: /* @__PURE__ */ l("table", { className: "tigrbl-table", children: [
     /* @__PURE__ */ n("thead", { children: /* @__PURE__ */ n("tr", { children: e.map((i) => /* @__PURE__ */ n("th", { children: i.header }, i.key)) }) }),
-    /* @__PURE__ */ n("tbody", { children: a.map((i) => /* @__PURE__ */ n("tr", { children: e.map((s) => /* @__PURE__ */ n("td", { children: s.render(i) }, s.key)) }, t(i))) })
+    /* @__PURE__ */ n("tbody", { children: a.map((i) => /* @__PURE__ */ n("tr", { children: e.map((c) => /* @__PURE__ */ n("td", { children: c.render(i) }, c.key)) }, t(i))) })
   ] }) });
 }
 function z({ children: e, title: r }) {
@@ -220,7 +220,19 @@ function _(e) {
 function ee({ value: e }) {
   return /* @__PURE__ */ n("pre", { className: "tigrbl-json", children: JSON.stringify(e, null, 2) });
 }
-function re({ label: e, value: r }) {
+function re({
+  description: e,
+  label: r,
+  value: t,
+  ...a
+}) {
+  return /* @__PURE__ */ l("article", { ...a, className: `tigrbl-metric-card ${a.className ?? ""}`.trim(), children: [
+    /* @__PURE__ */ n("p", { className: "tigrbl-metric-card-label", children: r }),
+    /* @__PURE__ */ n("strong", { className: "tigrbl-metric-card-value", children: t }),
+    e && /* @__PURE__ */ n("p", { className: "tigrbl-metric-card-description", children: e })
+  ] });
+}
+function te({ label: e, value: r }) {
   const [t, a] = b(!1);
   return /* @__PURE__ */ l("div", { className: "tigrbl-secret", children: [
     /* @__PURE__ */ n("span", { children: e }),
@@ -228,7 +240,7 @@ function re({ label: e, value: r }) {
     /* @__PURE__ */ n(d, { onClick: () => a((i) => !i), type: "button", variant: "subtle", children: t ? "Hide" : "Show" })
   ] });
 }
-function te({
+function ne({
   children: e,
   icon: r,
   label: t,
@@ -239,10 +251,10 @@ function te({
     /* @__PURE__ */ n("span", { children: e ?? `Continue with ${t}` })
   ] });
 }
-function ne({ children: e, tone: r = "neutral" }) {
+function ae({ children: e, tone: r = "neutral" }) {
   return /* @__PURE__ */ n("span", { className: `tigrbl-badge tigrbl-badge-${r}`, children: e });
 }
-function ae({
+function ie({
   children: e,
   loading: r = !1,
   loadingLabel: t = "Working...",
@@ -250,19 +262,19 @@ function ae({
 }) {
   return /* @__PURE__ */ n(d, { ...a, disabled: r || a.disabled, type: a.type ?? "submit", children: r ? t : e });
 }
-function ie({ activeHref: e, items: r }) {
+function le({ activeHref: e, items: r }) {
   return /* @__PURE__ */ n("nav", { className: "tigrbl-tabs", children: r.map((t) => /* @__PURE__ */ n("a", { "aria-current": e === t.href ? "page" : void 0, href: t.href, children: t.label }, t.href)) });
 }
-function le({ message: e, tone: r = "neutral" }) {
+function ce({ message: e, tone: r = "neutral" }) {
   return /* @__PURE__ */ n("div", { className: `tigrbl-toast tigrbl-toast-${r}`, children: e });
 }
 function se({ children: e }) {
   return /* @__PURE__ */ n("div", { className: "tigrbl-toolbar", children: e });
 }
-function ce(e) {
+function oe(e) {
   return /* @__PURE__ */ n("textarea", { ...e, className: `tigrbl-json-editor ${e.className ?? ""}`.trim(), spellCheck: !1 });
 }
-function oe({
+function de({
   children: e,
   footer: r,
   ...t
@@ -272,38 +284,38 @@ function oe({
     r && /* @__PURE__ */ n("footer", { children: r })
   ] });
 }
-function de(e) {
+function ue(e) {
   const [r, t] = b(null), [a, i] = b(!1);
-  async function s(...c) {
+  async function c(...s) {
     t(null), i(!0);
     try {
-      return await e(...c);
+      return await e(...s);
     } catch (h) {
       return t(h instanceof Error ? h.message : "Request failed"), null;
     } finally {
       i(!1);
     }
   }
-  return { error: r, loading: a, run: s };
+  return { error: r, loading: a, run: c };
 }
-function ue(e, r = []) {
+function he(e, r = []) {
   const [t, a] = b({ data: null, error: null, loading: !0 });
-  return A(() => {
+  return $(() => {
     const i = new AbortController();
-    return a((s) => ({ ...s, error: null, loading: !0 })), e(i.signal).then((s) => a({ data: s, error: null, loading: !1 })).catch((s) => {
-      i.signal.aborted || a({ data: null, error: s instanceof Error ? s.message : "Request failed", loading: !1 });
+    return a((c) => ({ ...c, error: null, loading: !0 })), e(i.signal).then((c) => a({ data: c, error: null, loading: !1 })).catch((c) => {
+      i.signal.aborted || a({ data: null, error: c instanceof Error ? c.message : "Request failed", loading: !1 });
     }), () => i.abort();
   }, r), t;
 }
-function he() {
+function be() {
   return u().session;
 }
-function be() {
+function me() {
   const { session: e } = u(), r = (e == null ? void 0 : e.permissions) ?? [];
   return {
     permissions: r,
-    hasAny: (t) => C(r, t),
-    hasEvery: (t) => N(r, t)
+    hasAny: (t) => x(r, t),
+    hasEvery: (t) => p(r, t)
   };
 }
 function fe() {
@@ -323,12 +335,12 @@ function U({
   return /* @__PURE__ */ l("aside", { className: "tigrbl-sidebar", children: [
     /* @__PURE__ */ n("p", { className: "tigrbl-sidebar-product", children: a }),
     /* @__PURE__ */ n("h1", { children: i }),
-    /* @__PURE__ */ n("nav", { children: t.map((s) => {
-      const c = e === s.href || e.startsWith(`${s.href}/`);
-      return /* @__PURE__ */ l("a", { "aria-current": c ? "page" : void 0, href: s.href, children: [
-        /* @__PURE__ */ n("span", { children: s.label }),
-        s.badge && /* @__PURE__ */ n("small", { children: s.badge })
-      ] }, s.href);
+    /* @__PURE__ */ n("nav", { children: t.map((c) => {
+      const s = e === c.href || e.startsWith(`${c.href}/`);
+      return /* @__PURE__ */ l("a", { "aria-current": s ? "page" : void 0, href: c.href, children: [
+        /* @__PURE__ */ n("span", { children: c.label }),
+        c.badge && /* @__PURE__ */ n("small", { children: c.badge })
+      ] }, c.href);
     }) }),
     r && /* @__PURE__ */ l("p", { className: "tigrbl-sidebar-api", children: [
       "API: ",
@@ -342,20 +354,20 @@ function B({ onLogout: e, sessionLabel: r }) {
     e && /* @__PURE__ */ n(d, { onClick: e, type: "button", variant: "subtle", children: "Sign out" })
   ] });
 }
-function me({
+function ge({
   activeHref: e,
   apiBaseUrl: r,
   children: t,
   navigation: a,
   onLogout: i,
-  productApi: s,
-  sessionLabel: c,
+  productApi: c,
+  sessionLabel: s,
   title: h
 }) {
   return /* @__PURE__ */ l("main", { className: "tigrbl-shell", children: [
-    /* @__PURE__ */ n(U, { activeHref: e, apiBaseUrl: r, items: a, productApi: s, title: h }),
+    /* @__PURE__ */ n(U, { activeHref: e, apiBaseUrl: r, items: a, productApi: c, title: h }),
     /* @__PURE__ */ l("section", { className: "tigrbl-shell-main", children: [
-      /* @__PURE__ */ n(B, { onLogout: i, sessionLabel: c }),
+      /* @__PURE__ */ n(B, { onLogout: i, sessionLabel: s }),
       /* @__PURE__ */ n("div", { className: "tigrbl-shell-content", children: t })
     ] })
   ] });
@@ -380,7 +392,7 @@ function R({
     e && /* @__PURE__ */ n("nav", { className: "tigrbl-brand-header-actions", children: e })
   ] });
 }
-function ge({
+function Ne({
   children: e,
   footer: r,
   productApi: t,
@@ -407,7 +419,7 @@ function ge({
 function pe({ items: e }) {
   return /* @__PURE__ */ n("nav", { "aria-label": "Breadcrumbs", className: "tigrbl-breadcrumbs", children: e.map((r, t) => /* @__PURE__ */ n("a", { href: r.href, "aria-current": t === e.length - 1 ? "page" : void 0, children: r.label }, r.href)) });
 }
-function Ne({
+function ye({
   actions: e,
   description: r,
   title: t
@@ -421,11 +433,11 @@ function Ne({
   ] });
 }
 export {
-  D as ApiClient,
-  $ as ApiError,
-  me as AppShell,
-  L as AuthProvider,
-  ge as AuthShell,
+  M as ApiClient,
+  A as ApiError,
+  ge as AppShell,
+  J as AuthProvider,
+  Ne as AuthShell,
   R as BrandHeader,
   j as BrandMark,
   pe as Breadcrumbs,
@@ -436,39 +448,40 @@ export {
   Q as CopyButton,
   Y as DataTable,
   z as DetailPanel,
-  m as EmptyState,
+  f as EmptyState,
   K as ErrorState,
   X as FormError,
   T as FormField,
   Z as IconButton,
   _ as Input,
-  ce as JsonEditor,
+  oe as JsonEditor,
   ee as JsonViewer,
+  re as MetricCard,
   P as Modal,
-  Ne as PageHeader,
-  M as PermissionGate,
+  ye as PageHeader,
+  L as PermissionGate,
   W as RequireAuth,
-  oe as ResourceForm,
-  re as SecretField,
+  de as ResourceForm,
+  te as SecretField,
   U as Sidebar,
-  te as SocialButton,
-  ne as StatusBadge,
-  ae as SubmitButton,
-  ie as Tabs,
-  le as Toast,
+  ne as SocialButton,
+  ae as StatusBadge,
+  ie as SubmitButton,
+  le as Tabs,
+  ce as Toast,
   se as Toolbar,
   B as Topbar,
   E as ValidationMessage,
-  k as assertSurfacePath,
-  x as createSurfaceUrl,
+  C as assertSurfacePath,
+  k as createSurfaceUrl,
   V as describeSession,
-  J as encodeCursorParams,
-  C as hasAnyPermission,
-  N as hasEveryPermission,
-  de as useApiMutation,
-  ue as useApiQuery,
+  D as encodeCursorParams,
+  x as hasAnyPermission,
+  p as hasEveryPermission,
+  ue as useApiMutation,
+  he as useApiQuery,
   u as useAuthContext,
-  he as useCurrentUser,
-  be as usePermissions,
+  be as useCurrentUser,
+  me as usePermissions,
   fe as useTenantContext
 };
