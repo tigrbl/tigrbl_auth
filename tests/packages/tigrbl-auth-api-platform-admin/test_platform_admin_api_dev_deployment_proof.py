@@ -45,7 +45,6 @@ def test_platform_admin_api_dev_deployment_exposes_rest_control_plane_surface() 
         assert openapi.status_code == 200, openapi.text
         paths = openapi.json()["paths"]
         assert "/admin/tenant" in paths
-        assert "/admin/tenant/{item_id}" in paths
         assert "/admin/identity" in paths
         assert "/admin/identity/{item_id}" in paths
         assert "/tenant" not in paths
@@ -54,18 +53,13 @@ def test_platform_admin_api_dev_deployment_exposes_rest_control_plane_surface() 
         assert "/authsession/{item_id}" not in paths
         assert "/client" not in paths
         schemas = openapi.json()["components"]["schemas"]
-        assert "TenantCreateRequest" in schemas
-        assert "TenantUpdateRequest" in schemas
+        assert "AdminTenantOut" in schemas
         assert "UserCreateRequest" in schemas
         assert "UserUpdateRequest" in schemas
-        assert "AdminTenantProvisionIn" not in schemas
         assert "AdminIdentityProvisionIn" not in schemas
-        assert (
-            paths["/admin/tenant"]["post"]["requestBody"]["content"][
-                "application/json"
-            ]["schema"]["$ref"]
-            == "#/components/schemas/TenantCreateRequest"
-        )
+        assert paths["/admin/tenant"]["post"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]["$ref"] == "#/components/schemas/AdminTenantOut"
         assert (
             paths["/admin/identity"]["post"]["requestBody"]["content"][
                 "application/json"

@@ -1,4 +1,4 @@
-import { AppShell, AuthProvider, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
 import { useDeveloperPortal } from "./hooks/useDeveloperPortal";
@@ -60,18 +60,24 @@ export default function App() {
 
   return (
     <AuthProvider value={authValue}>
-      <AppShell
-        activeHref={currentHash}
-        apiBaseUrl={API_BASE_URL}
-        navigation={navigation}
-        onLogout={developer.session?.authenticated ? () => developer.logout() : undefined}
-        productApi={PRODUCT_API}
-        sessionLabel={describeSession(authValue.session)}
-        title="Developer Portal"
-      >
-        {!developer.session?.authenticated ? (
+      {!developer.session?.authenticated ? (
+        <AuthShell
+          productApi={PRODUCT_API}
+          subtitle="Continue with your developer and tenant context to manage applications, redirect URIs, scopes, credentials, and issuer metadata."
+          title="Developer Portal"
+        >
           <LoginPage error={developer.error} onLogin={developer.login} />
-        ) : (
+        </AuthShell>
+      ) : (
+        <AppShell
+          activeHref={currentHash}
+          apiBaseUrl={API_BASE_URL}
+          navigation={navigation}
+          onLogout={() => developer.logout()}
+          productApi={PRODUCT_API}
+          sessionLabel={describeSession(authValue.session)}
+          title="Developer Portal"
+        >
           <RequireAuth>
             {developer.error && <div style={{ marginBottom: "16px" }}><Toast message={developer.error} tone="danger" /></div>}
             {currentHash.startsWith("#/apps") && <ApplicationsPage applications={developer.applications} registrations={developer.registrations} />}
@@ -86,8 +92,8 @@ export default function App() {
               <DashboardPage applications={developer.applications} metadata={developer.metadata} registrations={developer.registrations} session={developer.session} />
             )}
           </RequireAuth>
-        )}
-      </AppShell>
+        </AppShell>
+      )}
     </AuthProvider>
   );
 }

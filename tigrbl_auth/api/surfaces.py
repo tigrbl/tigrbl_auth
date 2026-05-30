@@ -181,6 +181,45 @@ def _route_pattern(path_template: str, param_names: tuple[str, ...]) -> re.Patte
     return re.compile(f"^{pattern}/?$")
 
 
+def _rewrite_model_rest_bindings(
+    model: type[Any],
+    *,
+    old_prefix: str,
+    new_prefix: str,
+) -> None:
+    ops = getattr(model, "ops", None)
+    by_alias = getattr(ops, "by_alias", None)
+    if not isinstance(by_alias, dict):
+        return
+
+    for alias, specs in list(by_alias.items()):
+        rewritten_specs = []
+        changed = False
+        for spec in tuple(specs or ()):
+            next_bindings = []
+            spec_changed = False
+            for binding in tuple(getattr(spec, "bindings", ()) or ()):
+                path = getattr(binding, "path", None)
+                if isinstance(path, str) and path.startswith(old_prefix):
+                    next_path = f"{new_prefix}{path[len(old_prefix):]}"
+                    next_bindings.append(replace(binding, path=next_path))
+                    spec_changed = True
+                else:
+                    next_bindings.append(binding)
+            if spec_changed:
+                rewritten_specs.append(
+                    replace(spec, bindings=tuple(next_bindings))
+                )
+                changed = True
+            else:
+                rewritten_specs.append(spec)
+        if changed:
+            try:
+                by_alias[alias] = type(specs)(tuple(rewritten_specs))
+            except TypeError:
+                by_alias[alias] = tuple(rewritten_specs)
+
+
 def _rewrite_admin_table_routes(
     router: TigrblRouter,
     deployment: ResolvedDeployment,
@@ -191,6 +230,15 @@ def _rewrite_admin_table_routes(
         "Tenant": ("/tenant", "/admin/tenant"),
         "User": ("/user", "/admin/identity"),
     }
+    for resource in _admin_table_resources(deployment):
+        rewrite = rewrites.get(resource.__name__)
+        if rewrite is not None:
+            old_prefix, new_prefix = rewrite
+            _rewrite_model_rest_bindings(
+                resource,
+                old_prefix=old_prefix,
+                new_prefix=new_prefix,
+            )
     rewritten = []
     for route in getattr(router, "_routes", []):
         model = getattr(route, "tigrbl_model", None)
@@ -205,6 +253,11 @@ def _rewrite_admin_table_routes(
         binding = getattr(route, "tigrbl_binding", None)
         if binding is not None and hasattr(binding, "path"):
             binding = replace(binding, path=next_path)
+        _rewrite_model_rest_bindings(
+            model,
+            old_prefix=old_prefix,
+            new_prefix=new_prefix,
+        )
         rewritten.append(
             replace(
                 route,
@@ -317,9 +370,18 @@ def build_surface_api(
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
     if deployment.flag_enabled("surface_admin_enabled"):
+        if deployment.product_surface == "platform-admin-api":
+            router.include_router(admin_tenants_api)
         admin_resources = _admin_table_resources(deployment)
         if admin_resources:
-            router.include_tables(admin_resources)
+            if deployment.product_surface == "platform-admin-api":
+                for resource in admin_resources:
+                    if resource.__name__ == "Tenant":
+                        continue
+                    else:
+                        router.include_table(resource)
+            else:
+                router.include_tables(admin_resources)
             _rewrite_admin_table_routes(router, deployment)
         for entry in ADMIN_ROUTER_BINDINGS:
             if deployment.admin_rest_group_enabled(str(entry["mount_group"])):

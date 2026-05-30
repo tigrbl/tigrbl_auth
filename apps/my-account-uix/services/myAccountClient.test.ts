@@ -4,7 +4,7 @@ import { MyAccountClient } from "./myAccountClient";
 describe("MyAccountClient", () => {
   it("uses global fetch without detaching the browser binding", async () => {
     const originalFetch = globalThis.fetch;
-    const calls: RequestInfo[] = [];
+    const calls: Array<RequestInfo | URL> = [];
     globalThis.fetch = async (input, init) => {
       calls.push(input);
       expect(init?.credentials).toBe("include");
@@ -25,7 +25,7 @@ describe("MyAccountClient", () => {
   });
 
   it("calls the current-subject profile endpoint with credentials", async () => {
-    const requests: RequestInfo[] = [];
+    const requests: Array<RequestInfo | URL> = [];
     const client = new MyAccountClient("http://example.test", async (input, init) => {
       requests.push(input);
       expect(init?.credentials).toBe("include");

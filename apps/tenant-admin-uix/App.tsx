@@ -1,4 +1,4 @@
-import { AppShell, AuthProvider, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
 import { useTenantAdmin } from "./hooks/useTenantAdmin";
@@ -55,18 +55,24 @@ export default function App() {
 
   return (
     <AuthProvider value={authValue}>
-      <AppShell
-        activeHref={currentHash}
-        apiBaseUrl={API_BASE_URL}
-        navigation={navigation}
-        onLogout={tenant.session?.authenticated ? () => void tenant.logout() : undefined}
-        productApi={PRODUCT_API}
-        sessionLabel={describeSession(authValue.session)}
-        title="Tenant Admin"
-      >
-        {!tenant.session?.authenticated ? (
+      {!tenant.session?.authenticated ? (
+        <AuthShell
+          productApi={PRODUCT_API}
+          subtitle="Use a tenant-scoped administrator session to manage identities, clients, consents, sessions, and audit posture."
+          title="Tenant Admin"
+        >
           <LoginPage error={tenant.error} onLogin={tenant.login} />
-        ) : (
+        </AuthShell>
+      ) : (
+        <AppShell
+          activeHref={currentHash}
+          apiBaseUrl={API_BASE_URL}
+          navigation={navigation}
+          onLogout={() => void tenant.logout()}
+          productApi={PRODUCT_API}
+          sessionLabel={describeSession(authValue.session)}
+          title="Tenant Admin"
+        >
           <RequireAuth>
             {tenant.error && <div style={{ marginBottom: "16px" }}><Toast message={tenant.error} tone="danger" /></div>}
             {currentHash.startsWith("#/identities") && <IdentitiesPage identities={tenant.identities} />}
@@ -80,8 +86,8 @@ export default function App() {
               <DashboardPage clients={tenant.clients} consents={tenant.consents} identities={tenant.identities} keyEvents={tenant.keyEvents} session={tenant.session} />
             )}
           </RequireAuth>
-        )}
-      </AppShell>
+        </AppShell>
+      )}
     </AuthProvider>
   );
 }

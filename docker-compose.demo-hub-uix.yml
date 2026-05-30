@@ -1,0 +1,35 @@
+services:
+  demo-hub-uix:
+    build:
+      context: .
+      dockerfile: apps/demo-hub-uix/Dockerfile
+    container_name: tigrbl-auth-demo-hub-uix-dev
+    ports:
+      - "3020:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      TIGRBL_AUTH_DEMO_ADMIN_PASSWORD: AdminPass123!
+      TIGRBL_AUTH_PUBLIC_API_BASE_URL: http://host.docker.internal:8013
+      TIGRBL_AUTH_RESOURCE_VALIDATION_API_BASE_URL: http://host.docker.internal:8014
+      TIGRBL_AUTH_PLATFORM_ADMIN_API_BASE_URL: http://host.docker.internal:8015
+      TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL: http://host.docker.internal:8016
+      TIGRBL_AUTH_DEVELOPER_API_BASE_URL: http://host.docker.internal:8017
+      TIGRBL_AUTH_SERVICE_ADMIN_API_BASE_URL: http://host.docker.internal:8018
+      TIGRBL_AUTH_PLATFORM_ADMIN_API_KEY: dev-platform-admin-key
+      TIGRBL_AUTH_TENANT_ADMIN_API_KEY: dev-tenant-admin-key
+      TIGRBL_AUTH_DEVELOPER_API_KEY: dev-developer-key
+      TIGRBL_AUTH_SERVICE_ADMIN_API_KEY: dev-service-admin-key
+      VITE_TIGRBL_AUTH_PUBLIC_UIX_URL: http://localhost:3010/#/login
+      VITE_TIGRBL_AUTH_PLATFORM_ADMIN_UIX_URL: http://localhost:3011/#/dashboard
+      VITE_TIGRBL_AUTH_TENANT_ADMIN_UIX_URL: http://localhost:3012/#/dashboard
+      VITE_TIGRBL_AUTH_DEVELOPER_UIX_URL: http://localhost:3013/#/dashboard
+      VITE_TIGRBL_AUTH_SERVICE_ADMIN_UIX_URL: http://localhost:3014/#/dashboard
+      VITE_TIGRBL_AUTH_MY_ACCOUNT_UIX_URL: http://localhost:3019/#/overview
+      VITE_TIGRBL_AUTH_PUBLIC_API_DOCS_URL: http://localhost:8013/docs
+      VITE_TIGRBL_AUTH_RESOURCE_VALIDATION_API_DOCS_URL: http://localhost:8014/docs
+      VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API_DOCS_URL: http://localhost:8015/docs
+      VITE_TIGRBL_AUTH_TENANT_ADMIN_API_DOCS_URL: http://localhost:8016/docs
+      VITE_TIGRBL_AUTH_DEVELOPER_API_DOCS_URL: http://localhost:8017/docs
+      VITE_TIGRBL_AUTH_SERVICE_ADMIN_API_DOCS_URL: http://localhost:8018/docs
+      VITE_TIGRBL_AUTH_MY_ACCOUNT_API_DOCS_URL: http://localhost:8019/docs

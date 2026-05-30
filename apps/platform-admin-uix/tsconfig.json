@@ -12,6 +12,11 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tigrbl-auth/uix-core": ["../../packages/uix-core/index.ts"],
+      "@tigrbl-auth/uix-core/styles.css": ["../../packages/uix-core/src/styles/core.css"]
+    },
     "noEmit": true
   }
 }

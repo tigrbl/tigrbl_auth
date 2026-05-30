@@ -118,7 +118,6 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
     assert "/authsession/{item_id}" not in paths
     assert "/auditevent" in paths
     assert "/admin/tenant" in paths
-    assert "/admin/tenant/{item_id}" in paths
     assert "/client" not in paths
     for path, methods in paths.items():
         if path.startswith("/admin/auth/"):
@@ -127,18 +126,13 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
     for route in PLATFORM_ADMIN_API_CONTRACT.forbidden_exact_routes:
         assert route not in paths
     schemas = openapi_response.json()["components"]["schemas"]
-    assert "TenantCreateRequest" in schemas
-    assert "TenantUpdateRequest" in schemas
+    assert "AdminTenantOut" in schemas
     assert "UserCreateRequest" in schemas
     assert "UserUpdateRequest" in schemas
-    assert "AdminTenantProvisionIn" not in schemas
     assert "AdminIdentityProvisionIn" not in schemas
-    assert (
-        paths["/admin/tenant"]["post"]["requestBody"]["content"][
-            "application/json"
-        ]["schema"]["$ref"]
-        == "#/components/schemas/TenantCreateRequest"
-    )
+    assert paths["/admin/tenant"]["post"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]["$ref"] == "#/components/schemas/AdminTenantOut"
     assert (
         paths["/admin/identity"]["post"]["requestBody"]["content"][
             "application/json"

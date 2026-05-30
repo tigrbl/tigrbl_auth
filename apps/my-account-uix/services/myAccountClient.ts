@@ -18,7 +18,17 @@ export class MyAccountClient {
       ...init
     });
     if (!response.ok) {
-      throw new Error(`${response.status} ${response.statusText}`.trim());
+      let detail = "";
+      try {
+        const payload = await response.json() as { detail?: unknown; message?: unknown };
+        detail = String(payload.detail ?? payload.message ?? "");
+      } catch {
+        detail = "";
+      }
+      throw new Error([response.status, response.statusText, detail].filter(Boolean).join(" "));
+    }
+    if (response.status === 204) {
+      return undefined as T;
     }
     return response.json() as Promise<T>;
   }

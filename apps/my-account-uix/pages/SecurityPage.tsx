@@ -1,5 +1,5 @@
+import { Button, Card, DetailPanel, FormField, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import { useState } from "react";
-import { Button, Field, Panel } from "../components/UI";
 
 export function SecurityPage({
   mustChangePassword,
@@ -21,14 +21,19 @@ export function SecurityPage({
   }
 
   return (
-    <Panel title="Security">
-      <div style={{ display: "grid", gap: "14px", maxWidth: "520px" }}>
-        {mustChangePassword ? <p style={{ color: "#7f1d1d", margin: 0 }}>Password change is required.</p> : null}
-        <Field label="Current password" type="password" value={currentPassword} onChange={setCurrentPassword} />
-        <Field label="New password" type="password" value={newPassword} onChange={setNewPassword} />
-        <Button onClick={submit}>Change password</Button>
-        {status ? <p style={{ color: "#2e704b", margin: 0 }}>{status}</p> : null}
-      </div>
-    </Panel>
+    <div className="tigrbl-page-stack">
+      <PageHeader title="Security" description="Manage password posture and account security settings." />
+      <Card tone="compact">
+        <p className="tigrbl-eyebrow">Password posture</p>
+        {mustChangePassword ? <Toast tone="danger" message="Password change is required." /> : <StatusBadge tone="success">Password current</StatusBadge>}
+      </Card>
+      <DetailPanel title="Change password">
+        <ResourceForm footer={<Button onClick={() => void submit()} type="button">Change password</Button>}>
+          <FormField label="Current password" type="password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} />
+          <FormField label="New password" type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
+          {status ? <Toast tone="success" message={status} /> : null}
+        </ResourceForm>
+      </DetailPanel>
+    </div>
   );
 }

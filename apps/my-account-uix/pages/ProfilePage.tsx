@@ -1,6 +1,6 @@
+import { Button, Card, DetailPanel, FormField, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import { useEffect, useState } from "react";
 import type { AccountProfile } from "../types";
-import { Button, Field, Panel } from "../components/UI";
 
 export function ProfilePage({
   profile,
@@ -12,6 +12,7 @@ export function ProfilePage({
   const [username, setUsername] = useState(profile.username);
   const [email, setEmail] = useState(profile.email);
   const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     setUsername(profile.username);
@@ -20,21 +21,39 @@ export function ProfilePage({
 
   async function save() {
     setSaving(true);
+    setStatus(null);
     try {
       await onSave(username, email);
+      setStatus("Profile saved");
     } finally {
       setSaving(false);
     }
   }
 
   return (
-    <Panel title="Profile">
-      <div style={{ display: "grid", gap: "14px", maxWidth: "520px" }}>
-        <Field label="Username" value={username} onChange={setUsername} />
-        <Field label="Email" value={email} onChange={setEmail} />
-        <p style={{ color: "#4f6d63", margin: 0 }}>Tenant: {profile.tenant_id}</p>
-        <Button onClick={save}>{saving ? "Saving" : "Save profile"}</Button>
+    <div className="tigrbl-page-stack">
+      <PageHeader title="Profile" description="Manage your current subject profile." />
+      <div className="tigrbl-metric-grid">
+        <Card tone="compact">
+          <p className="tigrbl-eyebrow">Subject</p>
+          <code>{profile.id}</code>
+        </Card>
+        <Card tone="compact">
+          <p className="tigrbl-eyebrow">Tenant</p>
+          <code>{profile.tenant_id}</code>
+        </Card>
+        <Card tone="compact">
+          <p className="tigrbl-eyebrow">Account status</p>
+          <StatusBadge tone={profile.is_active ? "success" : "warning"}>{profile.is_active ? "Active" : "Inactive"}</StatusBadge>
+        </Card>
       </div>
-    </Panel>
+      <DetailPanel title="Account profile">
+        <ResourceForm footer={<Button onClick={() => void save()} type="button">{saving ? "Saving" : "Save profile"}</Button>}>
+          <FormField label="Username" value={username} onChange={(event) => setUsername(event.target.value)} />
+          <FormField label="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
+          {status ? <Toast tone="success" message={status} /> : null}
+        </ResourceForm>
+      </DetailPanel>
+    </div>
   );
 }

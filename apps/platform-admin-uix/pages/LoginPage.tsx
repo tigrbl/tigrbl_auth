@@ -1,4 +1,4 @@
-import { Button, DetailPanel, ErrorState, FormField, PageHeader, ResourceForm } from "@tigrbl-auth/uix-core";
+import { Card, FormError, FormField, ResourceForm, SubmitButton } from "@tigrbl-auth/uix-core";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
@@ -22,15 +22,12 @@ export function LoginPage({ error, onLogin }: { error: string; onLogin: (identif
   }
 
   return (
-    <div style={{ display: "grid", gap: "18px", maxWidth: "520px" }}>
-      <PageHeader title="Platform operator sign in" description="Use an administrator session to manage tenant lifecycle and platform authority." />
-      {(localError || error) && <ErrorState message={localError || error} />}
-      <DetailPanel title="Admin credentials">
-        <ResourceForm onSubmit={submit} footer={<Button type="submit" disabled={submitting}>{submitting ? "Signing in..." : "Sign in"}</Button>}>
-          <FormField label="Identifier" value={identifier} onChange={(event) => setIdentifier(event.target.value)} required />
-          <FormField label="Password" value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />
-        </ResourceForm>
-      </DetailPanel>
-    </div>
+    <Card tone="hero" style={{ maxWidth: "520px", width: "100%" }}>
+      {(localError || error) && <FormError>{localError || error}</FormError>}
+      <ResourceForm onSubmit={submit} footer={<SubmitButton loading={submitting} loadingLabel="Signing in...">Sign in</SubmitButton>}>
+        <FormField label="Identifier" value={identifier} onChange={(event) => setIdentifier(event.target.value)} required />
+        <FormField label="Password" value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />
+      </ResourceForm>
+    </Card>
   );
 }

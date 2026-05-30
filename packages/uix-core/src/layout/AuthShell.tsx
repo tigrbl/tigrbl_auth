@@ -1,0 +1,33 @@
+import type { ReactNode } from "react";
+import { BrandHeader } from "./BrandHeader";
+
+export function AuthShell({
+  children,
+  footer,
+  productApi,
+  subtitle,
+  title
+}: {
+  children: ReactNode;
+  footer?: ReactNode;
+  productApi?: string;
+  subtitle?: string;
+  title: string;
+}) {
+  return (
+    <main className="tigrbl-auth-shell">
+      <BrandHeader label="Tigrbl Auth" />
+      <section className="tigrbl-auth-shell-content">
+        <div className="tigrbl-auth-copy">
+          {productApi && <p className="tigrbl-eyebrow">{productApi}</p>}
+          <h1>{title}</h1>
+          {subtitle && <p>{subtitle}</p>}
+        </div>
+        {children}
+      </section>
+      <footer className="tigrbl-auth-footer">
+        {footer ?? <span>© {new Date().getFullYear()} Tigrbl Auth</span>}
+      </footer>
+    </main>
+  );
+}

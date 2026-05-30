@@ -1,4 +1,5 @@
 import react from "@vitejs/plugin-react";
+import path from "node:path";
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
@@ -7,6 +8,12 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    resolve: {
+      alias: [
+        { find: "@tigrbl-auth/uix-core/styles.css", replacement: path.resolve(process.cwd(), "../../packages/uix-core/src/styles/core.css") },
+        { find: "@tigrbl-auth/uix-core", replacement: path.resolve(process.cwd(), "../../packages/uix-core/index.ts") }
+      ]
+    },
     server: {
       port: 3019,
       host: "0.0.0.0",

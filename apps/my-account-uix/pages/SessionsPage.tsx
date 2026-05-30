@@ -1,40 +1,45 @@
-import { Button, Panel } from "../components/UI";
+import { Button, Card, DataTable, DetailPanel, EmptyState, PageHeader, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import type { AccountSession } from "../types";
 
 export function SessionsPage({
   sessions,
+  error,
+  loading,
   onRevoke
 }: {
   sessions: AccountSession[];
+  error?: string | null;
+  loading?: boolean;
   onRevoke: (sessionId: string) => Promise<void>;
 }) {
   return (
-    <Panel title="Sessions">
-      <div style={{ display: "grid", gap: "10px" }}>
-        {sessions.length === 0 ? <p>No active sessions.</p> : null}
-        {sessions.map((session) => (
-          <div
-            key={session.id}
-            style={{
-              alignItems: "center",
-              borderTop: "1px solid #d8e2dd",
-              display: "grid",
-              gap: "8px",
-              gridTemplateColumns: "minmax(0, 1fr) auto",
-              padding: "12px 0"
-            }}
-          >
-            <div style={{ minWidth: 0 }}>
-              <strong>{session.state}</strong>
-              <p style={{ color: "#4f6d63", margin: "4px 0 0", overflowWrap: "anywhere" }}>{session.id}</p>
-              <p style={{ color: "#4f6d63", margin: "4px 0 0" }}>Last seen: {session.last_seen_at || "unknown"}</p>
-            </div>
-            <Button variant="danger" onClick={() => void onRevoke(session.id)}>
-              Revoke
-            </Button>
-          </div>
-        ))}
+    <div className="tigrbl-page-stack">
+      <PageHeader title="Sessions" description="Review and revoke active account sessions." />
+      <div className="tigrbl-metric-grid">
+        <Card tone="compact">
+          <p className="tigrbl-eyebrow">Visible sessions</p>
+          <h2 style={{ fontSize: "2rem", margin: "8px 0 0" }}>{sessions.length}</h2>
+        </Card>
+        <Card tone="compact">
+          <p className="tigrbl-eyebrow">Loading state</p>
+          <StatusBadge tone={loading ? "info" : "success"}>{loading ? "Refreshing" : "Current"}</StatusBadge>
+        </Card>
       </div>
-    </Panel>
+      {error ? <Toast tone="danger" message={error} /> : null}
+      <DetailPanel title="Active sessions">
+        <DataTable
+          items={sessions}
+          getRowKey={(session) => session.id}
+          empty={<EmptyState title="No active sessions" body="No active sessions are visible for this account." />}
+          columns={[
+            { key: "state", header: "State", render: (session) => <StatusBadge tone="info">{session.state}</StatusBadge> },
+            { key: "id", header: "Session", render: (session) => <code>{session.id}</code> },
+            { key: "client", header: "Client", render: (session) => session.client_id ?? "current account" },
+            { key: "lastSeen", header: "Last seen", render: (session) => session.last_seen_at || "unknown" },
+            { key: "actions", header: "Actions", render: (session) => <Button variant="danger" onClick={() => void onRevoke(session.id)}>Revoke</Button> }
+          ]}
+        />
+      </DetailPanel>
+    </div>
   );
 }

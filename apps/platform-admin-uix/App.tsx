@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AppShell, AuthProvider, ErrorState, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import { AppShell, AuthProvider, AuthShell, ErrorState, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { usePlatformAdmin } from "./hooks/usePlatformAdmin";
 import { AuditPage } from "./pages/AuditPage";
@@ -57,18 +57,24 @@ export default function App() {
 
   return (
     <AuthProvider value={authValue}>
-      <AppShell
-        activeHref={currentHash}
-        apiBaseUrl={API_BASE_URL}
-        navigation={navigation}
-        onLogout={platform.session?.authenticated ? () => void platform.logout() : undefined}
-        productApi={PRODUCT_API}
-        sessionLabel={describeSession(authValue.session)}
-        title="Platform Admin"
-      >
-        {!platform.session?.authenticated ? (
+      {!platform.session?.authenticated ? (
+        <AuthShell
+          productApi={PRODUCT_API}
+          subtitle="Use an operator session to manage tenant lifecycle, platform authority, signing posture, and audit state."
+          title="Platform Admin"
+        >
           <LoginPage error={platform.error} onLogin={platform.login} />
-        ) : (
+        </AuthShell>
+      ) : (
+        <AppShell
+          activeHref={currentHash}
+          apiBaseUrl={API_BASE_URL}
+          navigation={navigation}
+          onLogout={() => void platform.logout()}
+          productApi={PRODUCT_API}
+          sessionLabel={describeSession(authValue.session)}
+          title="Platform Admin"
+        >
           <RequireAuth>
             {platform.error && <div style={{ marginBottom: "16px" }}><Toast message={platform.error} tone="danger" /></div>}
             {currentHash.startsWith("#/tenants") && (
@@ -110,9 +116,9 @@ export default function App() {
               <DashboardPage identities={platform.identities} session={platform.session} tenants={platform.tenants} />
             )}
           </RequireAuth>
-        )}
-        {platform.loading && platform.session?.authenticated && <ErrorState title="Refreshing platform data" message="The platform console is loading the latest state." />}
-      </AppShell>
+          {platform.loading && <ErrorState title="Refreshing platform data" message="The platform console is loading the latest state." />}
+        </AppShell>
+      )}
     </AuthProvider>
   );
 }

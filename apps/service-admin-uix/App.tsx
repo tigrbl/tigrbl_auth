@@ -1,65 +1,111 @@
+import { AppShell, AuthProvider, AuthShell, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
+import "@tigrbl-auth/uix-core/styles.css";
 import { useEffect, useState } from "react";
-import { API_BASE_URL, PRODUCT_API, SURFACE_PURPOSE, apiUrl } from "./services/backendSurface";
+import { useServiceAdmin } from "./hooks/useServiceAdmin";
+import { ApiKeysPage } from "./pages/ApiKeysPage";
+import { AuditPage } from "./pages/AuditPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { LoginPage } from "./pages/LoginPage";
+import { RotationEventsPage } from "./pages/RotationEventsPage";
+import { ServiceDetailPage } from "./pages/ServiceDetailPage";
+import { ServiceKeysPage } from "./pages/ServiceKeysPage";
+import { ServicesPage } from "./pages/ServicesPage";
+import { TokenRecordsPage } from "./pages/TokenRecordsPage";
+import { ValidationToolsPage } from "./pages/ValidationToolsPage";
+import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
 
-const views = {
-  "#/services": {
-    title: "Service identities",
-    body: "Create and administer workload principals, service keys, and non-human identity lifecycle records.",
-    paths: ["/service", "/servicekey"]
-  },
-  "#/credentials": {
-    title: "Workload credentials",
-    body: "Issue and inspect API keys and token records used by machine-to-machine clients.",
-    paths: ["/apikey", "/tokenrecord"]
-  },
-  "#/validation": {
-    title: "Validation metadata",
-    body: "Check the token validation, resource metadata, and introspection surfaces used by protected APIs.",
-    paths: ["/introspect", "/.well-known/oauth-protected-resource", "/rpc"]
-  }
-};
+const navigation = [
+  { href: "#/dashboard", label: "Dashboard" },
+  { href: "#/services", label: "Services" },
+  { href: "#/service-detail", label: "Service Detail" },
+  { href: "#/service-keys", label: "Service Keys" },
+  { href: "#/api-keys", label: "API Keys" },
+  { href: "#/tokens", label: "Token Records" },
+  { href: "#/validation", label: "Validation Tools" },
+  { href: "#/rotation", label: "Rotation Events" },
+  { href: "#/audit", label: "Audit" }
+];
 
 export default function App() {
-  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/services");
+  const [currentHash, setCurrentHash] = useState(window.location.hash || "#/dashboard");
+  const serviceAdmin = useServiceAdmin();
 
   useEffect(() => {
-    const onHashChange = () => setCurrentHash(window.location.hash || "#/services");
+    const onHashChange = () => setCurrentHash(window.location.hash || "#/dashboard");
     window.addEventListener("hashchange", onHashChange);
     if (!window.location.hash || window.location.hash === "#/") {
-      window.location.hash = "#/services";
+      window.location.hash = "#/dashboard";
     }
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  const view = views[currentHash as keyof typeof views] || views["#/services"];
+  const authValue = {
+    loading: serviceAdmin.loading,
+    logout: serviceAdmin.logout,
+    refresh: serviceAdmin.refresh,
+    session: serviceAdmin.session
+      ? {
+          authenticated: serviceAdmin.session.authenticated,
+          email: serviceAdmin.session.email,
+          permissions: serviceAdmin.session.roles,
+          subject: serviceAdmin.session.operator_id,
+          tenantId: serviceAdmin.session.tenant_id,
+          username: serviceAdmin.session.username
+        }
+      : null
+  };
+
+  const selectedService = serviceAdmin.services[0] ?? null;
 
   return (
-    <main style={{ minHeight: "100vh", fontFamily: "Aptos, Segoe UI, sans-serif", background: "#f7f3f9", color: "#21172a" }}>
-      <aside style={{ borderRight: "1px solid #dbcbe6", bottom: 0, left: 0, padding: "24px", position: "fixed", top: 0, width: "260px" }}>
-        <p style={{ color: "#6a4187", fontSize: "0.72rem", letterSpacing: "0.12em", margin: 0, textTransform: "uppercase" }}>{PRODUCT_API}</p>
-        <h1 style={{ fontSize: "1.5rem", margin: "10px 0" }}>Service Admin</h1>
-        <p style={{ color: "#6b5877", fontSize: "0.9rem" }}>{SURFACE_PURPOSE}</p>
-        <nav style={{ display: "grid", gap: "8px", marginTop: "22px" }}>
-          {Object.entries(views).map(([href, item]) => (
-            <a key={href} href={href} style={{ background: currentHash === href ? "#6a4187" : "transparent", borderRadius: "6px", color: currentHash === href ? "#fff" : "#55356d", padding: "9px 10px", textDecoration: "none" }}>{item.title}</a>
-          ))}
-        </nav>
-        <p style={{ bottom: "22px", color: "#765f84", fontSize: "0.78rem", left: "24px", position: "absolute", right: "24px" }}>API: <code>{API_BASE_URL}</code></p>
-      </aside>
-      <section style={{ marginLeft: "260px", padding: "32px" }}>
-        <div style={{ maxWidth: "980px" }}>
-          <h2 style={{ fontSize: "2rem", margin: "0 0 8px" }}>{view.title}</h2>
-          <p style={{ color: "#6b5877", margin: "0 0 22px" }}>{view.body}</p>
-          <div style={{ display: "grid", gap: "12px" }}>
-            {view.paths.map((path) => (
-              <article key={path} style={{ background: "#fff", border: "1px solid #dbcbe6", borderRadius: "8px", padding: "14px" }}>
-                <strong>{path}</strong>
-                <div style={{ color: "#765f84", fontSize: "0.86rem", marginTop: "6px" }}>{apiUrl(path).href}</div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+    <AuthProvider value={authValue}>
+      {!serviceAdmin.session?.authenticated ? (
+        <AuthShell
+          productApi={PRODUCT_API}
+          subtitle="Use a workload administrator session to manage service principals, API keys, service keys, token records, and validation tools."
+          title="Service Admin"
+        >
+          <LoginPage error={serviceAdmin.error} onLogin={serviceAdmin.login} />
+        </AuthShell>
+      ) : (
+        <AppShell
+          activeHref={currentHash}
+          apiBaseUrl={API_BASE_URL}
+          navigation={navigation}
+          onLogout={() => serviceAdmin.logout()}
+          productApi={PRODUCT_API}
+          sessionLabel={describeSession(authValue.session)}
+          title="Service Admin"
+        >
+          <RequireAuth>
+            {serviceAdmin.error && <div style={{ marginBottom: "16px" }}><Toast message={serviceAdmin.error} tone="danger" /></div>}
+            {currentHash.startsWith("#/services") && <ServicesPage services={serviceAdmin.services} />}
+            {currentHash.startsWith("#/service-detail") && <ServiceDetailPage service={selectedService} serviceKeys={serviceAdmin.serviceKeys} apiKeys={serviceAdmin.apiKeys} />}
+            {currentHash.startsWith("#/service-keys") && <ServiceKeysPage serviceKeys={serviceAdmin.serviceKeys} />}
+            {currentHash.startsWith("#/api-keys") && <ApiKeysPage apiKeys={serviceAdmin.apiKeys} />}
+            {currentHash.startsWith("#/tokens") && <TokenRecordsPage tokenRecords={serviceAdmin.tokenRecords} />}
+            {currentHash.startsWith("#/validation") && (
+              <ValidationToolsPage
+                introspection={serviceAdmin.introspection}
+                metadata={serviceAdmin.metadata}
+                onIntrospect={serviceAdmin.runIntrospection}
+              />
+            )}
+            {currentHash.startsWith("#/rotation") && <RotationEventsPage serviceKeys={serviceAdmin.serviceKeys} />}
+            {currentHash.startsWith("#/audit") && <AuditPage session={serviceAdmin.session} />}
+            {(currentHash.startsWith("#/dashboard") || !navigation.some((item) => currentHash.startsWith(item.href))) && (
+              <DashboardPage
+                apiKeys={serviceAdmin.apiKeys}
+                metadata={serviceAdmin.metadata}
+                serviceKeys={serviceAdmin.serviceKeys}
+                services={serviceAdmin.services}
+                session={serviceAdmin.session}
+                tokenRecords={serviceAdmin.tokenRecords}
+              />
+            )}
+          </RequireAuth>
+        </AppShell>
+      )}
+    </AuthProvider>
   );
 }
