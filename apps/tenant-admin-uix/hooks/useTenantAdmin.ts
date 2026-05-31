@@ -1,6 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { tenantAdminClient } from "../services/tenantAdminClient";
-import type { KeyRotationEvent, TenantAdminSession, TenantClient, TenantConsent, TenantIdentity } from "../types";
+import type {
+  CreateTenantClientInput,
+  CreateTenantIdentityInput,
+  KeyRotationEvent,
+  TenantAdminSession,
+  TenantClient,
+  TenantConsent,
+  TenantIdentity,
+  UpdateTenantClientInput,
+  UpdateTenantIdentityInput
+} from "../types";
 
 async function optional<T>(load: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -77,16 +87,76 @@ export function useTenantAdmin() {
     setKeyEvents([]);
   }
 
+  async function createIdentity(payload: CreateTenantIdentityInput) {
+    await tenantAdminClient.createIdentity(payload);
+    setIdentities(await optional(() => tenantAdminClient.identities(), []));
+  }
+
+  async function updateIdentity(identityId: string, payload: UpdateTenantIdentityInput) {
+    await tenantAdminClient.updateIdentity(identityId, payload);
+    setIdentities(await optional(() => tenantAdminClient.identities(), []));
+  }
+
+  async function lockIdentity(identityId: string) {
+    await tenantAdminClient.lockIdentity(identityId);
+    setIdentities(await optional(() => tenantAdminClient.identities(), []));
+  }
+
+  async function unlockIdentity(identityId: string) {
+    await tenantAdminClient.unlockIdentity(identityId);
+    setIdentities(await optional(() => tenantAdminClient.identities(), []));
+  }
+
+  async function deleteIdentity(identityId: string) {
+    await tenantAdminClient.deleteIdentity(identityId);
+    setIdentities(await optional(() => tenantAdminClient.identities(), []));
+  }
+
+  async function createClient(payload: CreateTenantClientInput) {
+    await tenantAdminClient.createClient(payload);
+    setClients(await optional(() => tenantAdminClient.clients(), []));
+  }
+
+  async function updateClient(clientId: string, payload: UpdateTenantClientInput) {
+    await tenantAdminClient.updateClient(clientId, payload);
+    setClients(await optional(() => tenantAdminClient.clients(), []));
+  }
+
+  async function deleteClient(clientId: string) {
+    await tenantAdminClient.deleteClient(clientId);
+    setClients(await optional(() => tenantAdminClient.clients(), []));
+  }
+
+  async function revokeConsent(consentId: string) {
+    await tenantAdminClient.revokeConsent(consentId);
+    setConsents(await optional(() => tenantAdminClient.consents(), []));
+  }
+
+  async function triggerKeyRotation(payload: { tenant_id?: string; reason?: string }) {
+    await tenantAdminClient.triggerKeyRotation(payload);
+    setKeyEvents(await optional(() => tenantAdminClient.keyEvents(), []));
+  }
+
   return {
     clients,
     consents,
+    createClient,
+    createIdentity,
+    deleteClient,
+    deleteIdentity,
     error,
     identities,
     keyEvents,
+    lockIdentity,
     loading,
     login,
     logout,
     refresh,
-    session
+    revokeConsent,
+    session,
+    triggerKeyRotation,
+    unlockIdentity,
+    updateClient,
+    updateIdentity
   };
 }

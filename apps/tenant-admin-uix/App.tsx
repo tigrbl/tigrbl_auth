@@ -75,12 +75,34 @@ export default function App() {
         >
           <RequireAuth>
             {tenant.error && <div style={{ marginBottom: "16px" }}><Toast message={tenant.error} tone="danger" /></div>}
-            {currentHash.startsWith("#/identities") && <IdentitiesPage identities={tenant.identities} />}
+            {currentHash.startsWith("#/identities") && (
+              <IdentitiesPage
+                identities={tenant.identities}
+                onCreate={tenant.createIdentity}
+                onDelete={tenant.deleteIdentity}
+                onLock={tenant.lockIdentity}
+                onUnlock={tenant.unlockIdentity}
+                onUpdate={tenant.updateIdentity}
+              />
+            )}
             {currentHash.startsWith("#/groups") && <GroupsRolesPage identities={tenant.identities} />}
-            {currentHash.startsWith("#/clients") && <ClientsPage clients={tenant.clients} />}
-            {currentHash.startsWith("#/consents") && <ConsentsPage consents={tenant.consents} />}
+            {currentHash.startsWith("#/clients") && (
+              <ClientsPage
+                clients={tenant.clients}
+                onCreate={tenant.createClient}
+                onDelete={tenant.deleteClient}
+                onUpdate={tenant.updateClient}
+              />
+            )}
+            {currentHash.startsWith("#/consents") && <ConsentsPage consents={tenant.consents} onRevoke={tenant.revokeConsent} />}
             {currentHash.startsWith("#/sessions") && <SessionsPage session={tenant.session} />}
-            {currentHash.startsWith("#/keys") && <KeyEventsPage keyEvents={tenant.keyEvents} />}
+            {currentHash.startsWith("#/keys") && (
+              <KeyEventsPage
+                keyEvents={tenant.keyEvents}
+                tenantId={tenant.session.tenant_id ?? undefined}
+                onRotate={tenant.triggerKeyRotation}
+              />
+            )}
             {currentHash.startsWith("#/audit") && <AuditPage session={tenant.session} />}
             {(currentHash.startsWith("#/dashboard") || !navigation.some((item) => currentHash.startsWith(item.href))) && (
               <DashboardPage clients={tenant.clients} consents={tenant.consents} identities={tenant.identities} keyEvents={tenant.keyEvents} session={tenant.session} />

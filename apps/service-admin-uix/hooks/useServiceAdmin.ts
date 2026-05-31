@@ -1,6 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { serviceAdminClient } from "../services/serviceAdminClient";
-import type { ApiKeyRecord, IntrospectionResult, ResourceMetadata, ServiceAdminSession, ServiceIdentity, ServiceKey, TokenRecord } from "../types";
+import type {
+  ApiKeyRecord,
+  CreateApiKeyInput,
+  CreateServiceIdentityInput,
+  CreateServiceKeyInput,
+  IntrospectionResult,
+  ResourceMetadata,
+  ServiceAdminSession,
+  ServiceIdentity,
+  ServiceKey,
+  TokenRecord,
+  UpdateApiKeyInput,
+  UpdateServiceIdentityInput
+} from "../types";
 
 const defaultSession: ServiceAdminSession = {
   authenticated: true,
@@ -30,29 +43,33 @@ export function useServiceAdmin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const loadData = useCallback(async () => {
+    const [nextServices, nextServiceKeys, nextApiKeys, nextTokenRecords, nextMetadata] = await Promise.all([
+      optional(() => serviceAdminClient.services(), []),
+      optional(() => serviceAdminClient.serviceKeys(), []),
+      optional(() => serviceAdminClient.apiKeys(), []),
+      optional(() => serviceAdminClient.tokenRecords(), []),
+      optional(() => serviceAdminClient.resourceMetadata(), null)
+    ]);
+    setServices(nextServices);
+    setServiceKeys(nextServiceKeys);
+    setApiKeys(nextApiKeys);
+    setTokenRecords(nextTokenRecords);
+    setMetadata(nextMetadata);
+  }, []);
+
   const refresh = useCallback(async () => {
     if (!session?.authenticated) return;
     setLoading(true);
     setError("");
     try {
-      const [nextServices, nextServiceKeys, nextApiKeys, nextTokenRecords, nextMetadata] = await Promise.all([
-        optional(() => serviceAdminClient.services(), []),
-        optional(() => serviceAdminClient.serviceKeys(), []),
-        optional(() => serviceAdminClient.apiKeys(), []),
-        optional(() => serviceAdminClient.tokenRecords(), []),
-        optional(() => serviceAdminClient.resourceMetadata(), null)
-      ]);
-      setServices(nextServices);
-      setServiceKeys(nextServiceKeys);
-      setApiKeys(nextApiKeys);
-      setTokenRecords(nextTokenRecords);
-      setMetadata(nextMetadata);
+      await loadData();
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : "Unable to load service administration data.");
     } finally {
       setLoading(false);
     }
-  }, [session?.authenticated]);
+  }, [loadData, session?.authenticated]);
 
   useEffect(() => {
     void refresh();
@@ -83,8 +100,52 @@ export function useServiceAdmin() {
     setIntrospection(result);
   }
 
+  async function createService(payload: CreateServiceIdentityInput) {
+    await serviceAdminClient.createService(payload);
+    await loadData();
+  }
+
+  async function updateService(serviceId: string, payload: UpdateServiceIdentityInput) {
+    await serviceAdminClient.updateService(serviceId, payload);
+    await loadData();
+  }
+
+  async function deleteService(serviceId: string) {
+    await serviceAdminClient.deleteService(serviceId);
+    await loadData();
+  }
+
+  async function createServiceKey(payload: CreateServiceKeyInput) {
+    await serviceAdminClient.createServiceKey(payload);
+    setServiceKeys(await optional(() => serviceAdminClient.serviceKeys(), []));
+  }
+
+  async function revokeServiceKey(keyId: string) {
+    await serviceAdminClient.revokeServiceKey(keyId);
+    setServiceKeys(await optional(() => serviceAdminClient.serviceKeys(), []));
+  }
+
+  async function createApiKey(payload: CreateApiKeyInput) {
+    await serviceAdminClient.createApiKey(payload);
+    setApiKeys(await optional(() => serviceAdminClient.apiKeys(), []));
+  }
+
+  async function updateApiKey(apiKeyId: string, payload: UpdateApiKeyInput) {
+    await serviceAdminClient.updateApiKey(apiKeyId, payload);
+    setApiKeys(await optional(() => serviceAdminClient.apiKeys(), []));
+  }
+
+  async function revokeApiKey(apiKeyId: string) {
+    await serviceAdminClient.revokeApiKey(apiKeyId);
+    setApiKeys(await optional(() => serviceAdminClient.apiKeys(), []));
+  }
+
   return {
     apiKeys,
+    createApiKey,
+    createService,
+    createServiceKey,
+    deleteService,
     error,
     introspection,
     loading,
@@ -92,10 +153,14 @@ export function useServiceAdmin() {
     logout,
     metadata,
     refresh,
+    revokeApiKey,
+    revokeServiceKey,
     runIntrospection,
     serviceKeys,
     services,
     session,
-    tokenRecords
+    tokenRecords,
+    updateApiKey,
+    updateService
   };
 }

@@ -28,21 +28,38 @@ body: |-
   
   ## Contract Model
   
-  A resource verifier contract MUST define verifier identity/version, accepted issuer set, accepted audience or resource indicators, accepted token classes, sender-constraint requirements, replay/freshness expectations, required claims/proof material, and introspection-caller policy.
+  A resource verifier contract MUST define verifier identity/version, accepted
+  issuer set, accepted audience or resource indicators, accepted token classes,
+  sender-constraint requirements, replay/freshness expectations, JWKS cache
+  freshness expectations, revocation visibility expectations, replay-registry
+  visibility expectations, required claims/proof material, and
+  introspection-caller policy.
   
   ## Runtime Requirements
   
   Protected-resource behavior MUST fail closed when issuer, audience, sender-constraint, or required-claim expectations are not satisfied.
+
+  Protected-resource behavior MUST also fail closed when verifier state is too
+  stale to satisfy its declared freshness policy, when revocation or replay
+  visibility requirements are not met, or when the verifier cannot determine
+  whether a token remains valid under the declared resource contract.
   
   Resource validation metadata exposed by Tigrbl Auth SHOULD be available through the resource-validation API surface. That surface MUST expose only validation metadata and validation endpoints such as JWKS, tenant JWKS, discovery, protected-resource metadata, and introspection where enabled. It MUST NOT expose human login, client registration, admin resources, diagnostics, or JSON-RPC.
   
   ## Projection Rules
   
   RFC 9728 protected-resource metadata MUST be derived from the resource verifier contract. Runtime verifier behavior MUST use the same contract source and MUST NOT advertise broader acceptance or weaker proof requirements than runtime enforcement implements.
+
+  Metadata projections MUST NOT omit freshness or convergence requirements that
+  materially change verifier behavior. Runtime and metadata views MUST agree on
+  the conditions under which a verifier may continue, retry, or fail closed.
   
   ## Verification
   
-  Verification MUST prove metadata and runtime behavior agree on accepted issuers, audience expectations, proof requirements, introspection-caller policy, failure semantics, and resource-validation API surface exclusions.
+  Verification MUST prove metadata and runtime behavior agree on accepted
+  issuers, audience expectations, proof requirements, verifier-state freshness,
+  revocation visibility, introspection-caller policy, failure semantics, and
+  resource-validation API surface exclusions.
 spec_kind: "normative"
 adr_ids:
   - "adr:1067"

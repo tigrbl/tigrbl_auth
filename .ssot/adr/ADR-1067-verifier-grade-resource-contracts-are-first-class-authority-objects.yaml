@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class"
+summary: "`tigrbl_auth` MUST treat verifier-grade resource contracts as first-class authority objects with explicit verifier-state obligations."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -30,9 +30,16 @@ body: |-
   - accepted token classes;
   - sender-constraint requirements;
   - replay and freshness expectations;
+  - JWKS cache freshness expectations;
+  - revocation visibility expectations;
+  - replay-registry visibility expectations;
+  - introspection freshness expectations;
   - required claims or proof material; and
   - introspection-caller policy when introspection is part of the verifier
     surface.
+
+  Resource contracts MUST also define fail-closed behavior for stale verifier
+  state, delayed upstream convergence, and partitioned verification paths.
   
   RFC 9728 publication is a projection of this authority object, not the source
   of truth.
@@ -45,5 +52,6 @@ body: |-
   ## Consequences
   
   Runtime verifiers, metadata publication, introspection caller
-  authentication, sender-constrained token presentation, and interoperability
-  evidence should all derive from the same governed resource-contract source.
+  authentication, sender-constrained token presentation, verifier-state
+  freshness policy, and interoperability evidence should all derive from the
+  same governed resource-contract source.

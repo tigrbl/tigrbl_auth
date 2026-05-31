@@ -1,0 +1,75 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1182"
+number: 1182
+slug: "resource-server-grant-and-enforcement-requirements"
+title: "Resource server grant and enforcement requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines first-class resource-server grant semantics and enforcement requirements for protected-resource access in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+
+  This specification defines first-class `ResourceServerGrant` semantics for
+  protected-resource access in `tigrbl_auth`.
+
+  ## Decision Source
+
+  Decision sources: `adr:1067`, `adr:1085`, and `adr:1108`.
+
+  ## Contract Model
+
+  A resource-server grant MUST bind an authorized subject to a protected
+  resource contract through explicit authority data rather than inferred token
+  strings alone.
+
+  A resource-server grant MUST define, at minimum:
+
+  - subject type and subject identifier;
+  - tenant or trust-domain scope;
+  - target resource server, audience, or resource indicator binding;
+  - allowed scopes and permissions;
+  - lifecycle state;
+  - expiry or bounded validity rules;
+  - revocation state and reason where applicable; and
+  - delegation or issuing-authority provenance where applicable.
+
+  ## Runtime Requirements
+
+  Issuance and verification paths MUST NOT treat resource access as valid unless
+  the effective resource-server grant exists, is in an allowed lifecycle state,
+  and matches the target audience or resource contract.
+
+  Runtime enforcement MUST fail closed when:
+
+  - the target resource server cannot be resolved;
+  - the subject has no matching resource-server grant;
+  - the audience, resource, scope, or permission binding is inconsistent;
+  - the grant is expired, suspended, revoked, or replaced; or
+  - delegation provenance is required but missing or invalid.
+
+  ## Boundaries
+
+  Resource-server grants MUST remain distinct from generic client registration,
+  app ownership, or user membership records. They are authority objects, not
+  descriptive metadata.
+
+  This specification governs runtime authorization and enforcement semantics. It
+  does not require a specific storage engine or token format.
+
+  ## Verification
+
+  Verification MUST prove successful enforcement for valid grants and fail-closed
+  behavior for missing grant, wrong audience, wrong scope, revoked grant,
+  expired grant, cross-tenant use, and invalid delegation provenance.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1067"
+  - "adr:1085"
+  - "adr:1108"

@@ -80,10 +80,28 @@ export default function App() {
         >
           <RequireAuth>
             {developer.error && <div style={{ marginBottom: "16px" }}><Toast message={developer.error} tone="danger" /></div>}
-            {currentHash.startsWith("#/apps") && <ApplicationsPage applications={developer.applications} registrations={developer.registrations} />}
+            {currentHash.startsWith("#/apps") && (
+              <ApplicationsPage
+                applications={developer.applications}
+                registrations={developer.registrations}
+                onCreate={developer.registerClient}
+                onDeleteApplication={developer.deleteApplication}
+                onDeleteRegistration={developer.deleteClientRegistration}
+                onUpdateApplication={developer.updateApplication}
+                onUpdateRegistration={developer.updateClientRegistration}
+              />
+            )}
             {currentHash.startsWith("#/app-detail") && <ApplicationDetailPage application={selectedApplication} registration={selectedRegistration} />}
-            {currentHash.startsWith("#/metadata") && <ClientMetadataPage registrations={developer.registrations} />}
-            {currentHash.startsWith("#/redirects") && <RedirectUrisPage registrations={developer.registrations} />}
+            {currentHash.startsWith("#/metadata") && (
+              <ClientMetadataPage
+                registrations={developer.registrations}
+                onDelete={developer.deleteClientRegistration}
+                onUpdate={developer.updateClientRegistration}
+              />
+            )}
+            {currentHash.startsWith("#/redirects") && (
+              <RedirectUrisPage registrations={developer.registrations} onUpdate={developer.updateClientRegistration} />
+            )}
             {currentHash.startsWith("#/credentials") && <ClientCredentialsPage application={selectedApplication} registration={selectedRegistration} />}
             {currentHash.startsWith("#/scopes") && <ScopesPage applications={developer.applications} metadata={developer.metadata} />}
             {currentHash.startsWith("#/oauth-test") && <OAuthFlowTesterPage application={selectedApplication} metadata={developer.metadata} />}

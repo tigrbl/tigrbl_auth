@@ -83,7 +83,10 @@ export default function App() {
                 tenants={platform.tenants}
                 onCreate={platform.createTenant}
                 onDelete={platform.deleteTenant}
+                onDisable={platform.disableTenant}
+                onEnable={platform.enableTenant}
                 onSelect={platform.setSelectedTenantId}
+                onUpdate={platform.updateTenant}
               />
             )}
             {currentHash.startsWith("#/tenant-detail") && (
@@ -99,7 +102,9 @@ export default function App() {
               <IdentitiesPage
                 identities={platform.identities}
                 onCreate={platform.createIdentity}
+                onDelete={platform.deleteIdentity}
                 onSelectTenant={platform.setSelectedTenantId}
+                onUpdate={platform.updateIdentity}
                 selectedTenantId={platform.selectedTenantId}
                 tenants={platform.tenants}
               />

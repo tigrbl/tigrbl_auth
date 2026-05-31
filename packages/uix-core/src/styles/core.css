@@ -505,6 +505,54 @@ code {
   border-bottom: 0;
 }
 
+.tigrbl-link-button {
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font: inherit;
+  gap: 4px;
+  padding: 0;
+  text-align: left;
+}
+
+.tigrbl-link-button:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tigrbl-summary-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.tigrbl-summary-grid > div {
+  background: var(--tigrbl-surface-muted);
+  border: 1px solid var(--tigrbl-border);
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.tigrbl-summary-grid p {
+  color: var(--tigrbl-muted);
+  margin: 0;
+}
+
+.tigrbl-label {
+  color: var(--tigrbl-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .tigrbl-field,
 .tigrbl-resource-form-fields {
   display: grid;

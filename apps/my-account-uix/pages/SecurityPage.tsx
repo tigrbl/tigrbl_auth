@@ -1,4 +1,4 @@
-import { Button, Card, DetailPanel, FormField, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
 import { useState } from "react";
 
 export function SecurityPage({
@@ -9,15 +9,25 @@ export function SecurityPage({
   onChangePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 }) {
   const [currentPassword, setCurrentPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [newPassword, setNewPassword] = useState("");
-  const [status, setStatus] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
 
   async function submit() {
-    setStatus(null);
-    await onChangePassword(currentPassword, newPassword);
-    setCurrentPassword("");
-    setNewPassword("");
-    setStatus("Password changed");
+    setError(null);
+    setSuccess(null);
+    setSaving(true);
+    try {
+      await onChangePassword(currentPassword, newPassword);
+      setCurrentPassword("");
+      setNewPassword("");
+      setSuccess("Password changed.");
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : "Password change failed.");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -27,11 +37,11 @@ export function SecurityPage({
         <p className="tigrbl-eyebrow">Password posture</p>
         {mustChangePassword ? <Toast tone="danger" message="Password change is required." /> : <StatusBadge tone="success">Password current</StatusBadge>}
       </Card>
+      <InlineMutationResult error={error} success={success} />
       <DetailPanel title="Change password">
-        <ResourceForm footer={<Button onClick={() => void submit()} type="button">Change password</Button>}>
+        <ResourceForm footer={<Button disabled={saving || !currentPassword || !newPassword} onClick={() => void submit()} type="button">{saving ? "Changing" : "Change password"}</Button>}>
           <FormField label="Current password" type="password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} />
           <FormField label="New password" type="password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
-          {status ? <Toast tone="success" message={status} /> : null}
         </ResourceForm>
       </DetailPanel>
     </div>

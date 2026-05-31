@@ -55,6 +55,17 @@ body: |-
   
   Key rotation policy MUST be represented as a governed policy artifact with an
   immutable version lifecycle and a published effective-policy projection.
+
+  Key rotation policy MUST also define compromise scope and verifier reaction
+  semantics, including:
+
+  - which tenant, issuer, or trust-domain objects are affected by a compromised
+    key;
+  - what overlap, quarantine, or retirement windows apply after rotation;
+  - how quickly verifier-facing JWKS or introspection consumers are expected to
+    converge; and
+  - which fail-closed behaviors apply when verifiers miss required rotation or
+    freshness deadlines.
   
   Administration MAY expose forms, RPC methods, CLI commands, or UIX flows that
   submit policy changes or execute key rotation, but those surfaces MUST route

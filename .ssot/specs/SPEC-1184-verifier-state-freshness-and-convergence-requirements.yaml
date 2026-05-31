@@ -1,0 +1,72 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1184"
+number: 1184
+slug: "verifier-state-freshness-and-convergence-requirements"
+title: "Verifier-state freshness and convergence requirements"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification defines verifier-state freshness, visibility, and convergence requirements for protected-resource validation in `tigrbl_auth`."
+supersedes: []
+superseded_by: []
+status_notes: []
+references: []
+body: |-
+  ## Overview
+
+  This specification defines freshness and convergence requirements for verifier
+  state used by protected-resource validation in `tigrbl_auth`.
+
+  ## Decision Source
+
+  Decision sources: `adr:1067` and `adr:1094`.
+
+  ## Verifier-State Model
+
+  Verifier state MUST be treated as governed runtime input, not as an
+  implementation detail. Relevant verifier state includes, at minimum:
+
+  - JWKS caches or key material snapshots;
+  - revocation visibility state;
+  - replay-registry visibility state;
+  - introspection freshness state where introspection is used; and
+  - any local proof or nonce state required by sender-constrained verification.
+
+  ## Freshness and Convergence Requirements
+
+  A verifier contract MUST define:
+
+  - maximum tolerated staleness for each verifier-state class;
+  - whether the verifier may retry, refresh, or fail closed on stale state;
+  - what convergence is required after key rotation, grant mutation, or
+    revocation;
+  - what behavior applies during partition, failover, or delayed upstream
+    propagation; and
+  - which degraded states are still acceptable, if any.
+
+  ## Runtime Requirements
+
+  Protected-resource verification MUST fail closed when required verifier state
+  is absent, too stale, or inconsistent with declared resource-contract
+  expectations.
+
+  Metadata publication and runtime enforcement MUST agree on freshness-sensitive
+  behaviors. A verifier MUST NOT advertise stronger acceptance than its current
+  freshness policy can safely enforce.
+
+  ## Boundaries
+
+  This specification governs verifier-state behavior. It does not require a
+  specific cache backend, replay store, or introspection implementation.
+
+  ## Verification
+
+  Verification MUST prove fail-closed behavior for stale JWKS state, delayed
+  revocation visibility, missing replay visibility, unacceptable introspection
+  freshness, and convergence after key rotation or authority mutation.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1067"
+  - "adr:1094"

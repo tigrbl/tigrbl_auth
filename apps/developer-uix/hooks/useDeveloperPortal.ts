@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { developerClient } from "../services/developerClient";
-import type { ClientRegistration, DeveloperApplication, DeveloperSession, IssuerMetadata } from "../types";
+import type {
+  ClientRegistration,
+  CreateClientRegistrationInput,
+  DeveloperApplication,
+  DeveloperSession,
+  IssuerMetadata,
+  UpdateClientRegistrationInput
+} from "../types";
 
 const defaultSession: DeveloperSession = {
   authenticated: true,
@@ -27,24 +34,28 @@ export function useDeveloperPortal() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const loadData = useCallback(async () => {
+    const [nextApplications, nextRegistrations, nextMetadata] = await Promise.all([
+      optional(() => developerClient.applications(), []),
+      optional(() => developerClient.clientRegistrations(), []),
+      optional(() => developerClient.discovery(), null)
+    ]);
+    setApplications(nextApplications);
+    setRegistrations(nextRegistrations);
+    setMetadata(nextMetadata);
+  }, []);
+
   const refresh = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
-      const [nextApplications, nextRegistrations, nextMetadata] = await Promise.all([
-        optional(() => developerClient.applications(), []),
-        optional(() => developerClient.clientRegistrations(), []),
-        optional(() => developerClient.discovery(), null)
-      ]);
-      setApplications(nextApplications);
-      setRegistrations(nextRegistrations);
-      setMetadata(nextMetadata);
+      await loadData();
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : "Unable to load developer portal.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [loadData]);
 
   useEffect(() => {
     if (session?.authenticated) {
@@ -71,15 +82,45 @@ export function useDeveloperPortal() {
     setMetadata(null);
   }
 
+  async function registerClient(payload: CreateClientRegistrationInput) {
+    await developerClient.registerClient(payload);
+    await loadData();
+  }
+
+  async function updateApplication(clientId: string, payload: UpdateClientRegistrationInput) {
+    await developerClient.updateApplication(clientId, payload);
+    await loadData();
+  }
+
+  async function deleteApplication(clientId: string) {
+    await developerClient.deleteApplication(clientId);
+    await loadData();
+  }
+
+  async function updateClientRegistration(registrationId: string, payload: UpdateClientRegistrationInput) {
+    await developerClient.updateClientRegistration(registrationId, payload);
+    await loadData();
+  }
+
+  async function deleteClientRegistration(registrationId: string) {
+    await developerClient.deleteClientRegistration(registrationId);
+    await loadData();
+  }
+
   return {
     applications,
+    deleteApplication,
+    deleteClientRegistration,
     error,
     loading,
     login,
     logout,
     metadata,
+    registerClient,
     refresh,
     registrations,
-    session
+    session,
+    updateApplication,
+    updateClientRegistration
   };
 }

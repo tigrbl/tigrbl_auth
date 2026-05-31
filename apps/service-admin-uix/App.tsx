@@ -79,10 +79,32 @@ export default function App() {
         >
           <RequireAuth>
             {serviceAdmin.error && <div style={{ marginBottom: "16px" }}><Toast message={serviceAdmin.error} tone="danger" /></div>}
-            {currentHash.startsWith("#/services") && <ServicesPage services={serviceAdmin.services} />}
+            {currentHash.startsWith("#/services") && (
+              <ServicesPage
+                services={serviceAdmin.services}
+                onCreate={serviceAdmin.createService}
+                onDelete={serviceAdmin.deleteService}
+                onUpdate={serviceAdmin.updateService}
+              />
+            )}
             {currentHash.startsWith("#/service-detail") && <ServiceDetailPage service={selectedService} serviceKeys={serviceAdmin.serviceKeys} apiKeys={serviceAdmin.apiKeys} />}
-            {currentHash.startsWith("#/service-keys") && <ServiceKeysPage serviceKeys={serviceAdmin.serviceKeys} />}
-            {currentHash.startsWith("#/api-keys") && <ApiKeysPage apiKeys={serviceAdmin.apiKeys} />}
+            {currentHash.startsWith("#/service-keys") && (
+              <ServiceKeysPage
+                services={serviceAdmin.services}
+                serviceKeys={serviceAdmin.serviceKeys}
+                onCreate={serviceAdmin.createServiceKey}
+                onRevoke={serviceAdmin.revokeServiceKey}
+              />
+            )}
+            {currentHash.startsWith("#/api-keys") && (
+              <ApiKeysPage
+                apiKeys={serviceAdmin.apiKeys}
+                services={serviceAdmin.services}
+                onCreate={serviceAdmin.createApiKey}
+                onRevoke={serviceAdmin.revokeApiKey}
+                onUpdate={serviceAdmin.updateApiKey}
+              />
+            )}
             {currentHash.startsWith("#/tokens") && <TokenRecordsPage tokenRecords={serviceAdmin.tokenRecords} />}
             {currentHash.startsWith("#/validation") && (
               <ValidationToolsPage

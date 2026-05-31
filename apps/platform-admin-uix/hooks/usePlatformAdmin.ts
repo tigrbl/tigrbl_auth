@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { platformAdminClient } from "../services/platformAdminClient";
-import type { AdminSession, CreateIdentityInput, CreateTenantInput, Identity, Tenant } from "../types";
+import type { AdminSession, CreateIdentityInput, CreateTenantInput, Identity, Tenant, UpdateIdentityInput, UpdateTenantInput } from "../types";
 
 export function usePlatformAdmin() {
   const [session, setSession] = useState<AdminSession | null>(null);
@@ -95,6 +95,21 @@ export function usePlatformAdmin() {
     setSelectedTenantId(tenant.id);
   }
 
+  async function updateTenant(tenantId: string, payload: UpdateTenantInput) {
+    await platformAdminClient.updateTenant(tenantId, payload);
+    await loadTenants();
+  }
+
+  async function enableTenant(tenantId: string) {
+    await platformAdminClient.enableTenant(tenantId);
+    await loadTenants();
+  }
+
+  async function disableTenant(tenantId: string) {
+    await platformAdminClient.disableTenant(tenantId);
+    await loadTenants();
+  }
+
   async function deleteTenant(tenantId: string) {
     await platformAdminClient.deleteTenant(tenantId);
     const rows = await loadTenants();
@@ -108,10 +123,28 @@ export function usePlatformAdmin() {
     setIdentities(await platformAdminClient.identities(payload.tenant_id));
   }
 
+  async function updateIdentity(identityId: string, payload: UpdateIdentityInput) {
+    const identity = await platformAdminClient.updateIdentity(identityId, payload);
+    const tenantId = identity.tenant_id || selectedTenantId;
+    if (tenantId) {
+      setIdentities(await platformAdminClient.identities(tenantId));
+    }
+  }
+
+  async function deleteIdentity(identityId: string) {
+    await platformAdminClient.deleteIdentity(identityId);
+    if (selectedTenantId) {
+      setIdentities(await platformAdminClient.identities(selectedTenantId));
+    }
+  }
+
   return {
     createIdentity,
     createTenant,
+    deleteIdentity,
     deleteTenant,
+    disableTenant,
+    enableTenant,
     error,
     identities,
     loading,
@@ -121,6 +154,8 @@ export function usePlatformAdmin() {
     selectedTenantId,
     session,
     setSelectedTenantId,
-    tenants
+    tenants,
+    updateIdentity,
+    updateTenant
   };
 }

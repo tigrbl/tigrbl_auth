@@ -1,4 +1,4 @@
-import { Button, Card, DetailPanel, FormField, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import { Button, Card, DetailPanel, FormField, InlineMutationResult, PageHeader, ResourceForm, StatusBadge } from "@tigrbl-auth/uix-core";
 import { useEffect, useState } from "react";
 import type { AccountProfile } from "../types";
 
@@ -11,8 +11,9 @@ export function ProfilePage({
 }) {
   const [username, setUsername] = useState(profile.username);
   const [email, setEmail] = useState(profile.email);
+  const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     setUsername(profile.username);
@@ -21,10 +22,13 @@ export function ProfilePage({
 
   async function save() {
     setSaving(true);
-    setStatus(null);
+    setError(null);
+    setSuccess(null);
     try {
       await onSave(username, email);
-      setStatus("Profile saved");
+      setSuccess("Profile saved.");
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : "Profile update failed.");
     } finally {
       setSaving(false);
     }
@@ -47,11 +51,11 @@ export function ProfilePage({
           <StatusBadge tone={profile.is_active ? "success" : "warning"}>{profile.is_active ? "Active" : "Inactive"}</StatusBadge>
         </Card>
       </div>
+      <InlineMutationResult error={error} success={success} />
       <DetailPanel title="Account profile">
-        <ResourceForm footer={<Button onClick={() => void save()} type="button">{saving ? "Saving" : "Save profile"}</Button>}>
+        <ResourceForm footer={<Button disabled={saving} onClick={() => void save()} type="button">{saving ? "Saving" : "Save profile"}</Button>}>
           <FormField label="Username" value={username} onChange={(event) => setUsername(event.target.value)} />
           <FormField label="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
-          {status ? <Toast tone="success" message={status} /> : null}
         </ResourceForm>
       </DetailPanel>
     </div>

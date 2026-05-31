@@ -4,7 +4,7 @@ id: "adr:1085"
 number: 1085
 slug: "m2m-workload-identity-first-class-product-lane"
 title: "M2M and workload identity are a first-class product lane"
-status: "draft"
+status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
@@ -16,6 +16,45 @@ status_notes:
     status: "draft"
     note: "Draft product-boundary proposal from competitor-surface review and existing non-human identity roadmap."
     at: "2026-05-27T22:24:04Z"
+  -
+    status: "accepted"
+    note: "Accepted with explicit grant, bounded-authority, and protected-resource handoff semantics."
+    at: "2026-05-31T00:00:00Z"
 references: []
 body: |-
-  Decision: Treat machine-to-machine access and workload identity as a first-class product lane rather than a subsection of service administration. Context: the repo already contains client credentials token behavior, service and workload identity planning, API-key and service-key administration, and resource-server validation contracts. Consequences: product docs, specs, tests, and API matrices must name M2M, client credentials, service principals, machine principals, workload principals, credential lifecycle, token issuance, and protected-resource validation handoff explicitly. This ADR clarifies adr:1109 and the service-admin surface without replacing them.
+  ## Decision
+
+  Treat machine-to-machine access and workload identity as a first-class
+  product lane rather than a subsection of service administration.
+
+  Product docs, specs, tests, and API matrices MUST name M2M, client
+  credentials, service principals, machine principals, workload principals,
+  credential lifecycle, token issuance, resource-server grant semantics, and
+  protected-resource validation handoff explicitly.
+
+  ## Required Semantics
+
+  This product lane MUST define more than credential CRUD. It MUST also define:
+
+  - grant-bound authority between a subject and a resource server or audience;
+  - lifecycle semantics for grant issuance, expiry, suspension, revocation, and
+    replacement;
+  - bounded authority expectations such as scope, permission, audience,
+    tenant, trust-domain, or other explicit constraints; and
+  - downstream verifier expectations for issued non-human credentials and
+    tokens.
+
+  ## Context
+
+  The repo already contains client credentials token behavior, service and
+  workload identity planning, API-key and service-key administration, and
+  resource-server validation contracts. Those pieces are not sufficient to
+  claim a first-class workload identity lane unless grants, authority bounds,
+  and verifier handoff semantics are governed explicitly.
+
+  ## Consequences
+
+  This ADR clarifies `adr:1109` and the service-admin surface without replacing
+  them. M2M/workload identity MUST remain distinct from human user
+  administration, and protected-resource enforcement MUST be treated as part of
+  the same governed lane rather than as an unrelated metadata surface.

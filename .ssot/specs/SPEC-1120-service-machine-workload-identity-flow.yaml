@@ -35,12 +35,25 @@ body: |-
   Non-human identities MUST NOT be modeled as users. Tenant admins or authorized operators MAY create non-human principals according to policy.
   
   Service, machine, workload, API-key, and service-key administration SHOULD be exposed through the service-admin API and service-admin UIX. Credentials MUST be issued, bound, rotated, revoked, and audited according to credential lifecycle rules.
+
+  Non-human authority MUST be represented through explicit grant and binding
+  semantics in addition to credentials. A service or workload credential alone
+  MUST NOT imply unlimited downstream access. Effective authority MUST be
+  bounded by tenant, trust domain, audience or resource server, scope,
+  permission, lifecycle state, and any declared delegation provenance.
+
+  Grant lifecycle MUST define issuance, expiry, suspension, revocation,
+  replacement, and verifier handoff expectations for non-human flows.
   
   JWT assertion, mTLS, token exchange, and DPoP usage MUST align with their governing protocol requirements where used. Resource servers MUST validate issued tokens and proof binding before accepting non-human requests.
   
   ## Verification
   
-  Verification MUST prove service credential lifecycle, service-admin API exposure, JWT assertion flow, mTLS binding flow, DPoP binding flow, workload trust-domain denial, cross-tenant denial, token issuance, and downstream verifier enforcement.
+  Verification MUST prove service credential lifecycle, grant lifecycle,
+  service-admin API exposure, JWT assertion flow, mTLS binding flow, DPoP
+  binding flow, workload trust-domain denial, cross-tenant denial, token
+  issuance, bounded-authority enforcement, and downstream verifier
+  enforcement.
 spec_kind: "normative"
 adr_ids:
   - "adr:1046"

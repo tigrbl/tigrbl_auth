@@ -1,51 +1,127 @@
-import { Button, DataTable, DetailPanel, EmptyState, FormField, PageHeader, ResourceForm, StatusBadge, Toast } from "@tigrbl-auth/uix-core";
+import {
+  Button,
+  ConfirmDialog,
+  CreateResourceDialog,
+  DetailPanel,
+  EditResourceDialog,
+  FormField,
+  InlineMutationResult,
+  PageHeader,
+  ResourceForm,
+  ResourceTable,
+  ResourceToolbar,
+  StatusBadge
+} from "@tigrbl-auth/uix-core";
 import { useState } from "react";
 import type { FormEvent } from "react";
-import type { CreateIdentityInput, Identity, Tenant } from "../types";
+import type { CreateIdentityInput, Identity, Tenant, UpdateIdentityInput } from "../types";
+
+const emptyIdentityForm = {
+  username: "",
+  email: "",
+  password: "ChangeMe123!",
+  is_admin: true,
+  is_superuser: false,
+  must_change_password: true
+};
+
+function identityRole(identity: Pick<Identity, "is_admin" | "is_superuser">) {
+  if (identity.is_superuser) return "Superuser";
+  if (identity.is_admin) return "Admin";
+  return "User";
+}
 
 export function IdentitiesPage({
   identities,
   onCreate,
+  onDelete,
   onSelectTenant,
+  onUpdate,
   selectedTenantId,
   tenants
 }: {
   identities: Identity[];
   onCreate: (payload: CreateIdentityInput) => Promise<void>;
+  onDelete: (identityId: string) => Promise<void>;
   onSelectTenant: (tenantId: string) => void;
+  onUpdate: (identityId: string, payload: UpdateIdentityInput) => Promise<void>;
   selectedTenantId: string;
   tenants: Tenant[];
 }) {
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "ChangeMe123!",
-    is_admin: true,
-    is_superuser: false,
-    must_change_password: true
-  });
-  const [feedback, setFeedback] = useState("");
+  const [createOpen, setCreateOpen] = useState(false);
+  const [createForm, setCreateForm] = useState(emptyIdentityForm);
+  const [deleteIdentity, setDeleteIdentity] = useState<Identity | null>(null);
+  const [editIdentity, setEditIdentity] = useState<Identity | null>(null);
+  const [editForm, setEditForm] = useState<UpdateIdentityInput>({});
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  async function submit(event: FormEvent) {
+  function beginEdit(identity: Identity) {
+    setEditIdentity(identity);
+    setEditForm({
+      email: identity.email,
+      is_active: identity.is_active,
+      is_admin: identity.is_admin,
+      is_superuser: identity.is_superuser,
+      must_change_password: identity.must_change_password,
+      roles: identity.roles,
+      username: identity.username
+    });
+    setError("");
+    setSuccess("");
+  }
+
+  async function runMutation(action: () => Promise<void>, message: string) {
+    setError("");
+    setSuccess("");
+    try {
+      await action();
+      setSuccess(message);
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : "Identity mutation failed.");
+    }
+  }
+
+  async function submitCreate(event: FormEvent) {
     event.preventDefault();
     if (!selectedTenantId) return;
-    await onCreate({
-      tenant_id: selectedTenantId,
-      username: form.username.trim(),
-      email: form.email.trim().toLowerCase(),
-      password: form.password,
-      is_admin: form.is_admin,
-      is_superuser: form.is_superuser,
-      must_change_password: form.must_change_password
-    });
-    setFeedback("Identity provisioned.");
-    setForm({ ...form, username: "", email: "", password: "ChangeMe123!" });
+    await runMutation(async () => {
+      await onCreate({
+        tenant_id: selectedTenantId,
+        username: createForm.username.trim(),
+        email: createForm.email.trim().toLowerCase(),
+        password: createForm.password,
+        is_admin: createForm.is_admin,
+        is_superuser: createForm.is_superuser,
+        must_change_password: createForm.must_change_password
+      });
+      setCreateForm(emptyIdentityForm);
+      setCreateOpen(false);
+    }, "Identity provisioned.");
+  }
+
+  async function submitEdit(event: FormEvent) {
+    event.preventDefault();
+    if (!editIdentity) return;
+    await runMutation(async () => {
+      await onUpdate(editIdentity.id, {
+        username: editForm.username?.trim(),
+        email: editForm.email?.trim().toLowerCase(),
+        is_active: editForm.is_active,
+        is_admin: editForm.is_admin,
+        is_superuser: editForm.is_superuser,
+        must_change_password: editForm.must_change_password,
+        roles: editForm.roles
+      });
+      setEditIdentity(null);
+    }, "Identity updated.");
   }
 
   return (
     <div className="tigrbl-page-stack">
-      <PageHeader title="Platform identities" description="Review tenant administrators and provision platform-visible identities." />
-      {feedback && <Toast tone="success" message={feedback} />}
+      <PageHeader title="Platform identities" description="Create, edit, suspend, activate, and delete tenant-bound identities." />
+      <InlineMutationResult error={error} success={success} />
+
       <DetailPanel title="Tenant context">
         <select
           className="tigrbl-control"
@@ -57,38 +133,101 @@ export function IdentitiesPage({
           ))}
         </select>
       </DetailPanel>
-      <DetailPanel title="Create identity">
-        <ResourceForm onSubmit={submit} footer={<Button type="submit" disabled={!selectedTenantId}>Create identity</Button>}>
-          <FormField label="Username" value={form.username} onChange={(event) => setForm({ ...form, username: event.target.value })} required />
-          <FormField label="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} type="email" required />
-          <FormField label="Temporary password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} type="password" required />
-          <label className="tigrbl-choice-row">
-            <input type="checkbox" checked={form.is_admin} onChange={(event) => setForm({ ...form, is_admin: event.target.checked })} />
-            Admin
-          </label>
-          <label className="tigrbl-choice-row">
-            <input type="checkbox" checked={form.is_superuser} onChange={(event) => setForm({ ...form, is_superuser: event.target.checked })} />
-            Superuser
-          </label>
-          <label className="tigrbl-choice-row">
-            <input type="checkbox" checked={form.must_change_password} onChange={(event) => setForm({ ...form, must_change_password: event.target.checked })} />
-            Force password change
-          </label>
-        </ResourceForm>
-      </DetailPanel>
+
       <DetailPanel title="Visible identities">
-        <DataTable
+        <ResourceToolbar
+          title="Tenant identities"
+          description="Platform-visible identities are scoped to the selected tenant."
+          createLabel="Create identity"
+          onCreate={() => {
+            setCreateOpen(true);
+            setError("");
+            setSuccess("");
+          }}
+        />
+        <ResourceTable
           items={identities}
           getRowKey={(identity) => identity.id}
-          empty={<EmptyState title="No identities" body="No identities are visible for the selected tenant." />}
+          emptyTitle="No identities"
+          emptyBody="No identities are visible for the selected tenant."
           columns={[
             { key: "username", header: "Identity", render: (identity) => <><strong>{identity.username}</strong><div>{identity.email}</div></> },
-            { key: "role", header: "Role", render: (identity) => identity.is_superuser ? "Superuser" : identity.is_admin ? "Admin" : "User" },
-            { key: "status", header: "Status", render: (identity) => <StatusBadge tone={identity.is_active ? "success" : "warning"}>{identity.is_active ? "Active" : "Inactive"}</StatusBadge> },
+            { key: "role", header: "Role", render: (identity) => identityRole(identity) },
+            { key: "status", header: "Status", render: (identity) => <StatusBadge tone={identity.is_active ? "success" : "warning"}>{identity.is_active ? "Active" : "Suspended"}</StatusBadge> },
             { key: "password", header: "Password", render: (identity) => identity.must_change_password ? <StatusBadge tone="warning">Must change</StatusBadge> : <StatusBadge tone="success">Current</StatusBadge> }
+          ]}
+          actions={[
+            { label: "Edit", onClick: beginEdit, tone: "primary" },
+            {
+              label: "Activate",
+              onClick: (identity) => void runMutation(() => onUpdate(identity.id, { is_active: true }), "Identity activated.")
+            },
+            {
+              label: "Suspend",
+              onClick: (identity) => void runMutation(() => onUpdate(identity.id, { is_active: false }), "Identity suspended."),
+              tone: "danger"
+            },
+            { label: "Delete", onClick: setDeleteIdentity, tone: "danger" }
           ]}
         />
       </DetailPanel>
+
+      <CreateResourceDialog open={createOpen} title="Create identity" description="Provision an identity inside the selected tenant context." onClose={() => setCreateOpen(false)}>
+        <ResourceForm onSubmit={submitCreate} footer={<Button type="submit" disabled={!selectedTenantId}>Create identity</Button>}>
+          <FormField label="Username" value={createForm.username} onChange={(event) => setCreateForm({ ...createForm, username: event.target.value })} required />
+          <FormField label="Email" value={createForm.email} onChange={(event) => setCreateForm({ ...createForm, email: event.target.value })} type="email" required />
+          <FormField label="Temporary password" value={createForm.password} onChange={(event) => setCreateForm({ ...createForm, password: event.target.value })} type="password" required />
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={createForm.is_admin} onChange={(event) => setCreateForm({ ...createForm, is_admin: event.target.checked })} />
+            Admin
+          </label>
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={createForm.is_superuser} onChange={(event) => setCreateForm({ ...createForm, is_superuser: event.target.checked })} />
+            Superuser
+          </label>
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={createForm.must_change_password} onChange={(event) => setCreateForm({ ...createForm, must_change_password: event.target.checked })} />
+            Force password change
+          </label>
+        </ResourceForm>
+      </CreateResourceDialog>
+
+      <EditResourceDialog open={Boolean(editIdentity)} title="Edit identity" description={editIdentity?.email} onClose={() => setEditIdentity(null)}>
+        <ResourceForm onSubmit={submitEdit} footer={<Button type="submit">Save identity</Button>}>
+          <FormField label="Username" value={editForm.username ?? ""} onChange={(event) => setEditForm({ ...editForm, username: event.target.value })} required />
+          <FormField label="Email" value={editForm.email ?? ""} onChange={(event) => setEditForm({ ...editForm, email: event.target.value })} type="email" required />
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={editForm.is_active !== false} onChange={(event) => setEditForm({ ...editForm, is_active: event.target.checked })} />
+            Active identity
+          </label>
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={Boolean(editForm.is_admin)} onChange={(event) => setEditForm({ ...editForm, is_admin: event.target.checked })} />
+            Admin
+          </label>
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={Boolean(editForm.is_superuser)} onChange={(event) => setEditForm({ ...editForm, is_superuser: event.target.checked })} />
+            Superuser
+          </label>
+          <label className="tigrbl-choice-row">
+            <input type="checkbox" checked={Boolean(editForm.must_change_password)} onChange={(event) => setEditForm({ ...editForm, must_change_password: event.target.checked })} />
+            Force password change
+          </label>
+        </ResourceForm>
+      </EditResourceDialog>
+
+      <ConfirmDialog
+        open={Boolean(deleteIdentity)}
+        title="Delete identity"
+        body={`Delete ${deleteIdentity?.username ?? "this identity"}? This removes the identity row from the platform control plane.`}
+        confirmLabel="Delete identity"
+        onCancel={() => setDeleteIdentity(null)}
+        onConfirm={() => {
+          if (!deleteIdentity) return;
+          const identityId = deleteIdentity.id;
+          setDeleteIdentity(null);
+          void runMutation(() => onDelete(identityId), "Identity deleted.");
+        }}
+      />
     </div>
   );
 }
