@@ -143,6 +143,37 @@ async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
 
 
 @pytest.mark.asyncio
+async def test_tenant_admin_cors_allows_uix_origin_on_error_responses(
+    tmp_path: Path,
+) -> None:
+    tenant_app = build_app(_settings(tmp_path))
+
+    async with AsyncClient(
+        transport=ASGITransport(app=tenant_app), base_url="http://test"
+    ) as client:
+        preflight = await client.options(
+            "/admin/auth/login",
+            headers={
+                "origin": "http://localhost:3012",
+                "access-control-request-method": "POST",
+                "access-control-request-headers": "content-type",
+            },
+        )
+        anonymous = await client.get(
+            "/user",
+            headers={"origin": "http://localhost:3012"},
+        )
+
+    assert preflight.status_code == 204
+    assert preflight.headers["access-control-allow-origin"] == "http://localhost:3012"
+    assert preflight.headers["access-control-allow-credentials"] == "true"
+    assert "content-type" in preflight.headers["access-control-allow-headers"]
+    assert anonymous.status_code == 401
+    assert anonymous.headers["access-control-allow-origin"] == "http://localhost:3012"
+    assert anonymous.headers["access-control-allow-credentials"] == "true"
+
+
+@pytest.mark.asyncio
 async def test_tenant_admin_rpc_requires_key_and_reports_tenant_methods(
     tmp_path: Path,
 ) -> None:

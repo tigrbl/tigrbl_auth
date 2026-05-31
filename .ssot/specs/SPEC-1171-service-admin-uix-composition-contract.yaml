@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Draft contract for service-admin UIX composition."
     at: "2026-05-26T12:18:45Z"
+    note: "Draft contract for service-admin UIX composition."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Linked to adr:1088 so service-admin UIX composes workflow CRUD through shared uix-core primitives while preserving service and workload identity boundaries."
+    at: "2026-05-31T02:59:31Z"
 references: []
 body: |-
   The service-admin UIX app must consume only the service-admin API base URL. It owns service identity, workload identity, API key, service key, token inspection, validation metadata helper, and service audit workflows for machine and workload principals. It must not expose platform tenant lifecycle, tenant-local human identity administration, developer OIDC app catalog workflows, public login pages, diagnostics, system, or RPC paths outside the paired service-admin API contract.
@@ -24,3 +28,4 @@ adr_ids:
   - "adr:1084"
   - "adr:1120"
   - "adr:1081"
+  - "adr:1088"

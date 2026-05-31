@@ -16,6 +16,19 @@ export interface ServiceIdentity {
   created_at?: string | null;
 }
 
+export interface CreateServiceIdentityInput {
+  name: string;
+  tenant_id?: string;
+  subject?: string;
+  is_active?: boolean;
+}
+
+export interface UpdateServiceIdentityInput {
+  name?: string;
+  subject?: string;
+  is_active?: boolean;
+}
+
 export interface ServiceKey {
   id: string;
   service_id?: string | null;
@@ -24,12 +37,30 @@ export interface ServiceKey {
   created_at?: string | null;
 }
 
+export interface CreateServiceKeyInput {
+  service_id: string;
+  kid?: string;
+  algorithm?: string;
+}
+
 export interface ApiKeyRecord {
   id: string;
   service_id?: string | null;
   name?: string | null;
   scopes?: string[];
   status?: string | null;
+}
+
+export interface CreateApiKeyInput {
+  service_id: string;
+  name: string;
+  scopes?: string[];
+}
+
+export interface UpdateApiKeyInput {
+  name?: string;
+  scopes?: string[];
+  status?: string;
 }
 
 export interface TokenRecord {

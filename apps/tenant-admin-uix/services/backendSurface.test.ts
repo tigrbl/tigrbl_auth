@@ -10,6 +10,8 @@ describe("tenant admin API boundary", () => {
   it("permits tenant-scoped paths and rejects platform tenant lifecycle paths", () => {
     expect(apiUrl("/user").pathname).toBe("/user");
     expect(apiUrl("/rpc").pathname).toBe("/rpc");
+    expect(apiUrl("/admin/auth/login").pathname).toBe("/admin/auth/login");
+    expect(() => assertSurfacePath("/auth/admin/login")).toThrow(/not part/);
     expect(() => assertSurfacePath("/admin/tenant")).toThrow(/not part/);
     for (const path of FORBIDDEN_PATH_PREFIXES) {
       expect(() => assertSurfacePath(path)).toThrow(/outside/);

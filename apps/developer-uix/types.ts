@@ -24,6 +24,23 @@ export interface ClientRegistration {
   token_endpoint_auth_method?: string | null;
 }
 
+export interface CreateClientRegistrationInput {
+  client_name?: string;
+  redirect_uris?: string[];
+  grant_types?: string[];
+  response_types?: string[];
+  scope?: string;
+  token_endpoint_auth_method?: string;
+}
+
+export interface UpdateClientRegistrationInput {
+  client_name?: string;
+  redirect_uris?: string[];
+  grant_types?: string[];
+  scopes?: string[];
+  token_endpoint_auth_method?: string;
+}
+
 export interface IssuerMetadata {
   issuer?: string;
   authorization_endpoint?: string;

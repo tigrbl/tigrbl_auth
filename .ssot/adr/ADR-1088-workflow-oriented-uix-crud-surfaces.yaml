@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1088"
+number: 1088
+slug: "workflow-oriented-uix-crud-surfaces"
+title: "Workflow-oriented UIX CRUD surfaces"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tigrbl-auth/uix-core. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for shared UIX CRUD primitive governance and product-surface workflow CRUD delivery."
+    at: "2026-05-31T02:56:05Z"
+references: []
+body: |-
+  Decision: product UIX CRUD must be workflow-oriented and surface-scoped, not raw table administration. Shared reusable CRUD, mutation, error, drawer, toolbar, and form primitives live in @tigrbl-auth/uix-core. Product UIX packages compose those primitives only through their frontdoor API contracts and must preserve the product boundaries established by the surface-separated API architecture. Public UIX remains the hosted-login reference; admin, developer, service, tenant, my-account, and demo UIX surfaces may consume uix-core primitives for executable CRUD journeys.

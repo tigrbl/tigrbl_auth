@@ -1,5 +1,5 @@
 import { API_BASE_URL, apiUrl } from "./backendSurface";
-import type { ClientRegistration, DeveloperApplication, IssuerMetadata } from "../types";
+import type { ClientRegistration, CreateClientRegistrationInput, DeveloperApplication, IssuerMetadata, UpdateClientRegistrationInput } from "../types";
 
 type Fetcher = typeof fetch;
 
@@ -40,15 +40,45 @@ export class DeveloperClient {
     return this.request<DeveloperApplication[]>("/client");
   }
 
+  application(clientId: string) {
+    return this.request<DeveloperApplication>(`/client/${clientId}`);
+  }
+
+  updateApplication(clientId: string, payload: UpdateClientRegistrationInput) {
+    return this.request<DeveloperApplication>(`/client/${clientId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  deleteApplication(clientId: string) {
+    return this.request<DeveloperApplication>(`/client/${clientId}`, { method: "DELETE" });
+  }
+
   clientRegistrations() {
     return this.request<ClientRegistration[]>("/clientregistration");
+  }
+
+  clientRegistration(registrationId: string) {
+    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`);
+  }
+
+  updateClientRegistration(registrationId: string, payload: UpdateClientRegistrationInput) {
+    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  deleteClientRegistration(registrationId: string) {
+    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`, { method: "DELETE" });
   }
 
   discovery() {
     return this.request<IssuerMetadata>("/.well-known/openid-configuration");
   }
 
-  registerClient(payload: Partial<ClientRegistration>) {
+  registerClient(payload: CreateClientRegistrationInput) {
     return this.request<ClientRegistration>("/register", {
       method: "POST",
       body: JSON.stringify(payload)

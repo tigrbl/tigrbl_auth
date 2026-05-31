@@ -1,5 +1,17 @@
 import { API_BASE_URL, apiUrl } from "./backendSurface";
-import type { ApiKeyRecord, IntrospectionResult, ResourceMetadata, ServiceIdentity, ServiceKey, TokenRecord } from "../types";
+import type {
+  ApiKeyRecord,
+  CreateApiKeyInput,
+  CreateServiceIdentityInput,
+  CreateServiceKeyInput,
+  IntrospectionResult,
+  ResourceMetadata,
+  ServiceIdentity,
+  ServiceKey,
+  TokenRecord,
+  UpdateApiKeyInput,
+  UpdateServiceIdentityInput
+} from "../types";
 
 type Fetcher = typeof fetch;
 
@@ -40,12 +52,59 @@ export class ServiceAdminClient {
     return this.request<ServiceIdentity[]>("/service");
   }
 
+  createService(payload: CreateServiceIdentityInput) {
+    return this.request<ServiceIdentity>("/service", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  updateService(serviceId: string, payload: UpdateServiceIdentityInput) {
+    return this.request<ServiceIdentity>(`/service/${serviceId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  deleteService(serviceId: string) {
+    return this.request<ServiceIdentity>(`/service/${serviceId}`, { method: "DELETE" });
+  }
+
   serviceKeys() {
     return this.request<ServiceKey[]>("/servicekey");
   }
 
+  createServiceKey(payload: CreateServiceKeyInput) {
+    return this.request<ServiceKey>("/servicekey", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  revokeServiceKey(keyId: string) {
+    return this.request<ServiceKey>(`/servicekey/${keyId}`, { method: "DELETE" });
+  }
+
   apiKeys() {
     return this.request<ApiKeyRecord[]>("/apikey");
+  }
+
+  createApiKey(payload: CreateApiKeyInput) {
+    return this.request<ApiKeyRecord>("/apikey", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  updateApiKey(apiKeyId: string, payload: UpdateApiKeyInput) {
+    return this.request<ApiKeyRecord>(`/apikey/${apiKeyId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  revokeApiKey(apiKeyId: string) {
+    return this.request<ApiKeyRecord>(`/apikey/${apiKeyId}`, { method: "DELETE" });
   }
 
   tokenRecords() {

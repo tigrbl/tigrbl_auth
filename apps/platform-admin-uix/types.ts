@@ -16,6 +16,7 @@ export interface Tenant {
   slug: string;
   name: string;
   email: string;
+  is_active?: boolean;
   created_at?: string | null;
   updated_at?: string | null;
 }
@@ -40,6 +41,13 @@ export interface CreateTenantInput {
   email: string;
 }
 
+export interface UpdateTenantInput {
+  slug?: string;
+  name?: string;
+  email?: string;
+  is_active?: boolean;
+}
+
 export interface CreateIdentityInput {
   tenant_id: string;
   username: string;
@@ -48,4 +56,14 @@ export interface CreateIdentityInput {
   is_admin: boolean;
   is_superuser: boolean;
   must_change_password: boolean;
+}
+
+export interface UpdateIdentityInput {
+  username?: string;
+  email?: string;
+  is_active?: boolean;
+  is_admin?: boolean;
+  is_superuser?: boolean;
+  must_change_password?: boolean;
+  roles?: string[];
 }

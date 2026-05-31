@@ -4,7 +4,7 @@ export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_TENANT_ADMIN_API_B
 export const SURFACE_PURPOSE = "Tenant-scoped control plane for users, admins, JWKS, and local policy.";
 
 export const FORBIDDEN_PATH_PREFIXES = ["/login", "/authorize", "/token", "/register", "/tenant"];
-export const ALLOWED_PATH_PREFIXES = ["/rpc", "/user", "/client", "/clientregistration", "/consent", "/auth/admin", "/keyrotationevent"];
+export const ALLOWED_PATH_PREFIXES = ["/rpc", "/user", "/client", "/clientregistration", "/consent", "/admin/auth", "/keyrotationevent"];
 
 export function assertSurfacePath(path: string): void {
   if (!path.startsWith("/")) {

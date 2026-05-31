@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1181"
+number: 1181
+slug: "uix-core-crud-primitives-contract"
+title: "UIX Core CRUD Primitives Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This contract defines @tigrbl-auth/uix-core as the shared owner for reusable workflow CRUD primitives used by product UIX packages. Required primitives include ResourceToolbar, ResourceTable, create and edit resource dialogs, DetailDrawer, DangerZone, InlineMutationResult, ApiErrorNotice, typed field controls, and a mutation state hook. The primitives must be API-agnostic, accessible, reusable across platform-admin, tenant-admin, developer, service-admin, my-account, and demo-hub UIX packages, and must not encode product-specific routes, credentials, tenant selection, or authorization decisions. Product UIX packages own API clients and workflow composition while importing shared primitives from uix-core."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for shared CRUD primitive implementation and product UIX composition."
+    at: "2026-05-31T02:56:14Z"
+references: []
+body: |-
+  This contract defines @tigrbl-auth/uix-core as the shared owner for reusable workflow CRUD primitives used by product UIX packages. Required primitives include ResourceToolbar, ResourceTable, create and edit resource dialogs, DetailDrawer, DangerZone, InlineMutationResult, ApiErrorNotice, typed field controls, and a mutation state hook. The primitives must be API-agnostic, accessible, reusable across platform-admin, tenant-admin, developer, service-admin, my-account, and demo-hub UIX packages, and must not encode product-specific routes, credentials, tenant selection, or authorization decisions. Product UIX packages own API clients and workflow composition while importing shared primitives from uix-core.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1088"
+  - "adr:1120"
+  - "adr:1086"
+  - "adr:1087"

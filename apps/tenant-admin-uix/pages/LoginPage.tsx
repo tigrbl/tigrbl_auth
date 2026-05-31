@@ -4,7 +4,7 @@ import type { FormEvent } from "react";
 
 export function LoginPage({ error, onLogin }: { error: string; onLogin: (identifier: string, password: string) => Promise<void> }) {
   const [identifier, setIdentifier] = useState("admin");
-  const [password, setPassword] = useState("Admin123!");
+  const [password, setPassword] = useState("AdminPass123!");
   const [submitting, setSubmitting] = useState(false);
   const [localError, setLocalError] = useState("");
 

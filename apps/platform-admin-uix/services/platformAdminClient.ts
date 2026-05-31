@@ -1,5 +1,5 @@
 import { API_BASE_URL, apiUrl } from "./backendSurface";
-import type { AdminSession, CreateIdentityInput, CreateTenantInput, Identity, Tenant } from "../types";
+import type { AdminSession, CreateIdentityInput, CreateTenantInput, Identity, Tenant, UpdateIdentityInput, UpdateTenantInput } from "../types";
 
 type Fetcher = typeof fetch;
 
@@ -55,11 +55,30 @@ export class PlatformAdminClient {
     return this.request<Tenant[]>("/admin/tenant");
   }
 
+  tenant(tenantId: string) {
+    return this.request<Tenant>(`/admin/tenant/${tenantId}`);
+  }
+
   createTenant(payload: CreateTenantInput) {
     return this.request<Tenant>("/admin/tenant", {
       method: "POST",
       body: JSON.stringify(payload)
     });
+  }
+
+  updateTenant(tenantId: string, payload: UpdateTenantInput) {
+    return this.request<Tenant>(`/admin/tenant/${tenantId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  enableTenant(tenantId: string) {
+    return this.updateTenant(tenantId, { is_active: true });
+  }
+
+  disableTenant(tenantId: string) {
+    return this.updateTenant(tenantId, { is_active: false });
   }
 
   deleteTenant(tenantId: string) {
@@ -76,6 +95,17 @@ export class PlatformAdminClient {
       method: "POST",
       body: JSON.stringify(payload)
     });
+  }
+
+  updateIdentity(identityId: string, payload: UpdateIdentityInput) {
+    return this.request<Identity>(`/admin/identity/${identityId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  deleteIdentity(identityId: string) {
+    return this.request<Identity>(`/admin/identity/${identityId}`, { method: "DELETE" });
   }
 }
 

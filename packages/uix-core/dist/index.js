@@ -1,487 +1,678 @@
-var y = Object.defineProperty;
-var v = (e, r, t) => r in e ? y(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
-var o = (e, r, t) => v(e, typeof r != "symbol" ? r + "" : r, t);
-import { createContext as w, useContext as S, useState as b, useEffect as $ } from "react";
-import { jsx as n, Fragment as m, jsxs as l } from "react/jsx-runtime";
-class A extends Error {
-  constructor(t, a, i = null) {
-    super(t);
-    o(this, "status");
-    o(this, "payload");
-    this.name = "ApiError", this.status = a, this.payload = i;
+var x = Object.defineProperty;
+var E = (e, r, n) => r in e ? x(e, r, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[r] = n;
+var u = (e, r, n) => E(e, typeof r != "symbol" ? r + "" : r, n);
+import { createContext as T, useContext as P, useState as h, useEffect as R, useCallback as p } from "react";
+import { jsx as t, Fragment as f, jsxs as i } from "react/jsx-runtime";
+class M extends Error {
+  constructor(n, a, l = null) {
+    super(n);
+    u(this, "status");
+    u(this, "payload");
+    this.name = "ApiError", this.status = a, this.payload = l;
   }
 }
-function g(e, r) {
+function y(e, r) {
   return e === r || e.startsWith(`${r}/`);
 }
-function C(e, r) {
+function D(e, r) {
   if (!e.startsWith("/"))
     throw new Error(`API paths must be absolute: ${e}`);
-  if (r.forbiddenPathPrefixes.some((t) => g(e, t)))
+  if (r.forbiddenPathPrefixes.some((n) => y(e, n)))
     throw new Error(`Path is outside ${r.productApi}: ${e}`);
-  if (!r.allowedPathPrefixes.some((t) => g(e, t)))
+  if (!r.allowedPathPrefixes.some((n) => y(e, n)))
     throw new Error(`Path is not part of ${r.productApi}: ${e}`);
 }
-function k(e, r, t) {
-  return C(r, t), new URL(r, `${e.replace(/\/+$/, "")}/`);
+function U(e, r, n) {
+  return D(r, n), new URL(r, `${e.replace(/\/+$/, "")}/`);
 }
-class M {
+class O {
   constructor(r) {
-    o(this, "baseUrl");
-    o(this, "boundary");
-    o(this, "fetcher");
-    o(this, "headers");
+    u(this, "baseUrl");
+    u(this, "boundary");
+    u(this, "fetcher");
+    u(this, "headers");
     this.baseUrl = r.baseUrl.replace(/\/+$/, ""), this.boundary = r.boundary, this.fetcher = r.fetcher ?? globalThis.fetch.bind(globalThis), this.headers = r.headers ?? {};
   }
-  async request(r, t = {}) {
-    const a = this.boundary ? k(this.baseUrl, r, this.boundary) : new URL(r, `${this.baseUrl}/`), i = await this.fetcher(a, {
-      method: t.method ?? "GET",
+  async request(r, n = {}) {
+    const a = this.boundary ? U(this.baseUrl, r, this.boundary) : new URL(r, `${this.baseUrl}/`), l = await this.fetcher(a, {
+      method: n.method ?? "GET",
       headers: {
         ...this.headers,
-        ...t.body === void 0 ? {} : { "content-type": "application/json" },
-        ...t.headers
+        ...n.body === void 0 ? {} : { "content-type": "application/json" },
+        ...n.headers
       },
-      body: t.body === void 0 ? void 0 : JSON.stringify(t.body),
-      signal: t.signal
-    }), s = (i.headers.get("content-type") ?? "").includes("application/json") ? await i.json() : await i.text();
-    if (!i.ok)
-      throw new A(`Request failed with ${i.status}`, i.status, s);
-    return s;
+      body: n.body === void 0 ? void 0 : JSON.stringify(n.body),
+      signal: n.signal
+    }), c = (l.headers.get("content-type") ?? "").includes("application/json") ? await l.json() : await l.text();
+    if (!l.ok)
+      throw new M(`Request failed with ${l.status}`, l.status, c);
+    return c;
   }
 }
-function D(e, r) {
-  const t = new URLSearchParams();
-  return e && t.set("cursor", e), r !== void 0 && t.set("limit", String(r)), t;
+function Q(e, r) {
+  const n = new URLSearchParams();
+  return e && n.set("cursor", e), r !== void 0 && n.set("limit", String(r)), n;
 }
-const N = w({
+const w = T({
   loading: !1,
   session: null
-}), J = N.Provider;
-function u() {
-  return S(N);
+}), Y = w.Provider;
+function m() {
+  return P(w);
 }
-function p(e, r) {
-  const t = new Set(e);
-  return r.every((a) => t.has(a));
+function C(e, r) {
+  const n = new Set(e);
+  return r.every((a) => n.has(a));
 }
-function x(e, r) {
-  const t = new Set(e);
-  return r.some((a) => t.has(a));
+function B(e, r) {
+  const n = new Set(e);
+  return r.some((a) => n.has(a));
 }
-function L({
+function Z({
   children: e,
   fallback: r = null,
-  permissions: t
+  permissions: n
 }) {
-  const { session: a } = u();
-  return p((a == null ? void 0 : a.permissions) ?? [], t) ? /* @__PURE__ */ n(m, { children: e }) : /* @__PURE__ */ n(m, { children: r });
+  const { session: a } = m();
+  return C((a == null ? void 0 : a.permissions) ?? [], n) ? /* @__PURE__ */ t(f, { children: e }) : /* @__PURE__ */ t(f, { children: r });
 }
-function f({ body: e, title: r }) {
-  return /* @__PURE__ */ l("div", { className: "tigrbl-empty-state", children: [
-    /* @__PURE__ */ n("h2", { children: r }),
-    e && /* @__PURE__ */ n("p", { children: e })
+function N({ body: e, title: r }) {
+  return /* @__PURE__ */ i("div", { className: "tigrbl-empty-state", children: [
+    /* @__PURE__ */ t("h2", { children: r }),
+    e && /* @__PURE__ */ t("p", { children: e })
   ] });
 }
-function W({
+function K({
   children: e,
   fallback: r
 }) {
-  const { loading: t, session: a } = u();
-  return t ? /* @__PURE__ */ n(f, { title: "Loading session", body: "Checking the current authentication state." }) : a != null && a.authenticated ? /* @__PURE__ */ n(m, { children: e }) : r ?? /* @__PURE__ */ n(f, { title: "Session required", body: "Sign in to continue." });
+  const { loading: n, session: a } = m();
+  return n ? /* @__PURE__ */ t(N, { title: "Loading session", body: "Checking the current authentication state." }) : a != null && a.authenticated ? /* @__PURE__ */ t(f, { children: e }) : r ?? /* @__PURE__ */ t(N, { title: "Session required", body: "Sign in to continue." });
 }
-function V(e) {
+function X(e) {
   return e != null && e.authenticated ? e.username ?? e.email ?? e.subject ?? "Authenticated session" : "Unauthenticated";
+}
+function F({ message: e, title: r = "Something went wrong" }) {
+  return /* @__PURE__ */ i("div", { className: "tigrbl-error-state", role: "alert", children: [
+    /* @__PURE__ */ t("h2", { children: r }),
+    /* @__PURE__ */ t("p", { children: e })
+  ] });
+}
+function _({
+  message: e,
+  title: r = "Request failed"
+}) {
+  return e ? /* @__PURE__ */ t(F, { title: r, message: e }) : null;
 }
 function d({
   children: e,
   variant: r = "primary",
-  ...t
+  ...n
 }) {
-  return /* @__PURE__ */ n("button", { ...t, className: `tigrbl-button tigrbl-button-${r} ${t.className ?? ""}`.trim(), children: e });
+  return /* @__PURE__ */ t("button", { ...n, className: `tigrbl-button tigrbl-button-${r} ${n.className ?? ""}`.trim(), children: e });
 }
-function G({
+function ee({
   children: e,
   tone: r = "default",
-  ...t
+  ...n
 }) {
-  return /* @__PURE__ */ n("section", { ...t, className: `tigrbl-card tigrbl-card-${r} ${t.className ?? ""}`.trim(), children: e });
+  return /* @__PURE__ */ t("section", { ...n, className: `tigrbl-card tigrbl-card-${r} ${n.className ?? ""}`.trim(), children: e });
 }
-function H({
+function re({
   children: e,
   label: r,
-  onCheckedChange: t,
+  onCheckedChange: n,
   ...a
 }) {
-  return /* @__PURE__ */ l("label", { className: "tigrbl-checkbox", children: [
-    /* @__PURE__ */ l("span", { className: "tigrbl-checkbox-box", children: [
-      /* @__PURE__ */ n(
+  return /* @__PURE__ */ i("label", { className: "tigrbl-checkbox", children: [
+    /* @__PURE__ */ i("span", { className: "tigrbl-checkbox-box", children: [
+      /* @__PURE__ */ t(
         "input",
         {
           ...a,
           type: "checkbox",
-          onChange: (i) => t == null ? void 0 : t(i.target.checked)
+          onChange: (l) => n == null ? void 0 : n(l.target.checked)
         }
       ),
-      /* @__PURE__ */ n("span", { "aria-hidden": "true", className: "tigrbl-checkbox-mark", children: "✓" })
+      /* @__PURE__ */ t("span", { "aria-hidden": "true", className: "tigrbl-checkbox-mark", children: "✓" })
     ] }),
-    /* @__PURE__ */ n("span", { children: e ?? r })
+    /* @__PURE__ */ t("span", { children: e ?? r })
   ] });
 }
-function P({
+function k({
   children: e,
   onClose: r,
-  open: t,
+  open: n,
   title: a
 }) {
-  return t ? /* @__PURE__ */ n("div", { className: "tigrbl-modal-backdrop", role: "presentation", children: /* @__PURE__ */ l("section", { "aria-modal": "true", className: "tigrbl-modal", role: "dialog", children: [
-    /* @__PURE__ */ l("header", { children: [
-      /* @__PURE__ */ n("h2", { children: a }),
-      /* @__PURE__ */ n(d, { onClick: r, type: "button", variant: "subtle", children: "Close" })
+  return n ? /* @__PURE__ */ t("div", { className: "tigrbl-modal-backdrop", role: "presentation", children: /* @__PURE__ */ i("section", { "aria-modal": "true", className: "tigrbl-modal", role: "dialog", children: [
+    /* @__PURE__ */ i("header", { children: [
+      /* @__PURE__ */ t("h2", { children: a }),
+      /* @__PURE__ */ t(d, { onClick: r, type: "button", variant: "subtle", children: "Close" })
     ] }),
     e
   ] }) }) : null;
 }
-function O({
+function te({
   body: e,
   confirmLabel: r = "Confirm",
-  onCancel: t,
+  onCancel: n,
   onConfirm: a,
-  open: i,
-  title: c
+  open: l,
+  title: s
 }) {
-  return /* @__PURE__ */ l(P, { onClose: t, open: i, title: c, children: [
-    /* @__PURE__ */ n("p", { children: e }),
-    /* @__PURE__ */ l("div", { className: "tigrbl-actions", children: [
-      /* @__PURE__ */ n(d, { onClick: t, type: "button", variant: "subtle", children: "Cancel" }),
-      /* @__PURE__ */ n(d, { onClick: a, type: "button", variant: "danger", children: r })
+  return /* @__PURE__ */ i(k, { onClose: n, open: l, title: s, children: [
+    /* @__PURE__ */ t("p", { children: e }),
+    /* @__PURE__ */ i("div", { className: "tigrbl-actions", children: [
+      /* @__PURE__ */ t(d, { onClick: n, type: "button", variant: "subtle", children: "Cancel" }),
+      /* @__PURE__ */ t(d, { onClick: a, type: "button", variant: "danger", children: r })
     ] })
   ] });
 }
-function Q({ text: e }) {
+function ne({
+  help: e,
+  label: r,
+  rows: n = 8,
+  ...a
+}) {
+  return /* @__PURE__ */ i("label", { className: "tigrbl-field", children: [
+    /* @__PURE__ */ t("span", { className: "tigrbl-field-label", children: r }),
+    /* @__PURE__ */ t("textarea", { ...a, className: `tigrbl-code-field ${a.className ?? ""}`.trim(), rows: n }),
+    e && /* @__PURE__ */ t("span", { className: "tigrbl-field-help", children: e })
+  ] });
+}
+function ae({ text: e }) {
   async function r() {
     await navigator.clipboard.writeText(e);
   }
-  return /* @__PURE__ */ n(d, { onClick: () => void r(), type: "button", variant: "subtle", children: "Copy" });
+  return /* @__PURE__ */ t(d, { onClick: () => void r(), type: "button", variant: "subtle", children: "Copy" });
 }
-function Y({
+function le({
+  action: e,
+  children: r,
+  title: n = "Danger zone"
+}) {
+  return /* @__PURE__ */ i("section", { className: "tigrbl-danger-zone", children: [
+    /* @__PURE__ */ i("div", { children: [
+      /* @__PURE__ */ t("h2", { children: n }),
+      /* @__PURE__ */ t("div", { className: "tigrbl-danger-zone-body", children: r })
+    ] }),
+    e && /* @__PURE__ */ t("div", { className: "tigrbl-danger-zone-action", children: e })
+  ] });
+}
+function j({
   columns: e,
   empty: r,
-  getRowKey: t,
+  getRowKey: n,
   items: a
 }) {
-  return a.length === 0 ? /* @__PURE__ */ n(m, { children: r ?? /* @__PURE__ */ n(f, { title: "No records", body: "There are no records to show yet." }) }) : /* @__PURE__ */ n("div", { className: "tigrbl-table-wrap", children: /* @__PURE__ */ l("table", { className: "tigrbl-table", children: [
-    /* @__PURE__ */ n("thead", { children: /* @__PURE__ */ n("tr", { children: e.map((i) => /* @__PURE__ */ n("th", { children: i.header }, i.key)) }) }),
-    /* @__PURE__ */ n("tbody", { children: a.map((i) => /* @__PURE__ */ n("tr", { children: e.map((c) => /* @__PURE__ */ n("td", { children: c.render(i) }, c.key)) }, t(i))) })
+  return a.length === 0 ? /* @__PURE__ */ t(f, { children: r ?? /* @__PURE__ */ t(N, { title: "No records", body: "There are no records to show yet." }) }) : /* @__PURE__ */ t("div", { className: "tigrbl-table-wrap", children: /* @__PURE__ */ i("table", { className: "tigrbl-table", children: [
+    /* @__PURE__ */ t("thead", { children: /* @__PURE__ */ t("tr", { children: e.map((l) => /* @__PURE__ */ t("th", { children: l.header }, l.key)) }) }),
+    /* @__PURE__ */ t("tbody", { children: a.map((l) => /* @__PURE__ */ t("tr", { children: e.map((s) => /* @__PURE__ */ t("td", { children: s.render(l) }, s.key)) }, n(l))) })
   ] }) });
 }
-function z({ children: e, title: r }) {
-  return /* @__PURE__ */ l("section", { className: "tigrbl-panel", children: [
-    /* @__PURE__ */ n("h2", { children: r }),
+function ie({ children: e, title: r }) {
+  return /* @__PURE__ */ i("section", { className: "tigrbl-panel", children: [
+    /* @__PURE__ */ t("h2", { children: r }),
     e
   ] });
 }
-function K({ message: e, title: r = "Something went wrong" }) {
-  return /* @__PURE__ */ l("div", { className: "tigrbl-error-state", role: "alert", children: [
-    /* @__PURE__ */ n("h2", { children: r }),
-    /* @__PURE__ */ n("p", { children: e })
-  ] });
+function se({
+  actions: e,
+  children: r,
+  description: n,
+  onClose: a,
+  open: l,
+  title: s
+}) {
+  return l ? /* @__PURE__ */ t("div", { className: "tigrbl-drawer-backdrop", role: "presentation", children: /* @__PURE__ */ i("aside", { "aria-modal": "true", className: "tigrbl-drawer", role: "dialog", children: [
+    /* @__PURE__ */ i("header", { className: "tigrbl-drawer-header", children: [
+      /* @__PURE__ */ i("div", { children: [
+        /* @__PURE__ */ t("h2", { children: s }),
+        n && /* @__PURE__ */ t("p", { children: n })
+      ] }),
+      /* @__PURE__ */ t(d, { onClick: a, type: "button", variant: "subtle", children: "Close" })
+    ] }),
+    /* @__PURE__ */ t("div", { className: "tigrbl-drawer-body", children: r }),
+    e && /* @__PURE__ */ t("footer", { className: "tigrbl-drawer-actions", children: e })
+  ] }) }) : null;
 }
-function T({
+function q({
   error: e,
   help: r,
-  label: t,
+  label: n,
   ...a
 }) {
-  return /* @__PURE__ */ l("label", { className: "tigrbl-field", children: [
-    /* @__PURE__ */ l("span", { className: "tigrbl-field-label", children: [
-      /* @__PURE__ */ n("span", { children: t }),
-      e && /* @__PURE__ */ n(E, { children: e })
+  return /* @__PURE__ */ i("label", { className: "tigrbl-field", children: [
+    /* @__PURE__ */ i("span", { className: "tigrbl-field-label", children: [
+      /* @__PURE__ */ t("span", { children: n }),
+      e && /* @__PURE__ */ t(I, { children: e })
     ] }),
-    /* @__PURE__ */ n("input", { ...a, "aria-invalid": e ? "true" : a["aria-invalid"] }),
-    r && /* @__PURE__ */ n("small", { className: "tigrbl-field-help", children: r })
+    /* @__PURE__ */ t("input", { ...a, "aria-invalid": e ? "true" : a["aria-invalid"] }),
+    r && /* @__PURE__ */ t("small", { className: "tigrbl-field-help", children: r })
   ] });
 }
-function X({ children: e }) {
-  return /* @__PURE__ */ n("p", { className: "tigrbl-form-error", children: e });
+function ce({ children: e }) {
+  return /* @__PURE__ */ t("p", { className: "tigrbl-form-error", children: e });
 }
-function E({ children: e }) {
-  return /* @__PURE__ */ n("span", { className: "tigrbl-validation-message", children: e });
+function I({ children: e }) {
+  return /* @__PURE__ */ t("span", { className: "tigrbl-validation-message", children: e });
 }
-function Z({
+function oe({
   children: e,
   label: r,
-  ...t
+  ...n
 }) {
-  return /* @__PURE__ */ n("button", { ...t, "aria-label": r, className: `tigrbl-icon-button ${t.className ?? ""}`.trim(), title: r, children: e });
+  return /* @__PURE__ */ t("button", { ...n, "aria-label": r, className: `tigrbl-icon-button ${n.className ?? ""}`.trim(), title: r, children: e });
 }
-function _(e) {
-  return /* @__PURE__ */ n(T, { ...e });
-}
-function ee({ value: e }) {
-  return /* @__PURE__ */ n("pre", { className: "tigrbl-json", children: JSON.stringify(e, null, 2) });
-}
-function re({
-  description: e,
-  label: r,
-  value: t,
-  ...a
-}) {
-  return /* @__PURE__ */ l("article", { ...a, className: `tigrbl-metric-card ${a.className ?? ""}`.trim(), children: [
-    /* @__PURE__ */ n("p", { className: "tigrbl-metric-card-label", children: r }),
-    /* @__PURE__ */ n("strong", { className: "tigrbl-metric-card-value", children: t }),
-    e && /* @__PURE__ */ n("p", { className: "tigrbl-metric-card-description", children: e })
-  ] });
-}
-function te({ label: e, value: r }) {
-  const [t, a] = b(!1);
-  return /* @__PURE__ */ l("div", { className: "tigrbl-secret", children: [
-    /* @__PURE__ */ n("span", { children: e }),
-    /* @__PURE__ */ n("code", { children: t ? r : "••••••••••••" }),
-    /* @__PURE__ */ n(d, { onClick: () => a((i) => !i), type: "button", variant: "subtle", children: t ? "Hide" : "Show" })
-  ] });
-}
-function ne({
-  children: e,
-  icon: r,
-  label: t,
-  ...a
-}) {
-  return /* @__PURE__ */ l("button", { ...a, className: `tigrbl-social-button ${a.className ?? ""}`.trim(), type: a.type ?? "button", children: [
-    r && /* @__PURE__ */ n("span", { "aria-hidden": "true", className: "tigrbl-social-button-icon", children: r }),
-    /* @__PURE__ */ n("span", { children: e ?? `Continue with ${t}` })
-  ] });
-}
-function ae({ children: e, tone: r = "neutral" }) {
-  return /* @__PURE__ */ n("span", { className: `tigrbl-badge tigrbl-badge-${r}`, children: e });
-}
-function ie({
-  children: e,
-  loading: r = !1,
-  loadingLabel: t = "Working...",
-  ...a
-}) {
-  return /* @__PURE__ */ n(d, { ...a, disabled: r || a.disabled, type: a.type ?? "submit", children: r ? t : e });
-}
-function le({ activeHref: e, items: r }) {
-  return /* @__PURE__ */ n("nav", { className: "tigrbl-tabs", children: r.map((t) => /* @__PURE__ */ n("a", { "aria-current": e === t.href ? "page" : void 0, href: t.href, children: t.label }, t.href)) });
-}
-function ce({ message: e, tone: r = "neutral" }) {
-  return /* @__PURE__ */ n("div", { className: `tigrbl-toast tigrbl-toast-${r}`, children: e });
-}
-function se({ children: e }) {
-  return /* @__PURE__ */ n("div", { className: "tigrbl-toolbar", children: e });
-}
-function oe(e) {
-  return /* @__PURE__ */ n("textarea", { ...e, className: `tigrbl-json-editor ${e.className ?? ""}`.trim(), spellCheck: !1 });
+function v({ message: e, tone: r = "neutral" }) {
+  return /* @__PURE__ */ t("div", { className: `tigrbl-toast tigrbl-toast-${r}`, children: e });
 }
 function de({
-  children: e,
-  footer: r,
-  ...t
+  error: e,
+  success: r
 }) {
-  return /* @__PURE__ */ l("form", { ...t, className: `tigrbl-resource-form ${t.className ?? ""}`.trim(), children: [
-    /* @__PURE__ */ n("div", { className: "tigrbl-resource-form-fields", children: e }),
-    r && /* @__PURE__ */ n("footer", { children: r })
-  ] });
+  return e ? /* @__PURE__ */ t(v, { message: e, tone: "danger" }) : r ? /* @__PURE__ */ t(v, { message: r, tone: "success" }) : null;
 }
 function ue(e) {
-  const [r, t] = b(null), [a, i] = b(!1);
-  async function c(...s) {
-    t(null), i(!0);
+  return /* @__PURE__ */ t(q, { ...e });
+}
+function he({ value: e }) {
+  return /* @__PURE__ */ t("pre", { className: "tigrbl-json", children: JSON.stringify(e, null, 2) });
+}
+function be({
+  description: e,
+  label: r,
+  value: n,
+  ...a
+}) {
+  return /* @__PURE__ */ i("article", { ...a, className: `tigrbl-metric-card ${a.className ?? ""}`.trim(), children: [
+    /* @__PURE__ */ t("p", { className: "tigrbl-metric-card-label", children: r }),
+    /* @__PURE__ */ t("strong", { className: "tigrbl-metric-card-value", children: n }),
+    e && /* @__PURE__ */ t("p", { className: "tigrbl-metric-card-description", children: e })
+  ] });
+}
+function S({
+  children: e,
+  description: r,
+  onClose: n,
+  open: a,
+  title: l
+}) {
+  return /* @__PURE__ */ i(k, { onClose: n, open: a, title: l, children: [
+    r && /* @__PURE__ */ t("p", { className: "tigrbl-dialog-description", children: r }),
+    e
+  ] });
+}
+function ge(e) {
+  return /* @__PURE__ */ t(S, { ...e });
+}
+function me(e) {
+  return /* @__PURE__ */ t(S, { ...e });
+}
+function fe({
+  actions: e,
+  columns: r,
+  emptyBody: n,
+  emptyTitle: a,
+  getRowKey: l,
+  items: s
+}) {
+  const c = e != null && e.length ? [
+    ...r,
+    {
+      header: "Actions",
+      key: "actions",
+      render: (o) => /* @__PURE__ */ t("div", { className: "tigrbl-row-actions", children: e.map((b) => /* @__PURE__ */ t(
+        "button",
+        {
+          className: `tigrbl-row-action tigrbl-row-action-${b.tone ?? "subtle"}`,
+          onClick: () => b.onClick(o),
+          type: "button",
+          children: b.label
+        },
+        b.label
+      )) })
+    }
+  ] : r;
+  return /* @__PURE__ */ t(
+    j,
+    {
+      columns: c,
+      empty: /* @__PURE__ */ t(N, { title: a ?? "No resources", body: n ?? "Create a resource to begin." }),
+      getRowKey: l,
+      items: s
+    }
+  );
+}
+function Ne({
+  actions: e,
+  children: r,
+  createLabel: n,
+  description: a,
+  onCreate: l,
+  title: s
+}) {
+  return /* @__PURE__ */ i("div", { className: "tigrbl-resource-toolbar", children: [
+    /* @__PURE__ */ i("div", { className: "tigrbl-resource-toolbar-copy", children: [
+      s && /* @__PURE__ */ t("h2", { children: s }),
+      a && /* @__PURE__ */ t("p", { children: a }),
+      r
+    ] }),
+    /* @__PURE__ */ i("div", { className: "tigrbl-resource-toolbar-actions", children: [
+      e,
+      l && /* @__PURE__ */ t(d, { onClick: l, type: "button", children: n ?? "Create" })
+    ] })
+  ] });
+}
+function pe({ label: e, value: r }) {
+  const [n, a] = h(!1);
+  return /* @__PURE__ */ i("div", { className: "tigrbl-secret", children: [
+    /* @__PURE__ */ t("span", { children: e }),
+    /* @__PURE__ */ t("code", { children: n ? r : "••••••••••••" }),
+    /* @__PURE__ */ t(d, { onClick: () => a((l) => !l), type: "button", variant: "subtle", children: n ? "Hide" : "Show" })
+  ] });
+}
+function ye({
+  help: e,
+  label: r,
+  options: n,
+  ...a
+}) {
+  return /* @__PURE__ */ i("label", { className: "tigrbl-field", children: [
+    /* @__PURE__ */ t("span", { className: "tigrbl-field-label", children: r }),
+    /* @__PURE__ */ t("select", { ...a, children: n.map((l) => /* @__PURE__ */ t("option", { value: l.value, children: l.label }, l.value)) }),
+    e && /* @__PURE__ */ t("span", { className: "tigrbl-field-help", children: e })
+  ] });
+}
+function ve({
+  children: e,
+  icon: r,
+  label: n,
+  ...a
+}) {
+  return /* @__PURE__ */ i("button", { ...a, className: `tigrbl-social-button ${a.className ?? ""}`.trim(), type: a.type ?? "button", children: [
+    r && /* @__PURE__ */ t("span", { "aria-hidden": "true", className: "tigrbl-social-button-icon", children: r }),
+    /* @__PURE__ */ t("span", { children: e ?? `Continue with ${n}` })
+  ] });
+}
+function we({ children: e, tone: r = "neutral" }) {
+  return /* @__PURE__ */ t("span", { className: `tigrbl-badge tigrbl-badge-${r}`, children: e });
+}
+function Ce({
+  children: e,
+  loading: r = !1,
+  loadingLabel: n = "Working...",
+  ...a
+}) {
+  return /* @__PURE__ */ t(d, { ...a, disabled: r || a.disabled, type: a.type ?? "submit", children: r ? n : e });
+}
+function ke({ activeHref: e, items: r }) {
+  return /* @__PURE__ */ t("nav", { className: "tigrbl-tabs", children: r.map((n) => /* @__PURE__ */ t("a", { "aria-current": e === n.href ? "page" : void 0, href: n.href, children: n.label }, n.href)) });
+}
+function Se({
+  description: e,
+  label: r,
+  ...n
+}) {
+  return /* @__PURE__ */ i("label", { className: "tigrbl-toggle-field", children: [
+    /* @__PURE__ */ i("span", { className: "tigrbl-toggle-copy", children: [
+      /* @__PURE__ */ t("span", { className: "tigrbl-toggle-label", children: r }),
+      e && /* @__PURE__ */ t("span", { className: "tigrbl-toggle-description", children: e })
+    ] }),
+    /* @__PURE__ */ i("span", { className: "tigrbl-toggle-control", children: [
+      /* @__PURE__ */ t("input", { ...n, type: "checkbox" }),
+      /* @__PURE__ */ t("span", { "aria-hidden": "true", className: "tigrbl-toggle-track", children: /* @__PURE__ */ t("span", { className: "tigrbl-toggle-thumb" }) })
+    ] })
+  ] });
+}
+function $e({ children: e }) {
+  return /* @__PURE__ */ t("div", { className: "tigrbl-toolbar", children: e });
+}
+function Ae(e) {
+  return /* @__PURE__ */ t("textarea", { ...e, className: `tigrbl-json-editor ${e.className ?? ""}`.trim(), spellCheck: !1 });
+}
+function xe({
+  children: e,
+  footer: r,
+  ...n
+}) {
+  return /* @__PURE__ */ i("form", { ...n, className: `tigrbl-resource-form ${n.className ?? ""}`.trim(), children: [
+    /* @__PURE__ */ t("div", { className: "tigrbl-resource-form-fields", children: e }),
+    r && /* @__PURE__ */ t("footer", { children: r })
+  ] });
+}
+function Ee(e) {
+  const [r, n] = h(null), [a, l] = h(!1);
+  async function s(...c) {
+    n(null), l(!0);
     try {
-      return await e(...s);
-    } catch (h) {
-      return t(h instanceof Error ? h.message : "Request failed"), null;
+      return await e(...c);
+    } catch (o) {
+      return n(o instanceof Error ? o.message : "Request failed"), null;
     } finally {
-      i(!1);
+      l(!1);
     }
   }
-  return { error: r, loading: a, run: c };
+  return { error: r, loading: a, run: s };
 }
-function he(e, r = []) {
-  const [t, a] = b({ data: null, error: null, loading: !0 });
-  return $(() => {
-    const i = new AbortController();
-    return a((c) => ({ ...c, error: null, loading: !0 })), e(i.signal).then((c) => a({ data: c, error: null, loading: !1 })).catch((c) => {
-      i.signal.aborted || a({ data: null, error: c instanceof Error ? c.message : "Request failed", loading: !1 });
-    }), () => i.abort();
-  }, r), t;
+function Te(e, r = []) {
+  const [n, a] = h({ data: null, error: null, loading: !0 });
+  return R(() => {
+    const l = new AbortController();
+    return a((s) => ({ ...s, error: null, loading: !0 })), e(l.signal).then((s) => a({ data: s, error: null, loading: !1 })).catch((s) => {
+      l.signal.aborted || a({ data: null, error: s instanceof Error ? s.message : "Request failed", loading: !1 });
+    }), () => l.abort();
+  }, r), n;
 }
-function be() {
-  return u().session;
+function Pe() {
+  return m().session;
 }
-function me() {
-  const { session: e } = u(), r = (e == null ? void 0 : e.permissions) ?? [];
+function Re(e, r = {}) {
+  const [n, a] = h(null), [l, s] = h(!1), [c, o] = h(null), b = p(() => {
+    a(null), o(null);
+  }, []), $ = p(
+    async (...A) => {
+      a(null), o(null), s(!0);
+      try {
+        const g = await e(...A);
+        return r.successMessage && o(
+          typeof r.successMessage == "function" ? r.successMessage(g) : r.successMessage
+        ), g;
+      } catch (g) {
+        return a(g instanceof Error ? g.message : "Request failed"), null;
+      } finally {
+        s(!1);
+      }
+    },
+    [e, r.successMessage]
+  );
+  return { error: n, loading: l, reset: b, run: $, success: c };
+}
+function Me() {
+  const { session: e } = m(), r = (e == null ? void 0 : e.permissions) ?? [];
   return {
     permissions: r,
-    hasAny: (t) => x(r, t),
-    hasEvery: (t) => p(r, t)
+    hasAny: (n) => B(r, n),
+    hasEvery: (n) => C(r, n)
   };
 }
-function fe() {
-  const { session: e } = u();
+function De() {
+  const { session: e } = m();
   return {
     tenantId: (e == null ? void 0 : e.tenantId) ?? null,
     hasTenantContext: !!(e != null && e.tenantId)
   };
 }
-function U({
+function L({
   activeHref: e,
   apiBaseUrl: r,
-  items: t,
+  items: n,
   productApi: a,
-  title: i
+  title: l
 }) {
-  return /* @__PURE__ */ l("aside", { className: "tigrbl-sidebar", children: [
-    /* @__PURE__ */ n("p", { className: "tigrbl-sidebar-product", children: a }),
-    /* @__PURE__ */ n("h1", { children: i }),
-    /* @__PURE__ */ n("nav", { children: t.map((c) => {
-      const s = e === c.href || e.startsWith(`${c.href}/`);
-      return /* @__PURE__ */ l("a", { "aria-current": s ? "page" : void 0, href: c.href, children: [
-        /* @__PURE__ */ n("span", { children: c.label }),
-        c.badge && /* @__PURE__ */ n("small", { children: c.badge })
-      ] }, c.href);
+  return /* @__PURE__ */ i("aside", { className: "tigrbl-sidebar", children: [
+    /* @__PURE__ */ t("p", { className: "tigrbl-sidebar-product", children: a }),
+    /* @__PURE__ */ t("h1", { children: l }),
+    /* @__PURE__ */ t("nav", { children: n.map((s) => {
+      const c = e === s.href || e.startsWith(`${s.href}/`);
+      return /* @__PURE__ */ i("a", { "aria-current": c ? "page" : void 0, href: s.href, children: [
+        /* @__PURE__ */ t("span", { children: s.label }),
+        s.badge && /* @__PURE__ */ t("small", { children: s.badge })
+      ] }, s.href);
     }) }),
-    r && /* @__PURE__ */ l("p", { className: "tigrbl-sidebar-api", children: [
+    r && /* @__PURE__ */ i("p", { className: "tigrbl-sidebar-api", children: [
       "API: ",
-      /* @__PURE__ */ n("code", { children: r })
+      /* @__PURE__ */ t("code", { children: r })
     ] })
   ] });
 }
-function B({ onLogout: e, sessionLabel: r }) {
-  return /* @__PURE__ */ l("header", { className: "tigrbl-topbar", children: [
-    /* @__PURE__ */ n("span", { children: r ?? "No active session" }),
-    e && /* @__PURE__ */ n(d, { onClick: e, type: "button", variant: "subtle", children: "Sign out" })
+function z({ onLogout: e, sessionLabel: r }) {
+  return /* @__PURE__ */ i("header", { className: "tigrbl-topbar", children: [
+    /* @__PURE__ */ t("span", { children: r ?? "No active session" }),
+    e && /* @__PURE__ */ t(d, { onClick: e, type: "button", variant: "subtle", children: "Sign out" })
   ] });
 }
-function ge({
+function Ue({
   activeHref: e,
   apiBaseUrl: r,
-  children: t,
+  children: n,
   navigation: a,
-  onLogout: i,
-  productApi: c,
-  sessionLabel: s,
-  title: h
+  onLogout: l,
+  productApi: s,
+  sessionLabel: c,
+  title: o
 }) {
-  return /* @__PURE__ */ l("main", { className: "tigrbl-shell", children: [
-    /* @__PURE__ */ n(U, { activeHref: e, apiBaseUrl: r, items: a, productApi: c, title: h }),
-    /* @__PURE__ */ l("section", { className: "tigrbl-shell-main", children: [
-      /* @__PURE__ */ n(B, { onLogout: i, sessionLabel: s }),
-      /* @__PURE__ */ n("div", { className: "tigrbl-shell-content", children: t })
+  return /* @__PURE__ */ i("main", { className: "tigrbl-shell", children: [
+    /* @__PURE__ */ t(L, { activeHref: e, apiBaseUrl: r, items: a, productApi: s, title: o }),
+    /* @__PURE__ */ i("section", { className: "tigrbl-shell-main", children: [
+      /* @__PURE__ */ t(z, { onLogout: l, sessionLabel: c }),
+      /* @__PURE__ */ t("div", { className: "tigrbl-shell-content", children: n })
     ] })
   ] });
 }
-function j({
+function J({
   label: e = "Tigrbl Auth",
   logoLetter: r
 }) {
-  const t = r ?? (e.trim().charAt(0).toUpperCase() || "T");
-  return /* @__PURE__ */ l("div", { className: "tigrbl-brand-mark", children: [
-    /* @__PURE__ */ n("span", { className: "tigrbl-brand-mark-glyph", children: t }),
-    /* @__PURE__ */ n("span", { className: "tigrbl-brand-mark-label", children: e })
+  const n = r ?? (e.trim().charAt(0).toUpperCase() || "T");
+  return /* @__PURE__ */ i("div", { className: "tigrbl-brand-mark", children: [
+    /* @__PURE__ */ t("span", { className: "tigrbl-brand-mark-glyph", children: n }),
+    /* @__PURE__ */ t("span", { className: "tigrbl-brand-mark-label", children: e })
   ] });
 }
-function R({
+function W({
   actions: e,
   label: r = "Tigrbl Auth",
-  logoLetter: t
+  logoLetter: n
 }) {
-  return /* @__PURE__ */ l("header", { className: "tigrbl-brand-header", children: [
-    /* @__PURE__ */ n(j, { label: r, logoLetter: t }),
-    e && /* @__PURE__ */ n("nav", { className: "tigrbl-brand-header-actions", children: e })
+  return /* @__PURE__ */ i("header", { className: "tigrbl-brand-header", children: [
+    /* @__PURE__ */ t(J, { label: r, logoLetter: n }),
+    e && /* @__PURE__ */ t("nav", { className: "tigrbl-brand-header-actions", children: e })
   ] });
 }
-function Ne({
+function Be({
   children: e,
   footer: r,
-  productApi: t,
+  productApi: n,
   subtitle: a,
-  title: i
+  title: l
 }) {
-  return /* @__PURE__ */ l("main", { className: "tigrbl-auth-shell", children: [
-    /* @__PURE__ */ n(R, { label: "Tigrbl Auth" }),
-    /* @__PURE__ */ l("section", { className: "tigrbl-auth-shell-content", children: [
-      /* @__PURE__ */ l("div", { className: "tigrbl-auth-copy", children: [
-        t && /* @__PURE__ */ n("p", { className: "tigrbl-eyebrow", children: t }),
-        /* @__PURE__ */ n("h1", { children: i }),
-        a && /* @__PURE__ */ n("p", { children: a })
+  return /* @__PURE__ */ i("main", { className: "tigrbl-auth-shell", children: [
+    /* @__PURE__ */ t(W, { label: "Tigrbl Auth" }),
+    /* @__PURE__ */ i("section", { className: "tigrbl-auth-shell-content", children: [
+      /* @__PURE__ */ i("div", { className: "tigrbl-auth-copy", children: [
+        n && /* @__PURE__ */ t("p", { className: "tigrbl-eyebrow", children: n }),
+        /* @__PURE__ */ t("h1", { children: l }),
+        a && /* @__PURE__ */ t("p", { children: a })
       ] }),
       e
     ] }),
-    /* @__PURE__ */ n("footer", { className: "tigrbl-auth-footer", children: r ?? /* @__PURE__ */ l("span", { children: [
+    /* @__PURE__ */ t("footer", { className: "tigrbl-auth-footer", children: r ?? /* @__PURE__ */ i("span", { children: [
       "© ",
       (/* @__PURE__ */ new Date()).getFullYear(),
       " Tigrbl Auth"
     ] }) })
   ] });
 }
-function pe({ items: e }) {
-  return /* @__PURE__ */ n("nav", { "aria-label": "Breadcrumbs", className: "tigrbl-breadcrumbs", children: e.map((r, t) => /* @__PURE__ */ n("a", { href: r.href, "aria-current": t === e.length - 1 ? "page" : void 0, children: r.label }, r.href)) });
+function Fe({ items: e }) {
+  return /* @__PURE__ */ t("nav", { "aria-label": "Breadcrumbs", className: "tigrbl-breadcrumbs", children: e.map((r, n) => /* @__PURE__ */ t("a", { href: r.href, "aria-current": n === e.length - 1 ? "page" : void 0, children: r.label }, r.href)) });
 }
-function ye({
+function je({
   actions: e,
   description: r,
-  title: t
+  title: n
 }) {
-  return /* @__PURE__ */ l("header", { className: "tigrbl-page-header", children: [
-    /* @__PURE__ */ l("div", { children: [
-      /* @__PURE__ */ n("h1", { children: t }),
-      r && /* @__PURE__ */ n("p", { children: r })
+  return /* @__PURE__ */ i("header", { className: "tigrbl-page-header", children: [
+    /* @__PURE__ */ i("div", { children: [
+      /* @__PURE__ */ t("h1", { children: n }),
+      r && /* @__PURE__ */ t("p", { children: r })
     ] }),
-    e && /* @__PURE__ */ n("div", { className: "tigrbl-page-actions", children: e })
+    e && /* @__PURE__ */ t("div", { className: "tigrbl-page-actions", children: e })
   ] });
 }
 export {
-  M as ApiClient,
-  A as ApiError,
-  ge as AppShell,
-  J as AuthProvider,
-  Ne as AuthShell,
-  R as BrandHeader,
-  j as BrandMark,
-  pe as Breadcrumbs,
+  O as ApiClient,
+  M as ApiError,
+  _ as ApiErrorNotice,
+  Ue as AppShell,
+  Y as AuthProvider,
+  Be as AuthShell,
+  W as BrandHeader,
+  J as BrandMark,
+  Fe as Breadcrumbs,
   d as Button,
-  G as Card,
-  H as Checkbox,
-  O as ConfirmDialog,
-  Q as CopyButton,
-  Y as DataTable,
-  z as DetailPanel,
-  f as EmptyState,
-  K as ErrorState,
-  X as FormError,
-  T as FormField,
-  Z as IconButton,
-  _ as Input,
-  oe as JsonEditor,
-  ee as JsonViewer,
-  re as MetricCard,
-  P as Modal,
-  ye as PageHeader,
-  L as PermissionGate,
-  W as RequireAuth,
-  de as ResourceForm,
-  te as SecretField,
-  U as Sidebar,
-  ne as SocialButton,
-  ae as StatusBadge,
-  ie as SubmitButton,
-  le as Tabs,
-  ce as Toast,
-  se as Toolbar,
-  B as Topbar,
-  E as ValidationMessage,
-  C as assertSurfacePath,
-  k as createSurfaceUrl,
-  V as describeSession,
-  D as encodeCursorParams,
-  x as hasAnyPermission,
-  p as hasEveryPermission,
-  ue as useApiMutation,
-  he as useApiQuery,
-  u as useAuthContext,
-  be as useCurrentUser,
-  me as usePermissions,
-  fe as useTenantContext
+  ee as Card,
+  re as Checkbox,
+  ne as CodeField,
+  te as ConfirmDialog,
+  ae as CopyButton,
+  ge as CreateResourceDialog,
+  le as DangerZone,
+  j as DataTable,
+  se as DetailDrawer,
+  ie as DetailPanel,
+  me as EditResourceDialog,
+  N as EmptyState,
+  F as ErrorState,
+  ce as FormError,
+  q as FormField,
+  oe as IconButton,
+  de as InlineMutationResult,
+  ue as Input,
+  Ae as JsonEditor,
+  he as JsonViewer,
+  be as MetricCard,
+  k as Modal,
+  je as PageHeader,
+  Z as PermissionGate,
+  K as RequireAuth,
+  xe as ResourceForm,
+  fe as ResourceTable,
+  Ne as ResourceToolbar,
+  pe as SecretField,
+  ye as SelectField,
+  L as Sidebar,
+  ve as SocialButton,
+  we as StatusBadge,
+  Ce as SubmitButton,
+  ke as Tabs,
+  v as Toast,
+  Se as ToggleField,
+  $e as Toolbar,
+  z as Topbar,
+  I as ValidationMessage,
+  D as assertSurfacePath,
+  U as createSurfaceUrl,
+  X as describeSession,
+  Q as encodeCursorParams,
+  B as hasAnyPermission,
+  C as hasEveryPermission,
+  Ee as useApiMutation,
+  Te as useApiQuery,
+  m as useAuthContext,
+  Pe as useCurrentUser,
+  Re as useMutationState,
+  Me as usePermissions,
+  De as useTenantContext
 };
