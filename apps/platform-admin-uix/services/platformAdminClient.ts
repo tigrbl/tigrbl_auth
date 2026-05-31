@@ -5,6 +5,10 @@ type Fetcher = typeof fetch;
 
 const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
 
+function pathSegment(value: string) {
+  return encodeURIComponent(value);
+}
+
 export class PlatformAdminClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
@@ -56,7 +60,7 @@ export class PlatformAdminClient {
   }
 
   tenant(tenantId: string) {
-    return this.request<Tenant>(`/admin/tenant/${tenantId}`);
+    return this.request<Tenant>(`/admin/tenant/${pathSegment(tenantId)}`);
   }
 
   createTenant(payload: CreateTenantInput) {
@@ -67,7 +71,7 @@ export class PlatformAdminClient {
   }
 
   updateTenant(tenantId: string, payload: UpdateTenantInput) {
-    return this.request<Tenant>(`/admin/tenant/${tenantId}`, {
+    return this.request<Tenant>(`/admin/tenant/${pathSegment(tenantId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
@@ -82,7 +86,7 @@ export class PlatformAdminClient {
   }
 
   deleteTenant(tenantId: string) {
-    return this.request<Tenant>(`/admin/tenant/${tenantId}`, { method: "DELETE" });
+    return this.request<Tenant>(`/admin/tenant/${pathSegment(tenantId)}`, { method: "DELETE" });
   }
 
   identities(tenantId: string) {
@@ -98,14 +102,14 @@ export class PlatformAdminClient {
   }
 
   updateIdentity(identityId: string, payload: UpdateIdentityInput) {
-    return this.request<Identity>(`/admin/identity/${identityId}`, {
+    return this.request<Identity>(`/admin/identity/${pathSegment(identityId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteIdentity(identityId: string) {
-    return this.request<Identity>(`/admin/identity/${identityId}`, { method: "DELETE" });
+    return this.request<Identity>(`/admin/identity/${pathSegment(identityId)}`, { method: "DELETE" });
   }
 }
 

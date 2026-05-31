@@ -5,6 +5,10 @@ type Fetcher = typeof fetch;
 
 const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
 
+function pathSegment(value: string) {
+  return encodeURIComponent(value);
+}
+
 export class DeveloperClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
@@ -41,18 +45,18 @@ export class DeveloperClient {
   }
 
   application(clientId: string) {
-    return this.request<DeveloperApplication>(`/client/${clientId}`);
+    return this.request<DeveloperApplication>(`/client/${pathSegment(clientId)}`);
   }
 
   updateApplication(clientId: string, payload: UpdateClientRegistrationInput) {
-    return this.request<DeveloperApplication>(`/client/${clientId}`, {
+    return this.request<DeveloperApplication>(`/client/${pathSegment(clientId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteApplication(clientId: string) {
-    return this.request<DeveloperApplication>(`/client/${clientId}`, { method: "DELETE" });
+    return this.request<DeveloperApplication>(`/client/${pathSegment(clientId)}`, { method: "DELETE" });
   }
 
   clientRegistrations() {
@@ -60,18 +64,18 @@ export class DeveloperClient {
   }
 
   clientRegistration(registrationId: string) {
-    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`);
+    return this.request<ClientRegistration>(`/clientregistration/${pathSegment(registrationId)}`);
   }
 
   updateClientRegistration(registrationId: string, payload: UpdateClientRegistrationInput) {
-    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`, {
+    return this.request<ClientRegistration>(`/clientregistration/${pathSegment(registrationId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteClientRegistration(registrationId: string) {
-    return this.request<ClientRegistration>(`/clientregistration/${registrationId}`, { method: "DELETE" });
+    return this.request<ClientRegistration>(`/clientregistration/${pathSegment(registrationId)}`, { method: "DELETE" });
   }
 
   discovery() {

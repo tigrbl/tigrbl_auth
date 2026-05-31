@@ -51,4 +51,20 @@ describe("my-account self-service mutation workflows", () => {
       { body: undefined, method: "DELETE", path: "/account/consents/consent-1" }
     ]);
   });
+
+  it("normalizes base URLs, encodes subject-owned resource IDs, and accepts 204 deletes", async () => {
+    const calls: Array<{ method: string; url: string }> = [];
+    const client = new MyAccountClient("http://example.test/", async (input, init) => {
+      calls.push({ method: init?.method ?? "GET", url: String(input) });
+      return new Response(null, { status: 204 });
+    });
+
+    await expect(client.revokeAuthorizedApp("client/one two")).resolves.toBeUndefined();
+    await expect(client.revokeSession("session/one two")).resolves.toBeUndefined();
+
+    expect(calls).toEqual([
+      { method: "DELETE", url: "http://example.test/account/authorized-apps/client%2Fone%20two" },
+      { method: "DELETE", url: "http://example.test/account/sessions/session%2Fone%20two" }
+    ]);
+  });
 });

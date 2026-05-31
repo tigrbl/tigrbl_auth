@@ -50,4 +50,27 @@ describe("developer client CRUD workflows", () => {
       { body: undefined, method: "DELETE", path: "/clientregistration/reg-1" }
     ]);
   });
+
+  it("encodes application and registration identifiers while propagating API errors", async () => {
+    const calls: Array<{ method: string; url: string }> = [];
+    const client = new DeveloperClient(async (input, init) => {
+      calls.push({ method: init?.method ?? "GET", url: String(input) });
+      if (calls.length === 1) {
+        return jsonResponse({ id: "client/one two", client_id: "client/one two", client_name: "Portal" });
+      }
+      return new Response(JSON.stringify({ error: "registration denied" }), {
+        status: 400,
+        statusText: "Bad Request",
+        headers: { "content-type": "application/json" }
+      });
+    });
+
+    await expect(client.application("client/one two")).resolves.toMatchObject({ client_id: "client/one two" });
+    await expect(client.deleteClientRegistration("reg/one two")).rejects.toThrow("registration denied");
+
+    expect(calls).toEqual([
+      { method: "GET", url: expect.stringContaining("/client/client%2Fone%20two") },
+      { method: "DELETE", url: expect.stringContaining("/clientregistration/reg%2Fone%20two") }
+    ]);
+  });
 });

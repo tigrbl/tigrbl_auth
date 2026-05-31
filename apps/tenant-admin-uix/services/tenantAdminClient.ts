@@ -15,6 +15,10 @@ type Fetcher = typeof fetch;
 
 const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
 
+function pathSegment(value: string) {
+  return encodeURIComponent(value);
+}
+
 export class TenantAdminClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
@@ -73,7 +77,7 @@ export class TenantAdminClient {
   }
 
   updateIdentity(identityId: string, payload: UpdateTenantIdentityInput) {
-    return this.request<TenantIdentity>(`/user/${identityId}`, {
+    return this.request<TenantIdentity>(`/user/${pathSegment(identityId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
@@ -88,7 +92,7 @@ export class TenantAdminClient {
   }
 
   deleteIdentity(identityId: string) {
-    return this.request<TenantIdentity>(`/user/${identityId}`, { method: "DELETE" });
+    return this.request<TenantIdentity>(`/user/${pathSegment(identityId)}`, { method: "DELETE" });
   }
 
   clients() {
@@ -103,14 +107,14 @@ export class TenantAdminClient {
   }
 
   updateClient(clientId: string, payload: UpdateTenantClientInput) {
-    return this.request<TenantClient>(`/client/${clientId}`, {
+    return this.request<TenantClient>(`/client/${pathSegment(clientId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteClient(clientId: string) {
-    return this.request<TenantClient>(`/client/${clientId}`, { method: "DELETE" });
+    return this.request<TenantClient>(`/client/${pathSegment(clientId)}`, { method: "DELETE" });
   }
 
   consents() {
@@ -118,7 +122,7 @@ export class TenantAdminClient {
   }
 
   revokeConsent(consentId: string) {
-    return this.request<TenantConsent>(`/consent/${consentId}`, { method: "DELETE" });
+    return this.request<TenantConsent>(`/consent/${pathSegment(consentId)}`, { method: "DELETE" });
   }
 
   keyEvents() {

@@ -56,4 +56,23 @@ describe("tenant-admin identity CRUD workflows", () => {
       { body: undefined, method: "DELETE", path: "/user/user-1" }
     ]);
   });
+
+  it("encodes scoped identifiers and preserves non-JSON HTTP error fallback", async () => {
+    const calls: Array<{ method: string; url: string }> = [];
+    const client = new TenantAdminClient(async (input, init) => {
+      calls.push({ method: init?.method ?? "GET", url: String(input) });
+      if (calls.length === 1) {
+        return jsonResponse({ id: "user/one two", username: "alice" });
+      }
+      return new Response("not json", { status: 403, statusText: "Forbidden" });
+    });
+
+    await expect(client.updateIdentity("user/one two", { email: "alice@example.test" })).resolves.toMatchObject({ id: "user/one two" });
+    await expect(client.revokeConsent("consent/one two")).rejects.toThrow("403 Forbidden");
+
+    expect(calls).toEqual([
+      { method: "PATCH", url: expect.stringContaining("/user/user%2Fone%20two") },
+      { method: "DELETE", url: expect.stringContaining("/consent/consent%2Fone%20two") }
+    ]);
+  });
 });

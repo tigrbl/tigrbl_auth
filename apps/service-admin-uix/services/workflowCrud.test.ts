@@ -56,4 +56,23 @@ describe("service-admin workload CRUD workflows", () => {
       { body: undefined, method: "DELETE", path: "/apikey/api-key-1" }
     ]);
   });
+
+  it("encodes workload credential identifiers and keeps HTTP fallback errors", async () => {
+    const calls: Array<{ method: string; url: string }> = [];
+    const client = new ServiceAdminClient(async (input, init) => {
+      calls.push({ method: init?.method ?? "GET", url: String(input) });
+      if (calls.length === 1) {
+        return jsonResponse({ id: "svc/one two", name: "orders" });
+      }
+      return new Response("plain failure", { status: 404, statusText: "Not Found" });
+    });
+
+    await expect(client.updateService("svc/one two", { name: "orders-v2" })).resolves.toMatchObject({ id: "svc/one two" });
+    await expect(client.revokeApiKey("key/one two")).rejects.toThrow("404 Not Found");
+
+    expect(calls).toEqual([
+      { method: "PATCH", url: expect.stringContaining("/service/svc%2Fone%20two") },
+      { method: "DELETE", url: expect.stringContaining("/apikey/key%2Fone%20two") }
+    ]);
+  });
 });

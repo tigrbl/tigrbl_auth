@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { CodeField } from "./CodeField";
 import { DangerZone } from "./DangerZone";
 import { DetailDrawer } from "./DetailDrawer";
+import { ApiErrorNotice } from "./ApiErrorNotice";
 import { CreateResourceDialog, EditResourceDialog } from "./ResourceDialogs";
 import { ResourceTable } from "./ResourceTable";
 import { ResourceToolbar } from "./ResourceToolbar";
@@ -54,5 +55,32 @@ describe("CRUD UIX primitives", () => {
     expect(html).toContain("tigrbl-drawer");
     expect(html).toContain("tigrbl-toggle-field");
     expect(html).toContain("tigrbl-code-field");
+  });
+
+  it("renders fail-soft empty/error states and hides closed overlays", () => {
+    const html = renderToStaticMarkup(
+      <div>
+        <ResourceTable
+          columns={[{ header: "Name", key: "name", render: (item) => item.name }]}
+          emptyBody="Nothing is ready yet."
+          emptyTitle="No tenants"
+          getRowKey={(item) => item.id}
+          items={[] as Array<{ id: string; name: string }>}
+        />
+        <ApiErrorNotice message="Tenant API unavailable" title="Cannot load tenants" />
+        <CreateResourceDialog open={false} title="Hidden create dialog" onClose={() => undefined}>
+          Hidden form
+        </CreateResourceDialog>
+        <DetailDrawer open={false} title="Hidden drawer" onClose={() => undefined}>
+          Hidden detail
+        </DetailDrawer>
+      </div>
+    );
+
+    expect(html).toContain("No tenants");
+    expect(html).toContain("Nothing is ready yet.");
+    expect(html).toContain("Cannot load tenants");
+    expect(html).not.toContain("Hidden create dialog");
+    expect(html).not.toContain("Hidden drawer");
   });
 });

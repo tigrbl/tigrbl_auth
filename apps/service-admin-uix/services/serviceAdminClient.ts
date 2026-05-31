@@ -17,6 +17,10 @@ type Fetcher = typeof fetch;
 
 const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
 
+function pathSegment(value: string) {
+  return encodeURIComponent(value);
+}
+
 export class ServiceAdminClient {
   constructor(private readonly fetcher: Fetcher = defaultFetcher) {}
 
@@ -60,14 +64,14 @@ export class ServiceAdminClient {
   }
 
   updateService(serviceId: string, payload: UpdateServiceIdentityInput) {
-    return this.request<ServiceIdentity>(`/service/${serviceId}`, {
+    return this.request<ServiceIdentity>(`/service/${pathSegment(serviceId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteService(serviceId: string) {
-    return this.request<ServiceIdentity>(`/service/${serviceId}`, { method: "DELETE" });
+    return this.request<ServiceIdentity>(`/service/${pathSegment(serviceId)}`, { method: "DELETE" });
   }
 
   serviceKeys() {
@@ -82,7 +86,7 @@ export class ServiceAdminClient {
   }
 
   revokeServiceKey(keyId: string) {
-    return this.request<ServiceKey>(`/servicekey/${keyId}`, { method: "DELETE" });
+    return this.request<ServiceKey>(`/servicekey/${pathSegment(keyId)}`, { method: "DELETE" });
   }
 
   apiKeys() {
@@ -97,14 +101,14 @@ export class ServiceAdminClient {
   }
 
   updateApiKey(apiKeyId: string, payload: UpdateApiKeyInput) {
-    return this.request<ApiKeyRecord>(`/apikey/${apiKeyId}`, {
+    return this.request<ApiKeyRecord>(`/apikey/${pathSegment(apiKeyId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   revokeApiKey(apiKeyId: string) {
-    return this.request<ApiKeyRecord>(`/apikey/${apiKeyId}`, { method: "DELETE" });
+    return this.request<ApiKeyRecord>(`/apikey/${pathSegment(apiKeyId)}`, { method: "DELETE" });
   }
 
   tokenRecords() {

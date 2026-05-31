@@ -29,7 +29,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json && vite build",
-    "test": "vitest run"
+    "test": "vitest run --no-cache"
   },
   "peerDependencies": {
     "react": "^19.2.3",

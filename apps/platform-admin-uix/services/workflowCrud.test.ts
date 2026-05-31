@@ -53,4 +53,25 @@ describe("platform-admin tenant CRUD workflows", () => {
       { body: undefined, method: "DELETE", path: "/admin/tenant/tenant-1" }
     ]);
   });
+
+  it("encodes resource identifiers and surfaces structured API errors", async () => {
+    const paths: string[] = [];
+    const client = new PlatformAdminClient(async (input) => {
+      paths.push(String(input));
+      if (paths.length === 1) {
+        return jsonResponse({ id: "tenant/one two", slug: "acme", name: "Acme" });
+      }
+      return new Response(JSON.stringify({ detail: "tenant is locked" }), {
+        status: 409,
+        statusText: "Conflict",
+        headers: { "content-type": "application/json" }
+      });
+    });
+
+    await expect(client.tenant("tenant/one two")).resolves.toMatchObject({ id: "tenant/one two" });
+    await expect(client.updateTenant("tenant/one two", { name: "Blocked" })).rejects.toThrow("tenant is locked");
+
+    expect(paths[0]).toContain("/admin/tenant/tenant%2Fone%20two");
+    expect(paths[1]).toContain("/admin/tenant/tenant%2Fone%20two");
+  });
 });

@@ -5,11 +5,19 @@ type Fetcher = typeof fetch;
 
 const defaultFetcher: Fetcher = (input, init) => globalThis.fetch(input, init);
 
+function pathSegment(value: string) {
+  return encodeURIComponent(value);
+}
+
+function joinUrl(baseUrl: string, path: string) {
+  return `${baseUrl.replace(/\/+$/, "")}${path}`;
+}
+
 export class MyAccountClient {
   constructor(private readonly baseUrl = API_BASE_URL, private readonly fetcher: Fetcher = defaultFetcher) {}
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const response = await this.fetcher(`${this.baseUrl}${path}`, {
+    const response = await this.fetcher(joinUrl(this.baseUrl, path), {
       credentials: "include",
       headers: {
         "content-type": "application/json",
@@ -56,7 +64,7 @@ export class MyAccountClient {
   }
 
   revokeSession(sessionId: string) {
-    return this.request<{ status: string; id?: string }>(`/account/sessions/${sessionId}`, {
+    return this.request<{ status: string; id?: string }>(`/account/sessions/${pathSegment(sessionId)}`, {
       method: "DELETE"
     });
   }
@@ -66,7 +74,7 @@ export class MyAccountClient {
   }
 
   revokeAuthorizedApp(clientId: string) {
-    return this.request<{ status: string; id?: string }>(`/account/authorized-apps/${clientId}`, {
+    return this.request<{ status: string; id?: string }>(`/account/authorized-apps/${pathSegment(clientId)}`, {
       method: "DELETE"
     });
   }
@@ -76,7 +84,7 @@ export class MyAccountClient {
   }
 
   revokeConsent(consentId: string) {
-    return this.request<{ status: string; id?: string }>(`/account/consents/${consentId}`, {
+    return this.request<{ status: string; id?: string }>(`/account/consents/${pathSegment(consentId)}`, {
       method: "DELETE"
     });
   }
