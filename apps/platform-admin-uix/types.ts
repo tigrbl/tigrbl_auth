@@ -13,6 +13,7 @@ export interface AdminSession {
 
 export interface Tenant {
   id: string;
+  realm_id?: string | null;
   slug: string;
   name: string;
   email: string;
@@ -35,13 +36,39 @@ export interface Identity {
   updated_at?: string | null;
 }
 
+export interface Realm {
+  id: string;
+  slug: string;
+  name: string;
+  issuer_path: string;
+  description?: string | null;
+  created_at?: string | null;
+  updated_at?: string | null;
+}
+
 export interface CreateTenantInput {
+  realm_id?: string | null;
   slug: string;
   name: string;
   email: string;
 }
 
+export interface CreateRealmInput {
+  slug: string;
+  name: string;
+  issuer_path?: string | null;
+  description?: string | null;
+}
+
+export interface UpdateRealmInput {
+  slug?: string;
+  name?: string;
+  issuer_path?: string | null;
+  description?: string | null;
+}
+
 export interface UpdateTenantInput {
+  realm_id?: string | null;
   slug?: string;
   name?: string;
   email?: string;

@@ -24,6 +24,7 @@ TABLE_MODULE_EXPORTS = {
         "PushedAuthorizationRequest",
         "DEFAULT_PAR_EXPIRY",
     ),
+    "realm": ("Realm",),
     "revoked_token": ("RevokedToken",),
     "service": ("Service",),
     "service_key": ("ServiceKey",),
@@ -61,6 +62,10 @@ def test_tigrbl_auth_orm_and_db_facades_reexport_storage_symbols() -> None:
     assert auth_db.ENGINE is storage_db.ENGINE
     assert auth_db.dsn == storage_db.dsn
     assert auth_db.get_db is storage_db.get_db
+
+    auth_realm = importlib.import_module("tigrbl_auth.orm.realm")
+    storage_realm = importlib.import_module("tigrbl_identity_storage.orm.realm")
+    assert auth_realm.Realm is storage_realm.Realm
 
 
 def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:

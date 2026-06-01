@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1185"
+number: 1185
+slug: "platform-admin-realm-crud-contract"
+title: "Platform Admin Realm CRUD Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-api. Existing /admin/tenant routes remain default-realm compatibility routes."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for platform-admin realm lifecycle routes."
+    at: "2026-06-01T09:47:59Z"
+references: []
+body: |-
+  The platform-admin API MUST expose REST realm lifecycle routes under /admin/realm and tenant assignment routes under /admin/realm/{realm_id}/tenant. Realm CRUD is superuser-only. Raw /realm table routes MUST NOT be exposed by platform-admin-api. Existing /admin/tenant routes remain default-realm compatibility routes.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1089"
+  - "adr:1120"

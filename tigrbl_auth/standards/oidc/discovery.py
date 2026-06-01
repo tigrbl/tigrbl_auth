@@ -19,8 +19,11 @@ from tigrbl_auth.config.deployment import (
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.services.operator_service import build_operator_jwks_payload
 from tigrbl_auth.services.tenant_discovery import (
+    REALM_JWKS_PATH,
+    REALM_OPENID_CONFIGURATION_PATH,
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
+    build_realm_openid_config,
     build_tenant_openid_config,
     enabled_tenant_record,
 )
@@ -29,7 +32,7 @@ from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
 from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
-from tigrbl_auth.tables import Tenant
+from tigrbl_auth.tables import Realm, Tenant
 from tigrbl_auth.tables.engine import get_db
 
 api = TigrblRouter()
@@ -106,6 +109,18 @@ async def _tenant_exists(*, db, tenant_slug: str) -> bool:
     return operator_fallback
 
 
+async def _realm_exists(*, db, realm_slug: str) -> bool:
+    if realm_slug == "default":
+        return True
+    if db is None:
+        return False
+    try:
+        realm = await db.scalar(select(Realm).where(Realm.slug == realm_slug))
+    except SQLAlchemyError:
+        return False
+    return realm is not None
+
+
 @discovery_api.route(TENANT_OPENID_CONFIGURATION_PATH, methods=["GET"], tags=[".well-known", "tenant"])
 async def tenant_openid_configuration(request: Request, tenant_slug: str, db=Depends(get_db)):
     deployment = deployment_from_request(request, settings)
@@ -114,6 +129,16 @@ async def tenant_openid_configuration(request: Request, tenant_slug: str, db=Dep
     if not await _tenant_exists(db=db, tenant_slug=tenant_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
     return build_tenant_openid_config(deployment, tenant_slug)
+
+
+@discovery_api.route(REALM_OPENID_CONFIGURATION_PATH, methods=["GET"], tags=[".well-known", "realm"])
+async def realm_openid_configuration(request: Request, realm_slug: str, db=Depends(get_db)):
+    deployment = deployment_from_request(request, settings)
+    if not deployment.route_enabled(REALM_OPENID_CONFIGURATION_PATH):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm OIDC discovery disabled")
+    if not await _realm_exists(db=db, realm_slug=realm_slug):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm not found")
+    return build_realm_openid_config(deployment, realm_slug)
 
 
 @jwks_api.route(JWKS_PATH, methods=["GET"], tags=[".well-known"])
@@ -142,6 +167,16 @@ async def tenant_jwks(request: Request, tenant_slug: str, db=Depends(get_db)):
     if not await _tenant_exists(db=db, tenant_slug=tenant_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
     return build_operator_jwks_payload(Path.cwd(), tenant=tenant_slug)
+
+
+@jwks_api.route(REALM_JWKS_PATH, methods=["GET"], tags=[".well-known", "realm"])
+async def realm_jwks(request: Request, realm_slug: str, db=Depends(get_db)):
+    deployment = deployment_from_request(request, settings)
+    if not deployment.route_enabled(REALM_JWKS_PATH):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm JWKS publication disabled")
+    if not await _realm_exists(db=db, realm_slug=realm_slug):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm not found")
+    return build_operator_jwks_payload(Path.cwd(), tenant=realm_slug)
 
 
 def _include_if_missing(app: TigrblApp, router_obj: TigrblRouter, path: str) -> None:

@@ -9,6 +9,7 @@ from tigrbl_auth.typing import StrUUID
 _username = constr(strip_whitespace=True, min_length=3, max_length=80)
 _password = constr(min_length=8, max_length=256)
 _tenant_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
+_realm_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
 
 
 class RegisterIn(BaseModel):
@@ -261,6 +262,7 @@ class AdminIdentityUpdateIn(BaseModel):
 
 class AdminTenantOut(BaseModel):
     id: str
+    realm_id: str | None = None
     slug: _tenant_slug
     name: constr(strip_whitespace=True, min_length=1, max_length=120)
     email: constr(strip_whitespace=True, min_length=3, max_length=120)
@@ -269,6 +271,39 @@ class AdminTenantOut(BaseModel):
 
 
 class AdminTenantProvisionIn(BaseModel):
+    realm_id: str | None = None
     slug: _tenant_slug
     name: constr(strip_whitespace=True, min_length=1, max_length=120)
     email: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminTenantUpdateIn(BaseModel):
+    realm_id: str | None = None
+    slug: _tenant_slug | None = None
+    name: constr(strip_whitespace=True, min_length=1, max_length=120) | None = None
+    email: constr(strip_whitespace=True, min_length=3, max_length=120) | None = None
+    is_active: bool | None = None
+
+
+class AdminRealmOut(BaseModel):
+    id: str
+    slug: _realm_slug
+    name: constr(strip_whitespace=True, min_length=1, max_length=120)
+    issuer_path: str = ""
+    description: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminRealmProvisionIn(BaseModel):
+    slug: _realm_slug
+    name: constr(strip_whitespace=True, min_length=1, max_length=120)
+    issuer_path: str | None = None
+    description: constr(strip_whitespace=True, max_length=255) | None = None
+
+
+class AdminRealmUpdateIn(BaseModel):
+    slug: _realm_slug | None = None
+    name: constr(strip_whitespace=True, min_length=1, max_length=120) | None = None
+    issuer_path: str | None = None
+    description: constr(strip_whitespace=True, max_length=255) | None = None

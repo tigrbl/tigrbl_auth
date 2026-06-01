@@ -3,9 +3,9 @@ from __future__ import annotations
 from uuid import UUID
 
 from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, Request, TigrblRouter, select, status
-from tigrbl_auth.api.rest.schemas import AdminTenantOut, AdminTenantProvisionIn
+from tigrbl_auth.api.rest.schemas import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn
 from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
-from tigrbl_auth.tables import Tenant, User
+from tigrbl_auth.tables import Realm, Tenant, User
 from tigrbl_auth.tables.engine import get_db
 
 api = router = TigrblRouter()
@@ -14,6 +14,7 @@ api = router = TigrblRouter()
 def _tenant_payload(row: Tenant) -> AdminTenantOut:
     return AdminTenantOut(
         id=str(row.id),
+        realm_id=str(row.realm_id) if getattr(row, "realm_id", None) else None,
         slug=row.slug,
         name=row.name,
         email=row.email,
@@ -29,6 +30,16 @@ async def _require_admin(request: Request) -> User:
     return actor
 
 
+async def _default_realm(db: AsyncSession) -> Realm:
+    row = await db.scalar(select(Realm).where(Realm.slug == "default"))
+    if row is not None:
+        return row
+    row = Realm(slug="default", name="Default", issuer_path="", description="Default compatibility realm")
+    db.add(row)
+    await db.flush()
+    return row
+
+
 def _uuid(value: str, *, label: str) -> UUID:
     try:
         return UUID(str(value))
@@ -39,10 +50,14 @@ def _uuid(value: str, *, label: str) -> UUID:
 @api.route("/admin/tenant", methods=["GET"], response_model=list[AdminTenantOut])
 async def admin_list_tenants(
     request: Request,
+    realm_id: str | None = None,
     db: AsyncSession = Depends(get_db),
 ):
     await _require_admin(request)
-    rows = list(await db.scalars(select(Tenant).order_by(Tenant.created_at, Tenant.name, Tenant.slug)))
+    query = select(Tenant).order_by(Tenant.created_at, Tenant.name, Tenant.slug)
+    if realm_id:
+        query = query.where(Tenant.realm_id == _uuid(realm_id, label="realm_id"))
+    rows = list(await db.scalars(query))
     return [_tenant_payload(row) for row in rows]
 
 
@@ -66,8 +81,57 @@ async def admin_create_tenant(
     if existing is not None:
         raise HTTPException(status.HTTP_409_CONFLICT, "tenant slug, name, or email already exists")
 
-    row = Tenant(slug=slug, name=name, email=email)
+    realm_id = _uuid(payload.realm_id, label="realm_id") if payload.realm_id else (await _default_realm(db)).id
+    realm = await db.scalar(select(Realm).where(Realm.id == realm_id))
+    if realm is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
+
+    row = Tenant(slug=slug, name=name, email=email, realm_id=realm.id)
     db.add(row)
+    await db.commit()
+    await db.refresh(row)
+    return _tenant_payload(row)
+
+
+@api.route("/admin/tenant/{tenant_id}", methods=["GET"], response_model=AdminTenantOut)
+async def admin_get_tenant(
+    request: Request,
+    tenant_id: str,
+    db: AsyncSession = Depends(get_db),
+):
+    await _require_admin(request)
+    row = await db.scalar(select(Tenant).where(Tenant.id == _uuid(tenant_id, label="tenant_id")))
+    if row is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "tenant not found")
+    return _tenant_payload(row)
+
+
+@api.route("/admin/tenant/{tenant_id}", methods=["PATCH"], response_model=AdminTenantOut)
+async def admin_update_tenant(
+    request: Request,
+    tenant_id: str,
+    payload: AdminTenantUpdateIn | None = None,
+    db: AsyncSession = Depends(get_db),
+):
+    actor = await _require_admin(request)
+    if not bool(getattr(actor, "is_superuser", False)):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "superuser privileges required to update tenants")
+    if payload is None:
+        payload = AdminTenantUpdateIn.model_validate(await request.json() or {})
+    row = await db.scalar(select(Tenant).where(Tenant.id == _uuid(tenant_id, label="tenant_id")))
+    if row is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "tenant not found")
+    if payload.slug is not None:
+        row.slug = payload.slug.strip().lower()
+    if payload.name is not None:
+        row.name = payload.name.strip()
+    if payload.email is not None:
+        row.email = payload.email.strip().lower()
+    if payload.realm_id:
+        realm = await db.scalar(select(Realm).where(Realm.id == _uuid(payload.realm_id, label="realm_id")))
+        if realm is None:
+            raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
+        row.realm_id = realm.id
     await db.commit()
     await db.refresh(row)
     return _tenant_payload(row)

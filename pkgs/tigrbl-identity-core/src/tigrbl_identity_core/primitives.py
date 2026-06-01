@@ -8,6 +8,7 @@ from uuid import uuid4
 
 
 TenantId = NewType("TenantId", str)
+RealmId = NewType("RealmId", str)
 PrincipalId = NewType("PrincipalId", str)
 ClientId = NewType("ClientId", str)
 CredentialId = NewType("CredentialId", str)
@@ -19,6 +20,10 @@ ScopeValue = NewType("ScopeValue", str)
 
 def new_tenant_id() -> TenantId:
     return TenantId(str(uuid4()))
+
+
+def new_realm_id() -> RealmId:
+    return RealmId(str(uuid4()))
 
 
 def new_principal_id() -> PrincipalId:
@@ -34,8 +39,16 @@ def new_credential_id() -> CredentialId:
 
 
 @dataclass(frozen=True, slots=True)
+class RealmRef:
+    id: RealmId
+    slug: str | None = None
+    issuer: Issuer | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class TenantRef:
     id: TenantId
+    realm_id: RealmId | None = None
     slug: str | None = None
 
 
@@ -82,6 +95,8 @@ __all__ = [
     "Issuer",
     "PrincipalId",
     "PrincipalRef",
+    "RealmId",
+    "RealmRef",
     "Scope",
     "ScopeValue",
     "Subject",
@@ -90,5 +105,6 @@ __all__ = [
     "new_client_id",
     "new_credential_id",
     "new_principal_id",
+    "new_realm_id",
     "new_tenant_id",
 ]

@@ -10,11 +10,26 @@ from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 
 TENANT_OPENID_CONFIGURATION_PATH = "/tenants/{tenant_slug}/.well-known/openid-configuration"
 TENANT_JWKS_PATH = "/tenants/{tenant_slug}/.well-known/jwks.json"
+REALM_OPENID_CONFIGURATION_PATH = "/realms/{realm_slug}/.well-known/openid-configuration"
+REALM_JWKS_PATH = "/realms/{realm_slug}/.well-known/jwks.json"
 
 
 @dataclass(frozen=True, slots=True)
 class TenantTrustDomainAuthority:
     tenant_slug: str
+    issuer: str
+    jwks_uri: str
+    jwks_path: str
+    subject_namespace: str
+    protected_resource_identifier: str
+    signing_scope: str
+    accepted_issuers: tuple[str, ...]
+    verification_scope: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class RealmTrustDomainAuthority:
+    realm_slug: str
     issuer: str
     jwks_uri: str
     jwks_path: str
@@ -85,6 +100,18 @@ def tenant_issuer(root_issuer: str, tenant_slug: str) -> str:
     return f"{root_issuer.rstrip('/')}/tenants/{tenant_slug}"
 
 
+def realm_issuer(root_issuer: str, realm_slug: str) -> str:
+    return f"{root_issuer.rstrip('/')}/realms/{realm_slug}"
+
+
+def realm_jwks_path(realm_slug: str) -> str:
+    return REALM_JWKS_PATH.format(realm_slug=realm_slug)
+
+
+def realm_openid_configuration_path(realm_slug: str) -> str:
+    return REALM_OPENID_CONFIGURATION_PATH.format(realm_slug=realm_slug)
+
+
 def tenant_jwks_path(tenant_slug: str) -> str:
     return TENANT_JWKS_PATH.format(tenant_slug=tenant_slug)
 
@@ -105,6 +132,23 @@ def resolve_tenant_trust_domain_authority(deployment: ResolvedDeployment, tenant
         subject_namespace=f"{tenant_slug}:subjects",
         protected_resource_identifier=protected_resource_identifier,
         signing_scope=f"tenant:{tenant_slug}",
+        accepted_issuers=(issuer,),
+        verification_scope=(issuer, protected_resource_identifier),
+    )
+
+
+def resolve_realm_trust_domain_authority(deployment: ResolvedDeployment, realm_slug: str) -> RealmTrustDomainAuthority:
+    issuer = realm_issuer(deployment.issuer, realm_slug)
+    jwks_path = realm_jwks_path(realm_slug)
+    protected_resource_identifier = f"{str(deployment.protected_resource_identifier).rstrip('/')}/realms/{realm_slug}"
+    return RealmTrustDomainAuthority(
+        realm_slug=realm_slug,
+        issuer=issuer,
+        jwks_uri=f"{str(deployment.issuer).rstrip('/')}{jwks_path}",
+        jwks_path=jwks_path,
+        subject_namespace=f"realm:{realm_slug}:subjects",
+        protected_resource_identifier=protected_resource_identifier,
+        signing_scope=f"realm:{realm_slug}",
         accepted_issuers=(issuer,),
         verification_scope=(issuer, protected_resource_identifier),
     )
@@ -154,10 +198,30 @@ def tenant_deployment(deployment: ResolvedDeployment, tenant_slug: str) -> Resol
     )
 
 
+def realm_deployment(deployment: ResolvedDeployment, realm_slug: str) -> ResolvedDeployment:
+    authority = resolve_realm_trust_domain_authority(deployment, realm_slug)
+    return replace(
+        deployment,
+        issuer=authority.issuer,
+        protected_resource_identifier=authority.protected_resource_identifier,
+    )
+
+
 def build_tenant_openid_config(deployment: ResolvedDeployment, tenant_slug: str) -> dict[str, Any]:
     authority = resolve_tenant_trust_domain_authority(deployment, tenant_slug)
     tenant_scoped = tenant_deployment(deployment, tenant_slug)
     config = build_openid_config(tenant_scoped)
+    config["issuer"] = authority.issuer
+    config["jwks_uri"] = authority.jwks_uri
+    config["tigrbl_auth_subject_namespace"] = authority.subject_namespace
+    config["tigrbl_auth_signing_scope"] = authority.signing_scope
+    return config
+
+
+def build_realm_openid_config(deployment: ResolvedDeployment, realm_slug: str) -> dict[str, Any]:
+    authority = resolve_realm_trust_domain_authority(deployment, realm_slug)
+    realm_scoped = realm_deployment(deployment, realm_slug)
+    config = build_openid_config(realm_scoped)
     config["issuer"] = authority.issuer
     config["jwks_uri"] = authority.jwks_uri
     config["tigrbl_auth_subject_namespace"] = authority.subject_namespace
@@ -173,14 +237,23 @@ def require_tenant_issuer(payload: Mapping[str, Any], *, root_issuer: str, tenan
 
 
 __all__ = [
+    "REALM_JWKS_PATH",
+    "REALM_OPENID_CONFIGURATION_PATH",
+    "RealmTrustDomainAuthority",
     "TenantTrustDomainAuthority",
     "TenantPublicDiscoveryBoundaryFeature",
     "TENANT_JWKS_PATH",
     "TENANT_OPENID_CONFIGURATION_PATH",
     "TENANT_PUBLIC_DISCOVERY_FEATURES",
+    "build_realm_openid_config",
     "build_tenant_openid_config",
     "enabled_tenant_record",
     "require_tenant_issuer",
+    "realm_deployment",
+    "realm_issuer",
+    "realm_jwks_path",
+    "realm_openid_configuration_path",
+    "resolve_realm_trust_domain_authority",
     "resolve_tenant_trust_domain_authority",
     "tenant_public_discovery_boundary_integrity",
     "tenant_public_discovery_boundary_manifest",

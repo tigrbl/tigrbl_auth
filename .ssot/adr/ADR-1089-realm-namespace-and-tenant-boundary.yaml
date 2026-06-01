@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1089"
+number: 1089
+slug: "realm-namespace-and-tenant-boundary"
+title: "Realms are identity namespace and issuer boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Realm is the issuer, namespace, signing, discovery, and token authority boundary above Tenant. Tenant remains the customer, organization, delegated administration, and data boundary inside a Realm. Platform administration owns Realm lifecycle and Tenant assignment. Existing tenant-scoped and unprefixed routes remain default-realm compatibility surfaces for this implementation slice."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for the realm/tenant hierarchy implementation slice."
+    at: "2026-06-01T09:47:42Z"
+references: []
+body: |-
+  Decision: Realm is the issuer, namespace, signing, discovery, and token authority boundary above Tenant. Tenant remains the customer, organization, delegated administration, and data boundary inside a Realm. Platform administration owns Realm lifecycle and Tenant assignment. Existing tenant-scoped and unprefixed routes remain default-realm compatibility surfaces for this implementation slice.

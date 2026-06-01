@@ -5,6 +5,7 @@ from tigrbl import bind
 from tigrbl_auth.framework import Base, _install_local_handler_dict_compat
 from tigrbl_auth.config.settings import settings
 
+from .realm import Realm
 from .tenant import Tenant
 from .user import User
 from .client import Client, _CLIENT_ID_RE
@@ -29,6 +30,7 @@ def _ensure_runtime_bindings() -> None:
     """Materialize model handlers/schemas through Tigrbl's public bind API."""
 
     for model in (
+        Realm,
         Tenant,
         User,
         Client,
@@ -62,6 +64,7 @@ __all__ = [
     "dsn",
     "get_db",
     "Tenant",
+    "Realm",
     "User",
     "Client",
     "_CLIENT_ID_RE",

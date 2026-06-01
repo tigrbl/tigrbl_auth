@@ -22,12 +22,13 @@ PLATFORM_ADMIN_API_CONTRACT = PlatformAdminApiContract(
     product_surface="platform-admin-api",
     intended_uix="@tigrbl-auth/platform-admin-uix",
     admin_resources=(
+        "Realm",
         "Tenant",
         "User",
         "AuditEvent",
         "KeyRotationEvent",
     ),
-    admin_rest_groups=("admin_auth",),
+    admin_rest_groups=("admin_auth", "admin_realms"),
     forbidden_route_prefixes=(
         "/client",
         "/clientregistration",

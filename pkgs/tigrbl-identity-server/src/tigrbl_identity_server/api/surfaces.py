@@ -15,6 +15,7 @@ from tigrbl_auth.framework import TigrblApp, TigrblRouter
 from tigrbl_auth.api.rest.routers.authorize import api as authorize_api
 from tigrbl_auth.api.rest.routers.admin_auth import api as admin_auth_api
 from tigrbl_auth.api.rest.routers.admin_identities import api as admin_identities_api
+from tigrbl_auth.api.rest.routers.admin_realms import api as admin_realms_api
 from tigrbl_auth.api.rest.routers.admin_tenants import api as admin_tenants_api
 from tigrbl_auth.api.rest.routers.device_authorization import api as device_authorization_api
 from tigrbl_auth.api.rest.routers.login import api as login_api
@@ -46,6 +47,7 @@ from tigrbl_identity_storage.tables import (
     KeyRotationEvent,
     LogoutState,
     PushedAuthorizationRequest,
+    Realm,
     RevokedToken,
     Service,
     ServiceKey,
@@ -56,6 +58,7 @@ from tigrbl_identity_storage.tables import (
 from tigrbl_identity_storage.tables.engine import dsn
 
 TABLE_RESOURCES = [
+    Realm,
     Tenant,
     User,
     Client,
@@ -131,6 +134,7 @@ def _attach_admin_security_metadata(
 
 PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
     {"mount_group": "admin_auth", "capabilities": ("admin-auth",), "router": admin_auth_api},
+    {"mount_group": "admin_realms", "capabilities": ("admin-auth",), "router": admin_realms_api},
     {"mount_group": "admin_tenants", "capabilities": ("admin-auth",), "router": admin_tenants_api},
     {"mount_group": "admin_identities", "capabilities": ("admin-auth",), "router": admin_identities_api},
     {"mount_group": "login", "capabilities": ("login",), "router": login_api},
@@ -179,10 +183,18 @@ PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
     },
     {
         "mount_group": "openid_configuration",
-        "capabilities": ("openid-configuration",),
+        "capabilities": (
+            "openid-configuration",
+            "tenant-openid-configuration",
+            "realm-openid-configuration",
+        ),
         "include": include_openid_configuration,
     },
-    {"mount_group": "jwks", "capabilities": ("jwks",), "include": include_jwks},
+    {
+        "mount_group": "jwks",
+        "capabilities": ("jwks", "tenant-jwks", "realm-jwks"),
+        "include": include_jwks,
+    },
 )
 
 
@@ -204,11 +216,12 @@ def build_surface_api(
     if deployment.flag_enabled("surface_admin_enabled"):
         router.include_tables(TABLE_RESOURCES)
         router.include_router(admin_auth_api)
+        router.include_router(admin_realms_api)
         router.include_router(admin_tenants_api)
         router.include_router(admin_identities_api)
     if deployment.surface_enabled("public-rest"):
         for entry in PUBLIC_ROUTER_BINDINGS:
-            if entry["router"] in {admin_auth_api, admin_tenants_api, admin_identities_api}:
+            if entry["router"] in {admin_auth_api, admin_realms_api, admin_tenants_api, admin_identities_api}:
                 continue
             if any(deployment.capability_enabled(capability) for capability in entry["capabilities"]):
                 router.include_router(entry["router"])

@@ -1,5 +1,5 @@
 import { API_BASE_URL, apiUrl } from "./backendSurface";
-import type { AdminSession, CreateIdentityInput, CreateTenantInput, Identity, Tenant, UpdateIdentityInput, UpdateTenantInput } from "../types";
+import type { AdminSession, CreateIdentityInput, CreateRealmInput, CreateTenantInput, Identity, Realm, Tenant, UpdateIdentityInput, UpdateRealmInput, UpdateTenantInput } from "../types";
 
 type Fetcher = typeof fetch;
 
@@ -57,6 +57,32 @@ export class PlatformAdminClient {
 
   tenants() {
     return this.request<Tenant[]>("/admin/tenant");
+  }
+
+  realms() {
+    return this.request<Realm[]>("/admin/realm");
+  }
+
+  createRealm(payload: CreateRealmInput) {
+    return this.request<Realm>("/admin/realm", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  updateRealm(realmId: string, payload: UpdateRealmInput) {
+    return this.request<Realm>(`/admin/realm/${pathSegment(realmId)}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    });
+  }
+
+  deleteRealm(realmId: string) {
+    return this.request<Realm>(`/admin/realm/${pathSegment(realmId)}`, { method: "DELETE" });
+  }
+
+  realmTenants(realmId: string) {
+    return this.request<Tenant[]>(`/admin/realm/${pathSegment(realmId)}/tenant`);
   }
 
   tenant(tenantId: string) {

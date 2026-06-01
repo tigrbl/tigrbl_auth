@@ -85,7 +85,9 @@ def test_platform_admin_contract_routes_are_platform_control_plane_only() -> Non
     )
 
     assert "/admin/tenant" in admin_resource_path_prefixes(deployment)
+    assert "/admin/realm" in admin_resource_path_prefixes(deployment)
     assert "/admin/identity" in admin_resource_path_prefixes(deployment)
+    assert "/realm" not in admin_resource_path_prefixes(deployment)
     assert "/tenant" not in admin_resource_path_prefixes(deployment)
     assert "/user" not in admin_resource_path_prefixes(deployment)
     assert "/client" not in admin_resource_path_prefixes(deployment)
@@ -111,7 +113,11 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
     assert openapi_response.status_code == 200
     paths = openapi_response.json()["paths"]
     assert "/tenant" not in paths
+    assert "/realm" not in paths
     assert "/user" not in paths
+    assert "/admin/realm" in paths
+    assert "/admin/realm/{realm_id}" in paths
+    assert "/admin/realm/{realm_id}/tenant" in paths
     assert "/admin/identity" in paths
     assert "/admin/identity/{item_id}" in paths
     assert "/authsession" not in paths
@@ -127,6 +133,7 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
         assert route not in paths
     schemas = openapi_response.json()["components"]["schemas"]
     assert "AdminTenantOut" in schemas
+    assert "AdminRealmOut" in schemas
     assert "UserCreateRequest" in schemas
     assert "UserUpdateRequest" in schemas
     assert "AdminIdentityProvisionIn" not in schemas
@@ -215,6 +222,9 @@ async def test_platform_admin_rest_control_plane_requires_admin_key(
         raw_tenant = await client.get(
             "/tenant", headers={"X-API-Key": "test-platform-admin-key"}
         )
+        raw_realm = await client.get(
+            "/realm", headers={"X-API-Key": "test-platform-admin-key"}
+        )
         raw_user = await client.get(
             "/user", headers={"X-API-Key": "test-platform-admin-key"}
         )
@@ -230,6 +240,7 @@ async def test_platform_admin_rest_control_plane_requires_admin_key(
     assert invalid_key.status_code == 403
     assert invalid_key.json()["error"] == "invalid_admin_api_key"
     assert raw_tenant.status_code == 404
+    assert raw_realm.status_code == 404
     assert raw_user.status_code == 404
     assert raw_authsession.status_code == 404
     assert identity_missing_key.status_code == 401

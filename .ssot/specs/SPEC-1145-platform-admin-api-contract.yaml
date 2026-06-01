@@ -17,9 +17,13 @@ status_notes:
     note: "Draft contract for platform-admin API completion."
     status: "draft"
   -
-    status: "draft"
-    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
     at: "2026-05-27T16:58:50Z"
+    note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Platform-admin now owns Realm lifecycle via /admin/realm and Realm-scoped tenant assignment via /admin/realm/{realm_id}/tenant."
+    at: "2026-06-01T09:52:57Z"
 references: []
 body: |-
   ## Requirements

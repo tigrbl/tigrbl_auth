@@ -57,6 +57,38 @@ def _normalize_attributes(values: Mapping[str, Any] | None) -> Mapping[str, Any]
 
 
 @dataclass(frozen=True, slots=True)
+class Realm:
+    id: str
+    slug: str
+    name: str
+    issuer: str
+    status: PrincipalStatus = PrincipalStatus.ACTIVE
+
+    def __post_init__(self) -> None:
+        if not self.id:
+            raise ValueError("realm id is required")
+        if not self.slug:
+            raise ValueError("realm slug is required")
+        if not self.name:
+            raise ValueError("realm name is required")
+        if not self.issuer:
+            raise ValueError("realm issuer is required")
+        object.__setattr__(self, "status", PrincipalStatus(self.status))
+
+
+@dataclass(frozen=True, slots=True)
+class TenantBoundary:
+    tenant_id: str
+    realm_id: str
+
+    def __post_init__(self) -> None:
+        if not self.tenant_id:
+            raise ValueError("tenant id is required")
+        if not self.realm_id:
+            raise ValueError("realm id is required")
+
+
+@dataclass(frozen=True, slots=True)
 class Principal:
     id: str
     kind: PrincipalKind
@@ -269,7 +301,9 @@ __all__ = [
     "Principal",
     "PrincipalKind",
     "PrincipalStatus",
+    "Realm",
     "SubjectAlias",
+    "TenantBoundary",
     "TenantMembership",
     "alias_for",
     "create_admin_principal",

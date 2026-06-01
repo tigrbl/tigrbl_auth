@@ -29,9 +29,13 @@ status_notes:
     note: "Linked product API surface separation to canonical identity storage ownership."
     status: "draft"
   -
-    status: "draft"
-    note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-api, outside admin, RPC, client, tenant, and service surfaces."
     at: "2026-05-28T09:29:19Z"
+    note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-api, outside admin, RPC, client, tenant, and service surfaces."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Product API surface separation is realm-aware: frontdoors preserve product filtering while resolving Realm before Tenant-scoped behavior."
+    at: "2026-06-01T09:52:56Z"
 references: []
 body: |-
   ## Scope

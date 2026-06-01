@@ -8,6 +8,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { IdentitiesPage } from "./pages/IdentitiesPage";
 import { KeyRotationPage } from "./pages/KeyRotationPage";
 import { LoginPage } from "./pages/LoginPage";
+import { RealmsPage } from "./pages/RealmsPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TenantDetailPage } from "./pages/TenantDetailPage";
 import { TenantsPage } from "./pages/TenantsPage";
@@ -15,6 +16,7 @@ import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
 
 const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
+  { href: "#/realms", label: "Realms" },
   { href: "#/tenants", label: "Tenants" },
   { href: "#/tenant-detail", label: "Tenant Detail" },
   { href: "#/identities", label: "Identities" },
@@ -79,6 +81,8 @@ export default function App() {
             {platform.error && <div style={{ marginBottom: "16px" }}><Toast message={platform.error} tone="danger" /></div>}
             {currentHash.startsWith("#/tenants") && (
               <TenantsPage
+                realms={platform.realms}
+                selectedRealmId={platform.selectedRealmId}
                 selectedTenantId={platform.selectedTenantId}
                 tenants={platform.tenants}
                 onCreate={platform.createTenant}
@@ -87,6 +91,16 @@ export default function App() {
                 onEnable={platform.enableTenant}
                 onSelect={platform.setSelectedTenantId}
                 onUpdate={platform.updateTenant}
+              />
+            )}
+            {currentHash.startsWith("#/realms") && (
+              <RealmsPage
+                realms={platform.realms}
+                selectedRealmId={platform.selectedRealmId}
+                onCreate={platform.createRealm}
+                onDelete={platform.deleteRealm}
+                onSelect={platform.setSelectedRealmId}
+                onUpdate={platform.updateRealm}
               />
             )}
             {currentHash.startsWith("#/tenant-detail") && (

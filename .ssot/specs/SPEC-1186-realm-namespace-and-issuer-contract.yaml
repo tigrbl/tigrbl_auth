@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1186"
+number: 1186
+slug: "realm-namespace-and-issuer-contract"
+title: "Realm Namespace and Issuer Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Realms MUST be first-class identity namespace records owned by canonical identity storage. Realm-scoped issuer metadata MUST use /realms/{realm_slug} as the issuer path. Tenants MUST belong to a realm, with existing tenants treated as default-realm compatibility records when no realm_id is present. Product APIs MUST resolve realm context before tenant-scoped behavior."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted for realm-aware issuer and namespace implementation."
+    at: "2026-06-01T09:48:08Z"
+references: []
+body: |-
+  Realms MUST be first-class identity namespace records owned by canonical identity storage. Realm-scoped issuer metadata MUST use /realms/{realm_slug} as the issuer path. Tenants MUST belong to a realm, with existing tenants treated as default-realm compatibility records when no realm_id is present. Product APIs MUST resolve realm context before tenant-scoped behavior.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1089"
+  - "adr:1121"
+  - "adr:1120"

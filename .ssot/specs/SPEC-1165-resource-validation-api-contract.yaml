@@ -22,8 +22,8 @@ status_notes:
     status: "draft"
   -
     status: "draft"
-    note: "Linked conceptually to spc:1179: resource-validation API is part of the API Access Security product lane."
-    at: "2026-05-27T22:24:57Z"
+    note: "Resource-validation metadata now includes realm-scoped issuer discovery for protected resource integrations."
+    at: "2026-06-01T09:52:59Z"
 references: []
 body: |-
   The resource-validation API package must assemble only the resource-validation-api product surface. The surface exposes JWKS, tenant JWKS, OIDC discovery, tenant OIDC discovery, OAuth protected-resource metadata, and token introspection for resource servers and gateways. It must not expose login, authorize, consent, registration, admin resources, diagnostics, or RPC methods. Resource-server packages and middleware consume this front door for issuer metadata, key material, protected-resource metadata, and introspection without gaining control-plane authority.

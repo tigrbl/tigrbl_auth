@@ -20,6 +20,8 @@ from .primitives import (
     Issuer,
     PrincipalId,
     PrincipalRef,
+    RealmId,
+    RealmRef,
     Scope,
     ScopeValue,
     Subject,
@@ -28,6 +30,7 @@ from .primitives import (
     new_client_id,
     new_credential_id,
     new_principal_id,
+    new_realm_id,
     new_tenant_id,
 )
 from .rfc8785 import canonicalize
@@ -51,6 +54,8 @@ __all__ = [
     "Principal",
     "PrincipalId",
     "PrincipalRef",
+    "RealmId",
+    "RealmRef",
     "Scope",
     "ScopeValue",
     "StrUUID",
@@ -64,6 +69,7 @@ __all__ = [
     "new_client_id",
     "new_credential_id",
     "new_principal_id",
+    "new_realm_id",
     "new_tenant_id",
     "unix_seconds",
     "uuid_str",

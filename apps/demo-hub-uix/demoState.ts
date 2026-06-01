@@ -1,6 +1,11 @@
 import { surfaces } from "./surfaces";
 
 export const demoFixtures = {
+  realm: {
+    id: "realm_acme_demo",
+    name: "Acme Realm",
+    slug: "acme"
+  },
   tenant: {
     id: "tenant_acme_demo",
     name: "Acme Demo",
@@ -56,16 +61,16 @@ export const journeySteps: JourneyStep[] = [
     order: 1,
     surfaceId: "platform-admin",
     persona: "Platform operator",
-    goal: "Create the SaaS tenant and assign platform authority.",
-    action: `Provision ${demoFixtures.tenant.name} from the platform control plane.`,
-    proof: `${demoFixtures.tenant.slug} is visible as a platform-created tenant.`,
-    objectLabel: "Tenant",
-    objectValue: `${demoFixtures.tenant.name} (${demoFixtures.tenant.slug})`,
+    goal: "Create the issuer namespace, then create the SaaS tenant inside it.",
+    action: `Provision ${demoFixtures.realm.name} and ${demoFixtures.tenant.name} from the platform control plane.`,
+    proof: `${demoFixtures.tenant.slug} is visible as a platform-created tenant under ${demoFixtures.realm.slug}.`,
+    objectLabel: "Realm / tenant",
+    objectValue: `${demoFixtures.realm.name} / ${demoFixtures.tenant.name}`,
     apiRequest: {
-      label: "List platform tenants",
+      label: "List platform realms",
       method: "GET",
-      url: "/api/platform-admin/admin/tenant",
-      expected: "Returns tenant rows when an admin session/API key is present; otherwise proves auth boundary."
+      url: "/api/platform-admin/admin/realm",
+      expected: "Returns realm rows when an admin session/API key is present; otherwise proves auth boundary."
     }
   },
   {

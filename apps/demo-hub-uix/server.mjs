@@ -23,6 +23,12 @@ const adminKeys = {
 };
 
 const demo = {
+  realm: {
+    slug: "acme",
+    name: "Acme Realm",
+    issuer_path: "/realms/acme",
+    description: "Demo issuer namespace"
+  },
   tenant: {
     slug: "acme-demo",
     name: "Acme Demo",
@@ -107,25 +113,46 @@ function result(id, ok, status, summary, evidence = {}) {
 
 async function stepPlatformProvisionTenant() {
   const cookie = await loginAdmin(bases.platformAdmin);
-  const created = await apiFetch(bases.platformAdmin, "/admin/tenant", {
+  const createdRealm = await apiFetch(bases.platformAdmin, "/admin/realm", {
     method: "POST",
     cookie,
     apiKey: adminKeys.platformAdmin,
-    body: demo.tenant
+    body: demo.realm
+  });
+  let realm = createdRealm.json;
+  if (!createdRealm.ok && createdRealm.status !== 409) {
+    return result("platform-provision-tenant", false, createdRealm.status, textSample(createdRealm.text), { response: createdRealm.json ?? createdRealm.text });
+  }
+  if (createdRealm.status === 409) {
+    const listedRealms = await apiFetch(bases.platformAdmin, "/admin/realm", {
+      cookie,
+      apiKey: adminKeys.platformAdmin
+    });
+    const realmRows = Array.isArray(listedRealms.json) ? listedRealms.json : [];
+    realm = realmRows.find((row) => row.slug === demo.realm.slug);
+    if (!realm) {
+      return result("platform-provision-tenant", false, listedRealms.status, textSample(listedRealms.text), listedRealms.json);
+    }
+  }
+  const created = await apiFetch(bases.platformAdmin, `/admin/realm/${encodeURIComponent(realm.id)}/tenant`, {
+    method: "POST",
+    cookie,
+    apiKey: adminKeys.platformAdmin,
+    body: { ...demo.tenant, realm_id: realm.id }
   });
   if (created.ok) {
-    return result("platform-provision-tenant", true, created.status, `tenant provisioned: ${created.json?.slug}`, created.json);
+    return result("platform-provision-tenant", true, created.status, `realm and tenant provisioned: ${realm.slug}/${created.json?.slug}`, { realm, tenant: created.json });
   }
   if (created.status !== 409) {
-    return result("platform-provision-tenant", false, created.status, textSample(created.text), { response: created.json ?? created.text });
+    return result("platform-provision-tenant", false, created.status, textSample(created.text), { realm, response: created.json ?? created.text });
   }
-  const listed = await apiFetch(bases.platformAdmin, "/admin/tenant", {
+  const listed = await apiFetch(bases.platformAdmin, `/admin/realm/${encodeURIComponent(realm.id)}/tenant`, {
     cookie,
     apiKey: adminKeys.platformAdmin
   });
   const rows = Array.isArray(listed.json) ? listed.json : [];
   const match = rows.find((row) => row.slug === demo.tenant.slug);
-  return result("platform-provision-tenant", Boolean(match), listed.status, match ? `tenant already provisioned: ${match.slug}` : textSample(listed.text), match ?? listed.json);
+  return result("platform-provision-tenant", Boolean(match), listed.status, match ? `realm and tenant already provisioned: ${realm.slug}/${match.slug}` : textSample(listed.text), { realm, tenant: match ?? listed.json });
 }
 
 async function stepTenantManageIdentity() {

@@ -14,7 +14,7 @@ import {
 } from "@tigrbl-auth/uix-core";
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
-import type { CreateTenantInput, Tenant, UpdateTenantInput } from "../types";
+import type { CreateTenantInput, Realm, Tenant, UpdateTenantInput } from "../types";
 
 const emptyCreateForm: CreateTenantInput = { slug: "", name: "", email: "" };
 
@@ -24,6 +24,8 @@ function tenantStatus(tenant: Tenant) {
 
 export function TenantsPage({
   selectedTenantId,
+  selectedRealmId,
+  realms,
   tenants,
   onCreate,
   onDelete,
@@ -33,6 +35,8 @@ export function TenantsPage({
   onUpdate
 }: {
   selectedTenantId: string;
+  selectedRealmId?: string;
+  realms?: Realm[];
   tenants: Tenant[];
   onCreate: (payload: CreateTenantInput) => Promise<void>;
   onDelete: (tenantId: string) => Promise<void>;
@@ -52,6 +56,10 @@ export function TenantsPage({
   const selectedTenant = useMemo(
     () => tenants.find((tenant) => tenant.id === selectedTenantId) ?? null,
     [selectedTenantId, tenants]
+  );
+  const selectedRealm = useMemo(
+    () => (realms ?? []).find((realm) => realm.id === selectedRealmId) ?? null,
+    [realms, selectedRealmId]
   );
 
   function beginEdit(tenant: Tenant) {
@@ -81,6 +89,7 @@ export function TenantsPage({
     event.preventDefault();
     await runMutation(async () => {
       await onCreate({
+        realm_id: selectedRealmId || null,
         slug: createForm.slug.trim().toLowerCase(),
         name: createForm.name.trim(),
         email: createForm.email.trim().toLowerCase()
@@ -116,6 +125,11 @@ export function TenantsPage({
               <span className="tigrbl-label">Tenant</span>
               <strong>{selectedTenant.name}</strong>
               <p>{selectedTenant.slug} / {selectedTenant.email}</p>
+            </div>
+            <div>
+              <span className="tigrbl-label">Realm</span>
+              <strong>{selectedRealm?.name ?? "Default realm"}</strong>
+              <p>{selectedRealm?.slug ?? selectedTenant.realm_id ?? "default"}</p>
             </div>
             <div>
               <span className="tigrbl-label">Status</span>
@@ -157,6 +171,14 @@ export function TenantsPage({
                   <span>{tenant.slug} / {tenant.email}</span>
                 </button>
               )
+            },
+            {
+              key: "realm",
+              header: "Realm",
+              render: (tenant) => {
+                const realm = (realms ?? []).find((item) => item.id === tenant.realm_id);
+                return <span>{realm?.slug ?? tenant.realm_id ?? "default"}</span>;
+              }
             },
             {
               key: "status",

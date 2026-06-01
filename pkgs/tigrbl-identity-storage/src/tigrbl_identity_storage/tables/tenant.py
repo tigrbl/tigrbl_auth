@@ -14,6 +14,8 @@ from tigrbl_auth.framework import (
     ColumnSpec,
     Mapped,
     String,
+    PgUUID,
+    ForeignKeySpec,
     relationship,
 )
 
@@ -45,7 +47,25 @@ class Tenant(TenantBase, Bootstrappable):
             ),
         )
     )
+    realm_id: Mapped[uuid.UUID | None] = acol(
+        spec=ColumnSpec(
+            storage=S(
+                PgUUID(as_uuid=True),
+                fk=ForeignKeySpec(target="authn.realms.id"),
+                nullable=True,
+                index=True,
+            ),
+            field=F(),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq",),
+                sortable=True,
+            ),
+        )
+    )
 
+    realm = relationship("Realm", back_populates="tenants")
     users = relationship("User", back_populates="tenant", cascade="all, delete-orphan")
     clients = relationship("Client", back_populates="tenant", cascade="all, delete-orphan")
 
@@ -55,6 +75,7 @@ class Tenant(TenantBase, Bootstrappable):
             "email": "tenant@example.com",
             "name": "Public",
             "slug": "public",
+            "realm_id": uuid.UUID("FFFFFFFF-1000-0000-0000-000000000000"),
         }
     ]
 

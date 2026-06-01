@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "draft"
-    note: "Initial contract for canonical storage ownership and permanent compatibility facades."
     at: "2026-05-27T16:58:10Z"
+    note: "Initial contract for canonical storage ownership and permanent compatibility facades."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Canonical identity storage now includes Realm table ownership and Tenant realm_id association."
+    at: "2026-06-01T09:53:02Z"
 references: []
 body: |-
   ## Scope
