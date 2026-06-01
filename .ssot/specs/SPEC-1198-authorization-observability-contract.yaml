@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1198"
+number: 1198
+slug: "authorization-observability-contract"
+title: "Authorization Observability Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authorization observability MUST define required events, retention, provenance, evidence, audit, and incident-response semantics beyond unstructured logs."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:05Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:06Z"
+references: []
+body: |-
+  Authorization observability MUST define required events, retention, provenance, evidence, audit, and incident-response semantics beyond unstructured logs.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

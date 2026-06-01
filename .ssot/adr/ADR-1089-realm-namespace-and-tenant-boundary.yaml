@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for the realm/tenant hierarchy implementation slice."
     at: "2026-06-01T09:47:42Z"
+    note: "Accepted for the realm/tenant hierarchy implementation slice."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Realm isolation is a first-class certification concern, not only a storage and issuer namespace model."
+    at: "2026-06-01T10:41:16Z"
 references: []
 body: |-
   Decision: Realm is the issuer, namespace, signing, discovery, and token authority boundary above Tenant. Tenant remains the customer, organization, delegated administration, and data boundary inside a Realm. Platform administration owns Realm lifecycle and Tenant assignment. Existing tenant-scoped and unprefixed routes remain default-realm compatibility surfaces for this implementation slice.

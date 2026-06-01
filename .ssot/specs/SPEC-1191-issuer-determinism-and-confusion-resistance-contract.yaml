@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1191"
+number: 1191
+slug: "issuer-determinism-and-confusion-resistance-contract"
+title: "Issuer Determinism and Confusion Resistance Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Issuer derivation MUST be explicit and deterministic and MUST fail closed against host-header, proxy, alias, realm-vs-tenant, and discovery mismatch confusion."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:39:55Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:40:56Z"
+references: []
+body: |-
+  Issuer derivation MUST be explicit and deterministic and MUST fail closed against host-header, proxy, alias, realm-vs-tenant, and discovery mismatch confusion.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

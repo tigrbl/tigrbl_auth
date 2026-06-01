@@ -1,0 +1,10 @@
+Command:
+uv run pytest tests/security/test_realm_isolation_certification.py tests/security/test_tenant_isolation_certification.py tests/security/test_issuer_confusion_resistance.py tests/security/test_runtime_capability_truth.py tests/security/test_authorization_mutation_freshness.py tests/security/test_jose_negative_security.py tests/security/test_crypto_boundary_governance.py tests/security/test_resource_server_verifier_certification.py tests/security/test_machine_identity_governance.py tests/security/test_delegation_provenance.py tests/security/test_authorization_observability.py tests/security/test_runtime_qualification.py -q
+
+Result:
+48 passed
+
+Coverage:
+- T0 inventory/import coverage for all 13 near-term strategic security features.
+- T1 positive runtime behavior coverage for all 13 near-term strategic security features.
+- T2 negative, mismatch, collision, stale, malformed, or drift coverage for all 13 near-term strategic security features.

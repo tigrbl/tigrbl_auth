@@ -33,9 +33,13 @@ status_notes:
     note: "My Account API is now a product surface separation instance: authenticated end-user /account/* routes live in my-account-api, outside admin, RPC, client, tenant, and service surfaces."
     status: "draft"
   -
-    status: "draft"
-    note: "Product API surface separation is realm-aware: frontdoors preserve product filtering while resolving Realm before Tenant-scoped behavior."
     at: "2026-06-01T09:52:56Z"
+    note: "Product API surface separation is realm-aware: frontdoors preserve product filtering while resolving Realm before Tenant-scoped behavior."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Product API surface separation now references runtime capability truth and resource-validation/verifier certification boundaries."
+    at: "2026-06-01T10:41:22Z"
 references: []
 body: |-
   ## Scope

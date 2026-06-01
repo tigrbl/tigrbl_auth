@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1090"
+number: 1090
+slug: "strategic-security-certification-concerns"
+title: "Strategic Security Certification Concerns"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: strategic certification concern order is realm isolation, tenant isolation, issuer determinism, runtime capability truth, authorization mutation and freshness, JOSE and cryptographic boundary governance, resource-server verifier certification, machine identity governance, delegation provenance, authorization observability, runtime qualification, constraint-native authorization, authorization budgets, cross-issuer trust, and credential privacy. Realm isolation is distinct from tenant isolation. VC/OIDC4VC, OIDC4VCI, OID4VP, SIOPv2, HAIP, Authz API 1.0, OIDC 1.1, RISC/CAEP/SET/SSE are valid later standards but are non-blocking for current maturity."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as the SSOT ordering for strategic security certification concern planning."
+    at: "2026-06-01T10:39:48Z"
+references: []
+body: |-
+  Decision: strategic certification concern order is realm isolation, tenant isolation, issuer determinism, runtime capability truth, authorization mutation and freshness, JOSE and cryptographic boundary governance, resource-server verifier certification, machine identity governance, delegation provenance, authorization observability, runtime qualification, constraint-native authorization, authorization budgets, cross-issuer trust, and credential privacy. Realm isolation is distinct from tenant isolation. VC/OIDC4VC, OIDC4VCI, OID4VP, SIOPv2, HAIP, Authz API 1.0, OIDC 1.1, RISC/CAEP/SET/SSE are valid later standards but are non-blocking for current maturity.

@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for realm-aware frontdoor API behavior."
     at: "2026-06-01T09:48:17Z"
+    note: "Accepted for realm-aware frontdoor API behavior."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Realm-aware product surfaces must preserve realm isolation and include issuer-confusion negative testing."
+    at: "2026-06-01T10:41:21Z"
 references: []
 body: |-
   Public, resource-validation, platform-admin, tenant-admin, developer, service-admin, and my-account API surfaces MUST preserve product filtering while resolving realm context. Public and validation metadata MUST expose realm discovery and realm JWKS paths. UIX surfaces MAY display realm context, but only platform-admin UIX may mutate realms in this slice.

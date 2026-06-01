@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1195"
+number: 1195
+slug: "resource-server-verifier-certification-contract"
+title: "Resource Server Verifier Certification Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Resource-server verifier certification MUST prove issuer, audience, scope, proof, replay, freshness, introspection, and JWKS behavior."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:00Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:02Z"
+references: []
+body: |-
+  Resource-server verifier certification MUST prove issuer, audience, scope, proof, replay, freshness, introspection, and JWKS behavior.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

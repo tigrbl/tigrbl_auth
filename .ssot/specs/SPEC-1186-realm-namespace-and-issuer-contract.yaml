@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for realm-aware issuer and namespace implementation."
     at: "2026-06-01T09:48:08Z"
+    note: "Accepted for realm-aware issuer and namespace implementation."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Realm namespace and issuer semantics now feed the realm isolation certification contract."
+    at: "2026-06-01T10:41:19Z"
 references: []
 body: |-
   Realms MUST be first-class identity namespace records owned by canonical identity storage. Realm-scoped issuer metadata MUST use /realms/{realm_slug} as the issuer path. Tenants MUST belong to a realm, with existing tenants treated as default-realm compatibility records when no realm_id is present. Product APIs MUST resolve realm context before tenant-scoped behavior.

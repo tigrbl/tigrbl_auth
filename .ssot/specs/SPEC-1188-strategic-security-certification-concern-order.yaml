@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1188"
+number: 1188
+slug: "strategic-security-certification-concern-order"
+title: "Strategic Security Certification Concern Order"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tigrbl_auth."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:39:50Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:40:51Z"
+references: []
+body: |-
+  Defines the ordered strategic security certification ladder, current and later horizons, and non-blocking future standards for tigrbl_auth.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1090"

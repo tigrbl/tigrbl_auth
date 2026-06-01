@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1196"
+number: 1196
+slug: "machine-identity-governance-contract"
+title: "Machine Identity Governance Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Machine identity governance MUST cover service, workload, agent, pipeline, key, credential, rotation, delegation, and revocation lifecycle requirements."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:02Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:03Z"
+references: []
+body: |-
+  Machine identity governance MUST cover service, workload, agent, pipeline, key, credential, rotation, delegation, and revocation lifecycle requirements.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

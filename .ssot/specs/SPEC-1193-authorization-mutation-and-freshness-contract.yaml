@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1193"
+number: 1193
+slug: "authorization-mutation-and-freshness-contract"
+title: "Authorization Mutation and Freshness Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authorization mutations MUST define token, session, grant, delegation, cache, and verifier invalidation plus freshness visibility requirements."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:39:58Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:40:59Z"
+references: []
+body: |-
+  Authorization mutations MUST define token, session, grant, delegation, cache, and verifier invalidation plus freshness visibility requirements.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

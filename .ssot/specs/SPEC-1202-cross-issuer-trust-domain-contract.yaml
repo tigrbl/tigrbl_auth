@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1202"
+number: 1202
+slug: "cross-issuer-trust-domain-contract"
+title: "Cross-Issuer Trust Domain Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Cross-issuer trust domains are later roadmap work that MUST follow hardened realm and tenant issuer semantics."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:11Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:11Z"
+references: []
+body: |-
+  Cross-issuer trust domains are later roadmap work that MUST follow hardened realm and tenant issuer semantics.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"

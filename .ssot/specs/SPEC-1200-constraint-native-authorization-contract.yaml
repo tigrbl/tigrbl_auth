@@ -1,0 +1,28 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1200"
+number: 1200
+slug: "constraint-native-authorization-contract"
+title: "Constraint-Native Authorization Contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Constraint-native authorization is a later roadmap concern for temporal, geography, resource, environment, and policy constraints mapped to existing policy primitives."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    at: "2026-06-01T10:40:08Z"
+    note: "Accepted for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Linked to strategic security certification concerns ADR."
+    at: "2026-06-01T10:41:09Z"
+references: []
+body: |-
+  Constraint-native authorization is a later roadmap concern for temporal, geography, resource, environment, and policy constraints mapped to existing policy primitives.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1090"
