@@ -16,7 +16,7 @@ swarmauri_crypto_jwe==0.3.0.dev5
 swarmauri_crypto_paramiko==0.4.0.dev5
 swarmauri_keyprovider_file==0.2.0
 swarmauri_keyprovider_local==0.2.0
-python-multipart==0.0.22
+python-multipart==0.0.27
 sqlalchemy==2.0.49
 pydantic==2.12.5
 pydantic-settings==2.13.1
