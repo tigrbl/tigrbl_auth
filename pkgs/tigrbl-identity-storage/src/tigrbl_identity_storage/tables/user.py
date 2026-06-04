@@ -135,11 +135,5 @@ class User(UserBase, Bootstrappable):
         }
     ]
 
-    @classmethod
-    def _after_create_insert_default_rows(cls, target, connection, **_) -> None:
-        # User rows depend on tenant defaults. Apply them explicitly after
-        # migrations via ensure_bootstrapped.
-        return None
-
 
 __all__ = ["DEFAULT_BOOTSTRAP_SUPERUSER_ID", "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD", "User"]
