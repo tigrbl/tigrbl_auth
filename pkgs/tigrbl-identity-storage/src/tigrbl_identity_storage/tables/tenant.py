@@ -75,9 +75,14 @@ class Tenant(TenantBase, Bootstrappable):
             "email": "tenant@example.com",
             "name": "Public",
             "slug": "public",
-            "realm_id": uuid.UUID("FFFFFFFF-1000-0000-0000-000000000000"),
         }
     ]
+
+    @classmethod
+    def _after_create_insert_default_rows(cls, target, connection, **_) -> None:
+        # Tenant rows depend on the realm table being fully materialized. Apply
+        # them explicitly after migrations via ensure_bootstrapped.
+        return None
 
 
 __all__ = ["Tenant"]
