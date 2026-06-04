@@ -19,6 +19,7 @@ from tigrbl_auth.standards.oauth2.jwt_client_auth import (
 from tigrbl_auth.standards.oauth2.mtls import SUPPORTED_MTLS_AUTH_METHODS
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
 from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
+from tigrbl_auth.security.runtime_metadata import assert_runtime_metadata_truth
 
 
 def _as_deployment(
@@ -96,6 +97,12 @@ def build_openid_config(
             "introspection_endpoint": f"{issuer}/introspect",
             "registration_endpoint": f"{issuer}/register",
         }
+    config["tigrbl_auth_capabilities"] = sorted(
+        capability
+        for capability in deployment.active_capabilities
+        if deployment.capability_enabled(capability)
+    )
+    assert_runtime_metadata_truth(deployment, metadata=config)
     return config
 
 

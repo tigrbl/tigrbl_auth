@@ -1,11 +1,15 @@
 import pytest
+from types import SimpleNamespace
 
+from tigrbl_auth.config.deployment import DEFAULT_VALUES
 from tigrbl_auth.security.certification import (
     CertificationError,
     TenantState,
     assert_tenant_isolation,
     deterministic_issuer,
 )
+from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.services.tenant_discovery import build_tenant_openid_config
 
 
 def _tenant(realm_id: str, tenant_id: str, slug: str) -> TenantState:
@@ -53,3 +57,25 @@ def test_tenant_isolation_t2_rejects_cross_tenant_client_collision() -> None:
 
     with pytest.raises(CertificationError, match="client"):
         assert_tenant_isolation((tenant_a, compromised))
+
+
+def test_tenant_isolation_t2_integrates_with_same_and_cross_realm_metadata() -> None:
+    values = dict(DEFAULT_VALUES)
+    values.update(
+        issuer="https://auth.example.test",
+        protected_resource_identifier="https://auth.example.test/resource",
+    )
+    deployment = resolve_deployment(
+        SimpleNamespace(**values),
+        profile="production",
+        product_surface="resource-validation-api",
+    )
+
+    tenant_a = build_tenant_openid_config(deployment, "tenant-a")
+    tenant_b = build_tenant_openid_config(deployment, "tenant-b")
+
+    assert tenant_a["issuer"] == "https://auth.example.test/tenants/tenant-a"
+    assert tenant_b["issuer"] == "https://auth.example.test/tenants/tenant-b"
+    assert tenant_a["jwks_uri"] != tenant_b["jwks_uri"]
+    assert tenant_a["tigrbl_auth_signing_scope"] == "tenant:tenant-a"
+    assert tenant_b["tigrbl_auth_signing_scope"] == "tenant:tenant-b"

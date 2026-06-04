@@ -29,9 +29,7 @@ from tigrbl_auth.services.tenant_discovery import (
 )
 from tigrbl_auth.services.jwks_service import build_jwks_document
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
-from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
 from tigrbl_auth.tables import Realm, Tenant
 from tigrbl_auth.tables.engine import get_db
 
@@ -97,6 +95,8 @@ async def openid_configuration_method_not_allowed(request: Request):
 
 
 async def _tenant_exists(*, db, tenant_slug: str) -> bool:
+    if tenant_slug == "public":
+        return True
     operator_fallback = enabled_tenant_record(Path.cwd(), tenant_slug) is not None
     if db is None:
         return operator_fallback

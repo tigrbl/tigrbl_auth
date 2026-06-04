@@ -53,6 +53,7 @@ class ResourceRequirement:
     scopes: tuple[str, ...] = ()
     require_dpop: bool = False
     require_mtls: bool = False
+    max_authz_staleness_seconds: int | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "scopes", _normalize(self.scopes))
@@ -197,6 +198,10 @@ class ResourceServerVerifier:
             raise TokenValidationError("audience mismatch")
         if claims.exp <= self.now():
             raise TokenValidationError("token expired")
+        if requirement.max_authz_staleness_seconds is not None:
+            authz_iat = int(getattr(claims, "iat", 0))
+            if self.now() - authz_iat > requirement.max_authz_staleness_seconds:
+                raise TokenValidationError("authorization snapshot stale")
         missing = set(requirement.scopes) - set(claims.scope)
         if missing:
             raise TokenValidationError(f"missing required scopes: {', '.join(sorted(missing))}")

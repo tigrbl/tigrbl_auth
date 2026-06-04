@@ -20,6 +20,10 @@ from .verifier import (
     bearer_token_from_authorization,
     verify_framework_request,
 )
+from .metadata import (
+    VerifierContractProfile,
+    verifier_contract_from_metadata,
+)
 
 __all__ = [
     "AccessTokenClaims",
@@ -36,6 +40,8 @@ __all__ = [
     "TokenValidationError",
     "VerificationResult",
     "VerificationStatus",
+    "VerifierContractProfile",
     "bearer_token_from_authorization",
+    "verifier_contract_from_metadata",
     "verify_framework_request",
 ]

@@ -1,9 +1,14 @@
 import pytest
 
+from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.security.certification import (
     CapabilityRecord,
     CertificationError,
     runtime_capability_truth,
+)
+from tigrbl_auth.security.runtime_metadata import (
+    build_capability_attestation,
+    runtime_truth_manifest,
 )
 
 
@@ -31,3 +36,41 @@ def test_runtime_capability_truth_t2_rejects_disabled_or_unknown_advertising() -
 
     with pytest.raises(CertificationError, match="unknown"):
         runtime_capability_truth(configured, advertised={"token"})
+
+
+def test_runtime_derived_metadata_t1_projects_enabled_resource_validation_surface() -> None:
+    deployment = resolve_deployment(
+        profile="production",
+        product_surface="resource-validation-api",
+    )
+
+    manifest = runtime_truth_manifest(deployment)
+
+    assert manifest["product_surface"] == "resource-validation-api"
+    assert "introspection" in manifest["capabilities"]
+    assert "jwks" in manifest["capabilities"]
+    assert "token" not in manifest["capabilities"]
+    assert "/introspect" in {row["path"] for row in manifest["routes"]}
+    assert all(row["evidence_id"] for row in manifest["capabilities"].values())
+
+
+def test_capability_attestation_t2_is_deterministic_and_evidence_backed() -> None:
+    deployment = resolve_deployment(
+        profile="production",
+        product_surface="resource-validation-api",
+    )
+
+    first = build_capability_attestation(
+        deployment,
+        generated_at="2026-06-01T00:00:00+00:00",
+        claim_ids=("clm:runtime-capability-truth.t2",),
+    )
+    second = build_capability_attestation(
+        deployment,
+        generated_at="2026-06-01T00:00:00+00:00",
+        claim_ids=("clm:runtime-capability-truth.t2",),
+    )
+
+    assert first.artifact_sha256 == second.artifact_sha256
+    assert first.evidence_ids
+    assert all(item.startswith("evd:runtime-capability:") for item in first.evidence_ids)

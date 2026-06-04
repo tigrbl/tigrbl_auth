@@ -10,6 +10,9 @@ from tigrbl_auth.runtime import LazyASGIApplication
 from tigrbl_auth_api_resource_validation.openapi import (
     patch_resource_validation_openapi,
 )
+from tigrbl_auth.standards.oauth2.resource_validation_metadata import (
+    include_resource_validation_metadata,
+)
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
@@ -46,9 +49,11 @@ def _default_settings() -> object:
 def build_app(settings_obj: object | None = None) -> "TigrblApp":
     if settings_obj is None:
         settings_obj = _default_settings()
-    return patch_resource_validation_openapi(
+    app = patch_resource_validation_openapi(
         build_product_app(PRODUCT_SURFACE, settings_obj)
     )
+    include_resource_validation_metadata(app)
+    return app
 
 
 app = LazyASGIApplication(build_app)

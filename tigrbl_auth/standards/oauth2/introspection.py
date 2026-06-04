@@ -39,12 +39,6 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
         presented_certificate_thumbprint,
     )
     from tigrbl_auth.tables.engine import get_db
-    from tigrbl_auth.services.persistence import (
-        introspect_token as _introspect_token,
-        record_token as _record_token,
-        reset_token_state as _reset_token_state,
-        unregister_token as _unregister_token,
-    )
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     IntrospectOut = dict  # type: ignore[assignment]
     AsyncSession = Any  # type: ignore[assignment]
@@ -292,7 +286,31 @@ def introspect_token(token: str) -> Dict[str, Any]:
         raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
     payload = _introspect_token(token)
     if payload.get("active") is False and token in _FALLBACK_TOKENS:
-        return {"active": True, **_FALLBACK_TOKENS[token]}
+        payload = {"active": True, **_FALLBACK_TOKENS[token]}
+    if payload.get("active") is True:
+        token_version = payload.get("authz_version")
+        current_version = payload.get("current_authz_version")
+        if (
+            token_version is not None
+            and current_version is not None
+            and int(token_version) < int(current_version)
+        ):
+            return {
+                **payload,
+                "active": False,
+                "inactive_reason": "authorization_snapshot_stale",
+            }
+        max_staleness = payload.get("max_authz_staleness_seconds")
+        authz_iat = payload.get("authz_iat") or payload.get("iat")
+        if max_staleness is not None and authz_iat is not None:
+            import time
+
+            if int(time.time()) - int(authz_iat) > int(max_staleness):
+                return {
+                    **payload,
+                    "active": False,
+                    "inactive_reason": "authorization_freshness_window_exceeded",
+                }
     return payload
 
 

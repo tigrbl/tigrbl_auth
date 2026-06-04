@@ -109,6 +109,8 @@ def test_resource_validation_openapi_documents_introspection_only(
     assert "/.well-known/openid-configuration" in paths
     assert "/.well-known/oauth-protected-resource" in paths
     assert "/.well-known/jwks.json" in paths
+    assert "/metadata/capabilities" in paths
+    assert "/metadata/verifier-contract" in paths
 
     for route in RESOURCE_VALIDATION_API_CONTRACT.forbidden_exact_routes:
         assert route not in paths
@@ -145,6 +147,8 @@ async def test_resource_validation_metadata_endpoints_project_configured_behavio
         tenant_jwks = await client.get("/tenants/public/.well-known/jwks.json")
         resource_metadata = await client.get("/.well-known/oauth-protected-resource")
         issuer_metadata = await client.get("/.well-known/openid-configuration")
+        capabilities = await client.get("/metadata/capabilities")
+        verifier_contract = await client.get("/metadata/verifier-contract")
         missing_token = await client.post("/introspect", data={})
 
     assert jwks.status_code == 200
@@ -171,6 +175,23 @@ async def test_resource_validation_metadata_endpoints_project_configured_behavio
     assert issuer_payload["introspection_endpoint"] == (
         "http://localhost:8014/introspect"
     )
+    assert "tigrbl_auth_capabilities" in issuer_payload
+    assert "introspection" in issuer_payload["tigrbl_auth_capabilities"]
+    assert "token" not in issuer_payload["tigrbl_auth_capabilities"]
+
+    assert capabilities.status_code == 200
+    capabilities_payload = capabilities.json()
+    assert capabilities_payload["product_surface"] == "resource-validation-api"
+    assert capabilities_payload["artifact_sha256"]
+    assert "introspection" in capabilities_payload["capabilities"]
+    assert "evd:runtime-capability:introspection" in capabilities_payload["evidence_ids"]
+
+    assert verifier_contract.status_code == 200
+    verifier_payload = verifier_contract.json()
+    assert verifier_payload["issuer"] == "http://localhost:8014"
+    assert verifier_payload["jwks_uri"] == "http://localhost:8014/.well-known/jwks.json"
+    assert verifier_payload["introspection_endpoint"] == "http://localhost:8014/introspect"
+    assert verifier_payload["fail_closed"] is True
 
     assert missing_token.status_code == 400
     assert "token parameter required" in missing_token.text

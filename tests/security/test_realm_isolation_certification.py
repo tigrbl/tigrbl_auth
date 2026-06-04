@@ -1,10 +1,17 @@
 import pytest
+from types import SimpleNamespace
 
+from tigrbl_auth.config.deployment import DEFAULT_VALUES
 from tigrbl_auth.security.certification import (
     CertificationError,
     RealmState,
     assert_realm_isolation,
     deterministic_issuer,
+)
+from tigrbl_auth.config.deployment import resolve_deployment
+from tigrbl_auth.services.tenant_discovery import (
+    build_realm_openid_config,
+    build_tenant_openid_config,
 )
 
 
@@ -45,3 +52,27 @@ def test_realm_isolation_t2_rejects_cross_realm_tenant_leakage() -> None:
 
     with pytest.raises(CertificationError, match="tenant"):
         assert_realm_isolation((realm_a, compromised))
+
+
+def test_realm_isolation_t2_integrates_with_realm_and_tenant_metadata() -> None:
+    values = dict(DEFAULT_VALUES)
+    values.update(
+        issuer="https://auth.example.test",
+        protected_resource_identifier="https://auth.example.test/resource",
+    )
+    deployment = resolve_deployment(
+        SimpleNamespace(**values),
+        profile="production",
+        product_surface="resource-validation-api",
+    )
+
+    realm_a = build_realm_openid_config(deployment, "realm-a")
+    realm_b = build_realm_openid_config(deployment, "realm-b")
+    tenant_a = build_tenant_openid_config(deployment, "tenant-a")
+    tenant_b = build_tenant_openid_config(deployment, "tenant-b")
+
+    assert realm_a["issuer"] != realm_b["issuer"]
+    assert realm_a["jwks_uri"] != realm_b["jwks_uri"]
+    assert tenant_a["issuer"] != tenant_b["issuer"]
+    assert tenant_a["jwks_uri"] != tenant_b["jwks_uri"]
+    assert tenant_a["issuer"] not in {realm_a["issuer"], realm_b["issuer"]}
