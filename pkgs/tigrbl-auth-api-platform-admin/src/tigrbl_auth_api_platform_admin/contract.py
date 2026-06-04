@@ -28,7 +28,7 @@ PLATFORM_ADMIN_API_CONTRACT = PlatformAdminApiContract(
         "AuditEvent",
         "KeyRotationEvent",
     ),
-    admin_rest_groups=("admin_auth", "admin_realms"),
+    admin_rest_groups=("admin_auth", "admin_realms", "admin_identities"),
     forbidden_route_prefixes=(
         "/client",
         "/clientregistration",

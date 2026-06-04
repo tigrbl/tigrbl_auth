@@ -120,6 +120,8 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
     assert "/admin/realm/{realm_id}/tenant" in paths
     assert "/admin/identity" in paths
     assert "/admin/identity/{item_id}" in paths
+    assert "/admin/identities" in paths
+    assert "/admin/identities/{user_id}" in paths
     assert "/authsession" not in paths
     assert "/authsession/{item_id}" not in paths
     assert "/auditevent" in paths
@@ -136,7 +138,6 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
     assert "AdminRealmOut" in schemas
     assert "UserCreateRequest" in schemas
     assert "UserUpdateRequest" in schemas
-    assert "AdminIdentityProvisionIn" not in schemas
     assert paths["/admin/tenant"]["post"]["responses"]["200"]["content"][
         "application/json"
     ]["schema"]["$ref"] == "#/components/schemas/AdminTenantOut"
@@ -145,6 +146,18 @@ async def test_platform_admin_openapi_is_rest_control_plane_only(
             "application/json"
         ]["schema"]["$ref"]
         == "#/components/schemas/UserCreateRequest"
+    )
+    assert (
+        paths["/admin/identities"]["get"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]["items"]["$ref"]
+        == "#/components/schemas/AdminIdentityOut"
+    )
+    assert (
+        paths["/admin/identities"]["post"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]["$ref"]
+        == "#/components/schemas/AdminIdentityOut"
     )
 
     assert openrpc_response.status_code == 404

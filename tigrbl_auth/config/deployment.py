@@ -196,7 +196,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "AuditEvent",
             "KeyRotationEvent",
         ),
-        "admin_rest_groups": ("admin_auth", "admin_realms"),
+        "admin_rest_groups": ("admin_auth", "admin_realms", "admin_identities"),
         "rpc_method_prefixes": (
             "audit.",
             "discovery.",

@@ -191,6 +191,7 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
         platform_admin_tenants = await client.get("/admin/tenant")
         platform_user = await client.get("/user")
         platform_identity = await client.get("/admin/identity")
+        platform_identities = await client.get("/admin/identities")
         platform_authsession = await client.get(
             "/authsession", headers={"X-API-Key": "test-admin-key"}
         )
@@ -211,6 +212,7 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
     assert platform_user.status_code == 404
     assert platform_admin_tenants.status_code == 401
     assert platform_identity.status_code == 401
+    assert platform_identities.status_code == 401
     assert platform_authsession.status_code == 404
     assert platform_rpc.status_code == 404
     assert platform_openrpc.status_code == 404
