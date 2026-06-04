@@ -27,6 +27,7 @@ from __future__ import annotations
 
 from tigrbl_auth.framework import TigrblRouter
 from tigrbl_auth.tables import (
+    Realm,
     Tenant,
     User,
     Client,
@@ -47,6 +48,7 @@ surface_api = TigrblRouter(engine=dsn)
 
 surface_api.include_tables(
     [
+        Realm,
         Tenant,
         User,
         Client,

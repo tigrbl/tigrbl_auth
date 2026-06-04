@@ -72,10 +72,10 @@ class Tenant(TenantBase, Bootstrappable):
     DEFAULT_ROWS = [
         {
             "id": uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
+            "realm_id": uuid.UUID("FFFFFFFF-1000-0000-0000-000000000000"),
             "email": "tenant@example.com",
             "name": "Public",
             "slug": "public",
-            "realm_id": uuid.UUID("FFFFFFFF-1000-0000-0000-000000000000"),
         }
     ]
 

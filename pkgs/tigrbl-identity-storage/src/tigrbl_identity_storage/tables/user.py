@@ -7,6 +7,7 @@ import datetime as dt
 
 from tigrbl_auth.framework import (
     UserBase,
+    Bootstrappable,
     LargeBinary,
     Mapped,
     Boolean,
@@ -20,8 +21,13 @@ from tigrbl_auth.framework import (
     ColumnSpec,
 )
 
+from tigrbl_auth.services.key_management import hash_pw
 
-class User(UserBase):
+DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
+DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
+
+
+class User(UserBase, Bootstrappable):
     __table_args__ = ({"extend_existing": True, "schema": "authn"},)
 
     username: Mapped[str] = acol(
@@ -115,5 +121,19 @@ class User(UserBase):
             scopes.append("tigrbl_auth:superuser")
         return tuple(scopes)
 
+    DEFAULT_ROWS = [
+        {
+            "id": DEFAULT_BOOTSTRAP_SUPERUSER_ID,
+            "tenant_id": uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
+            "username": "admin",
+            "email": "admin@example.com",
+            "password_hash": hash_pw(DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD),
+            "is_admin": True,
+            "is_superuser": True,
+            "must_change_password": True,
+            "is_active": True,
+        }
+    ]
 
-__all__ = ["User"]
+
+__all__ = ["DEFAULT_BOOTSTRAP_SUPERUSER_ID", "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD", "User"]
