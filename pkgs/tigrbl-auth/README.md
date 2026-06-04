@@ -37,6 +37,34 @@ app = build_app()
 - Selected RFC helper compatibility
 - Facade entrypoint for the identity suite
 
+## Downstream Usage Guidance
+
+Use this facade when a downstream product needs the complete Tigrbl Auth app or
+legacy `tigrbl_auth` import root. Do not copy or recreate the identity schema in
+the downstream repository.
+
+Best-practice boundaries:
+
+- Import the app/plugin/facade from `tigrbl_auth` and focused capabilities from
+  the split `tigrbl-identity-*` packages.
+- Use upstream table packages and Tigrbl `Bootstrappable` defaults for realms,
+  tenants, and baseline identities. Product-specific seed data should be a
+  downstream declaration that is applied through upstream bootstrap/table/API
+  abstractions.
+- Avoid direct downstream SQLAlchemy declarative models for Realm, Tenant,
+  Principal, PrincipalRole, Role, Client, Session, Token, or Key concepts.
+- Prefer Tigrcorn for Tigrcorn-targeted deployments:
+
+```bash
+uv run tigrbl-auth serve --server tigrcorn --profile production --host 127.0.0.1 --port 8000 --no-require-tls
+```
+
+If the downstream wraps the app, serve the wrapper directly:
+
+```bash
+uv run tigrcorn downstream_package.app:app --host 127.0.0.1 --port 8000
+```
+
 ## Related Packages
 
 - [tigrbl-auth](https://pypi.org/project/tigrbl-auth/)

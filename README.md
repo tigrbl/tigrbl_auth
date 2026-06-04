@@ -61,6 +61,34 @@ This checkpoint remains intentionally aligned to Tigrbl guidance:
 - use Tigrbl ops and surfaces rather than ad-hoc framework routes,
 - avoid direct FastAPI or Starlette imports and dependencies in verified release scopes.
 
+## Downstream implementation best practices
+
+Downstream products should treat `tigrbl_auth` as the owner of the identity
+schema and product surfaces. A downstream authn/authz platform should compose
+the app, plugin, split identity packages, and API/UIX front doors rather than
+creating parallel tables for realms, tenants, principals, roles, sessions,
+clients, tokens, or keys.
+
+Use these boundaries:
+
+- Schema and default rows belong in upstream Tigrbl Auth table packages. Tables
+  such as `Realm` and `Tenant` use Tigrbl's `Bootstrappable` contract with
+  `DEFAULT_ROWS`; the default superuser is created by the upstream admin
+  bootstrap service.
+- Downstream repositories may declare product-specific seed intent, but they
+  should materialize it through upstream Tigrbl table/bootstrap abstractions or
+  API/front-door operations. They should not introduce duplicate SQLAlchemy
+  declarative bases or shadow identity tables.
+- Runtime serving should select an explicit runner profile. For Tigrcorn-first
+  deployments, install the `tigrcorn` extra and launch with
+  `tigrbl-auth serve --server tigrcorn` or the `tigrcorn` CLI against the
+  downstream ASGI app.
+- Keep provenance order: backend capability first, API front door second, UIX
+  third. The platform-admin path is `tigrbl-identity-admin` ->
+  `tigrbl-auth-api-platform-admin` -> `@tigrbl-auth/platform-admin-uix`; apply
+  the same pattern to tenant-admin, developer, service-admin, public,
+  my-account, and resource-validation surfaces.
+
 ## Installation profiles
 
 ### Base install
