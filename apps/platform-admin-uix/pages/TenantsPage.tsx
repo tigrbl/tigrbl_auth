@@ -14,6 +14,7 @@ import {
 } from "@tigrbl-auth/uix-core";
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
+import { ShortId } from "../components/ShortId";
 import type { CreateTenantInput, Realm, Tenant, UpdateTenantInput } from "../types";
 
 const emptyCreateForm: CreateTenantInput = { slug: "", name: "", email: "" };
@@ -137,7 +138,7 @@ export function TenantsPage({
             </div>
             <div>
               <span className="tigrbl-label">ID</span>
-              <code>{selectedTenant.id}</code>
+              <ShortId id={selectedTenant.id} />
             </div>
           </div>
         ) : (
@@ -192,7 +193,7 @@ export function TenantsPage({
               header: "Context",
               render: (tenant) => (selectedTenantId === tenant.id ? <StatusBadge tone="success">Selected</StatusBadge> : <StatusBadge>Available</StatusBadge>)
             },
-            { key: "id", header: "ID", render: (tenant) => <code>{tenant.id}</code> }
+            { key: "id", header: "ID", render: (tenant) => <ShortId id={tenant.id} /> }
           ]}
           actions={[
             { label: "Select", onClick: (tenant) => onSelect(tenant.id), tone: "primary" },

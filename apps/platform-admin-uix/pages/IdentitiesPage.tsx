@@ -12,8 +12,9 @@ import {
   ResourceToolbar,
   StatusBadge
 } from "@tigrbl-auth/uix-core";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
+import { ShortId } from "../components/ShortId";
 import type { CreateIdentityInput, Identity, Tenant, UpdateIdentityInput } from "../types";
 
 const emptyIdentityForm = {
@@ -35,16 +36,20 @@ export function IdentitiesPage({
   identities,
   onCreate,
   onDelete,
+  onSelect,
   onSelectTenant,
   onUpdate,
+  selectedIdentityId,
   selectedTenantId,
   tenants
 }: {
   identities: Identity[];
   onCreate: (payload: CreateIdentityInput) => Promise<void>;
   onDelete: (identityId: string) => Promise<void>;
+  onSelect: (identityId: string) => void;
   onSelectTenant: (tenantId: string) => void;
   onUpdate: (identityId: string, payload: UpdateIdentityInput) => Promise<void>;
+  selectedIdentityId?: string;
   selectedTenantId: string;
   tenants: Tenant[];
 }) {
@@ -55,6 +60,10 @@ export function IdentitiesPage({
   const [editForm, setEditForm] = useState<UpdateIdentityInput>({});
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const selectedIdentity = useMemo(
+    () => identities.find((identity) => identity.id === selectedIdentityId) ?? null,
+    [identities, selectedIdentityId]
+  );
 
   function beginEdit(identity: Identity) {
     setEditIdentity(identity);
@@ -134,6 +143,32 @@ export function IdentitiesPage({
         </select>
       </DetailPanel>
 
+      <DetailPanel title="Selected identity">
+        {selectedIdentity ? (
+          <div className="tigrbl-summary-grid">
+            <div>
+              <span className="tigrbl-label">Identity</span>
+              <strong>{selectedIdentity.username}</strong>
+              <p>{selectedIdentity.email}</p>
+            </div>
+            <div>
+              <span className="tigrbl-label">Role</span>
+              <StatusBadge tone={selectedIdentity.is_superuser || selectedIdentity.is_admin ? "success" : "info"}>{identityRole(selectedIdentity)}</StatusBadge>
+            </div>
+            <div>
+              <span className="tigrbl-label">Status</span>
+              <StatusBadge tone={selectedIdentity.is_active ? "success" : "warning"}>{selectedIdentity.is_active ? "Active" : "Suspended"}</StatusBadge>
+            </div>
+            <div>
+              <span className="tigrbl-label">ID</span>
+              <ShortId id={selectedIdentity.id} />
+            </div>
+          </div>
+        ) : (
+          <p>No identity context is selected.</p>
+        )}
+      </DetailPanel>
+
       <DetailPanel title="Visible identities">
         <ResourceToolbar
           title="Tenant identities"
@@ -151,12 +186,23 @@ export function IdentitiesPage({
           emptyTitle="No identities"
           emptyBody="No identities are visible for the selected tenant."
           columns={[
-            { key: "username", header: "Identity", render: (identity) => <><strong>{identity.username}</strong><div>{identity.email}</div></> },
+            {
+              key: "username",
+              header: "Identity",
+              render: (identity) => (
+                <button className="tigrbl-link-button" type="button" onClick={() => onSelect(identity.id)}>
+                  <strong>{identity.username}</strong>
+                  <span>{identity.email}</span>
+                </button>
+              )
+            },
             { key: "role", header: "Role", render: (identity) => identityRole(identity) },
             { key: "status", header: "Status", render: (identity) => <StatusBadge tone={identity.is_active ? "success" : "warning"}>{identity.is_active ? "Active" : "Suspended"}</StatusBadge> },
-            { key: "password", header: "Password", render: (identity) => identity.must_change_password ? <StatusBadge tone="warning">Must change</StatusBadge> : <StatusBadge tone="success">Current</StatusBadge> }
+            { key: "password", header: "Password", render: (identity) => identity.must_change_password ? <StatusBadge tone="warning">Must change</StatusBadge> : <StatusBadge tone="success">Current</StatusBadge> },
+            { key: "id", header: "ID", render: (identity) => <ShortId id={identity.id} /> }
           ]}
           actions={[
+            { label: "Select", onClick: (identity) => onSelect(identity.id), tone: "primary" },
             { label: "Edit", onClick: beginEdit, tone: "primary" },
             {
               label: "Activate",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AppShell, AuthProvider, AuthShell, ErrorState, RequireAuth, Toast, describeSession } from "@tigrbl-auth/uix-core";
 import "@tigrbl-auth/uix-core/styles.css";
 import { usePlatformAdmin } from "./hooks/usePlatformAdmin";
@@ -10,7 +10,6 @@ import { KeyRotationPage } from "./pages/KeyRotationPage";
 import { LoginPage } from "./pages/LoginPage";
 import { RealmsPage } from "./pages/RealmsPage";
 import { SettingsPage } from "./pages/SettingsPage";
-import { TenantDetailPage } from "./pages/TenantDetailPage";
 import { TenantsPage } from "./pages/TenantsPage";
 import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
 
@@ -18,7 +17,6 @@ const navigation = [
   { href: "#/dashboard", label: "Dashboard" },
   { href: "#/realms", label: "Realms" },
   { href: "#/tenants", label: "Tenants" },
-  { href: "#/tenant-detail", label: "Tenant Detail" },
   { href: "#/identities", label: "Identities" },
   { href: "#/authority", label: "Authority" },
   { href: "#/keys", label: "Key Rotation" },
@@ -26,9 +24,19 @@ const navigation = [
   { href: "#/settings", label: "Settings" }
 ];
 
+function routeSegments(hash: string) {
+  return hash.replace(/^#/, "").split("/").filter(Boolean).map((segment) => decodeURIComponent(segment));
+}
+
+function navigateToResource(resource: "realms" | "tenants" | "identities", id: string) {
+  window.location.hash = `#/${resource}/${encodeURIComponent(id)}`;
+}
+
 export default function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash || "#/dashboard");
   const platform = usePlatformAdmin();
+  const segments = useMemo(() => routeSegments(currentHash), [currentHash]);
+  const [resource, resourceId] = segments;
 
   useEffect(() => {
     const onHashChange = () => setCurrentHash(window.location.hash || "#/dashboard");
@@ -38,6 +46,24 @@ export default function App() {
     }
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  useEffect(() => {
+    if (currentHash.startsWith("#/tenant-detail")) {
+      window.location.hash = platform.selectedTenantId ? `#/tenants/${encodeURIComponent(platform.selectedTenantId)}` : "#/tenants";
+    }
+  }, [currentHash, platform.selectedTenantId]);
+
+  useEffect(() => {
+    if (resource === "realms" && resourceId && platform.realms.some((realm) => realm.id === resourceId)) {
+      platform.setSelectedRealmId(resourceId);
+    }
+  }, [platform.realms, platform.setSelectedRealmId, resource, resourceId]);
+
+  useEffect(() => {
+    if (resource === "tenants" && resourceId && platform.tenants.some((tenant) => tenant.id === resourceId)) {
+      platform.setSelectedTenantId(resourceId);
+    }
+  }, [platform.setSelectedTenantId, platform.tenants, resource, resourceId]);
 
   const authValue = {
     loading: platform.loading,
@@ -56,6 +82,7 @@ export default function App() {
   };
 
   const selectedTenant = platform.tenants.find((tenant) => tenant.id === platform.selectedTenantId) ?? null;
+  const selectedIdentityId = resource === "identities" ? resourceId : undefined;
 
   return (
     <AuthProvider value={authValue}>
@@ -89,7 +116,10 @@ export default function App() {
                 onDelete={platform.deleteTenant}
                 onDisable={platform.disableTenant}
                 onEnable={platform.enableTenant}
-                onSelect={platform.setSelectedTenantId}
+                onSelect={(tenantId) => {
+                  platform.setSelectedTenantId(tenantId);
+                  navigateToResource("tenants", tenantId);
+                }}
                 onUpdate={platform.updateTenant}
               />
             )}
@@ -99,17 +129,11 @@ export default function App() {
                 selectedRealmId={platform.selectedRealmId}
                 onCreate={platform.createRealm}
                 onDelete={platform.deleteRealm}
-                onSelect={platform.setSelectedRealmId}
+                onSelect={(realmId) => {
+                  platform.setSelectedRealmId(realmId);
+                  navigateToResource("realms", realmId);
+                }}
                 onUpdate={platform.updateRealm}
-              />
-            )}
-            {currentHash.startsWith("#/tenant-detail") && (
-              <TenantDetailPage
-                identities={platform.identities}
-                onSelectTenant={platform.setSelectedTenantId}
-                selectedTenant={selectedTenant}
-                selectedTenantId={platform.selectedTenantId}
-                tenants={platform.tenants}
               />
             )}
             {currentHash.startsWith("#/identities") && (
@@ -117,8 +141,10 @@ export default function App() {
                 identities={platform.identities}
                 onCreate={platform.createIdentity}
                 onDelete={platform.deleteIdentity}
+                onSelect={(identityId) => navigateToResource("identities", identityId)}
                 onSelectTenant={platform.setSelectedTenantId}
                 onUpdate={platform.updateIdentity}
+                selectedIdentityId={selectedIdentityId}
                 selectedTenantId={platform.selectedTenantId}
                 tenants={platform.tenants}
               />

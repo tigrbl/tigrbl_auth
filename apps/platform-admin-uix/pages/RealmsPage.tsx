@@ -14,6 +14,7 @@ import {
 } from "@tigrbl-auth/uix-core";
 import { useMemo, useState } from "react";
 import type { FormEvent } from "react";
+import { ShortId } from "../components/ShortId";
 import type { CreateRealmInput, Realm, UpdateRealmInput } from "../types";
 
 const emptyCreateForm: CreateRealmInput = { slug: "", name: "", issuer_path: "", description: "" };
@@ -116,7 +117,7 @@ export function RealmsPage({
             </div>
             <div>
               <span className="tigrbl-label">ID</span>
-              <code>{selectedRealm.id}</code>
+              <ShortId id={selectedRealm.id} />
             </div>
           </div>
         ) : (
@@ -156,7 +157,7 @@ export function RealmsPage({
               header: "Context",
               render: (realm) => (selectedRealmId === realm.id ? <StatusBadge tone="success">Selected</StatusBadge> : <StatusBadge>Available</StatusBadge>)
             },
-            { key: "id", header: "ID", render: (realm) => <code>{realm.id}</code> }
+            { key: "id", header: "ID", render: (realm) => <ShortId id={realm.id} /> }
           ]}
           actions={[
             { label: "Select", onClick: (realm) => onSelect(realm.id), tone: "primary" },
