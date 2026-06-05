@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { IdentitiesPage } from "./IdentitiesPage";
 import { RealmsPage } from "./RealmsPage";
+import { IdentityMemberPage, RealmMemberPage, TenantMemberPage } from "./ResourceMemberPages";
 import { TenantsPage } from "./TenantsPage";
 import type { Identity, Realm, Tenant } from "../types";
 
@@ -94,5 +95,49 @@ describe("platform-admin CRUD pages", () => {
     expect(html).toContain("Delete");
     expect(html).toContain("12345678...abcd");
     expect(html).toContain("Copy full ID");
+  });
+
+  it("renders realm member routes without the realms collection", () => {
+    const html = renderToStaticMarkup(
+      <RealmMemberPage realmId="12345678-realm-0000-0000-00000000abcd" realms={realms} />
+    );
+
+    expect(html).toContain("Realm details");
+    expect(html).toContain("12345678...abcd");
+    expect(html).toContain("Copy full ID");
+    expect(html).not.toContain("Platform realms");
+    expect(html).not.toContain("Create realm");
+  });
+
+  it("renders tenant member routes without the tenants collection", () => {
+    const html = renderToStaticMarkup(
+      <TenantMemberPage
+        realms={realms}
+        tenantId="12345678-tenant-0000-0000-00000000abcd"
+        tenants={tenants}
+      />
+    );
+
+    expect(html).toContain("Tenant details");
+    expect(html).toContain("12345678...abcd");
+    expect(html).toContain("Copy full ID");
+    expect(html).not.toContain("Platform tenants");
+    expect(html).not.toContain("Create tenant");
+  });
+
+  it("renders identity member routes without the identities collection", () => {
+    const html = renderToStaticMarkup(
+      <IdentityMemberPage
+        identities={identities}
+        identityId="12345678-identity-0000-0000-00000000abcd"
+        tenants={tenants}
+      />
+    );
+
+    expect(html).toContain("Identity details");
+    expect(html).toContain("12345678...abcd");
+    expect(html).toContain("Copy full ID");
+    expect(html).not.toContain("Tenant identities");
+    expect(html).not.toContain("Create identity");
   });
 });

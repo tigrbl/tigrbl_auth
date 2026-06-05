@@ -9,6 +9,7 @@ import { IdentitiesPage } from "./pages/IdentitiesPage";
 import { KeyRotationPage } from "./pages/KeyRotationPage";
 import { LoginPage } from "./pages/LoginPage";
 import { RealmsPage } from "./pages/RealmsPage";
+import { IdentityMemberPage, RealmMemberPage, TenantMemberPage } from "./pages/ResourceMemberPages";
 import { SettingsPage } from "./pages/SettingsPage";
 import { TenantsPage } from "./pages/TenantsPage";
 import { API_BASE_URL, PRODUCT_API } from "./services/backendSurface";
@@ -30,6 +31,10 @@ function routeSegments(hash: string) {
 
 function navigateToResource(resource: "realms" | "tenants" | "identities", id: string) {
   window.location.hash = `#/${resource}/${encodeURIComponent(id)}`;
+}
+
+function isCollectionRoute(resource: string | undefined, resourceId: string | undefined, expected: string) {
+  return resource === expected && !resourceId;
 }
 
 export default function App() {
@@ -82,7 +87,6 @@ export default function App() {
   };
 
   const selectedTenant = platform.tenants.find((tenant) => tenant.id === platform.selectedTenantId) ?? null;
-  const selectedIdentityId = resource === "identities" ? resourceId : undefined;
 
   return (
     <AuthProvider value={authValue}>
@@ -106,7 +110,7 @@ export default function App() {
         >
           <RequireAuth>
             {platform.error && <div style={{ marginBottom: "16px" }}><Toast message={platform.error} tone="danger" /></div>}
-            {currentHash.startsWith("#/tenants") && (
+            {isCollectionRoute(resource, resourceId, "tenants") && (
               <TenantsPage
                 realms={platform.realms}
                 selectedRealmId={platform.selectedRealmId}
@@ -123,7 +127,10 @@ export default function App() {
                 onUpdate={platform.updateTenant}
               />
             )}
-            {currentHash.startsWith("#/realms") && (
+            {resource === "tenants" && resourceId && (
+              <TenantMemberPage realms={platform.realms} tenantId={resourceId} tenants={platform.tenants} />
+            )}
+            {isCollectionRoute(resource, resourceId, "realms") && (
               <RealmsPage
                 realms={platform.realms}
                 selectedRealmId={platform.selectedRealmId}
@@ -136,7 +143,10 @@ export default function App() {
                 onUpdate={platform.updateRealm}
               />
             )}
-            {currentHash.startsWith("#/identities") && (
+            {resource === "realms" && resourceId && (
+              <RealmMemberPage realmId={resourceId} realms={platform.realms} />
+            )}
+            {isCollectionRoute(resource, resourceId, "identities") && (
               <IdentitiesPage
                 identities={platform.identities}
                 onCreate={platform.createIdentity}
@@ -144,10 +154,12 @@ export default function App() {
                 onSelect={(identityId) => navigateToResource("identities", identityId)}
                 onSelectTenant={platform.setSelectedTenantId}
                 onUpdate={platform.updateIdentity}
-                selectedIdentityId={selectedIdentityId}
                 selectedTenantId={platform.selectedTenantId}
                 tenants={platform.tenants}
               />
+            )}
+            {resource === "identities" && resourceId && (
+              <IdentityMemberPage identities={platform.identities} identityId={resourceId} tenants={platform.tenants} />
             )}
             {currentHash.startsWith("#/authority") && (
               <AuthorityPage identities={platform.identities} selectedTenant={selectedTenant} tenants={platform.tenants} />
