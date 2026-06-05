@@ -144,7 +144,7 @@ export default function App() {
               />
             )}
             {resource === "realms" && resourceId && (
-              <RealmMemberPage realmId={resourceId} realms={platform.realms} />
+              <RealmMemberPage realmId={resourceId} realms={platform.realms} tenants={platform.tenants} />
             )}
             {isCollectionRoute(resource, resourceId, "identities") && (
               <IdentitiesPage

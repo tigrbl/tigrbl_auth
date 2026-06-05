@@ -1,4 +1,4 @@
-import { DetailPanel, PageHeader, StatusBadge } from "@tigrbl-auth/uix-core";
+import { DetailPanel, PageHeader, ResourceTable, StatusBadge } from "@tigrbl-auth/uix-core";
 import { ShortId } from "../components/ShortId";
 import type { Identity, Realm, Tenant } from "../types";
 
@@ -28,9 +28,18 @@ function NotFoundDetail({ collectionHref, id, title }: { collectionHref: string;
   );
 }
 
-export function RealmMemberPage({ realmId, realms }: { realmId: string; realms: Realm[] }) {
+export function RealmMemberPage({
+  realmId,
+  realms,
+  tenants
+}: {
+  realmId: string;
+  realms: Realm[];
+  tenants: Tenant[];
+}) {
   const realm = realms.find((item) => item.id === realmId) ?? null;
   if (!realm) return <NotFoundDetail collectionHref="#/realms" id={realmId} title="Realm detail" />;
+  const realmTenants = tenants.filter((tenant) => tenant.realm_id === realm.id);
 
   return (
     <div className="tigrbl-page-stack">
@@ -57,6 +66,34 @@ export function RealmMemberPage({ realmId, realms }: { realmId: string; realms: 
         </div>
       </DetailPanel>
       {realm.description && <DetailPanel title="Description"><p>{realm.description}</p></DetailPanel>}
+      <DetailPanel title="Tenants in realm">
+        <ResourceTable
+          items={realmTenants}
+          getRowKey={(tenant) => tenant.id}
+          emptyTitle="No tenants"
+          emptyBody="No tenants are currently assigned to this realm."
+          columns={[
+            {
+              key: "name",
+              header: "Tenant",
+              render: (tenant) => (
+                <a className="tigrbl-link-button" href={`#/tenants/${encodeURIComponent(tenant.id)}`}>
+                  <strong>{tenant.name}</strong>
+                  <span>{tenant.slug} / {tenant.email}</span>
+                </a>
+              )
+            },
+            {
+              key: "status",
+              header: "Status",
+              render: (tenant) => (
+                <StatusBadge tone={tenant.is_active === false ? "warning" : "success"}>{tenantStatus(tenant)}</StatusBadge>
+              )
+            },
+            { key: "id", header: "ID", render: (tenant) => <ShortId id={tenant.id} /> }
+          ]}
+        />
+      </DetailPanel>
       <p><a href="#/realms">Back to realms</a></p>
     </div>
   );

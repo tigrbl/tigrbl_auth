@@ -7,7 +7,14 @@ import { TenantsPage } from "./TenantsPage";
 import type { Identity, Realm, Tenant } from "../types";
 
 const tenants: Tenant[] = [
-  { id: "12345678-tenant-0000-0000-00000000abcd", slug: "acme", name: "Acme", email: "ops@acme.test", is_active: true },
+  {
+    id: "12345678-tenant-0000-0000-00000000abcd",
+    realm_id: "12345678-realm-0000-0000-00000000abcd",
+    slug: "acme",
+    name: "Acme",
+    email: "ops@acme.test",
+    is_active: true
+  },
   { id: "tenant-2", slug: "paused", name: "Paused", email: "ops@paused.test", is_active: false }
 ];
 
@@ -99,10 +106,17 @@ describe("platform-admin CRUD pages", () => {
 
   it("renders realm member routes without the realms collection", () => {
     const html = renderToStaticMarkup(
-      <RealmMemberPage realmId="12345678-realm-0000-0000-00000000abcd" realms={realms} />
+      <RealmMemberPage
+        realmId="12345678-realm-0000-0000-00000000abcd"
+        realms={realms}
+        tenants={tenants}
+      />
     );
 
     expect(html).toContain("Realm details");
+    expect(html).toContain("Tenants in realm");
+    expect(html).toContain("Acme");
+    expect(html).toContain("#/tenants/12345678-tenant-0000-0000-00000000abcd");
     expect(html).toContain("12345678...abcd");
     expect(html).toContain("Copy full ID");
     expect(html).not.toContain("Platform realms");
