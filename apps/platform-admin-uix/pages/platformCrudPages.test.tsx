@@ -15,11 +15,19 @@ const tenants: Tenant[] = [
     email: "ops@acme.test",
     is_active: true
   },
-  { id: "tenant-2", slug: "paused", name: "Paused", email: "ops@paused.test", is_active: false }
+  {
+    id: "87654321-tenant-0000-0000-00000000dcba",
+    realm_id: "87654321-realm-0000-0000-00000000dcba",
+    slug: "paused",
+    name: "Paused",
+    email: "ops@paused.test",
+    is_active: false
+  }
 ];
 
 const realms: Realm[] = [
-  { id: "12345678-realm-0000-0000-00000000abcd", slug: "demo", name: "Demo", issuer_path: "/demo" }
+  { id: "12345678-realm-0000-0000-00000000abcd", slug: "demo", name: "Demo", issuer_path: "/demo" },
+  { id: "87654321-realm-0000-0000-00000000dcba", slug: "external", name: "External", issuer_path: "/external" }
 ];
 
 const identities: Identity[] = [
@@ -32,6 +40,17 @@ const identities: Identity[] = [
     is_admin: true,
     is_superuser: false,
     must_change_password: true,
+    roles: ["tenant-admin"]
+  },
+  {
+    id: "87654321-identity-0000-0000-00000000dcba",
+    tenant_id: "87654321-tenant-0000-0000-00000000dcba",
+    username: "mallory",
+    email: "mallory@paused.test",
+    is_active: true,
+    is_admin: true,
+    is_superuser: false,
+    must_change_password: false,
     roles: ["tenant-admin"]
   }
 ];
@@ -128,6 +147,22 @@ describe("platform-admin CRUD pages", () => {
     expect(html).not.toContain("Create realm");
   });
 
+  it("does not leak tenants or administrators from other realms on realm member routes", () => {
+    const html = renderToStaticMarkup(
+      <RealmMemberPage
+        identities={identities}
+        realmId="12345678-realm-0000-0000-00000000abcd"
+        realms={realms}
+        tenants={tenants}
+      />
+    );
+
+    expect(html).toContain("Acme");
+    expect(html).toContain("alice@acme.test");
+    expect(html).not.toContain("Paused");
+    expect(html).not.toContain("mallory@paused.test");
+  });
+
   it("renders tenant member routes without the tenants collection", () => {
     const html = renderToStaticMarkup(
       <TenantMemberPage
@@ -149,6 +184,20 @@ describe("platform-admin CRUD pages", () => {
     expect(html).not.toContain("Create tenant");
   });
 
+  it("does not leak identities from other tenants on tenant member routes", () => {
+    const html = renderToStaticMarkup(
+      <TenantMemberPage
+        identities={identities}
+        realms={realms}
+        tenantId="12345678-tenant-0000-0000-00000000abcd"
+        tenants={tenants}
+      />
+    );
+
+    expect(html).toContain("alice@acme.test");
+    expect(html).not.toContain("mallory@paused.test");
+  });
+
   it("renders identity member routes without the identities collection", () => {
     const html = renderToStaticMarkup(
       <IdentityMemberPage
@@ -168,5 +217,21 @@ describe("platform-admin CRUD pages", () => {
     expect(html).toContain("Copy full ID");
     expect(html).not.toContain("Tenant identities");
     expect(html).not.toContain("Create identity");
+  });
+
+  it("renders not-found recovery for unknown identity member routes", () => {
+    const html = renderToStaticMarkup(
+      <IdentityMemberPage
+        identities={identities}
+        identityId="ffffffff-identity-0000-0000-00000000ffff"
+        realms={realms}
+        tenants={tenants}
+      />
+    );
+
+    expect(html).toContain("Not found");
+    expect(html).toContain("The requested row is not visible to this platform session.");
+    expect(html).toContain("#/identities");
+    expect(html).toContain("ffffffff...ffff");
   });
 });
