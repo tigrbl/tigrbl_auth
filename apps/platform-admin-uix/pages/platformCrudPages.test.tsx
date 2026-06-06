@@ -107,6 +107,7 @@ describe("platform-admin CRUD pages", () => {
   it("renders realm member routes without the realms collection", () => {
     const html = renderToStaticMarkup(
       <RealmMemberPage
+        identities={identities}
         realmId="12345678-realm-0000-0000-00000000abcd"
         realms={realms}
         tenants={tenants}
@@ -115,8 +116,12 @@ describe("platform-admin CRUD pages", () => {
 
     expect(html).toContain("Realm details");
     expect(html).toContain("Tenants in realm");
+    expect(html).toContain("Realm administrators");
+    expect(html).toContain("1 active / 0 suspended");
     expect(html).toContain("Acme");
+    expect(html).toContain("alice@acme.test");
     expect(html).toContain("#/tenants/12345678-tenant-0000-0000-00000000abcd");
+    expect(html).toContain("#/identities/12345678-identity-0000-0000-00000000abcd");
     expect(html).toContain("12345678...abcd");
     expect(html).toContain("Copy full ID");
     expect(html).not.toContain("Platform realms");
@@ -126,6 +131,7 @@ describe("platform-admin CRUD pages", () => {
   it("renders tenant member routes without the tenants collection", () => {
     const html = renderToStaticMarkup(
       <TenantMemberPage
+        identities={identities}
         realms={realms}
         tenantId="12345678-tenant-0000-0000-00000000abcd"
         tenants={tenants}
@@ -133,6 +139,10 @@ describe("platform-admin CRUD pages", () => {
     );
 
     expect(html).toContain("Tenant details");
+    expect(html).toContain("Tenant administrators");
+    expect(html).toContain("Identities in tenant");
+    expect(html).toContain("#/realms/12345678-realm-0000-0000-00000000abcd");
+    expect(html).toContain("#/identities/12345678-identity-0000-0000-00000000abcd");
     expect(html).toContain("12345678...abcd");
     expect(html).toContain("Copy full ID");
     expect(html).not.toContain("Platform tenants");
@@ -144,11 +154,16 @@ describe("platform-admin CRUD pages", () => {
       <IdentityMemberPage
         identities={identities}
         identityId="12345678-identity-0000-0000-00000000abcd"
+        realms={realms}
         tenants={tenants}
       />
     );
 
     expect(html).toContain("Identity details");
+    expect(html).toContain("Assigned roles");
+    expect(html).toContain("#/tenants/12345678-tenant-0000-0000-00000000abcd");
+    expect(html).toContain("#/realms/12345678-realm-0000-0000-00000000abcd");
+    expect(html).toContain("tenant-admin");
     expect(html).toContain("12345678...abcd");
     expect(html).toContain("Copy full ID");
     expect(html).not.toContain("Tenant identities");

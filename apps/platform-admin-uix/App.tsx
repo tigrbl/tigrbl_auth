@@ -128,7 +128,7 @@ export default function App() {
               />
             )}
             {resource === "tenants" && resourceId && (
-              <TenantMemberPage realms={platform.realms} tenantId={resourceId} tenants={platform.tenants} />
+              <TenantMemberPage identities={platform.identities} realms={platform.realms} tenantId={resourceId} tenants={platform.tenants} />
             )}
             {isCollectionRoute(resource, resourceId, "realms") && (
               <RealmsPage
@@ -144,7 +144,7 @@ export default function App() {
               />
             )}
             {resource === "realms" && resourceId && (
-              <RealmMemberPage realmId={resourceId} realms={platform.realms} tenants={platform.tenants} />
+              <RealmMemberPage identities={platform.identities} realmId={resourceId} realms={platform.realms} tenants={platform.tenants} />
             )}
             {isCollectionRoute(resource, resourceId, "identities") && (
               <IdentitiesPage
@@ -159,7 +159,7 @@ export default function App() {
               />
             )}
             {resource === "identities" && resourceId && (
-              <IdentityMemberPage identities={platform.identities} identityId={resourceId} tenants={platform.tenants} />
+              <IdentityMemberPage identities={platform.identities} identityId={resourceId} realms={platform.realms} tenants={platform.tenants} />
             )}
             {currentHash.startsWith("#/authority") && (
               <AuthorityPage identities={platform.identities} selectedTenant={selectedTenant} tenants={platform.tenants} />
