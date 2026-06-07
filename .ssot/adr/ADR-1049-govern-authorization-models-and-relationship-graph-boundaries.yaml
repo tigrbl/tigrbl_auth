@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1049"
 number: 1049
@@ -8,18 +8,22 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Authorization models and graph features require explicit runtime semantics beyond admin helper primitives."
+summary: "`tigrbl_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Extended by adr:1123: relationship graph authorization is one input to the authority derivation graph, closure, and reachability proofs."
+    at: "2026-06-07T04:38:38Z"
 references: []
 body: |-
   ## Decision
-
+  
   `tigrbl_auth` MUST govern RBAC, ABAC, ReBAC, relationship modeling, graph authorization, fine-grained permissions, and dynamic conditions as authorization-model capabilities with explicit runtime and policy semantics.
-
+  
   ## Current Implementation Status
-
+  
   - F13 RBAC: partial.
   - F14 ABAC: partial.
   - F15 ReBAC: absent.
@@ -27,9 +31,9 @@ body: |-
   - F23 Relationship modeling: absent.
   - F24 Fine-grained permissions: partial.
   - F25 Dynamic conditions: partial.
-
+  
   ## Impacted Features
-
+  
   - F13 RBAC.
   - F14 ABAC.
   - F15 ReBAC.
@@ -37,9 +41,9 @@ body: |-
   - F23 Relationship modeling.
   - F24 Fine-grained permissions.
   - F25 Dynamic conditions.
-
+  
   ## Standards / Specs
-
+  
   - ANSI/INCITS 359 RBAC.
   - NIST RBAC model.
   - NIST SP 800-162.
@@ -49,15 +53,15 @@ body: |-
   - SpiceDB/Authzed.
   - OAuth scopes / RFC 6749 where scopes represent permissions.
   - RAR / RFC 9396 where request-bound authorization details are used.
-
+  
   ## Required Future Capability
-
+  
   Future implementation MUST provide durable model storage, schema validation, policy attachment, runtime enforcement, decision traces, operator/API surfaces, tests, and evidence for each supported authorization model.
-
+  
   ## Out of Scope
-
+  
   This ADR does not implement a relationship tuple store, graph traversal, a complete permission enforcement engine, or generalized condition evaluation.
-
+  
   ## Operational Consequences
-
+  
   Admin UIX role and attribute helpers are useful partial surfaces, but they MUST NOT be promoted to complete authorization-model implementation without durable runtime enforcement and proof.

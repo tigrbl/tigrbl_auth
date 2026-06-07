@@ -1,0 +1,24 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1206"
+number: 1206
+slug: "authority-derivation-graph-contract"
+title: "Authority derivation graph contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines the durable authority derivation graph used to explain effective authority. Graph nodes include subjects, tenants, realms, resources, scopes, roles, policies, trust domains, credentials, and delegations. Graph edges include grants, inherited authorities, constraints, attenuation, policy-version bindings, and audit/provenance references."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as a formal authorization correctness planning contract."
+    at: "2026-06-07T04:39:26Z"
+references: []
+body: |-
+  Defines the durable authority derivation graph used to explain effective authority. Graph nodes include subjects, tenants, realms, resources, scopes, roles, policies, trust domains, credentials, and delegations. Graph edges include grants, inherited authorities, constraints, attenuation, policy-version bindings, and audit/provenance references.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1123"

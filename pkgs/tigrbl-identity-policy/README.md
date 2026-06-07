@@ -25,9 +25,15 @@ uv add tigrbl-identity-policy
 
 ```python
 from tigrbl_identity_policy.control_plane import PolicyEngine, RBACAdministration
+from tigrbl_identity_policy import AuthorityDerivationGraph, AuthorityNode, AuthorityScope
+from tigrbl_identity_policy.invariants import default_authorization_invariant_registry
 from tigrbl_identity_policy.provenance import canonical_hash
 
 trace_hash = canonical_hash({"decision": "allow", "permission": "tenant.read"})
+invariants = default_authorization_invariant_registry()
+assert invariants.get("authz.tenant_isolation").enabled
+graph = AuthorityDerivationGraph(nodes=(AuthorityNode("subject:alice", "subject"),))
+scope = AuthorityScope("tenant-a", "client.read")
 ```
 
 ## Package Boundary
@@ -35,6 +41,9 @@ trace_hash = canonical_hash({"decision": "allow", "permission": "tenant.read"})
 - RBAC and ABAC administration
 - Delegated administration scopes
 - Service identity authorization
+- Authorization invariant registry and safety property evaluation
+- Authority derivation graphs, closure, reachability, monotonicity, and least-authority diffs
+- Delegation attenuation, referential integrity, trust graph integrity, tenant/realm isolation, convergence, and replay proof helpers
 - Policy provenance, audit, governance extension, and release posture helpers
 
 ## Related Packages

@@ -11,7 +11,11 @@ tags: []
 summary: "Status: proposed"
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "draft"
+    note: "Extended by adr:1122: tenant and client policy normalization must support explicit isolation invariants."
+    at: "2026-06-07T04:38:41Z"
 references: []
 body: |-
   ## Decision

@@ -8,65 +8,69 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines mutation classes, invalidation behavior, and post-mutation audit requirements for authorization state in `tigrbl_auth`."
+summary: "This specification defines how authorization mutations change effective"
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Extended by spc:1209 for mutation-triggered liveness and convergence-flow contracts."
+    at: "2026-06-07T04:39:43Z"
 references: []
 body: |-
   ## Overview
-
+  
   This specification defines how authorization mutations change effective
   authority after credentials or tokens have already been issued.
-
+  
   ## Decision Source
-
+  
   Decision sources: `adr:1050`, `adr:1068`, and `adr:1069`.
-
+  
   ## Mutation Classes
-
+  
   Authorization mutation handling MUST define, at minimum, the effects of:
-
+  
   - policy version change;
   - policy revocation or rollback;
   - resource-server grant revocation or replacement;
   - delegation grant revocation, collapse, or expiry;
   - credential revocation where authority is credential-bound; and
   - replay or reuse detection that invalidates future or current authority.
-
+  
   ## Invalidation Requirements
-
+  
   For each mutation class, the runtime MUST define whether:
-
+  
   - current access tokens remain valid;
   - refresh tokens MUST fail or be revoked;
   - successor tokens may be issued;
   - dependent delegation chains remain valid;
   - resource-server grants remain effective; and
   - verifiers require refreshed state before accepting future requests.
-
+  
   Mutation handling MUST fail closed when invalidation consequences are
   ambiguous or when the runtime cannot determine the current effective
   authority.
-
+  
   ## Audit and Provenance Requirements
-
+  
   Authorization mutation processing MUST emit durable records that identify:
-
+  
   - actor or system cause;
   - tenant and trust-domain context;
   - mutated authority object;
   - invalidation result;
   - affected lineage or delegated chain where applicable; and
   - correlation or trace identifiers sufficient to reconstruct the decision.
-
+  
   ## Boundaries
-
+  
   This specification governs mutation and invalidation semantics. It does not
   choose a specific policy language, token format, or cache implementation.
-
+  
   ## Verification
-
+  
   Verification MUST prove revocation, replacement, replay-triggered
   invalidation, delegation collapse, refresh-token denial after invalidation,
   durable audit emission, and fail-closed behavior when lineage or effective

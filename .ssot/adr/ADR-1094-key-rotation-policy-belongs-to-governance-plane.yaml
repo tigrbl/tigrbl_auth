@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define key rotation policy as governance-plane truth with administration and authz boundaries."
     at: "2026-05-13T11:04:19Z"
+    note: "Define key rotation policy as governance-plane truth with administration and authz boundaries."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Extended by adr:1122: key rotation governance participates in liveness and convergence certification properties."
+    at: "2026-06-07T04:38:43Z"
 references: []
 body: |-
   ## Decision
@@ -55,10 +59,10 @@ body: |-
   
   Key rotation policy MUST be represented as a governed policy artifact with an
   immutable version lifecycle and a published effective-policy projection.
-
+  
   Key rotation policy MUST also define compromise scope and verifier reaction
   semantics, including:
-
+  
   - which tenant, issuer, or trust-domain objects are affected by a compromised
     key;
   - what overlap, quarantine, or retirement windows apply after rotation;

@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1122"
+number: 1122
+slug: "formal-authorization-correctness-properties"
+title: "Formal authorization correctness properties are certifiable boundaries"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: tigrbl_auth treats authorization safety, liveness, isolation, closure, monotonicity, attenuation, minimality, referential integrity, determinism, and control-plane correctness as first-class certifiable properties. These properties are governed separately from OAuth/OIDC protocol conformance and must be targetable through SPEC, feature, test, claim, and evidence rows before they can be represented as implementation or certification claims."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as the governing SSOT decision for formal authorization correctness planning."
+    at: "2026-06-07T04:38:30Z"
+references: []
+body: |-
+  Decision: tigrbl_auth treats authorization safety, liveness, isolation, closure, monotonicity, attenuation, minimality, referential integrity, determinism, and control-plane correctness as first-class certifiable properties. These properties are governed separately from OAuth/OIDC protocol conformance and must be targetable through SPEC, feature, test, claim, and evidence rows before they can be represented as implementation or certification claims.

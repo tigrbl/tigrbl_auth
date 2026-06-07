@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1210"
+number: 1210
+slug: "authorization-referential-integrity-contract"
+title: "Authorization referential integrity contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines referential integrity requirements for authorization objects, including no orphaned authority assignments, policies, delegations, trust edges, scopes, resources, credentials, or audit/provenance references."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as a formal authorization correctness planning contract."
+    at: "2026-06-07T04:39:33Z"
+references: []
+body: |-
+  Defines referential integrity requirements for authorization objects, including no orphaned authority assignments, policies, delegations, trust edges, scopes, resources, credentials, or audit/provenance references.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1122"
+  - "adr:1123"

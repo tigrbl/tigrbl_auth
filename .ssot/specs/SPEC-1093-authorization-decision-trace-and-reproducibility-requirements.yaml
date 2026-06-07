@@ -8,14 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines reproducible pre-token authorization decision artifacts for `tigrbl_auth`."
+summary: "This specification defines reproducible pre-token authorization decision"
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Accept reproducible pre-token authorization decision artifacts for OAuth and OIDC issuance."
-    at: "2026-05-12T00:00:00Z"
+    note: "Extended by spc:1212 for deterministic policy replay and decision stability over authorization decision traces."
+    at: "2026-06-07T04:39:42Z"
 references: []
 body: |-
   ## Overview

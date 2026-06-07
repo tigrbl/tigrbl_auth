@@ -1,0 +1,25 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1209"
+number: 1209
+slug: "authorization-liveness-convergence-flow-contract"
+title: "Authorization liveness convergence flow contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines liveness and convergence-flow requirements for revocation, key rotation, policy change, delegation change, trust-edge revocation, and tenant/realm isolation updates. Each flow must state trigger, convergence bound, verifier-visible expected outcome, and proof artifact."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as a formal authorization correctness planning contract."
+    at: "2026-06-07T04:39:31Z"
+references: []
+body: |-
+  Defines liveness and convergence-flow requirements for revocation, key rotation, policy change, delegation change, trust-edge revocation, and tenant/realm isolation updates. Each flow must state trigger, convergence bound, verifier-visible expected outcome, and proof artifact.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1122"
+  - "adr:1094"

@@ -8,14 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "This specification defines durable delegation lineage requirements for token exchange and related authorization flows."
+summary: "This specification defines durable delegation lineage requirements for token"
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Accept durable delegation-lineage requirements for token exchange and related flows."
-    at: "2026-05-12T00:00:00Z"
+    note: "Extended by spc:1208 for delegation attenuation proofs over existing delegation graph and token-exchange provenance."
+    at: "2026-06-07T04:39:41Z"
 references: []
 body: |-
   ## Overview

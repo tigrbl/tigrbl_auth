@@ -30,6 +30,15 @@ from tigrbl_auth.services.policy_control_plane import (
     phase3_admin_policy_boundary_manifest,
     simulate_policy,
 )
+from tigrbl_auth.services.policy_invariants import (
+    AuthorizationInvariant,
+    InvariantEvaluation,
+    InvariantRegistry,
+    InvariantSeverity,
+    InvariantViolation,
+    VerificationMethod,
+    default_authorization_invariant_registry,
+)
 from tigrbl_auth.services.governance_extension_plane import (
     AccessReviewWorkflow,
     EntitlementManager,

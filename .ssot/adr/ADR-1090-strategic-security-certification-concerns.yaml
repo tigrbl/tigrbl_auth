@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted as the SSOT ordering for strategic security certification concern planning."
     at: "2026-06-01T10:39:48Z"
+    note: "Accepted as the SSOT ordering for strategic security certification concern planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Extended by adr:1122 and adr:1123: formal authorization correctness properties and the authority derivation graph become targetable strategic security certification concerns."
+    at: "2026-06-07T04:38:34Z"
 references: []
 body: |-
   Decision: strategic certification concern order is realm isolation, tenant isolation, issuer determinism, runtime capability truth, authorization mutation and freshness, JOSE and cryptographic boundary governance, resource-server verifier certification, machine identity governance, delegation provenance, authorization observability, runtime qualification, constraint-native authorization, authorization budgets, cross-issuer trust, and credential privacy. Realm isolation is distinct from tenant isolation. VC/OIDC4VC, OIDC4VCI, OID4VP, SIOPv2, HAIP, Authz API 1.0, OIDC 1.1, RISC/CAEP/SET/SSE are valid later standards but are non-blocking for current maturity.

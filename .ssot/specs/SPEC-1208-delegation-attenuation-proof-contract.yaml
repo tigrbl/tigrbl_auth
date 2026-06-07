@@ -1,0 +1,26 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1208"
+number: 1208
+slug: "delegation-attenuation-proof-contract"
+title: "Delegation attenuation proof contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Defines proof requirements showing that delegated authority is never broader than source authority after constraints, tenant scope, resource scope, sender constraints, and policy-version bindings are applied."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted as a formal authorization correctness planning contract."
+    at: "2026-06-07T04:39:30Z"
+references: []
+body: |-
+  Defines proof requirements showing that delegated authority is never broader than source authority after constraints, tenant scope, resource scope, sender constraints, and policy-version bindings are applied.
+spec_kind: "governance"
+adr_ids:
+  - "adr:1068"
+  - "adr:1122"
+  - "adr:1123"

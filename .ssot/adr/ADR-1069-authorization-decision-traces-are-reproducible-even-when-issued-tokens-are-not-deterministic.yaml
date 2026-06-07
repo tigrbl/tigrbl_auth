@@ -8,14 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl_auth` MUST separate pre-token authorization determinism from final JWT nondeterminism and preserve reproducible decision traces."
+summary: "`tigrbl_auth` MUST separate pre-token authorization determinism from final"
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Accept reproducible authorization-decision trace governance for OAuth and OIDC issuance."
-    at: "2026-05-12T00:00:00Z"
+    note: "Extended by adr:1122: reproducible authorization decision traces support policy determinism and decision stability replay."
+    at: "2026-06-07T04:38:37Z"
 references: []
 body: |-
   ## Decision

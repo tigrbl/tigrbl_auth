@@ -17,9 +17,13 @@ status_notes:
     note: "Accepted for strategic security certification concern planning."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Linked to strategic security certification concerns ADR."
     at: "2026-06-01T10:41:06Z"
+    note: "Linked to strategic security certification concerns ADR."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Extended by spc:1206 and spc:1210 for graph-backed auditability and referential integrity."
+    at: "2026-06-07T04:39:50Z"
 references: []
 body: |-
   Authorization observability MUST define required events, retention, provenance, evidence, audit, and incident-response semantics beyond unstructured logs.

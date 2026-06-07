@@ -8,14 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Delegation and token exchange lineage MUST be represented as durable server-side provenance rather than only request-time claims."
+summary: "Delegation and token exchange lineage MUST be represented as durable"
 supersedes: []
 superseded_by: []
 status_notes:
   -
     status: "accepted"
-    note: "Accept durable delegation-lineage governance for token exchange and related flows."
-    at: "2026-05-12T00:00:00Z"
+    note: "Extended by adr:1123: delegation lineage must participate in authority derivation graph proofs and attenuation checks."
+    at: "2026-06-07T04:38:35Z"
 references: []
 body: |-
   ## Decision
