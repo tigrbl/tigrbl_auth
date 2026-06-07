@@ -37,9 +37,21 @@ class ReferenceCatalog:
     delegations: tuple[str, ...] = ()
     trust_domains: tuple[str, ...] = ()
     authority_nodes: tuple[str, ...] = ()
+    provenance_ids: tuple[str, ...] = ()
+    policy_versions: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
-        for field_name in ("subjects", "tenants", "realms", "policies", "delegations", "trust_domains", "authority_nodes"):
+        for field_name in (
+            "subjects",
+            "tenants",
+            "realms",
+            "policies",
+            "delegations",
+            "trust_domains",
+            "authority_nodes",
+            "provenance_ids",
+            "policy_versions",
+        ):
             object.__setattr__(self, field_name, tuple(sorted(set(getattr(self, field_name)))))
 
 
@@ -75,14 +87,26 @@ def validate_authorization_referential_integrity(
         "delegation": set(catalog.delegations),
         "trust_domain": set(catalog.trust_domains),
         "authority_node": set(catalog.authority_nodes),
+        "provenance": set(catalog.provenance_ids),
+        "policy_version": set(catalog.policy_versions),
     }
     rows = tuple(references)
-    failures = tuple(
-        f"{row.ref_id} references unknown {row.ref_type} {row.target_id!r}"
-        for row in rows
-        if row.ref_type not in known or row.target_id not in known[row.ref_type]
-    )
-    return IntegrityReport(passed=not failures, failures=failures, checked_count=len(rows))
+    failures: list[str] = []
+    by_ref_id: dict[str, set[str]] = {}
+    by_target_id: dict[str, set[str]] = {}
+    for row in rows:
+        by_ref_id.setdefault(row.ref_id, set()).add(row.ref_type)
+        by_target_id.setdefault(row.target_id, set()).add(row.ref_type)
+        if row.ref_type not in known or row.target_id not in known[row.ref_type]:
+            failures.append(f"{row.ref_id} references unknown {row.ref_type} {row.target_id!r}")
+    for ref_id, ref_types in by_ref_id.items():
+        if len(ref_types) > 1:
+            failures.append(f"reference id {ref_id!r} is reused across incompatible types")
+    for target_id, ref_types in by_target_id.items():
+        if len(ref_types) > 1:
+            failures.append(f"target id {target_id!r} is referenced as incompatible types")
+    failures_tuple = tuple(sorted(set(failures)))
+    return IntegrityReport(passed=not failures_tuple, failures=failures_tuple, checked_count=len(rows))
 
 
 @dataclass(frozen=True, slots=True)
@@ -93,6 +117,8 @@ class TrustEdge:
     tenant_id: str
     trust_domain: str
     revoked: bool = False
+    subject_tenant_id: str = ""
+    subject_trust_domain: str = ""
 
     def __post_init__(self) -> None:
         if not self.edge_id or not self.issuer or not self.subject or not self.tenant_id or not self.trust_domain:
@@ -104,11 +130,13 @@ def validate_trust_graph_integrity(
     catalog: ReferenceCatalog,
     edges: Iterable[TrustEdge],
     allow_cycles: bool = False,
+    allowed_cross_domain_edges: Iterable[tuple[str, str]] = (),
 ) -> IntegrityReport:
     rows = tuple(edges)
     subjects = set(catalog.subjects)
     tenants = set(catalog.tenants)
     domains = set(catalog.trust_domains)
+    allowed_cross_domain = set(allowed_cross_domain_edges)
     failures: list[str] = []
     adjacency: dict[str, set[str]] = {}
     for edge in rows:
@@ -122,6 +150,13 @@ def validate_trust_graph_integrity(
             failures.append(f"trust edge {edge.edge_id!r} has unknown tenant {edge.tenant_id!r}")
         if edge.trust_domain not in domains:
             failures.append(f"trust edge {edge.edge_id!r} has unknown trust domain {edge.trust_domain!r}")
+        if edge.subject_tenant_id and edge.subject_tenant_id != edge.tenant_id:
+            failures.append(f"trust edge {edge.edge_id!r} crosses tenant {edge.tenant_id!r}->{edge.subject_tenant_id!r}")
+        if edge.subject_trust_domain:
+            if edge.subject_trust_domain not in domains:
+                failures.append(f"trust edge {edge.edge_id!r} has unknown subject trust domain {edge.subject_trust_domain!r}")
+            if edge.subject_trust_domain != edge.trust_domain and (edge.trust_domain, edge.subject_trust_domain) not in allowed_cross_domain:
+                failures.append(f"trust edge {edge.edge_id!r} crosses trust domain {edge.trust_domain!r}->{edge.subject_trust_domain!r}")
         adjacency.setdefault(edge.issuer, set()).add(edge.subject)
     if not allow_cycles:
         for start in adjacency:

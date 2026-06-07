@@ -50,6 +50,7 @@ class PolicyReplayResult:
 class PolicyDeterminismReport:
     passed: bool
     policy_version: str
+    schema_version: str
     results: tuple[PolicyReplayResult, ...]
     failures: tuple[str, ...]
 
@@ -68,8 +69,10 @@ class DecisionStabilityReport:
     passed: bool
     baseline_version: str
     candidate_version: str
-    changes: tuple[DecisionStabilityChange, ...]
-    failures: tuple[str, ...]
+    baseline_schema_version: str = ""
+    candidate_schema_version: str = ""
+    changes: tuple[DecisionStabilityChange, ...] = field(default_factory=tuple)
+    failures: tuple[str, ...] = ()
 
 
 PolicyEvaluator = Callable[[Mapping[str, Any]], Mapping[str, Any]]
@@ -81,6 +84,7 @@ def replay_policy_determinism(
     cases: tuple[PolicyReplayCase, ...],
     evaluator: PolicyEvaluator,
     runs: int = 2,
+    schema_version: str = "",
 ) -> PolicyDeterminismReport:
     if runs < 2:
         raise ValueError("runs must be at least 2")
@@ -104,6 +108,7 @@ def replay_policy_determinism(
     return PolicyDeterminismReport(
         passed=not failures,
         policy_version=policy_version,
+        schema_version=schema_version,
         results=tuple(results),
         failures=tuple(failures),
     )
@@ -117,6 +122,8 @@ def compare_policy_version_decisions(
     baseline_evaluator: PolicyEvaluator,
     candidate_evaluator: PolicyEvaluator,
     allowed_change_reasons: Mapping[str, str] = {},
+    baseline_schema_version: str = "",
+    candidate_schema_version: str = "",
 ) -> DecisionStabilityReport:
     changes: list[DecisionStabilityChange] = []
     failures: list[str] = []
@@ -142,6 +149,8 @@ def compare_policy_version_decisions(
         passed=not failures,
         baseline_version=baseline_version,
         candidate_version=candidate_version,
+        baseline_schema_version=baseline_schema_version,
+        candidate_schema_version=candidate_schema_version,
         changes=tuple(changes),
         failures=tuple(failures),
     )

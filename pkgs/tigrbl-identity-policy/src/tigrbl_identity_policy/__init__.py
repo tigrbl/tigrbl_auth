@@ -76,11 +76,13 @@ from .invariants import (
 from .authority_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
+    AuthorityGraphIntegrityReport,
     AuthorityNode,
     AuthorityPath,
     AuthorityReachabilityProof,
     AuthorityScope,
     authority_matches,
+    validate_authority_graph_integrity,
 )
 from .authority_semantics import (
     AuthorityClosure,
@@ -147,6 +149,7 @@ __all__ = [
     "AuthorityClosure",
     "AuthorityDerivationGraph",
     "AuthorityEdge",
+    "AuthorityGraphIntegrityReport",
     "AuthorityMonotonicityReport",
     "AuthorityMutationKind",
     "AuthorityNode",
@@ -236,6 +239,7 @@ __all__ = [
     "replay_policy_determinism",
     "simulate_policy",
     "validate_authorization_referential_integrity",
+    "validate_authority_graph_integrity",
     "validate_tenant_realm_isolation",
     "validate_trust_graph_integrity",
 ]

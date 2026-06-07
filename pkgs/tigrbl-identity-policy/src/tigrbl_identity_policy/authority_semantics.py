@@ -44,7 +44,10 @@ class LeastAuthorityDiff:
 
 
 def compute_authority_closure(graph: AuthorityDerivationGraph, subject: str) -> AuthorityClosure:
-    paths = graph.derive_paths(subject)
+    try:
+        paths = graph.derive_paths(subject)
+    except KeyError:
+        paths = ()
     scopes: dict[tuple[str, str, str, str], AuthorityScope] = {}
     provenance: dict[tuple[str, str, str, str], set[str]] = {}
     for path in paths:

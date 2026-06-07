@@ -6,6 +6,7 @@ from tigrbl_identity_policy import (
     AuthorityClosure,
     AuthorityDerivationGraph,
     AuthorityEdge,
+    AuthorityGraphIntegrityReport,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,
     AuthorityNode,
@@ -42,6 +43,7 @@ from tigrbl_identity_policy import (
     prove_delegation_attenuation,
     replay_policy_determinism,
     validate_authorization_referential_integrity,
+    validate_authority_graph_integrity,
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
 )
@@ -53,6 +55,7 @@ __all__ = [
     "AuthorityClosure",
     "AuthorityDerivationGraph",
     "AuthorityEdge",
+    "AuthorityGraphIntegrityReport",
     "AuthorityMonotonicityReport",
     "AuthorityMutationKind",
     "AuthorityNode",
@@ -89,6 +92,7 @@ __all__ = [
     "prove_delegation_attenuation",
     "replay_policy_determinism",
     "validate_authorization_referential_integrity",
+    "validate_authority_graph_integrity",
     "validate_tenant_realm_isolation",
     "validate_trust_graph_integrity",
 ]
