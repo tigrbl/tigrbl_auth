@@ -117,25 +117,25 @@ export class PlatformAdminClient {
 
   identities(tenantId: string) {
     const params = new URLSearchParams({ tenant_id: tenantId });
-    return this.request<Identity[]>(`/admin/identity?${params.toString()}`);
+    return this.request<Identity[]>(`/admin/identities?${params.toString()}`);
   }
 
   createIdentity(payload: CreateIdentityInput) {
-    return this.request<Identity>("/admin/identity", {
+    return this.request<Identity>("/admin/identities", {
       method: "POST",
       body: JSON.stringify(payload)
     });
   }
 
   updateIdentity(identityId: string, payload: UpdateIdentityInput) {
-    return this.request<Identity>(`/admin/identity/${pathSegment(identityId)}`, {
+    return this.request<Identity>(`/admin/identities/${pathSegment(identityId)}`, {
       method: "PATCH",
       body: JSON.stringify(payload)
     });
   }
 
   deleteIdentity(identityId: string) {
-    return this.request<Identity>(`/admin/identity/${pathSegment(identityId)}`, { method: "DELETE" });
+    return this.request<Identity>(`/admin/identities/${pathSegment(identityId)}`, { method: "DELETE" });
   }
 }
 

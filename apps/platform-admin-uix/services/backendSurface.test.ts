@@ -11,9 +11,9 @@ describe("platform admin API boundary", () => {
     expect(apiUrl("/admin/tenant").pathname).toBe("/admin/tenant");
     expect(apiUrl("/admin/realm").pathname).toBe("/admin/realm");
     expect(apiUrl("/admin/realm/demo/tenant").pathname).toBe("/admin/realm/demo/tenant");
-    expect(apiUrl("/admin/identity").pathname).toBe("/admin/identity");
-    expect(apiUrl("/admin/identity?tenant_id=public").pathname).toBe("/admin/identity");
-    expect(() => assertSurfacePath("/admin/identities")).toThrow(/not part/);
+    expect(apiUrl("/admin/identities").pathname).toBe("/admin/identities");
+    expect(apiUrl("/admin/identities?tenant_id=public").pathname).toBe("/admin/identities");
+    expect(() => assertSurfacePath("/admin/identity")).toThrow(/not part/);
     for (const path of FORBIDDEN_PATH_PREFIXES) {
       expect(() => assertSurfacePath(path)).toThrow(/outside/);
     }

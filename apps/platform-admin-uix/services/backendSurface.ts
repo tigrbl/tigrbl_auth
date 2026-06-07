@@ -4,7 +4,7 @@ export const API_BASE_URL = (import.meta.env.VITE_TIGRBL_AUTH_PLATFORM_ADMIN_API
 export const SURFACE_PURPOSE = "Cross-tenant control plane for tenant lifecycle and platform authority.";
 
 export const FORBIDDEN_PATH_PREFIXES = ["/login", "/authorize", "/token", "/consent", "/register", "/userinfo"];
-export const ALLOWED_PATH_PREFIXES = ["/admin/auth", "/admin/realm", "/admin/tenant", "/admin/identity", "/auditevent"];
+export const ALLOWED_PATH_PREFIXES = ["/admin/auth", "/admin/realm", "/admin/tenant", "/admin/identities", "/auditevent"];
 
 export function assertSurfacePath(path: string): void {
   if (!path.startsWith("/")) {
