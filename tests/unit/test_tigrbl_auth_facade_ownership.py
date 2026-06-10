@@ -14,8 +14,15 @@ LARGE_FILE_THRESHOLD = 400
 
 
 FACADE_MODULES = {
+    "tigrbl_auth.api.surfaces": "tigrbl_identity_server.surfaces",
+    "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
+    "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
     "tigrbl_auth.framework": "tigrbl_identity_server.framework",
+    "tigrbl_auth.rfc.rfc8693": "tigrbl_identity_oauth.standards.rfc8693",
+    "tigrbl_auth.security.admin_gate": "tigrbl_identity_policy.admin_gate",
+    "tigrbl_auth.security.certification": "tigrbl_identity_policy.certification",
     "tigrbl_auth.services._operator_store": "tigrbl_identity_storage.operator_store",
+    "tigrbl_auth.services.advanced_identity_plane": "tigrbl_identity_admin.advanced_identity_plane",
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_identity_policy.governance_extension",
     "tigrbl_auth.services.policy_control_plane": "tigrbl_identity_policy.control_plane",
     "tigrbl_auth.services.operator_service": "tigrbl_identity_operator.operator_service",
@@ -27,6 +34,7 @@ FACADE_MODULES = {
     "tigrbl_auth.ops.register": "tigrbl_identity_oauth.ops.register",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_identity_operator.authorization_provenance",
     "tigrbl_auth.services.audit_service": "tigrbl_identity_operator.audit_service",
+    "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
 }
 
 EXECUTABLE_FACADE_MODULES = {
@@ -117,11 +125,13 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
     assert set(metadata["project"]["dependencies"]).issuperset(
         {
             "tigrbl-identity-cli==0.4.0.dev2",
+            "tigrbl-identity-admin==0.4.0.dev2",
             "tigrbl-identity-credentials==0.4.0.dev2",
             "tigrbl-identity-jose==0.4.0.dev2",
             "tigrbl-identity-oauth==0.4.0.dev2",
             "tigrbl-identity-operator==0.4.0.dev2",
             "tigrbl-identity-policy==0.4.0.dev2",
+            "tigrbl-identity-runtime==0.4.0.dev2",
             "tigrbl-identity-server==0.4.0.dev2",
             "tigrbl-identity-storage==0.4.0.dev2",
         }

@@ -42,11 +42,13 @@ dependencies = [
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
     "tigrbl-identity-cli==0.4.0.dev2",
+    "tigrbl-identity-admin==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-oauth==0.4.0.dev2",
     "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-identity-policy==0.4.0.dev2",
+    "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tomli==2.4.0; python_version < '3.11'",
@@ -144,11 +146,13 @@ dev = [
 
 [tool.uv.sources]
 tigrbl-identity-cli = { path = "pkgs/tigrbl-identity-cli", editable = true }
+tigrbl-identity-admin = { path = "pkgs/tigrbl-identity-admin", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/tigrbl-identity-credentials", editable = true }
 tigrbl-identity-jose = { path = "pkgs/tigrbl-identity-jose", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-operator = { path = "pkgs/tigrbl-identity-operator", editable = true }
 tigrbl-identity-policy = { path = "pkgs/tigrbl-identity-policy", editable = true }
+tigrbl-identity-runtime = { path = "pkgs/tigrbl-identity-runtime", editable = true }
 tigrbl-identity-server = { path = "pkgs/tigrbl-identity-server", editable = true }
 tigrbl-identity-storage = { path = "pkgs/tigrbl-identity-storage", editable = true }
 
