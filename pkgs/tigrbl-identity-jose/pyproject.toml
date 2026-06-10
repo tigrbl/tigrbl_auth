@@ -33,6 +33,10 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "tigrbl-identity-operator==0.4.0.dev2",
+    "tigrbl-identity-storage==0.4.0.dev2",
+]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

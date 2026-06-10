@@ -15,7 +15,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 17
+    assert len(packages) == 25
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/tigrbl-auth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
 
@@ -58,7 +58,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "85"
+    assert payload["count"] == "125"
     assert {
         cell["python_version"]
         for cell in matrix

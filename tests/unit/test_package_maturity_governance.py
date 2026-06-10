@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 for src in sorted((ROOT / "pkgs").glob("*/src")):
     value = str(src)
     if value not in sys.path:
-        sys.path.insert(0, value)
+        sys.path.append(value)
 
 from tigrbl_identity_operator.package_maturity import (  # noqa: E402
     PACKAGE_MATURITY_BOUNDARY_ID,
@@ -23,10 +23,11 @@ from tigrbl_identity_operator.package_maturity import (  # noqa: E402
 def test_package_maturity_t0_discovers_all_split_packages() -> None:
     packages = discover_package_manifests(ROOT)
 
-    assert len(packages) == 17
+    assert len(packages) == 25
     assert {package.name for package in packages} >= {
         "tigrbl-auth",
         "tigrbl-identity-core",
+        "tigrbl-identity-cli",
         "tigrbl-identity-operator",
         "tigrbl-identity-testkit",
     }
@@ -42,7 +43,7 @@ def test_package_maturity_t1_maps_every_package_to_boundary_feature() -> None:
     assert PACKAGE_MATURITY_BOUNDARY_ID == "bnd:package-maturity-governance-slice"
     assert "feat:package-maturity-facade" in feature_ids
     assert feature_ids <= boundary_feature_ids
-    assert report["summary"]["package_count"] == 17
+    assert report["summary"]["package_count"] == 25
 
 
 def test_package_maturity_t2_builds_complete_package_python_matrix() -> None:
@@ -66,6 +67,6 @@ def test_package_maturity_t2_gate_passes_with_claim_test_links() -> None:
 
     assert report["passed"], report["failures"]
     assert report["achieved_tier"] == "T2"
-    assert report["summary"]["boundary_feature_count"] == 20
-    assert report["summary"]["implemented_boundary_feature_count"] == 20
+    assert report["summary"]["boundary_feature_count"] == 28
+    assert report["summary"]["implemented_boundary_feature_count"] == 28
     assert run_package_maturity_gate(ROOT, target_tier="T2") == 0

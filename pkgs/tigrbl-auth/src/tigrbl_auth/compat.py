@@ -67,7 +67,7 @@ STABLE_ENTRYPOINTS: Mapping[str, StableEntrypoint] = {
         "tigrbl-identity-server",
         deprecated=True,
     ),
-    "cli_main": StableEntrypoint("cli_main", "tigrbl_identity_operator.cli.main", "main", "tigrbl-identity-operator", deprecated=True),
+    "cli_main": StableEntrypoint("cli_main", "tigrbl_identity_cli.cli.main", "main", "tigrbl-identity-cli", deprecated=True),
 }
 
 

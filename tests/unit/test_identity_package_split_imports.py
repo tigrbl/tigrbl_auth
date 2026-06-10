@@ -24,6 +24,7 @@ PACKAGE_ROOTS = [
     "tigrbl_identity_server",
     "tigrbl_identity_runtime",
     "tigrbl_identity_operator",
+    "tigrbl_identity_cli",
     "tigrbl_identity_resource_server",
     "tigrbl_identity_rp",
     "tigrbl_identity_testkit",
@@ -43,6 +44,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-identity-server": "tigrbl_identity_server",
     "tigrbl-identity-runtime": "tigrbl_identity_runtime",
     "tigrbl-identity-operator": "tigrbl_identity_operator",
+    "tigrbl-identity-cli": "tigrbl_identity_cli",
     "tigrbl-identity-resource-server": "tigrbl_identity_resource_server",
     "tigrbl-identity-rp": "tigrbl_identity_rp",
     "tigrbl-identity-testkit": "tigrbl_identity_testkit",
@@ -54,7 +56,7 @@ def _install_package_src_paths() -> None:
     for src in PKGS.glob("*/src"):
         value = str(src)
         if value not in sys.path:
-            sys.path.insert(0, value)
+            sys.path.append(value)
 
 
 def test_identity_split_uses_independent_import_roots() -> None:

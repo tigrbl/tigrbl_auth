@@ -41,6 +41,14 @@ dependencies = [
     "bcrypt==5.0.0",
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
+    "tigrbl-identity-cli==0.4.0.dev2",
+    "tigrbl-identity-credentials==0.4.0.dev2",
+    "tigrbl-identity-jose==0.4.0.dev2",
+    "tigrbl-identity-oauth==0.4.0.dev2",
+    "tigrbl-identity-operator==0.4.0.dev2",
+    "tigrbl-identity-policy==0.4.0.dev2",
+    "tigrbl-identity-server==0.4.0.dev2",
+    "tigrbl-identity-storage==0.4.0.dev2",
     "tomli==2.4.0; python_version < '3.11'",
 ]
 
@@ -82,7 +90,7 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
+pythonpath = [".", "pkgs/tigrbl-identity-cli/src"]
 testpaths = ["tests"]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
@@ -134,5 +142,15 @@ dev = [
     "ssot-registry>=0.2.8",
 ]
 
+[tool.uv.sources]
+tigrbl-identity-cli = { path = "pkgs/tigrbl-identity-cli", editable = true }
+tigrbl-identity-credentials = { path = "pkgs/tigrbl-identity-credentials", editable = true }
+tigrbl-identity-jose = { path = "pkgs/tigrbl-identity-jose", editable = true }
+tigrbl-identity-oauth = { path = "pkgs/tigrbl-identity-oauth", editable = true }
+tigrbl-identity-operator = { path = "pkgs/tigrbl-identity-operator", editable = true }
+tigrbl-identity-policy = { path = "pkgs/tigrbl-identity-policy", editable = true }
+tigrbl-identity-server = { path = "pkgs/tigrbl-identity-server", editable = true }
+tigrbl-identity-storage = { path = "pkgs/tigrbl-identity-storage", editable = true }
+
 [project.scripts]
-tigrbl-auth = "tigrbl_auth.cli.main:main"
+tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

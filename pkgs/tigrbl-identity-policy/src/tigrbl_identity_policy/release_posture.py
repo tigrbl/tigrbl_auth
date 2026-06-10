@@ -6,7 +6,15 @@ from typing import Any, Mapping
 
 from tigrbl_auth.runtime import runner_registry_manifest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+
+def _repo_root() -> Path:
+    for parent in Path(__file__).resolve().parents:
+        if (parent / "docs").is_dir() and (parent / ".github").is_dir():
+            return parent
+    return Path(__file__).resolve().parents[2]
+
+
+REPO_ROOT = _repo_root()
 
 PRIVATE_JWK_FIELDS: tuple[str, ...] = (
     "d",

@@ -98,7 +98,7 @@ def test_facade_t2_import_boundary_does_not_eagerly_import_split_runtime() -> No
         Path("pkgs/tigrbl-auth/src/tigrbl_auth/app.py"),
         Path("pkgs/tigrbl-auth/src/tigrbl_auth/gateway.py"),
         Path("pkgs/tigrbl-auth/src/tigrbl_auth/plugin.py"),
-        Path("pkgs/tigrbl-auth/src/tigrbl_auth/cli.py"),
+        Path("pkgs/tigrbl-auth/src/tigrbl_auth/cli/__init__.py"),
         Path("pkgs/tigrbl-auth/src/tigrbl_auth/compat.py"),
     ]
     forbidden_imports = {
