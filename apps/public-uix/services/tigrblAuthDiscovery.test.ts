@@ -70,7 +70,7 @@ describe("tigrblAuthDiscovery", () => {
     expect(config.loginEndpoint).toBe("http://localhost:3000/login");
     expect(config.authorizationEndpoint).toBe("http://localhost:3000/authorize");
     expect(config.tokenEndpoint).toBe("http://localhost:3000/token");
-    expect(config.redirectUri).toBe("http://localhost:3000/#/callback");
+    expect(config.redirectUri).toBe("http://localhost:3000/callback");
   });
 
   it("gates UI actions by discovered endpoint availability", () => {

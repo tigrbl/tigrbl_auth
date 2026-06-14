@@ -9,6 +9,8 @@ describe("public UIX nginx boundary", () => {
     expect(config).toContain("location /admin");
     expect(config).toContain("return 404;");
     expect(config).toContain("location /rpc");
+    expect(config).toContain("location = /callback");
+    expect(config).toContain("#/callback$is_args$args");
     expect(config).toContain("location /.well-known/");
     expect(config).toContain("location /authorize");
     expect(config).toContain("location /login");

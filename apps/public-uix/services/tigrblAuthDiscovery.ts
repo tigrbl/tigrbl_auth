@@ -55,7 +55,7 @@ export async function buildTigrblAuthOidcConfig(clientId: string): Promise<OidcC
     endSessionEndpoint: metadata.end_session_endpoint
       ? resolveTrustedPublicEndpoint(metadata.end_session_endpoint, "logout", publicBaseUrl)
       : undefined,
-    redirectUri: `${typeof window === "undefined" ? "http://localhost:3000" : window.location.origin}/#/callback`,
+    redirectUri: `${typeof window === "undefined" ? "http://localhost:3000" : window.location.origin}/callback`,
     scope: "openid profile email",
   };
 }

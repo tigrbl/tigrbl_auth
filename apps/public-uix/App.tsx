@@ -14,7 +14,7 @@ import { TermsOfServicePage } from './pages/TermsOfServicePage';
 import { ConsentPage } from './pages/ConsentPage';
 import { AuthProvider } from './types';
 import { usePlatform } from './hooks/usePlatform';
-import { parseConsentViewModel, sanitizePublicHashTarget } from './services/publicUxPolicy';
+import { buildPopupCallbackHash, parseConsentViewModel, sanitizePublicHashTarget } from './services/publicUxPolicy';
 
 const App: React.FC = () => {
   const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
@@ -42,6 +42,16 @@ const App: React.FC = () => {
     const handleHashChange = () => setCurrentHash(window.location.hash);
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (window.location.pathname === '/callback') {
+      const callbackHash = buildPopupCallbackHash(window.location.search);
+      if (callbackHash) {
+        window.history.replaceState(null, '', `/${callbackHash}`);
+        setCurrentHash(callbackHash);
+      }
+    }
   }, []);
 
   useEffect(() => {

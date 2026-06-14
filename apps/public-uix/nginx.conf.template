@@ -21,6 +21,10 @@ server {
     return 404;
   }
 
+  location = /callback {
+    return 302 $scheme://$http_host/#/callback$is_args$args;
+  }
+
   location /.well-known/ {
     proxy_pass ${TIGRBL_AUTH_BACKEND_UPSTREAM};
     proxy_set_header Host $host;
