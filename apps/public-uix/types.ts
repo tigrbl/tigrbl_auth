@@ -58,6 +58,7 @@ export interface OidcConfig {
   scope: string;
   authority: string;
   responseType?: string;
+  loginEndpoint?: string;
   authorizationEndpoint?: string;
   tokenEndpoint?: string;
   userinfoEndpoint?: string;

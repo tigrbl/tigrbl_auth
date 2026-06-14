@@ -42,9 +42,11 @@ export async function buildTigrblAuthOidcConfig(clientId: string): Promise<OidcC
     "callback",
     publicBaseUrl,
   );
+  const loginEndpoint = resolveTrustedPublicEndpoint("/login", "login", publicBaseUrl);
   return {
     clientId,
     authority: trimTrailingSlash(metadata.issuer || publicBaseUrl),
+    loginEndpoint,
     authorizationEndpoint,
     tokenEndpoint,
     userinfoEndpoint: metadata.userinfo_endpoint

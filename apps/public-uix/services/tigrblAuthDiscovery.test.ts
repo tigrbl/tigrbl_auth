@@ -67,6 +67,7 @@ describe("tigrblAuthDiscovery", () => {
 
     expect(config.clientId).toBe("public-uix");
     expect(config.authority).toBe("https://authn.example.com");
+    expect(config.loginEndpoint).toBe("http://localhost:3000/login");
     expect(config.authorizationEndpoint).toBe("http://localhost:3000/authorize");
     expect(config.tokenEndpoint).toBe("http://localhost:3000/token");
     expect(config.redirectUri).toBe("http://localhost:3000/#/callback");

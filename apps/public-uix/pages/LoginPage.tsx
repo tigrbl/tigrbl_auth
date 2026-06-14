@@ -6,7 +6,11 @@ import { AuthProvider } from '../types';
 import { usePlatform } from '../hooks/usePlatform';
 
 interface LoginPageProps {
-  onLogin: (provider: AuthProvider, remember: boolean) => void;
+  onLogin: (
+    provider: AuthProvider,
+    remember: boolean,
+    credentials: { identifier: string; password: string },
+  ) => void;
   isLoading: boolean;
   error: string | null;
 }
@@ -29,10 +33,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
 
   const validate = () => {
     const newErrors: {email?: string, password?: string} = {};
-    if (!email) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Invalid email format';
+    if (!email.trim()) {
+      newErrors.email = 'Identifier is required';
+    } else if (email.trim().length < 3) {
+      newErrors.email = 'Minimum 3 characters';
     }
 
     if (!password) {
@@ -48,7 +52,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
   const handleEmailSignIn = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      onLogin(AuthProvider.GENERIC, remember);
+      onLogin(AuthProvider.GENERIC, remember, {
+        identifier: email.trim(),
+        password,
+      });
     }
   };
 

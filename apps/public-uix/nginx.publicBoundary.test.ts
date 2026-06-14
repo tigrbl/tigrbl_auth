@@ -11,6 +11,7 @@ describe("public UIX nginx boundary", () => {
     expect(config).toContain("location /rpc");
     expect(config).toContain("location /.well-known/");
     expect(config).toContain("location /authorize");
+    expect(config).toContain("location /login");
     expect(config).toContain("location /token");
     expect(config).toContain("location /userinfo");
     expect(config).toContain("location /logout");
