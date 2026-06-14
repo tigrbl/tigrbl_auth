@@ -3,9 +3,9 @@ from __future__ import annotations
 from typing import Optional
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_auth.framework import AsyncSession, Request, TigrblRouter
-from tigrbl_auth.ops.authorize import authorize_request
-from tigrbl_auth.tables.engine import get_db
+from tigrbl_identity_server.framework import AsyncSession, Request, TigrblRouter
+from tigrbl_identity_oauth.ops.authorize import authorize_request
+from tigrbl_identity_storage.tables.engine import get_db
 
 api = TigrblRouter()
 router = api

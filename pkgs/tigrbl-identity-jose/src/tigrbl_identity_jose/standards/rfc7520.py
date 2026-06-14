@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.jose.rfc7515 import sign_jws, verify_jws
-from tigrbl_auth.standards.jose.rfc7516 import decrypt_jwe, encrypt_jwe
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_jose.standards.rfc7515 import sign_jws, verify_jws
+from tigrbl_identity_jose.standards.rfc7516 import decrypt_jwe, encrypt_jwe
 
 RFC7520_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7520"
 

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition
-from tigrbl_auth.api.rpc.schemas.client_registration import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition
+from tigrbl_identity_contracts.rpc.client_registration import (
     ClientRegistrationDeleteParams,
     ClientRegistrationDeleteResult,
     ClientRegistrationListParams,
@@ -14,9 +14,9 @@ from tigrbl_auth.api.rpc.schemas.client_registration import (
     ClientRegistrationUpsertParams,
     ClientRegistrationUpsertResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import repo_root_from_context
-from tigrbl_auth.services._operator_store import OperationContext
-from tigrbl_auth.services.operator_service import create_resource, delete_resource, get_record, list_resource, update_resource
+from tigrbl_identity_admin.rpc._shared import repo_root_from_context
+from tigrbl_identity_storage.operator_store import OperationContext
+from tigrbl_identity_operator.operator_service import create_resource, delete_resource, get_record, list_resource, update_resource
 
 
 def _rpc_context(context, command: str) -> OperationContext:

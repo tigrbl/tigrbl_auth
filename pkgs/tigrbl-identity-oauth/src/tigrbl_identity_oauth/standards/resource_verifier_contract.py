@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
 
 
 @dataclass(frozen=True, slots=True)

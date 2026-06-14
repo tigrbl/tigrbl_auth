@@ -12,13 +12,13 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Sequence
 
-from tigrbl_auth.config.deployment import (
+from tigrbl_identity_runtime.deployment import (
     EXTENSION_REGISTRY,
     PLUGIN_MODE_TO_SURFACE_SETS,
     PROTOCOL_SLICE_REGISTRY,
     SURFACE_SET_REGISTRY,
 )
-from tigrbl_auth.runtime import iter_runner_adapters, registered_runner_names
+from tigrbl_identity_runtime import iter_runner_adapters, registered_runner_names
 
 
 @dataclass(slots=True)

@@ -25,7 +25,15 @@ from .repository import (
     matrix_entry_for_dialect,
 )
 
+
+def ensure_identity_storage_importable() -> None:
+    """Compatibility hook for callers that previously used facade path setup."""
+
+    return None
+
+
 __all__ = [
+    "ensure_identity_storage_importable",
     "InMemoryRepository",
     "MigrationContract",
     "MigrationRevision",

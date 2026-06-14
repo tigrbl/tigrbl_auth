@@ -63,14 +63,14 @@ from tigrbl_identity_cli.cli.install_substrate import write_install_substrate_re
 from tigrbl_identity_cli.cli.project_tree import run_migration_plan_check, run_project_tree_layout_check
 from tigrbl_identity_cli.cli.runtime import run_runtime_foundation_check, write_runtime_profile_report
 from tigrbl_identity_cli.cli.truth import materialize_truth_chain, verify_truth_chain
-from tigrbl_auth.config.deployment import ROUTE_REGISTRY
-from tigrbl_auth.document_authority import (
+from tigrbl_identity_runtime.deployment import ROUTE_REGISTRY
+from tigrbl_identity_operator.document_authority import (
     DEFAULT_GENERATED_CURRENT_STATE_DOCS,
     load_document_authority,
     render_document_authority_projection,
 )
-from tigrbl_auth.path_safety import sanitize_local_paths
-from tigrbl_auth.repo_truth import (
+from tigrbl_identity_core.path_safety import sanitize_local_paths
+from tigrbl_identity_operator.repo_truth import (
     evaluate_tier4_bundle,
     has_install_matrix_workflow,
     has_release_gate_workflow,
@@ -78,10 +78,10 @@ from tigrbl_auth.repo_truth import (
     workflow_paths,
 )
 from tigrbl_identity_cli.package_maturity import evaluate_package_maturity
-from tigrbl_auth.runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
-from tigrbl_auth.services._operator_store import OperationContext, operator_state_root, operator_store_summary
-from tigrbl_auth.services.discovery_service import diff_discovery, publish_discovery, validate_discovery
-from tigrbl_auth.services.operator_service import (
+from tigrbl_identity_runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
+from tigrbl_identity_storage.operator_store import OperationContext, operator_state_root, operator_store_summary
+from tigrbl_identity_oidc.discovery_service import diff_discovery, publish_discovery, validate_discovery
+from tigrbl_identity_operator.operator_service import (
     create_resource,
     delete_resource,
     generate_key_record,
@@ -96,7 +96,7 @@ from tigrbl_auth.services.operator_service import (
     update_resource,
     validate_import_artifact,
 )
-from tigrbl_auth.release_signing import (
+from tigrbl_identity_jose.release_signing import (
     build_contract_set_manifest,
     load_signer,
     verify_bundle_attestations,

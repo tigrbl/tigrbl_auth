@@ -11,10 +11,10 @@ import time
 import warnings
 from typing import Any, Iterable
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.standards.jose.rfc7519 import encode_jwt
-from tigrbl_auth.standards.oauth2.jwt_client_auth import validate_client_jwt_bearer
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_jose.standards.rfc7519 import encode_jwt
+from tigrbl_identity_oauth.standards.jwt_client_auth import validate_client_jwt_bearer
 
 RFC8523_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8523"
 REQUIRED_CLAIMS: set[str] = {"iss", "sub", "aud", "exp", "iat", "jti"}

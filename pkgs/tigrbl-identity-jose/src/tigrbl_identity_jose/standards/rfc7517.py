@@ -16,10 +16,10 @@ from typing import Final
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat, PublicFormat
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_auth.services.key_management import _load_keypair, _provider
+    from tigrbl_identity_jose.key_management import _load_keypair, _provider
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     _load_keypair = None
     _provider = None

@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Final
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC8176_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8176"
 AMR_VALUES: set[str] = {

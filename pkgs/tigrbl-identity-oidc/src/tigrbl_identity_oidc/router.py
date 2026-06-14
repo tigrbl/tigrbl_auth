@@ -7,7 +7,7 @@ from uuid import UUID, uuid4
 from urllib.parse import urlencode
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     HTTPException,
     Request,
     status,
@@ -16,12 +16,12 @@ from tigrbl_auth.framework import (
     AsyncSession,
 )
 
-from tigrbl_auth.tables.engine import get_db
+from tigrbl_identity_storage.tables.engine import get_db
 
-from tigrbl_auth.tables import AuthCode, AuthSession, Client, User
-from tigrbl_auth.oidc_id_token import mint_id_token, oidc_hash
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oauth2.native_apps import is_native_redirect_uri
+from tigrbl_identity_storage.tables import AuthCode, AuthSession, Client, User
+from tigrbl_identity_oidc.id_token import mint_id_token, oidc_hash
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_identity_oauth.standards.native_apps import is_native_redirect_uri
 from ..shared import _require_tls
 from . import api
 

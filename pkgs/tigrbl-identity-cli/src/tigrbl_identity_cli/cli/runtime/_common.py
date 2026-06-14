@@ -18,17 +18,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from tigrbl_auth.api.app import build_app
+from tigrbl_identity_server.api.app import build_app
 from tigrbl_identity_cli.cli.certification_evidence import (
     environment_identity_ready,
     install_evidence_ready,
     runtime_surface_probe_ready,
     validated_runtime_manifest_passed,
 )
-from tigrbl_auth.path_safety import sanitize_local_paths
-from tigrbl_auth.repo_truth import workflow_role_text
-from tigrbl_auth.runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, iter_runner_adapters
-from tigrbl_auth.runtime.types import ApplicationProbeResult, CommandProbeResult, HttpEndpointProbeResult
+from tigrbl_identity_core.path_safety import sanitize_local_paths
+from tigrbl_identity_operator.repo_truth import workflow_role_text
+from tigrbl_identity_runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, iter_runner_adapters
+from tigrbl_identity_runtime.types import ApplicationProbeResult, CommandProbeResult, HttpEndpointProbeResult
 
 FORBIDDEN_IMPORT_PATTERNS = [
     re.compile(r"^\s*from\s+fastapi\b", re.MULTILINE),

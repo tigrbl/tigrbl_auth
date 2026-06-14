@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Final
 from uuid import UUID, uuid4
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = "backchannel-logout-fanout-runtime"
 _BACKCHANNEL_EVENT: Final[str] = "http://schemas.openid.net/event/backchannel-logout"
@@ -67,13 +67,13 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_auth.services import persistence as persistence_module
+    from tigrbl_identity_storage import persistence as persistence_module
 
     return persistence_module
 
 
 def _jwt_coder_cls():
-    from tigrbl_auth.services.token_service import JWTCoder
+    from tigrbl_identity_credentials.token_service import JWTCoder
 
     return JWTCoder
 

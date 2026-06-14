@@ -9,10 +9,10 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Final, Literal, Mapping
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when full runtime deps are installed
-    from tigrbl_auth.framework import BaseModel, hook_ctx
+    from tigrbl_identity_server.framework import BaseModel, hook_ctx
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel
 
@@ -80,7 +80,7 @@ class DeviceGrantForm(BaseModel):
 
 
 def _device_code_table():
-    from tigrbl_auth.tables import DeviceCode
+    from tigrbl_identity_storage.tables import DeviceCode
 
     return DeviceCode
 

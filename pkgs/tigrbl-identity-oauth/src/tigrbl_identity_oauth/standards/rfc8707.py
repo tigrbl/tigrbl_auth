@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 8707 resource-indicator helpers."""
 
-from tigrbl_auth.standards.oauth2.resource_indicators import (
+from tigrbl_identity_oauth.standards.resource_indicators import (
     RFC8707_SPEC_URL,
     OWNER,
     STATUS,

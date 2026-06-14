@@ -5,10 +5,10 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Iterable, Optional
 
-from tigrbl_auth.framework import Select, or_, select, AsyncSession
-from tigrbl_auth.services.key_management import verify_pw
-from tigrbl_auth.typing import Principal
-from tigrbl_auth.tables import ApiKey, Client, ServiceKey, User
+from tigrbl_identity_server.framework import Select, or_, select, AsyncSession
+from tigrbl_identity_jose.key_management import verify_pw
+from tigrbl_identity_core.typing import Principal
+from tigrbl_identity_storage.tables import ApiKey, Client, ServiceKey, User
 
 
 class AuthError(Exception):

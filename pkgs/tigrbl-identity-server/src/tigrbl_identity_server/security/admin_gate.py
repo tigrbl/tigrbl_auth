@@ -11,8 +11,8 @@ from typing import Any, Iterable
 
 from tigrbl.security import APIKey, HTTPBearer, Security
 
-from tigrbl_auth.config.deployment import ResolvedDeployment
-from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
+from tigrbl_identity_runtime.deployment import ResolvedDeployment
+from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
 
 ADMIN_API_KEY_ENV = "TIGRBL_AUTH_ADMIN_API_KEY"
 ADMIN_API_KEY_HEADER = "x-api-key"

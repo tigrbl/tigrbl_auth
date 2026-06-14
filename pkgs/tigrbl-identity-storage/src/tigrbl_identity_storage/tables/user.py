@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 import datetime as dt
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     UserBase,
     Bootstrappable,
     LargeBinary,
@@ -21,7 +21,7 @@ from tigrbl_auth.framework import (
     ColumnSpec,
 )
 
-from tigrbl_auth.services.key_management import hash_pw
+from tigrbl_identity_jose.key_management import hash_pw
 
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
 DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
@@ -98,7 +98,7 @@ class User(UserBase, Bootstrappable):
         )
 
     def verify_password(self, plain: str) -> bool:
-        from tigrbl_auth.services.key_management import verify_pw
+        from tigrbl_identity_jose.key_management import verify_pw
         if self.password_hash is None:
             return False
         return verify_pw(plain, self.password_hash)

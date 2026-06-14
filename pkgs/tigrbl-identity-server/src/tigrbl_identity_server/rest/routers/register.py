@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationOut
-from tigrbl_auth.framework import Depends, TigrblRouter
-from tigrbl_auth.ops.register import delete_registered_client, get_registered_client, register_client, update_registered_client
-from tigrbl_auth.tables import get_db
+from tigrbl_identity_contracts.rest import DynamicClientRegistrationOut
+from tigrbl_identity_server.framework import Depends, TigrblRouter
+from tigrbl_identity_oauth.ops.register import delete_registered_client, get_registered_client, register_client, update_registered_client
+from tigrbl_identity_storage.tables import get_db
 
 api = TigrblRouter()
 router = api
@@ -16,8 +16,8 @@ def _repo_root() -> Path:
 
 
 def _sync_client_registration(command: str, registration) -> None:
-    from tigrbl_auth.services._operator_store import OperationContext
-    from tigrbl_auth.services.operator_service import create_resource, delete_resource, update_resource
+    from tigrbl_identity_storage.operator_store import OperationContext
+    from tigrbl_identity_operator.operator_service import create_resource, delete_resource, update_resource
 
     if isinstance(registration, dict):
         payload = dict(registration)

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Final, Iterable, Set
 
-from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_identity_core.errors import InvalidTokenError
 
 RFC9068_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9068"
 

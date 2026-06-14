@@ -5,8 +5,8 @@ from datetime import timedelta
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
-from tigrbl_auth.rfc.rfc8176 import validate_amr_claim
-from tigrbl_auth.rfc.rfc8812 import is_webauthn_algorithm
+from tigrbl_identity_jose.standards.rfc8176 import validate_amr_claim
+from tigrbl_identity_jose.standards.rfc8812 import is_webauthn_algorithm
 
 from .adaptive import evaluate_adaptive_context
 from .models import (

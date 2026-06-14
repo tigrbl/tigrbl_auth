@@ -91,9 +91,9 @@ def _claim_registry(repo_root: Path, features: list[dict[str, Any]]) -> dict[str
         "generated_from": [
             "compliance/targets/*.yaml",
             "tigrbl_auth.config.surfaces",
-            "tigrbl_auth.api.rpc.registry",
+            "tigrbl_identity_server.rpc.registry",
             "tigrbl_identity_cli.cli.metadata",
-            "tigrbl_auth.config.deployment",
+            "tigrbl_identity_runtime.deployment",
             FAPI_ATOMIC_CLAIMS_PATH,
         ],
         "summary": {
@@ -270,9 +270,9 @@ def generate_claim_registries(repo_root: Path) -> dict[str, Any]:
         "generated_from": [
             "compliance/targets/*.yaml",
             "tigrbl_auth.config.surfaces",
-            "tigrbl_auth.api.rpc.registry",
+            "tigrbl_identity_server.rpc.registry",
             "tigrbl_identity_cli.cli.metadata",
-            "tigrbl_auth.config.deployment",
+            "tigrbl_identity_runtime.deployment",
         ],
         "summary": {
             "feature_count": len(features),

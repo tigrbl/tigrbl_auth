@@ -8,7 +8,7 @@ from typing import Any, Iterable
 
 import yaml
 
-from tigrbl_auth.repo_truth import evaluate_tier4_bundle
+from tigrbl_identity_operator.repo_truth import evaluate_tier4_bundle
 
 from tigrbl_identity_cli.cli.artifacts import (
     build_effective_claims_manifest,
@@ -263,7 +263,7 @@ ENTRYPOINT_LEGACY_IMPORT_PREFIXES = LEGACY_TREE_IMPORT_PREFIXES + (
     ".db",
     "..db",
     "...db",
-    "tigrbl_auth.runtime_cfg",
+    "tigrbl_identity_runtime.settings",
     ".runtime_cfg",
     "..runtime_cfg",
     "...runtime_cfg",

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from importlib import import_module, reload as _reload
 
-_settings_module = import_module("tigrbl_auth.config.settings")
+_settings_module = import_module("tigrbl_identity_runtime.settings")
 _settings_module = _reload(_settings_module)
 
 Settings = _settings_module.Settings

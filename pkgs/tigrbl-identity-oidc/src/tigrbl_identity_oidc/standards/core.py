@@ -7,9 +7,9 @@ UserInfo helpers without depending on star-import shims.
 
 from __future__ import annotations
 
-from tigrbl_auth.standards.oidc.discovery import include_oidc_discovery
-from tigrbl_auth.standards.oidc.id_token import mint_id_token, oidc_hash, rotate_rsa_jwt_key, verify_id_token
-from tigrbl_auth.standards.oidc.userinfo import include_oidc_userinfo
+from tigrbl_identity_oidc.standards.discovery import include_oidc_discovery
+from tigrbl_identity_oidc.standards.id_token import mint_id_token, oidc_hash, rotate_rsa_jwt_key, verify_id_token
+from tigrbl_identity_oidc.standards.userinfo import include_oidc_userinfo
 
 OIDC_CORE_COMPONENTS = (
     "discovery",

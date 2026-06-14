@@ -34,6 +34,14 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "bcrypt==5.0.0",
+    "swarmauri_core==0.10.0",
+    "swarmauri_crypto_jwe==0.3.0.dev5",
+    "swarmauri_keyprovider_file==0.2.0",
+    "swarmauri_keyprovider_local==0.2.0",
+    "swarmauri_signing_ed25519==0.2.0.dev32",
+    "swarmauri_signing_jws==0.3.0.dev31",
+    "swarmauri_tokens_jwt==0.3.0.dev31",
     "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
 ]

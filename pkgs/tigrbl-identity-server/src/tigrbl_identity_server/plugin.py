@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
@@ -25,8 +25,8 @@ class TigrblAuthPlugin:
         resolved_settings = settings if settings is not None else self.settings
         deployment = self.resolve_plugin_deployment(resolved_settings)
 
-        from tigrbl_auth.api.lifecycle import register_lifecycle
-        from tigrbl_auth.api.surfaces import attach_runtime_surfaces
+        from tigrbl_identity_server.api.lifecycle import register_lifecycle
+        from tigrbl_identity_server.api.surfaces import attach_runtime_surfaces
 
         state = getattr(app, "state", None)
         if state is not None:

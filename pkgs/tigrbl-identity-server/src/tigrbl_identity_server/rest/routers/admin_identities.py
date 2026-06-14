@@ -2,16 +2,16 @@ from __future__ import annotations
 
 from uuid import UUID
 
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, Request, TigrblRouter, select, status
-from tigrbl_auth.api.rest.schemas import (
+from tigrbl_identity_server.framework import AsyncSession, Depends, HTTPException, Request, TigrblRouter, select, status
+from tigrbl_identity_contracts.rest import (
     AdminIdentityOut,
     AdminIdentityProvisionIn,
     AdminIdentityUpdateIn,
 )
-from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
-from tigrbl_auth.services.key_management import hash_pw
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_auth.tables.engine import get_db
+from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_storage.tables import Tenant, User
+from tigrbl_identity_storage.tables.engine import get_db
 
 api = router = TigrblRouter()
 

@@ -61,15 +61,15 @@ class RpcRequestContext:
 
 
 METHOD_MODULES: tuple[str, ...] = (
-    "tigrbl_auth.api.rpc.methods.governance",
-    "tigrbl_auth.api.rpc.methods.directory",
-    "tigrbl_auth.api.rpc.methods.client_registration",
-    "tigrbl_auth.api.rpc.methods.session",
-    "tigrbl_auth.api.rpc.methods.token",
-    "tigrbl_auth.api.rpc.methods.consent",
-    "tigrbl_auth.api.rpc.methods.audit",
-    "tigrbl_auth.api.rpc.methods.keys",
-    "tigrbl_auth.api.rpc.methods.profile",
+    "tigrbl_identity_admin.rpc.governance",
+    "tigrbl_identity_admin.rpc.directory",
+    "tigrbl_identity_admin.rpc.client_registration",
+    "tigrbl_identity_admin.rpc.session",
+    "tigrbl_identity_admin.rpc.token",
+    "tigrbl_identity_admin.rpc.consent",
+    "tigrbl_identity_admin.rpc.audit",
+    "tigrbl_identity_admin.rpc.keys",
+    "tigrbl_identity_admin.rpc.profile",
 )
 
 _METHODS: dict[str, RpcMethodDefinition] | None = None
@@ -106,7 +106,11 @@ def get_rpc_method_registry() -> dict[str, dict[str, Any]]:
 
 def iter_active_rpc_methods(deployment: Any) -> list[RpcMethodDefinition]:
     active: list[RpcMethodDefinition] = []
+    allowed_names = getattr(deployment, "active_openrpc_methods", None)
+    allowed_set = set(allowed_names or ())
     for item in list_rpc_methods():
+        if allowed_names is not None and item.name not in allowed_set:
+            continue
         if hasattr(deployment, "surface_enabled") and not deployment.surface_enabled(item.surface_set):
             continue
         if item.required_flags and hasattr(deployment, "flag_enabled"):

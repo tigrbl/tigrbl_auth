@@ -9,16 +9,16 @@ from typing import Any
 
 from sqlalchemy.exc import SQLAlchemyError
 
-from tigrbl_auth.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, select, status
-from tigrbl_auth.config.deployment import (
+from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, select, status
+from tigrbl_identity_runtime.deployment import (
     ResolvedDeployment,
     deployment_from_app,
     deployment_from_request,
     resolve_deployment,
 )
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.services.operator_service import build_operator_jwks_payload
-from tigrbl_auth.services.tenant_discovery import (
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_operator.operator_service import build_operator_jwks_payload
+from tigrbl_identity_principals.tenant_discovery import (
     REALM_JWKS_PATH,
     REALM_OPENID_CONFIGURATION_PATH,
     TENANT_JWKS_PATH,
@@ -27,13 +27,13 @@ from tigrbl_auth.services.tenant_discovery import (
     build_tenant_openid_config,
     enabled_tenant_record,
 )
-from tigrbl_auth.services.jwks_service import build_jwks_document
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
-from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
-from tigrbl_auth.tables import Realm, Tenant
-from tigrbl_auth.tables.engine import get_db
+from tigrbl_identity_jose.jwks_service import build_jwks_document
+from tigrbl_identity_oidc.standards.discovery_metadata import build_openid_config
+from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER, JWKS_PATH
+from tigrbl_identity_oauth.standards.rfc9700 import discovery_policy_metadata
+from tigrbl_identity_storage.tables import Realm, Tenant
+from tigrbl_identity_storage.tables.engine import get_db
 
 api = TigrblRouter()
 discovery_api = TigrblRouter()
@@ -97,6 +97,8 @@ async def openid_configuration_method_not_allowed(request: Request):
 
 
 async def _tenant_exists(*, db, tenant_slug: str) -> bool:
+    if tenant_slug == "public":
+        return True
     operator_fallback = enabled_tenant_record(Path.cwd(), tenant_slug) is not None
     if db is None:
         return operator_fallback

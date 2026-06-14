@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9101 JAR helpers."""
 
-from tigrbl_auth.standards.oauth2.jar import (
+from tigrbl_identity_oauth.standards.jar import (
     RFC9101_SPEC_URL,
     OWNER,
     STATUS,

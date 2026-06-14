@@ -110,7 +110,7 @@ from swarmauri_tokens_jwt import JWTTokenService
 _BaseTigrblRouter = getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")
 
 
-_TABLE_MODULE_PREFIXES = ("tigrbl_auth.tables.", "tigrbl_identity_storage.tables.")
+_TABLE_MODULE_PREFIXES = ("tigrbl_identity_storage.tables.", "tigrbl_identity_storage.tables.")
 
 
 def _is_local_table_module(module_name: str) -> bool:

@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 7009 revocation helpers."""
 
-from tigrbl_auth.standards.oauth2.revocation import (
+from tigrbl_identity_oauth.standards.revocation import (
     RFC7009_SPEC_URL,
     api,
     include_revocation_endpoint,

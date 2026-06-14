@@ -11,28 +11,28 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any, Callable, Final
 
-from tigrbl_auth.framework import TigrblApp, TigrblRouter
-from tigrbl_auth.api.rest.routers.authorize import api as authorize_api
-from tigrbl_auth.api.rest.routers.admin_auth import api as admin_auth_api
-from tigrbl_auth.api.rest.routers.admin_identities import api as admin_identities_api
-from tigrbl_auth.api.rest.routers.admin_realms import api as admin_realms_api
-from tigrbl_auth.api.rest.routers.admin_tenants import api as admin_tenants_api
-from tigrbl_auth.api.rest.routers.device_authorization import api as device_authorization_api
-from tigrbl_auth.api.rest.routers.login import api as login_api
-from tigrbl_auth.api.rest.routers.logout import api as logout_api
-from tigrbl_auth.api.rest.routers.par import api as par_api
-from tigrbl_auth.api.rest.routers.register import api as register_api
-from tigrbl_auth.api.rest.routers.revoke import api as revoke_api
-from tigrbl_auth.api.rest.routers.token import api as token_api
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.standards.oidc.discovery import include_jwks, include_openid_configuration
-from tigrbl_auth.standards.oidc.userinfo import include_oidc_userinfo
-from tigrbl_auth.standards.oauth2.introspection import include_introspection_endpoint
-from tigrbl_auth.standards.oauth2.rfc8414 import include_rfc8414
-from tigrbl_auth.standards.oauth2.rfc9728 import include_rfc9728
-from tigrbl_auth.standards.oauth2.token_exchange import include_token_exchange_endpoint
-from tigrbl_auth.security.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
-from tigrbl_auth._identity_storage import ensure_identity_storage_importable
+from tigrbl_identity_server.framework import TigrblApp, TigrblRouter
+from tigrbl_identity_server.rest.routers.authorize import api as authorize_api
+from tigrbl_identity_server.rest.routers.admin_auth import api as admin_auth_api
+from tigrbl_identity_server.rest.routers.admin_identities import api as admin_identities_api
+from tigrbl_identity_server.rest.routers.admin_realms import api as admin_realms_api
+from tigrbl_identity_server.rest.routers.admin_tenants import api as admin_tenants_api
+from tigrbl_identity_server.rest.routers.device_authorization import api as device_authorization_api
+from tigrbl_identity_server.rest.routers.login import api as login_api
+from tigrbl_identity_server.rest.routers.logout import api as logout_api
+from tigrbl_identity_server.rest.routers.par import api as par_api
+from tigrbl_identity_server.rest.routers.register import api as register_api
+from tigrbl_identity_server.rest.routers.revoke import api as revoke_api
+from tigrbl_identity_server.rest.routers.token import api as token_api
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_oidc.standards.discovery import include_jwks, include_openid_configuration
+from tigrbl_identity_oidc.standards.userinfo import include_oidc_userinfo
+from tigrbl_identity_oauth.standards.introspection import include_introspection_endpoint
+from tigrbl_identity_oauth.standards.rfc8414 import include_rfc8414
+from tigrbl_identity_oauth.standards.rfc9728 import include_rfc9728
+from tigrbl_identity_oauth.standards.token_exchange import include_token_exchange_endpoint
+from tigrbl_identity_server.security.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tigrbl_identity_storage import ensure_identity_storage_importable
 
 ensure_identity_storage_importable()
 

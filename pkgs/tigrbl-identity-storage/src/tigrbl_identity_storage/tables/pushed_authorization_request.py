@@ -6,7 +6,7 @@ import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     Base,
     Timestamped,
     S,
@@ -20,8 +20,8 @@ from tigrbl_auth.framework import (
     ForeignKeySpec,
     PgUUID,
 )
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import HTTPException
 from http import HTTPStatus as status
 
 DEFAULT_PAR_EXPIRY = 90

@@ -45,7 +45,7 @@ try:  # pragma: no cover - exercised in real runtime installs
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     DpopSigner = None  # type: ignore[assignment]
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC9449_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9449"
 _ALG_VALUE: Final[str] = "EdDSA"

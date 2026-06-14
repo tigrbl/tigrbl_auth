@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9207 issuer-identification helpers."""
 
-from tigrbl_auth.standards.oauth2.issuer_identification import (
+from tigrbl_identity_oauth.standards.issuer_identification import (
     RFC9207_SPEC_URL,
     OWNER,
     STATUS,

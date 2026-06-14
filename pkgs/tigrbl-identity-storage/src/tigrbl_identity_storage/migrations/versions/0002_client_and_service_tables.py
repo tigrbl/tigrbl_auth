@@ -1,6 +1,6 @@
 """Executable DDL migration for 0002_client_and_service_tables."""
 
-from tigrbl_auth.migrations.helpers import create_tables, drop_tables
+from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
 from tigrbl_identity_storage.tables import Client, ClientRegistration, Service, ServiceKey, ApiKey
 
 revision = '0002_client_and_service_tables'

@@ -13,17 +13,17 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
-from tigrbl_auth.framework import Request
+from tigrbl_identity_server.framework import Request
 from typing import Final
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC6750_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc6750"
 
 
 def _active_settings():
     try:
-        from tigrbl_auth.runtime_cfg import settings as runtime_settings
+        from tigrbl_identity_runtime.settings import settings as runtime_settings
 
         return runtime_settings
     except Exception:  # pragma: no cover - import fallback

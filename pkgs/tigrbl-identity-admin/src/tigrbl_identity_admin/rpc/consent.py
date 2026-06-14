@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition
-from tigrbl_auth.api.rpc.schemas.consent import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition
+from tigrbl_identity_contracts.rpc.consent import (
     ConsentListParams,
     ConsentListResult,
     ConsentRevokeParams,
@@ -11,11 +11,11 @@ from tigrbl_auth.api.rpc.schemas.consent import (
     ConsentShowParams,
     ConsentShowResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import get_row, list_rows, row_to_dict
+from tigrbl_identity_admin.rpc._shared import get_row, list_rows, row_to_dict
 
 
 async def handle_consent_list(params: ConsentListParams, _context):
-    from tigrbl_auth.tables import Consent
+    from tigrbl_identity_storage.tables import Consent
 
     rows = await list_rows(
         Consent,
@@ -28,14 +28,14 @@ async def handle_consent_list(params: ConsentListParams, _context):
 
 
 async def handle_consent_show(params: ConsentShowParams, _context):
-    from tigrbl_auth.tables import Consent
+    from tigrbl_identity_storage.tables import Consent
 
     row = await get_row(Consent, id_value=params.consent_id)
     return ConsentShowResult(consent=row_to_dict(row) if row else None)
 
 
 async def handle_consent_revoke(params: ConsentRevokeParams, _context):
-    from tigrbl_auth.services.persistence import revoke_consent_async
+    from tigrbl_identity_storage.persistence import revoke_consent_async
 
     row = await revoke_consent_async(params.consent_id)
     return ConsentRevokeResult(consent=row_to_dict(row) if row else None)

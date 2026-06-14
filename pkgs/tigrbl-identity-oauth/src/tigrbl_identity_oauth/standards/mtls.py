@@ -19,8 +19,8 @@ from typing import Any, Final, Iterable, Mapping
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError
 
 RFC8705_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8705"
 TLS_CLIENT_AUTH_METHOD: Final[str] = "tls_client_auth"

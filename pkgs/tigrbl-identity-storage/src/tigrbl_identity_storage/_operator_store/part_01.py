@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
-from tigrbl_auth.path_safety import safe_display_path
+from tigrbl_identity_core.path_safety import safe_display_path
 
 try:
     import yaml

@@ -7,16 +7,16 @@ exist in *tigrbl_auth* so that Tigrbl can consume them automatically.
 
 Usage
 -----
->>> from tigrbl_auth.framework import TigrblRouter
+>>> from tigrbl_identity_server.framework import TigrblRouter
 >>> from tigrbl_auth.adapters import LocalAuthNAdapter
 >>> api = TigrblRouter(engine=ENGINE, authn=LocalAuthNAdapter())
 """
 
 from __future__ import annotations
 
-from tigrbl_auth.framework import AuthNProvider, Request
-from tigrbl_auth.security.auth import get_principal
-from tigrbl_auth.security.context import principal_var  # noqa: F401  # ensure ContextVar is initialised
+from tigrbl_identity_server.framework import AuthNProvider, Request
+from tigrbl_identity_server.security.auth import get_principal
+from tigrbl_identity_server.security.context import principal_var  # noqa: F401  # ensure ContextVar is initialised
 from .auth_context import set_auth_context
 
 
@@ -31,7 +31,7 @@ class LocalAuthNAdapter(AuthNProvider):
     # ------------------------------------------------------------------ #
     async def get_principal(self, request: Request) -> dict:  # noqa: D401
         """
-        Delegate to ``tigrbl_auth.security.deps.get_principal`` and forward
+        Delegate to ``tigrbl_identity_server.security.deps.get_principal`` and forward
         whatever dict it returns.
 
         Raises

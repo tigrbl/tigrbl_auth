@@ -18,7 +18,7 @@ import secrets
 import warnings
 from typing import Final
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC7636_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7636"
 

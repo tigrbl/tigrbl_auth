@@ -1,6 +1,6 @@
 """Executable DDL migration for 0004_device_par_revocation_tables."""
 
-from tigrbl_auth.migrations.helpers import create_tables, drop_tables
+from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
 from tigrbl_identity_storage.tables import DeviceCode, PushedAuthorizationRequest, RevokedToken
 
 revision = '0004_device_par_revocation_tables'

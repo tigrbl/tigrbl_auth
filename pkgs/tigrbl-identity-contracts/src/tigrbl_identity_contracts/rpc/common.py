@@ -6,7 +6,7 @@ from typing import Any
 
 from pydantic import ConfigDict, Field
 
-from tigrbl_auth.api.rpc.registry import EmptyParams, RpcSchema
+from tigrbl_identity_server.rpc.registry import EmptyParams, RpcSchema
 
 
 class PaginationParams(RpcSchema):

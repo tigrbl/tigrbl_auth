@@ -23,7 +23,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Final, Iterable, Mapping, Sequence
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = 'request-object-runtime'
 RFC9101_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9101'

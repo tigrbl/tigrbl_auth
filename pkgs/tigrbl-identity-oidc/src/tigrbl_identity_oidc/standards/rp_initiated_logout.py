@@ -10,11 +10,11 @@ from typing import Any, Final
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
 
 try:  # dependency-light import path for checkpoint evidence generation
-    from tigrbl_auth.framework import HTTPException, status
+    from tigrbl_identity_server.framework import HTTPException, status
 except Exception:  # pragma: no cover - exercised in dependency-light tests
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -62,25 +62,25 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_auth.services import persistence as persistence_module
+    from tigrbl_identity_storage import persistence as persistence_module
 
     return persistence_module
 
 
 def _frontchannel_builder():
-    from tigrbl_auth.standards.oidc.frontchannel_logout import build_frontchannel_descriptor
+    from tigrbl_identity_oidc.standards.frontchannel_logout import build_frontchannel_descriptor
 
     return build_frontchannel_descriptor
 
 
 def _backchannel_builder():
-    from tigrbl_auth.standards.oidc.backchannel_logout import build_backchannel_descriptor
+    from tigrbl_identity_oidc.standards.backchannel_logout import build_backchannel_descriptor
 
     return build_backchannel_descriptor
 
 
 async def _verify_id_token_hint(token: str, *, issuer: str, audience: str):
-    from tigrbl_auth.standards.oidc.id_token import verify_id_token
+    from tigrbl_identity_oidc.standards.id_token import verify_id_token
 
     return await verify_id_token(token, issuer=issuer, audience=audience)
 

@@ -8,32 +8,32 @@ from uuid import UUID, uuid4
 
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
-from tigrbl_auth.api.rest.schemas import (
+from tigrbl_identity_contracts.rest import (
     DynamicClientRegistrationIn,
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
 )
-from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException, IntegrityError, select, status
-from tigrbl_auth.services.persistence import append_audit_event_async, token_hash, upsert_client_registration_async
-from tigrbl_auth.services.tenant_discovery import enabled_tenant_record
-from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import HTTPException, IntegrityError, select, status
+from tigrbl_identity_storage.persistence import append_audit_event_async, token_hash, upsert_client_registration_async
+from tigrbl_identity_principals.tenant_discovery import enabled_tenant_record
+from tigrbl_identity_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,
 )
-from tigrbl_auth.standards.oauth2.mtls import (
+from tigrbl_identity_oauth.standards.mtls import (
     SELF_SIGNED_TLS_CLIENT_AUTH_METHOD,
     SUPPORTED_MTLS_AUTH_METHODS,
     TLS_CLIENT_AUTH_METHOD,
 )
-from tigrbl_auth.standards.oauth2.native_apps import (
+from tigrbl_identity_oauth.standards.native_apps import (
     is_native_redirect_uri,
     validate_native_client_metadata,
     validate_native_redirect_uri,
 )
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
-from tigrbl_auth.tables import Client, ClientRegistration, Tenant
+from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_identity_storage.tables import Client, ClientRegistration, Tenant
 
 
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHODS = {"client_secret_basic", "client_secret_post", PRIVATE_KEY_JWT_AUTH_METHOD, *SUPPORTED_MTLS_AUTH_METHODS}

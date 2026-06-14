@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.migrations.helpers import column_names, drop_columns, AUTHN_SCHEMA
+from tigrbl_identity_storage.migrations.helpers import column_names, drop_columns, AUTHN_SCHEMA
 
 revision = '0007_browser_session_cookie_and_auth_code_linkage'
 down_revision = '0006_key_rotation_and_audit_tables'

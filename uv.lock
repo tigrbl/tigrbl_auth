@@ -2537,11 +2537,17 @@ dependencies = [
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-cli" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth" },
+    { name = "tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-policy" },
+    { name = "tigrbl-identity-principals" },
+    { name = "tigrbl-identity-resource-server" },
+    { name = "tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
@@ -2638,11 +2644,17 @@ requires-dist = [
     { name = "tigrbl-authz-resource-server", editable = "pkgs/tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin", editable = "pkgs/tigrbl-identity-admin" },
     { name = "tigrbl-identity-cli", editable = "pkgs/tigrbl-identity-cli" },
+    { name = "tigrbl-identity-contracts", editable = "pkgs/tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core", editable = "pkgs/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-jose", editable = "pkgs/tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth", editable = "pkgs/tigrbl-identity-oauth" },
+    { name = "tigrbl-identity-oidc", editable = "pkgs/tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator", editable = "pkgs/tigrbl-identity-operator" },
     { name = "tigrbl-identity-policy", editable = "pkgs/tigrbl-identity-policy" },
+    { name = "tigrbl-identity-principals", editable = "pkgs/tigrbl-identity-principals" },
+    { name = "tigrbl-identity-resource-server", editable = "pkgs/tigrbl-identity-resource-server" },
+    { name = "tigrbl-identity-rp", editable = "pkgs/tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime", editable = "pkgs/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/tigrbl-identity-storage" },
@@ -2817,6 +2829,16 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-cli" }
 
 [[package]]
+name = "tigrbl-identity-contracts"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-identity-contracts" }
+
+[[package]]
+name = "tigrbl-identity-core"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-identity-core" }
+
+[[package]]
 name = "tigrbl-identity-credentials"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-credentials" }
@@ -2838,12 +2860,28 @@ name = "tigrbl-identity-jose"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-jose" }
 dependencies = [
+    { name = "bcrypt" },
+    { name = "swarmauri-core" },
+    { name = "swarmauri-crypto-jwe" },
+    { name = "swarmauri-keyprovider-file" },
+    { name = "swarmauri-keyprovider-local" },
+    { name = "swarmauri-signing-ed25519" },
+    { name = "swarmauri-signing-jws" },
+    { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "bcrypt", specifier = "==5.0.0" },
+    { name = "swarmauri-core", specifier = "==0.10.0" },
+    { name = "swarmauri-crypto-jwe", specifier = "==0.3.0.dev5" },
+    { name = "swarmauri-keyprovider-file", specifier = "==0.2.0" },
+    { name = "swarmauri-keyprovider-local", specifier = "==0.2.0" },
+    { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
+    { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
+    { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]
@@ -2856,11 +2894,7 @@ source = { editable = "pkgs/tigrbl-identity-oauth" }
 [[package]]
 name = "tigrbl-identity-oidc"
 version = "0.4.0.dev2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/38/9a/4b40ba900f539838c350623f75cb98d0bd56ed5da4a8fcd2d249ff9f9a64/tigrbl_identity_oidc-0.4.0.dev2.tar.gz", hash = "sha256:ea3a86124927547c44d286bb10c0011e2697b00562732523a1c966754e57b925", size = 20004 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f1/56/08b9df9b34ccff50a9d9fed6f77cf1ea66a4843dedb4ed88fdc12765da09/tigrbl_identity_oidc-0.4.0.dev2-py3-none-any.whl", hash = "sha256:e8524ef16f1a06006508f7b3e16023bd5e0c09489aff329abe9a6bbec613f7a5", size = 30167 },
-]
+source = { editable = "pkgs/tigrbl-identity-oidc" }
 
 [[package]]
 name = "tigrbl-identity-operator"
@@ -2883,22 +2917,19 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-policy" }
 
 [[package]]
+name = "tigrbl-identity-principals"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-identity-principals" }
+
+[[package]]
 name = "tigrbl-identity-resource-server"
 version = "0.4.0.dev2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/17/df/325d9cb69b8ac1206d86c9ddf178338c2405767a6e02609bcc5a72274ce9/tigrbl_identity_resource_server-0.4.0.dev2.tar.gz", hash = "sha256:d9f314994ae620de26c59201b298aa59d88e084b4d9e8c4df4dd65b74c90354a", size = 1755 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/25/6a/94f6e4edbc4e79e208fad95f38ae886f2ba37925905422d23a24a78808ee/tigrbl_identity_resource_server-0.4.0.dev2-py3-none-any.whl", hash = "sha256:885ea5413ccd6626ec3a93a03a265d7086d8f397ad2a7a691cf37507cd7beb4c", size = 2764 },
-]
+source = { editable = "pkgs/tigrbl-identity-resource-server" }
 
 [[package]]
 name = "tigrbl-identity-rp"
 version = "0.4.0.dev2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/82/ac/a56f9ca8e0a4e7db9e92b92ad9192f2d8cee04431a322e92ca2947a654d5/tigrbl_identity_rp-0.4.0.dev2.tar.gz", hash = "sha256:e38fdd5e4f532204701c221a28a603871ad265f819573a4dc10daf573af5c60d", size = 6153 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2c/f1/0dad34cf845d05252c6c9cb1b5d74a58589b98b8df324a772f2f59a5d8e4/tigrbl_identity_rp-0.4.0.dev2-py3-none-any.whl", hash = "sha256:e7ee6ec3549836c25b97f5ae9620d5604c4445282f11614b0d1be84274e5039a", size = 7800 },
-]
+source = { editable = "pkgs/tigrbl-identity-rp" }
 
 [[package]]
 name = "tigrbl-identity-runtime"

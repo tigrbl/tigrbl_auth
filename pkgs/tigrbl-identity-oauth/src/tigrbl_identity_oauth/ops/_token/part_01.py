@@ -7,49 +7,49 @@ from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.services.token_service import (
+from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_credentials.token_service import (
     InvalidRefreshTokenError,
     RefreshTokenReuseError,
     issue_persisted_token_pair,
     redeem_refresh_token,
 )
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.oidc_id_token import mint_id_token, oidc_hash
+    from tigrbl_identity_oidc.id_token import mint_id_token, oidc_hash
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     async def mint_id_token(*, sub: str, aud: str, nonce: str, issuer: str, **claims):
         return 'dependency-light-id-token'
 
     def oidc_hash(value: str) -> str:
         return str(value)[:8]
-from tigrbl_auth.standards.oauth2.assertion_framework import (
+from tigrbl_identity_oauth.standards.assertion_framework import (
     JWT_BEARER_GRANT_TYPE,
     validate_assertion_grant_request,
 )
-from tigrbl_auth.standards.oauth2.device_authorization import (
+from tigrbl_identity_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
     DEVICE_CODE_GRANT_TYPE,
     DEVICE_CODE_INTERVAL,
     next_device_poll_interval,
     poll_too_frequently,
 )
-from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+from tigrbl_identity_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     authenticate_client_assertion,
 )
-from tigrbl_auth.standards.oauth2.mtls import (
+from tigrbl_identity_oauth.standards.mtls import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
     presented_certificate_thumbprint,
 )
-from tigrbl_auth.standards.oauth2.native_apps import validate_native_token_request
-from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
-from tigrbl_auth.standards.oauth2.rfc6749 import RFC6749Error, enforce_authorization_code_grant, enforce_grant_type, enforce_password_grant
-from tigrbl_auth.standards.oauth2.rfc7636_pkce import verify_code_challenge
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_identity_oauth.standards.native_apps import validate_native_token_request
+from tigrbl_identity_oauth.standards.resource_indicators import select_resource_indicator
+from tigrbl_identity_oauth.standards.rfc6749 import RFC6749Error, enforce_authorization_code_grant, enforce_grant_type, enforce_password_grant
+from tigrbl_identity_oauth.standards.rfc7636_pkce import verify_code_challenge
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_identity_oauth.standards.rfc9700 import (
     OAuthPolicyViolation,
     assert_token_request_allowed,
     dpop_proof_from_request,
@@ -58,7 +58,7 @@ from tigrbl_auth.standards.oauth2.rfc9700 import (
 )
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_auth.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, ValidationError, select, status
+    from tigrbl_identity_server.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, ValidationError, select, status
 
     class JSONResponse(_FrameworkJSONResponse):
         def __init__(self, content: Any, *, status_code: int = 200, headers: dict[str, str] | None = None):
@@ -102,7 +102,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover
-    from tigrbl_auth.api.rest.schemas import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
+    from tigrbl_identity_contracts.rest import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
 except Exception:  # pragma: no cover - dependency-light fallback
     from pydantic import BaseModel
 
@@ -124,9 +124,9 @@ except Exception:  # pragma: no cover - dependency-light fallback
         token_type: str = 'bearer'
 
 try:  # pragma: no cover
-    from tigrbl_auth.api.rest.shared import _jwt, _pwd_backend, _require_tls, allowed_grant_types
+    from tigrbl_identity_server.rest.shared import _jwt, _pwd_backend, _require_tls, allowed_grant_types
 except Exception:  # pragma: no cover - dependency-light fallback
-    from tigrbl_auth.services.token_service import JWTCoder
+    from tigrbl_identity_credentials.token_service import JWTCoder
 
     _jwt = JWTCoder.default if False else None  # placeholder to keep name bound
 
@@ -148,13 +148,13 @@ except Exception:  # pragma: no cover - dependency-light fallback
         return ['client_credentials', 'password', 'authorization_code', 'refresh_token', JWT_BEARER_GRANT_TYPE, DEVICE_CODE_GRANT_TYPE]
 
 try:  # pragma: no cover
-    from tigrbl_auth.services.persistence import append_audit_event_async
+    from tigrbl_identity_storage.persistence import append_audit_event_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def append_audit_event_async(**kwargs):
         return None
 
 try:  # pragma: no cover
-    from tigrbl_auth.tables import AuthCode, Client, ClientRegistration, DeviceCode, User
+    from tigrbl_identity_storage.tables import AuthCode, Client, ClientRegistration, DeviceCode, User
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()

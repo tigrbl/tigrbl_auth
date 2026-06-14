@@ -9,16 +9,16 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
-from tigrbl_auth.standards.jose.rfc7516 import jwe_policy_metadata
-from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
+from tigrbl_identity_jose.standards.rfc7516 import jwe_policy_metadata
+from tigrbl_identity_oauth.standards.jwt_client_auth import (
     token_endpoint_auth_methods_supported,
     token_endpoint_auth_signing_alg_values_supported,
 )
-from tigrbl_auth.standards.oauth2.mtls import SUPPORTED_MTLS_AUTH_METHODS
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth.standards.oauth2.rfc9700 import discovery_policy_metadata
+from tigrbl_identity_oauth.standards.mtls import SUPPORTED_MTLS_AUTH_METHODS
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER, JWKS_PATH
+from tigrbl_identity_oauth.standards.rfc9700 import discovery_policy_metadata
 
 
 def _as_deployment(
@@ -96,6 +96,11 @@ def build_openid_config(
             "introspection_endpoint": f"{issuer}/introspect",
             "registration_endpoint": f"{issuer}/register",
         }
+    config["tigrbl_auth_capabilities"] = sorted(
+        capability
+        for capability in deployment.active_capabilities
+        if deployment.capability_enabled(capability)
+    )
     return config
 
 

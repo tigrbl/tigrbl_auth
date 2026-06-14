@@ -9,7 +9,7 @@ exercised without Tigrbl/SQLAlchemy.
 from __future__ import annotations
 
 try:  # pragma: no cover - exercised when runtime dependencies are installed
-    from tigrbl_auth.standards.oidc.discovery import (
+    from tigrbl_identity_oidc.standards.discovery import (
         ISSUER,
         JWKS_PATH,
         _build_openid_config,
@@ -25,10 +25,10 @@ except Exception:  # pragma: no cover - dependency-light fallback
     from functools import lru_cache
     from typing import Any
 
-    from tigrbl_auth.config.deployment import resolve_deployment
-    from tigrbl_auth.config.settings import settings
-    from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
-    from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
+    from tigrbl_identity_runtime.deployment import resolve_deployment
+    from tigrbl_identity_runtime.settings import settings
+    from tigrbl_identity_oidc.standards.discovery_metadata import build_openid_config
+    from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER, JWKS_PATH
 
     api = None
     router = None

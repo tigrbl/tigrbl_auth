@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_auth.api.rest.schemas import RevocationOut
-from tigrbl_auth.framework import TigrblRouter
-from tigrbl_auth.ops.revoke import revoke_request
+from tigrbl_identity_contracts.rest import RevocationOut
+from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl_identity_oauth.ops.revoke import revoke_request
 
 api = TigrblRouter()
 router = api

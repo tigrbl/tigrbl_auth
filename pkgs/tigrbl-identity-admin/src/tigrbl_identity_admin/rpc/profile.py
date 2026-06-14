@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition, RpcRequestContext
-from tigrbl_auth.api.rpc.schemas.profile import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition, RpcRequestContext
+from tigrbl_identity_contracts.rpc.profile import (
     ProfileShowParams,
     ProfileShowResult,
     TargetListParams,
@@ -13,13 +13,13 @@ from tigrbl_auth.api.rpc.schemas.profile import (
     TargetShowParams,
     TargetShowResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import deployment_summary, repo_root_from_context, read_yaml
+from tigrbl_identity_admin.rpc._shared import deployment_summary, repo_root_from_context, read_yaml
 
 
 def _resolved_deployment(context: RpcRequestContext):
     if context.deployment is not None:
         return context.deployment
-    from tigrbl_auth.config.deployment import resolve_deployment
+    from tigrbl_identity_runtime.deployment import resolve_deployment
 
     return resolve_deployment(profile=context.profile)
 

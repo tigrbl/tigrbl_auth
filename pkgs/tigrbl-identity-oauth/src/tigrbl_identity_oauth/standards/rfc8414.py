@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-from tigrbl_auth.config.deployment import deployment_from_app, deployment_from_request
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.oidc.discovery import refresh_discovery_cache
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_oidc.standards.discovery import refresh_discovery_cache
+from tigrbl_identity_oidc.standards.discovery_metadata import build_openid_config
 
 RFC8414_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc8414"
 

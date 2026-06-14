@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from uuid import UUID
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     Created,
     GUIDPk,

@@ -1,6 +1,6 @@
-from tigrbl_auth.framework import TigrblRouter
-from tigrbl_auth.standards.oauth2 import rfc6749_token
-from tigrbl_auth.standards.oauth2.introspection import api as introspection_api
+from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl_identity_oauth.standards import rfc6749_token
+from tigrbl_identity_oauth.standards.introspection import api as introspection_api
 
 api = TigrblRouter()
 api.include_router(rfc6749_token.api)

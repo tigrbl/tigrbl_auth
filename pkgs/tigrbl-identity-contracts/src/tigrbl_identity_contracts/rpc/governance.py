@@ -7,7 +7,7 @@ from typing import Any
 from pydantic import Field
 
 from .common import DeploymentSummary, EmptyParams, MethodSummary, OperationStatus
-from tigrbl_auth.api.rpc.registry import RpcSchema
+from tigrbl_identity_server.rpc.registry import RpcSchema
 
 
 class RpcDiscoverResult(RpcSchema):

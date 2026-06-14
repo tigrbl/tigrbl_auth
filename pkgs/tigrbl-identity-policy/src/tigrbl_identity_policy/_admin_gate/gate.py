@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Awaitable, Callable, Iterable
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment
-from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
+from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
 
 from .helpers import (
     _bootstrap_digest,
@@ -103,7 +103,7 @@ class AdminGate:
             await send({"type": "http.response.body", "body": response_body})
             return True
 
-        from tigrbl_auth.api.rpc import (
+        from tigrbl_identity_server.rpc import (
             RpcRequestContext,
             get_rpc_method,
             invoke_rpc_method_async,

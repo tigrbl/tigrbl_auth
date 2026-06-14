@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 7523 JWT client-auth helpers."""
 
-from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+from tigrbl_identity_oauth.standards.jwt_client_auth import (
     CLIENT_SECRET_JWT_AUTH_METHOD,
     JWT_BEARER_ASSERTION_TYPE,
     OWNER,

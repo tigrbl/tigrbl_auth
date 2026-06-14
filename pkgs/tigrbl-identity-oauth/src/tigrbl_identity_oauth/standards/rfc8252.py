@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 8252 native-app helpers."""
 
-from tigrbl_auth.standards.oauth2.native_apps import (
+from tigrbl_identity_oauth.standards.native_apps import (
     RFC8252_SPEC_URL,
     NativeRedirectAssessment,
     classify_native_redirect_uri,

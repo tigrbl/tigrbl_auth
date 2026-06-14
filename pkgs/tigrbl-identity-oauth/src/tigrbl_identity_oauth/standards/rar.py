@@ -7,11 +7,11 @@ from dataclasses import dataclass
 from typing import Any, Final
 from urllib.parse import urlparse
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_auth.framework import BaseModel, ValidationError
+    from tigrbl_identity_server.framework import BaseModel, ValidationError
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel, ValidationError  # type: ignore
 

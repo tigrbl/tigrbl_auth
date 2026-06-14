@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 7591 owner metadata."""
 
-from tigrbl_auth.standards.oauth2.dynamic_client_registration import (
+from tigrbl_identity_oauth.standards.dynamic_client_registration import (
     RFC7591_SPEC_URL,
     OWNER,
     STATUS,

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
-from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_identity_core.errors import InvalidTokenError
 
 from .runtime import _ACCESS_TTL, _REFRESH_TTL, _header_alg, _load_runtime, _run, _svc
 
@@ -68,7 +68,7 @@ class JWTCoder:
         if getattr(settings, "enable_rfc9068", False) and typ == "access":
             effective_issuer = issuer or settings.issuer
             effective_audience = audience or settings.protected_resource_identifier
-            from tigrbl_auth.standards.oauth2.jwt_access_tokens import add_jwt_access_token_claims
+            from tigrbl_identity_oauth.standards.jwt_access_tokens import add_jwt_access_token_claims
 
             payload = add_jwt_access_token_claims(payload, issuer=effective_issuer, audience=effective_audience)
             issuer = effective_issuer

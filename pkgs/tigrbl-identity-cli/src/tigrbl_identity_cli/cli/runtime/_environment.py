@@ -166,7 +166,7 @@ def build_validated_runner_profile_report(repo_root: Path, *, deployment: Any) -
         "validated_artifact_source": validated_source.relative_to(repo_root).as_posix() if validated_source.exists() else None,
         "application_probe": {
             "passed": application_probe_passed,
-            "app_factory": "tigrbl_auth.api.app.build_app",
+            "app_factory": "tigrbl_identity_server.api.app.build_app",
             "message": application_message,
             "error_type": None if application_probe_passed else "ValidatedRuntimeEvidenceMissing",
         },

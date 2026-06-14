@@ -9,9 +9,9 @@ from typing import Any
 
 from tigrbl import bootstrap_dbschema
 from tigrbl.ddl import sqlite_default_attach_map
-from tigrbl_auth.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
-from tigrbl_auth.migrations.helpers import AUTHN_SCHEMA
-from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_storage.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
+from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA
+from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_storage.tables import Base
 from tigrbl_identity_storage.tables.engine import ENGINE
 
@@ -39,7 +39,7 @@ class SchemaVerification:
 
 def _resolve_provider():
     try:
-        from tigrbl_auth.api.surfaces import surface_api
+        from tigrbl_identity_server.api.surfaces import surface_api
 
         provider = resolve_api_provider(surface_api)
         if provider is not None:

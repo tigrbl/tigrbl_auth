@@ -28,7 +28,7 @@ except Exception:  # pragma: no cover - fallback for dependency-light checkpoint
         return kwargs
 
 try:
-    from tigrbl_auth.framework import Field
+    from tigrbl_identity_server.framework import Field
 except Exception:  # pragma: no cover - dependency-light fallback for governance/checkpoint tooling
     from pydantic import Field
 

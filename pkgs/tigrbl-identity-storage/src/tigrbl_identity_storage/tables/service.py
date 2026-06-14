@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     Base,
     GUIDPk,
     Timestamped,

@@ -1,5 +1,5 @@
 """
-tigrbl_auth.typing
+tigrbl_identity_core.typing
 ==================
 
 Pure-typing utilities for the AuthN service.

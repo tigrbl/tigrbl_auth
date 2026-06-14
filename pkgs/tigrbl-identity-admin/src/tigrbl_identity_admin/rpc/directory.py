@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition
-from tigrbl_auth.api.rpc.schemas.common import EmptyParams
-from tigrbl_auth.api.rpc.schemas.directory import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition
+from tigrbl_identity_contracts.rpc.common import EmptyParams
+from tigrbl_identity_contracts.rpc.directory import (
     ClientListParams,
     ClientListResult,
     ClientShowParams,
@@ -18,25 +18,25 @@ from tigrbl_auth.api.rpc.schemas.directory import (
     TenantShowParams,
     TenantShowResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import get_row, list_rows, row_to_dict
+from tigrbl_identity_admin.rpc._shared import get_row, list_rows, row_to_dict
 
 
 async def handle_tenant_list(params: TenantListParams, _context):
-    from tigrbl_auth.tables import Tenant
+    from tigrbl_identity_storage.tables import Tenant
 
     rows = await list_rows(Tenant, limit=params.limit, offset=params.offset, order_by="created_at")
     return TenantListResult(count=len(rows), items=[row_to_dict(row) for row in rows])
 
 
 async def handle_tenant_show(params: TenantShowParams, _context):
-    from tigrbl_auth.tables import Tenant
+    from tigrbl_identity_storage.tables import Tenant
 
     row = await get_row(Tenant, id_value=params.id)
     return TenantShowResult(tenant=row_to_dict(row) if row else None)
 
 
 async def handle_client_list(params: ClientListParams, _context):
-    from tigrbl_auth.tables import Client
+    from tigrbl_identity_storage.tables import Client
 
     rows = await list_rows(
         Client,
@@ -49,14 +49,14 @@ async def handle_client_list(params: ClientListParams, _context):
 
 
 async def handle_client_show(params: ClientShowParams, _context):
-    from tigrbl_auth.tables import Client
+    from tigrbl_identity_storage.tables import Client
 
     row = await get_row(Client, id_value=params.id)
     return ClientShowResult(client=row_to_dict(row) if row else None)
 
 
 async def handle_identity_list(params: IdentityListParams, _context):
-    from tigrbl_auth.tables import User
+    from tigrbl_identity_storage.tables import User
 
     rows = await list_rows(
         User,
@@ -69,7 +69,7 @@ async def handle_identity_list(params: IdentityListParams, _context):
 
 
 async def handle_identity_show(params: IdentityShowParams, _context):
-    from tigrbl_auth.tables import User
+    from tigrbl_identity_storage.tables import User
 
     row = await get_row(User, id_value=params.id)
     return IdentityShowResult(identity=row_to_dict(row) if row else None)

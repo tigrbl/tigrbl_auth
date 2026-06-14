@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import uuid
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     Base,
     Bootstrappable,
     ColumnSpec,

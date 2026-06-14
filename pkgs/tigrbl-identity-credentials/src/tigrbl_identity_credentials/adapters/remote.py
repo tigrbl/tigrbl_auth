@@ -5,7 +5,7 @@ import time
 from typing import Final
 
 import httpx
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     HTTPException,
     Request,
     Security,
@@ -13,7 +13,7 @@ from tigrbl_auth.framework import (
     APIKey,
     AuthNProvider,
 )
-from tigrbl_auth.security.context import principal_var
+from tigrbl_identity_server.security.context import principal_var
 from .auth_context import set_auth_context
 
 

@@ -8,8 +8,8 @@ import string
 from datetime import datetime, timezone
 from typing import Any, Final, Literal, Mapping
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import BaseModel, hook_ctx
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import BaseModel, hook_ctx
 
 _USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
 _USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")
@@ -45,7 +45,7 @@ _TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
 
 @hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
 async def approve_device_code(ctx: Mapping[str, Any]) -> None:
-    from tigrbl_auth.tables import DeviceCode
+    from tigrbl_identity_storage.tables import DeviceCode
 
     payload = ctx.get("payload") or {}
     ident = payload.get("id") or payload.get("device_code")

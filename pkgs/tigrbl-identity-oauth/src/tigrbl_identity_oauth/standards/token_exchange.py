@@ -7,19 +7,19 @@ from dataclasses import dataclass
 from typing import Any, Dict, Final
 from urllib.parse import parse_qs
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.config.deployment import deployment_from_request
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.services.authorization_provenance import (
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_operator.authorization_provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )
-from tigrbl_auth.services.token_service import JWTCoder
-from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
-from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_identity_credentials.token_service import JWTCoder
+from tigrbl_identity_oauth.standards.resource_indicators import select_resource_indicator
+from tigrbl_identity_oauth.standards.resource_verifier_contract import build_protected_resource_verifier_contract
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_identity_oauth.standards.rfc9700 import (
     TOKEN_EXCHANGE_GRANT_TYPE,
     OAuthPolicyViolation,
     dpop_proof_from_request,
@@ -27,7 +27,7 @@ from tigrbl_auth.standards.oauth2.rfc9700 import (
 )
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_server.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -68,13 +68,13 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover
-    from tigrbl_auth.services.persistence import append_audit_event_async
+    from tigrbl_identity_storage.persistence import append_audit_event_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def append_audit_event_async(**kwargs):
         return None
 
 try:  # pragma: no cover
-    from tigrbl_auth.services.persistence import upsert_token_record_async
+    from tigrbl_identity_storage.persistence import upsert_token_record_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def upsert_token_record_async(*args, **kwargs):
         return None

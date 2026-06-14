@@ -6,15 +6,15 @@ from typing import Any
 
 import yaml
 
-from tigrbl_auth.api.rpc.registry import get_rpc_method_registry
+from tigrbl_identity_server.rpc.registry import get_rpc_method_registry
 from tigrbl_identity_cli.cli.metadata import ARGUMENT_SPECS, COMMAND_SPECS
-from tigrbl_auth.config.deployment import (
+from tigrbl_identity_runtime.deployment import (
     EXTENSION_REGISTRY,
     PROTOCOL_SLICE_REGISTRY,
     ROUTE_REGISTRY,
     TARGET_FLAG_REQUIREMENTS,
 )
-from tigrbl_auth.config.feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
+from tigrbl_identity_runtime.feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
 
 PROFILE_ORDER = (
     "baseline",
@@ -228,7 +228,7 @@ def _build_features(repo_root: Path) -> list[dict[str, Any]]:
                 "kind": "openrpc-method",
                 "title": method_name,
                 "description": str(meta.get("summary", method_name)),
-                "source": str(meta.get("owner_module", "tigrbl_auth.api.rpc.registry")),
+                "source": str(meta.get("owner_module", "tigrbl_identity_server.rpc.registry")),
                 "scope": "core",
                 "targets": ["OpenRPC 1.4.x admin/control-plane contract"],
                 "required_flags": [str(item) for item in meta.get("required_flags", ())],
@@ -285,7 +285,7 @@ def _build_features(repo_root: Path) -> list[dict[str, Any]]:
                 "kind": "setting-flag",
                 "title": flag_name,
                 "description": f"Settings-backed governance flag {flag_name}",
-                "source": "tigrbl_auth.config.settings",
+                "source": "tigrbl_identity_runtime.settings",
                 "scope": "extension" if flag_name.startswith("enable_rfc78") or flag_name.startswith("enable_rfc79") or flag_name.startswith("enable_rfc82") or flag_name.startswith("enable_rfc88") or flag_name.startswith("enable_rfc89") or flag_name == "enable_rfc8523" else "core",
                 "targets": _flag_targets(flag_name),
                 "required_flags": [flag_name],
@@ -315,7 +315,7 @@ def _build_features(repo_root: Path) -> list[dict[str, Any]]:
                 "kind": "protocol-slice",
                 "title": slice_name,
                 "description": f"{slice_name} protocol slice",
-                "source": "tigrbl_auth.config.deployment",
+                "source": "tigrbl_identity_runtime.deployment",
                 "scope": "core",
                 "targets": [str(item) for item in meta.get("targets", ())],
                 "required_flags": [str(item) for item in meta.get("flags", ())],
@@ -330,7 +330,7 @@ def _build_features(repo_root: Path) -> list[dict[str, Any]]:
                 "kind": "extension",
                 "title": extension_name,
                 "description": f"{extension_name} quarantined extension",
-                "source": "tigrbl_auth.config.deployment",
+                "source": "tigrbl_identity_runtime.deployment",
                 "scope": "extension",
                 "targets": [str(item) for item in meta.get("targets", ())],
                 "required_flags": [str(item) for item in meta.get("flags", ())],

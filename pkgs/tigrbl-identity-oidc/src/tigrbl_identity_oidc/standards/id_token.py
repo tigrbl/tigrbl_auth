@@ -18,7 +18,7 @@ from datetime import timedelta
 from functools import lru_cache
 from typing import Any, Iterable, Mapping, Tuple
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     ExportPolicy,
     FileKeyProvider,
     JWAAlg,
@@ -28,9 +28,9 @@ from tigrbl_auth.framework import (
     KeySpec,
     KeyUse,
 )
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.jose.rfc7516 import encrypt_jwe, decrypt_jwe
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_jose.standards.rfc7516 import encrypt_jwe, decrypt_jwe
 
 # ---------------------------------------------------------------------------
 # Signing key management
@@ -209,7 +209,7 @@ async def rotate_rsa_jwt_key() -> str:
     global _service_cache
     _service_cache = None
     try:  # refresh discovery metadata if available
-        from tigrbl_auth.standards.oidc.discovery import refresh_discovery_cache
+        from tigrbl_identity_oidc.standards.discovery import refresh_discovery_cache
 
         refresh_discovery_cache()
     except Exception:  # pragma: no cover - best effort

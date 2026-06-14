@@ -2,19 +2,19 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.framework import AsyncSession, Depends, Header, HTTPException, Request, select, status
-from tigrbl_auth.config.deployment import deployment_from_request
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.security.context import principal_var
-from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
-from tigrbl_auth.services.auth_backends import ApiKeyBackend, AuthError, PasswordBackend
-from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError
-from tigrbl_auth.standards.oauth2.mtls import presented_certificate_thumbprint
-from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
-from tigrbl_auth.standards.oauth2.rfc9700 import verify_access_token_sender_constraint
-from tigrbl_auth.tables import User
-from tigrbl_auth.tables.engine import get_db
-from tigrbl_auth.typing import Principal
+from tigrbl_identity_server.framework import AsyncSession, Depends, Header, HTTPException, Request, select, status
+from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.security.context import principal_var
+from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_identity_credentials.backends import ApiKeyBackend, AuthError, PasswordBackend
+from tigrbl_identity_credentials.token_service import JWTCoder, InvalidTokenError
+from tigrbl_identity_oauth.standards.mtls import presented_certificate_thumbprint
+from tigrbl_identity_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_identity_oauth.standards.rfc9700 import verify_access_token_sender_constraint
+from tigrbl_identity_storage.tables import User
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_core.typing import Principal
 
 _api_key_backend = ApiKeyBackend()
 _jwt_coder = JWTCoder.default()

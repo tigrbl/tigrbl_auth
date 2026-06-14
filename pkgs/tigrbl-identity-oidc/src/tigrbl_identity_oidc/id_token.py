@@ -17,14 +17,14 @@ import os
 import pathlib
 import secrets
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.standards.jose.rfc7516 import decrypt_jwe, encrypt_jwe
-from tigrbl_auth.standards.jose.rfc7519 import decode_jwt, encode_jwt
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_jose.standards.rfc7516 import decrypt_jwe, encrypt_jwe
+from tigrbl_identity_jose.standards.rfc7519 import decode_jwt, encode_jwt
 
 _CANONICAL = None
 try:  # pragma: no cover - exercised when runtime dependencies are installed
-    import tigrbl_auth.standards.oidc.id_token as _CANONICAL  # type: ignore[assignment]
+    import tigrbl_identity_oidc.standards.id_token as _CANONICAL  # type: ignore[assignment]
 except Exception:  # pragma: no cover - dependency-light fallback
     _CANONICAL = None
 
@@ -168,7 +168,7 @@ else:  # pragma: no cover - dependency-light fallback
         _RSA_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
         _RSA_KEY_PATH.write_text(kid)
         try:
-            from tigrbl_auth.oidc_discovery import refresh_discovery_cache
+            from tigrbl_identity_oidc.discovery import refresh_discovery_cache
 
             refresh_discovery_cache()
         except Exception:

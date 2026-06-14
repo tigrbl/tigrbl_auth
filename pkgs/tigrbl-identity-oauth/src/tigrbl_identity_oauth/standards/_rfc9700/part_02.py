@@ -7,7 +7,7 @@ def validate_sender_constraint(
     policy = runtime_security_profile(deployment)
     cert_thumbprint = client_certificate_thumbprint_from_request(request)
     if dpop_proof and policy.dpop_supported:
-        from tigrbl_auth.standards.oauth2.dpop import verify_proof
+        from tigrbl_identity_oauth.standards.dpop import verify_proof
 
         jkt = verify_proof(dpop_proof, getattr(request, "method", "POST"), str(getattr(request, "url", "")))
         return SenderConstraintResult(
@@ -70,7 +70,7 @@ def verify_access_token_sender_constraint(
                 "missing DPoP proof for DPoP-bound access token",
                 status_code=401,
             )
-        from tigrbl_auth.standards.oauth2.dpop import verify_proof
+        from tigrbl_identity_oauth.standards.dpop import verify_proof
 
         try:
             verified_jkt = verify_proof(
@@ -103,8 +103,8 @@ def verify_access_token_sender_constraint(
                 "certificate-bound token presented while mTLS support is disabled",
                 status_code=401,
             )
-        from tigrbl_auth.standards.oauth2.mtls import validate_request_certificate_binding
-        from tigrbl_auth.errors import InvalidTokenError
+        from tigrbl_identity_oauth.standards.mtls import validate_request_certificate_binding
+        from tigrbl_identity_core.errors import InvalidTokenError
 
         try:
             cert_thumbprint = validate_request_certificate_binding(token_payload, request)

@@ -18,9 +18,9 @@ from typing import Final
 from urllib.parse import urlparse
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.http.cookies import (
+from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_runtime.http_standards.cookies import (
     extract_session_cookie,
     hash_cookie_secret,
     new_session_cookie_secret,
@@ -64,7 +64,7 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_auth.services import persistence as persistence_module
+    from tigrbl_identity_storage import persistence as persistence_module
 
     return persistence_module
 

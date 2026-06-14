@@ -15,7 +15,7 @@ from tigrbl_identity_runtime.surfaces import (
     all_surface_capability_registry,
     route_registry as surface_route_registry,
 )
-from tigrbl_auth.api.rpc import get_rpc_method_registry
+from tigrbl_identity_server.rpc import get_rpc_method_registry
 
 # ---------------------------------------------------------------------------
 # Pure defaults mirrored from ``config.settings`` for governance tooling.

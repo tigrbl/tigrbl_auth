@@ -5,7 +5,7 @@ from __future__ import annotations
 import inspect
 from importlib import import_module
 
-from tigrbl_auth.framework import (
+from tigrbl_identity_server.framework import (
     TigrblRouter,
     TigrblApp,
     HTTPException,
@@ -14,14 +14,14 @@ from tigrbl_auth.framework import (
     status,
 )
 
-from tigrbl_auth.security import auth as security_auth
-from tigrbl_auth.security import deps as security_deps
-from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc
-from tigrbl_auth.tables import User
-from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
-from tigrbl_auth.framework import JWAAlg
-from tigrbl_auth.config.deployment import deployment_from_app, deployment_from_request
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_server.security import auth as security_auth
+from tigrbl_identity_server.security import deps as security_deps
+from tigrbl_identity_credentials.token_service import JWTCoder, InvalidTokenError, _svc
+from tigrbl_identity_storage.tables import User
+from tigrbl_identity_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_identity_server.framework import JWAAlg
+from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.settings import settings
 
 api = TigrblRouter()
 router = api

@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9126 owner metadata."""
 
-from tigrbl_auth.standards.oauth2.par import (
+from tigrbl_identity_oauth.standards.par import (
     RFC9126_SPEC_URL,
     OWNER,
     STATUS,

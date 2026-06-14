@@ -31,11 +31,11 @@ class RefreshTokenReuseError(RefreshTokenError):
 
 def _load_runtime() -> dict[str, Any]:
     try:
-        from tigrbl_auth.framework import ExportPolicy, FileKeyProvider, JWTTokenService, LocalKeyProvider, JWAAlg, KeyAlg, KeyClass, KeySpec, KeyUse
-        from tigrbl_auth.config.settings import settings
-        from tigrbl_auth.standards.oauth2.mtls import validate_certificate_binding
-        from tigrbl_auth.standards.oauth2.revocation import is_revoked
-        from tigrbl_auth.standards.oauth2.introspection import register_token
+        from tigrbl_identity_server.framework import ExportPolicy, FileKeyProvider, JWTTokenService, LocalKeyProvider, JWAAlg, KeyAlg, KeyClass, KeySpec, KeyUse
+        from tigrbl_identity_runtime.settings import settings
+        from tigrbl_identity_oauth.standards.mtls import validate_certificate_binding
+        from tigrbl_identity_oauth.standards.revocation import is_revoked
+        from tigrbl_identity_oauth.standards.introspection import register_token
     except Exception as exc:  # pragma: no cover
         raise RuntimeError("runtime token-service dependencies are unavailable") from exc
     return {

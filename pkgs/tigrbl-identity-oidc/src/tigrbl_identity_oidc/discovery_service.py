@@ -5,7 +5,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from ._operator_store import ArtifactResult, OperationContext, display_path, validate_checksum, write_structured
+from tigrbl_identity_storage.operator_store import (
+    ArtifactResult,
+    OperationContext,
+    display_path,
+    validate_checksum,
+    write_structured,
+)
 
 
 def _profile_dir(repo_root: Path, profile: str | None) -> Path:

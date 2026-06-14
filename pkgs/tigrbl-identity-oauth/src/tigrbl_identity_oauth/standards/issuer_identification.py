@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Final, Mapping, Sequence
 from urllib.parse import parse_qs, urlparse
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = 'authorization-response-issuer-runtime'
 RFC9207_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9207'

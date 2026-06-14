@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when Swarmauri is installed
     from swarmauri_core.crypto.types import JWAAlg

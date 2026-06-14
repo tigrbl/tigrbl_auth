@@ -14,32 +14,32 @@ import inspect
 from typing import Any, Dict, Final
 from urllib.parse import parse_qs
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_auth.api.rest.schemas import IntrospectOut
-    from tigrbl_auth.api.rest.shared import _require_tls
-    from tigrbl_auth.config.deployment import deployment_from_request
-    from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-    from tigrbl_auth.framework import AsyncSession, Depends
-    from tigrbl_auth.ops.token import _load_client, _registered_token_endpoint_auth_method
-    from tigrbl_auth.services.persistence import (
+    from tigrbl_identity_contracts.rest import IntrospectOut
+    from tigrbl_identity_server.rest.shared import _require_tls
+    from tigrbl_identity_runtime.deployment import deployment_from_request
+    from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_server.framework import AsyncSession, Depends
+    from tigrbl_identity_oauth.ops.token import _load_client, _registered_token_endpoint_auth_method
+    from tigrbl_identity_storage.persistence import (
         introspect_token as _introspect_token,
         record_token as _record_token,
         reset_token_state as _reset_token_state,
         unregister_token as _unregister_token,
     )
-    from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+    from tigrbl_identity_oauth.standards.jwt_client_auth import (
         PRIVATE_KEY_JWT_AUTH_METHOD,
         authenticate_client_assertion,
     )
-    from tigrbl_auth.standards.oauth2.mtls import (
+    from tigrbl_identity_oauth.standards.mtls import (
         SUPPORTED_MTLS_AUTH_METHODS,
         authenticate_mtls_client,
         presented_certificate_thumbprint,
     )
-    from tigrbl_auth.tables.engine import get_db
-    from tigrbl_auth.services.persistence import (
+    from tigrbl_identity_storage.tables.engine import get_db
+    from tigrbl_identity_storage.persistence import (
         introspect_token as _introspect_token,
         record_token as _record_token,
         reset_token_state as _reset_token_state,
@@ -153,7 +153,7 @@ _FALLBACK_TOKENS: dict[str, dict[str, Any]] = {}
 
 
 def _protected_resource_verifier_contract(request: Any):
-    from tigrbl_auth.standards.oauth2.resource_verifier_contract import protected_resource_verifier_contract_from_request
+    from tigrbl_identity_oauth.standards.resource_verifier_contract import protected_resource_verifier_contract_from_request
 
     return protected_resource_verifier_contract_from_request(request)
 

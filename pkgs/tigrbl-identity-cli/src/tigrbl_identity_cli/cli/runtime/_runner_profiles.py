@@ -222,7 +222,7 @@ def probe_application_factory(*, deployment: Any, settings_obj: object | None = 
         return (
             ApplicationProbeResult(
                 passed=False,
-                app_factory="tigrbl_auth.api.app.build_app",
+                app_factory="tigrbl_identity_server.api.app.build_app",
                 message=str(exc),
                 error_type=exc.__class__.__name__,
             ),
@@ -233,7 +233,7 @@ def probe_application_factory(*, deployment: Any, settings_obj: object | None = 
     return (
         ApplicationProbeResult(
             passed=True,
-            app_factory="tigrbl_auth.api.app.build_app",
+            app_factory="tigrbl_identity_server.api.app.build_app",
             message=f"Application factory materialized successfully with {active_routes} active routes and {active_targets} active targets.",
             error_type=None,
         ),

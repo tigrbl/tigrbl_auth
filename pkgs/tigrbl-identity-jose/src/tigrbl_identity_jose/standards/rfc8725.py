@@ -6,9 +6,9 @@ import base64
 import json
 from typing import Any
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError as BaseInvalidTokenError
-from tigrbl_auth.services.token_service import JWTCoder
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError as BaseInvalidTokenError
+from tigrbl_identity_credentials.token_service import JWTCoder
 
 
 class InvalidTokenError(BaseInvalidTokenError):

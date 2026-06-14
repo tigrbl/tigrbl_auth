@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.app import build_app, build_application_runtime_plan, _load_default_settings
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.runtime import LazyASGIApplication
+from tigrbl_identity_server.api.app import build_app, build_application_runtime_plan, _load_default_settings
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_runtime import LazyASGIApplication
 
 
 def _package_default_profile() -> str:

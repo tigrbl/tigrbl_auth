@@ -4,34 +4,34 @@ import json
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.services.persistence import append_audit_event_async
+    from tigrbl_identity_storage.persistence import append_audit_event_async
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     async def append_audit_event_async(**kwargs):
         return None
-from tigrbl_auth.standards.oauth2.jar import merge_request_object_params, parse_request_object
-from tigrbl_auth.standards.oauth2.par import REQUEST_URI_PREFIX
-from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
-from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_identity_oauth.standards.jar import merge_request_object_params, parse_request_object
+from tigrbl_identity_oauth.standards.par import REQUEST_URI_PREFIX
+from tigrbl_identity_oauth.standards.rar import normalize_authorization_details
+from tigrbl_identity_oauth.standards.resource_indicators import select_resource_indicator
+from tigrbl_identity_oauth.standards.rfc9700 import (
     client_certificate_thumbprint_from_request,
     dpop_proof_from_request,
     runtime_security_profile,
 )
-from tigrbl_auth.standards.oauth2.jwt_client_auth import (
+from tigrbl_identity_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     authenticate_client_assertion,
 )
-from tigrbl_auth.standards.oauth2.mtls import (
+from tigrbl_identity_oauth.standards.mtls import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
 )
-from tigrbl_auth.standards.oauth2.dpop import verify_proof
+from tigrbl_identity_oauth.standards.dpop import verify_proof
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.framework import HTTPException, select, status
+    from tigrbl_identity_server.framework import HTTPException, select, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -58,7 +58,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.tables import Client, PushedAuthorizationRequest
+    from tigrbl_identity_storage.tables import Client, PushedAuthorizationRequest
 except Exception:  # pragma: no cover - dependency-light placeholders
     class Client:  # type: ignore[override]
         id = object()
@@ -160,7 +160,7 @@ def _resolve_request_deployment(request):
 
 
 async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object], deployment) -> tuple[object, dict[str, object]]:
-    from tigrbl_auth.tables import Client, ClientRegistration
+    from tigrbl_identity_storage.tables import Client, ClientRegistration
 
     client_id = str(params.get("client_id") or "").strip()
     if not client_id:

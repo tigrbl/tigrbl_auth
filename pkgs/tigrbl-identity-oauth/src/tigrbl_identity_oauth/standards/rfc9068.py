@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9068 JWT access-token helpers."""
 
-from tigrbl_auth.standards.oauth2.jwt_access_tokens import (
+from tigrbl_identity_oauth.standards.jwt_access_tokens import (
     RFC9068_SPEC_URL,
     add_jwt_access_token_claims,
     validate_jwt_access_token_claims,

@@ -7,7 +7,7 @@ import json
 from hashlib import sha256
 from typing import Any, Final, Mapping
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC7638_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7638"
 _REQUIRED_MEMBERS: dict[str, tuple[str, ...]] = {

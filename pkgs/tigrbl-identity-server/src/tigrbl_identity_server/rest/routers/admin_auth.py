@@ -1,25 +1,25 @@
 from __future__ import annotations
 
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, TigrblRouter, select, status
-from tigrbl_auth.api.rest.schemas import (
+from tigrbl_identity_server.framework import AsyncSession, Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, TigrblRouter, select, status
+from tigrbl_identity_contracts.rest import (
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
     AdminPasswordResetRequestIn,
     AdminSessionOut,
     CredsIn,
 )
-from tigrbl_auth.ops.login import login_user
-from tigrbl_auth.services.admin_identity_bootstrap import (
+from tigrbl_identity_server.ops.login import login_user
+from tigrbl_identity_admin.bootstrap import (
     consume_password_reset_token,
     issue_password_reset_token,
     resolve_admin_user_from_request,
     user_is_admin,
 )
-from tigrbl_auth.services.key_management import hash_pw
-from tigrbl_auth.standards.http.cookies import clear_session_cookie
-from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
-from tigrbl_auth.tables import User
-from tigrbl_auth.tables.engine import get_db
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_runtime.http_standards.cookies import clear_session_cookie
+from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_identity_storage.tables import User
+from tigrbl_identity_storage.tables.engine import get_db
 
 api = router = TigrblRouter()
 ADMIN_AUTH_TAGS = ["Admin Auth"]
@@ -91,7 +91,7 @@ async def admin_forgot_password(
     debug_token = None
     if row is not None and user_is_admin(row):
         debug_token = await issue_password_reset_token(user=row)
-        from tigrbl_auth.config.settings import settings
+        from tigrbl_identity_runtime.settings import settings
 
         if not settings.admin_password_reset_debug_disclosure:
             debug_token = None

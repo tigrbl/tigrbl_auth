@@ -26,7 +26,7 @@ _BCRYPT_MAX_BYTES = 72
 
 def _load_framework() -> dict[str, Any]:
     try:
-        from tigrbl_auth.framework import ExportPolicy, FileKeyProvider, KeyAlg, KeyClass, KeySpec, KeyUse
+        from tigrbl_identity_server.framework import ExportPolicy, FileKeyProvider, KeyAlg, KeyClass, KeySpec, KeyUse
     except Exception as exc:  # pragma: no cover - environment specific
         raise RuntimeError("runtime key-management dependencies are unavailable") from exc
     return {

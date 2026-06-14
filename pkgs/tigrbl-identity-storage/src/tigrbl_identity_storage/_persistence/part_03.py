@@ -111,7 +111,7 @@ append_audit_event = lambda **kwargs: _run(append_audit_event_async(**kwargs))
 
 def load_operator_records(resource: str, *, repo_root=None):
     from pathlib import Path
-    from tigrbl_auth.services._operator_store import load_records
+    from tigrbl_identity_storage.operator_store import load_records
 
     root = Path(repo_root) if repo_root is not None else Path.cwd()
     return load_records(root, resource)
@@ -119,7 +119,7 @@ def load_operator_records(resource: str, *, repo_root=None):
 
 def operator_state_root(*, repo_root=None):
     from pathlib import Path
-    from tigrbl_auth.services._operator_store import operator_state_root as _root
+    from tigrbl_identity_storage.operator_store import operator_state_root as _root
 
     root = Path(repo_root) if repo_root is not None else Path.cwd()
     return _root(root)
@@ -127,7 +127,7 @@ def operator_state_root(*, repo_root=None):
 
 def append_operator_audit(event, *, repo_root=None):
     from pathlib import Path
-    from tigrbl_auth.services._operator_store import append_jsonl, audit_log_path
+    from tigrbl_identity_storage.operator_store import append_jsonl, audit_log_path
 
     root = Path(repo_root) if repo_root is not None else Path.cwd()
     append_jsonl(audit_log_path(root), event)

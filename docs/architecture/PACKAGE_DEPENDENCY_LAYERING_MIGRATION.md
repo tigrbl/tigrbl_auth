@@ -46,6 +46,8 @@ Current T1 exception packages:
 
 Remove the exception ledger by moving facade-owned imports down into the owning foundational packages or by replacing them with lower-layer contracts. At T2, no foundational package imports `tigrbl_auth`; only `tigrbl-auth` and `tigrbl-auth-api-*` packages do.
 
+Status: complete for direct Python imports. The exception ledger in `tests/unit/test_package_dependency_layering.py` is empty, and foundational packages now import the canonical split package roots directly.
+
 ## SSOT Entity Changes
 
 Update existing governance anchors:
@@ -68,7 +70,7 @@ Add feature, claims, tests, and evidence:
 
 ## Runtime Migration Work
 
-T2 requires moving or rehoming these facade-owned surfaces:
+T2 moved or rehomed these facade-owned surfaces:
 
 - framework and typing helpers into dependency-light foundation packages;
 - API contract helpers into contracts or server;

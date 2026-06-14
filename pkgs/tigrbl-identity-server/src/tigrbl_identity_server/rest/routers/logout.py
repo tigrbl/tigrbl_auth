@@ -3,9 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from tigrbl_auth.framework import Depends, TigrblRouter
-from tigrbl_auth.ops.logout import logout_request
-from tigrbl_auth.tables import get_db
+from tigrbl_identity_server.framework import Depends, TigrblRouter
+from tigrbl_identity_server.ops.logout import logout_request
+from tigrbl_identity_storage.tables import get_db
 
 api = TigrblRouter()
 router = api
@@ -18,7 +18,7 @@ def _repo_root() -> Path:
 @api.route('/logout', methods=['GET', 'POST'], response_model=None)
 async def logout(request, db=Depends(get_db)):
     result = await logout_request(request=request, db=db)
-    from tigrbl_auth.services.session_service import observe_logout_response
+    from tigrbl_identity_credentials.session_service import observe_logout_response
 
     payload: dict[str, object] = {}
     body = getattr(result, 'body', None)

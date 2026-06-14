@@ -5,9 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition, RpcRequestContext
-from tigrbl_auth.api.rpc.schemas.common import EmptyParams
-from tigrbl_auth.api.rpc.schemas.governance import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition, RpcRequestContext
+from tigrbl_identity_contracts.rpc.common import EmptyParams
+from tigrbl_identity_contracts.rpc.governance import (
     ClaimsLintParams,
     ClaimsLintResult,
     ClaimsShowParams,
@@ -23,19 +23,19 @@ from tigrbl_auth.api.rpc.schemas.governance import (
     ReleaseBundleResult,
     RpcDiscoverResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import deployment_summary, repo_root_from_context
+from tigrbl_identity_admin.rpc._shared import deployment_summary, repo_root_from_context
 
 
 def _resolved_deployment(context: RpcRequestContext):
     if context.deployment is not None:
         return context.deployment
-    from tigrbl_auth.config.deployment import resolve_deployment
+    from tigrbl_identity_runtime.deployment import resolve_deployment
 
     return resolve_deployment(profile=context.profile)
 
 
 async def handle_rpc_discover(_params, context: RpcRequestContext) -> RpcDiscoverResult:
-    from tigrbl_auth.api.rpc import iter_active_rpc_methods
+    from tigrbl_identity_server.rpc import iter_active_rpc_methods
 
     deployment = _resolved_deployment(context)
     methods = [
@@ -58,7 +58,7 @@ async def handle_rpc_discover(_params, context: RpcRequestContext) -> RpcDiscove
 
 async def handle_flow_list(_params, context: RpcRequestContext) -> FlowListResult:
     deployment = _resolved_deployment(context)
-    from tigrbl_auth.config.deployment import PROTOCOL_SLICE_REGISTRY
+    from tigrbl_identity_runtime.deployment import PROTOCOL_SLICE_REGISTRY
 
     flows = []
     for name, meta in sorted(PROTOCOL_SLICE_REGISTRY.items()):
@@ -78,7 +78,7 @@ async def handle_discovery_show(_params, context: RpcRequestContext) -> Discover
     deployment = _resolved_deployment(context)
     metadata = {}
     try:
-        from tigrbl_auth.standards.oidc.discovery import _build_openid_config
+        from tigrbl_identity_oidc.standards.discovery import _build_openid_config
         metadata = _build_openid_config()
     except Exception:
         issuer = getattr(deployment, "issuer", "https://authn.example.com")
@@ -97,7 +97,7 @@ async def handle_discovery_show(_params, context: RpcRequestContext) -> Discover
 
 async def handle_claims_lint(_params: ClaimsLintParams, context: RpcRequestContext) -> ClaimsLintResult:
     repo_root = repo_root_from_context(context)
-    from tigrbl_auth.cli.claims import run_lint
+    from tigrbl_identity_cli.cli.claims import run_lint
 
     rc = run_lint(repo_root, strict=False, report_dir=repo_root / "docs" / "compliance")
     report_path = repo_root / "docs" / "compliance" / "claims_lint_report.json"
@@ -115,7 +115,7 @@ async def handle_claims_lint(_params: ClaimsLintParams, context: RpcRequestConte
 async def handle_claims_show(_params: ClaimsShowParams, context: RpcRequestContext) -> ClaimsShowResult:
     repo_root = repo_root_from_context(context)
     deployment = _resolved_deployment(context)
-    from tigrbl_auth.cli.artifacts import write_effective_claims_manifest
+    from tigrbl_identity_cli.cli.artifacts import write_effective_claims_manifest
     import yaml
 
     manifest_path = write_effective_claims_manifest(repo_root, deployment, profile_label=deployment.profile)
@@ -130,7 +130,7 @@ async def handle_claims_show(_params: ClaimsShowParams, context: RpcRequestConte
 
 async def handle_gate_run(params: GateRunParams, context: RpcRequestContext) -> GateRunResult:
     repo_root = repo_root_from_context(context)
-    from tigrbl_auth.cli.reports import run_release_gates
+    from tigrbl_identity_cli.cli.reports import run_release_gates
 
     payload = run_release_gates(repo_root, gate_name=params.gate, strict=False)
     return GateRunResult(
@@ -143,7 +143,7 @@ async def handle_gate_run(params: GateRunParams, context: RpcRequestContext) -> 
 
 async def handle_evidence_status(_params: EvidenceStatusParams, context: RpcRequestContext) -> EvidenceStatusResult:
     repo_root = repo_root_from_context(context)
-    from tigrbl_auth.cli.reports import summarize_evidence_status
+    from tigrbl_identity_cli.cli.reports import summarize_evidence_status
 
     payload = summarize_evidence_status(repo_root)
     return EvidenceStatusResult(
@@ -158,7 +158,7 @@ async def handle_release_bundle(params: ReleaseBundleParams, context: RpcRequest
     repo_root = repo_root_from_context(context)
     deployment = _resolved_deployment(context)
     from pathlib import Path
-    from tigrbl_auth.cli.reports import build_release_bundle
+    from tigrbl_identity_cli.cli.reports import build_release_bundle
 
     bundle_path = build_release_bundle(
         repo_root,
@@ -259,7 +259,7 @@ METHODS = (
 )
 
 # Discovery RPC resolves through the shared discovery service layer.
-from tigrbl_auth.services.discovery_service import show_discovery as _svc_show_discovery
+from tigrbl_identity_oidc.discovery_service import show_discovery as _svc_show_discovery
 
 
 async def handle_discovery_show(_params, context: RpcRequestContext) -> DiscoveryShowResult:

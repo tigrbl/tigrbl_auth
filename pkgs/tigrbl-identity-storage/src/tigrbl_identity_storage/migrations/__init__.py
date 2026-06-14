@@ -1,6 +1,6 @@
 """Repository-owned executable migration helpers."""
 
-from tigrbl_auth.migrations.runtime import (
+from tigrbl_identity_storage.migrations.runtime import (
     MigrationResult,
     SchemaVerification,
     apply_all_async,

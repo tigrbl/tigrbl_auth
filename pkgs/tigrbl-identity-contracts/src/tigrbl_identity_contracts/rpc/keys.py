@@ -6,7 +6,7 @@ from typing import Any
 
 from .common import EmptyParams
 from pydantic import Field
-from tigrbl_auth.api.rpc.registry import RpcSchema
+from tigrbl_identity_server.rpc.registry import RpcSchema
 
 
 class KeyRecord(RpcSchema):
@@ -23,7 +23,8 @@ class KeyRecord(RpcSchema):
 
 
 class KeysListParams(EmptyParams):
-    pass
+    tenant: str | None = None
+    tenant_id: str | None = None
 
 
 class KeysListResult(RpcSchema):
@@ -51,10 +52,73 @@ class KeysRotateResult(RpcSchema):
     rotation_event: dict[str, Any] | None = None
 
 
+class TenantKeySeedParams(RpcSchema):
+    tenant: str
+    tenant_id: str | None = None
+    kid: str | None = None
+    force: bool = False
+    label: str | None = None
+    status: str = "active"
+    alg: str = "EdDSA"
+    kty: str = "OKP"
+    use: str = "sig"
+    crv: str = "Ed25519"
+    x: str | None = None
+
+
+class TenantKeyCreateParams(RpcSchema):
+    tenant: str
+    tenant_id: str | None = None
+    kid: str
+    label: str | None = None
+    status: str = "active"
+    alg: str = "EdDSA"
+    kty: str = "OKP"
+    use: str = "sig"
+    crv: str = "Ed25519"
+    x: str | None = None
+    n: str | None = None
+    e: str | None = None
+    publish: bool = True
+
+
+class TenantKeyUpdateParams(RpcSchema):
+    tenant: str
+    tenant_id: str | None = None
+    kid: str
+    label: str | None = None
+    status: str | None = None
+    alg: str | None = None
+    kty: str | None = None
+    use: str | None = None
+    crv: str | None = None
+    x: str | None = None
+    n: str | None = None
+    e: str | None = None
+    publish: bool | None = None
+
+
+class TenantKeyDeleteParams(RpcSchema):
+    tenant: str
+    tenant_id: str | None = None
+    kid: str
+
+
+class TenantKeyMutationResult(RpcSchema):
+    status: str
+    key: KeyRecord | None = None
+    jwks: dict[str, Any] = Field(default_factory=dict)
+
+
 __all__ = [
     "JwksShowParams",
     "JwksShowResult",
     "KeyRecord",
+    "TenantKeyCreateParams",
+    "TenantKeyDeleteParams",
+    "TenantKeyMutationResult",
+    "TenantKeySeedParams",
+    "TenantKeyUpdateParams",
     "KeysListParams",
     "KeysListResult",
     "KeysRotateParams",

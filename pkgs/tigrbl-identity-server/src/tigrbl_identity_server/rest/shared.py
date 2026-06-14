@@ -3,15 +3,15 @@ from __future__ import annotations
 from typing import Any, Callable
 from uuid import UUID
 
-from tigrbl_auth.framework import HTTPException, Request, status
+from tigrbl_identity_server.framework import HTTPException, Request, status
 
-from tigrbl_auth.services.token_service import JWTCoder
-from tigrbl_auth.services.auth_backends import PasswordBackend
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.standards.oidc.frontchannel_logout import mark_frontchannel_complete
-from tigrbl_auth.standards.oidc.backchannel_logout import mark_backchannel_complete
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
+from tigrbl_identity_credentials.token_service import JWTCoder
+from tigrbl_identity_credentials.backends import PasswordBackend
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_oidc.standards.frontchannel_logout import mark_frontchannel_complete
+from tigrbl_identity_oidc.standards.backchannel_logout import mark_backchannel_complete
+from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
 
 
 class _LazyRuntimeProxy:

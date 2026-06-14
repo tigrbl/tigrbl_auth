@@ -12,8 +12,8 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_cli.cli.certification_evidence import current_environment_identity, runtime_identity
-from tigrbl_auth.path_safety import sanitize_local_paths
-from tigrbl_auth.repo_truth import has_install_matrix_workflow, has_release_gate_workflow, workflow_role_text
+from tigrbl_identity_core.path_safety import sanitize_local_paths
+from tigrbl_identity_operator.repo_truth import has_install_matrix_workflow, has_release_gate_workflow, workflow_role_text
 
 try:
     import tomllib
@@ -43,7 +43,7 @@ ADDITIONAL_CERTIFICATION_ENVS = (
 )
 CERTIFICATION_TOX_ENVS = RUNTIME_MATRIX_ENVS + TEST_LANE_ENVS + ADDITIONAL_CERTIFICATION_ENVS
 RUNTIME_IMPORT_SURFACES = (
-    "tigrbl_auth.api.app",
+    "tigrbl_identity_server.api.app",
     "tigrbl_auth.app",
     "tigrbl_auth.plugin",
     "tigrbl_auth.gateway",

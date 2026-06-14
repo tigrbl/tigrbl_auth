@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.migrations.helpers import AUTHN_SCHEMA, column_names, drop_columns
+from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA, column_names, drop_columns
 
 revision = "0009_admin_identity_bootstrap_and_password_recovery"
 down_revision = "0008_refresh_token_family_state"

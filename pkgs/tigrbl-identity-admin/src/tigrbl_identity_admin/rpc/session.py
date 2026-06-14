@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition
-from tigrbl_auth.api.rpc.schemas.session import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition
+from tigrbl_identity_contracts.rpc.session import (
     SessionListParams,
     SessionListResult,
     SessionRecord,
@@ -12,10 +12,10 @@ from tigrbl_auth.api.rpc.schemas.session import (
     SessionTerminateParams,
     SessionTerminateResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import repo_root_from_context
-from tigrbl_auth.services._operator_store import OperationContext
-from tigrbl_auth.services.audit_service import latest_audit_event
-from tigrbl_auth.services.session_service import (
+from tigrbl_identity_admin.rpc._shared import repo_root_from_context
+from tigrbl_identity_storage.operator_store import OperationContext
+from tigrbl_identity_operator.audit_service import latest_audit_event
+from tigrbl_identity_credentials.session_service import (
     get_session_for_context,
     list_sessions_for_context,
     revoke_session_for_context,

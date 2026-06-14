@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, deployment_from_app, deployment_from_request, resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_app, deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER, JWKS_PATH
+from tigrbl_identity_oauth.standards.resource_verifier_contract import build_protected_resource_verifier_contract
+from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
 
 RFC9728_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9728"
 

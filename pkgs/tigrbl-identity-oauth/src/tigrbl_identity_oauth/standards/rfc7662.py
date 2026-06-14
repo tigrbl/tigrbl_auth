@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 7662 introspection helpers."""
 
-from tigrbl_auth.standards.oauth2.introspection import (
+from tigrbl_identity_oauth.standards.introspection import (
     RFC7662_SPEC_URL,
     api,
     include_introspection_endpoint,

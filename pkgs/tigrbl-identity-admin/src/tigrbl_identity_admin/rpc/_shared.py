@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 from uuid import UUID
 
-from tigrbl_auth.api.rpc.registry import RpcRequestContext
+from tigrbl_identity_server.rpc.registry import RpcRequestContext
 
 
 def repo_root_from_context(context: RpcRequestContext) -> Path:
@@ -92,8 +92,8 @@ def export_records(records: Sequence[Mapping[str, Any]], export_format: str) -> 
 
 def _db_handles():
     try:
-        from tigrbl_auth.services.persistence import _session
-        from tigrbl_auth.framework import select
+        from tigrbl_identity_storage.persistence import _session
+        from tigrbl_identity_server.framework import select
     except Exception as exc:  # pragma: no cover - surfaced when runtime deps are absent
         raise RuntimeError("database-backed RPC methods require the runtime dependency set") from exc
     return _session, select
@@ -142,7 +142,7 @@ async def get_row(model: Any, *, id_value: Any | None = None, filters: dict[str,
 
 async def create_key_rotation_event(*, key_kid: str, action: str, status: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
     _session, _ = _db_handles()
-    from tigrbl_auth.tables import KeyRotationEvent
+    from tigrbl_identity_storage.tables import KeyRotationEvent
 
     async with _session() as session:
         row = KeyRotationEvent(key_kid=key_kid, action=action, status=status, details=details or {})

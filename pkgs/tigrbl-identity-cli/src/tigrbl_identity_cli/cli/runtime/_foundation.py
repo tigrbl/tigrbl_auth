@@ -62,7 +62,7 @@ def write_runtime_profile_report(
         "",
         "## Application Probe",
         "",
-        f"- App factory: `{payload['application_probe'].get('app_factory', 'tigrbl_auth.api.app.build_app')}`",
+        f"- App factory: `{payload['application_probe'].get('app_factory', 'tigrbl_identity_server.api.app.build_app')}`",
         f"- Message: {payload['application_probe']['message']}",
         "",
         "## Surface Probe",

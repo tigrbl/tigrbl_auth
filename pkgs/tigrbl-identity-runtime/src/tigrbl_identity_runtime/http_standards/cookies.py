@@ -19,8 +19,8 @@ import secrets
 from typing import Final
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = "browser-session-runtime"
 COOKIE_VALUE_VERSION: Final[str] = "v1"

@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9396 RAR helpers."""
 
-from tigrbl_auth.standards.oauth2.rar import (
+from tigrbl_identity_oauth.standards.rar import (
     AuthorizationDetail,
     OWNER,
     RFC9396_SPEC_URL,

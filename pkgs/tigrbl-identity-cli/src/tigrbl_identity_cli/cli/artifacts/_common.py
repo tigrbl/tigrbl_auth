@@ -7,22 +7,22 @@ from typing import Any
 import yaml
 from pydantic.version import VERSION as PYDANTIC_VERSION
 
-from tigrbl_auth.api.rpc import iter_active_rpc_methods
-from tigrbl_auth.config.deployment import ROUTE_REGISTRY, resolve_deployment
-from tigrbl_auth.config.profile_loader import load_profile_reference
-from tigrbl_auth.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
-from tigrbl_auth.standards.http.well_known import WELL_KNOWN_ENDPOINTS
-from tigrbl_auth.services.tenant_discovery import (
+from tigrbl_identity_server.rpc import iter_active_rpc_methods
+from tigrbl_identity_runtime.deployment import ROUTE_REGISTRY, resolve_deployment
+from tigrbl_identity_runtime.profile_loader import load_profile_reference
+from tigrbl_identity_server.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
+from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
+from tigrbl_identity_principals.tenant_discovery import (
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     build_tenant_openid_config,
     resolve_tenant_trust_domain_authority,
 )
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
-from tigrbl_auth.standards.oauth2.assertion_framework import build_assertion_contract_examples
-from tigrbl_auth.standards.oauth2.jwt_client_auth import build_client_assertion_contract_examples
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import JWKS_PATH
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
+from tigrbl_identity_oidc.standards.discovery_metadata import build_openid_config
+from tigrbl_identity_oauth.standards.assertion_framework import build_assertion_contract_examples
+from tigrbl_identity_oauth.standards.jwt_client_auth import build_client_assertion_contract_examples
+from tigrbl_identity_oauth.standards.rfc8414_metadata import JWKS_PATH
+from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
 
 
 def _load_yaml(path: Path) -> Any:
@@ -65,7 +65,7 @@ def deployment_from_options(
         overrides["strict_boundary_enforcement"] = strict
     profile_defaults = load_profile_reference(profile)
     if settings_obj is None:
-        from tigrbl_auth.config.settings import settings as active_settings
+        from tigrbl_identity_runtime.settings import settings as active_settings
 
         settings_obj = active_settings
     profile_surface_sets = profile_defaults.surface_sets if profile_defaults else ()

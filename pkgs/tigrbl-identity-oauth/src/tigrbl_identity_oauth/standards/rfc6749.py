@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from typing import Final, Iterable, Mapping
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC6749_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc6749"
 

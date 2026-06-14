@@ -1,1 +1,1 @@
-from tigrbl_auth.api.rest.schemas import *  # noqa: F401,F403
+from tigrbl_identity_contracts.rest import *  # noqa: F401,F403

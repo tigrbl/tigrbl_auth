@@ -59,21 +59,7 @@ FRONTEND_WORKSPACES = {
     ROOT / "packages" / "uix-core",
 }
 
-T1_FOUNDATION_FACADE_IMPORT_EXCEPTIONS = {
-    "tigrbl-identity-admin": "admin RPC surfaces still consume facade framework, schemas, and key helpers",
-    "tigrbl-identity-cli": "CLI report and metadata commands still consume facade runtime helpers",
-    "tigrbl-identity-contracts": "contracts still consume facade RPC and typing helpers",
-    "tigrbl-identity-credentials": "credential proof code still consumes facade auth backends and token services",
-    "tigrbl-identity-jose": "JOSE code still consumes facade settings, key management, and OAuth helpers",
-    "tigrbl-identity-oauth": "OAuth compatibility package still consumes facade standards and operation helpers",
-    "tigrbl-identity-oidc": "OIDC compatibility package still consumes facade discovery, session, and token helpers",
-    "tigrbl-identity-policy": "policy package still consumes facade release posture and admin gate helpers",
-    "tigrbl-identity-resource-server": "resource-server compatibility package still consumes facade contracts",
-    "tigrbl-identity-rp": "RP compatibility package still consumes facade OIDC and security helpers",
-    "tigrbl-identity-runtime": "runtime package still consumes facade settings and backend helpers",
-    "tigrbl-identity-server": "server composition still consumes facade routes, security, tables, and standards",
-    "tigrbl-identity-storage": "storage still consumes facade framework, migrations, services, and standards",
-}
+T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
 
 JS_IMPORT_RE = re.compile(
     r"""(?:from\s+["'](?P<from>[^"']+)["']|import\s*\(\s*["'](?P<dynamic>[^"']+)["']\s*\)|require\s*\(\s*["'](?P<require>[^"']+)["']\s*\))"""
@@ -130,7 +116,7 @@ def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
             assert PYTHON_PACKAGE_LAYERS[layer].isdisjoint(PYTHON_PACKAGE_LAYERS[other])
 
 
-def test_t1_foundation_imports_of_tigrbl_auth_are_explicit_migration_debt() -> None:
+def test_t2_foundation_packages_do_not_import_tigrbl_auth_facade() -> None:
     facade_consumers = {
         package
         for package in _declared_python_packages()
@@ -141,8 +127,8 @@ def test_t1_foundation_imports_of_tigrbl_auth_are_explicit_migration_debt() -> N
     )
     foundation_consumers = facade_consumers - expected_upper_layers
 
-    undeclared = foundation_consumers - set(T1_FOUNDATION_FACADE_IMPORT_EXCEPTIONS)
-    stale = set(T1_FOUNDATION_FACADE_IMPORT_EXCEPTIONS) - foundation_consumers
+    undeclared = foundation_consumers - set(T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS)
+    stale = set(T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS) - foundation_consumers
 
     assert not undeclared, {
         package: [str(path) for path in _package_facade_imports(package)]

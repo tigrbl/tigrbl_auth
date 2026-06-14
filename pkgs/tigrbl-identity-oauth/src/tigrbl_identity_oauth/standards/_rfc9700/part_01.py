@@ -12,8 +12,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Final, Iterable, Mapping, Sequence
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.standards.oauth2.assertion_framework import JWT_BEARER_GRANT_TYPE
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_oauth.standards.assertion_framework import JWT_BEARER_GRANT_TYPE
 
 RFC9700_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9700"
 DEVICE_CODE_GRANT_TYPE: Final[str] = "urn:ietf:params:oauth:grant-type:device_code"
@@ -304,7 +304,7 @@ def dpop_proof_from_request(request: Any) -> str | None:
 
 
 def client_certificate_thumbprint_from_request(request: Any) -> str | None:
-    from tigrbl_auth.standards.oauth2.mtls import presented_certificate_thumbprint
+    from tigrbl_identity_oauth.standards.mtls import presented_certificate_thumbprint
 
     return presented_certificate_thumbprint(request)
 

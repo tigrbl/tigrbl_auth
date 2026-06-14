@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.api.rpc.registry import RpcMethodDefinition
-from tigrbl_auth.api.rpc.schemas.audit import (
+from tigrbl_identity_server.rpc.registry import RpcMethodDefinition
+from tigrbl_identity_contracts.rpc.audit import (
     AuditExportParams,
     AuditExportResult,
     AuditListParams,
     AuditListResult,
 )
-from tigrbl_auth.api.rpc.methods._shared import export_records, list_rows, row_to_dict
+from tigrbl_identity_admin.rpc._shared import export_records, list_rows, row_to_dict
 
 
 async def handle_audit_list(params: AuditListParams, _context):
-    from tigrbl_auth.tables import AuditEvent
+    from tigrbl_identity_storage.tables import AuditEvent
 
     rows = await list_rows(
         AuditEvent,
@@ -27,7 +27,7 @@ async def handle_audit_list(params: AuditListParams, _context):
 
 
 async def handle_audit_export(params: AuditExportParams, _context):
-    from tigrbl_auth.tables import AuditEvent
+    from tigrbl_identity_storage.tables import AuditEvent
 
     rows = await list_rows(
         AuditEvent,

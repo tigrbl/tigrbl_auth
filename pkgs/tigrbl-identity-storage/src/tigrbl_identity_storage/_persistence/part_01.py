@@ -10,8 +10,8 @@ from threading import Thread
 from typing import Any, AsyncIterator, Iterable
 from uuid import UUID
 
-from tigrbl_auth.framework import delete, select
-from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_server.framework import delete, select
+from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_storage.tables import (
     AuditEvent,
     AuthSession,
@@ -50,7 +50,7 @@ def _run(coro):
 
 def _resolve_provider():
     try:
-        from tigrbl_auth.api.surfaces import surface_api
+        from tigrbl_identity_server.api.surfaces import surface_api
 
         provider = resolve_api_provider(surface_api)
         if provider is not None:

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException, status
-from tigrbl_auth.services.persistence import append_audit_event_async, revoke_token_async
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import HTTPException, status
+from tigrbl_identity_storage.persistence import append_audit_event_async, revoke_token_async
 
 
 async def revoke_request(*, request):

@@ -10,9 +10,9 @@ import time
 from dataclasses import dataclass
 from typing import Any, Final, Iterable
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.errors import InvalidTokenError
-from tigrbl_auth.standards.jose.rfc7519 import decode_jwt
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_jose.standards.rfc7519 import decode_jwt
 
 STATUS: Final[str] = "assertion-framework-runtime-integrated"
 RFC7521_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7521"

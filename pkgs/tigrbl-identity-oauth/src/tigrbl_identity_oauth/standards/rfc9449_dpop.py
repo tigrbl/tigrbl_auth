@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 9449 DPoP helpers."""
 
-from tigrbl_auth.standards.oauth2.dpop import (
+from tigrbl_identity_oauth.standards.dpop import (
     RFC9449_SPEC_URL,
     DPoPNonceRecord,
     DPoPReplayStore,

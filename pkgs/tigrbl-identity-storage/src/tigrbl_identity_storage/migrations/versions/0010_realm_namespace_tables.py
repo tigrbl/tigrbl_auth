@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.migrations.helpers import AUTHN_SCHEMA, column_names, create_tables, drop_columns, table_names
+from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA, column_names, create_tables, drop_columns, table_names
 from tigrbl_identity_storage.tables import Realm
 
 revision = "0010_realm_namespace_tables"

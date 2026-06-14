@@ -4,14 +4,14 @@ from __future__ import annotations
 import secrets
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_auth.framework import AsyncSession, HTTPException, JSONResponse, Request
-from tigrbl_auth.tables.engine import get_db
-from tigrbl_auth.tables import AuthSession, User
+from tigrbl_identity_server.framework import AsyncSession, HTTPException, JSONResponse, Request
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage.tables import AuthSession, User
 from ..routers.schemas import CredsIn, TokenPair
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oidc.id_token import mint_id_token
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_identity_oidc.standards.id_token import mint_id_token
 from ..routers.shared import _jwt, _require_tls
-from tigrbl_auth.services.token_service import issue_persisted_token_pair
+from tigrbl_identity_credentials.token_service import issue_persisted_token_pair
 from .authz import router as router
 
 api = router

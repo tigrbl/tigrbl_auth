@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_auth.api.app import build_app
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.runtime import LazyASGIApplication, RuntimePlan, build_runtime_plan
+from tigrbl_identity_server.api.app import build_app
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_runtime import LazyASGIApplication, RuntimePlan, build_runtime_plan
 
 def resolve_gateway_deployment(settings_obj: object | None = None) -> ResolvedDeployment:
     return resolve_deployment(settings_obj, runtime_style="standalone")

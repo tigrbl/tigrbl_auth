@@ -5,16 +5,16 @@ from importlib.metadata import PackageNotFoundError, version as installed_packag
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth.repo_truth import package_version as repository_package_version
-from tigrbl_auth.runtime import LazyASGIApplication, RuntimePlan, build_runtime_plan
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_operator.repo_truth import package_version as repository_package_version
+from tigrbl_identity_runtime import LazyASGIApplication, RuntimePlan, build_runtime_plan
 
 if TYPE_CHECKING:
     from tigrbl import TigrblApp
 
 
 def _load_default_settings() -> object:
-    from tigrbl_auth.config.settings import settings as default_settings
+    from tigrbl_identity_runtime.settings import settings as default_settings
 
     return default_settings
 
@@ -68,10 +68,10 @@ def build_app(
 
     from tigrbl import TigrblApp
 
-    from tigrbl_auth.api.lifecycle import register_lifecycle
-    from tigrbl_auth.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
-    from tigrbl_auth.security.admin_gate import AdminGate
-    from tigrbl_auth.tables.engine import dsn
+    from tigrbl_identity_server.api.lifecycle import register_lifecycle
+    from tigrbl_identity_server.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
+    from tigrbl_identity_server.security.admin_gate import AdminGate
+    from tigrbl_identity_storage.tables.engine import dsn
 
     app = TigrblApp(
         title="tigrbl_auth",

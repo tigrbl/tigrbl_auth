@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 8705 mTLS helpers."""
 
-from tigrbl_auth.standards.oauth2.mtls import (
+from tigrbl_identity_oauth.standards.mtls import (
     RFC8705_SPEC_URL,
     SELF_SIGNED_TLS_CLIENT_AUTH_METHOD,
     SUPPORTED_MTLS_AUTH_METHODS,

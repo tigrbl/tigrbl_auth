@@ -5,7 +5,7 @@ import json
 from dataclasses import dataclass, field, replace
 from typing import Any
 
-from tigrbl_auth.config.deployment import ResolvedDeployment, resolve_deployment
+from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 
 from .types import RunnerCapability, RunnerFlagMetadata, RuntimeDiagnostic
 
@@ -181,7 +181,7 @@ def build_runtime_plan(
         plugin_mode=deployment_plugin_mode,
         runner=adapter.name,
         environment=environment,
-        app_factory="tigrbl_auth.api.app.build_app",
+        app_factory="tigrbl_identity_server.api.app.build_app",
         deployment=resolved_deployment,
         host=host,
         port=port,

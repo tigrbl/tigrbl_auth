@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_auth.framework import AsyncSession, Request, TigrblRouter
-from tigrbl_auth.tables.engine import get_db
-from tigrbl_auth.api.rest.schemas import CredsIn, TokenPair
-from tigrbl_auth.ops.login import login_user
+from tigrbl_identity_server.framework import AsyncSession, Request, TigrblRouter
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_contracts.rest import CredsIn, TokenPair
+from tigrbl_identity_server.ops.login import login_user
 
 api = TigrblRouter()
 router = api

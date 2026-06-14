@@ -8,7 +8,7 @@ from typing import Any, Final
 from urllib.parse import urlencode
 from uuid import UUID
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
@@ -36,7 +36,7 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_auth.services import persistence as persistence_module
+    from tigrbl_identity_storage import persistence as persistence_module
 
     return persistence_module
 

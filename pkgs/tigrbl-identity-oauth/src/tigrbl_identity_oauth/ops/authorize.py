@@ -6,32 +6,32 @@ from typing import Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
-from tigrbl_auth.framework import HTMLResponse, HTTPException, RedirectResponse, select, status
-from tigrbl_auth.api.rest.shared import _jwt, _require_tls
-from tigrbl_auth.config.deployment import deployment_from_request
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.http.cookies import issue_session_cookie
-from tigrbl_auth.oidc_id_token import mint_id_token, oidc_hash
-from tigrbl_auth.standards.oidc.session_mgmt import (
+from tigrbl_identity_server.framework import HTMLResponse, HTTPException, RedirectResponse, select, status
+from tigrbl_identity_server.rest.shared import _jwt, _require_tls
+from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie
+from tigrbl_identity_oidc.id_token import mint_id_token, oidc_hash
+from tigrbl_identity_oidc.standards.session_mgmt import (
     bind_browser_session_client,
     maybe_rotate_browser_session_cookie,
     resolve_browser_session,
     session_state_for_client,
 )
-from tigrbl_auth.standards.oauth2.native_apps import validate_native_authorization_request
-from tigrbl_auth.standards.oauth2.jar import merge_request_object_params, parse_request_object
-from tigrbl_auth.standards.oauth2.par import RFC9126_SPEC_URL, consume_pushed_authorization_request, validate_pushed_authorization_request_row
-from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
-from tigrbl_auth.standards.oauth2.resource_indicators import extract_resource
-from tigrbl_auth.standards.oauth2.issuer_identification import authorization_response_issuer
-from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_identity_oauth.standards.native_apps import validate_native_authorization_request
+from tigrbl_identity_oauth.standards.jar import merge_request_object_params, parse_request_object
+from tigrbl_identity_oauth.standards.par import RFC9126_SPEC_URL, consume_pushed_authorization_request, validate_pushed_authorization_request_row
+from tigrbl_identity_oauth.standards.rar import normalize_authorization_details
+from tigrbl_identity_oauth.standards.resource_indicators import extract_resource
+from tigrbl_identity_oauth.standards.issuer_identification import authorization_response_issuer
+from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_identity_oauth.standards.rfc9700 import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     runtime_security_profile,
 )
-from tigrbl_auth.tables import AuthCode, Client, PushedAuthorizationRequest, User
+from tigrbl_identity_storage.tables import AuthCode, Client, PushedAuthorizationRequest, User
 
 
 def _coerce_multi_value(value: Any) -> list[str]:

@@ -17,12 +17,12 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_auth.framework import JWAAlg, JwsSignerVerifier
+    from tigrbl_identity_server.framework import JWAAlg, JwsSignerVerifier
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     JWAAlg = None
     JwsSignerVerifier = None
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC7515_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7515"
 _signer = JwsSignerVerifier() if JwsSignerVerifier is not None else None

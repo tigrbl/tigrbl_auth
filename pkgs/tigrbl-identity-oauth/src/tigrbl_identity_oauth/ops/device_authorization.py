@@ -5,11 +5,11 @@ from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_auth.config.deployment import deployment_from_request
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_auth.framework import HTTPException, select, status
+    from tigrbl_identity_server.framework import HTTPException, select, status
 except Exception:  # pragma: no cover - dependency-light fallback
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -35,22 +35,22 @@ except Exception:  # pragma: no cover - dependency-light fallback
 
     status = _FallbackStatus()
 
-from tigrbl_auth.standards.oauth2.device_authorization import (
+from tigrbl_identity_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
     DEVICE_CODE_INTERVAL,
     generate_device_code,
     generate_user_code,
 )
-from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
+from tigrbl_identity_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover
-    from tigrbl_auth.services.persistence import append_audit_event_async
+    from tigrbl_identity_storage.persistence import append_audit_event_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def append_audit_event_async(**kwargs):
         return None
 
 try:  # pragma: no cover
-    from tigrbl_auth.tables import Client, DeviceCode
+    from tigrbl_identity_storage.tables import Client, DeviceCode
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()

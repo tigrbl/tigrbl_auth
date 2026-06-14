@@ -8,7 +8,7 @@ from typing import Any, Mapping
 
 import yaml
 
-from tigrbl_auth.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC, load_document_authority
+from tigrbl_identity_operator.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC, load_document_authority
 
 ROOT_CURRENT_STATE = "CURRENT_STATE.md"
 ROOT_CERTIFICATION_STATUS = "CERTIFICATION_STATUS.md"

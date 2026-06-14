@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_auth.runtime import runner_registry_manifest
+from tigrbl_identity_runtime import runner_registry_manifest
 
 from .models import TRANSPORT_REQUIREMENTS, TransportPosture
 

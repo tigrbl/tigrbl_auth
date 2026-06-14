@@ -22,7 +22,7 @@ from typing import Any, Final, Mapping
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from tigrbl_auth.config.settings import settings
+from tigrbl_identity_runtime.settings import settings
 
 RFC7516_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7516"
 SUPPORTED_JWE_ALG_VALUES: Final[tuple[str, ...]] = ("dir",)

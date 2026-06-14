@@ -1,6 +1,6 @@
 """Compatibility facade for canonical RFC 7521 assertion helpers."""
 
-from tigrbl_auth.standards.oauth2.assertion_framework import (
+from tigrbl_identity_oauth.standards.assertion_framework import (
     JWT_BEARER_ASSERTION_TYPE,
     JWT_BEARER_GRANT_TYPE,
     OWNER,

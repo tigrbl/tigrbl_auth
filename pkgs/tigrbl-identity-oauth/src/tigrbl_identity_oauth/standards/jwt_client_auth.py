@@ -7,10 +7,10 @@ import uuid
 from dataclasses import dataclass
 from typing import Any, Final, Iterable
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.oauth2.mtls import SUPPORTED_MTLS_AUTH_METHODS
-from tigrbl_auth.standards.jose.rfc7519 import decode_jwt, encode_jwt
-from tigrbl_auth.standards.oauth2.assertion_framework import (
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_oauth.standards.mtls import SUPPORTED_MTLS_AUTH_METHODS
+from tigrbl_identity_jose.standards.rfc7519 import decode_jwt, encode_jwt
+from tigrbl_identity_oauth.standards.assertion_framework import (
     JWT_BEARER_ASSERTION_TYPE,
     validate_temporal_claims,
 )

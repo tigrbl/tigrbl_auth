@@ -25,8 +25,8 @@ Notes
 
 from __future__ import annotations
 
-from tigrbl_auth.framework import TigrblRouter
-from tigrbl_auth.tables import (
+from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl_identity_storage.tables import (
     Realm,
     Tenant,
     User,
@@ -38,7 +38,7 @@ from tigrbl_auth.tables import (
     PushedAuthorizationRequest,
     AuthCode,
 )
-from tigrbl_auth.tables.engine import dsn
+from tigrbl_identity_storage.tables.engine import dsn
 from .auth_flows import api as flows_api
 
 # ----------------------------------------------------------------------

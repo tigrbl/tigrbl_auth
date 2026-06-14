@@ -5,12 +5,12 @@ import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_auth.framework import select
-from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
-from tigrbl_auth.services.key_management import hash_pw
-from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
-from tigrbl_auth.tables import Tenant, User
-from tigrbl_auth.tables.engine import ENGINE
+from tigrbl_identity_server.framework import select
+from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_identity_storage.tables import Tenant, User
+from tigrbl_identity_storage.tables.engine import ENGINE
 
 
 def _token_digest(value: str) -> str:
@@ -25,7 +25,7 @@ def user_is_admin(user: User | None) -> bool:
 
 def _resolve_provider():
     try:
-        from tigrbl_auth.api.surfaces import surface_api
+        from tigrbl_identity_server.api.surfaces import surface_api
 
         provider = resolve_api_provider(surface_api)
         if provider is not None:

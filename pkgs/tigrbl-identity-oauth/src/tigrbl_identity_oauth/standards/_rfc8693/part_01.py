@@ -23,10 +23,10 @@ from tigrbl_identity_server.framework import (
     status,
 )
 
-from tigrbl_auth import runtime_cfg
-from tigrbl_auth.jwtoken import JWTCoder
-from tigrbl_auth.rfc.rfc7519 import decode_jwt
-from tigrbl_auth.rfc.rfc9449_dpop import verify_proof
+from tigrbl_identity_runtime import settings as runtime_cfg
+from tigrbl_identity_jose.jwtoken import JWTCoder
+from tigrbl_identity_jose.standards.rfc7519 import decode_jwt
+from tigrbl_identity_oauth.standards.rfc9449_dpop import verify_proof
 
 RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
 

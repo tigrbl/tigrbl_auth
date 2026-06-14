@@ -28,7 +28,7 @@ from tigrbl_identity_cli.cli.claims import run_lint
 from tigrbl_identity_cli.cli.feature_surface import run_feature_surface_modularity_check
 from tigrbl_identity_cli.cli.governance import run_governance_install_check
 from tigrbl_identity_cli.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest
-from tigrbl_auth.services._operator_store import operator_state_root as _durable_operator_state_root
+from tigrbl_identity_storage.operator_store import operator_state_root as _durable_operator_state_root
 from tigrbl_identity_cli.cli.project_tree import run_migration_plan_check, run_project_tree_layout_check
 from tigrbl_identity_cli.cli.reports import (
     build_adr_index,
@@ -53,8 +53,8 @@ from tigrbl_identity_cli.cli.runtime import (
     runtime_evidence_paths,
     write_runtime_profile_report,
 )
-from tigrbl_auth.config.deployment import PROTOCOL_SLICE_REGISTRY, ROUTE_REGISTRY, SURFACE_SET_REGISTRY
-from tigrbl_auth.runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, runner_registry_manifest
+from tigrbl_identity_runtime.deployment import PROTOCOL_SLICE_REGISTRY, ROUTE_REGISTRY, SURFACE_SET_REGISTRY
+from tigrbl_identity_runtime import build_runtime_hash_matrix, build_runtime_plan, get_runner_adapter, runner_registry_manifest
 
 
 def _display_path(path: Path, repo_root: Path) -> str:

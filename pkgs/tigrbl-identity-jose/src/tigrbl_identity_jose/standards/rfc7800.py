@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Any, Final, Mapping
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.standards.jose.rfc7638 import jwk_thumbprint
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_jose.standards.rfc7638 import jwk_thumbprint
 
 RFC7800_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7800"
 

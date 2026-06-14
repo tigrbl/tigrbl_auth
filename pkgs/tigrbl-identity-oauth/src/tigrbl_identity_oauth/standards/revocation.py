@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import Final
 from urllib.parse import parse_qs
 
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-from tigrbl_auth.services.persistence import (
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_storage.persistence import (
     is_token_revoked as _is_token_revoked,
     reset_token_state as _reset_token_state,
     revoke_token as _revoke_token,

@@ -1,6 +1,6 @@
 """Executable DDL migration for 0001_initial_identity_tables."""
 
-from tigrbl_auth.migrations.helpers import create_tables, drop_tables
+from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
 from tigrbl_identity_storage.tables import Realm, Tenant, User
 
 revision = '0001_initial_identity_tables'
