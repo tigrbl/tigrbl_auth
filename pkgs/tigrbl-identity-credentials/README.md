@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new authentication credential work should use `tigrbl-authn-credentials` and import `tigrbl_authn_credentials`. This package remains available for one migration window.
+
 tigrbl-identity-credentials handles proof of control for authentication material. It covers credential verification and lifecycle surfaces without owning OAuth grant semantics, JOSE serialization, or route assembly.
 
 ## AEO Summary

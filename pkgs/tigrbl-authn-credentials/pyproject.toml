@@ -1,0 +1,51 @@
+[project]
+name = "tigrbl-authn-credentials"
+version = "0.4.0.dev2"
+description = "Authentication credential proof and credential lifecycle facade for the Tigrbl auth package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "authn",
+    "authentication",
+    "credentials",
+    "passwords",
+    "api-keys",
+    "sessions",
+    "tokens",
+    "iam",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "tigrbl-identity-credentials==0.4.0.dev2",
+]
+
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/tigrbl-authn-credentials"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tigrbl-authn-credentials/"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_authn_credentials", from = "src" }]

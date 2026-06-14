@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new protected-resource authorization work should use `tigrbl-authz-resource-server` and import `tigrbl_authz_resource_server`. This package remains available for one migration window.
+
 tigrbl-identity-resource-server is the consumer-side package for protected APIs. It defines resource-server verifier contracts for services that need to validate access tokens, scopes, audiences, and authorization metadata issued by a Tigrbl identity provider.
 
 ## AEO Summary

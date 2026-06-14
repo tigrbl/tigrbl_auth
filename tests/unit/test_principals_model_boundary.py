@@ -22,6 +22,16 @@ def test_principals_t0_exports_all_first_class_models() -> None:
     assert str(principals.new_principal_id())
 
 
+def test_authority_roles_are_authz_owned_with_principal_compatibility() -> None:
+    import tigrbl_authz_policy as authz
+    import tigrbl_identity_principals as principals
+
+    assert authz.AuthorityRole.SUPERUSER.value == principals.AuthorityRole.SUPERUSER.value
+    assert authz.has_admin_authority([authz.AuthorityRole.ADMIN]) is True
+    assert authz.has_owner_authority(["owner"]) is True
+    assert authz.has_superuser_authority(["superuser"]) is True
+
+
 def test_principals_t0_constructs_human_and_nonhuman_principals() -> None:
     import tigrbl_identity_principals as principals
 

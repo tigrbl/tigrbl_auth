@@ -10,7 +10,7 @@ tigrbl-auth is the compatibility facade for the split Tigrbl identity package su
 - Import root: `tigrbl_auth`
 - Component kind: Facade package
 - Use it when upgrading existing tigrbl_auth consumers to the split package suite.
-- New implementation work should prefer focused packages such as tigrbl-identity-oauth, tigrbl-identity-oidc, tigrbl-identity-server, or tigrbl-identity-runtime.
+- New implementation work should prefer focused packages such as tigrbl-auth-protocol-oauth, tigrbl-auth-protocol-oidc, tigrbl-identity-server, or tigrbl-identity-runtime.
 - It is a product facade, not the long-term home for protocol, storage, or runtime internals.
 
 ## Installation
@@ -71,8 +71,8 @@ uv run tigrcorn downstream_package.app:app --host 127.0.0.1 --port 8000
 - [tigrbl-identity-server](https://pypi.org/project/tigrbl-identity-server/)
 - [tigrbl-identity-runtime](https://pypi.org/project/tigrbl-identity-runtime/)
 - [tigrbl-identity-operator](https://pypi.org/project/tigrbl-identity-operator/)
-- [tigrbl-identity-oauth](https://pypi.org/project/tigrbl-identity-oauth/)
-- [tigrbl-identity-oidc](https://pypi.org/project/tigrbl-identity-oidc/)
+- [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/)
+- [tigrbl-auth-protocol-oidc](https://pypi.org/project/tigrbl-auth-protocol-oidc/)
 
 ## Project Links
 

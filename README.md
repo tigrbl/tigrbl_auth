@@ -65,7 +65,7 @@ This checkpoint remains intentionally aligned to Tigrbl guidance:
 
 Downstream products should treat `tigrbl_auth` as the owner of the identity
 schema and product surfaces. A downstream authn/authz platform should compose
-the app, plugin, split identity packages, and API/UIX front doors rather than
+the app, plugin, split identity/authn/authz/protocol packages, and API/UIX front doors rather than
 creating parallel tables for realms, tenants, principals, roles, sessions,
 clients, tokens, or keys.
 

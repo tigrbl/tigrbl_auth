@@ -36,6 +36,7 @@ jwks_path = tenant_jwks_path("acme")
 - Tenant trust-domain discovery
 - Tenant issuer and JWKS path helpers
 - Identity service and tenant discovery helpers
+- Authority roles and role-bearing membership semantics are authorization concepts; new code should use `tigrbl-authz-policy`.
 
 ## Related Packages
 

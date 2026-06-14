@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define first-wave package-suite boundaries and import rules."
     at: "2026-05-18T08:20:26Z"
+    note: "Define first-wave package-suite boundaries and import rules."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Import DAG now includes the foundation -> tigrbl-auth facade -> backend API products and frontend UIX layering guard, with T1 exception-ledger enforcement and a T2 zero-exception target."
+    at: "2026-06-14T22:51:25Z"
 references: []
 body: |-
   ## Scope
@@ -110,3 +114,5 @@ spec_kind: "normative"
 adr_ids:
   - "adr:1095"
   - "adr:1096"
+  - "adr:1104"
+  - "adr:1018"

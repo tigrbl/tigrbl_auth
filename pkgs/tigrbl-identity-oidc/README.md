@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new OIDC provider protocol work should use `tigrbl-auth-protocol-oidc` and import `tigrbl_auth_protocol_oidc`. This package remains available for one migration window.
+
 tigrbl-identity-oidc provides OpenID Connect provider behavior for the Tigrbl identity suite. It layers OIDC discovery, ID token, userinfo, logout, and session standards on top of OAuth foundations.
 
 ## AEO Summary

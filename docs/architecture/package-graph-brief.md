@@ -14,10 +14,10 @@ This brief grounds the architecture image in the live package inventory in this 
 ### Domain, protocol, and control-plane packages
 
 - `tigrbl-identity-admin`: tenant, user, client, key, session, token, consent, audit, profile, and governance control-plane operations.
-- `tigrbl-identity-oauth`: OAuth 2.x protocol flows including device authorization, PAR, token exchange, DPoP, and related RFC helpers.
-- `tigrbl-identity-oidc`: OIDC discovery, ID token, userinfo, logout, session, and OIDC standards helpers.
-- `tigrbl-identity-credentials`: password, API key, auth context, session, and token lifecycle helpers.
-- `tigrbl-identity-policy`: RBAC, ABAC, delegated administration, provenance, and governance policy controls.
+- `tigrbl-auth-protocol-oauth`: OAuth 2.x protocol flows including device authorization, PAR, token exchange, DPoP, and related RFC helpers.
+- `tigrbl-auth-protocol-oidc`: OIDC discovery, ID token, userinfo, logout, session, and OIDC standards helpers.
+- `tigrbl-authn-credentials`: password, API key, auth context, session, and token lifecycle helpers.
+- `tigrbl-authz-policy`: RBAC, ABAC, delegated administration, provenance, and governance policy controls.
 - `tigrbl-identity-principals`: tenant, principal, subject context, and trust-domain discovery helpers.
 - `tigrbl-identity-jose`: JOSE, JWT, JWS, JWE, JWK, JWKS, key rotation, and signing helpers.
 - `tigrbl-identity-contracts`: Pydantic REST and JSON-RPC contracts for public and admin APIs.
@@ -29,8 +29,8 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ### Consumer and verification packages
 
-- `tigrbl-identity-rp`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
-- `tigrbl-identity-resource-server`: protected API token-validation and resource-server contracts.
+- `tigrbl-auth-protocol-rp`: Python relying-party helpers for discovery, userinfo, logout, and RP integration.
+- `tigrbl-authz-resource-server`: protected API token-validation and resource-server contracts.
 - `tigrbl-identity-testkit`: fake identity components, vectors, fixtures, and integration harnesses.
 - `acme-notes-cli`: example consumer showing device-login usage.
 
@@ -70,7 +70,7 @@ This brief grounds the architecture image in the live package inventory in this 
 
 ## High-level flow edges
 
-1. Public users and consumer apps enter through `@tigrbl-auth/public-uix`, `@tigrbl-auth/rp`, `tigrbl-identity-rp`, or the example CLI.
+1. Public users and consumer apps enter through `@tigrbl-auth/public-uix`, `@tigrbl-auth/rp`, `tigrbl-auth-protocol-rp`, or the example CLI.
 2. Administrative operators enter through `@tigrbl-auth/admin-uix` and `tigrbl-identity-operator`.
 3. Those clients call the `tigrbl-identity-server` public REST or admin RPC surfaces.
 4. The server delegates protocol and domain work to OAuth, OIDC, admin, credentials, policy, principals, JOSE, and contracts packages.

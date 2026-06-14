@@ -57,6 +57,35 @@ INSTALLED_FACADE_MODULES = {
 
 
 @contextmanager
+def source_tree_paths_first():
+    original_path = list(sys.path)
+    removed_modules = {
+        name: module
+        for name, module in sys.modules.items()
+        if name == "tigrbl_auth"
+        or name.startswith("tigrbl_auth.")
+        or name.startswith("tigrbl_identity_")
+    }
+    for name in list(removed_modules):
+        sys.modules.pop(name, None)
+    try:
+        root_value = str(ROOT)
+        sys.path = [value for value in sys.path if value not in {root_value, ""}]
+        sys.path.insert(0, root_value)
+        yield
+    finally:
+        for name in list(sys.modules):
+            if (
+                name == "tigrbl_auth"
+                or name.startswith("tigrbl_auth.")
+                or name.startswith("tigrbl_identity_")
+            ):
+                sys.modules.pop(name, None)
+        sys.modules.update(removed_modules)
+        sys.path = original_path
+
+
+@contextmanager
 def package_src_paths_only():
     original_path = list(sys.path)
     removed_modules = {
@@ -89,21 +118,23 @@ def package_src_paths_only():
 
 
 def test_legacy_facade_modules_alias_canonical_module_objects() -> None:
-    for legacy_name, canonical_name in FACADE_MODULES.items():
-        legacy = importlib.import_module(legacy_name)
-        canonical = importlib.import_module(canonical_name)
+    with source_tree_paths_first():
+        for legacy_name, canonical_name in FACADE_MODULES.items():
+            legacy = importlib.import_module(legacy_name)
+            canonical = importlib.import_module(canonical_name)
 
-        assert legacy is canonical
+            assert legacy is canonical
 
 
 def test_legacy_executable_facades_preserve_private_patch_points() -> None:
-    for legacy_name, canonical_name in EXECUTABLE_FACADE_MODULES.items():
-        legacy = importlib.import_module(legacy_name)
-        canonical = importlib.import_module(canonical_name)
+    with source_tree_paths_first():
+        for legacy_name, canonical_name in EXECUTABLE_FACADE_MODULES.items():
+            legacy = importlib.import_module(legacy_name)
+            canonical = importlib.import_module(canonical_name)
 
-        assert legacy.DEVICE_CODE_GRANT_TYPE == canonical.DEVICE_CODE_GRANT_TYPE
-        assert legacy.token_request.__code__.co_code == canonical.token_request.__code__.co_code
-        assert hasattr(legacy, "_require_tls")
+            assert legacy.DEVICE_CODE_GRANT_TYPE == canonical.DEVICE_CODE_GRANT_TYPE
+            assert legacy.token_request.__code__.co_code == canonical.token_request.__code__.co_code
+            assert hasattr(legacy, "_require_tls")
 
 
 def test_installable_tigrbl_auth_facade_exposes_runtime_legacy_paths() -> None:
@@ -126,11 +157,11 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
         {
             "tigrbl-identity-cli==0.4.0.dev2",
             "tigrbl-identity-admin==0.4.0.dev2",
-            "tigrbl-identity-credentials==0.4.0.dev2",
+            "tigrbl-authn-credentials==0.4.0.dev2",
             "tigrbl-identity-jose==0.4.0.dev2",
-            "tigrbl-identity-oauth==0.4.0.dev2",
+            "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "tigrbl-identity-operator==0.4.0.dev2",
-            "tigrbl-identity-policy==0.4.0.dev2",
+            "tigrbl-authz-policy==0.4.0.dev2",
             "tigrbl-identity-runtime==0.4.0.dev2",
             "tigrbl-identity-server==0.4.0.dev2",
             "tigrbl-identity-storage==0.4.0.dev2",

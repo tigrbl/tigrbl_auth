@@ -11,6 +11,12 @@ PKGS = ROOT / "pkgs"
 
 
 PACKAGE_ROOTS = [
+    "tigrbl_auth_protocol_oauth",
+    "tigrbl_auth_protocol_oidc",
+    "tigrbl_auth_protocol_rp",
+    "tigrbl_authn_credentials",
+    "tigrbl_authz_policy",
+    "tigrbl_authz_resource_server",
     "tigrbl_identity_core",
     "tigrbl_identity_contracts",
     "tigrbl_identity_principals",
@@ -31,6 +37,12 @@ PACKAGE_ROOTS = [
 ]
 
 DIST_TO_IMPORT_ROOT = {
+    "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
+    "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
+    "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
+    "tigrbl-authn-credentials": "tigrbl_authn_credentials",
+    "tigrbl-authz-policy": "tigrbl_authz_policy",
+    "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-identity-core": "tigrbl_identity_core",
     "tigrbl-identity-contracts": "tigrbl_identity_contracts",
     "tigrbl-identity-principals": "tigrbl_identity_principals",

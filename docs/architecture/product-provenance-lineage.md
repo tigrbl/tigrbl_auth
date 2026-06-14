@@ -5,16 +5,22 @@ consumer integrations, and support tooling by provenance. Foundation packages
 come first, followed by shared protocol/runtime layers, provider surfaces, edge
 clients, consumer integrations, and support packages.
 
+The current package taxonomy uses `identity` for neutral identity records,
+`authn` for credential proof, `authz` for policy/enforcement, `auth-protocol`
+for OAuth/OIDC/RP wire behavior, and `auth` for composed products/front doors.
+The old renamed `tigrbl-identity-*` package names remain compatibility packages
+for one migration window.
+
 | Order | Package / app | Kind | Provenance role |
 | --- | --- | --- | --- |
 | 1 | `tigrbl-identity-core` | Backend package | Root primitives and shared identity foundation. |
 | 2 | `tigrbl-identity-contracts` | Backend package | Shared wire models and API contracts. |
 | 3 | `tigrbl-identity-principals` | Backend package | Tenants, users, services, clients, workloads, identity subjects. |
-| 4 | `tigrbl-identity-credentials` | Backend package | Passwords, keys, API keys, service keys, credential proof/lifecycle. |
+| 4 | `tigrbl-authn-credentials` | Backend package | Passwords, keys, API keys, service keys, credential proof/lifecycle. |
 | 5 | `tigrbl-identity-jose` | Backend package | JWT, JWK, JWKS, signing, key material, token crypto. |
-| 6 | `tigrbl-identity-policy` | Backend package | Authorization, RBAC/ABAC/delegation/governance decisions. |
-| 7 | `tigrbl-identity-oauth` | Backend package | OAuth protocol flows. |
-| 8 | `tigrbl-identity-oidc` | Backend package | OIDC behavior layered on OAuth. |
+| 6 | `tigrbl-authz-policy` | Backend package | Authorization, RBAC/ABAC/delegation/governance decisions. |
+| 7 | `tigrbl-auth-protocol-oauth` | Backend package | OAuth protocol flows. |
+| 8 | `tigrbl-auth-protocol-oidc` | Backend package | OIDC behavior layered on OAuth. |
 | 9 | `tigrbl-identity-admin` | Backend package | Shared administrative/control-plane services. |
 | 10 | `tigrbl-identity-storage` | Backend package | Persistence backing for identity/admin/runtime state. |
 | 11 | `tigrbl-identity-server` | Backend package | Provider app assembly. |
@@ -30,9 +36,9 @@ clients, consumer integrations, and support packages.
 | 21 | `@tigrbl-auth/tenant-admin-uix` | UIX app | Tenant owner/admin UI over `tenant-admin-api`. |
 | 22 | `@tigrbl-auth/developer-uix` | UIX app | Tenant developer UI over `developer-api`. |
 | 23 | `@tigrbl-auth/service-admin-uix` | UIX app | Service/workload admin UI over `service-admin-api`. |
-| 24 | `tigrbl-identity-rp` | Consumer package | App-side relying-party integration consuming the public issuer. |
+| 24 | `tigrbl-auth-protocol-rp` | Consumer package | App-side relying-party integration consuming the public issuer. |
 | 25 | `@tigrbl-auth/rp` | Consumer UI/package | Browser/client RP integration consuming public issuer behavior. |
-| 26 | `tigrbl-identity-resource-server` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |
+| 26 | `tigrbl-authz-resource-server` | Consumer package | Protected API token-validation integration consuming resource-validation metadata. |
 | 27 | `tigrbl-identity-operator` | Tooling package | Operational tooling over assembled deployments. |
 | 28 | `tigrbl-identity-testkit` | Test package | Cross-cutting fixtures, conformance, and integration harnesses. |
 | 29 | `@tigrbl-auth/admin-uix` | Legacy UIX app | Temporary ancestor/extraction source, not a final product surface. |

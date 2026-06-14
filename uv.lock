@@ -2529,6 +2529,12 @@ dependencies = [
     { name = "swarmauri-standard" },
     { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-authn-credentials" },
+    { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-cli" },
     { name = "tigrbl-identity-credentials" },
@@ -2624,6 +2630,12 @@ requires-dist = [
     { name = "swarmauri-standard", specifier = "==0.9.2" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl", specifier = "==0.4.0" },
+    { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-auth-protocol-rp", editable = "pkgs/tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-authn-credentials", editable = "pkgs/tigrbl-authn-credentials" },
+    { name = "tigrbl-authz-policy", editable = "pkgs/tigrbl-authz-policy" },
+    { name = "tigrbl-authz-resource-server", editable = "pkgs/tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin", editable = "pkgs/tigrbl-identity-admin" },
     { name = "tigrbl-identity-cli", editable = "pkgs/tigrbl-identity-cli" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/tigrbl-identity-credentials" },
@@ -2656,6 +2668,72 @@ dev = [
     { name = "ssot-registry", specifier = ">=0.2.8" },
     { name = "tox", specifier = ">=4.23.2" },
 ]
+
+[[package]]
+name = "tigrbl-auth-protocol-oauth"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
+dependencies = [
+    { name = "tigrbl-identity-oauth" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-oauth", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-auth-protocol-oidc"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-oidc" }
+dependencies = [
+    { name = "tigrbl-identity-oidc" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-oidc", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-auth-protocol-rp"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-rp" }
+dependencies = [
+    { name = "tigrbl-identity-rp" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-rp", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-authn-credentials"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-authn-credentials" }
+dependencies = [
+    { name = "tigrbl-identity-credentials" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-credentials", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-authz-policy"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-authz-policy" }
+dependencies = [
+    { name = "tigrbl-identity-policy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-policy", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-authz-resource-server"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-authz-resource-server" }
+dependencies = [
+    { name = "tigrbl-identity-resource-server" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-resource-server", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-base"
@@ -2776,6 +2854,15 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-oauth" }
 
 [[package]]
+name = "tigrbl-identity-oidc"
+version = "0.4.0.dev2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/38/9a/4b40ba900f539838c350623f75cb98d0bd56ed5da4a8fcd2d249ff9f9a64/tigrbl_identity_oidc-0.4.0.dev2.tar.gz", hash = "sha256:ea3a86124927547c44d286bb10c0011e2697b00562732523a1c966754e57b925", size = 20004 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f1/56/08b9df9b34ccff50a9d9fed6f77cf1ea66a4843dedb4ed88fdc12765da09/tigrbl_identity_oidc-0.4.0.dev2-py3-none-any.whl", hash = "sha256:e8524ef16f1a06006508f7b3e16023bd5e0c09489aff329abe9a6bbec613f7a5", size = 30167 },
+]
+
+[[package]]
 name = "tigrbl-identity-operator"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-operator" }
@@ -2794,6 +2881,24 @@ requires-dist = [
 name = "tigrbl-identity-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-policy" }
+
+[[package]]
+name = "tigrbl-identity-resource-server"
+version = "0.4.0.dev2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/17/df/325d9cb69b8ac1206d86c9ddf178338c2405767a6e02609bcc5a72274ce9/tigrbl_identity_resource_server-0.4.0.dev2.tar.gz", hash = "sha256:d9f314994ae620de26c59201b298aa59d88e084b4d9e8c4df4dd65b74c90354a", size = 1755 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/6a/94f6e4edbc4e79e208fad95f38ae886f2ba37925905422d23a24a78808ee/tigrbl_identity_resource_server-0.4.0.dev2-py3-none-any.whl", hash = "sha256:885ea5413ccd6626ec3a93a03a265d7086d8f397ad2a7a691cf37507cd7beb4c", size = 2764 },
+]
+
+[[package]]
+name = "tigrbl-identity-rp"
+version = "0.4.0.dev2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/82/ac/a56f9ca8e0a4e7db9e92b92ad9192f2d8cee04431a322e92ca2947a654d5/tigrbl_identity_rp-0.4.0.dev2.tar.gz", hash = "sha256:e38fdd5e4f532204701c221a28a603871ad265f819573a4dc10daf573af5c60d", size = 6153 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2c/f1/0dad34cf845d05252c6c9cb1b5d74a58589b98b8df324a772f2f59a5d8e4/tigrbl_identity_rp-0.4.0.dev2-py3-none-any.whl", hash = "sha256:e7ee6ec3549836c25b97f5ae9620d5604c4445282f11614b0d1be84274e5039a", size = 7800 },
+]
 
 [[package]]
 name = "tigrbl-identity-runtime"

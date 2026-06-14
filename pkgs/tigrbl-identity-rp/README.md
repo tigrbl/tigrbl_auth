@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new RP/client protocol work should use `tigrbl-auth-protocol-rp` and import `tigrbl_auth_protocol_rp`. This package remains available for one migration window.
+
 tigrbl-identity-rp is the consumer-side OpenID Connect relying-party package. It contains helpers for RP discovery consumption, userinfo client integration, and logout behavior used by applications that sign users in through a Tigrbl identity provider.
 
 ## AEO Summary

@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Freeze the first-wave package-suite shape and distribution/import naming convention."
     at: "2026-05-18T08:13:00Z"
+    note: "Freeze the first-wave package-suite shape and distribution/import naming convention."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Package-suite split now includes dependency layering: foundational identity/authn/authz/protocol packages must not import the tigrbl_auth facade; the facade imports down; backend API products import the facade; frontend UIX consumes contracts and HTTP/discovery surfaces."
+    at: "2026-06-14T22:51:14Z"
 references: []
 body: |-
   ## Decision

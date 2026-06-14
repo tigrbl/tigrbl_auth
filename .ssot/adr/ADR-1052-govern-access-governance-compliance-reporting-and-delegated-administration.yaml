@@ -13,45 +13,49 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Delegated administration now depends on spc:1213 for persisted DelegationGrant lifecycle, management visibility, revocation, and audit completion criteria."
     at: "2026-06-14T11:50:59Z"
+    note: "Delegated administration now depends on spc:1213 for persisted DelegationGrant lifecycle, management visibility, revocation, and audit completion criteria."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Resync ADR metadata after prior delegated-administration update."
+    at: "2026-06-14T22:45:32Z"
 references: []
 body: |-
   ## Decision
-
+  
   `tigrbl_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports.
-
+  
   ## Current Implementation Status
-
+  
   - F42 Compliance reporting: partial.
   - F43 Access review workflows: absent.
   - F44 Entitlement management: absent.
   - F45 Delegated admin: partial.
-
+  
   ## Impacted Features
-
+  
   - F42 Compliance reporting.
   - F43 Access review workflows.
   - F44 Entitlement management.
   - F45 Delegated admin.
-
+  
   ## Standards / Specs
-
+  
   - NIST SP 800-53 AC controls.
   - NIST SP 800-53 AU controls.
   - ISO/IEC 27001 access control and privileged access management controls.
   - SOC 2 logical access and audit evidence expectations.
   - SCIM RFC 7643 and RFC 7644 where groups or entitlements are provisioned.
-
+  
   ## Required Future Capability
-
+  
   Future implementation MUST provide access review campaigns, entitlement inventory, delegated administrator scope modeling, product-level compliance reports, tenant isolation, audit trails, tests, and evidence.
-
+  
   ## Out of Scope
-
+  
   This ADR does not implement access reviews, entitlement catalogs, compliance report generation over product data, or delegated-admin lifecycle APIs.
-
+  
   ## Operational Consequences
-
+  
   Repository-level compliance and certification reports MAY support release governance, but they MUST NOT be treated as complete product-level access compliance reporting.

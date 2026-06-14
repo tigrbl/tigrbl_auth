@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new authorization policy work should use `tigrbl-authz-policy` and import `tigrbl_authz_policy`. This package remains available for one migration window.
+
 tigrbl-identity-policy owns authorization decisions and governance policy for the Tigrbl identity suite. It keeps RBAC, ABAC, delegated administration, service identity policy, provenance, and release posture separate from protocol and server packages.
 
 ## AEO Summary

@@ -15,9 +15,10 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 25
+    assert len(packages) == 31
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/tigrbl-auth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
+    assert packages["tigrbl-auth-protocol-oauth"].import_root == "tigrbl_auth_protocol_oauth"
 
 
 def test_monorepo_release_accepts_package_version_tag() -> None:
@@ -58,7 +59,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "125"
+    assert payload["count"] == "155"
     assert {
         cell["python_version"]
         for cell in matrix
@@ -85,7 +86,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             str(SCRIPT),
             "test-matrix",
             "--package",
-            "tigrbl-identity-oauth",
+            "tigrbl-auth-protocol-oauth",
             "--python-version",
             "3.12",
         ],
@@ -101,16 +102,16 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
     assert payload["count"] == "1"
     assert matrix == [
         {
-            "name": "tigrbl-identity-oauth",
+            "name": "tigrbl-auth-protocol-oauth",
             "version": "0.4.0.dev2",
-            "path": "pkgs/tigrbl-identity-oauth",
-            "import_root": "tigrbl_identity_oauth",
-            "tag": "tigrbl-identity-oauth==0.4.0.dev2",
+            "path": "pkgs/tigrbl-auth-protocol-oauth",
+            "import_root": "tigrbl_auth_protocol_oauth",
+            "tag": "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "python_version": "3.12",
             "python_tag": "py312",
-            "cell_id": "tigrbl-identity-oauth-py312",
+            "cell_id": "tigrbl-auth-protocol-oauth-py312",
             "workspace_source_globs": "pkgs/*/src",
-            "package_test_paths": "tests/packages/tigrbl-identity-oauth\ntests/packages/tigrbl_identity_oauth",
+            "package_test_paths": "tests/packages/tigrbl-auth-protocol-oauth\ntests/packages/tigrbl_auth_protocol_oauth",
             "pre_test_command": "",
             "pytest_args": "",
             "cross_cutting": "false",

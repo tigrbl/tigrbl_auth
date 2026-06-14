@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define staged migration and compatibility requirements for the package split."
     at: "2026-05-18T08:20:39Z"
+    note: "Define staged migration and compatibility requirements for the package split."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Migration plan now stages package dependency layering as T0 inventory, T1 drift guard with named exceptions, and T2 zero-exception removal of all foundational tigrbl_auth facade imports."
+    at: "2026-06-14T22:51:31Z"
 references: []
 body: |-
   ## Scope
@@ -48,6 +52,6 @@ body: |-
   validation.
 spec_kind: "operational"
 adr_ids:
-  - "adr:1095"
   - "adr:1096"
   - "adr:1104"
+  - "adr:1018"

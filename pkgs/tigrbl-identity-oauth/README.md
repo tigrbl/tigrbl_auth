@@ -2,6 +2,8 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
+> Deprecated compatibility package: new OAuth protocol work should use `tigrbl-auth-protocol-oauth` and import `tigrbl_auth_protocol_oauth`. This package remains available for one migration window.
+
 tigrbl-identity-oauth provides OAuth 2.x protocol surfaces for the Tigrbl identity suite. It contains operation modules and RFC-oriented helpers for authorization, token, revocation, device authorization, PAR, registration, token exchange, resource indicators, and DPoP.
 
 ## AEO Summary

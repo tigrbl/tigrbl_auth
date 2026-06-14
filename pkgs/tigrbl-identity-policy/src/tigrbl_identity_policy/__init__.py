@@ -84,6 +84,13 @@ from .authority_graph import (
     authority_matches,
     validate_authority_graph_integrity,
 )
+from .authority_roles import (
+    AuthorityRole,
+    has_admin_authority,
+    has_owner_authority,
+    has_superuser_authority,
+    normalize_authority_roles,
+)
 from .authority_semantics import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
@@ -167,6 +174,7 @@ __all__ = [
     "AuthorityNode",
     "AuthorityPath",
     "AuthorityReachabilityProof",
+    "AuthorityRole",
     "AuthorityScope",
     "ControlPlaneCorrectnessReport",
     "ConvergenceEvent",
@@ -252,7 +260,11 @@ __all__ = [
     "evaluate_liveness_convergence",
     "expose_client_record",
     "filter_visible_tenants",
+    "has_admin_authority",
+    "has_owner_authority",
+    "has_superuser_authority",
     "normalize_delegation_scopes",
+    "normalize_authority_roles",
     "phase3_admin_policy_boundary_integrity",
     "phase3_admin_policy_boundary_manifest",
     "phase5_governance_extension_boundary_integrity",

@@ -41,6 +41,12 @@ dependencies = [
     "bcrypt==5.0.0",
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
+    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-auth-protocol-oidc==0.4.0.dev2",
+    "tigrbl-auth-protocol-rp==0.4.0.dev2",
+    "tigrbl-authn-credentials==0.4.0.dev2",
+    "tigrbl-authz-policy==0.4.0.dev2",
+    "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
@@ -145,6 +151,12 @@ dev = [
 ]
 
 [tool.uv.sources]
+tigrbl-auth-protocol-oauth = { path = "pkgs/tigrbl-auth-protocol-oauth", editable = true }
+tigrbl-auth-protocol-oidc = { path = "pkgs/tigrbl-auth-protocol-oidc", editable = true }
+tigrbl-auth-protocol-rp = { path = "pkgs/tigrbl-auth-protocol-rp", editable = true }
+tigrbl-authn-credentials = { path = "pkgs/tigrbl-authn-credentials", editable = true }
+tigrbl-authz-policy = { path = "pkgs/tigrbl-authz-policy", editable = true }
+tigrbl-authz-resource-server = { path = "pkgs/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/tigrbl-identity-admin", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/tigrbl-identity-credentials", editable = true }
