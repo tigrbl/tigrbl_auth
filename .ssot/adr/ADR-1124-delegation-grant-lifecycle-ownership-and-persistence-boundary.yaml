@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1124"
+number: 1124
+slug: "delegation-grant-lifecycle-ownership-and-persistence-boundary"
+title: "DelegationGrant lifecycle ownership and persistence boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tigrbl-identity-storage persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted to make DelegationGrant lifecycle a first-class governed authorization object; implementation remains tracked by lifecycle features and tests."
+    at: "2026-06-14T11:50:43Z"
+references: []
+body: |-
+  Decision: DelegationGrant truth lives in tigrbl-identity-policy semantics and tigrbl-identity-storage persistence. OAuth/OIDC token exchange consumes active grants, validates protocol inputs, and emits token, introspection, and provenance artifacts, but it does not own canonical delegation-grant truth. Consequences: persisted grants, grant scopes, grant proofs, graph edges, token links, and lifecycle audit events are the durable authority inputs; request-time act claims and token-exchange traces are derived artifacts.

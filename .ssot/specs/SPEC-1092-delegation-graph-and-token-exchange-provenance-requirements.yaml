@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Extended by spc:1208 for delegation attenuation proofs over existing delegation graph and token-exchange provenance."
     at: "2026-06-07T04:39:41Z"
+    note: "Extended by spc:1208 for delegation attenuation proofs over existing delegation graph and token-exchange provenance."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Delegation graph requirements now include DelegationGrant lifecycle nodes, scope rows, proof rows, parent-child grant edges, and token-link references from spc:1213."
+    at: "2026-06-14T11:51:58Z"
 references: []
 body: |-
   ## Overview
@@ -57,3 +61,4 @@ body: |-
 spec_kind: "normative"
 adr_ids:
   - "adr:1068"
+  - "adr:1124"

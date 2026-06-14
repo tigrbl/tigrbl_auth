@@ -13,12 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted as a formal authorization correctness planning contract."
     at: "2026-06-07T04:39:26Z"
+    note: "Accepted as a formal authorization correctness planning contract."
+    status: "accepted"
 references: []
 body: |-
   Defines the durable authority derivation graph used to explain effective authority. Graph nodes include subjects, tenants, realms, resources, scopes, roles, policies, trust domains, credentials, and delegations. Graph edges include grants, inherited authorities, constraints, attenuation, policy-version bindings, and audit/provenance references.
 spec_kind: "governance"
 adr_ids:
   - "adr:1123"
+  - "adr:1124"

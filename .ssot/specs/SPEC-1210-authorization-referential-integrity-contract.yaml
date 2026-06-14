@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted as a formal authorization correctness planning contract."
     at: "2026-06-07T04:39:33Z"
+    note: "Accepted as a formal authorization correctness planning contract."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Authorization referential integrity now covers DelegationGrant delegator, delegate, tenant, realm, resource, policy-version, proof, graph-edge, token-link, and audit references from spc:1213."
+    at: "2026-06-14T11:52:23Z"
 references: []
 body: |-
   Defines referential integrity requirements for authorization objects, including no orphaned authority assignments, policies, delegations, trust edges, scopes, resources, credentials, or audit/provenance references.
@@ -23,3 +27,4 @@ spec_kind: "governance"
 adr_ids:
   - "adr:1122"
   - "adr:1123"
+  - "adr:1124"

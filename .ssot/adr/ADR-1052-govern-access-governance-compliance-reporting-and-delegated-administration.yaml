@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1052"
 number: 1052
@@ -8,10 +8,14 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Access governance product capabilities are distinct from repository certification reports."
+summary: "`tigrbl_auth` MUST govern compliance reporting, access review workflows, entitlement management, and delegated administration as access-governance product capabilities, distinct from repository certification reports."
 supersedes: []
 superseded_by: []
-status_notes: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Delegated administration now depends on spc:1213 for persisted DelegationGrant lifecycle, management visibility, revocation, and audit completion criteria."
+    at: "2026-06-14T11:50:59Z"
 references: []
 body: |-
   ## Decision

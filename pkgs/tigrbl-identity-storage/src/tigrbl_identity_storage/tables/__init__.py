@@ -18,6 +18,13 @@ from .auth_code import AuthCode
 from .device_code import DeviceCode
 from .revoked_token import RevokedToken
 from .token_record import TokenRecord
+from .delegation_grant import (
+    DelegationGrantEdge,
+    DelegationGrantProof,
+    DelegationGrantRecord,
+    DelegationGrantScope,
+    DelegationGrantTokenLink,
+)
 from .pushed_authorization_request import PushedAuthorizationRequest
 from .consent import Consent
 from .audit_event import AuditEvent
@@ -43,6 +50,11 @@ def _ensure_runtime_bindings() -> None:
         DeviceCode,
         RevokedToken,
         TokenRecord,
+        DelegationGrantRecord,
+        DelegationGrantScope,
+        DelegationGrantProof,
+        DelegationGrantEdge,
+        DelegationGrantTokenLink,
         PushedAuthorizationRequest,
         Consent,
         AuditEvent,
@@ -77,6 +89,11 @@ __all__ = [
     "DeviceCode",
     "RevokedToken",
     "TokenRecord",
+    "DelegationGrantEdge",
+    "DelegationGrantProof",
+    "DelegationGrantRecord",
+    "DelegationGrantScope",
+    "DelegationGrantTokenLink",
     "PushedAuthorizationRequest",
     "Consent",
     "AuditEvent",

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from typing import Any, Dict, Final
 from urllib.parse import parse_qs
@@ -154,6 +155,12 @@ def _header_value(value: Any) -> str | None:
     return None
 
 
+def _hash_token(value: str | None) -> str | None:
+    if not value:
+        return None
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
 @api.route('/token/exchange', methods=['POST'])
 async def token_exchange(request: Request, dpop: str | None = Header(None, alias='DPoP')) -> dict[str, Any]:
     deployment = deployment_from_request(request, settings)
@@ -238,6 +245,22 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
         exchange_mode=exchange_mode,
         sender_constraint=sender_constraint.mechanism,
     )
+    delegation_grant_id = (
+        str(data.get("delegation_grant_id") or subject_claims.get("delegation_grant_id") or "").strip()
+        or None
+    )
+    delegation_token_linkage: dict[str, Any] | None = None
+    if delegation_grant_id:
+        delegation_token_linkage = {
+            "delegation_grant_id": delegation_grant_id,
+            "authorization_trace_id": authorization_trace["decision_key"],
+            "delegation_provenance_id": delegation_provenance["lineage_id"],
+            "actor_subject": actor.get("sub") if actor else None,
+            "subject": str(subject_claims.get("sub") or ""),
+            "exchange_mode": exchange_mode,
+            "source_token_hash": _hash_token(str(subject_token)),
+            "actor_token_hash": _hash_token(str(actor_token)) if actor_token else None,
+        }
     jwt_kwargs: Dict[str, Any] = {
         'scope': scope,
         'act': actor,
@@ -270,6 +293,10 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
         'authorization_trace': authorization_trace,
         'delegation_provenance': delegation_provenance,
     }
+    if delegation_token_linkage is not None:
+        persisted_claims["delegation_token_linkage"] = delegation_token_linkage
+        persisted_claims["delegation_grant_id"] = delegation_grant_id
+        delegation_provenance["delegation_grant_id"] = delegation_grant_id
     if actor is not None:
         persisted_claims['act'] = actor
     if sender_constraint.confirmation_claim:
@@ -299,6 +326,8 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
             'authorization_trace_decision_key': authorization_trace['decision_key'],
             'authorization_trace_request_hash': authorization_trace['request_hash'],
             'delegation_lineage_id': delegation_provenance['lineage_id'],
+            'delegation_grant_id': delegation_grant_id,
+            'delegation_token_linkage': delegation_token_linkage,
         },
         request_id=authorization_trace['request_hash'],
     )

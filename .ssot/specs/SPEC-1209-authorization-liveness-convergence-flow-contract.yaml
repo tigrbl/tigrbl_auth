@@ -13,9 +13,9 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted as a formal authorization correctness planning contract."
     at: "2026-06-07T04:39:31Z"
+    note: "Accepted as a formal authorization correctness planning contract."
+    status: "accepted"
 references: []
 body: |-
   Defines liveness and convergence-flow requirements for revocation, key rotation, policy change, delegation change, trust-edge revocation, and tenant/realm isolation updates. Each flow must state trigger, convergence bound, verifier-visible expected outcome, and proof artifact.
@@ -23,3 +23,4 @@ spec_kind: "governance"
 adr_ids:
   - "adr:1122"
   - "adr:1094"
+  - "adr:1124"

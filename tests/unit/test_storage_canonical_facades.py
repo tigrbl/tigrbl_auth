@@ -18,6 +18,13 @@ TABLE_MODULE_EXPORTS = {
     "client_registration": ("ClientRegistration",),
     "consent": ("Consent",),
     "device_code": ("DeviceCode",),
+    "delegation_grant": (
+        "DelegationGrantRecord",
+        "DelegationGrantScope",
+        "DelegationGrantProof",
+        "DelegationGrantEdge",
+        "DelegationGrantTokenLink",
+    ),
     "key_rotation_event": ("KeyRotationEvent",),
     "logout_state": ("LogoutState",),
     "pushed_authorization_request": (

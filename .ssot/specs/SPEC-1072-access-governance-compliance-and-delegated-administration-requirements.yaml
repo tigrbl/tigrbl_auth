@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "spec"
 id: "spc:1072"
 number: 1072
@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Defines access governance, compliance, and delegated administration requirements for less-than-implemented features."
     at: "2026-04-30T18:40:51Z"
+    note: "Defines access governance, compliance, and delegated administration requirements for less-than-implemented features."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Delegated administration completion now requires spc:1213 persisted DelegationGrant lifecycle, revocation, management visibility, tenant isolation, and audit evidence."
+    at: "2026-06-14T11:51:53Z"
 references: []
 body: |-
   ## Overview
@@ -64,4 +68,5 @@ body: |-
   
   This specification governs `F42`, `F43`, `F44`, and `F45`.
 spec_kind: "normative"
-adr_ids: []
+adr_ids:
+  - "adr:1124"

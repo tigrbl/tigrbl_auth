@@ -17,9 +17,13 @@ status_notes:
     note: "Draft contract for Management API resource groups and deployable surface slices."
     status: "draft"
   -
-    status: "draft"
-    note: "Management API segmentation now treats Realm lifecycle as a platform-admin segment above tenant administration."
     at: "2026-06-01T09:53:03Z"
+    note: "Management API segmentation now treats Realm lifecycle as a platform-admin segment above tenant administration."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Management API segmentation now includes DelegationGrant list, inspect, create, replace, revoke, and audit visibility as governed control-plane operations defined by spc:1213."
+    at: "2026-06-14T11:52:04Z"
 references: []
 body: |-
   Scope: The Management API product is composed of deployable slices for platform, tenant/organization, developer app/client, and service/workload administration. Requirements: slices may remain separately packaged and product-filtered, but resource ownership and documentation must describe them as Management API segments unless an accepted ADR says otherwise. Platform slice owns tenant lifecycle and platform authority. Tenant slice owns delegated tenant/organization administration. Developer slice owns app and OAuth/OIDC client management. Service/workload slice owns non-human identities, API keys, service keys, and workload credential administration. Cross-cutting governance includes authorization, audit, policy, key lifecycle, and canonical storage composition. Out of scope: public OAuth/OIDC protocol endpoints, RP consumer packages, and protected resource validation runtime.
@@ -31,3 +35,4 @@ adr_ids:
   - "adr:1079"
   - "adr:1080"
   - "adr:1081"
+  - "adr:1124"

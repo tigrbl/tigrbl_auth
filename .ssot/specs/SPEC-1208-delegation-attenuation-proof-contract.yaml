@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted as a formal authorization correctness planning contract."
     at: "2026-06-07T04:39:30Z"
+    note: "Accepted as a formal authorization correctness planning contract."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Delegation attenuation proofs now apply to DelegationGrant creation, replacement, and evaluation against current source authority, with persisted proof rows governed by spc:1213."
+    at: "2026-06-14T11:52:19Z"
 references: []
 body: |-
   Defines proof requirements showing that delegated authority is never broader than source authority after constraints, tenant scope, resource scope, sender constraints, and policy-version bindings are applied.
@@ -24,3 +28,4 @@ adr_ids:
   - "adr:1068"
   - "adr:1122"
   - "adr:1123"
+  - "adr:1124"

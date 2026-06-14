@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Extended by adr:1122: policy control-plane lifecycle includes invariant evaluation, determinism replay, and decision stability checks."
     at: "2026-06-07T04:38:40Z"
+    note: "Extended by adr:1122: policy control-plane lifecycle includes invariant evaluation, determinism replay, and decision stability checks."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Authorization mutation semantics now include DelegationGrant lifecycle transitions from spc:1213: revoke, expire, replace, dependent chain collapse, token-link invalidation, and refresh denial."
+    at: "2026-06-14T11:51:04Z"
 references: []
 body: |-
   ## Decision

@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Extended by adr:1123: delegation lineage must participate in authority derivation graph proofs and attenuation checks."
     at: "2026-06-07T04:38:35Z"
+    note: "Extended by adr:1123: delegation lineage must participate in authority derivation graph proofs and attenuation checks."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Delegation lineage now treats persisted DelegationGrant, scope, proof, graph-edge, token-link, and audit rows from spc:1213 as durable graph inputs; protocol token claims remain derived artifacts."
+    at: "2026-06-14T11:51:09Z"
 references: []
 body: |-
   ## Decision

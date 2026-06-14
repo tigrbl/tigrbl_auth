@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Extended by spc:1209 for mutation-triggered liveness and convergence-flow contracts."
     at: "2026-06-07T04:39:43Z"
+    note: "Extended by spc:1209 for mutation-triggered liveness and convergence-flow contracts."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Authorization invalidation requirements now include DelegationGrant create, activate, replace, revoke, expire, and chain-collapse transitions from spc:1213."
+    at: "2026-06-14T11:52:08Z"
 references: []
 body: |-
   ## Overview
@@ -80,3 +84,4 @@ adr_ids:
   - "adr:1050"
   - "adr:1068"
   - "adr:1069"
+  - "adr:1124"

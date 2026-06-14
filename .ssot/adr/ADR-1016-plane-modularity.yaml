@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Add cross-plane policy ownership rule for governance-owned policy truth."
     at: "2026-05-13T11:02:36Z"
+    note: "Add cross-plane policy ownership rule for governance-owned policy truth."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Plane modularity now fixes the DelegationGrant boundary: policy defines authorization semantics, identity-storage persists canonical grants, and OAuth/OIDC only consumes grants and emits protocol artifacts."
+    at: "2026-06-14T11:51:22Z"
 references: []
 body: |-
   ## Decision
