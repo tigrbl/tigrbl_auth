@@ -78,11 +78,25 @@
   gap: 0.5rem;
 }
 
-.layout-avatar {
+.layout-avatar,
+.layout-avatar-fallback {
   width: 2rem;
   height: 2rem;
-  border: 1px solid var(--color-slate-200);
   border-radius: 999px;
+}
+
+.layout-avatar {
+  border: 1px solid var(--color-slate-200);
+}
+
+.layout-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-primary);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .layout-user-name {

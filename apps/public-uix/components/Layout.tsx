@@ -29,7 +29,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
             {user ? (
               <div className="layout-auth-nav">
                 <div className="layout-user-chip">
-                  <img src={user.picture} className="layout-avatar" alt="Profile" />
+                  {user.picture ? (
+                    <img src={user.picture} className="layout-avatar" alt="Profile" />
+                  ) : (
+                    <div className="layout-avatar-fallback" aria-label="Profile">
+                      {String(user.name || user.email || 'U').slice(0, 1).toUpperCase()}
+                    </div>
+                  )}
                   <span className="layout-user-name">{user.name}</span>
                 </div>
                 <button

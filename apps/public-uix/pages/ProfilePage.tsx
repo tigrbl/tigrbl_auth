@@ -14,11 +14,17 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   return (
     <div className="profile-page profile-stack u-animate-in">
       <div className="profile-header">
-        <img
-          src={user.picture}
-          className="profile-avatar"
-          alt={user.name}
-        />
+        {user.picture ? (
+          <img
+            src={user.picture}
+            className="profile-avatar"
+            alt={user.name}
+          />
+        ) : (
+          <div className="profile-avatar-fallback" aria-label={user.name}>
+            {String(user.name || user.email || 'U').slice(0, 1).toUpperCase()}
+          </div>
+        )}
         <div>
           <h1 className="profile-title">{user.name}</h1>
           <p className="profile-subtitle">Logged in via tigrbl_auth</p>
