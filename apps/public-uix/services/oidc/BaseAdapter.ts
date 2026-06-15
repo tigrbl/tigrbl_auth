@@ -48,11 +48,11 @@ export abstract class BaseAdapter {
   }
 
   protected performRedirect(url: string): void {
-    this.openAuthPopup(url).catch(err => {
-      console.warn('[BaseAdapter] Popup auth failed or blocked, falling back to full page redirect:', err);
-      // If we're in an iframe environment, full page redirect might still fail due to IDP CSP
-      window.location.href = url;
-    });
+    if (typeof window.location.assign === 'function') {
+      window.location.assign(url);
+      return;
+    }
+    window.location.href = url;
   }
 
   protected generateRandomString(length: number = 32): string {

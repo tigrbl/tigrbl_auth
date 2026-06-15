@@ -57,6 +57,38 @@ async def test_userinfo_returns_claims_json(async_client):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
+async def test_userinfo_resolves_user_from_access_token_subject(async_client):
+    user = MagicMock(
+        id="user-1",
+        username="admin",
+        email="admin@example.test",
+    )
+
+    mock_coder = MagicMock()
+    mock_coder.async_decode = AsyncMock(
+        return_value={"sub": "user-1", "scope": "openid profile email"}
+    )
+    lookup = AsyncMock(return_value=user)
+
+    headers = {"Authorization": "Bearer token"}
+    with (
+        patch("tigrbl_auth.oidc_userinfo.JWTCoder.default", return_value=mock_coder),
+        patch("tigrbl_auth.standards.oidc.userinfo.first_user_by_filters", lookup),
+    ):
+        resp = await async_client.get("/userinfo", headers=headers)
+
+    assert resp.status_code == status.HTTP_200_OK
+    assert resp.json() == {
+        "sub": "user-1",
+        "name": "admin",
+        "email": "admin@example.test",
+    }
+    lookup.assert_awaited_once()
+    assert lookup.await_args.args[1] == {"id": "user-1", "is_active": True}
+
+
+@pytest.mark.unit
+@pytest.mark.asyncio
 async def test_userinfo_signed_jwt(async_client):
     user = MagicMock(id=1, username="bob", email="bob@example.com")
 

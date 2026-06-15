@@ -13,12 +13,14 @@ from __future__ import annotations
 
 import inspect
 
+from tigrbl.security import Depends as TigrblDepends
 from tigrbl_auth.framework import (
     TigrblRouter,
     TigrblApp,
     HTTPException,
     Request,
     Response,
+    AsyncSession,
     status,
 )
 
@@ -26,14 +28,16 @@ from tigrbl_auth.security import auth as security_auth
 from tigrbl_auth.security import deps as security_deps
 from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc
 from tigrbl_auth.tables import User
+from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
 from tigrbl_auth.framework import JWAAlg
+from tigrbl_auth.security.user_lookup import first_user_by_filters
 
 api = TigrblRouter()
 router = api
 
 
-async def _resolve_current_user(request: Request) -> User:
+async def _resolve_current_user(request: Request, db: AsyncSession, payload: dict) -> User:
     """Resolve the current principal, honoring app/router dependency overrides."""
 
     app = getattr(request, "app", None)
@@ -56,11 +60,20 @@ async def _resolve_current_user(request: Request) -> User:
             resolved = override()
         return await resolved if inspect.isawaitable(resolved) else resolved
 
-    return await security_deps.get_current_principal(request)
+    subject = payload.get("sub")
+    if not subject:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
+    user = await first_user_by_filters(db, {"id": subject, "is_active": True})
+    if user is None:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
+    return user
 
 
 @api.route("/userinfo", methods=["GET"], response_model=None)
-async def userinfo(request: Request) -> Response | dict[str, str]:
+async def userinfo(
+    request: Request,
+    db: AsyncSession = TigrblDepends(get_db),
+) -> Response | dict[str, str]:
     """Return claims about the authenticated user.
 
     The caller must present a valid access token in the ``Authorization``
@@ -83,7 +96,7 @@ async def userinfo(request: Request) -> Response | dict[str, str]:
             status.HTTP_401_UNAUTHORIZED, "invalid access token"
         ) from exc
     scopes: set[str] = set(payload.get("scope", "").split())
-    user = await _resolve_current_user(request)
+    user = await _resolve_current_user(request, db, payload)
 
     claims: dict[str, str] = {"sub": str(user.id)}
     if "profile" in scopes:

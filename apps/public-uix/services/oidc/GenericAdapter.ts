@@ -2,6 +2,24 @@ import { BaseAdapter } from './BaseAdapter';
 import { User, AuthProvider } from '../../types';
 import { safeProblemMessage } from '../tigrblAuthDiscovery';
 
+const parseJsonResponse = async (response: Response): Promise<Record<string, any>> => {
+  try {
+    const parsed = await response.json();
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+};
+
+const responseProblem = async (response: Response, fallback: string): Promise<string> => {
+  const body = await parseJsonResponse(response);
+  return String(body.title || body.detail || body.error_description || body.error || fallback);
+};
+
+const hasScope = (scope: string | undefined, value: string): boolean => {
+  return new Set((scope || '').split(/\s+/).filter(Boolean)).has(value);
+};
+
 export class GenericAdapter extends BaseAdapter {
   async authorize(): Promise<void> {
     const state = this.generateRandomString();
@@ -60,23 +78,41 @@ export class GenericAdapter extends BaseAdapter {
       }
       this.clearAuthSession();
 
-      let profile: Record<string, any> = {};
-      if (this.config.userinfoEndpoint && tokens.access_token) {
-        const userInfoResponse = await fetch(this.config.userinfoEndpoint, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${tokens.access_token}`,
-          },
-        });
-        if (userInfoResponse.ok) {
-          profile = await userInfoResponse.json();
-        }
+      const accessToken = typeof tokens.access_token === 'string' ? tokens.access_token : '';
+      if (!accessToken) {
+        throw new Error('OIDC callback did not return an access token for UserInfo hydration.');
+      }
+      if (!this.config.userinfoEndpoint) {
+        throw new Error('OIDC discovery did not provide a UserInfo endpoint.');
+      }
+
+      const userInfoResponse = await fetch(this.config.userinfoEndpoint, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (!userInfoResponse.ok) {
+        throw new Error(await responseProblem(userInfoResponse, `UserInfo failed with HTTP ${userInfoResponse.status}`));
+      }
+      const profile = await parseJsonResponse(userInfoResponse);
+      const subject = typeof profile.sub === 'string' && profile.sub.trim()
+        ? profile.sub
+        : typeof profile.id === 'string' && profile.id.trim()
+          ? profile.id
+          : '';
+      if (!subject) {
+        throw new Error('UserInfo response did not include a subject claim.');
+      }
+      const email = typeof profile.email === 'string' ? profile.email : '';
+      if (hasScope(this.config.scope, 'email') && !email) {
+        throw new Error('UserInfo response did not include the requested email claim.');
       }
 
       return {
-        id: String(profile.sub || profile.id || 'tigrbl-auth-user'),
-        email: String(profile.email || ''),
-        name: String(profile.name || profile.preferred_username || profile.email || 'tigrbl_auth user'),
+        id: subject,
+        email,
+        name: String(profile.name || profile.preferred_username || profile.email || subject),
         provider: AuthProvider.GENERIC,
         isEmailVerified: profile.email_verified !== false,
         mfaEnabled: false,

@@ -5,12 +5,14 @@ from __future__ import annotations
 import inspect
 from importlib import import_module
 
+from tigrbl.security import Depends as TigrblDepends
 from tigrbl_identity_server.framework import (
     TigrblRouter,
     TigrblApp,
     HTTPException,
     Request,
     Response,
+    AsyncSession,
     status,
 )
 
@@ -18,10 +20,12 @@ from tigrbl_identity_server.security import auth as security_auth
 from tigrbl_identity_server.security import deps as security_deps
 from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError, _svc
 from tigrbl_identity_storage.tables import User
+from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_auth_protocol_oauth.standards.rfc6750 import extract_bearer_token
 from tigrbl_identity_server.framework import JWAAlg
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.security.user_lookup import first_user_by_filters
 
 api = TigrblRouter()
 router = api
@@ -39,7 +43,7 @@ def _runtime_token_bindings():
     )
 
 
-async def _resolve_current_user(request: Request) -> User:
+async def _resolve_current_user(request: Request, db: AsyncSession, payload: dict) -> User:
     app = getattr(request, "app", None)
     router = getattr(app, "router", None)
     overrides = dict(getattr(app, "dependency_overrides", {}) or {})
@@ -60,11 +64,20 @@ async def _resolve_current_user(request: Request) -> User:
             resolved = override()
         return await resolved if inspect.isawaitable(resolved) else resolved
 
-    return await security_deps.get_current_principal(request)
+    subject = payload.get("sub")
+    if not subject:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
+    user = await first_user_by_filters(db, {"id": subject, "is_active": True})
+    if user is None:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
+    return user
 
 
 @api.route("/userinfo", methods=["GET"], response_model=None)
-async def userinfo(request: Request) -> Response | dict[str, str]:
+async def userinfo(
+    request: Request,
+    db: AsyncSession = TigrblDepends(get_db),
+) -> Response | dict[str, str]:
     deployment = deployment_from_request(request, settings)
     if not deployment.route_enabled("/userinfo"):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "OIDC UserInfo disabled")
@@ -84,7 +97,7 @@ async def userinfo(request: Request) -> Response | dict[str, str]:
             status.HTTP_401_UNAUTHORIZED, "invalid access token"
         ) from exc
     scopes: set[str] = set(payload.get("scope", "").split())
-    user = await _resolve_current_user(request)
+    user = await _resolve_current_user(request, db, payload)
 
     claims: dict[str, str] = {"sub": str(user.id)}
     if "profile" in scopes:

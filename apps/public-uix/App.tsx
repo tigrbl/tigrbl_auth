@@ -14,10 +14,18 @@ import { TermsOfServicePage } from './pages/TermsOfServicePage';
 import { ConsentPage } from './pages/ConsentPage';
 import { AuthProvider } from './types';
 import { usePlatform } from './hooks/usePlatform';
-import { buildPopupCallbackHash, parseConsentViewModel, sanitizePublicHashTarget } from './services/publicUxPolicy';
+import { parseConsentViewModel, sanitizePublicHashTarget } from './services/publicUxPolicy';
+import {
+  publicHashPath,
+  resolveInitialPublicHash,
+  resolvePublicRedirect,
+  shouldNormalizeCallbackLocation,
+} from './services/publicRouting';
 
 const App: React.FC = () => {
-  const [currentHash, setCurrentHash] = useState(window.location.hash || '#/');
+  const [currentHash, setCurrentHash] = useState(() =>
+    resolveInitialPublicHash(window.location.pathname, window.location.search, window.location.hash),
+  );
   const {
     user,
     isAuthenticated,
@@ -46,7 +54,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (window.location.pathname === '/callback') {
-      const callbackHash = buildPopupCallbackHash(window.location.search);
+      const callbackHash = shouldNormalizeCallbackLocation(window.location.pathname, window.location.search);
       if (callbackHash) {
         window.history.replaceState(null, '', `/${callbackHash}`);
         setCurrentHash(callbackHash);
@@ -54,19 +62,24 @@ const App: React.FC = () => {
     }
   }, []);
 
+  const callbackTarget = sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile');
+
   useEffect(() => {
-    if (!window.location.hash || window.location.hash === '#/' || window.location.hash === '#') {
-      const target = isAuthenticated
-        ? sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile')
-        : '#/login';
+    const target = resolvePublicRedirect({
+      currentHash,
+      isAuthenticated,
+      user,
+      callbackTarget,
+      mfaPending,
+    });
+    if (target && window.location.hash !== target) {
       window.location.hash = target;
       setCurrentHash(target);
     }
-  }, [isAuthenticated, platform.postLoginRedirectUri]);
+  }, [callbackTarget, currentHash, isAuthenticated, mfaPending, user]);
 
   const renderContent = () => {
-    const path = currentHash.split('?')[0] || '#/';
-    const callbackTarget = sanitizePublicHashTarget(platform.postLoginRedirectUri, '#/profile');
+    const path = publicHashPath(currentHash);
 
     // MFA Flow takes precedence
     if (mfaPending) return <MfaPage onVerify={verifyMfa} isLoading={isLoading} error={error} />;
@@ -108,28 +121,21 @@ const App: React.FC = () => {
         );
 
       case '#/register':
-        if (isAuthenticated) { window.location.hash = callbackTarget; return null; }
+        if (isAuthenticated) { return null; }
         return <RegisterPage onRegister={register} isLoading={isLoading} error={error} />;
 
       case '#/login':
-        if (isAuthenticated) { window.location.hash = callbackTarget; return null; }
+        if (isAuthenticated) { return null; }
         return <LoginPage onLogin={login} isLoading={isLoading} error={error} />;
 
       case '#/profile':
         if (!isAuthenticated) {
-          // If registered but not verified, show verification
-          if (user && !user.isEmailVerified) { window.location.hash = '#/verify-email'; return null; }
-          window.location.hash = '#/login';
           return null;
         }
         return user ? <ProfilePage user={user} /> : null;
 
       case '#/':
       default: {
-        const target = isAuthenticated ? callbackTarget : '#/login';
-        if (window.location.hash !== target) {
-          window.location.hash = target;
-        }
         return isAuthenticated ? null : <LoginPage onLogin={login} isLoading={isLoading} error={error} />;
       }
     }
