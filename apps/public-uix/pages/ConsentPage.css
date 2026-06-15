@@ -1,0 +1,129 @@
+.consent-page {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--color-slate-50);
+}
+
+.consent-shell {
+  display: flex;
+  width: 100%;
+  max-width: 42rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.consent-heading {
+  text-align: center;
+}
+
+.consent-title {
+  margin: 0;
+  color: var(--color-slate-900);
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.consent-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--color-slate-500);
+}
+
+.consent-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.consent-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.consent-section--scopes {
+  gap: 0.75rem;
+}
+
+.consent-label {
+  margin: 0;
+  color: var(--color-slate-400);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.consent-client {
+  margin: 0;
+  color: var(--color-slate-900);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.consent-scopes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.consent-scope {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-slate-100);
+  color: var(--color-slate-700);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.consent-copy {
+  margin: 0;
+  color: var(--color-slate-600);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.consent-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.consent-approve,
+.consent-cancel {
+  flex: 1 1 0;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-ui);
+  font-weight: 600;
+}
+
+.consent-approve {
+  background: var(--brand-primary);
+  color: var(--color-white);
+  box-shadow: 0 10px 15px -3px rgb(var(--brand-primary-rgb) / 0.2);
+}
+
+.consent-approve:hover {
+  opacity: 0.9;
+}
+
+.consent-cancel {
+  border: 1px solid var(--color-slate-200);
+  color: var(--color-slate-600);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.consent-cancel:hover {
+  border-color: var(--color-slate-300);
+  color: var(--color-slate-900);
+}
+
+@media (max-width: 640px) {
+  .consent-actions {
+    flex-direction: column;
+  }
+}

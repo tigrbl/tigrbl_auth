@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { AuthProvider } from '../types';
+import './CallbackPage.css';
 
 interface CallbackPageProps {
   onHandleCallback: (provider: AuthProvider) => Promise<void>;
@@ -42,14 +43,14 @@ export const CallbackPage: React.FC<CallbackPageProps> = ({ onHandleCallback }) 
   }, [onHandleCallback]);
 
   return (
-    <div className="flex-grow flex flex-col items-center justify-center p-6 text-center space-y-6">
-      <div className="relative w-20 h-20">
-        <div className="absolute inset-0 border-4 border-indigo-100 rounded-full"></div>
-        <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
+    <div className="callback-page">
+      <div className="callback-spinner-shell">
+        <div className="callback-spinner-track"></div>
+        <div className="callback-spinner-ring"></div>
       </div>
-      <div className="space-y-2">
-        <h2 className="text-2xl font-bold text-slate-900">Finalizing Identity</h2>
-        <p className="text-slate-500 max-w-xs mx-auto">
+      <div className="callback-copy">
+        <h2 className="callback-title">Finalizing Identity</h2>
+        <p className="callback-text">
           Verifying credentials and synchronizing session...
         </p>
       </div>

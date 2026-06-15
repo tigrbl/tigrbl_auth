@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Card, Input } from '../components/UI';
 import { usePlatform } from '../hooks/usePlatform';
+import './RegisterPage.css';
 
 interface RegisterPageProps {
   onRegister: (name: string, email: string) => Promise<void>;
@@ -47,58 +47,62 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onRegister, isLoadin
   };
 
   const strength = getPasswordStrength();
+  const strengthClass = (step: number): string => {
+    if (strength < step) return 'register-strength-bar';
+    return `register-strength-bar ${strength < 3 ? 'register-strength-bar--weak' : 'register-strength-bar--strong'}`;
+  };
 
   return (
-    <div className="flex-grow flex items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-8 animate-in slide-in-from-bottom-4 duration-700">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">{platform.registerTitle}</h1>
-          <p className="text-slate-500">{platform.registerSubtitle}</p>
+    <div className="register-page">
+      <div className="register-shell u-animate-in">
+        <div className="register-heading">
+          <h1 className="register-title">{platform.registerTitle}</h1>
+          <p className="register-subtitle">{platform.registerSubtitle}</p>
         </div>
 
-        <Card className="p-8">
-          <form className="space-y-5" onSubmit={handleSubmit}>
+        <Card className="register-card">
+          <form className="register-form" onSubmit={handleSubmit}>
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-brand text-red-600 text-xs font-bold text-center">
+              <div className="register-error">
                 {error}
               </div>
             )}
             <Input label="Display Name" placeholder="Your Full Name" value={name} error={errors.name} onChange={e => setName(e.target.value)} />
             <Input label="Email Identity" placeholder="you@company.com" value={email} error={errors.email} onChange={e => setEmail(e.target.value)} />
 
-            <div className="space-y-2">
-              <Input label="Secret Key" type="password" placeholder="••••••••" value={password} error={errors.password} onChange={e => setPassword(e.target.value)} />
+            <div className="register-secret">
+              <Input label="Secret Key" type="password" placeholder="********" value={password} error={errors.password} onChange={e => setPassword(e.target.value)} />
               {password && (
-                <div className="flex gap-1 h-1.5 px-1">
+                <div className="register-strength">
                   {[1, 2, 3, 4].map(i => (
-                    <div key={i} className={`flex-grow rounded-full transition-all duration-500 ${strength >= i ? (strength < 3 ? 'bg-amber-400' : 'bg-brand') : 'bg-slate-200'}`} />
+                    <div key={i} className={strengthClass(i)} />
                   ))}
                 </div>
               )}
             </div>
 
-            <Input label="Verify Secret" type="password" placeholder="••••••••" value={confirmPassword} error={errors.confirm} onChange={e => setConfirmPassword(e.target.value)} />
+            <Input label="Verify Secret" type="password" placeholder="********" value={confirmPassword} error={errors.confirm} onChange={e => setConfirmPassword(e.target.value)} />
 
-            <div className="pt-2">
+            <div className="register-action">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-brand text-white py-3 rounded-brand font-bold shadow-lg shadow-brand/20 hover:opacity-90 active:scale-[0.99] transition-all disabled:opacity-50"
+                className="register-submit-button"
               >
                 {isLoading ? 'Generating Identity...' : 'Join Platform'}
               </button>
             </div>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-100 text-center">
-            <p className="text-sm text-slate-500">
-              By proceeding, you agree to our <button onClick={() => window.location.hash = '#/terms'} className="text-brand font-bold hover:underline">Terms of Service</button>.
+          <div className="register-terms">
+            <p className="register-terms-text">
+              By proceeding, you agree to our <button onClick={() => window.location.hash = '#/terms'} className="register-link">Terms of Service</button>.
             </p>
           </div>
         </Card>
 
-        <p className="text-center text-sm text-slate-500">
-          Already have an identity? <button onClick={navigateToLogin} className="text-brand font-bold hover:underline">Sign in</button>
+        <p className="register-footer">
+          Already have an identity? <button onClick={navigateToLogin} className="register-link">Sign in</button>
         </p>
       </div>
     </div>

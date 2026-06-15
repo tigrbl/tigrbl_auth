@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, Input, Checkbox } from '../components/UI';
 import { ConfigPanel } from '../components/ConfigPanel';
 import { AuthProvider } from '../types';
 import { usePlatform } from '../hooks/usePlatform';
+import './LoginPage.css';
 
 interface LoginPageProps {
   onLogin: (
@@ -64,7 +64,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center p-6">
+    <div className="login-page">
       {showConfigPanel && (
         <ConfigPanel
           isOpen={isConfigOpen}
@@ -74,18 +74,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
         />
       )}
 
-      <div className="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">{platform.loginTitle}</h1>
-          <p className="text-slate-500">{platform.loginSubtitle}</p>
+      <div className="login-shell u-animate-in">
+        <div className="login-heading">
+          <h1 className="login-title">{platform.loginTitle}</h1>
+          <p className="login-subtitle">{platform.loginSubtitle}</p>
         </div>
 
-        <Card className="p-8">
-          <div className="space-y-4">
+        <Card className="login-card">
+          <div className="login-card-stack">
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-brand text-red-600 text-sm font-medium animate-in fade-in zoom-in-95">
-                <div className="flex gap-2 text-xs font-bold uppercase">
-                  <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="login-error u-animate-zoom">
+                <div className="login-error-inner">
+                  <svg className="login-error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>{error}</span>
@@ -93,7 +93,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
               </div>
             )}
 
-            <form className="space-y-5" onSubmit={handleEmailSignIn}>
+            <form className="login-form" onSubmit={handleEmailSignIn}>
               <Input
                 label="Identifier"
                 placeholder="Email or Username"
@@ -107,7 +107,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
               <Input
                 label="Secret"
                 type="password"
-                placeholder="••••••••"
+                placeholder="********"
                 value={password}
                 error={errors.password}
                 onChange={e => {
@@ -116,12 +116,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
                 }}
               />
 
-              <div className="flex items-center justify-between pt-1">
+              <div className="login-row">
                 <Checkbox label="Remember this device" checked={remember} onChange={setRemember} />
                 <button
                   type="button"
                   onClick={() => window.location.hash = '#/forgot-password'}
-                  className="text-xs font-bold text-brand hover:opacity-80 transition-colors"
+                  className="login-text-button"
                 >
                   Forgot Secret?
                 </button>
@@ -130,7 +130,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-brand text-white py-3 rounded-brand font-semibold shadow-lg shadow-brand/20 hover:opacity-90 active:scale-[0.99] transition-all disabled:opacity-50"
+                className="login-submit-button"
               >
                 {isLoading ? 'Synchronizing...' : 'Authorize Session'}
               </button>
@@ -140,9 +140,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
               <button
                 type="button"
                 onClick={() => setIsConfigOpen(true)}
-                className="w-full text-center text-[10px] text-slate-400 font-bold hover:text-brand transition-colors pt-4 flex items-center justify-center gap-2 uppercase tracking-tighter"
+                className="login-config-button"
               >
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="login-config-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -152,8 +152,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
           </div>
         </Card>
 
-        <p className="text-center text-sm text-slate-500">
-          New Identity? <button onClick={navigateToRegister} className="text-brand font-bold hover:underline">Create Account</button>
+        <p className="login-footer">
+          New Identity? <button onClick={navigateToRegister} className="login-footer-button">Create Account</button>
         </p>
       </div>
     </div>

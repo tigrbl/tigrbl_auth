@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card } from '../components/UI';
 import { User } from '../types';
+import './ProfilePage.css';
 
 interface ProfilePageProps {
   user: User;
@@ -11,54 +12,54 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   const myAccountUrl = import.meta.env.VITE_TIGRBL_AUTH_MY_ACCOUNT_UIX_URL || 'http://localhost:3019';
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6 space-y-8 animate-in fade-in zoom-in-95 duration-500">
-      <div className="flex items-center gap-6">
+    <div className="profile-page profile-stack u-animate-in">
+      <div className="profile-header">
         <img
           src={user.picture}
-          className="w-24 h-24 rounded-2xl border-4 border-white shadow-xl"
+          className="profile-avatar"
           alt={user.name}
         />
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">{user.name}</h1>
-          <p className="text-slate-500 font-medium">Logged in via tigrbl_auth</p>
+          <h1 className="profile-title">{user.name}</h1>
+          <p className="profile-subtitle">Logged in via tigrbl_auth</p>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card className="p-6 space-y-2">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Identity</p>
-          <p className="text-lg font-semibold text-slate-800 truncate">{user.email}</p>
+      <div className="profile-grid">
+        <Card className="profile-metric-card profile-metric-stack">
+          <p className="profile-label">Email Identity</p>
+          <p className="profile-value">{user.email}</p>
         </Card>
-        <Card className="p-6 space-y-2">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Global ID</p>
-          <p className="text-lg font-semibold text-slate-800">{user.id}</p>
+        <Card className="profile-metric-card profile-metric-stack">
+          <p className="profile-label">Global ID</p>
+          <p className="profile-value">{user.id}</p>
         </Card>
-        <Card className="p-6 space-y-2">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Account Status</p>
-          <div className="flex items-center gap-2">
-             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-             <p className="text-lg font-semibold text-emerald-600">Verified</p>
+        <Card className="profile-metric-card profile-metric-stack">
+          <p className="profile-label">Account Status</p>
+          <div className="profile-status">
+             <div className="profile-status-dot"></div>
+             <p className="profile-status-text">Verified</p>
           </div>
         </Card>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-white px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="profile-self-service">
         <div>
-          <h2 className="font-bold text-slate-800">Account self-service</h2>
-          <p className="text-sm text-slate-500">Manage profile details, sessions, credentials, and authorized apps.</p>
+          <h2 className="profile-self-service-title">Account self-service</h2>
+          <p className="profile-self-service-text">Manage profile details, sessions, credentials, and authorized apps.</p>
         </div>
-        <a className="inline-flex items-center justify-center rounded-lg bg-slate-900 text-white px-4 py-2 font-semibold" href={myAccountUrl}>
+        <a className="profile-self-service-link" href={myAccountUrl}>
           Open My Account
         </a>
       </div>
 
-      <Card className="overflow-hidden">
-        <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-          <h3 className="font-bold text-slate-700">Active Session Metadata</h3>
-          <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded font-bold uppercase">OIDC Context</span>
+      <Card className="profile-session-card">
+        <div className="profile-session-header">
+          <h3 className="profile-session-title">Active Session Metadata</h3>
+          <span className="profile-session-badge">OIDC Context</span>
         </div>
-        <div className="p-6">
-          <pre className="bg-slate-900 text-indigo-300 p-4 rounded-xl text-sm overflow-x-auto font-mono leading-relaxed">
+        <div className="profile-session-body">
+          <pre className="profile-session-code">
             {JSON.stringify({
               iss: 'tigrbl_auth',
               sub: user.id,

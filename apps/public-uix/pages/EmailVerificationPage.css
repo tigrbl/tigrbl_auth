@@ -1,0 +1,131 @@
+.email-verification-page {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--color-indigo-50), var(--color-white));
+}
+
+.email-verification-shell {
+  display: flex;
+  width: 100%;
+  max-width: 28rem;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.email-verification-icon-shell {
+  display: flex;
+  width: 6rem;
+  height: 6rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--color-white);
+  box-shadow: 0 20px 25px -5px rgb(15 23 42 / 0.1);
+}
+
+.email-verification-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-indigo-600);
+}
+
+.email-verification-title {
+  margin: 0;
+  color: var(--color-slate-900);
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.email-verification-subtitle {
+  max-width: 20rem;
+  margin: 0.5rem auto 0;
+  color: var(--color-slate-500);
+}
+
+.email-verification-email {
+  color: var(--color-slate-800);
+  font-weight: 700;
+}
+
+.email-verification-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.email-verification-success {
+  padding: 0.75rem;
+  border: 1px solid var(--color-emerald-100);
+  border-radius: 0.75rem;
+  background: var(--color-emerald-50);
+  color: var(--color-emerald-700);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.email-verification-copy {
+  margin: 0;
+  color: var(--color-slate-600);
+  font-size: 0.875rem;
+}
+
+.email-verification-primary {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--color-slate-900);
+  color: var(--color-white);
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1);
+}
+
+.email-verification-primary:hover {
+  background: var(--color-slate-800);
+}
+
+.email-verification-primary:active {
+  transform: scale(0.99);
+}
+
+.email-verification-primary:disabled,
+.email-verification-resend:disabled {
+  opacity: 0.5;
+}
+
+.email-verification-help {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-slate-100);
+}
+
+.email-verification-help-text {
+  margin: 0;
+  color: var(--color-slate-400);
+  font-size: 0.75rem;
+}
+
+.email-verification-resend {
+  color: var(--color-indigo-600);
+  font-weight: 700;
+}
+
+.email-verification-resend:hover {
+  text-decoration: underline;
+}
+
+.email-verification-back {
+  color: var(--color-slate-400);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.email-verification-back:hover {
+  color: var(--color-slate-600);
+}

@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Modal, Input } from './UI';
 import { usePlatform } from '../hooks/usePlatform';
 import { PlatformConfig } from '../types';
+import './ConfigPanel.css';
 
 interface ConfigPanelProps {
   isOpen: boolean;
@@ -60,13 +60,11 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={panelTitle}>
-      <div className="space-y-8">
-
-        {/* IDENTITY SECTION */}
+      <div className="config-panel-stack">
         {showBrandingSettings && (
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Identity & Branding</h3>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="config-panel-section">
+            <h3 className="config-panel-title">Identity & Branding</h3>
+            <div className="config-panel-grid">
               <Input
                 label="App Name"
                 value={platformConfig.name}
@@ -87,76 +85,73 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
           </div>
         )}
 
-        {/* NAVIGATION SECTION */}
         {showBrandingSettings && (
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Navigation & Flow</h3>
+          <div className="config-panel-section">
+            <h3 className="config-panel-title">Navigation & Flow</h3>
             <Input
               label="Post-Login Landing URI"
               placeholder="#/profile"
               value={platformConfig.postLoginRedirectUri}
               onChange={e => setPlatformConfig({...platformConfig, postLoginRedirectUri: e.target.value})}
             />
-            <p className="text-[10px] text-slate-400 italic">Determines where users are redirected after successful authentication.</p>
+            <p className="config-panel-note">Determines where users are redirected after successful authentication.</p>
           </div>
         )}
 
-        {/* VISUAL DESIGN TOKENS */}
         {showBrandingSettings && (
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Visual Style (CSS Tokens)</h3>
-            <div className="grid grid-cols-2 gap-4">
-               <div className="space-y-1.5">
-                 <label className="text-xs font-semibold text-slate-700">Primary Color</label>
-                 <input
-                   type="color"
-                   value={platformConfig.primaryColor}
-                   onChange={e => setPlatformConfig({...platformConfig, primaryColor: e.target.value})}
-                   className="w-full h-10 rounded-md cursor-pointer border border-slate-200"
-                 />
-               </div>
-               <div className="space-y-1.5">
-                 <label className="text-xs font-semibold text-slate-700">Surface Tint</label>
-                 <input
-                   type="color"
-                   value={platformConfig.backgroundColor}
-                   onChange={e => setPlatformConfig({...platformConfig, backgroundColor: e.target.value})}
-                   className="w-full h-10 rounded-md cursor-pointer border border-slate-200"
-                 />
-               </div>
+          <div className="config-panel-section">
+            <h3 className="config-panel-title">Visual Style (CSS Tokens)</h3>
+            <div className="config-panel-grid">
+              <div className="config-panel-color-field">
+                <label className="config-panel-label">Primary Color</label>
+                <input
+                  type="color"
+                  value={platformConfig.primaryColor}
+                  onChange={e => setPlatformConfig({...platformConfig, primaryColor: e.target.value})}
+                  className="config-panel-color-input"
+                />
+              </div>
+              <div className="config-panel-color-field">
+                <label className="config-panel-label">Surface Tint</label>
+                <input
+                  type="color"
+                  value={platformConfig.backgroundColor}
+                  onChange={e => setPlatformConfig({...platformConfig, backgroundColor: e.target.value})}
+                  className="config-panel-color-input"
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="config-panel-grid">
               <Input
                 label="Rounding (px)"
                 placeholder="12px"
                 value={platformConfig.borderRadius}
                 onChange={e => setPlatformConfig({...platformConfig, borderRadius: e.target.value})}
               />
-               <div className="space-y-1.5">
-                 <label className="text-xs font-semibold text-slate-700">Secondary Accent</label>
-                 <input
-                   type="color"
-                   value={platformConfig.secondaryColor}
-                   onChange={e => setPlatformConfig({...platformConfig, secondaryColor: e.target.value})}
-                   className="w-full h-10 rounded-md cursor-pointer border border-slate-200"
-                 />
-               </div>
+              <div className="config-panel-color-field">
+                <label className="config-panel-label">Secondary Accent</label>
+                <input
+                  type="color"
+                  value={platformConfig.secondaryColor}
+                  onChange={e => setPlatformConfig({...platformConfig, secondaryColor: e.target.value})}
+                  className="config-panel-color-input"
+                />
+              </div>
             </div>
           </div>
         )}
 
-        {/* CONTENT LABELS SECTION */}
         {showBrandingSettings && (
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Identity Hub Content</h3>
-            <div className="space-y-4">
-              <div className="p-3 bg-slate-50 rounded-brand space-y-3">
-                <p className="text-[10px] font-bold text-slate-400 uppercase">Login Page Strings</p>
+          <div className="config-panel-section">
+            <h3 className="config-panel-title">Identity Hub Content</h3>
+            <div className="config-panel-content-stack">
+              <div className="config-panel-string-group">
+                <p className="config-panel-string-title">Login Page Strings</p>
                 <Input label="Login Title" value={platformConfig.loginTitle} onChange={e => setPlatformConfig({...platformConfig, loginTitle: e.target.value})} />
                 <Input label="Login Subtitle" value={platformConfig.loginSubtitle} onChange={e => setPlatformConfig({...platformConfig, loginSubtitle: e.target.value})} />
               </div>
-              <div className="p-3 bg-slate-50 rounded-brand space-y-3">
-                <p className="text-[10px] font-bold text-slate-400 uppercase">Register Page Strings</p>
+              <div className="config-panel-string-group">
+                <p className="config-panel-string-title">Register Page Strings</p>
                 <Input label="Register Title" value={platformConfig.registerTitle} onChange={e => setPlatformConfig({...platformConfig, registerTitle: e.target.value})} />
                 <Input label="Register Subtitle" value={platformConfig.registerSubtitle} onChange={e => setPlatformConfig({...platformConfig, registerSubtitle: e.target.value})} />
               </div>
@@ -164,26 +159,25 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
           </div>
         )}
 
-        {/* OIDC ADAPTERS SECTION */}
         {showAdapterSettings && (
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">OIDC Client</h3>
-            <div className="space-y-3">
+          <div className="config-panel-section">
+            <h3 className="config-panel-title">OIDC Client</h3>
+            <div className="config-panel-section">
               <Input label="Client ID" value={config.VITE_TIGRBL_AUTH_CLIENT_ID} onChange={e => setConfig({...config, VITE_TIGRBL_AUTH_CLIENT_ID: e.target.value})} />
             </div>
           </div>
         )}
 
-        <div className="flex gap-3 pt-4 border-t border-slate-100">
+        <div className="config-panel-actions">
           <button
             onClick={handleSave}
-            className="flex-grow bg-brand text-white py-3 rounded-brand font-bold shadow-lg shadow-brand/40 hover:opacity-90 transition-all"
+            className="config-panel-save"
           >
             Deploy Changes
           </button>
           <button
             onClick={handleClear}
-            className="px-4 py-3 bg-white border border-slate-200 text-slate-600 rounded-brand font-bold hover:bg-slate-50 transition-all"
+            className="config-panel-reset"
           >
             Reset
           </button>

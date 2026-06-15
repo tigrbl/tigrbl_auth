@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Card, Input } from '../components/UI';
+import './ResetPasswordPage.css';
 
 interface ResetPasswordPageProps {
   onReset: (password: string, token: string) => Promise<void>;
@@ -28,19 +28,19 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center p-6 bg-slate-50">
-      <div className="w-full max-w-md space-y-8 animate-in slide-in-from-bottom-4 duration-500">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Set New Password</h1>
-          <p className="text-slate-500">Choose a strong, unique password.</p>
+    <div className="reset-page">
+      <div className="reset-shell u-animate-in">
+        <div className="reset-heading">
+          <h1 className="reset-title">Set New Password</h1>
+          <p className="reset-subtitle">Choose a strong, unique password.</p>
         </div>
 
-        <Card className="p-8">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <Card className="reset-card">
+          <form className="reset-form" onSubmit={handleSubmit}>
             <Input
               label="New Password"
               type="password"
-              placeholder="••••••••"
+              placeholder="********"
               value={password}
               error={errors.password}
               onChange={e => setPassword(e.target.value)}
@@ -48,7 +48,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
             <Input
               label="Confirm New Password"
               type="password"
-              placeholder="••••••••"
+              placeholder="********"
               value={confirmPassword}
               error={errors.confirm}
               onChange={e => setConfirmPassword(e.target.value)}
@@ -56,7 +56,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onReset, i
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition-all disabled:opacity-50"
+              className="reset-submit"
             >
               {isLoading ? 'Updating...' : 'Reset Password'}
             </button>

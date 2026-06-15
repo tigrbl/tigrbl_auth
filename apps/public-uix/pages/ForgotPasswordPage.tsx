@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, Input } from '../components/UI';
+import './ForgotPasswordPage.css';
 
 interface ForgotPasswordPageProps {
   onRequestReset: (email: string) => Promise<void>;
@@ -23,22 +24,22 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
 
   if (isSent) {
     return (
-      <div className="flex-grow flex items-center justify-center p-6 bg-slate-50">
-        <div className="w-full max-w-md animate-in zoom-in-95 duration-500">
-          <Card className="p-10 text-center space-y-6">
-            <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="forgot-page">
+        <div className="forgot-shell u-animate-zoom">
+          <Card className="forgot-sent-card">
+            <div className="forgot-icon-shell">
+              <svg className="forgot-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-slate-900">Check your inbox</h2>
-              <p className="text-slate-500">We've sent a secure reset link to <span className="font-bold text-slate-700">{email}</span></p>
+            <div>
+              <h2 className="forgot-title forgot-title--sent">Check your inbox</h2>
+              <p className="forgot-copy">We've sent a secure reset link to <span className="forgot-email">{email}</span></p>
             </div>
-            <div className="pt-4 space-y-3">
+            <div className="forgot-sent-actions">
               <button
                 onClick={() => window.location.hash = '#/login'}
-                className="w-full py-3 text-slate-500 font-semibold hover:text-slate-700"
+                className="forgot-secondary"
               >
                 Return to Login
               </button>
@@ -50,15 +51,15 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
   }
 
   return (
-    <div className="flex-grow flex items-center justify-center p-6 bg-slate-50">
-      <div className="w-full max-w-md space-y-8 animate-in slide-in-from-bottom-4 duration-500">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Forgot Password?</h1>
-          <p className="text-slate-500">We'll send you instructions to reset it.</p>
+    <div className="forgot-page">
+      <div className="forgot-shell forgot-stack u-animate-in">
+        <div className="forgot-heading">
+          <h1 className="forgot-title">Forgot Password?</h1>
+          <p className="forgot-subtitle">We'll send you instructions to reset it.</p>
         </div>
 
-        <Card className="p-8">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <Card className="forgot-card">
+          <form className="forgot-form" onSubmit={handleSubmit}>
             <Input
               label="Work Email"
               placeholder="name@company.com"
@@ -72,14 +73,14 @@ export const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({ onReques
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition-all disabled:opacity-50"
+              className="forgot-primary"
             >
               {isLoading ? 'Sending...' : 'Send Reset Link'}
             </button>
             <button
               type="button"
               onClick={() => window.location.hash = '#/login'}
-              className="w-full text-sm font-bold text-slate-400 hover:text-indigo-600 transition-colors"
+              className="forgot-secondary"
             >
               Wait, I remember it!
             </button>
