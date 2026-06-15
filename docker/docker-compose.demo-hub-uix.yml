@@ -1,7 +1,7 @@
 services:
   demo-hub-uix:
     build:
-      context: .
+      context: ..
       dockerfile: apps/demo-hub-uix/Dockerfile
     container_name: tigrbl-auth-demo-hub-uix-dev
     ports:

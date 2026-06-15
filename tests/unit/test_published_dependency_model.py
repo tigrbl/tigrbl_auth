@@ -79,9 +79,17 @@ def test_deployment_from_options_uses_active_settings_values():
 
 def test_workspace_sources_removed_and_provenance_artifacts_exist():
     manifest = _load_pyproject()
-    assert "uv" not in manifest.get("tool", {}) or "sources" not in manifest["tool"].get("uv", {})
+    sources = manifest.get("tool", {}).get("uv", {}).get("sources", {})
+    assert sources
+    for source in sources.values():
+        source_path = Path(source["path"])
+        assert not source_path.is_absolute()
+        assert ".." not in source_path.parts
+        assert source_path.parts[0] == "pkgs"
+        assert (ROOT / source_path / "pyproject.toml").is_file()
 
     required = {
+        "docker/Dockerfile",
         "constraints/base.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -95,9 +103,67 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
     }
     assert required <= set(_dependency_artifact_paths(ROOT))
 
-    dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+    dockerfile = (ROOT / "docker" / "Dockerfile").read_text(encoding="utf-8")
     assert "./pkgs/" not in dockerfile
     assert "constraints/base.txt" in dockerfile
+
+
+def test_docker_assets_are_not_published_from_repository_root():
+    root_docker_files = [
+        path.name
+        for path in ROOT.iterdir()
+        if path.is_file()
+        and (
+            path.name == ".dockerignore"
+            or path.name.startswith("Dockerfile")
+            or path.name.startswith("docker-compose")
+            or path.name.startswith("compose.")
+        )
+    ]
+
+    assert root_docker_files == []
+
+    docker_dir = ROOT / "docker"
+    expected = {
+        ".dockerignore",
+        "Dockerfile",
+        "Dockerfile.local-tigrbl",
+        "Dockerfile.dev-tigrbl",
+        "Dockerfile.dev-public-api",
+        "Dockerfile.dev-resource-validation-api",
+        "Dockerfile.dev-platform-admin-api",
+        "Dockerfile.dev-tenant-admin-api",
+        "Dockerfile.dev-developer-api",
+        "Dockerfile.dev-my-account-api",
+        "Dockerfile.dev-service-admin-api",
+        "docker-compose.yml",
+        "docker-compose.public-api.yml",
+        "docker-compose.resource-validation-api.yml",
+        "docker-compose.platform-admin-api.yml",
+        "docker-compose.tenant-admin-api.yml",
+        "docker-compose.developer-api.yml",
+        "docker-compose.my-account-api.yml",
+        "docker-compose.service-admin-api.yml",
+        "docker-compose.demo-hub-uix.yml",
+    }
+    assert expected <= {path.name for path in docker_dir.iterdir()}
+
+    root_context_dockerfiles = {
+        "Dockerfile",
+        "Dockerfile.local-tigrbl",
+        "Dockerfile.dev-tigrbl",
+        "Dockerfile.dev-public-api",
+        "Dockerfile.dev-resource-validation-api",
+        "Dockerfile.dev-platform-admin-api",
+        "Dockerfile.dev-tenant-admin-api",
+        "Dockerfile.dev-developer-api",
+        "Dockerfile.dev-my-account-api",
+        "Dockerfile.dev-service-admin-api",
+    }
+    for dockerfile in root_context_dockerfiles:
+        assert (docker_dir / f"{dockerfile}.dockerignore").is_file()
+
+    assert (ROOT / "apps" / "demo-hub-uix" / "Dockerfile.dockerignore").is_file()
 
 
 def test_state_report_tracks_dependency_model_checkpoint():
@@ -105,6 +171,9 @@ def test_state_report_tracks_dependency_model_checkpoint():
     summary = payload["current_state"]
 
     assert summary["workspace_sources_present"] is False
+    assert summary["workspace_sources_declared"] is True
+    assert summary["first_party_workspace_source_count"] > 0
+    assert summary["forbidden_workspace_source_count"] == 0
     assert summary["dependency_lock_manifest_present"] is True
     assert summary["install_profile_workflow_present"] is True
     assert summary["tigrcorn_extra_placeholder"] is False

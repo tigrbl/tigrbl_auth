@@ -3,8 +3,8 @@ name: tigrbl_auth_tenant_admin_api_dev
 services:
   tenant-admin-api:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-tenant-admin-api
+      context: ..
+      dockerfile: docker/Dockerfile.dev-tenant-admin-api
     image: tigrbl-auth-tenant-admin-api-dev:latest
     container_name: tigrbl-auth-tenant-admin-api-dev
     ports:

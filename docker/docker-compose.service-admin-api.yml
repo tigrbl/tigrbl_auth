@@ -1,20 +1,21 @@
-name: tigrbl_auth_my_account_api_dev
+name: tigrbl_auth_service_admin_api_dev
 
 services:
-  my-account-api:
+  service-admin-api:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-my-account-api
-    image: tigrbl-auth-my-account-api-dev:latest
-    container_name: tigrbl-auth-my-account-api-dev
+      context: ..
+      dockerfile: docker/Dockerfile.dev-service-admin-api
+    image: tigrbl-auth-service-admin-api-dev:latest
+    container_name: tigrbl-auth-service-admin-api-dev
     ports:
-      - "8019:8000"
+      - "8018:8000"
     environment:
       TIGRBL_AUTH_PROFILE: ${TIGRBL_AUTH_PROFILE:-production}
-      AUTHN_ISSUER: ${AUTHN_ISSUER:-http://localhost:8019}
-      TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8019/resource}
+      AUTHN_ISSUER: ${AUTHN_ISSUER:-http://localhost:8018}
+      TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER: ${TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER:-http://localhost:8018/resource}
       TIGRBL_AUTH_REQUIRE_TLS: "false"
-      TIGRBL_AUTH_SESSION_COOKIE_FORCE_SECURE: "false"
+      TIGRBL_AUTH_ADMIN_API_KEY: ${TIGRBL_AUTH_ADMIN_API_KEY:-dev-service-admin-key}
+      TIGRBL_AUTH_ADMIN_API_KEY_DIR: /tmp/tigrbl-auth-service-admin
       TIGRBL_AUTH_BOOTSTRAP_ADMIN_USERNAME: admin
       TIGRBL_AUTH_BOOTSTRAP_ADMIN_EMAIL: admin@example.test
       TIGRBL_AUTH_BOOTSTRAP_ADMIN_PASSWORD: AdminPass123!

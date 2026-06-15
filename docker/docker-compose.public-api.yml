@@ -3,8 +3,8 @@ name: tigrbl_auth_public_api_dev
 services:
   public-api:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-public-api
+      context: ..
+      dockerfile: docker/Dockerfile.dev-public-api
     image: tigrbl-auth-public-api-dev:latest
     container_name: tigrbl-auth-public-api-dev
     ports:

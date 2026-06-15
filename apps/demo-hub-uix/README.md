@@ -11,7 +11,7 @@ npm run dev -w @tigrbl-auth/demo-hub-uix
 Docker deployment:
 
 ```bash
-docker compose -f docker-compose.demo-hub-uix.yml up -d --build
+docker compose -f docker/docker-compose.demo-hub-uix.yml up -d --build
 ```
 
 Default URL: <http://localhost:3020>

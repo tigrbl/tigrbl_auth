@@ -6,7 +6,7 @@ inside Docker and exposes it on `http://127.0.0.1:8001`.
 ## Build and Run
 
 ```powershell
-docker build -f Dockerfile.dev-tigrbl -t tigrbl-auth-local:latest .
+docker build -f docker/Dockerfile.dev-tigrbl -t tigrbl-auth-local:latest .
 docker run -d --name tigrbl-auth-local -p 8001:8000 `
   -e AUTHN_ISSUER=http://localhost:8001 `
   -e TIGRBL_AUTH_PROTECTED_RESOURCE_IDENTIFIER=http://localhost:8001/resource `
@@ -22,7 +22,7 @@ docker run -d --name tigrbl-auth-local -p 8001:8000 `
 Equivalent compose workflow:
 
 ```powershell
-docker compose up -d --build
+docker compose -f docker/docker-compose.yml up -d --build
 ```
 
 The local compose runtime now bootstraps a default super-admin identity for the

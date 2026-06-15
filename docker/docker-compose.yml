@@ -1,8 +1,8 @@
 services:
   tigrbl-auth:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-tigrbl
+      context: ..
+      dockerfile: docker/Dockerfile.dev-tigrbl
     image: tigrbl-auth-local:latest
     container_name: tigrbl-auth-local
     ports:
@@ -30,7 +30,7 @@ services:
 
   admin-uix:
     build:
-      context: apps/admin-uix
+      context: ../apps/admin-uix
       dockerfile: Dockerfile
     image: tigrbl-auth-admin-uix-local:latest
     container_name: tigrbl-auth-admin-uix-local
@@ -44,7 +44,7 @@ services:
 
   public-uix:
     build:
-      context: apps/public-uix
+      context: ../apps/public-uix
       dockerfile: Dockerfile
     image: tigrbl-auth-public-uix-local:latest
     container_name: tigrbl-auth-public-uix-local

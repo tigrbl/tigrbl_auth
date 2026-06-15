@@ -3,8 +3,8 @@ name: tigrbl_auth_resource_validation_api_dev
 services:
   resource-validation-api:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-resource-validation-api
+      context: ..
+      dockerfile: docker/Dockerfile.dev-resource-validation-api
     image: tigrbl-auth-resource-validation-api-dev:latest
     container_name: tigrbl-auth-resource-validation-api-dev
     ports:

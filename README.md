@@ -130,7 +130,7 @@ uv run tigrbl-auth serve --server tigrcorn --profile production --host 127.0.0.1
 Or bring up the checked-in Docker example:
 
 ```bash
-docker compose up -d --build
+docker compose -f docker/docker-compose.yml up -d --build
 ```
 
 The compose example publishes the service on `http://127.0.0.1:8001` to avoid

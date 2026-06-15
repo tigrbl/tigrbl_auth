@@ -3,8 +3,8 @@ name: tigrbl_auth_developer_api_dev
 services:
   developer-api:
     build:
-      context: .
-      dockerfile: Dockerfile.dev-developer-api
+      context: ..
+      dockerfile: docker/Dockerfile.dev-developer-api
     image: tigrbl-auth-developer-api-dev:latest
     container_name: tigrbl-auth-developer-api-dev
     ports:
