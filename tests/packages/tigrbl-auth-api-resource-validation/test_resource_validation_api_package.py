@@ -47,7 +47,7 @@ def test_resource_validation_contract_matches_product_surface_registry() -> None
 
     assert PRODUCT_SURFACE == "resource-validation-api"
     assert RESOURCE_VALIDATION_API_CONTRACT.product_surface == PRODUCT_SURFACE
-    assert "tigrbl-identity-resource-server" in (
+    assert "tigrbl-authz-resource-server" in (
         RESOURCE_VALIDATION_API_CONTRACT.intended_consumers
     )
     assert deployment.plugin_mode == "public-only"

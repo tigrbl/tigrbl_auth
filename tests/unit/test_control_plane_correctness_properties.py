@@ -5,7 +5,7 @@ import tests.unit.formal_auth_helpers  # noqa: F401
 from tigrbl_auth.services.formal_authorization import (
     build_control_plane_correctness_report as facade_build_report,
 )
-from tigrbl_identity_policy import (
+from tigrbl_authz_policy import (
     CorrectnessProofSection,
     build_control_plane_correctness_report,
 )

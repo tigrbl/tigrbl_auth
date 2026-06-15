@@ -4,8 +4,8 @@ import json
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_identity_oidc.standards.rp_initiated_logout import build_logout_plan, validate_logout_request
-from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_auth_protocol_oidc.standards.rp_initiated_logout import build_logout_plan, validate_logout_request
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.http_standards.cookies import (
     clear_session_cookie,

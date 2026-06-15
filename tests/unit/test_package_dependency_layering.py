@@ -67,7 +67,13 @@ JS_IMPORT_RE = re.compile(
 
 
 def _declared_python_packages() -> set[str]:
-    return {path.parent.name for path in PKGS.glob("*/pyproject.toml")}
+    return {path.parent.name for path in PKGS.rglob("pyproject.toml")}
+
+
+def _package_dir(package_name: str) -> Path:
+    matches = [path.parent for path in PKGS.rglob("pyproject.toml") if path.parent.name == package_name]
+    assert len(matches) == 1, (package_name, matches)
+    return matches[0]
 
 
 def _absolute_import_roots(path: Path) -> set[str]:
@@ -84,7 +90,7 @@ def _absolute_import_roots(path: Path) -> set[str]:
 
 
 def _package_facade_imports(package_name: str) -> list[Path]:
-    package_dir = PKGS / package_name
+    package_dir = _package_dir(package_name)
     return [
         path.relative_to(ROOT)
         for path in sorted((package_dir / "src").rglob("*.py"))

@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
-description = "OpenID Connect provider protocol facade for the Tigrbl auth package suite."
+description = "OpenID Connect provider protocol implementation package for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -33,10 +33,6 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "tigrbl-identity-oidc==0.4.0.dev2",
-]
-
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"

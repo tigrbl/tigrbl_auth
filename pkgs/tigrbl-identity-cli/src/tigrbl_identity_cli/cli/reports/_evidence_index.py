@@ -128,7 +128,7 @@ def run_recertification(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     watched_paths = [
         repo_root / "pyproject.toml",
-        repo_root / "Dockerfile",
+        repo_root / "docker" / "Dockerfile",
         repo_root / "compliance" / "targets" / "boundaries.yaml",
         repo_root / "compliance" / "targets" / "boundary-decisions.yaml",
         repo_root / "compliance" / "targets" / "rfc-targets.yaml",

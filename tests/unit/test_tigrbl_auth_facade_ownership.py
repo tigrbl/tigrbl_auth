@@ -13,32 +13,40 @@ LEGACY_ROOT = ROOT / "tigrbl_auth"
 LARGE_FILE_THRESHOLD = 400
 
 
+SPLIT_MODULE_PREFIXES = (
+    "tigrbl_auth_protocol_",
+    "tigrbl_authn_",
+    "tigrbl_authz_",
+    "tigrbl_identity_",
+)
+
+
 FACADE_MODULES = {
     "tigrbl_auth.api.surfaces": "tigrbl_identity_server.surfaces",
     "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
     "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
     "tigrbl_auth.framework": "tigrbl_identity_server.framework",
-    "tigrbl_auth.rfc.rfc8693": "tigrbl_identity_oauth.standards.rfc8693",
-    "tigrbl_auth.security.admin_gate": "tigrbl_identity_policy.admin_gate",
-    "tigrbl_auth.security.certification": "tigrbl_identity_policy.certification",
+    "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
+    "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy.admin_gate",
+    "tigrbl_auth.security.certification": "tigrbl_authz_policy.certification",
     "tigrbl_auth.services._operator_store": "tigrbl_identity_storage.operator_store",
     "tigrbl_auth.services.advanced_identity_plane": "tigrbl_identity_admin.advanced_identity_plane",
-    "tigrbl_auth.services.governance_extension_plane": "tigrbl_identity_policy.governance_extension",
-    "tigrbl_auth.services.policy_control_plane": "tigrbl_identity_policy.control_plane",
+    "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
+    "tigrbl_auth.services.policy_control_plane": "tigrbl_authz_policy.control_plane",
     "tigrbl_auth.services.operator_service": "tigrbl_identity_operator.operator_service",
-    "tigrbl_auth.standards.oauth2.dpop": "tigrbl_identity_oauth.standards.dpop",
-    "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_identity_oauth.standards.rfc9700",
-    "tigrbl_auth.services.release_posture_plane": "tigrbl_identity_policy.release_posture",
-    "tigrbl_auth.services.token_service": "tigrbl_identity_credentials.token_service",
+    "tigrbl_auth.standards.oauth2.dpop": "tigrbl_auth_protocol_oauth.standards.dpop",
+    "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_auth_protocol_oauth.standards.rfc9700",
+    "tigrbl_auth.services.release_posture_plane": "tigrbl_authz_policy.release_posture",
+    "tigrbl_auth.services.token_service": "tigrbl_authn_credentials.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_jose.release_signing",
-    "tigrbl_auth.ops.register": "tigrbl_identity_oauth.ops.register",
+    "tigrbl_auth.ops.register": "tigrbl_auth_protocol_oauth.ops.register",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_identity_operator.authorization_provenance",
     "tigrbl_auth.services.audit_service": "tigrbl_identity_operator.audit_service",
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
 }
 
 EXECUTABLE_FACADE_MODULES = {
-    "tigrbl_auth.ops.token": "tigrbl_identity_oauth.ops.token",
+    "tigrbl_auth.ops.token": "tigrbl_auth_protocol_oauth.ops.token",
 }
 
 INSTALLED_FACADE_MODULES = {
@@ -64,7 +72,7 @@ def source_tree_paths_first():
         for name, module in sys.modules.items()
         if name == "tigrbl_auth"
         or name.startswith("tigrbl_auth.")
-        or name.startswith("tigrbl_identity_")
+        or name.startswith(SPLIT_MODULE_PREFIXES)
     }
     for name in list(removed_modules):
         sys.modules.pop(name, None)
@@ -78,7 +86,7 @@ def source_tree_paths_first():
             if (
                 name == "tigrbl_auth"
                 or name.startswith("tigrbl_auth.")
-                or name.startswith("tigrbl_identity_")
+                or name.startswith(SPLIT_MODULE_PREFIXES)
             ):
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
@@ -93,7 +101,7 @@ def package_src_paths_only():
         for name, module in sys.modules.items()
         if name == "tigrbl_auth"
         or name.startswith("tigrbl_auth.")
-        or name.startswith("tigrbl_identity_")
+        or name.startswith(SPLIT_MODULE_PREFIXES)
     }
     for name in list(removed_modules):
         sys.modules.pop(name, None)
@@ -110,7 +118,7 @@ def package_src_paths_only():
             if (
                 name == "tigrbl_auth"
                 or name.startswith("tigrbl_auth.")
-                or name.startswith("tigrbl_identity_")
+                or name.startswith(SPLIT_MODULE_PREFIXES)
             ):
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
@@ -171,7 +179,9 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
 
 def test_tigrbl_auth_has_no_large_exact_copies_of_split_package_modules() -> None:
     canonical_hashes: dict[str, list[Path]] = {}
-    for package_root in sorted(PKGS.glob("tigrbl-identity-*/src")):
+    for package_root in sorted(PKGS.glob("*/src")):
+        if package_root.parent.name == "tigrbl-auth":
+            continue
         for path in package_root.rglob("*.py"):
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
             canonical_hashes.setdefault(digest, []).append(path)

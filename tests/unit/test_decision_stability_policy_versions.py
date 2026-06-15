@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_identity_policy import PolicyReplayCase, compare_policy_version_decisions
+from tigrbl_authz_policy import PolicyReplayCase, compare_policy_version_decisions
 
 
 def test_decision_stability_policy_versions_t1_attributes_version_changes() -> None:

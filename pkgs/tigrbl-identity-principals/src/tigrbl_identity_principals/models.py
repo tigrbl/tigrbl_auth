@@ -26,7 +26,7 @@ class PrincipalStatus(str, Enum):
 
 
 class AuthorityRole(str, Enum):
-    """Deprecated compatibility enum; prefer tigrbl_identity_policy.AuthorityRole."""
+    """Deprecated compatibility enum; prefer tigrbl_authz_policy.AuthorityRole."""
 
     ADMIN = "admin"
     OWNER = "owner"

@@ -80,7 +80,7 @@ from tigrbl_identity_operator.repo_truth import (
 from tigrbl_identity_cli.package_maturity import evaluate_package_maturity
 from tigrbl_identity_runtime import build_runtime_hash_matrix, registered_runner_names, runner_registry_manifest
 from tigrbl_identity_storage.operator_store import OperationContext, operator_state_root, operator_store_summary
-from tigrbl_identity_oidc.discovery_service import diff_discovery, publish_discovery, validate_discovery
+from tigrbl_auth_protocol_oidc.discovery_service import diff_discovery, publish_discovery, validate_discovery
 from tigrbl_identity_operator.operator_service import (
     create_resource,
     delete_resource,
@@ -147,10 +147,39 @@ def _is_exact_pin(specifier: str) -> bool:
     return "==" in cleaned and all(token not in cleaned for token in (">=", "<=", "~=", "!=", " @ "))
 
 
+def _classify_uv_sources(
+    repo_root: Path, sources: dict[str, Any]
+) -> tuple[dict[str, str], dict[str, str]]:
+    repo_root = repo_root.resolve()
+    allowed: dict[str, str] = {}
+    forbidden: dict[str, str] = {}
+    for name, value in sources.items():
+        if not isinstance(value, dict):
+            forbidden[str(name)] = "non-table source"
+            continue
+        raw_path = value.get("path")
+        if not raw_path:
+            forbidden[str(name)] = "non-path source"
+            continue
+        source_path = Path(str(raw_path))
+        resolved = (source_path if source_path.is_absolute() else repo_root / source_path).resolve()
+        try:
+            rel_path = resolved.relative_to(repo_root)
+        except ValueError:
+            forbidden[str(name)] = str(raw_path)
+            continue
+        rel = rel_path.as_posix()
+        if rel.startswith("pkgs/") and (resolved / "pyproject.toml").is_file():
+            allowed[str(name)] = rel
+            continue
+        forbidden[str(name)] = rel
+    return allowed, forbidden
+
+
 def _dependency_artifact_paths(repo_root: Path) -> list[str]:
     candidates = [
         "pyproject.toml",
-        "Dockerfile",
+        "docker/Dockerfile",
         "tox.ini",
         "constraints/base.txt",
         "constraints/test.txt",

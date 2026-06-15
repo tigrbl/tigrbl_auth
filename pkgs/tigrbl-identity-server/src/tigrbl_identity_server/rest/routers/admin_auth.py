@@ -17,7 +17,7 @@ from tigrbl_identity_admin.bootstrap import (
 )
 from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_identity_runtime.http_standards.cookies import clear_session_cookie
-from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage.tables.engine import get_db
 

@@ -11,7 +11,7 @@ tigrbl-authz-policy is the authorization-facing package name for authority, poli
 - Component kind: Authorization package
 - Use it for authorization decisions rather than credential verification or token signing.
 - It owns authority roles, RBAC, ABAC, delegation, policy replay, and decision audit concepts.
-- Current implementation delegates to `tigrbl-identity-policy` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-policy` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

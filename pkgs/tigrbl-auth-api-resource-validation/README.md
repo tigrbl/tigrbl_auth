@@ -22,7 +22,7 @@ from tigrbl_auth_api_resource_validation import app, build_app
 Run the isolated validation front door on port `8014`:
 
 ```bash
-docker compose -f docker-compose.resource-validation-api.yml up -d --build
+docker compose -f docker/docker-compose.resource-validation-api.yml up -d --build
 ```
 
 Useful endpoints:

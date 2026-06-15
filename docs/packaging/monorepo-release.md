@@ -11,7 +11,7 @@ Examples:
 ```text
 tigrbl-auth==0.3.5
 tigrbl-identity-core==0.3.5
-tigrbl-identity-oauth==0.3.5
+tigrbl-auth-protocol-oauth==0.3.5
 ```
 
 The authoritative package version is the package-local `pyproject.toml` under
@@ -120,6 +120,6 @@ $VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"
 Manual dispatch supports narrowing the matrix:
 
 ```text
-package=tigrbl-identity-oauth
+package=tigrbl-auth-protocol-oauth
 python-version=3.12
 ```

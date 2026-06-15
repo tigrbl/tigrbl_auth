@@ -4,7 +4,7 @@ from typing import Optional
 
 from tigrbl.security import Depends as TigrblDepends
 from tigrbl_identity_server.framework import AsyncSession, Request, TigrblRouter
-from tigrbl_identity_oauth.ops.authorize import authorize_request
+from tigrbl_auth_protocol_oauth.ops.authorize import authorize_request
 from tigrbl_identity_storage.tables.engine import get_db
 
 api = TigrblRouter()

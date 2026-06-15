@@ -11,13 +11,13 @@ ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
 
-PREFERRED_TO_COMPAT = {
-    "tigrbl_authn_credentials": "tigrbl_identity_credentials",
-    "tigrbl_authz_policy": "tigrbl_identity_policy",
-    "tigrbl_authz_resource_server": "tigrbl_identity_resource_server",
-    "tigrbl_auth_protocol_oauth": "tigrbl_identity_oauth",
-    "tigrbl_auth_protocol_oidc": "tigrbl_identity_oidc",
-    "tigrbl_auth_protocol_rp": "tigrbl_identity_rp",
+COMPAT_TO_PREFERRED = {
+    "tigrbl_identity_credentials": "tigrbl_authn_credentials",
+    "tigrbl_identity_policy": "tigrbl_authz_policy",
+    "tigrbl_identity_resource_server": "tigrbl_authz_resource_server",
+    "tigrbl_identity_oauth": "tigrbl_auth_protocol_oauth",
+    "tigrbl_identity_oidc": "tigrbl_auth_protocol_oidc",
+    "tigrbl_identity_rp": "tigrbl_auth_protocol_rp",
 }
 
 DIST_TO_IMPORT_ROOT = {
@@ -29,9 +29,18 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
 }
 
+DEPRECATED_DIST_TO_IMPORT_ROOT = {
+    "tigrbl-identity-credentials": "tigrbl_identity_credentials",
+    "tigrbl-identity-policy": "tigrbl_identity_policy",
+    "tigrbl-identity-resource-server": "tigrbl_identity_resource_server",
+    "tigrbl-identity-oauth": "tigrbl_identity_oauth",
+    "tigrbl-identity-oidc": "tigrbl_identity_oidc",
+    "tigrbl-identity-rp": "tigrbl_identity_rp",
+}
+
 
 def _install_package_src_paths() -> None:
-    for src in PKGS.glob("*/src"):
+    for src in PKGS.rglob("src"):
         value = str(src)
         if value not in sys.path:
             sys.path.insert(0, value)
@@ -48,14 +57,13 @@ def _absolute_imports(path: Path) -> set[str]:
     return imports
 
 
-def test_preferred_taxonomy_roots_reexport_compatibility_surfaces() -> None:
+def test_deprecated_taxonomy_roots_reexport_preferred_surfaces() -> None:
     _install_package_src_paths()
 
-    for preferred_root, compat_root in PREFERRED_TO_COMPAT.items():
+    for compat_root, preferred_root in COMPAT_TO_PREFERRED.items():
         preferred = importlib.import_module(preferred_root)
         compat = importlib.import_module(compat_root)
 
-        assert preferred.__name__ == preferred_root
         assert set(preferred.__all__) == set(compat.__all__)
         for name in preferred.__all__:
             assert getattr(preferred, name) is getattr(compat, name), (preferred_root, name)
@@ -70,27 +78,35 @@ def test_preferred_taxonomy_package_metadata_is_declared() -> None:
         assert metadata["tool"]["poetry"]["packages"] == [{"include": import_root, "from": "src"}]
 
 
-def test_identity_packages_do_not_depend_on_new_authn_authz_behavior_roots() -> None:
-    forbidden = {"tigrbl_authn_credentials", "tigrbl_authz_policy", "tigrbl_authz_resource_server"}
+def test_deprecated_taxonomy_package_metadata_lives_under_deprecated_folder() -> None:
+    for dist_name, import_root in DEPRECATED_DIST_TO_IMPORT_ROOT.items():
+        package_path = PKGS / "deprecated" / dist_name
+        pyproject = package_path / "pyproject.toml"
+        metadata = tomllib.loads(pyproject.read_text(encoding="utf-8"))
 
-    for package in PKGS.glob("tigrbl-identity-*/src/*"):
-        if not package.is_dir():
-            continue
-        for path in package.rglob("*.py"):
-            assert _absolute_imports(path).isdisjoint(forbidden), path
+        assert not (PKGS / dist_name).exists()
+        assert metadata["project"]["name"] == dist_name
+        assert metadata["tool"]["poetry"]["packages"] == [{"include": import_root, "from": "src"}]
+        assert (package_path / "src" / import_root).is_dir()
 
 
-def test_authn_authz_protocol_boundaries_have_only_allowed_facade_imports() -> None:
-    allowed_imports = {
-        "tigrbl_authn_credentials": {"__future__", "tigrbl_identity_credentials"},
-        "tigrbl_authz_policy": {"__future__", "tigrbl_identity_policy"},
-        "tigrbl_authz_resource_server": {"__future__", "tigrbl_identity_resource_server"},
-        "tigrbl_auth_protocol_oauth": {"__future__", "tigrbl_identity_oauth"},
-        "tigrbl_auth_protocol_oidc": {"__future__", "tigrbl_identity_oidc"},
-        "tigrbl_auth_protocol_rp": {"__future__", "tigrbl_identity_rp"},
-    }
+def test_deprecated_taxonomy_roots_delegate_to_preferred_roots() -> None:
+    for dist_name, import_root in DEPRECATED_DIST_TO_IMPORT_ROOT.items():
+        package_root = PKGS / "deprecated" / dist_name / "src" / import_root
+        preferred_root = COMPAT_TO_PREFERRED[import_root]
+        for path in package_root.rglob("*.py"):
+            text = path.read_text(encoding="utf-8")
+            assert "_CANONICAL_MODULE" in text, path
+            assert preferred_root in text, path
+            assert _absolute_imports(path) <= {"__future__", "importlib", "warnings"}, path
 
-    for import_root, allowed in allowed_imports.items():
+
+def test_authn_authz_protocol_roots_do_not_import_deprecated_roots() -> None:
+    deprecated_imports = set(COMPAT_TO_PREFERRED)
+
+    for import_root in DIST_TO_IMPORT_ROOT.values():
         package_root = next(PKGS.glob(f"*/src/{import_root}"))
         for path in package_root.rglob("*.py"):
-            assert _absolute_imports(path) <= allowed, path
+            imports = _absolute_imports(path)
+            assert "tigrbl_auth" not in imports, path
+            assert imports.isdisjoint(deprecated_imports), path

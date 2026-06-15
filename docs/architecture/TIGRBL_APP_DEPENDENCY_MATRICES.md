@@ -37,7 +37,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | `tigrbl-auth`, `tigrbl-identity-server`, `tigrbl-identity-runtime`, `tigrbl-identity-admin`, `tigrbl-identity-oauth`, `tigrbl-identity-oidc`, `tigrbl-identity-credentials`, `tigrbl-identity-policy`, `tigrbl-identity-principals`, `tigrbl-identity-jose`, `tigrbl-identity-contracts`, `tigrbl-identity-storage`, `tigrbl-identity-core`, `tigrbl-identity-operator` |
+| Runtime package dependencies | `tigrbl-auth`, `tigrbl-identity-server`, `tigrbl-identity-runtime`, `tigrbl-identity-admin`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc`, `tigrbl-authn-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-identity-jose`, `tigrbl-identity-contracts`, `tigrbl-identity-storage`, `tigrbl-identity-core`, `tigrbl-identity-operator` |
 | Surface dependencies | public REST/OIDC lane, admin REST lane, admin RPC/OpenRPC lane, discovery documents, tenant discovery routes, JWKS publication routes |
 | UIX dependencies | supports `tigrbl-auth-public-portal`, `tigrbl-auth-platform-admin-console`, `tigrbl-auth-tenant-admin-console`, `tigrbl-auth-developer-portal`, and optionally `tigrbl-auth-service-admin-surface` |
 | Data and state dependencies | tenant records, user identities, auth sessions, auth codes, token records, client registrations, service keys, API keys, consent, audit events, key rotation events, JWKS artifacts |
@@ -63,7 +63,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tigrbl-auth/admin-uix`, React, React DOM, Vite, TypeScript; backend support from `tigrbl-identity-admin`, `tigrbl-identity-operator`, `tigrbl-identity-contracts`, `tigrbl-identity-policy` |
+| Runtime package dependencies | split subset of `@tigrbl-auth/admin-uix`, React, React DOM, Vite, TypeScript; backend support from `tigrbl-identity-admin`, `tigrbl-identity-operator`, `tigrbl-identity-contracts`, `tigrbl-authz-policy` |
 | Surface dependencies | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` methods for directory, profile, governance, keys, and operator status |
 | UIX dependencies | `platform-admin-uix` |
 | Data and state dependencies | admin session state, tenant records, platform-wide user records, admin authority flags, delegated-admin policy summaries, audit and governance state |
@@ -76,7 +76,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | split subset of `@tigrbl-auth/admin-uix`, React, React DOM, Vite, TypeScript; backend support from `tigrbl-identity-admin`, `tigrbl-identity-operator`, `tigrbl-identity-policy`, `tigrbl-identity-contracts` |
+| Runtime package dependencies | split subset of `@tigrbl-auth/admin-uix`, React, React DOM, Vite, TypeScript; backend support from `tigrbl-identity-admin`, `tigrbl-identity-operator`, `tigrbl-authz-policy`, `tigrbl-identity-contracts` |
 | Surface dependencies | `/admin/auth/*`, `/admin/identities`, tenant discovery routes, `/rpc` directory methods, `tenant.keys.*`, `keys.list`, `jwks.show`, client and policy control-plane methods |
 | UIX dependencies | `tenant-admin-uix` |
 | Data and state dependencies | tenant-scoped admin session, tenant visibility filters, tenant identities, tenant JWKS inventory and publication state, tenant client records, tenant policy state |
@@ -89,7 +89,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tigrbl-identity-oauth`, `tigrbl-identity-admin`, `tigrbl-identity-contracts`, `tigrbl-identity-policy`; existing partial frontend basis in `apps/admin-uix/components/ClientManagement.tsx` |
+| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tigrbl-auth-protocol-oauth`, `tigrbl-identity-admin`, `tigrbl-identity-contracts`, `tigrbl-authz-policy`; existing partial frontend basis in `apps/admin-uix/components/ClientManagement.tsx` |
 | Surface dependencies | `/register`, `/register/{client_id}`, OIDC discovery metadata, tenant discovery metadata, client control-plane methods (`client.list`, `client.show`, `client.registration.*`, and any future `client.create/update/delete` RPC methods that are formally shipped) |
 | UIX dependencies | `developer-uix` |
 | Data and state dependencies | client registration records, redirect URIs, grant types, token endpoint auth methods, client secrets or client JWKS metadata, software metadata, tenant ownership and delegated admin policy |
@@ -102,7 +102,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tigrbl-identity-credentials`, `tigrbl-identity-policy`, `tigrbl-identity-principals`, `tigrbl-identity-oauth`, `tigrbl-identity-resource-server`, and operator/service-key workflows |
+| Runtime package dependencies | future dedicated UIX or automation surface; backend support from `tigrbl-authn-credentials`, `tigrbl-authz-policy`, `tigrbl-identity-principals`, `tigrbl-auth-protocol-oauth`, `tigrbl-authz-resource-server`, and operator/service-key workflows |
 | Surface dependencies | token endpoint, introspection endpoint, JWKS publication, service-key and API-key administration surfaces, workload-identity and advanced-identity control surfaces where promoted into the release path |
 | UIX dependencies | `service-admin-uix` if browser-based; may also depend on CLI or automation surfaces rather than a browser UI alone |
 | Data and state dependencies | service identities, service keys, API keys, workload identity records, token introspection state, machine principal metadata, trust-domain and scope policy |

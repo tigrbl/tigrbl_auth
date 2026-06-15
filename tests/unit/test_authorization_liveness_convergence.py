@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_identity_policy import ConvergenceEvent, ConvergenceState, evaluate_liveness_convergence
+from tigrbl_authz_policy import ConvergenceEvent, ConvergenceState, evaluate_liveness_convergence
 
 
 def test_authorization_liveness_convergence_t1_classifies_converged_pending_and_late() -> None:

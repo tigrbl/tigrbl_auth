@@ -20,7 +20,7 @@ from tigrbl_auth_api_developer import app, build_app
 ## Local dev deployment
 
 ```powershell
-docker compose -f docker-compose.developer-api.yml up -d --build
+docker compose -f docker/docker-compose.developer-api.yml up -d --build
 ```
 
 The dev deployment listens on `http://localhost:8017` and uses

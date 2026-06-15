@@ -56,6 +56,9 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     workspace_sources = (((pyproject.get("tool", {}) or {}).get("uv", {}) or {}).get("sources", {}) or {}) if isinstance(pyproject, dict) else {}
     runner_extras = {name: list(values) for name, values in optional_dependencies.items() if name in {"uvicorn", "hypercorn", "tigrcorn", "servers"}}
     storage_extras = {name: list(values) for name, values in optional_dependencies.items() if name in {"postgres", "sqlite"}}
+    allowed_workspace_sources, forbidden_workspace_sources = _classify_uv_sources(
+        repo_root, workspace_sources
+    )
     dependency_artifacts = _dependency_artifact_paths(repo_root)
     dependency_lock_manifest = repo_root / "constraints" / "dependency-lock.json"
     test_constraints_manifest = repo_root / "constraints" / "test.txt"
@@ -144,7 +147,10 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "runner_extra_count": len(runner_extras),
         "storage_extra_count": len(storage_extras),
         "workspace_source_count": len(workspace_sources),
-        "workspace_sources_present": bool(workspace_sources),
+        "workspace_sources_declared": bool(workspace_sources),
+        "first_party_workspace_source_count": len(allowed_workspace_sources),
+        "forbidden_workspace_source_count": len(forbidden_workspace_sources),
+        "workspace_sources_present": bool(forbidden_workspace_sources),
         "dependency_provenance_artifact_count": len(dependency_artifacts),
         "dependency_lock_manifest_present": dependency_lock_manifest.exists(),
         "install_substrate_report_present": (repo_root / "docs" / "compliance" / "install_substrate_report.json").exists(),

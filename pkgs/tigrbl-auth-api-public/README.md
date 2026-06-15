@@ -22,7 +22,7 @@ from tigrbl_auth_api_public import app, build_app
 From the repository root:
 
 ```bash
-docker compose -f docker-compose.public-api.yml up -d --build
+docker compose -f docker/docker-compose.public-api.yml up -d --build
 ```
 
 The dev deployment publishes the public API on `http://localhost:8013`.

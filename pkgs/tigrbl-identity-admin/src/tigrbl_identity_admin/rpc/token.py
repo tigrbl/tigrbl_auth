@@ -14,8 +14,8 @@ from tigrbl_identity_contracts.rpc.token import (
 )
 from tigrbl_identity_admin.rpc._shared import repo_root_from_context
 from tigrbl_identity_storage.operator_store import OperationContext
-from tigrbl_identity_credentials.session_service import token_hash
-from tigrbl_identity_credentials.token_service import (
+from tigrbl_authn_credentials.session_service import token_hash
+from tigrbl_authn_credentials.token_service import (
     exchange_operator_token_for_context,
     introspect_operator_token_for_context,
     list_operator_tokens_for_context,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_identity_policy import ReferenceCatalog, TrustEdge, validate_trust_graph_integrity
+from tigrbl_authz_policy import ReferenceCatalog, TrustEdge, validate_trust_graph_integrity
 
 
 def test_trust_graph_integrity_t1_accepts_valid_edges() -> None:

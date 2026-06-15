@@ -31,18 +31,18 @@ roles but require more work.
 | `tigrbl-identity-core` | Shared IDs, errors, value objects, tenant and issuer primitives, base interfaces. |
 | `tigrbl-identity-contracts` | OpenAPI, OpenRPC, JSON Schema, discovery schemas, compliance target metadata, generated contract artifacts. |
 | `tigrbl-identity-principals` | Actor taxonomy: users, clients, apps, services, devices, workloads, machines, federated subjects. |
-| `tigrbl-identity-credentials` | Credential taxonomy and lifecycle: passwords, API keys, service keys, client secrets, JWT assertions, certificate bindings, DPoP keys, passkeys/WebAuthn credentials, recovery codes, sessions. |
+| `tigrbl-authn-credentials` | Credential taxonomy and lifecycle: passwords, API keys, service keys, client secrets, JWT assertions, certificate bindings, DPoP keys, passkeys/WebAuthn credentials, recovery codes, sessions. |
 | `tigrbl-identity-jose` | JWT, JWK, JWS, JWE, JWA, JWKS, signing, encryption, key material, key selection primitives. |
-| `tigrbl-identity-policy` | Tenant isolation, RBAC/ABAC decisions, scope authorization, admin authorization, audit/provenance policy, credential-use policy. |
-| `tigrbl-identity-oauth` | OAuth protocol semantics: authorization, token, revocation, introspection, client registration, device authorization, token exchange, PAR, JAR, RAR, DPoP, mTLS, resource indicators. |
-| `tigrbl-identity-oidc` | OIDC provider semantics: discovery, ID token, UserInfo, sessions, logout, `acr`/`amr` claim emission. |
+| `tigrbl-authz-policy` | Tenant isolation, RBAC/ABAC decisions, scope authorization, admin authorization, audit/provenance policy, credential-use policy. |
+| `tigrbl-auth-protocol-oauth` | OAuth protocol semantics: authorization, token, revocation, introspection, client registration, device authorization, token exchange, PAR, JAR, RAR, DPoP, mTLS, resource indicators. |
+| `tigrbl-auth-protocol-oidc` | OIDC provider semantics: discovery, ID token, UserInfo, sessions, logout, `acr`/`amr` claim emission. |
 | `tigrbl-identity-admin` | Control-plane APIs for tenants, users, apps, clients, services, credentials, policies, key rotation, and governed mutations. |
 | `tigrbl-identity-storage` | Tigrbl/SQLAlchemy table mappings, migrations, repositories, SQLite/Postgres support, database bootstrap, migration portability. SQLAlchemy is the default implementation substrate, not part of the package boundary name. |
 | `tigrbl-identity-server` | Default runnable Authorization Server / OIDC Provider / IdP distribution. |
 | `tigrbl-identity-runtime` | Process/runtime layer: runner profiles, ASGI runtime adapters, lifecycle hooks, runtime manifests, health and diagnostics wiring. |
 | `tigrbl-identity-operator` | CLI/operator workflows over admin, runtime, contracts, and evidence surfaces. |
-| `tigrbl-identity-resource-server` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
-| `tigrbl-identity-rp` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
+| `tigrbl-authz-resource-server` | Protected API toolkit: token validation, JWKS cache, introspection, scope/permission enforcement, DPoP/mTLS/resource checks. |
+| `tigrbl-auth-protocol-rp` | Relying-party/client SDK: discovery, authorization URL, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout. |
 | `tigrbl-identity-testkit` | Conformance fixtures, fake providers, fake clients, fake resource servers, protocol vectors, downstream harnesses. |
 | `tigrbl-auth` | Backward-compatible facade/default install. |
 
@@ -57,18 +57,18 @@ on day one.
 | `tigrbl-identity-core` | `TenantId`, `PrincipalId`, `CredentialId`, `ClientId`, `Issuer`, `Subject`, `Audience`, `Scope`, `Permission`, `GrantType`, `ResponseType`, `TokenType`, `Nonce`, `Clock`, `TimeWindow`, `ErrorCode`, `Result`, `CapabilityName`, `FeatureFlagName`, `RuntimeProfileName`. |
 | `tigrbl-identity-contracts` | `AuthorizeRequest`, `AuthorizeResponse`, `TokenRequest`, `TokenResponse`, `IntrospectionRequest`, `IntrospectionResponse`, `RevocationRequest`, `DeviceAuthorizationRequest`, `DeviceAuthorizationResponse`, `OpenIDConfiguration`, `OAuthAuthorizationServerMetadata`, `ProtectedResourceMetadata`, `JwksDocument`, `AdminRequest`, `AdminResponse`, `ErrorResponse`, `CapabilityManifest`, `OpenApiContractInput`, `OpenRpcContractInput`. |
 | `tigrbl-identity-principals` | `Principal`, `UserPrincipal`, `ClientPrincipal`, `AppPrincipal`, `ServicePrincipal`, `DevicePrincipal`, `MachinePrincipal`, `WorkloadPrincipal`, `FederatedSubjectPrincipal`, `Group`, `Role`, `Membership`, `PrincipalAlias`, `Tenant`, `TenantMembership`, `Ownership`, `Delegation`, `AdminAuthority`, `OwnerAuthority`, `SuperuserAuthority`. |
-| `tigrbl-identity-credentials` | `Credential`, `CredentialBinding`, `CredentialVerificationResult`, `CredentialStatus`, `PasswordCredential`, `ApiKeyCredential`, `ServiceKeyCredential`, `ClientSecretCredential`, `JwtAssertionCredential`, `MtlsCertificateCredential`, `DpopKeyCredential`, `WebAuthnCredential`, `PasskeyCredential`, `RecoveryCodeCredential`, `SessionCookieCredential`, `RefreshTokenCredential`, `DeviceCodeCredential`, `CredentialRotation`, `CredentialRevocation`, `CredentialPosture`. |
+| `tigrbl-authn-credentials` | `Credential`, `CredentialBinding`, `CredentialVerificationResult`, `CredentialStatus`, `PasswordCredential`, `ApiKeyCredential`, `ServiceKeyCredential`, `ClientSecretCredential`, `JwtAssertionCredential`, `MtlsCertificateCredential`, `DpopKeyCredential`, `WebAuthnCredential`, `PasskeyCredential`, `RecoveryCodeCredential`, `SessionCookieCredential`, `RefreshTokenCredential`, `DeviceCodeCredential`, `CredentialRotation`, `CredentialRevocation`, `CredentialPosture`. |
 | `tigrbl-identity-jose` | `Jwk`, `Jwks`, `Jws`, `Jwe`, `Jwt`, `JoseHeader`, `KeyId`, `SigningKey`, `VerificationKey`, `EncryptionKey`, `KeySet`, `KeyRotationPlan`, `KeySelectionPolicy`, `TokenSigner`, `TokenVerifier`, `JwksPublisher`, `JoseAlgorithmPolicy`. |
-| `tigrbl-identity-policy` | `Policy`, `PolicyDecision`, `PolicyRequest`, `PolicyContext`, `RbacPolicy`, `AbacPolicy`, `ScopePolicy`, `TenantIsolationPolicy`, `DelegatedAdminPolicy`, `ClientExposurePolicy`, `CredentialUsePolicy`, `AuthorizationTrace`, `PolicyVersion`, `PolicyRegistry`, `AuditPolicy`. |
-| `tigrbl-identity-oauth` | `AuthorizationGrant`, `AuthorizationCode`, `AccessToken`, `RefreshToken`, `ClientRegistration`, `ClientAuthentication`, `TokenExchange`, `DeviceAuthorization`, `DeviceCode`, `UserCode`, `PushedAuthorizationRequest`, `JwtSecuredAuthorizationRequest`, `RichAuthorizationRequest`, `ResourceIndicator`, `DpopProof`, `MtlsClientBinding`, `TokenRevocation`, `TokenIntrospection`, `OAuthError`. |
-| `tigrbl-identity-oidc` | `IdToken`, `UserInfo`, `OidcClaims`, `Acr`, `Amr`, `AuthenticationContext`, `OidcProviderMetadata`, `OidcSession`, `SessionState`, `LogoutRequest`, `RpInitiatedLogout`, `FrontChannelLogout`, `BackChannelLogout`, `FederatedLoginResult`. |
+| `tigrbl-authz-policy` | `Policy`, `PolicyDecision`, `PolicyRequest`, `PolicyContext`, `RbacPolicy`, `AbacPolicy`, `ScopePolicy`, `TenantIsolationPolicy`, `DelegatedAdminPolicy`, `ClientExposurePolicy`, `CredentialUsePolicy`, `AuthorizationTrace`, `PolicyVersion`, `PolicyRegistry`, `AuditPolicy`. |
+| `tigrbl-auth-protocol-oauth` | `AuthorizationGrant`, `AuthorizationCode`, `AccessToken`, `RefreshToken`, `ClientRegistration`, `ClientAuthentication`, `TokenExchange`, `DeviceAuthorization`, `DeviceCode`, `UserCode`, `PushedAuthorizationRequest`, `JwtSecuredAuthorizationRequest`, `RichAuthorizationRequest`, `ResourceIndicator`, `DpopProof`, `MtlsClientBinding`, `TokenRevocation`, `TokenIntrospection`, `OAuthError`. |
+| `tigrbl-auth-protocol-oidc` | `IdToken`, `UserInfo`, `OidcClaims`, `Acr`, `Amr`, `AuthenticationContext`, `OidcProviderMetadata`, `OidcSession`, `SessionState`, `LogoutRequest`, `RpInitiatedLogout`, `FrontChannelLogout`, `BackChannelLogout`, `FederatedLoginResult`. |
 | `tigrbl-identity-admin` | `AdminOperation`, `TenantAdminService`, `UserAdminService`, `ClientAdminService`, `AppAdminService`, `ServiceAdminService`, `CredentialAdminService`, `KeyAdminService`, `SessionAdminService`, `TokenAdminService`, `PolicyAdminService`, `DelegatedAdminService`, `SafeMutation`, `AdminAuditEvent`. |
 | `tigrbl-identity-storage` | `UserTable`, `ClientTable`, `AppTable`, `ServiceTable`, `DeviceTable`, `MachineTable`, `WorkloadTable`, `CredentialTable`, `ApiKeyTable`, `ServiceKeyTable`, `SessionTable`, `TenantTable`, `AuthorizationCodeTable`, `DeviceCodeTable`, `ConsentTable`, `AuditEventTable`, `Repository`, `UnitOfWork`, `Migration`, `DatabaseBootstrap`, `SqliteProfile`, `PostgresProfile`. |
 | `tigrbl-identity-server` | `IdentityApp`, `AppFactory`, `GatewayFactory`, `PluginInstaller`, `RouteManifest`, `SurfaceManifest`, `PublicRestSurface`, `AdminRpcSurface`, `DiagnosticsSurface`, `ProtocolPublisher`, `OpenApiPublisher`, `OpenRpcPublisher`, `DiscoveryPublisher`, `ServerSettings`. |
 | `tigrbl-identity-runtime` | `RuntimeProfile`, `RuntimeConfig`, `RuntimeManifest`, `RunnerProfile`, `UvicornRuntime`, `HypercornRuntime`, `TigrcornRuntime`, `LifecycleHook`, `HealthCheck`, `DiagnosticsEndpoint`, `RuntimeAdapter`, `ServeCommandPlan`, `RuntimeState`. |
 | `tigrbl-identity-operator` | `OperatorCommand`, `BootstrapCommand`, `MigrateCommand`, `ImportCommand`, `ExportCommand`, `KeyRotationCommand`, `ClientCommand`, `ServiceCommand`, `TenantCommand`, `ProfileInspectCommand`, `ClaimsLintCommand`, `ReleaseGateCommand`, `EvidenceBundleCommand`, `CertificationReportCommand`, `OperatorReport`. |
-| `tigrbl-identity-resource-server` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `ProofBindingValidator`, `DpopValidator`, `MtlsBindingValidator`, `ResourceAuthorizationResult`. |
-| `tigrbl-identity-rp` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
+| `tigrbl-authz-resource-server` | `ResourceServer`, `ResourceMetadata`, `Audience`, `ScopeRequirement`, `PermissionRequirement`, `TokenValidator`, `JwksCache`, `IntrospectionClient`, `ProofBindingValidator`, `DpopValidator`, `MtlsBindingValidator`, `ResourceAuthorizationResult`. |
+| `tigrbl-auth-protocol-rp` | `RelyingParty`, `LoginRequest`, `AuthorizationUrlBuilder`, `CallbackHandler`, `PkceVerifier`, `TokenExchangeClient`, `IdTokenValidator`, `UserInfoClient`, `LogoutClient`, `RpSession`, `RpConfiguration`. |
 | `tigrbl-identity-testkit` | `FakeClock`, `FakeKeyStore`, `FakeRepository`, `FakePrincipalFactory`, `FakeCredentialFactory`, `FakeIdp`, `FakeOAuthClient`, `FakeResourceServer`, `ProtocolTestVector`, `ConformanceHarness`, `PeerProfileHarness`, `TestTenantFactory`, `TestAppFactory`, `TokenFixture`, `JoseFixture`. |
 | `tigrbl-auth` | `app`, `create_app`, `create_gateway`, `install_plugin`, `IdentityServer`, `DefaultRuntime`, selected public re-exports, install extras, compatibility entrypoints. |
 
@@ -92,13 +92,13 @@ Distribution names use hyphens. Import names should use independent top-level
 packages with underscores:
 
 ```text
-dist:   tigrbl-identity-oauth
-import: tigrbl_identity_oauth
+dist:   tigrbl-auth-protocol-oauth
+import: tigrbl_auth_protocol_oauth
 ```
 
 Do not use a shared `tigrbl_identity.*` namespace package. Each distribution
 owns its own import root, such as `tigrbl_identity_core`,
-`tigrbl_identity_oauth`, and `tigrbl_identity_storage`. Also avoid
+`tigrbl_auth_protocol_oauth`, and `tigrbl_identity_storage`. Also avoid
 `tigrbl.identity.*` unless the existing `tigrbl` package is deliberately
 converted into a namespace package.
 
@@ -111,7 +111,7 @@ tigrbl-identity-contracts
 tigrbl-identity-principals
   -> tigrbl-identity-core
 
-tigrbl-identity-credentials
+tigrbl-authn-credentials
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
@@ -120,57 +120,57 @@ tigrbl-identity-jose
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
 
-tigrbl-identity-policy
+tigrbl-authz-policy
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
 
-tigrbl-identity-oauth
+tigrbl-auth-protocol-oauth
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-policy
+  -> tigrbl-authz-policy
 
-tigrbl-identity-oidc
+tigrbl-auth-protocol-oidc
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-authz-policy
 
 tigrbl-identity-admin
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-policy
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-authz-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
 
 tigrbl-identity-storage
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
-  -> tigrbl-identity-policy
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-authn-credentials
+  -> tigrbl-authz-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
 
 tigrbl-identity-server
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-policy
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-authz-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
   -> tigrbl-identity-admin
   -> tigrbl-identity-storage
 
@@ -187,38 +187,38 @@ tigrbl-identity-operator
   -> tigrbl-identity-server
   -> tigrbl-identity-runtime
 
-tigrbl-identity-resource-server
+tigrbl-authz-resource-server
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-policy
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-authz-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
 
-tigrbl-identity-rp
+tigrbl-auth-protocol-rp
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
 
 tigrbl-identity-testkit
   -> tigrbl-identity-core
   -> tigrbl-identity-contracts
   -> tigrbl-identity-principals
-  -> tigrbl-identity-credentials
+  -> tigrbl-authn-credentials
   -> tigrbl-identity-jose
-  -> tigrbl-identity-policy
-  -> tigrbl-identity-oauth
-  -> tigrbl-identity-oidc
+  -> tigrbl-authz-policy
+  -> tigrbl-auth-protocol-oauth
+  -> tigrbl-auth-protocol-oidc
   -> tigrbl-identity-admin
   -> tigrbl-identity-storage
   -> tigrbl-identity-server
-  -> tigrbl-identity-resource-server
-  -> tigrbl-identity-rp
+  -> tigrbl-authz-resource-server
+  -> tigrbl-auth-protocol-rp
 
 tigrbl-auth
   -> tigrbl-identity-core
@@ -315,8 +315,8 @@ The desired product flow is:
 6. Each app can own one or more OAuth/OIDC clients.
 7. App clients define redirect URIs, grant types, scopes, consent policy, secret/public-client posture, and allowed login behavior.
 8. End users can log into those tenant apps using the `tigrbl-identity-server` as the OAuth/OIDC provider.
-9. The app uses `tigrbl-identity-rp` to initiate login and handle callback/token validation.
-10. The app's APIs use `tigrbl-identity-resource-server` to validate access tokens and enforce authorization.
+9. The app uses `tigrbl-auth-protocol-rp` to initiate login and handle callback/token validation.
+10. The app's APIs use `tigrbl-authz-resource-server` to validate access tokens and enforce authorization.
 
 This is the Google/GitHub-style platform pattern:
 
@@ -410,20 +410,20 @@ human identity record.
 | --- | --- | --- |
 | `Tenant` | `tigrbl-identity-core` or `tigrbl-identity-principals` | `tigrbl-identity-admin` creates and manages it. |
 | `User` / `Account` | `tigrbl-identity-principals` | `tigrbl-identity-admin` and self-registration flows manage lifecycle. |
-| `TenantMembership` | `tigrbl-identity-principals` and `tigrbl-identity-policy` | `tigrbl-identity-admin` manages membership and tenant-scoped authority. |
-| `Role` / `Entitlement` | `tigrbl-identity-policy` | `tigrbl-identity-admin` governs assignment. |
+| `TenantMembership` | `tigrbl-identity-principals` and `tigrbl-authz-policy` | `tigrbl-identity-admin` manages membership and tenant-scoped authority. |
+| `Role` / `Entitlement` | `tigrbl-authz-policy` | `tigrbl-identity-admin` governs assignment. |
 | `App` | `tigrbl-identity-principals` | `tigrbl-identity-admin` creates and manages app registration. |
-| `OAuthClient` | `tigrbl-identity-principals` and `tigrbl-identity-oauth` | `tigrbl-identity-admin` manages persisted client records; dynamic client registration belongs to OAuth protocol behavior. |
-| `RelyingParty` | Runtime role of an app/client, not usually persisted separately | `tigrbl-identity-rp` provides the SDK used by consuming apps. |
-| `ResourceServer` | `tigrbl-identity-principals` and `tigrbl-identity-resource-server` | `tigrbl-identity-admin` registers resource/audience metadata. |
+| `OAuthClient` | `tigrbl-identity-principals` and `tigrbl-auth-protocol-oauth` | `tigrbl-identity-admin` manages persisted client records; dynamic client registration belongs to OAuth protocol behavior. |
+| `RelyingParty` | Runtime role of an app/client, not usually persisted separately | `tigrbl-auth-protocol-rp` provides the SDK used by consuming apps. |
+| `ResourceServer` | `tigrbl-identity-principals` and `tigrbl-authz-resource-server` | `tigrbl-identity-admin` registers resource/audience metadata. |
 | `Service` | `tigrbl-identity-principals` | `tigrbl-identity-admin` manages lifecycle. |
 | `Machine` | `tigrbl-identity-principals` | `tigrbl-identity-admin` or workload trust integration manages lifecycle. |
 | `Workload` | `tigrbl-identity-principals` | `tigrbl-identity-admin` or future workload registry manages lifecycle. |
 | `Device` | `tigrbl-identity-principals` | User enrollment and/or admin enrollment manages lifecycle. |
-| `Credential` | `tigrbl-identity-credentials` | `tigrbl-identity-admin` manages issue, bind, rotate, revoke, expire. |
-| `Policy` | `tigrbl-identity-policy` | `tigrbl-identity-admin` governs policy lifecycle. |
+| `Credential` | `tigrbl-authn-credentials` | `tigrbl-identity-admin` manages issue, bind, rotate, revoke, expire. |
+| `Policy` | `tigrbl-authz-policy` | `tigrbl-identity-admin` governs policy lifecycle. |
 | Runtime profile/config | `tigrbl-identity-runtime` | Operator/runtime config owns deployment selection and overrides. |
-| OAuth/OIDC protocol behavior | `tigrbl-identity-oauth`, `tigrbl-identity-oidc`, `tigrbl-identity-jose` | Used by server, RP, and resource-server packages. |
+| OAuth/OIDC protocol behavior | `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc`, `tigrbl-identity-jose` | Used by server, RP, and resource-server packages. |
 
 ## Service And Machine Identity Flows
 

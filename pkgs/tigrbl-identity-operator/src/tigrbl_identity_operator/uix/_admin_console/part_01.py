@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Callable, Mapping
 
-from tigrbl_identity_policy.control_plane import (
+from tigrbl_authz_policy.control_plane import (
     ABACAdministration,
     ADMIN_CLIENT_FIELDS,
     AdminPolicyBoundaryFeature,
@@ -30,7 +30,7 @@ from tigrbl_identity_policy.control_plane import (
     phase3_admin_policy_boundary_manifest,
     simulate_policy,
 )
-from tigrbl_identity_policy.invariants import (
+from tigrbl_authz_policy.invariants import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,
@@ -39,7 +39,7 @@ from tigrbl_identity_policy.invariants import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from tigrbl_identity_policy.governance_extension import (
+from tigrbl_authz_policy.governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,
     GovernanceExtensionBoundaryFeature,
@@ -52,7 +52,7 @@ from tigrbl_identity_policy.governance_extension import (
     phase5_governance_extension_boundary_integrity,
     phase5_governance_extension_boundary_manifest,
 )
-from tigrbl_identity_policy.release_posture import (
+from tigrbl_authz_policy.release_posture import (
     DisclosureRule,
     ProvenanceRequirement,
     TransportPosture,

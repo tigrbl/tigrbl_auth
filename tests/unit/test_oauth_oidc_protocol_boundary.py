@@ -13,7 +13,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_oauth import (  # noqa: E402
+from tigrbl_auth_protocol_oauth import (  # noqa: E402
     DPoPProof,
     InMemoryOAuthRepository,
     OAuthClient,
@@ -22,7 +22,7 @@ from tigrbl_identity_oauth import (  # noqa: E402
     OAuthProtocolService,
     sha256_thumbprint,
 )
-from tigrbl_identity_oidc import (  # noqa: E402
+from tigrbl_auth_protocol_oidc import (  # noqa: E402
     LogoutRequest,
     OidcProviderError,
     OidcProviderRuntime,
@@ -249,16 +249,16 @@ def test_oidc_t2_rejects_unregistered_redirect_logo_policy_and_session_mismatch(
 def test_oauth_oidc_t2_public_boundary_has_no_forbidden_imports() -> None:
     root = Path("pkgs")
     files = [
-        root / "tigrbl-identity-oauth/src/tigrbl_identity_oauth/__init__.py",
-        root / "tigrbl-identity-oauth/src/tigrbl_identity_oauth/protocol.py",
-        root / "tigrbl-identity-oidc/src/tigrbl_identity_oidc/__init__.py",
-        root / "tigrbl-identity-oidc/src/tigrbl_identity_oidc/provider.py",
+        root / "tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/__init__.py",
+        root / "tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/protocol.py",
+        root / "tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/__init__.py",
+        root / "tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/provider.py",
     ]
     forbidden = {
         "tigrbl_auth",
         "tigrbl_identity_admin",
-        "tigrbl_identity_resource_server",
-        "tigrbl_identity_rp",
+        "tigrbl_authz_resource_server",
+        "tigrbl_auth_protocol_rp",
         "tigrbl_identity_server",
     }
 

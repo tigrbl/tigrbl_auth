@@ -131,6 +131,17 @@ def resolve_tenant_trust_domain_authority(deployment: object, tenant_slug: str) 
     protected_resource_identifier = (
         f"{_deployment_value(deployment, 'protected_resource_identifier', root_issuer).rstrip('/')}/tenants/{tenant_slug}"
     )
+    return TenantTrustDomainAuthority(
+        tenant_slug=tenant_slug,
+        issuer=issuer,
+        jwks_uri=f"{root_issuer.rstrip('/')}{jwks_path}",
+        jwks_path=jwks_path,
+        subject_namespace=f"{tenant_slug}:subjects",
+        protected_resource_identifier=protected_resource_identifier,
+        signing_scope=f"tenant:{tenant_slug}",
+        accepted_issuers=(issuer,),
+        verification_scope=(issuer, protected_resource_identifier),
+    )
 
 
 def resolve_realm_trust_domain_authority(deployment: object, realm_slug: str) -> RealmTrustDomainAuthority:
@@ -148,17 +159,6 @@ def resolve_realm_trust_domain_authority(deployment: object, realm_slug: str) ->
         subject_namespace=f"realm:{realm_slug}:subjects",
         protected_resource_identifier=protected_resource_identifier,
         signing_scope=f"realm:{realm_slug}",
-        accepted_issuers=(issuer,),
-        verification_scope=(issuer, protected_resource_identifier),
-    )
-    return TenantTrustDomainAuthority(
-        tenant_slug=tenant_slug,
-        issuer=issuer,
-        jwks_uri=f"{root_issuer.rstrip('/')}{jwks_path}",
-        jwks_path=jwks_path,
-        subject_namespace=f"{tenant_slug}:subjects",
-        protected_resource_identifier=protected_resource_identifier,
-        signing_scope=f"tenant:{tenant_slug}",
         accepted_issuers=(issuer,),
         verification_scope=(issuer, protected_resource_identifier),
     )

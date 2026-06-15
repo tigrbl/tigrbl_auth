@@ -43,9 +43,9 @@ canonical = canonicalize({"sub": str(subject_id), "scope": ["openid", "profile"]
 - [tigrbl-identity-core](https://pypi.org/project/tigrbl-identity-core/)
 - [tigrbl-identity-contracts](https://pypi.org/project/tigrbl-identity-contracts/)
 - [tigrbl-identity-principals](https://pypi.org/project/tigrbl-identity-principals/)
-- [tigrbl-identity-credentials](https://pypi.org/project/tigrbl-identity-credentials/)
+- [tigrbl-authn-credentials](https://pypi.org/project/tigrbl-authn-credentials/)
 - [tigrbl-identity-jose](https://pypi.org/project/tigrbl-identity-jose/)
-- [tigrbl-identity-policy](https://pypi.org/project/tigrbl-identity-policy/)
+- [tigrbl-authz-policy](https://pypi.org/project/tigrbl-authz-policy/)
 
 ## Project Links
 

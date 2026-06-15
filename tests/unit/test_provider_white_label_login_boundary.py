@@ -12,7 +12,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_oidc import (  # noqa: E402
+from tigrbl_auth_protocol_oidc import (  # noqa: E402
     LoginThemeAssetPolicy,
     OidcProviderError,
     OidcProviderRuntime,
@@ -143,14 +143,14 @@ def test_provider_white_label_t2_rejects_unsafe_branding_and_cross_tenant_use() 
 @pytest.mark.unit
 def test_provider_white_label_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-identity-oidc/src/tigrbl_identity_oidc/__init__.py"),
-        Path("pkgs/tigrbl-identity-oidc/src/tigrbl_identity_oidc/provider.py"),
+        Path("pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/__init__.py"),
+        Path("pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/provider.py"),
     ]
     forbidden = {
         "tigrbl_auth",
         "tigrbl_identity_admin",
-        "tigrbl_identity_resource_server",
-        "tigrbl_identity_rp",
+        "tigrbl_authz_resource_server",
+        "tigrbl_auth_protocol_rp",
         "tigrbl_identity_server",
     }
 

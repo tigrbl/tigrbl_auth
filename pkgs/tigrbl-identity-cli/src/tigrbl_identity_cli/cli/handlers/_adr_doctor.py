@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_credentials.session_service import (
+from tigrbl_authn_credentials.session_service import (
     exchange_token_for_context as _svc_exchange_token_for_context,
     get_session_for_context as _svc_get_session_for_context,
     get_token_for_context as _svc_get_token_for_context,
@@ -12,7 +12,7 @@ from tigrbl_identity_credentials.session_service import (
     revoke_session_for_context as _svc_revoke_session_for_context,
     revoke_token_for_context as _svc_revoke_token_for_context,
 )
-from tigrbl_identity_oidc.discovery_service import (
+from tigrbl_auth_protocol_oidc.discovery_service import (
     diff_discovery as _svc_diff_discovery,
     publish_discovery as _svc_publish_discovery,
     show_discovery as _svc_show_discovery,

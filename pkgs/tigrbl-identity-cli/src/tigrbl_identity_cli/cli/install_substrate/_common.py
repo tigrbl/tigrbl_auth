@@ -250,6 +250,35 @@ def _requirements_have_forbidden_sources(requirements: list[str]) -> list[str]:
     return hits
 
 
+def _classify_uv_sources(
+    repo_root: Path, sources: dict[str, Any]
+) -> tuple[dict[str, str], dict[str, str]]:
+    repo_root = repo_root.resolve()
+    allowed: dict[str, str] = {}
+    forbidden: dict[str, str] = {}
+    for name, value in sources.items():
+        if not isinstance(value, dict):
+            forbidden[str(name)] = "non-table source"
+            continue
+        raw_path = value.get("path")
+        if not raw_path:
+            forbidden[str(name)] = "non-path source"
+            continue
+        source_path = Path(str(raw_path))
+        resolved = (source_path if source_path.is_absolute() else repo_root / source_path).resolve()
+        try:
+            rel_path = resolved.relative_to(repo_root)
+        except ValueError:
+            forbidden[str(name)] = str(raw_path)
+            continue
+        rel = rel_path.as_posix()
+        if rel.startswith("pkgs/") and (resolved / "pyproject.toml").is_file():
+            allowed[str(name)] = rel
+            continue
+        forbidden[str(name)] = rel
+    return allowed, forbidden
+
+
 def _read_tox(repo_root: Path) -> tuple[configparser.ConfigParser, str]:
     tox_path = repo_root / "tox.ini"
     parser = configparser.ConfigParser(interpolation=None)
@@ -353,6 +382,9 @@ def _pyproject_dependency_manifest(repo_root: Path) -> dict[str, Any]:
         for name, values in (project.get("optional-dependencies") or {}).items()
     }
     workspace_sources = (((manifest.get("tool", {}) or {}).get("uv", {}) or {}).get("sources", {}) or {}) if isinstance(manifest, dict) else {}
+    allowed_workspace_sources, forbidden_workspace_sources = _classify_uv_sources(
+        repo_root, workspace_sources
+    )
     forbidden = _requirements_have_forbidden_sources(dependencies)
     for values in optional.values():
         forbidden.extend(_requirements_have_forbidden_sources(values))
@@ -360,7 +392,11 @@ def _pyproject_dependency_manifest(repo_root: Path) -> dict[str, Any]:
         "requires_python": str(project.get("requires-python", "")),
         "dependencies": dependencies,
         "optional_dependencies": optional,
-        "workspace_sources_present": bool(workspace_sources),
+        "workspace_sources_present": bool(forbidden_workspace_sources),
+        "workspace_sources_declared": bool(workspace_sources),
+        "first_party_workspace_source_count": len(allowed_workspace_sources),
+        "forbidden_workspace_source_count": len(forbidden_workspace_sources),
+        "forbidden_workspace_sources": forbidden_workspace_sources,
         "forbidden_dependency_references": sorted(set(forbidden)),
         "exact_pinned_dependency_count": sum(1 for item in dependencies if _is_exact_pin(item)),
         "dependency_count": len(dependencies),

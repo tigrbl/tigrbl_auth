@@ -23,7 +23,7 @@ The Docker dev surface listens on `http://localhost:8016` and uses the
 admin API key `dev-tenant-admin-key` unless overridden.
 
 ```bash
-docker compose -f docker-compose.tenant-admin-api.yml up -d --build
+docker compose -f docker/docker-compose.tenant-admin-api.yml up -d --build
 ```
 
 Useful checks:

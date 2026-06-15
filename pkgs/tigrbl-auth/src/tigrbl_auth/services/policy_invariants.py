@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_policy.invariants import (
+from tigrbl_authz_policy.invariants import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,

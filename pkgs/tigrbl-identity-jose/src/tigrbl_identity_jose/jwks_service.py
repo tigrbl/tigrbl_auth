@@ -4,7 +4,7 @@ from __future__ import annotations
 
 
 async def build_jwks_document() -> dict:
-    from tigrbl_identity_oidc.standards.id_token import ensure_rsa_jwt_key, rsa_key_provider, rotation_jwks_cache
+    from tigrbl_auth_protocol_oidc.standards.id_token import ensure_rsa_jwt_key, rsa_key_provider, rotation_jwks_cache
     from tigrbl_identity_jose.key_management import _ensure_key as ensure_ed25519_key, _provider as ed25519_provider
 
     await ensure_rsa_jwt_key()

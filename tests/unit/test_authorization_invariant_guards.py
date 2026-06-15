@@ -19,7 +19,7 @@ from tigrbl_auth.services.policy_invariants import (
     InvariantRegistry as FacadeInvariantRegistry,
 )
 from tigrbl_auth.uix import InvariantRegistry as UixInvariantRegistry
-from tigrbl_identity_policy import (
+from tigrbl_authz_policy import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,

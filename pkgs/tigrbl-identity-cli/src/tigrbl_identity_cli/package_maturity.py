@@ -17,6 +17,12 @@ SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
 PACKAGE_MATURITY_BOUNDARY_ID = "bnd:package-maturity-governance-slice"
 PACKAGE_MATURITY_FEATURE_PREFIX = "feat:package-maturity-"
 PACKAGE_MATURITY_FEATURE_ALIASES = {
+    "tigrbl-auth-protocol-oauth": "oauth",
+    "tigrbl-auth-protocol-oidc": "oidc",
+    "tigrbl-auth-protocol-rp": "rp",
+    "tigrbl-authn-credentials": "credentials",
+    "tigrbl-authz-policy": "policy",
+    "tigrbl-authz-resource-server": "resource-server",
     "tigrbl-auth": "facade",
     "tigrbl-identity-cli": "cli",
 }

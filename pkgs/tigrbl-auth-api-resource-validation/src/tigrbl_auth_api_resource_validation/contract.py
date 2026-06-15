@@ -20,7 +20,7 @@ class ResourceValidationApiContract:
 RESOURCE_VALIDATION_API_CONTRACT = ResourceValidationApiContract(
     product_surface="resource-validation-api",
     intended_consumers=(
-        "tigrbl-identity-resource-server",
+        "tigrbl-authz-resource-server",
         "protected API gateways",
         "resource-server validation middleware",
     ),
@@ -57,7 +57,7 @@ RESOURCE_VALIDATION_API_CONTRACT = ResourceValidationApiContract(
         "tigrbl-identity-server",
         "tigrbl-identity-runtime",
         "tigrbl-identity-jose",
-        "tigrbl-identity-resource-server",
+        "tigrbl-authz-resource-server",
     ),
 )
 

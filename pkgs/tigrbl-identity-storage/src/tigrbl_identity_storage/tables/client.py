@@ -20,7 +20,7 @@ from tigrbl_identity_server.framework import (
 )
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_jose.key_management import hash_pw, verify_pw
-from tigrbl_identity_oauth.standards.native_apps import (
+from tigrbl_auth_protocol_oauth.standards.native_apps import (
     RFC8252_SPEC_URL,
     is_native_redirect_uri,
     validate_native_redirect_uri,

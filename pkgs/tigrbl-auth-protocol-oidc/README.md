@@ -11,7 +11,7 @@ tigrbl-auth-protocol-oidc is the protocol-facing package name for OpenID Connect
 - Component kind: Auth protocol package
 - Use it for OIDC discovery, ID Token, UserInfo, session, logout, and claim protocol behavior.
 - Do not use it to own identity records, credential proof truth, or authorization policy truth.
-- Current implementation delegates to `tigrbl-identity-oidc` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-oidc` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

@@ -11,7 +11,7 @@ tigrbl-auth-protocol-oauth is the protocol-facing package name for OAuth 2.x, OA
 - Component kind: Auth protocol package
 - Use it for OAuth wire behavior, RFC helpers, grant flows, PAR, RAR, dynamic client registration, token exchange, DPoP, and mTLS protocol logic.
 - Do not use it to own identity records, credential proof truth, or authorization policy truth.
-- Current implementation delegates to `tigrbl-identity-oauth` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-oauth` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

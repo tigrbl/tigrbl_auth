@@ -61,8 +61,8 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "tigrbl-auth",
         "tigrbl-identity-server",
         "tigrbl-identity-runtime",
-        "tigrbl-identity-oauth",
-        "tigrbl-identity-oidc",
+        "tigrbl-auth-protocol-oauth",
+        "tigrbl-auth-protocol-oidc",
         "tigrbl-identity-jose",
     ),
 )

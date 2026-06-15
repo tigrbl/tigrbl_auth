@@ -16,12 +16,12 @@ This taxonomy separates identity, authentication, authorization, protocol, and c
 
 | Concern | Preferred package | Deprecated compatibility package |
 | --- | --- | --- |
-| Credential proof and lifecycle | `tigrbl-authn-credentials` | `tigrbl-identity-credentials` |
-| Authorization policy and authority | `tigrbl-authz-policy` | `tigrbl-identity-policy` |
-| Protected-resource enforcement | `tigrbl-authz-resource-server` | `tigrbl-identity-resource-server` |
-| OAuth protocol behavior | `tigrbl-auth-protocol-oauth` | `tigrbl-identity-oauth` |
-| OIDC provider protocol behavior | `tigrbl-auth-protocol-oidc` | `tigrbl-identity-oidc` |
-| OIDC RP / OAuth client behavior | `tigrbl-auth-protocol-rp` | `tigrbl-identity-rp` |
+| Credential proof and lifecycle | `tigrbl-authn-credentials` | `tigrbl-authn-credentials` |
+| Authorization policy and authority | `tigrbl-authz-policy` | `tigrbl-authz-policy` |
+| Protected-resource enforcement | `tigrbl-authz-resource-server` | `tigrbl-authz-resource-server` |
+| OAuth protocol behavior | `tigrbl-auth-protocol-oauth` | `tigrbl-auth-protocol-oauth` |
+| OIDC provider protocol behavior | `tigrbl-auth-protocol-oidc` | `tigrbl-auth-protocol-oidc` |
+| OIDC RP / OAuth client behavior | `tigrbl-auth-protocol-rp` | `tigrbl-auth-protocol-rp` |
 
 ## Stable Identity Packages
 
@@ -41,7 +41,7 @@ These packages remain under `tigrbl-identity-*` because their primary responsibi
 
 ## Principal Narrowing
 
-`tigrbl-identity-principals` owns subject, tenant, realm, alias, and lifecycle concepts. Authority roles and role-bearing membership semantics are authorization concepts. New code should import authority helpers from `tigrbl-authz-policy` or `tigrbl_identity_policy`; principal-side role helpers remain only as migration compatibility.
+`tigrbl-identity-principals` owns subject, tenant, realm, alias, and lifecycle concepts. Authority roles and role-bearing membership semantics are authorization concepts. New code should import authority helpers from `tigrbl-authz-policy` or `tigrbl_authz_policy`; principal-side role helpers remain only as migration compatibility.
 
 ## Boundary Guards
 

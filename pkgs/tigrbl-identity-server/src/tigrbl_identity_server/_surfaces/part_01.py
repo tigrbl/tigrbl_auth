@@ -29,16 +29,16 @@ from tigrbl_identity_server.rest.routers.register import api as register_api
 from tigrbl_identity_server.rest.routers.revoke import api as revoke_api
 from tigrbl_identity_server.rest.routers.token import api as token_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_oidc.standards.discovery import (
+from tigrbl_auth_protocol_oidc.standards.discovery import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_identity_oidc.standards.userinfo import include_oidc_userinfo
-from tigrbl_identity_oauth.standards.introspection import include_introspection_endpoint
-from tigrbl_identity_oauth.standards.rfc8414 import include_rfc8414
-from tigrbl_identity_oauth.standards.rfc9728 import include_rfc9728
-from tigrbl_identity_oauth.standards.token_exchange import include_token_exchange_endpoint
-from tigrbl_identity_policy.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+from tigrbl_auth_protocol_oidc.standards.userinfo import include_oidc_userinfo
+from tigrbl_auth_protocol_oauth.standards.introspection import include_introspection_endpoint
+from tigrbl_auth_protocol_oauth.standards.rfc8414 import include_rfc8414
+from tigrbl_auth_protocol_oauth.standards.rfc9728 import include_rfc9728
+from tigrbl_auth_protocol_oauth.standards.token_exchange import include_token_exchange_endpoint
+from tigrbl_authz_policy.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
 
 ensure_identity_storage_importable()

@@ -1,6 +1,6 @@
-"""Compatibility facade for `tigrbl_identity_credentials.token_service`."""
+"""Compatibility facade for `tigrbl_authn_credentials.token_service`."""
 
 from tigrbl_auth._split_imports import alias_module as _alias_module
 
-_module = _alias_module(__name__, "tigrbl_identity_credentials.token_service", "tigrbl-identity-credentials")
+_module = _alias_module(__name__, "tigrbl_authn_credentials.token_service", "tigrbl-authn-credentials")
 globals().update(_module.__dict__)

@@ -6,8 +6,8 @@ import types
 
 import pytest
 
-from tigrbl_identity_policy import AuthorityScope
-from tigrbl_identity_policy.delegation_lifecycle import (
+from tigrbl_authz_policy import AuthorityScope
+from tigrbl_authz_policy.delegation_lifecycle import (
     DelegationGrantLifecycleService,
     assert_delegation_management_surface,
     delegation_grant_uix_workflows,

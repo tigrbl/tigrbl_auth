@@ -4,7 +4,7 @@ from pathlib import Path
 
 from tigrbl_identity_contracts.rest import DynamicClientRegistrationOut
 from tigrbl_identity_server.framework import Depends, TigrblRouter
-from tigrbl_identity_oauth.ops.register import delete_registered_client, get_registered_client, register_client, update_registered_client
+from tigrbl_auth_protocol_oauth.ops.register import delete_registered_client, get_registered_client, register_client, update_registered_client
 from tigrbl_identity_storage.tables import get_db
 
 api = TigrblRouter()

@@ -1,8 +1,53 @@
-"""Relying-party protocol surfaces for the Tigrbl auth package suite."""
+"""Relying-party SDK for the Tigrbl identity package suite."""
 
 from __future__ import annotations
 
-from tigrbl_identity_rp import *  # noqa: F401,F403
-from tigrbl_identity_rp import __all__ as _IDENTITY_RP_ALL
+from .client import (
+    BrowserMemorySession,
+    BrowserStoragePolicy,
+    CallbackResult,
+    DiscoveryClient,
+    JwksCache,
+    LoginRequest,
+    RPConfiguration,
+    RPError,
+    RPSession,
+    RelyingParty,
+    StateNonceStore,
+    TokenStore,
+    UserInfoClient,
+    assert_browser_no_client_secret,
+    example_app_manifest,
+    framework_callback_adapter,
+    framework_login_adapter,
+    make_pkce_verifier,
+    pkce_s256_challenge,
+    shared_vector_manifest,
+    validate_browser_storage_policy,
+    validate_id_token_claims,
+)
 
-__all__ = list(_IDENTITY_RP_ALL)
+__all__ = [
+    "BrowserMemorySession",
+    "BrowserStoragePolicy",
+    "CallbackResult",
+    "DiscoveryClient",
+    "JwksCache",
+    "LoginRequest",
+    "RPConfiguration",
+    "RPError",
+    "RPSession",
+    "RelyingParty",
+    "StateNonceStore",
+    "TokenStore",
+    "UserInfoClient",
+    "assert_browser_no_client_secret",
+    "example_app_manifest",
+    "framework_callback_adapter",
+    "framework_login_adapter",
+    "make_pkce_verifier",
+    "pkce_s256_challenge",
+    "shared_vector_manifest",
+    "validate_browser_storage_policy",
+    "validate_id_token_claims",
+]

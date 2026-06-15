@@ -58,9 +58,9 @@ MY_ACCOUNT_API_CONTRACT = MyAccountApiContract(
         "tigrbl-identity-server",
         "tigrbl-identity-runtime",
         "tigrbl-identity-principals",
-        "tigrbl-identity-credentials",
-        "tigrbl-identity-policy",
-        "tigrbl-identity-oidc",
+        "tigrbl-authn-credentials",
+        "tigrbl-authz-policy",
+        "tigrbl-auth-protocol-oidc",
         "tigrbl-identity-storage",
     ),
 )

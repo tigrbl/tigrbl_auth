@@ -28,20 +28,20 @@ from tigrbl_identity_server.framework import (
 )
 from tigrbl_identity_runtime.deployment import deployment_from_request
 
-from tigrbl_identity_credentials.backends import (
+from tigrbl_authn_credentials.backends import (
     ApiKeyBackend,
     AuthError,
     PasswordBackend,
 )  # PasswordBackend not used here, but re-exported for completeness
 
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_credentials.token_service import JWTCoder, InvalidTokenError
+from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
-from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_identity_oauth.standards.rfc6750 import extract_bearer_token
-from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
-from tigrbl_identity_oauth.standards.mtls import presented_certificate_thumbprint
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_auth_protocol_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
+from tigrbl_auth_protocol_oauth.standards.mtls import presented_certificate_thumbprint
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.typing import Principal
 

@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-authz-resource-server"
 version = "0.4.0.dev2"
-description = "Authorization resource-server token validation and protected API enforcement facade for the Tigrbl auth package suite."
+description = "Authorization resource-server token validation and protected API enforcement implementation package for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -33,10 +33,6 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "tigrbl-identity-resource-server==0.4.0.dev2",
-]
-
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"

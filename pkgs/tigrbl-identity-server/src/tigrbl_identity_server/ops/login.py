@@ -3,10 +3,10 @@ from __future__ import annotations
 import secrets
 from datetime import datetime, timedelta, timezone
 
-from tigrbl_identity_credentials.token_service import issue_persisted_token_pair
-from tigrbl_identity_oidc.id_token import mint_id_token
-from tigrbl_identity_oidc.standards.session_mgmt import create_browser_session
-from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_authn_credentials.token_service import issue_persisted_token_pair
+from tigrbl_auth_protocol_oidc.id_token import mint_id_token
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import create_browser_session
+from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
 from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie, session_cookie_policy
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.framework import HTTPException, JSONResponse, select, status

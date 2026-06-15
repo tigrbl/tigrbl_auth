@@ -78,7 +78,7 @@ async def handle_discovery_show(_params, context: RpcRequestContext) -> Discover
     deployment = _resolved_deployment(context)
     metadata = {}
     try:
-        from tigrbl_identity_oidc.standards.discovery import _build_openid_config
+        from tigrbl_auth_protocol_oidc.standards.discovery import _build_openid_config
         metadata = _build_openid_config()
     except Exception:
         issuer = getattr(deployment, "issuer", "https://authn.example.com")
@@ -259,7 +259,7 @@ METHODS = (
 )
 
 # Discovery RPC resolves through the shared discovery service layer.
-from tigrbl_identity_oidc.discovery_service import show_discovery as _svc_show_discovery
+from tigrbl_auth_protocol_oidc.discovery_service import show_discovery as _svc_show_discovery
 
 
 async def handle_discovery_show(_params, context: RpcRequestContext) -> DiscoveryShowResult:

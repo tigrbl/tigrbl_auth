@@ -6,7 +6,7 @@ from types import SimpleNamespace
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-PKG_SRC = ROOT / "pkgs" / "tigrbl-identity-resource-server" / "src"
+PKG_SRC = ROOT / "pkgs" / "tigrbl-authz-resource-server" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
@@ -20,7 +20,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES  # noqa: E402
 from tigrbl_auth.standards.oauth2.resource_verifier_contract import (  # noqa: E402
     build_protected_resource_verifier_contract,
 )
-from tigrbl_identity_resource_server import (  # noqa: E402
+from tigrbl_authz_resource_server import (  # noqa: E402
     AccessTokenClaims,
     ResourceServerVerifier,
     verifier_contract_from_metadata,

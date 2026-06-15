@@ -71,8 +71,8 @@ DEVELOPER_API_CONTRACT = DeveloperApiContract(
         "tigrbl-identity-runtime",
         "tigrbl-identity-admin",
         "tigrbl-identity-principals",
-        "tigrbl-identity-oauth",
-        "tigrbl-identity-oidc",
+        "tigrbl-auth-protocol-oauth",
+        "tigrbl-auth-protocol-oidc",
     ),
 )
 

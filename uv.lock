@@ -2646,15 +2646,15 @@ requires-dist = [
     { name = "tigrbl-identity-cli", editable = "pkgs/tigrbl-identity-cli" },
     { name = "tigrbl-identity-contracts", editable = "pkgs/tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core", editable = "pkgs/tigrbl-identity-core" },
-    { name = "tigrbl-identity-credentials", editable = "pkgs/tigrbl-identity-credentials" },
+    { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-jose", editable = "pkgs/tigrbl-identity-jose" },
-    { name = "tigrbl-identity-oauth", editable = "pkgs/tigrbl-identity-oauth" },
-    { name = "tigrbl-identity-oidc", editable = "pkgs/tigrbl-identity-oidc" },
+    { name = "tigrbl-identity-oauth", editable = "pkgs/deprecated/tigrbl-identity-oauth" },
+    { name = "tigrbl-identity-oidc", editable = "pkgs/deprecated/tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator", editable = "pkgs/tigrbl-identity-operator" },
-    { name = "tigrbl-identity-policy", editable = "pkgs/tigrbl-identity-policy" },
+    { name = "tigrbl-identity-policy", editable = "pkgs/deprecated/tigrbl-identity-policy" },
     { name = "tigrbl-identity-principals", editable = "pkgs/tigrbl-identity-principals" },
-    { name = "tigrbl-identity-resource-server", editable = "pkgs/tigrbl-identity-resource-server" },
-    { name = "tigrbl-identity-rp", editable = "pkgs/tigrbl-identity-rp" },
+    { name = "tigrbl-identity-resource-server", editable = "pkgs/deprecated/tigrbl-identity-resource-server" },
+    { name = "tigrbl-identity-rp", editable = "pkgs/deprecated/tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime", editable = "pkgs/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/tigrbl-identity-storage" },
@@ -2685,67 +2685,43 @@ dev = [
 name = "tigrbl-auth-protocol-oauth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
-dependencies = [
-    { name = "tigrbl-identity-oauth" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-identity-oauth", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-auth-protocol-oidc" }
-dependencies = [
-    { name = "tigrbl-identity-oidc" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-identity-oidc", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-rp"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-auth-protocol-rp" }
-dependencies = [
-    { name = "tigrbl-identity-rp" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-identity-rp", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-authn-credentials"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-authn-credentials" }
 dependencies = [
-    { name = "tigrbl-identity-credentials" },
+    { name = "tigrbl-identity-jose" },
+    { name = "tigrbl-identity-operator" },
+    { name = "tigrbl-identity-storage" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-credentials", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-authz-policy" }
-dependencies = [
-    { name = "tigrbl-identity-policy" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-identity-policy", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-authz-resource-server"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-authz-resource-server" }
-dependencies = [
-    { name = "tigrbl-identity-resource-server" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-identity-resource-server", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-base"
@@ -2841,19 +2817,13 @@ source = { editable = "pkgs/tigrbl-identity-core" }
 [[package]]
 name = "tigrbl-identity-credentials"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-credentials" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-credentials" }
 dependencies = [
-    { name = "tigrbl-identity-jose" },
-    { name = "tigrbl-identity-operator" },
-    { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-authn-credentials" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-]
+requires-dist = [{ name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-jose"
@@ -2889,12 +2859,24 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-oauth"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-oauth" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-oauth" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-oauth" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-oidc"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-oidc" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-oidc" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-oidc" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-operator"
@@ -2914,7 +2896,13 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-policy"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-policy" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-policy" }
+dependencies = [
+    { name = "tigrbl-authz-policy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-principals"
@@ -2924,12 +2912,24 @@ source = { editable = "pkgs/tigrbl-identity-principals" }
 [[package]]
 name = "tigrbl-identity-resource-server"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-resource-server" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-resource-server" }
+dependencies = [
+    { name = "tigrbl-authz-resource-server" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-rp"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-identity-rp" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-rp" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-rp" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-auth-protocol-rp", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-runtime"

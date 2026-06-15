@@ -150,7 +150,7 @@ def test_storage_t1_migration_contract_and_sqlite_postgres_matrix() -> None:
         required_collections=("tenants", "users", "clients", "services", "service_keys"),
     )
 
-    assert contract.latest_revision == "0009_admin_identity_bootstrap_and_password_recovery"
+    assert contract.latest_revision == "0011_delegation_grant_lifecycle_tables"
     assert contract.is_ordered is True
     assert len(contract.revisions) >= 9
     assert {entry.dialect for entry in STORAGE_MATRIX} == {StorageDialect.SQLITE, StorageDialect.POSTGRESQL}
@@ -179,8 +179,8 @@ def test_storage_t2_public_boundary_has_no_protocol_imports() -> None:
     ]
     forbidden = {
         "tigrbl_auth",
-        "tigrbl_identity_oauth",
-        "tigrbl_identity_oidc",
+        "tigrbl_auth_protocol_oauth",
+        "tigrbl_auth_protocol_oidc",
         "tigrbl_identity_server",
         "tigrbl_identity_runtime",
     }

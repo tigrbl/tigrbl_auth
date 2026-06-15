@@ -11,7 +11,7 @@ tigrbl-authn-credentials is the authentication-facing package name for credentia
 - Component kind: Authentication package
 - Use it for credential proof and authentication lifecycle primitives.
 - Do not use it for authorization policy, permission decisions, or OAuth/OIDC wire semantics.
-- Current implementation delegates to `tigrbl-identity-credentials` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-credentials` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

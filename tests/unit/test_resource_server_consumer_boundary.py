@@ -12,7 +12,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_resource_server import (  # noqa: E402
+from tigrbl_authz_resource_server import (  # noqa: E402
     AccessTokenClaims,
     DPoPBinding,
     FrameworkRequest,
@@ -143,13 +143,13 @@ def test_resource_server_t2_rejects_bad_dpop_mtls_and_missing_bearer() -> None:
 @pytest.mark.unit
 def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-identity-resource-server/src/tigrbl_identity_resource_server/__init__.py"),
-        Path("pkgs/tigrbl-identity-resource-server/src/tigrbl_identity_resource_server/verifier.py"),
+        Path("pkgs/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
+        Path("pkgs/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
     ]
     forbidden = {
         "tigrbl_auth",
-        "tigrbl_identity_oauth",
-        "tigrbl_identity_oidc",
+        "tigrbl_auth_protocol_oauth",
+        "tigrbl_auth_protocol_oidc",
         "tigrbl_identity_server",
         "tigrbl_identity_runtime",
     }

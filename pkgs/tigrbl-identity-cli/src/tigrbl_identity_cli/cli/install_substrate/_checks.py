@@ -21,7 +21,7 @@ def build_install_substrate_report(
 
     static_failures: list[str] = []
     if dependency_manifest["workspace_sources_present"]:
-        static_failures.append("pyproject.toml still declares workspace-only dependency sources")
+        static_failures.append("pyproject.toml still declares forbidden workspace dependency sources")
     if dependency_manifest["forbidden_dependency_references"]:
         static_failures.append("One or more dependency declarations still use forbidden local/editable sources")
     static_failures.extend(constraint_consistency["mismatches"])
@@ -86,6 +86,9 @@ def build_install_substrate_report(
         "tox_envs_declare_pip_check": tox_checks["pip_check_ok_count"] == tox_checks["section_count"],
         "tox_envs_declare_install_probe": tox_checks["install_probe_ok_count"] == tox_checks["section_count"],
         "workspace_sources_present": dependency_manifest["workspace_sources_present"],
+        "workspace_sources_declared": dependency_manifest["workspace_sources_declared"],
+        "first_party_workspace_source_count": dependency_manifest["first_party_workspace_source_count"],
+        "forbidden_workspace_source_count": dependency_manifest["forbidden_workspace_source_count"],
         "forbidden_dependency_reference_count": len(dependency_manifest["forbidden_dependency_references"]),
         "base_dependency_count": dependency_manifest["dependency_count"],
         "base_exact_pinned_dependency_count": dependency_manifest["exact_pinned_dependency_count"],

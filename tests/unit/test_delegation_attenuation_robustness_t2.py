@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_identity_policy import AuthorityScope, DelegationGrant, prove_delegation_attenuation
+from tigrbl_authz_policy import AuthorityScope, DelegationGrant, prove_delegation_attenuation
 
 
 def test_delegation_attenuation_t2_rejects_broader_action_resource_tenant_and_realm() -> None:

@@ -72,7 +72,7 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
         "tigrbl-identity-runtime",
         "tigrbl-identity-admin",
         "tigrbl-identity-principals",
-        "tigrbl-identity-policy",
+        "tigrbl-authz-policy",
     ),
 )
 

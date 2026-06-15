@@ -17,6 +17,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
 
     assert len(packages) == 31
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/tigrbl-auth"
+    assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
     assert packages["tigrbl-auth-protocol-oauth"].import_root == "tigrbl_auth_protocol_oauth"
 
@@ -110,7 +111,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tigrbl-auth-protocol-oauth-py312",
-            "workspace_source_globs": "pkgs/*/src",
+            "workspace_source_globs": "pkgs/*/src\npkgs/deprecated/*/src",
             "package_test_paths": "tests/packages/tigrbl-auth-protocol-oauth\ntests/packages/tigrbl_auth_protocol_oauth",
             "pre_test_command": "",
             "pytest_args": "",

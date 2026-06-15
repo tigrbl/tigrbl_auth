@@ -8,10 +8,10 @@ from tigrbl_identity_server.framework import AsyncSession, HTTPException, JSONRe
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables import AuthSession, User
 from ..routers.schemas import CredsIn, TokenPair
-from tigrbl_identity_oauth.standards.rfc8414_metadata import ISSUER
-from tigrbl_identity_oidc.standards.id_token import mint_id_token
+from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_auth_protocol_oidc.standards.id_token import mint_id_token
 from ..routers.shared import _jwt, _require_tls
-from tigrbl_identity_credentials.token_service import issue_persisted_token_pair
+from tigrbl_authn_credentials.token_service import issue_persisted_token_pair
 from .authz import router as router
 
 api = router

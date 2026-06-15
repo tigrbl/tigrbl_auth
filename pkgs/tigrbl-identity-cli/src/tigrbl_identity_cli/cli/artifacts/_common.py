@@ -18,11 +18,11 @@ from tigrbl_identity_principals.tenant_discovery import (
     build_tenant_openid_config,
     resolve_tenant_trust_domain_authority,
 )
-from tigrbl_identity_oidc.standards.discovery_metadata import build_openid_config
-from tigrbl_identity_oauth.standards.assertion_framework import build_assertion_contract_examples
-from tigrbl_identity_oauth.standards.jwt_client_auth import build_client_assertion_contract_examples
-from tigrbl_identity_oauth.standards.rfc8414_metadata import JWKS_PATH
-from tigrbl_identity_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
+from tigrbl_auth_protocol_oauth.standards.assertion_framework import build_assertion_contract_examples
+from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import build_client_assertion_contract_examples
+from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import JWKS_PATH
+from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
 
 
 def _load_yaml(path: Path) -> Any:

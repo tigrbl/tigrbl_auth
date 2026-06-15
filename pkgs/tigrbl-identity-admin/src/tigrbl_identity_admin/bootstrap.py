@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from tigrbl_identity_server.framework import select
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_identity_oidc.standards.session_mgmt import resolve_browser_session
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_identity_storage.tables import Tenant, User
 from tigrbl_identity_storage.tables.engine import ENGINE
 

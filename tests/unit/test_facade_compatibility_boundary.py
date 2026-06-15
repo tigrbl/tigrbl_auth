@@ -44,7 +44,7 @@ def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> N
         assert facade.__file__ and "pkgs" in facade.__file__
         assert "app" in compat.STABLE_ENTRYPOINTS
         assert compat.STABLE_ENTRYPOINTS["app"].package == "tigrbl-identity-server"
-        assert compat.extras_for("consumer") == ("tigrbl-identity-resource-server", "tigrbl-identity-rp")
+        assert compat.extras_for("consumer") == ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp")
 
 
 @pytest.mark.unit
@@ -72,23 +72,28 @@ def test_facade_t1_extras_map_covers_product_install_groups() -> None:
 
         assert "tigrbl-identity-server" in compat.extras_for("server")
         assert "tigrbl-identity-operator" in compat.extras_for("operator")
-        assert "tigrbl-identity-oauth" in compat.extras_for("oauth")
-        assert "tigrbl-identity-rp" in compat.extras_for("consumer")
+        assert "tigrbl-auth-protocol-oauth" in compat.extras_for("oauth")
+        assert "tigrbl-auth-protocol-rp" in compat.extras_for("consumer")
         assert set(compat.extras_for("all")).issuperset(set(compat.extras_for("server")))
 
 
 @pytest.mark.unit
-def test_facade_t2_fail_closed_unknowns_and_unavailable_targets() -> None:
+def test_facade_t2_fail_closed_unknowns_and_unavailable_targets(monkeypatch: pytest.MonkeyPatch) -> None:
     with isolated_facade_import():
         compat = importlib.import_module("tigrbl_auth.compat")
-        app_module = importlib.import_module("tigrbl_auth.app")
 
         with pytest.raises(compat.FacadeImportError, match="unknown tigrbl-auth extra"):
             compat.extras_for("missing")
         with pytest.raises(compat.FacadeImportError, match="unknown tigrbl-auth facade entrypoint"):
             compat.resolve_entrypoint("missing")
-        with pytest.raises(compat.FacadeImportError, match="requires tigrbl-identity-server"):
-            app_module.build_app()
+
+        monkeypatch.setitem(
+            compat.STABLE_ENTRYPOINTS,
+            "broken",
+            compat.StableEntrypoint("broken", "missing.module", "target", "missing-package"),
+        )
+        with pytest.raises(compat.FacadeImportError, match="requires missing-package"):
+            compat.resolve_entrypoint("broken")
 
 
 @pytest.mark.unit

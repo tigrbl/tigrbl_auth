@@ -11,7 +11,7 @@ tigrbl-authz-resource-server is the authorization-facing package name for protec
 - Component kind: Authorization package
 - Use it for protected API validation of issuer, audience, scopes, permissions, and proof bindings.
 - Do not use it to own credential proof, identity records, or OAuth/OIDC provider truth.
-- Current implementation delegates to `tigrbl-identity-resource-server` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

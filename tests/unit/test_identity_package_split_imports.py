@@ -10,6 +10,15 @@ ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
 
+DEPRECATED_DIST_NAMES = {
+    "tigrbl-identity-credentials",
+    "tigrbl-identity-policy",
+    "tigrbl-identity-oauth",
+    "tigrbl-identity-oidc",
+    "tigrbl-identity-resource-server",
+    "tigrbl-identity-rp",
+}
+
 PACKAGE_ROOTS = [
     "tigrbl_auth_protocol_oauth",
     "tigrbl_auth_protocol_oidc",
@@ -65,10 +74,16 @@ DIST_TO_IMPORT_ROOT = {
 
 
 def _install_package_src_paths() -> None:
-    for src in PKGS.glob("*/src"):
+    for src in PKGS.rglob("src"):
         value = str(src)
         if value not in sys.path:
             sys.path.append(value)
+
+
+def _package_path(dist_name: str) -> Path:
+    if dist_name in DEPRECATED_DIST_NAMES:
+        return PKGS / "deprecated" / dist_name
+    return PKGS / dist_name
 
 
 def test_identity_split_uses_independent_import_roots() -> None:
@@ -91,8 +106,9 @@ def test_tigrbl_auth_facade_import_root_exists() -> None:
 
 def test_split_package_metadata_declares_independent_import_roots() -> None:
     for dist_name, import_root in DIST_TO_IMPORT_ROOT.items():
-        pyproject = PKGS / dist_name / "pyproject.toml"
-        package_root = PKGS / dist_name / "src" / import_root
+        package_path = _package_path(dist_name)
+        pyproject = package_path / "pyproject.toml"
+        package_root = package_path / "src" / import_root
 
         assert pyproject.exists(), dist_name
         assert package_root.is_dir(), import_root

@@ -24,10 +24,10 @@ from .framework import (
     KeyUse,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_oauth.standards.mtls import validate_certificate_binding
+from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
 from tigrbl_identity_jose.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
-from tigrbl_identity_oauth.standards.revocation import is_revoked
-from tigrbl_identity_oauth.standards.introspection import register_token
+from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked
+from tigrbl_auth_protocol_oauth.standards.introspection import register_token
 
 _ACCESS_TTL = timedelta(minutes=60)
 _REFRESH_TTL = timedelta(days=7)
@@ -172,7 +172,7 @@ class JWTCoder:
                 raise ValueError(
                     "issuer and audience required when RFC 9068 support is enabled",
                 )
-            from tigrbl_identity_oauth.standards.jwt_access_tokens import add_jwt_access_token_claims
+            from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import add_jwt_access_token_claims
 
             payload = add_jwt_access_token_claims(payload, issuer=issuer, audience=audience)
         token = await self._svc.mint(
@@ -277,7 +277,7 @@ class JWTCoder:
                 raise ValueError(
                     "issuer and audience required for JWT access tokens per RFC 9068",
                 )
-            from tigrbl_identity_oauth.standards.jwt_access_tokens import validate_jwt_access_token_claims as validate_rfc9068_claims
+            from tigrbl_auth_protocol_oauth.standards.jwt_access_tokens import validate_jwt_access_token_claims as validate_rfc9068_claims
 
             validate_rfc9068_claims(payload, issuer=issuer, audience=audience)
         return payload

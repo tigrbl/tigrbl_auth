@@ -13,7 +13,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
     if value not in sys.path:
         sys.path.insert(0, value)
 
-from tigrbl_identity_rp import (  # noqa: E402
+from tigrbl_auth_protocol_rp import (  # noqa: E402
     BrowserMemorySession,
     BrowserStoragePolicy,
     DiscoveryClient,
@@ -164,13 +164,13 @@ def test_rp_t2_callback_replay_public_client_and_validation_failures() -> None:
 @pytest.mark.unit
 def test_rp_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-identity-rp/src/tigrbl_identity_rp/__init__.py"),
-        Path("pkgs/tigrbl-identity-rp/src/tigrbl_identity_rp/client.py"),
+        Path("pkgs/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"),
+        Path("pkgs/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"),
     ]
     forbidden = {
         "tigrbl_auth",
-        "tigrbl_identity_oauth",
-        "tigrbl_identity_oidc",
+        "tigrbl_auth_protocol_oauth",
+        "tigrbl_auth_protocol_oidc",
         "tigrbl_identity_server",
         "tigrbl_identity_runtime",
     }

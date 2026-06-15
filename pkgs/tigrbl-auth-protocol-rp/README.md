@@ -11,7 +11,7 @@ tigrbl-auth-protocol-rp is the protocol-facing package name for OpenID Connect R
 - Component kind: Auth protocol consumer package
 - Use it for discovery consumption, login URL generation, PKCE, callback handling, token exchange, ID-token validation, UserInfo, logout, and RP session helpers.
 - Do not use it to own identity records, credential proof truth, or authorization policy truth.
-- Current implementation delegates to `tigrbl-identity-rp` for compatibility.
+- Canonical implementation lives in this package; `tigrbl-identity-rp` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 

@@ -15,7 +15,7 @@ from tigrbl_identity_contracts.rpc.session import (
 from tigrbl_identity_admin.rpc._shared import repo_root_from_context
 from tigrbl_identity_storage.operator_store import OperationContext
 from tigrbl_identity_operator.audit_service import latest_audit_event
-from tigrbl_identity_credentials.session_service import (
+from tigrbl_authn_credentials.session_service import (
     get_session_for_context,
     list_sessions_for_context,
     revoke_session_for_context,
