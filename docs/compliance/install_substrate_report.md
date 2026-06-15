@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260519T045635Z`
+- Generated at: `20260615T043620Z`
 - Passed: `False`
 - Static manifest passed: `True`
 - Profile: `base`
@@ -16,11 +16,12 @@
 - Tox templates with pip check: `14` / `14`
 - Tox templates with install probe: `14` / `14`
 - Current profile import probe passed: `True`
-- Runtime surface probe passed: `True`
+- Runtime surface probe passed: `False`
 
 ## Failures
 
 - The current environment does not provide the full supported interpreter matrix required for clean-room certification.
+- One or more runtime import surfaces could not be resolved from the source tree.
 
 ## Warnings
 
@@ -54,7 +55,7 @@
 
 ## Runtime import surfaces
 
-- `tigrbl_auth.api.app` → passed=`True` message=`import surface resolvable`
+- `tigrbl_identity_server.api.app` → passed=`False` message=`module source missing`
 - `tigrbl_auth.app` → passed=`True` message=`import surface resolvable`
 - `tigrbl_auth.plugin` → passed=`True` message=`import surface resolvable`
 - `tigrbl_auth.gateway` → passed=`True` message=`import surface resolvable`

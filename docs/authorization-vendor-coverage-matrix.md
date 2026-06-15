@@ -52,11 +52,11 @@ For `tigrbl_auth`, the target product shape should be:
 
 | Product layer | Recommended owner |
 | --- | --- |
-| Authorization decision primitives | `tigrbl-identity-policy` |
+| Authorization decision primitives | `tigrbl-authz-policy` |
 | Principal facts and memberships | `tigrbl-identity-principals` |
-| Credential and assurance facts | `tigrbl-identity-credentials` |
-| OAuth scopes and resource indicators | `tigrbl-identity-oauth` |
-| Resource-server grants and enforcement | `tigrbl-identity-resource-server`, `tigrbl-auth-api-resource-validation` |
+| Credential and assurance facts | `tigrbl-authn-credentials` |
+| OAuth scopes and resource indicators | `tigrbl-auth-protocol-oauth` |
+| Resource-server grants and enforcement | `tigrbl-authz-resource-server`, `tigrbl-auth-api-resource-validation` |
 | Canonical role/policy/grant/relationship tables | `tigrbl-identity-storage` |
 | Admin lifecycle | Platform-admin, tenant-admin, developer, and service-admin frontdoors as scoped Management API slices |
 | Policy UI | Platform-admin and tenant-admin UIX first, developer/service-admin UIX where delegated |

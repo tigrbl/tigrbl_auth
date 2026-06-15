@@ -84,12 +84,18 @@ effective_deployment:
   - register-management
   - revoke
   - logout
+  - account-profile
+  - account-sessions
+  - account-consents
+  - account-credentials
   - openid-configuration
   - tenant-openid-configuration
+  - realm-openid-configuration
   - oauth-authorization-server-metadata
   - oauth-protected-resource-metadata
   - jwks
   - tenant-jwks
+  - realm-jwks
   active_routes:
   - /login
   - /authorize
@@ -100,12 +106,22 @@ effective_deployment:
   - /register/{client_id}
   - /revoke
   - /logout
+  - /account/profile
+  - /account/sessions
+  - /account/sessions/{session_id}
+  - /account/consents
+  - /account/consents/{consent_id}
+  - /account/authorized-apps
+  - /account/authorized-apps/{client_id}
+  - /account/password/change
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_contract_routes:
   - /login
   - /authorize
@@ -116,12 +132,22 @@ effective_deployment:
   - /register/{client_id}
   - /revoke
   - /logout
+  - /account/profile
+  - /account/sessions
+  - /account/sessions/{session_id}
+  - /account/consents
+  - /account/consents/{consent_id}
+  - /account/authorized-apps
+  - /account/authorized-apps/{client_id}
+  - /account/password/change
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_discovery_routes:
   - /userinfo
   - /introspect
@@ -130,10 +156,12 @@ effective_deployment:
   - /logout
   - /.well-known/openid-configuration
   - /tenants/{tenant_slug}/.well-known/openid-configuration
+  - /realms/{realm_slug}/.well-known/openid-configuration
   - /.well-known/oauth-authorization-server
   - /.well-known/oauth-protected-resource
   - /.well-known/jwks.json
   - /tenants/{tenant_slug}/.well-known/jwks.json
+  - /realms/{realm_slug}/.well-known/jwks.json
   active_targets:
   - RFC 6749
   - RFC 6750
@@ -172,6 +200,9 @@ effective_deployment:
   - Import/export portability
   - Release bundle and signature verification
   active_openrpc_methods: []
+  product_surface: null
+  allowed_admin_resources: []
+  allowed_admin_rest_groups: []
   profile_source:
     kind: packaged-profile-id
     profile_id: production

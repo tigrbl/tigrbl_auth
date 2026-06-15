@@ -53,5 +53,21 @@
   ],
   "code_challenge_methods_supported": [
     "S256"
+  ],
+  "tigrbl_auth_capabilities": [
+    "account-consents",
+    "account-credentials",
+    "account-profile",
+    "account-sessions",
+    "authorize",
+    "jwks",
+    "login",
+    "oauth-authorization-server-metadata",
+    "openid-configuration",
+    "realm-jwks",
+    "realm-openid-configuration",
+    "tenant-jwks",
+    "tenant-openid-configuration",
+    "token"
   ]
 }

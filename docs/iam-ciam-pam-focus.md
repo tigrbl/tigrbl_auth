@@ -52,7 +52,7 @@ The key point: IAM, CIAM, and PAM are product categories, not single protocols. 
 | `tigrbl-auth-api-developer` | Partial | Strong for app integration | No | No | M2M client setup partial | Strong |
 | `tigrbl-auth-api-service-admin` | Strong for NHI | Partial | PAM-adjacent but not PAM | Partial | Strong | Partial |
 | `tigrbl-auth-api-resource-validation` | Strong for API IAM | Strong for protected APIs | No | No | Strong | Strong |
-| `tigrbl-identity-policy` | Strong foundation | Strong foundation | Foundation only | Foundation only | Strong foundation | Strong foundation |
+| `tigrbl-authz-policy` | Strong foundation | Strong foundation | Foundation only | Foundation only | Strong foundation | Strong foundation |
 | `tigrbl-identity-operator` | Strong operator tooling | Partial | PAM-adjacent only | Partial | Partial | No |
 
 ## What `tigrbl_auth` Should Claim

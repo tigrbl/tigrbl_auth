@@ -1,14 +1,14 @@
 {
   "scope": "tigrbl-runtime-foundation",
   "strict": false,
-  "passed": false,
+  "passed": true,
   "summary": {
     "runtime_fastapi_starlette_hits": 0,
     "tests_fastapi_starlette_hits": 0,
     "scripts_fastapi_starlette_hits": 0,
-    "runtime_non_public_tigrbl_hits": 1,
+    "runtime_non_public_tigrbl_hits": 0,
     "pyproject_forbidden_dependency_hits": 0,
-    "release_path_fallback_hits": 8
+    "release_path_fallback_hits": 0
   },
   "hits": {
     "fastapi_starlette": {
@@ -16,59 +16,9 @@
       "tests": [],
       "scripts": []
     },
-    "runtime_non_public_tigrbl": [
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 32,
-        "match": "from tigrbl_core"
-      }
-    ],
+    "runtime_non_public_tigrbl": [],
     "pyproject_forbidden_dependencies": [],
-    "release_path_fallbacks": [
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 262,
-        "match": "if hasattr("
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 775,
-        "match": "if hasattr("
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 195,
-        "match": "except Exception:"
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 285,
-        "match": "except Exception:"
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 307,
-        "match": "except Exception:"
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 463,
-        "match": "except Exception:"
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 695,
-        "match": "except Exception:"
-      },
-      {
-        "path": "tigrbl_auth\\framework.py",
-        "line": 831,
-        "match": "except Exception:"
-      }
-    ]
+    "release_path_fallbacks": []
   },
-  "failures": [
-    "Non-public Tigrbl imports remain in the active runtime package.",
-    "Release-path framework fallbacks remain in active runtime files."
-  ]
+  "failures": []
 }

@@ -16,7 +16,7 @@ Normative anchors:
 |---|---|---|---|
 | SSOT target | SCIM is tracked as `feat:f33-scim-provisioning` and covered by `adr:1052`, `spc:1068`, and `spc:1072`. | [ADR-1052](../.ssot/adr/ADR-1052-govern-access-governance-compliance-reporting-and-delegated-administration.yaml), [SPEC-1068](../.ssot/specs/SPEC-1068-federation-provisioning-and-cross-cloud-trust-requirements.yaml), [SPEC-1072](../.ssot/specs/SPEC-1072-access-governance-compliance-and-delegated-administration-requirements.yaml) | SCIM is governed, but not implemented as a product API. |
 | Certification boundary | SCIM is explicitly out of the default baseline. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | Current conformance claims should not imply SCIM support. |
-| Runtime helper | `ScimProvisioningPlane` exists under governance-extension code and supports schema registration, user provision, group provision, simple patch, tenant snapshots. | [`governance_extension.py`](../pkgs/tigrbl-identity-policy/src/tigrbl_identity_policy/governance_extension.py) | Useful prototype/behavior seed, not a SCIM protocol server. |
+| Runtime helper | `ScimProvisioningPlane` exists under governance-extension code and supports schema registration, user provision, group provision, simple patch, tenant snapshots. | [`governance_extension.py`](../pkgs/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py) | Useful prototype/behavior seed, not a SCIM protocol server. |
 | Tests | Unit tests cover schema registration, required fields, user patch, group membership, tenant mismatch, unsupported patch op. | [`test_governance_extension_plane_phase5.py`](../tests/unit/test_governance_extension_plane_phase5.py), [`test_phase5_governance_extension_boundary.py`](../tests/unit/test_phase5_governance_extension_boundary.py) | Current proof is helper-level T1/T2 behavior, not RFC 7643/7644 endpoint conformance. |
 | Storage | Canonical storage has `Tenant`, `User`, `Service`, `Client`, keys, sessions, tokens, audit, etc.; no canonical `Group`/SCIM mapping tables are present. | [`tigrbl_identity_storage.tables`](../pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/tables) | User mapping can start from existing tables; group, membership, externalId, schema metadata, and SCIM audit need storage work. |
 | Frontdoor API | No `tigrbl-auth-api-scim` or `/scim/v2` frontdoor exists. | Repo path scan | SCIM should be a new provisioning frontdoor or a tightly scoped Management API slice. |
@@ -108,7 +108,7 @@ tigrbl-identity-scim                 # RFC 7643/7644 schemas, protocol logic, fi
 tigrbl-auth-api-scim                 # Deployable SCIM v2 frontdoor
 @tigrbl-auth/tenant-admin-uix        # SCIM connection setup/status UI
 tigrbl-identity-storage              # Canonical users, groups, memberships, mappings, audit
-tigrbl-identity-resource-server      # Token/scope validation integration for SCIM API
+tigrbl-authz-resource-server      # Token/scope validation integration for SCIM API
 ```
 
 This keeps the split consistent with the repo's current direction: canonical storage owns tables, protocol packages own protocol semantics, and frontdoor APIs own route composition and product filtering.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260519T045635Z",
+  "generated_at": "20260615T043620Z",
   "passed": false,
   "summary": {
     "static_manifest_passed": true,
@@ -28,9 +28,12 @@
     "tox_envs_declare_pip_check": true,
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
+    "workspace_sources_declared": true,
+    "first_party_workspace_source_count": 22,
+    "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 22,
-    "base_exact_pinned_dependency_count": 22,
+    "base_dependency_count": 44,
+    "base_exact_pinned_dependency_count": 44,
     "dependency_lock_manifest_present": true,
     "dependency_lock_install_profile_count": 14,
     "install_profiles_workflow_present": true,
@@ -46,11 +49,12 @@
     "current_profile_import_probe_failed_count": 0,
     "current_profile_import_probe_passed": true,
     "runtime_surface_probe_count": 4,
-    "runtime_surface_probe_failed_count": 0,
-    "runtime_surface_probe_passed": true
+    "runtime_surface_probe_failed_count": 1,
+    "runtime_surface_probe_passed": false
   },
   "failures": [
-    "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
+    "The current environment does not provide the full supported interpreter matrix required for clean-room certification.",
+    "One or more runtime import surfaces could not be resolved from the source tree."
   ],
   "warnings": [
     "The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.",
@@ -107,7 +111,7 @@
       "swarmauri_crypto_paramiko==0.4.0.dev5",
       "swarmauri_keyprovider_file==0.2.0",
       "swarmauri_keyprovider_local==0.2.0",
-      "python-multipart==0.0.22",
+      "python-multipart==0.0.27",
       "sqlalchemy[asyncio]==2.0.49",
       "pydantic[email]==2.12.5",
       "pydantic-settings==2.13.1",
@@ -116,6 +120,28 @@
       "bcrypt==5.0.0",
       "httpx==0.28.1",
       "aiosqlite==0.22.1",
+      "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+      "tigrbl-auth-protocol-oidc==0.4.0.dev2",
+      "tigrbl-auth-protocol-rp==0.4.0.dev2",
+      "tigrbl-authn-credentials==0.4.0.dev2",
+      "tigrbl-authz-policy==0.4.0.dev2",
+      "tigrbl-authz-resource-server==0.4.0.dev2",
+      "tigrbl-identity-cli==0.4.0.dev2",
+      "tigrbl-identity-admin==0.4.0.dev2",
+      "tigrbl-identity-contracts==0.4.0.dev2",
+      "tigrbl-identity-core==0.4.0.dev2",
+      "tigrbl-identity-credentials==0.4.0.dev2",
+      "tigrbl-identity-jose==0.4.0.dev2",
+      "tigrbl-identity-oauth==0.4.0.dev2",
+      "tigrbl-identity-oidc==0.4.0.dev2",
+      "tigrbl-identity-principals==0.4.0.dev2",
+      "tigrbl-identity-operator==0.4.0.dev2",
+      "tigrbl-identity-policy==0.4.0.dev2",
+      "tigrbl-identity-resource-server==0.4.0.dev2",
+      "tigrbl-identity-rp==0.4.0.dev2",
+      "tigrbl-identity-runtime==0.4.0.dev2",
+      "tigrbl-identity-server==0.4.0.dev2",
+      "tigrbl-identity-storage==0.4.0.dev2",
       "tomli==2.4.0; python_version<'3.11'"
     ],
     "optional_dependencies": {
@@ -151,9 +177,13 @@
       ]
     },
     "workspace_sources_present": false,
+    "workspace_sources_declared": true,
+    "first_party_workspace_source_count": 22,
+    "forbidden_workspace_source_count": 0,
+    "forbidden_workspace_sources": {},
     "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 22,
-    "dependency_count": 22
+    "exact_pinned_dependency_count": 44,
+    "dependency_count": 44
   },
   "constraints_consistency": {
     "passed": true,
@@ -165,7 +195,7 @@
       "hypercorn": [],
       "tigrcorn": []
     },
-    "base_count": 22,
+    "base_count": 44,
     "test_count": 7,
     "uvicorn_count": 1,
     "hypercorn_count": 1,
@@ -1168,9 +1198,9 @@
     ],
     "runtime_surface_results": [
       {
-        "module": "tigrbl_auth.api.app",
-        "passed": true,
-        "message": "import surface resolvable"
+        "module": "tigrbl_identity_server.api.app",
+        "passed": false,
+        "message": "module source missing"
       },
       {
         "module": "tigrbl_auth.app",

@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "tigrbl_auth public auth server",
-    "version": "0.3.4",
+    "version": "0.4.0.dev2",
     "description": "Generated public contract filtered by the effective deployment boundary."
   },
   "servers": [
@@ -390,6 +390,742 @@
         }
       }
     },
+    "/account/profile": {
+      "get": {
+        "operationId": "get_account_profile",
+        "summary": "End-user profile self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "patch": {
+        "operationId": "patch_account_profile",
+        "summary": "End-user profile self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/sessions": {
+      "get": {
+        "operationId": "get_account_sessions",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_sessions",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/sessions/{session_id}": {
+      "get": {
+        "operationId": "get_account_sessions_session_id",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_sessions_session_id",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/consents": {
+      "get": {
+        "operationId": "get_account_consents",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_consents",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/consents/{consent_id}": {
+      "get": {
+        "operationId": "get_account_consents_consent_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_consents_consent_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/authorized-apps": {
+      "get": {
+        "operationId": "get_account_authorized_apps",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_authorized_apps",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/authorized-apps/{client_id}": {
+      "get": {
+        "operationId": "get_account_authorized_apps_client_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_authorized_apps_client_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
+    "/account/password/change": {
+      "post": {
+        "operationId": "post_account_password_change",
+        "summary": "End-user credential self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
+      }
+    },
     "/.well-known/openid-configuration": {
       "get": {
         "operationId": "get__well_known_openid_configuration",
@@ -505,6 +1241,60 @@
             }
           }
         ]
+      }
+    },
+    "/realms/{realm_slug}/.well-known/openid-configuration": {
+      "get": {
+        "operationId": "get_realms_realm_slug__well_known_openid_configuration",
+        "summary": "Realm-scoped OIDC discovery document",
+        "tags": [
+          ".well-known",
+          "realm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_discovery",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
       }
     },
     "/.well-known/oauth-authorization-server": {
@@ -675,6 +1465,60 @@
             }
           }
         ]
+      }
+    },
+    "/realms/{realm_slug}/.well-known/jwks.json": {
+      "get": {
+        "operationId": "get_realms_realm_slug__well_known_jwks_json",
+        "summary": "Realm-scoped JSON Web Key Set",
+        "tags": [
+          ".well-known",
+          "realm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7517",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "baseline",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "password"
+          ],
+          "allowed_response_types": [
+            "code",
+            "token",
+            "id_token",
+            "code token",
+            "code id_token",
+            "token id_token",
+            "code token id_token"
+          ],
+          "par_required": false,
+          "sender_constraint_required": false,
+          "dpop_supported": false,
+          "mtls_supported": false,
+          "resource_indicators_supported": false,
+          "request_objects_supported": false,
+          "rich_authorization_requests_supported": false,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": false
+        }
       }
     }
   },

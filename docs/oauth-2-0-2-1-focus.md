@@ -24,12 +24,12 @@ Normative anchors:
 
 | Area | Current state | Evidence | Interpretation |
 |---|---|---|---|
-| OAuth protocol package | `tigrbl-identity-oauth` owns OAuth 2.x protocol behavior below route composition. | [`tigrbl-identity-oauth` README](../pkgs/tigrbl-identity-oauth/README.md) | This is the right package for OAuth 2.0 and OAuth 2.1 profile logic. |
+| OAuth protocol package | `tigrbl-auth-protocol-oauth` owns OAuth 2.x protocol behavior below route composition. | [`tigrbl-auth-protocol-oauth` README](../pkgs/tigrbl-auth-protocol-oauth/README.md) | This is the right package for OAuth 2.0 and OAuth 2.1 profile logic. |
 | Public authorization-server frontdoor | `tigrbl-auth-api-public` exposes login, authorize, token, logout, registration, discovery, JWKS, and public OAuth/OIDC helpers. | [`tigrbl-auth-api-public` README](../pkgs/tigrbl-auth-api-public/README.md) | This is the deployable AS frontdoor for OAuth/OIDC protocol endpoints. |
 | Resource validation frontdoor | `tigrbl-auth-api-resource-validation` exposes validation and metadata surfaces such as JWKS, introspection, and protected-resource metadata. | [`tigrbl-auth-api-resource-validation` README](../pkgs/tigrbl-auth-api-resource-validation/README.md), [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is the protected-resource / resource-server integration surface. |
 | Developer frontdoor | `tigrbl-auth-api-developer` owns developer-facing client registration and client management. | [`tigrbl-auth-api-developer` README](../pkgs/tigrbl-auth-api-developer/README.md) | OAuth client policy belongs here, while public protocol endpoints stay in public-api. |
 | Service admin frontdoor | `tigrbl-auth-api-service-admin` owns service/workload identity administration. | [`tigrbl-auth-api-service-admin` README](../pkgs/tigrbl-auth-api-service-admin/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
-| RP package | `tigrbl-identity-rp` is the app-side relying-party integration. | [`tigrbl-identity-rp` README](../pkgs/tigrbl-identity-rp/README.md) | Client/RP behavior should be tested separately from AS behavior. |
+| RP package | `tigrbl-auth-protocol-rp` is the app-side relying-party integration. | [`tigrbl-auth-protocol-rp` README](../pkgs/tigrbl-auth-protocol-rp/README.md) | Client/RP behavior should be tested separately from AS behavior. |
 | OAuth 2.1 profile | Tracked only as alignment, not a final standard claim. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is correct and should remain true until OAuth 2.1 exits draft state. |
 | Password grant signal | A `PasswordGrantForm` contract exists today. | [`rest.py`](../pkgs/tigrbl-identity-contracts/src/tigrbl_identity_contracts/rest.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
 
@@ -37,7 +37,7 @@ Normative anchors:
 
 | Standard / profile | Status in repo direction | Owning surface | OAuth 2.1 relevance |
 |---|---|---|---|
-| RFC 6749 OAuth 2.0 | Baseline certifiable target. | `tigrbl-identity-oauth`, `tigrbl-auth-api-public` | Foundation that OAuth 2.1 consolidates and tightens. |
+| RFC 6749 OAuth 2.0 | Baseline certifiable target. | `tigrbl-auth-protocol-oauth`, `tigrbl-auth-api-public` | Foundation that OAuth 2.1 consolidates and tightens. |
 | RFC 6750 Bearer Tokens | Baseline certifiable target. | Public API, resource validation API, resource-server integrations | OAuth 2.1 posture should disallow bearer tokens in query transport. |
 | RFC 7636 PKCE | Baseline certifiable target. | Public API authorize/token flow, RP package | Core OAuth 2.1 profile requirement for authorization-code clients. |
 | RFC 7009 Token Revocation | Production-completion target. | Public API `/revoke` | Required for serious client/session lifecycle management. |
@@ -77,16 +77,16 @@ Normative anchors:
 
 | Capability | Package / API owner | Route or product shape | Notes |
 |---|---|---|---|
-| Authorization endpoint | `tigrbl-auth-api-public`, backed by `tigrbl-identity-oauth` | `/authorize` | OAuth 2.1 profile should require PKCE and reject implicit. |
-| Token endpoint | `tigrbl-auth-api-public`, backed by `tigrbl-identity-oauth` and credentials/JOSE/storage | `/token` | Must enforce grant allowlist by profile and client type. |
+| Authorization endpoint | `tigrbl-auth-api-public`, backed by `tigrbl-auth-protocol-oauth` | `/authorize` | OAuth 2.1 profile should require PKCE and reject implicit. |
+| Token endpoint | `tigrbl-auth-api-public`, backed by `tigrbl-auth-protocol-oauth` and credentials/JOSE/storage | `/token` | Must enforce grant allowlist by profile and client type. |
 | Revocation | `tigrbl-auth-api-public` | `/revoke` | Also needs tenant/client scoping and audit. |
 | Introspection | `tigrbl-auth-api-resource-validation` as preferred validation surface | `/introspect` where exposed | Resource validation should be the clean product surface for protected APIs. |
 | Authorization server metadata | `tigrbl-auth-api-public` | `/.well-known/oauth-authorization-server` | Must be profile-specific and issuer-correct. |
 | JWKS | `tigrbl-auth-api-resource-validation` and public issuer metadata | `/.well-known/jwks.json`, tenant JWKS | Signing-key metadata supports resource-server validation. |
 | Dynamic registration | Public API for protocol endpoint, developer API for product lifecycle | `/register`, client-management routes | Developer API should own policy, lifecycle, UI-facing registration management. |
 | M2M / client credentials | `tigrbl-auth-api-service-admin`, `tigrbl-auth-api-developer`, token endpoint | service clients, workload credentials, `/token` | Product lane needs explicit scopes, resources, rotation, and audit. |
-| RP behavior | `tigrbl-identity-rp`, `@tigrbl-auth/rp` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
-| Resource server behavior | `tigrbl-identity-resource-server`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
+| RP behavior | `tigrbl-auth-protocol-rp`, `@tigrbl-auth/rp` | SDK/client integration | Should verify metadata consumption, PKCE, state/nonce, token exchange, and logout behavior. |
+| Resource server behavior | `tigrbl-authz-resource-server`, resource validation API | API middleware/integration | Should validate JWT/opaque tokens, issuer, audience/resource, scopes, DPoP/mTLS where enabled. |
 
 ## Competitor Surface Comparison
 
@@ -148,13 +148,13 @@ Do not replace current OAuth 2.0 entities. Add a narrow profile contract and pro
 OAuth 2.1 should not force a new deployable API package. It should be a runtime/profile mode across existing packages:
 
 ```text
-tigrbl-identity-oauth                    # OAuth 2.0 + extension RFC logic, OAuth 2.1 profile rules
+tigrbl-auth-protocol-oauth                    # OAuth 2.0 + extension RFC logic, OAuth 2.1 profile rules
 tigrbl-auth-api-public                   # authorize/token/revoke/register/discovery/JWKS protocol frontdoor
 tigrbl-auth-api-resource-validation      # introspection, JWKS, protected-resource metadata
 tigrbl-auth-api-developer                # client registration, redirect/grant/client policy
 tigrbl-auth-api-service-admin            # M2M/workload/service identity lifecycle
-tigrbl-identity-rp / @tigrbl-auth/rp     # OAuth/OIDC client and RP behavior
-tigrbl-identity-resource-server          # protected API token validation integration
+tigrbl-auth-protocol-rp / @tigrbl-auth/rp     # OAuth/OIDC client and RP behavior
+tigrbl-authz-resource-server          # protected API token validation integration
 ```
 
 The practical course is to keep OAuth 2.0 broad and interoperable, then add a stricter OAuth 2.1 alignment profile that operators can enable and tests can certify without overstating draft-standard status.

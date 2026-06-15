@@ -23,7 +23,7 @@ The main distinction: these are not competing features where one replaces the ot
 
 | Area | Current state | Evidence | Interpretation |
 | --- | --- | --- | --- |
-| Policy package boundary | `tigrbl-identity-policy` explicitly owns authorization decisions and prevents policy logic from leaking into OAuth, OIDC, admin, server, and principals code. | [ADR-1099](../.ssot/adr/ADR-1099-policy-is-an-explicit-package-boundary.yaml), [`tigrbl-identity-policy` README](../pkgs/tigrbl-identity-policy/README.md) | This is the right architectural center for RBAC/ABAC/PBAC/delegation decisions. |
+| Policy package boundary | `tigrbl-authz-policy` explicitly owns authorization decisions and prevents policy logic from leaking into OAuth, OIDC, admin, server, and principals code. | [ADR-1099](../.ssot/adr/ADR-1099-policy-is-an-explicit-package-boundary.yaml), [`tigrbl-authz-policy` README](../pkgs/tigrbl-authz-policy/README.md) | This is the right architectural center for RBAC/ABAC/PBAC/delegation decisions. |
 | Executable RBAC/ABAC/PBAC/delegation | Unit coverage exercises `RolePolicy`, `AttributePolicy`, `PermissionPolicy`, `DelegationPolicy`, `AdminPolicy`, `PolicyRequest`, `PolicyDecisionEngine`, and decision traces. | [`test_jose_policy_boundary.py`](../tests/unit/test_jose_policy_boundary.py) | These are implemented primitives with tests, but still need product-level admin/API surfaces and storage contracts. |
 | Decision trace | Policy engine records trace IDs, matched policies, evaluated kinds, and denial reasons. | [`test_jose_policy_boundary.py`](../tests/unit/test_jose_policy_boundary.py) | Strong foundation for explainable authorization and audit. |
 | ReBAC / graph authorization | Phase 4 tests include `RelationshipGraph`, relationship definitions, tuples, and graph-based access decisions. | [`test_phase4_advanced_identity_boundary.py`](../tests/unit/test_phase4_advanced_identity_boundary.py) | ReBAC exists as advanced identity behavior, not yet a canonical product/storage/API surface. |
@@ -48,11 +48,11 @@ The main distinction: these are not competing features where one replaces the ot
 
 | Layer | Owns | Does not own |
 | --- | --- | --- |
-| `tigrbl-identity-policy` | Policy request/decision contracts, RBAC, ABAC, PBAC, delegation, tenant isolation, scope/permission decisions, decision traces. | Credential verification, token signing, route mounting, DB sessions. |
+| `tigrbl-authz-policy` | Policy request/decision contracts, RBAC, ABAC, PBAC, delegation, tenant isolation, scope/permission decisions, decision traces. | Credential verification, token signing, route mounting, DB sessions. |
 | `tigrbl-identity-principals` | Principal facts: user, admin, owner, service, workload, client, tenant membership, roles as facts. | Final authorization decisions. |
-| `tigrbl-identity-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
-| `tigrbl-identity-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
-| `tigrbl-identity-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
+| `tigrbl-authn-credentials` | Credential facts and proof posture: password, API key, service key, client secret, MFA/passkey status. | Whether a credential grants permission to perform an action. |
+| `tigrbl-auth-protocol-oauth` | OAuth scopes, resource indicators, consent inputs, token issuance hooks. | Tenant/admin authorization policy itself. |
+| `tigrbl-authz-resource-server` | Downstream enforcement of audience, scope, token validity, proof binding, and policy hooks. | Issuing tokens or managing policy definitions. |
 | `tigrbl-identity-storage` | Canonical policy, role, permission, grant, relationship, assignment, audit, and version tables. | Policy semantics. |
 | Admin frontdoors | Product-scoped policy configuration and assignment under platform, tenant, developer, or service authority. | Low-level policy evaluation internals. |
 

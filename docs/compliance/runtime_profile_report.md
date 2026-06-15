@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260519T045705Z`
+- Generated at: `20260615T043627Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
 - Validated artifact source: `dist/validated-runs/collected-artifact-downloads.json`
@@ -26,7 +26,7 @@
 
 ## Application Probe
 
-- App factory: `tigrbl_auth.api.app.build_app`
+- App factory: `tigrbl_identity_server.api.app.build_app`
 - Message: Validated runtime manifests are missing or failing for the base application-factory environments: base@py3.13, base@py3.14
 
 ## Surface Probe
@@ -44,7 +44,7 @@
 
 - Status: `invalid`
 - Installed: `False`
-- Module: `hypercorn`
+- Module: `None`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`
@@ -60,7 +60,7 @@
 
 - Status: `invalid`
 - Installed: `False`
-- Module: `tigrcorn`
+- Module: `None`
 - Placeholder-supported: `False`
 - Declared CI-installable: `True`
 - Serve check passed: `False`

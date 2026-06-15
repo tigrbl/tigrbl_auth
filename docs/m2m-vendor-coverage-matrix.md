@@ -41,7 +41,7 @@ For `tigrbl_auth`, the product should be named explicitly as **M2M / Workload Id
 | Tenant/platform authority boundaries | `tigrbl-auth-api-platform-admin`, `tigrbl-auth-api-tenant-admin` |
 | Persistence and canonical tables | `tigrbl-identity-storage` |
 | Signing and token crypto | `tigrbl-identity-jose` |
-| Authorization decisions | `tigrbl-identity-policy` |
+| Authorization decisions | `tigrbl-authz-policy` |
 
 Recommended near-term framing:
 

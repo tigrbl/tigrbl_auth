@@ -50,13 +50,13 @@ For `tigrbl_auth`, the clean product split is:
 
 | Layer | Recommended owner |
 | --- | --- |
-| Factor proof material | `tigrbl-identity-credentials` |
-| MFA requirement decisions | `tigrbl-identity-policy` |
-| Challenge/session continuation | `tigrbl-auth-api-public`, `tigrbl-identity-oauth`, `tigrbl-identity-oidc` |
+| Factor proof material | `tigrbl-authn-credentials` |
+| MFA requirement decisions | `tigrbl-authz-policy` |
+| Challenge/session continuation | `tigrbl-auth-api-public`, `tigrbl-auth-protocol-oauth`, `tigrbl-auth-protocol-oidc` |
 | Factor and challenge storage | `tigrbl-identity-storage` |
 | Tenant policy and support reset | `tigrbl-auth-api-tenant-admin` |
 | Hosted login MFA UI | `@tigrbl-auth/public-uix` |
-| Assurance claims | `tigrbl-identity-jose`, `tigrbl-identity-oidc` |
+| Assurance claims | `tigrbl-identity-jose`, `tigrbl-auth-protocol-oidc` |
 
 Recommended near-term stance:
 

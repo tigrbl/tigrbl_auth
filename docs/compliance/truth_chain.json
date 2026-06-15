@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-18",
+  "generated_at": "2026-06-14",
   "source_of_truth": [
     ".ssot/registry.json",
     ".ssot/specs/SPEC-1052-ssot-document-authority.yaml",
@@ -55,9 +55,11 @@
       "Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.",
       "Validated clean-room install matrix evidence is incomplete or missing.",
       "Validated in-scope certification lane execution evidence is incomplete or missing.",
+      "Current generated public artifacts still drift from executable reality.",
       "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "At least one claim row is still missing a machine-derived certification proof binding.",
-      "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
+      "Release evidence can now be built only from a clean checkout, and the current workspace is dirty.",
+      "Current authoritative docs still contain stale code-path references."
     ],
     "final_release_failures": [
       "Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.",
@@ -69,8 +71,8 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "7306d012acf0ba2f4f107f9e7ea95917b101b7ef99674b0629839a34022ece94",
-    "docs/compliance/certification_state_report.json": "1355ee468722f6ca70559dbca146856a4b2fa198fce65280af1a61ab1fed8f20",
+    "docs/compliance/current_state_report.json": "99e28041bcaaf4e99d017c11258378c825d01f96983f1aef874f41b7050ce076",
+    "docs/compliance/certification_state_report.json": "4fcd2fd2a8f159b772c0ef552029654e8db486ba539816b6693866c765c81cca",
     "docs/compliance/release_gate_report.json": "c60722a98a571a1800cdb3b06690f433822df1f60572ba0be44a565ad28d8c39",
     "docs/compliance/final_release_gate_report.json": "43526484a5a25b65668c9a42005bef8c3fd25b502e01d8ce8b9b7197d4e09353",
     "docs/compliance/non_rfc_status_report.json": "fce26f8e9e6dd4b54c6ed6c3428b5b87b48251e2146d4e4a0205f817d21fb9ee"

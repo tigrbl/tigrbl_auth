@@ -1,4 +1,4 @@
-﻿> [!WARNING]
+> [!WARNING]
 > Non-authoritative active document.
 > Use this as a future-state product journey note, not as certification or release truth.
 > For current executable and release truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and the generated reference surfaces.
@@ -107,7 +107,7 @@ Assumption: `direct customer` means a customer using Acme's identity platform di
    3. As a tenant developer, I want to select public or confidential client posture so that my app's credential model matches its runtime.
 2. Journey: operate app integration.
    1. As a tenant developer, I want to rotate client secrets or JWKS metadata so that app credentials can be maintained safely.
-   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tigrbl-auth/rp` or `tigrbl-identity-rp`.
+   2. As a tenant developer, I want discovery URLs and SDK examples so that I can implement login with `@tigrbl-auth/rp` or `tigrbl-auth-protocol-rp`.
    3. As a tenant developer, I want test and production client records so that I can validate integration before affecting users.
 3. Journey: debug and evolve tenant apps.
    1. As a tenant developer, I want to inspect authorization, callback, token, and logout failures so that I can resolve integration issues.
@@ -175,100 +175,100 @@ Product columns:
 
 Cell legend:
 
-- ✅ Product is directly involved in the story.
+- ? Product is directly involved in the story.
 - Blank cell means the product is not directly involved in that story.
 
 | Role | Journey | Story | IDP | Platform Admin | Tenant Admin | Public Portal | Developer Portal | Service Admin | SDK/API |
 |---|---|---|---|---|---|---|---|---|---|
-| Platform owner | establish the identity platform | configure global IDP, domains, compliance posture, and default tenant policies | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | establish the identity platform | define tenancy model, authority boundaries, and product tiers | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | establish the identity platform | view tenant, operator, and security boundaries | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | delegate platform authority | appoint platform administrators and operators | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | delegate platform authority | require approval rules for privileged changes | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | delegate platform authority | separate business administration from runtime operations | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | steer platform lifecycle and risk | review adoption, incident, compliance, and tenant-risk reports | ✅ | ✅ |  |  |  |  |  |
-| Platform owner | steer platform lifecycle and risk | approve rollout of developer and service product surfaces | ✅ | ✅ |  |  | ✅ | ✅ |  |
-| Platform owner | steer platform lifecycle and risk | review certification and evidence summaries | ✅ | ✅ |  |  |  |  |  |
-| Platform administrator | onboard tenants | create tenant Beta | ✅ | ✅ |  |  |  |  |  |
-| Platform administrator | onboard tenants | assign tenant owner or tenant admin | ✅ | ✅ | ✅ |  |  |  |  |
-| Platform administrator | onboard tenants | verify tenant discovery, JWKS, and default branding | ✅ | ✅ | ✅ | ✅ |  |  |  |
-| Platform administrator | support tenant lifecycle | inspect tenant status, admins, and configuration | ✅ | ✅ |  |  |  |  |  |
-| Platform administrator | support tenant lifecycle | suspend, recover, or retire tenants | ✅ | ✅ |  |  |  |  |  |
-| Platform administrator | support tenant lifecycle | transfer tenant ownership safely | ✅ | ✅ | ✅ |  |  |  |  |
-| Platform administrator | manage tenant entitlements and templates | assign tenant feature tiers | ✅ | ✅ |  |  |  |  |  |
-| Platform administrator | manage tenant entitlements and templates | apply tenant templates for login, registration, developer access, and service identity | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| Platform administrator | manage tenant entitlements and templates | review tenant usage and entitlement drift | ✅ | ✅ |  |  |  |  |  |
-| Platform operators | run the shared platform | deploy and monitor IDP, public UIX, and admin consoles | ✅ | ✅ | ✅ | ✅ |  |  |  |
-| Platform operators | run the shared platform | manage scaling, backups, and restore procedures | ✅ |  |  |  |  |  |  |
-| Platform operators | run the shared platform | run smoke checks for public, admin, discovery, JWKS, and token surfaces | ✅ | ✅ | ✅ | ✅ |  |  |  |
-| Platform operators | maintain security posture | rotate platform infrastructure secrets and runtime configuration | ✅ | ✅ |  |  |  |  |  |
-| Platform operators | maintain security posture | use audit-safe break-glass access | ✅ | ✅ |  |  |  |  |  |
-| Platform operators | maintain security posture | patch dependencies and runtime images with change evidence | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Platform operators | respond to incidents | triage outages across IDP, UIX, token, and discovery surfaces | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| Platform operators | respond to incidents | isolate tenant-impacting configuration or key issues | ✅ | ✅ | ✅ |  |  |  |  |
-| Platform operators | respond to incidents | produce post-incident evidence and recovery notes | ✅ | ✅ |  |  |  |  |  |
-| Tenant owner | accept and configure tenancy | claim Beta's tenant boundary | ✅ |  | ✅ |  |  |  |  |
-| Tenant owner | accept and configure tenancy | configure tenant branding, issuer metadata, and login defaults | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant owner | accept and configure tenancy | approve baseline policy and registration defaults | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant owner | delegate tenant authority | appoint tenant admins | ✅ |  | ✅ |  |  |  |  |
-| Tenant owner | delegate tenant authority | delegate developer and service-owner permissions | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant owner | delegate tenant authority | review and revoke delegated permissions | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant owner | govern tenant risk and lifecycle | review audit trails, app inventory, and service identities | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant owner | govern tenant risk and lifecycle | approve key rotations, app trust changes, and service identity changes | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant owner | govern tenant risk and lifecycle | manage tenant export, retention, and offboarding controls | ✅ |  | ✅ |  |  |  |  |
-| Tenant admin | manage tenant identities | create, update, deactivate, and recover tenant users | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant admin | manage tenant identities | issue credentials and reset access | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant admin | manage tenant identities | manage user status, password-change requirements, and role flags | ✅ |  | ✅ |  |  |  |  |
-| Tenant admin | manage tenant auth posture | rotate tenant JWKS and signing keys | ✅ |  | ✅ |  |  |  |  |
-| Tenant admin | manage tenant auth posture | review tenant apps, service identities, and policy settings | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Tenant admin | manage tenant auth posture | verify tenant discovery and JWKS publication | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant admin | support tenant users and developers | troubleshoot login, registration, recovery, consent, and logout | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant admin | support tenant users and developers | approve or reject developer app requests | ✅ |  | ✅ |  | ✅ |  |  |
-| Tenant admin | support tenant users and developers | grant service or workload access to approved owners | ✅ |  | ✅ |  |  | ✅ |  |
-| Tenant user | authenticate into tenant apps | log in through tenant-branded public UIX | ✅ |  |  | ✅ |  |  |  |
-| Tenant user | authenticate into tenant apps | consent to app access | ✅ |  |  | ✅ |  |  | ✅ |
-| Tenant user | authenticate into tenant apps | use predictable sessions and token refresh | ✅ |  |  | ✅ |  |  | ✅ |
-| Tenant user | manage personal account access | register, recover password, reset password, logout, and manage profile | ✅ |  |  | ✅ |  |  |  |
-| Tenant user | manage personal account access | route consistently through the correct tenant namespace | ✅ |  |  | ✅ |  |  |  |
-| Tenant user | manage personal account access | receive tenant-matched verification and recovery messages | ✅ |  |  | ✅ |  |  |  |
-| Tenant user | control personal authorization | view authorized applications | ✅ |  |  | ✅ |  |  |  |
-| Tenant user | control personal authorization | revoke or end app sessions where supported | ✅ |  |  | ✅ |  |  | ✅ |
-| Tenant user | control personal authorization | log out of the intended tenant session | ✅ |  |  | ✅ |  |  |  |
-| Tenant user developer | create tenant-owned applications | register an OIDC app | ✅ |  |  |  | ✅ |  |  |
-| Tenant user developer | create tenant-owned applications | configure redirect URIs, grants, client auth method, and metadata | ✅ |  |  |  | ✅ |  |  |
-| Tenant user developer | create tenant-owned applications | select public or confidential client posture | ✅ |  |  |  | ✅ |  |  |
-| Tenant user developer | operate app integration | rotate client secrets or JWKS metadata | ✅ |  |  |  | ✅ |  |  |
-| Tenant user developer | operate app integration | use discovery URLs and SDK examples | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant user developer | operate app integration | manage test and production client records | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant user developer | debug and evolve tenant apps | inspect authorization, callback, token, and logout failures | ✅ |  |  | ✅ | ✅ |  | ✅ |
-| Tenant user developer | debug and evolve tenant apps | update scopes and consent metadata | ✅ |  |  | ✅ | ✅ |  |  |
-| Tenant user developer | debug and evolve tenant apps | decommission old clients safely | ✅ |  |  |  | ✅ |  |  |
-| Tenant's customer | use a tenant-created app | register or log in through tenant-branded auth | ✅ |  |  | ✅ |  |  |  |
-| Tenant's customer | use a tenant-created app | recover password, reset password, logout, and verify account | ✅ |  |  | ✅ |  |  |  |
-| Tenant's customer | use a tenant-created app | see clear tenant and app identity in login | ✅ |  |  | ✅ |  |  | ✅ |
-| Tenant's customer | authorize application access | see consent prompts that name the tenant app | ✅ |  |  | ✅ | ✅ |  |  |
-| Tenant's customer | authorize application access | use session and logout across app and IDP | ✅ |  |  | ✅ |  |  | ✅ |
-| Tenant's customer | authorize application access | see consent that matches requested scopes | ✅ |  |  | ✅ | ✅ |  |  |
-| Tenant's customer | manage customer account lifecycle | update profile and contact data where allowed | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant's customer | manage customer account lifecycle | recover access without support for common issues | ✅ |  |  | ✅ |  |  |  |
-| Tenant's customer | manage customer account lifecycle | understand account closure or access-removal behavior | ✅ |  | ✅ | ✅ |  |  |  |
-| Tenant's customer developer | integrate with a tenant's developer ecosystem | receive delegated access to developer portal | ✅ |  | ✅ |  | ✅ |  |  |
-| Tenant's customer developer | integrate with a tenant's developer ecosystem | manage app credentials, redirect URIs, and discovery metadata | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant's customer developer | integrate with a tenant's developer ecosystem | receive delegated permissions scoped to customer organization or app | ✅ |  | ✅ |  | ✅ |  |  |
-| Tenant's customer developer | consume tenant-protected APIs | use token, JWKS, and introspection guidance | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant's customer developer | consume tenant-protected APIs | use sandbox and test clients before production approval | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant's customer developer | consume tenant-protected APIs | follow resource and audience guidance for protected APIs | ✅ |  |  |  | ✅ |  | ✅ |
-| Tenant's customer developer | operate third-party integration lifecycle | rotate credentials without tenant support tickets | ✅ |  |  |  | ✅ |  |  |
-| Tenant's customer developer | operate third-party integration lifecycle | view relevant integration audit events | ✅ |  | ✅ |  | ✅ |  |  |
-| Tenant's customer developer | operate third-party integration lifecycle | request approval for expanded scopes | ✅ |  | ✅ |  | ✅ |  |  |
-| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | provision organization as a first-class tenant | ✅ | ✅ | ✅ |  |  |  |  |
-| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | use tenant-admin capabilities without Acme operating the tenant | ✅ |  | ✅ |  |  |  |  |
-| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | assign admins, developers, and service owners | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Direct customer owner / admin / developer / user | build and use direct customer apps | register apps and implement login with developer UIX and RP SDKs | ✅ |  |  |  | ✅ |  | ✅ |
-| Direct customer owner / admin / developer / user | build and use direct customer apps | use public UIX login, registration, recovery, consent, logout, and profile | ✅ |  |  | ✅ |  |  |  |
-| Direct customer owner / admin / developer / user | build and use direct customer apps | use tenant discovery and SDK guidance | ✅ |  |  | ✅ | ✅ |  | ✅ |
-| Direct customer owner / admin / developer / user | operate direct customer security | rotate tenant keys and review app/service access | ✅ |  | ✅ |  | ✅ | ✅ |  |
-| Direct customer owner / admin / developer / user | operate direct customer security | review audit and compliance evidence for the tenant | ✅ | ✅ | ✅ |  |  |  |  |
-| Direct customer owner / admin / developer / user | operate direct customer security | trust account recovery, consent, and logout behavior | ✅ |  |  | ✅ |  |  |  |
+| Platform owner | establish the identity platform | configure global IDP, domains, compliance posture, and default tenant policies | ? | ? |  |  |  |  |  |
+| Platform owner | establish the identity platform | define tenancy model, authority boundaries, and product tiers | ? | ? |  |  |  |  |  |
+| Platform owner | establish the identity platform | view tenant, operator, and security boundaries | ? | ? |  |  |  |  |  |
+| Platform owner | delegate platform authority | appoint platform administrators and operators | ? | ? |  |  |  |  |  |
+| Platform owner | delegate platform authority | require approval rules for privileged changes | ? | ? |  |  |  |  |  |
+| Platform owner | delegate platform authority | separate business administration from runtime operations | ? | ? |  |  |  |  |  |
+| Platform owner | steer platform lifecycle and risk | review adoption, incident, compliance, and tenant-risk reports | ? | ? |  |  |  |  |  |
+| Platform owner | steer platform lifecycle and risk | approve rollout of developer and service product surfaces | ? | ? |  |  | ? | ? |  |
+| Platform owner | steer platform lifecycle and risk | review certification and evidence summaries | ? | ? |  |  |  |  |  |
+| Platform administrator | onboard tenants | create tenant Beta | ? | ? |  |  |  |  |  |
+| Platform administrator | onboard tenants | assign tenant owner or tenant admin | ? | ? | ? |  |  |  |  |
+| Platform administrator | onboard tenants | verify tenant discovery, JWKS, and default branding | ? | ? | ? | ? |  |  |  |
+| Platform administrator | support tenant lifecycle | inspect tenant status, admins, and configuration | ? | ? |  |  |  |  |  |
+| Platform administrator | support tenant lifecycle | suspend, recover, or retire tenants | ? | ? |  |  |  |  |  |
+| Platform administrator | support tenant lifecycle | transfer tenant ownership safely | ? | ? | ? |  |  |  |  |
+| Platform administrator | manage tenant entitlements and templates | assign tenant feature tiers | ? | ? |  |  |  |  |  |
+| Platform administrator | manage tenant entitlements and templates | apply tenant templates for login, registration, developer access, and service identity | ? | ? | ? | ? | ? | ? |  |
+| Platform administrator | manage tenant entitlements and templates | review tenant usage and entitlement drift | ? | ? |  |  |  |  |  |
+| Platform operators | run the shared platform | deploy and monitor IDP, public UIX, and admin consoles | ? | ? | ? | ? |  |  |  |
+| Platform operators | run the shared platform | manage scaling, backups, and restore procedures | ? |  |  |  |  |  |  |
+| Platform operators | run the shared platform | run smoke checks for public, admin, discovery, JWKS, and token surfaces | ? | ? | ? | ? |  |  |  |
+| Platform operators | maintain security posture | rotate platform infrastructure secrets and runtime configuration | ? | ? |  |  |  |  |  |
+| Platform operators | maintain security posture | use audit-safe break-glass access | ? | ? |  |  |  |  |  |
+| Platform operators | maintain security posture | patch dependencies and runtime images with change evidence | ? | ? | ? | ? | ? | ? | ? |
+| Platform operators | respond to incidents | triage outages across IDP, UIX, token, and discovery surfaces | ? | ? | ? | ? | ? | ? |  |
+| Platform operators | respond to incidents | isolate tenant-impacting configuration or key issues | ? | ? | ? |  |  |  |  |
+| Platform operators | respond to incidents | produce post-incident evidence and recovery notes | ? | ? |  |  |  |  |  |
+| Tenant owner | accept and configure tenancy | claim Beta's tenant boundary | ? |  | ? |  |  |  |  |
+| Tenant owner | accept and configure tenancy | configure tenant branding, issuer metadata, and login defaults | ? |  | ? | ? |  |  |  |
+| Tenant owner | accept and configure tenancy | approve baseline policy and registration defaults | ? |  | ? |  | ? | ? |  |
+| Tenant owner | delegate tenant authority | appoint tenant admins | ? |  | ? |  |  |  |  |
+| Tenant owner | delegate tenant authority | delegate developer and service-owner permissions | ? |  | ? |  | ? | ? |  |
+| Tenant owner | delegate tenant authority | review and revoke delegated permissions | ? |  | ? |  | ? | ? |  |
+| Tenant owner | govern tenant risk and lifecycle | review audit trails, app inventory, and service identities | ? |  | ? |  | ? | ? |  |
+| Tenant owner | govern tenant risk and lifecycle | approve key rotations, app trust changes, and service identity changes | ? |  | ? |  | ? | ? |  |
+| Tenant owner | govern tenant risk and lifecycle | manage tenant export, retention, and offboarding controls | ? |  | ? |  |  |  |  |
+| Tenant admin | manage tenant identities | create, update, deactivate, and recover tenant users | ? |  | ? | ? |  |  |  |
+| Tenant admin | manage tenant identities | issue credentials and reset access | ? |  | ? | ? |  |  |  |
+| Tenant admin | manage tenant identities | manage user status, password-change requirements, and role flags | ? |  | ? |  |  |  |  |
+| Tenant admin | manage tenant auth posture | rotate tenant JWKS and signing keys | ? |  | ? |  |  |  |  |
+| Tenant admin | manage tenant auth posture | review tenant apps, service identities, and policy settings | ? |  | ? |  | ? | ? |  |
+| Tenant admin | manage tenant auth posture | verify tenant discovery and JWKS publication | ? |  | ? | ? |  |  |  |
+| Tenant admin | support tenant users and developers | troubleshoot login, registration, recovery, consent, and logout | ? |  | ? | ? |  |  |  |
+| Tenant admin | support tenant users and developers | approve or reject developer app requests | ? |  | ? |  | ? |  |  |
+| Tenant admin | support tenant users and developers | grant service or workload access to approved owners | ? |  | ? |  |  | ? |  |
+| Tenant user | authenticate into tenant apps | log in through tenant-branded public UIX | ? |  |  | ? |  |  |  |
+| Tenant user | authenticate into tenant apps | consent to app access | ? |  |  | ? |  |  | ? |
+| Tenant user | authenticate into tenant apps | use predictable sessions and token refresh | ? |  |  | ? |  |  | ? |
+| Tenant user | manage personal account access | register, recover password, reset password, logout, and manage profile | ? |  |  | ? |  |  |  |
+| Tenant user | manage personal account access | route consistently through the correct tenant namespace | ? |  |  | ? |  |  |  |
+| Tenant user | manage personal account access | receive tenant-matched verification and recovery messages | ? |  |  | ? |  |  |  |
+| Tenant user | control personal authorization | view authorized applications | ? |  |  | ? |  |  |  |
+| Tenant user | control personal authorization | revoke or end app sessions where supported | ? |  |  | ? |  |  | ? |
+| Tenant user | control personal authorization | log out of the intended tenant session | ? |  |  | ? |  |  |  |
+| Tenant user developer | create tenant-owned applications | register an OIDC app | ? |  |  |  | ? |  |  |
+| Tenant user developer | create tenant-owned applications | configure redirect URIs, grants, client auth method, and metadata | ? |  |  |  | ? |  |  |
+| Tenant user developer | create tenant-owned applications | select public or confidential client posture | ? |  |  |  | ? |  |  |
+| Tenant user developer | operate app integration | rotate client secrets or JWKS metadata | ? |  |  |  | ? |  |  |
+| Tenant user developer | operate app integration | use discovery URLs and SDK examples | ? |  |  |  | ? |  | ? |
+| Tenant user developer | operate app integration | manage test and production client records | ? |  |  |  | ? |  | ? |
+| Tenant user developer | debug and evolve tenant apps | inspect authorization, callback, token, and logout failures | ? |  |  | ? | ? |  | ? |
+| Tenant user developer | debug and evolve tenant apps | update scopes and consent metadata | ? |  |  | ? | ? |  |  |
+| Tenant user developer | debug and evolve tenant apps | decommission old clients safely | ? |  |  |  | ? |  |  |
+| Tenant's customer | use a tenant-created app | register or log in through tenant-branded auth | ? |  |  | ? |  |  |  |
+| Tenant's customer | use a tenant-created app | recover password, reset password, logout, and verify account | ? |  |  | ? |  |  |  |
+| Tenant's customer | use a tenant-created app | see clear tenant and app identity in login | ? |  |  | ? |  |  | ? |
+| Tenant's customer | authorize application access | see consent prompts that name the tenant app | ? |  |  | ? | ? |  |  |
+| Tenant's customer | authorize application access | use session and logout across app and IDP | ? |  |  | ? |  |  | ? |
+| Tenant's customer | authorize application access | see consent that matches requested scopes | ? |  |  | ? | ? |  |  |
+| Tenant's customer | manage customer account lifecycle | update profile and contact data where allowed | ? |  | ? | ? |  |  |  |
+| Tenant's customer | manage customer account lifecycle | recover access without support for common issues | ? |  |  | ? |  |  |  |
+| Tenant's customer | manage customer account lifecycle | understand account closure or access-removal behavior | ? |  | ? | ? |  |  |  |
+| Tenant's customer developer | integrate with a tenant's developer ecosystem | receive delegated access to developer portal | ? |  | ? |  | ? |  |  |
+| Tenant's customer developer | integrate with a tenant's developer ecosystem | manage app credentials, redirect URIs, and discovery metadata | ? |  |  |  | ? |  | ? |
+| Tenant's customer developer | integrate with a tenant's developer ecosystem | receive delegated permissions scoped to customer organization or app | ? |  | ? |  | ? |  |  |
+| Tenant's customer developer | consume tenant-protected APIs | use token, JWKS, and introspection guidance | ? |  |  |  | ? |  | ? |
+| Tenant's customer developer | consume tenant-protected APIs | use sandbox and test clients before production approval | ? |  |  |  | ? |  | ? |
+| Tenant's customer developer | consume tenant-protected APIs | follow resource and audience guidance for protected APIs | ? |  |  |  | ? |  | ? |
+| Tenant's customer developer | operate third-party integration lifecycle | rotate credentials without tenant support tickets | ? |  |  |  | ? |  |  |
+| Tenant's customer developer | operate third-party integration lifecycle | view relevant integration audit events | ? |  | ? |  | ? |  |  |
+| Tenant's customer developer | operate third-party integration lifecycle | request approval for expanded scopes | ? |  | ? |  | ? |  |  |
+| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | provision organization as a first-class tenant | ? | ? | ? |  |  |  |  |
+| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | use tenant-admin capabilities without Acme operating the tenant | ? |  | ? |  |  |  |  |
+| Direct customer owner / admin / developer / user | onboard as a direct Acme customer | assign admins, developers, and service owners | ? |  | ? |  | ? | ? |  |
+| Direct customer owner / admin / developer / user | build and use direct customer apps | register apps and implement login with developer UIX and RP SDKs | ? |  |  |  | ? |  | ? |
+| Direct customer owner / admin / developer / user | build and use direct customer apps | use public UIX login, registration, recovery, consent, logout, and profile | ? |  |  | ? |  |  |  |
+| Direct customer owner / admin / developer / user | build and use direct customer apps | use tenant discovery and SDK guidance | ? |  |  | ? | ? |  | ? |
+| Direct customer owner / admin / developer / user | operate direct customer security | rotate tenant keys and review app/service access | ? |  | ? |  | ? | ? |  |
+| Direct customer owner / admin / developer / user | operate direct customer security | review audit and compliance evidence for the tenant | ? | ? | ? |  |  |  |  |
+| Direct customer owner / admin / developer / user | operate direct customer security | trust account recovery, consent, and logout behavior | ? |  |  | ? |  |  |  |
 
 

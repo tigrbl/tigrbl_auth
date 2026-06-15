@@ -152,7 +152,7 @@
       ".github/workflows/recertify.yml",
       ".github/workflows/release-candidate.yml",
       ".github/workflows/release.yml",
-      "Dockerfile",
+      "docker/Dockerfile",
       "constraints/base.txt",
       "constraints/dependency-lock.json",
       "constraints/runner-hypercorn.txt",
@@ -810,7 +810,7 @@
       "sha256": "a588dfc38734a08a56a7708366951ee71540f0ea6595b9267d476e8fbb0fcc5f"
     },
     {
-      "path": "Dockerfile",
+      "path": "docker/Dockerfile",
       "present": true,
       "sha256": "a0f979413a7656f9c50a20f19055045f1e1b97bc6655e3cd9c671810fc26fff7"
     },

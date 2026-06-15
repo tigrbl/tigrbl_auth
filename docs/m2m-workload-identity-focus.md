@@ -11,8 +11,8 @@ For `tigrbl_auth`, M2M should be a first-class product lane spanning the existin
 - `tigrbl-auth-api-developer` owns application/client registration and developer-facing client policy.
 - `tigrbl-auth-api-resource-validation` owns token validation, JWKS, introspection, and protected-resource metadata.
 - `tigrbl-identity-principals` owns service, workload, client, tenant, and identity-subject semantics.
-- `tigrbl-identity-credentials` owns proof-of-control and credential lifecycle primitives.
-- `tigrbl-identity-oauth` owns `client_credentials`, JWT assertion, mTLS, DPoP, resource indicators, and token-exchange protocol behavior.
+- `tigrbl-authn-credentials` owns proof-of-control and credential lifecycle primitives.
+- `tigrbl-auth-protocol-oauth` owns `client_credentials`, JWT assertion, mTLS, DPoP, resource indicators, and token-exchange protocol behavior.
 - `tigrbl-identity-storage` owns canonical `Service`, `ServiceKey`, `ApiKey`, `Client`, `ClientRegistration`, token, key, and audit tables.
 
 ## Current `tigrbl_auth` State
@@ -22,8 +22,8 @@ For `tigrbl_auth`, M2M should be a first-class product lane spanning the existin
 | Product decision | M2M/workload identity is already drafted as a first-class product lane. | [ADR-1085](../.ssot/adr/ADR-1085-m2m-workload-identity-first-class-product-lane.yaml), [SPEC-1177](../.ssot/specs/SPEC-1177-m2m-workload-identity-product-surface-contract.yaml) | The right direction is already present, but the docs/tests/API shape still need to mature around it. |
 | Service admin API | Service-admin API exposes services, service keys, API keys, token/audit inspection, and validation metadata. | [`tigrbl-auth-api-service-admin` README](../pkgs/tigrbl-auth-api-service-admin/README.md), [SPEC-1160](../.ssot/specs/SPEC-1160-service-admin-api-contract.yaml) | This should be the lifecycle control plane for M2M service/workload identities. |
 | Principals | Principal package names users, services, clients, workloads, devices, and tenants as durable identity-subject context. | [`tigrbl-identity-principals` README](../pkgs/tigrbl-identity-principals/README.md) | M2M should use principal semantics, not treat machines as anonymous API keys. |
-| Credentials | Credentials package covers API keys, auth adapters, session services, and token lifecycle helpers. | [`tigrbl-identity-credentials` README](../pkgs/tigrbl-identity-credentials/README.md) | Secret verification and key lifecycle should stay below frontdoor APIs. |
-| OAuth token flow | `client_credentials` is implemented in token request flow and issues persisted token pairs for a client subject. | [`token.py`](../pkgs/tigrbl-identity-oauth/src/tigrbl_identity_oauth/ops/token.py), [`test_rfc6749_token_endpoint.py`](../tests/unit/test_rfc6749_token_endpoint.py) | Token issuance exists; product semantics around service/workload ownership need tightening. |
+| Credentials | Credentials package covers API keys, auth adapters, session services, and token lifecycle helpers. | [`tigrbl-authn-credentials` README](../pkgs/tigrbl-authn-credentials/README.md) | Secret verification and key lifecycle should stay below frontdoor APIs. |
+| OAuth token flow | `client_credentials` is implemented in token request flow and issues persisted token pairs for a client subject. | [`token.py`](../pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token.py), [`test_rfc6749_token_endpoint.py`](../tests/unit/test_rfc6749_token_endpoint.py) | Token issuance exists; product semantics around service/workload ownership need tightening. |
 | Storage | Canonical storage has `Service`, `ServiceKey`, `ApiKey`, `Client`, `ClientRegistration`, token, revoked-token, key, and audit tables. | [`service.py`](../pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/service.py), [`service_key.py`](../pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/service_key.py), [`api_key.py`](../pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/api_key.py) | The table base is present; workload, resource server, scope grant, client grant, and credential rotation models need sharper contracts. |
 | Service keys | Integration coverage proves service key creation, digest handling, read-time raw-key exclusion, validity windows, and request rejection for raw key/digest injection. | [`test_service_key_creation.py`](../tests/integration/test_service_key_creation.py) | Good credential hygiene exists at service-key level. It should be linked into M2M product tests. |
 | Resource validation | Resource-validation API is the preferred validation and metadata surface. | [OAuth 2.x Vendor Coverage Matrix](oauth-2x-vendor-coverage-matrix.md), [SPEC-1165](../.ssot/specs/SPEC-1165-resource-validation-api-contract.yaml) | M2M is incomplete without resource-server verification and API/resource metadata. |
@@ -77,7 +77,7 @@ For `tigrbl_auth`, M2M should be a first-class product lane spanning the existin
 | `tigrbl-auth-api-service-admin` | Service/workload principal lifecycle, service keys, API keys where service-bound, credential rotation/revocation, M2M audit. | Human login, tenant lifecycle, public consent, developer catalog UX. |
 | `tigrbl-auth-api-developer` | App/client registration, client type, allowed grants, redirect-free M2M client setup, developer-facing credentials. | Operational service ownership, production workload rotation, platform-wide policy. |
 | `tigrbl-auth-api-resource-validation` | JWKS, introspection, protected-resource metadata, issuer/resource/audience validation contracts. | Token issuance and credential lifecycle. |
-| `tigrbl-identity-resource-server` | Protected API integration package: validate tokens, scopes, audience/resource, DPoP/mTLS confirmation claims. | Authorization-server route composition. |
+| `tigrbl-authz-resource-server` | Protected API integration package: validate tokens, scopes, audience/resource, DPoP/mTLS confirmation claims. | Authorization-server route composition. |
 | `@tigrbl-auth/service-admin-uix` | Inventory, status, credential posture, rotation, revocation, audit, access grants. | Hosted login or end-user self-service. |
 
 ## Minimum Viable M2M Slice
@@ -133,14 +133,14 @@ The clean target is:
 
 ```text
 tigrbl-identity-principals          # Service, client, workload, tenant principal semantics
-tigrbl-identity-credentials         # Credential proof, API keys, service keys, rotation helpers
-tigrbl-identity-oauth               # client_credentials, private_key_jwt, mTLS, DPoP, resource indicators
+tigrbl-authn-credentials         # Credential proof, API keys, service keys, rotation helpers
+tigrbl-auth-protocol-oauth               # client_credentials, private_key_jwt, mTLS, DPoP, resource indicators
 tigrbl-identity-storage             # Canonical service/client/key/token/audit/resource/grant tables
 tigrbl-auth-api-public              # Token issuance and issuer metadata
 tigrbl-auth-api-service-admin       # Service/workload lifecycle, credential lifecycle, audit
 tigrbl-auth-api-developer           # Developer client/app registration and M2M setup
 tigrbl-auth-api-resource-validation # Resource validation, introspection, protected-resource metadata
-tigrbl-identity-resource-server     # Protected API integration
+tigrbl-authz-resource-server     # Protected API integration
 @tigrbl-auth/service-admin-uix      # M2M inventory, grants, credential posture, rotation, audit
 ```
 
