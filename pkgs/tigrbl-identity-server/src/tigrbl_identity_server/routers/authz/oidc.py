@@ -19,10 +19,12 @@ from tigrbl_identity_server.framework import (
 from tigrbl_identity_storage.tables.engine import get_db
 
 from tigrbl_identity_storage.tables import AuthCode, AuthSession, Client, User
+from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
 from tigrbl_auth_protocol_oauth.standards.native_apps import is_native_redirect_uri
+from tigrbl_identity_server.security.handler_records import resolve_browser_session_record
 from ..shared import _require_tls
 from . import api
 
@@ -96,7 +98,11 @@ async def authorize(
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
 
     prompts = set(prompt.split()) if prompt else set()
-    session = await resolve_browser_session(request)
+    session = await resolve_browser_session_record(
+        db,
+        request,
+        deployment=deployment_from_request(request, settings),
+    )
     if login_hint and session and session.username != login_hint:
         session = None
     if "login" in prompts:

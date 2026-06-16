@@ -237,14 +237,19 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
 
 
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
-    route_paths = (
-        ROOT / "tigrbl_auth" / "routers" / "authz" / "oidc.py",
-        PKGS / "tigrbl-auth-protocol-oidc" / "src" / "tigrbl_auth_protocol_oidc" / "router.py",
-        PKGS / "tigrbl-identity-server" / "src" / "tigrbl_identity_server" / "routers" / "authz" / "oidc.py",
-    )
+    route_paths = {
+        "facade": ROOT / "tigrbl_auth" / "routers" / "authz" / "oidc.py",
+        "protocol": PKGS / "tigrbl-auth-protocol-oidc" / "src" / "tigrbl_auth_protocol_oidc" / "router.py",
+        "identity_server": PKGS / "tigrbl-identity-server" / "src" / "tigrbl_identity_server" / "routers" / "authz" / "oidc.py",
+    }
 
-    for route_path in route_paths:
+    for route_path in route_paths.values():
         source = route_path.read_text(encoding="utf-8")
         assert "resolve_browser_session" in source, route_path
         assert 'request.cookies.get("sid")' not in source, route_path
         assert "UUID(sid)" not in source, route_path
+
+    identity_server_source = route_paths["identity_server"].read_text(encoding="utf-8")
+    assert "resolve_browser_session_record" in identity_server_source
+    assert "deployment_from_request(request, settings)" in identity_server_source
+    assert "await resolve_browser_session(request)" not in identity_server_source
