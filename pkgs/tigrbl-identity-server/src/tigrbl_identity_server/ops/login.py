@@ -78,4 +78,9 @@ async def login_user(*, request, db, identifier: str, password: str) -> JSONResp
         target_id=str(session_row.id),
         details={"identifier": identifier},
     )
+    commit = getattr(db, "commit", None)
+    if callable(commit):
+        result = commit()
+        if hasattr(result, "__await__"):
+            await result
     return response
