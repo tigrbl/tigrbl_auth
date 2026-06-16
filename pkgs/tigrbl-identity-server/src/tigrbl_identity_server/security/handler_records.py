@@ -139,6 +139,24 @@ async def create_handler_record(model: Any, db: Any, payload: Mapping[str, Any])
 
 
 async def update_handler_record(model: Any, db: Any, ident: Any, payload: Mapping[str, Any]) -> Any:
+    get = getattr(db, "get", None)
+    if callable(get):
+        try:
+            row = get(model, ident)
+            if inspect.isawaitable(row):
+                row = await row
+            if row is not None:
+                for key, value in payload.items():
+                    if hasattr(row, key):
+                        setattr(row, key, value)
+                flush = getattr(db, "flush", None)
+                if callable(flush):
+                    flushed = flush()
+                    if inspect.isawaitable(flushed):
+                        await flushed
+                return row
+        except Exception:
+            pass
     row = await model.handlers.update.core({"path_params": {"id": ident}, "payload": dict(payload), "db": db})
     return _created_item(row)
 

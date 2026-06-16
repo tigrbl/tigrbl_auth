@@ -5,7 +5,7 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_identity_server.security.handler_records import read_handler_record
+from tigrbl_identity_server.security.handler_records import read_handler_record, update_handler_record
 
 
 @pytest.mark.asyncio
@@ -28,3 +28,35 @@ async def test_read_handler_record_prefers_session_get() -> None:
         handlers = SimpleNamespace(read=_Read)
 
     assert await read_handler_record(Model, Db(), ident) is row
+
+
+@pytest.mark.asyncio
+async def test_update_handler_record_prefers_session_get_and_flushes() -> None:
+    ident = uuid4()
+    row = SimpleNamespace(id=ident, last_seen_at=None, ignored=None)
+    flushed = False
+
+    class Db:
+        async def get(self, model, value):
+            assert model is Model
+            assert value == ident
+            return row
+
+        async def flush(self):
+            nonlocal flushed
+            flushed = True
+
+    class _Update:
+        @staticmethod
+        async def core(envelope):
+            raise AssertionError("handler update should not be used when db.get resolves")
+
+    class Model:
+        handlers = SimpleNamespace(update=_Update)
+
+    payload = {"last_seen_at": "now", "missing_column": "ignored"}
+
+    assert await update_handler_record(Model, Db(), ident, payload) is row
+    assert row.last_seen_at == "now"
+    assert not hasattr(row, "missing_column")
+    assert flushed is True
