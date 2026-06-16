@@ -162,6 +162,25 @@ async def update_handler_record(model: Any, db: Any, ident: Any, payload: Mappin
 
 
 async def delete_handler_record(model: Any, db: Any, ident: Any) -> Any:
+    get = getattr(db, "get", None)
+    delete = getattr(db, "delete", None)
+    if callable(get) and callable(delete):
+        try:
+            row = get(model, ident)
+            if inspect.isawaitable(row):
+                row = await row
+            if row is not None:
+                deleted = delete(row)
+                if inspect.isawaitable(deleted):
+                    await deleted
+                flush = getattr(db, "flush", None)
+                if callable(flush):
+                    flushed = flush()
+                    if inspect.isawaitable(flushed):
+                        await flushed
+                return row
+        except Exception:
+            pass
     return await model.handlers.delete.core({"path_params": {"id": ident}, "db": db})
 
 
