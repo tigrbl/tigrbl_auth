@@ -148,17 +148,24 @@ def extract_session_cookie(request) -> str | None:
             return value
     headers = getattr(request, "headers", None) or {}
     raw_cookie = None
-    if hasattr(headers, "get"):
-        raw_cookie = headers.get("cookie") or headers.get("Cookie")
-    if not raw_cookie:
-        try:
-            for key, value in headers:
-                key_text = key.decode("latin-1") if isinstance(key, bytes) else str(key)
-                if key_text.lower() == "cookie":
-                    raw_cookie = value.decode("latin-1") if isinstance(value, bytes) else str(value)
-                    break
-        except (TypeError, ValueError):
-            raw_cookie = None
+    header_sources = [headers]
+    scope = getattr(request, "scope", None)
+    if isinstance(scope, dict) and scope.get("headers") is not None:
+        header_sources.append(scope["headers"])
+    for header_source in header_sources:
+        if hasattr(header_source, "get"):
+            raw_cookie = header_source.get("cookie") or header_source.get("Cookie")
+        if not raw_cookie:
+            try:
+                for key, value in header_source:
+                    key_text = key.decode("latin-1") if isinstance(key, bytes) else str(key)
+                    if key_text.lower() == "cookie":
+                        raw_cookie = value.decode("latin-1") if isinstance(value, bytes) else str(value)
+                        break
+            except (TypeError, ValueError):
+                raw_cookie = None
+        if raw_cookie:
+            break
     if not raw_cookie:
         return None
     parsed = SimpleCookie()

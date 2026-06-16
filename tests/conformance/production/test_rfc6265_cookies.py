@@ -53,3 +53,17 @@ def test_extract_session_cookie_falls_back_to_asgi_byte_headers():
         ]
 
     assert extract_session_cookie(Request()) == 'v1.00000000-0000-0000-0000-000000000001.secret'
+
+
+def test_extract_session_cookie_falls_back_to_asgi_scope_headers():
+    class Request:
+        cookies = None
+        headers = None
+        scope = {
+            'headers': [
+                (b'host', b'localhost'),
+                (b'cookie', b'theme=dark; sid=v1.00000000-0000-0000-0000-000000000001.secret; other=value'),
+            ]
+        }
+
+    assert extract_session_cookie(Request()) == 'v1.00000000-0000-0000-0000-000000000001.secret'
