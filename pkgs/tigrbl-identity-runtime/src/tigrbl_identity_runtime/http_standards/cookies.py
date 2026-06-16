@@ -15,6 +15,7 @@ This module intentionally keeps the cookie surface small:
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
+from http.cookies import SimpleCookie
 import secrets
 from typing import Final
 from uuid import UUID
@@ -139,10 +140,25 @@ def _expiry_delta(expires_at: datetime | None, max_age_seconds: int) -> int:
 
 
 def extract_session_cookie(request) -> str | None:
+    name = session_cookie_policy().name
     cookies = getattr(request, "cookies", None)
-    if not cookies:
+    if cookies and hasattr(cookies, "get"):
+        value = cookies.get(name)
+        if value:
+            return value
+    headers = getattr(request, "headers", None) or {}
+    raw_cookie = None
+    if hasattr(headers, "get"):
+        raw_cookie = headers.get("cookie") or headers.get("Cookie")
+    if not raw_cookie:
         return None
-    return cookies.get(session_cookie_policy().name)
+    parsed = SimpleCookie()
+    try:
+        parsed.load(str(raw_cookie))
+    except Exception:
+        return None
+    morsel = parsed.get(name)
+    return morsel.value if morsel is not None else None
 
 
 def issue_session_cookie(
