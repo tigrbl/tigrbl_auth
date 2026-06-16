@@ -156,26 +156,7 @@ def invoke_rpc_method(
         asyncio.get_running_loop()
     except RuntimeError:
         return asyncio.run(invoke_rpc_method_async(name, params, context=context))
-
-    result_box: dict[str, Any] = {}
-    error_box: dict[str, BaseException] = {}
-
-    def runner() -> None:
-        try:
-            result_box["result"] = asyncio.run(
-                invoke_rpc_method_async(name, params, context=context)
-            )
-        except BaseException as exc:  # pragma: no cover - defensive surfacing
-            error_box["error"] = exc
-
-    import threading
-
-    thread = threading.Thread(target=runner)
-    thread.start()
-    thread.join()
-    if "error" in error_box:
-        raise error_box["error"]
-    return result_box.get("result")
+    raise RuntimeError("sync RPC invocation cannot run inside an active event loop; use invoke_rpc_method_async")
 
 
 __all__ = [

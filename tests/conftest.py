@@ -148,8 +148,9 @@ def _import_runtime_objects() -> dict[str, Any]:
 
 
 @pytest.fixture(autouse=True)
-def isolate_operator_plane_state(monkeypatch: pytest.MonkeyPatch, tmp_path_factory: pytest.TempPathFactory):
-    state_home = tmp_path_factory.mktemp("operator-plane-state")
+def isolate_operator_plane_state(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
+    state_home = tmp_path / "operator-plane-state"
+    state_home.mkdir()
     monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(state_home))
     yield
 

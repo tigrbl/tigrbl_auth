@@ -7,7 +7,7 @@ from uuid import uuid4
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.orm import Client, Tenant
-from tigrbl_auth.standards.oauth2.introspection import register_token, reset_tokens
+from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async
 
 
 async def _create_tenant_and_client(db_session: AsyncSession) -> Client:
@@ -52,7 +52,7 @@ async def test_introspect_valid_api_key(
 ):
     """Valid API key should yield an active introspection response."""
     client = await _create_tenant_and_client(db_session)
-    register_token("active-introspection-token")
+    await register_token_async("active-introspection-token")
     try:
         response = await async_client.post(
             "/introspect",
@@ -63,7 +63,7 @@ async def test_introspect_valid_api_key(
         body = response.json()
         assert body.get("active") is True
     finally:
-        reset_tokens()
+        await reset_tokens_async()
 
 
 @pytest.mark.integration

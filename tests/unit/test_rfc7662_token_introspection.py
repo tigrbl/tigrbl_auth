@@ -4,9 +4,8 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl_auth.framework import TigrblApp, status
-from tigrbl_auth.rfc.rfc7662 import register_token, reset_tokens
 from tigrbl_auth.standards.oauth2 import introspection as introspection_module
-from tigrbl_auth.standards.oauth2.introspection import router
+from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async, router
 
 
 # RFC 7662 specification excerpt for reference within tests
@@ -31,7 +30,7 @@ async def test_introspection_endpoint_returns_active_field(enable_rfc7662):
     """RFC 7662 §2.2: Response must include an 'active' boolean."""
     app = TigrblApp()
     app.include_router(router)
-    register_token("dummy")
+    await register_token_async("dummy")
 
     async def _allow(*_args, **_kwargs):
         return None
@@ -40,14 +39,14 @@ async def test_introspection_endpoint_returns_active_field(enable_rfc7662):
     original = introspection_module._authorize_introspection_caller
     try:
         introspection_module._authorize_introspection_caller = _allow
-        async with AsyncClient(transport=transport, base_url="http://test") as client:
+        async with AsyncClient(transport=transport, base_url="https://test") as client:
             resp = await client.post("/introspect", data={"token": "dummy"})
         assert resp.status_code == status.HTTP_200_OK
         body = resp.json()
         assert body.get("active") is True
     finally:
         introspection_module._authorize_introspection_caller = original
-        reset_tokens()
+        await reset_tokens_async()
 
 
 @pytest.mark.unit
@@ -58,7 +57,7 @@ async def test_introspection_requires_token_parameter(enable_rfc7662):
     app.include_router(router)
 
     transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
+    async with AsyncClient(transport=transport, base_url="https://test") as client:
         resp = await client.post("/introspect", data={})
     assert resp.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -70,6 +69,6 @@ async def test_introspection_requires_authenticated_caller(enable_rfc7662):
     app.include_router(router)
 
     transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
+    async with AsyncClient(transport=transport, base_url="https://test") as client:
         resp = await client.post("/introspect", data={"token": "dummy"})
     assert resp.status_code == status.HTTP_401_UNAUTHORIZED

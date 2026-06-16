@@ -16,6 +16,7 @@ import base64
 import os
 import pathlib
 import secrets
+import sys
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidTokenError
@@ -35,7 +36,9 @@ if _CANONICAL is not None:  # pragma: no cover - covered indirectly in tests
     _service_cache = _CANONICAL._service_cache
 
     def _sync_to_canonical() -> None:
-        next_path = globals().get("_RSA_KEY_PATH", _CANONICAL._RSA_KEY_PATH)
+        root_facade = sys.modules.get("tigrbl_auth.oidc_id_token")
+        root_path = getattr(root_facade, "_RSA_KEY_PATH", None)
+        next_path = root_path or globals().get("_RSA_KEY_PATH", _CANONICAL._RSA_KEY_PATH)
         if next_path != _CANONICAL._RSA_KEY_PATH:
             _CANONICAL._RSA_KEY_PATH = next_path
             _CANONICAL._service_cache = None

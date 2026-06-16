@@ -7,7 +7,6 @@ import base64
 import json
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
-from threading import Thread
 from typing import Any, Dict, Iterable, Optional, Tuple
 
 from .errors import InvalidTokenError
@@ -26,8 +25,7 @@ from .framework import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
 from tigrbl_identity_jose.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
-from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked
-from tigrbl_auth_protocol_oauth.standards.introspection import register_token
+from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked_async
 
 _ACCESS_TTL = timedelta(minutes=60)
 _REFRESH_TTL = timedelta(days=7)
@@ -35,21 +33,13 @@ _ALG = JWAAlg.EDDSA.value
 
 
 def _run(coro):
-    """Execute *coro* regardless of the current event loop state."""
+    """Run an async token operation from a true synchronous caller."""
     try:
         asyncio.get_running_loop()
     except RuntimeError:
         return asyncio.run(coro)
-    result = None
-
-    def runner():
-        nonlocal result
-        result = asyncio.run(coro)
-
-    t = Thread(target=runner)
-    t.start()
-    t.join()
-    return result
+    coro.close()
+    raise RuntimeError("sync JWT helpers cannot run inside an active event loop; use the async helper")
 
 
 @lru_cache(maxsize=1)
@@ -184,11 +174,6 @@ class JWTCoder:
             issuer=issuer,
             audience=audience,
         )
-        if settings.enable_rfc7662:
-            claims = {"sub": sub, "kind": typ}
-            if tid is not None:
-                claims["tid"] = tid
-            register_token(token, claims)
         return token
 
     def sign(
@@ -252,7 +237,7 @@ class JWTCoder:
         audience: Optional[Iterable[str] | str] = None,
         cert_thumbprint: Optional[str] = None,
     ) -> Dict[str, Any]:
-        if is_revoked(token):
+        if await is_revoked_async(token):
             raise InvalidTokenError("token has been revoked")
         if _header_alg(token) in {"", "none"}:
             raise InvalidTokenError("unsigned JWTs are not accepted")

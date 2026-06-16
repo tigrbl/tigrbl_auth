@@ -9,8 +9,8 @@ The authoritative RPC surface is owned by `tigrbl_auth/api/rpc/`:
 - `registry.py` owns method registration and deployment filtering
 - `methods/` owns executable operator/admin handlers
 - `schemas/` owns request/response models used by both handlers and OpenRPC
-- `tigrbl_auth/cli/artifacts.py` generates OpenRPC directly from the live registry
-- `tigrbl_auth/cli/reports.py` validates that committed OpenRPC methods match the implementation-backed registry exactly
+- `pkgs/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/artifacts/` generates OpenRPC directly from the live registry
+- `pkgs/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/reports/` validates that committed OpenRPC methods match the implementation-backed registry exactly
 
 ## Contract generation model
 

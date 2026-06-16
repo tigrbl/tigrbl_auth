@@ -90,13 +90,11 @@ async def test_hidden_openrpc_endpoint_still_has_valid_builder_output(tmp_path) 
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.get("/openrpc.json")
 
-    assert response.status_code == 200
-    payload = response.json()
-    _assert_runtime_openrpc_payload_valid(payload)
-    assert payload["methods"] == []
+    assert response.status_code == 404
 
     contract = build_openrpc_contract(deployment, version="0.0.0-test")
     _assert_openrpc_contract_valid(contract, deployment)
+    assert contract["methods"] == []
 
 
 @pytest.mark.asyncio

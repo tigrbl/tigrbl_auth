@@ -958,7 +958,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResult'
+                $ref: '#/components/schemas/DiscoveryDocument'
       x-required-flags:
       - enable_oidc_discovery
       - enable_rfc8615
@@ -987,6 +987,12 @@ paths:
         query_bearer_disabled: true
         form_bearer_disabled: true
         jwt_access_token_profile_supported: false
+      parameters:
+      - name: realm_slug
+        in: path
+        required: true
+        schema:
+          type: string
   /.well-known/oauth-authorization-server:
     get:
       operationId: get__well_known_oauth_authorization_server
@@ -1130,7 +1136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResult'
+                $ref: '#/components/schemas/JwksDocument'
       x-required-flags:
       - enable_rfc7517
       - enable_rfc8615
@@ -1159,6 +1165,12 @@ paths:
         query_bearer_disabled: true
         form_bearer_disabled: true
         jwt_access_token_profile_supported: false
+      parameters:
+      - name: realm_slug
+        in: path
+        required: true
+        schema:
+          type: string
 components:
   securitySchemes:
     bearerAuth:

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, TigrblRouter, select, status
+from typing import Any
+
+from tigrbl_auth.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, TigrblRouter, status
 from tigrbl_auth.api.rest.schemas import (
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
@@ -9,6 +11,8 @@ from tigrbl_auth.api.rest.schemas import (
     CredsIn,
 )
 from tigrbl_auth.ops.login import login_user
+from tigrbl_auth.config.deployment import deployment_from_request
+from tigrbl_auth.config.settings import settings
 from tigrbl_auth.services.admin_identity_bootstrap import (
     consume_password_reset_token,
     issue_password_reset_token,
@@ -17,7 +21,12 @@ from tigrbl_auth.services.admin_identity_bootstrap import (
 )
 from tigrbl_auth.services.key_management import hash_pw
 from tigrbl_auth.standards.http.cookies import clear_session_cookie
-from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
+from tigrbl_auth.security.handler_records import (
+    first_handler_record,
+    read_handler_record,
+    resolve_browser_session_record,
+    update_handler_record,
+)
 from tigrbl_auth.tables import User
 from tigrbl_auth.tables.engine import get_db
 
@@ -41,12 +50,31 @@ def _session_payload(user: User | None, *, session_id: str | None = None, debug_
     )
 
 
+async def _find_user_by_identifier(db: Any, identifier: str) -> User | None:
+    row = await first_handler_record(User, db, {"username": identifier})
+    if row is not None:
+        return row
+    return await first_handler_record(User, db, {"email": identifier})
+
+
+async def _resolve_admin_session_and_user(request: Request, db: Any) -> tuple[Any, User]:
+    session_row = await resolve_browser_session_record(
+        db,
+        request,
+        deployment=deployment_from_request(request, settings),
+    )
+    user = await resolve_admin_user_from_request(request, db=db)
+    if session_row is None or user is None:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated admin session required")
+    return session_row, user
+
+
 @api.route("/admin/auth/login", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
-async def admin_login(request: Request, creds: CredsIn | None = None, db: AsyncSession = Depends(get_db)):
+async def admin_login(request: Request, creds: CredsIn | None = None, db: Any = Depends(get_db)):
     if creds is None:
         body = await request.json() or {}
         creds = CredsIn.model_validate(body)
-    row = await db.scalar(select(User).where((User.username == creds.identifier) | (User.email == creds.identifier)))
+    row = await _find_user_by_identifier(db, creds.identifier)
     if row is None or not user_is_admin(row):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "administrator authorization required")
     login_response = await login_user(request=request, db=db, identifier=creds.identifier, password=creds.password)
@@ -63,11 +91,8 @@ async def admin_login_browser_redirect() -> Response:
 
 
 @api.route("/admin/auth/session", methods=["GET"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
-async def admin_session(request: Request):
-    session_row = await resolve_browser_session(request)
-    user = await resolve_admin_user_from_request(request)
-    if session_row is None or user is None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated admin session required")
+async def admin_session(request: Request, db: Any = Depends(get_db)):
+    session_row, user = await _resolve_admin_session_and_user(request, db)
     return _session_payload(user, session_id=str(session_row.id))
 
 
@@ -82,15 +107,15 @@ async def admin_logout() -> Response:
 async def admin_forgot_password(
     request: Request,
     payload: AdminPasswordResetRequestIn | None = None,
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ):
     if payload is None:
         body = await request.json() or {}
         payload = AdminPasswordResetRequestIn.model_validate(body)
-    row = await db.scalar(select(User).where((User.username == payload.identifier) | (User.email == payload.identifier)))
+    row = await _find_user_by_identifier(db, payload.identifier)
     debug_token = None
     if row is not None and user_is_admin(row):
-        debug_token = await issue_password_reset_token(user=row)
+        debug_token = await issue_password_reset_token(user=row, db=db)
         from tigrbl_auth.config.settings import settings
 
         if not settings.admin_password_reset_debug_disclosure:
@@ -99,11 +124,15 @@ async def admin_forgot_password(
 
 
 @api.route("/admin/auth/reset-password", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
-async def admin_reset_password(request: Request, payload: AdminPasswordResetCompleteIn | None = None):
+async def admin_reset_password(
+    request: Request,
+    payload: AdminPasswordResetCompleteIn | None = None,
+    db: Any = Depends(get_db),
+):
     if payload is None:
         body = await request.json() or {}
         payload = AdminPasswordResetCompleteIn.model_validate(body)
-    user = await consume_password_reset_token(token=payload.token, new_password=payload.password)
+    user = await consume_password_reset_token(token=payload.token, new_password=payload.password, db=db)
     if user is None:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid or expired reset token")
     response = JSONResponse(_session_payload(None).model_dump())
@@ -115,25 +144,28 @@ async def admin_reset_password(request: Request, payload: AdminPasswordResetComp
 async def admin_change_password(
     request: Request,
     payload: AdminPasswordChangeIn | None = None,
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ):
     if payload is None:
         body = await request.json() or {}
         payload = AdminPasswordChangeIn.model_validate(body)
-    user = await resolve_admin_user_from_request(request)
-    session_row = await resolve_browser_session(request)
-    if user is None or session_row is None:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated admin session required")
+    session_row, user = await _resolve_admin_session_and_user(request, db)
     if not user.verify_password(payload.current_password):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid current password")
-    row = await db.scalar(select(User).where(User.id == user.id))
+    row = await read_handler_record(User, db, user.id)
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "user not found")
-    row.password_hash = hash_pw(payload.new_password)
-    row.must_change_password = False
-    row.password_reset_token_hash = None
-    row.password_reset_expires_at = None
-    await db.commit()
+    row = await update_handler_record(
+        User,
+        db,
+        row.id,
+        {
+            "password_hash": hash_pw(payload.new_password),
+            "must_change_password": False,
+            "password_reset_token_hash": None,
+            "password_reset_expires_at": None,
+        },
+    )
     return _session_payload(row, session_id=str(session_row.id))
 
 

@@ -1,42 +1,28 @@
 """Tests for RFC 7591 dynamic client registration via HTTP server."""
 
-import asyncio
+import importlib
 
 import httpx
 import pytest
-import uvicorn
+import pytest_asyncio
 
 from tigrbl_auth import rfc7591
+from tigrbl_auth.api.rest.routers.register import router
+from tigrbl_auth.framework import TigrblApp
+from tigrbl_auth.tables import get_db
+
+register_router_module = importlib.import_module("tigrbl_auth.api.rest.routers.register")
 
 
-async def _wait_for_app(base_url: str) -> None:
-    async with httpx.AsyncClient() as client:
-        for _ in range(50):
-            try:
-                resp = await client.get(f"{base_url}/openapi.json")
-                if resp.status_code == 200:
-                    return
-            except Exception:
-                pass
-            await asyncio.sleep(0.1)
-    raise RuntimeError("server not ready")
-
-
-@pytest.fixture()
-async def running_app(override_get_db, unused_tcp_port):
-    port = unused_tcp_port
-    base_url = f"http://127.0.0.1:{port}"
-    cfg = uvicorn.Config(
-        "tigrbl_auth.app:app", host="127.0.0.1", port=port, log_level="warning"
-    )
-    server = uvicorn.Server(cfg)
-    task = asyncio.create_task(server.serve())
-    await _wait_for_app(base_url)
-    try:
-        yield base_url
-    finally:
-        server.should_exit = True
-        await task
+@pytest_asyncio.fixture()
+async def registration_client(db_session, monkeypatch):
+    app = TigrblApp()
+    app.include_router(router)
+    app.router.dependency_overrides[get_db] = lambda: db_session
+    monkeypatch.setattr(register_router_module, "_sync_client_registration", lambda *args, **kwargs: None)
+    transport = httpx.ASGITransport(app=app)
+    async with httpx.AsyncClient(transport=transport, base_url="https://test") as client:
+        yield client
 
 
 def test_rfc7591_spec_url() -> None:
@@ -45,16 +31,14 @@ def test_rfc7591_spec_url() -> None:
 
 
 @pytest.mark.asyncio
-async def test_register_client_via_server(running_app):
+async def test_register_client_via_server(registration_client):
     """Client can register through the running server."""
-    base = running_app
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(
-            f"{base}/register",
-            json={
-                "tenant_slug": "public",
-                "redirect_uris": ["https://a.example/cb"],
-            },
-        )
+    resp = await registration_client.post(
+        "/register",
+        json={
+            "tenant_slug": "public",
+            "redirect_uris": ["https://a.example/cb"],
+        },
+    )
     assert resp.status_code == 200
     assert resp.json()["client_id"]

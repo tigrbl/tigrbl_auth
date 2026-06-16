@@ -6,11 +6,12 @@ from uuid import UUID
 
 from tigrbl_auth.config.deployment import deployment_from_request, resolve_deployment
 from tigrbl_auth.config.settings import settings
-try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.services.persistence import append_audit_event_async
-except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
-    async def append_audit_event_async(**kwargs):
-        return None
+from tigrbl_auth.security.handler_records import (
+    append_audit_event_record,
+    create_handler_record,
+    first_handler_record,
+    read_handler_record,
+)
 from tigrbl_auth.standards.oauth2.jar import merge_request_object_params, parse_request_object
 from tigrbl_auth.standards.oauth2.par import REQUEST_URI_PREFIX
 from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
@@ -31,7 +32,7 @@ from tigrbl_auth.standards.oauth2.mtls import (
 from tigrbl_auth.standards.oauth2.dpop import verify_proof
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.framework import HTTPException, select, status
+    from tigrbl_auth.framework import HTTPException, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -43,26 +44,18 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
             self.status_code = status_code
             self.detail = detail
 
-    class _Select:
-        def __init__(self, model: object):
-            self.model = model
-            self.criteria: list[object] = []
-
-        def where(self, criterion: object):
-            self.criteria.append(criterion)
-            return self
-
-    def select(model: object):
-        return _Select(model)
-
     status = _FallbackStatus()
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_auth.tables import Client, PushedAuthorizationRequest
+    from tigrbl_auth.tables import Client, ClientRegistration, PushedAuthorizationRequest
 except Exception:  # pragma: no cover - dependency-light placeholders
     class Client:  # type: ignore[override]
         id = object()
         tenant_id = None
+
+    class ClientRegistration:  # type: ignore[override]
+        client_id = object()
+        registration_metadata = {}
 
     class PushedAuthorizationRequest:  # type: ignore[override]
         def __init__(self, *, client_id=None, tenant_id=None, params=None):
@@ -160,8 +153,6 @@ def _resolve_request_deployment(request):
 
 
 async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object], deployment) -> tuple[object, dict[str, object]]:
-    from tigrbl_auth.tables import Client, ClientRegistration
-
     client_id = str(params.get("client_id") or "").strip()
     if not client_id:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "client_id parameter required")
@@ -169,10 +160,10 @@ async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object
         client_uuid = UUID(client_id)
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid client_id") from exc
-    client = await db.scalar(select(Client).where(Client.id == client_uuid))
+    client = await read_handler_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "client not found")
-    registration = await db.scalar(select(ClientRegistration).where(ClientRegistration.client_id == client.id))
+    registration = await first_handler_record(ClientRegistration, db, {"client_id": client.id})
     metadata = dict(getattr(registration, "registration_metadata", None) or {})
     auth_method = str(metadata.get("token_endpoint_auth_method") or "").strip()
     policy = runtime_security_profile(deployment)
@@ -227,7 +218,7 @@ async def pushed_authorization_request(*, request, db):
         client_uuid = UUID(str(client_id))
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid client_id') from exc
-    client = await db.scalar(select(Client).where(Client.id == client_uuid))
+    client = await read_handler_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'client not found')
     if policy.par_client_auth_required:
@@ -243,24 +234,28 @@ async def pushed_authorization_request(*, request, db):
     if cert_thumbprint:
         params["_mtls_thumbprint"] = cert_thumbprint
 
-    row = PushedAuthorizationRequest(
+    preview = PushedAuthorizationRequest(
         client_id=client.id,
         tenant_id=client.tenant_id,
         params=params,
     )
-    if int(getattr(row, "expires_in", 0) or 0) > policy.request_uri_max_lifetime_seconds:
+    if int(getattr(preview, "expires_in", 0) or 0) > policy.request_uri_max_lifetime_seconds:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST,
             {"error": "invalid_request", "error_description": "request_uri lifetime exceeds the active profile limit"},
         )
-    db.add(row)
-    await db.commit()
-    try:
-        await db.refresh(row)
-    except Exception:
-        pass
+    row = await create_handler_record(
+        PushedAuthorizationRequest,
+        db,
+        {
+            "client_id": client.id,
+            "tenant_id": client.tenant_id,
+            "params": params,
+        },
+    )
 
-    await append_audit_event_async(
+    await append_audit_event_record(
+        db,
         tenant_id=client.tenant_id,
         actor_client_id=client.id,
         event_type='authorization.par.created',

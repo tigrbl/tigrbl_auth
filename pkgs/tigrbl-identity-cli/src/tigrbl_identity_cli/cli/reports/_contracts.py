@@ -29,6 +29,8 @@ PUBLIC_ROUTE_SEARCH_ROOTS = (
     "tigrbl_auth/api/rest/routers",
     "tigrbl_auth/standards/oauth2",
     "tigrbl_auth/standards/oidc",
+    "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards",
+    "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards",
 )
 DOC_REF_RE = re.compile(r"tigrbl_auth/[A-Za-z0-9_./-]+\.py")
 
@@ -56,19 +58,6 @@ AUTHORITATIVE_DOCS = {
     "docs/reference/RPC_OPERATOR_SURFACE.md",
     "docs/reference/DISCOVERY_PROFILE_SNAPSHOTS.md",
 }
-DERIVED_CURRENT_DOCS = {
-    "docs/compliance/AUTHORITATIVE_CURRENT_DOCS.json",
-    "docs/compliance/current_state_report.json",
-    "docs/compliance/certification_state_report.json",
-    "docs/compliance/runtime_profile_report.json",
-    "docs/compliance/release_gate_report.json",
-    "docs/compliance/final_release_gate_report.json",
-    "docs/compliance/validated_execution_report.json",
-    "docs/compliance/release_signing_report.json",
-    "docs/compliance/FINAL_RELEASE_STATUS_2026-03-25.json",
-    "docs/compliance/final_target_decision_matrix.json",
-    "docs/compliance/peer_matrix_report.json",
-}
 DOC_REF_SCAN_EXCLUDE = {
     "docs/compliance/artifact_truthfulness_report.md",
     "docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md",
@@ -77,6 +66,8 @@ ROUTE_CONSTANTS = {
     "JWKS_PATH": "/.well-known/jwks.json",
     "TENANT_JWKS_PATH": "/tenants/{tenant_slug}/.well-known/jwks.json",
     "TENANT_OPENID_CONFIGURATION_PATH": "/tenants/{tenant_slug}/.well-known/openid-configuration",
+    "REALM_JWKS_PATH": "/realms/{realm_slug}/.well-known/jwks.json",
+    "REALM_OPENID_CONFIGURATION_PATH": "/realms/{realm_slug}/.well-known/openid-configuration",
 }
 WELL_KNOWN_ROUTE_CONSTANTS = {"oauth_protected_resource": "/.well-known/oauth-protected-resource"}
 

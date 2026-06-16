@@ -4,7 +4,8 @@ Unit tests for tigrbl_auth.backends module.
 Tests authentication backends for password and API key authentication.
 """
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from datetime import datetime, timedelta, timezone
+from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
@@ -45,6 +46,14 @@ class TestPasswordBackend:
         """Set up test fixtures for each test method."""
         self.backend = PasswordBackend()
         self.mock_db = AsyncMock()
+        self.user_rows = []
+
+    @pytest.fixture(autouse=True)
+    def _patch_user_handlers(self, monkeypatch):
+        async def _list_core(ctx):
+            return list(self.user_rows)
+
+        monkeypatch.setattr(User.handlers.list, "core", _list_core)
 
     def create_mock_user(self, mock_data_factory, **overrides):
         """Create a mock user using data factory for consistency."""
@@ -64,7 +73,7 @@ class TestPasswordBackend:
     async def test_authenticate_with_valid_username_password(self, mock_data_factory):
         """Test successful authentication with username."""
         mock_user = self.create_mock_user(mock_data_factory)
-        self.mock_db.scalar.return_value = mock_user
+        self.user_rows = [mock_user]
 
         # Use the password from the mock user creation
         test_password = "SecurePassword123!"  # Default from factory
@@ -73,13 +82,12 @@ class TestPasswordBackend:
         )
 
         assert result == mock_user
-        self.mock_db.scalar.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_authenticate_with_valid_email_password(self, mock_data_factory):
         """Test successful authentication with email."""
         mock_user = self.create_mock_user(mock_data_factory)
-        self.mock_db.scalar.return_value = mock_user
+        self.user_rows = [mock_user]
 
         test_password = "SecurePassword123!"
         result = await self.backend.authenticate(
@@ -87,13 +95,12 @@ class TestPasswordBackend:
         )
 
         assert result == mock_user
-        self.mock_db.scalar.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_authenticate_with_invalid_credentials(self, mock_data_factory):
         """Test authentication with invalid password."""
         mock_user = self.create_mock_user(mock_data_factory)
-        self.mock_db.scalar.return_value = mock_user
+        self.user_rows = [mock_user]
 
         # Test authentication with wrong password
         with pytest.raises(AuthError) as exc_info:
@@ -106,8 +113,7 @@ class TestPasswordBackend:
     @pytest.mark.asyncio
     async def test_authenticate_with_nonexistent_user(self):
         """Test authentication with nonexistent user."""
-        # Mock database returns None (user not found)
-        self.mock_db.scalar.return_value = None
+        self.user_rows = []
 
         # Test authentication
         with pytest.raises(AuthError) as exc_info:
@@ -118,8 +124,7 @@ class TestPasswordBackend:
     @pytest.mark.asyncio
     async def test_authenticate_with_inactive_user(self):
         """Test authentication with inactive user."""
-        # Mock the _get_user_stmt to simulate the query filtering out inactive users
-        self.mock_db.scalar.return_value = None  # Inactive users won't be returned
+        self.user_rows = [MagicMock(username="testuser", email="test@example.com", is_active=False)]
 
         # Test authentication
         with pytest.raises(AuthError) as exc_info:
@@ -135,7 +140,7 @@ class TestPasswordBackend:
         # Create mock user with None password hash
         mock_user = self.create_mock_user(mock_data_factory, password=None)
         mock_user.password_hash = None
-        self.mock_db.scalar.return_value = mock_user
+        self.user_rows = [mock_user]
 
         # Test authentication
         with pytest.raises(AuthError) as exc_info:
@@ -146,26 +151,21 @@ class TestPasswordBackend:
         assert exc_info.value.reason == "invalid username/email or password"
 
     @pytest.mark.asyncio
-    async def test_get_user_stmt_structure(self):
-        """Test that _get_user_stmt creates correct query structure."""
-        stmt = await self.backend._get_user_stmt("testuser")
+    async def test_get_user_candidates_filter_identifier_and_active(self, mock_data_factory):
+        """Candidate lookup returns active users matched by username or email."""
+        active_user = self.create_mock_user(mock_data_factory, username="testuser", email="test@example.com")
+        inactive_user = self.create_mock_user(mock_data_factory, username="testuser", is_active=False)
+        other_user = self.create_mock_user(mock_data_factory, username="other")
+        self.user_rows = [inactive_user, other_user, active_user]
 
-        # Verify the statement has expected WHERE criteria without compiling
-        clauses = list(stmt._where_criteria)
-        assert len(clauses) == 2
+        result = await self.backend._get_user_candidates(self.mock_db, "testuser")
 
-        # First clause should match username or email
-        or_clause = clauses[0]
-        sub_keys = {c.left.key for c in or_clause.clauses}
-        assert {"username", "email"} <= sub_keys
-
-        # Second clause should ensure the user is active
-        assert clauses[1].left.key == "is_active"
+        assert result == [active_user]
 
     @pytest.mark.asyncio
     async def test_authenticate_with_empty_identifier(self):
         """Test authentication with empty identifier."""
-        self.mock_db.scalar.return_value = None
+        self.user_rows = []
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, "", "password")
@@ -176,7 +176,7 @@ class TestPasswordBackend:
     async def test_authenticate_with_empty_password(self, mock_data_factory):
         """Test authentication with empty password."""
         mock_user = self.create_mock_user(mock_data_factory)
-        self.mock_db.scalar.return_value = mock_user
+        self.user_rows = [mock_user]
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, mock_user.username, "")
@@ -192,6 +192,26 @@ class TestApiKeyBackend:
         """Set up test fixtures for each test method."""
         self.backend = ApiKeyBackend()
         self.mock_db = AsyncMock()
+        self.api_key_rows = []
+        self.service_key_rows = []
+        self.client_rows = []
+
+    @pytest.fixture(autouse=True)
+    def _patch_key_handlers(self, monkeypatch):
+        async def _api_key_list_core(ctx):
+            return list(self.api_key_rows)
+
+        async def _service_key_list_core(ctx):
+            return list(self.service_key_rows)
+
+        async def _client_list_core(ctx):
+            return list(self.client_rows)
+
+        monkeypatch.setattr(ApiKey.handlers.list, "core", _api_key_list_core)
+        monkeypatch.setattr(ServiceKey.handlers.list, "core", _service_key_list_core)
+        from tigrbl_auth.orm import Client
+
+        monkeypatch.setattr(Client.handlers.list, "core", _client_list_core)
 
     def create_mock_user(self, mock_data_factory, **overrides):
         """Create a mock user using data factory for consistency."""
@@ -231,6 +251,7 @@ class TestApiKeyBackend:
         api_key.digest = ApiKey.digest_of(raw_key)
         api_key.valid_to = overrides.get("valid_to")
         api_key.touch = MagicMock()
+        api_key.valid_from = None
         return api_key
 
     def create_mock_service_key(
@@ -247,6 +268,7 @@ class TestApiKeyBackend:
         service_key.digest = ServiceKey.digest_of(raw_key)
         service_key.valid_to = overrides.get("valid_to")
         service_key.touch = MagicMock()
+        service_key.valid_from = None
         return service_key
 
     def create_mock_client(self, mock_data_factory, **overrides):
@@ -269,15 +291,13 @@ class TestApiKeyBackend:
             mock_data_factory, user=mock_user, raw_key=raw_key
         )
 
-        # Mock database to return the API key on first call, None on second
-        self.mock_db.scalar.side_effect = [mock_api_key, None]
+        self.api_key_rows = [mock_api_key]
 
         principal, key_type = await self.backend.authenticate(self.mock_db, raw_key)
 
         assert principal == mock_user
         assert key_type == "user"
         mock_api_key.touch.assert_called_once()
-        assert self.mock_db.scalar.call_count == 1  # Only user key query needed
 
     @pytest.mark.asyncio
     async def test_authenticate_with_valid_service_key(self, mock_data_factory):
@@ -288,36 +308,37 @@ class TestApiKeyBackend:
             mock_data_factory, service=mock_service, raw_key=raw_key
         )
 
-        # Mock database to return None for user key, service key on second call
-        self.mock_db.scalar.side_effect = [None, mock_service_key]
+        self.service_key_rows = [mock_service_key]
 
         principal, key_type = await self.backend.authenticate(self.mock_db, raw_key)
 
         assert principal == mock_service
         assert key_type == "service"
         mock_service_key.touch.assert_called_once()
-        assert self.mock_db.scalar.call_count == 2  # Both queries needed
 
     @pytest.mark.asyncio
     async def test_authenticate_with_invalid_api_key(self):
         """Test authentication with invalid API key."""
-        # Mock database returns None for both queries
-        self.mock_db.scalar.side_effect = [None, None]
+        self.api_key_rows = []
+        self.service_key_rows = []
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, "invalid-key")
 
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
-        assert self.mock_db.scalar.call_count == 2  # Both queries attempted
 
     @pytest.mark.asyncio
-    async def test_authenticate_with_expired_api_key(self):
+    async def test_authenticate_with_expired_api_key(self, mock_data_factory):
         """Test authentication with expired API key."""
         raw_key = "expired-api-key-12345"
 
-        # Create expired API key - but the query should filter it out
-        # So mock returns None (expired keys filtered by query)
-        self.mock_db.scalar.side_effect = [None, None]
+        self.api_key_rows = [
+            self.create_mock_api_key(
+                mock_data_factory,
+                raw_key=raw_key,
+                valid_to=datetime.now(timezone.utc) - timedelta(seconds=1),
+            )
+        ]
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, raw_key)
@@ -335,7 +356,7 @@ class TestApiKeyBackend:
             mock_data_factory, user=mock_user, raw_key=raw_key
         )
 
-        self.mock_db.scalar.side_effect = [mock_api_key, None]
+        self.api_key_rows = [mock_api_key]
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, raw_key)
@@ -353,7 +374,7 @@ class TestApiKeyBackend:
             mock_data_factory, service=mock_service, raw_key=raw_key
         )
 
-        self.mock_db.scalar.side_effect = [None, mock_service_key]
+        self.service_key_rows = [mock_service_key]
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, raw_key)
@@ -373,7 +394,7 @@ class TestApiKeyBackend:
             mock_data_factory, user=mock_user, raw_key=raw_key
         )
 
-        self.mock_db.scalar.side_effect = [mock_api_key, None]
+        self.api_key_rows = [mock_api_key]
 
         await self.backend.authenticate(self.mock_db, raw_key)
 
@@ -389,7 +410,7 @@ class TestApiKeyBackend:
             mock_data_factory, service=mock_service, raw_key=raw_key
         )
 
-        self.mock_db.scalar.side_effect = [None, mock_service_key]
+        self.service_key_rows = [mock_service_key]
 
         await self.backend.authenticate(self.mock_db, raw_key)
 
@@ -400,37 +421,26 @@ class TestApiKeyBackend:
     async def test_authenticate_with_valid_client_key(self, mock_data_factory):
         """Authenticate using a Client's API key."""
         client, raw_secret = self.create_mock_client(mock_data_factory)
-        self.mock_db.scalar.side_effect = [None, None]
-        self.mock_db.scalars = AsyncMock(return_value=[client])
-        self.backend._get_key_stmt = AsyncMock()
-        self.backend._get_service_key_stmt = AsyncMock()
+        self.client_rows = [client]
         client.verify_secret = MagicMock(wraps=client.verify_secret)
 
-        with patch("tigrbl_auth.backends._ApiKey") as mock_api_key:
-            mock_api_key.return_value.digest_of.return_value = "mock-digest"
-            principal, key_type = await self.backend.authenticate(
-                self.mock_db, raw_secret
-            )
+        principal, key_type = await self.backend.authenticate(
+            self.mock_db, raw_secret
+        )
 
         assert principal == client
         assert key_type == "client"
         client.verify_secret.assert_called_once_with(raw_secret)
-        self.mock_db.scalars.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_authenticate_with_invalid_client_secret(self, mock_data_factory):
         """Invalid secret for a Client should raise AuthError."""
         client, raw_secret = self.create_mock_client(mock_data_factory)
-        self.mock_db.scalar.side_effect = [None, None]
-        self.mock_db.scalars = AsyncMock(return_value=[client])
-        self.backend._get_key_stmt = AsyncMock()
-        self.backend._get_service_key_stmt = AsyncMock()
+        self.client_rows = [client]
         client.verify_secret = MagicMock(wraps=client.verify_secret)
 
-        with patch("tigrbl_auth.backends._ApiKey") as mock_api_key:
-            mock_api_key.return_value.digest_of.return_value = "mock-digest"
-            with pytest.raises(AuthError) as exc_info:
-                await self.backend.authenticate(self.mock_db, "wrong-secret")
+        with pytest.raises(AuthError) as exc_info:
+            await self.backend.authenticate(self.mock_db, "wrong-secret")
 
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
         client.verify_secret.assert_called_once_with("wrong-secret")
@@ -439,76 +449,85 @@ class TestApiKeyBackend:
     async def test_authenticate_with_inactive_client(self, mock_data_factory):
         """Inactive clients should not authenticate."""
         client, raw_secret = self.create_mock_client(mock_data_factory, is_active=False)
-        self.mock_db.scalar.side_effect = [None, None]
-        self.mock_db.scalars = AsyncMock(return_value=[])
-        self.backend._get_key_stmt = AsyncMock()
-        self.backend._get_service_key_stmt = AsyncMock()
+        self.client_rows = [client]
 
-        with patch("tigrbl_auth.backends._ApiKey") as mock_api_key:
-            mock_api_key.return_value.digest_of.return_value = "mock-digest"
-            with pytest.raises(AuthError) as exc_info:
-                await self.backend.authenticate(self.mock_db, raw_secret)
+        with pytest.raises(AuthError) as exc_info:
+            await self.backend.authenticate(self.mock_db, raw_secret)
 
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
-        self.mock_db.scalars.assert_called_once()
 
     @pytest.mark.asyncio
-    async def test_get_client_stmt_filters_inactive_clients(self):
-        """_get_client_stmt should select only active clients."""
-        stmt = await self.backend._get_client_stmt()
-        clause = list(stmt._where_criteria)[0]
-        assert clause.left.key == "is_active"
+    async def test_get_client_rows_filters_inactive_clients(self, mock_data_factory):
+        """Client lookup returns only active clients."""
+        active_client, _ = self.create_mock_client(mock_data_factory, is_active=True)
+        inactive_client, _ = self.create_mock_client(mock_data_factory, is_active=False)
+        self.client_rows = [inactive_client, active_client]
+
+        rows = await self.backend._get_client_rows(self.mock_db)
+
+        assert rows == [active_client]
 
     @pytest.mark.asyncio
-    async def test_get_key_stmt_filters_expired_keys(self):
-        """Test that _get_key_stmt properly filters expired keys."""
+    async def test_get_key_row_filters_expired_keys(self, mock_data_factory):
+        """API key lookup rejects expired keys."""
         test_digest = "test-digest"
+        expired = self.create_mock_api_key(
+            mock_data_factory,
+            raw_key="raw",
+            valid_to=datetime.now(timezone.utc) - timedelta(seconds=1),
+        )
+        expired.digest = test_digest
+        self.api_key_rows = [expired]
 
-        stmt = await self.backend._get_key_stmt(test_digest)
+        row = await self.backend._get_key_row(self.mock_db, test_digest)
 
-        clauses = list(stmt._where_criteria)
-        assert clauses[0].left.key == "digest"
-        sub_keys = {c.left.key for c in clauses[1].clauses}
-        assert "valid_to" in sub_keys
+        assert row is None
 
     @pytest.mark.asyncio
-    async def test_get_service_key_stmt_filters_expired_keys(self):
-        """Test that _get_service_key_stmt properly filters expired keys."""
+    async def test_get_service_key_row_filters_expired_keys(self, mock_data_factory):
+        """Service key lookup rejects expired keys."""
         test_digest = "test-digest"
+        expired = self.create_mock_service_key(
+            mock_data_factory,
+            raw_key="raw",
+            valid_to=datetime.now(timezone.utc) - timedelta(seconds=1),
+        )
+        expired.digest = test_digest
+        self.service_key_rows = [expired]
 
-        stmt = await self.backend._get_service_key_stmt(test_digest)
+        row = await self.backend._get_service_key_row(self.mock_db, test_digest)
 
-        clauses = list(stmt._where_criteria)
-        assert clauses[0].left.key == "digest"
-        sub_keys = {c.left.key for c in clauses[1].clauses}
-        assert "valid_to" in sub_keys
+        assert row is None
 
     @pytest.mark.asyncio
     async def test_authenticate_with_empty_api_key(self):
         """Test authentication with empty API key."""
-        self.mock_db.scalar.side_effect = [None, None]
+        self.api_key_rows = []
+        self.service_key_rows = []
 
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, "")
 
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
 
-    @patch("tigrbl_auth.backends._ApiKey")
     @pytest.mark.asyncio
-    async def test_digest_of_called_correctly(self, mock_api_key):
+    async def test_digest_of_called_correctly(self, monkeypatch):
         """Test that ApiKey.digest_of is called with the raw key."""
         raw_key = "test-api-key-12345"
-        mock_api_key.return_value.digest_of.return_value = "mocked-digest"
-        self.mock_db.scalar.side_effect = [None, None]
-        self.backend._get_key_stmt = AsyncMock()
-        self.backend._get_service_key_stmt = AsyncMock()
+        calls = []
+
+        def _digest_of(value):
+            calls.append(value)
+            return "mocked-digest"
+
+        monkeypatch.setattr("tigrbl_auth.services.auth_backends.ApiKey.digest_of", staticmethod(_digest_of))
 
         try:
             await self.backend.authenticate(self.mock_db, raw_key)
         except AuthError:
             pass  # Expected
 
-        mock_api_key.return_value.digest_of.assert_called_once_with(raw_key)
+        assert calls == [raw_key]
 
 
 @pytest.mark.unit
@@ -529,9 +548,9 @@ class TestBackendIntegration:
         # Verify they have different methods
         assert hasattr(password_backend, "authenticate")
         assert hasattr(api_key_backend, "authenticate")
-        assert hasattr(password_backend, "_get_user_stmt")
-        assert hasattr(api_key_backend, "_get_key_stmt")
-        assert hasattr(api_key_backend, "_get_service_key_stmt")
+        assert hasattr(password_backend, "_get_user_candidates")
+        assert hasattr(api_key_backend, "_get_key_row")
+        assert hasattr(api_key_backend, "_get_service_key_row")
 
     def test_auth_error_consistency(self):
         """Test that AuthError is consistent across backends."""

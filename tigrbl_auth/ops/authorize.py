@@ -6,17 +6,22 @@ from typing import Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
-from tigrbl_auth.framework import HTMLResponse, HTTPException, RedirectResponse, select, status
+from tigrbl_auth.framework import HTMLResponse, HTTPException, RedirectResponse, status
 from tigrbl_auth.api.rest.shared import _jwt, _require_tls
 from tigrbl_auth.config.deployment import deployment_from_request
-from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import settings
+from tigrbl_auth.security.handler_records import (
+    bind_browser_session_client_record,
+    create_handler_record,
+    first_handler_record,
+    maybe_rotate_browser_session_cookie_record,
+    read_handler_record,
+    resolve_browser_session_record,
+    update_handler_record,
+)
 from tigrbl_auth.standards.http.cookies import issue_session_cookie
 from tigrbl_auth.oidc_id_token import mint_id_token, oidc_hash
 from tigrbl_auth.standards.oidc.session_mgmt import (
-    bind_browser_session_client,
-    maybe_rotate_browser_session_cookie,
-    resolve_browser_session,
     session_state_for_client,
 )
 from tigrbl_auth.standards.oauth2.native_apps import validate_native_authorization_request
@@ -46,7 +51,7 @@ async def _resolve_pushed_authorization_request(db, params: dict[str, Any]) -> t
     request_uri = params.get("request_uri")
     if not request_uri:
         return params, None
-    row = await db.scalar(select(PushedAuthorizationRequest).where(PushedAuthorizationRequest.request_uri == str(request_uri)))
+    row = await first_handler_record(PushedAuthorizationRequest, db, {"request_uri": str(request_uri)})
     if row is None:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL})
     try:
@@ -149,14 +154,14 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     except ValueError as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
 
-    client = await db.scalar(select(Client).where(Client.id == client_uuid))
+    client = await read_handler_record(Client, db, client_uuid)
     if client is None or redirect_uri not in (client.redirect_uris or "").split():
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
 
     if par_row is not None and par_row.client_id not in {None, client_uuid}:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri"})
 
-    session = await resolve_browser_session(request, deployment=deployment)
+    session = await resolve_browser_session_record(db, request, deployment=deployment)
     if login_hint and session and session.username != login_hint:
         session = None
     prompts = set(str(prompt).split()) if prompt else set()
@@ -228,7 +233,8 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
         except ValueError as exc:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"}) from exc
 
-    await bind_browser_session_client(session.id, client_id=client_uuid)
+    await bind_browser_session_client_record(db, session.id, client_id=client_uuid)
+    session.client_id = client_uuid
     user_sub = str(session.user_id)
     tenant_id = str(session.tenant_id)
     scope_str = " ".join(sorted(scopes))
@@ -248,21 +254,23 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
 
     if "code" in rts:
         code_uuid = uuid4()
-        code_row = AuthCode(
-            id=code_uuid,
-            user_id=UUID(user_sub),
-            tenant_id=UUID(tenant_id),
-            client_id=client_uuid,
-            session_id=session.id,
-            redirect_uri=str(redirect_uri),
-            code_challenge=code_challenge,
-            nonce=nonce,
-            scope=scope_str,
-            expires_at=datetime.now(timezone.utc) + timedelta(minutes=10),
-            claims=auth_code_claims or None,
+        await create_handler_record(
+            AuthCode,
+            db,
+            {
+                "id": code_uuid,
+                "user_id": UUID(user_sub),
+                "tenant_id": UUID(tenant_id),
+                "client_id": client_uuid,
+                "session_id": session.id,
+                "redirect_uri": str(redirect_uri),
+                "code_challenge": code_challenge,
+                "nonce": nonce,
+                "scope": scope_str,
+                "expires_at": datetime.now(timezone.utc) + timedelta(minutes=10),
+                "claims": auth_code_claims or None,
+            },
         )
-        db.add(code_row)
-        await db.commit()
         code = str(code_uuid)
         params_out.append(("code", code))
 
@@ -282,7 +290,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
             "auth_time": int(session.auth_time.timestamp()),
         }
         if requested_claims and "id_token" in requested_claims:
-            user_obj = await db.scalar(select(User).where(User.id == UUID(user_sub)))
+            user_obj = await read_handler_record(User, db, UUID(user_sub))
             idc = requested_claims["id_token"]
             if "email" in idc:
                 extra_claims["email"] = user_obj.email if user_obj else ""
@@ -310,9 +318,14 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
 
     if par_row is not None and getattr(par_row, "consumed_at", None) is None:
         consume_pushed_authorization_request(par_row)
-        await db.commit()
+        await update_handler_record(
+            PushedAuthorizationRequest,
+            db,
+            par_row.id,
+            {"consumed_at": par_row.consumed_at},
+        )
 
-    rotated_secret = await maybe_rotate_browser_session_cookie(session)
+    rotated_secret = await maybe_rotate_browser_session_cookie_record(db, session)
 
     if mode == "fragment":
         response = RedirectResponse(f"{redirect_uri}#{urlencode(params_out)}" if params_out else redirect_uri)

@@ -1,6 +1,6 @@
 # CLI Surface
 
-> Generated from `tigrbl_auth.cli.metadata`; argparse help, CLI docs, contract artifacts, and conformance snapshots derive from the same metadata source.
+> Generated from `tigrbl_identity_cli.cli.metadata`; argparse help, CLI docs, contract artifacts, and conformance snapshots derive from the same metadata source.
 
 ## Global flags
 

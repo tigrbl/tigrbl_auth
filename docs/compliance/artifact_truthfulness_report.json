@@ -1,39 +1,16 @@
 {
-  "passed": false,
-  "failures": [
-    "baseline: OpenAPI contract publishes paths without decorated implementation: /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration",
-    "production: executable public routes missing from OpenAPI contract: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration",
-    "hardening: executable public routes missing from OpenAPI contract: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration",
-    "fapi2-security: executable public routes missing from OpenAPI contract: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration",
-    "peer-claim: executable public routes missing from OpenAPI contract: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration",
-    "CLI reference markdown drifts from tigrbl_identity_cli.cli.metadata",
-    "CLI contract artifact drifts from tigrbl_identity_cli.cli.metadata",
-    "CLI conformance snapshot drifts from argparse/metadata generation",
-    "CLI conformance markdown drifts from argparse/metadata generation",
-    "production: discovery artifact drifts from executable deployment metadata: openid-configuration.json",
-    "production: discovery artifact drifts from executable deployment metadata: oauth-authorization-server.json",
-    "production: discovery artifact drifts from executable deployment metadata: jwks.json",
-    "hardening: discovery artifact drifts from executable deployment metadata: openid-configuration.json",
-    "hardening: discovery artifact drifts from executable deployment metadata: oauth-authorization-server.json",
-    "hardening: discovery artifact drifts from executable deployment metadata: jwks.json",
-    "fapi2-security: discovery artifact drifts from executable deployment metadata: openid-configuration.json",
-    "fapi2-security: discovery artifact drifts from executable deployment metadata: oauth-authorization-server.json",
-    "fapi2-security: discovery artifact drifts from executable deployment metadata: jwks.json",
-    "peer-claim: discovery artifact drifts from executable deployment metadata: openid-configuration.json",
-    "peer-claim: discovery artifact drifts from executable deployment metadata: oauth-authorization-server.json",
-    "peer-claim: discovery artifact drifts from executable deployment metadata: jwks.json",
-    "Authoritative docs contain stale code-path references: 3"
-  ],
+  "passed": true,
+  "failures": [],
   "warnings": [],
   "summary": {
-    "contract_to_route_sync_passed": false,
-    "route_to_contract_sync_passed": false,
+    "contract_to_route_sync_passed": true,
+    "route_to_contract_sync_passed": true,
     "target_to_contract_sync_passed": true,
-    "cli_metadata_to_docs_sync_passed": false,
-    "runtime_plan_to_discovery_sync_passed": false,
+    "cli_metadata_to_docs_sync_passed": true,
+    "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
-    "authoritative_current_doc_stale_ref_count": 3,
-    "historical_doc_stale_ref_count": 26,
+    "authoritative_current_doc_stale_ref_count": 0,
+    "historical_doc_stale_ref_count": 25,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -81,10 +58,7 @@
           "/token"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [
-          "/realms/{realm_slug}/.well-known/jwks.json",
-          "/realms/{realm_slug}/.well-known/openid-configuration"
-        ],
+        "unmapped_contract_paths": [],
         "path_count": 18
       },
       "production": {
@@ -120,19 +94,6 @@
           "/.well-known/oauth-authorization-server",
           "/.well-known/oauth-protected-resource",
           "/.well-known/openid-configuration",
-          "/authorize",
-          "/introspect",
-          "/login",
-          "/logout",
-          "/register",
-          "/register/{client_id}",
-          "/revoke",
-          "/tenants/{tenant_slug}/.well-known/jwks.json",
-          "/tenants/{tenant_slug}/.well-known/openid-configuration",
-          "/token",
-          "/userinfo"
-        ],
-        "missing_from_contract": [
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -141,11 +102,23 @@
           "/account/profile",
           "/account/sessions",
           "/account/sessions/{session_id}",
+          "/authorize",
+          "/introspect",
+          "/login",
+          "/logout",
           "/realms/{realm_slug}/.well-known/jwks.json",
-          "/realms/{realm_slug}/.well-known/openid-configuration"
+          "/realms/{realm_slug}/.well-known/openid-configuration",
+          "/register",
+          "/register/{client_id}",
+          "/revoke",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
+          "/token",
+          "/userinfo"
         ],
+        "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 15
+        "path_count": 25
       },
       "hardening": {
         "expected_paths": [
@@ -183,12 +156,22 @@
           "/.well-known/oauth-authorization-server",
           "/.well-known/oauth-protected-resource",
           "/.well-known/openid-configuration",
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
           "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
@@ -198,20 +181,9 @@
           "/token/exchange",
           "/userinfo"
         ],
-        "missing_from_contract": [
-          "/account/authorized-apps",
-          "/account/authorized-apps/{client_id}",
-          "/account/consents",
-          "/account/consents/{consent_id}",
-          "/account/password/change",
-          "/account/profile",
-          "/account/sessions",
-          "/account/sessions/{session_id}",
-          "/realms/{realm_slug}/.well-known/jwks.json",
-          "/realms/{realm_slug}/.well-known/openid-configuration"
-        ],
+        "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 18
+        "path_count": 28
       },
       "fapi2-security": {
         "expected_paths": [
@@ -249,12 +221,22 @@
           "/.well-known/oauth-authorization-server",
           "/.well-known/oauth-protected-resource",
           "/.well-known/openid-configuration",
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
           "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
@@ -264,20 +246,9 @@
           "/token/exchange",
           "/userinfo"
         ],
-        "missing_from_contract": [
-          "/account/authorized-apps",
-          "/account/authorized-apps/{client_id}",
-          "/account/consents",
-          "/account/consents/{consent_id}",
-          "/account/password/change",
-          "/account/profile",
-          "/account/sessions",
-          "/account/sessions/{session_id}",
-          "/realms/{realm_slug}/.well-known/jwks.json",
-          "/realms/{realm_slug}/.well-known/openid-configuration"
-        ],
+        "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 18
+        "path_count": 28
       },
       "peer-claim": {
         "expected_paths": [
@@ -315,12 +286,22 @@
           "/.well-known/oauth-authorization-server",
           "/.well-known/oauth-protected-resource",
           "/.well-known/openid-configuration",
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
           "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
@@ -330,20 +311,9 @@
           "/token/exchange",
           "/userinfo"
         ],
-        "missing_from_contract": [
-          "/account/authorized-apps",
-          "/account/authorized-apps/{client_id}",
-          "/account/consents",
-          "/account/consents/{consent_id}",
-          "/account/password/change",
-          "/account/profile",
-          "/account/sessions",
-          "/account/sessions/{session_id}",
-          "/realms/{realm_slug}/.well-known/jwks.json",
-          "/realms/{realm_slug}/.well-known/openid-configuration"
-        ],
+        "missing_from_contract": [],
         "unmapped_contract_paths": [],
-        "path_count": 18
+        "path_count": 28
       }
     },
     "discovery_profiles": {
@@ -435,7 +405,7 @@
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "f68da96834ca3864c6ff2dd017c8b0afc5ba0ff2829554fbb758d896d08742dd",
+            "openapi": "4e5bf3f2ecd08a31989be60c4c4d76b4710327431dff50b1a33f1ae0051e6fcb",
             "openrpc": "81718c193952b1f2477c2ed65ccf474f8561dab8e643ca3bd849d1932ceaf171",
             "discovery": {
               "openid-configuration.json": "3369e3597afad4fa34ae65799dbfc35cfae2b8e0573fa88926f7d69714d17488",
@@ -444,7 +414,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "f68da96834ca3864c6ff2dd017c8b0afc5ba0ff2829554fbb758d896d08742dd",
+            "openapi": "4e5bf3f2ecd08a31989be60c4c4d76b4710327431dff50b1a33f1ae0051e6fcb",
             "openrpc": "81718c193952b1f2477c2ed65ccf474f8561dab8e643ca3bd849d1932ceaf171",
             "discovery": {
               "openid-configuration.json": "3369e3597afad4fa34ae65799dbfc35cfae2b8e0573fa88926f7d69714d17488",
@@ -453,7 +423,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "f68da96834ca3864c6ff2dd017c8b0afc5ba0ff2829554fbb758d896d08742dd",
+            "openapi": "4e5bf3f2ecd08a31989be60c4c4d76b4710327431dff50b1a33f1ae0051e6fcb",
             "openrpc": "81718c193952b1f2477c2ed65ccf474f8561dab8e643ca3bd849d1932ceaf171",
             "discovery": {
               "openid-configuration.json": "3369e3597afad4fa34ae65799dbfc35cfae2b8e0573fa88926f7d69714d17488",
@@ -473,7 +443,7 @@
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "a4680a72a07faa4d18251a86aaad70b9547be62eb855d5889ebb8f78ad225950",
+            "openapi": "18ea7c18a7c152a6dc785811e368fca4bfd2edb6811473ec68ffebf7f09f455b",
             "openrpc": "e499ddb648ac5a1e66aa15897afb65896e398de49ac25f019b566b6095a95e72",
             "discovery": {
               "openid-configuration.json": "34188d8ead3ba6f9f2e0671753778cbe4f790284dd2e39e7fdce42963e313059",
@@ -483,7 +453,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "a4680a72a07faa4d18251a86aaad70b9547be62eb855d5889ebb8f78ad225950",
+            "openapi": "18ea7c18a7c152a6dc785811e368fca4bfd2edb6811473ec68ffebf7f09f455b",
             "openrpc": "e499ddb648ac5a1e66aa15897afb65896e398de49ac25f019b566b6095a95e72",
             "discovery": {
               "openid-configuration.json": "34188d8ead3ba6f9f2e0671753778cbe4f790284dd2e39e7fdce42963e313059",
@@ -493,7 +463,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "a4680a72a07faa4d18251a86aaad70b9547be62eb855d5889ebb8f78ad225950",
+            "openapi": "18ea7c18a7c152a6dc785811e368fca4bfd2edb6811473ec68ffebf7f09f455b",
             "openrpc": "e499ddb648ac5a1e66aa15897afb65896e398de49ac25f019b566b6095a95e72",
             "discovery": {
               "openid-configuration.json": "34188d8ead3ba6f9f2e0671753778cbe4f790284dd2e39e7fdce42963e313059",
@@ -514,7 +484,7 @@
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "7e650b1eeb111a9a894b4363757e11f8240f7f033d0bb2cfd388ac90fc164be6",
+            "openapi": "6a2e4a3ced8409b5e48d70f85ecbdbc8f03f1ef4324b8495f9a30b8f2aa449fa",
             "openrpc": "bf036315da95e5e5be21121482a18215c772dce6ab9b5ddb133fb3a100b175e6",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -524,7 +494,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "7e650b1eeb111a9a894b4363757e11f8240f7f033d0bb2cfd388ac90fc164be6",
+            "openapi": "6a2e4a3ced8409b5e48d70f85ecbdbc8f03f1ef4324b8495f9a30b8f2aa449fa",
             "openrpc": "bf036315da95e5e5be21121482a18215c772dce6ab9b5ddb133fb3a100b175e6",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -534,7 +504,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "7e650b1eeb111a9a894b4363757e11f8240f7f033d0bb2cfd388ac90fc164be6",
+            "openapi": "6a2e4a3ced8409b5e48d70f85ecbdbc8f03f1ef4324b8495f9a30b8f2aa449fa",
             "openrpc": "bf036315da95e5e5be21121482a18215c772dce6ab9b5ddb133fb3a100b175e6",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -555,7 +525,7 @@
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "0a93d859c7f1e8468baabb698da9d2e0cd9cb4e400d93e459f65e1e7ee23b02f",
+            "openapi": "4cab34f292706398962ac1dc5accca30bc1d2ddca2842315bebf30df16b182f7",
             "openrpc": "c78d3e74378ea9b0f551d764967c1fda56a98635eba11cc3528b5edbd0efecd8",
             "discovery": {
               "openid-configuration.json": "92c36d9878463a64db99d657f1cea45304e4a64448dbf16422f308d12e8369ac",
@@ -565,7 +535,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "0a93d859c7f1e8468baabb698da9d2e0cd9cb4e400d93e459f65e1e7ee23b02f",
+            "openapi": "4cab34f292706398962ac1dc5accca30bc1d2ddca2842315bebf30df16b182f7",
             "openrpc": "c78d3e74378ea9b0f551d764967c1fda56a98635eba11cc3528b5edbd0efecd8",
             "discovery": {
               "openid-configuration.json": "92c36d9878463a64db99d657f1cea45304e4a64448dbf16422f308d12e8369ac",
@@ -575,7 +545,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "0a93d859c7f1e8468baabb698da9d2e0cd9cb4e400d93e459f65e1e7ee23b02f",
+            "openapi": "4cab34f292706398962ac1dc5accca30bc1d2ddca2842315bebf30df16b182f7",
             "openrpc": "c78d3e74378ea9b0f551d764967c1fda56a98635eba11cc3528b5edbd0efecd8",
             "discovery": {
               "openid-configuration.json": "92c36d9878463a64db99d657f1cea45304e4a64448dbf16422f308d12e8369ac",
@@ -596,7 +566,7 @@
         },
         "contract_hashes": {
           "hypercorn": {
-            "openapi": "007df6b05d26c878d297015b372dd1af1ee07011e366f06efbed8d50c178de50",
+            "openapi": "7ce7d7d679e6d87457a9d7da1846631f3301ad49e026ffc38f49586879d7d575",
             "openrpc": "55707bfc1564647be05ec96f9cf1f3e3462008b74d90a639df6bcb44d351dbef",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -606,7 +576,7 @@
             }
           },
           "tigrcorn": {
-            "openapi": "007df6b05d26c878d297015b372dd1af1ee07011e366f06efbed8d50c178de50",
+            "openapi": "7ce7d7d679e6d87457a9d7da1846631f3301ad49e026ffc38f49586879d7d575",
             "openrpc": "55707bfc1564647be05ec96f9cf1f3e3462008b74d90a639df6bcb44d351dbef",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -616,7 +586,7 @@
             }
           },
           "uvicorn": {
-            "openapi": "007df6b05d26c878d297015b372dd1af1ee07011e366f06efbed8d50c178de50",
+            "openapi": "7ce7d7d679e6d87457a9d7da1846631f3301ad49e026ffc38f49586879d7d575",
             "openrpc": "55707bfc1564647be05ec96f9cf1f3e3462008b74d90a639df6bcb44d351dbef",
             "discovery": {
               "openid-configuration.json": "cbe653ee7863c5ee6a17572d5c7218994e35bfb86816d70ffd580b3f22cc0d69",
@@ -631,17 +601,7 @@
       }
     },
     "stale_doc_refs": {
-      "authoritative": {
-        "tigrbl_auth/cli/artifacts.py": [
-          "docs/reference/RPC_OPERATOR_SURFACE.md"
-        ],
-        "tigrbl_auth/cli/reports.py": [
-          "docs/reference/RPC_OPERATOR_SURFACE.md"
-        ],
-        "tigrbl_auth/cli/metadata.py": [
-          "README.md"
-        ]
-      },
+      "authoritative": {},
       "historical": {
         "tigrbl_auth/cli/boundary.py": [
           "docs/architecture/MIGRATION_COMPLETION_REPORT.md"
@@ -649,9 +609,6 @@
         "tigrbl_auth/cli/install_substrate.py": [
           "docs/compliance/APP_FACTORY_MATERIALIZATION_CHECKPOINT_2026-03-26.md",
           "docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md"
-        ],
-        "tigrbl_auth/compat.py": [
-          "docs/compliance/certification_evidence_index.md"
         ],
         "tigrbl_auth/cli/certification_evidence.py": [
           "docs/compliance/CLEAN_ROOM_EXECUTOR_AND_EVIDENCE_CHECKPOINT_2026-03-27.md"

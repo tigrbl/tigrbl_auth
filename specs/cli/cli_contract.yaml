@@ -1,6 +1,6 @@
 schema_version: 1
 package: tigrbl_auth
-generated_from: tigrbl_auth.cli.metadata
+generated_from: tigrbl_identity_cli.cli.metadata
 summary:
   command_count: 20
   verb_count: 83
@@ -55,9 +55,17 @@ global_flags:
   family: global
   default: &id008 []
   choices: &id009
+  - admin-rest
   - admin-rpc
+  - developer-api
   - diagnostics
+  - my-account-api
+  - platform-admin-api
+  - public-api
   - public-rest
+  - resource-validation-api
+  - service-admin-api
+  - tenant-admin-api
   action: append
 - key: slice
   flags:

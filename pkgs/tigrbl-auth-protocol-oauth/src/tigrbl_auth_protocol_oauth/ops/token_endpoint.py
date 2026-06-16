@@ -62,7 +62,6 @@ from .token_runtime import (
     verify_code_challenge,
 )
 
-
 async def token_request(*, request, db):
     deployment = _resolve_request_deployment(request)
     _enforce_tls(request, deployment)
@@ -398,5 +397,4 @@ async def token_request(*, request, db):
             resource=resource,
             jwt_kwargs=_jwt_kwargs,
         )
-
     return _json_error('unsupported_grant_type', status_code=status.HTTP_400_BAD_REQUEST)

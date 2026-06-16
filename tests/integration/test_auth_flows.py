@@ -175,7 +175,7 @@ class TestLoginFlow:
         assert data["session_id"]
         assert async_client.cookies.get("sid") is not None
 
-        payload = JWTCoder.default().decode(data["access_token"])
+        payload = await (await JWTCoder.async_default()).async_decode(data["access_token"])
         assert payload["sub"] == str(user.id)
         assert payload["tid"] == str(tenant.id)
 
@@ -285,7 +285,7 @@ class TestTokenEndpoint:
             secret="refresh-secret",
         )
 
-        jwt_coder = JWTCoder.default()
+        jwt_coder = await JWTCoder.async_default()
         access_token, refresh_token = await issue_persisted_token_pair(
             jwt=jwt_coder,
             sub=str(user.id),
@@ -349,7 +349,7 @@ class TestTokenEndpoint:
             secret="family-secret",
         )
 
-        jwt_coder = JWTCoder.default()
+        jwt_coder = await JWTCoder.async_default()
         _, refresh_token = await issue_persisted_token_pair(
             jwt=jwt_coder,
             sub=str(user.id),
@@ -422,7 +422,7 @@ class TestIntrospectionEndpoint:
         client = await _create_confidential_client(db_session, tenant)
 
         access_token, _ = await issue_persisted_token_pair(
-            jwt=JWTCoder.default(),
+            jwt=await JWTCoder.async_default(),
             sub=str(user.id),
             tid=str(tenant.id),
             client_id=str(client.id),

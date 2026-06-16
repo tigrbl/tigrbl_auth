@@ -13,6 +13,8 @@ from tigrbl_identity_runtime.profile_loader import load_profile_reference
 from tigrbl_identity_server.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES
 from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_identity_principals.tenant_discovery import (
+    REALM_JWKS_PATH,
+    REALM_OPENID_CONFIGURATION_PATH,
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     build_tenant_openid_config,

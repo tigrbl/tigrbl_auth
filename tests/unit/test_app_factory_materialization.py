@@ -19,11 +19,31 @@ def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
 
 
 def test_framework_uses_published_tigrbl_api_surface_names() -> None:
-    text = (ROOT / "tigrbl_auth" / "framework.py").read_text(encoding="utf-8")
-    assert "from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx" in text
-    assert 'getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")' in text
-    assert "class TigrblRouter(_BaseTigrblRouter)" in text
-    assert "from tigrbl.core.crud.params import Header" in text
+    facade_text = (ROOT / "tigrbl_auth" / "framework.py").read_text(encoding="utf-8")
+    crud_text = (
+        ROOT
+        / "pkgs"
+        / "tigrbl-identity-server"
+        / "src"
+        / "tigrbl_identity_server"
+        / "_framework"
+        / "crud_compat.py"
+    ).read_text(encoding="utf-8")
+    router_text = (
+        ROOT
+        / "pkgs"
+        / "tigrbl-identity-server"
+        / "src"
+        / "tigrbl_identity_server"
+        / "_framework"
+        / "router_compat.py"
+    ).read_text(encoding="utf-8")
+
+    assert "tigrbl_identity_server.framework" in facade_text
+    assert "from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx" in crud_text
+    assert 'getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")' in crud_text
+    assert "class TigrblRouter(_BaseTigrblRouter)" in router_text
+    assert "from tigrbl.core.crud.params import Header" in crud_text
 
 
 def test_install_substrate_report_tracks_constraint_legalization() -> None:
@@ -42,7 +62,7 @@ def test_introspection_module_uses_runtime_router_when_dependencies_are_installe
     module = importlib.reload(importlib.import_module("tigrbl_auth.standards.oauth2.introspection"))
     routes = list(getattr(module.api, "routes", []))
 
-    assert type(module.api).__module__ == "tigrbl_auth.framework"
+    assert type(module.api).__module__ == "tigrbl_identity_server._framework.router_compat"
     assert routes
     assert any((getattr(route, "path", None) or getattr(route, "path_template", None)) == "/introspect" for route in routes)
     assert all(hasattr(route, "name") for route in routes)

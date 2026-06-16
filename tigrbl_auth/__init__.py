@@ -49,6 +49,7 @@ _install_http_status_aliases()
 
 _MODULE_EXPORTS = {
     "framework": "tigrbl_auth.framework",
+    "ops": "tigrbl_auth.ops",
     "runtime_cfg": "tigrbl_auth.runtime_cfg",
     "rfc7591": "tigrbl_auth.rfc.rfc7591",
     "rfc7592": "tigrbl_auth.rfc.rfc7592",

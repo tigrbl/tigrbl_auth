@@ -87,6 +87,8 @@ partitions:
   - tests/uix/test_safe_mutations.py
   - tests/unit/test_adapters.py
   - tests/unit/test_admin_control_plane_boundary.py
+  - tests/unit/test_admin_policy_boundary.py
+  - tests/unit/test_advanced_identity_graph_auth_boundary.py
   - tests/unit/test_advanced_identity_plane_phase4.py
   - tests/unit/test_advanced_surface_contracts.py
   - tests/unit/test_app_factory_materialization.py
@@ -137,6 +139,7 @@ partitions:
   - tests/unit/test_feature_flag_registry.py
   - tests/unit/test_final_aggregation.py
   - tests/unit/test_governance_extension_plane_phase5.py
+  - tests/unit/test_handler_records.py
   - tests/unit/test_hardening_cluster_a.py
   - tests/unit/test_hardening_cluster_b.py
   - tests/unit/test_hardening_cluster_c.py
@@ -155,6 +158,7 @@ partitions:
   - tests/unit/test_monorepo_release.py
   - tests/unit/test_non_rfc_track_checkpoint.py
   - tests/unit/test_oauth_oidc_protocol_boundary.py
+  - tests/unit/test_oidc_authorization_code_token_claims.py
   - tests/unit/test_oidc_authorize_scope_nonce.py
   - tests/unit/test_oidc_id_token.py
   - tests/unit/test_oidc_id_token_encryption.py
@@ -170,10 +174,6 @@ partitions:
   - tests/unit/test_package_maturity_governance.py
   - tests/unit/test_path_safety.py
   - tests/unit/test_peer_bundle_completeness.py
-  - tests/unit/test_phase1_surface_boundary.py
-  - tests/unit/test_phase3_admin_policy_boundary.py
-  - tests/unit/test_phase4_advanced_identity_boundary.py
-  - tests/unit/test_phase5_governance_extension_boundary.py
   - tests/unit/test_policy_control_plane_phase3.py
   - tests/unit/test_policy_determinism_replay.py
   - tests/unit/test_policy_replay_stability_robustness_t2.py
@@ -183,6 +183,7 @@ partitions:
   - tests/unit/test_protected_resource_verifier_contract.py
   - tests/unit/test_provenance_naming_guard.py
   - tests/unit/test_provider_white_label_login_boundary.py
+  - tests/unit/test_provisioning_governance_ecosystem_boundary.py
   - tests/unit/test_public_route_contracts.py
   - tests/unit/test_published_dependency_model.py
   - tests/unit/test_pytest_workspace_temp_root.py
@@ -247,6 +248,7 @@ partitions:
   - tests/unit/test_runtime_version_truthfulness.py
   - tests/unit/test_secure_default_admin_gate.py
   - tests/unit/test_security_deps.py
+  - tests/unit/test_security_user_lookup.py
   - tests/unit/test_server_runtime_operator_boundary.py
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
@@ -255,12 +257,14 @@ partitions:
   - tests/unit/test_ssot_work_item_traceability.py
   - tests/unit/test_storage_canonical_facades.py
   - tests/unit/test_storage_repository_boundary.py
+  - tests/unit/test_surface_baseline_boundary.py
   - tests/unit/test_tenant_public_discovery_boundary.py
   - tests/unit/test_tenant_realm_isolation_invariants.py
   - tests/unit/test_testkit_cross_cutting_boundary.py
   - tests/unit/test_tier3_validated_rebuild.py
   - tests/unit/test_tier4_checkpoint.py
   - tests/unit/test_tigrbl_auth_facade_ownership.py
+  - tests/unit/test_tigrbl_bcp_direct_db_boundary.py
   - tests/unit/test_trust_graph_integrity_guards.py
   - tests/unit/test_truth_chain_hashing.py
   - tests/unit/test_truthfulness_alignment.py
@@ -279,6 +283,7 @@ partitions:
   - tests/integration/test_default_openapi_endpoints.py
   - tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
+  - tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - tests/integration/test_oidc_endpoints.py
   - tests/integration/test_persistence_lifecycle_durability.py

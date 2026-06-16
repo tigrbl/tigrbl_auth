@@ -93,10 +93,56 @@ def export_records(records: Sequence[Mapping[str, Any]], export_format: str) -> 
 def _db_handles():
     try:
         from tigrbl_auth.services.persistence import _session
-        from tigrbl_auth.framework import select
     except Exception as exc:  # pragma: no cover - surfaced when runtime deps are absent
         raise RuntimeError("database-backed RPC methods require the runtime dependency set") from exc
-    return _session, select
+    return _session
+
+
+async def _ensure_schema_ready() -> None:
+    from tigrbl_auth.migrations.runtime import apply_all_async
+
+    await apply_all_async()
+
+
+def _created_item(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        for key in ("item", "result", "data"):
+            if key in value:
+                return value[key]
+    return value
+
+
+def _list_items(result: Any) -> list[Any]:
+    if isinstance(result, Mapping) and isinstance(result.get("items"), list):
+        result = result["items"]
+    elif hasattr(result, "items"):
+        result = result.items
+    if isinstance(result, list):
+        return result
+    if isinstance(result, tuple):
+        return list(result)
+    if result is None:
+        return []
+    return [result]
+
+
+def _value_matches(actual: Any, expected: Any) -> bool:
+    if actual == expected:
+        return True
+    if actual is None or expected is None:
+        return False
+    return str(actual) == str(expected)
+
+
+def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
+    for key, expected in filters.items():
+        if expected is None:
+            continue
+        if not hasattr(row, key):
+            continue
+        if not _value_matches(getattr(row, key, None), maybe_uuid(expected)):
+            return False
+    return True
 
 
 async def list_rows(
@@ -108,50 +154,56 @@ async def list_rows(
     order_by: str | None = "created_at",
     descending: bool = True,
 ) -> list[Any]:
-    _session, select = _db_handles()
+    _session = _db_handles()
+    await _ensure_schema_ready()
     async with _session() as session:
-        stmt = select(model)
-        for key, value in (filters or {}).items():
-            if value is None:
-                continue
-            stmt = stmt.where(getattr(model, key) == maybe_uuid(value))
-        column = getattr(model, order_by, None) if order_by else None
-        if column is not None:
-            try:
-                stmt = stmt.order_by(column.desc() if descending else column.asc())
-            except Exception:
-                pass
-        stmt = stmt.offset(offset).limit(limit)
-        result = await session.execute(stmt)
-        return list(result.scalars().all())
+        normalized_filters = {
+            key: maybe_uuid(value)
+            for key, value in (filters or {}).items()
+            if value is not None
+        }
+        result = await model.handlers.list.core({"payload": {"filters": normalized_filters}, "db": session})
+        rows = [row for row in _list_items(result) if _matches_filters(row, normalized_filters)]
+        if order_by:
+            rows = sorted(
+                rows,
+                key=lambda row: getattr(row, order_by, None) or "",
+                reverse=descending,
+            )
+        return rows[offset : offset + limit]
 
 
 async def get_row(model: Any, *, id_value: Any | None = None, filters: dict[str, Any] | None = None) -> Any | None:
-    _session, select = _db_handles()
+    _session = _db_handles()
+    await _ensure_schema_ready()
     async with _session() as session:
-        stmt = select(model)
         if id_value is not None and hasattr(model, "id"):
-            stmt = stmt.where(getattr(model, "id") == maybe_uuid(id_value))
-        for key, value in (filters or {}).items():
-            if value is None:
-                continue
-            stmt = stmt.where(getattr(model, key) == maybe_uuid(value))
-        result = await session.execute(stmt.limit(1))
-        return result.scalars().first()
+            row = await model.handlers.read.core({"path_params": {"id": maybe_uuid(id_value)}, "db": session})
+            if row is not None and _matches_filters(row, filters or {}):
+                return row
+            return None
+        rows = await list_rows(model, filters=filters, limit=1, offset=0, order_by=None)
+        return rows[0] if rows else None
 
 
 async def create_key_rotation_event(*, key_kid: str, action: str, status: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
-    _session, _ = _db_handles()
+    _session = _db_handles()
     from tigrbl_auth.tables import KeyRotationEvent
 
+    await _ensure_schema_ready()
     async with _session() as session:
-        row = KeyRotationEvent(key_kid=key_kid, action=action, status=status, details=details or {})
-        session.add(row)
-        await session.commit()
-        try:
-            await session.refresh(row)
-        except Exception:
-            pass
+        row = await KeyRotationEvent.handlers.create.core(
+            {
+                "payload": {
+                    "key_kid": key_kid,
+                    "action": action,
+                    "status": status,
+                    "details": details or {},
+                },
+                "db": session,
+            }
+        )
+        row = _created_item(row)
         return row_to_dict(row)
 
 

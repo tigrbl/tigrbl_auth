@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta, timezone
-import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
 from urllib.parse import urlencode
@@ -37,12 +36,9 @@ from tigrbl_auth.standards.oauth2.resource_indicators import (
     select_resource_indicator,
 )
 import tigrbl_auth.standards.oauth2.token_exchange as token_exchange_mod
+import tigrbl_auth_protocol_oauth.ops.token as token_ops
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-_TOKEN_OPS_SPEC = importlib.util.spec_from_file_location('capability_token_ops', _REPO_ROOT / 'tigrbl_auth' / 'ops' / 'token.py')
-token_ops = importlib.util.module_from_spec(_TOKEN_OPS_SPEC)
-assert _TOKEN_OPS_SPEC.loader is not None
-_TOKEN_OPS_SPEC.loader.exec_module(token_ops)
 
 from tigrbl_auth.standards.oauth2.token_exchange import (
     HTTPException,
@@ -224,6 +220,34 @@ class _FakeDB:
         self.commits += 1
 
 
+def _patch_token_handler_records(monkeypatch, *, client, registration=None, device_code=None):
+    updates = {}
+
+    async def _read_handler_record(model, db, ident):
+        if model is token_ops.Client:
+            return client
+        return None
+
+    async def _first_handler_record(model, db, filters):
+        if model is token_ops.ClientRegistration:
+            return registration
+        if model is token_ops.DeviceCode:
+            return device_code
+        return None
+
+    async def _update_handler_record(model, db, ident, payload):
+        updates.update(payload)
+        if device_code is not None:
+            for key, value in payload.items():
+                setattr(device_code, key, value)
+        return device_code
+
+    monkeypatch.setattr(token_ops, 'read_handler_record', _read_handler_record)
+    monkeypatch.setattr(token_ops, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(token_ops, 'update_handler_record', _update_handler_record)
+    return updates
+
+
 class _FakeDeployment:
     issuer = 'https://issuer.example/tenants/test'
     protected_resource_identifier = 'https://rs.example'
@@ -263,16 +287,17 @@ async def test_device_code_poll_slow_down(monkeypatch) -> None:
         scope='openid',
     )
     db = _FakeDB(client, None, row)
+    updates = _patch_token_handler_records(monkeypatch, client=client, device_code=row)
     monkeypatch.setattr(token_ops, '_require_tls', lambda request: None)
     monkeypatch.setattr(token_ops, 'resolve_deployment', lambda _settings: _FakeDeployment())
     monkeypatch.setattr(token_ops, 'assert_token_request_allowed', lambda data, deployment: None)
     monkeypatch.setattr(token_ops, 'validate_sender_constraint', lambda *args, **kwargs: _FakeSenderConstraint())
     captured = {}
 
-    async def _audit(**kwargs):
+    async def _audit(db, **kwargs):
         captured.update(kwargs)
 
-    monkeypatch.setattr(token_ops, 'append_audit_event_async', _audit)
+    monkeypatch.setattr(token_ops, 'append_audit_event_record', _audit)
     request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-1'})
     response = await token_ops.token_request(request=request, db=db)
     assert response.status_code == 400
@@ -280,7 +305,9 @@ async def test_device_code_poll_slow_down(monkeypatch) -> None:
     assert row.poll_count == 1
     assert row.slow_down_count == 1
     assert row.interval == next_device_poll_interval(DEVICE_CODE_INTERVAL, slow_down_count=1)
-    assert db.commits == 1
+    assert updates['poll_count'] == 1
+    assert updates['slow_down_count'] == 1
+    assert updates['interval'] == row.interval
     assert captured['event_type'] == 'device.authorization.poll.slow_down'
 
 
@@ -333,6 +360,31 @@ async def test_device_code_poll_denied_and_expired(monkeypatch) -> None:
     )
     denied_db = _FakeDB(client, None, denied_row)
     expired_db = _FakeDB(client, None, expired_row)
+    rows_by_code = {denied_row.device_code: denied_row, expired_row.device_code: expired_row}
+
+    async def _read_handler_record(model, db, ident):
+        if model is token_ops.Client:
+            return client
+        return None
+
+    async def _first_handler_record(model, db, filters):
+        if model is token_ops.ClientRegistration:
+            return None
+        if model is token_ops.DeviceCode:
+            return rows_by_code.get(filters.get('device_code'))
+        return None
+
+    async def _update_handler_record(model, db, ident, payload):
+        for row in rows_by_code.values():
+            if str(getattr(row, 'id', '')) == str(ident):
+                for key, value in payload.items():
+                    setattr(row, key, value)
+                return row
+        return None
+
+    monkeypatch.setattr(token_ops, 'read_handler_record', _read_handler_record)
+    monkeypatch.setattr(token_ops, 'first_handler_record', _first_handler_record)
+    monkeypatch.setattr(token_ops, 'update_handler_record', _update_handler_record)
     denied_request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-2'})
     expired_request = _FakeRequest({'grant_type': token_ops.DEVICE_CODE_GRANT_TYPE, 'client_id': 'client-1', 'client_secret': 'secret', 'device_code': 'device-code-3'})
     denied_response = await token_ops.token_request(request=denied_request, db=denied_db)

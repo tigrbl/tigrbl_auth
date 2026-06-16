@@ -12,6 +12,7 @@ from tigrbl_auth.api.rpc.registry import RpcSchema
 
 class TenantRecord(RpcSchema):
     id: str
+    realm_id: str | None = None
     name: str | None = None
     email: str | None = None
     slug: str | None = None

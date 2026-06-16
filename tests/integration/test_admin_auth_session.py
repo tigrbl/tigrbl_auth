@@ -7,13 +7,13 @@ from uuid import uuid4
 
 import pytest
 from httpx import ASGITransport, AsyncClient
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.api.app import build_app
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.framework import select
 from tigrbl_auth.routers.surface import surface_api as legacy_surface_api
 from tigrbl_auth.runtime.engine_resolver import (
     register_api_provider,

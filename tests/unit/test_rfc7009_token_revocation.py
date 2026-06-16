@@ -5,7 +5,7 @@ from http import HTTPStatus as status
 from httpx import AsyncClient
 
 from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.rfc.rfc7009 import is_revoked, reset_revocations
+from tigrbl_auth.rfc.rfc7009 import is_revoked_async, reset_revocations_async
 
 # RFC 7009 specification excerpt for reference within tests
 RFC7009_SPEC = """
@@ -25,7 +25,7 @@ async def test_revoke_returns_200_and_marks_token_revoked(
     """RFC 7009 §2.2: Revocation returns HTTP 200 and token becomes invalid."""
     resp = await async_client.post("/revoke", data={"token": "abc"})
     assert resp.status_code == status.HTTP_200_OK
-    assert is_revoked("abc")
+    assert await is_revoked_async("abc")
 
 
 @pytest.mark.unit
@@ -45,7 +45,7 @@ async def test_revoke_returns_200_for_unknown_token(
 async def test_revoke_returns_404_when_disabled(monkeypatch, async_client: AsyncClient):
     """RFC 7009: Revocation endpoint is unavailable when support is disabled."""
     monkeypatch.setattr(settings, "enable_rfc7009", False)
-    reset_revocations()
+    await reset_revocations_async()
     resp = await async_client.post("/revoke", data={"token": "abc"})
     assert resp.status_code == status.HTTP_404_NOT_FOUND
-    assert not is_revoked("abc")
+    assert not await is_revoked_async("abc")

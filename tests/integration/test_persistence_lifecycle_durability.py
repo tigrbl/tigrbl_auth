@@ -4,9 +4,9 @@ from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 
 import pytest
+from sqlalchemy import select
 
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.framework import select
 from tigrbl_auth.services.persistence import (
     append_audit_event_async,
     create_session_async,
@@ -192,7 +192,7 @@ async def test_client_registration_metadata_roundtrip_is_durable(db_session):
 
 async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session, test_db_engine):
     tenant, user, client = await _identity_triplet(db_session)
-    jwt = JWTCoder.default()
+    jwt = await JWTCoder.async_default()
 
     _, refresh_token = await issue_persisted_token_pair(
         jwt=jwt,
@@ -239,7 +239,7 @@ async def test_refresh_token_rotation_and_reuse_rejection_is_durable(db_session,
 
 async def test_issue_persisted_token_pair_retains_authorization_trace_and_delegation_provenance(db_session):
     tenant, user, client = await _identity_triplet(db_session)
-    jwt = JWTCoder.default()
+    jwt = await JWTCoder.async_default()
     authorization_trace = {
         "artifact_type": "authorization_decision_trace",
         "artifact_version": 1,

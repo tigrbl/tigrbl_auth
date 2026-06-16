@@ -19,6 +19,7 @@ SPLIT_MODULE_PREFIXES = (
     "tigrbl_authz_",
     "tigrbl_identity_",
 )
+TABLE_MODULE_PREFIXES = ("tigrbl_identity_storage",)
 
 
 FACADE_MODULES = {
@@ -40,14 +41,13 @@ FACADE_MODULES = {
     "tigrbl_auth.services.token_service": "tigrbl_authn_credentials.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_jose.release_signing",
     "tigrbl_auth.ops.register": "tigrbl_auth_protocol_oauth.ops.register",
+    "tigrbl_auth.ops.token": "tigrbl_auth_protocol_oauth.ops.token",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_identity_operator.authorization_provenance",
     "tigrbl_auth.services.audit_service": "tigrbl_identity_operator.audit_service",
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
 }
 
-EXECUTABLE_FACADE_MODULES = {
-    "tigrbl_auth.ops.token": "tigrbl_auth_protocol_oauth.ops.token",
-}
+EXECUTABLE_FACADE_MODULES: dict[str, str] = {}
 
 INSTALLED_FACADE_MODULES = {
     key: FACADE_MODULES[key]
@@ -70,9 +70,12 @@ def source_tree_paths_first():
     removed_modules = {
         name: module
         for name, module in sys.modules.items()
-        if name == "tigrbl_auth"
-        or name.startswith("tigrbl_auth.")
-        or name.startswith(SPLIT_MODULE_PREFIXES)
+        if (
+            name == "tigrbl_auth"
+            or name.startswith("tigrbl_auth.")
+            or name.startswith(SPLIT_MODULE_PREFIXES)
+        )
+        and not name.startswith(TABLE_MODULE_PREFIXES)
     }
     for name in list(removed_modules):
         sys.modules.pop(name, None)
@@ -86,7 +89,10 @@ def source_tree_paths_first():
             if (
                 name == "tigrbl_auth"
                 or name.startswith("tigrbl_auth.")
-                or name.startswith(SPLIT_MODULE_PREFIXES)
+                or (
+                    name.startswith(SPLIT_MODULE_PREFIXES)
+                    and not name.startswith(TABLE_MODULE_PREFIXES)
+                )
             ):
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
@@ -99,9 +105,12 @@ def package_src_paths_only():
     removed_modules = {
         name: module
         for name, module in sys.modules.items()
-        if name == "tigrbl_auth"
-        or name.startswith("tigrbl_auth.")
-        or name.startswith(SPLIT_MODULE_PREFIXES)
+        if (
+            name == "tigrbl_auth"
+            or name.startswith("tigrbl_auth.")
+            or name.startswith(SPLIT_MODULE_PREFIXES)
+        )
+        and not name.startswith(TABLE_MODULE_PREFIXES)
     }
     for name in list(removed_modules):
         sys.modules.pop(name, None)
@@ -118,7 +127,10 @@ def package_src_paths_only():
             if (
                 name == "tigrbl_auth"
                 or name.startswith("tigrbl_auth.")
-                or name.startswith(SPLIT_MODULE_PREFIXES)
+                or (
+                    name.startswith(SPLIT_MODULE_PREFIXES)
+                    and not name.startswith(TABLE_MODULE_PREFIXES)
+                )
             ):
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
@@ -134,15 +146,16 @@ def test_legacy_facade_modules_alias_canonical_module_objects() -> None:
             assert legacy is canonical
 
 
-def test_legacy_executable_facades_preserve_private_patch_points() -> None:
-    with source_tree_paths_first():
-        for legacy_name, canonical_name in EXECUTABLE_FACADE_MODULES.items():
-            legacy = importlib.import_module(legacy_name)
-            canonical = importlib.import_module(canonical_name)
+def test_no_legacy_executable_facades_remain() -> None:
+    assert EXECUTABLE_FACADE_MODULES == {}
 
-            assert legacy.DEVICE_CODE_GRANT_TYPE == canonical.DEVICE_CODE_GRANT_TYPE
-            assert legacy.token_request.__code__.co_code == canonical.token_request.__code__.co_code
-            assert hasattr(legacy, "_require_tls")
+
+def test_legacy_facade_token_is_non_executable_alias() -> None:
+    source = (LEGACY_ROOT / "ops" / "token.py").read_text(encoding="utf-8")
+
+    assert "exec(compile(" not in source
+    assert "alias_module" in source
+    assert "tigrbl_auth_protocol_oauth.ops.token" in source
 
 
 def test_installable_tigrbl_auth_facade_exposes_runtime_legacy_paths() -> None:

@@ -7,7 +7,6 @@ import base64
 import json
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
-from threading import Thread
 from typing import Any, Dict, Iterable, Optional, Tuple
 
 from .errors import InvalidTokenError
@@ -23,11 +22,10 @@ from .framework import (
     KeySpec,
     KeyUse,
 )
-from tigrbl_auth.config.settings import settings
+from tigrbl_auth.runtime_cfg import settings
 from tigrbl_auth.standards.oauth2.mtls import validate_certificate_binding
 from tigrbl_auth.services.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
-from tigrbl_auth.standards.oauth2.revocation import is_revoked
-from tigrbl_auth.standards.oauth2.introspection import register_token
+from tigrbl_auth.standards.oauth2.revocation import is_revoked_async
 
 _ACCESS_TTL = timedelta(minutes=60)
 _REFRESH_TTL = timedelta(days=7)
@@ -35,21 +33,13 @@ _ALG = JWAAlg.EDDSA.value
 
 
 def _run(coro):
-    """Execute *coro* regardless of the current event loop state."""
+    """Run an async token operation from a true synchronous caller."""
     try:
         asyncio.get_running_loop()
     except RuntimeError:
         return asyncio.run(coro)
-    result = None
-
-    def runner():
-        nonlocal result
-        result = asyncio.run(coro)
-
-    t = Thread(target=runner)
-    t.start()
-    t.join()
-    return result
+    coro.close()
+    raise RuntimeError("sync JWT helpers cannot run inside an active event loop; use the async helper")
 
 
 @lru_cache(maxsize=1)
@@ -184,11 +174,6 @@ class JWTCoder:
             issuer=issuer,
             audience=audience,
         )
-        if settings.enable_rfc7662:
-            claims = {"sub": sub, "kind": typ}
-            if tid is not None:
-                claims["tid"] = tid
-            register_token(token, claims)
         return token
 
     def sign(
@@ -252,7 +237,7 @@ class JWTCoder:
         audience: Optional[Iterable[str] | str] = None,
         cert_thumbprint: Optional[str] = None,
     ) -> Dict[str, Any]:
-        if is_revoked(token):
+        if await is_revoked_async(token):
             raise InvalidTokenError("token has been revoked")
         if _header_alg(token) in {"", "none"}:
             raise InvalidTokenError("unsigned JWTs are not accepted")
@@ -271,7 +256,7 @@ class JWTCoder:
         if settings.enable_rfc8705:
             if cnf.get("x5t#S256") is None:
                 raise InvalidTokenError("token missing required cnf.x5t#S256 claim")
-            validate_certificate_binding(payload, cert_thumbprint)
+            validate_certificate_binding(payload, cert_thumbprint, enabled=settings.enable_rfc8705)
         if settings.enable_rfc9068:
             if issuer is None or audience is None:
                 raise ValueError(

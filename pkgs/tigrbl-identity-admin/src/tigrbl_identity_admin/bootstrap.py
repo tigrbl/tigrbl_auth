@@ -4,13 +4,22 @@ import hashlib
 import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
+from typing import Any
 
-from tigrbl_identity_server.framework import select
+from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_identity_storage.tables import Tenant, User
+from tigrbl_identity_server.security.handler_records import (
+    create_handler_record,
+    first_handler_record,
+    read_handler_record,
+    resolve_browser_session_record,
+    update_handler_record,
+)
+from tigrbl_identity_storage.tables import Realm, Tenant, User
 from tigrbl_identity_storage.tables.engine import ENGINE
+from tigrbl_identity_storage.tables.user import DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
 
 
 def _token_digest(value: str) -> str:
@@ -40,7 +49,39 @@ async def _session():
     provider = _resolve_provider()
     _, maker = provider.ensure()
     async with maker() as session:
-        yield session
+        try:
+            yield session
+            commit = getattr(session, "commit", None)
+            if callable(commit):
+                result = commit()
+                if hasattr(result, "__await__"):
+                    await result
+        except Exception:
+            rollback = getattr(session, "rollback", None)
+            if callable(rollback):
+                result = rollback()
+                if hasattr(result, "__await__"):
+                    await result
+            raise
+
+
+async def _ensure_default_realm(db: Any) -> Realm:
+    default_realm = dict(Realm.DEFAULT_ROWS[0])
+    row = await first_handler_record(Realm, db, {"slug": default_realm["slug"]})
+    if row is not None:
+        return row
+    return await create_handler_record(Realm, db, default_realm)
+
+
+async def _ensure_default_tenant(db: Any, *, tenant_slug: str) -> Tenant:
+    default_tenant = dict(Tenant.DEFAULT_ROWS[0])
+    default_tenant["slug"] = tenant_slug
+    realm = await _ensure_default_realm(db)
+    default_tenant.setdefault("realm_id", realm.id)
+    row = await first_handler_record(Tenant, db, {"slug": tenant_slug})
+    if row is not None:
+        return row
+    return await create_handler_record(Tenant, db, default_tenant)
 
 
 async def ensure_default_superuser_async(settings_obj: object) -> dict[str, str | bool] | None:
@@ -50,45 +91,39 @@ async def ensure_default_superuser_async(settings_obj: object) -> dict[str, str 
     password = getattr(settings_obj, "bootstrap_admin_password", None)
     generated_password = False
     if not password:
-        password = secrets.token_urlsafe(18)
-        generated_password = True
+        password = DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
 
     async with _session() as db:
-        tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
-        if tenant is None:
-            tenant = Tenant(slug=tenant_slug, name="Public", email="tenant@example.com")
-            db.add(tenant)
-            await db.flush()
-
-        existing = await db.scalar(
-            select(User).where((User.username == username) | (User.email == email))
-        )
+        tenant = await _ensure_default_tenant(db, tenant_slug=tenant_slug)
+        existing = await first_handler_record(User, db, {"username": username})
+        if existing is None:
+            existing = await first_handler_record(User, db, {"email": email})
         if existing is not None:
-            changed = False
+            changes: dict[str, Any] = {}
             if not getattr(existing, "is_admin", False):
-                existing.is_admin = True
-                changed = True
+                changes["is_admin"] = True
             if not getattr(existing, "is_superuser", False):
-                existing.is_superuser = True
-                changed = True
+                changes["is_superuser"] = True
             if getattr(existing, "tenant_id", None) != tenant.id:
-                existing.tenant_id = tenant.id
-                changed = True
-            if changed:
-                await db.commit()
+                changes["tenant_id"] = tenant.id
+            if changes:
+                await update_handler_record(User, db, existing.id, changes)
             return None
 
-        row = User(
-            tenant_id=tenant.id,
-            username=username,
-            email=email,
-            password_hash=hash_pw(str(password)),
-            is_admin=True,
-            is_superuser=True,
-            must_change_password=bool(getattr(settings_obj, "bootstrap_admin_force_password_change", True)),
+        await create_handler_record(
+            User,
+            db,
+            {
+                "tenant_id": tenant.id,
+                "username": username,
+                "email": email,
+                "password_hash": hash_pw(str(password)),
+                "is_admin": True,
+                "is_superuser": True,
+                "must_change_password": bool(getattr(settings_obj, "bootstrap_admin_force_password_change", True)),
+                "is_active": True,
+            },
         )
-        db.add(row)
-        await db.commit()
         return {
             "username": username,
             "email": email,
@@ -97,47 +132,70 @@ async def ensure_default_superuser_async(settings_obj: object) -> dict[str, str 
         }
 
 
-async def resolve_admin_user_from_request(request) -> User | None:
-    session_row = await resolve_browser_session(request)
+async def resolve_admin_user_from_request(request, *, db: Any | None = None) -> User | None:
+    if db is None:
+        async with _session() as session:
+            return await resolve_admin_user_from_request(request, db=session)
+    session_row = await resolve_browser_session_record(
+        db,
+        request,
+        deployment=deployment_from_request(request, settings),
+    )
     if session_row is None:
         return None
-    async with _session() as db:
-        user = await db.scalar(select(User).where(User.id == session_row.user_id, User.is_active.is_(True)))
-        if not user_is_admin(user):
-            return None
-        return user
+    user = await read_handler_record(User, db, session_row.user_id)
+    if user is not None and not bool(getattr(user, "is_active", True)):
+        user = None
+    if not user_is_admin(user):
+        return None
+    return user
 
 
-async def issue_password_reset_token(*, user: User, minutes_valid: int = 15) -> str:
+async def issue_password_reset_token(*, user: User, minutes_valid: int = 15, db: Any | None = None) -> str:
+    if db is None:
+        async with _session() as session:
+            return await issue_password_reset_token(user=user, minutes_valid=minutes_valid, db=session)
     token = secrets.token_urlsafe(32)
-    async with _session() as db:
-        row = await db.scalar(select(User).where(User.id == user.id))
-        if row is None:
-            raise ValueError("user not found")
-        row.password_reset_token_hash = _token_digest(token)
-        row.password_reset_expires_at = datetime.now(timezone.utc) + timedelta(minutes=minutes_valid)
-        await db.commit()
+    row = await read_handler_record(User, db, user.id)
+    if row is None:
+        raise ValueError("user not found")
+    await update_handler_record(
+        User,
+        db,
+        row.id,
+        {
+            "password_reset_token_hash": _token_digest(token),
+            "password_reset_expires_at": datetime.now(timezone.utc) + timedelta(minutes=minutes_valid),
+        },
+    )
     return token
 
 
-async def consume_password_reset_token(*, token: str, new_password: str) -> User | None:
+async def consume_password_reset_token(*, token: str, new_password: str, db: Any | None = None) -> User | None:
+    if db is None:
+        async with _session() as session:
+            return await consume_password_reset_token(token=token, new_password=new_password, db=session)
     digest = _token_digest(token)
-    async with _session() as db:
-        row = await db.scalar(select(User).where(User.password_reset_token_hash == digest))
-        if row is None:
-            return None
-        expiry = getattr(row, "password_reset_expires_at", None)
-        if expiry is None:
-            return None
-        effective_expiry = expiry if expiry.tzinfo is not None else expiry.replace(tzinfo=timezone.utc)
-        if effective_expiry <= datetime.now(timezone.utc):
-            return None
-        row.password_hash = hash_pw(new_password)
-        row.password_reset_token_hash = None
-        row.password_reset_expires_at = None
-        row.must_change_password = False
-        await db.commit()
-        return row
+    row = await first_handler_record(User, db, {"password_reset_token_hash": digest})
+    if row is None:
+        return None
+    expiry = getattr(row, "password_reset_expires_at", None)
+    if expiry is None:
+        return None
+    effective_expiry = expiry if expiry.tzinfo is not None else expiry.replace(tzinfo=timezone.utc)
+    if effective_expiry <= datetime.now(timezone.utc):
+        return None
+    return await update_handler_record(
+        User,
+        db,
+        row.id,
+        {
+            "password_hash": hash_pw(new_password),
+            "password_reset_token_hash": None,
+            "password_reset_expires_at": None,
+            "must_change_password": False,
+        },
+    )
 
 
 __all__ = [

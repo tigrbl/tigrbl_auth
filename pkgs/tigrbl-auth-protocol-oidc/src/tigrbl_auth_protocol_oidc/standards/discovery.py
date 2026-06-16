@@ -7,15 +7,14 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy.exc import SQLAlchemyError
-
-from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, select, status
+from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_identity_runtime.deployment import (
     ResolvedDeployment,
     deployment_from_app,
     deployment_from_request,
     resolve_deployment,
 )
+from tigrbl_identity_server.security.handler_records import first_handler_record
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_operator.operator_service import build_operator_jwks_payload, get_record
 from tigrbl_identity_principals.tenant_discovery import (
@@ -103,8 +102,8 @@ async def _tenant_exists(*, db, tenant_slug: str) -> bool:
     if db is None:
         return operator_fallback
     try:
-        tenant = await db.scalar(select(Tenant).where(Tenant.slug == tenant_slug))
-    except SQLAlchemyError:
+        tenant = await first_handler_record(Tenant, db, {"slug": tenant_slug})
+    except Exception:
         return operator_fallback
     if tenant is not None:
         return True
@@ -126,8 +125,8 @@ async def _realm_exists(*, db, realm_slug: str) -> bool:
     if db is None:
         return False
     try:
-        realm = await db.scalar(select(Realm).where(Realm.slug == realm_slug))
-    except SQLAlchemyError:
+        realm = await first_handler_record(Realm, db, {"slug": realm_slug})
+    except Exception:
         return False
     return realm is not None
 

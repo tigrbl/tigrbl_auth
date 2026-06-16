@@ -5,7 +5,7 @@ from typing import Any
 from .models import AdvancedIdentityBoundaryFeature
 
 
-PHASE4_ADVANCED_IDENTITY_FEATURES: tuple[AdvancedIdentityBoundaryFeature, ...] = (
+ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES: tuple[AdvancedIdentityBoundaryFeature, ...] = (
     AdvancedIdentityBoundaryFeature("feat:f08-sso", "federation", ("FederationRegistry", "IdentityProvider", "FederatedSession"), ("issuer", "audience", "claim-normalization")),
     AdvancedIdentityBoundaryFeature("feat:f05-passwordless-authentication", "advanced-authentication", ("AdvancedAuthenticatorRegistry", "PasswordlessCredential", "AuthenticationChallenge"), ("challenge-replay", "credential-revocation")),
     AdvancedIdentityBoundaryFeature("feat:f06-mfa", "advanced-authentication", ("AdvancedAuthenticatorRegistry", "MfaFactor"), ("amr-validation", "step-up")),
@@ -27,19 +27,19 @@ PHASE4_ADVANCED_IDENTITY_FEATURES: tuple[AdvancedIdentityBoundaryFeature, ...] =
 )
 
 
-def phase4_advanced_identity_boundary_manifest() -> dict[str, dict[str, Any]]:
+def advanced_identity_graph_auth_boundary_manifest() -> dict[str, dict[str, Any]]:
     return {
         feature.feature_id: {
             "category": feature.category,
             "runtime_objects": list(feature.runtime_objects),
             "guarded_capabilities": list(feature.guarded_capabilities),
         }
-        for feature in PHASE4_ADVANCED_IDENTITY_FEATURES
+        for feature in ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES
     }
 
 
-def phase4_advanced_identity_boundary_integrity() -> dict[str, Any]:
-    manifest = phase4_advanced_identity_boundary_manifest()
+def advanced_identity_graph_auth_boundary_integrity() -> dict[str, Any]:
+    manifest = advanced_identity_graph_auth_boundary_manifest()
     categories = {row["category"] for row in manifest.values()}
     runtime_objects = {
         runtime_object
@@ -78,3 +78,8 @@ def phase4_advanced_identity_boundary_integrity() -> dict[str, Any]:
         "categories": sorted(categories),
         "failures": failures,
     }
+
+
+PHASE4_ADVANCED_IDENTITY_FEATURES = ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES
+phase4_advanced_identity_boundary_manifest = advanced_identity_graph_auth_boundary_manifest
+phase4_advanced_identity_boundary_integrity = advanced_identity_graph_auth_boundary_integrity

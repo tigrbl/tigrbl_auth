@@ -8,11 +8,13 @@ validate the stated requirements.
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+import pytest_asyncio
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.app import app
+from tigrbl_auth.framework import TigrblApp
+from tigrbl_auth.routers.auth_flows import router
 from tigrbl_auth.routers.shared import _jwt
 from tigrbl_auth.security.deps import get_db
 from tigrbl_auth.orm import Client
@@ -34,7 +36,7 @@ class DummyClient:
 def token_issue_stub(monkeypatch):
     issued: dict[str, dict] = {}
 
-    async def _fake_issue_persisted_token_pair(*, sub, tid, client_id, **extra):
+    async def _fake_issue_token_pair_records(db, *, sub, tid, client_id, **extra):
         audience = extra.get("audience")
         access = f"access:{len(issued) + 1}"
         refresh = f"refresh:{len(issued) + 1}"
@@ -48,19 +50,38 @@ def token_issue_stub(monkeypatch):
     async def _fake_decode(self, token, **_kwargs):
         return issued[token]
 
-    monkeypatch.setattr("tigrbl_auth.ops.token.issue_persisted_token_pair", _fake_issue_persisted_token_pair)
+    async def _read_handler_record(model, db, ident):
+        return DummyClient()
+
+    async def _first_handler_record(model, db, filters):
+        return None
+
+    monkeypatch.setattr("tigrbl_auth.ops.token.read_handler_record", _read_handler_record)
+    monkeypatch.setattr("tigrbl_auth.ops.token.first_handler_record", _first_handler_record)
+    monkeypatch.setattr("tigrbl_auth.ops.token.issue_token_pair_records", _fake_issue_token_pair_records)
+    monkeypatch.setattr("tigrbl_auth.ops.token._require_tls", lambda request, deployment=None: None)
     monkeypatch.setattr(JWTCoder, "async_decode", _fake_decode)
     yield
 
 
+@pytest_asyncio.fixture()
+async def token_client():
+    app = TigrblApp()
+    app.include_router(router)
+    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        yield client
+
+
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_token_includes_aud_when_resource_provided(monkeypatch):
+async def test_token_includes_aud_when_resource_provided(monkeypatch, token_client):
     """RFC 8707 §2: resource parameter indicates the target resource."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        "tigrbl_auth.ops.token._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -68,20 +89,17 @@ async def test_token_includes_aud_when_resource_provided(monkeypatch):
         "core",
         AsyncMock(return_value=DummyClient()),
     )
-    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        resp = await client.post(
-            "/token",
-            data={
-                "grant_type": "password",
-                "username": "u",
-                "password": "p",
-                "client_id": CLIENT_ID,
-                "client_secret": "secret",
-                "resource": "https://rs.example",
-            },
-        )
+    resp = await token_client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "u",
+            "password": "p",
+            "client_id": CLIENT_ID,
+            "client_secret": "secret",
+            "resource": "https://rs.example",
+        },
+    )
     assert resp.status_code == status.HTTP_200_OK
     payload = await _jwt.async_decode(resp.json()["access_token"])
     assert payload["aud"] == "https://rs.example"
@@ -89,40 +107,37 @@ async def test_token_includes_aud_when_resource_provided(monkeypatch):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_invalid_resource_returns_error(monkeypatch):
+async def test_invalid_resource_returns_error(monkeypatch, token_client):
     """RFC 8707 §2: invalid resource value results in 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        "tigrbl_auth.ops.token._pwd_backend.authenticate",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
     monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
-    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        resp = await client.post(
-            "/token",
-            data={
-                "grant_type": "password",
-                "username": "u",
-                "password": "p",
-                "client_id": CLIENT_ID,
-                "client_secret": "secret",
-                "resource": "not-a-uri",
-            },
-        )
+    resp = await token_client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "u",
+            "password": "p",
+            "client_id": CLIENT_ID,
+            "client_secret": "secret",
+            "resource": "not-a-uri",
+        },
+    )
     assert resp.status_code == status.HTTP_400_BAD_REQUEST
     assert resp.json()["error"] == "invalid_target"
 
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_multiple_resources_uses_first(monkeypatch):
+async def test_multiple_resources_uses_first(monkeypatch, token_client):
     """RFC 8707 §2: first valid resource is used as audience."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        "tigrbl_auth.ops.token._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -130,20 +145,17 @@ async def test_multiple_resources_uses_first(monkeypatch):
         "core",
         AsyncMock(return_value=DummyClient()),
     )
-    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        resp = await client.post(
-            "/token",
-            data={
-                "grant_type": "password",
-                "username": "u",
-                "password": "p",
-                "client_id": CLIENT_ID,
-                "client_secret": "secret",
-                "resource": ["https://rs.example", "https://api.example"],
-            },
-        )
+    resp = await token_client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "u",
+            "password": "p",
+            "client_id": CLIENT_ID,
+            "client_secret": "secret",
+            "resource": ["https://rs.example", "https://api.example"],
+        },
+    )
     assert resp.status_code == status.HTTP_200_OK
     payload = await _jwt.async_decode(resp.json()["access_token"])
     assert payload["aud"] == "https://rs.example"
@@ -151,40 +163,37 @@ async def test_multiple_resources_uses_first(monkeypatch):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_multiple_resources_with_invalid_returns_error(monkeypatch):
+async def test_multiple_resources_with_invalid_returns_error(monkeypatch, token_client):
     """RFC 8707 §2: any invalid resource causes 'invalid_target'."""
     monkeypatch.setattr(settings, "rfc8707_enabled", True)
     monkeypatch.setattr(
-        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        "tigrbl_auth.ops.token._pwd_backend.authenticate",
         AsyncMock(side_effect=AssertionError("password backend should not be reached for invalid resource")),
     )
     monkeypatch.setattr(Client.handlers.read, "core", AsyncMock(return_value=DummyClient()))
-    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        resp = await client.post(
-            "/token",
-            data={
-                "grant_type": "password",
-                "username": "u",
-                "password": "p",
-                "client_id": CLIENT_ID,
-                "client_secret": "secret",
-                "resource": ["https://rs.example", "not-a-uri"],
-            },
-        )
+    resp = await token_client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "u",
+            "password": "p",
+            "client_id": CLIENT_ID,
+            "client_secret": "secret",
+            "resource": ["https://rs.example", "not-a-uri"],
+        },
+    )
     assert resp.status_code == status.HTTP_400_BAD_REQUEST
     assert resp.json()["error"] == "invalid_target"
 
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_feature_flag_disables_resource(monkeypatch):
+async def test_feature_flag_disables_resource(monkeypatch, token_client):
     """When disabled, resource parameter is ignored."""
     mock_user = MagicMock(id="user", tenant_id="tenant")
     monkeypatch.setattr(settings, "rfc8707_enabled", False)
     monkeypatch.setattr(
-        "tigrbl_auth.api.rest.shared._pwd_backend.authenticate",
+        "tigrbl_auth.ops.token._pwd_backend.authenticate",
         AsyncMock(return_value=mock_user),
     )
     monkeypatch.setattr(
@@ -192,20 +201,17 @@ async def test_feature_flag_disables_resource(monkeypatch):
         "core",
         AsyncMock(return_value=DummyClient()),
     )
-    app.router.dependency_overrides[get_db] = lambda: AsyncMock()
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        resp = await client.post(
-            "/token",
-            data={
-                "grant_type": "password",
-                "username": "u",
-                "password": "p",
-                "client_id": CLIENT_ID,
-                "client_secret": "secret",
-                "resource": "https://rs.example",
-            },
-        )
+    resp = await token_client.post(
+        "/token",
+        data={
+            "grant_type": "password",
+            "username": "u",
+            "password": "p",
+            "client_id": CLIENT_ID,
+            "client_secret": "secret",
+            "resource": "https://rs.example",
+        },
+    )
     assert resp.status_code == status.HTTP_200_OK
     payload = await _jwt.async_decode(resp.json()["access_token"])
     assert "aud" not in payload

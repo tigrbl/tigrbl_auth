@@ -40,38 +40,44 @@ def _settings() -> SimpleNamespace:
     return SimpleNamespace(**values)
 
 
-async def _tenant(db: AsyncSession, label: str) -> Tenant:
+async def _tenant(db: AsyncSession, label: str, row_id) -> Tenant:
     suffix = uuid4().hex[:8]
     row = Tenant(
         slug=f"{label}-{suffix}",
         name=f"{label.title()} Tenant",
         email=f"{label}-{suffix}@example.test",
     )
+    row.id = row_id
+    row._fixture_id = row_id
     db.add(row)
     await db.commit()
     return row
 
 
-async def _user(db: AsyncSession, tenant: Tenant, username: str) -> User:
+async def _user(db: AsyncSession, tenant_id, username: str, row_id) -> User:
     row = User(
-        tenant_id=tenant.id,
+        tenant_id=tenant_id,
         username=username,
         email=f"{username}@example.test",
         password_hash=hash_pw("CurrentPass123!"),
         is_active=True,
     )
+    row.id = row_id
+    row._fixture_id = row_id
     db.add(row)
     await db.commit()
     return row
 
 
-async def _client(db: AsyncSession, tenant: Tenant) -> Client:
+async def _client(db: AsyncSession, tenant_id, row_id) -> Client:
     row = Client.new(
-        tenant_id=tenant.id,
-        client_id=str(uuid4()),
+        tenant_id=tenant_id,
+        client_id=str(row_id),
         client_secret="client-secret",
         redirects=["https://client.example/callback"],
     )
+    row.id = row_id
+    row._fixture_id = row_id
     db.add(row)
     await db.commit()
     return row
@@ -182,85 +188,98 @@ async def test_my_account_cors_allows_uix_origin_on_error_responses() -> None:
 async def test_my_account_handlers_are_current_subject_scoped(
     db_session: AsyncSession,
 ) -> None:
-    tenant = await _tenant(db_session, "my-account")
-    alice = await _user(db_session, tenant, "alice-account")
-    bob = await _user(db_session, tenant, "bob-account")
-    client = await _client(db_session, tenant)
+    tenant_id = uuid4()
+    alice_id = uuid4()
+    bob_id = uuid4()
+    client_id = uuid4()
+    await _tenant(db_session, "my-account", tenant_id)
+    await _user(db_session, tenant_id, "alice-account", alice_id)
+    await _user(db_session, tenant_id, "bob-account", bob_id)
+    await _client(db_session, tenant_id, client_id)
+    alice_session_id = uuid4()
+    bob_session_id = uuid4()
+    alice_consent_id = uuid4()
+    bob_consent_id = uuid4()
     alice_session = AuthSession(
-        tenant_id=tenant.id,
-        user_id=alice.id,
-        username=alice.username,
+        tenant_id=tenant_id,
+        user_id=alice_id,
+        username="alice-account",
         session_state="active",
     )
+    alice_session.id = alice_session_id
     bob_session = AuthSession(
-        tenant_id=tenant.id,
-        user_id=bob.id,
-        username=bob.username,
+        tenant_id=tenant_id,
+        user_id=bob_id,
+        username="bob-account",
         session_state="active",
     )
+    bob_session.id = bob_session_id
     alice_consent = Consent(
-        tenant_id=tenant.id,
-        user_id=alice.id,
-        client_id=client.id,
+        tenant_id=tenant_id,
+        user_id=alice_id,
+        client_id=client_id,
         scope="openid profile",
         state="active",
     )
+    alice_consent.id = alice_consent_id
     bob_consent = Consent(
-        tenant_id=tenant.id,
-        user_id=bob.id,
-        client_id=client.id,
+        tenant_id=tenant_id,
+        user_id=bob_id,
+        client_id=client_id,
         scope="openid email",
         state="active",
     )
+    bob_consent.id = bob_consent_id
     db_session.add_all([alice_session, bob_session, alice_consent, bob_consent])
     await db_session.commit()
+    current_alice = SimpleNamespace(id=alice_id, tenant_id=tenant_id)
 
     profile = await router_module.get_account_profile(
-        current_user=alice,
+        current_user=current_alice,
         db=db_session,
     )
     sessions = await router_module.list_account_sessions(
-        current_user=alice,
+        current_user=current_alice,
         db=db_session,
     )
     consents = await router_module.list_account_consents(
-        current_user=alice,
+        current_user=current_alice,
         db=db_session,
     )
     apps = await router_module.list_account_authorized_apps(
-        current_user=alice,
+        current_user=current_alice,
         db=db_session,
     )
 
-    assert profile.id == str(alice.id)
-    assert {item.id for item in sessions} == {str(alice_session.id)}
-    assert {item.id for item in consents} == {str(alice_consent.id)}
-    assert {item.client_id for item in apps} == {str(client.id)}
+    assert profile.id == str(alice_id)
+    assert {item.id for item in sessions} == {str(alice_session_id)}
+    assert {item.id for item in consents} == {str(alice_consent_id)}
+    assert {item.client_id for item in apps} == {str(client_id)}
 
     with pytest.raises(Exception) as missing_session:
         await router_module.revoke_account_session(
-            str(bob_session.id),
-            current_user=alice,
+            str(bob_session_id),
+            current_user=current_alice,
             db=db_session,
         )
     assert getattr(missing_session.value, "status_code", None) == 404
 
     with pytest.raises(Exception) as missing_consent:
         await router_module.revoke_account_consent(
-            str(bob_consent.id),
-            current_user=alice,
+            str(bob_consent_id),
+            current_user=current_alice,
             db=db_session,
         )
     assert getattr(missing_consent.value, "status_code", None) == 404
 
     revoked = await router_module.revoke_account_session(
-        str(alice_session.id),
-        current_user=alice,
+        str(alice_session_id),
+        current_user=current_alice,
         db=db_session,
     )
     revoked_consent = await router_module.revoke_account_consent(
-        str(alice_consent.id),
-        current_user=alice,
+        str(alice_consent_id),
+        current_user=current_alice,
         db=db_session,
     )
 

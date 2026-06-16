@@ -7,9 +7,10 @@ from uuid import UUID
 
 from tigrbl_auth.config.deployment import deployment_from_request
 from tigrbl_auth.config.settings import settings
+from tigrbl_auth.security.handler_records import append_audit_event_record, create_handler_record, read_handler_record
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_auth.framework import HTTPException, select, status
+    from tigrbl_auth.framework import HTTPException, status
 except Exception:  # pragma: no cover - dependency-light fallback
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -21,18 +22,6 @@ except Exception:  # pragma: no cover - dependency-light fallback
             self.status_code = status_code
             self.detail = detail
 
-    class _Select:
-        def __init__(self, model: Any):
-            self.model = model
-            self.criteria: list[Any] = []
-
-        def where(self, criterion: Any):
-            self.criteria.append(criterion)
-            return self
-
-    def select(model: Any):
-        return _Select(model)
-
     status = _FallbackStatus()
 
 from tigrbl_auth.standards.oauth2.device_authorization import (
@@ -42,12 +31,6 @@ from tigrbl_auth.standards.oauth2.device_authorization import (
     generate_user_code,
 )
 from tigrbl_auth.standards.oauth2.resource_indicators import select_resource_indicator
-
-try:  # pragma: no cover
-    from tigrbl_auth.services.persistence import append_audit_event_async
-except Exception:  # pragma: no cover - dependency-light fallback
-    async def append_audit_event_async(**kwargs):
-        return None
 
 try:  # pragma: no cover
     from tigrbl_auth.tables import Client, DeviceCode
@@ -79,7 +62,7 @@ async def device_authorization_request(*, request, db):
         client_uuid = UUID(str(client_id))
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid client_id') from exc
-    client = await db.scalar(select(Client).where(Client.id == client_uuid))
+    client = await read_handler_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'client not found')
 
@@ -97,30 +80,29 @@ async def device_authorization_request(*, request, db):
     device_code = generate_device_code()
     user_code = generate_user_code()
     expires_at = datetime.now(timezone.utc) + timedelta(seconds=DEVICE_CODE_EXPIRES_IN)
-    row = DeviceCode(
-        device_code=device_code,
-        user_code=user_code,
-        client_id=client.id,
-        scope=scope,
-        audience=effective_audience,
-        resource=effective_resource,
-        expires_at=expires_at,
-        interval=DEVICE_CODE_INTERVAL,
-        poll_count=0,
-        slow_down_count=0,
-        tenant_id=client.tenant_id,
+    row = await create_handler_record(
+        DeviceCode,
+        db,
+        {
+            "device_code": device_code,
+            "user_code": user_code,
+            "client_id": client.id,
+            "scope": scope,
+            "audience": effective_audience,
+            "resource": effective_resource,
+            "expires_at": expires_at,
+            "interval": DEVICE_CODE_INTERVAL,
+            "poll_count": 0,
+            "slow_down_count": 0,
+            "tenant_id": client.tenant_id,
+        },
     )
-    db.add(row)
-    await db.commit()
-    try:
-        await db.refresh(row)
-    except Exception:
-        pass
 
     verification_uri = f"{str(deployment.issuer or settings.issuer).rstrip('/')}/device"
     verification_uri_complete = f"{verification_uri}?user_code={user_code}"
 
-    await append_audit_event_async(
+    await append_audit_event_record(
+        db,
         tenant_id=client.tenant_id,
         actor_client_id=client.id,
         event_type='device.authorization.created',

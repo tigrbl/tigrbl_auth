@@ -10,7 +10,7 @@ from .telemetry import AuthAnomalyDetector
 from .trust import TrustFederationGraph
 
 
-def build_phase4_delivery_summary(
+def build_advanced_identity_graph_auth_delivery_summary(
     *,
     authenticator_registry: AdvancedAuthenticatorRegistry,
     federation_registry: FederationRegistry,
@@ -39,3 +39,6 @@ def build_phase4_delivery_summary(
             "edge_count": len(trust_graph.edges),
         },
     }
+
+
+build_phase4_delivery_summary = build_advanced_identity_graph_auth_delivery_summary

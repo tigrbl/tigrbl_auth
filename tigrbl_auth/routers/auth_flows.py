@@ -6,11 +6,12 @@ import secrets
 from tigrbl.security import Depends as TigrblDepends
 from tigrbl_auth.framework import AsyncSession, HTTPException, JSONResponse, Request
 from tigrbl_auth.tables.engine import get_db
-from tigrbl_auth.tables import AuthSession, User
+from tigrbl_auth.tables import AuthSession
 from ..routers.schemas import CredsIn, TokenPair
 from tigrbl_auth.standards.oauth2.rfc8414_metadata import ISSUER
 from tigrbl_auth.standards.oidc.id_token import mint_id_token
 from ..routers.shared import _jwt, _require_tls
+from tigrbl_auth.security.user_lookup import first_user_by_filters
 from tigrbl_auth.services.token_service import issue_persisted_token_pair
 from .authz import router as router
 
@@ -27,10 +28,7 @@ async def login(
     if creds is None:
         body = await request.json() or {}
         creds = CredsIn.model_validate(body)
-    users = await User.handlers.list.core(
-        {"payload": {"filters": {"username": creds.identifier}}, "db": db}
-    )
-    user = users[0] if users else None
+    user = await first_user_by_filters(db, {"username": creds.identifier})
     if user is None or not user.verify_password(creds.password):
         raise HTTPException(status_code=400, detail="invalid credentials")
     payload = {
@@ -39,7 +37,6 @@ async def login(
         "username": user.username,
     }
     session = await AuthSession.handlers.create.core({"payload": payload, "db": db})
-    await db.commit()
     access, refresh = await issue_persisted_token_pair(
         jwt=_jwt,
         sub=str(session.user_id),

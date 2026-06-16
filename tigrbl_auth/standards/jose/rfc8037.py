@@ -25,11 +25,8 @@ def _run(coro: Awaitable[Any]) -> Any:
         asyncio.get_running_loop()
     except RuntimeError:
         return asyncio.run(coro)
-    loop = asyncio.new_event_loop()
-    try:
-        return loop.run_until_complete(coro)
-    finally:
-        loop.close()
+    coro.close()
+    raise RuntimeError("sync RFC 8037 helpers cannot run inside an active event loop")
 
 
 def _to_keyref(key: bytes | Ed25519PrivateKey) -> dict[str, object]:

@@ -104,5 +104,31 @@
     "revocation_endpoint": "https://authn.example.com/revoke",
     "introspection_endpoint": "https://authn.example.com/introspect",
     "registration_endpoint": "https://authn.example.com/register"
-  }
+  },
+  "tigrbl_auth_capabilities": [
+    "account-consents",
+    "account-credentials",
+    "account-profile",
+    "account-sessions",
+    "authorize",
+    "device-authorization",
+    "introspection",
+    "jwks",
+    "login",
+    "logout",
+    "oauth-authorization-server-metadata",
+    "oauth-protected-resource-metadata",
+    "openid-configuration",
+    "par",
+    "realm-jwks",
+    "realm-openid-configuration",
+    "register",
+    "register-management",
+    "revoke",
+    "tenant-jwks",
+    "tenant-openid-configuration",
+    "token",
+    "token-exchange",
+    "userinfo"
+  ]
 }

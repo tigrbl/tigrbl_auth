@@ -1257,7 +1257,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericResult"
+                  "$ref": "#/components/schemas/DiscoveryDocument"
                 }
               }
             }
@@ -1294,7 +1294,17 @@
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
           "jwt_access_token_profile_supported": false
-        }
+        },
+        "parameters": [
+          {
+            "name": "realm_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/.well-known/oauth-authorization-server": {
@@ -1481,7 +1491,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenericResult"
+                  "$ref": "#/components/schemas/JwksDocument"
                 }
               }
             }
@@ -1518,7 +1528,17 @@
           "query_bearer_disabled": true,
           "form_bearer_disabled": true,
           "jwt_access_token_profile_supported": false
-        }
+        },
+        "parameters": [
+          {
+            "name": "realm_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   },

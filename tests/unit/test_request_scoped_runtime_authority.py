@@ -165,6 +165,7 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
         def __init__(self, tenant_id, client_id, client_secret, redirects):
             self.tenant_id = tenant_id
             self.id = client_id
+            self.client_secret_hash = f"hash:{client_secret}".encode()
             self.redirect_uris = " ".join(redirects)
             self.grant_types = ""
             self.response_types = ""
@@ -186,10 +187,13 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
     async def _validated_registration_payload(**kwargs):
         return SimpleNamespace(id=tenant_id), {"native_application": False, "pkce_required": False}
 
-    async def _upsert_client_registration_async(**kwargs):
+    async def _create_handler_record(model, db, payload):
+        if model is _FakeClient:
+            return SimpleNamespace(**payload)
         return SimpleNamespace(
-            registration_metadata=kwargs["metadata"],
-            registration_client_uri=kwargs["registration_client_uri"],
+            id=uuid4(),
+            registration_metadata=payload["registration_metadata"],
+            registration_client_uri=payload["registration_client_uri"],
             issued_at=None,
         )
 
@@ -199,9 +203,9 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
     monkeypatch.setattr(register_ops, "Client", _FakeClient)
     monkeypatch.setattr(register_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
     monkeypatch.setattr(register_ops, "_validated_registration_payload", _validated_registration_payload)
-    monkeypatch.setattr(register_ops, "upsert_client_registration_async", _upsert_client_registration_async)
+    monkeypatch.setattr(register_ops, "create_handler_record", _create_handler_record)
     monkeypatch.setattr(register_ops, "_registration_response", _registration_response)
-    monkeypatch.setattr(register_ops, "append_audit_event_async", lambda **kwargs: asyncio.sleep(0))
+    monkeypatch.setattr(register_ops, "append_audit_event_record", lambda db, **kwargs: asyncio.sleep(0))
     monkeypatch.setattr(register_ops.secrets, "token_urlsafe", lambda length: "token-value")
     monkeypatch.setattr(register_ops, "runtime_security_profile", lambda deployment: SimpleNamespace(fapi_mode=False, allowed_client_auth_methods=()))
 
@@ -227,22 +231,20 @@ def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) 
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4())
 
     class _DB:
-        def add(self, obj):
-            return None
+        pass
 
-        async def commit(self):
-            return None
+    async def _read_handler_record(model, db, ident):
+        return client
 
-        async def refresh(self, obj):
-            return None
-
-        async def scalar(self, query):
-            return client
+    async def _create_handler_record(model, db, payload):
+        return SimpleNamespace(id=payload.get("device_code"), **payload)
 
     monkeypatch.setattr(device_auth_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
     monkeypatch.setattr(device_auth_ops, "generate_device_code", lambda: "device-code-1")
     monkeypatch.setattr(device_auth_ops, "generate_user_code", lambda: "USER-CODE")
-    monkeypatch.setattr(device_auth_ops, "append_audit_event_async", lambda **kwargs: asyncio.sleep(0))
+    monkeypatch.setattr(device_auth_ops, "read_handler_record", _read_handler_record)
+    monkeypatch.setattr(device_auth_ops, "create_handler_record", _create_handler_record)
+    monkeypatch.setattr(device_auth_ops, "append_audit_event_record", lambda db, **kwargs: asyncio.sleep(0))
 
     request = SimpleNamespace(
         app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),

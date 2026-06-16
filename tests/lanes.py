@@ -106,6 +106,10 @@ def _module_path(module_name: str) -> Path | None:
     for candidate in (REPO_ROOT / f"{rel}.py", REPO_ROOT / rel / "__init__.py"):
         if candidate.exists():
             return candidate
+    for src_root in sorted((REPO_ROOT / "pkgs").glob("*/src")):
+        for candidate in (src_root / f"{rel}.py", src_root / rel / "__init__.py"):
+            if candidate.exists():
+                return candidate
     return None
 
 
@@ -134,6 +138,10 @@ def _module_imports(module_name: str) -> tuple[str, ...]:
                 imports.add(resolved)
             elif node.module:
                 imports.add(node.module)
+        elif isinstance(node, ast.Call):
+            module_name = _dynamic_import_target(node)
+            if module_name:
+                imports.add(module_name)
     return tuple(sorted(imports))
 
 
@@ -164,6 +172,10 @@ def _dynamic_import_target(node: ast.Call) -> str | None:
         target = node.args[0] if node.args else None
     elif isinstance(func, ast.Attribute) and func.attr == "import_module":
         target = node.args[0] if node.args else None
+    elif isinstance(func, ast.Name) and func.id.endswith("alias_module"):
+        target = node.args[1] if len(node.args) > 1 else None
+    elif isinstance(func, ast.Attribute) and func.attr == "alias_module":
+        target = node.args[1] if len(node.args) > 1 else None
     if isinstance(target, ast.Constant) and isinstance(target.value, str):
         return target.value
     return None

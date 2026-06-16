@@ -3,7 +3,7 @@
 import pytest
 
 from tigrbl_auth import rfc7662
-from tigrbl_auth.runtime_cfg import settings
+from tigrbl_auth.config.settings import settings
 
 RFC_7662 = "RFC 7662"
 

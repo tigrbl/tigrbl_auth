@@ -74,6 +74,36 @@ class _FakeDB:
         return None
 
 
+def _patch_token_handler_records(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    client: object,
+    registration: object | None = None,
+    auth_code: object | None = None,
+    user: object | None = None,
+) -> None:
+    async def _read_handler_record(model, db, ident):
+        if model is token_ops.Client:
+            return client
+        if model is token_ops.AuthCode:
+            return auth_code
+        if model is token_ops.User:
+            return user
+        return None
+
+    async def _first_handler_record(model, db, filters):
+        if model is token_ops.ClientRegistration:
+            return registration
+        return None
+
+    async def _delete_handler_record(model, db, ident):
+        return None
+
+    monkeypatch.setattr(token_ops, "read_handler_record", _read_handler_record)
+    monkeypatch.setattr(token_ops, "first_handler_record", _first_handler_record)
+    monkeypatch.setattr(token_ops, "delete_handler_record", _delete_handler_record)
+
+
 class _SenderConstraint:
     def __init__(self, *, mechanism: str | None = None, token_type: str = "DPoP", jkt: str | None = None, cert_thumbprint: str | None = None):
         self.mechanism = mechanism
@@ -146,6 +176,15 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4())
     registration = SimpleNamespace(registration_metadata={"token_endpoint_auth_method": "private_key_jwt"})
 
+    async def _read_handler_record(model, db, ident):
+        return client
+
+    async def _first_handler_record(model, db, filters):
+        return registration
+
+    monkeypatch.setattr(par_ops, "read_handler_record", _read_handler_record)
+    monkeypatch.setattr(par_ops, "first_handler_record", _first_handler_record)
+
     missing_redirect_request = _FakeRequest(
         body=urlencode({"client_id": str(client.id), "response_type": "code", "scope": "openid"}).encode("utf-8"),
         url="https://issuer.example/par",
@@ -166,7 +205,7 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
         url="https://issuer.example/par",
     )
     with pytest.raises(par_ops.HTTPException) as auth_exc:
-        await par_ops.pushed_authorization_request(request=authed_request, db=_FakeDB(client, client, registration))
+        await par_ops.pushed_authorization_request(request=authed_request, db=_FakeDB())
     assert auth_exc.value.status_code == 401
 
 
@@ -174,6 +213,11 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
 async def test_fapi_registration_rejects_shared_secret_auth(monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setattr(register_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
     tenant = SimpleNamespace(id=uuid4(), slug="public")
+
+    async def _first_handler_record(model, db, filters):
+        return tenant
+
+    monkeypatch.setattr(register_ops, "first_handler_record", _first_handler_record)
     payload = DynamicClientRegistrationIn(
         tenant_slug="public",
         redirect_uris=["https://client.example/cb"],
@@ -193,6 +237,7 @@ async def test_fapi_token_request_rejects_shared_secret_auth(monkeypatch: pytest
     monkeypatch.setattr(token_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4(), verify_secret=lambda secret: True)
     registration = SimpleNamespace(registration_metadata={"token_endpoint_auth_method": "client_secret_basic"})
+    _patch_token_handler_records(monkeypatch, client=client, registration=registration)
     request = _FakeRequest(
         {"grant_type": "client_credentials", "client_id": str(client.id), "client_secret": "secret"},
         url="https://issuer.example/token",
@@ -214,16 +259,17 @@ async def test_fapi_private_key_jwt_uses_issuer_as_assertion_audience(monkeypatc
         captured["audience"] = kwargs["audience"]
         return {"iss": kwargs["client_id"]}
 
-    async def _issue_pair(**kwargs):
+    async def _issue_pair(db, **kwargs):
         captured["audience_claim"] = kwargs.get("audience")
         return ("access-token", "refresh-token")
 
     monkeypatch.setattr(token_ops, "authenticate_client_assertion", _authenticate)
     monkeypatch.setattr(token_ops, "validate_sender_constraint", lambda *args, **kwargs: _SenderConstraint(mechanism="dpop", jkt="jkt-1"))
-    monkeypatch.setattr(token_ops, "issue_persisted_token_pair", _issue_pair)
+    monkeypatch.setattr(token_ops, "issue_token_pair_records", _issue_pair)
 
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4())
     registration = SimpleNamespace(registration_metadata={"token_endpoint_auth_method": "private_key_jwt"})
+    _patch_token_handler_records(monkeypatch, client=client, registration=registration)
     request = _FakeRequest(
         {
             "grant_type": "client_credentials",
@@ -249,14 +295,14 @@ async def test_fapi_authorization_code_requires_sender_key_continuity(monkeypatc
     monkeypatch.setattr(token_ops, "validate_sender_constraint", lambda *args, **kwargs: _SenderConstraint(mechanism="dpop", jkt="jkt-live"))
     monkeypatch.setattr(token_ops, "verify_code_challenge", lambda verifier, challenge: True)
 
-    async def _issue_pair(**kwargs):
+    async def _issue_pair(db, **kwargs):
         return ("access-token", "refresh-token")
 
     async def _mint_id_token(**kwargs):
         return "id-token"
 
     monkeypatch.setattr(token_ops, "mint_id_token", _mint_id_token)
-    monkeypatch.setattr(token_ops, "issue_persisted_token_pair", _issue_pair)
+    monkeypatch.setattr(token_ops, "issue_token_pair_records", _issue_pair)
     monkeypatch.setattr(
         token_ops,
         "authenticate_client_assertion",
@@ -278,6 +324,7 @@ async def test_fapi_authorization_code_requires_sender_key_continuity(monkeypatc
         session_id=None,
         claims={"_dpop_jkt": "jkt-init"},
     )
+    _patch_token_handler_records(monkeypatch, client=client, registration=registration, auth_code=auth_code)
     request = _FakeRequest(
         {
             "grant_type": "authorization_code",

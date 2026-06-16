@@ -95,5 +95,31 @@
   "backchannel_logout_session_supported": true,
   "device_authorization_endpoint": "https://authn.example.com/device_authorization",
   "pushed_authorization_request_endpoint": "https://authn.example.com/par",
-  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource"
+  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource",
+  "tigrbl_auth_capabilities": [
+    "account-consents",
+    "account-credentials",
+    "account-profile",
+    "account-sessions",
+    "authorize",
+    "device-authorization",
+    "introspection",
+    "jwks",
+    "login",
+    "logout",
+    "oauth-authorization-server-metadata",
+    "oauth-protected-resource-metadata",
+    "openid-configuration",
+    "par",
+    "realm-jwks",
+    "realm-openid-configuration",
+    "register",
+    "register-management",
+    "revoke",
+    "tenant-jwks",
+    "tenant-openid-configuration",
+    "token",
+    "token-exchange",
+    "userinfo"
+  ]
 }

@@ -29,6 +29,10 @@ def _openapi_operation(path: str, method: str, meta: dict[str, Any], deployment:
         op["parameters"] = [
             {"name": "tenant_slug", "in": "path", "required": True, "schema": {"type": "string"}}
         ]
+    elif "{realm_slug}" in path:
+        op["parameters"] = [
+            {"name": "realm_slug", "in": "path", "required": True, "schema": {"type": "string"}}
+        ]
     if path == "/authorize":
         op["parameters"] = [
             {"name": "response_type", "in": "query", "required": True, "schema": {"type": "string", "enum": list(policy.allowed_response_types)}},
@@ -231,13 +235,13 @@ def _openapi_operation(path: str, method: str, meta: dict[str, Any], deployment:
             parameters.append({"name": "X-Client-Cert-SHA256", "in": "header", "required": False, "schema": {"type": "string"}})
         if parameters:
             op["parameters"] = parameters
-    elif path in {"/.well-known/openid-configuration", TENANT_OPENID_CONFIGURATION_PATH}:
+    elif path in {"/.well-known/openid-configuration", TENANT_OPENID_CONFIGURATION_PATH, REALM_OPENID_CONFIGURATION_PATH}:
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/DiscoveryDocument")
     elif path == "/.well-known/oauth-authorization-server":
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/AuthorizationServerMetadata")
     elif path == "/.well-known/oauth-protected-resource":
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/ProtectedResourceMetadata")
-    elif path in {"/.well-known/jwks.json", TENANT_JWKS_PATH}:
+    elif path in {"/.well-known/jwks.json", TENANT_JWKS_PATH, REALM_JWKS_PATH}:
         op["responses"]["200"]["content"] = _json_content("#/components/schemas/JwksDocument")
     return op
 

@@ -111,11 +111,21 @@ OWNER = StandardOwner(
 
 api = TigrblRouter()
 router = api
+_jwt_coder: JWTCoder | None = None
 
 
 
-def _jwt_coder() -> JWTCoder:
-    return JWTCoder.default()
+async def _get_jwt_coder() -> JWTCoder:
+    global _jwt_coder
+    if _jwt_coder is not None:
+        candidate = _jwt_coder
+        if callable(candidate) and not hasattr(candidate, "async_decode"):
+            candidate = candidate()
+        if hasattr(candidate, "__await__"):
+            candidate = await candidate
+        return candidate
+    _jwt_coder = await JWTCoder.async_default()
+    return _jwt_coder
 
 
 
@@ -176,7 +186,7 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
 
     requested_token_type = _normalize_requested_token_type(data.get('requested_token_type'))
 
-    jwt = _jwt_coder()
+    jwt = await _get_jwt_coder()
     try:
         subject_claims = await jwt.async_decode(str(subject_token), verify_exp=True)
     except (InvalidTokenError, ValueError) as exc:

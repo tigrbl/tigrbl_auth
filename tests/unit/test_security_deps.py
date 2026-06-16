@@ -603,13 +603,14 @@ class TestSecurityDepsIntegration:
         assert PasswordBackend is not None
         assert ApiKeyBackend is not None
 
-    def test_backend_instances_are_created(self):
+    @pytest.mark.asyncio
+    async def test_backend_instances_are_created(self):
         """Test that backend instances are properly initialized."""
-        from tigrbl_auth.security.deps import _api_key_backend, _jwt_coder
+        from tigrbl_auth.security.deps import _api_key_backend, _get_jwt_coder
 
         # Verify backend instances exist
         assert _api_key_backend is not None
-        assert _jwt_coder is not None
+        assert await _get_jwt_coder() is not None
 
     @pytest.mark.asyncio
     async def test_database_error_handling(self):

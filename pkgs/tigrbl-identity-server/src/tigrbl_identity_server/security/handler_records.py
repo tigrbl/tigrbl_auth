@@ -20,14 +20,12 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.tables import AuditEvent, AuthSession, TokenRecord
 
-
 def _created_item(value: Any) -> Any:
     if isinstance(value, dict):
         for key in ("item", "result", "data"):
             if key in value:
                 return value[key]
     return value
-
 
 def _list_items(result: Any) -> list[Any]:
     if isinstance(result, Mapping) and isinstance(result.get("items"), list):
@@ -42,14 +40,12 @@ def _list_items(result: Any) -> list[Any]:
         return []
     return [result]
 
-
 def _value_matches(actual: Any, expected: Any) -> bool:
     if actual == expected:
         return True
     if actual is None or expected is None:
         return False
     return str(actual) == str(expected)
-
 
 def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
     for key, expected in filters.items():
@@ -58,7 +54,6 @@ def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
         if not _value_matches(getattr(row, key, None), expected):
             return False
     return True
-
 
 def _utc(value: datetime | None) -> datetime | None:
     if value is None:

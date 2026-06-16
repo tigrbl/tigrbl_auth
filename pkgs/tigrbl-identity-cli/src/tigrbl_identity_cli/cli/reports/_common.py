@@ -59,6 +59,11 @@ from tigrbl_identity_cli.cli.metadata import (
     render_cli_conformance_markdown,
     render_cli_markdown,
 )
+from tigrbl_identity_cli.cli.reports._document_authority_helpers import (
+    DERIVED_CURRENT_DOCS,
+    _docs_for_certification_bundle,
+    write_authoritative_current_docs_manifest,
+)
 from tigrbl_identity_cli.cli.install_substrate import write_install_substrate_report
 from tigrbl_identity_cli.cli.project_tree import run_migration_plan_check, run_project_tree_layout_check
 from tigrbl_identity_cli.cli.runtime import run_runtime_foundation_check, write_runtime_profile_report
@@ -254,62 +259,6 @@ def _write_report(report_dir: Path, stem: str, payload: dict[str, Any], title: s
 
 
 
-def _docs_for_certification_bundle(repo_root: Path) -> list[str]:
-    authority = load_document_authority(repo_root)
-    docs = authority.get("current_release_bundle_docs", list(DEFAULT_GENERATED_CURRENT_STATE_DOCS))
-    return [rel for rel in docs if (repo_root / rel).exists()]
-
-
-def write_authoritative_current_docs_manifest(repo_root: Path) -> dict[str, Any]:
-    repo_root = repo_root.resolve()
-    authority = load_document_authority(repo_root)
-    _write_yaml(repo_root / authority["projection_path"], render_document_authority_projection(authority))
-    payload = {
-        "schema_version": 1,
-        "authority_spec": authority.get("path"),
-        "projection_manifest": authority.get("projection_path"),
-        "canonical_ssot_roots": list(authority.get("canonical_ssot_roots", ())),
-        "authoritative_current_docs": sorted(authority.get("authoritative_current_docs", set())),
-        "derived_current_docs": sorted(DERIVED_CURRENT_DOCS),
-        "archive_roots": list(authority.get("archived_historical_roots", ())),
-        "certification_bundle_generated_current_docs": _docs_for_certification_bundle(repo_root),
-        "supporting_current_non_doc_artifacts": list(authority.get("supporting_current_non_doc_artifacts", [])),
-        "historical_docs_policy": "Historical and archived docs are non-authoritative and excluded from the certification bundle documentation scope.",
-    }
-    report_dir = repo_root / "docs" / "compliance"
-    _write_json(report_dir / "AUTHORITATIVE_CURRENT_DOCS.json", payload)
-    lines = [
-        "# Authoritative current docs",
-        "",
-        "This file is a compatibility projection of the current certification and release-facing docs derived from the SSOT authority spec.",
-        "",
-        f"- authority_spec: `{payload['authority_spec']}`",
-        f"- projection_manifest: `{payload['projection_manifest']}`",
-        "- authority_note: `.ssot/` is authoritative; this file is not.",
-        "",
-        "## Canonical SSOT roots",
-        "",
-    ]
-    lines.extend([f"- `{item}`" for item in payload["canonical_ssot_roots"]])
-    lines.extend([
-        "",
-        "## Current release-facing docs",
-        "",
-    ])
-    lines.extend([f"- `{item}`" for item in payload["authoritative_current_docs"]])
-    lines.extend(["", "## Derived current docs", ""])
-    lines.extend([f"- `{item}`" for item in payload["derived_current_docs"]])
-    lines.extend(["", "## Certification bundle documentation scope", ""])
-    lines.extend([f"- `{item}`" for item in payload["certification_bundle_generated_current_docs"]])
-    lines.extend(["", "## Supporting current non-doc artifacts", ""])
-    lines.extend([f"- `{item}`" for item in payload["supporting_current_non_doc_artifacts"]])
-    lines.extend(["", "## Archive policy", ""])
-    lines.extend([f"- archive_root: `{item}`" for item in payload["archive_roots"]])
-    lines.append(f"- policy: {payload['historical_docs_policy']}")
-    lines.append("- projection_policy: `.ssot/` remains authoritative; this manifest is informational compatibility output.")
-    lines.append("")
-    (report_dir / "AUTHORITATIVE_CURRENT_DOCS.md").write_text("\n".join(lines), encoding="utf-8")
-    return payload
 def build_adr_index(repo_root: Path) -> dict[str, Any]:
     adr_dir = repo_root / "docs" / "adr"
     entries: list[dict[str, str]] = []

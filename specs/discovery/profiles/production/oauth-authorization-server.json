@@ -74,5 +74,28 @@
     "private_key_jwt"
   ],
   "end_session_endpoint": "https://authn.example.com/logout",
-  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource"
+  "protected_resource_metadata": "https://authn.example.com/.well-known/oauth-protected-resource",
+  "tigrbl_auth_capabilities": [
+    "account-consents",
+    "account-credentials",
+    "account-profile",
+    "account-sessions",
+    "authorize",
+    "introspection",
+    "jwks",
+    "login",
+    "logout",
+    "oauth-authorization-server-metadata",
+    "oauth-protected-resource-metadata",
+    "openid-configuration",
+    "realm-jwks",
+    "realm-openid-configuration",
+    "register",
+    "register-management",
+    "revoke",
+    "tenant-jwks",
+    "tenant-openid-configuration",
+    "token",
+    "userinfo"
+  ]
 }

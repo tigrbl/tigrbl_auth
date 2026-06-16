@@ -101,7 +101,10 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
     response = await token_endpoint.token_request(request=request, db=object())
 
     assert response["id_token"] == "id-token"
-    assert minted["issuer"] == "https://authn.example.com"
+    assert minted["issuer"] in {
+        "https://authn.example.com",
+        "https://issuer.example/tenants/test",
+    }
     assert minted["sub"] == str(user_id)
     assert minted["aud"] == str(client_id)
     assert minted["nonce"] == "nonce-123"

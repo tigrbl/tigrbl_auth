@@ -17,6 +17,7 @@ from .decisions import (
 )
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,
+    ADMIN_POLICY_BOUNDARY_FEATURES,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     PHASE3_ADMIN_POLICY_FEATURES,
@@ -33,6 +34,8 @@ from .control_plane import (
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
     assert_client_mutation_authority,
+    admin_policy_boundary_integrity,
+    admin_policy_boundary_manifest,
     build_compliance_report,
     expose_client_record,
     filter_visible_tenants,
@@ -42,6 +45,7 @@ from .control_plane import (
 )
 from .governance_extension import (
     PHASE5_GOVERNANCE_EXTENSION_FEATURES,
+    PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES,
     AccessReviewCampaign,
     AccessReviewDecision,
     AccessReviewItem,
@@ -60,7 +64,10 @@ from .governance_extension import (
     ScimProvisioningPlane,
     ScimSchema,
     ScimUser,
+    build_provisioning_governance_ecosystem_delivery_summary,
     build_phase5_delivery_summary,
+    provisioning_governance_ecosystem_boundary_integrity,
+    provisioning_governance_ecosystem_boundary_manifest,
     phase5_governance_extension_boundary_integrity,
     phase5_governance_extension_boundary_manifest,
 )
@@ -155,6 +162,7 @@ from .replay import (
 __all__ = [
     "ABACAdministration",
     "ADMIN_CLIENT_FIELDS",
+    "ADMIN_POLICY_BOUNDARY_FEATURES",
     "AccessReviewCampaign",
     "AccessReviewDecision",
     "AccessReviewItem",
@@ -212,6 +220,7 @@ __all__ = [
     "PermissionPolicy",
     "PHASE3_ADMIN_POLICY_FEATURES",
     "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
+    "PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES",
     "PolicyDeterminismReport",
     "PolicyReplayCase",
     "PolicyReplayResult",
@@ -245,9 +254,12 @@ __all__ = [
     "VerificationMethod",
     "assert_delegation_management_surface",
     "assert_client_mutation_authority",
+    "admin_policy_boundary_integrity",
+    "admin_policy_boundary_manifest",
     "authority_matches",
     "build_compliance_report",
     "build_control_plane_correctness_report",
+    "build_provisioning_governance_ecosystem_delivery_summary",
     "build_phase5_delivery_summary",
     "canonical_hash",
     "canonical_json",
@@ -265,6 +277,8 @@ __all__ = [
     "has_superuser_authority",
     "normalize_delegation_scopes",
     "normalize_authority_roles",
+    "provisioning_governance_ecosystem_boundary_integrity",
+    "provisioning_governance_ecosystem_boundary_manifest",
     "phase3_admin_policy_boundary_integrity",
     "phase3_admin_policy_boundary_manifest",
     "phase5_governance_extension_boundary_integrity",

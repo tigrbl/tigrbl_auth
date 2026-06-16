@@ -1,0 +1,331 @@
+from __future__ import annotations
+
+import ast
+import importlib
+from pathlib import Path
+
+import pytest
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+MIGRATED_RELEASE_PATHS = [
+    ROOT / "tigrbl_auth/ops/authorize.py",
+    ROOT / "tigrbl_auth/ops/device_authorization.py",
+    ROOT / "tigrbl_auth/ops/login.py",
+    ROOT / "tigrbl_auth/ops/par.py",
+    ROOT / "tigrbl_auth/ops/register.py",
+    ROOT / "tigrbl_auth/ops/token.py",
+    ROOT / "tigrbl_auth/api/rest/routers/admin_auth.py",
+    ROOT / "tigrbl_auth/api/rest/routers/admin_identities.py",
+    ROOT / "tigrbl_auth/api/rest/routers/admin_realms.py",
+    ROOT / "tigrbl_auth/api/rest/routers/admin_tenants.py",
+    ROOT / "tigrbl_auth/api/rest/routers/my_account.py",
+    ROOT / "tigrbl_auth/api/rpc/methods/_shared.py",
+    ROOT / "tigrbl_auth/backends.py",
+    ROOT / "tigrbl_auth/routers/auth_flows.py",
+    ROOT / "tigrbl_auth/routers/authz/oidc.py",
+    ROOT / "tigrbl_auth/security/auth.py",
+    ROOT / "tigrbl_auth/security/deps.py",
+    ROOT / "tigrbl_auth/security/handler_records.py",
+    ROOT / "tigrbl_auth/security/user_lookup.py",
+    ROOT / "tigrbl_auth/services/admin_identity_bootstrap.py",
+    ROOT / "tigrbl_auth/services/auth_backends.py",
+    ROOT / "tigrbl_auth/services/persistence.py",
+    ROOT / "tigrbl_auth/standards/oidc/discovery.py",
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/authorize.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/device_authorization.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/par.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/register.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_endpoint.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_runtime.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token_endpoint.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token_runtime.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/router.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
+    ROOT / "pkgs/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
+    ROOT / "pkgs/tigrbl-identity-admin/src/tigrbl_identity_admin/rpc/_shared.py",
+    ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/ops/login.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/admin_auth.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/admin_identities.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/admin_realms.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/admin_tenants.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/my_account.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/routers/auth_flows.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/routers/authz/oidc.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/user_lookup.py",
+]
+
+FORBIDDEN_FRAMEWORK_EXPORTS = {
+    "IntegrityError",
+    "Select",
+    "delete",
+    "or_",
+    "select",
+}
+FORBIDDEN_DB_METHODS = {
+    "add",
+    "commit",
+    "delete",
+    "execute",
+    "flush",
+    "refresh",
+    "rollback",
+    "scalar",
+    "scalars",
+}
+
+SEMANTIC_FACADE_PATHS = [
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc8693.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc9700.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/__init__.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/__init__.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc9700/__init__.py",
+    ROOT / "pkgs/tigrbl-authz-policy/src/tigrbl_authz_policy/control_plane.py",
+    ROOT / "pkgs/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
+    ROOT / "pkgs/tigrbl-authz-policy/src/tigrbl_authz_policy/_control_plane/__init__.py",
+    ROOT / "pkgs/tigrbl-authz-policy/src/tigrbl_authz_policy/_governance_extension/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/deployment.py",
+    ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/surfaces.py",
+    ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_deployment/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/persistence.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_operator_store/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/framework.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/_framework/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/_surfaces/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-operator/src/tigrbl_identity_operator/operator_service.py",
+    ROOT / "pkgs/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/admin_console.py",
+    ROOT / "pkgs/tigrbl-identity-operator/src/tigrbl_identity_operator/_operator_service/__init__.py",
+    ROOT / "pkgs/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/_admin_console/__init__.py",
+]
+
+PERSISTENCE_HELPER_PATHS = [
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/token_records.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sessions.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/registrations_audit.py",
+]
+
+SYNC_COMPAT_PATHS = [
+    ROOT / "tigrbl_auth/jwtoken.py",
+    ROOT / "tigrbl_auth/api/rpc/registry.py",
+    ROOT / "tigrbl_auth/rfc/rfc8037.py",
+    ROOT / "tigrbl_auth/standards/jose/rfc8037.py",
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
+    ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
+    ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rpc/registry.py",
+    ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sync_compat.py",
+]
+
+ASYNC_REQUEST_TOKEN_PATHS = [
+    ROOT / "tigrbl_auth/security/auth.py",
+    ROOT / "tigrbl_auth/security/deps.py",
+    ROOT / "tigrbl_auth/oidc_userinfo.py",
+    ROOT / "tigrbl_auth/standards/oidc/userinfo.py",
+    ROOT / "tigrbl_auth/standards/oauth2/token_exchange.py",
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/userinfo.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
+    ROOT / "pkgs/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/userinfo_client.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
+    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+]
+
+AUTHN_TOKEN_SIGNER_PATHS = [
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
+    ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/coder.py",
+    ROOT / "tigrbl_auth/jwtoken.py",
+    ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
+]
+
+
+def _root_name(node: ast.AST) -> str | None:
+    current = node
+    while isinstance(current, ast.Attribute):
+        current = current.value
+    if isinstance(current, ast.Name):
+        return current.id
+    return None
+
+
+def _enclosing_function_name(node: ast.AST) -> str | None:
+    parent = getattr(node, "_parent", None)
+    while parent is not None:
+        if isinstance(parent, (ast.AsyncFunctionDef, ast.FunctionDef)):
+            return parent.name
+        parent = getattr(parent, "_parent", None)
+    return None
+
+
+def _violations(path: Path, *, allow_session_transaction_boundary: bool = False) -> list[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    for parent in ast.walk(tree):
+        for child in ast.iter_child_nodes(parent):
+            setattr(child, "_parent", parent)
+    found: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom):
+            module = node.module or ""
+            if module == "sqlalchemy" or module.startswith("sqlalchemy."):
+                names = ", ".join(alias.name for alias in node.names)
+                found.append(f"{path}:{node.lineno}: direct SQLAlchemy import {names}")
+            if module in {"tigrbl_auth.framework", "tigrbl_identity_server.framework"}:
+                leaked = sorted(
+                    alias.name for alias in node.names if alias.name in FORBIDDEN_FRAMEWORK_EXPORTS
+                )
+                if leaked:
+                    found.append(
+                        f"{path}:{node.lineno}: framework DB primitive import {', '.join(leaked)}"
+                    )
+        elif isinstance(node, ast.Call):
+            func = node.func
+            if isinstance(func, ast.Name) and func.id == "select":
+                found.append(f"{path}:{node.lineno}: direct select() call")
+            elif (
+                isinstance(func, ast.Attribute)
+                and func.attr in FORBIDDEN_DB_METHODS
+                and _root_name(func) in {"db", "session"}
+            ):
+                if (
+                    allow_session_transaction_boundary
+                    and path.name == "token_records.py"
+                    and func.attr in {"commit", "rollback"}
+                    and _root_name(func) == "session"
+                    and _enclosing_function_name(node) == "_session"
+                ):
+                    continue
+                found.append(f"{path}:{node.lineno}: direct {_root_name(func)}.{func.attr}() call")
+    return found
+
+
+@pytest.mark.unit
+def test_migrated_release_paths_use_tigrbl_handlers_not_direct_db_or_sqla() -> None:
+    violations: list[str] = []
+    for path in MIGRATED_RELEASE_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: migrated release path is missing")
+            continue
+        violations.extend(_violations(path))
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_package_surfaces_do_not_use_generated_part_modules() -> None:
+    violations: list[str] = []
+    for base in (ROOT / "pkgs", ROOT / "tigrbl_auth"):
+        for path in base.rglob("part_*.py"):
+            violations.append(f"{path}: generated part module remains in a package surface")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_semantic_facades_do_not_use_split_exec_loaders() -> None:
+    violations: list[str] = []
+    for path in SEMANTIC_FACADE_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: semantic facade path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        if "exec(compile(" in source:
+            violations.append(f"{path}: release-path split loader uses exec(compile(...))")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_package_code_does_not_use_exec_compile_split_loaders() -> None:
+    violations: list[str] = []
+    for base in (ROOT / "pkgs", ROOT / "tigrbl_auth"):
+        for path in base.rglob("*.py"):
+            source = path.read_text(encoding="utf-8")
+            if "exec(compile(" in source:
+                violations.append(f"{path}: package code uses exec(compile(...)) split loading")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_framework_public_surface_does_not_export_db_primitives() -> None:
+    framework = importlib.import_module("tigrbl_identity_server.framework")
+    exported = set(getattr(framework, "__all__", ()))
+    leaked = sorted(exported & FORBIDDEN_FRAMEWORK_EXPORTS)
+    assert leaked == []
+
+
+@pytest.mark.unit
+def test_storage_persistence_helpers_use_handlers_not_direct_queries() -> None:
+    violations: list[str] = []
+    for path in PERSISTENCE_HELPER_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: persistence helper path is missing")
+            continue
+        violations.extend(_violations(path, allow_session_transaction_boundary=True))
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_sync_compat_surfaces_do_not_spawn_private_event_loop_threads() -> None:
+    violations: list[str] = []
+    forbidden_snippets = ("Thread(", "threading.Thread(", "asyncio.new_event_loop(")
+    for path in SYNC_COMPAT_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: sync compatibility path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        for snippet in forbidden_snippets:
+            if snippet in source:
+                violations.append(f"{path}: sync compatibility surface uses {snippet}")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_async_request_token_paths_do_not_call_sync_jwt_default() -> None:
+    violations: list[str] = []
+    for path in ASYNC_REQUEST_TOKEN_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: async request token path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        if "JWTCoder.default()" in source:
+            violations.append(f"{path}: async request path calls JWTCoder.default()")
+
+    assert violations == []
+
+
+@pytest.mark.unit
+def test_authn_token_signers_do_not_register_oauth_introspection_state() -> None:
+    violations: list[str] = []
+    forbidden_snippets = (
+        "register_token",
+        "register_token_async",
+        ".standards.introspection",
+        "standards.oauth2.introspection",
+    )
+    for path in AUTHN_TOKEN_SIGNER_PATHS:
+        if not path.exists():
+            violations.append(f"{path}: authn token signer path is missing")
+            continue
+        source = path.read_text(encoding="utf-8")
+        for snippet in forbidden_snippets:
+            if snippet in source:
+                violations.append(f"{path}: authn token signer owns OAuth introspection state via {snippet}")
+
+    assert violations == []

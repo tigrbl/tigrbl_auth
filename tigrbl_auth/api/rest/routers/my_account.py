@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from typing import Any
 from uuid import UUID
 
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, Request, TigrblRouter, select, status
+from tigrbl_auth.framework import Depends, HTTPException, Request, TigrblRouter, status
 from tigrbl_auth.api.rest.deps.auth import get_current_principal
 from tigrbl_auth.api.rest.schemas import (
     MyAccountAuthorizedAppOut,
@@ -14,6 +15,7 @@ from tigrbl_auth.api.rest.schemas import (
     MyAccountProfileUpdateIn,
     MyAccountSessionOut,
 )
+from tigrbl_auth.security.handler_records import list_handler_records, read_handler_record, update_handler_record
 from tigrbl_auth.services.key_management import hash_pw
 from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth._identity_storage import ensure_identity_storage_importable
@@ -85,14 +87,15 @@ def _uuid(value: str, *, field: str) -> UUID:
         raise HTTPException(status.HTTP_404_NOT_FOUND, f"{field} not found") from exc
 
 
-async def _current_user_row(current_user: User, db: AsyncSession) -> User:
-    row = await db.scalar(
-        select(User).where(
-            User.id == current_user.id,
-            User.tenant_id == current_user.tenant_id,
-            User.is_active.is_(True),
-        )
-    )
+async def _current_user_row(current_user: User, db: Any) -> User:
+    row = await read_handler_record(User, db, current_user.id)
+    if (
+        row is not None
+        and str(getattr(row, "tenant_id", "")) != str(current_user.tenant_id)
+    ):
+        row = None
+    if row is not None and not bool(getattr(row, "is_active", True)):
+        row = None
     if row is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated account required")
     return row
@@ -106,7 +109,7 @@ async def _current_user_row(current_user: User, db: AsyncSession) -> User:
 )
 async def get_account_profile(
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountProfileOut:
     return _profile_payload(await _current_user_row(current_user, db))
 
@@ -121,21 +124,19 @@ async def update_account_profile(
     request: Request,
     payload: MyAccountProfileUpdateIn | None = None,
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountProfileOut:
     if payload is None:
         body = await request.json() or {}
         payload = MyAccountProfileUpdateIn.model_validate(body)
     row = await _current_user_row(current_user, db)
+    changes: dict[str, Any] = {}
     if payload.username is not None:
-        row.username = payload.username
+        changes["username"] = payload.username
     if payload.email is not None:
-        row.email = payload.email
-    await db.commit()
-    try:
-        await db.refresh(row)
-    except Exception:
-        pass
+        changes["email"] = payload.email
+    if changes:
+        row = await update_handler_record(User, db, row.id, changes)
     return _profile_payload(row)
 
 
@@ -147,16 +148,13 @@ async def update_account_profile(
 )
 async def list_account_sessions(
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> list[MyAccountSessionOut]:
-    rows = (
-        await db.execute(
-            select(AuthSession).where(
-                AuthSession.user_id == current_user.id,
-                AuthSession.tenant_id == current_user.tenant_id,
-            )
-        )
-    ).scalars().all()
+    rows = await list_handler_records(
+        AuthSession,
+        db,
+        {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
+    )
     return [_session_payload(row) for row in rows]
 
 
@@ -169,23 +167,31 @@ async def list_account_sessions(
 async def revoke_account_session(
     session_id: str,
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
     session_uuid = _uuid(session_id, field="session")
-    row = await db.scalar(
-        select(AuthSession).where(
-            AuthSession.id == session_uuid,
-            AuthSession.user_id == current_user.id,
-            AuthSession.tenant_id == current_user.tenant_id,
+    row = await read_handler_record(AuthSession, db, session_uuid)
+    if (
+        row is not None
+        and (
+            str(getattr(row, "user_id", "")) != str(current_user.id)
+            or str(getattr(row, "tenant_id", "")) != str(current_user.tenant_id)
         )
-    )
+    ):
+        row = None
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "session not found")
     now = datetime.now(timezone.utc)
-    row.session_state = "revoked"
-    row.ended_at = row.ended_at or now
-    row.logout_reason = row.logout_reason or "account_self_service"
-    await db.commit()
+    row = await update_handler_record(
+        AuthSession,
+        db,
+        row.id,
+        {
+            "session_state": "revoked",
+            "ended_at": row.ended_at or now,
+            "logout_reason": row.logout_reason or "account_self_service",
+        },
+    )
     return MyAccountMutationOut(status="revoked", id=str(row.id))
 
 
@@ -197,16 +203,13 @@ async def revoke_account_session(
 )
 async def list_account_consents(
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> list[MyAccountConsentOut]:
-    rows = (
-        await db.execute(
-            select(Consent).where(
-                Consent.user_id == current_user.id,
-                Consent.tenant_id == current_user.tenant_id,
-            )
-        )
-    ).scalars().all()
+    rows = await list_handler_records(
+        Consent,
+        db,
+        {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
+    )
     return [_consent_payload(row) for row in rows]
 
 
@@ -219,21 +222,26 @@ async def list_account_consents(
 async def revoke_account_consent(
     consent_id: str,
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
     consent_uuid = _uuid(consent_id, field="consent")
-    row = await db.scalar(
-        select(Consent).where(
-            Consent.id == consent_uuid,
-            Consent.user_id == current_user.id,
-            Consent.tenant_id == current_user.tenant_id,
+    row = await read_handler_record(Consent, db, consent_uuid)
+    if (
+        row is not None
+        and (
+            str(getattr(row, "user_id", "")) != str(current_user.id)
+            or str(getattr(row, "tenant_id", "")) != str(current_user.tenant_id)
         )
-    )
+    ):
+        row = None
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "consent not found")
-    row.state = "revoked"
-    row.revoked_at = row.revoked_at or datetime.now(timezone.utc)
-    await db.commit()
+    row = await update_handler_record(
+        Consent,
+        db,
+        row.id,
+        {"state": "revoked", "revoked_at": row.revoked_at or datetime.now(timezone.utc)},
+    )
     return MyAccountMutationOut(status="revoked", id=str(row.id))
 
 
@@ -245,16 +253,13 @@ async def revoke_account_consent(
 )
 async def list_account_authorized_apps(
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> list[MyAccountAuthorizedAppOut]:
-    rows = (
-        await db.execute(
-            select(Consent).where(
-                Consent.user_id == current_user.id,
-                Consent.tenant_id == current_user.tenant_id,
-            )
-        )
-    ).scalars().all()
+    rows = await list_handler_records(
+        Consent,
+        db,
+        {"user_id": current_user.id, "tenant_id": current_user.tenant_id},
+    )
     return [
         MyAccountAuthorizedAppOut(
             client_id=str(row.client_id),
@@ -277,25 +282,28 @@ async def list_account_authorized_apps(
 async def revoke_account_authorized_app(
     client_id: str,
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
     client_uuid = _uuid(client_id, field="client")
-    rows = (
-        await db.execute(
-            select(Consent).where(
-                Consent.client_id == client_uuid,
-                Consent.user_id == current_user.id,
-                Consent.tenant_id == current_user.tenant_id,
-            )
-        )
-    ).scalars().all()
+    rows = await list_handler_records(
+        Consent,
+        db,
+        {
+            "client_id": client_uuid,
+            "user_id": current_user.id,
+            "tenant_id": current_user.tenant_id,
+        },
+    )
     if not rows:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "authorized app not found")
     now = datetime.now(timezone.utc)
     for row in rows:
-        row.state = "revoked"
-        row.revoked_at = row.revoked_at or now
-    await db.commit()
+        await update_handler_record(
+            Consent,
+            db,
+            row.id,
+            {"state": "revoked", "revoked_at": row.revoked_at or now},
+        )
     return MyAccountMutationOut(status="revoked", id=str(client_uuid))
 
 
@@ -309,7 +317,7 @@ async def change_account_password(
     request: Request,
     payload: MyAccountPasswordChangeIn | None = None,
     current_user: User = Depends(get_current_principal),
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
     if payload is None:
         body = await request.json() or {}
@@ -317,11 +325,17 @@ async def change_account_password(
     row = await _current_user_row(current_user, db)
     if not row.verify_password(payload.current_password):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid current password")
-    row.password_hash = hash_pw(payload.new_password)
-    row.must_change_password = False
-    row.password_reset_token_hash = None
-    row.password_reset_expires_at = None
-    await db.commit()
+    row = await update_handler_record(
+        User,
+        db,
+        row.id,
+        {
+            "password_hash": hash_pw(payload.new_password),
+            "must_change_password": False,
+            "password_reset_token_hash": None,
+            "password_reset_expires_at": None,
+        },
+    )
     return MyAccountMutationOut(status="changed", id=str(row.id))
 
 

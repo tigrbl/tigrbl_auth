@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "tigrbl_auth public auth server",
-    "version": "0.3.4",
+    "version": "0.4.0.dev2",
     "description": "Generated public contract filtered by the effective deployment boundary."
   },
   "servers": [
@@ -1391,6 +1391,682 @@
         }
       }
     },
+    "/account/profile": {
+      "get": {
+        "operationId": "get_account_profile",
+        "summary": "End-user profile self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "patch": {
+        "operationId": "patch_account_profile",
+        "summary": "End-user profile self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/sessions": {
+      "get": {
+        "operationId": "get_account_sessions",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_sessions",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/sessions/{session_id}": {
+      "get": {
+        "operationId": "get_account_sessions_session_id",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_sessions_session_id",
+        "summary": "End-user session self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/consents": {
+      "get": {
+        "operationId": "get_account_consents",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_consents",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/consents/{consent_id}": {
+      "get": {
+        "operationId": "get_account_consents_consent_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_consents_consent_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/authorized-apps": {
+      "get": {
+        "operationId": "get_account_authorized_apps",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_authorized_apps",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/authorized-apps/{client_id}": {
+      "get": {
+        "operationId": "get_account_authorized_apps_client_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      },
+      "delete": {
+        "operationId": "delete_account_authorized_apps_client_id",
+        "summary": "End-user consent and authorized-app self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
+    "/account/password/change": {
+      "post": {
+        "operationId": "post_account_password_change",
+        "summary": "End-user credential self-service",
+        "tags": [
+          "my-account"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResult"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        }
+      }
+    },
     "/token/exchange": {
       "post": {
         "operationId": "post_token_exchange",
@@ -1605,6 +2281,66 @@
         ]
       }
     },
+    "/realms/{realm_slug}/.well-known/openid-configuration": {
+      "get": {
+        "operationId": "get_realms_realm_slug__well_known_openid_configuration",
+        "summary": "Realm-scoped OIDC discovery document",
+        "tags": [
+          ".well-known",
+          "realm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoveryDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_oidc_discovery",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        },
+        "parameters": [
+          {
+            "name": "realm_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/.well-known/oauth-authorization-server": {
       "get": {
         "operationId": "get__well_known_oauth_authorization_server",
@@ -1803,6 +2539,66 @@
         "parameters": [
           {
             "name": "tenant_slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/realms/{realm_slug}/.well-known/jwks.json": {
+      "get": {
+        "operationId": "get_realms_realm_slug__well_known_jwks_json",
+        "summary": "Realm-scoped JSON Web Key Set",
+        "tags": [
+          ".well-known",
+          "realm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwksDocument"
+                }
+              }
+            }
+          }
+        },
+        "x-required-flags": [
+          "enable_rfc7517",
+          "enable_rfc8615"
+        ],
+        "x-runtime-profile": {
+          "profile": "fapi2-security",
+          "allowed_grant_types": [
+            "authorization_code",
+            "client_credentials",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:jwt-bearer",
+            "urn:ietf:params:oauth:grant-type:device_code",
+            "urn:ietf:params:oauth:grant-type:token-exchange"
+          ],
+          "allowed_response_types": [
+            "code"
+          ],
+          "par_required": true,
+          "sender_constraint_required": true,
+          "dpop_supported": true,
+          "mtls_supported": true,
+          "resource_indicators_supported": true,
+          "request_objects_supported": true,
+          "rich_authorization_requests_supported": true,
+          "query_bearer_disabled": true,
+          "form_bearer_disabled": true,
+          "jwt_access_token_profile_supported": true
+        },
+        "parameters": [
+          {
+            "name": "realm_slug",
             "in": "path",
             "required": true,
             "schema": {

@@ -1,9 +1,18 @@
 from __future__ import annotations
 
+from typing import Any
 from uuid import UUID
 
 from tigrbl_auth.api.rest.schemas import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, AdminTenantOut, AdminTenantProvisionIn
-from tigrbl_auth.framework import AsyncSession, Depends, HTTPException, Request, TigrblRouter, select, status
+from tigrbl_auth.framework import Depends, HTTPException, Request, TigrblRouter, status
+from tigrbl_auth.security.handler_records import (
+    create_handler_record,
+    delete_handler_record,
+    first_handler_record,
+    list_handler_records,
+    read_handler_record,
+    update_handler_record,
+)
 from tigrbl_auth.services.admin_identity_bootstrap import resolve_admin_user_from_request
 from tigrbl_auth.tables import Realm, Tenant, User
 from tigrbl_auth.tables.engine import get_db
@@ -35,8 +44,8 @@ def _tenant_payload(row: Tenant) -> AdminTenantOut:
     )
 
 
-async def _require_superuser(request: Request) -> User:
-    actor = await resolve_admin_user_from_request(request)
+async def _require_superuser(request: Request, db: Any) -> User:
+    actor = await resolve_admin_user_from_request(request, db=db)
     if actor is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated admin session required")
     if not bool(getattr(actor, "is_superuser", False)):
@@ -60,10 +69,27 @@ def _issuer_path(value: str | None, slug: str) -> str:
     return text.rstrip("/")
 
 
+async def _find_realm_duplicate(db: Any, *, slug: str, name: str, issuer_path: str) -> Realm | None:
+    for filters in ({"slug": slug}, {"name": name}, {"issuer_path": issuer_path}):
+        row = await first_handler_record(Realm, db, filters)
+        if row is not None:
+            return row
+    return None
+
+
+async def _find_tenant_duplicate(db: Any, *, slug: str, name: str, email: str) -> Tenant | None:
+    for filters in ({"slug": slug}, {"name": name}, {"email": email}):
+        row = await first_handler_record(Tenant, db, filters)
+        if row is not None:
+            return row
+    return None
+
+
 @api.route("/admin/realm", methods=["GET"], response_model=list[AdminRealmOut])
-async def admin_list_realms(request: Request, db: AsyncSession = Depends(get_db)):
-    await _require_superuser(request)
-    rows = list(await db.scalars(select(Realm).order_by(Realm.created_at, Realm.name, Realm.slug)))
+async def admin_list_realms(request: Request, db: Any = Depends(get_db)):
+    await _require_superuser(request, db)
+    rows = await list_handler_records(Realm, db)
+    rows = sorted(rows, key=lambda row: (getattr(row, "created_at", None) or "", getattr(row, "name", ""), getattr(row, "slug", "")))
     return [_realm_payload(row) for row in rows]
 
 
@@ -71,28 +97,29 @@ async def admin_list_realms(request: Request, db: AsyncSession = Depends(get_db)
 async def admin_create_realm(
     request: Request,
     payload: AdminRealmProvisionIn | None = None,
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ):
-    await _require_superuser(request)
+    await _require_superuser(request, db)
     if payload is None:
         payload = AdminRealmProvisionIn.model_validate(await request.json() or {})
     slug = payload.slug.strip().lower()
     name = payload.name.strip()
     issuer_path = _issuer_path(payload.issuer_path, slug)
-    existing = await db.scalar(select(Realm).where((Realm.slug == slug) | (Realm.name == name) | (Realm.issuer_path == issuer_path)))
+    existing = await _find_realm_duplicate(db, slug=slug, name=name, issuer_path=issuer_path)
     if existing is not None:
         raise HTTPException(status.HTTP_409_CONFLICT, "realm slug, name, or issuer path already exists")
-    row = Realm(slug=slug, name=name, issuer_path=issuer_path, description=payload.description)
-    db.add(row)
-    await db.commit()
-    await db.refresh(row)
+    row = await create_handler_record(
+        Realm,
+        db,
+        {"slug": slug, "name": name, "issuer_path": issuer_path, "description": payload.description},
+    )
     return _realm_payload(row)
 
 
 @api.route("/admin/realm/{realm_id}", methods=["GET"], response_model=AdminRealmOut)
-async def admin_get_realm(request: Request, realm_id: str, db: AsyncSession = Depends(get_db)):
-    await _require_superuser(request)
-    row = await db.scalar(select(Realm).where(Realm.id == _uuid(realm_id, label="realm_id")))
+async def admin_get_realm(request: Request, realm_id: str, db: Any = Depends(get_db)):
+    await _require_superuser(request, db)
+    row = await read_handler_record(Realm, db, _uuid(realm_id, label="realm_id"))
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
     return _realm_payload(row)
@@ -103,47 +130,50 @@ async def admin_update_realm(
     request: Request,
     realm_id: str,
     payload: AdminRealmUpdateIn | None = None,
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ):
-    await _require_superuser(request)
+    await _require_superuser(request, db)
     if payload is None:
         payload = AdminRealmUpdateIn.model_validate(await request.json() or {})
-    row = await db.scalar(select(Realm).where(Realm.id == _uuid(realm_id, label="realm_id")))
+    row = await read_handler_record(Realm, db, _uuid(realm_id, label="realm_id"))
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
+    changes: dict[str, Any] = {}
+    next_slug = row.slug
     if payload.slug is not None:
-        row.slug = payload.slug.strip().lower()
+        next_slug = payload.slug.strip().lower()
+        changes["slug"] = next_slug
     if payload.name is not None:
-        row.name = payload.name.strip()
+        changes["name"] = payload.name.strip()
     if payload.issuer_path is not None:
-        row.issuer_path = _issuer_path(payload.issuer_path, row.slug)
+        changes["issuer_path"] = _issuer_path(payload.issuer_path, next_slug)
     if payload.description is not None:
-        row.description = payload.description
-    await db.commit()
-    await db.refresh(row)
+        changes["description"] = payload.description
+    if changes:
+        row = await update_handler_record(Realm, db, row.id, changes)
     return _realm_payload(row)
 
 
 @api.route("/admin/realm/{realm_id}", methods=["DELETE"], response_model=AdminRealmOut)
-async def admin_delete_realm(request: Request, realm_id: str, db: AsyncSession = Depends(get_db)):
-    await _require_superuser(request)
-    row = await db.scalar(select(Realm).where(Realm.id == _uuid(realm_id, label="realm_id")))
+async def admin_delete_realm(request: Request, realm_id: str, db: Any = Depends(get_db)):
+    await _require_superuser(request, db)
+    row = await read_handler_record(Realm, db, _uuid(realm_id, label="realm_id"))
     if row is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
-    tenant_count = len(list(await db.scalars(select(Tenant).where(Tenant.realm_id == row.id))))
+    tenant_count = len(await list_handler_records(Tenant, db, {"realm_id": row.id}))
     if tenant_count:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "cannot delete a realm that still owns tenants")
     snapshot = _realm_payload(row)
-    await db.delete(row)
-    await db.commit()
+    await delete_handler_record(Realm, db, row.id)
     return snapshot
 
 
 @api.route("/admin/realm/{realm_id}/tenant", methods=["GET"], response_model=list[AdminTenantOut])
-async def admin_list_realm_tenants(request: Request, realm_id: str, db: AsyncSession = Depends(get_db)):
-    await _require_superuser(request)
+async def admin_list_realm_tenants(request: Request, realm_id: str, db: Any = Depends(get_db)):
+    await _require_superuser(request, db)
     rid = _uuid(realm_id, label="realm_id")
-    rows = list(await db.scalars(select(Tenant).where(Tenant.realm_id == rid).order_by(Tenant.created_at, Tenant.name, Tenant.slug)))
+    rows = await list_handler_records(Tenant, db, {"realm_id": rid})
+    rows = sorted(rows, key=lambda row: (getattr(row, "created_at", None) or "", getattr(row, "name", ""), getattr(row, "slug", "")))
     return [_tenant_payload(row) for row in rows]
 
 
@@ -152,24 +182,21 @@ async def admin_create_realm_tenant(
     request: Request,
     realm_id: str,
     payload: AdminTenantProvisionIn | None = None,
-    db: AsyncSession = Depends(get_db),
+    db: Any = Depends(get_db),
 ):
-    await _require_superuser(request)
+    await _require_superuser(request, db)
     if payload is None:
         payload = AdminTenantProvisionIn.model_validate(await request.json() or {})
-    realm = await db.scalar(select(Realm).where(Realm.id == _uuid(realm_id, label="realm_id")))
+    realm = await read_handler_record(Realm, db, _uuid(realm_id, label="realm_id"))
     if realm is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "realm not found")
     slug = payload.slug.strip().lower()
     name = payload.name.strip()
     email = payload.email.strip().lower()
-    existing = await db.scalar(select(Tenant).where((Tenant.slug == slug) | (Tenant.name == name) | (Tenant.email == email)))
+    existing = await _find_tenant_duplicate(db, slug=slug, name=name, email=email)
     if existing is not None:
         raise HTTPException(status.HTTP_409_CONFLICT, "tenant slug, name, or email already exists")
-    row = Tenant(slug=slug, name=name, email=email, realm_id=realm.id)
-    db.add(row)
-    await db.commit()
-    await db.refresh(row)
+    row = await create_handler_record(Tenant, db, {"slug": slug, "name": name, "email": email, "realm_id": realm.id})
     return _tenant_payload(row)
 
 

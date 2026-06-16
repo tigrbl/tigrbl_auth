@@ -65,11 +65,11 @@ async def approve_device_code(ctx: Mapping[str, Any]) -> None:
     if ident is None:
         return
 
-    obj = await DeviceCode.handlers.read.core({"payload": {"id": ident}})
+    obj = await DeviceCode.handlers.read.core({"path_params": {"id": ident}})
     if obj:
         await DeviceCode.handlers.update.core(
             {
-                "obj": obj,
+                "path_params": {"id": ident},
                 "payload": {
                     "authorized": True,
                     "authorized_at": datetime.now(timezone.utc),
