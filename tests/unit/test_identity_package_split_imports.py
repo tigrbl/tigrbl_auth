@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib
+import inspect
 import sys
 import tomllib
 from pathlib import Path
@@ -136,3 +137,13 @@ def test_credentials_token_service_exports_async_runtime_helper() -> None:
 
     assert callable(module._svc_async)
     assert callable(runtime._svc_async)
+
+
+def test_credentials_jwt_coder_exports_async_default_factory() -> None:
+    _install_package_src_paths()
+
+    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    coder_module = importlib.import_module("tigrbl_authn_credentials._token_service.coder")
+
+    assert inspect.iscoroutinefunction(module.JWTCoder.async_default)
+    assert inspect.iscoroutinefunction(coder_module.JWTCoder.async_default)

@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from tigrbl_identity_core.errors import InvalidTokenError
 
-from .runtime import _ACCESS_TTL, _REFRESH_TTL, _header_alg, _load_runtime, _run, _svc
+from .runtime import _ACCESS_TTL, _REFRESH_TTL, _header_alg, _load_runtime, _run, _svc, _svc_async
 
 
 class JWTCoder:
@@ -36,6 +36,11 @@ class JWTCoder:
     @classmethod
     def default(cls) -> "JWTCoder":
         svc, kid = _svc()
+        return cls(svc, kid)
+
+    @classmethod
+    async def async_default(cls) -> "JWTCoder":
+        svc, kid = await _svc_async()
         return cls(svc, kid)
 
     async def async_sign(
