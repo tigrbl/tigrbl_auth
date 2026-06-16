@@ -4,8 +4,11 @@ import hashlib
 from collections.abc import Mapping
 from copy import deepcopy
 from datetime import datetime, timezone
+import inspect
 from typing import Any
 from uuid import UUID, uuid4
+
+from sqlalchemy.exc import NoResultFound
 
 from tigrbl_identity_runtime.http_standards.cookies import (
     extract_session_cookie,
@@ -114,7 +117,20 @@ async def list_handler_records(model: Any, db: Any, filters: Mapping[str, Any] |
 
 
 async def read_handler_record(model: Any, db: Any, ident: Any) -> Any:
-    return await model.handlers.read.core({"path_params": {"id": ident}, "db": db})
+    get = getattr(db, "get", None)
+    if callable(get):
+        try:
+            row = get(model, ident)
+            if inspect.isawaitable(row):
+                row = await row
+            if row is not None:
+                return row
+        except Exception:
+            pass
+    try:
+        return await model.handlers.read.core({"path_params": {"id": ident}, "db": db})
+    except NoResultFound:
+        return None
 
 
 async def create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:
