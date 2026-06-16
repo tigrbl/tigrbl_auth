@@ -31,3 +31,25 @@ def test_extract_session_cookie_falls_back_to_cookie_header():
         }
 
     assert extract_session_cookie(Request()) == 'v1.00000000-0000-0000-0000-000000000001.secret'
+
+
+def test_extract_session_cookie_falls_back_to_tuple_headers():
+    class Request:
+        cookies = None
+        headers = [
+            ('host', 'localhost'),
+            ('cookie', 'theme=dark; sid=v1.00000000-0000-0000-0000-000000000001.secret; other=value'),
+        ]
+
+    assert extract_session_cookie(Request()) == 'v1.00000000-0000-0000-0000-000000000001.secret'
+
+
+def test_extract_session_cookie_falls_back_to_asgi_byte_headers():
+    class Request:
+        cookies = None
+        headers = [
+            (b'host', b'localhost'),
+            (b'cookie', b'theme=dark; sid=v1.00000000-0000-0000-0000-000000000001.secret; other=value'),
+        ]
+
+    assert extract_session_cookie(Request()) == 'v1.00000000-0000-0000-0000-000000000001.secret'

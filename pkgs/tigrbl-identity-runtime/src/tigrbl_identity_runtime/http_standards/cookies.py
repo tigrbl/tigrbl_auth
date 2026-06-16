@@ -151,6 +151,15 @@ def extract_session_cookie(request) -> str | None:
     if hasattr(headers, "get"):
         raw_cookie = headers.get("cookie") or headers.get("Cookie")
     if not raw_cookie:
+        try:
+            for key, value in headers:
+                key_text = key.decode("latin-1") if isinstance(key, bytes) else str(key)
+                if key_text.lower() == "cookie":
+                    raw_cookie = value.decode("latin-1") if isinstance(value, bytes) else str(value)
+                    break
+        except (TypeError, ValueError):
+            raw_cookie = None
+    if not raw_cookie:
         return None
     parsed = SimpleCookie()
     try:
