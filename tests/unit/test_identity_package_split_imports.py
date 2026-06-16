@@ -132,5 +132,7 @@ def test_credentials_token_service_exports_async_runtime_helper() -> None:
     _install_package_src_paths()
 
     module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
 
     assert callable(module._svc_async)
+    assert callable(runtime._svc_async)

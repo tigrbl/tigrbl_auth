@@ -100,6 +100,34 @@ def _svc() -> Tuple[Any, str]:
     return service, kid
 
 
+async def _svc_async() -> Tuple[Any, str]:
+    runtime = _load_runtime()
+    kp = _provider()
+    if _DEFAULT_KEY_PATH.exists():
+        kid = _DEFAULT_KEY_PATH.read_text().strip()
+        if kid:
+            try:
+                await kp.get_key(kid, include_secret=False)
+            except Exception:
+                kid, _, _ = await _ensure_key()
+        else:
+            kid, _, _ = await _ensure_key()
+    else:
+        spec = runtime["KeySpec"](
+            klass=runtime["KeyClass"].asymmetric,
+            alg=runtime["KeyAlg"].ED25519,
+            uses=(runtime["KeyUse"].SIGN, runtime["KeyUse"].VERIFY),
+            export_policy=runtime["ExportPolicy"].SECRET_WHEN_ALLOWED,
+            label="jwt_ed25519",
+        )
+        ref = await kp.create_key(spec)
+        kid = ref.kid
+        _DEFAULT_KEY_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _DEFAULT_KEY_PATH.write_text(kid)
+    service = runtime["JWTTokenService"](kp)
+    return service, kid
+
+
 def _header_alg(token: str) -> str:
     try:
         header_segment = token.split(".")[0]
