@@ -8,8 +8,11 @@ from urllib.parse import parse_qs
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_auth.services.persistence import (
+    is_token_revoked_async as _is_token_revoked_async,
     is_token_revoked as _is_token_revoked,
+    reset_token_state_async as _reset_token_state_async,
     reset_token_state as _reset_token_state,
+    revoke_token_async as _revoke_token_async,
     revoke_token as _revoke_token,
 )
 
@@ -26,14 +29,30 @@ def revoke_token(token: str, token_type_hint: str | None = None) -> str | None:
     return _revoke_token(token, token_type_hint=token_type_hint)
 
 
+async def revoke_token_async(token: str, token_type_hint: str | None = None) -> str | None:
+    if not settings.enable_rfc7009:
+        return None
+    return await _revoke_token_async(token, token_type_hint=token_type_hint)
+
+
 def is_revoked(token: str) -> bool:
     if not settings.enable_rfc7009:
         return False
     return bool(_is_token_revoked(token))
 
 
+async def is_revoked_async(token: str) -> bool:
+    if not settings.enable_rfc7009:
+        return False
+    return bool(await _is_token_revoked_async(token))
+
+
 def reset_revocations() -> None:
     _reset_token_state()
+
+
+async def reset_revocations_async() -> None:
+    await _reset_token_state_async()
 
 
 @api.route(CANONICAL_REVOCATION_PATH, methods=["POST"])
@@ -46,7 +65,7 @@ async def revoke(request: Request) -> dict[str, str]:
     token_type_hint = (parsed.get("token_type_hint") or [None])[0]
     if token is None:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "missing token")
-    revoke_token(token, token_type_hint=token_type_hint)
+    await revoke_token_async(token, token_type_hint=token_type_hint)
     return {}
 
 
@@ -67,8 +86,11 @@ __all__ = [
     "api",
     "router",
     "revoke_token",
+    "revoke_token_async",
     "is_revoked",
+    "is_revoked_async",
     "reset_revocations",
+    "reset_revocations_async",
     "include_revocation_endpoint",
     "include_rfc7009",
 ]
