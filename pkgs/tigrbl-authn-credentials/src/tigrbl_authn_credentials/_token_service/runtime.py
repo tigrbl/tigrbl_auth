@@ -34,8 +34,8 @@ def _load_runtime() -> dict[str, Any]:
         from tigrbl_identity_server.framework import ExportPolicy, FileKeyProvider, JWTTokenService, LocalKeyProvider, JWAAlg, KeyAlg, KeyClass, KeySpec, KeyUse
         from tigrbl_identity_runtime.settings import settings
         from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
-        from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked
-        from tigrbl_auth_protocol_oauth.standards.introspection import register_token
+        from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async
+        from tigrbl_auth_protocol_oauth.standards.introspection import register_token, register_token_async
     except Exception as exc:  # pragma: no cover
         raise RuntimeError("runtime token-service dependencies are unavailable") from exc
     return {
@@ -51,7 +51,9 @@ def _load_runtime() -> dict[str, Any]:
         "settings": settings,
         "validate_certificate_binding": validate_certificate_binding,
         "is_revoked": is_revoked,
+        "is_revoked_async": is_revoked_async,
         "register_token": register_token,
+        "register_token_async": register_token_async,
     }
 
 

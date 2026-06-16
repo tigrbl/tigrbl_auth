@@ -20,6 +20,7 @@ from tigrbl_identity_storage.tables.engine import get_db
 
 from tigrbl_identity_storage.tables import AuthCode, AuthSession, Client, User
 from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
 from tigrbl_auth_protocol_oauth.standards.native_apps import is_native_redirect_uri
 from ..shared import _require_tls
@@ -90,17 +91,12 @@ async def authorize(
         client_uuid = UUID(client_id)
     except ValueError:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
-    client = await Client.handlers.read.core({"payload": {"id": client_uuid}, "db": db})
+    client = await Client.handlers.read.core({"path_params": {"id": client_uuid}, "db": db})
     if client is None or redirect_uri not in (client.redirect_uris or "").split():
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
 
     prompts = set(prompt.split()) if prompt else set()
-    sid = request.cookies.get("sid")
-    session = (
-        await AuthSession.handlers.read.core({"payload": {"id": UUID(sid)}, "db": db})
-        if sid
-        else None
-    )
+    session = await resolve_browser_session(request)
     if login_hint and session and session.username != login_hint:
         session = None
     if "login" in prompts:
@@ -160,7 +156,6 @@ async def authorize(
         if requested_claims:
             payload["claims"] = requested_claims
         await AuthCode.handlers.create.core({"payload": payload, "db": db})
-        await db.commit()
         params.append(("code", str(code)))
     if "token" in rts:
         from ..shared import _jwt
@@ -172,7 +167,7 @@ async def authorize(
         extra_claims: dict[str, Any] = {"tid": tenant_id, "typ": "id"}
         if requested_claims and "id_token" in requested_claims:
             user_obj = await User.handlers.read.core(
-                {"payload": {"id": UUID(user_sub)}, "db": db}
+                {"path_params": {"id": UUID(user_sub)}, "db": db}
             )
             idc = requested_claims["id_token"]
             if "email" in idc:

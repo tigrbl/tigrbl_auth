@@ -147,3 +147,62 @@ def test_credentials_jwt_coder_exports_async_default_factory() -> None:
 
     assert inspect.iscoroutinefunction(module.JWTCoder.async_default)
     assert inspect.iscoroutinefunction(coder_module.JWTCoder.async_default)
+
+
+def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
+    coder_source = (
+        PKGS
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "_token_service"
+        / "coder.py"
+    ).read_text(encoding="utf-8")
+    runtime_source = (
+        PKGS
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "_token_service"
+        / "runtime.py"
+    ).read_text(encoding="utf-8")
+    credentials_persistence_source = (
+        PKGS
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "_token_service"
+        / "persistence.py"
+    ).read_text(encoding="utf-8")
+    server_handler_source = (
+        PKGS
+        / "tigrbl-identity-server"
+        / "src"
+        / "tigrbl_identity_server"
+        / "security"
+        / "handler_records.py"
+    ).read_text(encoding="utf-8")
+
+    assert "persist_token: bool = True" in coder_source
+    assert 'runtime["register_token_async"]' in coder_source
+    assert 'runtime["register_token"](' not in coder_source
+    assert 'runtime["is_revoked_async"]' in coder_source
+    assert 'runtime["is_revoked"](' not in coder_source
+    assert '"register_token_async": register_token_async' in runtime_source
+    assert '"is_revoked_async": is_revoked_async' in runtime_source
+    assert "persist_token=False" in credentials_persistence_source
+    assert "persist_token=False" in server_handler_source
+
+
+def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
+    route_paths = (
+        ROOT / "tigrbl_auth" / "routers" / "authz" / "oidc.py",
+        PKGS / "tigrbl-auth-protocol-oidc" / "src" / "tigrbl_auth_protocol_oidc" / "router.py",
+        PKGS / "tigrbl-identity-server" / "src" / "tigrbl_identity_server" / "routers" / "authz" / "oidc.py",
+    )
+
+    for route_path in route_paths:
+        source = route_path.read_text(encoding="utf-8")
+        assert "resolve_browser_session" in source, route_path
+        assert 'request.cookies.get("sid")' not in source, route_path
+        assert "UUID(sid)" not in source, route_path

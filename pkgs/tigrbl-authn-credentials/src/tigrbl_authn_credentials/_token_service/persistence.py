@@ -27,6 +27,7 @@ async def issue_persisted_token_pair(
         sub=sub,
         tid=tid,
         cert_thumbprint=cert_thumbprint,
+        persist_token=False,
         **extra,
     )
     access_claims = await jwt.async_decode(access_token, verify_exp=False)

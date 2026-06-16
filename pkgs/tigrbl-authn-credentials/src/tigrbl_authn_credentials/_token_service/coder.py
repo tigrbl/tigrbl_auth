@@ -53,6 +53,7 @@ class JWTCoder:
         issuer: Optional[str] = None,
         audience: Optional[Iterable[str] | str] = None,
         cert_thumbprint: Optional[str] = None,
+        persist_token: bool = True,
         **extra: Any,
     ) -> str:
         runtime = _load_runtime()
@@ -87,7 +88,7 @@ class JWTCoder:
             issuer=issuer,
             audience=audience,
         )
-        if getattr(settings, "enable_rfc7662", False):
+        if persist_token and getattr(settings, "enable_rfc7662", False):
             claims = dict(payload)
             claims.setdefault("sub", sub)
             claims.setdefault("kind", typ)
@@ -97,7 +98,7 @@ class JWTCoder:
                 claims.setdefault("iss", issuer)
             if audience is not None:
                 claims.setdefault("aud", list(audience) if isinstance(audience, (list, tuple, set)) else audience)
-            runtime["register_token"](token, claims)
+            await runtime["register_token_async"](token, claims)
         return token
 
     def sign(self, **kwargs: Any) -> str:
@@ -130,7 +131,7 @@ class JWTCoder:
         cnf = payload.get("cnf") if isinstance(payload.get("cnf"), dict) else {}
         if getattr(settings, "enable_rfc8705", False) and cnf.get("x5t#S256") is not None:
             runtime["validate_certificate_binding"](payload, cert_thumbprint)
-        if runtime["is_revoked"](token):
+        if await runtime["is_revoked_async"](token):
             raise InvalidTokenError("token revoked")
         return payload
 

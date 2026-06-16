@@ -292,6 +292,7 @@ async def issue_token_pair_records(
         sub=sub,
         tid=tid,
         cert_thumbprint=cert_thumbprint,
+        persist_token=False,
         **extra,
     )
     access_claims = await jwt.async_decode(access_token, verify_exp=False)
