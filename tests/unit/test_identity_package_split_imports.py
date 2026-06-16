@@ -217,6 +217,25 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
     assert "from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async" in runtime_source
 
 
+def test_oauth_introspection_exports_async_runtime_hooks() -> None:
+    _install_package_src_paths()
+
+    split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection")
+    runtime_source = (
+        PKGS
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "_token_service"
+        / "runtime.py"
+    ).read_text(encoding="utf-8")
+
+    assert inspect.iscoroutinefunction(split_module.register_token_async)
+    assert inspect.iscoroutinefunction(split_module.introspect_token_async)
+    assert inspect.iscoroutinefunction(split_module.reset_tokens_async)
+    assert "from tigrbl_auth_protocol_oauth.standards.introspection import register_token, register_token_async" in runtime_source
+
+
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
     route_paths = (
         ROOT / "tigrbl_auth" / "routers" / "authz" / "oidc.py",

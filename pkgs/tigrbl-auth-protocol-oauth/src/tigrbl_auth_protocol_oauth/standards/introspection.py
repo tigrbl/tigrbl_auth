@@ -24,10 +24,13 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_identity_server.framework import AsyncSession, Depends
     from tigrbl_auth_protocol_oauth.ops.token import _load_client, _registered_token_endpoint_auth_method
     from tigrbl_identity_storage.persistence import (
+        introspect_token_async as _introspect_token_async,
         introspect_token as _introspect_token,
         record_token as _record_token,
+        reset_token_state_async as _reset_token_state_async,
         reset_token_state as _reset_token_state,
         unregister_token as _unregister_token,
+        upsert_token_record_async as _record_token_async,
     )
     from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
         PRIVATE_KEY_JWT_AUTH_METHOD,
@@ -39,12 +42,6 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
         presented_certificate_thumbprint,
     )
     from tigrbl_identity_storage.tables.engine import get_db
-    from tigrbl_identity_storage.persistence import (
-        introspect_token as _introspect_token,
-        record_token as _record_token,
-        reset_token_state as _reset_token_state,
-        unregister_token as _unregister_token,
-    )
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     IntrospectOut = dict  # type: ignore[assignment]
     AsyncSession = Any  # type: ignore[assignment]
@@ -142,8 +139,17 @@ except Exception:  # pragma: no cover - dependency-light checkpoint fallback
             return {"active": False}
         return {"active": True, **claims}
 
+    async def _introspect_token_async(token: str) -> Dict[str, Any]:
+        return _introspect_token(token)
+
+    async def _record_token_async(token: str, claims: Dict[str, Any], token_kind: str | None = None) -> str:
+        return _record_token(token, claims, token_kind=token_kind)
+
     def _reset_token_state() -> None:
         _TOKENS.clear()
+
+    async def _reset_token_state_async() -> None:
+        _reset_token_state()
 
 RFC7662_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7662"
 
@@ -282,6 +288,39 @@ def register_token(token: str, claims: Dict[str, Any] | None = None) -> str:
     return _record_token(token, payload, token_kind=payload.get("kind"))
 
 
+async def register_token_async(token: str, claims: Dict[str, Any] | None = None) -> str:
+    payload = dict(claims or {})
+    _FALLBACK_TOKENS[token] = payload
+    return await _record_token_async(token, payload, token_kind=payload.get("kind"))
+
+
+async def _request_form_data(request: Request) -> dict[str, Any]:
+    form = getattr(request, "form", None)
+    if callable(form):
+        result = form()
+        if inspect.isawaitable(result):
+            result = await result
+        if isinstance(result, dict):
+            return dict(result)
+        try:
+            return {key: result.get(key) for key in result.keys()}
+        except Exception:
+            pass
+
+    body = getattr(request, "body", b"") or b""
+    if callable(body):
+        result = body()
+        body = await result if inspect.isawaitable(result) else result
+    if isinstance(body, str):
+        body = body.encode("utf-8")
+    if not isinstance(body, (bytes, bytearray)):
+        body = b""
+    return {
+        key: values[-1] if isinstance(values, list) and values else values
+        for key, values in parse_qs(bytes(body).decode("utf-8"), keep_blank_values=True).items()
+    }
+
+
 def unregister_token(token: str) -> None:
     _FALLBACK_TOKENS.pop(token, None)
     _unregister_token(token)
@@ -296,9 +335,23 @@ def introspect_token(token: str) -> Dict[str, Any]:
     return payload
 
 
+async def introspect_token_async(token: str) -> Dict[str, Any]:
+    if not settings.enable_rfc7662:
+        raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
+    payload = await _introspect_token_async(token)
+    if payload.get("active") is False and token in _FALLBACK_TOKENS:
+        return {"active": True, **_FALLBACK_TOKENS[token]}
+    return payload
+
+
 def reset_tokens() -> None:
     _FALLBACK_TOKENS.clear()
     _reset_token_state()
+
+
+async def reset_tokens_async() -> None:
+    _FALLBACK_TOKENS.clear()
+    await _reset_token_state_async()
 
 
 @api.route("/introspect", methods=["POST"], response_model=IntrospectOut)
@@ -306,18 +359,13 @@ async def introspect(request: Request, db: AsyncSession = Depends(get_db)):
     _require_tls(request, deployment=deployment_from_request(request, settings))
     if not settings.enable_rfc7662:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "introspection disabled")
-    body = getattr(request, "body", b"") or b""
-    form_data = parse_qs(body.decode("utf-8"), keep_blank_values=True)
-    token_values = form_data.get("token") or []
-    token = token_values[0] if token_values else None
+    form_data = await _request_form_data(request)
+    token_value = form_data.get("token")
+    token = token_value[-1] if isinstance(token_value, list) and token_value else token_value
     if not token:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "token parameter required")
-    normalized_form = {
-        key: values[-1] if isinstance(values, list) and values else values
-        for key, values in form_data.items()
-    }
-    await _authorize_introspection_caller(request, normalized_form, db)
-    return introspect_token(token)
+    await _authorize_introspection_caller(request, form_data, db)
+    return await introspect_token_async(token)
 
 
 def include_introspection_endpoint(app: TigrblApp) -> None:
@@ -338,9 +386,12 @@ __all__ = [
     "api",
     "router",
     "register_token",
+    "register_token_async",
     "unregister_token",
     "introspect_token",
+    "introspect_token_async",
     "reset_tokens",
+    "reset_tokens_async",
     "introspect",
     "include_introspection_endpoint",
     "include_rfc7662",
