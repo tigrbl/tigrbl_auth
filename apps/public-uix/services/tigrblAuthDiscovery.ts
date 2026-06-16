@@ -7,6 +7,8 @@ import {
 
 const trimTrailingSlash = (value: string): string => value.replace(/\/+$/, "");
 const MAX_SAFE_ERROR_LENGTH = 180;
+const INTERNAL_DIAGNOSTIC_PATTERN =
+  /(<class\b|\bbuiltins\.|\bAttributeError\b|\bTraceback\b|\bSQL:\b|\bSELECT\s+|\bINSERT\s+|\bUPDATE\s+|\bDELETE\s+)/i;
 
 export const getPublicBaseUrl = (): string => {
   const configured = import.meta.env.VITE_TIGRBL_AUTH_PUBLIC_BASE_URL;
@@ -70,6 +72,9 @@ export function hasEndpoint(
 export function safeProblemMessage(error: unknown): string {
   const raw = error instanceof Error ? error.message : String(error || "Request failed.");
   const singleLine = raw.replace(/\s+/g, " ").trim();
+  if (INTERNAL_DIAGNOSTIC_PATTERN.test(singleLine)) {
+    return "The identity provider returned an internal error. Try again or contact support.";
+  }
   const redacted = singleLine
     .replace(/https?:\/\/\S+/gi, "[redacted-url]")
     .replace(/\b[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g, "[redacted-token]")

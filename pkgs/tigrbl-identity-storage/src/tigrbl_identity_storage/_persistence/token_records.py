@@ -20,6 +20,7 @@ from tigrbl_identity_storage.tables import (
     TokenRecord,
 )
 from tigrbl_identity_storage.tables.engine import ENGINE
+from .uuid_coercion import normalize_uuid_filters, normalize_uuid_identifier
 
 
 def _resolve_provider():
@@ -151,7 +152,7 @@ def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
 
 
 async def _list_handler_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> list[Any]:
-    filters = dict(filters or {})
+    filters = normalize_uuid_filters(filters or {})
     result = await model.handlers.list.core({"payload": {"filters": filters}, "db": db})
     return [row for row in _list_items(result) if _matches_filters(row, filters)]
 
@@ -162,7 +163,7 @@ async def _first_handler_record(model: Any, db: Any, filters: Mapping[str, Any])
 
 
 async def _read_handler_record(model: Any, db: Any, ident: Any) -> Any:
-    return await model.handlers.read.core({"path_params": {"id": ident}, "db": db})
+    return await model.handlers.read.core({"path_params": {"id": normalize_uuid_identifier(ident)}, "db": db})
 
 
 async def _create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:
@@ -171,16 +172,18 @@ async def _create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]
 
 async def _update_handler_record(model: Any, db: Any, ident: Any, payload: Mapping[str, Any]) -> Any:
     return _created_item(
-        await model.handlers.update.core({"path_params": {"id": ident}, "payload": dict(payload), "db": db})
+        await model.handlers.update.core(
+            {"path_params": {"id": normalize_uuid_identifier(ident)}, "payload": dict(payload), "db": db}
+        )
     )
 
 
 async def _delete_handler_record(model: Any, db: Any, ident: Any) -> Any:
-    return await model.handlers.delete.core({"path_params": {"id": ident}, "db": db})
+    return await model.handlers.delete.core({"path_params": {"id": normalize_uuid_identifier(ident)}, "db": db})
 
 
 async def _clear_handler_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> Any:
-    return await model.handlers.clear.core({"payload": {"filters": dict(filters or {})}, "db": db})
+    return await model.handlers.clear.core({"payload": {"filters": normalize_uuid_filters(filters or {})}, "db": db})
 
 
 async def upsert_token_record_async(

@@ -130,6 +130,17 @@ describe("tigrblAuthDiscovery", () => {
     );
   });
 
+  it("collapses backend SQL and exception diagnostics before display", () => {
+    const unsafe = "<class 'sqlalchemy.exc.StatementError'>: (builtins.AttributeError) 'str' object has no attribute 'hex' [SQL: SELECT auth_session.id FROM auth_session]";
+
+    const message = safeProblemMessage(unsafe);
+
+    expect(message).toBe("The identity provider returned an internal error. Try again or contact support.");
+    expect(message).not.toContain("AttributeError");
+    expect(message).not.toContain("SELECT");
+    expect(message).not.toContain("auth_session");
+  });
+
   it("reuses a session CSRF token for discovered public POST actions", async () => {
     const storage = createStorage();
     vi.stubGlobal("sessionStorage", storage);

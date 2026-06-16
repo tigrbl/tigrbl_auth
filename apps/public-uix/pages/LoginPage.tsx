@@ -3,6 +3,7 @@ import { Card, Input, Checkbox } from '../components/UI';
 import { ConfigPanel } from '../components/ConfigPanel';
 import { AuthProvider } from '../types';
 import { usePlatform } from '../hooks/usePlatform';
+import { safeProblemMessage } from '../services/tigrblAuthDiscovery';
 import './LoginPage.css';
 
 interface LoginPageProps {
@@ -30,6 +31,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
     : showBrandingSettings
       ? 'Branding Settings'
       : 'Adapter Settings';
+  const safeError = error ? safeProblemMessage(error) : null;
 
   const validate = () => {
     const newErrors: {email?: string, password?: string} = {};
@@ -82,13 +84,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, isLoading, error 
 
         <Card className="login-card">
           <div className="login-card-stack">
-            {error && (
+            {safeError && (
               <div className="login-error u-animate-zoom">
                 <div className="login-error-inner">
                   <svg className="login-error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>{error}</span>
+                  <span>{safeError}</span>
                 </div>
               </div>
             )}

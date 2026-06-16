@@ -59,6 +59,21 @@ describe("public UIX surface pages", () => {
     expect(recoveryMarkup).toContain("Send Reset Link");
   });
 
+  it("does not render raw backend diagnostics on the login page", () => {
+    const markup = renderToStaticMarkup(
+      <LoginPage
+        onLogin={() => undefined}
+        isLoading={false}
+        error={"<class 'sqlalchemy.exc.StatementError'>: (builtins.AttributeError) 'str' object has no attribute 'hex' [SQL: SELECT users.id FROM users]"}
+      />,
+    );
+
+    expect(markup).toContain("The identity provider returned an internal error.");
+    expect(markup).not.toContain("AttributeError");
+    expect(markup).not.toContain("SELECT");
+    expect(markup).not.toContain("sqlalchemy");
+  });
+
   it("renders the consent view as a governed public route", () => {
     const markup = renderToStaticMarkup(
       <ConsentPage
@@ -122,6 +137,14 @@ describe("public UIX surface pages", () => {
     expect(markup).toContain("&quot;id_token&quot;");
     expect(markup).toContain("&quot;userinfo&quot;");
     expect(markup).toContain("&quot;client&quot;");
+    expect(markup).toContain("Issuer");
+    expect(markup).toContain("ID token");
+    expect(markup).toContain("Subject");
+    expect(markup).toContain("UserInfo");
+    expect(markup).toContain("Scope");
+    expect(markup).toContain("Access token");
+    expect(markup).toContain("Token Type");
+    expect(markup).toContain("Token response");
     expect(markup).toContain("http://localhost:18081");
     expect(markup).toContain("user@example.com");
     expect(markup).not.toContain("&quot;iss&quot;: &quot;tigrbl_auth&quot;");
