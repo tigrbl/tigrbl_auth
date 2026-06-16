@@ -6,6 +6,7 @@ import { Layout } from "../components/Layout";
 import { ConsentPage } from "./ConsentPage";
 import { ForgotPasswordPage } from "./ForgotPasswordPage";
 import { LoginPage } from "./LoginPage";
+import { ProfilePage } from "./ProfilePage";
 import { RegisterPage } from "./RegisterPage";
 
 describe("public UIX surface pages", () => {
@@ -72,5 +73,57 @@ describe("public UIX surface pages", () => {
     expect(markup).toContain("Example Portal");
     expect(markup).toContain("openid");
     expect(markup).toContain("Approve access");
+  });
+
+  it("renders structured OIDC context without synthetic issuer metadata", () => {
+    const markup = renderToStaticMarkup(
+      <ProfilePage
+        user={{
+          id: "user-1",
+          email: "user@example.com",
+          name: "User One",
+          provider: "generic",
+          isEmailVerified: true,
+          mfaEnabled: false,
+          oidcContext: {
+            id_token: {
+              iss: "http://localhost:18081",
+              sub: "user-1",
+              aud: "tigrbl-auth-public-uix",
+              nonce: "nonce-1",
+              auth_time: 1781567454,
+              sid: "session-1",
+            },
+            access_token: {
+              scope: "openid profile email",
+            },
+            userinfo: {
+              sub: "user-1",
+              email: "user@example.com",
+              name: "User One",
+              email_verified: true,
+            },
+            client: {
+              provider: "generic",
+              client_id: "tigrbl-auth-public-uix",
+              issuer: "http://localhost:18081",
+              scope: "openid profile email",
+              token_type: "bearer",
+            },
+            authorization_request: {
+              nonce: "nonce-1",
+              redirect_uri: "http://localhost:18081/callback",
+            },
+          },
+        }}
+      />,
+    );
+
+    expect(markup).toContain("&quot;id_token&quot;");
+    expect(markup).toContain("&quot;userinfo&quot;");
+    expect(markup).toContain("&quot;client&quot;");
+    expect(markup).toContain("http://localhost:18081");
+    expect(markup).toContain("user@example.com");
+    expect(markup).not.toContain("&quot;iss&quot;: &quot;tigrbl_auth&quot;");
   });
 });

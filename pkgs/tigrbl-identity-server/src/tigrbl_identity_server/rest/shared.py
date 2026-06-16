@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from typing import Any, Callable
 from uuid import UUID
 
@@ -33,7 +34,29 @@ class _LazyRuntimeProxy:
             self._value = self._factory()
         return self._value
 
+    async def _resolve_async(self) -> Any:
+        if self._value is not None:
+            return self._value
+        owner = getattr(self._factory, "__self__", None)
+        async_factory = getattr(owner, "async_default", None)
+        if callable(async_factory):
+            self._value = await async_factory()
+            return self._value
+        value = self._factory()
+        if inspect.isawaitable(value):
+            value = await value
+        self._value = value
+        return self._value
+
     def __getattr__(self, name: str) -> Any:
+        if name.startswith("async_"):
+            async def _async_method(*args: Any, **kwargs: Any) -> Any:
+                target = await self._resolve_async()
+                method = getattr(target, name)
+                result = method(*args, **kwargs)
+                return await result if inspect.isawaitable(result) else result
+
+            return _async_method
         return getattr(self._resolve(), name)
 
     def __setattr__(self, name: str, value: Any) -> None:

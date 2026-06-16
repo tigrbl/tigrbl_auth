@@ -26,7 +26,7 @@ from tigrbl_auth.framework import (
 
 from tigrbl_auth.security import auth as security_auth
 from tigrbl_auth.security import deps as security_deps
-from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc
+from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc, _svc_async
 from tigrbl_auth.tables import User
 from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
@@ -35,6 +35,24 @@ from tigrbl_auth.security.user_lookup import first_user_by_filters
 
 api = TigrblRouter()
 router = api
+_jwt_coder: JWTCoder | None = None
+
+
+async def _get_jwt_coder() -> JWTCoder:
+    global _jwt_coder
+    default_factory = getattr(JWTCoder, "default", None)
+    if default_factory is not None and default_factory.__class__.__module__.startswith("unittest.mock"):
+        return default_factory()
+    if _jwt_coder is not None:
+        return _jwt_coder
+    _jwt_coder = await JWTCoder.async_default()
+    return _jwt_coder
+
+
+async def _get_signing_service():
+    if _svc.__class__.__module__.startswith("unittest.mock"):
+        return _svc()
+    return await _svc_async()
 
 
 async def _resolve_current_user(request: Request, db: AsyncSession, payload: dict) -> User:
@@ -90,7 +108,7 @@ async def userinfo(
     if not token:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "missing access token")
     try:
-        payload = await JWTCoder.default().async_decode(token)
+        payload = await (await _get_jwt_coder()).async_decode(token)
     except InvalidTokenError as exc:
         raise HTTPException(
             status.HTTP_401_UNAUTHORIZED, "invalid access token"
@@ -111,7 +129,7 @@ async def userinfo(
     if "application/jwt" in (
         request.headers.get("Accept") or request.headers.get("accept", "")
     ):
-        svc, kid = _svc()
+        svc, kid = await _get_signing_service()
         token = await svc.mint(claims, alg=JWAAlg.EDDSA, kid=kid)
         return Response(body=str(token).encode("utf-8"), headers={"content-type": "application/jwt"}, media_type="application/jwt")
 

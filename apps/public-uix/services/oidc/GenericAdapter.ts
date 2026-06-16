@@ -20,6 +20,30 @@ const hasScope = (scope: string | undefined, value: string): boolean => {
   return new Set((scope || '').split(/\s+/).filter(Boolean)).has(value);
 };
 
+const decodeBase64UrlJson = (value: string): Record<string, unknown> | null => {
+  try {
+    const base64 = value.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), '=');
+    const json = decodeURIComponent(
+      Array.from(atob(padded))
+        .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, '0')}`)
+        .join(''),
+    );
+    const parsed = JSON.parse(json);
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch {
+    return null;
+  }
+};
+
+const decodeJwtClaims = (token: string): Record<string, unknown> => {
+  const parts = token.split('.');
+  if (parts.length < 2 || !parts[1]) {
+    return {};
+  }
+  return decodeBase64UrlJson(parts[1]) || {};
+};
+
 export class GenericAdapter extends BaseAdapter {
   async authorize(): Promise<void> {
     const state = this.generateRandomString();
@@ -79,6 +103,7 @@ export class GenericAdapter extends BaseAdapter {
       this.clearAuthSession();
 
       const accessToken = typeof tokens.access_token === 'string' ? tokens.access_token : '';
+      const idToken = typeof tokens.id_token === 'string' ? tokens.id_token : '';
       if (!accessToken) {
         throw new Error('OIDC callback did not return an access token for UserInfo hydration.');
       }
@@ -108,6 +133,8 @@ export class GenericAdapter extends BaseAdapter {
       if (hasScope(this.config.scope, 'email') && !email) {
         throw new Error('UserInfo response did not include the requested email claim.');
       }
+      const idTokenClaims = decodeJwtClaims(idToken);
+      const accessTokenClaims = decodeJwtClaims(accessToken);
 
       return {
         id: subject,
@@ -117,6 +144,22 @@ export class GenericAdapter extends BaseAdapter {
         isEmailVerified: profile.email_verified !== false,
         mfaEnabled: false,
         picture: typeof profile.picture === 'string' ? profile.picture : undefined,
+        oidcContext: {
+          id_token: idTokenClaims,
+          access_token: accessTokenClaims,
+          userinfo: profile,
+          client: {
+            provider: AuthProvider.GENERIC,
+            client_id: this.config.clientId,
+            issuer: this.config.authority,
+            scope: this.config.scope || 'openid profile email',
+            token_type: typeof tokens.token_type === 'string' ? tokens.token_type : undefined,
+          },
+          authorization_request: {
+            nonce: session.nonce,
+            redirect_uri: this.config.redirectUri,
+          },
+        },
       };
     } catch (e) {
       throw new Error(safeProblemMessage(e));

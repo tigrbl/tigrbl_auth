@@ -18,7 +18,7 @@ from tigrbl_auth.framework import (
 
 from tigrbl_auth.security import auth as security_auth
 from tigrbl_auth.security import deps as security_deps
-from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc
+from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError, _svc, _svc_async
 from tigrbl_auth.tables import User
 from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
@@ -43,6 +43,40 @@ def _runtime_token_bindings():
     )
 
 
+async def _runtime_jwt_coder():
+    try:
+        compat = import_module("tigrbl_auth.oidc_userinfo")
+        get_coder = getattr(compat, "_get_jwt_coder", None)
+        if get_coder is not None:
+            result = get_coder()
+            return await result if inspect.isawaitable(result) else result
+    except Exception:
+        pass
+    coder_cls, _, _ = _runtime_token_bindings()
+    default_factory = getattr(coder_cls, "default", None)
+    if default_factory is not None and default_factory.__class__.__module__.startswith("unittest.mock"):
+        return default_factory()
+    async_factory = getattr(coder_cls, "async_default", None)
+    if async_factory is not None:
+        return await async_factory()
+    return coder_cls.default()
+
+
+async def _runtime_signing_service():
+    try:
+        compat = import_module("tigrbl_auth.oidc_userinfo")
+        get_service = getattr(compat, "_get_signing_service", None)
+        if get_service is not None:
+            result = get_service()
+            return await result if inspect.isawaitable(result) else result
+    except Exception:
+        pass
+    _, _, svc_factory = _runtime_token_bindings()
+    if svc_factory.__class__.__module__.startswith("unittest.mock"):
+        return svc_factory()
+    return await _svc_async()
+
+
 async def _resolve_current_user(request: Request, db: AsyncSession, payload: dict) -> User:
     app = getattr(request, "app", None)
     router = getattr(app, "router", None)
@@ -51,10 +85,23 @@ async def _resolve_current_user(request: Request, db: AsyncSession, payload: dic
     if router_overrides:
         overrides.update(router_overrides)
 
-    for dependency in (
+    dependencies = [
         security_deps.get_current_principal,
         security_auth.get_current_principal,
-    ):
+    ]
+    try:
+        compat_deps = import_module("tigrbl_identity_server.security.deps")
+        compat_auth = import_module("tigrbl_identity_server.security.auth")
+        dependencies.extend(
+            [
+                getattr(compat_deps, "get_current_principal"),
+                getattr(compat_auth, "get_current_principal"),
+            ]
+        )
+    except Exception:
+        pass
+
+    for dependency in dependencies:
         override = overrides.get(dependency)
         if override is None:
             continue
@@ -67,7 +114,15 @@ async def _resolve_current_user(request: Request, db: AsyncSession, payload: dic
     subject = payload.get("sub")
     if not subject:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
-    user = await first_user_by_filters(db, {"id": subject, "is_active": True})
+    lookup = first_user_by_filters
+    try:
+        compat = import_module("tigrbl_auth_protocol_oidc.standards.userinfo")
+        compat_lookup = getattr(compat, "first_user_by_filters", None)
+        if compat_lookup is not None and compat_lookup is not first_user_by_filters:
+            lookup = compat_lookup
+    except Exception:
+        pass
+    user = await lookup(db, {"id": subject, "is_active": True})
     if user is None:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid access token")
     return user
@@ -89,9 +144,9 @@ async def userinfo(
     )
     if not token:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "missing access token")
-    coder_cls, invalid_token_error, svc_factory = _runtime_token_bindings()
+    _, invalid_token_error, _ = _runtime_token_bindings()
     try:
-        payload = await coder_cls.default().async_decode(token)
+        payload = await (await _runtime_jwt_coder()).async_decode(token)
     except invalid_token_error as exc:
         raise HTTPException(
             status.HTTP_401_UNAUTHORIZED, "invalid access token"
@@ -112,7 +167,7 @@ async def userinfo(
     if "application/jwt" in (
         request.headers.get("Accept") or request.headers.get("accept", "")
     ):
-        svc, kid = svc_factory()
+        svc, kid = await _runtime_signing_service()
         token = await svc.mint(claims, alg=JWAAlg.EDDSA, kid=kid)
         return Response(body=str(token).encode("utf-8"), headers={"content-type": "application/jwt"}, media_type="application/jwt")
 

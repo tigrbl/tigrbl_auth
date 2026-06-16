@@ -24,9 +24,9 @@ from tigrbl_auth.framework import (
     Request,
     status,
     AsyncSession,
-    select,
 )
 from tigrbl_auth.config.deployment import deployment_from_request
+from tigrbl_auth.errors import InvalidTokenError as LegacyInvalidTokenError
 
 from tigrbl_auth.services.auth_backends import (
     ApiKeyBackend,
@@ -38,6 +38,7 @@ from tigrbl_auth.tables.engine import get_db
 from tigrbl_auth.services.token_service import JWTCoder, InvalidTokenError
 from tigrbl_auth.tables import User
 from tigrbl_auth.security.context import principal_var
+from tigrbl_auth.security.user_lookup import first_user_by_filters
 from tigrbl_auth.standards.oidc.session_mgmt import resolve_browser_session
 from tigrbl_auth.standards.oauth2.rfc6750 import extract_bearer_token
 from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
@@ -50,7 +51,14 @@ from tigrbl_auth.typing import Principal
 # Backends + Coder
 # ---------------------------------------------------------------------
 _api_key_backend = ApiKeyBackend()
-_jwt_coder = JWTCoder.default()
+_jwt_coder: JWTCoder | None = None
+
+
+async def _get_jwt_coder() -> JWTCoder:
+    global _jwt_coder
+    if _jwt_coder is None:
+        _jwt_coder = await JWTCoder.async_default()
+    return _jwt_coder
 
 
 # ---------------------------------------------------------------------
@@ -58,28 +66,11 @@ _jwt_coder = JWTCoder.default()
 # ---------------------------------------------------------------------
 async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str | None = None) -> User | None:
     try:
-        payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
-    except InvalidTokenError:
+        payload = await (await _get_jwt_coder()).async_decode(token, cert_thumbprint=cert_thumbprint)
+    except (InvalidTokenError, LegacyInvalidTokenError):
         return None
 
-    users = await User.handlers.list.core(
-        {
-            "payload": {
-                "filters": {
-                    "id": payload["sub"],
-                    "is_active": True,
-                }
-            },
-            "db": db,
-        }
-    )
-    if hasattr(users, "items"):
-        users = users.items
-    if isinstance(users, (list, tuple)):
-        return users[0] if users else None
-
-    # Fallback for dependency-light runtimes that expose scalar() only.
-    return await db.scalar(select(User).where(User.id == payload["sub"], User.is_active.is_(True)))
+    return await first_user_by_filters(db, {"id": payload["sub"], "is_active": True})
 
 
 async def _user_from_api_key(raw_key: str, db: AsyncSession) -> Principal | None:
@@ -94,7 +85,7 @@ async def _user_from_browser_session(request: Request, db: AsyncSession) -> User
     session = await resolve_browser_session(request)
     if session is None:
         return None
-    return await db.scalar(select(User).where(User.id == session.user_id, User.is_active.is_(True)))
+    return await first_user_by_filters(db, {"id": session.user_id, "is_active": True})
 
 
 # ---------------------------------------------------------------------
@@ -165,7 +156,7 @@ async def get_current_principal(  # type: ignore[override]
             if not (policy.sender_constraint_required or proof or cert_thumbprint):
                 return user
             try:
-                payload = await _jwt_coder.async_decode(token, cert_thumbprint=cert_thumbprint)
+                payload = await (await _get_jwt_coder()).async_decode(token, cert_thumbprint=cert_thumbprint)
                 verify_access_token_sender_constraint(
                     request,
                     payload,
@@ -173,7 +164,7 @@ async def get_current_principal(  # type: ignore[override]
                     access_token=token,
                     dpop_proof=proof,
                 )
-            except InvalidTokenError:
+            except (InvalidTokenError, LegacyInvalidTokenError):
                 raise HTTPException(status.HTTP_401_UNAUTHORIZED, "invalid token")
             except Exception as exc:
                 detail = getattr(exc, 'description', 'invalid token')

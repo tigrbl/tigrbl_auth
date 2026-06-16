@@ -10,6 +10,27 @@ interface ProfilePageProps {
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   const myAccountUrl = import.meta.env.VITE_TIGRBL_AUTH_MY_ACCOUNT_UIX_URL || 'http://localhost:3019';
+  const oidcContext = user.oidcContext || {
+    id_token: {
+      sub: user.id,
+    },
+    access_token: {},
+    userinfo: {
+      sub: user.id,
+      email: user.email,
+      name: user.name,
+      email_verified: user.isEmailVerified,
+    },
+    client: {
+      provider: user.provider,
+      client_id: 'unknown',
+      issuer: 'unknown',
+      scope: 'unknown',
+    },
+    authorization_request: {
+      redirect_uri: 'unknown',
+    },
+  };
 
   return (
     <div className="profile-page profile-stack u-animate-in">
@@ -66,14 +87,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
         </div>
         <div className="profile-session-body">
           <pre className="profile-session-code">
-            {JSON.stringify({
-              iss: 'tigrbl_auth',
-              sub: user.id,
-              aud: 'tigrbl-auth-public-uix',
-              iat: Math.floor(Date.now() / 1000),
-              exp: Math.floor(Date.now() / 1000) + 3600,
-              provider: user.provider
-            }, null, 2)}
+            {JSON.stringify(oidcContext, null, 2)}
           </pre>
         </div>
       </Card>

@@ -1,4 +1,23 @@
 
+export type OidcClaimSet = Record<string, unknown>;
+
+export interface OidcSessionContext {
+  id_token: OidcClaimSet;
+  access_token: OidcClaimSet;
+  userinfo: OidcClaimSet;
+  client: {
+    provider: 'generic';
+    client_id: string;
+    issuer: string;
+    scope: string;
+    token_type?: string;
+  };
+  authorization_request: {
+    nonce?: string;
+    redirect_uri: string;
+  };
+}
+
 export interface User {
   id: string;
   email: string;
@@ -7,6 +26,7 @@ export interface User {
   provider: 'generic';
   isEmailVerified: boolean;
   mfaEnabled: boolean;
+  oidcContext?: OidcSessionContext;
 }
 
 export interface PlatformConfig {

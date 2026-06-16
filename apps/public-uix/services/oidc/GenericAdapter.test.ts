@@ -2,6 +2,14 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { GenericAdapter } from "./GenericAdapter";
 
+const jwtWithClaims = (claims: Record<string, unknown>) => {
+  const encode = (value: Record<string, unknown>) => btoa(JSON.stringify(value))
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+  return `${encode({ alg: "none" })}.${encode(claims)}.`;
+};
+
 const createStorage = () => {
   const values = new Map<string, string>();
   return {
@@ -22,10 +30,26 @@ describe("GenericAdapter", () => {
   });
 
   it("exchanges the authorization code without persisting bearer tokens", async () => {
+    const accessToken = jwtWithClaims({
+      iss: "http://localhost:3000",
+      sub: "user-1",
+      scope: "openid profile email",
+    });
+    const idToken = jwtWithClaims({
+      iss: "http://localhost:3000",
+      sub: "user-1",
+      aud: "public-uix",
+      nonce: "nonce-1",
+      auth_time: 1781567454,
+      sid: "session-1",
+      iat: 1781567454,
+      exp: 1781571054,
+    });
     const localStorage = createStorage();
     localStorage.setItem("oidc_session_GenericAdapter", JSON.stringify({
       state: "state-1",
       verifier: "verifier-1",
+      nonce: "nonce-1",
       timestamp: Date.now(),
     }));
 
@@ -41,7 +65,11 @@ describe("GenericAdapter", () => {
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
-        json: async () => ({ access_token: "access-token-1" }),
+        json: async () => ({
+          access_token: accessToken,
+          id_token: idToken,
+          token_type: "bearer",
+        }),
       })
       .mockResolvedValueOnce({
         ok: true,
@@ -67,12 +95,42 @@ describe("GenericAdapter", () => {
     const user = await adapter.handleCallback();
 
     expect(user.email).toBe("user@example.com");
+    expect(user.oidcContext?.id_token).toMatchObject({
+      iss: "http://localhost:3000",
+      sub: "user-1",
+      aud: "public-uix",
+      nonce: "nonce-1",
+      auth_time: 1781567454,
+      sid: "session-1",
+    });
+    expect(user.oidcContext?.access_token).toMatchObject({
+      iss: "http://localhost:3000",
+      sub: "user-1",
+      scope: "openid profile email",
+    });
+    expect(user.oidcContext?.userinfo).toMatchObject({
+      sub: "user-1",
+      email: "user@example.com",
+      name: "User One",
+      email_verified: true,
+    });
+    expect(user.oidcContext?.client).toEqual({
+      provider: "generic",
+      client_id: "public-uix",
+      issuer: "http://localhost:3000",
+      scope: "openid profile email",
+      token_type: "bearer",
+    });
+    expect(user.oidcContext?.authorization_request).toEqual({
+      nonce: "nonce-1",
+      redirect_uri: "http://localhost:3000/#/callback",
+    });
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
       "http://localhost:3000/userinfo",
       expect.objectContaining({
         headers: expect.objectContaining({
-          Authorization: "Bearer access-token-1",
+          Authorization: `Bearer ${accessToken}`,
         }),
       }),
     );
