@@ -33,6 +33,9 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "email-validator>=2.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

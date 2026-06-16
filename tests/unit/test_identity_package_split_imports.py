@@ -118,3 +118,11 @@ def test_split_package_metadata_declares_independent_import_roots() -> None:
         assert metadata["tool"]["poetry"]["packages"] == [
             {"include": import_root, "from": "src"}
         ]
+
+
+def test_email_contract_packages_declare_email_validator_dependency() -> None:
+    for dist_name in ("tigrbl-identity-contracts", "tigrbl-identity-server"):
+        metadata = tomllib.loads((_package_path(dist_name) / "pyproject.toml").read_text(encoding="utf-8"))
+        dependencies = set(metadata["project"].get("dependencies", []))
+
+        assert any(item.startswith("email-validator") for item in dependencies), dist_name

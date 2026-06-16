@@ -2808,6 +2808,16 @@ source = { editable = "pkgs/tigrbl-identity-cli" }
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-contracts" }
+dependencies = [
+    { name = "email-validator" },
+    { name = "pydantic" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "email-validator", specifier = ">=2.0" },
+    { name = "pydantic" },
+]
 
 [[package]]
 name = "tigrbl-identity-core"
@@ -2940,6 +2950,12 @@ source = { editable = "pkgs/tigrbl-identity-runtime" }
 name = "tigrbl-identity-server"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-identity-server" }
+dependencies = [
+    { name = "email-validator" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "email-validator", specifier = ">=2.0" }]
 
 [[package]]
 name = "tigrbl-identity-storage"
