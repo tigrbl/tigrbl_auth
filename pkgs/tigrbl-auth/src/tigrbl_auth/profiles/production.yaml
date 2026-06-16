@@ -1,0 +1,63 @@
+schema_version: "0.1.0"
+id: "production"
+title: "production"
+ssot_profile_id: "prf:production"
+feature_id: "feat:profile-production"
+extends:
+  - "baseline"
+description: "Production deployment profile extending baseline with lifecycle, browser, metadata, registration, revocation, introspection, and userinfo targets."
+surface_plugin_mode: "public-only"
+surfaces:
+  public: true
+  admin: false
+  rpc: false
+  diagnostics: false
+  operator: true
+surface_sets:
+  - "public-rest"
+flags:
+  groups:
+    - "baseline"
+    - "production"
+  enabled:
+    - "enable_rfc6749"
+    - "enable_rfc6750"
+    - "enable_rfc7636"
+    - "enable_rfc8414"
+    - "enable_rfc8615"
+    - "enable_rfc7515"
+    - "enable_rfc7516"
+    - "enable_rfc7517"
+    - "enable_rfc7518"
+    - "enable_rfc7519"
+    - "enable_oidc_core"
+    - "enable_oidc_discovery"
+    - "enable_oidc_session_management"
+    - "enable_rfc7009"
+    - "enable_rfc7521"
+    - "enable_rfc7523"
+    - "enable_rfc7662"
+    - "enable_rfc7591"
+    - "enable_rfc7592"
+    - "enable_rfc8252"
+    - "enable_rfc9068"
+    - "enable_rfc9207"
+    - "enable_rfc9728"
+    - "enable_oidc_userinfo"
+    - "enable_oidc_rp_initiated_logout"
+protocol_slices: []
+extensions: []
+security:
+  require_tls: true
+  strict_boundary_enforcement: true
+  admin_gate_required_when_control_plane_enabled: true
+  allow_bearer_query: false
+  allow_bearer_form: false
+contracts:
+  openapi:
+    profile: "production"
+    public_surface: true
+    admin_surface: false
+  openrpc:
+    profile: "production"
+    admin_surface: false
