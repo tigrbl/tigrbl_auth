@@ -4,4 +4,4 @@ from __future__ import annotations
 
 from ._token_service import *
 from ._token_service import __all__
-from ._token_service.runtime import _svc
+from ._token_service.runtime import _svc, _svc_async

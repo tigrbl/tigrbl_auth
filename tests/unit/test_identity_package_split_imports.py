@@ -126,3 +126,11 @@ def test_email_contract_packages_declare_email_validator_dependency() -> None:
         dependencies = set(metadata["project"].get("dependencies", []))
 
         assert any(item.startswith("email-validator") for item in dependencies), dist_name
+
+
+def test_credentials_token_service_exports_async_runtime_helper() -> None:
+    _install_package_src_paths()
+
+    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+
+    assert callable(module._svc_async)
