@@ -7,15 +7,21 @@ import re
 import shutil
 import subprocess
 import sys
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - exercised by Python 3.10 CI
+    import tomli as tomllib  # type: ignore[no-redef]
 
 ROOT = Path(__file__).resolve().parents[1]
 TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
 REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
 TESTKIT_PACKAGE_NAME = "tigrbl-identity-testkit"
+SWARMAURI_PYTHON_CEILING = (3, 13)
+TIGRBL_PYTHON_CEILING = (3, 14)
 
 
 @dataclass(frozen=True)
@@ -175,6 +181,41 @@ def _local_dependency_closure(package: Package) -> list[Package]:
     return closure
 
 
+def _python_minor(version: str) -> tuple[int, int]:
+    major, minor = version.split(".", 1)
+    return int(major), int(minor)
+
+
+def _declared_dependency_requirements(package: Package) -> list[str]:
+    requirements = list(_project_dependencies(package))
+    for dependency in _local_dependency_closure(package):
+        requirements.extend(_project_dependencies(dependency))
+    return requirements
+
+
+def _supported_package_python_versions(package: Package, versions: list[str]) -> list[str]:
+    requirements = _declared_dependency_requirements(package)
+    compatible: list[str] = []
+    for version in versions:
+        python_minor = _python_minor(version)
+        if package.name == TESTKIT_PACKAGE_NAME and python_minor >= SWARMAURI_PYTHON_CEILING:
+            continue
+        blocked = False
+        for requirement in requirements:
+            dep_name = _dependency_name(requirement)
+            if dep_name is None:
+                continue
+            if dep_name.startswith("swarmauri-") and python_minor >= SWARMAURI_PYTHON_CEILING:
+                blocked = True
+                break
+            if dep_name == "tigrbl" and python_minor >= TIGRBL_PYTHON_CEILING:
+                blocked = True
+                break
+        if not blocked:
+            compatible.append(version)
+    return compatible
+
+
 def cmd_create_tags(args: argparse.Namespace) -> int:
     packages = discover_packages() if args.package == "all" else [_find_package(args.package)]
     created: list[str] = []
@@ -214,7 +255,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
 
     cells = []
     for package in packages:
-        for version in versions:
+        for version in _supported_package_python_versions(package, versions):
             package_test_paths = [
                 f"tests/packages/{package.name}",
                 f"tests/packages/{package.import_root}",

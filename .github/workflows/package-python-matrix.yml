@@ -97,7 +97,7 @@ jobs:
           python-version: ${{ matrix.package.python_version }}
       - name: Install package test toolchain
         shell: bash
-        run: python -m pip install --upgrade pip uv
+        run: python -m pip install --upgrade pip uv tomli
       - name: Build target package wheel
         uses: cobycloud/actions/actions/python-package-build@main
         with:
