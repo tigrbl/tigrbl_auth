@@ -28,6 +28,7 @@ from tigrbl_auth.standards.oauth2.jwt_client_auth import (
 from tigrbl_auth.standards.oauth2.mtls import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
+    presented_certificate_pem,
 )
 from tigrbl_auth.standards.oauth2.dpop import verify_proof
 
@@ -193,6 +194,7 @@ async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object
             authenticate_mtls_client(
                 metadata,
                 client_certificate_thumbprint_from_request(request),
+                presented_certificate_pem=presented_certificate_pem(request),
                 token_endpoint_auth_method=auth_method,
             )
         except ValueError as exc:

@@ -21,6 +21,13 @@ from cryptography.hazmat.primitives import serialization
 
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.errors import InvalidTokenError
+from tigrbl_auth.standards.oauth2._mtls_identity import (
+    certificate_matches_registered_identity,
+    certificate_san_values,
+    certificate_subject_dn,
+    normalize_presented_pem,
+    registered_certificate_identity_metadata,
+)
 
 RFC8705_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8705"
 TLS_CLIENT_AUTH_METHOD: Final[str] = "tls_client_auth"
@@ -51,6 +58,12 @@ _SCOPE_CERTIFICATE_PEM_KEYS: Final[tuple[str, ...]] = (
     "tls_client_cert_pem",
     "mtls_client_cert_pem",
 )
+_TRUSTED_CERTIFICATE_SCOPE_KEYS: Final[tuple[str, ...]] = (
+    "client_cert_trusted",
+    "tls_client_cert_trusted",
+    "mtls_client_cert_trusted",
+    "mtls_trusted_proxy",
+)
 _TLS_CERT_THUMBPRINT_KEYS: Final[tuple[str, ...]] = (
     "tls_client_certificate_thumbprint",
     "tls_client_certificate_thumbprints",
@@ -58,6 +71,13 @@ _TLS_CERT_THUMBPRINT_KEYS: Final[tuple[str, ...]] = (
 _SELF_SIGNED_CERT_THUMBPRINT_KEYS: Final[tuple[str, ...]] = (
     "self_signed_tls_client_certificate_thumbprint",
     "self_signed_tls_client_certificate_thumbprints",
+)
+_TLS_CLIENT_AUTH_IDENTITY_KEYS: Final[tuple[str, ...]] = (
+    "tls_client_auth_subject_dn",
+    "tls_client_auth_san_dns",
+    "tls_client_auth_san_uri",
+    "tls_client_auth_san_ip",
+    "tls_client_auth_san_email",
 )
 
 
@@ -126,11 +146,30 @@ def token_is_certificate_bound(payload: Mapping[str, Any]) -> bool:
 is_certificate_bound_token = token_is_certificate_bound
 
 
-def presented_certificate_thumbprint(request_or_mapping: Any) -> str | None:
+def _headers_from_request(request_or_mapping: Any) -> Any:
     headers = getattr(request_or_mapping, "headers", None)
     if headers is None and isinstance(request_or_mapping, Mapping):
         headers = request_or_mapping
-    headers = headers or {}
+    return headers or {}
+
+
+def _scope_from_request(request_or_mapping: Any) -> Mapping[str, Any]:
+    scope = getattr(request_or_mapping, "scope", None)
+    if scope is None and isinstance(request_or_mapping, Mapping):
+        scope = request_or_mapping
+    return scope if isinstance(scope, Mapping) else {}
+
+
+def _scope_trusts_certificate_headers(request_or_mapping: Any) -> bool:
+    scope = _scope_from_request(request_or_mapping)
+    if any(bool(scope.get(key)) for key in _TRUSTED_CERTIFICATE_SCOPE_KEYS):
+        return True
+    state = getattr(request_or_mapping, "state", None)
+    return any(bool(getattr(state, key, False)) for key in _TRUSTED_CERTIFICATE_SCOPE_KEYS)
+
+
+def _header_certificate_thumbprint(request_or_mapping: Any) -> str | None:
+    headers = _headers_from_request(request_or_mapping)
     if hasattr(headers, "get"):
         for name in _CERTIFICATE_THUMBPRINT_HEADER_NAMES:
             thumb = _normalize_presented_thumbprint(headers.get(name))
@@ -140,19 +179,49 @@ def presented_certificate_thumbprint(request_or_mapping: Any) -> str | None:
             thumb = _normalize_presented_thumbprint(headers.get(name))
             if thumb:
                 return thumb
-    scope = getattr(request_or_mapping, "scope", None)
-    if scope is None and isinstance(request_or_mapping, Mapping):
-        scope = request_or_mapping
-    if isinstance(scope, Mapping):
-        for key in _SCOPE_CERTIFICATE_KEYS:
-            thumb = _normalize_presented_thumbprint(scope.get(key))
-            if thumb:
-                return thumb
-        for key in _SCOPE_CERTIFICATE_PEM_KEYS:
-            thumb = _normalize_presented_thumbprint(scope.get(key))
-            if thumb:
-                return thumb
     return None
+
+
+def _scope_certificate_thumbprint(request_or_mapping: Any) -> str | None:
+    scope = _scope_from_request(request_or_mapping)
+    for key in _SCOPE_CERTIFICATE_KEYS:
+        thumb = _normalize_presented_thumbprint(scope.get(key))
+        if thumb:
+            return thumb
+    for key in _SCOPE_CERTIFICATE_PEM_KEYS:
+        thumb = _normalize_presented_thumbprint(scope.get(key))
+        if thumb:
+            return thumb
+    return None
+
+
+def presented_certificate_pem(request_or_mapping: Any, *, trusted_proxy: bool = False) -> bytes | None:
+    scope = _scope_from_request(request_or_mapping)
+    for key in _SCOPE_CERTIFICATE_PEM_KEYS:
+        pem = normalize_presented_pem(scope.get(key))
+        if pem:
+            return pem
+    if trusted_proxy or _scope_trusts_certificate_headers(request_or_mapping):
+        headers = _headers_from_request(request_or_mapping)
+        if hasattr(headers, "get"):
+            for name in _CERTIFICATE_PEM_HEADER_NAMES:
+                pem = normalize_presented_pem(headers.get(name))
+                if pem:
+                    return pem
+    return None
+
+
+def presented_trusted_certificate_thumbprint(request_or_mapping: Any, *, trusted_proxy: bool = False) -> str | None:
+    scope_thumbprint = _scope_certificate_thumbprint(request_or_mapping)
+    if scope_thumbprint:
+        return scope_thumbprint
+    if trusted_proxy or _scope_trusts_certificate_headers(request_or_mapping):
+        return _header_certificate_thumbprint(request_or_mapping)
+    return None
+
+
+def presented_certificate_thumbprint(request_or_mapping: Any) -> str | None:
+    return _header_certificate_thumbprint(request_or_mapping) or _scope_certificate_thumbprint(request_or_mapping)
 
 
 def _coerce_thumbprints(value: Any) -> tuple[str, ...]:
@@ -196,6 +265,7 @@ def authenticate_mtls_client(
     registration_metadata: Mapping[str, Any] | None,
     presented_thumbprint: str | bytes | None,
     *,
+    presented_certificate_pem: str | bytes | None = None,
     token_endpoint_auth_method: str | None = None,
     enabled: bool | None = None,
 ) -> MTLSClientAuthentication:
@@ -210,18 +280,25 @@ def authenticate_mtls_client(
     ).strip()
     if auth_method not in SUPPORTED_MTLS_AUTH_METHODS:
         raise ValueError("unsupported token_endpoint_auth_method for mTLS client authentication")
+    pem = normalize_presented_pem(presented_certificate_pem)
     effective_thumbprint = _normalize_presented_thumbprint(presented_thumbprint)
+    if not effective_thumbprint and pem:
+        effective_thumbprint = thumbprint_from_cert_pem(pem)
     if not effective_thumbprint:
         raise ValueError("client certificate thumbprint required for mTLS client authentication")
     allowed = registered_certificate_thumbprints(
         registration_metadata,
         token_endpoint_auth_method=auth_method,
     )
-    if not allowed:
-        raise ValueError("registration metadata does not pin an allowed client certificate thumbprint")
-    if effective_thumbprint not in set(allowed):
-        raise ValueError("presented client certificate thumbprint is not registered for this client")
-    return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
+    if allowed:
+        if effective_thumbprint not in set(allowed):
+            raise ValueError("presented client certificate thumbprint is not registered for this client")
+        return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
+    if auth_method == TLS_CLIENT_AUTH_METHOD and pem and certificate_matches_registered_identity(pem, registration_metadata):
+        return MTLSClientAuthentication(auth_method=auth_method, cert_thumbprint=effective_thumbprint)
+    if auth_method == TLS_CLIENT_AUTH_METHOD and any(registered_certificate_identity_metadata(registration_metadata).values()):
+        raise ValueError("presented client certificate identity is not registered for this client")
+    raise ValueError("registration metadata does not pin an allowed client certificate thumbprint")
 
 
 def validate_certificate_binding(
@@ -269,6 +346,7 @@ def describe() -> dict[str, object]:
         "supported_token_endpoint_auth_methods": list(SUPPORTED_MTLS_AUTH_METHODS),
         "certificate_thumbprint_header_names": list(_CERTIFICATE_THUMBPRINT_HEADER_NAMES),
         "certificate_pem_header_names": list(_CERTIFICATE_PEM_HEADER_NAMES),
+        "tls_client_auth_identity_metadata": list(_TLS_CLIENT_AUTH_IDENTITY_KEYS),
     }
 
 
@@ -281,10 +359,16 @@ __all__ = [
     "StandardOwner",
     "OWNER",
     "authenticate_mtls_client",
+    "certificate_matches_registered_identity",
     "certificate_confirmation_claim",
+    "certificate_san_values",
+    "certificate_subject_dn",
     "describe",
     "is_certificate_bound_token",
+    "presented_certificate_pem",
     "presented_certificate_thumbprint",
+    "presented_trusted_certificate_thumbprint",
+    "registered_certificate_identity_metadata",
     "registered_certificate_thumbprints",
     "thumbprint_from_cert_pem",
     "token_is_certificate_bound",

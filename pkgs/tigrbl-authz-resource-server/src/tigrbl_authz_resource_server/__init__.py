@@ -24,6 +24,7 @@ from .metadata import (
     VerifierContractProfile,
     verifier_contract_from_metadata,
 )
+from .proof_validators import MtlsBindingValidator, ProofBindingValidator
 
 __all__ = [
     "AccessTokenClaims",
@@ -33,7 +34,9 @@ __all__ = [
     "IntrospectionTransport",
     "JWKSCache",
     "MTLSBinding",
+    "MtlsBindingValidator",
     "PolicyHook",
+    "ProofBindingValidator",
     "ResourceRequirement",
     "ResourceServerError",
     "ResourceServerVerifier",

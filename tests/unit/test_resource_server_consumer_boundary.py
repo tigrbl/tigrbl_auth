@@ -19,9 +19,12 @@ from tigrbl_authz_resource_server import (  # noqa: E402
     IntrospectionClient,
     JWKSCache,
     MTLSBinding,
+    MtlsBindingValidator,
     ResourceRequirement,
     ResourceServerVerifier,
     VerificationStatus,
+    ProofBindingValidator,
+    TokenValidationError,
     bearer_token_from_authorization,
     verify_framework_request,
 )
@@ -104,6 +107,25 @@ def test_resource_server_t1_dpop_and_mtls_binding_validators() -> None:
     )
 
     assert result.allowed is True
+
+
+@pytest.mark.unit
+def test_resource_server_t1_public_proof_binding_validator_models() -> None:
+    claims = _claims()
+
+    assert MtlsBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="thumb-mtls")) is True
+    assert (
+        ProofBindingValidator().validate(
+            claims,
+            dpop=DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
+            mtls=MTLSBinding(certificate_thumbprint="thumb-mtls"),
+            require_dpop=True,
+            require_mtls=True,
+        )
+        is True
+    )
+    with pytest.raises(TokenValidationError, match="mTLS binding mismatch"):
+        MtlsBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="wrong"))
 
 
 @pytest.mark.unit

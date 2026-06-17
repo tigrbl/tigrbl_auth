@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1126"
+number: 1126
+slug: "rfc8705-mtls-proof-binding-boundary"
+title: "RFC 8705 mTLS proof binding is a protocol-authentication and resource-server sender-constraint concern"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: tigrbl_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted to govern RFC 8705 subject/SAN metadata, certificate-bound token confirmation, and forwarded-certificate trust boundaries."
+    at: "2026-06-17T09:48:44Z"
+references: []
+body: |-
+  Decision: tigrbl_auth implements RFC 8705 mTLS client authentication and certificate-bound token support as OAuth protocol/runtime behavior, credential proof-material modeling, and resource-server sender-constraint validation. Actual TLS handshakes and proxy termination remain deployment/runtime infrastructure. Forwarded certificate headers are trusted only when the request carries an explicit trusted runtime marker or ASGI scope certificate material. References: RFC 8705 https://www.rfc-editor.org/rfc/rfc8705, RFC 7800 https://www.rfc-editor.org/rfc/rfc7800.

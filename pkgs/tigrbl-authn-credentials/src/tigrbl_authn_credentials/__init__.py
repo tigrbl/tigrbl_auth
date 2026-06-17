@@ -30,6 +30,11 @@ from .lifecycle import (
     verify_credential,
     verify_secret,
 )
+from .proof_bindings import (
+    MtlsCertificateCredential,
+    ProofBinding,
+    create_mtls_certificate_credential,
+)
 
 __all__ = [
     "Credential",
@@ -42,10 +47,13 @@ __all__ = [
     "CredentialStatus",
     "CredentialVerificationError",
     "IssuedCredential",
+    "MtlsCertificateCredential",
+    "ProofBinding",
     "consume_one_time_credential",
     "create_api_key_credential",
     "create_client_secret_credential",
     "create_mfa_factor_credential",
+    "create_mtls_certificate_credential",
     "create_passkey_credential",
     "create_password_credential",
     "create_password_reset_credential",

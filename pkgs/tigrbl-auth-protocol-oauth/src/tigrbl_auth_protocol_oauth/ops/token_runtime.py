@@ -41,6 +41,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
 from tigrbl_auth_protocol_oauth.standards.mtls import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
+    presented_certificate_pem,
     presented_certificate_thumbprint,
 )
 from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_token_request

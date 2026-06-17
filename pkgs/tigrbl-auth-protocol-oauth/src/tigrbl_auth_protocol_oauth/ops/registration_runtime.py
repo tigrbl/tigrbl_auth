@@ -42,6 +42,13 @@ from tigrbl_identity_storage.tables import Client, ClientRegistration, Tenant
 
 
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHODS = {"client_secret_basic", "client_secret_post", PRIVATE_KEY_JWT_AUTH_METHOD, *SUPPORTED_MTLS_AUTH_METHODS}
+TLS_CLIENT_AUTH_IDENTITY_FIELDS = (
+    "tls_client_auth_subject_dn",
+    "tls_client_auth_san_dns",
+    "tls_client_auth_san_uri",
+    "tls_client_auth_san_ip",
+    "tls_client_auth_san_email",
+)
 
 
 def _tenant_from_operator_record(record: dict[str, object], *, tenant_slug: str) -> Tenant | None:
@@ -131,8 +138,12 @@ def _validated_token_endpoint_auth_method(payload: DynamicClientRegistrationIn, 
                 f'invalid_client_metadata: unsupported token_endpoint_auth_signing_alg {payload.token_endpoint_auth_signing_alg!r}',
             )
     elif method == TLS_CLIENT_AUTH_METHOD:
-        if not payload.tls_client_certificate_thumbprint:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid_client_metadata: tls_client_auth requires tls_client_certificate_thumbprint')
+        has_identity_metadata = any(getattr(payload, field, None) for field in TLS_CLIENT_AUTH_IDENTITY_FIELDS)
+        if not payload.tls_client_certificate_thumbprint and not has_identity_metadata:
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                'invalid_client_metadata: tls_client_auth requires tls_client_certificate_thumbprint, subject_dn, or SAN metadata',
+            )
     elif method == SELF_SIGNED_TLS_CLIENT_AUTH_METHOD:
         if not payload.self_signed_tls_client_certificate_thumbprint:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid_client_metadata: self_signed_tls_client_auth requires self_signed_tls_client_certificate_thumbprint')
@@ -259,6 +270,11 @@ async def _registration_response(
         token_endpoint_auth_signing_alg=metadata.get('token_endpoint_auth_signing_alg'),
         tls_client_certificate_thumbprint=metadata.get('tls_client_certificate_thumbprint'),
         self_signed_tls_client_certificate_thumbprint=metadata.get('self_signed_tls_client_certificate_thumbprint'),
+        tls_client_auth_subject_dn=metadata.get('tls_client_auth_subject_dn'),
+        tls_client_auth_san_dns=metadata.get('tls_client_auth_san_dns'),
+        tls_client_auth_san_uri=metadata.get('tls_client_auth_san_uri'),
+        tls_client_auth_san_ip=metadata.get('tls_client_auth_san_ip'),
+        tls_client_auth_san_email=metadata.get('tls_client_auth_san_email'),
         application_type=metadata.get('application_type'),
         scope=metadata.get('scope'),
         client_name=metadata.get('client_name'),

@@ -1,0 +1,27 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1216"
+number: 1216
+slug: "rfc8705-mtls-client-authentication-and-certificate-bound-token-contract"
+title: "RFC 8705 mTLS client authentication and certificate-bound token contract"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Normative target: RFC 8705 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens, https://www.rfc-editor.org/rfc/rfc8705. Related confirmation target: RFC 7800 cnf claim, https://www.rfc-editor.org/rfc/rfc7800. Requirements: registration metadata supports tls_client_auth subject DN and SAN matching fields as well as self_signed_tls_client_auth thumbprint pinning; token, PAR, and introspection client authentication pass presented certificate material into RFC 8705 validation; issued and consumed sender-constrained tokens use cnf.x5t#S256; resource-server validators fail closed on missing or mismatched presented certificate thumbprints; forwarded certificate headers are ignored unless a trusted runtime/proxy marker or ASGI scope certificate is present. Non-goal: performing the TLS mutual handshake inside the application package."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Accepted to track RFC 8705 subject/SAN client authentication, certificate-bound tokens, and trusted forwarded-certificate extraction."
+    at: "2026-06-17T09:48:54Z"
+references: []
+body: |-
+  Normative target: RFC 8705 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens, https://www.rfc-editor.org/rfc/rfc8705. Related confirmation target: RFC 7800 cnf claim, https://www.rfc-editor.org/rfc/rfc7800. Requirements: registration metadata supports tls_client_auth subject DN and SAN matching fields as well as self_signed_tls_client_auth thumbprint pinning; token, PAR, and introspection client authentication pass presented certificate material into RFC 8705 validation; issued and consumed sender-constrained tokens use cnf.x5t#S256; resource-server validators fail closed on missing or mismatched presented certificate thumbprints; forwarded certificate headers are ignored unless a trusted runtime/proxy marker or ASGI scope certificate is present. Non-goal: performing the TLS mutual handshake inside the application package.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1126"
+  - "adr:1100"
+  - "adr:1105"
+  - "adr:1098"

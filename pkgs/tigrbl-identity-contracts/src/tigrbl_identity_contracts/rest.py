@@ -28,6 +28,11 @@ class DynamicClientRegistrationIn(BaseModel):
     token_endpoint_auth_signing_alg: str | None = None
     tls_client_certificate_thumbprint: str | None = None
     self_signed_tls_client_certificate_thumbprint: str | None = None
+    tls_client_auth_subject_dn: str | None = None
+    tls_client_auth_san_dns: str | None = None
+    tls_client_auth_san_uri: str | None = None
+    tls_client_auth_san_ip: str | None = None
+    tls_client_auth_san_email: str | None = None
     application_type: str | None = None
     scope: str | None = None
     client_name: str | None = None
@@ -55,6 +60,11 @@ class DynamicClientRegistrationOut(BaseModel):
     token_endpoint_auth_signing_alg: str | None = None
     tls_client_certificate_thumbprint: str | None = None
     self_signed_tls_client_certificate_thumbprint: str | None = None
+    tls_client_auth_subject_dn: str | None = None
+    tls_client_auth_san_dns: str | None = None
+    tls_client_auth_san_uri: str | None = None
+    tls_client_auth_san_ip: str | None = None
+    tls_client_auth_san_email: str | None = None
     application_type: str | None = None
     scope: str | None = None
     client_name: str | None = None
@@ -81,6 +91,11 @@ class DynamicClientRegistrationManagementIn(BaseModel):
     token_endpoint_auth_signing_alg: str | None = None
     tls_client_certificate_thumbprint: str | None = None
     self_signed_tls_client_certificate_thumbprint: str | None = None
+    tls_client_auth_subject_dn: str | None = None
+    tls_client_auth_san_dns: str | None = None
+    tls_client_auth_san_uri: str | None = None
+    tls_client_auth_san_ip: str | None = None
+    tls_client_auth_san_email: str | None = None
     application_type: str | None = None
     scope: str | None = None
     client_name: str | None = None

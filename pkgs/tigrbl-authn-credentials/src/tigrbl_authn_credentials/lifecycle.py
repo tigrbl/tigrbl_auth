@@ -19,6 +19,7 @@ class CredentialKind(str, Enum):
     API_KEY = "api_key"
     SERVICE_KEY = "service_key"
     CLIENT_SECRET = "client_secret"
+    MTLS_CERTIFICATE = "mtls_certificate"
     MFA_FACTOR = "mfa_factor"
 
 

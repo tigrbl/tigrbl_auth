@@ -49,7 +49,7 @@ from .token_runtime import (
     issue_token_pair_records,
     mint_id_token,
     oidc_hash,
-    presented_certificate_thumbprint,
+    presented_certificate_pem, presented_certificate_thumbprint,
     read_handler_record,
     redeem_refresh_token,
     runtime_security_profile,
@@ -97,7 +97,6 @@ async def token_request(*, request, db):
     else:
         client_id = data.get('client_id')
         client_secret = data.get('client_secret')
-
     if not client_id:
         return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, headers={'WWW-Authenticate': 'Basic'})
 
@@ -140,6 +139,7 @@ async def token_request(*, request, db):
             authenticate_mtls_client(
                 registration_metadata,
                 presented_certificate_thumbprint(request),
+                presented_certificate_pem=presented_certificate_pem(request),
                 token_endpoint_auth_method=registered_auth_method,
             )
         except ValueError as exc:

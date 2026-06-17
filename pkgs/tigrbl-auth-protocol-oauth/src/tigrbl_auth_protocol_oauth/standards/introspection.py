@@ -39,7 +39,7 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_auth_protocol_oauth.standards.mtls import (
         SUPPORTED_MTLS_AUTH_METHODS,
         authenticate_mtls_client,
-        presented_certificate_thumbprint,
+        presented_certificate_pem, presented_certificate_thumbprint,
     )
     from tigrbl_identity_storage.tables.engine import get_db
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
@@ -75,6 +75,8 @@ except Exception:  # pragma: no cover - dependency-light checkpoint fallback
 
     def presented_certificate_thumbprint(_request: Any) -> str | None:
         return None
+
+    def presented_certificate_pem(_request: Any, *, trusted_proxy: bool = False) -> bytes | None: return None
 
     class HTTPException(Exception):
         def __init__(self, status_code: int, detail: str):
@@ -156,7 +158,6 @@ RFC7662_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7662"
 api = TigrblRouter()
 router = api
 _FALLBACK_TOKENS: dict[str, dict[str, Any]] = {}
-
 
 def _protected_resource_verifier_contract(request: Any):
     from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import protected_resource_verifier_contract_from_request
@@ -255,6 +256,7 @@ async def _authorize_introspection_caller(
             authenticate_mtls_client(
                 registration_metadata,
                 presented_certificate_thumbprint(request),
+                presented_certificate_pem=presented_certificate_pem(request),
                 token_endpoint_auth_method=registered_auth_method,
             )
         except ValueError as exc:
