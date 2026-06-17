@@ -15,8 +15,7 @@ allowed_categories:
 - perf
 category_descriptions:
   unit: Single-module, low-dependency correctness checks.
-  integration: Cross-module or persistence-backed flow checks with durable state and
-    mounted surfaces.
+  integration: Cross-module or persistence-backed flow checks with durable state and mounted surfaces.
   conformance: Protocol and contract conformance checks by deployment profile.
   interop: Independent peer-profile and compatibility checks.
   e2e: Release-path and documentation-driven end-to-end flows.
@@ -65,42 +64,139 @@ profiles:
   - tests/conformance/hardening/test_rfc9449_dpop.py
 categories:
   unit:
-  - tests/unit/test_tier3_validated_rebuild.py
-  - tests/unit/test_runtime_validation_matrix.py
-  - tests/unit/test_operator_control_plane.py
+  - tests/features/test_profile_reference_union.py
+  - tests/features/test_t0_tracked_targets.py
+  - tests/features/test_tenant_jwks_discovery.py
+  - tests/features/test_tenant_jwks_key_administration.py
+  - tests/packages/tigrbl-auth-api-developer/test_developer_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-developer/test_developer_api_package.py
+  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-my-account/test_my_account_api_package.py
+  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_api_package.py
+  - tests/packages/tigrbl-auth-api-platform-admin/test_platform_admin_realm_api.py
+  - tests/packages/tigrbl-auth-api-public/test_public_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-public/test_public_api_package.py
+  - tests/packages/tigrbl-auth-api-public/test_public_api_realm_issuer.py
+  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_api_package.py
+  - tests/packages/tigrbl-auth-api-resource-validation/test_resource_validation_realm_metadata.py
+  - tests/packages/tigrbl-auth-api-service-admin/test_service_admin_api_package.py
+  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_dev_deployment_proof.py
+  - tests/packages/tigrbl-auth-api-tenant-admin/test_tenant_admin_api_package.py
+  - tests/packages/tigrbl-identity-testkit/test_identity_testkit_package.py
   - tests/unit/test_adapters.py
+  - tests/unit/test_admin_control_plane_boundary.py
+  - tests/unit/test_admin_policy_boundary.py
+  - tests/unit/test_advanced_identity_graph_auth_boundary.py
+  - tests/unit/test_advanced_identity_plane_phase4.py
+  - tests/unit/test_advanced_surface_contracts.py
+  - tests/unit/test_app_factory_materialization.py
   - tests/unit/test_auth_code_exchange_pkce.py
+  - tests/unit/test_auth_package_taxonomy_boundary.py
+  - tests/unit/test_authority_closure_monotonicity.py
+  - tests/unit/test_authority_closure_monotonicity_robustness_t2.py
+  - tests/unit/test_authority_derivation_graph.py
+  - tests/unit/test_authority_graph_robustness_t2.py
+  - tests/unit/test_authorization_integrity_isolation_robustness_t2.py
+  - tests/unit/test_authorization_invariant_guards.py
+  - tests/unit/test_authorization_liveness_convergence.py
+  - tests/unit/test_authorization_provenance.py
+  - tests/unit/test_authorization_referential_integrity.py
+  - tests/unit/test_authorization_safety_property_evaluator.py
   - tests/unit/test_authorize_id_token_hashes.py
   - tests/unit/test_authorize_response_modes.py
   - tests/unit/test_backends.py
+  - tests/unit/test_bootstrap_secret_scrub.py
+  - tests/unit/test_bootstrappable_user_defaults.py
+  - tests/unit/test_boundary_freeze_checkpoint.py
   - tests/unit/test_bulk_schema_fields.py
+  - tests/unit/test_certification_gap_inventory.py
+  - tests/unit/test_certification_lane_evidence.py
+  - tests/unit/test_claim_boundary_rebaseline.py
+  - tests/unit/test_claim_registry_alignment.py
+  - tests/unit/test_clean_room_install_substrate.py
+  - tests/unit/test_cli_contract.py
   - tests/unit/test_cli_surface_checkpoint.py
+  - tests/unit/test_collect_validated_artifact_downloads.py
   - tests/unit/test_contract_generation_live.py
+  - tests/unit/test_contract_payloads_deferred_upstream.py
+  - tests/unit/test_control_plane_correctness_properties.py
+  - tests/unit/test_core_contracts_boundary.py
+  - tests/unit/test_credentials_lifecycle_boundary.py
   - tests/unit/test_crypto.py
+  - tests/unit/test_decision_stability_policy_versions.py
+  - tests/unit/test_delegation_attenuation_proof.py
+  - tests/unit/test_delegation_attenuation_robustness_t2.py
+  - tests/unit/test_delegation_grant_lifecycle_contract.py
   - tests/unit/test_deployment_resolver.py
   - tests/unit/test_deps_imports.py
+  - tests/unit/test_dpop_key_credentials.py
   - tests/unit/test_effective_artifacts.py
   - tests/unit/test_engine_initialization.py
+  - tests/unit/test_facade_compatibility_boundary.py
+  - tests/unit/test_fapi_runtime_profile.py
+  - tests/unit/test_feature_completeness_checkpoint.py
   - tests/unit/test_feature_flag_registry.py
+  - tests/unit/test_final_aggregation.py
+  - tests/unit/test_governance_extension_plane_phase5.py
+  - tests/unit/test_handler_records.py
+  - tests/unit/test_hardening_cluster_a.py
+  - tests/unit/test_hardening_cluster_b.py
+  - tests/unit/test_hardening_cluster_c.py
+  - tests/unit/test_identity_cli_file_size_guard.py
+  - tests/unit/test_identity_cli_package_boundary.py
+  - tests/unit/test_identity_package_file_size_guard.py
+  - tests/unit/test_identity_package_split_imports.py
+  - tests/unit/test_jose_policy_boundary.py
   - tests/unit/test_jwks_rotation.py
   - tests/unit/test_jwtoken.py
+  - tests/unit/test_key_rotation_policy_boundary.py
+  - tests/unit/test_key_rotation_policy_governance.py
+  - tests/unit/test_least_authority_minimality.py
+  - tests/unit/test_liveness_control_plane_robustness_t2.py
+  - tests/unit/test_migration_portability_evidence.py
   - tests/unit/test_models.py
+  - tests/unit/test_monorepo_release.py
+  - tests/unit/test_mtls_certificate_credentials.py
+  - tests/unit/test_non_rfc_track_checkpoint.py
+  - tests/unit/test_oauth_oidc_protocol_boundary.py
+  - tests/unit/test_oidc_authorization_code_token_claims.py
   - tests/unit/test_oidc_authorize_scope_nonce.py
   - tests/unit/test_oidc_id_token.py
   - tests/unit/test_oidc_id_token_encryption.py
+  - tests/unit/test_openapi_contract_validity.py
   - tests/unit/test_openapi_examples.py
   - tests/unit/test_openapi_well_known_endpoints.py
   - tests/unit/test_openid_configuration.py
   - tests/unit/test_openid_userinfo_endpoint.py
-  - tests/unit/test_claim_boundary_rebaseline.py
-  - tests/unit/test_published_dependency_model.py
-  - tests/unit/test_runner_adapter_runtime_layer.py
-  - tests/unit/test_public_route_contracts.py
+  - tests/unit/test_openrpc_contract_validity.py
+  - tests/unit/test_operator_control_plane.py
+  - tests/unit/test_operator_service_layer.py
+  - tests/unit/test_package_dependency_layering.py
+  - tests/unit/test_package_maturity_governance.py
+  - tests/unit/test_package_python_matrix_workflow.py
+  - tests/unit/test_path_safety.py
+  - tests/unit/test_policy_control_plane_phase3.py
+  - tests/unit/test_policy_determinism_replay.py
+  - tests/unit/test_policy_replay_stability_robustness_t2.py
+  - tests/unit/test_principals_model_boundary.py
+  - tests/unit/test_product_api_surfaces.py
+  - tests/unit/test_product_api_table_initialization.py
   - tests/unit/test_profile_discovery_runtime.py
-  - tests/unit/test_advanced_surface_contracts.py
-  - tests/unit/test_session_logout_cluster_b.py
-  - tests/unit/test_hardening_cluster_a.py
+  - tests/unit/test_protected_resource_verifier_contract.py
+  - tests/unit/test_provenance_naming_guard.py
+  - tests/unit/test_provider_white_label_login_boundary.py
+  - tests/unit/test_provisioning_governance_ecosystem_boundary.py
+  - tests/unit/test_public_route_contracts.py
+  - tests/unit/test_published_dependency_model.py
+  - tests/unit/test_pytest_workspace_temp_root.py
+  - tests/unit/test_release_posture_plane.py
   - tests/unit/test_remote_adapter.py
+  - tests/unit/test_repo_truth_helpers.py
+  - tests/unit/test_request_scoped_runtime_authority.py
+  - tests/unit/test_resource_server_consumer_boundary.py
+  - tests/unit/test_retained_target_test_evidence.py
   - tests/unit/test_rfc6749_auth_flow_endpoints.py
   - tests/unit/test_rfc6749_token_endpoint.py
   - tests/unit/test_rfc6749_validators.py
@@ -133,6 +229,7 @@ categories:
   - tests/unit/test_rfc8628_device_authorization.py
   - tests/unit/test_rfc8693_token_exchange.py
   - tests/unit/test_rfc8705_compliance.py
+  - tests/unit/test_rfc8705_mtls_runtime.py
   - tests/unit/test_rfc8707_resource_indicators.py
   - tests/unit/test_rfc8725_jwt_best_practices.py
   - tests/unit/test_rfc8812_webauthn_algorithms.py
@@ -146,69 +243,76 @@ categories:
   - tests/unit/test_rfc9449_dpop.py
   - tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py
   - tests/unit/test_rfc9728_metadata_checkpoint.py
+  - tests/unit/test_rp_consumer_boundary.py
   - tests/unit/test_rpc_registry_live.py
+  - tests/unit/test_runner_adapter_runtime_layer.py
   - tests/unit/test_runtime_cfg.py
-  - tests/unit/test_security_deps.py
-  - tests/unit/test_user_register_schema.py
-  - tests/unit/test_well_known_endpoints_behavior.py
   - tests/unit/test_runtime_launcher.py
-  - tests/unit/test_cli_contract.py
-  - tests/unit/test_operator_service_layer.py
-  - tests/unit/test_boundary_freeze_checkpoint.py
-  - tests/unit/test_truthfulness_alignment.py
-  - tests/unit/test_claim_registry_alignment.py
-  - tests/unit/test_migration_portability_evidence.py
-  - tests/unit/test_clean_room_install_substrate.py
-  - tests/unit/test_app_factory_materialization.py
-  - tests/unit/test_collect_validated_artifact_downloads.py
-  - tests/unit/test_validated_execution_runtime_matrix.py
-  - tests/unit/test_certification_lane_evidence.py
-  - tests/unit/test_hardening_cluster_b.py
-  - tests/unit/test_hardening_cluster_c.py
-  - tests/unit/test_non_rfc_track_checkpoint.py
-  - tests/unit/test_feature_completeness_checkpoint.py
-  - tests/unit/test_tier4_checkpoint.py
-  - tests/unit/test_final_aggregation.py
-  - tests/unit/test_retained_target_test_evidence.py
-  - tests/unit/test_fapi_runtime_profile.py
-  - tests/unit/test_certification_gap_inventory.py
-  - tests/unit/test_contract_payloads_deferred_upstream.py
-  - tests/unit/test_openapi_contract_validity.py
-  - tests/unit/test_openrpc_contract_validity.py
-  - tests/unit/test_provenance_naming_guard.py
-  - tests/unit/test_pytest_workspace_temp_root.py
-  - tests/unit/test_repo_truth_helpers.py
   - tests/unit/test_runtime_profile_configuration.py
+  - tests/unit/test_runtime_validation_matrix.py
   - tests/unit/test_runtime_version_truthfulness.py
   - tests/unit/test_secure_default_admin_gate.py
+  - tests/unit/test_security_deps.py
+  - tests/unit/test_security_user_lookup.py
+  - tests/unit/test_server_runtime_operator_boundary.py
+  - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
   - tests/unit/test_ssot_document_authority.py
   - tests/unit/test_ssot_registry_integrity.py
   - tests/unit/test_ssot_work_item_traceability.py
+  - tests/unit/test_storage_canonical_facades.py
+  - tests/unit/test_storage_repository_boundary.py
+  - tests/unit/test_storage_sqlite_uuid_coercion.py
+  - tests/unit/test_surface_baseline_boundary.py
+  - tests/unit/test_tenant_public_discovery_boundary.py
+  - tests/unit/test_tenant_realm_isolation_invariants.py
+  - tests/unit/test_testkit_cross_cutting_boundary.py
+  - tests/unit/test_tier3_validated_rebuild.py
+  - tests/unit/test_tier4_checkpoint.py
+  - tests/unit/test_tigrbl_auth_facade_ownership.py
+  - tests/unit/test_tigrbl_bcp_direct_db_boundary.py
+  - tests/unit/test_token_endpoint_minimal_storage.py
+  - tests/unit/test_tox_pip_install.py
+  - tests/unit/test_trust_graph_integrity_guards.py
+  - tests/unit/test_truth_chain_hashing.py
+  - tests/unit/test_truthfulness_alignment.py
+  - tests/unit/test_typescript_rp_node_package_boundary.py
+  - tests/unit/test_user_register_schema.py
+  - tests/unit/test_validated_execution_runtime_matrix.py
+  - tests/unit/test_well_known_endpoints_behavior.py
   integration:
+  - tests/integration/test_admin_auth_session.py
+  - tests/integration/test_admin_table_issue_regressions.py
+  - tests/integration/test_admin_table_surfaces.py
   - tests/integration/test_auth_flows.py
   - tests/integration/test_authorization_code_flow.py
   - tests/integration/test_authorization_response_types.py
   - tests/integration/test_crud_api.py
+  - tests/integration/test_default_openapi_endpoints.py
   - tests/integration/test_device_code_flow.py
   - tests/integration/test_full_workflow.py
+  - tests/integration/test_login_session_authorize.py
   - tests/integration/test_long_lived_worker_flow.py
   - tests/integration/test_migration_upgrade_downgrade_safety.py
   - tests/integration/test_oidc_endpoints.py
   - tests/integration/test_persistence_lifecycle_durability.py
+  - tests/integration/test_profile_all_documented_endpoints.py
   - tests/integration/test_profile_surface_and_contract_alignment.py
   - tests/integration/test_rfc7662.py
   - tests/integration/test_rfc8414_metadata.py
   - tests/integration/test_rfc8628.py
   - tests/integration/test_rfc8693_token_exchange_endpoint.py
+  - tests/integration/test_runtime_issuer_alignment.py
   - tests/integration/test_service_key_creation.py
   - tests/integration/test_service_key_introspection_flow.py
+  - tests/integration/test_sqlite_attachment_admin_directory.py
   - tests/integration/test_token_exchange_flow.py
-  - tests/runtime/test_runner_uvicorn.py
   - tests/runtime/test_runner_hypercorn.py
-  - tests/runtime/test_runner_tigrcorn.py
   - tests/runtime/test_runner_invariance.py
+  - tests/runtime/test_runner_tigrcorn.py
+  - tests/runtime/test_runner_uvicorn.py
   conformance:
+  - tests/conformance/backlog/test_rfc8785_jcs.py
   - tests/conformance/baseline/test_oidc_id_token.py
   - tests/conformance/baseline/test_openid_configuration.py
   - tests/conformance/baseline/test_openid_userinfo_endpoint.py
@@ -237,8 +341,8 @@ categories:
   - tests/conformance/operator/test_cli_bootstrap_migrate.py
   - tests/conformance/operator/test_cli_import_export.py
   - tests/conformance/operator/test_cli_keys_lifecycle.py
-  - tests/conformance/operator/test_cli_resource_lifecycle.py
   - tests/conformance/operator/test_cli_release_lifecycle.py
+  - tests/conformance/operator/test_cli_resource_lifecycle.py
   - tests/conformance/operator/test_cli_serve_runtime.py
   - tests/conformance/production/test_oidc_rp_initiated_logout.py
   - tests/conformance/production/test_oidc_session_management.py
@@ -253,41 +357,65 @@ categories:
   - tests/conformance/production/test_rfc8615_well_known_uris.py
   - tests/conformance/production/test_rfc9068_jwt_profile.py
   - tests/conformance/production/test_rfc9728_protected_resource_metadata.py
-  - tests/conformance/backlog/test_rfc8785_jcs.py
   interop:
-  - tests/interop/test_peer_matrix_external_status.py
-  - tests/interop/test_tier4_external_handoff_templates.py
-  - tests/interop/test_peer_profile_catalog.py
+  - tests/interop/test_operator_profile_catalog_completeness.py
   - tests/interop/test_peer_counterpart_catalog.py
   - tests/interop/test_peer_matrix_artifacts.py
-  - tests/interop/test_tier4_promotion_fail_closed.py
-  - tests/interop/test_runner_profile_catalog_completeness.py
-  - tests/interop/test_operator_profile_catalog_completeness.py
+  - tests/interop/test_peer_matrix_external_status.py
+  - tests/interop/test_peer_profile_catalog.py
   - tests/interop/test_peer_target_coverage.py
+  - tests/interop/test_runner_profile_catalog_completeness.py
+  - tests/interop/test_tier4_external_handoff_templates.py
   - tests/interop/test_tier4_fixture_rejection.py
+  - tests/interop/test_tier4_promotion_fail_closed.py
   - tests/unit/test_peer_bundle_completeness.py
   e2e:
   - tests/e2e/test_release_gate_catalog.py
+  - tests/examples/test_python_cli_device_login.py
   - tests/examples/test_readme_usage.py
   - tests/uix/test_abac_admin.py
+  - tests/uix/test_admin_enterprise_boundary.py
   - tests/uix/test_admin_golden_path.py
   - tests/uix/test_admin_shell.py
   - tests/uix/test_admin_shell_security.py
   - tests/uix/test_policy_simulation.py
+  - tests/uix/test_priority1_admin_console_shell_boundary.py
+  - tests/uix/test_priority1_administrative_resource_views_boundary.py
+  - tests/uix/test_priority1_administrative_safe_mutations_boundary.py
+  - tests/uix/test_priority1_enterprise_readiness_boundary.py
   - tests/uix/test_rbac_admin.py
   - tests/uix/test_readiness_dashboard.py
   - tests/uix/test_resource_views_contract.py
   - tests/uix/test_resource_views_states.py
   - tests/uix/test_safe_mutations.py
   security:
+  - tests/security/planning/test_authorization_budgets_planning.py
+  - tests/security/planning/test_constraint_native_authorization_planning.py
+  - tests/security/planning/test_credential_privacy_correlation_planning.py
+  - tests/security/planning/test_cross_issuer_trust_domain_planning.py
+  - tests/security/planning/test_future_standards_nonblocking_roadmap.py
+  - tests/security/test_algorithm_policy_readiness.py
+  - tests/security/test_authorization_mutation_freshness.py
+  - tests/security/test_authorization_observability.py
+  - tests/security/test_crypto_boundary_governance.py
+  - tests/security/test_delegation_provenance.py
+  - tests/security/test_issuer_confusion_resistance.py
+  - tests/security/test_jose_negative_security.py
+  - tests/security/test_machine_identity_governance.py
+  - tests/security/test_realm_isolation_certification.py
   - tests/security/test_release_bundle_signing.py
+  - tests/security/test_residency_sovereignty_policy.py
+  - tests/security/test_resource_server_verifier_certification.py
+  - tests/security/test_runtime_capability_truth.py
+  - tests/security/test_runtime_qualification.py
   - tests/security/test_sender_constraint_replay.py
+  - tests/security/test_tenant_isolation_certification.py
   negative:
+  - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_contract_diff_detects_drift.py
   - tests/negative/test_cookie_and_logout_abuse_cases.py
   - tests/negative/test_hardening_runtime_enforcement.py
   - tests/negative/test_invalid_artifact_inputs.py
   - tests/negative/test_resource_exchange_abuse.py
-  - tests/negative/test_certification_attack_paths.py
   perf:
   - tests/perf/test_bundle_manifest_size.py

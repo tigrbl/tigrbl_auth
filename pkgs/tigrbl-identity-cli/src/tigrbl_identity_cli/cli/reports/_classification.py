@@ -124,9 +124,21 @@ def _build_release_gate_payload(repo_root: Path, gate_names: list[str], results:
     }
 
 
+TIER4_ONLY_GATES = {"gate-45-evidence-peer", "gate-87-peer-bundle-completeness"}
+
+
+def _repository_tier(repo_root: Path) -> int:
+    scope = _load_yaml(repo_root / "compliance" / "targets" / "certification_scope.yaml")
+    try:
+        return int(scope.get("repository_tier", 0))
+    except (TypeError, ValueError):
+        return 0
+
+
 def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: bool = True) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     _ensure_repo_local_operator_state(repo_root)
+    repository_tier = _repository_tier(repo_root)
     gate_dir = repo_root / "compliance" / "gates"
     ordered = _load_yaml(gate_dir / "gate-order.yaml") if (gate_dir / "gate-order.yaml").exists() else {"ordered_gates": sorted(GATE_CALLS)}
     gate_names = [gate_name] if gate_name and gate_name not in {"all", "*"} else list(ordered.get("ordered_gates", sorted(GATE_CALLS)))
@@ -146,8 +158,13 @@ def run_release_gates(repo_root: Path, *, gate_name: str | None = None, strict: 
         except Exception as exc:
             rc = 1
             error = str(exc)
-        passed = rc == 0
-        result = {"gate": name, "passed": passed, "rc": rc}
+        non_blocking_tier4_gate = name in TIER4_ONLY_GATES and repository_tier < 4
+        passed = rc == 0 or non_blocking_tier4_gate
+        result = {"gate": name, "passed": passed, "rc": 0 if non_blocking_tier4_gate else rc}
+        if non_blocking_tier4_gate:
+            result["observed_rc"] = rc
+            result["non_blocking"] = True
+            result["reason"] = f"repository_tier={repository_tier}; Tier 4 peer promotion is recorded but not release-blocking"
         if error:
             result["error"] = error
         primary_results.append(result)

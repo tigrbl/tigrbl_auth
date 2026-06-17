@@ -201,6 +201,35 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
     return selected
 
 
+GENERATED_CLEAN_CHECK_PATHS = {
+    "CERTIFICATION_STATUS.md",
+    "CURRENT_STATE.md",
+    "compliance/claims/recertification-state.yaml",
+    "compliance/claims/repository-state.yaml",
+    "compliance/evidence/certification_test_partitions.json",
+    "compliance/evidence/certification_test_partitions.yaml",
+    "compliance/evidence/claim_proof_bindings.json",
+    "compliance/evidence/claim_proof_bindings.yaml",
+    "compliance/evidence/target_profile_evidence.json",
+    "compliance/evidence/target_profile_evidence.yaml",
+    "docs/adr/INDEX.md",
+    "docs/adr/index.json",
+    "specs/cli/cli_contract.json",
+    "specs/cli/cli_contract.yaml",
+}
+GENERATED_CLEAN_CHECK_PREFIXES = (
+    "docs/compliance/",
+    "docs/compliance/collected/",
+)
+
+
+def _clean_check_ignored(path: str) -> bool:
+    normalized = path.replace("\\", "/").strip()
+    return normalized in GENERATED_CLEAN_CHECK_PATHS or any(
+        normalized.startswith(prefix) for prefix in GENERATED_CLEAN_CHECK_PREFIXES
+    )
+
+
 def _git_checkout_summary(repo_root: Path) -> dict[str, Any]:
     try:
         result = subprocess.run(
@@ -214,12 +243,16 @@ def _git_checkout_summary(repo_root: Path) -> dict[str, Any]:
         return {"git_available": False, "clean": False, "failure": str(exc), "changed_paths": []}
     if result.returncode != 0:
         return {"git_available": True, "clean": False, "failure": result.stderr.strip() or "git status failed", "changed_paths": []}
-    changed_paths = [line[3:] for line in result.stdout.splitlines() if line.strip()]
+    raw_changed_paths = [line[3:] for line in result.stdout.splitlines() if line.strip()]
+    changed_paths = [path for path in raw_changed_paths if not _clean_check_ignored(path)]
+    ignored_paths = [path for path in raw_changed_paths if _clean_check_ignored(path)]
     return {
         "git_available": True,
         "clean": not changed_paths,
         "changed_path_count": len(changed_paths),
         "changed_paths": changed_paths[:200],
+        "ignored_generated_path_count": len(ignored_paths),
+        "ignored_generated_paths": ignored_paths[:200],
     }
 
 

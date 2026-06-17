@@ -22,12 +22,7 @@ RFC6750_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc6750"
 
 
 def _active_settings():
-    try:
-        from tigrbl_auth.runtime_cfg import settings as runtime_settings
-
-        return runtime_settings
-    except Exception:  # pragma: no cover - import fallback
-        return settings
+    return settings
 
 
 async def extract_bearer_token(request: Request, authorization: str) -> str | None:

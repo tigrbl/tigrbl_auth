@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.runtime_cfg import Settings, settings
+from tigrbl_identity_runtime.settings import Settings, settings
 
 __all__ = ["Settings", "settings"]

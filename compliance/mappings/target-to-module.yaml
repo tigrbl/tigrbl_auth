@@ -69,7 +69,7 @@ RFC 9700:
   - tigrbl_auth/ops/token.py
   - tigrbl_auth/standards/oidc/discovery.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   - tigrbl_auth/security/auth.py
   - tigrbl_auth/security/deps.py
 OpenRPC 1.4.x admin/control-plane contract:
@@ -79,8 +79,7 @@ OpenRPC 1.4.x admin/control-plane contract:
   - tigrbl_auth/api/rpc/methods
   - tigrbl_auth/api/rpc/schemas
   - tigrbl_auth/api/surfaces.py
-  - tigrbl_auth/cli/artifacts.py
-  - tigrbl_auth/cli/reports.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
 RFC 7009:
   modules:
@@ -180,7 +179,7 @@ RFC 9101:
   - tigrbl_auth/standards/oauth2/jar.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 RFC 9126:
   modules:
   - tigrbl_auth/standards/oauth2/par.py
@@ -194,13 +193,13 @@ RFC 9207:
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 RFC 9396:
   modules:
   - tigrbl_auth/standards/oauth2/rar.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 RFC 6265:
   modules:
   - tigrbl_auth/standards/http/cookies.py
@@ -213,14 +212,14 @@ RFC 7521:
   modules:
   - tigrbl_auth/standards/oauth2/assertion_framework.py
   - tigrbl_auth/ops/token.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 RFC 7523:
   modules:
   - tigrbl_auth/standards/oauth2/jwt_client_auth.py
   - tigrbl_auth/ops/token.py
   - tigrbl_auth/ops/register.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 OIDC UserInfo:
   modules:
   - tigrbl_auth/standards/oidc/userinfo.py
@@ -252,7 +251,7 @@ OIDC Front-Channel Logout:
   - tigrbl_auth/services/persistence.py
   - tigrbl_auth/api/rest/shared.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 OIDC Back-Channel Logout:
   modules:
   - tigrbl_auth/standards/oidc/backchannel_logout.py
@@ -263,7 +262,7 @@ OIDC Back-Channel Logout:
   - tigrbl_auth/services/persistence.py
   - tigrbl_auth/api/rest/shared.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
 ASGI 3 application package:
   modules:
   - tigrbl_auth/api/app.py
@@ -276,47 +275,37 @@ ASGI 3 application package:
   - tigrbl_auth/runtime/base.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/cli/runtime.py
+  - tigrbl_auth/cli
 'Runner profile: Uvicorn':
   modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/uvicorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
 'Runner profile: Hypercorn':
   modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/hypercorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
 'Runner profile: Tigrcorn':
   modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/tigrcorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
 CLI operator surface:
   modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/operator_service.py
   - tigrbl_auth/services/audit_service.py
   - tigrbl_auth/services/client_service.py
@@ -324,27 +313,20 @@ CLI operator surface:
   - tigrbl_auth/services/session_service.py
 Bootstrap and migration lifecycle:
   modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/project_tree.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/persistence.py
 Key lifecycle and JWKS publication:
   modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/api/rpc/methods/keys.py
   - tigrbl_auth/standards/jose/rfc7517.py
   - tigrbl_auth/services/key_management.py
   - tigrbl_auth/services/operator_service.py
 Import/export portability:
   modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/import_export_service.py
   - tigrbl_auth/services/operator_service.py
 Release bundle and signature verification:
   modules:
-  - tigrbl_auth/cli/reports.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli

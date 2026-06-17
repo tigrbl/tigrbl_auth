@@ -37,6 +37,7 @@ enforcement:
   - tigrbl_auth/security
   - tigrbl_auth/config
   - tigrbl_auth/standards
+  - tigrbl_auth/cli
   - tigrbl_auth/plugin.py
   - tigrbl_auth/gateway.py
   - tigrbl_auth/framework.py

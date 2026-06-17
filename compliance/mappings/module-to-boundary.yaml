@@ -13,7 +13,7 @@ tigrbl_auth/standards/http: certified_core
 tigrbl_auth/standards/oidc: certified_core
 tigrbl_auth/standards/jose: certified_core
 tigrbl_auth/standards/oauth2: certified_core
-tigrbl_auth/cli: governance_plane
+tigrbl_auth/cli: certified_core
 tigrbl_auth/cli/artifacts.py: certified_core
 tigrbl_auth/cli/reports.py: certified_core
 tigrbl_auth/cli/runtime.py: certified_core

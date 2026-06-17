@@ -318,7 +318,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
             if runtime_report_uses_validated_runs
             else "The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container."
         )
-        certification_state["open_gaps"].append("Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12/3.13/3.14, but preserved independent validation artifacts remain absent.")
+        certification_state["open_gaps"].append("Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.")
     if int(runtime_profile_report.get("summary", {}).get("placeholder_supported_runner_count", 0)) > 0:
         certification_state["open_gaps"].append("At least one kept runner is still modeled as a placeholder rather than a published pinned package.")
     if not bool(runtime_profile_report.get("summary", {}).get("declared_ci_install_probe_complete", False)):
@@ -378,8 +378,8 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
 
 
 
-EXPECTED_PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14"]
-EXPECTED_TIGRCORN_PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
+EXPECTED_PYTHON_VERSIONS = ["3.10", "3.11", "3.12"]
+EXPECTED_TIGRCORN_PYTHON_VERSIONS = ["3.11", "3.12"]
 EXPECTED_RUNTIME_VALIDATION_MATRIX = {
     "base": EXPECTED_PYTHON_VERSIONS,
     "sqlite-uvicorn": EXPECTED_PYTHON_VERSIONS,

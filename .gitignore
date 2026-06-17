@@ -12,6 +12,7 @@
 /.pytest-tmp-late-suite
 /.pytest-tmp-tier4-checkpoint
 /dist
+/docs/compliance/collected/
 /node_modules/
 /apps/*/node_modules/
 /apps/*/dist/
