@@ -25,7 +25,7 @@ from tigrbl_identity_server.framework import (
 
 from tigrbl_identity_runtime import settings as runtime_cfg
 from tigrbl_identity_jose.jwtoken import JWTCoder
-from tigrbl_identity_jose.standards.rfc7519 import decode_jwt
+from tigrbl_identity_jose.standards.rfc7519 import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.rfc9449_dpop import verify_proof
 
 RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
@@ -240,6 +240,15 @@ def validate_subject_token(token: str, token_type: str) -> Dict[str, Any]:
         return {"token_type": token_type, "value": token}
 
 
+def _sign_exchange_access_token(**claims: Any) -> str:
+    try:
+        return JWTCoder.default().sign(**claims)
+    except RuntimeError as exc:
+        if "active event loop" not in str(exc):
+            raise
+        return encode_jwt(**claims)
+
+
 def exchange_token(
     request: TokenExchangeRequest,
     *,
@@ -274,8 +283,6 @@ def exchange_token(
         validate_subject_token(request.actor_token, request.actor_token_type)
 
     # Create new token based on request
-    jwt_coder = JWTCoder.default()
-
     # Extract subject from original token
     subject_id = subject_claims.get("sub", "unknown")
     tenant_id = subject_claims.get("tid", "default")
@@ -287,7 +294,7 @@ def exchange_token(
     extra_claims: Dict[str, Any] = {}
     if jkt:
         extra_claims["cnf"] = {"jkt": jkt}
-    access_token = jwt_coder.sign(
+    access_token = _sign_exchange_access_token(
         sub=subject_id,
         tid=tenant_id,
         scopes=scope.split() if scope else [],

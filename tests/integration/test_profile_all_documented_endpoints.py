@@ -141,6 +141,7 @@ async def _exercise_profile_operations(
 ) -> None:
     observed: set[tuple[str, str]] = set()
     registration: dict | None = None
+    account_headers: dict[str, str] = {}
 
     async def expect(method: str, path: str, **kwargs):
         response = await client.request(method.upper(), path, **kwargs)
@@ -189,6 +190,9 @@ async def _exercise_profile_operations(
         )
         observed.add(("post", "/login"))
         assert response.status_code == HTTPStatus.OK, response.text
+        access_token = response.json().get("access_token")
+        if access_token:
+            account_headers = {"Authorization": f"Bearer {access_token}"}
 
     if ("get", "/authorize") in documented_operations:
         response = await client.get("/authorize")
@@ -284,6 +288,76 @@ async def _exercise_profile_operations(
         response = await client.post("/logout")
         observed.add(("post", "/logout"))
         assert response.status_code == HTTPStatus.OK, response.text
+
+    realm_discovery_path = "/realms/default/.well-known/openid-configuration"
+    operation = ("get", "/realms/{realm_slug}/.well-known/openid-configuration")
+    if operation in documented_operations:
+        response = await client.get(realm_discovery_path)
+        observed.add(operation)
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert response.json()["issuer"] == f"{deployment.issuer}/realms/default"
+
+    realm_jwks_path = "/realms/default/.well-known/jwks.json"
+    operation = ("get", "/realms/{realm_slug}/.well-known/jwks.json")
+    if operation in documented_operations:
+        response = await client.get(realm_jwks_path)
+        observed.add(operation)
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert "keys" in response.json()
+
+    if ("get", "/account/profile") in documented_operations:
+        response = await client.get("/account/profile", headers=account_headers)
+        observed.add(("get", "/account/profile"))
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert response.json()["username"] == username
+
+    if ("patch", "/account/profile") in documented_operations:
+        response = await client.patch("/account/profile", json={}, headers=account_headers)
+        observed.add(("patch", "/account/profile"))
+        assert response.status_code == HTTPStatus.OK, response.text
+
+    if ("get", "/account/sessions") in documented_operations:
+        response = await client.get("/account/sessions", headers=account_headers)
+        observed.add(("get", "/account/sessions"))
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert isinstance(response.json(), list)
+
+    missing_uuid = str(uuid4())
+    if ("delete", "/account/sessions/{session_id}") in documented_operations:
+        response = await client.delete(f"/account/sessions/{missing_uuid}", headers=account_headers)
+        observed.add(("delete", "/account/sessions/{session_id}"))
+        assert response.status_code == HTTPStatus.NOT_FOUND, response.text
+
+    if ("get", "/account/consents") in documented_operations:
+        response = await client.get("/account/consents", headers=account_headers)
+        observed.add(("get", "/account/consents"))
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert isinstance(response.json(), list)
+
+    if ("delete", "/account/consents/{consent_id}") in documented_operations:
+        response = await client.delete(f"/account/consents/{missing_uuid}", headers=account_headers)
+        observed.add(("delete", "/account/consents/{consent_id}"))
+        assert response.status_code == HTTPStatus.NOT_FOUND, response.text
+
+    if ("get", "/account/authorized-apps") in documented_operations:
+        response = await client.get("/account/authorized-apps", headers=account_headers)
+        observed.add(("get", "/account/authorized-apps"))
+        assert response.status_code == HTTPStatus.OK, response.text
+        assert isinstance(response.json(), list)
+
+    if ("delete", "/account/authorized-apps/{client_id}") in documented_operations:
+        response = await client.delete(f"/account/authorized-apps/{missing_uuid}", headers=account_headers)
+        observed.add(("delete", "/account/authorized-apps/{client_id}"))
+        assert response.status_code == HTTPStatus.NOT_FOUND, response.text
+
+    if ("post", "/account/password/change") in documented_operations:
+        response = await client.post(
+            "/account/password/change",
+            json={"current_password": "wrong-password", "new_password": "NewPassword123!"},
+            headers=account_headers,
+        )
+        observed.add(("post", "/account/password/change"))
+        assert response.status_code == HTTPStatus.BAD_REQUEST, response.text
 
     assert observed == documented_operations
 

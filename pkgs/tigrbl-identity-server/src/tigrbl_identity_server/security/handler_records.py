@@ -25,6 +25,7 @@ def _created_item(value: Any) -> Any:
                 return value[key]
     return value
 
+
 def _list_items(result: Any) -> list[Any]:
     if isinstance(result, Mapping) and isinstance(result.get("items"), list):
         result = result["items"]
@@ -38,12 +39,14 @@ def _list_items(result: Any) -> list[Any]:
         return []
     return [result]
 
+
 def _value_matches(actual: Any, expected: Any) -> bool:
     if actual == expected:
         return True
     if actual is None or expected is None:
         return False
     return str(actual) == str(expected)
+
 
 def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
     for key, expected in filters.items():
@@ -53,15 +56,14 @@ def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
             return False
     return True
 
+
 def _utc(value: datetime | None) -> datetime | None:
     if value is None:
         return None
     return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
 
-
 def token_hash(token: str) -> str:
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
-
 
 def _to_uuid(value: Any) -> UUID | None:
     if value in {None, "", False}:
@@ -73,7 +75,6 @@ def _to_uuid(value: Any) -> UUID | None:
     except Exception:
         return None
 
-
 def _to_datetime(value: Any) -> datetime | None:
     if value is None:
         return None
@@ -84,7 +85,6 @@ def _to_datetime(value: Any) -> datetime | None:
     except Exception:
         return None
 
-
 def _normalize_audience(value: Any) -> Any:
     if value is None:
         return None
@@ -94,7 +94,6 @@ def _normalize_audience(value: Any) -> Any:
         return list(value)
     return str(value)
 
-
 async def first_handler_record(model: Any, db: Any, filters: Mapping[str, Any]) -> Any:
     rows = await model.handlers.list.core({"payload": {"filters": dict(filters)}, "db": db})
     for row in _list_items(rows):
@@ -102,12 +101,10 @@ async def first_handler_record(model: Any, db: Any, filters: Mapping[str, Any]) 
             return row
     return None
 
-
 async def list_handler_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> list[Any]:
     filters = dict(filters or {})
     rows = await model.handlers.list.core({"payload": {"filters": filters}, "db": db})
     return [row for row in _list_items(rows) if _matches_filters(row, filters)]
-
 
 async def read_handler_record(model: Any, db: Any, ident: Any) -> Any:
     get = getattr(db, "get", None)
@@ -127,11 +124,9 @@ async def read_handler_record(model: Any, db: Any, ident: Any) -> Any:
             return None
         raise
 
-
 async def create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:
     row = await model.handlers.create.core({"payload": dict(payload), "db": db})
     return _created_item(row)
-
 
 async def update_handler_record(model: Any, db: Any, ident: Any, payload: Mapping[str, Any]) -> Any:
     get = getattr(db, "get", None)
@@ -155,7 +150,6 @@ async def update_handler_record(model: Any, db: Any, ident: Any, payload: Mappin
     row = await model.handlers.update.core({"path_params": {"id": ident}, "payload": dict(payload), "db": db})
     return _created_item(row)
 
-
 async def delete_handler_record(model: Any, db: Any, ident: Any) -> Any:
     get = getattr(db, "get", None)
     delete = getattr(db, "delete", None)
@@ -177,7 +171,6 @@ async def delete_handler_record(model: Any, db: Any, ident: Any) -> Any:
         except Exception:
             pass
     return await model.handlers.delete.core({"path_params": {"id": ident}, "db": db})
-
 
 def _token_record_payload(
     token: str,
@@ -218,7 +211,6 @@ def _token_record_payload(
         "revoked_reason": None,
     }
 
-
 async def create_browser_session_record(
     db: Any,
     *,
@@ -251,7 +243,6 @@ async def create_browser_session_record(
     )
     return _created_item(row), secret
 
-
 async def resolve_browser_session_record(db: Any, request: Any, *, deployment: Any) -> Any:
     if not deployment.flag_enabled("enable_oidc_session_management"):
         return None
@@ -279,7 +270,6 @@ async def resolve_browser_session_record(db: Any, request: Any, *, deployment: A
     row.last_seen_at = now
     return row
 
-
 async def bind_browser_session_client_record(db: Any, session_id: UUID, *, client_id: UUID | None) -> Any:
     return await update_handler_record(
         AuthSession,
@@ -287,7 +277,6 @@ async def bind_browser_session_client_record(db: Any, session_id: UUID, *, clien
         session_id,
         {"client_id": client_id, "last_seen_at": datetime.now(timezone.utc)},
     )
-
 
 async def maybe_rotate_browser_session_cookie_record(db: Any, session_row: Any) -> str | None:
     if session_row is None:
@@ -311,7 +300,6 @@ async def maybe_rotate_browser_session_cookie_record(db: Any, session_row: Any) 
     session_row.last_seen_at = now
     return secret
 
-
 async def create_token_record(db: Any, token: str, claims: dict[str, Any] | None = None, **kwargs: Any) -> Any:
     row = await TokenRecord.handlers.create.core(
         {
@@ -320,7 +308,6 @@ async def create_token_record(db: Any, token: str, claims: dict[str, Any] | None
         }
     )
     return _created_item(row)
-
 
 async def _decode_issued_claims(jwt: Any, token: str) -> dict[str, Any]:
     decode = jwt.async_decode
@@ -335,7 +322,6 @@ async def _decode_issued_claims(jwt: Any, token: str) -> dict[str, Any]:
     if supports_skip:
         return await decode(token, verify_exp=False, verify_revocation=False)
     return await decode(token, verify_exp=False)
-
 
 async def issue_token_pair_records(
     db: Any,
@@ -390,7 +376,6 @@ async def issue_token_pair_records(
         refresh_parent_hash=refresh_parent_hash,
     )
     return access_token, refresh_token
-
 
 async def append_audit_event_record(db: Any, **payload: Any) -> Any:
     row = await AuditEvent.handlers.create.core({"payload": payload, "db": db})

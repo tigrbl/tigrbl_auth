@@ -11,6 +11,7 @@ import base64
 import hashlib
 import hmac
 import json
+import threading
 import time
 from typing import Any, Final
 
@@ -32,6 +33,33 @@ def _runtime_coder() -> JWTCoder | None:
         return JWTCoder.default()
     except Exception:
         return None
+
+
+def _call_runtime(operation):
+    def _call():
+        return operation(JWTCoder.default())
+
+    result: dict[str, Any] = {}
+
+    def _worker() -> None:
+        try:
+            result["value"] = _call()
+        except Exception as exc:
+            result["error"] = exc
+
+    try:
+        import asyncio
+
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return _call()
+
+    thread = threading.Thread(target=_worker, daemon=True)
+    thread.start()
+    thread.join()
+    if "error" in result:
+        raise result["error"]
+    return result.get("value")
 
 
 def _b64url_encode(data: bytes) -> str:
@@ -91,9 +119,10 @@ def encode_jwt(**claims: Any) -> str:
     if not settings.enable_rfc7519:
         raise RuntimeError(f"RFC 7519 support disabled: {RFC7519_SPEC_URL}")
     sub = claims.pop("sub", "")
-    coder = _runtime_coder()
-    if coder is not None:
-        return coder.sign(sub=sub, **claims)
+    try:
+        return _call_runtime(lambda coder: coder.sign(sub=sub, **claims))
+    except Exception:
+        pass
     return _fallback_encode(sub=sub, **claims)
 
 
@@ -101,9 +130,10 @@ def decode_jwt(token: str) -> dict[str, Any]:
     """Decode and verify *token* returning the claims dictionary."""
     if not settings.enable_rfc7519:
         raise RuntimeError(f"RFC 7519 support disabled: {RFC7519_SPEC_URL}")
-    coder = _runtime_coder()
-    if coder is not None:
-        return coder.decode(token)
+    try:
+        return _call_runtime(lambda coder: coder.decode(token))
+    except Exception:
+        pass
     return _fallback_decode(token)
 
 

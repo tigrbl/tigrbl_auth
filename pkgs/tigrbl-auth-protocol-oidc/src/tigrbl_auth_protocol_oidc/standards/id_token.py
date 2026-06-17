@@ -13,6 +13,7 @@ import pathlib
 import base64
 import json
 import secrets
+import sys
 from hashlib import sha256
 from datetime import timedelta
 from functools import lru_cache
@@ -42,6 +43,20 @@ _RSA_KEY_PATH = pathlib.Path(
 )
 
 
+def _sync_key_path_from_root_facade() -> None:
+    global _RSA_KEY_PATH, _service_cache
+    root_facade = sys.modules.get("tigrbl_auth.oidc_id_token")
+    root_path = getattr(root_facade, "_RSA_KEY_PATH", None)
+    if root_path is None:
+        return
+    next_path = pathlib.Path(root_path)
+    if next_path == _RSA_KEY_PATH:
+        return
+    _RSA_KEY_PATH = next_path
+    _service_cache = None
+    _provider.cache_clear()
+
+
 @lru_cache(maxsize=1)
 def _provider() -> FileKeyProvider:
     """Return a cached ``FileKeyProvider`` rooted at the key directory."""
@@ -50,6 +65,7 @@ def _provider() -> FileKeyProvider:
 
 async def _ensure_key() -> Tuple[str, bytes, bytes]:
     """Ensure an RSA signing key exists and return ``(kid, priv, pub)``."""
+    _sync_key_path_from_root_facade()
     kp = _provider()
     if _RSA_KEY_PATH.exists():
         kid = _RSA_KEY_PATH.read_text().strip()
@@ -177,6 +193,7 @@ ensure_rsa_jwt_key = _ensure_key
 
 async def rotate_rsa_jwt_key() -> str:
     """Create a new RSA signing key and update cached services."""
+    _sync_key_path_from_root_facade()
     kp = _provider()
     previous_kid = _RSA_KEY_PATH.read_text().strip() if _RSA_KEY_PATH.exists() else ""
     try:
@@ -218,6 +235,7 @@ async def rotate_rsa_jwt_key() -> str:
 
 
 def rotation_jwks_cache() -> list[dict[str, Any]]:
+    _sync_key_path_from_root_facade()
     return [dict(item) for item in _rotation_jwks_cache]
 
 
