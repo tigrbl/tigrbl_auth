@@ -59,7 +59,9 @@ def test_package_maturity_t2_builds_complete_package_python_matrix() -> None:
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == len(SUPPORTED_PYTHON_VERSIONS)
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/integration" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tigrbl-identity-testkit" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
 
 
 def test_package_maturity_t2_gate_passes_with_claim_test_links() -> None:

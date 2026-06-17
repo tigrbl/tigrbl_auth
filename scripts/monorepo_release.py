@@ -264,7 +264,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
             pytest_args = ""
             cross_cutting = package.name == TESTKIT_PACKAGE_NAME
             if cross_cutting:
-                package_test_paths.extend(["tests/integration", "tests/interop"])
+                package_test_paths.append("tests/interop")
                 pre_test_command = '$VENV_PYTHON -m pip install -e ".[test,sqlite,postgres,servers]"'
                 pytest_args = "--certification-lane\nall"
             cell = package.as_cell()
@@ -345,13 +345,24 @@ def _build_local_dependency_wheels(package: Package, wheelhouse: Path) -> list[P
     return wheels
 
 
+def _root_project_package() -> Package:
+    project = _load_pyproject(ROOT / "pyproject.toml").get("project", {})
+    name = str(project.get("name") or "tigrbl-auth")
+    version = str(project.get("version") or "0.0.0")
+    return Package(name=name, version=version, path=Path("."), import_root="tigrbl_auth")
+
+
+def _build_testkit_root_dependency_wheels(wheelhouse: Path) -> list[Path]:
+    return _build_local_dependency_wheels(_root_project_package(), wheelhouse)
+
+
 def _package_test_paths(package: Package) -> list[Path]:
     candidates = [
         ROOT / "tests" / "packages" / package.name,
         ROOT / "tests" / "packages" / package.import_root,
     ]
     if package.name == TESTKIT_PACKAGE_NAME:
-        candidates.extend([ROOT / "tests" / "integration", ROOT / "tests" / "interop"])
+        candidates.append(ROOT / "tests" / "interop")
     return [path for path in candidates if path.exists()]
 
 
@@ -431,12 +442,28 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
     package_test_paths = _package_test_paths(package)
     if package_test_paths:
         if package.name == TESTKIT_PACKAGE_NAME:
+            root_dependency_wheels = _build_testkit_root_dependency_wheels(wheelhouse)
+            for path in root_dependency_wheels:
+                if path not in local_dependency_wheels:
+                    local_dependency_wheels.append(path)
             subprocess.run(
                 [
                     str(python),
                     "-m",
                     "pip",
                     "install",
+                    *[str(path) for path in root_dependency_wheels],
+                ],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    str(python),
+                    "-m",
+                    "pip",
+                    "install",
+                    "--find-links",
+                    str(wheelhouse),
                     "-e",
                     ".[test,sqlite,postgres,servers]",
                 ],

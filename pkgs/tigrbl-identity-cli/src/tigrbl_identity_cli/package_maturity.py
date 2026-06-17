@@ -111,7 +111,7 @@ def build_package_python_matrix(
                 f"tests/packages/{package.import_root}",
             ]
             if cross_cutting:
-                test_paths.extend(["tests/integration", "tests/interop"])
+                test_paths.append("tests/interop")
             cells.append(
                 {
                     "name": package.name,

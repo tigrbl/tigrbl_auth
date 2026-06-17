@@ -5,7 +5,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from scripts.monorepo_release import _local_dependency_closure, discover_packages
+from scripts.monorepo_release import (
+    _local_dependency_closure,
+    _root_project_package,
+    discover_packages,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -60,7 +64,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "130"
+    assert payload["count"] == "126"
     assert {
         cell["python_version"]
         for cell in matrix
@@ -84,7 +88,8 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
-    assert all("tests/integration" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/packages/tigrbl-identity-testkit" in cell["package_test_paths"] for cell in testkit_cells)
+    assert all("tests/integration" not in cell["package_test_paths"] for cell in testkit_cells)
     assert all("tests/interop" in cell["package_test_paths"] for cell in testkit_cells)
     assert all(cell["pytest_args"] == "--certification-lane\nall" for cell in testkit_cells)
 
@@ -151,3 +156,13 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
     }
     assert "tigrbl-auth" in api_dependency_names
     assert "tigrbl-auth-protocol-oauth" in api_dependency_names
+
+
+def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None:
+    root_dependency_names = {
+        item.name for item in _local_dependency_closure(_root_project_package())
+    }
+
+    assert "tigrbl-authz-resource-server" in root_dependency_names
+    assert "tigrbl-auth-protocol-oauth" in root_dependency_names
+    assert "tigrbl-identity-server" in root_dependency_names
