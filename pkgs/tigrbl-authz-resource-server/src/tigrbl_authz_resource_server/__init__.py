@@ -24,11 +24,12 @@ from .metadata import (
     VerifierContractProfile,
     verifier_contract_from_metadata,
 )
-from .proof_validators import MtlsBindingValidator, ProofBindingValidator
+from .proof_validators import DpopValidator, MtlsBindingValidator, ProofBindingValidator
 
 __all__ = [
     "AccessTokenClaims",
     "DPoPBinding",
+    "DpopValidator",
     "FrameworkRequest",
     "IntrospectionClient",
     "IntrospectionTransport",

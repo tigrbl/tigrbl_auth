@@ -69,6 +69,41 @@ class MtlsCertificateCredential:
 
 
 @dataclass(frozen=True, slots=True)
+class DpopKeyCredential:
+    principal_id: str
+    jwk_thumbprint: str
+    id: str = field(default_factory=lambda: str(uuid4()))
+    public_jwk: Mapping[str, Any] = field(default_factory=dict)
+    status: CredentialStatus = CredentialStatus.ACTIVE
+    metadata: Mapping[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "id", _required_text(self.id, "credential id"))
+        object.__setattr__(self, "principal_id", _required_text(self.principal_id, "principal id"))
+        object.__setattr__(self, "jwk_thumbprint", _required_text(self.jwk_thumbprint, "JWK thumbprint"))
+        object.__setattr__(self, "status", CredentialStatus(self.status))
+        object.__setattr__(self, "public_jwk", dict(self.public_jwk))
+        object.__setattr__(self, "metadata", dict(self.metadata))
+
+    @property
+    def confirmation_claim(self) -> dict[str, str]:
+        return {"jkt": self.jwk_thumbprint}
+
+    def to_credential(self) -> Credential:
+        return Credential(
+            id=self.id,
+            principal_id=self.principal_id,
+            kind=CredentialKind.DPOP_KEY,
+            public_id=self.jwk_thumbprint,
+            status=self.status,
+            metadata={
+                **dict(self.metadata),
+                "public_jwk": dict(self.public_jwk),
+            },
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class ProofBinding:
     method: str
     confirmation_claim: Mapping[str, str]
@@ -95,8 +130,34 @@ class ProofBinding:
         return cls("mtls", credential.confirmation_claim, credential_id=credential.id)
 
     @classmethod
-    def for_dpop(cls, jwk_thumbprint: str, *, credential_id: str | None = None) -> "ProofBinding":
+    def for_dpop(
+        cls,
+        jwk_thumbprint: str | DpopKeyCredential,
+        *,
+        credential_id: str | None = None,
+    ) -> "ProofBinding":
+        if isinstance(jwk_thumbprint, DpopKeyCredential):
+            return cls(
+                "dpop",
+                jwk_thumbprint.confirmation_claim,
+                credential_id=credential_id or jwk_thumbprint.id,
+            )
         return cls("dpop", {"jkt": jwk_thumbprint}, credential_id=credential_id)
+
+
+def create_dpop_key_credential(
+    principal_id: str,
+    *,
+    jwk_thumbprint: str,
+    public_jwk: Mapping[str, Any] | None = None,
+    metadata: Mapping[str, Any] | None = None,
+) -> DpopKeyCredential:
+    return DpopKeyCredential(
+        principal_id=principal_id,
+        jwk_thumbprint=jwk_thumbprint,
+        public_jwk=dict(public_jwk or {}),
+        metadata=dict(metadata or {}),
+    )
 
 
 def create_mtls_certificate_credential(
@@ -123,7 +184,9 @@ def create_mtls_certificate_credential(
 
 
 __all__ = [
+    "DpopKeyCredential",
     "MtlsCertificateCredential",
     "ProofBinding",
+    "create_dpop_key_credential",
     "create_mtls_certificate_credential",
 ]

@@ -21,6 +21,18 @@ class MtlsBindingValidator:
 
 
 @dataclass(frozen=True, slots=True)
+class DpopValidator:
+    confirmation_member: str = "jkt"
+
+    def validate(self, claims: AccessTokenClaims, binding: DPoPBinding | None) -> bool:
+        expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
+        presented = str(getattr(binding, "jwk_thumbprint", "") or "").strip()
+        if binding is None or not expected or not compare_digest(presented, expected):
+            raise TokenValidationError("DPoP binding mismatch")
+        return True
+
+
+@dataclass(frozen=True, slots=True)
 class ProofBindingValidator:
     dpop_confirmation_member: str = "jkt"
     mtls_confirmation_member: str = "x5t#S256"
@@ -35,13 +47,10 @@ class ProofBindingValidator:
         require_mtls: bool = False,
     ) -> bool:
         if require_dpop:
-            expected = str(claims.cnf.get(self.dpop_confirmation_member) or "").strip()
-            presented = str(getattr(dpop, "jwk_thumbprint", "") or "").strip()
-            if dpop is None or not expected or not compare_digest(presented, expected):
-                raise TokenValidationError("DPoP binding mismatch")
+            DpopValidator(self.dpop_confirmation_member).validate(claims, dpop)
         if require_mtls:
             MtlsBindingValidator(self.mtls_confirmation_member).validate(claims, mtls)
         return True
 
 
-__all__ = ["MtlsBindingValidator", "ProofBindingValidator"]
+__all__ = ["DpopValidator", "MtlsBindingValidator", "ProofBindingValidator"]

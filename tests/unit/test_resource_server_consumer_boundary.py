@@ -15,6 +15,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
 from tigrbl_authz_resource_server import (  # noqa: E402
     AccessTokenClaims,
     DPoPBinding,
+    DpopValidator,
     FrameworkRequest,
     IntrospectionClient,
     JWKSCache,
@@ -113,6 +114,10 @@ def test_resource_server_t1_dpop_and_mtls_binding_validators() -> None:
 def test_resource_server_t1_public_proof_binding_validator_models() -> None:
     claims = _claims()
 
+    assert DpopValidator().validate(
+        claims,
+        DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
+    )
     assert MtlsBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="thumb-mtls")) is True
     assert (
         ProofBindingValidator().validate(
