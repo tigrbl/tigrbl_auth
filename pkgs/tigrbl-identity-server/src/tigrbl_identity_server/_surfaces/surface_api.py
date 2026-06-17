@@ -113,11 +113,13 @@ def build_surface_api(
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
+    selected_table_resources: tuple[type[Any], ...] = ()
     if deployment.flag_enabled("surface_admin_enabled"):
         if deployment.product_surface == "platform-admin-api":
             router.include_router(admin_realms_api)
             router.include_router(admin_tenants_api)
         admin_resources = _admin_table_resources(deployment)
+        selected_table_resources = admin_resources
         if admin_resources:
             if deployment.product_surface == "platform-admin-api":
                 for resource in admin_resources:
@@ -145,6 +147,7 @@ def build_surface_api(
                 for capability in entry["capabilities"]
             ):
                 router.include_router(entry["router"])
+    assert_table_initialization_scope(deployment, selected_table_resources)
     return router
 
 
@@ -235,12 +238,16 @@ def attach_runtime_surfaces(
 __all__ = [
     "ADMIN_ROUTER_BINDINGS",
     "TABLE_RESOURCES",
+    "TableInitializationScopeError",
     "PUBLIC_ROUTER_BINDINGS",
     "PUBLIC_PUBLISHER_BINDINGS",
+    "assert_table_initialization_scope",
     "attach_runtime_surfaces",
     "admin_resource_path_prefixes",
     "build_surface_api",
     "include_public_runtime_publishers",
+    "required_table_resource_names",
     "runtime_surface_binding_manifest",
     "surface_api",
+    "table_initialization_manifest",
 ]

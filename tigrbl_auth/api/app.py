@@ -93,13 +93,15 @@ def build_app(
     if state is not None:
         state.tigrbl_auth_deployment = resolved_deployment
         state.tigrbl_auth_settings = resolved_settings
-    attach_runtime_surfaces(
+    surface_router = attach_runtime_surfaces(
         app,
         resolved_settings,
         deployment=resolved_deployment,
         rpc_prefix="/rpc",
         diagnostics_prefix="/system",
     )
+    if state is not None:
+        state.tigrbl_auth_surface_router = surface_router
     _hide_disabled_control_plane_docs(
         app,
         resolved_deployment,
@@ -107,7 +109,7 @@ def build_app(
         openrpc_path="/openrpc.json",
         diagnostics_prefix="/system",
     )
-    register_lifecycle(app)
+    register_lifecycle(app, settings_obj=resolved_settings)
     return AdminGate(
         app,
         deployment=resolved_deployment,

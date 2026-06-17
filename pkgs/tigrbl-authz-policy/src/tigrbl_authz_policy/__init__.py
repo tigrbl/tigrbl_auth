@@ -158,6 +158,15 @@ from .replay import (
     compare_policy_version_decisions,
     replay_policy_determinism,
 )
+from .residency import (
+    ResidencyDecision,
+    ResidencyPolicyError,
+    ResidencyZone,
+    TenantResidencyRecord,
+    assert_residency_access,
+    evaluate_residency_access,
+    residency_policy_manifest,
+)
 
 __all__ = [
     "ABACAdministration",
@@ -235,6 +244,9 @@ __all__ = [
     "PUBLIC_CLIENT_FIELDS",
     "RBACAdministration",
     "ReferenceCatalog",
+    "ResidencyDecision",
+    "ResidencyPolicyError",
+    "ResidencyZone",
     "Role",
     "RolePolicy",
     "SDKPackage",
@@ -250,9 +262,11 @@ __all__ = [
     "ServiceIdentityRegistry",
     "SafetyPropertyResult",
     "TenantRealmIsolationReport",
+    "TenantResidencyRecord",
     "TrustEdge",
     "VerificationMethod",
     "assert_delegation_management_surface",
+    "assert_residency_access",
     "assert_client_mutation_authority",
     "admin_policy_boundary_integrity",
     "admin_policy_boundary_manifest",
@@ -270,6 +284,7 @@ __all__ = [
     "delegation_grant_uix_workflows",
     "diff_least_authority",
     "evaluate_liveness_convergence",
+    "evaluate_residency_access",
     "expose_client_record",
     "filter_visible_tenants",
     "has_admin_authority",
@@ -285,6 +300,7 @@ __all__ = [
     "phase5_governance_extension_boundary_manifest",
     "prove_delegation_attenuation",
     "replay_policy_determinism",
+    "residency_policy_manifest",
     "simulate_policy",
     "validate_authorization_referential_integrity",
     "validate_authority_graph_integrity",

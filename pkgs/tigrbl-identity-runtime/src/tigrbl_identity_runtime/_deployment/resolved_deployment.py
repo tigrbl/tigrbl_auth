@@ -27,6 +27,7 @@ class ResolvedDeployment:
     active_openrpc_methods: tuple[str, ...]
     product_surface: str | None = None
     allowed_admin_resources: tuple[str, ...] = ()
+    required_table_resources: tuple[str, ...] = ()
     allowed_admin_rest_groups: tuple[str, ...] = ()
     profile_source: dict[str, Any] = field(default_factory=dict)
 
@@ -95,6 +96,7 @@ class ResolvedDeployment:
             "active_openrpc_methods": list(self.active_openrpc_methods),
             "product_surface": self.product_surface,
             "allowed_admin_resources": list(self.allowed_admin_resources),
+            "required_table_resources": list(self.required_table_resources),
             "allowed_admin_rest_groups": list(self.allowed_admin_rest_groups),
             "profile_source": self.profile_source,
         }

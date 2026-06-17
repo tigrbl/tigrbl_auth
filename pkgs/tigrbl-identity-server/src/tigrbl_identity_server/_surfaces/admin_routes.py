@@ -92,16 +92,64 @@ ADMIN_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
 )
 
 
+class TableInitializationScopeError(ValueError):
+    """Raised when a product surface selects table resources outside its contract."""
+
+
 def _admin_table_resources(
     deployment: ResolvedDeployment | None = None,
 ) -> tuple[type[Any], ...]:
     if deployment is None or getattr(deployment, "product_surface", None) is None:
         return tuple(TABLE_RESOURCES)
+    required = getattr(deployment, "required_table_resources", ())
+    if required:
+        resources_by_name = {resource.__name__: resource for resource in TABLE_RESOURCES}
+        return tuple(
+            resources_by_name[name]
+            for name in tuple(str(item) for item in required)
+            if name in resources_by_name
+        )
     return tuple(
         resource
         for resource in TABLE_RESOURCES
         if deployment.admin_resource_enabled(resource.__name__)
     )
+
+
+def _resource_name(resource: type[Any] | str) -> str:
+    return resource if isinstance(resource, str) else resource.__name__
+
+
+def required_table_resource_names(
+    deployment: ResolvedDeployment | None = None,
+) -> tuple[str, ...]:
+    return tuple(resource.__name__ for resource in _admin_table_resources(deployment))
+
+
+def table_initialization_manifest(
+    deployment: ResolvedDeployment | None = None,
+) -> dict[str, Any]:
+    return {
+        "product_surface": getattr(deployment, "product_surface", None),
+        "required_table_resources": list(required_table_resource_names(deployment)),
+    }
+
+
+def assert_table_initialization_scope(
+    deployment: ResolvedDeployment,
+    selected_resources: tuple[type[Any] | str, ...],
+) -> None:
+    if deployment.product_surface is None:
+        return
+    expected = set(required_table_resource_names(deployment))
+    selected = set(_resource_name(resource) for resource in selected_resources)
+    unexpected = sorted(selected - expected)
+    missing = sorted(expected - selected)
+    if unexpected or missing:
+        raise TableInitializationScopeError(
+            "product surface table initialization mismatch: "
+            f"unexpected={unexpected}, missing={missing}"
+        )
 
 
 def _admin_resource_path(resource: type[Any], deployment: ResolvedDeployment | None = None) -> str:

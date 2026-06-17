@@ -218,6 +218,13 @@ def resolve_deployment(
         allowed_admin_resources=tuple(
             str(item) for item in (product_meta or {}).get("admin_resources", ())
         ),
+        required_table_resources=tuple(
+            str(item)
+            for item in (product_meta or {}).get(
+                "required_table_resources",
+                (product_meta or {}).get("admin_resources", ()),
+            )
+        ),
         allowed_admin_rest_groups=tuple(
             str(item) for item in (product_meta or {}).get("admin_rest_groups", ())
         ),

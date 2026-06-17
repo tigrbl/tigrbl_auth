@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1131"
+number: 1131
+slug: "product-api-required-table-initialization-boundary"
+title: "Product API required table initialization boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: Product API packages initialize only the table resources required by their product-surface contract. There is no OAuth-specific RFC for ORM table initialization; adjacent HTTP API behavior remains under RFC 9110 HTTP Semantics at https://www.rfc-editor.org/rfc/rfc9110.html. Consequences: deployment resolution exposes required_table_resources, surface construction asserts selected resources against that manifest, and app startup initializes the product-specific surface router instead of a module-level full-suite compatibility router."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define product API table-resource initialization as a runtime boundary."
+    at: "2026-06-17T10:49:54Z"
+references: []
+body: |-
+  Decision: Product API packages initialize only the table resources required by their product-surface contract. There is no OAuth-specific RFC for ORM table initialization; adjacent HTTP API behavior remains under RFC 9110 HTTP Semantics at https://www.rfc-editor.org/rfc/rfc9110.html. Consequences: deployment resolution exposes required_table_resources, surface construction asserts selected resources against that manifest, and app startup initializes the product-specific surface router instead of a module-level full-suite compatibility router.
