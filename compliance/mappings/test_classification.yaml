@@ -113,6 +113,7 @@ categories:
   - tests/unit/test_bulk_schema_fields.py
   - tests/unit/test_certification_gap_inventory.py
   - tests/unit/test_certification_lane_evidence.py
+  - tests/unit/test_certification_evidence_negative_proofs.py
   - tests/unit/test_claim_boundary_rebaseline.py
   - tests/unit/test_claim_registry_alignment.py
   - tests/unit/test_clean_room_install_substrate.py

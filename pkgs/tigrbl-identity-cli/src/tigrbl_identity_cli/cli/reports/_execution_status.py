@@ -179,25 +179,96 @@ def _security_sensitive_claim(claim: Mapping[str, Any]) -> bool:
 
 def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mapping[str, list[str]]) -> list[str]:
     claim_id = str(claim.get("id", "")).lower()
-    negatives = list(partitioned_tests.get("security-negative", []))
+    claim_text = " ".join(
+        [
+            claim_id,
+            str(claim.get("title", "")).lower(),
+            str(claim.get("description", "")).lower(),
+            " ".join(str(item).lower() for item in claim.get("targets", []) or []),
+        ]
+    ).replace("-", "_")
+    negatives = list(
+        dict.fromkeys(
+            list(partitioned_tests.get("security-negative", []))
+            + list(partitioned_tests.get("conformance", []))
+            + list(partitioned_tests.get("unit", []))
+            + list(partitioned_tests.get("integration", []))
+            + list(partitioned_tests.get("interop", []))
+            + list(partitioned_tests.get("peer", []))
+        )
+    )
     selected: list[str] = []
 
     def _match(*patterns: str) -> None:
         for path in negatives:
-            lower = path.lower()
+            lower = path.lower().replace("-", "_")
             if any(pattern in lower for pattern in patterns) and path not in selected:
                 selected.append(path)
 
-    if "sender-constrained" in claim_id or "dpop" in claim_id or "mtls" in claim_id:
-        _match("sender_constraint", "capability_certification_attack_paths")
-    if "par" in claim_id:
-        _match("capability_certification_attack_paths", "capability_hardening_runtime_enforcement")
-    if "issuer" in claim_id or "mix" in claim_id:
-        _match("capability_certification_attack_paths", "capability_hardening_cluster_b")
-    if "security-bcp" in claim_id or "rfc 9700" in str(claim.get("targets", [])).lower():
-        _match("capability_hardening_runtime_enforcement", "capability_certification_attack_paths")
+    if any(token in claim_text for token in ("sender_constrained", "dpop", "mtls", "rfc 8705", "rfc 9449")):
+        _match(
+            "sender_constraint",
+            "sender_constrained",
+            "dpop",
+            "mtls",
+            "resource_server_consumer_boundary",
+            "certification_attack_paths",
+            "hardening_cluster_c",
+        )
+    if "par" in claim_text or "rfc 9126" in claim_text:
+        _match(
+            "certification_attack_paths",
+            "hardening_runtime_enforcement",
+            "rfc9126",
+            "pushed_authorization",
+            "hardening_cluster_b",
+        )
+    if "jar" in claim_text or "rfc 9101" in claim_text:
+        _match("certification_attack_paths", "rfc9101", "hardening_cluster_b")
+    if "rar" in claim_text or "rfc 9396" in claim_text:
+        _match("certification_attack_paths", "rfc9396", "hardening_cluster_b")
+    if any(token in claim_text for token in ("issuer", "mix", "rfc 9207", "openid_configuration")):
+        _match(
+            "certification_attack_paths",
+            "issuer_confusion",
+            "rfc9207",
+            "realm_isolation",
+            "tenant_isolation",
+            "runtime_issuer",
+            "hardening_cluster_b",
+        )
+    if any(token in claim_text for token in ("bearer", "rfc6750", "rfc 6750", "enable_rfc6750", "route:token")):
+        _match(
+            "rfc6750_bearer_token",
+            "resource_server_consumer_boundary",
+            "security_deps",
+            "hardening_cluster_c",
+        )
+    if "password" in claim_text:
+        _match("certification_attack_paths", "hardening_runtime_enforcement", "backends", "crypto")
+    if "token_exchange" in claim_text or "rfc 8693" in claim_text:
+        _match("token_exchange", "certification_attack_paths", "resource_server_consumer_boundary")
+    if any(token in claim_text for token in ("security_bcp", "rfc 9700", "hardening", "fapi2_security", "security")):
+        _match(
+            "certification_attack_paths",
+            "hardening_runtime_enforcement",
+            "rfc9700",
+            "fapi_runtime_profile",
+            "profile_discovery_runtime",
+            "hardening_cluster_c",
+        )
+    if claim_id.startswith("profile:"):
+        _match("peer_counterpart_catalog", "peer_matrix_artifacts", "tier4_promotion_fail_closed")
     if not selected and _security_sensitive_claim(claim):
-        _match("capability_certification_attack_paths", "capability_hardening_runtime_enforcement", "capability_sender_constraint_replay")
+        _match(
+            "certification_attack_paths",
+            "hardening_runtime_enforcement",
+            "issuer_confusion",
+            "rfc6750_bearer_token",
+            "hardening_cluster_c",
+            "peer_counterpart_catalog",
+            "tier4_promotion_fail_closed",
+        )
     return selected
 
 
