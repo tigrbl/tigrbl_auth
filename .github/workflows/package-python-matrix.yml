@@ -99,12 +99,12 @@ jobs:
         shell: bash
         run: python -m pip install --upgrade pip uv tomli
       - name: Build target package wheel
-        uses: cobycloud/actions/actions/python-package-build@main
-        with:
-          python-version: ${{ matrix.package.python_version }}
-          project-path: ${{ matrix.package.path }}
-          out-dir: dist/${{ matrix.package.cell_id }}
-          upload-artifact: "false"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m uv build \
+            --project "${{ matrix.package.path }}" \
+            --out-dir "dist/${{ matrix.package.cell_id }}"
       - name: Run isolated package tests
         shell: bash
         run: |
