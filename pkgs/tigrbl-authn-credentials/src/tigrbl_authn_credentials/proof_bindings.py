@@ -20,6 +20,12 @@ def _required_text(value: str, field_name: str) -> str:
     return cleaned
 
 
+def _clean_mapping(value: Mapping[str, Any], field_name: str) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise ValueError(f"{field_name} must be a mapping")
+    return dict(value)
+
+
 @dataclass(frozen=True, slots=True)
 class MtlsCertificateCredential:
     principal_id: str
@@ -82,8 +88,8 @@ class DpopKeyCredential:
         object.__setattr__(self, "principal_id", _required_text(self.principal_id, "principal id"))
         object.__setattr__(self, "jwk_thumbprint", _required_text(self.jwk_thumbprint, "JWK thumbprint"))
         object.__setattr__(self, "status", CredentialStatus(self.status))
-        object.__setattr__(self, "public_jwk", dict(self.public_jwk))
-        object.__setattr__(self, "metadata", dict(self.metadata))
+        object.__setattr__(self, "public_jwk", _clean_mapping(self.public_jwk, "public_jwk"))
+        object.__setattr__(self, "metadata", _clean_mapping(self.metadata, "metadata"))
 
     @property
     def confirmation_claim(self) -> dict[str, str]:

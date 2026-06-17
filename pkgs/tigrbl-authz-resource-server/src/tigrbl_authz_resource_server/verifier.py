@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
+from hmac import compare_digest
 from typing import Any, Callable, Iterable, Mapping, Protocol
 
 
@@ -25,6 +26,13 @@ def _utc_timestamp() -> int:
 
 def _normalize(values: Iterable[str]) -> tuple[str, ...]:
     return tuple(sorted({value.strip() for value in values if value and value.strip()}))
+
+
+def _required_text(value: str, field_name: str) -> str:
+    cleaned = str(value).strip()
+    if not cleaned:
+        raise ValueError(f"{field_name} is required")
+    return cleaned
 
 
 @dataclass(frozen=True, slots=True)
@@ -78,6 +86,16 @@ class DPoPBinding:
     htm: str
     htu: str
     jti: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "jwk_thumbprint",
+            _required_text(self.jwk_thumbprint, "DPoP JWK thumbprint"),
+        )
+        object.__setattr__(self, "htm", _required_text(self.htm, "DPoP htm").upper())
+        object.__setattr__(self, "htu", _required_text(self.htu, "DPoP htu"))
+        object.__setattr__(self, "jti", _required_text(self.jti, "DPoP jti"))
 
 
 @dataclass(frozen=True, slots=True)
@@ -215,12 +233,14 @@ class ResourceServerVerifier:
         mtls: MTLSBinding | None,
     ) -> None:
         if requirement.require_dpop:
-            expected = claims.cnf.get("jkt")
-            if dpop is None or not expected or dpop.jwk_thumbprint != expected:
+            expected = str(claims.cnf.get("jkt") or "").strip()
+            presented = str(getattr(dpop, "jwk_thumbprint", "") or "").strip()
+            if dpop is None or not expected or not compare_digest(presented, expected):
                 raise TokenValidationError("DPoP binding mismatch")
         if requirement.require_mtls:
-            expected = claims.cnf.get("x5t#S256")
-            if mtls is None or not expected or mtls.certificate_thumbprint != expected:
+            expected = str(claims.cnf.get("x5t#S256") or "").strip()
+            presented = str(getattr(mtls, "certificate_thumbprint", "") or "").strip()
+            if mtls is None or not expected or not compare_digest(presented, expected):
                 raise TokenValidationError("mTLS binding mismatch")
 
 

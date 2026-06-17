@@ -137,10 +137,29 @@ def test_resource_server_t1_public_proof_binding_validator_models() -> None:
 def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
     claims = _claims()
 
+    assert DpopValidator().validate(
+        claims,
+        DPoPBinding(
+            jwk_thumbprint=" thumb-dpop ",
+            htm="get",
+            htu="https://api.example.test/jobs",
+            jti="jti-1",
+        ),
+    )
     assert MtlsBindingValidator().validate(
         claims,
         MTLSBinding(certificate_thumbprint=" thumb-mtls "),
     )
+    with pytest.raises(TokenValidationError, match="DPoP binding mismatch"):
+        DpopValidator().validate(
+            _claims(cnf={"jkt": "  "}),
+            DPoPBinding(
+                jwk_thumbprint="thumb-dpop",
+                htm="GET",
+                htu="https://api.example.test/jobs",
+                jti="jti-1",
+            ),
+        )
     with pytest.raises(TokenValidationError, match="mTLS binding mismatch"):
         MtlsBindingValidator().validate(
             _claims(cnf={"x5t#S256": "  "}),
@@ -151,6 +170,13 @@ def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
             claims,
             dpop=DPoPBinding(jwk_thumbprint="wrong", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
             require_dpop=True,
+        )
+    with pytest.raises(ValueError, match="DPoP htm is required"):
+        DPoPBinding(
+            jwk_thumbprint="thumb-dpop",
+            htm="  ",
+            htu="https://api.example.test/jobs",
+            jti="jti-1",
         )
 
 
