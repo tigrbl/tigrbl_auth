@@ -5,7 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from scripts.monorepo_release import discover_packages
+from scripts.monorepo_release import _local_dependency_closure, discover_packages
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -118,3 +118,27 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
             "cross_cutting": "false",
         }
     ]
+
+
+def test_monorepo_release_resolves_local_dependency_closure() -> None:
+    packages = {item.name: item for item in discover_packages()}
+
+    dependency_names = {
+        item.name
+        for item in _local_dependency_closure(packages["tigrbl-identity-oauth"])
+    }
+
+    assert dependency_names == {"tigrbl-auth-protocol-oauth"}
+
+    facade_dependency_names = {
+        item.name for item in _local_dependency_closure(packages["tigrbl-auth"])
+    }
+    assert "tigrbl-auth-protocol-oauth" in facade_dependency_names
+    assert "tigrbl-identity-storage" in facade_dependency_names
+
+    api_dependency_names = {
+        item.name
+        for item in _local_dependency_closure(packages["tigrbl-auth-api-developer"])
+    }
+    assert "tigrbl-auth" in api_dependency_names
+    assert "tigrbl-auth-protocol-oauth" in api_dependency_names

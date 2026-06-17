@@ -95,6 +95,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.package.python_version }}
+      - name: Install package test toolchain
+        shell: bash
+        run: python -m pip install --upgrade pip uv
       - name: Build target package wheel
         uses: cobycloud/actions/actions/python-package-build@main
         with:
@@ -103,14 +106,9 @@ jobs:
           out-dir: dist/${{ matrix.package.cell_id }}
           upload-artifact: "false"
       - name: Run isolated package tests
-        uses: cobycloud/actions/actions/python-isolated-package-test@main
-        with:
-          python-version: ${{ matrix.package.python_version }}
-          package-name: ${{ matrix.package.name }}
-          package-version: ${{ matrix.package.version }}
-          import-root: ${{ matrix.package.import_root }}
-          wheel-dir: dist/${{ matrix.package.cell_id }}
-          workspace-source-globs: ${{ matrix.package.workspace_source_globs }}
-          package-test-paths: ${{ matrix.package.package_test_paths }}
-          pre-test-command: ${{ matrix.package.pre_test_command }}
-          pytest-args: ${{ matrix.package.pytest_args }}
+        shell: bash
+        run: |
+          python scripts/monorepo_release.py isolated-test \
+            --package "${{ matrix.package.name }}" \
+            --python-version "${{ matrix.package.python_version }}" \
+            --dist-dir "dist/${{ matrix.package.cell_id }}"

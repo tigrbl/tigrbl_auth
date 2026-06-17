@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tomllib
@@ -12,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TAG_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>\d+\.\d+\.\d+(?:\.dev\d+)?(?:[-+][A-Za-z0-9_.-]+)?)$")
+REQ_NAME_RE = re.compile(r"^\s*([A-Za-z0-9_.-]+)")
 SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
 TESTKIT_PACKAGE_NAME = "tigrbl-identity-testkit"
 
@@ -133,6 +135,46 @@ def _run_capture(args: list[str], cwd: Path | None = None) -> str:
     return result.stdout.strip()
 
 
+def _normalize_dist_name(name: str) -> str:
+    return re.sub(r"[-_.]+", "-", name).lower()
+
+
+def _dependency_name(requirement: str) -> str | None:
+    match = REQ_NAME_RE.match(requirement)
+    if match is None:
+        return None
+    return _normalize_dist_name(match.group(1))
+
+
+def _project_dependencies(package: Package) -> list[str]:
+    data = _load_pyproject(ROOT / package.path / "pyproject.toml")
+    dependencies = data.get("project", {}).get("dependencies", [])
+    return [str(item) for item in dependencies]
+
+
+def _local_dependency_closure(package: Package) -> list[Package]:
+    packages = discover_packages()
+    by_name = {_normalize_dist_name(item.name): item for item in packages}
+    root_name = _normalize_dist_name(package.name)
+    pending = [package]
+    seen: set[str] = set()
+    closure: list[Package] = []
+
+    while pending:
+        current = pending.pop()
+        for requirement in _project_dependencies(current):
+            dep_name = _dependency_name(requirement)
+            if dep_name is None or dep_name == root_name or dep_name in seen:
+                continue
+            dependency = by_name.get(dep_name)
+            if dependency is None:
+                continue
+            seen.add(dep_name)
+            closure.append(dependency)
+            pending.append(dependency)
+    return closure
+
+
 def cmd_create_tags(args: argparse.Namespace) -> int:
     packages = discover_packages() if args.package == "all" else [_find_package(args.package)]
     created: list[str] = []
@@ -233,19 +275,33 @@ def _venv_site_packages(python: Path) -> Path:
     return Path(output)
 
 
-def _install_workspace_source_paths(python: Path, package: Package) -> None:
-    site_packages = _venv_site_packages(python)
-    site_packages.mkdir(parents=True, exist_ok=True)
-    source_paths = [
-        (ROOT / sibling.path / "src").resolve()
-        for sibling in discover_packages()
-        if sibling.name != package.name
-    ]
-    pth = site_packages / "tigrbl_auth_workspace_sources.pth"
-    pth.write_text(
-        "\n".join(str(path) for path in source_paths if path.exists()) + "\n",
-        encoding="utf-8",
-    )
+def _built_local_wheel_path(package: Package, wheelhouse: Path) -> Path:
+    wheel_prefix = _normalize_dist_name(package.name).replace("-", "_")
+    candidates = sorted(wheelhouse.glob(f"{wheel_prefix}-{package.version}-*.whl"))
+    if not candidates:
+        raise SystemExit(
+            f"built wheel for {package.name}=={package.version} not found in {wheelhouse}"
+        )
+    return candidates[-1]
+
+
+def _build_local_dependency_wheels(package: Package, wheelhouse: Path) -> list[Path]:
+    dependencies = _local_dependency_closure(package)
+    wheelhouse.mkdir(parents=True, exist_ok=True)
+    wheels: list[Path] = []
+    for dependency in dependencies:
+        _run(
+            [
+                "uv",
+                "build",
+                "--project",
+                str(ROOT / dependency.path),
+                "--out-dir",
+                str(wheelhouse),
+            ]
+        )
+        wheels.append(_built_local_wheel_path(dependency, wheelhouse))
+    return wheels
 
 
 def _package_test_paths(package: Package) -> list[Path]:
@@ -253,6 +309,8 @@ def _package_test_paths(package: Package) -> list[Path]:
         ROOT / "tests" / "packages" / package.name,
         ROOT / "tests" / "packages" / package.import_root,
     ]
+    if package.name == TESTKIT_PACKAGE_NAME:
+        candidates.extend([ROOT / "tests" / "integration", ROOT / "tests" / "interop"])
     return [path for path in candidates if path.exists()]
 
 
@@ -270,11 +328,24 @@ def cmd_isolated_test(args: argparse.Namespace) -> int:
     work_dir = (ROOT / args.work_dir / package.name / _python_tag(args.python_version)).resolve()
     work_dir.mkdir(parents=True, exist_ok=True)
     venv = work_dir / ".venv"
+    if venv.exists():
+        shutil.rmtree(venv)
     subprocess.run([sys.executable, "-m", "venv", str(venv)], check=True)
     python = _venv_python(venv)
 
-    _install_workspace_source_paths(python, package)
-    subprocess.run([str(python), "-m", "pip", "install", "--no-deps", str(wheel)], check=True)
+    wheelhouse = work_dir / "local-wheelhouse"
+    if wheelhouse.exists():
+        shutil.rmtree(wheelhouse)
+    local_dependency_wheels = _build_local_dependency_wheels(package, wheelhouse)
+    install_command = [
+        str(python),
+        "-m",
+        "pip",
+        "install",
+        *[str(path) for path in local_dependency_wheels],
+        str(wheel),
+    ]
+    subprocess.run(install_command, check=True)
     subprocess.run([str(python), "-m", "pip", "check"], check=True)
 
     check_code = """
@@ -295,23 +366,50 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
 """
     output = _run_capture(
         [str(python), "-c", check_code, package.name, package.import_root, package.version],
-        cwd=ROOT,
+        cwd=work_dir,
     )
     print(output)
 
     package_test_paths = _package_test_paths(package)
     if package_test_paths:
+        if package.name == TESTKIT_PACKAGE_NAME:
+            subprocess.run(
+                [
+                    str(python),
+                    "-m",
+                    "pip",
+                    "install",
+                    "-e",
+                    ".[test,sqlite,postgres,servers]",
+                ],
+                cwd=ROOT,
+                check=True,
+            )
         subprocess.run([str(python), "-m", "pip", "install", "pytest"], check=True)
         env = os.environ.copy()
         env.update(
             {
+                "PACKAGE_UNDER_TEST": package.name,
+                "IMPORT_ROOT_UNDER_TEST": package.import_root,
+                "PACKAGE_VERSION_UNDER_TEST": package.version,
                 "TIGRBL_AUTH_PACKAGE_UNDER_TEST": package.name,
                 "TIGRBL_AUTH_IMPORT_ROOT_UNDER_TEST": package.import_root,
                 "TIGRBL_AUTH_PACKAGE_VERSION_UNDER_TEST": package.version,
+                "VENV_PYTHON": str(python),
+                "VENV_BIN": str(python.parent),
             }
         )
+        pytest_args = []
+        if package.name == TESTKIT_PACKAGE_NAME:
+            pytest_args.extend(["--certification-lane", "all"])
         subprocess.run(
-            [str(python), "-m", "pytest", *[str(path) for path in package_test_paths]],
+            [
+                str(python),
+                "-m",
+                "pytest",
+                *pytest_args,
+                *[str(path) for path in package_test_paths],
+            ],
             cwd=ROOT,
             env=env,
             check=True,

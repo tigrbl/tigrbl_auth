@@ -52,6 +52,9 @@ EXECUTABLE_FACADE_MODULES: dict[str, str] = {}
 INSTALLED_FACADE_MODULES = {
     key: FACADE_MODULES[key]
     for key in (
+        "tigrbl_auth.api.surfaces",
+        "tigrbl_auth.config.deployment",
+        "tigrbl_auth.config.surfaces",
         "tigrbl_auth.framework",
         "tigrbl_auth.services._operator_store",
         "tigrbl_auth.services.governance_extension_plane",
