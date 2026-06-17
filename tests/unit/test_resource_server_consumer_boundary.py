@@ -129,6 +129,27 @@ def test_resource_server_t1_public_proof_binding_validator_models() -> None:
 
 
 @pytest.mark.unit
+def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
+    claims = _claims()
+
+    assert MtlsBindingValidator().validate(
+        claims,
+        MTLSBinding(certificate_thumbprint=" thumb-mtls "),
+    )
+    with pytest.raises(TokenValidationError, match="mTLS binding mismatch"):
+        MtlsBindingValidator().validate(
+            _claims(cnf={"x5t#S256": "  "}),
+            MTLSBinding(certificate_thumbprint="thumb-mtls"),
+        )
+    with pytest.raises(TokenValidationError, match="DPoP binding mismatch"):
+        ProofBindingValidator().validate(
+            claims,
+            dpop=DPoPBinding(jwk_thumbprint="wrong", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
+            require_dpop=True,
+        )
+
+
+@pytest.mark.unit
 def test_resource_server_t2_rejects_expired_wrong_audience_missing_scope_and_inactive_introspection() -> None:
     verifier = ResourceServerVerifier(
         now=lambda: NOW,

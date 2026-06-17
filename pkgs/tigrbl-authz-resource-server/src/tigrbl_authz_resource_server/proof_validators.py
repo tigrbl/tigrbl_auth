@@ -3,6 +3,7 @@ from __future__ import annotations
 """Proof-binding validators for protected resource servers."""
 
 from dataclasses import dataclass
+from hmac import compare_digest
 
 from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding, TokenValidationError
 
@@ -12,8 +13,9 @@ class MtlsBindingValidator:
     confirmation_member: str = "x5t#S256"
 
     def validate(self, claims: AccessTokenClaims, binding: MTLSBinding | None) -> bool:
-        expected = claims.cnf.get(self.confirmation_member)
-        if binding is None or not expected or binding.certificate_thumbprint != expected:
+        expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
+        presented = str(getattr(binding, "certificate_thumbprint", "") or "").strip()
+        if binding is None or not expected or not compare_digest(presented, expected):
             raise TokenValidationError("mTLS binding mismatch")
         return True
 
@@ -33,8 +35,9 @@ class ProofBindingValidator:
         require_mtls: bool = False,
     ) -> bool:
         if require_dpop:
-            expected = claims.cnf.get(self.dpop_confirmation_member)
-            if dpop is None or not expected or dpop.jwk_thumbprint != expected:
+            expected = str(claims.cnf.get(self.dpop_confirmation_member) or "").strip()
+            presented = str(getattr(dpop, "jwk_thumbprint", "") or "").strip()
+            if dpop is None or not expected or not compare_digest(presented, expected):
                 raise TokenValidationError("DPoP binding mismatch")
         if require_mtls:
             MtlsBindingValidator(self.mtls_confirmation_member).validate(claims, mtls)

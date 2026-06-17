@@ -13,6 +13,13 @@ def _clean_tuple(values: tuple[str, ...] | list[str] | None) -> tuple[str, ...]:
     return tuple(dict.fromkeys(str(value).strip() for value in values or () if str(value).strip()))
 
 
+def _required_text(value: str, field_name: str) -> str:
+    cleaned = str(value).strip()
+    if not cleaned:
+        raise ValueError(f"{field_name} is required")
+    return cleaned
+
+
 @dataclass(frozen=True, slots=True)
 class MtlsCertificateCredential:
     principal_id: str
@@ -27,13 +34,11 @@ class MtlsCertificateCredential:
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        if not self.id:
-            raise ValueError("credential id is required")
-        if not self.principal_id:
-            raise ValueError("principal id is required")
-        if not self.certificate_thumbprint:
-            raise ValueError("certificate thumbprint is required")
-        object.__setattr__(self, "certificate_thumbprint", str(self.certificate_thumbprint).strip())
+        object.__setattr__(self, "id", _required_text(self.id, "credential id"))
+        object.__setattr__(self, "principal_id", _required_text(self.principal_id, "principal id"))
+        object.__setattr__(self, "certificate_thumbprint", _required_text(self.certificate_thumbprint, "certificate thumbprint"))
+        if self.subject_dn is not None:
+            object.__setattr__(self, "subject_dn", str(self.subject_dn).strip() or None)
         object.__setattr__(self, "status", CredentialStatus(self.status))
         object.__setattr__(self, "san_dns", _clean_tuple(self.san_dns))
         object.__setattr__(self, "san_uri", _clean_tuple(self.san_uri))
@@ -73,7 +78,11 @@ class ProofBinding:
         method = str(self.method).strip().lower()
         if method not in {"dpop", "mtls"}:
             raise ValueError("proof binding method must be dpop or mtls")
-        claim = {str(key): str(value) for key, value in self.confirmation_claim.items() if value}
+        claim = {
+            str(key).strip(): str(value).strip()
+            for key, value in self.confirmation_claim.items()
+            if str(key).strip() and str(value).strip()
+        }
         if method == "dpop" and not claim.get("jkt"):
             raise ValueError("DPoP proof binding requires cnf.jkt")
         if method == "mtls" and not claim.get("x5t#S256"):
