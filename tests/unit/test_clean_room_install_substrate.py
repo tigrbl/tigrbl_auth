@@ -28,6 +28,32 @@ def test_install_substrate_report_static_manifest_passes_and_tracks_profile_coun
     assert summary["release_gates_extra_env_present_count"] == 2
 
 
+def test_install_substrate_warns_when_sibling_supported_pythons_are_absent(monkeypatch) -> None:
+    current_version = f"{sys.version_info.major}.{sys.version_info.minor}"
+    if current_version not in install_substrate.SUPPORTED_PYTHON_VERSIONS:
+        return
+
+    monkeypatch.setattr(
+        install_substrate,
+        "_detect_supported_pythons",
+        lambda: [
+            {
+                "version": version,
+                "available": version == current_version,
+                "path": sys.executable if version == current_version else None,
+                "source": "current-interpreter" if version == current_version else None,
+            }
+            for version in install_substrate.SUPPORTED_PYTHON_VERSIONS
+        ],
+    )
+
+    payload = build_install_substrate_report(ROOT, execute_import_probes=False)
+
+    assert payload["passed"] is True
+    assert not any("full supported interpreter matrix" in item for item in payload["failures"])
+    assert any("does not provide supported interpreter binaries" in item for item in payload["warnings"])
+
+
 def test_dependency_artifact_paths_include_install_substrate_verifier() -> None:
     assert "scripts/verify_clean_room_install_substrate.py" in _dependency_artifact_paths(ROOT)
 

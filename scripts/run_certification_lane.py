@@ -18,6 +18,18 @@ def _default_report_path(lane: str) -> Path:
     return ROOT / "dist" / "test-reports" / f"{stem}.json"
 
 
+def _prepare_lane_artifacts(lane: str) -> None:
+    if lane != "interop":
+        return
+    from scripts.materialize_tier4_peer_evidence import (
+        load_counterparts,
+        load_peer_profiles,
+        materialize_external_handoff_templates,
+    )
+
+    materialize_external_handoff_templates(load_peer_profiles(), load_counterparts())
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a certification lane with a preserved pytest JSON report and validated-run manifest.")
     parser.add_argument("--lane", required=True)
@@ -31,6 +43,8 @@ def main() -> int:
     pytest_args = list(args.pytest_args)
     if pytest_args[:1] == ["--"]:
         pytest_args = pytest_args[1:]
+
+    _prepare_lane_artifacts(args.lane)
 
     install_env = dict(os.environ)
     install_env.setdefault("TIGRBL_AUTH_INSTALL_PROFILE", f"test-{args.lane}")

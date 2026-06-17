@@ -204,11 +204,11 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     ).read_text(encoding="utf-8")
 
     assert "persist_token: bool = True" in coder_source
-    assert 'runtime["register_token_async"]' in coder_source
-    assert 'runtime["register_token"](' not in coder_source
+    assert "register_token" not in coder_source
     assert 'runtime["is_revoked_async"]' in coder_source
     assert 'runtime["is_revoked"](' not in coder_source
-    assert '"register_token_async": register_token_async' in runtime_source
+    assert "standards.introspection" not in runtime_source
+    assert "register_token" not in runtime_source
     assert '"is_revoked_async": is_revoked_async' in runtime_source
     assert "persist_token=False" in credentials_persistence_source
     assert "persist_token=False" in server_handler_source
@@ -253,7 +253,8 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
     assert inspect.iscoroutinefunction(split_module.register_token_async)
     assert inspect.iscoroutinefunction(split_module.introspect_token_async)
     assert inspect.iscoroutinefunction(split_module.reset_tokens_async)
-    assert "from tigrbl_auth_protocol_oauth.standards.introspection import register_token, register_token_async" in runtime_source
+    assert "standards.introspection" not in runtime_source
+    assert "register_token" not in runtime_source
 
 
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:

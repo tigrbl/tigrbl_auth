@@ -8,8 +8,6 @@ import inspect
 from typing import Any
 from uuid import UUID, uuid4
 
-from sqlalchemy.exc import NoResultFound
-
 from tigrbl_identity_runtime.http_standards.cookies import (
     extract_session_cookie,
     hash_cookie_secret,
@@ -124,8 +122,10 @@ async def read_handler_record(model: Any, db: Any, ident: Any) -> Any:
             pass
     try:
         return await model.handlers.read.core({"path_params": {"id": ident}, "db": db})
-    except NoResultFound:
-        return None
+    except Exception as exc:
+        if exc.__class__.__name__ == "NoResultFound":
+            return None
+        raise
 
 
 async def create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:

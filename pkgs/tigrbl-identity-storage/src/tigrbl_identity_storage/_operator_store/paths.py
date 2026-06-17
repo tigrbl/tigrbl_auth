@@ -136,8 +136,16 @@ def _state_home() -> Path:
 
 
 def operator_state_root(repo_root: Path) -> Path:
+    state_home = _state_home()
+    try:
+        resolved_repo = repo_root.resolve()
+        resolved_home = state_home.resolve()
+        if resolved_home == resolved_repo or resolved_home.is_relative_to(resolved_repo):
+            state_home = resolved_repo.parent / "operator-plane-state"
+    except OSError:
+        pass
     namespace = f"{repo_root.name or 'repo'}-{_hash_repo_root(repo_root)}"
-    path = _state_home() / namespace
+    path = state_home / namespace
     path.mkdir(parents=True, exist_ok=True)
     (path / "logs").mkdir(parents=True, exist_ok=True)
     (path / "snapshots").mkdir(parents=True, exist_ok=True)

@@ -45,6 +45,8 @@ def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> N
         assert "app" in compat.STABLE_ENTRYPOINTS
         assert compat.STABLE_ENTRYPOINTS["app"].package == "tigrbl-identity-server"
         assert compat.extras_for("consumer") == ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp")
+        assert facade.security is importlib.import_module("tigrbl_auth.security")
+        assert facade.standards is importlib.import_module("tigrbl_auth.standards")
 
 
 @pytest.mark.unit
@@ -63,6 +65,18 @@ def test_facade_t1_legacy_imports_are_stable_and_lazy() -> None:
         assert "main" in cli_module.__all__
         assert repr(app_module.app).startswith("<LazyCompatEntrypoint")
         assert any("compatibility facade" in str(item.message) for item in captured)
+
+
+@pytest.mark.unit
+def test_facade_cli_proxy_prefers_workspace_split_cli() -> None:
+    with isolated_facade_import():
+        install_substrate = importlib.import_module("tigrbl_auth.cli.install_substrate")
+
+        assert install_substrate.SUPPORTED_PYTHON_VERSIONS == ("3.10", "3.11", "3.12")
+        loaded = sys.modules["tigrbl_auth.cli.install_substrate"]
+        assert Path(loaded.__file__).resolve().is_relative_to(
+            ROOT / "pkgs" / "tigrbl-identity-cli" / "src"
+        )
 
 
 @pytest.mark.unit

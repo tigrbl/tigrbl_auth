@@ -60,9 +60,19 @@ _install_tomllib_alias()
 _install_http_status_aliases()
 
 _MODULE_EXPORTS = {
+    "api": "tigrbl_auth.api",
+    "cli": "tigrbl_auth.cli",
     "compat": "tigrbl_auth.compat",
+    "config": "tigrbl_auth.config",
     "framework": "tigrbl_auth.framework",
+    "ops": "tigrbl_auth.ops",
+    "profiles": "tigrbl_auth.profiles",
+    "runtime": "tigrbl_auth.runtime",
     "runtime_cfg": "tigrbl_auth.runtime_cfg",
+    "security": "tigrbl_auth.security",
+    "services": "tigrbl_auth.services",
+    "standards": "tigrbl_auth.standards",
+    "uix": "tigrbl_auth.uix",
     "rfc7591": "tigrbl_auth.rfc.rfc7591",
     "rfc7592": "tigrbl_auth.rfc.rfc7592",
     "rfc7662": "tigrbl_auth.rfc.rfc7662",

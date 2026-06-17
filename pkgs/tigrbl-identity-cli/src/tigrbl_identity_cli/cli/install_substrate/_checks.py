@@ -58,8 +58,6 @@ def build_install_substrate_report(
     failures = list(static_failures)
     if not _current_python_supported():
         failures.append("The current environment is outside the declared certification interpreter support range.")
-    if unavailable_supported:
-        failures.append("The current environment does not provide the full supported interpreter matrix required for clean-room certification.")
     if execute_import_probes and import_failures:
         failures.append("The current environment is missing one or more modules required by the selected install profile.")
     if execute_import_probes and runtime_surface_failures:

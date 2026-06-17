@@ -21,6 +21,19 @@ def test_introspect_active_token(monkeypatch):
     assert result["sub"] == "alice"
 
 
+def test_introspect_stale_authorization_snapshot_is_inactive(monkeypatch):
+    monkeypatch.setattr(settings, "enable_rfc7662", True)
+    rfc7662.register_token(
+        "stale-authz",
+        {"sub": "alice", "authz_version": 1, "current_authz_version": 2},
+    )
+
+    result = rfc7662.introspect_token("stale-authz")
+
+    assert result["active"] is False
+    assert result["inactive_reason"] == "authorization_snapshot_stale"
+
+
 def test_introspect_inactive_token(monkeypatch):
     """RFC 7662 mandates inactive tokens return only active=False."""
     monkeypatch.setattr(settings, "enable_rfc7662", True)

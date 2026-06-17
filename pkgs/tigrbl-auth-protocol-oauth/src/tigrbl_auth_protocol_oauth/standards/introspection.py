@@ -15,6 +15,10 @@ from typing import Any, Dict, Final
 from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_auth_protocol_oauth.standards._introspection_activity import (
+    apply_introspection_activity_constraints as _apply_introspection_activity_constraints,
+    header as _header,
+)
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_identity_contracts.rest import IntrospectOut
@@ -163,13 +167,6 @@ def _protected_resource_verifier_contract(request: Any):
     from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import protected_resource_verifier_contract_from_request
 
     return protected_resource_verifier_contract_from_request(request)
-
-
-def _header(request: Any, name: str) -> str | None:
-    headers = getattr(request, "headers", {}) or {}
-    if hasattr(headers, "get"):
-        return headers.get(name) or headers.get(name.lower())
-    return None
 
 
 def _introspection_endpoint_audiences(request: Any) -> set[str]:
@@ -333,8 +330,8 @@ def introspect_token(token: str) -> Dict[str, Any]:
         raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
     payload = _introspect_token(token)
     if payload.get("active") is False and token in _FALLBACK_TOKENS:
-        return {"active": True, **_FALLBACK_TOKENS[token]}
-    return payload
+        payload = {"active": True, **_FALLBACK_TOKENS[token]}
+    return _apply_introspection_activity_constraints(payload)
 
 
 async def introspect_token_async(token: str) -> Dict[str, Any]:
@@ -342,8 +339,8 @@ async def introspect_token_async(token: str) -> Dict[str, Any]:
         raise RuntimeError(f"RFC 7662 support is disabled: {RFC7662_SPEC_URL}")
     payload = await _introspect_token_async(token)
     if payload.get("active") is False and token in _FALLBACK_TOKENS:
-        return {"active": True, **_FALLBACK_TOKENS[token]}
-    return payload
+        payload = {"active": True, **_FALLBACK_TOKENS[token]}
+    return _apply_introspection_activity_constraints(payload)
 
 
 def reset_tokens() -> None:

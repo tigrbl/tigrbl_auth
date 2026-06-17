@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import asyncio
 import base64
 import json
 from datetime import timedelta
-from functools import lru_cache
-from threading import Thread
 from typing import Any, Tuple
+
+from tigrbl_identity_storage._persistence.sync_compat import _run as _run_coro
 
 from ..key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 
@@ -35,7 +34,6 @@ def _load_runtime() -> dict[str, Any]:
         from tigrbl_identity_runtime.settings import settings
         from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
         from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async
-        from tigrbl_auth_protocol_oauth.standards.introspection import register_token, register_token_async
     except Exception as exc:  # pragma: no cover
         raise RuntimeError("runtime token-service dependencies are unavailable") from exc
     return {
@@ -52,26 +50,11 @@ def _load_runtime() -> dict[str, Any]:
         "validate_certificate_binding": validate_certificate_binding,
         "is_revoked": is_revoked,
         "is_revoked_async": is_revoked_async,
-        "register_token": register_token,
-        "register_token_async": register_token_async,
     }
 
 
 def _run(coro):
-    try:
-        asyncio.get_running_loop()
-    except RuntimeError:
-        return asyncio.run(coro)
-    result = None
-
-    def runner():
-        nonlocal result
-        result = asyncio.run(coro)
-
-    thread = Thread(target=runner)
-    thread.start()
-    thread.join()
-    return result
+    return _run_coro(coro)
 
 
 def _svc() -> Tuple[Any, str]:

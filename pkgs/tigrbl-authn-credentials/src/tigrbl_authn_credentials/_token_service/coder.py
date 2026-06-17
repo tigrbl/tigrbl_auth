@@ -88,17 +88,6 @@ class JWTCoder:
             issuer=issuer,
             audience=audience,
         )
-        if persist_token and getattr(settings, "enable_rfc7662", False):
-            claims = dict(payload)
-            claims.setdefault("sub", sub)
-            claims.setdefault("kind", typ)
-            if tid is not None:
-                claims.setdefault("tid", tid)
-            if issuer is not None:
-                claims.setdefault("iss", issuer)
-            if audience is not None:
-                claims.setdefault("aud", list(audience) if isinstance(audience, (list, tuple, set)) else audience)
-            await runtime["register_token_async"](token, claims)
         return token
 
     def sign(self, **kwargs: Any) -> str:
