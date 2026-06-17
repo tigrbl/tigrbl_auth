@@ -8,6 +8,53 @@ from typing import Any, Mapping, Sequence
 from .base import CertificationError
 
 
+RSA_SIGNATURE_PREFIXES = ("RS", "PS")
+ECDSA_SIGNATURE_ALGS = frozenset({"ES256", "ES384", "ES512", "ES256K"})
+EDDSA_SIGNATURE_ALGS = frozenset({"EdDSA"})
+PQC_SIGNATURE_ALGS = frozenset[str]()
+
+
+@dataclass(frozen=True)
+class AlgorithmPolicy:
+    allowed_algs: frozenset[str] = EDDSA_SIGNATURE_ALGS | ECDSA_SIGNATURE_ALGS
+    disallowed_algs: frozenset[str] = frozenset({"none", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512"})
+    warning_algs: frozenset[str] = ECDSA_SIGNATURE_ALGS
+    pqc_required: bool = False
+
+    @classmethod
+    def certification_default(cls) -> "AlgorithmPolicy":
+        return cls()
+
+
+def algorithm_policy_report(algorithms: Sequence[str], policy: AlgorithmPolicy | None = None) -> dict[str, Any]:
+    active = policy or AlgorithmPolicy.certification_default()
+    normalized = tuple(str(alg) for alg in algorithms)
+    refused = tuple(alg for alg in normalized if alg in active.disallowed_algs or alg.startswith(RSA_SIGNATURE_PREFIXES))
+    warnings = tuple(alg for alg in normalized if alg in active.warning_algs)
+    pqc_available = tuple(alg for alg in normalized if alg in PQC_SIGNATURE_ALGS)
+    return {
+        "allowed": [alg for alg in normalized if alg in active.allowed_algs and alg not in refused],
+        "refused": list(refused),
+        "warnings": [f"{alg} is classical ECDSA and not post-quantum resistant" for alg in warnings],
+        "pqc": {
+            "ready": bool(pqc_available) or not active.pqc_required,
+            "registered_algs": list(pqc_available),
+            "required": active.pqc_required,
+        },
+    }
+
+
+def assert_algorithm_policy(algorithm: str, policy: AlgorithmPolicy | None = None) -> None:
+    active = policy or AlgorithmPolicy.certification_default()
+    alg = str(algorithm)
+    if alg in active.disallowed_algs or alg.startswith(RSA_SIGNATURE_PREFIXES):
+        raise CertificationError("RSA signature algorithms are disallowed by certification policy")
+    if active.pqc_required and alg not in PQC_SIGNATURE_ALGS:
+        raise CertificationError("post-quantum signature algorithm required by certification policy")
+    if alg not in active.allowed_algs:
+        raise CertificationError("unsupported signature algorithm")
+
+
 def validate_jwk_set(
     jwks: Mapping[str, Any],
     *,

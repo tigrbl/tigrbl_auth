@@ -9,9 +9,12 @@ from .authorization import (
 )
 from .base import CertificationError, deterministic_issuer
 from .crypto import (
+    AlgorithmPolicy,
     KeyBoundary,
     MachineIdentity,
     VerifierPolicy,
+    algorithm_policy_report,
+    assert_algorithm_policy,
     assert_crypto_boundaries,
     assert_machine_identity_governed,
     assert_verifier_accepts,
@@ -38,6 +41,7 @@ __all__ = [
     'AuthorizationSnapshot',
     'AuthorizationState',
     'CapabilityRecord',
+    'AlgorithmPolicy',
     'CertificationError',
     'DelegationStep',
     'KeyBoundary',
@@ -46,6 +50,8 @@ __all__ = [
     'RuntimeQualification',
     'TenantState',
     'VerifierPolicy',
+    'algorithm_policy_report',
+    'assert_algorithm_policy',
     'assert_authorization_fresh',
     'assert_crypto_boundaries',
     'assert_delegation_provenance',
