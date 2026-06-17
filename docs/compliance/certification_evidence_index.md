@@ -9,7 +9,7 @@
 - security_sensitive_claim_count: `40`
 - partition_count: `7`
 - target_profile_bundle_count: `199`
-- clean_checkout: `{'git_available': True, 'clean': False, 'changed_path_count': 13, 'changed_paths': ['.github/workflows/package-python-matrix.yml', 'docs/compliance/certification_evidence_index.json', 'docs/compliance/certification_evidence_index.md', 'docs/compliance/current_state_report.json', 'docs/compliance/current_state_report.md', 'docs/compliance/feature_completeness_report.json', 'docs/compliance/feature_completeness_report.md', 'docs/compliance/install_substrate_report.json', 'docs/compliance/install_substrate_report.md', 'docs/compliance/runtime_profile_report.json', 'docs/compliance/runtime_profile_report.md', 'scripts/monorepo_release.py', 'tests/unit/test_monorepo_release.py']}`
+- clean_checkout: `{'git_available': True, 'clean': False, 'changed_path_count': 12, 'changed_paths': ['docs/compliance/certification_evidence_index.json', 'docs/compliance/certification_evidence_index.md', 'docs/compliance/current_state_report.json', 'docs/compliance/current_state_report.md', 'docs/compliance/feature_completeness_report.json', 'docs/compliance/feature_completeness_report.md', 'docs/compliance/install_substrate_report.json', 'docs/compliance/install_substrate_report.md', 'docs/compliance/runtime_profile_report.json', 'docs/compliance/runtime_profile_report.md', 'pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/lifecycle.py', 'pkgs/tigrbl-identity-core/src/tigrbl_identity_core/clock.py']}`
 
 ## Failures
 

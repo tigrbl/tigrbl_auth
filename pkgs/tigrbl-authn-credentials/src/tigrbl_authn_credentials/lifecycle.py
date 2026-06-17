@@ -6,10 +6,12 @@ import hashlib
 import hmac
 import secrets
 from dataclasses import dataclass, field, replace
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Mapping
 from uuid import uuid4
+
+UTC = timezone.utc
 
 
 class CredentialKind(str, Enum):
