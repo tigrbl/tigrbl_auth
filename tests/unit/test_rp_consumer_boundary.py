@@ -18,6 +18,7 @@ from tigrbl_auth_protocol_rp import (  # noqa: E402
     BrowserStoragePolicy,
     DiscoveryClient,
     JwksCache,
+    PkceVerifier,
     RPConfiguration,
     RPError,
     RPSession,
@@ -54,9 +55,20 @@ def test_rp_t0_public_surfaces_and_vectors_are_importable() -> None:
     values = parse_qs(urlparse(url).query)
 
     assert shared_vector_manifest()["callback_required_params"] == "code,state"
+    assert isinstance(PkceVerifier(login.code_verifier), PkceVerifier)
     assert values["client_id"] == ["client-a"]
     assert values["code_challenge_method"] == ["S256"]
     assert pkce_s256_challenge(login.code_verifier) == values["code_challenge"][0]
+
+
+@pytest.mark.unit
+def test_rp_t1_pkce_verifier_model_renders_authorization_params() -> None:
+    verifier = PkceVerifier.generate()
+    params = verifier.authorization_params()
+
+    assert 43 <= len(verifier.value) <= 128
+    assert params["code_challenge"] == pkce_s256_challenge(verifier.value)
+    assert params["code_challenge_method"] == "S256"
 
 
 @pytest.mark.unit

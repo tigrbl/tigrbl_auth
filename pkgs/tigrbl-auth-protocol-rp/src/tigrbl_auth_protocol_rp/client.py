@@ -1,14 +1,12 @@
 from __future__ import annotations
 
-import base64
-import hashlib
-import hmac
-import json
 import secrets
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Callable, Mapping
 from urllib.parse import parse_qs, urlencode, urlparse
+
+from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 
 
 class RPError(RuntimeError):
@@ -19,20 +17,6 @@ class BrowserStoragePolicy(str, Enum):
     MEMORY_ONLY = "memory_only"
     SESSION_STORAGE = "session_storage"
     LOCAL_STORAGE = "local_storage"
-
-
-def _b64url(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
-
-
-def make_pkce_verifier() -> str:
-    return secrets.token_urlsafe(48)
-
-
-def pkce_s256_challenge(verifier: str) -> str:
-    if not verifier:
-        raise ValueError("PKCE verifier is required")
-    return _b64url(hashlib.sha256(verifier.encode("ascii")).digest())
 
 
 @dataclass(frozen=True, slots=True)
@@ -81,10 +65,11 @@ class StateNonceStore:
         self._consumed: set[str] = set()
 
     def create(self, *, redirect_uri: str, scope: tuple[str, ...]) -> LoginRequest:
+        pkce = PkceVerifier.generate()
         request = LoginRequest(
             state=secrets.token_urlsafe(24),
             nonce=secrets.token_urlsafe(24),
-            code_verifier=make_pkce_verifier(),
+            code_verifier=pkce.value,
             redirect_uri=redirect_uri,
             scope=tuple(scope),
         )
@@ -200,6 +185,7 @@ class RelyingParty:
 
     def build_authorization_url(self, authorization_endpoint: str) -> tuple[str, LoginRequest]:
         login = self.state_store.create(redirect_uri=self.config.redirect_uri, scope=self.config.scopes)
+        pkce = PkceVerifier(login.code_verifier)
         params = {
             "response_type": "code",
             "client_id": self.config.client_id,
@@ -207,8 +193,7 @@ class RelyingParty:
             "scope": " ".join(login.scope),
             "state": login.state,
             "nonce": login.nonce,
-            "code_challenge": pkce_s256_challenge(login.code_verifier),
-            "code_challenge_method": "S256",
+            **pkce.authorization_params(),
         }
         return f"{authorization_endpoint}?{urlencode(params)}", login
 
@@ -338,6 +323,7 @@ __all__ = [
     "DiscoveryClient",
     "JwksCache",
     "LoginRequest",
+    "PkceVerifier",
     "RPConfiguration",
     "RPError",
     "RPSession",

@@ -1,0 +1,21 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1128"
+number: 1128
+slug: "rfc7636-rp-pkce-s256-boundary"
+title: "RFC 7636 RP PKCE S256 boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Decision: RP packages own consumer-side PKCE verifier generation, S256 code_challenge derivation, state/nonce association, and authorization URL construction. Target: RFC 7636 Proof Key for Code Exchange at https://www.rfc-editor.org/rfc/rfc7636.html plus OAuth security guidance that requires PKCE for authorization-code clients. Consequences: concrete RP PKCE verifier and login URL features require executable T0/T1/T2 proof before implemented status; provider token exchange remains OAuth/server ownership."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define RP-owned PKCE verifier and authorization URL construction for concrete consumer-package rows."
+    at: "2026-06-17T10:23:53Z"
+references: []
+body: |-
+  Decision: RP packages own consumer-side PKCE verifier generation, S256 code_challenge derivation, state/nonce association, and authorization URL construction. Target: RFC 7636 Proof Key for Code Exchange at https://www.rfc-editor.org/rfc/rfc7636.html plus OAuth security guidance that requires PKCE for authorization-code clients. Consequences: concrete RP PKCE verifier and login URL features require executable T0/T1/T2 proof before implemented status; provider token exchange remains OAuth/server ownership.
