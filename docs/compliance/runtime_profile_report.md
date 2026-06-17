@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260617T115815Z`
+- Generated at: `20260617T121926Z`
 - Deployment profile: `baseline`
 - Report mode: `validated-runs`
 - Validated artifact source: `dist/validated-runs/collected-artifact-downloads.json`
@@ -8,7 +8,7 @@
 - Ready profiles: `0`
 - Missing profiles: `0`
 - Invalid profiles: `3`
-- Application hash invariant: `True`
+- Application hash invariant: `False`
 - Pyproject requires-python: `>=3.10,<3.15`
 - Supported Python versions: `3.10, 3.11, 3.12, 3.13, 3.14`
 - Placeholder-supported runners: `0`

@@ -270,6 +270,7 @@ partitions:
   - tests/unit/test_tier4_checkpoint.py
   - tests/unit/test_tigrbl_auth_facade_ownership.py
   - tests/unit/test_tigrbl_bcp_direct_db_boundary.py
+  - tests/unit/test_tox_pip_install.py
   - tests/unit/test_trust_graph_integrity_guards.py
   - tests/unit/test_truth_chain_hashing.py
   - tests/unit/test_truthfulness_alignment.py

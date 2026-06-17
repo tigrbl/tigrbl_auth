@@ -253,12 +253,23 @@ def _probe_modules(expected_modules: list[dict[str, Any]]) -> list[dict[str, Any
     return payload
 
 
+def _runtime_surface_source_roots(repo_root: Path) -> list[Path]:
+    roots = [repo_root]
+    roots.extend(sorted((repo_root / "pkgs").glob("*/src")))
+    roots.extend(sorted((repo_root / "pkgs" / "deprecated").glob("*/src")))
+    return roots
+
+
 def _runtime_surface_probe(repo_root: Path) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
+    source_roots = _runtime_surface_source_roots(repo_root)
     for module in RUNTIME_IMPORT_SURFACES:
-        module_path = repo_root.joinpath(*module.split(".")).with_suffix(".py")
-        package_path = repo_root.joinpath(*module.split("."), "__init__.py")
-        passed = module_path.exists() or package_path.exists()
+        module_parts = module.split(".")
+        passed = any(
+            source_root.joinpath(*module_parts).with_suffix(".py").exists()
+            or source_root.joinpath(*module_parts, "__init__.py").exists()
+            for source_root in source_roots
+        )
         results.append(
             {
                 "module": module,

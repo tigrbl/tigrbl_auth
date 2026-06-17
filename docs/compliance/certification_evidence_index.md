@@ -9,7 +9,7 @@
 - security_sensitive_claim_count: `40`
 - partition_count: `7`
 - target_profile_bundle_count: `199`
-- clean_checkout: `{'git_available': True, 'clean': False, 'changed_path_count': 10, 'changed_paths': ['docs/compliance/certification_evidence_index.json', 'docs/compliance/certification_evidence_index.md', 'docs/compliance/contract_sync_report.json', 'docs/compliance/contract_sync_report.md', 'docs/compliance/feature_completeness_report.json', 'docs/compliance/feature_completeness_report.md', 'docs/compliance/install_substrate_report.json', 'docs/compliance/install_substrate_report.md', 'docs/compliance/runtime_profile_report.json', 'docs/compliance/runtime_profile_report.md']}`
+- clean_checkout: `{'git_available': True, 'clean': False, 'changed_path_count': 18, 'changed_paths': ['compliance/evidence/certification_test_partitions.json', 'compliance/evidence/certification_test_partitions.yaml', 'docs/compliance/certification_evidence_index.json', 'docs/compliance/certification_evidence_index.md', 'docs/compliance/current_state_report.json', 'docs/compliance/current_state_report.md', 'docs/compliance/feature_completeness_report.json', 'docs/compliance/feature_completeness_report.md', 'docs/compliance/install_substrate_report.json', 'docs/compliance/install_substrate_report.md', 'docs/compliance/runtime_profile_report.json', 'docs/compliance/runtime_profile_report.md', 'docs/compliance/truth_chain.json', 'pkgs/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/install_substrate/_models.py', 'tests/unit/test_clean_room_install_substrate.py', 'tox.ini', 'scripts/tox_pip_install.py', 'tests/unit/test_tox_pip_install.py']}`
 
 ## Failures
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260617T115808Z",
+  "generated_at": "20260617T121920Z",
   "passed": false,
   "summary": {
     "static_manifest_passed": true,
@@ -49,12 +49,11 @@
     "current_profile_import_probe_failed_count": 0,
     "current_profile_import_probe_passed": true,
     "runtime_surface_probe_count": 4,
-    "runtime_surface_probe_failed_count": 1,
-    "runtime_surface_probe_passed": false
+    "runtime_surface_probe_failed_count": 0,
+    "runtime_surface_probe_passed": true
   },
   "failures": [
-    "The current environment does not provide the full supported interpreter matrix required for clean-room certification.",
-    "One or more runtime import surfaces could not be resolved from the source tree."
+    "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
   ],
   "warnings": [
     "The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.",
@@ -1199,8 +1198,8 @@
     "runtime_surface_results": [
       {
         "module": "tigrbl_identity_server.api.app",
-        "passed": false,
-        "message": "module source missing"
+        "passed": true,
+        "message": "import surface resolvable"
       },
       {
         "module": "tigrbl_auth.app",

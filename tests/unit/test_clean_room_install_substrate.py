@@ -72,3 +72,14 @@ def test_detect_supported_pythons_counts_current_certification_interpreter(monke
     assert current_detection["available"] is True
     assert current_detection["path"] == sys.executable
     assert current_detection["source"] == "current-interpreter"
+
+
+def test_runtime_surface_probe_resolves_split_package_source_roots() -> None:
+    results = install_substrate._runtime_surface_probe(ROOT)
+
+    assert results
+    assert all(item["passed"] for item in results)
+    assert {item["module"] for item in results} >= {
+        "tigrbl_identity_server.api.app",
+        "tigrbl_auth.app",
+    }
