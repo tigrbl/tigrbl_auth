@@ -141,6 +141,14 @@ def test_identity_server_declares_tigrbl_framework_dependency() -> None:
     assert "tigrbl==0.4.0" in set(metadata["project"].get("dependencies", []))
 
 
+def test_oauth_protocol_declares_dpop_signing_dependency() -> None:
+    metadata = tomllib.loads(
+        (_package_path("tigrbl-auth-protocol-oauth") / "pyproject.toml").read_text(encoding="utf-8")
+    )
+
+    assert "swarmauri_signing_dpop==0.1.1" in set(metadata["project"].get("dependencies", []))
+
+
 def test_credentials_token_service_exports_async_runtime_helper() -> None:
     _install_package_src_paths()
 

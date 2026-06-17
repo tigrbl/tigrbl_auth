@@ -2685,6 +2685,12 @@ dev = [
 name = "tigrbl-auth-protocol-oauth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
+dependencies = [
+    { name = "swarmauri-signing-dpop" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "swarmauri-signing-dpop", specifier = "==0.1.1" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-oidc"

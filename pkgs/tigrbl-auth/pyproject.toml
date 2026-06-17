@@ -34,6 +34,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "swarmauri_standard==0.9.2",
+    "swarmauri_crypto_paramiko==0.4.0.dev5",
     "tigrbl-identity-admin==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
