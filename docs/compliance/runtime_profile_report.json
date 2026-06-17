@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260617T113839Z",
+  "generated_at": "20260617T115815Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
