@@ -18,6 +18,7 @@ from tigrbl_auth_protocol_rp import (  # noqa: E402
     BrowserStoragePolicy,
     DiscoveryClient,
     JwksCache,
+    LoginRequest,
     PkceVerifier,
     RPConfiguration,
     RPError,
@@ -171,6 +172,32 @@ def test_rp_t2_callback_replay_public_client_and_validation_failures() -> None:
         assert_browser_no_client_secret(_rp(secret="not-browser-safe").config)
     with pytest.raises(RPError, match="missing required endpoints"):
         DiscoveryClient(lambda _url: {"issuer": "https://issuer.example.test"}).discover("https://issuer.example.test")
+
+
+@pytest.mark.unit
+def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed() -> None:
+    class BadStateStore:
+        def create(self, *, redirect_uri: str, scope: tuple[str, ...]) -> LoginRequest:
+            return LoginRequest(
+                state="state-1",
+                nonce="nonce-1",
+                code_verifier="short",
+                redirect_uri=redirect_uri,
+                scope=scope,
+            )
+
+    with pytest.raises(ValueError, match="invalid PKCE code_verifier"):
+        PkceVerifier("short")
+    with pytest.raises(ValueError, match="invalid PKCE code_verifier"):
+        PkceVerifier("a" * 129)
+    with pytest.raises(ValueError, match="invalid PKCE code_verifier"):
+        PkceVerifier(("a" * 42) + "!")
+    with pytest.raises(ValueError, match="between 43 and 128"):
+        PkceVerifier.generate(42)
+    with pytest.raises(ValueError, match="invalid PKCE code_verifier"):
+        RelyingParty(_rp().config, state_store=BadStateStore()).build_authorization_url(
+            "https://issuer.example.test/authorize"
+        )
 
 
 @pytest.mark.unit
