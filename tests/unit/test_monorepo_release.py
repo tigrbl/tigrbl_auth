@@ -5,8 +5,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from scripts.monorepo_release import (
     _local_dependency_closure,
+    _materialize_testkit_interop_artifacts,
     _root_project_package,
     discover_packages,
 )
@@ -166,3 +169,24 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-authz-resource-server" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names
+
+
+def test_monorepo_release_materializes_testkit_interop_templates_with_isolated_python(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[list[str], Path | None, bool]] = []
+
+    def fake_run(args: list[str], *, cwd: Path | None = None, check: bool = False) -> None:
+        calls.append((args, cwd, check))
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    _materialize_testkit_interop_artifacts(Path(".venv/bin/python"))
+
+    assert len(calls) == 1
+    args, cwd, check = calls[0]
+    assert Path(args[0]) == Path(".venv/bin/python")
+    assert args[1] == "-c"
+    assert "materialize_external_handoff_templates" in args[2]
+    assert cwd == ROOT
+    assert check is True

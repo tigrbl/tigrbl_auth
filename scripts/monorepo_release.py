@@ -356,6 +356,19 @@ def _build_testkit_root_dependency_wheels(wheelhouse: Path) -> list[Path]:
     return _build_local_dependency_wheels(_root_project_package(), wheelhouse)
 
 
+def _materialize_testkit_interop_artifacts(python: Path) -> None:
+    code = """
+from scripts.materialize_tier4_peer_evidence import (
+    load_counterparts,
+    load_peer_profiles,
+    materialize_external_handoff_templates,
+)
+
+materialize_external_handoff_templates(load_peer_profiles(), load_counterparts())
+"""
+    subprocess.run([str(python), "-c", code], cwd=ROOT, check=True)
+
+
 def _package_test_paths(package: Package) -> list[Path]:
     candidates = [
         ROOT / "tests" / "packages" / package.name,
@@ -470,6 +483,7 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
                 cwd=ROOT,
                 check=True,
             )
+            _materialize_testkit_interop_artifacts(python)
         _install_package_test_harness(python)
         env = os.environ.copy()
         env.update(
