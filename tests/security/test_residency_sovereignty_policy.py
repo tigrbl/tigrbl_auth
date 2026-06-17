@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import pytest
+
 from tigrbl_authz_policy import (
+    ResidencyPolicyError,
     ResidencyZone,
     TenantResidencyRecord,
     assert_residency_access,
@@ -53,3 +56,38 @@ def test_residency_sovereignty_t1_allows_declared_region_and_reports_manifest() 
             "sovereign_controls": ["eu-only-processor"],
         }
     ]
+
+
+def test_residency_sovereignty_t2_fails_closed_for_boundary_violations() -> None:
+    record = _record()
+
+    with pytest.raises(ResidencyPolicyError, match="transfer-restricted"):
+        assert_residency_access(
+            record,
+            tenant_id="tenant-eu",
+            realm="realm-a",
+            processing_region="us-east",
+        )
+
+    denied = evaluate_residency_access(
+        record,
+        tenant_id="tenant-other",
+        realm="realm-a",
+        processing_region="eu-central",
+    )
+    assert denied.allowed is False
+    assert "tenant mismatch" in denied.reasons
+
+    missing_region_policy = TenantResidencyRecord(
+        tenant_id="tenant-eu",
+        realm="realm-a",
+        residency_zone=record.residency_zone,
+        allowed_processing_regions=(),
+    )
+    with pytest.raises(ResidencyPolicyError, match="no allowed processing regions"):
+        assert_residency_access(
+            missing_region_policy,
+            tenant_id="tenant-eu",
+            realm="realm-a",
+            processing_region="eu-central",
+        )
