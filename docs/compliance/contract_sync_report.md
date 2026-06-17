@@ -1,6 +1,13 @@
 # Contract Sync Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- Active OpenAPI contract is missing or out of sync
+- baseline: committed OpenAPI contract drifts from generated contract
+- production: committed OpenAPI contract drifts from generated contract
+- hardening: committed OpenAPI contract drifts from generated contract
 
 ## Summary
 

@@ -454,6 +454,14 @@ rpc:target.list:
 - OpenRPC 1.4.x admin/control-plane contract
 rpc:target.show:
 - OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.keys.create:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.keys.delete:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.keys.seed:
+- OpenRPC 1.4.x admin/control-plane contract
+rpc:tenant.keys.update:
+- OpenRPC 1.4.x admin/control-plane contract
 rpc:tenant.list:
 - OpenRPC 1.4.x admin/control-plane contract
 rpc:tenant.show:
@@ -703,6 +711,30 @@ slice:rar:
 - RFC 9396
 slice:token-exchange:
 - RFC 8693
+route:account-authorized-apps:
+- OIDC Core 1.0
+- RFC 6749
+route:account-authorized-apps-client-id:
+- OIDC Core 1.0
+- RFC 6749
+route:account-consents:
+- OIDC Core 1.0
+- RFC 6749
+route:account-consents-consent-id:
+- OIDC Core 1.0
+- RFC 6749
+route:account-password-change:
+- RFC 6749
+route:account-profile:
+- OIDC Core 1.0
+- RFC 6265
+- RFC 6750
+route:account-sessions:
+- OIDC Session Management
+- RFC 6265
+route:account-sessions-session-id:
+- OIDC Session Management
+- RFC 6265
 route:authorize:
 - OIDC Core 1.0
 - OIDC Session Management
@@ -736,6 +768,13 @@ route:par:
 - RFC 9101
 - RFC 9126
 - RFC 9396
+- RFC 9700
+route:realms-realm-slug-well-known-jwks-json:
+- RFC 7517
+- RFC 8615
+route:realms-realm-slug-well-known-openid-configuration:
+- OIDC Discovery 1.0
+- RFC 8615
 - RFC 9700
 route:register:
 - OIDC RP-Initiated Logout

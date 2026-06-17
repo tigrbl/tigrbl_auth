@@ -3,11 +3,11 @@ package: tigrbl_auth
 generated_from:
 - compliance/targets/*.yaml
 - tigrbl_auth.config.surfaces
-- tigrbl_auth.api.rpc.registry
-- tigrbl_auth.cli.metadata
-- tigrbl_auth.config.deployment
+- tigrbl_identity_server.rpc.registry
+- tigrbl_identity_cli.cli.metadata
+- tigrbl_identity_runtime.deployment
 summary:
-  feature_count: 390
+  feature_count: 404
   tracked_core_target_count: 48
   tracked_extension_target_count: 5
   settings_backed_flag_count: 68
@@ -16,7 +16,7 @@ features:
   kind: cli-flag
   title: --access-log
   description: Enable access logging for the selected runtime profile.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -25,7 +25,7 @@ features:
   kind: cli-flag
   title: --activate
   description: Mark a generated or imported key active immediately.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -34,7 +34,7 @@ features:
   kind: cli-flag
   title: --admin
   description: Enable the admin/control plane.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -43,7 +43,7 @@ features:
   kind: cli-flag
   title: --alg
   description: JWA/JOSE algorithm identifier.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -52,7 +52,7 @@ features:
   kind: cli-flag
   title: --artifact
   description: Release artifact subset.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -61,7 +61,7 @@ features:
   kind: cli-flag
   title: --baseline-file
   description: Optional explicit baseline artifact for diff operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -70,7 +70,7 @@ features:
   kind: cli-flag
   title: --bundle-dir
   description: Explicit bundle output directory.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -80,7 +80,7 @@ features:
   title: --check
   description: Validate the selected runner profile and application factory without
     launching runtime.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -89,7 +89,7 @@ features:
   kind: cli-flag
   title: --checksum
   description: Expected checksum or checksum algorithm for import/export validation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -98,7 +98,7 @@ features:
   kind: cli-flag
   title: --color
   description: Color policy for terminal output.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -107,7 +107,7 @@ features:
   kind: cli-flag
   title: --cookies
   description: Enable cookie/session helpers in serve plans.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -116,7 +116,7 @@ features:
   kind: cli-flag
   title: --curve
   description: Curve for EC/OKP keys.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -125,7 +125,7 @@ features:
   kind: cli-flag
   title: --db-safe-start
   description: Require a safe database start posture.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -134,7 +134,7 @@ features:
   kind: cli-flag
   title: --diagnostics
   description: Enable diagnostics surfaces.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -144,7 +144,7 @@ features:
   title: --dry-run
   description: Resolve and emit the runtime plan without applying or launching state
     changes.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -153,7 +153,7 @@ features:
   kind: cli-flag
   title: --enable-mtls
   description: Enable mTLS slice for the serve plan.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -162,7 +162,7 @@ features:
   kind: cli-flag
   title: --env-file
   description: Optional environment file loaded before resolution.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -171,7 +171,7 @@ features:
   kind: cli-flag
   title: --environment
   description: Deployment environment label.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -180,7 +180,7 @@ features:
   kind: cli-flag
   title: --execution-mode
   description: Peer execution mode.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -189,7 +189,7 @@ features:
   kind: cli-flag
   title: --extension
   description: Extension boundary slice. May be supplied multiple times.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -198,7 +198,7 @@ features:
   kind: cli-flag
   title: --filter
   description: Simple substring filter applied to identifiers or names.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -207,7 +207,7 @@ features:
   kind: cli-flag
   title: --format
   description: Output format.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -216,7 +216,7 @@ features:
   kind: cli-flag
   title: --from-file
   description: Load mutation input from a JSON or YAML file.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -225,7 +225,7 @@ features:
   kind: cli-flag
   title: --graceful-timeout
   description: Graceful shutdown timeout in seconds.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -234,7 +234,7 @@ features:
   kind: cli-flag
   title: --health
   description: Enable health endpoints in serve plans.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -243,7 +243,7 @@ features:
   kind: cli-flag
   title: --host
   description: Bind host.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -252,7 +252,7 @@ features:
   kind: cli-flag
   title: --hypercorn-http2
   description: Enable HTTP/2 ALPN for Hypercorn.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -261,7 +261,7 @@ features:
   kind: cli-flag
   title: --hypercorn-worker-class
   description: Hypercorn worker class.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -270,7 +270,7 @@ features:
   kind: cli-flag
   title: --id
   description: Primary identifier for a single record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -279,7 +279,7 @@ features:
   kind: cli-flag
   title: --if-exists
   description: Behavior when the target already exists.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -288,7 +288,7 @@ features:
   kind: cli-flag
   title: --if-missing
   description: Behavior when the target does not already exist.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -297,7 +297,7 @@ features:
   kind: cli-flag
   title: --include-secrets
   description: Include secret material where the selected surface permits it.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -306,7 +306,7 @@ features:
   kind: cli-flag
   title: --input
   description: Input path for import, validation, or diff operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -315,7 +315,7 @@ features:
   kind: cli-flag
   title: --issuer
   description: Issuer override for discovery and contract generation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -324,7 +324,7 @@ features:
   kind: cli-flag
   title: --jwks-refresh-seconds
   description: JWKS refresh cadence in seconds.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -333,7 +333,7 @@ features:
   kind: cli-flag
   title: --kid
   description: Explicit key identifier.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -342,7 +342,7 @@ features:
   kind: cli-flag
   title: --kind
   description: Contract artifact kind.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -351,7 +351,7 @@ features:
   kind: cli-flag
   title: --kty
   description: JWK key type.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -360,7 +360,7 @@ features:
   kind: cli-flag
   title: --lifespan
   description: ASGI lifespan policy.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -369,7 +369,7 @@ features:
   kind: cli-flag
   title: --limit
   description: Maximum number of results to return.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -378,7 +378,7 @@ features:
   kind: cli-flag
   title: --log-level
   description: Operator log level for serve plans.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -387,7 +387,7 @@ features:
   kind: cli-flag
   title: --metrics
   description: Enable metrics in serve plans.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -396,7 +396,7 @@ features:
   kind: cli-flag
   title: --name
   description: Optional named release gate or artifact selector.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -405,7 +405,7 @@ features:
   kind: cli-flag
   title: --no-strict
   description: Downgrade failures to warnings for exploratory use.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -414,7 +414,7 @@ features:
   kind: cli-flag
   title: --offline
   description: Avoid network or external peer execution assumptions.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -423,7 +423,7 @@ features:
   kind: cli-flag
   title: --offset
   description: Result offset for list operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -432,7 +432,7 @@ features:
   kind: cli-flag
   title: --output
   description: Optional output file path.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -441,7 +441,7 @@ features:
   kind: cli-flag
   title: --peer-profile
   description: Peer profile selector. May be supplied multiple times.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -450,7 +450,7 @@ features:
   kind: cli-flag
   title: --pid-file
   description: Optional PID file written for the launched runtime.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -459,7 +459,7 @@ features:
   kind: cli-flag
   title: --plugin-mode
   description: Plugin composition mode.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -468,7 +468,7 @@ features:
   kind: cli-flag
   title: --port
   description: Bind port.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -478,7 +478,7 @@ features:
   title: --profile
   description: 'Runtime profile reference: packaged profile id or external YAML profile
     path.'
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -487,7 +487,7 @@ features:
   kind: cli-flag
   title: --proxy-headers
   description: Honor proxy forwarding headers.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -496,7 +496,7 @@ features:
   kind: cli-flag
   title: --public
   description: Enable the public REST/auth plane.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -505,7 +505,7 @@ features:
   kind: cli-flag
   title: --publish
   description: Publish JWKS after a successful key mutation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -514,7 +514,7 @@ features:
   kind: cli-flag
   title: --redact
   description: Redact secret material from exported output.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -523,7 +523,7 @@ features:
   kind: cli-flag
   title: --repo-root
   description: Repository root for governance automation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -532,7 +532,7 @@ features:
   kind: cli-flag
   title: --report-dir
   description: Directory for generated reports.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -541,7 +541,7 @@ features:
   kind: cli-flag
   title: --require-tls
   description: Require TLS on the public plane.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -552,7 +552,7 @@ features:
   kind: cli-flag
   title: --retire-after
   description: Retire-after hint or timestamp recorded with the key.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -561,7 +561,7 @@ features:
   kind: cli-flag
   title: --rpc
   description: Enable the JSON-RPC control plane.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -570,7 +570,7 @@ features:
   kind: cli-flag
   title: --runtime-style
   description: Runtime style for installation or standalone serving.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -581,7 +581,7 @@ features:
   kind: cli-flag
   title: --scope
   description: Verification scope.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -590,7 +590,7 @@ features:
   kind: cli-flag
   title: --server
   description: Runner profile used to qualify and launch runtime.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -600,7 +600,7 @@ features:
   title: --set
   description: Inline mutation field assignment in key=value form. May be supplied
     multiple times.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -609,7 +609,7 @@ features:
   kind: cli-flag
   title: --signing-key
   description: Optional Ed25519 private signing key path or seed.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -618,7 +618,7 @@ features:
   kind: cli-flag
   title: --slice
   description: Protocol slice. May be supplied multiple times.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -627,7 +627,7 @@ features:
   kind: cli-flag
   title: --sort
   description: Sort key for list operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -636,7 +636,7 @@ features:
   kind: cli-flag
   title: --status
   description: Status filter for list operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -645,7 +645,7 @@ features:
   kind: cli-flag
   title: --strict
   description: Fail closed when governance or certification checks fail.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -654,7 +654,7 @@ features:
   kind: cli-flag
   title: --surface-set
   description: Installable surface set. May be supplied multiple times.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -665,7 +665,7 @@ features:
   kind: cli-flag
   title: --tenant
   description: Tenant identifier for multi-tenant operators.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -674,7 +674,7 @@ features:
   kind: cli-flag
   title: --tier
   description: Evidence tier selector.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -683,7 +683,7 @@ features:
   kind: cli-flag
   title: --tigrcorn-contract
   description: Preferred Tigrcorn adapter contract.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -692,7 +692,7 @@ features:
   kind: cli-flag
   title: --tigrcorn-mode
   description: Preferred Tigrcorn runtime mode hint.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -701,7 +701,7 @@ features:
   kind: cli-flag
   title: --timeout
   description: Maximum wait time in seconds for supported long-running operations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -710,7 +710,7 @@ features:
   kind: cli-flag
   title: --title
   description: Human-readable title.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -719,7 +719,7 @@ features:
   kind: cli-flag
   title: --trace
   description: Emit trace-oriented operator details.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -728,7 +728,7 @@ features:
   kind: cli-flag
   title: --uds
   description: Optional Unix domain socket path.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -737,7 +737,7 @@ features:
   kind: cli-flag
   title: --use
   description: JWK use classification.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -746,7 +746,7 @@ features:
   kind: cli-flag
   title: --uvicorn-http
   description: Uvicorn HTTP protocol implementation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -755,7 +755,7 @@ features:
   kind: cli-flag
   title: --uvicorn-loop
   description: Uvicorn event-loop implementation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -764,7 +764,7 @@ features:
   kind: cli-flag
   title: --uvicorn-ws
   description: Uvicorn WebSocket implementation.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -773,7 +773,7 @@ features:
   kind: cli-flag
   title: --verbose, -v
   description: Increase operator verbosity; may be repeated.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -782,7 +782,7 @@ features:
   kind: cli-flag
   title: --wait
   description: Wait for completion when the operation supports asynchronous execution.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -791,7 +791,7 @@ features:
   kind: cli-flag
   title: --workers
   description: Process count for the selected runtime profile.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -800,7 +800,7 @@ features:
   kind: cli-flag
   title: --yes
   description: Assume yes for state-changing confirmations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -809,7 +809,7 @@ features:
   kind: cli-verb
   title: bootstrap apply
   description: Materialize bootstrap manifests and record an applied bootstrap checkpoint.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -820,7 +820,7 @@ features:
   title: bootstrap manifest
   description: Write deployment, claims, evidence, and contract manifests for the
     selected profile.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -830,7 +830,7 @@ features:
   kind: cli-verb
   title: bootstrap status
   description: Summarize bootstrap readiness for the selected profile and surfaces.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -841,7 +841,7 @@ features:
   title: bootstrap verify
   description: Verify bootstrap manifests, effective artifacts, and applied checkpoint
     state.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -851,7 +851,7 @@ features:
   kind: cli-verb
   title: claims lint
   description: Validate declared claims against mappings and boundaries.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -860,7 +860,7 @@ features:
   kind: cli-verb
   title: claims show
   description: Materialize the effective claims manifest for the active deployment.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -869,7 +869,7 @@ features:
   kind: cli-verb
   title: claims status
   description: Summarize declared, effective, and promotable claims.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -878,7 +878,7 @@ features:
   kind: cli-verb
   title: client create
   description: Create a durable operator-plane client record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -887,7 +887,7 @@ features:
   kind: cli-verb
   title: client delete
   description: Delete a durable operator-plane client record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -896,7 +896,7 @@ features:
   kind: cli-verb
   title: client disable
   description: Mark a client record disabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -905,7 +905,7 @@ features:
   kind: cli-verb
   title: client enable
   description: Mark a client record enabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -914,7 +914,7 @@ features:
   kind: cli-verb
   title: client get
   description: Return a single durable operator-plane client record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -923,7 +923,7 @@ features:
   kind: cli-verb
   title: client list
   description: List durable operator-plane client records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -932,7 +932,7 @@ features:
   kind: cli-verb
   title: client rotate-secret
   description: Rotate durable operator-plane client secret material.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -941,7 +941,7 @@ features:
   kind: cli-verb
   title: client update
   description: Update a durable operator-plane client record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -950,7 +950,7 @@ features:
   kind: cli-verb
   title: discovery diff
   description: Diff active discovery metadata against a provided or published baseline.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -959,7 +959,7 @@ features:
   kind: cli-verb
   title: discovery publish
   description: Publish discovery metadata into a release-ready output directory.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -968,7 +968,7 @@ features:
   kind: cli-verb
   title: discovery show
   description: Show the active discovery snapshot for the selected profile.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -977,7 +977,7 @@ features:
   kind: cli-verb
   title: discovery validate
   description: Validate discovery metadata and supporting contracts.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -987,7 +987,7 @@ features:
   title: doctor
   description: Aggregate core verification, runtime profile, contracts, evidence,
     and gate status.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -996,7 +996,7 @@ features:
   kind: cli-verb
   title: evidence bundle
   description: Build a release/evidence bundle filtered by the effective deployment.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1005,7 +1005,7 @@ features:
   kind: cli-verb
   title: evidence peer-execute
   description: Materialize peer execution manifests for configured profiles.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1014,7 +1014,7 @@ features:
   kind: cli-verb
   title: evidence peer-status
   description: Summarize configured peer execution profiles and bundle refs.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1023,7 +1023,7 @@ features:
   kind: cli-verb
   title: evidence status
   description: Summarize Tier 3/Tier 4 evidence readiness.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1032,7 +1032,7 @@ features:
   kind: cli-verb
   title: evidence verify
   description: Run evidence/peer readiness checks.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1041,7 +1041,7 @@ features:
   kind: cli-verb
   title: export run
   description: Export durable operator-plane state to a portable artifact.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1051,7 +1051,7 @@ features:
   kind: cli-verb
   title: export status
   description: Show the last durable operator-plane export status.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1061,7 +1061,7 @@ features:
   kind: cli-verb
   title: export validate
   description: Validate export configuration and current operator state.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1071,7 +1071,7 @@ features:
   kind: cli-verb
   title: flow create
   description: Create a durable operator-plane flow record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1080,7 +1080,7 @@ features:
   kind: cli-verb
   title: flow delete
   description: Delete a durable operator-plane flow record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1089,7 +1089,7 @@ features:
   kind: cli-verb
   title: flow disable
   description: Mark a flow record disabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1098,7 +1098,7 @@ features:
   kind: cli-verb
   title: flow enable
   description: Mark a flow record enabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1107,7 +1107,7 @@ features:
   kind: cli-verb
   title: flow get
   description: Return a single durable operator-plane flow record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1116,7 +1116,7 @@ features:
   kind: cli-verb
   title: flow list
   description: List durable operator-plane flow records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1125,7 +1125,7 @@ features:
   kind: cli-verb
   title: flow update
   description: Update a durable operator-plane flow record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1134,7 +1134,7 @@ features:
   kind: cli-verb
   title: gate
   description: Run one release gate or the full ordered release gate catalog.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1143,7 +1143,7 @@ features:
   kind: cli-verb
   title: identity create
   description: Create a durable operator-plane identity record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1152,7 +1152,7 @@ features:
   kind: cli-verb
   title: identity delete
   description: Delete a durable operator-plane identity record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1161,7 +1161,7 @@ features:
   kind: cli-verb
   title: identity get
   description: Return a single durable operator-plane identity record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1170,7 +1170,7 @@ features:
   kind: cli-verb
   title: identity list
   description: List durable operator-plane identity records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1179,7 +1179,7 @@ features:
   kind: cli-verb
   title: identity lock
   description: Mark an identity record locked.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1188,7 +1188,7 @@ features:
   kind: cli-verb
   title: identity set-password
   description: Set or rotate a durable operator-plane identity password hash.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1197,7 +1197,7 @@ features:
   kind: cli-verb
   title: identity unlock
   description: Mark an identity record unlocked.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1206,7 +1206,7 @@ features:
   kind: cli-verb
   title: identity update
   description: Update a durable operator-plane identity record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1215,7 +1215,7 @@ features:
   kind: cli-verb
   title: import run
   description: Import durable operator-plane state from a portable artifact.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1225,7 +1225,7 @@ features:
   kind: cli-verb
   title: import status
   description: Show the last durable operator-plane import status.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1235,7 +1235,7 @@ features:
   kind: cli-verb
   title: import validate
   description: Validate an import artifact without mutating state.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1245,7 +1245,7 @@ features:
   kind: cli-verb
   title: keys delete
   description: Delete a durable operator-plane key record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1255,7 +1255,7 @@ features:
   kind: cli-verb
   title: keys export
   description: Export durable operator-plane key metadata to a JSON or YAML file.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1265,7 +1265,7 @@ features:
   kind: cli-verb
   title: keys generate
   description: Generate durable operator-plane key metadata and optional JWKS publication.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1275,7 +1275,7 @@ features:
   kind: cli-verb
   title: keys get
   description: Return a single durable operator-plane key record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1285,7 +1285,7 @@ features:
   kind: cli-verb
   title: keys import
   description: Import durable operator-plane key metadata from a JSON or YAML file.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1295,7 +1295,7 @@ features:
   kind: cli-verb
   title: keys list
   description: List durable operator-plane key records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1305,7 +1305,7 @@ features:
   kind: cli-verb
   title: keys publish-jwks
   description: Publish the current durable operator-plane JWKS document.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1315,7 +1315,7 @@ features:
   kind: cli-verb
   title: keys retire
   description: Mark a durable operator-plane key retired.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1325,7 +1325,7 @@ features:
   kind: cli-verb
   title: keys rotate
   description: Generate successor key metadata and retire the previous active key.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1335,7 +1335,7 @@ features:
   kind: cli-verb
   title: migrate apply
   description: Record a migration application checkpoint for the structured plan.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1345,7 +1345,7 @@ features:
   kind: cli-verb
   title: migrate plan
   description: Emit the structured migration plan and replacement order.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1355,7 +1355,7 @@ features:
   kind: cli-verb
   title: migrate status
   description: List migration revisions and current-to-target move status.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1365,7 +1365,7 @@ features:
   kind: cli-verb
   title: migrate verify
   description: Run migration-plan and project-tree verification.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1376,7 +1376,7 @@ features:
   title: release bundle
   description: Build a release bundle containing claims, evidence, contracts, ADR
     index, and peer refs.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1386,7 +1386,7 @@ features:
   kind: cli-verb
   title: release recertify
   description: Re-run recertification for Tigrbl and standards-boundary changes.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1397,7 +1397,7 @@ features:
   title: release sign
   description: Create externally verifiable Ed25519 attestations for an existing release
     bundle.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1407,7 +1407,7 @@ features:
   kind: cli-verb
   title: release status
   description: Summarize the current release bundle and release-gate posture.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1418,7 +1418,7 @@ features:
   title: release verify
   description: Verify release-bundle attestations and manifest integrity for an existing
     signed bundle.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1429,7 +1429,7 @@ features:
   title: serve
   description: Resolve deployment, materialize a runner-qualified runtime plan, validate
     the selected profile, and optionally launch runtime.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1438,7 +1438,7 @@ features:
   kind: cli-verb
   title: session get
   description: Return a single durable operator-plane session record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1447,7 +1447,7 @@ features:
   kind: cli-verb
   title: session list
   description: List durable operator-plane session records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1456,7 +1456,7 @@ features:
   kind: cli-verb
   title: session revoke
   description: Mark a durable operator-plane session revoked.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1465,7 +1465,7 @@ features:
   kind: cli-verb
   title: session revoke-all
   description: Mark all durable operator-plane sessions revoked.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1474,7 +1474,7 @@ features:
   kind: cli-verb
   title: spec diff
   description: Regenerate contracts and compare them to committed artifacts.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1485,7 +1485,7 @@ features:
   kind: cli-verb
   title: spec generate
   description: Generate OpenAPI/OpenRPC artifacts for the selected deployment.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1496,7 +1496,7 @@ features:
   kind: cli-verb
   title: spec report
   description: Summarize active contract contents and profile coverage.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1507,7 +1507,7 @@ features:
   kind: cli-verb
   title: spec validate
   description: Validate generated contracts against repository expectations.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1518,7 +1518,7 @@ features:
   kind: cli-verb
   title: tenant create
   description: Create a durable operator-plane tenant record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1527,7 +1527,7 @@ features:
   kind: cli-verb
   title: tenant delete
   description: Delete a durable operator-plane tenant record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1536,7 +1536,7 @@ features:
   kind: cli-verb
   title: tenant disable
   description: Mark a tenant record disabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1545,7 +1545,7 @@ features:
   kind: cli-verb
   title: tenant enable
   description: Mark a tenant record enabled.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1554,7 +1554,7 @@ features:
   kind: cli-verb
   title: tenant get
   description: Return a single durable operator-plane tenant record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1563,7 +1563,7 @@ features:
   kind: cli-verb
   title: tenant list
   description: List durable operator-plane tenant records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1572,7 +1572,7 @@ features:
   kind: cli-verb
   title: tenant update
   description: Update a durable operator-plane tenant record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1581,7 +1581,7 @@ features:
   kind: cli-verb
   title: token exchange
   description: Create a derived durable operator-plane token exchange record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1590,7 +1590,7 @@ features:
   kind: cli-verb
   title: token get
   description: Return a single durable operator-plane token record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1599,7 +1599,7 @@ features:
   kind: cli-verb
   title: token introspect
   description: Return active/revoked status and metadata for a token record.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1608,7 +1608,7 @@ features:
   kind: cli-verb
   title: token list
   description: List durable operator-plane token records.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1617,7 +1617,7 @@ features:
   kind: cli-verb
   title: token revoke
   description: Mark a durable operator-plane token revoked.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1626,7 +1626,7 @@ features:
   kind: cli-verb
   title: verify
   description: Execute one or more verification scopes and emit structured results.
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
   scope: core
   targets:
   - CLI operator surface
@@ -1635,7 +1635,7 @@ features:
   kind: extension
   title: dns-privacy
   description: dns-privacy quarantined extension
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: extension
   targets:
   - RFC 8932
@@ -1646,7 +1646,7 @@ features:
   kind: extension
   title: set
   description: set quarantined extension
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: extension
   targets:
   - RFC 7952
@@ -1657,7 +1657,7 @@ features:
   kind: extension
   title: webauthn-passkeys
   description: webauthn-passkeys quarantined extension
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: extension
   targets:
   - RFC 8812
@@ -1668,7 +1668,7 @@ features:
   kind: extension
   title: webpush
   description: webpush quarantined extension
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: extension
   targets:
   - RFC 8291
@@ -1941,6 +1941,42 @@ features:
   title: target.show
   description: Show a certification-scope target.
   source: tigrbl_auth/api/rpc/methods/profile.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.keys.create
+  kind: openrpc-method
+  title: tenant.keys.create
+  description: Create a tenant JWKS key record.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.keys.delete
+  kind: openrpc-method
+  title: tenant.keys.delete
+  description: Delete a tenant JWKS key record.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.keys.seed
+  kind: openrpc-method
+  title: tenant.keys.seed
+  description: Seed a publishable tenant JWKS key.
+  source: tigrbl_auth/api/rpc/methods/keys.py
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+- id: rpc:tenant.keys.update
+  kind: openrpc-method
+  title: tenant.keys.update
+  description: Update a tenant JWKS key record.
+  source: tigrbl_auth/api/rpc/methods/keys.py
   scope: core
   targets:
   - OpenRPC 1.4.x admin/control-plane contract
@@ -2535,7 +2571,7 @@ features:
   kind: protocol-slice
   title: device
   description: device protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 8628
@@ -2547,7 +2583,7 @@ features:
   kind: protocol-slice
   title: dpop
   description: dpop protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 9449
@@ -2558,7 +2594,7 @@ features:
   kind: protocol-slice
   title: jar
   description: jar protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 9101
@@ -2569,7 +2605,7 @@ features:
   kind: protocol-slice
   title: mtls
   description: mtls protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 8705
@@ -2580,7 +2616,7 @@ features:
   kind: protocol-slice
   title: par
   description: par protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 9126
@@ -2592,7 +2628,7 @@ features:
   kind: protocol-slice
   title: rar
   description: rar protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 9396
@@ -2603,7 +2639,7 @@ features:
   kind: protocol-slice
   title: token-exchange
   description: token-exchange protocol slice
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
   scope: core
   targets:
   - RFC 8693
@@ -2611,11 +2647,130 @@ features:
   - enable_rfc8693
   paths:
   - /token/exchange
+- id: route:account-authorized-apps
+  kind: public-route
+  title: /account/authorized-apps
+  description: End-user consent and authorized-app self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  paths:
+  - /account/authorized-apps
+  methods:
+  - GET
+  - DELETE
+- id: route:account-authorized-apps-client-id
+  kind: public-route
+  title: /account/authorized-apps/{client_id}
+  description: End-user consent and authorized-app self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  paths:
+  - /account/authorized-apps/{client_id}
+  methods:
+  - GET
+  - DELETE
+- id: route:account-consents
+  kind: public-route
+  title: /account/consents
+  description: End-user consent and authorized-app self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  paths:
+  - /account/consents
+  methods:
+  - GET
+  - DELETE
+- id: route:account-consents-consent-id
+  kind: public-route
+  title: /account/consents/{consent_id}
+  description: End-user consent and authorized-app self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  paths:
+  - /account/consents/{consent_id}
+  methods:
+  - GET
+  - DELETE
+- id: route:account-password-change
+  kind: public-route
+  title: /account/password/change
+  description: End-user credential self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - RFC 6749
+  required_flags: []
+  paths:
+  - /account/password/change
+  methods:
+  - POST
+- id: route:account-profile
+  kind: public-route
+  title: /account/profile
+  description: End-user profile self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6265
+  - RFC 6750
+  required_flags: []
+  paths:
+  - /account/profile
+  methods:
+  - GET
+  - PATCH
+- id: route:account-sessions
+  kind: public-route
+  title: /account/sessions
+  description: End-user session self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  required_flags: []
+  paths:
+  - /account/sessions
+  methods:
+  - GET
+  - DELETE
+- id: route:account-sessions-session-id
+  kind: public-route
+  title: /account/sessions/{session_id}
+  description: End-user session self-service
+  source: tigrbl_identity_server.rest.routers.my_account:api
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  required_flags: []
+  paths:
+  - /account/sessions/{session_id}
+  methods:
+  - GET
+  - DELETE
 - id: route:authorize
   kind: public-route
   title: /authorize
   description: Authorization endpoint
-  source: tigrbl_auth.api.rest.routers.authorize:api
+  source: tigrbl_identity_server.rest.routers.authorize:api
   scope: core
   targets:
   - RFC 6749
@@ -2639,7 +2794,7 @@ features:
   kind: public-route
   title: /device_authorization
   description: Device authorization endpoint
-  source: tigrbl_auth.api.rest.routers.device_authorization:api
+  source: tigrbl_identity_server.rest.routers.device_authorization:api
   scope: core
   targets:
   - RFC 8628
@@ -2654,7 +2809,7 @@ features:
   kind: public-route
   title: /introspect
   description: Token introspection endpoint
-  source: tigrbl_auth.standards.oauth2.introspection:include_introspection_endpoint
+  source: tigrbl_auth_protocol_oauth.standards.introspection:include_introspection_endpoint
   scope: core
   targets:
   - RFC 7662
@@ -2669,7 +2824,7 @@ features:
   kind: public-route
   title: /login
   description: Password login helper
-  source: tigrbl_auth.api.rest.routers.login:api
+  source: tigrbl_identity_server.rest.routers.login:api
   scope: core
   targets:
   - RFC 6749
@@ -2686,7 +2841,7 @@ features:
   kind: public-route
   title: /logout
   description: OIDC RP-initiated logout endpoint
-  source: tigrbl_auth.api.rest.routers.logout:api
+  source: tigrbl_identity_server.rest.routers.logout:api
   scope: core
   targets:
   - RFC 6265
@@ -2705,7 +2860,7 @@ features:
   kind: public-route
   title: /par
   description: Pushed authorization request endpoint
-  source: tigrbl_auth.api.rest.routers.par:api
+  source: tigrbl_identity_server.rest.routers.par:api
   scope: core
   targets:
   - RFC 9126
@@ -2719,11 +2874,44 @@ features:
   - /par
   methods:
   - POST
+- id: route:realms-realm-slug-well-known-jwks-json
+  kind: public-route
+  title: /realms/{realm_slug}/.well-known/jwks.json
+  description: Realm-scoped JSON Web Key Set
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
+  scope: core
+  targets:
+  - RFC 7517
+  - RFC 8615
+  required_flags:
+  - enable_rfc7517
+  - enable_rfc8615
+  paths:
+  - /realms/{realm_slug}/.well-known/jwks.json
+  methods:
+  - GET
+- id: route:realms-realm-slug-well-known-openid-configuration
+  kind: public-route
+  title: /realms/{realm_slug}/.well-known/openid-configuration
+  description: Realm-scoped OIDC discovery document
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  required_flags:
+  - enable_oidc_discovery
+  - enable_rfc8615
+  paths:
+  - /realms/{realm_slug}/.well-known/openid-configuration
+  methods:
+  - GET
 - id: route:register
   kind: public-route
   title: /register
   description: Dynamic client registration endpoint
-  source: tigrbl_auth.api.rest.routers.register:api
+  source: tigrbl_identity_server.rest.routers.register:api
   scope: core
   targets:
   - RFC 7591
@@ -2739,7 +2927,7 @@ features:
   kind: public-route
   title: /register/{client_id}
   description: Dynamic client registration management endpoint
-  source: tigrbl_auth.api.rest.routers.register:api
+  source: tigrbl_identity_server.rest.routers.register:api
   scope: core
   targets:
   - RFC 7592
@@ -2757,7 +2945,7 @@ features:
   kind: public-route
   title: /revoke
   description: Token revocation endpoint
-  source: tigrbl_auth.api.rest.routers.revoke:api
+  source: tigrbl_identity_server.rest.routers.revoke:api
   scope: core
   targets:
   - RFC 7009
@@ -2771,7 +2959,7 @@ features:
   kind: public-route
   title: /tenants/{tenant_slug}/.well-known/jwks.json
   description: Tenant-scoped JSON Web Key Set
-  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
   scope: core
   targets:
   - RFC 7517
@@ -2787,7 +2975,7 @@ features:
   kind: public-route
   title: /tenants/{tenant_slug}/.well-known/openid-configuration
   description: Tenant-scoped OIDC discovery document
-  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
   scope: core
   targets:
   - OIDC Discovery 1.0
@@ -2804,7 +2992,7 @@ features:
   kind: public-route
   title: /token
   description: Token endpoint
-  source: tigrbl_auth.api.rest.routers.token:api
+  source: tigrbl_identity_server.rest.routers.token:api
   scope: core
   targets:
   - RFC 6749
@@ -2821,7 +3009,7 @@ features:
   kind: public-route
   title: /token/exchange
   description: Token exchange endpoint
-  source: tigrbl_auth.standards.oauth2.token_exchange:include_token_exchange_endpoint
+  source: tigrbl_auth_protocol_oauth.standards.token_exchange:include_token_exchange_endpoint
   scope: core
   targets:
   - RFC 8693
@@ -2839,7 +3027,7 @@ features:
   kind: public-route
   title: /userinfo
   description: OIDC UserInfo endpoint
-  source: tigrbl_auth.standards.oidc.userinfo:include_oidc_userinfo
+  source: tigrbl_auth_protocol_oidc.standards.userinfo:include_oidc_userinfo
   scope: core
   targets:
   - OIDC UserInfo
@@ -2854,7 +3042,7 @@ features:
   kind: public-route
   title: /.well-known/jwks.json
   description: JSON Web Key Set
-  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
   scope: core
   targets:
   - RFC 7517
@@ -2870,7 +3058,7 @@ features:
   kind: public-route
   title: /.well-known/oauth-authorization-server
   description: OAuth authorization server metadata
-  source: tigrbl_auth.standards.oauth2.rfc8414:include_rfc8414
+  source: tigrbl_auth_protocol_oauth.standards.rfc8414:include_rfc8414
   scope: core
   targets:
   - RFC 8414
@@ -2886,7 +3074,7 @@ features:
   kind: public-route
   title: /.well-known/oauth-protected-resource
   description: OAuth protected resource metadata
-  source: tigrbl_auth.standards.oauth2.rfc9728:include_rfc9728
+  source: tigrbl_auth_protocol_oauth.standards.rfc9728:include_rfc9728
   scope: core
   targets:
   - RFC 9728
@@ -2902,7 +3090,7 @@ features:
   kind: public-route
   title: /.well-known/openid-configuration
   description: OIDC discovery document
-  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
   scope: core
   targets:
   - OIDC Discovery 1.0
@@ -2919,7 +3107,7 @@ features:
   kind: setting-flag
   title: active_extensions
   description: Settings-backed governance flag active_extensions
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2930,7 +3118,7 @@ features:
   kind: setting-flag
   title: active_protocol_slices
   description: Settings-backed governance flag active_protocol_slices
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2941,7 +3129,7 @@ features:
   kind: setting-flag
   title: active_surface_sets
   description: Settings-backed governance flag active_surface_sets
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2952,7 +3140,7 @@ features:
   kind: setting-flag
   title: enable_id_token_encryption
   description: Settings-backed governance flag enable_id_token_encryption
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2963,7 +3151,7 @@ features:
   kind: setting-flag
   title: enable_oidc_backchannel_logout
   description: Settings-backed governance flag enable_oidc_backchannel_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2973,7 +3161,7 @@ features:
   kind: setting-flag
   title: enable_oidc_core
   description: Settings-backed governance flag enable_oidc_core
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2983,7 +3171,7 @@ features:
   kind: setting-flag
   title: enable_oidc_discovery
   description: Settings-backed governance flag enable_oidc_discovery
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -2993,7 +3181,7 @@ features:
   kind: setting-flag
   title: enable_oidc_frontchannel_logout
   description: Settings-backed governance flag enable_oidc_frontchannel_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3003,7 +3191,7 @@ features:
   kind: setting-flag
   title: enable_oidc_rp_initiated_logout
   description: Settings-backed governance flag enable_oidc_rp_initiated_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3013,7 +3201,7 @@ features:
   kind: setting-flag
   title: enable_oidc_session_management
   description: Settings-backed governance flag enable_oidc_session_management
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3023,7 +3211,7 @@ features:
   kind: setting-flag
   title: enable_oidc_userinfo
   description: Settings-backed governance flag enable_oidc_userinfo
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3033,7 +3221,7 @@ features:
   kind: setting-flag
   title: enable_rfc6749
   description: Settings-backed governance flag enable_rfc6749
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3043,7 +3231,7 @@ features:
   kind: setting-flag
   title: enable_rfc6750
   description: Settings-backed governance flag enable_rfc6750
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3053,7 +3241,7 @@ features:
   kind: setting-flag
   title: enable_rfc6750_form
   description: Settings-backed governance flag enable_rfc6750_form
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6750
@@ -3064,7 +3252,7 @@ features:
   kind: setting-flag
   title: enable_rfc6750_query
   description: Settings-backed governance flag enable_rfc6750_query
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6750
@@ -3075,7 +3263,7 @@ features:
   kind: setting-flag
   title: enable_rfc7009
   description: Settings-backed governance flag enable_rfc7009
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3085,7 +3273,7 @@ features:
   kind: setting-flag
   title: enable_rfc7515
   description: Settings-backed governance flag enable_rfc7515
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3095,7 +3283,7 @@ features:
   kind: setting-flag
   title: enable_rfc7516
   description: Settings-backed governance flag enable_rfc7516
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3105,7 +3293,7 @@ features:
   kind: setting-flag
   title: enable_rfc7517
   description: Settings-backed governance flag enable_rfc7517
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3115,7 +3303,7 @@ features:
   kind: setting-flag
   title: enable_rfc7518
   description: Settings-backed governance flag enable_rfc7518
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3125,7 +3313,7 @@ features:
   kind: setting-flag
   title: enable_rfc7519
   description: Settings-backed governance flag enable_rfc7519
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3135,7 +3323,7 @@ features:
   kind: setting-flag
   title: enable_rfc7521
   description: Settings-backed governance flag enable_rfc7521
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3145,7 +3333,7 @@ features:
   kind: setting-flag
   title: enable_rfc7523
   description: Settings-backed governance flag enable_rfc7523
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3155,7 +3343,7 @@ features:
   kind: setting-flag
   title: enable_rfc7591
   description: Settings-backed governance flag enable_rfc7591
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3165,7 +3353,7 @@ features:
   kind: setting-flag
   title: enable_rfc7592
   description: Settings-backed governance flag enable_rfc7592
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3175,7 +3363,7 @@ features:
   kind: setting-flag
   title: enable_rfc7636
   description: Settings-backed governance flag enable_rfc7636
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3185,7 +3373,7 @@ features:
   kind: setting-flag
   title: enable_rfc7662
   description: Settings-backed governance flag enable_rfc7662
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3195,7 +3383,7 @@ features:
   kind: setting-flag
   title: enable_rfc7800
   description: Settings-backed governance flag enable_rfc7800
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3205,7 +3393,7 @@ features:
   kind: setting-flag
   title: enable_rfc7952
   description: Settings-backed governance flag enable_rfc7952
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3215,7 +3403,7 @@ features:
   kind: setting-flag
   title: enable_rfc8252
   description: Settings-backed governance flag enable_rfc8252
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3225,7 +3413,7 @@ features:
   kind: setting-flag
   title: enable_rfc8291
   description: Settings-backed governance flag enable_rfc8291
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3235,7 +3423,7 @@ features:
   kind: setting-flag
   title: enable_rfc8414
   description: Settings-backed governance flag enable_rfc8414
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3245,7 +3433,7 @@ features:
   kind: setting-flag
   title: enable_rfc8523
   description: Settings-backed governance flag enable_rfc8523
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3255,7 +3443,7 @@ features:
   kind: setting-flag
   title: enable_rfc8615
   description: Settings-backed governance flag enable_rfc8615
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3265,7 +3453,7 @@ features:
   kind: setting-flag
   title: enable_rfc8628
   description: Settings-backed governance flag enable_rfc8628
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3275,7 +3463,7 @@ features:
   kind: setting-flag
   title: enable_rfc8693
   description: Settings-backed governance flag enable_rfc8693
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3285,7 +3473,7 @@ features:
   kind: setting-flag
   title: enable_rfc8705
   description: Settings-backed governance flag enable_rfc8705
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3295,7 +3483,7 @@ features:
   kind: setting-flag
   title: enable_rfc8707
   description: Settings-backed governance flag enable_rfc8707
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3305,7 +3493,7 @@ features:
   kind: setting-flag
   title: enable_rfc8812
   description: Settings-backed governance flag enable_rfc8812
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3315,7 +3503,7 @@ features:
   kind: setting-flag
   title: enable_rfc8932
   description: Settings-backed governance flag enable_rfc8932
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
@@ -3325,7 +3513,7 @@ features:
   kind: setting-flag
   title: enable_rfc9068
   description: Settings-backed governance flag enable_rfc9068
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3335,7 +3523,7 @@ features:
   kind: setting-flag
   title: enable_rfc9101
   description: Settings-backed governance flag enable_rfc9101
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3345,7 +3533,7 @@ features:
   kind: setting-flag
   title: enable_rfc9126
   description: Settings-backed governance flag enable_rfc9126
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3355,7 +3543,7 @@ features:
   kind: setting-flag
   title: enable_rfc9207
   description: Settings-backed governance flag enable_rfc9207
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3365,7 +3553,7 @@ features:
   kind: setting-flag
   title: enable_rfc9396
   description: Settings-backed governance flag enable_rfc9396
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3375,7 +3563,7 @@ features:
   kind: setting-flag
   title: enable_rfc9449
   description: Settings-backed governance flag enable_rfc9449
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3385,7 +3573,7 @@ features:
   kind: setting-flag
   title: enable_rfc9700
   description: Settings-backed governance flag enable_rfc9700
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3395,7 +3583,7 @@ features:
   kind: setting-flag
   title: enable_rfc9728
   description: Settings-backed governance flag enable_rfc9728
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3405,7 +3593,7 @@ features:
   kind: setting-flag
   title: enforce_rfc8252
   description: Settings-backed governance flag enforce_rfc8252
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 8252
@@ -3415,7 +3603,7 @@ features:
   kind: setting-flag
   title: oauth21_alignment_mode
   description: Settings-backed governance flag oauth21_alignment_mode
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - OAuth 2.1 alignment profile
@@ -3425,7 +3613,7 @@ features:
   kind: setting-flag
   title: require_tls
   description: Settings-backed governance flag require_tls
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3436,7 +3624,7 @@ features:
   kind: setting-flag
   title: rfc8707_enabled
   description: Settings-backed governance flag rfc8707_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 8707
@@ -3446,7 +3634,7 @@ features:
   kind: setting-flag
   title: runtime_style
   description: Settings-backed governance flag runtime_style
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3457,7 +3645,7 @@ features:
   kind: setting-flag
   title: session_cookie_cross_site
   description: Settings-backed governance flag session_cookie_cross_site
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3469,7 +3657,7 @@ features:
   kind: setting-flag
   title: session_cookie_domain
   description: Settings-backed governance flag session_cookie_domain
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3481,7 +3669,7 @@ features:
   kind: setting-flag
   title: session_cookie_force_secure
   description: Settings-backed governance flag session_cookie_force_secure
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3493,7 +3681,7 @@ features:
   kind: setting-flag
   title: session_cookie_max_age_seconds
   description: Settings-backed governance flag session_cookie_max_age_seconds
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3505,7 +3693,7 @@ features:
   kind: setting-flag
   title: session_cookie_name
   description: Settings-backed governance flag session_cookie_name
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3517,7 +3705,7 @@ features:
   kind: setting-flag
   title: session_cookie_path
   description: Settings-backed governance flag session_cookie_path
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3529,7 +3717,7 @@ features:
   kind: setting-flag
   title: session_cookie_renewal_seconds
   description: Settings-backed governance flag session_cookie_renewal_seconds
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3541,7 +3729,7 @@ features:
   kind: setting-flag
   title: session_cookie_samesite
   description: Settings-backed governance flag session_cookie_samesite
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - RFC 6265
@@ -3553,7 +3741,7 @@ features:
   kind: setting-flag
   title: strict_boundary_enforcement
   description: Settings-backed governance flag strict_boundary_enforcement
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3564,7 +3752,7 @@ features:
   kind: setting-flag
   title: surface_admin_enabled
   description: Settings-backed governance flag surface_admin_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3576,7 +3764,7 @@ features:
   kind: setting-flag
   title: surface_diagnostics_enabled
   description: Settings-backed governance flag surface_diagnostics_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3588,7 +3776,7 @@ features:
   kind: setting-flag
   title: surface_operator_enabled
   description: Settings-backed governance flag surface_operator_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3600,7 +3788,7 @@ features:
   kind: setting-flag
   title: surface_plugin_mode
   description: Settings-backed governance flag surface_plugin_mode
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3612,7 +3800,7 @@ features:
   kind: setting-flag
   title: surface_public_enabled
   description: Settings-backed governance flag surface_public_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface
@@ -3624,7 +3812,7 @@ features:
   kind: setting-flag
   title: surface_rpc_enabled
   description: Settings-backed governance flag surface_rpc_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
   scope: core
   targets:
   - CLI operator surface

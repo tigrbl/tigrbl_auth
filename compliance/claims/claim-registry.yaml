@@ -3,13 +3,13 @@ package: tigrbl_auth
 generated_from:
 - compliance/targets/*.yaml
 - tigrbl_auth.config.surfaces
-- tigrbl_auth.api.rpc.registry
-- tigrbl_auth.cli.metadata
-- tigrbl_auth.config.deployment
+- tigrbl_identity_server.rpc.registry
+- tigrbl_identity_cli.cli.metadata
+- tigrbl_identity_runtime.deployment
 - compliance/claims/fapi-atomic-claims.yaml
 summary:
-  claim_count: 396
-  atomic_feature_claim_count: 390
+  claim_count: 410
+  atomic_feature_claim_count: 404
   fapi_atomic_claim_count: 6
 claims:
 - id: cli-flag:access_log
@@ -21,7 +21,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:activate
   feature_id: cli-flag:activate
   kind: cli-flag
@@ -31,7 +31,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:admin
   feature_id: cli-flag:admin
   kind: cli-flag
@@ -41,7 +41,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:alg
   feature_id: cli-flag:alg
   kind: cli-flag
@@ -51,7 +51,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:artifact
   feature_id: cli-flag:artifact
   kind: cli-flag
@@ -61,7 +61,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:baseline_file
   feature_id: cli-flag:baseline_file
   kind: cli-flag
@@ -71,7 +71,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:bundle_dir
   feature_id: cli-flag:bundle_dir
   kind: cli-flag
@@ -81,7 +81,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:check
   feature_id: cli-flag:check
   kind: cli-flag
@@ -92,7 +92,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:checksum
   feature_id: cli-flag:checksum
   kind: cli-flag
@@ -102,7 +102,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:color
   feature_id: cli-flag:color
   kind: cli-flag
@@ -112,7 +112,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:cookies
   feature_id: cli-flag:cookies
   kind: cli-flag
@@ -122,7 +122,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:curve
   feature_id: cli-flag:curve
   kind: cli-flag
@@ -132,7 +132,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:db_safe_start
   feature_id: cli-flag:db_safe_start
   kind: cli-flag
@@ -142,7 +142,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:diagnostics
   feature_id: cli-flag:diagnostics
   kind: cli-flag
@@ -152,7 +152,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:dry_run
   feature_id: cli-flag:dry_run
   kind: cli-flag
@@ -163,7 +163,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:enable_mtls
   feature_id: cli-flag:enable_mtls
   kind: cli-flag
@@ -173,7 +173,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:env_file
   feature_id: cli-flag:env_file
   kind: cli-flag
@@ -183,7 +183,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:environment
   feature_id: cli-flag:environment
   kind: cli-flag
@@ -193,7 +193,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:execution_mode
   feature_id: cli-flag:execution_mode
   kind: cli-flag
@@ -203,7 +203,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:extension
   feature_id: cli-flag:extension
   kind: cli-flag
@@ -213,7 +213,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:filter
   feature_id: cli-flag:filter
   kind: cli-flag
@@ -223,7 +223,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:format
   feature_id: cli-flag:format
   kind: cli-flag
@@ -233,7 +233,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:from_file
   feature_id: cli-flag:from_file
   kind: cli-flag
@@ -243,7 +243,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:graceful_timeout
   feature_id: cli-flag:graceful_timeout
   kind: cli-flag
@@ -253,7 +253,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:health
   feature_id: cli-flag:health
   kind: cli-flag
@@ -263,7 +263,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:host
   feature_id: cli-flag:host
   kind: cli-flag
@@ -273,7 +273,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:hypercorn_http2
   feature_id: cli-flag:hypercorn_http2
   kind: cli-flag
@@ -283,7 +283,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:hypercorn_worker_class
   feature_id: cli-flag:hypercorn_worker_class
   kind: cli-flag
@@ -293,7 +293,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:id
   feature_id: cli-flag:id
   kind: cli-flag
@@ -303,7 +303,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:if_exists
   feature_id: cli-flag:if_exists
   kind: cli-flag
@@ -313,7 +313,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:if_missing
   feature_id: cli-flag:if_missing
   kind: cli-flag
@@ -323,7 +323,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:include_secrets
   feature_id: cli-flag:include_secrets
   kind: cli-flag
@@ -333,7 +333,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:input_path
   feature_id: cli-flag:input_path
   kind: cli-flag
@@ -343,7 +343,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:issuer
   feature_id: cli-flag:issuer
   kind: cli-flag
@@ -353,7 +353,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:jwks_refresh_seconds
   feature_id: cli-flag:jwks_refresh_seconds
   kind: cli-flag
@@ -363,7 +363,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:kid
   feature_id: cli-flag:kid
   kind: cli-flag
@@ -373,7 +373,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:kind
   feature_id: cli-flag:kind
   kind: cli-flag
@@ -383,7 +383,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:kty
   feature_id: cli-flag:kty
   kind: cli-flag
@@ -393,7 +393,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:lifespan
   feature_id: cli-flag:lifespan
   kind: cli-flag
@@ -403,7 +403,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:limit
   feature_id: cli-flag:limit
   kind: cli-flag
@@ -413,7 +413,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:log_level
   feature_id: cli-flag:log_level
   kind: cli-flag
@@ -423,7 +423,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:metrics
   feature_id: cli-flag:metrics
   kind: cli-flag
@@ -433,7 +433,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:name
   feature_id: cli-flag:name
   kind: cli-flag
@@ -443,7 +443,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:no_strict
   feature_id: cli-flag:no_strict
   kind: cli-flag
@@ -453,7 +453,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:offline
   feature_id: cli-flag:offline
   kind: cli-flag
@@ -463,7 +463,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:offset
   feature_id: cli-flag:offset
   kind: cli-flag
@@ -473,7 +473,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:output
   feature_id: cli-flag:output
   kind: cli-flag
@@ -483,7 +483,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:peer_profile
   feature_id: cli-flag:peer_profile
   kind: cli-flag
@@ -493,7 +493,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:pid_file
   feature_id: cli-flag:pid_file
   kind: cli-flag
@@ -503,7 +503,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:plugin_mode
   feature_id: cli-flag:plugin_mode
   kind: cli-flag
@@ -513,7 +513,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:port
   feature_id: cli-flag:port
   kind: cli-flag
@@ -523,7 +523,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:profile
   feature_id: cli-flag:profile
   kind: cli-flag
@@ -534,7 +534,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:proxy_headers
   feature_id: cli-flag:proxy_headers
   kind: cli-flag
@@ -544,7 +544,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:public
   feature_id: cli-flag:public
   kind: cli-flag
@@ -554,7 +554,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:publish
   feature_id: cli-flag:publish
   kind: cli-flag
@@ -564,7 +564,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:redact
   feature_id: cli-flag:redact
   kind: cli-flag
@@ -574,7 +574,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:repo_root
   feature_id: cli-flag:repo_root
   kind: cli-flag
@@ -584,7 +584,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:report_dir
   feature_id: cli-flag:report_dir
   kind: cli-flag
@@ -594,7 +594,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:require_tls
   feature_id: cli-flag:require_tls
   kind: cli-flag
@@ -606,7 +606,7 @@ claims:
   - Release bundle and signature verification
   required_flags:
   - require_tls
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:retire_after
   feature_id: cli-flag:retire_after
   kind: cli-flag
@@ -616,7 +616,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:rpc
   feature_id: cli-flag:rpc
   kind: cli-flag
@@ -626,7 +626,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:runtime_style
   feature_id: cli-flag:runtime_style
   kind: cli-flag
@@ -638,7 +638,7 @@ claims:
   - ASGI 3 application package
   required_flags:
   - runtime_style
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:scope
   feature_id: cli-flag:scope
   kind: cli-flag
@@ -648,7 +648,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:server
   feature_id: cli-flag:server
   kind: cli-flag
@@ -658,7 +658,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:set_item
   feature_id: cli-flag:set_item
   kind: cli-flag
@@ -669,7 +669,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:signing_key
   feature_id: cli-flag:signing_key
   kind: cli-flag
@@ -679,7 +679,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:slice
   feature_id: cli-flag:slice
   kind: cli-flag
@@ -689,7 +689,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:sort
   feature_id: cli-flag:sort
   kind: cli-flag
@@ -699,7 +699,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:status_filter
   feature_id: cli-flag:status_filter
   kind: cli-flag
@@ -709,7 +709,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:strict
   feature_id: cli-flag:strict
   kind: cli-flag
@@ -719,7 +719,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:surface_set
   feature_id: cli-flag:surface_set
   kind: cli-flag
@@ -731,7 +731,7 @@ claims:
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:tenant
   feature_id: cli-flag:tenant
   kind: cli-flag
@@ -741,7 +741,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:tier
   feature_id: cli-flag:tier
   kind: cli-flag
@@ -751,7 +751,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:tigrcorn_contract
   feature_id: cli-flag:tigrcorn_contract
   kind: cli-flag
@@ -761,7 +761,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:tigrcorn_mode
   feature_id: cli-flag:tigrcorn_mode
   kind: cli-flag
@@ -771,7 +771,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:timeout
   feature_id: cli-flag:timeout
   kind: cli-flag
@@ -781,7 +781,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:title
   feature_id: cli-flag:title
   kind: cli-flag
@@ -791,7 +791,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:trace
   feature_id: cli-flag:trace
   kind: cli-flag
@@ -801,7 +801,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:uds
   feature_id: cli-flag:uds
   kind: cli-flag
@@ -811,7 +811,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:use
   feature_id: cli-flag:use
   kind: cli-flag
@@ -821,7 +821,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:uvicorn_http
   feature_id: cli-flag:uvicorn_http
   kind: cli-flag
@@ -831,7 +831,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:uvicorn_loop
   feature_id: cli-flag:uvicorn_loop
   kind: cli-flag
@@ -841,7 +841,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:uvicorn_ws
   feature_id: cli-flag:uvicorn_ws
   kind: cli-flag
@@ -851,7 +851,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:verbose
   feature_id: cli-flag:verbose
   kind: cli-flag
@@ -861,7 +861,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:wait
   feature_id: cli-flag:wait
   kind: cli-flag
@@ -871,7 +871,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:workers
   feature_id: cli-flag:workers
   kind: cli-flag
@@ -881,7 +881,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-flag:yes
   feature_id: cli-flag:yes
   kind: cli-flag
@@ -891,7 +891,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:bootstrap.apply
   feature_id: cli-verb:bootstrap.apply
   kind: cli-verb
@@ -902,7 +902,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:bootstrap.manifest
   feature_id: cli-verb:bootstrap.manifest
   kind: cli-verb
@@ -914,7 +914,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:bootstrap.status
   feature_id: cli-verb:bootstrap.status
   kind: cli-verb
@@ -925,7 +925,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:bootstrap.verify
   feature_id: cli-verb:bootstrap.verify
   kind: cli-verb
@@ -937,7 +937,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:claims.lint
   feature_id: cli-verb:claims.lint
   kind: cli-verb
@@ -947,7 +947,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:claims.show
   feature_id: cli-verb:claims.show
   kind: cli-verb
@@ -957,7 +957,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:claims.status
   feature_id: cli-verb:claims.status
   kind: cli-verb
@@ -967,7 +967,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.create
   feature_id: cli-verb:client.create
   kind: cli-verb
@@ -977,7 +977,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.delete
   feature_id: cli-verb:client.delete
   kind: cli-verb
@@ -987,7 +987,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.disable
   feature_id: cli-verb:client.disable
   kind: cli-verb
@@ -997,7 +997,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.enable
   feature_id: cli-verb:client.enable
   kind: cli-verb
@@ -1007,7 +1007,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.get
   feature_id: cli-verb:client.get
   kind: cli-verb
@@ -1017,7 +1017,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.list
   feature_id: cli-verb:client.list
   kind: cli-verb
@@ -1027,7 +1027,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.rotate-secret
   feature_id: cli-verb:client.rotate-secret
   kind: cli-verb
@@ -1037,7 +1037,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:client.update
   feature_id: cli-verb:client.update
   kind: cli-verb
@@ -1047,7 +1047,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:discovery.diff
   feature_id: cli-verb:discovery.diff
   kind: cli-verb
@@ -1057,7 +1057,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:discovery.publish
   feature_id: cli-verb:discovery.publish
   kind: cli-verb
@@ -1067,7 +1067,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:discovery.show
   feature_id: cli-verb:discovery.show
   kind: cli-verb
@@ -1077,7 +1077,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:discovery.validate
   feature_id: cli-verb:discovery.validate
   kind: cli-verb
@@ -1087,7 +1087,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:doctor
   feature_id: cli-verb:doctor
   kind: cli-verb
@@ -1098,7 +1098,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:evidence.bundle
   feature_id: cli-verb:evidence.bundle
   kind: cli-verb
@@ -1108,7 +1108,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:evidence.peer-execute
   feature_id: cli-verb:evidence.peer-execute
   kind: cli-verb
@@ -1118,7 +1118,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:evidence.peer-status
   feature_id: cli-verb:evidence.peer-status
   kind: cli-verb
@@ -1128,7 +1128,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:evidence.status
   feature_id: cli-verb:evidence.status
   kind: cli-verb
@@ -1138,7 +1138,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:evidence.verify
   feature_id: cli-verb:evidence.verify
   kind: cli-verb
@@ -1148,7 +1148,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:export.run
   feature_id: cli-verb:export.run
   kind: cli-verb
@@ -1159,7 +1159,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:export.status
   feature_id: cli-verb:export.status
   kind: cli-verb
@@ -1170,7 +1170,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:export.validate
   feature_id: cli-verb:export.validate
   kind: cli-verb
@@ -1181,7 +1181,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.create
   feature_id: cli-verb:flow.create
   kind: cli-verb
@@ -1191,7 +1191,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.delete
   feature_id: cli-verb:flow.delete
   kind: cli-verb
@@ -1201,7 +1201,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.disable
   feature_id: cli-verb:flow.disable
   kind: cli-verb
@@ -1211,7 +1211,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.enable
   feature_id: cli-verb:flow.enable
   kind: cli-verb
@@ -1221,7 +1221,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.get
   feature_id: cli-verb:flow.get
   kind: cli-verb
@@ -1231,7 +1231,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.list
   feature_id: cli-verb:flow.list
   kind: cli-verb
@@ -1241,7 +1241,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:flow.update
   feature_id: cli-verb:flow.update
   kind: cli-verb
@@ -1251,7 +1251,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:gate
   feature_id: cli-verb:gate
   kind: cli-verb
@@ -1261,7 +1261,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.create
   feature_id: cli-verb:identity.create
   kind: cli-verb
@@ -1271,7 +1271,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.delete
   feature_id: cli-verb:identity.delete
   kind: cli-verb
@@ -1281,7 +1281,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.get
   feature_id: cli-verb:identity.get
   kind: cli-verb
@@ -1291,7 +1291,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.list
   feature_id: cli-verb:identity.list
   kind: cli-verb
@@ -1301,7 +1301,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.lock
   feature_id: cli-verb:identity.lock
   kind: cli-verb
@@ -1311,7 +1311,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.set-password
   feature_id: cli-verb:identity.set-password
   kind: cli-verb
@@ -1321,7 +1321,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.unlock
   feature_id: cli-verb:identity.unlock
   kind: cli-verb
@@ -1331,7 +1331,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:identity.update
   feature_id: cli-verb:identity.update
   kind: cli-verb
@@ -1341,7 +1341,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:import.run
   feature_id: cli-verb:import.run
   kind: cli-verb
@@ -1352,7 +1352,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:import.status
   feature_id: cli-verb:import.status
   kind: cli-verb
@@ -1363,7 +1363,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:import.validate
   feature_id: cli-verb:import.validate
   kind: cli-verb
@@ -1374,7 +1374,7 @@ claims:
   - CLI operator surface
   - Import/export portability
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.delete
   feature_id: cli-verb:keys.delete
   kind: cli-verb
@@ -1385,7 +1385,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.export
   feature_id: cli-verb:keys.export
   kind: cli-verb
@@ -1396,7 +1396,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.generate
   feature_id: cli-verb:keys.generate
   kind: cli-verb
@@ -1407,7 +1407,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.get
   feature_id: cli-verb:keys.get
   kind: cli-verb
@@ -1418,7 +1418,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.import
   feature_id: cli-verb:keys.import
   kind: cli-verb
@@ -1429,7 +1429,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.list
   feature_id: cli-verb:keys.list
   kind: cli-verb
@@ -1440,7 +1440,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.publish-jwks
   feature_id: cli-verb:keys.publish-jwks
   kind: cli-verb
@@ -1451,7 +1451,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.retire
   feature_id: cli-verb:keys.retire
   kind: cli-verb
@@ -1462,7 +1462,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:keys.rotate
   feature_id: cli-verb:keys.rotate
   kind: cli-verb
@@ -1473,7 +1473,7 @@ claims:
   - CLI operator surface
   - Key lifecycle and JWKS publication
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:migrate.apply
   feature_id: cli-verb:migrate.apply
   kind: cli-verb
@@ -1484,7 +1484,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:migrate.plan
   feature_id: cli-verb:migrate.plan
   kind: cli-verb
@@ -1495,7 +1495,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:migrate.status
   feature_id: cli-verb:migrate.status
   kind: cli-verb
@@ -1506,7 +1506,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:migrate.verify
   feature_id: cli-verb:migrate.verify
   kind: cli-verb
@@ -1517,7 +1517,7 @@ claims:
   - CLI operator surface
   - Bootstrap and migration lifecycle
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:release.bundle
   feature_id: cli-verb:release.bundle
   kind: cli-verb
@@ -1529,7 +1529,7 @@ claims:
   - CLI operator surface
   - Release bundle and signature verification
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:release.recertify
   feature_id: cli-verb:release.recertify
   kind: cli-verb
@@ -1540,7 +1540,7 @@ claims:
   - CLI operator surface
   - Release bundle and signature verification
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:release.sign
   feature_id: cli-verb:release.sign
   kind: cli-verb
@@ -1552,7 +1552,7 @@ claims:
   - CLI operator surface
   - Release bundle and signature verification
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:release.status
   feature_id: cli-verb:release.status
   kind: cli-verb
@@ -1563,7 +1563,7 @@ claims:
   - CLI operator surface
   - Release bundle and signature verification
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:release.verify
   feature_id: cli-verb:release.verify
   kind: cli-verb
@@ -1575,7 +1575,7 @@ claims:
   - CLI operator surface
   - Release bundle and signature verification
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:serve
   feature_id: cli-verb:serve
   kind: cli-verb
@@ -1586,7 +1586,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:session.get
   feature_id: cli-verb:session.get
   kind: cli-verb
@@ -1596,7 +1596,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:session.list
   feature_id: cli-verb:session.list
   kind: cli-verb
@@ -1606,7 +1606,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:session.revoke
   feature_id: cli-verb:session.revoke
   kind: cli-verb
@@ -1616,7 +1616,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:session.revoke-all
   feature_id: cli-verb:session.revoke-all
   kind: cli-verb
@@ -1626,7 +1626,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:spec.diff
   feature_id: cli-verb:spec.diff
   kind: cli-verb
@@ -1638,7 +1638,7 @@ claims:
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:spec.generate
   feature_id: cli-verb:spec.generate
   kind: cli-verb
@@ -1650,7 +1650,7 @@ claims:
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:spec.report
   feature_id: cli-verb:spec.report
   kind: cli-verb
@@ -1662,7 +1662,7 @@ claims:
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:spec.validate
   feature_id: cli-verb:spec.validate
   kind: cli-verb
@@ -1674,7 +1674,7 @@ claims:
   - OpenAPI 3.1 / 3.2 compatible public contract
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.create
   feature_id: cli-verb:tenant.create
   kind: cli-verb
@@ -1684,7 +1684,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.delete
   feature_id: cli-verb:tenant.delete
   kind: cli-verb
@@ -1694,7 +1694,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.disable
   feature_id: cli-verb:tenant.disable
   kind: cli-verb
@@ -1704,7 +1704,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.enable
   feature_id: cli-verb:tenant.enable
   kind: cli-verb
@@ -1714,7 +1714,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.get
   feature_id: cli-verb:tenant.get
   kind: cli-verb
@@ -1724,7 +1724,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.list
   feature_id: cli-verb:tenant.list
   kind: cli-verb
@@ -1734,7 +1734,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:tenant.update
   feature_id: cli-verb:tenant.update
   kind: cli-verb
@@ -1744,7 +1744,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:token.exchange
   feature_id: cli-verb:token.exchange
   kind: cli-verb
@@ -1754,7 +1754,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:token.get
   feature_id: cli-verb:token.get
   kind: cli-verb
@@ -1764,7 +1764,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:token.introspect
   feature_id: cli-verb:token.introspect
   kind: cli-verb
@@ -1774,7 +1774,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:token.list
   feature_id: cli-verb:token.list
   kind: cli-verb
@@ -1784,7 +1784,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:token.revoke
   feature_id: cli-verb:token.revoke
   kind: cli-verb
@@ -1794,7 +1794,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: cli-verb:verify
   feature_id: cli-verb:verify
   kind: cli-verb
@@ -1804,7 +1804,7 @@ claims:
   targets:
   - CLI operator surface
   required_flags: []
-  source: tigrbl_auth.cli.metadata
+  source: tigrbl_identity_cli.cli.metadata
 - id: extension:dns-privacy
   feature_id: extension:dns-privacy
   kind: extension
@@ -1815,7 +1815,7 @@ claims:
   - RFC 8932
   required_flags:
   - enable_rfc8932
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: extension:set
   feature_id: extension:set
   kind: extension
@@ -1826,7 +1826,7 @@ claims:
   - RFC 7952
   required_flags:
   - enable_rfc7952
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: extension:webauthn-passkeys
   feature_id: extension:webauthn-passkeys
   kind: extension
@@ -1837,7 +1837,7 @@ claims:
   - RFC 8812
   required_flags:
   - enable_rfc8812
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: extension:webpush
   feature_id: extension:webpush
   kind: extension
@@ -1848,7 +1848,7 @@ claims:
   - RFC 8291
   required_flags:
   - enable_rfc8291
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: fapi2-security.issuer-identification
   feature_id: profile:fapi2-security
   kind: atomic-profile-claim
@@ -1938,7 +1938,7 @@ claims:
   - ASGI 3 application package
   required_flags:
   - active_extensions
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:active_protocol_slices
   feature_id: flag:active_protocol_slices
   kind: setting-flag
@@ -1950,7 +1950,7 @@ claims:
   - ASGI 3 application package
   required_flags:
   - active_protocol_slices
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:active_surface_sets
   feature_id: flag:active_surface_sets
   kind: setting-flag
@@ -1962,7 +1962,7 @@ claims:
   - ASGI 3 application package
   required_flags:
   - active_surface_sets
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_id_token_encryption
   feature_id: flag:enable_id_token_encryption
   kind: setting-flag
@@ -1974,7 +1974,7 @@ claims:
   - Release bundle and signature verification
   required_flags:
   - enable_id_token_encryption
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_backchannel_logout
   feature_id: flag:enable_oidc_backchannel_logout
   kind: setting-flag
@@ -1985,7 +1985,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_backchannel_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_core
   feature_id: flag:enable_oidc_core
   kind: setting-flag
@@ -1996,7 +1996,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_core
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_discovery
   feature_id: flag:enable_oidc_discovery
   kind: setting-flag
@@ -2007,7 +2007,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_discovery
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_frontchannel_logout
   feature_id: flag:enable_oidc_frontchannel_logout
   kind: setting-flag
@@ -2018,7 +2018,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_frontchannel_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_rp_initiated_logout
   feature_id: flag:enable_oidc_rp_initiated_logout
   kind: setting-flag
@@ -2029,7 +2029,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_rp_initiated_logout
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_session_management
   feature_id: flag:enable_oidc_session_management
   kind: setting-flag
@@ -2040,7 +2040,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_session_management
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_oidc_userinfo
   feature_id: flag:enable_oidc_userinfo
   kind: setting-flag
@@ -2051,7 +2051,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_oidc_userinfo
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc6749
   feature_id: flag:enable_rfc6749
   kind: setting-flag
@@ -2062,7 +2062,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc6749
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc6750
   feature_id: flag:enable_rfc6750
   kind: setting-flag
@@ -2073,7 +2073,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc6750
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc6750_form
   feature_id: flag:enable_rfc6750_form
   kind: setting-flag
@@ -2085,7 +2085,7 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc6750_form
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc6750_query
   feature_id: flag:enable_rfc6750_query
   kind: setting-flag
@@ -2097,7 +2097,7 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc6750_query
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7009
   feature_id: flag:enable_rfc7009
   kind: setting-flag
@@ -2108,7 +2108,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7009
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7515
   feature_id: flag:enable_rfc7515
   kind: setting-flag
@@ -2119,7 +2119,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7515
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7516
   feature_id: flag:enable_rfc7516
   kind: setting-flag
@@ -2130,7 +2130,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7516
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7517
   feature_id: flag:enable_rfc7517
   kind: setting-flag
@@ -2141,7 +2141,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7517
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7518
   feature_id: flag:enable_rfc7518
   kind: setting-flag
@@ -2152,7 +2152,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7518
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7519
   feature_id: flag:enable_rfc7519
   kind: setting-flag
@@ -2163,7 +2163,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7519
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7521
   feature_id: flag:enable_rfc7521
   kind: setting-flag
@@ -2174,7 +2174,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7521
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7523
   feature_id: flag:enable_rfc7523
   kind: setting-flag
@@ -2185,7 +2185,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7523
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7591
   feature_id: flag:enable_rfc7591
   kind: setting-flag
@@ -2196,7 +2196,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7591
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7592
   feature_id: flag:enable_rfc7592
   kind: setting-flag
@@ -2207,7 +2207,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7592
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7636
   feature_id: flag:enable_rfc7636
   kind: setting-flag
@@ -2218,7 +2218,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7636
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7662
   feature_id: flag:enable_rfc7662
   kind: setting-flag
@@ -2229,7 +2229,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7662
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7800
   feature_id: flag:enable_rfc7800
   kind: setting-flag
@@ -2240,7 +2240,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7800
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc7952
   feature_id: flag:enable_rfc7952
   kind: setting-flag
@@ -2251,7 +2251,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc7952
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8252
   feature_id: flag:enable_rfc8252
   kind: setting-flag
@@ -2262,7 +2262,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8252
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8291
   feature_id: flag:enable_rfc8291
   kind: setting-flag
@@ -2273,7 +2273,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8291
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8414
   feature_id: flag:enable_rfc8414
   kind: setting-flag
@@ -2284,7 +2284,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8414
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8523
   feature_id: flag:enable_rfc8523
   kind: setting-flag
@@ -2295,7 +2295,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8523
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8615
   feature_id: flag:enable_rfc8615
   kind: setting-flag
@@ -2306,7 +2306,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8615
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8628
   feature_id: flag:enable_rfc8628
   kind: setting-flag
@@ -2317,7 +2317,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8628
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8693
   feature_id: flag:enable_rfc8693
   kind: setting-flag
@@ -2328,7 +2328,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8693
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8705
   feature_id: flag:enable_rfc8705
   kind: setting-flag
@@ -2339,7 +2339,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8705
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8707
   feature_id: flag:enable_rfc8707
   kind: setting-flag
@@ -2350,7 +2350,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8707
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8812
   feature_id: flag:enable_rfc8812
   kind: setting-flag
@@ -2361,7 +2361,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8812
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc8932
   feature_id: flag:enable_rfc8932
   kind: setting-flag
@@ -2372,7 +2372,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc8932
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9068
   feature_id: flag:enable_rfc9068
   kind: setting-flag
@@ -2383,7 +2383,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9068
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9101
   feature_id: flag:enable_rfc9101
   kind: setting-flag
@@ -2394,7 +2394,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9101
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9126
   feature_id: flag:enable_rfc9126
   kind: setting-flag
@@ -2405,7 +2405,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9126
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9207
   feature_id: flag:enable_rfc9207
   kind: setting-flag
@@ -2416,7 +2416,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9207
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9396
   feature_id: flag:enable_rfc9396
   kind: setting-flag
@@ -2427,7 +2427,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9396
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9449
   feature_id: flag:enable_rfc9449
   kind: setting-flag
@@ -2438,7 +2438,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9449
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9700
   feature_id: flag:enable_rfc9700
   kind: setting-flag
@@ -2449,7 +2449,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9700
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enable_rfc9728
   feature_id: flag:enable_rfc9728
   kind: setting-flag
@@ -2460,7 +2460,7 @@ claims:
   - CLI operator surface
   required_flags:
   - enable_rfc9728
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:enforce_rfc8252
   feature_id: flag:enforce_rfc8252
   kind: setting-flag
@@ -2471,7 +2471,7 @@ claims:
   - RFC 8252
   required_flags:
   - enforce_rfc8252
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:oauth21_alignment_mode
   feature_id: flag:oauth21_alignment_mode
   kind: setting-flag
@@ -2482,7 +2482,7 @@ claims:
   - OAuth 2.1 alignment profile
   required_flags:
   - oauth21_alignment_mode
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:require_tls
   feature_id: flag:require_tls
   kind: setting-flag
@@ -2494,7 +2494,7 @@ claims:
   - Release bundle and signature verification
   required_flags:
   - require_tls
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:rfc8707_enabled
   feature_id: flag:rfc8707_enabled
   kind: setting-flag
@@ -2505,7 +2505,7 @@ claims:
   - RFC 8707
   required_flags:
   - rfc8707_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:runtime_style
   feature_id: flag:runtime_style
   kind: setting-flag
@@ -2517,7 +2517,7 @@ claims:
   - ASGI 3 application package
   required_flags:
   - runtime_style
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_cross_site
   feature_id: flag:session_cookie_cross_site
   kind: setting-flag
@@ -2530,7 +2530,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_cross_site
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_domain
   feature_id: flag:session_cookie_domain
   kind: setting-flag
@@ -2543,7 +2543,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_domain
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_force_secure
   feature_id: flag:session_cookie_force_secure
   kind: setting-flag
@@ -2556,7 +2556,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_force_secure
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_max_age_seconds
   feature_id: flag:session_cookie_max_age_seconds
   kind: setting-flag
@@ -2569,7 +2569,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_max_age_seconds
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_name
   feature_id: flag:session_cookie_name
   kind: setting-flag
@@ -2582,7 +2582,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_name
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_path
   feature_id: flag:session_cookie_path
   kind: setting-flag
@@ -2595,7 +2595,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_path
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_renewal_seconds
   feature_id: flag:session_cookie_renewal_seconds
   kind: setting-flag
@@ -2608,7 +2608,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_renewal_seconds
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:session_cookie_samesite
   feature_id: flag:session_cookie_samesite
   kind: setting-flag
@@ -2621,7 +2621,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - session_cookie_samesite
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:strict_boundary_enforcement
   feature_id: flag:strict_boundary_enforcement
   kind: setting-flag
@@ -2633,7 +2633,7 @@ claims:
   - Release bundle and signature verification
   required_flags:
   - strict_boundary_enforcement
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_admin_enabled
   feature_id: flag:surface_admin_enabled
   kind: setting-flag
@@ -2646,7 +2646,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_admin_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_diagnostics_enabled
   feature_id: flag:surface_diagnostics_enabled
   kind: setting-flag
@@ -2659,7 +2659,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_diagnostics_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_operator_enabled
   feature_id: flag:surface_operator_enabled
   kind: setting-flag
@@ -2672,7 +2672,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_operator_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_plugin_mode
   feature_id: flag:surface_plugin_mode
   kind: setting-flag
@@ -2685,7 +2685,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_plugin_mode
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_public_enabled
   feature_id: flag:surface_public_enabled
   kind: setting-flag
@@ -2698,7 +2698,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_public_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: flag:surface_rpc_enabled
   feature_id: flag:surface_rpc_enabled
   kind: setting-flag
@@ -2711,7 +2711,7 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags:
   - surface_rpc_enabled
-  source: tigrbl_auth.config.settings
+  source: tigrbl_identity_runtime.settings
 - id: profile:baseline
   feature_id: profile:baseline
   kind: profile
@@ -3234,6 +3234,94 @@ claims:
   - WebAuthn and passkey-bound OAuth patterns
   required_flags: []
   source: compliance/targets/profiles.yaml
+- id: route:account-authorized-apps
+  feature_id: route:account-authorized-apps
+  kind: public-route
+  title: /account/authorized-apps
+  description: End-user consent and authorized-app self-service
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-authorized-apps-client-id
+  feature_id: route:account-authorized-apps-client-id
+  kind: public-route
+  title: /account/authorized-apps/{client_id}
+  description: End-user consent and authorized-app self-service
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-consents
+  feature_id: route:account-consents
+  kind: public-route
+  title: /account/consents
+  description: End-user consent and authorized-app self-service
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-consents-consent-id
+  feature_id: route:account-consents-consent-id
+  kind: public-route
+  title: /account/consents/{consent_id}
+  description: End-user consent and authorized-app self-service
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6749
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-password-change
+  feature_id: route:account-password-change
+  kind: public-route
+  title: /account/password/change
+  description: End-user credential self-service
+  scope: core
+  targets:
+  - RFC 6749
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-profile
+  feature_id: route:account-profile
+  kind: public-route
+  title: /account/profile
+  description: End-user profile self-service
+  scope: core
+  targets:
+  - OIDC Core 1.0
+  - RFC 6265
+  - RFC 6750
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-sessions
+  feature_id: route:account-sessions
+  kind: public-route
+  title: /account/sessions
+  description: End-user session self-service
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
+- id: route:account-sessions-session-id
+  feature_id: route:account-sessions-session-id
+  kind: public-route
+  title: /account/sessions/{session_id}
+  description: End-user session self-service
+  scope: core
+  targets:
+  - RFC 6265
+  - OIDC Session Management
+  required_flags: []
+  source: tigrbl_identity_server.rest.routers.my_account:api
 - id: route:authorize
   feature_id: route:authorize
   kind: public-route
@@ -3254,7 +3342,7 @@ claims:
   required_flags:
   - enable_rfc6749
   - enable_oidc_core
-  source: tigrbl_auth.api.rest.routers.authorize:api
+  source: tigrbl_identity_server.rest.routers.authorize:api
 - id: route:device-authorization
   feature_id: route:device-authorization
   kind: public-route
@@ -3266,7 +3354,7 @@ claims:
   - RFC 8707
   required_flags:
   - enable_rfc8628
-  source: tigrbl_auth.api.rest.routers.device_authorization:api
+  source: tigrbl_identity_server.rest.routers.device_authorization:api
 - id: route:introspect
   feature_id: route:introspect
   kind: public-route
@@ -3278,7 +3366,7 @@ claims:
   - RFC 6750
   required_flags:
   - enable_rfc7662
-  source: tigrbl_auth.standards.oauth2.introspection:include_introspection_endpoint
+  source: tigrbl_auth_protocol_oauth.standards.introspection:include_introspection_endpoint
 - id: route:login
   feature_id: route:login
   kind: public-route
@@ -3292,7 +3380,7 @@ claims:
   - OIDC Session Management
   required_flags:
   - enable_rfc6749
-  source: tigrbl_auth.api.rest.routers.login:api
+  source: tigrbl_identity_server.rest.routers.login:api
 - id: route:logout
   feature_id: route:logout
   kind: public-route
@@ -3307,7 +3395,7 @@ claims:
   - OIDC Back-Channel Logout
   required_flags:
   - enable_oidc_rp_initiated_logout
-  source: tigrbl_auth.api.rest.routers.logout:api
+  source: tigrbl_identity_server.rest.routers.logout:api
 - id: route:par
   feature_id: route:par
   kind: public-route
@@ -3322,7 +3410,34 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc9126
-  source: tigrbl_auth.api.rest.routers.par:api
+  source: tigrbl_identity_server.rest.routers.par:api
+- id: route:realms-realm-slug-well-known-jwks-json
+  feature_id: route:realms-realm-slug-well-known-jwks-json
+  kind: public-route
+  title: /realms/{realm_slug}/.well-known/jwks.json
+  description: Realm-scoped JSON Web Key Set
+  scope: core
+  targets:
+  - RFC 7517
+  - RFC 8615
+  required_flags:
+  - enable_rfc7517
+  - enable_rfc8615
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
+- id: route:realms-realm-slug-well-known-openid-configuration
+  feature_id: route:realms-realm-slug-well-known-openid-configuration
+  kind: public-route
+  title: /realms/{realm_slug}/.well-known/openid-configuration
+  description: Realm-scoped OIDC discovery document
+  scope: core
+  targets:
+  - OIDC Discovery 1.0
+  - RFC 8615
+  - RFC 9700
+  required_flags:
+  - enable_oidc_discovery
+  - enable_rfc8615
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
 - id: route:register
   feature_id: route:register
   kind: public-route
@@ -3335,7 +3450,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7591
-  source: tigrbl_auth.api.rest.routers.register:api
+  source: tigrbl_identity_server.rest.routers.register:api
 - id: route:register-client-id
   feature_id: route:register-client-id
   kind: public-route
@@ -3348,7 +3463,7 @@ claims:
   - OIDC RP-Initiated Logout
   required_flags:
   - enable_rfc7592
-  source: tigrbl_auth.api.rest.routers.register:api
+  source: tigrbl_identity_server.rest.routers.register:api
 - id: route:revoke
   feature_id: route:revoke
   kind: public-route
@@ -3359,7 +3474,7 @@ claims:
   - RFC 7009
   required_flags:
   - enable_rfc7009
-  source: tigrbl_auth.api.rest.routers.revoke:api
+  source: tigrbl_identity_server.rest.routers.revoke:api
 - id: route:tenants-tenant-slug-well-known-jwks-json
   feature_id: route:tenants-tenant-slug-well-known-jwks-json
   kind: public-route
@@ -3372,7 +3487,7 @@ claims:
   required_flags:
   - enable_rfc7517
   - enable_rfc8615
-  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
 - id: route:tenants-tenant-slug-well-known-openid-configuration
   feature_id: route:tenants-tenant-slug-well-known-openid-configuration
   kind: public-route
@@ -3386,7 +3501,7 @@ claims:
   required_flags:
   - enable_oidc_discovery
   - enable_rfc8615
-  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
 - id: route:token
   feature_id: route:token
   kind: public-route
@@ -3400,7 +3515,7 @@ claims:
   - RFC 9700
   required_flags:
   - enable_rfc6749
-  source: tigrbl_auth.api.rest.routers.token:api
+  source: tigrbl_identity_server.rest.routers.token:api
 - id: route:token-exchange
   feature_id: route:token-exchange
   kind: public-route
@@ -3415,7 +3530,7 @@ claims:
   - RFC 9449
   required_flags:
   - enable_rfc8693
-  source: tigrbl_auth.standards.oauth2.token_exchange:include_token_exchange_endpoint
+  source: tigrbl_auth_protocol_oauth.standards.token_exchange:include_token_exchange_endpoint
 - id: route:userinfo
   feature_id: route:userinfo
   kind: public-route
@@ -3427,7 +3542,7 @@ claims:
   - RFC 6750
   required_flags:
   - enable_oidc_userinfo
-  source: tigrbl_auth.standards.oidc.userinfo:include_oidc_userinfo
+  source: tigrbl_auth_protocol_oidc.standards.userinfo:include_oidc_userinfo
 - id: route:well-known-jwks-json
   feature_id: route:well-known-jwks-json
   kind: public-route
@@ -3440,7 +3555,7 @@ claims:
   required_flags:
   - enable_rfc7517
   - enable_rfc8615
-  source: tigrbl_auth.standards.oidc.discovery:include_jwks
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_jwks
 - id: route:well-known-oauth-authorization-server
   feature_id: route:well-known-oauth-authorization-server
   kind: public-route
@@ -3453,7 +3568,7 @@ claims:
   required_flags:
   - enable_rfc8414
   - enable_rfc8615
-  source: tigrbl_auth.standards.oauth2.rfc8414:include_rfc8414
+  source: tigrbl_auth_protocol_oauth.standards.rfc8414:include_rfc8414
 - id: route:well-known-oauth-protected-resource
   feature_id: route:well-known-oauth-protected-resource
   kind: public-route
@@ -3466,7 +3581,7 @@ claims:
   required_flags:
   - enable_rfc9728
   - enable_rfc8615
-  source: tigrbl_auth.standards.oauth2.rfc9728:include_rfc9728
+  source: tigrbl_auth_protocol_oauth.standards.rfc9728:include_rfc9728
 - id: route:well-known-openid-configuration
   feature_id: route:well-known-openid-configuration
   kind: public-route
@@ -3480,7 +3595,7 @@ claims:
   required_flags:
   - enable_oidc_discovery
   - enable_rfc8615
-  source: tigrbl_auth.standards.oidc.discovery:include_openid_configuration
+  source: tigrbl_auth_protocol_oidc.standards.discovery:include_openid_configuration
 - id: rpc:audit.export
   feature_id: rpc:audit.export
   kind: openrpc-method
@@ -3781,6 +3896,46 @@ claims:
   - OpenRPC 1.4.x admin/control-plane contract
   required_flags: []
   source: tigrbl_auth/api/rpc/methods/profile.py
+- id: rpc:tenant.keys.create
+  feature_id: rpc:tenant.keys.create
+  kind: openrpc-method
+  title: tenant.keys.create
+  description: Create a tenant JWKS key record.
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+  source: tigrbl_auth/api/rpc/methods/keys.py
+- id: rpc:tenant.keys.delete
+  feature_id: rpc:tenant.keys.delete
+  kind: openrpc-method
+  title: tenant.keys.delete
+  description: Delete a tenant JWKS key record.
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+  source: tigrbl_auth/api/rpc/methods/keys.py
+- id: rpc:tenant.keys.seed
+  feature_id: rpc:tenant.keys.seed
+  kind: openrpc-method
+  title: tenant.keys.seed
+  description: Seed a publishable tenant JWKS key.
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+  source: tigrbl_auth/api/rpc/methods/keys.py
+- id: rpc:tenant.keys.update
+  feature_id: rpc:tenant.keys.update
+  kind: openrpc-method
+  title: tenant.keys.update
+  description: Update a tenant JWKS key record.
+  scope: core
+  targets:
+  - OpenRPC 1.4.x admin/control-plane contract
+  required_flags: []
+  source: tigrbl_auth/api/rpc/methods/keys.py
 - id: rpc:tenant.list
   feature_id: rpc:tenant.list
   kind: openrpc-method
@@ -3841,7 +3996,7 @@ claims:
   - RFC 8628
   required_flags:
   - enable_rfc8628
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:dpop
   feature_id: slice:dpop
   kind: protocol-slice
@@ -3852,7 +4007,7 @@ claims:
   - RFC 9449
   required_flags:
   - enable_rfc9449
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:jar
   feature_id: slice:jar
   kind: protocol-slice
@@ -3863,7 +4018,7 @@ claims:
   - RFC 9101
   required_flags:
   - enable_rfc9101
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:mtls
   feature_id: slice:mtls
   kind: protocol-slice
@@ -3874,7 +4029,7 @@ claims:
   - RFC 8705
   required_flags:
   - enable_rfc8705
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:par
   feature_id: slice:par
   kind: protocol-slice
@@ -3885,7 +4040,7 @@ claims:
   - RFC 9126
   required_flags:
   - enable_rfc9126
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:rar
   feature_id: slice:rar
   kind: protocol-slice
@@ -3896,7 +4051,7 @@ claims:
   - RFC 9396
   required_flags:
   - enable_rfc9396
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: slice:token-exchange
   feature_id: slice:token-exchange
   kind: protocol-slice
@@ -3907,7 +4062,7 @@ claims:
   - RFC 8693
   required_flags:
   - enable_rfc8693
-  source: tigrbl_auth.config.deployment
+  source: tigrbl_identity_runtime.deployment
 - id: target:asgi-3-application-package
   feature_id: target:asgi-3-application-package
   kind: target

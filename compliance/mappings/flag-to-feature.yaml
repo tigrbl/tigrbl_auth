@@ -28,6 +28,7 @@ enable_oidc_discovery:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-openid-configuration
 - route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-openid-configuration
 - target:oidc-discovery-1-0
@@ -116,6 +117,7 @@ enable_rfc7517:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-jwks-json
 - route:tenants-tenant-slug-well-known-jwks-json
 - route:well-known-jwks-json
 - target:rfc-7517
@@ -214,6 +216,8 @@ enable_rfc8615:
 - profile:hardening
 - profile:peer-claim
 - profile:production
+- route:realms-realm-slug-well-known-jwks-json
+- route:realms-realm-slug-well-known-openid-configuration
 - route:tenants-tenant-slug-well-known-jwks-json
 - route:tenants-tenant-slug-well-known-openid-configuration
 - route:well-known-jwks-json

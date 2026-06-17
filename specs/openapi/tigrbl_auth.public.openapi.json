@@ -1777,6 +1777,21 @@
           "self_signed_tls_client_certificate_thumbprint": {
             "type": "string"
           },
+          "tls_client_auth_subject_dn": {
+            "type": "string"
+          },
+          "tls_client_auth_san_dns": {
+            "type": "string"
+          },
+          "tls_client_auth_san_uri": {
+            "type": "string"
+          },
+          "tls_client_auth_san_ip": {
+            "type": "string"
+          },
+          "tls_client_auth_san_email": {
+            "type": "string"
+          },
           "post_logout_redirect_uris": {
             "type": "array",
             "items": {

@@ -454,6 +454,14 @@ rpc:target.list:
 - compliance/evidence/tier3/contracts/openrpc/
 rpc:target.show:
 - compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.keys.create:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.keys.delete:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.keys.seed:
+- compliance/evidence/tier3/contracts/openrpc/
+rpc:tenant.keys.update:
+- compliance/evidence/tier3/contracts/openrpc/
 rpc:tenant.list:
 - compliance/evidence/tier3/contracts/openrpc/
 rpc:tenant.show:
@@ -706,6 +714,30 @@ slice:rar:
 - compliance/evidence/tier3/rar/
 slice:token-exchange:
 - compliance/evidence/tier3/token-exchange/
+route:account-authorized-apps:
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-core/
+route:account-authorized-apps-client-id:
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-core/
+route:account-consents:
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-core/
+route:account-consents-consent-id:
+- compliance/evidence/tier3/oauth2-core/
+- compliance/evidence/tier3/oidc-core/
+route:account-password-change:
+- compliance/evidence/tier3/oauth2-core/
+route:account-profile:
+- compliance/evidence/tier3/bearer/
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-core/
+route:account-sessions:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-session-management/
+route:account-sessions-session-id:
+- compliance/evidence/tier3/cookies/
+- compliance/evidence/tier3/oidc-session-management/
 route:authorize:
 - compliance/evidence/tier3/cookies/
 - compliance/evidence/tier3/issuer-identification/
@@ -740,6 +772,13 @@ route:par:
 - compliance/evidence/tier3/rar/
 - compliance/evidence/tier3/resource-indicators/
 - compliance/evidence/tier3/security-bcp/
+route:realms-realm-slug-well-known-jwks-json:
+- compliance/evidence/tier3/jwks/
+- compliance/evidence/tier3/well-known/
+route:realms-realm-slug-well-known-openid-configuration:
+- compliance/evidence/tier3/discovery/
+- compliance/evidence/tier3/security-bcp/
+- compliance/evidence/tier3/well-known/
 route:register:
 - compliance/evidence/tier3/client-registration/
 - compliance/evidence/tier3/native-apps/

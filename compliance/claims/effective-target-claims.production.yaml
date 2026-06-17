@@ -202,6 +202,7 @@ effective_deployment:
   active_openrpc_methods: []
   product_surface: null
   allowed_admin_resources: []
+  required_table_resources: []
   allowed_admin_rest_groups: []
   profile_source:
     kind: packaged-profile-id
