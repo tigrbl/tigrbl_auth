@@ -314,6 +314,23 @@ def _package_test_paths(package: Package) -> list[Path]:
     return [path for path in candidates if path.exists()]
 
 
+def _install_package_test_harness(python: Path) -> None:
+    subprocess.run(
+        [
+            str(python),
+            "-m",
+            "pip",
+            "install",
+            "-c",
+            str(ROOT / "constraints" / "base.txt"),
+            "-r",
+            str(ROOT / "constraints" / "test.txt"),
+            "httpx",
+        ],
+        check=True,
+    )
+
+
 def cmd_isolated_test(args: argparse.Namespace) -> int:
     package = _find_package(args.package)
     expected_minor = tuple(int(part) for part in args.python_version.split("."))
@@ -385,7 +402,7 @@ print(json.dumps({"package": dist_name, "import_root": import_root, "version": v
                 cwd=ROOT,
                 check=True,
             )
-        subprocess.run([str(python), "-m", "pip", "install", "pytest"], check=True)
+        _install_package_test_harness(python)
         env = os.environ.copy()
         env.update(
             {

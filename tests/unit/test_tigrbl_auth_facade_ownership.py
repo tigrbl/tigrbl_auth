@@ -170,6 +170,15 @@ def test_installable_tigrbl_auth_facade_exposes_runtime_legacy_paths() -> None:
             assert legacy is canonical
 
 
+def test_installable_tigrbl_auth_facade_exposes_runtime_package() -> None:
+    with package_src_paths_only():
+        legacy = importlib.import_module("tigrbl_auth.runtime")
+        canonical = importlib.import_module("tigrbl_identity_runtime")
+
+        assert legacy is canonical
+        assert legacy.LazyASGIApplication is canonical.LazyASGIApplication
+
+
 def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
     import tomllib
 
