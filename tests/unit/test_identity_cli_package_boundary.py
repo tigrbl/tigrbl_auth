@@ -79,3 +79,11 @@ def test_root_console_script_delegates_to_identity_cli() -> None:
 
     assert pyproject["project"]["scripts"]["tigrbl-auth"] == "tigrbl_identity_cli.cli.main:main"
     assert "pkgs/tigrbl-identity-cli/src" in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
+
+
+def test_identity_cli_declares_python_310_toml_reader_dependency() -> None:
+    pyproject = tomllib.loads(
+        (ROOT / "pkgs" / "tigrbl-identity-cli" / "pyproject.toml").read_text(encoding="utf-8")
+    )
+
+    assert "tomli>=2.0; python_version < '3.11'" in pyproject["project"]["dependencies"]

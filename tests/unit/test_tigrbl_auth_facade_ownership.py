@@ -56,6 +56,8 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.config.deployment",
         "tigrbl_auth.config.surfaces",
         "tigrbl_auth.framework",
+        "tigrbl_auth.security.admin_gate",
+        "tigrbl_auth.security.certification",
         "tigrbl_auth.services._operator_store",
         "tigrbl_auth.services.governance_extension_plane",
         "tigrbl_auth.services.policy_control_plane",
@@ -177,6 +179,21 @@ def test_installable_tigrbl_auth_facade_exposes_runtime_package() -> None:
 
         assert legacy is canonical
         assert legacy.LazyASGIApplication is canonical.LazyASGIApplication
+
+
+def test_installable_resource_validation_api_imports_facade_metadata_modules() -> None:
+    with package_src_paths_only():
+        metadata = importlib.import_module(
+            "tigrbl_auth.standards.oauth2.resource_validation_metadata"
+        )
+        contract = importlib.import_module(
+            "tigrbl_auth.standards.oauth2.resource_verifier_contract"
+        )
+        package = importlib.import_module("tigrbl_auth_api_resource_validation")
+
+        assert metadata.CAPABILITIES_METADATA_PATH == "/metadata/capabilities"
+        assert contract.build_protected_resource_verifier_contract().fail_closed is True
+        assert package.PRODUCT_SURFACE == "resource-validation-api"
 
 
 def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:

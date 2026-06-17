@@ -3,8 +3,12 @@ from __future__ import annotations
 import importlib
 import inspect
 import sys
-import tomllib
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
+    import tomli as tomllib
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -127,6 +131,14 @@ def test_email_contract_packages_declare_email_validator_dependency() -> None:
         dependencies = set(metadata["project"].get("dependencies", []))
 
         assert any(item.startswith("email-validator") for item in dependencies), dist_name
+
+
+def test_identity_server_declares_tigrbl_framework_dependency() -> None:
+    metadata = tomllib.loads(
+        (_package_path("tigrbl-identity-server") / "pyproject.toml").read_text(encoding="utf-8")
+    )
+
+    assert "tigrbl==0.4.0" in set(metadata["project"].get("dependencies", []))
 
 
 def test_credentials_token_service_exports_async_runtime_helper() -> None:

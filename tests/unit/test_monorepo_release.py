@@ -60,7 +60,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "131"
+    assert payload["count"] == "130"
     assert {
         cell["python_version"]
         for cell in matrix
@@ -76,6 +76,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         for cell in matrix
         if cell["name"] == "tigrbl-identity-jose"
     } == {"3.10", "3.11", "3.12"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-identity-server"
+    } == {"3.10", "3.11", "3.12", "3.13"}
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
