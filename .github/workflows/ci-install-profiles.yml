@@ -9,11 +9,11 @@ permissions:
 
 env:
   TIGRBL_AUTH_RUNTIME_MATRIX_ENVS: >-
-    py310-base py311-base py312-base py313-base py314-base
-    py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn py313-sqlite-uvicorn py314-sqlite-uvicorn
-    py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn py313-postgres-hypercorn py314-postgres-hypercorn
-    py311-tigrcorn py312-tigrcorn py313-tigrcorn py314-tigrcorn
-    py310-devtest py311-devtest py312-devtest py313-devtest py314-devtest
+    py310-base py311-base py312-base
+    py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn
+    py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn
+    py311-tigrcorn py312-tigrcorn
+    py310-devtest py311-devtest py312-devtest
   TIGRBL_AUTH_RUNTIME_ARTIFACT_PATHS: >-
     dist/install-substrate dist/runtime-smoke
 

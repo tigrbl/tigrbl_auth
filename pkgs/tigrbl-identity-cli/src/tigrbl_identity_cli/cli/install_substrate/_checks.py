@@ -45,7 +45,7 @@ def build_install_substrate_report(
 
     warnings: list[str] = []
     if not _current_python_supported():
-        warnings.append("Current container Python is outside the declared certification support range (>=3.10,<3.15).")
+        warnings.append("Current container Python is outside the declared certification support range (>=3.10,<3.13).")
     unavailable_supported = [item["version"] for item in detected_pythons if not item["available"]]
     if unavailable_supported:
         warnings.append(

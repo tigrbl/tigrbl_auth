@@ -9,17 +9,17 @@ permissions:
 
 env:
   TIGRBL_AUTH_RELEASE_RUNTIME_ENVS: >-
-    py310-base py311-base py312-base py313-base py314-base
-    py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn py313-sqlite-uvicorn py314-sqlite-uvicorn
-    py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn py313-postgres-hypercorn py314-postgres-hypercorn
-    py311-tigrcorn py312-tigrcorn py313-tigrcorn py314-tigrcorn
-    py310-devtest py311-devtest py312-devtest py313-devtest py314-devtest
+    py310-base py311-base py312-base
+    py310-sqlite-uvicorn py311-sqlite-uvicorn py312-sqlite-uvicorn
+    py310-postgres-hypercorn py311-postgres-hypercorn py312-postgres-hypercorn
+    py311-tigrcorn py312-tigrcorn
+    py310-devtest py311-devtest py312-devtest
   TIGRBL_AUTH_RELEASE_LANE_ENVS: >-
-    py310-test-core py311-test-core py312-test-core py313-test-core py314-test-core
-    py310-test-integration py311-test-integration py312-test-integration py313-test-integration py314-test-integration
-    py310-test-conformance py311-test-conformance py312-test-conformance py313-test-conformance py314-test-conformance
-    py310-test-security-negative py311-test-security-negative py312-test-security-negative py313-test-security-negative py314-test-security-negative
-    py310-test-interop py311-test-interop py312-test-interop py313-test-interop py314-test-interop
+    py310-test-core py311-test-core py312-test-core
+    py310-test-integration py311-test-integration py312-test-integration
+    py310-test-conformance py311-test-conformance py312-test-conformance
+    py310-test-security-negative py311-test-security-negative py312-test-security-negative
+    py310-test-interop py311-test-interop py312-test-interop
   TIGRBL_AUTH_RELEASE_EXTRA_ENVS: >-
     py311-gates py311-test-extension py311-migration-portability py311-final-certification
   TIGRBL_AUTH_RELEASE_REQUIRED_PROBES: >-

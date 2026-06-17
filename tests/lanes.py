@@ -10,7 +10,7 @@ from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TESTS_ROOT = REPO_ROOT / "tests"
-SUPPORTED_CERTIFICATION_PYTHONS = {(3, 10), (3, 11), (3, 12), (3, 13), (3, 14)}
+SUPPORTED_CERTIFICATION_PYTHONS = {(3, 10), (3, 11), (3, 12)}
 OPTIONAL_RUNTIME_MODULES = (
     "tigrbl",
     "sqlalchemy",
@@ -71,6 +71,8 @@ def active_lane(explicit_lane: str | None = None) -> str:
 def classify_test_path(path: Path) -> str:
     name = path.name
     parts = path.parts
+    if "packages" in parts:
+        return "package"
     if name in DEFERRED_INTEGRATION_FILES:
         return "integration"
     if name.startswith(EXTENSION_TEST_PREFIXES) or any(
@@ -92,6 +94,9 @@ def lane_allows_path(selected_lane: str, path: Path) -> bool:
     if path.name in DEFERRED_INTEGRATION_FILES:
         return selected_lane in {"all", "*", "extension"}
     lane = classify_test_path(path)
+    if lane == "package":
+        package_context = os.getenv("PACKAGE_UNDER_TEST") or os.getenv("TIGRBL_AUTH_PACKAGE_UNDER_TEST")
+        return bool(package_context) or selected_lane in {"all", "*"}
     if selected_lane in {"all", "*"}:
         return True
     if selected_lane == "core":

@@ -53,8 +53,8 @@ FORBIDDEN_FALLBACK_PATTERNS = [
     re.compile(r"^\s*except\s+Exception:\s*$", re.MULTILINE),
 ]
 FORBIDDEN_DEPENDENCY_NAMES = {"fastapi", "starlette"}
-SUPPORTED_CERTIFICATION_PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14"]
-TIGRCORN_CERTIFICATION_PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
+SUPPORTED_CERTIFICATION_PYTHON_VERSIONS = ["3.10", "3.11", "3.12"]
+TIGRCORN_CERTIFICATION_PYTHON_VERSIONS = ["3.11", "3.12"]
 RUNNER_CERTIFICATION_MATRIX = {
     "uvicorn": {
         "profile_name": "sqlite-uvicorn",

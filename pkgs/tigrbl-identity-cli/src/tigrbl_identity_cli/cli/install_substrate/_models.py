@@ -96,7 +96,7 @@ def _dependency_lock_consistency(repo_root: Path, dependency_manifest: dict[str,
 
 def _current_python_supported() -> bool:
     current = sys.version_info[:3]
-    return (3, 10, 0) <= current < (3, 15, 0)
+    return (3, 10, 0) <= current < (3, 13, 0)
 
 
 def _probe_python_version(executable: list[str]) -> tuple[str | None, str | None]:

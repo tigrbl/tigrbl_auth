@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import ast
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -31,7 +31,7 @@ def test_core_t1_error_taxonomy_and_clock_primitives() -> None:
     assert issubclass(core.IdentityValidationError, core.IdentityError)
     assert issubclass(core.IdentityAuthorizationError, core.IdentityError)
     frozen = core.FrozenClock(datetime(2026, 1, 2, 3, 4, 5))
-    assert frozen.now().tzinfo == UTC
+    assert frozen.now().tzinfo == timezone.utc
     assert core.unix_seconds(frozen) == int(frozen.now().timestamp())
 
 

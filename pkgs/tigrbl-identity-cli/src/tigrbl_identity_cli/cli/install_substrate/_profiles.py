@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12", "3.13", "3.14")
+SUPPORTED_PYTHON_VERSIONS = ("3.10", "3.11", "3.12")
 _SUPPORTED_PYTHON_TAGS = tuple(version.replace(".", "") for version in SUPPORTED_PYTHON_VERSIONS)
 _TIGRCORN_PYTHON_TAGS = tuple(version.replace(".", "") for version in SUPPORTED_PYTHON_VERSIONS if version != "3.10")
 RUNTIME_MATRIX_ENVS = (
@@ -117,16 +117,16 @@ RELEASE_WORKFLOW_EXTRA_ENVS = {"py311-migration-portability", "py311-final-certi
 
 TOX_PROFILE_SECTION_EXPECTATIONS = {
     "[testenv]": "base",
-    "[testenv:py{310,311,312,313,314}-sqlite-uvicorn]": "sqlite-uvicorn",
-    "[testenv:py{310,311,312,313,314}-postgres-hypercorn]": "postgres-hypercorn",
-    "[testenv:py{311,312,313,314}-tigrcorn]": "tigrcorn",
-    "[testenv:py{310,311,312,313,314}-devtest]": "devtest",
+    "[testenv:py{310,311,312}-sqlite-uvicorn]": "sqlite-uvicorn",
+    "[testenv:py{310,311,312}-postgres-hypercorn]": "postgres-hypercorn",
+    "[testenv:py{311,312}-tigrcorn]": "tigrcorn",
+    "[testenv:py{310,311,312}-devtest]": "devtest",
     "[testenv:py311-gates]": "release-gates",
-    "[testenv:py{310,311,312,313,314}-test-core]": "test-core",
-    "[testenv:py{310,311,312,313,314}-test-integration]": "test-integration",
-    "[testenv:py{310,311,312,313,314}-test-conformance]": "test-conformance",
-    "[testenv:py{310,311,312,313,314}-test-security-negative]": "test-security-negative",
-    "[testenv:py{310,311,312,313,314}-test-interop]": "test-interop",
+    "[testenv:py{310,311,312}-test-core]": "test-core",
+    "[testenv:py{310,311,312}-test-integration]": "test-integration",
+    "[testenv:py{310,311,312}-test-conformance]": "test-conformance",
+    "[testenv:py{310,311,312}-test-security-negative]": "test-security-negative",
+    "[testenv:py{310,311,312}-test-interop]": "test-interop",
     "[testenv:py311-test-extension]": "test-extension",
     "[testenv:py311-migration-portability]": "migration-portability",
     "[testenv:py311-final-certification]": "final-certification",

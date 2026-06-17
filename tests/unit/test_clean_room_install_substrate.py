@@ -16,15 +16,15 @@ def test_install_substrate_report_static_manifest_passes_and_tracks_profile_coun
     summary = payload["summary"]
 
     assert summary["static_manifest_passed"] is True
-    assert summary["declared_runtime_matrix_env_count"] == 24
-    assert summary["declared_test_lane_env_count"] == 25
-    assert summary["declared_certification_tox_env_count"] == 53
+    assert summary["declared_runtime_matrix_env_count"] == 14
+    assert summary["declared_test_lane_env_count"] == 15
+    assert summary["declared_certification_tox_env_count"] == 33
     assert summary["tox_section_template_count"] == 14
     assert summary["tox_envs_declare_pip_check"] is True
     assert summary["tox_envs_declare_install_probe"] is True
-    assert summary["install_profiles_runtime_env_present_count"] == 24
-    assert summary["release_gates_runtime_env_present_count"] == 24
-    assert summary["release_gates_test_lane_env_present_count"] == 25
+    assert summary["install_profiles_runtime_env_present_count"] == 14
+    assert summary["release_gates_runtime_env_present_count"] == 14
+    assert summary["release_gates_test_lane_env_present_count"] == 15
     assert summary["release_gates_extra_env_present_count"] == 2
 
 
@@ -38,10 +38,10 @@ def test_generate_state_reports_tracks_install_substrate_checkpoint() -> None:
 
     assert summary["install_substrate_report_present"] is True
     assert summary["install_substrate_manifest_passed"] is True
-    assert summary["install_substrate_tox_env_count"] == 53
+    assert summary["install_substrate_tox_env_count"] == 33
     assert summary["install_substrate_tox_pip_check_complete"] is True
     assert summary["install_substrate_tox_import_probe_complete"] is True
-    assert summary["install_substrate_expected_supported_python_count"] == 5
+    assert summary["install_substrate_expected_supported_python_count"] == 3
 
 
 def test_dependency_lock_manifest_covers_certification_lane_profiles() -> None:

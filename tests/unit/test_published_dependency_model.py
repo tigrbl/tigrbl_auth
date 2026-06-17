@@ -25,7 +25,7 @@ def test_pyproject_uses_published_pins_and_extras():
 
     assert "tigrbl==0.4.0" in dependencies
     assert "swarmauri_core==0.10.0" in dependencies
-    assert "swarmauri_standard==0.9.2" in dependencies
+    assert "swarmauri_standard==0.10.0" in dependencies
     assert "swarmauri_tokens_jwt==0.3.0.dev31" in dependencies
     assert "swarmauri_crypto_jwe==0.3.0.dev5" in dependencies
 

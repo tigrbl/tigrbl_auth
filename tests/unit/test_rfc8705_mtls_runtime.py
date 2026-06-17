@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from ipaddress import ip_address
 from types import SimpleNamespace
 
@@ -31,8 +31,8 @@ def _generate_cert_pem() -> bytes:
         .issuer_name(issuer)
         .public_key(key.public_key())
         .serial_number(x509.random_serial_number())
-        .not_valid_before(datetime.now(UTC) - timedelta(minutes=1))
-        .not_valid_after(datetime.now(UTC) + timedelta(days=1))
+        .not_valid_before(datetime.now(timezone.utc) - timedelta(minutes=1))
+        .not_valid_after(datetime.now(timezone.utc) + timedelta(days=1))
         .add_extension(
             x509.SubjectAlternativeName(
                 [

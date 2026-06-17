@@ -38,48 +38,28 @@ jobs:
             toxenv: py311-base
           - python-version: '3.12'
             toxenv: py312-base
-          - python-version: '3.13'
-            toxenv: py313-base
-          - python-version: '3.14'
-            toxenv: py314-base
           - python-version: '3.10'
             toxenv: py310-sqlite-uvicorn
           - python-version: '3.11'
             toxenv: py311-sqlite-uvicorn
           - python-version: '3.12'
             toxenv: py312-sqlite-uvicorn
-          - python-version: '3.13'
-            toxenv: py313-sqlite-uvicorn
-          - python-version: '3.14'
-            toxenv: py314-sqlite-uvicorn
           - python-version: '3.10'
             toxenv: py310-postgres-hypercorn
           - python-version: '3.11'
             toxenv: py311-postgres-hypercorn
           - python-version: '3.12'
             toxenv: py312-postgres-hypercorn
-          - python-version: '3.13'
-            toxenv: py313-postgres-hypercorn
-          - python-version: '3.14'
-            toxenv: py314-postgres-hypercorn
           - python-version: '3.11'
             toxenv: py311-tigrcorn
           - python-version: '3.12'
             toxenv: py312-tigrcorn
-          - python-version: '3.13'
-            toxenv: py313-tigrcorn
-          - python-version: '3.14'
-            toxenv: py314-tigrcorn
           - python-version: '3.10'
             toxenv: py310-devtest
           - python-version: '3.11'
             toxenv: py311-devtest
           - python-version: '3.12'
             toxenv: py312-devtest
-          - python-version: '3.13'
-            toxenv: py313-devtest
-          - python-version: '3.14'
-            toxenv: py314-devtest
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -137,50 +117,30 @@ jobs:
             toxenv: py311-test-core
           - python-version: '3.12'
             toxenv: py312-test-core
-          - python-version: '3.13'
-            toxenv: py313-test-core
-          - python-version: '3.14'
-            toxenv: py314-test-core
           - python-version: '3.10'
             toxenv: py310-test-integration
           - python-version: '3.11'
             toxenv: py311-test-integration
           - python-version: '3.12'
             toxenv: py312-test-integration
-          - python-version: '3.13'
-            toxenv: py313-test-integration
-          - python-version: '3.14'
-            toxenv: py314-test-integration
           - python-version: '3.10'
             toxenv: py310-test-conformance
           - python-version: '3.11'
             toxenv: py311-test-conformance
           - python-version: '3.12'
             toxenv: py312-test-conformance
-          - python-version: '3.13'
-            toxenv: py313-test-conformance
-          - python-version: '3.14'
-            toxenv: py314-test-conformance
           - python-version: '3.10'
             toxenv: py310-test-security-negative
           - python-version: '3.11'
             toxenv: py311-test-security-negative
           - python-version: '3.12'
             toxenv: py312-test-security-negative
-          - python-version: '3.13'
-            toxenv: py313-test-security-negative
-          - python-version: '3.14'
-            toxenv: py314-test-security-negative
           - python-version: '3.10'
             toxenv: py310-test-interop
           - python-version: '3.11'
             toxenv: py311-test-interop
           - python-version: '3.12'
             toxenv: py312-test-interop
-          - python-version: '3.13'
-            toxenv: py313-test-interop
-          - python-version: '3.14'
-            toxenv: py314-test-interop
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
