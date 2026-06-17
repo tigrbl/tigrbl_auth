@@ -10,8 +10,6 @@ from tigrbl_auth.security.deps import get_db
 from tigrbl_auth.framework import TigrblApp
 from tigrbl_auth.routers.auth_flows import router
 from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.orm import Client
-
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 AUTH = BasicAuth(CLIENT_ID, "secret")
@@ -26,8 +24,7 @@ class DummyClient:
 
 
 class DummyDB:
-    async def scalar(self, stmt):  # pragma: no cover - trivial
-        return DummyClient()
+    pass
 
 
 async def _override_db():
@@ -40,9 +37,16 @@ async def client(monkeypatch):
     app.include_router(router)
     app.router.dependency_overrides[get_db] = _override_db
     monkeypatch.setattr(
-        Client.handlers.read,
-        "core",
+        "tigrbl_auth.ops.token.read_handler_record",
         AsyncMock(return_value=DummyClient()),
+    )
+    monkeypatch.setattr(
+        "tigrbl_auth.ops.token.first_handler_record",
+        AsyncMock(return_value=None),
+    )
+    monkeypatch.setattr(
+        "tigrbl_auth.ops.token.issue_token_pair_records",
+        AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:

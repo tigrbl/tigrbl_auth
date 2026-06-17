@@ -1,11 +1,27 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import inspect
 from typing import Any
 from uuid import uuid4
 
 from .coder import JWTCoder
 from .runtime import InvalidRefreshTokenError, RefreshTokenReuseError
+
+
+async def _decode_issued_claims(jwt: JWTCoder, token: str) -> dict[str, Any]:
+    decode = jwt.async_decode
+    try:
+        parameters = inspect.signature(decode).parameters
+    except (TypeError, ValueError):
+        parameters = {}
+    supports_skip = "verify_revocation" in parameters or any(
+        parameter.kind is inspect.Parameter.VAR_KEYWORD
+        for parameter in parameters.values()
+    )
+    if supports_skip:
+        return await decode(token, verify_exp=False, verify_revocation=False)
+    return await decode(token, verify_exp=False)
 
 
 async def issue_persisted_token_pair(
@@ -30,8 +46,8 @@ async def issue_persisted_token_pair(
         persist_token=False,
         **extra,
     )
-    access_claims = await jwt.async_decode(access_token, verify_exp=False)
-    refresh_claims = await jwt.async_decode(refresh_token, verify_exp=False)
+    access_claims = await _decode_issued_claims(jwt, access_token)
+    refresh_claims = await _decode_issued_claims(jwt, refresh_token)
     if authorization_trace is not None:
         access_claims["authorization_trace"] = deepcopy(authorization_trace)
         refresh_claims["authorization_trace"] = deepcopy(authorization_trace)

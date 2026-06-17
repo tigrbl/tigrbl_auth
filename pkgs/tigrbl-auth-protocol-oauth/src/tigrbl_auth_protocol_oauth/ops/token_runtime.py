@@ -170,6 +170,20 @@ except Exception:  # pragma: no cover - placeholders for dependency-light tests
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD = 'client_secret_basic'
 
 
+def _optional_registration_unavailable(exc: Exception) -> bool:
+    message = f"{exc.__class__.__module__}.{exc.__class__.__name__}: {exc}".lower()
+    if "has no attribute 'execute'" in message:
+        return True
+    return any(
+        marker in message
+        for marker in (
+            "undefinedtable",
+            "no such table",
+            "missing table",
+        )
+    ) or ("does not exist" in message and ("relation" in message or "table" in message))
+
+
 
 def _header(request, name: str) -> str | None:
     return getattr(request, 'headers', {}).get(name) or getattr(request, 'headers', {}).get(name.lower())
@@ -225,7 +239,11 @@ async def _load_client(db, client_id: str) -> tuple[Client | None, ClientRegistr
     client = await read_handler_record(Client, db, client_key)
     registration = None
     if client is not None:
-        registration = await first_handler_record(ClientRegistration, db, {"client_id": client.id})
+        try:
+            registration = await first_handler_record(ClientRegistration, db, {"client_id": client.id})
+        except Exception as exc:
+            if not _optional_registration_unavailable(exc):
+                raise
     return client, registration
 
 

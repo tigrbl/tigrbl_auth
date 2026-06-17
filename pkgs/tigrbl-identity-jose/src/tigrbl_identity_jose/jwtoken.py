@@ -236,8 +236,9 @@ class JWTCoder:
         issuer: Optional[str] = None,
         audience: Optional[Iterable[str] | str] = None,
         cert_thumbprint: Optional[str] = None,
+        verify_revocation: bool = True,
     ) -> Dict[str, Any]:
-        if await is_revoked_async(token):
+        if verify_revocation and await is_revoked_async(token):
             raise InvalidTokenError("token has been revoked")
         if _header_alg(token) in {"", "none"}:
             raise InvalidTokenError("unsigned JWTs are not accepted")
@@ -274,6 +275,7 @@ class JWTCoder:
         issuer: Optional[str] = None,
         audience: Optional[Iterable[str] | str] = None,
         cert_thumbprint: Optional[str] = None,
+        verify_revocation: bool = True,
     ) -> Dict[str, Any]:
         return _run(
             self.async_decode(
@@ -282,6 +284,7 @@ class JWTCoder:
                 issuer=issuer,
                 audience=audience,
                 cert_thumbprint=cert_thumbprint,
+                verify_revocation=verify_revocation,
             ),
         )
 

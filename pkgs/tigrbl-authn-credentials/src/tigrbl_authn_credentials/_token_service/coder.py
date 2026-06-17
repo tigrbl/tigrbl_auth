@@ -101,7 +101,15 @@ class JWTCoder:
     def sign_pair(self, **kwargs: Any) -> Tuple[str, str]:
         return _run(self.async_sign_pair(**kwargs))
 
-    async def async_verify(self, token: str, *, cert_thumbprint: Optional[str] = None, audience: Optional[Iterable[str] | str] = None, issuer: Optional[str] = None) -> Dict[str, Any]:
+    async def async_verify(
+        self,
+        token: str,
+        *,
+        cert_thumbprint: Optional[str] = None,
+        audience: Optional[Iterable[str] | str] = None,
+        issuer: Optional[str] = None,
+        verify_revocation: bool = True,
+    ) -> Dict[str, Any]:
         runtime = _load_runtime()
         settings = runtime["settings"]
         if _header_alg(token) == "none":
@@ -120,20 +128,53 @@ class JWTCoder:
         cnf = payload.get("cnf") if isinstance(payload.get("cnf"), dict) else {}
         if getattr(settings, "enable_rfc8705", False) and cnf.get("x5t#S256") is not None:
             runtime["validate_certificate_binding"](payload, cert_thumbprint)
-        if await runtime["is_revoked_async"](token):
+        if verify_revocation and await runtime["is_revoked_async"](token):
             raise InvalidTokenError("token revoked")
         return payload
 
     def verify(self, token: str, **kwargs: Any) -> Dict[str, Any]:
         return _run(self.async_verify(token, **kwargs))
 
-    async def async_decode(self, token: str, *, verify_exp: bool = True, cert_thumbprint: Optional[str] = None, audience: Optional[Iterable[str] | str] = None, issuer: Optional[str] = None) -> Dict[str, Any]:
-        payload = await self.async_verify(token, cert_thumbprint=cert_thumbprint, audience=audience, issuer=issuer)
+    async def async_decode(
+        self,
+        token: str,
+        *,
+        verify_exp: bool = True,
+        cert_thumbprint: Optional[str] = None,
+        audience: Optional[Iterable[str] | str] = None,
+        issuer: Optional[str] = None,
+        verify_revocation: bool = True,
+    ) -> Dict[str, Any]:
+        payload = await self.async_verify(
+            token,
+            cert_thumbprint=cert_thumbprint,
+            audience=audience,
+            issuer=issuer,
+            verify_revocation=verify_revocation,
+        )
         if verify_exp:
             exp = payload.get("exp")
             if exp is not None and int(exp) < int(datetime.now(timezone.utc).timestamp()):
                 raise InvalidTokenError("token expired")
         return payload
 
-    def decode(self, token: str, *, verify_exp: bool = True, cert_thumbprint: Optional[str] = None, audience: Optional[Iterable[str] | str] = None, issuer: Optional[str] = None) -> Dict[str, Any]:
-        return _run(self.async_decode(token, verify_exp=verify_exp, cert_thumbprint=cert_thumbprint, audience=audience, issuer=issuer))
+    def decode(
+        self,
+        token: str,
+        *,
+        verify_exp: bool = True,
+        cert_thumbprint: Optional[str] = None,
+        audience: Optional[Iterable[str] | str] = None,
+        issuer: Optional[str] = None,
+        verify_revocation: bool = True,
+    ) -> Dict[str, Any]:
+        return _run(
+            self.async_decode(
+                token,
+                verify_exp=verify_exp,
+                cert_thumbprint=cert_thumbprint,
+                audience=audience,
+                issuer=issuer,
+                verify_revocation=verify_revocation,
+            )
+        )
