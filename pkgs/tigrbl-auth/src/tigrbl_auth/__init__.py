@@ -106,8 +106,6 @@ _SYMBOL_EXPORTS = {
     "AuthorizationDetail": ("tigrbl_auth.rfc.rfc9396", "AuthorizationDetail"),
     "RFC9396_SPEC_URL": ("tigrbl_auth.rfc.rfc9396", "RFC9396_SPEC_URL"),
     "parse_authorization_details": ("tigrbl_auth.rfc.rfc9396", "parse_authorization_details"),
-    "RFC8932_SPEC_URL": ("tigrbl_auth.rfc.rfc8932", "RFC8932_SPEC_URL"),
-    "enforce_encrypted_dns": ("tigrbl_auth.rfc.rfc8932", "enforce_encrypted_dns"),
     "FACADE_EXTRAS": ("tigrbl_auth.compat", "FACADE_EXTRAS"),
     "STABLE_ENTRYPOINTS": ("tigrbl_auth.compat", "STABLE_ENTRYPOINTS"),
     "FacadeImportError": ("tigrbl_auth.compat", "FacadeImportError"),

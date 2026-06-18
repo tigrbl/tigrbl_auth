@@ -4,8 +4,12 @@ from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
 ensure_identity_storage_importable()
 
+from tigrbl_identity_storage.migrations.runtime import (
+    expected_table_names,
+    verify_schema_async,
+    verify_schema_sync,
+)
 from tigrbl_identity_storage.tables import Base
-from tigrbl_auth.migrations.runtime import expected_table_names, verify_schema_async, verify_schema_sync
 
 TARGET_METADATA = Base.metadata
 

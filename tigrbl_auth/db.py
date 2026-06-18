@@ -1,9 +1,11 @@
-"""Compatibility facade for canonical database engine wiring."""
+"""Compatibility facade for `tigrbl_identity_storage.db`."""
 
+import sys
 from tigrbl_auth._identity_storage import ensure_identity_storage_importable
 
 ensure_identity_storage_importable()
 
-from tigrbl_identity_storage.db import ENGINE, dsn, get_db
+import tigrbl_identity_storage.db as _module
 
-__all__ = ["ENGINE", "dsn", "get_db"]
+sys.modules[__name__] = _module
+globals().update(_module.__dict__)

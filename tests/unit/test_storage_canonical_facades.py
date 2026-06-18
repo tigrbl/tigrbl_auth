@@ -83,12 +83,47 @@ def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:
         assert getattr(auth_persistence, name) is getattr(storage_persistence, name)
 
 
+def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
+    auth_migrations = importlib.import_module("tigrbl_auth.migrations")
+    auth_runtime = importlib.import_module("tigrbl_auth.migrations.runtime")
+    auth_helpers = importlib.import_module("tigrbl_auth.migrations.helpers")
+    storage_migrations = importlib.import_module("tigrbl_identity_storage.migrations")
+    storage_runtime = importlib.import_module("tigrbl_identity_storage.migrations.runtime")
+    storage_helpers = importlib.import_module("tigrbl_identity_storage.migrations.helpers")
+
+    for name in storage_migrations.__all__:
+        assert getattr(auth_migrations, name) is getattr(storage_migrations, name)
+    for name in storage_runtime.__all__:
+        assert getattr(auth_runtime, name) is getattr(storage_runtime, name)
+    for name in storage_helpers.__all__:
+        assert getattr(auth_helpers, name) is getattr(storage_helpers, name)
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         class_defs = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
         assert class_defs == [], f"{path} defines duplicate table classes: {class_defs}"
+
+
+def test_tigrbl_auth_migration_modules_do_not_define_duplicate_runtime_logic() -> None:
+    migration_files = [
+        Path("tigrbl_auth/migrations/__init__.py"),
+        Path("tigrbl_auth/migrations/env.py"),
+        Path("tigrbl_auth/migrations/helpers.py"),
+        Path("tigrbl_auth/migrations/runtime.py"),
+    ]
+    for path in migration_files:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        class_defs = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
+        function_defs = [
+            node.name
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        ]
+        assert class_defs == [], f"{path} defines duplicate migration classes: {class_defs}"
+        assert function_defs == [], f"{path} defines duplicate migration functions: {function_defs}"
 
 
 def test_storage_package_does_not_import_compat_table_facades() -> None:

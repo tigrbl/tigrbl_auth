@@ -52,6 +52,12 @@ FACADE_MODULES = {
     "tigrbl_auth.services.authorization_provenance": "tigrbl_identity_operator.authorization_provenance",
     "tigrbl_auth.services.audit_service": "tigrbl_identity_operator.audit_service",
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
+    "tigrbl_auth.db": "tigrbl_identity_storage.db",
+    "tigrbl_auth.tables": "tigrbl_identity_storage.tables",
+    "tigrbl_auth.orm": "tigrbl_identity_storage.orm",
+    "tigrbl_auth.migrations": "tigrbl_identity_storage.migrations",
+    "tigrbl_auth.migrations.helpers": "tigrbl_identity_storage.migrations.helpers",
+    "tigrbl_auth.migrations.runtime": "tigrbl_identity_storage.migrations.runtime",
 }
 
 EXECUTABLE_FACADE_MODULES: dict[str, str] = {}
@@ -77,6 +83,12 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.standards.jose.rfc7517",
         "tigrbl_auth.standards.jose.rfc7518",
         "tigrbl_auth.standards.oauth2.resource_verifier_contract",
+        "tigrbl_auth.db",
+        "tigrbl_auth.tables",
+        "tigrbl_auth.orm",
+        "tigrbl_auth.migrations",
+        "tigrbl_auth.migrations.helpers",
+        "tigrbl_auth.migrations.runtime",
     )
 }
 
@@ -225,6 +237,63 @@ def test_installable_tigrbl_auth_facade_exposes_runtime_package() -> None:
 
         assert legacy is canonical
         assert legacy.LazyASGIApplication is canonical.LazyASGIApplication
+
+
+def test_installable_tigrbl_auth_facade_exposes_storage_legacy_submodules() -> None:
+    with package_src_paths_only():
+        legacy_user = importlib.import_module("tigrbl_auth.orm.user")
+        canonical_user = importlib.import_module("tigrbl_identity_storage.orm.user")
+        legacy_engine = importlib.import_module("tigrbl_auth.tables.engine")
+        canonical_engine = importlib.import_module("tigrbl_identity_storage.tables.engine")
+        legacy_revision = importlib.import_module(
+            "tigrbl_auth.migrations.versions.0011_delegation_grant_lifecycle_tables"
+        )
+        canonical_revision = importlib.import_module(
+            "tigrbl_identity_storage.migrations.versions.0011_delegation_grant_lifecycle_tables"
+        )
+
+        assert legacy_user is canonical_user
+        assert legacy_user.User is canonical_user.User
+        assert legacy_engine is canonical_engine
+        assert legacy_engine.get_db is canonical_engine.get_db
+        assert legacy_revision is canonical_revision
+        assert legacy_revision.revision == canonical_revision.revision
+
+
+def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
+    facade_modules = {
+        "tigrbl_auth.rfc.rfc7636_pkce": (
+            "tigrbl_auth_protocol_oauth.standards.rfc7636_pkce"
+        ),
+        "tigrbl_auth.rfc.rfc7662_introspection": (
+            "tigrbl_auth_protocol_oauth.standards.rfc7662_introspection"
+        ),
+        "tigrbl_auth.rfc.rfc8414": "tigrbl_auth_protocol_oauth.standards.rfc8414",
+        "tigrbl_auth.rfc.rfc9449_dpop": (
+            "tigrbl_auth_protocol_oauth.standards.rfc9449_dpop"
+        ),
+        "tigrbl_auth.rfc.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
+        "tigrbl_auth.rfc.rfc7516": "tigrbl_identity_jose.standards.rfc7516",
+        "tigrbl_auth.rfc.rfc7519": "tigrbl_identity_jose.standards.rfc7519",
+        "tigrbl_auth.rfc.rfc7520": "tigrbl_identity_jose.standards.rfc7520",
+        "tigrbl_auth.rfc.rfc8812": "tigrbl_identity_jose.standards.rfc8812",
+        "tigrbl_auth.rfc.rfc8785": "tigrbl_identity_core.rfc8785",
+    }
+
+    with package_src_paths_only():
+        for legacy_name, canonical_name in facade_modules.items():
+            legacy = importlib.import_module(legacy_name)
+            canonical = importlib.import_module(canonical_name)
+
+            assert legacy is canonical
+
+
+def test_installable_tigrbl_auth_facade_does_not_advertise_root_only_rfc_symbols() -> None:
+    with package_src_paths_only():
+        package = importlib.import_module("tigrbl_auth")
+
+        assert "RFC8932_SPEC_URL" not in dir(package)
+        assert "enforce_encrypted_dns" not in dir(package)
 
 
 def test_installable_resource_validation_api_imports_facade_metadata_modules() -> None:
