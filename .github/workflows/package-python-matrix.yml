@@ -55,12 +55,12 @@ jobs:
         with:
           python-version: "3.12"
       - name: Discover split Python packages
-        uses: cobycloud/actions/actions/monorepo-discover@main
+        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           package-globs: pkgs/*
           ecosystem: python
       - name: Validate split package metadata
-        uses: cobycloud/actions/actions/package-metadata@main
+        uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           manifest-globs: |
             pkgs/*/pyproject.toml

@@ -54,12 +54,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Discover UIX packages
-        uses: cobycloud/actions/actions/monorepo-discover@main
+        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           package-globs: apps/*
           ecosystem: node
       - name: Validate UIX package metadata
-        uses: cobycloud/actions/actions/package-metadata@main
+        uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           manifest-globs: |
             apps/*/package.json
@@ -123,7 +123,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Run isolated UIX package checks
-        uses: cobycloud/actions/actions/js-framework-ci@main
+        uses: cobycloud/actions/actions/js-framework-ci@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           framework: vite
           node-version: ${{ matrix.package.node_version }}

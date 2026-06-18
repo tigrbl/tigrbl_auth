@@ -159,7 +159,7 @@ jobs:
         with:
           ref: ${{ needs.resolve-dispatch-matrix.outputs.sha }}
       - name: Build package distribution
-        uses: cobycloud/actions/actions/python-package-build@main
+        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
           project-path: ${{ matrix.package.path }}
@@ -187,7 +187,7 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Publish package to PyPI with Trusted Publishing
-        uses: cobycloud/actions/actions/pypi-trusted-publish@main
+        uses: cobycloud/actions/actions/pypi-trusted-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           packages-dir: dist/${{ matrix.package.name }}
           skip-existing: "true"
@@ -210,7 +210,7 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Create package GitHub release
-        uses: cobycloud/actions/actions/github-release@main
+        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           tag-name: ${{ matrix.package.tag }}
           name: ${{ matrix.package.tag }}

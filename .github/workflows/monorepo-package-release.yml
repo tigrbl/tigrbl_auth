@@ -85,7 +85,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Build package distribution
-        uses: cobycloud/actions/actions/python-package-build@main
+        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
           project-path: ${{ matrix.package.path }}
@@ -113,7 +113,7 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-token-publish@main
+        uses: cobycloud/actions/actions/pypi-token-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           packages-dir: dist/${{ matrix.package.name }}
           token: ${{ secrets.PYPI_API_TOKEN }}
@@ -137,7 +137,7 @@ jobs:
           name: python-dist-${{ matrix.package.name }}
           path: dist/${{ matrix.package.name }}
       - name: Create package GitHub release
-        uses: cobycloud/actions/actions/github-release@main
+        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           tag-name: ${{ matrix.package.tag }}
           name: ${{ matrix.package.tag }}
@@ -161,12 +161,12 @@ jobs:
       - uses: actions/checkout@v6
       - name: Discover split Python packages
         id: discover
-        uses: cobycloud/actions/actions/monorepo-discover@main
+        uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           package-globs: pkgs/*
           ecosystem: python
       - name: Validate split package metadata
-        uses: cobycloud/actions/actions/package-metadata@main
+        uses: cobycloud/actions/actions/package-metadata@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           manifest-globs: |
             pkgs/*/pyproject.toml
@@ -205,7 +205,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Build package distribution
-        uses: cobycloud/actions/actions/python-package-build@main
+        uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           python-version: "3.12"
           project-path: ${{ matrix.package.path }}
@@ -252,7 +252,7 @@ jobs:
           name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
           path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
       - name: Publish package to PyPI
-        uses: cobycloud/actions/actions/pypi-token-publish@main
+        uses: cobycloud/actions/actions/pypi-token-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           packages-dir: dist/${{ needs.resolve-package-tag.outputs.package-name }}
           token: ${{ secrets.PYPI_API_TOKEN }}
@@ -272,7 +272,7 @@ jobs:
           name: python-dist-${{ needs.resolve-package-tag.outputs.package-name }}
           path: dist/${{ needs.resolve-package-tag.outputs.package-name }}
       - name: Create package GitHub release
-        uses: cobycloud/actions/actions/github-release@main
+        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           tag-name: ${{ needs.resolve-package-tag.outputs.tag }}
           name: ${{ needs.resolve-package-tag.outputs.tag }}

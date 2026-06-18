@@ -37,6 +37,6 @@ jobs:
           gh attestation verify dist/*.whl --repo "$GITHUB_REPOSITORY"
           gh attestation verify dist/*.tar.gz --repo "$GITHUB_REPOSITORY"
       - name: Publish to PyPI with Trusted Publishing
-        uses: cobycloud/actions/actions/pypi-publish@main
+        uses: cobycloud/actions/actions/pypi-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           packages-dir: dist

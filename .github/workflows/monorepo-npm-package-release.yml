@@ -169,7 +169,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Test npm package before publication
-        uses: cobycloud/actions/actions/js-framework-ci@main
+        uses: cobycloud/actions/actions/js-framework-ci@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           framework: vite
           node-version: "26"
@@ -195,7 +195,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Publish npm package
-        uses: cobycloud/actions/actions/npm-publish@main
+        uses: cobycloud/actions/actions/npm-publish@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           node-version: "26"
           package-directory: ${{ needs.resolve-npm-package-tag.outputs.package-path }}
@@ -221,7 +221,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Create npm package GitHub release
-        uses: cobycloud/actions/actions/github-release@main
+        uses: cobycloud/actions/actions/github-release@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
           tag-name: ${{ needs.resolve-npm-package-tag.outputs.release-tag }}
           name: ${{ needs.resolve-npm-package-tag.outputs.release-tag }}
