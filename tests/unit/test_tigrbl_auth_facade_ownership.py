@@ -27,7 +27,10 @@ FACADE_MODULES = {
     "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
     "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
     "tigrbl_auth.framework": "tigrbl_identity_server.framework",
+    "tigrbl_auth.jwtoken": "tigrbl_identity_jose.jwtoken",
     "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
+    "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
+    "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy.admin_gate",
     "tigrbl_auth.security.certification": "tigrbl_authz_policy.certification",
     "tigrbl_auth.services._operator_store": "tigrbl_identity_storage.operator_store",
@@ -35,8 +38,12 @@ FACADE_MODULES = {
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
     "tigrbl_auth.services.policy_control_plane": "tigrbl_authz_policy.control_plane",
     "tigrbl_auth.services.operator_service": "tigrbl_identity_operator.operator_service",
+    "tigrbl_auth.standards.jose.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
+    "tigrbl_auth.standards.jose.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
+    "tigrbl_auth.standards.jose.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.standards.oauth2.dpop": "tigrbl_auth_protocol_oauth.standards.dpop",
     "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_auth_protocol_oauth.standards.rfc9700",
+    "tigrbl_auth.standards.oauth2.resource_verifier_contract": "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract",
     "tigrbl_auth.services.release_posture_plane": "tigrbl_authz_policy.release_posture",
     "tigrbl_auth.services.token_service": "tigrbl_authn_credentials.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_jose.release_signing",
@@ -56,6 +63,7 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.config.deployment",
         "tigrbl_auth.config.surfaces",
         "tigrbl_auth.framework",
+        "tigrbl_auth.jwtoken",
         "tigrbl_auth.security.admin_gate",
         "tigrbl_auth.security.certification",
         "tigrbl_auth.services._operator_store",
@@ -65,6 +73,10 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.release_signing",
         "tigrbl_auth.services.authorization_provenance",
         "tigrbl_auth.services.audit_service",
+        "tigrbl_auth.standards.jose.rfc7515",
+        "tigrbl_auth.standards.jose.rfc7517",
+        "tigrbl_auth.standards.jose.rfc7518",
+        "tigrbl_auth.standards.oauth2.resource_verifier_contract",
     )
 }
 
@@ -161,6 +173,40 @@ def test_legacy_facade_token_is_non_executable_alias() -> None:
     assert "exec(compile(" not in source
     assert "alias_module" in source
     assert "tigrbl_auth_protocol_oauth.ops.token" in source
+
+
+def test_pqc_touched_facades_do_not_own_runtime_implementation() -> None:
+    facade_paths = [
+        LEGACY_ROOT / "jwtoken.py",
+        LEGACY_ROOT / "standards" / "jose" / "rfc7515.py",
+        LEGACY_ROOT / "standards" / "jose" / "rfc7517.py",
+        LEGACY_ROOT / "standards" / "jose" / "rfc7518.py",
+        LEGACY_ROOT / "rfc" / "rfc7517.py",
+        LEGACY_ROOT / "rfc" / "rfc7518.py",
+        LEGACY_ROOT / "standards" / "oauth2" / "resource_verifier_contract.py",
+        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "jwtoken.py",
+        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7515.py",
+        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7517.py",
+        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7518.py",
+        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "oauth2" / "resource_verifier_contract.py",
+    ]
+    forbidden_tokens = {
+        "class JWTCoder",
+        "def sign_jws",
+        "def verify_jws",
+        "def load_pqc",
+        "ML_DSA_65_ALG =",
+        "sign_pqc_payload",
+        "verify_pqc_signature",
+        "pqcrypto",
+        "ProtectedResourceVerifierContract:",
+    }
+
+    for path in facade_paths:
+        source = path.read_text(encoding="utf-8")
+        assert "alias_module" in source, path.relative_to(ROOT).as_posix()
+        for token in forbidden_tokens:
+            assert token not in source, f"{path.relative_to(ROOT).as_posix()} owns {token}"
 
 
 def test_installable_tigrbl_auth_facade_exposes_runtime_legacy_paths() -> None:
