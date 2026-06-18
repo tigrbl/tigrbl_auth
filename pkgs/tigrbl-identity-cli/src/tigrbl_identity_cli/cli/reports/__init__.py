@@ -8,6 +8,7 @@ _load_fragments(globals(), __file__, "reports.py", (
     '_truthfulness',
     '_feature_state',
     '_state_reports',
+    '_execution_readiness',
     '_execution_status',
     '_execution_gates',
     '_classification',

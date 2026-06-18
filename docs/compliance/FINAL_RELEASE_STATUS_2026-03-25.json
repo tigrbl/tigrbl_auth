@@ -7,13 +7,15 @@
     "fully_rfc_compliant_now": false,
     "fully_non_rfc_spec_compliant_now": false,
     "strict_independent_claims_ready": false,
-    "release_gates_passed": true,
-    "final_release_gate_passed": true
+    "release_gates_passed": false,
+    "final_release_gate_passed": false
   },
   "details": [
     "Tier 4 independent peer validation is not complete for the retained boundary.",
     "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
     "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
-    "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
+    "Release evidence can now be built only from a clean checkout, and the current workspace is dirty.",
+    "Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.",
+    "In-scope certification test lanes are not green from validated-run evidence."
   ]
 }

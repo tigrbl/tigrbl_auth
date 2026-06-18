@@ -151,13 +151,18 @@ def test_bucket_constants_and_surface_truth_match_reconciled_targets() -> None:
 
 def test_repository_state_marks_truth_reconciliation_complete_and_executor_evidence_checkpoint_installed() -> None:
     repository_state = _load_yaml("compliance/claims/repository-state.yaml")["repository_state"]
+    current_state = _load_json("docs/compliance/current_state_report.json")["summary"]
 
     assert repository_state["target_profile_truth_reconciled_complete"] is True
     assert repository_state["profile_scope_mismatch_set_empty"] is True
     assert repository_state["clean_room_executor_matrix_declared_complete"] is True
     assert repository_state["validated_manifest_identity_contract_installed"] is True
-    assert repository_state["validated_runtime_matrix_preservation_complete"] is False
-    assert repository_state["validated_test_lane_preservation_complete"] is False
+    assert repository_state["validated_runtime_matrix_preservation_complete"] is bool(
+        current_state["validated_clean_room_matrix_green"]
+    )
+    assert repository_state["validated_test_lane_preservation_complete"] is bool(
+        current_state["validated_in_scope_test_lanes_green"]
+    )
     assert repository_state["validated_migration_portability_preservation_complete"] is True
     assert repository_state["alignment_only_checkpoint_no_new_certification_evidence"] is False
 
@@ -169,6 +174,7 @@ def _load_json(relative_path: str) -> dict:
 def test_generated_reports_reflect_reconciled_target_profile_truth() -> None:
     rfc_family_status = _load_json("docs/compliance/rfc_family_status_report.json")
     assert rfc_family_status["summary"]["rfc_targets_with_scope_discrepancies"] == 0
+    current_state = _load_json("docs/compliance/current_state_report.json")["summary"]
 
     final_matrix = _load_json("docs/compliance/final_target_decision_matrix.json")
     rows = {row["target"]: row for row in final_matrix["rows"]}
@@ -181,7 +187,10 @@ def test_generated_reports_reflect_reconciled_target_profile_truth() -> None:
 
     current_state_md = (ROOT / "CURRENT_STATE.md").read_text(encoding="utf-8")
     certification_status_md = (ROOT / "CERTIFICATION_STATUS.md").read_text(encoding="utf-8")
-    assert "validated runtime matrix green: `False`" in current_state_md
+    assert (
+        f"validated runtime matrix green: `{bool(current_state['validated_clean_room_matrix_green'])}`"
+        in current_state_md
+    )
     assert "profile-scope mismatch set empty: `True`" in current_state_md
     assert "target_profile_truth_reconciled_complete: `True`" in certification_status_md
     assert "profile_scope_mismatch_set_empty: `True`" in certification_status_md

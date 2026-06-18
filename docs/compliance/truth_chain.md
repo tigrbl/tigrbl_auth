@@ -5,8 +5,8 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - generated_at: `2026-06-18`
 - final_release_ready: `False`
 - checkpoint_only: `True`
-- release_gates_passed: `True`
-- final_release_gate_passed: `True`
+- release_gates_passed: `False`
+- final_release_gate_passed: `False`
 
 ## Source of truth
 
@@ -33,10 +33,10 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
-- release_gates_passed: `True`
+- release_gates_passed: `False`
 - release_gate_count: `25`
-- release_gate_failed_count: `0`
-- final_release_gate_passed: `True`
+- release_gate_failed_count: `9`
+- final_release_gate_passed: `False`
 - final_release_ready: `False`
 - checkpoint_only: `True`
 - target_profile_truth_reconciled_complete: `True`
@@ -54,7 +54,7 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - tier4_invalid_external_bundle_count: `16`
 - tier4_missing_external_bundle_count: `0`
 - open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
-- final_release_failures: `[]`
+- final_release_failures: `['Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.', 'In-scope certification test lanes are not green from validated-run evidence.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `7`
 

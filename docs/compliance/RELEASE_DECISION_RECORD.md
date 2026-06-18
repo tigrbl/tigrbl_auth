@@ -6,10 +6,10 @@ Do not cut a final certified release. Publish only a truthful checkpoint/candida
 
 ## Basis
 
-- release_gates_passed: `True`
+- release_gates_passed: `False`
 - release_gate_count: `25`
-- release_gate_failed_count: `0`
-- final_release_gate_passed: `True`
+- release_gate_failed_count: `9`
+- final_release_gate_passed: `False`
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`

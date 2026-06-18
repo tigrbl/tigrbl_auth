@@ -2302,6 +2302,7 @@ dependencies = [
     { name = "swarmauri-signing-ed25519" },
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
+    { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
 ]
@@ -2317,6 +2318,7 @@ requires-dist = [
     { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]

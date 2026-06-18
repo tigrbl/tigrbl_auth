@@ -1,14 +1,13 @@
-"""Custom JWT-related exceptions for the JOSE package."""
+"""JOSE error aliases.
+
+The identity split packages share canonical error classes from
+``tigrbl_identity_core`` so compatibility facades and runtime packages catch
+the same exception objects.
+"""
 
 from __future__ import annotations
 
-
-class InvalidTokenError(Exception):
-    """Raised when a JWT cannot be decoded or fails validation."""
-
-
-class InvalidKeyError(Exception):
-    """Raised when a suitable key for JWT processing cannot be found."""
+from tigrbl_identity_core.errors import InvalidKeyError, InvalidTokenError
 
 
 __all__ = ["InvalidTokenError", "InvalidKeyError"]

@@ -24,10 +24,10 @@
     "fully_certifiable_now": false,
     "fully_rfc_compliant_now": false,
     "fully_non_rfc_spec_compliant_now": false,
-    "release_gates_passed": true,
+    "release_gates_passed": false,
     "release_gate_count": 25,
-    "release_gate_failed_count": 0,
-    "final_release_gate_passed": true,
+    "release_gate_failed_count": 9,
+    "final_release_gate_passed": false,
     "final_release_ready": false,
     "checkpoint_only": true,
     "target_profile_truth_reconciled_complete": true,
@@ -50,17 +50,20 @@
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ],
-    "final_release_failures": [],
+    "final_release_failures": [
+      "Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.",
+      "In-scope certification test lanes are not green from validated-run evidence."
+    ],
     "final_release_warnings": [
       "Tier 4 bundle promotion is not complete for the retained boundary."
     ],
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "0dc27bc8ce9ddc74b6cda76dba303190f305f9338abf4e0bee9681580b6ea219",
+    "docs/compliance/current_state_report.json": "0cb81a5f79020d4bb224d8cf78e2953bbb2fb36670ad44e8d8f95cd03980c94b",
     "docs/compliance/certification_state_report.json": "bb6e52c36bbd857c38d3bfaca1a7b046ed9ff11d5269a35f950b41990263640a",
-    "docs/compliance/release_gate_report.json": "0c31087995bfc02d57dd0901a4926c7737dd0590b7939eb584e17da391716c3e",
-    "docs/compliance/final_release_gate_report.json": "abf5f7d3b3b85a816f45d2916bdbe469b44ff8b8237ff714f43482066946e2ba",
+    "docs/compliance/release_gate_report.json": "c60722a98a571a1800cdb3b06690f433822df1f60572ba0be44a565ad28d8c39",
+    "docs/compliance/final_release_gate_report.json": "43526484a5a25b65668c9a42005bef8c3fd25b502e01d8ce8b9b7197d4e09353",
     "docs/compliance/non_rfc_status_report.json": "fce26f8e9e6dd4b54c6ed6c3428b5b87b48251e2146d4e4a0205f817d21fb9ee"
   },
   "explicitly_deauthorized_current_adjacent_docs": [

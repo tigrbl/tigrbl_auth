@@ -42,7 +42,8 @@ def test_typescript_rp_t2_npm_release_workflow_uses_provenance() -> None:
 
     assert "@tigrbl-auth/rp" in workflow_text
     assert '"apps/rp"' in workflow_text
-    assert "cobycloud/actions/actions/npm-publish@main" in workflow_text
+    assert "cobycloud/actions/actions/npm-publish@" in workflow_text
+    assert "cobycloud/actions/actions/npm-publish@main" not in workflow_text
     assert 'provenance: "true"' in workflow_text
     assert manifest["publishConfig"]["access"] == "public"
     assert manifest["publishConfig"]["provenance"] is True
