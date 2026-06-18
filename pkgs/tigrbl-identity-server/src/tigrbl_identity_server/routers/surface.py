@@ -1,6 +1,6 @@
 """
-tigrbl_auth.routers.surface
-===========================
+tigrbl_identity_server.routers.surface
+======================================
 
 Table-backed API surface for the authentication service.
 
@@ -8,7 +8,7 @@ Exports
 -------
 Base        : Declarative base for all models in **tigrbl_authn**.
 metadata    : Shared SQLAlchemy ``MetaData`` with a sane naming-convention.
-surface_api : ``TigrblRouter`` combining Tigrbl resources and auth flows.
+surface_api : ``TigrblRouter`` combining Tigrbl resources and REST flows.
 
 The resulting ``surface_api`` exposes a REST surface under
 namespaces like ``surface_api.core.User.create`` and
@@ -16,8 +16,6 @@ namespaces like ``surface_api.core.User.create`` and
 
 Notes
 -----
-*   All mix-ins (GUIDPk, Timestamped, TenantBound, etc.) live in
-    *tigrbl.orm.mixins* and are imported by the ORM models.
 *   Importing this module has the side-effect of importing
     ``tigrbl_identity_storage.tables``, so every model class is registered with the
     declarative base **before** Tigrbl introspects the metadata.

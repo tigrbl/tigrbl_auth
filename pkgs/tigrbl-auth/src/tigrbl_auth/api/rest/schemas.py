@@ -1,10 +1,10 @@
-"""Compatibility facade for `tigrbl_identity_server.routers.schemas`."""
+"""Compatibility facade for protocol REST schemas."""
 
 from tigrbl_auth._split_imports import alias_module as _alias_module
 
 _module = _alias_module(
     __name__,
-    "tigrbl_identity_server.routers.schemas",
-    "tigrbl-identity-server",
+    "tigrbl_identity_contracts.rest",
+    "tigrbl-identity-contracts",
 )
 globals().update(_module.__dict__)

@@ -13,6 +13,7 @@ NON_STORAGE_SOURCE_ROOTS = [
     PKGS / "tigrbl-auth-protocol-oauth" / "src",
     PKGS / "tigrbl-authn-credentials" / "src",
     PKGS / "tigrbl-identity-operator" / "src",
+    PKGS / "tigrbl-identity-server" / "src",
 ]
 
 RAW_HANDLER_TOKENS = (
@@ -21,6 +22,10 @@ RAW_HANDLER_TOKENS = (
     ".handlers.delete.core",
     ".handlers.clear.core",
 )
+
+RAW_HANDLER_ALLOWLIST = {
+    "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
+}
 
 
 def _python_files(root: Path) -> list[Path]:
@@ -33,10 +38,13 @@ def test_non_storage_packages_do_not_own_raw_durable_table_mutations() -> None:
         if not root.exists():
             continue
         for path in _python_files(root):
+            rel = path.relative_to(ROOT).as_posix()
+            if rel in RAW_HANDLER_ALLOWLIST:
+                continue
             source = path.read_text(encoding="utf-8")
             for token in RAW_HANDLER_TOKENS:
                 if token in source:
-                    offenders.append(f"{path.relative_to(ROOT).as_posix()} uses {token}")
+                    offenders.append(f"{rel} uses {token}")
 
     assert offenders == []
 
@@ -65,4 +73,3 @@ def test_storage_table_ops_are_not_hidden_in_module_level_free_functions() -> No
                 offenders.append(f"{path.relative_to(ROOT).as_posix()}::{node.name}")
 
     assert offenders == []
-
