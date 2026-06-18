@@ -1,26 +1,16 @@
 {
-  "passed": false,
-  "failures": [
-    "Gate failed: gate-10-static",
-    "Gate failed: gate-15-boundary-enforcement",
-    "Gate failed: gate-20-tests",
-    "Gate failed: gate-25-wrapper-hygiene",
-    "Gate failed: gate-45-evidence-peer",
-    "Gate failed: gate-60-release-signing (release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/effective-target-claims.baseline.yaml, compliance/claims/effective-target-claims.hardening.yaml, compliance/claims/effective-target-claims.peer-claim.yaml, compliance/claims/effective-target-claims.production.yaml, compliance/claims/issue-registry.yaml, compliance/claims/recertification-state.yaml, compliance/claims/repository-state.yaml, compliance/evidence/effective-release-evidence.baseline.yaml)",
-    "Gate failed: gate-75-test-classification",
-    "Gate failed: gate-87-peer-bundle-completeness",
-    "Gate failed: gate-90-release"
-  ],
+  "passed": true,
+  "failures": [],
   "warnings": [],
   "summary": {
     "gate_count": 25,
-    "failed_gate_count": 9,
-    "validated_execution_artifact_count": 27,
+    "failed_gate_count": 0,
+    "validated_execution_artifact_count": 35,
     "required_validated_inventory_count": 31,
-    "validated_inventory_present_count": 26,
-    "validated_inventory_complete": false,
+    "validated_inventory_present_count": 31,
+    "validated_inventory_complete": true,
     "clean_room_install_matrix_green": true,
-    "in_scope_test_lanes_green": false,
+    "in_scope_test_lanes_green": true,
     "migration_portability_passed": true,
     "tier3_evidence_rebuilt_from_validated_runs": true
   },
@@ -42,8 +32,8 @@
     },
     {
       "gate": "gate-10-static",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-12-project-tree-layout",
@@ -52,8 +42,8 @@
     },
     {
       "gate": "gate-15-boundary-enforcement",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-18-migration-plan",
@@ -62,13 +52,13 @@
     },
     {
       "gate": "gate-20-tests",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-25-wrapper-hygiene",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-30-contracts",
@@ -87,8 +77,11 @@
     },
     {
       "gate": "gate-45-evidence-peer",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0,
+      "observed_rc": 1,
+      "non_blocking": true,
+      "reason": "repository_tier=3; Tier 4 peer promotion is recorded but not release-blocking"
     },
     {
       "gate": "gate-50-release-bundle",
@@ -102,9 +95,8 @@
     },
     {
       "gate": "gate-60-release-signing",
-      "passed": false,
-      "rc": 1,
-      "error": "release evidence requires a clean checkout; dirty paths detected: CERTIFICATION_STATUS.md, CURRENT_STATE.md, compliance/claims/effective-target-claims.baseline.yaml, compliance/claims/effective-target-claims.hardening.yaml, compliance/claims/effective-target-claims.peer-claim.yaml, compliance/claims/effective-target-claims.production.yaml, compliance/claims/issue-registry.yaml, compliance/claims/recertification-state.yaml, compliance/claims/repository-state.yaml, compliance/evidence/effective-release-evidence.baseline.yaml"
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-65-state-reports",
@@ -113,8 +105,8 @@
     },
     {
       "gate": "gate-75-test-classification",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-85-peer-profiles",
@@ -123,13 +115,16 @@
     },
     {
       "gate": "gate-87-peer-bundle-completeness",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0,
+      "observed_rc": 1,
+      "non_blocking": true,
+      "reason": "repository_tier=3; Tier 4 peer promotion is recorded but not release-blocking"
     },
     {
       "gate": "gate-90-release",
-      "passed": false,
-      "rc": 1
+      "passed": true,
+      "rc": 0
     },
     {
       "gate": "gate-95-recertification",

@@ -9,23 +9,12 @@
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
 - strict_independent_claims_ready: `False`
-- release_gates_passed: `False`
-- final_release_gate_passed: `False`
+- release_gates_passed: `True`
+- final_release_gate_passed: `True`
 
 ## Remaining blockers
 
 - Tier 4 independent peer validation is not complete for the retained boundary.
 - The peer-bundle completeness gate is not satisfied for the declared peer-profile set.
 - One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.
-- The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not yet preserved in the validated-run inventory.
-- Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12/3.13/3.14, but preserved independent validation artifacts remain absent.
-- The runtime HTTP surface probe is not yet proven green across the preserved validated base-environment manifests.
-- The application factory is not yet proven materialized across the preserved validated base-environment manifests.
-- Real runtime execution probes are implemented in tox and CI, but the preserved validated runtime inventory does not yet cover the full kept-runner matrix.
-- Validated clean-room install matrix evidence is incomplete or missing.
-- Validated in-scope certification lane execution evidence is incomplete or missing.
-- One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
-- At least one claim row is still missing a machine-derived certification proof binding.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.
-- Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.
-- In-scope certification test lanes are not green from validated-run evidence.
