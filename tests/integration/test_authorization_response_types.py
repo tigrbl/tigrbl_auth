@@ -3,7 +3,7 @@ from urllib.parse import parse_qs, urlparse
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.orm import Tenant, User, Client
+from tigrbl_auth.tables import Tenant, User, Client
 from tigrbl_auth.crypto import hash_pw
 
 

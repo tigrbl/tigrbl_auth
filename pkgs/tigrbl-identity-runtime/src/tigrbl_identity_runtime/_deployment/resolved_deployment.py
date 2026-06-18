@@ -197,7 +197,7 @@ def _derive_surface_sets(
     if raw.get("surface_public_enabled", True):
         derived.append("public-rest")
     if raw.get("surface_admin_enabled", True) or raw.get("surface_rpc_enabled", True):
-        derived.append("admin-rpc")
+        derived.append("admin-rest")
     if raw.get("surface_diagnostics_enabled", True):
         derived.append("diagnostics")
     return tuple(dict.fromkeys(derived))

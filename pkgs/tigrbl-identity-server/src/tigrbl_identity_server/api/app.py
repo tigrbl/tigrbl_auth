@@ -45,7 +45,10 @@ def _hide_disabled_control_plane_docs(
     for route in routes:
         path = str(getattr(route, "path_template", None) or getattr(route, "path", ""))
         hide = (
-            (not deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, rpc_prefix))
+            (
+                not deployment.flag_enabled("surface_rpc_enabled")
+                and (_path_has_prefix(path, rpc_prefix) or path == "/openrpc.json")
+            )
             or (
                 not deployment.flag_enabled("surface_diagnostics_enabled")
                 and _path_has_prefix(path, diagnostics_prefix)

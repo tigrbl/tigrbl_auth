@@ -27,19 +27,10 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "KeyRotationEvent",
         ),
         "admin_rest_groups": ("admin_auth", "admin_realms", "admin_identities"),
-        "rpc_method_prefixes": (
-            "audit.",
-            "discovery.",
-            "flow.",
-            "identity.",
-            "profile.",
-            "rpc.",
-            "target.",
-            "tenant.",
-        ),
+        "rpc_method_prefixes": (),
     },
     "tenant-admin-api": {
-        "surface_sets": ("admin-rpc",),
+        "surface_sets": ("admin-rest",),
         "allowed_capabilities": (),
         "admin_resources": (
             "User",
@@ -50,23 +41,10 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "KeyRotationEvent",
         ),
         "admin_rest_groups": ("admin_auth", "admin_identities"),
-        "rpc_method_prefixes": (
-            "audit.",
-            "client.",
-            "client.registration.",
-            "consent.",
-            "discovery.",
-            "identity.",
-            "jwks.",
-            "keys.",
-            "profile.",
-            "rpc.",
-            "target.",
-            "tenant.keys.",
-        ),
+        "rpc_method_prefixes": (),
     },
     "developer-api": {
-        "surface_sets": ("public-rest", "admin-rpc"),
+        "surface_sets": ("public-rest", "admin-rest"),
         "allowed_capabilities": (
             "register",
             "register-management",
@@ -80,18 +58,10 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_resources": ("Client", "ClientRegistration", "AuditEvent"),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (
-            "client.",
-            "client.registration.",
-            "discovery.",
-            "jwks.",
-            "profile.",
-            "rpc.",
-            "target.",
-        ),
+        "rpc_method_prefixes": (),
     },
     "service-admin-api": {
-        "surface_sets": ("public-rest", "admin-rpc"),
+        "surface_sets": ("public-rest", "admin-rest"),
         "allowed_capabilities": (
             "introspection",
             "openid-configuration",
@@ -110,16 +80,7 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "AuditEvent",
         ),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (
-            "audit.",
-            "discovery.",
-            "jwks.",
-            "keys.",
-            "profile.",
-            "rpc.",
-            "target.",
-            "token.",
-        ),
+        "rpc_method_prefixes": (),
     },
     "resource-validation-api": {
         "surface_sets": ("public-rest",),
@@ -159,8 +120,8 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
 
 PLUGIN_MODE_TO_SURFACE_SETS: Final[dict[str, tuple[str, ...]]] = {
     "public-only": ("public-rest",),
-    "admin-only": ("admin-rpc",),
-    "mixed": ("public-rest", "admin-rpc", "diagnostics"),
+    "admin-only": ("admin-rest",),
+    "mixed": ("public-rest", "admin-rest", "diagnostics"),
     "diagnostics-only": ("diagnostics",),
 }
 

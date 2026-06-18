@@ -82,7 +82,8 @@ def test_runtime_profile_resolver_applies_operator_overrides() -> None:
 
     assert deployment.profile == "baseline-development"
     assert deployment.surface_enabled("public-rest")
-    assert deployment.surface_enabled("admin-rpc")
+    assert deployment.surface_enabled("admin-rest")
+    assert not deployment.surface_enabled("admin-rpc")
     assert deployment.surface_enabled("diagnostics")
     assert narrowed.surface_sets == ("public-rest",)
     assert narrowed.surface_enabled("public-rest")
@@ -91,12 +92,11 @@ def test_runtime_profile_resolver_applies_operator_overrides() -> None:
 
 
 def test_runtime_profile_outputs_drive_contracts_and_surfaces() -> None:
-    """Routes, RPC, diagnostics, OpenAPI, OpenRPC, and evidence derive from ResolvedDeployment."""
+    """Routes, diagnostics, OpenAPI, and evidence derive from ResolvedDeployment."""
     deployment = load_runtime_profile("baseline-development").resolve()
 
     assert "/.well-known/openid-configuration" in deployment.active_contract_routes
-    assert "rpc.discover" in deployment.active_openrpc_methods
-    assert deployment.active_openrpc_methods
+    assert deployment.active_openrpc_methods == ()
     assert "OpenAPI 3.1 / 3.2 compatible public contract" in deployment.active_targets
-    assert "OpenRPC 1.4.x admin/control-plane contract" in deployment.active_targets
+    assert "OpenRPC 1.4.x admin/control-plane contract" not in deployment.active_targets
     assert deployment.surfaces["surface_diagnostics_enabled"] is True

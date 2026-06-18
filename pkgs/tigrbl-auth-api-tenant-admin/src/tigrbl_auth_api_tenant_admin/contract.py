@@ -13,7 +13,6 @@ class TenantAdminApiContract:
     intended_uix: str
     admin_resources: tuple[str, ...]
     admin_rest_groups: tuple[str, ...]
-    rpc_method_prefixes: tuple[str, ...]
     forbidden_route_prefixes: tuple[str, ...]
     forbidden_exact_routes: tuple[str, ...]
     consumed_packages: tuple[str, ...]
@@ -31,20 +30,6 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
         "KeyRotationEvent",
     ),
     admin_rest_groups=("admin_auth", "admin_identities"),
-    rpc_method_prefixes=(
-        "audit.",
-        "client.",
-        "client.registration.",
-        "consent.",
-        "discovery.",
-        "identity.",
-        "jwks.",
-        "keys.",
-        "profile.",
-        "rpc.",
-        "target.",
-        "tenant.keys.",
-    ),
     forbidden_route_prefixes=(
         "/tenant",
         "/service",

@@ -17,7 +17,7 @@ from tigrbl_auth.framework import TigrblApp
 from tigrbl_auth.routers.auth_flows import router
 from tigrbl_auth.routers.shared import _jwt
 from tigrbl_auth.security.deps import get_db
-from tigrbl_auth.orm import Client
+from tigrbl_auth.tables import Client
 from tigrbl_auth.services.token_service import JWTCoder
 
 

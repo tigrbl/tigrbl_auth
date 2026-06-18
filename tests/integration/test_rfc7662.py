@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from tigrbl_auth.orm import Client, Tenant
+from tigrbl_auth.tables import Client, Tenant
 from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async
 
 

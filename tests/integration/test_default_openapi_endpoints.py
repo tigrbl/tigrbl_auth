@@ -12,7 +12,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.app import app
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import Tenant, User
+from tigrbl_auth.tables import Tenant, User
 from tigrbl_auth.services._operator_store import OperationContext
 from tigrbl_auth.services.operator_service import create_resource
 

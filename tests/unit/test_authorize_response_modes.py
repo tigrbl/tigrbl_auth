@@ -5,7 +5,7 @@ import pytest
 from http import HTTPStatus as status
 
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import Client, Tenant, User
+from tigrbl_auth.tables import Client, Tenant, User
 
 
 async def _setup(async_client, db_session):

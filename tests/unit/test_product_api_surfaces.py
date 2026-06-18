@@ -133,14 +133,14 @@ def test_platform_admin_surface_owns_tenant_lifecycle_without_public_login_route
 def test_tenant_admin_surface_excludes_platform_tenant_lifecycle() -> None:
     deployment = resolve_deployment(product_surface="tenant-admin-api")
 
-    assert deployment.surface_enabled("admin-rpc")
+    assert deployment.surface_enabled("admin-rest")
+    assert not deployment.surface_enabled("admin-rpc")
+    assert not deployment.flag_enabled("surface_rpc_enabled")
     assert deployment.plugin_mode == "admin-only"
     assert "/tenant" not in admin_resource_path_prefixes(deployment)
     assert "/user" in admin_resource_path_prefixes(deployment)
     assert "/authsession" not in admin_resource_path_prefixes(deployment)
-    assert "identity.list" in deployment.active_openrpc_methods
-    assert "tenant.keys.create" in deployment.active_openrpc_methods
-    assert "tenant.list" not in deployment.active_openrpc_methods
+    assert deployment.active_openrpc_methods == ()
 
 
 def test_developer_and_service_admin_surfaces_are_product_filtered() -> None:
@@ -153,17 +153,19 @@ def test_developer_and_service_admin_surfaces_are_product_filtered() -> None:
 
     assert "/register" in developer.active_routes
     assert developer.plugin_mode == "mixed"
+    assert developer.surface_enabled("admin-rest")
+    assert not developer.surface_enabled("admin-rpc")
     assert "/authorize" not in developer.active_routes
-    assert "client.registration.upsert" in developer.active_openrpc_methods
-    assert "tenant.list" not in developer.active_openrpc_methods
+    assert developer.active_openrpc_methods == ()
     assert "/tenant" not in admin_resource_path_prefixes(developer)
     assert "/client" in admin_resource_path_prefixes(developer)
 
     assert "/introspect" in service.active_routes
     assert service.plugin_mode == "mixed"
+    assert service.surface_enabled("admin-rest")
+    assert not service.surface_enabled("admin-rpc")
     assert "/login" not in service.active_routes
-    assert "token.inspect" in service.active_openrpc_methods
-    assert "tenant.list" not in service.active_openrpc_methods
+    assert service.active_openrpc_methods == ()
     assert "/service" in admin_resource_path_prefixes(service)
     assert "/tenant" not in admin_resource_path_prefixes(service)
 
@@ -211,7 +213,7 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
     assert platform_tenant.status_code == 404
     assert platform_user.status_code == 404
     assert platform_admin_tenants.status_code == 401
-    assert platform_identity.status_code == 401
+    assert platform_identity.status_code == 404
     assert platform_identities.status_code == 401
     assert platform_authsession.status_code == 404
     assert platform_rpc.status_code == 404

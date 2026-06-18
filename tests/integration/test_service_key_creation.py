@@ -5,7 +5,7 @@ import httpx
 import pytest
 import uvicorn
 
-from tigrbl_auth.orm.service_key import ServiceKey
+from tigrbl_auth.tables.service_key import ServiceKey
 
 TENANT_ID = UUID("ffffffff-0000-0000-0000-000000000000")
 

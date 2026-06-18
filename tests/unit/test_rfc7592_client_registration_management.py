@@ -5,7 +5,7 @@ import uuid
 import pytest
 
 from tigrbl_auth import rfc7592
-from tigrbl_auth.orm import Client
+from tigrbl_auth.tables import Client
 from sqlalchemy.exc import NoResultFound
 
 

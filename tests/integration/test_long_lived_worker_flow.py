@@ -13,7 +13,7 @@ from tigrbl_auth.framework import (
 
 from tigrbl_auth import encode_jwt, decode_jwt
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import Tenant, User
+from tigrbl_auth.tables import Tenant, User
 from tigrbl_auth.rfc.rfc9449_dpop import (
     makeProof,
     jwk_from_public_key,

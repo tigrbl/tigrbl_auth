@@ -14,7 +14,6 @@ class ServiceAdminApiContract:
     public_capabilities: tuple[str, ...]
     admin_resources: tuple[str, ...]
     admin_rest_groups: tuple[str, ...]
-    rpc_method_prefixes: tuple[str, ...]
     forbidden_route_prefixes: tuple[str, ...]
     forbidden_exact_routes: tuple[str, ...]
     consumed_packages: tuple[str, ...]
@@ -41,16 +40,6 @@ SERVICE_ADMIN_API_CONTRACT = ServiceAdminApiContract(
         "AuditEvent",
     ),
     admin_rest_groups=(),
-    rpc_method_prefixes=(
-        "audit.",
-        "discovery.",
-        "jwks.",
-        "keys.",
-        "profile.",
-        "rpc.",
-        "target.",
-        "token.",
-    ),
     forbidden_route_prefixes=(
         "/tenant",
         "/user",

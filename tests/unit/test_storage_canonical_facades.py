@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import importlib
+import importlib.util
 from pathlib import Path
 
 
@@ -53,22 +54,27 @@ def test_tigrbl_auth_tables_reexport_canonical_storage_symbols() -> None:
             assert getattr(auth_module, exported) is getattr(storage_module, exported)
 
 
-def test_tigrbl_auth_orm_and_db_facades_reexport_storage_symbols() -> None:
-    auth_orm = importlib.import_module("tigrbl_auth.orm")
-    storage_orm = importlib.import_module("tigrbl_identity_storage.orm")
+def test_tigrbl_auth_tables_and_db_facades_reexport_storage_symbols() -> None:
+    auth_tables = importlib.import_module("tigrbl_auth.tables")
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     auth_db = importlib.import_module("tigrbl_auth.db")
     storage_db = importlib.import_module("tigrbl_identity_storage.db")
 
-    for name in storage_orm.__all__:
-        assert getattr(auth_orm, name) is getattr(storage_orm, name)
+    for name in storage_tables.__all__:
+        assert getattr(auth_tables, name) is getattr(storage_tables, name)
 
     assert auth_db.ENGINE is storage_db.ENGINE
     assert auth_db.dsn == storage_db.dsn
     assert auth_db.get_db is storage_db.get_db
 
-    auth_realm = importlib.import_module("tigrbl_auth.orm.realm")
-    storage_realm = importlib.import_module("tigrbl_identity_storage.orm.realm")
+    auth_realm = importlib.import_module("tigrbl_auth.tables.realm")
+    storage_realm = importlib.import_module("tigrbl_identity_storage.tables.realm")
     assert auth_realm.Realm is storage_realm.Realm
+
+
+def test_orm_export_paths_are_not_supported() -> None:
+    assert importlib.util.find_spec("tigrbl_auth.orm") is None
+    assert importlib.util.find_spec("tigrbl_identity_storage.orm") is None
 
 
 def test_tigrbl_auth_persistence_facade_reexports_storage_helpers() -> None:

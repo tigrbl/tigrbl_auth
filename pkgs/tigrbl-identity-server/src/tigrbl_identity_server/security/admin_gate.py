@@ -127,6 +127,24 @@ def _platform_admin_raw_table_path(path: str, deployment: ResolvedDeployment) ->
     return _path_has_prefix(path, "/tenant") or _path_has_prefix(path, "/user")
 
 
+def _disallowed_admin_resource_path(
+    path: str,
+    deployment: ResolvedDeployment,
+    admin_path_prefixes: tuple[str, ...],
+) -> bool:
+    allowed_resources = {
+        str(name).lower() for name in getattr(deployment, "allowed_admin_resources", ())
+    }
+    if not allowed_resources:
+        return any(_path_has_prefix(path, prefix) for prefix in admin_path_prefixes)
+    for prefix in admin_path_prefixes:
+        if not _path_has_prefix(path, prefix):
+            continue
+        resource_name = prefix.strip("/").lower()
+        return resource_name not in allowed_resources
+    return False
+
+
 class AdminGate:
     """ASGI gate for generated local control-plane surfaces."""
 
@@ -166,7 +184,15 @@ class AdminGate:
     def _disabled_control_plane_path(self, path: str) -> bool:
         if _platform_admin_raw_table_path(path, self.deployment):
             return True
-        if not self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
+        if self.deployment.flag_enabled("surface_admin_enabled") and _disallowed_admin_resource_path(
+            path,
+            self.deployment,
+            self.admin_path_prefixes,
+        ):
+            return True
+        if not self.deployment.flag_enabled("surface_rpc_enabled") and (
+            _path_has_prefix(path, self.rpc_prefix) or path == "/openrpc.json"
+        ):
             return True
         if not self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
             return True

@@ -5,17 +5,17 @@ ssot_profile_id: "prf:baseline-development"
 feature_id: "feat:profile-baseline-development"
 extends:
   - "baseline"
-description: "Development deployment profile extending baseline with docs, OpenAPI, OpenRPC, and diagnostic inspection surfaces for local development."
+description: "Development deployment profile extending baseline with docs, OpenAPI and diagnostic inspection surfaces for local development."
 surface_plugin_mode: "mixed"
 surfaces:
   public: true
   admin: true
-  rpc: true
+  rpc: false
   diagnostics: true
   operator: true
 surface_sets:
   - "public-rest"
-  - "admin-rpc"
+  - "admin-rest"
   - "diagnostics"
 flags:
   groups:

@@ -54,7 +54,6 @@ FACADE_MODULES = {
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
     "tigrbl_auth.db": "tigrbl_identity_storage.db",
     "tigrbl_auth.tables": "tigrbl_identity_storage.tables",
-    "tigrbl_auth.orm": "tigrbl_identity_storage.orm",
     "tigrbl_auth.migrations": "tigrbl_identity_storage.migrations",
     "tigrbl_auth.migrations.helpers": "tigrbl_identity_storage.migrations.helpers",
     "tigrbl_auth.migrations.runtime": "tigrbl_identity_storage.migrations.runtime",
@@ -85,7 +84,6 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.standards.oauth2.resource_verifier_contract",
         "tigrbl_auth.db",
         "tigrbl_auth.tables",
-        "tigrbl_auth.orm",
         "tigrbl_auth.migrations",
         "tigrbl_auth.migrations.helpers",
         "tigrbl_auth.migrations.runtime",
@@ -237,8 +235,8 @@ def test_installable_tigrbl_auth_facade_exposes_runtime_package() -> None:
 
 def test_installable_tigrbl_auth_facade_exposes_storage_legacy_submodules() -> None:
     with package_src_paths_only():
-        legacy_user = importlib.import_module("tigrbl_auth.orm.user")
-        canonical_user = importlib.import_module("tigrbl_identity_storage.orm.user")
+        legacy_user = importlib.import_module("tigrbl_auth.tables.user")
+        canonical_user = importlib.import_module("tigrbl_identity_storage.tables.user")
         legacy_engine = importlib.import_module("tigrbl_auth.tables.engine")
         canonical_engine = importlib.import_module("tigrbl_identity_storage.tables.engine")
         legacy_revision = importlib.import_module(

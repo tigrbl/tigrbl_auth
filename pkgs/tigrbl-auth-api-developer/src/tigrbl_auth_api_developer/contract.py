@@ -14,7 +14,6 @@ class DeveloperApiContract:
     public_capabilities: tuple[str, ...]
     admin_resources: tuple[str, ...]
     admin_rest_groups: tuple[str, ...]
-    rpc_method_prefixes: tuple[str, ...]
     forbidden_route_prefixes: tuple[str, ...]
     forbidden_exact_routes: tuple[str, ...]
     consumed_packages: tuple[str, ...]
@@ -36,15 +35,6 @@ DEVELOPER_API_CONTRACT = DeveloperApiContract(
     ),
     admin_resources=("Client", "ClientRegistration", "AuditEvent"),
     admin_rest_groups=(),
-    rpc_method_prefixes=(
-        "client.",
-        "client.registration.",
-        "discovery.",
-        "jwks.",
-        "profile.",
-        "rpc.",
-        "target.",
-    ),
     forbidden_route_prefixes=(
         "/tenant",
         "/user",

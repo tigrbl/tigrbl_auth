@@ -1,7 +1,7 @@
 import pytest
 from http import HTTPStatus as status
 
-from tigrbl_auth.orm.pushed_authorization_request import (
+from tigrbl_auth.tables.pushed_authorization_request import (
     PushedAuthorizationRequest,
     DEFAULT_PAR_EXPIRY,
 )

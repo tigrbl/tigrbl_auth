@@ -13,7 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import AuthSession, Client, Consent, Tenant, User
+from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
 
 ROOT = Path(__file__).resolve().parents[3]
 PKG_SRC = ROOT / "pkgs" / "tigrbl-auth-api-my-account" / "src"

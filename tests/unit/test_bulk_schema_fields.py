@@ -1,7 +1,7 @@
 """Verify IO verb exposure for user and tenant columns."""
 
-from tigrbl_auth.orm.user import User
-from tigrbl_auth.orm.tenant import Tenant
+from tigrbl_auth.tables.user import User
+from tigrbl_auth.tables.tenant import Tenant
 
 
 def test_user_column_io() -> None:

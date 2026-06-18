@@ -11,7 +11,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import Client, ClientRegistration, Tenant, User
+from tigrbl_auth.tables import Client, ClientRegistration, Tenant, User
 from tigrbl_auth.services.persistence import get_token_record_async
 from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 

@@ -7,7 +7,7 @@ import pytest
 from http import HTTPStatus as status
 
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import AuthCode, AuthSession, Client, Tenant, User
+from tigrbl_auth.tables import AuthCode, AuthSession, Client, Tenant, User
 from tigrbl_auth.oidc_discovery import ISSUER
 from tigrbl_auth.oidc_id_token import verify_id_token
 from tigrbl_auth.standards.http.cookies import parse_session_cookie_value

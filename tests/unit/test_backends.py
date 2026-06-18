@@ -12,7 +12,7 @@ import pytest
 
 from tigrbl_auth.backends import AuthError, PasswordBackend, ApiKeyBackend
 from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.orm import User, ApiKey, ServiceKey, Service
+from tigrbl_auth.tables import User, ApiKey, ServiceKey, Service
 
 
 @pytest.mark.unit
@@ -209,7 +209,7 @@ class TestApiKeyBackend:
 
         monkeypatch.setattr(ApiKey.handlers.list, "core", _api_key_list_core)
         monkeypatch.setattr(ServiceKey.handlers.list, "core", _service_key_list_core)
-        from tigrbl_auth.orm import Client
+        from tigrbl_auth.tables import Client
 
         monkeypatch.setattr(Client.handlers.list, "core", _client_list_core)
 

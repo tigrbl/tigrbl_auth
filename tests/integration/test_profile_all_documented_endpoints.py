@@ -14,7 +14,7 @@ from tigrbl_auth.api.app import build_app
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, VALID_PROFILES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.orm import Tenant, User
+from tigrbl_auth.tables import Tenant, User
 from tigrbl_auth.services.operator_service import get_record
 from tigrbl_auth.tables import get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db

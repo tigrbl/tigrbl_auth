@@ -18,7 +18,7 @@ from tigrbl_auth.api.surfaces import surface_api as composed_surface_api
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
-from tigrbl_auth.orm import Tenant, User
+from tigrbl_auth.tables import Tenant, User
 from tigrbl_auth.routers.surface import surface_api as legacy_surface_api
 from tigrbl_auth.runtime.engine_resolver import (
     register_api_provider,

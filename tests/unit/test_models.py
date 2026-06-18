@@ -1,5 +1,5 @@
 """
-Unit tests for tigrbl_auth.orm module.
+Unit tests for tigrbl_auth.tables module.
 
 Tests ORM model creation, validation, relationships, hybrid properties, and methods.
 """
@@ -8,7 +8,7 @@ import uuid
 
 import pytest
 
-from tigrbl_auth.orm import Tenant, Client, User, Service, ApiKey, ServiceKey
+from tigrbl_auth.tables import Tenant, Client, User, Service, ApiKey, ServiceKey
 from tigrbl_auth.crypto import hash_pw
 
 
@@ -220,7 +220,7 @@ class TestModelIntegration:
 
     def test_client_id_regex_pattern(self):
         """Test the client ID regex pattern directly."""
-        from tigrbl_auth.orm import _CLIENT_ID_RE
+        from tigrbl_auth.tables import _CLIENT_ID_RE
 
         valid_patterns = [
             "simple123",

@@ -1,6 +1,6 @@
 import pytest
 from tigrbl import bind
-from tigrbl_auth.orm import User
+from tigrbl_auth.tables import User
 from tigrbl_auth.routers.schemas import RegisterIn, TokenPair
 
 

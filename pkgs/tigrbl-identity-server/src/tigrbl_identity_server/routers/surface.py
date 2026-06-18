@@ -2,7 +2,7 @@
 tigrbl_auth.routers.surface
 ===========================
 
-ORM-backed API surface for the authentication service.
+Table-backed API surface for the authentication service.
 
 Exports
 -------
@@ -19,7 +19,7 @@ Notes
 *   All mix-ins (GUIDPk, Timestamped, TenantBound, etc.) live in
     *tigrbl.orm.mixins* and are imported by the ORM models.
 *   Importing this module has the side-effect of importing
-    ``tigrbl_auth.orm``, so every model class is registered with the
+    ``tigrbl_identity_storage.tables``, so every model class is registered with the
     declarative base **before** Tigrbl introspects the metadata.
 """
 
