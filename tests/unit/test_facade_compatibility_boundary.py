@@ -51,17 +51,19 @@ def isolated_facade_import():
 
 @pytest.mark.unit
 def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
-    root_project = _load_pyproject(ROOT / "pyproject.toml")["project"]
-    root_poetry = _load_pyproject(ROOT / "pyproject.toml")["tool"]["poetry"]
+    root_pyproject = _load_pyproject(ROOT / "pyproject.toml")
+    root_project = root_pyproject["project"]
     facade_project = _load_pyproject(ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml")["project"]
 
     assert _normalized_dist_name(facade_project["name"]) == "tigrbl-auth"
     assert _normalized_dist_name(root_project["name"]) != "tigrbl-auth"
     assert _normalized_dist_name(root_project["name"]).endswith("-workspace")
     assert "tigrbl-auth==0.4.0.dev2" in root_project["dependencies"]
-    assert root_poetry["packages"] == [{"include": "tigrbl_auth_workspace"}]
-    assert (ROOT / "tigrbl_auth_workspace" / "__init__.py").exists()
-    assert all(package["include"] != "tigrbl_auth" for package in root_poetry["packages"])
+    assert root_pyproject["tool"]["uv"]["package"] is False
+    assert "poetry" not in root_pyproject["tool"]
+    assert not (ROOT / "tigrbl_auth").exists()
+    assert not (ROOT / "tigrbl_auth_workspace").exists()
+    assert (ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth" / "__init__.py").exists()
 
 
 @pytest.mark.unit

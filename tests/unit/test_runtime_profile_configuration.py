@@ -32,10 +32,12 @@ def test_packaged_runtime_profiles_load_and_validate() -> None:
 
 def test_runtime_profile_yaml_files_are_included_in_build_config() -> None:
     """Runtime profiles are package resources, not checkout-only fixtures."""
-    pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    pyproject = tomllib.loads(
+        (ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml").read_text(encoding="utf-8")
+    )
     includes = pyproject["tool"]["poetry"]["include"]
 
-    assert "tigrbl_auth/profiles/*.yaml" in includes
+    assert "src/tigrbl_auth/profiles/*.yaml" in includes
 
 
 def test_development_profile_is_active_in_ssot_registry() -> None:

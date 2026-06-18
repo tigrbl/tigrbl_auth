@@ -10,22 +10,23 @@ except ModuleNotFoundError:  # pragma: no cover - Python < 3.11
 
 
 ROOT = Path(__file__).resolve().parents[2]
+FACADE_SRC = ROOT / "pkgs" / "tigrbl-auth" / "src"
 CLI_SRC = ROOT / "pkgs" / "tigrbl-identity-cli" / "src"
 OPERATOR_SRC = ROOT / "pkgs" / "tigrbl-identity-operator" / "src"
 
-for value in (str(ROOT), str(CLI_SRC), str(OPERATOR_SRC)):
+for value in (str(ROOT), str(FACADE_SRC), str(CLI_SRC), str(OPERATOR_SRC)):
     if value in sys.path:
         sys.path.remove(value)
-for value in (str(OPERATOR_SRC), str(CLI_SRC), str(ROOT)):
+for value in (str(OPERATOR_SRC), str(CLI_SRC), str(FACADE_SRC)):
     if value not in sys.path:
         sys.path.insert(0, value)
 
 
 def _clear_cli_modules() -> None:
-    for value in (str(ROOT), str(CLI_SRC), str(OPERATOR_SRC)):
+    for value in (str(ROOT), str(FACADE_SRC), str(CLI_SRC), str(OPERATOR_SRC)):
         while value in sys.path:
             sys.path.remove(value)
-    for value in (str(OPERATOR_SRC), str(CLI_SRC), str(ROOT)):
+    for value in (str(OPERATOR_SRC), str(CLI_SRC), str(FACADE_SRC)):
         sys.path.insert(0, value)
     for name in list(sys.modules):
         if (
@@ -65,7 +66,6 @@ def test_legacy_cli_import_paths_are_shims_to_identity_cli() -> None:
 
 def test_legacy_cli_packages_do_not_keep_per_module_shim_files() -> None:
     legacy_cli_roots = [
-        ROOT / "tigrbl_auth" / "cli",
         ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth" / "cli",
         ROOT / "pkgs" / "tigrbl-identity-operator" / "src" / "tigrbl_identity_operator" / "cli",
     ]
@@ -74,10 +74,13 @@ def test_legacy_cli_packages_do_not_keep_per_module_shim_files() -> None:
         assert sorted(path.name for path in cli_root.glob("*.py")) == ["__init__.py"]
 
 
-def test_root_console_script_delegates_to_identity_cli() -> None:
+def test_workspace_console_script_delegates_to_identity_cli_without_packaging_root() -> None:
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert pyproject["project"]["scripts"]["tigrbl-auth"] == "tigrbl_identity_cli.cli.main:main"
+    assert pyproject["tool"]["uv"]["package"] is False
+    assert "tigrbl_auth_workspace" not in (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    assert "." not in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
     assert "pkgs/tigrbl-identity-cli/src" in pyproject["tool"]["pytest"]["ini_options"]["pythonpath"]
 
 

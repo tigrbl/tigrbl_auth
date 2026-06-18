@@ -16,9 +16,9 @@ PROFILE_GROUPS = {
     "peer-claim": ("baseline", "production", "hardening"),
 }
 PUBLIC_ROUTE_SEARCH_ROOTS = (
-    "tigrbl_auth/api/rest/routers",
-    "tigrbl_auth/standards/oauth2",
-    "tigrbl_auth/standards/oidc",
+    "pkgs/tigrbl-auth/src/tigrbl_auth/api/rest/routers",
+    "pkgs/tigrbl-auth/src/tigrbl_auth/standards/oauth2",
+    "pkgs/tigrbl-auth/src/tigrbl_auth/standards/oidc",
 )
 OPENAPI_TARGET_LABEL = "OpenAPI 3.1 / 3.2 compatible public contract"
 OPENRPC_TARGET_LABEL = "OpenRPC 1.4.x admin/control-plane contract"
@@ -73,12 +73,16 @@ def literal_assignment(path: Path, name: str) -> Any:
     return ast.literal_eval(value)
 
 
+def facade_package_root(repo_root: Path) -> Path:
+    return repo_root / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth"
+
+
 def load_public_capabilities(repo_root: Path) -> list[dict[str, Any]]:
-    return list(literal_assignment(repo_root / "tigrbl_auth/config/surfaces.py", "PUBLIC_CAPABILITIES"))
+    return list(literal_assignment(facade_package_root(repo_root) / "config/surfaces.py", "PUBLIC_CAPABILITIES"))
 
 
 def load_diagnostics_capabilities(repo_root: Path) -> list[dict[str, Any]]:
-    return list(literal_assignment(repo_root / "tigrbl_auth/config/surfaces.py", "DIAGNOSTICS_CAPABILITIES"))
+    return list(literal_assignment(facade_package_root(repo_root) / "config/surfaces.py", "DIAGNOSTICS_CAPABILITIES"))
 
 
 def capability_registry(repo_root: Path) -> dict[str, dict[str, Any]]:
@@ -105,7 +109,7 @@ def route_registry(repo_root: Path) -> dict[str, dict[str, Any]]:
 
 
 def load_feature_flag_groups(repo_root: Path) -> dict[str, dict[str, Any]]:
-    return dict(literal_assignment(repo_root / "tigrbl_auth/config/feature_flags.py", "FEATURE_FLAG_GROUPS"))
+    return dict(literal_assignment(facade_package_root(repo_root) / "config/feature_flags.py", "FEATURE_FLAG_GROUPS"))
 
 
 def active_flags_for_profile(repo_root: Path, profile: str) -> set[str]:
@@ -269,7 +273,7 @@ def _extract_rpc_methods_from_methods_tuple(node: ast.AST) -> list[dict[str, Any
 
 def extract_rpc_method_definitions(repo_root: Path) -> dict[str, dict[str, Any]]:
     extracted: dict[str, dict[str, Any]] = {}
-    base = repo_root / "tigrbl_auth/api/rpc/methods"
+    base = facade_package_root(repo_root) / "api/rpc/methods"
     for path in sorted(base.glob("*.py")):
         if path.name.startswith("_") or path.name == "__init__.py":
             continue
@@ -652,9 +656,9 @@ def verify_feature_surface_modularity(repo_root: Path) -> dict[str, Any]:
     expected_routes = [path for path, meta in route_map.items() if meta.get("surface_set") == "public-rest" and meta.get("contract_visible")]
     if set(current_routes) != set(expected_routes):
         failures.append(f"public-operator-surface current routes drift from capability registry: expected={expected_routes} actual={current_routes}")
-    if "attach_runtime_surfaces(" not in (repo_root / "tigrbl_auth/plugin.py").read_text(encoding="utf-8"):
+    if "attach_runtime_surfaces(" not in (facade_package_root(repo_root) / "plugin.py").read_text(encoding="utf-8"):
         failures.append("plugin.py does not install surfaces through attach_runtime_surfaces")
-    if "attach_runtime_surfaces(" not in (repo_root / "tigrbl_auth/api/app.py").read_text(encoding="utf-8"):
+    if "attach_runtime_surfaces(" not in (facade_package_root(repo_root) / "api/app.py").read_text(encoding="utf-8"):
         failures.append("api/app.py does not install surfaces through attach_runtime_surfaces")
     source_routes = extract_route_definitions(repo_root)
     for capability, meta in capability_map.items():

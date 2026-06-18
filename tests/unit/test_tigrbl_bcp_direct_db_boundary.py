@@ -10,29 +10,6 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 
 MIGRATED_RELEASE_PATHS = [
-    ROOT / "tigrbl_auth/ops/authorize.py",
-    ROOT / "tigrbl_auth/ops/device_authorization.py",
-    ROOT / "tigrbl_auth/ops/login.py",
-    ROOT / "tigrbl_auth/ops/par.py",
-    ROOT / "tigrbl_auth/ops/register.py",
-    ROOT / "tigrbl_auth/ops/token.py",
-    ROOT / "tigrbl_auth/api/rest/routers/admin_auth.py",
-    ROOT / "tigrbl_auth/api/rest/routers/admin_identities.py",
-    ROOT / "tigrbl_auth/api/rest/routers/admin_realms.py",
-    ROOT / "tigrbl_auth/api/rest/routers/admin_tenants.py",
-    ROOT / "tigrbl_auth/api/rest/routers/my_account.py",
-    ROOT / "tigrbl_auth/api/rpc/methods/_shared.py",
-    ROOT / "tigrbl_auth/backends.py",
-    ROOT / "tigrbl_auth/routers/auth_flows.py",
-    ROOT / "tigrbl_auth/routers/authz/oidc.py",
-    ROOT / "tigrbl_auth/security/auth.py",
-    ROOT / "tigrbl_auth/security/deps.py",
-    ROOT / "tigrbl_auth/security/handler_records.py",
-    ROOT / "tigrbl_auth/security/user_lookup.py",
-    ROOT / "tigrbl_auth/services/admin_identity_bootstrap.py",
-    ROOT / "tigrbl_auth/services/auth_backends.py",
-    ROOT / "tigrbl_auth/services/persistence.py",
-    ROOT / "tigrbl_auth/standards/oidc/discovery.py",
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
     ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/authorize.py",
@@ -118,10 +95,6 @@ PERSISTENCE_HELPER_PATHS = [
 ]
 
 SYNC_COMPAT_PATHS = [
-    ROOT / "tigrbl_auth/jwtoken.py",
-    ROOT / "tigrbl_auth/api/rpc/registry.py",
-    ROOT / "tigrbl_auth/rfc/rfc8037.py",
-    ROOT / "tigrbl_auth/standards/jose/rfc8037.py",
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
     ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
     ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
@@ -131,11 +104,6 @@ SYNC_COMPAT_PATHS = [
 ]
 
 ASYNC_REQUEST_TOKEN_PATHS = [
-    ROOT / "tigrbl_auth/security/auth.py",
-    ROOT / "tigrbl_auth/security/deps.py",
-    ROOT / "tigrbl_auth/oidc_userinfo.py",
-    ROOT / "tigrbl_auth/standards/oidc/userinfo.py",
-    ROOT / "tigrbl_auth/standards/oauth2/token_exchange.py",
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
     ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
     ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/userinfo.py",
@@ -148,7 +116,6 @@ ASYNC_REQUEST_TOKEN_PATHS = [
 AUTHN_TOKEN_SIGNER_PATHS = [
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
     ROOT / "pkgs/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/coder.py",
-    ROOT / "tigrbl_auth/jwtoken.py",
     ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
 ]
 
@@ -227,7 +194,7 @@ def test_migrated_release_paths_use_tigrbl_handlers_not_direct_db_or_sqla() -> N
 @pytest.mark.unit
 def test_package_surfaces_do_not_use_generated_part_modules() -> None:
     violations: list[str] = []
-    for base in (ROOT / "pkgs", ROOT / "tigrbl_auth"):
+    for base in (ROOT / "pkgs",):
         for path in base.rglob("part_*.py"):
             violations.append(f"{path}: generated part module remains in a package surface")
 
@@ -251,7 +218,7 @@ def test_semantic_facades_do_not_use_split_exec_loaders() -> None:
 @pytest.mark.unit
 def test_package_code_does_not_use_exec_compile_split_loaders() -> None:
     violations: list[str] = []
-    for base in (ROOT / "pkgs", ROOT / "tigrbl_auth"):
+    for base in (ROOT / "pkgs",):
         for path in base.rglob("*.py"):
             source = path.read_text(encoding="utf-8")
             if "exec(compile(" in source:

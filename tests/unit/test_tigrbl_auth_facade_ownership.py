@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
-LEGACY_ROOT = ROOT / "tigrbl_auth"
+FACADE_ROOT = PKGS / "tigrbl-auth" / "src" / "tigrbl_auth"
 LARGE_FILE_THRESHOLD = 400
 
 
@@ -111,7 +111,10 @@ def source_tree_paths_first():
     try:
         root_value = str(ROOT)
         sys.path = [value for value in sys.path if value not in {root_value, ""}]
-        sys.path.insert(0, root_value)
+        for src in PKGS.glob("*/src"):
+            value = str(src)
+            if value not in sys.path:
+                sys.path.insert(0, value)
         yield
     finally:
         for name in list(sys.modules):
@@ -180,7 +183,7 @@ def test_no_legacy_executable_facades_remain() -> None:
 
 
 def test_legacy_facade_token_is_non_executable_alias() -> None:
-    source = (LEGACY_ROOT / "ops" / "token.py").read_text(encoding="utf-8")
+    source = (FACADE_ROOT / "ops" / "token.py").read_text(encoding="utf-8")
 
     assert "exec(compile(" not in source
     assert "alias_module" in source
@@ -189,18 +192,11 @@ def test_legacy_facade_token_is_non_executable_alias() -> None:
 
 def test_pqc_touched_facades_do_not_own_runtime_implementation() -> None:
     facade_paths = [
-        LEGACY_ROOT / "jwtoken.py",
-        LEGACY_ROOT / "standards" / "jose" / "rfc7515.py",
-        LEGACY_ROOT / "standards" / "jose" / "rfc7517.py",
-        LEGACY_ROOT / "standards" / "jose" / "rfc7518.py",
-        LEGACY_ROOT / "rfc" / "rfc7517.py",
-        LEGACY_ROOT / "rfc" / "rfc7518.py",
-        LEGACY_ROOT / "standards" / "oauth2" / "resource_verifier_contract.py",
-        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "jwtoken.py",
-        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7515.py",
-        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7517.py",
-        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "jose" / "rfc7518.py",
-        PKGS / "tigrbl-auth" / "src" / "tigrbl_auth" / "standards" / "oauth2" / "resource_verifier_contract.py",
+        FACADE_ROOT / "jwtoken.py",
+        FACADE_ROOT / "standards" / "jose" / "rfc7515.py",
+        FACADE_ROOT / "standards" / "jose" / "rfc7517.py",
+        FACADE_ROOT / "standards" / "jose" / "rfc7518.py",
+        FACADE_ROOT / "standards" / "oauth2" / "resource_verifier_contract.py",
     ]
     forbidden_tokens = {
         "class JWTCoder",
@@ -346,7 +342,7 @@ def test_tigrbl_auth_has_no_large_exact_copies_of_split_package_modules() -> Non
             canonical_hashes.setdefault(digest, []).append(path)
 
     duplicate_large_files: list[str] = []
-    for path in sorted(LEGACY_ROOT.rglob("*.py")):
+    for path in sorted(FACADE_ROOT.rglob("*.py")):
         if len(path.read_text(encoding="utf-8").splitlines()) <= LARGE_FILE_THRESHOLD:
             continue
         digest = hashlib.sha256(path.read_bytes()).hexdigest()

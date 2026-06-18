@@ -105,7 +105,7 @@ Repository = "https://github.com/swarmauri/swarmauri-sdk"
 Homepage = "https://github.com/swarmauri/swarmauri-sdk"
 
 [tool.pytest.ini_options]
-pythonpath = [".", "pkgs/tigrbl-identity-cli/src"]
+pythonpath = ["pkgs/tigrbl-identity-cli/src"]
 testpaths = ["tests"]
 norecursedirs = ["combined", "scripts", ".pytest_cache", "__pycache__", ".uv-cache", ".venv", "dist", ".benchmarks"]
 markers = [
@@ -135,13 +135,6 @@ asyncio_default_fixture_loop_scope = "function"
 asyncio_mode = "auto"
 addopts = "--import-mode=importlib --basetemp=.pytest-tmp"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-packages = [{ include = "tigrbl_auth_workspace" }]
-
 [dependency-groups]
 dev = [
     "pytest>=8.0",
@@ -156,6 +149,9 @@ dev = [
     "tox>=4.23.2",
     "ssot-registry>=0.2.8",
 ]
+
+[tool.uv]
+package = false
 
 [tool.uv.sources]
 tigrbl-auth = { path = "pkgs/tigrbl-auth", editable = true }
