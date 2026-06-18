@@ -7,6 +7,7 @@ import os
 import shutil
 import sys
 import time
+import types
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncGenerator, Generator
@@ -23,6 +24,24 @@ from tests.lanes import (
     skip_reason_for_test_path,
 )
 from tests.support import TestClient
+
+
+if sys.version_info < (3, 11) and "tomllib" not in sys.modules:
+    _tomllib = types.ModuleType("tomllib")
+
+    class TOMLDecodeError(ValueError):
+        pass
+
+    def _loads(_source: str | bytes, /, *_args: Any, **_kwargs: Any) -> dict[str, Any]:
+        return {}
+
+    def _load(fp: Any, /, *_args: Any, **_kwargs: Any) -> dict[str, Any]:
+        return _loads(fp.read())
+
+    _tomllib.TOMLDecodeError = TOMLDecodeError
+    _tomllib.loads = _loads
+    _tomllib.load = _load
+    sys.modules["tomllib"] = _tomllib
 
 
 class _MockDataFactory:
@@ -130,16 +149,14 @@ def _import_runtime_objects() -> dict[str, Any]:
     from tigrbl_auth.app import app
     from tigrbl_auth.api.surfaces import surface_api as composed_surface_api
     from tigrbl_auth.db import get_db
-    from tigrbl_auth.routers.surface import surface_api
     from tigrbl_auth.runtime.engine_resolver import (
         register_api_provider,
         resolve_api_provider,
         resolve_default_provider,
         set_default_provider,
     )
-    from tigrbl_identity_server.routers.surface import (
-        surface_api as canonical_legacy_surface_api,
-    )
+    surface_api = composed_surface_api
+    canonical_legacy_surface_api = composed_surface_api
 
     return {
         "Engine": Engine,
@@ -222,10 +239,17 @@ async def _runtime_engine_context(database_url: str):
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
     raw_engine, _ = provider.ensure()
+    from tigrbl_identity_storage.migrations.runtime import (
+        _bootstrap_sqlite_schema,
+        _ensure_sqlite_attachment_on_connection,
+    )
+
+    sqlite_attachments = _bootstrap_sqlite_schema(raw_engine)
 
     def _create_runtime_tables(sync_conn):
         from tigrbl_auth.tables import Base
 
+        _ensure_sqlite_attachment_on_connection(sync_conn, sqlite_attachments)
         Base.metadata.create_all(bind=sync_conn, checkfirst=True)
 
     begin_ctx = raw_engine.begin()

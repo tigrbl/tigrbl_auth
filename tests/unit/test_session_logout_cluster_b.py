@@ -6,8 +6,8 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_auth.standards.oidc import rp_initiated_logout as rp_logout
-from tigrbl_auth.standards.oidc.session_mgmt import (
+from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
+from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
     compute_session_state,
     describe as describe_session_management,
     validate_session_state,

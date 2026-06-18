@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     TenantBase,
@@ -18,6 +19,7 @@ from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     relationship,
 )
+from ._ops import create_record, first_record, list_records, record_id, update_record
 
 
 class Tenant(TenantBase, Bootstrappable):
@@ -78,6 +80,29 @@ class Tenant(TenantBase, Bootstrappable):
             "slug": "public",
         }
     ]
+
+    @classmethod
+    async def create_tenant(cls, db: Any, **payload: Any) -> "Tenant":
+        return await create_record(cls, db, payload)
+
+    @classmethod
+    async def update_tenant(cls, db: Any, *, tenant_id: uuid.UUID, **payload: Any) -> "Tenant | None":
+        row = await first_record(cls, db, {"id": tenant_id})
+        if row is None:
+            return None
+        return await update_record(cls, db, record_id(row), payload)
+
+    @classmethod
+    async def disable_tenant(cls, db: Any, *, tenant_id: uuid.UUID) -> "Tenant | None":
+        return await cls.update_tenant(db, tenant_id=tenant_id, is_active=False)
+
+    @classmethod
+    async def list_by_realm(cls, db: Any, *, realm_id: uuid.UUID | None) -> list["Tenant"]:
+        return await list_records(cls, db, {"realm_id": realm_id})
+
+    @classmethod
+    async def lookup_by_name(cls, db: Any, *, name: str) -> "Tenant | None":
+        return await first_record(cls, db, {"name": name})
 
 
 __all__ = ["Tenant"]

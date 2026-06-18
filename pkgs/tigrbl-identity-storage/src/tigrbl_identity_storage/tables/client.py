@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import uuid
 from typing import Final
+from typing import Any
 from urllib.parse import urlparse
 
 from tigrbl_identity_server.framework import (
@@ -74,6 +75,31 @@ class Client(ClientBase):
 
     def verify_secret(self, plain: str) -> bool:
         return verify_pw(plain, self.client_secret_hash)
+
+    @classmethod
+    async def authenticate(cls, db: Any, *, client_secret: str, client_id: str | uuid.UUID | None = None):
+        from ._ops import field, first_record, list_records
+
+        rows = [await first_record(cls, db, {"id": client_id})] if client_id is not None else await list_records(cls, db, {"is_active": True})
+        for row in rows:
+            if row is not None and bool(field(row, "is_active", True)) and row.verify_secret(client_secret):
+                return row
+        return None
+
+    async def rotate_secret(self, db: Any, *, client_secret: str):
+        from ._ops import record_id, update_record
+
+        return await update_record(type(self), db, record_id(self), {"client_secret_hash": hash_pw(client_secret)})
+
+    async def enable(self, db: Any):
+        from ._ops import record_id, update_record
+
+        return await update_record(type(self), db, record_id(self), {"is_active": True})
+
+    async def disable(self, db: Any):
+        from ._ops import record_id, update_record
+
+        return await update_record(type(self), db, record_id(self), {"is_active": False})
 
 
 __all__ = ["Client", "_CLIENT_ID_RE"]

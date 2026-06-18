@@ -94,24 +94,17 @@ async def approve_device_code(ctx: Mapping[str, Any]) -> None:
 
     DeviceCode = _device_code_table()
     payload = ctx.get("payload") or {}
+    db = ctx.get("db") or ctx.get("session")
     ident = payload.get("id") or payload.get("device_code")
     if ident is None:
         return
-    obj = await DeviceCode.handlers.read.core({"path_params": {"id": ident}})
-    if obj:
-        await DeviceCode.handlers.update.core(
-            {
-                "path_params": {"id": ident},
-                "payload": {
-                    "authorized": True,
-                    "authorized_at": datetime.now(timezone.utc),
-                    "denied_at": None,
-                    "denial_reason": None,
-                    "user_id": payload.get("sub"),
-                    "tenant_id": payload.get("tid"),
-                },
-            }
-        )
+    await DeviceCode.approve(
+        db,
+        id=ident if payload.get("id") is not None else None,
+        device_code=ident if payload.get("device_code") is not None else None,
+        user_id=payload.get("sub"),
+        tenant_id=payload.get("tid"),
+    )
 
 
 @hook_ctx(**{"ops": "deny", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
@@ -120,22 +113,16 @@ async def deny_device_code(ctx: Mapping[str, Any]) -> None:
 
     DeviceCode = _device_code_table()
     payload = ctx.get("payload") or {}
+    db = ctx.get("db") or ctx.get("session")
     ident = payload.get("id") or payload.get("device_code")
     if ident is None:
         return
-    obj = await DeviceCode.handlers.read.core({"path_params": {"id": ident}})
-    if obj:
-        await DeviceCode.handlers.update.core(
-            {
-                "path_params": {"id": ident},
-                "payload": {
-                    "authorized": False,
-                    "authorized_at": None,
-                    "denied_at": datetime.now(timezone.utc),
-                    "denial_reason": payload.get("reason") or "access_denied",
-                },
-            }
-        )
+    await DeviceCode.deny(
+        db,
+        id=ident if payload.get("id") is not None else None,
+        device_code=ident if payload.get("device_code") is not None else None,
+        reason=payload.get("reason") or "access_denied",
+    )
 
 
 

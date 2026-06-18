@@ -25,6 +25,7 @@ MY_ACCOUNT_API_CONTRACT = MyAccountApiContract(
         "account-sessions",
         "account-consents",
         "account-credentials",
+        "rest-only",
         "openid-configuration",
         "tenant-openid-configuration",
         "jwks",
@@ -32,7 +33,6 @@ MY_ACCOUNT_API_CONTRACT = MyAccountApiContract(
     ),
     forbidden_route_prefixes=(
         "/admin",
-        "/rpc",
         "/tenant",
         "/client",
         "/service",

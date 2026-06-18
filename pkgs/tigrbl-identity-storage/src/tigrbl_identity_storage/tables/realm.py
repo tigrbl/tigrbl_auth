@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -18,6 +19,7 @@ from tigrbl_identity_server.framework import (
     acol,
     relationship,
 )
+from ._ops import create_record, first_record, list_records, record_id, update_record
 
 
 class Realm(Base, GUIDPk, Timestamped, Bootstrappable):
@@ -79,6 +81,25 @@ class Realm(Base, GUIDPk, Timestamped, Bootstrappable):
             "description": "Default compatibility realm",
         }
     ]
+
+    @classmethod
+    async def create_realm(cls, db: Any, **payload: Any) -> "Realm":
+        return await create_record(cls, db, payload)
+
+    @classmethod
+    async def update_realm(cls, db: Any, *, realm_id: uuid.UUID, **payload: Any) -> "Realm | None":
+        row = await first_record(cls, db, {"id": realm_id})
+        if row is None:
+            return None
+        return await update_record(cls, db, record_id(row), payload)
+
+    @classmethod
+    async def list_realms(cls, db: Any, **filters: Any) -> list["Realm"]:
+        return await list_records(cls, db, filters)
+
+    @classmethod
+    async def lookup_by_slug(cls, db: Any, *, slug: str) -> "Realm | None":
+        return await first_record(cls, db, {"slug": slug})
 
 
 __all__ = ["Realm"]

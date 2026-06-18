@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Create `tigrbl-identity-storage` as the persistence adapter package."
+summary: "Create `tigrbl-identity-storage` as the persistence adapter package and canonical storage operation owner. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -17,21 +17,24 @@ status_notes:
     note: "Add storage as the persistence boundary; SQLAlchemy/Tigrbl is the default implementation substrate."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Clarified by adr:1121: the storage adapter boundary includes canonical table, ORM, migration, engine, and persistence symbol ownership; tigrbl_auth surfaces are compatibility facades."
     at: "2026-05-27T16:58:17Z"
+    note: "Clarified by adr:1121: the storage adapter boundary includes canonical table, ORM, migration, engine, and persistence symbol ownership; tigrbl_auth surfaces are compatibility facades."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Clarify that the storage boundary is not passive persistence only; it owns canonical table operation behavior."
+    at: "2026-06-18T16:03:51Z"
 references: []
 body: |-
   ## Decision
   
-  Create `tigrbl-identity-storage` as the persistence adapter package.
-  SQLAlchemy/Tigrbl tables are the default implementation substrate, but the
-  tracked package boundary is storage.
+  Create `tigrbl-identity-storage` as the persistence adapter package and canonical storage operation owner. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage.
   
   It owns:
   
   - table mappings
-  - ORM integration
+  - table-owned domain operations for durable storage-table behavior
+  - ORM integration where retained
   - migrations
   - repository implementations
   - unit-of-work implementations
@@ -41,22 +44,16 @@ body: |-
   
   ## Context
   
-  The current package includes table resources, ORM models, persistence
-  lifecycle, engine configuration, SQLite support, and Postgres extras. Runtime
-  and surface code currently reach into table resources and engine details.
+  The current package includes table resources, table-bound operations, persistence lifecycle, engine configuration, SQLite support, and Postgres extras. Runtime and surface code currently reach into table resources and engine details.
   
-  Protocol packages should not know whether state is stored in SQLite,
-  Postgres, Redis, memory, or a test fake.
+  Protocol packages should not know whether state is stored in SQLite, Postgres, Redis, memory, or a test fake. Protocol and server packages may validate protocol inputs or adapt HTTP requests, but persisted behavior for a storage table belongs to that storage table's module.
   
   ## Constraints
   
-  Storage may import semantic/protocol packages to map their objects, but
-  protocol packages MUST NOT import storage.
+  Storage may import semantic/protocol packages only where needed to map storage-owned behavior, but protocol packages MUST NOT canonically own storage-table mutations or table lifecycle behavior.
   
-  Server may depend on storage as the default adapter. Runtime and operator may
-  use storage through server or explicit adapter boundaries.
+  Server may depend on storage as the default adapter. Runtime and operator may use storage through server or explicit adapter boundaries.
   
   ## Consequences
   
-  OAuth, OIDC, JOSE, principals, credentials, and policy stay pure. Alternate
-  storage adapters remain possible later.
+  OAuth, OIDC, JOSE, principals, credentials, and policy stay pure with respect to durable storage ownership. Alternate storage adapters remain possible later because table-owned operations define the canonical persistence contract.

@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -23,6 +24,7 @@ from tigrbl_identity_server.framework import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.framework import HTTPException
 from http import HTTPStatus as status
+from ._ops import create_record, first_record, record_id, update_record
 
 DEFAULT_PAR_EXPIRY = 90
 
@@ -93,6 +95,52 @@ class PushedAuthorizationRequest(Base, GUIDPk, Timestamped):
             return {}
         form = await request.form()
         return dict(form or {})
+
+    @classmethod
+    async def create_request(
+        cls,
+        db: Any,
+        *,
+        params: dict,
+        client_id: uuid.UUID | None = None,
+        tenant_id: uuid.UUID | None = None,
+        request_uri: str | None = None,
+        expires_in: int | None = None,
+        expires_at: datetime | None = None,
+    ) -> "PushedAuthorizationRequest":
+        ttl = expires_in or _default_expires_in()
+        return await create_record(
+            cls,
+            db,
+            {
+                "request_uri": request_uri or _default_request_uri(),
+                "client_id": client_id,
+                "tenant_id": tenant_id,
+                "params": dict(params),
+                "expires_in": ttl,
+                "expires_at": expires_at or datetime.now(tz=timezone.utc) + timedelta(seconds=ttl),
+            },
+        )
+
+    @classmethod
+    async def resolve_request_uri(
+        cls,
+        db: Any,
+        *,
+        request_uri: str,
+        client_id: uuid.UUID | str | None = None,
+    ) -> "PushedAuthorizationRequest | None":
+        row = await first_record(cls, db, {"request_uri": request_uri})
+        if row is None or row.is_expired() or row.is_consumed() or not row.client_bound(client_id):
+            return None
+        return row
+
+    @classmethod
+    async def consume_request(cls, db: Any, *, request_uri: str) -> "PushedAuthorizationRequest | None":
+        row = await first_record(cls, db, {"request_uri": request_uri})
+        if row is None:
+            return None
+        return await update_record(cls, db, record_id(row), {"consumed_at": datetime.now(tz=timezone.utc)})
 
 
 __all__ = ["PushedAuthorizationRequest", "DEFAULT_PAR_EXPIRY"]

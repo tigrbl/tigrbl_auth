@@ -1,5 +1,5 @@
 """
-Unit tests for tigrbl_auth.backends module.
+Unit tests for credential authentication backends.
 
 Tests authentication backends for password and API key authentication.
 """
@@ -10,9 +10,9 @@ from uuid import uuid4
 
 import pytest
 
-from tigrbl_auth.backends import AuthError, PasswordBackend, ApiKeyBackend
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.tables import User, ApiKey, ServiceKey, Service
+from tigrbl_authn_credentials.backends import AuthError, PasswordBackend, ApiKeyBackend
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_storage.tables import User, ApiKey, ServiceKey, Service
 
 
 @pytest.mark.unit
@@ -209,7 +209,7 @@ class TestApiKeyBackend:
 
         monkeypatch.setattr(ApiKey.handlers.list, "core", _api_key_list_core)
         monkeypatch.setattr(ServiceKey.handlers.list, "core", _service_key_list_core)
-        from tigrbl_auth.tables import Client
+        from tigrbl_identity_storage.tables import Client
 
         monkeypatch.setattr(Client.handlers.list, "core", _client_list_core)
 
@@ -457,15 +457,17 @@ class TestApiKeyBackend:
         assert exc_info.value.reason == "API key invalid, revoked, or expired"
 
     @pytest.mark.asyncio
-    async def test_get_client_rows_filters_inactive_clients(self, mock_data_factory):
-        """Client lookup returns only active clients."""
+    async def test_client_authenticate_filters_inactive_clients(self, mock_data_factory):
+        """Client table-owned authentication returns only active clients."""
+        from tigrbl_identity_storage.tables import Client
+
         active_client, _ = self.create_mock_client(mock_data_factory, is_active=True)
-        inactive_client, _ = self.create_mock_client(mock_data_factory, is_active=False)
+        inactive_client, raw_secret = self.create_mock_client(mock_data_factory, is_active=False)
         self.client_rows = [inactive_client, active_client]
 
-        rows = await self.backend._get_client_rows(self.mock_db)
+        row = await Client.authenticate(self.mock_db, client_secret=raw_secret)
 
-        assert rows == [active_client]
+        assert row == active_client
 
     @pytest.mark.asyncio
     async def test_get_key_row_filters_expired_keys(self, mock_data_factory):
@@ -520,7 +522,7 @@ class TestApiKeyBackend:
             calls.append(value)
             return "mocked-digest"
 
-        monkeypatch.setattr("tigrbl_auth.services.auth_backends.ApiKey.digest_of", staticmethod(_digest_of))
+        monkeypatch.setattr("tigrbl_authn_credentials.backends.ApiKey.digest_of", staticmethod(_digest_of))
 
         try:
             await self.backend.authenticate(self.mock_db, raw_key)

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -17,6 +18,7 @@ from tigrbl_identity_server.framework import (
     PgUUID,
     ForeignKeySpec,
 )
+from ._ops import create_record, first_record, record_id, update_record
 
 
 class RevokedToken(Base, GUIDPk, Timestamped):
@@ -34,6 +36,27 @@ class RevokedToken(Base, GUIDPk, Timestamped):
     )
     revoked_reason: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
     expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
+
+    @classmethod
+    async def revoke_token(
+        cls,
+        db: Any,
+        *,
+        token_hash: str,
+        token_type_hint: str | None = None,
+        reason: str | None = None,
+        **metadata: Any,
+    ) -> "RevokedToken":
+        existing = await first_record(cls, db, {"token_hash": token_hash})
+        payload = {"token_hash": token_hash, "token_type_hint": token_type_hint, "revoked_reason": reason or "revoked"}
+        payload.update(metadata)
+        if existing is None:
+            return await create_record(cls, db, payload)
+        return await update_record(cls, db, record_id(existing), payload)
+
+    @classmethod
+    async def is_revoked(cls, db: Any, *, token_hash: str) -> bool:
+        return await first_record(cls, db, {"token_hash": token_hash}) is not None
 
 
 __all__ = ["RevokedToken"]

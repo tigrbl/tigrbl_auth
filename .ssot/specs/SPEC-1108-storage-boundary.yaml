@@ -13,9 +13,13 @@ supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Define SQLAlchemy/Tigrbl storage adapter ownership."
     at: "2026-05-18T08:20:35Z"
+    note: "Define SQLAlchemy/Tigrbl storage adapter ownership."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Storage boundary now includes table-owned domain operation surfaces."
+    at: "2026-06-18T16:03:51Z"
 references: []
 body: |-
   ## Scope
@@ -24,24 +28,31 @@ body: |-
   
   ## First-Class Objects
   
-  The package MUST define or own storage mappings for:
+  The package MUST define or own storage mappings and table-owned operation surfaces for:
   
-  - `UserTable`
-  - `ClientTable`
-  - `AppTable`
-  - `ServiceTable`
-  - `DeviceTable`
-  - `MachineTable`
-  - `WorkloadTable`
-  - `CredentialTable`
-  - `ApiKeyTable`
-  - `ServiceKeyTable`
-  - `SessionTable`
-  - `TenantTable`
-  - `AuthorizationCodeTable`
-  - `DeviceCodeTable`
-  - `ConsentTable`
-  - `AuditEventTable`
+  - `Realm`
+  - `Tenant`
+  - `User`
+  - `Client`
+  - `ClientRegistration`
+  - `Service`
+  - `ApiKey`
+  - `ServiceKey`
+  - `AuthSession`
+  - `AuthCode`
+  - `DeviceCode`
+  - `RevokedToken`
+  - `TokenRecord`
+  - `DelegationGrantRecord`
+  - `DelegationGrantScope`
+  - `DelegationGrantProof`
+  - `DelegationGrantEdge`
+  - `DelegationGrantTokenLink`
+  - `PushedAuthorizationRequest`
+  - `Consent`
+  - `AuditEvent`
+  - `LogoutState`
+  - `KeyRotationEvent`
   - `Repository`
   - `UnitOfWork`
   - `Migration`
@@ -51,20 +62,16 @@ body: |-
   
   ## Requirements
   
-  Storage owns Tigrbl/SQLAlchemy table mappings, migrations, repository
-  implementations, unit-of-work implementations, database bootstrap, SQLite and
-  Postgres support, and migration evidence hooks. SQLAlchemy is the default
-  implementation substrate, but the package boundary is storage.
+  Storage owns Tigrbl/SQLAlchemy table mappings, table-owned domain operations, migrations, repository implementations, unit-of-work implementations, database bootstrap, SQLite and Postgres support, and migration evidence hooks. SQLAlchemy is the default implementation substrate, but the package boundary is storage.
   
-  Protocol packages MUST NOT import storage.
+  Protocol packages MUST NOT canonically own durable storage-table mutations or lifecycle state transitions. Protocol packages may validate protocol semantics and call table-owned operations.
   
-  Server may use storage as the default adapter. Alternate storage adapters MUST
-  remain possible.
+  Server may use storage as the default adapter. Server and REST routers may parse requests, enforce transport dependencies, and shape responses, but durable table behavior MUST be delegated to storage table operations. Alternate storage adapters MUST remain possible.
   
   ## Verification
   
-  Verification MUST prove storage imports do not require server/runtime/operator,
-  and protocol packages do not import storage.
+  Verification MUST prove storage imports do not require product frontdoor packages, storage table operations are importable from the owning table modules, protocol/server/router modules do not canonically own storage-table mutations, and protocol packages do not directly own table lifecycle behavior.
 spec_kind: "normative"
 adr_ids:
   - "adr:1101"
+  - "adr:1121"

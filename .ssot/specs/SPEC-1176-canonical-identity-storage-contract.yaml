@@ -17,9 +17,13 @@ status_notes:
     note: "Initial contract for canonical storage ownership and permanent compatibility facades."
     status: "draft"
   -
-    status: "draft"
-    note: "Canonical identity storage now includes Realm table ownership and Tenant realm_id association."
     at: "2026-06-01T09:53:02Z"
+    note: "Canonical identity storage now includes Realm table ownership and Tenant realm_id association."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Expand canonical identity storage contract to require table-owned domain operations."
+    at: "2026-06-18T16:03:51Z"
 references: []
 body: |-
   ## Scope
@@ -28,17 +32,34 @@ body: |-
   
   ## Requirements
   
-  `tigrbl_identity_storage.tables` MUST own canonical table classes, `Base`, runtime table binding, engine exports, and table module exports.
+  `tigrbl_identity_storage.tables` MUST own canonical table classes, `Base`, runtime table binding, engine exports, table module exports, and storage-table-owned domain operations.
   
-  `tigrbl_identity_storage.orm`, `tigrbl_identity_storage.db`, `tigrbl_identity_storage.persistence`, and `tigrbl_identity_storage.migrations` MUST consume canonical storage tables directly and MUST NOT import `tigrbl_auth.tables` compatibility facades.
+  Every durable operation whose primary subject is a storage table MUST be implemented directly on, or explicitly exported from, the owning table module. Examples include, but are not limited to:
   
-  `tigrbl_auth.tables`, `tigrbl_auth.orm`, `tigrbl_auth.db`, and `tigrbl_auth.services.persistence` MUST remain supported compatibility facades. Compatibility exports MUST preserve object identity with canonical storage symbols.
+  - `AuthSession` session create, touch, terminate, bind-client, cookie-secret rotation, and active-session lookup operations.
+  - `Consent` record, list-current-subject, revoke, and authorized-app projection operations.
+  - `TokenRecord` issue/upsert, get, introspect, mark-used, remove, and refresh-family state operations.
+  - `RevokedToken` revoke and revocation-status operations.
+  - `DeviceCode` create, poll-state update, approve, deny, consume, and replay/slow-down state operations.
+  - `PushedAuthorizationRequest` create, resolve, validate, consume, and expiry operations.
+  - `Client` and `ClientRegistration` registration lifecycle, metadata, and registration-access-token operations.
+  - `AuditEvent` append and query operations.
+  - `LogoutState` logout-plan, channel-state, latest-for-session, and metadata update operations.
+  - `Realm`, `Tenant`, and `User` discovery/admin/profile identity operations that persist or query table-owned state.
   
-  Deployable frontdoor APIs MUST compose route resources from canonical storage table objects and keep product-specific behavior limited to route composition, tags, prefixes, capability filtering, and fail-closed exposure rules.
+  `tigrbl_identity_storage.db`, `tigrbl_identity_storage.persistence`, and `tigrbl_identity_storage.migrations` MUST consume canonical storage tables directly and MUST NOT import `tigrbl_auth.tables` compatibility facades.
+  
+  Compatibility facades under `tigrbl_auth` MUST preserve object identity for canonical storage symbols where facades are intentionally retained. The legacy `orm` namespace is not required as a supported facade.
+  
+  Deployable frontdoor APIs MUST compose route resources from canonical storage table objects and keep product-specific behavior limited to route composition, tags, prefixes, capability filtering, request parsing, response shaping, and fail-closed exposure rules.
+  
+  Protocol packages MAY own standards validation and protocol grammar, but MUST delegate durable table state transitions to table-owned operations.
+  
+  Server and REST router packages MAY own transport adaptation, dependency injection, and product-surface composition, but MUST delegate durable table state transitions to table-owned operations.
   
   ## Verification
   
-  Verification MUST assert facade/storage symbol identity, absence of duplicate table class definitions under `tigrbl_auth.tables`, storage-owned migration imports, persistence facade parity, and product API composition over canonical storage table resources.
+  Verification MUST assert facade/storage symbol identity, absence of duplicate table class definitions under `tigrbl_auth.tables`, storage-owned migration imports, persistence facade parity, product API composition over canonical storage table resources, and boundary enforcement proving storage-table domain operations are not canonically owned by protocol, server, REST router, runtime, operator, or facade modules.
 spec_kind: "normative"
 adr_ids:
   - "adr:1121"

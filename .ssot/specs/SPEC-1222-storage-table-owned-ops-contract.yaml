@@ -1,0 +1,62 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1222"
+number: 1222
+slug: "storage-table-owned-ops-contract"
+title: "Storage Table Owned Operations Contract"
+status: "draft"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This SPEC defines the storage-table-owned operation contract for `tigrbl-identity-storage`."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "draft"
+    note: "Define the table-owned operation placement contract for durable identity storage behavior."
+    at: "2026-06-18T16:07:45Z"
+references: []
+body: |-
+  ## Scope
+  
+  This SPEC defines the storage-table-owned operation contract for `tigrbl-identity-storage`.
+  
+  ## Requirements
+  
+  Each storage table kind MUST expose the operations that own its durable behavior from the table module that defines the table. Generic CRUD operations remain table-bound through Tigrbl binding. Domain operations MUST also be table-owned when they mutate, read, consume, revoke, rotate, issue, derive, or project durable state whose primary aggregate is that table.
+  
+  The owning table module MAY implement operations as class methods, module-level functions, or explicitly exported operation objects, but callers MUST import them from `tigrbl_identity_storage.tables.<table>` or the aggregate table package when a grouped table module owns several related tables.
+  
+  REST routers, server ops, protocol packages, runtime packages, operator packages, and facade packages MUST NOT be canonical owners for storage-table operations. They may:
+  
+  - parse HTTP or protocol request bodies,
+  - validate standards-specific grammar,
+  - enforce product-surface or deployment gates,
+  - adapt dependency injection and database sessions,
+  - call table-owned operations,
+  - shape transport responses.
+  
+  They MUST NOT own the durable state transition for a storage table.
+  
+  The following table-owned operation families are required:
+  
+  - account operations: `User`, `AuthSession`, `Consent`
+  - OAuth runtime operations: `Client`, `ClientRegistration`, `AuthCode`, `TokenRecord`, `RevokedToken`, `DeviceCode`, `PushedAuthorizationRequest`
+  - discovery/admin operations: `Realm`, `Tenant`, `User`, `AuditEvent`, `KeyRotationEvent`
+  - service credential operations: `Service`, `ApiKey`, `ServiceKey`
+  - logout operations: `AuthSession`, `LogoutState`
+  - delegation lifecycle operations: `DelegationGrantRecord`, `DelegationGrantScope`, `DelegationGrantProof`, `DelegationGrantEdge`, `DelegationGrantTokenLink`
+  
+  ## Verification
+  
+  Verification MUST include:
+  
+  - an inventory test that fails when a storage table lacks its required table-owned operation exports,
+  - route/protocol delegation tests for my-account, OAuth, OIDC logout, registration, token, device, PAR, and revocation flows,
+  - a static ownership guard that fails when protocol/server/router/facade modules define canonical storage-table mutation functions,
+  - import-boundary tests proving table-owned operations are importable without root-level `tigrbl_auth` facades.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1101"
+  - "adr:1121"

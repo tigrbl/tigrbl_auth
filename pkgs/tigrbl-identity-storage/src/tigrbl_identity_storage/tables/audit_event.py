@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -19,6 +20,7 @@ from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     PgUUID,
 )
+from ._ops import create_record, list_records, utc_now
 
 
 class AuditEvent(Base, GUIDPk, Timestamped, TenantColumn):
@@ -43,6 +45,24 @@ class AuditEvent(Base, GUIDPk, Timestamped, TenantColumn):
     occurred_at: Mapped[dt.datetime] = acol(
         storage=S(TZDateTime, nullable=False, default=lambda: dt.datetime.now(dt.timezone.utc))
     )
+
+    @classmethod
+    async def record(cls, db: Any, *, event_type: str, outcome: str = "success", **payload: Any) -> "AuditEvent":
+        payload.update({"event_type": event_type, "outcome": outcome, "occurred_at": payload.get("occurred_at") or utc_now()})
+        return await create_record(cls, db, payload)
+
+    @classmethod
+    async def list_for_subject(cls, db: Any, *, actor_user_id: uuid.UUID | None = None, actor_client_id: uuid.UUID | None = None) -> list["AuditEvent"]:
+        filters: dict[str, Any] = {}
+        if actor_user_id is not None:
+            filters["actor_user_id"] = actor_user_id
+        if actor_client_id is not None:
+            filters["actor_client_id"] = actor_client_id
+        return await list_records(cls, db, filters)
+
+    @classmethod
+    async def list_for_tenant(cls, db: Any, *, tenant_id: uuid.UUID) -> list["AuditEvent"]:
+        return await list_records(cls, db, {"tenant_id": tenant_id})
 
 
 __all__ = ["AuditEvent"]

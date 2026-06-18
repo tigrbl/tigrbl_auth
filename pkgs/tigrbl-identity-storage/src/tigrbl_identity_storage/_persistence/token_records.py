@@ -228,9 +228,35 @@ async def upsert_token_record_async(
                 "revoked_reason": None,
             }
             if record is None:
-                await _create_handler_record(TokenRecord, db, payload)
+                await TokenRecord.persist_issued_token(
+                    db,
+                    token_hash=digest,
+                    claims=claims,
+                    token_kind=token_kind,
+                    token_type_hint=payload["token_type_hint"],
+                    refresh_family_id=payload["refresh_family_id"],
+                    refresh_parent_hash=payload["refresh_parent_hash"],
+                    refresh_successor_hash=payload["refresh_successor_hash"],
+                    issued_at=payload["issued_at"],
+                    expires_at=payload["expires_at"],
+                    used_at=payload["used_at"],
+                    reuse_detected_at=payload["reuse_detected_at"],
+                )
             else:
-                await _update_handler_record(TokenRecord, db, _record_id(record), payload)
+                await TokenRecord.persist_issued_token(
+                    db,
+                    token_hash=digest,
+                    claims=claims,
+                    token_kind=token_kind,
+                    token_type_hint=payload["token_type_hint"],
+                    refresh_family_id=payload["refresh_family_id"],
+                    refresh_parent_hash=payload["refresh_parent_hash"],
+                    refresh_successor_hash=payload["refresh_successor_hash"],
+                    issued_at=payload["issued_at"],
+                    expires_at=payload["expires_at"],
+                    used_at=payload["used_at"],
+                    reuse_detected_at=payload["reuse_detected_at"],
+                )
     except Exception:
         return digest
     return digest
@@ -294,9 +320,27 @@ async def revoke_token_async(
                     }
                 )
             if revoked is None:
-                await _create_handler_record(RevokedToken, db, revoked_payload)
+                await RevokedToken.revoke_token(
+                    db,
+                    token_hash=digest,
+                    token_type_hint=revoked_payload.get("token_type_hint"),
+                    reason=revoked_payload.get("revoked_reason"),
+                    subject=revoked_payload.get("subject"),
+                    tenant_id=revoked_payload.get("tenant_id"),
+                    client_id=revoked_payload.get("client_id"),
+                    expires_at=revoked_payload.get("expires_at"),
+                )
             else:
-                await _update_handler_record(RevokedToken, db, _record_id(revoked), revoked_payload)
+                await RevokedToken.revoke_token(
+                    db,
+                    token_hash=digest,
+                    token_type_hint=revoked_payload.get("token_type_hint"),
+                    reason=revoked_payload.get("revoked_reason"),
+                    subject=revoked_payload.get("subject"),
+                    tenant_id=revoked_payload.get("tenant_id"),
+                    client_id=revoked_payload.get("client_id"),
+                    expires_at=revoked_payload.get("expires_at"),
+                )
     except Exception:
         return digest
     return digest
@@ -324,7 +368,12 @@ async def mark_token_used_async(
             }
             if successor_hash:
                 payload["refresh_successor_hash"] = successor_hash
-            await _update_handler_record(TokenRecord, db, _record_id(record), payload)
+            await TokenRecord.mark_rotated(
+                db,
+                token_hash=digest,
+                successor_hash=successor_hash,
+                reason=reason,
+            )
     except Exception:
         return digest
     return digest
@@ -343,17 +392,14 @@ async def revoke_refresh_family_async(
     revoked_count = 0
     try:
         async with _session() as db:
-            rows = await _list_handler_records(TokenRecord, db, {"refresh_family_id": family_id})
+            rows = await TokenRecord.revoke_family(
+                db,
+                refresh_family_id=family_id,
+                reason=reason,
+                reuse_token_hash=reuse_hash,
+            )
             for row in rows:
                 token_record_hash = _field(row, "token_hash")
-                payload = {
-                    "active": False,
-                    "revoked_at": _field(row, "revoked_at") or now,
-                    "revoked_reason": reason,
-                }
-                if reuse_hash and token_record_hash == reuse_hash:
-                    payload["reuse_detected_at"] = now
-                await _update_handler_record(TokenRecord, db, _record_id(row), payload)
                 revoked = await _first_handler_record(RevokedToken, db, {"token_hash": token_record_hash})
                 revoked_payload = {
                     "token_hash": token_record_hash,
@@ -365,9 +411,27 @@ async def revoke_refresh_family_async(
                     "revoked_reason": reason,
                 }
                 if revoked is None:
-                    await _create_handler_record(RevokedToken, db, revoked_payload)
+                    await RevokedToken.revoke_token(
+                        db,
+                        token_hash=token_record_hash,
+                        token_type_hint=revoked_payload.get("token_type_hint"),
+                        reason=reason,
+                        subject=revoked_payload.get("subject"),
+                        tenant_id=revoked_payload.get("tenant_id"),
+                        client_id=revoked_payload.get("client_id"),
+                        expires_at=revoked_payload.get("expires_at"),
+                    )
                 else:
-                    await _update_handler_record(RevokedToken, db, _record_id(revoked), revoked_payload)
+                    await RevokedToken.revoke_token(
+                        db,
+                        token_hash=token_record_hash,
+                        token_type_hint=revoked_payload.get("token_type_hint"),
+                        reason=reason,
+                        subject=revoked_payload.get("subject"),
+                        tenant_id=revoked_payload.get("tenant_id"),
+                        client_id=revoked_payload.get("client_id"),
+                        expires_at=revoked_payload.get("expires_at"),
+                    )
                 revoked_count += 1
     except Exception:
         return 0
@@ -378,8 +442,7 @@ async def is_token_revoked_async(token: str) -> bool:
     digest = token_hash(token)
     try:
         async with _session() as db:
-            revoked = await _first_handler_record(RevokedToken, db, {"token_hash": digest})
-            if revoked is not None:
+            if await RevokedToken.is_revoked(db, token_hash=digest):
                 return True
             record = await _first_handler_record(TokenRecord, db, {"token_hash": digest})
             if record is None:

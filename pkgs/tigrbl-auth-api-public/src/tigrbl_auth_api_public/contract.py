@@ -25,6 +25,7 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "login",
         "authorize",
         "token",
+        "rest-only",
         "openid-configuration",
         "tenant-openid-configuration",
         "oauth-authorization-server-metadata",
@@ -54,7 +55,6 @@ PUBLIC_API_CONTRACT = PublicApiContract(
         "/diagnostics",
     ),
     forbidden_exact_routes=(
-        "/rpc",
         "/tenant",
     ),
     consumed_packages=(

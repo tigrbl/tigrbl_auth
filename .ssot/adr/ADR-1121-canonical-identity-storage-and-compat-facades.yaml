@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "`tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers."
+summary: "`tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, table-owned domain operations, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -17,23 +17,33 @@ status_notes:
     note: "Accepted storage canonicalization contract with permanent tigrbl_auth compatibility facades."
     status: "accepted"
   -
-    status: "accepted"
-    note: "Realm is now part of canonical identity storage ownership: tigrbl_identity_storage owns the Realm table and tigrbl_auth facades preserve compatibility."
     at: "2026-06-01T09:52:44Z"
+    note: "Realm is now part of canonical identity storage ownership: tigrbl_identity_storage owns the Realm table and tigrbl_auth facades preserve compatibility."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Storage table modules own durable table-specific operations; protocol, server, route, runtime, operator, and facade modules are adapters for persisted table behavior."
+    at: "2026-06-18T16:03:51Z"
 references: []
 body: |-
   ## Decision
   
-  `tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers.
+  `tigrbl-identity-storage` is the canonical owner for identity persistence symbols: table classes, table-owned domain operations, ORM imports, migrations, engine/session helpers, and persistence lifecycle helpers.
   
-  `tigrbl_auth.tables`, `tigrbl_auth.orm`, `tigrbl_auth.db`, and `tigrbl_auth.services.persistence` remain permanent compatibility facades. They re-export canonical storage symbols and MUST preserve object identity for existing importers.
+  All storage-table-specific behavior that mutates, reads, or derives durable table state MUST be implemented directly on, or explicitly exported from, the owning `tigrbl_identity_storage.tables.<table>` module. Protocol, server, REST router, runtime, operator, and facade modules may adapt transport or standards inputs, but they MUST delegate persisted table behavior to the storage table owner.
   
-  Frontdoor API packages compose product routes and product filters only. They MUST NOT define, fork, or shadow identity table classes.
+  `tigrbl_auth.tables`, `tigrbl_auth.db`, and selected `tigrbl_auth.services.*` compatibility surfaces may remain as facades where intentionally retained. They re-export or delegate to canonical storage symbols and MUST preserve object identity for table symbols. Legacy ORM facade ownership is not required.
+  
+  Frontdoor API packages compose product routes and product filters only. They MUST NOT define, fork, shadow, or canonically own identity table classes or storage-table domain operations.
   
   ## Context
   
-  The identity package split introduced a dedicated storage package while legacy callers still import table and persistence symbols through `tigrbl_auth`. The compatibility surface is product ergonomics, not canonical ownership.
+  The identity package split introduced a dedicated storage package while legacy callers still imported table and persistence symbols through `tigrbl_auth`. The compatibility surface is product ergonomics, not canonical ownership.
+  
+  Recent cleanup removed the duplicate root-level `tigrbl_auth` package and narrowed the facade package under `pkgs/tigrbl-auth`. During that cleanup, several durable operations were identified in protocol, server, REST, and persistence-helper modules even though their primary behavior belongs to storage tables such as `AuthSession`, `Consent`, `TokenRecord`, `RevokedToken`, `DeviceCode`, `PushedAuthorizationRequest`, `Client`, and `ClientRegistration`.
   
   ## Consequences
   
-  Storage owns migrations and runtime table resources. Compatibility facades remain supported indefinitely. Product frontdoors consume canonical storage resources and continue to fail closed by product-surface configuration.
+  Storage owns migrations, runtime table resources, canonical table symbols, and table-owned domain operations. Compatibility facades remain only where explicitly retained. Product frontdoors and protocol packages consume table-owned operations and continue to fail closed by product-surface configuration.
+  
+  Implementation work MUST migrate durable behavior from protocol/server/router helper modules into table-owned operation surfaces, leaving those modules as adapters.

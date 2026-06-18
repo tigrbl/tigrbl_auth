@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -19,6 +20,7 @@ from tigrbl_identity_server.framework import (
     Timestamped,
     acol,
 )
+from ._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
 class DelegationGrantRecord(Base, GUIDPk, Timestamped):
@@ -48,6 +50,53 @@ class DelegationGrantRecord(Base, GUIDPk, Timestamped):
     replaced_by_grant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.delegation_grants.id"), nullable=True)
     )
+
+    @classmethod
+    async def create_grant(cls, db: Any, **payload: Any) -> "DelegationGrantRecord":
+        payload.setdefault("status", "active")
+        payload.setdefault("effective_at", utc_now())
+        return await create_record(cls, db, payload)
+
+    @classmethod
+    async def revoke_grant(
+        cls,
+        db: Any,
+        *,
+        grant_id: uuid.UUID,
+        revoked_by: str | None = None,
+        reason: str | None = None,
+    ) -> "DelegationGrantRecord | None":
+        row = await first_record(cls, db, {"id": grant_id})
+        if row is None:
+            return None
+        return await update_record(
+            cls,
+            db,
+            record_id(row),
+            {"status": "revoked", "revoked_at": utc_now(), "revoked_by": revoked_by, "revoked_reason": reason},
+        )
+
+    @classmethod
+    async def list_grants(
+        cls,
+        db: Any,
+        *,
+        tenant_id: uuid.UUID | None = None,
+        delegator_subject: str | None = None,
+        delegate_subject: str | None = None,
+        status: str | None = None,
+    ) -> list["DelegationGrantRecord"]:
+        filters = {
+            key: value
+            for key, value in {
+                "tenant_id": tenant_id,
+                "delegator_subject": delegator_subject,
+                "delegate_subject": delegate_subject,
+                "status": status,
+            }.items()
+            if value is not None
+        }
+        return await list_records(cls, db, filters)
 
 
 class DelegationGrantScope(Base, GUIDPk, Timestamped):
@@ -85,6 +134,11 @@ class DelegationGrantProof(Base, GUIDPk, Timestamped):
         storage=S(TZDateTime, nullable=False, default=lambda: dt.datetime.now(dt.timezone.utc))
     )
 
+    @classmethod
+    async def persist_provenance(cls, db: Any, **payload: Any) -> "DelegationGrantProof":
+        payload.setdefault("evaluated_at", utc_now())
+        return await create_record(cls, db, payload)
+
 
 class DelegationGrantEdge(Base, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_edges"
@@ -119,6 +173,10 @@ class DelegationGrantTokenLink(Base, GUIDPk, Timestamped):
     exchange_mode: Mapped[str] = acol(storage=S(String(32), nullable=False, default="delegation"))
     source_token_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
     actor_token_hash: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
+
+    @classmethod
+    async def link_token(cls, db: Any, **payload: Any) -> "DelegationGrantTokenLink":
+        return await create_record(cls, db, payload)
 
 
 __all__ = [

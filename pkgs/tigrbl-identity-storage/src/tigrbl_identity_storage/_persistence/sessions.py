@@ -78,38 +78,21 @@ async def create_session_async(
     session_state_salt: str | None = None,
 ) -> AuthSession:
     async with _session() as db:
-        now = datetime.now(timezone.utc)
-        return await _create_handler_record(
-            AuthSession,
+        return await AuthSession.create_for_user(
             db,
-            {
-                "user_id": user_id,
-                "tenant_id": tenant_id,
-                "username": username,
-                "client_id": client_id,
-                "auth_time": now,
-                "session_state": "active",
-                "session_state_salt": session_state_salt,
-                "cookie_secret_hash": cookie_secret_hash,
-                "cookie_issued_at": now if cookie_secret_hash else None,
-                "cookie_rotated_at": now if cookie_secret_hash else None,
-                "expires_at": expires_at,
-                "last_seen_at": now,
-            },
+            user_id=user_id,
+            tenant_id=tenant_id,
+            username=username,
+            client_id=client_id,
+            expires_at=expires_at,
+            cookie_secret_hash=cookie_secret_hash,
+            session_state_salt=session_state_salt,
         )
 
 
 async def touch_session_async(session_id: UUID) -> AuthSession | None:
     async with _session() as db:
-        row = await _read_handler_record(AuthSession, db, session_id)
-        if row is None:
-            return None
-        return await _update_handler_record(
-            AuthSession,
-            db,
-            session_id,
-            {"last_seen_at": datetime.now(timezone.utc)},
-        )
+        return await AuthSession.touch(db, session_id=session_id)
 
 
 async def terminate_session_async(
@@ -145,26 +128,19 @@ async def terminate_session_async(
                 },
             )
 
-        await _update_handler_record(
-            AuthSession,
+        await AuthSession.revoke_for_user(
             db,
-            session_id,
-            {"session_state": "terminated", "ended_at": now, "logout_reason": reason},
+            session_id=session_id,
+            reason=reason,
         )
-        return await _create_handler_record(
-            LogoutState,
+        return await LogoutState.create_logout(
             db,
-            {
-                "session_id": _record_id(row),
-                "sid": str(_record_id(row)),
-                "status": "pending" if frontchannel_required or backchannel_required else "complete",
-                "initiated_by": initiated_by,
-                "reason": reason,
-                "frontchannel_required": frontchannel_required,
-                "backchannel_required": backchannel_required,
-                "propagated_at": None if frontchannel_required or backchannel_required else now,
-                "logout_metadata": metadata,
-            },
+            session_id=_record_id(row),
+            initiated_by=initiated_by,
+            reason=reason,
+            frontchannel_required=frontchannel_required,
+            backchannel_required=backchannel_required,
+            metadata=metadata,
         )
 
 
@@ -316,30 +292,17 @@ async def record_consent_async(
     expires_at: datetime | None = None,
 ) -> Consent:
     async with _session() as db:
-        return await _create_handler_record(
-            Consent,
+        return await Consent.grant(
             db,
-            {
-                "user_id": user_id,
-                "tenant_id": tenant_id,
-                "client_id": client_id,
-                "scope": scope,
-                "claims": claims,
-                "granted_at": datetime.now(timezone.utc),
-                "expires_at": expires_at,
-                "state": "active",
-            },
+            user_id=user_id,
+            tenant_id=tenant_id,
+            client_id=client_id,
+            scope=scope,
+            claims=claims,
+            expires_at=expires_at,
         )
 
 
 async def revoke_consent_async(consent_id: UUID) -> Consent | None:
     async with _session() as db:
-        row = await _read_handler_record(Consent, db, consent_id)
-        if row is None:
-            return None
-        return await _update_handler_record(
-            Consent,
-            db,
-            consent_id,
-            {"state": "revoked", "revoked_at": datetime.now(timezone.utc)},
-        )
+        return await Consent.revoke_for_user(db, consent_id=consent_id)

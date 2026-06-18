@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
+from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -19,6 +20,7 @@ from tigrbl_identity_server.framework import (
     TZDateTime,
     GUIDPk,
 )
+from ._ops import create_record, field, first_record, read_record, record_id, update_record, utc_now
 
 
 class DeviceCode(Base, GUIDPk, Timestamped):
@@ -49,6 +51,104 @@ class DeviceCode(Base, GUIDPk, Timestamped):
     tenant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
     )
+
+    @classmethod
+    async def create_device_authorization(
+        cls,
+        db: Any,
+        *,
+        device_code: str,
+        user_code: str,
+        client_id: uuid.UUID,
+        expires_at: dt.datetime,
+        interval: int = 5,
+        scope: str | None = None,
+        audience: str | None = None,
+        resource: str | None = None,
+        tenant_id: uuid.UUID | None = None,
+    ) -> "DeviceCode":
+        return await create_record(
+            cls,
+            db,
+            {
+                "device_code": device_code,
+                "user_code": user_code,
+                "client_id": client_id,
+                "scope": scope,
+                "audience": audience,
+                "resource": resource,
+                "expires_at": expires_at,
+                "interval": interval,
+                "tenant_id": tenant_id,
+            },
+        )
+
+    @classmethod
+    async def approve(
+        cls,
+        db: Any,
+        *,
+        user_id: uuid.UUID,
+        user_code: str | None = None,
+        device_code: str | None = None,
+        id: Any | None = None,
+        tenant_id: uuid.UUID | None = None,
+    ) -> "DeviceCode | None":
+        row = await read_record(cls, db, id) if id is not None else None
+        if row is None:
+            lookup_code = device_code or (str(id) if id is not None else None)
+            row = await first_record(cls, db, {"device_code": lookup_code} if lookup_code else {"user_code": user_code})
+        if row is None:
+            return None
+        return await update_record(
+            cls,
+            db,
+            record_id(row),
+            {
+                "authorized": True,
+                "authorized_at": utc_now(),
+                "user_id": user_id,
+                "tenant_id": tenant_id or field(row, "tenant_id"),
+                "last_polled_at": None,
+            },
+        )
+
+    @classmethod
+    async def deny(
+        cls,
+        db: Any,
+        *,
+        user_code: str | None = None,
+        device_code: str | None = None,
+        id: Any | None = None,
+        reason: str | None = None,
+    ) -> "DeviceCode | None":
+        row = await read_record(cls, db, id) if id is not None else None
+        if row is None:
+            lookup_code = device_code or (str(id) if id is not None else None)
+            row = await first_record(cls, db, {"device_code": lookup_code} if lookup_code else {"user_code": user_code})
+        if row is None:
+            return None
+        return await update_record(cls, db, record_id(row), {"denied_at": utc_now(), "denial_reason": reason})
+
+    @classmethod
+    async def poll(cls, db: Any, *, device_code: str) -> "DeviceCode | None":
+        row = await first_record(cls, db, {"device_code": device_code})
+        if row is None:
+            return None
+        return await update_record(
+            cls,
+            db,
+            record_id(row),
+            {"poll_count": int(field(row, "poll_count", 0) or 0) + 1, "last_polled_at": utc_now()},
+        )
+
+    @classmethod
+    async def consume(cls, db: Any, *, device_code: str) -> "DeviceCode | None":
+        row = await first_record(cls, db, {"device_code": device_code})
+        if row is None:
+            return None
+        return await update_record(cls, db, record_id(row), {"consumed_at": utc_now()})
 
 
 __all__ = ["DeviceCode"]

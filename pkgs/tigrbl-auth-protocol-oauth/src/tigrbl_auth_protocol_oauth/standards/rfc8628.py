@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 import secrets
 import string
-from datetime import datetime, timezone
 from typing import Any, Final, Literal, Mapping
 
 from tigrbl_identity_runtime.settings import settings
@@ -48,23 +47,18 @@ async def approve_device_code(ctx: Mapping[str, Any]) -> None:
     from tigrbl_identity_storage.tables import DeviceCode
 
     payload = ctx.get("payload") or {}
+    db = ctx.get("db") or ctx.get("session")
     ident = payload.get("id") or payload.get("device_code")
     if ident is None:
         return
 
-    obj = await DeviceCode.handlers.read.core({"path_params": {"id": ident}})
-    if obj:
-        await DeviceCode.handlers.update.core(
-            {
-                "path_params": {"id": ident},
-                "payload": {
-                    "authorized": True,
-                    "authorized_at": datetime.now(timezone.utc),
-                    "user_id": payload.get("sub"),
-                    "tenant_id": payload.get("tid"),
-                },
-            }
-        )
+    await DeviceCode.approve(
+        db,
+        id=ident if payload.get("id") is not None else None,
+        device_code=ident if payload.get("device_code") is not None else None,
+        user_id=payload.get("sub"),
+        tenant_id=payload.get("tid"),
+    )
 
 
 def generate_user_code(length: int = 8) -> str:
