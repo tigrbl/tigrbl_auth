@@ -10,7 +10,7 @@ swarmauri_base==0.10.0
 swarmauri_standard==0.10.0
 swarmauri_tokens_jwt==0.3.0.dev31
 swarmauri_signing_jws==0.3.0.dev31
-swarmauri_signing_ed25519==0.2.0.dev32
+swarmauri_signing_ed25519==0.2.0.dev50
 swarmauri_signing_dpop==0.1.1
 pqcrypto==0.4.0
 swarmauri_crypto_jwe==0.3.0.dev5
