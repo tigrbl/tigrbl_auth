@@ -11,7 +11,10 @@ from tigrbl import bootstrap_dbschema
 from tigrbl.ddl import sqlite_default_attach_map
 from tigrbl_identity_storage.migrations.helpers import applied_revisions, column_names, mark_revision, table_names, unmark_revision
 from tigrbl_identity_storage.migrations.helpers import AUTHN_SCHEMA
-from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_runtime.engine_resolver import (
+    resolve_api_provider,
+    resolve_default_provider,
+)
 from tigrbl_identity_storage.tables import Base
 from tigrbl_identity_storage.tables.engine import ENGINE
 
@@ -38,14 +41,26 @@ class SchemaVerification:
 
 
 def _resolve_provider():
-    try:
-        from tigrbl_identity_server.api.surfaces import surface_api
+    surface_imports = (
+        ("tigrbl_identity_server.api.surfaces", "surface_api"),
+        ("tigrbl_identity_server.routers.surface", "surface_api"),
+    )
+    for module_name, attr_name in surface_imports:
+        try:
+            module = __import__(module_name, fromlist=[attr_name])
+            provider = resolve_api_provider(getattr(module, attr_name))
+            if provider is not None:
+                return provider
+        except Exception:
+            pass
 
-        provider = resolve_api_provider(surface_api)
+    try:
+        provider = resolve_default_provider()
         if provider is not None:
             return provider
     except Exception:
         pass
+
     return ENGINE.provider
 
 

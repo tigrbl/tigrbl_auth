@@ -131,13 +131,24 @@ def _import_runtime_objects() -> dict[str, Any]:
     from tigrbl_auth.api.surfaces import surface_api as composed_surface_api
     from tigrbl_auth.db import get_db
     from tigrbl_auth.routers.surface import surface_api
-    from tigrbl_auth.runtime.engine_resolver import register_api_provider, resolve_api_provider
+    from tigrbl_auth.runtime.engine_resolver import (
+        register_api_provider,
+        resolve_api_provider,
+        resolve_default_provider,
+        set_default_provider,
+    )
+    from tigrbl_identity_server.routers.surface import (
+        surface_api as canonical_legacy_surface_api,
+    )
 
     return {
         "Engine": Engine,
         "EngineSpec": EngineSpec,
+        "canonical_legacy_surface_api": canonical_legacy_surface_api,
         "register_api_provider": register_api_provider,
         "resolve_api_provider": resolve_api_provider,
+        "resolve_default_provider": resolve_default_provider,
+        "set_default_provider": set_default_provider,
         "app": app,
         "composed_surface_api": composed_surface_api,
         "get_db": get_db,
@@ -188,8 +199,11 @@ async def _runtime_engine_context(database_url: str):
     EngineSpec = runtime["EngineSpec"]
     register_api_provider = runtime["register_api_provider"]
     resolve_api_provider = runtime["resolve_api_provider"]
+    resolve_default_provider = runtime["resolve_default_provider"]
+    set_default_provider = runtime["set_default_provider"]
     surface_api = runtime["surface_api"]
     composed_surface_api = runtime["composed_surface_api"]
+    canonical_legacy_surface_api = runtime["canonical_legacy_surface_api"]
     app = runtime["app"]
 
     spec = EngineSpec.from_any(database_url)
@@ -197,10 +211,14 @@ async def _runtime_engine_context(database_url: str):
     provider = engine.provider
     original_surface = resolve_api_provider(surface_api)
     original_composed_surface = resolve_api_provider(composed_surface_api)
+    original_canonical_legacy_surface = resolve_api_provider(canonical_legacy_surface_api)
     original_app = resolve_api_provider(app)
+    original_default_provider = resolve_default_provider()
     register_api_provider(surface_api, provider)
     register_api_provider(composed_surface_api, provider)
+    register_api_provider(canonical_legacy_surface_api, provider)
     register_api_provider(app, provider)
+    set_default_provider(provider)
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
     raw_engine, _ = provider.ensure()
@@ -236,7 +254,12 @@ async def _runtime_engine_context(database_url: str):
             await dispose_result
         register_api_provider(surface_api, original_surface or provider)
         register_api_provider(composed_surface_api, original_composed_surface or provider)
+        register_api_provider(
+            canonical_legacy_surface_api,
+            original_canonical_legacy_surface or provider,
+        )
         register_api_provider(app, original_app or provider)
+        set_default_provider(original_default_provider or provider)
         setattr(surface_api, "_ddl_executed", False)
 
 
