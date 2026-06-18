@@ -218,6 +218,7 @@ def _negative_tests_for_claim(claim: Mapping[str, Any], partitioned_tests: Mappi
 GENERATED_CLEAN_CHECK_PATHS = {
     "CERTIFICATION_STATUS.md",
     "CURRENT_STATE.md",
+    "compliance/claims/issue-registry.yaml",
     "compliance/claims/recertification-state.yaml",
     "compliance/claims/repository-state.yaml",
     "compliance/evidence/certification_test_partitions.json",

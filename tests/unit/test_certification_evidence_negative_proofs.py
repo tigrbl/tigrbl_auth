@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_cli.cli.reports._execution_status import _negative_tests_for_claim
+from tigrbl_identity_cli.cli.reports._execution_status import _clean_check_ignored, _negative_tests_for_claim
 
 
 PARTITIONED_TESTS = {
@@ -75,3 +75,7 @@ def test_negative_proof_classifier_matches_external_profile_fail_closed_files() 
 
     assert "tests/interop/test_peer_counterpart_catalog.py" in selected
     assert "tests/interop/test_tier4_promotion_fail_closed.py" in selected
+
+
+def test_generated_issue_registry_is_not_release_signing_source_dirtiness() -> None:
+    assert _clean_check_ignored("compliance/claims/issue-registry.yaml") is True

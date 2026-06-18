@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import importlib
+import re
 import sys
 import warnings
 from contextlib import contextmanager
@@ -9,8 +10,21 @@ from pathlib import Path
 
 import pytest
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
+    import tomli as tomllib  # type: ignore[no-redef]
+
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def _load_pyproject(path: Path) -> dict:
+    return tomllib.loads(path.read_text(encoding="utf-8"))
+
+
+def _normalized_dist_name(name: str) -> str:
+    return re.sub(r"[-_.]+", "-", name).lower()
 
 
 @contextmanager
@@ -33,6 +47,18 @@ def isolated_facade_import():
                 sys.modules.pop(name, None)
         sys.modules.update(removed_modules)
         sys.path = original_path
+
+
+@pytest.mark.unit
+def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
+    root_project = _load_pyproject(ROOT / "pyproject.toml")["project"]
+    root_poetry = _load_pyproject(ROOT / "pyproject.toml")["tool"]["poetry"]
+    facade_project = _load_pyproject(ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml")["project"]
+
+    assert _normalized_dist_name(facade_project["name"]) == "tigrbl-auth"
+    assert _normalized_dist_name(root_project["name"]) != "tigrbl-auth"
+    assert _normalized_dist_name(root_project["name"]).endswith("-workspace")
+    assert root_poetry["packages"] == [{"include": "tigrbl_auth_workspace"}]
 
 
 @pytest.mark.unit

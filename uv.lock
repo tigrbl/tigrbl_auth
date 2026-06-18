@@ -1941,7 +1941,28 @@ wheels = [
 ]
 
 [[package]]
-name = "tigrbl-auth"
+name = "tigrbl-auth-protocol-oauth"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
+dependencies = [
+    { name = "swarmauri-signing-dpop" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "swarmauri-signing-dpop", specifier = "==0.1.1" }]
+
+[[package]]
+name = "tigrbl-auth-protocol-oidc"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-oidc" }
+
+[[package]]
+name = "tigrbl-auth-protocol-rp"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth-protocol-rp" }
+
+[[package]]
+name = "tigrbl-auth-workspace"
 version = "0.4.0.dev2"
 source = { editable = "." }
 dependencies = [
@@ -2121,27 +2142,6 @@ dev = [
     { name = "ssot-registry", specifier = ">=0.2.8" },
     { name = "tox", specifier = ">=4.23.2" },
 ]
-
-[[package]]
-name = "tigrbl-auth-protocol-oauth"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
-dependencies = [
-    { name = "swarmauri-signing-dpop" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "swarmauri-signing-dpop", specifier = "==0.1.1" }]
-
-[[package]]
-name = "tigrbl-auth-protocol-oidc"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-auth-protocol-oidc" }
-
-[[package]]
-name = "tigrbl-auth-protocol-rp"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/tigrbl-auth-protocol-rp" }
 
 [[package]]
 name = "tigrbl-authn-credentials"

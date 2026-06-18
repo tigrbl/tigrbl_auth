@@ -149,6 +149,7 @@ categories:
   - tests/unit/test_identity_cli_package_boundary.py
   - tests/unit/test_identity_package_file_size_guard.py
   - tests/unit/test_identity_package_split_imports.py
+  - tests/unit/test_jose_pqc_mldsa.py
   - tests/unit/test_jose_policy_boundary.py
   - tests/unit/test_jwks_rotation.py
   - tests/unit/test_jwtoken.py

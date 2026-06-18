@@ -340,7 +340,12 @@ ALLOWED_TEST_CATEGORIES = (
 )
 _AUXILIARY_TEST_CATEGORY_BY_PREFIX = {
     "tests/examples/": "e2e",
+    "tests/features/": "unit",
+    "tests/packages/": "unit",
     "tests/uix/": "e2e",
+}
+_AUXILIARY_TEST_CATEGORY_BY_PATH = {
+    "tests/unit/test_peer_bundle_completeness.py": "interop",
 }
 
 
@@ -377,6 +382,9 @@ def collect_test_files(repo_root: Path) -> set[str]:
 
 def infer_test_category(rel_path: str) -> str | None:
     normalized = rel_path.replace("\\", "/")
+    explicit = _AUXILIARY_TEST_CATEGORY_BY_PATH.get(normalized)
+    if explicit is not None:
+        return explicit
     prefixes = {
         "tests/unit/": "unit",
         "tests/integration/": "integration",
