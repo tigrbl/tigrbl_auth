@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-server"
 version = "0.4.0.dev2"
-description = "Tigrbl ASGI identity server composition, app factories, gateway factories, plugin installation, routers, and REST/RPC surfaces."
+description = "Tigrbl ASGI identity server composition, app factories, gateway factories, plugin installation, routers, and REST surfaces."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -13,7 +13,6 @@ keywords = [
     "gateway",
     "plugin",
     "rest",
-    "json-rpc",
     "oauth",
     "oidc",
 ]

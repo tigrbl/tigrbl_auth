@@ -9,7 +9,6 @@ class SurfacePlane(str, Enum):
     PUBLIC = "public"
     ADMIN = "admin"
     SYSTEM = "system"
-    RPC = "rpc"
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,7 +60,6 @@ DEFAULT_ROUTE_SURFACES: tuple[RouteSurface, ...] = (
     RouteSurface("jwks", "/.well-known/jwks.json", SurfacePlane.PUBLIC, ("GET",)),
     RouteSurface("admin-principals", "/admin/principals", SurfacePlane.ADMIN, ("GET", "POST", "PATCH", "DELETE")),
     RouteSurface("admin-credentials", "/admin/credentials", SurfacePlane.ADMIN, ("GET", "POST", "PATCH", "DELETE")),
-    RouteSurface("rpc", "/rpc", SurfacePlane.RPC, ("POST",)),
     RouteSurface("health", "/health", SurfacePlane.SYSTEM, ("GET",)),
 )
 
@@ -98,8 +96,8 @@ def assert_public_admin_separation(manifest: AssemblyManifest) -> None:
 def provider_server_profile() -> ServerProfile:
     return ServerProfile(
         name="provider",
-        enabled_planes=(SurfacePlane.PUBLIC, SurfacePlane.ADMIN, SurfacePlane.RPC, SurfacePlane.SYSTEM),
-        feature_flags={"surface_public_enabled": True, "surface_admin_enabled": True, "surface_rpc_enabled": True},
+        enabled_planes=(SurfacePlane.PUBLIC, SurfacePlane.ADMIN, SurfacePlane.SYSTEM),
+        feature_flags={"surface_public_enabled": True, "surface_admin_enabled": True},
     )
 
 

@@ -68,21 +68,14 @@ def test_contracts_t0_oauth_oidc_wire_models_validate() -> None:
     assert claims.sub == "subject"
 
 
-def test_contracts_t1_admin_resource_server_and_rp_models_validate() -> None:
+def test_contracts_t1_resource_server_and_rp_protocol_models_validate() -> None:
     from tigrbl_identity_contracts import (
         AccessTokenClaims,
-        AdminPrincipalResponse,
-        AdminTenantRequest,
-        AdminTenantResponse,
         ResourceServerMetadata,
         RpConfiguration,
         RpLoginRequest,
     )
 
-    tenant_request = AdminTenantRequest(slug="test", name="Test", email="admin@example.test")
-    assert AdminTenantResponse(id="tenant-id", **tenant_request.model_dump()).slug == "test"
-    principal = AdminPrincipalResponse(id="p1", tenant_id="t1", kind="user", subject="user@example.test")
-    assert principal.status == "active"
     resource = ResourceServerMetadata(resource="https://api.example", issuer="https://issuer.example")
     assert resource.bearer_methods_supported == ["header"]
     token_claims = AccessTokenClaims(iss="https://issuer.example", sub="s", aud="https://api.example", exp=10)
@@ -92,7 +85,15 @@ def test_contracts_t1_admin_resource_server_and_rp_models_validate() -> None:
     assert login.code_challenge_method == "S256"
 
 
-def test_contracts_t2_projection_models_wrap_openapi_and_openrpc() -> None:
+def test_storage_tables_own_table_backed_admin_contracts() -> None:
+    from tigrbl_identity_storage.tables.tenant import AdminTenantOut, AdminTenantProvisionIn
+
+    tenant_request = AdminTenantProvisionIn(slug="test", name="Test", email="admin@example.test")
+    assert tenant_request.slug == "test"
+    assert AdminTenantOut(id="tenant-id", slug="test", name="Test", email="admin@example.test").slug == "test"
+
+
+def test_contracts_t2_projection_models_wrap_openapi_only() -> None:
     from tigrbl_identity_contracts import ContractProjection
 
     openapi = {
@@ -100,14 +101,6 @@ def test_contracts_t2_projection_models_wrap_openapi_and_openrpc() -> None:
         "info": {"title": "Identity API", "version": "0.0.0-test"},
         "paths": {"/register": {"post": {"operationId": "register"}}},
     }
-    openrpc = {
-        "openrpc": "1.3.2",
-        "info": {"title": "Identity RPC", "version": "0.0.0-test"},
-        "methods": [{"name": "identity.register"}],
-    }
-
     openapi_projection = ContractProjection(kind="openapi", profile="production", version="0.0.0-test", document=openapi)
-    openrpc_projection = ContractProjection(kind="openrpc", profile="production", version="0.0.0-test", document=openrpc)
 
     assert "/register" in openapi_projection.document["paths"]
-    assert openrpc_projection.document["openrpc"].startswith("1.")

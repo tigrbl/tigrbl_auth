@@ -73,7 +73,6 @@ def provider_runtime_profile() -> RuntimeProfile:
         feature_flags={
             "surface_public_enabled": True,
             "surface_admin_enabled": True,
-            "surface_rpc_enabled": True,
             "surface_diagnostics_enabled": True,
         },
         config={"mode": "provider"},

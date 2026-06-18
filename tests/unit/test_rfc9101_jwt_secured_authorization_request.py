@@ -20,7 +20,8 @@ def test_jwt_request_round_trip(monkeypatch):
     secret = "s" * 32
     token = asyncio.run(rfc9101.makeRequestObject(params, secret=secret))
     decoded = asyncio.run(rfc9101.parse_request_object(token, secret=secret))
-    assert decoded == params
+    assert {key: decoded[key] for key in params} == params
+    assert {"iat", "exp"} <= set(decoded)
 
 
 @pytest.mark.unit

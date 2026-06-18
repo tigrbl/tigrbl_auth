@@ -9,6 +9,8 @@ from typing import Any
 from tigrbl_identity_server.framework import (
     UserBase,
     Bootstrappable,
+    BaseModel,
+    Field,
     LargeBinary,
     Mapped,
     Boolean,
@@ -20,6 +22,7 @@ from tigrbl_identity_server.framework import (
     S,
     acol,
     ColumnSpec,
+    constr,
 )
 
 from tigrbl_identity_jose.key_management import hash_pw
@@ -27,6 +30,70 @@ from ._ops import create_record, first_record, list_records, record_id, update_r
 
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
 DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
+_email = constr(strip_whitespace=True, min_length=3, max_length=120)
+_password = constr(min_length=8, max_length=256)
+_username = constr(strip_whitespace=True, min_length=3, max_length=80)
+
+
+class AdminIdentityOut(BaseModel):
+    id: str
+    tenant_id: str
+    username: str
+    email: str
+    is_active: bool = True
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminIdentityProvisionIn(BaseModel):
+    tenant_id: str
+    username: _username
+    email: _email
+    password: _password
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = True
+
+
+class AdminIdentityUpdateIn(BaseModel):
+    username: _username | None = None
+    email: _email | None = None
+    password: _password | None = None
+    is_active: bool | None = None
+    is_admin: bool | None = None
+    is_superuser: bool | None = None
+    must_change_password: bool | None = None
+
+
+class MyAccountProfileOut(BaseModel):
+    id: str
+    tenant_id: str
+    username: str
+    email: str
+    is_active: bool = True
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class MyAccountProfileUpdateIn(BaseModel):
+    username: _username | None = None
+    email: _email | None = None
+
+
+class MyAccountPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class MyAccountMutationOut(BaseModel):
+    status: str
+    id: str | None = None
 
 
 class User(UserBase, Bootstrappable):
@@ -171,4 +238,15 @@ class User(UserBase, Bootstrappable):
     ]
 
 
-__all__ = ["DEFAULT_BOOTSTRAP_SUPERUSER_ID", "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD", "User"]
+__all__ = [
+    "AdminIdentityOut",
+    "AdminIdentityProvisionIn",
+    "AdminIdentityUpdateIn",
+    "DEFAULT_BOOTSTRAP_SUPERUSER_ID",
+    "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD",
+    "MyAccountMutationOut",
+    "MyAccountPasswordChangeIn",
+    "MyAccountProfileOut",
+    "MyAccountProfileUpdateIn",
+    "User",
+]

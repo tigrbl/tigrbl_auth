@@ -24,7 +24,6 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/router.py",
     ROOT / "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
     ROOT / "pkgs/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
-    ROOT / "pkgs/tigrbl-identity-admin/src/tigrbl_identity_admin/rpc/_shared.py",
     ROOT / "pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
     ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/ops/login.py",
     ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/admin_auth.py",
@@ -99,7 +98,6 @@ SYNC_COMPAT_PATHS = [
     ROOT / "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
     ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
     ROOT / "pkgs/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
-    ROOT / "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rpc/registry.py",
     ROOT / "pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sync_compat.py",
 ]
 

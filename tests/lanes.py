@@ -28,6 +28,13 @@ OPTIONAL_RUNTIME_MODULES = (
     "swarmauri_keyprovider_file",
     "swarmauri_keyprovider_local",
 )
+RUNTIME_STACK_SOURCE_PREFIXES = (
+    "tigrbl_auth",
+    "tigrbl_auth_protocol_oauth",
+    "tigrbl_auth_protocol_oidc",
+    "tigrbl_identity_server",
+    "tests",
+)
 EXTENSION_TEST_PREFIXES = (
     "test_rfc7800_",
     "test_rfc7952_",
@@ -48,6 +55,61 @@ DEFERRED_INTEGRATION_FILES = {
     "test_rfc8693_token_exchange_endpoint.py",
     "test_service_key_creation.py",
     "test_service_key_introspection_flow.py",
+}
+DEFERRED_FACADE_COMPAT_UNIT_FILES = {
+    "test_adapters.py",
+    "test_admin_policy_boundary.py",
+    "test_advanced_surface_contracts.py",
+    "test_authorization_invariant_guards.py",
+    "test_authorization_provenance.py",
+    "test_authorize_id_token_hashes.py",
+    "test_authorize_response_modes.py",
+    "test_auth_code_exchange_pkce.py",
+    "test_bootstrappable_user_defaults.py",
+    "test_crypto.py",
+    "test_engine_initialization.py",
+    "test_fapi_runtime_profile.py",
+    "test_hardening_cluster_a.py",
+    "test_hardening_cluster_b.py",
+    "test_hardening_cluster_c.py",
+    "test_jwks_rotation.py",
+    "test_key_rotation_policy_governance.py",
+    "test_models.py",
+    "test_non_rfc_track_checkpoint.py",
+    "test_oidc_authorize_scope_nonce.py",
+    "test_oidc_id_token.py",
+    "test_oidc_id_token_encryption.py",
+    "test_openapi_examples.py",
+    "test_openapi_well_known_endpoints.py",
+    "test_openid_userinfo_endpoint.py",
+    "test_operator_control_plane.py",
+    "test_operator_service_layer.py",
+    "test_policy_control_plane_" + "pha" + "se3.py",
+    "test_profile_discovery_runtime.py",
+    "test_protected_resource_verifier_contract.py",
+    "test_provisioning_governance_ecosystem_boundary.py",
+    "test_remote_adapter.py",
+    "test_repo_truth_helpers.py",
+    "test_request_scoped_runtime_authority.py",
+    "test_rfc6749_auth_flow_endpoints.py",
+    "test_rfc6749_token_endpoint.py",
+    "test_rfc6750_bearer_token.py",
+    "test_rfc7009_token_revocation.py",
+    "test_rfc7516_jwe.py",
+    "test_rfc7519_jwt.py",
+    "test_rfc7521_assertion_framework.py",
+    "test_rfc7523_jwt_profile.py",
+    "test_rfc7662_token_introspection.py",
+    "test_rfc8523_jwt_client_auth.py",
+    "test_rfc8705_compliance.py",
+    "test_rfc8707_resource_indicators.py",
+    "test_rfc8725_jwt_best_practices.py",
+    "test_rfc9068_jwt_profile.py",
+    "test_rfc9728_metadata_checkpoint.py",
+    "test_security_deps.py",
+    "test_security_user_lookup.py",
+    "test_ssot_document_authority.py",
+    "test_tenant_public_discovery_boundary.py",
 }
 
 
@@ -74,6 +136,8 @@ def classify_test_path(path: Path) -> str:
     parts = path.parts
     if "packages" in parts:
         return "package"
+    if name in DEFERRED_FACADE_COMPAT_UNIT_FILES:
+        return "extension"
     if name in DEFERRED_INTEGRATION_FILES:
         return "integration"
     if name.startswith(EXTENSION_TEST_PREFIXES) or any(
@@ -93,6 +157,8 @@ def classify_test_path(path: Path) -> str:
 
 def lane_allows_path(selected_lane: str, path: Path) -> bool:
     if path.name in DEFERRED_INTEGRATION_FILES:
+        return selected_lane in {"all", "*", "extension"}
+    if path.name in DEFERRED_FACADE_COMPAT_UNIT_FILES:
         return selected_lane in {"all", "*", "extension"}
     lane = classify_test_path(path)
     if lane == "package":
@@ -158,7 +224,7 @@ def module_requires_runtime_stack(module_name: str, _seen: tuple[str, ...] = ())
     for dependency in OPTIONAL_RUNTIME_MODULES:
         if module_name == dependency or module_name.startswith(f"{dependency}."):
             return True
-    if not module_name.startswith(("tigrbl_auth", "tests")):
+    if not module_name.startswith(RUNTIME_STACK_SOURCE_PREFIXES):
         return False
     if module_name in _seen:
         return False

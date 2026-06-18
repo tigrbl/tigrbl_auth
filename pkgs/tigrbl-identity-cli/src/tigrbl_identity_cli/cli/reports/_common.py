@@ -334,20 +334,14 @@ def validate_openrpc_contract(repo_root: Path, profile_label: str = "active") ->
     if not version.startswith("1."):
         failures.append(f"Unexpected OpenRPC version: {version}")
     methods = contract.get("methods", [])
-    if deployment.surface_enabled("admin-rpc") and not methods:
-        failures.append("OpenRPC contract has no methods while admin-rpc is active")
     method_names = {str(item.get("name")) for item in methods}
-    expected_method_names = set(getattr(deployment, "active_openrpc_methods", ()) or ())
-    if deployment.surface_enabled("admin-rpc") and "rpc.discover" not in method_names:
-        failures.append("OpenRPC contract missing rpc.discover")
+    expected_method_names: set[str] = set()
     if method_names != expected_method_names:
         failures.append(
             "OpenRPC contract method set does not match implementation-backed registry: "
             + f"expected={sorted(expected_method_names)} actual={sorted(method_names)}"
         )
     components = contract.get("components", {}).get("schemas", {})
-    if deployment.surface_enabled("admin-rpc") and not components:
-        failures.append("OpenRPC contract has no schema components while admin-rpc is active")
     for item in methods:
         owner = str(item.get("x-tigrbl-auth", {}).get("owner_module", ""))
         if not owner:
@@ -361,6 +355,6 @@ def validate_openrpc_contract(repo_root: Path, profile_label: str = "active") ->
         "expected_method_count": len(expected_method_names),
         "schema_count": len(components),
         "version": version,
-        "admin_rpc_enabled": deployment.surface_enabled("admin-rpc"),
+        "admin_rpc_enabled": False,
     }
     return ContractReport("openrpc", path, not failures, failures, warnings, summary)

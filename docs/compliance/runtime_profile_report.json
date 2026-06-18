@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260618T135238Z",
+  "generated_at": "20260618T185131Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
@@ -23,7 +23,7 @@
     "ready_count": 3,
     "missing_count": 0,
     "invalid_count": 0,
-    "application_hash_invariant": true,
+    "application_hash_invariant": false,
     "pyproject_requires_python": ">=3.10,<3.13",
     "supported_python_versions": [
       "3.10",

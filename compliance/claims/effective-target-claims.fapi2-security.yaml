@@ -22,7 +22,6 @@ effective_deployment:
   surfaces:
     surface_public_enabled: true
     surface_admin_enabled: false
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_operator_enabled: true
     surface_plugin_mode: public-only
@@ -71,7 +70,6 @@ effective_deployment:
     surface_public_enabled: true
     surface_admin_enabled: false
     surface_operator_enabled: true
-    surface_rpc_enabled: false
     surface_diagnostics_enabled: false
     surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
@@ -228,7 +226,6 @@ effective_deployment:
   - Key lifecycle and JWKS publication
   - Import/export portability
   - Release bundle and signature verification
-  active_openrpc_methods: []
   product_surface: null
   allowed_admin_resources: []
   required_table_resources: []

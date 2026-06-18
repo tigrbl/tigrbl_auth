@@ -200,7 +200,7 @@ def build_runtime_plan(
         metrics=metrics,
         public=bool(deployment_surfaces.get("surface_public_enabled", False)) if public is None else bool(public),
         admin=bool(deployment_surfaces.get("surface_admin_enabled", False)) if admin is None else bool(admin),
-        rpc=bool(deployment_surfaces.get("surface_rpc_enabled", False)) if rpc is None else bool(rpc),
+        rpc=False,
         diagnostics=bool(deployment_surfaces.get("surface_diagnostics_enabled", False)) if diagnostics is None else bool(diagnostics),
         jwks_refresh_seconds=jwks_refresh_seconds,
         runner_options=dict(runner_options or {}),

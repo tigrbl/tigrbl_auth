@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import importlib
 import sys
@@ -93,21 +93,18 @@ def test_public_and_resource_validation_surfaces_do_not_enable_control_plane() -
 
     assert public.surface_enabled("public-rest")
     assert public.plugin_mode == "public-only"
-    assert not public.surface_enabled("admin-rpc")
-    assert not public.flag_enabled("surface_rpc_enabled")
+    assert not public.surface_enabled("admin-rest")
     assert "/login" in public.active_routes
     assert "/authorize" in public.active_routes
-    assert public.active_openrpc_methods == ()
 
     assert validation.surface_enabled("public-rest")
     assert validation.plugin_mode == "public-only"
-    assert not validation.surface_enabled("admin-rpc")
+    assert not validation.surface_enabled("admin-rest")
     assert "/introspect" in validation.active_routes
     assert "/.well-known/jwks.json" in validation.active_routes
     assert "/login" not in validation.active_routes
     assert "/authorize" not in validation.active_routes
     assert "/register" not in validation.active_routes
-    assert validation.active_openrpc_methods == ()
 
 
 def test_platform_admin_surface_owns_tenant_lifecycle_without_public_login_routes() -> (
@@ -116,8 +113,6 @@ def test_platform_admin_surface_owns_tenant_lifecycle_without_public_login_route
     deployment = resolve_deployment(product_surface="platform-admin-api")
 
     assert deployment.surface_enabled("admin-rest")
-    assert not deployment.surface_enabled("admin-rpc")
-    assert not deployment.flag_enabled("surface_rpc_enabled")
     assert deployment.plugin_mode == "admin-only"
     assert not deployment.surface_enabled("public-rest")
     assert "/admin/tenant" in admin_resource_path_prefixes(deployment)
@@ -125,7 +120,6 @@ def test_platform_admin_surface_owns_tenant_lifecycle_without_public_login_route
     assert "/authsession" not in admin_resource_path_prefixes(deployment)
     assert "/tenant" not in admin_resource_path_prefixes(deployment)
     assert "/user" not in admin_resource_path_prefixes(deployment)
-    assert deployment.active_openrpc_methods == ()
     assert "/login" not in deployment.active_routes
     assert "/register" not in deployment.active_routes
 
@@ -134,13 +128,10 @@ def test_tenant_admin_surface_excludes_platform_tenant_lifecycle() -> None:
     deployment = resolve_deployment(product_surface="tenant-admin-api")
 
     assert deployment.surface_enabled("admin-rest")
-    assert not deployment.surface_enabled("admin-rpc")
-    assert not deployment.flag_enabled("surface_rpc_enabled")
     assert deployment.plugin_mode == "admin-only"
     assert "/tenant" not in admin_resource_path_prefixes(deployment)
     assert "/user" in admin_resource_path_prefixes(deployment)
     assert "/authsession" not in admin_resource_path_prefixes(deployment)
-    assert deployment.active_openrpc_methods == ()
 
 
 def test_developer_and_service_admin_surfaces_are_product_filtered() -> None:
@@ -154,18 +145,14 @@ def test_developer_and_service_admin_surfaces_are_product_filtered() -> None:
     assert "/register" in developer.active_routes
     assert developer.plugin_mode == "mixed"
     assert developer.surface_enabled("admin-rest")
-    assert not developer.surface_enabled("admin-rpc")
     assert "/authorize" not in developer.active_routes
-    assert developer.active_openrpc_methods == ()
     assert "/tenant" not in admin_resource_path_prefixes(developer)
     assert "/client" in admin_resource_path_prefixes(developer)
 
     assert "/introspect" in service.active_routes
     assert service.plugin_mode == "mixed"
     assert service.surface_enabled("admin-rest")
-    assert not service.surface_enabled("admin-rpc")
     assert "/login" not in service.active_routes
-    assert service.active_openrpc_methods == ()
     assert "/service" in admin_resource_path_prefixes(service)
     assert "/tenant" not in admin_resource_path_prefixes(service)
 
@@ -213,7 +200,7 @@ async def test_product_apps_fail_closed_for_cross_surface_paths(tmp_path: Path) 
     assert platform_tenant.status_code == 404
     assert platform_user.status_code == 404
     assert platform_admin_tenants.status_code == 401
-    assert platform_identity.status_code == 404
+    assert platform_identity.status_code == 401
     assert platform_identities.status_code == 401
     assert platform_authsession.status_code == 404
     assert platform_rpc.status_code == 404

@@ -91,7 +91,6 @@ def _claim_registry(repo_root: Path, features: list[dict[str, Any]]) -> dict[str
         "generated_from": [
             "compliance/targets/*.yaml",
             "tigrbl_auth.config.surfaces",
-            "tigrbl_identity_server.rpc.registry",
             "tigrbl_identity_cli.cli.metadata",
             "tigrbl_identity_runtime.deployment",
             FAPI_ATOMIC_CLAIMS_PATH,
@@ -201,7 +200,6 @@ def verify_claim_registries(repo_root: Path) -> dict[str, Any]:
         if label in extension_targets
     }
     public_route_features = {str(feature["id"]) for feature in features if str(feature["kind"]) == "public-route"}
-    rpc_features = {str(feature["id"]) for feature in features if str(feature["kind"]) == "openrpc-method"}
     cli_verb_features = {str(feature["id"]) for feature in features if str(feature["kind"]) == "cli-verb"}
     cli_flag_features = {str(feature["id"]) for feature in features if str(feature["kind"]) == "cli-flag"}
     profile_features = {str(feature["id"]) for feature in features if str(feature["kind"]) == "profile"}
@@ -224,8 +222,6 @@ def verify_claim_registries(repo_root: Path) -> dict[str, Any]:
         failures.append(f"Settings-backed flags remain unmapped: {', '.join(flag_missing)}")
     if len(public_route_features) != len([path for path, meta in ROUTE_REGISTRY.items() if str(meta.get('surface_set')) == 'public-rest']):
         failures.append("Public route atomic claim coverage is incomplete.")
-    if len(rpc_features) != len(get_rpc_method_registry()):
-        failures.append("OpenRPC method atomic claim coverage is incomplete.")
     if len(cli_verb_features) != expected_cli_verb_count:
         failures.append("CLI verb atomic claim coverage is incomplete.")
     if len(cli_flag_features) != len(ARGUMENT_SPECS):
@@ -243,7 +239,6 @@ def verify_claim_registries(repo_root: Path) -> dict[str, Any]:
         "extension_targets_missing_from_feature_map": len(extension_missing),
         "settings_backed_flags_missing_from_flag_map": len(flag_missing),
         "public_route_claim_count": len(public_route_features),
-        "openrpc_method_claim_count": len(rpc_features),
         "cli_verb_claim_count": len(cli_verb_features),
         "cli_flag_claim_count": len(cli_flag_features),
         "profile_claim_count": len(profile_features),
@@ -270,7 +265,6 @@ def generate_claim_registries(repo_root: Path) -> dict[str, Any]:
         "generated_from": [
             "compliance/targets/*.yaml",
             "tigrbl_auth.config.surfaces",
-            "tigrbl_identity_server.rpc.registry",
             "tigrbl_identity_cli.cli.metadata",
             "tigrbl_identity_runtime.deployment",
         ],
@@ -302,7 +296,6 @@ def generate_claim_registries(repo_root: Path) -> dict[str, Any]:
             "claim_registry_canonical_complete": verification["passed"],
             "fapi2_security_profile_declared_complete": True,
             "public_route_atomic_claims_complete": verification["public_route_claim_count"] == len([path for path, meta in ROUTE_REGISTRY.items() if str(meta.get("surface_set")) == "public-rest"]),
-            "openrpc_atomic_claims_complete": verification["openrpc_method_claim_count"] == len(get_rpc_method_registry()),
             "cli_atomic_claims_complete": verification["cli_flag_claim_count"] == len(ARGUMENT_SPECS) and verification["cli_verb_claim_count"] >= 1,
             "core_targets_missing_from_feature_map": verification["core_targets_missing_from_feature_map"],
             "extension_targets_missing_from_feature_map": verification["extension_targets_missing_from_feature_map"],

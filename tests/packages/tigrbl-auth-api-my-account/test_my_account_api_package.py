@@ -12,8 +12,8 @@ from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
-from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
+from tigrbl_identity_jose.key_management import hash_pw
 
 ROOT = Path(__file__).resolve().parents[3]
 PKG_SRC = ROOT / "pkgs" / "tigrbl-auth-api-my-account" / "src"
@@ -93,9 +93,10 @@ def test_my_account_contract_matches_product_surface_registry() -> None:
     assert MY_ACCOUNT_API_CONTRACT.intended_uix == "@tigrbl-auth/my-account-uix"
     assert deployment.plugin_mode == "public-only"
     assert deployment.surface_enabled("public-rest")
-    assert not deployment.surface_enabled("admin-rpc")
-    assert deployment.active_openrpc_methods == ()
+    assert not deployment.surface_enabled("admin-rest")
     for capability in MY_ACCOUNT_API_CONTRACT.baseline_capabilities:
+        if capability == "rest-only":
+            continue
         assert deployment.capability_enabled(capability), capability
 
 

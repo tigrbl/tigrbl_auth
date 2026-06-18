@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib
+import pytest
 import sys
 from contextlib import contextmanager
 from pathlib import Path
@@ -271,7 +272,6 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
         "tigrbl_auth.rfc.rfc7519": "tigrbl_identity_jose.standards.rfc7519",
         "tigrbl_auth.rfc.rfc7520": "tigrbl_identity_jose.standards.rfc7520",
         "tigrbl_auth.rfc.rfc8812": "tigrbl_identity_jose.standards.rfc8812",
-        "tigrbl_auth.rfc.rfc8785": "tigrbl_identity_core.rfc8785",
     }
 
     with package_src_paths_only():
@@ -280,6 +280,28 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
             canonical = importlib.import_module(canonical_name)
 
             assert legacy is canonical
+
+
+def test_rfc8785_legacy_modules_warn_and_export_canonical_helpers() -> None:
+    with package_src_paths_only():
+        canonical = importlib.import_module("tigrbl_identity_core.json_canonicalization")
+
+        sys.modules.pop("tigrbl_identity_core.rfc8785", None)
+        with pytest.warns(
+            DeprecationWarning,
+            match="tigrbl_identity_core.json_canonicalization",
+        ):
+            core_legacy = importlib.import_module("tigrbl_identity_core.rfc8785")
+
+        sys.modules.pop("tigrbl_auth.rfc.rfc8785", None)
+        with pytest.warns(
+            DeprecationWarning,
+            match="tigrbl_identity_core.json_canonicalization",
+        ):
+            facade_legacy = importlib.import_module("tigrbl_auth.rfc.rfc8785")
+
+        assert core_legacy.canonicalize is canonical.canonicalize
+        assert facade_legacy.canonicalize is canonical.canonicalize
 
 
 def test_installable_tigrbl_auth_facade_does_not_advertise_root_only_rfc_symbols() -> None:
@@ -306,7 +328,10 @@ def test_installable_resource_validation_api_imports_facade_metadata_modules() -
 
 
 def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
-    import tomllib
+    if sys.version_info >= (3, 11):
+        import tomllib
+    else:
+        import tomli as tomllib
 
     metadata = tomllib.loads(
         (ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml").read_text(encoding="utf-8")

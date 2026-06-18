@@ -4,9 +4,6 @@ from __future__ import annotations
 
 from .models import (
     AccessTokenClaims,
-    AdminPrincipalResponse,
-    AdminTenantRequest,
-    AdminTenantResponse,
     ContractModel,
     ContractProjection,
     OAuthIntrospectionResponse,
@@ -21,9 +18,6 @@ from .models import (
 
 __all__ = [
     "AccessTokenClaims",
-    "AdminPrincipalResponse",
-    "AdminTenantRequest",
-    "AdminTenantResponse",
     "ContractModel",
     "ContractProjection",
     "OAuthIntrospectionResponse",

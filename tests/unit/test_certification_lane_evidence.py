@@ -121,7 +121,7 @@ def test_runtime_stack_detection_catches_dynamic_import_targets(tmp_path: Path) 
     path.write_text(
         "import importlib\n\n"
         "def test_runtime_import():\n"
-        "    importlib.import_module('tigrbl_auth.standards.oauth2.introspection')\n",
+        "    importlib.import_module('tigrbl_auth_protocol_oauth.standards.introspection')\n",
         encoding="utf-8",
     )
 

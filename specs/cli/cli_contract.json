@@ -6995,7 +6995,6 @@
       "action": "append",
       "choices": [
         "admin-rest",
-        "admin-rpc",
         "developer-api",
         "diagnostics",
         "my-account-api",
@@ -7261,7 +7260,6 @@
       "action": "append",
       "choices": [
         "admin-rest",
-        "admin-rpc",
         "developer-api",
         "diagnostics",
         "my-account-api",

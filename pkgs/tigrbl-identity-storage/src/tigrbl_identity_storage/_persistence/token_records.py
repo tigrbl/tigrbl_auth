@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import hashlib
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
-from typing import Any, AsyncIterator, Iterable, Mapping
-from uuid import UUID
+from typing import Any, AsyncIterator, Iterable
 
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider, resolve_default_provider
 from tigrbl_identity_storage.tables import (
@@ -20,7 +18,21 @@ from tigrbl_identity_storage.tables import (
     TokenRecord,
 )
 from tigrbl_identity_storage.tables.engine import ENGINE
-from .uuid_coercion import normalize_uuid_filters, normalize_uuid_identifier
+from .record_helpers import (
+    clear_handler_records as _clear_handler_records,
+    create_handler_record as _create_handler_record,
+    delete_handler_record as _delete_handler_record,
+    field as _field,
+    first_handler_record as _first_handler_record,
+    list_handler_records as _list_handler_records,
+    normalize_audience as _normalize_audience,
+    read_handler_record as _read_handler_record,
+    record_id as _record_id,
+    to_datetime as _to_datetime,
+    token_hash,
+    to_uuid as _to_uuid,
+    update_handler_record as _update_handler_record,
+)
 
 
 def _resolve_provider():
@@ -66,124 +78,6 @@ async def _session() -> AsyncIterator[Any]:
                 if hasattr(result, "__await__"):
                     await result
             raise
-
-
-def token_hash(token: str) -> str:
-    return hashlib.sha256(token.encode("utf-8")).hexdigest()
-
-
-def _to_uuid(value: Any) -> UUID | None:
-    if value in {None, "", False}:
-        return None
-    if isinstance(value, UUID):
-        return value
-    try:
-        return UUID(str(value))
-    except Exception:
-        return None
-
-
-def _to_datetime(value: Any) -> datetime | None:
-    if value is None:
-        return None
-    if isinstance(value, datetime):
-        return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
-    try:
-        return datetime.fromtimestamp(int(value), tz=timezone.utc)
-    except Exception:
-        return None
-
-
-def _normalize_audience(value: Any) -> Any:
-    if value is None:
-        return None
-    if isinstance(value, (str, dict, list)):
-        return value
-    if isinstance(value, tuple):
-        return list(value)
-    return str(value)
-
-
-def _created_item(value: Any) -> Any:
-    if isinstance(value, Mapping):
-        for key in ("item", "result", "data"):
-            if key in value:
-                return value[key]
-    return value
-
-
-def _list_items(result: Any) -> list[Any]:
-    if isinstance(result, Mapping) and isinstance(result.get("items"), list):
-        result = result["items"]
-    elif hasattr(result, "items"):
-        result = result.items
-    if isinstance(result, list):
-        return result
-    if isinstance(result, tuple):
-        return list(result)
-    if result is None:
-        return []
-    return [result]
-
-
-def _field(row: Any, key: str, default: Any = None) -> Any:
-    if isinstance(row, Mapping):
-        return row.get(key, default)
-    return getattr(row, key, default)
-
-
-def _record_id(row: Any) -> Any:
-    return _field(row, "id")
-
-
-def _value_matches(actual: Any, expected: Any) -> bool:
-    if actual == expected:
-        return True
-    if actual is None or expected is None:
-        return False
-    return str(actual) == str(expected)
-
-
-def _matches_filters(row: Any, filters: Mapping[str, Any]) -> bool:
-    for key, expected in filters.items():
-        if not _value_matches(_field(row, key), expected):
-            return False
-    return True
-
-
-async def _list_handler_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> list[Any]:
-    filters = normalize_uuid_filters(filters or {})
-    result = await model.handlers.list.core({"payload": {"filters": filters}, "db": db})
-    return [row for row in _list_items(result) if _matches_filters(row, filters)]
-
-
-async def _first_handler_record(model: Any, db: Any, filters: Mapping[str, Any]) -> Any:
-    rows = await _list_handler_records(model, db, filters)
-    return rows[0] if rows else None
-
-
-async def _read_handler_record(model: Any, db: Any, ident: Any) -> Any:
-    return await model.handlers.read.core({"path_params": {"id": normalize_uuid_identifier(ident)}, "db": db})
-
-
-async def _create_handler_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:
-    return _created_item(await model.handlers.create.core({"payload": dict(payload), "db": db}))
-
-
-async def _update_handler_record(model: Any, db: Any, ident: Any, payload: Mapping[str, Any]) -> Any:
-    return _created_item(
-        await model.handlers.update.core(
-            {"path_params": {"id": normalize_uuid_identifier(ident)}, "payload": dict(payload), "db": db}
-        )
-    )
-
-
-async def _delete_handler_record(model: Any, db: Any, ident: Any) -> Any:
-    return await model.handlers.delete.core({"path_params": {"id": normalize_uuid_identifier(ident)}, "db": db})
-
-
-async def _clear_handler_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> Any:
-    return await model.handlers.clear.core({"payload": {"filters": normalize_uuid_filters(filters or {})}, "db": db})
 
 
 async def upsert_token_record_async(

@@ -1,5 +1,17 @@
 from __future__ import annotations
 
+from ._common import *  # noqa: F403
+from ._common import (
+    _current_version,
+    _hash_bytes,
+    _load_yaml,
+    _openapi_path,
+    _openrpc_path,
+    _profile_deployment,
+    _write_report,
+)
+
+
 def diff_contracts(repo_root: Path, kind: str = "all", profile_label: str = "active") -> dict[str, Any]:
     repo_root = repo_root.resolve()
     deployment = _profile_deployment(profile_label)
@@ -29,6 +41,7 @@ PUBLIC_ROUTE_SEARCH_ROOTS = (
     "tigrbl_auth/api/rest/routers",
     "tigrbl_auth/standards/oauth2",
     "tigrbl_auth/standards/oidc",
+    "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers",
     "pkgs/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards",
     "pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards",
 )

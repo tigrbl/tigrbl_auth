@@ -1,13 +1,10 @@
-"""Compatibility module for RFC 8785 JSON canonicalization helpers.
-
-Canonical module: tigrbl_identity_core.json_canonicalization.
-"""
+"""Deprecated RFC 8785 compatibility import path."""
 
 from __future__ import annotations
 
 import warnings
 
-from .json_canonicalization import (
+from tigrbl_identity_core.json_canonicalization import (
     JCSCanonicalizationError,
     MAX_SAFE_INTEGER,
     RFC8785_SPEC_URL,
@@ -16,12 +13,11 @@ from .json_canonicalization import (
 )
 
 warnings.warn(
-    "tigrbl_identity_core.rfc8785 is deprecated; use "
+    "tigrbl_auth.rfc.rfc8785 is deprecated; use "
     "tigrbl_identity_core.json_canonicalization instead.",
     DeprecationWarning,
     stacklevel=2,
 )
-
 
 __all__ = [
     "JCSCanonicalizationError",

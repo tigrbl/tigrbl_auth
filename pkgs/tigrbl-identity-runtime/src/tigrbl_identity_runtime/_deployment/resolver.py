@@ -14,7 +14,6 @@ from .resolved_deployment import (
     _derive_surface_sets,
     _plugin_mode_for_surface_sets,
     _product_config,
-    _rpc_method_allowed,
     _settings_dict,
     _valid_or_default,
 )
@@ -120,10 +119,7 @@ def resolve_deployment(
 
     surfaces = {
         "surface_public_enabled": "public-rest" in effective_surface_sets,
-        "surface_admin_enabled": bool(
-            {"admin-rest", "admin-rpc"}.intersection(effective_surface_sets)
-        ),
-        "surface_rpc_enabled": "admin-rpc" in effective_surface_sets,
+        "surface_admin_enabled": "admin-rest" in effective_surface_sets,
         "surface_diagnostics_enabled": "diagnostics" in effective_surface_sets,
         "surface_operator_enabled": bool(raw.get("surface_operator_enabled", True)),
         "surface_plugin_mode": plugin_mode_name,
@@ -183,14 +179,6 @@ def resolve_deployment(
         )
     active_targets = list(dict.fromkeys(active_targets))
 
-    active_methods: list[str] = []
-    if bool(surfaces["surface_rpc_enabled"]):
-        for name, meta in OPENRPC_METHOD_REGISTRY.items():
-            if meta.get("surface_set") in effective_surface_sets:
-                if not _rpc_method_allowed(name, product_meta):
-                    continue
-                active_methods.append(name)
-
     return ResolvedDeployment(
         profile=profile_name,
         plugin_mode=plugin_mode_name,
@@ -213,7 +201,6 @@ def resolve_deployment(
         active_contract_routes=tuple(active_contract_routes),
         active_discovery_routes=tuple(active_discovery_routes),
         active_targets=tuple(active_targets),
-        active_openrpc_methods=tuple(active_methods),
         product_surface=product_surface_name,
         allowed_admin_resources=tuple(
             str(item) for item in (product_meta or {}).get("admin_resources", ())
@@ -257,7 +244,6 @@ def deployment_from_request(
 __all__ = [
     "DEFAULT_VALUES",
     "EXTENSION_REGISTRY",
-    "OPENRPC_METHOD_REGISTRY",
     "PLUGIN_MODE_TO_SURFACE_SETS",
     "PRODUCT_SURFACE_REGISTRY",
     "PROTOCOL_SLICE_REGISTRY",

@@ -10,7 +10,7 @@ Base        : Declarative base for all models in **tigrbl_authn**.
 metadata    : Shared SQLAlchemy ``MetaData`` with a sane naming-convention.
 surface_api : ``TigrblRouter`` combining Tigrbl resources and auth flows.
 
-The resulting ``surface_api`` exposes a symmetrical REST/RPC surface under
+The resulting ``surface_api`` exposes a REST surface under
 namespaces like ``surface_api.core.User.create`` and
 ``surface_api.core_raw.User.create``.
 

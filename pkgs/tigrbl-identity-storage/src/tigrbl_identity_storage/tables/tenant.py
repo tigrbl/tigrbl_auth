@@ -8,6 +8,7 @@ from typing import Any
 from tigrbl_identity_server.framework import (
     TenantBase,
     Bootstrappable,
+    BaseModel,
     F,
     IO,
     S,
@@ -18,8 +19,38 @@ from tigrbl_identity_server.framework import (
     PgUUID,
     ForeignKeySpec,
     relationship,
+    constr,
 )
 from ._ops import create_record, first_record, list_records, record_id, update_record
+
+_email = constr(strip_whitespace=True, min_length=3, max_length=120)
+_tenant_name = constr(strip_whitespace=True, min_length=1, max_length=120)
+_tenant_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminTenantOut(BaseModel):
+    id: str
+    realm_id: str | None = None
+    slug: str
+    name: str
+    email: str
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminTenantProvisionIn(BaseModel):
+    realm_id: str | None = None
+    slug: _tenant_slug
+    name: _tenant_name
+    email: _email
+
+
+class AdminTenantUpdateIn(BaseModel):
+    realm_id: str | None = None
+    slug: _tenant_slug | None = None
+    name: _tenant_name | None = None
+    email: _email | None = None
+    is_active: bool | None = None
 
 
 class Tenant(TenantBase, Bootstrappable):
@@ -105,4 +136,9 @@ class Tenant(TenantBase, Bootstrappable):
         return await first_record(cls, db, {"name": name})
 
 
-__all__ = ["Tenant"]
+__all__ = [
+    "AdminTenantOut",
+    "AdminTenantProvisionIn",
+    "AdminTenantUpdateIn",
+    "Tenant",
+]

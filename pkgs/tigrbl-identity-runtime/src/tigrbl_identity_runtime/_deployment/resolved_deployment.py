@@ -24,7 +24,6 @@ class ResolvedDeployment:
     active_contract_routes: tuple[str, ...]
     active_discovery_routes: tuple[str, ...]
     active_targets: tuple[str, ...]
-    active_openrpc_methods: tuple[str, ...]
     product_surface: str | None = None
     allowed_admin_resources: tuple[str, ...] = ()
     required_table_resources: tuple[str, ...] = ()
@@ -39,10 +38,8 @@ class ResolvedDeployment:
             return name in self.surface_sets
         mapping = {
             "public-rest": "surface_public_enabled",
-            "admin-rpc": "surface_admin_enabled",
             "admin-rest": "surface_admin_enabled",
             "diagnostics": "surface_diagnostics_enabled",
-            "rpc": "surface_rpc_enabled",
             "operator": "surface_operator_enabled",
         }
         return bool(self.surfaces.get(mapping.get(name, name), False))
@@ -61,9 +58,6 @@ class ResolvedDeployment:
 
     def target_enabled(self, label: str) -> bool:
         return label in self.active_targets
-
-    def method_enabled(self, name: str) -> bool:
-        return name in self.active_openrpc_methods
 
     def admin_resource_enabled(self, name: str) -> bool:
         if self.product_surface is None:
@@ -93,7 +87,6 @@ class ResolvedDeployment:
             "active_contract_routes": list(self.active_contract_routes),
             "active_discovery_routes": list(self.active_discovery_routes),
             "active_targets": list(self.active_targets),
-            "active_openrpc_methods": list(self.active_openrpc_methods),
             "product_surface": self.product_surface,
             "allowed_admin_resources": list(self.allowed_admin_resources),
             "required_table_resources": list(self.required_table_resources),
@@ -163,19 +156,11 @@ def _capability_allowed(capability: str, product_meta: dict[str, Any] | None) ->
     return capability in set(str(item) for item in allowed)
 
 
-def _rpc_method_allowed(name: str, product_meta: dict[str, Any] | None) -> bool:
-    if product_meta is None:
-        return True
-    exact = tuple(str(item) for item in product_meta.get("rpc_methods", ()))
-    prefixes = tuple(str(item) for item in product_meta.get("rpc_method_prefixes", ()))
-    return name in exact or any(name.startswith(prefix) for prefix in prefixes)
-
-
 def _plugin_mode_for_surface_sets(surface_sets: tuple[str, ...]) -> str:
     surface_set = set(surface_sets)
     if surface_set == {"public-rest"}:
         return "public-only"
-    if surface_set in ({"admin-rpc"}, {"admin-rest"}):
+    if surface_set == {"admin-rest"}:
         return "admin-only"
     if surface_set == {"diagnostics"}:
         return "diagnostics-only"
@@ -196,7 +181,7 @@ def _derive_surface_sets(
     derived: list[str] = []
     if raw.get("surface_public_enabled", True):
         derived.append("public-rest")
-    if raw.get("surface_admin_enabled", True) or raw.get("surface_rpc_enabled", True):
+    if raw.get("surface_admin_enabled", True):
         derived.append("admin-rest")
     if raw.get("surface_diagnostics_enabled", True):
         derived.append("diagnostics")

@@ -90,7 +90,6 @@ def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
         bool(deployment.surfaces.get(name, False))
         for name in (
             "surface_admin_enabled",
-            "surface_rpc_enabled",
             "surface_diagnostics_enabled",
         )
     )

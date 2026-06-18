@@ -19,7 +19,9 @@ def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
 
 
 def test_framework_uses_published_tigrbl_api_surface_names() -> None:
-    facade_text = (ROOT / "tigrbl_auth" / "framework.py").read_text(encoding="utf-8")
+    facade_text = (
+        ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
+    ).read_text(encoding="utf-8")
     crud_text = (
         ROOT
         / "pkgs"
@@ -59,7 +61,7 @@ def test_introspection_module_uses_runtime_router_when_dependencies_are_installe
 
     import importlib
 
-    module = importlib.reload(importlib.import_module("tigrbl_auth.standards.oauth2.introspection"))
+    module = importlib.reload(importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection"))
     routes = list(getattr(module.api, "routes", []))
 
     assert type(module.api).__module__ == "tigrbl_identity_server._framework.router_compat"

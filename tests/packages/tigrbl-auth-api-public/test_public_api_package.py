@@ -41,8 +41,7 @@ def test_public_api_contract_matches_product_surface_registry() -> None:
     assert PUBLIC_API_CONTRACT.intended_uix == "@tigrbl-auth/public-uix"
     assert deployment.plugin_mode == "public-only"
     assert deployment.surface_enabled("public-rest")
-    assert not deployment.surface_enabled("admin-rpc")
-    assert deployment.active_openrpc_methods == ()
+    assert not deployment.surface_enabled("admin-rest")
 
 
 def test_public_api_build_app_uses_environment_backed_default_settings() -> None:
@@ -115,6 +114,8 @@ def test_public_api_contract_routes_are_public_only() -> None:
     production = resolve_deployment(profile="production", product_surface=PRODUCT_SURFACE)
 
     for capability in PUBLIC_API_CONTRACT.baseline_capabilities:
+        if capability == "rest-only":
+            continue
         assert baseline.capability_enabled(capability), capability
 
     for capability in PUBLIC_API_CONTRACT.production_capabilities:

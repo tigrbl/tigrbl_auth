@@ -1,15 +1,15 @@
 # Install Substrate Report
 
-- Generated at: `20260618T135229Z`
+- Generated at: `20260618T185123Z`
 - Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
-- Profile identity: `base@py310`
+- Profile identity: `base@py312`
 - Environment identity present: `True`
-- Current Python: `3.10.16`
+- Current Python: `3.12.5`
 - Current Python supported: `True`
 - Expected supported Python versions: `3.10, 3.11, 3.12`
-- Detected supported Python binaries: `1` / `3`
+- Detected supported Python binaries: `2` / `3`
 - Certification tox envs declared: `33`
 - Runtime matrix envs declared: `14`
 - Test lane envs declared: `15`
@@ -20,7 +20,7 @@
 
 ## Warnings
 
-- The current container does not provide supported interpreter binaries for: 3.11, 3.12.
+- The current container does not provide supported interpreter binaries for: 3.11.
 
 ## Current environment import probe
 
@@ -56,9 +56,9 @@
 
 ## Detected supported interpreters
 
-- `3.10` → available=`True` path=`<repo>/.tox/py310-devtest/Scripts/python.EXE`
+- `3.10` → available=`True` path=`py -3.10`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`False` path=`None`
+- `3.12` → available=`True` path=`<repo>/.tmp/uv-rest-only-py312/Scripts/python.exe`
 
 ## Workflow coverage
 

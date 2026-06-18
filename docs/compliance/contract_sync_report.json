@@ -1,8 +1,11 @@
 {
   "scope": "contract-sync",
   "strict": false,
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "production: committed OpenRPC contract drifts from generated contract",
+    "hardening: committed OpenRPC contract drifts from generated contract"
+  ],
   "warnings": [],
   "summary": {
     "profile_count": 3,

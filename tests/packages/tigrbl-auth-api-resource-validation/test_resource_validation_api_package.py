@@ -52,8 +52,7 @@ def test_resource_validation_contract_matches_product_surface_registry() -> None
     )
     assert deployment.plugin_mode == "public-only"
     assert deployment.surface_enabled("public-rest")
-    assert not deployment.surface_enabled("admin-rpc")
-    assert deployment.active_openrpc_methods == ()
+    assert not deployment.surface_enabled("admin-rest")
 
 
 def test_resource_validation_build_app_uses_environment_backed_default_settings() -> None:

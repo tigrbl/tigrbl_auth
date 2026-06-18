@@ -86,7 +86,6 @@ def _control_plane_enabled(deployment: ResolvedDeployment) -> bool:
         bool(deployment.surfaces.get(name, False))
         for name in (
             "surface_admin_enabled",
-            "surface_rpc_enabled",
             "surface_diagnostics_enabled",
         )
     )
@@ -124,7 +123,24 @@ def _path_has_prefix(path: str, prefix: str) -> bool:
 def _platform_admin_raw_table_path(path: str, deployment: ResolvedDeployment) -> bool:
     if getattr(deployment, "product_surface", None) != "platform-admin-api":
         return False
-    return _path_has_prefix(path, "/tenant") or _path_has_prefix(path, "/user")
+    return (
+        _path_has_prefix(path, "/realm")
+        or _path_has_prefix(path, "/tenant")
+        or _path_has_prefix(path, "/user")
+    )
+
+
+def _admin_resource_name_for_prefix(prefix: str, deployment: ResolvedDeployment) -> str:
+    if getattr(deployment, "product_surface", None) == "platform-admin-api":
+        platform_admin_names = {
+            "/admin/realm": "realm",
+            "/admin/tenant": "tenant",
+            "/admin/identity": "user",
+            "/admin/identities": "user",
+        }
+        if prefix in platform_admin_names:
+            return platform_admin_names[prefix]
+    return prefix.strip("/").lower()
 
 
 def _disallowed_admin_resource_path(
@@ -140,7 +156,7 @@ def _disallowed_admin_resource_path(
     for prefix in admin_path_prefixes:
         if not _path_has_prefix(path, prefix):
             continue
-        resource_name = prefix.strip("/").lower()
+        resource_name = _admin_resource_name_for_prefix(prefix, deployment)
         return resource_name not in allowed_resources
     return False
 
@@ -155,14 +171,12 @@ class AdminGate:
         deployment: ResolvedDeployment,
         settings_obj: object | None = None,
         admin_path_prefixes: Iterable[str] = (),
-        rpc_prefix: str = "/rpc",
         diagnostics_prefix: str = "/system",
     ) -> None:
         self.app = app
         self.deployment = deployment
         self.settings_obj = settings_obj
         self.admin_path_prefixes = tuple(dict.fromkeys(admin_path_prefixes))
-        self.rpc_prefix = rpc_prefix
         self.diagnostics_prefix = diagnostics_prefix
         self.enabled = _control_plane_enabled(deployment)
         self._digest = _bootstrap_digest(settings_obj, self.enabled)
@@ -173,8 +187,6 @@ class AdminGate:
     def _requires_admin(self, path: str) -> bool:
         if not self.enabled:
             return False
-        if self.deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, self.rpc_prefix):
-            return True
         if self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):
             return True
         if self.deployment.flag_enabled("surface_admin_enabled"):
@@ -182,16 +194,14 @@ class AdminGate:
         return False
 
     def _disabled_control_plane_path(self, path: str) -> bool:
+        if path == "/rpc" or path.startswith("/rpc/") or path == "/openrpc.json":
+            return True
         if _platform_admin_raw_table_path(path, self.deployment):
             return True
         if self.deployment.flag_enabled("surface_admin_enabled") and _disallowed_admin_resource_path(
             path,
             self.deployment,
             self.admin_path_prefixes,
-        ):
-            return True
-        if not self.deployment.flag_enabled("surface_rpc_enabled") and (
-            _path_has_prefix(path, self.rpc_prefix) or path == "/openrpc.json"
         ):
             return True
         if not self.deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, self.diagnostics_prefix):

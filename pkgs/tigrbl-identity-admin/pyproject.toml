@@ -15,7 +15,6 @@ keywords = [
     "client-management",
     "audit",
     "governance",
-    "json-rpc",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

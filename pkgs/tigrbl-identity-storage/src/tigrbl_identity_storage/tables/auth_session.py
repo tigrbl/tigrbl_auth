@@ -7,6 +7,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    BaseModel,
     TenantColumn,
     Timestamped,
     UserColumn,
@@ -21,6 +22,19 @@ from tigrbl_identity_server.framework import (
     UUID,
 )
 from ._ops import create_record, field, first_record, list_records, read_record, record_id, update_record, utc_now
+
+
+class MyAccountSessionOut(BaseModel):
+    id: str
+    tenant_id: str
+    user_id: str
+    username: str
+    client_id: str | None = None
+    state: str = "active"
+    auth_time: str | None = None
+    last_seen_at: str | None = None
+    expires_at: str | None = None
+    ended_at: str | None = None
 
 
 class AuthSession(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
@@ -145,4 +159,4 @@ class AuthSession(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
         return await update_record(cls, db, record_id(row) or session_id, {"last_seen_at": utc_now()})
 
 
-__all__ = ["AuthSession"]
+__all__ = ["AuthSession", "MyAccountSessionOut"]

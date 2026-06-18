@@ -67,7 +67,7 @@
 - install_substrate_manifest_passed: `True`
 - install_substrate_current_profile: `base`
 - install_substrate_current_python_supported: `True`
-- install_substrate_detected_supported_python_count: `1`
+- install_substrate_detected_supported_python_count: `2`
 - install_substrate_expected_supported_python_count: `3`
 - install_substrate_tox_env_count: `33`
 - install_substrate_tox_pip_check_complete: `True`
@@ -82,8 +82,8 @@
 - clean_room_matrix_executed_in_this_container: `False`
 - tigrcorn_extra_placeholder: `False`
 - tigrcorn_pin_committed: `True`
-- runtime_adapter_layer_present: `True`
-- runtime_adapter_module_count: `9`
+- runtime_adapter_layer_present: `False`
+- runtime_adapter_module_count: `0`
 - registered_runner_count: `3`
 - registered_runner_names: `hypercorn, tigrcorn, uvicorn`
 - runtime_application_hash_invariant: `True`
@@ -118,7 +118,7 @@
 - cli_catalog_only_resource_command_count: `0`
 - cli_required_verbs_missing: `False`
 - artifact_truthfulness_passed: `True`
-- contract_sync_report_passed: `True`
+- contract_sync_report_passed: `False`
 - contract_to_route_sync_passed: `True`
 - route_to_contract_sync_passed: `True`
 - target_to_contract_sync_passed: `True`
@@ -127,9 +127,9 @@
 - runner_contract_hash_invariance_passed: `True`
 - no_fastapi_starlette_passed: `True`
 - feature_completeness_capability_count: `10`
-- feature_completeness_passed_capability_count: `10`
-- feature_completeness_failed_capability_count: `0`
-- fully_featured_package_boundary_now: `True`
+- feature_completeness_passed_capability_count: `8`
+- feature_completeness_failed_capability_count: `2`
+- fully_featured_package_boundary_now: `False`
 - feature_release_verify_verb_present: `True`
 - certification_evidence_index_passed: `True`
 - certification_evidence_claim_count: `410`
@@ -137,9 +137,9 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `22`
+- release_evidence_dirty_checkout_path_count: `136`
 - authoritative_current_doc_stale_ref_count: `0`
-- historical_doc_stale_ref_count: `1188`
+- historical_doc_stale_ref_count: `5582`
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
 - validated_execution_artifact_count: `35`

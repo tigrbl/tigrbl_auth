@@ -1,13 +1,13 @@
 {
-  "generated_at": "20260618T135229Z",
+  "generated_at": "20260618T185123Z",
   "passed": true,
   "summary": {
     "static_manifest_passed": true,
     "passed": true,
     "profile": "base",
-    "current_profile_identity": "base@py310",
+    "current_profile_identity": "base@py312",
     "environment_identity_present": true,
-    "current_python": "3.10.16",
+    "current_python": "3.12.5",
     "current_python_supported": true,
     "expected_supported_python_versions": [
       "3.10",
@@ -15,7 +15,7 @@
       "3.12"
     ],
     "expected_supported_python_count": 3,
-    "detected_supported_python_count": 1,
+    "detected_supported_python_count": 2,
     "declared_runtime_matrix_env_count": 14,
     "declared_test_lane_env_count": 15,
     "declared_certification_tox_env_count": 33,
@@ -52,14 +52,14 @@
   },
   "failures": [],
   "warnings": [
-    "The current container does not provide supported interpreter binaries for: 3.11, 3.12."
+    "The current container does not provide supported interpreter binaries for: 3.11."
   ],
   "detected_supported_pythons": [
     {
       "version": "3.10",
       "available": true,
-      "path": "<repo>/.tox/py310-devtest/Scripts/python.EXE",
-      "source": "current-interpreter"
+      "path": "py -3.10",
+      "source": "py-launcher"
     },
     {
       "version": "3.11",
@@ -70,10 +70,9 @@
     },
     {
       "version": "3.12",
-      "available": false,
-      "path": null,
-      "source": "path",
-      "message": "[WinError 2] The system cannot find the file specified"
+      "available": true,
+      "path": "<repo>/.tmp/uv-rest-only-py312/Scripts/python.exe",
+      "source": "current-interpreter"
     }
   ],
   "dependency_manifest": {
@@ -480,7 +479,8 @@
         "pydantic_settings",
         "dotenv",
         "multipart",
-        "aiosqlite"
+        "aiosqlite",
+        "tigrcorn"
       ]
     },
     "devtest": {
@@ -571,7 +571,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "test-core": {
@@ -658,7 +659,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "test-conformance": {
@@ -706,7 +708,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "test-security-negative": {
@@ -754,7 +757,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "test-interop": {
@@ -799,7 +803,8 @@
         "pytest_benchmark",
         "requests",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "test-extension": {
@@ -847,7 +852,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "migration-portability": {
@@ -895,7 +901,8 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     },
     "final-certification": {
@@ -943,53 +950,54 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn"
+        "hypercorn",
+        "tigrcorn"
       ]
     }
   },
-  "identity": "base@py310",
+  "identity": "base@py312",
   "environment_identity": {
-    "python_version": "3.10",
-    "python_full_version": "3.10.16",
-    "python_tag": "py310",
+    "python_version": "3.12",
+    "python_full_version": "3.12.5",
+    "python_tag": "py312",
     "implementation": "CPython",
-    "implementation_version": "3.10.16",
-    "executable": ".tox/py310-devtest/Scripts/python.exe",
+    "implementation_version": "3.12.5",
+    "executable": ".tmp/uv-rest-only-py312/Scripts/python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
     "platform_release": "10",
     "platform_version": "10.0.19045",
     "machine": "AMD64",
-    "processor": "AMD64",
-    "tox_env": "py310-devtest",
-    "matrix_profile": "devtest",
+    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+    "tox_env": null,
+    "matrix_profile": null,
     "install_profile": "base",
     "test_lane": null,
-    "runner": "uvicorn"
+    "runner": null
   },
   "current_environment_probe": {
     "profile": "base",
-    "identity": "base@py310",
+    "identity": "base@py312",
     "environment_identity": {
-      "python_version": "3.10",
-      "python_full_version": "3.10.16",
-      "python_tag": "py310",
+      "python_version": "3.12",
+      "python_full_version": "3.12.5",
+      "python_tag": "py312",
       "implementation": "CPython",
-      "implementation_version": "3.10.16",
-      "executable": ".tox/py310-devtest/Scripts/python.exe",
+      "implementation_version": "3.12.5",
+      "executable": ".tmp/uv-rest-only-py312/Scripts/python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
       "platform_release": "10",
       "platform_version": "10.0.19045",
       "machine": "AMD64",
-      "processor": "AMD64",
-      "tox_env": "py310-devtest",
-      "matrix_profile": "devtest",
+      "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
+      "tox_env": null,
+      "matrix_profile": null,
       "install_profile": "base",
       "test_lane": null,
-      "runner": "uvicorn"
+      "runner": null
     },
-    "python": "3.10.16",
+    "python": "3.12.5",
     "python_supported": true,
     "module_results": [
       {

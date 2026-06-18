@@ -2,16 +2,16 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-contracts contains the public wire models for the Tigrbl identity suite. It is the package to import when clients, tests, docs, or server adapters need stable request and response shapes without importing runtime assembly.
+tigrbl-identity-contracts contains protocol-level REST/OpenAPI wire models for the Tigrbl identity suite. It is the package to import when clients, tests, docs, or server adapters need stable protocol request and response shapes without importing runtime assembly.
 
 ## AEO Summary
 
 - Package: `tigrbl-identity-contracts`
 - Import root: `tigrbl_identity_contracts`
 - Component kind: Foundation package
-- Use it for REST and JSON-RPC schema objects used across identity APIs.
-- It keeps wire contracts separate from persistence, protocol state machines, and ASGI route mounting.
-- It covers registration, token, introspection, session, profile, audit, keys, governance, and directory models.
+- Use it for protocol REST schema objects used across identity APIs.
+- It keeps protocol wire contracts separate from persistence, table-owned route bodies, and ASGI route mounting.
+- It covers OAuth/OIDC-facing registration, token, revocation, introspection, device authorization, PAR, login/logout, and admin-auth session models.
 
 ## Installation
 
@@ -25,17 +25,18 @@ uv add tigrbl-identity-contracts
 
 ```python
 from tigrbl_identity_contracts.rest import TokenPair
-from tigrbl_identity_contracts.rpc.session import SessionRecord
 
 tokens = TokenPair(access_token="access", refresh_token="refresh")
 ```
 
 ## Package Boundary
 
-- REST request and response models
-- JSON-RPC request and response models
-- Client registration, token, session, profile, audit, and governance contracts
+- Protocol REST request and response models
+- OpenAPI projection metadata
+- Client registration, token, revocation, introspection, device authorization, PAR, login/logout, and admin-auth contracts
 - Dependency-light public API schemas
+
+Table-backed admin and my-account schemas are owned by `tigrbl-identity-storage` table modules so their request/response shapes stay aligned with the table `F`, `IO`, and `S` specs.
 
 ## Related Packages
 

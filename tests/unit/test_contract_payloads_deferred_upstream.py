@@ -46,18 +46,16 @@ async def test_admin_gate_defers_openapi_payload_to_upstream_for_mixed_runtime(t
 
 
 @pytest.mark.asyncio
-async def test_admin_gate_defers_openrpc_payload_to_upstream_for_public_runtime(tmp_path) -> None:
+async def test_admin_gate_hides_openrpc_payload_for_public_runtime(tmp_path) -> None:
     deployment = resolve_deployment()
     wrapped = build_app(_settings(tmp_path), deployment=deployment)
 
-    assert deployment.active_openrpc_methods == ()
     assert await _response_payload(wrapped, "/openrpc.json") == (404, {"detail": "Not Found"})
 
 
 @pytest.mark.asyncio
-async def test_admin_gate_defers_openrpc_payload_to_upstream_for_mixed_runtime(tmp_path) -> None:
+async def test_admin_gate_hides_openrpc_payload_for_mixed_runtime(tmp_path) -> None:
     deployment = resolve_deployment(plugin_mode="mixed")
     wrapped = build_app(_settings(tmp_path), deployment=deployment)
-    inner = wrapped.app
 
-    assert await _json_payload(wrapped, "/openrpc.json") == await _json_payload(inner, "/openrpc.json")
+    assert await _response_payload(wrapped, "/openrpc.json") == (404, {"detail": "Not Found"})

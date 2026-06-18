@@ -1,6 +1,11 @@
 # Contract Sync Report
 
-- Passed: `True`
+- Passed: `False`
+
+## Failures
+
+- production: committed OpenRPC contract drifts from generated contract
+- hardening: committed OpenRPC contract drifts from generated contract
 
 ## Summary
 

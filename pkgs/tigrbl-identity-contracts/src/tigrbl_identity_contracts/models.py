@@ -70,29 +70,6 @@ class OidcIdTokenClaims(ContractModel):
     sid: str | None = None
 
 
-class AdminTenantRequest(ContractModel):
-    slug: str
-    name: str
-    email: str
-    status: str = "active"
-
-
-class AdminTenantResponse(AdminTenantRequest):
-    id: str
-    created_at: str | None = None
-    updated_at: str | None = None
-
-
-class AdminPrincipalResponse(ContractModel):
-    id: str
-    tenant_id: str
-    kind: str
-    subject: str
-    display_name: str | None = None
-    status: str = "active"
-    roles: list[str] = Field(default_factory=list)
-
-
 class ResourceServerMetadata(ContractModel):
     resource: str
     issuer: str
@@ -132,7 +109,7 @@ class RpLoginRequest(ContractModel):
 
 
 class ContractProjection(ContractModel):
-    kind: Literal["openapi", "openrpc"]
+    kind: Literal["openapi"]
     profile: str
     version: str
     document: dict[str, Any]
@@ -140,9 +117,6 @@ class ContractProjection(ContractModel):
 
 __all__ = [
     "AccessTokenClaims",
-    "AdminPrincipalResponse",
-    "AdminTenantRequest",
-    "AdminTenantResponse",
     "ContractModel",
     "ContractProjection",
     "OAuthIntrospectionResponse",

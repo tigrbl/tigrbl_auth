@@ -3,14 +3,9 @@
   "info": {
     "title": "tigrbl_auth admin/control-plane",
     "version": "0.4.0.dev2",
-    "description": "Generated admin/control-plane contract derived from implementation-backed RPC registration and filtered by the effective deployment boundary."
+    "description": "Deprecated empty OpenRPC compatibility artifact. Tigrbl identity APIs are REST/OpenAPI only."
   },
-  "servers": [
-    {
-      "name": "admin-rpc",
-      "url": "https://authn.example.com/rpc"
-    }
-  ],
+  "servers": [],
   "methods": [],
   "x-tigrbl-auth": {
     "profile": "baseline",
@@ -20,6 +15,6 @@
       "public-rest"
     ],
     "strict_boundary_enforcement": true,
-    "generation_mode": "implementation-backed-rpc-registry"
+    "generation_mode": "rest-only-no-rpc"
   }
 }

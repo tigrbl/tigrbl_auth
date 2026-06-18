@@ -206,19 +206,15 @@ def attach_runtime_surfaces(
     settings_obj: object | None = None,
     *,
     deployment: ResolvedDeployment | None = None,
-    rpc_prefix: str = "/rpc",
     diagnostics_prefix: str = "/system",
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     surface_router = build_surface_api(settings_obj, deployment=deployment)
-    if deployment.flag_enabled("surface_rpc_enabled"):
-        surface_router.mount_jsonrpc(prefix=rpc_prefix)
     if deployment.flag_enabled("surface_diagnostics_enabled"):
         surface_router.attach_diagnostics(prefix=diagnostics_prefix)
     _attach_admin_security_metadata(
         surface_router,
         deployment,
-        rpc_prefix=rpc_prefix,
         diagnostics_prefix=diagnostics_prefix,
     )
     if any(
@@ -226,7 +222,6 @@ def attach_runtime_surfaces(
         for key in (
             "surface_public_enabled",
             "surface_admin_enabled",
-            "surface_rpc_enabled",
             "surface_diagnostics_enabled",
         )
     ):

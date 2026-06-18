@@ -4,7 +4,6 @@ from typing import Any
 from uuid import UUID
 
 from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblRouter, status
-from tigrbl_identity_contracts.rest import AdminTenantOut, AdminTenantProvisionIn
 from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
 from tigrbl_identity_server.security.handler_records import (
     create_handler_record,
@@ -12,8 +11,14 @@ from tigrbl_identity_server.security.handler_records import (
     first_handler_record,
     list_handler_records,
     read_handler_record,
+    update_handler_record,
 )
 from tigrbl_identity_storage.tables import Tenant, User
+from tigrbl_identity_storage.tables.tenant import (
+    AdminTenantOut,
+    AdminTenantProvisionIn,
+    AdminTenantUpdateIn,
+)
 from tigrbl_identity_storage.tables.engine import get_db
 
 api = router = TigrblRouter()
@@ -110,4 +115,44 @@ async def admin_delete_tenant(
     return snapshot
 
 
-__all__ = ["router", "api"]
+@api.route("/admin/tenant/{tenant_id}", methods=["PATCH"], response_model=AdminTenantOut)
+async def admin_update_tenant(
+    request: Request,
+    tenant_id: str,
+    payload: AdminTenantUpdateIn | None = None,
+    db: Any = Depends(get_db),
+):
+    actor = await _require_admin(request, db)
+    if not bool(getattr(actor, "is_superuser", False)):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "superuser privileges required to update tenants")
+    if payload is None:
+        payload = AdminTenantUpdateIn.model_validate(await request.json() or {})
+
+    row = await read_handler_record(Tenant, db, _uuid(tenant_id, label="tenant_id"))
+    if row is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "tenant not found")
+    changes: dict[str, Any] = {}
+    if payload.realm_id is not None:
+        changes["realm_id"] = _uuid(payload.realm_id, label="realm_id")
+    if payload.slug is not None:
+        changes["slug"] = payload.slug.strip().lower()
+    if payload.name is not None:
+        changes["name"] = payload.name.strip()
+    if payload.email is not None:
+        changes["email"] = payload.email.strip().lower()
+    if payload.is_active is not None:
+        changes["is_active"] = payload.is_active
+    if changes:
+        duplicate = await _find_tenant_duplicate(
+            db,
+            slug=changes.get("slug", row.slug),
+            name=changes.get("name", row.name),
+            email=changes.get("email", row.email),
+        )
+        if duplicate is not None and str(duplicate.id) != str(row.id):
+            raise HTTPException(status.HTTP_409_CONFLICT, "tenant slug, name, or email already exists")
+        row = await update_handler_record(Tenant, db, row.id, changes)
+    return _tenant_payload(row)
+
+
+__all__ = ["router", "api", "admin_update_tenant"]

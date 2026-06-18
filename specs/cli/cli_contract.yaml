@@ -56,7 +56,6 @@ global_flags:
   default: &id008 []
   choices: &id009
   - admin-rest
-  - admin-rpc
   - developer-api
   - diagnostics
   - my-account-api

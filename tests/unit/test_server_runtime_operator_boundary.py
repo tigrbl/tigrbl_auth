@@ -53,7 +53,7 @@ def test_server_t1_manifest_registry_profile_and_surface_separation() -> None:
     assert {route.plane for route in manifest.public_routes} == {SurfacePlane.PUBLIC}
     assert {route.plane for route in manifest.admin_routes} == {SurfacePlane.ADMIN}
     assert "token" in manifest.route_names()
-    assert "rpc" in manifest.route_names()
+    assert "rpc" not in manifest.route_names()
 
 
 @pytest.mark.unit

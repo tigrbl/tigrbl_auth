@@ -33,7 +33,7 @@ from .primitives import (
     new_realm_id,
     new_tenant_id,
 )
-from .rfc8785 import canonicalize
+from .json_canonicalization import canonicalize
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
 
 __all__ = [

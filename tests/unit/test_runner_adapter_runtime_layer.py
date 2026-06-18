@@ -33,8 +33,8 @@ def test_runtime_plans_expose_runner_metadata_and_server_agnostic_factory():
 
     assert plan.runner == "uvicorn"
     assert gateway_plan.runner == "hypercorn"
-    assert plan.app_factory == "tigrbl_auth.api.app.build_app"
-    assert gateway_plan.app_factory == "tigrbl_auth.api.app.build_app"
+    assert plan.app_factory == "tigrbl_identity_server.api.app.build_app"
+    assert gateway_plan.app_factory == "tigrbl_identity_server.api.app.build_app"
     assert len(plan.runner_capabilities) > 0
     assert len(gateway_plan.runner_flag_metadata) > 0
 

@@ -7,6 +7,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    BaseModel,
     TenantColumn,
     Timestamped,
     UserColumn,
@@ -22,6 +23,28 @@ from tigrbl_identity_server.framework import (
     UUID,
 )
 from ._ops import create_record, field, list_records, read_record, record_id, update_record, utc_now
+
+
+class MyAccountConsentOut(BaseModel):
+    id: str
+    tenant_id: str
+    user_id: str
+    client_id: str
+    scope: str
+    claims: dict[str, Any] | None = None
+    state: str = "active"
+    granted_at: str | None = None
+    expires_at: str | None = None
+    revoked_at: str | None = None
+
+
+class MyAccountAuthorizedAppOut(BaseModel):
+    client_id: str
+    tenant_id: str
+    scope: str
+    consent_state: str = "active"
+    granted_at: str | None = None
+    revoked_at: str | None = None
 
 
 class Consent(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
@@ -125,4 +148,4 @@ class Consent(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
         return revoked
 
 
-__all__ = ["Consent"]
+__all__ = ["Consent", "MyAccountAuthorizedAppOut", "MyAccountConsentOut"]

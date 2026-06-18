@@ -73,8 +73,8 @@ def _resolved_from_args(args: Any):
     if not surface_sets and all(hasattr(args, name) for name in ("public", "admin", "rpc", "diagnostics")):
         if bool(getattr(args, "public", False)):
             surface_sets.append("public-rest")
-        if bool(getattr(args, "admin", False)) or bool(getattr(args, "rpc", False)):
-            surface_sets.append("admin-rpc")
+        if bool(getattr(args, "admin", False)):
+            surface_sets.append("admin-rest")
         if bool(getattr(args, "diagnostics", False)):
             surface_sets.append("diagnostics")
     protocol_slices = list(getattr(args, "slice", None) or [])

@@ -15,6 +15,6 @@ def test_baseline_profile_filters_production_and_hardening_targets() -> None:
 def test_plugin_mode_public_only_removes_admin_and_diagnostics_surfaces() -> None:
     deployment = resolve_deployment(plugin_mode="public-only")
     assert deployment.surface_enabled("public-rest") is True
-    assert deployment.surface_enabled("admin-rpc") is False
+    assert deployment.surface_enabled("admin-rest") is False
     assert deployment.surface_enabled("diagnostics") is False
     assert all(not route.startswith("/system/") for route in deployment.active_routes)

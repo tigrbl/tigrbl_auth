@@ -180,16 +180,11 @@ def _requires_admin_security_metadata(
     path: str,
     deployment: ResolvedDeployment,
     *,
-    rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> bool:
     if deployment.flag_enabled("surface_admin_enabled") and any(
         _path_has_prefix(path, prefix)
         for prefix in admin_resource_path_prefixes(deployment)
-    ):
-        return True
-    if deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(
-        path, rpc_prefix
     ):
         return True
     if deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(
@@ -203,7 +198,6 @@ def _attach_admin_security_metadata(
     router: TigrblRouter,
     deployment: ResolvedDeployment,
     *,
-    rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> None:
     secured_routes = []
@@ -212,7 +206,6 @@ def _attach_admin_security_metadata(
         if not _requires_admin_security_metadata(
             str(route_path),
             deployment,
-            rpc_prefix=rpc_prefix,
             diagnostics_prefix=diagnostics_prefix,
         ):
             secured_routes.append(route)

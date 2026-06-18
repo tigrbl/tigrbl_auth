@@ -10,7 +10,6 @@ surface_plugin_mode: "public-only"
 surfaces:
   public: true
   admin: false
-  rpc: false
   diagnostics: false
   operator: true
 surface_sets:
@@ -88,7 +87,4 @@ contracts:
   openapi:
     profile: "fapi2-security"
     public_surface: true
-    admin_surface: false
-  openrpc:
-    profile: "fapi2-security"
     admin_surface: false

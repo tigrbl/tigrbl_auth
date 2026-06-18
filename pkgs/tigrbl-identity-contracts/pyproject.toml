@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
-description = "Pydantic REST and JSON-RPC identity contracts for OAuth, OIDC, admin, tenant, client, session, token, and governance APIs."
+description = "Pydantic REST identity contracts for OAuth, OIDC, client registration, token, introspection, device, PAR, and login flows."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -10,7 +10,6 @@ keywords = [
     "identity",
     "api-contracts",
     "pydantic",
-    "json-rpc",
     "rest-api",
     "oauth",
     "oidc",

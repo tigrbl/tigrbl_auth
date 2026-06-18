@@ -10,7 +10,6 @@ surface_plugin_mode: "public-only"
 surfaces:
   public: true
   admin: false
-  rpc: false
   diagnostics: false
   operator: true
 surface_sets:
@@ -79,7 +78,4 @@ contracts:
   openapi:
     profile: "peer-claim"
     public_surface: true
-    admin_surface: false
-  openrpc:
-    profile: "peer-claim"
     admin_surface: false

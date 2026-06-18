@@ -8,6 +8,7 @@ from typing import Any
 from tigrbl_identity_server.framework import (
     Base,
     Bootstrappable,
+    BaseModel,
     ColumnSpec,
     F,
     GUIDPk,
@@ -18,8 +19,38 @@ from tigrbl_identity_server.framework import (
     Timestamped,
     acol,
     relationship,
+    constr,
 )
 from ._ops import create_record, first_record, list_records, record_id, update_record
+
+_realm_description = constr(strip_whitespace=True, max_length=255)
+_realm_issuer_path = constr(strip_whitespace=True, max_length=255)
+_realm_name = constr(strip_whitespace=True, min_length=1, max_length=120)
+_realm_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminRealmOut(BaseModel):
+    id: str
+    slug: str
+    name: str
+    issuer_path: str = ""
+    description: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class AdminRealmProvisionIn(BaseModel):
+    slug: _realm_slug
+    name: _realm_name
+    issuer_path: _realm_issuer_path | None = None
+    description: _realm_description | None = None
+
+
+class AdminRealmUpdateIn(BaseModel):
+    slug: _realm_slug | None = None
+    name: _realm_name | None = None
+    issuer_path: _realm_issuer_path | None = None
+    description: _realm_description | None = None
 
 
 class Realm(Base, GUIDPk, Timestamped, Bootstrappable):
@@ -102,4 +133,9 @@ class Realm(Base, GUIDPk, Timestamped, Bootstrappable):
         return await first_record(cls, db, {"slug": slug})
 
 
-__all__ = ["Realm"]
+__all__ = [
+    "AdminRealmOut",
+    "AdminRealmProvisionIn",
+    "AdminRealmUpdateIn",
+    "Realm",
+]

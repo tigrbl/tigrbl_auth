@@ -85,7 +85,7 @@ SURFACE_REGISTRY: dict[str, dict[str, Any]] = {
     },
     "admin_control_plane": {
         "settings_flag": "surface_admin_enabled",
-        "surface_set": "admin-rpc",
+        "surface_set": "admin-rest",
         "current_resources": [
             "Tenant",
             "User",
@@ -171,13 +171,6 @@ SURFACE_REGISTRY: dict[str, dict[str, Any]] = {
             "import",
             "export",
         ],
-    },
-    "rpc_control_plane": {
-        "settings_flag": "surface_rpc_enabled",
-        "surface_set": "admin-rpc",
-        "current_prefix": "/rpc",
-        "target_prefix": "/rpc",
-        "required_method": "rpc.discover",
     },
     "diagnostics_plane": {
         "settings_flag": "surface_diagnostics_enabled",

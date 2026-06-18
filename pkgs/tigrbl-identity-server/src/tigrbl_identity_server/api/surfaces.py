@@ -90,14 +90,11 @@ def _requires_admin_security_metadata(
     path: str,
     deployment: ResolvedDeployment,
     *,
-    rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> bool:
     if deployment.flag_enabled("surface_admin_enabled") and any(
         _path_has_prefix(path, prefix) for prefix in admin_resource_path_prefixes()
     ):
-        return True
-    if deployment.flag_enabled("surface_rpc_enabled") and _path_has_prefix(path, rpc_prefix):
         return True
     if deployment.flag_enabled("surface_diagnostics_enabled") and _path_has_prefix(path, diagnostics_prefix):
         return True
@@ -108,7 +105,6 @@ def _attach_admin_security_metadata(
     router: TigrblRouter,
     deployment: ResolvedDeployment,
     *,
-    rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> None:
     secured_routes = []
@@ -117,7 +113,6 @@ def _attach_admin_security_metadata(
         if not _requires_admin_security_metadata(
             str(route_path),
             deployment,
-            rpc_prefix=rpc_prefix,
             diagnostics_prefix=diagnostics_prefix,
         ):
             secured_routes.append(route)
@@ -273,19 +268,15 @@ def attach_runtime_surfaces(
     settings_obj: object | None = None,
     *,
     deployment: ResolvedDeployment | None = None,
-    rpc_prefix: str = "/rpc",
     diagnostics_prefix: str = "/system",
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     surface_router = build_surface_api(settings_obj, deployment=deployment)
-    if deployment.flag_enabled("surface_rpc_enabled"):
-        surface_router.mount_jsonrpc(prefix=rpc_prefix)
     if deployment.flag_enabled("surface_diagnostics_enabled"):
         surface_router.attach_diagnostics(prefix=diagnostics_prefix)
     _attach_admin_security_metadata(
         surface_router,
         deployment,
-        rpc_prefix=rpc_prefix,
         diagnostics_prefix=diagnostics_prefix,
     )
     if any(
@@ -293,7 +284,6 @@ def attach_runtime_surfaces(
         for key in (
             "surface_public_enabled",
             "surface_admin_enabled",
-            "surface_rpc_enabled",
             "surface_diagnostics_enabled",
         )
     ):

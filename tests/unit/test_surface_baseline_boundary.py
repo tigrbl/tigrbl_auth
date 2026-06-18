@@ -10,7 +10,6 @@ from httpx import ASGITransport, AsyncClient
 from tigrbl_auth.api.app import build_app
 from tigrbl_auth.cli.artifacts import (
     build_openapi_contract,
-    build_openrpc_contract,
     deployment_from_options,
 )
 from tigrbl_auth.config.deployment import resolve_deployment
@@ -56,7 +55,7 @@ def test_surface_baseline_boundary_t0_inventory_classifies_all_admin_public_api_
     public_uix_pkg = json.loads((ROOT / "apps/public-uix/package.json").read_text())
 
     assert set(manifest) == BOUNDARY_FEATURE_IDS
-    assert registry["admin_control_plane"]["surface_set"] == "admin-rpc"
+    assert registry["admin_control_plane"]["surface_set"] == "admin-rest"
     assert registry["public_auth_plane"]["surface_set"] == "public-rest"
     assert manifest["feat:uix-admin-boundary"]["audience"] == "admin"
     assert manifest["feat:uix-public-boundary"]["audience"] == "public"
@@ -70,20 +69,18 @@ def test_surface_baseline_boundary_t1_composes_public_and_admin_contracts_by_pro
     public_deployment = deployment_from_options(profile="production")
     mixed_deployment = deployment_from_options(profile="baseline", plugin_mode="mixed")
     public_openapi = build_openapi_contract(public_deployment, version="0.0.0-test")
-    mixed_openrpc = build_openrpc_contract(mixed_deployment, version="0.0.0-test")
     routes = route_registry()
 
     assert public_deployment.surface_enabled("public-rest")
-    assert not public_deployment.surface_enabled("admin-rpc")
+    assert not public_deployment.surface_enabled("admin-rest")
     assert mixed_deployment.surface_enabled("public-rest")
-    assert mixed_deployment.surface_enabled("admin-rpc")
+    assert mixed_deployment.surface_enabled("admin-rest")
     assert "/authorize" in public_openapi["paths"]
     assert "/token" in public_openapi["paths"]
     assert "/.well-known/openid-configuration" in public_openapi["paths"]
     assert "/register" in public_openapi["paths"]
     assert "/logout" in public_openapi["paths"]
     assert "/rpc" not in public_openapi["paths"]
-    assert all(method.get("security") for method in mixed_openrpc["methods"])
     assert {meta["surface_set"] for meta in routes.values()} <= {"public-rest", "diagnostics"}
 
 
@@ -111,5 +108,5 @@ async def test_surface_baseline_boundary_t2_fails_closed_for_surface_leaks_and_a
     assert discovery.status_code == 200
     assert public_rpc.status_code == 404
     assert public_tenant.status_code == 404
-    assert missing_admin_key.status_code == 401
-    assert invalid_admin_key.status_code == 403
+    assert missing_admin_key.status_code == 404
+    assert invalid_admin_key.status_code == 404

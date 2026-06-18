@@ -5,15 +5,24 @@ from tigrbl import bind
 from tigrbl_identity_server.framework import Base, _install_local_handler_dict_compat
 from tigrbl_identity_runtime.settings import settings
 
-from .realm import Realm
-from .tenant import Tenant
-from .user import User
+from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
+from .tenant import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn, Tenant
+from .user import (
+    AdminIdentityOut,
+    AdminIdentityProvisionIn,
+    AdminIdentityUpdateIn,
+    MyAccountMutationOut,
+    MyAccountPasswordChangeIn,
+    MyAccountProfileOut,
+    MyAccountProfileUpdateIn,
+    User,
+)
 from .client import Client, _CLIENT_ID_RE
 from .client_registration import ClientRegistration
 from .service import Service
 from .api_key import ApiKey
 from .service_key import ServiceKey
-from .auth_session import AuthSession
+from .auth_session import AuthSession, MyAccountSessionOut
 from .auth_code import AuthCode
 from .device_code import DeviceCode
 from .revoked_token import RevokedToken
@@ -26,7 +35,7 @@ from .delegation_grant import (
     DelegationGrantTokenLink,
 )
 from .pushed_authorization_request import PushedAuthorizationRequest
-from .consent import Consent
+from .consent import Consent, MyAccountAuthorizedAppOut, MyAccountConsentOut
 from .audit_event import AuditEvent
 from .logout_state import LogoutState
 from .key_rotation_event import KeyRotationEvent
@@ -76,8 +85,21 @@ __all__ = [
     "dsn",
     "get_db",
     "Tenant",
+    "AdminTenantOut",
+    "AdminTenantProvisionIn",
+    "AdminTenantUpdateIn",
     "Realm",
+    "AdminRealmOut",
+    "AdminRealmProvisionIn",
+    "AdminRealmUpdateIn",
     "User",
+    "AdminIdentityOut",
+    "AdminIdentityProvisionIn",
+    "AdminIdentityUpdateIn",
+    "MyAccountMutationOut",
+    "MyAccountPasswordChangeIn",
+    "MyAccountProfileOut",
+    "MyAccountProfileUpdateIn",
     "Client",
     "_CLIENT_ID_RE",
     "ClientRegistration",
@@ -85,6 +107,7 @@ __all__ = [
     "ApiKey",
     "ServiceKey",
     "AuthSession",
+    "MyAccountSessionOut",
     "AuthCode",
     "DeviceCode",
     "RevokedToken",
@@ -96,6 +119,8 @@ __all__ = [
     "DelegationGrantTokenLink",
     "PushedAuthorizationRequest",
     "Consent",
+    "MyAccountAuthorizedAppOut",
+    "MyAccountConsentOut",
     "AuditEvent",
     "LogoutState",
     "KeyRotationEvent",

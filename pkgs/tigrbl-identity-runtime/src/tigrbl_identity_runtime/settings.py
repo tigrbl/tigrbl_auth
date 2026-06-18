@@ -138,10 +138,6 @@ class Settings(BaseSettings):
         default=_env_bool("TIGRBL_AUTH_SURFACE_OPERATOR", "true"),
         description="Enable operator CLI and governance surfaces.",
     )
-    surface_rpc_enabled: bool = Field(
-        default=_env_bool("TIGRBL_AUTH_SURFACE_RPC", "false"),
-        description="Enable the JSON-RPC control-plane surface.",
-    )
     surface_diagnostics_enabled: bool = Field(
         default=_env_bool("TIGRBL_AUTH_SURFACE_DIAGNOSTICS", "false"),
         description="Enable diagnostics attachment on the composed Tigrbl surface.",
@@ -176,7 +172,7 @@ class Settings(BaseSettings):
     jwt_secret: str = Field(default=os.environ.get("JWT_SECRET", "insecure-dev-secret"))
     admin_api_key: Optional[str] = Field(
         default=os.environ.get("TIGRBL_AUTH_ADMIN_API_KEY"),
-        description="Local control-plane API key for generated admin, RPC, and diagnostics surfaces.",
+        description="Local control-plane API key for generated admin and diagnostics surfaces.",
     )
     admin_api_key_dir: str = Field(
         default=os.environ.get("TIGRBL_AUTH_ADMIN_API_KEY_DIR", "runtime_secrets"),

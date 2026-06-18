@@ -6,7 +6,6 @@ from typing import Any
 
 import yaml
 
-from tigrbl_identity_server.rpc.registry import get_rpc_method_registry
 from tigrbl_identity_cli.cli.metadata import ARGUMENT_SPECS, COMMAND_SPECS
 from tigrbl_identity_runtime.deployment import (
     EXTENSION_REGISTRY,
@@ -218,20 +217,6 @@ def _build_features(repo_root: Path) -> list[dict[str, Any]]:
                 "required_flags": [str(item) for item in meta.get("flags", ())],
                 "paths": [path],
                 "methods": [str(item).upper() for item in meta.get("methods", ())],
-            }
-        )
-
-    for method_name, meta in sorted(get_rpc_method_registry().items()):
-        features.append(
-            {
-                "id": f"rpc:{method_name}",
-                "kind": "openrpc-method",
-                "title": method_name,
-                "description": str(meta.get("summary", method_name)),
-                "source": str(meta.get("owner_module", "tigrbl_identity_server.rpc.registry")),
-                "scope": "core",
-                "targets": ["OpenRPC 1.4.x admin/control-plane contract"],
-                "required_flags": [str(item) for item in meta.get("required_flags", ())],
             }
         )
 

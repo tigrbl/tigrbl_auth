@@ -10,7 +10,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-uix",
         family="uix",
         audience="admin",
-        surface_set="admin-rpc",
+        surface_set="admin-rest",
         contract_kind="react-admin-uix",
         auth_required=True,
         public_visible=False,
@@ -43,8 +43,8 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-api",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
-        contract_kind="openrpc",
+        surface_set="admin-rest",
+        contract_kind="openapi",
         auth_required=True,
         public_visible=False,
         admin_visible=True,
@@ -55,8 +55,8 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-api-contract-publication",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
-        contract_kind="openrpc",
+        surface_set="admin-rest",
+        contract_kind="openapi",
         auth_required=True,
         public_visible=False,
         admin_visible=True,
@@ -67,20 +67,20 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-api-authz-gate",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
+        surface_set="admin-rest",
         contract_kind="runtime-gate",
         auth_required=True,
         public_visible=False,
         admin_visible=True,
-        owned_paths=("/rpc",),
+        owned_paths=("/admin",),
     ),
     SurfaceBoundaryClassification(
         feature_id="feat:api-admin-resource-management-boundary",
         surface_name="admin-api-resource-management",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
-        contract_kind="openrpc-resource-management",
+        surface_set="admin-rest",
+        contract_kind="openapi-resource-management",
         auth_required=True,
         public_visible=False,
         admin_visible=True,
@@ -91,8 +91,8 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-api-policy-control-plane",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
-        contract_kind="openrpc-policy-control",
+        surface_set="admin-rest",
+        contract_kind="openapi-policy-control",
         auth_required=True,
         public_visible=False,
         admin_visible=True,
@@ -102,7 +102,7 @@ SURFACE_BASELINE_BOUNDARY_FEATURES: Final[tuple[SurfaceBoundaryClassification, .
         surface_name="admin-api-public-exclusion",
         family="api",
         audience="admin",
-        surface_set="admin-rpc",
+        surface_set="admin-rest",
         contract_kind="exclusion-guard",
         auth_required=True,
         public_visible=False,
@@ -231,8 +231,8 @@ def surface_baseline_boundary_integrity() -> dict[str, Any]:
         path for path, meta in routes.items()
         if meta.get("surface_set") == "public-rest"
     }
-    admin_paths = {"/rpc", "/openrpc.json", "/tenant", "/client", "/user"}
-    admin_prefixes = ("/rpc/", "/tenant/", "/client/", "/user/")
+    admin_paths = {"/tenant", "/client", "/user"}
+    admin_prefixes = ("/tenant/", "/client/", "/user/")
     public_admin_leaks = sorted(path for path in public_paths if path in admin_paths)
     public_contract_leaks = sorted(
         path for path in public_contract_paths()

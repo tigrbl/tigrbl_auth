@@ -146,10 +146,10 @@ def _require_runtime_stack() -> None:
 def _import_runtime_objects() -> dict[str, Any]:
     _require_runtime_stack()
     from tigrbl.engine import Engine, EngineSpec
-    from tigrbl_auth.app import app
-    from tigrbl_auth.api.surfaces import surface_api as composed_surface_api
-    from tigrbl_auth.db import get_db
-    from tigrbl_auth.runtime.engine_resolver import (
+    from tigrbl_identity_server.app import app
+    from tigrbl_identity_server.api.surfaces import surface_api as composed_surface_api
+    from tigrbl_identity_storage.tables.engine import get_db
+    from tigrbl_identity_runtime.engine_resolver import (
         register_api_provider,
         resolve_api_provider,
         resolve_default_provider,
@@ -424,7 +424,7 @@ def enable_rfc8414():
     _require_runtime_stack()
     from tigrbl_auth.runtime_cfg import settings
     from tigrbl_auth.rfc.rfc8414 import include_rfc8414
-    from tigrbl_auth.oidc_discovery import include_oidc_discovery
+    from tigrbl_auth_protocol_oidc.discovery import include_oidc_discovery
 
     app = _import_runtime_objects()["app"]
     original = settings.enable_rfc8414
@@ -456,9 +456,9 @@ def temp_key_file(tmp_path_factory: pytest.TempPathFactory):
     temp_dir = tmp_path_factory.mktemp("runtime-keys")
     temp_kid = temp_dir / "jwt_ed25519.kid"
 
-    import tigrbl_auth.crypto as crypto_module
-    import tigrbl_auth.oidc_id_token as oidc_module
-    import tigrbl_auth.standards.oidc.id_token as canonical_oidc_module
+    import tigrbl_identity_jose.crypto as crypto_module
+    import tigrbl_auth_protocol_oidc.id_token as oidc_module
+    import tigrbl_auth_protocol_oidc.standards.id_token as canonical_oidc_module
 
     original_dir = crypto_module._DEFAULT_KEY_DIR
     original_path = crypto_module._DEFAULT_KEY_PATH

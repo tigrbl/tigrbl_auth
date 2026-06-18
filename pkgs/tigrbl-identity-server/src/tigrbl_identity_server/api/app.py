@@ -34,7 +34,6 @@ def _hide_disabled_control_plane_docs(
     app: object,
     deployment: ResolvedDeployment,
     *,
-    rpc_prefix: str,
     diagnostics_prefix: str,
 ) -> None:
     routes = getattr(app, "_routes", None)
@@ -45,14 +44,8 @@ def _hide_disabled_control_plane_docs(
     for route in routes:
         path = str(getattr(route, "path_template", None) or getattr(route, "path", ""))
         hide = (
-            (
-                not deployment.flag_enabled("surface_rpc_enabled")
-                and (_path_has_prefix(path, rpc_prefix) or path == "/openrpc.json")
-            )
-            or (
-                not deployment.flag_enabled("surface_diagnostics_enabled")
-                and _path_has_prefix(path, diagnostics_prefix)
-            )
+            not deployment.flag_enabled("surface_diagnostics_enabled")
+            and _path_has_prefix(path, diagnostics_prefix)
         )
         if hide and hasattr(route, "include_in_schema"):
             hidden.append(replace(route, include_in_schema=False))
@@ -72,7 +65,7 @@ def build_app(
     from tigrbl import TigrblApp
 
     from tigrbl_identity_server.api.lifecycle import register_lifecycle
-    from tigrbl_identity_server.api.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
+    from tigrbl_identity_server.surfaces import admin_resource_path_prefixes, attach_runtime_surfaces
     from tigrbl_identity_server.security.admin_gate import AdminGate
     from tigrbl_identity_storage.tables.engine import dsn
 
@@ -91,13 +84,11 @@ def build_app(
         app,
         resolved_settings,
         deployment=resolved_deployment,
-        rpc_prefix="/rpc",
         diagnostics_prefix="/system",
     )
     _hide_disabled_control_plane_docs(
         app,
         resolved_deployment,
-        rpc_prefix="/rpc",
         diagnostics_prefix="/system",
     )
     register_lifecycle(app)
@@ -105,8 +96,7 @@ def build_app(
         app,
         deployment=resolved_deployment,
         settings_obj=resolved_settings,
-        admin_path_prefixes=admin_resource_path_prefixes(),
-        rpc_prefix="/rpc",
+        admin_path_prefixes=admin_resource_path_prefixes(resolved_deployment),
         diagnostics_prefix="/system",
     )
 

@@ -19,7 +19,7 @@
     "validated_test_lanes_green": true,
     "migration_portability_passed": true,
     "tier3_evidence_rebuilt_from_validated_runs": true,
-    "fully_featured_package_boundary_now": true,
+    "fully_featured_package_boundary_now": false,
     "strict_independent_claims_ready": false,
     "fully_certifiable_now": false,
     "fully_rfc_compliant_now": false,
@@ -48,6 +48,7 @@
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ],
     "final_release_failures": [
@@ -60,8 +61,8 @@
     "explicitly_deauthorized_current_adjacent_doc_count": 7
   },
   "artifacts": {
-    "docs/compliance/current_state_report.json": "58cdd372e6c65531aef633be2c2de62300952c882cac6cb1ef11b155323d177b",
-    "docs/compliance/certification_state_report.json": "bb6e52c36bbd857c38d3bfaca1a7b046ed9ff11d5269a35f950b41990263640a",
+    "docs/compliance/current_state_report.json": "93a822d3f959a5496a9ef2919ae00e5142a124405a1e8a18fdd3a66c4941b335",
+    "docs/compliance/certification_state_report.json": "4012673c9c2754fedeb501ff3932a7bed2d64fdb8388d9d94ea959436a3b2d9c",
     "docs/compliance/release_gate_report.json": "2748344d7282a50874463868e2d55c3b7fa7e8c299bb29467b4ce94cc3e3a3b4",
     "docs/compliance/final_release_gate_report.json": "43526484a5a25b65668c9a42005bef8c3fd25b502e01d8ce8b9b7197d4e09353",
     "docs/compliance/non_rfc_status_report.json": "fce26f8e9e6dd4b54c6ed6c3428b5b87b48251e2146d4e4a0205f817d21fb9ee"

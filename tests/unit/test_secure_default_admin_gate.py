@@ -6,7 +6,6 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl_auth.api.app import build_app
-from tigrbl_auth.cli.artifacts import build_openrpc_contract, deployment_from_options
 from tigrbl_auth.config.deployment import resolve_deployment
 
 
@@ -35,12 +34,12 @@ async def test_default_runtime_exposes_public_only_surface(tmp_path):
 
 @pytest.mark.asyncio
 async def test_admin_enabled_runtime_requires_local_admin_key(tmp_path):
-    deployment = resolve_deployment(plugin_mode="mixed")
+    deployment = resolve_deployment(product_surface="developer-api")
     app = build_app(_settings(tmp_path), deployment=deployment)
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
-        missing = await client.get("/tenant")
-        invalid = await client.get("/tenant", headers={"X-API-Key": "wrong"})
-        valid = await client.post(
+        missing = await client.get("/client")
+        invalid = await client.get("/client", headers={"X-API-Key": "wrong"})
+        rpc = await client.post(
             "/rpc",
             json={"jsonrpc": "2.0", "method": "ApiKey.create", "params": {}, "id": 1},
             headers={"Authorization": "Bearer test-admin-key"},
@@ -50,7 +49,7 @@ async def test_admin_enabled_runtime_requires_local_admin_key(tmp_path):
     assert missing.json()["error"] == "missing_admin_api_key"
     assert invalid.status_code == 403
     assert invalid.json()["error"] == "invalid_admin_api_key"
-    assert valid.status_code not in {401, 403}
+    assert rpc.status_code == 404
 
 
 @pytest.mark.asyncio
@@ -78,23 +77,3 @@ async def test_admin_enabled_runtime_openapi_declares_tigrbl_security_dependenci
     assert security_schemes["AdminBearer"] == {"type": "http", "scheme": "bearer"}
     assert "/tenant" in openapi["paths"]
     assert "security" not in openapi["paths"]["/.well-known/openid-configuration"]["get"]
-
-
-@pytest.mark.asyncio
-async def test_admin_enabled_runtime_defers_openrpc_payload_to_upstream_app(tmp_path):
-    deployment = resolve_deployment(plugin_mode="mixed")
-    wrapped = build_app(_settings(tmp_path), deployment=deployment)
-    inner = wrapped.app
-    async with AsyncClient(transport=ASGITransport(app=wrapped), base_url="http://test") as wrapped_client:
-        wrapped_openrpc = (await wrapped_client.get("/openrpc.json")).json()
-    async with AsyncClient(transport=ASGITransport(app=inner), base_url="http://test") as inner_client:
-        inner_openrpc = (await inner_client.get("/openrpc.json")).json()
-
-    assert wrapped_openrpc == inner_openrpc
-
-
-def test_openrpc_artifact_marks_admin_methods_with_security():
-    deployment = deployment_from_options(profile="baseline", plugin_mode="mixed")
-    contract = build_openrpc_contract(deployment, version="0.0.0-test")
-    assert contract["components"]["securitySchemes"]["AdminApiKeyHeader"]["in"] == "header"
-    assert all(method.get("security") for method in contract["methods"])

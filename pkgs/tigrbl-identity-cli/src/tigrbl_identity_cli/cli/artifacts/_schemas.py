@@ -1,39 +1,31 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+from typing import Any
+
+from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import JWKS_PATH
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
+from tigrbl_identity_cli.cli.artifacts._common import (
+    WELL_KNOWN_ENDPOINTS,
+    _current_version,
+    _load_yaml,
+    _write_yaml,
+    build_tenant_openid_config,
+    resolve_tenant_trust_domain_authority,
+)
+
+
 def build_openrpc_contract(deployment: Any, *, version: str) -> dict[str, Any]:
     methods: list[dict[str, Any]] = []
-    components: dict[str, Any] = {}
-    if deployment.surface_enabled("admin-rpc"):
-        for definition in iter_active_rpc_methods(deployment):
-            methods.append(
-                {
-                    "name": definition.name,
-                    "summary": definition.summary,
-                    "description": definition.description,
-                    "tags": list(definition.tags),
-                    "paramStructure": "by-name",
-                    "params": _openrpc_params_from_model(definition.params_model, components),
-                    "result": {
-                        "name": "result",
-                        "schema": _collect_model_schema(definition.result_model, components),
-                    },
-                    "security": ADMIN_SECURITY_REQUIREMENT,
-                    "x-tigrbl-auth": {
-                        "owner_module": definition.owner_module,
-                        "required_flags": list(definition.required_flags),
-                        "surface_set": definition.surface_set,
-                        "introduced_in": definition.introduced_in,
-                    },
-                }
-            )
     contract = {
         "openrpc": "1.4.2",
         "info": {
             "title": "tigrbl_auth admin/control-plane",
             "version": version,
-            "description": "Generated admin/control-plane contract derived from implementation-backed RPC registration and filtered by the effective deployment boundary.",
+            "description": "Deprecated empty OpenRPC compatibility artifact. Tigrbl identity APIs are REST/OpenAPI only.",
         },
-        "servers": [{"name": "admin-rpc", "url": f"{deployment.issuer}/rpc"}],
+        "servers": [],
         "methods": methods,
         "x-tigrbl-auth": {
             "profile": deployment.profile,
@@ -41,16 +33,9 @@ def build_openrpc_contract(deployment: Any, *, version: str) -> dict[str, Any]:
             "runtime_style": deployment.runtime_style,
             "surface_sets": list(deployment.surface_sets),
             "strict_boundary_enforcement": deployment.strict_boundary_enforcement,
-            "generation_mode": "implementation-backed-rpc-registry",
+            "generation_mode": "rest-only-no-rpc",
         },
     }
-    contract_components: dict[str, Any] = {}
-    if components:
-        contract_components["schemas"] = components
-    if deployment.surface_enabled("admin-rpc"):
-        contract_components["securitySchemes"] = ADMIN_SECURITY_SCHEMES
-    if contract_components:
-        contract["components"] = contract_components
     return contract
 
 

@@ -4,7 +4,6 @@ from typing import Any, Final
 
 from .defaults import (
     all_surface_capability_registry,
-    get_rpc_method_registry,
     surface_route_registry,
 )
 
@@ -14,7 +13,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "allowed_capabilities": None,
         "admin_resources": (),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (),
     },
     "platform-admin-api": {
         "surface_sets": ("admin-rest",),
@@ -27,7 +25,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "KeyRotationEvent",
         ),
         "admin_rest_groups": ("admin_auth", "admin_realms", "admin_identities"),
-        "rpc_method_prefixes": (),
     },
     "tenant-admin-api": {
         "surface_sets": ("admin-rest",),
@@ -41,7 +38,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "KeyRotationEvent",
         ),
         "admin_rest_groups": ("admin_auth", "admin_identities"),
-        "rpc_method_prefixes": (),
     },
     "developer-api": {
         "surface_sets": ("public-rest", "admin-rest"),
@@ -58,7 +54,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_resources": ("Client", "ClientRegistration", "AuditEvent"),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (),
     },
     "service-admin-api": {
         "surface_sets": ("public-rest", "admin-rest"),
@@ -80,7 +75,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "AuditEvent",
         ),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (),
     },
     "resource-validation-api": {
         "surface_sets": ("public-rest",),
@@ -96,7 +90,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_resources": (),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (),
     },
     "my-account-api": {
         "surface_sets": ("public-rest",),
@@ -114,7 +107,6 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         ),
         "admin_resources": (),
         "admin_rest_groups": (),
-        "rpc_method_prefixes": (),
     },
 }
 
@@ -191,9 +183,6 @@ SURFACE_CAPABILITY_REGISTRY: Final[dict[str, dict[str, Any]]] = (
 )
 ROUTE_REGISTRY: Final[dict[str, dict[str, Any]]] = surface_route_registry()
 
-
-OPENRPC_METHOD_REGISTRY: Final[dict[str, dict[str, Any]]] = get_rpc_method_registry()
-
 TARGET_FLAG_REQUIREMENTS: Final[dict[str, tuple[str, ...]]] = {
     "RFC 6749": ("enable_rfc6749", "surface_public_enabled"),
     "RFC 6750": ("enable_rfc6750", "surface_public_enabled"),
@@ -245,10 +234,6 @@ TARGET_FLAG_REQUIREMENTS: Final[dict[str, tuple[str, ...]]] = {
         "surface_public_enabled",
     ),
     "OpenAPI 3.1 / 3.2 compatible public contract": ("surface_public_enabled",),
-    "OpenRPC 1.4.x admin/control-plane contract": (
-        "surface_admin_enabled",
-        "surface_rpc_enabled",
-    ),
 }
 
 

@@ -25,7 +25,11 @@ async def running_app(override_get_db, unused_tcp_port):
     port = unused_tcp_port
     base_url = f"http://127.0.0.1:{port}"
     cfg = uvicorn.Config(
-        "tigrbl_auth.app:app", host="127.0.0.1", port=port, log_level="warning"
+        "tigrbl_identity_server.app:app",
+        host="127.0.0.1",
+        port=port,
+        log_level="warning",
+        interface="asgi3",
     )
     server = uvicorn.Server(cfg)
     task = asyncio.create_task(server.serve())

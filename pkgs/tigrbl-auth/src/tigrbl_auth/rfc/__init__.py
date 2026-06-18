@@ -64,11 +64,4 @@ for _name in _JOSE_RFC_MODULES:
         "tigrbl-identity-jose",
     )
 
-for _name in _CORE_RFC_MODULES:
-    _alias_module(
-        f"{_LEGACY_NAME}.{_name}",
-        f"tigrbl_identity_core.{_name}",
-        "tigrbl-identity-core",
-    )
-
 __all__ = sorted((*_OAUTH_RFC_MODULES, *_JOSE_RFC_MODULES, *_CORE_RFC_MODULES))

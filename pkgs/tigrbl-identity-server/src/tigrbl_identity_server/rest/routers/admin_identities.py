@@ -4,11 +4,6 @@ from typing import Any
 from uuid import UUID
 
 from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblRouter, status
-from tigrbl_identity_contracts.rest import (
-    AdminIdentityOut,
-    AdminIdentityProvisionIn,
-    AdminIdentityUpdateIn,
-)
 from tigrbl_identity_admin.bootstrap import resolve_admin_user_from_request
 from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_identity_server.security.handler_records import (
@@ -20,6 +15,11 @@ from tigrbl_identity_server.security.handler_records import (
     update_handler_record,
 )
 from tigrbl_identity_storage.tables import Tenant, User
+from tigrbl_identity_storage.tables.user import (
+    AdminIdentityOut,
+    AdminIdentityProvisionIn,
+    AdminIdentityUpdateIn,
+)
 from tigrbl_identity_storage.tables.engine import get_db
 
 api = router = TigrblRouter()

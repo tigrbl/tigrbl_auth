@@ -80,6 +80,8 @@ async def test_product_api_table_initialization_t2_startup_uses_mounted_surface_
         state=SimpleNamespace(tigrbl_auth_surface_router=ProductSurfaceRouter())
     )
 
-    await lifecycle._startup(app, object())
+    monkeypatch.setattr(lifecycle, "surface_api", ProductSurfaceRouter())
+
+    await lifecycle._startup()
 
     assert calls == ["product-surface"]

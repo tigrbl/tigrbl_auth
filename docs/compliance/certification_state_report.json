@@ -95,6 +95,7 @@
       "Tier 4 independent peer validation is not complete for the retained boundary.",
       "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
       "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ]
   },
@@ -102,6 +103,7 @@
     "Tier 4 independent peer validation is not complete for the retained boundary.",
     "The peer-bundle completeness gate is not satisfied for the declared peer-profile set.",
     "One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.",
+    "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
     "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
   ]
 }

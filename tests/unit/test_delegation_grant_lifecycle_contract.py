@@ -222,7 +222,7 @@ def test_delegation_grant_cross_tenant_denial_contract() -> None:
 
 
 def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatch: pytest.MonkeyPatch) -> None:
-    oauth_exchange = importlib.import_module("tigrbl_auth.standards.oauth2.token_exchange")
+    oauth_exchange = importlib.import_module("tigrbl_auth_protocol_oauth.standards.token_exchange")
 
     class FakeJwt:
         async def async_decode(self, token: str, verify_exp: bool = True) -> dict[str, object]:

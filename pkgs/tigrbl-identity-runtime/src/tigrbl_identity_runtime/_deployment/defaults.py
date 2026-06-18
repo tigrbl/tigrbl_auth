@@ -15,8 +15,6 @@ from tigrbl_identity_runtime.surfaces import (
     all_surface_capability_registry,
     route_registry as surface_route_registry,
 )
-from tigrbl_identity_server.rpc import get_rpc_method_registry
-
 # ---------------------------------------------------------------------------
 # Pure defaults mirrored from ``config.settings`` for governance tooling.
 # ---------------------------------------------------------------------------
@@ -28,7 +26,6 @@ DEFAULT_VALUES: Final[dict[str, Any]] = {
     "surface_public_enabled": True,
     "surface_admin_enabled": False,
     "surface_operator_enabled": True,
-    "surface_rpc_enabled": False,
     "surface_diagnostics_enabled": False,
     "surface_plugin_mode": "public-only",
     "runtime_style": "standalone",
@@ -113,67 +110,51 @@ SURFACE_SET_REGISTRY: Final[dict[str, dict[str, bool]]] = {
     "public-rest": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
-        "surface_rpc_enabled": False,
-        "surface_diagnostics_enabled": False,
-    },
-    "admin-rpc": {
-        "surface_public_enabled": False,
-        "surface_admin_enabled": True,
-        "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
     "admin-rest": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
     "diagnostics": {
         "surface_public_enabled": False,
         "surface_admin_enabled": False,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": True,
     },
     "public-api": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
     "platform-admin-api": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
     "tenant-admin-api": {
         "surface_public_enabled": False,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
     "developer-api": {
         "surface_public_enabled": True,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
     "service-admin-api": {
         "surface_public_enabled": True,
         "surface_admin_enabled": True,
-        "surface_rpc_enabled": True,
         "surface_diagnostics_enabled": False,
     },
     "resource-validation-api": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
     "my-account-api": {
         "surface_public_enabled": True,
         "surface_admin_enabled": False,
-        "surface_rpc_enabled": False,
         "surface_diagnostics_enabled": False,
     },
 }

@@ -13,7 +13,6 @@ if TYPE_CHECKING:
 class TigrblAuthPlugin:
     """Install the tigrbl_auth surfaces into an existing ``TigrblApp``."""
 
-    rpc_prefix: str = "/rpc"
     diagnostics_prefix: str = "/system"
     settings: object | None = None
 
@@ -26,7 +25,7 @@ class TigrblAuthPlugin:
         deployment = self.resolve_plugin_deployment(resolved_settings)
 
         from tigrbl_identity_server.api.lifecycle import register_lifecycle
-        from tigrbl_identity_server.api.surfaces import attach_runtime_surfaces
+        from tigrbl_identity_server.surfaces import attach_runtime_surfaces
 
         state = getattr(app, "state", None)
         if state is not None:
@@ -37,7 +36,6 @@ class TigrblAuthPlugin:
             app,
             resolved_settings,
             deployment=deployment,
-            rpc_prefix=self.rpc_prefix,
             diagnostics_prefix=self.diagnostics_prefix,
         )
         register_lifecycle(app)

@@ -24,7 +24,7 @@ uv add tigrbl-identity-core
 ## Usage
 
 ```python
-from tigrbl_identity_core.rfc8785 import canonicalize
+from tigrbl_identity_core.json_canonicalization import canonicalize
 from tigrbl_identity_core.typing import uuid_str
 
 subject_id = uuid_str()

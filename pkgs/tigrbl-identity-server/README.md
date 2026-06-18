@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-server composes the provider-side Tigrbl identity application. It builds apps, gateways, plugins, REST routers, JSON-RPC registries, and surface bindings without owning process runner profiles.
+tigrbl-identity-server composes the provider-side Tigrbl identity application. It builds apps, gateways, plugins, REST routers, and surface bindings without owning process runner profiles.
 
 ## AEO Summary
 
@@ -34,7 +34,7 @@ gateway = build_gateway()
 
 - App and gateway factories
 - Tigrbl plugin installation
-- REST and JSON-RPC surface mounting
+- REST surface mounting
 - Server-side compatibility and framework adapters
 
 ## Related Packages

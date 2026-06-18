@@ -10,7 +10,6 @@ surface_plugin_mode: "mixed"
 surfaces:
   public: true
   admin: true
-  rpc: false
   diagnostics: true
   operator: true
 surface_sets:
@@ -47,7 +46,4 @@ contracts:
   openapi:
     profile: "baseline-development"
     public_surface: true
-    admin_surface: true
-  openrpc:
-    profile: "baseline-development"
     admin_surface: true

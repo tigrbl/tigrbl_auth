@@ -37,14 +37,6 @@ def _settings(tmp_path: Path) -> SimpleNamespace:
     return SimpleNamespace(**values)
 
 
-def _method_names(openrpc: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in openrpc.get("methods", [])}
-
-
-def _rpc_discover_method_names(result: dict[str, object]) -> set[str]:
-    return {str(item["name"]) for item in result.get("methods", [])}
-
-
 def test_tenant_admin_contract_matches_product_surface_registry() -> None:
     deployment = resolve_deployment(
         profile="production", product_surface=PRODUCT_SURFACE
@@ -56,7 +48,7 @@ def test_tenant_admin_contract_matches_product_surface_registry() -> None:
         "@tigrbl-auth/tenant-admin-uix"
     )
     assert deployment.plugin_mode == "admin-only"
-    assert deployment.surface_enabled("admin-rpc")
+    assert deployment.surface_enabled("admin-rest")
     assert not deployment.surface_enabled("public-rest")
     assert tuple(deployment.allowed_admin_resources) == (
         TENANT_ADMIN_API_CONTRACT.admin_resources
@@ -97,19 +89,13 @@ def test_tenant_admin_contract_routes_are_tenant_scoped_only() -> None:
     assert "/authsession" not in prefixes
     assert "/tenant" not in prefixes
     assert "/service" not in prefixes
-    assert "identity.list" in deployment.active_openrpc_methods
-    assert "client.registration.upsert" in deployment.active_openrpc_methods
-    assert "tenant.keys.create" in deployment.active_openrpc_methods
-    assert "session.list" not in deployment.active_openrpc_methods
-    assert "tenant.list" not in deployment.active_openrpc_methods
-    assert "token.inspect" not in deployment.active_openrpc_methods
 
     for route in TENANT_ADMIN_API_CONTRACT.forbidden_exact_routes:
         assert route not in deployment.active_routes
 
 
 @pytest.mark.asyncio
-async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
+async def test_tenant_admin_openapi_is_surface_constrained_and_openrpc_is_absent(
     tmp_path: Path,
 ) -> None:
     tenant_app = build_app(_settings(tmp_path))
@@ -121,6 +107,7 @@ async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
         openrpc_response = await client.get("/openrpc.json")
 
     assert openapi_response.status_code == 200
+    assert openrpc_response.status_code == 404
     paths = openapi_response.json()["paths"]
     assert "/user" in paths
     assert "/client" in paths
@@ -131,15 +118,6 @@ async def test_tenant_admin_openapi_and_openrpc_are_surface_constrained(
     assert "/service" not in paths
     for route in TENANT_ADMIN_API_CONTRACT.forbidden_exact_routes:
         assert route not in paths
-
-    assert openrpc_response.status_code == 200
-    methods = _method_names(openrpc_response.json())
-    assert {"User.list", "Client.list", "ClientRegistration.list"}.issubset(
-        methods
-    )
-    assert "Tenant.list" not in methods
-    assert "Service.list" not in methods
-    assert "session.list" not in methods
 
 
 @pytest.mark.asyncio
@@ -174,7 +152,7 @@ async def test_tenant_admin_cors_allows_uix_origin_on_error_responses(
 
 
 @pytest.mark.asyncio
-async def test_tenant_admin_rpc_requires_key_and_reports_tenant_methods(
+async def test_tenant_admin_rpc_endpoint_is_not_supported(
     tmp_path: Path,
 ) -> None:
     tenant_app = build_app(_settings(tmp_path))
@@ -186,33 +164,18 @@ async def test_tenant_admin_rpc_requires_key_and_reports_tenant_methods(
             "/rpc",
             json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
         )
-        valid_key = await client.post(
-            "/rpc",
-            headers={"X-API-Key": "test-tenant-admin-key"},
-            json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
-        )
         login = await client.post("/login", json={})
         register = await client.post("/register", json={})
         token = await client.post("/token", data={})
 
-    assert missing_key.status_code == 401
-    assert missing_key.json()["error"] == "missing_admin_api_key"
-    assert valid_key.status_code == 200
-    result = valid_key.json()["result"]
-    assert result["deployment"]["plugin_mode"] == "admin-only"
-    methods = _rpc_discover_method_names(result)
-    assert "identity.list" in methods
-    assert "client.registration.upsert" in methods
-    assert "tenant.keys.create" in methods
-    assert "tenant.list" not in methods
-    assert "token.inspect" not in methods
+    assert missing_key.status_code == 404
     assert login.status_code == 404
     assert register.status_code == 404
     assert token.status_code == 404
 
 
 @pytest.mark.asyncio
-async def test_tenant_admin_rpc_dispatch_fails_closed_for_cross_surface_methods(
+async def test_tenant_admin_rpc_dispatch_is_absent(
     tmp_path: Path,
 ) -> None:
     tenant_app = build_app(_settings(tmp_path))
@@ -221,7 +184,7 @@ async def test_tenant_admin_rpc_dispatch_fails_closed_for_cross_surface_methods(
     async with AsyncClient(
         transport=ASGITransport(app=tenant_app), base_url="http://test"
     ) as client:
-        allowed = await client.post(
+        discover = await client.post(
             "/rpc",
             headers=headers,
             json={"jsonrpc": "2.0", "method": "rpc.discover", "params": {}, "id": 1},
@@ -237,14 +200,9 @@ async def test_tenant_admin_rpc_dispatch_fails_closed_for_cross_surface_methods(
             json={"jsonrpc": "2.0", "method": "token.inspect", "params": {}, "id": 3},
         )
 
-    assert allowed.status_code == 200
-    assert allowed.json()["result"]["deployment"]["plugin_mode"] == "admin-only"
-    assert platform_method.status_code == 200
-    assert platform_method.json()["error"]["code"] == -32601
-    assert platform_method.json()["error"]["message"] == "Method not found"
-    assert service_method.status_code == 200
-    assert service_method.json()["error"]["code"] == -32601
-    assert service_method.json()["error"]["message"] == "Method not found"
+    assert discover.status_code == 404
+    assert platform_method.status_code == 404
+    assert service_method.status_code == 404
 
 
 @pytest.mark.asyncio

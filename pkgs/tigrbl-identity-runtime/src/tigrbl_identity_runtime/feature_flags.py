@@ -73,7 +73,6 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
             "surface_public_enabled": "Mount public auth plane routes",
             "surface_admin_enabled": "Mount table-backed admin plane",
             "surface_operator_enabled": "Enable operator/governance plane",
-            "surface_rpc_enabled": "Mount JSON-RPC control plane",
             "surface_diagnostics_enabled": "Attach diagnostics surface",
             "surface_plugin_mode": "Plugin install mode",
         },

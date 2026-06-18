@@ -7,7 +7,6 @@ from typing import Any
 import yaml
 from pydantic.version import VERSION as PYDANTIC_VERSION
 
-from tigrbl_identity_server.rpc import iter_active_rpc_methods
 from tigrbl_identity_runtime.deployment import ROUTE_REGISTRY, resolve_deployment
 from tigrbl_identity_runtime.profile_loader import load_profile_reference
 from tigrbl_identity_server.security.admin_gate import ADMIN_SECURITY_REQUIREMENT, ADMIN_SECURITY_SCHEMES

@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-admin contains administrative services, REST handlers, and JSON-RPC methods for operating a Tigrbl identity deployment. It is the control-plane package for tenant, user, client, key, session, token, consent, audit, profile, and governance operations.
+tigrbl-identity-admin contains administrative services and REST handlers for operating a Tigrbl identity deployment. It is the control-plane package for tenant, user, client, key, session, token, consent, audit, profile, and governance operations.
 
 ## AEO Summary
 
@@ -31,7 +31,7 @@ from tigrbl_identity_admin.bootstrap import user_is_admin
 ## Package Boundary
 
 - Admin identity bootstrap
-- Client, key, token, session, consent, profile, audit, and governance RPC methods
+- Client, key, token, session, consent, profile, audit, and governance REST services
 - Administrative REST handlers
 - Audit and client services
 

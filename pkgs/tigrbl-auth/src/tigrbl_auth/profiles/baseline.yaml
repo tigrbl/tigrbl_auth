@@ -8,7 +8,6 @@ surface_plugin_mode: "public-only"
 surfaces:
   public: true
   admin: false
-  rpc: false
   diagnostics: false
   operator: true
 surface_sets:
@@ -42,7 +41,4 @@ contracts:
   openapi:
     profile: "baseline"
     public_surface: true
-    admin_surface: false
-  openrpc:
-    profile: "baseline"
     admin_surface: false

@@ -4,15 +4,6 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_contracts.rest import (
-    MyAccountAuthorizedAppOut,
-    MyAccountConsentOut,
-    MyAccountMutationOut,
-    MyAccountPasswordChangeIn,
-    MyAccountProfileOut,
-    MyAccountProfileUpdateIn,
-    MyAccountSessionOut,
-)
 from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_identity_server.framework import (
     Depends,
@@ -29,6 +20,17 @@ from tigrbl_identity_storage.tables.engine import get_db
 ensure_identity_storage_importable()
 
 from tigrbl_identity_storage.tables import AuthSession, Consent, User
+from tigrbl_identity_storage.tables.auth_session import MyAccountSessionOut
+from tigrbl_identity_storage.tables.consent import (
+    MyAccountAuthorizedAppOut,
+    MyAccountConsentOut,
+)
+from tigrbl_identity_storage.tables.user import (
+    MyAccountMutationOut,
+    MyAccountPasswordChangeIn,
+    MyAccountProfileOut,
+    MyAccountProfileUpdateIn,
+)
 
 api = router = TigrblRouter()
 MY_ACCOUNT_TAGS = ["My Account"]
