@@ -17,6 +17,10 @@ def _load_pyproject() -> dict:
     return tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
 
+def _load_package_pyproject(name: str) -> dict:
+    return tomllib.loads((ROOT / "pkgs" / name / "pyproject.toml").read_text(encoding="utf-8"))
+
+
 def test_pyproject_uses_published_pins_and_extras():
     manifest = _load_pyproject()
     project = manifest["project"]
@@ -28,6 +32,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "swarmauri_standard==0.10.0" in dependencies
     assert "swarmauri_tokens_jwt==0.3.0.dev31" in dependencies
     assert "swarmauri_crypto_jwe==0.3.0.dev5" in dependencies
+    assert "pqcrypto==0.4.0" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
     assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -36,6 +41,11 @@ def test_pyproject_uses_published_pins_and_extras():
     assert extras["hypercorn"] == ["hypercorn==0.18.0"]
     assert extras["tigrcorn"] == ["tigrcorn==0.3.8; python_version >= '3.11'"]
     assert "tigrcorn==0.3.8; python_version >= '3.11'" in extras["servers"]
+
+    jose_dependencies = set(_load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"])
+    authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
+    assert "pqcrypto==0.4.0" in jose_dependencies
+    assert "pqcrypto==0.4.0" not in authz_dependencies
 
 
 def test_framework_router_uses_upstream_tigrbl_router():

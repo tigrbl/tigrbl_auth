@@ -219,6 +219,14 @@ class Settings(BaseSettings):
         default=_env_bool("TIGRBL_AUTH_REQUIRE_TLS", "true"),
         description="Require HTTPS for all incoming requests",
     )
+    jwt_signing_alg: str = Field(
+        default=os.environ.get("TIGRBL_AUTH_JWT_SIGNING_ALG", "EdDSA"),
+        description="JWT signing algorithm selector. EdDSA is the default; ML-DSA-65 opts into the PQC JOSE profile.",
+    )
+    enable_pqc_jose: bool = Field(
+        default=_env_bool("TIGRBL_AUTH_ENABLE_PQC_JOSE"),
+        description="Advertise and accept the ML-DSA-65 post-quantum JOSE profile when enabled.",
+    )
 
     # ------------------------------------------------------------------
     # Baseline RFC / OIDC flags

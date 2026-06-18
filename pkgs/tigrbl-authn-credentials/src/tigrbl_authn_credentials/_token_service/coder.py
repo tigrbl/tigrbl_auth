@@ -5,6 +5,13 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
 from tigrbl_identity_core.errors import InvalidTokenError
+from tigrbl_identity_jose.pqc_jwt import (
+    ML_DSA_65_ALG,
+    configured_jwt_signing_alg,
+    pqc_jose_enabled,
+    sign_pqc_jwt,
+    verify_pqc_jwt,
+)
 
 from .runtime import _ACCESS_TTL, _REFRESH_TTL, _header_alg, _load_runtime, _run, _svc, _svc_async
 
@@ -79,6 +86,12 @@ class JWTCoder:
             payload = add_jwt_access_token_claims(payload, issuer=effective_issuer, audience=effective_audience)
             issuer = effective_issuer
             audience = effective_audience
+        if configured_jwt_signing_alg(settings) == ML_DSA_65_ALG:
+            if issuer is not None:
+                payload.setdefault("iss", issuer)
+            if audience is not None:
+                payload.setdefault("aud", audience if isinstance(audience, str) else list(audience))
+            return await sign_pqc_jwt(payload)
         token = await self._svc.mint(
             payload,
             alg=runtime["JWAAlg"].EDDSA,
@@ -112,12 +125,21 @@ class JWTCoder:
     ) -> Dict[str, Any]:
         runtime = _load_runtime()
         settings = runtime["settings"]
-        if _header_alg(token) == "none":
+        header_alg = _header_alg(token)
+        if header_alg in {"", "none"}:
             raise InvalidTokenError("unsigned tokens are not accepted")
-        try:
-            payload = await self._svc.verify(token, audience=audience, issuer=issuer)
-        except Exception as exc:
-            raise InvalidTokenError("signature verification failed") from exc
+        if header_alg == ML_DSA_65_ALG.lower():
+            if not pqc_jose_enabled(settings):
+                raise InvalidTokenError("ML-DSA-65 JWT support is disabled")
+            try:
+                payload = await verify_pqc_jwt(token, audience=audience, issuer=issuer)
+            except Exception as exc:
+                raise InvalidTokenError("signature verification failed") from exc
+        else:
+            try:
+                payload = await self._svc.verify(token, audience=audience, issuer=issuer)
+            except Exception as exc:
+                raise InvalidTokenError("signature verification failed") from exc
         payload = dict(payload)
         if getattr(settings, "enable_rfc9700", False) and (audience is not None or issuer is not None):
             if payload.get("iss") in {None, "", "placeholder-issuer"}:

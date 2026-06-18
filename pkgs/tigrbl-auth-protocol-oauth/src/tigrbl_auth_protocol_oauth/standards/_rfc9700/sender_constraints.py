@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment
+from tigrbl_identity_runtime.settings import settings
 
 from .security_profile import (
     DEVICE_CODE_GRANT_TYPE,
@@ -19,6 +20,20 @@ from .security_profile import (
     runtime_security_profile,
     security_bcp_profile,
 )
+
+ML_DSA_65_ALG = "ML-DSA-65"
+
+
+def _pqc_jose_enabled() -> bool:
+    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+
+
+def _access_token_signing_algs() -> list[str]:
+    algs = ["EdDSA"]
+    if _pqc_jose_enabled():
+        algs.append(ML_DSA_65_ALG)
+    return algs
 
 def validate_sender_constraint(
     request: Any,
@@ -167,7 +182,7 @@ def discovery_policy_metadata(deployment: ResolvedDeployment) -> dict[str, objec
     if policy.rich_authorization_requests_supported:
         payload["authorization_details_types_supported"] = ["*"]
     if deployment.flag_enabled("enable_rfc9068") or deployment.profile in {"production", "hardening", "fapi2-security", "peer-claim"}:
-        payload["access_token_signing_alg_values_supported"] = ["EdDSA"]
+        payload["access_token_signing_alg_values_supported"] = _access_token_signing_algs()
     if policy.fapi_mode:
         payload["fapi_profiles_supported"] = ["fapi2-security"]
     return payload

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Final
 
+from tigrbl_identity_jose.pqc import ML_DSA_65_ALG
 from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when Swarmauri is installed
@@ -45,6 +46,8 @@ def supported_algorithms() -> list[str]:
     else:
         algs.difference_update(WEBAUTHN_ALGORITHMS)
         algs.add("RS256")
+    if getattr(settings, "enable_pqc_jose", False) or str(getattr(settings, "jwt_signing_alg", "")) == ML_DSA_65_ALG:
+        algs.add(ML_DSA_65_ALG)
     return sorted(algs)
 
 

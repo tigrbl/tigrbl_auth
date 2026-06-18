@@ -8,10 +8,21 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import json
 import os
 import pathlib
 from functools import lru_cache
 from typing import Any, Tuple
+from uuid import uuid4
+
+from .pqc import (
+    ML_DSA_65_ALG,
+    generate_pqc_signature_keypair,
+    pqc_public_jwk,
+    pqc_signing_jwk,
+    public_key_from_pqc_jwk,
+    secret_key_from_pqc_jwk,
+)
 
 try:  # pragma: no cover - optional in minimal environments
     import bcrypt
@@ -20,6 +31,9 @@ except Exception:  # pragma: no cover
 
 _DEFAULT_KEY_DIR = pathlib.Path(os.getenv("JWT_ED25519_KEY_DIR", "runtime_secrets"))
 _DEFAULT_KEY_PATH = _DEFAULT_KEY_DIR / "jwt_ed25519.kid"
+_DEFAULT_PQC_KEY_PATH = pathlib.Path(
+    os.getenv("JWT_ML_DSA_65_KEY_PATH", str(_DEFAULT_KEY_DIR / "jwt_ml_dsa_65.json"))
+)
 _BCRYPT_ROUNDS = 12
 _BCRYPT_MAX_BYTES = 72
 
@@ -134,6 +148,64 @@ async def rotate_ed25519_jwt_key() -> str:
     return ref.kid
 
 
+def _read_pqc_jwk(path: pathlib.Path) -> dict[str, str] | None:
+    if not path.exists():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    try:
+        public_key_from_pqc_jwk(payload)
+        secret_key_from_pqc_jwk(payload)
+    except Exception:
+        return None
+    return {str(key): str(value) for key, value in payload.items() if isinstance(value, str)}
+
+
+def _write_pqc_jwk(path: pathlib.Path, jwk: dict[str, str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(jwk, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def generate_pqc_jwt_keypair(*, path: pathlib.Path | None = None) -> dict[str, str]:
+    target = path or _DEFAULT_PQC_KEY_PATH
+    keypair = generate_pqc_signature_keypair()
+    kid = f"jwt:{ML_DSA_65_ALG.lower()}:{uuid4()}"
+    jwk = pqc_signing_jwk(keypair.secret_key, keypair.public_key, kid=kid)
+    _write_pqc_jwk(target, jwk)
+    return jwk
+
+
+def ensure_pqc_keypair(*, path: pathlib.Path | None = None) -> dict[str, str]:
+    target = path or _DEFAULT_PQC_KEY_PATH
+    existing = _read_pqc_jwk(target)
+    if existing is not None:
+        return existing
+    return generate_pqc_jwt_keypair(path=target)
+
+
+def load_pqc_signing_jwk(*, path: pathlib.Path | None = None) -> dict[str, str]:
+    return dict(ensure_pqc_keypair(path=path))
+
+
+def load_pqc_public_jwk(*, path: pathlib.Path | None = None) -> dict[str, str]:
+    signing_jwk = ensure_pqc_keypair(path=path)
+    public_key = public_key_from_pqc_jwk(signing_jwk)
+    return pqc_public_jwk(
+        public_key,
+        kid=signing_jwk.get("kid"),
+        algorithm=str(signing_jwk.get("alg") or ML_DSA_65_ALG),
+    )
+
+
+async def rotate_pqc_jwt_key(*, path: pathlib.Path | None = None) -> str:
+    jwk = generate_pqc_jwt_keypair(path=path)
+    return jwk["kid"]
+
+
 # -----------------------------
 # Operator-plane wrappers
 # -----------------------------
@@ -211,6 +283,7 @@ def delete_operator_key_for_context(context, *, record_id: str, if_missing: str 
 
 
 __all__ = [
+    "_DEFAULT_PQC_KEY_PATH",
     "_DEFAULT_KEY_PATH",
     "_generate_keypair",
     "_load_keypair",
@@ -218,15 +291,20 @@ __all__ = [
     "delete_operator_key_for_context",
     "export_operator_key_for_context",
     "generate_operator_key_for_context",
+    "generate_pqc_jwt_keypair",
     "get_operator_key_for_context",
     "hash_pw",
     "import_operator_key_for_context",
+    "ensure_pqc_keypair",
     "list_operator_keys_for_context",
+    "load_pqc_public_jwk",
+    "load_pqc_signing_jwk",
     "public_key",
     "publish_operator_jwks_for_context",
     "retire_operator_key_for_context",
     "rotate_ed25519_jwt_key",
     "rotate_operator_key_for_context",
+    "rotate_pqc_jwt_key",
     "signing_key",
     "verify_pw",
 ]

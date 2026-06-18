@@ -15,6 +15,17 @@ from typing import Any, Final, Mapping
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+from tigrbl_identity_jose.pqc import (
+    ML_DSA_65_ALG,
+    PQC_JWK_KTY,
+    PQC_SIGNATURE_ALGS,
+    is_pqc_algorithm,
+    normalize_pqc_algorithm,
+    public_key_from_pqc_jwk,
+    secret_key_from_pqc_jwk,
+    sign_pqc_payload,
+    verify_pqc_signature,
+)
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_auth.framework import JWAAlg, JwsSignerVerifier
@@ -85,25 +96,38 @@ def _ed25519_public_key(key: Mapping[str, Any]) -> Ed25519PublicKey:
     raise RuntimeError("missing Ed25519 public key material for dependency-light JWS fallback")
 
 
-def _fallback_algorithm_for_key(key: Mapping[str, Any]) -> str:
+def _fallback_algorithm_for_key(key: Mapping[str, Any], alg: str | None = None) -> str:
+    if alg is not None and is_pqc_algorithm(alg):
+        return normalize_pqc_algorithm(alg)
     kty = str(key.get("kty") or "").lower()
+    declared_alg = str(key.get("alg") or key.get("crv") or "")
+    if str(key.get("kty") or "") == PQC_JWK_KTY or is_pqc_algorithm(declared_alg):
+        return normalize_pqc_algorithm(declared_alg or ML_DSA_65_ALG)
     if kty == "oct":
         return "HS256"
     if kty in {"okp", "eddsa"} or str(key.get("alg") or "").upper() == "EDDSA":
         return "EdDSA"
-    raise RuntimeError("dependency-light JWS fallback only supports oct/HS256 and OKP/EdDSA keys")
+    raise RuntimeError(
+        "dependency-light JWS fallback only supports oct/HS256, OKP/EdDSA, and PQC/ML-DSA-65 keys"
+    )
 
 
-def _fallback_sign(payload: str, key: Mapping[str, Any]) -> str:
-    alg = _fallback_algorithm_for_key(key)
+def _fallback_sign(payload: str, key: Mapping[str, Any], alg: str | None = None) -> str:
+    alg = _fallback_algorithm_for_key(key, alg=alg)
     header = {"alg": alg, "typ": "JWT"}
+    if key.get("kid"):
+        header["kid"] = str(key["kid"])
     header_segment = _b64u_encode(json.dumps(header, separators=(",", ":")).encode())
     payload_segment = _b64u_encode(payload.encode())
     signing_input = f"{header_segment}.{payload_segment}".encode("ascii")
     if alg == "HS256":
         sig = hmac.new(_oct_key_bytes(key), signing_input, hashlib.sha256).digest()
-    else:
+    elif alg == "EdDSA":
         sig = _ed25519_private_key(key).sign(signing_input)
+    elif alg in PQC_SIGNATURE_ALGS:
+        sig = sign_pqc_payload(signing_input, secret_key_from_pqc_jwk(key), algorithm=alg)
+    else:
+        raise RuntimeError(f"unsupported dependency-light JWS alg: {alg}")
     return f"{signing_input.decode('ascii')}.{_b64u_encode(sig)}"
 
 
@@ -122,25 +146,40 @@ def _fallback_verify(token: str, key: Mapping[str, Any]) -> str:
             raise RuntimeError("invalid JWS signature")
     elif alg == "EdDSA":
         _ed25519_public_key(key).verify(signature, signing_input)
+    elif alg in PQC_SIGNATURE_ALGS:
+        if not verify_pqc_signature(signing_input, signature, public_key_from_pqc_jwk(key), algorithm=alg):
+            raise RuntimeError("invalid JWS signature")
     else:
         raise RuntimeError(f"unsupported dependency-light JWS alg: {alg}")
     return _b64u_decode(payload_segment).decode("utf-8")
 
 
-async def sign_jws(payload: str, key: Mapping[str, Any]) -> str:
+def _token_header_alg(token: str) -> str:
+    try:
+        return str(json.loads(_b64u_decode(token.split(".")[0]).decode("utf-8")).get("alg") or "")
+    except Exception:
+        return ""
+
+
+async def sign_jws(payload: str, key: Mapping[str, Any], alg: str | None = None) -> str:
     """Return a JWS compact serialization of *payload* using *key*."""
     if not settings.enable_rfc7515:
         raise RuntimeError(f"RFC 7515 support disabled: {RFC7515_SPEC_URL}")
+    selected_alg = _fallback_algorithm_for_key(key, alg=alg)
+    if selected_alg in PQC_SIGNATURE_ALGS:
+        return _fallback_sign(payload, key, alg=selected_alg)
     if _signer is not None and JWAAlg is not None:
         alg = JWAAlg.HS256 if key.get("kty") == "oct" else JWAAlg.EDDSA
         return await _signer.sign_compact(payload=payload, alg=alg, key=key)
-    return _fallback_sign(payload, key)
+    return _fallback_sign(payload, key, alg=selected_alg)
 
 
 async def verify_jws(token: str, key: Mapping[str, Any]) -> str:
     """Verify *token* and return the decoded payload as a string."""
     if not settings.enable_rfc7515:
         raise RuntimeError(f"RFC 7515 support disabled: {RFC7515_SPEC_URL}")
+    if _token_header_alg(token) in PQC_SIGNATURE_ALGS:
+        return _fallback_verify(token, key)
     if _signer is not None:
         result = await _signer.verify_compact(token, jwks_resolver=lambda _k, _a: key)
         return result.payload.decode()

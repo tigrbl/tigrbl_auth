@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import base64
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Mapping, Sequence
+from typing import Any, Final, Mapping, Sequence
 
 from .base import CertificationError
 
@@ -11,12 +12,35 @@ from .base import CertificationError
 RSA_SIGNATURE_PREFIXES = ("RS", "PS")
 ECDSA_SIGNATURE_ALGS = frozenset({"ES256", "ES384", "ES512", "ES256K"})
 EDDSA_SIGNATURE_ALGS = frozenset({"EdDSA"})
-PQC_SIGNATURE_ALGS = frozenset[str]()
+ML_DSA_65_ALG: Final[str] = "ML-DSA-65"
+PQC_SIGNATURE_ALGS: Final[frozenset[str]] = frozenset({ML_DSA_65_ALG})
+PQC_JWK_KTY: Final[str] = "PQC"
+
+
+def _b64url_decode(value: str) -> bytes:
+    return base64.urlsafe_b64decode((value + "=" * (-len(value) % 4)).encode("ascii"))
+
+
+def normalize_pqc_algorithm(algorithm: str) -> str:
+    normalized = str(algorithm or "").replace("_", "-").upper()
+    if normalized in {"ML-DSA-65", "MLDSA65"}:
+        return ML_DSA_65_ALG
+    raise CertificationError("unsupported post-quantum signature algorithm")
+
+
+def public_key_from_pqc_jwk(jwk: Mapping[str, Any]) -> bytes:
+    if str(jwk.get("kty") or "") != PQC_JWK_KTY:
+        raise CertificationError("PQC JWK requires PQC key type")
+    normalize_pqc_algorithm(str(jwk.get("alg") or jwk.get("crv") or ""))
+    x = jwk.get("x")
+    if not isinstance(x, str) or not x:
+        raise CertificationError("PQC JWK requires public key material")
+    return _b64url_decode(x)
 
 
 @dataclass(frozen=True)
 class AlgorithmPolicy:
-    allowed_algs: frozenset[str] = EDDSA_SIGNATURE_ALGS | ECDSA_SIGNATURE_ALGS
+    allowed_algs: frozenset[str] = EDDSA_SIGNATURE_ALGS | ECDSA_SIGNATURE_ALGS | PQC_SIGNATURE_ALGS
     disallowed_algs: frozenset[str] = frozenset({"none", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512"})
     warning_algs: frozenset[str] = ECDSA_SIGNATURE_ALGS
     pqc_required: bool = False
@@ -37,9 +61,10 @@ def algorithm_policy_report(algorithms: Sequence[str], policy: AlgorithmPolicy |
         "refused": list(refused),
         "warnings": [f"{alg} is classical ECDSA and not post-quantum resistant" for alg in warnings],
         "pqc": {
-            "ready": bool(pqc_available) or not active.pqc_required,
+            "ready": bool(pqc_available) if active.pqc_required else bool(PQC_SIGNATURE_ALGS),
             "registered_algs": list(pqc_available),
             "required": active.pqc_required,
+            "policy_registered_algs": sorted(PQC_SIGNATURE_ALGS),
         },
     }
 
@@ -58,7 +83,7 @@ def assert_algorithm_policy(algorithm: str, policy: AlgorithmPolicy | None = Non
 def validate_jwk_set(
     jwks: Mapping[str, Any],
     *,
-    allowed_algs: frozenset[str] = frozenset({"RS256", "ES256", "EdDSA"}),
+    allowed_algs: frozenset[str] = frozenset({"RS256", "ES256", "EdDSA"}) | PQC_SIGNATURE_ALGS,
 ) -> None:
     keys = jwks.get("keys")
     if not isinstance(keys, list) or not keys:
@@ -83,6 +108,11 @@ def validate_jwk_set(
             raise CertificationError("EC algorithm requires EC key type")
         if alg == "EdDSA" and kty != "OKP":
             raise CertificationError("EdDSA requires OKP key type")
+        if alg in PQC_SIGNATURE_ALGS:
+            normalize_pqc_algorithm(str(alg))
+            if kty != PQC_JWK_KTY:
+                raise CertificationError("PQC algorithm requires PQC key type")
+            public_key_from_pqc_jwk(key)
         if kty == "EC" and key.get("crv") not in {"P-256", "P-384", "P-521"}:
             raise CertificationError("unsupported EC curve")
         if kty == "OKP" and key.get("crv") not in {"Ed25519", "Ed448"}:

@@ -35,6 +35,7 @@ classifiers = [
 ]
 dependencies = [
     "bcrypt==5.0.0",
+    "pqcrypto==0.4.0",
     "swarmauri_core==0.10.0",
     "swarmauri_crypto_jwe==0.3.0.dev5",
     "swarmauri_keyprovider_file==0.2.0",

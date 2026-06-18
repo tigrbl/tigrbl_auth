@@ -17,6 +17,7 @@
     "swarmauri_signing_jws==0.3.0.dev31",
     "swarmauri_signing_ed25519==0.2.0.dev32",
     "swarmauri_signing_dpop==0.1.1",
+    "pqcrypto==0.4.0",
     "swarmauri_crypto_jwe==0.3.0.dev5",
     "swarmauri_crypto_paramiko==0.4.0.dev5",
     "swarmauri_keyprovider_file==0.2.0",
@@ -337,6 +338,11 @@
         "requires_python": ">=3.10,<3.13",
         "released": "2026-01-28"
       },
+      "pqcrypto": {
+        "version": "0.4.0",
+        "requires_python": ">=3.9",
+        "released": "2026-01-25"
+      },
       "swarmauri_crypto_jwe": {
         "version": "0.2.0.dev40",
         "requires_python": ">=3.10,<3.13",
@@ -393,6 +399,7 @@
     "swarmauri_signing_jws==0.3.0.dev31",
     "swarmauri_signing_ed25519==0.2.0.dev32",
     "swarmauri_signing_dpop==0.1.1",
+    "pqcrypto==0.4.0",
     "swarmauri_crypto_jwe==0.3.0.dev5",
     "swarmauri_crypto_paramiko==0.4.0.dev5",
     "swarmauri_keyprovider_file==0.2.0",

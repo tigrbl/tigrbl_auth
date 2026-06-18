@@ -25,6 +25,13 @@ from .framework import (
 from tigrbl_auth.runtime_cfg import settings
 from tigrbl_auth.standards.oauth2.mtls import validate_certificate_binding
 from tigrbl_auth.services.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
+from tigrbl_identity_jose.pqc_jwt import (
+    ML_DSA_65_ALG,
+    configured_jwt_signing_alg,
+    pqc_jose_enabled,
+    sign_pqc_jwt,
+    verify_pqc_jwt,
+)
 from tigrbl_auth.standards.oauth2.revocation import is_revoked_async
 
 _ACCESS_TTL = timedelta(minutes=60)
@@ -165,6 +172,12 @@ class JWTCoder:
             from tigrbl_auth.standards.oauth2.jwt_access_tokens import add_jwt_access_token_claims
 
             payload = add_jwt_access_token_claims(payload, issuer=issuer, audience=audience)
+        if configured_jwt_signing_alg(settings) == ML_DSA_65_ALG:
+            if issuer is not None:
+                payload.setdefault("iss", issuer)
+            if audience is not None:
+                payload.setdefault("aud", audience if isinstance(audience, str) else list(audience))
+            return await sign_pqc_jwt(payload)
         token = await self._svc.mint(
             payload,
             alg=JWAAlg.EDDSA,
@@ -240,13 +253,22 @@ class JWTCoder:
     ) -> Dict[str, Any]:
         if verify_revocation and await is_revoked_async(token):
             raise InvalidTokenError("token has been revoked")
-        if _header_alg(token) in {"", "none"}:
+        header_alg = _header_alg(token)
+        if header_alg in {"", "none"}:
             raise InvalidTokenError("unsigned JWTs are not accepted")
-        try:
-            payload = await self._svc.verify(token, issuer=issuer, audience=audience)
-        except Exception as exc:
-            # Delegate any verification issues to our own domain specific error
-            raise InvalidTokenError("unable to verify token") from exc
+        if header_alg == ML_DSA_65_ALG.lower():
+            if not pqc_jose_enabled(settings):
+                raise InvalidTokenError("ML-DSA-65 JWT support is disabled")
+            try:
+                payload = await verify_pqc_jwt(token, issuer=issuer, audience=audience)
+            except Exception as exc:
+                raise InvalidTokenError("unable to verify token") from exc
+        else:
+            try:
+                payload = await self._svc.verify(token, issuer=issuer, audience=audience)
+            except Exception as exc:
+                # Delegate any verification issues to our own domain specific error
+                raise InvalidTokenError("unable to verify token") from exc
         if verify_exp:
             exp = payload.get("exp")
             if exp is not None and int(exp) < int(

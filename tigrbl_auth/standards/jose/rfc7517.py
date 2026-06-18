@@ -20,9 +20,13 @@ from tigrbl_auth.config.settings import settings
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_auth.services.key_management import _load_keypair, _provider
+    from tigrbl_identity_jose.key_management import load_pqc_public_jwk as _load_pqc_public_jwk
+    from tigrbl_identity_jose.key_management import load_pqc_signing_jwk as _load_pqc_signing_jwk
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     _load_keypair = None
     _provider = None
+    _load_pqc_public_jwk = None
+    _load_pqc_signing_jwk = None
 
 RFC7517_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7517"
 
@@ -78,4 +82,28 @@ def load_public_jwk() -> dict:
     return {"kty": "OKP", "crv": "Ed25519", "kid": kid, "x": _b64u(public_bytes)}
 
 
-__all__ = ["load_signing_jwk", "load_public_jwk", "RFC7517_SPEC_URL"]
+def load_pqc_signing_jwk() -> dict:
+    """Return the private ML-DSA-65 signing key as a JWK mapping."""
+    if not settings.enable_rfc7517:
+        raise RuntimeError(f"RFC 7517 support disabled: {RFC7517_SPEC_URL}")
+    if _load_pqc_signing_jwk is None:
+        raise RuntimeError("ML-DSA-65 key-management support is unavailable")
+    return _load_pqc_signing_jwk()
+
+
+def load_pqc_public_jwk() -> dict:
+    """Return the public ML-DSA-65 key as a JWK mapping."""
+    if not settings.enable_rfc7517:
+        raise RuntimeError(f"RFC 7517 support disabled: {RFC7517_SPEC_URL}")
+    if _load_pqc_public_jwk is None:
+        raise RuntimeError("ML-DSA-65 key-management support is unavailable")
+    return _load_pqc_public_jwk()
+
+
+__all__ = [
+    "load_signing_jwk",
+    "load_public_jwk",
+    "load_pqc_signing_jwk",
+    "load_pqc_public_jwk",
+    "RFC7517_SPEC_URL",
+]

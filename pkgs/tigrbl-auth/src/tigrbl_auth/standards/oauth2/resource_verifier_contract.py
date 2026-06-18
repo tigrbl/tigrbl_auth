@@ -8,6 +8,20 @@ from tigrbl_auth.config.deployment import ResolvedDeployment, deployment_from_re
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
 
+ML_DSA_65_ALG = "ML-DSA-65"
+
+
+def _pqc_jose_enabled() -> bool:
+    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+
+
+def _allowed_token_algs() -> tuple[str, ...]:
+    algs = ["RS256", "ES256", "EdDSA"]
+    if _pqc_jose_enabled():
+        algs.append(ML_DSA_65_ALG)
+    return tuple(algs)
+
 
 @dataclass(frozen=True, slots=True)
 class ProtectedResourceVerifierContract:
@@ -89,7 +103,7 @@ def build_protected_resource_verifier_contract(
         resource=resource,
         accepted_audiences=(resource,),
         accepted_token_classes=("access_token",),
-        allowed_algs=("RS256", "ES256", "EdDSA"),
+        allowed_algs=_allowed_token_algs(),
         jwks_uri=f"{issuer}/.well-known/jwks.json",
         introspection_endpoint=f"{issuer}/introspect",
         sender_constraint_modes=tuple(dict.fromkeys(modes)),

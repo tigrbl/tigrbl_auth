@@ -10,6 +10,8 @@ from typing import Final
 
 from swarmauri_core.crypto.types import JWAAlg
 
+from tigrbl_identity_jose.pqc import ML_DSA_65_ALG
+
 from ..runtime_cfg import settings
 from .rfc8812 import WEBAUTHN_ALGORITHMS
 
@@ -29,6 +31,8 @@ def supported_algorithms() -> list[str]:
         # retaining RS256 for OpenID Connect compatibility.
         algs.difference_update(WEBAUTHN_ALGORITHMS)
         algs.add(JWAAlg.RS256.value)
+    if getattr(settings, "enable_pqc_jose", False) or str(getattr(settings, "jwt_signing_alg", "")) == ML_DSA_65_ALG:
+        algs.add(ML_DSA_65_ALG)
     return sorted(algs)
 
 

@@ -8,6 +8,20 @@ from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_fr
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
 
+ML_DSA_65_ALG = "ML-DSA-65"
+
+
+def _pqc_jose_enabled() -> bool:
+    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+
+
+def _allowed_token_algs() -> tuple[str, ...]:
+    algs = ["RS256", "ES256", "EdDSA"]
+    if _pqc_jose_enabled():
+        algs.append(ML_DSA_65_ALG)
+    return tuple(algs)
+
 
 @dataclass(frozen=True, slots=True)
 class ProtectedResourceVerifierContract:
@@ -17,6 +31,7 @@ class ProtectedResourceVerifierContract:
     resource: str
     accepted_audiences: tuple[str, ...]
     accepted_token_classes: tuple[str, ...]
+    allowed_algs: tuple[str, ...]
     sender_constraint_modes: tuple[str, ...]
     sender_constraint_required: bool
     required_claims: tuple[str, ...]
@@ -29,6 +44,7 @@ class ProtectedResourceVerifierContract:
             "resource": self.resource,
             "authorization_servers": list(self.accepted_issuers),
             "token_types_supported": list(self.accepted_token_classes),
+            "allowed_algorithms": list(self.allowed_algs),
             "proof_modes_supported": list(self.sender_constraint_modes),
             "proof_binding_required": self.sender_constraint_required,
             "required_claims": list(self.required_claims),
@@ -67,6 +83,7 @@ def build_protected_resource_verifier_contract(
         resource=resource,
         accepted_audiences=(resource,),
         accepted_token_classes=("access_token",),
+        allowed_algs=_allowed_token_algs(),
         sender_constraint_modes=tuple(dict.fromkeys(modes)),
         sender_constraint_required=bool(policy.sender_constraint_required),
         required_claims=tuple(required_claims),

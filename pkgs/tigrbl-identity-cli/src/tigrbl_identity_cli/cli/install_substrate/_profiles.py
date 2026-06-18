@@ -40,6 +40,7 @@ _BASE_MODULES: tuple[dict[str, Any], ...] = (
     {"module": "swarmauri_signing_jws", "package": "swarmauri_signing_jws", "category": "runtime"},
     {"module": "swarmauri_signing_ed25519", "package": "swarmauri_signing_ed25519", "category": "runtime"},
     {"module": "swarmauri_signing_dpop", "package": "swarmauri_signing_dpop", "category": "runtime"},
+    {"module": "pqcrypto", "package": "pqcrypto", "category": "runtime"},
     {"module": "swarmauri_crypto_jwe", "package": "swarmauri_crypto_jwe", "category": "runtime"},
     {"module": "swarmauri_crypto_paramiko", "package": "swarmauri_crypto_paramiko", "category": "runtime"},
     {"module": "swarmauri_keyprovider_file", "package": "swarmauri_keyprovider_file", "category": "runtime"},

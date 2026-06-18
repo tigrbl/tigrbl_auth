@@ -75,6 +75,8 @@ _SYMBOL_EXPORTS = {
     "verify_jws": ("tigrbl_auth.standards.jose.rfc7515", "verify_jws"),
     "load_signing_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_signing_jwk"),
     "load_public_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_public_jwk"),
+    "load_pqc_signing_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_pqc_signing_jwk"),
+    "load_pqc_public_jwk": ("tigrbl_auth.standards.jose.rfc7517", "load_pqc_public_jwk"),
     "supported_algorithms": ("tigrbl_auth.standards.jose.rfc7518", "supported_algorithms"),
     "RFC7520_SPEC_URL": ("tigrbl_auth.rfc.rfc7520", "RFC7520_SPEC_URL"),
     "jws_then_jwe": ("tigrbl_auth.rfc.rfc7520", "jws_then_jwe"),

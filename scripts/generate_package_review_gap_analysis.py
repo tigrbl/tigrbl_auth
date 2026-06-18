@@ -35,6 +35,7 @@ WORKSPACE_IMPORTS = (
     "swarmauri_signing_jws",
     "swarmauri_signing_ed25519",
     "swarmauri_signing_dpop",
+    "pqcrypto",
     "swarmauri_crypto_jwe",
     "swarmauri_crypto_paramiko",
     "swarmauri_keyprovider_file",

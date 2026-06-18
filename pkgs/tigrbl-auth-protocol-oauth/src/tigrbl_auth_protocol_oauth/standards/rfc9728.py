@@ -13,9 +13,22 @@ from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import buil
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
 
 RFC9728_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9728"
+ML_DSA_65_ALG: Final[str] = "ML-DSA-65"
 
 api = TigrblRouter()
 router = api
+
+
+def _pqc_jose_enabled() -> bool:
+    configured = str(getattr(settings, "jwt_signing_alg", "") or "").replace("_", "-").upper()
+    return bool(getattr(settings, "enable_pqc_jose", False)) or configured in {"ML-DSA-65", "MLDSA65"}
+
+
+def _access_token_signing_algs() -> list[str]:
+    algs = ["EdDSA"]
+    if _pqc_jose_enabled():
+        algs.append(ML_DSA_65_ALG)
+    return algs
 
 
 def build_protected_resource_metadata(deployment: ResolvedDeployment | None = None) -> dict[str, object]:
@@ -39,6 +52,7 @@ def build_protected_resource_metadata(deployment: ResolvedDeployment | None = No
         "fapi_profiles_supported": ["fapi2-security"] if policy.fapi_mode else [],
         "resource_documentation": f"{issuer}/docs/resource-metadata",
         "scopes_supported": ["openid", "profile", "email"],
+        "access_token_signing_alg_values_supported": _access_token_signing_algs(),
         "active_targets": list(active_deployment.active_targets),
         **verifier_contract.as_metadata_projection(),
     }

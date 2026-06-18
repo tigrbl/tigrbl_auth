@@ -32,6 +32,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "pqcrypto==0.4.0",
     "swarmauri_standard==0.10.0",
     "swarmauri_crypto_paramiko==0.4.0.dev5",
     "tigrbl-identity-admin==0.4.0.dev2",
