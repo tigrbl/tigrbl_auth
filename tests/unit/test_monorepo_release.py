@@ -23,6 +23,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
     assert len(packages) == 31
+    assert "tigrbl-auth-workspace" not in packages
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/tigrbl-auth"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
