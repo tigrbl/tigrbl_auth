@@ -31,6 +31,7 @@
     "bcrypt==5.0.0",
     "aiosqlite==0.22.1",
     "httpx==0.28.1",
+    "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",

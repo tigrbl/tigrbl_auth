@@ -1941,6 +1941,55 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-auth"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/tigrbl-auth" }
+dependencies = [
+    { name = "pqcrypto" },
+    { name = "swarmauri-crypto-paramiko" },
+    { name = "swarmauri-standard" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-auth-protocol-rp" },
+    { name = "tigrbl-authn-credentials" },
+    { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-resource-server" },
+    { name = "tigrbl-identity-admin" },
+    { name = "tigrbl-identity-cli" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-jose" },
+    { name = "tigrbl-identity-operator" },
+    { name = "tigrbl-identity-principals" },
+    { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-server" },
+    { name = "tigrbl-identity-storage" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pqcrypto", specifier = "==0.4.0" },
+    { name = "swarmauri-crypto-paramiko", specifier = "==0.4.0.dev5" },
+    { name = "swarmauri-standard", specifier = "==0.10.0" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-rp", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-cli", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-principals", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-protocol-oauth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/tigrbl-auth-protocol-oauth" }
@@ -1988,6 +2037,7 @@ dependencies = [
     { name = "swarmauri-standard" },
     { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl" },
+    { name = "tigrbl-auth" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-rp" },
@@ -2098,6 +2148,7 @@ requires-dist = [
     { name = "swarmauri-standard", specifier = "==0.10.0" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl", specifier = "==0.4.0" },
+    { name = "tigrbl-auth", editable = "pkgs/tigrbl-auth" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/tigrbl-auth-protocol-rp" },

@@ -58,6 +58,7 @@ def test_root_project_does_not_claim_tigrbl_auth_facade_distribution() -> None:
     assert _normalized_dist_name(facade_project["name"]) == "tigrbl-auth"
     assert _normalized_dist_name(root_project["name"]) != "tigrbl-auth"
     assert _normalized_dist_name(root_project["name"]).endswith("-workspace")
+    assert "tigrbl-auth==0.4.0.dev2" in root_project["dependencies"]
     assert root_poetry["packages"] == [{"include": "tigrbl_auth_workspace"}]
     assert (ROOT / "tigrbl_auth_workspace" / "__init__.py").exists()
     assert all(package["include"] != "tigrbl_auth" for package in root_poetry["packages"])
