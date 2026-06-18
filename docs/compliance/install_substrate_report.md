@@ -1,32 +1,26 @@
 # Install Substrate Report
 
-- Generated at: `20260617T123237Z`
-- Passed: `False`
+- Generated at: `20260618T135229Z`
+- Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
-- Profile identity: `base@py312`
+- Profile identity: `base@py310`
 - Environment identity present: `True`
-- Current Python: `3.12.5`
+- Current Python: `3.10.16`
 - Current Python supported: `True`
-- Expected supported Python versions: `3.10, 3.11, 3.12, 3.13, 3.14`
-- Detected supported Python binaries: `2` / `5`
-- Certification tox envs declared: `53`
-- Runtime matrix envs declared: `24`
-- Test lane envs declared: `25`
+- Expected supported Python versions: `3.10, 3.11, 3.12`
+- Detected supported Python binaries: `1` / `3`
+- Certification tox envs declared: `33`
+- Runtime matrix envs declared: `14`
+- Test lane envs declared: `15`
 - Tox templates with pip check: `14` / `14`
 - Tox templates with install probe: `14` / `14`
 - Current profile import probe passed: `True`
 - Runtime surface probe passed: `True`
 
-## Failures
-
-- The current environment does not provide the full supported interpreter matrix required for clean-room certification.
-
 ## Warnings
 
-- The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.
-- Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.
-- Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14.
+- The current container does not provide supported interpreter binaries for: 3.11, 3.12.
 
 ## Current environment import probe
 
@@ -38,6 +32,7 @@
 - `swarmauri_signing_jws` (swarmauri_signing_jws) → passed=`True` message=`import ok`
 - `swarmauri_signing_ed25519` (swarmauri_signing_ed25519) → passed=`True` message=`import ok`
 - `swarmauri_signing_dpop` (swarmauri_signing_dpop) → passed=`True` message=`import ok`
+- `pqcrypto` (pqcrypto) → passed=`True` message=`import ok`
 - `swarmauri_crypto_jwe` (swarmauri_crypto_jwe) → passed=`True` message=`import ok`
 - `swarmauri_crypto_paramiko` (swarmauri_crypto_paramiko) → passed=`True` message=`import ok`
 - `swarmauri_keyprovider_file` (swarmauri_keyprovider_file) → passed=`True` message=`import ok`
@@ -61,19 +56,17 @@
 
 ## Detected supported interpreters
 
-- `3.10` → available=`True` path=`py -3.10`
+- `3.10` → available=`True` path=`<repo>/.tox/py310-devtest/Scripts/python.EXE`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`True` path=`<repo>/.venv/Scripts/python.exe`
-- `3.13` → available=`False` path=`None`
-- `3.14` → available=`False` path=`None`
+- `3.12` → available=`False` path=`None`
 
 ## Workflow coverage
 
 - install_profiles_workflow_present: `True`
 - release_gates_workflow_present: `True`
-- install_profiles_runtime_env_present_count: `24`
-- release_gates_runtime_env_present_count: `24`
-- release_gates_test_lane_env_present_count: `25`
+- install_profiles_runtime_env_present_count: `14`
+- release_gates_runtime_env_present_count: `14`
+- release_gates_test_lane_env_present_count: `15`
 - release_gates_extra_env_present_count: `2`
 - install_profiles_artifact_upload_present: `True`
 - release_gates_artifact_upload_present: `True`

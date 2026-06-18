@@ -1,63 +1,32 @@
 {
-  "passed": false,
-  "failures": [
-    "Validated artifact inventory is below the required 24 runtime + 25 test lanes + 2 backend-distinct migration threshold.",
-    "Validated clean-room runtime matrix is incomplete.",
-    "Validated in-scope certification lane execution is incomplete."
-  ],
+  "passed": true,
+  "failures": [],
   "warnings": [],
   "summary": {
-    "validated_artifact_count": 27,
+    "validated_artifact_count": 35,
     "out_of_scope_validated_artifact_count": 0,
-    "required_validated_inventory_count": 51,
-    "validated_inventory_present_count": 26,
-    "validated_inventory_complete": false,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
+    "validated_inventory_complete": true,
     "runtime_matrix_present_count": 14,
-    "runtime_matrix_expected_count": 24,
+    "runtime_matrix_expected_count": 14,
     "runtime_matrix_passed_count": 14,
-    "runtime_matrix_green": false,
-    "test_lane_expected_count": 25,
-    "test_lane_passed_count": 10,
-    "in_scope_test_lanes_green": false,
+    "runtime_matrix_green": true,
+    "test_lane_expected_count": 15,
+    "test_lane_passed_count": 15,
+    "in_scope_test_lanes_green": true,
     "migration_portability_passed": true,
     "tier3_evidence_rebuilt_from_validated_runs": true
   },
   "details": {
-    "runtime_matrix_missing": [
-      "base@py3.13",
-      "base@py3.14",
-      "sqlite-uvicorn@py3.13",
-      "sqlite-uvicorn@py3.14",
-      "postgres-hypercorn@py3.13",
-      "postgres-hypercorn@py3.14",
-      "tigrcorn@py3.13",
-      "tigrcorn@py3.14",
-      "devtest@py3.13",
-      "devtest@py3.14"
-    ],
+    "runtime_matrix_missing": [],
     "runtime_matrix_present_count": 14,
-    "test_lane_missing": [
-      "core@py3.11",
-      "core@py3.13",
-      "core@py3.14",
-      "integration@py3.11",
-      "integration@py3.13",
-      "integration@py3.14",
-      "conformance@py3.11",
-      "conformance@py3.13",
-      "conformance@py3.14",
-      "security-negative@py3.11",
-      "security-negative@py3.13",
-      "security-negative@py3.14",
-      "interop@py3.11",
-      "interop@py3.13",
-      "interop@py3.14"
-    ],
-    "test_lane_present_count": 10,
+    "test_lane_missing": [],
+    "test_lane_present_count": 15,
     "migration_manifest_present": true,
-    "required_validated_inventory_count": 51,
-    "validated_inventory_present_count": 26,
-    "validated_inventory_complete": false,
+    "required_validated_inventory_count": 31,
+    "validated_inventory_present_count": 31,
+    "validated_inventory_complete": true,
     "runtime_evidence": {
       "base@py3.10": {
         "path": "dist/validated-runs/runtime-base-py310.json",
@@ -253,8 +222,21 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 97,
-        "tests_total": 97
+        "tests_collected": 102,
+        "tests_total": 102
+      },
+      "conformance@py3.11": {
+        "path": "dist/validated-runs/test-conformance-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "conformance@py311",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "pytest_report_present": true,
+        "pytest_exit_code": 0,
+        "pytest_report_exit_code": 0,
+        "tests_collected": 102,
+        "tests_total": 102
       },
       "conformance@py3.12": {
         "path": "dist/validated-runs/test-conformance-py312.json",
@@ -266,8 +248,8 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 97,
-        "tests_total": 97
+        "tests_collected": 102,
+        "tests_total": 102
       },
       "core@py3.10": {
         "path": "dist/validated-runs/test-core-py310.json",
@@ -279,8 +261,21 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 636,
-        "tests_total": 636
+        "tests_collected": 950,
+        "tests_total": 950
+      },
+      "core@py3.11": {
+        "path": "dist/validated-runs/test-core-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "core@py311",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "pytest_report_present": true,
+        "pytest_exit_code": 0,
+        "pytest_report_exit_code": 0,
+        "tests_collected": 950,
+        "tests_total": 950
       },
       "core@py3.12": {
         "path": "dist/validated-runs/test-core-py312.json",
@@ -292,8 +287,8 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 644,
-        "tests_total": 644
+        "tests_collected": 961,
+        "tests_total": 961
       },
       "integration@py3.10": {
         "path": "dist/validated-runs/test-integration-py310.json",
@@ -305,8 +300,21 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 68,
-        "tests_total": 68
+        "tests_collected": 69,
+        "tests_total": 69
+      },
+      "integration@py3.11": {
+        "path": "dist/validated-runs/test-integration-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "integration@py311",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "pytest_report_present": true,
+        "pytest_exit_code": 0,
+        "pytest_report_exit_code": 0,
+        "tests_collected": 69,
+        "tests_total": 69
       },
       "integration@py3.12": {
         "path": "dist/validated-runs/test-integration-py312.json",
@@ -318,14 +326,27 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 68,
-        "tests_total": 68
+        "tests_collected": 69,
+        "tests_total": 69
       },
       "interop@py3.10": {
         "path": "dist/validated-runs/test-interop-py310.json",
         "manifest_passed": true,
         "counts_as_passed": true,
         "identity": "interop@py310",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "pytest_report_present": true,
+        "pytest_exit_code": 0,
+        "pytest_report_exit_code": 0,
+        "tests_collected": 15,
+        "tests_total": 15
+      },
+      "interop@py3.11": {
+        "path": "dist/validated-runs/test-interop-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "interop@py311",
         "environment_identity_ready": true,
         "install_evidence_ready": true,
         "pytest_report_present": true,
@@ -357,8 +378,21 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 20,
-        "tests_total": 20
+        "tests_collected": 86,
+        "tests_total": 86
+      },
+      "security-negative@py3.11": {
+        "path": "dist/validated-runs/test-security-negative-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "security-negative@py311",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "pytest_report_present": true,
+        "pytest_exit_code": 0,
+        "pytest_report_exit_code": 0,
+        "tests_collected": 86,
+        "tests_total": 86
       },
       "security-negative@py3.12": {
         "path": "dist/validated-runs/test-security-negative-py312.json",
@@ -370,11 +404,29 @@
         "pytest_report_present": true,
         "pytest_exit_code": 0,
         "pytest_report_exit_code": 0,
-        "tests_collected": 20,
-        "tests_total": 20
+        "tests_collected": 86,
+        "tests_total": 86
       }
     },
     "migration_evidence": [
+      {
+        "path": "dist/validated-runs/migration-portability-py311.json",
+        "manifest_passed": true,
+        "counts_as_passed": true,
+        "identity": "migration-portability@py311",
+        "environment_identity_ready": true,
+        "install_evidence_ready": true,
+        "backends": [
+          "sqlite",
+          "postgres"
+        ],
+        "passed_backends": [
+          "sqlite",
+          "postgres"
+        ],
+        "expected_head_revision": "0011_delegation_grant_lifecycle_tables",
+        "downgrade_target_revision": "0010_realm_namespace_tables"
+      },
       {
         "path": "dist/validated-runs/migration-portability-py312.json",
         "manifest_passed": true,
@@ -398,6 +450,17 @@
         "counts_as_passed": true,
         "manifests": [
           {
+            "path": "dist/validated-runs/migration-portability-postgres-py311.json",
+            "manifest_passed": true,
+            "counts_as_passed": true,
+            "identity": "migration-portability-postgres@py311",
+            "backend": "postgres",
+            "environment_identity_ready": true,
+            "install_evidence_ready": true,
+            "expected_head_revision": "0011_delegation_grant_lifecycle_tables",
+            "downgrade_target_revision": "0010_realm_namespace_tables"
+          },
+          {
             "path": "dist/validated-runs/migration-portability-postgres-py312.json",
             "manifest_passed": true,
             "counts_as_passed": true,
@@ -415,6 +478,17 @@
         "counts_as_passed": true,
         "manifests": [
           {
+            "path": "dist/validated-runs/migration-portability-sqlite-py311.json",
+            "manifest_passed": true,
+            "counts_as_passed": true,
+            "identity": "migration-portability-sqlite@py311",
+            "backend": "sqlite",
+            "environment_identity_ready": true,
+            "install_evidence_ready": true,
+            "expected_head_revision": "0011_delegation_grant_lifecycle_tables",
+            "downgrade_target_revision": "0010_realm_namespace_tables"
+          },
+          {
             "path": "dist/validated-runs/migration-portability-sqlite-py312.json",
             "manifest_passed": true,
             "counts_as_passed": true,
@@ -429,7 +503,9 @@
       }
     ],
     "validated_manifests": [
+      "dist/validated-runs/migration-portability-postgres-py311.json",
       "dist/validated-runs/migration-portability-postgres-py312.json",
+      "dist/validated-runs/migration-portability-sqlite-py311.json",
       "dist/validated-runs/migration-portability-sqlite-py312.json",
       "dist/validated-runs/runtime-base-py310.json",
       "dist/validated-runs/runtime-base-py311.json",
@@ -446,21 +522,30 @@
       "dist/validated-runs/runtime-tigrcorn-py311.json",
       "dist/validated-runs/runtime-tigrcorn-py312.json",
       "dist/validated-runs/test-conformance-py310.json",
+      "dist/validated-runs/test-conformance-py311.json",
       "dist/validated-runs/test-conformance-py312.json",
       "dist/validated-runs/test-core-py310.json",
+      "dist/validated-runs/test-core-py311.json",
       "dist/validated-runs/test-core-py312.json",
       "dist/validated-runs/test-integration-py310.json",
+      "dist/validated-runs/test-integration-py311.json",
       "dist/validated-runs/test-integration-py312.json",
       "dist/validated-runs/test-interop-py310.json",
+      "dist/validated-runs/test-interop-py311.json",
       "dist/validated-runs/test-interop-py312.json",
       "dist/validated-runs/test-security-negative-py310.json",
+      "dist/validated-runs/test-security-negative-py311.json",
       "dist/validated-runs/test-security-negative-py312.json",
+      "dist/validated-runs/tier3-evidence-py311.json",
       "dist/validated-runs/tier3-evidence-py312.json"
     ],
     "out_of_scope_validated_manifests": [],
     "recognized_manifest_paths": [
+      "dist/validated-runs/migration-portability-postgres-py311.json",
       "dist/validated-runs/migration-portability-postgres-py312.json",
+      "dist/validated-runs/migration-portability-py311.json",
       "dist/validated-runs/migration-portability-py312.json",
+      "dist/validated-runs/migration-portability-sqlite-py311.json",
       "dist/validated-runs/migration-portability-sqlite-py312.json",
       "dist/validated-runs/runtime-base-py310.json",
       "dist/validated-runs/runtime-base-py311.json",
@@ -477,15 +562,21 @@
       "dist/validated-runs/runtime-tigrcorn-py311.json",
       "dist/validated-runs/runtime-tigrcorn-py312.json",
       "dist/validated-runs/test-conformance-py310.json",
+      "dist/validated-runs/test-conformance-py311.json",
       "dist/validated-runs/test-conformance-py312.json",
       "dist/validated-runs/test-core-py310.json",
+      "dist/validated-runs/test-core-py311.json",
       "dist/validated-runs/test-core-py312.json",
       "dist/validated-runs/test-integration-py310.json",
+      "dist/validated-runs/test-integration-py311.json",
       "dist/validated-runs/test-integration-py312.json",
       "dist/validated-runs/test-interop-py310.json",
+      "dist/validated-runs/test-interop-py311.json",
       "dist/validated-runs/test-interop-py312.json",
       "dist/validated-runs/test-security-negative-py310.json",
+      "dist/validated-runs/test-security-negative-py311.json",
       "dist/validated-runs/test-security-negative-py312.json",
+      "dist/validated-runs/tier3-evidence-py311.json",
       "dist/validated-runs/tier3-evidence-py312.json"
     ],
     "ignored_json_paths": [

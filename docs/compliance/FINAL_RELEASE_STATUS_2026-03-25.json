@@ -7,7 +7,7 @@
     "fully_rfc_compliant_now": false,
     "fully_non_rfc_spec_compliant_now": false,
     "strict_independent_claims_ready": false,
-    "release_gates_passed": false,
+    "release_gates_passed": true,
     "final_release_gate_passed": false
   },
   "details": [

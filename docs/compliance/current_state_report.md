@@ -51,14 +51,14 @@
 - tier4_external_handoff_template_present: `True`
 - signed_release_bundle_count: `5`
 - release_attestation_verifiable: `True`
-- base_dependency_count: `45`
-- base_exact_pinned_dependency_count: `45`
+- base_dependency_count: `46`
+- base_exact_pinned_dependency_count: `46`
 - optional_extra_count: `7`
 - runner_extra_count: `4`
 - storage_extra_count: `2`
-- workspace_source_count: `22`
+- workspace_source_count: `23`
 - workspace_sources_declared: `True`
-- first_party_workspace_source_count: `22`
+- first_party_workspace_source_count: `23`
 - forbidden_workspace_source_count: `0`
 - workspace_sources_present: `False`
 - dependency_provenance_artifact_count: `31`
@@ -67,7 +67,7 @@
 - install_substrate_manifest_passed: `True`
 - install_substrate_current_profile: `base`
 - install_substrate_current_python_supported: `True`
-- install_substrate_detected_supported_python_count: `2`
+- install_substrate_detected_supported_python_count: `1`
 - install_substrate_expected_supported_python_count: `3`
 - install_substrate_tox_env_count: `33`
 - install_substrate_tox_pip_check_complete: `True`
@@ -137,7 +137,7 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `10`
+- release_evidence_dirty_checkout_path_count: `22`
 - authoritative_current_doc_stale_ref_count: `0`
 - historical_doc_stale_ref_count: `1188`
 - derived_current_doc_count: `11`

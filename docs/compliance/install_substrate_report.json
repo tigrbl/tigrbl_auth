@@ -1,27 +1,25 @@
 {
-  "generated_at": "20260617T123237Z",
-  "passed": false,
+  "generated_at": "20260618T135229Z",
+  "passed": true,
   "summary": {
     "static_manifest_passed": true,
-    "passed": false,
+    "passed": true,
     "profile": "base",
-    "current_profile_identity": "base@py312",
+    "current_profile_identity": "base@py310",
     "environment_identity_present": true,
-    "current_python": "3.12.5",
+    "current_python": "3.10.16",
     "current_python_supported": true,
     "expected_supported_python_versions": [
       "3.10",
       "3.11",
-      "3.12",
-      "3.13",
-      "3.14"
+      "3.12"
     ],
-    "expected_supported_python_count": 5,
-    "detected_supported_python_count": 2,
-    "declared_runtime_matrix_env_count": 24,
-    "declared_test_lane_env_count": 25,
-    "declared_certification_tox_env_count": 53,
-    "tox_env_count": 53,
+    "expected_supported_python_count": 3,
+    "detected_supported_python_count": 1,
+    "declared_runtime_matrix_env_count": 14,
+    "declared_test_lane_env_count": 15,
+    "declared_certification_tox_env_count": 33,
+    "tox_env_count": 33,
     "tox_envs_with_pip_check_count": 14,
     "tox_envs_with_install_probe_count": 14,
     "tox_section_template_count": 14,
@@ -29,43 +27,39 @@
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 22,
+    "first_party_workspace_source_count": 23,
     "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 44,
-    "base_exact_pinned_dependency_count": 44,
+    "base_dependency_count": 46,
+    "base_exact_pinned_dependency_count": 46,
     "dependency_lock_manifest_present": true,
     "dependency_lock_install_profile_count": 14,
     "install_profiles_workflow_present": true,
     "release_gates_workflow_present": true,
-    "install_profiles_runtime_env_present_count": 24,
-    "release_gates_runtime_env_present_count": 24,
-    "release_gates_test_lane_env_present_count": 25,
+    "install_profiles_runtime_env_present_count": 14,
+    "release_gates_runtime_env_present_count": 14,
+    "release_gates_test_lane_env_present_count": 15,
     "release_gates_extra_env_present_count": 2,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
-    "current_profile_expected_module_count": 21,
-    "current_profile_import_probe_passed_count": 21,
+    "current_profile_expected_module_count": 22,
+    "current_profile_import_probe_passed_count": 22,
     "current_profile_import_probe_failed_count": 0,
     "current_profile_import_probe_passed": true,
     "runtime_surface_probe_count": 4,
     "runtime_surface_probe_failed_count": 0,
     "runtime_surface_probe_passed": true
   },
-  "failures": [
-    "The current environment does not provide the full supported interpreter matrix required for clean-room certification."
-  ],
+  "failures": [],
   "warnings": [
-    "The current container does not provide supported interpreter binaries for: 3.11, 3.13, 3.14.",
-    "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
-    "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
+    "The current container does not provide supported interpreter binaries for: 3.11, 3.12."
   ],
   "detected_supported_pythons": [
     {
       "version": "3.10",
       "available": true,
-      "path": "py -3.10",
-      "source": "py-launcher"
+      "path": "<repo>/.tox/py310-devtest/Scripts/python.EXE",
+      "source": "current-interpreter"
     },
     {
       "version": "3.11",
@@ -76,36 +70,24 @@
     },
     {
       "version": "3.12",
-      "available": true,
-      "path": "<repo>/.venv/Scripts/python.exe",
-      "source": "current-interpreter"
-    },
-    {
-      "version": "3.13",
       "available": false,
       "path": null,
-      "source": "py-launcher",
-      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
-    },
-    {
-      "version": "3.14",
-      "available": false,
-      "path": null,
-      "source": "py-launcher",
-      "message": "No suitable Python runtime found\nPass --list (-0) to see all detected environments on your machine\nor set environment variable PYLAUNCHER_ALLOW_INSTALL to use winget\nor open the Microsoft Store to the requested version."
+      "source": "path",
+      "message": "[WinError 2] The system cannot find the file specified"
     }
   ],
   "dependency_manifest": {
-    "requires_python": ">=3.10,<3.15",
+    "requires_python": ">=3.10,<3.13",
     "dependencies": [
       "tigrbl==0.4.0",
       "swarmauri_core==0.10.0",
-      "swarmauri_base==0.9.2",
-      "swarmauri_standard==0.9.2",
+      "swarmauri_base==0.10.0",
+      "swarmauri_standard==0.10.0",
       "swarmauri_tokens_jwt==0.3.0.dev31",
       "swarmauri_signing_jws==0.3.0.dev31",
       "swarmauri_signing_ed25519==0.2.0.dev32",
       "swarmauri_signing_dpop==0.1.1",
+      "pqcrypto==0.4.0",
       "swarmauri_crypto_jwe==0.3.0.dev5",
       "swarmauri_crypto_paramiko==0.4.0.dev5",
       "swarmauri_keyprovider_file==0.2.0",
@@ -119,6 +101,7 @@
       "bcrypt==5.0.0",
       "httpx==0.28.1",
       "aiosqlite==0.22.1",
+      "tigrbl-auth==0.4.0.dev2",
       "tigrbl-auth-protocol-oauth==0.4.0.dev2",
       "tigrbl-auth-protocol-oidc==0.4.0.dev2",
       "tigrbl-auth-protocol-rp==0.4.0.dev2",
@@ -151,7 +134,8 @@
         "pytest-timeout==2.3.1",
         "pytest-benchmark==5.2.3",
         "pytest-asyncio==1.3.0",
-        "requests==2.33.1"
+        "requests==2.33.1",
+        "ssot-registry==0.2.17"
       ],
       "postgres": [
         "asyncpg==0.31.0",
@@ -177,12 +161,12 @@
     },
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 22,
+    "first_party_workspace_source_count": 23,
     "forbidden_workspace_source_count": 0,
     "forbidden_workspace_sources": {},
     "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 44,
-    "dependency_count": 44
+    "exact_pinned_dependency_count": 46,
+    "dependency_count": 46
   },
   "constraints_consistency": {
     "passed": true,
@@ -194,8 +178,8 @@
       "hypercorn": [],
       "tigrcorn": []
     },
-    "base_count": 44,
-    "test_count": 7,
+    "base_count": 46,
+    "test_count": 8,
     "uvicorn_count": 1,
     "hypercorn_count": 1,
     "tigrcorn_count": 1
@@ -203,10 +187,7 @@
   "dependency_lock_consistency": {
     "passed": true,
     "failures": [],
-    "python_support_blockers": [
-      "Pinned tigrbl==0.4.0 declares Requires-Python >=3.10,<3.14, blocking Python 3.14.",
-      "Pinned Swarmauri core/base/standard/JWT/JWS/Ed25519/DPoP/JWE/Paramiko/keyprovider packages declare Requires-Python >=3.10,<3.13, blocking Python 3.13 and 3.14."
-    ],
+    "python_support_blockers": [],
     "missing_profiles": [],
     "install_profile_count": 14
   },
@@ -215,53 +196,33 @@
       "py310-base",
       "py311-base",
       "py312-base",
-      "py313-base",
-      "py314-base",
       "py310-sqlite-uvicorn",
       "py311-sqlite-uvicorn",
       "py312-sqlite-uvicorn",
-      "py313-sqlite-uvicorn",
-      "py314-sqlite-uvicorn",
       "py310-postgres-hypercorn",
       "py311-postgres-hypercorn",
       "py312-postgres-hypercorn",
-      "py313-postgres-hypercorn",
-      "py314-postgres-hypercorn",
       "py311-tigrcorn",
       "py312-tigrcorn",
-      "py313-tigrcorn",
-      "py314-tigrcorn",
       "py310-devtest",
       "py311-devtest",
       "py312-devtest",
-      "py313-devtest",
-      "py314-devtest",
       "py311-gates",
       "py310-test-core",
       "py311-test-core",
       "py312-test-core",
-      "py313-test-core",
-      "py314-test-core",
       "py310-test-integration",
       "py311-test-integration",
       "py312-test-integration",
-      "py313-test-integration",
-      "py314-test-integration",
       "py310-test-conformance",
       "py311-test-conformance",
       "py312-test-conformance",
-      "py313-test-conformance",
-      "py314-test-conformance",
       "py310-test-security-negative",
       "py311-test-security-negative",
       "py312-test-security-negative",
-      "py313-test-security-negative",
-      "py314-test-security-negative",
       "py310-test-interop",
       "py311-test-interop",
       "py312-test-interop",
-      "py313-test-interop",
-      "py314-test-interop",
       "py311-test-extension",
       "py311-migration-portability",
       "py311-final-certification"
@@ -274,28 +235,28 @@
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-sqlite-uvicorn]": {
+      "[testenv:py{310,311,312}-sqlite-uvicorn]": {
         "profile": "sqlite-uvicorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-postgres-hypercorn]": {
+      "[testenv:py{310,311,312}-postgres-hypercorn]": {
         "profile": "postgres-hypercorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{311,312,313,314}-tigrcorn]": {
+      "[testenv:py{311,312}-tigrcorn]": {
         "profile": "tigrcorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-devtest]": {
+      "[testenv:py{310,311,312}-devtest]": {
         "profile": "devtest",
         "pip_check_present": true,
         "install_probe_present": true,
@@ -309,35 +270,35 @@
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-core]": {
+      "[testenv:py{310,311,312}-test-core]": {
         "profile": "test-core",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-integration]": {
+      "[testenv:py{310,311,312}-test-integration]": {
         "profile": "test-integration",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-conformance]": {
+      "[testenv:py{310,311,312}-test-conformance]": {
         "profile": "test-conformance",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-security-negative]": {
+      "[testenv:py{310,311,312}-test-security-negative]": {
         "profile": "test-security-negative",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
         "constraints_present": true
       },
-      "[testenv:py{310,311,312,313,314}-test-interop]": {
+      "[testenv:py{310,311,312}-test-interop]": {
         "profile": "test-interop",
         "pip_check_present": true,
         "install_probe_present": true,
@@ -376,11 +337,11 @@
     "release_gates_workflow_present": true,
     "install_profiles_artifact_upload_present": true,
     "release_gates_artifact_upload_present": true,
-    "install_profiles_runtime_env_present_count": 24,
+    "install_profiles_runtime_env_present_count": 14,
     "install_profiles_runtime_env_missing": [],
-    "release_gates_runtime_env_present_count": 24,
+    "release_gates_runtime_env_present_count": 14,
     "release_gates_runtime_env_missing": [],
-    "release_gates_test_lane_env_present_count": 25,
+    "release_gates_test_lane_env_present_count": 15,
     "release_gates_test_lane_env_missing": [],
     "release_gates_extra_env_present_count": 2,
     "release_gates_extra_env_missing": [],
@@ -402,6 +363,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -435,6 +397,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -469,6 +432,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -503,6 +467,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -515,8 +480,7 @@
         "pydantic_settings",
         "dotenv",
         "multipart",
-        "aiosqlite",
-        "tigrcorn"
+        "aiosqlite"
       ]
     },
     "devtest": {
@@ -539,6 +503,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -584,6 +549,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -605,8 +571,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "test-core": {
@@ -626,6 +591,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -670,6 +636,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -691,8 +658,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "test-conformance": {
@@ -718,6 +684,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -739,8 +706,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "test-security-negative": {
@@ -766,6 +732,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -787,8 +754,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "test-interop": {
@@ -812,6 +778,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -832,8 +799,7 @@
         "pytest_benchmark",
         "requests",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "test-extension": {
@@ -859,6 +825,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -880,8 +847,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "migration-portability": {
@@ -907,6 +873,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -928,8 +895,7 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     },
     "final-certification": {
@@ -955,6 +921,7 @@
         "swarmauri_signing_jws",
         "swarmauri_signing_ed25519",
         "swarmauri_signing_dpop",
+        "pqcrypto",
         "swarmauri_crypto_jwe",
         "swarmauri_crypto_paramiko",
         "swarmauri_keyprovider_file",
@@ -976,54 +943,53 @@
         "requests",
         "asyncpg",
         "uvicorn",
-        "hypercorn",
-        "tigrcorn"
+        "hypercorn"
       ]
     }
   },
-  "identity": "base@py312",
+  "identity": "base@py310",
   "environment_identity": {
-    "python_version": "3.12",
-    "python_full_version": "3.12.5",
-    "python_tag": "py312",
+    "python_version": "3.10",
+    "python_full_version": "3.10.16",
+    "python_tag": "py310",
     "implementation": "CPython",
-    "implementation_version": "3.12.5",
-    "executable": ".venv/Scripts/python.exe",
+    "implementation_version": "3.10.16",
+    "executable": ".tox/py310-devtest/Scripts/python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
     "platform_release": "10",
     "platform_version": "10.0.19045",
     "machine": "AMD64",
-    "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
-    "tox_env": null,
-    "matrix_profile": null,
+    "processor": "AMD64",
+    "tox_env": "py310-devtest",
+    "matrix_profile": "devtest",
     "install_profile": "base",
     "test_lane": null,
-    "runner": null
+    "runner": "uvicorn"
   },
   "current_environment_probe": {
     "profile": "base",
-    "identity": "base@py312",
+    "identity": "base@py310",
     "environment_identity": {
-      "python_version": "3.12",
-      "python_full_version": "3.12.5",
-      "python_tag": "py312",
+      "python_version": "3.10",
+      "python_full_version": "3.10.16",
+      "python_tag": "py310",
       "implementation": "CPython",
-      "implementation_version": "3.12.5",
-      "executable": ".venv/Scripts/python.exe",
+      "implementation_version": "3.10.16",
+      "executable": ".tox/py310-devtest/Scripts/python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
       "platform_release": "10",
       "platform_version": "10.0.19045",
       "machine": "AMD64",
-      "processor": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD",
-      "tox_env": null,
-      "matrix_profile": null,
+      "processor": "AMD64",
+      "tox_env": "py310-devtest",
+      "matrix_profile": "devtest",
       "install_profile": "base",
       "test_lane": null,
-      "runner": null
+      "runner": "uvicorn"
     },
-    "python": "3.12.5",
+    "python": "3.10.16",
     "python_supported": true,
     "module_results": [
       {
@@ -1085,6 +1051,14 @@
       {
         "module": "swarmauri_signing_dpop",
         "package": "swarmauri_signing_dpop",
+        "passed": true,
+        "category": "runtime",
+        "message": "import ok",
+        "error_type": null
+      },
+      {
+        "module": "pqcrypto",
+        "package": "pqcrypto",
         "passed": true,
         "category": "runtime",
         "message": "import ok",

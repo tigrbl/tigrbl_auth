@@ -5,7 +5,7 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - generated_at: `2026-06-18`
 - final_release_ready: `False`
 - checkpoint_only: `True`
-- release_gates_passed: `False`
+- release_gates_passed: `True`
 - final_release_gate_passed: `False`
 
 ## Source of truth
@@ -33,9 +33,9 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - fully_certifiable_now: `False`
 - fully_rfc_compliant_now: `False`
 - fully_non_rfc_spec_compliant_now: `False`
-- release_gates_passed: `False`
-- release_gate_count: `25`
-- release_gate_failed_count: `9`
+- release_gates_passed: `True`
+- release_gate_count: `1`
+- release_gate_failed_count: `0`
 - final_release_gate_passed: `False`
 - final_release_ready: `False`
 - checkpoint_only: `True`

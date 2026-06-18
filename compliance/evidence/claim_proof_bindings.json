@@ -395,7 +395,16 @@
         "tests/unit/test_runtime_launcher.py"
       ],
       "negative_tests": [
-        "tests/security/test_sender_constraint_replay.py"
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
@@ -846,7 +855,17 @@
         "tests/unit/test_operator_service_layer.py",
         "tests/unit/test_runtime_launcher.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
       ],
@@ -3258,7 +3277,13 @@
         "tests/unit/test_operator_service_layer.py",
         "tests/unit/test_runtime_launcher.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/security/test_crypto_boundary_governance.py",
+        "tests/unit/test_backends.py",
+        "tests/unit/test_crypto.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
       ],
@@ -4068,7 +4093,13 @@
         "tests/unit/test_rpc_registry_live.py",
         "tests/unit/test_runtime_launcher.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/",
         "compliance/evidence/tier3/contracts/openapi/",
@@ -4658,7 +4689,23 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -4793,7 +4840,20 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -4928,7 +4988,18 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -5063,7 +5134,20 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -5198,7 +5282,15 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -5335,7 +5427,21 @@
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
       "negative_tests": [
-        "tests/security/test_sender_constraint_replay.py"
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
@@ -5720,7 +5826,13 @@
         "tests/unit/test_operator_service_layer.py",
         "tests/unit/test_runtime_launcher.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
       ],
@@ -5747,7 +5859,19 @@
         "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/security-bcp/"
@@ -5775,7 +5899,19 @@
         "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/security-bcp/"
@@ -7291,7 +7427,47 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -7344,7 +7520,18 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7363,7 +7550,18 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7382,7 +7580,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7520,7 +7722,47 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -7574,7 +7816,18 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7593,7 +7846,18 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7612,7 +7876,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7750,7 +8018,47 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -7804,7 +8112,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7823,7 +8135,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7842,7 +8158,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7861,7 +8181,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -7999,7 +8323,47 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -8172,7 +8536,47 @@
         "tests/unit/test_session_logout_cluster_b.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/assertion-framework/",
         "compliance/evidence/tier3/bearer/",
@@ -8226,7 +8630,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -8245,7 +8653,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -8264,7 +8676,11 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_peer_matrix_artifacts.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -8404,7 +8820,13 @@
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/security/test_crypto_boundary_governance.py",
+        "tests/unit/test_backends.py",
+        "tests/unit/test_crypto.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
       ],
@@ -8434,7 +8856,13 @@
         "tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/negative/test_cookie_and_logout_abuse_cases.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/cookies/",
@@ -8539,7 +8967,27 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/",
         "compliance/evidence/tier3/issuer-identification/",
@@ -8602,7 +9050,13 @@
         "tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/introspection/"
@@ -8637,7 +9091,13 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_session_logout_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/security/test_crypto_boundary_governance.py",
+        "tests/unit/test_backends.py",
+        "tests/unit/test_crypto.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/",
         "compliance/evidence/tier3/jwt-access-token-profile/",
@@ -8709,7 +9169,22 @@
         "tests/unit/test_public_route_contracts.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_rfc9396_authorization_details.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/",
         "compliance/evidence/tier3/par/",
@@ -8766,7 +9241,23 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/",
         "compliance/evidence/tier3/security-bcp/",
@@ -8908,7 +9399,23 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/",
         "compliance/evidence/tier3/security-bcp/",
@@ -8944,7 +9451,19 @@
         "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/jwt-access-token-profile/",
@@ -8981,7 +9500,25 @@
         "tests/unit/test_hardening_cluster_c.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/",
         "compliance/evidence/tier3/jwt-access-token-profile/",
@@ -9009,7 +9546,13 @@
         "tests/interop/test_tier4_promotion_fail_closed.py",
         "tests/unit/test_openid_userinfo_endpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/",
         "compliance/evidence/tier3/oidc-userinfo/"
@@ -9111,7 +9654,23 @@
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py",
         "tests/unit/test_well_known_endpoints_behavior.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/discovery/",
         "compliance/evidence/tier3/security-bcp/",
@@ -9862,7 +10421,16 @@
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "negative_tests": [
-        "tests/security/test_sender_constraint_replay.py"
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
@@ -9885,7 +10453,12 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
       ],
@@ -9908,7 +10481,16 @@
         "tests/unit/test_hardening_cluster_c.py"
       ],
       "negative_tests": [
-        "tests/security/test_sender_constraint_replay.py"
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/mtls/"
@@ -9931,7 +10513,13 @@
         "tests/unit/test_hardening_cluster_b.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
       ],
@@ -9953,7 +10541,12 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9396_authorization_details.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
       ],
@@ -9977,7 +10570,14 @@
         "tests/unit/test_hardening_cluster_a.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
       ],
@@ -10036,7 +10636,15 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -10099,7 +10707,16 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/interop/test_peer_counterpart_catalog.py",
+        "tests/interop/test_tier4_promotion_fail_closed.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -10118,7 +10735,15 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -10137,7 +10762,15 @@
         "tests/unit/test_boundary_freeze_checkpoint.py",
         "tests/unit/test_feature_flag_registry.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "docs/compliance/CERTIFICATION_BOUNDARY.md",
         "docs/compliance/TARGET_REALITY_MATRIX.md"
@@ -10527,7 +11160,13 @@
         "tests/interop/test_peer_matrix_artifacts.py",
         "tests/interop/test_tier4_promotion_fail_closed.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/conformance/baseline/test_rfc6750_bearer_token.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc6750_bearer_token.py",
+        "tests/unit/test_security_deps.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/bearer/"
       ],
@@ -10780,7 +11419,15 @@
       "positive_tests": [
         "tests/unit/test_rfc7952_security_event_token.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/jwt/"
       ],
@@ -10899,7 +11546,14 @@
         "tests/unit/test_hardening_cluster_a.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc8693_token_exchange.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8693_token_exchange.py",
+        "tests/integration/test_rfc8693_token_exchange_endpoint.py",
+        "tests/integration/test_token_exchange_flow.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/token-exchange/"
       ],
@@ -10921,7 +11575,18 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/mtls/"
       ],
@@ -11016,7 +11681,12 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc9101_jar.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9101_jwt_secured_authorization_request.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/jar/"
       ],
@@ -11038,7 +11708,13 @@
         "tests/unit/test_hardening_cluster_b.py",
         "tests/unit/test_public_route_contracts.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9126_par.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9126_pushed_authorization_requests.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/par/"
       ],
@@ -11058,7 +11734,17 @@
         "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9207_issuer_identification.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_issuer_confusion_resistance.py",
+        "tests/security/test_realm_isolation_certification.py",
+        "tests/security/test_tenant_isolation_certification.py",
+        "tests/conformance/hardening/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9207_issuer_identification.py",
+        "tests/unit/test_tenant_realm_isolation_invariants.py",
+        "tests/integration/test_runtime_issuer_alignment.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/issuer-identification/"
       ],
@@ -11080,7 +11766,12 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_b.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/conformance/hardening/test_rfc9396_rar.py",
+        "tests/unit/test_hardening_cluster_b.py",
+        "tests/unit/test_rfc9396_authorization_details.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/rar/"
       ],
@@ -11102,7 +11793,18 @@
         "tests/unit/test_advanced_surface_contracts.py",
         "tests/unit/test_hardening_cluster_c.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/security/test_sender_constraint_replay.py",
+        "tests/conformance/hardening/test_rfc8705_mtls.py",
+        "tests/conformance/hardening/test_rfc9449_dpop.py",
+        "tests/unit/test_dpop_key_credentials.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_mtls_certificate_credentials.py",
+        "tests/unit/test_resource_server_consumer_boundary.py",
+        "tests/unit/test_rfc8705_mtls_runtime.py",
+        "tests/unit/test_rfc9449_dpop.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/dpop/"
       ],
@@ -11123,7 +11825,15 @@
         "tests/unit/test_profile_discovery_runtime.py",
         "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
       ],
-      "negative_tests": [],
+      "negative_tests": [
+        "tests/negative/test_certification_attack_paths.py",
+        "tests/negative/test_hardening_runtime_enforcement.py",
+        "tests/conformance/hardening/test_rfc9700_security_bcp.py",
+        "tests/unit/test_fapi_runtime_profile.py",
+        "tests/unit/test_hardening_cluster_c.py",
+        "tests/unit/test_profile_discovery_runtime.py",
+        "tests/unit/test_rfc9700_security_bcp_profile_checkpoint.py"
+      ],
       "evidence_refs": [
         "compliance/evidence/tier3/security-bcp/"
       ],

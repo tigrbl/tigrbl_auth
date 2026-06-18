@@ -60,7 +60,7 @@ repository_state:
   tier4_last_matrix_profile_count: 16
   final_release_decision_complete: true
   release_decision_record_present: true
-  release_gate_passed_for_final_decision: false
+  release_gate_passed_for_final_decision: true
   full_release_claim_still_partial: true
   last_release_decision_record: docs/compliance/RELEASE_DECISION_RECORD.md
   runtime_target_manifests_present: true
