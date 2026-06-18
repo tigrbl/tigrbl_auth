@@ -11,7 +11,7 @@ from tigrbl_auth.cli.truth import materialize_truth_chain, verify_truth_chain
 from tigrbl_auth.config import deployment
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_auth.config.settings import Settings
-from tigrbl_auth.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC
+from tigrbl_identity_operator.document_authority import SSOT_DOCUMENT_AUTHORITY_SPEC
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -212,3 +212,35 @@ def test_truth_chain_and_current_state_reference_ssot_document_authority() -> No
     assert current_state_report["summary"]["document_authority_spec"] == SSOT_DOCUMENT_AUTHORITY_SPEC
     assert current_state_report["summary"]["document_authority_projection_manifest"] == "compliance/targets/document-authority.yaml"
     assert SSOT_DOCUMENT_AUTHORITY_SPEC in current_state_md
+
+
+def test_truth_materializer_is_only_root_status_markdown_writer() -> None:
+    allowed = {
+        ROOT
+        / "pkgs"
+        / "tigrbl-identity-cli"
+        / "src"
+        / "tigrbl_identity_cli"
+        / "cli"
+        / "truth"
+        / "_materialize.py"
+    }
+    status_write_patterns = (
+        "_write_text(repo_root / ROOT_CURRENT_STATE",
+        "_write_text(repo_root / ROOT_CERTIFICATION_STATUS",
+        "_write_text(ROOT / \"CURRENT_STATE.md\"",
+        "_write_text(ROOT / \"CERTIFICATION_STATUS.md\"",
+        "write_text(repo_root / ROOT_CURRENT_STATE",
+        "write_text(repo_root / ROOT_CERTIFICATION_STATUS",
+        "write_text(ROOT / \"CURRENT_STATE.md\"",
+        "write_text(ROOT / \"CERTIFICATION_STATUS.md\"",
+    )
+    offenders: list[str] = []
+    for base in (ROOT / "scripts", ROOT / "pkgs"):
+        for path in base.rglob("*.py"):
+            for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+                if any(pattern in line for pattern in status_write_patterns) and path not in allowed:
+                    rel = str(path.relative_to(ROOT)).replace("\\", "/")
+                    offenders.append(f"{rel}:{line_number}")
+
+    assert offenders == []

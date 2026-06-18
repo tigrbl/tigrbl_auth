@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 
 from tigrbl_auth.cli.artifacts import deployment_from_options, write_effective_claims_manifest, write_effective_evidence_manifest
 from tigrbl_auth.cli.reports import build_evidence_bundle, generate_state_reports, run_release_gates, summarize_evidence_status
+from tigrbl_auth.cli.truth import materialize_truth_chain
 from scripts.generate_certification_scope import build_scope, write_boundary_docs, write_yaml as write_scope_yaml
 
 PROMOTED_BASELINE_TARGETS = [
@@ -747,197 +748,6 @@ def update_evidence_manifest(promoted_dirs: list[str], promoted_targets: list[st
     write_yaml(path, payload)
 
 
-def update_current_state_docs() -> None:
-    current_lines = [
-        "# CURRENT_STATE",
-        "",
-        "## Summary",
-        "",
-        "This repository is now a **Tigrbl-native, governance-installed, boundary-locked Tier 3 evidence checkpoint** for `tigrbl_auth` with preserved Tier 3 evidence promoted for the full baseline target bucket and a selected production subset.",
-        "",
-        "## What changed in this checkpoint",
-        "",
-        "Tier 3 evidence checkpoint work is now present in the repository release path:",
-        "",
-        "- preserved Tier 3 evidence bundles now exist for the full baseline target bucket",
-        "- preserved Tier 3 evidence bundles now exist for a selected production subset (`RFC 7009`, `RFC 7591`, `RFC 7662`, `RFC 9068`, `RFC 6265`, `RFC 9728`, `OIDC UserInfo`, `OpenRPC 1.4.x admin/control-plane contract`)",
-        "- `compliance/evidence/manifest.yaml` now records the preserved Tier 3 bundle set and promoted target subsets",
-        "- declared claims are now promoted to Tier 3 for the now-backed subset and effective claim/evidence manifests have been regenerated",
-        "- bundle directories now preserve manifests, mappings, execution logs, contract snapshots, environment manifests, and digest material",
-        "",
-        "## Verification completed in this checkpoint",
-        "",
-        "The following dependency-light checks were executed successfully from this checkpoint environment:",
-        "",
-        "- `scripts/claims_lint.py`",
-        "- `scripts/verify_contract_sync.py`",
-        "- `scripts/verify_feature_surface_modularity.py`",
-        "- `scripts/verify_target_module_mapping.py`",
-        "- `scripts/verify_target_route_mapping.py`",
-        "- `scripts/verify_target_contract_mapping.py`",
-        "- `scripts/verify_target_test_mapping.py`",
-        "- `scripts/verify_target_evidence_mapping.py`",
-        "- `scripts/verify_evidence_peer.py`",
-        "",
-        "## What remains honest and unchanged",
-        "",
-        "This package is **not yet certifiably fully featured**.",
-        "",
-        "This package is **not yet certifiably fully RFC/spec compliant across the full declared certification boundary**.",
-        "",
-        "## Why it is still not fully certifiable",
-        "",
-        "- Tier 3 evidence is now preserved for the baseline bucket and a selected production subset, but not for the full retained boundary",
-        "- Tier 4 independent peer validation is still absent",
-        "- release signing and attestation remain checkpoint-grade",
-        "- RFC 7516, RFC 7521, and RFC 7523 remain below certification-grade completion",
-        "- broader certification-grade runtime and interop breadth is still required for some production and hardening targets",
-        "",
-        "## Key artifacts to inspect",
-        "",
-        "- `docs/compliance/TIER3_EVIDENCE_COMPLETION.md`",
-        "- `docs/compliance/TIER3_PROMOTION_MATRIX.md`",
-        "- `compliance/evidence/manifest.yaml`",
-        "- `docs/compliance/evidence_peer_readiness_report.md`",
-        "- `docs/compliance/current_state_report.md`",
-        "- `docs/compliance/certification_state_report.md`",
-        "- `CERTIFICATION_STATUS.md`",
-        "",
-    ]
-    write_text(ROOT / "CURRENT_STATE.md", "\n".join(current_lines))
-
-    cert_lines = [
-        "# CERTIFICATION_STATUS",
-        "",
-        "## Honest status",
-        "",
-        "`tigrbl_auth` in this checkpoint is **not yet certifiably fully featured**.",
-        "",
-        "`tigrbl_auth` in this checkpoint is **not yet certifiably fully RFC/spec compliant across the entire declared certification boundary**.",
-        "",
-        "## What Tier 3 evidence checkpoint achieved",
-        "",
-        "This checkpoint closes the preserved-evidence gap for the baseline bucket and a selected production subset:",
-        "",
-        "- all baseline targets are now promoted to Tier 3 with preserved evidence directories",
-        "- a selected production subset is now promoted to Tier 3 with preserved evidence directories",
-        "- claims, effective claims, and effective evidence manifests now reflect that partial Tier 3 promotion truthfully",
-        "- preserved bundle manifests now bind evidence to the checkpoint zip digest, repository tree digest, profile, and contract snapshot version",
-        "",
-        "## What is now materially stronger",
-        "",
-        "This checkpoint materially improves the repository because the baseline claim set and part of the production claim set no longer rely only on internal implementation assertions. They now carry preserved manifests, mappings, logs, contracts, environment details, and digest material in-repository.",
-        "",
-        "## What is still not claimed",
-        "",
-        "This checkpoint does **not** claim:",
-        "",
-        "- that the package is certifiably fully featured across the full retained boundary",
-        "- that the package is certifiably fully RFC/spec compliant across the full retained boundary",
-        "- that Tier 3 evidence promotion is complete across the retained production and hardening boundary",
-        "- that Tier 4 peer validation is complete",
-        "- that release signing/attestation is certification-grade",
-        "- that bounded/helper targets such as `RFC 7516`, `RFC 7521`, and `RFC 7523` have been fully promoted",
-        "",
-        "## Practical recommendation",
-        "",
-        "Use this checkpoint as the Tier 3 evidence checkpoint handoff for preserved Tier 3 evidence on the baseline bucket and the selected production subset. It is stronger and more truthful than the test-plane checkpoint zip, but it still does not support a final truthful claim that `tigrbl_auth` is certifiably fully featured or certifiably fully RFC/spec compliant across its full declared target boundary.",
-        "",
-    ]
-    write_text(ROOT / "CERTIFICATION_STATUS.md", "\n".join(cert_lines))
-
-    docs_current_lines = [
-        "# Current State",
-        "",
-        "`tigrbl_auth` is now a governed, boundary-locked Tier 3 evidence checkpoint with:",
-        "",
-        "- boundary-lock checkpoint certification-boundary freeze completed",
-        "- runtime-foundation checkpoint authoritative migration to standards-owned modules completed for the release path",
-        "- persistence-domain checkpoint durable persistence and executable migration ownership implemented in repository shape",
-        "- public-route checkpoint canonical public auth surface completed for the authoritative release path",
-        "- browser-session checkpoint browser session, cookie, and logout semantics implemented in the release path",
-        "- operator-service checkpoint implementation-backed operator/admin RPC generation and registry completed",
-        "- runtime-hardening checkpoint executable hardening/runtime enforcement implemented for the core authorization, token, discovery, and contract paths",
-        "- RFC-family runtime checkpoint retained RFC-family runtime completion materially implemented across client lifecycle, PAR/JAR/RAR/resource indicators, sender-constrained issuance, token exchange, native apps, and device flow",
-        "- capability-wiring checkpoint executable capability wiring and dependency-light surface verification implemented",
-        "- test-plane checkpoint certification-usable test-plane normalization completed",
-        "- Tier 3 evidence checkpoint preserved Tier 3 evidence promoted for the full baseline bucket and a selected production subset",
-        "",
-        "It now has:",
-        "",
-        "- preserved Tier 3 evidence directories with manifests, mappings, execution logs, contracts, environment manifests, and digests for the promoted subset",
-        "- preserved baseline and production Tier 3 bundle directories under `dist/evidence-bundles/`",
-        "- updated effective claims/evidence manifests that reflect Tier 3 promotion truthfully for the now-backed subset",
-        "- committed current-state and certification-state reports that reflect the new promotion state",
-        "",
-        "It still does not have:",
-        "",
-        "- certifiable full feature completion across the declared boundary",
-        "- certifiable full RFC/spec compliance across the declared boundary",
-        "- full-boundary Tier 3 promotion",
-        "- complete Tier 4 external peer validation",
-        "- certification-grade release signing/attestation",
-        "",
-    ]
-    write_text(ROOT / "docs/compliance/current_state.md", "\n".join(docs_current_lines))
-
-    evidence_doc = [
-        "# Tier 3 evidence checkpoint Tier 3 Evidence Completion",
-        "",
-        "This checkpoint promotes the full baseline target bucket and a selected production subset to Tier 3 using preserved bundle directories committed under `compliance/evidence/tier3/` and profile bundles committed under `dist/evidence-bundles/`.",
-        "",
-        "## Promoted baseline targets",
-        "",
-    ]
-    evidence_doc.extend([f"- `{target}`" for target in PROMOTED_BASELINE_TARGETS])
-    evidence_doc.extend([
-        "",
-        "## Promoted production subset",
-        "",
-    ])
-    evidence_doc.extend([f"- `{target}`" for target in PROMOTED_PRODUCTION_TARGETS])
-    evidence_doc.extend([
-        "",
-        "## Preservation model",
-        "",
-        "Each promoted evidence directory now contains:",
-        "",
-        "- `manifest.yaml` with bundle metadata, scenario assertions, contract version binding, and source-revision binding",
-        "- `mapping.yaml` with target, module, test, and endpoint mappings",
-        "- `execution.log` with preserved dependency-light verification transcripts",
-        "- `reports/` with generated governance and contract reports",
-        "- `contracts/` with profile-specific committed contract snapshots where applicable",
-        "- `environment.yaml`, `hashes.yaml`, and `signatures.yaml`",
-        "",
-        "## Honest limitations",
-        "",
-        "- the evidence is bound to the checkpoint zip digest and repository tree digest because Git commit metadata is absent from the checkpoint zip",
-        "- the external `tigrbl` runtime dependency is not installed in this container, so full runtime pytest execution was not reproduced here",
-        "- full-boundary Tier 3 promotion is still incomplete",
-        "- Tier 4 peer validation remains absent",
-        "",
-    ])
-    write_text(ROOT / "docs/compliance/TIER3_EVIDENCE_COMPLETION.md", "\n".join(evidence_doc))
-
-    matrix_lines = [
-        "# Tier 3 Promotion Matrix",
-        "",
-        "| Target | Profile | Evidence directory | Claim tier | Promotion status |",
-        "|---|---|---|---|---|",
-    ]
-    for group in EVIDENCE_GROUPS:
-        for target in group["targets"]:
-            matrix_lines.append(f"| {target} | {group['profile']} | {group['dir']} | 3 | promoted in Tier 3 evidence checkpoint |")
-    matrix_lines.extend([
-        "",
-        "## Not promoted in this checkpoint",
-        "",
-        "Targets outside the matrix above remain at their prior tier and are still blocked on broader evidence, bounded/helper completion, or Tier 4 peer validation.",
-        "",
-    ])
-    write_text(ROOT / "docs/compliance/TIER3_PROMOTION_MATRIX.md", "\n".join(matrix_lines))
-
-
 def main() -> int:
     update_claims()
     regenerate_effective_manifests()
@@ -977,7 +787,7 @@ def main() -> int:
     generate_state_reports(ROOT)
     summarize_evidence_status(ROOT, profile_label="baseline")
     run_release_gates(ROOT, strict=True)
-    update_current_state_docs()
+    materialize_truth_chain(ROOT)
     print(json.dumps({
         "delivery_track": "tier3-evidence",
         "repository_tier": 3,
