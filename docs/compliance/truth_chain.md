@@ -53,7 +53,7 @@ This manifest is a generated checkpoint projection derived from the SSOT authori
 - tier4_valid_external_bundle_count: `0`
 - tier4_invalid_external_bundle_count: `16`
 - tier4_missing_external_bundle_count: `0`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'Current generated public artifacts still drift from executable reality.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
 - final_release_failures: `['Validated artifact inventory is below the required 14 runtime + 15 test lanes + 1 migration threshold.', 'In-scope certification test lanes are not green from validated-run evidence.']`
 - final_release_warnings: `['Tier 4 bundle promotion is not complete for the retained boundary.']`
 - explicitly_deauthorized_current_adjacent_doc_count: `7`

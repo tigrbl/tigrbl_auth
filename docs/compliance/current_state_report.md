@@ -117,9 +117,9 @@
 - cli_verb_count: `83`
 - cli_catalog_only_resource_command_count: `0`
 - cli_required_verbs_missing: `False`
-- artifact_truthfulness_passed: `True`
+- artifact_truthfulness_passed: `False`
 - contract_sync_report_passed: `False`
-- contract_to_route_sync_passed: `True`
+- contract_to_route_sync_passed: `False`
 - route_to_contract_sync_passed: `True`
 - target_to_contract_sync_passed: `True`
 - cli_metadata_to_docs_sync_passed: `True`
@@ -137,9 +137,9 @@
 - certification_evidence_target_profile_bundle_count: `199`
 - release_evidence_clean_checkout_required: `True`
 - release_evidence_clean_checkout_now: `False`
-- release_evidence_dirty_checkout_path_count: `136`
+- release_evidence_dirty_checkout_path_count: `32`
 - authoritative_current_doc_stale_ref_count: `0`
-- historical_doc_stale_ref_count: `5582`
+- historical_doc_stale_ref_count: `5580`
 - derived_current_doc_count: `11`
 - historical_archive_present: `True`
 - validated_execution_artifact_count: `35`

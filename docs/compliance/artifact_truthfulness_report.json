@@ -1,16 +1,22 @@
 {
-  "passed": true,
-  "failures": [],
+  "passed": false,
+  "failures": [
+    "baseline: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /login, /token",
+    "production: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /login, /logout, /register, /register/{client_id}, /revoke, /token",
+    "hardening: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token",
+    "fapi2-security: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token",
+    "peer-claim: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token"
+  ],
   "warnings": [],
   "summary": {
-    "contract_to_route_sync_passed": true,
+    "contract_to_route_sync_passed": false,
     "route_to_contract_sync_passed": true,
     "target_to_contract_sync_passed": true,
     "cli_metadata_to_docs_sync_passed": true,
     "runtime_plan_to_discovery_sync_passed": true,
     "runner_contract_hash_invariance_passed": true,
     "authoritative_current_doc_stale_ref_count": 0,
-    "historical_doc_stale_ref_count": 5582,
+    "historical_doc_stale_ref_count": 5580,
     "openapi_profile_count_checked": 5,
     "discovery_profile_count_checked": 5
   },
@@ -58,7 +64,19 @@
           "/token"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [],
+        "unmapped_contract_paths": [
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
+          "/authorize",
+          "/login",
+          "/token"
+        ],
         "path_count": 18
       },
       "production": {
@@ -117,7 +135,23 @@
           "/userinfo"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [],
+        "unmapped_contract_paths": [
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
+          "/authorize",
+          "/login",
+          "/logout",
+          "/register",
+          "/register/{client_id}",
+          "/revoke",
+          "/token"
+        ],
         "path_count": 25
       },
       "hardening": {
@@ -182,7 +216,25 @@
           "/userinfo"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [],
+        "unmapped_contract_paths": [
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
+          "/authorize",
+          "/device_authorization",
+          "/login",
+          "/logout",
+          "/par",
+          "/register",
+          "/register/{client_id}",
+          "/revoke",
+          "/token"
+        ],
         "path_count": 28
       },
       "fapi2-security": {
@@ -247,7 +299,25 @@
           "/userinfo"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [],
+        "unmapped_contract_paths": [
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
+          "/authorize",
+          "/device_authorization",
+          "/login",
+          "/logout",
+          "/par",
+          "/register",
+          "/register/{client_id}",
+          "/revoke",
+          "/token"
+        ],
         "path_count": 28
       },
       "peer-claim": {
@@ -312,7 +382,25 @@
           "/userinfo"
         ],
         "missing_from_contract": [],
-        "unmapped_contract_paths": [],
+        "unmapped_contract_paths": [
+          "/account/authorized-apps",
+          "/account/authorized-apps/{client_id}",
+          "/account/consents",
+          "/account/consents/{consent_id}",
+          "/account/password/change",
+          "/account/profile",
+          "/account/sessions",
+          "/account/sessions/{session_id}",
+          "/authorize",
+          "/device_authorization",
+          "/login",
+          "/logout",
+          "/par",
+          "/register",
+          "/register/{client_id}",
+          "/revoke",
+          "/token"
+        ],
         "path_count": 28
       }
     },
@@ -2721,12 +2809,6 @@
           "docs/compliance/collected/validated-py312-test-security-negative/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md",
           "docs/compliance/collected/validated-py312-test-security-negative/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md",
           "docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md"
-        ],
-        "tigrbl_auth/rfc/__init__.py": [
-          "docs/compliance/certification_evidence_index.md"
-        ],
-        "tigrbl_auth/rfc/rfc8785.py": [
-          "docs/compliance/certification_evidence_index.md"
         ],
         "tigrbl_auth/rfc/rfc9396.py": [
           "docs/compliance/CERTIFICATION_LANES_CHECKPOINT_2026-03-26.md",

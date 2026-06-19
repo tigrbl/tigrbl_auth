@@ -263,6 +263,7 @@
       "tests/unit/test_secure_default_admin_gate.py",
       "tests/unit/test_security_deps.py",
       "tests/unit/test_security_user_lookup.py",
+      "tests/unit/test_server_router_schema_ownership.py",
       "tests/unit/test_server_runtime_operator_boundary.py",
       "tests/unit/test_session_logout_cluster_b.py",
       "tests/unit/test_ssot_dependency_maintenance_traceability.py",
