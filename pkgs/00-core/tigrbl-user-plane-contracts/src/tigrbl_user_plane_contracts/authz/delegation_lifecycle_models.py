@@ -40,7 +40,7 @@ def _normalize_values(values: Iterable[str] | None, *, default: tuple[str, ...] 
     return tuple(sorted(normalized))
 
 
-def normalize_delegation_scopes(
+def _normalize_delegation_scopes(
     *,
     tenant_ids: Iterable[str],
     actions: Iterable[str],
@@ -157,7 +157,7 @@ class DelegationGrantLifecycleEntry:
         )
 
     def scopes(self) -> tuple[AuthorityScope, ...]:
-        return normalize_delegation_scopes(
+        return _normalize_delegation_scopes(
             tenant_ids=self.tenant_ids,
             actions=self.actions,
             resources=self.resources,
@@ -185,5 +185,4 @@ __all__ = [
     "DelegationTokenLink",
     "_stable_hash",
     "_utc_now",
-    "normalize_delegation_scopes",
 ]

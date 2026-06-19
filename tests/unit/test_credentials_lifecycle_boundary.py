@@ -101,7 +101,7 @@ def test_credentials_t2_rotation_revocation_and_audit_events() -> None:
 
 
 def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
-    package_root = ROOT / "pkgs" / "tigrbl-authn-credentials" / "src" / "tigrbl_authn_credentials"
+    package_root = ROOT / "pkgs" / "40-capabilities" / "tigrbl-authn-credentials" / "src" / "tigrbl_authn_credentials"
     checked = [package_root / "__init__.py", package_root / "lifecycle.py"]
     forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_storage", "tigrbl_identity_admin"}
 

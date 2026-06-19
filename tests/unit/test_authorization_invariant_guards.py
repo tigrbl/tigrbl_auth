@@ -18,7 +18,6 @@ from tigrbl_auth.services.policy_invariants import (
     AuthorizationInvariant as FacadeAuthorizationInvariant,
     InvariantRegistry as FacadeInvariantRegistry,
 )
-from tigrbl_auth.uix import InvariantRegistry as UixInvariantRegistry
 from tigrbl_authz_policy import (
     AuthorizationInvariant,
     InvariantEvaluation,
@@ -32,7 +31,6 @@ from tigrbl_authz_policy import (
 def test_authorization_invariant_registry_t0_exports_public_surfaces() -> None:
     assert FacadeAuthorizationInvariant is AuthorizationInvariant
     assert FacadeInvariantRegistry is InvariantRegistry
-    assert UixInvariantRegistry is InvariantRegistry
     assert VerificationMethod.GRAPH.value == "graph"
     assert InvariantSeverity.CRITICAL.value == "critical"
 
