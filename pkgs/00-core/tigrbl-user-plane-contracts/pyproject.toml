@@ -21,6 +21,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-management-plane-contracts==0.1.0",
+    "tigrbl-security-trust-contracts==0.1.0",
 ]
 
 [build-system]

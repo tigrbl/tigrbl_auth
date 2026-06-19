@@ -3,7 +3,6 @@ from __future__ import annotations
 import ast
 import importlib
 import sys
-import warnings
 from pathlib import Path
 
 
@@ -152,16 +151,14 @@ def test_admin_capability_models_are_00_core_contract_reexports() -> None:
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
 
-def test_security_trust_contracts_bridge_points_to_user_plane_security() -> None:
-    sys.modules.pop("tigrbl_security_trust_contracts", None)
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        legacy = importlib.import_module("tigrbl_security_trust_contracts")
+def test_user_plane_security_reexports_security_trust_contracts() -> None:
+    sys.modules.pop("tigrbl_user_plane_contracts.security", None)
 
-    import tigrbl_user_plane_contracts as user_plane
+    security_trust = importlib.import_module("tigrbl_security_trust_contracts")
+    user_security = importlib.import_module("tigrbl_user_plane_contracts.security")
 
-    assert legacy.Artifact is user_plane.Artifact
-    assert any("tigrbl_user_plane_contracts.security" in str(item.message) for item in caught)
+    assert user_security.Artifact is security_trust.Artifact
+    assert user_security.IArtifactVerifier is security_trust.IArtifactVerifier
 
 
 def test_contract_packages_do_not_import_capability_runtime_or_storage_packages() -> None:

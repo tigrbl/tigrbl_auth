@@ -5,7 +5,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
-from tigrbl_user_plane_contracts.security import (
+from tigrbl_security_trust_contracts import (
     Artifact,
     CanonicalizeRequest,
     CapabilityMap,

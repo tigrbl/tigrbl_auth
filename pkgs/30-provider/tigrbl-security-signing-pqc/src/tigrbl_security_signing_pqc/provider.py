@@ -5,7 +5,7 @@ import hashlib
 from typing import Any, Final, Mapping
 
 from tigrbl_security_trust_domain_bases import SigningDomainBase
-from tigrbl_user_plane_contracts import (
+from tigrbl_security_trust_contracts import (
     Artifact,
     CanonicalizeRequest,
     CapabilityMap,

@@ -2529,9 +2529,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
-]
+requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-identity-resource-server"
@@ -2680,38 +2678,32 @@ version = "0.1.0"
 source = { editable = "pkgs/30-provider/tigrbl-security-signing-pqc" }
 dependencies = [
     { name = "pqcrypto" },
+    { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
-    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "pqcrypto", specifier = "==0.4.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
 name = "tigrbl-security-trust-contracts"
 version = "0.1.0"
 source = { editable = "pkgs/00-core/tigrbl-security-trust-contracts" }
-dependencies = [
-    { name = "tigrbl-user-plane-contracts" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-security-trust-domain-bases"
 version = "0.1.0"
 source = { editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" }
 dependencies = [
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-typing"
@@ -2731,10 +2723,14 @@ version = "0.1.0"
 source = { editable = "pkgs/00-core/tigrbl-user-plane-contracts" }
 dependencies = [
     { name = "tigrbl-management-plane-contracts" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [
+    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrcorn"

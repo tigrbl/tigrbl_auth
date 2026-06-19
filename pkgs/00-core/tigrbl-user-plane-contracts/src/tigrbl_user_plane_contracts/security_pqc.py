@@ -1,14 +1,7 @@
+"""Compatibility re-export for PQC security/trust contracts."""
+
 from __future__ import annotations
 
-from dataclasses import dataclass
-
-
-@dataclass(frozen=True, slots=True)
-class PQCSignatureKeyPair:
-    algorithm: str
-    public_key: bytes
-    secret_key: bytes
-    library: str = "pqcrypto"
-
+from tigrbl_security_trust_contracts import PQCSignatureKeyPair
 
 __all__ = ["PQCSignatureKeyPair"]

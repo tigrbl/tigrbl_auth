@@ -12,7 +12,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACTS = ROOT / "pkgs" / "00-core" / "tigrbl-security-trust-contracts"
-BASES = ROOT / "pkgs" / "00-core" / "tigrbl-security-trust-domain-bases"
+BASES = ROOT / "pkgs" / "05-bases" / "tigrbl-security-trust-domain-bases"
 
 
 def _absolute_import_roots(path: Path) -> set[str]:
