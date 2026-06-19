@@ -132,6 +132,26 @@ def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> Non
     assert KeyRotationAuditEvidence is contracts.KeyRotationAuditEvidence
 
 
+def test_admin_capability_models_are_00_core_contract_reexports() -> None:
+    import tigrbl_control_plane_contracts as control_contracts
+    import tigrbl_management_plane_contracts as management_contracts
+    import tigrbl_user_plane_contracts as user_contracts
+    from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
+    from tigrbl_identity_admin._control_plane import models as admin_models
+
+    assert admin_models.AdminResource is management_contracts.AdminResource
+    assert admin_models.PrincipalRecord is management_contracts.PrincipalRecord
+    assert admin_models.AdminAuditEvent is management_contracts.AdminAuditEvent
+    assert admin_models.AdminUiView is management_contracts.AdminUiView
+    assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
+    assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
+    assert advanced_models.TrustPath is control_contracts.TrustPath
+    assert advanced_models.PasswordlessCredential is user_contracts.PasswordlessCredential
+    assert advanced_models.AuthenticationChallenge is user_contracts.AuthenticationChallenge
+    assert advanced_models.WorkloadIdentity is user_contracts.WorkloadIdentity
+    assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
+
+
 def test_security_trust_contracts_bridge_points_to_user_plane_security() -> None:
     sys.modules.pop("tigrbl_security_trust_contracts", None)
     with warnings.catch_warnings(record=True) as caught:
@@ -164,6 +184,12 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
 
 def test_target_capability_packages_no_longer_own_contract_classes() -> None:
     capability_roots = [
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-identity-admin"
+        / "src"
+        / "tigrbl_identity_admin",
         ROOT
         / "pkgs"
         / "40-capabilities"

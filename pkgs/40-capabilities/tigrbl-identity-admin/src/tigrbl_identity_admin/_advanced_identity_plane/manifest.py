@@ -2,37 +2,35 @@ from __future__ import annotations
 
 from typing import Any
 
-from .models import AdvancedIdentityBoundaryFeature
 
-
-ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES: tuple[AdvancedIdentityBoundaryFeature, ...] = (
-    AdvancedIdentityBoundaryFeature("feat:f08-sso", "federation", ("FederationRegistry", "IdentityProvider", "FederatedSession"), ("issuer", "audience", "claim-normalization")),
-    AdvancedIdentityBoundaryFeature("feat:f05-passwordless-authentication", "advanced-authentication", ("AdvancedAuthenticatorRegistry", "PasswordlessCredential", "AuthenticationChallenge"), ("challenge-replay", "credential-revocation")),
-    AdvancedIdentityBoundaryFeature("feat:f06-mfa", "advanced-authentication", ("AdvancedAuthenticatorRegistry", "MfaFactor"), ("amr-validation", "step-up")),
-    AdvancedIdentityBoundaryFeature("feat:f07-webauthn", "advanced-authentication", ("AdvancedAuthenticatorRegistry", "WebAuthnCredential"), ("algorithm-allowlist", "sign-count")),
-    AdvancedIdentityBoundaryFeature("feat:f09-federation", "federation", ("FederationRegistry", "IdentityProvider"), ("provider-kind", "issuer", "audience")),
-    AdvancedIdentityBoundaryFeature("feat:f10-social-login", "federation", ("FederationRegistry", "IdentityProvider"), ("social-provider", "claim-normalization")),
-    AdvancedIdentityBoundaryFeature("feat:f11-device-identity", "nonhuman-identity", ("DeviceWorkloadIdentityRegistry", "DeviceIdentity"), ("tenant-scope", "revocation")),
-    AdvancedIdentityBoundaryFeature("feat:f12-workload-identity", "nonhuman-identity", ("DeviceWorkloadIdentityRegistry", "WorkloadIdentity"), ("trust-domain", "credential-rotation")),
-    AdvancedIdentityBoundaryFeature("feat:f15-rebac", "graph-authorization", ("RelationshipGraph", "GraphDecision"), ("bounded-depth", "tenant-scope")),
-    AdvancedIdentityBoundaryFeature("feat:f17-policy-language", "policy-language", ("PolicyRegistry", "PolicyDefinition"), ("safe-language", "context-conditions")),
-    AdvancedIdentityBoundaryFeature("feat:f18-policy-versioning", "policy-versioning", ("PolicyRegistry", "PolicyVersion"), ("promotion", "rollback", "compatibility")),
-    AdvancedIdentityBoundaryFeature("feat:f21-access-decision-api", "access-decision", ("AccessDecisionRequest", "AccessDecisionResponse", "PolicyRegistry"), ("idempotency", "explanation")),
-    AdvancedIdentityBoundaryFeature("feat:f22-graph-based-authorization", "graph-authorization", ("RelationshipGraph", "RelationshipTuple"), ("path-resolution", "deny-without-path")),
-    AdvancedIdentityBoundaryFeature("feat:f23-relationship-modeling", "relationship-modeling", ("RelationshipDefinition", "RelationshipTuple"), ("subject-type-schema", "schema-versioning")),
-    AdvancedIdentityBoundaryFeature("feat:f26-contextual-auth-time-location", "adaptive-authentication", ("AdaptiveContext", "AdaptiveDecision", "evaluate_adaptive_context"), ("time", "location", "device-posture")),
-    AdvancedIdentityBoundaryFeature("feat:f35-anomaly-detection-auth", "auth-telemetry", ("AuthAnomalyDetector", "AuthTelemetryEvent", "AnomalySignal"), ("redaction", "step-up-signal")),
-    AdvancedIdentityBoundaryFeature("feat:f46-trust-federation-graphs", "trust-graph", ("TrustFederationGraph", "TrustPath"), ("active-path", "revoked-edge")),
-    AdvancedIdentityBoundaryFeature("feat:f47-cross-cloud-identity", "cross-cloud-identity", ("TrustFederationGraph", "WorkloadIdentity"), ("cloud-mapping", "workload-trust-domain")),
+ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES: tuple[dict[str, Any], ...] = (
+    {"feature_id": "feat:f08-sso", "category": "federation", "runtime_objects": ("FederationRegistry", "IdentityProvider", "FederatedSession"), "guarded_capabilities": ("issuer", "audience", "claim-normalization")},
+    {"feature_id": "feat:f05-passwordless-authentication", "category": "advanced-authentication", "runtime_objects": ("AdvancedAuthenticatorRegistry", "PasswordlessCredential", "AuthenticationChallenge"), "guarded_capabilities": ("challenge-replay", "credential-revocation")},
+    {"feature_id": "feat:f06-mfa", "category": "advanced-authentication", "runtime_objects": ("AdvancedAuthenticatorRegistry", "MfaFactor"), "guarded_capabilities": ("amr-validation", "step-up")},
+    {"feature_id": "feat:f07-webauthn", "category": "advanced-authentication", "runtime_objects": ("AdvancedAuthenticatorRegistry", "WebAuthnCredential"), "guarded_capabilities": ("algorithm-allowlist", "sign-count")},
+    {"feature_id": "feat:f09-federation", "category": "federation", "runtime_objects": ("FederationRegistry", "IdentityProvider"), "guarded_capabilities": ("provider-kind", "issuer", "audience")},
+    {"feature_id": "feat:f10-social-login", "category": "federation", "runtime_objects": ("FederationRegistry", "IdentityProvider"), "guarded_capabilities": ("social-provider", "claim-normalization")},
+    {"feature_id": "feat:f11-device-identity", "category": "nonhuman-identity", "runtime_objects": ("DeviceWorkloadIdentityRegistry", "DeviceIdentity"), "guarded_capabilities": ("tenant-scope", "revocation")},
+    {"feature_id": "feat:f12-workload-identity", "category": "nonhuman-identity", "runtime_objects": ("DeviceWorkloadIdentityRegistry", "WorkloadIdentity"), "guarded_capabilities": ("trust-domain", "credential-rotation")},
+    {"feature_id": "feat:f15-rebac", "category": "graph-authorization", "runtime_objects": ("RelationshipGraph", "GraphDecision"), "guarded_capabilities": ("bounded-depth", "tenant-scope")},
+    {"feature_id": "feat:f17-policy-language", "category": "policy-language", "runtime_objects": ("PolicyRegistry", "PolicyDefinition"), "guarded_capabilities": ("safe-language", "context-conditions")},
+    {"feature_id": "feat:f18-policy-versioning", "category": "policy-versioning", "runtime_objects": ("PolicyRegistry", "PolicyVersion"), "guarded_capabilities": ("promotion", "rollback", "compatibility")},
+    {"feature_id": "feat:f21-access-decision-api", "category": "access-decision", "runtime_objects": ("AccessDecisionRequest", "AccessDecisionResponse", "PolicyRegistry"), "guarded_capabilities": ("idempotency", "explanation")},
+    {"feature_id": "feat:f22-graph-based-authorization", "category": "graph-authorization", "runtime_objects": ("RelationshipGraph", "RelationshipTuple"), "guarded_capabilities": ("path-resolution", "deny-without-path")},
+    {"feature_id": "feat:f23-relationship-modeling", "category": "relationship-modeling", "runtime_objects": ("RelationshipDefinition", "RelationshipTuple"), "guarded_capabilities": ("subject-type-schema", "schema-versioning")},
+    {"feature_id": "feat:f26-contextual-auth-time-location", "category": "adaptive-authentication", "runtime_objects": ("AdaptiveContext", "AdaptiveDecision", "evaluate_adaptive_context"), "guarded_capabilities": ("time", "location", "device-posture")},
+    {"feature_id": "feat:f35-anomaly-detection-auth", "category": "auth-telemetry", "runtime_objects": ("AuthAnomalyDetector", "AuthTelemetryEvent", "AnomalySignal"), "guarded_capabilities": ("redaction", "step-up-signal")},
+    {"feature_id": "feat:f46-trust-federation-graphs", "category": "trust-graph", "runtime_objects": ("TrustFederationGraph", "TrustPath"), "guarded_capabilities": ("active-path", "revoked-edge")},
+    {"feature_id": "feat:f47-cross-cloud-identity", "category": "cross-cloud-identity", "runtime_objects": ("TrustFederationGraph", "WorkloadIdentity"), "guarded_capabilities": ("cloud-mapping", "workload-trust-domain")},
 )
 
 
 def advanced_identity_graph_auth_boundary_manifest() -> dict[str, dict[str, Any]]:
     return {
-        feature.feature_id: {
-            "category": feature.category,
-            "runtime_objects": list(feature.runtime_objects),
-            "guarded_capabilities": list(feature.guarded_capabilities),
+        str(feature["feature_id"]): {
+            "category": feature["category"],
+            "runtime_objects": list(feature["runtime_objects"]),
+            "guarded_capabilities": list(feature["guarded_capabilities"]),
         }
         for feature in ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES
     }

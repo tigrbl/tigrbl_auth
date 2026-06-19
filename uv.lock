@@ -2372,12 +2372,14 @@ source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
     { name = "tigrbl-control-plane-contracts" },
     { name = "tigrbl-management-plane-contracts" },
+    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]

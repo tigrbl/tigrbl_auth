@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from .advanced_identity import *
 from .authn import *
 from .resource_server import *
 from .security import *
