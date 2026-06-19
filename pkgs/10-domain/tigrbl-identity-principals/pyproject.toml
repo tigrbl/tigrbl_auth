@@ -34,6 +34,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-release-contracts==0.1.0",
     "tigrbl-user-plane-contracts==0.1.0",
 ]
 

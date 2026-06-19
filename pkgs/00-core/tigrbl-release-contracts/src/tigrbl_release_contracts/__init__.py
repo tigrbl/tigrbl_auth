@@ -21,6 +21,7 @@ from .security_posture import (
     TenantState,
     VerifierPolicy,
 )
+from .tenant_discovery import TenantPublicDiscoveryBoundaryFeature
 
 __all__ = [
     "AlgorithmPolicy",
@@ -41,6 +42,7 @@ __all__ = [
     "ReleaseAssuranceError",
     "RuntimeQualification",
     "TenantState",
+    "TenantPublicDiscoveryBoundaryFeature",
     "VerifierPolicy",
 ]
 

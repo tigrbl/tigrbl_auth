@@ -34,7 +34,8 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "swarmauri_standard==0.10.0" in dependencies
     assert "swarmauri_tokens_jwt==0.3.0.dev31" in dependencies
     assert "swarmauri_crypto_jwe==0.3.0.dev5" in dependencies
-    assert "pqcrypto==0.4.0" in dependencies
+    assert "pqcrypto==0.4.0" not in dependencies
+    assert "tigrbl-security-signing-pqc==0.1.0" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
     assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -45,8 +46,14 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrcorn==0.3.8; python_version >= '3.11'" in extras["servers"]
 
     jose_dependencies = set(_load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"])
+    facade_dependencies = set(_load_package_pyproject("tigrbl-auth")["project"]["dependencies"])
+    pqc_provider_dependencies = set(_load_package_pyproject("tigrbl-security-signing-pqc")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
-    assert "pqcrypto==0.4.0" in jose_dependencies
+    assert "pqcrypto==0.4.0" not in jose_dependencies
+    assert "tigrbl-security-signing-pqc==0.1.0" in jose_dependencies
+    assert "pqcrypto==0.4.0" not in facade_dependencies
+    assert "tigrbl-security-signing-pqc==0.1.0" in facade_dependencies
+    assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
 
 

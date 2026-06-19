@@ -1945,7 +1945,6 @@ name = "tigrbl-auth"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/70-facade/tigrbl-auth" }
 dependencies = [
-    { name = "pqcrypto" },
     { name = "swarmauri-crypto-paramiko" },
     { name = "swarmauri-standard" },
     { name = "tigrbl-auth-protocol-oauth" },
@@ -1965,11 +1964,11 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-security-signing-pqc" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "pqcrypto", specifier = "==0.4.0" },
     { name = "swarmauri-crypto-paramiko", specifier = "==0.4.0.dev5" },
     { name = "swarmauri-standard", specifier = "==0.10.0" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
@@ -1989,6 +1988,7 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2036,7 +2036,6 @@ dependencies = [
     { name = "aiosqlite" },
     { name = "bcrypt" },
     { name = "httpx" },
-    { name = "pqcrypto" },
     { name = "pydantic", extra = ["email"] },
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
@@ -2081,6 +2080,7 @@ dependencies = [
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
     { name = "tigrbl-release-contracts" },
+    { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-user-plane-contracts" },
@@ -2144,7 +2144,6 @@ requires-dist = [
     { name = "httpx", specifier = "==0.28.1" },
     { name = "hypercorn", marker = "extra == 'hypercorn'", specifier = "==0.18.0" },
     { name = "hypercorn", marker = "extra == 'servers'", specifier = "==0.18.0" },
-    { name = "pqcrypto", specifier = "==0.4.0" },
     { name = "psycopg2-binary", marker = "extra == 'postgres'", specifier = "==2.9.11" },
     { name = "pydantic", extras = ["email"], specifier = "==2.12.5" },
     { name = "pydantic-settings", specifier = "==2.13.1" },
@@ -2198,6 +2197,7 @@ requires-dist = [
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
     { name = "tigrbl-release-contracts", editable = "pkgs/00-core/tigrbl-release-contracts" },
+    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-user-plane-contracts", editable = "pkgs/00-core/tigrbl-user-plane-contracts" },
@@ -2419,7 +2419,6 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/10-domain/tigrbl-identity-jose" }
 dependencies = [
     { name = "bcrypt" },
-    { name = "pqcrypto" },
     { name = "swarmauri-core" },
     { name = "swarmauri-crypto-jwe" },
     { name = "swarmauri-keyprovider-file" },
@@ -2427,17 +2426,18 @@ dependencies = [
     { name = "swarmauri-signing-ed25519" },
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
+    { name = "tigrbl-control-plane-contracts" },
     { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "bcrypt", specifier = "==5.0.0" },
-    { name = "pqcrypto", specifier = "==0.4.0" },
     { name = "swarmauri-core", specifier = "==0.10.0" },
     { name = "swarmauri-crypto-jwe", specifier = "==0.3.0.dev5" },
     { name = "swarmauri-keyprovider-file", specifier = "==0.2.0" },
@@ -2445,10 +2445,12 @@ requires-dist = [
     { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
+    { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
     { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
@@ -2505,11 +2507,15 @@ name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-domain/tigrbl-identity-principals" }
 dependencies = [
+    { name = "tigrbl-release-contracts" },
     { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [
+    { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-identity-resource-server"
@@ -2646,6 +2652,23 @@ dependencies = [
     { name = "tigrbl-typing" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/72/91/5093bd8a318c4e7bcfa901587d93d6078cbee7b81b7419618e91fb3c741b/tigrbl_runtime-0.4.0.tar.gz", hash = "sha256:e965674db2f5d69fd409bf0dabf141b1e777d3553627e7ddf8e6cae602cde673", size = 124357 }
+
+[[package]]
+name = "tigrbl-security-signing-pqc"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-signing-pqc" }
+dependencies = [
+    { name = "pqcrypto" },
+    { name = "tigrbl-security-trust-domain-bases" },
+    { name = "tigrbl-user-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "pqcrypto", specifier = "==0.4.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-security-trust-contracts"

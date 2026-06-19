@@ -17,12 +17,12 @@ from __future__ import annotations
 import base64
 import json
 import os
-from dataclasses import dataclass
 from typing import Any, Final, Mapping
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_user_plane_contracts.security_jwe import JWEPolicy
 
 RFC7516_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7516"
 SUPPORTED_JWE_ALG_VALUES: Final[tuple[str, ...]] = ("dir",)
@@ -32,22 +32,6 @@ _DEFAULT_KEY_SIZE_BYTES: Final[int] = 32
 
 class JWEPolicyError(ValueError):
     """Raised when a JWE request or token violates the active JWE profile."""
-
-
-@dataclass(frozen=True, slots=True)
-class JWEPolicy:
-    alg: str = "dir"
-    enc: str = "A256GCM"
-    key_type: str = "oct"
-    key_size_bytes: int = _DEFAULT_KEY_SIZE_BYTES
-
-    def as_header(self, *, typ: str | None = None, cty: str | None = None) -> dict[str, str]:
-        header = {"alg": self.alg, "enc": self.enc}
-        if typ:
-            header["typ"] = typ
-        if cty:
-            header["cty"] = cty
-        return header
 
 
 ACTIVE_JWE_POLICY: Final[JWEPolicy] = JWEPolicy()

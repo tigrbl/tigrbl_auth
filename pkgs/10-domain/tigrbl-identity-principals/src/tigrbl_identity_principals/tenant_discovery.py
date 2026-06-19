@@ -1,48 +1,20 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping
+
+from tigrbl_release_contracts.tenant_discovery import TenantPublicDiscoveryBoundaryFeature
+from tigrbl_user_plane_contracts.trust_domains import (
+    RealmTrustDomainAuthority,
+    TenantTrustDomainAuthority,
+)
 
 TENANT_OPENID_CONFIGURATION_PATH = "/tenants/{tenant_slug}/.well-known/openid-configuration"
 TENANT_JWKS_PATH = "/tenants/{tenant_slug}/.well-known/jwks.json"
 REALM_OPENID_CONFIGURATION_PATH = "/realms/{realm_slug}/.well-known/openid-configuration"
 REALM_JWKS_PATH = "/realms/{realm_slug}/.well-known/jwks.json"
-
-
-@dataclass(frozen=True, slots=True)
-class TenantTrustDomainAuthority:
-    tenant_slug: str
-    issuer: str
-    jwks_uri: str
-    jwks_path: str
-    subject_namespace: str
-    protected_resource_identifier: str
-    signing_scope: str
-    accepted_issuers: tuple[str, ...]
-    verification_scope: tuple[str, ...]
-
-
-@dataclass(frozen=True, slots=True)
-class RealmTrustDomainAuthority:
-    realm_slug: str
-    issuer: str
-    jwks_uri: str
-    jwks_path: str
-    subject_namespace: str
-    protected_resource_identifier: str
-    signing_scope: str
-    accepted_issuers: tuple[str, ...]
-    verification_scope: tuple[str, ...]
-
-
-@dataclass(frozen=True, slots=True)
-class TenantPublicDiscoveryBoundaryFeature:
-    feature_id: str
-    category: str
-    runtime_objects: tuple[str, ...]
-    guarded_capabilities: tuple[str, ...]
 
 
 TENANT_PUBLIC_DISCOVERY_FEATURES: tuple[TenantPublicDiscoveryBoundaryFeature, ...] = (

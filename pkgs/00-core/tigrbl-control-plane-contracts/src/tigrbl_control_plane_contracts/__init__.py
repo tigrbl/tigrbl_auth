@@ -4,3 +4,4 @@ from .admin import *
 from .admin_resources import *
 from .correctness import *
 from .governance import *
+from .key_rotation import *

@@ -3,11 +3,16 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
-from dataclasses import dataclass, replace
+from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
-from tigrbl_user_plane_contracts.security_jose import JoseKeyStatus, JoseKeyUse
+from tigrbl_user_plane_contracts.security_jose import (
+    JoseKey,
+    JoseKeyStatus,
+    JoseKeyUse,
+    KeyRotationContract,
+)
 
 
 RFC_TARGETS: Mapping[str, str] = {
@@ -57,46 +62,6 @@ def validate_public_jwk(jwk: Mapping[str, Any]) -> None:
     if jwk.get("kty") not in {"OKP", "RSA", "EC"}:
         raise ValueError("public JWKS publication requires OKP, RSA, or EC keys")
     _public_jwk_material(jwk)
-
-
-@dataclass(frozen=True, slots=True)
-class JoseKey:
-    kid: str
-    tenant_id: str
-    jwk: Mapping[str, Any]
-    algorithm: str
-    key_use: JoseKeyUse = JoseKeyUse.SIGN
-    status: JoseKeyStatus = JoseKeyStatus.NEXT
-    not_before: str = ""
-    not_after: str | None = None
-    created_at: str = ""
-    rotated_from: str | None = None
-
-    def public_jwk(self) -> dict[str, Any]:
-        validate_public_jwk(self.jwk)
-        public = dict(self.jwk)
-        public.pop("d", None)
-        public.pop("p", None)
-        public.pop("q", None)
-        public.pop("dp", None)
-        public.pop("dq", None)
-        public.pop("qi", None)
-        public.pop("k", None)
-        public["kid"] = self.kid
-        public.setdefault("alg", self.algorithm)
-        public.setdefault("use", self.key_use.value)
-        return public
-
-
-@dataclass(frozen=True, slots=True)
-class KeyRotationContract:
-    tenant_id: str
-    current_kid: str | None
-    next_kid: str
-    retired_kids: tuple[str, ...]
-    published_kids: tuple[str, ...]
-    reason: str
-    rotated_at: str
 
 
 class JoseKeySet:

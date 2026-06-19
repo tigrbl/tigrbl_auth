@@ -9,12 +9,19 @@ ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
 PYTHON_PACKAGE_LAYERS = {
-    "foundation": {
+    "core": {
         "tigrbl-control-plane-contracts",
         "tigrbl-release-contracts",
         "tigrbl-security-trust-contracts",
-        "tigrbl-security-trust-domain-bases",
         "tigrbl-user-plane-contracts",
+    },
+    "bases": {
+        "tigrbl-security-trust-domain-bases",
+    },
+    "providers": {
+        "tigrbl-security-signing-pqc",
+    },
+    "foundation": {
         "tigrbl-auth-protocol-oauth",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-auth-protocol-rp",

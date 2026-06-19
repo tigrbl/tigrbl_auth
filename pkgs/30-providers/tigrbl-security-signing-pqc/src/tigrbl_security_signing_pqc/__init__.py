@@ -1,8 +1,6 @@
-"""Compatibility surface for the PQC signing provider."""
-
 from __future__ import annotations
 
-from tigrbl_security_signing_pqc import (
+from .provider import (
     ML_DSA_65_ALG,
     PQC_JWK_KTY,
     PQC_LIBRARY_NAME,
