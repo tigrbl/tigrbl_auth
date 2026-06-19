@@ -5,20 +5,9 @@ import hashlib
 import json
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
-from enum import Enum
 from typing import Any, Iterable, Mapping
 
-
-class JoseKeyStatus(str, Enum):
-    ACTIVE = "active"
-    NEXT = "next"
-    RETIRED = "retired"
-    DISABLED = "disabled"
-
-
-class JoseKeyUse(str, Enum):
-    SIGN = "sig"
-    ENCRYPT = "enc"
+from tigrbl_user_plane_contracts.security_jose import JoseKeyStatus, JoseKeyUse
 
 
 RFC_TARGETS: Mapping[str, str] = {

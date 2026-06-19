@@ -10,8 +10,11 @@ PKGS = ROOT / "pkgs"
 
 PYTHON_PACKAGE_LAYERS = {
     "foundation": {
+        "tigrbl-control-plane-contracts",
+        "tigrbl-release-contracts",
         "tigrbl-security-trust-contracts",
         "tigrbl-security-trust-domain-bases",
+        "tigrbl-user-plane-contracts",
         "tigrbl-auth-protocol-oauth",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-auth-protocol-rp",

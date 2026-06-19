@@ -12,7 +12,6 @@ from __future__ import annotations
 from urllib.parse import parse_qs
 
 from typing import Any, Dict, List, Optional, Union
-from enum import Enum
 import warnings
 from tigrbl_identity_server.framework import (
     TigrblApp,
@@ -26,6 +25,7 @@ from tigrbl_identity_runtime import settings as runtime_cfg
 from tigrbl_identity_jose.jwtoken import JWTCoder
 from tigrbl_identity_jose.standards.rfc7519 import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.rfc9449_dpop import verify_proof
+from tigrbl_user_plane_contracts.protocols import TokenType
 
 RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
 
@@ -52,18 +52,6 @@ def _header_value(value: object) -> str | None:
         stripped = value.strip()
         return stripped or None
     return None
-
-
-# Standard Token Type URIs per RFC 8693 Section 3
-class TokenType(Enum):
-    """Standard token type URIs for token exchange."""
-
-    ACCESS_TOKEN = "urn:ietf:params:oauth:token-type:access_token"
-    REFRESH_TOKEN = "urn:ietf:params:oauth:token-type:refresh_token"
-    ID_TOKEN = "urn:ietf:params:oauth:token-type:id_token"
-    SAML1 = "urn:ietf:params:oauth:token-type:saml1"
-    SAML2 = "urn:ietf:params:oauth:token-type:saml2"
-    JWT = "urn:ietf:params:oauth:token-type:jwt"
 
 
 class TokenExchangeRequest:

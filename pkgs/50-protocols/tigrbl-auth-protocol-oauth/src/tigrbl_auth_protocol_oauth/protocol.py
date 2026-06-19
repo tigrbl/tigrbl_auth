@@ -5,16 +5,9 @@ import hmac
 import secrets
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
-from enum import Enum
 from typing import Iterable, Mapping, Protocol
 
-
-class OAuthGrantStatus(str, Enum):
-    PENDING = "pending"
-    APPROVED = "approved"
-    DENIED = "denied"
-    EXPIRED = "expired"
-    CONSUMED = "consumed"
+from tigrbl_user_plane_contracts.protocols import OAuthGrantStatus
 
 
 class OAuthError(RuntimeError):

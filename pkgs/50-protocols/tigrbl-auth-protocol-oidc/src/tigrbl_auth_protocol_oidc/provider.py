@@ -5,14 +5,9 @@ import re
 import secrets
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
-from enum import Enum
 from typing import Iterable, Mapping
 
-
-class OidcSessionStatus(str, Enum):
-    ACTIVE = "active"
-    LOGGED_OUT = "logged_out"
-    EXPIRED = "expired"
+from tigrbl_user_plane_contracts.protocols import OidcSessionStatus
 
 
 class OidcProviderError(RuntimeError):

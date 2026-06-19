@@ -3,34 +3,11 @@ from __future__ import annotations
 """First-class principal model objects for identity package consumers."""
 
 from dataclasses import dataclass, field, replace
-from enum import Enum
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
-
-class PrincipalKind(str, Enum):
-    USER = "user"
-    ADMIN = "admin"
-    SERVICE = "service"
-    APP = "app"
-    MACHINE = "machine"
-    WORKLOAD = "workload"
-    DEVICE = "device"
-
-
-class PrincipalStatus(str, Enum):
-    ACTIVE = "active"
-    DISABLED = "disabled"
-    LOCKED = "locked"
-    DELETED = "deleted"
-
-
-class AuthorityRole(str, Enum):
-    """Deprecated compatibility enum; prefer tigrbl_authz_policy.AuthorityRole."""
-
-    ADMIN = "admin"
-    OWNER = "owner"
-    SUPERUSER = "superuser"
+from tigrbl_user_plane_contracts.authz.authority_roles import AuthorityRole
+from tigrbl_user_plane_contracts.principals import PrincipalKind, PrincipalStatus
 
 
 NONHUMAN_PRINCIPAL_KINDS = frozenset(

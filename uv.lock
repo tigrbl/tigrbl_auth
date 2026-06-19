@@ -1997,20 +1997,36 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" }
 dependencies = [
     { name = "swarmauri-signing-dpop" },
+    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "swarmauri-signing-dpop", specifier = "==0.1.1" }]
+requires-dist = [
+    { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
+    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
+dependencies = [
+    { name = "tigrbl-user-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-rp"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" }
+dependencies = [
+    { name = "tigrbl-user-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-auth-workspace"
@@ -2343,6 +2359,12 @@ wheels = [
 name = "tigrbl-identity-admin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
+dependencies = [
+    { name = "tigrbl-control-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-identity-author"
@@ -2409,6 +2431,7 @@ dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
@@ -2426,6 +2449,7 @@ requires-dist = [
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2480,6 +2504,12 @@ requires-dist = [{ name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" }]
 name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-domain/tigrbl-identity-principals" }
+dependencies = [
+    { name = "tigrbl-user-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-identity-resource-server"

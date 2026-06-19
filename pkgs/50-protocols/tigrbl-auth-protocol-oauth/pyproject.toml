@@ -36,6 +36,7 @@ classifiers = [
 ]
 dependencies = [
     "swarmauri_signing_dpop==0.1.1",
+    "tigrbl-user-plane-contracts==0.1.0",
 ]
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

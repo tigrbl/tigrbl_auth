@@ -32,6 +32,9 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "tigrbl-control-plane-contracts==0.1.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
