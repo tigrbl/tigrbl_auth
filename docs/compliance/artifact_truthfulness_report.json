@@ -1,11 +1,11 @@
 {
   "passed": false,
   "failures": [
-    "baseline: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /login, /token",
-    "production: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /login, /logout, /register, /register/{client_id}, /revoke, /token",
-    "hardening: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token",
-    "fapi2-security: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token",
-    "peer-claim: OpenAPI contract publishes paths without decorated implementation: /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /login, /logout, /par, /register, /register/{client_id}, /revoke, /token"
+    "baseline: OpenAPI contract publishes paths without decorated implementation: /.well-known/jwks.json, /.well-known/oauth-authorization-server, /.well-known/openid-configuration, /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /login, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration, /tenants/{tenant_slug}/.well-known/jwks.json, /tenants/{tenant_slug}/.well-known/openid-configuration, /token",
+    "production: OpenAPI contract publishes paths without decorated implementation: /.well-known/jwks.json, /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource, /.well-known/openid-configuration, /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /introspect, /login, /logout, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration, /register, /register/{client_id}, /revoke, /tenants/{tenant_slug}/.well-known/jwks.json, /tenants/{tenant_slug}/.well-known/openid-configuration, /token, /userinfo",
+    "hardening: OpenAPI contract publishes paths without decorated implementation: /.well-known/jwks.json, /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource, /.well-known/openid-configuration, /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /introspect, /login, /logout, /par, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration, /register, /register/{client_id}, /revoke, /tenants/{tenant_slug}/.well-known/jwks.json, /tenants/{tenant_slug}/.well-known/openid-configuration, /token, /token/exchange, /userinfo",
+    "fapi2-security: OpenAPI contract publishes paths without decorated implementation: /.well-known/jwks.json, /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource, /.well-known/openid-configuration, /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /introspect, /login, /logout, /par, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration, /register, /register/{client_id}, /revoke, /tenants/{tenant_slug}/.well-known/jwks.json, /tenants/{tenant_slug}/.well-known/openid-configuration, /token, /token/exchange, /userinfo",
+    "peer-claim: OpenAPI contract publishes paths without decorated implementation: /.well-known/jwks.json, /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource, /.well-known/openid-configuration, /account/authorized-apps, /account/authorized-apps/{client_id}, /account/consents, /account/consents/{consent_id}, /account/password/change, /account/profile, /account/sessions, /account/sessions/{session_id}, /authorize, /device_authorization, /introspect, /login, /logout, /par, /realms/{realm_slug}/.well-known/jwks.json, /realms/{realm_slug}/.well-known/openid-configuration, /register, /register/{client_id}, /revoke, /tenants/{tenant_slug}/.well-known/jwks.json, /tenants/{tenant_slug}/.well-known/openid-configuration, /token, /token/exchange, /userinfo"
   ],
   "warnings": [],
   "summary": {
@@ -65,6 +65,9 @@
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [
+          "/.well-known/jwks.json",
+          "/.well-known/oauth-authorization-server",
+          "/.well-known/openid-configuration",
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -75,6 +78,10 @@
           "/account/sessions/{session_id}",
           "/authorize",
           "/login",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
           "/token"
         ],
         "path_count": 18
@@ -136,6 +143,10 @@
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [
+          "/.well-known/jwks.json",
+          "/.well-known/oauth-authorization-server",
+          "/.well-known/oauth-protected-resource",
+          "/.well-known/openid-configuration",
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -145,12 +156,18 @@
           "/account/sessions",
           "/account/sessions/{session_id}",
           "/authorize",
+          "/introspect",
           "/login",
           "/logout",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
-          "/token"
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
+          "/token",
+          "/userinfo"
         ],
         "path_count": 25
       },
@@ -217,6 +234,10 @@
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [
+          "/.well-known/jwks.json",
+          "/.well-known/oauth-authorization-server",
+          "/.well-known/oauth-protected-resource",
+          "/.well-known/openid-configuration",
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -227,13 +248,20 @@
           "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
+          "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
-          "/token"
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
+          "/token",
+          "/token/exchange",
+          "/userinfo"
         ],
         "path_count": 28
       },
@@ -300,6 +328,10 @@
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [
+          "/.well-known/jwks.json",
+          "/.well-known/oauth-authorization-server",
+          "/.well-known/oauth-protected-resource",
+          "/.well-known/openid-configuration",
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -310,13 +342,20 @@
           "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
+          "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
-          "/token"
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
+          "/token",
+          "/token/exchange",
+          "/userinfo"
         ],
         "path_count": 28
       },
@@ -383,6 +422,10 @@
         ],
         "missing_from_contract": [],
         "unmapped_contract_paths": [
+          "/.well-known/jwks.json",
+          "/.well-known/oauth-authorization-server",
+          "/.well-known/oauth-protected-resource",
+          "/.well-known/openid-configuration",
           "/account/authorized-apps",
           "/account/authorized-apps/{client_id}",
           "/account/consents",
@@ -393,13 +436,20 @@
           "/account/sessions/{session_id}",
           "/authorize",
           "/device_authorization",
+          "/introspect",
           "/login",
           "/logout",
           "/par",
+          "/realms/{realm_slug}/.well-known/jwks.json",
+          "/realms/{realm_slug}/.well-known/openid-configuration",
           "/register",
           "/register/{client_id}",
           "/revoke",
-          "/token"
+          "/tenants/{tenant_slug}/.well-known/jwks.json",
+          "/tenants/{tenant_slug}/.well-known/openid-configuration",
+          "/token",
+          "/token/exchange",
+          "/userinfo"
         ],
         "path_count": 28
       }

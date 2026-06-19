@@ -28,9 +28,9 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert len(packages) == 34
     assert "tigrbl-auth-workspace" not in packages
     assert packages["tigrbl-security-trust-contracts"].path.as_posix() == "pkgs/00-core/tigrbl-security-trust-contracts"
-    assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/00-core/tigrbl-security-trust-domain-bases"
-    assert packages["tigrbl-auth"].path.as_posix() == "pkgs/60-facade/tigrbl-auth"
-    assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/50-runtime/tigrbl-identity-author"
+    assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
+    assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
+    assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
@@ -145,7 +145,7 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
         {
             "name": "tigrbl-auth-protocol-oauth",
             "version": "0.4.0.dev2",
-            "path": "pkgs/40-protocols/tigrbl-auth-protocol-oauth",
+            "path": "pkgs/50-protocols/tigrbl-auth-protocol-oauth",
             "import_root": "tigrbl_auth_protocol_oauth",
             "tag": "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "python_version": "3.12",

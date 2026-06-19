@@ -116,9 +116,9 @@ That criterion is **not yet certifiably satisfied** in this checkpoint because:
 - `tigrbl_auth/framework.py`
 - `tigrbl_auth/api/app.py`
 - `tigrbl_auth/cli/install_substrate.py`
-- `constraints/base.txt`
+- `pyproject.toml`
+- `uv.lock`
 - `constraints/runner-uvicorn.txt`
-- `constraints/dependency-lock.json`
 - `tests/unit/test_published_dependency_model.py`
 - `tests/unit/test_app_factory_materialization.py`
 - generated current-state/compliance reports under `docs/compliance/`

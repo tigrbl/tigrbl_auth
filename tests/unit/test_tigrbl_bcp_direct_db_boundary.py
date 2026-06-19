@@ -10,9 +10,9 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 
 MIGRATED_RELEASE_PATHS = [
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_code.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client_registration.py",
@@ -24,12 +24,12 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/user.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/realm.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/tenant.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/user_lookup.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/user_lookup.py",
 ]
 
 FORBIDDEN_FRAMEWORK_EXPORTS = {
@@ -52,32 +52,32 @@ FORBIDDEN_DB_METHODS = {
 }
 
 SEMANTIC_FACADE_PATHS = [
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc8693.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc9700.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/__init__.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/__init__.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc9700/__init__.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/control_plane.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/_control_plane/__init__.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/_governance_extension/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/deployment.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/surfaces.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_deployment/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc8693.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/dpop.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/rfc9700.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc8693/__init__.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/__init__.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_rfc9700/__init__.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/control_plane.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/_control_plane/__init__.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/_governance_extension/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/deployment.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/surfaces.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_deployment/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/persistence.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/__init__.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_operator_store/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/framework.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_framework/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_surfaces/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/operator_service.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/admin_console.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/_operator_service/__init__.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/_admin_console/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/framework.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_framework/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_surfaces/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/operator_service.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/admin_console.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/_operator_service/__init__.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/uix/_admin_console/__init__.py",
 ]
 
 PERSISTENCE_HELPER_PATHS = [
@@ -87,24 +87,24 @@ PERSISTENCE_HELPER_PATHS = [
 ]
 
 SYNC_COMPAT_PATHS = [
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
     ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
     ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sync_compat.py",
 ]
 
 ASYNC_REQUEST_TOKEN_PATHS = [
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
-    ROOT / "pkgs/40-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
-    ROOT / "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
 ]
 
 AUTHN_TOKEN_SIGNER_PATHS = [
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
-    ROOT / "pkgs/30-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/coder.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/coder.py",
     ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
 ]
 

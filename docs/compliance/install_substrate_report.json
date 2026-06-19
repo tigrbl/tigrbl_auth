@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260618T213144Z",
+  "generated_at": "20260619T061719Z",
   "passed": true,
   "summary": {
     "static_manifest_passed": true,
@@ -27,13 +27,14 @@
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 23,
+    "first_party_workspace_source_count": 26,
     "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 46,
-    "base_exact_pinned_dependency_count": 46,
-    "dependency_lock_manifest_present": true,
-    "dependency_lock_install_profile_count": 14,
+    "base_dependency_count": 49,
+    "base_exact_pinned_dependency_count": 49,
+    "dependency_source": "pyproject.toml",
+    "native_uv_lock_present": true,
+    "install_profile_count": 14,
     "install_profiles_workflow_present": true,
     "release_gates_workflow_present": true,
     "install_profiles_runtime_env_present_count": 14,
@@ -71,7 +72,7 @@
     {
       "version": "3.12",
       "available": true,
-      "path": "<repo>/.tmp/uv-rest-only-py312/Scripts/python.exe",
+      "path": "<repo>/.venv/Scripts/python.exe",
       "source": "current-interpreter"
     }
   ],
@@ -100,6 +101,8 @@
       "bcrypt==5.0.0",
       "httpx==0.28.1",
       "aiosqlite==0.22.1",
+      "tigrbl-security-trust-contracts==0.1.0",
+      "tigrbl-security-trust-domain-bases==0.1.0",
       "tigrbl-auth==0.4.0.dev2",
       "tigrbl-auth-protocol-oauth==0.4.0.dev2",
       "tigrbl-auth-protocol-oidc==0.4.0.dev2",
@@ -109,6 +112,7 @@
       "tigrbl-authz-resource-server==0.4.0.dev2",
       "tigrbl-identity-cli==0.4.0.dev2",
       "tigrbl-identity-admin==0.4.0.dev2",
+      "tigrbl-identity-author==0.4.0.dev2",
       "tigrbl-identity-contracts==0.4.0.dev2",
       "tigrbl-identity-core==0.4.0.dev2",
       "tigrbl-identity-credentials==0.4.0.dev2",
@@ -160,35 +164,36 @@
     },
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 23,
+    "first_party_workspace_source_count": 26,
     "forbidden_workspace_source_count": 0,
     "forbidden_workspace_sources": {},
     "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 46,
-    "dependency_count": 46
+    "exact_pinned_dependency_count": 49,
+    "dependency_count": 49
   },
   "constraints_consistency": {
     "passed": true,
     "mismatches": [],
     "illegal_constraint_extras": {
-      "base": [],
       "test": [],
       "uvicorn": [],
       "hypercorn": [],
       "tigrcorn": []
     },
-    "base_count": 46,
     "test_count": 8,
     "uvicorn_count": 1,
     "hypercorn_count": 1,
     "tigrcorn_count": 1
   },
-  "dependency_lock_consistency": {
+  "uv_lock_consistency": {
     "passed": true,
     "failures": [],
     "python_support_blockers": [],
     "missing_profiles": [],
-    "install_profile_count": 14
+    "install_profile_count": 14,
+    "dependencies_source": "pyproject.toml",
+    "lockfile": "uv.lock",
+    "uv_lock_present": true
   },
   "tox": {
     "envlist": [
@@ -349,9 +354,7 @@
   },
   "profiles": {
     "base": {
-      "constraints": [
-        "constraints/base.txt"
-      ],
+      "constraints": [],
       "extras": [],
       "expected_modules": [
         "tigrbl",
@@ -380,7 +383,6 @@
     },
     "sqlite-uvicorn": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-uvicorn.txt"
       ],
       "extras": [
@@ -415,7 +417,6 @@
     },
     "postgres-hypercorn": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-hypercorn.txt"
       ],
       "extras": [
@@ -451,7 +452,6 @@
     },
     "tigrcorn": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-tigrcorn.txt"
       ],
       "extras": [
@@ -485,7 +485,6 @@
     },
     "devtest": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt"
       ],
@@ -528,7 +527,6 @@
     },
     "release-gates": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -577,7 +575,6 @@
     },
     "test-core": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt"
       ],
       "extras": [
@@ -616,7 +613,6 @@
     },
     "test-integration": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -665,7 +661,6 @@
     },
     "test-conformance": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -714,7 +709,6 @@
     },
     "test-security-negative": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -763,7 +757,6 @@
     },
     "test-interop": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -809,7 +802,6 @@
     },
     "test-extension": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -858,7 +850,6 @@
     },
     "migration-portability": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -907,7 +898,6 @@
     },
     "final-certification": {
       "constraints": [
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
@@ -962,7 +952,7 @@
     "python_tag": "py312",
     "implementation": "CPython",
     "implementation_version": "3.12.5",
-    "executable": ".tmp/uv-rest-only-py312/Scripts/python.exe",
+    "executable": ".venv/Scripts/python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
     "platform_release": "10",
@@ -984,7 +974,7 @@
       "python_tag": "py312",
       "implementation": "CPython",
       "implementation_version": "3.12.5",
-      "executable": ".tmp/uv-rest-only-py312/Scripts/python.exe",
+      "executable": ".venv/Scripts/python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
       "platform_release": "10",

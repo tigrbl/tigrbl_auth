@@ -16,7 +16,7 @@ from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
 from tigrbl_identity_jose.key_management import hash_pw
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "70-apis" / "tigrbl-auth-api-my-account" / "src"
+PKG_SRC = ROOT / "pkgs" / "80-apis" / "tigrbl-auth-api-my-account" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 

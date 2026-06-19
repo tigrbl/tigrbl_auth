@@ -1,15 +1,18 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from types import SimpleNamespace
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from scripts.collect_validated_artifact_downloads import collect_validated_artifact_downloads
 from tigrbl_auth.cli.certification_evidence import runtime_identity
 from tigrbl_auth.cli.reports import load_validated_execution_status
 from tigrbl_auth.cli.runtime import write_runtime_profile_report
-
-ROOT = Path(__file__).resolve().parents[2]
 
 
 def _write_json(path: Path, payload: dict) -> None:
@@ -20,10 +23,10 @@ def _write_json(path: Path, payload: dict) -> None:
 def _copy_support_files(dst_root: Path) -> None:
     for rel in [
         "pyproject.toml",
+        "uv.lock",
         "tox.ini",
         ".github/workflows/ci-install-profiles.yml",
         ".github/workflows/ci-release-gates.yml",
-        "constraints/base.txt",
         "constraints/test.txt",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",

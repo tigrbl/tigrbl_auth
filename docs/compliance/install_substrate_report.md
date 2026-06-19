@@ -1,6 +1,6 @@
 # Install Substrate Report
 
-- Generated at: `20260618T213144Z`
+- Generated at: `20260619T061719Z`
 - Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
@@ -58,7 +58,7 @@
 
 - `3.10` → available=`True` path=`py -3.10`
 - `3.11` → available=`False` path=`None`
-- `3.12` → available=`True` path=`<repo>/.tmp/uv-rest-only-py312/Scripts/python.exe`
+- `3.12` → available=`True` path=`<repo>/.venv/Scripts/python.exe`
 
 ## Workflow coverage
 

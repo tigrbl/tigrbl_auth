@@ -386,12 +386,12 @@ def _install_package_test_harness(python: Path) -> None:
             "-m",
             "pip",
             "install",
-            "-c",
-            str(ROOT / "constraints" / "base.txt"),
             "-r",
             str(ROOT / "constraints" / "test.txt"),
-            "httpx",
+            "-e",
+            ".[test]",
         ],
+        cwd=ROOT,
         check=True,
     )
 

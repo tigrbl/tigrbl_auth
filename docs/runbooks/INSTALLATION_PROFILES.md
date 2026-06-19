@@ -12,30 +12,30 @@ All clean-room certification installs are now modeled with the same profile voca
 
 ### Base
 
-- install: `pip install -c constraints/base.txt .`
+- install: `pip install .`
 - purpose: prove fresh-checkout install, `import tigrbl_auth`, and `python scripts/generate_state_reports.py`
 - note: the base dependency set now includes `aiosqlite==0.22.1` so the default local runtime/report smoke path works in a clean room
 
 ### SQLite + Uvicorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-uvicorn.txt '.[sqlite,uvicorn]'`
+- install: `pip install -c constraints/runner-uvicorn.txt '.[sqlite,uvicorn]'`
 - tox: `tox -e py311-sqlite-uvicorn`
 
 ### PostgreSQL + Hypercorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-hypercorn.txt '.[postgres,hypercorn]'`
+- install: `pip install -c constraints/runner-hypercorn.txt '.[postgres,hypercorn]'`
 - tox: `tox -e py311-postgres-hypercorn`
 - requires: reachable PostgreSQL DSN, defaulted in CI to `postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci`
 
 ### Tigrcorn
 
-- install: `pip install -c constraints/base.txt -c constraints/runner-tigrcorn.txt '.[tigrcorn]'`
+- install: `pip install -c constraints/runner-tigrcorn.txt '.[tigrcorn]'`
 - tox: `tox -e py311-tigrcorn` or `tox -e py312-tigrcorn`
 - support note: Tigrcorn is only included in the clean-room matrix on Python `3.11`, `3.12`, `3.13`, and `3.14`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
 
 ### Dev/test
 
-- install: `pip install -c constraints/base.txt -c constraints/test.txt -c constraints/runner-uvicorn.txt '.[test,sqlite,uvicorn]'`
+- install: `pip install -c constraints/test.txt -c constraints/runner-uvicorn.txt '.[test,sqlite,uvicorn]'`
 - tox: `tox -e py311-devtest`
 - smoke guarantee: `pytest --help` is executed so plugin loading failures break the profile
 
@@ -60,4 +60,4 @@ Every certification tox template now runs `python -I -m pip check` and `python s
 
 ## Certification lane install profiles
 
-The certification lane tox environments are now explicitly modeled as install profiles in `constraints/dependency-lock.json`: `test-core`, `test-integration`, `test-conformance`, `test-security-negative`, `test-interop`, `test-extension`, `migration-portability`, and `final-certification`.
+The certification lane tox environments are explicitly modeled as install profiles in the install-substrate profile registry, with dependency declarations maintained in `pyproject.toml` and resolver state preserved in `uv.lock`: `test-core`, `test-integration`, `test-conformance`, `test-security-negative`, `test-interop`, `test-extension`, `migration-portability`, and `final-certification`.

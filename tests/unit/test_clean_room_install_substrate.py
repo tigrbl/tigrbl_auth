@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
@@ -70,9 +69,9 @@ def test_generate_state_reports_tracks_install_substrate_checkpoint() -> None:
     assert summary["install_substrate_expected_supported_python_count"] == 3
 
 
-def test_dependency_lock_manifest_covers_certification_lane_profiles() -> None:
-    payload = json.loads((ROOT / "constraints" / "dependency-lock.json").read_text(encoding="utf-8"))
-    profiles = set((payload.get("install_profiles") or {}).keys())
+def test_install_substrate_profiles_cover_certification_lane_profiles() -> None:
+    payload = build_install_substrate_report(ROOT, execute_import_probes=False)
+    profiles = set(payload["profiles"])
     assert {
         "test-core",
         "test-integration",
@@ -83,6 +82,7 @@ def test_dependency_lock_manifest_covers_certification_lane_profiles() -> None:
         "migration-portability",
         "final-certification",
     } <= profiles
+    assert payload["profiles"]["base"]["constraints"] == []
 
 
 def test_detect_supported_pythons_counts_current_certification_interpreter(monkeypatch) -> None:

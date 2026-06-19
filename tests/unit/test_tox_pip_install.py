@@ -16,22 +16,22 @@ def test_tox_pip_install_rewrites_first_party_pins_to_local_paths() -> None:
         "tigrbl-auth-protocol-oauth": LocalProject(
             name="tigrbl-auth-protocol-oauth",
             version="0.4.0.dev2",
-            path=Path("pkgs/40-protocols/tigrbl-auth-protocol-oauth"),
+            path=Path("pkgs/50-protocols/tigrbl-auth-protocol-oauth"),
         )
     }
 
     assert rewrite_install_args(
         [
             "-c",
-            "constraints/base.txt",
+            "constraints/test.txt",
             "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "httpx==0.28.1",
         ],
         projects,
     ) == [
         "-c",
-        "constraints/base.txt",
-        str(Path("pkgs/40-protocols/tigrbl-auth-protocol-oauth")),
+        "constraints/test.txt",
+        str(Path("pkgs/50-protocols/tigrbl-auth-protocol-oauth")),
         "httpx==0.28.1",
     ]
 
@@ -41,7 +41,7 @@ def test_tox_pip_install_rejects_stale_first_party_pin() -> None:
         "tigrbl-auth-protocol-oauth": LocalProject(
             name="tigrbl-auth-protocol-oauth",
             version="0.4.0.dev2",
-            path=Path("pkgs/40-protocols/tigrbl-auth-protocol-oauth"),
+            path=Path("pkgs/50-protocols/tigrbl-auth-protocol-oauth"),
         )
     }
 

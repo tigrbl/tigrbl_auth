@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
-    for relpath in ("constraints/base.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt", "constraints/test.txt"):
+    for relpath in ("constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt", "constraints/test.txt"):
         text = (ROOT / relpath).read_text(encoding="utf-8")
         assert "[asyncio]" not in text
         assert "[email]" not in text
@@ -20,11 +20,12 @@ def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
 
 def test_framework_uses_published_tigrbl_api_surface_names() -> None:
     facade_text = (
-        ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
+        ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
     ).read_text(encoding="utf-8")
     crud_text = (
         ROOT
         / "pkgs"
+        / "60-runtime"
         / "tigrbl-identity-server"
         / "src"
         / "tigrbl_identity_server"
@@ -34,6 +35,7 @@ def test_framework_uses_published_tigrbl_api_surface_names() -> None:
     router_text = (
         ROOT
         / "pkgs"
+        / "60-runtime"
         / "tigrbl-identity-server"
         / "src"
         / "tigrbl_identity_server"
@@ -62,9 +64,7 @@ def test_introspection_module_uses_runtime_router_when_dependencies_are_installe
     import importlib
 
     module = importlib.reload(importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection"))
-    routes = list(getattr(module.api, "routes", []))
 
-    assert type(module.api).__module__ == "tigrbl_identity_server._framework.router_compat"
-    assert routes
-    assert any((getattr(route, "path", None) or getattr(route, "path_template", None)) == "/introspect" for route in routes)
-    assert all(hasattr(route, "name") for route in routes)
+    assert not hasattr(module, "api")
+    assert module.introspect_token.__module__ == "tigrbl_identity_storage.tables._oauth_introspection"
+    assert module.include_introspection_endpoint.__module__ == "tigrbl_identity_storage.tables._oauth_introspection"

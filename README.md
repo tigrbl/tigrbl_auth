@@ -94,23 +94,23 @@ Use these boundaries:
 ### Base install
 
 ```bash
-pip install -c constraints/base.txt .
+pip install .
 ```
 
 ### Storage extras
 
 ```bash
-pip install -c constraints/base.txt '.[postgres]'
-pip install -c constraints/base.txt '.[sqlite]'
+pip install '.[postgres]'
+pip install '.[sqlite]'
 ```
 
 ### Runner extras
 
 ```bash
-pip install -c constraints/base.txt -c constraints/runner-uvicorn.txt '.[uvicorn]'
-pip install -c constraints/base.txt -c constraints/runner-hypercorn.txt '.[hypercorn]'
-pip install -c constraints/base.txt -c constraints/runner-tigrcorn.txt '.[tigrcorn]'
-pip install -c constraints/base.txt -c constraints/runner-uvicorn.txt -c constraints/runner-hypercorn.txt -c constraints/runner-tigrcorn.txt '.[servers]'
+pip install -c constraints/runner-uvicorn.txt '.[uvicorn]'
+pip install -c constraints/runner-hypercorn.txt '.[hypercorn]'
+pip install -c constraints/runner-tigrcorn.txt '.[tigrcorn]'
+pip install -c constraints/runner-uvicorn.txt -c constraints/runner-hypercorn.txt -c constraints/runner-tigrcorn.txt '.[servers]'
 ```
 
 The `tigrcorn` extra is pinned to a published Tigrcorn runner package for Python `3.11` and `3.12`. Final certification is still blocked until preserved clean-room execution evidence exists for the full supported runtime/test/migration matrix and the Tier 4 external peer bundles are complete.
@@ -161,10 +161,10 @@ plugin.install(app)
 - OAuth 2.1 alignment is tracked as a profile, not as a formal RFC claim.
 - `keys` is the canonical certified command family; `key` is no longer part of the certified operator surface.
 - public "independent" wording remains disallowed until preserved Tier 4 external peer bundles exist and promote the retained boundary.
-- The authoritative executable CLI surface is `pkgs/50-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
+- The authoritative executable CLI surface is `pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
 - A current checkpoint gap review remains published at `docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md`.
 - Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the authoritative active document is the SSOT, and the generated reports and top-level current-state docs are its current projections.
-- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `constraints/*.txt`, and `constraints/dependency-lock.json`.
+- Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `uv.lock`, and the remaining test/runner constraint overlays.
 
 ## Known current blockers
 

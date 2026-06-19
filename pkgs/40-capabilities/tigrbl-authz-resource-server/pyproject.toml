@@ -1,0 +1,53 @@
+[project]
+name = "tigrbl-authz-resource-server"
+version = "0.4.0.dev2"
+description = "Authorization resource-server token validation and protected API enforcement implementation package for the Tigrbl auth package suite."
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = "Apache-2.0"
+keywords = [
+    "tigrbl",
+    "authz",
+    "resource-server",
+    "protected-api",
+    "access-token",
+    "oauth",
+    "scopes",
+    "audience",
+    "introspection",
+    "iam",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-authz-policy==0.4.0.dev2",
+    "tigrbl-identity-runtime==0.4.0.dev2",
+]
+[project.urls]
+Homepage = "https://github.com/tigrbl/tigrbl_auth"
+Repository = "https://github.com/tigrbl/tigrbl_auth"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-authz-resource-server"
+SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
+PyPI = "https://pypi.org/project/tigrbl-authz-resource-server/"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{ include = "tigrbl_authz_resource_server", from = "src" }]

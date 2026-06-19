@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 AUTHOR_ROOT = (
     ROOT
     / "pkgs"
-    / "50-runtime"
+    / "60-runtime"
     / "tigrbl-identity-author"
     / "src"
     / "tigrbl_identity_author"
@@ -58,7 +58,7 @@ def test_release_signing_consumers_do_not_import_jose_owner() -> None:
     source_paths = [
         ROOT
         / "pkgs"
-        / "50-runtime"
+        / "60-runtime"
         / "tigrbl-identity-cli"
         / "src"
         / "tigrbl_identity_cli"

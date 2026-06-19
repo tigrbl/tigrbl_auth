@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260618T213153Z",
+  "generated_at": "20260619T061726Z",
   "deployment_profile": "baseline",
   "report_mode": "validated-runs",
   "validated_artifact_source": "dist/validated-runs/collected-artifact-downloads.json",
@@ -219,11 +219,9 @@
       ],
       "aggregate_runner_extra_present": true,
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-hypercorn.txt"
       ],
       "constraints_present": [
-        "constraints/base.txt",
         "constraints/runner-hypercorn.txt"
       ],
       "tox_envs": [
@@ -406,11 +404,9 @@
       ],
       "aggregate_runner_extra_present": true,
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-tigrcorn.txt"
       ],
       "constraints_present": [
-        "constraints/base.txt",
         "constraints/runner-tigrcorn.txt"
       ],
       "tox_envs": [
@@ -621,11 +617,9 @@
       ],
       "aggregate_runner_extra_present": true,
       "constraints": [
-        "constraints/base.txt",
         "constraints/runner-uvicorn.txt"
       ],
       "constraints_present": [
-        "constraints/base.txt",
         "constraints/runner-uvicorn.txt"
       ],
       "tox_envs": [

@@ -144,12 +144,12 @@ def test_facade_t2_fail_closed_unknowns_and_unavailable_targets(monkeypatch: pyt
 @pytest.mark.unit
 def test_facade_t2_import_boundary_does_not_eagerly_import_split_runtime() -> None:
     files = [
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/__init__.py"),
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/app.py"),
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/gateway.py"),
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/plugin.py"),
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/cli/__init__.py"),
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/compat.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/__init__.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/app.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/gateway.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/plugin.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/cli/__init__.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/compat.py"),
     ]
     forbidden_imports = {
         "tigrbl_identity_server",

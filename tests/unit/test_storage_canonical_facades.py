@@ -102,7 +102,7 @@ def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
 
 
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
-    table_dir = Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/tables")
+    table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         class_defs = [node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)]
@@ -111,7 +111,7 @@ def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> No
 
 def test_tigrbl_auth_migration_modules_do_not_define_duplicate_runtime_logic() -> None:
     migration_files = [
-        Path("pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/migrations/__init__.py"),
+        Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/migrations/__init__.py"),
     ]
     for path in migration_files:
         tree = ast.parse(path.read_text(encoding="utf-8"))

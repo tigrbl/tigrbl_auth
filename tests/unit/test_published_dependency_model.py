@@ -103,11 +103,10 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
 
     required = {
         "docker/Dockerfile",
-        "constraints/base.txt",
+        "uv.lock",
         "constraints/runner-uvicorn.txt",
         "constraints/runner-hypercorn.txt",
         "constraints/runner-tigrcorn.txt",
-        "constraints/dependency-lock.json",
         "docs/runbooks/INSTALLATION_PROFILES.md",
         "docs/runbooks/CLEAN_CHECKOUT_REPRO.md",
         ".github/workflows/ci-install-profiles.yml",
@@ -118,7 +117,8 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
 
     dockerfile = (ROOT / "docker" / "Dockerfile").read_text(encoding="utf-8")
     assert "./pkgs/" not in dockerfile
-    assert "constraints/base.txt" in dockerfile
+    assert "constraints/base.txt" not in dockerfile
+    assert "constraints/runner-uvicorn.txt" in dockerfile
 
 
 def test_docker_assets_are_not_published_from_repository_root():
@@ -187,7 +187,8 @@ def test_state_report_tracks_dependency_model_checkpoint():
     assert summary["workspace_sources_declared"] is True
     assert summary["first_party_workspace_source_count"] > 0
     assert summary["forbidden_workspace_source_count"] == 0
-    assert summary["dependency_lock_manifest_present"] is True
+    assert summary["dependency_source"] == "pyproject.toml"
+    assert summary["native_uv_lock_present"] is True
     assert summary["install_profile_workflow_present"] is True
     assert summary["tigrcorn_extra_placeholder"] is False
     assert summary["tigrcorn_pin_committed"] is True

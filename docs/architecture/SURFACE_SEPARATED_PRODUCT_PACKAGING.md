@@ -6,12 +6,12 @@ This slice packages Tigrbl Auth as separate API front doors and separate UIX app
 
 | Package | Python entrypoint | Product surface | Primary consumers | Surface boundary |
 | --- | --- | --- | --- | --- |
-| `pkgs/70-apis/tigrbl-auth-api-public` | `tigrbl_auth_api_public:app` | `public-api` | `apps/public-uix`, white-label login clients | Public OAuth/OIDC, login/logout, registration, discovery, JWKS; no `/rpc` or admin resources |
-| `pkgs/70-apis/tigrbl-auth-api-platform-admin` | `tigrbl_auth_api_platform_admin:app` | `platform-admin-api` | `apps/platform-admin-uix` | Tenant lifecycle, platform authority, platform audit; no public login/register routes |
-| `pkgs/70-apis/tigrbl-auth-api-tenant-admin` | `tigrbl_auth_api_tenant_admin:app` | `tenant-admin-api` | `apps/tenant-admin-uix` | Tenant-scoped users, clients, consents, JWKS, policy; no platform tenant lifecycle |
-| `pkgs/70-apis/tigrbl-auth-api-developer` | `tigrbl_auth_api_developer:app` | `developer-api` | `apps/developer-uix` | Client registration and metadata; no tenant lifecycle or service identity admin |
-| `pkgs/70-apis/tigrbl-auth-api-service-admin` | `tigrbl_auth_api_service_admin:app` | `service-admin-api` | `apps/service-admin-uix` | Services, service keys, API keys, token inspection, validation metadata; no human login/consent pages |
-| `pkgs/70-apis/tigrbl-auth-api-resource-validation` | `tigrbl_auth_api_resource_validation:app` | `resource-validation-api` | Resource servers and gateways | JWKS, tenant JWKS, introspection, discovery, protected-resource metadata only |
+| `pkgs/80-apis/tigrbl-auth-api-public` | `tigrbl_auth_api_public:app` | `public-api` | `apps/public-uix`, white-label login clients | Public OAuth/OIDC, login/logout, registration, discovery, JWKS; no `/rpc` or admin resources |
+| `pkgs/80-apis/tigrbl-auth-api-platform-admin` | `tigrbl_auth_api_platform_admin:app` | `platform-admin-api` | `apps/platform-admin-uix` | Tenant lifecycle, platform authority, platform audit; no public login/register routes |
+| `pkgs/80-apis/tigrbl-auth-api-tenant-admin` | `tigrbl_auth_api_tenant_admin:app` | `tenant-admin-api` | `apps/tenant-admin-uix` | Tenant-scoped users, clients, consents, JWKS, policy; no platform tenant lifecycle |
+| `pkgs/80-apis/tigrbl-auth-api-developer` | `tigrbl_auth_api_developer:app` | `developer-api` | `apps/developer-uix` | Client registration and metadata; no tenant lifecycle or service identity admin |
+| `pkgs/80-apis/tigrbl-auth-api-service-admin` | `tigrbl_auth_api_service_admin:app` | `service-admin-api` | `apps/service-admin-uix` | Services, service keys, API keys, token inspection, validation metadata; no human login/consent pages |
+| `pkgs/80-apis/tigrbl-auth-api-resource-validation` | `tigrbl_auth_api_resource_validation:app` | `resource-validation-api` | Resource servers and gateways | JWKS, tenant JWKS, introspection, discovery, protected-resource metadata only |
 
 ## UIX Apps
 

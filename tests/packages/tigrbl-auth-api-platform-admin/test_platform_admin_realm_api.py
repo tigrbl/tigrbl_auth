@@ -13,7 +13,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES
 
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "70-apis" / "tigrbl-auth-api-platform-admin" / "src"
+PKG_SRC = ROOT / "pkgs" / "80-apis" / "tigrbl-auth-api-platform-admin" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 

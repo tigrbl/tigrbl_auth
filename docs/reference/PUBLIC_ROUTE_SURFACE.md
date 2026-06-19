@@ -6,7 +6,7 @@ This checkpoint completes the missing canonical public auth routes required by
 public-route checkpoint for the authoritative release path.
 
 The public route plane is now owned by explicit route modules under
-`pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/`, with
+`pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/`, with
 protocol operation logic in the split OAuth/OIDC packages, table-backed schema
 ownership in `pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/`,
 and contract publication through the OpenAPI generation pipeline.
@@ -15,17 +15,17 @@ and contract publication through the OpenAPI generation pipeline.
 
 | Route | Profiles | Router | Operation | Primary schema(s) | Persistence / owner targets |
 |---|---|---|---|---|---|
-| `/login` | baseline, production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/login.py` | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/ops/login.py` | `CredsIn`, `TokenPair` | `AuthSession`, `TokenRecord` |
-| `/authorize` | baseline, production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/authorize.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/authorize.py` | query surface | `AuthCode`, `AuthSession`, `Consent` |
-| `/token` | baseline, production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/token.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token.py` | `TokenPair`, grant forms | `TokenRecord`, `AuthCode`, `DeviceCode` |
+| `/login` | baseline, production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/login.py` | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/ops/login.py` | `CredsIn`, `TokenPair` | `AuthSession`, `TokenRecord` |
+| `/authorize` | baseline, production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/authorize.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/authorize.py` | query surface | `AuthCode`, `AuthSession`, `Consent` |
+| `/token` | baseline, production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/token.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/token.py` | `TokenPair`, grant forms | `TokenRecord`, `AuthCode`, `DeviceCode` |
 | `/userinfo` | production, hardening | standards include | OIDC owner surface | OIDC userinfo schemas | token/introspection backing |
-| `/register` | production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/register.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_runtime.py` | `DynamicClientRegistrationIn`, `DynamicClientRegistrationOut` | `Client`, `ClientRegistration`, `AuditEvent` |
-| `/register/{client_id}` | production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/register.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_runtime.py` | `DynamicClientRegistrationManagementIn`, `DynamicClientRegistrationOut`, delete status payload | `Client`, `ClientRegistration`, `AuditEvent` |
-| `/revoke` | production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/revoke.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/revoke.py` | `RevocationOut` | `RevokedToken`, `TokenRecord`, `AuditEvent` |
-| `/logout` | production, hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/logout.py` | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/ops/logout.py` | `LogoutIn`, `LogoutOut` | `AuthSession`, `LogoutState`, `AuditEvent` |
+| `/register` | production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/register.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_runtime.py` | `DynamicClientRegistrationIn`, `DynamicClientRegistrationOut` | `Client`, `ClientRegistration`, `AuditEvent` |
+| `/register/{client_id}` | production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/register.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/registration_runtime.py` | `DynamicClientRegistrationManagementIn`, `DynamicClientRegistrationOut`, delete status payload | `Client`, `ClientRegistration`, `AuditEvent` |
+| `/revoke` | production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/revoke.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/revoke.py` | `RevocationOut` | `RevokedToken`, `TokenRecord`, `AuditEvent` |
+| `/logout` | production, hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/logout.py` | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/ops/logout.py` | `LogoutIn`, `LogoutOut` | `AuthSession`, `LogoutState`, `AuditEvent` |
 | `/introspect` | production, hardening | standards include | RFC 7662 owner surface | `IntrospectOut` | `TokenRecord`, `RevokedToken` |
-| `/device_authorization` | hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/device_authorization.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/device_authorization.py` | `DeviceAuthorizationIn`, `DeviceAuthorizationOut` | `DeviceCode`, `AuditEvent` |
-| `/par` | hardening | `pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/par.py` | `pkgs/40-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/par.py` | `PushedAuthorizationRequestIn`, `PushedAuthorizationResponse` | `PushedAuthorizationRequest`, `AuditEvent` |
+| `/device_authorization` | hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/device_authorization.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/device_authorization.py` | `DeviceAuthorizationIn`, `DeviceAuthorizationOut` | `DeviceCode`, `AuditEvent` |
+| `/par` | hardening | `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/par.py` | `pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/ops/par.py` | `PushedAuthorizationRequestIn`, `PushedAuthorizationResponse` | `PushedAuthorizationRequest`, `AuditEvent` |
 | `/token/exchange` | hardening | standards include | RFC 8693 owner surface | form surface | token service / token lifecycle |
 | discovery + JWKS | baseline, production, hardening | standards includes | OIDC / RFC 8414 / RFC 9728 owner surfaces | discovery docs | deployment-aware metadata |
 
@@ -116,8 +116,8 @@ This still does not make the package fully certifiable, but it makes the browser
 
 The route inventory above is now driven by the split-package deployment and
 surface registries in
-`pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/` and mounted through
-`pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api/surfaces.py`.
+`pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/` and mounted through
+`pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/api/surfaces.py`.
 
 That registry is the authoritative source for:
 
