@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from tigrbl_control_plane_contracts.governance import *
+from tigrbl_management_plane_contracts.governance import *
 
 
 def _utc_now() -> datetime:

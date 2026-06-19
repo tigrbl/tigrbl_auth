@@ -45,14 +45,16 @@ def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None
     assert contracts.Artifact(kind="token", format="jwt").kind == "token"
 
 
-def test_control_plane_contracts_own_admin_and_governance_surfaces() -> None:
-    import tigrbl_control_plane_contracts as contracts
+def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
+    import tigrbl_control_plane_contracts as control_contracts
+    import tigrbl_management_plane_contracts as contracts
     from tigrbl_authz_policy._control_plane.models import Role
     from tigrbl_authz_policy._governance_extension.models import SDKPackage
 
-    assert Role is contracts.Role
+    assert Role is control_contracts.Role
     assert SDKPackage is contracts.SDKPackage
-    assert contracts.Role(name="admin", permissions=("tenant.read",)).name == "admin"
+    assert control_contracts.Role(name="admin", permissions=("tenant.read",)).name == "admin"
+    assert contracts.AdminResourceKind.PRINCIPAL.value == "principal"
 
 
 def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
@@ -99,11 +101,12 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
 
 def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> None:
     import tigrbl_control_plane_contracts as contracts
+    import tigrbl_management_plane_contracts as management_contracts
     from tigrbl_authz_policy._control_plane import models as admin_models
     from tigrbl_authz_policy._governance_extension import models as governance_models
 
     assert admin_models.Role is contracts.Role
-    assert governance_models.SDKPackage is contracts.SDKPackage
+    assert governance_models.SDKPackage is management_contracts.SDKPackage
     assert admin_models.admin_policy_boundary_integrity()["passed"] is True
     assert governance_models.provisioning_governance_ecosystem_boundary_integrity()["passed"] is True
     assert "feat:f13-rbac" in admin_models.admin_policy_boundary_manifest()
@@ -118,6 +121,15 @@ def test_release_contracts_own_release_posture_surfaces() -> None:
     from tigrbl_authz_policy._release_posture.models import TransportPosture
 
     assert TransportPosture is contracts.TransportPosture
+
+
+def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> None:
+    import tigrbl_management_plane_contracts as contracts
+    from tigrbl_authz_policy import ResidencyZone
+    from tigrbl_identity_jose import KeyRotationAuditEvidence
+
+    assert ResidencyZone is contracts.ResidencyZone
+    assert KeyRotationAuditEvidence is contracts.KeyRotationAuditEvidence
 
 
 def test_security_trust_contracts_bridge_points_to_user_plane_security() -> None:
@@ -142,7 +154,11 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
         "tigrbl_identity_storage",
     }
 
-    for package in ("tigrbl_user_plane_contracts", "tigrbl_control_plane_contracts"):
+    for package in (
+        "tigrbl_user_plane_contracts",
+        "tigrbl_control_plane_contracts",
+        "tigrbl_management_plane_contracts",
+    ):
         assert not (_imports_for(package) & forbidden), package
 
 

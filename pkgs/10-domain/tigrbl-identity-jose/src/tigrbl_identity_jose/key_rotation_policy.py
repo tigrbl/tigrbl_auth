@@ -6,9 +6,9 @@ from typing import Callable, Iterable, Mapping
 
 from tigrbl_control_plane_contracts.key_rotation import (
     EffectiveKeyRotationPolicy,
-    KeyRotationAuditEvidence,
     KeyRotationPolicyVersion,
 )
+from tigrbl_management_plane_contracts.evidence import KeyRotationAuditEvidence
 
 def _utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()

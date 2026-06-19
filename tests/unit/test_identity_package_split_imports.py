@@ -27,6 +27,7 @@ DEPRECATED_DIST_NAMES = {
 PACKAGE_ROOTS = [
     "tigrbl_security_trust_contracts",
     "tigrbl_security_trust_domain_bases",
+    "tigrbl_management_plane_contracts",
     "tigrbl_auth_protocol_oauth",
     "tigrbl_auth_protocol_oidc",
     "tigrbl_auth_protocol_rp",
@@ -56,6 +57,7 @@ PACKAGE_ROOTS = [
 DIST_TO_IMPORT_ROOT = {
     "tigrbl-security-trust-contracts": "tigrbl_security_trust_contracts",
     "tigrbl-security-trust-domain-bases": "tigrbl_security_trust_domain_bases",
+    "tigrbl-management-plane-contracts": "tigrbl_management_plane_contracts",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
@@ -133,8 +135,8 @@ def test_split_package_metadata_declares_independent_import_roots() -> None:
         ]
 
 
-def test_email_contract_packages_declare_email_validator_dependency() -> None:
-    for dist_name in ("tigrbl-identity-contracts", "tigrbl-identity-server"):
+def test_email_schema_packages_declare_email_validator_dependency() -> None:
+    for dist_name in ("tigrbl-identity-server",):
         metadata = tomllib.loads((_package_path(dist_name) / "pyproject.toml").read_text(encoding="utf-8"))
         dependencies = set(metadata["project"].get("dependencies", []))
 

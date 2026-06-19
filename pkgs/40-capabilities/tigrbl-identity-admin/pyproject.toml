@@ -34,6 +34,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-control-plane-contracts==0.1.0",
+    "tigrbl-management-plane-contracts==0.1.0",
 ]
 
 [project.urls]

@@ -40,6 +40,7 @@ dependencies = [
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
     "tigrbl-control-plane-contracts==0.1.0",
+    "tigrbl-management-plane-contracts==0.1.0",
     "tigrbl-release-contracts==0.1.0",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-trust-domain-bases==0.1.0",
@@ -161,6 +162,7 @@ package = false
 
 [tool.uv.sources]
 tigrbl-control-plane-contracts = { path = "pkgs/00-core/tigrbl-control-plane-contracts", editable = true }
+tigrbl-management-plane-contracts = { path = "pkgs/00-core/tigrbl-management-plane-contracts", editable = true }
 tigrbl-release-contracts = { path = "pkgs/00-core/tigrbl-release-contracts", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/00-core/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }

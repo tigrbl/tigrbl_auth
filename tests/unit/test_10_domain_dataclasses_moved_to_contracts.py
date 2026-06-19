@@ -26,6 +26,7 @@ def _dataclass_defs(path: Path) -> set[str]:
 
 def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     import tigrbl_control_plane_contracts as control_contracts
+    import tigrbl_management_plane_contracts as management_contracts
     import tigrbl_release_contracts as release_contracts
     import tigrbl_user_plane_contracts as user_contracts
     from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
@@ -36,7 +37,7 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     assert boundary.KeyRotationContract is user_contracts.KeyRotationContract
     assert key_rotation_policy.KeyRotationPolicyVersion is control_contracts.KeyRotationPolicyVersion
     assert key_rotation_policy.EffectiveKeyRotationPolicy is control_contracts.EffectiveKeyRotationPolicy
-    assert key_rotation_policy.KeyRotationAuditEvidence is control_contracts.KeyRotationAuditEvidence
+    assert key_rotation_policy.KeyRotationAuditEvidence is management_contracts.KeyRotationAuditEvidence
     assert pqc.PQCSignatureKeyPair is user_contracts.PQCSignatureKeyPair
     assert rfc7516.JWEPolicy is user_contracts.JWEPolicy
     assert models.Realm is user_contracts.Realm

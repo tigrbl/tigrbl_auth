@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
 from tigrbl_control_plane_contracts.admin import *
+from tigrbl_management_plane_contracts.service_identity import *
 
 
 def _utc_now() -> str:

@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
-from tigrbl_control_plane_contracts.admin_resources import (
+from tigrbl_management_plane_contracts.admin_resources import (
     AdminResourceKind,
     AdminResourceStatus,
     AdminUiState,

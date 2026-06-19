@@ -35,6 +35,7 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-control-plane-contracts==0.1.0",
+    "tigrbl-management-plane-contracts==0.1.0",
     "tigrbl-release-contracts==0.1.0",
     "tigrbl-user-plane-contracts==0.1.0",
 ]

@@ -10,4 +10,3 @@ from .replay import *
 from .correctness import *
 from .authority_roles import *
 from .delegation_lifecycle_models import *
-from .residency import *

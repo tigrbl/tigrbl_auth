@@ -34,7 +34,7 @@ def _enum_class_names(path: Path) -> set[str]:
 
 
 def test_reusable_enums_resolve_from_00_core_contracts() -> None:
-    from tigrbl_control_plane_contracts import (
+    from tigrbl_management_plane_contracts import (
         AdminResourceKind,
         AdminResourceStatus,
         AdminUiState,

@@ -1,28 +1,13 @@
 from __future__ import annotations
 
-from enum import Enum
+import warnings
 
+warnings.warn(
+    "tigrbl_control_plane_contracts.admin_resources is deprecated; "
+    "use tigrbl_management_plane_contracts.admin_resources",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
-class AdminResourceKind(str, Enum):
-    PRINCIPAL = "principal"
-    CREDENTIAL = "credential"
-    APP = "app"
-    SERVICE_IDENTITY = "service_identity"
-    RESOURCE_SERVER = "resource_server"
-    POLICY = "policy"
-
-
-class AdminResourceStatus(str, Enum):
-    ACTIVE = "active"
-    DISABLED = "disabled"
-    DELETED = "deleted"
-
-
-class AdminUiState(str, Enum):
-    LOADING = "loading"
-    EMPTY = "empty"
-    READY = "ready"
-    ERROR = "error"
-
-
-__all__ = ["AdminResourceKind", "AdminResourceStatus", "AdminUiState"]
+from tigrbl_management_plane_contracts.admin_resources import *  # noqa: F401,F403
+from tigrbl_management_plane_contracts.admin_resources import __all__ as __all__

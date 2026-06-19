@@ -2079,6 +2079,7 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-management-plane-contracts" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts" },
@@ -2196,6 +2197,7 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
+    { name = "tigrbl-management-plane-contracts", editable = "pkgs/00-core/tigrbl-management-plane-contracts" },
     { name = "tigrbl-release-contracts", editable = "pkgs/00-core/tigrbl-release-contracts" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
@@ -2249,6 +2251,7 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
     { name = "tigrbl-control-plane-contracts" },
+    { name = "tigrbl-management-plane-contracts" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-user-plane-contracts" },
 ]
@@ -2256,6 +2259,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
@@ -2338,6 +2342,12 @@ wheels = [
 name = "tigrbl-control-plane-contracts"
 version = "0.1.0"
 source = { editable = "pkgs/00-core/tigrbl-control-plane-contracts" }
+dependencies = [
+    { name = "tigrbl-management-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-core"
@@ -2361,10 +2371,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
     { name = "tigrbl-control-plane-contracts" },
+    { name = "tigrbl-management-plane-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [
+    { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-identity-author"
@@ -2431,6 +2445,7 @@ dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-management-plane-contracts" },
     { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-user-plane-contracts" },
 ]
@@ -2450,6 +2465,7 @@ requires-dist = [
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
     { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
@@ -2591,6 +2607,11 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-management-plane-contracts"
+version = "0.1.0"
+source = { editable = "pkgs/00-core/tigrbl-management-plane-contracts" }
+
+[[package]]
 name = "tigrbl-ops-olap"
 version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2708,6 +2729,12 @@ wheels = [
 name = "tigrbl-user-plane-contracts"
 version = "0.1.0"
 source = { editable = "pkgs/00-core/tigrbl-user-plane-contracts" }
+dependencies = [
+    { name = "tigrbl-management-plane-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrcorn"
