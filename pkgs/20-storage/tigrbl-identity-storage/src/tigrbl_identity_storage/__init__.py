@@ -8,22 +8,6 @@ from .migration_contract import (
     build_migration_contract,
     collect_migration_revisions,
 )
-from .repository import (
-    InMemoryRepository,
-    RepositoryPort,
-    STORAGE_MATRIX,
-    SqlAlchemyRepositoryAdapter,
-    StorageConflictError,
-    StorageDialect,
-    StorageError,
-    StorageMatrixEntry,
-    StorageNotFoundError,
-    StorageRecord,
-    StorageStatus,
-    assert_repository_port,
-    dialect_for_dsn,
-    matrix_entry_for_dialect,
-)
 
 
 def ensure_identity_storage_importable() -> None:
@@ -34,22 +18,8 @@ def ensure_identity_storage_importable() -> None:
 
 __all__ = [
     "ensure_identity_storage_importable",
-    "InMemoryRepository",
     "MigrationContract",
     "MigrationRevision",
-    "RepositoryPort",
-    "STORAGE_MATRIX",
-    "SqlAlchemyRepositoryAdapter",
-    "StorageConflictError",
-    "StorageDialect",
-    "StorageError",
-    "StorageMatrixEntry",
-    "StorageNotFoundError",
-    "StorageRecord",
-    "StorageStatus",
-    "assert_repository_port",
     "build_migration_contract",
     "collect_migration_revisions",
-    "dialect_for_dsn",
-    "matrix_entry_for_dialect",
 ]
