@@ -4,7 +4,7 @@ import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PROVIDERS = ROOT / "pkgs" / "30-providers"
+PROVIDERS = ROOT / "pkgs" / "30-provider"
 
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:

@@ -2199,7 +2199,7 @@ requires-dist = [
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
     { name = "tigrbl-management-plane-contracts", editable = "pkgs/00-core/tigrbl-management-plane-contracts" },
     { name = "tigrbl-release-contracts", editable = "pkgs/00-core/tigrbl-release-contracts" },
-    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
+    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-provider/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-user-plane-contracts", editable = "pkgs/00-core/tigrbl-user-plane-contracts" },
@@ -2677,7 +2677,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/72/91/5093bd8a318c4e7bc
 [[package]]
 name = "tigrbl-security-signing-pqc"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-signing-pqc" }
+source = { editable = "pkgs/30-provider/tigrbl-security-signing-pqc" }
 dependencies = [
     { name = "pqcrypto" },
     { name = "tigrbl-security-trust-domain-bases" },
