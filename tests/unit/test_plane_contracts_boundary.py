@@ -107,12 +107,9 @@ def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> N
     assert admin_models.Role is contracts.Role
     assert governance_models.SDKPackage is management_contracts.SDKPackage
     assert admin_models.admin_policy_boundary_integrity()["passed"] is True
-    assert governance_models.provisioning_governance_ecosystem_boundary_integrity()["passed"] is True
     assert "feat:f13-rbac" in admin_models.admin_policy_boundary_manifest()
-    assert (
-        "feat:f39-sdk-ecosystem"
-        in governance_models.provisioning_governance_ecosystem_boundary_manifest()
-    )
+    assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_manifest")
+    assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_integrity")
 
 
 def test_release_contracts_own_release_posture_surfaces() -> None:

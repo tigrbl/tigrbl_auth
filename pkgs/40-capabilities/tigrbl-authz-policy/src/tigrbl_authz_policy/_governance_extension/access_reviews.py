@@ -170,9 +170,6 @@ __all__ = [
     "EntitlementAssignment",
     "EntitlementDefinition",
     "EntitlementManager",
-    "GovernanceExtensionBoundaryFeature",
-    "PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES",
-    "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
     "PluginDescriptor",
     "PluginLifecycleEvent",
     "PluginRuntimeRegistry",
@@ -185,8 +182,4 @@ __all__ = [
     "ScimUser",
     "build_provisioning_governance_ecosystem_delivery_summary",
     "build_phase5_delivery_summary",
-    "provisioning_governance_ecosystem_boundary_integrity",
-    "provisioning_governance_ecosystem_boundary_manifest",
-    "phase5_governance_extension_boundary_integrity",
-    "phase5_governance_extension_boundary_manifest",
 ]

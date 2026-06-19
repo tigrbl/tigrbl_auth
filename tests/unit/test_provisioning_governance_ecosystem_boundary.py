@@ -12,18 +12,7 @@ from tigrbl_authz_policy._governance_extension import (
     ScimPatchOperation,
     ScimProvisioningPlane,
     build_provisioning_governance_ecosystem_delivery_summary,
-    provisioning_governance_ecosystem_boundary_integrity,
-    provisioning_governance_ecosystem_boundary_manifest,
 )
-
-
-BOUNDARY_FEATURE_IDS = {
-    "feat:f39-sdk-ecosystem",
-    "feat:f40-extensibility-plugins",
-    "feat:f33-scim-provisioning",
-    "feat:f43-access-review-workflows",
-    "feat:f44-entitlement-management",
-}
 
 
 def _sdk_catalog() -> SDKEcosystemCatalog:
@@ -106,16 +95,22 @@ def _entitlements() -> tuple[EntitlementManager, str]:
     return manager, assignment.assignment_id
 
 
-def test_provisioning_governance_ecosystem_boundary_t0_inventory_tracks_all_features():
-    manifest = provisioning_governance_ecosystem_boundary_manifest()
-    integrity = provisioning_governance_ecosystem_boundary_integrity()
+def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
+    import tigrbl_authz_policy._governance_extension as governance_extension
+    import tigrbl_management_plane_contracts as management_contracts
 
-    assert set(manifest) == BOUNDARY_FEATURE_IDS
-    assert integrity["passed"] is True
-    assert integrity["feature_count"] == 5
-    assert manifest["feat:f39-sdk-ecosystem"]["category"] == "sdk-ecosystem"
-    assert "plugins" in integrity["categories"]
-    assert "entitlement-management" in integrity["categories"]
+    removed_inline_surfaces = {
+        "GovernanceExtensionBoundaryFeature",
+        "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
+        "PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES",
+        "phase5_governance_extension_boundary_integrity",
+        "phase5_governance_extension_boundary_manifest",
+        "provisioning_governance_ecosystem_boundary_integrity",
+        "provisioning_governance_ecosystem_boundary_manifest",
+    }
+
+    assert not (removed_inline_surfaces & set(dir(governance_extension)))
+    assert not (removed_inline_surfaces & set(dir(management_contracts)))
 
 
 def test_provisioning_governance_ecosystem_boundary_t1_composes_sdk_plugins_scim_entitlements_and_reviews():

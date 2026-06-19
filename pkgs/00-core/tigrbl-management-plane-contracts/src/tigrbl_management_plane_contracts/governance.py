@@ -135,60 +135,12 @@ class AccessReviewCampaign:
     status: str = "open"
 
 
-@dataclass(frozen=True, slots=True)
-class GovernanceExtensionBoundaryFeature:
-    feature_id: str
-    category: str
-    runtime_objects: tuple[str, ...]
-    guarded_capabilities: tuple[str, ...]
-
-
-PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES: tuple[GovernanceExtensionBoundaryFeature, ...] = (
-    GovernanceExtensionBoundaryFeature(
-        "feat:f39-sdk-ecosystem",
-        "sdk-ecosystem",
-        ("SDKEcosystemCatalog", "SDKPackage"),
-        ("runtime-compatibility", "contract-alignment", "auth-helper-inventory"),
-    ),
-    GovernanceExtensionBoundaryFeature(
-        "feat:f40-extensibility-plugins",
-        "plugins",
-        ("PluginRuntimeRegistry", "PluginDescriptor", "PluginLifecycleEvent"),
-        ("isolated-hook-execution", "operator-disable", "lifecycle-audit"),
-    ),
-    GovernanceExtensionBoundaryFeature(
-        "feat:f33-scim-provisioning",
-        "scim-provisioning",
-        ("ScimProvisioningPlane", "ScimSchema", "ScimUser", "ScimGroup"),
-        ("schema-required-fields", "tenant-scope", "patch-validation"),
-    ),
-    GovernanceExtensionBoundaryFeature(
-        "feat:f43-access-review-workflows",
-        "access-review",
-        ("AccessReviewWorkflow", "AccessReviewCampaign", "AccessReviewDecision"),
-        ("reviewer-authorization", "overdue-escalation", "pending-close-guard"),
-    ),
-    GovernanceExtensionBoundaryFeature(
-        "feat:f44-entitlement-management",
-        "entitlement-management",
-        ("EntitlementManager", "EntitlementDefinition", "EntitlementAssignment"),
-        ("assignment-inventory", "expiry", "revocation"),
-    ),
-)
-
-
-PHASE5_GOVERNANCE_EXTENSION_FEATURES = PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES
-
-
 __all__ = [
     "AccessReviewCampaign",
     "AccessReviewDecision",
     "AccessReviewItem",
     "EntitlementAssignment",
     "EntitlementDefinition",
-    "GovernanceExtensionBoundaryFeature",
-    "PHASE5_GOVERNANCE_EXTENSION_FEATURES",
-    "PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES",
     "PluginDescriptor",
     "PluginLifecycleEvent",
     "SDKPackage",

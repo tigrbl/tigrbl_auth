@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any
-
 from tigrbl_management_plane_contracts.governance import *
 
 
@@ -31,59 +29,3 @@ def _version_in_range(version: str, compatible_runtime_range: tuple[str, str]) -
     lower, upper = compatible_runtime_range
     version_key = _semver_key(version)
     return _semver_key(lower) <= version_key <= _semver_key(upper)
-
-
-def provisioning_governance_ecosystem_boundary_manifest() -> dict[str, dict[str, Any]]:
-    return {
-        feature.feature_id: {
-            "category": feature.category,
-            "runtime_objects": list(feature.runtime_objects),
-            "guarded_capabilities": list(feature.guarded_capabilities),
-        }
-        for feature in PROVISIONING_GOVERNANCE_ECOSYSTEM_FEATURES
-    }
-
-
-def provisioning_governance_ecosystem_boundary_integrity() -> dict[str, Any]:
-    manifest = provisioning_governance_ecosystem_boundary_manifest()
-    categories = {row["category"] for row in manifest.values()}
-    runtime_objects = {
-        runtime_object
-        for row in manifest.values()
-        for runtime_object in row["runtime_objects"]
-    }
-    failures: list[str] = []
-    if len(manifest) != 5:
-        failures.append("phase 5 governance extension boundary must track exactly 5 feature rows")
-    for required in (
-        "sdk-ecosystem",
-        "plugins",
-        "scim-provisioning",
-        "access-review",
-        "entitlement-management",
-    ):
-        if required not in categories:
-            failures.append(f"missing category {required}")
-    for required_object in (
-        "SDKEcosystemCatalog",
-        "PluginRuntimeRegistry",
-        "ScimProvisioningPlane",
-        "EntitlementManager",
-        "AccessReviewWorkflow",
-    ):
-        if required_object not in runtime_objects:
-            failures.append(f"missing runtime object {required_object}")
-    return {
-        "passed": not failures,
-        "feature_count": len(manifest),
-        "categories": sorted(categories),
-        "failures": failures,
-    }
-
-
-phase5_governance_extension_boundary_manifest = (
-    provisioning_governance_ecosystem_boundary_manifest
-)
-phase5_governance_extension_boundary_integrity = (
-    provisioning_governance_ecosystem_boundary_integrity
-)
