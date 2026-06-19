@@ -15,6 +15,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from hashlib import sha256
 from typing import Final
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
 
@@ -31,13 +33,6 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 STATUS: Final[str] = "browser-session-runtime"
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -278,21 +273,17 @@ async def terminate_browser_session(session_id: UUID, **kwargs):
 def describe(*, request=None, deployment=None) -> dict[str, object]:
     if deployment is None:
         deployment = deployment_from_request(request, settings) if request is not None else resolve_deployment(settings)
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "cookie_name": settings.session_cookie_name,
-        "cookie_rotation_seconds": int(settings.session_cookie_renewal_seconds),
-        "same_site_default": settings.session_cookie_samesite,
-        "session_state_validation_supported": True,
-        "session_state_origin_bound": True,
-        "auth_code_linkage_supported": True,
-        "check_session_iframe_claimed": False,
-        "cross_site_logout_enabled": deployment.flag_enabled("enable_oidc_frontchannel_logout"),
-        "notes": OWNER.notes,
-    }
+    return describe_owner(
+        OWNER,
+        cookie_name=settings.session_cookie_name,
+        cookie_rotation_seconds=int(settings.session_cookie_renewal_seconds),
+        same_site_default=settings.session_cookie_samesite,
+        session_state_validation_supported=True,
+        session_state_origin_bound=True,
+        auth_code_linkage_supported=True,
+        check_session_iframe_claimed=False,
+        cross_site_logout_enabled=deployment.flag_enabled("enable_oidc_frontchannel_logout"),
+    )
 
 
 __all__ = [

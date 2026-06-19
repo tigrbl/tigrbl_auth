@@ -17,6 +17,7 @@ import threading
 import time
 from dataclasses import dataclass
 from typing import Any, Dict, Final
+from tigrbl_identity_core.standards import StandardOwner
 
 try:
     from cryptography.hazmat.primitives import serialization
@@ -82,13 +83,6 @@ class DPoPNonceRecord:
     expires_at: int
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(

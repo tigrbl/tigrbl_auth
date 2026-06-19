@@ -15,6 +15,7 @@ import base64
 import hashlib
 from dataclasses import dataclass
 from typing import Any, Final, Iterable, Mapping
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
@@ -91,13 +92,6 @@ class MTLSClientAuthentication:
         return certificate_confirmation_claim(self.cert_thumbprint)
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -336,19 +330,15 @@ def validate_request_certificate_binding(
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "notes": OWNER.notes,
-        "spec_url": RFC8705_SPEC_URL,
-        "confirmation_claim": "x5t#S256",
-        "supported_token_endpoint_auth_methods": list(SUPPORTED_MTLS_AUTH_METHODS),
-        "certificate_thumbprint_header_names": list(_CERTIFICATE_THUMBPRINT_HEADER_NAMES),
-        "certificate_pem_header_names": list(_CERTIFICATE_PEM_HEADER_NAMES),
-        "tls_client_auth_identity_metadata": list(_TLS_CLIENT_AUTH_IDENTITY_KEYS),
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC8705_SPEC_URL,
+        confirmation_claim="x5t#S256",
+        supported_token_endpoint_auth_methods=list(SUPPORTED_MTLS_AUTH_METHODS),
+        certificate_thumbprint_header_names=list(_CERTIFICATE_THUMBPRINT_HEADER_NAMES),
+        certificate_pem_header_names=list(_CERTIFICATE_PEM_HEADER_NAMES),
+        tls_client_auth_identity_metadata=list(_TLS_CLIENT_AUTH_IDENTITY_KEYS),
+    )
 
 
 __all__ = [

@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 import secrets
 import string
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Final, Literal
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from tigrbl_identity_runtime.settings import settings
 
@@ -28,13 +28,6 @@ _USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
 _USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -110,18 +103,14 @@ def poll_too_frequently(*, last_polled_at: datetime | None, now: datetime, inter
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "notes": OWNER.notes,
-        "poll_interval_seconds": DEVICE_CODE_INTERVAL,
-        "slow_down_increment_seconds": DEVICE_CODE_SLOW_DOWN_INCREMENT,
-        "replay_protection_supported": True,
-        "approval_denial_supported": True,
-        "spec_url": RFC8628_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        poll_interval_seconds=DEVICE_CODE_INTERVAL,
+        slow_down_increment_seconds=DEVICE_CODE_SLOW_DOWN_INCREMENT,
+        replay_protection_supported=True,
+        approval_denial_supported=True,
+        spec_url=RFC8628_SPEC_URL,
+    )
 
 
 __all__ = [

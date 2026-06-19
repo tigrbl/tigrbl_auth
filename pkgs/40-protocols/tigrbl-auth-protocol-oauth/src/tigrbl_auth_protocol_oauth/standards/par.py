@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Final, Mapping
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 STATUS: Final[str] = 'durable-request-uri-runtime'
 RFC9126_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9126'
@@ -12,13 +13,6 @@ REQUEST_URI_PREFIX: Final[str] = 'urn:ietf:params:oauth:request_uri:'
 PAR_ONE_TIME_USE: Final[bool] = True
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -122,16 +116,12 @@ def par_result_payload(result: PARValidationResult) -> dict[str, Any]:
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'request_uri_prefix': REQUEST_URI_PREFIX,
-        'one_time_use': PAR_ONE_TIME_USE,
-        'spec_url': RFC9126_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        request_uri_prefix=REQUEST_URI_PREFIX,
+        one_time_use=PAR_ONE_TIME_USE,
+        spec_url=RFC9126_SPEC_URL,
+    )
 
 
 __all__ = [

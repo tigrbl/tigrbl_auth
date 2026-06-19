@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import time
 import uuid
-from dataclasses import dataclass
 from typing import Any, Final, Iterable
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.mtls import SUPPORTED_MTLS_AUTH_METHODS
@@ -25,13 +26,6 @@ SUPPORTED_CLIENT_ASSERTION_AUTH_METHODS: Final[tuple[str, ...]] = (PRIVATE_KEY_J
 SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS: Final[tuple[str, ...]] = ("EdDSA",)
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -179,16 +173,12 @@ def build_client_assertion_contract_examples(token_endpoint_audience: str) -> li
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "notes": OWNER.notes,
-        "spec_url": RFC7523_SPEC_URL,
-        "token_endpoint_auth_methods_supported": token_endpoint_auth_methods_supported(),
-        "token_endpoint_auth_signing_alg_values_supported": token_endpoint_auth_signing_alg_values_supported(),
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC7523_SPEC_URL,
+        token_endpoint_auth_methods_supported=token_endpoint_auth_methods_supported(),
+        token_endpoint_auth_signing_alg_values_supported=token_endpoint_auth_signing_alg_values_supported(),
+    )
 
 
 __all__ = [

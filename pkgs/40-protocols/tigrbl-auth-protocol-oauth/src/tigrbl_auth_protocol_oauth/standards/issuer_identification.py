@@ -2,8 +2,9 @@ from __future__ import annotations
 
 """Authorization server issuer identification owner and helper module."""
 
-from dataclasses import dataclass
 from typing import Final, Mapping, Sequence
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import parse_qs, urlparse
 
 from tigrbl_identity_runtime.settings import settings
@@ -12,13 +13,6 @@ STATUS: Final[str] = 'authorization-response-issuer-runtime'
 RFC9207_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9207'
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -103,14 +97,10 @@ def issuer_metadata(issuer: str | None = None) -> dict[str, object]:
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'spec_url': RFC9207_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC9207_SPEC_URL,
+    )
 
 
 __all__ = [

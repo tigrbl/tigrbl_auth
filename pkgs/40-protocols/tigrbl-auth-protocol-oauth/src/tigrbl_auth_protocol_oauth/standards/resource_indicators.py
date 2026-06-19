@@ -16,19 +16,13 @@ profile:
 
 from dataclasses import dataclass
 from typing import Final, Iterable, Sequence
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 
 STATUS: Final[str] = 'resource-bound-runtime'
 RFC8707_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc8707'
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -109,16 +103,12 @@ def resource_binding_summary(resources: Sequence[str] | str | None, *, audience:
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'single_effective_target': True,
-        'conflicting_inputs_fail_closed': True,
-        'spec_url': RFC8707_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        single_effective_target=True,
+        conflicting_inputs_fail_closed=True,
+        spec_url=RFC8707_SPEC_URL,
+    )
 
 
 __all__ = [

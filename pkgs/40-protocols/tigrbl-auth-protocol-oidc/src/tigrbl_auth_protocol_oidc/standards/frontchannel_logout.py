@@ -2,9 +2,9 @@ from __future__ import annotations
 
 """OpenID Connect Front-Channel Logout planning and durable completion tracking."""
 
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Final
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlencode
 from uuid import UUID
 
@@ -14,13 +14,6 @@ STATUS: Final[str] = "frontchannel-logout-fanout-runtime"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -113,16 +106,12 @@ def validate_frontchannel_request(
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "fanout_supported": True,
-        "delivery_state_persisted": True,
-        "retry_semantics_supported": True,
-        "notes": OWNER.notes,
-    }
+    return describe_owner(
+        OWNER,
+        fanout_supported=True,
+        delivery_state_persisted=True,
+        retry_semantics_supported=True,
+    )
 
 
 __all__ = [

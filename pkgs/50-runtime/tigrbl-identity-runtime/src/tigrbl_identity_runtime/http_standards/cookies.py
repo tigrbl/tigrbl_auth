@@ -18,6 +18,8 @@ import hashlib
 from http.cookies import SimpleCookie
 import secrets
 from typing import Final
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from uuid import UUID
 
 from tigrbl_identity_runtime.deployment import resolve_deployment
@@ -28,13 +30,6 @@ COOKIE_VALUE_VERSION: Final[str] = "v1"
 DEFAULT_COOKIE_NAME: Final[str] = "sid"
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -234,23 +229,19 @@ def clear_session_cookie(response, *, cross_site: bool | None = None) -> None:
 
 def describe_runtime_policy() -> dict[str, object]:
     policy = session_cookie_policy()
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "cookie_name": policy.name,
-        "path": policy.path,
-        "domain": policy.domain,
-        "secure": policy.secure,
-        "http_only": policy.http_only,
-        "same_site": policy.same_site,
-        "cross_site": policy.cross_site,
-        "max_age_seconds": policy.max_age_seconds,
-        "rotation_supported": True,
-        "invalidation_supported": True,
-        "notes": OWNER.notes,
-    }
+    return describe_owner(
+        OWNER,
+        cookie_name=policy.name,
+        path=policy.path,
+        domain=policy.domain,
+        secure=policy.secure,
+        http_only=policy.http_only,
+        same_site=policy.same_site,
+        cross_site=policy.cross_site,
+        max_age_seconds=policy.max_age_seconds,
+        rotation_supported=True,
+        invalidation_supported=True,
+    )
 
 
 def describe() -> dict[str, object]:

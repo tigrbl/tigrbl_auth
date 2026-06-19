@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from typing import Any, Final
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 
 from tigrbl_identity_runtime.settings import settings
@@ -19,13 +20,6 @@ STATUS: Final[str] = 'rich-authorization-runtime'
 RFC9396_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc9396'
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -187,14 +181,10 @@ def normalize_authorization_details(raw: str | list[dict[str, Any]] | dict[str, 
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'spec_url': RFC9396_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC9396_SPEC_URL,
+    )
 
 
 __all__ = [

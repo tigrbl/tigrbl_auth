@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
 from typing import Any, Dict, Final
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.deployment import resolve_deployment
@@ -87,13 +87,6 @@ SUPPORTED_REQUESTED_TOKEN_TYPES: Final[tuple[str, ...]] = (
 )
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -357,17 +350,13 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'requested_token_types_supported': list(SUPPORTED_REQUESTED_TOKEN_TYPES),
-        'delegation_supported': True,
-        'single_effective_target': True,
-        'spec_url': RFC8693_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        requested_token_types_supported=list(SUPPORTED_REQUESTED_TOKEN_TYPES),
+        delegation_supported=True,
+        single_effective_target=True,
+        spec_url=RFC8693_SPEC_URL,
+    )
 
 
 

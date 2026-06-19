@@ -2,20 +2,14 @@ from __future__ import annotations
 
 """OAuth 2.0 Dynamic Client Registration Management Protocol owner module."""
 
-from dataclasses import dataclass
 from typing import Final
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 STATUS: Final[str] = 'persistence-backed-client-management-runtime'
 RFC7592_SPEC_URL: Final[str] = 'https://www.rfc-editor.org/rfc/rfc7592'
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -28,14 +22,10 @@ OWNER = StandardOwner(
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'spec_url': RFC7592_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC7592_SPEC_URL,
+    )
 
 
 __all__ = ['STATUS', 'RFC7592_SPEC_URL', 'StandardOwner', 'OWNER', 'describe']

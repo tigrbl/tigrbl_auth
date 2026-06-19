@@ -5,6 +5,8 @@ import secrets
 import time
 from typing import Any
 
+from tigrbl_identity_core.standards import describe_owner
+
 from .primitives import (
     DEFAULT_NONCE_STORE,
     DEFAULT_REPLAY_STORE,
@@ -289,18 +291,14 @@ def verify_proof(
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "notes": OWNER.notes,
-        "spec_url": RFC9449_SPEC_URL,
-        "signing_alg_values_supported": [_ALG_VALUE],
-        "ath_supported": True,
-        "nonce_supported": True,
-        "replay_detection_supported": True,
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC9449_SPEC_URL,
+        signing_alg_values_supported=[_ALG_VALUE],
+        ath_supported=True,
+        nonce_supported=True,
+        replay_detection_supported=True,
+    )
 
 
 __all__ = [

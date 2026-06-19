@@ -22,6 +22,7 @@ import json
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Final, Iterable, Mapping, Sequence
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from tigrbl_identity_runtime.settings import settings
 
@@ -32,13 +33,6 @@ DEFAULT_REQUEST_OBJECT_LIFETIME_SECONDS: Final[int] = 300
 DEFAULT_CLOCK_SKEW_SECONDS: Final[int] = 60
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -355,17 +349,13 @@ def request_object_summary(payload: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def describe() -> dict[str, object]:
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'notes': OWNER.notes,
-        'allowed_algs': list(ACTIVE_REQUEST_OBJECT_POLICY.allowed_algs),
-        'require_signature': ACTIVE_REQUEST_OBJECT_POLICY.require_signature,
-        'clock_skew_seconds': ACTIVE_REQUEST_OBJECT_POLICY.max_clock_skew_seconds,
-        'spec_url': RFC9101_SPEC_URL,
-    }
+    return describe_owner(
+        OWNER,
+        allowed_algs=list(ACTIVE_REQUEST_OBJECT_POLICY.allowed_algs),
+        require_signature=ACTIVE_REQUEST_OBJECT_POLICY.require_signature,
+        clock_skew_seconds=ACTIVE_REQUEST_OBJECT_POLICY.max_clock_skew_seconds,
+        spec_url=RFC9101_SPEC_URL,
+    )
 
 
 __all__ = [

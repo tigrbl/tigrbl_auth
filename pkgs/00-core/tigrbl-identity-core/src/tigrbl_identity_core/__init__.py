@@ -33,6 +33,7 @@ from .primitives import (
     new_realm_id,
     new_tenant_id,
 )
+from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonicalize
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
 
@@ -58,12 +59,14 @@ __all__ = [
     "RealmRef",
     "Scope",
     "ScopeValue",
+    "StandardOwner",
     "StrUUID",
     "Subject",
     "SystemClock",
     "TenantId",
     "TenantRef",
     "canonicalize",
+    "describe_owner",
     "safe_display_path",
     "sanitize_local_paths",
     "new_client_id",

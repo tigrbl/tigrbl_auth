@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 import base64
 import json
 from typing import Any, Final
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
 
@@ -32,13 +33,6 @@ except Exception:  # pragma: no cover - exercised in dependency-light tests
 STATUS: Final[str] = "rp-initiated-logout-runtime"
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -328,18 +322,14 @@ async def build_logout_plan(
 def describe(*, request=None, deployment=None) -> dict[str, object]:
     if deployment is None and request is not None:
         deployment = deployment_from_request(request, settings)
-    return {
-        'label': OWNER.label,
-        'title': OWNER.title,
-        'runtime_status': OWNER.runtime_status,
-        'public_surface': list(OWNER.public_surface),
-        'id_token_hint_validation_supported': True,
-        'post_logout_redirect_uri_validation_supported': True,
-        'idempotent_replay_protection': True,
-        'frontchannel_logout_supported': bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_frontchannel_logout")) if deployment is not None else True,
-        'backchannel_logout_supported': bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_backchannel_logout")) if deployment is not None else True,
-        'notes': OWNER.notes,
-    }
+    return describe_owner(
+        OWNER,
+        id_token_hint_validation_supported=True,
+        post_logout_redirect_uri_validation_supported=True,
+        idempotent_replay_protection=True,
+        frontchannel_logout_supported=bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_frontchannel_logout")) if deployment is not None else True,
+        backchannel_logout_supported=bool(getattr(deployment, "flag_enabled", lambda *_: True)("enable_oidc_backchannel_logout")) if deployment is not None else True,
+    )
 
 
 __all__ = [

@@ -7,8 +7,9 @@ assertion grants and client assertions at the token endpoint.
 """
 
 import time
-from dataclasses import dataclass
 from typing import Any, Final, Iterable
+
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidTokenError
@@ -22,13 +23,6 @@ REQUIRED_CLAIMS: Final[set[str]] = {"iss", "sub", "aud", "exp"}
 OPTIONAL_FRESHNESS_CLAIMS: Final[set[str]] = {"iat", "nbf", "jti"}
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 OWNER = StandardOwner(
@@ -158,16 +152,12 @@ def build_assertion_contract_examples(token_endpoint_audience: str) -> list[dict
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "notes": OWNER.notes,
-        "spec_url": RFC7521_SPEC_URL,
-        "assertion_grant_type": JWT_BEARER_GRANT_TYPE,
-        "client_assertion_type": JWT_BEARER_ASSERTION_TYPE,
-    }
+    return describe_owner(
+        OWNER,
+        spec_url=RFC7521_SPEC_URL,
+        assertion_grant_type=JWT_BEARER_GRANT_TYPE,
+        client_assertion_type=JWT_BEARER_ASSERTION_TYPE,
+    )
 
 
 __all__ = [

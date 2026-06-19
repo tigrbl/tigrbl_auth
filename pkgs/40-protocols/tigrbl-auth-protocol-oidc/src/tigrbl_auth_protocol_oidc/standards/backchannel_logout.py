@@ -7,9 +7,9 @@ import hashlib
 import hmac
 import json
 import threading
-from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Final
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from uuid import UUID, uuid4
 
 from tigrbl_identity_runtime.settings import settings
@@ -20,13 +20,6 @@ _DEFAULT_MAX_RETRIES: Final[int] = 3
 _ALLOWED_CLOCK_SKEW: Final[int] = 300
 
 
-@dataclass(frozen=True, slots=True)
-class StandardOwner:
-    label: str
-    title: str
-    runtime_status: str
-    public_surface: tuple[str, ...]
-    notes: str
 
 
 class _BackchannelReplayStore:
@@ -227,17 +220,13 @@ def replay_store_snapshot() -> dict[str, int]:
 
 
 def describe() -> dict[str, object]:
-    return {
-        "label": OWNER.label,
-        "title": OWNER.title,
-        "runtime_status": OWNER.runtime_status,
-        "public_surface": list(OWNER.public_surface),
-        "logout_token_validation_supported": True,
-        "replay_protection": True,
-        "delivery_state_persisted": True,
-        "retry_semantics_supported": True,
-        "notes": OWNER.notes,
-    }
+    return describe_owner(
+        OWNER,
+        logout_token_validation_supported=True,
+        replay_protection=True,
+        delivery_state_persisted=True,
+        retry_semantics_supported=True,
+    )
 
 
 __all__ = [
