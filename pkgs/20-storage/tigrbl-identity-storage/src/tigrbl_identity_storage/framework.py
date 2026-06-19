@@ -98,26 +98,38 @@ _BaseTigrblRouter = getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "
 
 
 class TigrblRouter(_BaseTigrblRouter):
-    """Storage table router facade with table binding compatibility."""
+    """Storage table router facade with local handler compatibility."""
 
-    def include_tables(self, models: type | list[type] | tuple[type, ...]) -> None:
-        model_seq = [models] if isinstance(models, type) else list(models)
-        include_models = getattr(self, "include_models", None)
-        if callable(include_models):
-            include_models(model_seq)
-        else:
-            include_table = getattr(self, "include_table", None)
-            if not callable(include_table):
-                parent_include_tables = getattr(super(), "include_tables", None)
-                if callable(parent_include_tables):
-                    parent_include_tables(model_seq)
-                else:
-                    raise AttributeError("Tigrbl router does not expose table inclusion")
-            else:
-                for model in model_seq:
-                    include_table(model)
-        for model in model_seq:
+    def include_tables(
+        self,
+        tables: list[type] | tuple[type, ...],
+        *,
+        base_prefix: str | None = None,
+        mount_router: bool = True,
+    ) -> Any:
+        result = super().include_tables(
+            tables,
+            base_prefix=base_prefix,
+            mount_router=mount_router,
+        )
+        for model in tables:
             _install_local_handler_dict_compat(model)
+        return result
+
+    def include_table(
+        self,
+        model: type,
+        *,
+        prefix: str | None = None,
+        mount_router: bool = True,
+    ) -> Any:
+        result = super().include_table(
+            model,
+            prefix=prefix,
+            mount_router=mount_router,
+        )
+        _install_local_handler_dict_compat(model)
+        return result
 
 
 class Request(_TigrblRequest):
