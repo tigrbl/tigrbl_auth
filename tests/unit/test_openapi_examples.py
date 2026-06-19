@@ -3,9 +3,9 @@ import pytest_asyncio
 import asyncio
 from types import SimpleNamespace
 
-from tigrbl_auth.api.app import build_app
-from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.routers.surface import surface_api
+from tigrbl_identity_server.api.app import build_app
+from tigrbl_identity_runtime.deployment import resolve_deployment
+from tigrbl_identity_server.routers.surface import surface_api
 
 ORM_MODELS = [
     "Tenant",

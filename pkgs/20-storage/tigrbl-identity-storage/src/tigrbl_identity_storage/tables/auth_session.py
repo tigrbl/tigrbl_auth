@@ -248,7 +248,7 @@ async def login(
     creds: CredsIn | None = None,
     db: Any = Depends(get_db),
 ) -> Any:
-    from tigrbl_identity_server.ops.login import login_user
+    from ._auth_session_login import login_user
 
     if creds is None:
         body = await request.json() or {}

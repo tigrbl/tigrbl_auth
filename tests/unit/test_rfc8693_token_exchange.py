@@ -8,7 +8,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 from tigrbl import TigrblApp
 
-from tigrbl_auth.rfc.rfc8693 import (
+from tigrbl_auth_protocol_oauth.standards.rfc8693 import (
     RFC8693_SPEC_URL,
     TokenType,
     TokenExchangeRequest,
@@ -21,8 +21,8 @@ from tigrbl_auth.rfc.rfc8693 import (
     TOKEN_EXCHANGE_GRANT_TYPE,
     include_rfc8693,
 )
-from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.rfc.rfc7519 import encode_jwt
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_jose.standards.rfc7519 import encode_jwt
 import time
 
 pytestmark = pytest.mark.usefixtures("enable_rfc8693")

@@ -100,7 +100,7 @@ def _repo_root() -> Path:
 
 @api.route("/logout", methods=["GET", "POST"], response_model=None)
 async def logout(request: Any, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_identity_server.ops.logout import logout_request
+    from ._logout_state_runtime import logout_request
 
     result = await logout_request(request=request, db=db)
     from tigrbl_authn_credentials.session_service import observe_logout_response

@@ -13,31 +13,29 @@ import re
 from typing import Any, Callable, Final
 
 from tigrbl_identity_server.framework import TigrblApp, TigrblRouter
-from tigrbl_identity_server.rest.routers.authorize import api as authorize_api
-from tigrbl_identity_server.rest.routers.admin_auth import api as admin_auth_api
-from tigrbl_identity_server.rest.routers.admin_identities import api as admin_identities_api
-from tigrbl_identity_server.rest.routers.admin_realms import api as admin_realms_api
-from tigrbl_identity_server.rest.routers.admin_tenants import api as admin_tenants_api
-from tigrbl_identity_server.rest.routers.device_authorization import (
-    api as device_authorization_api,
-)
-from tigrbl_identity_server.rest.routers.login import api as login_api
-from tigrbl_identity_server.rest.routers.logout import api as logout_api
-from tigrbl_identity_server.rest.routers.my_account import api as my_account_api
-from tigrbl_identity_server.rest.routers.par import api as par_api
-from tigrbl_identity_server.rest.routers.register import api as register_api
-from tigrbl_identity_server.rest.routers.revoke import api as revoke_api
-from tigrbl_identity_server.rest.routers.token import api as token_api
+from tigrbl_identity_storage.tables.auth_code import api as authorize_api
+from tigrbl_identity_storage.tables.auth_session import login_api
+from tigrbl_identity_storage.tables._account_routes import api as my_account_api
+from tigrbl_identity_storage.tables.client_registration import api as register_api
+from tigrbl_identity_storage.tables.device_code import api as device_authorization_api
+from tigrbl_identity_storage.tables.logout_state import api as logout_api
+from tigrbl_identity_storage.tables.pushed_authorization_request import api as par_api
+from tigrbl_identity_storage.tables.revoked_token import api as revoke_api
+from tigrbl_identity_storage.tables.token_record import api as token_api
+from tigrbl_identity_storage.tables.user import admin_api as admin_auth_api
+from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
+from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
+from tigrbl_identity_storage.tables.tenant import admin_api as admin_tenants_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_auth_protocol_oidc.standards.discovery import (
+from tigrbl_identity_storage.tables._oidc_discovery import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_auth_protocol_oidc.standards.userinfo import include_oidc_userinfo
-from tigrbl_auth_protocol_oauth.standards.introspection import include_introspection_endpoint
-from tigrbl_auth_protocol_oauth.standards.rfc8414 import include_rfc8414
-from tigrbl_auth_protocol_oauth.standards.rfc9728 import include_rfc9728
-from tigrbl_auth_protocol_oauth.standards.token_exchange import include_token_exchange_endpoint
+from tigrbl_identity_storage.tables._oidc_userinfo import include_oidc_userinfo
+from tigrbl_identity_storage.tables._oauth_authorization_server_metadata import include_rfc8414
+from tigrbl_identity_storage.tables._oauth_introspection import include_introspection_endpoint
+from tigrbl_identity_storage.tables._oauth_protected_resource_metadata import include_rfc9728
+from tigrbl_identity_storage.tables._oauth_token_exchange import include_token_exchange_endpoint
 from tigrbl_authz_policy.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
 

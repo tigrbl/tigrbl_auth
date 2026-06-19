@@ -5,10 +5,10 @@ from __future__ import annotations
 import re
 import secrets
 import string
-from typing import Any, Final, Literal, Mapping
+from typing import Final, Literal
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import BaseModel, hook_ctx
+from tigrbl_identity_server.framework import BaseModel
 
 _USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
 _USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")
@@ -39,28 +39,6 @@ class DeviceGrantForm(BaseModel):
     client_id: str
 
 
-_TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
-
-
-@hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
-async def approve_device_code(ctx: Mapping[str, Any]) -> None:
-    from tigrbl_identity_storage.tables import DeviceCode
-
-    payload = ctx.get("payload") or {}
-    db = ctx.get("db") or ctx.get("session")
-    ident = payload.get("id") or payload.get("device_code")
-    if ident is None:
-        return
-
-    await DeviceCode.approve(
-        db,
-        id=ident if payload.get("id") is not None else None,
-        device_code=ident if payload.get("device_code") is not None else None,
-        user_id=payload.get("sub"),
-        tenant_id=payload.get("tid"),
-    )
-
-
 def generate_user_code(length: int = 8) -> str:
     if length <= 0:
         raise ValueError("length must be positive")
@@ -84,7 +62,6 @@ __all__ = [
     "DeviceAuthIn",
     "DeviceAuthOut",
     "DeviceGrantForm",
-    "approve_device_code",
     "RFC8628_SPEC_URL",
     "DEVICE_VERIFICATION_URI",
     "DEVICE_CODE_EXPIRES_IN",

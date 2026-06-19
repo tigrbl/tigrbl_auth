@@ -38,7 +38,6 @@ from .record_helpers import (
 def _resolve_provider():
     for module_name, attr_name in (
         ("tigrbl_auth.api.surfaces", "surface_api"),
-        ("tigrbl_auth.routers.surface", "surface_api"),
         ("tigrbl_auth.app", "app"),
         ("tigrbl_identity_server.api.surfaces", "surface_api"),
     ):

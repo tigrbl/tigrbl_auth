@@ -13,12 +13,12 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES
 
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tigrbl-auth-api-platform-admin" / "src"
+PKG_SRC = ROOT / "pkgs" / "70-apis" / "tigrbl-auth-api-platform-admin" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
 build_app = import_module("tigrbl_auth_api_platform_admin").build_app
-admin_tenants = import_module("tigrbl_auth.api.rest.routers.admin_tenants")
+admin_tenants = import_module("tigrbl_identity_storage.tables.tenant")
 
 
 def _settings(tmp_path: Path) -> SimpleNamespace:

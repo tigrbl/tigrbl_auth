@@ -6,10 +6,10 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient, BasicAuth
 from unittest.mock import AsyncMock
 
-from tigrbl_auth.security.deps import get_db
-from tigrbl_auth.framework import TigrblApp
-from tigrbl_auth.routers.auth_flows import router
-from tigrbl_auth.runtime_cfg import settings
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_server.framework import TigrblApp
+from tigrbl_identity_storage.tables._auth_flows import router
+from tigrbl_identity_runtime.settings import settings
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
 AUTH = BasicAuth(CLIENT_ID, "secret")

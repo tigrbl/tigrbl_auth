@@ -15,7 +15,6 @@ from typing import Any, Dict, List, Optional, Union
 from enum import Enum
 import warnings
 from tigrbl_identity_server.framework import (
-    TigrblRouter,
     TigrblApp,
     HTTPException,
     Request,
@@ -33,12 +32,10 @@ RFC8693_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8693"
 # Token Exchange Grant Type
 TOKEN_EXCHANGE_GRANT_TYPE = "urn:ietf:params:oauth:grant-type:token-exchange"
 
-api = TigrblRouter()
-router = api
-
-
 def include_rfc8693(app: TigrblApp) -> None:
     """Attach the RFC 8693 router to *app* if enabled."""
+
+    from tigrbl_identity_storage.tables._oauth_token_exchange import api
 
     if runtime_cfg.settings.enable_rfc8693 and not any(
         (getattr(route, "path", None) or getattr(route, "path_template", None))

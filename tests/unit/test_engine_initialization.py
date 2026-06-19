@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy import text
-from tigrbl_auth.routers.surface import surface_api
-from tigrbl_auth.runtime.engine_resolver import resolve_api_provider
+from tigrbl_identity_server.routers.surface import surface_api
+from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 
 
 @pytest.mark.unit

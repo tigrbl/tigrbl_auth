@@ -8,8 +8,8 @@ import uuid
 
 import pytest
 
-from tigrbl_auth.tables import Tenant, Client, User, Service, ApiKey, ServiceKey
-from tigrbl_auth.crypto import hash_pw
+from tigrbl_identity_storage.tables import Tenant, Client, User, Service, ApiKey, ServiceKey
+from tigrbl_identity_jose.key_management import hash_pw
 
 
 @pytest.mark.unit
@@ -98,7 +98,7 @@ class TestUserModel:
             email="test@example.com",
             password="TestPassword123!",
         )
-        # Keep password_hash as None
+        user.password_hash = None
 
         # Should return False when no password hash is set
         assert user.verify_password("TestPassword123!") is False
@@ -177,7 +177,7 @@ class TestServiceKeyModel:
 
     def test_service_key_schema_uses_service_id(self):
         """Ensure ServiceKey API schema exposes correct fields."""
-        from tigrbl_auth.routers.surface import surface_api
+        from tigrbl_identity_server.routers.surface import surface_api
 
         create_schema = surface_api.schemas.ServiceKey.create.in_.model_json_schema()
         create_fields = surface_api.schemas.ServiceKey.create.in_.model_fields

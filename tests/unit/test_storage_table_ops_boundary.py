@@ -162,6 +162,27 @@ def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
 def test_protocol_and_facade_ops_packages_are_not_supported() -> None:
     assert not (package_src("tigrbl-auth-protocol-oauth") / "tigrbl_auth_protocol_oauth" / "ops").exists()
     assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "ops").exists()
+    assert not (package_src("tigrbl-identity-server") / "tigrbl_identity_server" / "ops").exists()
+    assert not (package_src("tigrbl-identity-server") / "tigrbl_identity_server" / "rest" / "routers").exists()
+    assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "api" / "rest" / "routers").exists()
+
+
+def test_route_and_hook_declarations_are_storage_owned() -> None:
+    offenders: list[str] = []
+    storage_tables_root = package_src("tigrbl-identity-storage") / "tigrbl_identity_storage" / "tables"
+    for root in sorted(PKGS.glob("**/src")):
+        for path in _python_files(root):
+            source = path.read_text(encoding="utf-8")
+            if "@api.route" not in source and "hook_ctx(" not in source:
+                continue
+            if storage_tables_root not in path.parents:
+                rel = path.relative_to(ROOT).as_posix()
+                if "@api.route" in source:
+                    offenders.append(f"{rel} declares route")
+                if "hook_ctx(" in source:
+                    offenders.append(f"{rel} declares hook")
+
+    assert offenders == []
 
 
 def test_protocol_packages_do_not_import_removed_oauth_ops() -> None:

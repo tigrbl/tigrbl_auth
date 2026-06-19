@@ -7,21 +7,14 @@ import secrets
 import string
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Final, Literal, Mapping
+from typing import Final, Literal
 
 from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when full runtime deps are installed
-    from tigrbl_identity_server.framework import BaseModel, hook_ctx
+    from tigrbl_identity_server.framework import BaseModel
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel
-
-    def hook_ctx(**_kwargs):
-        def decorator(func):
-            func.__wrapped__ = func
-            return func
-
-        return decorator
 
 
 STATUS: Final[str] = "persistence-backed-device-flow-runtime"
@@ -77,52 +70,6 @@ class DeviceGrantForm(BaseModel):
     device_code: str
     client_id: str
 
-
-
-def _device_code_table():
-    from tigrbl_identity_storage.tables import DeviceCode
-
-    return DeviceCode
-
-
-_TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
-
-
-@hook_ctx(**{"ops": "approve", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
-async def approve_device_code(ctx: Mapping[str, Any]) -> None:
-    """Mark a device code as authorized (testing/operator helper)."""
-
-    DeviceCode = _device_code_table()
-    payload = ctx.get("payload") or {}
-    db = ctx.get("db") or ctx.get("session")
-    ident = payload.get("id") or payload.get("device_code")
-    if ident is None:
-        return
-    await DeviceCode.approve(
-        db,
-        id=ident if payload.get("id") is not None else None,
-        device_code=ident if payload.get("device_code") is not None else None,
-        user_id=payload.get("sub"),
-        tenant_id=payload.get("tid"),
-    )
-
-
-@hook_ctx(**{"ops": "deny", _TIGRBL_HOOK_STAGE_KEY: "HANDLER"})
-async def deny_device_code(ctx: Mapping[str, Any]) -> None:
-    """Mark a device code as denied (testing/operator helper)."""
-
-    DeviceCode = _device_code_table()
-    payload = ctx.get("payload") or {}
-    db = ctx.get("db") or ctx.get("session")
-    ident = payload.get("id") or payload.get("device_code")
-    if ident is None:
-        return
-    await DeviceCode.deny(
-        db,
-        id=ident if payload.get("id") is not None else None,
-        device_code=ident if payload.get("device_code") is not None else None,
-        reason=payload.get("reason") or "access_denied",
-    )
 
 
 
@@ -190,8 +137,6 @@ __all__ = [
     "DeviceAuthIn",
     "DeviceAuthOut",
     "DeviceGrantForm",
-    "approve_device_code",
-    "deny_device_code",
     "generate_user_code",
     "validate_user_code",
     "generate_device_code",

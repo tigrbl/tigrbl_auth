@@ -66,8 +66,8 @@ async def test_device_token_polling(async_client: AsyncClient) -> None:
 @pytest.mark.asyncio
 async def test_device_code_flow_disabled(async_client: AsyncClient) -> None:
     """Disabling RFC 8628 should remove the device code grant."""
-    from tigrbl_auth.runtime_cfg import settings
-    from tigrbl_auth.routers import shared
+    from tigrbl_identity_runtime.settings import settings
+    from tigrbl_identity_server.rest import shared
 
     original = settings.enable_rfc8628
     settings.enable_rfc8628 = False

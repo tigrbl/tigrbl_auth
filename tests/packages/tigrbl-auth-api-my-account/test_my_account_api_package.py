@@ -16,7 +16,7 @@ from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
 from tigrbl_identity_jose.key_management import hash_pw
 
 ROOT = Path(__file__).resolve().parents[3]
-PKG_SRC = ROOT / "pkgs" / "tigrbl-auth-api-my-account" / "src"
+PKG_SRC = ROOT / "pkgs" / "70-apis" / "tigrbl-auth-api-my-account" / "src"
 if str(PKG_SRC) not in sys.path:
     sys.path.insert(0, str(PKG_SRC))
 
@@ -25,7 +25,9 @@ PRODUCT_SURFACE = my_account_package.PRODUCT_SURFACE
 MY_ACCOUNT_API_CONTRACT = my_account_package.MY_ACCOUNT_API_CONTRACT
 build_app = my_account_package.build_app
 
-router_module = import_module("tigrbl_auth.api.rest.routers.my_account")
+account_session_module = import_module("tigrbl_identity_storage.tables.auth_session")
+account_consent_module = import_module("tigrbl_identity_storage.tables.consent")
+account_user_module = import_module("tigrbl_identity_storage.tables.user")
 
 
 def _settings() -> SimpleNamespace:
@@ -235,19 +237,19 @@ async def test_my_account_handlers_are_current_subject_scoped(
     await db_session.commit()
     current_alice = SimpleNamespace(id=alice_id, tenant_id=tenant_id)
 
-    profile = await router_module.get_account_profile(
+    profile = await account_user_module.get_account_profile(
         current_user=current_alice,
         db=db_session,
     )
-    sessions = await router_module.list_account_sessions(
+    sessions = await account_session_module.list_account_sessions(
         current_user=current_alice,
         db=db_session,
     )
-    consents = await router_module.list_account_consents(
+    consents = await account_consent_module.list_account_consents(
         current_user=current_alice,
         db=db_session,
     )
-    apps = await router_module.list_account_authorized_apps(
+    apps = await account_consent_module.list_account_authorized_apps(
         current_user=current_alice,
         db=db_session,
     )
@@ -258,7 +260,7 @@ async def test_my_account_handlers_are_current_subject_scoped(
     assert {item.client_id for item in apps} == {str(client_id)}
 
     with pytest.raises(Exception) as missing_session:
-        await router_module.revoke_account_session(
+        await account_session_module.revoke_account_session(
             str(bob_session_id),
             current_user=current_alice,
             db=db_session,
@@ -266,19 +268,19 @@ async def test_my_account_handlers_are_current_subject_scoped(
     assert getattr(missing_session.value, "status_code", None) == 404
 
     with pytest.raises(Exception) as missing_consent:
-        await router_module.revoke_account_consent(
+        await account_consent_module.revoke_account_consent(
             str(bob_consent_id),
             current_user=current_alice,
             db=db_session,
         )
     assert getattr(missing_consent.value, "status_code", None) == 404
 
-    revoked = await router_module.revoke_account_session(
+    revoked = await account_session_module.revoke_account_session(
         str(alice_session_id),
         current_user=current_alice,
         db=db_session,
     )
-    revoked_consent = await router_module.revoke_account_consent(
+    revoked_consent = await account_consent_module.revoke_account_consent(
         str(alice_consent_id),
         current_user=current_alice,
         db=db_session,

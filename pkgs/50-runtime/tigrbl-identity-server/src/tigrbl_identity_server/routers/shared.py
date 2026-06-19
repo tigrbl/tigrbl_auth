@@ -1,4 +1,4 @@
-"""Compatibility facade for historical ``tigrbl_auth.routers.shared`` imports."""
+"""Compatibility facade for shared REST helper imports."""
 
 from tigrbl_identity_server.rest.shared import (
     _jwt,

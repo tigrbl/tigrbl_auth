@@ -69,7 +69,7 @@ async def _resolve_admin_session_and_user(request: Request, db: Any) -> tuple[An
 @admin_api.route("/admin/auth/login", methods=["POST"], response_model=AdminSessionOut, tags=ADMIN_AUTH_TAGS)
 async def admin_login(request: Request, creds: CredsIn | None = None, db: Any = Depends(get_db)) -> Response:
     from tigrbl_identity_admin.bootstrap import user_is_admin
-    from tigrbl_identity_server.ops.login import login_user
+    from ._auth_session_login import login_user
 
     if creds is None:
         creds = CredsIn.model_validate(await request.json() or {})

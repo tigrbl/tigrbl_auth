@@ -177,5 +177,7 @@ async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
 
 DeviceCode.device_authorization = staticmethod(device_authorization)  # type: ignore[attr-defined]
 
+from ._device_code_hooks import approve_device_code, deny_device_code
 
-__all__ = ["DeviceCode", "api", "router", "device_authorization"]
+
+__all__ = ["DeviceCode", "api", "router", "device_authorization", "approve_device_code", "deny_device_code"]

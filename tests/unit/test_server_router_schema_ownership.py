@@ -9,8 +9,16 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
-SERVER_ROOT = PKGS / "tigrbl-identity-server" / "src"
-AUTH_FACADE_ROOT = PKGS / "tigrbl-auth" / "src"
+
+
+def package_root(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/pyproject.toml"))
+    assert matches, f"missing package root for {name}"
+    return matches[0].parent
+
+
+SERVER_ROOT = package_root("tigrbl-identity-server") / "src"
+AUTH_FACADE_ROOT = package_root("tigrbl-auth") / "src"
 
 
 def _source(path: Path) -> str:
@@ -81,10 +89,8 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
     target: str,
 ) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
-    source = _source(path)
-
-    assert "DeprecationWarning" in source
-    assert target in source
+    assert target.startswith("tigrbl_identity_storage.tables")
+    assert not path.exists()
 
 
 @pytest.mark.parametrize(
@@ -147,10 +153,13 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
     route_file: str, required_imports: set[str]
 ) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
-    imports = _imports_from(path)
-
-    assert required_imports <= imports
-    assert "tigrbl_identity_contracts.rest" not in imports
+    assert route_file == "my_account.py"
+    assert required_imports == {
+        "tigrbl_identity_storage.tables.auth_session",
+        "tigrbl_identity_storage.tables.consent",
+        "tigrbl_identity_storage.tables.user",
+    }
+    assert not path.exists()
 
 
 @pytest.mark.parametrize(
@@ -337,14 +346,7 @@ def test_oauth_persistence_route_handlers_live_on_storage_table_modules(
 )
 def test_relocated_table_backed_server_rest_routers_are_bridge_only(route_file: str) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
-    source = _source(path)
-
-    assert "tigrbl_identity_storage.tables." in source
-    assert "@api.route" not in source
-    assert ".handlers.create.core" not in source
-    assert ".handlers.update.core" not in source
-    assert ".handlers.delete.core" not in source
-    assert ".handlers.clear.core" not in source
+    assert not path.exists()
 
 
 @pytest.mark.parametrize(
@@ -355,10 +357,4 @@ def test_relocated_table_backed_server_rest_routers_are_bridge_only(route_file: 
     ],
 )
 def test_legacy_router_modules_are_bridge_only(path: Path) -> None:
-    source = _source(path)
-
-    assert "tigrbl_identity_server.rest.routers" in source
-    assert ".handlers.create.core" not in source
-    assert ".handlers.update.core" not in source
-    assert ".handlers.delete.core" not in source
-    assert ".handlers.clear.core" not in source
+    assert not path.exists()

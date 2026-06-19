@@ -3,9 +3,13 @@
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.framework import TigrblApp, status
-from tigrbl_auth.standards.oauth2 import introspection as introspection_module
-from tigrbl_auth.standards.oauth2.introspection import register_token_async, reset_tokens_async, router
+from tigrbl_identity_server.framework import TigrblApp, status
+from tigrbl_identity_storage.tables import _oauth_introspection as introspection_module
+from tigrbl_identity_storage.tables._oauth_introspection import (
+    register_token_async,
+    reset_tokens_async,
+    router,
+)
 
 
 # RFC 7662 specification excerpt for reference within tests

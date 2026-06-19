@@ -12,13 +12,13 @@ import pytest_asyncio
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.runtime_cfg import settings
-from tigrbl_auth.framework import TigrblApp
-from tigrbl_auth.routers.auth_flows import router
-from tigrbl_auth.routers.shared import _jwt
-from tigrbl_auth.security.deps import get_db
-from tigrbl_auth.tables import Client
-from tigrbl_auth.services.token_service import JWTCoder
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import TigrblApp
+from tigrbl_identity_storage.tables._auth_flows import router
+from tigrbl_identity_server.rest.shared import _jwt
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage.tables import Client
+from tigrbl_authn_credentials.token_service import JWTCoder
 
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
