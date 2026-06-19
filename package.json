@@ -5,15 +5,15 @@
   "type": "module",
   "workspaces": [
     "packages/uix-core",
-    "apps/admin-uix",
-    "apps/platform-admin-uix",
-    "apps/tenant-admin-uix",
-    "apps/developer-uix",
-    "apps/service-admin-uix",
-    "apps/my-account-uix",
-    "apps/demo-hub-uix",
-    "apps/public-uix",
-    "apps/rp"
+    "pkgs/90-apps/admin-uix",
+    "pkgs/90-apps/platform-admin-uix",
+    "pkgs/90-apps/tenant-admin-uix",
+    "pkgs/90-apps/developer-uix",
+    "pkgs/90-apps/service-admin-uix",
+    "pkgs/90-apps/my-account-uix",
+    "pkgs/90-apps/demo-hub-uix",
+    "pkgs/90-apps/public-uix",
+    "pkgs/90-apps/rp"
   ],
   "scripts": {
     "build:uix-core": "npm run build -w @tigrbl-auth/uix-core",

@@ -1,13 +1,13 @@
 {
-  "name": "@tigrbl-auth/tenant-admin-uix",
+  "name": "@tigrbl-auth/service-admin-uix",
   "version": "0.3.5",
-  "description": "Tenant-scoped administration UIX for Tigrbl Auth.",
+  "description": "Service identity and workload administration UIX for Tigrbl Auth.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "apps/tenant-admin-uix"
+    "directory": "pkgs/90-apps/service-admin-uix"
   },
   "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
   "publishConfig": {

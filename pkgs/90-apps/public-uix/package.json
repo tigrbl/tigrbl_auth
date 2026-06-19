@@ -1,19 +1,18 @@
 {
-  "name": "@tigrbl-auth/demo-hub-uix",
-  "version": "0.4.0.dev2",
-  "description": "Demo hub UIX showing Tigrbl Auth product surfaces as one identity system.",
+  "name": "@tigrbl-auth/public-uix",
+  "version": "0.3.5",
+  "description": "Public UIX package for Tigrbl Auth identity flows.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "apps/demo-hub-uix"
+    "directory": "pkgs/90-apps/public-uix"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/apps/demo-hub-uix#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "provenance": true
+    "registry": "https://registry.npmjs.org/"
   },
   "files": [
     "dist",
@@ -27,7 +26,6 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@tigrbl-auth/uix-core": "file:../../packages/uix-core",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",

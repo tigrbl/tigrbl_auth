@@ -7,19 +7,19 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PACKAGE_DIR = ROOT / "apps" / "rp"
+PACKAGE_DIR = ROOT / "pkgs" / "90-apps" / "rp"
 
 
 def test_typescript_rp_t0_package_scaffold_and_workspace_membership() -> None:
     root_manifest = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
     manifest = json.loads((PACKAGE_DIR / "package.json").read_text(encoding="utf-8"))
 
-    assert "apps/rp" in root_manifest["workspaces"]
+    assert "pkgs/90-apps/rp" in root_manifest["workspaces"]
     assert manifest["name"] == "@tigrbl-auth/rp"
     assert manifest["type"] == "module"
     assert manifest["exports"]["."]["import"] == "./dist/index.js"
     assert manifest["exports"]["."]["types"] == "./dist/index.d.ts"
-    assert manifest["repository"]["directory"] == "apps/rp"
+    assert manifest["repository"]["directory"] == "pkgs/90-apps/rp"
     assert {"build", "test"} <= set(manifest["scripts"])
     assert (PACKAGE_DIR / "README.md").exists()
     assert (PACKAGE_DIR / "src" / "index.ts").exists()
@@ -31,7 +31,7 @@ def test_typescript_rp_t1_node_matrix_workflow_includes_package() -> None:
     on = workflow.get("on") or workflow.get(True)
 
     assert "@tigrbl-auth/rp" in on["workflow_dispatch"]["inputs"]["package"]["options"]
-    assert '"apps/rp"' in text
+    assert '"pkgs/90-apps/rp"' in text
     assert 'npm run test -w ${manifest.name}' in text
     assert 'npm run build -w ${manifest.name}' in text
 
@@ -41,7 +41,7 @@ def test_typescript_rp_t2_npm_release_workflow_uses_provenance() -> None:
     manifest = json.loads((PACKAGE_DIR / "package.json").read_text(encoding="utf-8"))
 
     assert "@tigrbl-auth/rp" in workflow_text
-    assert '"apps/rp"' in workflow_text
+    assert '"pkgs/90-apps/rp"' in workflow_text
     assert "cobycloud/actions/actions/npm-publish@" in workflow_text
     assert "cobycloud/actions/actions/npm-publish@main" not in workflow_text
     assert 'provenance: "true"' in workflow_text

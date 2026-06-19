@@ -7,9 +7,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "apps/my-account-uix"
+    "directory": "pkgs/90-apps/my-account-uix"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/apps/my-account-uix#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-apps/my-account-uix#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",

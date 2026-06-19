@@ -58,7 +58,7 @@ It should not consume `/admin/*` or `/rpc`.
 
 ## Repo basis
 
-- current `apps/public-uix`
+- current `pkgs/90-apps/public-uix`
 - current public route allowlist and hash-route pages
 
 ## Main split rule

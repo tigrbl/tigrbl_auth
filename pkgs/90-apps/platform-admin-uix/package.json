@@ -1,20 +1,24 @@
 {
-  "name": "@tigrbl-auth/developer-uix",
+  "name": "@tigrbl-auth/platform-admin-uix",
   "version": "0.3.5",
-  "description": "Developer self-service UIX for OAuth/OIDC app registration.",
+  "description": "Platform owner and operator UIX for Tigrbl Auth tenant lifecycle administration.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "apps/developer-uix"
+    "directory": "pkgs/90-apps/platform-admin-uix"
   },
   "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "files": ["dist", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

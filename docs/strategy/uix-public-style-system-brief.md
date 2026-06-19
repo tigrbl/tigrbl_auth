@@ -6,7 +6,7 @@ Adopt the current `@tigrbl-auth/public-uix` visual and interaction direction as 
 
 ## Source Surface
 
-Primary source: `apps/public-uix`
+Primary source: `pkgs/90-apps/public-uix`
 
 The public UIX already has the strongest visual identity in the repo:
 
