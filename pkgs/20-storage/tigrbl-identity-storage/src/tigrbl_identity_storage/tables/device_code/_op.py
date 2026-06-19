@@ -10,7 +10,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.security.handler_records import append_audit_event_record, create_handler_record, read_handler_record
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_server.framework import HTTPException, status
+    from tigrbl_identity_storage.framework import HTTPException, status
 except Exception:  # pragma: no cover - dependency-light fallback
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

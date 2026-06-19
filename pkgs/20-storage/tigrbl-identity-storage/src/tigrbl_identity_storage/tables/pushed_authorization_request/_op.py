@@ -33,7 +33,7 @@ from tigrbl_auth_protocol_oauth.standards.mtls import (
 from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_server.framework import HTTPException, status
+    from tigrbl_identity_storage.framework import HTTPException, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

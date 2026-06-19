@@ -58,7 +58,7 @@ from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
 )
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_server.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, ValidationError, status
+    from tigrbl_identity_storage.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, ValidationError, status
 
     class JSONResponse(_FrameworkJSONResponse):
         def __init__(self, content: Any, *, status_code: int = 200, headers: dict[str, str] | None = None):

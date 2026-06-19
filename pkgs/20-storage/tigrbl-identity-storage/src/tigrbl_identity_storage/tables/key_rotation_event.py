@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     Base,
     TenantColumn,
     Timestamped,

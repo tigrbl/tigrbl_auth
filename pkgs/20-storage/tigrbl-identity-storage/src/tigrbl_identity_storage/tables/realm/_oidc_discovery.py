@@ -7,7 +7,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from tigrbl_identity_server.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_storage.framework import Depends, HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_identity_runtime.deployment import (
     ResolvedDeployment,
     deployment_from_app,

@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     Base,
     BaseModel,
     Depends,
@@ -26,7 +26,7 @@ from tigrbl_identity_server.framework import (
     PgUUID,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import HTTPException
+from tigrbl_identity_storage.framework import HTTPException
 from http import HTTPStatus as status
 from .._ops import create_record, first_record, record_id, update_record
 from ..engine import get_db

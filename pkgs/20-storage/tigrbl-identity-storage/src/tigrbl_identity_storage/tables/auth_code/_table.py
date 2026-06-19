@@ -7,7 +7,7 @@ from typing import Any
 from typing import Optional
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     AsyncSession,
     Base,
     Request,

@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
     Created,
     GUIDPk,

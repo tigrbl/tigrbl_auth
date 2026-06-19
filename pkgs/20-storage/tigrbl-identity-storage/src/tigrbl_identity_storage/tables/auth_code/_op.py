@@ -6,7 +6,7 @@ from typing import Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
-from tigrbl_identity_server.framework import HTMLResponse, HTTPException, RedirectResponse, status
+from tigrbl_identity_storage.framework import HTMLResponse, HTTPException, RedirectResponse, status
 from tigrbl_identity_server.rest.shared import _jwt, _require_tls
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings

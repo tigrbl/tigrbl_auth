@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl_identity_storage.framework import TigrblRouter
 
 from . import api as authorize_api
 from ..token_record._introspection import api as introspection_api

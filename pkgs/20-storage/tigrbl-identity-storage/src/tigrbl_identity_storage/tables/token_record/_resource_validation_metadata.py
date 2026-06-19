@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import Request, TigrblApp, TigrblRouter
+from tigrbl_identity_storage.framework import Request, TigrblApp, TigrblRouter
 from tigrbl_authz_resource_server.runtime_metadata import (
     build_capability_attestation,
     runtime_truth_manifest,

@@ -7,7 +7,7 @@ import uuid
 from datetime import timezone
 from typing import Any
 
-from tigrbl_identity_server.framework import Depends, Header, HTTPException, Request, status
+from tigrbl_identity_storage.framework import Depends, Header, HTTPException, Request, status
 from tigrbl_identity_jose.key_management import hash_pw
 
 from .._ops import read_record, update_record

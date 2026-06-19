@@ -4,7 +4,7 @@ import warnings
 from typing import Optional
 from urllib.parse import parse_qs
 
-from tigrbl_identity_server.framework import Header, HTTPException, Request, status
+from tigrbl_identity_storage.framework import Header, HTTPException, Request, status
 from tigrbl_identity_runtime import settings as runtime_cfg
 from tigrbl_auth_protocol_oauth.standards.rfc9449_dpop import verify_proof
 

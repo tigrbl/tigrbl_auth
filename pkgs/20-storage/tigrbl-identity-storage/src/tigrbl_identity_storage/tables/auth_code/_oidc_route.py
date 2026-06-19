@@ -7,7 +7,7 @@ from uuid import UUID, uuid4
 from urllib.parse import urlencode
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     HTTPException,
     Request,
     status,

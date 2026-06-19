@@ -3,7 +3,7 @@
 from tigrbl import bootstrap_dbschema
 from tigrbl.ddl import sqlite_default_attach_map
 
-from tigrbl_identity_server.framework import build_engine
+from tigrbl_identity_storage.framework import build_engine
 from tigrbl_identity_runtime.settings import settings
 
 if settings.pg_dsn_env or (settings.pg_host and settings.pg_db and settings.pg_user):

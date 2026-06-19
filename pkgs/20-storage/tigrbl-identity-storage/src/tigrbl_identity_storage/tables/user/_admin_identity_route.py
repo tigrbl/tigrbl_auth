@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
-from tigrbl_identity_server.framework import Depends, HTTPException, Request, status
+from tigrbl_identity_storage.framework import Depends, HTTPException, Request, status
 from tigrbl_identity_jose.key_management import hash_pw
 
 from .._ops import create_record, delete_record, first_record, list_records, read_record, update_record

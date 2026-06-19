@@ -6,7 +6,7 @@ import datetime as dt
 import uuid
 from typing import Any
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     Base,
     Boolean,
     ForeignKeySpec,

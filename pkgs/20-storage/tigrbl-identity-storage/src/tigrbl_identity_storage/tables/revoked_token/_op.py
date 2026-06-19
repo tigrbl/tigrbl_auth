@@ -6,7 +6,7 @@ from typing import Final
 from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_identity_storage.persistence import (
     is_token_revoked_async as _is_token_revoked_async,
     is_token_revoked as _is_token_revoked,

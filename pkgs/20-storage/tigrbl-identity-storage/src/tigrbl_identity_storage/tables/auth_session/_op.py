@@ -8,7 +8,7 @@ from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
 from tigrbl_authn_credentials.token_service import JWTCoder
 from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie, session_cookie_policy
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import HTTPException, JSONResponse, status
+from tigrbl_identity_storage.framework import HTTPException, JSONResponse, status
 from tigrbl_identity_server.rest.shared import _require_tls
 from tigrbl_identity_server.security.handler_records import (
     append_audit_event_record,

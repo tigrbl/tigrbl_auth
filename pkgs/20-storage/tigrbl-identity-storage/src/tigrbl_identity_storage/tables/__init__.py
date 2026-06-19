@@ -2,7 +2,7 @@
 
 from tigrbl import bind
 
-from tigrbl_identity_server.framework import Base, _install_local_handler_dict_compat
+from tigrbl_identity_storage.framework import Base, _install_local_handler_dict_compat
 from tigrbl_identity_runtime.settings import settings
 
 from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm

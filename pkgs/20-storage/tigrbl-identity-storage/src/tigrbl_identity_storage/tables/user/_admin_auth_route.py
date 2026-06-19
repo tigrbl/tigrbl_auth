@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_identity_server.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
+from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
 
 from ..engine import get_db
 from ._table import (

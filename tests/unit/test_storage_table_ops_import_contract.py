@@ -30,3 +30,13 @@ def test_storage_package_exports_tables_not_orm_facades() -> None:
     assert "Consent" in source
     assert "TokenRecord" in source
     assert ".orm" not in source
+
+
+def test_storage_does_not_import_server_framework_surface() -> None:
+    offenders = [
+        path.relative_to(ROOT).as_posix()
+        for path in STORAGE_DIR.rglob("*.py")
+        if "tigrbl_identity_server.framework" in path.read_text(encoding="utf-8")
+    ]
+
+    assert offenders == []

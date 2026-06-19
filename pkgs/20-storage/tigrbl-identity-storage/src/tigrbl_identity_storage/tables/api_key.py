@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     Created,
     GUIDPk,
     KeyDigest,

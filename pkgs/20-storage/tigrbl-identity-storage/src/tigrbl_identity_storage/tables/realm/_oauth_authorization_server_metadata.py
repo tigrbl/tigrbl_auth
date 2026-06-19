@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Final
 
-from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from ._oidc_discovery import refresh_discovery_cache

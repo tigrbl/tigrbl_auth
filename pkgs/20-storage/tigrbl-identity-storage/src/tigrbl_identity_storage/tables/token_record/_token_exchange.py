@@ -27,7 +27,7 @@ from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
 )
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_server.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

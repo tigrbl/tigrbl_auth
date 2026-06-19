@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl_identity_storage.framework import TigrblRouter
 
 from ..auth_session import account_api as session_account_api
 from ..consent import account_api as consent_account_api

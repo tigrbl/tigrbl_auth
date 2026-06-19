@@ -7,7 +7,7 @@ import datetime as dt
 from typing import Any
 from datetime import timezone
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     UserBase,
     Bootstrappable,
     BaseModel,

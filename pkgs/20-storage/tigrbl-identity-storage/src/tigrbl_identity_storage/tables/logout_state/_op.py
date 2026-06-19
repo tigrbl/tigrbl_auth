@@ -13,7 +13,7 @@ from tigrbl_identity_runtime.http_standards.cookies import (
     parse_session_cookie_value,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import HTTPException, JSONResponse, RedirectResponse, status
+from tigrbl_identity_storage.framework import HTTPException, JSONResponse, RedirectResponse, status
 from tigrbl_identity_storage.persistence import append_audit_event_async, get_session_async
 
 

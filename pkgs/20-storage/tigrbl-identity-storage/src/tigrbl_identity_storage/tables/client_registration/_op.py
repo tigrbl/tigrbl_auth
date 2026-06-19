@@ -13,7 +13,7 @@ from . import (
 )
 from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import HTTPException, status
+from tigrbl_identity_storage.framework import HTTPException, status
 from tigrbl_identity_server.security.handler_records import (
     append_audit_event_record,
     create_handler_record,

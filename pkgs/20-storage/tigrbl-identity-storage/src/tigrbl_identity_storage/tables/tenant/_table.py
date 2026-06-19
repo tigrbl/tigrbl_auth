@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     TenantBase,
     Bootstrappable,
     BaseModel,

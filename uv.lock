@@ -2459,11 +2459,17 @@ name = "tigrbl-identity-resource-server"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-resource-server" }
 dependencies = [
+    { name = "email-validator" },
+    { name = "tigrbl" },
     { name = "tigrbl-authz-resource-server" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "email-validator", specifier = ">=2.0" },
+    { name = "tigrbl", specifier = "==0.4.0" },
+    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-rp"

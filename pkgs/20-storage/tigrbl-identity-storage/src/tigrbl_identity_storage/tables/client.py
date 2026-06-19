@@ -8,7 +8,7 @@ from typing import Final
 from typing import Any
 from urllib.parse import urlparse
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     ClientBase,
     relationship,
     Mapped,

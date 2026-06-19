@@ -24,8 +24,8 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
     from . import IntrospectOut
     from tigrbl_identity_server.rest.shared import _require_tls
     from tigrbl_identity_runtime.deployment import deployment_from_request
-    from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-    from tigrbl_identity_server.framework import AsyncSession, Depends
+    from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.framework import AsyncSession, Depends
     from tigrbl_identity_storage.tables.token_record._route import _load_client, _registered_token_endpoint_auth_method
     from tigrbl_identity_storage.persistence import (
         introspect_token_async as _introspect_token_async,

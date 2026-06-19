@@ -7,7 +7,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from tigrbl_identity_server.framework import (
+from tigrbl_identity_storage.framework import (
     Base,
     BaseModel,
     Depends,
