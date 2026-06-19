@@ -4,7 +4,8 @@ from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import HTTPException, status
-from tigrbl_identity_storage.persistence import append_audit_event_async, revoke_token_async
+from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from tigrbl_identity_storage.tables.revoked_token._op import revoke_token_async
 
 
 async def revoke_request(*, request):

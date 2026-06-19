@@ -37,7 +37,8 @@ async def issue_persisted_token_pair(
     delegation_provenance: dict[str, Any] | None = None,
     **extra: Any,
 ) -> tuple[str, str]:
-    from tigrbl_identity_storage.persistence import token_hash, upsert_token_record_async
+    from tigrbl_identity_storage.tables._ops import token_hash
+    from tigrbl_identity_storage.tables.token_record._lifecycle import upsert_token_record_async
 
     access_token, refresh_token = await jwt.async_sign_pair(
         sub=sub,
@@ -97,7 +98,7 @@ async def redeem_refresh_token(
     requested_audience: str | None = None,
     token_type: str = "bearer",
 ) -> dict[str, Any]:
-    from tigrbl_identity_storage.persistence import (
+    from tigrbl_identity_storage.tables.token_record._lifecycle import (
         get_token_record_async,
         mark_token_used_async,
         revoke_refresh_family_async,

@@ -13,17 +13,17 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/authenticators.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/backends.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/discovery.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_code.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client_registration.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/device_code.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/logout_state.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/pushed_authorization_request.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/revoked_token.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/user.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/realm.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/tenant.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_code/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client_registration/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/device_code/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/logout_state/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/pushed_authorization_request/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/revoked_token/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_op.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/user/_table.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/realm/_table.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/tenant/_table.py",
     ROOT / "pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
@@ -68,7 +68,7 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_surfaces/__init__.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/persistence.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/__init__.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_operator_store/__init__.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/framework.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
@@ -81,9 +81,12 @@ SEMANTIC_FACADE_PATHS = [
 ]
 
 PERSISTENCE_HELPER_PATHS = [
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/token_records.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sessions.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/registrations_audit.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_lifecycle.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/auth_session/_lifecycle.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/logout_state/_lifecycle.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/client_registration/_lifecycle.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/consent/_lifecycle.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/audit_event.py",
 ]
 
 SYNC_COMPAT_PATHS = [
@@ -91,7 +94,7 @@ SYNC_COMPAT_PATHS = [
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
     ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
     ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
-    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_persistence/sync_compat.py",
+    ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
 ]
 
 ASYNC_REQUEST_TOKEN_PATHS = [

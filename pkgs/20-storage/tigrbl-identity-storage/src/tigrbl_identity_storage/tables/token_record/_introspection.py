@@ -27,15 +27,27 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
     from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
     from tigrbl_identity_storage.framework import AsyncSession, Depends
     from tigrbl_identity_storage.tables.token_record._route import _load_client, _registered_token_endpoint_auth_method
-    from tigrbl_identity_storage.persistence import (
-        introspect_token_async as _introspect_token_async,
-        introspect_token as _introspect_token,
-        record_token as _record_token,
+    from tigrbl_identity_storage.tables._sync import run_async
+    from tigrbl_identity_storage.tables.revoked_token._op import (
         reset_token_state_async as _reset_token_state_async,
         reset_token_state as _reset_token_state,
-        unregister_token as _unregister_token,
+    )
+    from tigrbl_identity_storage.tables.token_record._introspection_store import (
+        introspect_token_record_async as _introspect_token_async,
+    )
+    from tigrbl_identity_storage.tables.token_record._lifecycle import (
+        remove_token_record_async,
         upsert_token_record_async as _record_token_async,
     )
+
+    def _introspect_token(token: str) -> Dict[str, Any]:
+        return run_async(_introspect_token_async(token))
+
+    def _record_token(token: str, claims: Dict[str, Any], token_kind: str | None = None) -> str:
+        return run_async(_record_token_async(token, claims, token_kind=token_kind))
+
+    def _unregister_token(token: str) -> None:
+        return run_async(remove_token_record_async(token))
     from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
         PRIVATE_KEY_JWT_AUTH_METHOD,
         authenticate_client_assertion,

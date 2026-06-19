@@ -5,8 +5,8 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from tigrbl_identity_storage._persistence import token_records
-from tigrbl_identity_storage._persistence.uuid_coercion import normalize_uuid_filters
+from tigrbl_identity_storage.tables import _ops as table_ops
+from tigrbl_identity_storage.tables._ops import normalize_uuid_filters
 
 
 class _Core:
@@ -26,7 +26,7 @@ async def test_handler_records_coerce_string_uuid_filters_before_list():
 
     model = SimpleNamespace(handlers=SimpleNamespace(list=_Core(list_core)))
 
-    rows = await token_records._list_handler_records(
+    rows = await table_ops.list_handler_records(
         model,
         db=object(),
         filters={"session_id": str(session_id)},
@@ -63,9 +63,9 @@ async def test_handler_records_coerce_string_uuid_identifiers_before_read_update
         )
     )
 
-    await token_records._read_handler_record(model, db=object(), ident=str(row_id))
-    await token_records._update_handler_record(model, db=object(), ident=str(row_id), payload={})
-    await token_records._delete_handler_record(model, db=object(), ident=str(row_id))
+    await table_ops.read_handler_record(model, db=object(), ident=str(row_id))
+    await table_ops.update_handler_record(model, db=object(), ident=str(row_id), payload={})
+    await table_ops.delete_handler_record(model, db=object(), ident=str(row_id))
 
     assert captured == {"read": row_id, "update": row_id, "delete": row_id}
 

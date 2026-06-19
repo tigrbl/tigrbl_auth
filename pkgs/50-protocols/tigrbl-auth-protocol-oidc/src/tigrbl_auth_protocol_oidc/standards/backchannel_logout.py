@@ -8,6 +8,7 @@ import hmac
 import json
 import threading
 from datetime import datetime, timedelta, timezone
+from types import SimpleNamespace
 from typing import Any, Final
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from uuid import UUID, uuid4
@@ -60,9 +61,13 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage import persistence as persistence_module
+    from tigrbl_identity_storage.tables.client_registration._lifecycle import get_client_registration_async
+    from tigrbl_identity_storage.tables.logout_state._lifecycle import mark_logout_channel_async
 
-    return persistence_module
+    return SimpleNamespace(
+        get_client_registration_async=get_client_registration_async,
+        mark_logout_channel_async=mark_logout_channel_async,
+    )
 
 
 def _jwt_coder_cls():

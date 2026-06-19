@@ -270,12 +270,14 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
-        / "auth_code.py",
+        / "auth_code"
+        / "_op.py",
         "storage_authorize_logic": _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
-        / "_oauth_authorize.py",
+        / "auth_code"
+        / "_op.py",
     }
 
     assert not route_paths["protocol"].exists()

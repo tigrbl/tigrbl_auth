@@ -5,7 +5,7 @@ import json
 from datetime import timedelta
 from typing import Any, Tuple
 
-from tigrbl_identity_storage._persistence.sync_compat import _run as _run_coro
+from tigrbl_identity_storage.tables._sync import run_async as _run_coro
 
 from ..key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 

@@ -14,7 +14,8 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 )
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import HTTPException, JSONResponse, RedirectResponse, status
-from tigrbl_identity_storage.persistence import append_audit_event_async, get_session_async
+from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from tigrbl_identity_storage.tables.auth_session._lifecycle import get_session_async
 
 
 def _append_state(uri: str, state: str | None) -> str:

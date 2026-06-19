@@ -2,13 +2,92 @@
 
 from __future__ import annotations
 
+import hashlib
 from collections.abc import Mapping
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Iterable
+from uuid import UUID
 
 
 def utc_now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+UUID_FILTER_KEYS = {
+    "id",
+    "tenant_id",
+    "user_id",
+    "client_id",
+    "session_id",
+    "logout_id",
+    "consent_id",
+    "actor_user_id",
+    "actor_client_id",
+}
+
+
+def token_hash(token: str) -> str:
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def coerce_uuid_value(value: Any) -> Any:
+    if value in {None, "", False}:
+        return value
+    if isinstance(value, UUID):
+        return value
+    try:
+        return UUID(str(value))
+    except Exception:
+        return value
+
+
+def normalize_uuid_identifier(value: Any) -> Any:
+    return coerce_uuid_value(value)
+
+
+def normalize_uuid_filters(filters: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        key: coerce_uuid_value(value) if key in UUID_FILTER_KEYS else value
+        for key, value in filters.items()
+    }
+
+
+def to_uuid(value: Any) -> UUID | None:
+    if value in {None, "", False}:
+        return None
+    if isinstance(value, UUID):
+        return value
+    try:
+        return UUID(str(value))
+    except Exception:
+        return None
+
+
+def to_datetime(value: Any) -> datetime | None:
+    if value in {None, "", False}:
+        return None
+    if isinstance(value, datetime):
+        return value if value.tzinfo is not None else value.replace(tzinfo=timezone.utc)
+    if isinstance(value, (int, float)):
+        try:
+            return datetime.fromtimestamp(float(value), tz=timezone.utc)
+        except Exception:
+            return None
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return parsed if parsed.tzinfo is not None else parsed.replace(tzinfo=timezone.utc)
+    except Exception:
+        return None
+
+
+def normalize_audience(value: Any) -> list[str] | None:
+    if value in {None, "", False}:
+        return None
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, Iterable):
+        return [str(item) for item in value if item not in {None, ""}]
+    return [str(value)]
 
 
 def normalize_items(result: Any) -> list[Any]:
@@ -56,7 +135,7 @@ def row_matches(row: Any, filters: Mapping[str, Any]) -> bool:
 
 
 async def list_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> list[Any]:
-    filters = dict(filters or {})
+    filters = normalize_uuid_filters(filters or {})
     result = await model.handlers.list.core({"payload": {"filters": filters}, "db": db})
     return [row for row in normalize_items(result) if row_matches(row, filters)]
 
@@ -67,6 +146,7 @@ async def first_record(model: Any, db: Any, filters: Mapping[str, Any]) -> Any:
 
 
 async def read_record(model: Any, db: Any, ident: Any) -> Any:
+    ident = normalize_uuid_identifier(ident)
     return await model.handlers.read.core({"path_params": {"id": ident}, "db": db})
 
 
@@ -75,15 +155,27 @@ async def create_record(model: Any, db: Any, payload: Mapping[str, Any]) -> Any:
 
 
 async def update_record(model: Any, db: Any, ident: Any, payload: Mapping[str, Any]) -> Any:
+    ident = normalize_uuid_identifier(ident)
     return created_item(
         await model.handlers.update.core({"path_params": {"id": ident}, "payload": dict(payload), "db": db})
     )
 
 
 async def delete_record(model: Any, db: Any, ident: Any) -> Any:
+    ident = normalize_uuid_identifier(ident)
     return await model.handlers.delete.core({"path_params": {"id": ident}, "db": db})
 
 
 async def clear_records(model: Any, db: Any, filters: Mapping[str, Any] | None = None) -> Any:
-    return await model.handlers.clear.core({"payload": {"filters": dict(filters or {})}, "db": db})
+    return await model.handlers.clear.core({"payload": {"filters": normalize_uuid_filters(filters or {})}, "db": db})
 
+
+list_items = normalize_items
+matches_filters = row_matches
+list_handler_records = list_records
+first_handler_record = first_record
+read_handler_record = read_record
+create_handler_record = create_record
+update_handler_record = update_record
+delete_handler_record = delete_record
+clear_handler_records = clear_records

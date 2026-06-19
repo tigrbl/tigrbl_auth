@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_identity_storage.tables import _oauth_token_runtime as token_runtime
+from tigrbl_identity_storage.tables.token_record import _op as token_runtime
 from tigrbl_authn_credentials._token_service import persistence as token_persistence
 from tigrbl_identity_server.security import handler_records
 
@@ -82,10 +82,10 @@ async def test_issue_persisted_token_pair_decodes_minted_tokens_without_revocati
         persisted.append((token, claims))
 
     monkeypatch.setattr(
-        "tigrbl_identity_storage.persistence.upsert_token_record_async",
+        "tigrbl_identity_storage.tables.token_record._lifecycle.upsert_token_record_async",
         upsert_token_record_async,
     )
-    monkeypatch.setattr("tigrbl_identity_storage.persistence.token_hash", lambda token: f"hash:{token}")
+    monkeypatch.setattr("tigrbl_identity_storage.tables._ops.token_hash", lambda token: f"hash:{token}")
 
     jwt = FakeJWT()
     access, refresh = await token_persistence.issue_persisted_token_pair(

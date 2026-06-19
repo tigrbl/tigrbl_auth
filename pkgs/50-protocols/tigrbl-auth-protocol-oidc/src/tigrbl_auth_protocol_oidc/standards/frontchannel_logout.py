@@ -3,6 +3,7 @@ from __future__ import annotations
 """OpenID Connect Front-Channel Logout planning and durable completion tracking."""
 
 from datetime import datetime, timezone
+from types import SimpleNamespace
 from typing import Any, Final
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlencode
@@ -29,9 +30,13 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage import persistence as persistence_module
+    from tigrbl_identity_storage.tables.client_registration._lifecycle import get_client_registration_async
+    from tigrbl_identity_storage.tables.logout_state._lifecycle import mark_logout_channel_async
 
-    return persistence_module
+    return SimpleNamespace(
+        get_client_registration_async=get_client_registration_async,
+        mark_logout_channel_async=mark_logout_channel_async,
+    )
 
 
 async def build_frontchannel_descriptor(

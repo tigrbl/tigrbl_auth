@@ -14,6 +14,7 @@ This module deliberately keeps the session-management claim boundary truthful:
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from hashlib import sha256
+from types import SimpleNamespace
 from typing import Final
 
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
@@ -59,9 +60,25 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage import persistence as persistence_module
+    from tigrbl_identity_storage.tables.auth_session._lifecycle import (
+        bind_session_client_async,
+        create_session_async,
+        get_active_session_async,
+        get_session_async,
+        rotate_session_cookie_secret_async,
+        touch_session_async,
+    )
+    from tigrbl_identity_storage.tables.logout_state._lifecycle import terminate_session_async
 
-    return persistence_module
+    return SimpleNamespace(
+        bind_session_client_async=bind_session_client_async,
+        create_session_async=create_session_async,
+        get_active_session_async=get_active_session_async,
+        get_session_async=get_session_async,
+        rotate_session_cookie_secret_async=rotate_session_cookie_secret_async,
+        terminate_session_async=terminate_session_async,
+        touch_session_async=touch_session_async,
+    )
 
 
 def _utc(value: datetime | None) -> datetime | None:

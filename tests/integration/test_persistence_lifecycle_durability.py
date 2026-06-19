@@ -6,27 +6,28 @@ from uuid import uuid4
 import pytest
 from sqlalchemy import select
 
-from tigrbl_auth.crypto import hash_pw
-from tigrbl_auth.services.persistence import (
-    append_audit_event_async,
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
+from tigrbl_identity_storage.tables.auth_session._lifecycle import (
     create_session_async,
-    get_token_record_async,
     get_active_session_async,
-    get_client_registration_async,
-    get_latest_logout_for_session_async,
     get_session_async,
-    introspect_token_async,
-    is_token_revoked_async,
-    mark_logout_channel_async,
-    record_consent_async,
-    revoke_consent_async,
-    revoke_token_async,
     rotate_session_cookie_secret_async,
-    terminate_session_async,
     touch_session_async,
-    upsert_client_registration_async,
-    upsert_token_record_async,
 )
+from tigrbl_identity_storage.tables.client_registration._lifecycle import (
+    get_client_registration_async,
+    upsert_client_registration_async,
+)
+from tigrbl_identity_storage.tables.consent._lifecycle import record_consent_async, revoke_consent_async
+from tigrbl_identity_storage.tables.logout_state._lifecycle import (
+    get_latest_logout_for_session_async,
+    mark_logout_channel_async,
+    terminate_session_async,
+)
+from tigrbl_identity_storage.tables.revoked_token._op import is_token_revoked_async, revoke_token_async
+from tigrbl_identity_storage.tables.token_record._introspection import introspect_token_async
+from tigrbl_identity_storage.tables.token_record._lifecycle import get_token_record_async, upsert_token_record_async
 from tigrbl_auth.services.token_service import (
     JWTCoder,
     RefreshTokenReuseError,
