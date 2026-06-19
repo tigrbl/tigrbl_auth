@@ -37,7 +37,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Configure git identity
@@ -66,7 +66,7 @@ jobs:
       matrix: ${{ steps.matrix.outputs.matrix }}
       count: ${{ steps.matrix.outputs.count }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build dispatch package matrix
         id: matrix
         shell: bash
@@ -83,7 +83,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-dispatch-matrix.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build package distribution
         uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
@@ -158,7 +158,7 @@ jobs:
     outputs:
       package-count: ${{ steps.discover.outputs.package-count }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Discover split Python packages
         id: discover
         uses: cobycloud/actions/actions/monorepo-discover@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
@@ -188,7 +188,7 @@ jobs:
       tag: ${{ steps.resolve.outputs.tag }}
       matrix: ${{ steps.resolve.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Resolve and validate package tag
         id: resolve
         shell: bash
@@ -203,7 +203,7 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.resolve-package-tag.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Build package distribution
         uses: cobycloud/actions/actions/python-package-build@aca75c25fa57e8c58ea9a333d0a4b5f25d9f8b0f
         with:
