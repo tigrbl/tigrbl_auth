@@ -22,7 +22,9 @@ TABLE_MODULE_EXPORTS = {
         "DelegationGrantEdge",
         "DelegationGrantTokenLink",
     ),
+    "key": ("Key",),
     "key_rotation_event": ("KeyRotationEvent",),
+    "key_version": ("KeyVersion",),
     "logout_state": ("LogoutState",),
     "pushed_authorization_request": (
         "PushedAuthorizationRequest",

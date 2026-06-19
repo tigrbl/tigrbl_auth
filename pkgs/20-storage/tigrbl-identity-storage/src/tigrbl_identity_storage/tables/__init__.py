@@ -32,6 +32,8 @@ from .client_registration import (
 from .service import Service
 from .api_key import ApiKey
 from .service_key import ServiceKey
+from .key import Key
+from .key_version import KeyVersion
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -76,6 +78,8 @@ def _ensure_runtime_bindings() -> None:
         Service,
         ApiKey,
         ServiceKey,
+        Key,
+        KeyVersion,
         AuthSession,
         AuthCode,
         DeviceCode,
@@ -183,6 +187,8 @@ __all__ = [
     "Service",
     "ApiKey",
     "ServiceKey",
+    "Key",
+    "KeyVersion",
     "AuthSession",
     "CredsIn",
     "MyAccountSessionOut",

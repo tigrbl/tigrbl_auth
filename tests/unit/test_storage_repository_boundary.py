@@ -55,7 +55,7 @@ def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
         required_collections=("tenants", "users", "clients", "services", "service_keys"),
     )
 
-    assert contract.latest_revision == "0011_delegation_grant_lifecycle_tables"
+    assert contract.latest_revision == "0012_key_version_and_token_provenance_tables"
     assert contract.is_ordered is True
     assert len(contract.revisions) >= 9
     assert dsn.startswith("sqlite")

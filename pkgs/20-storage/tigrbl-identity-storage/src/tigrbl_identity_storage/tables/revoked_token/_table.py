@@ -38,6 +38,7 @@ class RevokedToken(Base, GUIDPk, Timestamped):
 
     token_hash: Mapped[str] = acol(storage=S(String(128), nullable=False, unique=True, index=True, default=lambda: uuid.uuid4().hex))
     token_type_hint: Mapped[str | None] = acol(storage=S(String(64), nullable=True))
+    refresh_family_id: Mapped[str | None] = acol(storage=S(String(64), nullable=True, index=True))
     subject: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     tenant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
@@ -56,10 +57,16 @@ class RevokedToken(Base, GUIDPk, Timestamped):
         token_hash: str,
         token_type_hint: str | None = None,
         reason: str | None = None,
+        refresh_family_id: str | None = None,
         **metadata: Any,
     ) -> "RevokedToken":
         existing = await first_record(cls, db, {"token_hash": token_hash})
-        payload = {"token_hash": token_hash, "token_type_hint": token_type_hint, "revoked_reason": reason or "revoked"}
+        payload = {
+            "token_hash": token_hash,
+            "token_type_hint": token_type_hint,
+            "refresh_family_id": refresh_family_id,
+            "revoked_reason": reason or "revoked",
+        }
         payload.update(metadata)
         if existing is None:
             return await create_record(cls, db, payload)
@@ -68,6 +75,31 @@ class RevokedToken(Base, GUIDPk, Timestamped):
     @classmethod
     async def is_revoked(cls, db: Any, *, token_hash: str) -> bool:
         return await first_record(cls, db, {"token_hash": token_hash}) is not None
+
+    @classmethod
+    async def revoke_family(
+        cls,
+        db: Any,
+        *,
+        refresh_family_id: str,
+        token_hashes: list[str],
+        reason: str = "refresh_token_family_revoked",
+        **metadata: Any,
+    ) -> list["RevokedToken"]:
+        revoked = []
+        token_type_hint = metadata.pop("token_type_hint", None)
+        for token_hash in token_hashes:
+            revoked.append(
+                await cls.revoke_token(
+                    db,
+                    token_hash=token_hash,
+                    token_type_hint=token_type_hint,
+                    reason=reason,
+                    refresh_family_id=refresh_family_id,
+                    **metadata,
+                )
+            )
+        return revoked
 
 
 api = router = TigrblRouter()

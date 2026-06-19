@@ -7,6 +7,7 @@ from pathlib import Path
 TABLES_DIR = (
     Path(__file__).resolve().parents[2]
     / "pkgs"
+    / "20-storage"
     / "tigrbl-identity-storage"
     / "src"
     / "tigrbl_identity_storage"
@@ -38,6 +39,8 @@ REQUIRED_TABLE_OPS = {
         "DelegationGrantProof": {"persist_provenance"},
         "DelegationGrantTokenLink": {"link_token"},
     },
+    "key.py": {"Key": {"create_key", "lookup_by_kid", "list_active", "enable", "disable", "retire", "rotate", "publish_jwks", "sign", "verify"}},
+    "key_version.py": {"KeyVersion": {"create_version", "lookup", "list_for_key", "activate", "retire", "export_public_jwk"}},
 }
 
 
@@ -54,6 +57,8 @@ def test_storage_tables_own_required_operation_methods() -> None:
 
     for filename, class_requirements in REQUIRED_TABLE_OPS.items():
         path = TABLES_DIR / filename
+        if not path.exists():
+            path = TABLES_DIR / filename.removesuffix(".py") / "_table.py"
         for class_name, operation_names in class_requirements.items():
             defined = _class_methods(path, class_name)
             for name in sorted(operation_names - defined):

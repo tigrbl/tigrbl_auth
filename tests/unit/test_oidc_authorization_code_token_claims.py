@@ -8,7 +8,7 @@ import pytest
 
 from tigrbl_auth.framework import Request
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
-from tigrbl_identity_storage.tables import _oauth_token_endpoint as token_endpoint
+from tigrbl_identity_storage.tables.token_record import _endpoint as token_endpoint
 
 
 @pytest.mark.unit
