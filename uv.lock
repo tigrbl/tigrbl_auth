@@ -2063,6 +2063,7 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-release-contracts" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
@@ -2177,6 +2178,7 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
+    { name = "tigrbl-release-contracts", editable = "pkgs/00-core/tigrbl-release-contracts" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'servers'", specifier = "==0.3.8" },
@@ -2223,6 +2225,12 @@ requires-dist = [
 name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
+dependencies = [
+    { name = "tigrbl-release-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-release-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-authz-resource-server"
@@ -2459,17 +2467,11 @@ name = "tigrbl-identity-resource-server"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/deprecated/tigrbl-identity-resource-server" }
 dependencies = [
-    { name = "email-validator" },
-    { name = "tigrbl" },
     { name = "tigrbl-authz-resource-server" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "email-validator", specifier = ">=2.0" },
-    { name = "tigrbl", specifier = "==0.4.0" },
-    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
-]
+requires-dist = [{ name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-rp"
@@ -2507,11 +2509,17 @@ name = "tigrbl-identity-storage"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-storage/tigrbl-identity-storage" }
 dependencies = [
+    { name = "email-validator" },
+    { name = "tigrbl" },
     { name = "tigrbl-authz-resource-server" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "email-validator", specifier = ">=2.0" },
+    { name = "tigrbl", specifier = "==0.4.0" },
+    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-kernel"
@@ -2570,6 +2578,11 @@ sdist = { url = "https://files.pythonhosted.org/packages/cb/5a/8306eab482bca18cf
 wheels = [
     { url = "https://files.pythonhosted.org/packages/66/84/9fd6c58b1f0395f46f4617f51dd52297f1d3c48c3a7abe02ca2de0867700/tigrbl_orm-0.4.0-py3-none-any.whl", hash = "sha256:f8b2d1759821ae43e4dfcef3c83c9fabd2bdb82d24edbf6273ce70415e856dcc", size = 28821 },
 ]
+
+[[package]]
+name = "tigrbl-release-contracts"
+version = "0.1.0"
+source = { editable = "pkgs/00-core/tigrbl-release-contracts" }
 
 [[package]]
 name = "tigrbl-runtime"

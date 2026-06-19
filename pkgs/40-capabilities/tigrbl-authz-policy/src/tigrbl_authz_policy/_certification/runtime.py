@@ -1,19 +1,10 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
 from .base import CertificationError
-
-
-@dataclass(frozen=True)
-class RuntimeQualification:
-    artifact_sha256: str
-    dependency_lock_sha256: str
-    config_sha256: str
-    product_surface: str
-    capabilities: frozenset[str]
+from tigrbl_release_contracts import RuntimeQualification
 
 
 def stable_sha256(value: Mapping[str, Any] | Sequence[Any] | str) -> str:

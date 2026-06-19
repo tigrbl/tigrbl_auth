@@ -40,6 +40,7 @@ dependencies = [
     "bcrypt==5.0.0",
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
+    "tigrbl-release-contracts==0.1.0",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-trust-domain-bases==0.1.0",
     "tigrbl-auth==0.4.0.dev2",
@@ -157,6 +158,7 @@ dev = [
 package = false
 
 [tool.uv.sources]
+tigrbl-release-contracts = { path = "pkgs/00-core/tigrbl-release-contracts", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/00-core/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }

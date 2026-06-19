@@ -3,9 +3,7 @@ from __future__ import annotations
 import re
 from urllib.parse import urlparse
 
-
-class CertificationError(ValueError):
-    """Raised when a strategic security certification check fails closed."""
+from tigrbl_release_contracts import CertificationError
 
 
 _SLUG_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$")

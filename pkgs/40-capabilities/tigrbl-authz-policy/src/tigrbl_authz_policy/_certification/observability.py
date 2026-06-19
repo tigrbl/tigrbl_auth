@@ -1,18 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from datetime import datetime
 from typing import Any, Mapping, Sequence
 
 from .base import CertificationError, _SECRET_KEYS
-
-
-@dataclass(frozen=True)
-class DelegationStep:
-    actor: str
-    subject: str
-    scopes: frozenset[str]
-    proof_id: str
+from tigrbl_release_contracts import AuthorizationEvent, DelegationStep
 
 
 def assert_delegation_provenance(
@@ -38,17 +29,6 @@ def assert_delegation_provenance(
         previous_subject = step.actor
     if not chain[-1].scopes.issubset(allowed_final_scopes):
         raise CertificationError("delegation final scopes exceed attenuation")
-
-
-@dataclass(frozen=True)
-class AuthorizationEvent:
-    event_type: str
-    subject_id: str
-    actor_id: str
-    decision: str
-    correlation_id: str
-    occurred_at: datetime
-    attributes: Mapping[str, Any] = field(default_factory=dict)
 
 
 def sanitize_event_attributes(attributes: Mapping[str, Any]) -> dict[str, Any]:

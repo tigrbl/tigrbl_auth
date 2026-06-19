@@ -2,19 +2,24 @@ from __future__ import annotations
 
 import base64
 import time
-from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Final, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .base import CertificationError
+from tigrbl_release_contracts import (
+    AlgorithmPolicy,
+    ECDSA_SIGNATURE_ALGS,
+    EDDSA_SIGNATURE_ALGS,
+    KeyBoundary,
+    ML_DSA_65_ALG,
+    MachineIdentity,
+    PQC_JWK_KTY,
+    PQC_SIGNATURE_ALGS,
+    VerifierPolicy,
+)
 
 
 RSA_SIGNATURE_PREFIXES = ("RS", "PS")
-ECDSA_SIGNATURE_ALGS = frozenset({"ES256", "ES384", "ES512", "ES256K"})
-EDDSA_SIGNATURE_ALGS = frozenset({"EdDSA"})
-ML_DSA_65_ALG: Final[str] = "ML-DSA-65"
-PQC_SIGNATURE_ALGS: Final[frozenset[str]] = frozenset({ML_DSA_65_ALG})
-PQC_JWK_KTY: Final[str] = "PQC"
 
 
 def _b64url_decode(value: str) -> bytes:
@@ -36,18 +41,6 @@ def public_key_from_pqc_jwk(jwk: Mapping[str, Any]) -> bytes:
     if not isinstance(x, str) or not x:
         raise CertificationError("PQC JWK requires public key material")
     return _b64url_decode(x)
-
-
-@dataclass(frozen=True)
-class AlgorithmPolicy:
-    allowed_algs: frozenset[str] = EDDSA_SIGNATURE_ALGS | ECDSA_SIGNATURE_ALGS | PQC_SIGNATURE_ALGS
-    disallowed_algs: frozenset[str] = frozenset({"none", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512"})
-    warning_algs: frozenset[str] = ECDSA_SIGNATURE_ALGS
-    pqc_required: bool = False
-
-    @classmethod
-    def certification_default(cls) -> "AlgorithmPolicy":
-        return cls()
 
 
 def algorithm_policy_report(algorithms: Sequence[str], policy: AlgorithmPolicy | None = None) -> dict[str, Any]:
@@ -119,16 +112,6 @@ def validate_jwk_set(
             raise CertificationError("unsupported OKP curve")
 
 
-@dataclass(frozen=True)
-class KeyBoundary:
-    key_id: str
-    owner_type: str
-    owner_id: str
-    algorithm: str
-    rotation_epoch: int
-    visible_to: frozenset[str] = field(default_factory=frozenset)
-
-
 def assert_crypto_boundaries(keys: Sequence[KeyBoundary]) -> None:
     by_id: dict[str, KeyBoundary] = {}
     for key in keys:
@@ -143,15 +126,6 @@ def assert_crypto_boundaries(keys: Sequence[KeyBoundary]) -> None:
             raise CertificationError("tenant key visible outside its owner boundary")
         if key.rotation_epoch < 1:
             raise CertificationError("key rotation epoch must be positive")
-
-
-@dataclass(frozen=True)
-class VerifierPolicy:
-    issuer: str
-    audiences: frozenset[str]
-    required_scopes: frozenset[str]
-    max_authz_staleness_seconds: int
-    allowed_algs: frozenset[str] = frozenset({"RS256", "ES256", "EdDSA"})
 
 
 def assert_verifier_accepts(policy: VerifierPolicy, token_claims: Mapping[str, Any]) -> None:
@@ -172,17 +146,6 @@ def assert_verifier_accepts(policy: VerifierPolicy, token_claims: Mapping[str, A
     authz_iat = int(token_claims.get("authz_iat", token_claims.get("iat", now)))
     if now - authz_iat > policy.max_authz_staleness_seconds:
         raise CertificationError("verifier rejects stale authorization")
-
-
-@dataclass(frozen=True)
-class MachineIdentity:
-    subject_id: str
-    owner_id: str
-    tenant_id: str
-    credential_id: str
-    credential_rotates_at: datetime
-    allowed_audiences: frozenset[str]
-    human: bool = False
 
 
 def assert_machine_identity_governed(identity: MachineIdentity, *, now: datetime | None = None) -> None:

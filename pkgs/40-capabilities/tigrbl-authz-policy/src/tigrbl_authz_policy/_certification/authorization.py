@@ -1,18 +1,14 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
 from typing import Iterable, Sequence
 
 from .base import CertificationError
-
-
-@dataclass(frozen=True)
-class CapabilityRecord:
-    name: str
-    enabled: bool
-    evidence_id: str | None = None
-    route: str | None = None
+from tigrbl_release_contracts import (
+    AuthorizationSnapshot,
+    AuthorizationState,
+    CapabilityRecord,
+)
 
 
 def runtime_capability_truth(
@@ -35,28 +31,17 @@ def runtime_capability_truth(
     return {name: record.enabled and bool(record.evidence_id) for name, record in by_name.items()}
 
 
-@dataclass
-class AuthorizationState:
-    subject_id: str
-    version: int = 1
-    updated_at: float = field(default_factory=time.time)
-    mutations: list[str] = field(default_factory=list)
-
-    def mutate(self, reason: str) -> int:
-        if not reason:
-            raise CertificationError("authorization mutation requires a reason")
-        self.version += 1
-        self.updated_at = time.time()
-        self.mutations.append(reason)
-        return self.version
+def mutate_authorization_state(state: AuthorizationState, reason: str) -> int:
+    if not reason:
+        raise CertificationError("authorization mutation requires a reason")
+    state.version += 1
+    state.updated_at = time.time()
+    state.mutations.append(reason)
+    return state.version
 
 
-@dataclass(frozen=True)
-class AuthorizationSnapshot:
-    subject_id: str
-    version: int
-    issued_at: float
-    max_staleness_seconds: int
+if not hasattr(AuthorizationState, "mutate"):
+    AuthorizationState.mutate = mutate_authorization_state  # type: ignore[attr-defined]
 
 
 def assert_authorization_fresh(

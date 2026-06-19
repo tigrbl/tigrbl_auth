@@ -1,40 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Mapping, Sequence
 
 from .base import CertificationError
-
-
-@dataclass(frozen=True)
-class RealmState:
-    realm_id: str
-    slug: str
-    issuer: str
-    jwks_uri: str
-    key_ids: frozenset[str]
-    tenant_ids: frozenset[str] = field(default_factory=frozenset)
-    client_ids: frozenset[str] = field(default_factory=frozenset)
-    policy_ids: frozenset[str] = field(default_factory=frozenset)
-    token_ids: frozenset[str] = field(default_factory=frozenset)
-    cache_namespace: str | None = None
-    admin_authorities: frozenset[str] = field(default_factory=frozenset)
-
-
-@dataclass(frozen=True)
-class TenantState:
-    tenant_id: str
-    slug: str
-    realm_id: str
-    issuer: str
-    jwks_uri: str
-    key_ids: frozenset[str]
-    client_ids: frozenset[str] = field(default_factory=frozenset)
-    user_ids: frozenset[str] = field(default_factory=frozenset)
-    policy_ids: frozenset[str] = field(default_factory=frozenset)
-    credential_ids: frozenset[str] = field(default_factory=frozenset)
-    token_ids: frozenset[str] = field(default_factory=frozenset)
-    cache_namespace: str | None = None
+from tigrbl_release_contracts import RealmState, TenantState
 
 
 def _assert_disjoint(label: str, owners: Mapping[str, frozenset[str]]) -> None:
