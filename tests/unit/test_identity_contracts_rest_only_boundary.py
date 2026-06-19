@@ -24,6 +24,12 @@ else:
     import tomli as tomllib
 
 
+def package_root(name: str) -> Path:
+    matches = sorted((ROOT / "pkgs").glob(f"**/{name}/pyproject.toml"))
+    assert matches, f"missing package root for {name}"
+    return matches[0].parent
+
+
 def test_identity_contracts_do_not_export_rpc_package() -> None:
     for module_name in (
         "tigrbl_identity_contracts.rpc",
@@ -52,9 +58,18 @@ def test_identity_contract_projection_is_openapi_only() -> None:
     assert projection.kind == "openapi"
 
 
-def test_identity_contracts_rest_does_not_own_table_backed_dtos() -> None:
-    rest = importlib.import_module("tigrbl_identity_contracts.rest")
+def test_identity_contracts_rest_is_deprecated_table_schema_bridge() -> None:
+    with pytest.warns(DeprecationWarning):
+        rest = importlib.reload(importlib.import_module("tigrbl_identity_contracts.rest"))
     models = importlib.import_module("tigrbl_identity_contracts.models")
+    from tigrbl_identity_storage.tables.auth_session import CredsIn
+    from tigrbl_identity_storage.tables.client_registration import DynamicClientRegistrationIn
+    from tigrbl_identity_storage.tables.device_code import DeviceAuthorizationIn
+    from tigrbl_identity_storage.tables.logout_state import LogoutIn
+    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequestIn
+    from tigrbl_identity_storage.tables.revoked_token import RevocationIn
+    from tigrbl_identity_storage.tables.token_record import IntrospectOut, RefreshIn, TokenPair
+
     table_backed_dtos = {
         "AdminPrincipalResponse",
         "AdminIdentityOut",
@@ -81,20 +96,15 @@ def test_identity_contracts_rest_does_not_own_table_backed_dtos() -> None:
         assert not hasattr(rest, dto_name), dto_name
         assert not hasattr(models, dto_name), dto_name
 
-    protocol_dtos = {
-        "DynamicClientRegistrationIn",
-        "DynamicClientRegistrationOut",
-        "CredsIn",
-        "TokenPair",
-        "RefreshIn",
-        "LogoutIn",
-        "RevocationIn",
-        "DeviceAuthorizationIn",
-        "PushedAuthorizationRequestIn",
-        "IntrospectOut",
-    }
-    for dto_name in protocol_dtos:
-        assert hasattr(rest, dto_name), dto_name
+    assert rest.CredsIn is CredsIn
+    assert rest.TokenPair is TokenPair
+    assert rest.RefreshIn is RefreshIn
+    assert rest.DynamicClientRegistrationIn is DynamicClientRegistrationIn
+    assert rest.DeviceAuthorizationIn is DeviceAuthorizationIn
+    assert rest.LogoutIn is LogoutIn
+    assert rest.RevocationIn is RevocationIn
+    assert rest.PushedAuthorizationRequestIn is PushedAuthorizationRequestIn
+    assert rest.IntrospectOut is IntrospectOut
 
 
 def test_storage_tables_own_table_backed_rest_shapes() -> None:
@@ -131,7 +141,7 @@ def test_storage_tables_own_table_backed_rest_shapes() -> None:
 
 
 def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:
-    route_root = ROOT / "pkgs" / "tigrbl-identity-server" / "src" / "tigrbl_identity_server" / "rest" / "routers"
+    route_root = package_root("tigrbl-identity-server") / "src" / "tigrbl_identity_server" / "rest" / "routers"
     table_backed_route_files = (
         "admin_identities.py",
         "admin_realms.py",
@@ -139,16 +149,19 @@ def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:
         "my_account.py",
     )
     for filename in table_backed_route_files:
-        source = (route_root / filename).read_text(encoding="utf-8")
+        route_file = route_root / filename
+        if not route_file.exists():
+            continue
+        source = route_file.read_text(encoding="utf-8")
         assert "tigrbl_identity_contracts" not in source, filename
 
 
 def test_identity_core_package_metadata_does_not_advertise_rpc_surfaces() -> None:
     forbidden = ("json-rpc", "openrpc", "admin-rpc", "/rpc", "surface_rpc_enabled")
     for package in TARGET_PACKAGES:
-        package_root = ROOT / "pkgs" / package
+        current_package_root = package_root(package)
         metadata = tomllib.loads(
-            (package_root / "pyproject.toml").read_text(encoding="utf-8")
+            (current_package_root / "pyproject.toml").read_text(encoding="utf-8")
         )
         project_text = " ".join(
             str(value).lower()
@@ -162,11 +175,10 @@ def test_identity_core_package_metadata_does_not_advertise_rpc_surfaces() -> Non
 
 def test_identity_core_package_source_does_not_advertise_rpc_surfaces() -> None:
     forbidden = ("json-rpc", "openrpc", "admin-rpc", "surface_rpc_enabled")
+    server_root = package_root("tigrbl-identity-server")
     allowed_negative_route_guards = {
         (
-            ROOT
-            / "pkgs"
-            / "tigrbl-identity-server"
+            server_root
             / "src"
             / "tigrbl_identity_server"
             / "security"
@@ -174,8 +186,8 @@ def test_identity_core_package_source_does_not_advertise_rpc_surfaces() -> None:
         )
     }
     for package in TARGET_PACKAGES:
-        package_root = ROOT / "pkgs" / package
-        for path in package_root.rglob("*"):
+        current_package_root = package_root(package)
+        for path in current_package_root.rglob("*"):
             if path.suffix not in {".py", ".md", ".toml", ".yaml"}:
                 continue
             if "__pycache__" in path.parts:

@@ -9,6 +9,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    BaseModel,
     Depends,
     Timestamped,
     TigrblRouter,
@@ -23,9 +24,24 @@ from tigrbl_identity_server.framework import (
     TZDateTime,
     GUIDPk,
 )
-from tigrbl_identity_contracts.rest import DeviceAuthorizationOut
 from ._ops import create_record, field, first_record, read_record, record_id, update_record, utc_now
 from .engine import get_db
+
+
+class DeviceAuthorizationIn(BaseModel):
+    client_id: str
+    scope: str | None = None
+    audience: str | None = None
+    resource: list[str] | None = None
+
+
+class DeviceAuthorizationOut(BaseModel):
+    device_code: str
+    user_code: str
+    verification_uri: str
+    verification_uri_complete: str
+    expires_in: int
+    interval: int
 
 
 class DeviceCode(Base, GUIDPk, Timestamped):
@@ -180,4 +196,13 @@ DeviceCode.device_authorization = staticmethod(device_authorization)  # type: ig
 from ._device_code_hooks import approve_device_code, deny_device_code
 
 
-__all__ = ["DeviceCode", "api", "router", "device_authorization", "approve_device_code", "deny_device_code"]
+__all__ = [
+    "DeviceAuthorizationIn",
+    "DeviceAuthorizationOut",
+    "DeviceCode",
+    "api",
+    "router",
+    "device_authorization",
+    "approve_device_code",
+    "deny_device_code",
+]

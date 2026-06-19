@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
-from typing import Any
+from typing import Any, Optional
 
 from tigrbl_identity_server.framework import (
     Base,
@@ -24,12 +24,27 @@ from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     PgUUID,
     UUID,
+    Field,
+    constr,
     status,
 )
-from tigrbl_identity_contracts.rest import CredsIn, TokenPair
 from .user import MyAccountMutationOut, User, _current_principal_dependency, _iso, _not_found_uuid
 from ._ops import create_record, field, first_record, list_records, read_record, record_id, update_record, utc_now
 from .engine import get_db
+
+_password = constr(min_length=8, max_length=256)
+
+
+class CredsIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: _password
+
+
+class TokenPair(BaseModel):
+    access_token: str
+    refresh_token: Optional[str] = None
+    token_type: str = Field(default="bearer")
+    id_token: Optional[str] = None
 
 
 class MyAccountSessionOut(BaseModel):
@@ -266,7 +281,9 @@ AuthSession.login = staticmethod(login)  # type: ignore[attr-defined]
 
 __all__ = [
     "AuthSession",
+    "CredsIn",
     "MyAccountSessionOut",
+    "TokenPair",
     "account_api",
     "account_router",
     "login_api",

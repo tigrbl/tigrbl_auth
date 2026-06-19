@@ -8,6 +8,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    BaseModel,
     TigrblRouter,
     Timestamped,
     S,
@@ -19,8 +20,16 @@ from tigrbl_identity_server.framework import (
     PgUUID,
     ForeignKeySpec,
 )
-from tigrbl_identity_contracts.rest import RevocationOut
 from ._ops import create_record, first_record, record_id, update_record
+
+
+class RevocationIn(BaseModel):
+    token: str
+    token_type_hint: str | None = None
+
+
+class RevocationOut(BaseModel):
+    revoked: bool = True
 
 
 class RevokedToken(Base, GUIDPk, Timestamped):
@@ -74,4 +83,4 @@ async def revoke(request: Any) -> Any:
 RevokedToken.revoke = staticmethod(revoke)  # type: ignore[attr-defined]
 
 
-__all__ = ["RevokedToken", "api", "router", "revoke"]
+__all__ = ["RevocationIn", "RevocationOut", "RevokedToken", "api", "router", "revoke"]

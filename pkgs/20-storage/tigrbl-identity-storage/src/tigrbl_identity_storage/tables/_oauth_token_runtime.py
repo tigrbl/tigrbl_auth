@@ -90,7 +90,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover
-    from tigrbl_identity_contracts.rest import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
+    from .token_record import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
 except Exception:  # pragma: no cover - dependency-light fallback
     from pydantic import BaseModel
 

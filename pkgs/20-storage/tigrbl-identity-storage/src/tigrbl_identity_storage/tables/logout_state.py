@@ -10,6 +10,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    BaseModel,
     Depends,
     Timestamped,
     TigrblRouter,
@@ -26,6 +27,27 @@ from tigrbl_identity_server.framework import (
 )
 from ._ops import create_record, first_record, record_id, update_record, utc_now
 from .engine import get_db
+
+
+class LogoutIn(BaseModel):
+    id_token_hint: str | None = None
+    post_logout_redirect_uri: str | None = None
+    state: str | None = None
+    sid: str | None = None
+    client_id: str | None = None
+
+
+class LogoutOut(BaseModel):
+    status: str
+    session_id: str | None = None
+    logout_id: str | None = None
+    post_logout_redirect_uri: str | None = None
+    state: str | None = None
+    cookie_cleared: bool = True
+    cookie_policy: dict[str, Any] | None = None
+    frontchannel_logout: dict[str, Any] | None = None
+    backchannel_logout: dict[str, Any] | None = None
+    replay_protected: bool = True
 
 
 class LogoutState(Base, GUIDPk, Timestamped):
@@ -126,4 +148,4 @@ async def logout(request: Any, db: Any = Depends(get_db)) -> Any:
 LogoutState.logout = staticmethod(logout)  # type: ignore[attr-defined]
 
 
-__all__ = ["LogoutState", "api", "router", "logout"]
+__all__ = ["LogoutIn", "LogoutOut", "LogoutState", "api", "router", "logout"]

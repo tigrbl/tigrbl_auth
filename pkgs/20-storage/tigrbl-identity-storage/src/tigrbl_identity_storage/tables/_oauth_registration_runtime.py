@@ -6,7 +6,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 from uuid import UUID, uuid4
 
-from tigrbl_identity_contracts.rest import (
+from .client_registration import (
     DynamicClientRegistrationIn,
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,

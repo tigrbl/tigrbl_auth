@@ -5,13 +5,14 @@ from __future__ import annotations
 import datetime as dt
 from pathlib import Path
 import uuid
-from typing import Any
+from typing import Any, Literal, Optional
 
 from tigrbl.security import Depends as TigrblDepends
-from tigrbl_identity_contracts.rest import TokenPair
 from tigrbl_identity_server.framework import (
     AsyncSession,
     Base,
+    BaseModel,
+    Field,
     Request,
     Timestamped,
     TigrblRouter,
@@ -26,8 +27,41 @@ from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     PgUUID,
 )
+from tigrbl_identity_core.typing import StrUUID
 from ._ops import create_record, field, first_record, list_records, record_id, update_record, utc_now
 from .engine import get_db
+
+
+class TokenPair(BaseModel):
+    access_token: str
+    refresh_token: Optional[str] = None
+    token_type: str = Field(default="bearer")
+    id_token: Optional[str] = None
+
+
+class RefreshIn(BaseModel):
+    refresh_token: str
+
+
+class IntrospectOut(BaseModel):
+    active: bool
+    sub: Optional[StrUUID] = None
+    tid: Optional[StrUUID] = None
+    kind: Optional[str] = None
+
+
+class PasswordGrantForm(BaseModel):
+    grant_type: Literal["password"]
+    username: str
+    password: str
+
+
+class AuthorizationCodeGrantForm(BaseModel):
+    grant_type: Literal["authorization_code"]
+    code: str
+    redirect_uri: str
+    client_id: str
+    code_verifier: Optional[str] = None
 
 
 def _to_uuid(value: Any) -> uuid.UUID | None:
@@ -214,4 +248,14 @@ async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)) -> A
 TokenRecord.token = staticmethod(token)  # type: ignore[attr-defined]
 
 
-__all__ = ["TokenRecord", "api", "router", "token"]
+__all__ = [
+    "AuthorizationCodeGrantForm",
+    "IntrospectOut",
+    "PasswordGrantForm",
+    "RefreshIn",
+    "TokenPair",
+    "TokenRecord",
+    "api",
+    "router",
+    "token",
+]

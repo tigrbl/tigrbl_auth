@@ -21,7 +21,7 @@ from tigrbl_auth_protocol_oauth.standards._introspection_activity import (
 )
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_identity_contracts.rest import IntrospectOut
+    from .token_record import IntrospectOut
     from tigrbl_identity_server.rest.shared import _require_tls
     from tigrbl_identity_runtime.deployment import deployment_from_request
     from tigrbl_identity_server.framework import HTTPException, Request, TigrblApp, TigrblRouter, status

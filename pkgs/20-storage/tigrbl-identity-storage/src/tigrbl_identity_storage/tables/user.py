@@ -35,13 +35,6 @@ from tigrbl_identity_server.framework import (
     constr,
 )
 
-from tigrbl_identity_contracts.rest import (
-    AdminPasswordChangeIn,
-    AdminPasswordResetCompleteIn,
-    AdminPasswordResetRequestIn,
-    AdminSessionOut,
-    CredsIn,
-)
 from tigrbl_identity_jose.key_management import hash_pw
 from ._ops import create_record, delete_record, first_record, list_records, read_record, record_id, update_record
 from .engine import get_db
@@ -112,6 +105,39 @@ class MyAccountPasswordChangeIn(BaseModel):
 class MyAccountMutationOut(BaseModel):
     status: str
     id: str | None = None
+
+
+class CredsIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+    password: _password
+
+
+class AdminPasswordResetRequestIn(BaseModel):
+    identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
+
+
+class AdminPasswordResetCompleteIn(BaseModel):
+    token: constr(strip_whitespace=True, min_length=16, max_length=256)
+    password: _password
+
+
+class AdminPasswordChangeIn(BaseModel):
+    current_password: _password
+    new_password: _password
+
+
+class AdminSessionOut(BaseModel):
+    authenticated: bool
+    session_id: str | None = None
+    user_id: str | None = None
+    tenant_id: str | None = None
+    username: str | None = None
+    email: str | None = None
+    is_admin: bool = False
+    is_superuser: bool = False
+    must_change_password: bool = False
+    roles: list[str] = Field(default_factory=list)
+    debug_reset_token: str | None = None
 
 
 class User(UserBase, Bootstrappable):
@@ -310,6 +336,11 @@ __all__ = [
     "AdminIdentityOut",
     "AdminIdentityProvisionIn",
     "AdminIdentityUpdateIn",
+    "AdminPasswordChangeIn",
+    "AdminPasswordResetCompleteIn",
+    "AdminPasswordResetRequestIn",
+    "AdminSessionOut",
+    "CredsIn",
     "DEFAULT_BOOTSTRAP_SUPERUSER_ID",
     "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD",
     "MyAccountMutationOut",
