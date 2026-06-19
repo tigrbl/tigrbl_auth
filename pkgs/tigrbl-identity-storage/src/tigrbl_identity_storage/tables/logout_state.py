@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import datetime as dt
+import json
+from pathlib import Path
 import uuid
 from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    Depends,
     Timestamped,
+    TigrblRouter,
     S,
     acol,
     JSON,
@@ -21,6 +25,7 @@ from tigrbl_identity_server.framework import (
     PgUUID,
 )
 from ._ops import create_record, first_record, record_id, update_record, utc_now
+from .engine import get_db
 
 
 class LogoutState(Base, GUIDPk, Timestamped):
@@ -86,4 +91,39 @@ class LogoutState(Base, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"status": "expired", "expires_at": utc_now()})
 
 
-__all__ = ["LogoutState"]
+api = router = TigrblRouter()
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/logout", methods=["GET", "POST"], response_model=None)
+async def logout(request: Any, db: Any = Depends(get_db)) -> Any:
+    from tigrbl_identity_server.ops.logout import logout_request
+
+    result = await logout_request(request=request, db=db)
+    from tigrbl_authn_credentials.session_service import observe_logout_response
+
+    payload: dict[str, object] = {}
+    body = getattr(result, "body", None)
+    if body:
+        try:
+            payload = json.loads(body.decode("utf-8"))
+        except Exception:
+            payload = {}
+    if not payload:
+        headers = getattr(result, "headers", {}) or {}
+        payload = {
+            "status": headers.get("x-tigrbl-auth-logout-status"),
+            "logout_id": headers.get("x-tigrbl-auth-logout-id"),
+            "session_id": headers.get("x-tigrbl-auth-session-id"),
+        }
+    observe_logout_response(_repo_root(), session_id=payload.get("session_id"), details=payload)
+    return result
+
+
+LogoutState.logout = staticmethod(logout)  # type: ignore[attr-defined]
+
+
+__all__ = ["LogoutState", "api", "router", "logout"]

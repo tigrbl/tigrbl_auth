@@ -1,38 +1,16 @@
+"""Compatibility bridge for the storage-owned logout route."""
+
 from __future__ import annotations
 
-import json
-from pathlib import Path
+from warnings import warn
 
-from tigrbl_identity_server.framework import Depends, TigrblRouter
-from tigrbl_identity_server.ops.logout import logout_request
-from tigrbl_identity_storage.tables import get_db
+warn(
+    "tigrbl_identity_server.rest.routers.logout is deprecated; "
+    "import tigrbl_identity_storage.tables.logout_state instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
-api = TigrblRouter()
-router = api
+from tigrbl_identity_storage.tables.logout_state import api, logout, router
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[4]
-
-
-@api.route('/logout', methods=['GET', 'POST'], response_model=None)
-async def logout(request, db=Depends(get_db)):
-    result = await logout_request(request=request, db=db)
-    from tigrbl_authn_credentials.session_service import observe_logout_response
-
-    payload: dict[str, object] = {}
-    body = getattr(result, 'body', None)
-    if body:
-        try:
-            payload = json.loads(body.decode('utf-8'))
-        except Exception:
-            payload = {}
-    if not payload:
-        headers = getattr(result, 'headers', {}) or {}
-        payload = {
-            'status': headers.get('x-tigrbl-auth-logout-status'),
-            'logout_id': headers.get('x-tigrbl-auth-logout-id'),
-            'session_id': headers.get('x-tigrbl-auth-session-id'),
-        }
-    observe_logout_response(_repo_root(), session_id=payload.get('session_id'), details=payload)
-    return result
+__all__ = ["api", "logout", "router"]

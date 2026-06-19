@@ -1,21 +1,20 @@
 from __future__ import annotations
 
-from tigrbl.security import Depends as TigrblDepends
-from tigrbl_identity_server.framework import AsyncSession, Request, TigrblRouter
-from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_contracts.rest import CredsIn, TokenPair
-from tigrbl_identity_server.ops.login import login_user
+"""Compatibility bridge for AuthSession-owned login route."""
 
-api = TigrblRouter()
-router = api
+from warnings import warn
 
+warn(
+    "tigrbl_identity_server.rest.routers.login is deprecated; "
+    "import tigrbl_identity_storage.tables.auth_session instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
-@api.route('/login', methods=['POST'], response_model=TokenPair)
-async def login(request: Request, creds: CredsIn | None = None, db: AsyncSession = TigrblDepends(get_db)):
-    if creds is None:
-        body = await request.json() or {}
-        creds = CredsIn.model_validate(body)
-    return await login_user(request=request, db=db, identifier=creds.identifier, password=creds.password)
+from tigrbl_identity_storage.tables.auth_session import (
+    login,
+    login_api as api,
+    login_router as router,
+)
 
-
-__all__ = ['router', 'api']
+__all__ = ["api", "router", "login"]

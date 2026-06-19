@@ -26,6 +26,25 @@ def _imports_from(path: Path) -> set[str]:
     return imports
 
 
+ROUTER_DEPRECATION_TARGETS = {
+    "__init__.py": "tigrbl_identity_storage.tables.*",
+    "admin_auth.py": "tigrbl_identity_storage.tables.user",
+    "admin_identities.py": "tigrbl_identity_storage.tables.user",
+    "admin_realms.py": "tigrbl_identity_storage.tables.realm",
+    "admin_tenants.py": "tigrbl_identity_storage.tables.tenant",
+    "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
+    "authorize.py": "tigrbl_identity_storage.tables.auth_code",
+    "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
+    "login.py": "tigrbl_identity_storage.tables.auth_session",
+    "logout.py": "tigrbl_identity_storage.tables.logout_state",
+    "my_account.py": "tigrbl_identity_storage.tables.user",
+    "par.py": "tigrbl_identity_storage.tables.pushed_authorization_request",
+    "register.py": "tigrbl_identity_storage.tables.client_registration",
+    "revoke.py": "tigrbl_identity_storage.tables.revoked_token",
+    "token.py": "tigrbl_identity_storage.tables.token_record",
+}
+
+
 def test_server_has_no_rest_schema_bucket_module() -> None:
     with pytest.raises(ModuleNotFoundError):
         importlib.import_module("tigrbl_identity_server.routers.schemas")
@@ -54,11 +73,30 @@ def test_no_package_imports_removed_server_schema_bucket() -> None:
 
 
 @pytest.mark.parametrize(
+    ("route_file", "target"),
+    sorted(ROUTER_DEPRECATION_TARGETS.items()),
+)
+def test_server_rest_router_bridges_warn_to_storage_owner(
+    route_file: str,
+    target: str,
+) -> None:
+    path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
+    source = _source(path)
+
+    assert "DeprecationWarning" in source
+    assert target in source
+
+
+@pytest.mark.parametrize(
     ("module_name", "names"),
     [
         (
             "tigrbl_identity_storage.tables.user",
             {
+                "AdminPasswordChangeIn",
+                "AdminPasswordResetCompleteIn",
+                "AdminPasswordResetRequestIn",
+                "AdminSessionOut",
                 "AdminIdentityOut",
                 "AdminIdentityProvisionIn",
                 "AdminIdentityUpdateIn",
@@ -95,15 +133,6 @@ def test_table_backed_rest_schemas_live_on_table_modules(
 @pytest.mark.parametrize(
     ("route_file", "required_imports"),
     [
-        ("admin_identities.py", {"tigrbl_identity_storage.tables.user"}),
-        ("admin_tenants.py", {"tigrbl_identity_storage.tables.tenant"}),
-        (
-            "admin_realms.py",
-            {
-                "tigrbl_identity_storage.tables.realm",
-                "tigrbl_identity_storage.tables.tenant",
-            },
-        ),
         (
             "my_account.py",
             {
@@ -114,7 +143,7 @@ def test_table_backed_rest_schemas_live_on_table_modules(
         ),
     ],
 )
-def test_table_backed_rest_routers_import_schemas_from_table_modules(
+def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
     route_file: str, required_imports: set[str]
 ) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
@@ -125,24 +154,197 @@ def test_table_backed_rest_routers_import_schemas_from_table_modules(
 
 
 @pytest.mark.parametrize(
+    ("module_name", "route_names"),
+    [
+        (
+            "tigrbl_identity_storage.tables.user",
+            {
+                "admin_change_password",
+                "admin_list_identities",
+                "admin_create_identity",
+                "admin_update_identity",
+                "admin_delete_identity",
+                "admin_forgot_password",
+                "admin_login",
+                "admin_login_browser_redirect",
+                "admin_logout",
+                "admin_reset_password",
+                "admin_session",
+            },
+        ),
+        (
+            "tigrbl_identity_storage.tables.tenant",
+            {
+                "admin_list_tenants",
+                "admin_create_tenant",
+                "admin_update_tenant",
+                "admin_delete_tenant",
+            },
+        ),
+        (
+            "tigrbl_identity_storage.tables.realm",
+            {
+                "admin_list_realms",
+                "admin_create_realm",
+                "admin_get_realm",
+                "admin_update_realm",
+                "admin_delete_realm",
+                "admin_list_realm_tenants",
+                "admin_create_realm_tenant",
+            },
+        ),
+    ],
+)
+def test_admin_route_handlers_live_on_storage_table_modules(
+    module_name: str, route_names: set[str]
+) -> None:
+    module = importlib.import_module(module_name)
+    table_name = module_name.rsplit(".", 1)[-1]
+    class_name = {
+        "realm": "Realm",
+        "tenant": "Tenant",
+        "user": "User",
+    }[table_name]
+    table_class = getattr(module, class_name)
+
+    assert hasattr(module, "admin_api")
+    assert hasattr(module, "admin_router")
+    missing = sorted(name for name in route_names if not hasattr(module, name))
+    assert missing == []
+    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
+    assert missing_class_ops == []
+
+
+@pytest.mark.parametrize(
+    ("module_name", "class_name", "route_names"),
+    [
+        (
+            "tigrbl_identity_storage.tables.user",
+            "User",
+            {
+                "get_account_profile",
+                "update_account_profile",
+                "change_account_password",
+            },
+        ),
+        (
+            "tigrbl_identity_storage.tables.auth_session",
+            "AuthSession",
+            {
+                "list_account_sessions",
+                "login",
+                "revoke_account_session",
+            },
+        ),
+        (
+            "tigrbl_identity_storage.tables.consent",
+            "Consent",
+            {
+                "list_account_consents",
+                "revoke_account_consent",
+                "list_account_authorized_apps",
+                "revoke_account_authorized_app",
+            },
+        ),
+    ],
+)
+def test_my_account_route_handlers_live_on_storage_table_modules(
+    module_name: str, class_name: str, route_names: set[str]
+) -> None:
+    module = importlib.import_module(module_name)
+    table_class = getattr(module, class_name)
+
+    assert hasattr(module, "account_api")
+    assert hasattr(module, "account_router")
+    missing = sorted(name for name in route_names if not hasattr(module, name))
+    assert missing == []
+    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
+    assert missing_class_ops == []
+
+
+@pytest.mark.parametrize(
+    ("module_name", "class_name", "route_names"),
+    [
+        (
+            "tigrbl_identity_storage.tables.client_registration",
+            "ClientRegistration",
+            {"register", "register_get", "register_put", "register_delete"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.device_code",
+            "DeviceCode",
+            {"device_authorization"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.pushed_authorization_request",
+            "PushedAuthorizationRequest",
+            {"par"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.revoked_token",
+            "RevokedToken",
+            {"revoke"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.auth_code",
+            "AuthCode",
+            {"authorize"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.token_record",
+            "TokenRecord",
+            {"token"},
+        ),
+        (
+            "tigrbl_identity_storage.tables.logout_state",
+            "LogoutState",
+            {"logout"},
+        ),
+    ],
+)
+def test_oauth_persistence_route_handlers_live_on_storage_table_modules(
+    module_name: str, class_name: str, route_names: set[str]
+) -> None:
+    module = importlib.import_module(module_name)
+    table_class = getattr(module, class_name)
+
+    assert hasattr(module, "api")
+    assert hasattr(module, "router")
+    missing = sorted(name for name in route_names if not hasattr(module, name))
+    assert missing == []
+    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
+    assert missing_class_ops == []
+
+
+@pytest.mark.parametrize(
     "route_file",
     [
-        "admin_auth.py",
-        "auth_flows.py",
-        "device_authorization.py",
+        "admin_identities.py",
+        "admin_tenants.py",
+        "admin_realms.py",
+        "my_account.py",
         "login.py",
+        "logout.py",
+        "auth_flows.py",
+        "authorize.py",
+        "device_authorization.py",
         "par.py",
         "register.py",
         "revoke.py",
         "token.py",
+        "admin_auth.py",
     ],
 )
-def test_protocol_rest_routers_import_protocol_schemas_from_contracts(
-    route_file: str,
-) -> None:
+def test_relocated_table_backed_server_rest_routers_are_bridge_only(route_file: str) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
+    source = _source(path)
 
-    assert "tigrbl_identity_contracts.rest" in _imports_from(path)
+    assert "tigrbl_identity_storage.tables." in source
+    assert "@api.route" not in source
+    assert ".handlers.create.core" not in source
+    assert ".handlers.update.core" not in source
+    assert ".handlers.delete.core" not in source
+    assert ".handlers.clear.core" not in source
 
 
 @pytest.mark.parametrize(

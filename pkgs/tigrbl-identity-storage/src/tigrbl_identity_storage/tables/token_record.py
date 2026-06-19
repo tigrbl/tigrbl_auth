@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import datetime as dt
+from pathlib import Path
 import uuid
 from typing import Any
 
+from tigrbl.security import Depends as TigrblDepends
+from tigrbl_identity_contracts.rest import TokenPair
 from tigrbl_identity_server.framework import (
+    AsyncSession,
     Base,
+    Request,
     Timestamped,
+    TigrblRouter,
     S,
     acol,
     JSON,
@@ -21,6 +27,7 @@ from tigrbl_identity_server.framework import (
     PgUUID,
 )
 from ._ops import create_record, field, first_record, list_records, record_id, update_record, utc_now
+from .engine import get_db
 
 
 def _to_uuid(value: Any) -> uuid.UUID | None:
@@ -179,4 +186,32 @@ class TokenRecord(Base, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), payload)
 
 
-__all__ = ["TokenRecord"]
+api = router = TigrblRouter()
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/token", methods=["POST"], response_model=TokenPair)
+async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)) -> Any:
+    from tigrbl_auth_protocol_oauth.ops.token import token_request
+
+    result = await token_request(request=request, db=db)
+    from tigrbl_authn_credentials.session_service import observe_token_response
+
+    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
+    observe_token_response(
+        _repo_root(),
+        access_token=payload.get("access_token"),
+        refresh_token=payload.get("refresh_token"),
+        id_token=payload.get("id_token"),
+        details=payload,
+    )
+    return result
+
+
+TokenRecord.token = staticmethod(token)  # type: ignore[attr-defined]
+
+
+__all__ = ["TokenRecord", "api", "router", "token"]

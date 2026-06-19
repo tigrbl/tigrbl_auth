@@ -27,6 +27,95 @@ RAW_HANDLER_ALLOWLIST = {
     "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
 }
 
+TABLE_ROUTE_FUNCTION_ALLOWLIST = {
+    "_user_account_routes.py": {
+        "change_account_password",
+        "get_account_profile",
+        "update_account_profile",
+    },
+    "_user_admin_auth_routes.py": {
+        "admin_change_password",
+        "admin_forgot_password",
+        "admin_login",
+        "admin_login_browser_redirect",
+        "admin_logout",
+        "admin_reset_password",
+        "admin_session",
+    },
+    "_user_admin_identity_routes.py": {
+        "admin_create_identity",
+        "admin_delete_identity",
+        "admin_list_identities",
+        "admin_update_identity",
+    },
+    "auth_session.py": {
+        "list_account_sessions",
+        "login",
+        "revoke_account_session",
+    },
+    "auth_code.py": {
+        "authorize",
+    },
+    "consent.py": {
+        "list_account_authorized_apps",
+        "list_account_consents",
+        "revoke_account_authorized_app",
+        "revoke_account_consent",
+    },
+    "client_registration.py": {
+        "register",
+        "register_delete",
+        "register_get",
+        "register_put",
+    },
+    "device_code.py": {
+        "device_authorization",
+    },
+    "pushed_authorization_request.py": {
+        "par",
+    },
+    "realm.py": {
+        "admin_create_realm",
+        "admin_create_realm_tenant",
+        "admin_delete_realm",
+        "admin_get_realm",
+        "admin_list_realm_tenants",
+        "admin_list_realms",
+        "admin_update_realm",
+    },
+    "tenant.py": {
+        "admin_create_tenant",
+        "admin_delete_tenant",
+        "admin_list_tenants",
+        "admin_update_tenant",
+    },
+    "user.py": {
+        "admin_change_password",
+        "admin_create_identity",
+        "admin_delete_identity",
+        "admin_forgot_password",
+        "admin_list_identities",
+        "admin_login",
+        "admin_login_browser_redirect",
+        "admin_logout",
+        "admin_reset_password",
+        "admin_session",
+        "admin_update_identity",
+        "change_account_password",
+        "get_account_profile",
+        "update_account_profile",
+    },
+    "logout_state.py": {
+        "logout",
+    },
+    "revoked_token.py": {
+        "revoke",
+    },
+    "token_record.py": {
+        "token",
+    },
+}
+
 
 def _python_files(root: Path) -> list[Path]:
     return [path for path in root.rglob("*.py") if "__pycache__" not in path.parts]
@@ -70,6 +159,8 @@ def test_storage_table_ops_are_not_hidden_in_module_level_free_functions() -> No
         tree = ast.parse(path.read_text(encoding="utf-8"))
         for node in tree.body:
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and not node.name.startswith("_"):
+                if node.name in TABLE_ROUTE_FUNCTION_ALLOWLIST.get(path.name, set()):
+                    continue
                 offenders.append(f"{path.relative_to(ROOT).as_posix()}::{node.name}")
 
     assert offenders == []

@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from tigrbl_identity_contracts.rest import RevocationOut
-from tigrbl_identity_server.framework import TigrblRouter
-from tigrbl_auth_protocol_oauth.ops.revoke import revoke_request
+"""Compatibility bridge for RevokedToken-owned revocation route."""
 
-api = TigrblRouter()
-router = api
+from warnings import warn
 
+warn(
+    "tigrbl_identity_server.rest.routers.revoke is deprecated; "
+    "import tigrbl_identity_storage.tables.revoked_token instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
-@api.route("/revoke", methods=["POST"], response_model=RevocationOut)
-async def revoke(request):
-    return await revoke_request(request=request)
+from tigrbl_identity_storage.tables.revoked_token import api, revoke, router
+
+__all__ = ["api", "router", "revoke"]

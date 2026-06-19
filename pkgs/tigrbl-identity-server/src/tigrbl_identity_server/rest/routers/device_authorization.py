@@ -1,25 +1,16 @@
 from __future__ import annotations
 
-from pathlib import Path
+"""Compatibility bridge for DeviceCode-owned device authorization route."""
 
-from tigrbl_identity_contracts.rest import DeviceAuthorizationOut
-from tigrbl_identity_server.framework import Depends, TigrblRouter
-from tigrbl_auth_protocol_oauth.ops.device_authorization import device_authorization_request
-from tigrbl_identity_storage.tables import get_db
+from warnings import warn
 
-api = TigrblRouter()
-router = api
+warn(
+    "tigrbl_identity_server.rest.routers.device_authorization is deprecated; "
+    "import tigrbl_identity_storage.tables.device_code instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
+from tigrbl_identity_storage.tables.device_code import api, device_authorization, router
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[4]
-
-
-@api.route('/device_authorization', methods=['POST'], response_model=DeviceAuthorizationOut)
-async def device_authorization(request, db=Depends(get_db)):
-    result = await device_authorization_request(request=request, db=db)
-    from tigrbl_authn_credentials.session_service import observe_device_authorization_response
-
-    payload = result if isinstance(result, dict) else getattr(result, 'model_dump', lambda **_: {})(mode='json')
-    observe_device_authorization_response(_repo_root(), device_code=payload.get('device_code'), details=payload)
-    return result
+__all__ = ["api", "router", "device_authorization"]

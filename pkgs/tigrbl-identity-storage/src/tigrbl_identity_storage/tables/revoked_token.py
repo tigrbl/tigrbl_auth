@@ -8,6 +8,7 @@ from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    TigrblRouter,
     Timestamped,
     S,
     acol,
@@ -18,6 +19,7 @@ from tigrbl_identity_server.framework import (
     PgUUID,
     ForeignKeySpec,
 )
+from tigrbl_identity_contracts.rest import RevocationOut
 from ._ops import create_record, first_record, record_id, update_record
 
 
@@ -59,4 +61,17 @@ class RevokedToken(Base, GUIDPk, Timestamped):
         return await first_record(cls, db, {"token_hash": token_hash}) is not None
 
 
-__all__ = ["RevokedToken"]
+api = router = TigrblRouter()
+
+
+@api.route("/revoke", methods=["POST"], response_model=RevocationOut)
+async def revoke(request: Any) -> Any:
+    from tigrbl_auth_protocol_oauth.ops.revoke import revoke_request
+
+    return await revoke_request(request=request)
+
+
+RevokedToken.revoke = staticmethod(revoke)  # type: ignore[attr-defined]
+
+
+__all__ = ["RevokedToken", "api", "router", "revoke"]

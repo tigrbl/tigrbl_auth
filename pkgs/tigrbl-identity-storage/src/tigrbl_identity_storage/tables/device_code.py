@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
+from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    Depends,
     Timestamped,
+    TigrblRouter,
     S,
     acol,
     ForeignKeySpec,
@@ -20,7 +23,9 @@ from tigrbl_identity_server.framework import (
     TZDateTime,
     GUIDPk,
 )
+from tigrbl_identity_contracts.rest import DeviceAuthorizationOut
 from ._ops import create_record, field, first_record, read_record, record_id, update_record, utc_now
+from .engine import get_db
 
 
 class DeviceCode(Base, GUIDPk, Timestamped):
@@ -151,4 +156,26 @@ class DeviceCode(Base, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"consumed_at": utc_now()})
 
 
-__all__ = ["DeviceCode"]
+api = router = TigrblRouter()
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/device_authorization", methods=["POST"], response_model=DeviceAuthorizationOut)
+async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
+    from tigrbl_auth_protocol_oauth.ops.device_authorization import device_authorization_request
+
+    result = await device_authorization_request(request=request, db=db)
+    from tigrbl_authn_credentials.session_service import observe_device_authorization_response
+
+    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
+    observe_device_authorization_response(_repo_root(), device_code=payload.get("device_code"), details=payload)
+    return result
+
+
+DeviceCode.device_authorization = staticmethod(device_authorization)  # type: ignore[attr-defined]
+
+
+__all__ = ["DeviceCode", "api", "router", "device_authorization"]

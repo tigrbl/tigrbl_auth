@@ -269,6 +269,12 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
         / "rest"
         / "routers"
         / "authorize.py",
+        "storage_authorize_route": PKGS
+        / "tigrbl-identity-storage"
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+        / "auth_code.py",
     }
 
     for route_path in (route_paths["protocol"], route_paths["identity_server_op"]):
@@ -283,4 +289,6 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
     assert "await resolve_browser_session(request)" not in identity_server_source
 
     router_source = route_paths["identity_server_router"].read_text(encoding="utf-8")
-    assert "authorize_request" in router_source
+    assert "tigrbl_identity_storage.tables.auth_code" in router_source
+    storage_route_source = route_paths["storage_authorize_route"].read_text(encoding="utf-8")
+    assert "authorize_request" in storage_route_source

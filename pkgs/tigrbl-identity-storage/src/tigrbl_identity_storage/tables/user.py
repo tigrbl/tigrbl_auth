@@ -5,18 +5,28 @@ from __future__ import annotations
 import uuid
 import datetime as dt
 from typing import Any
+from datetime import timezone
 
 from tigrbl_identity_server.framework import (
     UserBase,
     Bootstrappable,
     BaseModel,
+    Depends,
     Field,
+    HTTPException,
+    JSONResponse,
     LargeBinary,
     Mapped,
     Boolean,
+    RedirectResponse,
+    Request,
+    Response,
     String,
     TZDateTime,
+    TigrblRouter,
     relationship,
+    status,
+    Header,
     F,
     IO,
     S,
@@ -25,8 +35,16 @@ from tigrbl_identity_server.framework import (
     constr,
 )
 
+from tigrbl_identity_contracts.rest import (
+    AdminPasswordChangeIn,
+    AdminPasswordResetCompleteIn,
+    AdminPasswordResetRequestIn,
+    AdminSessionOut,
+    CredsIn,
+)
 from tigrbl_identity_jose.key_management import hash_pw
-from ._ops import create_record, first_record, list_records, record_id, update_record
+from ._ops import create_record, delete_record, first_record, list_records, read_record, record_id, update_record
+from .engine import get_db
 
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
 DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
@@ -238,6 +256,56 @@ class User(UserBase, Bootstrappable):
     ]
 
 
+admin_api = admin_router = TigrblRouter()
+account_api = account_router = TigrblRouter()
+MY_ACCOUNT_TAGS = ["My Account"]
+ADMIN_AUTH_TAGS = ["Admin Auth"]
+
+
+from ._user_account_routes import (  # noqa: E402
+    _current_principal_dependency,
+    _iso,
+    _not_found_uuid,
+    change_account_password,
+    get_account_profile,
+    update_account_profile,
+)
+from ._user_admin_auth_routes import (  # noqa: E402
+    admin_change_password,
+    admin_forgot_password,
+    admin_login,
+    admin_login_browser_redirect,
+    admin_logout,
+    admin_reset_password,
+    admin_session,
+)
+from ._user_admin_identity_routes import (  # noqa: E402
+    admin_create_identity,
+    admin_delete_identity,
+    admin_list_identities,
+    admin_update_identity,
+)
+
+
+for _name, _func in {
+    "admin_change_password": admin_change_password,
+    "admin_create_identity": admin_create_identity,
+    "admin_delete_identity": admin_delete_identity,
+    "admin_forgot_password": admin_forgot_password,
+    "admin_list_identities": admin_list_identities,
+    "admin_login": admin_login,
+    "admin_login_browser_redirect": admin_login_browser_redirect,
+    "admin_logout": admin_logout,
+    "admin_reset_password": admin_reset_password,
+    "admin_session": admin_session,
+    "admin_update_identity": admin_update_identity,
+    "change_account_password": change_account_password,
+    "get_account_profile": get_account_profile,
+    "update_account_profile": update_account_profile,
+}.items():
+    setattr(User, _name, staticmethod(_func))
+
+
 __all__ = [
     "AdminIdentityOut",
     "AdminIdentityProvisionIn",
@@ -249,4 +317,22 @@ __all__ = [
     "MyAccountProfileOut",
     "MyAccountProfileUpdateIn",
     "User",
+    "admin_api",
+    "admin_router",
+    "admin_change_password",
+    "account_api",
+    "account_router",
+    "admin_create_identity",
+    "admin_delete_identity",
+    "admin_forgot_password",
+    "admin_list_identities",
+    "admin_login",
+    "admin_login_browser_redirect",
+    "admin_logout",
+    "admin_reset_password",
+    "admin_session",
+    "admin_update_identity",
+    "change_account_password",
+    "get_account_profile",
+    "update_account_profile",
 ]

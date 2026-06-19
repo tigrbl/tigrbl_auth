@@ -5,11 +5,14 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_server.framework import (
     Base,
+    Depends,
     Timestamped,
+    TigrblRouter,
     S,
     acol,
     JSON,
@@ -21,10 +24,12 @@ from tigrbl_identity_server.framework import (
     ForeignKeySpec,
     PgUUID,
 )
+from tigrbl_identity_contracts.rest import PushedAuthorizationResponse
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.framework import HTTPException
 from http import HTTPStatus as status
 from ._ops import create_record, first_record, record_id, update_record
+from .engine import get_db
 
 DEFAULT_PAR_EXPIRY = 90
 
@@ -143,4 +148,26 @@ class PushedAuthorizationRequest(Base, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"consumed_at": datetime.now(tz=timezone.utc)})
 
 
-__all__ = ["PushedAuthorizationRequest", "DEFAULT_PAR_EXPIRY"]
+api = router = TigrblRouter()
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/par", methods=["POST"], response_model=PushedAuthorizationResponse)
+async def par(request: Any, db: Any = Depends(get_db)) -> Any:
+    from tigrbl_auth_protocol_oauth.ops.par import pushed_authorization_request
+
+    result = await pushed_authorization_request(request=request, db=db)
+    from tigrbl_authn_credentials.session_service import observe_par_response
+
+    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
+    observe_par_response(_repo_root(), request_uri=payload.get("request_uri"), details=payload)
+    return result
+
+
+PushedAuthorizationRequest.par = staticmethod(par)  # type: ignore[attr-defined]
+
+
+__all__ = ["PushedAuthorizationRequest", "DEFAULT_PAR_EXPIRY", "api", "router", "par"]
