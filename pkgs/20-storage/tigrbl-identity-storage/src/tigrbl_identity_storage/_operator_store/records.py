@@ -2,21 +2,18 @@ from __future__ import annotations
 
 from .paths import *
 from .paths import (
+    _OPERATOR_DB_FILENAME,
     _append_jsonl_file,
-    _connect,
     _metadata_payload,
-    _upsert_metadata,
     _write_metadata_snapshot,
 )
-from .sqlite_store import *
-from .sqlite_store import (
-    _insert_activity,
-    _insert_audit,
-    _insert_record,
-    _insert_transaction,
-    _normalize_record,
-    _row_to_record,
-)
+from .app import operator_store_session
+from tigrbl_identity_storage.tables._sync import run_async
+from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
+from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
+from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata
+from tigrbl_identity_storage.tables.operator_record import OperatorRecord
+from tigrbl_identity_storage.tables.operator_transaction import OperatorTransaction
 
 def _load_records_from_snapshot(path: Path, *, tenant: str | None = None) -> dict[str, dict[str, Any]]:
     loaded = load_structured(path, default={})
@@ -39,19 +36,19 @@ def _load_records_from_snapshot(path: Path, *, tenant: str | None = None) -> dic
     return rows
 
 
-def load_records(repo_root: Path, resource: str, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+async def _load_records_async(repo_root: Path, resource: str, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+    state_root = operator_state_root(repo_root)
     db_path = operator_database_path(repo_root)
-    with _connect(repo_root) as conn:
-        sql = "SELECT resource, id, status, enabled, created_at, updated_at, actor, profile, tenant, issuer, revision, data_json FROM records WHERE resource = ?"
-        params: list[Any] = [resource]
-        if tenant is not None:
-            sql += " AND tenant = ?"
-            params.append(tenant)
-        sql += " ORDER BY id"
-        rows = conn.execute(sql, params).fetchall()
-    if rows or db_path.exists():
-        return {str(row["id"]): _row_to_record(row) for row in rows}
+    had_db = db_path.exists()
+    async with operator_store_session(state_root) as db:
+        rows = await OperatorRecord.load_records(db, resource, tenant=tenant)
+    if rows or had_db or db_path.exists():
+        return rows
     return _load_records_from_snapshot(resource_state_path(repo_root, resource), tenant=tenant)
+
+
+def load_records(repo_root: Path, resource: str, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+    return run_async(_load_records_async(repo_root, resource, tenant=tenant))
 
 
 def default_status(resource: str) -> str:
@@ -204,50 +201,31 @@ def _sync_resource_snapshot(repo_root: Path, resource: str) -> None:
     _write_metadata_snapshot(repo_root)
 
 
-def _record_equal_without_revision(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
-    def _strip(payload: Mapping[str, Any]) -> dict[str, Any]:
-        cleaned = copy.deepcopy(dict(payload))
-        cleaned.pop("revision", None)
-        return cleaned
-    return _strip(left) == _strip(right)
-
-
-def commit_mutation(context: OperationContext, *, records: Mapping[str, Mapping[str, Any]], transaction: Mapping[str, Any], audit_entry: Mapping[str, Any] | None = None) -> None:
+async def _commit_mutation_async(
+    context: OperationContext,
+    *,
+    records: Mapping[str, Mapping[str, Any]],
+    transaction: Mapping[str, Any],
+    audit_entry: Mapping[str, Any] | None = None,
+) -> None:
     root = operator_state_root(context.repo_root)
     changed_ids = {str(item) for item in list(transaction.get("changed_ids") or [])}
-    with _connect(context.repo_root) as conn:
-        conn.execute("BEGIN IMMEDIATE")
-        existing_all_rows = conn.execute(
-            "SELECT resource, id, status, enabled, created_at, updated_at, actor, profile, tenant, issuer, revision, data_json FROM records WHERE resource = ? ORDER BY id",
-            (context.resource,),
-        ).fetchall()
-        existing_all = {str(row["id"]): _row_to_record(row) for row in existing_all_rows}
-        if context.tenant is None:
-            full_records = {str(key): _normalize_record(context.resource, str(key), value, fallback_actor=context.actor) for key, value in records.items()}
-        else:
-            preserved = {record_id: record for record_id, record in existing_all.items() if record.get("tenant") != context.tenant}
-            scoped = {str(key): _normalize_record(context.resource, str(key), value, fallback_actor=context.actor) for key, value in records.items()}
-            for row in scoped.values():
-                row["tenant"] = context.tenant
-            full_records = {**preserved, **scoped}
-        if not context.dry_run:
-            conn.execute("DELETE FROM records WHERE resource = ?", (context.resource,))
-            for record_id in sorted(full_records):
-                record = copy.deepcopy(full_records[record_id])
-                previous = existing_all.get(record_id)
-                incoming_revision = int(record.get("revision") or 1)
-                if previous is None:
-                    record["revision"] = max(1, incoming_revision)
-                elif record_id in changed_ids and not _record_equal_without_revision(previous, record):
-                    record["revision"] = max(int(previous.get("revision") or 0) + 1, incoming_revision)
-                else:
-                    record["revision"] = max(int(previous.get("revision") or 1), incoming_revision)
-                _insert_record(conn, record)
-        _insert_transaction(conn, transaction)
+    async with operator_store_session(root) as db:
+        await OperatorRecord.replace_resource_records(
+            db,
+            resource=context.resource,
+            records=records,
+            tenant=context.tenant,
+            actor=context.actor,
+            changed_ids=changed_ids,
+            dry_run=context.dry_run,
+            now=utc_now(),
+        )
+        await OperatorTransaction.record_transaction(db, transaction)
         if audit_entry is not None:
-            _insert_audit(conn, audit_entry)
-        _insert_activity(
-            conn,
+            await OperatorAuditEvent.record_operator_audit(db, audit_entry)
+        await OperatorActivity.record_activity(
+            db,
             {
                 "ts": utc_now(),
                 "kind": context.command,
@@ -257,10 +235,13 @@ def commit_mutation(context: OperationContext, *, records: Mapping[str, Mapping[
                 "transaction_id": transaction.get("transaction_id"),
             },
         )
-        _upsert_metadata(conn, "last_transaction_id", transaction.get("transaction_id"))
-        _upsert_metadata(conn, "last_transaction_status", transaction.get("status"))
-        _upsert_metadata(conn, "repo_mutation_dependency", False)
-        conn.commit()
+        await OperatorMetadata.upsert_metadata(db, "last_transaction_id", transaction.get("transaction_id"))
+        await OperatorMetadata.upsert_metadata(db, "last_transaction_status", transaction.get("status"))
+        await OperatorMetadata.upsert_metadata(db, "repo_mutation_dependency", False)
+
+
+def commit_mutation(context: OperationContext, *, records: Mapping[str, Mapping[str, Any]], transaction: Mapping[str, Any], audit_entry: Mapping[str, Any] | None = None) -> None:
+    run_async(_commit_mutation_async(context, records=records, transaction=transaction, audit_entry=audit_entry))
     if not context.dry_run:
         _sync_resource_snapshot(context.repo_root, context.resource)
     _append_jsonl_file(transaction_log_path(context.repo_root), transaction)
@@ -280,8 +261,68 @@ def commit_mutation(context: OperationContext, *, records: Mapping[str, Mapping[
     _write_metadata_snapshot(context.repo_root)
 
 
+def _operator_root_from_path(path: Path) -> Path | None:
+    if path.parent.name == "logs":
+        return path.parent.parent
+    if path.parent.name == "snapshots":
+        return path.parent.parent
+    return None
+
+
+def _operator_table_for_log(path: Path) -> str | None:
+    return {
+        "transactions.jsonl": "transaction_log",
+        "audit-events.jsonl": "audit_log",
+        "activity.jsonl": "activity_log",
+    }.get(path.name)
+
+
+async def _read_operator_log_async(root: Path, table: str) -> list[dict[str, Any]]:
+    async with operator_store_session(root) as db:
+        if table == "transaction_log":
+            return await OperatorTransaction.list_transactions(db)
+        if table == "audit_log":
+            return await OperatorAuditEvent.list_operator_audit(db)
+        return await OperatorActivity.list_activity(db)
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    root = _operator_root_from_path(path)
+    table = _operator_table_for_log(path)
+    if root is not None and table is not None and (root / _OPERATOR_DB_FILENAME).exists():
+        return run_async(_read_operator_log_async(root, table))
+    return _jsonl_rows(path)
+
+
+async def _append_operator_log_async(root: Path, table: str, payload: Mapping[str, Any]) -> None:
+    async with operator_store_session(root) as db:
+        if table == "transaction_log":
+            await OperatorTransaction.record_transaction(db, payload)
+        elif table == "audit_log":
+            await OperatorAuditEvent.record_operator_audit(db, payload)
+        else:
+            await OperatorActivity.record_activity(db, payload)
+
+
+def append_jsonl(path: Path, payload: Mapping[str, Any]) -> None:
+    root = _operator_root_from_path(path)
+    table = _operator_table_for_log(path)
+    if root is not None and table is not None:
+        run_async(_append_operator_log_async(root, table, payload))
+        _append_jsonl_file(path, payload)
+        return
+    _append_jsonl_file(path, payload)
+
+
+async def _ensure_operator_metadata_async(repo_root: Path) -> None:
+    root = operator_state_root(repo_root)
+    async with operator_store_session(root) as db:
+        for key, value in _metadata_payload(repo_root).items():
+            await OperatorMetadata.upsert_metadata(db, key, value)
+
+
 def operator_store_summary(repo_root: Path) -> dict[str, Any]:
-    operator_state_root(repo_root)
+    run_async(_ensure_operator_metadata_async(repo_root))
     _write_metadata_snapshot(repo_root)
     payload = _metadata_payload(repo_root)
     payload.update(

@@ -7,7 +7,6 @@ import hashlib
 import json
 import os
 import secrets
-import sqlite3
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -239,26 +238,6 @@ def _append_jsonl_file(path: Path, payload: Mapping[str, Any]) -> None:
         handle.write(json.dumps(dict(payload), sort_keys=True) + "\n")
 
 
-def _connect_state_root(state_root: Path) -> sqlite3.Connection:
-    from .sqlite_store import _initialize_schema
-
-    state_root.mkdir(parents=True, exist_ok=True)
-    (state_root / "logs").mkdir(parents=True, exist_ok=True)
-    (state_root / "snapshots").mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(state_root / _OPERATOR_DB_FILENAME), timeout=30, isolation_level=None)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    conn.execute("PRAGMA busy_timeout=30000")
-    _initialize_schema(conn, state_root)
-    return conn
-
-
-def _connect(repo_root: Path) -> sqlite3.Connection:
-    return _connect_state_root(operator_state_root(repo_root))
-
-
 def _metadata_payload(repo_root: Path) -> dict[str, Any]:
     root = operator_state_root(repo_root)
     return {
@@ -277,12 +256,5 @@ def _metadata_payload(repo_root: Path) -> dict[str, Any]:
 
 def _write_metadata_snapshot(repo_root: Path) -> None:
     write_structured(operator_state_metadata_path(repo_root), _metadata_payload(repo_root))
-
-
-def _upsert_metadata(conn: sqlite3.Connection, key: str, value: Any) -> None:
-    conn.execute(
-        "INSERT INTO metadata(key, value_json, updated_at) VALUES(?, ?, ?) ON CONFLICT(key) DO UPDATE SET value_json=excluded.value_json, updated_at=excluded.updated_at",
-        (key, json.dumps(value, sort_keys=True), utc_now()),
-    )
 
 
