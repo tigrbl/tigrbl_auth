@@ -2,15 +2,14 @@ from __future__ import annotations
 
 """Proof-binding validators for protected resource servers."""
 
-from dataclasses import dataclass
 from hmac import compare_digest
 
 from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding, TokenValidationError
 
 
-@dataclass(frozen=True, slots=True)
 class MtlsBindingValidator:
-    confirmation_member: str = "x5t#S256"
+    def __init__(self, confirmation_member: str = "x5t#S256") -> None:
+        self.confirmation_member = confirmation_member
 
     def validate(self, claims: AccessTokenClaims, binding: MTLSBinding | None) -> bool:
         expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
@@ -20,9 +19,9 @@ class MtlsBindingValidator:
         return True
 
 
-@dataclass(frozen=True, slots=True)
 class DpopValidator:
-    confirmation_member: str = "jkt"
+    def __init__(self, confirmation_member: str = "jkt") -> None:
+        self.confirmation_member = confirmation_member
 
     def validate(self, claims: AccessTokenClaims, binding: DPoPBinding | None) -> bool:
         expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
@@ -32,10 +31,14 @@ class DpopValidator:
         return True
 
 
-@dataclass(frozen=True, slots=True)
 class ProofBindingValidator:
-    dpop_confirmation_member: str = "jkt"
-    mtls_confirmation_member: str = "x5t#S256"
+    def __init__(
+        self,
+        dpop_confirmation_member: str = "jkt",
+        mtls_confirmation_member: str = "x5t#S256",
+    ) -> None:
+        self.dpop_confirmation_member = dpop_confirmation_member
+        self.mtls_confirmation_member = mtls_confirmation_member
 
     def validate(
         self,

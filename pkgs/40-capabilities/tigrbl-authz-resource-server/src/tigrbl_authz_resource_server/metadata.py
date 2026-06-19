@@ -2,33 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Any, Mapping
 
-from .verifier import ResourceRequirement
+from tigrbl_user_plane_contracts.resource_server import ResourceRequirement, VerifierContractProfile
 
-
-@dataclass(frozen=True, slots=True)
-class VerifierContractProfile:
-    issuer: str
-    audiences: tuple[str, ...]
-    required_scopes: tuple[str, ...]
-    allowed_algs: tuple[str, ...]
-    jwks_uri: str
-    introspection_endpoint: str
-    max_authz_staleness_seconds: int
-    clock_skew_seconds: int
-    fail_closed: bool
-
-    def resource_requirement(self) -> ResourceRequirement:
-        if not self.audiences:
-            raise ValueError("verifier contract has no accepted audience")
-        return ResourceRequirement(
-            issuer=self.issuer,
-            audience=self.audiences[0],
-            scopes=self.required_scopes,
-            max_authz_staleness_seconds=self.max_authz_staleness_seconds,
-        )
 
 
 def verifier_contract_from_metadata(

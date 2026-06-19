@@ -19,7 +19,7 @@ classifiers = [
     "Typing :: Typed",
     "Topic :: Security",
 ]
-dependencies = []
+dependencies = ["tigrbl-user-plane-contracts==0.1.0"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

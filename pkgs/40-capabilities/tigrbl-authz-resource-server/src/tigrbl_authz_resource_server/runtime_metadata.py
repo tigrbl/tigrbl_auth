@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, replace
+from dataclasses import replace
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -14,6 +14,7 @@ from tigrbl_identity_runtime.deployment import (
     ResolvedDeployment,
     resolve_deployment,
 )
+from tigrbl_user_plane_contracts.resource_server import CapabilityAttestation
 from tigrbl_authz_policy.certification import (
     CapabilityRecord,
     CertificationError,
@@ -110,27 +111,6 @@ def assert_runtime_metadata_truth(
         tuple(str(item) for item in advertised),
     )
 
-
-@dataclass(frozen=True, slots=True)
-class CapabilityAttestation:
-    version: str
-    issuer: str
-    product_surface: str | None
-    profile: str
-    capabilities: tuple[str, ...]
-    routes: tuple[str, ...]
-    evidence_ids: tuple[str, ...]
-    claim_ids: tuple[str, ...]
-    generated_at: str
-    artifact_sha256: str
-
-    def as_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["capabilities"] = list(self.capabilities)
-        payload["routes"] = list(self.routes)
-        payload["evidence_ids"] = list(self.evidence_ids)
-        payload["claim_ids"] = list(self.claim_ids)
-        return payload
 
 
 def _canonical_sha256(payload: Mapping[str, Any]) -> str:

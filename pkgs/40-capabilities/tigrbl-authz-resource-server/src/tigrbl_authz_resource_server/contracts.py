@@ -2,42 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_user_plane_contracts.resource_server import ProtectedResourceVerifierContract
 
-
-@dataclass(frozen=True, slots=True)
-class ProtectedResourceVerifierContract:
-    verifier_logic_id: str
-    issuer: str
-    accepted_issuers: tuple[str, ...]
-    resource: str
-    accepted_audiences: tuple[str, ...]
-    accepted_token_classes: tuple[str, ...]
-    sender_constraint_modes: tuple[str, ...]
-    sender_constraint_required: bool
-    required_claims: tuple[str, ...]
-    replay_expectation: str
-    freshness_expectation: str
-    introspection_auth_methods: tuple[str, ...]
-
-    def as_metadata_projection(self) -> dict[str, object]:
-        payload: dict[str, object] = {
-            "resource": self.resource,
-            "authorization_servers": list(self.accepted_issuers),
-            "token_types_supported": list(self.accepted_token_classes),
-            "proof_modes_supported": list(self.sender_constraint_modes),
-            "proof_binding_required": self.sender_constraint_required,
-            "required_claims": list(self.required_claims),
-            "introspection_endpoint_auth_methods_supported": list(self.introspection_auth_methods),
-            "verifier_logic": self.verifier_logic_id,
-            "verification_freshness_expectation": self.freshness_expectation,
-            "verification_replay_expectation": self.replay_expectation,
-        }
-        return payload
 
 
 def build_protected_resource_verifier_contract(

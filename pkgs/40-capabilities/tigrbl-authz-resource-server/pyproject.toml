@@ -37,6 +37,7 @@ dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
+    "tigrbl-user-plane-contracts==0.1.0",
 ]
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
