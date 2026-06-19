@@ -32,6 +32,10 @@ from .client_registration import (
 from .service import Service
 from .api_key import ApiKey
 from .service_key import ServiceKey
+from .credential import Credential
+from .credential_audit_event import CredentialAuditEvent
+from .credential_dpop_key import CredentialDpopKey
+from .credential_mtls_certificate import CredentialMtlsCertificate
 from .key import Key
 from .key_version import KeyVersion
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
@@ -62,6 +66,20 @@ from .consent import Consent, MyAccountAuthorizedAppOut, MyAccountConsentOut
 from .audit_event import AuditEvent
 from .logout_state import LogoutIn, LogoutOut, LogoutState
 from .key_rotation_event import KeyRotationEvent
+from .key_rotation_policy import KeyRotationPolicy
+from .tenant_membership import TenantMembership
+from .subject_alias import SubjectAlias
+from .role import Role
+from .attribute_policy import AttributePolicy
+from .policy_condition import PolicyCondition
+from .delegated_admin_scope import DelegatedAdminScope
+from .entitlement import Entitlement
+from .entitlement_assignment import EntitlementAssignment
+from .access_review_campaign import AccessReviewCampaign
+from .access_review_item import AccessReviewItem
+from .access_review_decision import AccessReviewDecision
+from .residency_zone import ResidencyZone
+from .tenant_residency import TenantResidency
 from .engine import ENGINE, dsn, get_db
 from ._schema_ctx import set_schema
 
@@ -78,6 +96,10 @@ def _ensure_runtime_bindings() -> None:
         Service,
         ApiKey,
         ServiceKey,
+        Credential,
+        CredentialAuditEvent,
+        CredentialDpopKey,
+        CredentialMtlsCertificate,
         Key,
         KeyVersion,
         AuthSession,
@@ -95,6 +117,20 @@ def _ensure_runtime_bindings() -> None:
         AuditEvent,
         LogoutState,
         KeyRotationEvent,
+        KeyRotationPolicy,
+        TenantMembership,
+        SubjectAlias,
+        Role,
+        AttributePolicy,
+        PolicyCondition,
+        DelegatedAdminScope,
+        Entitlement,
+        EntitlementAssignment,
+        AccessReviewCampaign,
+        AccessReviewItem,
+        AccessReviewDecision,
+        ResidencyZone,
+        TenantResidency,
     ):
         handlers = getattr(model, "handlers", None)
         if getattr(handlers, "read", None) is None:
@@ -187,6 +223,10 @@ __all__ = [
     "Service",
     "ApiKey",
     "ServiceKey",
+    "Credential",
+    "CredentialAuditEvent",
+    "CredentialDpopKey",
+    "CredentialMtlsCertificate",
     "Key",
     "KeyVersion",
     "AuthSession",
@@ -222,4 +262,18 @@ __all__ = [
     "LogoutIn",
     "LogoutOut",
     "KeyRotationEvent",
+    "KeyRotationPolicy",
+    "TenantMembership",
+    "SubjectAlias",
+    "Role",
+    "AttributePolicy",
+    "PolicyCondition",
+    "DelegatedAdminScope",
+    "Entitlement",
+    "EntitlementAssignment",
+    "AccessReviewCampaign",
+    "AccessReviewItem",
+    "AccessReviewDecision",
+    "ResidencyZone",
+    "TenantResidency",
 ]
