@@ -7,4 +7,4 @@ Tenant-scoped admin UIX for identities, tenant administrators, tenant JWKS, and 
 - Consumes `tigrbl-auth-api-tenant-admin`.
 - Uses exactly one configured base URL: `VITE_TIGRBL_AUTH_TENANT_ADMIN_API_BASE_URL`.
 - Blocks platform tenant lifecycle paths and public login/consent paths.
-- `pkgs/90-apps/admin-uix` remains the temporary extraction source until parity is proven.
+- `pkgs/90-ui/admin-uix` remains the temporary extraction source until parity is proven.

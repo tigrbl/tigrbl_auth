@@ -25,9 +25,9 @@ The app names here match the target composition set in
 | App | Current repo basis | Primary role |
 |---|---|---|
 | `tigrbl-auth-idp` | `tigrbl_auth` backend deployment | Shared multi-tenant identity provider and control plane |
-| `tigrbl-auth-public-portal` | `pkgs/90-apps/public-uix` | Tenant human-user public auth UX |
-| `tigrbl-auth-platform-admin-console` | split from `pkgs/90-apps/admin-uix` | Platform-wide tenant and authority administration |
-| `tigrbl-auth-tenant-admin-console` | split from `pkgs/90-apps/admin-uix` | Tenant-scoped identity, key, and local configuration administration |
+| `tigrbl-auth-public-portal` | `pkgs/90-ui/public-uix` | Tenant human-user public auth UX |
+| `tigrbl-auth-platform-admin-console` | split from `pkgs/90-ui/admin-uix` | Platform-wide tenant and authority administration |
+| `tigrbl-auth-tenant-admin-console` | split from `pkgs/90-ui/admin-uix` | Tenant-scoped identity, key, and local configuration administration |
 | `tigrbl-auth-developer-portal` | not fully shipped; partial client-management code exists | Tenant app and OIDC client self-service |
 | `tigrbl-auth-service-admin-surface` | not fully shipped; backend capability is partial | Machine/service/workload identity administration |
 
@@ -89,7 +89,7 @@ The app names here match the target composition set in
 
 | Dependency class | Dependencies |
 |---|---|
-| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tigrbl-auth-protocol-oauth`, `tigrbl-identity-admin`, `tigrbl-identity-contracts`, `tigrbl-authz-policy`; existing partial frontend basis in `pkgs/90-apps/admin-uix/components/ClientManagement.tsx` |
+| Runtime package dependencies | future dedicated portal UIX, plus existing backend support from `tigrbl-auth-protocol-oauth`, `tigrbl-identity-admin`, `tigrbl-identity-contracts`, `tigrbl-authz-policy`; existing partial frontend basis in `pkgs/90-ui/admin-uix/components/ClientManagement.tsx` |
 | Surface dependencies | `/register`, `/register/{client_id}`, OIDC discovery metadata, tenant discovery metadata, client control-plane methods (`client.list`, `client.show`, `client.registration.*`, and any future `client.create/update/delete` RPC methods that are formally shipped) |
 | UIX dependencies | `developer-uix` |
 | Data and state dependencies | client registration records, redirect URIs, grant types, token endpoint auth methods, client secrets or client JWKS metadata, software metadata, tenant ownership and delegated admin policy |
@@ -129,9 +129,9 @@ The app names here match the target composition set in
 | Target app | Current concrete basis in this repo | Main dependency gap |
 |---|---|---|
 | `tigrbl-auth-idp` | `tigrbl_auth` backend package and split Python packages | already concrete |
-| `tigrbl-auth-public-portal` | `pkgs/90-apps/public-uix` | tenant-branded composition and deployment wiring |
-| `tigrbl-auth-platform-admin-console` | platform subset of `pkgs/90-apps/admin-uix` | explicit split from tenant-admin concerns |
-| `tigrbl-auth-tenant-admin-console` | tenant subset of `pkgs/90-apps/admin-uix` | explicit split from platform-admin concerns |
+| `tigrbl-auth-public-portal` | `pkgs/90-ui/public-uix` | tenant-branded composition and deployment wiring |
+| `tigrbl-auth-platform-admin-console` | platform subset of `pkgs/90-ui/admin-uix` | explicit split from tenant-admin concerns |
+| `tigrbl-auth-tenant-admin-console` | tenant subset of `pkgs/90-ui/admin-uix` | explicit split from platform-admin concerns |
 | `tigrbl-auth-developer-portal` | partial `ClientManagement` component plus backend registration/control-plane support | dedicated UIX, formal routing, and tighter client-management contract surface |
 | `tigrbl-auth-service-admin-surface` | partial backend service/workload capability only | dedicated surface definition, promoted workflows, and possibly a non-browser-first operator experience |
 

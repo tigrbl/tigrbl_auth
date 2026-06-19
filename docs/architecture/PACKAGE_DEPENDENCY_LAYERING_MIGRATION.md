@@ -14,7 +14,7 @@ This plan makes the package rename work enforceable. The target graph is directi
 | Foundation | `tigrbl-identity-*`, `tigrbl-authn-*`, `tigrbl-authz-*`, `tigrbl-auth-protocol-*` | May depend sideways/downward only through owned package contracts. Must not import `tigrbl_auth`. |
 | Facade | `tigrbl-auth` | May import foundational packages and preserve compatibility paths. Must not become canonical truth for identity, authn, authz, protocol, storage, or policy. |
 | Downstream backend | `tigrbl-auth-api-*` | May import `tigrbl_auth` and product-local code. Should not reach around the facade into storage or lower internals unless a product contract requires it. |
-| Downstream frontend | `pkgs/90-apps/*-uix`, `pkgs/90-pkgs/90-apps/rp`, `packages/uix-core` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tigrbl_auth` modules. |
+| Downstream frontend | `pkgs/90-ui/*-uix`, `pkgs/90-ui/rp`, `packages/uix-core` | May consume API contracts, discovery metadata, generated clients, and browser-safe UIX packages. Must not import Python `tigrbl_auth` modules. |
 
 ## Staged Enforcement
 

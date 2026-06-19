@@ -83,7 +83,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedNode = process.env.SELECTED_NODE || "all";
           const nodeVersions = selectedNode === "all" ? ["22", "24", "26"] : [selectedNode];
-          const packageDirs = ["pkgs/90-apps/admin-uix", "pkgs/90-apps/public-uix", "pkgs/90-apps/rp"];
+          const packageDirs = ["pkgs/90-ui/admin-uix", "pkgs/90-ui/public-uix", "pkgs/90-ui/rp"];
           const cells = [];
 
           for (const packagePath of packageDirs) {

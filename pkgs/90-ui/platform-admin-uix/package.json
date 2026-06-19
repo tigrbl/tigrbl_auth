@@ -1,19 +1,18 @@
 {
-  "name": "@tigrbl-auth/demo-hub-uix",
-  "version": "0.4.0.dev2",
-  "description": "Demo hub UIX showing Tigrbl Auth product surfaces as one identity system.",
+  "name": "@tigrbl-auth/platform-admin-uix",
+  "version": "0.3.5",
+  "description": "Platform owner and operator UIX for Tigrbl Auth tenant lifecycle administration.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "pkgs/90-apps/demo-hub-uix"
+    "directory": "pkgs/90-ui/platform-admin-uix"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-apps/demo-hub-uix#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "provenance": true
+    "registry": "https://registry.npmjs.org/"
   },
   "files": [
     "dist",

@@ -2,7 +2,7 @@ services:
   demo-hub-uix:
     build:
       context: ..
-      dockerfile: pkgs/90-apps/demo-hub-uix/Dockerfile
+      dockerfile: pkgs/90-ui/demo-hub-uix/Dockerfile
     container_name: tigrbl-auth-demo-hub-uix-dev
     ports:
       - "3020:80"

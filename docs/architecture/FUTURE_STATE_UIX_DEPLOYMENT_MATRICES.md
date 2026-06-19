@@ -19,9 +19,9 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 
 | UIX | Primary actor | Main job | Current implementation basis |
 |---|---|---|---|
-| `public-uix` | tenant human user | login and end-user auth experience | current `pkgs/90-apps/public-uix` |
-| `platform-admin-uix` | platform superuser | deployment-wide control-plane administration | split from current `pkgs/90-apps/admin-uix` |
-| `tenant-admin-uix` | tenant admin | tenant-scoped administration | split from current `pkgs/90-apps/admin-uix` |
+| `public-uix` | tenant human user | login and end-user auth experience | current `pkgs/90-ui/public-uix` |
+| `platform-admin-uix` | platform superuser | deployment-wide control-plane administration | split from current `pkgs/90-ui/admin-uix` |
+| `tenant-admin-uix` | tenant admin | tenant-scoped administration | split from current `pkgs/90-ui/admin-uix` |
 | `developer-uix` | tenant app developer | app registration and federation integration management | future extraction over partial current basis |
 | `service-admin-uix` | service or workload operator | machine identity and service-access administration | future UIX over partial backend basis |
 
@@ -37,7 +37,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend surfaces consumed | public auth routes and tenant discovery documents |
 | Navigation scope | end-user only |
 | Explicit exclusions | no tenant admin, no platform admin, no client management |
-| Current repo basis | `pkgs/90-apps/public-uix/App.tsx`, discovery service, nginx allowlist |
+| Current repo basis | `pkgs/90-ui/public-uix/App.tsx`, discovery service, nginx allowlist |
 | Main future-state gap | tenant branding and namespace entry model may need to be hardened |
 
 ## `platform-admin-uix` matrix
@@ -52,7 +52,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 | Backend surfaces consumed | `/admin/auth/*`, `/admin/tenants`, `/admin/identities`, `/rpc` |
 | Navigation scope | deployment-wide only |
 | Explicit exclusions | no tenant end-user auth, no tenant app self-service, no tenant-local day-to-day operations |
-| Current repo basis | `pkgs/90-apps/admin-uix` auth shell plus tenant and identity management slices |
+| Current repo basis | `pkgs/90-ui/admin-uix` auth shell plus tenant and identity management slices |
 | Main future-state gap | current component tree needs separation between platform-only and tenant-local views |
 
 ## `tenant-admin-uix` matrix
@@ -114,7 +114,7 @@ See also `docs/architecture/EDGE_APP_UIX_COMPOSITION_MATRICES.md` for the role s
 
 | Current UIX/component basis | Future-state UIX | Split action |
 |---|---|---|
-| `pkgs/90-apps/public-uix` | `public-uix` | preserve as the end-user auth UIX |
+| `pkgs/90-ui/public-uix` | `public-uix` | preserve as the end-user auth UIX |
 | `admin-uix` tenant creation and global authority controls | `platform-admin-uix` | extract into superuser-only console |
 | `admin-uix` identities and JWKS management | `tenant-admin-uix` | extract into tenant-admin console |
 | `ClientManagement.tsx` and client APIs | `developer-uix` | promote into a dedicated developer-facing UIX |

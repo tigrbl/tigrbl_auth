@@ -1,24 +1,20 @@
 {
-  "name": "@tigrbl-auth/admin-uix",
+  "name": "@tigrbl-auth/service-admin-uix",
   "version": "0.3.5",
-  "description": "Administrative UIX package for Tigrbl Auth identity operations.",
+  "description": "Service identity and workload administration UIX for Tigrbl Auth.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "pkgs/90-apps/admin-uix"
+    "directory": "pkgs/90-ui/service-admin-uix"
   },
   "homepage": "https://github.com/tigrbl/tigrbl_auth#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "files": [
-    "dist",
-    "README.md",
-    "package.json"
-  ],
+  "files": ["dist", "README.md", "package.json"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,20 +22,17 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@tigrbl-auth/uix-core": "file:../../packages/uix-core",
     "@vitejs/plugin-react": "^5.0.0",
     "vite": "^6.2.0",
     "typescript": "~5.8.2",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "recharts": "^3.7.0"
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
     "vitest": "^3.2.0"
   },
   "engines": {

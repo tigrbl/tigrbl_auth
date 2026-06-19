@@ -7,9 +7,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "pkgs/90-apps/rp"
+    "directory": "pkgs/90-ui/rp"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-apps/rp#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-ui/rp#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",

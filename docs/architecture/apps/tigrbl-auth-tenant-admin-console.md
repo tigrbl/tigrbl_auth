@@ -53,7 +53,7 @@ It should not own cross-tenant creation or platform superuser authority assignme
 
 ## Repo basis
 
-- tenant-relevant portions of current `pkgs/90-apps/admin-uix`
+- tenant-relevant portions of current `pkgs/90-ui/admin-uix`
 - identity and tenant JWKS components
 
 ## Main split rule

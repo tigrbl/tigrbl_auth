@@ -46,6 +46,6 @@ def test_safe_display_path_prefers_repo_relative_paths(tmp_path: Path) -> None:
     repo_root.mkdir()
 
     assert (
-        safe_display_path(repo_root / "pkgs" / "90-apps" / "admin-uix", repo_root)
-        == "pkgs/90-apps/admin-uix"
+        safe_display_path(repo_root / "pkgs" / "90-ui" / "admin-uix", repo_root)
+        == "pkgs/90-ui/admin-uix"
     )

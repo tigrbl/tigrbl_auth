@@ -1,15 +1,15 @@
 {
-  "name": "@tigrbl-auth/my-account-uix",
+  "name": "@tigrbl-auth/demo-hub-uix",
   "version": "0.4.0.dev2",
-  "description": "End-user account self-service UIX package for Tigrbl Auth.",
+  "description": "Demo hub UIX showing Tigrbl Auth product surfaces as one identity system.",
   "license": "Apache-2.0",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tigrbl/tigrbl_auth.git",
-    "directory": "pkgs/90-apps/my-account-uix"
+    "directory": "pkgs/90-ui/demo-hub-uix"
   },
-  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-apps/my-account-uix#readme",
+  "homepage": "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/90-ui/demo-hub-uix#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",
@@ -24,7 +24,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run --no-cache"
+    "test": "vitest run"
   },
   "dependencies": {
     "@tigrbl-auth/uix-core": "file:../../packages/uix-core",

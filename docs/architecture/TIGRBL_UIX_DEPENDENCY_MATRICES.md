@@ -32,9 +32,9 @@ These UIX names match the target UIX composition in
 
 | UIX | Current repo basis | Primary role |
 |---|---|---|
-| `public-uix` | `pkgs/90-apps/public-uix` | Tenant human-user authentication and consent UX |
-| `platform-admin-uix` | split from `pkgs/90-apps/admin-uix` | Platform superuser administration UX |
-| `tenant-admin-uix` | split from `pkgs/90-apps/admin-uix` | Tenant-scoped administration UX |
+| `public-uix` | `pkgs/90-ui/public-uix` | Tenant human-user authentication and consent UX |
+| `platform-admin-uix` | split from `pkgs/90-ui/admin-uix` | Platform superuser administration UX |
+| `tenant-admin-uix` | split from `pkgs/90-ui/admin-uix` | Tenant-scoped administration UX |
 | `developer-uix` | not fully shipped; partial basis in `ClientManagement` and discovery helpers | Tenant app developer and OIDC client self-service UX |
 | `service-admin-uix` | not fully shipped; backend-only partial basis today | Service/workload/machine identity administration UX |
 
@@ -125,9 +125,9 @@ These UIX names match the target UIX composition in
 
 | Target UIX | Current concrete basis in this repo | Main dependency gap |
 |---|---|---|
-| `public-uix` | `pkgs/90-apps/public-uix` | tenant-branded composition and deployment wiring only |
-| `platform-admin-uix` | platform subset of `pkgs/90-apps/admin-uix` | explicit removal of tenant-local workflows and a dedicated platform nav/state model |
-| `tenant-admin-uix` | tenant subset of `pkgs/90-apps/admin-uix` | explicit removal of platform-global workflows and tenant-local client/policy completion |
+| `public-uix` | `pkgs/90-ui/public-uix` | tenant-branded composition and deployment wiring only |
+| `platform-admin-uix` | platform subset of `pkgs/90-ui/admin-uix` | explicit removal of tenant-local workflows and a dedicated platform nav/state model |
+| `tenant-admin-uix` | tenant subset of `pkgs/90-ui/admin-uix` | explicit removal of platform-global workflows and tenant-local client/policy completion |
 | `developer-uix` | `ClientManagement.tsx` plus discovery/client backend support | dedicated UI shell, formal route model, stronger app-owner workflow model |
 | `service-admin-uix` | partial backend-only service/workload capability | dedicated UI model, promoted service identity workflows, and possibly CLI-first rather than browser-first delivery |
 
