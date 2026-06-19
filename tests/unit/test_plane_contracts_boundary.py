@@ -55,6 +55,52 @@ def test_control_plane_contracts_own_admin_and_governance_surfaces() -> None:
     assert contracts.Role(name="admin", permissions=("tenant.read",)).name == "admin"
 
 
+def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> None:
+    import tigrbl_control_plane_contracts as contracts
+
+    executable_helpers = {
+        "admin_policy_boundary_manifest",
+        "admin_policy_boundary_integrity",
+        "phase3_admin_policy_boundary_manifest",
+        "phase3_admin_policy_boundary_integrity",
+        "provisioning_governance_ecosystem_boundary_manifest",
+        "provisioning_governance_ecosystem_boundary_integrity",
+        "phase5_governance_extension_boundary_manifest",
+        "phase5_governance_extension_boundary_integrity",
+    }
+
+    assert not (executable_helpers & set(dir(contracts)))
+
+
+def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
+    package_root = next((ROOT / "pkgs").glob("00-core/tigrbl-control-plane-contracts/src/tigrbl_control_plane_contracts"))
+    offenders: list[str] = []
+
+    for path in package_root.rglob("*.py"):
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                offenders.append(f"{path.relative_to(ROOT)}:{node.lineno}:{node.name}")
+
+    assert offenders == []
+
+
+def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> None:
+    import tigrbl_control_plane_contracts as contracts
+    from tigrbl_authz_policy._control_plane import models as admin_models
+    from tigrbl_authz_policy._governance_extension import models as governance_models
+
+    assert admin_models.Role is contracts.Role
+    assert governance_models.SDKPackage is contracts.SDKPackage
+    assert admin_models.admin_policy_boundary_integrity()["passed"] is True
+    assert governance_models.provisioning_governance_ecosystem_boundary_integrity()["passed"] is True
+    assert "feat:f13-rbac" in admin_models.admin_policy_boundary_manifest()
+    assert (
+        "feat:f39-sdk-ecosystem"
+        in governance_models.provisioning_governance_ecosystem_boundary_manifest()
+    )
+
+
 def test_release_contracts_own_release_posture_surfaces() -> None:
     import tigrbl_release_contracts as contracts
     from tigrbl_authz_policy._release_posture.models import TransportPosture

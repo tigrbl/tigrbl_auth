@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tigrbl_auth.uix import (
+from tigrbl_authz_policy._governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,
     PluginRuntimeRegistry,

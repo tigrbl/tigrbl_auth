@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tigrbl_auth.uix import (
+from tigrbl_authz_policy._control_plane import (
     ADMIN_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
     ABACAdministration,
