@@ -144,7 +144,7 @@ def test_storage_t1_sqlalchemy_adapter_contract_uses_session_boundary() -> None:
 
 @pytest.mark.unit
 def test_storage_t1_migration_contract_and_sqlite_postgres_matrix() -> None:
-    versions_dir = Path("pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/migrations/versions")
+    versions_dir = Path("pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/migrations/versions")
     contract = build_migration_contract(
         versions_dir=versions_dir,
         required_collections=("tenants", "users", "clients", "services", "service_keys"),
@@ -173,9 +173,9 @@ def test_storage_t2_delete_visibility_and_no_protocol_semantics() -> None:
 @pytest.mark.unit
 def test_storage_t2_public_boundary_has_no_protocol_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/__init__.py"),
-        Path("pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/repository.py"),
-        Path("pkgs/tigrbl-identity-storage/src/tigrbl_identity_storage/migration_contract.py"),
+        Path("pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/__init__.py"),
+        Path("pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/repository.py"),
+        Path("pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/migration_contract.py"),
     ]
     forbidden = {
         "tigrbl_auth",

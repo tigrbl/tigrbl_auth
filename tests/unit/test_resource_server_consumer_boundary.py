@@ -217,8 +217,8 @@ def test_resource_server_t2_rejects_bad_dpop_mtls_and_missing_bearer() -> None:
 @pytest.mark.unit
 def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
-        Path("pkgs/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
+        Path("pkgs/30-capabilities/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
+        Path("pkgs/30-capabilities/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
     ]
     forbidden = {
         "tigrbl_auth",

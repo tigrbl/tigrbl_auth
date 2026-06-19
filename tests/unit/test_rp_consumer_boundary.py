@@ -203,8 +203,8 @@ def test_rp_t2_pkce_verifier_rejects_invalid_values_and_login_url_fails_closed()
 @pytest.mark.unit
 def test_rp_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"),
-        Path("pkgs/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"),
+        Path("pkgs/40-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/__init__.py"),
+        Path("pkgs/40-protocols/tigrbl-auth-protocol-rp/src/tigrbl_auth_protocol_rp/client.py"),
     ]
     forbidden = {
         "tigrbl_auth",

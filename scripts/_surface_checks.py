@@ -16,9 +16,9 @@ PROFILE_GROUPS = {
     "peer-claim": ("baseline", "production", "hardening"),
 }
 PUBLIC_ROUTE_SEARCH_ROOTS = (
-    "pkgs/tigrbl-auth/src/tigrbl_auth/api/rest/routers",
-    "pkgs/tigrbl-auth/src/tigrbl_auth/standards/oauth2",
-    "pkgs/tigrbl-auth/src/tigrbl_auth/standards/oidc",
+    "pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/api/rest/routers",
+    "pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/standards/oauth2",
+    "pkgs/60-facade/tigrbl-auth/src/tigrbl_auth/standards/oidc",
 )
 OPENAPI_TARGET_LABEL = "OpenAPI 3.1 / 3.2 compatible public contract"
 OPENRPC_TARGET_LABEL = "OpenRPC 1.4.x admin/control-plane contract"

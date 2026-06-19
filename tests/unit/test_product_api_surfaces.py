@@ -20,26 +20,26 @@ from tigrbl_auth.api import surfaces
 
 ROOT = Path(__file__).resolve().parents[2]
 API_PACKAGES = {
-    "public-api": ("tigrbl_auth_api_public", ROOT / "pkgs/tigrbl-auth-api-public/src"),
+    "public-api": ("tigrbl_auth_api_public", ROOT / "pkgs/70-apis/tigrbl-auth-api-public/src"),
     "platform-admin-api": (
         "tigrbl_auth_api_platform_admin",
-        ROOT / "pkgs/tigrbl-auth-api-platform-admin/src",
+        ROOT / "pkgs/70-apis/tigrbl-auth-api-platform-admin/src",
     ),
     "tenant-admin-api": (
         "tigrbl_auth_api_tenant_admin",
-        ROOT / "pkgs/tigrbl-auth-api-tenant-admin/src",
+        ROOT / "pkgs/70-apis/tigrbl-auth-api-tenant-admin/src",
     ),
     "developer-api": (
         "tigrbl_auth_api_developer",
-        ROOT / "pkgs/tigrbl-auth-api-developer/src",
+        ROOT / "pkgs/70-apis/tigrbl-auth-api-developer/src",
     ),
     "service-admin-api": (
         "tigrbl_auth_api_service_admin",
-        ROOT / "pkgs/tigrbl-auth-api-service-admin/src",
+        ROOT / "pkgs/70-apis/tigrbl-auth-api-service-admin/src",
     ),
     "resource-validation-api": (
         "tigrbl_auth_api_resource_validation",
-        ROOT / "pkgs/tigrbl-auth-api-resource-validation/src",
+        ROOT / "pkgs/70-apis/tigrbl-auth-api-resource-validation/src",
     ),
 }
 

@@ -24,7 +24,7 @@ RAW_HANDLER_TOKENS = (
 )
 
 RAW_HANDLER_ALLOWLIST = {
-    "pkgs/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
+    "pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
 }
 
 TABLE_ROUTE_FUNCTION_ALLOWLIST = {

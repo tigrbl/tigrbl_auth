@@ -161,7 +161,7 @@ plugin.install(app)
 - OAuth 2.1 alignment is tracked as a profile, not as a formal RFC claim.
 - `keys` is the canonical certified command family; `key` is no longer part of the certified operator surface.
 - public "independent" wording remains disallowed until preserved Tier 4 external peer bundles exist and promote the retained boundary.
-- The authoritative executable CLI surface is `pkgs/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
+- The authoritative executable CLI surface is `pkgs/50-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/metadata/` plus the generated `docs/reference/CLI_SURFACE.md`.
 - A current checkpoint gap review remains published at `docs/compliance/PACKAGE_REVIEW_GAP_ANALYSIS.md`.
 - Supplemental supporting review/plan docs remain available at `docs/compliance/INDEPENDENT_PACKAGE_REVIEW_2026-03-27.md` and `docs/compliance/CERTIFIABLE_DELIVERY_PLAN_2026-03-27.md`; the authoritative active document is the SSOT, and the generated reports and top-level current-state docs are its current projections.
 - Dependency provenance for this checkpoint is preserved in `pyproject.toml`, `constraints/*.txt`, and `constraints/dependency-lock.json`.

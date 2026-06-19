@@ -273,7 +273,7 @@ def cmd_test_matrix(args: argparse.Namespace) -> int:
                     "python_version": version,
                     "python_tag": _python_tag(version),
                     "cell_id": f"{package.name}-{_python_tag(version)}",
-                    "workspace_source_globs": "pkgs/*/src\npkgs/deprecated/*/src",
+                    "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/src",
                     "package_test_paths": "\n".join(package_test_paths),
                     "pre_test_command": pre_test_command,
                     "pytest_args": pytest_args,

@@ -7,6 +7,10 @@ from pathlib import Path
 
 import pytest
 
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from scripts.monorepo_release import (
     _local_dependency_closure,
     _materialize_testkit_interop_artifacts,
@@ -15,7 +19,6 @@ from scripts.monorepo_release import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 
 
@@ -24,7 +27,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
 
     assert len(packages) == 31
     assert "tigrbl-auth-workspace" not in packages
-    assert packages["tigrbl-auth"].path.as_posix() == "pkgs/tigrbl-auth"
+    assert packages["tigrbl-auth"].path.as_posix() == "pkgs/60-facade/tigrbl-auth"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
     assert packages["tigrbl-auth-protocol-oauth"].import_root == "tigrbl_auth_protocol_oauth"
@@ -123,13 +126,13 @@ def test_monorepo_release_filters_package_python_test_matrix() -> None:
         {
             "name": "tigrbl-auth-protocol-oauth",
             "version": "0.4.0.dev2",
-            "path": "pkgs/tigrbl-auth-protocol-oauth",
+            "path": "pkgs/40-protocols/tigrbl-auth-protocol-oauth",
             "import_root": "tigrbl_auth_protocol_oauth",
             "tag": "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "python_version": "3.12",
             "python_tag": "py312",
             "cell_id": "tigrbl-auth-protocol-oauth-py312",
-            "workspace_source_globs": "pkgs/*/src\npkgs/deprecated/*/src",
+            "workspace_source_globs": "pkgs/*/*/src\npkgs/deprecated/*/src",
             "package_test_paths": "tests/packages/tigrbl-auth-protocol-oauth\ntests/packages/tigrbl_auth_protocol_oauth",
             "pre_test_command": "",
             "pytest_args": "",

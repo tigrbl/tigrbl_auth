@@ -126,14 +126,14 @@ def test_server_runtime_operator_t2_fail_closed_guards() -> None:
 @pytest.mark.unit
 def test_server_runtime_operator_t2_import_boundaries() -> None:
     server_files = [
-        Path("pkgs/tigrbl-identity-server/src/tigrbl_identity_server/__init__.py"),
-        Path("pkgs/tigrbl-identity-server/src/tigrbl_identity_server/assembly.py"),
+        Path("pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/__init__.py"),
+        Path("pkgs/50-runtime/tigrbl-identity-server/src/tigrbl_identity_server/assembly.py"),
     ]
     runtime_files = [
-        Path("pkgs/tigrbl-identity-runtime/src/tigrbl_identity_runtime/assembly.py"),
+        Path("pkgs/50-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/assembly.py"),
     ]
     operator_files = [
-        Path("pkgs/tigrbl-identity-operator/src/tigrbl_identity_operator/workflows.py"),
+        Path("pkgs/50-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/workflows.py"),
     ]
 
     def imports_for(files: list[Path]) -> set[str]:

@@ -143,8 +143,8 @@ def test_provider_white_label_t2_rejects_unsafe_branding_and_cross_tenant_use() 
 @pytest.mark.unit
 def test_provider_white_label_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
-        Path("pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/__init__.py"),
-        Path("pkgs/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/provider.py"),
+        Path("pkgs/40-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/__init__.py"),
+        Path("pkgs/40-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/provider.py"),
     ]
     forbidden = {
         "tigrbl_auth",

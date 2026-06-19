@@ -90,7 +90,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add pkgs/*/pyproject.toml
+          git add pkgs/*/*/pyproject.toml
           if git diff --cached --quiet; then
             echo "::notice::No version changes to commit."
           else
