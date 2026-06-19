@@ -59,6 +59,23 @@ REQUIRED_TABLE_OPS = {
     "access_review_decision.py": {"AccessReviewDecision": {"record_decision", "lookup", "list_for_item"}},
     "residency_zone.py": {"ResidencyZone": {"create_zone", "lookup", "list_active", "disable"}},
     "tenant_residency.py": {"TenantResidency": {"assign_residency", "lookup", "list_for_zone", "disable"}},
+    "sdk_package.py": {"SDKPackageRecord": {"register", "lookup", "list_by_language", "disable"}},
+    "plugin_descriptor.py": {"PluginDescriptorRecord": {"register", "lookup", "list_enabled", "disable"}},
+    "plugin_lifecycle_event.py": {"PluginLifecycleEventRecord": {"append_event", "lookup", "list_for_plugin"}},
+    "scim_schema.py": {"ScimSchemaRecord": {"register_schema", "lookup", "list_for_resource_kind", "disable"}},
+    "scim_user.py": {"ScimUserRecord": {"upsert_user", "lookup", "list_for_tenant", "deactivate"}},
+    "scim_group.py": {"ScimGroupRecord": {"upsert_group", "lookup", "list_for_tenant", "deactivate"}},
+    "scim_patch_event.py": {"ScimPatchEvent": {"append_event", "list_for_resource", "list_for_tenant"}},
+    "release_capability_record.py": {"ReleaseCapabilityRecord": {"record", "lookup", "list_for_release"}},
+    "release_authorization_state.py": {"ReleaseAuthorizationState": {"snapshot", "lookup", "list_for_release"}},
+    "runtime_qualification.py": {"RuntimeQualificationRecord": {"record", "lookup", "list_for_release"}},
+    "release_security_posture.py": {"ReleaseSecurityPosture": {"snapshot", "lookup", "list_for_release"}},
+    "release_posture.py": {"ReleasePosture": {"snapshot", "lookup", "list_for_release"}},
+    "release_attestation_event.py": {"ReleaseAttestationEvent": {"append_event", "lookup", "list_for_release"}},
+    "control_correctness_report.py": {"ControlCorrectnessReport": {"snapshot", "lookup", "list_for_release"}},
+    "authz_verification_report.py": {"AuthzVerificationReport": {"snapshot", "lookup", "list_by_kind"}},
+    "resource_server_contract.py": {"ResourceServerContract": {"register", "lookup", "list_for_resource_server", "disable"}},
+    "provider_artifact.py": {"ProviderArtifact": {"register", "lookup", "list_by_kind", "disable"}},
 }
 
 

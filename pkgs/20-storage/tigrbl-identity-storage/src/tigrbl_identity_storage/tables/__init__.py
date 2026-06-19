@@ -80,6 +80,23 @@ from .access_review_item import AccessReviewItem
 from .access_review_decision import AccessReviewDecision
 from .residency_zone import ResidencyZone
 from .tenant_residency import TenantResidency
+from .sdk_package import SDKPackageRecord
+from .plugin_descriptor import PluginDescriptorRecord
+from .plugin_lifecycle_event import PluginLifecycleEventRecord
+from .scim_schema import ScimSchemaRecord
+from .scim_user import ScimUserRecord
+from .scim_group import ScimGroupRecord
+from .scim_patch_event import ScimPatchEvent
+from .release_capability_record import ReleaseCapabilityRecord
+from .release_authorization_state import ReleaseAuthorizationState
+from .runtime_qualification import RuntimeQualificationRecord
+from .release_security_posture import ReleaseSecurityPosture
+from .release_posture import ReleasePosture
+from .release_attestation_event import ReleaseAttestationEvent
+from .control_correctness_report import ControlCorrectnessReport
+from .authz_verification_report import AuthzVerificationReport
+from .resource_server_contract import ResourceServerContract
+from .provider_artifact import ProviderArtifact
 from .engine import ENGINE, dsn, get_db
 from ._schema_ctx import set_schema
 
@@ -131,6 +148,23 @@ def _ensure_runtime_bindings() -> None:
         AccessReviewDecision,
         ResidencyZone,
         TenantResidency,
+        SDKPackageRecord,
+        PluginDescriptorRecord,
+        PluginLifecycleEventRecord,
+        ScimSchemaRecord,
+        ScimUserRecord,
+        ScimGroupRecord,
+        ScimPatchEvent,
+        ReleaseCapabilityRecord,
+        ReleaseAuthorizationState,
+        RuntimeQualificationRecord,
+        ReleaseSecurityPosture,
+        ReleasePosture,
+        ReleaseAttestationEvent,
+        ControlCorrectnessReport,
+        AuthzVerificationReport,
+        ResourceServerContract,
+        ProviderArtifact,
     ):
         handlers = getattr(model, "handlers", None)
         if getattr(handlers, "read", None) is None:
@@ -276,4 +310,21 @@ __all__ = [
     "AccessReviewDecision",
     "ResidencyZone",
     "TenantResidency",
+    "SDKPackageRecord",
+    "PluginDescriptorRecord",
+    "PluginLifecycleEventRecord",
+    "ScimSchemaRecord",
+    "ScimUserRecord",
+    "ScimGroupRecord",
+    "ScimPatchEvent",
+    "ReleaseCapabilityRecord",
+    "ReleaseAuthorizationState",
+    "RuntimeQualificationRecord",
+    "ReleaseSecurityPosture",
+    "ReleasePosture",
+    "ReleaseAttestationEvent",
+    "ControlCorrectnessReport",
+    "AuthzVerificationReport",
+    "ResourceServerContract",
+    "ProviderArtifact",
 ]

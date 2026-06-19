@@ -5,6 +5,8 @@ from tigrbl_identity_storage.tables import (
     AccessReviewDecision,
     AccessReviewItem,
     AttributePolicy,
+    AuthzVerificationReport,
+    ControlCorrectnessReport,
     Credential,
     CredentialAuditEvent,
     CredentialDpopKey,
@@ -14,8 +16,23 @@ from tigrbl_identity_storage.tables import (
     EntitlementAssignment,
     KeyRotationPolicy,
     PolicyCondition,
+    PluginDescriptorRecord,
+    PluginLifecycleEventRecord,
+    ProviderArtifact,
+    ReleaseAttestationEvent,
+    ReleaseAuthorizationState,
+    ReleaseCapabilityRecord,
+    ReleasePosture,
+    ReleaseSecurityPosture,
     ResidencyZone,
+    ResourceServerContract,
     Role,
+    RuntimeQualificationRecord,
+    SDKPackageRecord,
+    ScimGroupRecord,
+    ScimPatchEvent,
+    ScimSchemaRecord,
+    ScimUserRecord,
     SubjectAlias,
     TenantMembership,
     TenantResidency,
@@ -42,6 +59,23 @@ def test_remaining_definitely_durable_contracts_have_storage_tables() -> None:
         AccessReviewDecision: "access_review_decisions",
         ResidencyZone: "residency_zones",
         TenantResidency: "tenant_residency",
+        SDKPackageRecord: "sdk_packages",
+        PluginDescriptorRecord: "plugin_descriptors",
+        PluginLifecycleEventRecord: "plugin_lifecycle_events",
+        ScimSchemaRecord: "scim_schemas",
+        ScimUserRecord: "scim_users",
+        ScimGroupRecord: "scim_groups",
+        ScimPatchEvent: "scim_patch_events",
+        ReleaseCapabilityRecord: "release_capability_records",
+        ReleaseAuthorizationState: "release_authorization_states",
+        RuntimeQualificationRecord: "runtime_qualifications",
+        ReleaseSecurityPosture: "release_security_postures",
+        ReleasePosture: "release_postures",
+        ReleaseAttestationEvent: "release_attestation_events",
+        ControlCorrectnessReport: "control_correctness_reports",
+        AuthzVerificationReport: "authz_verification_reports",
+        ResourceServerContract: "resource_server_contracts",
+        ProviderArtifact: "provider_artifacts",
     }
 
     for model, table_name in expected.items():
@@ -50,7 +84,7 @@ def test_remaining_definitely_durable_contracts_have_storage_tables() -> None:
         assert getattr(model, "handlers", None) is not None
 
 
-def test_optional_contracts_are_not_duplicated_as_storage_tables() -> None:
+def test_remaining_ephemeral_contracts_are_not_duplicated_as_storage_tables() -> None:
     table_names = {table.name for table in Credential.metadata.sorted_tables if table.schema == "authn"}
 
     assert "jose_keys" not in table_names
