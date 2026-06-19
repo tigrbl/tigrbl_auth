@@ -6,6 +6,8 @@ import sys
 import warnings
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[2]
 for src in sorted((ROOT / "pkgs").glob("*/*/src")):
@@ -71,15 +73,15 @@ def test_legacy_plane_contract_modules_reexport_with_deprecation_warnings() -> N
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter("always")
         admin_resources = importlib.import_module("tigrbl_control_plane_contracts.admin_resources")
-        governance = importlib.import_module("tigrbl_control_plane_contracts.governance")
         residency = importlib.import_module("tigrbl_user_plane_contracts.authz.residency")
 
     import tigrbl_management_plane_contracts as contracts
 
     assert admin_resources.AdminResourceKind is contracts.AdminResourceKind
-    assert governance.SDKPackage is contracts.SDKPackage
     assert residency.ResidencyZone is contracts.ResidencyZone
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_control_plane_contracts.governance")
+    assert contracts.SDKPackage.__name__ == "SDKPackage"
     messages = "\n".join(str(item.message) for item in caught)
     assert "tigrbl_management_plane_contracts.admin_resources" in messages
-    assert "tigrbl_management_plane_contracts.governance" in messages
     assert "tigrbl_management_plane_contracts.residency" in messages
