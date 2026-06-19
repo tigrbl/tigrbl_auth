@@ -62,7 +62,7 @@ jobs:
           const selectedPackage = process.env.SELECTED_PACKAGE || "all";
           const selectedVersion = process.env.SELECTED_VERSION || "";
           const force = process.env.FORCE_TAG === "true";
-          const packageDirs = ["pkgs/90-ui/admin-uix", "pkgs/90-ui/public-uix", "pkgs/90-ui/rp"];
+          const packageDirs = ["pkgs/95-ui/admin-uix", "pkgs/95-ui/public-uix", "pkgs/95-ui/rp"];
           const created = [];
 
           function run(args) {
@@ -132,7 +132,7 @@ jobs:
           }
           const packageName = match[1];
           const version = match[2];
-          const packageDirs = ["pkgs/90-ui/admin-uix", "pkgs/90-ui/public-uix", "pkgs/90-ui/rp"];
+          const packageDirs = ["pkgs/95-ui/admin-uix", "pkgs/95-ui/public-uix", "pkgs/95-ui/rp"];
           let found = null;
           for (const packagePath of packageDirs) {
             const manifest = JSON.parse(fs.readFileSync(path.join(packagePath, "package.json"), "utf8"));

@@ -61,16 +61,16 @@ PYTHON_PACKAGE_LAYERS = {
 }
 
 FRONTEND_WORKSPACES = {
-    ROOT / "apps" / "admin-uix",
-    ROOT / "apps" / "demo-hub-uix",
-    ROOT / "apps" / "developer-uix",
-    ROOT / "apps" / "my-account-uix",
-    ROOT / "apps" / "platform-admin-uix",
-    ROOT / "apps" / "public-uix",
-    ROOT / "apps" / "rp",
-    ROOT / "apps" / "service-admin-uix",
-    ROOT / "apps" / "tenant-admin-uix",
-    ROOT / "packages" / "uix-core",
+    ROOT / "pkgs" / "90-uix-core" / "uix-core",
+    ROOT / "pkgs" / "95-ui" / "admin-uix",
+    ROOT / "pkgs" / "95-ui" / "demo-hub-uix",
+    ROOT / "pkgs" / "95-ui" / "developer-uix",
+    ROOT / "pkgs" / "95-ui" / "my-account-uix",
+    ROOT / "pkgs" / "95-ui" / "platform-admin-uix",
+    ROOT / "pkgs" / "95-ui" / "public-uix",
+    ROOT / "pkgs" / "95-ui" / "rp",
+    ROOT / "pkgs" / "95-ui" / "service-admin-uix",
+    ROOT / "pkgs" / "95-ui" / "tenant-admin-uix",
 }
 
 T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
