@@ -85,3 +85,28 @@ def test_storage_does_not_define_a_parallel_directional_schema_helper() -> None:
 
     assert offenders == []
 
+
+def test_storage_table_helpers_are_nested_under_table_owners() -> None:
+    tables_root = STORAGE_SRC / "tables"
+    flat_helper_prefixes = (
+        "_account",
+        "_auth_flows",
+        "_auth_session",
+        "_authz",
+        "_device_code",
+        "_logout_state",
+        "_oauth",
+        "_oidc",
+        "_resource_validation",
+        "_rp",
+        "_user",
+    )
+    offenders = [
+        path.relative_to(ROOT).as_posix()
+        for path in tables_root.glob("_*.py")
+        if path.name != "_ops.py"
+        and path.name != "_schema_ctx.py"
+        and path.name.startswith(flat_helper_prefixes)
+    ]
+
+    assert offenders == []

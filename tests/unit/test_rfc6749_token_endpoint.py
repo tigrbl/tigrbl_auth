@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock
 
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_server.framework import TigrblApp
-from tigrbl_identity_storage.tables._auth_flows import router
+from tigrbl_identity_storage.tables.auth_code._auth_flows import router
 from tigrbl_identity_runtime.settings import settings
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
@@ -32,15 +32,15 @@ async def client(monkeypatch):
     app.include_router(router)
     app.router.dependency_overrides[get_db] = lambda: DummyDB()
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables._oauth_token.read_handler_record",
+        "tigrbl_identity_storage.tables.token_record._route.read_handler_record",
         AsyncMock(return_value=DummyClient()),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables._oauth_token.first_handler_record",
+        "tigrbl_identity_storage.tables.token_record._route.first_handler_record",
         AsyncMock(return_value=None),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables._oauth_token.issue_token_pair_records",
+        "tigrbl_identity_storage.tables.token_record._route.issue_token_pair_records",
         AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)

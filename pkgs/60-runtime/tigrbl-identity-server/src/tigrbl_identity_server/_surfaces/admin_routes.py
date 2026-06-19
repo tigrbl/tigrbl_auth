@@ -15,7 +15,7 @@ from typing import Any, Callable, Final
 from tigrbl_identity_server.framework import TigrblApp, TigrblRouter
 from tigrbl_identity_storage.tables.auth_code import api as authorize_api
 from tigrbl_identity_storage.tables.auth_session import login_api
-from tigrbl_identity_storage.tables._account_routes import api as my_account_api
+from tigrbl_identity_storage.tables.user._account_surface import api as my_account_api
 from tigrbl_identity_storage.tables.client_registration import api as register_api
 from tigrbl_identity_storage.tables.device_code import api as device_authorization_api
 from tigrbl_identity_storage.tables.logout_state import api as logout_api
@@ -27,15 +27,15 @@ from tigrbl_identity_storage.tables.user import admin_api as admin_identities_ap
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
 from tigrbl_identity_storage.tables.tenant import admin_api as admin_tenants_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_storage.tables._oidc_discovery import (
+from tigrbl_identity_storage.tables.realm._oidc_discovery import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_identity_storage.tables._oidc_userinfo import include_oidc_userinfo
-from tigrbl_identity_storage.tables._oauth_authorization_server_metadata import include_rfc8414
-from tigrbl_identity_storage.tables._oauth_introspection import include_introspection_endpoint
-from tigrbl_identity_storage.tables._oauth_protected_resource_metadata import include_rfc9728
-from tigrbl_identity_storage.tables._oauth_token_exchange import include_token_exchange_endpoint
+from tigrbl_identity_storage.tables.user._oidc_userinfo import include_oidc_userinfo
+from tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata import include_rfc8414
+from tigrbl_identity_storage.tables.token_record._introspection import include_introspection_endpoint
+from tigrbl_identity_storage.tables.token_record._protected_resource_metadata import include_rfc9728
+from tigrbl_identity_storage.tables.token_record._token_exchange import include_token_exchange_endpoint
 from tigrbl_authz_policy.admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
 

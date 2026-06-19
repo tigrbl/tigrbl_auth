@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables._resource_validation_metadata import (
+from tigrbl_identity_storage.tables.token_record._resource_validation_metadata import (
     CAPABILITIES_METADATA_PATH,
     VERIFIER_CONTRACT_METADATA_PATH,
     include_resource_validation_metadata,

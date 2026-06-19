@@ -1,7 +1,7 @@
 """RFC 8414 compatibility exports.
 
 The well-known route is owned by
-``tigrbl_identity_storage.tables._oauth_authorization_server_metadata``.
+``tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata``.
 """
 
 from __future__ import annotations
@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Final
 
 from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import *
-from tigrbl_identity_storage.tables._oauth_authorization_server_metadata import (
+from tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata import (
     include_rfc8414,
 )
 

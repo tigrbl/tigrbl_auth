@@ -1,12 +1,12 @@
 """RFC 9728 compatibility exports.
 
 The protected-resource metadata route is owned by
-``tigrbl_identity_storage.tables._oauth_protected_resource_metadata``.
+``tigrbl_identity_storage.tables.token_record._protected_resource_metadata``.
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables._oauth_protected_resource_metadata import (
+from tigrbl_identity_storage.tables.token_record._protected_resource_metadata import (
     include_rfc9728,
 )
 from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS

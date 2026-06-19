@@ -66,5 +66,5 @@ def test_introspection_module_uses_runtime_router_when_dependencies_are_installe
     module = importlib.reload(importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection"))
 
     assert not hasattr(module, "api")
-    assert module.introspect_token.__module__ == "tigrbl_identity_storage.tables._oauth_introspection"
-    assert module.include_introspection_endpoint.__module__ == "tigrbl_identity_storage.tables._oauth_introspection"
+    assert module.introspect_token.__module__ == "tigrbl_identity_storage.tables.token_record._introspection"
+    assert module.include_introspection_endpoint.__module__ == "tigrbl_identity_storage.tables.token_record._introspection"

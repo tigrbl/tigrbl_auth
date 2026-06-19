@@ -1,11 +1,11 @@
 """OAuth token introspection compatibility exports.
 
-Endpoint routes are owned by ``tigrbl_identity_storage.tables._oauth_introspection``.
+Endpoint routes are owned by ``tigrbl_identity_storage.tables.token_record._introspection``.
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables._oauth_introspection import (
+from tigrbl_identity_storage.tables.token_record._introspection import (
     RFC7662_SPEC_URL,
     include_introspection_endpoint,
     include_rfc7662,

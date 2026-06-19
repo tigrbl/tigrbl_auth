@@ -37,7 +37,7 @@ from tigrbl_identity_storage.tables import (
     AuthCode,
 )
 from tigrbl_identity_storage.tables.engine import dsn
-from tigrbl_identity_storage.tables._auth_flows import api as flows_api
+from tigrbl_identity_storage.tables.auth_code._auth_flows import api as flows_api
 
 # ----------------------------------------------------------------------
 # 3.  Build Tigrbl instance & router

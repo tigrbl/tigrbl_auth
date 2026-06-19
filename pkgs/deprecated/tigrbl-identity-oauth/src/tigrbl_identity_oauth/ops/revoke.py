@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_identity_storage.tables._oauth_revoke`."""
+"""Deprecated compatibility module for `tigrbl_identity_storage.tables.revoked_token._route`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_oauth.ops.revoke"
-_CANONICAL_MODULE = "tigrbl_identity_storage.tables._oauth_revoke"
+_CANONICAL_MODULE = "tigrbl_identity_storage.tables.revoked_token._route"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

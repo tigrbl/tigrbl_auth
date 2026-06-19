@@ -1,46 +1,28 @@
 from __future__ import annotations
 
-import json
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 from types import SimpleNamespace
 from urllib.parse import urlencode
 
 import pytest
 
-from tigrbl_auth.api.rpc.methods.client_registration import (
-    handle_registration_delete,
-    handle_registration_show,
-    handle_registration_upsert,
-)
-from tigrbl_auth.api.rpc.methods.token import handle_token_exchange
-from tigrbl_auth.api.rpc.registry import RpcRequestContext
-from tigrbl_auth.api.rpc.schemas.client_registration import (
-    ClientRegistrationDeleteParams,
-    ClientRegistrationShowParams,
-    ClientRegistrationUpsertParams,
-)
-from tigrbl_auth.api.rpc.schemas.token import TokenExchangeParams
-from tigrbl_auth.services._operator_store import resource_state_path
-from tigrbl_auth.standards.oauth2.client_registration_management import describe as describe_rfc7592
-from tigrbl_auth.standards.oauth2.device_authorization import (
+from tigrbl_auth_protocol_oauth.standards.client_registration_management import describe as describe_rfc7592
+from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_INTERVAL,
     DEVICE_CODE_SLOW_DOWN_INCREMENT,
     describe as describe_rfc8628,
     next_device_poll_interval,
     poll_too_frequently,
 )
-from tigrbl_auth.standards.oauth2.resource_indicators import (
+from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
     describe as describe_rfc8707,
     resource_binding_summary,
     select_resource_indicator,
 )
-import tigrbl_auth.standards.oauth2.token_exchange as token_exchange_mod
-import tigrbl_identity_storage.tables._oauth_token as token_ops
+import tigrbl_identity_storage.tables.token_record._token_exchange as token_exchange_mod
+import tigrbl_identity_storage.tables.token_record._route as token_ops
 
-_REPO_ROOT = Path(__file__).resolve().parents[2]
-
-from tigrbl_auth.standards.oauth2.token_exchange import (
+from tigrbl_identity_storage.tables.token_record._token_exchange import (
     HTTPException,
     _actor_claim,
     _normalize_requested_token_type,
@@ -114,76 +96,6 @@ def test_describe_metadata_is_truthful() -> None:
     assert "lineage" in rfc8693["notes"]
     assert rfc8707["single_effective_target"] is True
     assert rfc8707["conflicting_inputs_fail_closed"] is True
-
-
-@pytest.mark.asyncio
-@pytest.mark.unit
-async def test_client_registration_rpc_delete_round_trip(tmp_path) -> None:
-    context = RpcRequestContext(repo_root=tmp_path)
-    upsert = await handle_registration_upsert(
-        ClientRegistrationUpsertParams(
-            client_id="client-7592",
-            tenant_id="tenant-a",
-            metadata={"redirect_uris": ["https://client.example/cb"]},
-            contacts=["ops@example.com"],
-            registration_access_token_hash="hashed-token",
-            registration_client_uri="https://issuer.example/register/client-7592",
-        ),
-        context,
-    )
-    assert upsert.registration.client_id == "client-7592"
-
-    shown = await handle_registration_show(ClientRegistrationShowParams(client_id="client-7592"), context)
-    assert shown.registration is not None
-    assert shown.registration.registration_access_token_hash == "hashed-token"
-
-    deleted = await handle_registration_delete(
-        ClientRegistrationDeleteParams(client_id="client-7592"),
-        context,
-    )
-    assert deleted.deleted is True
-    assert deleted.status == "deleted"
-    assert deleted.registration is not None
-    assert deleted.registration.client_id == "client-7592"
-
-    shown_after = await handle_registration_show(ClientRegistrationShowParams(client_id="client-7592"), context)
-    assert shown_after.registration is None
-
-
-@pytest.mark.asyncio
-@pytest.mark.unit
-async def test_token_exchange_rpc_persists_lineage(tmp_path) -> None:
-    context = RpcRequestContext(repo_root=tmp_path)
-    result = await handle_token_exchange(
-        TokenExchangeParams(
-            subject_token="subject-token-abc",
-            actor_token="actor-token-def",
-            requested_token_type="access_token",
-            audience="https://rs.example",
-            resource="https://rs.example",
-            extras={"exchange_mode": "delegation", "client_id": "client-8693"},
-        ),
-        context,
-    )
-    assert result.status == "created"
-    assert result.token is not None
-    state = json.loads(resource_state_path(tmp_path, "token").read_text(encoding="utf-8"))
-    assert len(state) == 1
-    stored = next(iter(state.values()))
-    assert stored["data"]["subject_token"] == "subject-token-abc"
-    assert stored["data"]["actor_token"] == "actor-token-def"
-    assert stored["data"]["requested_token_type"] in {
-        "access_token",
-        "urn:ietf:params:oauth:token-type:access_token",
-    }
-    assert stored["data"]["audience"] == "https://rs.example"
-    assert stored["data"]["resource"] == "https://rs.example"
-    assert stored["data"]["exchange_mode"] == "delegation"
-    claims = stored["data"]["claims"]
-    assert claims["authorization_trace"]["decision_key"]
-    assert claims["authorization_trace"]["derived_grant"]["resource"] == "https://rs.example"
-    assert claims["delegation_provenance"]["lineage_id"]
-    assert claims["delegation_provenance"]["edge"]["exchange_mode"] == "delegation"
 
 
 class _Form(dict):

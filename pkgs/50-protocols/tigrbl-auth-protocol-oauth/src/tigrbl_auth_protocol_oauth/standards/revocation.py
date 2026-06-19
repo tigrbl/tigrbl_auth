@@ -1,11 +1,11 @@
 """OAuth token revocation compatibility exports.
 
-Route handlers are owned by ``tigrbl_identity_storage.tables._oauth_revocation``.
+Route handlers are owned by ``tigrbl_identity_storage.tables.revoked_token._op``.
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables._oauth_revocation import (
+from tigrbl_identity_storage.tables.revoked_token._op import (
     CANONICAL_REVOCATION_PATH,
     RFC7009_SPEC_URL,
     include_rfc7009,
