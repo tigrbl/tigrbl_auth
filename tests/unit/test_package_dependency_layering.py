@@ -11,6 +11,7 @@ PKGS = ROOT / "pkgs"
 PYTHON_PACKAGE_LAYERS = {
     "core": {
         "tigrbl-control-plane-contracts",
+        "tigrbl-management-plane-contracts",
         "tigrbl-release-contracts",
         "tigrbl-security-trust-contracts",
         "tigrbl-user-plane-contracts",

@@ -27,8 +27,6 @@ from .service import PrincipalDirectory
 from .tenant_discovery import (
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
-    TENANT_PUBLIC_DISCOVERY_FEATURES,
-    TenantPublicDiscoveryBoundaryFeature,
     TenantTrustDomainAuthority,
     build_tenant_openid_config,
     enabled_tenant_record,
@@ -38,8 +36,6 @@ from .tenant_discovery import (
     tenant_issuer,
     tenant_jwks_path,
     tenant_openid_configuration_path,
-    tenant_public_discovery_boundary_integrity,
-    tenant_public_discovery_boundary_manifest,
     tenant_trust_domain_authority_from_root_issuer,
 )
 
@@ -53,8 +49,6 @@ __all__ = [
     "SubjectAlias",
     "TENANT_JWKS_PATH",
     "TENANT_OPENID_CONFIGURATION_PATH",
-    "TENANT_PUBLIC_DISCOVERY_FEATURES",
-    "TenantPublicDiscoveryBoundaryFeature",
     "TenantTrustDomainAuthority",
     "TenantMembership",
     "alias_for",
@@ -77,7 +71,5 @@ __all__ = [
     "tenant_issuer",
     "tenant_jwks_path",
     "tenant_openid_configuration_path",
-    "tenant_public_discovery_boundary_integrity",
-    "tenant_public_discovery_boundary_manifest",
     "tenant_trust_domain_authority_from_root_issuer",
 ]

@@ -27,7 +27,6 @@ def _dataclass_defs(path: Path) -> set[str]:
 def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     import tigrbl_control_plane_contracts as control_contracts
     import tigrbl_management_plane_contracts as management_contracts
-    import tigrbl_release_contracts as release_contracts
     import tigrbl_user_plane_contracts as user_contracts
     from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
     from tigrbl_identity_jose.standards import rfc7516
@@ -47,7 +46,7 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     assert models.SubjectAlias is user_contracts.SubjectAlias
     assert tenant_discovery.TenantTrustDomainAuthority is user_contracts.TenantTrustDomainAuthority
     assert tenant_discovery.RealmTrustDomainAuthority is user_contracts.RealmTrustDomainAuthority
-    assert tenant_discovery.TenantPublicDiscoveryBoundaryFeature is release_contracts.TenantPublicDiscoveryBoundaryFeature
+    assert not hasattr(tenant_discovery, "TenantPublicDiscoveryBoundaryFeature")
 
 
 def test_10_domain_only_keeps_implementation_local_dataclasses() -> None:

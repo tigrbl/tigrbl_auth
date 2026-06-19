@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -32,6 +33,7 @@ from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER, JWKS_P
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import discovery_policy_metadata
 from tigrbl_identity_storage.tables import Realm, Tenant
 from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 
 api = TigrblRouter()
 discovery_api = TigrblRouter()
@@ -97,7 +99,7 @@ async def openid_configuration_method_not_allowed(request: Request):
 async def _tenant_exists(*, db, tenant_slug: str) -> bool:
     if tenant_slug == "public":
         return True
-    operator_record = get_record(Path.cwd(), "tenant", tenant_slug)
+    operator_record = await _operator_record(db=db, resource="tenant", record_id=tenant_slug)
     operator_fallback = _tenant_record_enabled(operator_record)
     if db is None:
         return operator_fallback
@@ -108,6 +110,16 @@ async def _tenant_exists(*, db, tenant_slug: str) -> bool:
     if tenant is not None:
         return True
     return operator_fallback
+
+
+async def _operator_record(*, db, resource: str, record_id: str) -> dict[str, Any] | None:
+    if db is None:
+        return await asyncio.to_thread(get_record, Path.cwd(), resource, record_id)
+    try:
+        records = await OperatorRecord.load_records(db, resource)
+    except Exception:
+        return await asyncio.to_thread(get_record, Path.cwd(), resource, record_id)
+    return records.get(str(record_id))
 
 
 def _tenant_record_enabled(record: dict[str, Any] | None) -> bool:
@@ -176,7 +188,7 @@ async def tenant_jwks(request: Request, tenant_slug: str, db=Depends(get_db)):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant JWKS publication disabled")
     if not await _tenant_exists(db=db, tenant_slug=tenant_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Tenant not found")
-    return build_operator_jwks_payload(Path.cwd(), tenant=tenant_slug)
+    return await asyncio.to_thread(build_operator_jwks_payload, Path.cwd(), tenant=tenant_slug)
 
 
 @jwks_api.route(REALM_JWKS_PATH, methods=["GET"], tags=[".well-known", "realm"])
@@ -186,7 +198,7 @@ async def realm_jwks(request: Request, realm_slug: str, db=Depends(get_db)):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm JWKS publication disabled")
     if not await _realm_exists(db=db, realm_slug=realm_slug):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Realm not found")
-    return build_operator_jwks_payload(Path.cwd(), tenant=realm_slug)
+    return await asyncio.to_thread(build_operator_jwks_payload, Path.cwd(), tenant=realm_slug)
 
 
 def _include_if_missing(app: TigrblApp, router_obj: TigrblRouter, path: str) -> None:

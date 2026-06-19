@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 import sys
 from pathlib import Path
@@ -9,7 +10,7 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 ROOT = Path(__file__).resolve().parents[2]
-PRINCIPALS_SRC = ROOT / "pkgs" / "tigrbl-identity-principals" / "src"
+PRINCIPALS_SRC = ROOT / "pkgs" / "10-domain" / "tigrbl-identity-principals" / "src"
 if str(PRINCIPALS_SRC) not in sys.path:
     sys.path.append(str(PRINCIPALS_SRC))
 
@@ -19,14 +20,12 @@ from tigrbl_auth.api.app import build_app  # noqa: E402
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
 from tigrbl_auth.services._operator_store import OperationContext  # noqa: E402
 from tigrbl_auth.services.operator_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
-from tigrbl_auth.services.tenant_discovery import (  # noqa: E402
+from tigrbl_identity_principals.tenant_discovery import (  # noqa: E402
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     require_tenant_issuer,
     resolve_tenant_trust_domain_authority,
     tenant_issuer,
-    tenant_public_discovery_boundary_integrity,
-    tenant_public_discovery_boundary_manifest,
 )
 
 
@@ -49,6 +48,69 @@ BOUNDARY_FEATURE_IDS = {
     "feat:tenant-jwks-cross-tenant-leakage-guard",
 }
 
+TENANT_PUBLIC_DISCOVERY_BOUNDARY = {
+    "feat:tenant-scoped-issuer-boundary": {
+        "category": "tenant-issuer",
+        "runtime_objects": ("TenantTrustDomainAuthority", "tenant_issuer"),
+        "guarded_capabilities": ("issuer-boundary", "tenant-scope"),
+    },
+    "feat:route-tenant-openid-configuration": {
+        "category": "route",
+        "runtime_objects": ("build_tenant_openid_config", "TENANT_OPENID_CONFIGURATION_PATH"),
+        "guarded_capabilities": ("route-enabled", "tenant-exists"),
+    },
+    "feat:route-tenant-jwks-json": {
+        "category": "route",
+        "runtime_objects": ("TENANT_JWKS_PATH", "tenant_jwks_path"),
+        "guarded_capabilities": ("route-enabled", "tenant-exists"),
+    },
+    "feat:tenant-discovery-jwks-uri": {
+        "category": "discovery-document",
+        "runtime_objects": ("build_tenant_openid_config", "tenant_jwks_path"),
+        "guarded_capabilities": ("jwks-uri", "issuer-root"),
+    },
+    "feat:tenant-jwks-key-filtering": {
+        "category": "jwks",
+        "runtime_objects": ("TENANT_JWKS_PATH",),
+        "guarded_capabilities": ("tenant-filtering", "public-key-only"),
+    },
+    "feat:tenant-jwks-rotation-visibility": {
+        "category": "jwks",
+        "runtime_objects": ("TENANT_JWKS_PATH",),
+        "guarded_capabilities": ("active-visible", "next-visible", "retired-hidden"),
+    },
+    "feat:tenant-public-discovery-disabled-policy": {
+        "category": "route-policy",
+        "runtime_objects": ("enabled_tenant_record",),
+        "guarded_capabilities": ("disabled-tenant-404", "missing-tenant-404"),
+    },
+    "feat:operator-tenant-jwks-runtime-parity": {
+        "category": "operator-parity",
+        "runtime_objects": ("TENANT_JWKS_PATH",),
+        "guarded_capabilities": ("runtime-payload-parity",),
+    },
+    "feat:openapi-tenant-discovery-routes": {
+        "category": "contract",
+        "runtime_objects": ("TENANT_OPENID_CONFIGURATION_PATH", "TENANT_JWKS_PATH"),
+        "guarded_capabilities": ("openapi-route-parameters",),
+    },
+    "feat:discovery-snapshot-tenant-profile-artifacts": {
+        "category": "snapshot",
+        "runtime_objects": ("build_tenant_openid_config",),
+        "guarded_capabilities": ("tenant-profile-artifacts",),
+    },
+    "feat:tenant-issuer-token-validation-contract": {
+        "category": "validation",
+        "runtime_objects": ("require_tenant_issuer", "TenantTrustDomainAuthority"),
+        "guarded_capabilities": ("accepted-issuer-only",),
+    },
+    "feat:tenant-jwks-cross-tenant-leakage-guard": {
+        "category": "leakage-guard",
+        "runtime_objects": ("build_tenant_openid_config",),
+        "guarded_capabilities": ("cross-tenant-redaction", "tenant-path-isolation"),
+    },
+}
+
 
 def _settings(tmp_path: Path) -> SimpleNamespace:
     return SimpleNamespace(admin_api_key="test-admin-key", admin_api_key_dir=str(tmp_path))
@@ -69,10 +131,7 @@ def _context(tmp_path: Path, resource: str, command: str, *, tenant: str | None 
     )
 
 
-def _seed_operator_state(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
-    monkeypatch.chdir(tmp_path)
-
+def _seed_operator_records(tmp_path: Path) -> None:
     tenant_ctx = _context(tmp_path, "tenant", "tenant.create")
     create_resource(tenant_ctx, record_id=TENANT_A, patch={"name": "Tenant A"}, if_exists="error")
     create_resource(tenant_ctx, record_id=TENANT_B, patch={"name": "Tenant B"}, if_exists="error")
@@ -102,25 +161,29 @@ async def _client(tmp_path: Path) -> AsyncClient:
 
 
 def test_tenant_public_discovery_boundary_t0_inventory_tracks_all_features():
-    manifest = tenant_public_discovery_boundary_manifest()
-    integrity = tenant_public_discovery_boundary_integrity()
-    split_integrity = principals.tenant_public_discovery_boundary_integrity()
+    categories = {row["category"] for row in TENANT_PUBLIC_DISCOVERY_BOUNDARY.values()}
 
-    assert set(manifest) == BOUNDARY_FEATURE_IDS
-    assert integrity["passed"] is True
-    assert split_integrity["passed"] is True
-    assert integrity["feature_count"] == 12
-    assert manifest["feat:route-tenant-jwks-json"]["category"] == "route"
+    assert set(TENANT_PUBLIC_DISCOVERY_BOUNDARY) == BOUNDARY_FEATURE_IDS
+    assert len(TENANT_PUBLIC_DISCOVERY_BOUNDARY) == 12
+    assert {"tenant-issuer", "route", "jwks", "operator-parity", "contract", "snapshot", "validation", "leakage-guard"} <= categories
+    assert TENANT_PUBLIC_DISCOVERY_BOUNDARY["feat:route-tenant-jwks-json"]["category"] == "route"
     assert TENANT_OPENID_CONFIGURATION_PATH == principals.TENANT_OPENID_CONFIGURATION_PATH
     assert TENANT_JWKS_PATH == principals.TENANT_JWKS_PATH
+    assert not hasattr(principals, "tenant_public_discovery_boundary_manifest")
+    assert not hasattr(principals, "tenant_public_discovery_boundary_integrity")
 
 
 @pytest.mark.asyncio
 async def test_tenant_public_discovery_boundary_t1_composes_runtime_contracts(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-    _seed_operator_state(tmp_path, monkeypatch)
+    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
+    monkeypatch.chdir(tmp_path)
+    await asyncio.to_thread(_seed_operator_records, tmp_path)
     deployment = _deployment()
     authority = resolve_tenant_trust_domain_authority(deployment, TENANT_A)
-    operator = publish_jwks_document(_context(tmp_path, "keys", "keys.publish-jwks", tenant=TENANT_A))
+    operator = await asyncio.to_thread(
+        publish_jwks_document,
+        _context(tmp_path, "keys", "keys.publish-jwks", tenant=TENANT_A),
+    )
     operator_payload = json.loads((tmp_path / operator.path).read_text(encoding="utf-8"))
     contract = build_openapi_contract(deployment, version="0.0.0-test")
     artifacts = write_discovery_artifacts(tmp_path, deployment, profile_label="production")
@@ -153,7 +216,9 @@ async def test_tenant_public_discovery_boundary_t2_fails_closed_for_disabled_pol
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ):
-    _seed_operator_state(tmp_path, monkeypatch)
+    monkeypatch.setenv("TIGRBL_AUTH_OPERATOR_STATE_DIR", str(tmp_path / ".operator-state"))
+    monkeypatch.chdir(tmp_path)
+    await asyncio.to_thread(_seed_operator_records, tmp_path)
 
     async with await _client(tmp_path) as client:
         missing = await client.get("/tenants/missing/.well-known/openid-configuration")

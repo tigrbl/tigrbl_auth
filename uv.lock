@@ -2523,13 +2523,11 @@ name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-domain/tigrbl-identity-principals" }
 dependencies = [
-    { name = "tigrbl-release-contracts" },
     { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
