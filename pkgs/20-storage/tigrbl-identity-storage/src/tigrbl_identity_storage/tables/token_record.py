@@ -195,7 +195,7 @@ def _repo_root() -> Path:
 
 @api.route("/token", methods=["POST"], response_model=TokenPair)
 async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.token import token_request
+    from ._oauth_token import token_request
 
     result = await token_request(request=request, db=db)
     from tigrbl_authn_credentials.session_service import observe_token_response

@@ -11,21 +11,21 @@ import pytest
 
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 from tigrbl_auth.config.settings import settings
-from tigrbl_auth.ops.par import _normalized_par_params
-from tigrbl_auth.standards.oauth2.issuer_identification import (
+from tigrbl_identity_storage.tables._oauth_par import _normalized_par_params
+from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
     IssuerIdentificationError,
     authorization_response_issuer,
     extract_issuer_from_redirect_uri,
 )
-from tigrbl_auth.standards.oauth2.jar import (
+from tigrbl_auth_protocol_oauth.standards.jar import (
     RequestObjectValidationError,
     make_request_object,
     merge_request_object_params,
     parse_request_object,
 )
-from tigrbl_auth.standards.oauth2.par import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
-from tigrbl_auth.standards.oauth2.rar import normalize_authorization_details
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tigrbl_auth_protocol_oauth.standards.par import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
+from tigrbl_auth_protocol_oauth.standards.rar import normalize_authorization_details
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 

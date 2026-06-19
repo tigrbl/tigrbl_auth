@@ -5,8 +5,8 @@ the stable import and monkeypatch surface for protocol tests and legacy facades.
 """
 from __future__ import annotations
 
-from . import token_endpoint as _endpoint
-from . import token_runtime as _runtime
+from . import _oauth_token_endpoint as _endpoint
+from . import _oauth_token_runtime as _runtime
 
 globals().update(
     {

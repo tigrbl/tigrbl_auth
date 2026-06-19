@@ -36,7 +36,7 @@ from tigrbl_auth.standards.oauth2.resource_indicators import (
     select_resource_indicator,
 )
 import tigrbl_auth.standards.oauth2.token_exchange as token_exchange_mod
-import tigrbl_auth_protocol_oauth.ops.token as token_ops
+import tigrbl_identity_storage.tables._oauth_token as token_ops
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 

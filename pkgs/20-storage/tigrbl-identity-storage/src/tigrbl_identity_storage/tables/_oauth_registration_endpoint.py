@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .registration_runtime import (
+from ._oauth_registration_runtime import (
     Client,
     ClientRegistration,
     DynamicClientRegistrationIn,

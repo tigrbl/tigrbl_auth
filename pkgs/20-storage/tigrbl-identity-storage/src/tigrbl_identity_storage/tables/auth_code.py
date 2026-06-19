@@ -119,7 +119,7 @@ async def authorize(
     authorization_details: Optional[str] = None,
     db: AsyncSession = TigrblDepends(get_db),
 ) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.authorize import authorize_request
+    from ._oauth_authorize import authorize_request
 
     params = {
         "response_type": response_type or request.query_params.get("response_type"),

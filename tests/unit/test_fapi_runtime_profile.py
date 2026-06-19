@@ -10,9 +10,9 @@ import pytest
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.config.settings import settings
-from tigrbl_auth.ops import par as par_ops
-from tigrbl_auth.ops import register as register_ops
-from tigrbl_auth.ops import token as token_ops
+from tigrbl_identity_storage.tables import _oauth_par as par_ops
+from tigrbl_identity_storage.tables import _oauth_register as register_ops
+from tigrbl_identity_storage.tables import _oauth_token as token_ops
 from tigrbl_auth.standards.oauth2.rfc9700 import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,

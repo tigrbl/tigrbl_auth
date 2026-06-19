@@ -5,10 +5,10 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
-from tigrbl_auth.ops import device_authorization as device_auth_ops
-from tigrbl_auth.ops import logout as logout_ops
-from tigrbl_auth.ops import par as par_ops
-from tigrbl_auth.ops import register as register_ops
+from tigrbl_identity_server.ops import logout as logout_ops
+from tigrbl_identity_storage.tables import _oauth_device_authorization as device_auth_ops
+from tigrbl_identity_storage.tables import _oauth_par as par_ops
+from tigrbl_identity_storage.tables import _oauth_register as register_ops
 from tigrbl_auth.standards.oidc import rp_initiated_logout as rp_logout
 from tigrbl_auth.standards.oidc.session_mgmt import compute_session_state, session_state_for_client
 

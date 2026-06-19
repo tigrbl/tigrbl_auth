@@ -5,8 +5,8 @@ presentation helpers live in named runtime modules.
 """
 from __future__ import annotations
 
-from . import registration_endpoint as _endpoint
-from . import registration_runtime as _runtime
+from . import _oauth_registration_endpoint as _endpoint
+from . import _oauth_registration_runtime as _runtime
 
 globals().update(
     {

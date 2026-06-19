@@ -6,14 +6,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
-STORAGE_ROOT = PKGS / "tigrbl-identity-storage" / "src"
+
+
+def package_src(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/src"))
+    assert matches, f"missing package src for {name}"
+    return matches[0]
+
+
+STORAGE_ROOT = package_src("tigrbl-identity-storage")
 NON_STORAGE_SOURCE_ROOTS = [
-    PKGS / "tigrbl-auth-api-my-account" / "src",
-    PKGS / "tigrbl-auth-api-public" / "src",
-    PKGS / "tigrbl-auth-protocol-oauth" / "src",
-    PKGS / "tigrbl-authn-credentials" / "src",
-    PKGS / "tigrbl-identity-operator" / "src",
-    PKGS / "tigrbl-identity-server" / "src",
+    package_src("tigrbl-auth-api-my-account"),
+    package_src("tigrbl-auth-api-public"),
+    package_src("tigrbl-auth-protocol-oauth"),
+    package_src("tigrbl-authn-credentials"),
+    package_src("tigrbl-identity-operator"),
+    package_src("tigrbl-identity-server"),
 ]
 
 RAW_HANDLER_TOKENS = (
@@ -140,7 +148,7 @@ def test_non_storage_packages_do_not_own_raw_durable_table_mutations() -> None:
 
 def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
     offenders: list[str] = []
-    for root in [PKGS / "tigrbl-auth-api-my-account" / "src", PKGS / "tigrbl-auth-api-public" / "src"]:
+    for root in [package_src("tigrbl-auth-api-my-account"), package_src("tigrbl-auth-api-public")]:
         if not root.exists():
             continue
         for path in _python_files(root):
@@ -151,10 +159,31 @@ def test_no_rpc_support_is_reintroduced_in_product_api_packages() -> None:
     assert offenders == []
 
 
+def test_protocol_and_facade_ops_packages_are_not_supported() -> None:
+    assert not (package_src("tigrbl-auth-protocol-oauth") / "tigrbl_auth_protocol_oauth" / "ops").exists()
+    assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "ops").exists()
+
+
+def test_protocol_packages_do_not_import_removed_oauth_ops() -> None:
+    offenders: list[str] = []
+    for root in [
+        package_src("tigrbl-auth-protocol-oauth"),
+        package_src("tigrbl-auth-protocol-oidc"),
+        package_src("tigrbl-auth-protocol-rp"),
+    ]:
+        for path in _python_files(root):
+            rel = path.relative_to(ROOT).as_posix()
+            source = path.read_text(encoding="utf-8")
+            if "tigrbl_auth_protocol_oauth.ops" in source:
+                offenders.append(f"{rel} imports removed oauth ops")
+
+    assert offenders == []
+
+
 def test_storage_table_ops_are_not_hidden_in_module_level_free_functions() -> None:
     offenders: list[str] = []
     for path in (STORAGE_ROOT / "tigrbl_identity_storage" / "tables").glob("*.py"):
-        if path.name in {"__init__.py", "_ops.py", "engine.py"}:
+        if path.name in {"__init__.py", "engine.py"} or path.name.startswith("_"):
             continue
         tree = ast.parse(path.read_text(encoding="utf-8"))
         for node in tree.body:

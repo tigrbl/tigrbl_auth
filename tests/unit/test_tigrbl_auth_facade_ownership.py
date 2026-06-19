@@ -10,8 +10,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
-FACADE_ROOT = PKGS / "tigrbl-auth" / "src" / "tigrbl_auth"
 LARGE_FILE_THRESHOLD = 400
+
+
+def package_root(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/pyproject.toml"))
+    assert matches, f"missing package root for {name}"
+    return matches[0].parent
+
+
+def package_src_roots() -> list[Path]:
+    return sorted(PKGS.glob("**/src"))
+
+
+FACADE_PACKAGE = package_root("tigrbl-auth")
+FACADE_ROOT = FACADE_PACKAGE / "src" / "tigrbl_auth"
 
 
 SPLIT_MODULE_PREFIXES = (
@@ -48,8 +61,6 @@ FACADE_MODULES = {
     "tigrbl_auth.services.release_posture_plane": "tigrbl_authz_policy.release_posture",
     "tigrbl_auth.services.token_service": "tigrbl_authn_credentials.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_jose.release_signing",
-    "tigrbl_auth.ops.register": "tigrbl_auth_protocol_oauth.ops.register",
-    "tigrbl_auth.ops.token": "tigrbl_auth_protocol_oauth.ops.token",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_identity_operator.authorization_provenance",
     "tigrbl_auth.services.audit_service": "tigrbl_identity_operator.audit_service",
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
@@ -110,7 +121,7 @@ def source_tree_paths_first():
     try:
         root_value = str(ROOT)
         sys.path = [value for value in sys.path if value not in {root_value, ""}]
-        for src in PKGS.glob("*/src"):
+        for src in package_src_roots():
             value = str(src)
             if value not in sys.path:
                 sys.path.insert(0, value)
@@ -148,7 +159,7 @@ def package_src_paths_only():
     try:
         root_values = {str(ROOT), ""}
         sys.path = [value for value in sys.path if value not in root_values]
-        for src in PKGS.glob("*/src"):
+        for src in package_src_roots():
             value = str(src)
             if value not in sys.path:
                 sys.path.insert(0, value)
@@ -181,12 +192,8 @@ def test_no_legacy_executable_facades_remain() -> None:
     assert EXECUTABLE_FACADE_MODULES == {}
 
 
-def test_legacy_facade_token_is_non_executable_alias() -> None:
-    source = (FACADE_ROOT / "ops" / "token.py").read_text(encoding="utf-8")
-
-    assert "exec(compile(" not in source
-    assert "alias_module" in source
-    assert "tigrbl_auth_protocol_oauth.ops.token" in source
+def test_legacy_facade_ops_are_not_supported() -> None:
+    assert not (FACADE_ROOT / "ops").exists()
 
 
 def test_pqc_touched_facades_do_not_own_runtime_implementation() -> None:
@@ -334,7 +341,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
         import tomli as tomllib
 
     metadata = tomllib.loads(
-        (ROOT / "pkgs" / "tigrbl-auth" / "pyproject.toml").read_text(encoding="utf-8")
+        (FACADE_PACKAGE / "pyproject.toml").read_text(encoding="utf-8")
     )
 
     assert set(metadata["project"]["dependencies"]).issuperset(
@@ -357,7 +364,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
 
 def test_tigrbl_auth_has_no_large_exact_copies_of_split_package_modules() -> None:
     canonical_hashes: dict[str, list[Path]] = {}
-    for package_root in sorted(PKGS.glob("*/src")):
+    for package_root in package_src_roots():
         if package_root.parent.name == "tigrbl-auth":
             continue
         for path in package_root.rglob("*.py"):

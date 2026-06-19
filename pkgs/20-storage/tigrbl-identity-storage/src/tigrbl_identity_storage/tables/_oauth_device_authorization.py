@@ -33,7 +33,8 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover
-    from tigrbl_identity_storage.tables import Client, DeviceCode
+    from .client import Client
+    from .device_code import DeviceCode
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()

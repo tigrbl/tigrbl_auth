@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth_protocol_oauth.ops import token_runtime
+from tigrbl_identity_storage.tables import _oauth_token_runtime as token_runtime
 from tigrbl_authn_credentials._token_service import persistence as token_persistence
 from tigrbl_identity_server.security import handler_records
 

@@ -165,7 +165,7 @@ def _repo_root() -> Path:
 
 @api.route("/device_authorization", methods=["POST"], response_model=DeviceAuthorizationOut)
 async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.device_authorization import device_authorization_request
+    from ._oauth_device_authorization import device_authorization_request
 
     result = await device_authorization_request(request=request, db=db)
     from tigrbl_authn_credentials.session_service import observe_device_authorization_response

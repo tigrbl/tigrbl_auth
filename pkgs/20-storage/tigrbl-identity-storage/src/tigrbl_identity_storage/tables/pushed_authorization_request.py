@@ -157,7 +157,7 @@ def _repo_root() -> Path:
 
 @api.route("/par", methods=["POST"], response_model=PushedAuthorizationResponse)
 async def par(request: Any, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.par import pushed_authorization_request
+    from ._oauth_par import pushed_authorization_request
 
     result = await pushed_authorization_request(request=request, db=db)
     from tigrbl_authn_credentials.session_service import observe_par_response

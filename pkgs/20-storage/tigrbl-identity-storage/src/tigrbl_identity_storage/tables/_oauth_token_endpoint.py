@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .token_runtime import (
+from ._oauth_token_runtime import (
     AuthCode,
     AuthSession,
     AuthorizationCodeGrantForm,

@@ -128,7 +128,7 @@ def _sync_client_registration(command: str, registration: Any) -> None:
 
 @api.route("/register", methods=["POST"], response_model=DynamicClientRegistrationOut)
 async def register(request: Any, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.register import register_client as register_client_request
+    from ._oauth_register import register_client as register_client_request
 
     result = await register_client_request(request=request, db=db)
     _sync_client_registration("client.registration.create", result)
@@ -137,14 +137,14 @@ async def register(request: Any, db: Any = Depends(get_db)) -> Any:
 
 @api.route("/register/{client_id}", methods=["GET"], response_model=DynamicClientRegistrationOut)
 async def register_get(request: Any, client_id: str, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.register import get_registered_client
+    from ._oauth_register import get_registered_client
 
     return await get_registered_client(request=request, db=db, client_id=client_id)
 
 
 @api.route("/register/{client_id}", methods=["PUT"], response_model=DynamicClientRegistrationOut)
 async def register_put(request: Any, client_id: str, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.register import update_registered_client
+    from ._oauth_register import update_registered_client
 
     result = await update_registered_client(request=request, db=db, client_id=client_id)
     _sync_client_registration("client.registration.update", result)
@@ -153,7 +153,7 @@ async def register_put(request: Any, client_id: str, db: Any = Depends(get_db)) 
 
 @api.route("/register/{client_id}", methods=["DELETE"])
 async def register_delete(request: Any, client_id: str, db: Any = Depends(get_db)) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.register import delete_registered_client
+    from ._oauth_register import delete_registered_client
 
     result = await delete_registered_client(request=request, db=db, client_id=client_id)
     _sync_client_registration("client.registration.delete", {"client_id": client_id})

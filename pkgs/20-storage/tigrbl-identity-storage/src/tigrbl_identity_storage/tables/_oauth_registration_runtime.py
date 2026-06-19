@@ -38,7 +38,9 @@ from tigrbl_auth_protocol_oauth.standards.native_apps import (
     validate_native_redirect_uri,
 )
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
-from tigrbl_identity_storage.tables import Client, ClientRegistration, Tenant
+from .client import Client
+from .client_registration import ClientRegistration
+from .tenant import Tenant
 
 
 DEFAULT_TOKEN_ENDPOINT_AUTH_METHODS = {"client_secret_basic", "client_secret_post", PRIVATE_KEY_JWT_AUTH_METHOD, *SUPPORTED_MTLS_AUTH_METHODS}

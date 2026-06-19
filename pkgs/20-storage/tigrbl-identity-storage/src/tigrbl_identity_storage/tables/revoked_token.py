@@ -66,7 +66,7 @@ api = router = TigrblRouter()
 
 @api.route("/revoke", methods=["POST"], response_model=RevocationOut)
 async def revoke(request: Any) -> Any:
-    from tigrbl_auth_protocol_oauth.ops.revoke import revoke_request
+    from ._oauth_revoke import revoke_request
 
     return await revoke_request(request=request)
 

@@ -36,7 +36,10 @@ from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
     assert_authorization_request_allowed,
     runtime_security_profile,
 )
-from tigrbl_identity_storage.tables import AuthCode, Client, PushedAuthorizationRequest, User
+from .auth_code import AuthCode
+from .client import Client
+from .pushed_authorization_request import PushedAuthorizationRequest
+from .user import User
 
 
 def _coerce_multi_value(value: Any) -> list[str]:

@@ -4,7 +4,16 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-OAUTH_ROOT = ROOT / "pkgs" / "tigrbl-auth-protocol-oauth" / "src"
+PKGS = ROOT / "pkgs"
+
+
+def package_src(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/src"))
+    assert matches, f"missing package src for {name}"
+    return matches[0]
+
+
+OAUTH_ROOT = package_src("tigrbl-auth-protocol-oauth")
 
 
 def test_oauth_protocol_modules_do_not_use_raw_table_mutation_handlers() -> None:
@@ -17,4 +26,3 @@ def test_oauth_protocol_modules_do_not_use_raw_table_mutation_handlers() -> None
                 offenders.append(f"{path.relative_to(ROOT).as_posix()} uses {token}")
 
     assert offenders == []
-

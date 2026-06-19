@@ -4,8 +4,17 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FACADE_DIR = ROOT / "pkgs" / "tigrbl-auth" / "src" / "tigrbl_auth"
-STORAGE_DIR = ROOT / "pkgs" / "tigrbl-identity-storage" / "src" / "tigrbl_identity_storage"
+PKGS = ROOT / "pkgs"
+
+
+def package_src(name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{name}/src"))
+    assert matches, f"missing package src for {name}"
+    return matches[0]
+
+
+FACADE_DIR = package_src("tigrbl-auth") / "tigrbl_auth"
+STORAGE_DIR = package_src("tigrbl-identity-storage") / "tigrbl_identity_storage"
 
 
 def test_orm_export_paths_are_not_supported_for_storage_ops() -> None:

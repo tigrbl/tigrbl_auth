@@ -48,7 +48,9 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_storage.tables import Client, ClientRegistration, PushedAuthorizationRequest
+    from .client import Client
+    from .client_registration import ClientRegistration
+    from .pushed_authorization_request import PushedAuthorizationRequest
 except Exception:  # pragma: no cover - dependency-light placeholders
     class Client:  # type: ignore[override]
         id = object()
