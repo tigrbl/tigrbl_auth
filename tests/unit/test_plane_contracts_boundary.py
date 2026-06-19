@@ -55,6 +55,17 @@ def test_control_plane_contracts_own_admin_and_governance_surfaces() -> None:
     assert contracts.Role(name="admin", permissions=("tenant.read",)).name == "admin"
 
 
+def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
+    import tigrbl_control_plane_contracts as contracts
+    import tigrbl_user_plane_contracts as user_contracts
+    from tigrbl_authz_policy import ControlPlaneCorrectnessReport, CorrectnessProofSection
+
+    assert CorrectnessProofSection is contracts.CorrectnessProofSection
+    assert ControlPlaneCorrectnessReport is contracts.ControlPlaneCorrectnessReport
+    assert not hasattr(user_contracts, "ControlPlaneCorrectnessReport")
+    assert not hasattr(user_contracts, "CorrectnessProofSection")
+
+
 def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> None:
     import tigrbl_control_plane_contracts as contracts
 
@@ -67,6 +78,7 @@ def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> 
         "provisioning_governance_ecosystem_boundary_integrity",
         "phase5_governance_extension_boundary_manifest",
         "phase5_governance_extension_boundary_integrity",
+        "build_control_plane_correctness_report",
     }
 
     assert not (executable_helpers & set(dir(contracts)))
