@@ -54,7 +54,6 @@ __all__ = [
     "ABACAdministration",
     "ADMIN_POLICY_BOUNDARY_FEATURES",
     "ADMIN_CLIENT_FIELDS",
-    "AdminPolicyBoundaryFeature",
     "AttributePolicy",
     "DELEGATED_MUTABLE_CLIENT_FIELDS",
     "DELEGATED_VISIBLE_CLIENT_FIELDS",

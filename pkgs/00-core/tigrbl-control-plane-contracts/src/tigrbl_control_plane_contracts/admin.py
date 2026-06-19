@@ -5,12 +5,9 @@ from typing import Any, Mapping
 
 from tigrbl_management_plane_contracts.service_identity import (
     ADMIN_CLIENT_FIELDS,
-    ADMIN_POLICY_BOUNDARY_FEATURES,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
-    PHASE3_ADMIN_POLICY_FEATURES,
     PUBLIC_CLIENT_FIELDS,
-    AdminPolicyBoundaryFeature,
     DelegatedAdminScope,
     ServiceCredential,
     ServiceIdentity,
@@ -86,14 +83,11 @@ class PolicyAuditEvent:
 
 __all__ = [
     "ADMIN_CLIENT_FIELDS",
-    "ADMIN_POLICY_BOUNDARY_FEATURES",
     "AttributePolicy",
-    "AdminPolicyBoundaryFeature",
     "DELEGATED_MUTABLE_CLIENT_FIELDS",
     "DELEGATED_VISIBLE_CLIENT_FIELDS",
     "DelegatedAdminScope",
     "DynamicCondition",
-    "PHASE3_ADMIN_POLICY_FEATURES",
     "PUBLIC_CLIENT_FIELDS",
     "PolicyAuditEvent",
     "PolicyDecision",

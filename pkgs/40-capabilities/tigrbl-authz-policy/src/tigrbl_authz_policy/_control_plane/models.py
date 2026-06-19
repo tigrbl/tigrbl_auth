@@ -6,6 +6,26 @@ from typing import Any, Iterable, Mapping
 from tigrbl_control_plane_contracts.admin import *
 from tigrbl_management_plane_contracts.service_identity import *
 
+ADMIN_POLICY_BOUNDARY_FEATURES: tuple[dict[str, Any], ...] = (
+    {"feature_id": "feat:f03-service-identities", "category": "service-identity", "runtime_objects": ("ServiceIdentityRegistry", "ServiceIdentityAuthentication"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f13-rbac", "category": "rbac", "runtime_objects": ("RBACAdministration", "Role"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f14-abac", "category": "abac", "runtime_objects": ("ABACAdministration", "AttributePolicy"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f16-policy-engine", "category": "policy-engine", "runtime_objects": ("PolicyEngine", "PolicyDecision"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f19-policy-simulation", "category": "simulation", "runtime_objects": ("simulate_policy",), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f20-policy-audit", "category": "audit", "runtime_objects": ("PolicyAuditEvent", "PolicyEngine.audit_events"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f24-fine-grained-permissions", "category": "permissions", "runtime_objects": ("RBACAdministration.effective_permissions", "DynamicCondition"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f25-dynamic-conditions", "category": "conditions", "runtime_objects": ("DynamicCondition", "ABACAdministration"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f42-compliance-reporting", "category": "compliance", "runtime_objects": ("build_compliance_report", "PolicyEngine.compliance_report"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:f45-delegated-admin", "category": "delegation", "runtime_objects": ("DelegatedAdministration", "DelegatedAdminScope"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:tenant-isolation-cross-plane", "category": "tenant-isolation", "runtime_objects": ("filter_visible_tenants", "DelegatedAdministration.visible_tenant_ids"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:tenant-visibility-rules", "category": "tenant-visibility", "runtime_objects": ("filter_visible_tenants",), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:client-policy-cross-plane", "category": "client-policy", "runtime_objects": ("expose_client_record", "assert_client_mutation_authority"), "guarded_planes": ("admin", "public", "policy")},
+    {"feature_id": "feat:client-mutation-authority-rules", "category": "client-mutation", "runtime_objects": ("assert_client_mutation_authority", "DelegatedAdministration.authorize"), "guarded_planes": ("admin", "policy")},
+    {"feature_id": "feat:public-vs-admin-client-exposure", "category": "client-exposure", "runtime_objects": ("PUBLIC_CLIENT_FIELDS", "ADMIN_CLIENT_FIELDS"), "guarded_planes": ("admin", "public")},
+)
+
+PHASE3_ADMIN_POLICY_FEATURES = ADMIN_POLICY_BOUNDARY_FEATURES
+
 
 def _utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()
@@ -26,10 +46,10 @@ def _pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, 
 
 def admin_policy_boundary_manifest() -> dict[str, dict[str, Any]]:
     return {
-        feature.feature_id: {
-            "category": feature.category,
-            "runtime_objects": list(feature.runtime_objects),
-            "guarded_planes": list(feature.guarded_planes),
+        str(feature["feature_id"]): {
+            "category": feature["category"],
+            "runtime_objects": list(feature["runtime_objects"]),
+            "guarded_planes": list(feature["guarded_planes"]),
         }
         for feature in ADMIN_POLICY_BOUNDARY_FEATURES
     }
