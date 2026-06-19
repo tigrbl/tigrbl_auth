@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
-description = "Pydantic REST identity contracts for OAuth, OIDC, client registration, token, introspection, device, PAR, and login flows."
+description = "Dependency-light identity contract projection metadata for table-owned REST/OpenAPI surfaces."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -9,12 +9,12 @@ keywords = [
     "tigrbl",
     "identity",
     "api-contracts",
-    "pydantic",
-    "rest-api",
+    "openapi",
+    "projection",
     "oauth",
     "oidc",
     "iam",
-    "schemas",
+    "contracts",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -32,10 +32,7 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "email-validator>=2.0",
-    "pydantic",
-]
+dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

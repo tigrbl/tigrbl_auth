@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 
 import pytest
-from pydantic import ValidationError
 
 from tigrbl_identity_contracts.models import ContractProjection
 
@@ -41,7 +40,7 @@ def test_identity_contracts_do_not_export_rpc_package() -> None:
 
 
 def test_identity_contract_projection_is_openapi_only() -> None:
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValueError):
         ContractProjection(
             kind="openrpc",
             profile="baseline",
@@ -58,17 +57,25 @@ def test_identity_contract_projection_is_openapi_only() -> None:
     assert projection.kind == "openapi"
 
 
-def test_identity_contracts_rest_is_deprecated_table_schema_bridge() -> None:
-    with pytest.warns(DeprecationWarning):
-        rest = importlib.reload(importlib.import_module("tigrbl_identity_contracts.rest"))
+def test_identity_contracts_have_no_pydantic_schema_ownership() -> None:
+    current_package_root = package_root("tigrbl-identity-contracts")
+    metadata = tomllib.loads((current_package_root / "pyproject.toml").read_text(encoding="utf-8"))
+    dependencies = [dependency.lower() for dependency in metadata.get("project", {}).get("dependencies", [])]
+    assert not any("pydantic" in dependency for dependency in dependencies)
+
+    offenders = []
+    for path in (current_package_root / "src" / "tigrbl_identity_contracts").rglob("*.py"):
+        source = path.read_text(encoding="utf-8")
+        if "BaseModel" in source or "pydantic" in source:
+            offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_contracts.rest")
     models = importlib.import_module("tigrbl_identity_contracts.models")
-    from tigrbl_identity_storage.tables.auth_session import CredsIn
-    from tigrbl_identity_storage.tables.client_registration import DynamicClientRegistrationIn
-    from tigrbl_identity_storage.tables.device_code import DeviceAuthorizationIn
-    from tigrbl_identity_storage.tables.logout_state import LogoutIn
-    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequestIn
-    from tigrbl_identity_storage.tables.revoked_token import RevocationIn
-    from tigrbl_identity_storage.tables.token_record import IntrospectOut, RefreshIn, TokenPair
 
     table_backed_dtos = {
         "AdminPrincipalResponse",
@@ -93,18 +100,7 @@ def test_identity_contracts_rest_is_deprecated_table_schema_bridge() -> None:
         "RegisterIn",
     }
     for dto_name in table_backed_dtos:
-        assert not hasattr(rest, dto_name), dto_name
         assert not hasattr(models, dto_name), dto_name
-
-    assert rest.CredsIn is CredsIn
-    assert rest.TokenPair is TokenPair
-    assert rest.RefreshIn is RefreshIn
-    assert rest.DynamicClientRegistrationIn is DynamicClientRegistrationIn
-    assert rest.DeviceAuthorizationIn is DeviceAuthorizationIn
-    assert rest.LogoutIn is LogoutIn
-    assert rest.RevocationIn is RevocationIn
-    assert rest.PushedAuthorizationRequestIn is PushedAuthorizationRequestIn
-    assert rest.IntrospectOut is IntrospectOut
 
 
 def test_storage_tables_own_table_backed_rest_shapes() -> None:

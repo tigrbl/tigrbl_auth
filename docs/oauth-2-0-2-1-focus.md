@@ -31,7 +31,7 @@ Normative anchors:
 | Service admin frontdoor | `tigrbl-auth-api-service-admin` owns service/workload identity administration. | [`tigrbl-auth-api-service-admin` README](../pkgs/80-apis/tigrbl-auth-api-service-admin/README.md) | Client credentials, M2M, workload credentials, and service keys are product concerns here. |
 | RP package | `tigrbl-auth-protocol-rp` is the app-side relying-party integration. | [`tigrbl-auth-protocol-rp` README](../pkgs/50-protocols/tigrbl-auth-protocol-rp/README.md) | Client/RP behavior should be tested separately from AS behavior. |
 | OAuth 2.1 profile | Tracked only as alignment, not a final standard claim. | [Target Reality Matrix](compliance/TARGET_REALITY_MATRIX.md) | This is correct and should remain true until OAuth 2.1 exits draft state. |
-| Password grant signal | A `PasswordGrantForm` contract exists today. | [`rest.py`](../pkgs/00-core/tigrbl-identity-contracts/src/tigrbl_identity_contracts/rest.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
+| Password grant signal | A table-owned `PasswordGrantForm` schema exists today. | [`token_record.py`](../pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record.py) | This must be explicitly excluded from any OAuth 2.1 profile, except tightly labeled dev/backcompat modes. |
 
 ## Standards Coverage Map
 

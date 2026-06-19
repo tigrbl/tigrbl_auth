@@ -36,7 +36,7 @@ def test_core_t1_error_taxonomy_and_clock_primitives() -> None:
 
 
 def test_core_t2_import_dag_clean_room() -> None:
-    core_root = ROOT / "pkgs" / "tigrbl-identity-core" / "src" / "tigrbl_identity_core"
+    core_root = ROOT / "pkgs" / "00-core" / "tigrbl-identity-core" / "src" / "tigrbl_identity_core"
     forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_runtime", "tigrbl_identity_storage"}
     for path in core_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -49,40 +49,23 @@ def test_core_t2_import_dag_clean_room() -> None:
         assert not (imports & forbidden), path
 
 
-def test_contracts_t0_oauth_oidc_wire_models_validate() -> None:
-    from tigrbl_identity_contracts import (
-        OAuthIntrospectionResponse,
-        OAuthTokenRequest,
-        OAuthTokenResponse,
-        OidcDiscoveryDocument,
-        OidcIdTokenClaims,
-    )
+def test_contracts_do_not_export_wire_request_response_models() -> None:
+    import tigrbl_identity_contracts as contracts
 
-    token_request = OAuthTokenRequest(grant_type="authorization_code", client_id="client", code="code")
-    assert token_request.grant_type == "authorization_code"
-    assert OAuthTokenResponse(access_token="token").token_type == "Bearer"
-    assert OAuthIntrospectionResponse(active=True, sub="subject").active is True
-    discovery = OidcDiscoveryDocument(issuer="https://issuer.example", jwks_uri="https://issuer.example/jwks.json")
-    assert str(discovery.issuer).startswith("https://issuer.example")
-    claims = OidcIdTokenClaims(iss="https://issuer.example", sub="subject", aud="client", exp=10, iat=1)
-    assert claims.sub == "subject"
+    removed_wire_models = {
+        "AccessTokenClaims",
+        "OAuthIntrospectionResponse",
+        "OAuthTokenRequest",
+        "OAuthTokenResponse",
+        "OidcDiscoveryDocument",
+        "OidcIdTokenClaims",
+        "ResourceServerMetadata",
+        "RpConfiguration",
+        "RpLoginRequest",
+    }
 
-
-def test_contracts_t1_resource_server_and_rp_protocol_models_validate() -> None:
-    from tigrbl_identity_contracts import (
-        AccessTokenClaims,
-        ResourceServerMetadata,
-        RpConfiguration,
-        RpLoginRequest,
-    )
-
-    resource = ResourceServerMetadata(resource="https://api.example", issuer="https://issuer.example")
-    assert resource.bearer_methods_supported == ["header"]
-    token_claims = AccessTokenClaims(iss="https://issuer.example", sub="s", aud="https://api.example", exp=10)
-    assert token_claims.aud == "https://api.example"
-    rp = RpConfiguration(issuer="https://issuer.example", client_id="client", redirect_uri="https://rp.example/cb")
-    login = RpLoginRequest(state="state", nonce="nonce", code_challenge="challenge", redirect_uri=rp.redirect_uri)
-    assert login.code_challenge_method == "S256"
+    for model_name in removed_wire_models:
+        assert not hasattr(contracts, model_name), model_name
 
 
 def test_storage_tables_own_table_backed_admin_contracts() -> None:

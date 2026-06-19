@@ -2347,16 +2347,6 @@ requires-dist = [
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/00-core/tigrbl-identity-contracts" }
-dependencies = [
-    { name = "email-validator" },
-    { name = "pydantic" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "email-validator", specifier = ">=2.0" },
-    { name = "pydantic" },
-]
 
 [[package]]
 name = "tigrbl-identity-core"
