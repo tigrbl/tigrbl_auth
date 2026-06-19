@@ -25,8 +25,10 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 32
+    assert len(packages) == 34
     assert "tigrbl-auth-workspace" not in packages
+    assert packages["tigrbl-security-trust-contracts"].path.as_posix() == "pkgs/00-core/tigrbl-security-trust-contracts"
+    assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/00-core/tigrbl-security-trust-domain-bases"
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/60-facade/tigrbl-auth"
     assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/50-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
@@ -73,7 +75,17 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "123"
+    assert payload["count"] == "133"
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-security-trust-contracts"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-security-trust-domain-bases"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
         for cell in matrix

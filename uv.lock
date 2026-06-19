@@ -2063,6 +2063,8 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 
@@ -2175,6 +2177,8 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", editable = "pkgs/50-runtime/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/50-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
+    { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/00-core/tigrbl-security-trust-domain-bases" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'servers'", specifier = "==0.3.8" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'tigrcorn'", specifier = "==0.3.8" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -2584,6 +2588,22 @@ dependencies = [
     { name = "tigrbl-typing" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/72/91/5093bd8a318c4e7bcfa901587d93d6078cbee7b81b7419618e91fb3c741b/tigrbl_runtime-0.4.0.tar.gz", hash = "sha256:e965674db2f5d69fd409bf0dabf141b1e777d3553627e7ddf8e6cae602cde673", size = 124357 }
+
+[[package]]
+name = "tigrbl-security-trust-contracts"
+version = "0.1.0"
+source = { editable = "pkgs/00-core/tigrbl-security-trust-contracts" }
+
+[[package]]
+name = "tigrbl-security-trust-domain-bases"
+version = "0.1.0"
+source = { editable = "pkgs/00-core/tigrbl-security-trust-domain-bases" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-typing"
