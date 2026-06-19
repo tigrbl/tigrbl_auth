@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from tigrbl_auth.config.deployment import deployment_from_app, deployment_from_request
-from tigrbl_auth.config.settings import settings
-from tigrbl_auth.framework import Request, TigrblApp, TigrblRouter
-from tigrbl_auth.security.runtime_metadata import (
+from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_server.framework import Request, TigrblApp, TigrblRouter
+from tigrbl_authz_resource_server.runtime_metadata import (
     build_capability_attestation,
     runtime_truth_manifest,
 )
-from tigrbl_auth.standards.oauth2.resource_verifier_contract import (
+from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import (
     build_protected_resource_verifier_contract,
 )
 

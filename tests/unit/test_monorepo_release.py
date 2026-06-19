@@ -25,9 +25,11 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 31
+    assert len(packages) == 32
     assert "tigrbl-auth-workspace" not in packages
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/60-facade/tigrbl-auth"
+    assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/50-runtime/tigrbl-identity-author"
+    assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
     assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
     assert packages["tigrbl-auth-protocol-oauth"].import_root == "tigrbl_auth_protocol_oauth"
@@ -71,7 +73,12 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "126"
+    assert payload["count"] == "123"
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-identity-author"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
         for cell in matrix
@@ -155,6 +162,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         item.name for item in _local_dependency_closure(packages["tigrbl-auth"])
     }
     assert "tigrbl-auth-protocol-oauth" in facade_dependency_names
+    assert "tigrbl-identity-author" in facade_dependency_names
     assert "tigrbl-identity-storage" in facade_dependency_names
 
     api_dependency_names = {
@@ -171,6 +179,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     }
 
     assert "tigrbl-authz-resource-server" in root_dependency_names
+    assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names
 

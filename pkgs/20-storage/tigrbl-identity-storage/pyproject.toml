@@ -33,6 +33,9 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "tigrbl-authz-resource-server==0.4.0.dev2",
+]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

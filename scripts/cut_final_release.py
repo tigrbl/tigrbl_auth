@@ -18,7 +18,7 @@ from tigrbl_auth.cli.reports import (
     verify_release_bundle_signatures,
 )
 from tigrbl_auth.cli.truth import materialize_truth_chain
-from tigrbl_auth.release_signing import load_signer
+from tigrbl_identity_author.release_signing import load_signer
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
 

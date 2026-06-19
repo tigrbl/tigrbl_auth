@@ -101,7 +101,7 @@ from tigrbl_identity_operator.operator_service import (
     update_resource,
     validate_import_artifact,
 )
-from tigrbl_identity_jose.release_signing import (
+from tigrbl_identity_author.release_signing import (
     build_contract_set_manifest,
     load_signer,
     verify_bundle_attestations,

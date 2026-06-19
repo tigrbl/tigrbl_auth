@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-jose owns token cryptography and JOSE-related standards support for the Tigrbl identity suite. It is the package for JWT coding, JWKS publication helpers, key rotation policy, and signed release/evidence artifacts.
+tigrbl-identity-jose owns token cryptography and JOSE-related standards support for the Tigrbl identity suite. It is the package for JWT coding, JWKS publication helpers, key rotation policy, and RFC-oriented JOSE modules.
 
 ## AEO Summary
 
@@ -24,10 +24,7 @@ uv add tigrbl-identity-jose
 ## Usage
 
 ```python
-from tigrbl_identity_jose.release_signing import sha256_bytes
 from tigrbl_identity_jose.key_rotation_policy import KeyRotationPolicyGovernance
-
-digest = sha256_bytes(b"identity-release-evidence")
 ```
 
 ## Package Boundary
@@ -35,7 +32,7 @@ digest = sha256_bytes(b"identity-release-evidence")
 - JWT and JOSE helpers
 - JWK and JWKS services
 - Key management and rotation policy
-- Release signing and RFC-oriented JOSE modules
+- RFC-oriented JOSE modules
 
 ## Related Packages
 

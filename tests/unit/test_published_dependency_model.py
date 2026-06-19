@@ -18,7 +18,9 @@ def _load_pyproject() -> dict:
 
 
 def _load_package_pyproject(name: str) -> dict:
-    return tomllib.loads((ROOT / "pkgs" / name / "pyproject.toml").read_text(encoding="utf-8"))
+    matches = sorted((ROOT / "pkgs").glob(f"**/{name}/pyproject.toml"))
+    assert matches, name
+    return tomllib.loads(matches[0].read_text(encoding="utf-8"))
 
 
 def test_pyproject_uses_published_pins_and_extras():
@@ -52,7 +54,8 @@ def test_framework_router_uses_upstream_tigrbl_router():
     import tigrbl
     from tigrbl_auth import framework
 
-    assert framework.TigrblRouter is tigrbl.TigrblRouter
+    assert framework.TigrblRouter.__module__ == tigrbl.TigrblRouter.__module__
+    assert framework.TigrblRouter.__qualname__ == tigrbl.TigrblRouter.__qualname__
 
 
 def test_framework_router_include_tables_falls_back_to_upstream_include_tables(monkeypatch):

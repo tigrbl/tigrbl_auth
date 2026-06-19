@@ -17,6 +17,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authz-policy",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
+        "tigrbl-identity-author",
         "tigrbl-identity-cli",
         "tigrbl-identity-contracts",
         "tigrbl-identity-core",

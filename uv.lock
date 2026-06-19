@@ -1955,6 +1955,7 @@ dependencies = [
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin" },
+    { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-cli" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -1978,6 +1979,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-cli", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
@@ -2045,6 +2047,7 @@ dependencies = [
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin" },
+    { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-cli" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -2156,6 +2159,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy", editable = "pkgs/30-capabilities/tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server", editable = "pkgs/30-capabilities/tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin", editable = "pkgs/30-capabilities/tigrbl-identity-admin" },
+    { name = "tigrbl-identity-author", editable = "pkgs/50-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/50-runtime/tigrbl-identity-cli" },
     { name = "tigrbl-identity-contracts", editable = "pkgs/00-core/tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core", editable = "pkgs/00-core/tigrbl-identity-core" },
@@ -2220,6 +2224,18 @@ source = { editable = "pkgs/30-capabilities/tigrbl-authz-policy" }
 name = "tigrbl-authz-resource-server"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/30-capabilities/tigrbl-authz-resource-server" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-identity-runtime" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-base"
@@ -2298,15 +2314,30 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/30-capabilities/tigrbl-identity-admin" }
 
 [[package]]
+name = "tigrbl-identity-author"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-runtime/tigrbl-identity-author" }
+dependencies = [
+    { name = "cryptography" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "cryptography", specifier = ">=45.0.0" }]
+
+[[package]]
 name = "tigrbl-identity-cli"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-runtime/tigrbl-identity-cli" }
 dependencies = [
+    { name = "tigrbl-identity-author" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" }]
+requires-dist = [
+    { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
+    { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" },
+]
 
 [[package]]
 name = "tigrbl-identity-contracts"
@@ -2353,6 +2384,7 @@ dependencies = [
     { name = "swarmauri-signing-ed25519" },
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
+    { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
@@ -2369,6 +2401,7 @@ requires-dist = [
     { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
+    { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
@@ -2473,6 +2506,12 @@ requires-dist = [
 name = "tigrbl-identity-storage"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/20-storage/tigrbl-identity-storage" }
+dependencies = [
+    { name = "tigrbl-authz-resource-server" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-kernel"

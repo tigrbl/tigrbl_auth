@@ -35,6 +35,7 @@ PACKAGE_ROOTS = [
     "tigrbl_identity_contracts",
     "tigrbl_identity_principals",
     "tigrbl_identity_credentials",
+    "tigrbl_identity_author",
     "tigrbl_identity_jose",
     "tigrbl_identity_policy",
     "tigrbl_identity_oauth",
@@ -61,6 +62,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-identity-contracts": "tigrbl_identity_contracts",
     "tigrbl-identity-principals": "tigrbl_identity_principals",
     "tigrbl-identity-credentials": "tigrbl_identity_credentials",
+    "tigrbl-identity-author": "tigrbl_identity_author",
     "tigrbl-identity-jose": "tigrbl_identity_jose",
     "tigrbl-identity-policy": "tigrbl_identity_policy",
     "tigrbl-identity-oauth": "tigrbl_identity_oauth",
@@ -88,7 +90,9 @@ def _install_package_src_paths() -> None:
 def _package_path(dist_name: str) -> Path:
     if dist_name in DEPRECATED_DIST_NAMES:
         return PKGS / "deprecated" / dist_name
-    return PKGS / dist_name
+    matches = sorted(PKGS.glob(f"**/{dist_name}/pyproject.toml"))
+    assert matches, dist_name
+    return matches[0].parent
 
 
 def test_identity_split_uses_independent_import_roots() -> None:
@@ -171,32 +175,28 @@ def test_credentials_jwt_coder_exports_async_default_factory() -> None:
 
 def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     coder_source = (
-        PKGS
-        / "tigrbl-authn-credentials"
+        _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
         / "coder.py"
     ).read_text(encoding="utf-8")
     runtime_source = (
-        PKGS
-        / "tigrbl-authn-credentials"
+        _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
         / "runtime.py"
     ).read_text(encoding="utf-8")
     credentials_persistence_source = (
-        PKGS
-        / "tigrbl-authn-credentials"
+        _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
         / "persistence.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
-        PKGS
-        / "tigrbl-identity-server"
+        _package_path("tigrbl-identity-server")
         / "src"
         / "tigrbl_identity_server"
         / "security"
@@ -219,8 +219,7 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
 
     split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.revocation")
     runtime_source = (
-        PKGS
-        / "tigrbl-authn-credentials"
+        _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
@@ -238,8 +237,7 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
 
     split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection")
     runtime_source = (
-        PKGS
-        / "tigrbl-authn-credentials"
+        _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
@@ -255,40 +253,36 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
 
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
     route_paths = {
-        "protocol": PKGS / "tigrbl-auth-protocol-oidc" / "src" / "tigrbl_auth_protocol_oidc" / "router.py",
-        "identity_server_op": PKGS
-        / "tigrbl-auth-protocol-oauth"
+        "protocol": _package_path("tigrbl-auth-protocol-oidc")
+        / "src"
+        / "tigrbl_auth_protocol_oidc"
+        / "router.py",
+        "protocol_op": _package_path("tigrbl-auth-protocol-oauth")
         / "src"
         / "tigrbl_auth_protocol_oauth"
         / "ops"
         / "authorize.py",
-        "identity_server_router": PKGS
-        / "tigrbl-identity-server"
-        / "src"
-        / "tigrbl_identity_server"
-        / "rest"
-        / "routers"
-        / "authorize.py",
-        "storage_authorize_route": PKGS
-        / "tigrbl-identity-storage"
+        "storage_authorize_route": _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
         / "auth_code.py",
+        "storage_authorize_logic": _package_path("tigrbl-identity-storage")
+        / "src"
+        / "tigrbl_identity_storage"
+        / "tables"
+        / "_oauth_authorize.py",
     }
 
-    for route_path in (route_paths["protocol"], route_paths["identity_server_op"]):
-        source = route_path.read_text(encoding="utf-8")
-        assert "resolve_browser_session" in source, route_path
-        assert 'request.cookies.get("sid")' not in source, route_path
-        assert "UUID(sid)" not in source, route_path
+    assert not route_paths["protocol"].exists()
+    assert not route_paths["protocol_op"].exists()
 
-    identity_server_source = route_paths["identity_server_op"].read_text(encoding="utf-8")
-    assert "resolve_browser_session_record" in identity_server_source
-    assert "deployment_from_request(request, settings)" in identity_server_source
-    assert "await resolve_browser_session(request)" not in identity_server_source
-
-    router_source = route_paths["identity_server_router"].read_text(encoding="utf-8")
-    assert "tigrbl_identity_storage.tables.auth_code" in router_source
     storage_route_source = route_paths["storage_authorize_route"].read_text(encoding="utf-8")
+    storage_logic_source = route_paths["storage_authorize_logic"].read_text(encoding="utf-8")
+
     assert "authorize_request" in storage_route_source
+    assert "resolve_browser_session_record" in storage_logic_source
+    assert "deployment_from_request(request, settings)" in storage_logic_source
+    assert "await resolve_browser_session(request)" not in storage_logic_source
+    assert 'request.cookies.get("sid")' not in storage_logic_source
+    assert "UUID(sid)" not in storage_logic_source

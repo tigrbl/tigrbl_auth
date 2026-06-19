@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
 
 from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.cli.reports import build_release_bundle, sign_release_bundle
-from tigrbl_auth.release_signing import load_signer
+from tigrbl_identity_author.release_signing import load_signer
 
 
 PROFILES = ("baseline", "production", "hardening", "fapi2-security", "peer-claim")
