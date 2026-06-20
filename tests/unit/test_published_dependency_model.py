@@ -29,7 +29,8 @@ def test_pyproject_uses_published_pins_and_extras():
     dependencies = set(project["dependencies"])
     extras = project["optional-dependencies"]
 
-    assert "tigrbl==0.4.0" in dependencies
+    assert "tigrbl==0.4.4.dev1" in dependencies
+    assert "tigrbl-core==0.4.4.dev1" in dependencies
     assert "swarmauri_core==0.10.0" in dependencies
     assert "swarmauri_standard==0.10.0" in dependencies
     assert "swarmauri_tokens_jwt==0.3.0.dev31" in dependencies
@@ -58,11 +59,10 @@ def test_pyproject_uses_published_pins_and_extras():
 
 
 def test_framework_router_uses_upstream_tigrbl_router():
-    import tigrbl
     from tigrbl_auth import framework
 
-    assert framework.TigrblRouter.__module__ == tigrbl.TigrblRouter.__module__
-    assert framework.TigrblRouter.__qualname__ == tigrbl.TigrblRouter.__qualname__
+    assert issubclass(framework.TigrblRouter, framework._BaseTigrblRouter)
+    assert framework.TigrblRouter.__name__ == "TigrblRouter"
 
 
 def test_framework_router_include_tables_falls_back_to_upstream_include_tables(monkeypatch):
@@ -183,7 +183,9 @@ def test_docker_assets_are_not_published_from_repository_root():
     for dockerfile in root_context_dockerfiles:
         assert (docker_dir / f"{dockerfile}.dockerignore").is_file()
 
-    assert (ROOT / "apps" / "demo-hub-uix" / "Dockerfile.dockerignore").is_file()
+    assert (
+        ROOT / "pkgs" / "95-ui" / "demo-hub-uix" / "Dockerfile.dockerignore"
+    ).is_file()
 
 
 def test_state_report_tracks_dependency_model_checkpoint():

@@ -163,7 +163,10 @@ def _install_table_crud_invoke_compat() -> None:
     from tigrbl_ops_oltp.crud import ops as _crud_ops
     from tigrbl_ops_oltp.crud.helpers.model import _coerce_pk_value, _single_pk_name
     from tigrbl_concrete._mapping.router import rpc as _rpc_router_module
-    from tigrbl_runtime.runtime.executor import invoke as _invoke_module
+    try:
+        from tigrbl_runtime.runtime.executor import invoke as _invoke_module
+    except ModuleNotFoundError:
+        from tigrbl_runtime.executors import invoke as _invoke_module
 
     current = getattr(_invoke_module, "invoke_op", None)
     if not callable(current) or getattr(current, "__tigrbl_auth_table_crud_compat__", False):

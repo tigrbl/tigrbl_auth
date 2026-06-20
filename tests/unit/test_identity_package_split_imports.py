@@ -148,7 +148,9 @@ def test_identity_server_declares_tigrbl_framework_dependency() -> None:
         (_package_path("tigrbl-identity-server") / "pyproject.toml").read_text(encoding="utf-8")
     )
 
-    assert "tigrbl==0.4.0" in set(metadata["project"].get("dependencies", []))
+    dependencies = set(metadata["project"].get("dependencies", []))
+    assert "tigrbl==0.4.4.dev1" in dependencies
+    assert "tigrbl-core==0.4.4.dev1" in dependencies
 
 
 def test_oauth_protocol_declares_dpop_signing_dependency() -> None:

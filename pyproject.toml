@@ -18,7 +18,19 @@ classifiers = [
 authors = [{ name = "Jacob Stewart", email = "jacob@swarmauri.com" }]
 keywords = ["oidc", "oauth2", "identity-provider", "jwks", "jwt", "tigrbl", "sdk", "standards", "auth", "authentication"]
 dependencies = [
-    "tigrbl==0.4.0",
+    "tigrbl==0.4.4.dev1",
+    "tigrbl-atoms==0.4.4.dev1",
+    "tigrbl-base==0.4.4.dev1",
+    "tigrbl-canon==0.4.4.dev1",
+    "tigrbl-concrete==0.4.4.dev1",
+    "tigrbl-core==0.4.4.dev1",
+    "tigrbl-kernel==0.4.4.dev1",
+    "tigrbl-ops-olap==0.4.4.dev1",
+    "tigrbl-ops-oltp==0.4.4.dev1",
+    "tigrbl-ops-realtime==0.4.4.dev1",
+    "tigrbl-orm==0.4.4.dev1",
+    "tigrbl-runtime==0.4.4.dev1",
+    "tigrbl-typing==0.4.4.dev1",
     "swarmauri_core==0.10.0",
     "swarmauri_base==0.10.0",
     "swarmauri_standard==0.10.0",
