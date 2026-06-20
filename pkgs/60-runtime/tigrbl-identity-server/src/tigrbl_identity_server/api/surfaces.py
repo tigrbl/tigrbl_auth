@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any, Callable, Final
 
-from tigrbl_identity_server.framework import TigrblApp, TigrblRouter
+from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_storage.tables.auth_code import api as authorize_api
 from tigrbl_identity_storage.tables.auth_session import login_api
 from tigrbl_identity_storage.tables.client_registration import api as register_api

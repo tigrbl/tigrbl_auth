@@ -89,18 +89,6 @@ async def _resolve_current_user(request: Request, db: AsyncSession, payload: dic
         security_deps.get_current_principal,
         security_auth.get_current_principal,
     ]
-    try:
-        compat_deps = import_module("tigrbl_auth.security.deps")
-        compat_auth = import_module("tigrbl_auth.security.auth")
-        dependencies.extend(
-            [
-                getattr(compat_deps, "get_current_principal"),
-                getattr(compat_auth, "get_current_principal"),
-            ]
-        )
-    except Exception:
-        pass
-
     for dependency in dependencies:
         override = overrides.get(dependency)
         if override is None:

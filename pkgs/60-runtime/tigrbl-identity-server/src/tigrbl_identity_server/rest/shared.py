@@ -4,7 +4,9 @@ import inspect
 from typing import Any, Callable
 from uuid import UUID
 
-from tigrbl_identity_server.framework import HTTPException, Request, status
+from http import HTTPStatus as status
+from tigrbl.requests import Request
+from tigrbl.runtime.status import HTTPException
 
 from tigrbl_authn_credentials.token_service import JWTCoder
 from tigrbl_authn_credentials.backends import PasswordBackend

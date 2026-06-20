@@ -13,7 +13,7 @@ from tigrbl.security import Depends
 from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_auth.security.deps import get_current_principal, get_db
+from tigrbl_identity_server.security.deps import get_current_principal, get_db
 from tigrbl_auth.runtime_cfg import settings
 
 
@@ -49,9 +49,9 @@ async def test_lowercase_bearer_scheme():
 
     mock_user = MagicMock()
     with patch(
-        "tigrbl_auth.security.deps._user_from_jwt", AsyncMock(return_value=mock_user)
+        "tigrbl_identity_server.security.deps._user_from_jwt", AsyncMock(return_value=mock_user)
     ):
-        with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+        with patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder:
             mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
             transport = ASGITransport(app=app)
             async with AsyncClient(transport=transport, base_url="http://test") as client:
@@ -99,10 +99,10 @@ async def test_access_token_query_parameter_enabled():
     mock_user = MagicMock()
     with patch.object(settings, "enable_rfc6750_query", True):
         with patch(
-            "tigrbl_auth.security.deps._user_from_jwt",
+            "tigrbl_identity_server.security.deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
-            with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+            with patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder:
                 mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
                 transport = ASGITransport(app=app)
                 async with AsyncClient(
@@ -148,10 +148,10 @@ async def test_access_token_form_body_enabled():
     mock_user = MagicMock()
     with patch.object(settings, "enable_rfc6750_form", True):
         with patch(
-            "tigrbl_auth.security.deps._user_from_jwt",
+            "tigrbl_identity_server.security.deps._user_from_jwt",
             AsyncMock(return_value=mock_user),
         ):
-            with patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+            with patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder:
                 mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
                 transport = ASGITransport(app=app)
                 async with AsyncClient(

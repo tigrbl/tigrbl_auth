@@ -70,7 +70,6 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/_operator_store/__init__.py",
-    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/framework.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/surfaces.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/_surfaces/__init__.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-operator/src/tigrbl_identity_operator/operator_service.py",
@@ -219,11 +218,9 @@ def test_package_code_does_not_use_exec_compile_split_loaders() -> None:
 
 
 @pytest.mark.unit
-def test_framework_public_surface_does_not_export_db_primitives() -> None:
-    framework = importlib.import_module("tigrbl_identity_server.framework")
-    exported = set(getattr(framework, "__all__", ()))
-    leaked = sorted(exported & FORBIDDEN_FRAMEWORK_EXPORTS)
-    assert leaked == []
+def test_framework_public_surface_is_not_supported() -> None:
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("tigrbl_identity_server.framework")
 
 
 @pytest.mark.unit

@@ -5,7 +5,7 @@ from tigrbl_auth.tables.pushed_authorization_request import (
     PushedAuthorizationRequest,
     DEFAULT_PAR_EXPIRY,
 )
-from tigrbl_auth.framework import HTTPException
+from tigrbl.runtime.status import HTTPException
 from tigrbl_auth.runtime_cfg import settings
 
 

@@ -7,7 +7,7 @@ from httpx import ASGITransport, AsyncClient, BasicAuth
 from unittest.mock import AsyncMock
 
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_server.framework import TigrblApp
+from tigrbl import TigrblApp
 from tigrbl_identity_storage.tables.auth_code._auth_flows import router
 from tigrbl_identity_runtime.settings import settings
 

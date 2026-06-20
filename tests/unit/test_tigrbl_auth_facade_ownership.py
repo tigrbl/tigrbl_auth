@@ -40,7 +40,6 @@ FACADE_MODULES = {
     "tigrbl_auth.api.surfaces": "tigrbl_identity_server.surfaces",
     "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
     "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
-    "tigrbl_auth.framework": "tigrbl_identity_server.framework",
     "tigrbl_auth.jwtoken": "tigrbl_identity_jose.jwtoken",
     "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
@@ -80,7 +79,6 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.api.surfaces",
         "tigrbl_auth.config.deployment",
         "tigrbl_auth.config.surfaces",
-        "tigrbl_auth.framework",
         "tigrbl_auth.jwtoken",
         "tigrbl_auth.security.admin_gate",
         "tigrbl_auth.security.certification",
@@ -196,6 +194,12 @@ def test_no_legacy_executable_facades_remain() -> None:
 
 def test_legacy_facade_ops_are_not_supported() -> None:
     assert not (FACADE_ROOT / "ops").exists()
+
+
+def test_legacy_framework_facade_is_not_supported() -> None:
+    with package_src_paths_only():
+        with pytest.raises(ModuleNotFoundError):
+            importlib.import_module("tigrbl_auth.framework")
 
 
 def test_pqc_touched_facades_do_not_own_runtime_implementation() -> None:

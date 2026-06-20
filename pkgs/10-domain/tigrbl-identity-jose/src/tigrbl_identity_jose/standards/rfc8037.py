@@ -6,7 +6,7 @@ import asyncio
 from typing import Any, Awaitable
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import Ed25519EnvelopeSigner
+from swarmauri_signing_ed25519 import Ed25519EnvelopeSigner
 
 try:  # pragma: no cover - optional dependency
     from cryptography.hazmat.primitives.asymmetric.ed25519 import (

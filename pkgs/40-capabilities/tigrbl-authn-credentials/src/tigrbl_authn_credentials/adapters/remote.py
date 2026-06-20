@@ -5,16 +5,14 @@ import time
 from typing import Final
 
 import httpx
-from tigrbl_identity_server.framework import (
-    HTTPException,
-    Request,
-    Security,
-    status,
-    APIKey,
-    AuthNProvider,
-)
+from http import HTTPStatus as status
+from tigrbl import APIKey
+from tigrbl.requests import Request
+from tigrbl.runtime.status import HTTPException
+from tigrbl.security import Security
+from tigrbl.types import AuthNProvider
 from tigrbl_identity_server.security.context import principal_var
-from .auth_context import set_auth_context
+from ..auth_context import set_auth_context
 
 
 # OpenAPI-advertised security scheme (header-based API key)

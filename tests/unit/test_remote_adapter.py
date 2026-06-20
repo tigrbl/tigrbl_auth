@@ -5,12 +5,12 @@ from unittest.mock import MagicMock
 
 import httpx
 import pytest
-from tigrbl_auth.framework import Request
+from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 from http import HTTPStatus as status
 
-import tigrbl_auth.adapters.remote_adapter as remote_adapter
-from tigrbl_auth.adapters.remote_adapter import RemoteAuthNAdapter
+import tigrbl_authn_credentials.adapters.remote as remote_adapter
+from tigrbl_authn_credentials.adapters.remote import RemoteAuthNAdapter
 
 
 @pytest.mark.unit

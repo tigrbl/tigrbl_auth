@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from tigrbl_auth.framework import Request
+from tigrbl.requests import Request
 from tigrbl_auth.tables import AuthCode
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
 

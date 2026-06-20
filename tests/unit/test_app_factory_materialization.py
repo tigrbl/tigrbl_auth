@@ -18,11 +18,11 @@ def test_constraint_files_are_pip_legal_for_clean_room_installs() -> None:
         assert "[standard]" not in text
 
 
-def test_framework_uses_published_tigrbl_api_surface_names() -> None:
-    facade_text = (
+def test_framework_facades_are_not_package_surfaces() -> None:
+    assert not (
         ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
-    ).read_text(encoding="utf-8")
-    framework_text = (
+    ).exists()
+    assert not (
         ROOT
         / "pkgs"
         / "60-runtime"
@@ -30,14 +30,7 @@ def test_framework_uses_published_tigrbl_api_surface_names() -> None:
         / "src"
         / "tigrbl_identity_server"
         / "framework.py"
-    ).read_text(encoding="utf-8")
-
-    assert "tigrbl_identity_server.framework" in facade_text
-    assert "from tigrbl import (" in framework_text
-    assert "TigrblRouter" in framework_text
-    assert "RestOltpTable as Base" in framework_text
-    assert "from tigrbl.core.crud.params import Header" in framework_text
-    assert "_framework" not in framework_text
+    ).exists()
 
 
 def test_install_substrate_report_tracks_constraint_legalization() -> None:

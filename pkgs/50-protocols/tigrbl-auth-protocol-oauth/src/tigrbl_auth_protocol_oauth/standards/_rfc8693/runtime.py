@@ -13,13 +13,11 @@ from urllib.parse import parse_qs
 
 from typing import Any, Dict, List, Optional, Union
 import warnings
-from tigrbl_identity_server.framework import (
-    TigrblApp,
-    HTTPException,
-    Request,
-    Header,
-    status,
-)
+from http import HTTPStatus as status
+from tigrbl import TigrblApp
+from tigrbl.core.crud.params import Header
+from tigrbl.requests import Request
+from tigrbl.runtime.status import HTTPException
 
 from tigrbl_identity_runtime import settings as runtime_cfg
 from tigrbl_identity_jose.jwtoken import JWTCoder

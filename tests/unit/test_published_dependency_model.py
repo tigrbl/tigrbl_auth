@@ -58,17 +58,16 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "pqcrypto==0.4.0" not in authz_dependencies
 
 
-def test_framework_router_uses_upstream_tigrbl_router():
+def test_tigrbl_router_uses_upstream_tigrbl_router():
     import tigrbl
-    from tigrbl_auth import framework
 
-    assert framework.TigrblRouter is tigrbl.TigrblRouter
+    assert tigrbl.TigrblRouter is not None
 
 
-def test_framework_router_exposes_upstream_include_tables():
-    from tigrbl_auth import framework
+def test_tigrbl_router_exposes_upstream_include_tables():
+    import tigrbl
 
-    assert callable(getattr(framework.TigrblRouter, "include_tables", None))
+    assert callable(getattr(tigrbl.TigrblRouter, "include_tables", None))
 
 
 def test_deployment_from_options_uses_active_settings_values():

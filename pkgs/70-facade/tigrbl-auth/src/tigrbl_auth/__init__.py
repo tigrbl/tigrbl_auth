@@ -64,7 +64,6 @@ _MODULE_EXPORTS = {
     "cli": "tigrbl_auth.cli",
     "compat": "tigrbl_auth.compat",
     "config": "tigrbl_auth.config",
-    "framework": "tigrbl_auth.framework",
     "profiles": "tigrbl_auth.profiles",
     "runtime": "tigrbl_auth.runtime",
     "runtime_cfg": "tigrbl_auth.runtime_cfg",

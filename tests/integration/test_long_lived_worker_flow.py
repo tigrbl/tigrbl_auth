@@ -1,15 +1,10 @@
 import time
 import pytest
 from httpx import AsyncClient
-from tigrbl_auth.framework import (
-    status,
-    LocalKeyProvider,
-    KeySpec,
-    KeyAlg,
-    KeyClass,
-    KeyUse,
-    ExportPolicy,
-)
+from http import HTTPStatus as status
+from swarmauri_core.crypto.types import ExportPolicy, KeyUse
+from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
+from swarmauri_keyprovider_local import LocalKeyProvider
 
 from tigrbl_auth import encode_jwt, decode_jwt
 from tigrbl_auth.crypto import hash_pw

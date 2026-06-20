@@ -12,7 +12,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_identity_server.framework import BaseModel, ValidationError
+    from tigrbl.types import BaseModel, ValidationError
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel, ValidationError  # type: ignore
 

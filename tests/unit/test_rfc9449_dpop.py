@@ -6,14 +6,9 @@ that the helper functions respect the ``enable_rfc9449`` feature flag.
 
 import asyncio
 import pytest
-from tigrbl_auth.framework import (
-    LocalKeyProvider,
-    KeySpec,
-    KeyAlg,
-    KeyClass,
-    KeyUse,
-    ExportPolicy,
-)
+from swarmauri_core.crypto.types import ExportPolicy, KeyUse
+from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
+from swarmauri_keyprovider_local import LocalKeyProvider
 from tigrbl_auth.rfc.rfc9449_dpop import (
     RFC9449_SPEC_URL,
     makeProof,

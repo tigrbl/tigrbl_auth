@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import Request, TIGRBL_AUTH_CONTEXT_ATTR
+from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
+from tigrbl.requests import Request
 
 
 def set_auth_context(request: Request, principal: dict | None) -> None:

@@ -30,7 +30,11 @@ class RefreshTokenReuseError(RefreshTokenError):
 
 def _load_runtime() -> dict[str, Any]:
     try:
-        from tigrbl_identity_server.framework import ExportPolicy, FileKeyProvider, JWTTokenService, LocalKeyProvider, JWAAlg, KeyAlg, KeyClass, KeySpec, KeyUse
+        from swarmauri_core.crypto.types import ExportPolicy, JWAAlg, KeyUse
+        from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
+        from swarmauri_keyprovider_file import FileKeyProvider
+        from swarmauri_keyprovider_local import LocalKeyProvider
+        from swarmauri_tokens_jwt import JWTTokenService
         from tigrbl_identity_runtime.settings import settings
         from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
         from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked, is_revoked_async

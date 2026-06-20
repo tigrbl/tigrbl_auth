@@ -1,9 +1,10 @@
 """Tests for OAuth2 token introspection compliance with RFC 7662."""
 
 import pytest
+from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
-from tigrbl_identity_server.framework import TigrblApp, status
+from tigrbl import TigrblApp
 from tigrbl_identity_storage.tables.token_record import _introspection as introspection_module
 from tigrbl_identity_storage.tables.token_record._introspection import (
     register_token_async,

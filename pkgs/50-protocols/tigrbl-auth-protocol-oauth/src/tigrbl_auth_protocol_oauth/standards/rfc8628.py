@@ -8,7 +8,7 @@ import string
 from typing import Final, Literal
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import BaseModel
+from tigrbl.types import BaseModel
 
 _USER_CODE_CHARSET: Final[str] = string.ascii_uppercase + string.digits
 _USER_CODE_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Z0-9]{8,}$")

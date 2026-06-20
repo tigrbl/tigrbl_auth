@@ -23,7 +23,7 @@ Notes
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import TigrblRouter
+from tigrbl import TigrblRouter
 from tigrbl_identity_storage.tables import (
     Realm,
     Tenant,

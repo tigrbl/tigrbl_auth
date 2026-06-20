@@ -12,7 +12,7 @@ from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when full runtime deps are installed
-    from tigrbl_identity_server.framework import BaseModel
+    from tigrbl.types import BaseModel
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     from pydantic import BaseModel
 

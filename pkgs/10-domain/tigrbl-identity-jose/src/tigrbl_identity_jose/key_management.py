@@ -40,7 +40,9 @@ _BCRYPT_MAX_BYTES = 72
 
 def _load_framework() -> dict[str, Any]:
     try:
-        from tigrbl_identity_server.framework import ExportPolicy, FileKeyProvider, KeyAlg, KeyClass, KeySpec, KeyUse
+        from swarmauri_core.crypto.types import ExportPolicy, KeyUse
+        from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
+        from swarmauri_keyprovider_file import FileKeyProvider
     except Exception as exc:  # pragma: no cover - environment specific
         raise RuntimeError("runtime key-management dependencies are unavailable") from exc
     return {

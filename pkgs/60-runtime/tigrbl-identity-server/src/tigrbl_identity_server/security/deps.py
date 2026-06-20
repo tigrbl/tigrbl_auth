@@ -17,14 +17,12 @@ Both helpers are **framework-thin**: they translate `AuthError` raised by
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import (
-    Depends,
-    Header,
-    HTTPException,
-    Request,
-    status,
-    AsyncSession,
-)
+from http import HTTPStatus as status
+from tigrbl.core.crud.params import Header
+from tigrbl.engine import HybridSession as AsyncSession
+from tigrbl.requests import Request
+from tigrbl.runtime.status import HTTPException
+from tigrbl.security import Depends
 from tigrbl_identity_runtime.deployment import deployment_from_request
 
 from tigrbl_authn_credentials.backends import (

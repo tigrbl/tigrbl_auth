@@ -12,7 +12,7 @@ from dataclasses import replace
 import re
 from typing import Any, Callable, Final
 
-from tigrbl_identity_server.framework import TigrblApp, TigrblRouter
+from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_storage.tables.auth_code import api as authorize_api
 from tigrbl_identity_storage.tables.auth_session import login_api
 from tigrbl_identity_storage.tables.user._account_surface import api as my_account_api

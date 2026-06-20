@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import AsyncSession, Depends, Header, HTTPException, Request, status
+from http import HTTPStatus as status
+from tigrbl.core.crud.params import Header
+from tigrbl.engine import HybridSession as AsyncSession
+from tigrbl.requests import Request
+from tigrbl.runtime.status import HTTPException
+from tigrbl.security import Depends
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.security.context import principal_var

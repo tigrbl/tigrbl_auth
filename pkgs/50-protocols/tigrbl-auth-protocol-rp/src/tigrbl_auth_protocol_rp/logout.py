@@ -16,7 +16,8 @@ from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_
 from tigrbl_identity_runtime.settings import settings
 
 try:  # dependency-light import path for checkpoint evidence generation
-    from tigrbl_identity_server.framework import HTTPException, status
+    from http import HTTPStatus as status
+    from tigrbl.runtime.status import HTTPException
 except Exception:  # pragma: no cover - exercised in dependency-light tests
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400

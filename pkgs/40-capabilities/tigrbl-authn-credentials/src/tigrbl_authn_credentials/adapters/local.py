@@ -1,5 +1,5 @@
 """
-tigrbl_auth.adapters.local_adapter
+tigrbl_authn_credentials.adapters.local
 ──────────────────
 Concrete implementation of the ``AuthNProvider`` ABC declared by
 ``tigrbl.authn_abc``.  It merely **adapts** the public helpers that already
@@ -7,17 +7,18 @@ exist in *tigrbl_auth* so that Tigrbl can consume them automatically.
 
 Usage
 -----
->>> from tigrbl_identity_server.framework import TigrblRouter
->>> from tigrbl_auth.adapters import LocalAuthNAdapter
+>>> from tigrbl import TigrblRouter
+>>> from tigrbl_authn_credentials.adapters import LocalAuthNAdapter
 >>> api = TigrblRouter(engine=ENGINE, authn=LocalAuthNAdapter())
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_server.framework import AuthNProvider, Request
+from tigrbl.requests import Request
+from tigrbl.types import AuthNProvider
 from tigrbl_identity_server.security.auth import get_principal
 from tigrbl_identity_server.security.context import principal_var  # noqa: F401  # ensure ContextVar is initialised
-from .auth_context import set_auth_context
+from ..auth_context import set_auth_context
 
 
 class LocalAuthNAdapter(AuthNProvider):

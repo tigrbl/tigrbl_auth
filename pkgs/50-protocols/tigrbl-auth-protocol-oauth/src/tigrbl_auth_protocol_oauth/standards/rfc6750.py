@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
-from tigrbl_identity_server.framework import Request
+from tigrbl.requests import Request
 from typing import Final
 
 from tigrbl_identity_runtime.settings import settings

@@ -7,10 +7,10 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-import tigrbl_auth.adapters.local_adapter as local_adapter_mod
+import tigrbl_authn_credentials.adapters.local as local_adapter_mod
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
-from tigrbl_auth.adapters.local_adapter import LocalAuthNAdapter
-from tigrbl_auth.adapters.remote_adapter import RemoteAuthNAdapter
+from tigrbl_authn_credentials.adapters.local import LocalAuthNAdapter
+from tigrbl_authn_credentials.adapters.remote import RemoteAuthNAdapter
 
 
 @pytest.mark.unit

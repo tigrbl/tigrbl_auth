@@ -1,5 +1,5 @@
 """
-Unit tests for tigrbl_auth.security.deps module.
+Unit tests for tigrbl_identity_server.security.deps module.
 
 Tests dependency functions including database sessions,
 authentication, principal resolution, and error handling.
@@ -12,17 +12,24 @@ import contextvars
 import pytest
 from tigrbl.runtime.status import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from tigrbl_auth.framework import Request
-from tigrbl_auth.jwtoken import InvalidTokenError
+from tigrbl.requests import Request
+from tigrbl_authn_credentials.token_service import InvalidTokenError
 
-from tigrbl_auth.security.deps import (
+from tigrbl_identity_server.security.deps import (
     get_current_principal,
     get_principal,
     _user_from_jwt,
     _user_from_api_key,
     principal_var,
 )
-from tigrbl_auth.backends import AuthError
+from tigrbl_authn_credentials.backends import AuthError
+
+
+def _request() -> MagicMock:
+    request = MagicMock(spec=Request)
+    request.scope = {"type": "http", "method": "GET", "path": "/"}
+    request.state = MagicMock()
+    return request
 
 
 @pytest.mark.unit
@@ -31,8 +38,8 @@ class TestDatabaseDependency:
 
     def test_database_dependency_import(self):
         """Test that database dependency can be imported correctly."""
-        from tigrbl_auth.security.deps import get_db
-        from tigrbl_auth.db import get_db as db_get_db
+        from tigrbl_identity_server.security.deps import get_db
+        from tigrbl_identity_storage.tables.engine import get_db as db_get_db
 
         # Verify they're the same function
         assert get_db is db_get_db
@@ -64,9 +71,9 @@ class TestJWTUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with (
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core",
+                "tigrbl_identity_server.security.deps.User.handlers.list.core",
                 AsyncMock(return_value=MagicMock(items=[mock_user])),
             ) as mock_list,
         ):
@@ -90,9 +97,9 @@ class TestJWTUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with (
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core", AsyncMock()
+                "tigrbl_identity_server.security.deps.User.handlers.list.core", AsyncMock()
             ) as mock_list,
         ):
             mock_coder.async_decode = AsyncMock(
@@ -111,10 +118,10 @@ class TestJWTUserResolution:
 
         with (
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core",
+                "tigrbl_identity_server.security.deps.User.handlers.list.core",
                 AsyncMock(return_value=MagicMock(items=[])),
             ) as mock_list,
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
         ):
             mock_coder.async_decode = AsyncMock(
                 return_value={
@@ -137,10 +144,10 @@ class TestJWTUserResolution:
 
         with (
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core",
+                "tigrbl_identity_server.security.deps.User.handlers.list.core",
                 AsyncMock(return_value=MagicMock(items=[])),
             ) as mock_list,
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
         ):
             mock_coder.async_decode = AsyncMock(
                 return_value={
@@ -162,9 +169,9 @@ class TestJWTUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with (
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core", AsyncMock()
+                "tigrbl_identity_server.security.deps.User.handlers.list.core", AsyncMock()
             ) as mock_list,
         ):
             mock_coder.async_decode = AsyncMock(
@@ -193,7 +200,7 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "valid-api-key-12345"
 
-        with patch("tigrbl_auth.security.deps._api_key_backend") as mock_backend:
+        with patch("tigrbl_identity_server.security.deps._api_key_backend") as mock_backend:
             mock_backend.authenticate = AsyncMock(return_value=(mock_user, "user"))
 
             user = await _user_from_api_key(raw_key, mock_db)
@@ -208,7 +215,7 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "invalid-api-key"
 
-        with patch("tigrbl_auth.security.deps._api_key_backend") as mock_backend:
+        with patch("tigrbl_identity_server.security.deps._api_key_backend") as mock_backend:
             mock_backend.authenticate = AsyncMock(
                 side_effect=AuthError("Invalid API key")
             )
@@ -224,7 +231,7 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "expired-api-key"
 
-        with patch("tigrbl_auth.security.deps._api_key_backend") as mock_backend:
+        with patch("tigrbl_identity_server.security.deps._api_key_backend") as mock_backend:
             mock_backend.authenticate = AsyncMock(
                 side_effect=AuthError("API key expired")
             )
@@ -242,7 +249,7 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "service-api-key"
 
-        with patch("tigrbl_auth.security.deps._api_key_backend") as mock_backend:
+        with patch("tigrbl_identity_server.security.deps._api_key_backend") as mock_backend:
             mock_backend.authenticate = AsyncMock(
                 return_value=(mock_service, "service")
             )
@@ -261,7 +268,7 @@ class TestAPIKeyUserResolution:
         mock_db = AsyncMock(spec=AsyncSession)
         raw_key = "client-api-key"
 
-        with patch("tigrbl_auth.security.deps._api_key_backend") as mock_backend:
+        with patch("tigrbl_identity_server.security.deps._api_key_backend") as mock_backend:
             mock_backend.authenticate = AsyncMock(return_value=(mock_client, "client"))
 
             principal = await _user_from_api_key(raw_key, mock_db)
@@ -284,9 +291,9 @@ class TestGetCurrentPrincipal:
         api_key = "valid-api-key-12345"
 
         with patch(
-            "tigrbl_auth.security.deps._user_from_api_key", return_value=mock_user
+            "tigrbl_identity_server.security.deps._user_from_api_key", return_value=mock_user
         ):
-            request = Request(scope={"type": "http"})
+            request = _request()
             principal = await get_current_principal(
                 request,
                 authorization="",
@@ -307,11 +314,11 @@ class TestGetCurrentPrincipal:
         authorization = "Bearer valid.jwt.token"
 
         with (
-            patch("tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user),
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._user_from_jwt", return_value=mock_user),
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
         ):
             mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
-            request = Request(scope={"type": "http"})
+            request = _request()
             principal = await get_current_principal(
                 request,
                 authorization=authorization,
@@ -333,12 +340,12 @@ class TestGetCurrentPrincipal:
         authorization = "Bearer valid.jwt.token"
 
         with patch(
-            "tigrbl_auth.security.deps._user_from_api_key", return_value=mock_user
+            "tigrbl_identity_server.security.deps._user_from_api_key", return_value=mock_user
         ) as mock_api:
             with patch(
-                "tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user
+                "tigrbl_identity_server.security.deps._user_from_jwt", return_value=mock_user
             ) as mock_jwt:
-                request = Request(scope={"type": "http"})
+                request = _request()
                 principal = await get_current_principal(
                     request,
                     authorization=authorization,
@@ -364,12 +371,12 @@ class TestGetCurrentPrincipal:
         api_key = "invalid-api-key"
         authorization = "Bearer valid.jwt.token"
 
-        with patch("tigrbl_auth.security.deps._user_from_api_key", return_value=None):
+        with patch("tigrbl_identity_server.security.deps._user_from_api_key", return_value=None):
             with patch(
-                "tigrbl_auth.security.deps._user_from_jwt", return_value=mock_user
-            ), patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder:
+                "tigrbl_identity_server.security.deps._user_from_jwt", return_value=mock_user
+            ), patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder:
                 mock_coder.async_decode = AsyncMock(return_value={"sub": str(mock_user.id)})
-                request = Request(scope={"type": "http"})
+                request = _request()
                 principal = await get_current_principal(
                     request,
                     authorization=authorization,
@@ -385,7 +392,7 @@ class TestGetCurrentPrincipal:
         """Test principal resolution with no credentials raises HTTP 401."""
         mock_db = AsyncMock(spec=AsyncSession)
 
-        request = Request(scope={"type": "http"})
+        request = _request()
         with pytest.raises(HTTPException) as exc_info:
             await get_current_principal(
                 request, authorization="", api_key=None, db=mock_db
@@ -401,7 +408,7 @@ class TestGetCurrentPrincipal:
         mock_db = AsyncMock(spec=AsyncSession)
         authorization = "InvalidFormat token"
 
-        request = Request(scope={"type": "http"})
+        request = _request()
         with pytest.raises(HTTPException) as exc_info:
             await get_current_principal(
                 request,
@@ -419,9 +426,9 @@ class TestGetCurrentPrincipal:
         api_key = "invalid-api-key"
         authorization = "Bearer invalid.jwt.token"
 
-        with patch("tigrbl_auth.security.deps._user_from_api_key", return_value=None):
-            with patch("tigrbl_auth.security.deps._user_from_jwt", return_value=None):
-                request = Request(scope={"type": "http"})
+        with patch("tigrbl_identity_server.security.deps._user_from_api_key", return_value=None):
+            with patch("tigrbl_identity_server.security.deps._user_from_jwt", return_value=None):
+                request = _request()
                 with pytest.raises(HTTPException) as exc_info:
                     await get_current_principal(
                         request,
@@ -453,7 +460,7 @@ class TestGetPrincipal:
         api_key = "valid-api-key-12345"
 
         with patch(
-            "tigrbl_auth.security.deps.get_current_principal", return_value=mock_user
+            "tigrbl_identity_server.security.deps.get_current_principal", return_value=mock_user
         ):
             principal = await get_principal(
                 request=mock_request, authorization="", api_key=api_key, db=mock_db
@@ -474,7 +481,7 @@ class TestGetPrincipal:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with patch(
-            "tigrbl_auth.security.deps.get_current_principal", return_value=mock_user
+            "tigrbl_identity_server.security.deps.get_current_principal", return_value=mock_user
         ):
             await get_principal(
                 request=mock_request,
@@ -503,7 +510,7 @@ class TestGetPrincipal:
         principal_var.set(None)
 
         with patch(
-            "tigrbl_auth.security.deps.get_current_principal", return_value=mock_user
+            "tigrbl_identity_server.security.deps.get_current_principal", return_value=mock_user
         ):
             await get_principal(
                 request=mock_request,
@@ -524,7 +531,7 @@ class TestGetPrincipal:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with patch(
-            "tigrbl_auth.security.deps.get_current_principal"
+            "tigrbl_identity_server.security.deps.get_current_principal"
         ) as mock_get_current:
             mock_get_current.side_effect = HTTPException(
                 status_code=401, detail="invalid credentials"
@@ -588,7 +595,7 @@ class TestSecurityDepsIntegration:
 
     def test_all_exports_are_available(self):
         """Test that all expected exports are available from the module."""
-        from tigrbl_auth.security.deps import (
+        from tigrbl_identity_server.security.deps import (
             get_current_principal,
             get_principal,
             principal_var,
@@ -606,7 +613,7 @@ class TestSecurityDepsIntegration:
     @pytest.mark.asyncio
     async def test_backend_instances_are_created(self):
         """Test that backend instances are properly initialized."""
-        from tigrbl_auth.security.deps import _api_key_backend, _get_jwt_coder
+        from tigrbl_identity_server.security.deps import _api_key_backend, _get_jwt_coder
 
         # Verify backend instances exist
         assert _api_key_backend is not None
@@ -618,9 +625,9 @@ class TestSecurityDepsIntegration:
         mock_db = AsyncMock(spec=AsyncSession)
 
         with (
-            patch("tigrbl_auth.security.deps._jwt_coder") as mock_coder,
+            patch("tigrbl_identity_server.security.deps._jwt_coder") as mock_coder,
             patch(
-                "tigrbl_auth.security.deps.User.handlers.list.core",
+                "tigrbl_identity_server.security.deps.User.handlers.list.core",
                 AsyncMock(side_effect=Exception("Database error")),
             ),
         ):

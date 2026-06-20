@@ -28,7 +28,8 @@ from tigrbl_identity_jose.pqc import (
 )
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
-    from tigrbl_identity_server.framework import JWAAlg, JwsSignerVerifier
+    from swarmauri_core.crypto.types import JWAAlg
+    from swarmauri_signing_jws import JwsSignerVerifier
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     JWAAlg = None
     JwsSignerVerifier = None

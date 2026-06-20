@@ -13,7 +13,7 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.framework import TigrblApp
+from tigrbl import TigrblApp
 from tigrbl_identity_storage.tables.auth_code._auth_flows import router
 from tigrbl_identity_server.rest.shared import _jwt
 from tigrbl_identity_storage.tables.engine import get_db

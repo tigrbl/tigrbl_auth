@@ -19,16 +19,10 @@ from datetime import timedelta
 from functools import lru_cache
 from typing import Any, Iterable, Mapping, Tuple
 
-from tigrbl_identity_server.framework import (
-    ExportPolicy,
-    FileKeyProvider,
-    JWAAlg,
-    JWTTokenService,
-    KeyAlg,
-    KeyClass,
-    KeySpec,
-    KeyUse,
-)
+from swarmauri_core.crypto.types import ExportPolicy, JWAAlg, KeyUse
+from swarmauri_core.key_providers.types import KeyAlg, KeyClass, KeySpec
+from swarmauri_keyprovider_file import FileKeyProvider
+from swarmauri_tokens_jwt import JWTTokenService
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_jose.standards.rfc7516 import encrypt_jwe, decrypt_jwe
