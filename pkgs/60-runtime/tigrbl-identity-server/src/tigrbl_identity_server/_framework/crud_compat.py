@@ -20,7 +20,15 @@ import inspect
 import tigrbl as _tigrbl
 from pydantic import AnyHttpUrl, ConfigDict, EmailStr, constr, field_validator
 
-from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx
+from tigrbl import (
+    APIKey,
+    HTTPBearer,
+    RestOltpTable as Base,
+    TigrblApp,
+    engine_ctx,
+    hook_ctx,
+    op_ctx,
+)
 from tigrbl.requests import Request as _TigrblRequest
 try:
     from tigrbl.column.shortcuts import ColumnSpec, F, IO, S, acol
@@ -52,7 +60,6 @@ except ModuleNotFoundError:
                 read_producer=read_producer,
             )
         return _TigrblColumn(spec=spec, **kw)
-from tigrbl.orm.tables._base import Base
 try:
     from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 except ModuleNotFoundError:

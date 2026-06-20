@@ -17,6 +17,7 @@ import tigrbl as _tigrbl
 from pydantic import EmailStr, constr
 
 from swarmauri_core.crypto.types import JWAAlg
+from tigrbl import RestOltpTable as Base
 from tigrbl import TigrblApp, hook_ctx
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
 from tigrbl.core.crud.params import Header
@@ -38,7 +39,6 @@ from tigrbl.orm.mixins import (
 from tigrbl.orm.tables import Client as ClientBase
 from tigrbl.orm.tables import Tenant as TenantBase
 from tigrbl.orm.tables import User as UserBase
-from tigrbl.orm.tables._base import Base
 from tigrbl.requests import Request as _TigrblRequest
 try:
     from tigrbl.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
