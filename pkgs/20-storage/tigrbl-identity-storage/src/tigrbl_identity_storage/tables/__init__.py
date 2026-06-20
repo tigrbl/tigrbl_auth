@@ -2,7 +2,7 @@
 
 from tigrbl import bind
 
-from tigrbl_identity_storage.framework import Base, _install_local_handler_dict_compat
+from tigrbl_identity_storage.framework import Base
 from tigrbl_identity_runtime.settings import settings
 
 from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
@@ -169,7 +169,6 @@ def _ensure_runtime_bindings() -> None:
         handlers = getattr(model, "handlers", None)
         if getattr(handlers, "read", None) is None:
             bind(model)
-        _install_local_handler_dict_compat(model)
 
 
 def _attach_custom_op_schemas() -> None:

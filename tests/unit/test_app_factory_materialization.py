@@ -22,32 +22,22 @@ def test_framework_uses_published_tigrbl_api_surface_names() -> None:
     facade_text = (
         ROOT / "pkgs" / "70-facade" / "tigrbl-auth" / "src" / "tigrbl_auth" / "framework.py"
     ).read_text(encoding="utf-8")
-    crud_text = (
+    framework_text = (
         ROOT
         / "pkgs"
         / "60-runtime"
         / "tigrbl-identity-server"
         / "src"
         / "tigrbl_identity_server"
-        / "_framework"
-        / "crud_compat.py"
-    ).read_text(encoding="utf-8")
-    router_text = (
-        ROOT
-        / "pkgs"
-        / "60-runtime"
-        / "tigrbl-identity-server"
-        / "src"
-        / "tigrbl_identity_server"
-        / "_framework"
-        / "router_compat.py"
+        / "framework.py"
     ).read_text(encoding="utf-8")
 
     assert "tigrbl_identity_server.framework" in facade_text
-    assert "from tigrbl import APIKey, HTTPBearer, TigrblApp, engine_ctx, hook_ctx, op_ctx" in crud_text
-    assert 'getattr(_tigrbl, "TigrblRouter", None) or getattr(_tigrbl, "TigrblApi")' in crud_text
-    assert "class TigrblRouter(_BaseTigrblRouter)" in router_text
-    assert "from tigrbl.core.crud.params import Header" in crud_text
+    assert "from tigrbl import (" in framework_text
+    assert "TigrblRouter" in framework_text
+    assert "RestOltpTable as Base" in framework_text
+    assert "from tigrbl.core.crud.params import Header" in framework_text
+    assert "_framework" not in framework_text
 
 
 def test_install_substrate_report_tracks_constraint_legalization() -> None:

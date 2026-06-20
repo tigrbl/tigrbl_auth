@@ -59,27 +59,16 @@ def test_pyproject_uses_published_pins_and_extras():
 
 
 def test_framework_router_uses_upstream_tigrbl_router():
+    import tigrbl
     from tigrbl_auth import framework
 
-    assert issubclass(framework.TigrblRouter, framework._BaseTigrblRouter)
-    assert framework.TigrblRouter.__name__ == "TigrblRouter"
+    assert framework.TigrblRouter is tigrbl.TigrblRouter
 
 
-def test_framework_router_include_tables_falls_back_to_upstream_include_tables(monkeypatch):
+def test_framework_router_exposes_upstream_include_tables():
     from tigrbl_auth import framework
 
-    sentinel = object()
-    calls: list[list[object]] = []
-
-    def fake_parent_include_tables(self, models):
-        calls.append(list(models))
-
-    monkeypatch.setattr(framework._BaseTigrblRouter, "include_tables", fake_parent_include_tables)
-
-    router = object.__new__(framework.TigrblRouter)
-    router.include_tables((sentinel,))
-
-    assert calls == [[sentinel]]
+    assert callable(getattr(framework.TigrblRouter, "include_tables", None))
 
 
 def test_deployment_from_options_uses_active_settings_values():
