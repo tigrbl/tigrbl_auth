@@ -5,6 +5,9 @@ from dataclasses import replace
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.entity_keys import normalize_entity
+
 from .models import (
     AccessDecisionRequest,
     AccessDecisionResponse,
@@ -14,7 +17,6 @@ from .models import (
     RelationshipDefinition,
     RelationshipTuple,
 )
-from .utils import _normalize_entity, _utc_now_iso
 
 
 class RelationshipGraph:
@@ -62,9 +64,9 @@ class RelationshipGraph:
         if subject_type not in definition.subject_types:
             raise ValueError("relationship subject type is not allowed by schema")
         relationship = RelationshipTuple(
-            resource=_normalize_entity(resource_type, resource_id),
+            resource=normalize_entity(resource_type, resource_id),
             relation=relation,
-            subject=_normalize_entity(subject_type, subject_id),
+            subject=normalize_entity(subject_type, subject_id),
             tenant_id=tenant_id,
         )
         self._tuples.append(relationship)
@@ -130,7 +132,7 @@ class PolicyRegistry:
             name=name,
             tenant_id=tenant_id,
             language=language,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._definitions[definition.policy_id] = definition
         self._versions_by_policy[definition.policy_id] = []
@@ -145,7 +147,7 @@ class PolicyRegistry:
             policy_id=policy_id,
             version_number=len(current_ids) + 1,
             source=source,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
             relation=relation,
             context_equals=context_equals,
             promoted=False,

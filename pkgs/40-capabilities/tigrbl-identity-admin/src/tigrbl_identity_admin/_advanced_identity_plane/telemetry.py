@@ -3,8 +3,10 @@ from __future__ import annotations
 from typing import Any, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.redaction import redact_sensitive_mapping
+
 from .models import AnomalySignal, AuthTelemetryEvent
-from .utils import _redact_sensitive_mapping, _utc_now_iso
 
 
 class AuthAnomalyDetector:
@@ -36,8 +38,8 @@ class AuthAnomalyDetector:
             ip_country=ip_country,
             trusted_device=trusted_device,
             outcome=outcome,
-            details=_redact_sensitive_mapping(details),
-            recorded_at=_utc_now_iso(),
+            details=redact_sensitive_mapping(details),
+            recorded_at=utc_now_iso(),
         )
         self._events.append(event)
         return event, self._detect_signal(event)

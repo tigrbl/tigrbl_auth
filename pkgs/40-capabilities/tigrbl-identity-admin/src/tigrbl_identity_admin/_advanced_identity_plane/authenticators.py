@@ -5,6 +5,7 @@ from datetime import timedelta
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now, utc_now_iso
 from tigrbl_identity_jose.standards.rfc8176 import validate_amr_claim
 from tigrbl_identity_jose.standards.rfc8812 import is_webauthn_algorithm
 
@@ -17,7 +18,6 @@ from .models import (
     PasswordlessCredential,
     WebAuthnCredential,
 )
-from .utils import _utc_now, _utc_now_iso
 
 
 class AdvancedAuthenticatorRegistry:
@@ -53,7 +53,7 @@ class AdvancedAuthenticatorRegistry:
             tenant_id=tenant_id,
             credential_kind=credential_kind,
             recovery_codes=tuple(sorted(set(recovery_codes))),
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._passwordless_credentials[credential.credential_id] = credential
         return credential
@@ -82,7 +82,7 @@ class AdvancedAuthenticatorRegistry:
             rp_id=rp_id,
             algorithm=algorithm.upper(),
             transports=tuple(sorted(set(transports))),
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._webauthn_credentials[credential.credential_id] = credential
         return credential
@@ -108,7 +108,7 @@ class AdvancedAuthenticatorRegistry:
             subject_id=subject_id,
             tenant_id=tenant_id,
             method=method,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
             bound_credential_id=bound_credential_id,
         )
         self._mfa_factors[factor.factor_id] = factor
@@ -148,8 +148,8 @@ class AdvancedAuthenticatorRegistry:
             tenant_id=tenant_id,
             challenge_kind="passwordless",
             expected_nonce=uuid4().hex,
-            issued_at=_utc_now_iso(),
-            expires_at=(_utc_now() + timedelta(minutes=5)).isoformat(),
+            issued_at=utc_now_iso(),
+            expires_at=(utc_now() + timedelta(minutes=5)).isoformat(),
             allowed_methods=tuple(sorted(allowed_methods)),
             step_up_required=decision.step_up_required,
         )
@@ -202,8 +202,8 @@ class AdvancedAuthenticatorRegistry:
             tenant_id=tenant_id,
             challenge_kind="mfa",
             expected_nonce=uuid4().hex,
-            issued_at=_utc_now_iso(),
-            expires_at=(_utc_now() + timedelta(minutes=5)).isoformat(),
+            issued_at=utc_now_iso(),
+            expires_at=(utc_now() + timedelta(minutes=5)).isoformat(),
             allowed_methods=tuple(methods),
             step_up_required=True,
         )

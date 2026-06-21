@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .base64url import base64url_decode, base64url_encode
 from .clock import Clock, FrozenClock, SystemClock, unix_seconds, utc_now, utc_now_iso
+from .entity_keys import normalize_entity, tenant_key
 from .errors import (
     IdentityAuthorizationError,
     IdentityConfigurationError,
@@ -38,6 +39,7 @@ from .primitives import (
 from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonical_json_bytes, canonicalize
 from .normalization import normal_tuple
+from .redaction import SECRET_FIELD_TOKENS, redact_sensitive_mapping
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
 from .versions import semver_key, version_in_range
 
@@ -66,6 +68,7 @@ __all__ = [
     "RealmRef",
     "Scope",
     "ScopeValue",
+    "SECRET_FIELD_TOKENS",
     "StandardOwner",
     "StrUUID",
     "Subject",
@@ -77,7 +80,9 @@ __all__ = [
     "canonicalize",
     "canonical_json_bytes",
     "describe_owner",
+    "redact_sensitive_mapping",
     "normal_tuple",
+    "normalize_entity",
     "safe_display_path",
     "sanitize_local_paths",
     "new_client_id",
@@ -85,6 +90,7 @@ __all__ = [
     "new_principal_id",
     "new_realm_id",
     "new_tenant_id",
+    "tenant_key",
     "unix_seconds",
     "utc_now",
     "utc_now_iso",

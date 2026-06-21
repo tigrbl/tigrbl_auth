@@ -4,8 +4,10 @@ from dataclasses import replace
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.entity_keys import tenant_key
+
 from .models import DeviceIdentity, WorkloadIdentity
-from .utils import _tenant_key, _utc_now_iso
 
 
 class DeviceWorkloadIdentityRegistry:
@@ -36,13 +38,13 @@ class DeviceWorkloadIdentityRegistry:
             tenant_id=tenant_id,
             credential_posture=credential_posture,
             last_ip_country=last_ip_country,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
-        self._devices[_tenant_key(tenant_id, device_id)] = identity
+        self._devices[tenant_key(tenant_id, device_id)] = identity
         return identity
 
     def revoke_device(self, *, device_id: str, tenant_id: str) -> DeviceIdentity:
-        key = _tenant_key(tenant_id, device_id)
+        key = tenant_key(tenant_id, device_id)
         identity = self._devices[key]
         updated = replace(identity, revoked=True)
         self._devices[key] = updated
@@ -66,20 +68,20 @@ class DeviceWorkloadIdentityRegistry:
             namespace=namespace,
             attestor=attestor,
             credential_id=f"spire://{trust_domain}/{workload_id}/{uuid4().hex}",
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
-        self._workloads[_tenant_key(tenant_id, workload_id)] = identity
+        self._workloads[tenant_key(tenant_id, workload_id)] = identity
         return identity
 
     def rotate_workload_credential(self, *, workload_id: str, tenant_id: str) -> WorkloadIdentity:
-        key = _tenant_key(tenant_id, workload_id)
+        key = tenant_key(tenant_id, workload_id)
         identity = self._workloads[key]
         updated = replace(identity, credential_id=f"spire://{identity.trust_domain}/{workload_id}/{uuid4().hex}")
         self._workloads[key] = updated
         return updated
 
     def revoke_workload(self, *, workload_id: str, tenant_id: str) -> WorkloadIdentity:
-        key = _tenant_key(tenant_id, workload_id)
+        key = tenant_key(tenant_id, workload_id)
         identity = self._workloads[key]
         updated = replace(identity, revoked=True)
         self._workloads[key] = updated

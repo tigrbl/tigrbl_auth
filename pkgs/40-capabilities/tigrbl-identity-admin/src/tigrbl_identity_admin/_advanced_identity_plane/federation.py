@@ -3,8 +3,9 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any, Iterable, Mapping
 
+from tigrbl_identity_core.clock import utc_now_iso
+
 from .models import FederatedSession, IdentityProvider
-from .utils import _utc_now_iso
 
 
 class FederationRegistry:
@@ -89,7 +90,7 @@ class FederationRegistry:
             audience=audience,
             logout_supported=provider.logout_supported,
             normalized_claims=self.normalize_claims(provider_id, claims),
-            bound_at=_utc_now_iso(),
+            bound_at=utc_now_iso(),
         )
         self._sessions[session_id] = session
         return session
