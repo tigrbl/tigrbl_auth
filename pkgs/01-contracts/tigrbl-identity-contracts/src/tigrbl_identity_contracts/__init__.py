@@ -16,7 +16,6 @@ from .resource_server import *
 from .security_jose import *
 from .security_jwe import *
 from .tokens import *
-from .authz import *
 from .admin import *
 from .adaptive_access import *
 from .correctness import *

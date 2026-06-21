@@ -380,6 +380,7 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
     )
 
     assert not (contracts_root / "authz" / "decisions.py").exists()
+    assert not (contracts_root / "authz").exists()
     assert not (contracts_root / "key_rotation.py").exists()
     assert (contracts_root / "policy" / "__init__.py").exists()
     assert (contracts_root / "policy" / "conditions.py").exists()
