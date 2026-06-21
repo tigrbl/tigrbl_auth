@@ -5,14 +5,6 @@ from .authenticators import AdvancedAuthenticatorRegistry
 from .authorization import PolicyRegistry, RelationshipGraph
 from .federation import FederationRegistry
 from .identities import DeviceWorkloadIdentityRegistry
-from .manifest import (
-    ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES,
-    PHASE4_ADVANCED_IDENTITY_FEATURES,
-    advanced_identity_graph_auth_boundary_integrity,
-    advanced_identity_graph_auth_boundary_manifest,
-    phase4_advanced_identity_boundary_integrity,
-    phase4_advanced_identity_boundary_manifest,
-)
 from .models import (
     AccessDecisionRequest,
     AccessDecisionResponse,
@@ -47,9 +39,6 @@ __all__ = [
     'AdaptiveContext',
     'AdaptiveDecision',
     'AdvancedAuthenticatorRegistry',
-    'ADVANCED_IDENTITY_GRAPH_AUTH_FEATURES',
-    'advanced_identity_graph_auth_boundary_integrity',
-    'advanced_identity_graph_auth_boundary_manifest',
     'AnomalySignal',
     'AuthAnomalyDetector',
     'AuthTelemetryEvent',
@@ -65,7 +54,6 @@ __all__ = [
     'PolicyDefinition',
     'PolicyRegistry',
     'PolicyVersion',
-    'PHASE4_ADVANCED_IDENTITY_FEATURES',
     'RelationshipDefinition',
     'RelationshipGraph',
     'RelationshipTuple',
@@ -78,6 +66,4 @@ __all__ = [
     'build_advanced_identity_graph_auth_delivery_summary',
     'build_phase4_delivery_summary',
     'evaluate_adaptive_context',
-    'phase4_advanced_identity_boundary_integrity',
-    'phase4_advanced_identity_boundary_manifest',
 ]

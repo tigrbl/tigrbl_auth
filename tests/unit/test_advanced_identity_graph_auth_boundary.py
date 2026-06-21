@@ -12,32 +12,8 @@ from tigrbl_auth.services.advanced_identity_plane import (
     PolicyRegistry,
     RelationshipGraph,
     TrustFederationGraph,
-    advanced_identity_graph_auth_boundary_integrity,
-    advanced_identity_graph_auth_boundary_manifest,
     build_advanced_identity_graph_auth_delivery_summary,
 )
-
-
-BOUNDARY_FEATURE_IDS = {
-    "feat:f08-sso",
-    "feat:f05-passwordless-authentication",
-    "feat:f06-mfa",
-    "feat:f07-webauthn",
-    "feat:f09-federation",
-    "feat:f10-social-login",
-    "feat:f11-device-identity",
-    "feat:f12-workload-identity",
-    "feat:f15-rebac",
-    "feat:f17-policy-language",
-    "feat:f18-policy-versioning",
-    "feat:f21-access-decision-api",
-    "feat:f22-graph-based-authorization",
-    "feat:f23-relationship-modeling",
-    "feat:f26-contextual-auth-time-location",
-    "feat:f35-anomaly-detection-auth",
-    "feat:f46-trust-federation-graphs",
-    "feat:f47-cross-cloud-identity",
-}
 
 
 def _authenticators() -> AdvancedAuthenticatorRegistry:
@@ -160,18 +136,6 @@ def _nonhuman_and_trust() -> tuple[DeviceWorkloadIdentityRegistry, TrustFederati
         constraints={"audience": "gcp"},
     )
     return identities, trust
-
-
-def test_advanced_identity_graph_auth_boundary_t0_inventory_tracks_all_features():
-    manifest = advanced_identity_graph_auth_boundary_manifest()
-    integrity = advanced_identity_graph_auth_boundary_integrity()
-
-    assert set(manifest) == BOUNDARY_FEATURE_IDS
-    assert integrity["passed"] is True
-    assert integrity["feature_count"] == 18
-    assert "advanced-authentication" in integrity["categories"]
-    assert "graph-authorization" in integrity["categories"]
-    assert manifest["feat:f47-cross-cloud-identity"]["category"] == "cross-cloud-identity"
 
 
 def test_advanced_identity_graph_auth_boundary_t1_composes_advanced_identity_runtime():
