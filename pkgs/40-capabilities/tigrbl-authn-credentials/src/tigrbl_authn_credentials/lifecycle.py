@@ -10,10 +10,10 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_contracts.audit.credentials import CredentialAuditEvent
 from tigrbl_identity_contracts.credentials import (
     Credential,
     CredentialAuditAction,
-    CredentialAuditEvent,
     CredentialError,
     CredentialKind,
     CredentialStateError,

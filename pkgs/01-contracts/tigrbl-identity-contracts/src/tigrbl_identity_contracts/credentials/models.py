@@ -6,29 +6,10 @@ from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Mapping
 
-from .enums import CredentialAuditAction, CredentialKind, CredentialStatus
+from .enums import CredentialKind, CredentialStatus
 from .errors import CredentialStateError
 
 UTC = timezone.utc
-
-
-@dataclass(frozen=True, slots=True)
-class CredentialAuditEvent:
-    id: str
-    credential_id: str
-    action: CredentialAuditAction
-    occurred_at: datetime
-    principal_id: str | None = None
-    actor: str | None = None
-    outcome: str = "ok"
-    reason: str | None = None
-
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "action", CredentialAuditAction(self.action))
-        if self.occurred_at.tzinfo is None:
-            object.__setattr__(self, "occurred_at", self.occurred_at.replace(tzinfo=UTC))
-        else:
-            object.__setattr__(self, "occurred_at", self.occurred_at.astimezone(UTC))
 
 
 @dataclass(frozen=True, slots=True)
@@ -148,7 +129,6 @@ class ProofBinding:
 
 __all__ = [
     "Credential",
-    "CredentialAuditEvent",
     "IssuedCredential",
     "ProofBinding",
 ]
