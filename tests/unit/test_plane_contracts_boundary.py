@@ -125,7 +125,7 @@ def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> N
 
 def test_release_contracts_own_release_posture_surfaces() -> None:
     import tigrbl_release_contracts as contracts
-    from tigrbl_authz_policy._release_posture.models import TransportPosture
+    from tigrbl_auth_release_certification.release_posture.models import TransportPosture
 
     assert TransportPosture is contracts.TransportPosture
 
@@ -430,6 +430,7 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
         "tigrbl_authz_resource_server",
         "tigrbl_identity_runtime",
         "tigrbl_identity_storage",
+        "tigrbl_auth_release_certification",
     }
 
     for package in (

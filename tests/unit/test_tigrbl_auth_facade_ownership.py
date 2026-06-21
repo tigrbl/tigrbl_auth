@@ -32,6 +32,7 @@ SPLIT_MODULE_PREFIXES = (
     "tigrbl_authn_",
     "tigrbl_authz_",
     "tigrbl_identity_",
+    "tigrbl_auth_release_certification",
 )
 TABLE_MODULE_PREFIXES = ("tigrbl_identity_storage",)
 
@@ -49,7 +50,7 @@ FACADE_MODULES = {
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy.admin_gate",
-    "tigrbl_auth.security.certification": "tigrbl_authz_policy.certification",
+    "tigrbl_auth.security.certification": "tigrbl_auth_release_certification.certification",
     "tigrbl_auth.security.runtime_metadata": "tigrbl_authz_resource_server.runtime_metadata",
     "tigrbl_auth.services.advanced_identity_plane": "tigrbl_identity_admin.advanced_identity_plane",
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
@@ -61,7 +62,7 @@ FACADE_MODULES = {
     "tigrbl_auth.standards.oauth2.dpop": "tigrbl_auth_protocol_oauth.standards.dpop",
     "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_auth_protocol_oauth.standards.rfc9700",
     "tigrbl_auth.standards.oauth2.resource_verifier_contract": "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract",
-    "tigrbl_auth.services.release_posture_plane": "tigrbl_authz_policy.release_posture",
+    "tigrbl_auth.services.release_posture_plane": "tigrbl_auth_release_certification.release_posture",
     "tigrbl_auth.services.token_service": "tigrbl_authn_credentials.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_author.release_signing",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_authz_policy.provenance",
@@ -363,6 +364,7 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "tigrbl-auth-protocol-oauth==0.4.0.dev2",
             "tigrbl-identity-operator==0.4.0.dev2",
             "tigrbl-authz-policy==0.4.0.dev2",
+            "tigrbl-auth-release-certification==0.4.0.dev2",
             "tigrbl-identity-runtime==0.4.0.dev2",
             "tigrbl-identity-server==0.4.0.dev2",
             "tigrbl-identity-storage==0.4.0.dev2",

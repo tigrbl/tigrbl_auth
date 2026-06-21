@@ -51,7 +51,7 @@ from tigrbl_authz_policy.governance_extension import (
     build_provisioning_governance_ecosystem_delivery_summary,
     build_phase5_delivery_summary,
 )
-from tigrbl_authz_policy.release_posture import (
+from tigrbl_auth_release_certification.release_posture import (
     DisclosureRule,
     ProvenanceRequirement,
     TransportPosture,

@@ -1,23 +1,10 @@
+"""Compatibility alias for `tigrbl_auth_release_certification.certification.runtime`."""
+
 from __future__ import annotations
 
-import hashlib
-from typing import Any, Mapping, Sequence
+from importlib import import_module as _import_module
+import sys as _sys
 
-from .base import CertificationError
-from tigrbl_release_contracts import RuntimeQualification
-
-
-def stable_sha256(value: Mapping[str, Any] | Sequence[Any] | str) -> str:
-    if isinstance(value, str):
-        payload = value.encode("utf-8")
-    else:
-        payload = repr(value).encode("utf-8")
-    return hashlib.sha256(payload).hexdigest()
-
-
-def assert_runtime_qualified(
-    qualified: RuntimeQualification,
-    running: RuntimeQualification,
-) -> None:
-    if qualified != running:
-        raise CertificationError("running runtime does not match qualified deployment truth")
+_target = _import_module("tigrbl_auth_release_certification.certification.runtime")
+_sys.modules[__name__] = _target
+globals().update(_target.__dict__)

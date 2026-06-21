@@ -52,6 +52,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-runtime",
         "tigrbl-identity-server",
         "tigrbl-identity-testkit",
+        "tigrbl-auth-release-certification",
     },
     "facade": {"tigrbl-auth"},
     "apis": {

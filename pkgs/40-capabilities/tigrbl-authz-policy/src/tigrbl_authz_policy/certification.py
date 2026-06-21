@@ -1,6 +1,10 @@
-"""Compatibility re-export for split certification helpers."""
+"""Compatibility re-export for release certification helpers."""
 
 from __future__ import annotations
 
-from ._certification import *
-from ._certification import __all__
+from importlib import import_module as _import_module
+import sys as _sys
+
+_target = _import_module("tigrbl_auth_release_certification.certification")
+_sys.modules[__name__] = _target
+globals().update(_target.__dict__)

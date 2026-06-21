@@ -15,8 +15,8 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 def test_release_contracts_export_release_assurance_dtos() -> None:
     import tigrbl_release_contracts as contracts
     import tigrbl_identity_concrete as concrete
-    from tigrbl_authz_policy._certification import AlgorithmPolicy, CertificationError
-    from tigrbl_authz_policy._certification import MachineIdentity
+    from tigrbl_auth_release_certification.certification import AlgorithmPolicy, CertificationError
+    from tigrbl_auth_release_certification.certification import MachineIdentity
 
     assert contracts.ReleaseAssuranceError is contracts.CertificationError
     assert CertificationError is contracts.CertificationError
@@ -32,15 +32,15 @@ def test_release_contracts_export_release_assurance_dtos() -> None:
     ).product_surface == "public-api"
 
 
-def test_authz_certification_modules_do_not_define_moved_contract_classes() -> None:
+def test_release_certification_modules_do_not_define_moved_contract_classes() -> None:
     certification_root = (
         ROOT
         / "pkgs"
-        / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "60-runtime"
+        / "tigrbl-auth-release-certification"
         / "src"
-        / "tigrbl_authz_policy"
-        / "_certification"
+        / "tigrbl_auth_release_certification"
+        / "certification"
     )
     moved = {
         "AlgorithmPolicy",
@@ -83,6 +83,7 @@ def test_release_contracts_do_not_import_runtime_or_capability_packages() -> Non
         "tigrbl_identity_author",
         "tigrbl_identity_cli",
         "tigrbl_identity_storage",
+        "tigrbl_auth_release_certification",
     }
 
     for path in contracts_root.rglob("*.py"):

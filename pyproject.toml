@@ -55,6 +55,7 @@ dependencies = [
     "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-concrete==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
+    "tigrbl-auth-release-certification==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-trust-domain-bases==0.1.0",
     "tigrbl-security-certificate-mtls==0.1.0",
@@ -175,6 +176,7 @@ package = false
 
 [tool.uv.sources]
 tigrbl-release-contracts = { path = "pkgs/01-contracts/tigrbl-release-contracts", editable = true }
+tigrbl-auth-release-certification = { path = "pkgs/60-runtime/tigrbl-auth-release-certification", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/01-contracts/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
 tigrbl-security-certificate-mtls = { path = "pkgs/30-providers/tigrbl-security-certificate-mtls", editable = true }

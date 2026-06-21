@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_authz_policy._release_posture.provenance`."""
+"""Deprecated compatibility module for `tigrbl_auth_release_certification.release_posture.provenance`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_policy._release_posture.provenance"
-_CANONICAL_MODULE = "tigrbl_authz_policy._release_posture.provenance"
+_CANONICAL_MODULE = "tigrbl_auth_release_certification.release_posture.provenance"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

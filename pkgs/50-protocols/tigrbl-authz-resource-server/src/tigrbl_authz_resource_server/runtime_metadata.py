@@ -15,7 +15,7 @@ from tigrbl_identity_runtime.deployment import (
     resolve_deployment,
 )
 from tigrbl_identity_contracts.resource_server import CapabilityAttestation
-from tigrbl_authz_policy.certification import (
+from tigrbl_auth_release_certification.certification import (
     CapabilityRecord,
     CertificationError,
     runtime_capability_truth,
