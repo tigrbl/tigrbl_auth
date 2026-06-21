@@ -1,82 +1,55 @@
 """PKCE utilities for RFC 7636 compliance.
 
-This module implements the Proof Key for Code Exchange (PKCE)
-requirements defined in :rfc:`7636`. It provides helpers for creating
-``code_verifier`` strings and deriving ``code_challenge`` values using the
-``S256`` transformation. The functions may be disabled via runtime
-configuration to allow deployments to opt out of RFC 7636 enforcement.
+This module keeps the OAuth protocol public API while delegating reusable
+RFC 7636 proof-key primitives to ``tigrbl-security-proof-pkce``.
 
 See RFC 7636: https://www.rfc-editor.org/rfc/rfc7636
 """
 
 from __future__ import annotations
 
-import base64
-import hashlib
-import re
-import secrets
 import warnings
 from typing import Final
 
+from tigrbl_security_proof_pkce import (
+    PKCE_SPEC_URL,
+    make_pkce_verifier,
+    pkce_s256_challenge,
+    validate_pkce_verifier,
+    verify_pkce_s256_challenge,
+)
 from tigrbl_identity_runtime.settings import settings
 
-RFC7636_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7636"
-
-# Allowed characters for the code_verifier as defined by RFC 7636 §4.1
-_VERIFIER_CHARSET: Final = (
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-)
-
-# Regular expression to validate code_verifier values
-_VERIFIER_RE: Final = re.compile(r"^[A-Za-z0-9\-._~]{43,128}$")
+RFC7636_SPEC_URL: Final = PKCE_SPEC_URL
 
 
 def makeCodeVerifier(length: int = 43) -> str:
-    """Return a high-entropy ``code_verifier`` string.
+    """Return a high-entropy RFC 7636 ``code_verifier`` string."""
 
-    RFC 7636 §4.1 specifies that a ``code_verifier`` MUST be between 43 and
-    128 characters and use only ``ALPHA / DIGIT / "-" / "." / "_" / "~"``.
-    ``length`` defaults to the minimum 43 characters.
-    """
-
-    if not 43 <= length <= 128:
-        raise ValueError("length must be between 43 and 128 characters")
-    return "".join(secrets.choice(_VERIFIER_CHARSET) for _ in range(length))
+    try:
+        return make_pkce_verifier(length)
+    except ValueError as exc:
+        raise ValueError("length must be between 43 and 128 characters") from exc
 
 
 def makeCodeChallenge(verifier: str) -> str:
-    """Derive an ``S256`` ``code_challenge`` from *verifier*.
+    """Derive an ``S256`` ``code_challenge`` from *verifier*."""
 
-    The verifier is first validated against the RFC 7636 §4.1 character and
-    length requirements and then hashed using SHA-256 with the result encoded
-    using base64url without padding, as required by RFC 7636 §4.2.
-    """
-
-    if not _VERIFIER_RE.fullmatch(verifier):
-        raise ValueError("invalid code_verifier")
-    digest = hashlib.sha256(verifier.encode("ascii")).digest()
-    return base64.urlsafe_b64encode(digest).decode("ascii").rstrip("=")
+    try:
+        value = validate_pkce_verifier(verifier)
+    except ValueError as exc:
+        raise ValueError("invalid code_verifier") from exc
+    return pkce_s256_challenge(value)
 
 
 def verify_code_challenge(
     verifier: str, challenge: str, *, enabled: bool | None = None
 ) -> bool:
-    """Return ``True`` if *challenge* matches *verifier* using ``S256``.
-
-    The check may be toggled by passing ``enabled`` or globally via the
-    ``TIGRBL_AUTH_ENABLE_RFC7636`` environment variable. When disabled the
-    function returns ``True`` to allow non-PKCE clients.
-    """
+    """Return ``True`` if *challenge* matches *verifier* using ``S256``."""
 
     if enabled is None:
         enabled = settings.enable_rfc7636
-    if not enabled:
-        return True
-    try:
-        expected = makeCodeChallenge(verifier)
-    except ValueError:
-        return False
-    return secrets.compare_digest(expected, challenge)
+    return verify_pkce_s256_challenge(verifier, challenge, enabled=enabled)
 
 
 def create_code_verifier(length: int = 43) -> str:

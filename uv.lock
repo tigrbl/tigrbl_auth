@@ -2177,6 +2177,7 @@ dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-security-proof-pkce" },
 ]
 
 [package.metadata]
@@ -2186,6 +2187,7 @@ requires-dist = [
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2217,10 +2219,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-proof-pkce" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-auth-release-certification"
@@ -2306,6 +2312,7 @@ dependencies = [
     { name = "tigrbl-runtime" },
     { name = "tigrbl-security-certificate-mtls" },
     { name = "tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
@@ -2438,6 +2445,7 @@ requires-dist = [
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-security-certificate-mtls", editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" },
     { name = "tigrbl-security-proof-dpop", editable = "pkgs/30-providers/tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-proof-pkce", editable = "pkgs/30-providers/tigrbl-security-proof-pkce" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
@@ -2973,6 +2981,21 @@ requires-dist = [
 name = "tigrbl-security-proof-dpop"
 version = "0.1.0"
 source = { editable = "pkgs/30-providers/tigrbl-security-proof-dpop" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-security-proof-pkce"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-proof-pkce" }
 dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },

@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 41
+    assert len(packages) == 42
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -36,6 +36,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
     assert packages["tigrbl-security-certificate-mtls"].path.as_posix() == "pkgs/30-providers/tigrbl-security-certificate-mtls"
     assert packages["tigrbl-security-proof-dpop"].path.as_posix() == "pkgs/30-providers/tigrbl-security-proof-dpop"
+    assert packages["tigrbl-security-proof-pkce"].path.as_posix() == "pkgs/30-providers/tigrbl-security-proof-pkce"
     assert packages["tigrbl-security-signing-pqc"].path.as_posix() == "pkgs/30-providers/tigrbl-security-signing-pqc"
     assert packages["tigrbl-auth-release-certification"].path.as_posix() == "pkgs/60-runtime/tigrbl-auth-release-certification"
     assert packages["tigrbl-auth-release-certification"].import_root == "tigrbl_auth_release_certification"
@@ -86,7 +87,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "164"
+    assert payload["count"] == "169"
     assert not any(
         cell["name"]
         in {
@@ -130,6 +131,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-security-proof-dpop"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-security-proof-pkce"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -234,6 +240,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-release-contracts",
         "tigrbl-security-certificate-mtls",
         "tigrbl-security-proof-dpop",
+        "tigrbl-security-proof-pkce",
         "tigrbl-security-signing-pqc",
         "tigrbl-security-trust-contracts",
         "tigrbl-security-trust-domain-bases",

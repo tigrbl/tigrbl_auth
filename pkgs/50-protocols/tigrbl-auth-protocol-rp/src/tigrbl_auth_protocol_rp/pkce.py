@@ -1,40 +1,15 @@
 from __future__ import annotations
 
-import base64
-import hashlib
-import re
-import secrets
 from dataclasses import dataclass
-from typing import Final, Mapping
+from typing import Mapping
 
-
-PKCE_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7636"
-PKCE_CHALLENGE_METHOD: Final = "S256"
-_VERIFIER_CHARS: Final = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-_VERIFIER_RE: Final = re.compile(r"^[A-Za-z0-9\-._~]{43,128}$")
-
-
-def _b64url(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
-
-
-def make_pkce_verifier(length: int = 64) -> str:
-    if not 43 <= length <= 128:
-        raise ValueError("PKCE verifier length must be between 43 and 128 characters")
-    return "".join(secrets.choice(_VERIFIER_CHARS) for _ in range(length))
-
-
-def validate_pkce_verifier(verifier: str) -> str:
-    value = str(verifier)
-    if not _VERIFIER_RE.fullmatch(value):
-        raise ValueError("invalid PKCE code_verifier")
-    return value
-
-
-def pkce_s256_challenge(verifier: str) -> str:
-    if not verifier:
-        raise ValueError("PKCE verifier is required")
-    return _b64url(hashlib.sha256(str(verifier).encode("ascii")).digest())
+from tigrbl_security_proof_pkce import (
+    PKCE_CHALLENGE_METHOD,
+    PKCE_SPEC_URL,
+    make_pkce_verifier,
+    pkce_s256_challenge,
+    validate_pkce_verifier,
+)
 
 
 @dataclass(frozen=True, slots=True)

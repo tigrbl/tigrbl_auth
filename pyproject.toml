@@ -60,6 +60,7 @@ dependencies = [
     "tigrbl-security-trust-domain-bases==0.1.0",
     "tigrbl-security-certificate-mtls==0.1.0",
     "tigrbl-security-proof-dpop==0.1.0",
+    "tigrbl-security-proof-pkce==0.1.0",
     "tigrbl-security-signing-pqc==0.1.0",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
@@ -181,6 +182,7 @@ tigrbl-security-trust-contracts = { path = "pkgs/01-contracts/tigrbl-security-tr
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
 tigrbl-security-certificate-mtls = { path = "pkgs/30-providers/tigrbl-security-certificate-mtls", editable = true }
 tigrbl-security-proof-dpop = { path = "pkgs/30-providers/tigrbl-security-proof-dpop", editable = true }
+tigrbl-security-proof-pkce = { path = "pkgs/30-providers/tigrbl-security-proof-pkce", editable = true }
 tigrbl-security-signing-pqc = { path = "pkgs/30-providers/tigrbl-security-signing-pqc", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }

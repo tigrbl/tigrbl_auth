@@ -29,6 +29,7 @@ PACKAGE_ROOTS = [
     "tigrbl_security_trust_domain_bases",
     "tigrbl_security_certificate_mtls",
     "tigrbl_security_proof_dpop",
+    "tigrbl_security_proof_pkce",
     "tigrbl_auth_release_certification",
     "tigrbl_auth_protocol_oauth",
     "tigrbl_auth_protocol_oidc",
@@ -63,6 +64,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-security-trust-domain-bases": "tigrbl_security_trust_domain_bases",
     "tigrbl-security-certificate-mtls": "tigrbl_security_certificate_mtls",
     "tigrbl-security-proof-dpop": "tigrbl_security_proof_dpop",
+    "tigrbl-security-proof-pkce": "tigrbl_security_proof_pkce",
     "tigrbl-auth-release-certification": "tigrbl_auth_release_certification",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
@@ -161,12 +163,13 @@ def test_identity_server_declares_tigrbl_framework_dependency() -> None:
     assert "tigrbl-core==0.4.4.dev1" in dependencies
 
 
-def test_oauth_protocol_declares_dpop_signing_dependency() -> None:
+def test_oauth_protocol_declares_security_proof_dependencies() -> None:
     metadata = tomllib.loads(
         (_package_path("tigrbl-auth-protocol-oauth") / "pyproject.toml").read_text(encoding="utf-8")
     )
 
     assert "swarmauri_signing_dpop==0.1.1" in set(metadata["project"].get("dependencies", []))
+    assert "tigrbl-security-proof-pkce==0.1.0" in set(metadata["project"].get("dependencies", []))
 
 
 def test_credentials_token_service_exports_async_runtime_helper() -> None:

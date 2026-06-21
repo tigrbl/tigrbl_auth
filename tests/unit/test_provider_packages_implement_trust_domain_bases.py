@@ -15,6 +15,14 @@ def test_pqc_provider_inherits_signing_domain_base() -> None:
     assert "ML-DSA-65" in PQCSigningProvider().supports().algs
 
 
+def test_pkce_provider_inherits_proof_of_possession_domain_base() -> None:
+    from tigrbl_security_proof_pkce import PkceProofProvider
+    from tigrbl_security_trust_domain_bases import ProofOfPossessionDomainBase
+
+    assert issubclass(PkceProofProvider, ProofOfPossessionDomainBase)
+    assert "S256" in PkceProofProvider().supports().algs
+
+
 def test_provider_packages_expose_trust_domain_base_implementers() -> None:
     packages = [path for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()]
     assert packages

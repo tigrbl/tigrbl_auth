@@ -31,6 +31,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-jose",
         "tigrbl-security-certificate-mtls",
         "tigrbl-security-proof-dpop",
+        "tigrbl-security-proof-pkce",
         "tigrbl-security-signing-pqc",
     },
     "capabilities": {
