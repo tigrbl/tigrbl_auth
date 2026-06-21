@@ -17,9 +17,9 @@ from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.mtls import presented_certificate_thumbprint
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import verify_access_token_sender_constraint
+from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_core.typing import Principal
 
 _api_key_backend = ApiKeyBackend()
 _jwt_coder: JWTCoder | None = None
@@ -41,7 +41,7 @@ async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str |
     return row if row is not None and _active(row) else None
 
 
-async def _user_from_api_key(raw_key: str, db: AsyncSession) -> Principal | None:
+async def _user_from_api_key(raw_key: str, db: AsyncSession) -> PrincipalLike | None:
     try:
         principal, _ = await _api_key_backend.authenticate(db, raw_key)
         return principal
@@ -83,7 +83,7 @@ async def get_current_principal(
     api_key: str | None = Header(None, alias="x-api-key"),
     dpop: str | None = Header(None, alias="DPoP"),
     db: AsyncSession = Depends(get_db),
-) -> Principal:
+) -> PrincipalLike:
     if api_key:
         if user := await _user_from_api_key(api_key, db):
             return user

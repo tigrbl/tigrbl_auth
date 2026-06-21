@@ -40,8 +40,8 @@ from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_ses
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
 from tigrbl_auth_protocol_oauth.standards.mtls import presented_certificate_thumbprint
+from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_core.typing import Principal
 
 
 # ---------------------------------------------------------------------
@@ -70,7 +70,7 @@ async def _user_from_jwt(token: str, db: AsyncSession, *, cert_thumbprint: str |
     return await first_user_by_filters(db, {"id": payload["sub"], "is_active": True})
 
 
-async def _user_from_api_key(raw_key: str, db: AsyncSession) -> Principal | None:
+async def _user_from_api_key(raw_key: str, db: AsyncSession) -> PrincipalLike | None:
     try:
         principal, _ = await _api_key_backend.authenticate(db, raw_key)
         return principal
@@ -121,7 +121,7 @@ async def get_current_principal(  # type: ignore[override]
     api_key: str | None = Header(None, alias="x-api-key"),
     dpop: str | None = Header(None, alias="DPoP"),
     db: AsyncSession = Depends(get_db),
-) -> Principal:
+) -> PrincipalLike:
     """
     Resolve the request principal via **exactly one** of:
 

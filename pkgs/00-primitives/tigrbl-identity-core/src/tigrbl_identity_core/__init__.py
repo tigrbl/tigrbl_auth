@@ -41,7 +41,7 @@ from .json_canonicalization import canonical_json_bytes, canonicalize
 from .normalization import normal_tuple
 from .patterns import matches_dotted_pattern
 from .redaction import SECRET_FIELD_TOKENS, redact_sensitive_mapping
-from .typing import JWTPayload, Principal, StrUUID, uuid_str
+from .typing import StrUUID, uuid_str
 from .versions import semver_key, version_in_range
 
 __all__ = [
@@ -58,9 +58,7 @@ __all__ = [
     "InvalidKeyError",
     "InvalidTokenError",
     "Issuer",
-    "JWTPayload",
     "parse_time",
-    "Principal",
     "PrincipalId",
     "PrincipalRef",
     "RealmId",

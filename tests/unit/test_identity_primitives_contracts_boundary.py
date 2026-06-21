@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-for src in sorted((ROOT / "pkgs").glob("*/src")):
+for src in sorted((ROOT / "pkgs").glob("*/*/src")):
     value = str(src)
     if value not in sys.path:
         sys.path.insert(0, value)
@@ -18,6 +18,11 @@ def test_identity_primitives_exports_public_values() -> None:
 
     assert core.Scope.parse("openid profile").contains("openid")
     assert core.Scope.parse(["openid", "email"]).serialize() == "openid email"
+    assert isinstance(core.uuid_str(), str)
+    assert (
+        core.StrUUID("00000000-0000-0000-0000-000000000000")
+        == "00000000-0000-0000-0000-000000000000"
+    )
     assert str(core.new_tenant_id())
     assert str(core.new_principal_id())
     assert str(core.new_client_id())
@@ -53,6 +58,60 @@ def test_identity_primitives_do_not_own_liveness_contracts() -> None:
     assert not hasattr(core, "ConvergenceEvent")
     assert not hasattr(core, "ConvergenceState")
     assert not hasattr(core, "LivenessConvergenceReport")
+
+
+def test_identity_primitives_do_not_own_jwt_payload_or_principal_protocol() -> None:
+    import tigrbl_identity_core as core
+    import tigrbl_identity_core.typing as core_typing
+    from tigrbl_identity_contracts.principals import PrincipalLike
+    from tigrbl_identity_contracts.tokens import JWTPayload
+
+    assert not hasattr(core, "JWTPayload")
+    assert not hasattr(core, "Principal")
+    assert not hasattr(core_typing, "JWTPayload")
+    assert not hasattr(core_typing, "Principal")
+    assert JWTPayload.__module__ == "tigrbl_identity_contracts.tokens"
+    assert PrincipalLike.__module__ == "tigrbl_identity_contracts.principals.protocols"
+
+
+def test_auth_helpers_import_principal_protocol_from_contracts() -> None:
+    targets = [
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "backends.py",
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authn-credentials"
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "authenticators.py",
+        ROOT
+        / "pkgs"
+        / "60-runtime"
+        / "tigrbl-identity-server"
+        / "src"
+        / "tigrbl_identity_server"
+        / "security"
+        / "auth.py",
+        ROOT
+        / "pkgs"
+        / "60-runtime"
+        / "tigrbl-identity-server"
+        / "src"
+        / "tigrbl_identity_server"
+        / "security"
+        / "deps.py",
+    ]
+
+    for path in targets:
+        source = path.read_text(encoding="utf-8")
+        assert "from tigrbl_identity_core.typing import Principal" not in source
+        assert "from tigrbl_identity_contracts.principals import PrincipalLike" in source
 
 
 def test_identity_primitives_import_dag_clean_room() -> None:

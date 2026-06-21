@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from tigrbl_identity_jose.key_management import verify_pw
-from tigrbl_identity_core.typing import Principal
+from tigrbl_identity_contracts.principals import PrincipalLike
 from tigrbl_identity_storage.tables import ApiKey, Client, ServiceKey, User
 
 
@@ -38,7 +38,7 @@ class ApiKeyBackend:
     async def _get_service_key_row(self, db: Any, digest: str) -> ServiceKey | None:
         return await ServiceKey.lookup_active(db, digest=digest)
 
-    async def authenticate(self, db: Any, api_key: str) -> tuple[Principal, str]:
+    async def authenticate(self, db: Any, api_key: str) -> tuple[PrincipalLike, str]:
         digest = ApiKey.digest_of(api_key)
 
         key_row = await self._get_key_row(db, digest)
