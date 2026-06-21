@@ -145,6 +145,7 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tigrbl_identity_contracts as control_contracts
     import tigrbl_identity_contracts as management_contracts
     import tigrbl_identity_contracts as user_contracts
+    import tigrbl_identity_concrete as concrete
     from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
     from tigrbl_identity_admin._control_plane import models as admin_models
 
@@ -156,9 +157,9 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
     assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
     assert advanced_models.TrustPath is control_contracts.TrustPath
-    assert advanced_models.PasswordlessCredential is user_contracts.PasswordlessCredential
+    assert advanced_models.PasswordlessCredential is concrete.PasswordlessCredential
     assert advanced_models.AuthenticationChallenge is user_contracts.AuthenticationChallenge
-    assert advanced_models.WorkloadIdentity is user_contracts.WorkloadIdentity
+    assert advanced_models.WorkloadIdentity is concrete.WorkloadIdentity
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
 
@@ -175,14 +176,24 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
     assert not (contracts_root / "advanced_identity.py").exists()
     assert (contracts_root / "authentication" / "__init__.py").exists()
     assert (contracts_root / "authentication" / "challenges.py").exists()
-    assert (contracts_root / "credentials" / "passwordless.py").exists()
-    assert (contracts_root / "credentials" / "webauthn.py").exists()
-    assert (contracts_root / "credentials" / "factors.py").exists()
+    assert not (contracts_root / "credentials" / "passwordless.py").exists()
+    assert not (contracts_root / "credentials" / "webauthn.py").exists()
+    assert not (contracts_root / "credentials" / "factors.py").exists()
     assert (contracts_root / "federation" / "__init__.py").exists()
     assert (contracts_root / "federation" / "providers.py").exists()
     assert (contracts_root / "federation" / "sessions.py").exists()
-    assert (contracts_root / "principals" / "devices.py").exists()
-    assert (contracts_root / "principals" / "workloads.py").exists()
+    assert not (contracts_root / "principals" / "devices.py").exists()
+    assert not (contracts_root / "principals" / "workloads.py").exists()
+    concrete_root = (
+        ROOT
+        / "pkgs"
+        / "10-concrete"
+        / "tigrbl-identity-concrete"
+        / "src"
+        / "tigrbl_identity_concrete"
+    )
+    assert (concrete_root / "credentials.py").exists()
+    assert (concrete_root / "identities.py").exists()
 
 
 def test_authority_contracts_are_domain_packaged() -> None:
@@ -301,8 +312,8 @@ def test_service_identity_contracts_are_placed_with_owning_domains() -> None:
 
     assert not (contracts_root / "service_identity.py").exists()
     assert not (contracts_root / "service_identity").exists()
-    assert (contracts_root / "principals" / "services.py").exists()
-    assert (contracts_root / "credentials" / "services.py").exists()
+    assert not (contracts_root / "principals" / "services.py").exists()
+    assert not (contracts_root / "credentials" / "services.py").exists()
     assert (contracts_root / "authentication" / "services.py").exists()
     assert (contracts_root / "delegation" / "admin.py").exists()
 

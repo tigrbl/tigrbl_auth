@@ -2261,6 +2261,7 @@ dependencies = [
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-cli" },
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials" },
@@ -2388,6 +2389,7 @@ requires-dist = [
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
+    { name = "tigrbl-identity-concrete", editable = "pkgs/10-concrete/tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts", editable = "pkgs/01-contracts/tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
@@ -2441,6 +2443,7 @@ name = "tigrbl-authn-credentials"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authn-credentials" }
 dependencies = [
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-operator" },
@@ -2449,6 +2452,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
@@ -2460,12 +2464,14 @@ name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-release-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
 ]
@@ -2567,11 +2573,15 @@ name = "tigrbl-identity-admin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-author"
@@ -2598,6 +2608,17 @@ requires-dist = [
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2.0" },
 ]
+
+[[package]]
+name = "tigrbl-identity-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-contracts"
@@ -2712,11 +2733,15 @@ name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-principals" }
 dependencies = [
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-identity-resource-server"

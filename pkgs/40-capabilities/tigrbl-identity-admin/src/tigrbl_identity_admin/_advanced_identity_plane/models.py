@@ -15,10 +15,15 @@ from tigrbl_identity_contracts.adaptive_access import (
     TrustPath,
 )
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
-from tigrbl_identity_contracts.credentials import MfaFactor, PasswordlessCredential, WebAuthnCredential
 from tigrbl_identity_contracts.federation import FederatedSession, IdentityProvider
 from tigrbl_identity_contracts.policy.lifecycle import PolicyDefinition, PolicyVersion
-from tigrbl_identity_contracts.principals import DeviceIdentity, WorkloadIdentity
+from tigrbl_identity_concrete import (
+    DeviceIdentity,
+    MfaFactor,
+    PasswordlessCredential,
+    WebAuthnCredential,
+    WorkloadIdentity,
+)
 
 __all__ = [
     "AccessDecisionRequest",

@@ -50,7 +50,7 @@ class TenantBoundary:
 
 
 @dataclass(frozen=True, slots=True)
-class Principal:
+class Identity:
     id: str
     kind: PrincipalKind
     subject: str
@@ -90,14 +90,14 @@ class Principal:
     def is_superuser(self) -> bool:
         return AuthorityRole.SUPERUSER.value in self.roles
 
-    def with_roles(self, *roles: str | AuthorityRole) -> "Principal":
+    def with_roles(self, *roles: str | AuthorityRole) -> "Identity":
         return replace(self, roles=_normalize_roles((*self.roles, *roles)))
 
-    def without_roles(self, *roles: str | AuthorityRole) -> "Principal":
+    def without_roles(self, *roles: str | AuthorityRole) -> "Identity":
         removed = {str(role.value if isinstance(role, AuthorityRole) else role) for role in roles}
         return replace(self, roles=tuple(role for role in self.roles if role not in removed))
 
-    def with_status(self, status: PrincipalStatus | str) -> "Principal":
+    def with_status(self, status: PrincipalStatus | str) -> "Identity":
         return replace(self, status=PrincipalStatus(status))
 
     def to_dict(self) -> dict[str, Any]:
@@ -111,6 +111,9 @@ class Principal:
             "roles": list(self.roles),
             "attributes": dict(self.attributes),
         }
+
+
+Principal = Identity
 
 
 @dataclass(frozen=True, slots=True)
@@ -151,6 +154,7 @@ class SubjectAlias:
 
 
 __all__ = [
+    "Identity",
     "Principal",
     "Realm",
     "SubjectAlias",

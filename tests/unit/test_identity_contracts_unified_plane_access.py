@@ -17,6 +17,7 @@ def test_identity_contracts_are_canonical_for_identity_and_admin_contracts() -> 
     from tigrbl_identity_contracts.policy.requests import PolicyRequest
 
     assert contracts.Principal.__module__.startswith("tigrbl_identity_contracts")
+    assert contracts.Identity.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.Credential.__module__.startswith("tigrbl_identity_contracts")
     assert PolicyRequest.__module__.startswith("tigrbl_identity_contracts.policy")
     assert contracts.ProtectedResourceVerifierContract.__module__.startswith("tigrbl_identity_contracts")
@@ -26,7 +27,7 @@ def test_identity_contracts_are_canonical_for_identity_and_admin_contracts() -> 
     assert not hasattr(contracts, "PolicyRequest")
     assert not hasattr(contracts, "KeyRotationPolicyVersion")
     assert contracts.AdminResource.__module__.startswith("tigrbl_identity_contracts")
-    assert contracts.ServiceIdentity.__module__.startswith("tigrbl_identity_contracts")
+    assert not hasattr(contracts, "ServiceIdentity")
     assert contracts.SDKPackage.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.ResidencyZone.__module__.startswith("tigrbl_identity_contracts")
 

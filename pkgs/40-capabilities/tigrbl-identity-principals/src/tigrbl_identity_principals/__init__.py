@@ -5,6 +5,7 @@ from __future__ import annotations
 from .directory import PrincipalDirectory
 from .factories import (
     AuthorityRole,
+    Identity,
     NONHUMAN_PRINCIPAL_KINDS,
     Principal,
     PrincipalKind,
@@ -26,6 +27,7 @@ from .factories import (
 
 __all__ = [
     "AuthorityRole",
+    "Identity",
     "NONHUMAN_PRINCIPAL_KINDS",
     "Principal",
     "PrincipalDirectory",

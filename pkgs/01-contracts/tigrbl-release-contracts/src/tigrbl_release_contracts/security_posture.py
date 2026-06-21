@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
 from typing import Final
 
 ECDSA_SIGNATURE_ALGS = frozenset({"ES256", "ES384", "ES512", "ES256K"})
@@ -47,17 +46,6 @@ class VerifierPolicy:
 
 
 @dataclass(frozen=True)
-class MachineIdentity:
-    subject_id: str
-    owner_id: str
-    tenant_id: str
-    credential_id: str
-    credential_rotates_at: datetime
-    allowed_audiences: frozenset[str]
-    human: bool = False
-
-
-@dataclass(frozen=True)
 class RealmState:
     realm_id: str
     slug: str
@@ -94,7 +82,6 @@ __all__ = [
     "EDDSA_SIGNATURE_ALGS",
     "KeyBoundary",
     "ML_DSA_65_ALG",
-    "MachineIdentity",
     "PQC_JWK_KTY",
     "PQC_SIGNATURE_ALGS",
     "RealmState",

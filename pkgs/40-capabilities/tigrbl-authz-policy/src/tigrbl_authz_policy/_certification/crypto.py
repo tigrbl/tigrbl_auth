@@ -6,13 +6,13 @@ from datetime import datetime, timezone
 from typing import Any, Mapping, Sequence
 
 from .base import CertificationError
+from tigrbl_identity_concrete import MachineIdentity
 from tigrbl_release_contracts import (
     AlgorithmPolicy,
     ECDSA_SIGNATURE_ALGS,
     EDDSA_SIGNATURE_ALGS,
     KeyBoundary,
     ML_DSA_65_ALG,
-    MachineIdentity,
     PQC_JWK_KTY,
     PQC_SIGNATURE_ALGS,
     VerifierPolicy,
@@ -154,7 +154,7 @@ def assert_machine_identity_governed(identity: MachineIdentity, *, now: datetime
         raise CertificationError("machine identity cannot be marked human")
     if not identity.owner_id or not identity.tenant_id:
         raise CertificationError("machine identity requires owner and tenant scope")
-    if identity.credential_rotates_at <= current:
+    if identity.credential_rotates_at is None or identity.credential_rotates_at <= current:
         raise CertificationError("machine identity credential is past rotation deadline")
     if not identity.allowed_audiences:
         raise CertificationError("machine identity requires bounded audiences")

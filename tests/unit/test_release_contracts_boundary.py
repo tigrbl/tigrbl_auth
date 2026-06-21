@@ -14,11 +14,15 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 def test_release_contracts_export_release_assurance_dtos() -> None:
     import tigrbl_release_contracts as contracts
+    import tigrbl_identity_concrete as concrete
     from tigrbl_authz_policy._certification import AlgorithmPolicy, CertificationError
+    from tigrbl_authz_policy._certification import MachineIdentity
 
     assert contracts.ReleaseAssuranceError is contracts.CertificationError
     assert CertificationError is contracts.CertificationError
     assert AlgorithmPolicy is contracts.AlgorithmPolicy
+    assert not hasattr(contracts, "MachineIdentity")
+    assert MachineIdentity is concrete.MachineIdentity
     assert contracts.RuntimeQualification(
         artifact_sha256="a",
         dependency_lock_sha256="b",

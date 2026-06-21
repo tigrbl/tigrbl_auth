@@ -52,6 +52,7 @@ dependencies = [
     "httpx==0.28.1",
     "aiosqlite==0.22.1",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-trust-domain-bases==0.1.0",
@@ -185,6 +186,7 @@ tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable =
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/01-contracts/tigrbl-identity-contracts", editable = true }
+tigrbl-identity-concrete = { path = "pkgs/10-concrete/tigrbl-identity-concrete", editable = true }
 tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
 tigrbl-identity-jose = { path = "pkgs/30-providers/tigrbl-identity-jose", editable = true }

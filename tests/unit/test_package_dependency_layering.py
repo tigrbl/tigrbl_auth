@@ -20,6 +20,9 @@ PYTHON_PACKAGE_LAYERS = {
     "bases": {
         "tigrbl-security-trust-domain-bases",
     },
+    "concrete": {
+        "tigrbl-identity-concrete",
+    },
     "storage": {
         "tigrbl-identity-storage",
     },
@@ -71,6 +74,7 @@ PYTHON_LAYER_FOLDERS = {
     "primitives": "00-primitives",
     "contracts": "01-contracts",
     "bases": "05-bases",
+    "concrete": "10-concrete",
     "storage": "20-storage",
     "providers": "30-providers",
     "capabilities": "40-capabilities",

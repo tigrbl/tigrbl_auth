@@ -8,6 +8,7 @@ from uuid import uuid4
 from tigrbl_identity_contracts.authority import AuthorityRole
 from tigrbl_identity_contracts.principals import (
     NONHUMAN_PRINCIPAL_KINDS,
+    Identity,
     Principal,
     PrincipalKind,
     PrincipalStatus,
@@ -15,6 +16,15 @@ from tigrbl_identity_contracts.principals import (
     SubjectAlias,
     TenantBoundary,
     TenantMembership,
+)
+from tigrbl_identity_concrete import (
+    AdminIdentity,
+    AppIdentity,
+    DeviceIdentity,
+    MachineIdentity,
+    ServiceIdentity,
+    UserIdentity,
+    WorkloadIdentity,
 )
 
 
@@ -41,9 +51,8 @@ def create_user_principal(
     roles: Iterable[str | AuthorityRole] = (),
     attributes: Mapping[str, Any] | None = None,
 ) -> Principal:
-    return Principal(
+    return UserIdentity(
         id=id or new_principal_id(),
-        kind=PrincipalKind.USER,
         subject=subject,
         tenant_id=tenant_id,
         display_name=display_name,
@@ -66,9 +75,8 @@ def create_admin_principal(
         role_values.append(AuthorityRole.OWNER)
     if superuser:
         role_values.append(AuthorityRole.SUPERUSER)
-    return Principal(
+    return AdminIdentity(
         id=id or new_principal_id(),
-        kind=PrincipalKind.ADMIN,
         subject=subject,
         tenant_id=tenant_id,
         roles=_normalize_roles(role_values),
@@ -87,9 +95,15 @@ def create_nonhuman_principal(
     principal_kind = PrincipalKind(kind)
     if principal_kind not in NONHUMAN_PRINCIPAL_KINDS:
         raise ValueError(f"{principal_kind.value!r} is not a nonhuman principal kind")
-    return Principal(
+    identity_cls = {
+        PrincipalKind.APP: AppIdentity,
+        PrincipalKind.DEVICE: DeviceIdentity,
+        PrincipalKind.MACHINE: MachineIdentity,
+        PrincipalKind.SERVICE: ServiceIdentity,
+        PrincipalKind.WORKLOAD: WorkloadIdentity,
+    }[principal_kind]
+    return identity_cls(
         id=id or new_principal_id(),
-        kind=principal_kind,
         subject=subject,
         tenant_id=tenant_id,
         display_name=display_name,
@@ -140,6 +154,7 @@ def alias_for(
 
 __all__ = [
     "AuthorityRole",
+    "Identity",
     "NONHUMAN_PRINCIPAL_KINDS",
     "Principal",
     "PrincipalKind",

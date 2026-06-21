@@ -19,9 +19,18 @@ from tigrbl_identity_contracts.credentials import (
     CredentialStateError,
     CredentialStatus,
     CredentialVerificationError,
-    DpopKeyCredential,
     IssuedCredential,
+)
+from tigrbl_identity_concrete import (
+    ApiKeyCredential,
+    ClientSecretCredential,
+    DpopKeyCredential,
+    MfaCredential,
     MtlsCertificateCredential,
+    PasskeyCredential,
+    PasswordCredential,
+    PasswordResetCredential,
+    ServiceKeyCredential,
 )
 
 UTC = timezone.utc
@@ -72,16 +81,26 @@ def issue_shared_secret(
 ) -> IssuedCredential:
     active_secret = secret or secrets.token_urlsafe(32)
     now = utc_now()
-    credential = Credential(
-        id=new_credential_id(),
-        principal_id=principal_id,
-        kind=CredentialKind(kind),
-        secret_digest=hash_secret(active_secret),
-        public_id=public_id,
-        created_at=now,
-        expires_at=now + ttl if ttl is not None else None,
-        metadata=dict(metadata or {}),
-    )
+    credential_cls = {
+        CredentialKind.API_KEY: ApiKeyCredential,
+        CredentialKind.CLIENT_SECRET: ClientSecretCredential,
+        CredentialKind.MFA_FACTOR: MfaCredential,
+        CredentialKind.PASSWORD: PasswordCredential,
+        CredentialKind.PASSWORD_RESET: PasswordResetCredential,
+        CredentialKind.SERVICE_KEY: ServiceKeyCredential,
+    }.get(CredentialKind(kind), Credential)
+    credential_kwargs = {
+        "principal_id": principal_id,
+        "secret_digest": hash_secret(active_secret),
+        "public_id": public_id,
+        "created_at": now,
+        "expires_at": now + ttl if ttl is not None else None,
+        "metadata": dict(metadata or {}),
+    }
+    if credential_cls is Credential:
+        credential = Credential(id=new_credential_id(), kind=CredentialKind(kind), **credential_kwargs)
+    else:
+        credential = credential_cls(**credential_kwargs)
     return IssuedCredential(credential=credential, secret=active_secret)
 
 
@@ -163,16 +182,11 @@ def create_passkey_credential(
         raise ValueError("passkey credential_id is required")
     if not public_key:
         raise ValueError("passkey public_key is required")
-    return Credential(
-        id=new_credential_id(),
+    return PasskeyCredential(
         principal_id=principal_id,
-        kind=CredentialKind.PASSKEY_WEBAUTHN,
-        public_id=credential_id,
-        metadata={
-            "credential_id": credential_id,
-            "public_key": public_key,
-            "sign_count": int(sign_count),
-        },
+        credential_id=credential_id,
+        public_key=public_key,
+        sign_count=sign_count,
     )
 
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Mapping
-from uuid import uuid4
 
 from .enums import CredentialAuditAction, CredentialKind, CredentialStatus
 from .errors import CredentialStateError
@@ -40,30 +39,27 @@ class Credential:
     secret_digest: str | None = None
     public_id: str | None = None
     status: CredentialStatus = CredentialStatus.ACTIVE
-    created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
-    expires_at: datetime | None = None
+    created_at: datetime | str = field(default_factory=lambda: datetime.now(UTC))
+    expires_at: datetime | str | None = None
     version: int = 1
     rotated_from: str | None = None
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        if not self.id:
+        credential_id = str(self.id).strip()
+        principal_id = str(self.principal_id).strip()
+        if not credential_id:
             raise ValueError("credential id is required")
-        if not self.principal_id:
+        if not principal_id:
             raise ValueError("principal id is required")
+        object.__setattr__(self, "id", credential_id)
+        object.__setattr__(self, "principal_id", principal_id)
         object.__setattr__(self, "kind", CredentialKind(self.kind))
         object.__setattr__(self, "status", CredentialStatus(self.status))
-        if self.created_at.tzinfo is None:
-            object.__setattr__(self, "created_at", self.created_at.replace(tzinfo=UTC))
-        else:
-            object.__setattr__(self, "created_at", self.created_at.astimezone(UTC))
+        created_at = _coerce_datetime(self.created_at, "created_at")
+        object.__setattr__(self, "created_at", created_at)
         if self.expires_at is not None:
-            expires_at = (
-                self.expires_at.replace(tzinfo=UTC)
-                if self.expires_at.tzinfo is None
-                else self.expires_at.astimezone(UTC)
-            )
-            object.__setattr__(self, "expires_at", expires_at)
+            object.__setattr__(self, "expires_at", _coerce_datetime(self.expires_at, "expires_at"))
         object.__setattr__(self, "metadata", dict(self.metadata))
 
     def is_expired(self, now: datetime | None = None) -> bool:
@@ -93,105 +89,15 @@ class IssuedCredential:
     secret: str | None = None
 
 
-def _clean_tuple(values: tuple[str, ...] | list[str] | None) -> tuple[str, ...]:
-    return tuple(dict.fromkeys(str(value).strip() for value in values or () if str(value).strip()))
-
-
-def _required_text(value: str, field_name: str) -> str:
-    cleaned = str(value).strip()
-    if not cleaned:
-        raise ValueError(f"{field_name} is required")
-    return cleaned
-
-
-def _clean_mapping(value: Mapping[str, Any], field_name: str) -> dict[str, Any]:
-    if not isinstance(value, Mapping):
-        raise ValueError(f"{field_name} must be a mapping")
-    return dict(value)
-
-
-@dataclass(frozen=True, slots=True)
-class MtlsCertificateCredential:
-    principal_id: str
-    certificate_thumbprint: str
-    id: str = field(default_factory=lambda: str(uuid4()))
-    subject_dn: str | None = None
-    san_dns: tuple[str, ...] = ()
-    san_uri: tuple[str, ...] = ()
-    san_ip: tuple[str, ...] = ()
-    san_email: tuple[str, ...] = ()
-    status: CredentialStatus = CredentialStatus.ACTIVE
-    metadata: Mapping[str, Any] = field(default_factory=dict)
-
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "id", _required_text(self.id, "credential id"))
-        object.__setattr__(self, "principal_id", _required_text(self.principal_id, "principal id"))
-        object.__setattr__(
-            self,
-            "certificate_thumbprint",
-            _required_text(self.certificate_thumbprint, "certificate thumbprint"),
-        )
-        if self.subject_dn is not None:
-            object.__setattr__(self, "subject_dn", str(self.subject_dn).strip() or None)
-        object.__setattr__(self, "status", CredentialStatus(self.status))
-        object.__setattr__(self, "san_dns", _clean_tuple(self.san_dns))
-        object.__setattr__(self, "san_uri", _clean_tuple(self.san_uri))
-        object.__setattr__(self, "san_ip", _clean_tuple(self.san_ip))
-        object.__setattr__(self, "san_email", _clean_tuple(self.san_email))
-        object.__setattr__(self, "metadata", dict(self.metadata))
-
-    @property
-    def confirmation_claim(self) -> dict[str, str]:
-        return {"x5t#S256": self.certificate_thumbprint}
-
-    def to_credential(self) -> Credential:
-        return Credential(
-            id=self.id,
-            principal_id=self.principal_id,
-            kind=CredentialKind.MTLS_CERTIFICATE,
-            public_id=self.certificate_thumbprint,
-            status=self.status,
-            metadata={
-                **dict(self.metadata),
-                "subject_dn": self.subject_dn,
-                "san_dns": list(self.san_dns),
-                "san_uri": list(self.san_uri),
-                "san_ip": list(self.san_ip),
-                "san_email": list(self.san_email),
-            },
-        )
-
-
-@dataclass(frozen=True, slots=True)
-class DpopKeyCredential:
-    principal_id: str
-    jwk_thumbprint: str
-    id: str = field(default_factory=lambda: str(uuid4()))
-    public_jwk: Mapping[str, Any] = field(default_factory=dict)
-    status: CredentialStatus = CredentialStatus.ACTIVE
-    metadata: Mapping[str, Any] = field(default_factory=dict)
-
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "id", _required_text(self.id, "credential id"))
-        object.__setattr__(self, "principal_id", _required_text(self.principal_id, "principal id"))
-        object.__setattr__(self, "jwk_thumbprint", _required_text(self.jwk_thumbprint, "JWK thumbprint"))
-        object.__setattr__(self, "status", CredentialStatus(self.status))
-        object.__setattr__(self, "public_jwk", _clean_mapping(self.public_jwk, "public_jwk"))
-        object.__setattr__(self, "metadata", _clean_mapping(self.metadata, "metadata"))
-
-    @property
-    def confirmation_claim(self) -> dict[str, str]:
-        return {"jkt": self.jwk_thumbprint}
-
-    def to_credential(self) -> Credential:
-        return Credential(
-            id=self.id,
-            principal_id=self.principal_id,
-            kind=CredentialKind.DPOP_KEY,
-            public_id=self.jwk_thumbprint,
-            status=self.status,
-            metadata={**dict(self.metadata), "public_jwk": dict(self.public_jwk)},
-        )
+def _coerce_datetime(value: datetime | str, field_name: str) -> datetime:
+    if isinstance(value, str):
+        try:
+            value = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise ValueError(f"{field_name} must be an ISO datetime") from exc
+    if value.tzinfo is None:
+        return value.replace(tzinfo=UTC)
+    return value.astimezone(UTC)
 
 
 @dataclass(frozen=True, slots=True)
@@ -217,21 +123,25 @@ class ProofBinding:
         object.__setattr__(self, "confirmation_claim", claim)
 
     @classmethod
-    def for_mtls(cls, credential: MtlsCertificateCredential) -> "ProofBinding":
-        return cls("mtls", credential.confirmation_claim, credential_id=credential.id)
+    def for_mtls(cls, credential: object) -> "ProofBinding":
+        return cls(
+            "mtls",
+            getattr(credential, "confirmation_claim"),
+            credential_id=getattr(credential, "id", None),
+        )
 
     @classmethod
     def for_dpop(
         cls,
-        jwk_thumbprint: str | DpopKeyCredential,
+        jwk_thumbprint: str | object,
         *,
         credential_id: str | None = None,
     ) -> "ProofBinding":
-        if isinstance(jwk_thumbprint, DpopKeyCredential):
+        if not isinstance(jwk_thumbprint, str) and hasattr(jwk_thumbprint, "confirmation_claim"):
             return cls(
                 "dpop",
-                jwk_thumbprint.confirmation_claim,
-                credential_id=credential_id or jwk_thumbprint.id,
+                getattr(jwk_thumbprint, "confirmation_claim"),
+                credential_id=credential_id or getattr(jwk_thumbprint, "id", None),
             )
         return cls("dpop", {"jkt": jwk_thumbprint}, credential_id=credential_id)
 
@@ -239,8 +149,6 @@ class ProofBinding:
 __all__ = [
     "Credential",
     "CredentialAuditEvent",
-    "DpopKeyCredential",
     "IssuedCredential",
-    "MtlsCertificateCredential",
     "ProofBinding",
 ]
