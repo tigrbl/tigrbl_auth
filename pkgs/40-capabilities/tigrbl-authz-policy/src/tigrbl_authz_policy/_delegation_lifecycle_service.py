@@ -6,10 +6,8 @@ from typing import Iterable, Mapping
 from uuid import uuid4
 
 from tigrbl_identity_core.clock import utc_now
-
-from .authority_graph import AuthorityScope
-from .delegation_proofs import prove_delegation_attenuation
-from ._delegation_lifecycle_models import (
+from tigrbl_identity_core.json_canonicalization import canonical_hash
+from tigrbl_identity_contracts.delegation import (
     DELEGATION_GRANT_UIX_WORKFLOWS,
     MANAGEMENT_DELEGATION_SURFACES,
     TERMINAL_GRANT_STATUSES,
@@ -17,8 +15,10 @@ from ._delegation_lifecycle_models import (
     DelegationGrantLifecycleEntry,
     DelegationLifecycleAuditEvent,
     DelegationTokenLink,
-    _stable_hash,
 )
+
+from .authority_graph import AuthorityScope
+from .delegation_proofs import prove_delegation_attenuation
 
 
 class DelegationGrantLifecycleService:
@@ -154,7 +154,7 @@ class DelegationGrantLifecycleService:
             evaluated_at=(evaluated_at or utc_now()).isoformat(),
         )
         failures = tuple(proof.failures + (() if grant.active else ("delegation grant is not active",)))
-        proof_hash = _stable_hash(
+        proof_hash = canonical_hash(
             {
                 "grant_id": grant_id,
                 "delegated": [scope.key for scope in proof.delegated_scopes],
@@ -173,15 +173,15 @@ class DelegationGrantLifecycleService:
             raise ValueError("cannot link token to inactive delegation grant")
         link = DelegationTokenLink(
             grant_id=grant_id,
-            token_hash=_stable_hash(token),
+            token_hash=canonical_hash(token),
             subject=subject,
             token_kind=str(kwargs.get("token_kind") or "access"),
             authorization_trace_id=str(kwargs.get("authorization_trace_id") or ""),
             delegation_provenance_id=str(kwargs.get("delegation_provenance_id") or ""),
             actor_subject=kwargs.get("actor_subject") if isinstance(kwargs.get("actor_subject"), str) else None,
             exchange_mode=str(kwargs.get("exchange_mode") or "delegation"),
-            source_token_hash=_stable_hash(kwargs["source_token"]) if isinstance(kwargs.get("source_token"), str) else None,
-            actor_token_hash=_stable_hash(kwargs["actor_token"]) if isinstance(kwargs.get("actor_token"), str) else None,
+            source_token_hash=canonical_hash(kwargs["source_token"]) if isinstance(kwargs.get("source_token"), str) else None,
+            actor_token_hash=canonical_hash(kwargs["actor_token"]) if isinstance(kwargs.get("actor_token"), str) else None,
         )
         self._token_links.append(link)
         return link

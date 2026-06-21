@@ -2,21 +2,53 @@ from __future__ import annotations
 
 import asyncio
 import importlib
+from pathlib import Path
 import types
 
 import pytest
 
 from tigrbl_authz_policy import AuthorityScope
 from tigrbl_authz_policy.delegation_lifecycle import (
+    DelegationGrantLifecycleEntry,
     DelegationGrantLifecycleService,
+    DelegationLifecycleAuditEvent,
+    DelegationTokenLink,
     assert_delegation_management_surface,
     delegation_grant_uix_workflows,
     normalize_delegation_scopes,
 )
 
 
+ROOT = Path(__file__).resolve().parents[2]
+
+
 def _grant_service() -> DelegationGrantLifecycleService:
     return DelegationGrantLifecycleService()
+
+
+def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
+    from tigrbl_identity_contracts.delegation import (
+        DelegationGrantLifecycleEntry as ContractLifecycleEntry,
+        DelegationLifecycleAuditEvent as ContractAuditEvent,
+        DelegationTokenLink as ContractTokenLink,
+    )
+
+    assert DelegationGrantLifecycleEntry is ContractLifecycleEntry
+    assert DelegationLifecycleAuditEvent is ContractAuditEvent
+    assert DelegationTokenLink is ContractTokenLink
+    assert not (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy"
+        / "_delegation_lifecycle_models.py"
+    ).exists()
+    assert not hasattr(
+        importlib.import_module("tigrbl_identity_contracts.delegation.lifecycle"),
+        "_stable_hash",
+    )
 
 
 def test_delegation_grant_storage_model_contract() -> None:

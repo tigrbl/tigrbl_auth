@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import hashlib
-import json
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Iterable, Mapping
@@ -26,11 +24,6 @@ DELEGATION_GRANT_UIX_WORKFLOWS = (
     "replace",
     "revoke",
 )
-
-
-def _stable_hash(payload: object) -> str:
-    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode()
-    return hashlib.sha256(encoded).hexdigest()
 
 
 def _normalize_values(values: Iterable[str] | None, *, default: tuple[str, ...] = ()) -> tuple[str, ...]:
@@ -181,5 +174,4 @@ __all__ = [
     "DelegationGrantLifecycleEntry",
     "DelegationLifecycleAuditEvent",
     "DelegationTokenLink",
-    "_stable_hash",
 ]
