@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import ast
+import importlib
 import sys
 from pathlib import Path
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -66,6 +69,35 @@ def test_release_certification_modules_do_not_define_moved_contract_classes() ->
             if isinstance(node, ast.ClassDef) and node.name in moved
         }
         assert not defined, f"{path} still owns moved release contracts: {sorted(defined)}"
+
+
+def test_authz_policy_no_longer_exposes_release_certification_or_posture_modules() -> None:
+    authz_root = (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy"
+    )
+    removed_paths = (
+        authz_root / "certification.py",
+        authz_root / "_certification",
+        authz_root / "release_posture.py",
+        authz_root / "_release_posture",
+    )
+
+    assert not any(path.exists() for path in removed_paths)
+
+    for module_name in (
+        "tigrbl_authz_policy.certification",
+        "tigrbl_authz_policy._certification",
+        "tigrbl_authz_policy.release_posture",
+        "tigrbl_authz_policy._release_posture",
+    ):
+        sys.modules.pop(module_name, None)
+        with pytest.raises(ModuleNotFoundError):
+            importlib.import_module(module_name)
 
 
 def test_release_contracts_do_not_import_runtime_or_capability_packages() -> None:
