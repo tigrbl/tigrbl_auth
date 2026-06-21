@@ -17,7 +17,7 @@ class JoseKeyUse(str, Enum):
     ENCRYPT = "enc"
 
 
-def _public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
+def public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
     kty = jwk.get("kty")
     if kty == "OKP":
         return {key: jwk[key] for key in ("crv", "kty", "x") if key in jwk}
@@ -30,12 +30,12 @@ def _public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
     raise ValueError(f"unsupported JWK key type {kty!r}")
 
 
-def _validate_public_jwk(jwk: Mapping[str, Any]) -> None:
+def validate_public_jwk_material(jwk: Mapping[str, Any]) -> None:
     if not jwk.get("kid"):
         raise ValueError("JWK kid is required")
     if jwk.get("kty") not in {"OKP", "RSA", "EC"}:
         raise ValueError("public JWKS publication requires OKP, RSA, or EC keys")
-    _public_jwk_material(jwk)
+    public_jwk_material(jwk)
 
 
 @dataclass(frozen=True, slots=True)
@@ -52,7 +52,7 @@ class JoseKey:
     rotated_from: str | None = None
 
     def public_jwk(self) -> dict[str, Any]:
-        _validate_public_jwk(self.jwk)
+        validate_public_jwk_material(self.jwk)
         public = dict(self.jwk)
         public.pop("d", None)
         public.pop("p", None)
@@ -68,7 +68,7 @@ class JoseKey:
 
 
 @dataclass(frozen=True, slots=True)
-class KeyRotationContract:
+class JoseKeyRotationResult:
     tenant_id: str
     current_kid: str | None
     next_kid: str
@@ -78,4 +78,11 @@ class KeyRotationContract:
     rotated_at: str
 
 
-__all__ = ["JoseKey", "JoseKeyStatus", "JoseKeyUse", "KeyRotationContract"]
+__all__ = [
+    "JoseKey",
+    "JoseKeyRotationResult",
+    "JoseKeyStatus",
+    "JoseKeyUse",
+    "public_jwk_material",
+    "validate_public_jwk_material",
+]

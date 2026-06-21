@@ -6,7 +6,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 JOSE_ROOT = ROOT / "pkgs" / "30-providers" / "tigrbl-identity-jose"
 
-ALLOWED_JOSE_DATACLASSES: set[str] = set()
+ALLOWED_JOSE_DATACLASSES: set[str] = {
+    "src/tigrbl_identity_jose/jwe_policy.py::JWEPolicy",
+    "src/tigrbl_identity_jose/keys.py::JoseKey",
+    "src/tigrbl_identity_jose/keys.py::JoseKeyRotationResult",
+}
 
 
 def _dataclass_defs(path: Path) -> set[str]:
@@ -31,12 +35,13 @@ def test_jose_reusable_dataclasses_are_owner_reexports() -> None:
         KeyRotationPolicyVersion,
     )
     from tigrbl_auth_protocol_oidc import tenant_discovery
-    from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
+    from tigrbl_identity_jose import boundary, key_rotation_policy, keys, pqc
+    from tigrbl_identity_jose.jwe_policy import JWEPolicy
     from tigrbl_identity_jose.standards import rfc7516
     from tigrbl_identity_principals import factories
 
-    assert boundary.JoseKey is user_contracts.JoseKey
-    assert boundary.KeyRotationContract is user_contracts.KeyRotationContract
+    assert boundary.JoseKey is keys.JoseKey
+    assert boundary.JoseKeyRotationResult is keys.JoseKeyRotationResult
     assert key_rotation_policy.KeyRotationPolicyVersion is KeyRotationPolicyVersion
     assert key_rotation_policy.EffectiveKeyRotationPolicy is EffectiveKeyRotationPolicy
     assert not hasattr(key_rotation_policy, "KeyRotationAuditEvidence")
@@ -46,7 +51,11 @@ def test_jose_reusable_dataclasses_are_owner_reexports() -> None:
     assert audit.audit_records == ()
     assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
     assert pqc.PQCSignatureKeyPair is security_trust_contracts.PQCSignatureKeyPair
-    assert rfc7516.JWEPolicy is user_contracts.JWEPolicy
+    assert rfc7516.JWEPolicy is JWEPolicy
+    assert not hasattr(user_contracts, "JoseKey")
+    assert not hasattr(user_contracts, "JoseKeyRotationResult")
+    assert not hasattr(user_contracts, "KeyRotationContract")
+    assert not hasattr(user_contracts, "JWEPolicy")
     assert factories.Realm is user_contracts.Realm
     assert factories.TenantBoundary is user_contracts.TenantBoundary
     assert factories.Principal is user_contracts.Principal

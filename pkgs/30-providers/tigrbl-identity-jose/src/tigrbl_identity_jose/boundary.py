@@ -7,11 +7,13 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
-from tigrbl_identity_contracts.security_jose import (
+from .keys import (
     JoseKey,
+    JoseKeyRotationResult,
     JoseKeyStatus,
     JoseKeyUse,
-    KeyRotationContract,
+    public_jwk_material,
+    validate_public_jwk_material,
 )
 
 
@@ -39,16 +41,7 @@ def _canonical_json(value: Mapping[str, Any]) -> bytes:
 
 
 def _public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
-    kty = jwk.get("kty")
-    if kty == "OKP":
-        return {key: jwk[key] for key in ("crv", "kty", "x") if key in jwk}
-    if kty == "RSA":
-        return {key: jwk[key] for key in ("e", "kty", "n") if key in jwk}
-    if kty == "EC":
-        return {key: jwk[key] for key in ("crv", "kty", "x", "y") if key in jwk}
-    if kty == "oct":
-        return {key: jwk[key] for key in ("k", "kty") if key in jwk}
-    raise ValueError(f"unsupported JWK key type {kty!r}")
+    return public_jwk_material(jwk)
 
 
 def jwk_thumbprint(jwk: Mapping[str, Any]) -> str:
@@ -57,11 +50,7 @@ def jwk_thumbprint(jwk: Mapping[str, Any]) -> str:
 
 
 def validate_public_jwk(jwk: Mapping[str, Any]) -> None:
-    if not jwk.get("kid"):
-        raise ValueError("JWK kid is required")
-    if jwk.get("kty") not in {"OKP", "RSA", "EC"}:
-        raise ValueError("public JWKS publication requires OKP, RSA, or EC keys")
-    _public_jwk_material(jwk)
+    validate_public_jwk_material(jwk)
 
 
 class JoseKeySet:
@@ -89,7 +78,7 @@ class JoseKeySet:
         next_key: JoseKey,
         reason: str,
         retire_current: bool = True,
-    ) -> KeyRotationContract:
+    ) -> JoseKeyRotationResult:
         active = [
             key
             for key in self._keys.values()
@@ -104,7 +93,7 @@ class JoseKeySet:
             self._keys[current.kid] = replace(current, status=JoseKeyStatus.RETIRED)
             retired.append(current.kid)
         published = tuple(key["kid"] for key in publish_tenant_jwks(self._keys.values(), tenant_id=tenant_id)["keys"])
-        return KeyRotationContract(
+        return JoseKeyRotationResult(
             tenant_id=tenant_id,
             current_kid=current.kid if current else None,
             next_kid=next_key.kid,
@@ -142,7 +131,7 @@ __all__ = [
     "JoseKeySet",
     "JoseKeyStatus",
     "JoseKeyUse",
-    "KeyRotationContract",
+    "JoseKeyRotationResult",
     "RFC_TARGETS",
     "jwk_thumbprint",
     "publish_tenant_jwks",

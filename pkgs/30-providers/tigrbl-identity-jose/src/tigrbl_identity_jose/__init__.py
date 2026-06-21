@@ -5,15 +5,16 @@ from __future__ import annotations
 from .boundary import (
     RFC_TARGETS,
     JoseKey,
+    JoseKeyRotationResult,
     JoseKeySet,
     JoseKeyStatus,
     JoseKeyUse,
-    KeyRotationContract,
     jwk_thumbprint,
     publish_tenant_jwks,
     rfc_vector_manifest,
     validate_public_jwk,
 )
+from .jwe_policy import JWEPolicy
 from .key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
@@ -40,14 +41,15 @@ from .pqc import (
 __all__ = [
     "EffectiveKeyRotationPolicy",
     "JoseKey",
+    "JoseKeyRotationResult",
     "JoseKeySet",
     "JoseKeyStatus",
     "JoseKeyUse",
     "KeyRotationAdministration",
-    "KeyRotationContract",
     "KeyRotationPolicyGovernance",
     "KeyRotationPolicyOverlapError",
     "KeyRotationPolicyVersion",
+    "JWEPolicy",
     "ML_DSA_65_ALG",
     "PQCError",
     "PQC_JWK_KTY",

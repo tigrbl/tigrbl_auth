@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
 ALLOWED_NON_CONTRACT_ENUMS = {
+    "JoseKeyStatus",
+    "JoseKeyUse",
     "MatrixCellStatus",
     "ReadinessStatus",
     "SurfacePlane",
@@ -39,12 +41,10 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
         AdminResourceStatus,
     )
     from tigrbl_identity_admin._control_plane import models as admin_models
-    from tigrbl_identity_jose import boundary
+    from tigrbl_identity_jose import boundary, keys
     from tigrbl_identity_principals import factories as principal_factories
     from tigrbl_identity_contracts import (
         BrowserStoragePolicy,
-        JoseKeyStatus,
-        JoseKeyUse,
         OAuthGrantStatus,
         OidcSessionStatus,
         PrincipalKind,
@@ -56,8 +56,8 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
     from tigrbl_auth_protocol_oidc import provider as oidc_provider
     from tigrbl_auth_protocol_rp import client as rp_client
 
-    assert boundary.JoseKeyStatus is JoseKeyStatus
-    assert boundary.JoseKeyUse is JoseKeyUse
+    assert boundary.JoseKeyStatus is keys.JoseKeyStatus
+    assert boundary.JoseKeyUse is keys.JoseKeyUse
     assert principal_factories.PrincipalKind is PrincipalKind
     assert principal_factories.PrincipalStatus is PrincipalStatus
     assert oauth_protocol.OAuthGrantStatus is OAuthGrantStatus

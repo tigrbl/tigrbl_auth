@@ -15,6 +15,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
 from tigrbl_identity_jose import (
     RFC_TARGETS,
     JoseKey,
+    JoseKeyRotationResult,
     JoseKeySet,
     JoseKeyStatus,
     JoseKeyUse,
@@ -94,6 +95,7 @@ def test_jose_t1_vectors_rotation_and_tenant_jwks_publication() -> None:
     jwks = publish_tenant_jwks(keyset.keys.values(), tenant_id="tenant-a")
 
     assert jwk_thumbprint(PUBLIC_JWK)
+    assert isinstance(rotation, JoseKeyRotationResult)
     assert rotation.current_kid == "kid-active"
     assert rotation.retired_kids == ("kid-active",)
     assert [key["kid"] for key in jwks["keys"]] == ["kid-next"]
