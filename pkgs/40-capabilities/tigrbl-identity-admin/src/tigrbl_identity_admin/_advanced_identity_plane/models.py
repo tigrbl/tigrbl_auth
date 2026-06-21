@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_control_plane_contracts.advanced_identity import (
+from tigrbl_identity_contracts.adaptive_access import (
     AccessDecisionRequest,
     AccessDecisionResponse,
     AdaptiveContext,
@@ -16,7 +16,7 @@ from tigrbl_control_plane_contracts.advanced_identity import (
     TrustEdge,
     TrustPath,
 )
-from tigrbl_user_plane_contracts.advanced_identity import (
+from tigrbl_identity_contracts.advanced_identity import (
     AuthenticationChallenge,
     DeviceIdentity,
     FederatedSession,

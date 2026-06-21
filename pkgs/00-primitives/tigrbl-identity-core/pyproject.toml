@@ -1,20 +1,21 @@
 [project]
-name = "tigrbl-identity-contracts"
+name = "tigrbl-identity-core"
 version = "0.4.0.dev2"
-description = "Dependency-light identity contract projection metadata for table-owned REST/OpenAPI surfaces."
+description = "Dependency-light identity primitives, typed helpers, path safety, and RFC 8785 JSON canonicalization for Tigrbl identity systems."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 keywords = [
     "tigrbl",
     "identity",
-    "api-contracts",
-    "openapi",
-    "projection",
-    "oauth",
-    "oidc",
     "iam",
-    "contracts",
+    "json-canonicalization",
+    "rfc8785",
+    "jwt",
+    "typed-primitives",
+    "tenant",
+    "principal",
+    "security",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -32,18 +33,17 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/00-core/tigrbl-identity-contracts"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/00-primitives/tigrbl-identity-core"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-contracts/"
+PyPI = "https://pypi.org/project/tigrbl-identity-core/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_contracts", from = "src" }]
+packages = [{ include = "tigrbl_identity_core", from = "src" }]

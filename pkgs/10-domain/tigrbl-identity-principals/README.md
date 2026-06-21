@@ -8,7 +8,7 @@ tigrbl-identity-principals owns durable identity subjects and tenant trust-domai
 
 - Package: `tigrbl-identity-principals`
 - Import root: `tigrbl_identity_principals`
-- Component kind: Foundation package
+- Component kind: Domain package
 - Use it to resolve tenant-specific issuers, JWKS paths, and OpenID discovery paths.
 - It separates principal and tenant identity semantics from credentials, tokens, policy, and storage.
 - It is the natural home for subject context shared by human and nonhuman principals.

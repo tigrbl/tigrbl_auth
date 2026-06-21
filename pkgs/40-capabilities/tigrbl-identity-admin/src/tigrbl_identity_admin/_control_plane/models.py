@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from uuid import uuid4
 
-from tigrbl_management_plane_contracts.admin_resources import (
+from tigrbl_identity_contracts.admin_resources import (
     AdminAuditEvent,
     AdminResource,
     AdminResourceKind,

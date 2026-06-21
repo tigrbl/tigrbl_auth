@@ -8,7 +8,7 @@ tigrbl-identity-jose owns token cryptography and JOSE-related standards support 
 
 - Package: `tigrbl-identity-jose`
 - Import root: `tigrbl_identity_jose`
-- Component kind: Foundation package
+- Component kind: Domain package
 - Use it when you need JOSE, JWT, JWK, JWS, JWE, JWKS, or key rotation behavior.
 - It separates signing and verification material from OAuth and OIDC protocol decisions.
 - It includes RFC-oriented modules for JOSE standards tracked by the identity suite.

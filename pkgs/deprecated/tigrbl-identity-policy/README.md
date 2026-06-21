@@ -10,7 +10,7 @@ tigrbl-identity-policy owns authorization decisions and governance policy for th
 
 - Package: `tigrbl-identity-policy`
 - Import root: `tigrbl_identity_policy`
-- Component kind: Foundation package
+- Component kind: Deprecated compatibility package
 - Use it for authorization decisions rather than credential verification or token signing.
 - It models RBAC, ABAC, delegated admin scopes, service identities, and policy audit evidence.
 - It is the policy boundary that prevents OAuth, admin, and server packages from embedding authorization logic directly.

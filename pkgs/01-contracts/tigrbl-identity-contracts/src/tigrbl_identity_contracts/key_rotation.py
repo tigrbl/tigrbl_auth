@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from tigrbl_management_plane_contracts.evidence import KeyRotationAuditEvidence
+from .evidence import KeyRotationAuditEvidence
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_user_plane_contracts.authn import (
+from tigrbl_identity_contracts.authn import (
     DpopKeyCredential,
     MtlsCertificateCredential,
     ProofBinding,

@@ -25,10 +25,10 @@ def _dataclass_defs(path: Path) -> set[str]:
 
 
 def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
-    import tigrbl_control_plane_contracts as control_contracts
-    import tigrbl_management_plane_contracts as management_contracts
+    import tigrbl_identity_contracts as control_contracts
+    import tigrbl_identity_contracts as management_contracts
     import tigrbl_security_trust_contracts as security_trust_contracts
-    import tigrbl_user_plane_contracts as user_contracts
+    import tigrbl_identity_contracts as user_contracts
     from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
     from tigrbl_identity_jose.standards import rfc7516
     from tigrbl_identity_principals import models, tenant_discovery

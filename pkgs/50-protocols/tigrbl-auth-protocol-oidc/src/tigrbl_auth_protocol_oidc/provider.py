@@ -7,7 +7,7 @@ from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from typing import Iterable, Mapping
 
-from tigrbl_user_plane_contracts.protocols import OidcSessionStatus
+from tigrbl_identity_contracts.protocols import OidcSessionStatus
 
 
 class OidcProviderError(RuntimeError):

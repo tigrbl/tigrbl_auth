@@ -36,7 +36,7 @@ dependencies = [
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
-    "tigrbl-user-plane-contracts==0.1.0",
+    "tigrbl-identity-contracts==0.4.0.dev2",
 ]
 
 [project.urls]

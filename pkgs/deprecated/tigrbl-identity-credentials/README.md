@@ -10,7 +10,7 @@ tigrbl-identity-credentials handles proof of control for authentication material
 
 - Package: `tigrbl-identity-credentials`
 - Import root: `tigrbl_identity_credentials`
-- Component kind: Foundation package
+- Component kind: Deprecated compatibility package
 - Use it for passwords, API keys, local and remote auth adapters, session services, and token lifecycle helpers.
 - It answers whether a presented credential proves control of a principal.
 - It should be combined with policy for authorization decisions and JOSE for JWT/JWK operations.

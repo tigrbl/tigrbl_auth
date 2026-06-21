@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
-ALLOWED_NON_CORE_ENUMS = {
+ALLOWED_NON_CONTRACT_ENUMS = {
     "MatrixCellStatus",
     "ReadinessStatus",
     "SurfacePlane",
@@ -33,8 +33,8 @@ def _enum_class_names(path: Path) -> set[str]:
     return names
 
 
-def test_reusable_enums_resolve_from_00_core_contracts() -> None:
-    from tigrbl_management_plane_contracts import (
+def test_reusable_enums_resolve_from_contract_packages() -> None:
+    from tigrbl_identity_contracts import (
         AdminResourceKind,
         AdminResourceStatus,
         AdminUiState,
@@ -42,7 +42,7 @@ def test_reusable_enums_resolve_from_00_core_contracts() -> None:
     from tigrbl_identity_admin._control_plane import models as admin_models
     from tigrbl_identity_jose import boundary
     from tigrbl_identity_principals import models as principal_models
-    from tigrbl_user_plane_contracts import (
+    from tigrbl_identity_contracts import (
         BrowserStoragePolicy,
         JoseKeyStatus,
         JoseKeyUse,
@@ -70,14 +70,14 @@ def test_reusable_enums_resolve_from_00_core_contracts() -> None:
     assert admin_models.AdminUiState is AdminUiState
 
 
-def test_reusable_enums_are_not_defined_outside_00_core() -> None:
+def test_reusable_enums_are_not_defined_outside_contract_packages() -> None:
     offenders: list[str] = []
     for path in PKGS.rglob("*.py"):
         relative = path.relative_to(PKGS)
-        if relative.parts[0] == "00-core":
+        if relative.parts[0] == "01-contracts":
             continue
         for enum_name in sorted(_enum_class_names(path)):
-            if enum_name in ALLOWED_NON_CORE_ENUMS:
+            if enum_name in ALLOWED_NON_CONTRACT_ENUMS:
                 continue
             offenders.append(f"{relative.as_posix()}::{enum_name}")
 

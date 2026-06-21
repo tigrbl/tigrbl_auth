@@ -27,7 +27,6 @@ DEPRECATED_DIST_NAMES = {
 PACKAGE_ROOTS = [
     "tigrbl_security_trust_contracts",
     "tigrbl_security_trust_domain_bases",
-    "tigrbl_management_plane_contracts",
     "tigrbl_auth_protocol_oauth",
     "tigrbl_auth_protocol_oidc",
     "tigrbl_auth_protocol_rp",
@@ -57,7 +56,6 @@ PACKAGE_ROOTS = [
 DIST_TO_IMPORT_ROOT = {
     "tigrbl-security-trust-contracts": "tigrbl_security_trust_contracts",
     "tigrbl-security-trust-domain-bases": "tigrbl_security_trust_domain_bases",
-    "tigrbl-management-plane-contracts": "tigrbl_management_plane_contracts",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",

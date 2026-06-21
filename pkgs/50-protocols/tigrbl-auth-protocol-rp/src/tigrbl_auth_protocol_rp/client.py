@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Mapping
 from urllib.parse import parse_qs, urlencode, urlparse
 
-from tigrbl_user_plane_contracts.protocols import BrowserStoragePolicy
+from tigrbl_identity_contracts.protocols import BrowserStoragePolicy
 
 from .pkce import PkceVerifier, make_pkce_verifier, pkce_s256_challenge
 

@@ -11,7 +11,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACTS = ROOT / "pkgs" / "00-core" / "tigrbl-security-trust-contracts"
+CONTRACTS = ROOT / "pkgs" / "01-contracts" / "tigrbl-security-trust-contracts"
 BASES = ROOT / "pkgs" / "05-bases" / "tigrbl-security-trust-domain-bases"
 
 
@@ -57,7 +57,7 @@ def test_security_trust_domain_bases_depend_only_on_contracts() -> None:
         }, path
 
 
-def test_security_trust_core_packages_export_expected_surfaces() -> None:
+def test_security_trust_contract_and_base_packages_export_expected_surfaces() -> None:
     contracts = importlib.import_module("tigrbl_security_trust_contracts")
     bases = importlib.import_module("tigrbl_security_trust_domain_bases")
 

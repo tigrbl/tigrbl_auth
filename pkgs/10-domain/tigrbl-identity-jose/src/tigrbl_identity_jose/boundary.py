@@ -7,7 +7,7 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
-from tigrbl_user_plane_contracts.security_jose import (
+from tigrbl_identity_contracts.security_jose import (
     JoseKey,
     JoseKeyStatus,
     JoseKeyUse,

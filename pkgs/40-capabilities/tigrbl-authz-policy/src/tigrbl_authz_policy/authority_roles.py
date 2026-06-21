@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tigrbl_user_plane_contracts.authz.authority_roles import AuthorityRole
+from tigrbl_identity_contracts.authz.authority_roles import AuthorityRole
 
 
 def normalize_authority_roles(values: Iterable[str | AuthorityRole] = ()) -> tuple[str, ...]:

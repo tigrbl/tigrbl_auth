@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from tigrbl_management_plane_contracts.governance import *
+from tigrbl_identity_contracts.governance import *
 
 
 def _utc_now() -> datetime:

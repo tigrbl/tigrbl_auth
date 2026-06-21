@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tigrbl_user_plane_contracts.authz.correctness import (
+from tigrbl_identity_contracts.authz.correctness import (
     AuthorizationReference,
     IntegrityReport,
     ReferenceCatalog,
@@ -10,7 +10,7 @@ from tigrbl_user_plane_contracts.authz.correctness import (
     TenantRealmIsolationReport,
     TrustEdge,
 )
-from tigrbl_user_plane_contracts.authz.invariants import InvariantEvaluation
+from tigrbl_identity_contracts.authz.invariants import InvariantEvaluation
 
 from .authority_graph import AuthorityDerivationGraph
 from .invariants import InvariantRegistry

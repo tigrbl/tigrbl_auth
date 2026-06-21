@@ -4,11 +4,11 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Callable, Iterable, Mapping
 
-from tigrbl_control_plane_contracts.key_rotation import (
+from tigrbl_identity_contracts.key_rotation import (
     EffectiveKeyRotationPolicy,
     KeyRotationPolicyVersion,
 )
-from tigrbl_management_plane_contracts.evidence import KeyRotationAuditEvidence
+from tigrbl_identity_contracts.evidence import KeyRotationAuditEvidence
 
 def _utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()

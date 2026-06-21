@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Mapping
 
-from tigrbl_management_plane_contracts.service_identity import (
+from .service_identity import (
     ADMIN_CLIENT_FIELDS,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,

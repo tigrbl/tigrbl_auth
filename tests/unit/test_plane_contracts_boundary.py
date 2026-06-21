@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import ast
-import importlib
 import sys
 from pathlib import Path
 
@@ -14,7 +13,7 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 
 def _imports_for(package: str) -> set[str]:
-    package_root = next((ROOT / "pkgs").glob(f"00-core/*/src/{package}"))
+    package_root = next((ROOT / "pkgs").glob(f"01-contracts/*/src/{package}"))
     imports: set[str] = set()
     for path in package_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -27,7 +26,8 @@ def _imports_for(package: str) -> set[str]:
 
 
 def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None:
-    import tigrbl_user_plane_contracts as contracts
+    import tigrbl_identity_contracts as contracts
+    import tigrbl_security_trust_contracts as security_trust
     from tigrbl_authn_credentials.lifecycle import Credential
     from tigrbl_authn_credentials.proof_bindings import ProofBinding
 
@@ -41,12 +41,12 @@ def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None
         exp=1,
         iat=1,
     ).aud == ("api",)
-    assert contracts.Artifact(kind="token", format="jwt").kind == "token"
+    assert security_trust.Artifact(kind="token", format="jwt").kind == "token"
 
 
 def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
-    import tigrbl_control_plane_contracts as control_contracts
-    import tigrbl_management_plane_contracts as contracts
+    import tigrbl_identity_contracts as control_contracts
+    import tigrbl_identity_contracts as contracts
     from tigrbl_authz_policy._control_plane.models import Role
     from tigrbl_authz_policy._governance_extension.models import SDKPackage
 
@@ -57,18 +57,15 @@ def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
 
 
 def test_control_plane_contracts_own_control_plane_correctness_dtos() -> None:
-    import tigrbl_control_plane_contracts as contracts
-    import tigrbl_user_plane_contracts as user_contracts
+    import tigrbl_identity_contracts as contracts
     from tigrbl_authz_policy import ControlPlaneCorrectnessReport, CorrectnessProofSection
 
     assert CorrectnessProofSection is contracts.CorrectnessProofSection
     assert ControlPlaneCorrectnessReport is contracts.ControlPlaneCorrectnessReport
-    assert not hasattr(user_contracts, "ControlPlaneCorrectnessReport")
-    assert not hasattr(user_contracts, "CorrectnessProofSection")
 
 
 def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> None:
-    import tigrbl_control_plane_contracts as contracts
+    import tigrbl_identity_contracts as contracts
 
     executable_helpers = {
         "admin_policy_boundary_manifest",
@@ -86,10 +83,24 @@ def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> 
 
 
 def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
-    package_root = next((ROOT / "pkgs").glob("00-core/tigrbl-control-plane-contracts/src/tigrbl_control_plane_contracts"))
+    package_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+    checked_modules = {
+        "admin.py",
+        "adaptive_access.py",
+        "correctness.py",
+        "key_rotation.py",
+    }
     offenders: list[str] = []
 
-    for path in package_root.rglob("*.py"):
+    for name in checked_modules:
+        path = package_root / name
         tree = ast.parse(path.read_text(encoding="utf-8"))
         for node in tree.body:
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
@@ -99,8 +110,8 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
 
 
 def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> None:
-    import tigrbl_control_plane_contracts as contracts
-    import tigrbl_management_plane_contracts as management_contracts
+    import tigrbl_identity_contracts as contracts
+    import tigrbl_identity_contracts as management_contracts
     from tigrbl_authz_policy._control_plane import models as admin_models
     from tigrbl_authz_policy._governance_extension import models as governance_models
 
@@ -120,7 +131,7 @@ def test_release_contracts_own_release_posture_surfaces() -> None:
 
 
 def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> None:
-    import tigrbl_management_plane_contracts as contracts
+    import tigrbl_identity_contracts as contracts
     from tigrbl_authz_policy import ResidencyZone
     from tigrbl_identity_jose import KeyRotationAuditEvidence
 
@@ -128,10 +139,10 @@ def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> Non
     assert KeyRotationAuditEvidence is contracts.KeyRotationAuditEvidence
 
 
-def test_admin_capability_models_are_00_core_contract_reexports() -> None:
-    import tigrbl_control_plane_contracts as control_contracts
-    import tigrbl_management_plane_contracts as management_contracts
-    import tigrbl_user_plane_contracts as user_contracts
+def test_admin_capability_models_are_contract_reexports() -> None:
+    import tigrbl_identity_contracts as control_contracts
+    import tigrbl_identity_contracts as management_contracts
+    import tigrbl_identity_contracts as user_contracts
     from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
     from tigrbl_identity_admin._control_plane import models as admin_models
 
@@ -148,14 +159,10 @@ def test_admin_capability_models_are_00_core_contract_reexports() -> None:
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
 
-def test_user_plane_security_reexports_security_trust_contracts() -> None:
-    sys.modules.pop("tigrbl_user_plane_contracts.security", None)
-
-    security_trust = importlib.import_module("tigrbl_security_trust_contracts")
-    user_security = importlib.import_module("tigrbl_user_plane_contracts.security")
-
-    assert user_security.Artifact is security_trust.Artifact
-    assert user_security.IArtifactVerifier is security_trust.IArtifactVerifier
+def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
+    assert "tigrbl_user_plane_contracts" not in sys.modules
+    assert "tigrbl_control_plane_contracts" not in sys.modules
+    assert "tigrbl_management_plane_contracts" not in sys.modules
 
 
 def test_contract_packages_do_not_import_capability_runtime_or_storage_packages() -> None:
@@ -169,9 +176,9 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
     }
 
     for package in (
-        "tigrbl_user_plane_contracts",
-        "tigrbl_control_plane_contracts",
-        "tigrbl_management_plane_contracts",
+        "tigrbl_identity_contracts",
+        "tigrbl_release_contracts",
+        "tigrbl_security_trust_contracts",
     ):
         assert not (_imports_for(package) & forbidden), package
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable, Mapping
 
-from tigrbl_user_plane_contracts.authz.authority_graph import (
+from tigrbl_identity_contracts.authz.authority_graph import (
     AuthorityEdge,
     AuthorityGraphIntegrityReport,
     AuthorityNode,

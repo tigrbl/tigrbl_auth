@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tigrbl_user_plane_contracts.authz.authority_graph import AuthorityScope
-from tigrbl_user_plane_contracts.authz.delegation_lifecycle_models import *
+from tigrbl_identity_contracts.authz.authority_graph import AuthorityScope
+from tigrbl_identity_contracts.authz.delegation_lifecycle_models import *
 
 
 def _normalize_values(values: Iterable[str] | None, *, default: tuple[str, ...] = ()) -> tuple[str, ...]:

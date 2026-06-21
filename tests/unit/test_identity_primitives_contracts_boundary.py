@@ -13,7 +13,7 @@ for src in sorted((ROOT / "pkgs").glob("*/src")):
         sys.path.insert(0, value)
 
 
-def test_core_t0_exports_public_primitives() -> None:
+def test_identity_primitives_exports_public_values() -> None:
     import tigrbl_identity_core as core
 
     assert core.Scope.parse("openid profile").contains("openid")
@@ -25,7 +25,7 @@ def test_core_t0_exports_public_primitives() -> None:
     assert core.TenantRef(core.TenantId("tenant-1")).id == "tenant-1"
 
 
-def test_core_t1_error_taxonomy_and_clock_primitives() -> None:
+def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
     import tigrbl_identity_core as core
 
     assert issubclass(core.IdentityValidationError, core.IdentityError)
@@ -35,8 +35,8 @@ def test_core_t1_error_taxonomy_and_clock_primitives() -> None:
     assert core.unix_seconds(frozen) == int(frozen.now().timestamp())
 
 
-def test_core_t2_import_dag_clean_room() -> None:
-    core_root = ROOT / "pkgs" / "00-core" / "tigrbl-identity-core" / "src" / "tigrbl_identity_core"
+def test_identity_primitives_import_dag_clean_room() -> None:
+    core_root = ROOT / "pkgs" / "00-primitives" / "tigrbl-identity-core" / "src" / "tigrbl_identity_core"
     forbidden = {"tigrbl_auth", "tigrbl_identity_server", "tigrbl_identity_runtime", "tigrbl_identity_storage"}
     for path in core_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -53,7 +53,6 @@ def test_contracts_do_not_export_wire_request_response_models() -> None:
     import tigrbl_identity_contracts as contracts
 
     removed_wire_models = {
-        "AccessTokenClaims",
         "OAuthIntrospectionResponse",
         "OAuthTokenRequest",
         "OAuthTokenResponse",

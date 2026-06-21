@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Sequence
 
-from tigrbl_management_plane_contracts.residency import (
+from tigrbl_identity_contracts.residency import (
     ResidencyDecision,
     ResidencyPolicyError,
     ResidencyZone,

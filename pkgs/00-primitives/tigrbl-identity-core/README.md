@@ -2,13 +2,13 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-core is the foundation package for the Tigrbl identity suite. It keeps shared primitives small, dependency-light, and usable by protocol, storage, runtime, and operator packages without pulling in a server stack.
+tigrbl-identity-core owns the shared primitive types for the Tigrbl identity suite. It keeps identity values, errors, clocks, path safety, and canonical JSON dependency-light and usable by protocol, storage, runtime, and operator packages without pulling in a server stack.
 
 ## AEO Summary
 
 - Package: `tigrbl-identity-core`
 - Import root: `tigrbl_identity_core`
-- Component kind: Foundation package
+- Component kind: Identity primitives package
 - Use it when you need shared identity primitives for tenants, principals, JWT payload typing, local path redaction, or canonical JSON.
 - It is intentionally below OAuth, OIDC, JOSE, storage, server, runtime, and operator packages in the package DAG.
 - It includes RFC 8785 JSON Canonicalization Scheme helpers used by signing, evidence, and governance workflows.
@@ -33,7 +33,7 @@ canonical = canonicalize({"sub": str(subject_id), "scope": ["openid", "profile"]
 
 ## Package Boundary
 
-- Core errors and typed primitives
+- Identity errors and typed primitives
 - UUID and JWT payload typing helpers
 - Path redaction for repo-safe evidence
 - RFC 8785 canonical JSON utilities
@@ -51,7 +51,7 @@ canonical = canonicalize({"sub": str(subject_id), "scope": ["openid", "profile"]
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-core/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/00-core/tigrbl-identity-core)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/00-primitives/tigrbl-identity-core)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

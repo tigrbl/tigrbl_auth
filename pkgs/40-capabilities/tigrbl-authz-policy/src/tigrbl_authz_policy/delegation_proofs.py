@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Iterable
 
-from tigrbl_user_plane_contracts.authz.authority_graph import AuthorityScope
-from tigrbl_user_plane_contracts.authz.delegation_proofs import (
+from tigrbl_identity_contracts.authz.authority_graph import AuthorityScope
+from tigrbl_identity_contracts.authz.delegation_proofs import (
     DelegationAttenuationProof,
     DelegationGrant,
 )

@@ -5,7 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping
 
-from tigrbl_user_plane_contracts.trust_domains import (
+from tigrbl_identity_contracts.trust_domains import (
     RealmTrustDomainAuthority,
     TenantTrustDomainAuthority,
 )

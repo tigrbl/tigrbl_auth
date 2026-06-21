@@ -68,7 +68,7 @@ def test_release_contracts_do_not_import_runtime_or_capability_packages() -> Non
     contracts_root = (
         ROOT
         / "pkgs"
-        / "00-core"
+        / "01-contracts"
         / "tigrbl-release-contracts"
         / "src"
         / "tigrbl_release_contracts"

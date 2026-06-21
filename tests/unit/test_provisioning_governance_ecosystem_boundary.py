@@ -97,7 +97,7 @@ def _entitlements() -> tuple[EntitlementManager, str]:
 
 def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
     import tigrbl_authz_policy._governance_extension as governance_extension
-    import tigrbl_management_plane_contracts as management_contracts
+    import tigrbl_identity_contracts as management_contracts
 
     removed_inline_surfaces = {
         "GovernanceExtensionBoundaryFeature",

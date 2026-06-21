@@ -2171,13 +2171,13 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" }
 dependencies = [
     { name = "swarmauri-signing-dpop" },
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2185,22 +2185,22 @@ name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-rp"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" }
 dependencies = [
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-auth-workspace"
@@ -2239,7 +2239,6 @@ dependencies = [
     { name = "tigrbl-base" },
     { name = "tigrbl-canon" },
     { name = "tigrbl-concrete" },
-    { name = "tigrbl-control-plane-contracts" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-author" },
@@ -2259,7 +2258,6 @@ dependencies = [
     { name = "tigrbl-identity-server" },
     { name = "tigrbl-identity-storage" },
     { name = "tigrbl-kernel" },
-    { name = "tigrbl-management-plane-contracts" },
     { name = "tigrbl-ops-olap" },
     { name = "tigrbl-ops-oltp" },
     { name = "tigrbl-ops-realtime" },
@@ -2270,7 +2268,6 @@ dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-typing" },
-    { name = "tigrbl-user-plane-contracts" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
 
@@ -2369,13 +2366,12 @@ requires-dist = [
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-control-plane-contracts", editable = "pkgs/00-core/tigrbl-control-plane-contracts" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
-    { name = "tigrbl-identity-contracts", editable = "pkgs/00-core/tigrbl-identity-contracts" },
-    { name = "tigrbl-identity-core", editable = "pkgs/00-core/tigrbl-identity-core" },
+    { name = "tigrbl-identity-contracts", editable = "pkgs/01-contracts/tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-jose", editable = "pkgs/10-domain/tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth", editable = "pkgs/deprecated/tigrbl-identity-oauth" },
@@ -2389,18 +2385,16 @@ requires-dist = [
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
     { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-management-plane-contracts", editable = "pkgs/00-core/tigrbl-management-plane-contracts" },
     { name = "tigrbl-ops-olap", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-oltp", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-realtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-orm", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-release-contracts", editable = "pkgs/00-core/tigrbl-release-contracts" },
+    { name = "tigrbl-release-contracts", editable = "pkgs/01-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-provider/tigrbl-security-signing-pqc" },
-    { name = "tigrbl-security-trust-contracts", editable = "pkgs/00-core/tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
+    { name = "tigrbl-security-trust-contracts", editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-user-plane-contracts", editable = "pkgs/00-core/tigrbl-user-plane-contracts" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'servers'", specifier = "==0.3.8" },
     { name = "tigrcorn", marker = "python_full_version >= '3.11' and extra == 'tigrcorn'", specifier = "==0.3.8" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -2429,18 +2423,18 @@ name = "tigrbl-authn-credentials"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authn-credentials" }
 dependencies = [
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
-    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2448,18 +2442,14 @@ name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
-    { name = "tigrbl-control-plane-contracts" },
-    { name = "tigrbl-management-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-release-contracts" },
-    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2469,16 +2459,16 @@ source = { editable = "pkgs/40-capabilities/tigrbl-authz-resource-server" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-runtime" },
-    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2538,17 +2528,6 @@ wheels = [
 ]
 
 [[package]]
-name = "tigrbl-control-plane-contracts"
-version = "0.1.0"
-source = { editable = "pkgs/00-core/tigrbl-control-plane-contracts" }
-dependencies = [
-    { name = "tigrbl-management-plane-contracts" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" }]
-
-[[package]]
 name = "tigrbl-core"
 version = "0.4.4.dev1"
 source = { registry = "https://pypi.org/simple" }
@@ -2570,17 +2549,11 @@ name = "tigrbl-identity-admin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
-    { name = "tigrbl-control-plane-contracts" },
-    { name = "tigrbl-management-plane-contracts" },
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
-]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-author"
@@ -2611,12 +2584,12 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/00-core/tigrbl-identity-contracts" }
+source = { editable = "pkgs/01-contracts/tigrbl-identity-contracts" }
 
 [[package]]
 name = "tigrbl-identity-core"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/00-core/tigrbl-identity-core" }
+source = { editable = "pkgs/00-primitives/tigrbl-identity-core" }
 
 [[package]]
 name = "tigrbl-identity-credentials"
@@ -2642,14 +2615,12 @@ dependencies = [
     { name = "swarmauri-signing-ed25519" },
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
-    { name = "tigrbl-control-plane-contracts" },
     { name = "tigrbl-identity-author" },
+    { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-operator" },
     { name = "tigrbl-identity-storage" },
-    { name = "tigrbl-management-plane-contracts" },
     { name = "tigrbl-security-signing-pqc" },
-    { name = "tigrbl-user-plane-contracts" },
 ]
 
 [package.metadata]
@@ -2662,14 +2633,12 @@ requires-dist = [
     { name = "swarmauri-signing-ed25519", specifier = "==0.2.0.dev32" },
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
-    { name = "tigrbl-control-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-operator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
-    { name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2725,11 +2694,11 @@ name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-domain/tigrbl-identity-principals" }
 dependencies = [
-    { name = "tigrbl-user-plane-contracts" },
+    { name = "tigrbl-identity-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-user-plane-contracts", specifier = "==0.1.0" }]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-resource-server"
@@ -2809,11 +2778,6 @@ wheels = [
 ]
 
 [[package]]
-name = "tigrbl-management-plane-contracts"
-version = "0.1.0"
-source = { editable = "pkgs/00-core/tigrbl-management-plane-contracts" }
-
-[[package]]
 name = "tigrbl-ops-olap"
 version = "0.4.4.dev1"
 source = { registry = "https://pypi.org/simple" }
@@ -2860,7 +2824,7 @@ wheels = [
 [[package]]
 name = "tigrbl-release-contracts"
 version = "0.1.0"
-source = { editable = "pkgs/00-core/tigrbl-release-contracts" }
+source = { editable = "pkgs/01-contracts/tigrbl-release-contracts" }
 
 [[package]]
 name = "tigrbl-runtime"
@@ -2882,7 +2846,7 @@ wheels = [
 [[package]]
 name = "tigrbl-security-signing-pqc"
 version = "0.1.0"
-source = { editable = "pkgs/30-provider/tigrbl-security-signing-pqc" }
+source = { editable = "pkgs/30-providers/tigrbl-security-signing-pqc" }
 dependencies = [
     { name = "pqcrypto" },
     { name = "tigrbl-security-trust-contracts" },
@@ -2899,7 +2863,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-trust-contracts"
 version = "0.1.0"
-source = { editable = "pkgs/00-core/tigrbl-security-trust-contracts" }
+source = { editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" }
 
 [[package]]
 name = "tigrbl-security-trust-domain-bases"
@@ -2935,21 +2899,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f1/99/a85a44aba06f6df179d2022f04b919044b9ded028f98086ede5940256427/tigrbl_typing-0.4.4.dev1.tar.gz", hash = "sha256:49ddbea073420e6e7ea0f979b18a353845be4c88e88ed0253dca71c405555e4d", size = 23616 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/bc/ce/360695533254a6fa49a050a89af0a98f67bb9434f0fb908fda8f6a4a536a/tigrbl_typing-0.4.4.dev1-py3-none-any.whl", hash = "sha256:90f201263b519053485b04773633a62e6021bfe055a6c422836fba1831b8701e", size = 28098 },
-]
-
-[[package]]
-name = "tigrbl-user-plane-contracts"
-version = "0.1.0"
-source = { editable = "pkgs/00-core/tigrbl-user-plane-contracts" }
-dependencies = [
-    { name = "tigrbl-management-plane-contracts" },
-    { name = "tigrbl-security-trust-contracts" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl-management-plane-contracts", specifier = "==0.1.0" },
-    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]

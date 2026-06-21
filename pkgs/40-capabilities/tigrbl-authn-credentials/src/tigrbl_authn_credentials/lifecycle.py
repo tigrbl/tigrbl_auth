@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Mapping
 from uuid import uuid4
 
-from tigrbl_user_plane_contracts.authn import (
+from tigrbl_identity_contracts.authn import (
     Credential,
     CredentialAuditAction,
     CredentialAuditEvent,

@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from hmac import compare_digest
 from typing import Any, Callable, Mapping
 
-from tigrbl_user_plane_contracts.resource_server import (
+from tigrbl_identity_contracts.resource_server import (
     AccessTokenClaims,
     DPoPBinding,
     FrameworkRequest,

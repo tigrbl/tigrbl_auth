@@ -9,47 +9,48 @@ ROOT = Path(__file__).resolve().parents[2]
 PKGS = ROOT / "pkgs"
 
 PYTHON_PACKAGE_LAYERS = {
-    "core": {
-        "tigrbl-control-plane-contracts",
-        "tigrbl-management-plane-contracts",
+    "primitives": {
+        "tigrbl-identity-core",
+    },
+    "contracts": {
+        "tigrbl-identity-contracts",
         "tigrbl-release-contracts",
         "tigrbl-security-trust-contracts",
-        "tigrbl-user-plane-contracts",
     },
     "bases": {
         "tigrbl-security-trust-domain-bases",
     },
+    "domain": {
+        "tigrbl-identity-jose",
+        "tigrbl-identity-principals",
+    },
+    "storage": {
+        "tigrbl-identity-storage",
+    },
     "providers": {
         "tigrbl-security-signing-pqc",
     },
-    "foundation": {
-        "tigrbl-auth-protocol-oauth",
-        "tigrbl-auth-protocol-oidc",
-        "tigrbl-auth-protocol-rp",
+    "capabilities": {
         "tigrbl-authn-credentials",
         "tigrbl-authz-policy",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
+    },
+    "protocols": {
+        "tigrbl-auth-protocol-oauth",
+        "tigrbl-auth-protocol-oidc",
+        "tigrbl-auth-protocol-rp",
+    },
+    "runtime": {
         "tigrbl-identity-author",
         "tigrbl-identity-cli",
-        "tigrbl-identity-contracts",
-        "tigrbl-identity-core",
-        "tigrbl-identity-credentials",
-        "tigrbl-identity-jose",
-        "tigrbl-identity-oauth",
-        "tigrbl-identity-oidc",
         "tigrbl-identity-operator",
-        "tigrbl-identity-policy",
-        "tigrbl-identity-principals",
-        "tigrbl-identity-resource-server",
-        "tigrbl-identity-rp",
         "tigrbl-identity-runtime",
         "tigrbl-identity-server",
-        "tigrbl-identity-storage",
         "tigrbl-identity-testkit",
     },
     "facade": {"tigrbl-auth"},
-    "downstream_backend": {
+    "apis": {
         "tigrbl-auth-api-developer",
         "tigrbl-auth-api-my-account",
         "tigrbl-auth-api-platform-admin",
@@ -58,6 +59,29 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-api-service-admin",
         "tigrbl-auth-api-tenant-admin",
     },
+    "deprecated": {
+        "tigrbl-identity-credentials",
+        "tigrbl-identity-oauth",
+        "tigrbl-identity-oidc",
+        "tigrbl-identity-policy",
+        "tigrbl-identity-resource-server",
+        "tigrbl-identity-rp",
+    },
+}
+
+PYTHON_LAYER_FOLDERS = {
+    "primitives": "00-primitives",
+    "contracts": "01-contracts",
+    "bases": "05-bases",
+    "domain": "10-domain",
+    "storage": "20-storage",
+    "providers": "30-providers",
+    "capabilities": "40-capabilities",
+    "protocols": "50-protocols",
+    "runtime": "60-runtime",
+    "facade": "70-facade",
+    "apis": "80-apis",
+    "deprecated": "deprecated",
 }
 
 FRONTEND_WORKSPACES = {
@@ -73,7 +97,7 @@ FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "95-ui" / "tenant-admin-uix",
 }
 
-T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
+LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS: dict[str, str] = {}
 
 JS_IMPORT_RE = re.compile(
     r"""(?:from\s+["'](?P<from>[^"']+)["']|import\s*\(\s*["'](?P<dynamic>[^"']+)["']\s*\)|require\s*\(\s*["'](?P<require>[^"']+)["']\s*\))"""
@@ -128,6 +152,9 @@ def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
     discovered = _declared_python_packages()
     declared = set().union(*PYTHON_PACKAGE_LAYERS.values())
 
+    assert "core" not in PYTHON_PACKAGE_LAYERS
+    assert "foundation" not in PYTHON_PACKAGE_LAYERS
+    assert not (PKGS / "00-core").exists()
     assert declared == discovered
 
     layer_names = list(PYTHON_PACKAGE_LAYERS)
@@ -136,19 +163,29 @@ def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
             assert PYTHON_PACKAGE_LAYERS[layer].isdisjoint(PYTHON_PACKAGE_LAYERS[other])
 
 
-def test_t2_foundation_packages_do_not_import_tigrbl_auth_facade() -> None:
+def test_python_package_layers_match_filesystem_layout() -> None:
+    assert set(PYTHON_LAYER_FOLDERS) == set(PYTHON_PACKAGE_LAYERS)
+
+    for layer, packages in PYTHON_PACKAGE_LAYERS.items():
+        expected_folder = PYTHON_LAYER_FOLDERS[layer]
+        for package in packages:
+            package_folder = _package_dir(package).relative_to(PKGS).parts[0]
+            assert package_folder == expected_folder, (package, expected_folder, package_folder)
+
+
+def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
     facade_consumers = {
         package
         for package in _declared_python_packages()
         if _package_facade_imports(package)
     }
     expected_upper_layers = (
-        PYTHON_PACKAGE_LAYERS["facade"] | PYTHON_PACKAGE_LAYERS["downstream_backend"]
+        PYTHON_PACKAGE_LAYERS["facade"] | PYTHON_PACKAGE_LAYERS["apis"]
     )
-    foundation_consumers = facade_consumers - expected_upper_layers
+    lower_layer_consumers = facade_consumers - expected_upper_layers
 
-    undeclared = foundation_consumers - set(T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS)
-    stale = set(T2_FOUNDATION_FACADE_IMPORT_EXCEPTIONS) - foundation_consumers
+    undeclared = lower_layer_consumers - set(LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS)
+    stale = set(LOWER_LAYER_FACADE_IMPORT_EXCEPTIONS) - lower_layer_consumers
 
     assert not undeclared, {
         package: [str(path) for path in _package_facade_imports(package)]
@@ -158,11 +195,7 @@ def test_t2_foundation_packages_do_not_import_tigrbl_auth_facade() -> None:
 
 
 def test_new_authn_authz_protocol_packages_do_not_import_tigrbl_auth_facade() -> None:
-    split_packages = {
-        package
-        for package in PYTHON_PACKAGE_LAYERS["foundation"]
-        if package.startswith("tigrbl-auth")
-    }
+    split_packages = PYTHON_PACKAGE_LAYERS["capabilities"] | PYTHON_PACKAGE_LAYERS["protocols"]
 
     offenders = {
         package: [str(path) for path in _package_facade_imports(package)]

@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Iterable
 
-from tigrbl_user_plane_contracts.authz.decisions import (
+from tigrbl_identity_contracts.authz.decisions import (
     AdminPolicy,
     AttributePolicy,
     DecisionEffect,
