@@ -3,16 +3,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Mapping
 
-from .service_identity import (
+from .authentication import ServiceIdentityAuthentication
+from .credentials import ServiceCredential
+from .delegation import (
     ADMIN_CLIENT_FIELDS,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
     DelegatedAdminScope,
-    ServiceCredential,
-    ServiceIdentity,
-    ServiceIdentityAuthentication,
 )
+from .principals import ServiceIdentity
 
 
 @dataclass(frozen=True, slots=True)

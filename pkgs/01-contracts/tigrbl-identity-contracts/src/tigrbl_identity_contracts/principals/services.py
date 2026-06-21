@@ -1,4 +1,4 @@
-"""Service identity contract dataclasses."""
+"""Service principal contract dataclasses."""
 
 from __future__ import annotations
 

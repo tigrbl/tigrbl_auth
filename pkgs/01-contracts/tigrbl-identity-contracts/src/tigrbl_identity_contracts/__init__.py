@@ -25,6 +25,5 @@ from .admin_resources import *
 from .evidence import *
 from .governance import *
 from .residency import *
-from .service_identity import *
 
 __all__ = [name for name in globals() if not name.startswith("_")]

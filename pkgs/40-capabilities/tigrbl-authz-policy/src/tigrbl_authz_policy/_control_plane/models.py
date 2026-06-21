@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_contracts.admin import *
-from tigrbl_identity_contracts.service_identity import *
 
 ADMIN_POLICY_BOUNDARY_FEATURES: tuple[dict[str, Any], ...] = (
     {"feature_id": "feat:f03-service-identities", "category": "service-identity", "runtime_objects": ("ServiceIdentityRegistry", "ServiceIdentityAuthentication"), "guarded_planes": ("admin", "policy")},

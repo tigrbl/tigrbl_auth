@@ -238,7 +238,7 @@ def test_governance_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "governance" / "accessreview" / "__init__.py").exists()
 
 
-def test_service_identity_contracts_are_domain_packaged() -> None:
+def test_service_identity_contracts_are_placed_with_owning_domains() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
@@ -249,12 +249,11 @@ def test_service_identity_contracts_are_domain_packaged() -> None:
     )
 
     assert not (contracts_root / "service_identity.py").exists()
-    assert (contracts_root / "service_identity" / "__init__.py").exists()
-    assert (contracts_root / "service_identity" / "constants.py").exists()
-    assert (contracts_root / "service_identity" / "services.py").exists()
-    assert (contracts_root / "service_identity" / "credentials.py").exists()
-    assert (contracts_root / "service_identity" / "authentication.py").exists()
-    assert (contracts_root / "service_identity" / "delegation.py").exists()
+    assert not (contracts_root / "service_identity").exists()
+    assert (contracts_root / "principals" / "services.py").exists()
+    assert (contracts_root / "credentials" / "services.py").exists()
+    assert (contracts_root / "authentication" / "services.py").exists()
+    assert (contracts_root / "delegation" / "admin.py").exists()
 
 
 def test_delegation_contracts_are_domain_packaged() -> None:

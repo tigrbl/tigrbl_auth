@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .services import ServiceIdentity
+from ..principals import ServiceIdentity
 
 
 @dataclass(frozen=True, slots=True)
