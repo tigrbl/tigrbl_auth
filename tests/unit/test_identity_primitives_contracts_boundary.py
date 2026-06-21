@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import ast
 import sys
 from datetime import datetime, timezone
@@ -50,6 +51,66 @@ def test_identity_primitives_export_version_range_helpers() -> None:
     assert core.semver_key("1.2") == (1, 2, 0)
     assert core.version_in_range("0.3.5", ("0.3.0", "0.3.9"))
     assert not core.version_in_range("0.4.0", ("0.3.0", "0.3.9"))
+
+
+def test_identity_primitives_export_http_and_jsonrpc_helpers() -> None:
+    import tigrbl_identity_core as core
+
+    status, headers, body = core.json_response(401, {"error": "missing"})
+
+    assert status == 401
+    assert (b"www-authenticate", b"Bearer") in headers
+    assert body == b'{"error":"missing"}'
+    assert core.headers_from_scope({"headers": [(b"X-API-Key", b"secret")]}) == {"x-api-key": "secret"}
+    assert core.jsonrpc_error("1", -32600, "Invalid Request") == {
+        "jsonrpc": "2.0",
+        "id": "1",
+        "error": {"code": -32600, "message": "Invalid Request"},
+    }
+
+    messages = iter(
+        [
+            {"type": "http.request", "body": b"alpha", "more_body": True},
+            {"type": "http.request", "body": b"beta", "more_body": False},
+        ]
+    )
+
+    async def receive() -> dict[str, object]:
+        return next(messages)
+
+    assert asyncio.run(core.read_http_body(receive)) == b"alphabeta"
+    replay = core.replay_http_body(b"body")
+    assert asyncio.run(replay()) == {"type": "http.request", "body": b"body", "more_body": False}
+    assert asyncio.run(replay()) == {"type": "http.request", "body": b"", "more_body": False}
+
+
+def test_authz_policy_admin_gate_uses_identity_core_primitives() -> None:
+    helper_path = (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy"
+        / "_admin_gate"
+        / "helpers.py"
+    )
+    tree = ast.parse(helper_path.read_text(encoding="utf-8"))
+    local_functions = {
+        node.name
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+
+    assert {
+        "_digest",
+        "_headers",
+        "_json_response",
+        "_jsonrpc_error",
+        "_read_http_body",
+        "_replay_http_body",
+    }.isdisjoint(local_functions)
+    assert "from tigrbl_identity_core import" in helper_path.read_text(encoding="utf-8")
 
 
 def test_identity_primitives_do_not_own_liveness_contracts() -> None:

@@ -15,6 +15,8 @@ from .errors import (
     InvalidTokenError,
 )
 from .path_safety import safe_display_path, sanitize_local_paths
+from .http import headers_from_scope, json_response, read_http_body, replay_http_body
+from .jsonrpc import jsonrpc_error
 from .primitives import (
     Audience,
     ClientId,
@@ -77,10 +79,15 @@ __all__ = [
     "canonicalize",
     "canonical_json_bytes",
     "describe_owner",
+    "headers_from_scope",
+    "json_response",
+    "jsonrpc_error",
     "matches_dotted_pattern",
     "normal_tuple",
     "normalize_entity",
     "redact_sensitive_mapping",
+    "read_http_body",
+    "replay_http_body",
     "safe_display_path",
     "sanitize_local_paths",
     "sha256_text_digest",
