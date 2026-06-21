@@ -1,17 +1,13 @@
 from __future__ import annotations
 
-from datetime import datetime
 from typing import Iterable
 
+from tigrbl_identity_core.clock import parse_time
 from tigrbl_identity_contracts.authority import AuthorityScope
 from tigrbl_identity_contracts.delegation import (
     DelegationAttenuationProof,
     DelegationGrant,
 )
-
-
-def _parse_time(value: str) -> datetime:
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
 def prove_delegation_attenuation(
@@ -31,7 +27,7 @@ def prove_delegation_attenuation(
     ]
     if grant.revoked:
         failures.append("delegation grant is revoked")
-    if grant.expires_at is not None and evaluated_at is not None and _parse_time(grant.expires_at) <= _parse_time(evaluated_at):
+    if grant.expires_at is not None and evaluated_at is not None and parse_time(grant.expires_at) <= parse_time(evaluated_at):
         failures.append("delegation grant is expired")
     if known_provenance_ids is not None:
         known = set(known_provenance_ids)

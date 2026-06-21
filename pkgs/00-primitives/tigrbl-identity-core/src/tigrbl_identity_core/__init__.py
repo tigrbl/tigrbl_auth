@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from .base64url import base64url_decode, base64url_encode
-from .clock import Clock, FrozenClock, SystemClock, unix_seconds, utc_now, utc_now_iso
+from .clock import Clock, FrozenClock, SystemClock, parse_time, unix_seconds, utc_now, utc_now_iso
 from .entity_keys import normalize_entity, tenant_key
 from .digests import sha256_text_digest
 from .errors import (
@@ -14,7 +14,6 @@ from .errors import (
     InvalidKeyError,
     InvalidTokenError,
 )
-from .liveness import ConvergenceEvent, ConvergenceState, LivenessConvergenceReport
 from .path_safety import safe_display_path, sanitize_local_paths
 from .primitives import (
     Audience,
@@ -50,8 +49,6 @@ __all__ = [
     "Clock",
     "ClientId",
     "ClientRef",
-    "ConvergenceEvent",
-    "ConvergenceState",
     "CredentialId",
     "FrozenClock",
     "IdentityAuthorizationError",
@@ -62,7 +59,7 @@ __all__ = [
     "InvalidTokenError",
     "Issuer",
     "JWTPayload",
-    "LivenessConvergenceReport",
+    "parse_time",
     "Principal",
     "PrincipalId",
     "PrincipalRef",
@@ -83,9 +80,9 @@ __all__ = [
     "canonical_json_bytes",
     "describe_owner",
     "matches_dotted_pattern",
-    "redact_sensitive_mapping",
     "normal_tuple",
     "normalize_entity",
+    "redact_sensitive_mapping",
     "safe_display_path",
     "sanitize_local_paths",
     "sha256_text_digest",

@@ -44,4 +44,16 @@ def utc_now_iso(clock: Clock | None = None) -> str:
     return utc_now(clock).isoformat()
 
 
-__all__ = ["Clock", "FrozenClock", "SystemClock", "unix_seconds", "utc_now", "utc_now_iso"]
+def parse_time(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+__all__ = [
+    "Clock",
+    "FrozenClock",
+    "SystemClock",
+    "parse_time",
+    "unix_seconds",
+    "utc_now",
+    "utc_now_iso",
+]

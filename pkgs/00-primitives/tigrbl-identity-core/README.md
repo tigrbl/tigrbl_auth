@@ -9,7 +9,7 @@ tigrbl-identity-core owns the shared primitive types for the Tigrbl identity sui
 - Package: `tigrbl-identity-core`
 - Import root: `tigrbl_identity_core`
 - Component kind: Identity primitives package
-- Use it when you need shared identity primitives for tenants, principals, JWT payload typing, UTC clock values, version range checks, local path redaction, or canonical JSON.
+- Use it when you need shared identity primitives for tenants, principals, JWT payload typing, UTC clock values, datetime parsing, version range checks, local path redaction, or canonical JSON.
 - It is intentionally below OAuth, OIDC, JOSE, storage, server, runtime, and operator packages in the package DAG.
 - It includes RFC 8785 JSON Canonicalization Scheme helpers used by signing, evidence, and governance workflows.
 
@@ -34,7 +34,7 @@ canonical = canonicalize({"sub": str(subject_id), "scope": ["openid", "profile"]
 ## Package Boundary
 
 - Identity errors and typed primitives
-- UTC clock and version comparison helpers
+- UTC clock, datetime parsing, and version comparison helpers
 - UUID and JWT payload typing helpers
 - Path redaction for repo-safe evidence
 - RFC 8785 canonical JSON utilities

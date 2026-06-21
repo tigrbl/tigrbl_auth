@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import importlib
 import sys
 from pathlib import Path
 
@@ -277,6 +278,28 @@ def test_liveness_contracts_are_domain_packaged() -> None:
 
     assert not (contracts_root / "authz" / "liveness.py").exists()
     assert (contracts_root / "liveness" / "__init__.py").exists()
+    assert not (
+        ROOT
+        / "pkgs"
+        / "00-primitives"
+        / "tigrbl-identity-core"
+        / "src"
+        / "tigrbl_identity_core"
+        / "liveness.py"
+    ).exists()
+
+    import tigrbl_identity_contracts.liveness as liveness
+
+    assert liveness.ConvergenceEvent.__module__ == "tigrbl_identity_contracts.liveness"
+    assert liveness.ConvergenceState.__module__ == "tigrbl_identity_contracts.liveness"
+    assert liveness.LivenessConvergenceReport.__module__ == "tigrbl_identity_contracts.liveness"
+    sys.modules.pop("tigrbl_identity_core.liveness", None)
+    try:
+        importlib.import_module("tigrbl_identity_core.liveness")
+    except ModuleNotFoundError:
+        pass
+    else:  # pragma: no cover - fail if core starts owning liveness records again.
+        raise AssertionError("tigrbl_identity_core.liveness should not exist")
 
 
 def test_replay_contracts_are_domain_packaged() -> None:

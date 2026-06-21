@@ -35,6 +35,7 @@ def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
     assert core.unix_seconds(frozen) == int(frozen.now().timestamp())
     assert core.utc_now(frozen) == frozen.now()
     assert core.utc_now_iso(frozen) == "2026-01-02T03:04:05+00:00"
+    assert core.parse_time("2026-01-02T03:04:05Z") == datetime(2026, 1, 2, 3, 4, 5, tzinfo=timezone.utc)
 
 
 def test_identity_primitives_export_version_range_helpers() -> None:
@@ -44,6 +45,14 @@ def test_identity_primitives_export_version_range_helpers() -> None:
     assert core.semver_key("1.2") == (1, 2, 0)
     assert core.version_in_range("0.3.5", ("0.3.0", "0.3.9"))
     assert not core.version_in_range("0.4.0", ("0.3.0", "0.3.9"))
+
+
+def test_identity_primitives_do_not_own_liveness_contracts() -> None:
+    import tigrbl_identity_core as core
+
+    assert not hasattr(core, "ConvergenceEvent")
+    assert not hasattr(core, "ConvergenceState")
+    assert not hasattr(core, "LivenessConvergenceReport")
 
 
 def test_identity_primitives_import_dag_clean_room() -> None:
