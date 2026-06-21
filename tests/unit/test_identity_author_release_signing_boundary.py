@@ -1,10 +1,7 @@
 from __future__ import annotations
 
 import importlib
-import sys
 from pathlib import Path
-
-import pytest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,15 +33,8 @@ def test_release_signing_lives_in_identity_author() -> None:
     assert callable(canonical._canonical_json)
 
 
-def test_jose_release_signing_is_deprecated_bridge() -> None:
-    canonical = importlib.import_module("tigrbl_identity_author.release_signing")
-    sys.modules.pop("tigrbl_identity_jose.release_signing", None)
-
-    with pytest.warns(DeprecationWarning, match="tigrbl_identity_author.release_signing"):
-        legacy = importlib.import_module("tigrbl_identity_jose.release_signing")
-
-    assert legacy.load_signer is canonical.load_signer
-    assert legacy._canonical_json is canonical._canonical_json
+def test_jose_release_signing_bridge_is_removed() -> None:
+    assert not (JOSE_ROOT / "release_signing.py").exists()
 
 
 def test_tigrbl_auth_release_signing_facade_points_to_identity_author() -> None:
