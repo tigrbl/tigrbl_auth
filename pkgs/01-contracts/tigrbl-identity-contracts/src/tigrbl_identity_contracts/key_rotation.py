@@ -2,9 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .evidence import KeyRotationAuditEvidence
-
-
 @dataclass(frozen=True, slots=True)
 class KeyRotationPolicyVersion:
     policy_id: str
@@ -52,6 +49,5 @@ class EffectiveKeyRotationPolicy:
 
 __all__ = [
     "EffectiveKeyRotationPolicy",
-    "KeyRotationAuditEvidence",
     "KeyRotationPolicyVersion",
 ]

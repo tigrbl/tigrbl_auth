@@ -26,9 +26,9 @@ def _dataclass_defs(path: Path) -> set[str]:
 
 def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     import tigrbl_identity_contracts as control_contracts
-    import tigrbl_identity_contracts as management_contracts
     import tigrbl_security_trust_contracts as security_trust_contracts
     import tigrbl_identity_contracts as user_contracts
+    from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
     from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
     from tigrbl_identity_jose.standards import rfc7516
     from tigrbl_identity_principals import models, tenant_discovery
@@ -37,7 +37,12 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     assert boundary.KeyRotationContract is user_contracts.KeyRotationContract
     assert key_rotation_policy.KeyRotationPolicyVersion is control_contracts.KeyRotationPolicyVersion
     assert key_rotation_policy.EffectiveKeyRotationPolicy is control_contracts.EffectiveKeyRotationPolicy
-    assert key_rotation_policy.KeyRotationAuditEvidence is management_contracts.KeyRotationAuditEvidence
+    assert not hasattr(key_rotation_policy, "KeyRotationAuditEvidence")
+    audit = key_rotation_policy.KeyRotationAdministration(
+        key_rotation_policy.KeyRotationPolicyGovernance()
+    )
+    assert audit.audit_records == ()
+    assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
     assert pqc.PQCSignatureKeyPair is security_trust_contracts.PQCSignatureKeyPair
     assert rfc7516.JWEPolicy is user_contracts.JWEPolicy
     assert models.Realm is user_contracts.Realm

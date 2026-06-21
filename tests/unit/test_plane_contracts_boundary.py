@@ -133,14 +133,16 @@ def test_release_contracts_own_release_posture_surfaces() -> None:
 
 def test_management_plane_contracts_own_residency_and_evidence_surfaces() -> None:
     import tigrbl_identity_contracts as contracts
+    from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
     from tigrbl_authz_policy import ResidencyZone
-    from tigrbl_identity_jose import KeyRotationAuditEvidence
 
     assert ResidencyZone is contracts.ResidencyZone
-    assert KeyRotationAuditEvidence is contracts.KeyRotationAuditEvidence
+    assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
+    assert not hasattr(contracts, "KeyRotationAuditEvidence")
 
 
 def test_admin_capability_models_are_contract_reexports() -> None:
+    from tigrbl_identity_contracts.audit.admin import AdminAuditEvent
     import tigrbl_identity_contracts as control_contracts
     import tigrbl_identity_contracts as management_contracts
     import tigrbl_identity_contracts as user_contracts
@@ -149,7 +151,8 @@ def test_admin_capability_models_are_contract_reexports() -> None:
 
     assert admin_models.AdminResource is management_contracts.AdminResource
     assert admin_models.PrincipalRecord is management_contracts.PrincipalRecord
-    assert admin_models.AdminAuditEvent is management_contracts.AdminAuditEvent
+    assert not hasattr(admin_models, "AdminAuditEvent")
+    assert AdminAuditEvent.__name__ == "AdminAuditEvent"
     assert admin_models.AdminUiView is management_contracts.AdminUiView
     assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
     assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest

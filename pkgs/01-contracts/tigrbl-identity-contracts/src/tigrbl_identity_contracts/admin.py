@@ -67,20 +67,6 @@ class AttributePolicy:
     client_id: str | None = None
 
 
-@dataclass(frozen=True, slots=True)
-class PolicyAuditEvent:
-    event_id: str
-    subject: str
-    tenant_id: str | None
-    permission: str
-    allowed: bool
-    reason: str
-    matched: tuple[str, ...]
-    actor_type: str
-    recorded_at: str
-    client_id: str | None = None
-
-
 __all__ = [
     "ADMIN_CLIENT_FIELDS",
     "AttributePolicy",
@@ -89,7 +75,6 @@ __all__ = [
     "DelegatedAdminScope",
     "DynamicCondition",
     "PUBLIC_CLIENT_FIELDS",
-    "PolicyAuditEvent",
     "PolicyDecision",
     "Role",
     "ServiceCredential",

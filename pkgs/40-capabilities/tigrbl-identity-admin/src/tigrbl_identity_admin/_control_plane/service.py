@@ -3,8 +3,9 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any, Iterable, Mapping
 
+from tigrbl_identity_contracts.audit.admin import AdminAuditEvent as _AdminAuditEvent
+
 from .models import (
-    AdminAuditEvent,
     AdminControlPlaneError,
     AdminResource,
     AdminResourceKind,
@@ -28,10 +29,10 @@ class AdminControlPlane:
         self._resources: dict[AdminResourceKind, dict[str, AdminResource]] = {
             kind: {} for kind in AdminResourceKind
         }
-        self._audit_events: list[AdminAuditEvent] = []
+        self._audit_events: list[_AdminAuditEvent] = []
 
     @property
-    def audit_events(self) -> tuple[AdminAuditEvent, ...]:
+    def audit_events(self) -> tuple[_AdminAuditEvent, ...]:
         return tuple(self._audit_events)
 
     def create_principal(
@@ -261,7 +262,7 @@ class AdminControlPlane:
 
     def _record(self, actor: str, action: str, resource: AdminResource, outcome: str) -> None:
         self._audit_events.append(
-            AdminAuditEvent(
+            _AdminAuditEvent(
                 event_id=_new_id("audit"),
                 actor=actor,
                 action=action,

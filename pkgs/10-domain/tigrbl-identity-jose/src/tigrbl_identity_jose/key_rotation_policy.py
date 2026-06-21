@@ -8,7 +8,9 @@ from tigrbl_identity_contracts.key_rotation import (
     EffectiveKeyRotationPolicy,
     KeyRotationPolicyVersion,
 )
-from tigrbl_identity_contracts.evidence import KeyRotationAuditEvidence
+from tigrbl_identity_contracts.evidence.key_rotation import (
+    KeyRotationAuditEvidence as _KeyRotationAuditEvidence,
+)
 
 def _utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()
@@ -185,10 +187,10 @@ class KeyRotationAdministration:
     ) -> None:
         self._governance = governance
         self._authorize = authorize or (lambda request: "decision:allow")
-        self._audit_records: list[KeyRotationAuditEvidence] = []
+        self._audit_records: list[_KeyRotationAuditEvidence] = []
 
     @property
-    def audit_records(self) -> tuple[KeyRotationAuditEvidence, ...]:
+    def audit_records(self) -> tuple[_KeyRotationAuditEvidence, ...]:
         return tuple(self._audit_records)
 
     def view_effective_policy(self, **scope: str) -> EffectiveKeyRotationPolicy:
@@ -209,7 +211,7 @@ class KeyRotationAdministration:
         jwks_published: bool,
         retired: bool,
         reason: str,
-    ) -> KeyRotationAuditEvidence:
+    ) -> _KeyRotationAuditEvidence:
         policy = self._governance.require_effective_policy(
             tenant_id=tenant_id,
             issuer=issuer,
@@ -234,7 +236,7 @@ class KeyRotationAdministration:
             raise PermissionError("rotation policy requires JWKS publication")
         if not retired:
             raise PermissionError("rotation policy requires old key retirement evidence")
-        audit = KeyRotationAuditEvidence(
+        audit = _KeyRotationAuditEvidence(
             audit_id=f"kra:{policy.policy_id}:{policy.version_id}:{new_kid}",
             tenant_id=tenant_id,
             issuer=issuer,
@@ -257,7 +259,6 @@ class KeyRotationAdministration:
 __all__ = [
     "EffectiveKeyRotationPolicy",
     "KeyRotationAdministration",
-    "KeyRotationAuditEvidence",
     "KeyRotationPolicyGovernance",
     "KeyRotationPolicyOverlapError",
     "KeyRotationPolicyVersion",

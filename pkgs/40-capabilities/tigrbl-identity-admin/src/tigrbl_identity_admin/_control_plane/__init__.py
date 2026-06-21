@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from .models import (
-    AdminAuditEvent,
     AdminControlPlaneError,
     AdminResource,
     AdminResourceKind,
@@ -18,7 +17,6 @@ from .models import (
 from .service import AdminControlPlane
 
 __all__ = [
-    'AdminAuditEvent',
     'AdminControlPlane',
     'AdminControlPlaneError',
     'AdminResource',

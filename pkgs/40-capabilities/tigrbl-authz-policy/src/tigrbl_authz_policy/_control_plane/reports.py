@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Iterable, Mapping
 
+from tigrbl_identity_contracts.audit.policy import PolicyAuditEvent as _PolicyAuditEvent
+
 from .models import *
 from .administration import *
 from .policy_engine import *
@@ -12,7 +14,7 @@ def build_compliance_report(
     rbac: RBACAdministration,
     abac: ABACAdministration,
     delegated_admin: DelegatedAdministration,
-    audit_events: Iterable[PolicyAuditEvent],
+    audit_events: Iterable[_PolicyAuditEvent],
     tenant_ids: Iterable[str],
     clients: Iterable[Mapping[str, Any]],
 ) -> dict[str, Any]:
@@ -61,7 +63,6 @@ __all__ = [
     "DelegatedAdministration",
     "DynamicCondition",
     "PUBLIC_CLIENT_FIELDS",
-    "PolicyAuditEvent",
     "PolicyDecision",
     "PolicyEngine",
     "PHASE3_ADMIN_POLICY_FEATURES",

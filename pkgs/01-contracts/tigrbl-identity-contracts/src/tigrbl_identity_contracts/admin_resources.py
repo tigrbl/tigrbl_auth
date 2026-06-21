@@ -126,18 +126,6 @@ class PolicyRecord(AdminResource):
 
 
 @dataclass(frozen=True, slots=True)
-class AdminAuditEvent:
-    event_id: str
-    actor: str
-    action: str
-    resource_kind: AdminResourceKind
-    resource_id: str
-    tenant_id: str
-    outcome: str
-    recorded_at: str = field(default_factory=_utc_now)
-
-
-@dataclass(frozen=True, slots=True)
 class AdminUiView:
     state: AdminUiState
     resource_kind: AdminResourceKind
@@ -150,7 +138,6 @@ class AdminUiView:
 
 
 __all__ = [
-    "AdminAuditEvent",
     "AdminResource",
     "AdminResourceKind",
     "AdminResourceStatus",

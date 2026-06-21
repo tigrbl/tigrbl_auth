@@ -17,7 +17,6 @@ from .boundary import (
 from .key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
-    KeyRotationAuditEvidence,
     KeyRotationPolicyGovernance,
     KeyRotationPolicyOverlapError,
     KeyRotationPolicyVersion,
@@ -45,7 +44,6 @@ __all__ = [
     "JoseKeyStatus",
     "JoseKeyUse",
     "KeyRotationAdministration",
-    "KeyRotationAuditEvidence",
     "KeyRotationContract",
     "KeyRotationPolicyGovernance",
     "KeyRotationPolicyOverlapError",

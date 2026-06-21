@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_contracts.audit.policy import PolicyAuditEvent as _PolicyAuditEvent
+
 from .models import *
 from .models import _permission_matches, _pick_fields, _utc_now
 from .administration import *
@@ -93,10 +95,10 @@ class PolicyEngine:
         self.rbac = rbac or RBACAdministration()
         self.abac = abac or ABACAdministration()
         self.delegated_admin = delegated_admin or DelegatedAdministration()
-        self._audit_events: list[PolicyAuditEvent] = []
+        self._audit_events: list[_PolicyAuditEvent] = []
 
     @property
-    def audit_events(self) -> tuple[PolicyAuditEvent, ...]:
+    def audit_events(self) -> tuple[_PolicyAuditEvent, ...]:
         return tuple(self._audit_events)
 
     def evaluate(
@@ -186,7 +188,7 @@ class PolicyEngine:
         client_id: str | None,
     ) -> None:
         self._audit_events.append(
-            PolicyAuditEvent(
+            _PolicyAuditEvent(
                 event_id=f"policy-audit-{uuid4().hex}",
                 subject=subject,
                 tenant_id=tenant_id,
@@ -282,5 +284,15 @@ def assert_client_mutation_authority(
     )
     if not decision.allowed:
         raise PermissionError(decision.reason)
+
+
+__all__ = [
+    "DelegatedAdministration",
+    "PolicyEngine",
+    "assert_client_mutation_authority",
+    "expose_client_record",
+    "filter_visible_tenants",
+    "simulate_policy",
+]
 
 

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from .control_plane import (
-    AdminAuditEvent,
     AdminControlPlane,
     AdminControlPlaneError,
     AdminResource,
@@ -20,7 +19,6 @@ from .control_plane import (
 )
 
 __all__ = [
-    "AdminAuditEvent",
     "AdminControlPlane",
     "AdminControlPlaneError",
     "AdminResource",

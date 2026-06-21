@@ -10,6 +10,7 @@ for src in (ROOT / "pkgs").glob("*/src"):
         sys.path.insert(0, value)
 
 import tigrbl_identity_jose as jose
+from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
 
 
 SCOPE = {
@@ -52,7 +53,8 @@ def _published_governance() -> jose.KeyRotationPolicyGovernance:
 def test_key_rotation_policy_boundary_t0_inventory_exports_policy_runtime_objects():
     assert jose.KeyRotationPolicyVersion.__name__ == "KeyRotationPolicyVersion"
     assert jose.EffectiveKeyRotationPolicy.__name__ == "EffectiveKeyRotationPolicy"
-    assert jose.KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
+    assert not hasattr(jose, "KeyRotationAuditEvidence")
+    assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
     assert jose.KeyRotationPolicyGovernance.__name__ == "KeyRotationPolicyGovernance"
     assert jose.KeyRotationAdministration.__name__ == "KeyRotationAdministration"
     assert jose.KeyRotationPolicyOverlapError.__name__ == "KeyRotationPolicyOverlapError"

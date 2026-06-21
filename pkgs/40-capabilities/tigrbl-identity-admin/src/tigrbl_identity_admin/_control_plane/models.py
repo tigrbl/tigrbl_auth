@@ -3,7 +3,6 @@ from __future__ import annotations
 from uuid import uuid4
 
 from tigrbl_identity_contracts.admin_resources import (
-    AdminAuditEvent,
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
@@ -29,7 +28,6 @@ def _new_id(prefix: str) -> str:
 
 
 __all__ = [
-    "AdminAuditEvent",
     "AdminControlPlaneError",
     "AdminResource",
     "AdminResourceKind",
