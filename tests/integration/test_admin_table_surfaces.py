@@ -29,7 +29,7 @@ from tigrbl_auth.runtime.engine_resolver import (
 from tigrbl_auth.services._operator_store import OperationContext
 from tigrbl_auth.services.operator_service import create_resource
 from tigrbl_auth.services.session_service import observe_token_response
-from tigrbl_auth.tables import AuditEvent, Base, Client, Consent, get_db as tables_get_db
+from tigrbl_auth.tables import AuditEvent, Client, Consent, RestOltpTable, get_db as tables_get_db
 from tigrbl_auth.tables.engine import get_db as engine_get_db
 
 
@@ -66,7 +66,7 @@ async def _ensure_runtime_tables(provider: Any) -> None:
     raw_engine, _ = provider.ensure()
 
     def _create_runtime_tables(sync_conn):
-        Base.metadata.create_all(bind=sync_conn, checkfirst=True)
+        RestOltpTable.metadata.create_all(bind=sync_conn, checkfirst=True)
 
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):

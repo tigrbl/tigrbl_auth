@@ -247,10 +247,10 @@ async def _runtime_engine_context(database_url: str):
     sqlite_attachments = _bootstrap_sqlite_schema(raw_engine)
 
     def _create_runtime_tables(sync_conn):
-        from tigrbl_auth.tables import Base
+        from tigrbl_auth.tables import RestOltpTable
 
         _ensure_sqlite_attachment_on_connection(sync_conn, sqlite_attachments)
-        Base.metadata.create_all(bind=sync_conn, checkfirst=True)
+        RestOltpTable.metadata.create_all(bind=sync_conn, checkfirst=True)
 
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):

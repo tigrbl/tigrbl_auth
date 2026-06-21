@@ -30,7 +30,7 @@ def test_delegation_grant_storage_model_contract() -> None:
     assert storage_tables.DelegationGrantTokenLink.__tablename__ == "delegation_grant_token_links"
     assert auth_tables.DelegationGrantRecord is storage_tables.DelegationGrantRecord
 
-    metadata_tables = set(storage_tables.Base.metadata.tables)
+    metadata_tables = set(storage_tables.RestOltpTable.metadata.tables)
     assert {
         "authn.delegation_grants",
         "authn.delegation_grant_scopes",

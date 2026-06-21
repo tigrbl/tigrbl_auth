@@ -6,8 +6,8 @@ Table-backed API surface for the authentication service.
 
 Exports
 -------
-Base        : Declarative base for all models in **tigrbl_authn**.
-metadata    : Shared SQLAlchemy ``MetaData`` with a sane naming-convention.
+RestOltpTable : Declarative table root for all models in **tigrbl_authn**.
+metadata      : Shared SQLAlchemy ``MetaData`` with a sane naming-convention.
 surface_api : ``TigrblRouter`` combining Tigrbl resources and REST flows.
 
 The resulting ``surface_api`` exposes a REST surface under
@@ -18,7 +18,7 @@ Notes
 -----
 *   Importing this module has the side-effect of importing
     ``tigrbl_identity_storage.tables``, so every model class is registered with the
-    declarative base **before** Tigrbl introspects the metadata.
+    declarative table root **before** Tigrbl introspects the metadata.
 """
 
 from __future__ import annotations

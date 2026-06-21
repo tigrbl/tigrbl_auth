@@ -65,9 +65,9 @@ async def _ensure_runtime_tables(provider: object) -> None:
     raw_engine, _ = provider.ensure()
 
     def _create_runtime_tables(sync_conn):
-        from tigrbl_auth.tables import Base
+        from tigrbl_auth.tables import RestOltpTable
 
-        Base.metadata.create_all(bind=sync_conn, checkfirst=True)
+        RestOltpTable.metadata.create_all(bind=sync_conn, checkfirst=True)
 
     begin_ctx = raw_engine.begin()
     if hasattr(begin_ctx, "__aenter__"):
