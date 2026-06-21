@@ -7,7 +7,7 @@ from tigrbl_identity_contracts.policy.decisions import PolicyDecision, PolicyTra
 from tigrbl_identity_contracts.policy.effects import DecisionEffect
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
 from tigrbl_identity_contracts.policy.requests import PolicyRequest
-from tigrbl_identity_contracts.policy.rules import (
+from tigrbl_authz_policy_concrete import (
     AdminPolicy,
     AttributePolicy,
     DelegationPolicy,

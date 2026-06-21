@@ -2253,6 +2253,7 @@ dependencies = [
     { name = "tigrbl-auth-protocol-rp" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-policy-concrete" },
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-base" },
     { name = "tigrbl-canon" },
@@ -2381,6 +2382,7 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" },
     { name = "tigrbl-authn-credentials", editable = "pkgs/40-capabilities/tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy", editable = "pkgs/40-capabilities/tigrbl-authz-policy" },
+    { name = "tigrbl-authz-policy-concrete", editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" },
     { name = "tigrbl-authz-resource-server", editable = "pkgs/40-capabilities/tigrbl-authz-resource-server" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
@@ -2464,6 +2466,7 @@ name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
+    { name = "tigrbl-authz-policy-concrete" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-release-contracts" },
@@ -2471,10 +2474,22 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-authz-policy-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-authz-resource-server"

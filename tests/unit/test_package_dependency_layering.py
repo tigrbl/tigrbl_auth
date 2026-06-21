@@ -21,6 +21,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-security-trust-domain-bases",
     },
     "concrete": {
+        "tigrbl-authz-policy-concrete",
         "tigrbl-identity-concrete",
     },
     "storage": {

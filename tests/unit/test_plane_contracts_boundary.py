@@ -390,6 +390,15 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
     assert (contracts_root / "policy" / "lifecycle.py").exists()
     assert (contracts_root / "policy" / "requests.py").exists()
     assert (contracts_root / "policy" / "rules.py").exists()
+    assert (
+        ROOT
+        / "pkgs"
+        / "10-concrete"
+        / "tigrbl-authz-policy-concrete"
+        / "src"
+        / "tigrbl_authz_policy_concrete"
+        / "rules.py"
+    ).exists()
 
 
 def test_plane_contracts_are_domain_packaged() -> None:

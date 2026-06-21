@@ -14,8 +14,8 @@ from tigrbl_identity_contracts.delegation import (
 )
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision
-from tigrbl_identity_contracts.policy.rules import AttributePolicy
 from tigrbl_identity_concrete import ServiceCredential, ServiceIdentity
+from tigrbl_authz_policy_concrete import AttributePolicy
 
 ADMIN_POLICY_BOUNDARY_FEATURES: tuple[dict[str, Any], ...] = (
     {"feature_id": "feat:f03-service-identities", "category": "service-identity", "runtime_objects": ("ServiceIdentityRegistry", "ServiceIdentityAuthentication"), "guarded_planes": ("admin", "policy")},
