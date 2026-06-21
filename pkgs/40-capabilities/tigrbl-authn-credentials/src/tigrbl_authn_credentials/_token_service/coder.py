@@ -4,6 +4,10 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
+from tigrbl_identity_contracts.tokens import (
+    DEFAULT_ACCESS_TOKEN_TTL as _ACCESS_TTL,
+    DEFAULT_REFRESH_TOKEN_TTL as _REFRESH_TTL,
+)
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.pqc_jwt import (
     ML_DSA_65_ALG,
@@ -13,7 +17,7 @@ from tigrbl_identity_jose.pqc_jwt import (
     verify_pqc_jwt,
 )
 
-from .runtime import _ACCESS_TTL, _REFRESH_TTL, _header_alg, _load_runtime, _run, _svc, _svc_async
+from .runtime import _header_alg, _load_runtime, _run, _svc, _svc_async
 
 
 class JWTCoder:

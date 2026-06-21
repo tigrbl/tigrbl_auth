@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenError, RefreshTokenReuseError
+
 from .coder import InvalidTokenError, JWTCoder
 from .operator import (
     exchange_operator_token_for_context,
@@ -11,7 +13,6 @@ from .operator import (
     revoke_operator_token_for_context,
 )
 from .persistence import issue_persisted_token_pair, redeem_refresh_token
-from .runtime import InvalidRefreshTokenError, RefreshTokenError, RefreshTokenReuseError
 
 __all__ = [
     'InvalidRefreshTokenError',

@@ -9,6 +9,10 @@ from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from typing import Any, Dict, Iterable, Optional, Tuple
 
+from tigrbl_identity_contracts.tokens import (
+    DEFAULT_ACCESS_TOKEN_TTL as _ACCESS_TTL,
+    DEFAULT_REFRESH_TOKEN_TTL as _REFRESH_TTL,
+)
 from tigrbl_identity_jose.errors import InvalidTokenError
 from tigrbl_identity_jose.framework import (
     ExportPolicy,
@@ -33,8 +37,6 @@ from tigrbl_identity_jose.pqc_jwt import (
 )
 from tigrbl_auth_protocol_oauth.standards.revocation import is_revoked_async
 
-_ACCESS_TTL = timedelta(minutes=60)
-_REFRESH_TTL = timedelta(days=7)
 _ALG = JWAAlg.EDDSA.value
 
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib
 import inspect
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 try:
@@ -180,6 +181,31 @@ def test_credentials_token_service_exports_async_runtime_helper() -> None:
 
     assert callable(module._svc_async)
     assert callable(runtime._svc_async)
+
+
+def test_credentials_token_service_reuses_token_contract_defaults_and_errors() -> None:
+    _install_package_src_paths()
+
+    contracts = importlib.import_module("tigrbl_identity_contracts.tokens")
+    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
+    runtime_source = (
+        _package_path("tigrbl-authn-credentials")
+        / "src"
+        / "tigrbl_authn_credentials"
+        / "_token_service"
+        / "runtime.py"
+    ).read_text(encoding="utf-8")
+
+    assert contracts.DEFAULT_ACCESS_TOKEN_TTL == timedelta(minutes=60)
+    assert contracts.DEFAULT_REFRESH_TOKEN_TTL == timedelta(days=7)
+    assert runtime._ACCESS_TTL is contracts.DEFAULT_ACCESS_TOKEN_TTL
+    assert runtime._REFRESH_TTL is contracts.DEFAULT_REFRESH_TOKEN_TTL
+    assert module.RefreshTokenError is contracts.RefreshTokenError
+    assert module.InvalidRefreshTokenError is contracts.InvalidRefreshTokenError
+    assert module.RefreshTokenReuseError is contracts.RefreshTokenReuseError
+    assert "class RefreshTokenError" not in runtime_source
+    assert "DEFAULT_ACCESS_TOKEN_TTL" in runtime_source
 
 
 def test_credentials_jwt_coder_exports_async_default_factory() -> None:

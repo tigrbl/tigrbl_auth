@@ -2,30 +2,22 @@ from __future__ import annotations
 
 import base64
 import json
-from datetime import timedelta
 from typing import Any, Tuple
 
+from tigrbl_identity_contracts.tokens import (
+    DEFAULT_ACCESS_TOKEN_TTL,
+    DEFAULT_REFRESH_TOKEN_TTL,
+    InvalidRefreshTokenError,
+    RefreshTokenError,
+    RefreshTokenReuseError,
+)
 from tigrbl_identity_storage.tables._sync import run_async as _run_coro
 
 from ..key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 
 
-_ACCESS_TTL = timedelta(minutes=60)
-
-
-_REFRESH_TTL = timedelta(days=7)
-
-
-class RefreshTokenError(Exception):
-    """Base class for refresh token lifecycle failures."""
-
-
-class InvalidRefreshTokenError(RefreshTokenError):
-    """The presented refresh token is invalid for the retained boundary."""
-
-
-class RefreshTokenReuseError(RefreshTokenError):
-    """A refresh token replay was detected and the family was revoked."""
+_ACCESS_TTL = DEFAULT_ACCESS_TOKEN_TTL
+_REFRESH_TTL = DEFAULT_REFRESH_TOKEN_TTL
 
 
 def _load_runtime() -> dict[str, Any]:

@@ -5,8 +5,9 @@ import inspect
 from typing import Any
 from uuid import uuid4
 
+from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenReuseError
+
 from .coder import JWTCoder
-from .runtime import InvalidRefreshTokenError, RefreshTokenReuseError
 
 
 async def _decode_issued_claims(jwt: JWTCoder, token: str) -> dict[str, Any]:
