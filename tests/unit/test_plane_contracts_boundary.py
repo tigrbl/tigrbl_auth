@@ -286,6 +286,7 @@ def test_residency_contracts_are_domain_packaged() -> None:
     )
 
     assert not (contracts_root / "residency.py").exists()
+    assert not (contracts_root / "authz" / "residency.py").exists()
     assert (contracts_root / "residency" / "__init__.py").exists()
     assert (contracts_root / "residency" / "errors.py").exists()
     assert (contracts_root / "residency" / "zones.py").exists()
