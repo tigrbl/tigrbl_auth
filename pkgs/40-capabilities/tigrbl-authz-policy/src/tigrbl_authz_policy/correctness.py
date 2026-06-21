@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tigrbl_identity_contracts.authz.correctness import (
+from tigrbl_identity_contracts.correctness import (
     AuthorizationReference,
     IntegrityReport,
     ReferenceCatalog,

@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Mapping
+from dataclasses import dataclass
 
-from .invariants import InvariantEvaluation
+from ..authz.invariants import InvariantEvaluation
 
 
 @dataclass(frozen=True, slots=True)

@@ -94,7 +94,8 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
     checked_modules = {
         "admin.py",
         "adaptive_access.py",
-        "correctness.py",
+        "correctness/authorization.py",
+        "correctness/reports.py",
         "key_rotation.py",
     }
     offenders: list[str] = []
@@ -199,6 +200,24 @@ def test_authority_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "authority" / "graph.py").exists()
     assert (contracts_root / "authority" / "roles.py").exists()
     assert (contracts_root / "authority" / "semantics.py").exists()
+
+
+def test_correctness_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "correctness.py").exists()
+    assert not (contracts_root / "authz" / "correctness.py").exists()
+    assert not (contracts_root / "authz" / "correctness_report.py").exists()
+    assert (contracts_root / "correctness" / "__init__.py").exists()
+    assert (contracts_root / "correctness" / "authorization.py").exists()
+    assert (contracts_root / "correctness" / "reports.py").exists()
 
 
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
