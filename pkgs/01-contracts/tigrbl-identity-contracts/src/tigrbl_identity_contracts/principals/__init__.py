@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from .devices import *
 from .enums import *
 from .models import *
+from .workloads import *
 
 __all__ = [
+    "DeviceIdentity",
     "NONHUMAN_PRINCIPAL_KINDS",
     "Principal",
     "PrincipalKind",
@@ -12,4 +15,5 @@ __all__ = [
     "SubjectAlias",
     "TenantBoundary",
     "TenantMembership",
+    "WorkloadIdentity",
 ]

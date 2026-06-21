@@ -159,6 +159,29 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
 
+def test_advanced_identity_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "advanced_identity.py").exists()
+    assert (contracts_root / "authentication" / "__init__.py").exists()
+    assert (contracts_root / "authentication" / "challenges.py").exists()
+    assert (contracts_root / "credentials" / "passwordless.py").exists()
+    assert (contracts_root / "credentials" / "webauthn.py").exists()
+    assert (contracts_root / "credentials" / "factors.py").exists()
+    assert (contracts_root / "federation" / "__init__.py").exists()
+    assert (contracts_root / "federation" / "providers.py").exists()
+    assert (contracts_root / "federation" / "sessions.py").exists()
+    assert (contracts_root / "principals" / "devices.py").exists()
+    assert (contracts_root / "principals" / "workloads.py").exists()
+
+
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
     assert "tigrbl_user_plane_contracts" not in sys.modules
     assert "tigrbl_control_plane_contracts" not in sys.modules
