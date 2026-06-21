@@ -7,7 +7,6 @@ workflows can run without the full Tigrbl runtime stack.
 
 from __future__ import annotations
 
-import base64
 import hashlib
 import hmac
 import json
@@ -15,6 +14,7 @@ from typing import Any, Final, Mapping
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
 from tigrbl_identity_jose.pqc import (
     ML_DSA_65_ALG,
     PQC_JWK_KTY,
@@ -40,22 +40,13 @@ RFC7515_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7515"
 _signer = JwsSignerVerifier() if JwsSignerVerifier is not None else None
 
 
-def _b64u_encode(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
-
-
-def _b64u_decode(text: str) -> bytes:
-    padding = "=" * (-len(text) % 4)
-    return base64.urlsafe_b64decode((text + padding).encode("ascii"))
-
-
 def _oct_key_bytes(key: Mapping[str, Any]) -> bytes:
     raw = key.get("key")
     if isinstance(raw, (bytes, bytearray)):
         return bytes(raw)
     material = key.get("k")
     if isinstance(material, str):
-        return _b64u_decode(material)
+        return base64url_decode(material)
     if isinstance(material, (bytes, bytearray)):
         return bytes(material)
     raise RuntimeError("missing symmetric oct key material for dependency-light JWS fallback")
@@ -73,7 +64,7 @@ def _ed25519_private_key(key: Mapping[str, Any]) -> Ed25519PrivateKey:
             return Ed25519PrivateKey.from_private_bytes(material[:32])
     material = key.get("d")
     if isinstance(material, str):
-        decoded = _b64u_decode(material)
+        decoded = base64url_decode(material)
         if len(decoded) >= 32:
             return Ed25519PrivateKey.from_private_bytes(decoded[:32])
     raise RuntimeError("missing Ed25519 private key material for dependency-light JWS fallback")
@@ -91,7 +82,7 @@ def _ed25519_public_key(key: Mapping[str, Any]) -> Ed25519PublicKey:
             return Ed25519PublicKey.from_public_bytes(material)
     material = key.get("x")
     if isinstance(material, str):
-        decoded = _b64u_decode(material)
+        decoded = base64url_decode(material)
         if len(decoded) == 32:
             return Ed25519PublicKey.from_public_bytes(decoded)
     raise RuntimeError("missing Ed25519 public key material for dependency-light JWS fallback")
@@ -118,8 +109,8 @@ def _fallback_sign(payload: str, key: Mapping[str, Any], alg: str | None = None)
     header = {"alg": alg, "typ": "JWT"}
     if key.get("kid"):
         header["kid"] = str(key["kid"])
-    header_segment = _b64u_encode(json.dumps(header, separators=(",", ":")).encode())
-    payload_segment = _b64u_encode(payload.encode())
+    header_segment = base64url_encode(json.dumps(header, separators=(",", ":")).encode())
+    payload_segment = base64url_encode(payload.encode())
     signing_input = f"{header_segment}.{payload_segment}".encode("ascii")
     if alg == "HS256":
         sig = hmac.new(_oct_key_bytes(key), signing_input, hashlib.sha256).digest()
@@ -129,7 +120,7 @@ def _fallback_sign(payload: str, key: Mapping[str, Any], alg: str | None = None)
         sig = sign_pqc_payload(signing_input, secret_key_from_pqc_jwk(key), algorithm=alg)
     else:
         raise RuntimeError(f"unsupported dependency-light JWS alg: {alg}")
-    return f"{signing_input.decode('ascii')}.{_b64u_encode(sig)}"
+    return f"{signing_input.decode('ascii')}.{base64url_encode(sig)}"
 
 
 def _fallback_verify(token: str, key: Mapping[str, Any]) -> str:
@@ -138,9 +129,9 @@ def _fallback_verify(token: str, key: Mapping[str, Any]) -> str:
     except ValueError as exc:
         raise RuntimeError("invalid compact JWS serialization") from exc
     signing_input = f"{header_segment}.{payload_segment}".encode("ascii")
-    header = json.loads(_b64u_decode(header_segment).decode("utf-8"))
+    header = json.loads(base64url_decode(header_segment).decode("utf-8"))
     alg = str(header.get("alg") or "")
-    signature = _b64u_decode(sig_segment)
+    signature = base64url_decode(sig_segment)
     if alg == "HS256":
         expected = hmac.new(_oct_key_bytes(key), signing_input, hashlib.sha256).digest()
         if not hmac.compare_digest(expected, signature):
@@ -152,12 +143,12 @@ def _fallback_verify(token: str, key: Mapping[str, Any]) -> str:
             raise RuntimeError("invalid JWS signature")
     else:
         raise RuntimeError(f"unsupported dependency-light JWS alg: {alg}")
-    return _b64u_decode(payload_segment).decode("utf-8")
+    return base64url_decode(payload_segment).decode("utf-8")
 
 
 def _token_header_alg(token: str) -> str:
     try:
-        return str(json.loads(_b64u_decode(token.split(".")[0]).decode("utf-8")).get("alg") or "")
+        return str(json.loads(base64url_decode(token.split(".")[0]).decode("utf-8")).get("alg") or "")
     except Exception:
         return ""
 

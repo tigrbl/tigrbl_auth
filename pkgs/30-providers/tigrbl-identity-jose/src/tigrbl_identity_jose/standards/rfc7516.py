@@ -14,15 +14,15 @@ minimal checkpoint environments without importing the full Tigrbl runtime.
 
 from __future__ import annotations
 
-import base64
 import json
 import os
 from typing import Any, Final, Mapping
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_core.base64url import base64url_decode, base64url_encode
 from tigrbl_identity_jose.jwe_policy import JWEPolicy
+from tigrbl_identity_runtime.settings import settings
 
 RFC7516_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7516"
 SUPPORTED_JWE_ALG_VALUES: Final[tuple[str, ...]] = ("dir",)
@@ -37,24 +37,12 @@ class JWEPolicyError(ValueError):
 ACTIVE_JWE_POLICY: Final[JWEPolicy] = JWEPolicy()
 
 
-
-def _b64url_encode(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).decode("ascii").rstrip("=")
-
-
-
-def _b64url_decode(value: str) -> bytes:
-    padding = "=" * (-len(value) % 4)
-    return base64.urlsafe_b64decode(value + padding)
-
-
-
 def _normalize_oct_key_material(key: Mapping[str, Any] | bytes | bytearray | str) -> bytes:
     if isinstance(key, (bytes, bytearray)):
         return bytes(key)
     if isinstance(key, str):
         try:
-            decoded = _b64url_decode(key)
+            decoded = base64url_decode(key)
             if decoded:
                 return decoded
         except Exception:
@@ -72,14 +60,13 @@ def _normalize_oct_key_material(key: Mapping[str, Any] | bytes | bytearray | str
         return bytes(material)
     if isinstance(material, str):
         try:
-            decoded = _b64url_decode(material)
+            decoded = base64url_decode(material)
             if decoded:
                 return decoded
         except Exception:
             return material.encode("utf-8")
         return material.encode("utf-8")
     raise JWEPolicyError("unsupported symmetric key material type")
-
 
 
 def validate_oct_key(key: Mapping[str, Any] | bytes | bytearray | str, *, policy: JWEPolicy = ACTIVE_JWE_POLICY) -> bytes:
@@ -89,7 +76,6 @@ def validate_oct_key(key: Mapping[str, Any] | bytes | bytearray | str, *, policy
             f"invalid JWE direct-encryption key length {len(material)}; expected {policy.key_size_bytes} bytes"
         )
     return material
-
 
 
 def validate_jwe_header(header: Mapping[str, Any], *, policy: JWEPolicy = ACTIVE_JWE_POLICY) -> dict[str, Any]:
@@ -104,7 +90,6 @@ def validate_jwe_header(header: Mapping[str, Any], *, policy: JWEPolicy = ACTIVE
             f"unsupported JWE enc {enc!r}; supported values: {', '.join(SUPPORTED_JWE_ENC_VALUES)}"
         )
     return dict(header)
-
 
 
 def jwe_policy_metadata(*, policy: JWEPolicy = ACTIVE_JWE_POLICY) -> dict[str, list[str]]:
@@ -140,18 +125,19 @@ async def encrypt_jwe(
         requested_header["enc"] = enc
     header = validate_jwe_header(requested_header, policy=policy)
     key_bytes = validate_oct_key(key, policy=policy)
-    aad_segment = _b64url_encode(json.dumps(header, separators=(",", ":")).encode("utf-8"))
+    aad_segment = base64url_encode(json.dumps(header, separators=(",", ":")).encode("utf-8"))
     iv = os.urandom(12)
     aesgcm = AESGCM(key_bytes)
-    raw_ciphertext = aesgcm.encrypt(iv, plaintext.encode("utf-8") if isinstance(plaintext, str) else plaintext, aad_segment.encode("ascii"))
+    plaintext_bytes = plaintext.encode("utf-8") if isinstance(plaintext, str) else plaintext
+    raw_ciphertext = aesgcm.encrypt(iv, plaintext_bytes, aad_segment.encode("ascii"))
     ciphertext, tag = raw_ciphertext[:-16], raw_ciphertext[-16:]
     return ".".join(
         (
             aad_segment,
             "",  # direct encryption has an empty encrypted-key component
-            _b64url_encode(iv),
-            _b64url_encode(ciphertext),
-            _b64url_encode(tag),
+            base64url_encode(iv),
+            base64url_encode(ciphertext),
+            base64url_encode(tag),
         )
     )
 
@@ -174,7 +160,7 @@ async def decrypt_jwe(
     if encrypted_key_segment not in {"", None}:
         raise JWEPolicyError("direct-encryption JWE must not contain an encrypted key segment")
     try:
-        header = json.loads(_b64url_decode(header_segment).decode("utf-8"))
+        header = json.loads(base64url_decode(header_segment).decode("utf-8"))
     except Exception as exc:
         raise JWEPolicyError("invalid compact JWE header") from exc
     if expected_alg is not None:
@@ -186,9 +172,9 @@ async def decrypt_jwe(
     validate_jwe_header(header, policy=ACTIVE_JWE_POLICY)
     key_bytes = validate_oct_key(key, policy=ACTIVE_JWE_POLICY)
     try:
-        iv = _b64url_decode(iv_segment)
-        ciphertext = _b64url_decode(ciphertext_segment)
-        tag = _b64url_decode(tag_segment)
+        iv = base64url_decode(iv_segment)
+        ciphertext = base64url_decode(ciphertext_segment)
+        tag = base64url_decode(tag_segment)
     except Exception as exc:
         raise JWEPolicyError("invalid compact JWE body encoding") from exc
     if len(iv) != 12:

@@ -8,7 +8,6 @@ standalone helper use.
 from __future__ import annotations
 
 import asyncio
-import base64
 import hashlib
 from functools import lru_cache
 from typing import Final
@@ -16,6 +15,7 @@ from typing import Final
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption, PrivateFormat, PublicFormat
 
+from tigrbl_identity_core.base64url import base64url_encode
 from tigrbl_identity_runtime.settings import settings
 
 try:  # pragma: no cover - exercised when the full runtime stack is installed
@@ -29,10 +29,6 @@ except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     _load_pqc_signing_jwk = None
 
 RFC7517_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7517"
-
-
-def _b64u(b: bytes) -> str:
-    return base64.urlsafe_b64encode(b).rstrip(b"=").decode("ascii")
 
 
 @lru_cache(maxsize=1)
@@ -56,11 +52,23 @@ def load_signing_jwk() -> dict:
             sk = ref.material or priv
             pk = ref.public or pub
             d = sk[:32] if len(sk) > 32 else sk
-            return {"kty": "OKP", "crv": "Ed25519", "kid": kid, "d": _b64u(d), "x": _b64u(pk)}
+            return {
+                "kty": "OKP",
+                "crv": "Ed25519",
+                "kid": kid,
+                "d": base64url_encode(d),
+                "x": base64url_encode(pk),
+            }
         except Exception:
             pass
     private_bytes, public_bytes, kid = _fallback_keypair()
-    return {"kty": "OKP", "crv": "Ed25519", "kid": kid, "d": _b64u(private_bytes), "x": _b64u(public_bytes)}
+    return {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "kid": kid,
+        "d": base64url_encode(private_bytes),
+        "x": base64url_encode(public_bytes),
+    }
 
 
 def load_public_jwk() -> dict:
@@ -79,7 +87,7 @@ def load_public_jwk() -> dict:
         except Exception:
             pass
     _, public_bytes, kid = _fallback_keypair()
-    return {"kty": "OKP", "crv": "Ed25519", "kid": kid, "x": _b64u(public_bytes)}
+    return {"kty": "OKP", "crv": "Ed25519", "kid": kid, "x": base64url_encode(public_bytes)}
 
 
 def load_pqc_signing_jwk() -> dict:

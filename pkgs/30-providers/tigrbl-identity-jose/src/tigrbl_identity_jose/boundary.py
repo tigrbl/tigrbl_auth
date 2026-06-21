@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-import base64
 import hashlib
 import json
 from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
+
+from tigrbl_identity_core.base64url import base64url_encode
 
 from .keys import (
     JoseKey,
@@ -32,10 +33,6 @@ def _utc_now() -> str:
     return datetime.now(tz=timezone.utc).isoformat()
 
 
-def _b64url(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
-
-
 def _canonical_json(value: Mapping[str, Any]) -> bytes:
     return json.dumps(value, separators=(",", ":"), sort_keys=True).encode("utf-8")
 
@@ -46,7 +43,7 @@ def _public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
 
 def jwk_thumbprint(jwk: Mapping[str, Any]) -> str:
     """Return the RFC 7638 SHA-256 JWK thumbprint."""
-    return _b64url(hashlib.sha256(_canonical_json(_public_jwk_material(jwk))).digest())
+    return base64url_encode(hashlib.sha256(_canonical_json(_public_jwk_material(jwk))).digest())
 
 
 def validate_public_jwk(jwk: Mapping[str, Any]) -> None:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .base64url import base64url_decode, base64url_encode
 from .clock import Clock, FrozenClock, SystemClock, unix_seconds, utc_now, utc_now_iso
 from .errors import (
     IdentityAuthorizationError,
@@ -70,6 +71,8 @@ __all__ = [
     "SystemClock",
     "TenantId",
     "TenantRef",
+    "base64url_decode",
+    "base64url_encode",
     "canonicalize",
     "describe_owner",
     "safe_display_path",

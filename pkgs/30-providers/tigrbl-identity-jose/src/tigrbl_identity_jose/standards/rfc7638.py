@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-import base64
 import json
 from hashlib import sha256
 from typing import Any, Final, Mapping
 
+from tigrbl_identity_core.base64url import base64url_encode
 from tigrbl_identity_runtime.settings import settings
 
 RFC7638_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7638"
@@ -30,7 +30,7 @@ def jwk_thumbprint(jwk: Mapping[str, Any], *, enabled: bool | None = None) -> st
     obj = {key: jwk[key] for key in members}
     canonical = json.dumps(obj, separators=(",", ":"), sort_keys=True).encode("utf-8")
     digest = sha256(canonical).digest()
-    return base64.urlsafe_b64encode(digest).decode("ascii").rstrip("=")
+    return base64url_encode(digest)
 
 
 def verify_jwk_thumbprint(
