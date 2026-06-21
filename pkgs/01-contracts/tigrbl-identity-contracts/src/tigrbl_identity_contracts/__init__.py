@@ -6,6 +6,7 @@ from .models import *
 from .planes import *
 from .authentication import *
 from .authority import *
+from .applications import *
 from .credentials import *
 from .delegation import *
 from .federation import *

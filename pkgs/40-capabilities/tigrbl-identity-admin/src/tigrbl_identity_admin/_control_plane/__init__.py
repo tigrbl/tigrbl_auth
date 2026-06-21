@@ -5,14 +5,7 @@ from .models import (
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
-    AdminUiState,
-    AdminUiView,
-    AppRecord,
-    CredentialRecord,
-    PolicyRecord,
-    PrincipalRecord,
-    ResourceServerRecord,
-    ServiceIdentityRecord,
+    App,
 )
 from .service import AdminControlPlane
 
@@ -22,12 +15,5 @@ __all__ = [
     'AdminResource',
     'AdminResourceKind',
     'AdminResourceStatus',
-    'AdminUiState',
-    'AdminUiView',
-    'AppRecord',
-    'CredentialRecord',
-    'PolicyRecord',
-    'PrincipalRecord',
-    'ResourceServerRecord',
-    'ServiceIdentityRecord',
+    'App',
 ]

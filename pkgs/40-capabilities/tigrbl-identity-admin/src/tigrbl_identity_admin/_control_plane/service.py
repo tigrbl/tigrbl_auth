@@ -4,20 +4,16 @@ from dataclasses import replace
 from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_contracts.audit.admin import AdminAuditEvent as _AdminAuditEvent
+from tigrbl_identity_contracts.credentials import Credential, CredentialKind
+from tigrbl_identity_contracts.policy.lifecycle import PolicyDefinition
+from tigrbl_identity_contracts.principals import Principal, PrincipalKind
 
 from .models import (
     AdminControlPlaneError,
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
-    AdminUiState,
-    AdminUiView,
-    AppRecord,
-    CredentialRecord,
-    PolicyRecord,
-    PrincipalRecord,
-    ResourceServerRecord,
-    ServiceIdentityRecord,
+    App,
     _clean_tuple,
     _new_id,
     _utc_now,
@@ -26,7 +22,10 @@ from .models import (
 
 class AdminControlPlane:
     def __init__(self) -> None:
-        self._resources: dict[AdminResourceKind, dict[str, AdminResource]] = {
+        self._metadata: dict[AdminResourceKind, dict[str, AdminResource]] = {
+            kind: {} for kind in AdminResourceKind
+        }
+        self._objects: dict[AdminResourceKind, dict[str, object]] = {
             kind: {} for kind in AdminResourceKind
         }
         self._audit_events: list[_AdminAuditEvent] = []
@@ -45,20 +44,18 @@ class AdminControlPlane:
         principal_kind: str = "user",
         roles: Iterable[str] = (),
         attributes: Mapping[str, Any] | None = None,
-    ) -> PrincipalRecord:
-        return self._create(
-            PrincipalRecord(
-                id=_new_id("principal"),
-                kind=AdminResourceKind.PRINCIPAL,
-                tenant_id=tenant_id,
-                subject=subject,
-                name=name,
-                principal_kind=principal_kind,
-                roles=_clean_tuple(roles),
-                attributes=dict(attributes or {}),
-            ),
-            actor=actor,
+    ) -> Principal:
+        principal = Principal(
+            id=_new_id("principal"),
+            kind=PrincipalKind(principal_kind),
+            subject=subject,
+            tenant_id=tenant_id,
+            display_name=name,
+            roles=_clean_tuple(roles),
+            attributes=dict(attributes or {}),
         )
+        metadata = self._metadata_for(principal.id, AdminResourceKind.PRINCIPAL, tenant_id, name)
+        return self._create(metadata, principal, actor=actor)
 
     def create_credential(
         self,
@@ -69,20 +66,16 @@ class AdminControlPlane:
         name: str,
         credential_kind: str,
         attributes: Mapping[str, Any] | None = None,
-    ) -> CredentialRecord:
+    ) -> Credential:
         self._require(AdminResourceKind.PRINCIPAL, principal_id, tenant_id=tenant_id)
-        return self._create(
-            CredentialRecord(
-                id=_new_id("credential"),
-                kind=AdminResourceKind.CREDENTIAL,
-                tenant_id=tenant_id,
-                principal_id=principal_id,
-                name=name,
-                credential_kind=credential_kind,
-                attributes=dict(attributes or {}),
-            ),
-            actor=actor,
+        credential = Credential(
+            id=_new_id("credential"),
+            principal_id=principal_id,
+            kind=CredentialKind(credential_kind),
+            metadata=dict(attributes or {}),
         )
+        metadata = self._metadata_for(credential.id, AdminResourceKind.CREDENTIAL, tenant_id, name)
+        return self._create(metadata, credential, actor=actor)
 
     def create_app(
         self,
@@ -92,20 +85,18 @@ class AdminControlPlane:
         name: str,
         client_ids: Iterable[str],
         owner_principal_id: str | None = None,
-    ) -> AppRecord:
+    ) -> App:
         if owner_principal_id:
             self._require(AdminResourceKind.PRINCIPAL, owner_principal_id, tenant_id=tenant_id)
-        return self._create(
-            AppRecord(
-                id=_new_id("app"),
-                kind=AdminResourceKind.APP,
-                tenant_id=tenant_id,
-                name=name,
-                client_ids=_clean_tuple(client_ids),
-                owner_principal_id=owner_principal_id,
-            ),
-            actor=actor,
+        app = App(
+            id=_new_id("app"),
+            tenant_id=tenant_id,
+            name=name,
+            client_ids=_clean_tuple(client_ids),
+            owner_principal_id=owner_principal_id,
         )
+        metadata = self._metadata_for(app.id, AdminResourceKind.APP, tenant_id, name)
+        return self._create(metadata, app, actor=actor)
 
     def create_service_identity(
         self,
@@ -115,20 +106,22 @@ class AdminControlPlane:
         name: str,
         scopes: Iterable[str],
         owner_principal_id: str | None = None,
-    ) -> ServiceIdentityRecord:
+    ) -> Principal:
         if owner_principal_id:
             self._require(AdminResourceKind.PRINCIPAL, owner_principal_id, tenant_id=tenant_id)
-        return self._create(
-            ServiceIdentityRecord(
-                id=_new_id("service"),
-                kind=AdminResourceKind.SERVICE_IDENTITY,
-                tenant_id=tenant_id,
-                name=name,
-                scopes=_clean_tuple(scopes),
-                owner_principal_id=owner_principal_id,
-            ),
-            actor=actor,
+        service = Principal(
+            id=_new_id("service"),
+            kind=PrincipalKind.SERVICE,
+            subject=f"service:{name}",
+            tenant_id=tenant_id,
+            display_name=name,
+            attributes={
+                "owner_principal_id": owner_principal_id,
+                "scopes": _clean_tuple(scopes),
+            },
         )
+        metadata = self._metadata_for(service.id, AdminResourceKind.SERVICE_IDENTITY, tenant_id, name)
+        return self._create(metadata, service, actor=actor)
 
     def create_resource_server(
         self,
@@ -138,18 +131,17 @@ class AdminControlPlane:
         name: str,
         audience: str,
         scopes: Iterable[str],
-    ) -> ResourceServerRecord:
-        return self._create(
-            ResourceServerRecord(
-                id=_new_id("rs"),
-                kind=AdminResourceKind.RESOURCE_SERVER,
-                tenant_id=tenant_id,
-                name=name,
-                audience=audience,
-                scopes=_clean_tuple(scopes),
-            ),
-            actor=actor,
+    ) -> AdminResource:
+        if not audience:
+            raise ValueError("resource server audience is required")
+        metadata = self._metadata_for(
+            _new_id("rs"),
+            AdminResourceKind.RESOURCE_SERVER,
+            tenant_id,
+            name,
+            attributes={"audience": audience, "scopes": _clean_tuple(scopes)},
         )
+        return self._create(metadata, metadata, actor=actor)
 
     def create_policy(
         self,
@@ -160,30 +152,40 @@ class AdminControlPlane:
         policy_kind: str,
         rules: Mapping[str, Any],
         version: int = 1,
-    ) -> PolicyRecord:
-        return self._create(
-            PolicyRecord(
-                id=_new_id("policy"),
-                kind=AdminResourceKind.POLICY,
-                tenant_id=tenant_id,
-                name=name,
-                policy_kind=policy_kind,
-                rules=dict(rules),
-                version=version,
-            ),
-            actor=actor,
+    ) -> PolicyDefinition:
+        if version <= 0:
+            raise ValueError("policy version must be positive")
+        policy = PolicyDefinition(
+            policy_id=_new_id("policy"),
+            name=name,
+            tenant_id=tenant_id,
+            language=policy_kind,
+            created_at=_utc_now(),
         )
+        metadata = self._metadata_for(
+            policy.policy_id,
+            AdminResourceKind.POLICY,
+            tenant_id,
+            name,
+            attributes={"rules": dict(rules), "version": version},
+        )
+        return self._create(metadata, policy, actor=actor)
 
-    def get(self, kind: AdminResourceKind | str, resource_id: str, *, tenant_id: str) -> AdminResource:
+    def get(self, kind: AdminResourceKind | str, resource_id: str, *, tenant_id: str) -> object:
+        metadata = self._require(AdminResourceKind(kind), resource_id, tenant_id=tenant_id)
+        return self._objects[metadata.kind][resource_id]
+
+    def metadata(self, kind: AdminResourceKind | str, resource_id: str, *, tenant_id: str) -> AdminResource:
         return self._require(AdminResourceKind(kind), resource_id, tenant_id=tenant_id)
 
-    def list(self, kind: AdminResourceKind | str, *, tenant_id: str) -> tuple[AdminResource, ...]:
+    def list(self, kind: AdminResourceKind | str, *, tenant_id: str) -> tuple[object, ...]:
         resource_kind = AdminResourceKind(kind)
         return tuple(
-            sorted(
+            self._objects[resource_kind][metadata.id]
+            for metadata in sorted(
                 (
                     resource
-                    for resource in self._resources[resource_kind].values()
+                    for resource in self._metadata[resource_kind].values()
                     if resource.tenant_id == tenant_id and resource.status != AdminResourceStatus.DELETED
                 ),
                 key=lambda resource: (resource.name, resource.id),
@@ -200,18 +202,21 @@ class AdminControlPlane:
         name: str | None = None,
         attributes: Mapping[str, Any] | None = None,
         status: AdminResourceStatus | str | None = None,
-    ) -> AdminResource:
+    ) -> object:
         resource_kind = AdminResourceKind(kind)
-        resource = self._require(resource_kind, resource_id, tenant_id=tenant_id)
-        updated = replace(
-            resource,
-            name=name if name is not None else resource.name,
-            attributes=dict(attributes) if attributes is not None else resource.attributes,
-            status=AdminResourceStatus(status) if status is not None else resource.status,
+        metadata = self._require(resource_kind, resource_id, tenant_id=tenant_id)
+        updated_metadata = replace(
+            metadata,
+            name=name if name is not None else metadata.name,
+            attributes=dict(attributes) if attributes is not None else metadata.attributes,
+            status=AdminResourceStatus(status) if status is not None else metadata.status,
             updated_at=_utc_now(),
         )
-        self._resources[resource_kind][resource_id] = updated
-        self._record(actor, "update", updated, "ok")
+        current = self._objects[resource_kind][resource_id]
+        updated = self._replace_object(current, name=name, attributes=attributes)
+        self._metadata[resource_kind][resource_id] = updated_metadata
+        self._objects[resource_kind][resource_id] = updated
+        self._record(actor, "update", updated_metadata, "ok")
         return updated
 
     def delete(
@@ -223,41 +228,70 @@ class AdminControlPlane:
         tenant_id: str,
     ) -> AdminResource:
         resource_kind = AdminResourceKind(kind)
-        resource = self._require(resource_kind, resource_id, tenant_id=tenant_id)
-        deleted = replace(resource, status=AdminResourceStatus.DELETED, updated_at=_utc_now())
-        self._resources[resource_kind][resource_id] = deleted
+        metadata = self._require(resource_kind, resource_id, tenant_id=tenant_id)
+        deleted = replace(metadata, status=AdminResourceStatus.DELETED, updated_at=_utc_now())
+        self._metadata[resource_kind][resource_id] = deleted
         self._record(actor, "delete", deleted, "ok")
         return deleted
 
-    def render_uix_view(
+    def _metadata_for(
         self,
-        kind: AdminResourceKind | str,
-        *,
+        resource_id: str,
+        kind: AdminResourceKind,
         tenant_id: str,
-        loading: bool = False,
-        error: str | None = None,
-    ) -> AdminUiView:
-        resource_kind = AdminResourceKind(kind)
-        if loading:
-            return AdminUiView(AdminUiState.LOADING, resource_kind)
-        if error:
-            return AdminUiView(AdminUiState.ERROR, resource_kind, error=error)
-        rows = self.list(resource_kind, tenant_id=tenant_id)
-        if not rows:
-            return AdminUiView(AdminUiState.EMPTY, resource_kind)
-        return AdminUiView(AdminUiState.READY, resource_kind, rows=rows)
+        name: str,
+        *,
+        attributes: Mapping[str, Any] | None = None,
+    ) -> AdminResource:
+        return AdminResource(
+            id=resource_id,
+            kind=kind,
+            tenant_id=tenant_id,
+            name=name,
+            attributes=dict(attributes or {}),
+        )
 
-    def _create(self, resource: AdminResource, *, actor: str) -> Any:
-        self._resources[resource.kind][resource.id] = resource
-        self._record(actor, "create", resource, "ok")
+    def _create(self, metadata: AdminResource, resource: object, *, actor: str) -> Any:
+        self._metadata[metadata.kind][metadata.id] = metadata
+        self._objects[metadata.kind][metadata.id] = resource
+        self._record(actor, "create", metadata, "ok")
         return resource
 
     def _require(self, kind: AdminResourceKind, resource_id: str, *, tenant_id: str) -> AdminResource:
-        resource = self._resources[kind].get(resource_id)
+        resource = self._metadata[kind].get(resource_id)
         if resource is None or resource.status == AdminResourceStatus.DELETED:
             raise AdminControlPlaneError(f"{kind.value} resource not found")
         if resource.tenant_id != tenant_id:
             raise AdminControlPlaneError("resource tenant mismatch")
+        return resource
+
+    def _replace_object(
+        self,
+        resource: object,
+        *,
+        name: str | None,
+        attributes: Mapping[str, Any] | None,
+    ) -> object:
+        if isinstance(resource, Principal):
+            return replace(
+                resource,
+                display_name=name if name is not None else resource.display_name,
+                attributes=dict(attributes) if attributes is not None else resource.attributes,
+            )
+        if isinstance(resource, App):
+            return replace(
+                resource,
+                name=name if name is not None else resource.name,
+                attributes=dict(attributes) if attributes is not None else resource.attributes,
+            )
+        if isinstance(resource, PolicyDefinition):
+            return replace(resource, name=name if name is not None else resource.name)
+        if isinstance(resource, AdminResource):
+            return replace(
+                resource,
+                name=name if name is not None else resource.name,
+                attributes=dict(attributes) if attributes is not None else resource.attributes,
+            )
         return resource
 
     def _record(self, actor: str, action: str, resource: AdminResource, outcome: str) -> None:

@@ -8,14 +8,7 @@ from .control_plane import (
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
-    AdminUiState,
-    AdminUiView,
-    AppRecord,
-    CredentialRecord,
-    PolicyRecord,
-    PrincipalRecord,
-    ResourceServerRecord,
-    ServiceIdentityRecord,
+    App,
 )
 
 __all__ = [
@@ -24,12 +17,5 @@ __all__ = [
     "AdminResource",
     "AdminResourceKind",
     "AdminResourceStatus",
-    "AdminUiState",
-    "AdminUiView",
-    "AppRecord",
-    "CredentialRecord",
-    "PolicyRecord",
-    "PrincipalRecord",
-    "ResourceServerRecord",
-    "ServiceIdentityRecord",
+    "App",
 ]

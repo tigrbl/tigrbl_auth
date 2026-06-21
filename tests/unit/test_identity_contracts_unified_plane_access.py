@@ -27,6 +27,7 @@ def test_identity_contracts_are_canonical_for_identity_and_admin_contracts() -> 
     assert not hasattr(contracts, "PolicyRequest")
     assert not hasattr(contracts, "KeyRotationPolicyVersion")
     assert contracts.AdminResource.__module__.startswith("tigrbl_identity_contracts")
+    assert contracts.App.__module__ == "tigrbl_identity_contracts.applications.models"
     assert not hasattr(contracts, "ServiceIdentity")
     assert contracts.SDKPackage.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.ResidencyZone.__module__.startswith("tigrbl_identity_contracts")

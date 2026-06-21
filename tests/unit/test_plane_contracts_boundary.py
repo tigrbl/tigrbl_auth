@@ -150,10 +150,11 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     from tigrbl_identity_admin._control_plane import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
-    assert admin_models.PrincipalRecord is management_contracts.PrincipalRecord
+    assert admin_models.App is management_contracts.App
+    assert not hasattr(admin_models, "PrincipalRecord")
     assert not hasattr(admin_models, "AdminAuditEvent")
     assert AdminAuditEvent.__name__ == "AdminAuditEvent"
-    assert admin_models.AdminUiView is management_contracts.AdminUiView
+    assert not hasattr(admin_models, "AdminUiView")
     assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
     assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
     assert advanced_models.TrustPath is control_contracts.TrustPath
@@ -194,6 +195,20 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
     )
     assert (concrete_root / "credentials.py").exists()
     assert (concrete_root / "identities.py").exists()
+
+
+def test_application_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert (contracts_root / "applications" / "__init__.py").exists()
+    assert (contracts_root / "applications" / "models.py").exists()
 
 
 def test_authority_contracts_are_domain_packaged() -> None:

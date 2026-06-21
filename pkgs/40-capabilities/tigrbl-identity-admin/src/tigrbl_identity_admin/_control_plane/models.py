@@ -6,17 +6,10 @@ from tigrbl_identity_contracts.admin_resources import (
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
-    AdminUiState,
-    AdminUiView,
-    AppRecord,
-    CredentialRecord,
-    PolicyRecord,
-    PrincipalRecord,
-    ResourceServerRecord,
-    ServiceIdentityRecord,
     _clean_tuple,
     _utc_now,
 )
+from tigrbl_identity_contracts.applications import App
 
 
 class AdminControlPlaneError(RuntimeError):
@@ -32,14 +25,7 @@ __all__ = [
     "AdminResource",
     "AdminResourceKind",
     "AdminResourceStatus",
-    "AdminUiState",
-    "AdminUiView",
-    "AppRecord",
-    "CredentialRecord",
-    "PolicyRecord",
-    "PrincipalRecord",
-    "ResourceServerRecord",
-    "ServiceIdentityRecord",
+    "App",
     "_clean_tuple",
     "_new_id",
     "_utc_now",

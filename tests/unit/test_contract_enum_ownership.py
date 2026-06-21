@@ -37,7 +37,6 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
     from tigrbl_identity_contracts import (
         AdminResourceKind,
         AdminResourceStatus,
-        AdminUiState,
     )
     from tigrbl_identity_admin._control_plane import models as admin_models
     from tigrbl_identity_jose import boundary
@@ -67,7 +66,7 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
     assert rp_client.BrowserStoragePolicy is BrowserStoragePolicy
     assert admin_models.AdminResourceKind is AdminResourceKind
     assert admin_models.AdminResourceStatus is AdminResourceStatus
-    assert admin_models.AdminUiState is AdminUiState
+    assert not hasattr(admin_models, "AdminUiState")
 
 
 def test_reusable_enums_are_not_defined_outside_contract_packages() -> None:

@@ -17,7 +17,7 @@ from tigrbl_identity_admin import (  # noqa: E402
     AdminControlPlaneError,
     AdminResourceKind,
     AdminResourceStatus,
-    AdminUiState,
+    App,
 )
 
 
@@ -39,8 +39,8 @@ def test_admin_t0_public_surfaces_are_importable() -> None:
 
     principal = admin.get(AdminResourceKind.PRINCIPAL, principal_id, tenant_id="tenant-a")
 
-    assert principal.name == "Tenant User"
-    assert admin.render_uix_view(AdminResourceKind.CREDENTIAL, tenant_id="tenant-a").state == AdminUiState.EMPTY
+    assert principal.display_name == "Tenant User"
+    assert admin.list(AdminResourceKind.CREDENTIAL, tenant_id="tenant-a") == ()
 
 
 @pytest.mark.unit
@@ -91,28 +91,24 @@ def test_admin_t1_crud_for_all_control_plane_resource_types() -> None:
     )
 
     assert credential.principal_id == principal_id
-    assert service.scopes == ("jobs.read", "jobs.write")
-    assert resource_server.audience == "api://jobs"
-    assert policy.rules["role"] == "tenant-admin"
+    assert isinstance(app, App)
+    assert service.attributes["scopes"] == ("jobs.read", "jobs.write")
+    assert resource_server.attributes["audience"] == "api://jobs"
+    assert policy.language == "rbac"
     assert updated.name == "Portal App"
     assert [row.name for row in admin.list(AdminResourceKind.APP, tenant_id="tenant-a")] == ["Portal App"]
 
 
 @pytest.mark.unit
-def test_admin_t1_uix_ready_empty_loading_and_error_states() -> None:
+def test_admin_t1_lists_return_canonical_objects_without_uix_state_contracts() -> None:
     admin, principal_id = _seed_control_plane()
 
-    ready = admin.render_uix_view(AdminResourceKind.PRINCIPAL, tenant_id="tenant-a")
-    empty = admin.render_uix_view(AdminResourceKind.POLICY, tenant_id="tenant-a")
-    loading = admin.render_uix_view(AdminResourceKind.APP, tenant_id="tenant-a", loading=True)
-    error = admin.render_uix_view(AdminResourceKind.SERVICE_IDENTITY, tenant_id="tenant-a", error="failed")
+    principals = admin.list(AdminResourceKind.PRINCIPAL, tenant_id="tenant-a")
+    policies = admin.list(AdminResourceKind.POLICY, tenant_id="tenant-a")
 
-    assert ready.state == AdminUiState.READY
-    assert ready.rows[0].id == principal_id
-    assert empty.is_empty is True
-    assert loading.state == AdminUiState.LOADING
-    assert error.state == AdminUiState.ERROR
-    assert error.error == "failed"
+    assert principals[0].id == principal_id
+    assert policies == ()
+    assert not hasattr(admin, "render_uix_view")
 
 
 @pytest.mark.unit
@@ -129,10 +125,10 @@ def test_admin_t2_tenant_isolation_delete_and_audit_guardrails() -> None:
     with pytest.raises(AdminControlPlaneError, match="tenant mismatch"):
         admin.get(AdminResourceKind.PRINCIPAL, principal_id, tenant_id="tenant-b")
 
-    deleted = admin.delete(AdminResourceKind.POLICY, policy.id, actor="admin:root", tenant_id="tenant-a")
+    deleted = admin.delete(AdminResourceKind.POLICY, policy.policy_id, actor="admin:root", tenant_id="tenant-a")
 
     assert deleted.status == AdminResourceStatus.DELETED
-    assert admin.render_uix_view(AdminResourceKind.POLICY, tenant_id="tenant-a").state == AdminUiState.EMPTY
+    assert admin.list(AdminResourceKind.POLICY, tenant_id="tenant-a") == ()
     assert [(event.action, event.resource_kind) for event in admin.audit_events] == [
         ("create", AdminResourceKind.PRINCIPAL),
         ("create", AdminResourceKind.POLICY),
