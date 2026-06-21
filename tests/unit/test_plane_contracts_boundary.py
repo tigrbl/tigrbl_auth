@@ -198,10 +198,12 @@ def test_authority_contracts_are_domain_packaged() -> None:
     assert not (contracts_root / "authz" / "authority_graph.py").exists()
     assert not (contracts_root / "authz" / "authority_roles.py").exists()
     assert not (contracts_root / "authz" / "authority_semantics.py").exists()
+    assert not (contracts_root / "trust_domains.py").exists()
     assert (contracts_root / "authority" / "__init__.py").exists()
     assert (contracts_root / "authority" / "graph.py").exists()
     assert (contracts_root / "authority" / "roles.py").exists()
     assert (contracts_root / "authority" / "semantics.py").exists()
+    assert (contracts_root / "authority" / "trust_domains.py").exists()
 
 
 def test_correctness_contracts_are_domain_packaged() -> None:
