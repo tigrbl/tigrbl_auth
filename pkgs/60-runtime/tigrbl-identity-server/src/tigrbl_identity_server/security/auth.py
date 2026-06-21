@@ -16,7 +16,7 @@ from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_ses
 from tigrbl_authn_credentials.backends import ApiKeyBackend, AuthError, PasswordBackend
 from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.mtls import presented_certificate_thumbprint
-from tigrbl_auth_protocol_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import verify_access_token_sender_constraint
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage.tables.engine import get_db

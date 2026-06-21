@@ -50,10 +50,20 @@ _JOSE_RFC_MODULES = (
 )
 _CORE_RFC_MODULES = ("rfc8785",)
 
+_OAUTH_RFC_TARGETS = {
+    "rfc6750": "bearer_token_usage",
+    "rfc7009": "revocation",
+    "rfc7519": "json_web_token",
+    "rfc7521": "assertion_framework",
+    "rfc7523": "jwt_client_auth",
+    "rfc7591": "dynamic_client_registration",
+    "rfc7592": "client_registration_management",
+}
+
 for _name in _OAUTH_RFC_MODULES:
     _alias_module(
         f"{_LEGACY_NAME}.{_name}",
-        f"tigrbl_auth_protocol_oauth.standards.{_name}",
+        f"tigrbl_auth_protocol_oauth.standards.{_OAUTH_RFC_TARGETS.get(_name, _name)}",
         "tigrbl-auth-protocol-oauth",
     )
 

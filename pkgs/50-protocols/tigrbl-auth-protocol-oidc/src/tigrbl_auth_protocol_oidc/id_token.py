@@ -21,7 +21,7 @@ import sys
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.standards.rfc7516 import decrypt_jwe, encrypt_jwe
-from tigrbl_auth_protocol_oauth.standards.rfc7519 import decode_jwt, encode_jwt
+from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 
 _CANONICAL = None
 try:  # pragma: no cover - exercised when runtime dependencies are installed

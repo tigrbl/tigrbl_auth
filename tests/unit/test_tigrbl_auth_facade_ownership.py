@@ -45,7 +45,7 @@ FACADE_MODULES = {
     "tigrbl_auth.jwtoken": "tigrbl_auth_protocol_oauth.jwtoken",
     "tigrbl_auth.oidc_id_token": "tigrbl_auth_protocol_oidc.id_token",
     "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
-    "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.rfc7519",
+    "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.json_web_token",
     "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
@@ -285,7 +285,7 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
         ),
         "tigrbl_auth.rfc.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
         "tigrbl_auth.rfc.rfc7516": "tigrbl_identity_jose.standards.rfc7516",
-        "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.rfc7519",
+        "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.json_web_token",
         "tigrbl_auth.rfc.rfc7520": "tigrbl_identity_jose.standards.rfc7520",
         "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
         "tigrbl_auth.rfc.rfc8812": "tigrbl_identity_jose.standards.rfc8812",
@@ -384,9 +384,42 @@ def test_jose_no_longer_owns_protocol_jwt_facades() -> None:
     assert not (jose_root / "standards" / "rfc7519.py").exists()
     assert not (jose_root / "standards" / "rfc8725.py").exists()
     assert (oauth_root / "jwtoken.py").exists()
-    assert (oauth_root / "standards" / "rfc7519.py").exists()
+    assert (oauth_root / "standards" / "json_web_token.py").exists()
     assert (oauth_root / "standards" / "rfc8725.py").exists()
     assert (oidc_root / "jwks_service.py").exists()
+
+
+def test_oauth_standards_use_descriptive_module_names() -> None:
+    oauth_standards = (
+        package_root("tigrbl-auth-protocol-oauth")
+        / "src"
+        / "tigrbl_auth_protocol_oauth"
+        / "standards"
+    )
+
+    descriptive_modules = {
+        "bearer_token_usage.py",
+        "json_web_token.py",
+        "revocation.py",
+        "assertion_framework.py",
+        "jwt_client_auth.py",
+        "dynamic_client_registration.py",
+        "client_registration_management.py",
+    }
+    removed_rfc_modules = {
+        "rfc6750.py",
+        "rfc7009.py",
+        "rfc7519.py",
+        "rfc7521.py",
+        "rfc7523.py",
+        "rfc7591.py",
+        "rfc7592.py",
+    }
+
+    for filename in descriptive_modules:
+        assert (oauth_standards / filename).exists()
+    for filename in removed_rfc_modules:
+        assert not (oauth_standards / filename).exists()
 
 
 def test_tigrbl_auth_has_no_large_exact_copies_of_split_package_modules() -> None:

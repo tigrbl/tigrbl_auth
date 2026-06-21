@@ -21,7 +21,7 @@ from tigrbl_identity_server.security import deps as security_deps
 from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError, _svc, _svc_async
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_auth_protocol_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_identity_storage.framework import JWAAlg
 from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings

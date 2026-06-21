@@ -21,7 +21,7 @@ from tigrbl.runtime.status import HTTPException
 
 from tigrbl_identity_runtime import settings as runtime_cfg
 from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
-from tigrbl_auth_protocol_oauth.standards.rfc7519 import decode_jwt, encode_jwt
+from tigrbl_auth_protocol_oauth.standards.json_web_token import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.rfc9449_dpop import verify_proof
 from tigrbl_identity_contracts.protocols import TokenType
 

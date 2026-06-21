@@ -37,7 +37,7 @@ from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
 from tigrbl_identity_server.security.user_lookup import first_user_by_filters
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_auth_protocol_oauth.standards.rfc6750 import extract_bearer_token
+from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile, verify_access_token_sender_constraint
 from tigrbl_auth_protocol_oauth.standards.mtls import presented_certificate_thumbprint
 from tigrbl_identity_runtime.settings import settings
