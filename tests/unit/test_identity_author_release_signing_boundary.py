@@ -19,7 +19,7 @@ AUTHOR_ROOT = (
 JOSE_ROOT = (
     ROOT
     / "pkgs"
-    / "10-domain"
+    / "30-providers"
     / "tigrbl-identity-jose"
     / "src"
     / "tigrbl_identity_jose"

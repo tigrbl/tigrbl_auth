@@ -90,8 +90,8 @@ PERSISTENCE_HELPER_PATHS = [
 SYNC_COMPAT_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/_dpop/primitives.py",
-    ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
-    ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/jwtoken.py",
+    ROOT / "pkgs/30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/standards/rfc8037.py",
     ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/_sync.py",
 ]
 
@@ -106,7 +106,7 @@ ASYNC_REQUEST_TOKEN_PATHS = [
 AUTHN_TOKEN_SIGNER_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/runtime.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authn-credentials/src/tigrbl_authn_credentials/_token_service/coder.py",
-    ROOT / "pkgs/10-domain/tigrbl-identity-jose/src/tigrbl_identity_jose/jwtoken.py",
+    ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/jwtoken.py",
 ]
 
 

@@ -4,9 +4,9 @@ import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DOMAIN_ROOT = ROOT / "pkgs" / "10-domain"
+JOSE_ROOT = ROOT / "pkgs" / "30-providers" / "tigrbl-identity-jose"
 
-ALLOWED_DOMAIN_DATACLASSES: set[str] = set()
+ALLOWED_JOSE_DATACLASSES: set[str] = set()
 
 
 def _dataclass_defs(path: Path) -> set[str]:
@@ -22,7 +22,7 @@ def _dataclass_defs(path: Path) -> set[str]:
     return names
 
 
-def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
+def test_jose_reusable_dataclasses_are_contract_reexports() -> None:
     import tigrbl_security_trust_contracts as security_trust_contracts
     import tigrbl_identity_contracts as user_contracts
     from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
@@ -57,13 +57,13 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     assert not hasattr(tenant_discovery, "TenantPublicDiscoveryBoundaryFeature")
 
 
-def test_10_domain_only_keeps_implementation_local_dataclasses() -> None:
+def test_jose_provider_only_keeps_implementation_local_dataclasses() -> None:
     offenders: list[str] = []
-    for path in DOMAIN_ROOT.rglob("*.py"):
-        relative = path.relative_to(DOMAIN_ROOT).as_posix()
+    for path in JOSE_ROOT.rglob("*.py"):
+        relative = path.relative_to(JOSE_ROOT).as_posix()
         for name in sorted(_dataclass_defs(path)):
             entry = f"{relative}::{name}"
-            if entry not in ALLOWED_DOMAIN_DATACLASSES:
+            if entry not in ALLOWED_JOSE_DATACLASSES:
                 offenders.append(entry)
 
     assert offenders == []

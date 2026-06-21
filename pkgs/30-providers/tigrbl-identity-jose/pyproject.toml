@@ -53,7 +53,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-domain/tigrbl-identity-jose"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-identity-jose"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-identity-jose/"
 

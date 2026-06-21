@@ -2391,7 +2391,7 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", editable = "pkgs/01-contracts/tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
-    { name = "tigrbl-identity-jose", editable = "pkgs/10-domain/tigrbl-identity-jose" },
+    { name = "tigrbl-identity-jose", editable = "pkgs/30-providers/tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth", editable = "pkgs/deprecated/tigrbl-identity-oauth" },
     { name = "tigrbl-identity-oidc", editable = "pkgs/deprecated/tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator", editable = "pkgs/60-runtime/tigrbl-identity-operator" },
@@ -2623,7 +2623,7 @@ requires-dist = [{ name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2"
 [[package]]
 name = "tigrbl-identity-jose"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-domain/tigrbl-identity-jose" }
+source = { editable = "pkgs/30-providers/tigrbl-identity-jose" }
 dependencies = [
     { name = "bcrypt" },
     { name = "swarmauri-core" },

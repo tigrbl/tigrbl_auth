@@ -20,13 +20,11 @@ PYTHON_PACKAGE_LAYERS = {
     "bases": {
         "tigrbl-security-trust-domain-bases",
     },
-    "domain": {
-        "tigrbl-identity-jose",
-    },
     "storage": {
         "tigrbl-identity-storage",
     },
     "providers": {
+        "tigrbl-identity-jose",
         "tigrbl-security-signing-pqc",
     },
     "capabilities": {
@@ -73,7 +71,6 @@ PYTHON_LAYER_FOLDERS = {
     "primitives": "00-primitives",
     "contracts": "01-contracts",
     "bases": "05-bases",
-    "domain": "10-domain",
     "storage": "20-storage",
     "providers": "30-providers",
     "capabilities": "40-capabilities",
@@ -155,6 +152,8 @@ def test_all_python_packages_are_assigned_to_one_dependency_layer() -> None:
     assert "core" not in PYTHON_PACKAGE_LAYERS
     assert "foundation" not in PYTHON_PACKAGE_LAYERS
     assert not (PKGS / "00-core").exists()
+    assert "domain" not in PYTHON_PACKAGE_LAYERS
+    assert not (PKGS / "10-domain").exists()
     assert declared == discovered
 
     layer_names = list(PYTHON_PACKAGE_LAYERS)

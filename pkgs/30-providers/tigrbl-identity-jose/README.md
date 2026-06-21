@@ -8,7 +8,7 @@ tigrbl-identity-jose owns token cryptography and JOSE-related standards support 
 
 - Package: `tigrbl-identity-jose`
 - Import root: `tigrbl_identity_jose`
-- Component kind: Domain package
+- Component kind: Provider package
 - Use it when you need JOSE, JWT, JWK, JWS, JWE, JWKS, or key rotation behavior.
 - It separates signing and verification material from OAuth and OIDC protocol decisions.
 - It includes RFC-oriented modules for JOSE standards tracked by the identity suite.
@@ -47,7 +47,7 @@ from tigrbl_identity_jose.key_rotation_policy import KeyRotationPolicyGovernance
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-jose/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-domain/tigrbl-identity-jose)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-identity-jose)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

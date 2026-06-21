@@ -187,7 +187,7 @@ tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", edit
 tigrbl-identity-contracts = { path = "pkgs/01-contracts/tigrbl-identity-contracts", editable = true }
 tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
-tigrbl-identity-jose = { path = "pkgs/10-domain/tigrbl-identity-jose", editable = true }
+tigrbl-identity-jose = { path = "pkgs/30-providers/tigrbl-identity-jose", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }
