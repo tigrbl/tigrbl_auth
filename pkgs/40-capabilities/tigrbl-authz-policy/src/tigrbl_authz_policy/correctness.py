@@ -10,7 +10,7 @@ from tigrbl_identity_contracts.correctness import (
     TenantRealmIsolationReport,
     TrustEdge,
 )
-from tigrbl_identity_contracts.authz.invariants import InvariantEvaluation
+from tigrbl_identity_contracts.invariants import InvariantEvaluation
 
 from .authority_graph import AuthorityDerivationGraph
 from .invariants import InvariantRegistry

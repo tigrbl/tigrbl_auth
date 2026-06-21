@@ -222,6 +222,20 @@ def test_correctness_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "correctness" / "reports.py").exists()
 
 
+def test_invariant_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "authz" / "invariants.py").exists()
+    assert (contracts_root / "invariants" / "__init__.py").exists()
+
+
 def test_governance_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT

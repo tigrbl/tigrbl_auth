@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Callable, Iterable, Mapping
 
-from tigrbl_identity_contracts.authz.invariants import (
+from tigrbl_identity_contracts.invariants import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantSeverity,

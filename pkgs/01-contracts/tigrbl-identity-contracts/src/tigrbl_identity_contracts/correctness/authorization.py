@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from ..authz.invariants import InvariantEvaluation
+from ..invariants import InvariantEvaluation
 
 
 @dataclass(frozen=True, slots=True)

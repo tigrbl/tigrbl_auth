@@ -22,6 +22,7 @@ from .adaptive_access import *
 from .correctness import *
 from .admin_resources import *
 from .governance import *
+from .invariants import *
 from .residency import *
 
 __all__ = [name for name in globals() if not name.startswith("_")]
