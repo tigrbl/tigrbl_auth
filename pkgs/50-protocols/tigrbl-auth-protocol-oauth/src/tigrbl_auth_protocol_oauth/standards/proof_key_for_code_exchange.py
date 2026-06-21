@@ -1,4 +1,4 @@
-"""PKCE utilities for RFC 7636 compliance.
+"""Proof Key for Code Exchange utilities.
 
 This module keeps the OAuth protocol public API while delegating reusable
 RFC 7636 proof-key primitives to ``tigrbl-security-proof-pkce``.

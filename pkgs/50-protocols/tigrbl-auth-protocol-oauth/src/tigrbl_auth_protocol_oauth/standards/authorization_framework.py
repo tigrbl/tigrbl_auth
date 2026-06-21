@@ -1,4 +1,4 @@
-"""Utilities for core OAuth 2.0 Authorization Framework (RFC 6749).
+"""Utilities for the core OAuth 2.0 authorization framework.
 
 This module provides helpers for validating token endpoint requests according
 to RFC 6749 Section 5.2. Validation can be toggled on or off via the

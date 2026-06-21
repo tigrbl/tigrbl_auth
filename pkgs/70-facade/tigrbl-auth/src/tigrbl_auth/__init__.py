@@ -92,9 +92,18 @@ _SYMBOL_EXPORTS = {
     "RFC7520_SPEC_URL": ("tigrbl_auth.rfc.rfc7520", "RFC7520_SPEC_URL"),
     "jws_then_jwe": ("tigrbl_auth.rfc.rfc7520", "jws_then_jwe"),
     "jwe_then_jws": ("tigrbl_auth.rfc.rfc7520", "jwe_then_jws"),
-    "makeCodeVerifier": ("tigrbl_auth.rfc.rfc7636_pkce", "makeCodeVerifier"),
-    "makeCodeChallenge": ("tigrbl_auth.rfc.rfc7636_pkce", "makeCodeChallenge"),
-    "verify_code_challenge": ("tigrbl_auth.rfc.rfc7636_pkce", "verify_code_challenge"),
+    "makeCodeVerifier": (
+        "tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange",
+        "makeCodeVerifier",
+    ),
+    "makeCodeChallenge": (
+        "tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange",
+        "makeCodeChallenge",
+    ),
+    "verify_code_challenge": (
+        "tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange",
+        "verify_code_challenge",
+    ),
     "RFC8628_SPEC_URL": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "RFC8628_SPEC_URL"),
     "generate_user_code": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "generate_user_code"),
     "validate_user_code": ("tigrbl_auth_protocol_oauth.standards.device_authorization", "validate_user_code"),

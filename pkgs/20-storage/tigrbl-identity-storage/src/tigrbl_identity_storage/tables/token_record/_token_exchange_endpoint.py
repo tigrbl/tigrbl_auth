@@ -6,7 +6,7 @@ from urllib.parse import parse_qs
 
 from tigrbl_identity_storage.framework import Header, HTTPException, Request, status
 from tigrbl_identity_runtime import settings as runtime_cfg
-from tigrbl_auth_protocol_oauth.standards.rfc9449_dpop import verify_proof
+from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof
 
 from tigrbl_auth_protocol_oauth.standards._rfc8693.runtime import (
     TOKEN_EXCHANGE_GRANT_TYPE,

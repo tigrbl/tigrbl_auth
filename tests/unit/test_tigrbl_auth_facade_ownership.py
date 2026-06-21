@@ -274,14 +274,14 @@ def test_installable_tigrbl_auth_facade_exposes_storage_legacy_submodules() -> N
 def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
     facade_modules = {
         "tigrbl_auth.rfc.rfc7636_pkce": (
-            "tigrbl_auth_protocol_oauth.standards.rfc7636_pkce"
+            "tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange"
         ),
         "tigrbl_auth.rfc.rfc7662_introspection": (
             "tigrbl_auth_protocol_oauth.standards.introspection"
         ),
         "tigrbl_auth.rfc.rfc8414": "tigrbl_auth_protocol_oauth.standards.authorization_server_metadata_endpoint",
         "tigrbl_auth.rfc.rfc9449_dpop": (
-            "tigrbl_auth_protocol_oauth.standards.rfc9449_dpop"
+            "tigrbl_auth_protocol_oauth.standards.dpop"
         ),
         "tigrbl_auth.rfc.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
         "tigrbl_auth.rfc.rfc7516": "tigrbl_identity_jose.standards.rfc7516",
@@ -405,6 +405,9 @@ def test_oauth_standards_use_descriptive_module_names() -> None:
         "jwt_client_auth.py",
         "dynamic_client_registration.py",
         "client_registration_management.py",
+        "authorization_framework.py",
+        "token_endpoint.py",
+        "proof_key_for_code_exchange.py",
         "introspection.py",
         "native_apps.py",
         "authorization_server_metadata.py",
@@ -431,6 +434,10 @@ def test_oauth_standards_use_descriptive_module_names() -> None:
         "rfc7523.py",
         "rfc7591.py",
         "rfc7592.py",
+        "rfc6749.py",
+        "rfc6749_token.py",
+        "rfc7636_pkce.py",
+        "rfc9449_dpop.py",
         "rfc7662.py",
         "rfc7662_introspection.py",
         "rfc8252.py",

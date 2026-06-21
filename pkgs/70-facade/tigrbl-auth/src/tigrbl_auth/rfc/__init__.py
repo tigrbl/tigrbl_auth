@@ -51,6 +51,8 @@ _JOSE_RFC_MODULES = (
 _CORE_RFC_MODULES = ("rfc8785",)
 
 _OAUTH_RFC_TARGETS = {
+    "rfc6749": "authorization_framework",
+    "rfc6749_token": "token_endpoint",
     "rfc6750": "bearer_token_usage",
     "rfc7009": "revocation",
     "rfc7519": "json_web_token",
@@ -58,6 +60,7 @@ _OAUTH_RFC_TARGETS = {
     "rfc7523": "jwt_client_auth",
     "rfc7591": "dynamic_client_registration",
     "rfc7592": "client_registration_management",
+    "rfc7636_pkce": "proof_key_for_code_exchange",
     "rfc7662": "introspection",
     "rfc7662_introspection": "introspection",
     "rfc8252": "native_apps",
@@ -74,6 +77,7 @@ _OAUTH_RFC_TARGETS = {
     "rfc9126": "pushed_authorization_requests",
     "rfc9207": "issuer_identification",
     "rfc9396": "rich_authorization_requests",
+    "rfc9449_dpop": "dpop",
 }
 
 for _name in _OAUTH_RFC_MODULES:
