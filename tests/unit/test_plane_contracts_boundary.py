@@ -257,6 +257,23 @@ def test_service_identity_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "service_identity" / "delegation.py").exists()
 
 
+def test_delegation_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "authz" / "delegation_lifecycle_models.py").exists()
+    assert not (contracts_root / "authz" / "delegation_proofs.py").exists()
+    assert (contracts_root / "delegation" / "__init__.py").exists()
+    assert (contracts_root / "delegation" / "lifecycle.py").exists()
+    assert (contracts_root / "delegation" / "proofs.py").exists()
+
+
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
     assert "tigrbl_user_plane_contracts" not in sys.modules
     assert "tigrbl_control_plane_contracts" not in sys.modules

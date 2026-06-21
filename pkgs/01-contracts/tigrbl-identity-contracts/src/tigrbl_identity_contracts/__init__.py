@@ -7,6 +7,7 @@ from .planes import *
 from .authentication import *
 from .authority import *
 from .credentials import *
+from .delegation import *
 from .federation import *
 from .principals import *
 from .protocols import *

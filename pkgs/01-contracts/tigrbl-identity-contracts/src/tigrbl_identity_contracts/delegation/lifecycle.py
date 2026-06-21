@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from typing import Iterable, Mapping
 
 from ..authority import AuthorityScope
-from .delegation_proofs import DelegationAttenuationProof, DelegationGrant
+from .proofs import DelegationAttenuationProof, DelegationGrant
 
 ACTIVE_GRANT_STATUSES = {"active"}
 TERMINAL_GRANT_STATUSES = {"revoked", "expired", "replaced"}

@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Iterable
 
 from tigrbl_identity_contracts.authority import AuthorityScope
-from tigrbl_identity_contracts.authz.delegation_proofs import (
+from tigrbl_identity_contracts.delegation import (
     DelegationAttenuationProof,
     DelegationGrant,
 )
