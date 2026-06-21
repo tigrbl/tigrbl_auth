@@ -17,10 +17,8 @@ from .decisions import (
 )
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,
-    ADMIN_POLICY_BOUNDARY_FEATURES,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
-    PHASE3_ADMIN_POLICY_FEATURES,
     PUBLIC_CLIENT_FIELDS,
     ABACAdministration,
     DelegatedAdministration,
@@ -33,13 +31,9 @@ from .control_plane import (
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
     assert_client_mutation_authority,
-    admin_policy_boundary_integrity,
-    admin_policy_boundary_manifest,
     build_compliance_report,
     expose_client_record,
     filter_visible_tenants,
-    phase3_admin_policy_boundary_integrity,
-    phase3_admin_policy_boundary_manifest,
     simulate_policy,
 )
 from .governance_extension import (
@@ -163,7 +157,6 @@ from .residency import (
 __all__ = [
     "ABACAdministration",
     "ADMIN_CLIENT_FIELDS",
-    "ADMIN_POLICY_BOUNDARY_FEATURES",
     "AccessReviewCampaign",
     "AccessReviewDecision",
     "AccessReviewItem",
@@ -217,7 +210,6 @@ __all__ = [
     "LivenessConvergenceReport",
     "MANAGEMENT_DELEGATION_SURFACES",
     "PermissionPolicy",
-    "PHASE3_ADMIN_POLICY_FEATURES",
     "PolicyDeterminismReport",
     "PolicyReplayCase",
     "PolicyReplayResult",
@@ -256,8 +248,6 @@ __all__ = [
     "assert_delegation_management_surface",
     "assert_residency_access",
     "assert_client_mutation_authority",
-    "admin_policy_boundary_integrity",
-    "admin_policy_boundary_manifest",
     "authority_matches",
     "build_compliance_report",
     "build_control_plane_correctness_report",
@@ -280,8 +270,6 @@ __all__ = [
     "has_superuser_authority",
     "normalize_delegation_scopes",
     "normalize_authority_roles",
-    "phase3_admin_policy_boundary_integrity",
-    "phase3_admin_policy_boundary_manifest",
     "prove_delegation_attenuation",
     "replay_policy_determinism",
     "residency_policy_manifest",

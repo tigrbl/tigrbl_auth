@@ -54,7 +54,6 @@ def build_compliance_report(
 
 __all__ = [
     "ABACAdministration",
-    "ADMIN_POLICY_BOUNDARY_FEATURES",
     "ADMIN_CLIENT_FIELDS",
     "AttributePolicy",
     "DELEGATED_MUTABLE_CLIENT_FIELDS",
@@ -65,7 +64,6 @@ __all__ = [
     "PUBLIC_CLIENT_FIELDS",
     "PolicyDecision",
     "PolicyEngine",
-    "PHASE3_ADMIN_POLICY_FEATURES",
     "RBACAdministration",
     "Role",
     "ServiceCredential",
@@ -74,11 +72,7 @@ __all__ = [
     "ServiceIdentityRegistry",
     "assert_client_mutation_authority",
     "build_compliance_report",
-    "admin_policy_boundary_integrity",
-    "admin_policy_boundary_manifest",
     "expose_client_record",
     "filter_visible_tenants",
-    "phase3_admin_policy_boundary_integrity",
-    "phase3_admin_policy_boundary_manifest",
     "simulate_policy",
 ]

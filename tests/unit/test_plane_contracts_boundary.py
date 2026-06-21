@@ -68,10 +68,6 @@ def test_control_plane_contracts_do_not_export_executable_boundary_helpers() -> 
     import tigrbl_identity_contracts as contracts
 
     executable_helpers = {
-        "admin_policy_boundary_manifest",
-        "admin_policy_boundary_integrity",
-        "phase3_admin_policy_boundary_manifest",
-        "phase3_admin_policy_boundary_integrity",
         "provisioning_governance_ecosystem_boundary_manifest",
         "provisioning_governance_ecosystem_boundary_integrity",
         "phase5_governance_extension_boundary_manifest",
@@ -117,8 +113,8 @@ def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> N
 
     assert admin_models.Role is contracts.Role
     assert governance_models.SDKPackage is management_contracts.SDKPackage
-    assert admin_models.admin_policy_boundary_integrity()["passed"] is True
-    assert "feat:f13-rbac" in admin_models.admin_policy_boundary_manifest()
+    assert set(admin_models.PUBLIC_CLIENT_FIELDS) < set(admin_models.ADMIN_CLIENT_FIELDS)
+    assert "client_secret" not in admin_models.PUBLIC_CLIENT_FIELDS
     assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_manifest")
     assert not hasattr(governance_models, "provisioning_governance_ecosystem_boundary_integrity")
 

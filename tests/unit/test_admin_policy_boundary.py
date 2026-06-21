@@ -15,29 +15,8 @@ from tigrbl_authz_policy._control_plane import (
     build_compliance_report,
     expose_client_record,
     filter_visible_tenants,
-    admin_policy_boundary_integrity,
-    admin_policy_boundary_manifest,
     simulate_policy,
 )
-
-
-BOUNDARY_FEATURE_IDS = {
-    "feat:f03-service-identities",
-    "feat:f13-rbac",
-    "feat:f14-abac",
-    "feat:f16-policy-engine",
-    "feat:f19-policy-simulation",
-    "feat:f20-policy-audit",
-    "feat:f24-fine-grained-permissions",
-    "feat:f25-dynamic-conditions",
-    "feat:f42-compliance-reporting",
-    "feat:f45-delegated-admin",
-    "feat:tenant-isolation-cross-plane",
-    "feat:tenant-visibility-rules",
-    "feat:client-policy-cross-plane",
-    "feat:client-mutation-authority-rules",
-    "feat:public-vs-admin-client-exposure",
-}
 
 
 def _client() -> dict[str, object]:
@@ -94,14 +73,7 @@ def _policy_stack() -> tuple[ServiceIdentityRegistry, RBACAdministration, ABACAd
     return services, rbac, abac, delegated, PolicyEngine(rbac=rbac, abac=abac, delegated_admin=delegated)
 
 
-def test_admin_policy_boundary_t0_inventory_tracks_all_cross_plane_features():
-    manifest = admin_policy_boundary_manifest()
-    integrity = admin_policy_boundary_integrity()
-
-    assert set(manifest) == BOUNDARY_FEATURE_IDS
-    assert integrity["passed"] is True
-    assert integrity["feature_count"] == 15
-    assert "service-identity" in integrity["categories"]
+def test_admin_policy_boundary_t0_runtime_client_field_exposure_is_guarded():
     assert "client_secret" not in PUBLIC_CLIENT_FIELDS
     assert set(PUBLIC_CLIENT_FIELDS) < set(ADMIN_CLIENT_FIELDS)
 

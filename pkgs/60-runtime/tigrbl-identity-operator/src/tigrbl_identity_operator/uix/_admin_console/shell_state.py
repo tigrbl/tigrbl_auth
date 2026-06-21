@@ -6,7 +6,6 @@ from typing import Any, Callable, Mapping
 
 from tigrbl_authz_policy.control_plane import (
     ABACAdministration,
-    ADMIN_POLICY_BOUNDARY_FEATURES,
     ADMIN_CLIENT_FIELDS,
     AttributePolicy,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
@@ -16,20 +15,15 @@ from tigrbl_authz_policy.control_plane import (
     DynamicCondition,
     PolicyDecision,
     PolicyEngine,
-    PHASE3_ADMIN_POLICY_FEATURES,
     PUBLIC_CLIENT_FIELDS,
     RBACAdministration,
     Role,
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
     assert_client_mutation_authority,
-    admin_policy_boundary_integrity,
-    admin_policy_boundary_manifest,
     build_compliance_report,
     expose_client_record,
     filter_visible_tenants,
-    phase3_admin_policy_boundary_integrity,
-    phase3_admin_policy_boundary_manifest,
     simulate_policy,
 )
 from tigrbl_authz_policy.invariants import (
