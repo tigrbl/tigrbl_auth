@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_auth.services._operator_store import OperationContext, operator_state_root, operator_store_summary
+from tigrbl_identity_storage.operator_store import OperationContext, operator_state_root, operator_store_summary
 from tigrbl_auth.cli.handlers import _operator_state_dir
-from tigrbl_auth.services.import_export_service import validate_export_plan
 from tigrbl_auth.services.operator_service import OperatorStateError, build_portability_artifact, create_resource, get_resource, list_resource_result, update_resource
+from tigrbl_identity_operator.import_export_service import validate_export_plan
 
 
 def _ctx(repo_root: Path, resource: str, command: str, *, tenant: str | None = None) -> OperationContext:
@@ -64,4 +64,3 @@ def test_cli_handler_status_root_is_external_to_repo(tmp_path: Path) -> None:
     state_dir = _operator_state_dir(repo_root)
     assert state_dir.name == "status"
     assert repo_root.resolve() not in state_dir.resolve().parents
-

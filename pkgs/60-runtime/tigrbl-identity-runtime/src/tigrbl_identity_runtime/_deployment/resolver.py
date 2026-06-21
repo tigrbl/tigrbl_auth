@@ -229,7 +229,9 @@ def deployment_from_app(
     deployment = (
         getattr(state, "tigrbl_auth_deployment", None) if state is not None else None
     )
-    if isinstance(deployment, ResolvedDeployment):
+    if isinstance(deployment, ResolvedDeployment) or (
+        hasattr(deployment, "route_enabled") and hasattr(deployment, "to_manifest")
+    ):
         return deployment
     return resolve_deployment(fallback_settings)
 
@@ -237,6 +239,20 @@ def deployment_from_app(
 def deployment_from_request(
     request: Any | None, fallback_settings: object | None = None
 ) -> ResolvedDeployment:
+    scope = getattr(request, "scope", None) if request is not None else None
+    if isinstance(scope, dict):
+        deployment = scope.get("tigrbl_auth_deployment")
+        if isinstance(deployment, ResolvedDeployment) or (
+            hasattr(deployment, "route_enabled") and hasattr(deployment, "to_manifest")
+        ):
+            return deployment
+        scoped_app = scope.get("app")
+        if scoped_app is not None:
+            deployment = deployment_from_app(scoped_app, fallback_settings)
+            if isinstance(deployment, ResolvedDeployment) or (
+                hasattr(deployment, "route_enabled") and hasattr(deployment, "to_manifest")
+            ):
+                return deployment
     app = getattr(request, "app", None) if request is not None else None
     return deployment_from_app(app, fallback_settings)
 

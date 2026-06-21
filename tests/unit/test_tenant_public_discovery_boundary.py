@@ -10,16 +10,17 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 ROOT = Path(__file__).resolve().parents[2]
-for src in sorted((ROOT / "pkgs").glob("**/src")):
+for src in sorted((ROOT / "pkgs").glob("**/src"), reverse=True):
     value = str(src)
-    if value not in sys.path:
-        sys.path.append(value)
+    if value in sys.path:
+        sys.path.remove(value)
+    sys.path.insert(0, value)
 
 import tigrbl_identity_principals as principals  # noqa: E402
 
 from tigrbl_auth.api.app import build_app  # noqa: E402
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
-from tigrbl_auth.services._operator_store import OperationContext  # noqa: E402
+from tigrbl_identity_storage.operator_store import OperationContext  # noqa: E402
 from tigrbl_auth.services.operator_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
 from tigrbl_auth_protocol_oidc.tenant_discovery import (  # noqa: E402
     TENANT_JWKS_PATH,
@@ -115,7 +116,7 @@ TENANT_PUBLIC_DISCOVERY_BOUNDARY = {
 
 
 def _settings(tmp_path: Path) -> SimpleNamespace:
-    return SimpleNamespace(admin_api_key="test-admin-key", admin_api_key_dir=str(tmp_path))
+    return SimpleNamespace(admin_api_key="test-admin-key", admin_api_key_dir=str(tmp_path), issuer=ROOT_ISSUER)
 
 
 def _deployment():

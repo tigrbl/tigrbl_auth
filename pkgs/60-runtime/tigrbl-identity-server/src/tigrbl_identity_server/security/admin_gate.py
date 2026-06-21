@@ -209,6 +209,8 @@ class AdminGate:
         return False
 
     async def __call__(self, scope: dict[str, Any], receive: Any, send: Any) -> None:
+        scope["tigrbl_auth_deployment"] = self.deployment
+        scope["tigrbl_auth_settings"] = self.settings_obj
         if scope.get("type") != "http":
             await self.app(scope, receive, send)
             return

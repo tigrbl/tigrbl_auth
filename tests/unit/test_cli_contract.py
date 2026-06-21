@@ -6,7 +6,7 @@ from pathlib import Path
 from tigrbl_auth.cli.main import main
 from tigrbl_auth.cli.metadata import build_cli_conformance_snapshot, build_cli_contract_manifest, build_parser
 from tigrbl_auth.cli.reports import generate_state_reports
-from tigrbl_auth.services._operator_store import resource_state_path, operator_state_root
+from tigrbl_identity_storage.operator_store import resource_state_path, operator_state_root
 
 
 ROOT = Path(__file__).resolve().parents[2]

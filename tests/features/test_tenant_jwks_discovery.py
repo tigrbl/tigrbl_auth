@@ -9,7 +9,7 @@ from httpx import ASGITransport, AsyncClient
 
 from tigrbl_auth.api.app import build_app
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts
-from tigrbl_auth.services._operator_store import OperationContext
+from tigrbl_identity_storage.operator_store import OperationContext
 from tigrbl_auth.services.operator_service import create_resource, generate_key_record, publish_jwks_document
 from tigrbl_auth.services.tenant_discovery import (
     TENANT_JWKS_PATH,

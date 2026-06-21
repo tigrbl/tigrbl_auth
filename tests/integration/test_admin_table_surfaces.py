@@ -26,7 +26,7 @@ from tigrbl_auth.runtime.engine_resolver import (
     resolve_default_provider,
     set_default_provider,
 )
-from tigrbl_auth.services._operator_store import OperationContext
+from tigrbl_identity_storage.operator_store import OperationContext
 from tigrbl_auth.services.operator_service import create_resource
 from tigrbl_auth.services.session_service import observe_token_response
 from tigrbl_auth.tables import AuditEvent, Client, Consent, RestOltpTable, get_db as tables_get_db

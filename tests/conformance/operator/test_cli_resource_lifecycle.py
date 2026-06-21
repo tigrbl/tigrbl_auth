@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from tigrbl_auth.cli.main import main
-from tigrbl_auth.services._operator_store import operator_state_root, resource_state_path
+from tigrbl_identity_storage.operator_store import operator_state_root, resource_state_path
 
 
 def _invoke_json(argv: list[str]) -> tuple[int, dict[str, object]]:

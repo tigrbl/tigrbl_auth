@@ -73,7 +73,10 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         "bootstrap storage",
         passed=operator_summary.get("backend") == "sqlite-authoritative" and operator_summary.get("repo_mutation_dependency") is False,
         summary="The operator plane materializes durable sqlite-backed storage outside the repository tree.",
-        evidence=["tigrbl_auth/services/_operator_store.py", "tests/unit/test_operator_control_plane.py"],
+        evidence=[
+            "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
+            "tests/unit/test_operator_control_plane.py",
+        ],
         details_payload=operator_summary,
     )
     capabilities["register_manage_clients"] = _capability(
