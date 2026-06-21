@@ -2497,7 +2497,6 @@ name = "tigrbl-authz-policy"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
-    { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy-concrete" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
@@ -2507,7 +2506,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
