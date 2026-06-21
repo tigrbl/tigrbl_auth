@@ -220,6 +220,24 @@ def test_correctness_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "correctness" / "reports.py").exists()
 
 
+def test_governance_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "governance.py").exists()
+    assert (contracts_root / "governance" / "__init__.py").exists()
+    assert (contracts_root / "governance" / "plugin" / "__init__.py").exists()
+    assert (contracts_root / "governance" / "scim" / "__init__.py").exists()
+    assert (contracts_root / "governance" / "entitlement" / "__init__.py").exists()
+    assert (contracts_root / "governance" / "accessreview" / "__init__.py").exists()
+
+
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:
     assert "tigrbl_user_plane_contracts" not in sys.modules
     assert "tigrbl_control_plane_contracts" not in sys.modules
