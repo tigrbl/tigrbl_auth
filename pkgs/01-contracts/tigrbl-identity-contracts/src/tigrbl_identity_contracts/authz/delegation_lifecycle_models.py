@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Iterable, Mapping
 
-from .authority_graph import AuthorityScope
+from ..authority import AuthorityScope
 from .delegation_proofs import DelegationAttenuationProof, DelegationGrant
 
 ACTIVE_GRANT_STATUSES = {"active"}

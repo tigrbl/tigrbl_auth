@@ -5,6 +5,7 @@ from __future__ import annotations
 from .models import *
 from .planes import *
 from .authentication import *
+from .authority import *
 from .credentials import *
 from .federation import *
 from .principals import *

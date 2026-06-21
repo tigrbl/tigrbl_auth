@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field, replace
 from typing import Any, Iterable, Mapping
 
-from ..authz.authority_roles import AuthorityRole
+from ..authority import AuthorityRole
 from .enums import NONHUMAN_PRINCIPAL_KINDS, PrincipalKind, PrincipalStatus
 
 

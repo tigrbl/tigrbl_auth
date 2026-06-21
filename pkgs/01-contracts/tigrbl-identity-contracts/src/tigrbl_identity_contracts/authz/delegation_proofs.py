@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from .authority_graph import AuthorityScope
+from ..authority import AuthorityScope
 
 
 @dataclass(frozen=True, slots=True)

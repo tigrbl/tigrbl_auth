@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
-from tigrbl_identity_contracts.authz.authority_roles import AuthorityRole
+from tigrbl_identity_contracts.authority import AuthorityRole
 from tigrbl_identity_contracts.principals import (
     NONHUMAN_PRINCIPAL_KINDS,
     Principal,

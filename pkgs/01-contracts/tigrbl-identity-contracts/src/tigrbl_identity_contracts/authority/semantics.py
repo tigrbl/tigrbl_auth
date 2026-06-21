@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Mapping
 
-from .authority_graph import AuthorityScope
+from .graph import AuthorityScope
 
 
 class AuthorityMutationKind(str, Enum):

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from tigrbl_identity_contracts.authz.authority_graph import AuthorityScope
-from tigrbl_identity_contracts.authz.authority_semantics import (
+from tigrbl_identity_contracts.authority import AuthorityScope
+from tigrbl_identity_contracts.authority import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,

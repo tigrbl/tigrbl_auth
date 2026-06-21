@@ -38,10 +38,12 @@ def test_principal_contracts_are_grouped_under_principals_package() -> None:
     assert (contracts_root / "principals" / "models.py").is_file()
 
 
-def test_authority_roles_are_authz_owned_with_principal_compatibility() -> None:
+def test_authority_roles_are_authority_owned_with_principal_compatibility() -> None:
     import tigrbl_authz_policy as authz
+    import tigrbl_identity_contracts as contracts
     import tigrbl_identity_principals as principals
 
+    assert contracts.AuthorityRole is principals.AuthorityRole
     assert authz.AuthorityRole.SUPERUSER.value == principals.AuthorityRole.SUPERUSER.value
     assert authz.has_admin_authority([authz.AuthorityRole.ADMIN]) is True
     assert authz.has_owner_authority(["owner"]) is True
