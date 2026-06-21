@@ -24,23 +24,27 @@ from .metadata import (
     VerifierContractProfile,
     verifier_contract_from_metadata,
 )
-from .proof_validators import DpopValidator, MtlsBindingValidator, ProofBindingValidator
+from .sender_constraints import (
+    DpopCnfBindingValidator,
+    MtlsCnfBindingValidator,
+    SenderConstraintValidator,
+)
 
 __all__ = [
     "AccessTokenClaims",
     "DPoPBinding",
-    "DpopValidator",
+    "DpopCnfBindingValidator",
     "FrameworkRequest",
     "IntrospectionClient",
     "IntrospectionTransport",
     "JWKSCache",
     "MTLSBinding",
-    "MtlsBindingValidator",
+    "MtlsCnfBindingValidator",
     "PolicyHook",
-    "ProofBindingValidator",
     "ResourceRequirement",
     "ResourceServerError",
     "ResourceServerVerifier",
+    "SenderConstraintValidator",
     "TokenValidationError",
     "VerificationResult",
     "VerificationStatus",

@@ -2284,6 +2284,8 @@ dependencies = [
     { name = "tigrbl-orm" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-runtime" },
+    { name = "tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
@@ -2383,7 +2385,7 @@ requires-dist = [
     { name = "tigrbl-authn-credentials", editable = "pkgs/40-capabilities/tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy", editable = "pkgs/40-capabilities/tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-concrete", editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" },
-    { name = "tigrbl-authz-resource-server", editable = "pkgs/40-capabilities/tigrbl-authz-resource-server" },
+    { name = "tigrbl-authz-resource-server", editable = "pkgs/50-protocols/tigrbl-authz-resource-server" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
@@ -2413,6 +2415,8 @@ requires-dist = [
     { name = "tigrbl-orm", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-release-contracts", editable = "pkgs/01-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-security-certificate-mtls", editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-proof-dpop", editable = "pkgs/30-providers/tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
@@ -2494,12 +2498,15 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-authz-resource-server"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/40-capabilities/tigrbl-authz-resource-server" }
+source = { editable = "pkgs/50-protocols/tigrbl-authz-resource-server" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
@@ -2508,6 +2515,9 @@ requires-dist = [
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-certificate-mtls", specifier = "==0.1.0" },
+    { name = "tigrbl-security-proof-dpop", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]
@@ -2639,6 +2649,12 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/01-contracts/tigrbl-identity-contracts" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
 
 [[package]]
 name = "tigrbl-identity-core"
@@ -2899,6 +2915,36 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f9/4a/39dd8a22b87e337da73063840b983841d20723eed90ce705f064409c69bf/tigrbl_runtime-0.4.4.dev1.tar.gz", hash = "sha256:f57f7b68aa8b6faf268c354c1fc46787c6a7f5b4f74c30db3ba43a6a52014b40", size = 65573 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a8/c4/c05ca37d6fab6fa6a0510c0b71baa6dc64d4f81a9fa61afb84087b12c9b9/tigrbl_runtime-0.4.4.dev1-py3-none-any.whl", hash = "sha256:15231aec552680c50bc9f40d39e7926f90d501e47858880f350b9dcea783a594", size = 83328 },
+]
+
+[[package]]
+name = "tigrbl-security-certificate-mtls"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-security-proof-dpop"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-proof-dpop" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
 
 [[package]]

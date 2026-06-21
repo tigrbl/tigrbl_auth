@@ -4,6 +4,8 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum
 from typing import Any, Iterable, Mapping, Protocol
 
+from tigrbl_security_trust_contracts import DPoPBinding, MTLSBinding
+
 
 class VerificationStatus(str, Enum):
     ALLOWED = "allowed"
@@ -20,13 +22,6 @@ class TokenValidationError(ResourceServerError):
 
 def _normalize(values: Iterable[str]) -> tuple[str, ...]:
     return tuple(sorted({value.strip() for value in values if value and value.strip()}))
-
-
-def _required_text(value: str, field_name: str) -> str:
-    cleaned = str(value).strip()
-    if not cleaned:
-        raise ValueError(f"{field_name} is required")
-    return cleaned
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,29 +67,6 @@ class VerificationResult:
     @property
     def allowed(self) -> bool:
         return self.status == VerificationStatus.ALLOWED
-
-
-@dataclass(frozen=True, slots=True)
-class DPoPBinding:
-    jwk_thumbprint: str
-    htm: str
-    htu: str
-    jti: str
-
-    def __post_init__(self) -> None:
-        object.__setattr__(
-            self,
-            "jwk_thumbprint",
-            _required_text(self.jwk_thumbprint, "DPoP JWK thumbprint"),
-        )
-        object.__setattr__(self, "htm", _required_text(self.htm, "DPoP htm").upper())
-        object.__setattr__(self, "htu", _required_text(self.htu, "DPoP htu"))
-        object.__setattr__(self, "jti", _required_text(self.jti, "DPoP jti"))
-
-
-@dataclass(frozen=True, slots=True)
-class MTLSBinding:
-    certificate_thumbprint: str
 
 
 class IntrospectionTransport(Protocol):

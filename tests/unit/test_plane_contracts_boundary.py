@@ -462,7 +462,7 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
         / "tigrbl_authz_policy",
         ROOT
         / "pkgs"
-        / "40-capabilities"
+        / "50-protocols"
         / "tigrbl-authz-resource-server"
         / "src"
         / "tigrbl_authz_resource_server",

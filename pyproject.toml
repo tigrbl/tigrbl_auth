@@ -57,6 +57,8 @@ dependencies = [
     "tigrbl-release-contracts==0.1.0",
     "tigrbl-security-trust-contracts==0.1.0",
     "tigrbl-security-trust-domain-bases==0.1.0",
+    "tigrbl-security-certificate-mtls==0.1.0",
+    "tigrbl-security-proof-dpop==0.1.0",
     "tigrbl-security-signing-pqc==0.1.0",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
@@ -175,6 +177,8 @@ package = false
 tigrbl-release-contracts = { path = "pkgs/01-contracts/tigrbl-release-contracts", editable = true }
 tigrbl-security-trust-contracts = { path = "pkgs/01-contracts/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
+tigrbl-security-certificate-mtls = { path = "pkgs/30-providers/tigrbl-security-certificate-mtls", editable = true }
+tigrbl-security-proof-dpop = { path = "pkgs/30-providers/tigrbl-security-proof-dpop", editable = true }
 tigrbl-security-signing-pqc = { path = "pkgs/30-providers/tigrbl-security-signing-pqc", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
@@ -182,7 +186,7 @@ tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oid
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
 tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", editable = true }
-tigrbl-authz-resource-server = { path = "pkgs/40-capabilities/tigrbl-authz-resource-server", editable = true }
+tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }

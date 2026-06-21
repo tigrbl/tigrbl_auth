@@ -57,6 +57,12 @@ def _absolute_imports(path: Path) -> set[str]:
     return imports
 
 
+def _package_path(dist_name: str) -> Path:
+    matches = sorted(PKGS.glob(f"**/{dist_name}/pyproject.toml"))
+    assert matches, dist_name
+    return matches[0].parent
+
+
 def test_deprecated_taxonomy_roots_reexport_preferred_surfaces() -> None:
     _install_package_src_paths()
 
@@ -71,7 +77,7 @@ def test_deprecated_taxonomy_roots_reexport_preferred_surfaces() -> None:
 
 def test_preferred_taxonomy_package_metadata_is_declared() -> None:
     for dist_name, import_root in DIST_TO_IMPORT_ROOT.items():
-        pyproject = PKGS / dist_name / "pyproject.toml"
+        pyproject = _package_path(dist_name) / "pyproject.toml"
         metadata = tomllib.loads(pyproject.read_text(encoding="utf-8"))
 
         assert metadata["project"]["name"] == dist_name
@@ -105,7 +111,7 @@ def test_authn_authz_protocol_roots_do_not_import_deprecated_roots() -> None:
     deprecated_imports = set(COMPAT_TO_PREFERRED)
 
     for import_root in DIST_TO_IMPORT_ROOT.values():
-        package_root = next(PKGS.glob(f"*/src/{import_root}"))
+        package_root = next(PKGS.glob(f"**/src/{import_root}"))
         for path in package_root.rglob("*.py"):
             imports = _absolute_imports(path)
             assert "tigrbl_auth" not in imports, path

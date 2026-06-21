@@ -29,12 +29,13 @@ PYTHON_PACKAGE_LAYERS = {
     },
     "providers": {
         "tigrbl-identity-jose",
+        "tigrbl-security-certificate-mtls",
+        "tigrbl-security-proof-dpop",
         "tigrbl-security-signing-pqc",
     },
     "capabilities": {
         "tigrbl-authn-credentials",
         "tigrbl-authz-policy",
-        "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
         "tigrbl-identity-principals",
     },
@@ -42,6 +43,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-protocol-oauth",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-auth-protocol-rp",
+        "tigrbl-authz-resource-server",
     },
     "runtime": {
         "tigrbl-identity-author",

@@ -6,6 +6,8 @@ from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Mapping
 
+from tigrbl_security_trust_contracts import ProofBinding
+
 from .enums import CredentialKind, CredentialStatus
 from .errors import CredentialStateError
 
@@ -79,52 +81,6 @@ def _coerce_datetime(value: datetime | str, field_name: str) -> datetime:
     if value.tzinfo is None:
         return value.replace(tzinfo=UTC)
     return value.astimezone(UTC)
-
-
-@dataclass(frozen=True, slots=True)
-class ProofBinding:
-    method: str
-    confirmation_claim: Mapping[str, str]
-    credential_id: str | None = None
-
-    def __post_init__(self) -> None:
-        method = str(self.method).strip().lower()
-        if method not in {"dpop", "mtls"}:
-            raise ValueError("proof binding method must be dpop or mtls")
-        claim = {
-            str(key).strip(): str(value).strip()
-            for key, value in self.confirmation_claim.items()
-            if str(key).strip() and str(value).strip()
-        }
-        if method == "dpop" and not claim.get("jkt"):
-            raise ValueError("DPoP proof binding requires cnf.jkt")
-        if method == "mtls" and not claim.get("x5t#S256"):
-            raise ValueError("mTLS proof binding requires cnf.x5t#S256")
-        object.__setattr__(self, "method", method)
-        object.__setattr__(self, "confirmation_claim", claim)
-
-    @classmethod
-    def for_mtls(cls, credential: object) -> "ProofBinding":
-        return cls(
-            "mtls",
-            getattr(credential, "confirmation_claim"),
-            credential_id=getattr(credential, "id", None),
-        )
-
-    @classmethod
-    def for_dpop(
-        cls,
-        jwk_thumbprint: str | object,
-        *,
-        credential_id: str | None = None,
-    ) -> "ProofBinding":
-        if not isinstance(jwk_thumbprint, str) and hasattr(jwk_thumbprint, "confirmation_claim"):
-            return cls(
-                "dpop",
-                getattr(jwk_thumbprint, "confirmation_claim"),
-                credential_id=credential_id or getattr(jwk_thumbprint, "id", None),
-            )
-        return cls("dpop", {"jkt": jwk_thumbprint}, credential_id=credential_id)
 
 
 __all__ = [

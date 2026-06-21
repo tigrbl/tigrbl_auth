@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-for src in (ROOT / "pkgs").glob("*/src"):
+for src in (ROOT / "pkgs").rglob("src"):
     value = str(src)
     if value not in sys.path:
         sys.path.insert(0, value)
@@ -15,16 +15,16 @@ for src in (ROOT / "pkgs").glob("*/src"):
 from tigrbl_authz_resource_server import (  # noqa: E402
     AccessTokenClaims,
     DPoPBinding,
-    DpopValidator,
+    DpopCnfBindingValidator,
     FrameworkRequest,
     IntrospectionClient,
     JWKSCache,
     MTLSBinding,
-    MtlsBindingValidator,
+    MtlsCnfBindingValidator,
     ResourceRequirement,
     ResourceServerVerifier,
     VerificationStatus,
-    ProofBindingValidator,
+    SenderConstraintValidator,
     TokenValidationError,
     bearer_token_from_authorization,
     verify_framework_request,
@@ -114,13 +114,13 @@ def test_resource_server_t1_dpop_and_mtls_binding_validators() -> None:
 def test_resource_server_t1_public_proof_binding_validator_models() -> None:
     claims = _claims()
 
-    assert DpopValidator().validate(
+    assert DpopCnfBindingValidator().validate(
         claims,
         DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
     )
-    assert MtlsBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="thumb-mtls")) is True
+    assert MtlsCnfBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="thumb-mtls")) is True
     assert (
-        ProofBindingValidator().validate(
+        SenderConstraintValidator().validate(
             claims,
             dpop=DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
             mtls=MTLSBinding(certificate_thumbprint="thumb-mtls"),
@@ -130,14 +130,14 @@ def test_resource_server_t1_public_proof_binding_validator_models() -> None:
         is True
     )
     with pytest.raises(TokenValidationError, match="mTLS binding mismatch"):
-        MtlsBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="wrong"))
+        MtlsCnfBindingValidator().validate(claims, MTLSBinding(certificate_thumbprint="wrong"))
 
 
 @pytest.mark.unit
 def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
     claims = _claims()
 
-    assert DpopValidator().validate(
+    assert DpopCnfBindingValidator().validate(
         claims,
         DPoPBinding(
             jwk_thumbprint=" thumb-dpop ",
@@ -146,12 +146,12 @@ def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
             jti="jti-1",
         ),
     )
-    assert MtlsBindingValidator().validate(
+    assert MtlsCnfBindingValidator().validate(
         claims,
         MTLSBinding(certificate_thumbprint=" thumb-mtls "),
     )
     with pytest.raises(TokenValidationError, match="DPoP binding mismatch"):
-        DpopValidator().validate(
+        DpopCnfBindingValidator().validate(
             _claims(cnf={"jkt": "  "}),
             DPoPBinding(
                 jwk_thumbprint="thumb-dpop",
@@ -161,12 +161,12 @@ def test_resource_server_t2_proof_binding_validators_fail_closed() -> None:
             ),
         )
     with pytest.raises(TokenValidationError, match="mTLS binding mismatch"):
-        MtlsBindingValidator().validate(
+        MtlsCnfBindingValidator().validate(
             _claims(cnf={"x5t#S256": "  "}),
             MTLSBinding(certificate_thumbprint="thumb-mtls"),
         )
     with pytest.raises(TokenValidationError, match="DPoP binding mismatch"):
-        ProofBindingValidator().validate(
+        SenderConstraintValidator().validate(
             claims,
             dpop=DPoPBinding(jwk_thumbprint="wrong", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
             require_dpop=True,
@@ -217,8 +217,8 @@ def test_resource_server_t2_rejects_bad_dpop_mtls_and_missing_bearer() -> None:
 @pytest.mark.unit
 def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
-        Path("pkgs/40-capabilities/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
-        Path("pkgs/40-capabilities/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
+        Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
+        Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
     ]
     forbidden = {
         "tigrbl_auth",

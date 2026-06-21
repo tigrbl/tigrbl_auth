@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 36
+    assert len(packages) == 40
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -34,7 +34,10 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-release-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-release-contracts"
     assert packages["tigrbl-security-trust-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-security-trust-contracts"
     assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
+    assert packages["tigrbl-security-certificate-mtls"].path.as_posix() == "pkgs/30-providers/tigrbl-security-certificate-mtls"
+    assert packages["tigrbl-security-proof-dpop"].path.as_posix() == "pkgs/30-providers/tigrbl-security-proof-dpop"
     assert packages["tigrbl-security-signing-pqc"].path.as_posix() == "pkgs/30-providers/tigrbl-security-signing-pqc"
+    assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
     assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
@@ -81,7 +84,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "143"
+    assert payload["count"] == "159"
     assert not any(
         cell["name"]
         in {
@@ -115,6 +118,16 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-security-signing-pqc"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-security-certificate-mtls"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-security-proof-dpop"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -200,7 +213,24 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
 
     assert dependency_names == {
         "tigrbl-auth-protocol-oauth",
+        "tigrbl-authz-policy",
+        "tigrbl-authz-policy-concrete",
+        "tigrbl-authz-resource-server",
+        "tigrbl-identity-author",
+        "tigrbl-identity-cli",
+        "tigrbl-identity-concrete",
         "tigrbl-identity-contracts",
+        "tigrbl-identity-core",
+        "tigrbl-identity-jose",
+        "tigrbl-identity-operator",
+        "tigrbl-identity-runtime",
+        "tigrbl-identity-storage",
+        "tigrbl-release-contracts",
+        "tigrbl-security-certificate-mtls",
+        "tigrbl-security-proof-dpop",
+        "tigrbl-security-signing-pqc",
+        "tigrbl-security-trust-contracts",
+        "tigrbl-security-trust-domain-bases",
     }
 
     facade_dependency_names = {

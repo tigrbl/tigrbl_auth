@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from hmac import compare_digest
 from typing import Any, Callable, Mapping
 
+from tigrbl_security_certificate_mtls import MtlsBindingValidator
+from tigrbl_security_proof_dpop import DpopBindingValidator
+from tigrbl_security_trust_contracts import DPoPBinding, MTLSBinding
 from tigrbl_identity_contracts.resource_server import (
     AccessTokenClaims,
-    DPoPBinding,
     FrameworkRequest,
     IntrospectionTransport,
-    MTLSBinding,
     PolicyHook,
     ResourceRequirement,
     ResourceServerError,
@@ -163,14 +163,10 @@ class ResourceServerVerifier:
         mtls: MTLSBinding | None,
     ) -> None:
         if requirement.require_dpop:
-            expected = str(claims.cnf.get("jkt") or "").strip()
-            presented = str(getattr(dpop, "jwk_thumbprint", "") or "").strip()
-            if dpop is None or not expected or not compare_digest(presented, expected):
+            if not DpopBindingValidator().validate_confirmation(claims.cnf, dpop):
                 raise TokenValidationError("DPoP binding mismatch")
         if requirement.require_mtls:
-            expected = str(claims.cnf.get("x5t#S256") or "").strip()
-            presented = str(getattr(mtls, "certificate_thumbprint", "") or "").strip()
-            if mtls is None or not expected or not compare_digest(presented, expected):
+            if not MtlsBindingValidator().validate_confirmation(claims.cnf, mtls):
                 raise TokenValidationError("mTLS binding mismatch")
 
 

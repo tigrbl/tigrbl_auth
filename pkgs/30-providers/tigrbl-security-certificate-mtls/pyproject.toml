@@ -1,20 +1,11 @@
 [project]
-name = "tigrbl-identity-contracts"
-version = "0.4.0.dev2"
-description = "Dependency-light identity contract dataclasses, enums, protocols, and plane access metadata."
+name = "tigrbl-security-certificate-mtls"
+version = "0.1.0"
+description = "mTLS certificate confirmation-claim binding validator provider for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-keywords = [
-    "tigrbl",
-    "identity",
-    "api-contracts",
-    "openapi",
-    "contracts",
-    "oauth",
-    "oidc",
-    "iam",
-]
+keywords = ["tigrbl", "security", "mtls", "certificate", "oauth"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -27,22 +18,22 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
-    "Topic :: Internet :: WWW/HTTP",
-    "Topic :: Security",
-    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = ["tigrbl-security-trust-contracts==0.1.0"]
+dependencies = [
+    "tigrbl-security-trust-contracts==0.1.0",
+    "tigrbl-security-trust-domain-bases==0.1.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/01-contracts/tigrbl-identity-contracts"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-security-certificate-mtls"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-contracts/"
+PyPI = "https://pypi.org/project/tigrbl-security-certificate-mtls/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_contracts", from = "src" }]
+packages = [{ include = "tigrbl_security_certificate_mtls", from = "src" }]

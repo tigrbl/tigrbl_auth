@@ -13,6 +13,13 @@ Operation: TypeAlias = str
 KeyRefLike: TypeAlias = str | bytes | Mapping[str, Any]
 
 
+def _required_text(value: object, field_name: str) -> str:
+    cleaned = str(value).strip()
+    if not cleaned:
+        raise ValueError(f"{field_name} is required")
+    return cleaned
+
+
 @dataclass(frozen=True)
 class CapabilityMap:
     """Normalized capability advertisement shared by provider contracts."""
@@ -73,6 +80,103 @@ class VerificationResult:
     claims: Mapping[str, Any] | None = None
     subject: Mapping[str, Any] | None = None
     meta: Mapping[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True, slots=True)
+class ProofBinding:
+    """Confirmation-claim binding for proof-of-possession and sender constraints."""
+
+    method: str
+    confirmation_claim: Mapping[str, str]
+    credential_id: str | None = None
+
+    def __post_init__(self) -> None:
+        method = _required_text(self.method, "proof binding method").lower()
+        if method not in {"dpop", "mtls"}:
+            raise ValueError("proof binding method must be dpop or mtls")
+        claim = {
+            str(key).strip(): str(value).strip()
+            for key, value in self.confirmation_claim.items()
+            if str(key).strip() and str(value).strip()
+        }
+        if method == "dpop" and not claim.get("jkt"):
+            raise ValueError("DPoP proof binding requires cnf.jkt")
+        if method == "mtls" and not claim.get("x5t#S256"):
+            raise ValueError("mTLS proof binding requires cnf.x5t#S256")
+        object.__setattr__(self, "method", method)
+        object.__setattr__(self, "confirmation_claim", claim)
+        if self.credential_id is not None:
+            object.__setattr__(
+                self,
+                "credential_id",
+                _required_text(self.credential_id, "credential id"),
+            )
+
+    @classmethod
+    def for_mtls(cls, credential: object) -> "ProofBinding":
+        return cls(
+            "mtls",
+            getattr(credential, "confirmation_claim"),
+            credential_id=getattr(credential, "id", None),
+        )
+
+    @classmethod
+    def for_dpop(
+        cls,
+        jwk_thumbprint: str | object,
+        *,
+        credential_id: str | None = None,
+    ) -> "ProofBinding":
+        if not isinstance(jwk_thumbprint, str) and hasattr(jwk_thumbprint, "confirmation_claim"):
+            return cls(
+                "dpop",
+                getattr(jwk_thumbprint, "confirmation_claim"),
+                credential_id=getattr(jwk_thumbprint, "id", None),
+            )
+        return cls("dpop", {"jkt": str(jwk_thumbprint)}, credential_id=credential_id)
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class DPoPBinding(ProofBinding):
+    """Presented DPoP proof binding material for request-bound validation."""
+
+    jwk_thumbprint: str
+    htm: str
+    htu: str
+    jti: str
+    iat: int | None = None
+    ath: str | None = None
+    nonce: str | None = None
+    method: str = "dpop"
+    confirmation_claim: Mapping[str, str] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        thumbprint = _required_text(self.jwk_thumbprint, "DPoP JWK thumbprint")
+        object.__setattr__(self, "jwk_thumbprint", thumbprint)
+        object.__setattr__(self, "htm", _required_text(self.htm, "DPoP htm").upper())
+        object.__setattr__(self, "htu", _required_text(self.htu, "DPoP htu"))
+        object.__setattr__(self, "jti", _required_text(self.jti, "DPoP jti"))
+        if not self.confirmation_claim:
+            object.__setattr__(self, "confirmation_claim", {"jkt": thumbprint})
+        ProofBinding.__post_init__(self)
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class MTLSBinding(ProofBinding):
+    """Presented mTLS certificate binding material for request-bound validation."""
+
+    certificate_thumbprint: str
+    method: str = "mtls"
+    confirmation_claim: Mapping[str, str] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        thumbprint = _required_text(
+            self.certificate_thumbprint, "mTLS certificate thumbprint"
+        )
+        object.__setattr__(self, "certificate_thumbprint", thumbprint)
+        if not self.confirmation_claim:
+            object.__setattr__(self, "confirmation_claim", {"x5t#S256": thumbprint})
+        ProofBinding.__post_init__(self)
 
 
 @dataclass(frozen=True)
@@ -336,9 +440,12 @@ __all__ = [
     "OpenRequest",
     "OpenResult",
     "Operation",
+    "DPoPBinding",
+    "MTLSBinding",
     "PQCSignatureKeyPair",
     "ParsedArtifact",
     "ParseRequest",
+    "ProofBinding",
     "RewrapRequest",
     "TokenIssueRequest",
     "TokenVerifyRequest",

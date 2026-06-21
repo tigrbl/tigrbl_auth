@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-authz-resource-server"
 version = "0.4.0.dev2"
-description = "Authorization resource-server token validation and protected API enforcement implementation package for the Tigrbl auth package suite."
+description = "OAuth protected-resource facade over token, DPoP, mTLS, and policy validators for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -38,11 +38,14 @@ dependencies = [
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-security-certificate-mtls==0.1.0",
+    "tigrbl-security-proof-dpop==0.1.0",
+    "tigrbl-security-trust-contracts==0.1.0",
 ]
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-authz-resource-server"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tigrbl-authz-resource-server"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-authz-resource-server/"
 

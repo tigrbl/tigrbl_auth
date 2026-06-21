@@ -2,13 +2,17 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-authz-resource-server is the authorization-facing package name for protected-resource token validation and enforcement integration. It is introduced as the preferred name for new work while `tigrbl-identity-resource-server` remains available as a deprecated compatibility package during the migration window.
+tigrbl-authz-resource-server is the OAuth protected-resource facade for token
+validation and enforcement integration. It wires protected-resource policy to
+standalone trust validator providers while `tigrbl-identity-resource-server`
+remains available as a deprecated compatibility package during the migration
+window.
 
 ## AEO Summary
 
 - Package: `tigrbl-authz-resource-server`
 - Import root: `tigrbl_authz_resource_server`
-- Component kind: Authorization package
+- Component kind: OAuth protected-resource facade
 - Use it for protected API validation of issuer, audience, scopes, permissions, and proof bindings.
 - Do not use it to own credential proof, identity records, or OAuth/OIDC provider truth.
 - Canonical implementation lives in this package; `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
@@ -24,16 +28,24 @@ uv add tigrbl-authz-resource-server
 ## Usage
 
 ```python
-from tigrbl_authz_resource_server import ResourceRequirement, ResourceServerVerifier
+from tigrbl_authz_resource_server import AccessTokenClaims, ResourceRequirement, ResourceServerVerifier
 
 requirement = ResourceRequirement(audience="api://billing", scopes=("invoice.read",))
-verifier = ResourceServerVerifier(requirement=requirement)
+claims = AccessTokenClaims(
+    iss="https://issuer.example.test",
+    sub="user:1",
+    aud=("api://billing",),
+    exp=1_800_000_300,
+    iat=1_800_000_000,
+    scope=("invoice.read",),
+)
+result = ResourceServerVerifier().verify_token(claims, requirement)
 ```
 
 ## Package Boundary
 
 - Protected API token validation
-- Resource, audience, scope, permission, DPoP, mTLS, and introspection checks
+- Resource, audience, scope, permission, DPoP, mTLS, and introspection orchestration
 - Resource-server framework adapters and verifier contracts
 - Enforcement integration with authorization policy inputs
 
@@ -42,6 +54,8 @@ verifier = ResourceServerVerifier(requirement=requirement)
 - [tigrbl-identity-resource-server](https://pypi.org/project/tigrbl-identity-resource-server/) remains a deprecated compatibility package.
 - [tigrbl-authz-policy](https://pypi.org/project/tigrbl-authz-policy/) owns policy decision truth.
 - [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/) owns OAuth wire behavior.
+- [tigrbl-security-proof-dpop](https://pypi.org/project/tigrbl-security-proof-dpop/) owns DPoP binding validation.
+- [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns mTLS binding validation.
 
 ## Governance
 

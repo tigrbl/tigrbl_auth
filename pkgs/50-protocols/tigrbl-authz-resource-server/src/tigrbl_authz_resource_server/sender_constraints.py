@@ -1,37 +1,36 @@
 from __future__ import annotations
 
-"""Proof-binding validators for protected resource servers."""
+"""Sender-constraint validator facade for protected resource servers."""
 
-from hmac import compare_digest
+from tigrbl_security_certificate_mtls import MtlsBindingValidator
+from tigrbl_security_proof_dpop import DpopBindingValidator
 
 from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding, TokenValidationError
 
 
-class MtlsBindingValidator:
+class MtlsCnfBindingValidator:
     def __init__(self, confirmation_member: str = "x5t#S256") -> None:
-        self.confirmation_member = confirmation_member
+        self.provider = MtlsBindingValidator()
+        self.provider.confirmation_member = confirmation_member
 
     def validate(self, claims: AccessTokenClaims, binding: MTLSBinding | None) -> bool:
-        expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
-        presented = str(getattr(binding, "certificate_thumbprint", "") or "").strip()
-        if binding is None or not expected or not compare_digest(presented, expected):
+        if not self.provider.validate_confirmation(claims.cnf, binding):
             raise TokenValidationError("mTLS binding mismatch")
         return True
 
 
-class DpopValidator:
+class DpopCnfBindingValidator:
     def __init__(self, confirmation_member: str = "jkt") -> None:
-        self.confirmation_member = confirmation_member
+        self.provider = DpopBindingValidator()
+        self.provider.confirmation_member = confirmation_member
 
     def validate(self, claims: AccessTokenClaims, binding: DPoPBinding | None) -> bool:
-        expected = str(claims.cnf.get(self.confirmation_member) or "").strip()
-        presented = str(getattr(binding, "jwk_thumbprint", "") or "").strip()
-        if binding is None or not expected or not compare_digest(presented, expected):
+        if not self.provider.validate_confirmation(claims.cnf, binding):
             raise TokenValidationError("DPoP binding mismatch")
         return True
 
 
-class ProofBindingValidator:
+class SenderConstraintValidator:
     def __init__(
         self,
         dpop_confirmation_member: str = "jkt",
@@ -50,10 +49,14 @@ class ProofBindingValidator:
         require_mtls: bool = False,
     ) -> bool:
         if require_dpop:
-            DpopValidator(self.dpop_confirmation_member).validate(claims, dpop)
+            DpopCnfBindingValidator(self.dpop_confirmation_member).validate(claims, dpop)
         if require_mtls:
-            MtlsBindingValidator(self.mtls_confirmation_member).validate(claims, mtls)
+            MtlsCnfBindingValidator(self.mtls_confirmation_member).validate(claims, mtls)
         return True
 
 
-__all__ = ["DpopValidator", "MtlsBindingValidator", "ProofBindingValidator"]
+__all__ = [
+    "DpopCnfBindingValidator",
+    "MtlsCnfBindingValidator",
+    "SenderConstraintValidator",
+]
