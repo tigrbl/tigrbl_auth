@@ -4,6 +4,7 @@ import base64
 import hashlib
 import re
 import secrets
+from dataclasses import dataclass
 from hmac import compare_digest
 from typing import Any, Final, Mapping
 
@@ -60,6 +61,34 @@ def verify_pkce_s256_challenge(
     except (UnicodeEncodeError, ValueError):
         return False
     return compare_digest(expected, str(challenge))
+
+
+@dataclass(frozen=True, slots=True)
+class PkceVerifier:
+    """Concrete PKCE verifier value with S256 authorization parameter projection."""
+
+    value: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "value", validate_pkce_verifier(self.value))
+
+    @classmethod
+    def generate(cls, length: int = 64) -> "PkceVerifier":
+        return cls(make_pkce_verifier(length))
+
+    @property
+    def code_challenge(self) -> str:
+        return pkce_s256_challenge(self.value)
+
+    @property
+    def code_challenge_method(self) -> str:
+        return PKCE_CHALLENGE_METHOD
+
+    def authorization_params(self) -> Mapping[str, str]:
+        return {
+            "code_challenge": self.code_challenge,
+            "code_challenge_method": self.code_challenge_method,
+        }
 
 
 class PkceProofProvider(ProofOfPossessionDomainBase):
@@ -142,6 +171,7 @@ __all__ = [
     "PKCE_VERIFIER_CHARS",
     "PKCE_VERIFIER_RE",
     "PkceProofProvider",
+    "PkceVerifier",
     "b64url",
     "make_pkce_verifier",
     "pkce_s256_challenge",

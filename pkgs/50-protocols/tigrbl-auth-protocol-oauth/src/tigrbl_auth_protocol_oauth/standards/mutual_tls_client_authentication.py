@@ -13,9 +13,9 @@ from __future__ import annotations
 
 import base64
 import hashlib
-from dataclasses import dataclass
 from typing import Any, Final, Iterable, Mapping
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
+from tigrbl_security_trust_contracts import MTLSClientAuthentication
 
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
@@ -80,18 +80,6 @@ _TLS_CLIENT_AUTH_IDENTITY_KEYS: Final[tuple[str, ...]] = (
     "tls_client_auth_san_ip",
     "tls_client_auth_san_email",
 )
-
-
-@dataclass(frozen=True, slots=True)
-class MTLSClientAuthentication:
-    auth_method: str
-    cert_thumbprint: str
-
-    @property
-    def confirmation_claim(self) -> dict[str, str]:
-        return certificate_confirmation_claim(self.cert_thumbprint)
-
-
 
 
 OWNER = StandardOwner(

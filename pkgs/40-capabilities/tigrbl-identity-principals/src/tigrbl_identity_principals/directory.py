@@ -2,16 +2,19 @@ from __future__ import annotations
 
 """In-memory principal directory contracts used by tests and adapters."""
 
-from dataclasses import dataclass, field
-
 from .factories import Principal, PrincipalStatus, SubjectAlias, TenantMembership
 
 
-@dataclass(slots=True)
 class PrincipalDirectory:
-    principals: dict[str, Principal] = field(default_factory=dict)
-    memberships: dict[tuple[str, str], TenantMembership] = field(default_factory=dict)
-    aliases: dict[tuple[str | None, str, str], SubjectAlias] = field(default_factory=dict)
+    def __init__(
+        self,
+        principals: dict[str, Principal] | None = None,
+        memberships: dict[tuple[str, str], TenantMembership] | None = None,
+        aliases: dict[tuple[str | None, str, str], SubjectAlias] | None = None,
+    ) -> None:
+        self.principals = dict(principals or {})
+        self.memberships = dict(memberships or {})
+        self.aliases = dict(aliases or {})
 
     def add_principal(self, principal: Principal) -> Principal:
         if principal.id in self.principals:

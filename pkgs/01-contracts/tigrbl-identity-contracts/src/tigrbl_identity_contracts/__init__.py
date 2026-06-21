@@ -12,6 +12,9 @@ from .delegation import *
 from .federation import *
 from .principals import *
 from .protocols import *
+from .oauth import *
+from .oidc import *
+from .rp import *
 from .resource_server import *
 from .tokens import *
 from .admin import *

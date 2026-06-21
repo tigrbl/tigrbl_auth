@@ -19,10 +19,10 @@ import base64
 import hashlib
 import hmac
 import json
-from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Final, Iterable, Mapping, Sequence
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
+from tigrbl_identity_contracts.oauth import RequestObjectPolicy
 
 from tigrbl_identity_runtime.settings import settings
 
@@ -33,13 +33,6 @@ DEFAULT_REQUEST_OBJECT_LIFETIME_SECONDS: Final[int] = 300
 DEFAULT_CLOCK_SKEW_SECONDS: Final[int] = 60
 
 
-
-
-@dataclass(frozen=True, slots=True)
-class RequestObjectPolicy:
-    allowed_algs: tuple[str, ...] = SUPPORTED_JAR_ALG_VALUES
-    require_signature: bool = True
-    max_clock_skew_seconds: int = DEFAULT_CLOCK_SKEW_SECONDS
 
 
 OWNER = StandardOwner(

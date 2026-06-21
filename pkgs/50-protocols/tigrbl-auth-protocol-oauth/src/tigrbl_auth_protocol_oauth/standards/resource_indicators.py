@@ -14,8 +14,8 @@ profile:
   same effective target or the request fails closed with ``invalid_target``
 """
 
-from dataclasses import dataclass
 from typing import Final, Iterable, Sequence
+from tigrbl_identity_contracts.oauth import ResourceSelection
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 
@@ -37,14 +37,6 @@ OWNER = StandardOwner(
         'closed on conflicting or ambiguous resource/audience inputs.'
     ),
 )
-
-
-@dataclass(frozen=True, slots=True)
-class ResourceSelection:
-    resources: tuple[str, ...]
-    resource: str | None
-    audience: str | None
-
 
 
 def _coerce_resources(resources: Sequence[str] | str | None) -> list[str]:

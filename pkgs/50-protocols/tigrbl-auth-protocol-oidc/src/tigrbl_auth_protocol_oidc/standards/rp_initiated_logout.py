@@ -2,12 +2,12 @@ from __future__ import annotations
 
 """OpenID Connect RP-Initiated Logout with durable fanout planning and replay protection."""
 
-from dataclasses import dataclass
 from datetime import datetime, timezone
 import base64
 import json
 from types import SimpleNamespace
 from typing import Any, Final
+from tigrbl_identity_contracts.oidc import LogoutRequestContext
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
@@ -35,13 +35,6 @@ except Exception:  # pragma: no cover - exercised in dependency-light tests
 STATUS: Final[str] = "rp-initiated-logout-runtime"
 
 
-
-
-@dataclass(frozen=True, slots=True)
-class LogoutRequestContext:
-    client_id: UUID | None
-    post_logout_redirect_uri: str | None
-    id_token_hint_claims: dict[str, Any] | None
 
 
 OWNER = StandardOwner(

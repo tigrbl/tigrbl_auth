@@ -2178,6 +2178,7 @@ dependencies = [
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
@@ -2188,6 +2189,7 @@ requires-dist = [
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-pkce", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]

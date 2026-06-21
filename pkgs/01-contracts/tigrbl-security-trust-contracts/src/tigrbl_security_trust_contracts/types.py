@@ -152,6 +152,38 @@ class ProofBinding:
         return cls("dpop", {"jkt": str(jwk_thumbprint)}, credential_id=credential_id)
 
 
+@dataclass(frozen=True, slots=True)
+class DPoPProofClaims:
+    """Parsed DPoP proof claim-set used by proof validators."""
+
+    jti: str
+    htm: str
+    htu: str
+    iat: int | None
+    nonce: str | None
+    ath: str | None
+    jkt: str
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "jti": self.jti,
+            "htm": self.htm,
+            "htu": self.htu,
+            "iat": self.iat,
+            "nonce": self.nonce,
+            "ath": self.ath,
+            "jkt": self.jkt,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class DPoPNonceRecord:
+    """Issued nonce and expiry pair for DPoP nonce stores."""
+
+    nonce: str
+    expires_at: int
+
+
 @dataclass(frozen=True, slots=True, kw_only=True)
 class DPoPBinding(ProofBinding):
     """Presented DPoP proof binding material for request-bound validation."""
@@ -193,6 +225,18 @@ class MTLSBinding(ProofBinding):
         if not self.confirmation_claim:
             object.__setattr__(self, "confirmation_claim", {"x5t#S256": thumbprint})
         ProofBinding.__post_init__(self)
+
+
+@dataclass(frozen=True, slots=True)
+class MTLSClientAuthentication:
+    """mTLS client-authentication result projected as a confirmation claim."""
+
+    auth_method: str
+    cert_thumbprint: str
+
+    @property
+    def confirmation_claim(self) -> dict[str, str]:
+        return {"x5t#S256": str(self.cert_thumbprint)}
 
 
 @dataclass(frozen=True)
@@ -444,6 +488,8 @@ __all__ = [
     "CertificateRequest",
     "CertificateVerifyRequest",
     "DeriveKeyRequest",
+    "DPoPNonceRecord",
+    "DPoPProofClaims",
     "ExportKeyRequest",
     "IssueRequest",
     "JWTPayload",
@@ -453,6 +499,7 @@ __all__ = [
     "KeyPage",
     "KeyRefLike",
     "ListKeysRequest",
+    "MTLSClientAuthentication",
     "NormalizedDescriptor",
     "OpenRequest",
     "OpenResult",

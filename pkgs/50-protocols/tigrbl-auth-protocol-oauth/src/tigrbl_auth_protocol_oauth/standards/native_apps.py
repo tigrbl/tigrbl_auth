@@ -2,23 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Final, Iterable
+from tigrbl_identity_contracts.oauth import NativeRedirectAssessment
 from urllib.parse import urlparse
 
 RFC8252_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc8252"
 _LOOPBACK_HOSTS: Final[set[str]] = {"127.0.0.1", "localhost", "::1"}
-
-
-@dataclass(frozen=True, slots=True)
-class NativeRedirectAssessment:
-    redirect_uri: str
-    kind: str
-    scheme: str
-    host: str | None
-    port: int | None
-    pkce_required: bool = True
-
 
 
 def classify_native_redirect_uri(uri: str) -> NativeRedirectAssessment | None:

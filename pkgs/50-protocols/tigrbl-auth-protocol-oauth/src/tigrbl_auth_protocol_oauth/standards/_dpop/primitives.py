@@ -15,9 +15,9 @@ import json
 import secrets
 import threading
 import time
-from dataclasses import dataclass
 from typing import Any, Dict, Final
 from tigrbl_identity_core.standards import StandardOwner
+from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
 
 try:
     from cryptography.hazmat.primitives import serialization
@@ -53,36 +53,6 @@ _ALG_VALUE: Final[str] = "EdDSA"
 _TYP_VALUE: Final[str] = "dpop+jwt"
 _ALLOWED_SKEW: Final[int] = 300
 _SIGNER = DpopSigner() if DpopSigner is not None else None
-
-
-@dataclass(frozen=True, slots=True)
-class DPoPProofClaims:
-    jti: str
-    htm: str
-    htu: str
-    iat: int | None
-    nonce: str | None
-    ath: str | None
-    jkt: str
-
-    def as_dict(self) -> dict[str, object]:
-        return {
-            "jti": self.jti,
-            "htm": self.htm,
-            "htu": self.htu,
-            "iat": self.iat,
-            "nonce": self.nonce,
-            "ath": self.ath,
-            "jkt": self.jkt,
-        }
-
-
-@dataclass(frozen=True, slots=True)
-class DPoPNonceRecord:
-    nonce: str
-    expires_at: int
-
-
 
 
 OWNER = StandardOwner(

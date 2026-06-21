@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
+from tigrbl_identity_contracts.oauth import ProtectedResourceVerifierContract
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
@@ -21,57 +20,6 @@ def _allowed_token_algs() -> tuple[str, ...]:
     if _pqc_jose_enabled():
         algs.append(ML_DSA_65_ALG)
     return tuple(algs)
-
-
-@dataclass(frozen=True, slots=True)
-class ProtectedResourceVerifierContract:
-    verifier_logic_id: str
-    issuer: str
-    accepted_issuers: tuple[str, ...]
-    resource: str
-    accepted_audiences: tuple[str, ...]
-    accepted_token_classes: tuple[str, ...]
-    allowed_algs: tuple[str, ...]
-    jwks_uri: str
-    introspection_endpoint: str
-    sender_constraint_modes: tuple[str, ...]
-    sender_constraint_required: bool
-    required_claims: tuple[str, ...]
-    required_scopes: tuple[str, ...]
-    max_authz_staleness_seconds: int
-    cache_policy: str
-    clock_skew_seconds: int
-    fail_closed: bool
-    revocation_check: str
-    replay_expectation: str
-    freshness_expectation: str
-    introspection_auth_methods: tuple[str, ...]
-
-    def as_metadata_projection(self) -> dict[str, object]:
-        payload: dict[str, object] = {
-            "resource": self.resource,
-            "authorization_servers": list(self.accepted_issuers),
-            "issuer": self.issuer,
-            "accepted_audiences": list(self.accepted_audiences),
-            "token_types_supported": list(self.accepted_token_classes),
-            "allowed_algorithms": list(self.allowed_algs),
-            "jwks_uri": self.jwks_uri,
-            "introspection_endpoint": self.introspection_endpoint,
-            "proof_modes_supported": list(self.sender_constraint_modes),
-            "proof_binding_required": self.sender_constraint_required,
-            "required_claims": list(self.required_claims),
-            "required_scopes": list(self.required_scopes),
-            "max_authz_staleness_seconds": self.max_authz_staleness_seconds,
-            "cache_policy": self.cache_policy,
-            "clock_skew_seconds": self.clock_skew_seconds,
-            "fail_closed": self.fail_closed,
-            "revocation_check": self.revocation_check,
-            "introspection_endpoint_auth_methods_supported": list(self.introspection_auth_methods),
-            "verifier_logic": self.verifier_logic_id,
-            "verification_freshness_expectation": self.freshness_expectation,
-            "verification_replay_expectation": self.replay_expectation,
-        }
-        return payload
 
 
 def build_protected_resource_verifier_contract(

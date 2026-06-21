@@ -272,3 +272,38 @@ def test_oauth_oidc_t2_public_boundary_has_no_forbidden_imports() -> None:
                 imports.add(node.module.split(".")[0])
 
     assert imports.isdisjoint(forbidden)
+
+
+@pytest.mark.unit
+def test_protocol_and_capability_layers_do_not_define_dataclasses() -> None:
+    roots = (Path("pkgs") / "40-capabilities", Path("pkgs") / "50-protocols")
+    offenders: list[str] = []
+
+    for root in roots:
+        for file in root.rglob("*.py"):
+            tree = ast.parse(file.read_text(encoding="utf-8"))
+            dataclass_aliases = {"dataclass"}
+            dataclasses_module_aliases = {"dataclasses"}
+            for node in tree.body:
+                if isinstance(node, ast.ImportFrom) and node.module == "dataclasses":
+                    dataclass_aliases.update(alias.asname or alias.name for alias in node.names if alias.name == "dataclass")
+                elif isinstance(node, ast.Import):
+                    dataclasses_module_aliases.update(
+                        alias.asname or alias.name for alias in node.names if alias.name == "dataclasses"
+                    )
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.ClassDef):
+                    continue
+                for decorator in node.decorator_list:
+                    target = decorator.func if isinstance(decorator, ast.Call) else decorator
+                    if isinstance(target, ast.Name) and target.id in dataclass_aliases:
+                        offenders.append(f"{file.as_posix()}:{node.lineno}:{node.name}")
+                    elif (
+                        isinstance(target, ast.Attribute)
+                        and target.attr == "dataclass"
+                        and isinstance(target.value, ast.Name)
+                        and target.value.id in dataclasses_module_aliases
+                    ):
+                        offenders.append(f"{file.as_posix()}:{node.lineno}:{node.name}")
+
+    assert offenders == []

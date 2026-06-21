@@ -3,10 +3,17 @@ from __future__ import annotations
 import hashlib
 import hmac
 import secrets
-from dataclasses import dataclass, field, replace
+from dataclasses import replace
 from datetime import datetime, timedelta, timezone
-from typing import Iterable, Mapping, Protocol
+from typing import Callable, Iterable, Mapping
 
+from tigrbl_identity_contracts.oauth import (
+    DPoPProof,
+    DeviceAuthorization,
+    OAuthClient,
+    OAuthRepositoryPort,
+    TokenExchangeResult,
+)
 from tigrbl_identity_contracts.protocols import OAuthGrantStatus
 
 
@@ -27,63 +34,6 @@ def _code(prefix: str) -> str:
 
 def _normalize_scope(scopes: Iterable[str]) -> tuple[str, ...]:
     return tuple(sorted({scope.strip() for scope in scopes if scope and scope.strip()}))
-
-
-@dataclass(frozen=True, slots=True)
-class OAuthClient:
-    client_id: str
-    tenant_id: str
-    allowed_scopes: tuple[str, ...]
-    redirect_uris: tuple[str, ...] = ()
-    jwk_thumbprint: str | None = None
-    mtls_thumbprint: str | None = None
-    enabled: bool = True
-
-
-@dataclass(frozen=True, slots=True)
-class DeviceAuthorization:
-    device_code: str
-    user_code: str
-    client_id: str
-    tenant_id: str
-    scopes: tuple[str, ...]
-    expires_at: datetime
-    interval_seconds: int = 5
-    status: OAuthGrantStatus = OAuthGrantStatus.PENDING
-    subject: str | None = None
-    poll_count: int = 0
-
-
-@dataclass(frozen=True, slots=True)
-class TokenExchangeResult:
-    issued_token: str
-    subject: str
-    actor: str
-    audience: str
-    scopes: tuple[str, ...]
-    token_type: str = "urn:ietf:params:oauth:token-type:access_token"
-
-
-@dataclass(frozen=True, slots=True)
-class DPoPProof:
-    jti: str
-    htm: str
-    htu: str
-    iat: int
-    jwk_thumbprint: str
-    access_token_hash: str | None = None
-
-
-class OAuthRepositoryPort(Protocol):
-    def save_client(self, client: OAuthClient) -> None: ...
-
-    def get_client(self, client_id: str) -> OAuthClient | None: ...
-
-    def save_device_authorization(self, grant: DeviceAuthorization) -> None: ...
-
-    def get_device_authorization(self, device_code: str) -> DeviceAuthorization | None: ...
-
-    def remember_dpop_jti(self, client_id: str, jti: str) -> bool: ...
 
 
 class InMemoryOAuthRepository:
@@ -112,10 +62,14 @@ class InMemoryOAuthRepository:
         return True
 
 
-@dataclass(slots=True)
 class OAuthProtocolService:
-    repository: OAuthRepositoryPort
-    now: callable = field(default=_utc_now)
+    def __init__(
+        self,
+        repository: OAuthRepositoryPort,
+        now: Callable[[], datetime] = _utc_now,
+    ) -> None:
+        self.repository = repository
+        self.now = now
 
     def register_client(self, client: OAuthClient) -> OAuthClient:
         if not client.client_id or not client.tenant_id:

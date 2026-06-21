@@ -2,9 +2,9 @@ from __future__ import annotations
 
 """OAuth 2.0 Pushed Authorization Requests owner and helper module."""
 
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Final, Mapping
+from tigrbl_identity_contracts.oauth import PARValidationResult
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 STATUS: Final[str] = 'durable-request-uri-runtime'
@@ -13,15 +13,6 @@ REQUEST_URI_PREFIX: Final[str] = 'urn:ietf:params:oauth:request_uri:'
 PAR_ONE_TIME_USE: Final[bool] = True
 
 
-
-
-@dataclass(frozen=True, slots=True)
-class PARValidationResult:
-    request_uri: str
-    client_id: str | None
-    expires_at: datetime
-    consumed: bool
-    params: dict[str, Any]
 
 
 OWNER = StandardOwner(

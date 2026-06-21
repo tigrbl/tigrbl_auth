@@ -9,9 +9,9 @@ behavior.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Any, Final, Iterable, Mapping, Sequence
 
+from tigrbl_identity_contracts.oauth import RuntimeSecurityProfile, SenderConstraintResult
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import JWT_BEARER_GRANT_TYPE
 
@@ -27,88 +27,14 @@ _CLIENT_CERT_HEADER_NAMES: Final[tuple[str, ...]] = (
 )
 
 
-@dataclass(frozen=True, slots=True)
 class OAuthPolicyViolation(ValueError):
     """A fail-closed runtime policy violation."""
 
-    error: str
-    description: str
-    status_code: int = 400
-
-
-@dataclass(frozen=True, slots=True)
-class SenderConstraintResult:
-    mechanism: str | None = None
-    token_type: str = "bearer"
-    confirmation_claim: dict[str, str] | None = None
-    cert_thumbprint: str | None = None
-    jkt: str | None = None
-
-
-@dataclass(frozen=True, slots=True)
-class RuntimeSecurityProfile:
-    profile: str
-    enabled: bool
-    fapi_mode: bool
-    oauth21_alignment_mode: str
-    require_tls: bool
-    pkce_required: bool
-    pkce_required_for_all_clients: bool
-    pkce_s256_required: bool
-    implicit_hybrid_allowed: bool
-    password_grant_allowed: bool
-    par_required: bool
-    par_client_auth_required: bool
-    par_redirect_uri_required: bool
-    request_uri_max_lifetime_seconds: int
-    minimal_frontchannel_authorization: bool
-    sender_constraint_required: bool
-    dpop_supported: bool
-    mtls_supported: bool
-    allowed_client_auth_methods: tuple[str, ...]
-    resource_indicators_supported: bool
-    rich_authorization_requests_supported: bool
-    request_objects_supported: bool
-    issuer_identification_supported: bool
-    authorization_response_iss_required: bool
-    query_bearer_disabled: bool
-    form_bearer_disabled: bool
-    allowed_response_types: tuple[str, ...]
-    allowed_response_modes: tuple[str, ...]
-    allowed_grant_types: tuple[str, ...]
-
-    def as_dict(self) -> dict[str, object]:
-        return {
-            "profile": self.profile,
-            "enabled": self.enabled,
-            "fapi_mode": self.fapi_mode,
-            "oauth21_alignment_mode": self.oauth21_alignment_mode,
-            "require_tls": self.require_tls,
-            "pkce_required": self.pkce_required,
-            "pkce_required_for_all_clients": self.pkce_required_for_all_clients,
-            "pkce_s256_required": self.pkce_s256_required,
-            "implicit_hybrid_allowed": self.implicit_hybrid_allowed,
-            "password_grant_allowed": self.password_grant_allowed,
-            "par_required": self.par_required,
-            "par_client_auth_required": self.par_client_auth_required,
-            "par_redirect_uri_required": self.par_redirect_uri_required,
-            "request_uri_max_lifetime_seconds": self.request_uri_max_lifetime_seconds,
-            "minimal_frontchannel_authorization": self.minimal_frontchannel_authorization,
-            "sender_constraint_required": self.sender_constraint_required,
-            "dpop_supported": self.dpop_supported,
-            "mtls_supported": self.mtls_supported,
-            "allowed_client_auth_methods": list(self.allowed_client_auth_methods),
-            "resource_indicators_supported": self.resource_indicators_supported,
-            "rich_authorization_requests_supported": self.rich_authorization_requests_supported,
-            "request_objects_supported": self.request_objects_supported,
-            "issuer_identification_supported": self.issuer_identification_supported,
-            "authorization_response_iss_required": self.authorization_response_iss_required,
-            "query_bearer_disabled": self.query_bearer_disabled,
-            "form_bearer_disabled": self.form_bearer_disabled,
-            "allowed_response_types": list(self.allowed_response_types),
-            "allowed_response_modes": list(self.allowed_response_modes),
-            "allowed_grant_types": list(self.allowed_grant_types),
-        }
+    def __init__(self, error: str, description: str, status_code: int = 400) -> None:
+        super().__init__(description)
+        self.error = error
+        self.description = description
+        self.status_code = status_code
 
 
 def _as_deployment(

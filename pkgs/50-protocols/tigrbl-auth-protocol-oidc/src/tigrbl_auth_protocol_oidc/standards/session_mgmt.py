@@ -11,12 +11,12 @@ This module deliberately keeps the session-management claim boundary truthful:
   by discovery or contracts in this checkpoint
 """
 
-from dataclasses import dataclass
 from datetime import datetime, timezone
 from hashlib import sha256
 from types import SimpleNamespace
 from typing import Final
 
+from tigrbl_identity_contracts.oidc import SessionStateValidation
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse
 from uuid import UUID
@@ -34,15 +34,6 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 STATUS: Final[str] = "browser-session-runtime"
 
 
-
-
-@dataclass(frozen=True, slots=True)
-class SessionStateValidation:
-    valid: bool
-    reason: str
-    origin: str
-    presented_session_state: str | None
-    expected_session_state: str | None
 
 
 OWNER = StandardOwner(

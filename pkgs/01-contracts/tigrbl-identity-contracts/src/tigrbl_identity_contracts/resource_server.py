@@ -4,6 +4,7 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum
 from typing import Any, Iterable, Mapping, Protocol
 
+from .oauth import ProtectedResourceVerifierContract
 from tigrbl_security_trust_contracts import DPoPBinding, MTLSBinding
 
 
@@ -86,36 +87,6 @@ class FrameworkRequest:
     authorization: str | None
     dpop: DPoPBinding | None = None
     mtls: MTLSBinding | None = None
-
-
-@dataclass(frozen=True, slots=True)
-class ProtectedResourceVerifierContract:
-    verifier_logic_id: str
-    issuer: str
-    accepted_issuers: tuple[str, ...]
-    resource: str
-    accepted_audiences: tuple[str, ...]
-    accepted_token_classes: tuple[str, ...]
-    sender_constraint_modes: tuple[str, ...]
-    sender_constraint_required: bool
-    required_claims: tuple[str, ...]
-    replay_expectation: str
-    freshness_expectation: str
-    introspection_auth_methods: tuple[str, ...]
-
-    def as_metadata_projection(self) -> dict[str, object]:
-        return {
-            "resource": self.resource,
-            "authorization_servers": list(self.accepted_issuers),
-            "token_types_supported": list(self.accepted_token_classes),
-            "proof_modes_supported": list(self.sender_constraint_modes),
-            "proof_binding_required": self.sender_constraint_required,
-            "required_claims": list(self.required_claims),
-            "introspection_endpoint_auth_methods_supported": list(self.introspection_auth_methods),
-            "verifier_logic": self.verifier_logic_id,
-            "verification_freshness_expectation": self.freshness_expectation,
-            "verification_replay_expectation": self.replay_expectation,
-        }
 
 
 @dataclass(frozen=True, slots=True)
