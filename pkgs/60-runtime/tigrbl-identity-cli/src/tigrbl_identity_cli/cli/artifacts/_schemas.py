@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import JWKS_PATH
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 from tigrbl_identity_cli.cli.artifacts._common import (
     WELL_KNOWN_ENDPOINTS,

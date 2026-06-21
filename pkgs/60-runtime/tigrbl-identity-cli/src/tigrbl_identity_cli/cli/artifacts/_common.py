@@ -22,7 +22,7 @@ from tigrbl_auth_protocol_oidc.tenant_discovery import (
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import build_assertion_contract_examples
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import build_client_assertion_contract_examples
-from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import JWKS_PATH
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
 
 

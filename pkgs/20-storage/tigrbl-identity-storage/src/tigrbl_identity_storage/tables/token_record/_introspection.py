@@ -52,7 +52,7 @@ try:  # pragma: no cover - exercised when the full runtime stack is installed
         PRIVATE_KEY_JWT_AUTH_METHOD,
         authenticate_client_assertion,
     )
-    from tigrbl_auth_protocol_oauth.standards.mtls import (
+    from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
         SUPPORTED_MTLS_AUTH_METHODS,
         authenticate_mtls_client,
         presented_certificate_pem, presented_certificate_thumbprint,

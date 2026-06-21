@@ -8,7 +8,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 from tigrbl import TigrblApp
 
-from tigrbl_auth_protocol_oauth.standards.rfc8693 import (
+from tigrbl_auth_protocol_oauth.standards.token_exchange import (
     RFC8693_SPEC_URL,
     TokenType,
     TokenExchangeRequest,

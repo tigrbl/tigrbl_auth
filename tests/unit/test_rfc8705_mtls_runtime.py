@@ -10,7 +10,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.x509.oid import NameOID
 
-from tigrbl_auth_protocol_oauth.standards.mtls import (
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     authenticate_mtls_client,
     certificate_matches_registered_identity,
     certificate_san_values,

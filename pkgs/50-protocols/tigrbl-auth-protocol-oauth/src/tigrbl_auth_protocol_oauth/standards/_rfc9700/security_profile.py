@@ -304,7 +304,7 @@ def dpop_proof_from_request(request: Any) -> str | None:
 
 
 def client_certificate_thumbprint_from_request(request: Any) -> str | None:
-    from tigrbl_auth_protocol_oauth.standards.mtls import presented_trusted_certificate_thumbprint
+    from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import presented_trusted_certificate_thumbprint
 
     return presented_trusted_certificate_thumbprint(request)
 

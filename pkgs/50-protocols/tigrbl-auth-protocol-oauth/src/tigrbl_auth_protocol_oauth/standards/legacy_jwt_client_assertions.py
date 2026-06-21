@@ -1,4 +1,4 @@
-"""Legacy migration-history compatibility module for the historical RFC 8523 label.
+"""Legacy migration-history compatibility module for JWT client assertions.
 
 Certification claims map JWT client authentication to RFC 7523. This module
 preserves the legacy helper API without relying on the flat ``tigrbl_auth.rfc``

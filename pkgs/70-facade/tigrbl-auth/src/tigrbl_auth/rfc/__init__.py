@@ -58,6 +58,22 @@ _OAUTH_RFC_TARGETS = {
     "rfc7523": "jwt_client_auth",
     "rfc7591": "dynamic_client_registration",
     "rfc7592": "client_registration_management",
+    "rfc7662": "introspection",
+    "rfc7662_introspection": "introspection",
+    "rfc8252": "native_apps",
+    "rfc8414": "authorization_server_metadata_endpoint",
+    "rfc8414_metadata": "authorization_server_metadata",
+    "rfc8523": "legacy_jwt_client_assertions",
+    "rfc8628": "device_authorization",
+    "rfc8693": "token_exchange",
+    "rfc8705": "mutual_tls_client_authentication",
+    "rfc8707": "resource_indicators",
+    "rfc8725": "jwt_best_practices",
+    "rfc9068": "jwt_access_tokens",
+    "rfc9101": "jwt_secured_authorization_requests",
+    "rfc9126": "pushed_authorization_requests",
+    "rfc9207": "issuer_identification",
+    "rfc9396": "rich_authorization_requests",
 }
 
 for _name in _OAUTH_RFC_MODULES:

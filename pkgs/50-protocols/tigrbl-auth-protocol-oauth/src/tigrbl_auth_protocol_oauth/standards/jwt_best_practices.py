@@ -1,4 +1,4 @@
-"""JWT Best Current Practices utilities for RFC 8725 compliance."""
+"""JWT Best Current Practices validation utilities."""
 
 from __future__ import annotations
 

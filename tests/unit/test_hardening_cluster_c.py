@@ -21,7 +21,7 @@ from tigrbl_auth.standards.oauth2.dpop import (
     make_proof,
     verify_proof,
 )
-from tigrbl_auth.standards.oauth2.mtls import (
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     authenticate_mtls_client,
     presented_certificate_thumbprint,
     thumbprint_from_cert_pem,

@@ -21,7 +21,7 @@ from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables import AuthCode, Client, User
 from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
-from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
 from tigrbl_auth_protocol_oauth.standards.native_apps import is_native_redirect_uri
 from ..shared import _require_tls
 from . import api

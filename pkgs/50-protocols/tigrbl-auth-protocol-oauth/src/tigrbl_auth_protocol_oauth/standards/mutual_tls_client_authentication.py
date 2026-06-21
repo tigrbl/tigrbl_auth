@@ -1,4 +1,4 @@
-"""Domain-organized RFC 8705 mTLS helpers.
+"""Mutual-TLS client authentication and certificate-bound token helpers.
 
 This module is intentionally dependency-light so Tier 3 evidence checkpoint evidence can execute
 without the full runtime stack.  It covers three distinct concerns:

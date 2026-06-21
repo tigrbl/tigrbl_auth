@@ -12,9 +12,9 @@ from tigrbl_identity_server.security.handler_records import (
     first_handler_record,
     read_handler_record,
 )
-from tigrbl_auth_protocol_oauth.standards.jar import merge_request_object_params, parse_request_object
-from tigrbl_auth_protocol_oauth.standards.par import REQUEST_URI_PREFIX
-from tigrbl_auth_protocol_oauth.standards.rar import normalize_authorization_details
+from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import merge_request_object_params, parse_request_object
+from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import REQUEST_URI_PREFIX
+from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
     client_certificate_thumbprint_from_request,
@@ -25,7 +25,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     authenticate_client_assertion,
 )
-from tigrbl_auth_protocol_oauth.standards.mtls import (
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
     presented_certificate_pem,

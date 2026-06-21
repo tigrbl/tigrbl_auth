@@ -16,8 +16,8 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     token_endpoint_auth_methods_supported,
     token_endpoint_auth_signing_alg_values_supported,
 )
-from tigrbl_auth_protocol_oauth.standards.mtls import SUPPORTED_MTLS_AUTH_METHODS
-from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER, JWKS_PATH
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import SUPPORTED_MTLS_AUTH_METHODS
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import discovery_policy_metadata
 
 

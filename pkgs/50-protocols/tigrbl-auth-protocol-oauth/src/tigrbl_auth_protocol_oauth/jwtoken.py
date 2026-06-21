@@ -22,7 +22,7 @@ from tigrbl_identity_jose.framework import (
     KeyUse,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_auth_protocol_oauth.standards.mtls import validate_certificate_binding
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_certificate_binding
 from tigrbl_identity_jose.key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 from tigrbl_identity_jose.pqc_jwt import (
     ML_DSA_65_ALG,

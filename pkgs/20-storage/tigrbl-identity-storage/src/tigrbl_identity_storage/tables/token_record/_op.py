@@ -38,7 +38,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     authenticate_client_assertion,
 )
-from tigrbl_auth_protocol_oauth.standards.mtls import (
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     SUPPORTED_MTLS_AUTH_METHODS,
     authenticate_mtls_client,
     presented_certificate_pem,
@@ -48,7 +48,7 @@ from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_tok
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.rfc6749 import RFC6749Error, enforce_authorization_code_grant, enforce_grant_type, enforce_password_grant
 from tigrbl_auth_protocol_oauth.standards.rfc7636_pkce import verify_code_challenge
-from tigrbl_auth_protocol_oauth.standards.rfc8414_metadata import ISSUER
+from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
 from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
     OAuthPolicyViolation,
     assert_token_request_allowed,

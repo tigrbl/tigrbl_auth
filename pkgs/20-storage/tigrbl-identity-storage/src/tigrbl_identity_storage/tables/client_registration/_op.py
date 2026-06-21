@@ -27,7 +27,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,
 )
-from tigrbl_auth_protocol_oauth.standards.mtls import (
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
     SELF_SIGNED_TLS_CLIENT_AUTH_METHOD,
     SUPPORTED_MTLS_AUTH_METHODS,
     TLS_CLIENT_AUTH_METHOD,

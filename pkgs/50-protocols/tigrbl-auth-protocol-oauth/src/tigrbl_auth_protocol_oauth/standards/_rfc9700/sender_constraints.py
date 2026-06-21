@@ -140,7 +140,7 @@ def verify_access_token_sender_constraint(
                 "certificate-bound token presented while mTLS support is disabled",
                 status_code=401,
             )
-        from tigrbl_auth_protocol_oauth.standards.mtls import validate_request_certificate_binding
+        from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import validate_request_certificate_binding
         from tigrbl_identity_core.errors import InvalidTokenError
 
         try:

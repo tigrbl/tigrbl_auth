@@ -17,14 +17,14 @@ from tigrbl_auth_protocol_oauth.standards.issuer_identification import (
     authorization_response_issuer,
     extract_issuer_from_redirect_uri,
 )
-from tigrbl_auth_protocol_oauth.standards.jar import (
+from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import (
     RequestObjectValidationError,
     make_request_object,
     merge_request_object_params,
     parse_request_object,
 )
-from tigrbl_auth_protocol_oauth.standards.par import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
-from tigrbl_auth_protocol_oauth.standards.rar import normalize_authorization_details
+from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import PushedAuthorizationRequestError, validate_pushed_authorization_request_row
+from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 

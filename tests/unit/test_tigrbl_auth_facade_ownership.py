@@ -44,9 +44,9 @@ FACADE_MODULES = {
     "tigrbl_auth.errors": "tigrbl_identity_core.errors",
     "tigrbl_auth.jwtoken": "tigrbl_auth_protocol_oauth.jwtoken",
     "tigrbl_auth.oidc_id_token": "tigrbl_auth_protocol_oidc.id_token",
-    "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
+    "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.token_exchange",
     "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.json_web_token",
-    "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
+    "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.jwt_best_practices",
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy.admin_gate",
@@ -277,9 +277,9 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
             "tigrbl_auth_protocol_oauth.standards.rfc7636_pkce"
         ),
         "tigrbl_auth.rfc.rfc7662_introspection": (
-            "tigrbl_auth_protocol_oauth.standards.rfc7662_introspection"
+            "tigrbl_auth_protocol_oauth.standards.introspection"
         ),
-        "tigrbl_auth.rfc.rfc8414": "tigrbl_auth_protocol_oauth.standards.rfc8414",
+        "tigrbl_auth.rfc.rfc8414": "tigrbl_auth_protocol_oauth.standards.authorization_server_metadata_endpoint",
         "tigrbl_auth.rfc.rfc9449_dpop": (
             "tigrbl_auth_protocol_oauth.standards.rfc9449_dpop"
         ),
@@ -287,7 +287,7 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
         "tigrbl_auth.rfc.rfc7516": "tigrbl_identity_jose.standards.rfc7516",
         "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.json_web_token",
         "tigrbl_auth.rfc.rfc7520": "tigrbl_identity_jose.standards.rfc7520",
-        "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
+        "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.jwt_best_practices",
         "tigrbl_auth.rfc.rfc8812": "tigrbl_identity_jose.standards.rfc8812",
     }
 
@@ -385,7 +385,7 @@ def test_jose_no_longer_owns_protocol_jwt_facades() -> None:
     assert not (jose_root / "standards" / "rfc8725.py").exists()
     assert (oauth_root / "jwtoken.py").exists()
     assert (oauth_root / "standards" / "json_web_token.py").exists()
-    assert (oauth_root / "standards" / "rfc8725.py").exists()
+    assert (oauth_root / "standards" / "jwt_best_practices.py").exists()
     assert (oidc_root / "jwks_service.py").exists()
 
 
@@ -405,6 +405,21 @@ def test_oauth_standards_use_descriptive_module_names() -> None:
         "jwt_client_auth.py",
         "dynamic_client_registration.py",
         "client_registration_management.py",
+        "introspection.py",
+        "native_apps.py",
+        "authorization_server_metadata.py",
+        "authorization_server_metadata_endpoint.py",
+        "legacy_jwt_client_assertions.py",
+        "device_authorization.py",
+        "token_exchange.py",
+        "mutual_tls_client_authentication.py",
+        "resource_indicators.py",
+        "jwt_best_practices.py",
+        "jwt_access_tokens.py",
+        "jwt_secured_authorization_requests.py",
+        "pushed_authorization_requests.py",
+        "issuer_identification.py",
+        "rich_authorization_requests.py",
     }
     removed_rfc_modules = {
         "rfc6750.py",
@@ -414,6 +429,22 @@ def test_oauth_standards_use_descriptive_module_names() -> None:
         "rfc7523.py",
         "rfc7591.py",
         "rfc7592.py",
+        "rfc7662.py",
+        "rfc7662_introspection.py",
+        "rfc8252.py",
+        "rfc8414.py",
+        "rfc8414_metadata.py",
+        "rfc8523.py",
+        "rfc8628.py",
+        "rfc8693.py",
+        "rfc8705.py",
+        "rfc8707.py",
+        "rfc8725.py",
+        "rfc9068.py",
+        "rfc9101.py",
+        "rfc9126.py",
+        "rfc9207.py",
+        "rfc9396.py",
     }
 
     for filename in descriptive_modules:
