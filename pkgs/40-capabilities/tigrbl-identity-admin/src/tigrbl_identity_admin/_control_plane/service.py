@@ -5,7 +5,7 @@ from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_contracts.audit.admin import AdminAuditEvent as _AdminAuditEvent
 from tigrbl_identity_contracts.credentials import Credential, CredentialKind
-from tigrbl_identity_contracts.policy.lifecycle import PolicyDefinition
+from tigrbl_identity_contracts.policy.definitions import PolicyDefinition
 from tigrbl_identity_contracts.principals import Principal, PrincipalKind
 
 from .models import (

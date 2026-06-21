@@ -11,6 +11,7 @@ from .errors import (
     InvalidKeyError,
     InvalidTokenError,
 )
+from .liveness import ConvergenceEvent, ConvergenceState, LivenessConvergenceReport
 from .path_safety import safe_display_path, sanitize_local_paths
 from .primitives import (
     Audience,
@@ -42,6 +43,8 @@ __all__ = [
     "Clock",
     "ClientId",
     "ClientRef",
+    "ConvergenceEvent",
+    "ConvergenceState",
     "CredentialId",
     "FrozenClock",
     "IdentityAuthorizationError",
@@ -52,6 +55,7 @@ __all__ = [
     "InvalidTokenError",
     "Issuer",
     "JWTPayload",
+    "LivenessConvergenceReport",
     "Principal",
     "PrincipalId",
     "PrincipalRef",

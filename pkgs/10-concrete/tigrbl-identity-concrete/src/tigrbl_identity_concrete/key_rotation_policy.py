@@ -1,4 +1,4 @@
-"""Key rotation policy contract dataclasses."""
+"""Concrete key rotation policy dataclasses."""
 
 from __future__ import annotations
 

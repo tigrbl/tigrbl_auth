@@ -22,11 +22,11 @@ def _dataclass_defs(path: Path) -> set[str]:
     return names
 
 
-def test_jose_reusable_dataclasses_are_contract_reexports() -> None:
+def test_jose_reusable_dataclasses_are_owner_reexports() -> None:
     import tigrbl_security_trust_contracts as security_trust_contracts
     import tigrbl_identity_contracts as user_contracts
     from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
-    from tigrbl_identity_contracts.policy.key_rotation import (
+    from tigrbl_identity_concrete.key_rotation_policy import (
         EffectiveKeyRotationPolicy,
         KeyRotationPolicyVersion,
     )

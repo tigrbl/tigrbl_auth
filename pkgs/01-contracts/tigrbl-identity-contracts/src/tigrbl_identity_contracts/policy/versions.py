@@ -1,18 +1,9 @@
-"""Policy lifecycle contract dataclasses."""
+"""Policy version contract dataclasses."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
-
-
-@dataclass(frozen=True, slots=True)
-class PolicyDefinition:
-    policy_id: str
-    name: str
-    tenant_id: str
-    language: str
-    created_at: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,4 +18,4 @@ class PolicyVersion:
     promoted: bool = False
 
 
-__all__ = ["PolicyDefinition", "PolicyVersion"]
+__all__ = ["PolicyVersion"]

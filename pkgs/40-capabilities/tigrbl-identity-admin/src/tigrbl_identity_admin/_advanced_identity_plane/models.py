@@ -16,7 +16,8 @@ from tigrbl_identity_contracts.adaptive_access import (
 )
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_contracts.federation import FederatedSession, IdentityProvider
-from tigrbl_identity_contracts.policy.lifecycle import PolicyDefinition, PolicyVersion
+from tigrbl_identity_contracts.policy.definitions import PolicyDefinition
+from tigrbl_identity_contracts.policy.versions import PolicyVersion
 from tigrbl_identity_concrete import (
     DeviceIdentity,
     MfaFactor,

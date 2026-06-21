@@ -43,6 +43,7 @@ dependencies = [
     "swarmauri_signing_jws==0.3.0.dev31",
     "swarmauri_tokens_jwt==0.3.0.dev31",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",

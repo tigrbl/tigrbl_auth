@@ -2677,11 +2677,15 @@ name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/01-contracts/tigrbl-identity-contracts" }
 dependencies = [
+    { name = "tigrbl-identity-core" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
+requires-dist = [
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
 
 [[package]]
 name = "tigrbl-identity-core"
@@ -2713,6 +2717,7 @@ dependencies = [
     { name = "swarmauri-signing-jws" },
     { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl-identity-author" },
+    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-storage" },
@@ -2730,6 +2735,7 @@ requires-dist = [
     { name = "swarmauri-signing-jws", specifier = "==0.3.0.dev31" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
