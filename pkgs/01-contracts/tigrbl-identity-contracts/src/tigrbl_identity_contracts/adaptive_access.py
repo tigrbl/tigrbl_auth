@@ -48,27 +48,6 @@ class GraphDecision:
 
 
 @dataclass(frozen=True, slots=True)
-class PolicyDefinition:
-    policy_id: str
-    name: str
-    tenant_id: str
-    language: str
-    created_at: str
-
-
-@dataclass(frozen=True, slots=True)
-class PolicyVersion:
-    version_id: str
-    policy_id: str
-    version_number: int
-    source: str
-    created_at: str
-    relation: str
-    context_equals: tuple[tuple[str, Any], ...]
-    promoted: bool = False
-
-
-@dataclass(frozen=True, slots=True)
 class AccessDecisionRequest:
     tenant_id: str
     subject: str
@@ -147,8 +126,6 @@ __all__ = [
     "AnomalySignal",
     "AuthTelemetryEvent",
     "GraphDecision",
-    "PolicyDefinition",
-    "PolicyVersion",
     "RelationshipDefinition",
     "RelationshipTuple",
     "TrustDomain",

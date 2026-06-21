@@ -13,14 +13,18 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 def test_identity_contracts_are_canonical_for_identity_and_admin_contracts() -> None:
     import tigrbl_identity_contracts as contracts
+    from tigrbl_identity_contracts.policy.key_rotation import KeyRotationPolicyVersion
+    from tigrbl_identity_contracts.policy.requests import PolicyRequest
 
     assert contracts.Principal.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.Credential.__module__.startswith("tigrbl_identity_contracts")
-    assert contracts.PolicyRequest.__module__.startswith("tigrbl_identity_contracts")
+    assert PolicyRequest.__module__.startswith("tigrbl_identity_contracts.policy")
     assert contracts.ProtectedResourceVerifierContract.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.Role.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.AccessDecisionRequest.__module__.startswith("tigrbl_identity_contracts")
-    assert contracts.KeyRotationPolicyVersion.__module__.startswith("tigrbl_identity_contracts")
+    assert KeyRotationPolicyVersion.__module__.startswith("tigrbl_identity_contracts.policy")
+    assert not hasattr(contracts, "PolicyRequest")
+    assert not hasattr(contracts, "KeyRotationPolicyVersion")
     assert contracts.AdminResource.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.ServiceIdentity.__module__.startswith("tigrbl_identity_contracts")
     assert contracts.SDKPackage.__module__.startswith("tigrbl_identity_contracts")

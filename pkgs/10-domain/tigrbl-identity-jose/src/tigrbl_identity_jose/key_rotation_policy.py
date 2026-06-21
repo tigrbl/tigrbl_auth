@@ -4,7 +4,7 @@ from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Callable, Iterable, Mapping
 
-from tigrbl_identity_contracts.key_rotation import (
+from tigrbl_identity_contracts.policy.key_rotation import (
     EffectiveKeyRotationPolicy,
     KeyRotationPolicyVersion,
 )

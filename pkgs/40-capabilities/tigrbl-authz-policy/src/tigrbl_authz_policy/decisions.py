@@ -3,16 +3,15 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Iterable
 
-from tigrbl_identity_contracts.authz.decisions import (
+from tigrbl_identity_contracts.policy.decisions import PolicyDecision, PolicyTrace
+from tigrbl_identity_contracts.policy.effects import DecisionEffect
+from tigrbl_identity_contracts.policy.kinds import PolicyKind
+from tigrbl_identity_contracts.policy.requests import PolicyRequest
+from tigrbl_identity_contracts.policy.rules import (
     AdminPolicy,
     AttributePolicy,
-    DecisionEffect,
     DelegationPolicy,
     PermissionPolicy,
-    PolicyDecision,
-    PolicyKind,
-    PolicyRequest,
-    PolicyTrace,
     RolePolicy,
 )
 

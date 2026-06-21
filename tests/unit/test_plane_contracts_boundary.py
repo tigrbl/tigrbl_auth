@@ -96,7 +96,6 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
         "adaptive_access.py",
         "correctness/authorization.py",
         "correctness/reports.py",
-        "key_rotation.py",
     }
     offenders: list[str] = []
 
@@ -292,6 +291,29 @@ def test_residency_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "residency" / "zones.py").exists()
     assert (contracts_root / "residency" / "records.py").exists()
     assert (contracts_root / "residency" / "decisions.py").exists()
+
+
+def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "authz" / "decisions.py").exists()
+    assert not (contracts_root / "key_rotation.py").exists()
+    assert (contracts_root / "policy" / "__init__.py").exists()
+    assert (contracts_root / "policy" / "conditions.py").exists()
+    assert (contracts_root / "policy" / "decisions.py").exists()
+    assert (contracts_root / "policy" / "effects.py").exists()
+    assert (contracts_root / "policy" / "key_rotation.py").exists()
+    assert (contracts_root / "policy" / "kinds.py").exists()
+    assert (contracts_root / "policy" / "lifecycle.py").exists()
+    assert (contracts_root / "policy" / "requests.py").exists()
+    assert (contracts_root / "policy" / "rules.py").exists()
 
 
 def test_removed_plane_contract_import_roots_are_not_loaded() -> None:

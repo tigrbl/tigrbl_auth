@@ -8,8 +8,6 @@ from tigrbl_identity_contracts.adaptive_access import (
     AnomalySignal,
     AuthTelemetryEvent,
     GraphDecision,
-    PolicyDefinition,
-    PolicyVersion,
     RelationshipDefinition,
     RelationshipTuple,
     TrustDomain,
@@ -19,6 +17,7 @@ from tigrbl_identity_contracts.adaptive_access import (
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_contracts.credentials import MfaFactor, PasswordlessCredential, WebAuthnCredential
 from tigrbl_identity_contracts.federation import FederatedSession, IdentityProvider
+from tigrbl_identity_contracts.policy.lifecycle import PolicyDefinition, PolicyVersion
 from tigrbl_identity_contracts.principals import DeviceIdentity, WorkloadIdentity
 
 __all__ = [
