@@ -5,8 +5,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from ._operator_store import ArtifactResult, display_path, latest_event, read_jsonl, validate_checksum, write_structured
-from .operator_service import list_activity, list_audit_rows, list_transactions
+from tigrbl_identity_storage.operator_store import ArtifactResult, display_path, latest_event, validate_checksum, write_structured
+from tigrbl_identity_storage.resource_service import list_activity, list_audit_rows, list_transactions
 
 
 def record_surface_event(
@@ -23,7 +23,7 @@ def record_surface_event(
     details: Mapping[str, Any] | None = None,
     source_surface: str = "operator",
 ) -> dict[str, Any]:
-    from ._operator_store import OperationContext, build_audit_entry, append_jsonl, audit_log_path, utc_now
+    from tigrbl_identity_storage.operator_store import OperationContext, append_jsonl, audit_log_path, build_audit_entry, utc_now
 
     context = OperationContext(repo_root=repo_root, command=event_type, resource=target_type, dry_run=False, actor=actor_user_id or "system", tenant=tenant_id)
     entry = build_audit_entry(

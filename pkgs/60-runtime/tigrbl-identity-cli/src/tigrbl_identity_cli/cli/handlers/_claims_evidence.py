@@ -354,7 +354,7 @@ __all__ = ["HANDLER_MAP"]
 # -----------------------------------------------------------------------------
 
 from tigrbl_identity_storage.operator_store import OperationContext, TransactionResult, ArtifactResult
-from tigrbl_identity_operator.operator_service import (
+from tigrbl_identity_storage.resource_service import (
     OperatorStateError,
     create_resource as _svc_create_resource,
     delete_resource as _svc_delete_resource,
@@ -375,4 +375,4 @@ from tigrbl_identity_jose.key_management import (
     retire_operator_key_for_context,
     rotate_operator_key_for_context,
 )
-from tigrbl_identity_operator.operator_service import lock_identity as _svc_lock_identity, set_identity_password as _svc_set_identity_password
+from tigrbl_identity_storage.resource_service import lock_identity as _svc_lock_identity, set_identity_password as _svc_set_identity_password

@@ -45,7 +45,6 @@ dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
-    "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-security-signing-pqc==0.1.0",
 ]

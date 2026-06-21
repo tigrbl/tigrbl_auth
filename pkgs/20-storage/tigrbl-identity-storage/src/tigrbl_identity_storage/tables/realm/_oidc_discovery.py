@@ -17,7 +17,7 @@ from tigrbl_identity_runtime.deployment import (
 )
 from tigrbl_identity_server.security.handler_records import first_handler_record
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_operator.operator_service import build_operator_jwks_payload, get_record
+from tigrbl_identity_storage.resource_service import build_operator_jwks_payload, get_record
 from tigrbl_auth_protocol_oidc.tenant_discovery import (
     REALM_JWKS_PATH,
     REALM_OPENID_CONFIGURATION_PATH,

@@ -26,14 +26,18 @@ def test_public_operator_surface_means_public_python_exports_not_state_store() -
     assert all("operator_store" not in module for module in declared_modules)
 
 
-def test_facade_does_not_expose_operator_store_as_public_surface() -> None:
+def test_facade_does_not_expose_operator_storage_services_as_public_surface() -> None:
     with _package_src_paths_first():
-        try:
-            importlib.import_module("tigrbl_auth.services._operator_store")
-        except ModuleNotFoundError:
-            pass
-        else:  # pragma: no cover - failure path
-            raise AssertionError("operator store must not be a public tigrbl_auth service facade")
+        for module_name in (
+            "tigrbl_auth.services._operator_store",
+            "tigrbl_auth.services.operator_service",
+            "tigrbl_auth.services.audit_service",
+        ):
+            try:
+                importlib.import_module(module_name)
+            except ModuleNotFoundError:
+                continue
+            raise AssertionError(f"{module_name} must not be a public tigrbl_auth service facade")
 
 
 def test_operator_store_names_are_not_in_tigrbl_auth_facade_modules() -> None:

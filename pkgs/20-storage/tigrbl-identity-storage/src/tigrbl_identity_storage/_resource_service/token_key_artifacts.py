@@ -2,6 +2,10 @@ from __future__ import annotations
 
 from .resource_operations import *
 from .resource_operations import _commit_records, _list, _sanitize_patch_for_scope
+from tigrbl_authz_policy.provenance import (
+    build_authorization_decision_trace,
+    build_delegation_provenance,
+)
 
 def exchange_token(context: OperationContext, *, subject_token: str | None, requested_token_type: str | None = None, audience: str | None = None, resource: str | None = None, actor_token: str | None = None, extras: Mapping[str, Any] | None = None) -> TransactionResult:
     extras_dict = dict(extras or {})

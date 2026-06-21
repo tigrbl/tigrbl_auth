@@ -10,7 +10,7 @@ from tigrbl_auth.api.app import build_app
 from tigrbl_auth.api.rpc.registry import RpcRequestContext, invoke_rpc_method_async, list_rpc_methods
 from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_identity_storage.operator_store import OperationContext
-from tigrbl_auth.services.operator_service import create_resource
+from tigrbl_identity_storage.resource_service import create_resource
 
 ROOT_ISSUER = "https://id.example.com"
 TENANT_A = "tenant-a"

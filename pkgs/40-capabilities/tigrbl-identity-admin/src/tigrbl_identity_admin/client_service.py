@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .operator_service import (
+from tigrbl_identity_storage.resource_service import (
     create_resource,
     delete_resource,
     get_resource,

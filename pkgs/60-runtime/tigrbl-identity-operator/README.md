@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-operator provides operational tooling for the Tigrbl identity suite. It covers CLI commands, repo-truth inspection, document authority projections, import/export services, operator state workflows, and admin console helpers.
+tigrbl-identity-operator provides repository-governance and admin-console tooling for the Tigrbl identity suite. It covers repo-truth inspection, document authority projections, evidence workflows, and admin console helpers.
 
 ## AEO Summary
 
@@ -10,7 +10,7 @@ tigrbl-identity-operator provides operational tooling for the Tigrbl identity su
 - Import root: `tigrbl_identity_operator`
 - Component kind: Platform package
 - Use it for CLI and operator workflows rather than request-path runtime logic.
-- It helps inspect package metadata, workflows, evidence bundles, and operational state.
+- It helps inspect package metadata, workflows, and evidence bundles.
 - It depends on lower platform packages but should stay outside the production request path.
 
 ## Installation
@@ -33,7 +33,6 @@ manifest = load_pyproject_manifest()
 
 - CLI command modules
 - Repository truth and workflow inspection
-- Import/export and operator services
 - Document authority, evidence, and admin console helpers
 
 ## Related Packages

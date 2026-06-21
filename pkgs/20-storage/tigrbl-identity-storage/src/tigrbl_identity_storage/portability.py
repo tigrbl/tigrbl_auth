@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ._operator_store import ArtifactResult, OperationContext, PORTABILITY_SCHEMA_VERSION
-from .audit_service import record_surface_event
-from .operator_service import export_status, import_status, operator_plane_status, run_export, run_import, validate_import_artifact
+from .audit import record_surface_event
+from .operator_store import ArtifactResult, OperationContext, PORTABILITY_SCHEMA_VERSION
+from .resource_service import export_status, import_status, operator_plane_status, run_export, run_import, validate_import_artifact
 
 
 def validate_import_file(path: Path) -> dict[str, object]:

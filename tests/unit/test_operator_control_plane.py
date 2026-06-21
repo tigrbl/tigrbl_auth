@@ -7,8 +7,8 @@ import pytest
 
 from tigrbl_identity_storage.operator_store import OperationContext, operator_state_root, operator_store_summary
 from tigrbl_auth.cli.handlers import _operator_state_dir
-from tigrbl_auth.services.operator_service import OperatorStateError, build_portability_artifact, create_resource, get_resource, list_resource_result, update_resource
-from tigrbl_identity_operator.import_export_service import validate_export_plan
+from tigrbl_identity_storage.resource_service import OperatorStateError, build_portability_artifact, create_resource, get_resource, list_resource_result, update_resource
+from tigrbl_identity_storage.portability import validate_export_plan
 
 
 def _ctx(repo_root: Path, resource: str, command: str, *, tenant: str | None = None) -> OperationContext:

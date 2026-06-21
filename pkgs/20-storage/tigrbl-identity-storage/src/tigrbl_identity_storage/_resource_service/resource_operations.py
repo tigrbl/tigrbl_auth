@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from tigrbl_identity_operator._operator_store import (
+from tigrbl_identity_storage.operator_store import (
     ArtifactResult,
     FilterSpec,
     OperationContext,
@@ -36,11 +36,6 @@ from tigrbl_identity_operator._operator_store import (
     audit_log_path,
     activity_log_path,
 )
-from tigrbl_identity_operator.authorization_provenance import (
-    build_authorization_decision_trace,
-    build_delegation_provenance,
-)
-
 GENERIC_RESOURCES = {"tenant", "client", "identity", "flow", "session", "token", "keys"}
 
 
@@ -222,7 +217,7 @@ def rotate_client_secret(context: OperationContext, *, record_id: str) -> Transa
 
 
 def set_identity_password(context: OperationContext, *, record_id: str, password: str | None = None) -> TransactionResult:
-    from .key_management import hash_pw
+    from tigrbl_identity_jose.key_management import hash_pw
     records = load_records(context.repo_root, "identity", tenant=context.tenant)
     record = records.get(str(record_id))
     if record is None:

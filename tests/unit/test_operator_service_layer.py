@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from tigrbl_identity_storage.operator_store import OperationContext, operator_store_summary
-from tigrbl_auth.services.operator_service import (
+from tigrbl_identity_storage.resource_service import (
     create_resource,
     delete_resource,
     generate_key_record,
@@ -17,7 +17,7 @@ from tigrbl_auth.services.operator_service import (
 )
 from tigrbl_authn_credentials.session_service import observe_token_response, token_hash
 from tigrbl_auth_protocol_oidc.discovery_service import diff_discovery, show_discovery
-from tigrbl_identity_operator.import_export_service import validate_export_plan
+from tigrbl_identity_storage.portability import validate_export_plan
 
 
 def _context(repo_root: Path, resource: str, command: str) -> OperationContext:

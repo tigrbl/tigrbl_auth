@@ -18,7 +18,7 @@ from tigrbl_auth_protocol_oidc.discovery_service import (
     show_discovery as _svc_show_discovery,
     validate_discovery as _svc_validate_discovery,
 )
-from tigrbl_identity_operator.import_export_service import (
+from tigrbl_identity_storage.portability import (
     export_status as _svc_export_status,
     import_status as _svc_import_status,
     run_export_file as _svc_run_export_file,

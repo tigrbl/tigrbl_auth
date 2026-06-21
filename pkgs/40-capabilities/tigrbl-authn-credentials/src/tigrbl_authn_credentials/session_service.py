@@ -4,9 +4,9 @@ import hashlib
 from pathlib import Path
 from typing import Any, Mapping
 
-from ._operator_store import OperationContext, TransactionResult, utc_now
-from .audit_service import record_surface_event
-from .operator_service import (
+from tigrbl_identity_storage.audit import record_surface_event
+from tigrbl_identity_storage.operator_store import OperationContext, TransactionResult, utc_now
+from tigrbl_identity_storage.resource_service import (
     exchange_token,
     get_record,
     get_resource,
@@ -69,7 +69,7 @@ def exchange_token_for_context(context: OperationContext, *, subject_token: str 
 
 
 def _observe_token_like(repo_root: Path, *, token: str, kind: str, actor: str | None = None, tenant: str | None = None, issuer: str | None = None, details: Mapping[str, Any] | None = None) -> str:
-    from .operator_service import create_resource
+    from tigrbl_identity_storage.resource_service import create_resource
 
     details = dict(details or {})
     record_id = token_hash(token)
