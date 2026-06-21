@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Iterable
 
 from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.patterns import matches_dotted_pattern
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision, PolicyTrace
 from tigrbl_identity_contracts.policy.effects import DecisionEffect
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
@@ -14,15 +15,6 @@ from tigrbl_authz_policy_concrete import (
     PermissionPolicy,
     RolePolicy,
 )
-
-
-def _matches(pattern: str, value: str) -> bool:
-    if pattern == "*" or pattern == value:
-        return True
-    if pattern.endswith(".*"):
-        prefix = pattern[:-2]
-        return value == prefix or value.startswith(f"{prefix}.")
-    return False
 
 
 class PolicyDecisionEngine:
@@ -54,7 +46,7 @@ class PolicyDecisionEngine:
                 continue
             if policy.role not in request.roles:
                 continue
-            if any(_matches(permission, request.action) for permission in policy.permissions):
+            if any(matches_dotted_pattern(permission, request.action) for permission in policy.permissions):
                 if policy.effect == DecisionEffect.DENY:
                     matched_deny.append(policy.role)
                 else:
@@ -71,7 +63,7 @@ class PolicyDecisionEngine:
         for policy in self.attributes:
             if policy.tenant_id not in {None, request.tenant_id}:
                 continue
-            if not _matches(policy.action, request.action):
+            if not matches_dotted_pattern(policy.action, request.action):
                 continue
             if not all(request.attributes.get(key) == value for key, value in policy.required_attributes.items()):
                 continue
@@ -92,7 +84,7 @@ class PolicyDecisionEngine:
         for policy in self.permissions:
             if policy.tenant_id not in {None, request.tenant_id}:
                 continue
-            if not any(_matches(permission, request.action) for permission in policy.permissions):
+            if not any(matches_dotted_pattern(permission, request.action) for permission in policy.permissions):
                 continue
             if not granted.intersection(policy.permissions) and "*" not in granted:
                 continue
@@ -114,7 +106,7 @@ class PolicyDecisionEngine:
                 continue
             if request.tenant_id not in policy.tenant_ids:
                 return PolicyDecision(False, "delegation tenant scope denied", (policy.delegator,))
-            if any(_matches(action, request.action) for action in policy.actions):
+            if any(matches_dotted_pattern(action, request.action) for action in policy.actions):
                 return PolicyDecision(True, "allowed by delegation policy", (policy.delegator,))
         return PolicyDecision(False, "no delegation policy matched", ())
 
@@ -126,7 +118,9 @@ class PolicyDecisionEngine:
                 continue
             if policy.superuser:
                 return PolicyDecision(True, "allowed by superuser admin policy", (policy.subject,))
-            if request.tenant_id in policy.tenant_ids and any(_matches(action, request.action) for action in policy.actions):
+            if request.tenant_id in policy.tenant_ids and any(
+                matches_dotted_pattern(action, request.action) for action in policy.actions
+            ):
                 return PolicyDecision(True, "allowed by tenant admin policy", (policy.subject,))
         return PolicyDecision(False, "admin policy denied", ())
 

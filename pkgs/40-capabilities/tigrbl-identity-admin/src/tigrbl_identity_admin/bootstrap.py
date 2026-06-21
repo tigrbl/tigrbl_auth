@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import hashlib
 import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
+from tigrbl_identity_core.digests import sha256_text_digest
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_runtime.settings import settings
@@ -20,10 +20,6 @@ from tigrbl_identity_server.security.handler_records import (
 from tigrbl_identity_storage.tables import Realm, Tenant, User
 from tigrbl_identity_storage.tables.engine import ENGINE
 from tigrbl_identity_storage.tables.user import DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD
-
-
-def _token_digest(value: str) -> str:
-    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
 def user_is_admin(user: User | None) -> bool:
@@ -164,7 +160,7 @@ async def issue_password_reset_token(*, user: User, minutes_valid: int = 15, db:
         db,
         row.id,
         {
-            "password_reset_token_hash": _token_digest(token),
+            "password_reset_token_hash": sha256_text_digest(token),
             "password_reset_expires_at": datetime.now(timezone.utc) + timedelta(minutes=minutes_valid),
         },
     )
@@ -175,7 +171,7 @@ async def consume_password_reset_token(*, token: str, new_password: str, db: Any
     if db is None:
         async with _session() as session:
             return await consume_password_reset_token(token=token, new_password=new_password, db=session)
-    digest = _token_digest(token)
+    digest = sha256_text_digest(token)
     row = await first_handler_record(User, db, {"password_reset_token_hash": digest})
     if row is None:
         return None

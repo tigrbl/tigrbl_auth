@@ -5,6 +5,7 @@ from __future__ import annotations
 from .base64url import base64url_decode, base64url_encode
 from .clock import Clock, FrozenClock, SystemClock, unix_seconds, utc_now, utc_now_iso
 from .entity_keys import normalize_entity, tenant_key
+from .digests import sha256_text_digest
 from .errors import (
     IdentityAuthorizationError,
     IdentityConfigurationError,
@@ -39,6 +40,7 @@ from .primitives import (
 from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonical_json_bytes, canonicalize
 from .normalization import normal_tuple
+from .patterns import matches_dotted_pattern
 from .redaction import SECRET_FIELD_TOKENS, redact_sensitive_mapping
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
 from .versions import semver_key, version_in_range
@@ -80,11 +82,13 @@ __all__ = [
     "canonicalize",
     "canonical_json_bytes",
     "describe_owner",
+    "matches_dotted_pattern",
     "redact_sensitive_mapping",
     "normal_tuple",
     "normalize_entity",
     "safe_display_path",
     "sanitize_local_paths",
+    "sha256_text_digest",
     "new_client_id",
     "new_credential_id",
     "new_principal_id",
