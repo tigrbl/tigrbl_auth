@@ -63,9 +63,13 @@ def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
 
 @pytest.mark.unit
 def test_storage_public_boundary_has_no_generic_repository_imports() -> None:
+    assert not (STORAGE_SRC / "migration_contract.py").exists()
+    assert (STORAGE_SRC / "migrations" / "contract.py").exists()
+
     files = [
         STORAGE_SRC / "__init__.py",
-        STORAGE_SRC / "migration_contract.py",
+        STORAGE_SRC / "migrations" / "contract.py",
+        STORAGE_SRC / "migrations" / "__init__.py",
         STORAGE_SRC / "tables" / "__init__.py",
     ]
     forbidden_modules = {"tigrbl_identity_storage.repository"}

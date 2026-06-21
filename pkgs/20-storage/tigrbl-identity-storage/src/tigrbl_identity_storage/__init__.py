@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .migration_contract import (
+from .migrations.contract import (
     MigrationContract,
     MigrationRevision,
     build_migration_contract,
