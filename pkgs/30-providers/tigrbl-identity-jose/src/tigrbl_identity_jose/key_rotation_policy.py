@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from datetime import datetime, timezone
 from typing import Callable, Iterable, Mapping
 
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.normalization import normal_tuple
 from tigrbl_identity_concrete.key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationPolicyVersion,
@@ -11,13 +12,6 @@ from tigrbl_identity_concrete.key_rotation_policy import (
 from tigrbl_identity_contracts.evidence.key_rotation import (
     KeyRotationAuditEvidence as _KeyRotationAuditEvidence,
 )
-
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
-
-
-def _normal_tuple(values: Iterable[str] | None) -> tuple[str, ...]:
-    return tuple(sorted({str(value).strip() for value in values or () if str(value).strip()}))
 
 
 class KeyRotationPolicyOverlapError(RuntimeError):
@@ -79,12 +73,12 @@ class KeyRotationPolicyGovernance:
             max_key_age_days=max_key_age_days,
             overlap_seconds=overlap_seconds,
             retirement_seconds=retirement_seconds,
-            emergency_triggers=_normal_tuple(emergency_triggers),
+            emergency_triggers=normal_tuple(emergency_triggers),
             approval_required=approval_required,
             jwks_publish_required=jwks_publish_required,
             created_by=created_by,
             reason=reason,
-            created_at=_utc_now(),
+            created_at=utc_now_iso(),
         )
         self._versions[(policy_id, version_id)] = policy
         return policy
@@ -93,7 +87,7 @@ class KeyRotationPolicyGovernance:
         policy = self._get(policy_id, version_id)
         if policy.status not in {"draft", "approved"}:
             raise ValueError("only draft policy versions can be approved")
-        approved = replace(policy, status="approved", approved_by=actor, approved_at=_utc_now())
+        approved = replace(policy, status="approved", approved_by=actor, approved_at=utc_now_iso())
         self._versions[(policy_id, version_id)] = approved
         return approved
 
@@ -111,8 +105,8 @@ class KeyRotationPolicyGovernance:
             policy,
             status="published",
             approved_by=policy.approved_by or actor,
-            approved_at=policy.approved_at or _utc_now(),
-            published_at=_utc_now(),
+            approved_at=policy.approved_at or utc_now_iso(),
+            published_at=utc_now_iso(),
             supersedes=supersedes,
         )
         self._versions[(policy_id, version_id)] = published
@@ -250,7 +244,7 @@ class KeyRotationAdministration:
             jwks_published=jwks_published,
             retired=retired,
             reason=reason,
-            recorded_at=_utc_now(),
+            recorded_at=utc_now_iso(),
         )
         self._audit_records.append(audit)
         return audit

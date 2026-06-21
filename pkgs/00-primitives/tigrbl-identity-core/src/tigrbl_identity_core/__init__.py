@@ -36,7 +36,8 @@ from .primitives import (
     new_tenant_id,
 )
 from .standards import StandardOwner, describe_owner
-from .json_canonicalization import canonicalize
+from .json_canonicalization import canonical_json_bytes, canonicalize
+from .normalization import normal_tuple
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
 from .versions import semver_key, version_in_range
 
@@ -74,7 +75,9 @@ __all__ = [
     "base64url_decode",
     "base64url_encode",
     "canonicalize",
+    "canonical_json_bytes",
     "describe_owner",
+    "normal_tuple",
     "safe_display_path",
     "sanitize_local_paths",
     "new_client_id",

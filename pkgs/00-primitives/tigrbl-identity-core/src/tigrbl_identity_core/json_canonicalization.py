@@ -63,10 +63,16 @@ def canonical_json(value: Any) -> str:
     )
 
 
+def canonical_json_bytes(value: Any) -> bytes:
+    """Return deterministic JSON encoded as UTF-8 bytes."""
+
+    return canonical_json(value).encode("utf-8")
+
+
 def canonical_hash(value: Any) -> str:
     """Return the SHA-256 hex digest of :func:`canonical_json` output."""
 
-    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+    return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
 
 
 def _reject_duplicate_pairs(pairs: Iterable[tuple[str, Any]]) -> dict[str, Any]:
@@ -161,6 +167,7 @@ __all__ = [
     "RFC8785_SPEC_URL",
     "canonical_hash",
     "canonical_json",
+    "canonical_json_bytes",
     "canonicalize",
     "canonicalize_json",
 ]

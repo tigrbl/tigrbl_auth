@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from dataclasses import replace
-from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_core.base64url import base64url_encode
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.json_canonicalization import canonical_json_bytes
 
 from .keys import (
     JoseKey,
@@ -29,21 +29,13 @@ RFC_TARGETS: Mapping[str, str] = {
 }
 
 
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
-
-
-def _canonical_json(value: Mapping[str, Any]) -> bytes:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True).encode("utf-8")
-
-
 def _public_jwk_material(jwk: Mapping[str, Any]) -> dict[str, Any]:
     return public_jwk_material(jwk)
 
 
 def jwk_thumbprint(jwk: Mapping[str, Any]) -> str:
     """Return the RFC 7638 SHA-256 JWK thumbprint."""
-    return base64url_encode(hashlib.sha256(_canonical_json(_public_jwk_material(jwk))).digest())
+    return base64url_encode(hashlib.sha256(canonical_json_bytes(_public_jwk_material(jwk))).digest())
 
 
 def validate_public_jwk(jwk: Mapping[str, Any]) -> None:
@@ -64,7 +56,7 @@ class JoseKeySet:
         validate_public_jwk(key.jwk)
         if key.kid in self._keys:
             raise ValueError("JWK kid already exists")
-        created = key if key.created_at else replace(key, created_at=_utc_now())
+        created = key if key.created_at else replace(key, created_at=utc_now_iso())
         self._keys[key.kid] = created
         return created
 
@@ -97,7 +89,7 @@ class JoseKeySet:
             retired_kids=tuple(retired),
             published_kids=published,
             reason=reason,
-            rotated_at=_utc_now(),
+            rotated_at=utc_now_iso(),
         )
 
 
