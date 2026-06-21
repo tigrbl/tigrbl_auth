@@ -1,38 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
-from enum import Enum
 from typing import Any, Iterable, Mapping
 
-from .authz.authority_roles import AuthorityRole
-
-
-class PrincipalKind(str, Enum):
-    USER = "user"
-    ADMIN = "admin"
-    SERVICE = "service"
-    APP = "app"
-    MACHINE = "machine"
-    WORKLOAD = "workload"
-    DEVICE = "device"
-
-
-class PrincipalStatus(str, Enum):
-    ACTIVE = "active"
-    DISABLED = "disabled"
-    LOCKED = "locked"
-    DELETED = "deleted"
-
-
-NONHUMAN_PRINCIPAL_KINDS = frozenset(
-    {
-        PrincipalKind.SERVICE,
-        PrincipalKind.APP,
-        PrincipalKind.MACHINE,
-        PrincipalKind.WORKLOAD,
-        PrincipalKind.DEVICE,
-    }
-)
+from ..authz.authority_roles import AuthorityRole
+from .enums import NONHUMAN_PRINCIPAL_KINDS, PrincipalKind, PrincipalStatus
 
 
 def _normalize_roles(values: Iterable[str | AuthorityRole] = ()) -> tuple[str, ...]:
@@ -179,10 +151,7 @@ class SubjectAlias:
 
 
 __all__ = [
-    "NONHUMAN_PRINCIPAL_KINDS",
     "Principal",
-    "PrincipalKind",
-    "PrincipalStatus",
     "Realm",
     "SubjectAlias",
     "TenantBoundary",

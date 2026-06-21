@@ -22,6 +22,22 @@ def test_principals_t0_exports_all_first_class_models() -> None:
     assert str(principals.new_principal_id())
 
 
+def test_principal_contracts_are_grouped_under_principals_package() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "principals.py").exists()
+    assert (contracts_root / "principals" / "__init__.py").is_file()
+    assert (contracts_root / "principals" / "enums.py").is_file()
+    assert (contracts_root / "principals" / "models.py").is_file()
+
+
 def test_authority_roles_are_authz_owned_with_principal_compatibility() -> None:
     import tigrbl_authz_policy as authz
     import tigrbl_identity_principals as principals
