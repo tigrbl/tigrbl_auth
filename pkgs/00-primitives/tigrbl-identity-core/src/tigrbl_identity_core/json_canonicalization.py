@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import hashlib
 from collections.abc import Iterable, Mapping, Sequence
 from decimal import Decimal
 from typing import Any
@@ -31,6 +32,41 @@ def canonicalize_json(document: str | bytes | bytearray) -> bytes:
         document = bytes(document).decode("utf-8")
     value = json.loads(document, object_pairs_hook=_reject_duplicate_pairs)
     return canonicalize(value)
+
+
+def _normalize_canonical_json_value(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return {
+            str(key): _normalize_canonical_json_value(item)
+            for key, item in sorted(value.items(), key=lambda item: str(item[0]))
+        }
+    if isinstance(value, tuple):
+        return [_normalize_canonical_json_value(item) for item in value]
+    if isinstance(value, list):
+        return [_normalize_canonical_json_value(item) for item in value]
+    if isinstance(value, set):
+        return [
+            _normalize_canonical_json_value(item)
+            for item in sorted(value, key=lambda item: repr(item))
+        ]
+    return value
+
+
+def canonical_json(value: Any) -> str:
+    """Return deterministic JSON text for policy proof artifacts."""
+
+    return json.dumps(
+        _normalize_canonical_json_value(value),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    )
+
+
+def canonical_hash(value: Any) -> str:
+    """Return the SHA-256 hex digest of :func:`canonical_json` output."""
+
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
 
 def _reject_duplicate_pairs(pairs: Iterable[tuple[str, Any]]) -> dict[str, Any]:
@@ -123,6 +159,8 @@ __all__ = [
     "JCSCanonicalizationError",
     "MAX_SAFE_INTEGER",
     "RFC8785_SPEC_URL",
+    "canonical_hash",
+    "canonical_json",
     "canonicalize",
     "canonicalize_json",
 ]

@@ -2493,6 +2493,7 @@ dependencies = [
     { name = "tigrbl-authz-policy-concrete" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
     { name = "tigrbl-release-contracts" },
 ]
 
@@ -2502,6 +2503,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
 ]
 

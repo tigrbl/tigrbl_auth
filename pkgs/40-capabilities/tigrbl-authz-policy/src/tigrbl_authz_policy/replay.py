@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-import hashlib
-import json
-from typing import Any, Mapping
+from typing import Mapping
 
+from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
 from tigrbl_identity_contracts.replay import (
     DecisionStabilityChange,
     DecisionStabilityReport,
@@ -12,26 +11,6 @@ from tigrbl_identity_contracts.replay import (
     PolicyReplayCase,
     PolicyReplayResult,
 )
-
-
-def _normalize(value: Any) -> Any:
-    if isinstance(value, Mapping):
-        return {str(key): _normalize(val) for key, val in sorted(value.items(), key=lambda item: str(item[0]))}
-    if isinstance(value, tuple):
-        return [_normalize(item) for item in value]
-    if isinstance(value, list):
-        return [_normalize(item) for item in value]
-    if isinstance(value, set):
-        return [_normalize(item) for item in sorted(value, key=lambda item: repr(item))]
-    return value
-
-
-def canonical_json(value: Any) -> str:
-    return json.dumps(_normalize(value), sort_keys=True, separators=(",", ":"), ensure_ascii=True)
-
-
-def canonical_hash(value: Any) -> str:
-    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
 
 def replay_policy_determinism(
