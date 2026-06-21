@@ -1,56 +1,16 @@
-from __future__ import annotations
-
 """Dependency-light credential contract objects."""
+
+from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
-from enum import Enum
 from typing import Any, Mapping
 from uuid import uuid4
 
+from .enums import CredentialAuditAction, CredentialKind, CredentialStatus
+from .errors import CredentialStateError
+
 UTC = timezone.utc
-
-
-class CredentialKind(str, Enum):
-    PASSWORD = "password"
-    PASSWORD_RESET = "password_reset"
-    PASSKEY_WEBAUTHN = "passkey_webauthn"
-    API_KEY = "api_key"
-    SERVICE_KEY = "service_key"
-    CLIENT_SECRET = "client_secret"
-    MTLS_CERTIFICATE = "mtls_certificate"
-    DPOP_KEY = "dpop_key"
-    MFA_FACTOR = "mfa_factor"
-
-
-class CredentialStatus(str, Enum):
-    PENDING = "pending"
-    ACTIVE = "active"
-    ROTATED = "rotated"
-    REVOKED = "revoked"
-    EXPIRED = "expired"
-    CONSUMED = "consumed"
-
-
-class CredentialAuditAction(str, Enum):
-    CREATED = "created"
-    VERIFIED = "verified"
-    FAILED = "failed"
-    ROTATED = "rotated"
-    REVOKED = "revoked"
-    CONSUMED = "consumed"
-
-
-class CredentialError(Exception):
-    """Base credential lifecycle error."""
-
-
-class CredentialVerificationError(CredentialError):
-    """Raised when presented credential material does not verify."""
-
-
-class CredentialStateError(CredentialError):
-    """Raised when a credential is not usable in its current lifecycle state."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -278,13 +238,7 @@ class ProofBinding:
 
 __all__ = [
     "Credential",
-    "CredentialAuditAction",
     "CredentialAuditEvent",
-    "CredentialError",
-    "CredentialKind",
-    "CredentialStateError",
-    "CredentialStatus",
-    "CredentialVerificationError",
     "DpopKeyCredential",
     "IssuedCredential",
     "MtlsCertificateCredential",

@@ -5,7 +5,7 @@ from __future__ import annotations
 from .models import *
 from .planes import *
 from .advanced_identity import *
-from .authn import *
+from .credentials import *
 from .principals import *
 from .protocols import *
 from .resource_server import *

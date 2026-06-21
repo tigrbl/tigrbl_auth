@@ -114,3 +114,13 @@ def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
             elif isinstance(node, ast.ImportFrom) and node.module:
                 imports.add(node.module.split(".")[0])
         assert not (imports & forbidden), path
+
+
+def test_credentials_contracts_are_packaged_by_domain() -> None:
+    contracts_root = ROOT / "pkgs" / "01-contracts" / "tigrbl-identity-contracts" / "src" / "tigrbl_identity_contracts"
+
+    assert not (contracts_root / "authn.py").exists()
+    assert (contracts_root / "credentials" / "__init__.py").exists()
+    assert (contracts_root / "credentials" / "enums.py").exists()
+    assert (contracts_root / "credentials" / "errors.py").exists()
+    assert (contracts_root / "credentials" / "models.py").exists()
