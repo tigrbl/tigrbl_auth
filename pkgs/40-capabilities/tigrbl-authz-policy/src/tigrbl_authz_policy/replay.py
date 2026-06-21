@@ -4,7 +4,7 @@ import hashlib
 import json
 from typing import Any, Mapping
 
-from tigrbl_identity_contracts.authz.replay import (
+from tigrbl_identity_contracts.replay import (
     DecisionStabilityChange,
     DecisionStabilityReport,
     PolicyDeterminismReport,

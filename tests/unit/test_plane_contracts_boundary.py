@@ -250,6 +250,20 @@ def test_liveness_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "liveness" / "__init__.py").exists()
 
 
+def test_replay_contracts_are_domain_packaged() -> None:
+    contracts_root = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts"
+    )
+
+    assert not (contracts_root / "authz" / "replay.py").exists()
+    assert (contracts_root / "replay" / "__init__.py").exists()
+
+
 def test_governance_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
