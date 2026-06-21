@@ -27,7 +27,7 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
     thumbprint_from_cert_pem,
     validate_request_certificate_binding,
 )
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     runtime_security_profile,
     validate_sender_constraint,

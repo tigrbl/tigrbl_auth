@@ -18,7 +18,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
 )
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import SUPPORTED_MTLS_AUTH_METHODS
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import discovery_policy_metadata
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import discovery_policy_metadata
 
 
 def _as_deployment(

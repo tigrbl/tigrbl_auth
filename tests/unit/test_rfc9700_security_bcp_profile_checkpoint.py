@@ -1,4 +1,4 @@
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile, security_bcp_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile, security_bcp_profile
 
 
 def test_rfc9700_security_bcp_profile_exposes_requirements():

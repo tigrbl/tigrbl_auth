@@ -1,5 +1,5 @@
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
-from tigrbl_auth.standards.oauth2.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 
 

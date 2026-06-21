@@ -49,7 +49,7 @@ from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_reso
 from tigrbl_auth_protocol_oauth.standards.rfc6749 import RFC6749Error, enforce_authorization_code_grant, enforce_grant_type, enforce_password_grant
 from tigrbl_auth_protocol_oauth.standards.rfc7636_pkce import verify_code_challenge
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_token_request_allowed,
     dpop_proof_from_request,

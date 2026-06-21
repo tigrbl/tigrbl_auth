@@ -19,7 +19,7 @@ from tigrbl_authn_credentials.token_service import JWTCoder
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     TOKEN_EXCHANGE_GRANT_TYPE,
     OAuthPolicyViolation,
     dpop_proof_from_request,

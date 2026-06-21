@@ -13,12 +13,12 @@ from tigrbl_auth.config.settings import settings
 from tigrbl_identity_storage.tables import _oauth_par as par_ops
 from tigrbl_identity_storage.tables import _oauth_register as register_ops
 from tigrbl_identity_storage.tables import _oauth_token as token_ops
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     runtime_security_profile,
 )
-from tigrbl_auth.standards.oauth2.rfc9728 import build_protected_resource_metadata
+from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
 from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
 
 

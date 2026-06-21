@@ -11,7 +11,7 @@ from tigrbl_auth.errors import InvalidTokenError
 from tigrbl_auth.standards.oauth2.dpop import clear_runtime_state, jwk_from_public_key, jwk_thumbprint, make_proof
 from tigrbl_auth.standards.oauth2.issuer_identification import IssuerIdentificationError, extract_issuer_from_redirect_uri
 from tigrbl_auth.standards.oauth2.jwt_access_tokens import validate_jwt_access_token_claims
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     assert_token_request_allowed,

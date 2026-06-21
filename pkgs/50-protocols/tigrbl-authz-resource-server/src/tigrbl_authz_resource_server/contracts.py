@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 from tigrbl_identity_contracts.resource_server import ProtectedResourceVerifierContract
 
 

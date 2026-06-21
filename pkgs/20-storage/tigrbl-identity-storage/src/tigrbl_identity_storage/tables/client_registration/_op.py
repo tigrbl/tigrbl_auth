@@ -37,7 +37,7 @@ from tigrbl_auth_protocol_oauth.standards.native_apps import (
     validate_native_client_metadata,
     validate_native_redirect_uri,
 )
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 from ..client import Client
 from . import ClientRegistration
 from ..tenant import Tenant

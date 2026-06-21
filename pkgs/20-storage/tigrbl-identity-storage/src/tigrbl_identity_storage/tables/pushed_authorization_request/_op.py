@@ -16,7 +16,7 @@ from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests imp
 from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import REQUEST_URI_PREFIX
 from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     client_certificate_thumbprint_from_request,
     dpop_proof_from_request,
     runtime_security_profile,

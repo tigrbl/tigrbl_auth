@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 
 ML_DSA_65_ALG = "ML-DSA-65"
 

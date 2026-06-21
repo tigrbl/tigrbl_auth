@@ -1,7 +1,7 @@
 import pytest
 
 from tigrbl_auth.config.deployment import resolve_deployment
-from tigrbl_auth.standards.oauth2.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     assert_token_request_allowed,

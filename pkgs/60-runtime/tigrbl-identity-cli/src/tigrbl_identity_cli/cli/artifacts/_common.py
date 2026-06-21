@@ -23,7 +23,7 @@ from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import build_assertion_contract_examples
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import build_client_assertion_contract_examples
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 
 
 def _load_yaml(path: Path) -> Any:

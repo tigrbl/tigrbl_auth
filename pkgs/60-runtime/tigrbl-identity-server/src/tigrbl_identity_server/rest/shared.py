@@ -14,7 +14,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_auth_protocol_oidc.standards.frontchannel_logout import mark_frontchannel_complete
 from tigrbl_auth_protocol_oidc.standards.backchannel_logout import mark_backchannel_complete
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import runtime_security_profile
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import runtime_security_profile
 
 
 class _LazyRuntimeProxy:

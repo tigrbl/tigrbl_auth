@@ -31,7 +31,7 @@ from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import nor
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import extract_resource
 from tigrbl_auth_protocol_oauth.standards.issuer_identification import authorization_response_issuer
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_auth_protocol_oauth.standards.rfc9700 import (
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     runtime_security_profile,

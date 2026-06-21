@@ -5,7 +5,7 @@ from pathlib import Path
 
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
-from tigrbl_auth.standards.oauth2.rfc9728 import build_protected_resource_metadata
+from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
 
 
 ROOT = Path(__file__).resolve().parents[3]
