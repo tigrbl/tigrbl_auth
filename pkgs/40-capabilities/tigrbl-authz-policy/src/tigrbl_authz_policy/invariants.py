@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Callable, Iterable, Mapping
 
+from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_contracts.invariants import (
     AuthorizationInvariant,
     InvariantEvaluation,
@@ -10,10 +10,6 @@ from tigrbl_identity_contracts.invariants import (
     InvariantViolation,
     VerificationMethod,
 )
-
-
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
 
 
 def _stable_tuple(values: Iterable[str]) -> tuple[str, ...]:
@@ -72,7 +68,7 @@ class InvariantRegistry:
                 invariant_id=invariant.invariant_id,
                 passed=True,
                 message="invariant disabled",
-                evaluated_at=_utc_now(),
+                evaluated_at=utc_now_iso(),
             )
         result = evaluator(invariant)
         if isinstance(result, InvariantEvaluation):
@@ -83,7 +79,7 @@ class InvariantRegistry:
             invariant_id=invariant.invariant_id,
             passed=bool(result),
             message="invariant passed" if result else "invariant failed",
-            evaluated_at=_utc_now(),
+            evaluated_at=utc_now_iso(),
         )
 
     def violations(self, evaluations: Iterable[InvariantEvaluation]) -> tuple[InvariantViolation, ...]:

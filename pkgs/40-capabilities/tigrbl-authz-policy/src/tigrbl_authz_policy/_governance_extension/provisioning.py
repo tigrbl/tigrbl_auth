@@ -5,8 +5,9 @@ from datetime import datetime
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now, utc_now_iso
+
 from .models import *
-from .models import _utc_now, _utc_now_iso
 
 class ScimProvisioningPlane:
     def __init__(self) -> None:
@@ -31,7 +32,7 @@ class ScimProvisioningPlane:
             schema_id=schema_id,
             resource_kind=resource_kind,
             required_fields=tuple(sorted(set(required_fields))),
-            registered_at=_utc_now_iso(),
+            registered_at=utc_now_iso(),
         )
         self._schemas[schema_id] = schema
         return schema
@@ -55,7 +56,7 @@ class ScimProvisioningPlane:
             tenant_id=tenant_id,
             user_name=user_name,
             attributes=dict(attributes),
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._users[user_id] = user
         return user
@@ -106,7 +107,7 @@ class ScimProvisioningPlane:
             tenant_id=tenant_id,
             display_name=display_name,
             members=tuple(sorted(set(members))),
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._groups[group_id] = group
         return group
@@ -179,7 +180,7 @@ class EntitlementManager:
             name=name,
             owner=owner,
             description=description,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
         )
         self._definitions[entitlement_id] = definition
         return definition
@@ -201,7 +202,7 @@ class EntitlementManager:
             subject_id=subject_id,
             justification=justification,
             assigned_by=assigned_by,
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
             expires_at=expires_at,
         )
         self._assignments[assignment.assignment_id] = assignment
@@ -214,7 +215,7 @@ class EntitlementManager:
         return updated
 
     def expire_assignments(self, *, reference_time: datetime | None = None) -> tuple[str, ...]:
-        now = reference_time or _utc_now()
+        now = reference_time or utc_now()
         expired: list[str] = []
         for assignment_id, assignment in list(self._assignments.items()):
             if not assignment.active or assignment.expires_at is None:

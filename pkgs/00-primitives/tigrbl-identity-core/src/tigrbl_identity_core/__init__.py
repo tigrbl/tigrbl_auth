@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .clock import Clock, FrozenClock, SystemClock, unix_seconds
+from .clock import Clock, FrozenClock, SystemClock, unix_seconds, utc_now, utc_now_iso
 from .errors import (
     IdentityAuthorizationError,
     IdentityConfigurationError,
@@ -37,6 +37,7 @@ from .primitives import (
 from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonicalize
 from .typing import JWTPayload, Principal, StrUUID, uuid_str
+from .versions import semver_key, version_in_range
 
 __all__ = [
     "Audience",
@@ -79,5 +80,9 @@ __all__ = [
     "new_realm_id",
     "new_tenant_id",
     "unix_seconds",
+    "utc_now",
+    "utc_now_iso",
     "uuid_str",
+    "semver_key",
+    "version_in_range",
 ]

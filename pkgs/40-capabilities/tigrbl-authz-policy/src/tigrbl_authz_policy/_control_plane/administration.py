@@ -3,8 +3,10 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
+
 from .models import *
-from .models import _permission_matches, _utc_now
+from .models import _permission_matches
 
 class ServiceIdentityRegistry:
     def __init__(self) -> None:
@@ -67,7 +69,7 @@ class ServiceIdentityRegistry:
             service_id=service_id,
             label=label,
             raw_key=raw_key or f"svc-{uuid4().hex}",
-            created_at=_utc_now(),
+            created_at=utc_now_iso(),
             expires_at=expires_at,
         )
         self._credentials[credential.credential_id] = credential

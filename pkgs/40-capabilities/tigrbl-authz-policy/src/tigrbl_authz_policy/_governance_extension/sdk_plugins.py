@@ -4,8 +4,10 @@ from dataclasses import replace
 from typing import Any, Callable, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.versions import version_in_range
+
 from .models import *
-from .models import _utc_now_iso, _version_in_range
 
 class SDKEcosystemCatalog:
     def __init__(self) -> None:
@@ -55,7 +57,7 @@ class SDKEcosystemCatalog:
         for package in self._packages.values():
             if language is not None and package.language != language:
                 continue
-            if _version_in_range(runtime_version, package.compatible_runtime_range):
+            if version_in_range(runtime_version, package.compatible_runtime_range):
                 compatible.append(package.sdk_id)
         return tuple(sorted(compatible))
 
@@ -68,7 +70,7 @@ class SDKEcosystemCatalog:
         aligned_sdk_ids: list[str] = []
         mismatches: dict[str, dict[str, str]] = {}
         for package in self._packages.values():
-            if not _version_in_range(runtime_version, package.compatible_runtime_range):
+            if not version_in_range(runtime_version, package.compatible_runtime_range):
                 mismatches[package.sdk_id] = {"runtime": runtime_version, "reason": "runtime version out of range"}
                 continue
             contract_mismatch = {
@@ -134,7 +136,7 @@ class PluginRuntimeRegistry:
             isolation_mode=isolation_mode,
             operator_controls=tuple(sorted(set(operator_controls))),
             fail_behavior=fail_behavior,
-            registered_at=_utc_now_iso(),
+            registered_at=utc_now_iso(),
         )
         self._plugins[plugin_id] = descriptor
         self._hook_handlers[plugin_id] = dict(hooks)
@@ -172,7 +174,7 @@ class PluginRuntimeRegistry:
                     hook_name=hook_name,
                     outcome="failed",
                     message=message,
-                    recorded_at=_utc_now_iso(),
+                    recorded_at=utc_now_iso(),
                 )
             )
             if descriptor.fail_behavior == "disable_on_error" or "disable" in descriptor.operator_controls:
@@ -185,7 +187,7 @@ class PluginRuntimeRegistry:
                 hook_name=hook_name,
                 outcome="succeeded",
                 message="hook completed",
-                recorded_at=_utc_now_iso(),
+                recorded_at=utc_now_iso(),
             )
         )
         return result

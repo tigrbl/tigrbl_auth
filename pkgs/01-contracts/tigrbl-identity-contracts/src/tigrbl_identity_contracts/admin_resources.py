@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Iterable, Mapping
+
+from tigrbl_identity_core.clock import utc_now_iso
 
 
 class AdminResourceKind(str, Enum):
@@ -21,10 +22,6 @@ class AdminResourceStatus(str, Enum):
     DELETED = "deleted"
 
 
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
-
-
 def _clean_tuple(values: Iterable[str] = ()) -> tuple[str, ...]:
     return tuple(sorted({str(value).strip() for value in values if str(value).strip()}))
 
@@ -37,8 +34,8 @@ class AdminResource:
     name: str
     status: AdminResourceStatus = AdminResourceStatus.ACTIVE
     attributes: Mapping[str, Any] = field(default_factory=dict)
-    created_at: str = field(default_factory=_utc_now)
-    updated_at: str = field(default_factory=_utc_now)
+    created_at: str = field(default_factory=utc_now_iso)
+    updated_at: str = field(default_factory=utc_now_iso)
 
     def __post_init__(self) -> None:
         if not self.id or not self.tenant_id or not self.name:

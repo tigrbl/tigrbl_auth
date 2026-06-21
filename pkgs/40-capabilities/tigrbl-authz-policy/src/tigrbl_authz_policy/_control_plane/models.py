@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_contracts.authentication import ServiceIdentityAuthentication
@@ -36,10 +35,6 @@ ADMIN_POLICY_BOUNDARY_FEATURES: tuple[dict[str, Any], ...] = (
 )
 
 PHASE3_ADMIN_POLICY_FEATURES = ADMIN_POLICY_BOUNDARY_FEATURES
-
-
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
 
 
 def _permission_matches(grant: str, permission: str) -> bool:

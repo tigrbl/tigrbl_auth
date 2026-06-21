@@ -35,4 +35,13 @@ def unix_seconds(clock: Clock | None = None) -> int:
     return int(active.now().timestamp())
 
 
-__all__ = ["Clock", "FrozenClock", "SystemClock", "unix_seconds"]
+def utc_now(clock: Clock | None = None) -> datetime:
+    active = clock or SystemClock()
+    return active.now().astimezone(UTC)
+
+
+def utc_now_iso(clock: Clock | None = None) -> str:
+    return utc_now(clock).isoformat()
+
+
+__all__ = ["Clock", "FrozenClock", "SystemClock", "unix_seconds", "utc_now", "utc_now_iso"]

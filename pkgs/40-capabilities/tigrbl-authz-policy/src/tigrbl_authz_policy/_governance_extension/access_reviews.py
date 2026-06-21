@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now, utc_now_iso
+
 from .models import *
-from .models import _utc_now, _utc_now_iso
 from .sdk_plugins import *
 from .provisioning import *
 
@@ -43,7 +44,7 @@ class AccessReviewWorkflow:
         if not reviewers:
             raise ValueError("access review campaign requires at least one reviewer")
         item_ids: list[str] = []
-        due_at = (_utc_now() + timedelta(days=due_in_days)).isoformat()
+        due_at = (utc_now() + timedelta(days=due_in_days)).isoformat()
         assignments = [self._entitlement_manager.assignments[assignment_id] for assignment_id in assignment_ids]
         for index, assignment in enumerate(assignments):
             if assignment.tenant_id != tenant_id:
@@ -66,7 +67,7 @@ class AccessReviewWorkflow:
             name=name,
             reviewer_ids=reviewers,
             item_ids=tuple(item_ids),
-            created_at=_utc_now_iso(),
+            created_at=utc_now_iso(),
             due_at=due_at,
         )
         self._campaigns[campaign_id] = campaign
@@ -99,13 +100,13 @@ class AccessReviewWorkflow:
             reviewer_id=reviewer_id,
             decision=decision,
             reason=reason,
-            recorded_at=_utc_now_iso(),
+            recorded_at=utc_now_iso(),
         )
         self._decisions[review_decision.decision_id] = review_decision
         return review_decision
 
     def escalate_overdue(self, *, reference_time: datetime | None = None) -> tuple[str, ...]:
-        now = reference_time or _utc_now()
+        now = reference_time or utc_now()
         escalated_ids: list[str] = []
         for item_id, item in list(self._items.items()):
             if item.status != "pending":
@@ -121,7 +122,7 @@ class AccessReviewWorkflow:
         open_items = [self._items[item_id] for item_id in campaign.item_ids if self._items[item_id].status == "pending"]
         if open_items:
             raise PermissionError("cannot close campaign with pending review items")
-        updated = replace(campaign, closed_at=_utc_now_iso(), status="closed")
+        updated = replace(campaign, closed_at=utc_now_iso(), status="closed")
         self._campaigns[campaign_id] = updated
         return updated
 

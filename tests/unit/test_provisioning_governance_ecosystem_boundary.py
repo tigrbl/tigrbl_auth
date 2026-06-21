@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import ast
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
@@ -13,6 +15,9 @@ from tigrbl_authz_policy._governance_extension import (
     ScimProvisioningPlane,
     build_provisioning_governance_ecosystem_delivery_summary,
 )
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def _sdk_catalog() -> SDKEcosystemCatalog:
@@ -111,6 +116,34 @@ def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
 
     assert not (removed_inline_surfaces & set(dir(governance_extension)))
     assert not (removed_inline_surfaces & set(dir(management_contracts)))
+
+
+def test_contracts_and_authz_policy_use_identity_core_time_and_version_primitives():
+    helper_names = {"_utc_now", "_utc_now_iso", "_semver_key", "_version_in_range"}
+    roots = (
+        ROOT
+        / "pkgs"
+        / "01-contracts"
+        / "tigrbl-identity-contracts"
+        / "src"
+        / "tigrbl_identity_contracts",
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy",
+    )
+
+    for root in roots:
+        for path in root.rglob("*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            defined = {
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            }
+            assert not (defined & helper_names), path
 
 
 def test_provisioning_governance_ecosystem_boundary_t1_composes_sdk_plugins_scim_entitlements_and_reviews():

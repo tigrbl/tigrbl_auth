@@ -3,8 +3,10 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Iterable, Mapping
+
+from tigrbl_identity_core.clock import utc_now
 
 from ..authority import AuthorityScope
 from .proofs import DelegationAttenuationProof, DelegationGrant
@@ -24,10 +26,6 @@ DELEGATION_GRANT_UIX_WORKFLOWS = (
     "replace",
     "revoke",
 )
-
-
-def _utc_now() -> datetime:
-    return datetime.now(timezone.utc)
 
 
 def _stable_hash(payload: object) -> str:
@@ -68,7 +66,7 @@ class DelegationLifecycleAuditEvent:
     grant_id: str
     actor: str | None = None
     reason: str | None = None
-    occurred_at: datetime = field(default_factory=_utc_now)
+    occurred_at: datetime = field(default_factory=utc_now)
     details: Mapping[str, object] = field(default_factory=dict)
 
 
@@ -114,7 +112,7 @@ class DelegationGrantLifecycleEntry:
     policy_version: str = ""
     provenance_id: str = ""
     constraints: Mapping[str, object] = field(default_factory=dict)
-    created_at: datetime = field(default_factory=_utc_now)
+    created_at: datetime = field(default_factory=utc_now)
     effective_at: datetime | None = None
     expires_at: datetime | None = None
     revoked_at: datetime | None = None
@@ -138,7 +136,7 @@ class DelegationGrantLifecycleEntry:
     def active(self) -> bool:
         if self.status not in ACTIVE_GRANT_STATUSES:
             return False
-        if self.expires_at is not None and self.expires_at <= _utc_now():
+        if self.expires_at is not None and self.expires_at <= utc_now():
             return False
         return self.revoked_at is None
 
@@ -184,5 +182,4 @@ __all__ = [
     "DelegationLifecycleAuditEvent",
     "DelegationTokenLink",
     "_stable_hash",
-    "_utc_now",
 ]

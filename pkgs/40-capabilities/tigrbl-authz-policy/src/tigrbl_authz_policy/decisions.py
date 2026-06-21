@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from typing import Iterable
 
+from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision, PolicyTrace
 from tigrbl_identity_contracts.policy.effects import DecisionEffect
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
@@ -14,10 +14,6 @@ from tigrbl_authz_policy_concrete import (
     PermissionPolicy,
     RolePolicy,
 )
-
-
-def _utc_now() -> str:
-    return datetime.now(tz=timezone.utc).isoformat()
 
 
 def _matches(pattern: str, value: str) -> bool:
@@ -172,7 +168,7 @@ class PolicyDecisionEngine:
             reason=reason,
             matched=matched,
             evaluated_kinds=tuple(kind for kind, _decision in decisions),
-            recorded_at=_utc_now(),
+            recorded_at=utc_now_iso(),
         )
         self._traces.append(trace)
         return PolicyDecision(allowed, reason, matched, trace_id)

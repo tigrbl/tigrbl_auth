@@ -3,10 +3,11 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_contracts.audit.policy import PolicyAuditEvent as _PolicyAuditEvent
 
 from .models import *
-from .models import _permission_matches, _pick_fields, _utc_now
+from .models import _permission_matches, _pick_fields
 from .administration import *
 
 class DelegatedAdministration:
@@ -197,7 +198,7 @@ class PolicyEngine:
                 reason=decision.reason,
                 matched=decision.matched,
                 actor_type=actor_type,
-                recorded_at=_utc_now(),
+                recorded_at=utc_now_iso(),
                 client_id=client_id,
             )
         )

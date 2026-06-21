@@ -5,6 +5,8 @@ from datetime import datetime
 from typing import Iterable, Mapping
 from uuid import uuid4
 
+from tigrbl_identity_core.clock import utc_now
+
 from .authority_graph import AuthorityScope
 from .delegation_proofs import prove_delegation_attenuation
 from ._delegation_lifecycle_models import (
@@ -16,7 +18,6 @@ from ._delegation_lifecycle_models import (
     DelegationLifecycleAuditEvent,
     DelegationTokenLink,
     _stable_hash,
-    _utc_now,
 )
 
 
@@ -59,7 +60,7 @@ class DelegationGrantLifecycleService:
             policy_version=policy_version,
             provenance_id=provenance_id,
             constraints=dict(constraints or {}),
-            effective_at=effective_at or _utc_now(),
+            effective_at=effective_at or utc_now(),
             expires_at=expires_at,
         )
         self._grants[grant.grant_id] = grant
@@ -83,7 +84,7 @@ class DelegationGrantLifecycleService:
         return tuple(sorted(grants, key=lambda grant: grant.created_at))
 
     def activate(self, grant_id: str, *, actor: str | None = None) -> DelegationGrantLifecycleEntry:
-        grant = replace(self.inspect(grant_id), status="active", effective_at=_utc_now())
+        grant = replace(self.inspect(grant_id), status="active", effective_at=utc_now())
         self._grants[grant_id] = grant
         self._audit("delegation.grant.activated", grant_id, actor=actor)
         return grant
@@ -101,7 +102,7 @@ class DelegationGrantLifecycleService:
         return revoked_ids
 
     def expire(self, grant_id: str, *, actor: str | None = None) -> DelegationGrantLifecycleEntry:
-        grant = replace(self.inspect(grant_id), status="expired", expires_at=_utc_now())
+        grant = replace(self.inspect(grant_id), status="expired", expires_at=utc_now())
         self._grants[grant_id] = grant
         self._audit("delegation.grant.expired", grant_id, actor=actor)
         return grant
@@ -126,7 +127,7 @@ class DelegationGrantLifecycleService:
         revoked = replace(
             current,
             status="replaced",
-            revoked_at=_utc_now(),
+            revoked_at=utc_now(),
             revoked_by=actor,
             revoked_reason="replaced",
             replaced_by_grant_id=replacement.grant_id,
@@ -150,7 +151,7 @@ class DelegationGrantLifecycleService:
             grant=grant.to_policy_grant(),
             known_provenance_ids=known_provenance_ids,
             allowed_policy_versions=allowed_policy_versions,
-            evaluated_at=(evaluated_at or _utc_now()).isoformat(),
+            evaluated_at=(evaluated_at or utc_now()).isoformat(),
         )
         failures = tuple(proof.failures + (() if grant.active else ("delegation grant is not active",)))
         proof_hash = _stable_hash(
@@ -216,7 +217,7 @@ class DelegationGrantLifecycleService:
 
     def _revoke_recursive(self, grant_id: str, *, actor: str | None, reason: str) -> tuple[str, ...]:
         grant = self.inspect(grant_id)
-        self._grants[grant_id] = replace(grant, status="revoked", revoked_at=_utc_now(), revoked_by=actor, revoked_reason=reason)
+        self._grants[grant_id] = replace(grant, status="revoked", revoked_at=utc_now(), revoked_by=actor, revoked_reason=reason)
         self._audit("delegation.grant.revoked", grant_id, actor=actor, reason=reason)
         revoked_ids = [grant_id]
         descendants = [
