@@ -204,6 +204,11 @@ def test_authority_contracts_are_domain_packaged() -> None:
     assert (contracts_root / "authority" / "roles.py").exists()
     assert (contracts_root / "authority" / "semantics.py").exists()
     assert (contracts_root / "authority" / "trust_domains.py").exists()
+    assert not hasattr(__import__("tigrbl_identity_contracts.admin").admin, "Role")
+
+    from tigrbl_identity_contracts.authority import Role
+
+    assert Role.__module__ == "tigrbl_identity_contracts.authority.roles"
 
 
 def test_correctness_contracts_are_domain_packaged() -> None:

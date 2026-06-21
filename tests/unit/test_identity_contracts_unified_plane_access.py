@@ -20,7 +20,7 @@ def test_identity_contracts_are_canonical_for_identity_and_admin_contracts() -> 
     assert contracts.Credential.__module__.startswith("tigrbl_identity_contracts")
     assert PolicyRequest.__module__.startswith("tigrbl_identity_contracts.policy")
     assert contracts.ProtectedResourceVerifierContract.__module__.startswith("tigrbl_identity_contracts")
-    assert contracts.Role.__module__.startswith("tigrbl_identity_contracts")
+    assert contracts.Role.__module__ == "tigrbl_identity_contracts.authority.roles"
     assert contracts.AccessDecisionRequest.__module__.startswith("tigrbl_identity_contracts")
     assert KeyRotationPolicyVersion.__module__.startswith("tigrbl_identity_contracts.policy")
     assert not hasattr(contracts, "PolicyRequest")

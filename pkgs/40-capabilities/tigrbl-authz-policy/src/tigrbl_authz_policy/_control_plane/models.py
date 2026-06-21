@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Iterable, Mapping
 
-from tigrbl_identity_contracts.admin import Role
 from tigrbl_identity_contracts.authentication import ServiceIdentityAuthentication
+from tigrbl_identity_contracts.authority import Role
 from tigrbl_identity_contracts.credentials import ServiceCredential
 from tigrbl_identity_contracts.delegation import (
     ADMIN_CLIENT_FIELDS,

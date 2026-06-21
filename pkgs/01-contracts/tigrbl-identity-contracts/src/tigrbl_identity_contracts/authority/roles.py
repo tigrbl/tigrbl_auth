@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from enum import Enum
 
 
@@ -13,6 +14,16 @@ class AuthorityRole(str, Enum):
     SUPERUSER = "superuser"
 
 
+@dataclass(frozen=True, slots=True)
+class Role:
+    name: str
+    permissions: tuple[str, ...]
+    tenant_id: str | None = None
+    denied_permissions: tuple[str, ...] = ()
+    inherited_roles: tuple[str, ...] = ()
+
+
 __all__ = [
     "AuthorityRole",
+    "Role",
 ]
