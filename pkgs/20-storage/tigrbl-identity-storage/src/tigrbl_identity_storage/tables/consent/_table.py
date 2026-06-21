@@ -6,7 +6,7 @@ import datetime as dt
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     HTTPException,
@@ -54,7 +54,7 @@ class MyAccountAuthorizedAppOut(BaseModel):
     revoked_at: str | None = None
 
 
-class Consent(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
+class Consent(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     __tablename__ = "consents"
     __table_args__ = ({"schema": "authn"},)
 

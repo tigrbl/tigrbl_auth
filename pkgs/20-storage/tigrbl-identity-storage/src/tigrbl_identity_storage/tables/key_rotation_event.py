@@ -7,7 +7,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     TenantColumn,
     Timestamped,
     S,
@@ -22,7 +22,7 @@ from tigrbl_identity_storage.framework import (
 )
 
 
-class KeyRotationEvent(Base, GUIDPk, Timestamped, TenantColumn):
+class KeyRotationEvent(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
     __tablename__ = "key_rotation_events"
     __table_args__ = ({"schema": "authn"},)
 

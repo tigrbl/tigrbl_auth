@@ -6,7 +6,7 @@ import copy
 import json
 from typing import Any, Mapping
 
-from tigrbl_identity_storage.framework import Base, Boolean, Mapped, S, String, acol
+from tigrbl_identity_storage.framework import RestOltpTable, Boolean, Mapped, S, String, acol
 
 from ._ops import create_record, delete_record, field, first_record, list_records, record_id, update_record
 
@@ -15,7 +15,7 @@ def _default_status(resource: str) -> str:
     return "staged" if resource in {"keys"} else "active"
 
 
-class OperatorRecord(Base):
+class OperatorRecord(RestOltpTable):
     __tablename__ = "operator_records"
 
     id: Mapped[str] = acol(storage=S(String(512), primary_key=True, nullable=False))

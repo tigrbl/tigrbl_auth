@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_identity_storage.framework import Base, GUIDPk, Mapped, S, String, Timestamped, acol
+from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, Mapped, S, String, Timestamped, acol
 
 from ._ops import create_record, first_record, list_records
 
 
-class AccessReviewDecision(Base, GUIDPk, Timestamped):
+class AccessReviewDecision(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "access_review_decisions"
     __table_args__ = ({"schema": "authn"},)
 

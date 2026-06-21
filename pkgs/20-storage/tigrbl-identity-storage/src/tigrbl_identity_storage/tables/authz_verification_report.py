@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_identity_storage.framework import Base, Boolean, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
+from tigrbl_identity_storage.framework import RestOltpTable, Boolean, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
 from ._ops import create_record, first_record, list_records
 
 
-class AuthzVerificationReport(Base, GUIDPk, Timestamped):
+class AuthzVerificationReport(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "authz_verification_reports"
     __table_args__ = ({"schema": "authn"},)
 

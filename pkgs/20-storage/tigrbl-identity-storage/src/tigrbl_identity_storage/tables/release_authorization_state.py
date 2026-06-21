@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from tigrbl_identity_storage.framework import Base, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
+from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
 from ._ops import create_record, first_record, list_records
 
 
-class ReleaseAuthorizationState(Base, GUIDPk, Timestamped):
+class ReleaseAuthorizationState(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "release_authorization_states"
     __table_args__ = ({"schema": "authn"},)
 

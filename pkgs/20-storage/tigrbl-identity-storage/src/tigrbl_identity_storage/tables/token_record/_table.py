@@ -10,7 +10,7 @@ from typing import Any, Literal, Optional
 from tigrbl.security import Depends as TigrblDepends
 from tigrbl_identity_storage.framework import (
     AsyncSession,
-    Base,
+    RestOltpTable,
     BaseModel,
     Field,
     Request,
@@ -87,7 +87,7 @@ def _to_datetime(value: Any) -> dt.datetime | None:
         return None
 
 
-class TokenRecord(Base, GUIDPk, Timestamped):
+class TokenRecord(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "token_records"
     __table_args__ = ({"schema": "authn"},)
 

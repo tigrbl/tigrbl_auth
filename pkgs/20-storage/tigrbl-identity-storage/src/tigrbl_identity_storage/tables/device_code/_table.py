@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     Timestamped,
@@ -44,7 +44,7 @@ class DeviceAuthorizationOut(BaseModel):
     interval: int
 
 
-class DeviceCode(Base, GUIDPk, Timestamped):
+class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "device_codes"
     __table_args__ = ({"schema": "authn"},)
 

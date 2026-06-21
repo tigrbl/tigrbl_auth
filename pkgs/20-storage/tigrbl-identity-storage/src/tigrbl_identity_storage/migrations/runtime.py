@@ -15,7 +15,7 @@ from tigrbl_identity_runtime.engine_resolver import (
     resolve_api_provider,
     resolve_default_provider,
 )
-from tigrbl_identity_storage.tables import Base
+from tigrbl_identity_storage.tables import RestOltpTable
 from tigrbl_identity_storage.tables.engine import ENGINE
 
 VERSIONS_DIR = Path(__file__).resolve().parent / "versions"
@@ -79,7 +79,7 @@ def iter_migration_modules() -> list[Any]:
 
 def expected_table_names() -> list[str]:
     names: list[str] = []
-    for table in sorted(Base.metadata.sorted_tables, key=lambda item: item.name):
+    for table in sorted(RestOltpTable.metadata.sorted_tables, key=lambda item: item.name):
         if table.schema == "authn":
             names.append(table.name)
     return names

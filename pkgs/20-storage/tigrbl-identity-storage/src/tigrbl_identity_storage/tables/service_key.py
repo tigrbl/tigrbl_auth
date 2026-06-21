@@ -13,7 +13,7 @@ from tigrbl_identity_storage.framework import (
     KeyDigest,
     LastUsed,
     ValidityWindow,
-    Base,
+    RestOltpTable,
     F,
     IO,
     S,
@@ -26,7 +26,7 @@ from tigrbl_identity_storage.framework import (
 from ._ops import first_record
 
 
-class ServiceKey(Base, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
+class ServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
     __tablename__ = "service_keys"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
 

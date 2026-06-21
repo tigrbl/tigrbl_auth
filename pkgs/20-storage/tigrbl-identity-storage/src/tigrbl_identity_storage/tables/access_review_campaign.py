@@ -5,12 +5,12 @@ from __future__ import annotations
 import datetime as dt
 from typing import Any
 
-from tigrbl_identity_storage.framework import Base, GUIDPk, JSON, Mapped, S, String, TZDateTime, Timestamped, acol
+from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, TZDateTime, Timestamped, acol
 
 from ._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
-class AccessReviewCampaign(Base, GUIDPk, Timestamped):
+class AccessReviewCampaign(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "access_review_campaigns"
     __table_args__ = ({"schema": "authn"},)
 

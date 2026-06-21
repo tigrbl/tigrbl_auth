@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     GUIDPk,
     Timestamped,
     TenantBound,
@@ -20,7 +20,7 @@ from tigrbl_identity_storage.framework import (
 )
 
 
-class Service(Base, GUIDPk, Timestamped, TenantBound, Principal, ActiveToggle):
+class Service(RestOltpTable, GUIDPk, Timestamped, TenantBound, Principal, ActiveToggle):
     __tablename__ = "services"
     __table_args__ = ({"schema": "authn"},)
 

@@ -5,12 +5,12 @@ from __future__ import annotations
 import datetime as dt
 from typing import Any
 
-from tigrbl_identity_storage.framework import Base, GUIDPk, Boolean, Integer, Mapped, S, String, TZDateTime, Timestamped, acol
+from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, Boolean, Integer, Mapped, S, String, TZDateTime, Timestamped, acol
 
 from ._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
-class KeyRotationPolicy(Base, GUIDPk, Timestamped):
+class KeyRotationPolicy(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "key_rotation_policies"
     __table_args__ = ({"schema": "authn"},)
 

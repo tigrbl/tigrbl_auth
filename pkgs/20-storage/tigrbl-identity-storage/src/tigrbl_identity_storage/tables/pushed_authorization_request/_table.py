@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     Timestamped,
@@ -71,7 +71,7 @@ def _default_expires_at() -> datetime:
     return datetime.now(tz=timezone.utc) + timedelta(seconds=_default_expires_in())
 
 
-class PushedAuthorizationRequest(Base, GUIDPk, Timestamped):
+class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "par_requests"
     __table_args__ = ({"schema": "authn"},)
 

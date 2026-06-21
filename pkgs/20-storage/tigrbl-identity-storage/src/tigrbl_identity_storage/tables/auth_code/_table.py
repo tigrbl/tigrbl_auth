@@ -9,7 +9,7 @@ from typing import Optional
 from tigrbl.security import Depends as TigrblDepends
 from tigrbl_identity_storage.framework import (
     AsyncSession,
-    Base,
+    RestOltpTable,
     Request,
     TenantColumn,
     Timestamped,
@@ -30,7 +30,7 @@ from .._ops import create_record, read_record, record_id, update_record, utc_now
 from ..engine import get_db
 
 
-class AuthCode(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
+class AuthCode(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     __tablename__ = "auth_codes"
     __table_args__ = ({"schema": "authn"},)
 

@@ -6,7 +6,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     ForeignKeySpec,
     GUIDPk,
     Integer,
@@ -22,7 +22,7 @@ from tigrbl_identity_storage.framework import (
 from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
-class KeyVersion(Base, GUIDPk, Timestamped):
+class KeyVersion(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "identity_key_versions"
     __table_args__ = ({"schema": "authn"},)
 

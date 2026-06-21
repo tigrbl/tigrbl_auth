@@ -7,7 +7,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     TigrblRouter,
     Timestamped,
@@ -32,7 +32,7 @@ class RevocationOut(BaseModel):
     revoked: bool = True
 
 
-class RevokedToken(Base, GUIDPk, Timestamped):
+class RevokedToken(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "revoked_tokens"
     __table_args__ = ({"schema": "authn"},)
 

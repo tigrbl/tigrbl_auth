@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     EmailStr,
@@ -125,7 +125,7 @@ class DynamicClientRegistrationManagementIn(BaseModel):
     backchannel_logout_session_required: bool | None = None
 
 
-class ClientRegistration(Base, GUIDPk, Timestamped, TenantColumn):
+class ClientRegistration(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
     __tablename__ = "client_registrations"
     __table_args__ = ({"schema": "authn"},)
 

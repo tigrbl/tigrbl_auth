@@ -7,7 +7,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     TenantColumn,
     Timestamped,
     S,
@@ -26,7 +26,7 @@ from ._sync import run_async
 from .tenant import Tenant
 
 
-class AuditEvent(Base, GUIDPk, Timestamped, TenantColumn):
+class AuditEvent(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
     __tablename__ = "audit_events"
     __table_args__ = ({"schema": "authn"},)
 

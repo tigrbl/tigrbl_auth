@@ -6,7 +6,7 @@ import datetime as dt
 from typing import Any, Optional
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     HTTPException,
@@ -60,7 +60,7 @@ class MyAccountSessionOut(BaseModel):
     ended_at: str | None = None
 
 
-class AuthSession(Base, GUIDPk, Timestamped, UserColumn, TenantColumn):
+class AuthSession(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     __tablename__ = "sessions"
     __table_args__ = ({"schema": "authn"},)
 

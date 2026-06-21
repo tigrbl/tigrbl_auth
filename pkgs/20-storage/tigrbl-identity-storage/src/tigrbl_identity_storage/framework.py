@@ -6,7 +6,7 @@ from http import HTTPStatus as status
 
 from pydantic import EmailStr, constr
 from swarmauri_core.crypto.types import JWAAlg
-from tigrbl import ForeignKeySpec, HTMLResponse, JSONResponse, RedirectResponse, Response, RestOltpTable as Base
+from tigrbl import ForeignKeySpec, HTMLResponse, JSONResponse, RedirectResponse, Response, RestOltpTable
 from tigrbl import TigrblApp, TigrblRouter, hook_ctx
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
 from tigrbl.core.crud.params import Header
@@ -51,7 +51,7 @@ from tigrbl.types import (
 __all__ = [
     "ActiveToggle",
     "AsyncSession",
-    "Base",
+    "RestOltpTable",
     "BaseModel",
     "Boolean",
     "Bootstrappable",

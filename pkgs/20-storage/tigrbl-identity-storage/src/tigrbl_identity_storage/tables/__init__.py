@@ -2,7 +2,7 @@
 
 from tigrbl import bind
 
-from tigrbl_identity_storage.framework import Base
+from tigrbl_identity_storage.framework import RestOltpTable
 from tigrbl_identity_runtime.settings import settings
 
 from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
@@ -222,7 +222,7 @@ _ensure_runtime_bindings()
 _attach_custom_op_schemas()
 
 __all__ = [
-    "Base",
+    "RestOltpTable",
     "settings",
     "ENGINE",
     "dsn",

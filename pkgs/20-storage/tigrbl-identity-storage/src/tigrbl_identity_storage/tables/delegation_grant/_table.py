@@ -7,7 +7,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     Boolean,
     ForeignKeySpec,
     GUIDPk,
@@ -23,7 +23,7 @@ from tigrbl_identity_storage.framework import (
 from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
-class DelegationGrantRecord(Base, GUIDPk, Timestamped):
+class DelegationGrantRecord(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grants"
     __table_args__ = ({"schema": "authn"},)
 
@@ -99,7 +99,7 @@ class DelegationGrantRecord(Base, GUIDPk, Timestamped):
         return await list_records(cls, db, filters)
 
 
-class DelegationGrantScope(Base, GUIDPk, Timestamped):
+class DelegationGrantScope(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_scopes"
     __table_args__ = ({"schema": "authn"},)
 
@@ -117,7 +117,7 @@ class DelegationGrantScope(Base, GUIDPk, Timestamped):
     constraints: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
 
-class DelegationGrantProof(Base, GUIDPk, Timestamped):
+class DelegationGrantProof(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_proofs"
     __table_args__ = ({"schema": "authn"},)
 
@@ -140,7 +140,7 @@ class DelegationGrantProof(Base, GUIDPk, Timestamped):
         return await create_record(cls, db, payload)
 
 
-class DelegationGrantEdge(Base, GUIDPk, Timestamped):
+class DelegationGrantEdge(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_edges"
     __table_args__ = ({"schema": "authn"},)
 
@@ -157,7 +157,7 @@ class DelegationGrantEdge(Base, GUIDPk, Timestamped):
     active: Mapped[bool] = acol(storage=S(Boolean, nullable=False, default=True))
 
 
-class DelegationGrantTokenLink(Base, GUIDPk, Timestamped):
+class DelegationGrantTokenLink(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_token_links"
     __table_args__ = ({"schema": "authn"},)
 

@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from tigrbl_identity_storage.framework import Base, Integer, Mapped, S, String, acol
+from tigrbl_identity_storage.framework import RestOltpTable, Integer, Mapped, S, String, acol
 
 from ._ops import create_record, field, list_records
 
 
-class OperatorActivity(Base):
+class OperatorActivity(RestOltpTable):
     __tablename__ = "operator_activity"
 
     id: Mapped[int] = acol(storage=S(Integer, primary_key=True, autoincrement=True, nullable=False))

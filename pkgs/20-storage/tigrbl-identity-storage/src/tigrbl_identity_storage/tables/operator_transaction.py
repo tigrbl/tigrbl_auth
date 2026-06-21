@@ -5,12 +5,12 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping
 
-from tigrbl_identity_storage.framework import Base, Mapped, S, String, acol
+from tigrbl_identity_storage.framework import RestOltpTable, Mapped, S, String, acol
 
 from ._ops import create_record, field, list_records
 
 
-class OperatorTransaction(Base):
+class OperatorTransaction(RestOltpTable):
     __tablename__ = "operator_transactions"
 
     transaction_id: Mapped[str] = acol(storage=S(String(255), primary_key=True, nullable=False))

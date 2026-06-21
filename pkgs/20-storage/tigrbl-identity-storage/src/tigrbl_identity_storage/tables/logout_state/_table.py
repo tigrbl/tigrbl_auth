@@ -9,7 +9,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     BaseModel,
     Depends,
     Timestamped,
@@ -50,7 +50,7 @@ class LogoutOut(BaseModel):
     replay_protected: bool = True
 
 
-class LogoutState(Base, GUIDPk, Timestamped):
+class LogoutState(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "logout_state"
     __table_args__ = ({"schema": "authn"},)
 

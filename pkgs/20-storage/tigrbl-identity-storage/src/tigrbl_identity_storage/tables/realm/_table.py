@@ -6,7 +6,7 @@ import uuid
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
-    Base,
+    RestOltpTable,
     Bootstrappable,
     BaseModel,
     ColumnSpec,
@@ -60,7 +60,7 @@ class AdminRealmUpdateIn(BaseModel):
     description: _realm_description | None = None
 
 
-class Realm(Base, GUIDPk, Timestamped, Bootstrappable):
+class Realm(RestOltpTable, GUIDPk, Timestamped, Bootstrappable):
     __tablename__ = "realms"
     __table_args__ = ({"schema": "authn"},)
 

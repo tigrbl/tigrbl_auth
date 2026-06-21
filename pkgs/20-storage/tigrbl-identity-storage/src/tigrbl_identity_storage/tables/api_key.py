@@ -12,7 +12,7 @@ from tigrbl_identity_storage.framework import (
     LastUsed,
     UserColumn,
     ValidityWindow,
-    Base,
+    RestOltpTable,
     F,
     S,
     acol,
@@ -23,7 +23,7 @@ from tigrbl_identity_storage.framework import (
 from ._ops import first_record
 
 
-class ApiKey(Base, GUIDPk, Created, LastUsed, ValidityWindow, UserColumn, KeyDigest):
+class ApiKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, UserColumn, KeyDigest):
     __tablename__ = "api_keys"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
 
