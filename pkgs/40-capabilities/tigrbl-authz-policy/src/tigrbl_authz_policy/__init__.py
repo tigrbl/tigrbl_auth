@@ -112,7 +112,7 @@ from .correctness_report import (
 )
 from .delegation_proofs import (
     DelegationAttenuationProof,
-    DelegationGrant,
+    DelegationGrantSpec,
     prove_delegation_attenuation,
 )
 from .delegation_lifecycle import (
@@ -120,11 +120,8 @@ from .delegation_lifecycle import (
     MANAGEMENT_DELEGATION_SURFACES,
     DelegationGrantEvaluation,
     DelegationGrantLifecycleEntry,
-    DelegationGrantLifecycleService,
     DelegationLifecycleAuditEvent,
     DelegationTokenLink,
-    assert_delegation_management_surface,
-    delegation_grant_uix_workflows,
     normalize_delegation_scopes,
 )
 from .liveness import (
@@ -190,8 +187,7 @@ __all__ = [
     "DelegationAttenuationProof",
     "DelegationGrantEvaluation",
     "DelegationGrantLifecycleEntry",
-    "DelegationGrantLifecycleService",
-    "DelegationGrant",
+    "DelegationGrantSpec",
     "DelegationLifecycleAuditEvent",
     "DelegationPolicy",
     "DelegationTokenLink",
@@ -245,7 +241,6 @@ __all__ = [
     "TenantResidencyRecord",
     "TrustEdge",
     "VerificationMethod",
-    "assert_delegation_management_surface",
     "assert_residency_access",
     "assert_client_mutation_authority",
     "authority_matches",
@@ -259,7 +254,6 @@ __all__ = [
     "compare_policy_version_decisions",
     "compute_authority_closure",
     "default_authorization_invariant_registry",
-    "delegation_grant_uix_workflows",
     "diff_least_authority",
     "evaluate_liveness_convergence",
     "evaluate_residency_access",

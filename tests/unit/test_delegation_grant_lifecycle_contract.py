@@ -3,18 +3,14 @@ from __future__ import annotations
 import asyncio
 import importlib
 from pathlib import Path
-import types
+from types import SimpleNamespace
+from uuid import uuid4
 
 import pytest
 
-from tigrbl_authz_policy import AuthorityScope
-from tigrbl_authz_policy.delegation_lifecycle import (
+from tigrbl_identity_contracts.delegation import (
     DelegationGrantLifecycleEntry,
-    DelegationGrantLifecycleService,
-    DelegationLifecycleAuditEvent,
-    DelegationTokenLink,
-    assert_delegation_management_surface,
-    delegation_grant_uix_workflows,
+    DelegationGrantSpec,
     normalize_delegation_scopes,
 )
 
@@ -22,20 +18,45 @@ from tigrbl_authz_policy.delegation_lifecycle import (
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def _grant_service() -> DelegationGrantLifecycleService:
-    return DelegationGrantLifecycleService()
+class _FakeTableHandlers:
+    def __init__(self) -> None:
+        self.rows: list[dict[str, object]] = []
+        self.create = SimpleNamespace(core=self._create)
+        self.list = SimpleNamespace(core=self._list)
+        self.read = SimpleNamespace(core=self._read)
+        self.update = SimpleNamespace(core=self._update)
+
+    async def _create(self, ctx: dict[str, object]) -> dict[str, object]:
+        payload = dict(ctx.get("payload") or {})
+        payload.setdefault("id", uuid4())
+        self.rows.append(payload)
+        return payload
+
+    async def _list(self, ctx: dict[str, object]) -> dict[str, object]:
+        return {"items": list(self.rows)}
+
+    async def _read(self, ctx: dict[str, object]) -> dict[str, object] | None:
+        ident = (ctx.get("path_params") or {}).get("id")  # type: ignore[union-attr]
+        return next((row for row in self.rows if str(row.get("id")) == str(ident)), None)
+
+    async def _update(self, ctx: dict[str, object]) -> dict[str, object] | None:
+        ident = (ctx.get("path_params") or {}).get("id")  # type: ignore[union-attr]
+        payload = dict(ctx.get("payload") or {})
+        for row in self.rows:
+            if str(row.get("id")) == str(ident):
+                row.update(payload)
+                return row
+        return None
 
 
 def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
-    from tigrbl_identity_contracts.delegation import (
-        DelegationGrantLifecycleEntry as ContractLifecycleEntry,
-        DelegationLifecycleAuditEvent as ContractAuditEvent,
-        DelegationTokenLink as ContractTokenLink,
-    )
+    authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation_lifecycle")
+    contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
 
-    assert DelegationGrantLifecycleEntry is ContractLifecycleEntry
-    assert DelegationLifecycleAuditEvent is ContractAuditEvent
-    assert DelegationTokenLink is ContractTokenLink
+    assert authz_lifecycle.DelegationGrantLifecycleEntry is contracts.DelegationGrantLifecycleEntry
+    assert authz_lifecycle.DelegationLifecycleAuditEvent is contracts.DelegationLifecycleAuditEvent
+    assert authz_lifecycle.DelegationTokenLink is contracts.DelegationTokenLink
+    assert authz_lifecycle.normalize_delegation_scopes is contracts.normalize_delegation_scopes
     assert not (
         ROOT
         / "pkgs"
@@ -45,22 +66,62 @@ def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
         / "tigrbl_authz_policy"
         / "_delegation_lifecycle_models.py"
     ).exists()
-    assert not hasattr(
-        importlib.import_module("tigrbl_identity_contracts.delegation.lifecycle"),
-        "_stable_hash",
+    assert not (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy"
+        / "_delegation_lifecycle_service.py"
+    ).exists()
+
+
+def test_delegation_grant_spec_contract_replaces_policy_grant_name() -> None:
+    contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
+    authz_policy = importlib.import_module("tigrbl_authz_policy")
+    facade = importlib.import_module("tigrbl_auth.services.formal_authorization")
+
+    assert contracts.DelegationGrantSpec is DelegationGrantSpec
+    assert authz_policy.DelegationGrantSpec is DelegationGrantSpec
+    assert facade.DelegationGrantSpec is DelegationGrantSpec
+    assert not hasattr(authz_policy, "DelegationGrant")
+    assert not hasattr(authz_policy, "DelegationGrantLifecycleService")
+    assert not hasattr(facade, "DelegationGrant")
+    assert not hasattr(facade, "DelegationGrantLifecycleService")
+
+
+def test_delegation_lifecycle_entry_converts_to_grant_spec() -> None:
+    entry = DelegationGrantLifecycleEntry(
+        grant_id="dgr:1",
+        delegator="alice",
+        delegate="bob",
+        tenant_ids=("tenant-a",),
+        actions=("client.read",),
+        provenance_id="prov:1",
     )
+
+    spec = entry.to_grant_spec()
+
+    assert isinstance(spec, DelegationGrantSpec)
+    assert spec.delegator == "alice"
+    assert spec.delegate == "bob"
+    assert spec.provenance_id == "prov:1"
+    assert not hasattr(entry, "to_policy_grant")
 
 
 def test_delegation_grant_storage_model_contract() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     auth_tables = importlib.import_module("tigrbl_auth.tables")
 
-    assert storage_tables.DelegationGrantRecord.__tablename__ == "delegation_grants"
+    assert storage_tables.DelegationGrant.__tablename__ == "delegation_grants"
+    assert storage_tables.DelegationGrantRecord is storage_tables.DelegationGrant
+    assert auth_tables.DelegationGrant is storage_tables.DelegationGrant
+    assert auth_tables.DelegationGrantRecord is storage_tables.DelegationGrant
     assert storage_tables.DelegationGrantScope.__tablename__ == "delegation_grant_scopes"
     assert storage_tables.DelegationGrantProof.__tablename__ == "delegation_grant_proofs"
     assert storage_tables.DelegationGrantEdge.__tablename__ == "delegation_grant_edges"
     assert storage_tables.DelegationGrantTokenLink.__tablename__ == "delegation_grant_token_links"
-    assert auth_tables.DelegationGrantRecord is storage_tables.DelegationGrantRecord
 
     metadata_tables = set(storage_tables.RestOltpTable.metadata.tables)
     assert {
@@ -70,35 +131,6 @@ def test_delegation_grant_storage_model_contract() -> None:
         "authn.delegation_grant_edges",
         "authn.delegation_grant_token_links",
     } <= metadata_tables
-
-
-def test_delegation_grant_lifecycle_service_contract() -> None:
-    service = _grant_service()
-    grant = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-        resources=["client:123"],
-        policy_version="v1",
-        provenance_id="prov:known",
-        actor="admin",
-    )
-
-    evaluation = service.evaluate(
-        grant.grant_id,
-        source_scopes=[AuthorityScope("tenant-a", "client.*", "client:123", "")],
-        known_provenance_ids=["prov:known"],
-        allowed_policy_versions=["v1"],
-    )
-
-    assert service.inspect(grant.grant_id).active is True
-    assert evaluation.allowed is True
-    assert evaluation.proof_hash
-    assert "delegation.grant.created" in {event.event_type for event in service.audit_events(grant.grant_id)}
-    assert "delegation.grant.evaluation.allowed" in {
-        event.event_type for event in service.audit_events(grant.grant_id)
-    }
 
 
 def test_delegation_grant_scope_normalization_contract() -> None:
@@ -124,133 +156,93 @@ def test_delegation_grant_scope_normalization_contract() -> None:
         normalize_delegation_scopes(tenant_ids=[], actions=["client.read"])
 
 
-def test_delegation_grant_revocation_collapse_contract() -> None:
-    service = _grant_service()
-    parent = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-    )
-    child = service.create(
-        delegator="bob",
-        delegate="carol",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-        parent_grant_id=parent.grant_id,
-    )
+def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: pytest.MonkeyPatch) -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    grant_handlers = _FakeTableHandlers()
+    edge_handlers = _FakeTableHandlers()
+    proof_handlers = _FakeTableHandlers()
+    token_link_handlers = _FakeTableHandlers()
 
-    revoked_ids = service.revoke(parent.grant_id, actor="admin", reason="security")
+    monkeypatch.setattr(storage_tables.DelegationGrant, "handlers", grant_handlers)
+    monkeypatch.setattr(storage_tables.DelegationGrantEdge, "handlers", edge_handlers)
+    monkeypatch.setattr(storage_tables.DelegationGrantProof, "handlers", proof_handlers)
+    monkeypatch.setattr(storage_tables.DelegationGrantTokenLink, "handlers", token_link_handlers)
 
-    assert revoked_ids == (parent.grant_id, child.grant_id)
-    assert service.inspect(parent.grant_id).active is False
-    assert service.inspect(child.grant_id).active is False
-    with pytest.raises(ValueError):
-        service.link_token(child.grant_id, token="issued-token", subject="carol")
+    async def scenario() -> None:
+        state_grant = await storage_tables.DelegationGrant.create_grant(
+            object(),
+            delegator_subject="alice",
+            delegate_subject="erin",
+        )
+        parent = await storage_tables.DelegationGrant.create_grant(
+            object(),
+            delegator_subject="alice",
+            delegate_subject="bob",
+            tenant_id=uuid4(),
+        )
+        child = await storage_tables.DelegationGrant.create_grant(
+            object(),
+            delegator_subject="bob",
+            delegate_subject="carol",
+            parent_grant_id=parent["id"],
+        )
+        await storage_tables.DelegationGrantEdge.link_edge(
+            object(),
+            parent_grant_id=parent["id"],
+            child_grant_id=child["id"],
+            delegator_subject="bob",
+            delegate_subject="carol",
+        )
 
+        inspected = await storage_tables.DelegationGrant.inspect_grant(object(), grant_id=parent["id"])
+        active = await storage_tables.DelegationGrant.activate_grant(object(), grant_id=state_grant["id"])
+        active_status = active["status"]
+        expired = await storage_tables.DelegationGrant.expire_grant(object(), grant_id=state_grant["id"])
+        replacement = await storage_tables.DelegationGrant.replace_grant(
+            object(),
+            grant_id=child["id"],
+            delegate_subject="dave",
+        )
+        revoked = await storage_tables.DelegationGrant.revoke_grant(
+            object(),
+            grant_id=parent["id"],
+            revoked_by="admin",
+            reason="cleanup",
+            collapse_descendants=True,
+        )
+        grants = await storage_tables.DelegationGrant.list_grants(
+            object(),
+            delegator_subject="alice",
+            delegate_subject="bob",
+        )
+        proof = await storage_tables.DelegationGrantProof.persist_provenance(
+            object(),
+            grant_id=parent["id"],
+            source_scope_hash="source",
+            delegated_scope_hash="delegated",
+            attenuation_result=True,
+            proof_hash="proof:1",
+        )
+        token_link = await storage_tables.DelegationGrantTokenLink.link_token(
+            object(),
+            grant_id=parent["id"],
+            token_hash="token:hash",
+            subject="bob",
+        )
+        token_links = await storage_tables.DelegationGrantTokenLink.list_for_grant(object(), grant_id=parent["id"])
 
-def test_delegation_grant_token_linkage_contract() -> None:
-    service = _grant_service()
-    grant = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-    )
+        assert inspected is parent
+        assert active_status == "active"
+        assert expired["status"] == "expired"
+        assert replacement["parent_grant_id"] == child["id"]
+        assert revoked["status"] == "revoked"
+        assert child["status"] in {"replaced", "revoked"}
+        assert grants == [parent]
+        assert proof["proof_hash"] == "proof:1"
+        assert token_link in token_links
+        assert edge_handlers.rows[0]["active"] is False
 
-    link = service.link_token(
-        grant.grant_id,
-        token="issued-token",
-        subject="bob",
-        actor_subject="alice",
-        authorization_trace_id="trace:1",
-        delegation_provenance_id="lineage:1",
-        source_token="subject-token",
-        actor_token="actor-token",
-    )
-
-    claims = link.as_claims()
-    assert claims["delegation_grant_id"] == grant.grant_id
-    assert claims["authorization_trace_id"] == "trace:1"
-    assert claims["delegation_provenance_id"] == "lineage:1"
-    assert claims["actor_subject"] == "alice"
-    assert claims["source_token_hash"] != "subject-token"
-    assert claims["actor_token_hash"] != "actor-token"
-
-
-def test_delegation_grant_management_api_boundary_contract() -> None:
-    service = _grant_service()
-    grant = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-    )
-
-    projection = service.management_projection(grant.grant_id, surface="tenant-admin-api")
-
-    assert projection["id"] == grant.grant_id
-    assert projection["status"] == "active"
-    assert projection["active"] is True
-    with pytest.raises(PermissionError):
-        assert_delegation_management_surface("oauth-token-endpoint")
-
-
-def test_delegation_grant_audit_events_contract() -> None:
-    service = _grant_service()
-    grant = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-a"],
-        actions=["client.read"],
-        actor="admin",
-    )
-    service.evaluate(
-        grant.grant_id,
-        source_scopes=[AuthorityScope("tenant-a", "client.read", "*", "")],
-    )
-    service.revoke(grant.grant_id, actor="admin", reason="cleanup")
-
-    events = service.audit_events(grant.grant_id)
-    assert [event.event_type for event in events] == [
-        "delegation.grant.created",
-        "delegation.grant.activated",
-        "delegation.grant.evaluation.allowed",
-        "delegation.grant.revoked",
-    ]
-    assert events[-1].reason == "cleanup"
-
-
-def test_delegation_grant_uix_workflows_contract() -> None:
-    workflows = delegation_grant_uix_workflows(surface="platform-admin-api")
-
-    assert {workflow["workflow"] for workflow in workflows} == {
-        "list",
-        "inspect",
-        "create",
-        "replace",
-        "revoke",
-    }
-    assert all(workflow["api_owned"] is True for workflow in workflows)
-
-
-def test_delegation_grant_cross_tenant_denial_contract() -> None:
-    service = _grant_service()
-    grant = service.create(
-        delegator="alice",
-        delegate="bob",
-        tenant_ids=["tenant-b"],
-        actions=["client.read"],
-    )
-
-    evaluation = service.evaluate(
-        grant.grant_id,
-        source_scopes=[AuthorityScope("tenant-a", "client.*", "*", "")],
-    )
-
-    assert evaluation.allowed is False
-    assert evaluation.proof.uncovered_scopes
-    assert "not covered in tenant 'tenant-b'" in " ".join(evaluation.failures)
+    asyncio.run(scenario())
 
 
 def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -284,7 +276,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
     monkeypatch.setattr(
         oauth_exchange,
         "deployment_from_request",
-        lambda *args, **kwargs: types.SimpleNamespace(
+        lambda *args, **kwargs: SimpleNamespace(
             issuer="https://issuer.example",
             protected_resource_identifier="https://issuer.example/resource",
             flag_enabled=lambda flag: flag == "enable_rfc8693",
@@ -293,7 +285,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
     monkeypatch.setattr(
         oauth_exchange,
         "build_protected_resource_verifier_contract",
-        lambda deployment: types.SimpleNamespace(
+        lambda deployment: SimpleNamespace(
             verifier_logic_id="resource-verifier:test",
             required_claims=("iss", "sub", "aud", "exp", "iat"),
         ),
@@ -303,7 +295,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
     monkeypatch.setattr(
         oauth_exchange,
         "validate_sender_constraint",
-        lambda *args, **kwargs: types.SimpleNamespace(
+        lambda *args, **kwargs: SimpleNamespace(
             mechanism="bearer",
             cert_thumbprint=None,
             confirmation_claim=None,
@@ -311,7 +303,7 @@ def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatc
         ),
     )
 
-    request = types.SimpleNamespace(
+    request = SimpleNamespace(
         body=(
             b"grant_type=urn:ietf:params:oauth:grant-type:token-exchange"
             b"&subject_token=subject-token"

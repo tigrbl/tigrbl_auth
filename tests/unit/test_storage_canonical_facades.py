@@ -25,6 +25,7 @@ TABLE_MODULE_EXPORTS = {
     "device_code": ("DeviceCode",),
     "delegated_admin_scope": ("DelegatedAdminScope",),
     "delegation_grant": (
+        "DelegationGrant",
         "DelegationGrantRecord",
         "DelegationGrantScope",
         "DelegationGrantProof",

@@ -5,9 +5,10 @@ from datetime import datetime
 from typing import Iterable, Mapping
 
 from tigrbl_identity_core.clock import utc_now
+from tigrbl_identity_core.normalization import normal_tuple
 
 from ..authority import AuthorityScope
-from .proofs import DelegationAttenuationProof, DelegationGrant
+from .proofs import DelegationAttenuationProof, DelegationGrantSpec
 
 ACTIVE_GRANT_STATUSES = {"active"}
 TERMINAL_GRANT_STATUSES = {"revoked", "expired", "replaced"}
@@ -26,21 +27,16 @@ DELEGATION_GRANT_UIX_WORKFLOWS = (
 )
 
 
-def _normalize_values(values: Iterable[str] | None, *, default: tuple[str, ...] = ()) -> tuple[str, ...]:
-    normalized = {str(value).strip() for value in values or default if str(value).strip()}
-    return tuple(sorted(normalized))
-
-
-def _normalize_delegation_scopes(
+def normalize_delegation_scopes(
     *,
     tenant_ids: Iterable[str],
     actions: Iterable[str],
     resources: Iterable[str] | None = None,
     realm: str = "",
 ) -> tuple[AuthorityScope, ...]:
-    tenants = _normalize_values(tenant_ids)
-    normalized_actions = _normalize_values(actions)
-    normalized_resources = _normalize_values(resources, default=("*",))
+    tenants = normal_tuple(tenant_ids)
+    normalized_actions = normal_tuple(actions)
+    normalized_resources = normal_tuple(resources or ("*",))
     if not tenants:
         raise ValueError("at least one tenant_id is required")
     if not normalized_actions:
@@ -117,9 +113,9 @@ class DelegationGrantLifecycleEntry:
     def __post_init__(self) -> None:
         if not self.delegator or not self.delegate:
             raise ValueError("delegator and delegate are required")
-        object.__setattr__(self, "tenant_ids", _normalize_values(self.tenant_ids))
-        object.__setattr__(self, "actions", _normalize_values(self.actions))
-        object.__setattr__(self, "resources", _normalize_values(self.resources, default=("*",)))
+        object.__setattr__(self, "tenant_ids", normal_tuple(self.tenant_ids))
+        object.__setattr__(self, "actions", normal_tuple(self.actions))
+        object.__setattr__(self, "resources", normal_tuple(self.resources or ("*",)))
         if not self.tenant_ids:
             raise ValueError("tenant_ids are required")
         if not self.actions:
@@ -133,8 +129,8 @@ class DelegationGrantLifecycleEntry:
             return False
         return self.revoked_at is None
 
-    def to_policy_grant(self) -> DelegationGrant:
-        return DelegationGrant(
+    def to_grant_spec(self) -> DelegationGrantSpec:
+        return DelegationGrantSpec(
             delegator=self.delegator,
             delegate=self.delegate,
             tenant_ids=self.tenant_ids,
@@ -148,7 +144,7 @@ class DelegationGrantLifecycleEntry:
         )
 
     def scopes(self) -> tuple[AuthorityScope, ...]:
-        return _normalize_delegation_scopes(
+        return normalize_delegation_scopes(
             tenant_ids=self.tenant_ids,
             actions=self.actions,
             resources=self.resources,
@@ -174,4 +170,5 @@ __all__ = [
     "DelegationGrantLifecycleEntry",
     "DelegationLifecycleAuditEvent",
     "DelegationTokenLink",
+    "normalize_delegation_scopes",
 ]

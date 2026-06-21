@@ -20,10 +20,13 @@ from tigrbl_identity_storage.framework import (
     Timestamped,
     acol,
 )
-from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
+from .._ops import create_record, field, first_record, list_records, record_id, update_record, utc_now
 
 
-class DelegationGrantRecord(RestOltpTable, GUIDPk, Timestamped):
+TERMINAL_GRANT_STATUSES = {"revoked", "expired", "replaced"}
+
+
+class DelegationGrant(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grants"
     __table_args__ = ({"schema": "authn"},)
 
@@ -52,10 +55,32 @@ class DelegationGrantRecord(RestOltpTable, GUIDPk, Timestamped):
     )
 
     @classmethod
-    async def create_grant(cls, db: Any, **payload: Any) -> "DelegationGrantRecord":
+    async def create_grant(cls, db: Any, **payload: Any) -> "DelegationGrant":
         payload.setdefault("status", "active")
         payload.setdefault("effective_at", utc_now())
         return await create_record(cls, db, payload)
+
+    @classmethod
+    async def inspect_grant(cls, db: Any, *, grant_id: uuid.UUID) -> "DelegationGrant | None":
+        return await first_record(cls, db, {"id": grant_id})
+
+    @classmethod
+    async def activate_grant(
+        cls,
+        db: Any,
+        *,
+        grant_id: uuid.UUID,
+        effective_at: dt.datetime | None = None,
+    ) -> "DelegationGrant | None":
+        row = await cls.inspect_grant(db, grant_id=grant_id)
+        if row is None:
+            return None
+        return await update_record(
+            cls,
+            db,
+            record_id(row),
+            {"status": "active", "effective_at": effective_at or utc_now()},
+        )
 
     @classmethod
     async def revoke_grant(
@@ -65,16 +90,90 @@ class DelegationGrantRecord(RestOltpTable, GUIDPk, Timestamped):
         grant_id: uuid.UUID,
         revoked_by: str | None = None,
         reason: str | None = None,
-    ) -> "DelegationGrantRecord | None":
-        row = await first_record(cls, db, {"id": grant_id})
+        collapse_descendants: bool = False,
+    ) -> "DelegationGrant | None":
+        row = await cls.inspect_grant(db, grant_id=grant_id)
+        if row is None:
+            return None
+        revoked = await update_record(
+            cls,
+            db,
+            record_id(row),
+            {"status": "revoked", "revoked_at": utc_now(), "revoked_by": revoked_by, "revoked_reason": reason},
+        )
+        if collapse_descendants:
+            children = await cls.list_grants(db, parent_grant_id=record_id(row))
+            for child in children:
+                if field(child, "status") not in TERMINAL_GRANT_STATUSES:
+                    await cls.revoke_grant(
+                        db,
+                        grant_id=record_id(child),
+                        revoked_by=revoked_by,
+                        reason="ancestor-revoked",
+                        collapse_descendants=True,
+                    )
+            await DelegationGrantEdge.deactivate_children(db, parent_grant_id=record_id(row))
+        return revoked
+
+    @classmethod
+    async def expire_grant(
+        cls,
+        db: Any,
+        *,
+        grant_id: uuid.UUID,
+        expires_at: dt.datetime | None = None,
+    ) -> "DelegationGrant | None":
+        row = await cls.inspect_grant(db, grant_id=grant_id)
         if row is None:
             return None
         return await update_record(
             cls,
             db,
             record_id(row),
-            {"status": "revoked", "revoked_at": utc_now(), "revoked_by": revoked_by, "revoked_reason": reason},
+            {"status": "expired", "expires_at": expires_at or utc_now()},
         )
+
+    @classmethod
+    async def replace_grant(
+        cls,
+        db: Any,
+        *,
+        grant_id: uuid.UUID,
+        replaced_by: str | None = None,
+        reason: str = "replaced",
+        **payload: Any,
+    ) -> "DelegationGrant | None":
+        current = await cls.inspect_grant(db, grant_id=grant_id)
+        if current is None:
+            return None
+        replacement_payload = {
+            "tenant_id": field(current, "tenant_id"),
+            "realm": field(current, "realm", ""),
+            "delegator_subject": field(current, "delegator_subject"),
+            "delegate_subject": field(current, "delegate_subject"),
+            "delegate_type": field(current, "delegate_type", "subject"),
+            "parent_grant_id": record_id(current),
+            "source_authority_ref": field(current, "source_authority_ref"),
+            "policy_version": field(current, "policy_version"),
+            "provenance_id": field(current, "provenance_id"),
+            "constraints": field(current, "constraints"),
+            "expires_at": field(current, "expires_at"),
+        }
+        replacement_payload.update(payload)
+        replacement = await cls.create_grant(db, **replacement_payload)
+        await update_record(
+            cls,
+            db,
+            record_id(current),
+            {
+                "status": "replaced",
+                "revoked_at": utc_now(),
+                "revoked_by": replaced_by,
+                "revoked_reason": reason,
+                "replaced_by_grant_id": record_id(replacement),
+            },
+        )
+        return replacement
 
     @classmethod
     async def list_grants(
@@ -84,14 +183,16 @@ class DelegationGrantRecord(RestOltpTable, GUIDPk, Timestamped):
         tenant_id: uuid.UUID | None = None,
         delegator_subject: str | None = None,
         delegate_subject: str | None = None,
+        parent_grant_id: uuid.UUID | None = None,
         status: str | None = None,
-    ) -> list["DelegationGrantRecord"]:
+    ) -> list["DelegationGrant"]:
         filters = {
             key: value
             for key, value in {
                 "tenant_id": tenant_id,
                 "delegator_subject": delegator_subject,
                 "delegate_subject": delegate_subject,
+                "parent_grant_id": parent_grant_id,
                 "status": status,
             }.items()
             if value is not None
@@ -115,6 +216,10 @@ class DelegationGrantScope(RestOltpTable, GUIDPk, Timestamped):
     audience: Mapped[str | None] = acol(storage=S(String(255), nullable=True))
     resource_indicator: Mapped[str | None] = acol(storage=S(String(255), nullable=True))
     constraints: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
+
+    @classmethod
+    async def list_for_grant(cls, db: Any, *, grant_id: uuid.UUID) -> list["DelegationGrantScope"]:
+        return await list_records(cls, db, {"grant_id": grant_id})
 
 
 class DelegationGrantProof(RestOltpTable, GUIDPk, Timestamped):
@@ -156,6 +261,22 @@ class DelegationGrantEdge(RestOltpTable, GUIDPk, Timestamped):
     provenance_id: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
     active: Mapped[bool] = acol(storage=S(Boolean, nullable=False, default=True))
 
+    @classmethod
+    async def link_edge(cls, db: Any, **payload: Any) -> "DelegationGrantEdge":
+        payload.setdefault("active", True)
+        return await create_record(cls, db, payload)
+
+    @classmethod
+    async def list_children(cls, db: Any, *, parent_grant_id: uuid.UUID) -> list["DelegationGrantEdge"]:
+        return await list_records(cls, db, {"parent_grant_id": parent_grant_id})
+
+    @classmethod
+    async def deactivate_children(cls, db: Any, *, parent_grant_id: uuid.UUID) -> list["DelegationGrantEdge"]:
+        updated: list["DelegationGrantEdge"] = []
+        for edge in await cls.list_children(db, parent_grant_id=parent_grant_id):
+            updated.append(await update_record(cls, db, record_id(edge), {"active": False}))
+        return updated
+
 
 class DelegationGrantTokenLink(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "delegation_grant_token_links"
@@ -178,8 +299,16 @@ class DelegationGrantTokenLink(RestOltpTable, GUIDPk, Timestamped):
     async def link_token(cls, db: Any, **payload: Any) -> "DelegationGrantTokenLink":
         return await create_record(cls, db, payload)
 
+    @classmethod
+    async def list_for_grant(cls, db: Any, *, grant_id: uuid.UUID) -> list["DelegationGrantTokenLink"]:
+        return await list_records(cls, db, {"grant_id": grant_id})
+
+
+DelegationGrantRecord = DelegationGrant
+
 
 __all__ = [
+    "DelegationGrant",
     "DelegationGrantEdge",
     "DelegationGrantProof",
     "DelegationGrantRecord",

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy import AuthorityScope, DelegationGrant, prove_delegation_attenuation
+from tigrbl_authz_policy import AuthorityScope, DelegationGrantSpec, prove_delegation_attenuation
 
 
 def test_delegation_attenuation_t2_rejects_broader_action_resource_tenant_and_realm() -> None:
@@ -10,7 +10,7 @@ def test_delegation_attenuation_t2_rejects_broader_action_resource_tenant_and_re
 
     proof = prove_delegation_attenuation(
         source_scopes=source,
-        grant=DelegationGrant(
+        grant=DelegationGrantSpec(
             delegator="subject:alice",
             delegate="subject:bob",
             tenant_ids=("tenant-a", "tenant-b"),
@@ -28,7 +28,7 @@ def test_delegation_attenuation_t2_rejects_broader_action_resource_tenant_and_re
 def test_delegation_attenuation_t2_checks_chained_attenuation_and_wildcard_narrowing() -> None:
     first_hop = prove_delegation_attenuation(
         source_scopes=(AuthorityScope("tenant-a", "client.*"),),
-        grant=DelegationGrant(
+        grant=DelegationGrantSpec(
             delegator="subject:alice",
             delegate="subject:bob",
             tenant_ids=("tenant-a",),
@@ -39,7 +39,7 @@ def test_delegation_attenuation_t2_checks_chained_attenuation_and_wildcard_narro
     )
     second_hop = prove_delegation_attenuation(
         source_scopes=first_hop.delegated_scopes,
-        grant=DelegationGrant(
+        grant=DelegationGrantSpec(
             delegator="subject:bob",
             delegate="subject:carol",
             tenant_ids=("tenant-a",),
@@ -63,20 +63,20 @@ def test_delegation_attenuation_t2_rejects_revoked_expired_missing_provenance_an
     }
     source = (AuthorityScope("tenant-a", "client.*"),)
 
-    revoked = prove_delegation_attenuation(source_scopes=source, grant=DelegationGrant(**base, revoked=True))
+    revoked = prove_delegation_attenuation(source_scopes=source, grant=DelegationGrantSpec(**base, revoked=True))
     expired = prove_delegation_attenuation(
         source_scopes=source,
-        grant=DelegationGrant(**base, expires_at="2026-06-07T00:00:00+00:00"),
+        grant=DelegationGrantSpec(**base, expires_at="2026-06-07T00:00:00+00:00"),
         evaluated_at="2026-06-07T00:00:01+00:00",
     )
     missing_provenance = prove_delegation_attenuation(
         source_scopes=source,
-        grant=DelegationGrant(**base),
+        grant=DelegationGrantSpec(**base),
         known_provenance_ids=("prov:known",),
     )
     bad_version = prove_delegation_attenuation(
         source_scopes=source,
-        grant=DelegationGrant(**base, policy_version="policy:v2", provenance_id="prov:known"),
+        grant=DelegationGrantSpec(**base, policy_version="policy:v2", provenance_id="prov:known"),
         known_provenance_ids=("prov:known",),
         allowed_policy_versions=("policy:v1",),
     )

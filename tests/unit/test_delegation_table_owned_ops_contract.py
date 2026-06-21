@@ -7,11 +7,13 @@ from pathlib import Path
 DELEGATION_TABLE = (
     Path(__file__).resolve().parents[2]
     / "pkgs"
+    / "20-storage"
     / "tigrbl-identity-storage"
     / "src"
     / "tigrbl_identity_storage"
     / "tables"
-    / "delegation_grant.py"
+    / "delegation_grant"
+    / "_table.py"
 )
 
 
@@ -24,6 +26,14 @@ def _class_methods(class_name: str) -> set[str]:
 
 
 def test_delegation_storage_tables_own_grant_and_provenance_ops() -> None:
-    assert {"create_grant", "revoke_grant", "list_grants"} <= _class_methods("DelegationGrantRecord")
+    assert {
+        "activate_grant",
+        "create_grant",
+        "expire_grant",
+        "inspect_grant",
+        "list_grants",
+        "replace_grant",
+        "revoke_grant",
+    } <= _class_methods("DelegationGrant")
     assert {"persist_provenance"} <= _class_methods("DelegationGrantProof")
-    assert {"link_token"} <= _class_methods("DelegationGrantTokenLink")
+    assert {"link_token", "list_for_grant"} <= _class_methods("DelegationGrantTokenLink")

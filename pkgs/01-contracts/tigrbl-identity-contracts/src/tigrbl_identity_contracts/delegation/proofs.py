@@ -6,7 +6,7 @@ from ..authority import AuthorityScope
 
 
 @dataclass(frozen=True, slots=True)
-class DelegationGrant:
+class DelegationGrantSpec:
     delegator: str
     delegate: str
     tenant_ids: tuple[str, ...]
@@ -38,7 +38,7 @@ class DelegationGrant:
 
 @dataclass(frozen=True, slots=True)
 class DelegationAttenuationProof:
-    grant: DelegationGrant
+    grant: DelegationGrantSpec
     passed: bool
     delegated_scopes: tuple[AuthorityScope, ...]
     uncovered_scopes: tuple[AuthorityScope, ...]
@@ -49,5 +49,5 @@ class DelegationAttenuationProof:
 
 __all__ = [
     "DelegationAttenuationProof",
-    "DelegationGrant",
+    "DelegationGrantSpec",
 ]

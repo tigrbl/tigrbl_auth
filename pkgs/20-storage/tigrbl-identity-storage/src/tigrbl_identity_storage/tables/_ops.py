@@ -21,6 +21,10 @@ UUID_FILTER_KEYS = {
     "session_id",
     "logout_id",
     "consent_id",
+    "grant_id",
+    "parent_grant_id",
+    "child_grant_id",
+    "replaced_by_grant_id",
     "actor_user_id",
     "actor_client_id",
 }

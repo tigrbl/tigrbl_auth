@@ -51,6 +51,7 @@ from .token_record import (
     TokenRecord,
 )
 from .delegation_grant import (
+    DelegationGrant,
     DelegationGrantEdge,
     DelegationGrantProof,
     DelegationGrantRecord,
@@ -124,7 +125,7 @@ def _ensure_runtime_bindings() -> None:
         DeviceCode,
         RevokedToken,
         TokenRecord,
-        DelegationGrantRecord,
+        DelegationGrant,
         DelegationGrantScope,
         DelegationGrantProof,
         DelegationGrantEdge,
@@ -281,6 +282,7 @@ __all__ = [
     "TokenPair",
     "DelegationGrantEdge",
     "DelegationGrantProof",
+    "DelegationGrant",
     "DelegationGrantRecord",
     "DelegationGrantScope",
     "DelegationGrantTokenLink",

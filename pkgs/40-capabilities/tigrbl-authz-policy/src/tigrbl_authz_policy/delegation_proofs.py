@@ -6,14 +6,14 @@ from tigrbl_identity_core.clock import parse_time
 from tigrbl_identity_contracts.authority import AuthorityScope
 from tigrbl_identity_contracts.delegation import (
     DelegationAttenuationProof,
-    DelegationGrant,
+    DelegationGrantSpec,
 )
 
 
 def prove_delegation_attenuation(
     *,
     source_scopes: Iterable[AuthorityScope],
-    grant: DelegationGrant,
+    grant: DelegationGrantSpec,
     known_provenance_ids: Iterable[str] | None = None,
     allowed_policy_versions: Iterable[str] | None = None,
     evaluated_at: str | None = None,
@@ -50,6 +50,6 @@ def prove_delegation_attenuation(
 
 __all__ = [
     "DelegationAttenuationProof",
-    "DelegationGrant",
+    "DelegationGrantSpec",
     "prove_delegation_attenuation",
 ]

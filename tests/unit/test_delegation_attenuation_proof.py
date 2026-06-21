@@ -2,16 +2,16 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_auth.services.formal_authorization import DelegationGrant as FacadeDelegationGrant
-from tigrbl_authz_policy import AuthorityScope, DelegationGrant, prove_delegation_attenuation
+from tigrbl_auth.services.formal_authorization import DelegationGrantSpec as FacadeDelegationGrantSpec
+from tigrbl_authz_policy import AuthorityScope, DelegationGrantSpec, prove_delegation_attenuation
 
 
 def test_delegation_attenuation_t0_exports_facade_identity() -> None:
-    assert FacadeDelegationGrant is DelegationGrant
+    assert FacadeDelegationGrantSpec is DelegationGrantSpec
 
 
 def test_delegation_attenuation_t1_accepts_bounded_delegation() -> None:
-    grant = DelegationGrant(
+    grant = DelegationGrantSpec(
         delegator="subject:alice",
         delegate="subject:bob",
         tenant_ids=("tenant-a",),
@@ -32,7 +32,7 @@ def test_delegation_attenuation_t1_accepts_bounded_delegation() -> None:
 def test_delegation_attenuation_t1_rejects_uncovered_scope() -> None:
     proof = prove_delegation_attenuation(
         source_scopes=(AuthorityScope("tenant-a", "client.read"),),
-        grant=DelegationGrant(
+        grant=DelegationGrantSpec(
             delegator="subject:alice",
             delegate="subject:bob",
             tenant_ids=("tenant-a",),
