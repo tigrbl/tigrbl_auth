@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_contracts.authz.liveness import (
+from tigrbl_identity_contracts.liveness import (
     ConvergenceEvent,
     ConvergenceState,
     LivenessConvergenceReport,
