@@ -115,7 +115,14 @@ def test_principals_t2_rejects_invalid_nonhuman_kind_and_alias_collision() -> No
 
 
 def test_principals_t2_import_dag_stays_clean() -> None:
-    package_root = ROOT / "pkgs" / "tigrbl-identity-principals" / "src" / "tigrbl_identity_principals"
+    package_root = (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-identity-principals"
+        / "src"
+        / "tigrbl_identity_principals"
+    )
     forbidden = {"tigrbl_auth", "tigrbl_identity_admin", "tigrbl_identity_server", "tigrbl_identity_storage"}
 
     for path in package_root.rglob("*.py"):

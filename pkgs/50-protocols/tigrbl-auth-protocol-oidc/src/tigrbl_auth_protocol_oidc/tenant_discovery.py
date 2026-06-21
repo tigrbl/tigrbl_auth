@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from pathlib import Path
 from types import SimpleNamespace
 from typing import Any, Mapping
 
@@ -110,23 +109,6 @@ def tenant_trust_domain_authority_from_root_issuer(
     )
 
 
-def enabled_tenant_record(repo_root: Path, tenant_slug: str) -> dict[str, Any] | None:
-    record_path = Path(repo_root) / ".operator-state" / "tenant" / f"{tenant_slug}.json"
-    if not record_path.exists():
-        return None
-    import json
-
-    record = json.loads(record_path.read_text(encoding="utf-8"))
-    if record is None:
-        return None
-    status = str(record.get("status") or "").lower()
-    if status in {"deleted", "disabled", "revoked"}:
-        return None
-    if record.get("enabled") is False:
-        return None
-    return record
-
-
 def tenant_deployment(deployment: object, tenant_slug: str) -> object:
     authority = resolve_tenant_trust_domain_authority(deployment, tenant_slug)
     try:
@@ -211,7 +193,6 @@ __all__ = [
     "TENANT_OPENID_CONFIGURATION_PATH",
     "build_realm_openid_config",
     "build_tenant_openid_config",
-    "enabled_tenant_record",
     "require_tenant_issuer",
     "realm_deployment",
     "realm_issuer",

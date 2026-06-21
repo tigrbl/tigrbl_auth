@@ -10,9 +10,10 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 ROOT = Path(__file__).resolve().parents[2]
-PRINCIPALS_SRC = ROOT / "pkgs" / "10-domain" / "tigrbl-identity-principals" / "src"
-if str(PRINCIPALS_SRC) not in sys.path:
-    sys.path.append(str(PRINCIPALS_SRC))
+for src in sorted((ROOT / "pkgs").glob("**/src")):
+    value = str(src)
+    if value not in sys.path:
+        sys.path.append(value)
 
 import tigrbl_identity_principals as principals  # noqa: E402
 
@@ -20,13 +21,14 @@ from tigrbl_auth.api.app import build_app  # noqa: E402
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
 from tigrbl_auth.services._operator_store import OperationContext  # noqa: E402
 from tigrbl_auth.services.operator_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
-from tigrbl_identity_principals.tenant_discovery import (  # noqa: E402
+from tigrbl_auth_protocol_oidc.tenant_discovery import (  # noqa: E402
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,
     require_tenant_issuer,
     resolve_tenant_trust_domain_authority,
     tenant_issuer,
 )
+from tigrbl_identity_storage.tables.tenant.operator_state import enabled_tenant_record  # noqa: E402
 
 
 ROOT_ISSUER = "https://id.example.com"
@@ -167,8 +169,11 @@ def test_tenant_public_discovery_boundary_t0_inventory_tracks_all_features():
     assert len(TENANT_PUBLIC_DISCOVERY_BOUNDARY) == 12
     assert {"tenant-issuer", "route", "jwks", "operator-parity", "contract", "snapshot", "validation", "leakage-guard"} <= categories
     assert TENANT_PUBLIC_DISCOVERY_BOUNDARY["feat:route-tenant-jwks-json"]["category"] == "route"
-    assert TENANT_OPENID_CONFIGURATION_PATH == principals.TENANT_OPENID_CONFIGURATION_PATH
-    assert TENANT_JWKS_PATH == principals.TENANT_JWKS_PATH
+    assert TENANT_OPENID_CONFIGURATION_PATH == "/tenants/{tenant_slug}/.well-known/openid-configuration"
+    assert TENANT_JWKS_PATH == "/tenants/{tenant_slug}/.well-known/jwks.json"
+    assert enabled_tenant_record(Path.cwd(), "missing") is None
+    assert not hasattr(principals, "TENANT_OPENID_CONFIGURATION_PATH")
+    assert not hasattr(principals, "TENANT_JWKS_PATH")
     assert not hasattr(principals, "tenant_public_discovery_boundary_manifest")
     assert not hasattr(principals, "tenant_public_discovery_boundary_integrity")
 

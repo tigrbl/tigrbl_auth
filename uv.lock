@@ -2396,7 +2396,7 @@ requires-dist = [
     { name = "tigrbl-identity-oidc", editable = "pkgs/deprecated/tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator", editable = "pkgs/60-runtime/tigrbl-identity-operator" },
     { name = "tigrbl-identity-policy", editable = "pkgs/deprecated/tigrbl-identity-policy" },
-    { name = "tigrbl-identity-principals", editable = "pkgs/10-domain/tigrbl-identity-principals" },
+    { name = "tigrbl-identity-principals", editable = "pkgs/40-capabilities/tigrbl-identity-principals" },
     { name = "tigrbl-identity-resource-server", editable = "pkgs/deprecated/tigrbl-identity-resource-server" },
     { name = "tigrbl-identity-rp", editable = "pkgs/deprecated/tigrbl-identity-rp" },
     { name = "tigrbl-identity-runtime", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
@@ -2710,7 +2710,7 @@ requires-dist = [{ name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" }]
 [[package]]
 name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-domain/tigrbl-identity-principals" }
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-principals" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
 ]

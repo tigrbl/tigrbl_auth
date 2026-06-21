@@ -22,7 +22,7 @@ from tigrbl_identity_server.security.handler_records import (
     token_hash,
     update_handler_record,
 )
-from tigrbl_identity_principals.tenant_discovery import enabled_tenant_record
+from tigrbl_identity_storage.tables.tenant.operator_state import enabled_tenant_record
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,

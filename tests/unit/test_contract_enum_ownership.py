@@ -41,7 +41,7 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
     )
     from tigrbl_identity_admin._control_plane import models as admin_models
     from tigrbl_identity_jose import boundary
-    from tigrbl_identity_principals import models as principal_models
+    from tigrbl_identity_principals import factories as principal_factories
     from tigrbl_identity_contracts import (
         BrowserStoragePolicy,
         JoseKeyStatus,
@@ -59,8 +59,8 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
 
     assert boundary.JoseKeyStatus is JoseKeyStatus
     assert boundary.JoseKeyUse is JoseKeyUse
-    assert principal_models.PrincipalKind is PrincipalKind
-    assert principal_models.PrincipalStatus is PrincipalStatus
+    assert principal_factories.PrincipalKind is PrincipalKind
+    assert principal_factories.PrincipalStatus is PrincipalStatus
     assert oauth_protocol.OAuthGrantStatus is OAuthGrantStatus
     assert token_exchange.TokenType is TokenType
     assert oidc_provider.OidcSessionStatus is OidcSessionStatus

@@ -6,9 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DOMAIN_ROOT = ROOT / "pkgs" / "10-domain"
 
-ALLOWED_DOMAIN_DATACLASSES = {
-    "tigrbl-identity-principals/src/tigrbl_identity_principals/service.py::PrincipalDirectory",
-}
+ALLOWED_DOMAIN_DATACLASSES: set[str] = set()
 
 
 def _dataclass_defs(path: Path) -> set[str]:
@@ -32,9 +30,10 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
         EffectiveKeyRotationPolicy,
         KeyRotationPolicyVersion,
     )
+    from tigrbl_auth_protocol_oidc import tenant_discovery
     from tigrbl_identity_jose import boundary, key_rotation_policy, pqc
     from tigrbl_identity_jose.standards import rfc7516
-    from tigrbl_identity_principals import models, tenant_discovery
+    from tigrbl_identity_principals import factories
 
     assert boundary.JoseKey is user_contracts.JoseKey
     assert boundary.KeyRotationContract is user_contracts.KeyRotationContract
@@ -48,11 +47,11 @@ def test_10_domain_reusable_dataclasses_are_core_contract_reexports() -> None:
     assert KeyRotationAuditEvidence.__name__ == "KeyRotationAuditEvidence"
     assert pqc.PQCSignatureKeyPair is security_trust_contracts.PQCSignatureKeyPair
     assert rfc7516.JWEPolicy is user_contracts.JWEPolicy
-    assert models.Realm is user_contracts.Realm
-    assert models.TenantBoundary is user_contracts.TenantBoundary
-    assert models.Principal is user_contracts.Principal
-    assert models.TenantMembership is user_contracts.TenantMembership
-    assert models.SubjectAlias is user_contracts.SubjectAlias
+    assert factories.Realm is user_contracts.Realm
+    assert factories.TenantBoundary is user_contracts.TenantBoundary
+    assert factories.Principal is user_contracts.Principal
+    assert factories.TenantMembership is user_contracts.TenantMembership
+    assert factories.SubjectAlias is user_contracts.SubjectAlias
     assert tenant_discovery.TenantTrustDomainAuthority is user_contracts.TenantTrustDomainAuthority
     assert tenant_discovery.RealmTrustDomainAuthority is user_contracts.RealmTrustDomainAuthority
     assert not hasattr(tenant_discovery, "TenantPublicDiscoveryBoundaryFeature")

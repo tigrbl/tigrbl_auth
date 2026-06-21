@@ -22,7 +22,6 @@ PYTHON_PACKAGE_LAYERS = {
     },
     "domain": {
         "tigrbl-identity-jose",
-        "tigrbl-identity-principals",
     },
     "storage": {
         "tigrbl-identity-storage",
@@ -35,6 +34,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authz-policy",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
+        "tigrbl-identity-principals",
     },
     "protocols": {
         "tigrbl-auth-protocol-oauth",

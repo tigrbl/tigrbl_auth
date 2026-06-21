@@ -56,7 +56,7 @@ FACADE_MODULES = {
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
     "tigrbl_auth.services.policy_control_plane": "tigrbl_authz_policy.control_plane",
     "tigrbl_auth.services.operator_service": "tigrbl_identity_operator.operator_service",
-    "tigrbl_auth.services.tenant_discovery": "tigrbl_identity_principals.tenant_discovery",
+    "tigrbl_auth.services.tenant_discovery": "tigrbl_auth_protocol_oidc.tenant_discovery",
     "tigrbl_auth.standards.jose.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
     "tigrbl_auth.standards.jose.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.standards.jose.rfc7518": "tigrbl_identity_jose.standards.rfc7518",

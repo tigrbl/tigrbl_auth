@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-principals"
 version = "0.4.0.dev2"
-description = "Tenant, principal, subject context, trust-domain discovery, and identity service helpers for Tigrbl IAM deployments."
+description = "Principal construction, tenant membership, subject alias, and in-memory directory helpers for Tigrbl IAM deployments."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -40,7 +40,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-domain/tigrbl-identity-principals"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-principals"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
 PyPI = "https://pypi.org/project/tigrbl-identity-principals/"
 
