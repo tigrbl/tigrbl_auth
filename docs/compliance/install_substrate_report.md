@@ -1,12 +1,12 @@
 # Install Substrate Report
 
-- Generated at: `20260619T061719Z`
+- Generated at: `20260621T090241Z`
 - Passed: `True`
 - Static manifest passed: `True`
 - Profile: `base`
 - Profile identity: `base@py312`
 - Environment identity present: `True`
-- Current Python: `3.12.5`
+- Current Python: `3.12.9`
 - Current Python supported: `True`
 - Expected supported Python versions: `3.10, 3.11, 3.12`
 - Detected supported Python binaries: `2` / `3`

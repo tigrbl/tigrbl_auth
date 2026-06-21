@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: '2026-06-19'
+generated_at: '2026-06-21'
 projection_of: .ssot/specs/SPEC-1052-ssot-document-authority.yaml
 canonical_ssot_roots:
 - .ssot/registry.json

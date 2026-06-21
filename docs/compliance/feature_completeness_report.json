@@ -44,18 +44,18 @@
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a",
-        "database_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/operator_plane.sqlite3",
-        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/snapshots",
-        "log_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/logs",
+        "state_root": "<operator-state>/operator-state-a530a91be5ca2e9c",
+        "database_path": "<operator-state>/operator_plane.sqlite3",
+        "snapshot_root": "<operator-state>/snapshots",
+        "log_root": "<operator-state>/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/logs/audit-events.jsonl",
-        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/logs/transactions.jsonl",
-        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-51b1a0da8945149a/logs/activity.jsonl"
+        "audit_log_path": "<operator-state>/audit-events.jsonl",
+        "transaction_log_path": "<operator-state>/transactions.jsonl",
+        "activity_log_path": "<operator-state>/activity.jsonl"
       }
     },
     "register_manage_clients": {
@@ -114,7 +114,7 @@
       "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-e10z38t7/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-uqhne5a2/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -157,10 +157,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-e10z38t7/release-bundle"
+        "dist/feature-completeness-sandbox-uqhne5a2/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-e10z38t7/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-uqhne5a2/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -188,10 +188,10 @@
         ],
         "runtime_summary": {
           "runner_count": 3,
-          "ready_count": 3,
-          "missing_count": 0,
+          "ready_count": 1,
+          "missing_count": 2,
           "invalid_count": 0,
-          "application_hash_invariant": false,
+          "application_hash_invariant": true,
           "pyproject_requires_python": ">=3.10,<3.13",
           "supported_python_versions": [
             "3.10",
@@ -212,16 +212,14 @@
           "surface_probe_endpoint_count": 4,
           "surface_probe_passed_count": 4,
           "surface_probe_failed_count": 0,
-          "serve_check_passed_count": 3,
+          "serve_check_passed_count": 1,
           "execution_probe_complete": true,
-          "source_mode": "validated-runs",
+          "source_mode": "live-probe",
           "required_runtime_cell_count": 14,
-          "validated_runtime_cell_count": 14,
-          "validated_runtime_cell_passed_count": 14,
-          "validated_runtime_matrix_green": true,
-          "validated_runtime_identity_ready_count": 14,
-          "validated_runtime_install_evidence_ready_count": 14,
-          "validated_download_collection_present": true
+          "validated_runtime_cell_count": 0,
+          "validated_runtime_cell_passed_count": 0,
+          "validated_runtime_matrix_green": false,
+          "validated_download_collection_present": false
         }
       }
     },
