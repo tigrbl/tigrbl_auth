@@ -63,6 +63,7 @@ def test_security_trust_contract_and_base_packages_export_expected_surfaces() ->
 
     assert contracts.ICapabilityProvider.__name__ == "ICapabilityProvider"
     assert contracts.Artifact.__name__ == "Artifact"
+    assert contracts.JWTPayload.__module__ == "tigrbl_security_trust_contracts.types"
     assert contracts.ProofBinding("dpop", {"jkt": "thumb"}).method == "dpop"
     assert contracts.DPoPBinding(jwk_thumbprint="thumb", htm="get", htu="https://api.example.test", jti="jti").confirmation_claim == {"jkt": "thumb"}
     assert contracts.MTLSBinding(certificate_thumbprint="thumb").confirmation_claim == {"x5t#S256": "thumb"}

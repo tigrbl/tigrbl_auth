@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Mapping, Sequence, TypeAlias
+from typing import Any, Mapping, Sequence, TypeAlias, TypedDict
 
 Alg: TypeAlias = str
 ArtifactKind: TypeAlias = str
@@ -11,6 +11,22 @@ ArtifactFormat: TypeAlias = str
 Canon: TypeAlias = str
 Operation: TypeAlias = str
 KeyRefLike: TypeAlias = str | bytes | Mapping[str, Any]
+
+
+class JWTPayload(TypedDict, total=False):
+    """Neutral JWT claim-set contract; domain layers interpret claim semantics."""
+
+    iss: str
+    sub: str
+    aud: str | Sequence[str]
+    exp: int
+    nbf: int
+    iat: int
+    jti: str
+    typ: str
+    tid: str
+    scope: str
+    cnf: Mapping[str, Any]
 
 
 def _required_text(value: object, field_name: str) -> str:
@@ -430,6 +446,7 @@ __all__ = [
     "DeriveKeyRequest",
     "ExportKeyRequest",
     "IssueRequest",
+    "JWTPayload",
     "KeyArtifact",
     "KeyDescriptor",
     "KeyMaterial",

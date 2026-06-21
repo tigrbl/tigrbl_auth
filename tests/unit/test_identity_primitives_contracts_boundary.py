@@ -63,14 +63,16 @@ def test_identity_primitives_do_not_own_liveness_contracts() -> None:
 def test_identity_primitives_do_not_own_jwt_payload_or_principal_protocol() -> None:
     import tigrbl_identity_core as core
     import tigrbl_identity_core.typing as core_typing
+    import tigrbl_identity_contracts as identity_contracts
     from tigrbl_identity_contracts.principals import PrincipalLike
-    from tigrbl_identity_contracts.tokens import JWTPayload
+    from tigrbl_security_trust_contracts import JWTPayload
 
     assert not hasattr(core, "JWTPayload")
     assert not hasattr(core, "Principal")
     assert not hasattr(core_typing, "JWTPayload")
     assert not hasattr(core_typing, "Principal")
-    assert JWTPayload.__module__ == "tigrbl_identity_contracts.tokens"
+    assert not hasattr(identity_contracts, "JWTPayload")
+    assert JWTPayload.__module__ == "tigrbl_security_trust_contracts.types"
     assert PrincipalLike.__module__ == "tigrbl_identity_contracts.principals.protocols"
 
 
