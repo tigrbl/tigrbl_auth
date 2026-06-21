@@ -13,7 +13,7 @@ from typing import Any, Iterable
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_identity_jose.standards.rfc7519 import encode_jwt
+from tigrbl_auth_protocol_oauth.standards.rfc7519 import encode_jwt
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import validate_client_jwt_bearer
 
 RFC8523_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc8523"

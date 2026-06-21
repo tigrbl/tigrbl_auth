@@ -22,7 +22,7 @@ from tigrbl_auth_protocol_oauth.standards.rfc8693 import (
     include_rfc8693,
 )
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_jose.standards.rfc7519 import encode_jwt
+from tigrbl_auth_protocol_oauth.standards.rfc7519 import encode_jwt
 import time
 
 pytestmark = pytest.mark.usefixtures("enable_rfc8693")

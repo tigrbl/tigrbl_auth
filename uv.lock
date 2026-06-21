@@ -2172,12 +2172,18 @@ source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" }
 dependencies = [
     { name = "swarmauri-signing-dpop" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-jose" },
+    { name = "tigrbl-identity-runtime" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "swarmauri-signing-dpop", specifier = "==0.1.1" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2185,11 +2191,23 @@ name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-jose" },
+    { name = "tigrbl-identity-runtime" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-auth-protocol-rp"

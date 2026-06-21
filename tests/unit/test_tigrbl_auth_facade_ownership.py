@@ -40,8 +40,12 @@ FACADE_MODULES = {
     "tigrbl_auth.api.surfaces": "tigrbl_identity_server.surfaces",
     "tigrbl_auth.config.deployment": "tigrbl_identity_runtime.deployment",
     "tigrbl_auth.config.surfaces": "tigrbl_identity_runtime.surfaces",
-    "tigrbl_auth.jwtoken": "tigrbl_identity_jose.jwtoken",
+    "tigrbl_auth.errors": "tigrbl_identity_core.errors",
+    "tigrbl_auth.jwtoken": "tigrbl_auth_protocol_oauth.jwtoken",
+    "tigrbl_auth.oidc_id_token": "tigrbl_auth_protocol_oidc.id_token",
     "tigrbl_auth.rfc.rfc8693": "tigrbl_auth_protocol_oauth.standards.rfc8693",
+    "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.rfc7519",
+    "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
     "tigrbl_auth.rfc.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.rfc.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.security.admin_gate": "tigrbl_authz_policy.admin_gate",
@@ -52,6 +56,7 @@ FACADE_MODULES = {
     "tigrbl_auth.services.governance_extension_plane": "tigrbl_authz_policy.governance_extension",
     "tigrbl_auth.services.policy_control_plane": "tigrbl_authz_policy.control_plane",
     "tigrbl_auth.services.operator_service": "tigrbl_identity_operator.operator_service",
+    "tigrbl_auth.services.tenant_discovery": "tigrbl_identity_principals.tenant_discovery",
     "tigrbl_auth.standards.jose.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
     "tigrbl_auth.standards.jose.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.standards.jose.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
@@ -79,7 +84,9 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.api.surfaces",
         "tigrbl_auth.config.deployment",
         "tigrbl_auth.config.surfaces",
+        "tigrbl_auth.errors",
         "tigrbl_auth.jwtoken",
+        "tigrbl_auth.oidc_id_token",
         "tigrbl_auth.security.admin_gate",
         "tigrbl_auth.security.certification",
         "tigrbl_auth.security.runtime_metadata",
@@ -87,6 +94,7 @@ INSTALLED_FACADE_MODULES = {
         "tigrbl_auth.services.governance_extension_plane",
         "tigrbl_auth.services.policy_control_plane",
         "tigrbl_auth.services.operator_service",
+        "tigrbl_auth.services.tenant_discovery",
         "tigrbl_auth.release_signing",
         "tigrbl_auth.services.authorization_provenance",
         "tigrbl_auth.services.audit_service",
@@ -282,8 +290,9 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
         ),
         "tigrbl_auth.rfc.rfc7515": "tigrbl_identity_jose.standards.rfc7515",
         "tigrbl_auth.rfc.rfc7516": "tigrbl_identity_jose.standards.rfc7516",
-        "tigrbl_auth.rfc.rfc7519": "tigrbl_identity_jose.standards.rfc7519",
+        "tigrbl_auth.rfc.rfc7519": "tigrbl_auth_protocol_oauth.standards.rfc7519",
         "tigrbl_auth.rfc.rfc7520": "tigrbl_identity_jose.standards.rfc7520",
+        "tigrbl_auth.rfc.rfc8725": "tigrbl_auth_protocol_oauth.standards.rfc8725",
         "tigrbl_auth.rfc.rfc8812": "tigrbl_identity_jose.standards.rfc8812",
     }
 
@@ -367,6 +376,21 @@ def test_tigrbl_auth_facade_declares_canonical_runtime_dependencies() -> None:
             "swarmauri_crypto_paramiko==0.4.0.dev5",
         }
     )
+
+
+def test_jose_no_longer_owns_protocol_jwt_facades() -> None:
+    jose_root = package_root("tigrbl-identity-jose") / "src" / "tigrbl_identity_jose"
+    oauth_root = package_root("tigrbl-auth-protocol-oauth") / "src" / "tigrbl_auth_protocol_oauth"
+    oidc_root = package_root("tigrbl-auth-protocol-oidc") / "src" / "tigrbl_auth_protocol_oidc"
+
+    assert not (jose_root / "jwtoken.py").exists()
+    assert not (jose_root / "jwks_service.py").exists()
+    assert not (jose_root / "standards" / "rfc7519.py").exists()
+    assert not (jose_root / "standards" / "rfc8725.py").exists()
+    assert (oauth_root / "jwtoken.py").exists()
+    assert (oauth_root / "standards" / "rfc7519.py").exists()
+    assert (oauth_root / "standards" / "rfc8725.py").exists()
+    assert (oidc_root / "jwks_service.py").exists()
 
 
 def test_tigrbl_auth_has_no_large_exact_copies_of_split_package_modules() -> None:

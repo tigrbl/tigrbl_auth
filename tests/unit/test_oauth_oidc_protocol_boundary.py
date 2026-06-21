@@ -247,7 +247,7 @@ def test_oidc_t2_rejects_unregistered_redirect_logo_policy_and_session_mismatch(
 
 @pytest.mark.unit
 def test_oauth_oidc_t2_public_boundary_has_no_forbidden_imports() -> None:
-    root = Path("pkgs")
+    root = Path("pkgs") / "50-protocols"
     files = [
         root / "tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/__init__.py",
         root / "tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/protocol.py",

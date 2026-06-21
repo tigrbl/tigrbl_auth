@@ -10,7 +10,7 @@ from tigrbl_identity_core.standards import StandardOwner, describe_owner
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_auth_protocol_oauth.standards.mtls import SUPPORTED_MTLS_AUTH_METHODS
-from tigrbl_identity_jose.standards.rfc7519 import decode_jwt, encode_jwt
+from tigrbl_auth_protocol_oauth.standards.rfc7519 import decode_jwt, encode_jwt
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_ASSERTION_TYPE,
     validate_temporal_claims,

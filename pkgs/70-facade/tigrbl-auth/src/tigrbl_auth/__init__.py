@@ -78,8 +78,8 @@ _MODULE_EXPORTS = {
 }
 
 _SYMBOL_EXPORTS = {
-    "encode_jwt": ("tigrbl_auth.standards.jose.rfc7519", "encode_jwt"),
-    "decode_jwt": ("tigrbl_auth.standards.jose.rfc7519", "decode_jwt"),
+    "encode_jwt": ("tigrbl_auth.rfc.rfc7519", "encode_jwt"),
+    "decode_jwt": ("tigrbl_auth.rfc.rfc7519", "decode_jwt"),
     "encrypt_jwe": ("tigrbl_auth.standards.jose.rfc7516", "encrypt_jwe"),
     "decrypt_jwe": ("tigrbl_auth.standards.jose.rfc7516", "decrypt_jwe"),
     "sign_jws": ("tigrbl_auth.standards.jose.rfc7515", "sign_jws"),

@@ -1,4 +1,4 @@
-"""JWT minting and verification via swarmauri token plugins."""
+"""OAuth-facing JWT minting and verification helpers."""
 
 from __future__ import annotations
 
@@ -9,9 +9,8 @@ from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from typing import Any, Dict, Iterable, Optional, Tuple
 
-from .errors import InvalidTokenError
-
-from .framework import (
+from tigrbl_identity_jose.errors import InvalidTokenError
+from tigrbl_identity_jose.framework import (
     ExportPolicy,
     FileKeyProvider,
     JWTTokenService,

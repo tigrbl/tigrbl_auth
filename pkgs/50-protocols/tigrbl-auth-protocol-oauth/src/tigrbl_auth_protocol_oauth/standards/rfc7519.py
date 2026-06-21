@@ -22,7 +22,7 @@ except ModuleNotFoundError:  # pragma: no cover - dependency-light fallback
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_authn_credentials.token_service import JWTCoder
+from tigrbl_auth_protocol_oauth.jwtoken import JWTCoder
 
 RFC7519_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc7519"
 _FALLBACK_ALGORITHM: Final[str] = "HS256"
