@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 51
+    assert len(packages) == 52
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -64,6 +64,10 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-service-identity-registry"].import_root == "tigrbl_authz_policy_service_identity_registry"
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
+    assert packages["tigrbl-identity-admin-control-plane"].path.as_posix() == (
+        "pkgs/40-capabilities/tigrbl-identity-admin-control-plane"
+    )
+    assert packages["tigrbl-identity-admin-control-plane"].import_root == "tigrbl_identity_admin_control_plane"
     assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
@@ -109,7 +113,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "193"
+    assert payload["count"] == "198"
     assert not any(
         cell["name"]
         in {
@@ -261,6 +265,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy-concrete",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
+        "tigrbl-identity-admin-control-plane",
         "tigrbl-identity-author",
         "tigrbl-identity-concrete",
         "tigrbl-identity-contracts",
@@ -302,6 +307,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-authz-resource-server" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names
+    assert "tigrbl-identity-admin-control-plane" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names

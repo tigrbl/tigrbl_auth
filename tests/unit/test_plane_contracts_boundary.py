@@ -144,10 +144,12 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tigrbl_identity_contracts as user_contracts
     import tigrbl_identity_concrete as concrete
     from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
-    from tigrbl_identity_admin._control_plane import models as admin_models
+    from tigrbl_identity_admin._control_plane import models as legacy_admin_models
+    from tigrbl_identity_admin_control_plane import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
     assert admin_models.App is management_contracts.App
+    assert legacy_admin_models.AdminResource is management_contracts.AdminResource
     assert not hasattr(admin_models, "PrincipalRecord")
     assert not hasattr(admin_models, "AdminAuditEvent")
     assert AdminAuditEvent.__name__ == "AdminAuditEvent"
@@ -462,6 +464,12 @@ def test_contract_packages_do_not_import_capability_runtime_or_storage_packages(
 
 def test_target_capability_packages_no_longer_own_contract_classes() -> None:
     capability_roots = [
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-identity-admin-control-plane"
+        / "src"
+        / "tigrbl_identity_admin_control_plane",
         ROOT
         / "pkgs"
         / "40-capabilities"

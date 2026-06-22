@@ -80,6 +80,7 @@ dependencies = [
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
+    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
@@ -211,6 +212,7 @@ tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", edita
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }
+tigrbl-identity-admin-control-plane = { path = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/01-contracts/tigrbl-identity-contracts", editable = true }
 tigrbl-identity-concrete = { path = "pkgs/10-concrete/tigrbl-identity-concrete", editable = true }

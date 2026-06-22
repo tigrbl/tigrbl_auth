@@ -1,19 +1,6 @@
+"""Compatibility facade for `tigrbl_identity_admin_control_plane`."""
+
 from __future__ import annotations
 
-from .models import (
-    AdminControlPlaneError,
-    AdminResource,
-    AdminResourceKind,
-    AdminResourceStatus,
-    App,
-)
-from .service import AdminControlPlane
-
-__all__ = [
-    'AdminControlPlane',
-    'AdminControlPlaneError',
-    'AdminResource',
-    'AdminResourceKind',
-    'AdminResourceStatus',
-    'App',
-]
+from tigrbl_identity_admin_control_plane import *
+from tigrbl_identity_admin_control_plane import __all__

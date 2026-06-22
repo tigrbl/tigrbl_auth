@@ -58,6 +58,8 @@ def test_pyproject_uses_published_pins_and_extras():
     invariant_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-invariant-registry")["project"]["dependencies"])
     rbac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-rbac-administrator")["project"]["dependencies"])
     service_identity_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-service-identity-registry")["project"]["dependencies"])
+    admin_control_plane_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-control-plane")["project"]["dependencies"])
+    identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
     assert "pqcrypto==0.4.0" not in jose_dependencies
@@ -88,6 +90,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in rbac_administrator_dependencies
     assert "pqcrypto==0.4.0" not in service_identity_registry_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" in service_identity_registry_dependencies
+    assert "pqcrypto==0.4.0" not in admin_control_plane_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in admin_control_plane_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" in admin_control_plane_dependencies
+    assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-admin-gate==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in authz_dependencies

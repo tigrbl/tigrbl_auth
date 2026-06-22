@@ -19,6 +19,9 @@ from tigrbl_identity_admin import (  # noqa: E402
     AdminResourceStatus,
     App,
 )
+from tigrbl_identity_admin_control_plane import (  # noqa: E402
+    AdminControlPlane as CanonicalAdminControlPlane,
+)
 
 
 def _seed_control_plane() -> tuple[AdminControlPlane, str]:
@@ -41,6 +44,7 @@ def test_admin_t0_public_surfaces_are_importable() -> None:
 
     assert principal.display_name == "Tenant User"
     assert admin.list(AdminResourceKind.CREDENTIAL, tenant_id="tenant-a") == ()
+    assert AdminControlPlane is CanonicalAdminControlPlane
 
 
 @pytest.mark.unit
@@ -139,6 +143,9 @@ def test_admin_t2_tenant_isolation_delete_and_audit_guardrails() -> None:
 @pytest.mark.unit
 def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/__init__.py"),
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/models.py"),
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/service.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"),
     ]

@@ -1,15 +1,13 @@
-"""Admin control-plane surfaces for the Tigrbl identity package suite."""
-
 from __future__ import annotations
 
-from tigrbl_identity_admin_control_plane import (
-    AdminControlPlane,
+from .models import (
     AdminControlPlaneError,
     AdminResource,
     AdminResourceKind,
     AdminResourceStatus,
     App,
 )
+from .service import AdminControlPlane
 
 __all__ = [
     "AdminControlPlane",

@@ -1,6 +1,6 @@
-"""Compatibility re-export for split admin control-plane modules."""
+"""Compatibility facade for `tigrbl_identity_admin_control_plane`."""
 
 from __future__ import annotations
 
-from ._control_plane import *
-from ._control_plane import __all__
+from tigrbl_identity_admin_control_plane import *
+from tigrbl_identity_admin_control_plane import __all__
