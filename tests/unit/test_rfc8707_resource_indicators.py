@@ -18,7 +18,7 @@ from tigrbl_identity_storage.tables.auth_code._auth_flows import router
 from tigrbl_identity_server.rest.shared import _jwt
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables import Client
-from tigrbl_authn_credentials.token_service import JWTCoder
+from tigrbl_identity_jose.jwt_coder import JWTCoder
 
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"

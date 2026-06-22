@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
+
+from tigrbl_identity_core.digests import token_hash
 
 from .audit import record_surface_event
 from .resource_service import (
@@ -20,10 +21,6 @@ from .resource_service import (
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-
-def token_hash(token: str) -> str:
-    return hashlib.sha256(str(token).encode("utf-8")).hexdigest()
 
 
 def _normalized_context(

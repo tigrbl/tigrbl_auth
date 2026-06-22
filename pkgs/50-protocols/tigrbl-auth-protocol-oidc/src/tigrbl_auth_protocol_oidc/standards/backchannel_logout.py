@@ -71,7 +71,7 @@ def _persistence():
 
 
 def _jwt_coder_cls():
-    from tigrbl_authn_credentials.token_service import JWTCoder
+    from tigrbl_identity_jose.jwt_coder import JWTCoder
 
     return JWTCoder
 

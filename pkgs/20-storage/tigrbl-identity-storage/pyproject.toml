@@ -37,6 +37,7 @@ dependencies = [
     "email-validator>=2.0",
     "tigrbl==0.4.4.dev1",
     "tigrbl-core==0.4.4.dev1",
+    "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
 ]
 

@@ -8,7 +8,7 @@ from http import HTTPStatus as status
 from tigrbl.requests import Request
 from tigrbl.runtime.status import HTTPException
 
-from tigrbl_authn_credentials.token_service import JWTCoder
+from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_authn_credentials.backends import PasswordBackend
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment

@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
 from collections.abc import Mapping
 from datetime import datetime, timezone
 from typing import Any, Iterable
 from uuid import UUID
+
+from tigrbl_identity_core.digests import token_hash
 
 
 def utc_now() -> datetime:
@@ -28,10 +29,6 @@ UUID_FILTER_KEYS = {
     "actor_user_id",
     "actor_client_id",
 }
-
-
-def token_hash(token: str) -> str:
-    return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
 def coerce_uuid_value(value: Any) -> Any:

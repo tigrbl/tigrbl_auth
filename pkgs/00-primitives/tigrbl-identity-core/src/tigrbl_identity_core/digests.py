@@ -11,4 +11,10 @@ def sha256_text_digest(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
-__all__ = ["sha256_text_digest"]
+def token_hash(token: object) -> str:
+    """Return the stable token/storage identifier digest for a token-like value."""
+
+    return sha256_text_digest(str(token))
+
+
+__all__ = ["sha256_text_digest", "token_hash"]

@@ -6,6 +6,8 @@ import sys
 from datetime import timedelta
 from pathlib import Path
 
+import pytest
+
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
@@ -173,24 +175,22 @@ def test_oauth_protocol_declares_security_proof_dependencies() -> None:
     assert "tigrbl-security-proof-pkce==0.1.0" in set(metadata["project"].get("dependencies", []))
 
 
-def test_credentials_token_service_exports_async_runtime_helper() -> None:
+def test_runtime_token_service_exports_async_runtime_helper() -> None:
     _install_package_src_paths()
 
-    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    module = importlib.import_module("tigrbl_identity_runtime.token_service")
     runtime = importlib.import_module("tigrbl_identity_jose.jwt_runtime")
-    compat_runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
 
     assert callable(module._svc_async)
     assert callable(runtime._svc_async)
     assert module._svc_async is runtime._svc_async
-    assert compat_runtime._svc_async is runtime._svc_async
 
 
-def test_credentials_token_service_reuses_token_contract_defaults_and_errors() -> None:
+def test_runtime_token_service_reuses_token_contract_defaults_and_errors() -> None:
     _install_package_src_paths()
 
     contracts = importlib.import_module("tigrbl_identity_contracts.tokens")
-    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    module = importlib.import_module("tigrbl_identity_runtime.token_service")
     runtime = importlib.import_module("tigrbl_identity_jose.jwt_runtime")
     runtime_source = (
         _package_path("tigrbl-identity-jose")
@@ -210,17 +210,40 @@ def test_credentials_token_service_reuses_token_contract_defaults_and_errors() -
     assert "DEFAULT_ACCESS_TOKEN_TTL" in runtime_source
 
 
-def test_credentials_jwt_coder_exports_async_default_factory() -> None:
+def test_runtime_token_service_uses_provider_jwt_coder() -> None:
     _install_package_src_paths()
 
-    module = importlib.import_module("tigrbl_authn_credentials.token_service")
+    module = importlib.import_module("tigrbl_identity_runtime.token_service")
     coder_module = importlib.import_module("tigrbl_identity_jose.jwt_coder")
-    compat_coder_module = importlib.import_module("tigrbl_authn_credentials._token_service.coder")
 
     assert inspect.iscoroutinefunction(module.JWTCoder.async_default)
     assert inspect.iscoroutinefunction(coder_module.JWTCoder.async_default)
     assert module.JWTCoder is coder_module.JWTCoder
-    assert compat_coder_module.JWTCoder is coder_module.JWTCoder
+
+
+def test_authn_credentials_no_longer_owns_token_or_session_service_modules() -> None:
+    _install_package_src_paths()
+
+    credentials_root = (
+        _package_path("tigrbl-authn-credentials")
+        / "src"
+        / "tigrbl_authn_credentials"
+    )
+
+    assert not (credentials_root / "token_service.py").exists()
+    assert not (credentials_root / "session_service.py").exists()
+    assert not (credentials_root / "_token_service").exists()
+
+    for module_name in (
+        "tigrbl_authn_credentials.token_service",
+        "tigrbl_authn_credentials.session_service",
+        "tigrbl_authn_credentials._token_service",
+    ):
+        for loaded_name in list(sys.modules):
+            if loaded_name == module_name or loaded_name.startswith(f"{module_name}."):
+                sys.modules.pop(loaded_name, None)
+        with pytest.raises(ModuleNotFoundError):
+            importlib.import_module(module_name)
 
 
 def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
@@ -236,26 +259,11 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
         / "tigrbl_identity_jose"
         / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
-    compat_coder_source = (
-        _package_path("tigrbl-authn-credentials")
+    storage_token_service_source = (
+        _package_path("tigrbl-identity-storage")
         / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "coder.py"
-    ).read_text(encoding="utf-8")
-    compat_runtime_source = (
-        _package_path("tigrbl-authn-credentials")
-        / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "runtime.py"
-    ).read_text(encoding="utf-8")
-    credentials_persistence_source = (
-        _package_path("tigrbl-authn-credentials")
-        / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "persistence.py"
+        / "tigrbl_identity_storage"
+        / "token_service.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
         _package_path("tigrbl-identity-server")
@@ -272,10 +280,8 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
     assert '"is_revoked_async": is_revoked_async' in runtime_source
-    assert "persist_token=False" in credentials_persistence_source
+    assert "persist_token=False" in storage_token_service_source
     assert "persist_token=False" in server_handler_source
-    assert "class JWTCoder" not in compat_coder_source
-    assert "def _svc(" not in compat_runtime_source
 
 
 def test_oauth_revocation_exports_async_runtime_hooks() -> None:

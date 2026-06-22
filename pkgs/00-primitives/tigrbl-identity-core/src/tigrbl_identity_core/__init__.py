@@ -5,7 +5,7 @@ from __future__ import annotations
 from .base64url import base64url_decode, base64url_encode
 from .clock import Clock, FrozenClock, SystemClock, parse_time, unix_seconds, utc_now, utc_now_iso
 from .entity_keys import normalize_entity, tenant_key
-from .digests import sha256_text_digest
+from .digests import sha256_text_digest, token_hash
 from .errors import (
     IdentityAuthorizationError,
     IdentityConfigurationError,
@@ -101,6 +101,7 @@ __all__ = [
     "new_realm_id",
     "new_tenant_id",
     "tenant_key",
+    "token_hash",
     "unix_seconds",
     "utc_now",
     "utc_now_iso",

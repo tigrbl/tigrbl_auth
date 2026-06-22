@@ -13,7 +13,7 @@ import pytest
 from tigrbl.runtime.status import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from tigrbl.requests import Request
-from tigrbl_authn_credentials.token_service import InvalidTokenError
+from tigrbl_identity_jose.jwt_coder import InvalidTokenError
 
 from tigrbl_identity_server.security.deps import (
     get_current_principal,

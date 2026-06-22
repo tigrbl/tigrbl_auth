@@ -13,7 +13,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_server.security.context import principal_var
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import resolve_browser_session
 from tigrbl_authn_credentials.backends import ApiKeyBackend, AuthError, PasswordBackend, _active, _first_handler_record
-from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError
+from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import presented_certificate_thumbprint
 from tigrbl_auth_protocol_oauth.standards.bearer_token_usage import extract_bearer_token
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import verify_access_token_sender_constraint

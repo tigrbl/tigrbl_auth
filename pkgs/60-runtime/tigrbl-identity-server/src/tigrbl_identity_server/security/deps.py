@@ -32,7 +32,7 @@ from tigrbl_authn_credentials.backends import (
 )  # PasswordBackend not used here, but re-exported for completeness
 
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_authn_credentials.token_service import JWTCoder, InvalidTokenError
+from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_storage.tables import User
 from tigrbl_identity_server.security.context import principal_var
 from tigrbl_identity_server.security.user_lookup import first_user_by_filters
