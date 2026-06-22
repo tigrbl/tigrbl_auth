@@ -44,6 +44,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-verifier==0.4.0.dev2" in dependencies
+    assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
     assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -67,6 +68,7 @@ def test_pyproject_uses_published_pins_and_extras():
     invariant_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-invariant-registry")["project"]["dependencies"])
     rbac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-rbac-administrator")["project"]["dependencies"])
     service_identity_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-service-identity-registry")["project"]["dependencies"])
+    advanced_authenticator_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-advanced-authenticator-registry")["project"]["dependencies"])
     admin_control_plane_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-control-plane")["project"]["dependencies"])
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
@@ -108,10 +110,17 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in rbac_administrator_dependencies
     assert "pqcrypto==0.4.0" not in service_identity_registry_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" in service_identity_registry_dependencies
+    assert "pqcrypto==0.4.0" not in advanced_authenticator_registry_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in advanced_authenticator_registry_dependencies
+    assert "tigrbl-identity-concrete==0.4.0.dev2" in advanced_authenticator_registry_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" in advanced_authenticator_registry_dependencies
+    assert "tigrbl-identity-jose==0.4.0.dev2" in advanced_authenticator_registry_dependencies
+    assert "tigrbl-identity-admin==0.4.0.dev2" not in advanced_authenticator_registry_dependencies
     assert "pqcrypto==0.4.0" not in admin_control_plane_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in admin_control_plane_dependencies
     assert "tigrbl-identity-core==0.4.0.dev2" in admin_control_plane_dependencies
     assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-admin-gate==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in authz_dependencies

@@ -1,5 +1,8 @@
 import pytest
 
+from tigrbl_identity_admin_advanced_authenticator_registry import (
+    AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
+)
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
@@ -15,6 +18,8 @@ from tigrbl_auth.services.advanced_identity_plane import (
 
 
 def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_replay_safety():
+    assert AdvancedAuthenticatorRegistry is CanonicalAdvancedAuthenticatorRegistry
+
     registry = AdvancedAuthenticatorRegistry()
     passwordless = registry.enroll_passwordless_credential(
         subject_id="alice",

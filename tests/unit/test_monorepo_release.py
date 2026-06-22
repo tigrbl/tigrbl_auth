@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 59
+    assert len(packages) == 60
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -104,6 +104,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
         "pkgs/40-capabilities/tigrbl-identity-admin-control-plane"
     )
     assert packages["tigrbl-identity-admin-control-plane"].import_root == "tigrbl_identity_admin_control_plane"
+    assert packages["tigrbl-identity-admin-advanced-authenticator-registry"].path.as_posix() == (
+        "pkgs/40-capabilities/tigrbl-identity-admin-advanced-authenticator-registry"
+    )
+    assert packages["tigrbl-identity-admin-advanced-authenticator-registry"].import_root == (
+        "tigrbl_identity_admin_advanced_authenticator_registry"
+    )
     assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
@@ -155,7 +161,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "233"
+    assert payload["count"] == "236"
     assert not any(
         cell["name"]
         in {
@@ -244,6 +250,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-auth-release-certification"
+    } == {"3.10", "3.11", "3.12"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-identity-admin-advanced-authenticator-registry"
     } == {"3.10", "3.11", "3.12"}
     assert {
         cell["python_version"]
@@ -358,6 +369,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-identity-storage",
         "tigrbl-auth-release-certification",
         "tigrbl-release-contracts",
+        "tigrbl-identity-admin-advanced-authenticator-registry",
         "tigrbl-security-certificate-mtls",
         "tigrbl-security-proof-dpop",
         "tigrbl-security-proof-pkce",
@@ -396,6 +408,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-authz-resource-server-verifier" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names
+    assert "tigrbl-identity-admin-advanced-authenticator-registry" in root_dependency_names
     assert "tigrbl-identity-admin-control-plane" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
