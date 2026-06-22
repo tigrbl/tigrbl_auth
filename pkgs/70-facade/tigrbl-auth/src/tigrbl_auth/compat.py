@@ -59,12 +59,18 @@ STABLE_ENTRYPOINTS: Mapping[str, StableEntrypoint] = {
         "tigrbl-identity-server",
         deprecated=True,
     ),
-    "plugin_install": StableEntrypoint("plugin_install", "tigrbl_identity_server.plugin", "install", "tigrbl-identity-server", deprecated=True),
+    "plugin_install": StableEntrypoint(
+        "plugin_install",
+        "tigrbl_auth_plugin",
+        "install",
+        "tigrbl-auth-plugin",
+        deprecated=True,
+    ),
     "TigrblAuthPlugin": StableEntrypoint(
         "TigrblAuthPlugin",
-        "tigrbl_identity_server.plugin",
+        "tigrbl_auth_plugin",
         "TigrblAuthPlugin",
-        "tigrbl-identity-server",
+        "tigrbl-auth-plugin",
         deprecated=True,
     ),
     "cli_main": StableEntrypoint("cli_main", "tigrbl_identity_cli.cli.main", "main", "tigrbl-identity-cli", deprecated=True),
@@ -72,7 +78,12 @@ STABLE_ENTRYPOINTS: Mapping[str, StableEntrypoint] = {
 
 
 FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
-    "server": ("tigrbl-identity-server", "tigrbl-identity-runtime", "tigrbl-identity-storage"),
+    "server": (
+        "tigrbl-identity-server",
+        "tigrbl-auth-plugin",
+        "tigrbl-identity-runtime",
+        "tigrbl-identity-storage",
+    ),
     "operator": ("tigrbl-identity-operator", "tigrbl-identity-testkit"),
     "oauth": ("tigrbl-auth-protocol-oauth", "tigrbl-auth-protocol-oidc", "tigrbl-identity-jose"),
     "consumer": ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp"),
@@ -88,6 +99,7 @@ FACADE_EXTRAS: Mapping[str, tuple[str, ...]] = {
         "tigrbl-identity-admin",
         "tigrbl-identity-storage",
         "tigrbl-identity-server",
+        "tigrbl-auth-plugin",
         "tigrbl-identity-runtime",
         "tigrbl-identity-operator",
         "tigrbl-authz-resource-server",

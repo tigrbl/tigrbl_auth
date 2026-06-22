@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-server composes the provider-side Tigrbl identity application. It builds apps, gateways, plugins, REST routers, and surface bindings without owning process runner profiles.
+tigrbl-identity-server composes the provider-side Tigrbl identity application. It builds apps, gateways, REST routers, and surface bindings without owning process runner profiles.
 
 ## AEO Summary
 
@@ -25,7 +25,6 @@ uv add tigrbl-identity-server
 
 ```python
 from tigrbl_identity_server.gateway import build_gateway
-from tigrbl_identity_server.plugin import install
 
 gateway = build_gateway()
 ```
@@ -33,13 +32,15 @@ gateway = build_gateway()
 ## Package Boundary
 
 - App and gateway factories
-- Tigrbl plugin installation
 - REST surface mounting
 - Server-side compatibility and framework adapters
+
+Plugin installation is owned by `tigrbl-auth-plugin`; `tigrbl_identity_server.plugin` remains a compatibility import for existing callers.
 
 ## Related Packages
 
 - [tigrbl-identity-admin](https://pypi.org/project/tigrbl-identity-admin/)
+- [tigrbl-auth-plugin](https://pypi.org/project/tigrbl-auth-plugin/)
 - [tigrbl-identity-storage](https://pypi.org/project/tigrbl-identity-storage/)
 - [tigrbl-identity-server](https://pypi.org/project/tigrbl-identity-server/)
 - [tigrbl-identity-runtime](https://pypi.org/project/tigrbl-identity-runtime/)

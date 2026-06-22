@@ -2121,6 +2121,7 @@ source = { editable = "pkgs/70-facade/tigrbl-auth" }
 dependencies = [
     { name = "swarmauri-crypto-paramiko" },
     { name = "swarmauri-standard" },
+    { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-rp" },
@@ -2149,6 +2150,7 @@ dependencies = [
 requires-dist = [
     { name = "swarmauri-crypto-paramiko", specifier = "==0.4.0.dev5" },
     { name = "swarmauri-standard", specifier = "==0.10.0" },
+    { name = "tigrbl-auth-plugin", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-rp", specifier = "==0.4.0.dev2" },
@@ -2171,6 +2173,21 @@ requires-dist = [
     { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-signing-pqc", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-auth-plugin"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/60-runtime/tigrbl-auth-plugin" }
+dependencies = [
+    { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-server" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-server", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2288,6 +2305,7 @@ dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-atoms" },
     { name = "tigrbl-auth" },
+    { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
@@ -2440,6 +2458,7 @@ requires-dist = [
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-atoms", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
+    { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" },
     { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc-backchannel-replay-store" },

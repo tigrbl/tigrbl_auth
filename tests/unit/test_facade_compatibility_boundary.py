@@ -75,6 +75,10 @@ def test_facade_t0_public_surfaces_and_entrypoint_manifest_are_importable() -> N
         assert facade.__file__ and "pkgs" in facade.__file__
         assert "app" in compat.STABLE_ENTRYPOINTS
         assert compat.STABLE_ENTRYPOINTS["app"].package == "tigrbl-identity-server"
+        assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].module == "tigrbl_auth_plugin"
+        assert compat.STABLE_ENTRYPOINTS["TigrblAuthPlugin"].package == "tigrbl-auth-plugin"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].module == "tigrbl_auth_plugin"
+        assert compat.STABLE_ENTRYPOINTS["plugin_install"].package == "tigrbl-auth-plugin"
         assert compat.extras_for("consumer") == ("tigrbl-authz-resource-server", "tigrbl-auth-protocol-rp")
         assert facade.security is importlib.import_module("tigrbl_auth.security")
         assert facade.standards is importlib.import_module("tigrbl_auth.standards")
@@ -116,6 +120,7 @@ def test_facade_t1_extras_map_covers_product_install_groups() -> None:
         compat = importlib.import_module("tigrbl_auth.compat")
 
         assert "tigrbl-identity-server" in compat.extras_for("server")
+        assert "tigrbl-auth-plugin" in compat.extras_for("server")
         assert "tigrbl-identity-operator" in compat.extras_for("operator")
         assert "tigrbl-auth-protocol-oauth" in compat.extras_for("oauth")
         assert "tigrbl-auth-protocol-rp" in compat.extras_for("consumer")

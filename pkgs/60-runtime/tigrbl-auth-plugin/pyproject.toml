@@ -1,18 +1,16 @@
 [project]
-name = "tigrbl-identity-server"
+name = "tigrbl-auth-plugin"
 version = "0.4.0.dev2"
-description = "Tigrbl ASGI identity server composition, app factories, gateway factories, routers, and REST surfaces."
+description = "Standalone TigrblAuthPlugin adoption adapter for installing Tigrbl auth surfaces into an existing Tigrbl app."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 keywords = [
     "tigrbl",
+    "auth",
     "identity",
-    "server",
-    "asgi",
-    "gateway",
     "plugin",
-    "rest",
+    "asgi",
     "oauth",
     "oidc",
 ]
@@ -33,22 +31,20 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "email-validator>=2.0",
-    "tigrbl==0.4.4.dev1",
-    "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
-    "tigrbl-core==0.4.4.dev1",
+    "tigrbl-identity-runtime==0.4.0.dev2",
+    "tigrbl-identity-server==0.4.0.dev2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tigrbl-identity-server"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tigrbl-auth-plugin"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-server/"
+PyPI = "https://pypi.org/project/tigrbl-auth-plugin/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_server", from = "src" }]
+packages = [{ include = "tigrbl_auth_plugin", from = "src" }]
