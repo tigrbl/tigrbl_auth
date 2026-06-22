@@ -215,6 +215,7 @@ def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
         root / "40-capabilities/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/engine.py",
+        root / "40-capabilities/tigrbl-authz-policy-invariant-registry/src/tigrbl_authz_policy_invariant_registry/registry.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
     ]

@@ -36,6 +36,7 @@ classifiers = [
 
 dependencies = [
     "tigrbl-authz-policy==0.4.0.dev2",
+    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
 ]
 

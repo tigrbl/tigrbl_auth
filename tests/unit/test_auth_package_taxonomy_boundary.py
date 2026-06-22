@@ -23,6 +23,7 @@ COMPAT_TO_PREFERRED = {
 DIST_TO_IMPORT_ROOT = {
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
     "tigrbl-authz-policy-decision-engine": "tigrbl_authz_policy_decision_engine",
+    "tigrbl-authz-policy-invariant-registry": "tigrbl_authz_policy_invariant_registry",
     "tigrbl-authz-policy": "tigrbl_authz_policy",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
@@ -37,6 +38,10 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
     "tigrbl-identity-oauth": "tigrbl_identity_oauth",
     "tigrbl-identity-oidc": "tigrbl_identity_oidc",
     "tigrbl-identity-rp": "tigrbl_identity_rp",
+}
+
+DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
+    "tigrbl_identity_policy/invariants.py": "tigrbl_authz_policy_invariant_registry",
 }
 
 
@@ -103,8 +108,13 @@ def test_deprecated_taxonomy_roots_delegate_to_preferred_roots() -> None:
         preferred_root = COMPAT_TO_PREFERRED[import_root]
         for path in package_root.rglob("*.py"):
             text = path.read_text(encoding="utf-8")
+            relative_module = path.relative_to(package_root).as_posix()
+            expected_root = DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT.get(
+                f"{import_root}/{relative_module}",
+                preferred_root,
+            )
             assert "_CANONICAL_MODULE" in text, path
-            assert preferred_root in text, path
+            assert expected_root in text, path
             assert _absolute_imports(path) <= {"__future__", "importlib", "warnings"}, path
 
 

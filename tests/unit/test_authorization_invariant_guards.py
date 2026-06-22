@@ -18,6 +18,11 @@ from tigrbl_auth.services.policy_invariants import (
     AuthorizationInvariant as FacadeAuthorizationInvariant,
     InvariantRegistry as FacadeInvariantRegistry,
 )
+from tigrbl_authz_policy_invariant_registry import (
+    AuthorizationInvariant as CanonicalAuthorizationInvariant,
+    InvariantRegistry as CanonicalInvariantRegistry,
+    default_authorization_invariant_registry as canonical_authorization_invariant_registry,
+)
 from tigrbl_authz_policy import (
     AuthorizationInvariant,
     InvariantEvaluation,
@@ -29,6 +34,9 @@ from tigrbl_authz_policy import (
 
 
 def test_authorization_invariant_registry_t0_exports_public_surfaces() -> None:
+    assert AuthorizationInvariant is CanonicalAuthorizationInvariant
+    assert InvariantRegistry is CanonicalInvariantRegistry
+    assert default_authorization_invariant_registry is canonical_authorization_invariant_registry
     assert FacadeAuthorizationInvariant is AuthorizationInvariant
     assert FacadeInvariantRegistry is InvariantRegistry
     assert VerificationMethod.GRAPH.value == "graph"
