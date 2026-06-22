@@ -53,6 +53,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-admin-federation-registry",
         "tigrbl-identity-admin-policy-registry",
         "tigrbl-identity-admin-relationship-graph",
+        "tigrbl-identity-admin-trust-federation-graph",
         "tigrbl-identity-principals",
     },
     "protocols": {

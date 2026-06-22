@@ -49,6 +49,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in dependencies
+    assert "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
     assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
@@ -78,6 +79,7 @@ def test_pyproject_uses_published_pins_and_extras():
     federation_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-federation-registry")["project"]["dependencies"])
     policy_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-policy-registry")["project"]["dependencies"])
     relationship_graph_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-relationship-graph")["project"]["dependencies"])
+    trust_federation_graph_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-trust-federation-graph")["project"]["dependencies"])
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     dpop_cnf_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-dpop-cnf-binding-validator")["project"]["dependencies"])
@@ -143,12 +145,18 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-contracts==0.4.0.dev2" in relationship_graph_dependencies
     assert "tigrbl-identity-core==0.4.0.dev2" in relationship_graph_dependencies
     assert "tigrbl-identity-admin==0.4.0.dev2" not in relationship_graph_dependencies
+    assert "pqcrypto==0.4.0" not in trust_federation_graph_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in trust_federation_graph_dependencies
+    assert "tigrbl-identity-concrete==0.4.0.dev2" in trust_federation_graph_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" in trust_federation_graph_dependencies
+    assert "tigrbl-identity-admin==0.4.0.dev2" not in trust_federation_graph_dependencies
     assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2" in identity_admin_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-admin-gate==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in authz_dependencies

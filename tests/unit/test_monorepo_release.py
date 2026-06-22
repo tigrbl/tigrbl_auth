@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 64
+    assert len(packages) == 65
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -134,6 +134,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-identity-admin-relationship-graph"].import_root == (
         "tigrbl_identity_admin_relationship_graph"
     )
+    assert packages["tigrbl-identity-admin-trust-federation-graph"].path.as_posix() == (
+        "pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph"
+    )
+    assert packages["tigrbl-identity-admin-trust-federation-graph"].import_root == (
+        "tigrbl_identity_admin_trust_federation_graph"
+    )
     assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
     assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
     assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
@@ -185,7 +191,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "256"
+    assert payload["count"] == "261"
     assert not any(
         cell["name"]
         in {
@@ -299,6 +305,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-identity-admin-relationship-graph"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-identity-admin-trust-federation-graph"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -418,6 +429,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-identity-admin-federation-registry",
         "tigrbl-identity-admin-policy-registry",
         "tigrbl-identity-admin-relationship-graph",
+        "tigrbl-identity-admin-trust-federation-graph",
         "tigrbl-security-certificate-mtls",
         "tigrbl-security-proof-dpop",
         "tigrbl-security-proof-pkce",
@@ -462,6 +474,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-identity-admin-federation-registry" in root_dependency_names
     assert "tigrbl-identity-admin-policy-registry" in root_dependency_names
     assert "tigrbl-identity-admin-relationship-graph" in root_dependency_names
+    assert "tigrbl-identity-admin-trust-federation-graph" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-auth-protocol-oidc-backchannel-replay-store" in root_dependency_names

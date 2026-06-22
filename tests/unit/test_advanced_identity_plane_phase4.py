@@ -7,6 +7,7 @@ from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as C
 from tigrbl_identity_admin_federation_registry import FederationRegistry as CanonicalFederationRegistry
 from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
 from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
+from tigrbl_identity_admin_trust_federation_graph import TrustFederationGraph as CanonicalTrustFederationGraph
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
@@ -149,6 +150,8 @@ def test_federation_registry_supports_sso_social_provider_trust_claim_normalizat
 
 
 def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_cloud_trust_paths():
+    assert TrustFederationGraph is CanonicalTrustFederationGraph
+
     identities = DeviceWorkloadIdentityRegistry()
     trust_graph = TrustFederationGraph()
 
