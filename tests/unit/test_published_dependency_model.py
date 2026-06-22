@@ -49,6 +49,7 @@ def test_pyproject_uses_published_pins_and_extras():
     jose_dependencies = set(_load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"])
     facade_dependencies = set(_load_package_pyproject("tigrbl-auth")["project"]["dependencies"])
     pqc_provider_dependencies = set(_load_package_pyproject("tigrbl-security-signing-pqc")["project"]["dependencies"])
+    decision_engine_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-decision-engine")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
     assert "pqcrypto==0.4.0" not in jose_dependencies
@@ -56,7 +57,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "pqcrypto==0.4.0" not in facade_dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in facade_dependencies
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
+    assert "pqcrypto==0.4.0" not in decision_engine_dependencies
+    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in decision_engine_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
+    assert "tigrbl-authz-policy-decision-engine==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
 

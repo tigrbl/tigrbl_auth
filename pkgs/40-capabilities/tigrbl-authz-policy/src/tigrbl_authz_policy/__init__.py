@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from .decisions import (
+from tigrbl_authz_policy_decision_engine import (
     AdminPolicy,
     AttributePolicy,
     DecisionEffect,

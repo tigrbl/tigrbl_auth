@@ -22,6 +22,7 @@ COMPAT_TO_PREFERRED = {
 
 DIST_TO_IMPORT_ROOT = {
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
+    "tigrbl-authz-policy-decision-engine": "tigrbl_authz_policy_decision_engine",
     "tigrbl-authz-policy": "tigrbl_authz_policy",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",

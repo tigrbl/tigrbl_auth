@@ -33,6 +33,7 @@ from tigrbl_authz_policy import (
     PolicyRequest,
     RolePolicy,
 )
+from tigrbl_authz_policy_decision_engine import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
 
 
 PUBLIC_JWK = {
@@ -49,6 +50,7 @@ def test_jose_policy_t0_public_surfaces_are_importable() -> None:
     assert RFC_TARGETS["jwk"] == "RFC 7517"
     assert rfc_vector_manifest()["jwt-bcp"] == "RFC 8725"
     assert PolicyKind.RBAC.value == "rbac"
+    assert PolicyDecisionEngine is CanonicalPolicyDecisionEngine
 
     key = JoseKey(
         kid="kid-active",
@@ -212,6 +214,7 @@ def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
+        root / "40-capabilities/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/engine.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
     ]
