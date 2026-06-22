@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 from types import SimpleNamespace
 
 import pytest
@@ -11,6 +12,19 @@ from tigrbl_auth.config.deployment import resolve_deployment
 
 def _settings(tmp_path, key: str = "test-admin-key") -> SimpleNamespace:
     return SimpleNamespace(admin_api_key=key, admin_api_key_dir=str(tmp_path))
+
+
+def test_admin_gate_canonical_package_owns_public_surface():
+    canonical = importlib.import_module("tigrbl_authz_policy_admin_gate")
+    policy_wrapper = importlib.import_module("tigrbl_authz_policy.admin_gate")
+    server_wrapper = importlib.import_module("tigrbl_identity_server.security.admin_gate")
+    facade = importlib.import_module("tigrbl_auth.security.admin_gate")
+
+    assert policy_wrapper.AdminGate is canonical.AdminGate
+    assert server_wrapper.AdminGate is canonical.AdminGate
+    assert facade is canonical
+    assert policy_wrapper.ADMIN_OPENAPI_SECURITY_DEPENDENCIES is canonical.ADMIN_OPENAPI_SECURITY_DEPENDENCIES
+    assert server_wrapper.ADMIN_SECURITY_SCHEMES is canonical.ADMIN_SECURITY_SCHEMES
 
 
 @pytest.mark.asyncio

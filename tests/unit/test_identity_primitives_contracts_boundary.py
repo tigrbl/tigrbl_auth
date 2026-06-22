@@ -104,18 +104,17 @@ def test_identity_primitives_export_http_and_jsonrpc_helpers() -> None:
     assert asyncio.run(replay()) == {"type": "http.request", "body": b"", "more_body": False}
 
 
-def test_authz_policy_admin_gate_uses_identity_core_primitives() -> None:
-    helper_path = (
+def test_authz_policy_admin_gate_package_uses_identity_core_primitives() -> None:
+    gate_path = (
         ROOT
         / "pkgs"
         / "40-capabilities"
-        / "tigrbl-authz-policy"
+        / "tigrbl-authz-policy-admin-gate"
         / "src"
-        / "tigrbl_authz_policy"
-        / "_admin_gate"
-        / "helpers.py"
+        / "tigrbl_authz_policy_admin_gate"
+        / "gate.py"
     )
-    tree = ast.parse(helper_path.read_text(encoding="utf-8"))
+    tree = ast.parse(gate_path.read_text(encoding="utf-8"))
     local_functions = {
         node.name
         for node in tree.body
@@ -130,7 +129,7 @@ def test_authz_policy_admin_gate_uses_identity_core_primitives() -> None:
         "_read_http_body",
         "_replay_http_body",
     }.isdisjoint(local_functions)
-    assert "from tigrbl_identity_core import" in helper_path.read_text(encoding="utf-8")
+    assert "from tigrbl_identity_core import" in gate_path.read_text(encoding="utf-8")
 
 
 def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:

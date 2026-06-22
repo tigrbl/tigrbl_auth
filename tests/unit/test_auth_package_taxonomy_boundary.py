@@ -22,6 +22,7 @@ COMPAT_TO_PREFERRED = {
 
 DIST_TO_IMPORT_ROOT = {
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
+    "tigrbl-authz-policy-admin-gate": "tigrbl_authz_policy_admin_gate",
     "tigrbl-authz-policy-abac-administrator": "tigrbl_authz_policy_abac_administrator",
     "tigrbl-authz-policy-delegated-administrator": "tigrbl_authz_policy_delegated_administrator",
     "tigrbl-authz-policy-decision-engine": "tigrbl_authz_policy_decision_engine",
@@ -46,6 +47,11 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
+    "tigrbl_identity_policy/admin_gate.py": "tigrbl_authz_policy_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/__init__.py": "tigrbl_authz_policy_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/constants.py": "tigrbl_authz_policy_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/gate.py": "tigrbl_authz_policy_admin_gate",
+    "tigrbl_identity_policy/_admin_gate/helpers.py": "tigrbl_authz_policy_admin_gate",
     "tigrbl_identity_policy/invariants.py": "tigrbl_authz_policy_invariant_registry",
 }
 

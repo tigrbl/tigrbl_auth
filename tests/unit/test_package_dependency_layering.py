@@ -36,6 +36,7 @@ PYTHON_PACKAGE_LAYERS = {
     },
     "capabilities": {
         "tigrbl-authn-credentials",
+        "tigrbl-authz-policy-admin-gate",
         "tigrbl-authz-policy-abac-administrator",
         "tigrbl-authz-policy-delegated-administrator",
         "tigrbl-authz-policy-decision-engine",

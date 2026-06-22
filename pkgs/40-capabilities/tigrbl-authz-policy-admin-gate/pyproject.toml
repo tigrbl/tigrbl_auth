@@ -1,21 +1,19 @@
 [project]
-name = "tigrbl-identity-policy"
+name = "tigrbl-authz-policy-admin-gate"
 version = "0.4.0.dev2"
-description = "RBAC, ABAC, delegated administration, service identity policy, provenance, and governance controls for Tigrbl IAM."
+description = "Standalone ASGI AdminGate for Tigrbl auth control-plane and diagnostics surfaces."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 keywords = [
     "tigrbl",
-    "identity",
+    "authz",
     "authorization",
-    "rbac",
-    "abac",
-    "delegated-admin",
-    "policy",
+    "admin-gate",
+    "asgi",
+    "control-plane",
+    "diagnostics",
     "iam",
-    "service-identity",
-    "governance",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -33,24 +31,23 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-
 dependencies = [
-    "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
-    "tigrbl-authz-policy==0.4.0.dev2",
-    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
-    "tigrbl-auth-release-certification==0.4.0.dev2",
+    "tigrbl==0.4.4.dev1",
+    "tigrbl-identity-admin==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-runtime==0.4.0.dev2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/deprecated/tigrbl-identity-policy"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-authz-policy-admin-gate"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-policy/"
+PyPI = "https://pypi.org/project/tigrbl-authz-policy-admin-gate/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_policy", from = "src" }]
+packages = [{ include = "tigrbl_authz_policy_admin_gate", from = "src" }]

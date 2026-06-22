@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 49
+    assert len(packages) == 50
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -40,6 +40,8 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-security-signing-pqc"].path.as_posix() == "pkgs/30-providers/tigrbl-security-signing-pqc"
     assert packages["tigrbl-auth-release-certification"].path.as_posix() == "pkgs/60-runtime/tigrbl-auth-release-certification"
     assert packages["tigrbl-auth-release-certification"].import_root == "tigrbl_auth_release_certification"
+    assert packages["tigrbl-authz-policy-admin-gate"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-admin-gate"
+    assert packages["tigrbl-authz-policy-admin-gate"].import_root == "tigrbl_authz_policy_admin_gate"
     assert packages["tigrbl-authz-policy-abac-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator"
     assert packages["tigrbl-authz-policy-abac-administrator"].import_root == "tigrbl_authz_policy_abac_administrator"
     assert packages["tigrbl-authz-policy-delegated-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-delegated-administrator"
@@ -101,7 +103,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "186"
+    assert payload["count"] == "188"
     assert not any(
         cell["name"]
         in {
@@ -240,6 +242,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
 
     assert dependency_names == {
         "tigrbl-auth-protocol-oauth",
+        "tigrbl-authz-policy-admin-gate",
         "tigrbl-authz-policy-abac-administrator",
         "tigrbl-authz-policy-delegated-administrator",
         "tigrbl-authz-policy-decision-engine",
@@ -250,6 +253,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",
         "tigrbl-authz-resource-server",
+        "tigrbl-identity-admin",
         "tigrbl-identity-author",
         "tigrbl-identity-concrete",
         "tigrbl-identity-contracts",
@@ -289,6 +293,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     }
 
     assert "tigrbl-authz-resource-server" in root_dependency_names
+    assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names
