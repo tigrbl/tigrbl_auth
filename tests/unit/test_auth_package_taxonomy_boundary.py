@@ -35,6 +35,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-authz-policy": "tigrbl_authz_policy",
     "tigrbl-authz-resource-server-dpop-cnf-binding-validator": "tigrbl_authz_resource_server_dpop_cnf_binding_validator",
     "tigrbl-authz-resource-server-mtls-cnf-binding-validator": "tigrbl_authz_resource_server_mtls_cnf_binding_validator",
+    "tigrbl-authz-resource-server-sender-constraint-validator": "tigrbl_authz_resource_server_sender_constraint_validator",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",

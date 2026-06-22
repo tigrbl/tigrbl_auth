@@ -35,6 +35,9 @@ from tigrbl_authz_resource_server_dpop_cnf_binding_validator import (  # noqa: E
 from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (  # noqa: E402
     MtlsCnfBindingValidator as CanonicalMtlsCnfBindingValidator,
 )
+from tigrbl_authz_resource_server_sender_constraint_validator import (  # noqa: E402
+    SenderConstraintValidator as CanonicalSenderConstraintValidator,
+)
 
 
 NOW = 1_800_000_000
@@ -122,6 +125,7 @@ def test_resource_server_t1_public_proof_binding_validator_models() -> None:
 
     assert DpopCnfBindingValidator is CanonicalDpopCnfBindingValidator
     assert MtlsCnfBindingValidator is CanonicalMtlsCnfBindingValidator
+    assert SenderConstraintValidator is CanonicalSenderConstraintValidator
     assert DpopCnfBindingValidator().validate(
         claims,
         DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),

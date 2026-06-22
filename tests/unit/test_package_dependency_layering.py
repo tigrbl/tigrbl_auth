@@ -56,6 +56,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-protocol-rp",
         "tigrbl-authz-resource-server-dpop-cnf-binding-validator",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
+        "tigrbl-authz-resource-server-sender-constraint-validator",
         "tigrbl-authz-resource-server",
     },
     "runtime": {
