@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-identity-admin"
+name = "tigrbl-identity-admin-federation-registry"
 version = "0.4.0.dev2"
-description = "Administrative identity control plane for tenants, users, clients, keys, sessions, tokens, audit, consent, profiles, and governance."
+description = "Federation registry capability for the Tigrbl identity admin package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -9,12 +9,10 @@ keywords = [
     "tigrbl",
     "identity",
     "admin",
-    "control-plane",
+    "federation",
+    "sso",
+    "social-login",
     "iam",
-    "tenant-management",
-    "client-management",
-    "audit",
-    "governance",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -28,31 +26,24 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
-    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-control-plane==0.4.0.dev2",
-    "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-concrete==0.4.0.dev2",
-    "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-admin"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-identity-admin-federation-registry"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-admin/"
+PyPI = "https://pypi.org/project/tigrbl-identity-admin-federation-registry/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_admin", from = "src" }]
+packages = [{ include = "tigrbl_identity_admin_federation_registry", from = "src" }]

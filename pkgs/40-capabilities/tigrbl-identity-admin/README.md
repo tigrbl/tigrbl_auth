@@ -12,7 +12,7 @@ tigrbl-identity-admin contains storage-backed administration services for a Tigr
 - Use it for Administrator/control-plane identity management objects.
 - It is not the public OAuth/OIDC flow package; it manages storage-backed administrative mutations and views.
 - It works with policy, storage, credentials, JOSE, OAuth, and OIDC packages to expose governed operations.
-- `AdminControlPlane` is implemented by `tigrbl-identity-admin-control-plane`; `AdvancedAuthenticatorRegistry` is implemented by `tigrbl-identity-admin-advanced-authenticator-registry`; `PolicyRegistry` is implemented by `tigrbl-identity-admin-policy-registry`; `RelationshipGraph` is implemented by `tigrbl-identity-admin-relationship-graph`; this package re-exports them for compatibility.
+- `AdminControlPlane` is implemented by `tigrbl-identity-admin-control-plane`; `AdvancedAuthenticatorRegistry` is implemented by `tigrbl-identity-admin-advanced-authenticator-registry`; `FederationRegistry` is implemented by `tigrbl-identity-admin-federation-registry`; `PolicyRegistry` is implemented by `tigrbl-identity-admin-policy-registry`; `RelationshipGraph` is implemented by `tigrbl-identity-admin-relationship-graph`; this package re-exports them for compatibility.
 
 ## Installation
 
@@ -43,6 +43,7 @@ from tigrbl_identity_admin_control_plane import AdminControlPlane
 - [tigrbl-identity-admin](https://pypi.org/project/tigrbl-identity-admin/)
 - [tigrbl-identity-admin-advanced-authenticator-registry](https://pypi.org/project/tigrbl-identity-admin-advanced-authenticator-registry/)
 - [tigrbl-identity-admin-control-plane](https://pypi.org/project/tigrbl-identity-admin-control-plane/)
+- [tigrbl-identity-admin-federation-registry](https://pypi.org/project/tigrbl-identity-admin-federation-registry/)
 - [tigrbl-identity-admin-policy-registry](https://pypi.org/project/tigrbl-identity-admin-policy-registry/)
 - [tigrbl-identity-admin-relationship-graph](https://pypi.org/project/tigrbl-identity-admin-relationship-graph/)
 - [tigrbl-identity-storage](https://pypi.org/project/tigrbl-identity-storage/)

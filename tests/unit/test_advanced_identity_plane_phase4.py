@@ -3,6 +3,7 @@ import pytest
 from tigrbl_identity_admin_advanced_authenticator_registry import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
+from tigrbl_identity_admin_federation_registry import FederationRegistry as CanonicalFederationRegistry
 from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
 from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
 from tigrbl_auth.services.advanced_identity_plane import (
@@ -86,6 +87,8 @@ def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_
 
 
 def test_federation_registry_supports_sso_social_provider_trust_claim_normalization_and_logout():
+    assert FederationRegistry is CanonicalFederationRegistry
+
     registry = FederationRegistry()
     social = registry.register_provider(
         provider_id="github",
