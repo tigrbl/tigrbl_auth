@@ -6,6 +6,12 @@ from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
 from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.normalization import (
+    pick_fields as _pick_fields,
+    row_active as _row_active,
+    row_value as _row_value,
+    str_tuple as _str_tuple,
+)
 from tigrbl_identity_core.patterns import matches_dotted_pattern as _permission_matches
 from tigrbl_identity_contracts.audit.policy import PolicyAuditEvent as _PolicyAuditEvent
 from tigrbl_identity_contracts.authentication import ServiceIdentityAuthentication
@@ -25,30 +31,6 @@ from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminS
 from tigrbl_identity_storage.tables.role import Role as _StoredRole
 from tigrbl_identity_storage.tables.tenant_membership import TenantMembership as _StoredTenantMembership
 from tigrbl_authz_policy_concrete import AttributePolicy
-
-
-def _pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, Any]:
-    return {field: record[field] for field in fields if field in record}
-
-
-def _row_value(row: Any, key: str, default: Any = None) -> Any:
-    if isinstance(row, Mapping):
-        return row.get(key, default)
-    return getattr(row, key, default)
-
-
-def _row_active(row: Any) -> bool:
-    return str(_row_value(row, "status", "active") or "active") == "active"
-
-
-def _str_tuple(values: Any, *, sort: bool = True) -> tuple[str, ...]:
-    if values is None or values == "" or values is False:
-        return ()
-    if isinstance(values, str):
-        items = (values,)
-    else:
-        items = tuple(str(value) for value in values if value not in {None, ""})
-    return tuple(sorted(set(items))) if sort else tuple(items)
 
 
 def _role_contract(row: Any) -> Role:

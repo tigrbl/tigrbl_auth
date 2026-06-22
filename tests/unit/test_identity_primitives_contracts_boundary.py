@@ -17,6 +17,10 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 def test_identity_primitives_exports_public_values() -> None:
     import tigrbl_identity_core as core
 
+    class Row:
+        status = "active"
+        tenant_id = "tenant-1"
+
     assert core.Scope.parse("openid profile").contains("openid")
     assert core.Scope.parse(["openid", "email"]).serialize() == "openid email"
     assert isinstance(core.uuid_str(), str)
@@ -29,6 +33,12 @@ def test_identity_primitives_exports_public_values() -> None:
     assert str(core.new_client_id())
     assert str(core.new_credential_id())
     assert core.TenantRef(core.TenantId("tenant-1")).id == "tenant-1"
+    assert core.pick_fields({"a": 1, "b": 2}, ("b", "missing")) == {"b": 2}
+    assert core.row_value({"tenant_id": "tenant-1"}, "tenant_id") == "tenant-1"
+    assert core.row_value(Row(), "tenant_id") == "tenant-1"
+    assert core.row_active(Row())
+    assert core.str_tuple(["b", "a", "b", None, ""]) == ("a", "b")
+    assert core.str_tuple(["b", "a"], sort=False) == ("b", "a")
 
 
 def test_identity_primitives_error_taxonomy_and_clock_values() -> None:
@@ -123,29 +133,36 @@ def test_authz_policy_admin_gate_uses_identity_core_primitives() -> None:
     assert "from tigrbl_identity_core import" in helper_path.read_text(encoding="utf-8")
 
 
-def test_authz_policy_control_plane_uses_identity_core_permission_matching() -> None:
-    model_path = (
+def test_authz_policy_control_plane_uses_identity_core_primitives() -> None:
+    control_plane_path = (
         ROOT
         / "pkgs"
         / "40-capabilities"
         / "tigrbl-authz-policy"
         / "src"
         / "tigrbl_authz_policy"
-        / "_control_plane"
-        / "models.py"
+        / "control_plane.py"
     )
-    administration_path = model_path.with_name("administration.py")
-    policy_engine_path = model_path.with_name("policy_engine.py")
-    tree = ast.parse(model_path.read_text(encoding="utf-8"))
+    source = control_plane_path.read_text(encoding="utf-8")
+    tree = ast.parse(source)
     local_functions = {
         node.name
         for node in tree.body
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
     }
 
-    assert "_permission_matches" not in local_functions
-    assert "matches_dotted_pattern as _permission_matches" in administration_path.read_text(encoding="utf-8")
-    assert "matches_dotted_pattern as _permission_matches" in policy_engine_path.read_text(encoding="utf-8")
+    assert {
+        "_permission_matches",
+        "_pick_fields",
+        "_row_active",
+        "_row_value",
+        "_str_tuple",
+    }.isdisjoint(local_functions)
+    assert "matches_dotted_pattern as _permission_matches" in source
+    assert "pick_fields as _pick_fields" in source
+    assert "row_active as _row_active" in source
+    assert "row_value as _row_value" in source
+    assert "str_tuple as _str_tuple" in source
 
 
 def test_identity_primitives_do_not_own_liveness_contracts() -> None:

@@ -40,7 +40,7 @@ from .primitives import (
 )
 from .standards import StandardOwner, describe_owner
 from .json_canonicalization import canonical_json_bytes, canonicalize
-from .normalization import normal_tuple
+from .normalization import normal_tuple, pick_fields, row_active, row_value, str_tuple
 from .patterns import matches_dotted_pattern
 from .redaction import SECRET_FIELD_TOKENS, redact_sensitive_mapping
 from .typing import StrUUID, uuid_str
@@ -85,12 +85,16 @@ __all__ = [
     "matches_dotted_pattern",
     "normal_tuple",
     "normalize_entity",
+    "pick_fields",
     "redact_sensitive_mapping",
     "read_http_body",
     "replay_http_body",
+    "row_active",
+    "row_value",
     "safe_display_path",
     "sanitize_local_paths",
     "sha256_text_digest",
+    "str_tuple",
     "new_client_id",
     "new_credential_id",
     "new_principal_id",
