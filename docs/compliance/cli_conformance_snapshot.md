@@ -19,7 +19,7 @@ usage: tigrbl-auth [-h]
                    {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
                    ...
 
-Tigrbl-native operator CLI for the tigrbl_auth package.
+Tigrbl-native identity CLI for the tigrbl_auth package.
 
 positional arguments:
   {serve,verify,gate,spec,claims,evidence,doctor,bootstrap,migrate,release,tenant,client,identity,flow,session,token,keys,discovery,import,export}
@@ -75,7 +75,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -92,8 +92,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth bootstrap apply`
@@ -120,7 +120,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -137,8 +137,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --bundle-dir BUNDLE_DIR
@@ -172,7 +172,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -189,8 +189,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --bundle-dir BUNDLE_DIR
@@ -220,7 +220,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -237,8 +237,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -268,7 +268,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -285,8 +285,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -319,7 +319,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -336,8 +336,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth claims lint`
@@ -361,7 +361,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -378,8 +378,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -406,7 +406,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -423,8 +423,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
 ```
@@ -451,7 +451,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -468,8 +468,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -491,7 +491,7 @@ usage: tigrbl-auth client [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           {create,update,delete,get,list,rotate-secret,enable,disable}
                           ...
 
-Stateful durable operator-plane client lifecycle operators.
+Storage-backed client lifecycle administration commands.
 
 positional arguments:
   {create,update,delete,get,list,rotate-secret,enable,disable}
@@ -508,7 +508,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -525,8 +525,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth client create`
@@ -549,13 +549,13 @@ usage: tigrbl-auth client create [-h] [--env-file ENV_FILE]
                                  [--yes] [--dry-run] [--wait]
                                  [--timeout TIMEOUT]
 
-Create a durable operator-plane client record.
+Create a storage-backed client record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -572,8 +572,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -604,13 +604,13 @@ usage: tigrbl-auth client delete [-h] [--env-file ENV_FILE]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
                                  [--id ID] [--yes] [--dry-run]
 
-Delete a durable operator-plane client record.
+Delete a storage-backed client record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -627,8 +627,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -659,7 +659,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -676,8 +676,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -707,7 +707,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -724,8 +724,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -747,13 +747,13 @@ usage: tigrbl-auth client get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--output OUTPUT] [--verbose] [--trace]
                               [--repo-root REPO_ROOT] [--id ID]
 
-Return a single durable operator-plane client record.
+Return a single storage-backed client record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -770,8 +770,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -795,13 +795,13 @@ usage: tigrbl-auth client list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--sort {id,name,status,created_at,updated_at}]
                                [--status STATUS]
 
-List durable operator-plane client records.
+List storage-backed client records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -818,8 +818,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -847,13 +847,13 @@ usage: tigrbl-auth client rotate-secret [-h] [--env-file ENV_FILE]
                                         [--trace] [--repo-root REPO_ROOT]
                                         [--id ID] [--yes] [--dry-run]
 
-Rotate durable operator-plane client secret material.
+Rotate storage-backed client secret material.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -870,8 +870,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -898,13 +898,13 @@ usage: tigrbl-auth client update [-h] [--env-file ENV_FILE]
                                  [--if-missing {fail,create,skip}] [--yes]
                                  [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a durable operator-plane client record.
+Update a storage-backed client record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -921,8 +921,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -951,7 +951,7 @@ usage: tigrbl-auth discovery [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--output OUTPUT] [--verbose] [--trace]
                              {show,validate,publish,diff} ...
 
-Discovery and metadata operators bound to repository snapshots.
+Discovery and metadata workflows bound to repository snapshots.
 
 positional arguments:
   {show,validate,publish,diff}
@@ -964,7 +964,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -981,8 +981,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth discovery diff`
@@ -1008,7 +1008,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1025,8 +1025,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --input INPUT         Input path for import, validation, or diff operations.
@@ -1057,7 +1057,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1074,8 +1074,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --checksum CHECKSUM   Expected checksum or checksum algorithm for import/export validation.
@@ -1105,7 +1105,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1122,8 +1122,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
 ```
@@ -1151,7 +1151,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1168,8 +1168,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -1196,7 +1196,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1213,8 +1213,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -1250,7 +1250,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1267,8 +1267,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth evidence bundle`
@@ -1294,7 +1294,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1311,8 +1311,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --tier {3,4,all}      Evidence tier selector.
@@ -1345,7 +1345,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1362,8 +1362,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --peer-profile PEER_PROFILE
@@ -1397,7 +1397,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1414,8 +1414,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -1445,7 +1445,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1462,8 +1462,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --tier {3,4,all}      Evidence tier selector.
@@ -1494,7 +1494,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1511,8 +1511,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -1533,7 +1533,7 @@ usage: tigrbl-auth export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--output OUTPUT] [--verbose] [--trace]
                           {validate,run,status} ...
 
-Export durable operator-plane state into portable artifacts.
+Export storage-backed identity state into portable artifacts.
 
 positional arguments:
   {validate,run,status}
@@ -1545,7 +1545,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1562,8 +1562,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth export run`
@@ -1582,13 +1582,13 @@ usage: tigrbl-auth export run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--redact] [--checksum CHECKSUM] [--yes]
                               [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Export durable operator-plane state to a portable artifact.
+Export storage-backed identity state to a portable artifact.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1605,8 +1605,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --include-secrets     Include secret material where the selected surface permits it.
@@ -1633,13 +1633,13 @@ usage: tigrbl-auth export status [-h] [--env-file ENV_FILE]
                                  [--format {json,yaml,text}] [--output OUTPUT]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
 
-Show the last durable operator-plane export status.
+Show the last storage-backed export status.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1656,8 +1656,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
 ```
@@ -1680,13 +1680,13 @@ usage: tigrbl-auth export validate [-h] [--env-file ENV_FILE]
                                    [--redact] [--checksum CHECKSUM]
                                    [--report-dir REPORT_DIR]
 
-Validate export configuration and current operator state.
+Validate export configuration and current storage-backed identity state.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1703,8 +1703,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --include-secrets     Include secret material where the selected surface permits it.
@@ -1728,7 +1728,7 @@ usage: tigrbl-auth flow [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         [--output OUTPUT] [--verbose] [--trace]
                         {create,update,delete,get,list,enable,disable} ...
 
-Stateful durable operator-plane flow lifecycle operators.
+Storage-backed flow lifecycle administration commands.
 
 positional arguments:
   {create,update,delete,get,list,enable,disable}
@@ -1744,7 +1744,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1761,8 +1761,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth flow create`
@@ -1783,13 +1783,13 @@ usage: tigrbl-auth flow create [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--if-exists {fail,replace,merge,skip}] [--yes]
                                [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Create a durable operator-plane flow record.
+Create a storage-backed flow record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1806,8 +1806,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -1837,13 +1837,13 @@ usage: tigrbl-auth flow delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run]
 
-Delete a durable operator-plane flow record.
+Delete a storage-backed flow record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1860,8 +1860,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -1890,7 +1890,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1907,8 +1907,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -1937,7 +1937,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -1954,8 +1954,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -1977,13 +1977,13 @@ usage: tigrbl-auth flow get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--output OUTPUT] [--verbose] [--trace]
                             [--repo-root REPO_ROOT] [--id ID]
 
-Return a single durable operator-plane flow record.
+Return a single storage-backed flow record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2000,8 +2000,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2024,13 +2024,13 @@ usage: tigrbl-auth flow list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--sort {id,name,status,created_at,updated_at}]
                              [--status STATUS]
 
-List durable operator-plane flow records.
+List storage-backed flow records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2047,8 +2047,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -2077,13 +2077,13 @@ usage: tigrbl-auth flow update [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--if-missing {fail,create,skip}] [--yes]
                                [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a durable operator-plane flow record.
+Update a storage-backed flow record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2100,8 +2100,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2137,7 +2137,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2154,8 +2154,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -2178,7 +2178,7 @@ usage: tigrbl-auth identity [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             {create,update,delete,get,list,set-password,lock,unlock}
                             ...
 
-Stateful durable operator-plane identity lifecycle operators.
+Storage-backed identity lifecycle administration commands.
 
 positional arguments:
   {create,update,delete,get,list,set-password,lock,unlock}
@@ -2195,7 +2195,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2212,8 +2212,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth identity create`
@@ -2236,13 +2236,13 @@ usage: tigrbl-auth identity create [-h] [--env-file ENV_FILE]
                                    [--yes] [--dry-run] [--wait]
                                    [--timeout TIMEOUT]
 
-Create a durable operator-plane identity record.
+Create a storage-backed identity record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2259,8 +2259,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2292,13 +2292,13 @@ usage: tigrbl-auth identity delete [-h] [--env-file ENV_FILE]
                                    [--repo-root REPO_ROOT] [--id ID] [--yes]
                                    [--dry-run]
 
-Delete a durable operator-plane identity record.
+Delete a storage-backed identity record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2315,8 +2315,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2339,13 +2339,13 @@ usage: tigrbl-auth identity get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--verbose] [--trace] [--repo-root REPO_ROOT]
                                 [--id ID]
 
-Return a single durable operator-plane identity record.
+Return a single storage-backed identity record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2362,8 +2362,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2388,13 +2388,13 @@ usage: tigrbl-auth identity list [-h] [--env-file ENV_FILE]
                                  [--sort {id,name,status,created_at,updated_at}]
                                  [--status STATUS]
 
-List durable operator-plane identity records.
+List storage-backed identity records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2411,8 +2411,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -2445,7 +2445,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2462,8 +2462,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2489,13 +2489,13 @@ usage: tigrbl-auth identity set-password [-h] [--env-file ENV_FILE]
                                          [--id ID] [--from-file FROM_FILE]
                                          [--set key=value] [--yes] [--dry-run]
 
-Set or rotate a durable operator-plane identity password hash.
+Set or rotate a storage-backed identity password hash.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2512,8 +2512,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2547,7 +2547,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2564,8 +2564,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2592,13 +2592,13 @@ usage: tigrbl-auth identity update [-h] [--env-file ENV_FILE]
                                    [--if-missing {fail,create,skip}] [--yes]
                                    [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a durable operator-plane identity record.
+Update a storage-backed identity record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2615,8 +2615,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2645,7 +2645,7 @@ usage: tigrbl-auth import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--output OUTPUT] [--verbose] [--trace]
                           {validate,run,status} ...
 
-Import durable operator-plane state from portable artifacts.
+Import storage-backed identity state from portable artifacts.
 
 positional arguments:
   {validate,run,status}
@@ -2657,7 +2657,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2674,8 +2674,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth import run`
@@ -2694,13 +2694,13 @@ usage: tigrbl-auth import run [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--checksum CHECKSUM] [--yes] [--dry-run]
                               [--wait] [--timeout TIMEOUT]
 
-Import durable operator-plane state from a portable artifact.
+Import storage-backed identity state from a portable artifact.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2717,8 +2717,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --input INPUT         Input path for import, validation, or diff operations.
@@ -2744,13 +2744,13 @@ usage: tigrbl-auth import status [-h] [--env-file ENV_FILE]
                                  [--format {json,yaml,text}] [--output OUTPUT]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
 
-Show the last durable operator-plane import status.
+Show the last storage-backed import status.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2767,8 +2767,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
 ```
@@ -2797,7 +2797,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2814,8 +2814,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --input INPUT         Input path for import, validation, or diff operations.
@@ -2839,7 +2839,7 @@ usage: tigrbl-auth keys [-h] [--env-file ENV_FILE] [--profile PROFILE]
                         {generate,import,export,rotate,retire,publish-jwks,get,list,delete}
                         ...
 
-Stateful durable operator-plane key lifecycle and JWKS publication operators.
+Storage-backed key lifecycle and JWKS publication commands.
 
 positional arguments:
   {generate,import,export,rotate,retire,publish-jwks,get,list,delete}
@@ -2857,7 +2857,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2874,8 +2874,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth keys delete`
@@ -2893,13 +2893,13 @@ usage: tigrbl-auth keys delete [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run]
 
-Delete a durable operator-plane key record.
+Delete a storage-backed key record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2916,8 +2916,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2941,13 +2941,13 @@ usage: tigrbl-auth keys export [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--id ID] [--include-secrets] [--redact]
                                [--checksum CHECKSUM]
 
-Export durable operator-plane key metadata to a JSON or YAML file.
+Export storage-backed key metadata to a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -2964,8 +2964,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -2994,13 +2994,13 @@ usage: tigrbl-auth keys generate [-h] [--env-file ENV_FILE]
                                  [--activate] [--retire-after RETIRE_AFTER]
                                  [--publish] [--yes] [--dry-run]
 
-Generate durable operator-plane key metadata and optional JWKS publication.
+Generate storage-backed key metadata and optional JWKS publication.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3017,8 +3017,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -3051,13 +3051,13 @@ usage: tigrbl-auth keys get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                             [--output OUTPUT] [--verbose] [--trace]
                             [--repo-root REPO_ROOT] [--id ID]
 
-Return a single durable operator-plane key record.
+Return a single storage-backed key record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3074,8 +3074,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -3098,13 +3098,13 @@ usage: tigrbl-auth keys import [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--input INPUT] [--activate] [--publish]
                                [--yes] [--dry-run]
 
-Import durable operator-plane key metadata from a JSON or YAML file.
+Import storage-backed key metadata from a JSON or YAML file.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3121,8 +3121,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -3152,13 +3152,13 @@ usage: tigrbl-auth keys list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--sort {id,name,status,created_at,updated_at}]
                              [--status STATUS]
 
-List durable operator-plane key records.
+List storage-backed key records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3175,8 +3175,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -3205,13 +3205,13 @@ usage: tigrbl-auth keys publish-jwks [-h] [--env-file ENV_FILE]
                                      [--include-secrets] [--redact]
                                      [--checksum CHECKSUM]
 
-Publish the current durable operator-plane JWKS document.
+Publish the current storage-backed JWKS document.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3228,8 +3228,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --include-secrets     Include secret material where the selected surface permits it.
@@ -3252,13 +3252,13 @@ usage: tigrbl-auth keys retire [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID] [--yes] [--dry-run] [--publish]
 
-Mark a durable operator-plane key retired.
+Mark a storage-backed key retired.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3275,8 +3275,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -3310,7 +3310,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3327,8 +3327,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -3361,7 +3361,7 @@ usage: tigrbl-auth migrate [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--output OUTPUT] [--verbose] [--trace]
                            {status,plan,apply,verify} ...
 
-Migration-chain status, planning, application, and verification operators.
+Migration-chain status, planning, application, and verification workflows.
 
 positional arguments:
   {status,plan,apply,verify}
@@ -3374,7 +3374,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3391,8 +3391,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth migrate apply`
@@ -3418,7 +3418,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3435,8 +3435,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --yes                 Assume yes for state-changing confirmations.
@@ -3465,7 +3465,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3482,8 +3482,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
 ```
@@ -3511,7 +3511,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3528,8 +3528,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -3559,7 +3559,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3576,8 +3576,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -3598,7 +3598,7 @@ usage: tigrbl-auth release [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--output OUTPUT] [--verbose] [--trace]
                            {bundle,sign,verify,status,recertify} ...
 
-Release automation and recertification operators.
+Release automation and recertification workflows.
 
 positional arguments:
   {bundle,sign,verify,status,recertify}
@@ -3612,7 +3612,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3629,8 +3629,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth release bundle`
@@ -3657,7 +3657,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3674,8 +3674,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --bundle-dir BUNDLE_DIR
@@ -3707,7 +3707,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3724,8 +3724,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -3754,7 +3754,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3771,8 +3771,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --bundle-dir BUNDLE_DIR
@@ -3804,7 +3804,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3821,8 +3821,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -3852,7 +3852,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3869,8 +3869,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --bundle-dir BUNDLE_DIR
@@ -3920,7 +3920,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -3937,8 +3937,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR
@@ -3952,7 +3952,7 @@ options:
   --workers WORKERS     Process count for the selected runtime profile.
   --uds UDS             Optional Unix domain socket path.
   --log-level LOG_LEVEL
-                        Operator log level for serve plans.
+                        Log level for serve plans.
   --access-log, --no-access-log
                         Enable access logging for the selected runtime profile.
   --proxy-headers       Honor proxy forwarding headers.
@@ -4012,7 +4012,7 @@ usage: tigrbl-auth session [-h] [--env-file ENV_FILE] [--profile PROFILE]
                            [--output OUTPUT] [--verbose] [--trace]
                            {get,list,revoke,revoke-all} ...
 
-Stateful durable operator-plane session control operators.
+Storage-backed session administration commands.
 
 positional arguments:
   {get,list,revoke,revoke-all}
@@ -4025,7 +4025,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4042,8 +4042,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth session get`
@@ -4061,13 +4061,13 @@ usage: tigrbl-auth session get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--verbose] [--trace] [--repo-root REPO_ROOT]
                                [--id ID]
 
-Return a single durable operator-plane session record.
+Return a single storage-backed session record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4084,8 +4084,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4109,13 +4109,13 @@ usage: tigrbl-auth session list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--sort {id,name,status,created_at,updated_at}]
                                 [--status STATUS]
 
-List durable operator-plane session records.
+List storage-backed session records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4132,8 +4132,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -4161,13 +4161,13 @@ usage: tigrbl-auth session revoke [-h] [--env-file ENV_FILE]
                                   [--repo-root REPO_ROOT] [--id ID] [--yes]
                                   [--dry-run]
 
-Mark a durable operator-plane session revoked.
+Mark a storage-backed session revoked.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4184,8 +4184,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4211,13 +4211,13 @@ usage: tigrbl-auth session revoke-all [-h] [--env-file ENV_FILE]
                                       [--filter FILTER] [--status STATUS]
                                       [--yes] [--dry-run]
 
-Mark all durable operator-plane sessions revoked.
+Mark all storage-backed sessions revoked.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4234,8 +4234,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -4271,7 +4271,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4288,8 +4288,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth spec diff`
@@ -4315,7 +4315,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4332,8 +4332,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --kind {openapi,openrpc,all}
@@ -4367,7 +4367,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4384,8 +4384,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --kind {openapi,openrpc,all}
@@ -4416,7 +4416,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4433,8 +4433,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --kind {openapi,openrpc,all}
@@ -4466,7 +4466,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4483,8 +4483,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --kind {openapi,openrpc,all}
@@ -4507,7 +4507,7 @@ usage: tigrbl-auth tenant [-h] [--env-file ENV_FILE] [--profile PROFILE]
                           [--output OUTPUT] [--verbose] [--trace]
                           {create,update,delete,get,list,enable,disable} ...
 
-Stateful durable operator-plane tenant lifecycle operators.
+Storage-backed tenant lifecycle administration commands.
 
 positional arguments:
   {create,update,delete,get,list,enable,disable}
@@ -4523,7 +4523,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4540,8 +4540,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth tenant create`
@@ -4564,13 +4564,13 @@ usage: tigrbl-auth tenant create [-h] [--env-file ENV_FILE]
                                  [--yes] [--dry-run] [--wait]
                                  [--timeout TIMEOUT]
 
-Create a durable operator-plane tenant record.
+Create a storage-backed tenant record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4587,8 +4587,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4619,13 +4619,13 @@ usage: tigrbl-auth tenant delete [-h] [--env-file ENV_FILE]
                                  [--verbose] [--trace] [--repo-root REPO_ROOT]
                                  [--id ID] [--yes] [--dry-run]
 
-Delete a durable operator-plane tenant record.
+Delete a storage-backed tenant record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4642,8 +4642,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4674,7 +4674,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4691,8 +4691,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4722,7 +4722,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4739,8 +4739,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4762,13 +4762,13 @@ usage: tigrbl-auth tenant get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--output OUTPUT] [--verbose] [--trace]
                               [--repo-root REPO_ROOT] [--id ID]
 
-Return a single durable operator-plane tenant record.
+Return a single storage-backed tenant record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4785,8 +4785,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4810,13 +4810,13 @@ usage: tigrbl-auth tenant list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                [--sort {id,name,status,created_at,updated_at}]
                                [--status STATUS]
 
-List durable operator-plane tenant records.
+List storage-backed tenant records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4833,8 +4833,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -4864,13 +4864,13 @@ usage: tigrbl-auth tenant update [-h] [--env-file ENV_FILE]
                                  [--if-missing {fail,create,skip}] [--yes]
                                  [--dry-run] [--wait] [--timeout TIMEOUT]
 
-Update a durable operator-plane tenant record.
+Update a storage-backed tenant record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4887,8 +4887,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -4917,7 +4917,7 @@ usage: tigrbl-auth token [-h] [--env-file ENV_FILE] [--profile PROFILE]
                          [--output OUTPUT] [--verbose] [--trace]
                          {get,list,introspect,revoke,exchange} ...
 
-Stateful durable operator-plane token control operators.
+Storage-backed token administration commands.
 
 positional arguments:
   {get,list,introspect,revoke,exchange}
@@ -4931,7 +4931,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4948,8 +4948,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
 ```
 
 ### `tigrbl-auth token exchange`
@@ -4970,13 +4970,13 @@ usage: tigrbl-auth token exchange [-h] [--env-file ENV_FILE]
                                   [--from-file FROM_FILE] [--set key=value]
                                   [--yes] [--dry-run]
 
-Create a derived durable operator-plane token exchange record.
+Create a derived storage-backed token exchange record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -4993,8 +4993,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -5019,13 +5019,13 @@ usage: tigrbl-auth token get [-h] [--env-file ENV_FILE] [--profile PROFILE]
                              [--output OUTPUT] [--verbose] [--trace]
                              [--repo-root REPO_ROOT] [--id ID]
 
-Return a single durable operator-plane token record.
+Return a single storage-backed token record.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -5042,8 +5042,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -5071,7 +5071,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -5088,8 +5088,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -5112,13 +5112,13 @@ usage: tigrbl-auth token list [-h] [--env-file ENV_FILE] [--profile PROFILE]
                               [--sort {id,name,status,created_at,updated_at}]
                               [--status STATUS]
 
-List durable operator-plane token records.
+List storage-backed token records.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -5135,8 +5135,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --filter FILTER       Simple substring filter applied to identifiers or names.
@@ -5162,13 +5162,13 @@ usage: tigrbl-auth token revoke [-h] [--env-file ENV_FILE] [--profile PROFILE]
                                 [--verbose] [--trace] [--repo-root REPO_ROOT]
                                 [--id ID] [--yes] [--dry-run]
 
-Mark a durable operator-plane token revoked.
+Mark a storage-backed token revoked.
 
 options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -5185,8 +5185,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --id ID               Primary identifier for a single record.
@@ -5215,7 +5215,7 @@ options:
   -h, --help            show this help message and exit
   --env-file ENV_FILE   Optional environment file loaded before resolution.
   --profile PROFILE     Runtime profile reference: packaged profile id or external YAML profile path.
-  --tenant TENANT       Tenant identifier for multi-tenant operators.
+  --tenant TENANT       Tenant identifier for multi-tenant commands.
   --issuer ISSUER       Issuer override for discovery and contract generation.
   --surface-set {admin-rest,developer-api,diagnostics,my-account-api,platform-admin-api,public-api,public-rest,resource-validation-api,service-admin-api,tenant-admin-api}
                         Installable surface set. May be supplied multiple times.
@@ -5232,8 +5232,8 @@ options:
   --format {json,yaml,text}
                         Output format.
   --output OUTPUT       Optional output file path.
-  --verbose, -v         Increase operator verbosity; may be repeated.
-  --trace               Emit trace-oriented operator details.
+  --verbose, -v         Increase CLI verbosity; may be repeated.
+  --trace               Emit trace-oriented execution details.
   --repo-root REPO_ROOT
                         Repository root for governance automation.
   --report-dir REPORT_DIR

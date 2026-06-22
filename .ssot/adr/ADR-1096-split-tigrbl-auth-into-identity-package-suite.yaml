@@ -4,13 +4,14 @@ id: "adr:1096"
 number: 1096
 slug: "split-tigrbl-auth-into-identity-package-suite"
 title: "Split tigrbl-auth into an identity package suite"
-status: "accepted"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "Split the implementation into a governed package suite:"
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "adr:1133"
 status_notes:
   -
     at: "2026-05-18T08:13:00Z"
@@ -20,6 +21,10 @@ status_notes:
     status: "accepted"
     note: "Package-suite split now includes dependency layering: foundational identity/authn/authz/protocol packages must not import the tigrbl_auth facade; the facade imports down; backend API products import the facade; frontend UIX consumes contracts and HTTP/discovery surfaces."
     at: "2026-06-14T22:51:14Z"
+  -
+    status: "superseded"
+    note: "Superseded by ADR-1133, which restates the identity package suite using current layer and exported-surface ownership."
+    at: "2026-06-22T07:50:45Z"
 references: []
 body: |-
   ## Decision

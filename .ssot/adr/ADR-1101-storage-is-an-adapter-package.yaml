@@ -3,12 +3,12 @@ kind: "adr"
 id: "adr:1101"
 number: 1101
 slug: "storage-is-an-adapter-package"
-title: "Storage is an adapter package"
+title: "Storage owns canonical tables and table-owned operations"
 status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Create `tigrbl-identity-storage` as the persistence adapter package and canonical storage operation owner. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage."
+summary: "Create `tigrbl-identity-storage` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -24,11 +24,15 @@ status_notes:
     status: "accepted"
     note: "Clarify that the storage boundary is not passive persistence only; it owns canonical table operation behavior."
     at: "2026-06-18T16:03:51Z"
+  -
+    status: "accepted"
+    note: "Align storage wording with current package layering: table-owned persistence is public; repository tooling state is not a public storage-package responsibility."
+    at: "2026-06-22T07:42:04Z"
 references: []
 body: |-
   ## Decision
   
-  Create `tigrbl-identity-storage` as the persistence adapter package and canonical storage operation owner. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage.
+  Create `tigrbl-identity-storage` as the canonical table, migration, repository helper, and table-owned operation package. SQLAlchemy/Tigrbl tables are the default implementation substrate, but the tracked package boundary is storage-owned persistence behavior.
   
   It owns:
   
@@ -36,23 +40,24 @@ body: |-
   - table-owned domain operations for durable storage-table behavior
   - ORM integration where retained
   - migrations
-  - repository implementations
+  - repository helper implementations
   - unit-of-work implementations
   - database bootstrap
   - SQLite/Postgres portability
   - migration evidence hooks
+  - compatibility helpers that support repository tooling without defining a separate public storage model
   
   ## Context
   
   The current package includes table resources, table-bound operations, persistence lifecycle, engine configuration, SQLite support, and Postgres extras. Runtime and surface code currently reach into table resources and engine details.
   
-  Protocol packages should not know whether state is stored in SQLite, Postgres, Redis, memory, or a test fake. Protocol and server packages may validate protocol inputs or adapt HTTP requests, but persisted behavior for a storage table belongs to that storage table's module.
+  Protocol packages should not know whether durable table state is stored in SQLite, Postgres, Redis, memory, or a test fake. Protocol and server packages may validate protocol inputs or adapt HTTP requests, but persisted behavior for a storage table belongs to that storage table's module.
   
   ## Constraints
   
-  Storage may import semantic/protocol packages only where needed to map storage-owned behavior, but protocol packages MUST NOT canonically own storage-table mutations or table lifecycle behavior.
+  Storage may import lower-layer primitives and contracts needed to map storage-owned behavior. Cross-layer imports from storage into capability or protocol packages are compatibility exceptions that must not define canonical storage-table mutation semantics.
   
-  Server may depend on storage as the default adapter. Runtime and operator may use storage through server or explicit adapter boundaries.
+  Server, runtime, CLI, release, and API packages may use storage through explicit table, repository helper, or adapter boundaries.
   
   ## Consequences
   

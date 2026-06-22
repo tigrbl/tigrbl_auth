@@ -4,13 +4,14 @@ id: "spc:1099"
 number: 1099
 slug: "identity-package-suite-boundary"
 title: "Identity package suite boundary"
-status: "accepted"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "This specification governs the first-wave `tigrbl-identity-*` package suite"
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "spc:1225"
 status_notes:
   -
     at: "2026-05-18T08:20:26Z"
@@ -20,6 +21,10 @@ status_notes:
     status: "accepted"
     note: "Import DAG now includes the foundation -> tigrbl-auth facade -> backend API products and frontend UIX layering guard, with T1 exception-ledger enforcement and a T2 zero-exception target."
     at: "2026-06-14T22:51:25Z"
+  -
+    status: "superseded"
+    note: "Superseded by SPEC-1225, which defines current package-suite layering without a public operator surface category."
+    at: "2026-06-22T07:50:45Z"
 references: []
 body: |-
   ## Scope

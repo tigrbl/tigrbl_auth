@@ -44,7 +44,7 @@ def _attach_command_spec(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tigrbl-auth",
-        description="Tigrbl-native operator CLI for the tigrbl_auth package.",
+        description="Tigrbl-native identity CLI for the tigrbl_auth package.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
     subparsers = parser.add_subparsers(dest="command", required=True)

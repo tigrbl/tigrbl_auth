@@ -6,7 +6,7 @@
 
 - `--env-file` — Optional environment file loaded before resolution.
 - `--profile` — Runtime profile reference: packaged profile id or external YAML profile path.
-- `--tenant` — Tenant identifier for multi-tenant operators.
+- `--tenant` — Tenant identifier for multi-tenant commands.
 - `--issuer` — Issuer override for discovery and contract generation.
 - `--surface-set` — Installable surface set. May be supplied multiple times.
 - `--slice` — Protocol slice. May be supplied multiple times.
@@ -17,8 +17,8 @@
 - `--no-strict` — Downgrade failures to warnings for exploratory use.
 - `--format` — Output format.
 - `--output` — Optional output file path.
-- `--verbose, -v` — Increase operator verbosity; may be repeated.
-- `--trace` — Emit trace-oriented operator details.
+- `--verbose, -v` — Increase CLI verbosity; may be repeated.
+- `--trace` — Emit trace-oriented execution details.
 
 ## Runtime
 
@@ -35,7 +35,7 @@ Resolve deployment, materialize a runner-qualified runtime plan, validate the se
   - `--port` — Bind port.
   - `--workers` — Process count for the selected runtime profile.
   - `--uds` — Optional Unix domain socket path.
-  - `--log-level` — Operator log level for serve plans.
+  - `--log-level` — Log level for serve plans.
   - `--access-log` — Enable access logging for the selected runtime profile.
   - `--proxy-headers` — Honor proxy forwarding headers.
   - `--lifespan` — ASGI lifespan policy.
@@ -240,7 +240,7 @@ Operate on Tier 3/Tier 4 evidence automation.
       - `1` — Operation failed or verification did not pass.
       - `2` — CLI argument or contract validation failed before execution.
 
-## Bootstrap, migration, and operator lifecycle
+## Bootstrap and migration workflows
 
 ### `bootstrap`
 
@@ -259,7 +259,7 @@ Materialize and verify baseline bootstrap manifests for deployment or plugin ins
   - `manifest` — Write bootstrap manifests.
     - `--repo-root` — Repository root for governance automation.
     - `--bundle-dir` — Explicit bundle output directory.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -272,7 +272,7 @@ Materialize and verify baseline bootstrap manifests for deployment or plugin ins
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -289,7 +289,7 @@ Materialize and verify baseline bootstrap manifests for deployment or plugin ins
 
 ### `migrate`
 
-Migration-chain status, planning, application, and verification operators.
+Migration-chain status, planning, application, and verification workflows.
 
 - Verbs:
   - `status` — Show migration status.
@@ -303,7 +303,7 @@ Migration-chain status, planning, application, and verification operators.
       - `3` — Requested record or dependent resource was not found.
   - `plan` — Emit migration plan details.
     - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -315,7 +315,7 @@ Migration-chain status, planning, application, and verification operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -334,7 +334,7 @@ Migration-chain status, planning, application, and verification operators.
 
 ### `release`
 
-Release automation and recertification operators.
+Release automation and recertification workflows.
 
 - Verbs:
   - `bundle` — Build a release bundle.
@@ -384,7 +384,7 @@ Release automation and recertification operators.
 
 ### `tenant`
 
-Stateful durable operator-plane tenant lifecycle operators.
+Storage-backed tenant lifecycle administration commands.
 
 - Verbs:
   - `create` — Create a tenant record.
@@ -397,7 +397,7 @@ Stateful durable operator-plane tenant lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -413,7 +413,7 @@ Stateful durable operator-plane tenant lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -424,7 +424,7 @@ Stateful durable operator-plane tenant lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -433,7 +433,7 @@ Stateful durable operator-plane tenant lifecycle operators.
   - `get` — Get a tenant record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -455,7 +455,7 @@ Stateful durable operator-plane tenant lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -466,7 +466,7 @@ Stateful durable operator-plane tenant lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -475,7 +475,7 @@ Stateful durable operator-plane tenant lifecycle operators.
 
 ### `client`
 
-Stateful durable operator-plane client lifecycle operators.
+Storage-backed client lifecycle administration commands.
 
 - Verbs:
   - `create` — Create a client record.
@@ -488,7 +488,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -504,7 +504,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -515,7 +515,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -524,7 +524,7 @@ Stateful durable operator-plane client lifecycle operators.
   - `get` — Get a client record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -546,7 +546,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -557,7 +557,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -568,7 +568,7 @@ Stateful durable operator-plane client lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -577,7 +577,7 @@ Stateful durable operator-plane client lifecycle operators.
 
 ### `identity`
 
-Stateful durable operator-plane identity lifecycle operators.
+Storage-backed identity lifecycle administration commands.
 
 - Verbs:
   - `create` — Create an identity record.
@@ -590,7 +590,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -606,7 +606,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -617,7 +617,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -626,7 +626,7 @@ Stateful durable operator-plane identity lifecycle operators.
   - `get` — Get an identity record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -650,7 +650,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--set` — Inline mutation field assignment in key=value form. May be supplied multiple times.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -661,7 +661,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -672,7 +672,7 @@ Stateful durable operator-plane identity lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -681,7 +681,7 @@ Stateful durable operator-plane identity lifecycle operators.
 
 ### `flow`
 
-Stateful durable operator-plane flow lifecycle operators.
+Storage-backed flow lifecycle administration commands.
 
 - Verbs:
   - `create` — Create a flow record.
@@ -694,7 +694,7 @@ Stateful durable operator-plane flow lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -710,7 +710,7 @@ Stateful durable operator-plane flow lifecycle operators.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -721,7 +721,7 @@ Stateful durable operator-plane flow lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -730,7 +730,7 @@ Stateful durable operator-plane flow lifecycle operators.
   - `get` — Get a flow record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -752,7 +752,7 @@ Stateful durable operator-plane flow lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -763,7 +763,7 @@ Stateful durable operator-plane flow lifecycle operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -772,13 +772,13 @@ Stateful durable operator-plane flow lifecycle operators.
 
 ### `session`
 
-Stateful durable operator-plane session control operators.
+Storage-backed session administration commands.
 
 - Verbs:
   - `get` — Get a session record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -800,7 +800,7 @@ Stateful durable operator-plane session control operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -812,7 +812,7 @@ Stateful durable operator-plane session control operators.
     - `--status` — Status filter for list operations.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -821,13 +821,13 @@ Stateful durable operator-plane session control operators.
 
 ### `token`
 
-Stateful durable operator-plane token control operators.
+Storage-backed token administration commands.
 
 - Verbs:
   - `get` — Get a token record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -847,7 +847,7 @@ Stateful durable operator-plane token control operators.
   - `introspect` — Introspect a token.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -857,7 +857,7 @@ Stateful durable operator-plane token control operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -870,7 +870,7 @@ Stateful durable operator-plane token control operators.
     - `--set` — Inline mutation field assignment in key=value form. May be supplied multiple times.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -879,7 +879,7 @@ Stateful durable operator-plane token control operators.
 
 ### `keys`
 
-Stateful durable operator-plane key lifecycle and JWKS publication operators.
+Storage-backed key lifecycle and JWKS publication commands.
 
 - Verbs:
   - `generate` — Generate a key record.
@@ -895,7 +895,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--publish` — Publish JWKS after a successful key mutation.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -910,7 +910,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--publish` — Publish JWKS after a successful key mutation.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -924,7 +924,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--include-secrets` — Include secret material where the selected surface permits it.
     - `--redact` — Redact secret material from exported output.
     - `--checksum` — Expected checksum or checksum algorithm for import/export validation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -942,7 +942,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--publish` — Publish JWKS after a successful key mutation.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -954,7 +954,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--publish` — Publish JWKS after a successful key mutation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -967,7 +967,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--include-secrets` — Include secret material where the selected surface permits it.
     - `--redact` — Redact secret material from exported output.
     - `--checksum` — Expected checksum or checksum algorithm for import/export validation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -975,7 +975,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
   - `get` — Get a key record.
     - `--repo-root` — Repository root for governance automation.
     - `--id` — Primary identifier for a single record.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -997,7 +997,7 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
     - `--id` — Primary identifier for a single record.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1006,12 +1006,12 @@ Stateful durable operator-plane key lifecycle and JWKS publication operators.
 
 ### `discovery`
 
-Discovery and metadata operators bound to repository snapshots.
+Discovery and metadata workflows bound to repository snapshots.
 
 - Verbs:
   - `show` — Show discovery metadata.
     - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1031,7 +1031,7 @@ Discovery and metadata operators bound to repository snapshots.
     - `--checksum` — Expected checksum or checksum algorithm for import/export validation.
     - `--yes` — Assume yes for state-changing confirmations.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1041,7 +1041,7 @@ Discovery and metadata operators bound to repository snapshots.
     - `--repo-root` — Repository root for governance automation.
     - `--input` — Input path for import, validation, or diff operations.
     - `--report-dir` — Directory for generated reports.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1049,7 +1049,7 @@ Discovery and metadata operators bound to repository snapshots.
 
 ### `import`
 
-Import durable operator-plane state from portable artifacts.
+Import storage-backed identity state from portable artifacts.
 
 - Verbs:
   - `validate` — Validate import input.
@@ -1072,7 +1072,7 @@ Import durable operator-plane state from portable artifacts.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1080,7 +1080,7 @@ Import durable operator-plane state from portable artifacts.
       - `3` — Requested record or dependent resource was not found.
   - `status` — Show import status.
     - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1088,7 +1088,7 @@ Import durable operator-plane state from portable artifacts.
 
 ### `export`
 
-Export durable operator-plane state into portable artifacts.
+Export storage-backed identity state into portable artifacts.
 
 - Verbs:
   - `validate` — Validate export configuration.
@@ -1115,7 +1115,7 @@ Export durable operator-plane state into portable artifacts.
     - `--dry-run` — Resolve and emit the runtime plan without applying or launching state changes.
     - `--wait` — Wait for completion when the operation supports asynchronous execution.
     - `--timeout` — Maximum wait time in seconds for supported long-running operations.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.
@@ -1123,7 +1123,7 @@ Export durable operator-plane state into portable artifacts.
       - `3` — Requested record or dependent resource was not found.
   - `status` — Show export status.
     - `--repo-root` — Repository root for governance automation.
-    - Output: `resource-record` — Single operator resource record with state and metadata.
+    - Output: `resource-record` — Single storage-backed resource record with metadata.
     - Exit codes:
       - `0` — Operation completed successfully.
       - `1` — Operation failed or verification did not pass.

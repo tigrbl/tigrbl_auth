@@ -1,4 +1,4 @@
-"""Canonical feature-flag registry for standards, surfaces, and operator UX."""
+"""Canonical feature-flag registry for standards, surfaces, and CLI UX."""
 
 from __future__ import annotations
 
@@ -72,7 +72,7 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
         "flags": {
             "surface_public_enabled": "Mount public auth plane routes",
             "surface_admin_enabled": "Mount table-backed admin plane",
-            "surface_operator_enabled": "Enable operator/governance plane",
+            "surface_operator_enabled": "Enable repository governance plane",
             "surface_diagnostics_enabled": "Attach diagnostics surface",
             "surface_plugin_mode": "Plugin install mode",
         },
@@ -90,7 +90,7 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
             "enable_rfc7952": "RFC 7952 SET",
             "enable_rfc8291": "RFC 8291 Web Push encryption",
             "enable_rfc8812": "RFC 8812 WebAuthn algorithm registrations",
-            "enable_rfc8932": "RFC 8932 DNS privacy operator guidance",
+            "enable_rfc8932": "RFC 8932 DNS privacy operational guidance",
             "enable_rfc8523": "Legacy mislabel retained for migration history only",
         },
     },
@@ -98,7 +98,7 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
 
 CLI_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
     "global": {
-        "description": "Shared operator flags",
+        "description": "Shared CLI flags",
         "flags": [
             "--env-file",
             "--profile",
@@ -146,7 +146,7 @@ CLI_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
         ],
     },
     "governance": {
-        "description": "Certification and governance operators",
+        "description": "Certification and governance commands",
         "flags": [
             "spec",
             "verify",
@@ -157,7 +157,7 @@ CLI_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
         ],
     },
     "admin": {
-        "description": "Admin/operator resource surface",
+        "description": "Admin and resource command surface",
         "flags": [
             "bootstrap",
             "migrate",

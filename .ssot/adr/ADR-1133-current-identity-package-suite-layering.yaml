@@ -1,0 +1,60 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1133"
+number: 1133
+slug: "current-identity-package-suite-layering"
+title: "Current identity package suite layering"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "The identity package suite is governed by dependency layer and exported-surface ownership, not by an operator package category."
+supersedes:
+  - "adr:1096"
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Supersede the first-wave package split with current layer and exported-surface ownership."
+    at: "2026-06-22T07:42:04Z"
+  -
+    status: "accepted"
+    note: "Supersedes ADR-1096 first-wave package split wording."
+    at: "2026-06-22T07:50:45Z"
+references: []
+body: |-
+  ## Decision
+  
+  The identity package suite is governed by dependency layer and exported-surface ownership, not by an operator package category.
+  
+  The canonical package layers are:
+  
+  - 00 primitives: reusable identity primitives with no suite dependencies.
+  - 01 contracts: public wire, manifest, release, and trust-domain contracts.
+  - 05 bases: reusable base abstractions for trust-domain implementations.
+  - 10 concrete: concrete shared implementations over primitives and contracts.
+  - 20 storage: canonical tables, migrations, persistence helpers, and table-owned operations.
+  - 30 providers: pluggable cryptographic, JOSE, certificate, proof, and trust providers.
+  - 40 capabilities: domain capability packages for administration, principals, credentials, and authorization policy.
+  - 50 protocols: OAuth, OIDC, resource-server, and relying-party protocol behavior.
+  - 60 runtime/tooling: server composition, runtime helpers, CLI, authoring tools, testkit, and release certification.
+  - 70 facade: the `tigrbl-auth` compatibility/public facade.
+  - 80 APIs: deployable product API frontdoors.
+  
+  Public downstream shape is defined by exported package APIs, product API frontdoors, generated contracts, and facade exports. A package name containing `operator` does not create an authority class, a role family, a storage model, or a public exported surface category. Legacy tooling package names may remain temporarily for compatibility, but new SSOT guidance must describe repository tooling, CLI, release certification, administration, or product API surfaces by their actual function.
+  
+  ## Rationale
+  
+  ADR-1096 froze an early first-wave package split. The repository has since moved to a layered package layout with separate primitives, contracts, concrete implementations, storage, providers, capabilities, protocols, runtime/tooling, facade, and API frontdoors.
+  
+  Keeping the old first-wave wording makes downstream consumers expect a public operator surface and keeps storage, CLI, and product API responsibilities blurred. ADR-1132 already retired that vocabulary for public exported surfaces.
+  
+  ## Consequences
+  
+  New ADRs, SPECs, package READMEs, and generated contract descriptions must name the actual exported surface or package layer.
+  
+  Storage remains the canonical owner of tables and table-owned persistent behavior.
+  
+  CLI and repository tooling may orchestrate storage-backed operations, portability, bootstrap, release, and evidence workflows, but they do not create a distinct public operator model.
+  
+  Deprecated packages and compatibility facades may continue to exist while import guards and documentation describe the current layer taxonomy.

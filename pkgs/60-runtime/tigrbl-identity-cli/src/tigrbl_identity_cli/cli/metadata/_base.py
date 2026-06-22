@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """Canonical CLI metadata for parser generation, docs, and contract artifacts.
 
-This module is the single source of truth for the operator CLI surface.
+This module is the single source of truth for the identity CLI surface.
 Argparse help output, markdown reference docs, machine-readable contract
 artifacts, and conformance snapshots are all derived from these structures.
 """
@@ -195,7 +195,7 @@ ARGUMENT_SPECS: dict[str, FlagSpec] = {
     # Global/shared flags.
     "env_file": FlagSpec("env_file", ("--env-file",), "Optional environment file loaded before resolution.", {"default": None}, group="global", family="global"),
     "profile": FlagSpec("profile", ("--profile",), "Runtime profile reference: packaged profile id or external YAML profile path.", {"default": "baseline"}, group="global", family="global"),
-    "tenant": FlagSpec("tenant", ("--tenant",), "Tenant identifier for multi-tenant operators.", {"default": None}, group="global", family="global"),
+    "tenant": FlagSpec("tenant", ("--tenant",), "Tenant identifier for multi-tenant commands.", {"default": None}, group="global", family="global"),
     "issuer": FlagSpec("issuer", ("--issuer",), "Issuer override for discovery and contract generation.", {"default": None}, group="global", family="global"),
     "surface_set": FlagSpec("surface_set", ("--surface-set",), "Installable surface set. May be supplied multiple times.", {"action": "append", "choices": sorted(SURFACE_SET_REGISTRY), "default": []}, group="global", family="global"),
     "slice": FlagSpec("slice", ("--slice",), "Protocol slice. May be supplied multiple times.", {"action": "append", "choices": sorted(PROTOCOL_SLICE_REGISTRY), "default": []}, group="global", family="global"),
@@ -207,10 +207,10 @@ ARGUMENT_SPECS: dict[str, FlagSpec] = {
     "offline": FlagSpec("offline", ("--offline",), "Avoid network or external peer execution assumptions.", {"action": "store_true"}, group="global", family="global"),
     "format": FlagSpec("format", ("--format",), "Output format.", {"choices": ["json", "yaml", "text"], "default": "json"}, group="global", family="global"),
     "output": FlagSpec("output", ("--output",), "Optional output file path.", {"default": None}, group="global", family="global"),
-    "verbose": FlagSpec("verbose", ("--verbose", "-v"), "Increase operator verbosity; may be repeated.", {"action": "count", "default": 0}, group="global", family="global"),
-    "trace": FlagSpec("trace", ("--trace",), "Emit trace-oriented operator details.", {"action": "store_true"}, group="global", family="global"),
+    "verbose": FlagSpec("verbose", ("--verbose", "-v"), "Increase CLI verbosity; may be repeated.", {"action": "count", "default": 0}, group="global", family="global"),
+    "trace": FlagSpec("trace", ("--trace",), "Emit trace-oriented execution details.", {"action": "store_true"}, group="global", family="global"),
     "color": FlagSpec("color", ("--color",), "Color policy for terminal output.", {"choices": ["auto", "always", "never"], "default": "auto"}, group="global", family="global"),
-    # Common operator plumbing.
+    # Common CLI plumbing.
     "repo_root": FlagSpec("repo_root", ("--repo-root",), "Repository root for governance automation.", {"default": None}, group="plumbing", family="plumbing"),
     "report_dir": FlagSpec("report_dir", ("--report-dir",), "Directory for generated reports.", {"default": None}, group="plumbing", family="plumbing"),
     "name": FlagSpec("name", ("--name",), "Optional named release gate or artifact selector.", {"default": None}, group="plumbing", family="plumbing"),
@@ -233,7 +233,7 @@ ARGUMENT_SPECS: dict[str, FlagSpec] = {
     "cookies": FlagSpec("cookies", ("--cookies",), "Enable cookie/session helpers in serve plans.", {"action": argparse.BooleanOptionalAction, "default": True}, group="serve", family="serve-portable"),
     "health": FlagSpec("health", ("--health",), "Enable health endpoints in serve plans.", {"action": argparse.BooleanOptionalAction, "default": True}, group="serve", family="serve-portable"),
     "metrics": FlagSpec("metrics", ("--metrics",), "Enable metrics in serve plans.", {"action": argparse.BooleanOptionalAction, "default": True}, group="serve", family="serve-portable"),
-    "log_level": FlagSpec("log_level", ("--log-level",), "Operator log level for serve plans.", {"default": "INFO"}, group="serve", family="serve-portable"),
+    "log_level": FlagSpec("log_level", ("--log-level",), "Log level for serve plans.", {"default": "INFO"}, group="serve", family="serve-portable"),
     "access_log": FlagSpec("access_log", ("--access-log",), "Enable access logging for the selected runtime profile.", {"action": argparse.BooleanOptionalAction, "default": True}, group="serve", family="serve-portable"),
     "lifespan": FlagSpec("lifespan", ("--lifespan",), "ASGI lifespan policy.", {"choices": ["auto", "on", "off"], "default": "auto"}, group="serve", family="serve-portable"),
     "graceful_timeout": FlagSpec("graceful_timeout", ("--graceful-timeout",), "Graceful shutdown timeout in seconds.", {"type": int, "default": 30}, group="serve", family="serve-portable"),
@@ -348,7 +348,7 @@ OUTPUT_RUNTIME = OutputSpec(
 )
 OUTPUT_RECORD = OutputSpec(
     "resource-record",
-    "Single operator resource record with state and metadata.",
+    "Single storage-backed resource record with metadata.",
     fields=("command", "resource", "record", "state_path"),
 )
 OUTPUT_COLLECTION = OutputSpec(

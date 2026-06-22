@@ -36,7 +36,7 @@ global_flags:
 - key: tenant
   flags:
   - --tenant
-  help: Tenant identifier for multi-tenant operators.
+  help: Tenant identifier for multi-tenant commands.
   group: global
   family: global
   default: null
@@ -154,7 +154,7 @@ global_flags:
   flags:
   - --verbose
   - -v
-  help: Increase operator verbosity; may be repeated.
+  help: Increase CLI verbosity; may be repeated.
   group: global
   family: global
   default: 0
@@ -162,7 +162,7 @@ global_flags:
 - key: trace
   flags:
   - --trace
-  help: Emit trace-oriented operator details.
+  help: Emit trace-oriented execution details.
   group: global
   family: global
   action: store_true
@@ -549,7 +549,7 @@ flag_catalog:
     key: log_level
     flags:
     - --log-level
-    help: Operator log level for serve plans.
+    help: Log level for serve plans.
     group: serve
     family: serve-portable
     default: INFO
@@ -841,7 +841,7 @@ flag_catalog:
     key: tenant
     flags:
     - --tenant
-    help: Tenant identifier for multi-tenant operators.
+    help: Tenant identifier for multi-tenant commands.
     group: global
     family: global
     default: null
@@ -902,7 +902,7 @@ flag_catalog:
     key: trace
     flags:
     - --trace
-    help: Emit trace-oriented operator details.
+    help: Emit trace-oriented execution details.
     group: global
     family: global
     action: store_true
@@ -967,7 +967,7 @@ flag_catalog:
     flags:
     - --verbose
     - -v
-    help: Increase operator verbosity; may be repeated.
+    help: Increase CLI verbosity; may be repeated.
     group: global
     family: global
     default: 0
@@ -1973,7 +1973,7 @@ commands:
     - bundle_dir
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2025,7 +2025,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2099,7 +2099,7 @@ commands:
   exit_codes: []
 - name: migrate
   help: Inspect migration readiness and plans.
-  description: Migration-chain status, planning, application, and verification operators.
+  description: Migration-chain status, planning, application, and verification workflows.
   handler: null
   aliases: []
   include_global: true
@@ -2197,7 +2197,7 @@ commands:
     - repo_root
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2248,7 +2248,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2321,7 +2321,7 @@ commands:
   exit_codes: []
 - name: release
   help: Build release bundles and recertification reports.
-  description: Release automation and recertification operators.
+  description: Release automation and recertification workflows.
   handler: null
   aliases: []
   include_global: true
@@ -2580,7 +2580,7 @@ commands:
   exit_codes: []
 - name: tenant
   help: Manage tenant records.
-  description: Stateful durable operator-plane tenant lifecycle operators.
+  description: Storage-backed tenant lifecycle administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -2604,7 +2604,7 @@ commands:
   verbs:
   - name: create
     help: Create a tenant record.
-    description: Create a durable operator-plane tenant record.
+    description: Create a storage-backed tenant record.
     handler: tenant.create
     aliases: []
     include_global: true
@@ -2636,7 +2636,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2659,7 +2659,7 @@ commands:
     family: admin
   - name: update
     help: Update a tenant record.
-    description: Update a durable operator-plane tenant record.
+    description: Update a storage-backed tenant record.
     handler: tenant.update
     aliases: []
     include_global: true
@@ -2691,7 +2691,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2714,7 +2714,7 @@ commands:
     family: admin
   - name: delete
     help: Delete a tenant record.
-    description: Delete a durable operator-plane tenant record.
+    description: Delete a storage-backed tenant record.
     handler: tenant.delete
     aliases: []
     include_global: true
@@ -2741,7 +2741,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2764,7 +2764,7 @@ commands:
     family: admin
   - name: get
     help: Get a tenant record.
-    description: Return a single durable operator-plane tenant record.
+    description: Return a single storage-backed tenant record.
     handler: tenant.get
     aliases: []
     include_global: true
@@ -2789,7 +2789,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2810,7 +2810,7 @@ commands:
     family: admin
   - name: list
     help: List tenant records.
-    description: List durable operator-plane tenant records.
+    description: List storage-backed tenant records.
     handler: tenant.list
     aliases: []
     include_global: true
@@ -2889,7 +2889,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2939,7 +2939,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -2966,7 +2966,7 @@ commands:
   exit_codes: []
 - name: client
   help: Manage client records.
-  description: Stateful durable operator-plane client lifecycle operators.
+  description: Storage-backed client lifecycle administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -2990,7 +2990,7 @@ commands:
   verbs:
   - name: create
     help: Create a client record.
-    description: Create a durable operator-plane client record.
+    description: Create a storage-backed client record.
     handler: client.create
     aliases: []
     include_global: true
@@ -3022,7 +3022,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3045,7 +3045,7 @@ commands:
     family: admin
   - name: update
     help: Update a client record.
-    description: Update a durable operator-plane client record.
+    description: Update a storage-backed client record.
     handler: client.update
     aliases: []
     include_global: true
@@ -3077,7 +3077,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3100,7 +3100,7 @@ commands:
     family: admin
   - name: delete
     help: Delete a client record.
-    description: Delete a durable operator-plane client record.
+    description: Delete a storage-backed client record.
     handler: client.delete
     aliases: []
     include_global: true
@@ -3127,7 +3127,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3150,7 +3150,7 @@ commands:
     family: admin
   - name: get
     help: Get a client record.
-    description: Return a single durable operator-plane client record.
+    description: Return a single storage-backed client record.
     handler: client.get
     aliases: []
     include_global: true
@@ -3175,7 +3175,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3196,7 +3196,7 @@ commands:
     family: admin
   - name: list
     help: List client records.
-    description: List durable operator-plane client records.
+    description: List storage-backed client records.
     handler: client.list
     aliases: []
     include_global: true
@@ -3248,7 +3248,7 @@ commands:
     family: admin
   - name: rotate-secret
     help: Rotate a client secret.
-    description: Rotate durable operator-plane client secret material.
+    description: Rotate storage-backed client secret material.
     handler: client.rotate_secret
     aliases: []
     include_global: true
@@ -3275,7 +3275,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3325,7 +3325,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3375,7 +3375,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3402,7 +3402,7 @@ commands:
   exit_codes: []
 - name: identity
   help: Manage identity records.
-  description: Stateful durable operator-plane identity lifecycle operators.
+  description: Storage-backed identity lifecycle administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -3426,7 +3426,7 @@ commands:
   verbs:
   - name: create
     help: Create an identity record.
-    description: Create a durable operator-plane identity record.
+    description: Create a storage-backed identity record.
     handler: identity.create
     aliases: []
     include_global: true
@@ -3458,7 +3458,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3481,7 +3481,7 @@ commands:
     family: admin
   - name: update
     help: Update an identity record.
-    description: Update a durable operator-plane identity record.
+    description: Update a storage-backed identity record.
     handler: identity.update
     aliases: []
     include_global: true
@@ -3513,7 +3513,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3536,7 +3536,7 @@ commands:
     family: admin
   - name: delete
     help: Delete an identity record.
-    description: Delete a durable operator-plane identity record.
+    description: Delete a storage-backed identity record.
     handler: identity.delete
     aliases: []
     include_global: true
@@ -3563,7 +3563,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3586,7 +3586,7 @@ commands:
     family: admin
   - name: get
     help: Get an identity record.
-    description: Return a single durable operator-plane identity record.
+    description: Return a single storage-backed identity record.
     handler: identity.get
     aliases: []
     include_global: true
@@ -3611,7 +3611,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3632,7 +3632,7 @@ commands:
     family: admin
   - name: list
     help: List identity records.
-    description: List durable operator-plane identity records.
+    description: List storage-backed identity records.
     handler: identity.list
     aliases: []
     include_global: true
@@ -3684,7 +3684,7 @@ commands:
     family: admin
   - name: set-password
     help: Set an identity password.
-    description: Set or rotate a durable operator-plane identity password hash.
+    description: Set or rotate a storage-backed identity password hash.
     handler: identity.set_password
     aliases: []
     include_global: true
@@ -3713,7 +3713,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3763,7 +3763,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3813,7 +3813,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3840,7 +3840,7 @@ commands:
   exit_codes: []
 - name: flow
   help: Manage flow records.
-  description: Stateful durable operator-plane flow lifecycle operators.
+  description: Storage-backed flow lifecycle administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -3864,7 +3864,7 @@ commands:
   verbs:
   - name: create
     help: Create a flow record.
-    description: Create a durable operator-plane flow record.
+    description: Create a storage-backed flow record.
     handler: flow.create
     aliases: []
     include_global: true
@@ -3896,7 +3896,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3919,7 +3919,7 @@ commands:
     family: admin
   - name: update
     help: Update a flow record.
-    description: Update a durable operator-plane flow record.
+    description: Update a storage-backed flow record.
     handler: flow.update
     aliases: []
     include_global: true
@@ -3951,7 +3951,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -3974,7 +3974,7 @@ commands:
     family: admin
   - name: delete
     help: Delete a flow record.
-    description: Delete a durable operator-plane flow record.
+    description: Delete a storage-backed flow record.
     handler: flow.delete
     aliases: []
     include_global: true
@@ -4001,7 +4001,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4024,7 +4024,7 @@ commands:
     family: admin
   - name: get
     help: Get a flow record.
-    description: Return a single durable operator-plane flow record.
+    description: Return a single storage-backed flow record.
     handler: flow.get
     aliases: []
     include_global: true
@@ -4049,7 +4049,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4070,7 +4070,7 @@ commands:
     family: admin
   - name: list
     help: List flow records.
-    description: List durable operator-plane flow records.
+    description: List storage-backed flow records.
     handler: flow.list
     aliases: []
     include_global: true
@@ -4149,7 +4149,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4199,7 +4199,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4226,7 +4226,7 @@ commands:
   exit_codes: []
 - name: session
   help: Manage session records.
-  description: Stateful durable operator-plane session control operators.
+  description: Storage-backed session administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -4250,7 +4250,7 @@ commands:
   verbs:
   - name: get
     help: Get a session record.
-    description: Return a single durable operator-plane session record.
+    description: Return a single storage-backed session record.
     handler: session.get
     aliases: []
     include_global: true
@@ -4275,7 +4275,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4296,7 +4296,7 @@ commands:
     family: admin
   - name: list
     help: List session records.
-    description: List durable operator-plane session records.
+    description: List storage-backed session records.
     handler: session.list
     aliases: []
     include_global: true
@@ -4348,7 +4348,7 @@ commands:
     family: admin
   - name: revoke
     help: Revoke a session.
-    description: Mark a durable operator-plane session revoked.
+    description: Mark a storage-backed session revoked.
     handler: session.revoke
     aliases: []
     include_global: true
@@ -4375,7 +4375,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4398,7 +4398,7 @@ commands:
     family: admin
   - name: revoke-all
     help: Revoke all sessions.
-    description: Mark all durable operator-plane sessions revoked.
+    description: Mark all storage-backed sessions revoked.
     handler: session.revoke_all
     aliases: []
     include_global: true
@@ -4426,7 +4426,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4453,7 +4453,7 @@ commands:
   exit_codes: []
 - name: token
   help: Manage token records.
-  description: Stateful durable operator-plane token control operators.
+  description: Storage-backed token administration commands.
   handler: null
   aliases: []
   include_global: true
@@ -4477,7 +4477,7 @@ commands:
   verbs:
   - name: get
     help: Get a token record.
-    description: Return a single durable operator-plane token record.
+    description: Return a single storage-backed token record.
     handler: token.get
     aliases: []
     include_global: true
@@ -4502,7 +4502,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4523,7 +4523,7 @@ commands:
     family: admin
   - name: list
     help: List token records.
-    description: List durable operator-plane token records.
+    description: List storage-backed token records.
     handler: token.list
     aliases: []
     include_global: true
@@ -4600,7 +4600,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4621,7 +4621,7 @@ commands:
     family: admin
   - name: revoke
     help: Revoke a token.
-    description: Mark a durable operator-plane token revoked.
+    description: Mark a storage-backed token revoked.
     handler: token.revoke
     aliases: []
     include_global: true
@@ -4648,7 +4648,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4671,7 +4671,7 @@ commands:
     family: admin
   - name: exchange
     help: Exchange a token.
-    description: Create a derived durable operator-plane token exchange record.
+    description: Create a derived storage-backed token exchange record.
     handler: token.exchange
     aliases: []
     include_global: true
@@ -4700,7 +4700,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4727,8 +4727,7 @@ commands:
   exit_codes: []
 - name: keys
   help: Manage key lifecycle and JWKS publication.
-  description: Stateful durable operator-plane key lifecycle and JWKS publication
-    operators.
+  description: Storage-backed key lifecycle and JWKS publication commands.
   handler: null
   aliases: []
   include_global: true
@@ -4752,7 +4751,7 @@ commands:
   verbs:
   - name: generate
     help: Generate a key record.
-    description: Generate durable operator-plane key metadata and optional JWKS publication.
+    description: Generate storage-backed key metadata and optional JWKS publication.
     handler: keys.generate
     aliases: []
     include_global: true
@@ -4787,7 +4786,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4810,7 +4809,7 @@ commands:
     family: admin
   - name: import
     help: Import key material.
-    description: Import durable operator-plane key metadata from a JSON or YAML file.
+    description: Import storage-backed key metadata from a JSON or YAML file.
     handler: keys.import
     aliases: []
     include_global: true
@@ -4841,7 +4840,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4864,7 +4863,7 @@ commands:
     family: admin
   - name: export
     help: Export key material.
-    description: Export durable operator-plane key metadata to a JSON or YAML file.
+    description: Export storage-backed key metadata to a JSON or YAML file.
     handler: keys.export
     aliases: []
     include_global: true
@@ -4894,7 +4893,7 @@ commands:
     - checksum
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4950,7 +4949,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -4973,7 +4972,7 @@ commands:
     family: admin
   - name: retire
     help: Retire a key.
-    description: Mark a durable operator-plane key retired.
+    description: Mark a storage-backed key retired.
     handler: keys.retire
     aliases: []
     include_global: true
@@ -5001,7 +5000,7 @@ commands:
     - publish
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5024,7 +5023,7 @@ commands:
     family: admin
   - name: publish-jwks
     help: Publish JWKS.
-    description: Publish the current durable operator-plane JWKS document.
+    description: Publish the current storage-backed JWKS document.
     handler: keys.publish_jwks
     aliases: []
     include_global: true
@@ -5053,7 +5052,7 @@ commands:
     - checksum
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5074,7 +5073,7 @@ commands:
     family: admin
   - name: get
     help: Get a key record.
-    description: Return a single durable operator-plane key record.
+    description: Return a single storage-backed key record.
     handler: keys.get
     aliases: []
     include_global: true
@@ -5099,7 +5098,7 @@ commands:
     - id
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5120,7 +5119,7 @@ commands:
     family: admin
   - name: list
     help: List key records.
-    description: List durable operator-plane key records.
+    description: List storage-backed key records.
     handler: keys.list
     aliases: []
     include_global: true
@@ -5172,7 +5171,7 @@ commands:
     family: admin
   - name: delete
     help: Delete a key record.
-    description: Delete a durable operator-plane key record.
+    description: Delete a storage-backed key record.
     handler: keys.delete
     aliases: []
     include_global: true
@@ -5199,7 +5198,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5226,7 +5225,7 @@ commands:
   exit_codes: []
 - name: discovery
   help: Show, validate, publish, and diff discovery artifacts.
-  description: Discovery and metadata operators bound to repository snapshots.
+  description: Discovery and metadata workflows bound to repository snapshots.
   handler: null
   aliases: []
   include_global: true
@@ -5274,7 +5273,7 @@ commands:
     - repo_root
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5370,7 +5369,7 @@ commands:
     - dry_run
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5419,7 +5418,7 @@ commands:
     - report_dir
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5444,7 +5443,7 @@ commands:
   exit_codes: []
 - name: import
   help: Validate and run import portability workflows.
-  description: Import durable operator-plane state from portable artifacts.
+  description: Import storage-backed identity state from portable artifacts.
   handler: null
   aliases: []
   include_global: true
@@ -5517,7 +5516,7 @@ commands:
     family: admin
   - name: run
     help: Run an import.
-    description: Import durable operator-plane state from a portable artifact.
+    description: Import storage-backed identity state from a portable artifact.
     handler: import.run
     aliases: []
     include_global: true
@@ -5548,7 +5547,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5571,7 +5570,7 @@ commands:
     family: admin
   - name: status
     help: Show import status.
-    description: Show the last durable operator-plane import status.
+    description: Show the last storage-backed import status.
     handler: import.status
     aliases: []
     include_global: true
@@ -5595,7 +5594,7 @@ commands:
     - repo_root
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5620,7 +5619,7 @@ commands:
   exit_codes: []
 - name: export
   help: Validate and run export portability workflows.
-  description: Export durable operator-plane state into portable artifacts.
+  description: Export storage-backed identity state into portable artifacts.
   handler: null
   aliases: []
   include_global: true
@@ -5644,7 +5643,8 @@ commands:
   verbs:
   - name: validate
     help: Validate export configuration.
-    description: Validate export configuration and current operator state.
+    description: Validate export configuration and current storage-backed identity
+      state.
     handler: export.validate
     aliases: []
     include_global: true
@@ -5695,7 +5695,7 @@ commands:
     family: admin
   - name: run
     help: Run an export.
-    description: Export durable operator-plane state to a portable artifact.
+    description: Export storage-backed identity state to a portable artifact.
     handler: export.run
     aliases: []
     include_global: true
@@ -5728,7 +5728,7 @@ commands:
     - timeout
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource
@@ -5751,7 +5751,7 @@ commands:
     family: admin
   - name: status
     help: Show export status.
-    description: Show the last durable operator-plane export status.
+    description: Show the last storage-backed export status.
     handler: export.status
     aliases: []
     include_global: true
@@ -5775,7 +5775,7 @@ commands:
     - repo_root
     output:
       name: resource-record
-      description: Single operator resource record with state and metadata.
+      description: Single storage-backed resource record with metadata.
       fields:
       - command
       - resource

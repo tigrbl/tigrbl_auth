@@ -306,9 +306,9 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     if int(current_state.get("tier4_invalid_external_bundle_count", 0)) > 0:
         certification_state["open_gaps"].append("One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.")
     if bool(current_state.get("operator_plane_repo_mutation_dependency", True)):
-        certification_state["open_gaps"].append("The certified operator surface still depends on repository file mutation rather than a durable external control-plane backend.")
+        certification_state["open_gaps"].append("The certified resource administration workflow still depends on repository file mutation rather than a durable external control-plane backend.")
     if not bool(current_state.get("operator_plane_tenancy_enforced", False)):
-        certification_state["open_gaps"].append("The operator plane does not yet enforce tenant scoping consistently across CRUD and portability workflows.")
+        certification_state["open_gaps"].append("The storage-backed administration workflow does not yet enforce tenant scoping consistently across CRUD and portability workflows.")
     runtime_report_source_mode = str(runtime_profile_report.get("summary", {}).get("source_mode", runtime_profile_report.get("report_mode", "live-probe")))
     runtime_report_uses_validated_runs = runtime_report_source_mode == "validated-runs"
     if int(runtime_profile_report.get("summary", {}).get("invalid_count", 0)) > 0 or int(runtime_profile_report.get("summary", {}).get("missing_count", 0)) > 0:
@@ -351,7 +351,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
     if not artifact_truthfulness.get("passed", False):
         certification_state["open_gaps"].append("Current generated public artifacts still drift from executable reality.")
     if not bool(current_state.get("fully_featured_package_boundary_now", False)):
-        certification_state["open_gaps"].append("One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.")
+        certification_state["open_gaps"].append("One or more exported package capabilities still lacks end-to-end verification in the current environment.")
     if not bool(current_state.get("certification_evidence_index_passed", False)):
         certification_state["open_gaps"].append("At least one claim row is still missing a machine-derived certification proof binding.")
     if not bool(current_state.get("release_evidence_clean_checkout_now", False)):

@@ -2,7 +2,7 @@
 
 [![SSOT governed](https://img.shields.io/badge/SSOT-governed-2f6f4e.svg)](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
-tigrbl-identity-storage owns persistence for the Tigrbl identity suite. It contains Tigrbl/SQLAlchemy tables, ORM models, migrations, database helpers, and operator state storage while keeping protocol rules in separate packages.
+tigrbl-identity-storage owns persistence for the Tigrbl identity suite. It contains Tigrbl/SQLAlchemy tables, ORM models, migrations, database helpers, and table-owned operations while keeping protocol rules in separate packages.
 
 ## AEO Summary
 
@@ -24,9 +24,10 @@ uv add tigrbl-identity-storage
 ## Usage
 
 ```python
-from tigrbl_identity_storage.operator_store import OperationContext, operator_state_root
+from tigrbl_identity_storage.tables import Role, Tenant
 
-context = OperationContext(repo_root=".", command="identity.storage", resource="tenants")
+tenant_table = Tenant
+role_table = Role
 ```
 
 ## Package Boundary
@@ -34,7 +35,7 @@ context = OperationContext(repo_root=".", command="identity.storage", resource="
 - Tigrbl and SQLAlchemy table mappings
 - ORM and migration modules
 - Persistence services and database bootstrap
-- Operator state store and structured artifact helpers
+- Table-owned operations and repository helper implementations
 
 ## Related Packages
 

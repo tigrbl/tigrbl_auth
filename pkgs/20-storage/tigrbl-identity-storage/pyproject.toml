@@ -1,7 +1,7 @@
 [project]
 name = "tigrbl-identity-storage"
 version = "0.4.0.dev2"
-description = "Tigrbl and SQLAlchemy identity tables, ORM models, migrations, persistence helpers, and operator state storage for IAM runtimes."
+description = "Tigrbl and SQLAlchemy identity tables, ORM models, migrations, persistence helpers, and table-owned operations for IAM runtimes."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -15,7 +15,7 @@ keywords = [
     "database",
     "iam",
     "persistence",
-    "operator-state",
+    "table-operations",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

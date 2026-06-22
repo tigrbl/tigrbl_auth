@@ -1,0 +1,73 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1225"
+number: 1225
+slug: "current-identity-package-suite-boundary"
+title: "Current identity package suite boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs the current identity package-suite layering, public exported surface ownership, and import-direction vocabulary for `tigrbl_auth`."
+supersedes:
+  - "spc:1099"
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define current package-suite layers without a public operator surface category."
+    at: "2026-06-22T07:42:04Z"
+  -
+    status: "accepted"
+    note: "Supersedes SPEC-1099 first-wave package suite boundary wording."
+    at: "2026-06-22T07:50:45Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs the current identity package-suite layering, public exported surface ownership, and import-direction vocabulary for `tigrbl_auth`.
+  
+  ## Package Layers
+  
+  The governed package suite MUST be described by layer and function:
+  
+  - `pkgs/00-primitives`: primitive identity types and helpers.
+  - `pkgs/01-contracts`: public wire, manifest, trust, and release contracts.
+  - `pkgs/05-bases`: reusable trust-domain base abstractions.
+  - `pkgs/10-concrete`: concrete shared implementations.
+  - `pkgs/20-storage`: canonical identity storage tables, migrations, repository helpers, and table-owned operations.
+  - `pkgs/30-providers`: cryptographic, JOSE, certificate, proof, and trust providers.
+  - `pkgs/40-capabilities`: administration, principal, credential, and authorization capability packages.
+  - `pkgs/50-protocols`: OAuth, OIDC, resource-server, and relying-party protocol packages.
+  - `pkgs/60-runtime`: runtime assembly, CLI, authoring, testkit, release certification, and compatibility tooling.
+  - `pkgs/70-facade`: `tigrbl-auth` public and compatibility facade.
+  - `pkgs/80-apis`: deployable product API frontdoors.
+  
+  ## Requirements
+  
+  Public downstream shape MUST be defined by exported package APIs, facade exports, generated contracts, product API frontdoors, and documented package boundaries.
+  
+  SSOT documents MUST NOT define a public operator surface, operator authority class, operator state model, or operator action family.
+  
+  CLI and repository tooling descriptions MUST use function-specific wording such as CLI, repository tooling, release certification, portability, bootstrap, migration, evidence, or administration.
+  
+  Storage package documentation MUST describe canonical table and table-owned operation ownership. It MUST NOT advertise operator state storage as a public storage-package responsibility.
+  
+  Generated CLI contracts MUST be regenerated from metadata source after vocabulary changes. SPEC-1000 and SPEC-1001 MUST NOT be hand-edited as standalone truth.
+  
+  Import-direction policy MUST preserve lower-layer independence from higher-layer runtime, facade, API, and testkit code. Compatibility packages may remain while marked as compatibility tooling rather than canonical public surface categories.
+  
+  ## Verification
+  
+  Verification MUST include:
+  
+  - static package metadata and README vocabulary checks;
+  - CLI metadata source checks for retired operator-shape vocabulary;
+  - generated CLI contract and reference documentation synchronization checks;
+  - ADR/SPEC vocabulary checks for active repo-local documents; and
+  - package import-layering checks.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1133"
+  - "adr:1132"
+  - "adr:1101"
