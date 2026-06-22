@@ -130,19 +130,17 @@ sqlite = [
     "aiosqlite==0.22.1",
 ]
 uvicorn = [
-    "uvicorn[standard]==0.41.0",
+    "tigrbl-identity-runtime[uvicorn]==0.4.0.dev2",
 ]
 hypercorn = [
-    "hypercorn==0.18.0",
+    "tigrbl-identity-runtime[hypercorn]==0.4.0.dev2",
 ]
 tigrcorn = [
-    "tigrcorn==0.3.8; python_version >= '3.11'",
+    "tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2",
 ]
-# Aggregate runner extra used by release-gate and clean-room certification jobs.
+# Aggregate runner extra delegates concrete runner pins to tigrbl-identity-runtime.
 servers = [
-    "uvicorn[standard]==0.41.0",
-    "hypercorn==0.18.0",
-    "tigrcorn==0.3.8; python_version >= '3.11'",
+    "tigrbl-identity-runtime[servers]==0.4.0.dev2",
 ]
 
 [project.urls]

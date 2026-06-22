@@ -11,7 +11,7 @@ def build_install_substrate_report(
     environment_identity = current_environment_identity(install_profile=current_profile, repo_root=repo_root)
     detected_pythons = _detect_supported_pythons()
     dependency_manifest = _pyproject_dependency_manifest(repo_root)
-    constraint_consistency = _constraint_consistency(repo_root, dependency_manifest)
+    extras_consistency = _extras_consistency(repo_root, dependency_manifest)
     uv_lock_consistency = _uv_lock_consistency(repo_root, dependency_manifest)
     tox_parser, tox_text = _read_tox(repo_root)
     tox_envlist = _extract_tox_envlist(tox_parser)
@@ -24,7 +24,7 @@ def build_install_substrate_report(
         static_failures.append("pyproject.toml still declares forbidden workspace dependency sources")
     if dependency_manifest["forbidden_dependency_references"]:
         static_failures.append("One or more dependency declarations still use forbidden local/editable sources")
-    static_failures.extend(constraint_consistency["mismatches"])
+    static_failures.extend(extras_consistency["mismatches"])
     static_failures.extend(uv_lock_consistency["failures"])
     if len(tox_envlist) != len(CERTIFICATION_TOX_ENVS):
         static_failures.append("tox envlist does not match the retained certification tox matrix")
@@ -112,7 +112,6 @@ def build_install_substrate_report(
 
     profiles = {
         name: {
-            "constraints": list(details["constraints"]),
             "extras": list(details["extras"]),
             "expected_modules": [item["module"] for item in _expected_modules_for_profile(name)],
         }
@@ -127,7 +126,7 @@ def build_install_substrate_report(
         "warnings": warnings,
         "detected_supported_pythons": detected_pythons,
         "dependency_manifest": dependency_manifest,
-        "constraints_consistency": constraint_consistency,
+        "extras_consistency": extras_consistency,
         "uv_lock_consistency": uv_lock_consistency,
         "tox": tox_checks,
         "workflow": workflow,

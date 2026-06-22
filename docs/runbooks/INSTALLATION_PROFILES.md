@@ -18,24 +18,24 @@ All clean-room certification installs are now modeled with the same profile voca
 
 ### SQLite + Uvicorn
 
-- install: `pip install -c constraints/runner-uvicorn.txt '.[sqlite,uvicorn]'`
+- install: `pip install '.[sqlite,uvicorn]'`
 - tox: `tox -e py311-sqlite-uvicorn`
 
 ### PostgreSQL + Hypercorn
 
-- install: `pip install -c constraints/runner-hypercorn.txt '.[postgres,hypercorn]'`
+- install: `pip install '.[postgres,hypercorn]'`
 - tox: `tox -e py311-postgres-hypercorn`
 - requires: reachable PostgreSQL DSN, defaulted in CI to `postgresql://postgres:postgres@127.0.0.1:5432/tigrbl_auth_ci`
 
 ### Tigrcorn
 
-- install: `pip install -c constraints/runner-tigrcorn.txt '.[tigrcorn]'`
+- install: `pip install '.[tigrcorn]'`
 - tox: `tox -e py311-tigrcorn` or `tox -e py312-tigrcorn`
 - support note: Tigrcorn is only included in the clean-room matrix on Python `3.11`, `3.12`, `3.13`, and `3.14`; the aggregate `servers` extra also includes Tigrcorn on those interpreters
 
 ### Dev/test
 
-- install: `pip install -c constraints/test.txt -c constraints/runner-uvicorn.txt '.[test,sqlite,uvicorn]'`
+- install: `pip install '.[test,sqlite,uvicorn]'`
 - tox: `tox -e py311-devtest`
 - smoke guarantee: `pytest --help` is executed so plugin loading failures break the profile
 

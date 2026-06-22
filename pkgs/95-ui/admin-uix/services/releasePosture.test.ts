@@ -103,7 +103,7 @@ const provenance: ProvenanceRequirementRecord[] = [
   },
   {
     standard: 'slsa',
-    required_artifact_paths: ['constraints/dependency-lock.json'],
+    required_artifact_paths: ['uv.lock'],
     generated_projection_paths: ['docs/compliance/final_release_gate_report.json'],
     release_gate_obligations: ['gate-90-release'],
     disclosure_paths: ['docs/compliance/final_release_gate_report.md'],

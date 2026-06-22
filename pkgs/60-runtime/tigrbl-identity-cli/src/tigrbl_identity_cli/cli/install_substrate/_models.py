@@ -1,44 +1,75 @@
 from __future__ import annotations
 
-def _constraint_consistency(repo_root: Path, dependency_manifest: dict[str, Any]) -> dict[str, Any]:
-    test_path = repo_root / "constraints" / "test.txt"
-    uvicorn_path = repo_root / "constraints" / "runner-uvicorn.txt"
-    hypercorn_path = repo_root / "constraints" / "runner-hypercorn.txt"
-    tigrcorn_path = repo_root / "constraints" / "runner-tigrcorn.txt"
 
-    test_constraints = _parse_constraints(test_path)
-    uvicorn_constraints = _parse_constraints(uvicorn_path)
-    hypercorn_constraints = _parse_constraints(hypercorn_path)
-    tigrcorn_constraints = _parse_constraints(tigrcorn_path)
+def _runtime_pyproject_manifest(repo_root: Path) -> dict[str, Any]:
+    path = repo_root / "pkgs" / "60-runtime" / "tigrbl-identity-runtime" / "pyproject.toml"
+    if not path.exists():
+        return {}
+    return tomllib.loads(path.read_text(encoding="utf-8"))
+
+
+def _extras_consistency(repo_root: Path, dependency_manifest: dict[str, Any]) -> dict[str, Any]:
     optional = dependency_manifest["optional_dependencies"]
+    runtime_manifest = _runtime_pyproject_manifest(repo_root)
+    runtime_project = runtime_manifest.get("project", {}) if isinstance(runtime_manifest, dict) else {}
+    runtime_version = str(runtime_project.get("version", ""))
+    runtime_optional = {
+        str(name): [_normalize_requirement(str(item)) for item in values]
+        for name, values in (runtime_project.get("optional-dependencies") or {}).items()
+    }
+    expected_runtime_runner_extras = {
+        "uvicorn": [_normalize_requirement("uvicorn[standard]==0.41.0")],
+        "hypercorn": [_normalize_requirement("hypercorn==0.18.0")],
+        "tigrcorn": [_normalize_requirement("tigrcorn==0.3.8; python_version >= '3.11'")],
+        "servers": [
+            _normalize_requirement("uvicorn[standard]==0.41.0"),
+            _normalize_requirement("hypercorn==0.18.0"),
+            _normalize_requirement("tigrcorn==0.3.8; python_version >= '3.11'"),
+        ],
+    }
+    expected_root_runner_extras = {
+        name: [_normalize_requirement(f"tigrbl-identity-runtime[{name}]=={runtime_version}")]
+        for name in expected_runtime_runner_extras
+    }
     mismatches: list[str] = []
 
-    illegal_constraint_extras = {
-        "test": _constraint_lines_with_extras(test_path),
-        "uvicorn": _constraint_lines_with_extras(uvicorn_path),
-        "hypercorn": _constraint_lines_with_extras(hypercorn_path),
-        "tigrcorn": _constraint_lines_with_extras(tigrcorn_path),
-    }
-    for scope, items in illegal_constraint_extras.items():
-        if items:
-            mismatches.append(f"constraints/{'runner-' + scope if scope in {'uvicorn', 'hypercorn', 'tigrcorn'} else scope}.txt contains extras syntax that pip constraints mode does not accept")
+    for name, expected in expected_runtime_runner_extras.items():
+        if runtime_optional.get(name, []) != expected:
+            mismatches.append(
+                f"tigrbl-identity-runtime optional-dependencies.{name} does not match expected runner pins"
+            )
 
-    if set(test_constraints) != {_constraint_safe_requirement(item) for item in optional.get("test", [])}:
-        mismatches.append("constraints/test.txt does not match pyproject optional-dependencies.test")
-    if set(uvicorn_constraints) != {_constraint_safe_requirement(item) for item in optional.get("uvicorn", [])}:
-        mismatches.append("constraints/runner-uvicorn.txt does not match pyproject optional-dependencies.uvicorn when normalized to pip-legal constraint form")
-    if set(hypercorn_constraints) != {_constraint_safe_requirement(item) for item in optional.get("hypercorn", [])}:
-        mismatches.append("constraints/runner-hypercorn.txt does not match pyproject optional-dependencies.hypercorn")
-    if set(tigrcorn_constraints) != {_constraint_safe_requirement(item) for item in optional.get("tigrcorn", [])}:
-        mismatches.append("constraints/runner-tigrcorn.txt does not match pyproject optional-dependencies.tigrcorn")
+    for name, expected in expected_root_runner_extras.items():
+        if optional.get(name, []) != expected:
+            mismatches.append(
+                f"workspace optional-dependencies.{name} must delegate to tigrbl-identity-runtime[{name}]"
+            )
+
+    profile_extra_coverage: dict[str, dict[str, Any]] = {}
+    for profile, details in PROFILE_TOGGLES.items():
+        extras = [str(item) for item in details.get("extras", [])]
+        missing = [extra for extra in extras if extra not in optional]
+        profile_extra_coverage[profile] = {
+            "extras": extras,
+            "missing_extras": missing,
+            "passed": not missing,
+        }
+        if missing:
+            mismatches.append(
+                f"profile {profile} references undeclared workspace extras: {', '.join(missing)}"
+            )
+
     return {
         "passed": not mismatches,
         "mismatches": mismatches,
-        "illegal_constraint_extras": illegal_constraint_extras,
-        "test_count": len(test_constraints),
-        "uvicorn_count": len(uvicorn_constraints),
-        "hypercorn_count": len(hypercorn_constraints),
-        "tigrcorn_count": len(tigrcorn_constraints),
+        "runtime_pyproject": "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
+        "runtime_runner_extras": {
+            name: runtime_optional.get(name, []) for name in expected_runtime_runner_extras
+        },
+        "workspace_runner_extras": {
+            name: optional.get(name, []) for name in expected_root_runner_extras
+        },
+        "profile_extra_coverage": profile_extra_coverage,
     }
 
 

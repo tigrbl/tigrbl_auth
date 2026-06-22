@@ -26,7 +26,6 @@
 # Release and publishing controls
 /pyproject.toml @Tigrbl/release
 /tox.ini @Tigrbl/release
-/constraints/ @Tigrbl/release
 /dist/release-bundles/ @Tigrbl/release
 /docs/runbooks/RELEASE_SIGNING_AND_VERIFICATION.md @Tigrbl/release @Tigrbl/security
 /docs/runbooks/GITHUB_ACTIONS_CERTIFICATION_PIPELINE.md @Tigrbl/release @Tigrbl/platform-admins

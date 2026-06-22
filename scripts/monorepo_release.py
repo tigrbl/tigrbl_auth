@@ -386,8 +386,6 @@ def _install_package_test_harness(python: Path) -> None:
             "-m",
             "pip",
             "install",
-            "-r",
-            str(ROOT / "constraints" / "test.txt"),
             "-e",
             ".[test]",
         ],

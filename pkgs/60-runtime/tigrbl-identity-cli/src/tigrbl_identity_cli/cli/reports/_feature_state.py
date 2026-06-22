@@ -60,7 +60,6 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         repo_root, workspace_sources
     )
     dependency_artifacts = _dependency_artifact_paths(repo_root)
-    test_constraints_manifest = repo_root / "constraints" / "test.txt"
     tox_manifest = repo_root / "tox.ini"
     tigrcorn_extra = runner_extras.get("tigrcorn", [])
     runtime_pkg = repo_root / "tigrbl_auth" / "runtime"
@@ -162,7 +161,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "install_substrate_tox_pip_check_complete": bool(install_substrate_report.get("summary", {}).get("tox_envs_declare_pip_check", False)),
         "install_substrate_tox_import_probe_complete": bool(install_substrate_report.get("summary", {}).get("tox_envs_declare_install_probe", False)),
         "install_substrate_current_profile_import_probe_passed": bool(install_substrate_report.get("summary", {}).get("current_profile_import_probe_passed", False)),
-        "test_constraints_manifest_present": test_constraints_manifest.exists(),
+        "test_extra_present": bool(optional_dependencies.get("test")),
         "tox_manifest_present": tox_manifest.exists(),
         "native_uv_lock_present": (repo_root / "uv.lock").exists(),
         "install_profile_workflow_present": has_install_matrix_workflow(repo_root),
@@ -266,7 +265,7 @@ def generate_state_reports(repo_root: Path) -> dict[str, Any]:
         "clean_room_matrix_implemented": bool(current_state.get("tox_manifest_present", False) and current_state.get("install_profile_workflow_present", False) and current_state.get("release_gate_workflow_present", False)),
         "clean_room_matrix_executed_in_this_container": False,
         "tox_manifest_present": bool(current_state.get("tox_manifest_present", False)),
-        "test_constraints_manifest_present": bool(current_state.get("test_constraints_manifest_present", False)),
+        "test_extra_present": bool(current_state.get("test_extra_present", False)),
         "tigrcorn_pin_committed": bool(current_state.get("tigrcorn_pin_committed", False)),
         "operator_plane_backend": str(current_state.get("operator_plane_backend", "unknown")),
         "operator_plane_repo_mutation_dependency": bool(current_state.get("operator_plane_repo_mutation_dependency", True)),

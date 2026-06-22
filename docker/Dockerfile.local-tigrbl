@@ -15,8 +15,6 @@ COPY . .
 COPY --from=tigrbl-src . /opt/tigrbl
 
 RUN uv pip install --system \
-    -c constraints/base.txt \
-    -c constraints/runner-uvicorn.txt \
     ".[sqlite,uvicorn]" && \
     uv pip install --system --reinstall \
     /opt/tigrbl/pkgs/core/tigrbl_atoms \

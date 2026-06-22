@@ -23,14 +23,11 @@ def _write_json(path: Path, payload: dict) -> None:
 def _copy_support_files(dst_root: Path) -> None:
     for rel in [
         "pyproject.toml",
+        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
         "uv.lock",
         "tox.ini",
         ".github/workflows/ci-install-profiles.yml",
         ".github/workflows/ci-release-gates.yml",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt",
     ]:
         src = ROOT / rel
         dst = dst_root / rel

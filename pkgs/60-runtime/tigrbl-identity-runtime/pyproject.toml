@@ -39,6 +39,22 @@ dependencies = [
     "tigrbl-identity-storage==0.4.0.dev2",
 ]
 
+[project.optional-dependencies]
+uvicorn = [
+    "uvicorn[standard]==0.41.0",
+]
+hypercorn = [
+    "hypercorn==0.18.0",
+]
+tigrcorn = [
+    "tigrcorn==0.3.8; python_version >= '3.11'",
+]
+servers = [
+    "uvicorn[standard]==0.41.0",
+    "hypercorn==0.18.0",
+    "tigrcorn==0.3.8; python_version >= '3.11'",
+]
+
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"

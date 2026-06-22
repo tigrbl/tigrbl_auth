@@ -61,7 +61,8 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist/sbom
-          cyclonedx-py requirements -i constraints/base.txt -o dist/sbom/tigrbl_auth.cdx.json
+          uv export --format requirements.txt --no-hashes --all-extras -o dist/sbom/tigrbl_auth.requirements.txt
+          cyclonedx-py requirements -i dist/sbom/tigrbl_auth.requirements.txt -o dist/sbom/tigrbl_auth.cdx.json
       - name: Build and verify release bundles
         shell: bash
         run: |

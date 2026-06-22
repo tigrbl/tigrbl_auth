@@ -78,21 +78,6 @@ def _is_exact_pin(specifier: str) -> bool:
     return "==" in cleaned and all(token not in cleaned for token in (">=", "<=", "~=", "!=", " @ "))
 
 
-
-
-_EXTRAS_NAME_PATTERN = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)\[[^\]]+\](?P<rest>.*)$")
-
-
-def _constraint_safe_requirement(specifier: str) -> str:
-    cleaned = _normalize_requirement(specifier)
-    match = _EXTRAS_NAME_PATTERN.match(cleaned)
-    if not match:
-        return cleaned
-    return f"{match.group('name')}{match.group('rest')}"
-
-
-def _constraint_lines_with_extras(path: Path) -> list[str]:
-    return [item for item in _parse_constraints(path) if _EXTRAS_NAME_PATTERN.match(item)]
 def _load_pyproject(repo_root: Path) -> dict[str, Any]:
     path = repo_root / "pyproject.toml"
     if not path.exists():
@@ -104,18 +89,6 @@ def _load_json(path: Path) -> Any:
     if not path.exists():
         return None
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _parse_constraints(path: Path) -> list[str]:
-    if not path.exists():
-        return []
-    lines: list[str] = []
-    for raw in path.read_text(encoding="utf-8").splitlines():
-        line = raw.strip()
-        if not line or line.startswith("#"):
-            continue
-        lines.append(_normalize_requirement(line))
-    return lines
 
 
 def _requirements_have_forbidden_sources(requirements: list[str]) -> list[str]:
@@ -175,6 +148,10 @@ def _section_block(text: str, header: str) -> str:
     return match.group(1) if match else ""
 
 
+def _block_declares_extra(block: str, extra: str) -> bool:
+    return bool(re.search(rf"^\s*{re.escape(extra)}\s*$", block, flags=re.MULTILINE))
+
+
 def _tox_section_checks(text: str) -> dict[str, Any]:
     section_results: dict[str, dict[str, Any]] = {}
     pip_check_ok_count = 0
@@ -184,14 +161,17 @@ def _tox_section_checks(text: str) -> dict[str, Any]:
         pip_check_present = "python -I -m pip check" in block
         install_probe_present = "scripts/verify_clean_room_install_substrate.py" in block
         profile_present = f"TIGRBL_AUTH_INSTALL_PROFILE = {profile}" in block
-        constraints = PROFILE_TOGGLES.get(profile, {}).get("constraints", [])
-        constraints_present = all(path in block or header == "[testenv]" for path in constraints)
+        extras = PROFILE_TOGGLES.get(profile, {}).get("extras", [])
+        extras_present = all(
+            _block_declares_extra(block, str(extra)) or header == "[testenv]"
+            for extra in extras
+        )
         section_results[header] = {
             "profile": profile,
             "pip_check_present": pip_check_present,
             "install_probe_present": install_probe_present,
             "install_profile_variable_present": profile_present,
-            "constraints_present": constraints_present,
+            "extras_present": extras_present,
         }
         if pip_check_present:
             pip_check_ok_count += 1
@@ -207,7 +187,7 @@ def _tox_section_checks(text: str) -> dict[str, Any]:
             item["pip_check_present"]
             and item["install_probe_present"]
             and item["install_profile_variable_present"]
-            and item["constraints_present"]
+            and item["extras_present"]
             for item in section_results.values()
         ),
     }

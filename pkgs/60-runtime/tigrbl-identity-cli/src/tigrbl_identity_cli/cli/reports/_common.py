@@ -184,13 +184,10 @@ def _classify_uv_sources(
 def _dependency_artifact_paths(repo_root: Path) -> list[str]:
     candidates = [
         "pyproject.toml",
+        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
         "uv.lock",
         "docker/Dockerfile",
         "tox.ini",
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt",
         "docs/runbooks/INSTALLATION_PROFILES.md",
         "docs/runbooks/CLEAN_CHECKOUT_REPRO.md",
         ".github/workflows/ci-install-profiles.yml",

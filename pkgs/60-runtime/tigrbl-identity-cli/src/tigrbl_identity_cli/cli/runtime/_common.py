@@ -59,7 +59,6 @@ RUNNER_CERTIFICATION_MATRIX = {
     "uvicorn": {
         "profile_name": "sqlite-uvicorn",
         "supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS,
-        "constraints": ["constraints/runner-uvicorn.txt"],
         "ci_install_job": "sqlite-uvicorn",
         "required_extra": "uvicorn",
         "required_release_probe": "--runner uvicorn",
@@ -67,7 +66,6 @@ RUNNER_CERTIFICATION_MATRIX = {
     "hypercorn": {
         "profile_name": "postgres-hypercorn",
         "supported_python_versions": SUPPORTED_CERTIFICATION_PYTHON_VERSIONS,
-        "constraints": ["constraints/runner-hypercorn.txt"],
         "ci_install_job": "postgres-hypercorn",
         "required_extra": "hypercorn",
         "required_release_probe": "--runner hypercorn",
@@ -75,7 +73,6 @@ RUNNER_CERTIFICATION_MATRIX = {
     "tigrcorn": {
         "profile_name": "tigrcorn",
         "supported_python_versions": TIGRCORN_CERTIFICATION_PYTHON_VERSIONS,
-        "constraints": ["constraints/runner-tigrcorn.txt"],
         "ci_install_job": "tigrcorn",
         "required_extra": "tigrcorn",
         "required_release_probe": "--runner tigrcorn",
@@ -167,7 +164,7 @@ def _scan_patterns(
 
 
 def _load_pyproject_runtime_manifest(repo_root: Path) -> dict[str, Any]:
-    pyproject_path = repo_root / "pyproject.toml"
+    pyproject_path = repo_root / "pkgs" / "60-runtime" / "tigrbl-identity-runtime" / "pyproject.toml"
     if not pyproject_path.exists():
         return {}
     return tomllib.loads(pyproject_path.read_text(encoding="utf-8"))
@@ -189,8 +186,6 @@ def _build_runner_support_manifest(repo_root: Path) -> dict[str, Any]:
         expected_tox_envs = [f"py{version.replace('.', '')}-{config['profile_name']}" for version in supported_python_versions]
         extra_values = list(optional_dependencies.get(config["required_extra"], []) or [])
         servers_extra_values = list(optional_dependencies.get("servers", []) or [])
-        constraint_files = list(config["constraints"])
-        constraints_present = [item for item in constraint_files if (repo_root / item).exists()]
         tox_envs_present = [env for env in expected_tox_envs if env in tox_text]
         release_probe_present = config["required_release_probe"] in tox_text or config["required_release_probe"] in release_workflow_text
         ci_install_job_present = config["ci_install_job"] in install_workflow_text
@@ -203,8 +198,6 @@ def _build_runner_support_manifest(repo_root: Path) -> dict[str, Any]:
             "pyproject_extra_present": not placeholder_supported,
             "pyproject_extra_values": extra_values,
             "aggregate_runner_extra_present": aggregate_runner_extra_present,
-            "constraints": constraint_files,
-            "constraints_present": constraints_present,
             "tox_envs": expected_tox_envs,
             "tox_envs_present": tox_envs_present,
             "ci_install_job": config["ci_install_job"],
@@ -212,7 +205,6 @@ def _build_runner_support_manifest(repo_root: Path) -> dict[str, Any]:
             "ci_release_gate_probe_present": release_probe_present,
             "placeholder_supported": placeholder_supported,
             "declared_installable_from_repository": (not placeholder_supported)
-            and len(constraints_present) == len(constraint_files)
             and len(tox_envs_present) == len(expected_tox_envs)
             and ci_install_job_present
             and release_probe_present,

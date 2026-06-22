@@ -14,7 +14,6 @@ COPY . .
 # Default container profile: repository-root install with committed reproducibility inputs.
 # This image demonstrates the published dependency model using the SQLite + Uvicorn profile.
 RUN uv pip install --system \
-    -c constraints/runner-uvicorn.txt \
     ".[sqlite,uvicorn]"
 
 EXPOSE 8000

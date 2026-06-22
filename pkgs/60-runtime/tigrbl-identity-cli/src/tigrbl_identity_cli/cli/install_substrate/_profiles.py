@@ -95,20 +95,20 @@ PROFILE_IMPORT_GROUPS: dict[str, tuple[tuple[dict[str, Any], ...], ...]] = {
 }
 
 PROFILE_TOGGLES: dict[str, dict[str, Any]] = {
-    "base": {"constraints": [], "extras": []},
-    "sqlite-uvicorn": {"constraints": ["constraints/runner-uvicorn.txt"], "extras": ["sqlite", "uvicorn"]},
-    "postgres-hypercorn": {"constraints": ["constraints/runner-hypercorn.txt"], "extras": ["postgres", "hypercorn"]},
-    "tigrcorn": {"constraints": ["constraints/runner-tigrcorn.txt"], "extras": ["tigrcorn"]},
-    "devtest": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt"], "extras": ["test", "sqlite", "uvicorn"]},
-    "release-gates": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "test-core": {"constraints": ["constraints/test.txt"], "extras": ["test"]},
-    "test-integration": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "test-conformance": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "test-security-negative": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "test-interop": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "servers"]},
-    "test-extension": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "migration-portability": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
-    "final-certification": {"constraints": ["constraints/test.txt", "constraints/runner-uvicorn.txt", "constraints/runner-hypercorn.txt", "constraints/runner-tigrcorn.txt"], "extras": ["test", "sqlite", "postgres", "servers"]},
+    "base": {"extras": []},
+    "sqlite-uvicorn": {"extras": ["sqlite", "uvicorn"]},
+    "postgres-hypercorn": {"extras": ["postgres", "hypercorn"]},
+    "tigrcorn": {"extras": ["tigrcorn"]},
+    "devtest": {"extras": ["test", "sqlite", "uvicorn"]},
+    "release-gates": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "test-core": {"extras": ["test"]},
+    "test-integration": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "test-conformance": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "test-security-negative": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "test-interop": {"extras": ["test", "servers"]},
+    "test-extension": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "migration-portability": {"extras": ["test", "sqlite", "postgres", "servers"]},
+    "final-certification": {"extras": ["test", "sqlite", "postgres", "servers"]},
 }
 
 INSTALL_WORKFLOW_RUNTIME_ENVS = set(RUNTIME_MATRIX_ENVS)

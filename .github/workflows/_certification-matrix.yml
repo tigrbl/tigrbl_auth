@@ -272,5 +272,4 @@ jobs:
             dist/test-reports
             dist/migration-portability
             dist/release-bundles
-            constraints/dependency-lock.json
             tox.ini

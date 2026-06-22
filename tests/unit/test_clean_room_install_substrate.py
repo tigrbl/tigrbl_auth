@@ -82,7 +82,8 @@ def test_install_substrate_profiles_cover_certification_lane_profiles() -> None:
         "migration-portability",
         "final-certification",
     } <= profiles
-    assert payload["profiles"]["base"]["constraints"] == []
+    assert payload["profiles"]["base"]["extras"] == []
+    assert all("constraints" not in details for details in payload["profiles"].values())
 
 
 def test_detect_supported_pythons_counts_current_certification_interpreter(monkeypatch) -> None:

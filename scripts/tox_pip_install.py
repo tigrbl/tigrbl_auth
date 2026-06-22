@@ -9,7 +9,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PIN_RE = re.compile(r"^(?P<name>[A-Za-z0-9_.-]+)==(?P<version>[^;\s]+)$")
+PIN_RE = re.compile(
+    r"^(?P<name>[A-Za-z0-9_.-]+)(?P<extras>\[[^\]]+\])?==(?P<version>[^;\s]+)$"
+)
 
 
 @dataclass(frozen=True)
@@ -84,7 +86,7 @@ def rewrite_install_args(args: list[str], projects: dict[str, LocalProject] | No
                 f"{project.name} pin {requested_version!r} does not match "
                 f"local pyproject version {project.version!r}"
             )
-        rewritten.append(str(project.path))
+        rewritten.append(f"{project.path}{match.group('extras') or ''}")
 
     return rewritten
 

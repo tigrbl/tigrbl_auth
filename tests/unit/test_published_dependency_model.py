@@ -52,12 +52,18 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
-    assert extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
+    assert extras["uvicorn"] == ["tigrbl-identity-runtime[uvicorn]==0.4.0.dev2"]
     assert "sqlalchemy[asyncio]==2.0.49" in dependencies
     assert "pydantic[email]==2.12.5" in dependencies
-    assert extras["hypercorn"] == ["hypercorn==0.18.0"]
-    assert extras["tigrcorn"] == ["tigrcorn==0.3.8; python_version >= '3.11'"]
-    assert "tigrcorn==0.3.8; python_version >= '3.11'" in extras["servers"]
+    assert extras["hypercorn"] == ["tigrbl-identity-runtime[hypercorn]==0.4.0.dev2"]
+    assert extras["tigrcorn"] == ["tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2"]
+    assert extras["servers"] == ["tigrbl-identity-runtime[servers]==0.4.0.dev2"]
+
+    runtime_extras = _load_package_pyproject("tigrbl-identity-runtime")["project"]["optional-dependencies"]
+    assert runtime_extras["uvicorn"] == ["uvicorn[standard]==0.41.0"]
+    assert runtime_extras["hypercorn"] == ["hypercorn==0.18.0"]
+    assert runtime_extras["tigrcorn"] == ["tigrcorn==0.3.8; python_version >= '3.11'"]
+    assert "tigrcorn==0.3.8; python_version >= '3.11'" in runtime_extras["servers"]
 
     jose_dependencies = set(_load_package_pyproject("tigrbl-identity-jose")["project"]["dependencies"])
     oidc_backchannel_replay_store_dependencies = set(_load_package_pyproject("tigrbl-auth-protocol-oidc-backchannel-replay-store")["project"]["dependencies"])
@@ -246,9 +252,7 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
     required = {
         "docker/Dockerfile",
         "uv.lock",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt",
+        "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
         "docs/runbooks/INSTALLATION_PROFILES.md",
         "docs/runbooks/CLEAN_CHECKOUT_REPRO.md",
         ".github/workflows/ci-install-profiles.yml",
@@ -259,8 +263,8 @@ def test_workspace_sources_removed_and_provenance_artifacts_exist():
 
     dockerfile = (ROOT / "docker" / "Dockerfile").read_text(encoding="utf-8")
     assert "./pkgs/" not in dockerfile
-    assert "constraints/base.txt" not in dockerfile
-    assert "constraints/runner-uvicorn.txt" in dockerfile
+    assert "\n    -c " not in dockerfile
+    assert '".[sqlite,uvicorn]"' in dockerfile
 
 
 def test_docker_assets_are_not_published_from_repository_root():
@@ -342,6 +346,7 @@ def test_state_report_tracks_dependency_model_checkpoint():
     assert summary["install_substrate_manifest_passed"] is True
     assert summary["install_substrate_tox_pip_check_complete"] is True
     assert summary["install_substrate_tox_import_probe_complete"] is True
+    assert summary["test_extra_present"] is True
     assert isinstance(summary["migration_portability_passed"], bool)
     assert summary["base_dependency_count"] >= 12
     assert summary["base_exact_pinned_dependency_count"] == summary["base_dependency_count"]
