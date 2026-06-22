@@ -2298,6 +2298,7 @@ dependencies = [
     { name = "tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry" },
     { name = "tigrbl-authz-resource-server" },
+    { name = "tigrbl-authz-resource-server-dpop-cnf-binding-validator" },
     { name = "tigrbl-authz-resource-server-mtls-cnf-binding-validator" },
     { name = "tigrbl-base" },
     { name = "tigrbl-canon" },
@@ -2442,6 +2443,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-rbac-administrator", editable = "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry", editable = "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry" },
     { name = "tigrbl-authz-resource-server", editable = "pkgs/50-protocols/tigrbl-authz-resource-server" },
+    { name = "tigrbl-authz-resource-server-dpop-cnf-binding-validator", editable = "pkgs/50-protocols/tigrbl-authz-resource-server-dpop-cnf-binding-validator" },
     { name = "tigrbl-authz-resource-server-mtls-cnf-binding-validator", editable = "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
@@ -2737,10 +2739,10 @@ dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-resource-server-dpop-cnf-binding-validator" },
     { name = "tigrbl-authz-resource-server-mtls-cnf-binding-validator" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-runtime" },
-    { name = "tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
@@ -2749,9 +2751,26 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-resource-server-dpop-cnf-binding-validator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server-mtls-cnf-binding-validator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-authz-resource-server-dpop-cnf-binding-validator"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-authz-resource-server-dpop-cnf-binding-validator" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-proof-dpop", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]

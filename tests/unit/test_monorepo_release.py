@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 53
+    assert len(packages) == 54
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -62,6 +62,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-rbac-administrator"].import_root == "tigrbl_authz_policy_rbac_administrator"
     assert packages["tigrbl-authz-policy-service-identity-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry"
     assert packages["tigrbl-authz-policy-service-identity-registry"].import_root == "tigrbl_authz_policy_service_identity_registry"
+    assert packages["tigrbl-authz-resource-server-dpop-cnf-binding-validator"].path.as_posix() == (
+        "pkgs/50-protocols/tigrbl-authz-resource-server-dpop-cnf-binding-validator"
+    )
+    assert packages["tigrbl-authz-resource-server-dpop-cnf-binding-validator"].import_root == (
+        "tigrbl_authz_resource_server_dpop_cnf_binding_validator"
+    )
     assert packages["tigrbl-authz-resource-server-mtls-cnf-binding-validator"].path.as_posix() == (
         "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator"
     )
@@ -119,7 +125,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "203"
+    assert payload["count"] == "208"
     assert not any(
         cell["name"]
         in {
@@ -158,6 +164,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-security-certificate-mtls"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-authz-resource-server-dpop-cnf-binding-validator"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -274,6 +285,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy-service-identity-registry",
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",
+        "tigrbl-authz-resource-server-dpop-cnf-binding-validator",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
@@ -317,6 +329,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     }
 
     assert "tigrbl-authz-resource-server" in root_dependency_names
+    assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator" in root_dependency_names
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names

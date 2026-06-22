@@ -3,10 +3,12 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Callable, Mapping
 
+from tigrbl_authz_resource_server_dpop_cnf_binding_validator import (
+    DpopCnfBindingValidator,
+)
 from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (
     MtlsCnfBindingValidator,
 )
-from tigrbl_security_proof_dpop import DpopBindingValidator
 from tigrbl_security_trust_contracts import DPoPBinding, MTLSBinding
 from tigrbl_identity_contracts.resource_server import (
     AccessTokenClaims,
@@ -165,8 +167,7 @@ class ResourceServerVerifier:
         mtls: MTLSBinding | None,
     ) -> None:
         if requirement.require_dpop:
-            if not DpopBindingValidator().validate_confirmation(claims.cnf, dpop):
-                raise TokenValidationError("DPoP binding mismatch")
+            DpopCnfBindingValidator().validate(claims, dpop)
         if requirement.require_mtls:
             MtlsCnfBindingValidator().validate(claims, mtls)
 

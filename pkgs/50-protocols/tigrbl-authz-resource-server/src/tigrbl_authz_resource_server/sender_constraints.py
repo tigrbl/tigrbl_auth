@@ -2,23 +2,14 @@ from __future__ import annotations
 
 """Sender-constraint validator facade for protected resource servers."""
 
+from tigrbl_authz_resource_server_dpop_cnf_binding_validator import (
+    DpopCnfBindingValidator,
+)
 from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (
     MtlsCnfBindingValidator,
 )
-from tigrbl_security_proof_dpop import DpopBindingValidator
 
-from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding, TokenValidationError
-
-
-class DpopCnfBindingValidator:
-    def __init__(self, confirmation_member: str = "jkt") -> None:
-        self.provider = DpopBindingValidator()
-        self.provider.confirmation_member = confirmation_member
-
-    def validate(self, claims: AccessTokenClaims, binding: DPoPBinding | None) -> bool:
-        if not self.provider.validate_confirmation(claims.cnf, binding):
-            raise TokenValidationError("DPoP binding mismatch")
-        return True
+from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding
 
 
 class SenderConstraintValidator:

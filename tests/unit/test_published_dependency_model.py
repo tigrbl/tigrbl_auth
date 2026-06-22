@@ -37,6 +37,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "swarmauri_crypto_jwe==0.3.0.dev5" in dependencies
     assert "pqcrypto==0.4.0" not in dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in dependencies
+    assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in dependencies
 
     assert set({"postgres", "sqlite", "uvicorn", "hypercorn", "tigrcorn", "servers"}) <= set(extras)
@@ -62,6 +63,7 @@ def test_pyproject_uses_published_pins_and_extras():
     admin_control_plane_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-control-plane")["project"]["dependencies"])
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
+    dpop_cnf_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-dpop-cnf-binding-validator")["project"]["dependencies"])
     mtls_cnf_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-mtls-cnf-binding-validator")["project"]["dependencies"])
     resource_server_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server")["project"]["dependencies"])
     storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
@@ -109,11 +111,17 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
+    assert "pqcrypto==0.4.0" not in dpop_cnf_validator_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in dpop_cnf_validator_dependencies
+    assert "tigrbl-security-proof-dpop==0.1.0" in dpop_cnf_validator_dependencies
+    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in dpop_cnf_validator_dependencies
     assert "pqcrypto==0.4.0" not in mtls_cnf_validator_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in mtls_cnf_validator_dependencies
     assert "tigrbl-security-certificate-mtls==0.1.0" in mtls_cnf_validator_dependencies
     assert "tigrbl-authz-resource-server==0.4.0.dev2" not in mtls_cnf_validator_dependencies
+    assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2" in resource_server_dependencies
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in resource_server_dependencies
+    assert "tigrbl-security-proof-dpop==0.1.0" not in resource_server_dependencies
     assert "tigrbl-security-certificate-mtls==0.1.0" not in resource_server_dependencies
 
 
