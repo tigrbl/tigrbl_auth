@@ -21,6 +21,9 @@ from tigrbl_authz_policy_abac_administrator import (
     AttributePolicy as CanonicalAttributePolicy,
     DynamicCondition as CanonicalDynamicCondition,
 )
+from tigrbl_authz_policy_delegated_administrator import (
+    DelegatedAdministrator as CanonicalDelegatedAdministrator,
+)
 from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
@@ -62,6 +65,7 @@ def test_administrator_hard_rename_exports_only_new_names():
     for module in (uix, authz_policy):
         assert module.RBACAdministrator is CanonicalRBACAdministrator
         assert module.ABACAdministrator is CanonicalABACAdministrator
+        assert module.DelegatedAdministrator is CanonicalDelegatedAdministrator
         assert hasattr(module, "RBACAdministrator")
         assert hasattr(module, "ABACAdministrator")
         assert hasattr(module, "DelegatedAdministrator")

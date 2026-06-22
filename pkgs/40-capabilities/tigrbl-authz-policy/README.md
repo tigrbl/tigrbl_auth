@@ -12,6 +12,7 @@ tigrbl-authz-policy is the authorization-facing package name for authority, poli
 - Use it for authorization policy surfaces rather than credential verification or token signing.
 - It owns authority roles, RBAC, ABAC, delegation, policy replay, and decision audit concepts.
 - `ABACAdministrator` is implemented by `tigrbl-authz-policy-abac-administrator`; this package re-exports it for compatibility.
+- `DelegatedAdministrator` is implemented by `tigrbl-authz-policy-delegated-administrator`; this package re-exports it for compatibility.
 - `PolicyDecisionEngine` is implemented by `tigrbl-authz-policy-decision-engine`; this package re-exports it for compatibility.
 - `InvariantRegistry` is implemented by `tigrbl-authz-policy-invariant-registry`; this package re-exports it for compatibility.
 - `RBACAdministrator` is implemented by `tigrbl-authz-policy-rbac-administrator`; this package re-exports it for compatibility.
@@ -31,6 +32,7 @@ uv add tigrbl-authz-policy
 ```python
 from tigrbl_authz_policy import AuthorityRole, AuthorityScope
 from tigrbl_authz_policy_abac_administrator import ABACAdministrator
+from tigrbl_authz_policy_delegated_administrator import DelegatedAdministrator
 from tigrbl_authz_policy_decision_engine import PolicyDecisionEngine
 from tigrbl_authz_policy_invariant_registry import default_authorization_invariant_registry
 from tigrbl_authz_policy_rbac_administrator import RBACAdministrator
@@ -39,6 +41,7 @@ from tigrbl_authz_policy_service_identity_registry import ServiceIdentityRegistr
 assert AuthorityRole.ADMIN.value == "admin"
 scope = AuthorityScope("tenant-a", "client.read")
 abac = ABACAdministrator(db)
+delegated = DelegatedAdministrator(db)
 engine = PolicyDecisionEngine()
 invariants = default_authorization_invariant_registry()
 rbac = RBACAdministrator(db)
@@ -50,6 +53,7 @@ services = ServiceIdentityRegistry()
 - Authority roles, grants, permissions, scopes, and decision inputs
 - RBAC and ABAC policy surfaces; concrete engine evaluation lives in `tigrbl-authz-policy-decision-engine`
 - ABAC Administrator attribute policy behavior lives in `tigrbl-authz-policy-abac-administrator`
+- Delegated Administrator tenant visibility, client exposure, and mutation authority lives in `tigrbl-authz-policy-delegated-administrator`
 - RBAC Administrator role and assignment behavior lives in `tigrbl-authz-policy-rbac-administrator`
 - Invariant registry behavior lives in `tigrbl-authz-policy-invariant-registry`
 - Service identity registry behavior lives in `tigrbl-authz-policy-service-identity-registry`
@@ -61,6 +65,7 @@ services = ServiceIdentityRegistry()
 
 - [tigrbl-identity-policy](https://pypi.org/project/tigrbl-identity-policy/) remains a deprecated compatibility package.
 - [tigrbl-authz-policy-abac-administrator](https://pypi.org/project/tigrbl-authz-policy-abac-administrator/) owns `ABACAdministrator`.
+- [tigrbl-authz-policy-delegated-administrator](https://pypi.org/project/tigrbl-authz-policy-delegated-administrator/) owns `DelegatedAdministrator`.
 - [tigrbl-authz-policy-decision-engine](https://pypi.org/project/tigrbl-authz-policy-decision-engine/) owns `PolicyDecisionEngine`.
 - [tigrbl-authz-policy-invariant-registry](https://pypi.org/project/tigrbl-authz-policy-invariant-registry/) owns `InvariantRegistry`.
 - [tigrbl-authz-policy-rbac-administrator](https://pypi.org/project/tigrbl-authz-policy-rbac-administrator/) owns `RBACAdministrator`.

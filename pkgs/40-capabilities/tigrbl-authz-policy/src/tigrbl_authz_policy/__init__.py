@@ -16,14 +16,16 @@ from tigrbl_authz_policy_decision_engine import (
     RolePolicy,
 )
 from tigrbl_authz_policy_abac_administrator import ABACAdministrator, DynamicCondition
+from tigrbl_authz_policy_delegated_administrator import (
+    DELEGATED_MUTABLE_CLIENT_FIELDS,
+    DELEGATED_VISIBLE_CLIENT_FIELDS,
+    DelegatedAdministrator,
+    DelegatedAdminScope,
+)
 from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,
-    DELEGATED_MUTABLE_CLIENT_FIELDS,
-    DELEGATED_VISIBLE_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
-    DelegatedAdministrator,
-    DelegatedAdminScope,
     ServiceCredential,
     ServiceIdentity,
     ServiceIdentityAuthentication,

@@ -50,6 +50,7 @@ def test_pyproject_uses_published_pins_and_extras():
     facade_dependencies = set(_load_package_pyproject("tigrbl-auth")["project"]["dependencies"])
     pqc_provider_dependencies = set(_load_package_pyproject("tigrbl-security-signing-pqc")["project"]["dependencies"])
     abac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-abac-administrator")["project"]["dependencies"])
+    delegated_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-delegated-administrator")["project"]["dependencies"])
     decision_engine_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-decision-engine")["project"]["dependencies"])
     invariant_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-invariant-registry")["project"]["dependencies"])
     rbac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-rbac-administrator")["project"]["dependencies"])
@@ -64,6 +65,8 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "pqcrypto==0.4.0" not in abac_administrator_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in abac_administrator_dependencies
     assert "tigrbl-identity-storage==0.4.0.dev2" in abac_administrator_dependencies
+    assert "pqcrypto==0.4.0" not in delegated_administrator_dependencies
+    assert "tigrbl-identity-storage==0.4.0.dev2" in delegated_administrator_dependencies
     assert "pqcrypto==0.4.0" not in decision_engine_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in decision_engine_dependencies
     assert "pqcrypto==0.4.0" not in invariant_registry_dependencies
@@ -74,6 +77,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-concrete==0.4.0.dev2" in service_identity_registry_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-decision-engine==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2" in authz_dependencies
