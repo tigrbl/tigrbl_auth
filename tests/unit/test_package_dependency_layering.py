@@ -38,6 +38,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authn-credentials",
         "tigrbl-authz-policy-decision-engine",
         "tigrbl-authz-policy-invariant-registry",
+        "tigrbl-authz-policy-rbac-administrator",
         "tigrbl-authz-policy-service-identity-registry",
         "tigrbl-authz-policy",
         "tigrbl-identity-admin",

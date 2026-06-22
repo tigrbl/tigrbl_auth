@@ -19,6 +19,9 @@ from tigrbl_auth.uix import (
 from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
+from tigrbl_authz_policy_rbac_administrator import (
+    RBACAdministrator as CanonicalRBACAdministrator,
+)
 
 
 def test_service_identities_support_tenant_scoped_authentication_and_revocation():
@@ -52,6 +55,7 @@ def test_administrator_hard_rename_exports_only_new_names():
     import tigrbl_authz_policy as authz_policy
 
     for module in (uix, authz_policy):
+        assert module.RBACAdministrator is CanonicalRBACAdministrator
         assert hasattr(module, "RBACAdministrator")
         assert hasattr(module, "ABACAdministrator")
         assert hasattr(module, "DelegatedAdministrator")

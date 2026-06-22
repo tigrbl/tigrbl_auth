@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 45
+    assert len(packages) == 46
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -44,6 +44,8 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-decision-engine"].import_root == "tigrbl_authz_policy_decision_engine"
     assert packages["tigrbl-authz-policy-invariant-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry"
     assert packages["tigrbl-authz-policy-invariant-registry"].import_root == "tigrbl_authz_policy_invariant_registry"
+    assert packages["tigrbl-authz-policy-rbac-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator"
+    assert packages["tigrbl-authz-policy-rbac-administrator"].import_root == "tigrbl_authz_policy_rbac_administrator"
     assert packages["tigrbl-authz-policy-service-identity-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry"
     assert packages["tigrbl-authz-policy-service-identity-registry"].import_root == "tigrbl_authz_policy_service_identity_registry"
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
@@ -93,7 +95,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "174"
+    assert payload["count"] == "177"
     assert not any(
         cell["name"]
         in {
@@ -234,6 +236,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-auth-protocol-oauth",
         "tigrbl-authz-policy-decision-engine",
         "tigrbl-authz-policy-invariant-registry",
+        "tigrbl-authz-policy-rbac-administrator",
         "tigrbl-authz-policy-service-identity-registry",
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",

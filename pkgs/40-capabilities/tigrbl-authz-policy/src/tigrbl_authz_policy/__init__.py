@@ -15,6 +15,7 @@ from tigrbl_authz_policy_decision_engine import (
     PolicyTrace,
     RolePolicy,
 )
+from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
@@ -24,8 +25,6 @@ from .control_plane import (
     DelegatedAdministrator,
     DelegatedAdminScope,
     DynamicCondition,
-    RBACAdministrator,
-    Role,
     ServiceCredential,
     ServiceIdentity,
     ServiceIdentityAuthentication,

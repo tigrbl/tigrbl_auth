@@ -20,6 +20,9 @@ from tigrbl_authz_policy.control_plane import (
 from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
+from tigrbl_authz_policy_rbac_administrator import (
+    RBACAdministrator as CanonicalRBACAdministrator,
+)
 
 
 def _client() -> dict[str, object]:
@@ -77,6 +80,7 @@ async def _policy_stack(administrator_storage) -> tuple[ServiceIdentityRegistry,
 
 
 def test_admin_policy_boundary_t0_runtime_client_field_exposure_is_guarded():
+    assert RBACAdministrator is CanonicalRBACAdministrator
     assert ServiceIdentityRegistry is CanonicalServiceIdentityRegistry
     assert "client_secret" not in PUBLIC_CLIENT_FIELDS
     assert set(PUBLIC_CLIENT_FIELDS) < set(ADMIN_CLIENT_FIELDS)

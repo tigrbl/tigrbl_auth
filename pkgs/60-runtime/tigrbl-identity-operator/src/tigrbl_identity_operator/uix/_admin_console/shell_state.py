@@ -16,8 +16,6 @@ from tigrbl_authz_policy.control_plane import (
     PolicyDecision,
     PolicyEngine,
     PUBLIC_CLIENT_FIELDS,
-    RBACAdministrator,
-    Role,
     assert_client_mutation_authority,
     build_compliance_report,
     expose_client_record,
@@ -37,6 +35,7 @@ from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
 )
+from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
 from tigrbl_authz_policy.governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,
