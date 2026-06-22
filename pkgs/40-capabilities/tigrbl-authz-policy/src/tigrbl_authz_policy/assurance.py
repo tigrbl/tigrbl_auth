@@ -38,7 +38,7 @@ from tigrbl_identity_contracts.replay import (
     PolicyReplayResult,
 )
 
-from .authority import AuthorityDerivationGraph
+from tigrbl_authz_policy_authority_derivation_graph import AuthorityDerivationGraph
 
 
 class AuthorizationSafetyPropertyEvaluator:

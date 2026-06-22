@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy import (
+from tigrbl_authz_policy import validate_tenant_realm_isolation
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,
     AuthorityScope,
-    validate_tenant_realm_isolation,
 )
 
 

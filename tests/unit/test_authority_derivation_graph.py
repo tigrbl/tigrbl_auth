@@ -3,7 +3,8 @@ from __future__ import annotations
 import tests.unit.formal_auth_helpers  # noqa: F401
 
 from tigrbl_auth.services.formal_authorization import AuthorityDerivationGraph as FacadeGraph
-from tigrbl_authz_policy import (
+from tigrbl_authz_policy import AuthorityDerivationGraph as PolicyGraph
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,
@@ -41,6 +42,7 @@ def _graph() -> AuthorityDerivationGraph:
 
 def test_authority_derivation_graph_t0_exports_facade_identity() -> None:
     assert FacadeGraph is AuthorityDerivationGraph
+    assert PolicyGraph is AuthorityDerivationGraph
 
 
 def test_authority_derivation_graph_t1_derives_paths_and_reachability() -> None:

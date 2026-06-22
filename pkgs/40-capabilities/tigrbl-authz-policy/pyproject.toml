@@ -40,6 +40,7 @@ dependencies = [
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
     "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
+    "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-engine==0.4.0.dev2",

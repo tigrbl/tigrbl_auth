@@ -4,15 +4,17 @@ import tests.unit.formal_auth_helpers  # noqa: F401
 
 from tigrbl_authz_policy import (
     AuthorizationReference,
-    AuthorityDerivationGraph,
-    AuthorityEdge,
-    AuthorityNode,
-    AuthorityScope,
     ReferenceCatalog,
     TrustEdge,
     validate_authorization_referential_integrity,
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
+)
+from tigrbl_authz_policy_authority_derivation_graph import (
+    AuthorityDerivationGraph,
+    AuthorityEdge,
+    AuthorityNode,
+    AuthorityScope,
 )
 
 

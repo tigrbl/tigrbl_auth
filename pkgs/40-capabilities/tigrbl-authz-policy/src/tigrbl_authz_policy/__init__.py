@@ -67,7 +67,7 @@ from .assurance import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from .authority import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityGraphIntegrityReport,
@@ -78,14 +78,14 @@ from .authority import (
     authority_matches,
     validate_authority_graph_integrity,
 )
-from .authority import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityRole,
     has_admin_authority,
     has_owner_authority,
     has_superuser_authority,
     normalize_authority_roles,
 )
-from .authority import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,

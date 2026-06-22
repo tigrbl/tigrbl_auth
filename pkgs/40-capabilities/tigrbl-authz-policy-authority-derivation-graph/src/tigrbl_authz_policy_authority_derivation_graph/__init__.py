@@ -1,0 +1,51 @@
+"""Authority derivation graph and closure helpers."""
+
+from __future__ import annotations
+
+from .graph import (
+    AuthorityClosure,
+    AuthorityDerivationGraph,
+    AuthorityEdge,
+    AuthorityGraphIntegrityReport,
+    AuthorityMonotonicityReport,
+    AuthorityMutationKind,
+    AuthorityNode,
+    AuthorityPath,
+    AuthorityReachabilityProof,
+    AuthorityRole,
+    AuthorityScope,
+    LeastAuthorityDiff,
+    authority_matches,
+    compare_authority_monotonicity,
+    compute_authority_closure,
+    diff_least_authority,
+    has_admin_authority,
+    has_owner_authority,
+    has_superuser_authority,
+    normalize_authority_roles,
+    validate_authority_graph_integrity,
+)
+
+__all__ = [
+    "AuthorityClosure",
+    "AuthorityDerivationGraph",
+    "AuthorityEdge",
+    "AuthorityGraphIntegrityReport",
+    "AuthorityMonotonicityReport",
+    "AuthorityMutationKind",
+    "AuthorityNode",
+    "AuthorityPath",
+    "AuthorityReachabilityProof",
+    "AuthorityRole",
+    "AuthorityScope",
+    "LeastAuthorityDiff",
+    "authority_matches",
+    "compare_authority_monotonicity",
+    "compute_authority_closure",
+    "diff_least_authority",
+    "has_admin_authority",
+    "has_owner_authority",
+    "has_superuser_authority",
+    "normalize_authority_roles",
+    "validate_authority_graph_integrity",
+]

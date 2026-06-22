@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_authz_policy import (
-    AuthorizationReference,
-    AuthorizationSafetyPropertyEvaluator,
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityClosure,
     AuthorityDerivationGraph,
     AuthorityEdge,
@@ -13,6 +11,16 @@ from tigrbl_authz_policy import (
     AuthorityPath,
     AuthorityReachabilityProof,
     AuthorityScope,
+    LeastAuthorityDiff,
+    authority_matches,
+    compare_authority_monotonicity,
+    compute_authority_closure,
+    diff_least_authority,
+    validate_authority_graph_integrity,
+)
+from tigrbl_authz_policy import (
+    AuthorizationReference,
+    AuthorizationSafetyPropertyEvaluator,
     ControlPlaneCorrectnessReport,
     ConvergenceEvent,
     ConvergenceState,
@@ -28,7 +36,6 @@ from tigrbl_authz_policy import (
     DelegationLifecycleAuditEvent,
     DelegationTokenLink,
     IntegrityReport,
-    LeastAuthorityDiff,
     LivenessConvergenceReport,
     PolicyDeterminismReport,
     PolicyReplayCase,
@@ -37,20 +44,15 @@ from tigrbl_authz_policy import (
     SafetyPropertyResult,
     TenantRealmIsolationReport,
     TrustEdge,
-    authority_matches,
     build_control_plane_correctness_report,
     canonical_hash,
     canonical_json,
-    compare_authority_monotonicity,
     compare_policy_version_decisions,
-    compute_authority_closure,
-    diff_least_authority,
     evaluate_liveness_convergence,
     normalize_delegation_scopes,
     prove_delegation_attenuation,
     replay_policy_determinism,
     validate_authorization_referential_integrity,
-    validate_authority_graph_integrity,
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
 )
