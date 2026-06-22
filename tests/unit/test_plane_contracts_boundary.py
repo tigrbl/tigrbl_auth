@@ -145,7 +145,7 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tigrbl_identity_concrete as concrete
     from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
     from tigrbl_identity_admin._control_plane import models as legacy_admin_models
-    from tigrbl_identity_admin_control_plane import models as admin_models
+    from tigrbl_identity_concrete.admin_control_plane import models as admin_models
 
     assert admin_models.AdminResource is management_contracts.AdminResource
     assert admin_models.App is management_contracts.App
@@ -406,12 +406,13 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
     assert (contracts_root / "policy" / "__init__.py").exists()
     assert (contracts_root / "policy" / "conditions.py").exists()
     assert (contracts_root / "policy" / "decisions.py").exists()
+    assert (contracts_root / "policy" / "definitions.py").exists()
     assert (contracts_root / "policy" / "effects.py").exists()
-    assert (contracts_root / "policy" / "key_rotation.py").exists()
     assert (contracts_root / "policy" / "kinds.py").exists()
-    assert (contracts_root / "policy" / "lifecycle.py").exists()
+    assert (contracts_root / "policy" / "ports.py").exists()
     assert (contracts_root / "policy" / "requests.py").exists()
     assert (contracts_root / "policy" / "rules.py").exists()
+    assert (contracts_root / "policy" / "versions.py").exists()
     assert (
         ROOT
         / "pkgs"
@@ -466,10 +467,11 @@ def test_target_capability_packages_no_longer_own_contract_classes() -> None:
     capability_roots = [
         ROOT
         / "pkgs"
-        / "40-capabilities"
-        / "tigrbl-identity-admin-control-plane"
+        / "10-concrete"
+        / "tigrbl-identity-concrete"
         / "src"
-        / "tigrbl_identity_admin_control_plane",
+        / "tigrbl_identity_concrete"
+        / "admin_control_plane",
         ROOT
         / "pkgs"
         / "40-capabilities"

@@ -12,6 +12,7 @@ from tigrbl_security_trust_contracts import (
     CertificateRequest,
     CertificateVerifyRequest,
     DeriveKeyRequest,
+    DPoPBinding,
     ExportKeyRequest,
     IssueRequest,
     KeyArtifact,
@@ -25,11 +26,15 @@ from tigrbl_security_trust_contracts import (
     OpenResult,
     ParsedArtifact,
     ParseRequest,
+    ProofBinding,
     RewrapRequest,
+    TokenIntrospectionRequest,
+    TokenIntrospectionResult,
     TokenIssueRequest,
     TokenVerifyRequest,
     VerificationResult,
     VerifyRequest,
+    MTLSBinding,
 )
 
 
@@ -240,3 +245,61 @@ class CipherPolicyDomainBase(CapabilityProviderBase):
             if default not in set(allowed):
                 issues.append(f"default_alg({op})={default} not in supports().ops[{op}]")
         return tuple(issues)
+
+
+class ConfirmationBindingValidatorBase(CapabilityProviderBase):
+    """Base for proof confirmation validators such as DPoP or mTLS cnf checks."""
+
+    @property
+    @abstractmethod
+    def confirmation_member(self) -> str: ...
+
+    def validate_confirmation(
+        self,
+        cnf: Mapping[str, Any],
+        binding: ProofBinding | None,
+    ) -> bool:
+        raise NotImplementedError
+
+
+class SenderConstraintValidatorBase(CapabilityProviderBase):
+    """Base for composing sender-constraint validation providers."""
+
+    def validate(
+        self,
+        cnf: Mapping[str, Any],
+        *,
+        dpop: DPoPBinding | None = None,
+        mtls: MTLSBinding | None = None,
+        require_dpop: bool = False,
+        require_mtls: bool = False,
+    ) -> bool:
+        raise NotImplementedError
+
+
+class VerificationKeyResolverBase(CapabilityProviderBase):
+    """Base for verification key resolution and JWKS-backed caches."""
+
+    def get(self, kid: str) -> Mapping[str, Any]:
+        raise NotImplementedError
+
+
+class JWKSCacheBase(VerificationKeyResolverBase):
+    """Base for mutable JWKS verification key caches."""
+
+    @property
+    def keys(self) -> Mapping[str, Mapping[str, Any]]:
+        raise NotImplementedError
+
+    def put_jwks(self, jwks: Mapping[str, Any]) -> None:
+        raise NotImplementedError
+
+
+class TokenIntrospectionClientBase(CapabilityProviderBase):
+    """Base for provider-neutral token introspection clients."""
+
+    def introspect(
+        self,
+        request: TokenIntrospectionRequest,
+    ) -> TokenIntrospectionResult:
+        raise NotImplementedError

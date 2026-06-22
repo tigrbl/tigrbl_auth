@@ -27,7 +27,7 @@ MIGRATED_RELEASE_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/bootstrap.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/backends.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
-    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/security_deps.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/handler_records.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/user_lookup.py",
 ]
@@ -64,11 +64,11 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/control_plane.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
-    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator/src/tigrbl_authz_policy_abac_administrator/administrator.py",
-    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-delegated-administrator/src/tigrbl_authz_policy_delegated_administrator/administrator.py",
-    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-engine/src/tigrbl_authz_policy_engine/engine.py",
-    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator/src/tigrbl_authz_policy_rbac_administrator/administrator.py",
-    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry/src/tigrbl_authz_policy_service_identity_registry/registry.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/abac.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegated_admin.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/policy_engine.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/rbac.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/service_identity_registry.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/deployment.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/surfaces.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/_deployment/__init__.py",
@@ -107,7 +107,7 @@ ASYNC_REQUEST_TOKEN_PATHS = [
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oauth/src/tigrbl_auth_protocol_oauth/standards/token_exchange.py",
     ROOT / "pkgs/50-protocols/tigrbl-auth-protocol-oidc/src/tigrbl_auth_protocol_oidc/standards/userinfo.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/auth.py",
-    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/deps.py",
+    ROOT / "pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/security/security_deps.py",
 ]
 
 AUTHN_TOKEN_SIGNER_PATHS = [

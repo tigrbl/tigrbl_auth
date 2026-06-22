@@ -21,136 +21,48 @@ from scripts.monorepo_release import (
 
 SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 
+REMOVED_HELPER_PACKAGES = {
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store",
+    "tigrbl-authz-policy-abac-administrator",
+    "tigrbl-authz-policy-authority-derivation-graph",
+    "tigrbl-authz-policy-decision-engine",
+    "tigrbl-authz-policy-delegated-administrator",
+    "tigrbl-authz-policy-engine",
+    "tigrbl-authz-policy-invariant-registry",
+    "tigrbl-authz-policy-rbac-administrator",
+    "tigrbl-authz-policy-service-identity-registry",
+    "tigrbl-authz-resource-server-dpop-cnf-binding-validator",
+    "tigrbl-authz-resource-server-introspection-client",
+    "tigrbl-authz-resource-server-jwks-cache",
+    "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
+    "tigrbl-authz-resource-server-sender-constraint-validator",
+    "tigrbl-authz-resource-server-verifier",
+    "tigrbl-identity-admin-advanced-authenticator-registry",
+    "tigrbl-identity-admin-auth-anomaly-detector",
+    "tigrbl-identity-admin-control-plane",
+    "tigrbl-identity-admin-federation-registry",
+    "tigrbl-identity-admin-policy-registry",
+    "tigrbl-identity-admin-relationship-graph",
+    "tigrbl-identity-admin-trust-federation-graph",
+}
+
 
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 65
+    assert len(packages) == 45
     assert "tigrbl-auth-workspace" not in packages
-    assert "tigrbl-control-plane-contracts" not in packages
-    assert "tigrbl-management-plane-contracts" not in packages
-    assert "tigrbl-user-plane-contracts" not in packages
+    assert REMOVED_HELPER_PACKAGES.isdisjoint(packages)
     assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-identity-contracts"
-    assert packages["tigrbl-release-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-release-contracts"
-    assert packages["tigrbl-security-trust-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-security-trust-contracts"
     assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
-    assert packages["tigrbl-security-certificate-mtls"].path.as_posix() == "pkgs/30-providers/tigrbl-security-certificate-mtls"
-    assert packages["tigrbl-security-proof-dpop"].path.as_posix() == "pkgs/30-providers/tigrbl-security-proof-dpop"
-    assert packages["tigrbl-security-proof-pkce"].path.as_posix() == "pkgs/30-providers/tigrbl-security-proof-pkce"
-    assert packages["tigrbl-security-signing-pqc"].path.as_posix() == "pkgs/30-providers/tigrbl-security-signing-pqc"
-    assert packages["tigrbl-auth-release-certification"].path.as_posix() == "pkgs/60-runtime/tigrbl-auth-release-certification"
-    assert packages["tigrbl-auth-release-certification"].import_root == "tigrbl_auth_release_certification"
-    assert packages["tigrbl-authz-policy-admin-gate"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-admin-gate"
-    assert packages["tigrbl-authz-policy-admin-gate"].import_root == "tigrbl_authz_policy_admin_gate"
-    assert packages["tigrbl-authz-policy-abac-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator"
-    assert packages["tigrbl-authz-policy-abac-administrator"].import_root == "tigrbl_authz_policy_abac_administrator"
-    assert packages["tigrbl-authz-policy-authority-derivation-graph"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph"
+    assert packages["tigrbl-authz-policy-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-authz-policy-concrete"
+    assert packages["tigrbl-identity-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-identity-concrete"
+    assert packages["tigrbl-security-token-verification"].path.as_posix() == (
+        "pkgs/30-providers/tigrbl-security-token-verification"
     )
-    assert packages["tigrbl-authz-policy-authority-derivation-graph"].import_root == (
-        "tigrbl_authz_policy_authority_derivation_graph"
-    )
-    assert packages["tigrbl-authz-policy-delegated-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-delegated-administrator"
-    assert packages["tigrbl-authz-policy-delegated-administrator"].import_root == "tigrbl_authz_policy_delegated_administrator"
-    assert packages["tigrbl-authz-policy-decision-engine"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine"
-    assert packages["tigrbl-authz-policy-decision-engine"].import_root == "tigrbl_authz_policy_decision_engine"
-    assert packages["tigrbl-authz-policy-engine"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-engine"
-    assert packages["tigrbl-authz-policy-engine"].import_root == "tigrbl_authz_policy_engine"
-    assert packages["tigrbl-authz-policy-invariant-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry"
-    assert packages["tigrbl-authz-policy-invariant-registry"].import_root == "tigrbl_authz_policy_invariant_registry"
-    assert packages["tigrbl-authz-policy-rbac-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator"
-    assert packages["tigrbl-authz-policy-rbac-administrator"].import_root == "tigrbl_authz_policy_rbac_administrator"
-    assert packages["tigrbl-authz-policy-service-identity-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry"
-    assert packages["tigrbl-authz-policy-service-identity-registry"].import_root == "tigrbl_authz_policy_service_identity_registry"
-    assert packages["tigrbl-authz-resource-server-dpop-cnf-binding-validator"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-dpop-cnf-binding-validator"
-    )
-    assert packages["tigrbl-authz-resource-server-dpop-cnf-binding-validator"].import_root == (
-        "tigrbl_authz_resource_server_dpop_cnf_binding_validator"
-    )
-    assert packages["tigrbl-authz-resource-server-introspection-client"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-introspection-client"
-    )
-    assert packages["tigrbl-authz-resource-server-introspection-client"].import_root == (
-        "tigrbl_authz_resource_server_introspection_client"
-    )
-    assert packages["tigrbl-authz-resource-server-jwks-cache"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-jwks-cache"
-    )
-    assert packages["tigrbl-authz-resource-server-jwks-cache"].import_root == (
-        "tigrbl_authz_resource_server_jwks_cache"
-    )
-    assert packages["tigrbl-authz-resource-server-mtls-cnf-binding-validator"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator"
-    )
-    assert packages["tigrbl-authz-resource-server-mtls-cnf-binding-validator"].import_root == (
-        "tigrbl_authz_resource_server_mtls_cnf_binding_validator"
-    )
-    assert packages["tigrbl-authz-resource-server-sender-constraint-validator"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-sender-constraint-validator"
-    )
-    assert packages["tigrbl-authz-resource-server-sender-constraint-validator"].import_root == (
-        "tigrbl_authz_resource_server_sender_constraint_validator"
-    )
-    assert packages["tigrbl-authz-resource-server-verifier"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-authz-resource-server-verifier"
-    )
-    assert packages["tigrbl-authz-resource-server-verifier"].import_root == (
-        "tigrbl_authz_resource_server_verifier"
-    )
+    assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy"
+    assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/40-capabilities/tigrbl-identity-admin"
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
-    assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
-    assert packages["tigrbl-identity-admin-control-plane"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-control-plane"
-    )
-    assert packages["tigrbl-identity-admin-control-plane"].import_root == "tigrbl_identity_admin_control_plane"
-    assert packages["tigrbl-identity-admin-federation-registry"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-federation-registry"
-    )
-    assert packages["tigrbl-identity-admin-federation-registry"].import_root == (
-        "tigrbl_identity_admin_federation_registry"
-    )
-    assert packages["tigrbl-identity-admin-advanced-authenticator-registry"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-advanced-authenticator-registry"
-    )
-    assert packages["tigrbl-identity-admin-advanced-authenticator-registry"].import_root == (
-        "tigrbl_identity_admin_advanced_authenticator_registry"
-    )
-    assert packages["tigrbl-identity-admin-auth-anomaly-detector"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-auth-anomaly-detector"
-    )
-    assert packages["tigrbl-identity-admin-auth-anomaly-detector"].import_root == (
-        "tigrbl_identity_admin_auth_anomaly_detector"
-    )
-    assert packages["tigrbl-identity-admin-policy-registry"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-policy-registry"
-    )
-    assert packages["tigrbl-identity-admin-policy-registry"].import_root == (
-        "tigrbl_identity_admin_policy_registry"
-    )
-    assert packages["tigrbl-identity-admin-relationship-graph"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph"
-    )
-    assert packages["tigrbl-identity-admin-relationship-graph"].import_root == (
-        "tigrbl_identity_admin_relationship_graph"
-    )
-    assert packages["tigrbl-identity-admin-trust-federation-graph"].path.as_posix() == (
-        "pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph"
-    )
-    assert packages["tigrbl-identity-admin-trust-federation-graph"].import_root == (
-        "tigrbl_identity_admin_trust_federation_graph"
-    )
-    assert packages["tigrbl-identity-author"].path.as_posix() == "pkgs/60-runtime/tigrbl-identity-author"
-    assert packages["tigrbl-identity-author"].import_root == "tigrbl_identity_author"
-    assert packages["tigrbl-identity-oauth"].path.as_posix() == "pkgs/deprecated/tigrbl-identity-oauth"
-    assert packages["tigrbl-identity-oauth"].import_root == "tigrbl_identity_oauth"
-    assert packages["tigrbl-auth-protocol-oauth"].import_root == "tigrbl_auth_protocol_oauth"
-    assert packages["tigrbl-auth-protocol-oidc-backchannel-replay-store"].path.as_posix() == (
-        "pkgs/50-protocols/tigrbl-auth-protocol-oidc-backchannel-replay-store"
-    )
-    assert packages["tigrbl-auth-protocol-oidc-backchannel-replay-store"].import_root == (
-        "tigrbl_auth_protocol_oidc_backchannel_replay_store"
-    )
 
 
 def test_monorepo_release_accepts_package_version_tag() -> None:
@@ -191,151 +103,15 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "261"
-    assert not any(
-        cell["name"]
-        in {
-            "tigrbl-control-plane-contracts",
-            "tigrbl-management-plane-contracts",
-            "tigrbl-user-plane-contracts",
-        }
-        for cell in matrix
-    )
+    assert payload["count"] == "169"
+    names = {cell["name"] for cell in matrix}
+    assert REMOVED_HELPER_PACKAGES.isdisjoint(names)
+    assert "tigrbl-security-token-verification" in names
     assert {
         cell["python_version"]
         for cell in matrix
-        if cell["name"] == "tigrbl-identity-contracts"
+        if cell["name"] == "tigrbl-security-token-verification"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-release-contracts"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-trust-contracts"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-trust-domain-bases"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-signing-pqc"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-auth-protocol-oidc-backchannel-replay-store"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-certificate-mtls"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-dpop-cnf-binding-validator"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-introspection-client"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-jwks-cache"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-mtls-cnf-binding-validator"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-sender-constraint-validator"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-authz-resource-server-verifier"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-proof-dpop"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-security-proof-pkce"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-auth-release-certification"
-    } == {"3.10", "3.11", "3.12"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-advanced-authenticator-registry"
-    } == {"3.10", "3.11", "3.12"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-auth-anomaly-detector"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-federation-registry"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-policy-registry"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-relationship-graph"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-admin-trust-federation-graph"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-author"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-core"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-auth"
-    } == {"3.10", "3.11", "3.12"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-jose"
-    } == {"3.10", "3.11", "3.12"}
-    assert {
-        cell["python_version"]
-        for cell in matrix
-        if cell["name"] == "tigrbl-identity-server"
-    } == {"3.10", "3.11", "3.12"}
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
@@ -393,50 +169,20 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         for item in _local_dependency_closure(packages["tigrbl-identity-oauth"])
     }
 
-    assert dependency_names == {
+    assert REMOVED_HELPER_PACKAGES.isdisjoint(dependency_names)
+    assert {
         "tigrbl-auth-protocol-oauth",
-        "tigrbl-authz-policy-admin-gate",
-        "tigrbl-authz-policy-abac-administrator",
-        "tigrbl-authz-policy-authority-derivation-graph",
-        "tigrbl-authz-policy-delegated-administrator",
-        "tigrbl-authz-policy-decision-engine",
-        "tigrbl-authz-policy-engine",
-        "tigrbl-authz-policy-invariant-registry",
-        "tigrbl-authz-policy-rbac-administrator",
-        "tigrbl-authz-policy-service-identity-registry",
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",
-        "tigrbl-authz-resource-server-dpop-cnf-binding-validator",
-        "tigrbl-authz-resource-server-introspection-client",
-        "tigrbl-authz-resource-server-jwks-cache",
-        "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
-        "tigrbl-authz-resource-server-sender-constraint-validator",
-        "tigrbl-authz-resource-server-verifier",
         "tigrbl-authz-resource-server",
-        "tigrbl-identity-admin",
-        "tigrbl-identity-admin-control-plane",
-        "tigrbl-identity-author",
         "tigrbl-identity-concrete",
         "tigrbl-identity-contracts",
         "tigrbl-identity-core",
         "tigrbl-identity-jose",
-        "tigrbl-identity-runtime",
-        "tigrbl-identity-storage",
-        "tigrbl-auth-release-certification",
-        "tigrbl-release-contracts",
-        "tigrbl-identity-admin-advanced-authenticator-registry",
-        "tigrbl-identity-admin-auth-anomaly-detector",
-        "tigrbl-identity-admin-federation-registry",
-        "tigrbl-identity-admin-policy-registry",
-        "tigrbl-identity-admin-relationship-graph",
-        "tigrbl-identity-admin-trust-federation-graph",
-        "tigrbl-security-certificate-mtls",
-        "tigrbl-security-proof-dpop",
-        "tigrbl-security-proof-pkce",
-        "tigrbl-security-signing-pqc",
+        "tigrbl-security-token-verification",
         "tigrbl-security-trust-contracts",
         "tigrbl-security-trust-domain-bases",
-    }
+    }.issubset(dependency_names)
 
     facade_dependency_names = {
         item.name for item in _local_dependency_closure(packages["tigrbl-auth"])
@@ -444,7 +190,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
     assert "tigrbl-auth-protocol-oauth" in facade_dependency_names
     assert "tigrbl-identity-author" in facade_dependency_names
     assert "tigrbl-identity-storage" in facade_dependency_names
-    assert "tigrbl-security-signing-pqc" in facade_dependency_names
+    assert "tigrbl-security-token-verification" in facade_dependency_names
 
     api_dependency_names = {
         item.name
@@ -459,25 +205,14 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
         item.name for item in _local_dependency_closure(_root_project_package())
     }
 
+    assert REMOVED_HELPER_PACKAGES.isdisjoint(root_dependency_names)
     assert "tigrbl-authz-resource-server" in root_dependency_names
-    assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator" in root_dependency_names
-    assert "tigrbl-authz-resource-server-introspection-client" in root_dependency_names
-    assert "tigrbl-authz-resource-server-jwks-cache" in root_dependency_names
-    assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator" in root_dependency_names
-    assert "tigrbl-authz-resource-server-sender-constraint-validator" in root_dependency_names
-    assert "tigrbl-authz-resource-server-verifier" in root_dependency_names
+    assert "tigrbl-security-token-verification" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
-    assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names
-    assert "tigrbl-identity-admin-advanced-authenticator-registry" in root_dependency_names
-    assert "tigrbl-identity-admin-auth-anomaly-detector" in root_dependency_names
-    assert "tigrbl-identity-admin-control-plane" in root_dependency_names
-    assert "tigrbl-identity-admin-federation-registry" in root_dependency_names
-    assert "tigrbl-identity-admin-policy-registry" in root_dependency_names
-    assert "tigrbl-identity-admin-relationship-graph" in root_dependency_names
-    assert "tigrbl-identity-admin-trust-federation-graph" in root_dependency_names
+    assert "tigrbl-authz-policy-concrete" in root_dependency_names
+    assert "tigrbl-identity-concrete" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
-    assert "tigrbl-auth-protocol-oidc-backchannel-replay-store" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names
 
 

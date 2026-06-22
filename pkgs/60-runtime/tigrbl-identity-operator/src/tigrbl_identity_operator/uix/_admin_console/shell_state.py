@@ -13,20 +13,20 @@ from tigrbl_authz_policy.control_plane import (
     filter_visible_tenants,
     simulate_policy,
 )
-from tigrbl_authz_policy_abac_administrator import (
+from tigrbl_authz_policy import (
     ABACAdministrator,
     AttributePolicy,
     DynamicCondition,
 )
-from tigrbl_authz_policy_delegated_administrator import (
+from tigrbl_authz_policy import (
     ADMIN_CLIENT_FIELDS,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdminScope,
     DelegatedAdministrator,
 )
-from tigrbl_authz_policy_engine import PolicyEngine
-from tigrbl_authz_policy_invariant_registry import (
+from tigrbl_authz_policy import PolicyEngine
+from tigrbl_authz_policy_concrete import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,
@@ -35,11 +35,11 @@ from tigrbl_authz_policy_invariant_registry import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from tigrbl_authz_policy_service_identity_registry import (
+from tigrbl_authz_policy import (
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
 )
-from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
+from tigrbl_authz_policy import RBACAdministrator, Role
 from tigrbl_authz_policy.governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,

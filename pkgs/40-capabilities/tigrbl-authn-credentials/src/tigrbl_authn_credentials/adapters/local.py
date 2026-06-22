@@ -32,7 +32,7 @@ class LocalAuthNAdapter(AuthNProvider):
     # ------------------------------------------------------------------ #
     async def get_principal(self, request: Request) -> dict:  # noqa: D401
         """
-        Delegate to ``tigrbl_identity_server.security.deps.get_principal`` and forward
+        Delegate to ``tigrbl_identity_server.security.security_deps.get_principal`` and forward
         whatever dict it returns.
 
         Raises

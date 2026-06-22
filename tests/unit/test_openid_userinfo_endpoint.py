@@ -6,7 +6,7 @@ import pytest
 from http import HTTPStatus as status
 
 from tigrbl_auth.app import app
-from tigrbl_identity_server.security.deps import get_current_principal
+from tigrbl_identity_server.security.security_deps import get_current_principal
 
 
 @pytest.mark.unit

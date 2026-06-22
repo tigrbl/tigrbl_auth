@@ -12,26 +12,26 @@ from tigrbl_identity_contracts.delegation import (
     PUBLIC_CLIENT_FIELDS,
 )
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision
-from tigrbl_authz_policy_abac_administrator import (
+from .abac import (
     ABACAdministrator,
     AttributePolicy,
     DynamicCondition,
 )
-from tigrbl_authz_policy_engine import PolicyEngine
-from tigrbl_authz_policy_delegated_administrator import (
+from .policy_engine import PolicyEngine
+from .delegated_admin import (
     ADMIN_CLIENT_FIELDS,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdministrator,
     DelegatedAdminScope,
 )
-from tigrbl_authz_policy_service_identity_registry import (
+from .service_identity_registry import (
     ServiceCredential,
     ServiceIdentity,
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,
 )
-from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
+from .rbac import RBACAdministrator, Role
 
 
 async def simulate_policy(

@@ -18,6 +18,7 @@ from .rp import *
 from .resource_server import *
 from .tokens import *
 from .admin import *
+from .admin_services import *
 from .adaptive_access import *
 from .correctness import *
 from .admin_resources import *

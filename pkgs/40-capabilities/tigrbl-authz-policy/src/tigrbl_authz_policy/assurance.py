@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Mapping
 
 from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
-from tigrbl_authz_policy_invariant_registry import (
+from tigrbl_authz_policy_concrete.invariant_registry import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,
@@ -38,7 +38,7 @@ from tigrbl_identity_contracts.replay import (
     PolicyReplayResult,
 )
 
-from tigrbl_authz_policy_authority_derivation_graph import AuthorityDerivationGraph
+from tigrbl_authz_policy_concrete.authority_graph import AuthorityDerivationGraph
 
 
 class AuthorizationSafetyPropertyEvaluator:

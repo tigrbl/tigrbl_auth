@@ -82,6 +82,26 @@ class PolicyHook(Protocol):
     ) -> tuple[bool, str]: ...
 
 
+class ResourceServerVerifierPort(Protocol):
+    def verify_claims(
+        self,
+        claims: AccessTokenClaims,
+        requirement: ResourceRequirement,
+        *,
+        dpop: DPoPBinding | None = None,
+        mtls: MTLSBinding | None = None,
+    ) -> VerificationResult: ...
+
+    def verify_token(
+        self,
+        token: str | AccessTokenClaims,
+        requirement: ResourceRequirement,
+        *,
+        dpop: DPoPBinding | None = None,
+        mtls: MTLSBinding | None = None,
+    ) -> VerificationResult: ...
+
+
 @dataclass(frozen=True, slots=True)
 class FrameworkRequest:
     authorization: str | None
@@ -145,6 +165,7 @@ __all__ = [
     "ProtectedResourceVerifierContract",
     "ResourceRequirement",
     "ResourceServerError",
+    "ResourceServerVerifierPort",
     "TokenValidationError",
     "VerificationResult",
     "VerificationStatus",

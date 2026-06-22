@@ -17,18 +17,18 @@ from tigrbl_authz_policy.control_plane import (
     filter_visible_tenants,
     simulate_policy,
 )
-from tigrbl_authz_policy_abac_administrator import (
+from tigrbl_authz_policy import (
     ABACAdministrator as CanonicalABACAdministrator,
     DynamicCondition as CanonicalDynamicCondition,
 )
-from tigrbl_authz_policy_delegated_administrator import (
+from tigrbl_authz_policy import (
     DelegatedAdministrator as CanonicalDelegatedAdministrator,
 )
-from tigrbl_authz_policy_engine import PolicyEngine as CanonicalPolicyEngine
-from tigrbl_authz_policy_service_identity_registry import (
+from tigrbl_authz_policy import PolicyEngine as CanonicalPolicyEngine
+from tigrbl_authz_policy import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
-from tigrbl_authz_policy_rbac_administrator import (
+from tigrbl_authz_policy import (
     RBACAdministrator as CanonicalRBACAdministrator,
 )
 

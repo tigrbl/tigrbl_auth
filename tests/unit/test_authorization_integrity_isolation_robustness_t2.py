@@ -10,7 +10,7 @@ from tigrbl_authz_policy import (
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tigrbl_authz_policy_concrete import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,

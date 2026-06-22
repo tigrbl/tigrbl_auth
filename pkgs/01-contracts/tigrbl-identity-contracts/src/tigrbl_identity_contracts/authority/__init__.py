@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .graph import *
+from .ports import *
 from .roles import *
 from .semantics import *
 from .trust_domains import *

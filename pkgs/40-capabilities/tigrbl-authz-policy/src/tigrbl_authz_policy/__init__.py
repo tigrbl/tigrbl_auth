@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_authz_policy_decision_engine import (
+from tigrbl_authz_policy_concrete import (
     AdminPolicy,
     AttributePolicy,
     DecisionEffect,
@@ -15,15 +15,15 @@ from tigrbl_authz_policy_decision_engine import (
     PolicyTrace,
     RolePolicy,
 )
-from tigrbl_authz_policy_abac_administrator import ABACAdministrator, DynamicCondition
-from tigrbl_authz_policy_delegated_administrator import (
+from .abac import ABACAdministrator, DynamicCondition
+from .delegated_admin import (
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdministrator,
     DelegatedAdminScope,
 )
-from tigrbl_authz_policy_engine import PolicyEngine
-from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
+from .policy_engine import PolicyEngine
+from .rbac import RBACAdministrator, Role
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
@@ -67,7 +67,7 @@ from .assurance import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tigrbl_authz_policy_concrete import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityGraphIntegrityReport,
@@ -78,14 +78,14 @@ from tigrbl_authz_policy_authority_derivation_graph import (
     authority_matches,
     validate_authority_graph_integrity,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tigrbl_authz_policy_concrete import (
     AuthorityRole,
     has_admin_authority,
     has_owner_authority,
     has_superuser_authority,
     normalize_authority_roles,
 )
-from tigrbl_authz_policy_authority_derivation_graph import (
+from tigrbl_authz_policy_concrete import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,

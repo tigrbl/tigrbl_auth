@@ -33,7 +33,7 @@ from tigrbl_authz_policy import (
     PolicyRequest,
     RolePolicy,
 )
-from tigrbl_authz_policy_decision_engine import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
+from tigrbl_authz_policy_concrete import PolicyDecisionEngine as CanonicalPolicyDecisionEngine
 
 
 PUBLIC_JWK = {
@@ -214,16 +214,16 @@ def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
         root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
-        root / "40-capabilities/tigrbl-authz-policy-abac-administrator/src/tigrbl_authz_policy_abac_administrator/administrator.py",
-        root / "40-capabilities/tigrbl-authz-policy-authority-derivation-graph/src/tigrbl_authz_policy_authority_derivation_graph/graph.py",
-        root / "40-capabilities/tigrbl-authz-policy-delegated-administrator/src/tigrbl_authz_policy_delegated_administrator/administrator.py",
-        root / "40-capabilities/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/engine.py",
-        root / "40-capabilities/tigrbl-authz-policy-engine/src/tigrbl_authz_policy_engine/engine.py",
-        root / "40-capabilities/tigrbl-authz-policy-invariant-registry/src/tigrbl_authz_policy_invariant_registry/registry.py",
-        root / "40-capabilities/tigrbl-authz-policy-rbac-administrator/src/tigrbl_authz_policy_rbac_administrator/administrator.py",
-        root / "40-capabilities/tigrbl-authz-policy-service-identity-registry/src/tigrbl_authz_policy_service_identity_registry/registry.py",
+        root / "10-concrete/tigrbl-authz-policy-concrete/src/tigrbl_authz_policy_concrete/authority_graph.py",
+        root / "10-concrete/tigrbl-authz-policy-concrete/src/tigrbl_authz_policy_concrete/decision_engine.py",
+        root / "10-concrete/tigrbl-authz-policy-concrete/src/tigrbl_authz_policy_concrete/invariant_registry.py",
+        root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/abac.py",
+        root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegated_admin.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/__init__.py",
         root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/decisions.py",
+        root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/policy_engine.py",
+        root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/rbac.py",
+        root / "40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/service_identity_registry.py",
     ]
     forbidden = {"tigrbl_auth", "tigrbl_auth_protocol_oauth", "tigrbl_auth_protocol_oidc", "tigrbl_identity_server"}
 

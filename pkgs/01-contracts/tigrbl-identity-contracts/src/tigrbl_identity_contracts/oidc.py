@@ -4,7 +4,7 @@ import html
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any
+from typing import Any, Mapping, Protocol
 from uuid import UUID
 
 from .protocols import OidcSessionStatus
@@ -124,7 +124,14 @@ class SessionStateValidation:
     expected_session_state: str | None
 
 
+class BackchannelReplayStorePort(Protocol):
+    def register(self, jti: str, *, exp: datetime, now: datetime) -> None: ...
+
+    def snapshot(self) -> Mapping[str, int]: ...
+
+
 __all__ = [
+    "BackchannelReplayStorePort",
     "HostedLoginPage",
     "HostedLoginRequest",
     "LoginThemeAssetPolicy",

@@ -34,12 +34,8 @@ classifiers = [
 dependencies = [
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
-    "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
-    "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2",
-    "tigrbl-authz-policy-engine==0.4.0.dev2",
-    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
-    "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
-    "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
+    "tigrbl-authz-policy==0.4.0.dev2",
+    "tigrbl-authz-policy-concrete==0.4.0.dev2",
 ]
 
 [project.urls]

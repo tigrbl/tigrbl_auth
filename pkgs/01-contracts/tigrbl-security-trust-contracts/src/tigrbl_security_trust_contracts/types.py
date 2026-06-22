@@ -239,6 +239,22 @@ class MTLSClientAuthentication:
         return {"x5t#S256": str(self.cert_thumbprint)}
 
 
+@dataclass(frozen=True, slots=True)
+class TokenIntrospectionRequest:
+    """Provider-neutral token introspection input."""
+
+    token: str
+    token_type_hint: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class TokenIntrospectionResult:
+    """Provider-neutral token introspection result."""
+
+    active: bool
+    claims: Mapping[str, Any] = field(default_factory=dict)
+
+
 @dataclass(frozen=True)
 class OpenRequest:
     """Input to opening protected artifacts such as ciphertexts and envelopes."""
@@ -511,6 +527,8 @@ __all__ = [
     "ParseRequest",
     "ProofBinding",
     "RewrapRequest",
+    "TokenIntrospectionRequest",
+    "TokenIntrospectionResult",
     "TokenIssueRequest",
     "TokenVerifyRequest",
     "VerificationResult",

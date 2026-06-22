@@ -17,7 +17,7 @@ from tigrbl_identity_storage.framework import (
 )
 
 from tigrbl_identity_server.security import auth as security_auth
-from tigrbl_identity_server.security import deps as security_deps
+from tigrbl_identity_server.security import security_deps
 from tigrbl_identity_jose.jwt_coder import JWTCoder, InvalidTokenError
 from tigrbl_identity_jose.jwt_runtime import _svc, _svc_async
 from tigrbl_identity_storage.tables import User

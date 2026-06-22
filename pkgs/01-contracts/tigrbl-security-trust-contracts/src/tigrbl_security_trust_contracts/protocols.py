@@ -10,6 +10,7 @@ from .types import (
     CapabilityMap,
     CanonicalizeRequest,
     DeriveKeyRequest,
+    DPoPBinding,
     ExportKeyRequest,
     IssueRequest,
     KeyArtifact,
@@ -23,9 +24,13 @@ from .types import (
     OpenResult,
     ParsedArtifact,
     ParseRequest,
+    ProofBinding,
     RewrapRequest,
+    TokenIntrospectionRequest,
+    TokenIntrospectionResult,
     VerificationResult,
     VerifyRequest,
+    MTLSBinding,
 )
 
 
@@ -157,6 +162,60 @@ class ICipherPolicy(Protocol):
     def lint(self) -> Sequence[str]: ...
 
 
+class IConfirmationBindingValidator(Protocol):
+    """Validate token confirmation material against a presented proof binding."""
+
+    @property
+    def confirmation_member(self) -> str: ...
+
+    def validate_confirmation(
+        self,
+        cnf: Mapping[str, Any],
+        binding: ProofBinding | None,
+    ) -> bool: ...
+
+
+class ISenderConstraintValidator(Protocol):
+    """Compose supported sender-constraint proof checks."""
+
+    def validate(
+        self,
+        cnf: Mapping[str, Any],
+        *,
+        dpop: DPoPBinding | None = None,
+        mtls: MTLSBinding | None = None,
+        require_dpop: bool = False,
+        require_mtls: bool = False,
+    ) -> bool: ...
+
+
+class IVerificationKeyResolver(Protocol):
+    """Resolve verification keys by key id or equivalent provider hint."""
+
+    def get(self, kid: str) -> Mapping[str, Any]: ...
+
+
+class IJWKSCache(IVerificationKeyResolver, Protocol):
+    """Mutable JWKS-backed verification-key cache."""
+
+    @property
+    def keys(self) -> Mapping[str, Mapping[str, Any]]: ...
+
+    def put_jwks(self, jwks: Mapping[str, Any]) -> None: ...
+
+
+class ITokenIntrospectionTransport(Protocol):
+    """Provider-neutral token introspection transport."""
+
+    def __call__(self, request: TokenIntrospectionRequest) -> TokenIntrospectionResult: ...
+
+
+class ITokenIntrospectionClient(Protocol):
+    """Provider-neutral token introspection client."""
+
+    def introspect(self, request: TokenIntrospectionRequest) -> TokenIntrospectionResult: ...
+
+
 __all__ = [
     "IArtifactCodec",
     "IArtifactIssuer",
@@ -164,11 +223,17 @@ __all__ = [
     "IArtifactVerifier",
     "ICapabilityProvider",
     "ICipherPolicy",
+    "IConfirmationBindingValidator",
     "IEntropySource",
     "IKeyDeriver",
     "IKeyDiscovery",
     "IKeyExporter",
     "IKeyLifecycle",
     "IKeyResolver",
+    "IJWKSCache",
     "IRecipientSetEditor",
+    "ISenderConstraintValidator",
+    "ITokenIntrospectionClient",
+    "ITokenIntrospectionTransport",
+    "IVerificationKeyResolver",
 ]

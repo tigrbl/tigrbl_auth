@@ -41,7 +41,7 @@ def test_reusable_enums_resolve_from_contract_packages() -> None:
         AdminResourceStatus,
     )
     from tigrbl_identity_admin._control_plane import models as legacy_admin_models
-    from tigrbl_identity_admin_control_plane import models as admin_models
+    from tigrbl_identity_concrete.admin_control_plane import models as admin_models
     from tigrbl_identity_jose import boundary, keys
     from tigrbl_identity_principals import factories as principal_factories
     from tigrbl_identity_contracts import (

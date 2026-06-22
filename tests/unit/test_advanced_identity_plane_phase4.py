@@ -1,13 +1,13 @@
 import pytest
 
-from tigrbl_identity_admin_advanced_authenticator_registry import (
+from tigrbl_identity_concrete import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
-from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
-from tigrbl_identity_admin_federation_registry import FederationRegistry as CanonicalFederationRegistry
-from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
-from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
-from tigrbl_identity_admin_trust_federation_graph import TrustFederationGraph as CanonicalTrustFederationGraph
+from tigrbl_identity_concrete import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
+from tigrbl_identity_concrete import FederationRegistry as CanonicalFederationRegistry
+from tigrbl_identity_concrete import PolicyRegistry as CanonicalPolicyRegistry
+from tigrbl_identity_concrete import RelationshipGraph as CanonicalRelationshipGraph
+from tigrbl_identity_concrete import TrustFederationGraph as CanonicalTrustFederationGraph
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
