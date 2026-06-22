@@ -67,6 +67,7 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
+    "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
@@ -193,6 +194,7 @@ tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oa
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
+tigrbl-authz-policy-abac-administrator = { path = "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator", editable = true }
 tigrbl-authz-policy-decision-engine = { path = "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine", editable = true }
 tigrbl-authz-policy-invariant-registry = { path = "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry", editable = true }
 tigrbl-authz-policy-rbac-administrator = { path = "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator", editable = true }

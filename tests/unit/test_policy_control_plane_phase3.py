@@ -16,6 +16,11 @@ from tigrbl_auth.uix import (
     filter_visible_tenants,
     simulate_policy,
 )
+from tigrbl_authz_policy_abac_administrator import (
+    ABACAdministrator as CanonicalABACAdministrator,
+    AttributePolicy as CanonicalAttributePolicy,
+    DynamicCondition as CanonicalDynamicCondition,
+)
 from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
@@ -56,6 +61,7 @@ def test_administrator_hard_rename_exports_only_new_names():
 
     for module in (uix, authz_policy):
         assert module.RBACAdministrator is CanonicalRBACAdministrator
+        assert module.ABACAdministrator is CanonicalABACAdministrator
         assert hasattr(module, "RBACAdministrator")
         assert hasattr(module, "ABACAdministrator")
         assert hasattr(module, "DelegatedAdministrator")
@@ -91,6 +97,10 @@ async def test_rbac_supports_inheritance_tenant_scoping_and_fine_grained_denies(
 
 @pytest.mark.asyncio
 async def test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit(administrator_storage):
+    assert ABACAdministrator is CanonicalABACAdministrator
+    assert AttributePolicy is CanonicalAttributePolicy
+    assert DynamicCondition is CanonicalDynamicCondition
+
     rbac = RBACAdministrator(administrator_storage)
     await rbac.upsert_role("security-admin", ("key.rotate",), tenant_id="tenant-a")
     await rbac.assign_role("alice", "security-admin", tenant_id="tenant-a")

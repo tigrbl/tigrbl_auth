@@ -5,14 +5,11 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Mapping
 
 from tigrbl_authz_policy.control_plane import (
-    ABACAdministrator,
     ADMIN_CLIENT_FIELDS,
-    AttributePolicy,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdminScope,
     DelegatedAdministrator,
-    DynamicCondition,
     PolicyDecision,
     PolicyEngine,
     PUBLIC_CLIENT_FIELDS,
@@ -21,6 +18,11 @@ from tigrbl_authz_policy.control_plane import (
     expose_client_record,
     filter_visible_tenants,
     simulate_policy,
+)
+from tigrbl_authz_policy_abac_administrator import (
+    ABACAdministrator,
+    AttributePolicy,
+    DynamicCondition,
 )
 from tigrbl_authz_policy_invariant_registry import (
     AuthorizationInvariant,

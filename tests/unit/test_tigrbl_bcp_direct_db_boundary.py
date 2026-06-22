@@ -64,6 +64,7 @@ SEMANTIC_FACADE_PATHS = [
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/control_plane.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/delegation.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy/src/tigrbl_authz_policy/governance_extension.py",
+    ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator/src/tigrbl_authz_policy_abac_administrator/administrator.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator/src/tigrbl_authz_policy_rbac_administrator/administrator.py",
     ROOT / "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry/src/tigrbl_authz_policy_service_identity_registry/registry.py",
     ROOT / "pkgs/60-runtime/tigrbl-identity-runtime/src/tigrbl_identity_runtime/deployment.py",
