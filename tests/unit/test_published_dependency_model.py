@@ -51,6 +51,7 @@ def test_pyproject_uses_published_pins_and_extras():
     pqc_provider_dependencies = set(_load_package_pyproject("tigrbl-security-signing-pqc")["project"]["dependencies"])
     decision_engine_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-decision-engine")["project"]["dependencies"])
     invariant_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-invariant-registry")["project"]["dependencies"])
+    service_identity_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-service-identity-registry")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
     assert "pqcrypto==0.4.0" not in jose_dependencies
@@ -62,9 +63,12 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in decision_engine_dependencies
     assert "pqcrypto==0.4.0" not in invariant_registry_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in invariant_registry_dependencies
+    assert "pqcrypto==0.4.0" not in service_identity_registry_dependencies
+    assert "tigrbl-identity-concrete==0.4.0.dev2" in service_identity_registry_dependencies
     assert "pqcrypto==0.4.0" not in authz_dependencies
     assert "tigrbl-authz-policy-decision-engine==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
 

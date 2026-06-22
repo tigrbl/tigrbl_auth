@@ -16,9 +16,13 @@ from tigrbl_auth.uix import (
     filter_visible_tenants,
     simulate_policy,
 )
+from tigrbl_authz_policy_service_identity_registry import (
+    ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
+)
 
 
 def test_service_identities_support_tenant_scoped_authentication_and_revocation():
+    assert ServiceIdentityRegistry is CanonicalServiceIdentityRegistry
     registry = ServiceIdentityRegistry()
     service = registry.register_service(
         "svc-notifier",

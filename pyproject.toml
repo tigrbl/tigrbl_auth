@@ -69,6 +69,7 @@ dependencies = [
     "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
+    "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
@@ -193,6 +194,7 @@ tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", 
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
 tigrbl-authz-policy-decision-engine = { path = "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine", editable = true }
 tigrbl-authz-policy-invariant-registry = { path = "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry", editable = true }
+tigrbl-authz-policy-service-identity-registry = { path = "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry", editable = true }
 tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }

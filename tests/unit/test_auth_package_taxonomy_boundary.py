@@ -24,6 +24,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
     "tigrbl-authz-policy-decision-engine": "tigrbl_authz_policy_decision_engine",
     "tigrbl-authz-policy-invariant-registry": "tigrbl_authz_policy_invariant_registry",
+    "tigrbl-authz-policy-service-identity-registry": "tigrbl_authz_policy_service_identity_registry",
     "tigrbl-authz-policy": "tigrbl_authz_policy",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",

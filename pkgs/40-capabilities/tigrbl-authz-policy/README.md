@@ -13,6 +13,7 @@ tigrbl-authz-policy is the authorization-facing package name for authority, poli
 - It owns authority roles, RBAC, ABAC, delegation, policy replay, and decision audit concepts.
 - `PolicyDecisionEngine` is implemented by `tigrbl-authz-policy-decision-engine`; this package re-exports it for compatibility.
 - `InvariantRegistry` is implemented by `tigrbl-authz-policy-invariant-registry`; this package re-exports it for compatibility.
+- `ServiceIdentityRegistry` is implemented by `tigrbl-authz-policy-service-identity-registry`; this package re-exports it for compatibility.
 - Canonical authz-policy surfaces live in this package; `tigrbl-identity-policy` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
@@ -29,11 +30,13 @@ uv add tigrbl-authz-policy
 from tigrbl_authz_policy import AuthorityRole, AuthorityScope
 from tigrbl_authz_policy_decision_engine import PolicyDecisionEngine
 from tigrbl_authz_policy_invariant_registry import default_authorization_invariant_registry
+from tigrbl_authz_policy_service_identity_registry import ServiceIdentityRegistry
 
 assert AuthorityRole.ADMIN.value == "admin"
 scope = AuthorityScope("tenant-a", "client.read")
 engine = PolicyDecisionEngine()
 invariants = default_authorization_invariant_registry()
+services = ServiceIdentityRegistry()
 ```
 
 ## Package Boundary
@@ -41,6 +44,7 @@ invariants = default_authorization_invariant_registry()
 - Authority roles, grants, permissions, scopes, and decision inputs
 - RBAC and ABAC policy surfaces; concrete engine evaluation lives in `tigrbl-authz-policy-decision-engine`
 - Invariant registry behavior lives in `tigrbl-authz-policy-invariant-registry`
+- Service identity registry behavior lives in `tigrbl-authz-policy-service-identity-registry`
 - Delegated administration and attenuation
 - Decision logs, replay, stability, and determinism helpers
 - Governance policy lifecycle, provenance, and release posture
@@ -50,6 +54,7 @@ invariants = default_authorization_invariant_registry()
 - [tigrbl-identity-policy](https://pypi.org/project/tigrbl-identity-policy/) remains a deprecated compatibility package.
 - [tigrbl-authz-policy-decision-engine](https://pypi.org/project/tigrbl-authz-policy-decision-engine/) owns `PolicyDecisionEngine`.
 - [tigrbl-authz-policy-invariant-registry](https://pypi.org/project/tigrbl-authz-policy-invariant-registry/) owns `InvariantRegistry`.
+- [tigrbl-authz-policy-service-identity-registry](https://pypi.org/project/tigrbl-authz-policy-service-identity-registry/) owns `ServiceIdentityRegistry`.
 - [tigrbl-authn-credentials](https://pypi.org/project/tigrbl-authn-credentials/) owns credential proof.
 - [tigrbl-authz-resource-server](https://pypi.org/project/tigrbl-authz-resource-server/) owns protected-resource token validation and enforcement integration.
 
