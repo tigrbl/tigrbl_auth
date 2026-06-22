@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 from pathlib import Path
 
 
@@ -63,6 +64,66 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
     assert LogoutState.schemas.logout.out is LogoutOut
     assert User.schemas.admin_login.in_ is AdminCredsIn
     assert User.schemas.admin_session.out is AdminSessionOut
+
+
+def test_every_exported_storage_table_exports_bound_schema_namespace() -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    auth_tables = importlib.import_module("tigrbl_auth.tables")
+
+    schema_exports: list[str] = []
+    for name in storage_tables.__all__:
+        if name.endswith("Schemas"):
+            continue
+        exported = getattr(storage_tables, name)
+        if getattr(exported, "__table__", None) is None:
+            continue
+
+        schema_name = f"{name}Schemas"
+        schema_exports.append(schema_name)
+        assert schema_name in storage_tables.__all__
+        assert getattr(storage_tables, schema_name) is exported.schemas
+        assert getattr(auth_tables, schema_name) is getattr(storage_tables, schema_name)
+
+    assert "ServiceKeySchemas" in schema_exports
+    assert "OperatorRecordSchemas" in schema_exports
+
+
+def test_exported_schema_aliases_use_openapi_component_model_names() -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+
+    for name in storage_tables.__all__:
+        exported = getattr(storage_tables, name)
+        if getattr(exported, "__table__", None) is None:
+            continue
+        for op_name in dir(exported.schemas):
+            if op_name.startswith("_"):
+                continue
+            op_schema = getattr(exported.schemas, op_name)
+            for direction in ("in_", "out"):
+                schema = getattr(op_schema, direction, None)
+                if schema is None or not hasattr(schema, "model_json_schema"):
+                    continue
+                schema_name = schema.__name__
+                schema_alias = getattr(storage_tables, schema_name)
+
+                assert schema_name in storage_tables.__all__
+                if schema_alias is not schema:
+                    assert schema_alias.model_json_schema() == schema.model_json_schema()
+
+    assert storage_tables.ServiceKeyCreateRequest is storage_tables.ServiceKey.schemas.create.in_
+    assert storage_tables.OperatorRecordCreateRequest is storage_tables.OperatorRecord.schemas.create.in_
+
+
+def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    from tigrbl_identity_server.routers.surface import surface_api
+
+    component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
+    missing = sorted(name for name in component_names if not hasattr(storage_tables, name))
+
+    assert missing == []
+    assert storage_tables.ServiceKeyCreateRequest.__name__ in component_names
+    assert storage_tables.TokenPair.__name__ in component_names
 
 
 def test_storage_package_does_not_import_identity_contract_schemas() -> None:

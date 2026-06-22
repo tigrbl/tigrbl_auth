@@ -98,75 +98,88 @@ from .control_correctness_report import ControlCorrectnessReport
 from .authz_verification_report import AuthzVerificationReport
 from .resource_server_contract import ResourceServerContract
 from .provider_artifact import ProviderArtifact
+from .operator_metadata import OperatorMetadata
+from .operator_record import OperatorRecord
+from .operator_transaction import OperatorTransaction
+from .operator_audit_event import OperatorAuditEvent
+from .operator_activity import OperatorActivity
 from .engine import ENGINE, dsn, get_db
 from ._schema_ctx import set_schema
+
+
+_TABLE_MODELS = (
+    Realm,
+    Tenant,
+    User,
+    Client,
+    ClientRegistration,
+    Service,
+    ApiKey,
+    ServiceKey,
+    Credential,
+    CredentialAuditEvent,
+    CredentialDpopKey,
+    CredentialMtlsCertificate,
+    Key,
+    KeyVersion,
+    AuthSession,
+    AuthCode,
+    DeviceCode,
+    RevokedToken,
+    TokenRecord,
+    DelegationGrant,
+    DelegationGrantScope,
+    DelegationGrantProof,
+    DelegationGrantEdge,
+    DelegationGrantTokenLink,
+    PushedAuthorizationRequest,
+    Consent,
+    AuditEvent,
+    LogoutState,
+    KeyRotationEvent,
+    KeyRotationPolicy,
+    TenantMembership,
+    SubjectAlias,
+    Role,
+    AttributePolicy,
+    PolicyCondition,
+    DelegatedAdminScope,
+    Entitlement,
+    EntitlementAssignment,
+    AccessReviewCampaign,
+    AccessReviewItem,
+    AccessReviewDecision,
+    ResidencyZone,
+    TenantResidency,
+    SDKPackageRecord,
+    PluginDescriptorRecord,
+    PluginLifecycleEventRecord,
+    ScimSchemaRecord,
+    ScimUserRecord,
+    ScimGroupRecord,
+    ScimPatchEvent,
+    ReleaseCapabilityRecord,
+    ReleaseAuthorizationState,
+    RuntimeQualificationRecord,
+    ReleaseSecurityPosture,
+    ReleasePosture,
+    ReleaseAttestationEvent,
+    ControlCorrectnessReport,
+    AuthzVerificationReport,
+    ResourceServerContract,
+    ProviderArtifact,
+    OperatorMetadata,
+    OperatorRecord,
+    OperatorTransaction,
+    OperatorAuditEvent,
+    OperatorActivity,
+)
 
 
 def _ensure_runtime_bindings() -> None:
     """Materialize model handlers/schemas through Tigrbl's public bind API."""
 
-    for model in (
-        Realm,
-        Tenant,
-        User,
-        Client,
-        ClientRegistration,
-        Service,
-        ApiKey,
-        ServiceKey,
-        Credential,
-        CredentialAuditEvent,
-        CredentialDpopKey,
-        CredentialMtlsCertificate,
-        Key,
-        KeyVersion,
-        AuthSession,
-        AuthCode,
-        DeviceCode,
-        RevokedToken,
-        TokenRecord,
-        DelegationGrant,
-        DelegationGrantScope,
-        DelegationGrantProof,
-        DelegationGrantEdge,
-        DelegationGrantTokenLink,
-        PushedAuthorizationRequest,
-        Consent,
-        AuditEvent,
-        LogoutState,
-        KeyRotationEvent,
-        KeyRotationPolicy,
-        TenantMembership,
-        SubjectAlias,
-        Role,
-        AttributePolicy,
-        PolicyCondition,
-        DelegatedAdminScope,
-        Entitlement,
-        EntitlementAssignment,
-        AccessReviewCampaign,
-        AccessReviewItem,
-        AccessReviewDecision,
-        ResidencyZone,
-        TenantResidency,
-        SDKPackageRecord,
-        PluginDescriptorRecord,
-        PluginLifecycleEventRecord,
-        ScimSchemaRecord,
-        ScimUserRecord,
-        ScimGroupRecord,
-        ScimPatchEvent,
-        ReleaseCapabilityRecord,
-        ReleaseAuthorizationState,
-        RuntimeQualificationRecord,
-        ReleaseSecurityPosture,
-        ReleasePosture,
-        ReleaseAttestationEvent,
-        ControlCorrectnessReport,
-        AuthzVerificationReport,
-        ResourceServerContract,
-        ProviderArtifact,
-    ):
+    for model in _TABLE_MODELS:
         handlers = getattr(model, "handlers", None)
         if getattr(handlers, "read", None) is None:
             bind(model)
@@ -219,8 +232,35 @@ def _attach_custom_op_schemas() -> None:
     set_schema(Realm, "admin_delete_realm", out=AdminRealmOut)
 
 
+def _export_table_schemas() -> list[str]:
+    exports = {f"{model.__name__}Schemas": model.schemas for model in _TABLE_MODELS}
+    exports["DelegationGrantRecordSchemas"] = DelegationGrant.schemas
+    for model in _TABLE_MODELS:
+        schemas = getattr(model, "schemas", None)
+        for op_name in dir(schemas):
+            if op_name.startswith("_"):
+                continue
+            op_schema = getattr(schemas, op_name)
+            for direction in ("in_", "out"):
+                schema = getattr(op_schema, direction, None)
+                if schema is None or not (
+                    hasattr(schema, "model_json_schema") or hasattr(schema, "schema")
+                ):
+                    continue
+                schema_name = getattr(schema, "__name__", "")
+                if not schema_name.isidentifier():
+                    continue
+                existing = globals().get(schema_name, exports.get(schema_name))
+                if existing is not None and existing is not schema:
+                    continue
+                exports[schema_name] = schema
+    globals().update(exports)
+    return sorted(exports)
+
+
 _ensure_runtime_bindings()
 _attach_custom_op_schemas()
+_TABLE_SCHEMA_EXPORTS = _export_table_schemas()
 
 __all__ = [
     "RestOltpTable",
@@ -328,4 +368,11 @@ __all__ = [
     "AuthzVerificationReport",
     "ResourceServerContract",
     "ProviderArtifact",
+    "OperatorMetadata",
+    "OperatorRecord",
+    "OperatorTransaction",
+    "OperatorAuditEvent",
+    "OperatorActivity",
+    *_TABLE_SCHEMA_EXPORTS,
 ]
+__all__ = list(dict.fromkeys(__all__))
