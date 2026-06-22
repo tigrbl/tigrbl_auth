@@ -4,18 +4,23 @@ id: "spc:1148"
 number: 1148
 slug: "platform-operator-access-contract"
 title: "Platform Operator Access Contract"
-status: "draft"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "Platform operator access MUST be distinct from platform owner and platform administrator access."
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "spc:1224"
 status_notes:
   -
-    status: "draft"
-    note: "Draft operator and break-glass boundary for platform-admin API."
     at: "2026-05-25T05:01:43Z"
+    note: "Draft operator and break-glass boundary for platform-admin API."
+    status: "draft"
+  -
+    at: "2026-06-22T07:25:15Z"
+    note: "Superseded by SPEC-1224: support and break-glass controls replace platform operator access terminology."
+    status: "superseded"
 references: []
 body: |-
   ## Requirements

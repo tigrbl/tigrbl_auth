@@ -8,24 +8,32 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The platform-admin API is the production control-plane front door for cross-tenant platform authority. It owns tenant lifecycle, tenant ownership issuance, platform administrator authority, platform operator boundaries, and audited break-glass operations."
+summary: "The platform-admin API is the production control-plane front door for cross-tenant platform authority. It owns tenant lifecycle, tenant ownership issuance, platform administrator authority, support and break-glass control boundaries, and audited privileged operations."
 supersedes: []
 superseded_by: []
 status_notes:
   -
-    status: "accepted"
-    note: "Accepted for platform-admin API product completion planning."
     at: "2026-05-25T05:01:07Z"
+    note: "Accepted for platform-admin API product completion planning."
+    status: "accepted"
+  -
+    status: "accepted"
+    note: "Correct operator vocabulary drift: platform support and break-glass controls are not an operator authority class."
+    at: "2026-06-22T07:21:52Z"
 references: []
 body: |-
   ## Decision
-  
-  The platform-admin API is the production control-plane front door for cross-tenant platform authority. It owns tenant lifecycle, tenant ownership issuance, platform administrator authority, platform operator boundaries, and audited break-glass operations.
-  
+
+  The platform-admin API is the production control-plane front door for cross-tenant platform authority. It owns tenant lifecycle, tenant ownership issuance, platform administrator authority, support and break-glass control boundaries, and audited privileged operations.
+
   ## Rationale
-  
+
   Surface-separated deployments must not expose broad admin capabilities to every principal. Platform owners and platform administrators require cross-tenant authority that tenant administrators, developers, service administrators, and public users must not receive.
-  
+
+  Support and break-glass workflows are bounded control-plane workflows, not an operator authority class.
+
   ## Consequences
-  
+
   Platform tenant lifecycle and authority assignment must be specified separately from tenant self-service, developer app registration, service identity administration, and public authentication. Platform-admin APIs and UIX must fail closed for public login, tenant-local self-service-only workflows, developer-only app management, and service-only machine identity workflows unless explicitly delegated by a platform authority contract.
+
+  Platform support and break-glass access must be auditable, explicitly scoped, and governed without introducing separate operator roles, operator actions, or operator state.

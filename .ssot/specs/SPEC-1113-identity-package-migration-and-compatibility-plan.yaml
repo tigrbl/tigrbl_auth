@@ -38,7 +38,7 @@ body: |-
   4. Move JOSE, OAuth, and OIDC protocol packages.
   5. Move storage mappings into `storage`.
   6. Move server composition and runtime execution.
-  7. Move operator workflows.
+  7. Move repository tooling workflows.
   8. Keep `tigrbl-auth` as the facade and compatibility distribution.
   9. Deprecate legacy imports only after replacement imports and tests exist.
   

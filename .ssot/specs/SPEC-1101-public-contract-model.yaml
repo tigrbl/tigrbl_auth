@@ -54,12 +54,12 @@ body: |-
   Contracts MAY depend on `core` primitives.
   
   Contracts MUST NOT contain business logic, persistence logic, token signing,
-  credential verification, ASGI app construction, or operator workflows.
+  credential verification, ASGI app construction, or repository tooling workflows.
   
   ## Verification
   
   Verification MUST prove that public schemas can be imported and serialized
-  without importing storage, server, runtime, or operator packages.
+  without importing storage, server, runtime, or repository tooling packages.
 spec_kind: "normative"
 adr_ids:
   - "adr:1097"

@@ -21,16 +21,20 @@ status_notes:
     note: "Linked to spc:1176 for canonical identity storage table and persistence ownership where this API exposes table-backed behavior."
     status: "draft"
   -
-    status: "draft"
-    note: "Platform-admin now owns Realm lifecycle via /admin/realm and Realm-scoped tenant assignment via /admin/realm/{realm_id}/tenant."
     at: "2026-06-01T09:52:57Z"
+    note: "Platform-admin now owns Realm lifecycle via /admin/realm and Realm-scoped tenant assignment via /admin/realm/{realm_id}/tenant."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Replace platform operator access wording with administrator/support/break-glass controls."
+    at: "2026-06-22T07:21:52Z"
 references: []
 body: |-
   ## Requirements
   
   The platform-admin API MUST expose only platform control-plane capabilities for cross-tenant administration.
   
-  It MUST include tenant lifecycle operations, platform authority assignment, platform operator access controls, and platform audit read/export workflows.
+  It MUST include tenant lifecycle operations, platform authority assignment, platform administrator and support/break-glass controls, and platform audit read/export workflows.
   
   It MUST exclude public end-user authentication pages, tenant self-service-only workflows, developer-only OIDC/OAuth app management, service-only machine identity workflows, and resource-validation-only surfaces.
   
@@ -40,3 +44,4 @@ adr_ids:
   - "adr:1078"
   - "adr:1120"
   - "adr:1076"
+  - "adr:1132"

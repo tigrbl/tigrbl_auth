@@ -1,0 +1,55 @@
+schema_version: "0.4.0"
+kind: "spec"
+id: "spc:1223"
+number: 1223
+slug: "public-exported-surface-boundary"
+title: "Public Exported Surface Boundary"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "This specification governs first-class exported surfaces in the Tigrbl Auth repository."
+supersedes:
+  - "spc:1111"
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Define exported surfaces without operator-plane vocabulary."
+    at: "2026-06-22T07:21:52Z"
+  -
+    status: "accepted"
+    note: "Superseded by SPEC-1223: public exported surfaces replace operator workflow terminology."
+    at: "2026-06-22T07:25:15Z"
+references: []
+body: |-
+  ## Scope
+  
+  This specification governs first-class exported surfaces in the Tigrbl Auth repository.
+  
+  ## Definitions
+  
+  A public exported surface is any package export, module export, command, route, JSON-RPC method, generated contract, UIX component, or documented API that downstream consumers are expected to use directly.
+  
+  A public exported surface is not a separate operator plane. It does not imply operator-owned state, operator-specific actions, operator-only workflows, or an operator authority role.
+  
+  ## Requirements
+  
+  Public exported surfaces MUST have stable package/module/API ownership and MUST be covered by the relevant boundary, import, or contract tests.
+  
+  Public exported surfaces MUST delegate durable table mutation, reads, and derivation to storage table owners when the behavior concerns persisted table state.
+  
+  Documents MUST use precise surface names: `platform-admin-api`, `tenant-admin-api`, `developer-api`, `service-admin-api`, `resource-validation-api`, `public-api`, `my-account-api`, package export, CLI command surface, UIX surface, or another explicit product/export boundary.
+  
+  Documents MUST NOT use `operator surface`, `operator action`, `operator state`, `operator-style`, or `operator workflow` to describe public exports.
+  
+  Administrative workflows MUST be described as Administrator/control-plane behavior, support workflows, or audited break-glass behavior according to their actual product boundary.
+  
+  ## Verification
+  
+  Verification MUST prove that newly authored repo-local SSOT documents do not introduce canonical operator-plane vocabulary for public exported surfaces.
+  
+  Verification MUST allow historical, superseded, generated, or upstream SSOT-origin documents to retain legacy wording only when they are explicitly non-authoritative or derived.
+spec_kind: "normative"
+adr_ids:
+  - "adr:1132"

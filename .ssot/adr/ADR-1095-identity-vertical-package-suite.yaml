@@ -31,8 +31,8 @@ body: |-
   
   The existing `tigrbl_auth` repository covers more than authentication. It
   includes OAuth/OIDC protocol behavior, principals, credentials, clients,
-  services, policy controls, tenant boundaries, runtime profiles, operator
-  workflows, contracts, and certification evidence.
+  services, policy controls, tenant boundaries, runtime profiles, repository
+  tooling workflows, contracts, and certification evidence.
   
   The term `auth` is ambiguous and can mean authentication, authorization, or
   both. The package suite needs a name that can truthfully cover users, clients,
@@ -43,7 +43,7 @@ body: |-
   
   The architecture can distinguish authentication, authorization, principals,
   credentials, policy, protocol standards, storage, server composition, runtime
-  execution, and operator workflows without forcing them under a vague auth
+  execution, and repository tooling workflows without forcing them under a vague auth
   bucket.
   
   Existing users can continue using `tigrbl-auth` while implementation

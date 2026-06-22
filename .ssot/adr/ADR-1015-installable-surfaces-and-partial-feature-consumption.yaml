@@ -1,4 +1,4 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1015"
 number: 1015
@@ -18,7 +18,7 @@ body: |-
   
   > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.
   
-  > **Historical / non-authoritative** — This document is retained for planning, provenance, or operator guidance only.
+  > **Historical / non-authoritative** — This document is retained for planning, provenance, or tooling guidance only.
   > Do **not** use it to determine the current certification state, executable surface, or release readiness.
   > Use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md`, `CURRENT_STATE.md`, and `CERTIFICATION_STATUS.md` instead.
   
@@ -31,7 +31,7 @@ body: |-
   
   - public auth plane,
   - admin/control plane,
-  - operator plane,
+  - repository tooling surface,
   - JSON-RPC plane,
   - diagnostics plane,
   - plugin install modes.

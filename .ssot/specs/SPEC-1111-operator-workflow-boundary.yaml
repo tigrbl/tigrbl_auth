@@ -4,18 +4,23 @@ id: "spc:1111"
 number: 1111
 slug: "operator-workflow-boundary"
 title: "Operator workflow boundary"
-status: "accepted"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "This specification governs `tigrbl-identity-operator`."
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "spc:1223"
 status_notes:
   -
-    status: "accepted"
-    note: "Define operator workflow package ownership."
     at: "2026-05-18T08:20:38Z"
+    note: "Define operator workflow package ownership."
+    status: "accepted"
+  -
+    at: "2026-06-22T07:25:15Z"
+    note: "Superseded by SPEC-1223: public exported surfaces replace operator workflow terminology."
+    status: "superseded"
 references: []
 body: |-
   ## Scope

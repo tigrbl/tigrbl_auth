@@ -1,21 +1,26 @@
-schema_version: "0.1.0"
+schema_version: "0.4.0"
 kind: "adr"
 id: "adr:1027"
 number: 1027
 slug: "cli-operator-surface-is-certification-boundary"
 title: "CLI operator surface is part of the certification boundary"
-status: "accepted"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "> [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports."
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "adr:1132"
 status_notes:
   -
-    status: "accepted"
-    note: "Clarify that tigrbl-auth ADR CLI command surfaces are rejected and out-of-bounds/out-of-scope; ADR CRUD belongs to the SSOT registry CLI."
     at: "2026-04-22T09:49:39Z"
+    note: "Clarify that tigrbl-auth ADR CLI command surfaces are rejected and out-of-bounds/out-of-scope; ADR CRUD belongs to the SSOT registry CLI."
+    status: "accepted"
+  -
+    at: "2026-06-22T07:25:15Z"
+    note: "Superseded by ADR-1132: public exported surfaces are downstream API contracts, not operator workflows."
+    status: "superseded"
 references: []
 body: |-
   > [!WARNING] Non-authoritative active document. For current release and certification truth, use `docs/compliance/AUTHORITATIVE_CURRENT_DOCS.md` and the generated current-state reports.

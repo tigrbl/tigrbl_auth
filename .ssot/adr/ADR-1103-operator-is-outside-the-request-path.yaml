@@ -4,18 +4,23 @@ id: "adr:1103"
 number: 1103
 slug: "operator-is-outside-the-request-path"
 title: "Operator is outside the request path"
-status: "accepted"
+status: "superseded"
 origin: "repo-local"
 decision_date: null
 tags: []
 summary: "Create `tigrbl-identity-operator` for CLI and operator workflows."
 supersedes: []
-superseded_by: []
+superseded_by:
+  - "adr:1132"
 status_notes:
   -
-    status: "accepted"
-    note: "Create an operator package for CLI and evidence workflows outside the request path."
     at: "2026-05-18T08:13:07Z"
+    note: "Create an operator package for CLI and evidence workflows outside the request path."
+    status: "accepted"
+  -
+    at: "2026-06-22T07:25:15Z"
+    note: "Superseded by ADR-1132: public exported surfaces are downstream API contracts, not operator workflows."
+    status: "superseded"
 references: []
 body: |-
   ## Decision

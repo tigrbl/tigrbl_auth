@@ -50,7 +50,7 @@ body: |-
   
   The current repository combines protocol standards, SQLAlchemy/Tigrbl tables,
   REST/RPC surfaces, admin operations, runtime profile configuration,
-  CLI/operator workflows, contracts, and conformance evidence in one package.
+  CLI and repository tooling workflows, contracts, and conformance evidence in one package.
   
   This makes boundaries hard to enforce and makes it difficult to claim exactly
   which package owns which standards, runtime behavior, storage behavior, or
@@ -59,7 +59,7 @@ body: |-
   ## Consequences
   
   Each package has a claimable ownership boundary. Protocol packages can remain
-  pure. Storage, runtime, operator, and testkit dependencies no longer leak into
+  pure. Storage, runtime, repository tooling, and testkit dependencies no longer leak into
   the protocol layer.
   
   The split requires a compatibility and migration plan for existing

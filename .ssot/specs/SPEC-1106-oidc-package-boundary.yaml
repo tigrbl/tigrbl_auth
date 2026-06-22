@@ -50,8 +50,8 @@ body: |-
   ## Requirements
   
   OIDC MAY depend on OAuth and JOSE. OIDC MUST NOT own generic OAuth grant
-  behavior, SQLAlchemy/Tigrbl mappings, process runtime adapters, operator
-  workflows, or test-only fixtures.
+  behavior, SQLAlchemy/Tigrbl mappings, process runtime adapters, repository
+  tooling workflows, or test-only fixtures.
   
   ## Verification
   

@@ -30,7 +30,7 @@ body: |-
   
   ## Scope
   
-  This specification governs administrative and operator workflows that view key
+  This specification governs administrative workflows that view key
   state, request rotation, execute rotation, retire keys, and publish JWKS outputs
   under a governed key rotation policy.
   
@@ -76,8 +76,7 @@ body: |-
   
   Governance owns the policy record and policy version lifecycle.
   
-  Administration owns safe operational workflow execution and operator-facing
-  views.
+  Administration owns safe operational workflow execution and operational views.
   
   Authorization owns the decision that the actor may perform the requested action.
   
@@ -102,7 +101,7 @@ body: |-
   ## Traceability
   
   This specification is governed by `adr:1094`, `adr:1016`, `adr:1038`,
-  `adr:1039`, `adr:1040`, and `adr:1050`.
+  `adr:1039`, `adr:1040`, `adr:1050`, and `adr:1132`.
 spec_kind: "normative"
 adr_ids:
   - "adr:1094"
@@ -111,3 +110,4 @@ adr_ids:
   - "adr:1039"
   - "adr:1040"
   - "adr:1050"
+  - "adr:1132"

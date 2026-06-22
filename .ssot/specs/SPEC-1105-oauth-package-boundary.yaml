@@ -56,8 +56,8 @@ body: |-
   ## Requirements
   
   OAuth owns protocol state machines and protocol errors. OAuth MUST NOT own
-  OIDC ID token/userinfo semantics, DB mappings, ASGI runners, operator
-  workflows, or test-only fixtures.
+  OIDC ID token/userinfo semantics, DB mappings, ASGI runners, repository
+  tooling workflows, or test-only fixtures.
   
   OAuth MAY depend on `core`, `contracts`, `principals`, `credentials`, `jose`,
   and `policy`.

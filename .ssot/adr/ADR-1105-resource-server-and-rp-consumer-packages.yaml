@@ -39,7 +39,7 @@ body: |-
   
   The base identity package split covers the provider-side implementation:
   OAuth/OIDC server behavior, admin/control-plane operations, storage, runtime,
-  operator workflows, contracts, and testkit.
+  repository tooling workflows, contracts, and testkit.
   
   The package-boundary proposal also identifies two consumer roles:
   

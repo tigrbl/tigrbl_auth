@@ -8,7 +8,7 @@ status: "accepted"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "Scope: This SPEC governs authenticated tenant JWKS key administration in the runtime/admin plane. Requirements: 1. Admin RPC exposes tenant-scoped methods to list, seed, create, update, and delete JWKS key records. 2. Seed is idempotent per tenant and creates a publishable active signing key when no publishable key exists, or when forced creates a deterministic replacement record id supplied by the caller. 3. Create and update accept only public JWK publication fields and lifecycle metadata: kid, alg, kty, use, crv/curve, x/n/e, status, publish, label, valid_from, valid_to. 4. Delete removes the tenant-scoped key record from durable operator state. 5. Public tenant JWKS includes only publishable active and next keys and excludes retired keys unless explicitly configured by existing publication rules. 6. Runtime/UIX surfaces must not disclose private JWK fields such as d, p, q, dp, dq, qi, k, client_secret, password_hash, or token. 7. Tests must prove runtime mutation, tenant isolation, public JWKS parity, UIX service behavior, and the governed execution bodies for the linked features."
+summary: "Scope: This SPEC governs authenticated tenant JWKS key administration in the runtime/admin plane. Requirements: 1. Admin RPC exposes tenant-scoped methods to list, seed, create, update, and delete JWKS key records. 2. Seed is idempotent per tenant and creates a publishable active signing key when no publishable key exists, or when forced creates a deterministic replacement record id supplied by the caller. 3. Create and update accept only public JWK publication fields and lifecycle metadata: kid, alg, kty, use, crv/curve, x/n/e, status, publish, label, valid_from, valid_to. 4. Delete removes the tenant-scoped key record from durable storage-backed key state. 5. Public tenant JWKS includes only publishable active and next keys and excludes retired keys unless explicitly configured by existing publication rules. 6. Runtime/UIX surfaces must not disclose private JWK fields such as d, p, q, dp, dq, qi, k, client_secret, password_hash, or token. 7. Tests must prove runtime mutation, tenant isolation, public JWKS parity, UIX service behavior, and the governed execution bodies for the linked features."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -16,11 +16,16 @@ status_notes:
     status: "accepted"
     note: "Define seed and CRUD requirements for tenant JWKS key administration."
     at: "2026-05-19T06:37:18Z"
+  -
+    status: "accepted"
+    note: "Correct operator-state vocabulary: tenant JWKS durability is storage-backed key state."
+    at: "2026-06-22T07:25:15Z"
 references: []
 body: |-
-  Scope: This SPEC governs authenticated tenant JWKS key administration in the runtime/admin plane. Requirements: 1. Admin RPC exposes tenant-scoped methods to list, seed, create, update, and delete JWKS key records. 2. Seed is idempotent per tenant and creates a publishable active signing key when no publishable key exists, or when forced creates a deterministic replacement record id supplied by the caller. 3. Create and update accept only public JWK publication fields and lifecycle metadata: kid, alg, kty, use, crv/curve, x/n/e, status, publish, label, valid_from, valid_to. 4. Delete removes the tenant-scoped key record from durable operator state. 5. Public tenant JWKS includes only publishable active and next keys and excludes retired keys unless explicitly configured by existing publication rules. 6. Runtime/UIX surfaces must not disclose private JWK fields such as d, p, q, dp, dq, qi, k, client_secret, password_hash, or token. 7. Tests must prove runtime mutation, tenant isolation, public JWKS parity, UIX service behavior, and the governed execution bodies for the linked features.
+  Scope: This SPEC governs authenticated tenant JWKS key administration in the runtime/admin plane. Requirements: 1. Admin RPC exposes tenant-scoped methods to list, seed, create, update, and delete JWKS key records. 2. Seed is idempotent per tenant and creates a publishable active signing key when no publishable key exists, or when forced creates a deterministic replacement record id supplied by the caller. 3. Create and update accept only public JWK publication fields and lifecycle metadata: kid, alg, kty, use, crv/curve, x/n/e, status, publish, label, valid_from, valid_to. 4. Delete removes the tenant-scoped key record from durable storage-backed key state. 5. Public tenant JWKS includes only publishable active and next keys and excludes retired keys unless explicitly configured by existing publication rules. 6. Runtime/UIX surfaces must not disclose private JWK fields such as d, p, q, dp, dq, qi, k, client_secret, password_hash, or token. 7. Tests must prove runtime mutation, tenant isolation, public JWKS parity, UIX service behavior, and the governed execution bodies for the linked features.
 spec_kind: "normative"
 adr_ids:
   - "adr:1064"
   - "adr:1066"
   - "adr:1094"
+  - "adr:1132"

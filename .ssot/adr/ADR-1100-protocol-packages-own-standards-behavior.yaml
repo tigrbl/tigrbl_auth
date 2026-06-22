@@ -49,7 +49,7 @@ body: |-
   OIDC MAY import OAuth and JOSE.
   
   None of the protocol packages may own SQLAlchemy tables, ASGI runners,
-  operator workflows, or testkit fixtures.
+  repository tooling workflows, or testkit fixtures.
   
   ## Consequences
   

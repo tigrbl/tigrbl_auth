@@ -36,11 +36,11 @@ body: |-
   
   Product API packages MAY be thin wrappers over the shared app factory, but the selected product surface MUST filter public capabilities, admin resources, admin router groups, and OpenRPC methods before runtime exposure.
   
-  Server MUST NOT own process runner behavior, CLI/operator workflows, or testkit fixtures.
+  Server MUST NOT own process runner behavior, CLI/repository tooling workflows, or testkit fixtures.
   
   ## Verification
   
-  Verification MUST prove the server can build default and product-specific apps and expose route, surface, publisher, and product-surface manifests without importing operator or testkit.
+  Verification MUST prove the server can build default and product-specific apps and expose route, surface, publisher, and product-surface manifests without importing repository tooling or testkit.
 spec_kind: "normative"
 adr_ids:
   - "adr:1102"

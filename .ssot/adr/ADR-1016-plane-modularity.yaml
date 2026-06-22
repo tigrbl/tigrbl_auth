@@ -40,7 +40,7 @@ body: |-
   Each plane owns one authoritative concern. Authorization surfaces own
   permission evaluation and enforcement. Administration surfaces own privileged
   operational workflows and safe mutations. Governance surfaces own durable
-  policy truth, version lifecycle, approval rules, audit requirements, and
+    policy truth, version lifecycle, approval rules, audit requirements, and
   published effective-policy projections. Runtime protocol surfaces may consume
   published effective policy, but they MUST NOT mutate governance policy.
   
@@ -58,7 +58,7 @@ body: |-
   diagnostics plane have separate runtime trust envelopes.
   
   Key rotation illustrates the cross-plane boundary. A key rotation operation is
-  an administrative or operator workflow, while the durable rule that defines
+  an administrative workflow, while the durable rule that defines
   cadence, approval, emergency triggers, overlap windows, retirement windows,
   publication requirements, and evidence obligations is governance policy.
   

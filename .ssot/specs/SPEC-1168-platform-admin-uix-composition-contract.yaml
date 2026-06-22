@@ -8,7 +8,7 @@ status: "draft"
 origin: "repo-local"
 decision_date: null
 tags: []
-summary: "The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform operator workflows for tenant creation, tenant lifecycle, platform authority assignment, platform users/operators, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract."
+summary: "The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform administration workflows for tenant creation, tenant lifecycle, platform authority assignment, platform administrator/support user management, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract."
 supersedes: []
 superseded_by: []
 status_notes:
@@ -17,15 +17,20 @@ status_notes:
     note: "Draft contract for platform-admin UIX composition."
     status: "draft"
   -
-    status: "draft"
-    note: "Linked to adr:1088 so platform-admin UIX composes workflow CRUD through shared uix-core primitives while preserving product API boundaries."
     at: "2026-05-31T02:59:12Z"
+    note: "Linked to adr:1088 so platform-admin UIX composes workflow CRUD through shared uix-core primitives while preserving product API boundaries."
+    status: "draft"
+  -
+    status: "draft"
+    note: "Replace platform operator workflow wording with platform administration and support user management wording."
+    at: "2026-06-22T07:22:02Z"
 references: []
 body: |-
-  The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform operator workflows for tenant creation, tenant lifecycle, platform authority assignment, platform users/operators, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract.
+  The platform-admin UIX app must consume only the platform-admin API base URL. It owns platform administration workflows for tenant creation, tenant lifecycle, platform authority assignment, platform administrator/support user management, platform audit discovery, and platform-scoped governance views. It must not expose tenant-local identity administration, developer app management, service identity administration, public login, diagnostics, system, or RPC paths outside the paired platform-admin API contract.
 spec_kind: "normative"
 adr_ids:
   - "adr:1084"
   - "adr:1120"
   - "adr:1076"
   - "adr:1088"
+  - "adr:1132"
