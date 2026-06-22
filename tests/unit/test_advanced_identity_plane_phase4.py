@@ -3,6 +3,7 @@ import pytest
 from tigrbl_identity_admin_advanced_authenticator_registry import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
+from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
 from tigrbl_identity_admin_federation_registry import FederationRegistry as CanonicalFederationRegistry
 from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
 from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
@@ -308,6 +309,8 @@ def test_relationship_graph_and_policy_registry_support_rebac_graph_queries_vers
 
 
 def test_auth_anomaly_detector_normalizes_redacts_and_explains_detection_outputs():
+    assert AuthAnomalyDetector is CanonicalAuthAnomalyDetector
+
     detector = AuthAnomalyDetector()
     detector.record_event(
         tenant_id="tenant-a",

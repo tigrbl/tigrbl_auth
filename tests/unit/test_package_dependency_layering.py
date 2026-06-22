@@ -48,6 +48,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authz-policy",
         "tigrbl-identity-admin",
         "tigrbl-identity-admin-advanced-authenticator-registry",
+        "tigrbl-identity-admin-auth-anomaly-detector",
         "tigrbl-identity-admin-control-plane",
         "tigrbl-identity-admin-federation-registry",
         "tigrbl-identity-admin-policy-registry",

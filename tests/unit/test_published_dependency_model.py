@@ -45,6 +45,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-verifier==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" in dependencies
+    assert "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in dependencies
@@ -72,6 +73,7 @@ def test_pyproject_uses_published_pins_and_extras():
     rbac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-rbac-administrator")["project"]["dependencies"])
     service_identity_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-service-identity-registry")["project"]["dependencies"])
     advanced_authenticator_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-advanced-authenticator-registry")["project"]["dependencies"])
+    auth_anomaly_detector_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-auth-anomaly-detector")["project"]["dependencies"])
     admin_control_plane_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-control-plane")["project"]["dependencies"])
     federation_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-federation-registry")["project"]["dependencies"])
     policy_registry_dependencies = set(_load_package_pyproject("tigrbl-identity-admin-policy-registry")["project"]["dependencies"])
@@ -122,6 +124,10 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-core==0.4.0.dev2" in advanced_authenticator_registry_dependencies
     assert "tigrbl-identity-jose==0.4.0.dev2" in advanced_authenticator_registry_dependencies
     assert "tigrbl-identity-admin==0.4.0.dev2" not in advanced_authenticator_registry_dependencies
+    assert "pqcrypto==0.4.0" not in auth_anomaly_detector_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in auth_anomaly_detector_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" in auth_anomaly_detector_dependencies
+    assert "tigrbl-identity-admin==0.4.0.dev2" not in auth_anomaly_detector_dependencies
     assert "pqcrypto==0.4.0" not in admin_control_plane_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in admin_control_plane_dependencies
     assert "tigrbl-identity-core==0.4.0.dev2" in admin_control_plane_dependencies
@@ -139,6 +145,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-admin==0.4.0.dev2" not in relationship_graph_dependencies
     assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
