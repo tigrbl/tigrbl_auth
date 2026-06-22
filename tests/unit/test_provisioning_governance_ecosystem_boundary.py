@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from tigrbl_authz_policy._governance_extension import (
+from tigrbl_authz_policy.governance_extension import (
     AccessReviewWorkflow,
     EntitlementManager,
     PluginRuntimeRegistry,
@@ -101,7 +101,7 @@ def _entitlements() -> tuple[EntitlementManager, str]:
 
 
 def test_provisioning_governance_ecosystem_boundary_inventory_is_ssot_owned():
-    import tigrbl_authz_policy._governance_extension as governance_extension
+    import tigrbl_authz_policy.governance_extension as governance_extension
     import tigrbl_identity_contracts as management_contracts
 
     removed_inline_surfaces = {

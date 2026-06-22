@@ -57,7 +57,7 @@ from .governance_extension import (
     build_provisioning_governance_ecosystem_delivery_summary,
     build_phase5_delivery_summary,
 )
-from .invariants import (
+from .assurance import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,
@@ -66,7 +66,7 @@ from .invariants import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from .authority_graph import (
+from .authority import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityGraphIntegrityReport,
@@ -77,14 +77,14 @@ from .authority_graph import (
     authority_matches,
     validate_authority_graph_integrity,
 )
-from .authority_roles import (
+from .authority import (
     AuthorityRole,
     has_admin_authority,
     has_owner_authority,
     has_superuser_authority,
     normalize_authority_roles,
 )
-from .authority_semantics import (
+from .authority import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,
@@ -93,7 +93,7 @@ from .authority_semantics import (
     compute_authority_closure,
     diff_least_authority,
 )
-from .correctness import (
+from .assurance import (
     AuthorizationReference,
     AuthorizationSafetyPropertyEvaluator,
     IntegrityReport,
@@ -105,17 +105,17 @@ from .correctness import (
     validate_tenant_realm_isolation,
     validate_trust_graph_integrity,
 )
-from .correctness_report import (
+from .assurance import (
     ControlPlaneCorrectnessReport,
     CorrectnessProofSection,
     build_control_plane_correctness_report,
 )
-from .delegation_proofs import (
+from .delegation import (
     DelegationAttenuationProof,
     DelegationGrantSpec,
     prove_delegation_attenuation,
 )
-from .delegation_lifecycle import (
+from .delegation import (
     DELEGATION_GRANT_UIX_WORKFLOWS,
     MANAGEMENT_DELEGATION_SURFACES,
     DelegationGrantEvaluation,
@@ -124,13 +124,13 @@ from .delegation_lifecycle import (
     DelegationTokenLink,
     normalize_delegation_scopes,
 )
-from .liveness import (
+from .assurance import (
     ConvergenceEvent,
     ConvergenceState,
     LivenessConvergenceReport,
     evaluate_liveness_convergence,
 )
-from .replay import (
+from .assurance import (
     DecisionStabilityChange,
     DecisionStabilityReport,
     PolicyDeterminismReport,

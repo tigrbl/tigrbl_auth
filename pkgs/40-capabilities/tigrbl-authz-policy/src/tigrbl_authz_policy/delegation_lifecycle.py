@@ -1,8 +1,8 @@
-"""Delegation-grant lifecycle public compatibility surface."""
+"""Compatibility re-export for delegation lifecycle helpers."""
 
 from __future__ import annotations
 
-from tigrbl_identity_contracts.delegation import (
+from .delegation import (
     ACTIVE_GRANT_STATUSES,
     DELEGATION_GRANT_UIX_WORKFLOWS,
     MANAGEMENT_DELEGATION_SURFACES,
@@ -13,7 +13,6 @@ from tigrbl_identity_contracts.delegation import (
     DelegationTokenLink,
     normalize_delegation_scopes,
 )
-
 
 __all__ = [
     "ACTIVE_GRANT_STATUSES",

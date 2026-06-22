@@ -48,8 +48,8 @@ def test_user_plane_contracts_own_authn_resource_and_security_surfaces() -> None
 def test_management_plane_contracts_own_admin_and_governance_surfaces() -> None:
     import tigrbl_identity_contracts as control_contracts
     import tigrbl_identity_contracts as contracts
-    from tigrbl_authz_policy._control_plane.models import Role
-    from tigrbl_authz_policy._governance_extension.models import SDKPackage
+    from tigrbl_authz_policy.control_plane import Role
+    from tigrbl_authz_policy.governance_extension import SDKPackage
 
     assert Role is control_contracts.Role
     assert SDKPackage is contracts.SDKPackage
@@ -109,8 +109,8 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
 def test_control_plane_executable_helpers_stay_in_authz_policy_capability() -> None:
     import tigrbl_identity_contracts as contracts
     import tigrbl_identity_contracts as management_contracts
-    from tigrbl_authz_policy._control_plane import models as admin_models
-    from tigrbl_authz_policy._governance_extension import models as governance_models
+    import tigrbl_authz_policy.control_plane as admin_models
+    import tigrbl_authz_policy.governance_extension as governance_models
 
     assert admin_models.Role is contracts.Role
     assert governance_models.SDKPackage is management_contracts.SDKPackage
