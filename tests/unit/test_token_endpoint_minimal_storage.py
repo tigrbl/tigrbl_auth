@@ -9,6 +9,14 @@ from tigrbl_identity_storage import token_service as token_persistence
 from tigrbl_identity_server.security import handler_records
 
 
+def test_storage_token_service_uses_provider_object_protocol():
+    source = token_persistence.__loader__.get_source(token_persistence.__name__)
+
+    assert "class TokenCoder(Protocol)" in source
+    assert "from tigrbl_identity_jose" not in source
+    assert "jwt: TokenCoder" in source
+
+
 @pytest.mark.asyncio
 async def test_load_client_defaults_registration_when_optional_store_is_absent(monkeypatch):
     client = SimpleNamespace(id="client-a")

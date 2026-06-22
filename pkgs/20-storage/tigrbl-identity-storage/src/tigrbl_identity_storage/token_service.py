@@ -2,14 +2,19 @@ from __future__ import annotations
 
 from copy import deepcopy
 import inspect
-from typing import Any
+from typing import Any, Protocol
 from uuid import uuid4
 
 from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenReuseError
-from tigrbl_identity_jose.jwt_coder import JWTCoder
 
 
-async def _decode_issued_claims(jwt: JWTCoder, token: str) -> dict[str, Any]:
+class TokenCoder(Protocol):
+    async def async_sign_pair(self, **kwargs: Any) -> tuple[str, str]: ...
+
+    async def async_decode(self, token: str, **kwargs: Any) -> dict[str, Any]: ...
+
+
+async def _decode_issued_claims(jwt: TokenCoder, token: str) -> dict[str, Any]:
     decode = jwt.async_decode
     try:
         parameters = inspect.signature(decode).parameters
@@ -26,7 +31,7 @@ async def _decode_issued_claims(jwt: JWTCoder, token: str) -> dict[str, Any]:
 
 async def issue_persisted_token_pair(
     *,
-    jwt: JWTCoder,
+    jwt: TokenCoder,
     sub: str,
     tid: str,
     client_id: str | None,
@@ -91,7 +96,7 @@ def _normalize_refresh_audience(value: Any) -> str | list[str] | None:
 
 async def redeem_refresh_token(
     *,
-    jwt: JWTCoder,
+    jwt: TokenCoder,
     refresh_token: str,
     client_id: str,
     cert_thumbprint: str | None = None,
@@ -170,6 +175,7 @@ async def redeem_refresh_token(
 
 
 __all__ = [
+    "TokenCoder",
     "issue_persisted_token_pair",
     "redeem_refresh_token",
 ]
