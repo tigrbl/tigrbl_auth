@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 
 from tigrbl_auth_protocol_oidc.id_token import mint_id_token
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_authn_credentials.token_service import JWTCoder
+from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie, session_cookie_policy
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import HTTPException, JSONResponse, status

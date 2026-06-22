@@ -179,7 +179,7 @@ async def par(request: Any, db: Any = Depends(get_db)) -> Any:
     from ._op import pushed_authorization_request
 
     result = await pushed_authorization_request(request=request, db=db)
-    from tigrbl_authn_credentials.session_service import observe_par_response
+    from tigrbl_identity_storage.session_service import observe_par_response
 
     payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
     observe_par_response(_repo_root(), request_uri=payload.get("request_uri"), details=payload)

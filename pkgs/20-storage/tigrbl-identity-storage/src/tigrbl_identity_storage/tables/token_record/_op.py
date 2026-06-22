@@ -9,12 +9,10 @@ from uuid import UUID
 
 from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
+from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_authn_credentials.token_service import (
-    InvalidRefreshTokenError,
-    RefreshTokenReuseError,
-    redeem_refresh_token,
-)
+from tigrbl_identity_jose.jwt_coder import JWTCoder
+from tigrbl_identity_storage.token_service import redeem_refresh_token
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
@@ -114,8 +112,6 @@ except Exception:  # pragma: no cover - dependency-light fallback
 try:  # pragma: no cover
     from tigrbl_identity_server.rest.shared import _jwt, _pwd_backend, _require_tls, allowed_grant_types
 except Exception:  # pragma: no cover - dependency-light fallback
-    from tigrbl_authn_credentials.token_service import JWTCoder
-
     _jwt = JWTCoder.default if False else None  # placeholder to keep name bound
 
     class _MissingJWT:

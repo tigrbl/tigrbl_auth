@@ -15,7 +15,7 @@ from tigrbl_identity_storage.resource_service import (
     update_resource,
     validate_import_artifact,
 )
-from tigrbl_authn_credentials.session_service import observe_token_response, token_hash
+from tigrbl_identity_storage.session_service import observe_token_response, token_hash
 from tigrbl_auth_protocol_oidc.discovery_service import diff_discovery, show_discovery
 from tigrbl_identity_storage.portability import validate_export_plan
 

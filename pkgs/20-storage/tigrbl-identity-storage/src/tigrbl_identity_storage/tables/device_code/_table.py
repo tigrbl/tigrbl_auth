@@ -184,7 +184,7 @@ async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
     from ._op import device_authorization_request
 
     result = await device_authorization_request(request=request, db=db)
-    from tigrbl_authn_credentials.session_service import observe_device_authorization_response
+    from tigrbl_identity_storage.session_service import observe_device_authorization_response
 
     payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
     observe_device_authorization_response(_repo_root(), device_code=payload.get("device_code"), details=payload)

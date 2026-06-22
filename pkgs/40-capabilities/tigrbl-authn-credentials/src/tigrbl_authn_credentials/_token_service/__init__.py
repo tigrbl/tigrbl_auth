@@ -3,7 +3,7 @@ from __future__ import annotations
 from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenError, RefreshTokenReuseError
 
 from .coder import InvalidTokenError, JWTCoder
-from ..session_service import (
+from tigrbl_identity_storage.session_service import (
     exchange_token_for_context,
     get_token_for_context,
     introspect_token_for_context,
@@ -11,7 +11,7 @@ from ..session_service import (
     revoke_all_tokens_for_context,
     revoke_token_for_context,
 )
-from .persistence import issue_persisted_token_pair, redeem_refresh_token
+from tigrbl_identity_storage.token_service import issue_persisted_token_pair, redeem_refresh_token
 
 __all__ = [
     'InvalidRefreshTokenError',

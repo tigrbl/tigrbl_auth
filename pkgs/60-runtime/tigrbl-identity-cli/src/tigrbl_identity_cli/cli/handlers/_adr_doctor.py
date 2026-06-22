@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_authn_credentials.session_service import (
+from tigrbl_identity_storage.session_service import (
     exchange_token_for_context as _svc_exchange_token_for_context,
     get_session_for_context as _svc_get_session_for_context,
     get_token_for_context as _svc_get_token_for_context,

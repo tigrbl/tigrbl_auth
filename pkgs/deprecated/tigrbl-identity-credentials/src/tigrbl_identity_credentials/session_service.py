@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_authn_credentials.session_service`."""
+"""Deprecated compatibility module for `tigrbl_identity_storage.session_service`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_credentials.session_service"
-_CANONICAL_MODULE = "tigrbl_authn_credentials.session_service"
+_CANONICAL_MODULE = "tigrbl_identity_storage.session_service"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

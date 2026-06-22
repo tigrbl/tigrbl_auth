@@ -125,7 +125,7 @@ async def logout(request: Any, db: Any = Depends(get_db)) -> Any:
     from ._op import logout_request
 
     result = await logout_request(request=request, db=db)
-    from tigrbl_authn_credentials.session_service import observe_logout_response
+    from tigrbl_identity_storage.session_service import observe_logout_response
 
     payload: dict[str, object] = {}
     body = getattr(result, "body", None)

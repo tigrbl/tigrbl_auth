@@ -15,7 +15,7 @@ from tigrbl_identity_storage.provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )
-from tigrbl_authn_credentials.token_service import JWTCoder
+from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.resource_verifier_contract import build_protected_resource_verifier_contract
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
