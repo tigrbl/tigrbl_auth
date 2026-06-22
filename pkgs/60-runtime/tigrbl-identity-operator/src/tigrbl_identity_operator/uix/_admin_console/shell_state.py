@@ -26,7 +26,7 @@ from tigrbl_authz_policy.control_plane import (
     filter_visible_tenants,
     simulate_policy,
 )
-from tigrbl_authz_policy.invariants import (
+from tigrbl_authz_policy.assurance import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,

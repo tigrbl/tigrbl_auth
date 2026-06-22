@@ -26,7 +26,7 @@ uv add tigrbl-identity-policy
 ## Usage
 
 ```python
-from tigrbl_identity_policy.control_plane import PolicyEngine, RBACAdministration
+from tigrbl_identity_policy.control_plane import PolicyEngine, RBACAdministrator
 from tigrbl_identity_policy import AuthorityDerivationGraph, AuthorityNode, AuthorityScope
 from tigrbl_identity_policy.invariants import default_authorization_invariant_registry
 from tigrbl_identity_policy.provenance import canonical_hash

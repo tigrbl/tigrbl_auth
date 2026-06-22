@@ -50,7 +50,7 @@ class _FakeTableHandlers:
 
 
 def test_delegation_lifecycle_dtos_are_contract_owned() -> None:
-    authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation_lifecycle")
+    authz_lifecycle = importlib.import_module("tigrbl_authz_policy.delegation")
     contracts = importlib.import_module("tigrbl_identity_contracts.delegation")
 
     assert authz_lifecycle.DelegationGrantLifecycleEntry is contracts.DelegationGrantLifecycleEntry
