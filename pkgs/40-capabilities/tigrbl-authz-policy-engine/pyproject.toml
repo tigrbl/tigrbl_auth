@@ -1,19 +1,21 @@
 [project]
-name = "tigrbl-identity-operator"
+name = "tigrbl-authz-policy-engine"
 version = "0.4.0.dev2"
-description = "Repository truth, document authority, evidence workflows, and admin console helpers for Tigrbl IAM."
+description = "Storage-backed policy orchestration engine for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 keywords = [
     "tigrbl",
-    "identity",
-    "operator",
+    "authz",
+    "authorization",
+    "policy",
+    "engine",
+    "orchestration",
+    "rbac",
+    "abac",
+    "delegation",
     "iam",
-    "evidence",
-    "repo-truth",
-    "admin-console",
-    "governance",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -27,17 +29,14 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3 :: Only",
     "Typing :: Typed",
-    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-identity-cli==0.4.0.dev2",
-    "tigrbl-auth-release-certification==0.4.0.dev2",
+    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
     "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2",
-    "tigrbl-authz-policy-engine==0.4.0.dev2",
-    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
     "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
 ]
@@ -45,13 +44,13 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/60-runtime/tigrbl-identity-operator"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/40-capabilities/tigrbl-authz-policy-engine"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-operator/"
+PyPI = "https://pypi.org/project/tigrbl-authz-policy-engine/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_operator", from = "src" }]
+packages = [{ include = "tigrbl_authz_policy_engine", from = "src" }]

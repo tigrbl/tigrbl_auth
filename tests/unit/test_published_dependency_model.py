@@ -52,6 +52,7 @@ def test_pyproject_uses_published_pins_and_extras():
     abac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-abac-administrator")["project"]["dependencies"])
     delegated_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-delegated-administrator")["project"]["dependencies"])
     decision_engine_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-decision-engine")["project"]["dependencies"])
+    policy_engine_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-engine")["project"]["dependencies"])
     invariant_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-invariant-registry")["project"]["dependencies"])
     rbac_administrator_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-rbac-administrator")["project"]["dependencies"])
     service_identity_registry_dependencies = set(_load_package_pyproject("tigrbl-authz-policy-service-identity-registry")["project"]["dependencies"])
@@ -69,6 +70,11 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in delegated_administrator_dependencies
     assert "pqcrypto==0.4.0" not in decision_engine_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in decision_engine_dependencies
+    assert "pqcrypto==0.4.0" not in policy_engine_dependencies
+    assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in policy_engine_dependencies
+    assert "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2" in policy_engine_dependencies
+    assert "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2" in policy_engine_dependencies
+    assert "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2" in policy_engine_dependencies
     assert "pqcrypto==0.4.0" not in invariant_registry_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in invariant_registry_dependencies
     assert "pqcrypto==0.4.0" not in rbac_administrator_dependencies
@@ -79,6 +85,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-policy-abac-administrator==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-decision-engine==0.4.0.dev2" in authz_dependencies
+    assert "tigrbl-authz-policy-engine==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2" in authz_dependencies
     assert "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2" in authz_dependencies

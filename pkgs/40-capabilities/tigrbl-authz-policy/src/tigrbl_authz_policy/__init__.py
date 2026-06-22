@@ -22,6 +22,7 @@ from tigrbl_authz_policy_delegated_administrator import (
     DelegatedAdministrator,
     DelegatedAdminScope,
 )
+from tigrbl_authz_policy_engine import PolicyEngine
 from tigrbl_authz_policy_rbac_administrator import RBACAdministrator, Role
 from .control_plane import (
     ADMIN_CLIENT_FIELDS,

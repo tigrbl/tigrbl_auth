@@ -24,6 +24,7 @@ from tigrbl_authz_policy_abac_administrator import (
 from tigrbl_authz_policy_delegated_administrator import (
     DelegatedAdministrator as CanonicalDelegatedAdministrator,
 )
+from tigrbl_authz_policy_engine import PolicyEngine as CanonicalPolicyEngine
 from tigrbl_authz_policy_service_identity_registry import (
     ServiceIdentityRegistry as CanonicalServiceIdentityRegistry,
 )
@@ -90,6 +91,7 @@ def test_admin_policy_boundary_t0_runtime_client_field_exposure_is_guarded():
     assert RBACAdministrator is CanonicalRBACAdministrator
     assert ABACAdministrator is CanonicalABACAdministrator
     assert DelegatedAdministrator is CanonicalDelegatedAdministrator
+    assert PolicyEngine is CanonicalPolicyEngine
     assert DynamicCondition is CanonicalDynamicCondition
     assert ServiceIdentityRegistry is CanonicalServiceIdentityRegistry
     assert "client_secret" not in PUBLIC_CLIENT_FIELDS

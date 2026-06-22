@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 48
+    assert len(packages) == 49
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -46,6 +46,8 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-delegated-administrator"].import_root == "tigrbl_authz_policy_delegated_administrator"
     assert packages["tigrbl-authz-policy-decision-engine"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine"
     assert packages["tigrbl-authz-policy-decision-engine"].import_root == "tigrbl_authz_policy_decision_engine"
+    assert packages["tigrbl-authz-policy-engine"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-engine"
+    assert packages["tigrbl-authz-policy-engine"].import_root == "tigrbl_authz_policy_engine"
     assert packages["tigrbl-authz-policy-invariant-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry"
     assert packages["tigrbl-authz-policy-invariant-registry"].import_root == "tigrbl_authz_policy_invariant_registry"
     assert packages["tigrbl-authz-policy-rbac-administrator"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator"
@@ -99,7 +101,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "183"
+    assert payload["count"] == "186"
     assert not any(
         cell["name"]
         in {
@@ -241,6 +243,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy-abac-administrator",
         "tigrbl-authz-policy-delegated-administrator",
         "tigrbl-authz-policy-decision-engine",
+        "tigrbl-authz-policy-engine",
         "tigrbl-authz-policy-invariant-registry",
         "tigrbl-authz-policy-rbac-administrator",
         "tigrbl-authz-policy-service-identity-registry",

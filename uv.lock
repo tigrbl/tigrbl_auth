@@ -2290,6 +2290,7 @@ dependencies = [
     { name = "tigrbl-authz-policy-abac-administrator" },
     { name = "tigrbl-authz-policy-delegated-administrator" },
     { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-engine" },
     { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry" },
@@ -2428,6 +2429,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-abac-administrator", editable = "pkgs/40-capabilities/tigrbl-authz-policy-abac-administrator" },
     { name = "tigrbl-authz-policy-delegated-administrator", editable = "pkgs/40-capabilities/tigrbl-authz-policy-delegated-administrator" },
     { name = "tigrbl-authz-policy-concrete", editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-engine", editable = "pkgs/40-capabilities/tigrbl-authz-policy-engine" },
     { name = "tigrbl-authz-policy-invariant-registry", editable = "pkgs/40-capabilities/tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-rbac-administrator", editable = "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry", editable = "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry" },
@@ -2518,6 +2520,7 @@ dependencies = [
     { name = "tigrbl-authz-policy-abac-administrator" },
     { name = "tigrbl-authz-policy-delegated-administrator" },
     { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-engine" },
     { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry" },
@@ -2533,6 +2536,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-abac-administrator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-delegated-administrator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-engine", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-rbac-administrator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-service-identity-registry", specifier = "==0.4.0.dev2" },
@@ -2588,6 +2592,29 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-authz-policy-engine"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy-engine" }
+dependencies = [
+    { name = "tigrbl-authz-policy-abac-administrator" },
+    { name = "tigrbl-authz-policy-delegated-administrator" },
+    { name = "tigrbl-authz-policy-rbac-administrator" },
+    { name = "tigrbl-authz-policy-service-identity-registry" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authz-policy-abac-administrator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-delegated-administrator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-rbac-administrator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-service-identity-registry", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2893,6 +2920,7 @@ dependencies = [
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy-abac-administrator" },
     { name = "tigrbl-authz-policy-delegated-administrator" },
+    { name = "tigrbl-authz-policy-engine" },
     { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-rbac-administrator" },
     { name = "tigrbl-authz-policy-service-identity-registry" },
@@ -2904,6 +2932,7 @@ requires-dist = [
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-abac-administrator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-delegated-administrator", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-engine", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-rbac-administrator", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-service-identity-registry", specifier = "==0.4.0.dev2" },

@@ -6,7 +6,6 @@ from typing import Any, Callable, Mapping
 
 from tigrbl_authz_policy.control_plane import (
     PolicyDecision,
-    PolicyEngine,
     PUBLIC_CLIENT_FIELDS,
     assert_client_mutation_authority,
     build_compliance_report,
@@ -26,6 +25,7 @@ from tigrbl_authz_policy_delegated_administrator import (
     DelegatedAdminScope,
     DelegatedAdministrator,
 )
+from tigrbl_authz_policy_engine import PolicyEngine
 from tigrbl_authz_policy_invariant_registry import (
     AuthorizationInvariant,
     InvariantEvaluation,
