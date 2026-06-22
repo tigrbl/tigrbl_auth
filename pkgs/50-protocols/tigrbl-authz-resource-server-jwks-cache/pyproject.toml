@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-authz-resource-server"
+name = "tigrbl-authz-resource-server-jwks-cache"
 version = "0.4.0.dev2"
-description = "OAuth protected-resource facade over token, DPoP, mTLS, and policy validators for the Tigrbl auth package suite."
+description = "Resource-server JWKS cache for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -9,13 +9,9 @@ keywords = [
     "tigrbl",
     "authz",
     "resource-server",
-    "protected-api",
-    "access-token",
+    "jwks",
     "oauth",
-    "scopes",
-    "audience",
-    "introspection",
-    "iam",
+    "jwk",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -34,27 +30,19 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
-    "tigrbl-authz-policy==0.4.0.dev2",
-    "tigrbl-auth-release-certification==0.4.0.dev2",
-    "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2",
-    "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2",
-    "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
-    "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2",
-    "tigrbl-security-trust-contracts==0.1.0",
 ]
+
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tigrbl-authz-resource-server"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tigrbl-authz-resource-server-jwks-cache"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-authz-resource-server/"
+PyPI = "https://pypi.org/project/tigrbl-authz-resource-server-jwks-cache/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_authz_resource_server", from = "src" }]
+packages = [{ include = "tigrbl_authz_resource_server_jwks_cache", from = "src" }]

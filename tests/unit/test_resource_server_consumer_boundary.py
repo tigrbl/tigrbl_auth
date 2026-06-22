@@ -32,6 +32,9 @@ from tigrbl_authz_resource_server import (  # noqa: E402
 from tigrbl_authz_resource_server_dpop_cnf_binding_validator import (  # noqa: E402
     DpopCnfBindingValidator as CanonicalDpopCnfBindingValidator,
 )
+from tigrbl_authz_resource_server_jwks_cache import (  # noqa: E402
+    JWKSCache as CanonicalJWKSCache,
+)
 from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (  # noqa: E402
     MtlsCnfBindingValidator as CanonicalMtlsCnfBindingValidator,
 )
@@ -72,6 +75,7 @@ def test_resource_server_t0_public_surfaces_are_importable() -> None:
     cache = JWKSCache()
     cache.put_jwks({"keys": [{"kid": "kid-1", "kty": "OKP"}]})
 
+    assert JWKSCache is CanonicalJWKSCache
     assert cache.get("kid-1")["kty"] == "OKP"
     assert bearer_token_from_authorization("Bearer abc") == "abc"
     assert ResourceServerVerifier(now=lambda: NOW).verify_token(_claims(), _requirement()).allowed is True
