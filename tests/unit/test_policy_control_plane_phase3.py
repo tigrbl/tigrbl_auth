@@ -1,12 +1,14 @@
+import pytest
+
 from tigrbl_auth.uix import (
-    ABACAdministration,
+    ABACAdministrator,
     ADMIN_CLIENT_FIELDS,
     PUBLIC_CLIENT_FIELDS,
     AttributePolicy,
-    DelegatedAdministration,
+    DelegatedAdministrator,
     DynamicCondition,
     PolicyEngine,
-    RBACAdministration,
+    RBACAdministrator,
     ServiceIdentityRegistry,
     assert_client_mutation_authority,
     build_compliance_report,
@@ -41,50 +43,66 @@ def test_service_identities_support_tenant_scoped_authentication_and_revocation(
         raise AssertionError("revoked service credential unexpectedly authenticated")
 
 
-def test_rbac_supports_inheritance_tenant_scoping_and_fine_grained_denies():
-    rbac = RBACAdministration()
-    rbac.upsert_role("support-reader", ("tenant.read", "client.read"), tenant_id="tenant-a")
-    rbac.upsert_role(
+def test_administrator_hard_rename_exports_only_new_names():
+    import tigrbl_auth.uix as uix
+    import tigrbl_authz_policy as authz_policy
+
+    for module in (uix, authz_policy):
+        assert hasattr(module, "RBACAdministrator")
+        assert hasattr(module, "ABACAdministrator")
+        assert hasattr(module, "DelegatedAdministrator")
+        assert not hasattr(module, "RBACAdministration")
+        assert not hasattr(module, "ABACAdministration")
+        assert not hasattr(module, "DelegatedAdministration")
+
+
+@pytest.mark.asyncio
+async def test_rbac_supports_inheritance_tenant_scoping_and_fine_grained_denies(administrator_storage):
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("support-reader", ("tenant.read", "client.read"), tenant_id="tenant-a")
+    await rbac.upsert_role(
         "support-editor",
         ("client.update",),
         tenant_id="tenant-a",
         denied_permissions=("client.update.secret",),
         inherited_roles=("support-reader",),
     )
-    rbac.assign_role("alice", "support-editor", tenant_id="tenant-a")
+    await rbac.assign_role("alice", "support-editor", tenant_id="tenant-a")
 
-    allowed = rbac.decide("alice", "client.update", "tenant-a")
-    denied = rbac.decide("alice", "client.update.secret", "tenant-a")
-    wrong_tenant = rbac.decide("alice", "client.update", "tenant-b")
+    reader = RBACAdministrator(administrator_storage)
+    allowed = await reader.decide("alice", "client.update", "tenant-a")
+    denied = await reader.decide("alice", "client.update.secret", "tenant-a")
+    wrong_tenant = await reader.decide("alice", "client.update", "tenant-b")
 
     assert allowed.allowed
-    assert set(rbac.effective_permissions("alice", "tenant-a")) == {"client.read", "client.update", "tenant.read"}
+    assert set(await reader.effective_permissions("alice", "tenant-a")) == {"client.read", "client.update", "tenant.read"}
     assert not denied.allowed
     assert "denied" in denied.reason
     assert not wrong_tenant.allowed
 
 
-def test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit():
-    rbac = RBACAdministration()
-    rbac.upsert_role("security-admin", ("key.rotate",))
-    rbac.assign_role("alice", "security-admin")
+@pytest.mark.asyncio
+async def test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit(administrator_storage):
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("security-admin", ("key.rotate",), tenant_id="tenant-a")
+    await rbac.assign_role("alice", "security-admin", tenant_id="tenant-a")
 
-    abac = ABACAdministration()
-    policy = abac.upsert_policy(
+    abac = ABACAdministrator(administrator_storage)
+    policy = await abac.upsert_policy(
         "same-tenant-mfa-risk",
         permission="key.rotate",
         required_attributes={"tenant_id": "tenant-a", "mfa": True},
         dynamic_conditions=(DynamicCondition(field="risk", operator="lte", expected=2),),
     )
 
-    allowed = simulate_policy(
+    allowed = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="alice",
         permission="key.rotate",
         attributes={"tenant_id": "tenant-a", "mfa": True, "risk": 1},
     )
-    denied = simulate_policy(
+    denied = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="alice",
@@ -92,8 +110,8 @@ def test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit():
         attributes={"tenant_id": "tenant-a", "mfa": True, "risk": 7},
     )
 
-    engine = PolicyEngine(rbac=rbac, abac=abac)
-    engine_decision = engine.evaluate(
+    engine = PolicyEngine(db=administrator_storage, rbac=rbac, abac=abac)
+    engine_decision = await engine.evaluate(
         subject="alice",
         permission="key.rotate",
         tenant_id="tenant-a",
@@ -108,9 +126,10 @@ def test_policy_engine_supports_abac_dynamic_conditions_simulation_and_audit():
     assert engine.audit_events[0].permission == "key.rotate"
 
 
-def test_delegated_administration_controls_tenant_visibility_and_client_exposure():
-    delegated = DelegatedAdministration()
-    delegated.grant_scope(
+@pytest.mark.asyncio
+async def test_delegated_administrator_controls_tenant_visibility_and_client_exposure(administrator_storage):
+    delegated = DelegatedAdministrator(administrator_storage)
+    await delegated.grant_scope(
         "operator:tenant-a",
         tenant_ids=("tenant-a",),
         permissions=("client.read", "client.update"),
@@ -132,9 +151,10 @@ def test_delegated_administration_controls_tenant_visibility_and_client_exposure
         "created_at": "2026-05-05T00:00:00+00:00",
     }
 
-    visible = filter_visible_tenants(tenants, subject="operator:tenant-a", delegated_admin=delegated)
-    delegated_view = expose_client_record(client, plane="admin", subject="operator:tenant-a", delegated_admin=delegated)
-    public_view = expose_client_record(client, plane="public")
+    reader = DelegatedAdministrator(administrator_storage)
+    visible = await filter_visible_tenants(tenants, subject="operator:tenant-a", delegated_admin=reader)
+    delegated_view = await expose_client_record(client, plane="admin", subject="operator:tenant-a", delegated_admin=reader)
+    public_view = await expose_client_record(client, plane="public")
 
     assert [tenant["id"] for tenant in visible] == ["tenant-a"]
     assert set(delegated_view) == {"id", "tenant_id", "name", "client_id", "redirect_uris", "type"}
@@ -142,18 +162,18 @@ def test_delegated_administration_controls_tenant_visibility_and_client_exposure
     assert "client_secret" not in delegated_view
     assert tuple(public_view) == PUBLIC_CLIENT_FIELDS
 
-    assert_client_mutation_authority(
+    await assert_client_mutation_authority(
         subject="operator:tenant-a",
         tenant_id="tenant-a",
         patch={"name": "Portal 2"},
-        delegated_admin=delegated,
+        delegated_admin=reader,
     )
     try:
-        assert_client_mutation_authority(
+        await assert_client_mutation_authority(
             subject="operator:tenant-a",
             tenant_id="tenant-a",
             patch={"client_secret": "rotated"},
-            delegated_admin=delegated,
+            delegated_admin=reader,
         )
     except PermissionError as exc:
         assert "delegated client mutation scope" in str(exc)
@@ -161,7 +181,8 @@ def test_delegated_administration_controls_tenant_visibility_and_client_exposure
         raise AssertionError("delegated mutation unexpectedly allowed a secret rotation")
 
 
-def test_compliance_report_summarizes_cross_plane_policy_state():
+@pytest.mark.asyncio
+async def test_compliance_report_summarizes_cross_plane_policy_state(administrator_storage):
     registry = ServiceIdentityRegistry()
     registry.register_service(
         "svc-notifier",
@@ -169,26 +190,26 @@ def test_compliance_report_summarizes_cross_plane_policy_state():
         name="notifier",
         scopes=("client.read",),
     )
-    rbac = RBACAdministration()
-    rbac.upsert_role("auditor", ("audit.read",))
-    rbac.assign_role("dana", "auditor")
-    abac = ABACAdministration()
-    abac.upsert_policy(
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("auditor", ("audit.read",), tenant_id="tenant-a")
+    await rbac.assign_role("dana", "auditor", tenant_id="tenant-a")
+    abac = ABACAdministrator(administrator_storage)
+    await abac.upsert_policy(
         "tenant-a-audit",
         permission="audit.read",
         required_attributes={"tenant_id": "tenant-a"},
     )
-    delegated = DelegatedAdministration()
-    delegated.grant_scope("delegate", tenant_ids=("tenant-a",), permissions=("client.read",))
+    delegated = DelegatedAdministrator(administrator_storage)
+    await delegated.grant_scope("delegate", tenant_ids=("tenant-a",), permissions=("client.read",))
     engine = PolicyEngine(rbac=rbac, abac=abac, delegated_admin=delegated)
-    engine.evaluate(
+    await engine.evaluate(
         subject="dana",
         permission="audit.read",
         tenant_id="tenant-a",
         attributes={"tenant_id": "tenant-a"},
     )
 
-    report = build_compliance_report(
+    report = await build_compliance_report(
         service_registry=registry,
         rbac=rbac,
         abac=abac,

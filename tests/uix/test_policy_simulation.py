@@ -1,31 +1,34 @@
-from tigrbl_auth.uix import ABACAdministration, RBACAdministration, simulate_policy
+import pytest
+
+from tigrbl_auth.uix import ABACAdministrator, RBACAdministrator, simulate_policy
 
 
-def test_policy_simulation_returns_allow_deny_and_explanations():
-    rbac = RBACAdministration()
-    rbac.upsert_role("security-admin", ("key.rotate",))
-    rbac.assign_role("alice", "security-admin")
+@pytest.mark.asyncio
+async def test_policy_simulation_returns_allow_deny_and_explanations(administrator_storage):
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("security-admin", ("key.rotate",), tenant_id="tenant-a")
+    await rbac.assign_role("alice", "security-admin", tenant_id="tenant-a")
 
-    abac = ABACAdministration()
-    abac.upsert_policy(
+    abac = ABACAdministrator(administrator_storage)
+    await abac.upsert_policy(
         "same-tenant-mfa",
         permission="key.rotate",
         required_attributes={"tenant_id": "tenant-a", "mfa": True},
     )
 
-    allowed = simulate_policy(
+    allowed = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="alice",
         permission="key.rotate",
         attributes={"tenant_id": "tenant-a", "mfa": True},
     )
-    denied = simulate_policy(
+    denied = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="alice",
         permission="key.rotate",
-        attributes={"tenant_id": "tenant-b", "mfa": True},
+        attributes={"tenant_id": "tenant-a", "mfa": False},
     )
 
     assert allowed.allowed

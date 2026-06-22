@@ -11,7 +11,7 @@ from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_authz_policy.provenance import (
+from tigrbl_identity_storage.provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )

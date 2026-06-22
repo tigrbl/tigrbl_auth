@@ -2503,6 +2503,7 @@ dependencies = [
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
     { name = "tigrbl-release-contracts" },
 ]
 
@@ -2512,6 +2513,7 @@ requires-dist = [
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-release-contracts", specifier = "==0.1.0" },
 ]
 
@@ -2868,7 +2870,6 @@ source = { editable = "pkgs/20-storage/tigrbl-identity-storage" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
-    { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-core" },
 ]
@@ -2877,7 +2878,6 @@ dependencies = [
 requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
 ]

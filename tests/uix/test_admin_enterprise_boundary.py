@@ -1,7 +1,7 @@
 import pytest
 
 from tigrbl_auth.uix import (
-    ABACAdministration,
+    ABACAdministrator,
     ADMIN_NAVIGATION,
     RESOURCE_VIEW_METHODS,
     SAFE_MUTATION_METHODS,
@@ -9,7 +9,7 @@ from tigrbl_auth.uix import (
     AdminConsoleShell,
     AdminPrincipal,
     AdminSession,
-    RBACAdministration,
+    RBACAdministrator,
     SafeMutationRequest,
     TenantProfileSelection,
     build_readiness_dashboard,
@@ -79,7 +79,8 @@ def test_admin_enterprise_boundary_t0_inventory_exposes_all_required_surfaces():
     }
 
 
-def test_admin_enterprise_boundary_t1_happy_path_composes_shell_views_mutations_and_policy():
+@pytest.mark.asyncio
+async def test_admin_enterprise_boundary_t1_happy_path_composes_shell_views_mutations_and_policy(administrator_storage):
     shell = AdminConsoleShell(
         issuer="https://issuer.example.test",
         environment_label="test",
@@ -108,16 +109,16 @@ def test_admin_enterprise_boundary_t1_happy_path_composes_shell_views_mutations_
         )
     )
 
-    rbac = RBACAdministration()
-    rbac.upsert_role("security-admin", ("jwks.show",))
-    rbac.assign_role("admin@example.test", "security-admin")
-    abac = ABACAdministration()
-    abac.upsert_policy(
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("security-admin", ("jwks.show",), tenant_id="tenant-a")
+    await rbac.assign_role("admin@example.test", "security-admin", tenant_id="tenant-a")
+    abac = ABACAdministrator(administrator_storage)
+    await abac.upsert_policy(
         "same-tenant",
         permission="jwks.show",
         required_attributes={"tenant_id": "tenant-a", "mfa": True},
     )
-    decision = simulate_policy(
+    decision = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="admin@example.test",
@@ -135,7 +136,8 @@ def test_admin_enterprise_boundary_t1_happy_path_composes_shell_views_mutations_
     assert decision.matched == ("security-admin", "same-tenant")
 
 
-def test_admin_enterprise_boundary_t2_fail_closed_guards_for_auth_readiness_mutation_and_policy():
+@pytest.mark.asyncio
+async def test_admin_enterprise_boundary_t2_fail_closed_guards_for_auth_readiness_mutation_and_policy(administrator_storage):
     shell = AdminConsoleShell(
         issuer="https://issuer.example.test",
         environment_label="test",
@@ -162,21 +164,21 @@ def test_admin_enterprise_boundary_t2_fail_closed_guards_for_auth_readiness_muta
         SafeMutationRequest(action="rotate-key", target_id="kid-1")
     )
 
-    rbac = RBACAdministration()
-    rbac.upsert_role("security-admin", ("key.rotate",))
-    rbac.assign_role("admin@example.test", "security-admin")
-    abac = ABACAdministration()
-    abac.upsert_policy(
+    rbac = RBACAdministrator(administrator_storage)
+    await rbac.upsert_role("security-admin", ("key.rotate",), tenant_id="tenant-a")
+    await rbac.assign_role("admin@example.test", "security-admin", tenant_id="tenant-a")
+    abac = ABACAdministrator(administrator_storage)
+    await abac.upsert_policy(
         "same-tenant",
         permission="key.rotate",
         required_attributes={"tenant_id": "tenant-a", "mfa": True},
     )
-    denied = simulate_policy(
+    denied = await simulate_policy(
         rbac=rbac,
         abac=abac,
         subject="admin@example.test",
         permission="key.rotate",
-        attributes={"tenant_id": "tenant-b", "mfa": True},
+        attributes={"tenant_id": "tenant-a", "mfa": False},
     )
 
     assert blocked_dashboard.status == "blocked"

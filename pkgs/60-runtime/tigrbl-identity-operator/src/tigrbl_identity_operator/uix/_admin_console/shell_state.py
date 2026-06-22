@@ -5,18 +5,18 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Mapping
 
 from tigrbl_authz_policy.control_plane import (
-    ABACAdministration,
+    ABACAdministrator,
     ADMIN_CLIENT_FIELDS,
     AttributePolicy,
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdminScope,
-    DelegatedAdministration,
+    DelegatedAdministrator,
     DynamicCondition,
     PolicyDecision,
     PolicyEngine,
     PUBLIC_CLIENT_FIELDS,
-    RBACAdministration,
+    RBACAdministrator,
     Role,
     ServiceIdentityAuthentication,
     ServiceIdentityRegistry,

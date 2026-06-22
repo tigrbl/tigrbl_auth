@@ -20,11 +20,83 @@ from tigrbl_identity_contracts.delegation import (
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision
 from tigrbl_identity_concrete import ServiceCredential, ServiceIdentity
+from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy as _StoredAttributePolicy
+from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope as _StoredDelegatedAdminScope
+from tigrbl_identity_storage.tables.policy_condition import PolicyCondition as _StoredPolicyCondition
+from tigrbl_identity_storage.tables.role import Role as _StoredRole
+from tigrbl_identity_storage.tables.tenant_membership import TenantMembership as _StoredTenantMembership
 from tigrbl_authz_policy_concrete import AttributePolicy
 
 
 def _pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, Any]:
     return {field: record[field] for field in fields if field in record}
+
+
+def _row_value(row: Any, key: str, default: Any = None) -> Any:
+    if isinstance(row, Mapping):
+        return row.get(key, default)
+    return getattr(row, key, default)
+
+
+def _row_id(row: Any) -> str:
+    return str(_row_value(row, "id", "") or "")
+
+
+def _row_active(row: Any) -> bool:
+    return str(_row_value(row, "status", "active") or "active") == "active"
+
+
+def _str_tuple(values: Any, *, sort: bool = True) -> tuple[str, ...]:
+    if values is None or values == "" or values is False:
+        return ()
+    if isinstance(values, str):
+        items = (values,)
+    else:
+        items = tuple(str(value) for value in values if value not in {None, ""})
+    return tuple(sorted(set(items))) if sort else tuple(items)
+
+
+def _role_contract(row: Any) -> Role:
+    return Role(
+        name=str(_row_value(row, "name") or ""),
+        tenant_id=_row_value(row, "tenant_id"),
+        permissions=_str_tuple(_row_value(row, "permissions")),
+        denied_permissions=_str_tuple(_row_value(row, "denied_permissions")),
+        inherited_roles=_str_tuple(_row_value(row, "inherited_roles")),
+    )
+
+
+def _condition_contract(row: Any) -> DynamicCondition:
+    return DynamicCondition(
+        field=str(_row_value(row, "field_name") or ""),
+        operator=str(_row_value(row, "operator") or ""),
+        expected=_row_value(row, "expected"),
+    )
+
+
+def _attribute_policy_contract(row: Any, conditions: Iterable[DynamicCondition] = ()) -> AttributePolicy:
+    return AttributePolicy(
+        name=str(_row_value(row, "name") or ""),
+        permission=str(_row_value(row, "permission") or ""),
+        tenant_id=_row_value(row, "tenant_id"),
+        client_id=_row_value(row, "client_id"),
+        effect=str(_row_value(row, "effect", "allow") or "allow"),
+        required_attributes=dict(_row_value(row, "required_attributes", {}) or {}),
+        dynamic_conditions=tuple(conditions),
+    )
+
+
+def _delegated_scope_contract(row: Any) -> DelegatedAdminScope:
+    visible = _str_tuple(_row_value(row, "visible_client_fields")) or DELEGATED_VISIBLE_CLIENT_FIELDS
+    mutable = _str_tuple(_row_value(row, "mutable_client_fields")) or DELEGATED_MUTABLE_CLIENT_FIELDS
+    return DelegatedAdminScope(
+        subject=str(_row_value(row, "subject") or ""),
+        tenant_ids=_str_tuple(_row_value(row, "tenant_ids")),
+        permissions=_str_tuple(_row_value(row, "permissions")),
+        visible_client_fields=visible,
+        mutable_client_fields=mutable,
+        service_identity_permissions=_str_tuple(_row_value(row, "service_identity_permissions")),
+    )
 
 
 class ServiceIdentityRegistry:
@@ -144,23 +216,11 @@ class ServiceIdentityRegistry:
         }
 
 
-class RBACAdministration:
-    def __init__(self) -> None:
-        self._roles: dict[str, Role] = {}
-        self._assignments: dict[str, set[tuple[str, str | None]]] = {}
+class RBACAdministrator:
+    def __init__(self, db: Any) -> None:
+        self.db = db
 
-    @property
-    def roles(self) -> Mapping[str, Role]:
-        return dict(self._roles)
-
-    @property
-    def assignments(self) -> Mapping[str, tuple[str, ...]]:
-        return {
-            subject: tuple(sorted(role_name for role_name, _tenant_id in assignments))
-            for subject, assignments in self._assignments.items()
-        }
-
-    def upsert_role(
+    async def upsert_role(
         self,
         name: str,
         permissions: tuple[str, ...],
@@ -171,34 +231,83 @@ class RBACAdministration:
     ) -> Role:
         if not name or not permissions:
             raise ValueError("role name and permissions are required")
-        role = Role(
+        row = await _StoredRole.create_role(
+            self.db,
             name=name,
-            permissions=tuple(sorted(set(permissions))),
             tenant_id=tenant_id,
-            denied_permissions=tuple(sorted(set(denied_permissions))),
-            inherited_roles=tuple(sorted(set(inherited_roles))),
+            permissions=_str_tuple(permissions),
+            denied_permissions=_str_tuple(denied_permissions),
+            inherited_roles=_str_tuple(inherited_roles),
         )
-        self._roles[name] = role
-        return role
+        return _role_contract(row)
 
-    def assign_role(self, subject: str, role_name: str, *, tenant_id: str | None = None) -> None:
-        if role_name not in self._roles:
+    async def assign_role(self, subject: str, role_name: str, *, tenant_id: str | None = None) -> None:
+        if not tenant_id:
+            raise ValueError("tenant_id is required for storage-backed role assignment")
+        if await self._role_for(role_name, tenant_id) is None:
             raise KeyError(f"unknown role {role_name!r}")
-        self._assignments.setdefault(subject, set()).add((role_name, tenant_id))
+        membership = await _StoredTenantMembership.lookup(
+            self.db,
+            tenant_id=tenant_id,
+            principal_id=subject,
+        )
+        roles = set(_str_tuple(_row_value(membership, "roles") if membership is not None else ()))
+        roles.add(role_name)
+        await _StoredTenantMembership.grant_membership(
+            self.db,
+            tenant_id=tenant_id,
+            principal_id=subject,
+            roles=tuple(sorted(roles)),
+        )
 
-    def effective_permissions(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
-        grants, _denies, _matched = self._decision_inputs(subject, tenant_id)
+    async def assignments_for(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
+        rows = await _StoredTenantMembership.list_for_principal(self.db, principal_id=subject)
+        roles: set[str] = set()
+        for row in rows:
+            if not _row_active(row):
+                continue
+            row_tenant = _row_value(row, "tenant_id")
+            if tenant_id is not None and row_tenant != tenant_id:
+                continue
+            roles.update(_str_tuple(_row_value(row, "roles")))
+        return tuple(sorted(roles))
+
+    async def list_roles(self, tenant_id: str | None = None) -> tuple[Role, ...]:
+        role_map = await self._role_map_for_tenant(tenant_id)
+        return tuple(role_map[name] for name in sorted(role_map))
+
+    async def effective_permissions(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
+        grants, _denies, _matched = await self._decision_inputs(subject, tenant_id)
         return tuple(sorted(grants))
 
-    def decide(self, subject: str, permission: str, tenant_id: str | None = None) -> PolicyDecision:
-        grants, denies, matched_roles = self._decision_inputs(subject, tenant_id)
+    async def decide(self, subject: str, permission: str, tenant_id: str | None = None) -> PolicyDecision:
+        grants, denies, matched_roles = await self._decision_inputs(subject, tenant_id)
         if any(_permission_matches(deny, permission) for deny in denies):
             return PolicyDecision(False, "permission denied by RBAC role assignments", matched_roles)
         if any(_permission_matches(grant, permission) for grant in grants):
             return PolicyDecision(True, "permission granted by assigned role", matched_roles)
         return PolicyDecision(False, "permission denied by RBAC role assignments", matched_roles)
 
-    def _decision_inputs(
+    async def summary(self, tenant_id: str | None = None) -> dict[str, Any]:
+        roles = await self.list_roles(tenant_id)
+        return {"role_count": len(roles), "roles": [role.name for role in roles]}
+
+    async def _role_for(self, role_name: str, tenant_id: str | None) -> Role | None:
+        return (await self._role_map_for_tenant(tenant_id)).get(role_name)
+
+    async def _role_map_for_tenant(self, tenant_id: str | None) -> dict[str, Role]:
+        rows = await _StoredRole.list_for_tenant(self.db)
+        roles: dict[str, Role] = {}
+        for row in rows:
+            role = _role_contract(row)
+            if not _row_active(row):
+                continue
+            if tenant_id is not None and role.tenant_id not in {None, tenant_id}:
+                continue
+            roles[role.name] = role
+        return roles
+
+    async def _decision_inputs(
         self,
         subject: str,
         tenant_id: str | None,
@@ -206,44 +315,41 @@ class RBACAdministration:
         grants: set[str] = set()
         denies: set[str] = set()
         matched_roles: set[str] = set()
-        for role_name, assignment_tenant in self._assignments.get(subject, set()):
-            if assignment_tenant not in {None, tenant_id}:
+        roles = await self._role_map_for_tenant(tenant_id)
+        for row in await _StoredTenantMembership.list_for_principal(self.db, principal_id=subject):
+            if not _row_active(row):
                 continue
-            self._collect_role(role_name, tenant_id, grants, denies, matched_roles, set())
+            if tenant_id is not None and _row_value(row, "tenant_id") != tenant_id:
+                continue
+            for role_name in _str_tuple(_row_value(row, "roles")):
+                self._collect_role(role_name, roles, grants, denies, matched_roles, set())
         return grants, denies, tuple(sorted(matched_roles))
 
     def _collect_role(
         self,
         role_name: str,
-        tenant_id: str | None,
+        roles: Mapping[str, Role],
         grants: set[str],
         denies: set[str],
         matched_roles: set[str],
         seen: set[str],
     ) -> None:
-        if role_name in seen:
+        if role_name in seen or role_name not in roles:
             return
         seen.add(role_name)
-        role = self._roles[role_name]
-        if role.tenant_id not in {None, tenant_id}:
-            return
+        role = roles[role_name]
         matched_roles.add(role_name)
         grants.update(role.permissions)
         denies.update(role.denied_permissions)
         for inherited in role.inherited_roles:
-            if inherited in self._roles:
-                self._collect_role(inherited, tenant_id, grants, denies, matched_roles, seen)
+            self._collect_role(inherited, roles, grants, denies, matched_roles, seen)
 
 
-class ABACAdministration:
-    def __init__(self) -> None:
-        self._policies: dict[str, AttributePolicy] = {}
+class ABACAdministrator:
+    def __init__(self, db: Any) -> None:
+        self.db = db
 
-    @property
-    def policies(self) -> Mapping[str, AttributePolicy]:
-        return dict(self._policies)
-
-    def upsert_policy(
+    async def upsert_policy(
         self,
         name: str,
         *,
@@ -256,27 +362,35 @@ class ABACAdministration:
     ) -> AttributePolicy:
         if not name or not permission or not required_attributes:
             raise ValueError("policy name, permission, and attributes are required")
-        policy = AttributePolicy(
+        row = await _StoredAttributePolicy.create_policy(
+            self.db,
             name=name,
-            permission=permission,
-            required_attributes=dict(required_attributes),
             tenant_id=tenant_id,
-            dynamic_conditions=tuple(dynamic_conditions),
-            effect=effect,
             client_id=client_id,
+            permission=permission,
+            effect=effect,
+            required_attributes=dict(required_attributes),
         )
-        self._policies[name] = policy
-        return policy
-
-    def has_relevant_policy(self, permission: str, tenant_id: str | None = None, client_id: str | None = None) -> bool:
-        return any(
-            _permission_matches(policy.permission, permission)
-            and policy.tenant_id in {None, tenant_id}
-            and policy.client_id in {None, client_id}
-            for policy in self._policies.values()
+        conditions = tuple(dynamic_conditions)
+        await _StoredPolicyCondition.replace_for_policy(
+            self.db,
+            policy_id=_row_id(row) or name,
+            conditions=(
+                {"field_name": condition.field, "operator": condition.operator, "expected": condition.expected}
+                for condition in conditions
+            ),
         )
+        return _attribute_policy_contract(row, conditions)
 
-    def decide(
+    async def has_relevant_policy(
+        self,
+        permission: str,
+        tenant_id: str | None = None,
+        client_id: str | None = None,
+    ) -> bool:
+        return bool(await self._matching_policies(permission, tenant_id=tenant_id, client_id=client_id))
+
+    async def decide(
         self,
         *,
         permission: str,
@@ -286,13 +400,7 @@ class ABACAdministration:
     ) -> PolicyDecision:
         allow_matches: list[str] = []
         deny_matches: list[str] = []
-        for policy in self._policies.values():
-            if not _permission_matches(policy.permission, permission):
-                continue
-            if policy.tenant_id not in {None, tenant_id}:
-                continue
-            if policy.client_id not in {None, client_id}:
-                continue
+        for policy in await self._matching_policies(permission, tenant_id=tenant_id, client_id=client_id):
             if not all(attributes.get(key) == value for key, value in policy.required_attributes.items()):
                 continue
             if not all(condition.evaluate(attributes) for condition in policy.dynamic_conditions):
@@ -307,16 +415,45 @@ class ABACAdministration:
             return PolicyDecision(True, "permission granted by matching attributes", tuple(sorted(allow_matches)))
         return PolicyDecision(False, "permission denied by ABAC attributes", ())
 
+    async def list_policies(self) -> tuple[AttributePolicy, ...]:
+        return tuple(await self._policies_from_rows(await _StoredAttributePolicy.list_active(self.db)))
 
-class DelegatedAdministration:
-    def __init__(self) -> None:
-        self._scopes: dict[str, DelegatedAdminScope] = {}
+    async def summary(self) -> dict[str, Any]:
+        policies = await self.list_policies()
+        return {"policy_count": len(policies), "policies": [policy.name for policy in policies]}
 
-    @property
-    def scopes(self) -> Mapping[str, DelegatedAdminScope]:
-        return dict(self._scopes)
+    async def _matching_policies(
+        self,
+        permission: str,
+        *,
+        tenant_id: str | None,
+        client_id: str | None,
+    ) -> tuple[AttributePolicy, ...]:
+        rows = await _StoredAttributePolicy.list_active(self.db)
+        policies = await self._policies_from_rows(rows)
+        return tuple(
+            policy
+            for policy in policies
+            if _permission_matches(policy.permission, permission)
+            and policy.tenant_id in {None, tenant_id}
+            and policy.client_id in {None, client_id}
+        )
 
-    def grant_scope(
+    async def _policies_from_rows(self, rows: Iterable[Any]) -> list[AttributePolicy]:
+        policies: list[AttributePolicy] = []
+        for row in rows:
+            if not _row_active(row):
+                continue
+            condition_rows = await _StoredPolicyCondition.list_for_policy(self.db, policy_id=_row_id(row) or str(_row_value(row, "name") or ""))
+            policies.append(_attribute_policy_contract(row, tuple(_condition_contract(item) for item in condition_rows)))
+        return policies
+
+
+class DelegatedAdministrator:
+    def __init__(self, db: Any) -> None:
+        self.db = db
+
+    async def grant_scope(
         self,
         subject: str,
         *,
@@ -326,21 +463,28 @@ class DelegatedAdministration:
         mutable_client_fields: Iterable[str] = DELEGATED_MUTABLE_CLIENT_FIELDS,
         service_identity_permissions: Iterable[str] = (),
     ) -> DelegatedAdminScope:
-        scope = DelegatedAdminScope(
+        row = await _StoredDelegatedAdminScope.grant_scope(
+            self.db,
             subject=subject,
-            tenant_ids=tuple(sorted(set(tenant_ids))),
-            permissions=tuple(sorted(set(permissions))),
-            visible_client_fields=tuple(sorted(set(visible_client_fields))),
-            mutable_client_fields=tuple(sorted(set(mutable_client_fields))),
-            service_identity_permissions=tuple(sorted(set(service_identity_permissions))),
+            tenant_ids=list(_str_tuple(tenant_ids)),
+            permissions=list(_str_tuple(permissions)),
+            visible_client_fields=list(_str_tuple(visible_client_fields)),
+            mutable_client_fields=list(_str_tuple(mutable_client_fields)),
+            service_identity_permissions=list(_str_tuple(service_identity_permissions)),
         )
-        self._scopes[subject] = scope
-        return scope
+        return _delegated_scope_contract(row)
 
-    def scope_for(self, subject: str) -> DelegatedAdminScope | None:
-        return self._scopes.get(subject)
+    async def revoke_scope(self, subject: str) -> DelegatedAdminScope | None:
+        row = await _StoredDelegatedAdminScope.revoke_scope(self.db, subject=subject)
+        return _delegated_scope_contract(row) if row is not None else None
 
-    def authorize(
+    async def scope_for(self, subject: str) -> DelegatedAdminScope | None:
+        row = await _StoredDelegatedAdminScope.lookup(self.db, subject=subject)
+        if row is None or not _row_active(row):
+            return None
+        return _delegated_scope_contract(row)
+
+    async def authorize(
         self,
         subject: str,
         *,
@@ -348,7 +492,7 @@ class DelegatedAdministration:
         permission: str,
         patch_fields: Iterable[str] = (),
     ) -> PolicyDecision:
-        scope = self._scopes.get(subject)
+        scope = await self.scope_for(subject)
         if scope is None:
             return PolicyDecision(True, "no delegated scope restriction active", ())
         if tenant_id not in scope.tenant_ids:
@@ -360,25 +504,26 @@ class DelegatedAdministration:
             return PolicyDecision(False, "permission denied by delegated client mutation scope", tuple(sorted(patch_field_set)))
         return PolicyDecision(True, "permission granted by delegated admin scope", (scope.subject,))
 
-    def visible_tenant_ids(self, subject: str, tenant_ids: Iterable[str]) -> tuple[str, ...]:
-        scope = self._scopes.get(subject)
+    async def visible_tenant_ids(self, subject: str, tenant_ids: Iterable[str]) -> tuple[str, ...]:
+        scope = await self.scope_for(subject)
         if scope is None:
             return tuple(sorted(set(tenant_ids)))
         return tuple(sorted(tenant_id for tenant_id in tenant_ids if tenant_id in scope.tenant_ids))
 
-    def visible_client_fields_for(self, subject: str) -> tuple[str, ...]:
-        scope = self._scopes.get(subject)
+    async def visible_client_fields_for(self, subject: str) -> tuple[str, ...]:
+        scope = await self.scope_for(subject)
         if scope is None:
             return ADMIN_CLIENT_FIELDS
         return scope.visible_client_fields
 
-    def summary(self) -> dict[str, Any]:
+    async def summary(self) -> dict[str, Any]:
+        scopes = [_delegated_scope_contract(row) for row in await _StoredDelegatedAdminScope.list_active(self.db) if _row_active(row)]
         return {
-            "scope_count": len(self._scopes),
-            "delegates": sorted(self._scopes),
+            "scope_count": len(scopes),
+            "delegates": sorted(scope.subject for scope in scopes),
             "tenant_map": {
-                subject: list(scope.tenant_ids)
-                for subject, scope in sorted(self._scopes.items())
+                scope.subject: list(scope.tenant_ids)
+                for scope in sorted(scopes, key=lambda scope: scope.subject)
             },
         }
 
@@ -387,20 +532,24 @@ class PolicyEngine:
     def __init__(
         self,
         *,
-        rbac: RBACAdministration | None = None,
-        abac: ABACAdministration | None = None,
-        delegated_admin: DelegatedAdministration | None = None,
+        db: Any | None = None,
+        rbac: RBACAdministrator | None = None,
+        abac: ABACAdministrator | None = None,
+        delegated_admin: DelegatedAdministrator | None = None,
     ) -> None:
-        self.rbac = rbac or RBACAdministration()
-        self.abac = abac or ABACAdministration()
-        self.delegated_admin = delegated_admin or DelegatedAdministration()
+        if db is None and (rbac is None or abac is None or delegated_admin is None):
+            raise ValueError("db is required when PolicyEngine constructs storage-backed administrators")
+        self.db = db
+        self.rbac = rbac or RBACAdministrator(db)
+        self.abac = abac or ABACAdministrator(db)
+        self.delegated_admin = delegated_admin or DelegatedAdministrator(db)
         self._audit_events: list[_PolicyAuditEvent] = []
 
     @property
     def audit_events(self) -> tuple[_PolicyAuditEvent, ...]:
         return tuple(self._audit_events)
 
-    def evaluate(
+    async def evaluate(
         self,
         *,
         subject: str,
@@ -412,7 +561,7 @@ class PolicyEngine:
         service_auth: ServiceIdentityAuthentication | None = None,
         patch_fields: Iterable[str] = (),
     ) -> PolicyDecision:
-        delegated = self.delegated_admin.authorize(
+        delegated = await self.delegated_admin.authorize(
             subject,
             tenant_id=tenant_id,
             permission=permission,
@@ -434,15 +583,15 @@ class PolicyEngine:
                 return decision
             rbac_decision = PolicyDecision(True, "permission granted by service identity scope", (service_auth.service.name,))
         else:
-            rbac_decision = self.rbac.decide(subject, permission, tenant_id)
+            rbac_decision = await self.rbac.decide(subject, permission, tenant_id)
 
-        abac_decision = self.abac.decide(
+        abac_decision = await self.abac.decide(
             permission=permission,
             attributes=attributes,
             tenant_id=tenant_id,
             client_id=client_id,
         )
-        requires_abac = self.abac.has_relevant_policy(permission, tenant_id, client_id)
+        requires_abac = await self.abac.has_relevant_policy(permission, tenant_id, client_id)
 
         if rbac_decision.allowed and (abac_decision.allowed or not requires_abac):
             matched = rbac_decision.matched + (() if not requires_abac else abac_decision.matched)
@@ -458,7 +607,7 @@ class PolicyEngine:
         self._record_audit(decision, subject=subject, tenant_id=tenant_id, permission=permission, actor_type=actor_type, client_id=client_id)
         return decision
 
-    def compliance_report(
+    async def compliance_report(
         self,
         *,
         service_registry: ServiceIdentityRegistry,
@@ -466,7 +615,7 @@ class PolicyEngine:
         clients: Iterable[Mapping[str, Any]],
     ) -> dict[str, Any]:
         tenant_ids = [str(tenant["id"]) for tenant in tenants if "id" in tenant]
-        return build_compliance_report(
+        return await build_compliance_report(
             service_registry=service_registry,
             rbac=self.rbac,
             abac=self.abac,
@@ -502,10 +651,10 @@ class PolicyEngine:
         )
 
 
-def simulate_policy(
+async def simulate_policy(
     *,
-    rbac: RBACAdministration,
-    abac: ABACAdministration,
+    rbac: RBACAdministrator,
+    abac: ABACAdministrator,
     subject: str,
     permission: str,
     attributes: Mapping[str, Any],
@@ -513,17 +662,17 @@ def simulate_policy(
     client_id: str | None = None,
 ) -> PolicyDecision:
     tenant = tenant_id or str(attributes.get("tenant_id") or "")
-    engine = PolicyEngine(rbac=rbac, abac=abac)
+    engine = PolicyEngine(rbac=rbac, abac=abac, delegated_admin=DelegatedAdministrator(rbac.db))
     if tenant:
-        return engine.evaluate(
+        return await engine.evaluate(
             subject=subject,
             permission=permission,
             tenant_id=tenant,
             attributes=attributes,
             client_id=client_id,
         )
-    rbac_decision = rbac.decide(subject, permission, tenant_id)
-    abac_decision = abac.decide(permission=permission, attributes=attributes, tenant_id=tenant_id, client_id=client_id)
+    rbac_decision = await rbac.decide(subject, permission, tenant_id)
+    abac_decision = await abac.decide(permission=permission, attributes=attributes, tenant_id=tenant_id, client_id=client_id)
     if rbac_decision.allowed and abac_decision.allowed:
         return PolicyDecision(
             True,
@@ -534,48 +683,48 @@ def simulate_policy(
     return PolicyDecision(False, "; ".join(reasons), rbac_decision.matched + abac_decision.matched)
 
 
-def filter_visible_tenants(
+async def filter_visible_tenants(
     tenants: Iterable[Mapping[str, Any]],
     *,
     subject: str,
-    delegated_admin: DelegatedAdministration | None = None,
+    delegated_admin: DelegatedAdministrator | None = None,
 ) -> list[dict[str, Any]]:
     tenants_list = [dict(tenant) for tenant in tenants]
     if delegated_admin is None:
         return tenants_list
-    visible_ids = set(delegated_admin.visible_tenant_ids(subject, (str(tenant.get("id")) for tenant in tenants_list)))
+    visible_ids = set(await delegated_admin.visible_tenant_ids(subject, (str(tenant.get("id")) for tenant in tenants_list)))
     return [tenant for tenant in tenants_list if str(tenant.get("id")) in visible_ids]
 
 
-def expose_client_record(
+async def expose_client_record(
     client: Mapping[str, Any],
     *,
     plane: str,
     subject: str | None = None,
-    delegated_admin: DelegatedAdministration | None = None,
+    delegated_admin: DelegatedAdministrator | None = None,
 ) -> dict[str, Any]:
     if plane == "public":
         return _pick_fields(client, PUBLIC_CLIENT_FIELDS)
     if plane != "admin":
         raise ValueError(f"unsupported exposure plane {plane!r}")
-    if delegated_admin is not None and subject is not None and delegated_admin.scope_for(subject) is not None:
-        return _pick_fields(client, delegated_admin.visible_client_fields_for(subject))
+    if delegated_admin is not None and subject is not None and await delegated_admin.scope_for(subject) is not None:
+        return _pick_fields(client, await delegated_admin.visible_client_fields_for(subject))
     return _pick_fields(client, ADMIN_CLIENT_FIELDS)
 
 
-def assert_client_mutation_authority(
+async def assert_client_mutation_authority(
     *,
     subject: str,
     tenant_id: str,
     patch: Mapping[str, Any],
-    delegated_admin: DelegatedAdministration | None = None,
+    delegated_admin: DelegatedAdministrator | None = None,
 ) -> None:
     patch_fields = tuple(sorted(set(patch)))
     if "tenant_id" in patch and patch["tenant_id"] != tenant_id:
         raise PermissionError("tenant mutation is not allowed")
     if delegated_admin is None:
         return
-    decision = delegated_admin.authorize(
+    decision = await delegated_admin.authorize(
         subject,
         tenant_id=tenant_id,
         permission="client.update",
@@ -585,12 +734,12 @@ def assert_client_mutation_authority(
         raise PermissionError(decision.reason)
 
 
-def build_compliance_report(
+async def build_compliance_report(
     *,
     service_registry: ServiceIdentityRegistry,
-    rbac: RBACAdministration,
-    abac: ABACAdministration,
-    delegated_admin: DelegatedAdministration,
+    rbac: RBACAdministrator,
+    abac: ABACAdministrator,
+    delegated_admin: DelegatedAdministrator,
     audit_events: Iterable[_PolicyAuditEvent],
     tenant_ids: Iterable[str],
     clients: Iterable[Mapping[str, Any]],
@@ -598,19 +747,22 @@ def build_compliance_report(
     tenant_ids_tuple = tuple(sorted(set(str(tenant_id) for tenant_id in tenant_ids)))
     clients_list = [dict(client) for client in clients]
     audit_list = list(audit_events)
+    delegated_summary = await delegated_admin.summary()
+    rbac_summary = await rbac.summary()
+    abac_summary = await abac.summary()
     return {
         "tenant_isolation": {
             "enforced": True,
             "tenants": list(tenant_ids_tuple),
-            "delegated_tenant_map": delegated_admin.summary()["tenant_map"],
+            "delegated_tenant_map": delegated_summary["tenant_map"],
         },
         "service_identities": service_registry.summary(),
         "policy_engine": {
-            "role_count": len(rbac.roles),
-            "policy_count": len(abac.policies),
+            "role_count": rbac_summary["role_count"],
+            "policy_count": abac_summary["policy_count"],
             "audit_event_count": len(audit_list),
         },
-        "delegated_admin": delegated_admin.summary(),
+        "delegated_admin": delegated_summary,
         "client_exposure": {
             "public_fields": list(PUBLIC_CLIENT_FIELDS),
             "admin_fields": list(ADMIN_CLIENT_FIELDS),
@@ -630,18 +782,18 @@ def build_compliance_report(
 
 
 __all__ = [
-    "ABACAdministration",
+    "ABACAdministrator",
     "ADMIN_CLIENT_FIELDS",
     "AttributePolicy",
     "DELEGATED_MUTABLE_CLIENT_FIELDS",
     "DELEGATED_VISIBLE_CLIENT_FIELDS",
     "DelegatedAdminScope",
-    "DelegatedAdministration",
+    "DelegatedAdministrator",
     "DynamicCondition",
     "PUBLIC_CLIENT_FIELDS",
     "PolicyDecision",
     "PolicyEngine",
-    "RBACAdministration",
+    "RBACAdministrator",
     "Role",
     "ServiceCredential",
     "ServiceIdentity",

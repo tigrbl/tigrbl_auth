@@ -44,6 +44,13 @@ class AttributePolicy(RestOltpTable, GUIDPk, Timestamped):
         return await list_records(cls, db, filters)
 
     @classmethod
+    async def list_active(cls, db: Any, *, tenant_id: str | None = None) -> list["AttributePolicy"]:
+        filters: dict[str, Any] = {"status": "active"}
+        if tenant_id is not None:
+            filters["tenant_id"] = tenant_id
+        return await list_records(cls, db, filters)
+
+    @classmethod
     async def disable(cls, db: Any, *, name: str, tenant_id: str | None = None) -> "AttributePolicy | None":
         row = await cls.lookup(db, name=name, tenant_id=tenant_id)
         if row is None:

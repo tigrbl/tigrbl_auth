@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from ._ops import create_record, list_records
+from ._ops import clear_records, create_record, list_records
 
 
 class PolicyCondition(RestOltpTable, GUIDPk, Timestamped):
@@ -45,6 +45,29 @@ class PolicyCondition(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def list_for_policy(cls, db: Any, *, policy_id: str) -> list["PolicyCondition"]:
         return await list_records(cls, db, {"policy_id": policy_id})
+
+    @classmethod
+    async def replace_for_policy(
+        cls,
+        db: Any,
+        *,
+        policy_id: str,
+        conditions: Iterable[Mapping[str, Any]],
+    ) -> list["PolicyCondition"]:
+        await clear_records(cls, db, {"policy_id": policy_id})
+        rows: list["PolicyCondition"] = []
+        for condition in conditions:
+            rows.append(
+                await cls.add_condition(
+                    db,
+                    policy_id=policy_id,
+                    field_name=str(condition["field_name"]),
+                    operator=str(condition["operator"]),
+                    expected=condition.get("expected"),
+                    condition_metadata=dict(condition.get("condition_metadata") or {}),
+                )
+            )
+        return rows
 
 
 __all__ = ["PolicyCondition"]

@@ -10,6 +10,7 @@ import time
 import types
 from contextlib import asynccontextmanager
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, AsyncGenerator, Generator
 
 import pytest
@@ -71,9 +72,77 @@ class _MockDataFactory:
         return data
 
 
+class _InMemoryTableStorage:
+    def __init__(self) -> None:
+        self._rows: dict[type, list[dict[str, Any]]] = {}
+        self._counters: dict[type, int] = {}
+
+    def handlers_for(self, model: type) -> SimpleNamespace:
+        async def list_core(request: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+            filters = dict((request.get("payload") or {}).get("filters") or {})
+            return {"items": [dict(row) for row in self._bucket(model) if self._matches(row, filters)]}
+
+        async def create_core(request: dict[str, Any]) -> dict[str, dict[str, Any]]:
+            payload = dict(request.get("payload") or {})
+            payload.setdefault("id", self._next_id(model))
+            self._bucket(model).append(payload)
+            return {"item": dict(payload)}
+
+        async def update_core(request: dict[str, Any]) -> dict[str, dict[str, Any]]:
+            ident = str((request.get("path_params") or {}).get("id"))
+            payload = dict(request.get("payload") or {})
+            for row in self._bucket(model):
+                if str(row.get("id")) == ident:
+                    row.update(payload)
+                    return {"item": dict(row)}
+            raise KeyError(ident)
+
+        async def clear_core(request: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+            filters = dict((request.get("payload") or {}).get("filters") or {})
+            bucket = self._bucket(model)
+            removed = [row for row in bucket if self._matches(row, filters)]
+            self._rows[model] = [row for row in bucket if not self._matches(row, filters)]
+            return {"items": [dict(row) for row in removed]}
+
+        return SimpleNamespace(
+            list=SimpleNamespace(core=list_core),
+            create=SimpleNamespace(core=create_core),
+            update=SimpleNamespace(core=update_core),
+            clear=SimpleNamespace(core=clear_core),
+        )
+
+    def _bucket(self, model: type) -> list[dict[str, Any]]:
+        return self._rows.setdefault(model, [])
+
+    def _next_id(self, model: type) -> str:
+        self._counters[model] = self._counters.get(model, 0) + 1
+        return f"{getattr(model, '__tablename__', model.__name__)}-{self._counters[model]}"
+
+    def _matches(self, row: dict[str, Any], filters: dict[str, Any]) -> bool:
+        return all(self._value_matches(row.get(key), value) for key, value in filters.items())
+
+    @staticmethod
+    def _value_matches(actual: Any, expected: Any) -> bool:
+        return actual == expected or (actual is not None and expected is not None and str(actual) == str(expected))
+
+
 @pytest.fixture
 def mock_data_factory():
     return _MockDataFactory()
+
+
+@pytest.fixture
+def administrator_storage(monkeypatch: pytest.MonkeyPatch):
+    from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy
+    from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope
+    from tigrbl_identity_storage.tables.policy_condition import PolicyCondition
+    from tigrbl_identity_storage.tables.role import Role
+    from tigrbl_identity_storage.tables.tenant_membership import TenantMembership
+
+    storage = _InMemoryTableStorage()
+    for model in (Role, TenantMembership, AttributePolicy, PolicyCondition, DelegatedAdminScope):
+        monkeypatch.setattr(model, "handlers", storage.handlers_for(model), raising=False)
+    return storage
 
 
 @pytest.fixture

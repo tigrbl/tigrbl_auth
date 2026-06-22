@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from ..control_plane import (
-    DelegatedAdministration,
+    DelegatedAdministrator,
     PolicyEngine,
     assert_client_mutation_authority,
     expose_client_record,
@@ -10,7 +10,7 @@ from ..control_plane import (
 )
 
 __all__ = [
-    "DelegatedAdministration",
+    "DelegatedAdministrator",
     "PolicyEngine",
     "assert_client_mutation_authority",
     "expose_client_record",

@@ -1,7 +1,7 @@
 """Administrator UIX contract helpers."""
 
 from .admin_console import (
-    ABACAdministration,
+    ABACAdministrator,
     ADMINISTRATIVE_RESOURCE_VIEW_FEATURES,
     ADMINISTRATIVE_SAFE_MUTATION_FEATURES,
     ADMIN_CLIENT_FIELDS,
@@ -19,7 +19,7 @@ from .admin_console import (
     DELEGATED_MUTABLE_CLIENT_FIELDS,
     DELEGATED_VISIBLE_CLIENT_FIELDS,
     DelegatedAdminScope,
-    DelegatedAdministration,
+    DelegatedAdministrator,
     DynamicCondition,
     EntitlementManager,
     ENTERPRISE_READINESS_FEATURES,
@@ -32,7 +32,7 @@ from .admin_console import (
     PluginRuntimeRegistry,
     ProvenanceRequirement,
     PUBLIC_CLIENT_FIELDS,
-    RBACAdministration,
+    RBACAdministrator,
     RESOURCE_VIEW_METHODS,
     ResourceView,
     Role,
@@ -87,7 +87,7 @@ from .admin_console import (
 )
 
 __all__ = [
-    "ABACAdministration",
+    "ABACAdministrator",
     "ADMINISTRATIVE_RESOURCE_VIEW_FEATURES",
     "ADMINISTRATIVE_SAFE_MUTATION_FEATURES",
     "ADMIN_CLIENT_FIELDS",
@@ -105,7 +105,7 @@ __all__ = [
     "DELEGATED_MUTABLE_CLIENT_FIELDS",
     "DELEGATED_VISIBLE_CLIENT_FIELDS",
     "DelegatedAdminScope",
-    "DelegatedAdministration",
+    "DelegatedAdministrator",
     "DynamicCondition",
     "EntitlementManager",
     "ENTERPRISE_READINESS_FEATURES",
@@ -118,7 +118,7 @@ __all__ = [
     "PluginRuntimeRegistry",
     "ProvenanceRequirement",
     "PUBLIC_CLIENT_FIELDS",
-    "RBACAdministration",
+    "RBACAdministrator",
     "RESOURCE_VIEW_METHODS",
     "ResourceView",
     "Role",
