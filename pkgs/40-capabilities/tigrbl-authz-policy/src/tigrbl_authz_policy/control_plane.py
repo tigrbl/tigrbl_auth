@@ -20,7 +20,10 @@ from tigrbl_identity_contracts.delegation import (
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision
 from tigrbl_identity_concrete import ServiceCredential, ServiceIdentity
-from tigrbl_identity_storage.authz_policy_store import AuthzPolicyStore, str_tuple as _str_tuple
+from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy as _StoredAttributePolicy
+from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope as _StoredDelegatedAdminScope
+from tigrbl_identity_storage.tables.role import Role as _StoredRole
+from tigrbl_identity_storage.tables.tenant_membership import TenantMembership as _StoredTenantMembership
 from tigrbl_authz_policy_concrete import AttributePolicy
 
 
@@ -28,46 +31,66 @@ def _pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, 
     return {field: record[field] for field in fields if field in record}
 
 
-def _role_contract(record: Mapping[str, Any]) -> Role:
+def _row_value(row: Any, key: str, default: Any = None) -> Any:
+    if isinstance(row, Mapping):
+        return row.get(key, default)
+    return getattr(row, key, default)
+
+
+def _row_active(row: Any) -> bool:
+    return str(_row_value(row, "status", "active") or "active") == "active"
+
+
+def _str_tuple(values: Any, *, sort: bool = True) -> tuple[str, ...]:
+    if values is None or values == "" or values is False:
+        return ()
+    if isinstance(values, str):
+        items = (values,)
+    else:
+        items = tuple(str(value) for value in values if value not in {None, ""})
+    return tuple(sorted(set(items))) if sort else tuple(items)
+
+
+def _role_contract(row: Any) -> Role:
     return Role(
-        name=str(record.get("name") or ""),
-        tenant_id=record.get("tenant_id"),
-        permissions=_str_tuple(record.get("permissions")),
-        denied_permissions=_str_tuple(record.get("denied_permissions")),
-        inherited_roles=_str_tuple(record.get("inherited_roles")),
+        name=str(_row_value(row, "name") or ""),
+        tenant_id=_row_value(row, "tenant_id"),
+        permissions=_str_tuple(_row_value(row, "permissions")),
+        denied_permissions=_str_tuple(_row_value(row, "denied_permissions")),
+        inherited_roles=_str_tuple(_row_value(row, "inherited_roles")),
     )
 
 
-def _condition_contract(record: Mapping[str, Any]) -> DynamicCondition:
+def _condition_contract(row: Any) -> DynamicCondition:
     return DynamicCondition(
-        field=str(record.get("field_name") or ""),
-        operator=str(record.get("operator") or ""),
-        expected=record.get("expected"),
+        field=str(_row_value(row, "field_name") or ""),
+        operator=str(_row_value(row, "operator") or ""),
+        expected=_row_value(row, "expected"),
     )
 
 
-def _attribute_policy_contract(record: Mapping[str, Any]) -> AttributePolicy:
+def _attribute_policy_contract(row: Any, conditions: Iterable[Any] = ()) -> AttributePolicy:
     return AttributePolicy(
-        name=str(record.get("name") or ""),
-        permission=str(record.get("permission") or ""),
-        tenant_id=record.get("tenant_id"),
-        client_id=record.get("client_id"),
-        effect=str(record.get("effect", "allow") or "allow"),
-        required_attributes=dict(record.get("required_attributes", {}) or {}),
-        dynamic_conditions=tuple(_condition_contract(condition) for condition in record.get("dynamic_conditions", ())),
+        name=str(_row_value(row, "name") or ""),
+        permission=str(_row_value(row, "permission") or ""),
+        tenant_id=_row_value(row, "tenant_id"),
+        client_id=_row_value(row, "client_id"),
+        effect=str(_row_value(row, "effect", "allow") or "allow"),
+        required_attributes=dict(_row_value(row, "required_attributes", {}) or {}),
+        dynamic_conditions=tuple(_condition_contract(condition) for condition in conditions),
     )
 
 
-def _delegated_scope_contract(record: Mapping[str, Any]) -> DelegatedAdminScope:
-    visible = _str_tuple(record.get("visible_client_fields")) or DELEGATED_VISIBLE_CLIENT_FIELDS
-    mutable = _str_tuple(record.get("mutable_client_fields")) or DELEGATED_MUTABLE_CLIENT_FIELDS
+def _delegated_scope_contract(row: Any) -> DelegatedAdminScope:
+    visible = _str_tuple(_row_value(row, "visible_client_fields")) or DELEGATED_VISIBLE_CLIENT_FIELDS
+    mutable = _str_tuple(_row_value(row, "mutable_client_fields")) or DELEGATED_MUTABLE_CLIENT_FIELDS
     return DelegatedAdminScope(
-        subject=str(record.get("subject") or ""),
-        tenant_ids=_str_tuple(record.get("tenant_ids")),
-        permissions=_str_tuple(record.get("permissions")),
+        subject=str(_row_value(row, "subject") or ""),
+        tenant_ids=_str_tuple(_row_value(row, "tenant_ids")),
+        permissions=_str_tuple(_row_value(row, "permissions")),
         visible_client_fields=visible,
         mutable_client_fields=mutable,
-        service_identity_permissions=_str_tuple(record.get("service_identity_permissions")),
+        service_identity_permissions=_str_tuple(_row_value(row, "service_identity_permissions")),
     )
 
 
@@ -191,7 +214,6 @@ class ServiceIdentityRegistry:
 class RBACAdministrator:
     def __init__(self, db: Any) -> None:
         self.db = db
-        self.store = AuthzPolicyStore(db)
 
     async def upsert_role(
         self,
@@ -204,24 +226,34 @@ class RBACAdministrator:
     ) -> Role:
         if not name or not permissions:
             raise ValueError("role name and permissions are required")
-        record = await self.store.upsert_role(
+        row = await _StoredRole.create_role(
+            self.db,
             name=name,
             tenant_id=tenant_id,
             permissions=_str_tuple(permissions),
             denied_permissions=_str_tuple(denied_permissions),
             inherited_roles=_str_tuple(inherited_roles),
         )
-        return _role_contract(record)
+        return _role_contract(row)
 
     async def assign_role(self, subject: str, role_name: str, *, tenant_id: str | None = None) -> None:
         if not tenant_id:
             raise ValueError("tenant_id is required for storage-backed role assignment")
         if await self._role_for(role_name, tenant_id) is None:
             raise KeyError(f"unknown role {role_name!r}")
-        await self.store.assign_role(subject=subject, role_name=role_name, tenant_id=tenant_id)
+        await _StoredTenantMembership.assign_role(
+            self.db,
+            tenant_id=tenant_id,
+            principal_id=subject,
+            role_name=role_name,
+        )
 
     async def assignments_for(self, subject: str, tenant_id: str | None = None) -> tuple[str, ...]:
-        return await self.store.assignment_names_for(subject=subject, tenant_id=tenant_id)
+        return await _StoredTenantMembership.role_names_for_principal(
+            self.db,
+            principal_id=subject,
+            tenant_id=tenant_id,
+        )
 
     async def list_roles(self, tenant_id: str | None = None) -> tuple[Role, ...]:
         role_map = await self._role_map_for_tenant(tenant_id)
@@ -248,8 +280,12 @@ class RBACAdministrator:
 
     async def _role_map_for_tenant(self, tenant_id: str | None) -> dict[str, Role]:
         roles: dict[str, Role] = {}
-        for record in await self.store.role_records(tenant_id=tenant_id):
-            role = _role_contract(record)
+        for row in await _StoredRole.list_for_tenant(self.db):
+            if not _row_active(row):
+                continue
+            role = _role_contract(row)
+            if tenant_id is not None and role.tenant_id not in {None, tenant_id}:
+                continue
             roles[role.name] = role
         return roles
 
@@ -262,7 +298,11 @@ class RBACAdministrator:
         denies: set[str] = set()
         matched_roles: set[str] = set()
         roles = await self._role_map_for_tenant(tenant_id)
-        for role_name in await self.store.assignment_names_for(subject=subject, tenant_id=tenant_id):
+        for role_name in await _StoredTenantMembership.role_names_for_principal(
+            self.db,
+            principal_id=subject,
+            tenant_id=tenant_id,
+        ):
             self._collect_role(role_name, roles, grants, denies, matched_roles, set())
         return grants, denies, tuple(sorted(matched_roles))
 
@@ -289,7 +329,6 @@ class RBACAdministrator:
 class ABACAdministrator:
     def __init__(self, db: Any) -> None:
         self.db = db
-        self.store = AuthzPolicyStore(db)
 
     async def upsert_policy(
         self,
@@ -304,7 +343,8 @@ class ABACAdministrator:
     ) -> AttributePolicy:
         if not name or not permission or not required_attributes:
             raise ValueError("policy name, permission, and attributes are required")
-        record = await self.store.upsert_attribute_policy(
+        row, conditions = await _StoredAttributePolicy.upsert_with_conditions(
+            self.db,
             name=name,
             tenant_id=tenant_id,
             client_id=client_id,
@@ -316,7 +356,7 @@ class ABACAdministrator:
                 for condition in dynamic_conditions
             ),
         )
-        return _attribute_policy_contract(record)
+        return _attribute_policy_contract(row, conditions)
 
     async def has_relevant_policy(
         self,
@@ -353,8 +393,8 @@ class ABACAdministrator:
 
     async def list_policies(self) -> tuple[AttributePolicy, ...]:
         return tuple(
-            _attribute_policy_contract(record)
-            for record in await self.store.active_attribute_policy_records()
+            _attribute_policy_contract(row, conditions)
+            for row, conditions in await _StoredAttributePolicy.list_active_with_conditions(self.db)
         )
 
     async def summary(self) -> dict[str, Any]:
@@ -381,7 +421,6 @@ class ABACAdministrator:
 class DelegatedAdministrator:
     def __init__(self, db: Any) -> None:
         self.db = db
-        self.store = AuthzPolicyStore(db)
 
     async def grant_scope(
         self,
@@ -393,23 +432,26 @@ class DelegatedAdministrator:
         mutable_client_fields: Iterable[str] = DELEGATED_MUTABLE_CLIENT_FIELDS,
         service_identity_permissions: Iterable[str] = (),
     ) -> DelegatedAdminScope:
-        record = await self.store.upsert_delegated_scope(
+        row = await _StoredDelegatedAdminScope.grant_scope(
+            self.db,
             subject=subject,
-            tenant_ids=_str_tuple(tenant_ids),
-            permissions=_str_tuple(permissions),
-            visible_client_fields=_str_tuple(visible_client_fields),
-            mutable_client_fields=_str_tuple(mutable_client_fields),
-            service_identity_permissions=_str_tuple(service_identity_permissions),
+            tenant_ids=list(_str_tuple(tenant_ids)),
+            permissions=list(_str_tuple(permissions)),
+            visible_client_fields=list(_str_tuple(visible_client_fields)),
+            mutable_client_fields=list(_str_tuple(mutable_client_fields)),
+            service_identity_permissions=list(_str_tuple(service_identity_permissions)),
         )
-        return _delegated_scope_contract(record)
+        return _delegated_scope_contract(row)
 
     async def revoke_scope(self, subject: str) -> DelegatedAdminScope | None:
-        record = await self.store.revoke_delegated_scope(subject=subject)
-        return _delegated_scope_contract(record) if record is not None else None
+        row = await _StoredDelegatedAdminScope.revoke_scope(self.db, subject=subject)
+        return _delegated_scope_contract(row) if row is not None else None
 
     async def scope_for(self, subject: str) -> DelegatedAdminScope | None:
-        record = await self.store.delegated_scope_for(subject=subject)
-        return _delegated_scope_contract(record) if record is not None else None
+        row = await _StoredDelegatedAdminScope.lookup(self.db, subject=subject)
+        if row is None or not _row_active(row):
+            return None
+        return _delegated_scope_contract(row)
 
     async def authorize(
         self,
@@ -445,8 +487,9 @@ class DelegatedAdministrator:
 
     async def summary(self) -> dict[str, Any]:
         scopes = [
-            _delegated_scope_contract(record)
-            for record in await self.store.active_delegated_scope_records()
+            _delegated_scope_contract(row)
+            for row in await _StoredDelegatedAdminScope.list_active(self.db)
+            if _row_active(row)
         ]
         return {
             "scope_count": len(scopes),
