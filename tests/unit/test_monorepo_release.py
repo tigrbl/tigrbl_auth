@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 56
+    assert len(packages) == 57
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -67,6 +67,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     )
     assert packages["tigrbl-authz-resource-server-dpop-cnf-binding-validator"].import_root == (
         "tigrbl_authz_resource_server_dpop_cnf_binding_validator"
+    )
+    assert packages["tigrbl-authz-resource-server-introspection-client"].path.as_posix() == (
+        "pkgs/50-protocols/tigrbl-authz-resource-server-introspection-client"
+    )
+    assert packages["tigrbl-authz-resource-server-introspection-client"].import_root == (
+        "tigrbl_authz_resource_server_introspection_client"
     )
     assert packages["tigrbl-authz-resource-server-jwks-cache"].path.as_posix() == (
         "pkgs/50-protocols/tigrbl-authz-resource-server-jwks-cache"
@@ -137,7 +143,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "218"
+    assert payload["count"] == "223"
     assert not any(
         cell["name"]
         in {
@@ -181,6 +187,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-authz-resource-server-dpop-cnf-binding-validator"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-authz-resource-server-introspection-client"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -308,6 +319,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",
         "tigrbl-authz-resource-server-dpop-cnf-binding-validator",
+        "tigrbl-authz-resource-server-introspection-client",
         "tigrbl-authz-resource-server-jwks-cache",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server-sender-constraint-validator",
@@ -354,6 +366,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
 
     assert "tigrbl-authz-resource-server" in root_dependency_names
     assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator" in root_dependency_names
+    assert "tigrbl-authz-resource-server-introspection-client" in root_dependency_names
     assert "tigrbl-authz-resource-server-jwks-cache" in root_dependency_names
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator" in root_dependency_names
     assert "tigrbl-authz-resource-server-sender-constraint-validator" in root_dependency_names

@@ -38,6 +38,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "pqcrypto==0.4.0" not in dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in dependencies
     assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2" in dependencies
+    assert "tigrbl-authz-resource-server-introspection-client==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in dependencies
     assert "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2" in dependencies
@@ -66,6 +67,7 @@ def test_pyproject_uses_published_pins_and_extras():
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     dpop_cnf_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-dpop-cnf-binding-validator")["project"]["dependencies"])
+    introspection_client_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-introspection-client")["project"]["dependencies"])
     jwks_cache_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-jwks-cache")["project"]["dependencies"])
     mtls_cnf_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-mtls-cnf-binding-validator")["project"]["dependencies"])
     sender_constraint_validator_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-sender-constraint-validator")["project"]["dependencies"])
@@ -119,6 +121,9 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-contracts==0.4.0.dev2" in dpop_cnf_validator_dependencies
     assert "tigrbl-security-proof-dpop==0.1.0" in dpop_cnf_validator_dependencies
     assert "tigrbl-authz-resource-server==0.4.0.dev2" not in dpop_cnf_validator_dependencies
+    assert "pqcrypto==0.4.0" not in introspection_client_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in introspection_client_dependencies
+    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in introspection_client_dependencies
     assert "pqcrypto==0.4.0" not in jwks_cache_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in jwks_cache_dependencies
     assert "tigrbl-authz-resource-server==0.4.0.dev2" not in jwks_cache_dependencies
@@ -131,6 +136,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in sender_constraint_validator_dependencies
     assert "tigrbl-authz-resource-server==0.4.0.dev2" not in sender_constraint_validator_dependencies
     assert "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2" in resource_server_dependencies
+    assert "tigrbl-authz-resource-server-introspection-client==0.4.0.dev2" in resource_server_dependencies
     assert "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2" in resource_server_dependencies
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2" in resource_server_dependencies
     assert "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2" in resource_server_dependencies

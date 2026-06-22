@@ -32,6 +32,9 @@ from tigrbl_authz_resource_server import (  # noqa: E402
 from tigrbl_authz_resource_server_dpop_cnf_binding_validator import (  # noqa: E402
     DpopCnfBindingValidator as CanonicalDpopCnfBindingValidator,
 )
+from tigrbl_authz_resource_server_introspection_client import (  # noqa: E402
+    IntrospectionClient as CanonicalIntrospectionClient,
+)
 from tigrbl_authz_resource_server_jwks_cache import (  # noqa: E402
     JWKSCache as CanonicalJWKSCache,
 )
@@ -83,6 +86,8 @@ def test_resource_server_t0_public_surfaces_are_importable() -> None:
 
 @pytest.mark.unit
 def test_resource_server_t1_claims_scope_audience_policy_and_framework_adapter() -> None:
+    assert IntrospectionClient is CanonicalIntrospectionClient
+
     verifier = ResourceServerVerifier(
         now=lambda: NOW,
         policy_hook=lambda claims, requirement: (claims.sub == "user:123", "policy:allow-user-123"),
