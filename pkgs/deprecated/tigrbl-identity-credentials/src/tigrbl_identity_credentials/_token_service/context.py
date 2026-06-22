@@ -5,7 +5,7 @@ from __future__ import annotations
 from importlib import import_module as _import_module
 import warnings as _warnings
 
-_DEPRECATED_MODULE = "tigrbl_identity_credentials._token_service.operator"
+_DEPRECATED_MODULE = "tigrbl_identity_credentials._token_service.context"
 _CANONICAL_MODULE = "tigrbl_authn_credentials._token_service.context"
 
 _warnings.warn(

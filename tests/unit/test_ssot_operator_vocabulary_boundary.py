@@ -42,6 +42,9 @@ GENERATED_CLI_CONTRACT_SNAPSHOTS = {
     "specs/cli/cli_contract.yaml",
 }
 
+REGISTRY_TEXT_FAMILIES = ("features", "claims", "tests", "evidence")
+REGISTRY_TEXT_FIELDS = ("title", "description", "body")
+
 FORBIDDEN_PATTERNS = {
     "public operator surface": re.compile(r"\bpublic\s+operator\s+surfaces?\b", re.IGNORECASE),
     "operator-style": re.compile(r"\boperator-style\b", re.IGNORECASE),
@@ -135,5 +138,25 @@ def test_generated_cli_contract_snapshots_are_synced_with_retired_vocabulary() -
         for label, pattern in FORBIDDEN_PATTERNS.items():
             if pattern.search(text):
                 offenders.append(f"{relative_path} {label}")
+
+    assert offenders == []
+
+
+def test_active_registry_display_text_does_not_reintroduce_operator_vocabulary() -> None:
+    offenders: list[str] = []
+    registry = _registry()
+
+    for family in REGISTRY_TEXT_FAMILIES:
+        for row in registry.get(family, ()):
+            if row.get("status") in {"retired", "superseded"}:
+                continue
+            text = "\n".join(
+                str(row.get(field) or "")
+                for field in REGISTRY_TEXT_FIELDS
+                if isinstance(row.get(field), str)
+            )
+            for label, pattern in SSOT_DOCUMENT_FORBIDDEN_PATTERNS.items():
+                if pattern.search(text):
+                    offenders.append(f"{family}.{row.get('id')} {label}")
 
     assert offenders == []

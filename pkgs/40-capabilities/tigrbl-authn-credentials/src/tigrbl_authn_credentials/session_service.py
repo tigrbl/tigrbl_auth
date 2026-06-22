@@ -5,8 +5,9 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from tigrbl_identity_storage.audit import record_surface_event
-from tigrbl_identity_storage.operator_store import OperationContext, TransactionResult, utc_now
 from tigrbl_identity_storage.resource_service import (
+    OperationContext,
+    TransactionResult,
     exchange_token,
     get_record,
     get_resource,
@@ -14,6 +15,13 @@ from tigrbl_identity_storage.resource_service import (
     list_resource_result,
     revoke_resource,
 )
+from tigrbl_identity_storage.resource_service import create_resource
+
+
+def _utc_now() -> str:
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def token_hash(token: str) -> str:
@@ -69,8 +77,6 @@ def exchange_token_for_context(context: OperationContext, *, subject_token: str 
 
 
 def _observe_token_like(repo_root: Path, *, token: str, kind: str, actor: str | None = None, tenant: str | None = None, issuer: str | None = None, details: Mapping[str, Any] | None = None) -> str:
-    from tigrbl_identity_storage.resource_service import create_resource
-
     details = dict(details or {})
     record_id = token_hash(token)
     context = _normalized_context(repo_root, command="observe", resource="token", actor=actor, tenant=tenant, issuer=issuer)
@@ -83,7 +89,7 @@ def _observe_token_like(repo_root: Path, *, token: str, kind: str, actor: str | 
         "scope": details.get("scope"),
         "issuer": issuer or details.get("issuer"),
         "audience": details.get("audience") or details.get("aud"),
-        "issued_at": details.get("issued_at") or utc_now(),
+        "issued_at": details.get("issued_at") or _utc_now(),
         "expires_at": details.get("expires_at"),
         "claims": details.get("claims"),
         "token": token,
