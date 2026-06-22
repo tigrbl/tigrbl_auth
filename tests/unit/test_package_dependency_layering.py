@@ -54,6 +54,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-protocol-oauth",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-auth-protocol-rp",
+        "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server",
     },
     "runtime": {

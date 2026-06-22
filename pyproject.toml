@@ -77,6 +77,7 @@ dependencies = [
     "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
     "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
+    "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
@@ -209,6 +210,7 @@ tigrbl-authz-policy-invariant-registry = { path = "pkgs/40-capabilities/tigrbl-a
 tigrbl-authz-policy-rbac-administrator = { path = "pkgs/40-capabilities/tigrbl-authz-policy-rbac-administrator", editable = true }
 tigrbl-authz-policy-service-identity-registry = { path = "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry", editable = true }
 tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", editable = true }
+tigrbl-authz-resource-server-mtls-cnf-binding-validator = { path = "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }

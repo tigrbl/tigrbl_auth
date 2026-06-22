@@ -2,21 +2,12 @@ from __future__ import annotations
 
 """Sender-constraint validator facade for protected resource servers."""
 
-from tigrbl_security_certificate_mtls import MtlsBindingValidator
+from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (
+    MtlsCnfBindingValidator,
+)
 from tigrbl_security_proof_dpop import DpopBindingValidator
 
 from .verifier import AccessTokenClaims, DPoPBinding, MTLSBinding, TokenValidationError
-
-
-class MtlsCnfBindingValidator:
-    def __init__(self, confirmation_member: str = "x5t#S256") -> None:
-        self.provider = MtlsBindingValidator()
-        self.provider.confirmation_member = confirmation_member
-
-    def validate(self, claims: AccessTokenClaims, binding: MTLSBinding | None) -> bool:
-        if not self.provider.validate_confirmation(claims.cnf, binding):
-            raise TokenValidationError("mTLS binding mismatch")
-        return True
 
 
 class DpopCnfBindingValidator:

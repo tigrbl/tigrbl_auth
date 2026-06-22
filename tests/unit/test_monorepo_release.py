@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 52
+    assert len(packages) == 53
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -62,6 +62,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-rbac-administrator"].import_root == "tigrbl_authz_policy_rbac_administrator"
     assert packages["tigrbl-authz-policy-service-identity-registry"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy-service-identity-registry"
     assert packages["tigrbl-authz-policy-service-identity-registry"].import_root == "tigrbl_authz_policy_service_identity_registry"
+    assert packages["tigrbl-authz-resource-server-mtls-cnf-binding-validator"].path.as_posix() == (
+        "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator"
+    )
+    assert packages["tigrbl-authz-resource-server-mtls-cnf-binding-validator"].import_root == (
+        "tigrbl_authz_resource_server_mtls_cnf_binding_validator"
+    )
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
     assert packages["tigrbl-identity-admin-control-plane"].path.as_posix() == (
@@ -113,7 +119,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "198"
+    assert payload["count"] == "203"
     assert not any(
         cell["name"]
         in {
@@ -156,6 +162,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     assert {
         cell["python_version"]
         for cell in matrix
+        if cell["name"] == "tigrbl-authz-resource-server-mtls-cnf-binding-validator"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
         if cell["name"] == "tigrbl-security-proof-dpop"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
@@ -167,7 +178,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-auth-release-certification"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    } == {"3.10", "3.11", "3.12"}
     assert {
         cell["python_version"]
         for cell in matrix
@@ -192,7 +203,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-identity-server"
-    } == {"3.10", "3.11", "3.12", "3.13"}
+    } == {"3.10", "3.11", "3.12"}
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
@@ -263,6 +274,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-policy-service-identity-registry",
         "tigrbl-authz-policy",
         "tigrbl-authz-policy-concrete",
+        "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
         "tigrbl-identity-admin-control-plane",
@@ -305,6 +317,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     }
 
     assert "tigrbl-authz-resource-server" in root_dependency_names
+    assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names
     assert "tigrbl-identity-admin-control-plane" in root_dependency_names

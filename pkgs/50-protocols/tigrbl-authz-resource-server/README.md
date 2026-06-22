@@ -55,7 +55,8 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 - [tigrbl-authz-policy](https://pypi.org/project/tigrbl-authz-policy/) owns policy decision truth.
 - [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/) owns OAuth wire behavior.
 - [tigrbl-security-proof-dpop](https://pypi.org/project/tigrbl-security-proof-dpop/) owns DPoP binding validation.
-- [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns mTLS binding validation.
+- [tigrbl-authz-resource-server-mtls-cnf-binding-validator](https://pypi.org/project/tigrbl-authz-resource-server-mtls-cnf-binding-validator/) owns the resource-server mTLS `cnf` adapter.
+- [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns lower certificate binding comparison.
 
 ## Governance
 

@@ -29,6 +29,9 @@ from tigrbl_authz_resource_server import (  # noqa: E402
     bearer_token_from_authorization,
     verify_framework_request,
 )
+from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (  # noqa: E402
+    MtlsCnfBindingValidator as CanonicalMtlsCnfBindingValidator,
+)
 
 
 NOW = 1_800_000_000
@@ -114,6 +117,7 @@ def test_resource_server_t1_dpop_and_mtls_binding_validators() -> None:
 def test_resource_server_t1_public_proof_binding_validator_models() -> None:
     claims = _claims()
 
+    assert MtlsCnfBindingValidator is CanonicalMtlsCnfBindingValidator
     assert DpopCnfBindingValidator().validate(
         claims,
         DPoPBinding(jwk_thumbprint="thumb-dpop", htm="GET", htu="https://api.example.test/jobs", jti="jti-1"),
