@@ -15,6 +15,7 @@ from .boundary import (
     validate_public_jwk,
 )
 from .jwe_policy import JWEPolicy
+from .jwt_coder import JWTCoder
 from .key_rotation_policy import (
     EffectiveKeyRotationPolicy,
     KeyRotationAdministration,
@@ -45,6 +46,7 @@ __all__ = [
     "JoseKeySet",
     "JoseKeyStatus",
     "JoseKeyUse",
+    "JWTCoder",
     "KeyRotationAdministration",
     "KeyRotationPolicyGovernance",
     "KeyRotationPolicyOverlapError",

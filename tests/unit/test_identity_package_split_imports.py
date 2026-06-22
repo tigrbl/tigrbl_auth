@@ -177,10 +177,13 @@ def test_credentials_token_service_exports_async_runtime_helper() -> None:
     _install_package_src_paths()
 
     module = importlib.import_module("tigrbl_authn_credentials.token_service")
-    runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
+    runtime = importlib.import_module("tigrbl_identity_jose.jwt_runtime")
+    compat_runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
 
     assert callable(module._svc_async)
     assert callable(runtime._svc_async)
+    assert module._svc_async is runtime._svc_async
+    assert compat_runtime._svc_async is runtime._svc_async
 
 
 def test_credentials_token_service_reuses_token_contract_defaults_and_errors() -> None:
@@ -188,13 +191,12 @@ def test_credentials_token_service_reuses_token_contract_defaults_and_errors() -
 
     contracts = importlib.import_module("tigrbl_identity_contracts.tokens")
     module = importlib.import_module("tigrbl_authn_credentials.token_service")
-    runtime = importlib.import_module("tigrbl_authn_credentials._token_service.runtime")
+    runtime = importlib.import_module("tigrbl_identity_jose.jwt_runtime")
     runtime_source = (
-        _package_path("tigrbl-authn-credentials")
+        _package_path("tigrbl-identity-jose")
         / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "runtime.py"
+        / "tigrbl_identity_jose"
+        / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
 
     assert contracts.DEFAULT_ACCESS_TOKEN_TTL == timedelta(minutes=60)
@@ -212,21 +214,36 @@ def test_credentials_jwt_coder_exports_async_default_factory() -> None:
     _install_package_src_paths()
 
     module = importlib.import_module("tigrbl_authn_credentials.token_service")
-    coder_module = importlib.import_module("tigrbl_authn_credentials._token_service.coder")
+    coder_module = importlib.import_module("tigrbl_identity_jose.jwt_coder")
+    compat_coder_module = importlib.import_module("tigrbl_authn_credentials._token_service.coder")
 
     assert inspect.iscoroutinefunction(module.JWTCoder.async_default)
     assert inspect.iscoroutinefunction(coder_module.JWTCoder.async_default)
+    assert module.JWTCoder is coder_module.JWTCoder
+    assert compat_coder_module.JWTCoder is coder_module.JWTCoder
 
 
 def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     coder_source = (
+        _package_path("tigrbl-identity-jose")
+        / "src"
+        / "tigrbl_identity_jose"
+        / "jwt_coder.py"
+    ).read_text(encoding="utf-8")
+    runtime_source = (
+        _package_path("tigrbl-identity-jose")
+        / "src"
+        / "tigrbl_identity_jose"
+        / "jwt_runtime.py"
+    ).read_text(encoding="utf-8")
+    compat_coder_source = (
         _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
         / "_token_service"
         / "coder.py"
     ).read_text(encoding="utf-8")
-    runtime_source = (
+    compat_runtime_source = (
         _package_path("tigrbl-authn-credentials")
         / "src"
         / "tigrbl_authn_credentials"
@@ -257,6 +274,8 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     assert '"is_revoked_async": is_revoked_async' in runtime_source
     assert "persist_token=False" in credentials_persistence_source
     assert "persist_token=False" in server_handler_source
+    assert "class JWTCoder" not in compat_coder_source
+    assert "def _svc(" not in compat_runtime_source
 
 
 def test_oauth_revocation_exports_async_runtime_hooks() -> None:
@@ -264,11 +283,10 @@ def test_oauth_revocation_exports_async_runtime_hooks() -> None:
 
     split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.revocation")
     runtime_source = (
-        _package_path("tigrbl-authn-credentials")
+        _package_path("tigrbl-identity-jose")
         / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "runtime.py"
+        / "tigrbl_identity_jose"
+        / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
 
     assert inspect.iscoroutinefunction(split_module.revoke_token_async)
@@ -282,11 +300,10 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
 
     split_module = importlib.import_module("tigrbl_auth_protocol_oauth.standards.introspection")
     runtime_source = (
-        _package_path("tigrbl-authn-credentials")
+        _package_path("tigrbl-identity-jose")
         / "src"
-        / "tigrbl_authn_credentials"
-        / "_token_service"
-        / "runtime.py"
+        / "tigrbl_identity_jose"
+        / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
 
     assert inspect.iscoroutinefunction(split_module.register_token_async)
