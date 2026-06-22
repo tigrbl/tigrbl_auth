@@ -90,6 +90,7 @@ dependencies = [
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
+    "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-credentials==0.4.0.dev2",
@@ -231,6 +232,7 @@ tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", e
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/40-capabilities/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-control-plane = { path = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane", editable = true }
 tigrbl-identity-admin-policy-registry = { path = "pkgs/40-capabilities/tigrbl-identity-admin-policy-registry", editable = true }
+tigrbl-identity-admin-relationship-graph = { path = "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
 tigrbl-identity-contracts = { path = "pkgs/01-contracts/tigrbl-identity-contracts", editable = true }
 tigrbl-identity-concrete = { path = "pkgs/10-concrete/tigrbl-identity-concrete", editable = true }

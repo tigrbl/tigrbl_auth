@@ -4,6 +4,7 @@ from tigrbl_identity_admin_advanced_authenticator_registry import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
 from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
+from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
@@ -211,6 +212,7 @@ def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_clo
 
 def test_relationship_graph_and_policy_registry_support_rebac_graph_queries_versions_and_decision_api():
     assert PolicyRegistry is CanonicalPolicyRegistry
+    assert RelationshipGraph is CanonicalRelationshipGraph
 
     graph = RelationshipGraph()
     initial = graph.define_relation(resource_type="document", relation="viewer", subject_types=("user",))

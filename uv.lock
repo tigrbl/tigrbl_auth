@@ -2320,6 +2320,7 @@ dependencies = [
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph" },
     { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-cli" },
     { name = "tigrbl-identity-concrete" },
@@ -2472,6 +2473,7 @@ requires-dist = [
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/40-capabilities/tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-control-plane", editable = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-policy-registry", editable = "pkgs/40-capabilities/tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph", editable = "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
     { name = "tigrbl-identity-concrete", editable = "pkgs/10-concrete/tigrbl-identity-concrete" },
@@ -2966,6 +2968,7 @@ dependencies = [
     { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage" },
@@ -2976,6 +2979,7 @@ requires-dist = [
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin-control-plane", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin-policy-registry", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-relationship-graph", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
@@ -3019,6 +3023,21 @@ requires-dist = [
 name = "tigrbl-identity-admin-policy-registry"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-policy-registry" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-relationship-graph"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
