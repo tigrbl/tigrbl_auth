@@ -192,16 +192,18 @@ class ISenderConstraintValidator(Protocol):
 class IVerificationKeyResolver(Protocol):
     """Resolve verification keys by key id or equivalent provider hint."""
 
-    def get(self, kid: str) -> Mapping[str, Any]: ...
+    def get(self, key_id: str) -> Mapping[str, Any]: ...
 
 
-class IJWKSCache(IVerificationKeyResolver, Protocol):
-    """Mutable JWKS-backed verification-key cache."""
+class IVerificationKeyCache(IVerificationKeyResolver, Protocol):
+    """Mutable verification-key cache independent of source format."""
 
     @property
     def keys(self) -> Mapping[str, Mapping[str, Any]]: ...
 
-    def put_jwks(self, jwks: Mapping[str, Any]) -> None: ...
+    def put(self, key_id: str, key: Mapping[str, Any]) -> None: ...
+
+    def put_many(self, keys: Mapping[str, Mapping[str, Any]]) -> None: ...
 
 
 class ITokenIntrospectionTransport(Protocol):
@@ -230,10 +232,10 @@ __all__ = [
     "IKeyExporter",
     "IKeyLifecycle",
     "IKeyResolver",
-    "IJWKSCache",
     "IRecipientSetEditor",
     "ISenderConstraintValidator",
     "ITokenIntrospectionClient",
     "ITokenIntrospectionTransport",
+    "IVerificationKeyCache",
     "IVerificationKeyResolver",
 ]

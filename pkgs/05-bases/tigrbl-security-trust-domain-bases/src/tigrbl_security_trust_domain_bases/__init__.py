@@ -11,7 +11,6 @@ from .bases import (
     CipherPolicyDomainBase,
     ConfirmationBindingValidatorBase,
     CryptoDomainBase,
-    JWKSCacheBase,
     KeyProviderDomainBase,
     MreCryptoDomainBase,
     ProofOfPossessionDomainBase,
@@ -21,6 +20,7 @@ from .bases import (
     TokenDomainBase,
     TokenIntrospectionClientBase,
     TokenServiceDomainBase,
+    VerificationKeyCacheBase,
     VerificationKeyResolverBase,
 )
 
@@ -35,7 +35,6 @@ __all__ = [
     "CipherPolicyDomainBase",
     "ConfirmationBindingValidatorBase",
     "CryptoDomainBase",
-    "JWKSCacheBase",
     "KeyProviderDomainBase",
     "MreCryptoDomainBase",
     "ProofOfPossessionDomainBase",
@@ -45,5 +44,6 @@ __all__ = [
     "TokenDomainBase",
     "TokenIntrospectionClientBase",
     "TokenServiceDomainBase",
+    "VerificationKeyCacheBase",
     "VerificationKeyResolverBase",
 ]

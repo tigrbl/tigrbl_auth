@@ -44,6 +44,7 @@ from tigrbl_security_token_verification import (  # noqa: E402
 from tigrbl_security_token_verification import (  # noqa: E402
     SenderConstraintValidator as CanonicalSenderConstraintValidator,
 )
+from tigrbl_security_trust_domain_bases import VerificationKeyCacheBase  # noqa: E402
 from tigrbl_authz_resource_server import (  # noqa: E402
     ResourceServerVerifier as CanonicalResourceServerVerifier,
 )
@@ -83,7 +84,10 @@ def test_resource_server_t0_public_surfaces_are_importable() -> None:
 
     assert JWKSCache is CanonicalJWKSCache
     assert ResourceServerVerifier is CanonicalResourceServerVerifier
+    assert issubclass(JWKSCache, VerificationKeyCacheBase)
     assert cache.get("kid-1")["kty"] == "OKP"
+    cache.put("kid-2", {"kid": "kid-2", "kty": "EC"})
+    assert cache.get("kid-2")["kty"] == "EC"
     assert bearer_token_from_authorization("Bearer abc") == "abc"
     assert ResourceServerVerifier(now=lambda: NOW).verify_token(_claims(), _requirement()).allowed is True
 

@@ -278,21 +278,25 @@ class SenderConstraintValidatorBase(CapabilityProviderBase):
 
 
 class VerificationKeyResolverBase(CapabilityProviderBase):
-    """Base for verification key resolution and JWKS-backed caches."""
+    """Base for verification key resolution."""
 
-    def get(self, kid: str) -> Mapping[str, Any]:
+    def get(self, key_id: str) -> Mapping[str, Any]:
         raise NotImplementedError
 
 
-class JWKSCacheBase(VerificationKeyResolverBase):
-    """Base for mutable JWKS verification key caches."""
+class VerificationKeyCacheBase(VerificationKeyResolverBase):
+    """Base for mutable verification-key caches independent of source format."""
 
     @property
     def keys(self) -> Mapping[str, Mapping[str, Any]]:
         raise NotImplementedError
 
-    def put_jwks(self, jwks: Mapping[str, Any]) -> None:
+    def put(self, key_id: str, key: Mapping[str, Any]) -> None:
         raise NotImplementedError
+
+    def put_many(self, keys: Mapping[str, Mapping[str, Any]]) -> None:
+        for key_id, key in keys.items():
+            self.put(key_id, key)
 
 
 class TokenIntrospectionClientBase(CapabilityProviderBase):
