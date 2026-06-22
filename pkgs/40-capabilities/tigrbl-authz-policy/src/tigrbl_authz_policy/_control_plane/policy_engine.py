@@ -4,10 +4,11 @@ from typing import Any, Iterable, Mapping
 from uuid import uuid4
 
 from tigrbl_identity_core.clock import utc_now_iso
+from tigrbl_identity_core.patterns import matches_dotted_pattern as _permission_matches
 from tigrbl_identity_contracts.audit.policy import PolicyAuditEvent as _PolicyAuditEvent
 
 from .models import *
-from .models import _permission_matches, _pick_fields
+from .models import _pick_fields
 from .administration import *
 
 class DelegatedAdministration:

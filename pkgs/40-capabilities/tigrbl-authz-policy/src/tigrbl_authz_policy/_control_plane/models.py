@@ -17,14 +17,5 @@ from tigrbl_identity_concrete import ServiceCredential, ServiceIdentity
 from tigrbl_authz_policy_concrete import AttributePolicy
 
 
-def _permission_matches(grant: str, permission: str) -> bool:
-    if grant == "*" or grant == permission:
-        return True
-    if grant.endswith(".*"):
-        prefix = grant[:-2]
-        return permission == prefix or permission.startswith(f"{prefix}.")
-    return False
-
-
 def _pick_fields(record: Mapping[str, Any], fields: Iterable[str]) -> dict[str, Any]:
     return {field: record[field] for field in fields if field in record}

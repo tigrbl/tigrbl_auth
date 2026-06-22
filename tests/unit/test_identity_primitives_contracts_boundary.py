@@ -53,6 +53,16 @@ def test_identity_primitives_export_version_range_helpers() -> None:
     assert not core.version_in_range("0.4.0", ("0.3.0", "0.3.9"))
 
 
+def test_identity_primitives_export_dotted_permission_matching() -> None:
+    import tigrbl_identity_core as core
+
+    assert core.matches_dotted_pattern("*", "client.read")
+    assert core.matches_dotted_pattern("client.*", "client")
+    assert core.matches_dotted_pattern("client.*", "client.read")
+    assert core.matches_dotted_pattern("client.read", "client.read")
+    assert not core.matches_dotted_pattern("client.read", "client.write")
+
+
 def test_identity_primitives_export_http_and_jsonrpc_helpers() -> None:
     import tigrbl_identity_core as core
 
@@ -111,6 +121,31 @@ def test_authz_policy_admin_gate_uses_identity_core_primitives() -> None:
         "_replay_http_body",
     }.isdisjoint(local_functions)
     assert "from tigrbl_identity_core import" in helper_path.read_text(encoding="utf-8")
+
+
+def test_authz_policy_control_plane_uses_identity_core_permission_matching() -> None:
+    model_path = (
+        ROOT
+        / "pkgs"
+        / "40-capabilities"
+        / "tigrbl-authz-policy"
+        / "src"
+        / "tigrbl_authz_policy"
+        / "_control_plane"
+        / "models.py"
+    )
+    administration_path = model_path.with_name("administration.py")
+    policy_engine_path = model_path.with_name("policy_engine.py")
+    tree = ast.parse(model_path.read_text(encoding="utf-8"))
+    local_functions = {
+        node.name
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+
+    assert "_permission_matches" not in local_functions
+    assert "matches_dotted_pattern as _permission_matches" in administration_path.read_text(encoding="utf-8")
+    assert "matches_dotted_pattern as _permission_matches" in policy_engine_path.read_text(encoding="utf-8")
 
 
 def test_identity_primitives_do_not_own_liveness_contracts() -> None:
