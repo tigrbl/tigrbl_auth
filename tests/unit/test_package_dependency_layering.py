@@ -49,6 +49,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-admin",
         "tigrbl-identity-admin-advanced-authenticator-registry",
         "tigrbl-identity-admin-control-plane",
+        "tigrbl-identity-admin-policy-registry",
         "tigrbl-identity-principals",
     },
     "protocols": {
