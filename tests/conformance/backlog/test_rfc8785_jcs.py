@@ -6,7 +6,7 @@ from decimal import Decimal
 
 import pytest
 
-from tigrbl_auth.rfc.rfc8785 import (
+from tigrbl_identity_core.json_canonicalization import (
     JCSCanonicalizationError,
     MAX_SAFE_INTEGER,
     canonicalize,

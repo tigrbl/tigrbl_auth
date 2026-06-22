@@ -302,7 +302,7 @@ def test_installable_tigrbl_auth_facade_exposes_rfc_legacy_modules() -> None:
             assert legacy is canonical
 
 
-def test_rfc8785_legacy_modules_warn_and_export_canonical_helpers() -> None:
+def test_rfc8785_core_legacy_warns_and_facade_module_is_removed() -> None:
     with package_src_paths_only():
         canonical = importlib.import_module("tigrbl_identity_core.json_canonicalization")
 
@@ -314,14 +314,10 @@ def test_rfc8785_legacy_modules_warn_and_export_canonical_helpers() -> None:
             core_legacy = importlib.import_module("tigrbl_identity_core.rfc8785")
 
         sys.modules.pop("tigrbl_auth.rfc.rfc8785", None)
-        with pytest.warns(
-            DeprecationWarning,
-            match="tigrbl_identity_core.json_canonicalization",
-        ):
-            facade_legacy = importlib.import_module("tigrbl_auth.rfc.rfc8785")
+        with pytest.raises(ModuleNotFoundError):
+            importlib.import_module("tigrbl_auth.rfc.rfc8785")
 
         assert core_legacy.canonicalize is canonical.canonicalize
-        assert facade_legacy.canonicalize is canonical.canonicalize
 
 
 def test_installable_tigrbl_auth_facade_does_not_advertise_root_only_rfc_symbols() -> None:

@@ -48,8 +48,6 @@ _JOSE_RFC_MODULES = (
     "rfc8176",
     "rfc8812",
 )
-_CORE_RFC_MODULES = ("rfc8785",)
-
 _OAUTH_RFC_TARGETS = {
     "rfc6749": "authorization_framework",
     "rfc6749_token": "token_endpoint",
@@ -94,4 +92,4 @@ for _name in _JOSE_RFC_MODULES:
         "tigrbl-identity-jose",
     )
 
-__all__ = sorted((*_OAUTH_RFC_MODULES, *_JOSE_RFC_MODULES, *_CORE_RFC_MODULES))
+__all__ = sorted((*_OAUTH_RFC_MODULES, *_JOSE_RFC_MODULES))
