@@ -35,6 +35,7 @@ PACKAGE_ROOTS = [
     "tigrbl_security_proof_pkce",
     "tigrbl_auth_release_certification",
     "tigrbl_auth_protocol_oauth",
+    "tigrbl_auth_protocol_oidc_backchannel_replay_store",
     "tigrbl_auth_protocol_oidc",
     "tigrbl_auth_protocol_rp",
     "tigrbl_authn_credentials",
@@ -86,6 +87,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-security-proof-pkce": "tigrbl_security_proof_pkce",
     "tigrbl-auth-release-certification": "tigrbl_auth_release_certification",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store": "tigrbl_auth_protocol_oidc_backchannel_replay_store",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
@@ -349,6 +351,22 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
     assert inspect.iscoroutinefunction(split_module.reset_tokens_async)
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
+
+
+def test_oidc_backchannel_logout_uses_split_replay_store() -> None:
+    _install_package_src_paths()
+
+    backchannel_logout = importlib.import_module("tigrbl_auth_protocol_oidc.standards.backchannel_logout")
+    replay_store = importlib.import_module("tigrbl_auth_protocol_oidc_backchannel_replay_store")
+
+    assert isinstance(backchannel_logout._REPLAY_STORE, replay_store._BackchannelReplayStore)
+    assert "class _BackchannelReplayStore" not in (
+        _package_path("tigrbl-auth-protocol-oidc")
+        / "src"
+        / "tigrbl_auth_protocol_oidc"
+        / "standards"
+        / "backchannel_logout.py"
+    ).read_text(encoding="utf-8").split("=", 1)[0]
 
 
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:

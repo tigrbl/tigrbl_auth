@@ -6,44 +6,19 @@ import base64
 import hashlib
 import hmac
 import json
-import threading
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 from typing import Any, Final
-from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from uuid import UUID, uuid4
 
+from tigrbl_auth_protocol_oidc_backchannel_replay_store import _BackchannelReplayStore
+from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from tigrbl_identity_runtime.settings import settings
 
 STATUS: Final[str] = "backchannel-logout-fanout-runtime"
 _BACKCHANNEL_EVENT: Final[str] = "http://schemas.openid.net/event/backchannel-logout"
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 _ALLOWED_CLOCK_SKEW: Final[int] = 300
-
-
-
-
-class _BackchannelReplayStore:
-    def __init__(self) -> None:
-        self._items: dict[str, datetime] = {}
-        self._lock = threading.Lock()
-
-    def _cleanup(self, now: datetime) -> None:
-        for key in [item for item, expiry in self._items.items() if expiry <= now]:
-            self._items.pop(key, None)
-
-    def register(self, jti: str, *, exp: datetime, now: datetime) -> None:
-        with self._lock:
-            self._cleanup(now)
-            if jti in self._items and self._items[jti] > now:
-                raise ValueError("replayed logout token")
-            self._items[jti] = exp
-
-    def snapshot(self) -> dict[str, int]:
-        now = datetime.now(timezone.utc)
-        with self._lock:
-            self._cleanup(now)
-            return {"active_logout_jti": len(self._items)}
 
 
 _REPLAY_STORE = _BackchannelReplayStore()

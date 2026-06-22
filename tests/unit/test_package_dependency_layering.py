@@ -52,6 +52,7 @@ PYTHON_PACKAGE_LAYERS = {
     },
     "protocols": {
         "tigrbl-auth-protocol-oauth",
+        "tigrbl-auth-protocol-oidc-backchannel-replay-store",
         "tigrbl-auth-protocol-oidc",
         "tigrbl-auth-protocol-rp",
         "tigrbl-authz-resource-server-dpop-cnf-binding-validator",

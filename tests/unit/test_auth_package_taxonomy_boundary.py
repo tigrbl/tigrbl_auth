@@ -41,6 +41,7 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-authz-resource-server-verifier": "tigrbl_authz_resource_server_verifier",
     "tigrbl-authz-resource-server": "tigrbl_authz_resource_server",
     "tigrbl-auth-protocol-oauth": "tigrbl_auth_protocol_oauth",
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store": "tigrbl_auth_protocol_oidc_backchannel_replay_store",
     "tigrbl-auth-protocol-oidc": "tigrbl_auth_protocol_oidc",
     "tigrbl-auth-protocol-rp": "tigrbl_auth_protocol_rp",
 }

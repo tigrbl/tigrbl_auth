@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-auth-protocol-oidc"
+name = "tigrbl-auth-protocol-oidc-backchannel-replay-store"
 version = "0.4.0.dev2"
-description = "OpenID Connect provider protocol implementation package for the Tigrbl auth package suite."
+description = "OIDC back-channel logout replay store for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -10,12 +10,8 @@ keywords = [
     "auth",
     "protocol",
     "oidc",
-    "openid-connect",
-    "id-token",
-    "userinfo",
-    "discovery",
-    "logout",
-    "iam",
+    "back-channel-logout",
+    "replay-protection",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -33,25 +29,18 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
-    "tigrbl-auth-protocol-oauth==0.4.0.dev2",
-    "tigrbl-authn-credentials==0.4.0.dev2",
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-core==0.4.0.dev2",
-    "tigrbl-identity-jose==0.4.0.dev2",
-    "tigrbl-identity-runtime==0.4.0.dev2",
-]
+dependencies = []
+
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tigrbl-auth-protocol-oidc"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/50-protocols/tigrbl-auth-protocol-oidc-backchannel-replay-store"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-auth-protocol-oidc/"
+PyPI = "https://pypi.org/project/tigrbl-auth-protocol-oidc-backchannel-replay-store/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_auth_protocol_oidc", from = "src" }]
+packages = [{ include = "tigrbl_auth_protocol_oidc_backchannel_replay_store", from = "src" }]

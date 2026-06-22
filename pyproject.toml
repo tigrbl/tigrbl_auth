@@ -64,6 +64,7 @@ dependencies = [
     "tigrbl-security-signing-pqc==0.1.0",
     "tigrbl-auth==0.4.0.dev2",
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-auth-protocol-rp==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
@@ -202,6 +203,7 @@ tigrbl-security-proof-pkce = { path = "pkgs/30-providers/tigrbl-security-proof-p
 tigrbl-security-signing-pqc = { path = "pkgs/30-providers/tigrbl-security-signing-pqc", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
+tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }
