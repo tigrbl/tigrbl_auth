@@ -6,9 +6,10 @@ from types import SimpleNamespace
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-PKG_SRC = ROOT / "pkgs" / "50-protocols" / "tigrbl-authz-resource-server" / "src"
-if str(PKG_SRC) not in sys.path:
-    sys.path.insert(0, str(PKG_SRC))
+for src in (ROOT / "pkgs").rglob("src"):
+    value = str(src)
+    if value not in sys.path:
+        sys.path.insert(0, value)
 
 from tigrbl_auth.security.certification import (  # noqa: E402
     CertificationError,

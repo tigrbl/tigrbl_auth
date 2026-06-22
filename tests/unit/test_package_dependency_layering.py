@@ -59,6 +59,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authz-resource-server-jwks-cache",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server-sender-constraint-validator",
+        "tigrbl-authz-resource-server-verifier",
         "tigrbl-authz-resource-server",
     },
     "runtime": {

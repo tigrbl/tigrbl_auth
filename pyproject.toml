@@ -82,6 +82,7 @@ dependencies = [
     "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2",
     "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
     "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2",
+    "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-identity-admin==0.4.0.dev2",
@@ -219,6 +220,7 @@ tigrbl-authz-resource-server-introspection-client = { path = "pkgs/50-protocols/
 tigrbl-authz-resource-server-jwks-cache = { path = "pkgs/50-protocols/tigrbl-authz-resource-server-jwks-cache", editable = true }
 tigrbl-authz-resource-server-mtls-cnf-binding-validator = { path = "pkgs/50-protocols/tigrbl-authz-resource-server-mtls-cnf-binding-validator", editable = true }
 tigrbl-authz-resource-server-sender-constraint-validator = { path = "pkgs/50-protocols/tigrbl-authz-resource-server-sender-constraint-validator", editable = true }
+tigrbl-authz-resource-server-verifier = { path = "pkgs/50-protocols/tigrbl-authz-resource-server-verifier", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }

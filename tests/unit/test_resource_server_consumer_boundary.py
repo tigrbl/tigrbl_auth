@@ -44,6 +44,9 @@ from tigrbl_authz_resource_server_mtls_cnf_binding_validator import (  # noqa: E
 from tigrbl_authz_resource_server_sender_constraint_validator import (  # noqa: E402
     SenderConstraintValidator as CanonicalSenderConstraintValidator,
 )
+from tigrbl_authz_resource_server_verifier import (  # noqa: E402
+    ResourceServerVerifier as CanonicalResourceServerVerifier,
+)
 
 
 NOW = 1_800_000_000
@@ -79,6 +82,7 @@ def test_resource_server_t0_public_surfaces_are_importable() -> None:
     cache.put_jwks({"keys": [{"kid": "kid-1", "kty": "OKP"}]})
 
     assert JWKSCache is CanonicalJWKSCache
+    assert ResourceServerVerifier is CanonicalResourceServerVerifier
     assert cache.get("kid-1")["kty"] == "OKP"
     assert bearer_token_from_authorization("Bearer abc") == "abc"
     assert ResourceServerVerifier(now=lambda: NOW).verify_token(_claims(), _requirement()).allowed is True
@@ -240,6 +244,10 @@ def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
     files = [
         Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
         Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
+        Path(
+            "pkgs/50-protocols/tigrbl-authz-resource-server-verifier/src/"
+            "tigrbl_authz_resource_server_verifier/__init__.py"
+        ),
     ]
     forbidden = {
         "tigrbl_auth",

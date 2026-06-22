@@ -25,7 +25,7 @@ SCRIPT = ROOT / "scripts" / "monorepo_release.py"
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 57
+    assert len(packages) == 58
     assert "tigrbl-auth-workspace" not in packages
     assert "tigrbl-control-plane-contracts" not in packages
     assert "tigrbl-management-plane-contracts" not in packages
@@ -92,6 +92,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-resource-server-sender-constraint-validator"].import_root == (
         "tigrbl_authz_resource_server_sender_constraint_validator"
     )
+    assert packages["tigrbl-authz-resource-server-verifier"].path.as_posix() == (
+        "pkgs/50-protocols/tigrbl-authz-resource-server-verifier"
+    )
+    assert packages["tigrbl-authz-resource-server-verifier"].import_root == (
+        "tigrbl_authz_resource_server_verifier"
+    )
     assert packages["tigrbl-authz-resource-server"].path.as_posix() == "pkgs/50-protocols/tigrbl-authz-resource-server"
     assert packages["tigrbl-auth"].path.as_posix() == "pkgs/70-facade/tigrbl-auth"
     assert packages["tigrbl-identity-admin-control-plane"].path.as_posix() == (
@@ -143,7 +149,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "223"
+    assert payload["count"] == "228"
     assert not any(
         cell["name"]
         in {
@@ -207,6 +213,11 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-authz-resource-server-sender-constraint-validator"
+    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    assert {
+        cell["python_version"]
+        for cell in matrix
+        if cell["name"] == "tigrbl-authz-resource-server-verifier"
     } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
     assert {
         cell["python_version"]
@@ -323,6 +334,7 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
         "tigrbl-authz-resource-server-jwks-cache",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator",
         "tigrbl-authz-resource-server-sender-constraint-validator",
+        "tigrbl-authz-resource-server-verifier",
         "tigrbl-authz-resource-server",
         "tigrbl-identity-admin",
         "tigrbl-identity-admin-control-plane",
@@ -370,6 +382,7 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-authz-resource-server-jwks-cache" in root_dependency_names
     assert "tigrbl-authz-resource-server-mtls-cnf-binding-validator" in root_dependency_names
     assert "tigrbl-authz-resource-server-sender-constraint-validator" in root_dependency_names
+    assert "tigrbl-authz-resource-server-verifier" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
     assert "tigrbl-authz-policy-authority-derivation-graph" in root_dependency_names
     assert "tigrbl-identity-admin-control-plane" in root_dependency_names

@@ -15,7 +15,7 @@ window.
 - Component kind: OAuth protected-resource facade
 - Use it for protected API validation of issuer, audience, scopes, permissions, and proof bindings.
 - Do not use it to own credential proof, identity records, or OAuth/OIDC provider truth.
-- Canonical implementation lives in this package; `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
+- Canonical facade exports live in this package; verifier implementation lives in `tigrbl-authz-resource-server-verifier`, and `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 
@@ -59,6 +59,7 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 - [tigrbl-authz-resource-server-jwks-cache](https://pypi.org/project/tigrbl-authz-resource-server-jwks-cache/) owns the lightweight protected-resource JWKS cache.
 - [tigrbl-authz-resource-server-mtls-cnf-binding-validator](https://pypi.org/project/tigrbl-authz-resource-server-mtls-cnf-binding-validator/) owns the resource-server mTLS `cnf` adapter.
 - [tigrbl-authz-resource-server-sender-constraint-validator](https://pypi.org/project/tigrbl-authz-resource-server-sender-constraint-validator/) owns composed sender-constraint enforcement.
+- [tigrbl-authz-resource-server-verifier](https://pypi.org/project/tigrbl-authz-resource-server-verifier/) owns the protected-resource verifier implementation.
 - [tigrbl-security-proof-dpop](https://pypi.org/project/tigrbl-security-proof-dpop/) owns lower DPoP proof binding comparison.
 - [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns lower certificate binding comparison.
 
