@@ -34,7 +34,7 @@ from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
     include_jwks,
     include_openid_configuration,
 )
-from tigrbl_identity_storage.tables.user._oidc_userinfo import include_oidc_userinfo
+from tigrbl_identity_storage_runtime.userinfo import include_oidc_userinfo
 from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import include_rfc8414
 from tigrbl_identity_storage.tables.token_record._introspection import include_introspection_endpoint
 from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import include_rfc9728

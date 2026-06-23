@@ -337,6 +337,12 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
             "LogoutState",
             {"logout"},
         ),
+        (
+            "tigrbl_identity_storage_runtime.userinfo",
+            "tigrbl_identity_storage.tables.user",
+            "User",
+            {"userinfo"},
+        ),
     ],
 )
 def test_moved_oauth_publishers_live_above_storage_table_modules(
