@@ -1,7 +1,7 @@
 """Token exchange endpoint compatibility marker.
 
 The concrete endpoint is owned by
-``tigrbl_identity_storage.tables.token_record._token_exchange_endpoint``.
+``tigrbl_identity_storage_runtime.token_exchange``.
 """
 
 from __future__ import annotations

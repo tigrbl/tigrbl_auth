@@ -33,7 +33,7 @@ TOKEN_EXCHANGE_GRANT_TYPE = "urn:ietf:params:oauth:grant-type:token-exchange"
 def include_rfc8693(app: TigrblApp) -> None:
     """Attach the RFC 8693 router to *app* if enabled."""
 
-    from tigrbl_identity_storage.tables.token_record._token_exchange import api
+    from tigrbl_identity_storage_runtime.token_exchange import api
 
     if runtime_cfg.settings.enable_rfc8693 and not any(
         (getattr(route, "path", None) or getattr(route, "path_template", None))

@@ -1,4 +1,4 @@
-"""RFC 8693 token-exchange route for the release path."""
+"""RFC 8693 token-exchange runtime publisher for the release path."""
 
 from __future__ import annotations
 

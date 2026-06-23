@@ -19,10 +19,10 @@ from tigrbl_auth_protocol_oauth.standards.resource_indicators import (
     resource_binding_summary,
     select_resource_indicator,
 )
-import tigrbl_identity_storage.tables.token_record._token_exchange as token_exchange_mod
+import tigrbl_identity_storage_runtime.token_exchange as token_exchange_mod
 import tigrbl_identity_storage.tables.token_record._route as token_ops
 
-from tigrbl_identity_storage.tables.token_record._token_exchange import (
+from tigrbl_identity_storage_runtime.token_exchange import (
     HTTPException,
     _actor_claim,
     _normalize_requested_token_type,

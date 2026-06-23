@@ -246,7 +246,7 @@ def test_delegation_grant_table_owns_lifecycle_and_association_ops(monkeypatch: 
 
 
 def test_delegation_grant_oauth_boundary_no_policy_ownership_contract(monkeypatch: pytest.MonkeyPatch) -> None:
-    oauth_exchange = importlib.import_module("tigrbl_identity_storage.tables.token_record._token_exchange")
+    oauth_exchange = importlib.import_module("tigrbl_identity_storage_runtime.token_exchange")
 
     class FakeJwt:
         async def async_decode(self, token: str, verify_exp: bool = True) -> dict[str, object]:
