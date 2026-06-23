@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import datetime as dt
-from pathlib import Path
 import uuid
 from typing import Any, Literal, Optional
 
@@ -244,26 +243,11 @@ class TokenRecord(RestOltpTable, GUIDPk, Timestamped):
 api = router = TigrblRouter()
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[5]
-
-
 @api.route("/token", methods=["POST"], response_model=TokenPair)
 async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)) -> Any:
     from ._route import token_request
 
-    result = await token_request(request=request, db=db)
-    from tigrbl_identity_storage.session_service import observe_token_response
-
-    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
-    observe_token_response(
-        _repo_root(),
-        access_token=payload.get("access_token"),
-        refresh_token=payload.get("refresh_token"),
-        id_token=payload.get("id_token"),
-        details=payload,
-    )
-    return result
+    return await token_request(request=request, db=db)
 
 
 TokenRecord.token = staticmethod(token)  # type: ignore[attr-defined]

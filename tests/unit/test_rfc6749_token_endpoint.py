@@ -8,7 +8,8 @@ from unittest.mock import AsyncMock
 
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl import TigrblApp
-from tigrbl_identity_storage.tables.auth_code._auth_flows import router
+from tigrbl_identity_storage_runtime.auth_flows import router
+from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 
 CLIENT_ID = "00000000-0000-0000-0000-000000000000"
@@ -29,6 +30,9 @@ class DummyDB:
 @pytest_asyncio.fixture()
 async def client(monkeypatch):
     app = TigrblApp()
+    app.state.tigrbl_auth_deployment = resolve_deployment(
+        settings, flag_overrides={"require_tls": False}
+    )
     app.include_router(router)
     app.router.dependency_overrides[get_db] = lambda: DummyDB()
     monkeypatch.setattr(

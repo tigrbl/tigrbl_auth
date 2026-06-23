@@ -285,6 +285,32 @@ def test_executable_introspection_publisher_lives_above_storage() -> None:
     assert not hasattr(storage, "include_introspection_endpoint")
 
 
+def test_executable_auth_flow_composition_lives_above_storage() -> None:
+    old_modules = (
+        "tigrbl_identity_storage.tables.auth_code._authz_surface",
+        "tigrbl_identity_storage.tables.auth_code._auth_flows",
+    )
+    for module_name in old_modules:
+        assert importlib.util.find_spec(module_name) is None
+
+    authz_surface = importlib.import_module("tigrbl_identity_storage_runtime.authz_surface")
+    auth_flows = importlib.import_module("tigrbl_identity_storage_runtime.auth_flows")
+
+    assert authz_surface.api is authz_surface.router
+    assert auth_flows.api is auth_flows.router
+
+
+def test_token_table_route_does_not_call_sync_session_observer() -> None:
+    path = Path(
+        "pkgs/01-storage/tigrbl-identity-storage/src/"
+        "tigrbl_identity_storage/tables/token_record/_table.py"
+    )
+    source = path.read_text(encoding="utf-8")
+
+    assert "observe_token_response" not in source
+    assert "session_service" not in source
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):

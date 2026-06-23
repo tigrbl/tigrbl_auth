@@ -2,7 +2,17 @@
 
 from __future__ import annotations
 
-from http import HTTPStatus as status
+from http import HTTPStatus
+
+
+class _Status:
+    def __getattr__(self, name: str) -> int | HTTPStatus:
+        if name.startswith("HTTP_"):
+            return int(name.split("_", 2)[1])
+        return getattr(HTTPStatus, name)
+
+
+status = _Status()
 
 from pydantic import EmailStr, constr
 from swarmauri_core.crypto.types import JWAAlg
