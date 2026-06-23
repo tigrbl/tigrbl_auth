@@ -38,7 +38,7 @@ REMOVED_HELPER_PACKAGES = {
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 61
+    assert len(packages) == 62
     assert "tigrbl-auth-workspace" not in packages
     assert REMOVED_HELPER_PACKAGES.isdisjoint(packages)
     assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/02-contracts/tigrbl-identity-contracts"
@@ -53,6 +53,9 @@ def test_monorepo_release_discovers_split_packages() -> None:
     )
     assert packages["tigrbl-security-token-jwks-cache"].path.as_posix() == (
         "pkgs/20-providers/tigrbl-security-token-jwks-cache"
+    )
+    assert packages["tigrbl-identity-storage-runtime"].path.as_posix() == (
+        "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime"
     )
     assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy"
     assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/40-capabilities/tigrbl-identity-admin"
@@ -97,12 +100,13 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "249"
+    assert payload["count"] == "252"
     names = {cell["name"] for cell in matrix}
     assert REMOVED_HELPER_PACKAGES.isdisjoint(names)
     assert "tigrbl-security-token-verification" not in names
     assert "tigrbl-authz-resource-server-verifier" in names
     assert "tigrbl-security-token-jwks-cache" in names
+    assert "tigrbl-identity-storage-runtime" in names
     assert {
         cell["python_version"]
         for cell in matrix

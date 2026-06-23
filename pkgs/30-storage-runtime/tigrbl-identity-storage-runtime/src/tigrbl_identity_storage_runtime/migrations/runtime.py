@@ -18,7 +18,16 @@ from tigrbl_identity_runtime.engine_resolver import (
 from tigrbl_identity_storage.tables import RestOltpTable
 from tigrbl_identity_storage.tables.engine import ENGINE
 
-VERSIONS_DIR = Path(__file__).resolve().parent / "versions"
+
+def _versions_dir() -> Path:
+    spec = importlib.util.find_spec("tigrbl_identity_storage.migrations.versions")
+    locations = list(spec.submodule_search_locations or ()) if spec is not None else []
+    if not locations:
+        raise RuntimeError("Unable to resolve tigrbl_identity_storage migration versions directory")
+    return Path(locations[0])
+
+
+VERSIONS_DIR = _versions_dir()
 
 
 @dataclass(slots=True)

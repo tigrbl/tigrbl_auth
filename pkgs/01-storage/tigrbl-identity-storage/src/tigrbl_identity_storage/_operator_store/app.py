@@ -7,7 +7,6 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncIterator
 
-from tigrbl_identity_runtime.engine_resolver import resolve_api_provider
 from tigrbl_identity_storage.framework import TigrblRouter
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
 from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
@@ -27,6 +26,15 @@ OPERATOR_TABLES = (
 )
 
 _APP_CACHE: dict[str, TigrblRouter] = {}
+
+
+def _resolve_api_provider(api: Any) -> Any:
+    from tigrbl.engine import resolver as engine_resolver
+
+    try:
+        return engine_resolver.resolve_provider(api=api)
+    except TypeError:
+        return engine_resolver.resolve_provider(router=api)
 
 
 async def operator_store_app(state_root: Path) -> TigrblRouter:
@@ -50,7 +58,7 @@ async def operator_store_app(state_root: Path) -> TigrblRouter:
 
 async def operator_store_provider(state_root: Path) -> Any:
     app = await operator_store_app(state_root)
-    provider = resolve_api_provider(app)
+    provider = _resolve_api_provider(app)
     if provider is None:
         raise RuntimeError("operator store app did not expose a Tigrbl engine provider")
     return provider

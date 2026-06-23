@@ -308,7 +308,7 @@ async def _runtime_engine_context(database_url: str):
     setattr(surface_api, "_ddl_executed", False)
     await surface_api.initialize()
     raw_engine, _ = provider.ensure()
-    from tigrbl_identity_storage.migrations.runtime import (
+    from tigrbl_identity_storage_runtime.migrations.runtime import (
         _bootstrap_sqlite_schema,
         _ensure_sqlite_attachment_on_connection,
     )

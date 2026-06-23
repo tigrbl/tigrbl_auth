@@ -104,6 +104,7 @@ dependencies = [
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-server==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
+    "tigrbl-identity-storage-runtime==0.4.0.dev2",
     "tomli==2.4.0; python_version < '3.11'",
 ]
 
@@ -246,6 +247,7 @@ tigrbl-identity-rp = { path = "pkgs/deprecated/tigrbl-identity-rp", editable = t
 tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", editable = true }
 tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
 tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
+tigrbl-identity-storage-runtime = { path = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

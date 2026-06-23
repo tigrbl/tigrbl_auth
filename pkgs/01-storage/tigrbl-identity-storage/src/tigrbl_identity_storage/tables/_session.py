@@ -5,8 +5,22 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator
 
-from tigrbl_identity_runtime.engine_resolver import resolve_api_provider, resolve_default_provider
 from tigrbl_identity_storage.tables.engine import ENGINE
+
+
+def _resolve_api_provider(api: Any) -> Any:
+    from tigrbl.engine import resolver as engine_resolver
+
+    try:
+        return engine_resolver.resolve_provider(api=api)
+    except TypeError:
+        return engine_resolver.resolve_provider(router=api)
+
+
+def _resolve_default_provider() -> Any:
+    from tigrbl.engine import resolver as engine_resolver
+
+    return engine_resolver.resolve_provider()
 
 
 def resolve_storage_provider() -> Any:
@@ -17,13 +31,13 @@ def resolve_storage_provider() -> Any:
         try:
             module = __import__(module_name, fromlist=[attr_name])
             api = getattr(module, attr_name)
-            provider = resolve_api_provider(api)
+            provider = _resolve_api_provider(api)
             if provider is not None:
                 return provider
         except Exception:
             pass
     try:
-        provider = resolve_default_provider()
+        provider = _resolve_default_provider()
         if provider is not None:
             return provider
     except Exception:

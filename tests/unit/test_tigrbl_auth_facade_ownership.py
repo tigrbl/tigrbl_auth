@@ -71,9 +71,9 @@ FACADE_MODULES = {
     "tigrbl_auth.uix.admin_console": "tigrbl_identity_operator.uix.admin_console",
     "tigrbl_auth.db": "tigrbl_identity_storage.db",
     "tigrbl_auth.tables": "tigrbl_identity_storage.tables",
-    "tigrbl_auth.migrations": "tigrbl_identity_storage.migrations",
+    "tigrbl_auth.migrations": "tigrbl_identity_storage_runtime.migrations",
     "tigrbl_auth.migrations.helpers": "tigrbl_identity_storage.migrations.helpers",
-    "tigrbl_auth.migrations.runtime": "tigrbl_identity_storage.migrations.runtime",
+    "tigrbl_auth.migrations.runtime": "tigrbl_identity_storage_runtime.migrations.runtime",
 }
 
 EXECUTABLE_FACADE_MODULES: dict[str, str] = {}

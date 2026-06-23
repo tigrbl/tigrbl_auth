@@ -1,6 +1,4 @@
-"""Compatibility facade for `tigrbl_identity_storage.migrations`."""
-
-from importlib import import_module
+"""Compatibility facade for storage migration runtime and durable assets."""
 
 from tigrbl_auth._split_imports import alias_module as _alias_module
 
@@ -19,15 +17,24 @@ _VERSIONS = (
 )
 
 _LEGACY_NAME = __name__
-_module = _alias_module(__name__, "tigrbl_identity_storage.migrations", "tigrbl-identity-storage")
+_module = _alias_module(
+    __name__,
+    "tigrbl_identity_storage_runtime.migrations",
+    "tigrbl-identity-storage-runtime",
+)
 globals().update(_module.__dict__)
 
-for _submodule in ("env", "helpers", "runtime"):
+for _submodule in ("env", "helpers"):
     _alias_module(
         f"{_LEGACY_NAME}.{_submodule}",
         f"tigrbl_identity_storage.migrations.{_submodule}",
         "tigrbl-identity-storage",
     )
+_alias_module(
+    f"{_LEGACY_NAME}.runtime",
+    "tigrbl_identity_storage_runtime.migrations.runtime",
+    "tigrbl-identity-storage-runtime",
+)
 
 _alias_module(
     f"{_LEGACY_NAME}.versions",

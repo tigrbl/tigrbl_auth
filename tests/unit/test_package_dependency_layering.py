@@ -51,6 +51,9 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-security-token-introspection-client",
         "tigrbl-security-token-jwks-cache",
     },
+    "storage-runtime": {
+        "tigrbl-identity-storage-runtime",
+    },
     "capabilities": {
         "tigrbl-authn-credentials",
         "tigrbl-authz-policy-admin-gate",
@@ -101,6 +104,7 @@ PYTHON_LAYER_FOLDERS = {
     "bases": "05-bases",
     "concrete": "10-concrete",
     "providers": "20-providers",
+    "storage-runtime": "30-storage-runtime",
     "capabilities": "40-capabilities",
     "protocols": "50-protocols",
     "runtime": "60-runtime",

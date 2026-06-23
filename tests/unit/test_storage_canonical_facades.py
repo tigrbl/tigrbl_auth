@@ -110,15 +110,27 @@ def test_tigrbl_auth_migration_facades_reexport_storage_helpers() -> None:
     auth_runtime = importlib.import_module("tigrbl_auth.migrations.runtime")
     auth_helpers = importlib.import_module("tigrbl_auth.migrations.helpers")
     storage_migrations = importlib.import_module("tigrbl_identity_storage.migrations")
-    storage_runtime = importlib.import_module("tigrbl_identity_storage.migrations.runtime")
+    storage_runtime = importlib.import_module("tigrbl_identity_storage_runtime.migrations.runtime")
+    storage_runtime_migrations = importlib.import_module("tigrbl_identity_storage_runtime.migrations")
     storage_helpers = importlib.import_module("tigrbl_identity_storage.migrations.helpers")
 
     for name in storage_migrations.__all__:
         assert getattr(auth_migrations, name) is getattr(storage_migrations, name)
+    for name in storage_runtime_migrations.__all__:
+        assert getattr(auth_migrations, name) is getattr(storage_runtime_migrations, name)
     for name in storage_runtime.__all__:
         assert getattr(auth_runtime, name) is getattr(storage_runtime, name)
     for name in storage_helpers.__all__:
         assert getattr(auth_helpers, name) is getattr(storage_helpers, name)
+
+
+def test_executable_migration_runtime_lives_above_storage() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.migrations.runtime") is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.migrations.runtime")
+    assert runtime.VERSIONS_DIR.name == "versions"
+    assert "tigrbl-identity-storage" in runtime.VERSIONS_DIR.parts
+    assert "tigrbl_identity_storage" in runtime.VERSIONS_DIR.parts
 
 
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:

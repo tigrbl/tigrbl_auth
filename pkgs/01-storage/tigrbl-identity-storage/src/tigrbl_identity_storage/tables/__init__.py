@@ -3,7 +3,6 @@
 from tigrbl import bind
 
 from tigrbl_identity_storage.framework import RestOltpTable
-from tigrbl_identity_runtime.settings import settings
 
 from .realm import AdminRealmOut, AdminRealmProvisionIn, AdminRealmUpdateIn, Realm
 from .tenant import AdminTenantOut, AdminTenantProvisionIn, AdminTenantUpdateIn, Tenant
@@ -264,7 +263,6 @@ _TABLE_SCHEMA_EXPORTS = _export_table_schemas()
 
 __all__ = [
     "RestOltpTable",
-    "settings",
     "ENGINE",
     "dsn",
     "get_db",
