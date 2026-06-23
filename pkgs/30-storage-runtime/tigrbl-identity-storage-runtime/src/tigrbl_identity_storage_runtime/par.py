@@ -1,17 +1,14 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
+from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.security.handler_records import (
-    append_audit_event_record,
-    create_handler_record,
-    first_handler_record,
-    read_handler_record,
-)
+from tigrbl_identity_storage.tables._ops import create_record, first_record, read_record
+from tigrbl_identity_storage.tables.audit_event import AuditEvent
 from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import merge_request_object_params, parse_request_object
 from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import REQUEST_URI_PREFIX
 from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
@@ -33,11 +30,13 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
 from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_storage.framework import HTTPException, status
+    from tigrbl_identity_storage.framework import Depends, HTTPException, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.tables.engine import get_db
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
         HTTP_404_NOT_FOUND = 404
+        HTTP_401_UNAUTHORIZED = 401
 
     class HTTPException(Exception):
         def __init__(self, status_code: int, detail: object):
@@ -46,11 +45,32 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
             self.detail = detail
 
     status = _FallbackStatus()
+    Depends = lambda dependency: dependency  # type: ignore[assignment]
+
+    class TigrblApp:  # type: ignore[override]
+        pass
+
+    class TigrblRouter:  # type: ignore[override]
+        def __init__(self, *args, **kwargs):
+            self.routes = []
+
+        def route(self, path: str, methods=None, response_model=None, **kwargs):
+            def decorator(func):
+                self.routes.append(type("Route", (), {"path": path, "methods": methods})())
+                return func
+
+            return decorator
+
+    def get_db():  # type: ignore[override]
+        return None
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from ..client import Client
-    from ..client_registration import ClientRegistration
-    from . import PushedAuthorizationRequest
+    from tigrbl_identity_storage.tables.client import Client
+    from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+    from tigrbl_identity_storage.tables.pushed_authorization_request import (
+        PushedAuthorizationRequest,
+        PushedAuthorizationResponse,
+    )
 except Exception:  # pragma: no cover - dependency-light placeholders
     class Client:  # type: ignore[override]
         id = object()
@@ -71,7 +91,10 @@ except Exception:  # pragma: no cover - dependency-light placeholders
             self.expires_at = None
             self.consumed_at = None
 
+    class PushedAuthorizationResponse:  # type: ignore[override]
+        pass
 
+api = router = TigrblRouter()
 
 def _body_dict(body: bytes) -> dict:
     if not body:
@@ -163,10 +186,10 @@ async def _authenticate_fapi_par_client(*, request, db, params: dict[str, object
         client_uuid = UUID(client_id)
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "invalid client_id") from exc
-    client = await read_handler_record(Client, db, client_uuid)
+    client = await read_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "client not found")
-    registration = await first_handler_record(ClientRegistration, db, {"client_id": client.id})
+    registration = await first_record(ClientRegistration, db, {"client_id": client.id})
     metadata = dict(getattr(registration, "registration_metadata", None) or {})
     auth_method = str(metadata.get("token_endpoint_auth_method") or "").strip()
     policy = runtime_security_profile(deployment)
@@ -222,7 +245,7 @@ async def pushed_authorization_request(*, request, db):
         client_uuid = UUID(str(client_id))
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid client_id') from exc
-    client = await read_handler_record(Client, db, client_uuid)
+    client = await read_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'client not found')
     if policy.par_client_auth_required:
@@ -248,7 +271,7 @@ async def pushed_authorization_request(*, request, db):
             status.HTTP_400_BAD_REQUEST,
             {"error": "invalid_request", "error_description": "request_uri lifetime exceeds the active profile limit"},
         )
-    row = await create_handler_record(
+    row = await create_record(
         PushedAuthorizationRequest,
         db,
         {
@@ -258,7 +281,7 @@ async def pushed_authorization_request(*, request, db):
         },
     )
 
-    await append_audit_event_record(
+    await AuditEvent.record(
         db,
         tenant_id=client.tenant_id,
         actor_client_id=client.id,
@@ -275,3 +298,41 @@ async def pushed_authorization_request(*, request, db):
     )
 
     return {'request_uri': row.request_uri, 'expires_in': row.expires_in}
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/par", methods=["POST"], response_model=PushedAuthorizationResponse)
+async def par(request, db=Depends(get_db)):
+    result = await pushed_authorization_request(request=request, db=db)
+    from tigrbl_identity_storage.session_service import observe_par_response
+
+    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
+    observe_par_response(_repo_root(), request_uri=payload.get("request_uri"), details=payload)
+    return result
+
+
+def include_par_endpoint(app: TigrblApp) -> None:
+    deployment = deployment_from_app(app, settings)
+    path = "/par"
+    if deployment.route_enabled(path) and not any(
+        (getattr(route, "path", None) or getattr(route, "path_template", None)) == path
+        for route in app.router.routes
+    ):
+        app.include_router(api)
+
+
+include_rfc9126 = include_par_endpoint
+
+
+__all__ = [
+    "api",
+    "router",
+    "par",
+    "pushed_authorization_request",
+    "_normalized_par_params",
+    "include_par_endpoint",
+    "include_rfc9126",
+]

@@ -40,7 +40,6 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "capabilities": ("device-authorization",),
         "router": device_authorization_api,
     },
-    {"mount_group": "par", "capabilities": ("par",), "router": par_api},
     {
         "mount_group": "my_account",
         "capabilities": (
@@ -54,6 +53,11 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
+    {
+        "mount_group": "par",
+        "capabilities": ("par",),
+        "include": include_par_endpoint,
+    },
     {
         "mount_group": "revoke",
         "capabilities": ("revoke",),

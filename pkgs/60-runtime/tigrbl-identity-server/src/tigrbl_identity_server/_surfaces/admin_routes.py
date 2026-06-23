@@ -19,7 +19,7 @@ from tigrbl_identity_storage.tables.user._account_surface import api as my_accou
 from tigrbl_identity_storage.tables.client_registration import api as register_api
 from tigrbl_identity_storage.tables.device_code import api as device_authorization_api
 from tigrbl_identity_storage.tables.logout_state import api as logout_api
-from tigrbl_identity_storage.tables.pushed_authorization_request import api as par_api
+from tigrbl_identity_storage_runtime.par import include_par_endpoint
 from tigrbl_identity_storage_runtime.revocation import (
     api as revoke_api,
     include_revocation_endpoint,

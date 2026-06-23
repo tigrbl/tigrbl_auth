@@ -5,15 +5,12 @@ from __future__ import annotations
 import datetime as dt
 import uuid
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
     BaseModel,
-    Depends,
     Timestamped,
-    TigrblRouter,
     S,
     acol,
     JSON,
@@ -25,11 +22,7 @@ from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
     PgUUID,
 )
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_storage.framework import HTTPException
-from http import HTTPStatus as status
 from .._ops import create_record, first_record, record_id, update_record
-from ..engine import get_db
 
 DEFAULT_PAR_EXPIRY = 90
 
@@ -110,16 +103,6 @@ class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
         self.consumed_at = consumed_at
         return consumed_at
 
-    @staticmethod
-    async def _extract_form_params(context: dict) -> dict:
-        if not settings.enable_rfc9126:
-            raise HTTPException(status.HTTP_404_NOT_FOUND, "PAR disabled")
-        request = context.get("request")
-        if request is None:
-            return {}
-        form = await request.form()
-        return dict(form or {})
-
     @classmethod
     async def create_request(
         cls,
@@ -167,34 +150,9 @@ class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"consumed_at": datetime.now(tz=timezone.utc)})
 
 
-api = router = TigrblRouter()
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[5]
-
-
-@api.route("/par", methods=["POST"], response_model=PushedAuthorizationResponse)
-async def par(request: Any, db: Any = Depends(get_db)) -> Any:
-    from ._op import pushed_authorization_request
-
-    result = await pushed_authorization_request(request=request, db=db)
-    from tigrbl_identity_storage.session_service import observe_par_response
-
-    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
-    observe_par_response(_repo_root(), request_uri=payload.get("request_uri"), details=payload)
-    return result
-
-
-PushedAuthorizationRequest.par = staticmethod(par)  # type: ignore[attr-defined]
-
-
 __all__ = [
     "DEFAULT_PAR_EXPIRY",
     "PushedAuthorizationRequest",
     "PushedAuthorizationRequestIn",
     "PushedAuthorizationResponse",
-    "api",
-    "router",
-    "par",
 ]

@@ -20,7 +20,7 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
     },
     {
         "capability": "authorize",
-        "kind": "router",
+        "kind": "publisher",
         "surface_set": "public-rest",
         "mount_group": "authorize",
         "paths": ("/authorize",),
@@ -180,7 +180,7 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc9126",),
         "summary": "Pushed authorization request endpoint",
         "tags": ("oauth2",),
-        "router_ref": "tigrbl_identity_storage.tables.pushed_authorization_request:api",
+        "publisher_ref": "tigrbl_identity_storage_runtime.par:include_par_endpoint",
         "targets": ("RFC 9126", "RFC 9101", "RFC 9396", "RFC 8707", "RFC 9700"),
         "contract_visible": True,
         "discovery_visible": True,

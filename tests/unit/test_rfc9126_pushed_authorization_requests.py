@@ -1,20 +1,12 @@
 import pytest
 from http import HTTPStatus as status
+from types import SimpleNamespace
 
 from tigrbl_auth.tables.pushed_authorization_request import (
     PushedAuthorizationRequest,
     DEFAULT_PAR_EXPIRY,
 )
-from tigrbl.runtime.status import HTTPException
-from tigrbl_auth.runtime_cfg import settings
-
-
-class _Req:
-    def __init__(self, form):
-        self._form = form
-
-    async def form(self):
-        return self._form
+from tigrbl_identity_storage_runtime import par as par_runtime
 
 
 @pytest.mark.unit
@@ -29,13 +21,9 @@ async def test_par_returns_request_uri_and_expires(enable_rfc9126, db_session):
 
 @pytest.mark.unit
 @pytest.mark.asyncio
-async def test_par_disabled_returns_404():
-    original = settings.enable_rfc9126
-    settings.enable_rfc9126 = False
-    try:
-        req = _Req({})
-        with pytest.raises(HTTPException) as exc:
-            await PushedAuthorizationRequest._extract_form_params({"request": req})
-        assert exc.value.status_code == status.HTTP_404_NOT_FOUND
-    finally:
-        settings.enable_rfc9126 = original
+async def test_par_runtime_disabled_returns_404(monkeypatch):
+    monkeypatch.setattr(par_runtime.settings, "enable_rfc9126", False)
+    request = SimpleNamespace(body=b"", app=None)
+    with pytest.raises(par_runtime.HTTPException) as exc:
+        await par_runtime.pushed_authorization_request(request=request, db=None)
+    assert exc.value.status_code == status.HTTP_404_NOT_FOUND

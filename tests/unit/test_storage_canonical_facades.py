@@ -172,6 +172,18 @@ def test_executable_revocation_publisher_lives_above_storage() -> None:
     assert not hasattr(storage, "router")
 
 
+def test_executable_par_publisher_lives_above_storage() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.pushed_authorization_request._op") is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.par")
+    storage = importlib.import_module("tigrbl_identity_storage.tables.pushed_authorization_request")
+
+    assert runtime.api is runtime.router
+    assert runtime.include_par_endpoint.__module__ == "tigrbl_identity_storage_runtime.par"
+    assert not hasattr(storage, "api")
+    assert not hasattr(storage, "router")
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):

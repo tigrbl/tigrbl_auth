@@ -10,16 +10,16 @@ import pytest
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.config.settings import settings
-from tigrbl_identity_storage.tables import _oauth_par as par_ops
-from tigrbl_identity_storage.tables import _oauth_register as register_ops
-from tigrbl_identity_storage.tables import _oauth_token as token_ops
+import tigrbl_identity_storage_runtime.par as par_ops
+from tigrbl_identity_storage.tables.client_registration import _route_op as register_ops
+from tigrbl_identity_storage.tables.token_record import _route as token_ops
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,
     runtime_security_profile,
 )
 from tigrbl_auth_protocol_oauth.standards.protected_resource_metadata import build_protected_resource_metadata
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 class _Form(dict):
@@ -176,14 +176,14 @@ async def test_fapi_par_requires_redirect_uri_and_client_auth(monkeypatch: pytes
     client = SimpleNamespace(id=uuid4(), tenant_id=uuid4())
     registration = SimpleNamespace(registration_metadata={"token_endpoint_auth_method": "private_key_jwt"})
 
-    async def _read_handler_record(model, db, ident):
+    async def _read_record(model, db, ident):
         return client
 
-    async def _first_handler_record(model, db, filters):
+    async def _first_record(model, db, filters):
         return registration
 
-    monkeypatch.setattr(par_ops, "read_handler_record", _read_handler_record)
-    monkeypatch.setattr(par_ops, "first_handler_record", _first_handler_record)
+    monkeypatch.setattr(par_ops, "read_record", _read_record)
+    monkeypatch.setattr(par_ops, "first_record", _first_record)
 
     missing_redirect_request = _FakeRequest(
         body=urlencode({"client_id": str(client.id), "response_type": "code", "scope": "openid"}).encode("utf-8"),
