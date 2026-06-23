@@ -35,9 +35,9 @@ classifiers = [
 ]
 dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
     "tigrbl-authn-credentials==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",

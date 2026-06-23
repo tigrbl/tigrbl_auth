@@ -37,9 +37,12 @@ dependencies = [
     "tigrbl-auth-protocol-oauth==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
+    "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-security-token-verification==0.4.0.dev2",
+    "tigrbl-security-dpop-cnf-binding-validator==0.1.0",
+    "tigrbl-security-mtls-cnf-binding-validator==0.1.0",
+    "tigrbl-security-sender-constraint-validator==0.1.0",
     "tigrbl-security-trust-contracts==0.1.0",
 ]
 [project.urls]

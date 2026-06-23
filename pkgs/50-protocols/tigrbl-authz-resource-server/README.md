@@ -15,7 +15,7 @@ window.
 - Component kind: OAuth protected-resource facade
 - Use it for protected API validation of issuer, audience, scopes, permissions, and proof bindings.
 - Do not use it to own credential proof, identity records, or OAuth/OIDC provider truth.
-- Canonical protected-resource exports live in this package. Reusable sender-constraint, JWKS, introspection, mTLS, and DPoP helpers live in `tigrbl-security-token-verification`; `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
+- Canonical protected-resource exports live in this package. The verifier and reusable sender-constraint, JWKS, introspection, mTLS, and DPoP helpers live in standalone 30-layer provider packages; `tigrbl-identity-resource-server` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 
@@ -54,7 +54,9 @@ result = ResourceServerVerifier().verify_token(claims, requirement)
 - [tigrbl-identity-resource-server](https://pypi.org/project/tigrbl-identity-resource-server/) remains a deprecated compatibility package.
 - [tigrbl-authz-policy](https://pypi.org/project/tigrbl-authz-policy/) owns policy decision truth.
 - [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/) owns OAuth wire behavior.
-- [tigrbl-security-token-verification](https://pypi.org/project/tigrbl-security-token-verification/) owns reusable protected-resource token verification helpers.
+- [tigrbl-authz-resource-server-verifier](https://pypi.org/project/tigrbl-authz-resource-server-verifier/) owns the reusable protected-resource verifier.
+- [tigrbl-security-token-jwks-cache](https://pypi.org/project/tigrbl-security-token-jwks-cache/) and [tigrbl-security-token-introspection-client](https://pypi.org/project/tigrbl-security-token-introspection-client/) own token lookup helpers.
+- [tigrbl-security-dpop-cnf-binding-validator](https://pypi.org/project/tigrbl-security-dpop-cnf-binding-validator/), [tigrbl-security-mtls-cnf-binding-validator](https://pypi.org/project/tigrbl-security-mtls-cnf-binding-validator/), and [tigrbl-security-sender-constraint-validator](https://pypi.org/project/tigrbl-security-sender-constraint-validator/) own sender-constraint providers.
 - [tigrbl-security-proof-dpop](https://pypi.org/project/tigrbl-security-proof-dpop/) owns lower DPoP proof binding comparison.
 - [tigrbl-security-certificate-mtls](https://pypi.org/project/tigrbl-security-certificate-mtls/) owns lower certificate binding comparison.
 

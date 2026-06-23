@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-for src in (ROOT / "pkgs").glob("*/src"):
+for src in (ROOT / "pkgs").rglob("src"):
     value = str(src)
     if value not in sys.path:
         sys.path.insert(0, value)
@@ -19,7 +19,7 @@ from tigrbl_identity_admin import (  # noqa: E402
     AdminResourceStatus,
     App,
 )
-from tigrbl_identity_concrete.admin_control_plane import (  # noqa: E402
+from tigrbl_identity_admin_control_plane import (  # noqa: E402
     AdminControlPlane as CanonicalAdminControlPlane,
 )
 
@@ -143,9 +143,9 @@ def test_admin_t2_tenant_isolation_delete_and_audit_guardrails() -> None:
 @pytest.mark.unit
 def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
-        Path("pkgs/10-concrete/tigrbl-identity-concrete/src/tigrbl_identity_concrete/admin_control_plane/__init__.py"),
-        Path("pkgs/10-concrete/tigrbl-identity-concrete/src/tigrbl_identity_concrete/admin_control_plane/models.py"),
-        Path("pkgs/10-concrete/tigrbl-identity-concrete/src/tigrbl_identity_concrete/admin_control_plane/service.py"),
+        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/__init__.py"),
+        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/models.py"),
+        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/service.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"),
     ]

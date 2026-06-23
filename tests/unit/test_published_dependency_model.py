@@ -29,13 +29,9 @@ def test_pyproject_uses_published_pins_and_extras():
     dependencies = set(project["dependencies"])
     extras = project["optional-dependencies"]
     removed_helper_pins = {
-        "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
         "tigrbl-authz-policy-abac-administrator==0.4.0.dev2",
-        "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
-        "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
         "tigrbl-authz-policy-delegated-administrator==0.4.0.dev2",
         "tigrbl-authz-policy-engine==0.4.0.dev2",
-        "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
         "tigrbl-authz-policy-rbac-administrator==0.4.0.dev2",
         "tigrbl-authz-policy-service-identity-registry==0.4.0.dev2",
         "tigrbl-authz-resource-server-dpop-cnf-binding-validator==0.4.0.dev2",
@@ -43,14 +39,6 @@ def test_pyproject_uses_published_pins_and_extras():
         "tigrbl-authz-resource-server-jwks-cache==0.4.0.dev2",
         "tigrbl-authz-resource-server-mtls-cnf-binding-validator==0.4.0.dev2",
         "tigrbl-authz-resource-server-sender-constraint-validator==0.4.0.dev2",
-        "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
-        "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
-        "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
-        "tigrbl-identity-admin-control-plane==0.4.0.dev2",
-        "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
-        "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
-        "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
-        "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     }
 
     assert "tigrbl==0.4.4.dev1" in dependencies
@@ -61,7 +49,11 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "swarmauri_crypto_jwe==0.3.0.dev5" in dependencies
     assert "pqcrypto==0.4.0" not in dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in dependencies
-    assert "tigrbl-security-token-verification==0.4.0.dev2" in dependencies
+    assert "tigrbl-authz-resource-server-verifier==0.4.0.dev2" in dependencies
+    assert "tigrbl-security-token-verification==0.4.0.dev2" not in dependencies
+    assert "tigrbl-security-token-jwks-cache==0.1.0" in dependencies
+    assert "tigrbl-security-token-introspection-client==0.1.0" in dependencies
+    assert "tigrbl-security-sender-constraint-validator==0.1.0" in dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in dependencies
     assert dependencies.isdisjoint(removed_helper_pins)
 
@@ -88,7 +80,10 @@ def test_pyproject_uses_published_pins_and_extras():
     identity_concrete_dependencies = set(_load_package_pyproject("tigrbl-identity-concrete")["project"]["dependencies"])
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
-    token_verification_dependencies = set(_load_package_pyproject("tigrbl-security-token-verification")["project"]["dependencies"])
+    verifier_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-verifier")["project"]["dependencies"])
+    jwks_cache_dependencies = set(_load_package_pyproject("tigrbl-security-token-jwks-cache")["project"]["dependencies"])
+    introspection_dependencies = set(_load_package_pyproject("tigrbl-security-token-introspection-client")["project"]["dependencies"])
+    sender_constraint_dependencies = set(_load_package_pyproject("tigrbl-security-sender-constraint-validator")["project"]["dependencies"])
     resource_server_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server")["project"]["dependencies"])
     storage_dependencies = set(_load_package_pyproject("tigrbl-identity-storage")["project"]["dependencies"])
     operator_dependencies = set(_load_package_pyproject("tigrbl-identity-operator")["project"]["dependencies"])
@@ -96,11 +91,14 @@ def test_pyproject_uses_published_pins_and_extras():
 
     assert "pqcrypto==0.4.0" not in jose_dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in jose_dependencies
-    assert "tigrbl-identity-concrete==0.4.0.dev2" in oidc_dependencies
+    assert "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2" in oidc_dependencies
+    assert "tigrbl-identity-concrete==0.4.0.dev2" not in oidc_dependencies
     assert oidc_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in facade_dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in facade_dependencies
+    assert "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2" in facade_dependencies
     assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in facade_dependencies
+    assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in facade_dependencies
     assert facade_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" in pqc_provider_dependencies
     assert "pqcrypto==0.4.0" not in admin_gate_dependencies
@@ -108,11 +106,14 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-runtime==0.4.0.dev2" in admin_gate_dependencies
     assert "pqcrypto==0.4.0" not in authz_concrete_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in authz_concrete_dependencies
-    assert "tigrbl-identity-core==0.4.0.dev2" in authz_concrete_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" not in authz_concrete_dependencies
     assert "pqcrypto==0.4.0" not in identity_concrete_dependencies
     assert "tigrbl-identity-contracts==0.4.0.dev2" in identity_concrete_dependencies
-    assert "tigrbl-identity-core==0.4.0.dev2" in identity_concrete_dependencies
+    assert "tigrbl-identity-core==0.4.0.dev2" not in identity_concrete_dependencies
     assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_concrete_dependencies
+    assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" in identity_admin_dependencies
     assert identity_admin_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in authz_dependencies
@@ -120,22 +121,25 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in authz_dependencies
     assert authz_dependencies.isdisjoint(removed_helper_pins)
     assert "tigrbl-authz-policy==0.4.0.dev2" not in storage_dependencies
-    assert "pqcrypto==0.4.0" not in token_verification_dependencies
-    assert "tigrbl-identity-contracts==0.4.0.dev2" in token_verification_dependencies
-    assert "tigrbl-security-trust-contracts==0.1.0" in token_verification_dependencies
-    assert "tigrbl-security-trust-domain-bases==0.1.0" in token_verification_dependencies
-    assert "tigrbl-security-proof-dpop==0.1.0" in token_verification_dependencies
-    assert "tigrbl-security-certificate-mtls==0.1.0" in token_verification_dependencies
-    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in token_verification_dependencies
-    assert "tigrbl-security-token-verification==0.4.0.dev2" in resource_server_dependencies
+    assert "pqcrypto==0.4.0" not in verifier_dependencies
+    assert "tigrbl-identity-contracts==0.4.0.dev2" in verifier_dependencies
+    assert "tigrbl-security-token-jwks-cache==0.1.0" in verifier_dependencies
+    assert "tigrbl-security-token-introspection-client==0.1.0" in verifier_dependencies
+    assert "tigrbl-authz-resource-server==0.4.0.dev2" not in verifier_dependencies
+    assert "tigrbl-security-trust-domain-bases==0.1.0" in jwks_cache_dependencies
+    assert "tigrbl-security-trust-domain-bases==0.1.0" in introspection_dependencies
+    assert "tigrbl-security-dpop-cnf-binding-validator==0.1.0" in sender_constraint_dependencies
+    assert "tigrbl-security-mtls-cnf-binding-validator==0.1.0" in sender_constraint_dependencies
+    assert "tigrbl-security-token-verification==0.4.0.dev2" not in resource_server_dependencies
+    assert "tigrbl-authz-resource-server-verifier==0.4.0.dev2" in resource_server_dependencies
+    assert "tigrbl-security-sender-constraint-validator==0.1.0" in resource_server_dependencies
     assert resource_server_dependencies.isdisjoint(removed_helper_pins)
-    assert "tigrbl-security-proof-dpop==0.1.0" not in resource_server_dependencies
-    assert "tigrbl-security-certificate-mtls==0.1.0" not in resource_server_dependencies
     assert "tigrbl-authz-policy==0.4.0.dev2" in operator_dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in operator_dependencies
+    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in operator_dependencies
     assert operator_dependencies.isdisjoint(removed_helper_pins)
     assert "tigrbl-authz-policy==0.4.0.dev2" in deprecated_policy_dependencies
-    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" in deprecated_policy_dependencies
+    assert "tigrbl-authz-policy-invariant-registry==0.4.0.dev2" in deprecated_policy_dependencies
+    assert "tigrbl-authz-policy-concrete==0.4.0.dev2" not in deprecated_policy_dependencies
     assert deprecated_policy_dependencies.isdisjoint(removed_helper_pins)
 
 

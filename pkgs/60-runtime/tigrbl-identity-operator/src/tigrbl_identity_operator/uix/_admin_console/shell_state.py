@@ -26,7 +26,7 @@ from tigrbl_authz_policy import (
     DelegatedAdministrator,
 )
 from tigrbl_authz_policy import PolicyEngine
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy import (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantRegistry,

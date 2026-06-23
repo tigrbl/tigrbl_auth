@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_decision_engine import (
     AdminPolicy,
     AttributePolicy,
     DecisionEffect,
@@ -67,7 +67,7 @@ from .assurance import (
     VerificationMethod,
     default_authorization_invariant_registry,
 )
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityGraphIntegrityReport,
@@ -78,14 +78,14 @@ from tigrbl_authz_policy_concrete import (
     authority_matches,
     validate_authority_graph_integrity,
 )
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityRole,
     has_admin_authority,
     has_owner_authority,
     has_superuser_authority,
     normalize_authority_roles,
 )
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityClosure,
     AuthorityMonotonicityReport,
     AuthorityMutationKind,

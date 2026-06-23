@@ -2,11 +2,9 @@ from __future__ import annotations
 
 """Sender-constraint validator facade for protected resource servers."""
 
-from tigrbl_security_token_verification import (
-    DpopCnfBindingValidator,
-    MtlsCnfBindingValidator,
-    SenderConstraintValidator,
-)
+from tigrbl_security_dpop_cnf_binding_validator import DpopCnfBindingValidator
+from tigrbl_security_mtls_cnf_binding_validator import MtlsCnfBindingValidator
+from tigrbl_security_sender_constraint_validator import SenderConstraintValidator
 
 
 __all__ = [

@@ -35,7 +35,6 @@ dependencies = [
     "tigrbl-identity-cli==0.4.0.dev2",
     "tigrbl-auth-release-certification==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
-    "tigrbl-authz-policy-concrete==0.4.0.dev2",
 ]
 
 [project.urls]

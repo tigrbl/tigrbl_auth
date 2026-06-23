@@ -11,7 +11,7 @@ from types import SimpleNamespace
 from typing import Any, Final
 from uuid import UUID, uuid4
 
-from tigrbl_identity_concrete.replay_store import _BackchannelReplayStore
+from tigrbl_auth_protocol_oidc_backchannel_replay_store import _BackchannelReplayStore
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from tigrbl_identity_runtime.settings import settings
 

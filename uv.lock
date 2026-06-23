@@ -2128,7 +2128,9 @@ dependencies = [
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph" },
     { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-admin" },
     { name = "tigrbl-identity-author" },
@@ -2155,7 +2157,9 @@ requires-dist = [
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-author", specifier = "==0.4.0.dev2" },
@@ -2217,8 +2221,8 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-authn-credentials" },
-    { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-jose" },
@@ -2228,13 +2232,24 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-auth-protocol-oidc-backchannel-replay-store"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-auth-protocol-rp"
@@ -2299,18 +2314,30 @@ dependencies = [
     { name = "tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-admin-gate" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph" },
     { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-decision-engine" },
+    { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-resource-server" },
+    { name = "tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-base" },
     { name = "tigrbl-canon" },
     { name = "tigrbl-concrete" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-admin" },
+    { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
+    { name = "tigrbl-identity-admin-auth-anomaly-detector" },
+    { name = "tigrbl-identity-admin-control-plane" },
+    { name = "tigrbl-identity-admin-federation-registry" },
+    { name = "tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph" },
+    { name = "tigrbl-identity-admin-trust-federation-graph" },
     { name = "tigrbl-identity-author" },
     { name = "tigrbl-identity-cli" },
     { name = "tigrbl-identity-concrete" },
@@ -2336,10 +2363,14 @@ dependencies = [
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-runtime" },
     { name = "tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator" },
     { name = "tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-signing-pqc" },
-    { name = "tigrbl-security-token-verification" },
+    { name = "tigrbl-security-token-introspection-client" },
+    { name = "tigrbl-security-token-jwks-cache" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-typing" },
@@ -2431,18 +2462,30 @@ requires-dist = [
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" },
     { name = "tigrbl-auth-release-certification", editable = "pkgs/60-runtime/tigrbl-auth-release-certification" },
     { name = "tigrbl-authn-credentials", editable = "pkgs/40-capabilities/tigrbl-authn-credentials" },
     { name = "tigrbl-authz-policy", editable = "pkgs/40-capabilities/tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-admin-gate", editable = "pkgs/40-capabilities/tigrbl-authz-policy-admin-gate" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph", editable = "pkgs/10-concrete/tigrbl-authz-policy-authority-derivation-graph" },
     { name = "tigrbl-authz-policy-concrete", editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-decision-engine", editable = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine" },
+    { name = "tigrbl-authz-policy-invariant-registry", editable = "pkgs/10-concrete/tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-resource-server", editable = "pkgs/50-protocols/tigrbl-authz-resource-server" },
+    { name = "tigrbl-authz-resource-server-verifier", editable = "pkgs/30-providers/tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
+    { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/10-concrete/tigrbl-identity-admin-advanced-authenticator-registry" },
+    { name = "tigrbl-identity-admin-auth-anomaly-detector", editable = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector" },
+    { name = "tigrbl-identity-admin-control-plane", editable = "pkgs/10-concrete/tigrbl-identity-admin-control-plane" },
+    { name = "tigrbl-identity-admin-federation-registry", editable = "pkgs/10-concrete/tigrbl-identity-admin-federation-registry" },
+    { name = "tigrbl-identity-admin-policy-registry", editable = "pkgs/10-concrete/tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph", editable = "pkgs/10-concrete/tigrbl-identity-admin-relationship-graph" },
+    { name = "tigrbl-identity-admin-trust-federation-graph", editable = "pkgs/10-concrete/tigrbl-identity-admin-trust-federation-graph" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
     { name = "tigrbl-identity-concrete", editable = "pkgs/10-concrete/tigrbl-identity-concrete" },
@@ -2472,10 +2515,14 @@ requires-dist = [
     { name = "tigrbl-release-contracts", editable = "pkgs/01-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-security-certificate-mtls", editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator", editable = "pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator" },
     { name = "tigrbl-security-proof-dpop", editable = "pkgs/30-providers/tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-proof-pkce", editable = "pkgs/30-providers/tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/30-providers/tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
-    { name = "tigrbl-security-token-verification", editable = "pkgs/30-providers/tigrbl-security-token-verification" },
+    { name = "tigrbl-security-token-introspection-client", editable = "pkgs/30-providers/tigrbl-security-token-introspection-client" },
+    { name = "tigrbl-security-token-jwks-cache", editable = "pkgs/30-providers/tigrbl-security-token-jwks-cache" },
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
@@ -2523,7 +2570,10 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy" }
 dependencies = [
     { name = "tigrbl" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph" },
     { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-decision-engine" },
+    { name = "tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -2535,7 +2585,10 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-decision-engine", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
@@ -2564,9 +2617,48 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-authz-policy-authority-derivation-graph"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-authority-derivation-graph" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-authz-policy-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-authz-policy-decision-engine"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine" }
+dependencies = [
+    { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-authz-policy-invariant-registry"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-invariant-registry" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -2586,9 +2678,12 @@ dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy" },
+    { name = "tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-runtime" },
-    { name = "tigrbl-security-token-verification" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator" },
+    { name = "tigrbl-security-sender-constraint-validator" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
@@ -2597,9 +2692,35 @@ requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-resource-server-verifier", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-security-token-verification", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-sender-constraint-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-authz-resource-server-verifier"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/30-providers/tigrbl-authz-resource-server-verifier" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator" },
+    { name = "tigrbl-security-token-introspection-client" },
+    { name = "tigrbl-security-token-jwks-cache" },
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-token-introspection-client", specifier = "==0.1.0" },
+    { name = "tigrbl-security-token-jwks-cache", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
@@ -2681,6 +2802,13 @@ name = "tigrbl-identity-admin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
+    { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
+    { name = "tigrbl-identity-admin-auth-anomaly-detector" },
+    { name = "tigrbl-identity-admin-control-plane" },
+    { name = "tigrbl-identity-admin-federation-registry" },
+    { name = "tigrbl-identity-admin-policy-registry" },
+    { name = "tigrbl-identity-admin-relationship-graph" },
+    { name = "tigrbl-identity-admin-trust-federation-graph" },
     { name = "tigrbl-identity-concrete" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage" },
@@ -2688,9 +2816,123 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-admin-advanced-authenticator-registry", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-auth-anomaly-detector", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-control-plane", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-federation-registry", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-policy-registry", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-relationship-graph", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-admin-trust-federation-graph", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-advanced-authenticator-registry"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-advanced-authenticator-registry" }
+dependencies = [
+    { name = "tigrbl-identity-concrete" },
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-auth-anomaly-detector"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-control-plane"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-control-plane" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-federation-registry"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-federation-registry" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-policy-registry"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-policy-registry" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-relationship-graph"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-relationship-graph" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-identity-admin-trust-federation-graph"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-trust-federation-graph" }
+dependencies = [
+    { name = "tigrbl-identity-concrete" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -2725,14 +2967,10 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-identity-concrete" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
-    { name = "tigrbl-identity-core" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
-]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-contracts"
@@ -2841,7 +3079,6 @@ source = { editable = "pkgs/60-runtime/tigrbl-identity-operator" }
 dependencies = [
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy" },
-    { name = "tigrbl-authz-policy-concrete" },
     { name = "tigrbl-identity-cli" },
 ]
 
@@ -2849,7 +3086,6 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-cli", specifier = "==0.4.0.dev2" },
 ]
 
@@ -2860,14 +3096,14 @@ source = { editable = "pkgs/deprecated/tigrbl-identity-policy" }
 dependencies = [
     { name = "tigrbl-auth-release-certification" },
     { name = "tigrbl-authz-policy" },
-    { name = "tigrbl-authz-policy-concrete" },
+    { name = "tigrbl-authz-policy-invariant-registry" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-release-certification", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authz-policy", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-authz-policy-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-policy-invariant-registry", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
@@ -3083,6 +3319,44 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-security-dpop-cnf-binding-validator"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-proof-dpop", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-security-mtls-cnf-binding-validator"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-certificate-mtls", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
 name = "tigrbl-security-proof-dpop"
 version = "0.1.0"
 source = { editable = "pkgs/30-providers/tigrbl-security-proof-dpop" }
@@ -3113,6 +3387,27 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-security-sender-constraint-validator"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-sender-constraint-validator" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
 name = "tigrbl-security-signing-pqc"
 version = "0.1.0"
 source = { editable = "pkgs/30-providers/tigrbl-security-signing-pqc" }
@@ -3130,13 +3425,11 @@ requires-dist = [
 ]
 
 [[package]]
-name = "tigrbl-security-token-verification"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/30-providers/tigrbl-security-token-verification" }
+name = "tigrbl-security-token-introspection-client"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-token-introspection-client" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
-    { name = "tigrbl-security-certificate-mtls" },
-    { name = "tigrbl-security-proof-dpop" },
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
 ]
@@ -3144,8 +3437,23 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-security-certificate-mtls", specifier = "==0.1.0" },
-    { name = "tigrbl-security-proof-dpop", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
+    { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
+]
+
+[[package]]
+name = "tigrbl-security-token-jwks-cache"
+version = "0.1.0"
+source = { editable = "pkgs/30-providers/tigrbl-security-token-jwks-cache" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-trust-domain-bases" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
