@@ -5,7 +5,7 @@ from .schema import *
 PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
     {
         "capability": "login",
-        "kind": "router",
+        "kind": "publisher",
         "surface_set": "public-rest",
         "mount_group": "login",
         "paths": ("/login",),
@@ -129,7 +129,7 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_rfc7009",),
         "summary": "Token revocation endpoint",
         "tags": ("oauth2",),
-        "router_ref": "tigrbl_identity_storage.tables.revoked_token:api",
+        "publisher_ref": "tigrbl_identity_storage_runtime.revocation:include_revocation_endpoint",
         "targets": ("RFC 7009",),
         "contract_visible": True,
         "discovery_visible": True,

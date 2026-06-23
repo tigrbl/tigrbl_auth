@@ -23,6 +23,7 @@ NON_STORAGE_SOURCE_ROOTS = [
     package_src("tigrbl-identity-operator"),
     package_src("tigrbl-identity-server"),
 ]
+STORAGE_RUNTIME_ROOT = package_src("tigrbl-identity-storage-runtime")
 
 RAW_HANDLER_TOKENS = (
     ".handlers.create.core",
@@ -167,15 +168,16 @@ def test_protocol_and_facade_ops_packages_are_not_supported() -> None:
     assert not (package_src("tigrbl-auth") / "tigrbl_auth" / "api" / "rest" / "routers").exists()
 
 
-def test_route_and_hook_declarations_are_storage_owned() -> None:
+def test_route_and_hook_declarations_are_storage_or_storage_runtime_owned() -> None:
     offenders: list[str] = []
     storage_tables_root = package_src("tigrbl-identity-storage") / "tigrbl_identity_storage" / "tables"
+    storage_runtime_root = STORAGE_RUNTIME_ROOT / "tigrbl_identity_storage_runtime"
     for root in sorted(PKGS.glob("**/src")):
         for path in _python_files(root):
             source = path.read_text(encoding="utf-8")
             if "@api.route" not in source and "hook_ctx(" not in source:
                 continue
-            if storage_tables_root not in path.parents:
+            if storage_tables_root not in path.parents and storage_runtime_root not in path.parents:
                 rel = path.relative_to(ROOT).as_posix()
                 if "@api.route" in source:
                     offenders.append(f"{rel} declares route")

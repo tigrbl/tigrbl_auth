@@ -9,7 +9,6 @@ from typing import Any
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
     BaseModel,
-    TigrblRouter,
     Timestamped,
     S,
     acol,
@@ -102,17 +101,4 @@ class RevokedToken(RestOltpTable, GUIDPk, Timestamped):
         return revoked
 
 
-api = router = TigrblRouter()
-
-
-@api.route("/revoke", methods=["POST"], response_model=RevocationOut)
-async def revoke(request: Any) -> Any:
-    from ._route import revoke_request
-
-    return await revoke_request(request=request)
-
-
-RevokedToken.revoke = staticmethod(revoke)  # type: ignore[attr-defined]
-
-
-__all__ = ["RevocationIn", "RevocationOut", "RevokedToken", "api", "router", "revoke"]
+__all__ = ["RevocationIn", "RevocationOut", "RevokedToken"]

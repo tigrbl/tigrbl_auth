@@ -158,6 +158,20 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
     )
 
 
+def test_executable_revocation_publisher_lives_above_storage() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._route") is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.revocation")
+    storage = importlib.import_module("tigrbl_identity_storage.tables.revoked_token")
+    storage_ops = importlib.import_module("tigrbl_identity_storage.tables.revoked_token._op")
+
+    assert runtime.api is runtime.router
+    assert runtime.include_revocation_endpoint.__module__ == "tigrbl_identity_storage_runtime.revocation"
+    assert runtime.revoke_token_async is storage_ops.revoke_token_async
+    assert not hasattr(storage, "api")
+    assert not hasattr(storage, "router")
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):

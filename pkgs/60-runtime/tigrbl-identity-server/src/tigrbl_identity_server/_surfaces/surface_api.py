@@ -34,7 +34,6 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "capabilities": ("register", "register-management"),
         "router": register_api,
     },
-    {"mount_group": "revoke", "capabilities": ("revoke",), "router": revoke_api},
     {"mount_group": "logout", "capabilities": ("logout",), "router": logout_api},
     {
         "mount_group": "device_authorization",
@@ -55,6 +54,11 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
+    {
+        "mount_group": "revoke",
+        "capabilities": ("revoke",),
+        "include": include_revocation_endpoint,
+    },
     {
         "mount_group": "userinfo",
         "capabilities": ("userinfo",),

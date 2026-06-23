@@ -20,7 +20,10 @@ from tigrbl_identity_storage.tables.client_registration import api as register_a
 from tigrbl_identity_storage.tables.device_code import api as device_authorization_api
 from tigrbl_identity_storage.tables.logout_state import api as logout_api
 from tigrbl_identity_storage.tables.pushed_authorization_request import api as par_api
-from tigrbl_identity_storage.tables.revoked_token import api as revoke_api
+from tigrbl_identity_storage_runtime.revocation import (
+    api as revoke_api,
+    include_revocation_endpoint,
+)
 from tigrbl_identity_storage.tables.token_record import api as token_api
 from tigrbl_identity_storage.tables.user import admin_api as admin_auth_api
 from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
