@@ -289,6 +289,7 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     old_modules = (
         "tigrbl_identity_storage.tables.auth_code._authz_surface",
         "tigrbl_identity_storage.tables.auth_code._auth_flows",
+        "tigrbl_identity_storage.tables.auth_code._oidc_route",
     )
     for module_name in old_modules:
         assert importlib.util.find_spec(module_name) is None
