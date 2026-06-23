@@ -5,12 +5,12 @@ from enum import Enum
 
 class PrincipalKind(str, Enum):
     USER = "user"
-    ADMIN = "admin"
-    SERVICE = "service"
-    APP = "app"
-    MACHINE = "machine"
-    WORKLOAD = "workload"
-    DEVICE = "device"
+    SERVICE_IDENTITY = "service_identity"
+    MACHINE_IDENTITY = "machine_identity"
+    WORKLOAD_IDENTITY = "workload_identity"
+    CLIENT_IDENTITY = "client_identity"
+    EXTERNAL_SUBJECT = "external_subject"
+    DEVICE_IDENTITY = "device_identity"
 
 
 class PrincipalStatus(str, Enum):
@@ -22,11 +22,12 @@ class PrincipalStatus(str, Enum):
 
 NONHUMAN_PRINCIPAL_KINDS = frozenset(
     {
-        PrincipalKind.SERVICE,
-        PrincipalKind.APP,
-        PrincipalKind.MACHINE,
-        PrincipalKind.WORKLOAD,
-        PrincipalKind.DEVICE,
+        PrincipalKind.SERVICE_IDENTITY,
+        PrincipalKind.MACHINE_IDENTITY,
+        PrincipalKind.WORKLOAD_IDENTITY,
+        PrincipalKind.CLIENT_IDENTITY,
+        PrincipalKind.EXTERNAL_SUBJECT,
+        PrincipalKind.DEVICE_IDENTITY,
     }
 )
 

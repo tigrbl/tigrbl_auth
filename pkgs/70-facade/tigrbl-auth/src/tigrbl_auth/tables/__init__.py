@@ -3,7 +3,6 @@
 from tigrbl_auth._split_imports import alias_module as _alias_module
 
 _SUBMODULES = (
-    "api_key",
     "access_review_campaign",
     "access_review_decision",
     "access_review_item",
@@ -16,8 +15,15 @@ _SUBMODULES = (
     "consent",
     "credential",
     "credential_audit_event",
+    "credential_api_key",
+    "credential_client_secret",
     "credential_dpop_key",
+    "credential_mfa_factor",
     "credential_mtls_certificate",
+    "credential_password",
+    "credential_recovery_code",
+    "credential_service_key",
+    "credential_webauthn_passkey",
     "delegation_grant",
     "delegated_admin_scope",
     "device_code",
@@ -29,20 +35,22 @@ _SUBMODULES = (
     "key_rotation_policy",
     "key_version",
     "logout_state",
+    "machine_identity",
     "policy_condition",
+    "principal",
     "pushed_authorization_request",
     "realm",
     "revoked_token",
     "residency_zone",
     "role",
-    "service",
-    "service_key",
+    "service_identity",
     "subject_alias",
     "tenant",
     "tenant_membership",
     "tenant_residency",
     "token_record",
     "user",
+    "workload_identity",
 )
 
 _LEGACY_NAME = __name__

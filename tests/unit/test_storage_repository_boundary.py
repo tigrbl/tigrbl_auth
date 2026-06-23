@@ -52,7 +52,13 @@ def test_storage_migration_contract_uses_tigrbl_owned_tables() -> None:
     versions_dir = STORAGE_SRC / "migrations" / "versions"
     contract = build_migration_contract(
         versions_dir=versions_dir,
-        required_collections=("tenants", "users", "clients", "services", "service_keys"),
+        required_collections=(
+            "tenants",
+            "users",
+            "clients",
+            "service_identities",
+            "credential_service_keys",
+        ),
     )
 
     assert contract.latest_revision == "0014_optional_contract_state_tables"

@@ -153,7 +153,7 @@ def test_developer_and_service_admin_surfaces_are_product_filtered() -> None:
     assert service.plugin_mode == "mixed"
     assert service.surface_enabled("admin-rest")
     assert "/login" not in service.active_routes
-    assert "/service" in admin_resource_path_prefixes(service)
+    assert "/serviceidentity" in admin_resource_path_prefixes(service)
     assert "/tenant" not in admin_resource_path_prefixes(service)
 
 

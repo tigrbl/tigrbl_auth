@@ -33,9 +33,9 @@ SERVICE_ADMIN_API_CONTRACT = ServiceAdminApiContract(
         "realm-jwks",
     ),
     admin_resources=(
-        "ApiKey",
-        "Service",
-        "ServiceKey",
+        "CredentialApiKey",
+        "ServiceIdentity",
+        "CredentialServiceKey",
         "TokenRecord",
         "AuditEvent",
     ),

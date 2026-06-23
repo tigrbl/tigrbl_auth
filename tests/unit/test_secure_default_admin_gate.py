@@ -34,7 +34,10 @@ async def test_default_runtime_exposes_public_only_surface(tmp_path):
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         discovery = await client.get("/.well-known/openid-configuration")
         tenant = await client.get("/tenant")
-        rpc = await client.post("/rpc", json={"jsonrpc": "2.0", "method": "ApiKey.create", "params": {}, "id": 1})
+        rpc = await client.post(
+            "/rpc",
+            json={"jsonrpc": "2.0", "method": "CredentialApiKey.create", "params": {}, "id": 1},
+        )
         diagnostics = await client.get("/system/healthz")
         openapi = (await client.get("/openapi.json")).json()
 
@@ -55,7 +58,7 @@ async def test_admin_enabled_runtime_requires_local_admin_key(tmp_path):
         invalid = await client.get("/client", headers={"X-API-Key": "wrong"})
         rpc = await client.post(
             "/rpc",
-            json={"jsonrpc": "2.0", "method": "ApiKey.create", "params": {}, "id": 1},
+            json={"jsonrpc": "2.0", "method": "CredentialApiKey.create", "params": {}, "id": 1},
             headers={"Authorization": "Bearer test-admin-key"},
         )
 

@@ -55,20 +55,20 @@ def test_principals_t0_constructs_human_and_nonhuman_principals() -> None:
 
     user = principals.create_user_principal("user@example.test", tenant_id="tenant-a")
     service = principals.create_service_principal("svc:billing", tenant_id="tenant-a")
-    app = principals.create_app_principal("app:portal", tenant_id="tenant-a")
+    client = principals.create_client_principal("client:portal", tenant_id="tenant-a")
     machine = principals.create_machine_principal("machine:runner-1", tenant_id="tenant-a")
     workload = principals.create_workload_principal("workload:jobs/monthly", tenant_id="tenant-a")
     device = principals.create_device_principal("device:tablet-1", tenant_id="tenant-a")
 
     assert user.is_human is True
-    assert {service.kind, app.kind, machine.kind, workload.kind, device.kind} == {
-        principals.PrincipalKind.SERVICE,
-        principals.PrincipalKind.APP,
-        principals.PrincipalKind.MACHINE,
-        principals.PrincipalKind.WORKLOAD,
-        principals.PrincipalKind.DEVICE,
+    assert {service.kind, client.kind, machine.kind, workload.kind, device.kind} == {
+        principals.PrincipalKind.SERVICE_IDENTITY,
+        principals.PrincipalKind.CLIENT_IDENTITY,
+        principals.PrincipalKind.MACHINE_IDENTITY,
+        principals.PrincipalKind.WORKLOAD_IDENTITY,
+        principals.PrincipalKind.DEVICE_IDENTITY,
     }
-    assert all(item.is_nonhuman for item in (service, app, machine, workload, device))
+    assert all(item.is_nonhuman for item in (service, client, machine, workload, device))
 
 
 def test_principals_t1_admin_owner_superuser_roles_are_explicit() -> None:
@@ -76,7 +76,7 @@ def test_principals_t1_admin_owner_superuser_roles_are_explicit() -> None:
 
     admin = principals.create_admin_principal("admin@example.test", owner=True, superuser=True)
 
-    assert admin.kind is principals.PrincipalKind.ADMIN
+    assert admin.kind is principals.PrincipalKind.USER
     assert admin.is_admin is True
     assert admin.is_owner is True
     assert admin.is_superuser is True

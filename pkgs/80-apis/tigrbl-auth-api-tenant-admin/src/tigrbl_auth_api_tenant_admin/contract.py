@@ -32,9 +32,9 @@ TENANT_ADMIN_API_CONTRACT = TenantAdminApiContract(
     admin_rest_groups=("admin_auth", "admin_identities"),
     forbidden_route_prefixes=(
         "/tenant",
-        "/service",
-        "/servicekey",
-        "/apikey",
+        "/serviceidentity",
+        "/credentialservicekey",
+        "/credentialapikey",
         "/tokenrecord",
         "/revokedtoken",
         "/authsession",

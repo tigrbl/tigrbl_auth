@@ -113,7 +113,7 @@ class AdminControlPlane:
             self._require(AdminResourceKind.PRINCIPAL, owner_principal_id, tenant_id=tenant_id)
         service = Principal(
             id=_new_id("service"),
-            kind=PrincipalKind.SERVICE,
+            kind=PrincipalKind.SERVICE_IDENTITY,
             subject=f"service:{name}",
             tenant_id=tenant_id,
             display_name=name,

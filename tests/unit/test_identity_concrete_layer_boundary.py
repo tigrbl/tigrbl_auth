@@ -67,7 +67,7 @@ def test_concrete_variants_subclass_contract_dataclasses() -> None:
 
     for name in (
         "AdminIdentity",
-        "AppIdentity",
+        "ClientIdentity",
         "DeviceIdentity",
         "MachineIdentity",
         "ServiceIdentity",

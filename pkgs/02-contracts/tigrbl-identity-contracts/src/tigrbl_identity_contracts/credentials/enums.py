@@ -15,6 +15,7 @@ class CredentialKind(str, Enum):
     MTLS_CERTIFICATE = "mtls_certificate"
     DPOP_KEY = "dpop_key"
     MFA_FACTOR = "mfa_factor"
+    RECOVERY_CODE = "recovery_code"
 
 
 class CredentialStatus(str, Enum):

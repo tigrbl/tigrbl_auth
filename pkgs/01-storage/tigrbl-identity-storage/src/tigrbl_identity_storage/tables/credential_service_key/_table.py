@@ -1,4 +1,4 @@
-"""Service key model for the authentication service."""
+"""Durable service-identity key credential records."""
 
 from __future__ import annotations
 
@@ -26,8 +26,8 @@ from tigrbl_identity_storage.framework import (
 from .._ops import first_record
 
 
-class ServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
-    __tablename__ = "service_keys"
+class CredentialServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):
+    __tablename__ = "credential_service_keys"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
 
     label: Mapped[str] = acol(
@@ -35,16 +35,21 @@ class ServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDi
         field=F(constraints={"max_length": 120}, required_in=("create",)),
         io=IO(in_verbs=("create",), out_verbs=("read", "list"), filter_ops=("eq",)),
     )
-    service_id: Mapped[UUID] = acol(
-        storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.services.id"), index=True, nullable=False),
+    service_identity_id: Mapped[UUID] = acol(
+        storage=S(
+            PgUUID(as_uuid=True),
+            fk=ForeignKeySpec(target="authn.service_identities.id"),
+            index=True,
+            nullable=False,
+        ),
         field=F(py_type=UUID, required_in=("create",)),
         io=IO(in_verbs=("create",), out_verbs=("read", "list"), filter_ops=("eq",)),
     )
 
-    _service = relationship("Service", back_populates="_service_keys", lazy="joined")
+    _service_identity = relationship("ServiceIdentity", back_populates="_credential_service_keys", lazy="joined")
 
     @classmethod
-    async def lookup_active(cls, db: Any, *, digest: str) -> "ServiceKey | None":
+    async def lookup_active(cls, db: Any, *, digest: str) -> "CredentialServiceKey | None":
         row = await first_record(cls, db, {"digest": digest})
         if row is None:
             return None
@@ -58,4 +63,4 @@ class ServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDi
         return row
 
 
-__all__ = ["ServiceKey"]
+__all__ = ["CredentialServiceKey"]

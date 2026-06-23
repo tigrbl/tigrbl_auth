@@ -72,7 +72,7 @@ class Identity:
 
     @property
     def is_human(self) -> bool:
-        return self.kind in {PrincipalKind.USER, PrincipalKind.ADMIN}
+        return self.kind is PrincipalKind.USER
 
     @property
     def is_nonhuman(self) -> bool:
@@ -80,7 +80,7 @@ class Identity:
 
     @property
     def is_admin(self) -> bool:
-        return AuthorityRole.ADMIN.value in self.roles or self.kind is PrincipalKind.ADMIN
+        return AuthorityRole.ADMIN.value in self.roles
 
     @property
     def is_owner(self) -> bool:

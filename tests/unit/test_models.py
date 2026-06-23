@@ -8,7 +8,14 @@ import uuid
 
 import pytest
 
-from tigrbl_identity_storage.tables import Tenant, Client, User, Service, ApiKey, ServiceKey
+from tigrbl_identity_storage.tables import (
+    Client,
+    CredentialApiKey,
+    CredentialServiceKey,
+    ServiceIdentity,
+    Tenant,
+    User,
+)
 from tigrbl_identity_jose.key_management import hash_pw
 
 
@@ -105,103 +112,103 @@ class TestUserModel:
 
 
 @pytest.mark.unit
-class TestApiKeyModel:
-    """Test ApiKey model functionality."""
+class TestCredentialApiKeyModel:
+    """Test CredentialApiKey model functionality."""
 
     def test_api_key_raw_key_getter_raises_error(self):
         """Test that accessing raw_key property raises AttributeError."""
-        api_key = ApiKey(user_id=uuid.uuid4(), label="Test API Key")
+        api_key = CredentialApiKey(principal_id=str(uuid.uuid4()), principal_kind="user", label="Test API Key")
 
         with pytest.raises(AttributeError, match="raw_key is write-only"):
             _ = api_key.raw_key
 
     def test_api_key_digest_of_static_method(self):
-        """Test ApiKey.digest_of static method."""
+        """Test CredentialApiKey.digest_of static method."""
         test_key = "test-api-key-123"
-        digest = ApiKey.digest_of(test_key)
+        digest = CredentialApiKey.digest_of(test_key)
 
         assert isinstance(digest, str)
         assert len(digest) == 64  # blake2b with digest_size=32 produces 64 hex chars
 
         # Should be deterministic
-        assert ApiKey.digest_of(test_key) == digest
+        assert CredentialApiKey.digest_of(test_key) == digest
 
         # Different keys should produce different digests
-        assert ApiKey.digest_of("different-key") != digest
+        assert CredentialApiKey.digest_of("different-key") != digest
 
     def test_api_key_raw_key_setter(self):
         """Test API key raw_key setter updates digest."""
-        api_key = ApiKey(user_id=uuid.uuid4(), label="Test API Key")
+        api_key = CredentialApiKey(principal_id=str(uuid.uuid4()), principal_kind="user", label="Test API Key")
         raw_key = "test-api-key-123"
 
         api_key.raw_key = raw_key
 
-        expected_digest = ApiKey.digest_of(raw_key)
+        expected_digest = CredentialApiKey.digest_of(raw_key)
         assert api_key.digest == expected_digest
 
 
 @pytest.mark.unit
-class TestServiceKeyModel:
-    """Test ServiceKey model functionality."""
+class TestCredentialServiceKeyModel:
+    """Test CredentialServiceKey model functionality."""
 
     def test_service_key_raw_key_getter_raises_error(self):
         """Test that accessing raw_key property raises AttributeError."""
-        service_key = ServiceKey(service_id=uuid.uuid4(), label="Test Service Key")
+        service_key = CredentialServiceKey(service_identity_id=uuid.uuid4(), label="Test Service Key")
 
         with pytest.raises(AttributeError, match="raw_key is write-only"):
             _ = service_key.raw_key
 
     def test_service_key_digest_of_static_method(self):
-        """Test ServiceKey.digest_of static method."""
+        """Test CredentialServiceKey.digest_of static method."""
         test_key = "test-service-key-123"
-        digest = ServiceKey.digest_of(test_key)
+        digest = CredentialServiceKey.digest_of(test_key)
 
         assert isinstance(digest, str)
         assert len(digest) == 64
 
         # Should be deterministic
-        assert ServiceKey.digest_of(test_key) == digest
+        assert CredentialServiceKey.digest_of(test_key) == digest
 
         # Different keys should produce different digests
-        assert ServiceKey.digest_of("different-key") != digest
+        assert CredentialServiceKey.digest_of("different-key") != digest
 
     def test_service_key_raw_key_setter(self):
         """Test service key raw_key setter updates digest."""
-        service_key = ServiceKey(service_id=uuid.uuid4(), label="Test Service Key")
+        service_key = CredentialServiceKey(service_identity_id=uuid.uuid4(), label="Test Service Key")
         raw_key = "test-service-key-123"
 
         service_key.raw_key = raw_key
 
-        expected_digest = ServiceKey.digest_of(raw_key)
+        expected_digest = CredentialServiceKey.digest_of(raw_key)
         assert service_key.digest == expected_digest
 
-    def test_service_key_schema_uses_service_id(self):
-        """Ensure ServiceKey API schema exposes correct fields."""
+    def test_service_key_schema_uses_service_identity_id(self):
+        """Ensure CredentialServiceKey API schema exposes correct fields."""
         from tigrbl_identity_server.surfaces import AdminRouter
 
-        create_schema = AdminRouter.schemas.ServiceKey.create.in_.model_json_schema()
-        create_fields = AdminRouter.schemas.ServiceKey.create.in_.model_fields
-        read_schema = AdminRouter.schemas.ServiceKey.read.out.model_json_schema()
+        create_schema = AdminRouter.schemas.CredentialServiceKey.create.in_.model_json_schema()
+        create_fields = AdminRouter.schemas.CredentialServiceKey.create.in_.model_fields
+        read_schema = AdminRouter.schemas.CredentialServiceKey.read.out.model_json_schema()
 
         # Only expected fields are exposed on create
         assert set(create_fields.keys()) == {
             "label",
-            "service_id",
+            "service_identity_id",
             "valid_from",
             "valid_to",
         }
-        # Only label and service_id are required
-        assert set(create_schema.get("required", [])) == {"label", "service_id"}
+        # Only label and service_identity_id are required
+        assert set(create_schema.get("required", [])) == {"label", "service_identity_id"}
         # Digest should not be part of the create payload
         assert "digest" not in create_fields
         # Validity window fields are included in responses
         assert "valid_from" in read_schema.get("properties", {})
         assert "valid_to" in read_schema.get("properties", {})
-        # Schemas still reference service_id and exclude user_id
-        assert "service_id" in create_fields
+        # Schemas still reference service_identity_id and exclude user_id
+        assert "service_identity_id" in create_fields
         assert "user_id" not in create_fields
-        assert "service_id" in AdminRouter.schemas.ServiceKey.read.out.model_fields
-        assert "user_id" not in AdminRouter.schemas.ServiceKey.read.out.model_fields
+        assert "service_identity_id" in AdminRouter.schemas.CredentialServiceKey.read.out.model_fields
+        assert "user_id" not in AdminRouter.schemas.CredentialServiceKey.read.out.model_fields
 
 
 @pytest.mark.unit
@@ -209,11 +216,11 @@ class TestModelIntegration:
     """Test model interactions and edge cases."""
 
     def test_api_key_and_service_key_digest_compatibility(self):
-        """Test that ApiKey and ServiceKey use same digest algorithm."""
+        """Test that credential key tables use the same digest algorithm."""
         test_key = "test-key-123"
 
-        api_key_digest = ApiKey.digest_of(test_key)
-        service_key_digest = ServiceKey.digest_of(test_key)
+        api_key_digest = CredentialApiKey.digest_of(test_key)
+        service_key_digest = CredentialServiceKey.digest_of(test_key)
 
         # Should produce same digest for same input
         assert api_key_digest == service_key_digest
@@ -249,7 +256,7 @@ class TestModelIntegration:
 
     def test_service_basic_creation(self):
         """Test basic service creation without database."""
-        service = Service(tenant_id=uuid.uuid4(), name="test-service", is_active=True)
+        service = ServiceIdentity(tenant_id=uuid.uuid4(), name="test-service", is_active=True)
 
         assert service.name == "test-service"
         assert service.is_active is True

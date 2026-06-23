@@ -120,7 +120,7 @@ def test_storage_schema_module_exports_openapi_component_model_names() -> None:
                 assert schema_alias.model_json_schema() == schema.model_json_schema()
 
     assert storage_schemas.RoleCreateRequest is storage_tables.Role.schemas.create.in_
-    assert storage_schemas.ServiceKeyCreateRequest is storage_tables.ServiceKey.schemas.create.in_
+    assert storage_schemas.CredentialServiceKeyCreateRequest is storage_tables.CredentialServiceKey.schemas.create.in_
     assert storage_schemas.OperatorRecordCreateRequest is storage_tables.OperatorRecord.schemas.create.in_
 
 
@@ -137,7 +137,7 @@ def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
     missing = sorted(name for name in component_names if not hasattr(storage_schemas, name))
 
     assert missing == []
-    assert storage_schemas.ServiceKeyCreateRequest.__name__ in component_names
+    assert storage_schemas.CredentialServiceKeyCreateRequest.__name__ in component_names
     assert storage_schemas.TokenPair.__name__ in component_names
 
 

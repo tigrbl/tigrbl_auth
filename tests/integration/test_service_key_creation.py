@@ -5,7 +5,7 @@ import httpx
 import pytest
 import uvicorn
 
-from tigrbl_auth.tables.service_key import ServiceKey
+from tigrbl_auth.tables.credential_service_key import CredentialServiceKey
 
 TENANT_ID = UUID("ffffffff-0000-0000-0000-000000000000")
 
@@ -43,24 +43,24 @@ async def running_app(override_get_db):
 async def test_service_key_workflow(running_app):
     base = running_app
     async with httpx.AsyncClient() as client:
-        # create service
+        # create service identity
         svc_resp = await client.post(
-            f"{base}/service",
+            f"{base}/serviceidentity",
             json={"tenant_id": str(TENANT_ID), "name": "svc"},
         )
         assert svc_resp.status_code == 201
-        service_id = svc_resp.json()["id"]
+        service_identity_id = svc_resp.json()["id"]
 
         # create service key without validity window
-        create_payload = {"label": "test", "service_id": service_id}
-        key_resp = await client.post(f"{base}/servicekey", json=create_payload)
+        create_payload = {"label": "test", "service_identity_id": service_identity_id}
+        key_resp = await client.post(f"{base}/credentialservicekey", json=create_payload)
         assert key_resp.status_code == 201
         body = key_resp.json()
 
         expected_keys = {
             "id",
             "label",
-            "service_id",
+            "service_identity_id",
             "digest",
             "valid_from",
             "valid_to",
@@ -70,11 +70,11 @@ async def test_service_key_workflow(running_app):
         }
         assert set(body) == expected_keys
         assert body["valid_from"] and body["valid_to"]
-        assert body["digest"] == ServiceKey.digest_of(body["api_key"])
+        assert body["digest"] == CredentialServiceKey.digest_of(body["api_key"])
 
         # verify persistence and exclusion of api_key
         key_id = body["id"]
-        read_resp = await client.get(f"{base}/servicekey/{key_id}")
+        read_resp = await client.get(f"{base}/credentialservicekey/{key_id}")
         assert read_resp.status_code == 200
         read_body = read_resp.json()
         assert "api_key" not in read_body
@@ -87,30 +87,30 @@ async def test_service_key_workflow(running_app):
         custom_to = "2024-12-31T00:00:00+00:00"
         payload2 = {
             "label": "custom",
-            "service_id": service_id,
+            "service_identity_id": service_identity_id,
             "valid_from": custom_from,
             "valid_to": custom_to,
         }
-        key_resp2 = await client.post(f"{base}/servicekey", json=payload2)
+        key_resp2 = await client.post(f"{base}/credentialservicekey", json=payload2)
         assert key_resp2.status_code == 201
         body2 = key_resp2.json()
         assert body2["valid_from"] == custom_from
         assert body2["valid_to"] == custom_to
-        read_body2 = (await client.get(f"{base}/servicekey/{body2['id']}")).json()
+        read_body2 = (await client.get(f"{base}/credentialservicekey/{body2['id']}")).json()
         assert read_body2["valid_from"] == custom_from
         assert read_body2["valid_to"] == custom_to
 
         # digest or api_key are not accepted in the request body
-        bad_payload = {"label": "bad", "service_id": service_id, "digest": "x"}
-        bad_resp = await client.post(f"{base}/servicekey", json=bad_payload)
+        bad_payload = {"label": "bad", "service_identity_id": service_identity_id, "digest": "x"}
+        bad_resp = await client.post(f"{base}/credentialservicekey", json=bad_payload)
         assert bad_resp.status_code == 422
-        bad_payload2 = {"label": "bad", "service_id": service_id, "api_key": "raw"}
-        bad_resp2 = await client.post(f"{base}/servicekey", json=bad_payload2)
+        bad_payload2 = {"label": "bad", "service_identity_id": service_identity_id, "api_key": "raw"}
+        bad_resp2 = await client.post(f"{base}/credentialservicekey", json=bad_payload2)
         assert bad_resp2.status_code == 422
 
         # check openapi response example includes validity window
         openapi = (await client.get(f"{base}/openapi.json")).json()
-        schema = openapi["components"]["schemas"]["ServiceKeyCreateResponse"]
+        schema = openapi["components"]["schemas"]["CredentialServiceKeyCreateResponse"]
         assert "valid_from" in schema["properties"]
         assert "valid_to" in schema["properties"]
         example = schema.get("example") or (schema.get("examples") or [{}])[0]

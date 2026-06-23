@@ -20,6 +20,7 @@ UUID_FILTER_KEYS = {
     "user_id",
     "client_id",
     "session_id",
+    "service_identity_id",
     "logout_id",
     "consent_id",
     "grant_id",

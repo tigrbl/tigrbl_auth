@@ -6,7 +6,7 @@ window without relying on star-import shims.
 """
 
 from tigrbl_authn_credentials.backends import ApiKeyBackend, AuthError, PasswordBackend
-from tigrbl_identity_storage.tables import ApiKey as _ApiKey
+from tigrbl_identity_storage.tables import CredentialApiKey as _CredentialApiKey
 
 
-__all__ = ["ApiKeyBackend", "AuthError", "PasswordBackend", "_ApiKey"]
+__all__ = ["ApiKeyBackend", "AuthError", "PasswordBackend", "_CredentialApiKey"]

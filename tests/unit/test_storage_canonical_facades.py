@@ -22,7 +22,6 @@ TABLE_MODULE_EXPORTS = {
     "access_review_campaign": ("AccessReviewCampaign",),
     "access_review_decision": ("AccessReviewDecision",),
     "access_review_item": ("AccessReviewItem",),
-    "api_key": ("ApiKey",),
     "attribute_policy": ("AttributePolicy",),
     "audit_event": ("AuditEvent",),
     "auth_code": ("AuthCode",),
@@ -32,8 +31,15 @@ TABLE_MODULE_EXPORTS = {
     "consent": ("Consent",),
     "credential": ("Credential",),
     "credential_audit_event": ("CredentialAuditEvent",),
+    "credential_api_key": ("CredentialApiKey",),
+    "credential_client_secret": ("CredentialClientSecret",),
     "credential_dpop_key": ("CredentialDpopKey",),
+    "credential_mfa_factor": ("CredentialMfaFactor",),
     "credential_mtls_certificate": ("CredentialMtlsCertificate",),
+    "credential_password": ("CredentialPassword",),
+    "credential_recovery_code": ("CredentialRecoveryCode",),
+    "credential_service_key": ("CredentialServiceKey",),
+    "credential_webauthn_passkey": ("CredentialWebAuthnPasskey",),
     "device_code": ("DeviceCode",),
     "delegated_admin_scope": ("DelegatedAdminScope",),
     "delegation_grant": (
@@ -51,6 +57,8 @@ TABLE_MODULE_EXPORTS = {
     "key_rotation_policy": ("KeyRotationPolicy",),
     "key_version": ("KeyVersion",),
     "logout_state": ("LogoutState",),
+    "machine_identity": ("MachineIdentity",),
+    "principal": ("Principal",),
     "pushed_authorization_request": (
         "PushedAuthorizationRequest",
         "DEFAULT_PAR_EXPIRY",
@@ -59,14 +67,14 @@ TABLE_MODULE_EXPORTS = {
     "revoked_token": ("RevokedToken",),
     "residency_zone": ("ResidencyZone",),
     "role": ("Role",),
-    "service": ("Service",),
-    "service_key": ("ServiceKey",),
+    "service_identity": ("ServiceIdentity",),
     "subject_alias": ("SubjectAlias",),
     "tenant": ("Tenant",),
     "tenant_membership": ("TenantMembership",),
     "tenant_residency": ("TenantResidency",),
     "token_record": ("TokenRecord",),
     "user": ("User",),
+    "workload_identity": ("WorkloadIdentity",),
 }
 
 
@@ -84,6 +92,18 @@ def test_tigrbl_auth_tables_reexport_canonical_storage_symbols() -> None:
         )
         for exported in exports:
             assert getattr(auth_module, exported) is getattr(storage_module, exported)
+
+
+def test_renamed_identity_credential_tables_do_not_keep_legacy_modules() -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+
+    for legacy_name in ("ApiKey", "Service", "ServiceKey"):
+        assert legacy_name not in storage_tables.__all__
+        assert not hasattr(storage_tables, legacy_name)
+
+    for module_name in ("api_key", "service", "service_key"):
+        assert importlib.util.find_spec(f"tigrbl_identity_storage.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tigrbl_auth.tables.{module_name}") is None
 
 
 def test_tigrbl_auth_tables_and_db_facades_reexport_storage_symbols() -> None:

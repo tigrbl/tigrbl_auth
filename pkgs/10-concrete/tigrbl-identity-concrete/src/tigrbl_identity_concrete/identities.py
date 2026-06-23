@@ -33,7 +33,7 @@ class UserIdentity(Identity):
 @dataclass(frozen=True, slots=True, kw_only=True)
 class AdminIdentity(Identity):
     id: str = field(default_factory=_new_identity_id)
-    kind: PrincipalKind = field(default=PrincipalKind.ADMIN, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.USER, init=False)
 
     def __post_init__(self) -> None:
         roles = {AuthorityRole.ADMIN.value, *self.roles}
@@ -45,7 +45,7 @@ class AdminIdentity(Identity):
 class ServiceIdentity(Identity):
     id: str = ""
     subject: str = ""
-    kind: PrincipalKind = field(default=PrincipalKind.SERVICE, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.SERVICE_IDENTITY, init=False)
     service_id: str = ""
     name: str = ""
     scopes: tuple[str, ...] = ()
@@ -65,16 +65,16 @@ class ServiceIdentity(Identity):
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class AppIdentity(Identity):
+class ClientIdentity(Identity):
     id: str = field(default_factory=_new_identity_id)
-    kind: PrincipalKind = field(default=PrincipalKind.APP, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.CLIENT_IDENTITY, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class MachineIdentity(Identity):
     id: str = ""
     subject: str = ""
-    kind: PrincipalKind = field(default=PrincipalKind.MACHINE, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.MACHINE_IDENTITY, init=False)
     subject_id: str = ""
     owner_id: str = ""
     credential_id: str = ""
@@ -95,7 +95,7 @@ class MachineIdentity(Identity):
 class WorkloadIdentity(Identity):
     id: str = ""
     subject: str = ""
-    kind: PrincipalKind = field(default=PrincipalKind.WORKLOAD, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.WORKLOAD_IDENTITY, init=False)
     workload_id: str = ""
     trust_domain: str = ""
     cloud: str = ""
@@ -119,7 +119,7 @@ class WorkloadIdentity(Identity):
 class DeviceIdentity(Identity):
     id: str = ""
     subject: str = ""
-    kind: PrincipalKind = field(default=PrincipalKind.DEVICE, init=False)
+    kind: PrincipalKind = field(default=PrincipalKind.DEVICE_IDENTITY, init=False)
     device_id: str = ""
     subject_id: str = ""
     credential_posture: str = ""
@@ -141,7 +141,7 @@ class DeviceIdentity(Identity):
 
 __all__ = [
     "AdminIdentity",
-    "AppIdentity",
+    "ClientIdentity",
     "DeviceIdentity",
     "MachineIdentity",
     "ServiceIdentity",

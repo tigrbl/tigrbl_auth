@@ -28,13 +28,21 @@ from .client_registration import (
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
 )
-from .service import Service
-from .api_key import ApiKey
-from .service_key import ServiceKey
+from .principal import Principal
+from .service_identity import ServiceIdentity
+from .machine_identity import MachineIdentity
+from .workload_identity import WorkloadIdentity
+from .credential_api_key import CredentialApiKey
+from .credential_service_key import CredentialServiceKey
 from .credential import Credential
 from .credential_audit_event import CredentialAuditEvent
+from .credential_client_secret import CredentialClientSecret
 from .credential_dpop_key import CredentialDpopKey
+from .credential_mfa_factor import CredentialMfaFactor
 from .credential_mtls_certificate import CredentialMtlsCertificate
+from .credential_password import CredentialPassword
+from .credential_recovery_code import CredentialRecoveryCode
+from .credential_webauthn_passkey import CredentialWebAuthnPasskey
 from .key import Key
 from .key_version import KeyVersion
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
@@ -112,13 +120,21 @@ _TABLE_MODELS = (
     User,
     Client,
     ClientRegistration,
-    Service,
-    ApiKey,
-    ServiceKey,
+    Principal,
+    ServiceIdentity,
+    MachineIdentity,
+    WorkloadIdentity,
+    CredentialApiKey,
+    CredentialServiceKey,
     Credential,
     CredentialAuditEvent,
+    CredentialClientSecret,
     CredentialDpopKey,
+    CredentialMfaFactor,
     CredentialMtlsCertificate,
+    CredentialPassword,
+    CredentialRecoveryCode,
+    CredentialWebAuthnPasskey,
     Key,
     KeyVersion,
     AuthSession,
@@ -251,13 +267,21 @@ __all__ = [
     "Client",
     "_CLIENT_ID_RE",
     "ClientRegistration",
-    "Service",
-    "ApiKey",
-    "ServiceKey",
+    "Principal",
+    "ServiceIdentity",
+    "MachineIdentity",
+    "WorkloadIdentity",
+    "CredentialApiKey",
+    "CredentialServiceKey",
     "Credential",
     "CredentialAuditEvent",
+    "CredentialClientSecret",
     "CredentialDpopKey",
+    "CredentialMfaFactor",
     "CredentialMtlsCertificate",
+    "CredentialPassword",
+    "CredentialRecoveryCode",
+    "CredentialWebAuthnPasskey",
     "Key",
     "KeyVersion",
     "AuthSession",

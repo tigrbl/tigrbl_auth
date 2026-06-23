@@ -68,9 +68,9 @@ PRODUCT_SURFACE_REGISTRY: Final[dict[str, dict[str, Any]]] = {
             "realm-jwks",
         ),
         "admin_resources": (
-            "ApiKey",
-            "Service",
-            "ServiceKey",
+            "CredentialApiKey",
+            "ServiceIdentity",
+            "CredentialServiceKey",
             "TokenRecord",
             "AuditEvent",
         ),

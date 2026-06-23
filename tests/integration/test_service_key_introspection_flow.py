@@ -65,12 +65,12 @@ async def test_service_key_introspection_flow(running_app):
         assert cli_resp.status_code == 201
 
         svc_payload = {"tenant_id": str(TENANT_ID), "name": "svc1"}
-        svc_resp = await client.post(f"{base}/service", json=svc_payload)
+        svc_resp = await client.post(f"{base}/serviceidentity", json=svc_payload)
         assert svc_resp.status_code == 201
-        service_id = svc_resp.json()["id"]
+        service_identity_id = svc_resp.json()["id"]
 
-        key_payload = {"label": "test", "service_id": service_id}
-        key_resp = await client.post(f"{base}/servicekey", json=key_payload)
+        key_payload = {"label": "test", "service_identity_id": service_identity_id}
+        key_resp = await client.post(f"{base}/credentialservicekey", json=key_payload)
         assert key_resp.status_code == 201
         api_key = key_resp.json()["api_key"]
 

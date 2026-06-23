@@ -12,7 +12,12 @@ import pytest
 
 from tigrbl_authn_credentials.backends import AuthError, PasswordBackend, ApiKeyBackend
 from tigrbl_identity_jose.key_management import hash_pw
-from tigrbl_identity_storage.tables import User, ApiKey, ServiceKey, Service
+from tigrbl_identity_storage.tables import (
+    CredentialApiKey,
+    CredentialServiceKey,
+    ServiceIdentity,
+    User,
+)
 
 
 @pytest.mark.unit
@@ -207,8 +212,8 @@ class TestApiKeyBackend:
         async def _client_list_core(ctx):
             return list(self.client_rows)
 
-        monkeypatch.setattr(ApiKey.handlers.list, "core", _api_key_list_core)
-        monkeypatch.setattr(ServiceKey.handlers.list, "core", _service_key_list_core)
+        monkeypatch.setattr(CredentialApiKey.handlers.list, "core", _api_key_list_core)
+        monkeypatch.setattr(CredentialServiceKey.handlers.list, "core", _service_key_list_core)
         from tigrbl_identity_storage.tables import Client
 
         monkeypatch.setattr(Client.handlers.list, "core", _client_list_core)
@@ -229,7 +234,7 @@ class TestApiKeyBackend:
         service_data = {"name": f"service-{uuid4().hex[:8]}", "is_active": True}
         service_data.update(overrides)
 
-        service = MagicMock(spec=Service)
+        service = MagicMock(spec=ServiceIdentity)
         service.id = uuid4()
         service.name = service_data["name"]
         service.is_active = service_data["is_active"]
@@ -244,11 +249,11 @@ class TestApiKeyBackend:
             api_key_data = mock_data_factory.create_api_key_data(**overrides)
             raw_key = api_key_data["raw_key"]
 
-        api_key = MagicMock(spec=ApiKey)
+        api_key = MagicMock(spec=CredentialApiKey)
         api_key.id = uuid4()
         api_key.user = user or self.create_mock_user(mock_data_factory)
         api_key.label = f"Test API Key {uuid4().hex[:8]}"
-        api_key.digest = ApiKey.digest_of(raw_key)
+        api_key.digest = CredentialApiKey.digest_of(raw_key)
         api_key.valid_to = overrides.get("valid_to")
         api_key.touch = MagicMock()
         api_key.valid_from = None
@@ -261,11 +266,11 @@ class TestApiKeyBackend:
         if raw_key is None:
             raw_key = f"service-key-{uuid4().hex[:8]}"
 
-        service_key = MagicMock(spec=ServiceKey)
+        service_key = MagicMock(spec=CredentialServiceKey)
         service_key.id = uuid4()
-        service_key.service = service or self.create_mock_service(mock_data_factory)
+        service_key.service_identity = service or self.create_mock_service(mock_data_factory)
         service_key.label = f"Test Service Key {uuid4().hex[:8]}"
-        service_key.digest = ServiceKey.digest_of(raw_key)
+        service_key.digest = CredentialServiceKey.digest_of(raw_key)
         service_key.valid_to = overrides.get("valid_to")
         service_key.touch = MagicMock()
         service_key.valid_from = None
@@ -313,7 +318,7 @@ class TestApiKeyBackend:
         principal, key_type = await self.backend.authenticate(self.mock_db, raw_key)
 
         assert principal == mock_service
-        assert key_type == "service"
+        assert key_type == "service_identity"
         mock_service_key.touch.assert_called_once()
 
     @pytest.mark.asyncio
@@ -379,7 +384,7 @@ class TestApiKeyBackend:
         with pytest.raises(AuthError) as exc_info:
             await self.backend.authenticate(self.mock_db, raw_key)
 
-        assert exc_info.value.reason == "service is inactive"
+        assert exc_info.value.reason == "service identity is inactive"
         # touch should not be called for inactive services
         mock_service_key.touch.assert_not_called()
 
@@ -487,7 +492,7 @@ class TestApiKeyBackend:
 
     @pytest.mark.asyncio
     async def test_get_service_key_row_filters_expired_keys(self, mock_data_factory):
-        """Service key lookup rejects expired keys."""
+        """Credential service key lookup rejects expired keys."""
         test_digest = "test-digest"
         expired = self.create_mock_service_key(
             mock_data_factory,
@@ -514,7 +519,7 @@ class TestApiKeyBackend:
 
     @pytest.mark.asyncio
     async def test_digest_of_called_correctly(self, monkeypatch):
-        """Test that ApiKey.digest_of is called with the raw key."""
+        """Test that CredentialApiKey.digest_of is called with the raw key."""
         raw_key = "test-api-key-12345"
         calls = []
 
@@ -522,7 +527,7 @@ class TestApiKeyBackend:
             calls.append(value)
             return "mocked-digest"
 
-        monkeypatch.setattr("tigrbl_authn_credentials.backends.ApiKey.digest_of", staticmethod(_digest_of))
+        monkeypatch.setattr("tigrbl_authn_credentials.backends.CredentialApiKey.digest_of", staticmethod(_digest_of))
 
         try:
             await self.backend.authenticate(self.mock_db, raw_key)

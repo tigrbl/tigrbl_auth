@@ -69,16 +69,16 @@ async def test_service_key_introspection_flow(running_app, enable_rfc7662):
         client_id = client_resp.json()["id"]
 
         service_resp = await client.post(
-            f"{base}/service",
+            f"{base}/serviceidentity",
             json={"tenant_id": str(TENANT_ID), "name": "example"},
             headers=headers,
         )
         assert service_resp.status_code == 201
-        service_id = service_resp.json()["id"]
+        service_identity_id = service_resp.json()["id"]
 
         key_resp = await client.post(
-            f"{base}/servicekey",
-            json={"label": "primary", "service_id": service_id},
+            f"{base}/credentialservicekey",
+            json={"label": "primary", "service_identity_id": service_identity_id},
             headers=headers,
         )
         assert key_resp.status_code == 201
@@ -92,4 +92,4 @@ async def test_service_key_introspection_flow(running_app, enable_rfc7662):
         assert introspect_resp.status_code == 200
         data = introspect_resp.json()
         assert data["active"] is True
-        assert data.get("kind") == "service"
+        assert data.get("kind") == "service_identity"

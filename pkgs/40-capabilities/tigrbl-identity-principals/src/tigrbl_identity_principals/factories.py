@@ -19,7 +19,7 @@ from tigrbl_identity_contracts.principals import (
 )
 from tigrbl_identity_concrete import (
     AdminIdentity,
-    AppIdentity,
+    ClientIdentity,
     DeviceIdentity,
     MachineIdentity,
     ServiceIdentity,
@@ -96,11 +96,11 @@ def create_nonhuman_principal(
     if principal_kind not in NONHUMAN_PRINCIPAL_KINDS:
         raise ValueError(f"{principal_kind.value!r} is not a nonhuman principal kind")
     identity_cls = {
-        PrincipalKind.APP: AppIdentity,
-        PrincipalKind.DEVICE: DeviceIdentity,
-        PrincipalKind.MACHINE: MachineIdentity,
-        PrincipalKind.SERVICE: ServiceIdentity,
-        PrincipalKind.WORKLOAD: WorkloadIdentity,
+        PrincipalKind.CLIENT_IDENTITY: ClientIdentity,
+        PrincipalKind.DEVICE_IDENTITY: DeviceIdentity,
+        PrincipalKind.MACHINE_IDENTITY: MachineIdentity,
+        PrincipalKind.SERVICE_IDENTITY: ServiceIdentity,
+        PrincipalKind.WORKLOAD_IDENTITY: WorkloadIdentity,
     }[principal_kind]
     return identity_cls(
         id=id or new_principal_id(),
@@ -112,23 +112,23 @@ def create_nonhuman_principal(
 
 
 def create_service_principal(subject: str, **kwargs: Any) -> Principal:
-    return create_nonhuman_principal(PrincipalKind.SERVICE, subject, **kwargs)
+    return create_nonhuman_principal(PrincipalKind.SERVICE_IDENTITY, subject, **kwargs)
 
 
-def create_app_principal(subject: str, **kwargs: Any) -> Principal:
-    return create_nonhuman_principal(PrincipalKind.APP, subject, **kwargs)
+def create_client_principal(subject: str, **kwargs: Any) -> Principal:
+    return create_nonhuman_principal(PrincipalKind.CLIENT_IDENTITY, subject, **kwargs)
 
 
 def create_machine_principal(subject: str, **kwargs: Any) -> Principal:
-    return create_nonhuman_principal(PrincipalKind.MACHINE, subject, **kwargs)
+    return create_nonhuman_principal(PrincipalKind.MACHINE_IDENTITY, subject, **kwargs)
 
 
 def create_workload_principal(subject: str, **kwargs: Any) -> Principal:
-    return create_nonhuman_principal(PrincipalKind.WORKLOAD, subject, **kwargs)
+    return create_nonhuman_principal(PrincipalKind.WORKLOAD_IDENTITY, subject, **kwargs)
 
 
 def create_device_principal(subject: str, **kwargs: Any) -> Principal:
-    return create_nonhuman_principal(PrincipalKind.DEVICE, subject, **kwargs)
+    return create_nonhuman_principal(PrincipalKind.DEVICE_IDENTITY, subject, **kwargs)
 
 
 def membership_for(principal: Principal, tenant_id: str, roles: Iterable[str | AuthorityRole] = ()) -> TenantMembership:
@@ -165,7 +165,7 @@ __all__ = [
     "TenantMembership",
     "alias_for",
     "create_admin_principal",
-    "create_app_principal",
+    "create_client_principal",
     "create_device_principal",
     "create_machine_principal",
     "create_nonhuman_principal",

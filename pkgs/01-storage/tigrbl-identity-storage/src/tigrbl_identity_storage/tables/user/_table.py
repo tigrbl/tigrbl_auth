@@ -198,7 +198,6 @@ class User(UserBase, Bootstrappable):
         spec=ColumnSpec(storage=S(TZDateTime, nullable=True), io=IO(in_verbs=("update", "replace"), out_verbs=("read",)))
     )
 
-    _api_keys = relationship("ApiKey", back_populates="_user", cascade="all, delete-orphan")
     tenant = relationship("Tenant", back_populates="users")
 
     @classmethod
