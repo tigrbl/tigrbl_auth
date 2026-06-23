@@ -277,26 +277,6 @@ def test_my_account_route_handlers_live_on_storage_table_modules(
     ("module_name", "class_name", "route_names"),
     [
         (
-            "tigrbl_identity_storage.tables.client_registration",
-            "ClientRegistration",
-            {"register", "register_get", "register_put", "register_delete"},
-        ),
-        (
-            "tigrbl_identity_storage.tables.device_code",
-            "DeviceCode",
-            {"device_authorization"},
-        ),
-        (
-            "tigrbl_identity_storage.tables.pushed_authorization_request",
-            "PushedAuthorizationRequest",
-            {"par"},
-        ),
-        (
-            "tigrbl_identity_storage.tables.revoked_token",
-            "RevokedToken",
-            {"revoke"},
-        ),
-        (
             "tigrbl_identity_storage.tables.auth_code",
             "AuthCode",
             {"authorize"},
@@ -306,15 +286,12 @@ def test_my_account_route_handlers_live_on_storage_table_modules(
             "TokenRecord",
             {"token"},
         ),
-        (
-            "tigrbl_identity_storage.tables.logout_state",
-            "LogoutState",
-            {"logout"},
-        ),
     ],
 )
-def test_oauth_persistence_route_handlers_live_on_storage_table_modules(
-    module_name: str, class_name: str, route_names: set[str]
+def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
+    module_name: str,
+    class_name: str,
+    route_names: set[str],
 ) -> None:
     module = importlib.import_module(module_name)
     table_class = getattr(module, class_name)
@@ -324,6 +301,63 @@ def test_oauth_persistence_route_handlers_live_on_storage_table_modules(
     missing = sorted(name for name in route_names if not hasattr(module, name))
     assert missing == []
     missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
+    assert missing_class_ops == []
+
+
+@pytest.mark.parametrize(
+    ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
+    [
+        (
+            "tigrbl_identity_storage_runtime.client_registration",
+            "tigrbl_identity_storage.tables.client_registration",
+            "ClientRegistration",
+            {"register", "register_get", "register_put", "register_delete"},
+        ),
+        (
+            "tigrbl_identity_storage_runtime.device_authorization",
+            "tigrbl_identity_storage.tables.device_code",
+            "DeviceCode",
+            {"device_authorization"},
+        ),
+        (
+            "tigrbl_identity_storage_runtime.par",
+            "tigrbl_identity_storage.tables.pushed_authorization_request",
+            "PushedAuthorizationRequest",
+            {"par"},
+        ),
+        (
+            "tigrbl_identity_storage_runtime.revocation",
+            "tigrbl_identity_storage.tables.revoked_token",
+            "RevokedToken",
+            {"revoke"},
+        ),
+        (
+            "tigrbl_identity_storage_runtime.logout",
+            "tigrbl_identity_storage.tables.logout_state",
+            "LogoutState",
+            {"logout"},
+        ),
+    ],
+)
+def test_moved_oauth_publishers_live_above_storage_table_modules(
+    runtime_module_name: str,
+    storage_module_name: str,
+    class_name: str,
+    route_names: set[str],
+) -> None:
+    runtime_module = importlib.import_module(runtime_module_name)
+    storage_module = importlib.import_module(storage_module_name)
+    table_class = getattr(storage_module, class_name)
+
+    assert hasattr(runtime_module, "api")
+    assert hasattr(runtime_module, "router")
+    missing = sorted(name for name in route_names if not hasattr(runtime_module, name))
+    assert missing == []
+    assert not hasattr(storage_module, "api")
+    assert not hasattr(storage_module, "router")
+    missing_class_ops = sorted(
+        name for name in route_names if hasattr(table_class, name)
+    )
     assert missing_class_ops == []
 
 

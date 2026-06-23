@@ -16,7 +16,7 @@ from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_storage.tables.auth_code import api as authorize_api
 from tigrbl_identity_storage.tables.auth_session import login_api
 from tigrbl_identity_storage.tables.user._account_surface import api as my_account_api
-from tigrbl_identity_storage.tables.client_registration import api as register_api
+from tigrbl_identity_storage_runtime.client_registration import include_client_registration_endpoint
 from tigrbl_identity_storage_runtime.par import include_par_endpoint
 from tigrbl_identity_storage_runtime.device_authorization import include_device_authorization_endpoint
 from tigrbl_identity_storage_runtime.logout import include_logout_endpoint

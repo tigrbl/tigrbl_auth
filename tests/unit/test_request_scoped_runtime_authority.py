@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 import tigrbl_identity_storage_runtime.par as par_ops
-from tigrbl_identity_storage.tables.client_registration import _route_op as register_ops
+import tigrbl_identity_storage_runtime.client_registration as register_ops
 import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
 import tigrbl_identity_storage_runtime.logout as logout_ops
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
@@ -187,7 +187,7 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
     async def _validated_registration_payload(**kwargs):
         return SimpleNamespace(id=tenant_id), {"native_application": False, "pkce_required": False}
 
-    async def _create_handler_record(model, db, payload):
+    async def _create_record(model, db, payload):
         if model is _FakeClient:
             return SimpleNamespace(**payload)
         return SimpleNamespace(
@@ -203,9 +203,9 @@ def test_register_client_uses_request_scoped_registration_client_uri(monkeypatch
     monkeypatch.setattr(register_ops, "Client", _FakeClient)
     monkeypatch.setattr(register_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
     monkeypatch.setattr(register_ops, "_validated_registration_payload", _validated_registration_payload)
-    monkeypatch.setattr(register_ops, "create_handler_record", _create_handler_record)
+    monkeypatch.setattr(register_ops, "create_record", _create_record)
     monkeypatch.setattr(register_ops, "_registration_response", _registration_response)
-    monkeypatch.setattr(register_ops, "append_audit_event_record", lambda db, **kwargs: asyncio.sleep(0))
+    monkeypatch.setattr(register_ops.AuditEvent, "record", lambda db, **kwargs: asyncio.sleep(0))
     monkeypatch.setattr(register_ops.secrets, "token_urlsafe", lambda length: "token-value")
     monkeypatch.setattr(register_ops, "runtime_security_profile", lambda deployment: SimpleNamespace(fapi_mode=False, allowed_client_auth_methods=()))
 

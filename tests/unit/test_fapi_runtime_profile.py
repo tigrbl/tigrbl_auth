@@ -11,7 +11,7 @@ from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.config.settings import settings
 import tigrbl_identity_storage_runtime.par as par_ops
-from tigrbl_identity_storage.tables.client_registration import _route_op as register_ops
+import tigrbl_identity_storage_runtime.client_registration as register_ops
 from tigrbl_identity_storage.tables.token_record import _route as token_ops
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
@@ -214,10 +214,10 @@ async def test_fapi_registration_rejects_shared_secret_auth(monkeypatch: pytest.
     monkeypatch.setattr(register_ops, "resolve_deployment", lambda _settings: _fapi_deployment())
     tenant = SimpleNamespace(id=uuid4(), slug="public")
 
-    async def _first_handler_record(model, db, filters):
+    async def _first_record(model, db, filters):
         return tenant
 
-    monkeypatch.setattr(register_ops, "first_handler_record", _first_handler_record)
+    monkeypatch.setattr(register_ops, "first_record", _first_record)
     payload = DynamicClientRegistrationIn(
         tenant_slug="public",
         redirect_uris=["https://client.example/cb"],

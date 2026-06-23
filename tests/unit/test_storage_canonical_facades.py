@@ -210,6 +210,26 @@ def test_executable_logout_publisher_lives_above_storage() -> None:
     assert not hasattr(storage, "router")
 
 
+def test_executable_client_registration_publisher_lives_above_storage() -> None:
+    old_modules = (
+        "tigrbl_identity_storage.tables.client_registration._op",
+        "tigrbl_identity_storage.tables.client_registration._endpoint",
+        "tigrbl_identity_storage.tables.client_registration._route_op",
+    )
+    for module_name in old_modules:
+        assert importlib.util.find_spec(module_name) is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.client_registration")
+    storage = importlib.import_module("tigrbl_identity_storage.tables.client_registration")
+
+    assert runtime.api is runtime.router
+    assert runtime.include_client_registration_endpoint.__module__ == (
+        "tigrbl_identity_storage_runtime.client_registration"
+    )
+    assert not hasattr(storage, "api")
+    assert not hasattr(storage, "router")
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):
