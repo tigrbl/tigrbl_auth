@@ -12,7 +12,10 @@ from .errors import (
     IdentityError,
     IdentityValidationError,
     InvalidKeyError,
+    InvalidRefreshTokenError,
     InvalidTokenError,
+    RefreshTokenError,
+    RefreshTokenReuseError,
 )
 from .path_safety import safe_display_path, sanitize_local_paths
 from .http import headers_from_scope, json_response, read_http_body, replay_http_body
@@ -58,6 +61,7 @@ __all__ = [
     "IdentityError",
     "IdentityValidationError",
     "InvalidKeyError",
+    "InvalidRefreshTokenError",
     "InvalidTokenError",
     "Issuer",
     "parse_time",
@@ -87,6 +91,8 @@ __all__ = [
     "normalize_entity",
     "pick_fields",
     "redact_sensitive_mapping",
+    "RefreshTokenError",
+    "RefreshTokenReuseError",
     "read_http_body",
     "replay_http_body",
     "row_active",

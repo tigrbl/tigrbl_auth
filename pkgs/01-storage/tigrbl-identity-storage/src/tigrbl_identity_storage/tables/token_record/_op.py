@@ -9,7 +9,7 @@ from uuid import UUID
 
 from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenReuseError
+from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.jwt_coder import JWTCoder
 from tigrbl_identity_storage.token_service import redeem_refresh_token

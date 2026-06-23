@@ -13,6 +13,18 @@ class InvalidTokenError(Exception):
     """Raised when a JWT cannot be decoded or fails validation."""
 
 
+class RefreshTokenError(Exception):
+    """Base class for refresh token lifecycle errors."""
+
+
+class InvalidRefreshTokenError(RefreshTokenError):
+    """Raised when a refresh token is unknown, expired, revoked, or inactive."""
+
+
+class RefreshTokenReuseError(RefreshTokenError):
+    """Raised when refresh token reuse is detected."""
+
+
 class InvalidKeyError(Exception):
     """Raised when a suitable key for JWT processing cannot be found."""
 
@@ -39,5 +51,8 @@ __all__ = [
     "IdentityError",
     "IdentityValidationError",
     "InvalidKeyError",
+    "InvalidRefreshTokenError",
     "InvalidTokenError",
+    "RefreshTokenError",
+    "RefreshTokenReuseError",
 ]

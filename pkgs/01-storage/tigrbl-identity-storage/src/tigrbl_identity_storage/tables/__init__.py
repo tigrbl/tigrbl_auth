@@ -173,6 +173,9 @@ _TABLE_MODELS = (
     OperatorAuditEvent,
     OperatorActivity,
 )
+TABLE_MODELS = _TABLE_MODELS
+TABLE_MODEL_BY_NAME = {model.__name__: model for model in TABLE_MODELS}
+TABLE_MODEL_BY_TABLENAME = {model.__tablename__: model for model in TABLE_MODELS}
 
 
 def _ensure_runtime_bindings() -> None:
@@ -231,67 +234,23 @@ def _attach_custom_op_schemas() -> None:
     set_schema(Realm, "admin_delete_realm", out=AdminRealmOut)
 
 
-def _export_table_schemas() -> list[str]:
-    exports = {f"{model.__name__}Schemas": model.schemas for model in _TABLE_MODELS}
-    exports["DelegationGrantRecordSchemas"] = DelegationGrant.schemas
-    for model in _TABLE_MODELS:
-        schemas = getattr(model, "schemas", None)
-        for op_name in dir(schemas):
-            if op_name.startswith("_"):
-                continue
-            op_schema = getattr(schemas, op_name)
-            for direction in ("in_", "out"):
-                schema = getattr(op_schema, direction, None)
-                if schema is None or not (
-                    hasattr(schema, "model_json_schema") or hasattr(schema, "schema")
-                ):
-                    continue
-                schema_name = getattr(schema, "__name__", "")
-                if not schema_name.isidentifier():
-                    continue
-                existing = globals().get(schema_name, exports.get(schema_name))
-                if existing is not None and existing is not schema:
-                    continue
-                exports[schema_name] = schema
-    globals().update(exports)
-    return sorted(exports)
-
-
 _ensure_runtime_bindings()
 _attach_custom_op_schemas()
-_TABLE_SCHEMA_EXPORTS = _export_table_schemas()
 
 __all__ = [
     "RestOltpTable",
     "ENGINE",
     "dsn",
     "get_db",
+    "TABLE_MODELS",
+    "TABLE_MODEL_BY_NAME",
+    "TABLE_MODEL_BY_TABLENAME",
     "Tenant",
-    "AdminTenantOut",
-    "AdminTenantProvisionIn",
-    "AdminTenantUpdateIn",
     "Realm",
-    "AdminRealmOut",
-    "AdminRealmProvisionIn",
-    "AdminRealmUpdateIn",
     "User",
-    "AdminIdentityOut",
-    "AdminIdentityProvisionIn",
-    "AdminIdentityUpdateIn",
-    "AdminPasswordChangeIn",
-    "AdminPasswordResetCompleteIn",
-    "AdminPasswordResetRequestIn",
-    "AdminSessionOut",
-    "MyAccountMutationOut",
-    "MyAccountPasswordChangeIn",
-    "MyAccountProfileOut",
-    "MyAccountProfileUpdateIn",
     "Client",
     "_CLIENT_ID_RE",
     "ClientRegistration",
-    "DynamicClientRegistrationIn",
-    "DynamicClientRegistrationManagementIn",
-    "DynamicClientRegistrationOut",
     "Service",
     "ApiKey",
     "ServiceKey",
@@ -302,22 +261,10 @@ __all__ = [
     "Key",
     "KeyVersion",
     "AuthSession",
-    "CredsIn",
-    "MyAccountSessionOut",
-    "LoginTokenPair",
     "AuthCode",
     "DeviceCode",
-    "DeviceAuthorizationIn",
-    "DeviceAuthorizationOut",
     "RevokedToken",
-    "RevocationIn",
-    "RevocationOut",
     "TokenRecord",
-    "AuthorizationCodeGrantForm",
-    "IntrospectOut",
-    "PasswordGrantForm",
-    "RefreshIn",
-    "TokenPair",
     "DelegationGrantEdge",
     "DelegationGrantProof",
     "DelegationGrant",
@@ -325,15 +272,9 @@ __all__ = [
     "DelegationGrantScope",
     "DelegationGrantTokenLink",
     "PushedAuthorizationRequest",
-    "PushedAuthorizationRequestIn",
-    "PushedAuthorizationResponse",
     "Consent",
-    "MyAccountAuthorizedAppOut",
-    "MyAccountConsentOut",
     "AuditEvent",
     "LogoutState",
-    "LogoutIn",
-    "LogoutOut",
     "KeyRotationEvent",
     "KeyRotationPolicy",
     "TenantMembership",
@@ -371,6 +312,5 @@ __all__ = [
     "OperatorTransaction",
     "OperatorAuditEvent",
     "OperatorActivity",
-    *_TABLE_SCHEMA_EXPORTS,
 ]
 __all__ = list(dict.fromkeys(__all__))

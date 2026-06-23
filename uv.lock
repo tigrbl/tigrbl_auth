@@ -2982,12 +2982,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/02-contracts/tigrbl-identity-contracts" }
 dependencies = [
     { name = "tigrbl-identity-core" },
+    { name = "tigrbl-identity-storage" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
@@ -3215,7 +3217,6 @@ source = { editable = "pkgs/01-storage/tigrbl-identity-storage" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
-    { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-core" },
 ]
@@ -3224,7 +3225,6 @@ dependencies = [
 requires-dist = [
     { name = "email-validator", specifier = ">=2.0" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]

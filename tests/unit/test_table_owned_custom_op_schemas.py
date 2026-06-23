@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import importlib
+from types import SimpleNamespace
 from pathlib import Path
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -66,32 +69,32 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
     assert User.schemas.admin_session.out is AdminSessionOut
 
 
-def test_every_exported_storage_table_exports_bound_schema_namespace() -> None:
+def test_storage_tables_export_table_inventory_without_schema_namespaces() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     auth_tables = importlib.import_module("tigrbl_auth.tables")
 
-    schema_exports: list[str] = []
-    for name in storage_tables.__all__:
-        if name.endswith("Schemas"):
-            continue
-        exported = getattr(storage_tables, name)
-        if getattr(exported, "__table__", None) is None:
-            continue
+    assert storage_tables.Role in storage_tables.TABLE_MODELS
+    assert storage_tables.TABLE_MODEL_BY_NAME["Role"] is storage_tables.Role
+    assert storage_tables.TABLE_MODEL_BY_TABLENAME["roles"] is storage_tables.Role
+    assert auth_tables.Role is storage_tables.Role
+    assert auth_tables.TABLE_MODELS is storage_tables.TABLE_MODELS
 
-        schema_name = f"{name}Schemas"
-        schema_exports.append(schema_name)
-        assert schema_name in storage_tables.__all__
-        assert getattr(storage_tables, schema_name) is exported.schemas
-        assert getattr(auth_tables, schema_name) is getattr(storage_tables, schema_name)
+    assert "RoleSchemas" not in storage_tables.__all__
+    assert "UserSchemas" not in storage_tables.__all__
+    assert "DelegationGrantRecordSchemas" not in storage_tables.__all__
+    assert "RoleCreateRequest" not in storage_tables.__all__
 
-    assert "ServiceKeySchemas" in schema_exports
-    assert "OperatorRecordSchemas" in schema_exports
+    with pytest.raises(ImportError):
+        exec("from tigrbl_identity_storage.tables import RoleSchemas", {})
 
 
-def test_exported_schema_aliases_use_openapi_component_model_names() -> None:
+def test_storage_schema_module_exports_openapi_component_model_names() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
+    contract_schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
+    schema_registry = importlib.import_module("tigrbl_identity_storage.schema_registry")
 
-    for name in storage_tables.__all__:
+    for name in storage_tables.TABLE_MODEL_BY_NAME:
         exported = getattr(storage_tables, name)
         if getattr(exported, "__table__", None) is None:
             continue
@@ -104,18 +107,25 @@ def test_exported_schema_aliases_use_openapi_component_model_names() -> None:
                 if schema is None or not hasattr(schema, "model_json_schema"):
                     continue
                 schema_name = schema.__name__
-                schema_alias = getattr(storage_tables, schema_name)
+                schema_alias = getattr(storage_schemas, schema_name)
 
-                assert schema_name in storage_tables.__all__
-                if schema_alias is not schema:
-                    assert schema_alias.model_json_schema() == schema.model_json_schema()
+                assert schema_name in storage_schemas.__all__
+                assert schema_name in contract_schemas.__all__
+                assert getattr(contract_schemas, schema_name) is schema_alias
+                assert schema_registry.OPENAPI_SCHEMA_REGISTRY[schema_name] is schema_alias
+                assert (
+                    schema_registry.TABLE_SCHEMA_BINDINGS[(name, op_name, direction.removesuffix("_"))]
+                    is schema
+                )
+                assert schema_alias.model_json_schema() == schema.model_json_schema()
 
-    assert storage_tables.ServiceKeyCreateRequest is storage_tables.ServiceKey.schemas.create.in_
-    assert storage_tables.OperatorRecordCreateRequest is storage_tables.OperatorRecord.schemas.create.in_
+    assert storage_schemas.RoleCreateRequest is storage_tables.Role.schemas.create.in_
+    assert storage_schemas.ServiceKeyCreateRequest is storage_tables.ServiceKey.schemas.create.in_
+    assert storage_schemas.OperatorRecordCreateRequest is storage_tables.OperatorRecord.schemas.create.in_
 
 
 def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
-    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+    storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
     from tigrbl_identity_runtime.deployment import resolve_deployment
     from tigrbl_identity_server.surfaces import build_public_router
 
@@ -124,11 +134,37 @@ def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
     )
 
     component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
-    missing = sorted(name for name in component_names if not hasattr(storage_tables, name))
+    missing = sorted(name for name in component_names if not hasattr(storage_schemas, name))
 
     assert missing == []
-    assert storage_tables.ServiceKeyCreateRequest.__name__ in component_names
-    assert storage_tables.TokenPair.__name__ in component_names
+    assert storage_schemas.ServiceKeyCreateRequest.__name__ in component_names
+    assert storage_schemas.TokenPair.__name__ in component_names
+
+
+def test_schema_registry_rejects_conflicting_duplicate_openapi_names() -> None:
+    from tigrbl_identity_storage.schema_registry import (
+        SchemaRegistryError,
+        _build_schema_indexes,
+    )
+
+    DuplicateA = type(
+        "DuplicateSchema",
+        (),
+        {"model_json_schema": classmethod(lambda cls: {"title": "DuplicateSchema", "type": "object"})},
+    )
+    DuplicateB = type(
+        "DuplicateSchema",
+        (),
+        {"model_json_schema": classmethod(lambda cls: {"title": "DuplicateSchema", "type": "string"})},
+    )
+    FakeTable = type(
+        "FakeTable",
+        (),
+        {"schemas": SimpleNamespace(create=SimpleNamespace(in_=DuplicateA, out=DuplicateB))},
+    )
+
+    with pytest.raises(SchemaRegistryError):
+        _build_schema_indexes((FakeTable,))
 
 
 def test_storage_package_does_not_import_identity_contract_schemas() -> None:
@@ -139,6 +175,15 @@ def test_storage_package_does_not_import_identity_contract_schemas() -> None:
             offenders.append(path.relative_to(ROOT).as_posix())
 
     assert offenders == []
+
+
+def test_storage_package_metadata_does_not_depend_on_higher_layers() -> None:
+    pyproject = ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "pyproject.toml"
+    source = pyproject.read_text(encoding="utf-8")
+
+    assert "tigrbl-authz-resource-server" not in source
+    assert "tigrbl-identity-contracts" not in source
+    assert "tigrbl-identity-storage-runtime" not in source
 
 
 def test_storage_does_not_define_a_parallel_directional_schema_helper() -> None:

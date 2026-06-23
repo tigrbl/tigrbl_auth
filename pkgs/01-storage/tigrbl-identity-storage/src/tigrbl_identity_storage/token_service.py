@@ -5,7 +5,7 @@ import inspect
 from typing import Any, Protocol
 from uuid import uuid4
 
-from tigrbl_identity_contracts.tokens import InvalidRefreshTokenError, RefreshTokenReuseError
+from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 
 
 class TokenCoder(Protocol):
