@@ -1,12 +1,12 @@
 """OIDC discovery compatibility exports.
 
-Discovery and JWKS routes are owned by
-``tigrbl_identity_storage.tables.realm._oidc_discovery``.
+Discovery and JWKS routes are runtime publishers owned by
+``tigrbl_identity_storage_runtime.metadata.oidc_discovery``.
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables.realm._oidc_discovery import (
+from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
     _build_openid_config,
     include_jwks,
     include_oidc_discovery,

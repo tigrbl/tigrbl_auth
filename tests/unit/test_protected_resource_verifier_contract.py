@@ -8,7 +8,7 @@ import pytest
 from tigrbl_auth.config.deployment import resolve_deployment
 from tigrbl_identity_storage.tables.token_record import _introspection as introspection_module
 from tigrbl_auth.standards.oauth2.resource_verifier_contract import build_protected_resource_verifier_contract
-from tigrbl_identity_storage.tables.token_record._protected_resource_metadata import (
+from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import (
     build_protected_resource_metadata,
 )
 

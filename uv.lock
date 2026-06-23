@@ -3235,6 +3235,9 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime" }
 dependencies = [
     { name = "tigrbl" },
+    { name = "tigrbl-auth-protocol-oauth" },
+    { name = "tigrbl-auth-protocol-oidc" },
+    { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-storage" },
 ]
@@ -3242,6 +3245,9 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oidc", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-authz-resource-server", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]

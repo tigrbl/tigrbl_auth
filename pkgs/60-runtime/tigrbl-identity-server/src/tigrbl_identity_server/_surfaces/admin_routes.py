@@ -27,14 +27,14 @@ from tigrbl_identity_storage.tables.user import admin_api as admin_identities_ap
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
 from tigrbl_identity_storage.tables.tenant import admin_api as admin_tenants_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_storage.tables.realm._oidc_discovery import (
+from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
     include_jwks,
     include_openid_configuration,
 )
 from tigrbl_identity_storage.tables.user._oidc_userinfo import include_oidc_userinfo
-from tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata import include_rfc8414
+from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import include_rfc8414
 from tigrbl_identity_storage.tables.token_record._introspection import include_introspection_endpoint
-from tigrbl_identity_storage.tables.token_record._protected_resource_metadata import include_rfc9728
+from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import include_rfc9728
 from tigrbl_identity_storage.tables.token_record._token_exchange import include_token_exchange_endpoint
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable

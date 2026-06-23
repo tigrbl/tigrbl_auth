@@ -133,6 +133,31 @@ def test_executable_migration_runtime_lives_above_storage() -> None:
     assert "tigrbl_identity_storage" in runtime.VERSIONS_DIR.parts
 
 
+def test_executable_metadata_publishers_live_above_storage() -> None:
+    old_modules = (
+        "tigrbl_identity_storage.tables.realm._oidc_discovery",
+        "tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata",
+        "tigrbl_identity_storage.tables.token_record._protected_resource_metadata",
+        "tigrbl_identity_storage.tables.token_record._resource_validation_metadata",
+    )
+    for module_name in old_modules:
+        assert importlib.util.find_spec(module_name) is None
+
+    metadata = importlib.import_module("tigrbl_identity_storage_runtime.metadata")
+    assert metadata.include_openid_configuration.__module__ == (
+        "tigrbl_identity_storage_runtime.metadata.oidc_discovery"
+    )
+    assert metadata.include_rfc8414.__module__ == (
+        "tigrbl_identity_storage_runtime.metadata.authorization_server_metadata"
+    )
+    assert metadata.include_rfc9728.__module__ == (
+        "tigrbl_identity_storage_runtime.metadata.protected_resource_metadata"
+    )
+    assert metadata.include_resource_validation_metadata.__module__ == (
+        "tigrbl_identity_storage_runtime.metadata.resource_validation_metadata"
+    )
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):

@@ -1,12 +1,12 @@
 """OAuth protected-resource metadata endpoint exports.
 
 The protected-resource metadata route is owned by
-``tigrbl_identity_storage.tables.token_record._protected_resource_metadata``.
+``tigrbl_identity_storage_runtime.metadata.protected_resource_metadata``.
 """
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables.token_record._protected_resource_metadata import (
+from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import (
     api,
     build_protected_resource_metadata,
     include_rfc9728,

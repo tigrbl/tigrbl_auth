@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import *
-from tigrbl_identity_storage.tables.realm._oauth_authorization_server_metadata import (
+from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import (
     include_rfc8414,
 )
 

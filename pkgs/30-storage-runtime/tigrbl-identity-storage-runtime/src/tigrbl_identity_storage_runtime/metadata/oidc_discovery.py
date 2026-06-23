@@ -15,7 +15,6 @@ from tigrbl_identity_runtime.deployment import (
     deployment_from_request,
     resolve_deployment,
 )
-from tigrbl_identity_server.security.handler_records import first_handler_record
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.resource_service import build_operator_jwks_payload, get_record
 from tigrbl_auth_protocol_oidc.tenant_discovery import (
@@ -30,8 +29,8 @@ from tigrbl_auth_protocol_oidc.jwks_service import build_jwks_document
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import discovery_policy_metadata
 from tigrbl_identity_storage.tables import Realm, Tenant
+from tigrbl_identity_storage.tables._ops import first_record
 from tigrbl_identity_storage.tables.engine import get_db
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 
@@ -104,7 +103,7 @@ async def _tenant_exists(*, db, tenant_slug: str) -> bool:
     if db is None:
         return operator_fallback
     try:
-        tenant = await first_handler_record(Tenant, db, {"slug": tenant_slug})
+        tenant = await first_record(Tenant, db, {"slug": tenant_slug})
     except Exception:
         return operator_fallback
     if tenant is not None:
@@ -137,7 +136,7 @@ async def _realm_exists(*, db, realm_slug: str) -> bool:
     if db is None:
         return False
     try:
-        realm = await first_handler_record(Realm, db, {"slug": realm_slug})
+        realm = await first_record(Realm, db, {"slug": realm_slug})
     except Exception:
         return False
     return realm is not None
