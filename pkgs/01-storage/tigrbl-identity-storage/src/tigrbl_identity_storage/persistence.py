@@ -51,7 +51,9 @@ from tigrbl_identity_storage.tables.revoked_token._op import (
     revoke_token,
     revoke_token_async,
 )
-from tigrbl_identity_storage.tables.token_record._introspection import introspect_token, introspect_token_async
+from tigrbl_identity_storage.tables.token_record._introspection_store import (
+    introspect_token_record_async as introspect_token_async,
+)
 from tigrbl_identity_storage.tables.token_record._lifecycle import (
     get_token_record_async,
     mark_token_used_async,
@@ -79,6 +81,7 @@ mark_token_used = lambda token, successor_token=None, reason="refresh_rotated": 
 revoke_refresh_family = lambda family_id, reason="refresh_token_reuse_detected", reuse_token=None: run_async(
     revoke_refresh_family_async(family_id, reason=reason, reuse_token=reuse_token)
 )
+introspect_token = lambda token: run_async(introspect_token_async(token))
 
 
 def load_operator_records(resource: str, *, repo_root=None):

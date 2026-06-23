@@ -26,7 +26,9 @@ from tigrbl_identity_storage.tables.logout_state._lifecycle import (
     terminate_session_async,
 )
 from tigrbl_identity_storage.tables.revoked_token._op import is_token_revoked_async, revoke_token_async
-from tigrbl_identity_storage.tables.token_record._introspection import introspect_token_async
+from tigrbl_identity_storage.tables.token_record._introspection_store import (
+    introspect_token_record_async as introspect_token_async,
+)
 from tigrbl_identity_storage.tables.token_record._lifecycle import get_token_record_async, upsert_token_record_async
 from tigrbl_auth.services.token_service import (
     JWTCoder,

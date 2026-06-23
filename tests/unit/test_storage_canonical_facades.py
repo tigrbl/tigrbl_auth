@@ -267,6 +267,24 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
     assert not hasattr(storage, "userinfo")
 
 
+def test_executable_introspection_publisher_lives_above_storage() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.token_record._introspection") is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
+    storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
+    store = importlib.import_module("tigrbl_identity_storage.tables.token_record._introspection_store")
+
+    assert runtime.api is runtime.router
+    assert runtime.include_introspection_endpoint.__module__ == (
+        "tigrbl_identity_storage_runtime.introspection"
+    )
+    assert store.introspect_token_record_async.__module__ == (
+        "tigrbl_identity_storage.tables.token_record._introspection_store"
+    )
+    assert not hasattr(storage, "introspect")
+    assert not hasattr(storage, "include_introspection_endpoint")
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):

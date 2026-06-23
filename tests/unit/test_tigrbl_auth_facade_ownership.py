@@ -62,6 +62,7 @@ FACADE_MODULES = {
     "tigrbl_auth.standards.jose.rfc7517": "tigrbl_identity_jose.standards.rfc7517",
     "tigrbl_auth.standards.jose.rfc7518": "tigrbl_identity_jose.standards.rfc7518",
     "tigrbl_auth.standards.oauth2.dpop": "tigrbl_auth_protocol_oauth.standards.dpop",
+    "tigrbl_auth.standards.oauth2.introspection": "tigrbl_identity_storage_runtime.introspection",
     "tigrbl_auth.standards.oauth2.rfc9700": "tigrbl_auth_protocol_oauth.standards.oauth_security_bcp",
     "tigrbl_auth.standards.oauth2.resource_verifier_contract": "tigrbl_auth_protocol_oauth.standards.resource_verifier_contract",
     "tigrbl_auth.standards.oauth2.token_exchange": "tigrbl_identity_storage_runtime.token_exchange",

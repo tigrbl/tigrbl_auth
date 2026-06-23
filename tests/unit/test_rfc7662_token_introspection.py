@@ -5,8 +5,8 @@ from http import HTTPStatus as status
 from httpx import ASGITransport, AsyncClient
 
 from tigrbl import TigrblApp
-from tigrbl_identity_storage.tables.token_record import _introspection as introspection_module
-from tigrbl_identity_storage.tables.token_record._introspection import (
+import tigrbl_identity_storage_runtime.introspection as introspection_module
+from tigrbl_identity_storage_runtime.introspection import (
     register_token_async,
     reset_tokens_async,
     router,
