@@ -7,7 +7,7 @@ import uuid
 from datetime import timezone
 from typing import Any
 
-from tigrbl_identity_storage.framework import Depends, Header, HTTPException, Request, status
+from tigrbl_identity_storage.framework import Depends, HTTPException, Request, status
 from tigrbl_identity_jose.key_management import hash_pw
 
 from .._ops import read_record, update_record
@@ -40,14 +40,24 @@ def _iso(value: dt.datetime | None) -> str | None:
 
 async def _current_principal_dependency(
     request: Request,
-    authorization: str = Header("", alias="Authorization"),
-    api_key: str | None = Header(None, alias="x-api-key"),
-    dpop: str | None = Header(None, alias="DPoP"),
+    authorization: str | None = None,
+    api_key: str | None = None,
+    dpop: str | None = None,
     db: Any = Depends(get_db),
 ) -> User:
     from tigrbl_identity_server.security.auth import get_current_principal
 
-    return await get_current_principal(request, authorization=authorization, api_key=api_key, dpop=dpop, db=db)
+    headers = getattr(request, "headers", {})
+    authorization = (
+        authorization
+        if authorization is not None
+        else headers.get("Authorization", "") or headers.get("authorization", "")
+    )
+    api_key = api_key if api_key is not None else headers.get("x-api-key")
+    dpop = dpop if dpop is not None else headers.get("DPoP") or headers.get("dpop")
+    return await get_current_principal(
+        request, authorization=authorization, api_key=api_key, dpop=dpop, db=db
+    )
 
 
 def _profile_payload(user: User) -> MyAccountProfileOut:
@@ -82,9 +92,14 @@ async def _current_user_row(current_user: User, db: Any) -> User:
     tags=MY_ACCOUNT_TAGS,
 )
 async def get_account_profile(
-    current_user: User = Depends(_current_principal_dependency),
+    request: Request | None = None,
+    current_user: User | None = None,
     db: Any = Depends(get_db),
 ) -> MyAccountProfileOut:
+    if current_user is None:
+        if request is None:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated account required")
+        current_user = await _current_principal_dependency(request, db=db)
     return _profile_payload(await _current_user_row(current_user, db))
 
 
@@ -95,12 +110,18 @@ async def get_account_profile(
     tags=MY_ACCOUNT_TAGS,
 )
 async def update_account_profile(
-    request: Request,
+    request: Request | None = None,
     payload: MyAccountProfileUpdateIn | None = None,
-    current_user: User = Depends(_current_principal_dependency),
+    current_user: User | None = None,
     db: Any = Depends(get_db),
 ) -> MyAccountProfileOut:
+    if current_user is None:
+        if request is None:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated account required")
+        current_user = await _current_principal_dependency(request, db=db)
     if payload is None:
+        if request is None:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "request payload required")
         payload = MyAccountProfileUpdateIn.model_validate(await request.json() or {})
     row = await _current_user_row(current_user, db)
     changes = {name: value for name in ("username", "email") if (value := getattr(payload, name)) is not None}
@@ -116,12 +137,18 @@ async def update_account_profile(
     tags=MY_ACCOUNT_TAGS,
 )
 async def change_account_password(
-    request: Request,
+    request: Request | None = None,
     payload: MyAccountPasswordChangeIn | None = None,
-    current_user: User = Depends(_current_principal_dependency),
+    current_user: User | None = None,
     db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
+    if current_user is None:
+        if request is None:
+            raise HTTPException(status.HTTP_401_UNAUTHORIZED, "authenticated account required")
+        current_user = await _current_principal_dependency(request, db=db)
     if payload is None:
+        if request is None:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, "request payload required")
         payload = MyAccountPasswordChangeIn.model_validate(await request.json() or {})
     row = await _current_user_row(current_user, db)
     if not row.verify_password(payload.current_password):

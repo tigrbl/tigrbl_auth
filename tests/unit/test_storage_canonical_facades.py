@@ -300,6 +300,18 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
     assert auth_flows.api is auth_flows.router
 
 
+def test_executable_account_surface_composition_lives_above_storage() -> None:
+    assert importlib.util.find_spec(
+        "tigrbl_identity_storage.tables.user._account_surface"
+    ) is None
+
+    account_surface = importlib.import_module(
+        "tigrbl_identity_storage_runtime.account_surface"
+    )
+
+    assert account_surface.api is account_surface.router
+
+
 def test_token_table_route_does_not_call_sync_session_observer() -> None:
     path = Path(
         "pkgs/01-storage/tigrbl-identity-storage/src/"
