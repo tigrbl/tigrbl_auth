@@ -1,16 +1,19 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
-from tigrbl_identity_runtime.deployment import deployment_from_request
+from tigrbl_identity_runtime.deployment import deployment_from_app, deployment_from_request
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_server.security.handler_records import append_audit_event_record, create_handler_record, read_handler_record
+from tigrbl_identity_storage.tables._ops import create_record, read_record
+from tigrbl_identity_storage.tables.audit_event import AuditEvent
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_storage.framework import HTTPException, status
+    from tigrbl_identity_storage.framework import Depends, HTTPException, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.tables.engine import get_db
 except Exception:  # pragma: no cover - dependency-light fallback
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -23,6 +26,24 @@ except Exception:  # pragma: no cover - dependency-light fallback
             self.detail = detail
 
     status = _FallbackStatus()
+    Depends = lambda dependency: dependency  # type: ignore[assignment]
+
+    class TigrblApp:  # type: ignore[override]
+        pass
+
+    class TigrblRouter:  # type: ignore[override]
+        def __init__(self, *args, **kwargs):
+            self.routes = []
+
+        def route(self, path: str, methods=None, response_model=None, **kwargs):
+            def decorator(func):
+                self.routes.append(type("Route", (), {"path": path, "methods": methods})())
+                return func
+
+            return decorator
+
+    def get_db():  # type: ignore[override]
+        return None
 
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
@@ -33,8 +54,8 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 
 try:  # pragma: no cover
-    from ..client import Client
-    from ._table import DeviceCode
+    from tigrbl_identity_storage.tables.client import Client
+    from tigrbl_identity_storage.tables.device_code import DeviceAuthorizationOut, DeviceCode
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()
@@ -44,6 +65,12 @@ except Exception:  # pragma: no cover - placeholders for dependency-light tests
             for key, value in kwargs.items():
                 setattr(self, key, value)
             self.id = kwargs.get('id') or kwargs.get('device_code')
+
+    class DeviceAuthorizationOut:  # type: ignore[override]
+        pass
+
+
+api = router = TigrblRouter()
 
 
 async def device_authorization_request(*, request, db):
@@ -63,7 +90,7 @@ async def device_authorization_request(*, request, db):
         client_uuid = UUID(str(client_id))
     except Exception as exc:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, 'invalid client_id') from exc
-    client = await read_handler_record(Client, db, client_uuid)
+    client = await read_record(Client, db, client_uuid)
     if client is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, 'client not found')
 
@@ -81,7 +108,7 @@ async def device_authorization_request(*, request, db):
     device_code = generate_device_code()
     user_code = generate_user_code()
     expires_at = datetime.now(timezone.utc) + timedelta(seconds=DEVICE_CODE_EXPIRES_IN)
-    row = await create_handler_record(
+    row = await create_record(
         DeviceCode,
         db,
         {
@@ -102,7 +129,7 @@ async def device_authorization_request(*, request, db):
     verification_uri = f"{str(deployment.issuer or settings.issuer).rstrip('/')}/device"
     verification_uri_complete = f"{verification_uri}?user_code={user_code}"
 
-    await append_audit_event_record(
+    await AuditEvent.record(
         db,
         tenant_id=client.tenant_id,
         actor_client_id=client.id,
@@ -129,3 +156,40 @@ async def device_authorization_request(*, request, db):
         'expires_in': DEVICE_CODE_EXPIRES_IN,
         'interval': DEVICE_CODE_INTERVAL,
     }
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[5]
+
+
+@api.route("/device_authorization", methods=["POST"], response_model=DeviceAuthorizationOut)
+async def device_authorization(request: Any, db: Any = Depends(get_db)) -> Any:
+    result = await device_authorization_request(request=request, db=db)
+    from tigrbl_identity_storage.session_service import observe_device_authorization_response
+
+    payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
+    observe_device_authorization_response(_repo_root(), device_code=payload.get("device_code"), details=payload)
+    return result
+
+
+def include_device_authorization_endpoint(app: TigrblApp) -> None:
+    deployment = deployment_from_app(app, settings)
+    path = "/device_authorization"
+    if deployment.route_enabled(path) and not any(
+        (getattr(route, "path", None) or getattr(route, "path_template", None)) == path
+        for route in app.router.routes
+    ):
+        app.include_router(api)
+
+
+include_rfc8628 = include_device_authorization_endpoint
+
+
+__all__ = [
+    "api",
+    "router",
+    "device_authorization",
+    "device_authorization_request",
+    "include_device_authorization_endpoint",
+    "include_rfc8628",
+]

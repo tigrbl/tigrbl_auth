@@ -7,7 +7,7 @@ from uuid import uuid4
 from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 import tigrbl_identity_storage_runtime.par as par_ops
 from tigrbl_identity_storage.tables.client_registration import _route_op as register_ops
-from tigrbl_identity_storage.tables.device_code import _op as device_auth_ops
+import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
 from tigrbl_identity_storage.tables.logout_state import _op as logout_ops
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import compute_session_state, session_state_for_client
@@ -233,18 +233,18 @@ def test_device_authorization_uses_request_scoped_verification_uri(monkeypatch) 
     class _DB:
         pass
 
-    async def _read_handler_record(model, db, ident):
+    async def _read_record(model, db, ident):
         return client
 
-    async def _create_handler_record(model, db, payload):
+    async def _create_record(model, db, payload):
         return SimpleNamespace(id=payload.get("device_code"), **payload)
 
     monkeypatch.setattr(device_auth_ops, "deployment_from_request", lambda request, fallback_settings: deployment)
     monkeypatch.setattr(device_auth_ops, "generate_device_code", lambda: "device-code-1")
     monkeypatch.setattr(device_auth_ops, "generate_user_code", lambda: "USER-CODE")
-    monkeypatch.setattr(device_auth_ops, "read_handler_record", _read_handler_record)
-    monkeypatch.setattr(device_auth_ops, "create_handler_record", _create_handler_record)
-    monkeypatch.setattr(device_auth_ops, "append_audit_event_record", lambda db, **kwargs: asyncio.sleep(0))
+    monkeypatch.setattr(device_auth_ops, "read_record", _read_record)
+    monkeypatch.setattr(device_auth_ops, "create_record", _create_record)
+    monkeypatch.setattr(device_auth_ops.AuditEvent, "record", lambda db, **kwargs: asyncio.sleep(0))
 
     request = SimpleNamespace(
         app=SimpleNamespace(state=SimpleNamespace(tigrbl_auth_deployment=deployment)),

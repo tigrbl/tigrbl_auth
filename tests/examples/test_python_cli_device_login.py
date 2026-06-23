@@ -14,7 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.config.settings import settings as runtime_settings
-from tigrbl_identity_storage.tables.device_code._op import device_authorization_request
+from tigrbl_identity_storage_runtime.device_authorization import device_authorization_request
 from tigrbl_auth.tables import Client, DeviceCode, Tenant, User
 from tigrbl_auth.services.token_service import JWTCoder, issue_persisted_token_pair
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER

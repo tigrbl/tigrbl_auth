@@ -184,6 +184,20 @@ def test_executable_par_publisher_lives_above_storage() -> None:
     assert not hasattr(storage, "router")
 
 
+def test_executable_device_authorization_publisher_lives_above_storage() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.device_code._op") is None
+
+    runtime = importlib.import_module("tigrbl_identity_storage_runtime.device_authorization")
+    storage = importlib.import_module("tigrbl_identity_storage.tables.device_code")
+
+    assert runtime.api is runtime.router
+    assert runtime.include_device_authorization_endpoint.__module__ == (
+        "tigrbl_identity_storage_runtime.device_authorization"
+    )
+    assert not hasattr(storage, "api")
+    assert not hasattr(storage, "router")
+
+
 def test_tigrbl_auth_table_modules_do_not_define_duplicate_table_classes() -> None:
     table_dir = Path("pkgs/70-facade/tigrbl-auth/src/tigrbl_auth/tables")
     for path in table_dir.glob("*.py"):
