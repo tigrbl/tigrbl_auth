@@ -15,8 +15,8 @@ from .._ops import (
     token_hash,
     update_handler_record,
 )
-from .._session import storage_session
 from .._sync import run_async
+from ..engine import storage_session
 from ..token_record._table import TokenRecord
 from ._table import RevokedToken
 

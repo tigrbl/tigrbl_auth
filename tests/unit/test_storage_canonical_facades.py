@@ -10,6 +10,14 @@ def test_storage_does_not_export_provenance_builders() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.provenance") is None
 
 
+def test_storage_tables_do_not_export_ambient_session_module() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables._session") is None
+
+    runtime_session = importlib.import_module("tigrbl_identity_storage_runtime.session")
+    assert runtime_session.storage_session.__module__ == "tigrbl_identity_storage_runtime.session"
+    assert runtime_session.resolve_storage_provider.__module__ == "tigrbl_identity_storage_runtime.session"
+
+
 TABLE_MODULE_EXPORTS = {
     "access_review_campaign": ("AccessReviewCampaign",),
     "access_review_decision": ("AccessReviewDecision",),

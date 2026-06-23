@@ -7,8 +7,8 @@ from typing import Any, Iterable
 from uuid import UUID
 
 from .._ops import create_handler_record, field, first_handler_record, record_id, update_handler_record
-from .._session import storage_session
 from .._sync import run_async
+from ..engine import storage_session
 from ._table import ClientRegistration
 
 

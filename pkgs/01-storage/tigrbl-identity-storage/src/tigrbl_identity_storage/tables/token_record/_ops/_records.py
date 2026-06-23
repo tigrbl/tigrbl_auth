@@ -14,7 +14,7 @@ from ..._ops import (
     to_uuid,
     token_hash,
 )
-from ..._session import storage_session
+from ...engine import storage_session
 from .._table import TokenRecord
 
 

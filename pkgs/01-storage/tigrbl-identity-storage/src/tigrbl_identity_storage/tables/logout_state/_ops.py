@@ -7,8 +7,8 @@ from typing import Any
 from uuid import UUID
 
 from .._ops import field, list_handler_records, read_handler_record, record_id, update_handler_record
-from .._session import storage_session
 from .._sync import run_async
+from ..engine import storage_session
 from ..auth_session._table import AuthSession
 from ._table import LogoutState
 

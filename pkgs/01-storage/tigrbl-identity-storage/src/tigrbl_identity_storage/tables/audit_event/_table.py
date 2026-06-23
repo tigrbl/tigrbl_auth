@@ -21,8 +21,8 @@ from tigrbl_identity_storage.framework import (
     PgUUID,
 )
 from .._ops import create_record, list_records, record_id, utc_now
-from .._session import storage_session
 from .._sync import run_async
+from ..engine import storage_session
 from ..tenant import Tenant
 
 

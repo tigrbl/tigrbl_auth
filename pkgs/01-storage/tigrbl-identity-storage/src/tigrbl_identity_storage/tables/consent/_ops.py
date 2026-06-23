@@ -6,8 +6,8 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from .._session import storage_session
 from .._sync import run_async
+from ..engine import storage_session
 from ._table import Consent
 
 

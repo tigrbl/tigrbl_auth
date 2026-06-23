@@ -1,4 +1,4 @@
-"""Storage-local database session resolution for table-owned helpers."""
+"""Runtime provider/session resolution for identity storage composition."""
 
 from __future__ import annotations
 

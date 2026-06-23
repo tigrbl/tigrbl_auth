@@ -1,6 +1,8 @@
 """Tigrbl-native engine and DB dependency wiring."""
 
+from contextlib import asynccontextmanager
 import os
+from typing import Any, AsyncIterator
 
 from tigrbl import bootstrap_dbschema
 from tigrbl.ddl import sqlite_default_attach_map
@@ -55,4 +57,38 @@ def _bootstrap_runtime_engine() -> None:
 _bootstrap_runtime_engine()
 get_db = ENGINE.get_db
 
-__all__ = ["ENGINE", "dsn", "get_db"]
+
+def resolve_storage_provider() -> Any:
+    try:
+        from tigrbl.engine import resolver as engine_resolver
+
+        provider = engine_resolver.resolve_provider()
+        if provider is not None:
+            return provider
+    except Exception:
+        pass
+    return ENGINE.provider
+
+
+@asynccontextmanager
+async def storage_session() -> AsyncIterator[Any]:
+    provider = resolve_storage_provider()
+    _, maker = provider.ensure()
+    async with maker() as session:
+        try:
+            yield session
+            commit = getattr(session, "commit", None)
+            if callable(commit):
+                result = commit()
+                if hasattr(result, "__await__"):
+                    await result
+        except Exception:
+            rollback = getattr(session, "rollback", None)
+            if callable(rollback):
+                result = rollback()
+                if hasattr(result, "__await__"):
+                    await result
+            raise
+
+
+__all__ = ["ENGINE", "dsn", "get_db", "resolve_storage_provider", "storage_session"]
