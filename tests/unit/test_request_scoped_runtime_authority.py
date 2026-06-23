@@ -8,7 +8,7 @@ from tigrbl_auth.api.rest.schemas import DynamicClientRegistrationIn
 import tigrbl_identity_storage_runtime.par as par_ops
 from tigrbl_identity_storage.tables.client_registration import _route_op as register_ops
 import tigrbl_identity_storage_runtime.device_authorization as device_auth_ops
-from tigrbl_identity_storage.tables.logout_state import _op as logout_ops
+import tigrbl_identity_storage_runtime.logout as logout_ops
 from tigrbl_auth_protocol_oidc.standards import rp_initiated_logout as rp_logout
 from tigrbl_auth_protocol_oidc.standards.session_mgmt import compute_session_state, session_state_for_client
 

@@ -136,7 +136,7 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
     },
     {
         "capability": "logout",
-        "kind": "router",
+        "kind": "publisher",
         "surface_set": "public-rest",
         "mount_group": "logout",
         "paths": ("/logout",),
@@ -144,7 +144,7 @@ PUBLIC_CAPABILITIES: Final[tuple[dict[str, Any], ...]] = (
         "flags": ("enable_oidc_rp_initiated_logout",),
         "summary": "OIDC RP-initiated logout endpoint",
         "tags": ("oidc",),
-        "router_ref": "tigrbl_identity_storage.tables.logout_state:api",
+        "publisher_ref": "tigrbl_identity_storage_runtime.logout:include_logout_endpoint",
         "targets": (
             "RFC 6265",
             "OIDC Session Management",
