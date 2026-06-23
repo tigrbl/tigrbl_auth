@@ -12,7 +12,7 @@ from tigrbl_auth.cli.artifacts import deployment_from_options
 from tigrbl_auth.config.settings import settings
 import tigrbl_identity_storage_runtime.par as par_ops
 import tigrbl_identity_storage_runtime.client_registration as register_ops
-from tigrbl_identity_storage.tables.token_record import _op as token_ops
+from tigrbl_identity_storage.tables.token_record import _ops as token_ops
 from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     OAuthPolicyViolation,
     assert_authorization_request_allowed,

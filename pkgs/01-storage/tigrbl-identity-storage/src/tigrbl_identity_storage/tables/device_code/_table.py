@@ -168,7 +168,7 @@ class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"consumed_at": utc_now()})
 
 
-from ._hook import approve_device_code, deny_device_code
+from ._hooks import approve_device_code, deny_device_code
 
 
 __all__ = [

@@ -20,6 +20,15 @@ def test_policy_canonicalization_helpers_are_owned_by_identity_core() -> None:
     assert canonical_json({"values": {"z", "a"}}) == '{"values":["a","z"]}'
 
 
+def test_policy_provenance_builders_are_concrete_backed() -> None:
+    assert provenance.build_authorization_decision_trace.__module__ == (
+        "tigrbl_authz_policy_concrete.provenance"
+    )
+    assert provenance.build_delegation_provenance.__module__ == (
+        "tigrbl_authz_policy_concrete.provenance"
+    )
+
+
 def test_authz_policy_no_longer_defines_canonicalization_helpers() -> None:
     helper_names = {"_normalize", "canonical_json", "canonical_hash"}
     for relative_path in (

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from .resource_operations import *
 from .resource_operations import _commit_records, _list, _sanitize_patch_for_scope
-from tigrbl_identity_storage.provenance import (
+from tigrbl_authz_policy_concrete.provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )

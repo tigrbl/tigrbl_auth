@@ -263,7 +263,7 @@ async def login(
     creds: CredsIn | None = None,
     db: Any = Depends(get_db),
 ) -> Any:
-    from ._op import login_user
+    from ._ops import login_user
 
     if creds is None:
         body = await request.json() or {}

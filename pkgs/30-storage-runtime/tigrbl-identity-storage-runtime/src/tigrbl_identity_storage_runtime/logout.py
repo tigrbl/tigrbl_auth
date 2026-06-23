@@ -16,7 +16,7 @@ from tigrbl_identity_runtime.http_standards.cookies import (
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, TigrblApp, TigrblRouter, status
 from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
-from tigrbl_identity_storage.tables.auth_session._lifecycle import get_session_async
+from tigrbl_identity_storage.tables.auth_session._ops import get_session_async
 from tigrbl_identity_storage.tables.engine import get_db
 
 

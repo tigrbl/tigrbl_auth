@@ -51,9 +51,9 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage.tables.auth_session._lifecycle import get_active_session_async
-    from tigrbl_identity_storage.tables.client_registration._lifecycle import get_client_registration_async
-    from tigrbl_identity_storage.tables.logout_state._lifecycle import (
+    from tigrbl_identity_storage.tables.auth_session._ops import get_active_session_async
+    from tigrbl_identity_storage.tables.client_registration._ops import get_client_registration_async
+    from tigrbl_identity_storage.tables.logout_state._ops import (
         get_latest_logout_for_session_async,
         terminate_session_async,
         update_logout_metadata_async,

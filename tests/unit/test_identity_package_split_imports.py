@@ -301,7 +301,7 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
         / "tigrbl_identity_storage"
         / "tables"
         / "token_record"
-        / "_op"
+        / "_ops"
         / "_persistence.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
@@ -390,13 +390,13 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
         / "tigrbl_identity_storage"
         / "tables"
         / "auth_code"
-        / "_op.py",
+        / "_ops.py",
         "storage_authorize_logic": _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
         / "auth_code"
-        / "_op.py",
+        / "_ops.py",
     }
 
     assert not route_paths["protocol"].exists()

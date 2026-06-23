@@ -6,6 +6,10 @@ import importlib.util
 from pathlib import Path
 
 
+def test_storage_does_not_export_provenance_builders() -> None:
+    assert importlib.util.find_spec("tigrbl_identity_storage.provenance") is None
+
+
 TABLE_MODULE_EXPORTS = {
     "access_review_campaign": ("AccessReviewCampaign",),
     "access_review_decision": ("AccessReviewDecision",),
@@ -160,10 +164,11 @@ def test_executable_metadata_publishers_live_above_storage() -> None:
 
 def test_executable_revocation_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._route") is None
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._op") is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.revocation")
     storage = importlib.import_module("tigrbl_identity_storage.tables.revoked_token")
-    storage_ops = importlib.import_module("tigrbl_identity_storage.tables.revoked_token._op")
+    storage_ops = importlib.import_module("tigrbl_identity_storage.tables.revoked_token._ops")
 
     assert runtime.api is runtime.router
     assert runtime.include_revocation_endpoint.__module__ == "tigrbl_identity_storage_runtime.revocation"
@@ -269,6 +274,7 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
 
 def test_executable_introspection_publisher_lives_above_storage() -> None:
     old_modules = (
+        "tigrbl_identity_storage.tables.token_record._op",
         "tigrbl_identity_storage.tables.token_record._introspection",
         "tigrbl_identity_storage.tables.token_record._introspection_store",
         "tigrbl_identity_storage.tables.token_record._lifecycle",
@@ -280,14 +286,14 @@ def test_executable_introspection_publisher_lives_above_storage() -> None:
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
-    ops = importlib.import_module("tigrbl_identity_storage.tables.token_record._op")
+    ops = importlib.import_module("tigrbl_identity_storage.tables.token_record._ops")
 
     assert runtime.api is runtime.router
     assert runtime.include_introspection_endpoint.__module__ == (
         "tigrbl_identity_storage_runtime.introspection"
     )
     assert ops.introspect_token_record_async.__module__ == (
-        "tigrbl_identity_storage.tables.token_record._op._introspection"
+        "tigrbl_identity_storage.tables.token_record._ops._introspection"
     )
     assert not hasattr(storage, "introspect")
     assert not hasattr(storage, "include_introspection_endpoint")

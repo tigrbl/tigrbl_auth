@@ -7,8 +7,10 @@ from typing import Any, Mapping, Protocol, Sequence
 from .types import (
     Alg,
     Artifact,
+    AuthorizationDecisionTrace,
     CapabilityMap,
     CanonicalizeRequest,
+    DelegationProvenance,
     DeriveKeyRequest,
     DPoPBinding,
     ExportKeyRequest,
@@ -218,6 +220,20 @@ class ITokenIntrospectionClient(Protocol):
     def introspect(self, request: TokenIntrospectionRequest) -> TokenIntrospectionResult: ...
 
 
+class IProvenanceArtifactBuilder(Protocol):
+    """Build deterministic authorization and delegation provenance artifacts."""
+
+    def build_authorization_decision_trace(
+        self,
+        **kwargs: Any,
+    ) -> AuthorizationDecisionTrace | Mapping[str, Any]: ...
+
+    def build_delegation_provenance(
+        self,
+        **kwargs: Any,
+    ) -> DelegationProvenance | Mapping[str, Any]: ...
+
+
 __all__ = [
     "IArtifactCodec",
     "IArtifactIssuer",
@@ -232,6 +248,7 @@ __all__ = [
     "IKeyExporter",
     "IKeyLifecycle",
     "IKeyResolver",
+    "IProvenanceArtifactBuilder",
     "IRecipientSetEditor",
     "ISenderConstraintValidator",
     "ITokenIntrospectionClient",

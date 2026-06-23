@@ -11,7 +11,7 @@ from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_identity_storage.provenance import (
+from tigrbl_authz_policy_concrete.provenance import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )
@@ -74,7 +74,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
         return None
 
 try:  # pragma: no cover
-    from tigrbl_identity_storage.tables.token_record._op import upsert_token_record_async
+    from tigrbl_identity_storage.tables.token_record._ops import upsert_token_record_async
 except Exception:  # pragma: no cover - dependency-light fallback
     async def upsert_token_record_async(*args, **kwargs):
         return None

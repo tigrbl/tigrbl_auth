@@ -24,7 +24,7 @@ from tigrbl_identity_storage.tables._ops import (
 )
 from tigrbl_identity_storage.tables.audit_event import AuditEvent
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_storage.tables.tenant.operator_state import enabled_tenant_record
+from tigrbl_identity_storage.tables.tenant import enabled_tenant_record
 from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
     PRIVATE_KEY_JWT_AUTH_METHOD,
     SUPPORTED_CLIENT_ASSERTION_SIGNING_ALGS,

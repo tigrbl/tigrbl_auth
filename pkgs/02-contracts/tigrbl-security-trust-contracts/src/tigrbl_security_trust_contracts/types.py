@@ -255,6 +255,56 @@ class TokenIntrospectionResult:
     claims: Mapping[str, Any] = field(default_factory=dict)
 
 
+@dataclass(frozen=True, slots=True)
+class AuthorizationDecisionTrace:
+    """Deterministic authorization decision artifact shape."""
+
+    request_hash: str
+    policy_hash: str
+    derivation_hash: str
+    decision_key: str
+    request: Mapping[str, Any]
+    derived_grant: Mapping[str, Any]
+    artifact_type: str = "authorization_decision_trace"
+    artifact_version: int = 1
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "artifact_type": self.artifact_type,
+            "artifact_version": self.artifact_version,
+            "request_hash": self.request_hash,
+            "policy_hash": self.policy_hash,
+            "derivation_hash": self.derivation_hash,
+            "decision_key": self.decision_key,
+            "request": dict(self.request),
+            "derived_grant": dict(self.derived_grant),
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class DelegationProvenance:
+    """Deterministic delegation lineage artifact shape."""
+
+    lineage_id: str
+    subject_token_hash: str
+    actor_token_hash: str | None
+    nodes: Mapping[str, Any]
+    edge: Mapping[str, Any]
+    artifact_type: str = "delegation_provenance"
+    artifact_version: int = 1
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "artifact_type": self.artifact_type,
+            "artifact_version": self.artifact_version,
+            "lineage_id": self.lineage_id,
+            "subject_token_hash": self.subject_token_hash,
+            "actor_token_hash": self.actor_token_hash,
+            "nodes": dict(self.nodes),
+            "edge": dict(self.edge),
+        }
+
+
 @dataclass(frozen=True)
 class OpenRequest:
     """Input to opening protected artifacts such as ciphertexts and envelopes."""
@@ -498,12 +548,14 @@ __all__ = [
     "Artifact",
     "ArtifactFormat",
     "ArtifactKind",
+    "AuthorizationDecisionTrace",
     "Canon",
     "CanonicalizeRequest",
     "CapabilityMap",
     "CertificateRequest",
     "CertificateVerifyRequest",
     "DeriveKeyRequest",
+    "DelegationProvenance",
     "DPoPNonceRecord",
     "DPoPProofClaims",
     "ExportKeyRequest",

@@ -5,7 +5,7 @@ from __future__ import annotations
 import warnings
 from tigrbl_identity_storage.tables._ops import token_hash
 from tigrbl_identity_storage.tables.audit_event import append_audit_event, append_audit_event_async
-from tigrbl_identity_storage.tables.auth_session._lifecycle import (
+from tigrbl_identity_storage.tables.auth_session._ops import (
     bind_session_client,
     bind_session_client_async,
     create_session,
@@ -19,19 +19,19 @@ from tigrbl_identity_storage.tables.auth_session._lifecycle import (
     touch_session,
     touch_session_async,
 )
-from tigrbl_identity_storage.tables.client_registration._lifecycle import (
+from tigrbl_identity_storage.tables.client_registration._ops import (
     get_client_registration,
     get_client_registration_async,
     upsert_client_registration,
     upsert_client_registration_async,
 )
-from tigrbl_identity_storage.tables.consent._lifecycle import (
+from tigrbl_identity_storage.tables.consent._ops import (
     record_consent,
     record_consent_async,
     revoke_consent,
     revoke_consent_async,
 )
-from tigrbl_identity_storage.tables.logout_state._lifecycle import (
+from tigrbl_identity_storage.tables.logout_state._ops import (
     get_latest_logout_for_session,
     get_latest_logout_for_session_async,
     mark_logout_channel,
@@ -41,7 +41,7 @@ from tigrbl_identity_storage.tables.logout_state._lifecycle import (
     update_logout_metadata,
     update_logout_metadata_async,
 )
-from tigrbl_identity_storage.tables.revoked_token._op import (
+from tigrbl_identity_storage.tables.revoked_token._ops import (
     is_token_revoked,
     is_token_revoked_async,
     reset_token_state,
@@ -49,10 +49,10 @@ from tigrbl_identity_storage.tables.revoked_token._op import (
     revoke_token,
     revoke_token_async,
 )
-from tigrbl_identity_storage.tables.token_record._op import (
+from tigrbl_identity_storage.tables.token_record._ops import (
     introspect_token_record_async as introspect_token_async,
 )
-from tigrbl_identity_storage.tables.token_record._op import (
+from tigrbl_identity_storage.tables.token_record._ops import (
     get_token_record_async,
     mark_token_used_async,
     remove_token_record_async,
