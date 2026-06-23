@@ -51,6 +51,11 @@ PUBLIC_API_CONTRACT = PublicApiContract(
     ),
     forbidden_route_prefixes=(
         "/admin",
+        "/cryptokey",
+        "/cryptokeyversion",
+        "/principalkeybinding",
+        "/keyenvelope",
+        "/keyattestationevidence",
         "/tenant/",
         "/diagnostics",
     ),

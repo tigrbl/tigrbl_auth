@@ -6,20 +6,31 @@ from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
 from tigrbl_security_trust_contracts import (
+    AttestKeyRequest,
+    AttestationEvidence,
     Artifact,
     CanonicalizeRequest,
     CapabilityMap,
     CertificateRequest,
     CertificateVerifyRequest,
+    DecapsulateRequest,
+    DecryptRequest,
     DeriveKeyRequest,
     DPoPBinding,
+    EncapsulateRequest,
+    EncapsulationResult,
+    EncryptRequest,
+    ExportPublicKeyRequest,
+    ExportPublicKeyResult,
     ExportKeyRequest,
     IssueRequest,
     KeyArtifact,
     KeyDescriptor,
+    KeyHandle,
     KeyMaterial,
     KeyPage,
     KeyRefLike,
+    KeySpec,
     ListKeysRequest,
     NormalizedDescriptor,
     OpenRequest,
@@ -28,12 +39,20 @@ from tigrbl_security_trust_contracts import (
     ParseRequest,
     ProofBinding,
     RewrapRequest,
+    SignRequest,
+    SignResult,
     TokenIntrospectionRequest,
     TokenIntrospectionResult,
     TokenIssueRequest,
     TokenVerifyRequest,
+    UnwrapKeyRequest,
+    VerifyAttestationRequest,
+    VerifySignatureRequest,
+    VerifySignatureResult,
     VerificationResult,
     VerifyRequest,
+    WrappedKeyMaterial,
+    WrapKeyRequest,
     MTLSBinding,
 )
 
@@ -87,6 +106,19 @@ class SigningDomainBase(
     CapabilityProviderBase, ArtifactIssuerBase, ArtifactVerifierBase, ArtifactCodecBase
 ):
     """Domain composition for detached or attached signing providers."""
+
+
+class SigningProviderBase(CapabilityProviderBase):
+    """Base for provider-neutral signing and signature verification."""
+
+    async def sign(self, request: SignRequest) -> SignResult:
+        raise NotImplementedError
+
+    async def verify_signature(
+        self,
+        request: VerifySignatureRequest,
+    ) -> VerifySignatureResult:
+        raise NotImplementedError
 
 
 class ProofOfPossessionDomainBase(
@@ -202,6 +234,111 @@ class KeyProviderDomainBase(CapabilityProviderBase):
 
     async def derive_key(self, request: DeriveKeyRequest) -> KeyMaterial:
         raise NotImplementedError
+
+
+class KeyLifecycleProviderBase(CapabilityProviderBase):
+    """Base for provider-neutral key creation, import, rotation, and destruction."""
+
+    async def create_key(self, spec: KeySpec) -> KeyHandle:
+        raise NotImplementedError
+
+    async def import_key(
+        self,
+        spec: KeySpec,
+        material: bytes,
+        *,
+        public: bytes | None = None,
+    ) -> KeyHandle:
+        raise NotImplementedError
+
+    async def rotate_key(
+        self,
+        kid: str,
+        *,
+        spec_overrides: Mapping[str, Any] | None = None,
+    ) -> KeyHandle:
+        raise NotImplementedError
+
+    async def destroy_key(self, kid: str, version: int | None = None) -> bool:
+        raise NotImplementedError
+
+
+class KeyResolverBase(CapabilityProviderBase):
+    """Base for resolving opaque key references into provider handles."""
+
+    async def resolve_key(
+        self,
+        ref: KeyRefLike,
+        *,
+        include_secret: bool = False,
+    ) -> KeyRefLike:
+        raise NotImplementedError
+
+
+class EncryptionProviderBase(CapabilityProviderBase):
+    """Base for data encryption and decryption providers."""
+
+    async def encrypt(self, request: EncryptRequest) -> Artifact:
+        raise NotImplementedError
+
+    async def decrypt(self, request: DecryptRequest) -> bytes:
+        raise NotImplementedError
+
+
+class KeyWrappingProviderBase(CapabilityProviderBase):
+    """Base for key wrapping and unwrapping providers."""
+
+    async def wrap_key(self, request: WrapKeyRequest) -> WrappedKeyMaterial:
+        raise NotImplementedError
+
+    async def unwrap_key(self, request: UnwrapKeyRequest) -> KeyMaterial:
+        raise NotImplementedError
+
+
+class KeyEncapsulationProviderBase(CapabilityProviderBase):
+    """Base for KEM encapsulation and decapsulation providers."""
+
+    async def encapsulate(self, request: EncapsulateRequest) -> EncapsulationResult:
+        raise NotImplementedError
+
+    async def decapsulate(self, request: DecapsulateRequest) -> bytes:
+        raise NotImplementedError
+
+
+class AttestationProviderBase(CapabilityProviderBase):
+    """Base for key attestation and evidence verification providers."""
+
+    async def attest_key(self, request: AttestKeyRequest) -> AttestationEvidence:
+        raise NotImplementedError
+
+    async def verify_attestation(
+        self,
+        request: VerifyAttestationRequest,
+    ) -> VerificationResult:
+        raise NotImplementedError
+
+
+class PublicKeyExporterBase(CapabilityProviderBase):
+    """Base for public key material export."""
+
+    async def export_public_key(
+        self,
+        request: ExportPublicKeyRequest,
+    ) -> ExportPublicKeyResult:
+        raise NotImplementedError
+
+
+class CryptoKeyProviderBase(
+    KeyLifecycleProviderBase,
+    KeyResolverBase,
+    SigningProviderBase,
+    EncryptionProviderBase,
+    KeyWrappingProviderBase,
+    KeyEncapsulationProviderBase,
+    AttestationProviderBase,
+    PublicKeyExporterBase,
+):
+    """Composite base for providers that intentionally implement the full key surface."""
 
 
 class CipherPolicyDomainBase(CapabilityProviderBase):

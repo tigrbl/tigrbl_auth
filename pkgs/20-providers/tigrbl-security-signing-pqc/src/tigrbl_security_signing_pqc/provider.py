@@ -4,7 +4,7 @@ import base64
 import hashlib
 from typing import Any, Final, Mapping
 
-from tigrbl_security_trust_domain_bases import SigningDomainBase
+from tigrbl_security_trust_domain_bases import SigningDomainBase, SigningProviderBase
 from tigrbl_security_trust_contracts import (
     Artifact,
     CanonicalizeRequest,
@@ -13,6 +13,10 @@ from tigrbl_security_trust_contracts import (
     ParsedArtifact,
     ParseRequest,
     PQCSignatureKeyPair,
+    SignRequest,
+    SignResult,
+    VerifySignatureRequest,
+    VerifySignatureResult,
     VerificationResult,
     VerifyRequest,
 )
@@ -158,7 +162,7 @@ def secret_key_from_pqc_jwk(jwk: Mapping[str, Any]) -> bytes:
     return b64url_decode(d)
 
 
-class PQCSigningProvider(SigningDomainBase):
+class PQCSigningProvider(SigningProviderBase, SigningDomainBase):
     """Concrete ML-DSA-65 signing provider implementing the signing trust-domain base."""
 
     def supports(self) -> CapabilityMap:
@@ -201,6 +205,24 @@ class PQCSigningProvider(SigningDomainBase):
             meta={"alg": alg, "provider": "tigrbl-security-signing-pqc"},
         )
 
+    async def sign(self, request: SignRequest) -> SignResult:
+        artifact = await self.issue(
+            IssueRequest(
+                op="sign",
+                payload=request.payload,
+                key=request.key,
+                alg=request.alg,
+                context=request.context,
+                opts=request.opts,
+            )
+        )
+        return SignResult(
+            signature=artifact.bytes_value or b"",
+            alg=str(artifact.meta.get("alg")) if artifact.meta.get("alg") else request.alg,
+            format=artifact.format,
+            meta=artifact.meta,
+        )
+
     async def verify(self, request: VerifyRequest) -> VerificationResult:
         artifact = request.artifact
         if artifact.bytes_value is None:
@@ -218,6 +240,31 @@ class PQCSigningProvider(SigningDomainBase):
         alg = normalize_pqc_algorithm(str(artifact.meta.get("alg") or ML_DSA_65_ALG))
         valid = verify_pqc_signature(payload, artifact.bytes_value, public, algorithm=alg)
         return VerificationResult(valid=valid, reason=None if valid else "invalid PQC signature")
+
+    async def verify_signature(
+        self,
+        request: VerifySignatureRequest,
+    ) -> VerifySignatureResult:
+        signature = request.signature
+        if isinstance(signature, Artifact):
+            artifact = signature
+        else:
+            artifact = Artifact(
+                kind="signature",
+                format="raw-signature",
+                bytes_value=signature if isinstance(signature, bytes) else str(signature).encode("utf-8"),
+                meta={"alg": request.alg or ML_DSA_65_ALG},
+            )
+        result = await self.verify(
+            VerifyRequest(
+                artifact=artifact,
+                payload=request.payload,
+                key=request.key,
+                context=request.context,
+                opts=request.opts,
+            )
+        )
+        return VerifySignatureResult(valid=result.valid, reason=result.reason, meta=result.meta)
 
     async def parse(self, request: ParseRequest) -> ParsedArtifact:
         return ParsedArtifact(

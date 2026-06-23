@@ -47,6 +47,11 @@ SERVICE_ADMIN_API_CONTRACT = ServiceAdminApiContract(
         "/consent",
         "/client",
         "/clientregistration",
+        "/cryptokey",
+        "/cryptokeyversion",
+        "/principalkeybinding",
+        "/keyenvelope",
+        "/keyattestationevidence",
     ),
     forbidden_exact_routes=(
         "/login",

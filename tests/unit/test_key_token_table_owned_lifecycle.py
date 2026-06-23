@@ -1,6 +1,14 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage.tables import Key, KeyVersion, RevokedToken, TokenRecord
+from tigrbl_identity_storage.tables import (
+    CryptoKey,
+    CryptoKeyVersion,
+    KeyAttestationEvidence,
+    KeyEnvelope,
+    PrincipalKeyBinding,
+    RevokedToken,
+    TokenRecord,
+)
 from tigrbl_identity_storage.tables._security_ctx import (
     JWT_CODER_CTX,
     KEY_PROVIDER_CTX,
@@ -8,32 +16,37 @@ from tigrbl_identity_storage.tables._security_ctx import (
     VERIFIER_CTX,
     stash_security_providers,
 )
-from tigrbl_identity_storage.tables.key import scrub_key_material
-from tigrbl_identity_storage.tables.key_version import scrub_key_version_material
+from tigrbl_identity_storage.tables.crypto_key import scrub_key_material
+from tigrbl_identity_storage.tables.crypto_key_version import scrub_key_version_material
 
 
 def test_key_tables_are_storage_owned_and_exported() -> None:
-    assert Key.__tablename__ == "identity_keys"
-    assert KeyVersion.__tablename__ == "identity_key_versions"
-    assert callable(Key.rotate)
-    assert callable(Key.publish_jwks)
-    assert callable(KeyVersion.create_version)
+    assert CryptoKey.__tablename__ == "crypto_keys"
+    assert CryptoKeyVersion.__tablename__ == "crypto_key_versions"
+    assert PrincipalKeyBinding.__tablename__ == "principal_key_bindings"
+    assert KeyEnvelope.__tablename__ == "key_envelopes"
+    assert KeyAttestationEvidence.__tablename__ == "key_attestation_evidence"
+    assert callable(CryptoKey.rotate_record)
+    assert not hasattr(CryptoKey, "sign")
+    assert not hasattr(CryptoKey, "verify")
+    assert not hasattr(CryptoKey, "publish_jwks")
+    assert callable(CryptoKeyVersion.create_version)
 
 
 def test_key_material_scrubbers_remove_private_fields() -> None:
     payload = {
         "kid": "kid-1",
         "provider_key_ref": "secret-ref",
-        "public_jwk": {"kid": "kid-1", "kty": "PQC", "x": "pub", "d": "priv"},
+        "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub", "d": "priv"},
     }
 
     assert scrub_key_material(payload) == {
         "kid": "kid-1",
-        "public_jwk": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
+        "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
     }
     assert scrub_key_version_material(payload) == {
         "kid": "kid-1",
-        "public_jwk": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
+        "public_material": {"kid": "kid-1", "kty": "PQC", "x": "pub"},
     }
 
 

@@ -4,6 +4,27 @@ from __future__ import annotations
 
 from typing import Any, Mapping, Protocol, Sequence
 
+from .keys import (
+    AttestKeyRequest,
+    AttestationEvidence,
+    DecapsulateRequest,
+    DecryptRequest,
+    EncapsulateRequest,
+    EncapsulationResult,
+    EncryptRequest,
+    ExportPublicKeyRequest,
+    ExportPublicKeyResult,
+    KeyHandle,
+    KeySpec,
+    SignRequest,
+    SignResult,
+    UnwrapKeyRequest,
+    VerifyAttestationRequest,
+    VerifySignatureRequest,
+    VerifySignatureResult,
+    WrappedKeyMaterial,
+    WrapKeyRequest,
+)
 from .types import (
     Alg,
     Artifact,
@@ -110,6 +131,29 @@ class IKeyLifecycle(Protocol):
     ) -> KeyRefLike: ...
 
 
+class IKeyLifecycleProvider(Protocol):
+    """Provider-neutral key lifecycle using explicit key DTOs."""
+
+    async def create_key(self, spec: KeySpec) -> KeyHandle: ...
+
+    async def import_key(
+        self,
+        spec: KeySpec,
+        material: bytes,
+        *,
+        public: bytes | None = None,
+    ) -> KeyHandle: ...
+
+    async def rotate_key(
+        self,
+        kid: str,
+        *,
+        spec_overrides: Mapping[str, Any] | None = None,
+    ) -> KeyHandle: ...
+
+    async def destroy_key(self, kid: str, version: int | None = None) -> bool: ...
+
+
 class IKeyDiscovery(Protocol):
     """Format-neutral key inventory and description."""
 
@@ -136,6 +180,61 @@ class IKeyDeriver(Protocol):
     """Generic KDF surface; HKDF, PBKDF2, scrypt, etc. are selected by request.alg."""
 
     async def derive_key(self, request: DeriveKeyRequest) -> KeyMaterial: ...
+
+
+class ISigningProvider(Protocol):
+    """Provider-neutral signing and verification."""
+
+    async def sign(self, request: SignRequest) -> SignResult: ...
+
+    async def verify_signature(
+        self,
+        request: VerifySignatureRequest,
+    ) -> VerifySignatureResult: ...
+
+
+class IEncryptionProvider(Protocol):
+    """Provider-neutral data encryption and decryption."""
+
+    async def encrypt(self, request: EncryptRequest) -> Artifact: ...
+
+    async def decrypt(self, request: DecryptRequest) -> bytes: ...
+
+
+class IKeyWrappingProvider(Protocol):
+    """Provider-neutral key wrapping and unwrapping."""
+
+    async def wrap_key(self, request: WrapKeyRequest) -> WrappedKeyMaterial: ...
+
+    async def unwrap_key(self, request: UnwrapKeyRequest) -> KeyMaterial: ...
+
+
+class IKeyEncapsulationProvider(Protocol):
+    """Provider-neutral KEM encapsulation and decapsulation."""
+
+    async def encapsulate(self, request: EncapsulateRequest) -> EncapsulationResult: ...
+
+    async def decapsulate(self, request: DecapsulateRequest) -> bytes: ...
+
+
+class IAttestationProvider(Protocol):
+    """Provider-neutral key attestation and evidence verification."""
+
+    async def attest_key(self, request: AttestKeyRequest) -> AttestationEvidence: ...
+
+    async def verify_attestation(
+        self,
+        request: VerifyAttestationRequest,
+    ) -> VerificationResult: ...
+
+
+class IPublicKeyExporter(Protocol):
+    """Provider-neutral public key export."""
+
+    async def export_public_key(
+        self,
+        request: ExportPublicKeyRequest,
+    ) -> ExportPublicKeyResult: ...
 
 
 class ICipherPolicy(Protocol):
@@ -243,13 +342,20 @@ __all__ = [
     "ICipherPolicy",
     "IConfirmationBindingValidator",
     "IEntropySource",
+    "IAttestationProvider",
+    "IEncryptionProvider",
+    "IKeyEncapsulationProvider",
     "IKeyDeriver",
     "IKeyDiscovery",
     "IKeyExporter",
     "IKeyLifecycle",
+    "IKeyLifecycleProvider",
     "IKeyResolver",
+    "IKeyWrappingProvider",
+    "IPublicKeyExporter",
     "IProvenanceArtifactBuilder",
     "IRecipientSetEditor",
+    "ISigningProvider",
     "ISenderConstraintValidator",
     "ITokenIntrospectionClient",
     "ITokenIntrospectionTransport",

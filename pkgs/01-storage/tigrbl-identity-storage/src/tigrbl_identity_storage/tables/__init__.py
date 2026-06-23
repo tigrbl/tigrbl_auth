@@ -43,8 +43,11 @@ from .credential_mtls_certificate import CredentialMtlsCertificate
 from .credential_password import CredentialPassword
 from .credential_recovery_code import CredentialRecoveryCode
 from .credential_webauthn_passkey import CredentialWebAuthnPasskey
-from .key import Key
-from .key_version import KeyVersion
+from .crypto_key import CryptoKey
+from .crypto_key_version import CryptoKeyVersion
+from .principal_key_binding import PrincipalKeyBinding
+from .key_envelope import KeyEnvelope
+from .key_attestation_evidence import KeyAttestationEvidence
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -135,8 +138,11 @@ _TABLE_MODELS = (
     CredentialPassword,
     CredentialRecoveryCode,
     CredentialWebAuthnPasskey,
-    Key,
-    KeyVersion,
+    CryptoKey,
+    CryptoKeyVersion,
+    PrincipalKeyBinding,
+    KeyEnvelope,
+    KeyAttestationEvidence,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -282,8 +288,11 @@ __all__ = [
     "CredentialPassword",
     "CredentialRecoveryCode",
     "CredentialWebAuthnPasskey",
-    "Key",
-    "KeyVersion",
+    "CryptoKey",
+    "CryptoKeyVersion",
+    "PrincipalKeyBinding",
+    "KeyEnvelope",
+    "KeyAttestationEvidence",
     "AuthSession",
     "AuthCode",
     "DeviceCode",

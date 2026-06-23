@@ -52,13 +52,16 @@ TABLE_MODULE_EXPORTS = {
     ),
     "entitlement": ("Entitlement",),
     "entitlement_assignment": ("EntitlementAssignment",),
-    "key": ("Key",),
+    "crypto_key": ("CryptoKey",),
+    "crypto_key_version": ("CryptoKeyVersion",),
     "key_rotation_event": ("KeyRotationEvent",),
     "key_rotation_policy": ("KeyRotationPolicy",),
-    "key_version": ("KeyVersion",),
+    "key_envelope": ("KeyEnvelope",),
+    "key_attestation_evidence": ("KeyAttestationEvidence",),
     "logout_state": ("LogoutState",),
     "machine_identity": ("MachineIdentity",),
     "principal": ("Principal",),
+    "principal_key_binding": ("PrincipalKeyBinding",),
     "pushed_authorization_request": (
         "PushedAuthorizationRequest",
         "DEFAULT_PAR_EXPIRY",
@@ -102,6 +105,18 @@ def test_renamed_identity_credential_tables_do_not_keep_legacy_modules() -> None
         assert not hasattr(storage_tables, legacy_name)
 
     for module_name in ("api_key", "service", "service_key"):
+        assert importlib.util.find_spec(f"tigrbl_identity_storage.tables.{module_name}") is None
+        assert importlib.util.find_spec(f"tigrbl_auth.tables.{module_name}") is None
+
+
+def test_renamed_crypto_key_tables_do_not_keep_legacy_modules() -> None:
+    storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
+
+    for legacy_name in ("Key", "KeyVersion"):
+        assert legacy_name not in storage_tables.__all__
+        assert not hasattr(storage_tables, legacy_name)
+
+    for module_name in ("key", "key_version"):
         assert importlib.util.find_spec(f"tigrbl_identity_storage.tables.{module_name}") is None
         assert importlib.util.find_spec(f"tigrbl_auth.tables.{module_name}") is None
 

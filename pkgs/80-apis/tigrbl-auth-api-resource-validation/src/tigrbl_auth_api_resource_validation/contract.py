@@ -37,6 +37,11 @@ RESOURCE_VALIDATION_API_CONTRACT = ResourceValidationApiContract(
         "/tenant/",
         "/register/",
         "/diagnostics",
+        "/cryptokey",
+        "/cryptokeyversion",
+        "/principalkeybinding",
+        "/keyenvelope",
+        "/keyattestationevidence",
     ),
     forbidden_exact_routes=(
         "/login",

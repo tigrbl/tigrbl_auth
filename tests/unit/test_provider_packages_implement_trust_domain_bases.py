@@ -26,9 +26,10 @@ COMPOSITION_PROVIDER_PACKAGES = {
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:
     from tigrbl_security_signing_pqc import PQCSigningProvider
-    from tigrbl_security_trust_domain_bases import SigningDomainBase
+    from tigrbl_security_trust_domain_bases import SigningDomainBase, SigningProviderBase
 
     assert issubclass(PQCSigningProvider, SigningDomainBase)
+    assert issubclass(PQCSigningProvider, SigningProviderBase)
     assert "ML-DSA-65" in PQCSigningProvider().supports().algs
 
 

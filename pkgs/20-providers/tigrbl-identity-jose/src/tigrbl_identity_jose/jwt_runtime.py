@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 import base64
+import asyncio
 import json
+from collections.abc import Coroutine
 from typing import Any, Tuple
 
 from tigrbl_identity_contracts.tokens import (
     DEFAULT_ACCESS_TOKEN_TTL,
     DEFAULT_REFRESH_TOKEN_TTL,
 )
-from tigrbl_identity_storage.tables._sync import run_async as _run_coro
 
 from .key_management import _DEFAULT_KEY_PATH, _ensure_key, _provider
 
@@ -46,8 +47,13 @@ def _load_runtime() -> dict[str, Any]:
     }
 
 
-def _run(coro):
-    return _run_coro(coro)
+def _run(coro: Coroutine[Any, Any, Any]) -> Any:
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)
+    coro.close()
+    raise RuntimeError("sync JOSE helpers cannot run inside an active event loop; use the async helper")
 
 
 def _svc() -> Tuple[Any, str]:
