@@ -20,16 +20,13 @@ from tigrbl_identity_storage.framework import (
     Timestamped,
     acol,
 )
+from tigrbl_security_trust_contracts import normalize_key_operations
 
 from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
 
 
-def _string_list(values: Any) -> list[str]:
-    if values is None or values == "" or values is False:
-        return []
-    if isinstance(values, str):
-        return [values]
-    return [str(value) for value in values if value not in {None, ""}]
+def _operation_list(values: Any) -> list[str]:
+    return [operation.value for operation in normalize_key_operations(values)]
 
 
 class CryptoKeyVersion(RestOltpTable, GUIDPk, Timestamped):
@@ -82,7 +79,7 @@ class CryptoKeyVersion(RestOltpTable, GUIDPk, Timestamped):
             "public_material_format": public_material_format,
             "provider_key_ref": provider_key_ref,
             "provider": provider,
-            "allowed_ops": _string_list(allowed_ops),
+            "allowed_ops": _operation_list(allowed_ops),
             "fingerprint": fingerprint,
             "not_before": not_before,
             "not_after": not_after,

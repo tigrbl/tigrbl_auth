@@ -3219,6 +3219,7 @@ dependencies = [
     { name = "tigrbl" },
     { name = "tigrbl-core" },
     { name = "tigrbl-identity-core" },
+    { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
@@ -3227,6 +3228,7 @@ requires-dist = [
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]
 
 [[package]]

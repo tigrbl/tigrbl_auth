@@ -21,14 +21,7 @@ from tigrbl_identity_storage.framework import (
 )
 
 from .._ops import create_record, field, first_record, list_records, read_record, record_id, update_record, utc_now
-
-
-def _string_list(values: Any) -> list[str]:
-    if values is None or values == "" or values is False:
-        return []
-    if isinstance(values, str):
-        return [values]
-    return [str(value) for value in values if value not in {None, ""}]
+from ._usage import normalize_payload_key_usage, stored_key_operations, stored_key_usages
 
 
 class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
@@ -38,7 +31,7 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
     kid: Mapped[str] = acol(storage=S(String(255), nullable=False, unique=True, index=True))
     algorithm: Mapped[str] = acol(storage=S(String(64), nullable=False, index=True))
     key_kind: Mapped[str] = acol(storage=S(String(64), nullable=False, default="asymmetric", index=True))
-    key_profiles: Mapped[list[str] | None] = acol(storage=S(JSON, nullable=True))
+    key_usages: Mapped[list[str] | None] = acol(storage=S(JSON, nullable=True))
     allowed_ops: Mapped[list[str] | None] = acol(storage=S(JSON, nullable=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     primary_version: Mapped[int | None] = acol(storage=S(Integer, nullable=True, default=1))
@@ -66,7 +59,7 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
         kid: str,
         algorithm: str,
         key_kind: str = "asymmetric",
-        key_profiles: Any = None,
+        key_usages: Any = None,
         allowed_ops: Any = None,
         status: str = "active",
         primary_version: int | None = 1,
@@ -82,15 +75,22 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
         tenant_id: uuid.UUID | None = None,
         realm_id: uuid.UUID | None = None,
     ) -> "CryptoKey":
+        usage_record = normalize_payload_key_usage(
+            {
+                "key_kind": key_kind,
+                "key_usages": key_usages,
+                "allowed_ops": allowed_ops,
+            }
+        )
         return await create_record(
             cls,
             db,
             {
                 "kid": kid,
                 "algorithm": algorithm,
-                "key_kind": key_kind,
-                "key_profiles": _string_list(key_profiles),
-                "allowed_ops": _string_list(allowed_ops),
+                "key_kind": usage_record["key_kind"],
+                "key_usages": usage_record["key_usages"],
+                "allowed_ops": usage_record["allowed_ops"],
                 "status": status,
                 "primary_version": primary_version,
                 "provider": provider,
@@ -120,15 +120,15 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
         db: Any,
         *,
         tenant_id: uuid.UUID | None = None,
-        key_profile: str | None = None,
+        key_usage: str | None = None,
         operation: str | None = None,
     ) -> list["CryptoKey"]:
         filters: dict[str, Any] = {"status": "active"}
         if tenant_id is not None:
             filters["tenant_id"] = tenant_id
         rows = await list_records(cls, db, filters)
-        if key_profile is not None:
-            rows = [row for row in rows if key_profile in set(field(row, "key_profiles", []) or [])]
+        if key_usage is not None:
+            rows = [row for row in rows if key_usage in set(field(row, "key_usages", []) or [])]
         if operation is not None:
             rows = [row for row in rows if operation in set(field(row, "allowed_ops", []) or [])]
         return rows
@@ -183,7 +183,16 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
             public_material_format=public_material_format or field(row, "public_material_format"),
             provider_key_ref=provider_key_ref,
             provider=provider or field(row, "provider"),
-            allowed_ops=_string_list(allowed_ops) or field(row, "allowed_ops"),
+            allowed_ops=stored_key_operations(
+                key_kind=field(row, "key_kind"),
+                key_usages=field(row, "key_usages"),
+                allowed_ops=allowed_ops if allowed_ops is not None else field(row, "allowed_ops"),
+            ),
+        )
+        next_allowed_ops = stored_key_operations(
+            key_kind=field(row, "key_kind"),
+            key_usages=field(row, "key_usages"),
+            allowed_ops=allowed_ops if allowed_ops is not None else field(row, "allowed_ops"),
         )
         updated = await update_record(
             cls,
@@ -195,7 +204,8 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
                 "public_material_format": public_material_format or field(row, "public_material_format"),
                 "provider_key_ref": provider_key_ref or field(row, "provider_key_ref"),
                 "provider": provider or field(row, "provider"),
-                "allowed_ops": _string_list(allowed_ops) or field(row, "allowed_ops"),
+                "key_usages": stored_key_usages(field(row, "key_usages")),
+                "allowed_ops": next_allowed_ops,
             },
         )
         await KeyRotationEvent.record_rotation(

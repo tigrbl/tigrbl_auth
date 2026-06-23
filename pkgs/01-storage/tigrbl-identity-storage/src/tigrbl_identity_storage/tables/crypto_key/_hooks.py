@@ -7,6 +7,7 @@ from typing import Any, Mapping
 from tigrbl_identity_storage.framework import hook_ctx
 
 from .._ops import field, record_id
+from ._usage import normalize_payload_key_usage
 from ._table import CryptoKey
 
 _TIGRBL_HOOK_STAGE_KEY = "".join(("pha", "se"))
@@ -36,6 +37,16 @@ def scrub_key_material(payload: Any) -> Any:
         except Exception:
             pass
     return payload
+
+
+@hook_ctx(**{"ops": ("create", "update"), _TIGRBL_HOOK_STAGE_KEY: "PRE_HANDLER"})
+async def normalize_key_usage_policy(ctx: Mapping[str, Any]) -> None:
+    payload = ctx.get("payload")
+    if not isinstance(payload, Mapping):
+        return
+    normalized = normalize_payload_key_usage(payload)
+    if isinstance(ctx, dict):
+        ctx["payload"] = normalized
 
 
 @hook_ctx(**{"ops": "create", _TIGRBL_HOOK_STAGE_KEY: "POST_HANDLER"})
@@ -78,4 +89,4 @@ async def ensure_key_enabled(ctx: Mapping[str, Any]) -> None:
         ctx["crypto_key"] = row
 
 
-__all__ = ["ensure_key_enabled", "scrub_key_material", "seed_primary_key_version"]
+__all__ = ["ensure_key_enabled", "normalize_key_usage_policy", "scrub_key_material", "seed_primary_key_version"]

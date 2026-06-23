@@ -55,9 +55,10 @@ def _adopt_legacy_key_tables(conn) -> None:
     _rename_table_if_present(conn, "identity_key_versions", "crypto_key_versions")
     _rename_column_if_present(conn, "crypto_keys", "public_jwk", "public_material")
     _rename_column_if_present(conn, "crypto_key_versions", "public_jwk", "public_material")
+    _rename_column_if_present(conn, "crypto_keys", "key_profiles", "key_usages")
 
     _add_column_if_missing(conn, "crypto_keys", '"key_kind" VARCHAR(64) NOT NULL DEFAULT \'asymmetric\'', "key_kind")
-    _add_column_if_missing(conn, "crypto_keys", '"key_profiles" JSON', "key_profiles")
+    _add_column_if_missing(conn, "crypto_keys", '"key_usages" JSON', "key_usages")
     _add_column_if_missing(conn, "crypto_keys", '"allowed_ops" JSON', "allowed_ops")
     _add_column_if_missing(conn, "crypto_keys", '"export_policy" VARCHAR(64) NOT NULL DEFAULT \'public_only\'', "export_policy")
     _add_column_if_missing(conn, "crypto_keys", '"origin" VARCHAR(64) NOT NULL DEFAULT \'generated\'', "origin")

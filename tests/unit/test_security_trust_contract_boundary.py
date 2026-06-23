@@ -4,6 +4,8 @@ import ast
 import importlib
 from pathlib import Path
 
+import pytest
+
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
@@ -66,10 +68,25 @@ def test_security_trust_contract_and_base_packages_export_expected_surfaces() ->
     assert contracts.Artifact.__name__ == "Artifact"
     assert contracts.JWTPayload.__module__ == "tigrbl_security_trust_contracts.types"
     assert contracts.ProofBinding("dpop", {"jkt": "thumb"}).method == "dpop"
-    assert contracts.DPoPBinding(jwk_thumbprint="thumb", htm="get", htu="https://api.example.test", jti="jti").confirmation_claim == {"jkt": "thumb"}
+    assert contracts.DPoPBinding(
+        jwk_thumbprint="thumb",
+        htm="get",
+        htu="https://api.example.test",
+        jti="jti",
+    ).confirmation_claim == {"jkt": "thumb"}
     assert contracts.MTLSBinding(certificate_thumbprint="thumb").confirmation_claim == {"x5t#S256": "thumb"}
-    assert contracts.KeyProfile.KEK.value == "kek"
-    assert contracts.KeyProfile.DEK.value == "dek"
+    assert not hasattr(contracts, "KeyProfile")
+    assert contracts.KeyUsage.KEK.value == "kek"
+    assert contracts.KeyUsage.DEK.value == "dek"
+    assert contracts.KEY_USAGE_SPECS[contracts.KeyUsage.KEK].default_ops == (
+        contracts.KeyOperation.WRAP_KEY,
+        contracts.KeyOperation.UNWRAP_KEY,
+    )
+    assert contracts.resolve_key_allowed_operations(
+        kind=contracts.KeyKind.SYMMETRIC,
+        usages=(contracts.KeyUsage.KEK,),
+        allowed_ops=(contracts.KeyOperation.WRAP_KEY,),
+    ) == (contracts.KeyOperation.WRAP_KEY,)
     assert contracts.KeyOperation.ENCAPSULATE.value == "encapsulate"
     assert contracts.KeyOperation.DECAPSULATE.value == "decapsulate"
     assert contracts.EncapsulateRequest(public_key="pub").public_key == "pub"
@@ -78,3 +95,31 @@ def test_security_trust_contract_and_base_packages_export_expected_surfaces() ->
     assert bases.KeyWrappingProviderBase.__name__ == "KeyWrappingProviderBase"
     assert bases.KeyEncapsulationProviderBase.__name__ == "KeyEncapsulationProviderBase"
     assert bases.KeyProviderDomainBase.__name__ == "KeyProviderDomainBase"
+
+
+def test_key_usage_specs_default_narrow_and_reject_expanded_operations() -> None:
+    contracts = importlib.import_module("tigrbl_security_trust_contracts")
+
+    assert contracts.resolve_key_allowed_operations(
+        kind="symmetric",
+        usages=("dek",),
+        allowed_ops=None,
+    ) == (contracts.KeyOperation.ENCRYPT, contracts.KeyOperation.DECRYPT)
+    assert contracts.resolve_key_allowed_operations(
+        kind="symmetric",
+        usages=("dek",),
+        allowed_ops=("encrypt",),
+    ) == (contracts.KeyOperation.ENCRYPT,)
+
+    with pytest.raises(ValueError):
+        contracts.resolve_key_allowed_operations(
+            kind="symmetric",
+            usages=("dek",),
+            allowed_ops=("encrypt", "sign"),
+        )
+
+    with pytest.raises(ValueError):
+        contracts.resolve_key_allowed_operations(
+            kind="asymmetric",
+            usages=("dek",),
+        )

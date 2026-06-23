@@ -17,11 +17,16 @@ from tigrbl_identity_storage.tables._security_ctx import (
     stash_security_providers,
 )
 from tigrbl_identity_storage.tables.crypto_key import scrub_key_material
+from tigrbl_identity_storage.tables.crypto_key._usage import normalize_payload_key_usage
 from tigrbl_identity_storage.tables.crypto_key_version import scrub_key_version_material
 
 
 def test_key_tables_are_storage_owned_and_exported() -> None:
+    key_columns = CryptoKey.__table__.columns
+
     assert CryptoKey.__tablename__ == "crypto_keys"
+    assert "key_usages" in key_columns
+    assert "key_profiles" not in key_columns
     assert CryptoKeyVersion.__tablename__ == "crypto_key_versions"
     assert PrincipalKeyBinding.__tablename__ == "principal_key_bindings"
     assert KeyEnvelope.__tablename__ == "key_envelopes"
@@ -31,6 +36,23 @@ def test_key_tables_are_storage_owned_and_exported() -> None:
     assert not hasattr(CryptoKey, "verify")
     assert not hasattr(CryptoKey, "publish_jwks")
     assert callable(CryptoKeyVersion.create_version)
+
+
+def test_key_usage_defaults_and_narrows_allowed_ops() -> None:
+    assert normalize_payload_key_usage(
+        {"key_kind": "symmetric", "key_usages": ["kek"]}
+    ) == {
+        "key_kind": "symmetric",
+        "key_usages": ["kek"],
+        "allowed_ops": ["wrap_key", "unwrap_key"],
+    }
+    assert normalize_payload_key_usage(
+        {"key_kind": "symmetric", "key_usages": ["kek"], "allowed_ops": ["wrap_key"]}
+    ) == {
+        "key_kind": "symmetric",
+        "key_usages": ["kek"],
+        "allowed_ops": ["wrap_key"],
+    }
 
 
 def test_key_material_scrubbers_remove_private_fields() -> None:
