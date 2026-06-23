@@ -75,7 +75,7 @@ def test_reusable_enums_are_not_defined_outside_contract_packages() -> None:
     offenders: list[str] = []
     for path in PKGS.rglob("*.py"):
         relative = path.relative_to(PKGS)
-        if relative.parts[0] == "01-contracts":
+        if relative.parts[0] == "02-contracts":
             continue
         for enum_name in sorted(_enum_class_names(path)):
             if enum_name in ALLOWED_NON_CONTRACT_ENUMS:

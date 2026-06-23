@@ -123,7 +123,7 @@ def test_contracts_and_authz_policy_use_identity_core_time_and_version_primitive
     roots = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts",

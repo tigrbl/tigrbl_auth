@@ -26,7 +26,7 @@ def test_principal_contracts_are_grouped_under_principals_package() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"

@@ -7,7 +7,7 @@ from pathlib import Path
 DELEGATION_TABLE = (
     Path(__file__).resolve().parents[2]
     / "pkgs"
-    / "20-storage"
+    / "01-storage"
     / "tigrbl-identity-storage"
     / "src"
     / "tigrbl_identity_storage"

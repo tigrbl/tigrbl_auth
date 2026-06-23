@@ -4,7 +4,7 @@ import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-JOSE_ROOT = ROOT / "pkgs" / "30-providers" / "tigrbl-identity-jose"
+JOSE_ROOT = ROOT / "pkgs" / "20-providers" / "tigrbl-identity-jose"
 
 ALLOWED_JOSE_DATACLASSES: set[str] = {
     "src/tigrbl_identity_jose/jwe_policy.py::JWEPolicy",

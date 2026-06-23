@@ -74,7 +74,7 @@ surface_access = PlaneAccessDeclaration(
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-contracts/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/01-contracts/tigrbl-identity-contracts)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tigrbl-identity-contracts)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

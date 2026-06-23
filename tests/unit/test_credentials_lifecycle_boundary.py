@@ -117,7 +117,7 @@ def test_credentials_t2_public_surface_import_dag_stays_clean() -> None:
 
 
 def test_credentials_contracts_are_packaged_by_domain() -> None:
-    contracts_root = ROOT / "pkgs" / "01-contracts" / "tigrbl-identity-contracts" / "src" / "tigrbl_identity_contracts"
+    contracts_root = ROOT / "pkgs" / "02-contracts" / "tigrbl-identity-contracts" / "src" / "tigrbl_identity_contracts"
 
     from tigrbl_identity_contracts.audit.credentials import CredentialAuditEvent
     import tigrbl_identity_contracts.credentials as credential_contracts

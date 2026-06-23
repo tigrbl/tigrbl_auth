@@ -249,12 +249,12 @@ def test_resource_server_t2_public_boundary_has_no_provider_imports() -> None:
         Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/__init__.py"),
         Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/verifier.py"),
         Path("pkgs/50-protocols/tigrbl-authz-resource-server/src/tigrbl_authz_resource_server/sender_constraints.py"),
-        Path("pkgs/30-providers/tigrbl-authz-resource-server-verifier/src/tigrbl_authz_resource_server_verifier/__init__.py"),
-        Path("pkgs/30-providers/tigrbl-security-token-jwks-cache/src/tigrbl_security_token_jwks_cache/__init__.py"),
-        Path("pkgs/30-providers/tigrbl-security-token-introspection-client/src/tigrbl_security_token_introspection_client/__init__.py"),
-        Path("pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator/src/tigrbl_security_dpop_cnf_binding_validator/__init__.py"),
-        Path("pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator/src/tigrbl_security_mtls_cnf_binding_validator/__init__.py"),
-        Path("pkgs/30-providers/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-authz-resource-server-verifier/src/tigrbl_authz_resource_server_verifier/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-security-token-jwks-cache/src/tigrbl_security_token_jwks_cache/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-security-token-introspection-client/src/tigrbl_security_token_introspection_client/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator/src/tigrbl_security_dpop_cnf_binding_validator/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator/src/tigrbl_security_mtls_cnf_binding_validator/__init__.py"),
+        Path("pkgs/20-providers/tigrbl-security-sender-constraint-validator/src/tigrbl_security_sender_constraint_validator/__init__.py"),
     ]
     forbidden = {
         "tigrbl_auth",

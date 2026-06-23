@@ -193,19 +193,19 @@ dev = [
 package = false
 
 [tool.uv.sources]
-tigrbl-release-contracts = { path = "pkgs/01-contracts/tigrbl-release-contracts", editable = true }
+tigrbl-release-contracts = { path = "pkgs/02-contracts/tigrbl-release-contracts", editable = true }
 tigrbl-auth-release-certification = { path = "pkgs/60-runtime/tigrbl-auth-release-certification", editable = true }
-tigrbl-security-trust-contracts = { path = "pkgs/01-contracts/tigrbl-security-trust-contracts", editable = true }
+tigrbl-security-trust-contracts = { path = "pkgs/02-contracts/tigrbl-security-trust-contracts", editable = true }
 tigrbl-security-trust-domain-bases = { path = "pkgs/05-bases/tigrbl-security-trust-domain-bases", editable = true }
-tigrbl-security-certificate-mtls = { path = "pkgs/30-providers/tigrbl-security-certificate-mtls", editable = true }
-tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator", editable = true }
-tigrbl-security-mtls-cnf-binding-validator = { path = "pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator", editable = true }
-tigrbl-security-proof-dpop = { path = "pkgs/30-providers/tigrbl-security-proof-dpop", editable = true }
-tigrbl-security-proof-pkce = { path = "pkgs/30-providers/tigrbl-security-proof-pkce", editable = true }
-tigrbl-security-sender-constraint-validator = { path = "pkgs/30-providers/tigrbl-security-sender-constraint-validator", editable = true }
-tigrbl-security-signing-pqc = { path = "pkgs/30-providers/tigrbl-security-signing-pqc", editable = true }
-tigrbl-security-token-introspection-client = { path = "pkgs/30-providers/tigrbl-security-token-introspection-client", editable = true }
-tigrbl-security-token-jwks-cache = { path = "pkgs/30-providers/tigrbl-security-token-jwks-cache", editable = true }
+tigrbl-security-certificate-mtls = { path = "pkgs/20-providers/tigrbl-security-certificate-mtls", editable = true }
+tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator", editable = true }
+tigrbl-security-mtls-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator", editable = true }
+tigrbl-security-proof-dpop = { path = "pkgs/20-providers/tigrbl-security-proof-dpop", editable = true }
+tigrbl-security-proof-pkce = { path = "pkgs/20-providers/tigrbl-security-proof-pkce", editable = true }
+tigrbl-security-sender-constraint-validator = { path = "pkgs/20-providers/tigrbl-security-sender-constraint-validator", editable = true }
+tigrbl-security-signing-pqc = { path = "pkgs/20-providers/tigrbl-security-signing-pqc", editable = true }
+tigrbl-security-token-introspection-client = { path = "pkgs/20-providers/tigrbl-security-token-introspection-client", editable = true }
+tigrbl-security-token-jwks-cache = { path = "pkgs/20-providers/tigrbl-security-token-jwks-cache", editable = true }
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
 tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
@@ -218,12 +218,12 @@ tigrbl-authz-policy = { path = "pkgs/40-capabilities/tigrbl-authz-policy", edita
 tigrbl-authz-policy-decision-engine = { path = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine", editable = true }
 tigrbl-authz-policy-invariant-registry = { path = "pkgs/10-concrete/tigrbl-authz-policy-invariant-registry", editable = true }
 tigrbl-auth-plugin = { path = "pkgs/60-runtime/tigrbl-auth-plugin", editable = true }
-tigrbl-authz-resource-server-verifier = { path = "pkgs/30-providers/tigrbl-authz-resource-server-verifier", editable = true }
+tigrbl-authz-resource-server-verifier = { path = "pkgs/20-providers/tigrbl-authz-resource-server-verifier", editable = true }
 tigrbl-authz-resource-server = { path = "pkgs/50-protocols/tigrbl-authz-resource-server", editable = true }
 tigrbl-identity-cli = { path = "pkgs/60-runtime/tigrbl-identity-cli", editable = true }
 tigrbl-identity-admin = { path = "pkgs/40-capabilities/tigrbl-identity-admin", editable = true }
 tigrbl-identity-author = { path = "pkgs/60-runtime/tigrbl-identity-author", editable = true }
-tigrbl-identity-contracts = { path = "pkgs/01-contracts/tigrbl-identity-contracts", editable = true }
+tigrbl-identity-contracts = { path = "pkgs/02-contracts/tigrbl-identity-contracts", editable = true }
 tigrbl-identity-concrete = { path = "pkgs/10-concrete/tigrbl-identity-concrete", editable = true }
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/10-concrete/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
@@ -235,7 +235,7 @@ tigrbl-identity-admin-trust-federation-graph = { path = "pkgs/10-concrete/tigrbl
 tigrbl-authz-policy-concrete = { path = "pkgs/10-concrete/tigrbl-authz-policy-concrete", editable = true }
 tigrbl-identity-core = { path = "pkgs/00-primitives/tigrbl-identity-core", editable = true }
 tigrbl-identity-credentials = { path = "pkgs/deprecated/tigrbl-identity-credentials", editable = true }
-tigrbl-identity-jose = { path = "pkgs/30-providers/tigrbl-identity-jose", editable = true }
+tigrbl-identity-jose = { path = "pkgs/20-providers/tigrbl-identity-jose", editable = true }
 tigrbl-identity-oauth = { path = "pkgs/deprecated/tigrbl-identity-oauth", editable = true }
 tigrbl-identity-oidc = { path = "pkgs/deprecated/tigrbl-identity-oidc", editable = true }
 tigrbl-identity-principals = { path = "pkgs/40-capabilities/tigrbl-identity-principals", editable = true }
@@ -245,7 +245,7 @@ tigrbl-identity-resource-server = { path = "pkgs/deprecated/tigrbl-identity-reso
 tigrbl-identity-rp = { path = "pkgs/deprecated/tigrbl-identity-rp", editable = true }
 tigrbl-identity-runtime = { path = "pkgs/60-runtime/tigrbl-identity-runtime", editable = true }
 tigrbl-identity-server = { path = "pkgs/60-runtime/tigrbl-identity-server", editable = true }
-tigrbl-identity-storage = { path = "pkgs/20-storage/tigrbl-identity-storage", editable = true }
+tigrbl-identity-storage = { path = "pkgs/01-storage/tigrbl-identity-storage", editable = true }
 
 [project.scripts]
 tigrbl-auth = "tigrbl_identity_cli.cli.main:main"

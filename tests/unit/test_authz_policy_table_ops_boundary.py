@@ -14,7 +14,7 @@ def test_authz_policy_store_facade_is_removed() -> None:
     assert not (
         ROOT
         / "pkgs"
-        / "20-storage"
+        / "01-storage"
         / "tigrbl-identity-storage"
         / "src"
         / "tigrbl_identity_storage"

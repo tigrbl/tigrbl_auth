@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 STORAGE_SRC = (
     ROOT
     / "pkgs"
-    / "20-storage"
+    / "01-storage"
     / "tigrbl-identity-storage"
     / "src"
     / "tigrbl_identity_storage"

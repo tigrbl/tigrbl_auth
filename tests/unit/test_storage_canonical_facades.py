@@ -146,7 +146,7 @@ def test_tigrbl_auth_migration_modules_do_not_define_duplicate_runtime_logic() -
 
 
 def test_storage_package_does_not_import_compat_table_facades() -> None:
-    storage_root = Path("pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage")
+    storage_root = Path("pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage")
     offenders = []
     for path in storage_root.rglob("*.py"):
         text = path.read_text(encoding="utf-8")
@@ -157,7 +157,7 @@ def test_storage_package_does_not_import_compat_table_facades() -> None:
 
 def test_storage_migrations_import_canonical_models() -> None:
     migration_root = Path(
-        "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/migrations"
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/migrations"
     )
     migration_files = list(migration_root.rglob("*.py"))
     assert migration_files

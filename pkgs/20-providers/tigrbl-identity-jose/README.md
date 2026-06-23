@@ -47,7 +47,7 @@ from tigrbl_identity_jose.key_rotation_policy import KeyRotationPolicyGovernance
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-jose/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-identity-jose)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-identity-jose)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

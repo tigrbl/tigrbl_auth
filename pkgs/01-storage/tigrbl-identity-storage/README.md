@@ -50,7 +50,7 @@ role_table = Role
 
 - [PyPI package](https://pypi.org/project/tigrbl-identity-storage/)
 - [Source repository](https://github.com/tigrbl/tigrbl_auth)
-- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-storage/tigrbl-identity-storage)
+- [Package source](https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/01-storage/tigrbl-identity-storage)
 - [SSOT registry](https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json)
 
 ## Governance

@@ -12,6 +12,9 @@ PYTHON_PACKAGE_LAYERS = {
     "primitives": {
         "tigrbl-identity-core",
     },
+    "storage": {
+        "tigrbl-identity-storage",
+    },
     "contracts": {
         "tigrbl-identity-contracts",
         "tigrbl-release-contracts",
@@ -34,9 +37,6 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-admin-relationship-graph",
         "tigrbl-identity-admin-trust-federation-graph",
         "tigrbl-identity-concrete",
-    },
-    "storage": {
-        "tigrbl-identity-storage",
     },
     "providers": {
         "tigrbl-identity-jose",
@@ -96,11 +96,11 @@ PYTHON_PACKAGE_LAYERS = {
 
 PYTHON_LAYER_FOLDERS = {
     "primitives": "00-primitives",
-    "contracts": "01-contracts",
+    "storage": "01-storage",
+    "contracts": "02-contracts",
     "bases": "05-bases",
     "concrete": "10-concrete",
-    "storage": "20-storage",
-    "providers": "30-providers",
+    "providers": "20-providers",
     "capabilities": "40-capabilities",
     "protocols": "50-protocols",
     "runtime": "60-runtime",

@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-STORE_ROOT = ROOT / "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage"
+STORE_ROOT = ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage"
 
 
 def test_operator_store_has_no_legacy_sqlite_store_module() -> None:

@@ -41,7 +41,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert len(packages) == 61
     assert "tigrbl-auth-workspace" not in packages
     assert REMOVED_HELPER_PACKAGES.isdisjoint(packages)
-    assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/01-contracts/tigrbl-identity-contracts"
+    assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/02-contracts/tigrbl-identity-contracts"
     assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
     assert packages["tigrbl-authz-policy-decision-engine"].path.as_posix() == (
         "pkgs/10-concrete/tigrbl-authz-policy-decision-engine"
@@ -49,10 +49,10 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-authz-policy-concrete"
     assert packages["tigrbl-identity-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-identity-concrete"
     assert packages["tigrbl-authz-resource-server-verifier"].path.as_posix() == (
-        "pkgs/30-providers/tigrbl-authz-resource-server-verifier"
+        "pkgs/20-providers/tigrbl-authz-resource-server-verifier"
     )
     assert packages["tigrbl-security-token-jwks-cache"].path.as_posix() == (
-        "pkgs/30-providers/tigrbl-security-token-jwks-cache"
+        "pkgs/20-providers/tigrbl-security-token-jwks-cache"
     )
     assert packages["tigrbl-authz-policy"].path.as_posix() == "pkgs/40-capabilities/tigrbl-authz-policy"
     assert packages["tigrbl-identity-admin"].path.as_posix() == "pkgs/40-capabilities/tigrbl-identity-admin"

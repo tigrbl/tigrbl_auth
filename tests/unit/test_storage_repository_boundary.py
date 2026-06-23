@@ -12,7 +12,7 @@ from tigrbl_identity_storage.tables.engine import dsn
 
 
 ROOT = Path(__file__).resolve().parents[2]
-STORAGE_SRC = ROOT / "pkgs" / "20-storage" / "tigrbl-identity-storage" / "src" / "tigrbl_identity_storage"
+STORAGE_SRC = ROOT / "pkgs" / "01-storage" / "tigrbl-identity-storage" / "src" / "tigrbl_identity_storage"
 
 
 @pytest.mark.unit

@@ -1,21 +1,19 @@
 [project]
-name = "tigrbl-identity-jose"
+name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
-description = "JOSE, JWT, JWS, JWE, JWK, JWKS, key rotation, and standards helpers for Tigrbl identity tokens."
+description = "Dependency-light identity contract dataclasses, enums, protocols, and plane access metadata."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 keywords = [
     "tigrbl",
     "identity",
-    "jose",
-    "jwt",
-    "jwk",
-    "jwks",
-    "jws",
-    "jwe",
-    "key-rotation",
+    "api-contracts",
+    "openapi",
+    "contracts",
     "oauth",
+    "oidc",
+    "iam",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -34,32 +32,20 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "bcrypt==5.0.0",
-    "swarmauri_core==0.10.0",
-    "swarmauri_crypto_jwe==0.3.0.dev5",
-    "swarmauri_keyprovider_file==0.2.0",
-    "swarmauri_keyprovider_local==0.2.0",
-    "swarmauri_signing_ed25519==0.2.0.dev32",
-    "swarmauri_signing_jws==0.3.0.dev31",
-    "swarmauri_tokens_jwt==0.3.0.dev31",
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
-    "tigrbl-identity-author==0.4.0.dev2",
-    "tigrbl-identity-storage==0.4.0.dev2",
-    "tigrbl-security-signing-pqc==0.1.0",
+    "tigrbl-security-trust-contracts==0.1.0",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-identity-jose"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tigrbl-identity-contracts"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-jose/"
+PyPI = "https://pypi.org/project/tigrbl-identity-contracts/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_jose", from = "src" }]
+packages = [{ include = "tigrbl_identity_contracts", from = "src" }]

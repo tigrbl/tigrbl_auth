@@ -212,8 +212,8 @@ def test_policy_t2_denies_out_of_scope_delegation_and_admin() -> None:
 def test_jose_policy_t2_public_boundary_has_no_forbidden_imports() -> None:
     root = Path("pkgs")
     files = [
-        root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
-        root / "30-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
+        root / "20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/__init__.py",
+        root / "20-providers/tigrbl-identity-jose/src/tigrbl_identity_jose/boundary.py",
         root / "10-concrete/tigrbl-authz-policy-authority-derivation-graph/src/tigrbl_authz_policy_authority_derivation_graph/__init__.py",
         root / "10-concrete/tigrbl-authz-policy-decision-engine/src/tigrbl_authz_policy_decision_engine/__init__.py",
         root / "10-concrete/tigrbl-authz-policy-invariant-registry/src/tigrbl_authz_policy_invariant_registry/__init__.py",

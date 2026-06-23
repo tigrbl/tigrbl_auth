@@ -1,11 +1,11 @@
 [project]
-name = "tigrbl-security-proof-pkce"
+name = "tigrbl-security-proof-dpop"
 version = "0.1.0"
-description = "PKCE proof helper and verifier provider for the Tigrbl auth package suite."
+description = "DPoP proof and confirmation-claim binding validator provider for the Tigrbl auth package suite."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-keywords = ["tigrbl", "security", "pkce", "proof-key", "oauth"]
+keywords = ["tigrbl", "security", "dpop", "proof-of-possession", "oauth"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -27,13 +27,13 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/30-providers/tigrbl-security-proof-pkce"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/20-providers/tigrbl-security-proof-dpop"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-security-proof-pkce/"
+PyPI = "https://pypi.org/project/tigrbl-security-proof-dpop/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_security_proof_pkce", from = "src" }]
+packages = [{ include = "tigrbl_security_proof_dpop", from = "src" }]

@@ -2473,7 +2473,7 @@ requires-dist = [
     { name = "tigrbl-authz-policy-decision-engine", editable = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine" },
     { name = "tigrbl-authz-policy-invariant-registry", editable = "pkgs/10-concrete/tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-resource-server", editable = "pkgs/50-protocols/tigrbl-authz-resource-server" },
-    { name = "tigrbl-authz-resource-server-verifier", editable = "pkgs/30-providers/tigrbl-authz-resource-server-verifier" },
+    { name = "tigrbl-authz-resource-server-verifier", editable = "pkgs/20-providers/tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
@@ -2489,10 +2489,10 @@ requires-dist = [
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
     { name = "tigrbl-identity-concrete", editable = "pkgs/10-concrete/tigrbl-identity-concrete" },
-    { name = "tigrbl-identity-contracts", editable = "pkgs/01-contracts/tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-contracts", editable = "pkgs/02-contracts/tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
-    { name = "tigrbl-identity-jose", editable = "pkgs/30-providers/tigrbl-identity-jose" },
+    { name = "tigrbl-identity-jose", editable = "pkgs/20-providers/tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth", editable = "pkgs/deprecated/tigrbl-identity-oauth" },
     { name = "tigrbl-identity-oidc", editable = "pkgs/deprecated/tigrbl-identity-oidc" },
     { name = "tigrbl-identity-operator", editable = "pkgs/60-runtime/tigrbl-identity-operator" },
@@ -2506,24 +2506,24 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", extras = ["tigrcorn"], marker = "extra == 'tigrcorn'", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-runtime", extras = ["uvicorn"], marker = "extra == 'uvicorn'", editable = "pkgs/60-runtime/tigrbl-identity-runtime" },
     { name = "tigrbl-identity-server", editable = "pkgs/60-runtime/tigrbl-identity-server" },
-    { name = "tigrbl-identity-storage", editable = "pkgs/20-storage/tigrbl-identity-storage" },
+    { name = "tigrbl-identity-storage", editable = "pkgs/01-storage/tigrbl-identity-storage" },
     { name = "tigrbl-kernel", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-olap", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-oltp", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-ops-realtime", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-orm", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-release-contracts", editable = "pkgs/01-contracts/tigrbl-release-contracts" },
+    { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-security-certificate-mtls", editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" },
-    { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator" },
-    { name = "tigrbl-security-mtls-cnf-binding-validator", editable = "pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator" },
-    { name = "tigrbl-security-proof-dpop", editable = "pkgs/30-providers/tigrbl-security-proof-dpop" },
-    { name = "tigrbl-security-proof-pkce", editable = "pkgs/30-providers/tigrbl-security-proof-pkce" },
-    { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/30-providers/tigrbl-security-sender-constraint-validator" },
-    { name = "tigrbl-security-signing-pqc", editable = "pkgs/30-providers/tigrbl-security-signing-pqc" },
-    { name = "tigrbl-security-token-introspection-client", editable = "pkgs/30-providers/tigrbl-security-token-introspection-client" },
-    { name = "tigrbl-security-token-jwks-cache", editable = "pkgs/30-providers/tigrbl-security-token-jwks-cache" },
-    { name = "tigrbl-security-trust-contracts", editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" },
+    { name = "tigrbl-security-certificate-mtls", editable = "pkgs/20-providers/tigrbl-security-certificate-mtls" },
+    { name = "tigrbl-security-dpop-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" },
+    { name = "tigrbl-security-mtls-cnf-binding-validator", editable = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator" },
+    { name = "tigrbl-security-proof-dpop", editable = "pkgs/20-providers/tigrbl-security-proof-dpop" },
+    { name = "tigrbl-security-proof-pkce", editable = "pkgs/20-providers/tigrbl-security-proof-pkce" },
+    { name = "tigrbl-security-sender-constraint-validator", editable = "pkgs/20-providers/tigrbl-security-sender-constraint-validator" },
+    { name = "tigrbl-security-signing-pqc", editable = "pkgs/20-providers/tigrbl-security-signing-pqc" },
+    { name = "tigrbl-security-token-introspection-client", editable = "pkgs/20-providers/tigrbl-security-token-introspection-client" },
+    { name = "tigrbl-security-token-jwks-cache", editable = "pkgs/20-providers/tigrbl-security-token-jwks-cache" },
+    { name = "tigrbl-security-trust-contracts", editable = "pkgs/02-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
@@ -2704,7 +2704,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-authz-resource-server-verifier"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/30-providers/tigrbl-authz-resource-server-verifier" }
+source = { editable = "pkgs/20-providers/tigrbl-authz-resource-server-verifier" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
@@ -2975,7 +2975,7 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-identity-contracts"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/01-contracts/tigrbl-identity-contracts" }
+source = { editable = "pkgs/02-contracts/tigrbl-identity-contracts" }
 dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-security-trust-contracts" },
@@ -3014,7 +3014,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-jose"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/30-providers/tigrbl-identity-jose" }
+source = { editable = "pkgs/20-providers/tigrbl-identity-jose" }
 dependencies = [
     { name = "bcrypt" },
     { name = "swarmauri-core" },
@@ -3205,7 +3205,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-storage"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/20-storage/tigrbl-identity-storage" }
+source = { editable = "pkgs/01-storage/tigrbl-identity-storage" }
 dependencies = [
     { name = "email-validator" },
     { name = "tigrbl" },
@@ -3284,7 +3284,7 @@ wheels = [
 [[package]]
 name = "tigrbl-release-contracts"
 version = "0.1.0"
-source = { editable = "pkgs/01-contracts/tigrbl-release-contracts" }
+source = { editable = "pkgs/02-contracts/tigrbl-release-contracts" }
 
 [[package]]
 name = "tigrbl-runtime"
@@ -3306,7 +3306,7 @@ wheels = [
 [[package]]
 name = "tigrbl-security-certificate-mtls"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-certificate-mtls" }
+source = { editable = "pkgs/20-providers/tigrbl-security-certificate-mtls" }
 dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
@@ -3321,7 +3321,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-dpop-cnf-binding-validator"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-dpop-cnf-binding-validator" }
+source = { editable = "pkgs/20-providers/tigrbl-security-dpop-cnf-binding-validator" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-proof-dpop" },
@@ -3340,7 +3340,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-mtls-cnf-binding-validator"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-mtls-cnf-binding-validator" }
+source = { editable = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-certificate-mtls" },
@@ -3359,7 +3359,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-proof-dpop"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-proof-dpop" }
+source = { editable = "pkgs/20-providers/tigrbl-security-proof-dpop" }
 dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
@@ -3374,7 +3374,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-proof-pkce"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-proof-pkce" }
+source = { editable = "pkgs/20-providers/tigrbl-security-proof-pkce" }
 dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
@@ -3389,7 +3389,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-sender-constraint-validator"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-sender-constraint-validator" }
+source = { editable = "pkgs/20-providers/tigrbl-security-sender-constraint-validator" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-dpop-cnf-binding-validator" },
@@ -3410,7 +3410,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-signing-pqc"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-signing-pqc" }
+source = { editable = "pkgs/20-providers/tigrbl-security-signing-pqc" }
 dependencies = [
     { name = "pqcrypto" },
     { name = "tigrbl-security-trust-contracts" },
@@ -3427,7 +3427,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-token-introspection-client"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-token-introspection-client" }
+source = { editable = "pkgs/20-providers/tigrbl-security-token-introspection-client" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-trust-contracts" },
@@ -3444,7 +3444,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-token-jwks-cache"
 version = "0.1.0"
-source = { editable = "pkgs/30-providers/tigrbl-security-token-jwks-cache" }
+source = { editable = "pkgs/20-providers/tigrbl-security-token-jwks-cache" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-trust-contracts" },
@@ -3461,7 +3461,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-security-trust-contracts"
 version = "0.1.0"
-source = { editable = "pkgs/01-contracts/tigrbl-security-trust-contracts" }
+source = { editable = "pkgs/02-contracts/tigrbl-security-trust-contracts" }
 
 [[package]]
 name = "tigrbl-security-trust-domain-bases"

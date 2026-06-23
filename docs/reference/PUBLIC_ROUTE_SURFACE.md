@@ -8,7 +8,7 @@ public-route checkpoint for the authoritative release path.
 The public route plane is now owned by explicit route modules under
 `pkgs/60-runtime/tigrbl-identity-server/src/tigrbl_identity_server/rest/routers/`, with
 protocol operation logic in the split OAuth/OIDC packages, table-backed schema
-ownership in `pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/`,
+ownership in `pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/`,
 and contract publication through the OpenAPI generation pipeline.
 
 ## Canonical route ownership

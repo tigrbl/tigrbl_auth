@@ -14,7 +14,7 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 
 def _imports_for(package: str) -> set[str]:
-    package_root = next((ROOT / "pkgs").glob(f"01-contracts/*/src/{package}"))
+    package_root = next((ROOT / "pkgs").glob(f"02-contracts/*/src/{package}"))
     imports: set[str] = set()
     for path in package_root.rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -83,7 +83,7 @@ def test_control_plane_contract_modules_have_no_top_level_functions() -> None:
     package_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -167,7 +167,7 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -200,7 +200,7 @@ def test_application_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -214,7 +214,7 @@ def test_authority_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -240,7 +240,7 @@ def test_correctness_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -258,7 +258,7 @@ def test_invariant_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -272,7 +272,7 @@ def test_liveness_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -308,7 +308,7 @@ def test_replay_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -322,7 +322,7 @@ def test_governance_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -340,7 +340,7 @@ def test_service_identity_contracts_are_placed_with_owning_domains() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -358,7 +358,7 @@ def test_delegation_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -375,7 +375,7 @@ def test_residency_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -394,7 +394,7 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"
@@ -428,7 +428,7 @@ def test_plane_contracts_are_domain_packaged() -> None:
     contracts_root = (
         ROOT
         / "pkgs"
-        / "01-contracts"
+        / "02-contracts"
         / "tigrbl-identity-contracts"
         / "src"
         / "tigrbl_identity_contracts"

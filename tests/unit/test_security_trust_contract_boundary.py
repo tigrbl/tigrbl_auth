@@ -11,7 +11,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CONTRACTS = ROOT / "pkgs" / "01-contracts" / "tigrbl-security-trust-contracts"
+CONTRACTS = ROOT / "pkgs" / "02-contracts" / "tigrbl-security-trust-contracts"
 BASES = ROOT / "pkgs" / "05-bases" / "tigrbl-security-trust-domain-bases"
 
 

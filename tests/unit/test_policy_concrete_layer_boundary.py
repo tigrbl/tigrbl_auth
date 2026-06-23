@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CONTRACTS_ROOT = (
     ROOT
     / "pkgs"
-    / "01-contracts"
+    / "02-contracts"
     / "tigrbl-identity-contracts"
     / "src"
     / "tigrbl_identity_contracts"

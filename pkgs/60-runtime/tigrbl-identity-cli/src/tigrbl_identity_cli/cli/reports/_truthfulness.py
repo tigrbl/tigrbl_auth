@@ -74,7 +74,7 @@ def build_feature_completeness_report(repo_root: Path, *, report_dir: Path | Non
         passed=operator_summary.get("backend") == "sqlite-authoritative" and operator_summary.get("repo_mutation_dependency") is False,
         summary="The storage-backed administration workflow materializes durable sqlite-backed state outside the repository tree.",
         evidence=[
-            "pkgs/20-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
+            "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
             "tests/unit/test_operator_control_plane.py",
         ],
         details_payload=operator_summary,
