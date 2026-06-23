@@ -68,7 +68,7 @@ FACADE_MODULES = {
     "tigrbl_auth.standards.oauth2.token_exchange": "tigrbl_identity_storage_runtime.token_exchange",
     "tigrbl_auth.standards.oidc.userinfo": "tigrbl_identity_storage_runtime.userinfo",
     "tigrbl_auth.services.release_posture_plane": "tigrbl_auth_release_certification.release_posture",
-    "tigrbl_auth.services.session_service": "tigrbl_identity_storage.session_service",
+    "tigrbl_auth.services.session_service": "tigrbl_identity_storage_runtime.session_service",
     "tigrbl_auth.services.token_service": "tigrbl_identity_runtime.token_service",
     "tigrbl_auth.release_signing": "tigrbl_identity_author.release_signing",
     "tigrbl_auth.services.authorization_provenance": "tigrbl_authz_policy.provenance",

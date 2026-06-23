@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import warnings
-
-from tigrbl_identity_storage.operator_store import append_jsonl, audit_log_path, load_records, operator_state_root as _operator_state_root
 from tigrbl_identity_storage.tables._ops import token_hash
 from tigrbl_identity_storage.tables.audit_event import append_audit_event, append_audit_event_async
 from tigrbl_identity_storage.tables.auth_session._lifecycle import (
@@ -84,32 +82,9 @@ revoke_refresh_family = lambda family_id, reason="refresh_token_reuse_detected",
 introspect_token = lambda token: run_async(introspect_token_async(token))
 
 
-def load_operator_records(resource: str, *, repo_root=None):
-    from pathlib import Path
-
-    root = Path(repo_root) if repo_root is not None else Path.cwd()
-    return load_records(root, resource)
-
-
-def operator_state_root(*, repo_root=None):
-    from pathlib import Path
-
-    root = Path(repo_root) if repo_root is not None else Path.cwd()
-    return _operator_state_root(root)
-
-
-def append_operator_audit(event, *, repo_root=None):
-    from pathlib import Path
-
-    root = Path(repo_root) if repo_root is not None else Path.cwd()
-    append_jsonl(audit_log_path(root), event)
-    return event
-
-
 __all__ = [
     "append_audit_event",
     "append_audit_event_async",
-    "append_operator_audit",
     "bind_session_client",
     "bind_session_client_async",
     "create_session",
@@ -128,12 +103,10 @@ __all__ = [
     "introspect_token_async",
     "is_token_revoked",
     "is_token_revoked_async",
-    "load_operator_records",
     "mark_logout_channel",
     "mark_logout_channel_async",
     "mark_token_used",
     "mark_token_used_async",
-    "operator_state_root",
     "record_consent",
     "record_consent_async",
     "record_token",

@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from tigrbl_identity_storage.operator_store import (
+from tigrbl_identity_storage_runtime.operator_store import (
     ArtifactResult,
     FilterSpec,
     OperationContext,

@@ -307,7 +307,7 @@ def _repo_root() -> Path:
 @api.route("/par", methods=["POST"], response_model=PushedAuthorizationResponse)
 async def par(request, db=Depends(get_db)):
     result = await pushed_authorization_request(request=request, db=db)
-    from tigrbl_identity_storage.session_service import observe_par_response
+    from tigrbl_identity_storage_runtime.session_service import observe_par_response
 
     payload = result if isinstance(result, dict) else getattr(result, "model_dump", lambda **_: {})(mode="json")
     observe_par_response(_repo_root(), request_uri=payload.get("request_uri"), details=payload)

@@ -20,8 +20,8 @@ import tigrbl_identity_principals as principals  # noqa: E402
 
 from tigrbl_auth.api.app import build_app  # noqa: E402
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options, write_discovery_artifacts  # noqa: E402
-from tigrbl_identity_storage.operator_store import OperationContext  # noqa: E402
-from tigrbl_identity_storage.resource_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
+from tigrbl_identity_storage_runtime.operator_store import OperationContext  # noqa: E402
+from tigrbl_identity_storage_runtime.resource_service import create_resource, generate_key_record, publish_jwks_document  # noqa: E402
 from tigrbl_auth_protocol_oidc.tenant_discovery import (  # noqa: E402
     TENANT_JWKS_PATH,
     TENANT_OPENID_CONFIGURATION_PATH,

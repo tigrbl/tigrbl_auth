@@ -4,16 +4,20 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-STORE_ROOT = ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage"
+STORAGE_ROOT = ROOT / "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage"
+RUNTIME_ROOT = (
+    ROOT
+    / "pkgs/30-storage-runtime/tigrbl-identity-storage-runtime/src/tigrbl_identity_storage_runtime"
+)
 
 
 def test_operator_store_has_no_legacy_sqlite_store_module() -> None:
-    assert not (STORE_ROOT / "_operator_store/sqlite_store.py").exists()
+    assert not (RUNTIME_ROOT / "_operator_store/sqlite_store.py").exists()
 
 
 def test_operator_store_orchestration_does_not_own_sqlite_ddl_or_raw_dml() -> None:
     violations: list[str] = []
-    for path in (STORE_ROOT / "_operator_store").glob("*.py"):
+    for path in (RUNTIME_ROOT / "_operator_store").glob("*.py"):
         source = path.read_text(encoding="utf-8")
         for forbidden in ("import sqlite3", "CREATE TABLE", "INSERT INTO", "SELECT ", "DELETE FROM"):
             if forbidden in source:
@@ -30,5 +34,5 @@ def test_operator_store_tables_own_operator_record_surfaces() -> None:
         "operator_activity.py": "OperatorActivity",
     }
     for filename, symbol in expected.items():
-        source = (STORE_ROOT / "tables" / filename).read_text(encoding="utf-8")
+        source = (STORAGE_ROOT / "tables" / filename).read_text(encoding="utf-8")
         assert f"class {symbol}" in source

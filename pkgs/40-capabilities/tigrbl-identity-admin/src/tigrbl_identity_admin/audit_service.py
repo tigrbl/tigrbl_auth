@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tigrbl_identity_storage.audit import (
+from tigrbl_identity_storage_runtime.audit import (
     export_audit_events,
     latest_audit_event,
     list_audit_events,

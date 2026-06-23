@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from tigrbl_auth.path_safety import safe_display_path, sanitize_local_paths
-from tigrbl_identity_storage.operator_store import operator_store_summary
+from tigrbl_identity_storage_runtime.operator_store import operator_store_summary
 
 
 def test_sanitize_local_paths_redacts_repo_and_host_paths(tmp_path: Path) -> None:

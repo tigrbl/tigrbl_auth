@@ -313,6 +313,51 @@ def test_executable_account_surface_composition_lives_above_storage() -> None:
     assert account_surface.api is account_surface.router
 
 
+def test_operator_service_composition_lives_above_storage() -> None:
+    old_modules = (
+        "tigrbl_identity_storage.operator_store",
+        "tigrbl_identity_storage.resource_service",
+        "tigrbl_identity_storage.session_service",
+        "tigrbl_identity_storage.audit",
+        "tigrbl_identity_storage.portability",
+        "tigrbl_identity_storage._operator_store",
+        "tigrbl_identity_storage._resource_service",
+    )
+    for module_name in old_modules:
+        assert importlib.util.find_spec(module_name) is None
+
+    runtime_modules = (
+        "tigrbl_identity_storage_runtime.operator_store",
+        "tigrbl_identity_storage_runtime.resource_service",
+        "tigrbl_identity_storage_runtime.session_service",
+        "tigrbl_identity_storage_runtime.audit",
+        "tigrbl_identity_storage_runtime.portability",
+        "tigrbl_identity_storage_runtime._operator_store",
+        "tigrbl_identity_storage_runtime._resource_service",
+        "tigrbl_identity_storage_runtime.key_management",
+    )
+    for module_name in runtime_modules:
+        assert importlib.import_module(module_name).__name__ == module_name
+
+
+def test_lower_layers_do_not_import_storage_runtime_composition() -> None:
+    lower_layers = (
+        Path("pkgs/00-primitives"),
+        Path("pkgs/01-storage"),
+        Path("pkgs/02-contracts"),
+        Path("pkgs/05-bases"),
+        Path("pkgs/10-concrete"),
+        Path("pkgs/20-providers"),
+    )
+    offenders: list[str] = []
+    for root in lower_layers:
+        for path in root.rglob("*.py"):
+            if "tigrbl_identity_storage_runtime" in path.read_text(encoding="utf-8"):
+                offenders.append(path.as_posix())
+
+    assert offenders == []
+
+
 def test_token_table_route_does_not_call_sync_session_observer() -> None:
     path = Path(
         "pkgs/01-storage/tigrbl-identity-storage/src/"

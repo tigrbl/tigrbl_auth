@@ -19,7 +19,7 @@ from tigrbl_identity_jose.jwt_runtime import (
     _svc,
     _svc_async,
 )
-from tigrbl_identity_storage.session_service import (
+from tigrbl_identity_storage_runtime.session_service import (
     exchange_token_for_context,
     get_token_for_context,
     introspect_token_for_context,

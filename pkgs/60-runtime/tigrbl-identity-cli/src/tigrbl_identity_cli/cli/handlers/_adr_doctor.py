@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tigrbl_identity_storage.session_service import (
+from tigrbl_identity_storage_runtime.session_service import (
     exchange_token_for_context as _svc_exchange_token_for_context,
     get_session_for_context as _svc_get_session_for_context,
     get_token_for_context as _svc_get_token_for_context,
@@ -18,7 +18,7 @@ from tigrbl_auth_protocol_oidc.discovery_service import (
     show_discovery as _svc_show_discovery,
     validate_discovery as _svc_validate_discovery,
 )
-from tigrbl_identity_storage.portability import (
+from tigrbl_identity_storage_runtime.portability import (
     export_status as _svc_export_status,
     import_status as _svc_import_status,
     run_export_file as _svc_run_export_file,

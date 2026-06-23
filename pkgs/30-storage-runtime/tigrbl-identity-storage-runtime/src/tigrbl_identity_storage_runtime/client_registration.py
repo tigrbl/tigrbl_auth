@@ -490,8 +490,8 @@ def _repo_root() -> Path:
 
 
 def _sync_client_registration(command: str, registration: object) -> None:
-    from tigrbl_identity_storage.operator_store import OperationContext
-    from tigrbl_identity_storage.resource_service import create_resource, delete_resource, update_resource
+    from tigrbl_identity_storage_runtime.operator_store import OperationContext
+    from tigrbl_identity_storage_runtime.resource_service import create_resource, delete_resource, update_resource
 
     if isinstance(registration, dict):
         payload = dict(registration)

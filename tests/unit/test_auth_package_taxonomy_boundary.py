@@ -47,15 +47,15 @@ DEPRECATED_DIST_TO_IMPORT_ROOT = {
 }
 
 DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
-    "tigrbl_identity_credentials/_operator_store.py": "tigrbl_identity_storage.operator_store",
+    "tigrbl_identity_credentials/_operator_store.py": "tigrbl_identity_storage_runtime.operator_store",
     "tigrbl_identity_credentials/_token_service/__init__.py": "tigrbl_identity_runtime.token_service",
     "tigrbl_identity_credentials/_token_service/coder.py": "tigrbl_identity_jose.jwt_coder",
-    "tigrbl_identity_credentials/_token_service/operator.py": "tigrbl_identity_storage.session_service",
+    "tigrbl_identity_credentials/_token_service/operator.py": "tigrbl_identity_storage_runtime.session_service",
     "tigrbl_identity_credentials/_token_service/persistence.py": "tigrbl_identity_storage.token_service",
     "tigrbl_identity_credentials/_token_service/runtime.py": "tigrbl_identity_jose.jwt_runtime",
-    "tigrbl_identity_credentials/audit_service.py": "tigrbl_identity_storage.audit",
-    "tigrbl_identity_credentials/operator_service.py": "tigrbl_identity_storage.resource_service",
-    "tigrbl_identity_credentials/session_service.py": "tigrbl_identity_storage.session_service",
+    "tigrbl_identity_credentials/audit_service.py": "tigrbl_identity_storage_runtime.audit",
+    "tigrbl_identity_credentials/operator_service.py": "tigrbl_identity_storage_runtime.resource_service",
+    "tigrbl_identity_credentials/session_service.py": "tigrbl_identity_storage_runtime.session_service",
     "tigrbl_identity_credentials/token_service.py": "tigrbl_identity_runtime.token_service",
     "tigrbl_identity_policy/_certification/__init__.py": "tigrbl_auth_release_certification.certification",
     "tigrbl_identity_policy/_certification/authorization.py": "tigrbl_auth_release_certification.certification.authorization",
@@ -88,6 +88,7 @@ NON_TAXONOMY_CANONICAL_ROOTS = {
     "tigrbl_identity_jose",
     "tigrbl_identity_runtime",
     "tigrbl_identity_storage",
+    "tigrbl_identity_storage_runtime",
 }
 
 CANONICAL_MODULE_RE = re.compile(r'_CANONICAL_MODULE\s*=\s*"([^"]+)"')
