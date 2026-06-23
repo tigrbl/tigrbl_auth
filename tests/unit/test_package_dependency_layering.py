@@ -113,6 +113,8 @@ PYTHON_LAYER_FOLDERS = {
     "deprecated": "deprecated",
 }
 
+FRONTEND_LAYER_FOLDERS = {"90-uix-core", "95-ui"}
+
 FRONTEND_WORKSPACES = {
     ROOT / "pkgs" / "90-uix-core" / "uix-core",
     ROOT / "pkgs" / "95-ui" / "admin-uix",
@@ -202,6 +204,32 @@ def test_python_package_layers_match_filesystem_layout() -> None:
         for package in packages:
             package_folder = _package_dir(package).relative_to(PKGS).parts[0]
             assert package_folder == expected_folder, (package, expected_folder, package_folder)
+
+
+def test_pkgs_tree_contains_only_declared_package_layers() -> None:
+    allowed_layers = set(PYTHON_LAYER_FOLDERS.values()) | FRONTEND_LAYER_FOLDERS
+    unexpected_layers = [
+        path.name
+        for path in sorted(PKGS.iterdir())
+        if path.is_dir() and path.name not in allowed_layers
+    ]
+
+    assert unexpected_layers == []
+
+
+def test_layer_children_are_packages_or_declared_frontend_workspaces() -> None:
+    frontend_workspaces = {path.resolve() for path in FRONTEND_WORKSPACES}
+    offenders: list[str] = []
+
+    for layer_dir in sorted(path for path in PKGS.iterdir() if path.is_dir()):
+        for child in sorted(path for path in layer_dir.iterdir() if path.is_dir()):
+            if (child / "pyproject.toml").is_file():
+                continue
+            if child.resolve() in frontend_workspaces:
+                continue
+            offenders.append(str(child.relative_to(ROOT)).replace("\\", "/"))
+
+    assert offenders == []
 
 
 def test_lower_layer_packages_do_not_import_tigrbl_auth_facade() -> None:
