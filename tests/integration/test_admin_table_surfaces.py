@@ -19,7 +19,7 @@ from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.crypto import hash_pw
 from tigrbl_auth.db import get_db as legacy_get_db
 from tigrbl_auth.tables import Tenant, User
-from tigrbl_identity_server.routers.surface import surface_api as legacy_surface_api
+from tigrbl_identity_server.surfaces import AdminRouter
 from tigrbl_auth.runtime.engine_resolver import (
     register_api_provider,
     resolve_api_provider,
@@ -59,8 +59,8 @@ def _override_db(app: object, session: AsyncSession) -> None:
 
 
 async def _ensure_runtime_tables(provider: Any) -> None:
-    setattr(legacy_surface_api, "_ddl_executed", False)
-    initialize = getattr(legacy_surface_api, "initialize", None)
+    setattr(AdminRouter, "_ddl_executed", False)
+    initialize = getattr(AdminRouter, "initialize", None)
     if callable(initialize):
         await initialize()
     raw_engine, _ = provider.ensure()
@@ -83,11 +83,11 @@ async def _admin_client(tmp_path: Path, db_session: AsyncSession, test_db_engine
     deployment = resolve_deployment(settings_obj, plugin_mode="mixed")
     app = build_app(settings_obj, deployment=deployment)
     provider = test_db_engine.provider
-    original_legacy_surface = resolve_api_provider(legacy_surface_api)
+    original_admin_router = resolve_api_provider(AdminRouter)
     original_composed_surface = resolve_api_provider(composed_surface_api)
     original_app = resolve_api_provider(app)
     original_default_provider = resolve_default_provider()
-    register_api_provider(legacy_surface_api, provider)
+    register_api_provider(AdminRouter, provider)
     register_api_provider(composed_surface_api, provider)
     register_api_provider(app, provider)
     set_default_provider(provider)
@@ -97,12 +97,12 @@ async def _admin_client(tmp_path: Path, db_session: AsyncSession, test_db_engine
         async with AsyncClient(transport=ASGITransport(app=app), base_url=deployment.issuer) as client:
             yield client, deployment
     finally:
-        register_api_provider(legacy_surface_api, original_legacy_surface or provider)
+        register_api_provider(AdminRouter, original_admin_router or provider)
         register_api_provider(composed_surface_api, original_composed_surface or provider)
         register_api_provider(app, original_app or provider)
         if original_default_provider is not None:
             set_default_provider(original_default_provider)
-        setattr(legacy_surface_api, "_ddl_executed", False)
+        setattr(AdminRouter, "_ddl_executed", False)
 
 
 async def _seed_db_records(db_session: AsyncSession) -> dict[str, str]:

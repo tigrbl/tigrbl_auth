@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from .admin_routes import *
 from .admin_routes import (
-    _admin_table_resources,
     _attach_admin_security_metadata,
-    _rewrite_admin_table_routes,
+    include_admin_routes,
 )
 
 PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
@@ -106,33 +105,14 @@ def _as_deployment(
     return deployment or resolve_deployment(settings_obj)
 
 
-def build_surface_api(
+def build_public_router(
     settings_obj: object | None = None,
     *,
     deployment: ResolvedDeployment | None = None,
 ) -> TigrblRouter:
     deployment = _as_deployment(settings_obj, deployment=deployment)
     router = TigrblRouter(engine=dsn)
-    selected_table_resources: tuple[type[Any], ...] = ()
-    if deployment.flag_enabled("surface_admin_enabled"):
-        if deployment.product_surface == "platform-admin-api":
-            router.include_router(admin_realms_api)
-            router.include_router(admin_tenants_api)
-        admin_resources = _admin_table_resources(deployment)
-        selected_table_resources = admin_resources
-        if admin_resources:
-            if deployment.product_surface == "platform-admin-api":
-                for resource in admin_resources:
-                    if resource.__name__ in {"Realm", "Tenant"}:
-                        continue
-                    else:
-                        router.include_table(resource)
-            else:
-                router.include_tables(admin_resources)
-            _rewrite_admin_table_routes(router, deployment)
-        for entry in ADMIN_ROUTER_BINDINGS:
-            if deployment.admin_rest_group_enabled(str(entry["mount_group"])):
-                router.include_router(entry["router"])
+    selected_table_resources = include_admin_routes(router, deployment=deployment)
     if deployment.surface_enabled("public-rest"):
         for entry in PUBLIC_ROUTER_BINDINGS:
             if entry["router"] in {
@@ -151,7 +131,16 @@ def build_surface_api(
     return router
 
 
-surface_api = build_surface_api()
+def build_surface_api(
+    settings_obj: object | None = None,
+    *,
+    deployment: ResolvedDeployment | None = None,
+) -> TigrblRouter:
+    return build_public_router(settings_obj, deployment=deployment)
+
+
+PublicRouter = build_public_router(deployment=resolve_deployment(plugin_mode="public-only"))
+surface_api = PublicRouter
 
 
 def runtime_surface_binding_manifest() -> dict[str, Any]:
@@ -232,6 +221,7 @@ def attach_runtime_surfaces(
 
 __all__ = [
     "ADMIN_ROUTER_BINDINGS",
+    "AdminRouter",
     "TABLE_RESOURCES",
     "TableInitializationScopeError",
     "PUBLIC_ROUTER_BINDINGS",
@@ -239,8 +229,12 @@ __all__ = [
     "assert_table_initialization_scope",
     "attach_runtime_surfaces",
     "admin_resource_path_prefixes",
+    "build_admin_router",
+    "build_public_router",
     "build_surface_api",
+    "include_admin_routes",
     "include_public_runtime_publishers",
+    "PublicRouter",
     "required_table_resource_names",
     "runtime_surface_binding_manifest",
     "surface_api",

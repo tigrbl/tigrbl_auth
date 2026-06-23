@@ -177,11 +177,11 @@ class TestServiceKeyModel:
 
     def test_service_key_schema_uses_service_id(self):
         """Ensure ServiceKey API schema exposes correct fields."""
-        from tigrbl_identity_server.routers.surface import surface_api
+        from tigrbl_identity_server.surfaces import AdminRouter
 
-        create_schema = surface_api.schemas.ServiceKey.create.in_.model_json_schema()
-        create_fields = surface_api.schemas.ServiceKey.create.in_.model_fields
-        read_schema = surface_api.schemas.ServiceKey.read.out.model_json_schema()
+        create_schema = AdminRouter.schemas.ServiceKey.create.in_.model_json_schema()
+        create_fields = AdminRouter.schemas.ServiceKey.create.in_.model_fields
+        read_schema = AdminRouter.schemas.ServiceKey.read.out.model_json_schema()
 
         # Only expected fields are exposed on create
         assert set(create_fields.keys()) == {
@@ -200,8 +200,8 @@ class TestServiceKeyModel:
         # Schemas still reference service_id and exclude user_id
         assert "service_id" in create_fields
         assert "user_id" not in create_fields
-        assert "service_id" in surface_api.schemas.ServiceKey.read.out.model_fields
-        assert "user_id" not in surface_api.schemas.ServiceKey.read.out.model_fields
+        assert "service_id" in AdminRouter.schemas.ServiceKey.read.out.model_fields
+        assert "user_id" not in AdminRouter.schemas.ServiceKey.read.out.model_fields
 
 
 @pytest.mark.unit

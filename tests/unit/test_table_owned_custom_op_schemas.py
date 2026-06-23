@@ -116,7 +116,12 @@ def test_exported_schema_aliases_use_openapi_component_model_names() -> None:
 
 def test_table_schema_alias_exports_cover_router_openapi_components() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
-    from tigrbl_identity_server.routers.surface import surface_api
+    from tigrbl_identity_runtime.deployment import resolve_deployment
+    from tigrbl_identity_server.surfaces import build_public_router
+
+    surface_api = build_public_router(
+        deployment=resolve_deployment(plugin_mode="mixed")
+    )
 
     component_names = set(surface_api.openapi().get("components", {}).get("schemas", {}))
     missing = sorted(name for name in component_names if not hasattr(storage_tables, name))

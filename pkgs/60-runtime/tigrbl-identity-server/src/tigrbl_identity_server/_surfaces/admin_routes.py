@@ -316,3 +316,54 @@ def _rewrite_admin_table_routes(
     router._routes[:] = rewritten
 
 
+def _as_deployment(
+    settings_obj: object | None = None,
+    *,
+    deployment: ResolvedDeployment | None = None,
+) -> ResolvedDeployment:
+    return deployment or resolve_deployment(settings_obj)
+
+
+def include_admin_routes(
+    router: TigrblRouter,
+    settings_obj: object | None = None,
+    *,
+    deployment: ResolvedDeployment | None = None,
+) -> tuple[type[Any], ...]:
+    deployment = _as_deployment(settings_obj, deployment=deployment)
+    selected_table_resources: tuple[type[Any], ...] = ()
+    if deployment.flag_enabled("surface_admin_enabled"):
+        if deployment.product_surface == "platform-admin-api":
+            router.include_router(admin_realms_api)
+            router.include_router(admin_tenants_api)
+        selected_table_resources = _admin_table_resources(deployment)
+        if selected_table_resources:
+            if deployment.product_surface == "platform-admin-api":
+                for resource in selected_table_resources:
+                    if resource.__name__ in {"Realm", "Tenant"}:
+                        continue
+                    router.include_table(resource)
+            else:
+                router.include_tables(selected_table_resources)
+            _rewrite_admin_table_routes(router, deployment)
+        for entry in ADMIN_ROUTER_BINDINGS:
+            if deployment.admin_rest_group_enabled(str(entry["mount_group"])):
+                router.include_router(entry["router"])
+    return selected_table_resources
+
+
+def build_admin_router(
+    settings_obj: object | None = None,
+    *,
+    deployment: ResolvedDeployment | None = None,
+) -> TigrblRouter:
+    deployment = _as_deployment(settings_obj, deployment=deployment)
+    router = TigrblRouter(engine=dsn)
+    selected_table_resources = include_admin_routes(router, deployment=deployment)
+    assert_table_initialization_scope(deployment, selected_table_resources)
+    return router
+
+
+AdminRouter = build_admin_router(deployment=resolve_deployment(plugin_mode="admin-only"))
+
+

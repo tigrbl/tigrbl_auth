@@ -3,14 +3,14 @@ import asyncio
 import pytest_asyncio
 
 from tigrbl_identity_server.api.app import app
-from tigrbl_identity_server.routers.surface import surface_api
+from tigrbl_identity_server.surfaces import PublicRouter
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import JWKS_PATH
 
 
 @pytest_asyncio.fixture()
 async def openapi_spec() -> dict:
     """Generate an OpenAPI specification after initializing the API surface."""
-    init = surface_api.initialize()
+    init = PublicRouter.initialize()
     if asyncio.iscoroutine(init):
         await init
     return app.openapi()
