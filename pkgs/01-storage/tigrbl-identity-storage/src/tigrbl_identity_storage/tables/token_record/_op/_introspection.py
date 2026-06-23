@@ -5,10 +5,10 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from .._ops import field, first_handler_record, record_id, token_hash, update_handler_record
-from .._session import storage_session
-from ..revoked_token._table import RevokedToken
-from ._table import TokenRecord
+from ..._ops import field, first_handler_record, record_id, token_hash, update_handler_record
+from ..._session import storage_session
+from ...revoked_token._table import RevokedToken
+from .._table import TokenRecord
 
 
 async def introspect_token_record_async(token: str) -> dict[str, Any]:

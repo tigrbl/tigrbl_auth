@@ -8,7 +8,7 @@ import pytest
 
 from tigrbl.requests import Request
 from tigrbl_auth.rfc.rfc7636_pkce import makeCodeChallenge, makeCodeVerifier
-from tigrbl_identity_storage.tables.token_record import _endpoint as token_endpoint
+from tigrbl_identity_storage.tables.token_record import _op as token_endpoint
 
 
 @pytest.mark.unit
@@ -97,7 +97,7 @@ async def test_authorization_code_exchange_mints_session_bound_id_token_claims(m
     monkeypatch.setattr(token_endpoint, "delete_handler_record", fake_delete_handler_record)
     monkeypatch.setattr(token_endpoint, "mint_id_token", fake_mint_id_token)
 
-    request = Request(scope={"type": "http", "scheme": "https", "headers": []})
+    request = Request({"type": "http", "scheme": "https", "headers": []})
     response = await token_endpoint.token_request(request=request, db=object())
 
     assert response["id_token"] == "id-token"

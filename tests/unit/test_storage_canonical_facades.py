@@ -268,18 +268,26 @@ def test_executable_userinfo_publisher_lives_above_storage() -> None:
 
 
 def test_executable_introspection_publisher_lives_above_storage() -> None:
-    assert importlib.util.find_spec("tigrbl_identity_storage.tables.token_record._introspection") is None
+    old_modules = (
+        "tigrbl_identity_storage.tables.token_record._introspection",
+        "tigrbl_identity_storage.tables.token_record._introspection_store",
+        "tigrbl_identity_storage.tables.token_record._lifecycle",
+        "tigrbl_identity_storage.tables.token_record._endpoint",
+        "tigrbl_identity_storage.tables.token_record._route",
+    )
+    for module_name in old_modules:
+        assert importlib.util.find_spec(module_name) is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.introspection")
     storage = importlib.import_module("tigrbl_identity_storage.tables.token_record")
-    store = importlib.import_module("tigrbl_identity_storage.tables.token_record._introspection_store")
+    ops = importlib.import_module("tigrbl_identity_storage.tables.token_record._op")
 
     assert runtime.api is runtime.router
     assert runtime.include_introspection_endpoint.__module__ == (
         "tigrbl_identity_storage_runtime.introspection"
     )
-    assert store.introspect_token_record_async.__module__ == (
-        "tigrbl_identity_storage.tables.token_record._introspection_store"
+    assert ops.introspect_token_record_async.__module__ == (
+        "tigrbl_identity_storage.tables.token_record._op._introspection"
     )
     assert not hasattr(storage, "introspect")
     assert not hasattr(storage, "include_introspection_endpoint")

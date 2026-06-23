@@ -245,7 +245,7 @@ api = router = TigrblRouter()
 
 @api.route("/token", methods=["POST"], response_model=TokenPair)
 async def token(request: Request, db: AsyncSession = TigrblDepends(get_db)) -> Any:
-    from ._route import token_request
+    from ._op import token_request
 
     return await token_request(request=request, db=db)
 

@@ -299,7 +299,10 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
         _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
-        / "token_service.py"
+        / "tables"
+        / "token_record"
+        / "_op"
+        / "_persistence.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
         _package_path("tigrbl-identity-server")

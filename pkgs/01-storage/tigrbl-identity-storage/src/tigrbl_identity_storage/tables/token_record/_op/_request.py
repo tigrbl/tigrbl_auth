@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ._op import (
+from ._runtime import (
     AuthCode,
     AuthSession,
     AuthorizationCodeGrantForm,
@@ -49,7 +49,8 @@ from ._op import (
     issue_token_pair_records,
     mint_id_token,
     oidc_hash,
-    presented_certificate_pem, presented_certificate_thumbprint,
+    presented_certificate_pem,
+    presented_certificate_thumbprint,
     read_handler_record,
     redeem_refresh_token,
     runtime_security_profile,
@@ -61,6 +62,7 @@ from ._op import (
     validate_sender_constraint,
     verify_code_challenge,
 )
+from ._persistence import redeem_refresh_token
 
 async def token_request(*, request, db):
     deployment = _resolve_request_deployment(request)

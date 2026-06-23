@@ -49,10 +49,10 @@ from tigrbl_identity_storage.tables.revoked_token._op import (
     revoke_token,
     revoke_token_async,
 )
-from tigrbl_identity_storage.tables.token_record._introspection_store import (
+from tigrbl_identity_storage.tables.token_record._op import (
     introspect_token_record_async as introspect_token_async,
 )
-from tigrbl_identity_storage.tables.token_record._lifecycle import (
+from tigrbl_identity_storage.tables.token_record._op import (
     get_token_record_async,
     mark_token_used_async,
     remove_token_record_async,

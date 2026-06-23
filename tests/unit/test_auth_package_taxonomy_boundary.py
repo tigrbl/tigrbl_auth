@@ -51,7 +51,7 @@ DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
     "tigrbl_identity_credentials/_token_service/__init__.py": "tigrbl_identity_runtime.token_service",
     "tigrbl_identity_credentials/_token_service/coder.py": "tigrbl_identity_jose.jwt_coder",
     "tigrbl_identity_credentials/_token_service/operator.py": "tigrbl_identity_storage_runtime.session_service",
-    "tigrbl_identity_credentials/_token_service/persistence.py": "tigrbl_identity_storage.token_service",
+    "tigrbl_identity_credentials/_token_service/persistence.py": "tigrbl_identity_storage.tables.token_record._op",
     "tigrbl_identity_credentials/_token_service/runtime.py": "tigrbl_identity_jose.jwt_runtime",
     "tigrbl_identity_credentials/audit_service.py": "tigrbl_identity_storage_runtime.audit",
     "tigrbl_identity_credentials/operator_service.py": "tigrbl_identity_storage_runtime.resource_service",

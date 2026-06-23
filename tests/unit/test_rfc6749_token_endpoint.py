@@ -36,15 +36,15 @@ async def client(monkeypatch):
     app.include_router(router)
     app.router.dependency_overrides[get_db] = lambda: DummyDB()
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables.token_record._route.read_handler_record",
+        "tigrbl_identity_storage.tables.token_record._op.read_handler_record",
         AsyncMock(return_value=DummyClient()),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables.token_record._route.first_handler_record",
+        "tigrbl_identity_storage.tables.token_record._op.first_handler_record",
         AsyncMock(return_value=None),
     )
     monkeypatch.setattr(
-        "tigrbl_identity_storage.tables.token_record._route.issue_token_pair_records",
+        "tigrbl_identity_storage.tables.token_record._op.issue_token_pair_records",
         AsyncMock(return_value=("access-token", "refresh-token")),
     )
     transport = ASGITransport(app=app)

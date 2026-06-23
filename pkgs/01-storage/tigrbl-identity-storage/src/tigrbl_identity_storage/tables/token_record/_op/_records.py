@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from .._ops import (
+from ..._ops import (
     delete_handler_record,
     field,
     first_handler_record,
@@ -14,8 +14,8 @@ from .._ops import (
     to_uuid,
     token_hash,
 )
-from .._session import storage_session
-from ._table import TokenRecord
+from ..._session import storage_session
+from .._table import TokenRecord
 
 
 async def upsert_token_record_async(
@@ -107,7 +107,7 @@ async def revoke_refresh_family_async(
 ) -> int:
     if not family_id:
         return 0
-    from ..revoked_token._op import persist_revoked_token_hash
+    from ...revoked_token._op import persist_revoked_token_hash
 
     reuse_hash = token_hash(reuse_token) if reuse_token else None
     revoked_count = 0

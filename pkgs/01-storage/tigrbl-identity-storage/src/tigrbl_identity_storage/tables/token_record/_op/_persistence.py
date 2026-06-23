@@ -6,6 +6,7 @@ from typing import Any, Protocol
 from uuid import uuid4
 
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
+from .._hooks import normalize_refresh_audience
 
 
 class TokenCoder(Protocol):
@@ -43,7 +44,7 @@ async def issue_persisted_token_pair(
     **extra: Any,
 ) -> tuple[str, str]:
     from tigrbl_identity_storage.tables._ops import token_hash
-    from tigrbl_identity_storage.tables.token_record._lifecycle import upsert_token_record_async
+    from tigrbl_identity_storage.tables.token_record import _op as token_record_ops
 
     access_token, refresh_token = await jwt.async_sign_pair(
         sub=sub,
@@ -65,7 +66,7 @@ async def issue_persisted_token_pair(
         refresh_claims["client_id"] = client_id
     family_id = refresh_family_id or str(uuid4())
     refresh_parent_hash = token_hash(refresh_parent_token) if refresh_parent_token else None
-    await upsert_token_record_async(
+    await token_record_ops.upsert_token_record_async(
         access_token,
         access_claims,
         token_kind="access",
@@ -73,7 +74,7 @@ async def issue_persisted_token_pair(
         refresh_family_id=family_id,
         refresh_parent_hash=refresh_parent_hash,
     )
-    await upsert_token_record_async(
+    await token_record_ops.upsert_token_record_async(
         refresh_token,
         refresh_claims,
         token_kind="refresh",
@@ -82,16 +83,6 @@ async def issue_persisted_token_pair(
         refresh_parent_hash=refresh_parent_hash,
     )
     return access_token, refresh_token
-
-
-def _normalize_refresh_audience(value: Any) -> str | list[str] | None:
-    if value is None or value == "":
-        return None
-    if isinstance(value, (str, list)):
-        return value
-    if isinstance(value, tuple):
-        return list(value)
-    return str(value)
 
 
 async def redeem_refresh_token(
@@ -103,13 +94,9 @@ async def redeem_refresh_token(
     requested_audience: str | None = None,
     token_type: str = "bearer",
 ) -> dict[str, Any]:
-    from tigrbl_identity_storage.tables.token_record._lifecycle import (
-        get_token_record_async,
-        mark_token_used_async,
-        revoke_refresh_family_async,
-    )
+    from tigrbl_identity_storage.tables.token_record import _op as token_record_ops
 
-    record = await get_token_record_async(refresh_token)
+    record = await token_record_ops.get_token_record_async(refresh_token)
     if record is None:
         raise InvalidRefreshTokenError("refresh token was not issued by this repository")
     if record.token_kind != "refresh":
@@ -119,7 +106,7 @@ async def redeem_refresh_token(
     family_id = str(record.refresh_family_id or "")
     if record.used_at is not None or record.refresh_successor_hash:
         if family_id:
-            await revoke_refresh_family_async(family_id, reuse_token=refresh_token)
+            await token_record_ops.revoke_refresh_family_async(family_id, reuse_token=refresh_token)
         raise RefreshTokenReuseError("refresh token replay detected")
     if not record.active or record.revoked_at is not None:
         raise InvalidRefreshTokenError("refresh token is inactive")
@@ -130,7 +117,7 @@ async def redeem_refresh_token(
     if client_id and str(claims.get("client_id") or record.client_id or "") not in {"", client_id}:
         raise InvalidRefreshTokenError("refresh token client binding mismatch")
 
-    stored_audience = _normalize_refresh_audience((record.claims or {}).get("aud") if isinstance(record.claims, dict) else None)
+    stored_audience = normalize_refresh_audience((record.claims or {}).get("aud") if isinstance(record.claims, dict) else None)
     if requested_audience and stored_audience not in {None, "", requested_audience}:
         raise InvalidRefreshTokenError("refresh token audience cannot be widened or changed")
 
@@ -141,7 +128,7 @@ async def redeem_refresh_token(
     preserved_claims.pop("jti", None)
     preserved_claims.pop("typ", None)
 
-    next_audience = requested_audience or _normalize_refresh_audience(preserved_claims.pop("aud", None))
+    next_audience = requested_audience or normalize_refresh_audience(preserved_claims.pop("aud", None))
     next_scope = preserved_claims.pop("scope", None)
     next_issuer = preserved_claims.pop("iss", None)
     preserved_claims.pop("sub", None)
@@ -166,7 +153,7 @@ async def redeem_refresh_token(
         audience=next_audience,
         **extra_claims,
     )
-    await mark_token_used_async(refresh_token, successor_token=next_refresh_token)
+    await token_record_ops.mark_token_used_async(refresh_token, successor_token=next_refresh_token)
     return {
         "access_token": access_token,
         "refresh_token": next_refresh_token,
@@ -177,5 +164,6 @@ async def redeem_refresh_token(
 __all__ = [
     "TokenCoder",
     "issue_persisted_token_pair",
+    "normalize_refresh_audience",
     "redeem_refresh_token",
 ]

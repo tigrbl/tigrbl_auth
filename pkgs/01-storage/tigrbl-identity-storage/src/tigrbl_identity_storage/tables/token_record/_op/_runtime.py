@@ -12,7 +12,7 @@ from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
 from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.jwt_coder import JWTCoder
-from tigrbl_identity_storage.token_service import redeem_refresh_token
+from ._persistence import redeem_refresh_token
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
@@ -88,7 +88,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover
-    from . import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
+    from .._table import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
 except Exception:  # pragma: no cover - dependency-light fallback
     from pydantic import BaseModel
 
@@ -141,12 +141,12 @@ from tigrbl_identity_server.security.handler_records import (
 )
 
 try:  # pragma: no cover
-    from ..auth_code import AuthCode
-    from ..auth_session import AuthSession
-    from ..client import Client
-    from ..client_registration import ClientRegistration
-    from ._table import DeviceCode
-    from ..user._table import User
+    from ...auth_code import AuthCode
+    from ...auth_session import AuthSession
+    from ...client import Client
+    from ...client_registration import ClientRegistration
+    from ...device_code._table import DeviceCode
+    from ...user._table import User
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()
