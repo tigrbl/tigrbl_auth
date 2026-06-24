@@ -163,25 +163,3 @@ __all__ = [
     "update_logout_metadata",
     "update_logout_metadata_async",
 ]
-
-# BEGIN classmethod-to-op_ctx migration
-from tigrbl import op_ctx as _table_op_ctx
-
-import uuid
-from .._ops import first_record, update_record, utc_now
-
-@_table_op_ctx(bind=LogoutState, alias="consume_logout", target="custom", rest=False)
-async def consume_logout(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
-    row = await first_record(cls, db, {"id": logout_id})
-    if row is None:
-        return None
-    return await update_record(cls, db, record_id(row), {"status": "complete", "propagated_at": utc_now()})
-
-@_table_op_ctx(bind=LogoutState, alias="expire", target="custom", rest=False)
-async def expire(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
-    row = await first_record(cls, db, {"id": logout_id})
-    if row is None:
-        return None
-    return await update_record(cls, db, record_id(row), {"status": "expired", "expires_at": utc_now()})
-
-# END classmethod-to-op_ctx migration

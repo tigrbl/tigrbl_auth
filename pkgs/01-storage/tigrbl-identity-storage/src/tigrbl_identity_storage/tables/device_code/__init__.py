@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from . import _table as _table
 from ._table import *
-from . import _ops as _ops
 
 for _name in dir(_table):
     if not _name.startswith("__"):

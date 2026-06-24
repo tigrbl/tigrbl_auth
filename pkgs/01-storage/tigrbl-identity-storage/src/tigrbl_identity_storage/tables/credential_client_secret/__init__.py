@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from . import _table as _table
 from ._table import *
-from . import _ops as _ops
 
 try:
     __all__ = list(_table.__all__)

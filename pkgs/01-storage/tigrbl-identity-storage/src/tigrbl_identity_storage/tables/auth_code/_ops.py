@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta, timezone
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
 from tigrbl_identity_storage.framework import HTMLResponse, HTTPException, RedirectResponse, status
 from ._table import AuthCode
+
+if TYPE_CHECKING:
+    from ..pushed_authorization_request import PushedAuthorizationRequest
 
 
 def _coerce_multi_value(value: Any) -> list[str]:
@@ -359,25 +362,3 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     if rotated_secret:
         issue_session_cookie(response, session_id=session.id, secret=rotated_secret, expires_at=session.expires_at)
     return response
-
-# BEGIN classmethod-to-op_ctx migration
-from tigrbl import op_ctx as _table_op_ctx
-
-from .._ops import read_record, record_id, update_record, utc_now
-from ..pushed_authorization_request._table import PushedAuthorizationRequest
-
-@_table_op_ctx(bind=AuthCode, alias="consume", target="custom", rest=False)
-async def consume(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
-    row = await read_record(cls, db, code_id)
-    if row is None:
-        return None
-    return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
-
-@_table_op_ctx(bind=AuthCode, alias="expire", target="custom", rest=False)
-async def expire(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
-    row = await read_record(cls, db, code_id)
-    if row is None:
-        return None
-    return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
-
-# END classmethod-to-op_ctx migration

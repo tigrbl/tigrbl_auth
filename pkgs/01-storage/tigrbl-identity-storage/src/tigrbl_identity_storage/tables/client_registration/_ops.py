@@ -59,27 +59,3 @@ __all__ = [
     "upsert_client_registration",
     "upsert_client_registration_async",
 ]
-
-# BEGIN classmethod-to-op_ctx migration
-from tigrbl import op_ctx as _table_op_ctx
-
-from .._ops import delete_record, first_record, update_record
-
-async def _read_registration(cls, db: Any, *, client_id: UUID) -> "ClientRegistration | None":
-    return await first_record(cls, db, {"client_id": client_id})
-
-@_table_op_ctx(bind=ClientRegistration, alias="update_registration", target="custom", rest=False)
-async def update_registration(cls, db: Any, *, client_id: UUID, **payload: Any) -> "ClientRegistration | None":
-    row = await _read_registration(cls, db, client_id=client_id)
-    if row is None:
-        return None
-    return await update_record(cls, db, record_id(row), payload)
-
-@_table_op_ctx(bind=ClientRegistration, alias="delete_registration", target="custom", rest=False)
-async def delete_registration(cls, db: Any, *, client_id: UUID) -> Any:
-    row = await _read_registration(cls, db, client_id=client_id)
-    if row is None:
-        return None
-    return await delete_record(cls, db, record_id(row))
-
-# END classmethod-to-op_ctx migration

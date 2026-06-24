@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from . import _table as _table
 from ._table import *
-from . import _ops as _ops
 from . import _account_route as _account_route
 
 for _name in dir(_table):

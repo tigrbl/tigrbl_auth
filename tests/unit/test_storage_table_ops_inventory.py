@@ -17,11 +17,6 @@ TABLES_DIR = (
 )
 MATRIX_PATH = ROOT / "docs" / "refactor" / "01-storage-classmethod-refactor-matrix.md"
 
-OP_CTX_ACTIONS = {
-    "built-in-update-delete-or-op",
-    "move-to-op-ctx",
-    "review-custom-vs-hook",
-}
 PRIVATE_HELPER_ROWS = {
     ("OperatorRecord", "row_to_record"),
     ("OperatorRecord", "normalize_record"),
@@ -64,8 +59,12 @@ def _package_module(module_name: str) -> str:
     return module_name.removesuffix("._table")
 
 
-def _op_spec(attr: object) -> object | None:
-    return getattr(getattr(attr, "__func__", attr), "__tigrbl_op_spec__", None)
+def _ops_paths() -> list[Path]:
+    return [
+        path
+        for path in sorted(TABLES_DIR.rglob("*.py"))
+        if path.name == "_ops.py" or "_ops" in path.parts
+    ]
 
 
 def test_storage_table_modules_do_not_define_classmethod_ops() -> None:
@@ -81,28 +80,29 @@ def test_storage_table_modules_do_not_define_classmethod_ops() -> None:
     assert offenders == []
 
 
-def test_matrix_table_ops_are_bound_with_op_ctx_or_collapsed_to_builtins() -> None:
-    missing_op_ctx: list[str] = []
+def test_storage_ops_modules_do_not_use_op_ctx() -> None:
+    offenders: list[str] = []
+    for path in _ops_paths():
+        text = path.read_text(encoding="utf-8")
+        if "op_ctx" in text or "_table_op_ctx" in text:
+            offenders.append(path.relative_to(ROOT).as_posix())
+
+    assert offenders == []
+
+
+def test_matrix_table_ops_are_collapsed_from_table_classes() -> None:
     unexpected_semantic_methods: list[str] = []
 
     for row in _matrix_rows():
         module = importlib.import_module(_package_module(row["module"]))
         cls = getattr(module, row["class"])
         method_name = row["method"]
-        should_bind_op = row["action"] in OP_CTX_ACTIONS and (
-            row["class"],
-            method_name,
-        ) not in PRIVATE_HELPER_ROWS
 
-        if should_bind_op:
-            attr = getattr(cls, method_name, None)
-            spec = _op_spec(attr) if attr is not None else None
-            if getattr(spec, "alias", None) != method_name:
-                missing_op_ctx.append(f"{row['class']}.{method_name}")
-        elif hasattr(cls, method_name):
+        if (row["class"], method_name) in PRIVATE_HELPER_ROWS:
+            continue
+        if hasattr(cls, method_name):
             unexpected_semantic_methods.append(f"{row['class']}.{method_name}")
 
-    assert missing_op_ctx == []
     assert unexpected_semantic_methods == []
 
 
