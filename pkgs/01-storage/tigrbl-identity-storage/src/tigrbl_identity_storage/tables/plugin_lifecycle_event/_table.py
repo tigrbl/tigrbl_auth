@@ -20,13 +20,5 @@ class PluginLifecycleEventRecord(RestOltpTable, GUIDPk, Timestamped):
     message: Mapped[str | None] = acol(storage=S(String(2000), nullable=True))
     event_payload: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def append_event(cls, db: Any, **payload: Any) -> "PluginLifecycleEventRecord":
-        payload.setdefault("event_payload", dict(payload))
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, event_id: str) -> "PluginLifecycleEventRecord | None":
-        return await first_record(cls, db, {"event_id": event_id})
 
 __all__ = ["PluginLifecycleEventRecord"]

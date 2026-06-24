@@ -281,19 +281,22 @@ async def pushed_authorization_request(*, request, db):
         },
     )
 
-    await AuditEvent.record(
+    await create_record(
+        AuditEvent,
         db,
-        tenant_id=client.tenant_id,
-        actor_client_id=client.id,
-        event_type='authorization.par.created',
-        target_type='par_request',
-        target_id=str(row.id),
-        details={
-            'request_uri': row.request_uri,
-            'resource': params.get('resource'),
-            'audience': params.get('audience'),
-            'authorization_details_present': bool(params.get('authorization_details')),
-            'request_object_present': bool(params.get('request')),
+        {
+            'tenant_id': client.tenant_id,
+            'actor_client_id': client.id,
+            'event_type': 'authorization.par.created',
+            'target_type': 'par_request',
+            'target_id': str(row.id),
+            'details': {
+                'request_uri': row.request_uri,
+                'resource': params.get('resource'),
+                'audience': params.get('audience'),
+                'authorization_details_present': bool(params.get('authorization_details')),
+                'request_object_present': bool(params.get('request')),
+            },
         },
     )
 

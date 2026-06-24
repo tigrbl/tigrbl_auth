@@ -118,7 +118,7 @@ async def is_token_revoked_async(token: str) -> bool:
     digest = token_hash(token)
     try:
         async with storage_session() as db:
-            if await RevokedToken.is_revoked(db, token_hash=digest):
+            if await first_handler_record(RevokedToken, db, {"token_hash": digest}) is not None:
                 return True
             record = await first_handler_record(TokenRecord, db, {"token_hash": digest})
             if record is None:
@@ -174,3 +174,61 @@ __all__ = [
     "reset_token_state",
     "reset_token_state_async",
 ]
+
+# BEGIN classmethod-to-op_ctx migration
+from tigrbl import op_ctx as _table_op_ctx
+from . import _table as _table_module
+
+for _table_name in dir(_table_module):
+    if not _table_name.startswith("__"):
+        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+
+@_table_op_ctx(bind=RevokedToken, alias="revoke_token", target="custom", rest=False)
+async def revoke_token(
+    cls,
+    db: Any,
+    *,
+    token_hash: str,
+    token_type_hint: str | None = None,
+    reason: str | None = None,
+    refresh_family_id: str | None = None,
+    **metadata: Any,
+) -> "RevokedToken":
+    existing = await first_record(cls, db, {"token_hash": token_hash})
+    payload = {
+        "token_hash": token_hash,
+        "token_type_hint": token_type_hint,
+        "refresh_family_id": refresh_family_id,
+        "revoked_reason": reason or "revoked",
+    }
+    payload.update(metadata)
+    if existing is None:
+        return await create_record(cls, db, payload)
+    return await update_record(cls, db, record_id(existing), payload)
+
+@_table_op_ctx(bind=RevokedToken, alias="revoke_family", target="custom", rest=False)
+async def revoke_family(
+    cls,
+    db: Any,
+    *,
+    refresh_family_id: str,
+    token_hashes: list[str],
+    reason: str = "refresh_token_family_revoked",
+    **metadata: Any,
+) -> list["RevokedToken"]:
+    revoked = []
+    token_type_hint = metadata.pop("token_type_hint", None)
+    for token_hash in token_hashes:
+        revoked.append(
+            await cls.revoke_token(
+                db,
+                token_hash=token_hash,
+                token_type_hint=token_type_hint,
+                reason=reason,
+                refresh_family_id=refresh_family_id,
+                **metadata,
+            )
+        )
+    return revoked
+
+# END classmethod-to-op_ctx migration

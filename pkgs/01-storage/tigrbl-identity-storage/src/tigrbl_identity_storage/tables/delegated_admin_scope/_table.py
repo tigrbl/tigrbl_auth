@@ -21,28 +21,5 @@ class DelegatedAdminScope(RestOltpTable, GUIDPk, Timestamped):
     service_identity_permissions: Mapped[list | None] = acol(storage=S(JSON, nullable=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
 
-    @classmethod
-    async def grant_scope(cls, db: Any, **payload: Any) -> "DelegatedAdminScope":
-        existing = await cls.lookup(db, subject=payload["subject"])
-        payload.setdefault("status", "active")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, subject: str) -> "DelegatedAdminScope | None":
-        return await first_record(cls, db, {"subject": subject})
-
-    @classmethod
-    async def list_active(cls, db: Any) -> list["DelegatedAdminScope"]:
-        return await list_records(cls, db, {"status": "active"})
-
-    @classmethod
-    async def revoke_scope(cls, db: Any, *, subject: str) -> "DelegatedAdminScope | None":
-        row = await cls.lookup(db, subject=subject)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "revoked"})
-
 
 __all__ = ["DelegatedAdminScope"]

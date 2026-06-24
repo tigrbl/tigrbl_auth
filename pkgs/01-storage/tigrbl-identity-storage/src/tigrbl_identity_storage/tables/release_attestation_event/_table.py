@@ -19,13 +19,5 @@ class ReleaseAttestationEvent(RestOltpTable, GUIDPk, Timestamped):
     subject: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     event_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def append_event(cls, db: Any, **payload: Any) -> "ReleaseAttestationEvent":
-        payload.setdefault("event_payload", dict(payload))
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, event_id: str) -> "ReleaseAttestationEvent | None":
-        return await first_record(cls, db, {"event_id": event_id})
 
 __all__ = ["ReleaseAttestationEvent"]

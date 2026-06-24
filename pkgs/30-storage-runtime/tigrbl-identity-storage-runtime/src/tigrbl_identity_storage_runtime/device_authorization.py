@@ -129,22 +129,25 @@ async def device_authorization_request(*, request, db):
     verification_uri = f"{str(deployment.issuer or settings.issuer).rstrip('/')}/device"
     verification_uri_complete = f"{verification_uri}?user_code={user_code}"
 
-    await AuditEvent.record(
+    await create_record(
+        AuditEvent,
         db,
-        tenant_id=client.tenant_id,
-        actor_client_id=client.id,
-        event_type='device.authorization.created',
-        target_type='device_code',
-        target_id=str(getattr(row, 'id', device_code)),
-        details={
-            'audience': effective_audience,
-            'resource': effective_resource,
-            'resources': list(selection.resources) if selection is not None else [],
-            'scope': scope,
-            'interval': DEVICE_CODE_INTERVAL,
-            'expires_in': DEVICE_CODE_EXPIRES_IN,
-            'user_code_length': len(user_code),
-            'user_code_charset': 'A-Z0-9',
+        {
+            'tenant_id': client.tenant_id,
+            'actor_client_id': client.id,
+            'event_type': 'device.authorization.created',
+            'target_type': 'device_code',
+            'target_id': str(getattr(row, 'id', device_code)),
+            'details': {
+                'audience': effective_audience,
+                'resource': effective_resource,
+                'resources': list(selection.resources) if selection is not None else [],
+                'scope': scope,
+                'interval': DEVICE_CODE_INTERVAL,
+                'expires_in': DEVICE_CODE_EXPIRES_IN,
+                'user_code_length': len(user_code),
+                'user_code_charset': 'A-Z0-9',
+            },
         },
     )
 

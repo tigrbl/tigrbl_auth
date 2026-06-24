@@ -19,25 +19,5 @@ class ResourceServerContract(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(64), nullable=False, default="active", index=True))
     contract_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def register(cls, db: Any, **payload: Any) -> "ResourceServerContract":
-        existing = await cls.lookup(db, contract_id=payload["contract_id"])
-        payload.setdefault("contract_payload", dict(payload))
-        payload.setdefault("status", "active")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, contract_id: str) -> "ResourceServerContract | None":
-        return await first_record(cls, db, {"contract_id": contract_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, contract_id: str) -> "ResourceServerContract | None":
-        row = await cls.lookup(db, contract_id=contract_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["ResourceServerContract"]

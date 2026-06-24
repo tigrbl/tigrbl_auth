@@ -120,12 +120,6 @@ class Realm(RestOltpTable, GUIDPk, Timestamped, Bootstrappable):
         }
     ]
 
-    @classmethod
-    async def update_realm(cls, db: Any, *, realm_id: uuid.UUID, **payload: Any) -> "Realm | None":
-        row = await first_record(cls, db, {"id": realm_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), payload)
 
 admin_api = admin_router = TigrblRouter()
 

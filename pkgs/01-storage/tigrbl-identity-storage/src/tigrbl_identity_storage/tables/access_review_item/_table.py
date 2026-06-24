@@ -24,22 +24,5 @@ class AccessReviewItem(RestOltpTable, GUIDPk, Timestamped):
     due_at: Mapped[dt.datetime] = acol(storage=S(TZDateTime, nullable=False, index=True))
     escalation_count: Mapped[int] = acol(storage=S(Integer, nullable=False, default=0))
 
-    @classmethod
-    async def create_item(cls, db: Any, **payload: Any) -> "AccessReviewItem":
-        payload.setdefault("status", "pending")
-        payload.setdefault("escalation_count", 0)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, item_id: str) -> "AccessReviewItem | None":
-        return await first_record(cls, db, {"item_id": item_id})
-
-    @classmethod
-    async def mark_decided(cls, db: Any, *, item_id: str) -> "AccessReviewItem | None":
-        row = await cls.lookup(db, item_id=item_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "decided"})
-
 
 __all__ = ["AccessReviewItem"]

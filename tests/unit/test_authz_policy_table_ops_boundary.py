@@ -110,6 +110,7 @@ async def test_abac_policy_condition_helpers_are_table_owned(administrator_stora
 
 @pytest.mark.asyncio
 async def test_delegated_admin_scope_ops_remain_table_owned(administrator_storage) -> None:
+    from tigrbl_identity_storage.tables._ops import first_record, list_records
     from tigrbl_identity_storage.tables.delegated_admin_scope import DelegatedAdminScope
 
     granted = await DelegatedAdminScope.grant_scope(
@@ -120,12 +121,15 @@ async def test_delegated_admin_scope_ops_remain_table_owned(administrator_storag
         visible_client_fields=["id", "name"],
         mutable_client_fields=["name"],
     )
-    looked_up = await DelegatedAdminScope.lookup(administrator_storage, subject="delegate")
+    looked_up = await first_record(DelegatedAdminScope, administrator_storage, {"subject": "delegate"})
 
     assert looked_up == granted
-    assert [row["subject"] for row in await DelegatedAdminScope.list_active(administrator_storage)] == ["delegate"]
+    assert [
+        row["subject"]
+        for row in await list_records(DelegatedAdminScope, administrator_storage, {"status": "active"})
+    ] == ["delegate"]
 
     revoked = await DelegatedAdminScope.revoke_scope(administrator_storage, subject="delegate")
 
     assert revoked["status"] == "revoked"
-    assert await DelegatedAdminScope.list_active(administrator_storage) == []
+    assert await list_records(DelegatedAdminScope, administrator_storage, {"status": "active"}) == []

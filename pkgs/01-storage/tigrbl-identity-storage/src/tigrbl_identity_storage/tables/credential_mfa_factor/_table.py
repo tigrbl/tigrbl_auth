@@ -22,20 +22,5 @@ class CredentialMfaFactor(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     factor_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def lookup(cls, db: Any, *, factor_id: str) -> "CredentialMfaFactor | None":
-        return await first_record(cls, db, {"factor_id": factor_id})
-
-    @classmethod
-    async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialMfaFactor"]:
-        return await list_records(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def revoke(cls, db: Any, *, credential_id: str) -> "CredentialMfaFactor | None":
-        row = await first_record(cls, db, {"credential_id": credential_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "revoked"})
-
 
 __all__ = ["CredentialMfaFactor"]

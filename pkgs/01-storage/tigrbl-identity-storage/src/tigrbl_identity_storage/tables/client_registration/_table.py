@@ -142,29 +142,6 @@ class ClientRegistration(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
     rotated_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True))
     disabled_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
 
-    @classmethod
-    async def register_client(cls, db: Any, **payload: Any) -> "ClientRegistration":
-        payload.setdefault("issued_at", utc_now())
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def read_registration(cls, db: Any, *, client_id: UUID) -> "ClientRegistration | None":
-        return await first_record(cls, db, {"client_id": client_id})
-
-    @classmethod
-    async def update_registration(cls, db: Any, *, client_id: UUID, **payload: Any) -> "ClientRegistration | None":
-        row = await cls.read_registration(db, client_id=client_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), payload)
-
-    @classmethod
-    async def delete_registration(cls, db: Any, *, client_id: UUID) -> Any:
-        row = await cls.read_registration(db, client_id=client_id)
-        if row is None:
-            return None
-        return await delete_record(cls, db, record_id(row))
-
 
 __all__ = [
     "ClientRegistration",

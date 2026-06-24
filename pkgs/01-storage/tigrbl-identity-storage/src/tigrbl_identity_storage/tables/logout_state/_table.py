@@ -64,48 +64,5 @@ class LogoutState(RestOltpTable, GUIDPk, Timestamped):
     expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     logout_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def create_logout(
-        cls,
-        db: Any,
-        *,
-        session_id: uuid.UUID | None,
-        initiated_by: str = "rp_logout",
-        reason: str = "logout",
-        frontchannel_required: bool = False,
-        backchannel_required: bool = False,
-        metadata: dict | None = None,
-    ) -> "LogoutState":
-        now = utc_now()
-        return await create_record(
-            cls,
-            db,
-            {
-                "session_id": session_id,
-                "sid": str(session_id) if session_id is not None else None,
-                "status": "pending" if frontchannel_required or backchannel_required else "complete",
-                "initiated_by": initiated_by,
-                "reason": reason,
-                "frontchannel_required": frontchannel_required,
-                "backchannel_required": backchannel_required,
-                "propagated_at": None if frontchannel_required or backchannel_required else now,
-                "logout_metadata": metadata,
-            },
-        )
-
-    @classmethod
-    async def consume_logout(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
-        row = await first_record(cls, db, {"id": logout_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "complete", "propagated_at": utc_now()})
-
-    @classmethod
-    async def expire(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
-        row = await first_record(cls, db, {"id": logout_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "expired", "expires_at": utc_now()})
-
 
 __all__ = ["LogoutIn", "LogoutOut", "LogoutState"]

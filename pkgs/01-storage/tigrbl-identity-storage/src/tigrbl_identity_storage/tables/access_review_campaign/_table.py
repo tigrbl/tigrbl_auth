@@ -23,28 +23,5 @@ class AccessReviewCampaign(RestOltpTable, GUIDPk, Timestamped):
     closed_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="open", index=True))
 
-    @classmethod
-    async def create_campaign(cls, db: Any, **payload: Any) -> "AccessReviewCampaign":
-        payload.setdefault("status", "open")
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, campaign_id: str) -> "AccessReviewCampaign | None":
-        return await first_record(cls, db, {"campaign_id": campaign_id})
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str, status: str | None = None) -> list["AccessReviewCampaign"]:
-        filters: dict[str, Any] = {"tenant_id": tenant_id}
-        if status is not None:
-            filters["status"] = status
-        return await list_records(cls, db, filters)
-
-    @classmethod
-    async def close(cls, db: Any, *, campaign_id: str) -> "AccessReviewCampaign | None":
-        row = await cls.lookup(db, campaign_id=campaign_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "closed", "closed_at": utc_now()})
-
 
 __all__ = ["AccessReviewCampaign"]

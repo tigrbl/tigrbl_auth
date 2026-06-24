@@ -21,24 +21,5 @@ class TenantResidency(RestOltpTable, GUIDPk, Timestamped):
     residency_attributes: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
 
-    @classmethod
-    async def assign_residency(cls, db: Any, **payload: Any) -> "TenantResidency":
-        existing = await cls.lookup(db, tenant_id=payload["tenant_id"])
-        payload.setdefault("status", "active")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, tenant_id: str) -> "TenantResidency | None":
-        return await first_record(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, tenant_id: str) -> "TenantResidency | None":
-        row = await cls.lookup(db, tenant_id=tenant_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["TenantResidency"]

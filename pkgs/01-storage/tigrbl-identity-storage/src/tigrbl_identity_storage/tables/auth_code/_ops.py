@@ -7,39 +7,7 @@ from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
 from tigrbl_identity_storage.framework import HTMLResponse, HTTPException, RedirectResponse, status
-from tigrbl_identity_server.rest.shared import _jwt, _require_tls
-from tigrbl_identity_runtime.deployment import deployment_from_request
-from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie
-from tigrbl_identity_server.security.handler_records import (
-    bind_browser_session_client_record,
-    create_handler_record,
-    first_handler_record,
-    maybe_rotate_browser_session_cookie_record,
-    read_handler_record,
-    resolve_browser_session_record,
-    update_handler_record,
-)
-from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
-from tigrbl_auth_protocol_oidc.standards.session_mgmt import (
-    session_state_for_client,
-)
-from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_authorization_request
-from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import merge_request_object_params, parse_request_object
-from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import RFC9126_SPEC_URL, consume_pushed_authorization_request, validate_pushed_authorization_request_row
-from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import normalize_authorization_details
-from tigrbl_auth_protocol_oauth.standards.resource_indicators import extract_resource
-from tigrbl_auth_protocol_oauth.standards.issuer_identification import authorization_response_issuer
-from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
-    OAuthPolicyViolation,
-    assert_authorization_request_allowed,
-    runtime_security_profile,
-)
-from . import AuthCode
-from ..client import Client
-from ..pushed_authorization_request import PushedAuthorizationRequest
-from ..user._table import User
+from ._table import AuthCode
 
 
 def _coerce_multi_value(value: Any) -> list[str]:
@@ -51,6 +19,14 @@ def _coerce_multi_value(value: Any) -> list[str]:
 
 
 async def _resolve_pushed_authorization_request(db, params: dict[str, Any]) -> tuple[dict[str, Any], PushedAuthorizationRequest | None]:
+    from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+        RFC9126_SPEC_URL,
+        validate_pushed_authorization_request_row,
+    )
+    from tigrbl_identity_server.security.handler_records import first_handler_record
+
+    from ..pushed_authorization_request import PushedAuthorizationRequest
+
     request_uri = params.get("request_uri")
     if not request_uri:
         return params, None
@@ -80,6 +56,13 @@ async def _resolve_pushed_authorization_request(db, params: dict[str, Any]) -> t
 
 
 async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[str, Any]:
+    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
+    from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import (
+        merge_request_object_params,
+        parse_request_object,
+    )
+    from tigrbl_identity_runtime.settings import settings
+
     request_object = params.get("request")
     if not request_object:
         return params
@@ -100,6 +83,40 @@ async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[st
 
 
 async def authorize_request(*, request, db, params: dict[str, Any]):
+    from tigrbl_auth_protocol_oauth.standards.issuer_identification import authorization_response_issuer
+    from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_authorization_request
+    from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+        OAuthPolicyViolation,
+        assert_authorization_request_allowed,
+        runtime_security_profile,
+    )
+    from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
+        consume_pushed_authorization_request,
+    )
+    from tigrbl_auth_protocol_oauth.standards.resource_indicators import extract_resource
+    from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import (
+        normalize_authorization_details,
+    )
+    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
+    from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
+    from tigrbl_auth_protocol_oidc.standards.session_mgmt import session_state_for_client
+    from tigrbl_identity_runtime.deployment import deployment_from_request
+    from tigrbl_identity_runtime.http_standards.cookies import issue_session_cookie
+    from tigrbl_identity_runtime.settings import settings
+    from tigrbl_identity_server.rest.shared import _jwt, _require_tls
+    from tigrbl_identity_server.security.handler_records import (
+        bind_browser_session_client_record,
+        create_handler_record,
+        maybe_rotate_browser_session_cookie_record,
+        read_handler_record,
+        resolve_browser_session_record,
+        update_handler_record,
+    )
+
+    from ..client import Client
+    from ..pushed_authorization_request import PushedAuthorizationRequest
+    from ..user._table import User
+
     deployment = deployment_from_request(request, settings)
     _require_tls(request, deployment=deployment)
     policy = runtime_security_profile(deployment)
@@ -342,3 +359,27 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     if rotated_secret:
         issue_session_cookie(response, session_id=session.id, secret=rotated_secret, expires_at=session.expires_at)
     return response
+
+# BEGIN classmethod-to-op_ctx migration
+from tigrbl import op_ctx as _table_op_ctx
+from . import _table as _table_module
+
+for _table_name in dir(_table_module):
+    if not _table_name.startswith("__"):
+        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+
+@_table_op_ctx(bind=AuthCode, alias="consume", target="custom", rest=False)
+async def consume(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
+    row = await read_record(cls, db, code_id)
+    if row is None:
+        return None
+    return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
+
+@_table_op_ctx(bind=AuthCode, alias="expire", target="custom", rest=False)
+async def expire(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
+    row = await read_record(cls, db, code_id)
+    if row is None:
+        return None
+    return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
+
+# END classmethod-to-op_ctx migration

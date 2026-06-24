@@ -46,55 +46,5 @@ class PrincipalKeyBinding(RestOltpTable, GUIDPk, Timestamped):
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.realms.id"), nullable=True, index=True)
     )
 
-    @classmethod
-    async def lookup(
-        cls,
-        db: Any,
-        *,
-        principal_id: uuid.UUID,
-        key_id: uuid.UUID,
-        binding_kind: str = "identity",
-    ) -> "PrincipalKeyBinding | None":
-        return await first_record(
-            cls,
-            db,
-            {"principal_id": principal_id, "key_id": key_id, "binding_kind": binding_kind},
-        )
-
-    @classmethod
-    async def list_for_principal(
-        cls,
-        db: Any,
-        *,
-        principal_id: uuid.UUID,
-        status: str | None = "active",
-    ) -> list["PrincipalKeyBinding"]:
-        filters: dict[str, Any] = {"principal_id": principal_id}
-        if status is not None:
-            filters["status"] = status
-        return await list_records(cls, db, filters)
-
-    @classmethod
-    async def list_for_key(
-        cls,
-        db: Any,
-        *,
-        key_id: uuid.UUID,
-        status: str | None = "active",
-    ) -> list["PrincipalKeyBinding"]:
-        filters: dict[str, Any] = {"key_id": key_id}
-        if status is not None:
-            filters["status"] = status
-        return await list_records(cls, db, filters)
-
-    @classmethod
-    async def revoke(cls, db: Any, *, id: Any) -> "PrincipalKeyBinding":
-        return await update_record(
-            cls,
-            db,
-            id,
-            {"status": "revoked", "binding_metadata": {"revoked_at": utc_now().isoformat()}},
-        )
-
 
 __all__ = ["PrincipalKeyBinding"]

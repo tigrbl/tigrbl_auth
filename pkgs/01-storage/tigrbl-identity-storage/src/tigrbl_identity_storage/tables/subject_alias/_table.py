@@ -19,53 +19,5 @@ class SubjectAlias(RestOltpTable, GUIDPk, Timestamped):
     tenant_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     verified: Mapped[str] = acol(storage=S(String(8), nullable=False, default="false", index=True))
 
-    @classmethod
-    async def bind_alias(
-        cls,
-        db: Any,
-        *,
-        principal_id: str,
-        issuer: str,
-        subject: str,
-        tenant_id: str | None = None,
-        verified: bool = False,
-    ) -> "SubjectAlias":
-        existing = await cls.lookup(db, issuer=issuer, subject=subject, tenant_id=tenant_id)
-        payload = {
-            "principal_id": principal_id,
-            "issuer": issuer,
-            "subject": subject,
-            "tenant_id": tenant_id,
-            "verified": str(bool(verified)).lower(),
-        }
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(
-        cls,
-        db: Any,
-        *,
-        issuer: str,
-        subject: str,
-        tenant_id: str | None = None,
-    ) -> "SubjectAlias | None":
-        filters: dict[str, Any] = {"issuer": issuer, "subject": subject}
-        if tenant_id is not None:
-            filters["tenant_id"] = tenant_id
-        return await first_record(cls, db, filters)
-
-    @classmethod
-    async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["SubjectAlias"]:
-        return await list_records(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def verify_alias(cls, db: Any, *, issuer: str, subject: str, tenant_id: str | None = None) -> "SubjectAlias | None":
-        row = await cls.lookup(db, issuer=issuer, subject=subject, tenant_id=tenant_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"verified": "true"})
-
 
 __all__ = ["SubjectAlias"]

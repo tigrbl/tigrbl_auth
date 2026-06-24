@@ -20,47 +20,5 @@ class Role(RestOltpTable, GUIDPk, Timestamped):
     inherited_roles: Mapped[list | None] = acol(storage=S(JSON, nullable=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
 
-    @classmethod
-    async def create_role(
-        cls,
-        db: Any,
-        *,
-        name: str,
-        permissions: list[str] | tuple[str, ...],
-        tenant_id: str | None = None,
-        denied_permissions: list[str] | tuple[str, ...] = (),
-        inherited_roles: list[str] | tuple[str, ...] = (),
-    ) -> "Role":
-        existing = await cls.lookup(db, name=name, tenant_id=tenant_id)
-        payload = {
-            "name": name,
-            "tenant_id": tenant_id,
-            "permissions": list(permissions),
-            "denied_permissions": list(denied_permissions),
-            "inherited_roles": list(inherited_roles),
-            "status": "active",
-        }
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, name: str, tenant_id: str | None = None) -> "Role | None":
-        filters: dict[str, Any] = {"name": name}
-        if tenant_id is not None:
-            filters["tenant_id"] = tenant_id
-        return await first_record(cls, db, filters)
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str | None = None) -> list["Role"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id} if tenant_id is not None else {})
-
-    @classmethod
-    async def disable(cls, db: Any, *, name: str, tenant_id: str | None = None) -> "Role | None":
-        row = await cls.lookup(db, name=name, tenant_id=tenant_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["Role"]

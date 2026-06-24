@@ -6,7 +6,7 @@ from typing import Any, Mapping
 
 from tigrbl_identity_storage.framework import hook_ctx
 
-from .._ops import field, record_id
+from .._ops import field, first_record, record_id
 from ._usage import normalize_payload_key_usage
 from ._table import CryptoKey
 
@@ -58,7 +58,7 @@ async def seed_primary_key_version(ctx: Mapping[str, Any]) -> None:
     from ..crypto_key_version import CryptoKeyVersion
 
     version = int(field(row, "primary_version", 1) or 1)
-    existing = await CryptoKeyVersion.lookup(db, key_id=record_id(row), version=version)
+    existing = await first_record(CryptoKeyVersion, db, {"key_id": record_id(row), "version": version})
     if existing is not None:
         return
     await CryptoKeyVersion.create_version(
@@ -82,7 +82,7 @@ async def ensure_key_enabled(ctx: Mapping[str, Any]) -> None:
     kid = payload.get("kid") if isinstance(payload, Mapping) else None
     if db is None or not kid:
         return
-    row = await CryptoKey.lookup_by_kid(db, kid=str(kid))
+    row = await first_record(CryptoKey, db, {"kid": str(kid)})
     if row is None or field(row, "status") != "active":
         raise LookupError("active crypto key not found")
     if isinstance(ctx, dict):

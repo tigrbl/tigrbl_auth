@@ -21,26 +21,5 @@ class SDKPackageRecord(RestOltpTable, GUIDPk, Timestamped):
     contract_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
 
-    @classmethod
-    async def register(cls, db: Any, **payload: Any) -> "SDKPackageRecord":
-        existing = await cls.lookup(db, sdk_id=payload["sdk_id"])
-        payload.setdefault("release_channel", "stable")
-        payload.setdefault("contract_payload", dict(payload))
-        payload.setdefault("status", "active")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, sdk_id: str) -> "SDKPackageRecord | None":
-        return await first_record(cls, db, {"sdk_id": sdk_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, sdk_id: str) -> "SDKPackageRecord | None":
-        row = await cls.lookup(db, sdk_id=sdk_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["SDKPackageRecord"]

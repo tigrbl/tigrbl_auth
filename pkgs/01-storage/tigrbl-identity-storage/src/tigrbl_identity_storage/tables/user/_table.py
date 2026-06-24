@@ -200,47 +200,6 @@ class User(UserBase, Bootstrappable):
 
     tenant = relationship("Tenant", back_populates="users")
 
-    @classmethod
-    def new(cls, *, tenant_id: uuid.UUID, username: str, email: str, password: str):
-        return cls(
-            tenant_id=tenant_id,
-            username=username,
-            email=email,
-            password_hash=hash_pw(password) if password is not None else None,
-        )
-
-    @classmethod
-    async def create_user(cls, db: Any, **payload: Any) -> "User":
-        if "password" in payload and "password_hash" not in payload:
-            payload["password_hash"] = hash_pw(str(payload.pop("password")))
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def update_user(cls, db: Any, *, user_id: uuid.UUID, **payload: Any) -> "User | None":
-        if "password" in payload and "password_hash" not in payload:
-            payload["password_hash"] = hash_pw(str(payload.pop("password")))
-        row = await first_record(cls, db, {"id": user_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), payload)
-
-    @classmethod
-    async def disable_user(cls, db: Any, *, user_id: uuid.UUID) -> "User | None":
-        return await cls.update_user(db, user_id=user_id, is_active=False)
-
-    @classmethod
-    async def list_by_tenant(cls, db: Any, *, tenant_id: uuid.UUID) -> list["User"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def lookup_by_identifier(cls, db: Any, *, identifier: str) -> "User | None":
-        for row in await list_records(cls, db, {"username": identifier}):
-            if getattr(row, "is_active", True):
-                return row
-        for row in await list_records(cls, db, {"email": identifier}):
-            if getattr(row, "is_active", True):
-                return row
-        return None
 
     def verify_password(self, plain: str) -> bool:
         from tigrbl_identity_jose.key_management import verify_pw

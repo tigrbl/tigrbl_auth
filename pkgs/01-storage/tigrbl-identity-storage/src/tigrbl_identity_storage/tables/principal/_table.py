@@ -47,24 +47,5 @@ class Principal(RestOltpTable, GUIDPk, Timestamped):
     external_ref: Mapped[str | None] = acol(storage=S(String(1000), nullable=True, index=True))
     principal_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def create_principal(cls, db: Any, **payload: Any) -> "Principal":
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, principal_id: str) -> "Principal | None":
-        return await first_record(cls, db, {"id": principal_id})
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str) -> list["Principal"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, principal_id: str) -> "Principal | None":
-        row = await cls.lookup(db, principal_id=principal_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["Principal"]

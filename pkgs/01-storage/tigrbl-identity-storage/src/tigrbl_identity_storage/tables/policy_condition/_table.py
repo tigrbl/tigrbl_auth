@@ -19,55 +19,5 @@ class PolicyCondition(RestOltpTable, GUIDPk, Timestamped):
     expected: Mapped[dict | list | str | int | float | bool | None] = acol(storage=S(JSON, nullable=True))
     condition_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def add_condition(
-        cls,
-        db: Any,
-        *,
-        policy_id: str,
-        field_name: str,
-        operator: str,
-        expected: Any,
-        condition_metadata: dict | None = None,
-    ) -> "PolicyCondition":
-        return await create_record(
-            cls,
-            db,
-            {
-                "policy_id": policy_id,
-                "field_name": field_name,
-                "operator": operator,
-                "expected": expected,
-                "condition_metadata": condition_metadata,
-            },
-        )
-
-    @classmethod
-    async def list_for_policy(cls, db: Any, *, policy_id: str) -> list["PolicyCondition"]:
-        return await list_records(cls, db, {"policy_id": policy_id})
-
-    @classmethod
-    async def replace_for_policy(
-        cls,
-        db: Any,
-        *,
-        policy_id: str,
-        conditions: Iterable[Mapping[str, Any]],
-    ) -> list["PolicyCondition"]:
-        await clear_records(cls, db, {"policy_id": policy_id})
-        rows: list["PolicyCondition"] = []
-        for condition in conditions:
-            rows.append(
-                await cls.add_condition(
-                    db,
-                    policy_id=policy_id,
-                    field_name=str(condition["field_name"]),
-                    operator=str(condition["operator"]),
-                    expected=condition.get("expected"),
-                    condition_metadata=dict(condition.get("condition_metadata") or {}),
-                )
-            )
-        return rows
-
 
 __all__ = ["PolicyCondition"]

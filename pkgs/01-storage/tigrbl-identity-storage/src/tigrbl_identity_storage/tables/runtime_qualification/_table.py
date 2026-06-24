@@ -19,14 +19,5 @@ class RuntimeQualificationRecord(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(64), nullable=False, default="qualified", index=True))
     qualification_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def record(cls, db: Any, **payload: Any) -> "RuntimeQualificationRecord":
-        payload.setdefault("qualification_payload", dict(payload))
-        payload.setdefault("status", "qualified")
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, qualification_id: str) -> "RuntimeQualificationRecord | None":
-        return await first_record(cls, db, {"qualification_id": qualification_id})
 
 __all__ = ["RuntimeQualificationRecord"]

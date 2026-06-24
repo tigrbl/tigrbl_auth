@@ -41,36 +41,5 @@ class KeyRotationEvent(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
         storage=S(TZDateTime, nullable=False, default=lambda: dt.datetime.now(dt.timezone.utc))
     )
 
-    @classmethod
-    async def record_rotation(
-        cls,
-        db: Any,
-        *,
-        key_kid: str,
-        algorithm: str | None = None,
-        tenant_id: uuid.UUID | None = None,
-        actor_user_id: uuid.UUID | None = None,
-        actor_client_id: uuid.UUID | None = None,
-        action: str = "rotate",
-        status: str = "success",
-        details: dict | None = None,
-    ) -> "KeyRotationEvent":
-        from .._ops import create_record
-
-        return await create_record(
-            cls,
-            db,
-            {
-                "tenant_id": tenant_id,
-                "actor_user_id": actor_user_id,
-                "actor_client_id": actor_client_id,
-                "key_kid": key_kid,
-                "algorithm": algorithm,
-                "action": action,
-                "status": status,
-                "details": details,
-            },
-        )
-
 
 __all__ = ["KeyRotationEvent"]

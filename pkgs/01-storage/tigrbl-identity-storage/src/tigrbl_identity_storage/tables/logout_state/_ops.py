@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import UUID
 
-from .._ops import field, list_handler_records, read_handler_record, record_id, update_handler_record
+from .._ops import create_record, field, list_handler_records, read_handler_record, record_id, update_handler_record
 from .._sync import run_async
 from ..engine import storage_session
 from ..auth_session._table import AuthSession
@@ -48,14 +48,18 @@ async def terminate_session_async(
                 },
             )
         await AuthSession.revoke_for_user(db, session_id=session_id, reason=reason)
-        return await LogoutState.create_logout(
+        return await create_record(
+            LogoutState,
             db,
-            session_id=record_id(row),
-            initiated_by=initiated_by,
-            reason=reason,
-            frontchannel_required=frontchannel_required,
-            backchannel_required=backchannel_required,
-            metadata=metadata,
+            {
+                "session_id": record_id(row),
+                "initiated_by": initiated_by,
+                "reason": reason,
+                "frontchannel_required": frontchannel_required,
+                "backchannel_required": backchannel_required,
+                "logout_metadata": metadata,
+                "status": "pending",
+            },
         )
 
 
@@ -155,3 +159,27 @@ __all__ = [
     "update_logout_metadata",
     "update_logout_metadata_async",
 ]
+
+# BEGIN classmethod-to-op_ctx migration
+from tigrbl import op_ctx as _table_op_ctx
+from . import _table as _table_module
+
+for _table_name in dir(_table_module):
+    if not _table_name.startswith("__"):
+        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+
+@_table_op_ctx(bind=LogoutState, alias="consume_logout", target="custom", rest=False)
+async def consume_logout(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
+    row = await first_record(cls, db, {"id": logout_id})
+    if row is None:
+        return None
+    return await update_record(cls, db, record_id(row), {"status": "complete", "propagated_at": utc_now()})
+
+@_table_op_ctx(bind=LogoutState, alias="expire", target="custom", rest=False)
+async def expire(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":
+    row = await first_record(cls, db, {"id": logout_id})
+    if row is None:
+        return None
+    return await update_record(cls, db, record_id(row), {"status": "expired", "expires_at": utc_now()})
+
+# END classmethod-to-op_ctx migration

@@ -103,52 +103,6 @@ class PushedAuthorizationRequest(RestOltpTable, GUIDPk, Timestamped):
         self.consumed_at = consumed_at
         return consumed_at
 
-    @classmethod
-    async def create_request(
-        cls,
-        db: Any,
-        *,
-        params: dict,
-        client_id: uuid.UUID | None = None,
-        tenant_id: uuid.UUID | None = None,
-        request_uri: str | None = None,
-        expires_in: int | None = None,
-        expires_at: datetime | None = None,
-    ) -> "PushedAuthorizationRequest":
-        ttl = expires_in or _default_expires_in()
-        return await create_record(
-            cls,
-            db,
-            {
-                "request_uri": request_uri or _default_request_uri(),
-                "client_id": client_id,
-                "tenant_id": tenant_id,
-                "params": dict(params),
-                "expires_in": ttl,
-                "expires_at": expires_at or datetime.now(tz=timezone.utc) + timedelta(seconds=ttl),
-            },
-        )
-
-    @classmethod
-    async def resolve_request_uri(
-        cls,
-        db: Any,
-        *,
-        request_uri: str,
-        client_id: uuid.UUID | str | None = None,
-    ) -> "PushedAuthorizationRequest | None":
-        row = await first_record(cls, db, {"request_uri": request_uri})
-        if row is None or row.is_expired() or row.is_consumed() or not row.client_bound(client_id):
-            return None
-        return row
-
-    @classmethod
-    async def consume_request(cls, db: Any, *, request_uri: str) -> "PushedAuthorizationRequest | None":
-        row = await first_record(cls, db, {"request_uri": request_uri})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"consumed_at": datetime.now(tz=timezone.utc)})
-
 
 __all__ = [
     "DEFAULT_PAR_EXPIRY",

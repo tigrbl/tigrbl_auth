@@ -24,33 +24,5 @@ class EntitlementAssignment(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     revoked_reason: Mapped[str | None] = acol(storage=S(String(1000), nullable=True))
 
-    @classmethod
-    async def assign(cls, db: Any, **payload: Any) -> "EntitlementAssignment":
-        payload.setdefault("status", "active")
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, assignment_id: str) -> "EntitlementAssignment | None":
-        return await first_record(cls, db, {"assignment_id": assignment_id})
-
-    @classmethod
-    async def list_for_subject(cls, db: Any, *, subject_id: str, tenant_id: str | None = None) -> list["EntitlementAssignment"]:
-        filters: dict[str, Any] = {"subject_id": subject_id}
-        if tenant_id is not None:
-            filters["tenant_id"] = tenant_id
-        return await list_records(cls, db, filters)
-
-    @classmethod
-    async def revoke(cls, db: Any, *, assignment_id: str, reason: str) -> "EntitlementAssignment | None":
-        row = await cls.lookup(db, assignment_id=assignment_id)
-        if row is None:
-            return None
-        return await update_record(
-            cls,
-            db,
-            record_id(row),
-            {"status": "revoked", "revoked_reason": reason},
-        )
-
 
 __all__ = ["EntitlementAssignment"]

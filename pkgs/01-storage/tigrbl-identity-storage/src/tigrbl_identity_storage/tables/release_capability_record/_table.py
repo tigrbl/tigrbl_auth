@@ -19,17 +19,5 @@ class ReleaseCapabilityRecord(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(64), nullable=False, default="recorded", index=True))
     capability_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def record(cls, db: Any, **payload: Any) -> "ReleaseCapabilityRecord":
-        existing = await cls.lookup(db, capability_id=payload["capability_id"])
-        payload.setdefault("capability_payload", dict(payload))
-        payload.setdefault("status", "recorded")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, capability_id: str) -> "ReleaseCapabilityRecord | None":
-        return await first_record(cls, db, {"capability_id": capability_id})
 
 __all__ = ["ReleaseCapabilityRecord"]

@@ -49,19 +49,5 @@ class CredentialApiKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow,
         )
     )
 
-    @classmethod
-    async def lookup_active(cls, db: Any, *, digest: str) -> "CredentialApiKey | None":
-        row = await first_record(cls, db, {"digest": digest})
-        if row is None:
-            return None
-        now = datetime.now(timezone.utc)
-        valid_from = getattr(row, "valid_from", None)
-        valid_to = getattr(row, "valid_to", None)
-        if isinstance(valid_from, datetime) and (valid_from if valid_from.tzinfo else valid_from.replace(tzinfo=timezone.utc)) > now:
-            return None
-        if isinstance(valid_to, datetime) and (valid_to if valid_to.tzinfo else valid_to.replace(tzinfo=timezone.utc)) <= now:
-            return None
-        return row
-
 
 __all__ = ["CredentialApiKey"]

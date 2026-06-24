@@ -21,25 +21,5 @@ class PluginDescriptorRecord(RestOltpTable, GUIDPk, Timestamped):
     descriptor_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="enabled", index=True))
 
-    @classmethod
-    async def register(cls, db: Any, **payload: Any) -> "PluginDescriptorRecord":
-        existing = await cls.lookup(db, plugin_id=payload["plugin_id"])
-        payload.setdefault("descriptor_payload", dict(payload))
-        payload.setdefault("status", "enabled" if payload.get("enabled", True) else "disabled")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, plugin_id: str) -> "PluginDescriptorRecord | None":
-        return await first_record(cls, db, {"plugin_id": plugin_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, plugin_id: str) -> "PluginDescriptorRecord | None":
-        row = await cls.lookup(db, plugin_id=plugin_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["PluginDescriptorRecord"]

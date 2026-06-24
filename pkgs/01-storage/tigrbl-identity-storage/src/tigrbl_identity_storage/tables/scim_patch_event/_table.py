@@ -20,13 +20,5 @@ class ScimPatchEvent(RestOltpTable, GUIDPk, Timestamped):
     path: Mapped[str | None] = acol(storage=S(String(512), nullable=True))
     value_payload: Mapped[dict | list | str | int | float | bool | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def append_event(cls, db: Any, **payload: Any) -> "ScimPatchEvent":
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str) -> list["ScimPatchEvent"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id})
-
 
 __all__ = ["ScimPatchEvent"]

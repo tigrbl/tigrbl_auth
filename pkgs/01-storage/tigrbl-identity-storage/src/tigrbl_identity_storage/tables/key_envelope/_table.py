@@ -52,11 +52,5 @@ class KeyEnvelope(RestOltpTable, GUIDPk, Timestamped):
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.realms.id"), nullable=True, index=True)
     )
 
-    @classmethod
-    async def lookup_by_label(cls, db: Any, *, envelope_label: str, tenant_id: uuid.UUID | None = None) -> "KeyEnvelope | None":
-        filters: dict[str, Any] = {"envelope_label": envelope_label}
-        if tenant_id is not None:
-            filters["tenant_id"] = tenant_id
-        return await first_record(cls, db, filters)
 
 __all__ = ["KeyEnvelope"]

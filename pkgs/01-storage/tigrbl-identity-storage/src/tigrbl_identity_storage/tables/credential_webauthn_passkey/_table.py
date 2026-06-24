@@ -24,16 +24,5 @@ class CredentialWebAuthnPasskey(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     passkey_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialWebAuthnPasskey"]:
-        return await list_records(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def revoke(cls, db: Any, *, credential_id: str) -> "CredentialWebAuthnPasskey | None":
-        row = await first_record(cls, db, {"credential_id": credential_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "revoked"})
-
 
 __all__ = ["CredentialWebAuthnPasskey"]

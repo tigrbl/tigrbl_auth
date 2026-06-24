@@ -6,6 +6,7 @@ from typing import Any
 
 from tigrbl_identity_jose.key_management import verify_pw
 from tigrbl_identity_contracts.principals import PrincipalLike
+from tigrbl_identity_storage.tables._ops import first_record
 from tigrbl_identity_storage.tables import Client, CredentialApiKey, CredentialServiceKey, User
 
 
@@ -33,10 +34,10 @@ class PasswordBackend:
 
 class ApiKeyBackend:
     async def _get_key_row(self, db: Any, digest: str) -> CredentialApiKey | None:
-        return await CredentialApiKey.lookup_active(db, digest=digest)
+        return await first_record(CredentialApiKey, db, {"digest": digest, "status": "active"})
 
     async def _get_service_key_row(self, db: Any, digest: str) -> CredentialServiceKey | None:
-        return await CredentialServiceKey.lookup_active(db, digest=digest)
+        return await first_record(CredentialServiceKey, db, {"digest": digest, "status": "active"})
 
     async def _resolve_user_principal(self, db: Any, key_row: Any) -> User | None:
         user = getattr(key_row, "user", None) or getattr(key_row, "_user", None)

@@ -6,6 +6,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from tigrbl_identity_storage.tables import CryptoKey
+from tigrbl_identity_storage.tables._ops import create_record, first_record
 from tigrbl_security_trust_contracts import (
     AttestKeyRequest,
     DecapsulateRequest,
@@ -31,7 +32,10 @@ from ._crypto_keys import (
 
 
 async def _key_for_operation(db: Any, *, kid: str, operation: str, tenant_id: Any = None) -> Any:
-    row = await CryptoKey.lookup_by_kid(db, kid=kid, tenant_id=tenant_id)
+    filters = {"kid": kid}
+    if tenant_id is not None:
+        filters["tenant_id"] = tenant_id
+    row = await first_record(CryptoKey, db, filters)
     if row is None:
         raise LookupError("crypto key not found")
     ensure_allowed_op(row, operation)
@@ -58,16 +62,19 @@ async def create_key(
 ) -> Any:
     handle = await provider.create_key(spec)
     data = dict(storage or {})
-    return await CryptoKey.create_key(
+    return await create_record(
+        CryptoKey,
         db,
-        kid=kid,
-        algorithm=algorithm,
-        provider=data.pop("provider", getattr(handle, "provider", None)),
-        provider_key_ref=data.pop("provider_key_ref", getattr(handle, "ref", None)),
-        public_material=data.pop("public_material", getattr(handle, "public_material", None)),
-        public_material_format=data.pop("public_material_format", getattr(handle, "public_material_format", None)),
-        fingerprint=data.pop("fingerprint", getattr(handle, "fingerprint", None)),
-        **data,
+        {
+            "kid": kid,
+            "algorithm": algorithm,
+            "provider": data.pop("provider", getattr(handle, "provider", None)),
+            "provider_key_ref": data.pop("provider_key_ref", getattr(handle, "ref", None)),
+            "public_material": data.pop("public_material", getattr(handle, "public_material", None)),
+            "public_material_format": data.pop("public_material_format", getattr(handle, "public_material_format", None)),
+            "fingerprint": data.pop("fingerprint", getattr(handle, "fingerprint", None)),
+            **data,
+        },
     )
 
 

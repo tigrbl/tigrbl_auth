@@ -21,28 +21,5 @@ class CredentialRecoveryCode(RestOltpTable, GUIDPk, Timestamped):
     consumed_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     recovery_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def lookup_active(cls, db: Any, *, code_digest: str) -> "CredentialRecoveryCode | None":
-        return await first_record(cls, db, {"code_digest": code_digest, "status": "active"})
-
-    @classmethod
-    async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialRecoveryCode"]:
-        return await list_records(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def consume(cls, db: Any, *, code_digest: str) -> "CredentialRecoveryCode | None":
-        row = await cls.lookup_active(db, code_digest=code_digest)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "consumed", "consumed_at": utc_now()})
-
-    @classmethod
-    async def revoke(cls, db: Any, *, credential_id: str) -> list["CredentialRecoveryCode"]:
-        rows = await list_records(cls, db, {"credential_id": credential_id})
-        revoked = []
-        for row in rows:
-            revoked.append(await update_record(cls, db, record_id(row), {"status": "revoked"}))
-        return revoked
-
 
 __all__ = ["CredentialRecoveryCode"]

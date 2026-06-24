@@ -36,39 +36,5 @@ class KeyRotationPolicy(RestOltpTable, GUIDPk, Timestamped):
     published_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True))
     supersedes: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
 
-    @classmethod
-    async def create_policy_version(cls, db: Any, **payload: Any) -> "KeyRotationPolicy":
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup_version(cls, db: Any, *, version_id: str) -> "KeyRotationPolicy | None":
-        return await first_record(cls, db, {"version_id": version_id})
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str, status: str | None = None) -> list["KeyRotationPolicy"]:
-        filters: dict[str, Any] = {"tenant_id": tenant_id}
-        if status is not None:
-            filters["status"] = status
-        return await list_records(cls, db, filters)
-
-    @classmethod
-    async def approve(cls, db: Any, *, version_id: str, approved_by: str) -> "KeyRotationPolicy | None":
-        row = await cls.lookup_version(db, version_id=version_id)
-        if row is None:
-            return None
-        return await update_record(
-            cls,
-            db,
-            record_id(row),
-            {"status": "approved", "approved_by": approved_by, "approved_at": utc_now()},
-        )
-
-    @classmethod
-    async def publish(cls, db: Any, *, version_id: str) -> "KeyRotationPolicy | None":
-        row = await cls.lookup_version(db, version_id=version_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "published", "published_at": utc_now()})
-
 
 __all__ = ["KeyRotationPolicy"]

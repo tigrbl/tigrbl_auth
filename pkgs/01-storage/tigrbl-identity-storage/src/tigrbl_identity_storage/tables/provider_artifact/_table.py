@@ -20,25 +20,5 @@ class ProviderArtifact(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(64), nullable=False, default="active", index=True))
     artifact_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def register(cls, db: Any, **payload: Any) -> "ProviderArtifact":
-        existing = await cls.lookup(db, artifact_id=payload["artifact_id"])
-        payload.setdefault("artifact_payload", dict(payload))
-        payload.setdefault("status", "active")
-        if existing is not None:
-            return await update_record(cls, db, record_id(existing), payload)
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, artifact_id: str) -> "ProviderArtifact | None":
-        return await first_record(cls, db, {"artifact_id": artifact_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, artifact_id: str) -> "ProviderArtifact | None":
-        row = await cls.lookup(db, artifact_id=artifact_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["ProviderArtifact"]

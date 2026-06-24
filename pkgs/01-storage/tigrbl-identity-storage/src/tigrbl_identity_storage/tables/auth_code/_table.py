@@ -47,20 +47,6 @@ class AuthCode(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     expires_at: Mapped[dt.datetime] = acol(storage=S(TZDateTime, nullable=False))
     claims: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def consume(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
-        row = await read_record(cls, db, code_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
-
-    @classmethod
-    async def expire(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":
-        row = await read_record(cls, db, code_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row) or code_id, {"expires_at": utc_now()})
-
 
 api = router = TigrblRouter()
 

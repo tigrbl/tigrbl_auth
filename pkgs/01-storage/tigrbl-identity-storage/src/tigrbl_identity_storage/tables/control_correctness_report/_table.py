@@ -18,13 +18,5 @@ class ControlCorrectnessReport(RestOltpTable, GUIDPk, Timestamped):
     passed: Mapped[bool] = acol(storage=S(Boolean, nullable=False, default=False, index=True))
     report_payload: Mapped[dict] = acol(storage=S(JSON, nullable=False, default=dict))
 
-    @classmethod
-    async def snapshot(cls, db: Any, **payload: Any) -> "ControlCorrectnessReport":
-        payload.setdefault("report_payload", dict(payload))
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup(cls, db: Any, *, report_id: str) -> "ControlCorrectnessReport | None":
-        return await first_record(cls, db, {"report_id": report_id})
 
 __all__ = ["ControlCorrectnessReport"]

@@ -118,16 +118,6 @@ class Tenant(TenantBase, Bootstrappable):
         }
     ]
 
-    @classmethod
-    async def update_tenant(cls, db: Any, *, tenant_id: uuid.UUID, **payload: Any) -> "Tenant | None":
-        row = await first_record(cls, db, {"id": tenant_id})
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), payload)
-
-    @classmethod
-    async def disable_tenant(cls, db: Any, *, tenant_id: uuid.UUID) -> "Tenant | None":
-        return await cls.update_tenant(db, tenant_id=tenant_id, is_active=False)
 
 admin_api = admin_router = TigrblRouter()
 

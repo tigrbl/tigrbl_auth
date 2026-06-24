@@ -3,6 +3,7 @@ from __future__ import annotations
 from . import _table as _table
 from . import _hooks as _hooks
 from ._table import *
+from . import _ops as _ops
 from ._hooks import *
 
 for _name in dir(_table):

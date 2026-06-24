@@ -45,20 +45,5 @@ class ServiceIdentity(RestOltpTable, GUIDPk, Timestamped, TenantBound, Principal
         cascade="all, delete-orphan",
     )
 
-    @classmethod
-    async def lookup(cls, db: Any, *, service_identity_id: Any) -> "ServiceIdentity | None":
-        return await first_record(cls, db, {"id": service_identity_id})
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: Any) -> list["ServiceIdentity"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, service_identity_id: Any) -> "ServiceIdentity | None":
-        row = await cls.lookup(db, service_identity_id=service_identity_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"is_active": False})
-
 
 __all__ = ["ServiceIdentity"]

@@ -50,20 +50,5 @@ class WorkloadIdentity(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     workload_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
-    @classmethod
-    async def lookup(cls, db: Any, *, principal_id: str) -> "WorkloadIdentity | None":
-        return await first_record(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def list_for_tenant(cls, db: Any, *, tenant_id: str) -> list["WorkloadIdentity"]:
-        return await list_records(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, principal_id: str) -> "WorkloadIdentity | None":
-        row = await cls.lookup(db, principal_id=principal_id)
-        if row is None:
-            return None
-        return await update_record(cls, db, record_id(row), {"status": "disabled"})
-
 
 __all__ = ["WorkloadIdentity"]
