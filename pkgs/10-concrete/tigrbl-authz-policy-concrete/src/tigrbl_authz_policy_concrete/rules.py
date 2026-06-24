@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
-from tigrbl_identity_contracts.policy.effects import DecisionEffect
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
 from tigrbl_identity_contracts.policy.rules import PolicyRule
 

@@ -256,7 +256,7 @@ async def _registration_response(
     client_secret: str | None = None,
 ) -> dict:
     metadata = dict(registration.registration_metadata or {})
-    tenant = await read_record(Tenant, db, client.tenant_id)
+    await read_record(Tenant, db, client.tenant_id)
     redirect_uris = list(metadata.get('redirect_uris') or (client.redirect_uris or '').split())
     grant_types = list(metadata.get('grant_types') or (client.grant_types or 'authorization_code').split())
     response_types = list(metadata.get('response_types') or (client.response_types or 'code').split())

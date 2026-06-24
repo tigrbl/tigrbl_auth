@@ -1,11 +1,11 @@
-from __future__ import annotations
-
 """Canonical CLI metadata for parser generation, docs, and contract artifacts.
 
 This module is the single source of truth for the identity CLI surface.
 Argparse help output, markdown reference docs, machine-readable contract
 artifacts, and conformance snapshots are all derived from these structures.
 """
+
+from __future__ import annotations
 
 import argparse
 import re

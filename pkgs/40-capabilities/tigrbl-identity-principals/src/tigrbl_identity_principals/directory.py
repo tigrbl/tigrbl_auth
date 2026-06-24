@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """In-memory principal directory contracts used by tests and adapters."""
+
+from __future__ import annotations
 
 from .factories import Principal, PrincipalStatus, SubjectAlias, TenantMembership
 

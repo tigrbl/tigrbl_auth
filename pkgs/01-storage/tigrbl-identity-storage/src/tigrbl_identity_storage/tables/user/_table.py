@@ -4,29 +4,19 @@ from __future__ import annotations
 
 import uuid
 import datetime as dt
-from typing import Any
-from datetime import timezone
 
 from tigrbl_identity_storage.framework import (
     UserBase,
     Bootstrappable,
     BaseModel,
-    Depends,
     Field,
-    HTTPException,
-    JSONResponse,
     LargeBinary,
     Mapped,
     Boolean,
-    RedirectResponse,
-    Request,
-    Response,
     String,
     TZDateTime,
     TigrblRouter,
     relationship,
-    status,
-    Header,
     F,
     IO,
     S,
@@ -36,8 +26,6 @@ from tigrbl_identity_storage.framework import (
 )
 
 from tigrbl_identity_jose.key_management import hash_pw
-from .._ops import create_record, delete_record, first_record, list_records, read_record, record_id, update_record
-from ..engine import get_db
 
 DEFAULT_BOOTSTRAP_SUPERUSER_ID = uuid.UUID("FFFFFFFF-0000-0000-0000-000000000001")
 DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD = "AdminPass123!"
@@ -247,9 +235,6 @@ ADMIN_AUTH_TAGS = ["Admin Auth"]
 
 
 from ._account_route import (  # noqa: E402
-    _current_principal_dependency,
-    _iso,
-    _not_found_uuid,
     change_account_password,
     get_account_profile,
     update_account_profile,

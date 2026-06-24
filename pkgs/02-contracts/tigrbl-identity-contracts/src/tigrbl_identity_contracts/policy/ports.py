@@ -14,7 +14,6 @@ from ..invariants import (
 )
 from ..authentication import ServiceIdentityAuthentication
 from .decisions import PolicyDecision, PolicyTrace
-from .kinds import PolicyKind
 from .requests import PolicyRequest
 
 

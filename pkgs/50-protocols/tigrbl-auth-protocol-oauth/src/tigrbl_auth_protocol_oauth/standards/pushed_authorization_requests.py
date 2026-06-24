@@ -1,9 +1,9 @@
-from __future__ import annotations
-
 """OAuth 2.0 Pushed Authorization Requests owner and helper module."""
 
+from __future__ import annotations
+
 from datetime import datetime, timezone
-from typing import Any, Final, Mapping
+from typing import Any, Final
 from tigrbl_identity_contracts.oauth import PARValidationResult
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 

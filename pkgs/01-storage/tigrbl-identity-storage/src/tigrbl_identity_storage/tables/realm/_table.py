@@ -26,7 +26,7 @@ from tigrbl_identity_storage.framework import (
     constr,
     status,
 )
-from .._ops import create_record, delete_record, first_record, list_records, read_record, record_id, update_record
+from .._ops import create_record, delete_record, first_record, list_records, read_record, update_record
 from ..engine import get_db
 from ..tenant import AdminTenantOut, AdminTenantProvisionIn, Tenant, _tenant_payload
 

@@ -9,8 +9,6 @@ from .base import CertificationError
 from tigrbl_identity_concrete import MachineIdentity
 from tigrbl_release_contracts import (
     AlgorithmPolicy,
-    ECDSA_SIGNATURE_ALGS,
-    EDDSA_SIGNATURE_ALGS,
     KeyBoundary,
     ML_DSA_65_ALG,
     PQC_JWK_KTY,

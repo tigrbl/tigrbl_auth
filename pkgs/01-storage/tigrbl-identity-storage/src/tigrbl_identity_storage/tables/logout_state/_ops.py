@@ -143,10 +143,14 @@ async def update_logout_metadata_async(
         return await update_handler_record(LogoutState, db, logout_id, payload)
 
 
-terminate_session = lambda session_id, **kwargs: run_async(terminate_session_async(session_id, **kwargs))
-get_latest_logout_for_session = lambda session_id: run_async(get_latest_logout_for_session_async(session_id))
-update_logout_metadata = lambda logout_id, **kwargs: run_async(update_logout_metadata_async(logout_id, **kwargs))
-mark_logout_channel = lambda logout_id, **kwargs: run_async(mark_logout_channel_async(logout_id, **kwargs))
+def terminate_session(session_id, **kwargs):
+    return run_async(terminate_session_async(session_id, **kwargs))
+def get_latest_logout_for_session(session_id):
+    return run_async(get_latest_logout_for_session_async(session_id))
+def update_logout_metadata(logout_id, **kwargs):
+    return run_async(update_logout_metadata_async(logout_id, **kwargs))
+def mark_logout_channel(logout_id, **kwargs):
+    return run_async(mark_logout_channel_async(logout_id, **kwargs))
 
 
 __all__ = [
@@ -162,11 +166,9 @@ __all__ = [
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from .._ops import first_record, update_record, utc_now
 
 @_table_op_ctx(bind=LogoutState, alias="consume_logout", target="custom", rest=False)
 async def consume_logout(cls, db: Any, *, logout_id: uuid.UUID) -> "LogoutState | None":

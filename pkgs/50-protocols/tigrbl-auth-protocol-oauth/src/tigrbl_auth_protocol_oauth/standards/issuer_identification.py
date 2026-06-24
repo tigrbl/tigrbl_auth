@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Authorization server issuer identification owner and helper module."""
+
+from __future__ import annotations
 
 from typing import Final, Mapping, Sequence
 

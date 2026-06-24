@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """OAuth 2.0 JWT-Secured Authorization Request owner and runtime helpers.
 
 The active repository profile keeps a deliberately bounded JAR implementation:
@@ -14,6 +12,8 @@ The active repository profile keeps a deliberately bounded JAR implementation:
 The helpers stay dependency-light so targeted standards tests and evidence can run
 without importing the full Tigrbl runtime stack.
 """
+
+from __future__ import annotations
 
 import base64
 import hashlib

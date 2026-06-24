@@ -1,10 +1,10 @@
-from __future__ import annotations
-
 """RFC 7521 assertion-framework helpers.
 
 This module owns the runtime validation and contract helpers for JWT bearer
 assertion grants and client assertions at the token endpoint.
 """
+
+from __future__ import annotations
 
 import time
 from typing import Any, Final, Iterable

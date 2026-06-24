@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     ColumnSpec,
@@ -18,7 +17,6 @@ from tigrbl_identity_storage.framework import (
     acol,
 )
 
-from .._ops import first_record, list_records, record_id, update_record
 
 
 class WorkloadIdentity(RestOltpTable, GUIDPk, Timestamped):

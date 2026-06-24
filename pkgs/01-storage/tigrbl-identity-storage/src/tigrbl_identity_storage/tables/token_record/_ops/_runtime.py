@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import base64
-import inspect
 from datetime import datetime, timezone
 from typing import Any
 from urllib.parse import parse_qs
@@ -9,10 +7,7 @@ from uuid import UUID
 
 from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
-from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
-from tigrbl_identity_core.errors import InvalidTokenError
 from tigrbl_identity_jose.jwt_coder import JWTCoder
-from ._persistence import redeem_refresh_token
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
@@ -23,7 +18,6 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
         return str(value)[:8]
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_GRANT_TYPE,
-    validate_assertion_grant_request,
 )
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
@@ -32,31 +26,11 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     next_device_poll_interval,
     poll_too_frequently,
 )
-from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
-    PRIVATE_KEY_JWT_AUTH_METHOD,
-    authenticate_client_assertion,
-)
-from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
-    SUPPORTED_MTLS_AUTH_METHODS,
-    authenticate_mtls_client,
-    presented_certificate_pem,
-    presented_certificate_thumbprint,
-)
-from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_token_request
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
-from tigrbl_auth_protocol_oauth.standards.authorization_framework import RFC6749Error, enforce_authorization_code_grant, enforce_grant_type, enforce_password_grant
-from tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange import verify_code_challenge
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
-from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
-    OAuthPolicyViolation,
-    assert_token_request_allowed,
-    dpop_proof_from_request,
-    runtime_security_profile,
-    validate_sender_constraint,
-)
 
 try:  # pragma: no cover - exercised with full runtime deps installed
-    from tigrbl_identity_storage.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, ValidationError, status
+    from tigrbl_identity_storage.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, status
 
     class JSONResponse(_FrameworkJSONResponse):
         def __init__(self, content: Any, *, status_code: int = 200, headers: dict[str, str] | None = None):
@@ -65,7 +39,6 @@ try:  # pragma: no cover - exercised with full runtime deps installed
                 self.headers[key] = value
             self.content = content
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
-    from pydantic import ValidationError  # type: ignore
 
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -133,7 +106,6 @@ except Exception:  # pragma: no cover - dependency-light fallback
 
 from tigrbl_identity_server.security.handler_records import (
     append_audit_event_record,
-    delete_handler_record,
     first_handler_record,
     issue_token_pair_records,
     read_handler_record,

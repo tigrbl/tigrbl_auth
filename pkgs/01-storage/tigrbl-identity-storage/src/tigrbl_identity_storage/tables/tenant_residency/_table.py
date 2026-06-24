@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, record_id, update_record
 
 
 class TenantResidency(RestOltpTable, GUIDPk, Timestamped):

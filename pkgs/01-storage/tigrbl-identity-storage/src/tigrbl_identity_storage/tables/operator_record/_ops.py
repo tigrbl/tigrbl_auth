@@ -4,11 +4,13 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import copy
+import json
+from .._ops import create_record, delete_record, field, first_record, list_records, record_id, update_record
+from ._table import OperatorRecord, _default_status, _without_revision
+from collections.abc import Mapping
+from typing import Any
 
 def _row_to_record(cls, row: Any) -> dict[str, Any]:
     data = json.loads(field(row, "data_json") or "{}")

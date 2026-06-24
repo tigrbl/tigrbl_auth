@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """OAuth 2.0 Dynamic Client Registration Protocol owner module."""
+
+from __future__ import annotations
 
 from typing import Final
 

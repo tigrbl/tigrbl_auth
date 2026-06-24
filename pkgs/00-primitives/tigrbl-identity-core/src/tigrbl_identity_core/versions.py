@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Version comparison primitives shared by identity packages."""
+
+from __future__ import annotations
 
 
 def semver_key(version: str) -> tuple[int, int, int]:

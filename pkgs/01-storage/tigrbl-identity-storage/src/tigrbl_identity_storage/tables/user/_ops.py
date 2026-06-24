@@ -4,11 +4,12 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from .._ops import first_record, list_records, record_id, update_record
+from ._table import User
+from tigrbl_identity_jose.key_management import hash_pw
+from typing import Any
 
 @_table_op_ctx(bind=User, alias="new", target="custom", rest=False)
 def new(cls, *, tenant_id: uuid.UUID, username: str, email: str, password: str):

@@ -6,6 +6,8 @@ import time
 from typing import Any
 
 from tigrbl_identity_core.standards import describe_owner
+from tigrbl_identity_runtime.settings import settings
+from tigrbl_security_trust_contracts import DPoPProofClaims
 
 from .primitives import (
     DEFAULT_NONCE_STORE,
@@ -14,9 +16,7 @@ from .primitives import (
     RFC9449_SPEC_URL,
     DPoPNonceRecord,
     DPoPNonceStore,
-    DPoPProofClaims,
     DPoPReplayStore,
-    Ed25519PrivateKey,
     Ed25519PublicKey,
     StandardOwner,
     _ALG_VALUE,
@@ -26,14 +26,12 @@ from .primitives import (
     _b64url,
     _b64url_decode,
     _compact_signing_input,
-    _json_segment,
     _load_private_key,
     _run_async,
     access_token_hash,
     ath_for_access_token,
     jwk_from_public_key,
     jwk_thumbprint,
-    settings,
 )
 
 def _segments(proof: str) -> tuple[dict[str, Any], dict[str, Any]]:

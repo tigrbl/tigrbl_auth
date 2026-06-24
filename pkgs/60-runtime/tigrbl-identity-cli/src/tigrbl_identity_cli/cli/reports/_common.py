@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Contracts, evidence, release, signing, and reporting automation."""
+
+from __future__ import annotations
 
 import ast
 import hashlib

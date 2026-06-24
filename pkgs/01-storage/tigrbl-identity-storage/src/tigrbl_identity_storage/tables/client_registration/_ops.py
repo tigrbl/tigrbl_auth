@@ -47,8 +47,10 @@ async def upsert_client_registration_async(
         return await update_handler_record(ClientRegistration, db, record_id(row), payload)
 
 
-get_client_registration = lambda client_id: run_async(get_client_registration_async(client_id))
-upsert_client_registration = lambda **kwargs: run_async(upsert_client_registration_async(**kwargs))
+def get_client_registration(client_id):
+    return run_async(get_client_registration_async(client_id))
+def upsert_client_registration(**kwargs):
+    return run_async(upsert_client_registration_async(**kwargs))
 
 
 __all__ = [
@@ -60,11 +62,8 @@ __all__ = [
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import delete_record, first_record, update_record
 
 async def _read_registration(cls, db: Any, *, client_id: UUID) -> "ClientRegistration | None":
     return await first_record(cls, db, {"client_id": client_id})

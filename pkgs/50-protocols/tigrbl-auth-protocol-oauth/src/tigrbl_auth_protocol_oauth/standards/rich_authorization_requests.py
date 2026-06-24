@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Rich Authorization Requests owner and helper module."""
+
+from __future__ import annotations
 
 import json
 from typing import Any, Final

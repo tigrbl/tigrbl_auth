@@ -5,7 +5,7 @@ import hmac
 import secrets
 from dataclasses import replace
 from datetime import datetime, timedelta, timezone
-from typing import Callable, Iterable, Mapping
+from typing import Callable, Iterable
 
 from tigrbl_identity_contracts.oauth import (
     DPoPProof,

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """HTTP State Management Mechanism.
 
 Domain-owned cookie policy and opaque browser-session cookie helpers for the
@@ -11,6 +9,8 @@ This module intentionally keeps the cookie surface small:
 - server-side validation against durable session state
 - explicit cross-site handling when front/back-channel logout is enabled
 """
+
+from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone

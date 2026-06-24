@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import datetime as dt
 import uuid
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
@@ -21,7 +20,6 @@ from tigrbl_identity_storage.framework import (
     TZDateTime,
     GUIDPk,
 )
-from .._ops import field, first_record, read_record, record_id, update_record, utc_now
 
 
 class DeviceAuthorizationIn(BaseModel):

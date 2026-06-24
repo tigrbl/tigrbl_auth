@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import base64
 import hashlib
-from typing import Any, Final, Iterable, Mapping
+from typing import Any, Final, Mapping
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from tigrbl_security_trust_contracts import MTLSClientAuthentication
 

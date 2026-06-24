@@ -103,11 +103,10 @@ __all__ = sorted(
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from .. import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from ..._ops import create_record, field, first_record, list_records, record_id, update_record, utc_now
+from .._table import TokenRecord, _to_datetime, _to_uuid
 
 @_table_op_ctx(bind=TokenRecord, alias="persist_issued_token", target="custom", rest=False)
 async def persist_issued_token(

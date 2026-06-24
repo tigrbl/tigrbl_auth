@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     RestOltpTable,
@@ -20,7 +19,6 @@ from tigrbl_identity_storage.framework import (
     acol,
     ColumnSpec,
 )
-from .._ops import first_record, list_records, record_id, update_record
 
 
 class ServiceIdentity(RestOltpTable, GUIDPk, Timestamped, TenantBound, PrincipalMixin, ActiveToggle):

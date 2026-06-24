@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from tigrbl_identity_contracts.resource_server import ResourceRequirement, VerifierContractProfile
+from tigrbl_identity_contracts.resource_server import VerifierContractProfile
 
 
 

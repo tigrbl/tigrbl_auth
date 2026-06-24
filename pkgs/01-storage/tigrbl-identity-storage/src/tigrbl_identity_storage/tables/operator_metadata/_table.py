@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import json
 from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, Mapped, S, String, TZDateTime, acol
 
-from .._ops import create_record, field, first_record, list_records, record_id, update_record, utc_now
+from .._ops import utc_now
 
 
 class OperatorMetadata(RestOltpTable):

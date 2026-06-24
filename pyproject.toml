@@ -175,6 +175,22 @@ asyncio_default_fixture_loop_scope = "function"
 asyncio_mode = "auto"
 addopts = "--import-mode=importlib --basetemp=.pytest-tmp"
 
+[tool.ruff.lint.per-file-ignores]
+"pkgs/**/src/**/__init__.py" = ["F401", "F403", "F405"]
+"pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/**/_ops.py" = ["E402"]
+"pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/tables/token_record/_ops/__init__.py" = ["E402"]
+"pkgs/60-runtime/tigrbl-identity-cli/src/tigrbl_identity_cli/cli/*/_*.py" = [
+    "E402",
+    "F401",
+    "F405",
+    "F601",
+    "F821",
+    "F822",
+    "F841",
+]
+"scripts/*.py" = ["E402"]
+"tests/**/*.py" = ["E402", "F403"]
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",

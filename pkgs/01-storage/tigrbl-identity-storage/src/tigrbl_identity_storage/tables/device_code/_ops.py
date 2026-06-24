@@ -4,11 +4,11 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from .._ops import field, first_record, read_record, record_id, update_record, utc_now
+from ._table import DeviceCode
+from typing import Any
 
 @_table_op_ctx(bind=DeviceCode, alias="approve", target="custom", rest=False)
 async def approve(

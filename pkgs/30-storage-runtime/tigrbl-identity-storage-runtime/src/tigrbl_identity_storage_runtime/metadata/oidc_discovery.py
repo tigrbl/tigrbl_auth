@@ -27,7 +27,6 @@ from tigrbl_auth_protocol_oidc.tenant_discovery import (
 )
 from tigrbl_auth_protocol_oidc.jwks_service import build_jwks_document
 from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
-from tigrbl_identity_runtime.http_standards.well_known import WELL_KNOWN_ENDPOINTS
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER, JWKS_PATH
 from tigrbl_identity_storage.tables import Realm, Tenant
 from tigrbl_identity_storage.tables._ops import first_record

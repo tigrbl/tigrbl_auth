@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Durable SQLite-backed operator-plane persistence helpers."""
+
+from __future__ import annotations
 
 import copy
 import hashlib

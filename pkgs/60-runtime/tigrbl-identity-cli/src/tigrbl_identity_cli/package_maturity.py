@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Package maturity evaluation for the split identity package suite."""
+
+from __future__ import annotations
 
 import json
 from dataclasses import dataclass

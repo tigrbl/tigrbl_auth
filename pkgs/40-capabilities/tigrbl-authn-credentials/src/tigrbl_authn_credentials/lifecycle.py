@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Credential lifecycle behavior for authn credentials."""
+
+from __future__ import annotations
 
 import hashlib
 import hmac

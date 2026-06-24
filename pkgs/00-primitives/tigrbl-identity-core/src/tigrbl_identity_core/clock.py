@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Clock primitives shared by identity packages."""
+
+from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone

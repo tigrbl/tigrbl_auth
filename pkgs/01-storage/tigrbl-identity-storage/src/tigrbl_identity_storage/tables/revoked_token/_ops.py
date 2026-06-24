@@ -177,14 +177,11 @@ __all__ = [
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import create_record, first_record, update_record
 
 @_table_op_ctx(bind=RevokedToken, alias="revoke_token", target="custom", rest=False)
-async def revoke_token(
+async def revoke_token_record(
     cls,
     db: Any,
     *,
@@ -218,11 +215,11 @@ async def revoke_family(
 ) -> list["RevokedToken"]:
     revoked = []
     token_type_hint = metadata.pop("token_type_hint", None)
-    for token_hash in token_hashes:
+    for revoked_hash in token_hashes:
         revoked.append(
             await cls.revoke_token(
                 db,
-                token_hash=token_hash,
+                token_hash=revoked_hash,
                 token_type_hint=token_type_hint,
                 reason=reason,
                 refresh_family_id=refresh_family_id,

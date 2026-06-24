@@ -5,7 +5,8 @@ from ._table import *
 from . import _ops as _ops
 
 append_audit_event_async = AuditEvent.append_event
-append_audit_event = lambda **kwargs: _table.run_async(AuditEvent.append_event(**kwargs))
+def append_audit_event(**kwargs):
+    return _table.run_async(AuditEvent.append_event(**kwargs))
 
 try:
     __all__ = list(_table.__all__)

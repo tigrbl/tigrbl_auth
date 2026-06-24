@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 import re
-import uuid
 from typing import Final
 from typing import Any
-from urllib.parse import urlparse
 
 from tigrbl_identity_storage.framework import (
     ClientBase,
@@ -19,13 +17,7 @@ from tigrbl_identity_storage.framework import (
     S,
     acol,
 )
-from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_jose.key_management import hash_pw, verify_pw
-from tigrbl_auth_protocol_oauth.standards.native_apps import (
-    RFC8252_SPEC_URL,
-    is_native_redirect_uri,
-    validate_native_redirect_uri,
-)
 
 _CLIENT_ID_RE: Final[re.Pattern[str]] = re.compile(r"^[A-Za-z0-9\-_]{8,64}$")
 

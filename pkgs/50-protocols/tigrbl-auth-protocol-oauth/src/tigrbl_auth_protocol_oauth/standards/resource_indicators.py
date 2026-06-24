@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """Resource Indicators for OAuth 2.0 owner and helper module.
 
 The repository retains a bounded but certification-grade resource-indicator
@@ -14,7 +12,9 @@ profile:
   same effective target or the request fails closed with ``invalid_target``
 """
 
-from typing import Final, Iterable, Sequence
+from __future__ import annotations
+
+from typing import Final, Sequence
 from tigrbl_identity_contracts.oauth import ResourceSelection
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import urlparse

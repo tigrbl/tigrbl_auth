@@ -1,8 +1,7 @@
-from __future__ import annotations
-
 """OpenID Connect Front-Channel Logout planning and durable completion tracking."""
 
-from datetime import datetime, timezone
+from __future__ import annotations
+
 from types import SimpleNamespace
 from typing import Any, Final
 from tigrbl_identity_core.standards import StandardOwner, describe_owner

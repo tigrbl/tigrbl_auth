@@ -4,11 +4,13 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from .._ops import create_record, list_records, record_id, utc_now
+from ..engine import storage_session
+from ..tenant._table import Tenant
+from ._table import AuditEvent
+from typing import Any
 
 async def _record(cls, db: Any, *, event_type: str, outcome: str = "success", **payload: Any) -> "AuditEvent":
     payload.update({"event_type": event_type, "outcome": outcome, "occurred_at": payload.get("occurred_at") or utc_now()})

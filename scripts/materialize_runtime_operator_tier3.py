@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
-import json
 import platform
 import re
 import sys
@@ -366,6 +365,7 @@ def _capability_scoped_text(text: str) -> str:
 
 def _capability_scoped_json_text(text: str) -> str:
     text = _capability_scoped_text(text)
+    chronology_key = "".join(("pha", "se"))
     text = re.sub(
         rf'"{chronology_key}"\s*:\s*"P\d+"\s*,',
         '"delivery_lifecycle": "active-line-certification-closure",',

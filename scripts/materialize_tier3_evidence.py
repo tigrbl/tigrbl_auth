@@ -7,7 +7,6 @@ import platform
 import shutil
 import subprocess
 import sys
-from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any

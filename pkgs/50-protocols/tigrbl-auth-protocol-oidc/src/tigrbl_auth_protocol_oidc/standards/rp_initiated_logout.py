@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """OpenID Connect RP-Initiated Logout with durable fanout planning and replay protection."""
+
+from __future__ import annotations
 
 from datetime import datetime, timezone
 import base64

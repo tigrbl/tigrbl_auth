@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import datetime as dt
-from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, TZDateTime, Timestamped, acol
 
-from .._ops import create_record, list_records, utc_now
+from .._ops import utc_now
 
 
 class CredentialAuditEvent(RestOltpTable, GUIDPk, Timestamped):

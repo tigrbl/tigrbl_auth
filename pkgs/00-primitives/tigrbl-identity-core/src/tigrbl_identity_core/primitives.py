@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Dependency-light identity value objects."""
+
+from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import NewType

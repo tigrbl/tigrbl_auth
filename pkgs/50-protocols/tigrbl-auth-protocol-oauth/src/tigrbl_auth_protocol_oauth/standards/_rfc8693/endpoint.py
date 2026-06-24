@@ -5,6 +5,7 @@ The concrete endpoint is owned by
 """
 
 from __future__ import annotations
+# ruff: noqa: F403,F405
 
 from tigrbl_auth_protocol_oauth.standards._rfc8693.runtime import *
 

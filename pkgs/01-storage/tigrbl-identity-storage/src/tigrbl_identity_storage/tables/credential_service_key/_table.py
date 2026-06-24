@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Any
 from uuid import UUID
 
 from tigrbl_identity_storage.framework import (
@@ -23,7 +21,6 @@ from tigrbl_identity_storage.framework import (
     String,
     relationship,
 )
-from .._ops import first_record
 
 
 class CredentialServiceKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):

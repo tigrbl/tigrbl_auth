@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 from tigrbl_identity_storage.framework import GUIDPk, Integer, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
 
-from .._ops import first_record, list_records, record_id, update_record
 
 
 class CredentialWebAuthnPasskey(RestOltpTable, GUIDPk, Timestamped):

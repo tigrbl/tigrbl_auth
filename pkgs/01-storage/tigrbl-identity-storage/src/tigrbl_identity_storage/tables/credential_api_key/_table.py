@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     Created,
@@ -20,7 +18,6 @@ from tigrbl_identity_storage.framework import (
     Mapped,
     String,
 )
-from .._ops import first_record
 
 
 class CredentialApiKey(RestOltpTable, GUIDPk, Created, LastUsed, ValidityWindow, KeyDigest):

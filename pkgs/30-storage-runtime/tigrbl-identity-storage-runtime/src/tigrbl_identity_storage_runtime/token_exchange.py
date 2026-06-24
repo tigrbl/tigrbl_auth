@@ -7,7 +7,6 @@ from typing import Any, Dict, Final
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from urllib.parse import parse_qs
 
-from tigrbl_identity_runtime.deployment import resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_core.errors import InvalidTokenError

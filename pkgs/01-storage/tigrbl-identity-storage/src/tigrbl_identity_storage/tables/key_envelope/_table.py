@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import uuid
-from typing import Any
 
 from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
@@ -18,7 +17,6 @@ from tigrbl_identity_storage.framework import (
     acol,
 )
 
-from .._ops import first_record
 
 
 class KeyEnvelope(RestOltpTable, GUIDPk, Timestamped):

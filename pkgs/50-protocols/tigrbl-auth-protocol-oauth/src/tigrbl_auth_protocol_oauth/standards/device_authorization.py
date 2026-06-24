@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """OAuth 2.0 Device Authorization Grant owner and helper module."""
+
+from __future__ import annotations
 
 import re
 import secrets

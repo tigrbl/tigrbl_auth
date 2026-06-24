@@ -52,7 +52,6 @@ from ._runtime import (
     presented_certificate_pem,
     presented_certificate_thumbprint,
     read_handler_record,
-    redeem_refresh_token,
     runtime_security_profile,
     settings,
     status,

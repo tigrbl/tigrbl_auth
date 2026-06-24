@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Entrypoint for the Tigrbl-native operator CLI."""
+
+from __future__ import annotations
 
 import sys
 

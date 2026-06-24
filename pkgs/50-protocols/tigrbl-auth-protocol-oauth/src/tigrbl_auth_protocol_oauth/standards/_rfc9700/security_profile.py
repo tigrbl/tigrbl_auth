@@ -9,9 +9,12 @@ behavior.
 
 from __future__ import annotations
 
-from typing import Any, Final, Iterable, Mapping, Sequence
+from typing import Any, Final, Sequence
 
-from tigrbl_identity_contracts.oauth import RuntimeSecurityProfile, SenderConstraintResult
+from tigrbl_identity_contracts.oauth import (
+    RuntimeSecurityProfile,
+    SenderConstraintResult as SenderConstraintResult,
+)
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import JWT_BEARER_GRANT_TYPE
 

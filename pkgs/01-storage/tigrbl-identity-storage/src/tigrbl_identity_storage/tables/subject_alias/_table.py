@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
 
 
 class SubjectAlias(RestOltpTable, GUIDPk, Timestamped):

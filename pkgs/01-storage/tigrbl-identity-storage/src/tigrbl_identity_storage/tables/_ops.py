@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 from typing import Any, Iterable
 from uuid import UUID
 
-from tigrbl_identity_core.digests import token_hash
+from tigrbl_identity_core.digests import token_hash as token_hash
+
 
 
 def utc_now() -> datetime:

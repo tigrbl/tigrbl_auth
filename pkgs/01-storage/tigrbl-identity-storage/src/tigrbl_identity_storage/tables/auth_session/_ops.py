@@ -186,14 +186,20 @@ async def bind_session_client_async(session_id: UUID, *, client_id: UUID | None)
         )
 
 
-create_session = lambda **kwargs: run_async(create_session_async(**kwargs))
-touch_session = lambda session_id: run_async(touch_session_async(session_id))
-get_session = lambda session_id: run_async(get_session_async(session_id))
-get_active_session = lambda session_id: run_async(get_active_session_async(session_id))
-rotate_session_cookie_secret = lambda session_id, **kwargs: run_async(
+def create_session(**kwargs):
+    return run_async(create_session_async(**kwargs))
+def touch_session(session_id):
+    return run_async(touch_session_async(session_id))
+def get_session(session_id):
+    return run_async(get_session_async(session_id))
+def get_active_session(session_id):
+    return run_async(get_active_session_async(session_id))
+def rotate_session_cookie_secret(session_id, **kwargs):
+    return run_async(
     rotate_session_cookie_secret_async(session_id, **kwargs)
 )
-bind_session_client = lambda session_id, **kwargs: run_async(bind_session_client_async(session_id, **kwargs))
+def bind_session_client(session_id, **kwargs):
+    return run_async(bind_session_client_async(session_id, **kwargs))
 
 
 __all__ = [
@@ -214,11 +220,8 @@ __all__ = [
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import first_record, list_records, read_record, record_id, update_record, utc_now
 
 @_table_op_ctx(bind=AuthSession, alias="list_for_user", target="custom", rest=False)
 async def list_for_user(

@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """First-class principal model objects for identity package consumers."""
+
+from __future__ import annotations
 
 from typing import Any, Iterable, Mapping
 from uuid import uuid4

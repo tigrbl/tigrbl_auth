@@ -4,11 +4,14 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+import uuid
+from ._table import Client, _CLIENT_ID_RE
+from tigrbl_auth_protocol_oauth.standards.native_apps import RFC8252_SPEC_URL, is_native_redirect_uri, validate_native_redirect_uri
+from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_identity_runtime.settings import settings
+from typing import Any
+from urllib.parse import urlparse
 
 @_table_op_ctx(bind=Client, alias="new", target="custom", rest=False)
 def new(

@@ -4,11 +4,12 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import create_record, first_record, list_records, record_id, update_record
+from ..policy_condition._table import PolicyCondition
+from ._table import AttributePolicy
+from collections.abc import Mapping
+from typing import Any, Iterable
 
 @_table_op_ctx(bind=AttributePolicy, alias="create_policy", target="custom", rest=False)
 async def create_policy(cls, db: Any, **payload: Any) -> "AttributePolicy":

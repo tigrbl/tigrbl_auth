@@ -76,7 +76,7 @@ async def test_product_api_table_initialization_t2_startup_uses_mounted_surface_
 
     monkeypatch.setattr(lifecycle, "apply_all_async", _noop)
     monkeypatch.setattr(lifecycle, "ensure_default_superuser_async", _noop)
-    app = SimpleNamespace(
+    SimpleNamespace(
         state=SimpleNamespace(tigrbl_auth_surface_router=ProductSurfaceRouter())
     )
 

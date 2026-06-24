@@ -71,15 +71,20 @@ warnings.warn(
 record_token = upsert_token_record = lambda token, claims=None, token_kind=None, token_type_hint=None: run_async(
     upsert_token_record_async(token, claims, token_kind=token_kind, token_type_hint=token_type_hint)
 )
-get_token_record = lambda token: run_async(get_token_record_async(token))
-unregister_token = lambda token: run_async(remove_token_record_async(token))
-mark_token_used = lambda token, successor_token=None, reason="refresh_rotated": run_async(
+def get_token_record(token):
+    return run_async(get_token_record_async(token))
+def unregister_token(token):
+    return run_async(remove_token_record_async(token))
+def mark_token_used(token, successor_token=None, reason="refresh_rotated"):
+    return run_async(
     mark_token_used_async(token, successor_token=successor_token, reason=reason)
 )
-revoke_refresh_family = lambda family_id, reason="refresh_token_reuse_detected", reuse_token=None: run_async(
+def revoke_refresh_family(family_id, reason="refresh_token_reuse_detected", reuse_token=None):
+    return run_async(
     revoke_refresh_family_async(family_id, reason=reason, reuse_token=reuse_token)
 )
-introspect_token = lambda token: run_async(introspect_token_async(token))
+def introspect_token(token):
+    return run_async(introspect_token_async(token))
 
 
 __all__ = [

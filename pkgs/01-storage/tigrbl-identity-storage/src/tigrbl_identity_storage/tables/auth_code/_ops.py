@@ -362,11 +362,9 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import read_record, record_id, update_record, utc_now
+from ..pushed_authorization_request._table import PushedAuthorizationRequest
 
 @_table_op_ctx(bind=AuthCode, alias="consume", target="custom", rest=False)
 async def consume(cls, db: Any, *, code_id: UUID) -> "AuthCode | None":

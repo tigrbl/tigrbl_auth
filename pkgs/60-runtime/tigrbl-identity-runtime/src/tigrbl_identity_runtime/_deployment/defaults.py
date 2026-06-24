@@ -7,14 +7,13 @@ active deployment shape without initializing the full Tigrbl/SQLAlchemy stack.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any, Final
 
-from tigrbl_identity_runtime.feature_flags import FEATURE_FLAG_GROUPS, flags_for_profile
-from tigrbl_identity_runtime.surfaces import (
-    all_surface_capability_registry,
-    route_registry as surface_route_registry,
-)
+from .._surfaces.registries import all_surface_capability_registry as all_surface_capability_registry
+from .._surfaces.registries import route_registry as _surface_route_registry
+
+surface_route_registry = _surface_route_registry
+
 # ---------------------------------------------------------------------------
 # Pure defaults mirrored from ``config.settings`` for governance tooling.
 # ---------------------------------------------------------------------------

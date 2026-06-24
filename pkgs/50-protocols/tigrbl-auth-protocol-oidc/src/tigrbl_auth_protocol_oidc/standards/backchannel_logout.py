@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """OpenID Connect Back-Channel Logout planning and durable completion tracking."""
+
+from __future__ import annotations
 
 import base64
 import hashlib

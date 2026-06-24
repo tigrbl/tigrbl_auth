@@ -102,7 +102,7 @@ def test_federation_registry_supports_sso_social_provider_trust_claim_normalizat
         display_name="GitHub",
         scopes=("openid", "email"),
     )
-    sso = registry.register_provider(
+    registry.register_provider(
         provider_id="corp-sso",
         tenant_id="tenant-a",
         kind="sso",

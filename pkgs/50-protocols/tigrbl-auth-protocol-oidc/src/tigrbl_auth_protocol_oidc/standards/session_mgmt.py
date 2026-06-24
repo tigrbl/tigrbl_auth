@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """OpenID Connect Session Management with durable browser-session handling.
 
 This module deliberately keeps the session-management claim boundary truthful:
@@ -10,6 +8,8 @@ This module deliberately keeps the session-management claim boundary truthful:
 - a dedicated mounted ``check_session_iframe`` route is *not* currently claimed
   by discovery or contracts in this checkpoint
 """
+
+from __future__ import annotations
 
 from datetime import datetime, timezone
 from hashlib import sha256

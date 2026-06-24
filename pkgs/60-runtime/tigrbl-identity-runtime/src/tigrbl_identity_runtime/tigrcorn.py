@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import inspect
-from typing import Any
 
 from .base import RunnerAdapter
 from .types import RunnerCapability, RunnerFlagMetadata, RuntimeDiagnostic

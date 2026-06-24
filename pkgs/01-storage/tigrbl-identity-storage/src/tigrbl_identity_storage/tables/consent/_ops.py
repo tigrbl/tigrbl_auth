@@ -42,19 +42,18 @@ async def revoke_consent_async(consent_id: UUID) -> Consent | None:
         return await Consent.revoke_for_user(db, consent_id=consent_id)
 
 
-record_consent = lambda **kwargs: run_async(record_consent_async(**kwargs))
-revoke_consent = lambda consent_id: run_async(revoke_consent_async(consent_id))
+def record_consent(**kwargs):
+    return run_async(record_consent_async(**kwargs))
+def revoke_consent(consent_id):
+    return run_async(revoke_consent_async(consent_id))
 
 
 __all__ = ["record_consent", "record_consent_async", "revoke_consent", "revoke_consent_async"]
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import field, list_records, read_record, record_id, update_record, utc_now
 
 @_table_op_ctx(bind=Consent, alias="list_for_user", target="custom", rest=False)
 async def list_for_user(

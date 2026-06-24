@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """RFC 7523 JWT client-auth helpers."""
+
+from __future__ import annotations
 
 import time
 import uuid

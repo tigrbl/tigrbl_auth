@@ -10,40 +10,16 @@ from __future__ import annotations
 
 from dataclasses import replace
 import re
-from typing import Any, Callable, Final
+from typing import Any, Final
 
-from tigrbl import TigrblApp, TigrblRouter
-from tigrbl_identity_storage.tables.auth_code import api as authorize_api
-from tigrbl_identity_storage.tables.auth_session import login_api
-from tigrbl_identity_storage_runtime.account_surface import api as my_account_api
-from tigrbl_identity_storage_runtime.client_registration import include_client_registration_endpoint
-from tigrbl_identity_storage_runtime.par import include_par_endpoint
-from tigrbl_identity_storage_runtime.device_authorization import include_device_authorization_endpoint
-from tigrbl_identity_storage_runtime.logout import include_logout_endpoint
-from tigrbl_identity_storage_runtime.revocation import (
-    api as revoke_api,
-    include_revocation_endpoint,
-)
-from tigrbl_identity_storage.tables.token_record import api as token_api
+from tigrbl import TigrblRouter
 from tigrbl_identity_storage.tables.user import admin_api as admin_auth_api
 from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
 from tigrbl_identity_storage.tables.tenant import admin_api as admin_tenants_api
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_storage_runtime.metadata.oidc_discovery import (
-    include_jwks,
-    include_openid_configuration,
-)
-from tigrbl_identity_storage_runtime.userinfo import include_oidc_userinfo
-from tigrbl_identity_storage_runtime.metadata.authorization_server_metadata import include_rfc8414
-from tigrbl_identity_storage_runtime.introspection import include_introspection_endpoint
-from tigrbl_identity_storage_runtime.metadata.protected_resource_metadata import include_rfc9728
-from tigrbl_identity_storage_runtime.token_exchange import include_token_exchange_endpoint
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
-
-ensure_identity_storage_importable()
-
 from tigrbl_identity_storage.tables import (
     AuditEvent,
     AuthCode,
@@ -69,6 +45,8 @@ from tigrbl_identity_storage.tables import (
     User,
 )
 from tigrbl_identity_storage.tables.engine import dsn
+
+ensure_identity_storage_importable()
 
 TABLE_RESOURCES = [
     Realm,

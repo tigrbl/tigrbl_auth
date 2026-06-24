@@ -17,7 +17,7 @@ import threading
 import time
 from typing import Any, Dict, Final
 from tigrbl_identity_core.standards import StandardOwner
-from tigrbl_security_trust_contracts import DPoPNonceRecord, DPoPProofClaims
+from tigrbl_security_trust_contracts import DPoPNonceRecord
 
 try:
     from cryptography.hazmat.primitives import serialization
@@ -46,7 +46,6 @@ try:  # pragma: no cover - exercised in real runtime installs
 except Exception:  # pragma: no cover - dependency-light checkpoint fallback
     DpopSigner = None  # type: ignore[assignment]
 
-from tigrbl_identity_runtime.settings import settings
 
 RFC9449_SPEC_URL: Final[str] = "https://www.rfc-editor.org/rfc/rfc9449"
 _ALG_VALUE: Final[str] = "EdDSA"

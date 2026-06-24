@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
-from typing import Any, Iterable, Mapping
+from typing import Any, Mapping
 from uuid import uuid4
 
 from tigrbl_identity_core.clock import utc_now_iso

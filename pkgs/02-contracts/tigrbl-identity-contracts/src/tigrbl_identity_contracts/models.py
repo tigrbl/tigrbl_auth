@@ -1,10 +1,10 @@
-from __future__ import annotations
-
 """Projection metadata for identity contract documents.
 
 Request and response schemas are owned by the storage table modules that expose
 the corresponding custom operations.
 """
+
+from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any, Literal

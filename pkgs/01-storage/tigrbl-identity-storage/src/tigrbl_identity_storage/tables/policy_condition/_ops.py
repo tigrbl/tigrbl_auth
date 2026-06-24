@@ -4,11 +4,11 @@ __all__: list[str] = []
 
 # BEGIN classmethod-to-op_ctx migration
 from tigrbl import op_ctx as _table_op_ctx
-from . import _table as _table_module
 
-for _table_name in dir(_table_module):
-    if not _table_name.startswith("__"):
-        globals().setdefault(_table_name, getattr(_table_module, _table_name))
+from .._ops import clear_records, create_record
+from ._table import PolicyCondition
+from collections.abc import Mapping
+from typing import Any, Iterable
 
 async def _add_condition(
     cls,

@@ -45,7 +45,8 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
             self.detail = detail
 
     status = _FallbackStatus()
-    Depends = lambda dependency: dependency  # type: ignore[assignment]
+    def Depends(dependency):
+        return dependency  # type: ignore[assignment]
 
     class TigrblApp:  # type: ignore[override]
         pass
