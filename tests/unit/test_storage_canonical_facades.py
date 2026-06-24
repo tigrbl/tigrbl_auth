@@ -353,9 +353,14 @@ def test_executable_auth_flow_composition_lives_above_storage() -> None:
 
     authz_surface = importlib.import_module("tigrbl_identity_storage_runtime.authz_surface")
     auth_flows = importlib.import_module("tigrbl_identity_storage_runtime.auth_flows")
+    authorization = importlib.import_module("tigrbl_identity_storage_runtime.authorization")
 
-    assert authz_surface.api is authz_surface.router
-    assert auth_flows.api is auth_flows.router
+    assert not hasattr(authz_surface, "api")
+    assert not hasattr(auth_flows, "api")
+    assert not hasattr(authorization, "api")
+    assert hasattr(authz_surface, "router")
+    assert hasattr(auth_flows, "router")
+    assert hasattr(authorization, "router")
 
 
 def test_executable_account_surface_composition_lives_above_storage() -> None:

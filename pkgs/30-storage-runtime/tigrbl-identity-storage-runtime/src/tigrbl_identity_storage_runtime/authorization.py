@@ -1,16 +1,27 @@
+"""Runtime-owned OAuth/OIDC authorization endpoint."""
+
 from __future__ import annotations
 
 import json
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING, Any
+from typing import Any
 from urllib.parse import urlencode
 from uuid import UUID, uuid4
 
-from tigrbl_identity_storage.framework import HTMLResponse, HTTPException, RedirectResponse, status
-from ._table import AuthCode
+from tigrbl_identity_storage.framework import (
+    AsyncSession,
+    Depends,
+    HTMLResponse,
+    HTTPException,
+    RedirectResponse,
+    Request,
+    TigrblRouter,
+    status,
+)
+from tigrbl_identity_storage.tables.auth_code import AuthCode
+from tigrbl_identity_storage.tables.engine import get_db
 
-if TYPE_CHECKING:
-    from ..pushed_authorization_request import PushedAuthorizationRequest
+router = TigrblRouter()
 
 
 def _coerce_multi_value(value: Any) -> list[str]:
@@ -21,44 +32,55 @@ def _coerce_multi_value(value: Any) -> list[str]:
     return [str(value)] if str(value) else []
 
 
-async def _resolve_pushed_authorization_request(db, params: dict[str, Any]) -> tuple[dict[str, Any], PushedAuthorizationRequest | None]:
+async def _resolve_pushed_authorization_request(db: Any, params: dict[str, Any]) -> tuple[dict[str, Any], Any | None]:
     from tigrbl_auth_protocol_oauth.standards.pushed_authorization_requests import (
         RFC9126_SPEC_URL,
         validate_pushed_authorization_request_row,
     )
     from tigrbl_identity_server.security.handler_records import first_handler_record
-
-    from ..pushed_authorization_request import PushedAuthorizationRequest
+    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequest
 
     request_uri = params.get("request_uri")
     if not request_uri:
         return params, None
     row = await first_handler_record(PushedAuthorizationRequest, db, {"request_uri": str(request_uri)})
     if row is None:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL})
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL},
+        )
     try:
         result = validate_pushed_authorization_request_row(
             row,
-            client_id=str(params.get("client_id") or '') or None,
+            client_id=str(params.get("client_id") or "") or None,
             request_uri=str(request_uri),
         )
     except Exception as exc:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL}) from exc
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL},
+        ) from exc
 
     merged = dict(result.params or {})
     for key, value in params.items():
         if value in (None, "", [], (), {}):
             continue
         if key not in {"request_uri", "client_id"}:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request", "error_description": RFC9126_SPEC_URL})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                {"error": "invalid_request", "error_description": RFC9126_SPEC_URL},
+            )
         existing = merged.get(key)
         if existing not in (None, "", [], (), {}) and existing != value:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL})
+            raise HTTPException(
+                status.HTTP_400_BAD_REQUEST,
+                {"error": "invalid_request_uri", "error_description": RFC9126_SPEC_URL},
+            )
         merged[key] = value
     return merged, row
 
 
-async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[str, Any]:
+async def _resolve_request_object(params: dict[str, Any], deployment: Any) -> dict[str, Any]:
     from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
     from tigrbl_auth_protocol_oauth.standards.jwt_secured_authorization_requests import (
         merge_request_object_params,
@@ -76,7 +98,7 @@ async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[st
             str(request_object),
             secret=settings.jwt_secret,
             algorithms=("HS256", "HS384", "HS512"),
-            expected_client_id=str(params.get("client_id") or '') or None,
+            expected_client_id=str(params.get("client_id") or "") or None,
             expected_audience=str(deployment.issuer or ISSUER),
         )
         merged = merge_request_object_params(parsed, params)
@@ -85,7 +107,8 @@ async def _resolve_request_object(params: dict[str, Any], deployment) -> dict[st
     return merged
 
 
-async def authorize_request(*, request, db, params: dict[str, Any]):
+async def authorize_request(*, request: Request, db: Any, params: dict[str, Any]) -> Any:
+    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
     from tigrbl_auth_protocol_oauth.standards.issuer_identification import authorization_response_issuer
     from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_authorization_request
     from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
@@ -100,7 +123,6 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     from tigrbl_auth_protocol_oauth.standards.rich_authorization_requests import (
         normalize_authorization_details,
     )
-    from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
     from tigrbl_auth_protocol_oidc.id_token import mint_id_token, oidc_hash
     from tigrbl_auth_protocol_oidc.standards.session_mgmt import session_state_for_client
     from tigrbl_identity_runtime.deployment import deployment_from_request
@@ -109,16 +131,14 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     from tigrbl_identity_server.rest.shared import _jwt, _require_tls
     from tigrbl_identity_server.security.handler_records import (
         bind_browser_session_client_record,
-        create_handler_record,
         maybe_rotate_browser_session_cookie_record,
         read_handler_record,
         resolve_browser_session_record,
         update_handler_record,
     )
-
-    from ..client import Client
-    from ..pushed_authorization_request import PushedAuthorizationRequest
-    from ..user._table import User
+    from tigrbl_identity_storage.tables.client import Client
+    from tigrbl_identity_storage.tables.pushed_authorization_request import PushedAuthorizationRequest
+    from tigrbl_identity_storage.tables.user import User
 
     deployment = deployment_from_request(request, settings)
     _require_tls(request, deployment=deployment)
@@ -207,7 +227,10 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
             code_challenge_method=code_challenge_method,
         )
     except ValueError as exc:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request", "error_description": str(exc)}) from exc
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST,
+            {"error": "invalid_request", "error_description": str(exc)},
+        ) from exc
     if code_challenge_method and code_challenge_method != "S256":
         raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_request"})
     if policy.pkce_s256_required and (not code_challenge or code_challenge_method != "S256"):
@@ -223,10 +246,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     requested_claims: dict[str, Any] | None = None
     if claims:
         try:
-            if isinstance(claims, dict):
-                parsed = claims
-            else:
-                parsed = json.loads(str(claims))
+            parsed = claims if isinstance(claims, dict) else json.loads(str(claims))
             if not isinstance(parsed, dict):
                 raise ValueError
             requested_claims = parsed
@@ -277,9 +297,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
 
     if "code" in rts:
         code_uuid = uuid4()
-        await create_handler_record(
-            AuthCode,
-            db,
+        await AuthCode.handlers.authorize.core(
             {
                 "id": code_uuid,
                 "user_id": UUID(user_sub),
@@ -293,6 +311,7 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
                 "expires_at": datetime.now(timezone.utc) + timedelta(minutes=10),
                 "claims": auth_code_claims or None,
             },
+            db=db,
         )
         code = str(code_uuid)
         params_out.append(("code", code))
@@ -323,7 +342,13 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
             extra_claims["at_hash"] = oidc_hash(access)
         if code:
             extra_claims["c_hash"] = oidc_hash(code)
-        id_token = await mint_id_token(sub=user_sub, aud=str(client_id), nonce=nonce, issuer=str(deployment.issuer or ISSUER), **extra_claims)
+        id_token = await mint_id_token(
+            sub=user_sub,
+            aud=str(client_id),
+            nonce=nonce,
+            issuer=str(deployment.issuer or ISSUER),
+            **extra_claims,
+        )
         params_out.append(("id_token", id_token))
 
     session_state = session_state_for_client(
@@ -354,7 +379,11 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
         response = RedirectResponse(f"{redirect_uri}#{urlencode(params_out)}" if params_out else redirect_uri)
     elif mode == "form_post":
         inputs = "".join(f'<input type="hidden" name="{k}" value="{v}" />' for k, v in params_out)
-        body = "<!DOCTYPE html><html><body>" + f'<form method="post" action="{redirect_uri}">{inputs}</form>' + "<script>document.forms[0].submit()</script></body></html>"
+        body = (
+            "<!DOCTYPE html><html><body>"
+            + f'<form method="post" action="{redirect_uri}">{inputs}</form>'
+            + "<script>document.forms[0].submit()</script></body></html>"
+        )
         response = HTMLResponse(content=body)
     else:
         response = RedirectResponse(f"{redirect_uri}?{urlencode(params_out)}" if params_out else redirect_uri)
@@ -362,3 +391,55 @@ async def authorize_request(*, request, db, params: dict[str, Any]):
     if rotated_secret:
         issue_session_cookie(response, session_id=session.id, secret=rotated_secret, expires_at=session.expires_at)
     return response
+
+
+@router.route("/authorize", methods=["GET"])
+async def authorize(
+    request: Request,
+    response_type: str | None = None,
+    client_id: str | None = None,
+    redirect_uri: str | None = None,
+    scope: str | None = None,
+    response_mode: str | None = None,
+    state: str | None = None,
+    nonce: str | None = None,
+    code_challenge: str | None = None,
+    code_challenge_method: str | None = None,
+    prompt: str | None = None,
+    max_age: int | None = None,
+    login_hint: str | None = None,
+    claims: str | None = None,
+    request_uri: str | None = None,
+    request_object: str | None = None,
+    authorization_details: str | None = None,
+    db: AsyncSession = Depends(get_db),
+) -> Any:
+    params = {
+        "response_type": response_type or request.query_params.get("response_type"),
+        "client_id": client_id or request.query_params.get("client_id"),
+        "redirect_uri": redirect_uri or request.query_params.get("redirect_uri"),
+        "scope": scope or request.query_params.get("scope"),
+        "response_mode": response_mode or request.query_params.get("response_mode"),
+        "state": state or request.query_params.get("state"),
+        "nonce": nonce or request.query_params.get("nonce"),
+        "code_challenge": code_challenge or request.query_params.get("code_challenge"),
+        "code_challenge_method": code_challenge_method or request.query_params.get("code_challenge_method"),
+        "prompt": prompt or request.query_params.get("prompt"),
+        "max_age": max_age if max_age is not None else request.query_params.get("max_age"),
+        "login_hint": login_hint or request.query_params.get("login_hint"),
+        "claims": claims or request.query_params.get("claims"),
+        "request_uri": request_uri or request.query_params.get("request_uri"),
+        "request": request_object or request.query_params.get("request"),
+        "authorization_details": authorization_details or request.query_params.get("authorization_details"),
+        "resource": list(request.query_params.getlist("resource"))
+        if hasattr(request.query_params, "getlist")
+        else None,
+    }
+    return await authorize_request(request=request, db=db, params=params)
+
+
+__all__ = [
+    "authorize",
+    "authorize_request",
+    "router",
+]

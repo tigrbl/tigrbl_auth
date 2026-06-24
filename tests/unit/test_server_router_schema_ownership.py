@@ -262,11 +262,6 @@ def test_my_account_route_handlers_live_on_storage_table_modules(
     ("module_name", "class_name", "route_names"),
     [
         (
-            "tigrbl_identity_storage.tables.auth_code",
-            "AuthCode",
-            {"authorize"},
-        ),
-        (
             "tigrbl_identity_storage.tables.token_record",
             "TokenRecord",
             {"token"},
@@ -292,6 +287,12 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
 @pytest.mark.parametrize(
     ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
     [
+        (
+            "tigrbl_identity_storage_runtime.authorization",
+            "tigrbl_identity_storage.tables.auth_code",
+            "AuthCode",
+            {"authorize"},
+        ),
         (
             "tigrbl_identity_storage_runtime.client_registration",
             "tigrbl_identity_storage.tables.client_registration",
@@ -340,16 +341,25 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     storage_module = importlib.import_module(storage_module_name)
     table_class = getattr(storage_module, class_name)
 
-    assert hasattr(runtime_module, "api")
     assert hasattr(runtime_module, "router")
+    if runtime_module_name == "tigrbl_identity_storage_runtime.authorization":
+        assert not hasattr(runtime_module, "api")
+    else:
+        assert hasattr(runtime_module, "api")
     missing = sorted(name for name in route_names if not hasattr(runtime_module, name))
     assert missing == []
     assert not hasattr(storage_module, "api")
     assert not hasattr(storage_module, "router")
-    missing_class_ops = sorted(
-        name for name in route_names if hasattr(table_class, name)
-    )
-    assert missing_class_ops == []
+    if runtime_module_name == "tigrbl_identity_storage_runtime.authorization":
+        missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
+        assert missing_class_ops == []
+        missing_handler_ops = sorted(name for name in route_names if not hasattr(table_class.handlers, name))
+        assert missing_handler_ops == []
+    else:
+        missing_class_ops = sorted(
+            name for name in route_names if hasattr(table_class, name)
+        )
+        assert missing_class_ops == []
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:

@@ -385,29 +385,27 @@ def test_authorize_routes_use_opaque_browser_session_resolver() -> None:
         / "tigrbl_auth_protocol_oauth"
         / "ops"
         / "authorize.py",
-        "storage_authorize_route": _package_path("tigrbl-identity-storage")
+        "storage_authorize_ops": _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
         / "auth_code"
         / "_ops.py",
-        "storage_authorize_logic": _package_path("tigrbl-identity-storage")
+        "runtime_authorization": _package_path("tigrbl-identity-storage-runtime")
         / "src"
-        / "tigrbl_identity_storage"
-        / "tables"
-        / "auth_code"
-        / "_ops.py",
+        / "tigrbl_identity_storage_runtime"
+        / "authorization.py",
     }
 
     assert not route_paths["protocol"].exists()
     assert not route_paths["protocol_op"].exists()
 
-    storage_route_source = route_paths["storage_authorize_route"].read_text(encoding="utf-8")
-    storage_logic_source = route_paths["storage_authorize_logic"].read_text(encoding="utf-8")
+    runtime_authorization_source = route_paths["runtime_authorization"].read_text(encoding="utf-8")
 
-    assert "authorize_request" in storage_route_source
-    assert "resolve_browser_session_record" in storage_logic_source
-    assert "deployment_from_request(request, settings)" in storage_logic_source
-    assert "await resolve_browser_session(request)" not in storage_logic_source
-    assert 'request.cookies.get("sid")' not in storage_logic_source
-    assert "UUID(sid)" not in storage_logic_source
+    assert not route_paths["storage_authorize_ops"].exists()
+    assert "authorize_request" in runtime_authorization_source
+    assert "resolve_browser_session_record" in runtime_authorization_source
+    assert "deployment_from_request(request, settings)" in runtime_authorization_source
+    assert "await resolve_browser_session(request)" not in runtime_authorization_source
+    assert 'request.cookies.get("sid")' not in runtime_authorization_source
+    assert "UUID(sid)" not in runtime_authorization_source
