@@ -134,14 +134,6 @@ class CryptoKey(RestOltpTable, GUIDPk, Timestamped):
         return rows
 
     @classmethod
-    async def enable(cls, db: Any, *, id: Any) -> "CryptoKey":
-        return await update_record(cls, db, id, {"status": "active"})
-
-    @classmethod
-    async def disable(cls, db: Any, *, id: Any) -> "CryptoKey":
-        return await update_record(cls, db, id, {"status": "disabled"})
-
-    @classmethod
     async def retire(cls, db: Any, *, id: Any) -> "CryptoKey":
         row = await read_record(cls, db, id)
         metadata = dict(field(row, "key_metadata", {}) or {}) if row is not None else {}

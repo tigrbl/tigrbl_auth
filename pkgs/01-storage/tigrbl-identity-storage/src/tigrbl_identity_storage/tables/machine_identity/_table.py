@@ -18,7 +18,7 @@ from tigrbl_identity_storage.framework import (
     acol,
 )
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class MachineIdentity(RestOltpTable, GUIDPk, Timestamped):
@@ -48,16 +48,8 @@ class MachineIdentity(RestOltpTable, GUIDPk, Timestamped):
     machine_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
     @classmethod
-    async def create_identity(cls, db: Any, **payload: Any) -> "MachineIdentity":
-        return await create_record(cls, db, payload)
-
-    @classmethod
     async def lookup(cls, db: Any, *, principal_id: str) -> "MachineIdentity | None":
         return await first_record(cls, db, {"principal_id": principal_id})
-
-    @classmethod
-    async def lookup_by_subject(cls, db: Any, *, machine_subject: str) -> "MachineIdentity | None":
-        return await first_record(cls, db, {"machine_subject": machine_subject})
 
     @classmethod
     async def list_for_tenant(cls, db: Any, *, tenant_id: str) -> list["MachineIdentity"]:

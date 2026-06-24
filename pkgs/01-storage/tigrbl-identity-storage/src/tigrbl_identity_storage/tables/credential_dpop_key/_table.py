@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class CredentialDpopKey(RestOltpTable, GUIDPk, Timestamped):
@@ -19,14 +19,6 @@ class CredentialDpopKey(RestOltpTable, GUIDPk, Timestamped):
     public_jwk: Mapped[dict] = acol(storage=S(JSON, nullable=False))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     key_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-    @classmethod
-    async def bind_key(cls, db: Any, **payload: Any) -> "CredentialDpopKey":
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup_by_thumbprint(cls, db: Any, *, jwk_thumbprint: str) -> "CredentialDpopKey | None":
-        return await first_record(cls, db, {"jwk_thumbprint": jwk_thumbprint})
 
     @classmethod
     async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialDpopKey"]:

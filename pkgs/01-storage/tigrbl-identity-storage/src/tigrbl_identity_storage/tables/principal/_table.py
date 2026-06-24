@@ -56,16 +56,8 @@ class Principal(RestOltpTable, GUIDPk, Timestamped):
         return await first_record(cls, db, {"id": principal_id})
 
     @classmethod
-    async def lookup_by_subject(cls, db: Any, *, subject: str) -> "Principal | None":
-        return await first_record(cls, db, {"subject": subject})
-
-    @classmethod
     async def list_for_tenant(cls, db: Any, *, tenant_id: str) -> list["Principal"]:
         return await list_records(cls, db, {"tenant_id": tenant_id})
-
-    @classmethod
-    async def list_by_kind(cls, db: Any, *, principal_kind: str) -> list["Principal"]:
-        return await list_records(cls, db, {"principal_kind": principal_kind})
 
     @classmethod
     async def disable(cls, db: Any, *, principal_id: str) -> "Principal | None":

@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records
+from .._ops import create_record, first_record
 
 
 class PluginLifecycleEventRecord(RestOltpTable, GUIDPk, Timestamped):
@@ -28,10 +28,5 @@ class PluginLifecycleEventRecord(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, event_id: str) -> "PluginLifecycleEventRecord | None":
         return await first_record(cls, db, {"event_id": event_id})
-
-    @classmethod
-    async def list_for_plugin(cls, db: Any, *, plugin_id: str) -> list["PluginLifecycleEventRecord"]:
-        return await list_records(cls, db, {"plugin_id": plugin_id})
-
 
 __all__ = ["PluginLifecycleEventRecord"]

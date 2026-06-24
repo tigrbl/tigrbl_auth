@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records
+from .._ops import create_record, first_record
 
 
 class ReleaseAuthorizationState(RestOltpTable, GUIDPk, Timestamped):
@@ -28,10 +28,5 @@ class ReleaseAuthorizationState(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, snapshot_id: str) -> "ReleaseAuthorizationState | None":
         return await first_record(cls, db, {"snapshot_id": snapshot_id})
-
-    @classmethod
-    async def list_for_release(cls, db: Any, *, release_id: str) -> list["ReleaseAuthorizationState"]:
-        return await list_records(cls, db, {"release_id": release_id})
-
 
 __all__ = ["ReleaseAuthorizationState"]

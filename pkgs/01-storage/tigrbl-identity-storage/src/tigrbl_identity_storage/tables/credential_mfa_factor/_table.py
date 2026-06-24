@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import GUIDPk, JSON, Mapped, RestOltpTable, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class CredentialMfaFactor(RestOltpTable, GUIDPk, Timestamped):
@@ -21,10 +21,6 @@ class CredentialMfaFactor(RestOltpTable, GUIDPk, Timestamped):
     public_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     factor_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-    @classmethod
-    async def bind_factor(cls, db: Any, **payload: Any) -> "CredentialMfaFactor":
-        return await create_record(cls, db, payload)
 
     @classmethod
     async def lookup(cls, db: Any, *, factor_id: str) -> "CredentialMfaFactor | None":

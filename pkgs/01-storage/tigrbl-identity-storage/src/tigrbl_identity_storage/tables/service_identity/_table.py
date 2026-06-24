@@ -20,7 +20,7 @@ from tigrbl_identity_storage.framework import (
     acol,
     ColumnSpec,
 )
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class ServiceIdentity(RestOltpTable, GUIDPk, Timestamped, TenantBound, PrincipalMixin, ActiveToggle):
@@ -44,10 +44,6 @@ class ServiceIdentity(RestOltpTable, GUIDPk, Timestamped, TenantBound, Principal
         back_populates="_service_identity",
         cascade="all, delete-orphan",
     )
-
-    @classmethod
-    async def create_identity(cls, db: Any, **payload: Any) -> "ServiceIdentity":
-        return await create_record(cls, db, payload)
 
     @classmethod
     async def lookup(cls, db: Any, *, service_identity_id: Any) -> "ServiceIdentity | None":

@@ -22,7 +22,7 @@ from tigrbl_identity_storage.framework import (
 )
 from tigrbl_security_trust_contracts import normalize_key_operations
 
-from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
+from .._ops import create_record, first_record, record_id, update_record, utc_now
 
 
 def _operation_list(values: Any) -> list[str]:
@@ -94,10 +94,6 @@ class CryptoKeyVersion(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, key_id: uuid.UUID, version: int) -> "CryptoKeyVersion | None":
         return await first_record(cls, db, {"key_id": key_id, "version": version})
-
-    @classmethod
-    async def list_for_key(cls, db: Any, *, key_id: uuid.UUID) -> list["CryptoKeyVersion"]:
-        return await list_records(cls, db, {"key_id": key_id})
 
     @classmethod
     async def activate(cls, db: Any, *, key_id: uuid.UUID, version: int) -> "CryptoKeyVersion | None":

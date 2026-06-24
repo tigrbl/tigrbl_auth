@@ -7,7 +7,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, Integer, Mapped, S, String, TZDateTime, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import create_record, first_record, record_id, update_record
 
 
 class AccessReviewItem(RestOltpTable, GUIDPk, Timestamped):
@@ -33,10 +33,6 @@ class AccessReviewItem(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, item_id: str) -> "AccessReviewItem | None":
         return await first_record(cls, db, {"item_id": item_id})
-
-    @classmethod
-    async def list_for_campaign(cls, db: Any, *, campaign_id: str) -> list["AccessReviewItem"]:
-        return await list_records(cls, db, {"campaign_id": campaign_id})
 
     @classmethod
     async def mark_decided(cls, db: Any, *, item_id: str) -> "AccessReviewItem | None":

@@ -18,7 +18,7 @@ from tigrbl_identity_storage.framework import (
     acol,
 )
 
-from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
+from .._ops import first_record, list_records, update_record, utc_now
 
 
 class PrincipalKeyBinding(RestOltpTable, GUIDPk, Timestamped):
@@ -45,39 +45,6 @@ class PrincipalKeyBinding(RestOltpTable, GUIDPk, Timestamped):
     realm_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.realms.id"), nullable=True, index=True)
     )
-
-    @classmethod
-    async def bind_key(
-        cls,
-        db: Any,
-        *,
-        principal_id: uuid.UUID,
-        principal_kind: str,
-        key_id: uuid.UUID,
-        key_version_id: uuid.UUID | None = None,
-        binding_kind: str = "identity",
-        status: str = "active",
-        proof_metadata: dict | None = None,
-        binding_metadata: dict | None = None,
-        tenant_id: uuid.UUID | None = None,
-        realm_id: uuid.UUID | None = None,
-    ) -> "PrincipalKeyBinding":
-        return await create_record(
-            cls,
-            db,
-            {
-                "principal_id": principal_id,
-                "principal_kind": principal_kind,
-                "key_id": key_id,
-                "key_version_id": key_version_id,
-                "binding_kind": binding_kind,
-                "status": status,
-                "proof_metadata": proof_metadata,
-                "binding_metadata": binding_metadata,
-                "tenant_id": tenant_id,
-                "realm_id": realm_id,
-            },
-        )
 
     @classmethod
     async def lookup(

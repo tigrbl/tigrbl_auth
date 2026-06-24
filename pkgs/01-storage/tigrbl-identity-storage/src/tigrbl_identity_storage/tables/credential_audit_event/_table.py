@@ -51,10 +51,6 @@ class CredentialAuditEvent(RestOltpTable, GUIDPk, Timestamped):
         )
 
     @classmethod
-    async def list_for_credential(cls, db: Any, *, credential_id: str) -> list["CredentialAuditEvent"]:
-        return await list_records(cls, db, {"credential_id": credential_id})
-
-    @classmethod
     async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialAuditEvent"]:
         return await list_records(cls, db, {"principal_id": principal_id})
 

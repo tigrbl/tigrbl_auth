@@ -7,7 +7,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record, utc_now
+from .._ops import first_record, list_records, record_id, update_record, utc_now
 
 
 class CredentialRecoveryCode(RestOltpTable, GUIDPk, Timestamped):
@@ -20,10 +20,6 @@ class CredentialRecoveryCode(RestOltpTable, GUIDPk, Timestamped):
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     consumed_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     recovery_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-    @classmethod
-    async def bind_code(cls, db: Any, **payload: Any) -> "CredentialRecoveryCode":
-        return await create_record(cls, db, payload)
 
     @classmethod
     async def lookup_active(cls, db: Any, *, code_digest: str) -> "CredentialRecoveryCode | None":

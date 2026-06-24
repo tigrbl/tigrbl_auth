@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import create_record, first_record, record_id, update_record
 
 
 class ScimSchemaRecord(RestOltpTable, GUIDPk, Timestamped):
@@ -31,10 +31,6 @@ class ScimSchemaRecord(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, schema_id: str) -> "ScimSchemaRecord | None":
         return await first_record(cls, db, {"schema_id": schema_id})
-
-    @classmethod
-    async def list_for_resource_kind(cls, db: Any, *, resource_kind: str) -> list["ScimSchemaRecord"]:
-        return await list_records(cls, db, {"resource_kind": resource_kind})
 
     @classmethod
     async def disable(cls, db: Any, *, schema_id: str) -> "ScimSchemaRecord | None":

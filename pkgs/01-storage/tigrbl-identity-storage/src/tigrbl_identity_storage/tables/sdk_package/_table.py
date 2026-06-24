@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import create_record, first_record, record_id, update_record
 
 
 class SDKPackageRecord(RestOltpTable, GUIDPk, Timestamped):
@@ -34,10 +34,6 @@ class SDKPackageRecord(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, sdk_id: str) -> "SDKPackageRecord | None":
         return await first_record(cls, db, {"sdk_id": sdk_id})
-
-    @classmethod
-    async def list_by_language(cls, db: Any, *, language: str) -> list["SDKPackageRecord"]:
-        return await list_records(cls, db, {"language": language})
 
     @classmethod
     async def disable(cls, db: Any, *, sdk_id: str) -> "SDKPackageRecord | None":

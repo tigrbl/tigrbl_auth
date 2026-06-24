@@ -7,7 +7,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import GUIDPk, JSON, Mapped, RestOltpTable, S, String, TZDateTime, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class CredentialPassword(RestOltpTable, GUIDPk, Timestamped):
@@ -21,10 +21,6 @@ class CredentialPassword(RestOltpTable, GUIDPk, Timestamped):
     rotated_from: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
     expires_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     password_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-    @classmethod
-    async def bind_password(cls, db: Any, **payload: Any) -> "CredentialPassword":
-        return await create_record(cls, db, payload)
 
     @classmethod
     async def lookup_active(cls, db: Any, *, principal_id: str) -> "CredentialPassword | None":

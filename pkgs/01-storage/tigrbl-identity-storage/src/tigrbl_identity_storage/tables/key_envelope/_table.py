@@ -18,7 +18,7 @@ from tigrbl_identity_storage.framework import (
     acol,
 )
 
-from .._ops import create_record, first_record, list_records, update_record
+from .._ops import first_record
 
 
 class KeyEnvelope(RestOltpTable, GUIDPk, Timestamped):
@@ -53,60 +53,10 @@ class KeyEnvelope(RestOltpTable, GUIDPk, Timestamped):
     )
 
     @classmethod
-    async def record_envelope(
-        cls,
-        db: Any,
-        *,
-        wrapping_key_id: uuid.UUID,
-        algorithm: str,
-        wrapped_material: dict | str,
-        wrapping_key_version_id: uuid.UUID | None = None,
-        wrapped_key_id: uuid.UUID | None = None,
-        wrapped_key_version_id: uuid.UUID | None = None,
-        envelope_label: str | None = None,
-        material_format: str = "wrapped",
-        aad_hash: str | None = None,
-        status: str = "active",
-        envelope_context: dict | None = None,
-        envelope_metadata: dict | None = None,
-        tenant_id: uuid.UUID | None = None,
-        realm_id: uuid.UUID | None = None,
-    ) -> "KeyEnvelope":
-        return await create_record(
-            cls,
-            db,
-            {
-                "envelope_label": envelope_label,
-                "wrapping_key_id": wrapping_key_id,
-                "wrapping_key_version_id": wrapping_key_version_id,
-                "wrapped_key_id": wrapped_key_id,
-                "wrapped_key_version_id": wrapped_key_version_id,
-                "algorithm": algorithm,
-                "material_format": material_format,
-                "wrapped_material": wrapped_material,
-                "aad_hash": aad_hash,
-                "status": status,
-                "envelope_context": envelope_context,
-                "envelope_metadata": envelope_metadata,
-                "tenant_id": tenant_id,
-                "realm_id": realm_id,
-            },
-        )
-
-    @classmethod
     async def lookup_by_label(cls, db: Any, *, envelope_label: str, tenant_id: uuid.UUID | None = None) -> "KeyEnvelope | None":
         filters: dict[str, Any] = {"envelope_label": envelope_label}
         if tenant_id is not None:
             filters["tenant_id"] = tenant_id
         return await first_record(cls, db, filters)
-
-    @classmethod
-    async def list_for_wrapping_key(cls, db: Any, *, wrapping_key_id: uuid.UUID) -> list["KeyEnvelope"]:
-        return await list_records(cls, db, {"wrapping_key_id": wrapping_key_id})
-
-    @classmethod
-    async def disable(cls, db: Any, *, id: Any) -> "KeyEnvelope":
-        return await update_record(cls, db, id, {"status": "disabled"})
-
 
 __all__ = ["KeyEnvelope"]

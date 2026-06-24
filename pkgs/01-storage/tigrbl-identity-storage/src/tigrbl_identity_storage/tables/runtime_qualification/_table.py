@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records
+from .._ops import create_record, first_record
 
 
 class RuntimeQualificationRecord(RestOltpTable, GUIDPk, Timestamped):
@@ -28,10 +28,5 @@ class RuntimeQualificationRecord(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, qualification_id: str) -> "RuntimeQualificationRecord | None":
         return await first_record(cls, db, {"qualification_id": qualification_id})
-
-    @classmethod
-    async def list_for_release(cls, db: Any, *, release_id: str) -> list["RuntimeQualificationRecord"]:
-        return await list_records(cls, db, {"release_id": release_id})
-
 
 __all__ = ["RuntimeQualificationRecord"]

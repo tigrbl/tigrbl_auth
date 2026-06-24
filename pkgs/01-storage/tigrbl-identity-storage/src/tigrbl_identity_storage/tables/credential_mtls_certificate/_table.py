@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import first_record, list_records, record_id, update_record
 
 
 class CredentialMtlsCertificate(RestOltpTable, GUIDPk, Timestamped):
@@ -23,14 +23,6 @@ class CredentialMtlsCertificate(RestOltpTable, GUIDPk, Timestamped):
     san_email: Mapped[list | None] = acol(storage=S(JSON, nullable=True))
     status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
     certificate_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
-
-    @classmethod
-    async def bind_certificate(cls, db: Any, **payload: Any) -> "CredentialMtlsCertificate":
-        return await create_record(cls, db, payload)
-
-    @classmethod
-    async def lookup_by_thumbprint(cls, db: Any, *, certificate_thumbprint: str) -> "CredentialMtlsCertificate | None":
-        return await first_record(cls, db, {"certificate_thumbprint": certificate_thumbprint})
 
     @classmethod
     async def list_for_principal(cls, db: Any, *, principal_id: str) -> list["CredentialMtlsCertificate"]:

@@ -21,7 +21,7 @@ from tigrbl_identity_storage.framework import (
     TZDateTime,
     GUIDPk,
 )
-from .._ops import create_record, field, first_record, read_record, record_id, update_record, utc_now
+from .._ops import field, first_record, read_record, record_id, update_record, utc_now
 
 
 class DeviceAuthorizationIn(BaseModel):
@@ -68,37 +68,6 @@ class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
     tenant_id: Mapped[uuid.UUID | None] = acol(
         storage=S(PgUUID(as_uuid=True), fk=ForeignKeySpec(target="authn.tenants.id"), nullable=True, index=True)
     )
-
-    @classmethod
-    async def create_device_authorization(
-        cls,
-        db: Any,
-        *,
-        device_code: str,
-        user_code: str,
-        client_id: uuid.UUID,
-        expires_at: dt.datetime,
-        interval: int = 5,
-        scope: str | None = None,
-        audience: str | None = None,
-        resource: str | None = None,
-        tenant_id: uuid.UUID | None = None,
-    ) -> "DeviceCode":
-        return await create_record(
-            cls,
-            db,
-            {
-                "device_code": device_code,
-                "user_code": user_code,
-                "client_id": client_id,
-                "scope": scope,
-                "audience": audience,
-                "resource": resource,
-                "expires_at": expires_at,
-                "interval": interval,
-                "tenant_id": tenant_id,
-            },
-        )
 
     @classmethod
     async def approve(
@@ -168,7 +137,7 @@ class DeviceCode(RestOltpTable, GUIDPk, Timestamped):
         return await update_record(cls, db, record_id(row), {"consumed_at": utc_now()})
 
 
-from ._hooks import approve_device_code, deny_device_code
+from ._hooks import approve_device_code, deny_device_code  # noqa: E402
 
 
 __all__ = [

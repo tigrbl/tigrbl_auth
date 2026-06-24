@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import create_record, first_record, record_id, update_record
 
 
 class ProviderArtifact(RestOltpTable, GUIDPk, Timestamped):
@@ -32,10 +32,6 @@ class ProviderArtifact(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, artifact_id: str) -> "ProviderArtifact | None":
         return await first_record(cls, db, {"artifact_id": artifact_id})
-
-    @classmethod
-    async def list_by_kind(cls, db: Any, *, artifact_kind: str) -> list["ProviderArtifact"]:
-        return await list_records(cls, db, {"artifact_kind": artifact_kind})
 
     @classmethod
     async def disable(cls, db: Any, *, artifact_id: str) -> "ProviderArtifact | None":

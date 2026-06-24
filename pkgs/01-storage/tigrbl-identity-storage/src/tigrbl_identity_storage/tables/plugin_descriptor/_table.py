@@ -6,7 +6,7 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import RestOltpTable, GUIDPk, JSON, Mapped, S, String, Timestamped, acol
 
-from .._ops import create_record, first_record, list_records, record_id, update_record
+from .._ops import create_record, first_record, record_id, update_record
 
 
 class PluginDescriptorRecord(RestOltpTable, GUIDPk, Timestamped):
@@ -33,10 +33,6 @@ class PluginDescriptorRecord(RestOltpTable, GUIDPk, Timestamped):
     @classmethod
     async def lookup(cls, db: Any, *, plugin_id: str) -> "PluginDescriptorRecord | None":
         return await first_record(cls, db, {"plugin_id": plugin_id})
-
-    @classmethod
-    async def list_enabled(cls, db: Any) -> list["PluginDescriptorRecord"]:
-        return await list_records(cls, db, {"status": "enabled"})
 
     @classmethod
     async def disable(cls, db: Any, *, plugin_id: str) -> "PluginDescriptorRecord | None":
