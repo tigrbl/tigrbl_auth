@@ -67,6 +67,10 @@ def _ops_paths() -> list[Path]:
     ]
 
 
+def _op_spec(attr: object) -> object | None:
+    return getattr(getattr(attr, "__func__", attr), "__tigrbl_op_spec__", None)
+
+
 def test_storage_table_modules_do_not_define_classmethod_ops() -> None:
     offenders: list[str] = []
     for path in sorted(TABLES_DIR.glob("**/_table.py")):
@@ -92,6 +96,7 @@ def test_storage_ops_modules_do_not_use_op_ctx() -> None:
 
 def test_matrix_table_ops_are_collapsed_from_table_classes() -> None:
     unexpected_semantic_methods: list[str] = []
+    invalid_ctx_ops: list[str] = []
 
     for row in _matrix_rows():
         module = importlib.import_module(_package_module(row["module"]))
@@ -101,9 +106,15 @@ def test_matrix_table_ops_are_collapsed_from_table_classes() -> None:
         if (row["class"], method_name) in PRIVATE_HELPER_ROWS:
             continue
         if hasattr(cls, method_name):
-            unexpected_semantic_methods.append(f"{row['class']}.{method_name}")
+            attr = getattr(cls, method_name)
+            spec = _op_spec(attr)
+            if spec is None:
+                unexpected_semantic_methods.append(f"{row['class']}.{method_name}")
+            elif getattr(spec, "expose_routes", None) is not False:
+                invalid_ctx_ops.append(f"{row['class']}.{method_name}")
 
     assert unexpected_semantic_methods == []
+    assert invalid_ctx_ops == []
 
 
 def test_refactor_matrix_covers_every_original_table_classmethod_row() -> None:

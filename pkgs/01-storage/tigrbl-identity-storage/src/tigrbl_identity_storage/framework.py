@@ -7,7 +7,7 @@ from http import HTTPStatus
 from pydantic import EmailStr, constr
 from swarmauri_core.crypto.types import JWAAlg
 from tigrbl import ForeignKeySpec, HTMLResponse, JSONResponse, RedirectResponse, Response, RestOltpTable
-from tigrbl import TigrblApp, TigrblRouter, hook_ctx
+from tigrbl import TigrblApp, TigrblRouter, hook_ctx, op_ctx
 from tigrbl.config.constants import TIGRBL_AUTH_CONTEXT_ATTR
 from tigrbl.core.crud.params import Header
 from tigrbl.engine import HybridSession as AsyncSession, engine as build_engine
@@ -110,6 +110,7 @@ __all__ = [
     "build_engine",
     "constr",
     "hook_ctx",
+    "op_ctx",
     "relationship",
     "status",
 ]

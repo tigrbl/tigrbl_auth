@@ -73,7 +73,7 @@ from .pushed_authorization_request import (
     PushedAuthorizationRequestIn,
     PushedAuthorizationResponse,
 )
-from .consent import Consent, MyAccountAuthorizedAppOut, MyAccountConsentOut
+from .consent import Consent
 from .audit_event import AuditEvent
 from .logout_state import LogoutIn, LogoutOut, LogoutState
 from .key_rotation_event import KeyRotationEvent

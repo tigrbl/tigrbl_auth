@@ -26,7 +26,7 @@ MY_ACCOUNT_API_CONTRACT = my_account_package.MY_ACCOUNT_API_CONTRACT
 build_app = my_account_package.build_app
 
 account_session_module = import_module("tigrbl_identity_storage.tables.auth_session")
-account_consent_module = import_module("tigrbl_identity_storage.tables.consent")
+account_consent_module = import_module("tigrbl_identity_storage_runtime.account_consent")
 account_user_module = import_module("tigrbl_identity_storage.tables.user")
 
 
@@ -72,11 +72,13 @@ async def _user(db: AsyncSession, tenant_id, username: str, row_id) -> User:
 
 
 async def _client(db: AsyncSession, tenant_id, row_id) -> Client:
-    row = Client.new(
+    row = Client(
         tenant_id=tenant_id,
-        client_id=str(row_id),
-        client_secret="client-secret",
-        redirects=["https://client.example/callback"],
+        client_secret_hash=hash_pw("client-secret"),
+        redirect_uris="https://client.example/callback",
+        grant_types="authorization_code",
+        response_types="code",
+        is_active=True,
     )
     row.id = row_id
     row._fixture_id = row_id
@@ -256,8 +258,8 @@ async def test_my_account_handlers_are_current_subject_scoped(
 
     assert profile.id == str(alice_id)
     assert {item.id for item in sessions} == {str(alice_session_id)}
-    assert {item.id for item in consents} == {str(alice_consent_id)}
-    assert {item.client_id for item in apps} == {str(client_id)}
+    assert {item.id for item in consents} == {alice_consent_id}
+    assert {item.client_id for item in apps} == {client_id}
 
     with pytest.raises(Exception) as missing_session:
         await account_session_module.revoke_account_session(
@@ -287,4 +289,4 @@ async def test_my_account_handlers_are_current_subject_scoped(
     )
 
     assert revoked.status == "revoked"
-    assert revoked_consent.status == "revoked"
+    assert revoked_consent.state == "revoked"

@@ -122,10 +122,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
             {"AdminRealmOut", "AdminRealmProvisionIn", "AdminRealmUpdateIn"},
         ),
         ("tigrbl_identity_storage.tables.auth_session", {"MyAccountSessionOut"}),
-        (
-            "tigrbl_identity_storage.tables.consent",
-            {"MyAccountAuthorizedAppOut", "MyAccountConsentOut"},
-        ),
     ],
 )
 def test_table_backed_rest_schemas_live_on_table_modules(
@@ -246,16 +242,6 @@ def test_admin_route_handlers_live_on_storage_table_modules(
                 "revoke_account_session",
             },
         ),
-        (
-            "tigrbl_identity_storage.tables.consent",
-            "Consent",
-            {
-                "list_account_consents",
-                "revoke_account_consent",
-                "list_account_authorized_apps",
-                "revoke_account_authorized_app",
-            },
-        ),
     ],
 )
 def test_my_account_route_handlers_live_on_storage_table_modules(
@@ -364,6 +350,32 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
         name for name in route_names if hasattr(table_class, name)
     )
     assert missing_class_ops == []
+
+
+def test_consent_account_routes_live_above_storage_table_module() -> None:
+    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.account_consent")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.consent")
+    table_class = storage_module.Consent
+    route_names = {
+        "list_account_consents",
+        "revoke_account_consent",
+        "list_account_authorized_apps",
+        "revoke_account_authorized_app",
+    }
+    table_op_names = {
+        "list_for_user",
+        "revoke_for_user",
+        "revoke_for_client",
+    }
+
+    assert hasattr(runtime_module, "api")
+    assert hasattr(runtime_module, "router")
+    assert not hasattr(storage_module, "account_api")
+    assert not hasattr(storage_module, "account_router")
+    assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in table_op_names if not hasattr(table_class, name)) == []
+    assert sorted(name for name in table_op_names if not hasattr(table_class.handlers, name)) == []
 
 
 @pytest.mark.parametrize(

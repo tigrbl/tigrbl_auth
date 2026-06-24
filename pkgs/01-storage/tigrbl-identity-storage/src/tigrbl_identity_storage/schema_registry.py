@@ -6,15 +6,11 @@ from collections.abc import Iterable, Iterator, Mapping
 from types import MappingProxyType
 from typing import Any, Literal, get_args
 
-from .tables.consent import MyAccountAuthorizedAppOut, MyAccountConsentOut
 from .tables import TABLE_MODELS
 
 SchemaDirection = Literal["in", "out"]
 TableSchemaKey = tuple[str, str, SchemaDirection]
-EXTRA_OPENAPI_SCHEMAS = (
-    MyAccountAuthorizedAppOut,
-    MyAccountConsentOut,
-)
+EXTRA_OPENAPI_SCHEMAS = ()
 
 
 class SchemaRegistryError(RuntimeError):

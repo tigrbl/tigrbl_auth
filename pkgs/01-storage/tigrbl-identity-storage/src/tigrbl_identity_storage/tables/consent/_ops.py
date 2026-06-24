@@ -39,7 +39,10 @@ async def record_consent_async(
 
 async def revoke_consent_async(consent_id: UUID) -> Consent | None:
     async with storage_session() as db:
-        return await Consent.revoke_for_user(db, consent_id=consent_id)
+        return await Consent.handlers.revoke_for_user.core(
+            {"id": consent_id},
+            db=db,
+        )
 
 
 def record_consent(**kwargs):

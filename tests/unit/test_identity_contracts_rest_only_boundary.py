@@ -107,10 +107,6 @@ def test_identity_contracts_rest_schema_bridge_is_removed() -> None:
 def test_storage_tables_own_table_backed_rest_shapes() -> None:
     table_modules = {
         "tigrbl_identity_storage.tables.auth_session": {"MyAccountSessionOut"},
-        "tigrbl_identity_storage.tables.consent": {
-            "MyAccountAuthorizedAppOut",
-            "MyAccountConsentOut",
-        },
         "tigrbl_identity_storage.tables.realm": {
             "AdminRealmOut",
             "AdminRealmProvisionIn",
