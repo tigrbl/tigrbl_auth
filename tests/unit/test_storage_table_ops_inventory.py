@@ -298,6 +298,13 @@ DEFAULT_OP_COLLAPSED_METHODS = {
     "machine_identity.py": {
         "MachineIdentity": {"create_identity", "lookup_by_subject"}
     },
+    "operator_activity.py": {"OperatorActivity": {"record_activity", "list_activity"}},
+    "operator_audit_event.py": {
+        "OperatorAuditEvent": {"record_operator_audit", "list_operator_audit"}
+    },
+    "operator_transaction.py": {
+        "OperatorTransaction": {"record_transaction", "list_transactions"}
+    },
     "plugin_descriptor.py": {"PluginDescriptorRecord": {"list_enabled"}},
     "plugin_lifecycle_event.py": {"PluginLifecycleEventRecord": {"list_for_plugin"}},
     "principal.py": {"Principal": {"list_by_kind", "lookup_by_subject"}},

@@ -34,5 +34,8 @@ def test_operator_store_tables_own_operator_record_surfaces() -> None:
         "operator_activity.py": "OperatorActivity",
     }
     for filename, symbol in expected.items():
-        source = (STORAGE_ROOT / "tables" / filename).read_text(encoding="utf-8")
+        path = STORAGE_ROOT / "tables" / filename
+        if not path.exists():
+            path = STORAGE_ROOT / "tables" / filename.removesuffix(".py") / "_table.py"
+        source = path.read_text(encoding="utf-8")
         assert f"class {symbol}" in source

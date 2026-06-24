@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# ruff: noqa: F403,F405
+
 from .paths import *
 from .paths import (
     _OPERATOR_DB_FILENAME,
@@ -8,6 +10,11 @@ from .paths import (
     _write_metadata_snapshot,
 )
 from .app import operator_store_session
+from tigrbl_identity_storage.tables._ops import (
+    create_handler_record as _create_table_record,
+    field as _table_field,
+    list_handler_records as _list_table_records,
+)
 from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.operator_activity import OperatorActivity
 from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEvent
@@ -15,7 +22,10 @@ from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 from tigrbl_identity_storage.tables.operator_transaction import OperatorTransaction
 
-def _load_records_from_snapshot(path: Path, *, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+
+def _load_records_from_snapshot(
+    path: Path, *, tenant: str | None = None
+) -> dict[str, dict[str, Any]]:
     loaded = load_structured(path, default={})
     rows: dict[str, dict[str, Any]] = {}
     if isinstance(loaded, Mapping):
@@ -36,7 +46,9 @@ def _load_records_from_snapshot(path: Path, *, tenant: str | None = None) -> dic
     return rows
 
 
-async def _load_records_async(repo_root: Path, resource: str, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+async def _load_records_async(
+    repo_root: Path, resource: str, tenant: str | None = None
+) -> dict[str, dict[str, Any]]:
     state_root = operator_state_root(repo_root)
     db_path = operator_database_path(repo_root)
     had_db = db_path.exists()
@@ -44,10 +56,14 @@ async def _load_records_async(repo_root: Path, resource: str, tenant: str | None
         rows = await OperatorRecord.load_records(db, resource, tenant=tenant)
     if rows or had_db or db_path.exists():
         return rows
-    return _load_records_from_snapshot(resource_state_path(repo_root, resource), tenant=tenant)
+    return _load_records_from_snapshot(
+        resource_state_path(repo_root, resource), tenant=tenant
+    )
 
 
-def load_records(repo_root: Path, resource: str, tenant: str | None = None) -> dict[str, dict[str, Any]]:
+def load_records(
+    repo_root: Path, resource: str, tenant: str | None = None
+) -> dict[str, dict[str, Any]]:
     return run_async(_load_records_async(repo_root, resource, tenant=tenant))
 
 
@@ -67,7 +83,12 @@ def deep_merge(base: Mapping[str, Any], patch: Mapping[str, Any]) -> dict[str, A
     return merged
 
 
-def make_record(resource: str, record_id: str, context: OperationContext, patch: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def make_record(
+    resource: str,
+    record_id: str,
+    context: OperationContext,
+    patch: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     patch = dict(patch or {})
     now = utc_now()
     data = copy.deepcopy(dict(patch))
@@ -76,7 +97,9 @@ def make_record(resource: str, record_id: str, context: OperationContext, patch:
     else:
         tenant = context.tenant
     status = str(data.pop("status", default_status(resource)))
-    enabled = bool(data.pop("enabled", status not in {"disabled", "revoked", "retired", "locked"}))
+    enabled = bool(
+        data.pop("enabled", status not in {"disabled", "revoked", "retired", "locked"})
+    )
     return {
         "id": str(record_id),
         "resource": resource,
@@ -106,31 +129,54 @@ def matches_record(record: Mapping[str, Any], spec: FilterSpec) -> bool:
         ]
         data = record.get("data") or {}
         if isinstance(data, Mapping):
-            for key in ("name", "display_name", "tenant_id", "client_id", "username", "email", "kid", "software_id"):
+            for key in (
+                "name",
+                "display_name",
+                "tenant_id",
+                "client_id",
+                "username",
+                "email",
+                "kid",
+                "software_id",
+            ):
                 haystacks.append(str(data.get(key, "")).lower())
         if not any(term in item for item in haystacks):
             return False
     return True
 
 
-def sort_records(records: list[dict[str, Any]], sort_key: str = "id") -> list[dict[str, Any]]:
+def sort_records(
+    records: list[dict[str, Any]], sort_key: str = "id"
+) -> list[dict[str, Any]]:
     def _sort_value(item: Mapping[str, Any]) -> tuple[str, str]:
         data = item.get("data") if isinstance(item.get("data"), Mapping) else {}
         primary = data.get(sort_key, item.get(sort_key, ""))
         return (str(primary or ""), str(item.get("id", "")))
+
     return [copy.deepcopy(dict(item)) for item in sorted(records, key=_sort_value)]
 
 
-def list_records(repo_root: Path, resource: str, spec: FilterSpec | None = None, tenant: str | None = None) -> list[dict[str, Any]]:
+def list_records(
+    repo_root: Path,
+    resource: str,
+    spec: FilterSpec | None = None,
+    tenant: str | None = None,
+) -> list[dict[str, Any]]:
     spec = spec or FilterSpec()
     records = load_records(repo_root, resource, tenant=tenant).values()
-    filtered = [copy.deepcopy(dict(item)) for item in records if matches_record(item, spec)]
+    filtered = [
+        copy.deepcopy(dict(item)) for item in records if matches_record(item, spec)
+    ]
     sorted_items = sort_records(filtered, spec.sort)
     return sorted_items[spec.offset : spec.offset + spec.limit]
 
 
 def latest_event(repo_root: Path, *, predicate=None) -> dict[str, Any] | None:
-    items = sorted(read_jsonl(audit_log_path(repo_root)), key=lambda item: str(item.get("occurred_at", "")), reverse=True)
+    items = sorted(
+        read_jsonl(audit_log_path(repo_root)),
+        key=lambda item: str(item.get("occurred_at", "")),
+        reverse=True,
+    )
     if predicate is None:
         return items[0] if items else None
     for item in items:
@@ -195,6 +241,124 @@ def build_audit_entry(
     }
 
 
+def _operator_activity_record(payload: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "ts": payload.get("ts"),
+        "kind": payload.get("kind"),
+        "resource": payload.get("resource"),
+        "record_id": payload.get("id") or payload.get("record_id"),
+        "status": payload.get("status"),
+        "transaction_id": payload.get("transaction_id"),
+    }
+
+
+def _operator_activity_rows(rows: list[Any]) -> list[dict[str, Any]]:
+    return [
+        {
+            "seq": int(_table_field(row, "id") or 0),
+            "ts": _table_field(row, "ts"),
+            "kind": _table_field(row, "kind"),
+            "resource": _table_field(row, "resource"),
+            "id": _table_field(row, "record_id"),
+            "status": _table_field(row, "status"),
+            "transaction_id": _table_field(row, "transaction_id"),
+        }
+        for row in sorted(rows, key=lambda item: int(_table_field(item, "id") or 0))
+    ]
+
+
+def _operator_audit_record(payload: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "id": payload.get("id"),
+        "tenant_id": payload.get("tenant_id"),
+        "actor_user_id": payload.get("actor_user_id"),
+        "actor_client_id": payload.get("actor_client_id"),
+        "session_id": payload.get("session_id"),
+        "event_type": payload.get("event_type"),
+        "target_type": payload.get("target_type"),
+        "target_id": payload.get("target_id"),
+        "outcome": payload.get("outcome"),
+        "request_id": payload.get("request_id"),
+        "occurred_at": payload.get("occurred_at"),
+        "details_json": json.dumps(dict(payload.get("details") or {}), sort_keys=True),
+    }
+
+
+def _operator_audit_rows(rows: list[Any]) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": _table_field(row, "id"),
+            "tenant_id": _table_field(row, "tenant_id"),
+            "actor_user_id": _table_field(row, "actor_user_id"),
+            "actor_client_id": _table_field(row, "actor_client_id"),
+            "session_id": _table_field(row, "session_id"),
+            "event_type": _table_field(row, "event_type"),
+            "target_type": _table_field(row, "target_type"),
+            "target_id": _table_field(row, "target_id"),
+            "outcome": _table_field(row, "outcome"),
+            "request_id": _table_field(row, "request_id"),
+            "occurred_at": _table_field(row, "occurred_at"),
+            "details": json.loads(_table_field(row, "details_json") or "{}"),
+        }
+        for row in sorted(
+            rows,
+            key=lambda item: (
+                str(_table_field(item, "occurred_at", "")),
+                str(_table_field(item, "id", "")),
+            ),
+        )
+    ]
+
+
+def _operator_transaction_record(payload: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "transaction_id": payload.get("transaction_id"),
+        "ts": payload.get("ts"),
+        "command": payload.get("command"),
+        "resource": payload.get("resource"),
+        "status": payload.get("status"),
+        "record_id": payload.get("record_id"),
+        "changed_ids_json": json.dumps(
+            list(payload.get("changed_ids") or []), sort_keys=True
+        ),
+        "summary_json": json.dumps(dict(payload.get("summary") or {}), sort_keys=True),
+        "actor": payload.get("actor"),
+        "profile": payload.get("profile"),
+        "tenant": payload.get("tenant"),
+        "issuer": payload.get("issuer"),
+        "before_checksum": payload.get("before_checksum"),
+        "after_checksum": payload.get("after_checksum"),
+    }
+
+
+def _operator_transaction_rows(rows: list[Any]) -> list[dict[str, Any]]:
+    return [
+        {
+            "transaction_id": _table_field(row, "transaction_id"),
+            "ts": _table_field(row, "ts"),
+            "command": _table_field(row, "command"),
+            "resource": _table_field(row, "resource"),
+            "status": _table_field(row, "status"),
+            "record_id": _table_field(row, "record_id"),
+            "changed_ids": json.loads(_table_field(row, "changed_ids_json") or "[]"),
+            "summary": json.loads(_table_field(row, "summary_json") or "{}"),
+            "actor": _table_field(row, "actor"),
+            "profile": _table_field(row, "profile"),
+            "tenant": _table_field(row, "tenant"),
+            "issuer": _table_field(row, "issuer"),
+            "before_checksum": _table_field(row, "before_checksum"),
+            "after_checksum": _table_field(row, "after_checksum"),
+        }
+        for row in sorted(
+            rows,
+            key=lambda item: (
+                str(_table_field(item, "ts", "")),
+                str(_table_field(item, "transaction_id", "")),
+            ),
+        )
+    ]
+
+
 def _sync_resource_snapshot(repo_root: Path, resource: str) -> None:
     rows = load_records(repo_root, resource, tenant=None)
     write_structured(resource_state_path(repo_root, resource), rows, fmt="json")
@@ -221,27 +385,48 @@ async def _commit_mutation_async(
             dry_run=context.dry_run,
             now=utc_now(),
         )
-        await OperatorTransaction.record_transaction(db, transaction)
-        if audit_entry is not None:
-            await OperatorAuditEvent.record_operator_audit(db, audit_entry)
-        await OperatorActivity.record_activity(
-            db,
-            {
-                "ts": utc_now(),
-                "kind": context.command,
-                "resource": context.resource,
-                "id": transaction.get("record_id"),
-                "status": transaction.get("status"),
-                "transaction_id": transaction.get("transaction_id"),
-            },
+        await _create_table_record(
+            OperatorTransaction, db, _operator_transaction_record(transaction)
         )
-        await OperatorMetadata.upsert_metadata(db, "last_transaction_id", transaction.get("transaction_id"))
-        await OperatorMetadata.upsert_metadata(db, "last_transaction_status", transaction.get("status"))
+        if audit_entry is not None:
+            await _create_table_record(
+                OperatorAuditEvent, db, _operator_audit_record(audit_entry)
+            )
+        await _create_table_record(
+            OperatorActivity,
+            db,
+            _operator_activity_record(
+                {
+                    "ts": utc_now(),
+                    "kind": context.command,
+                    "resource": context.resource,
+                    "id": transaction.get("record_id"),
+                    "status": transaction.get("status"),
+                    "transaction_id": transaction.get("transaction_id"),
+                }
+            ),
+        )
+        await OperatorMetadata.upsert_metadata(
+            db, "last_transaction_id", transaction.get("transaction_id")
+        )
+        await OperatorMetadata.upsert_metadata(
+            db, "last_transaction_status", transaction.get("status")
+        )
         await OperatorMetadata.upsert_metadata(db, "repo_mutation_dependency", False)
 
 
-def commit_mutation(context: OperationContext, *, records: Mapping[str, Mapping[str, Any]], transaction: Mapping[str, Any], audit_entry: Mapping[str, Any] | None = None) -> None:
-    run_async(_commit_mutation_async(context, records=records, transaction=transaction, audit_entry=audit_entry))
+def commit_mutation(
+    context: OperationContext,
+    *,
+    records: Mapping[str, Mapping[str, Any]],
+    transaction: Mapping[str, Any],
+    audit_entry: Mapping[str, Any] | None = None,
+) -> None:
+    run_async(
+        _commit_mutation_async(
+            context, records=records, transaction=transaction, audit_entry=audit_entry
+        )
+    )
     if not context.dry_run:
         _sync_resource_snapshot(context.repo_root, context.resource)
     _append_jsonl_file(transaction_log_path(context.repo_root), transaction)
@@ -280,28 +465,44 @@ def _operator_table_for_log(path: Path) -> str | None:
 async def _read_operator_log_async(root: Path, table: str) -> list[dict[str, Any]]:
     async with operator_store_session(root) as db:
         if table == "transaction_log":
-            return await OperatorTransaction.list_transactions(db)
+            return _operator_transaction_rows(
+                await _list_table_records(OperatorTransaction, db)
+            )
         if table == "audit_log":
-            return await OperatorAuditEvent.list_operator_audit(db)
-        return await OperatorActivity.list_activity(db)
+            return _operator_audit_rows(
+                await _list_table_records(OperatorAuditEvent, db)
+            )
+        return _operator_activity_rows(await _list_table_records(OperatorActivity, db))
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     root = _operator_root_from_path(path)
     table = _operator_table_for_log(path)
-    if root is not None and table is not None and (root / _OPERATOR_DB_FILENAME).exists():
+    if (
+        root is not None
+        and table is not None
+        and (root / _OPERATOR_DB_FILENAME).exists()
+    ):
         return run_async(_read_operator_log_async(root, table))
     return _jsonl_rows(path)
 
 
-async def _append_operator_log_async(root: Path, table: str, payload: Mapping[str, Any]) -> None:
+async def _append_operator_log_async(
+    root: Path, table: str, payload: Mapping[str, Any]
+) -> None:
     async with operator_store_session(root) as db:
         if table == "transaction_log":
-            await OperatorTransaction.record_transaction(db, payload)
+            await _create_table_record(
+                OperatorTransaction, db, _operator_transaction_record(payload)
+            )
         elif table == "audit_log":
-            await OperatorAuditEvent.record_operator_audit(db, payload)
+            await _create_table_record(
+                OperatorAuditEvent, db, _operator_audit_record(payload)
+            )
         else:
-            await OperatorActivity.record_activity(db, payload)
+            await _create_table_record(
+                OperatorActivity, db, _operator_activity_record(payload)
+            )
 
 
 def append_jsonl(path: Path, payload: Mapping[str, Any]) -> None:
@@ -328,9 +529,19 @@ def operator_store_summary(repo_root: Path) -> dict[str, Any]:
     payload.update(
         {
             "database_present": operator_database_path(repo_root).exists(),
-            "audit_log_path": safe_display_path(audit_log_path(repo_root), repo_root, external_label="<operator-state>"),
-            "transaction_log_path": safe_display_path(transaction_log_path(repo_root), repo_root, external_label="<operator-state>"),
-            "activity_log_path": safe_display_path(activity_log_path(repo_root), repo_root, external_label="<operator-state>"),
+            "audit_log_path": safe_display_path(
+                audit_log_path(repo_root), repo_root, external_label="<operator-state>"
+            ),
+            "transaction_log_path": safe_display_path(
+                transaction_log_path(repo_root),
+                repo_root,
+                external_label="<operator-state>",
+            ),
+            "activity_log_path": safe_display_path(
+                activity_log_path(repo_root),
+                repo_root,
+                external_label="<operator-state>",
+            ),
         }
     )
     return payload
