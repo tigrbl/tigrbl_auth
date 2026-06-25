@@ -15,16 +15,7 @@ from tigrbl_identity_storage.tables.auth_session._ops import (
     rotate_session_cookie_secret_async,
     touch_session_async,
 )
-from tigrbl_identity_storage.tables.client_registration._ops import (
-    get_client_registration_async,
-    upsert_client_registration_async,
-)
 from tigrbl_identity_storage.tables.consent._ops import record_consent_async, revoke_consent_async
-from tigrbl_identity_storage.tables.logout_state._ops import (
-    get_latest_logout_for_session_async,
-    mark_logout_channel_async,
-    terminate_session_async,
-)
 from tigrbl_identity_storage.tables.revoked_token._ops import is_token_revoked_async, revoke_token_async
 from tigrbl_identity_storage.tables.token_record._ops import (
     introspect_token_record_async as introspect_token_async,
@@ -36,7 +27,7 @@ from tigrbl_auth.services.token_service import (
     issue_persisted_token_pair,
     redeem_refresh_token,
 )
-from tigrbl_auth.tables import AuditEvent, Client, Consent, Tenant, User
+from tigrbl_auth.tables import AuditEvent, AuthSession, Client, ClientRegistration, Consent, LogoutState, Tenant, User
 
 
 pytestmark = [pytest.mark.integration, pytest.mark.asyncio]
@@ -129,20 +120,41 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
     assert revoked is not None
     assert revoked.state == "revoked"
 
-    logout = await terminate_session_async(
-        session.id,
-        initiated_by="rp_logout",
-        reason="capability-test",
-        frontchannel_required=True,
-        backchannel_required=True,
-        metadata={"source": "capability"},
+    terminated_session = await AuthSession.handlers.terminate.core(
+        {
+            "path_params": {"id": session.id},
+            "payload": {"reason": "capability-test"},
+            "db": db_session,
+        }
+    )
+    assert terminated_session is not None
+    assert terminated_session.session_state == "terminated"
+
+    logout = await LogoutState.handlers.ensure_for_session.core(
+        {
+            "payload": {
+                "session_id": session.id,
+                "initiated_by": "rp_logout",
+                "reason": "capability-test",
+                "frontchannel_required": True,
+                "backchannel_required": True,
+                "metadata": {"source": "capability"},
+            },
+            "db": db_session,
+        }
     )
     assert logout is not None
     assert logout.status == "pending"
 
-    await mark_logout_channel_async(logout.id, channel="frontchannel")
-    await mark_logout_channel_async(logout.id, channel="backchannel")
-    latest_logout = await get_latest_logout_for_session_async(session.id)
+    await LogoutState.handlers.mark_channel.core(
+        {"path_params": {"id": logout.id}, "payload": {"logout_id": logout.id, "channel": "frontchannel"}, "db": db_session}
+    )
+    await LogoutState.handlers.mark_channel.core(
+        {"path_params": {"id": logout.id}, "payload": {"logout_id": logout.id, "channel": "backchannel"}, "db": db_session}
+    )
+    latest_logout = await LogoutState.handlers.latest_for_session.core(
+        {"payload": {"session_id": session.id}, "db": db_session}
+    )
     assert latest_logout is not None
     assert latest_logout.status == "complete"
 
@@ -171,23 +183,31 @@ async def test_session_logout_consent_and_audit_roundtrip_is_durable(db_session)
 async def test_client_registration_metadata_roundtrip_is_durable(db_session):
     tenant, _, client = await _identity_triplet(db_session)
 
-    registration = await upsert_client_registration_async(
-        client_id=client.id,
-        tenant_id=tenant.id,
-        metadata={
-            "redirect_uris": ["https://client.example/callback"],
-            "token_endpoint_auth_method": "client_secret_basic",
-            "frontchannel_logout_uri": "https://client.example/frontchannel-logout",
-        },
-        contacts=["ops@example.com"],
-        software_id="capability-client",
-        software_version="9.0",
-        registration_access_token_hash="rat-hash",
-        registration_client_uri="https://issuer.example/register/" + str(client.id),
+    registration = await ClientRegistration.handlers.upsert.core(
+        {
+            "payload": {
+                "client_id": client.id,
+                "tenant_id": tenant.id,
+                "metadata": {
+                    "redirect_uris": ["https://client.example/callback"],
+                    "token_endpoint_auth_method": "client_secret_basic",
+                    "frontchannel_logout_uri": "https://client.example/frontchannel-logout",
+                },
+                "contacts": ["ops@example.com"],
+                "software_id": "capability-client",
+                "software_version": "9.0",
+                "registration_access_token_hash": "rat-hash",
+                "registration_client_uri": "https://issuer.example/register/" + str(client.id),
+            },
+            "db": db_session,
+        }
     )
     assert registration.client_id == client.id
 
-    persisted = await get_client_registration_async(client.id)
+    result = await ClientRegistration.handlers.list.core(
+        {"payload": {"filters": {"client_id": client.id}}, "db": db_session}
+    )
+    persisted = result["items"][0] if isinstance(result, dict) else result[0]
     assert persisted is not None
     assert persisted.software_id == "capability-client"
     assert persisted.registration_metadata["token_endpoint_auth_method"] == "client_secret_basic"

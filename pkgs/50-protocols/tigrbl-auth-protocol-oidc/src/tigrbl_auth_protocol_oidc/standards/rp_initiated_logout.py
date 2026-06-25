@@ -52,12 +52,38 @@ OWNER = StandardOwner(
 
 def _persistence():
     from tigrbl_identity_storage.tables.auth_session._ops import get_active_session_async
-    from tigrbl_identity_storage.tables.client_registration._ops import get_client_registration_async
-    from tigrbl_identity_storage.tables.logout_state._ops import (
-        get_latest_logout_for_session_async,
-        terminate_session_async,
-        update_logout_metadata_async,
-    )
+    from tigrbl_identity_storage.tables.auth_session import AuthSession
+    from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+    from tigrbl_identity_storage.tables.engine import storage_session
+    from tigrbl_identity_storage.tables.logout_state import LogoutState
+
+    async def get_client_registration_async(client_id):
+        async with storage_session() as db:
+            result = await ClientRegistration.handlers.list.core(
+                {"payload": {"filters": {"client_id": client_id}}, "db": db}
+            )
+        if isinstance(result, dict) and isinstance(result.get("items"), list):
+            rows = result["items"]
+        else:
+            rows = result if isinstance(result, list) else []
+        return rows[0] if rows else None
+
+    async def get_latest_logout_for_session_async(session_id):
+        async with storage_session() as db:
+            return await LogoutState.handlers.latest_for_session.core({"payload": {"session_id": session_id}, "db": db})
+
+    async def terminate_session_async(session_id, **kwargs):
+        async with storage_session() as db:
+            session = await AuthSession.handlers.terminate.core({"path_params": {"id": session_id}, "payload": kwargs, "db": db})
+            if session is None:
+                return None
+            return await LogoutState.handlers.ensure_for_session.core({"payload": {"session_id": session_id, **kwargs}, "db": db})
+
+    async def update_logout_metadata_async(logout_id, **kwargs):
+        async with storage_session() as db:
+            return await LogoutState.handlers.update_metadata.core(
+                {"path_params": {"id": logout_id}, "payload": {"logout_id": logout_id, **kwargs}, "db": db}
+            )
 
     return SimpleNamespace(
         get_active_session_async=get_active_session_async,

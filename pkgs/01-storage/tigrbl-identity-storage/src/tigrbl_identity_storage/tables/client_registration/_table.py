@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+from datetime import timezone
 from typing import Any
 
 from tigrbl_identity_storage.framework import (
@@ -23,6 +24,7 @@ from tigrbl_identity_storage.framework import (
     PgUUID,
     UUID,
     constr,
+    op_ctx,
 )
 
 _tenant_slug = constr(strip_whitespace=True, min_length=3, max_length=120)
@@ -140,6 +142,67 @@ class ClientRegistration(RestOltpTable, GUIDPk, Timestamped, TenantColumn):
     )
     rotated_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True))
     disabled_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
+
+
+def _items(result: Any) -> list[Any]:
+    if isinstance(result, dict) and isinstance(result.get("items"), list):
+        return result["items"]
+    if isinstance(result, list):
+        return result
+    if isinstance(result, tuple):
+        return list(result)
+    return [] if result is None else [result]
+
+
+def _created(result: Any) -> Any:
+    if isinstance(result, dict):
+        for key in ("item", "result", "data"):
+            if key in result:
+                return result[key]
+    return result
+
+
+def _field(row: Any, key: str) -> Any:
+    if row is None:
+        return None
+    if isinstance(row, dict):
+        return row.get(key)
+    return getattr(row, key, None)
+
+
+@op_ctx(
+    bind=ClientRegistration,
+    alias="upsert",
+    target="custom",
+    arity="collection",
+    rest=False,
+)
+async def upsert(cls: type[ClientRegistration], ctx: dict[str, Any]) -> ClientRegistration:
+    db = ctx["db"]
+    payload = dict(ctx.get("payload") or {})
+    client_id = payload["client_id"]
+    result = await cls.handlers.list.core({"payload": {"filters": {"client_id": client_id}}, "db": db})
+    matches = _items(result)
+    row = matches[0] if matches else None
+    merged = {
+        "client_id": client_id,
+        "tenant_id": payload.get("tenant_id") or _field(row, "tenant_id"),
+        "registration_metadata": payload.get("metadata")
+        or payload.get("registration_metadata")
+        or _field(row, "registration_metadata"),
+        "contacts": list(payload["contacts"]) if payload.get("contacts") is not None else _field(row, "contacts"),
+        "software_id": payload.get("software_id") or _field(row, "software_id"),
+        "software_version": payload.get("software_version") or _field(row, "software_version"),
+        "registration_access_token_hash": payload.get("registration_access_token_hash")
+        or _field(row, "registration_access_token_hash"),
+        "registration_client_uri": payload.get("registration_client_uri") or _field(row, "registration_client_uri"),
+        "issued_at": _field(row, "issued_at") or dt.datetime.now(timezone.utc),
+    }
+    if row is None:
+        return _created(await cls.handlers.create.core({"payload": merged, "db": db}))
+    return _created(
+        await cls.handlers.update.core({"path_params": {"id": _field(row, "id")}, "payload": merged, "db": db})
+    )
 
 
 __all__ = [

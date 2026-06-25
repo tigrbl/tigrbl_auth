@@ -59,7 +59,14 @@ def _persistence():
         rotate_session_cookie_secret_async,
         touch_session_async,
     )
-    from tigrbl_identity_storage.tables.logout_state._ops import terminate_session_async
+    from tigrbl_identity_storage.tables.auth_session import AuthSession
+    from tigrbl_identity_storage.tables.engine import storage_session
+
+    async def terminate_session_async(session_id, **kwargs):
+        async with storage_session() as db:
+            return await AuthSession.handlers.terminate.core(
+                {"path_params": {"id": session_id}, "payload": kwargs, "db": db}
+            )
 
     return SimpleNamespace(
         bind_session_client_async=bind_session_client_async,

@@ -26,6 +26,7 @@ from tigrbl_identity_storage.framework import (
     UUID,
     Field,
     constr,
+    op_ctx,
     status,
 )
 from ..user import MyAccountMutationOut, User, _current_principal_dependency, _iso, _not_found_uuid
@@ -80,6 +81,51 @@ class AuthSession(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
     last_seen_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True))
     ended_at: Mapped[dt.datetime | None] = acol(storage=S(TZDateTime, nullable=True, index=True))
     logout_reason: Mapped[str | None] = acol(storage=S(String(128), nullable=True))
+
+
+def _created(result: Any) -> Any:
+    if isinstance(result, dict):
+        for key in ("item", "result", "data"):
+            if key in result:
+                return result[key]
+    return result
+
+
+def _field(row: Any, key: str, default: Any = None) -> Any:
+    if row is None:
+        return default
+    if isinstance(row, dict):
+        return row.get(key, default)
+    return getattr(row, key, default)
+
+
+@op_ctx(
+    bind=AuthSession,
+    alias="terminate",
+    target="custom",
+    arity="member",
+    rest=False,
+)
+async def terminate(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession | None:
+    payload = dict(ctx.get("payload") or {})
+    session_id = payload.get("session_id") or payload.get("id") or dict(ctx.get("path_params") or {}).get("id")
+    row = await cls.handlers.read.core({"path_params": {"id": session_id}, "db": ctx["db"]})
+    if row is None:
+        return None
+    now = utc_now()
+    return _created(
+        await cls.handlers.update.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {
+                    "session_state": payload.get("session_state") or "terminated",
+                    "ended_at": _field(row, "ended_at") or now,
+                    "logout_reason": payload.get("reason") or _field(row, "logout_reason") or "logout",
+                },
+                "db": ctx["db"],
+            }
+        )
+    )
 
 
 account_api = account_router = TigrblRouter()

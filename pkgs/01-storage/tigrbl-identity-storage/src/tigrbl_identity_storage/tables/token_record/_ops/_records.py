@@ -10,8 +10,6 @@ from ..._ops import (
     field,
     first_handler_record,
     record_id,
-    to_datetime,
-    to_uuid,
     token_hash,
 )
 from ...engine import storage_session
@@ -35,23 +33,22 @@ async def upsert_token_record_async(
     token_kind = token_kind or str(claims.get("kind") or claims.get("typ") or "access")
     try:
         async with storage_session() as db:
-            record = await first_handler_record(TokenRecord, db, {"token_hash": digest})
-            now = datetime.now(timezone.utc)
-            await TokenRecord.persist_issued_token(
-                db,
-                token_hash=digest,
-                claims=claims,
-                token_kind=token_kind,
-                token_type_hint=token_type_hint or field(record, "token_type_hint") or token_kind,
-                refresh_family_id=refresh_family_id or field(record, "refresh_family_id"),
-                refresh_parent_hash=refresh_parent_hash or field(record, "refresh_parent_hash"),
-                refresh_successor_hash=refresh_successor_hash or field(record, "refresh_successor_hash"),
-                issued_at=to_datetime(claims.get("iat")) or field(record, "issued_at") or now,
-                expires_at=to_datetime(claims.get("exp")) or field(record, "expires_at"),
-                used_at=used_at or field(record, "used_at"),
-                reuse_detected_at=reuse_detected_at or field(record, "reuse_detected_at"),
-                tenant_id=to_uuid(claims.get("tid") or field(record, "tenant_id")),
-                client_id=to_uuid(claims.get("client_id") or claims.get("azp") or field(record, "client_id")),
+            await TokenRecord.handlers.persist_issued.core(
+                {
+                    "payload": {
+                        "token_hash": digest,
+                        "claims": claims,
+                        "token_kind": token_kind,
+                        "token_type_hint": token_type_hint or token_kind,
+                        "refresh_family_id": refresh_family_id,
+                        "refresh_parent_hash": refresh_parent_hash,
+                        "refresh_successor_hash": refresh_successor_hash,
+                        "issued_at": datetime.now(timezone.utc),
+                        "used_at": used_at,
+                        "reuse_detected_at": reuse_detected_at,
+                    },
+                    "db": db,
+                }
             )
     except Exception:
         return digest
@@ -88,11 +85,8 @@ async def mark_token_used_async(
     successor_hash = token_hash(successor_token) if successor_token else None
     try:
         async with storage_session() as db:
-            await TokenRecord.mark_rotated(
-                db,
-                token_hash=digest,
-                successor_hash=successor_hash,
-                reason=reason,
+            await TokenRecord.handlers.mark_rotated.core(
+                {"payload": {"token_hash": digest, "successor_hash": successor_hash, "reason": reason}, "db": db}
             )
     except Exception:
         return digest
@@ -107,29 +101,33 @@ async def revoke_refresh_family_async(
 ) -> int:
     if not family_id:
         return 0
-    from ...revoked_token._ops import persist_revoked_token_hash
+    from ...revoked_token._table import RevokedToken
 
     reuse_hash = token_hash(reuse_token) if reuse_token else None
     revoked_count = 0
     try:
         async with storage_session() as db:
-            rows = await TokenRecord.revoke_family(
-                db,
-                refresh_family_id=family_id,
-                reason=reason,
-                reuse_token_hash=reuse_hash,
+            rows = await TokenRecord.handlers.revoke_family.core(
+                {
+                    "payload": {"refresh_family_id": family_id, "reason": reason, "reuse_token_hash": reuse_hash},
+                    "db": db,
+                }
             )
             for row in rows:
                 token_record_hash = field(row, "token_hash")
-                await persist_revoked_token_hash(
-                    db,
-                    token_hash=token_record_hash,
-                    token_type_hint=field(row, "token_type_hint"),
-                    reason=reason,
-                    subject=field(row, "subject"),
-                    tenant_id=field(row, "tenant_id"),
-                    client_id=field(row, "client_id"),
-                    expires_at=field(row, "expires_at"),
+                await RevokedToken.handlers.record_hash.core(
+                    {
+                        "payload": {
+                            "token_hash": token_record_hash,
+                            "token_type_hint": field(row, "token_type_hint"),
+                            "reason": reason,
+                            "subject": field(row, "subject"),
+                            "tenant_id": field(row, "tenant_id"),
+                            "client_id": field(row, "client_id"),
+                            "expires_at": field(row, "expires_at"),
+                        },
+                        "db": db,
+                    }
                 )
                 revoked_count += 1
     except Exception:

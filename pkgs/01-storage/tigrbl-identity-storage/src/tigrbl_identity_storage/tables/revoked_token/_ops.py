@@ -41,15 +41,19 @@ async def persist_revoked_token_hash(
     client_id: Any = None,
     expires_at: Any = None,
 ) -> RevokedToken:
-    return await RevokedToken.revoke_token(
-        db,
-        token_hash=token_hash,
-        token_type_hint=token_type_hint,
-        reason=reason,
-        subject=subject,
-        tenant_id=tenant_id,
-        client_id=client_id,
-        expires_at=expires_at,
+    return await RevokedToken.handlers.record_hash.core(
+        {
+            "payload": {
+                "token_hash": token_hash,
+                "token_type_hint": token_type_hint,
+                "reason": reason,
+                "subject": subject,
+                "tenant_id": tenant_id,
+                "client_id": client_id,
+                "expires_at": expires_at,
+            },
+            "db": db,
+        }
     )
 
 
