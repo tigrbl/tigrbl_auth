@@ -16,7 +16,7 @@ from tigrbl import TigrblRouter
 from tigrbl_identity_storage.tables.user import admin_api as admin_auth_api
 from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
-from tigrbl_identity_storage.tables.tenant import admin_api as admin_tenants_api
+from tigrbl_identity_storage_runtime.tenant_admin import router as admin_tenants_router
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_authz_policy_admin_gate import ADMIN_OPENAPI_SECURITY_DEPENDENCIES
 from tigrbl_identity_storage import ensure_identity_storage_importable
@@ -76,7 +76,7 @@ TABLE_RESOURCES = [
 ADMIN_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
     {"mount_group": "admin_auth", "router": admin_auth_api},
     {"mount_group": "admin_realms", "router": admin_realms_api},
-    {"mount_group": "admin_tenants", "router": admin_tenants_api},
+    {"mount_group": "admin_tenants", "router": admin_tenants_router},
     {"mount_group": "admin_identities", "router": admin_identities_api},
 )
 
@@ -326,7 +326,7 @@ def include_admin_routes(
     if deployment.flag_enabled("surface_admin_enabled"):
         if deployment.product_surface == "platform-admin-api":
             router.include_router(admin_realms_api)
-            router.include_router(admin_tenants_api)
+            router.include_router(admin_tenants_router)
         selected_table_resources = _admin_table_resources(deployment)
         if selected_table_resources:
             if deployment.product_surface == "platform-admin-api":

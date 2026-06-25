@@ -3,6 +3,10 @@
 from __future__ import annotations
 
 import warnings
+from datetime import datetime
+from typing import Any
+from uuid import UUID
+
 from tigrbl_identity_storage.tables._ops import token_hash
 from tigrbl_identity_storage.tables.audit_event import append_audit_event, append_audit_event_async
 from tigrbl_identity_storage.tables.auth_session._ops import (
@@ -19,12 +23,6 @@ from tigrbl_identity_storage.tables.auth_session._ops import (
     touch_session,
     touch_session_async,
 )
-from tigrbl_identity_storage.tables.consent._ops import (
-    record_consent,
-    record_consent_async,
-    revoke_consent,
-    revoke_consent_async,
-)
 from tigrbl_identity_storage.tables.revoked_token._ops import (
     is_token_revoked,
     is_token_revoked_async,
@@ -36,6 +34,7 @@ from tigrbl_identity_storage.tables.revoked_token._ops import (
 from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.auth_session import AuthSession
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+from tigrbl_identity_storage.tables.consent import Consent
 from tigrbl_identity_storage.tables.engine import storage_session
 from tigrbl_identity_storage.tables.logout_state import LogoutState
 from tigrbl_identity_storage.tables.revoked_token import RevokedToken
@@ -57,6 +56,47 @@ def _items(result):
     if isinstance(result, tuple):
         return list(result)
     return [] if result is None else [result]
+
+
+async def record_consent_async(
+    *,
+    user_id: UUID,
+    tenant_id: UUID,
+    client_id: UUID,
+    scope: str,
+    claims: dict[str, Any] | None = None,
+    expires_at: datetime | None = None,
+) -> Consent:
+    async with storage_session() as db:
+        return await Consent.handlers.create.core(
+            {
+                "payload": {
+                    "user_id": user_id,
+                    "tenant_id": tenant_id,
+                    "client_id": client_id,
+                    "scope": scope,
+                    "claims": claims,
+                    "expires_at": expires_at,
+                    "state": "active",
+                },
+                "db": db,
+            }
+        )
+
+
+async def revoke_consent_async(consent_id: UUID) -> Consent | None:
+    async with storage_session() as db:
+        return await Consent.handlers.revoke_for_user.core(
+            {"path_params": {"id": consent_id}, "payload": {"id": consent_id}, "db": db}
+        )
+
+
+def record_consent(**kwargs):
+    return run_async(record_consent_async(**kwargs))
+
+
+def revoke_consent(consent_id):
+    return run_async(revoke_consent_async(consent_id))
 
 
 async def get_client_registration_async(client_id):

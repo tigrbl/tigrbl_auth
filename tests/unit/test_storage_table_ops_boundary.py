@@ -92,12 +92,6 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
         "admin_list_realms",
         "admin_update_realm",
     },
-    "tenant.py": {
-        "admin_create_tenant",
-        "admin_delete_tenant",
-        "admin_list_tenants",
-        "admin_update_tenant",
-    },
     "user.py": {
         "admin_change_password",
         "admin_create_identity",

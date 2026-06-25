@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 from typing import Any
+import uuid
 
 from tigrbl_identity_storage.framework import (
     ForeignKeySpec,
@@ -22,8 +23,6 @@ from tigrbl_identity_storage.framework import (
     acol,
     op_ctx,
 )
-
-from .._ops import list_records, to_uuid, update_record, utc_now
 
 
 class Consent(RestOltpTable, GUIDPk, Timestamped, UserColumn, TenantColumn):
@@ -57,11 +56,36 @@ def _db(ctx: dict[str, Any]) -> Any:
     return ctx.get("db") or ctx.get("session")
 
 
+def _items(result: Any) -> list[Any]:
+    if isinstance(result, dict) and isinstance(result.get("items"), list):
+        return result["items"]
+    if isinstance(result, list):
+        return result
+    if isinstance(result, tuple):
+        return list(result)
+    return [] if result is None else [result]
+
+
+def _to_uuid(value: Any) -> uuid.UUID | None:
+    if value in {None, ""}:
+        return None
+    if isinstance(value, uuid.UUID):
+        return value
+    try:
+        return uuid.UUID(str(value))
+    except (TypeError, ValueError):
+        return None
+
+
+def _utc_now() -> dt.datetime:
+    return dt.datetime.now(dt.timezone.utc)
+
+
 def _principal_filters(ctx: dict[str, Any]) -> dict[str, Any]:
     payload = _payload(ctx)
     filters: dict[str, Any] = {}
-    user_id = to_uuid(payload.get("user_id"))
-    tenant_id = to_uuid(payload.get("tenant_id"))
+    user_id = _to_uuid(payload.get("user_id"))
+    tenant_id = _to_uuid(payload.get("tenant_id"))
     if user_id is not None:
         filters["user_id"] = user_id
     if tenant_id is not None:
@@ -86,7 +110,11 @@ def _update_response_schema(table: type) -> type:
     response_schema=_list_response_schema,
 )
 async def list_for_user(cls: type[Consent], ctx: dict[str, Any]) -> list[Consent]:
-    return await list_records(cls, _db(ctx), _principal_filters(ctx))
+    return _items(
+        await cls.handlers.list.core(
+            {"payload": {"filters": _principal_filters(ctx)}, "db": _db(ctx)}
+        )
+    )
 
 
 @op_ctx(
@@ -99,19 +127,24 @@ async def list_for_user(cls: type[Consent], ctx: dict[str, Any]) -> list[Consent
 )
 async def revoke_for_user(cls: type[Consent], ctx: dict[str, Any]) -> Consent | None:
     filters = _principal_filters(ctx)
-    consent_id = to_uuid(_path_params(ctx).get("id") or _path_params(ctx).get("consent_id") or _payload(ctx).get("id"))
+    consent_id = _to_uuid(_path_params(ctx).get("id") or _path_params(ctx).get("consent_id") or _payload(ctx).get("id"))
     if consent_id is None:
         return None
     filters["id"] = consent_id
-    rows = await list_records(cls, _db(ctx), filters)
+    rows = _items(
+        await cls.handlers.list.core(
+            {"payload": {"filters": filters}, "db": _db(ctx)}
+        )
+    )
     if not rows:
         return None
     row = rows[0]
-    return await update_record(
-        cls,
-        _db(ctx),
-        row.id,
-        {"state": "revoked", "revoked_at": row.revoked_at or utc_now()},
+    return await cls.handlers.update.core(
+        {
+            "path_params": {"id": row.id},
+            "payload": {"state": "revoked", "revoked_at": row.revoked_at or _utc_now()},
+            "db": _db(ctx),
+        }
     )
 
 
@@ -125,7 +158,7 @@ async def revoke_for_user(cls: type[Consent], ctx: dict[str, Any]) -> Consent | 
 )
 async def revoke_for_client(cls: type[Consent], ctx: dict[str, Any]) -> list[Consent]:
     filters = _principal_filters(ctx)
-    client_id = to_uuid(
+    client_id = _to_uuid(
         _path_params(ctx).get("client_id")
         or _path_params(ctx).get("id")
         or _payload(ctx).get("client_id")
@@ -133,16 +166,21 @@ async def revoke_for_client(cls: type[Consent], ctx: dict[str, Any]) -> list[Con
     if client_id is None:
         return []
     filters["client_id"] = client_id
-    rows = await list_records(cls, _db(ctx), filters)
-    now = utc_now()
+    rows = _items(
+        await cls.handlers.list.core(
+            {"payload": {"filters": filters}, "db": _db(ctx)}
+        )
+    )
+    now = _utc_now()
     updated: list[Consent] = []
     for row in rows:
         updated.append(
-            await update_record(
-                cls,
-                _db(ctx),
-                row.id,
-                {"state": "revoked", "revoked_at": row.revoked_at or now},
+            await cls.handlers.update.core(
+                {
+                    "path_params": {"id": row.id},
+                    "payload": {"state": "revoked", "revoked_at": row.revoked_at or now},
+                    "db": _db(ctx),
+                }
             )
         )
     return updated

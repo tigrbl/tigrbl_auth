@@ -39,7 +39,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "admin_auth.py": "tigrbl_identity_storage.tables.user",
     "admin_identities.py": "tigrbl_identity_storage.tables.user",
     "admin_realms.py": "tigrbl_identity_storage.tables.realm",
-    "admin_tenants.py": "tigrbl_identity_storage.tables.tenant",
+    "admin_tenants.py": "tigrbl_identity_storage_runtime.tenant_admin",
     "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
     "authorize.py": "tigrbl_identity_storage.tables.auth_code",
     "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
@@ -90,7 +90,7 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
     target: str,
 ) -> None:
     path = SERVER_ROOT / "tigrbl_identity_server" / "rest" / "routers" / route_file
-    assert target.startswith("tigrbl_identity_storage.tables")
+    assert target.startswith(("tigrbl_identity_storage.tables", "tigrbl_identity_storage_runtime"))
     assert not path.exists()
 
 
@@ -179,15 +179,6 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
             },
         ),
         (
-            "tigrbl_identity_storage.tables.tenant",
-            {
-                "admin_list_tenants",
-                "admin_create_tenant",
-                "admin_update_tenant",
-                "admin_delete_tenant",
-            },
-        ),
-        (
             "tigrbl_identity_storage.tables.realm",
             {
                 "admin_list_realms",
@@ -219,6 +210,27 @@ def test_admin_route_handlers_live_on_storage_table_modules(
     assert missing == []
     missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
     assert missing_class_ops == []
+
+
+def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
+    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.tenant_admin")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.tenant")
+    table_class = storage_module.Tenant
+    route_names = {
+        "admin_list_tenants",
+        "admin_create_tenant",
+        "admin_update_tenant",
+        "admin_delete_tenant",
+    }
+
+    assert hasattr(runtime_module, "admin_router")
+    assert hasattr(runtime_module, "router")
+    assert not hasattr(runtime_module, "admin_api")
+    assert not hasattr(storage_module, "admin_api")
+    assert not hasattr(storage_module, "admin_router")
+    assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(table_class, name)) == []
 
 
 @pytest.mark.parametrize(

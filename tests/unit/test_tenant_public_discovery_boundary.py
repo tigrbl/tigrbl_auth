@@ -29,7 +29,7 @@ from tigrbl_auth_protocol_oidc.tenant_discovery import (  # noqa: E402
     resolve_tenant_trust_domain_authority,
     tenant_issuer,
 )
-from tigrbl_identity_storage.tables.tenant import enabled_tenant_record  # noqa: E402
+from tigrbl_identity_storage_runtime.tenant_state import enabled_tenant_record  # noqa: E402
 
 
 ROOT_ISSUER = "https://id.example.com"
