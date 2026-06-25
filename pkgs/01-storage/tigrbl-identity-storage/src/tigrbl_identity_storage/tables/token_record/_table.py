@@ -238,8 +238,8 @@ async def revoke_family(cls: type[TokenRecord], ctx: dict[str, Any]) -> list[Tok
     return updated
 
 
-@op_ctx(bind=TokenRecord, alias="introspect_record", target="custom", arity="collection", rest=False)
-async def introspect_record(cls: type[TokenRecord], ctx: dict[str, Any]) -> dict[str, Any]:
+@op_ctx(bind=TokenRecord, alias="introspect", target="custom", arity="collection", rest=False)
+async def introspect(cls: type[TokenRecord], ctx: dict[str, Any]) -> dict[str, Any]:
     payload = dict(ctx.get("payload") or {})
     digest = payload.get("token_hash") or token_hash(payload["token"])
     now = dt.datetime.now(dt.timezone.utc)

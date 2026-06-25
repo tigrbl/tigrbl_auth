@@ -499,7 +499,7 @@ async def introspect_token_async(token):
     async with storage_session() as db:
         if await RevokedToken.handlers.is_hash_revoked.core({"payload": {"token_hash": digest}, "db": db}):
             return {"active": False}
-        return await TokenRecord.handlers.introspect_record.core({"payload": {"token_hash": digest}, "db": db})
+        return await TokenRecord.handlers.introspect.core({"payload": {"token_hash": digest}, "db": db})
 
 
 introspect_token_record_async = introspect_token_async
