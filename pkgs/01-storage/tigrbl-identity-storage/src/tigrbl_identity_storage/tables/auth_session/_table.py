@@ -10,7 +10,6 @@ from tigrbl_identity_storage.framework import (
     BaseModel,
     Depends,
     HTTPException,
-    Request,
     TenantColumn,
     Timestamped,
     TigrblRouter,
@@ -128,8 +127,122 @@ async def terminate(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession 
     )
 
 
+@op_ctx(
+    bind=AuthSession,
+    alias="touch",
+    target="custom",
+    arity="member",
+    rest=False,
+)
+async def touch(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession | None:
+    payload = dict(ctx.get("payload") or {})
+    session_id = payload.get("session_id") or payload.get("id") or dict(ctx.get("path_params") or {}).get("id")
+    row = await cls.handlers.read.core({"path_params": {"id": session_id}, "db": ctx["db"]})
+    if row is None:
+        return None
+    return _created(
+        await cls.handlers.update.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {"last_seen_at": utc_now()},
+                "db": ctx["db"],
+            }
+        )
+    )
+
+
+@op_ctx(
+    bind=AuthSession,
+    alias="get_active",
+    target="custom",
+    arity="member",
+    rest=False,
+)
+async def get_active(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession | None:
+    payload = dict(ctx.get("payload") or {})
+    session_id = payload.get("session_id") or payload.get("id") or dict(ctx.get("path_params") or {}).get("id")
+    row = await cls.handlers.read.core({"path_params": {"id": session_id}, "db": ctx["db"]})
+    if row is None:
+        return None
+    if _field(row, "ended_at") is not None or str(_field(row, "session_state")).lower() in {
+        "terminated",
+        "ended",
+        "revoked",
+    }:
+        return None
+    expires_at = _field(row, "expires_at")
+    if expires_at is not None:
+        expiry = expires_at if expires_at.tzinfo is not None else expires_at.replace(tzinfo=dt.timezone.utc)
+        if expiry <= dt.datetime.now(dt.timezone.utc):
+            await cls.handlers.update.core(
+                {
+                    "path_params": {"id": session_id},
+                    "payload": {
+                        "session_state": "expired",
+                        "ended_at": _field(row, "ended_at") or utc_now(),
+                    },
+                    "db": ctx["db"],
+                }
+            )
+            return None
+    return row
+
+
+@op_ctx(
+    bind=AuthSession,
+    alias="rotate_cookie_secret",
+    target="custom",
+    arity="member",
+    rest=False,
+)
+async def rotate_cookie_secret(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession | None:
+    payload = dict(ctx.get("payload") or {})
+    session_id = payload.get("session_id") or payload.get("id") or dict(ctx.get("path_params") or {}).get("id")
+    row = await cls.handlers.read.core({"path_params": {"id": session_id}, "db": ctx["db"]})
+    if row is None:
+        return None
+    now = utc_now()
+    return _created(
+        await cls.handlers.update.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {
+                    "cookie_secret_hash": payload.get("cookie_secret_hash"),
+                    "cookie_rotated_at": now,
+                    "cookie_issued_at": _field(row, "cookie_issued_at") or now,
+                    "last_seen_at": now,
+                },
+                "db": ctx["db"],
+            }
+        )
+    )
+
+
+@op_ctx(
+    bind=AuthSession,
+    alias="bind_client",
+    target="custom",
+    arity="member",
+    rest=False,
+)
+async def bind_client(cls: type[AuthSession], ctx: dict[str, Any]) -> AuthSession | None:
+    payload = dict(ctx.get("payload") or {})
+    session_id = payload.get("session_id") or payload.get("id") or dict(ctx.get("path_params") or {}).get("id")
+    row = await cls.handlers.read.core({"path_params": {"id": session_id}, "db": ctx["db"]})
+    if row is None:
+        return None
+    return _created(
+        await cls.handlers.update.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {"client_id": payload.get("client_id"), "last_seen_at": utc_now()},
+                "db": ctx["db"],
+            }
+        )
+    )
+
+
 account_api = account_router = TigrblRouter()
-login_api = login_router = TigrblRouter()
 MY_ACCOUNT_TAGS = ["My Account"]
 
 
@@ -203,28 +316,6 @@ AuthSession.list_account_sessions = staticmethod(list_account_sessions)  # type:
 AuthSession.revoke_account_session = staticmethod(revoke_account_session)  # type: ignore[attr-defined]
 
 
-@login_api.route("/login", methods=["POST"], response_model=TokenPair)
-async def login(
-    request: Request,
-    creds: CredsIn | None = None,
-    db: Any = Depends(get_db),
-) -> Any:
-    from ._ops import login_user
-
-    if creds is None:
-        body = await request.json() or {}
-        creds = CredsIn.model_validate(body)
-    return await login_user(
-        request=request,
-        db=db,
-        identifier=creds.identifier,
-        password=creds.password,
-    )
-
-
-AuthSession.login = staticmethod(login)  # type: ignore[attr-defined]
-
-
 __all__ = [
     "AuthSession",
     "CredsIn",
@@ -232,9 +323,6 @@ __all__ = [
     "TokenPair",
     "account_api",
     "account_router",
-    "login_api",
-    "login_router",
     "list_account_sessions",
-    "login",
     "revoke_account_session",
 ]

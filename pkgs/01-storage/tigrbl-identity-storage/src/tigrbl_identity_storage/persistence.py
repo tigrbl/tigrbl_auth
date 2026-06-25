@@ -9,20 +9,6 @@ from uuid import UUID
 
 from tigrbl_identity_storage.tables._ops import token_hash
 from tigrbl_identity_storage.tables.audit_event import append_audit_event, append_audit_event_async
-from tigrbl_identity_storage.tables.auth_session._ops import (
-    bind_session_client,
-    bind_session_client_async,
-    create_session,
-    create_session_async,
-    get_active_session,
-    get_active_session_async,
-    get_session,
-    get_session_async,
-    rotate_session_cookie_secret,
-    rotate_session_cookie_secret_async,
-    touch_session,
-    touch_session_async,
-)
 from tigrbl_identity_storage.tables.revoked_token._ops import (
     is_token_revoked,
     is_token_revoked_async,
@@ -56,6 +42,108 @@ def _items(result):
     if isinstance(result, tuple):
         return list(result)
     return [] if result is None else [result]
+
+
+def _created(result):
+    if isinstance(result, dict):
+        for key in ("item", "result", "data"):
+            if key in result:
+                return result[key]
+    return result
+
+
+async def create_session_async(
+    *,
+    user_id: UUID,
+    tenant_id: UUID,
+    username: str,
+    client_id: UUID | None = None,
+    expires_at: datetime | None = None,
+    cookie_secret_hash: str | None = None,
+    session_state_salt: str | None = None,
+) -> AuthSession:
+    async with storage_session() as db:
+        return _created(
+            await AuthSession.handlers.create.core(
+                {
+                    "payload": {
+                        "user_id": user_id,
+                        "tenant_id": tenant_id,
+                        "username": username,
+                        "client_id": client_id,
+                        "expires_at": expires_at,
+                        "cookie_secret_hash": cookie_secret_hash,
+                        "session_state_salt": session_state_salt,
+                    },
+                    "db": db,
+                }
+            )
+        )
+
+
+async def touch_session_async(session_id: UUID) -> AuthSession | None:
+    async with storage_session() as db:
+        return await AuthSession.handlers.touch.core(
+            {"path_params": {"id": session_id}, "payload": {"session_id": session_id}, "db": db}
+        )
+
+
+async def get_session_async(session_id: UUID) -> AuthSession | None:
+    async with storage_session() as db:
+        return await AuthSession.handlers.read.core({"path_params": {"id": session_id}, "db": db})
+
+
+async def get_active_session_async(session_id: UUID) -> AuthSession | None:
+    async with storage_session() as db:
+        return await AuthSession.handlers.get_active.core(
+            {"path_params": {"id": session_id}, "payload": {"session_id": session_id}, "db": db}
+        )
+
+
+async def rotate_session_cookie_secret_async(session_id: UUID, *, cookie_secret_hash: str) -> AuthSession | None:
+    async with storage_session() as db:
+        return await AuthSession.handlers.rotate_cookie_secret.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {"session_id": session_id, "cookie_secret_hash": cookie_secret_hash},
+                "db": db,
+            }
+        )
+
+
+async def bind_session_client_async(session_id: UUID, *, client_id: UUID | None) -> AuthSession | None:
+    async with storage_session() as db:
+        return await AuthSession.handlers.bind_client.core(
+            {
+                "path_params": {"id": session_id},
+                "payload": {"session_id": session_id, "client_id": client_id},
+                "db": db,
+            }
+        )
+
+
+def create_session(**kwargs):
+    return run_async(create_session_async(**kwargs))
+
+
+def touch_session(session_id):
+    return run_async(touch_session_async(session_id))
+
+
+def get_session(session_id):
+    return run_async(get_session_async(session_id))
+
+
+def get_active_session(session_id):
+    return run_async(get_active_session_async(session_id))
+
+
+def rotate_session_cookie_secret(session_id, **kwargs):
+    return run_async(rotate_session_cookie_secret_async(session_id, **kwargs))
+
+
+def bind_session_client(session_id, **kwargs):
+    return run_async(bind_session_client_async(session_id, **kwargs))
 
 
 async def record_consent_async(

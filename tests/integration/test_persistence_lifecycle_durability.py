@@ -8,21 +8,19 @@ from sqlalchemy import select
 
 from tigrbl_identity_jose.key_management import hash_pw
 from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
-from tigrbl_identity_storage.tables.auth_session._ops import (
+from tigrbl_identity_storage.persistence import (
     create_session_async,
     get_active_session_async,
     get_session_async,
-    rotate_session_cookie_secret_async,
-    touch_session_async,
-)
-from tigrbl_identity_storage.tables.revoked_token._ops import is_token_revoked_async, revoke_token_async
-from tigrbl_identity_storage.persistence import (
     get_token_record_async,
     introspect_token_async,
     record_consent_async,
     revoke_consent_async,
+    rotate_session_cookie_secret_async,
+    touch_session_async,
     upsert_token_record_async,
 )
+from tigrbl_identity_storage.tables.revoked_token._ops import is_token_revoked_async, revoke_token_async
 from tigrbl_auth.services.token_service import (
     JWTCoder,
     RefreshTokenReuseError,

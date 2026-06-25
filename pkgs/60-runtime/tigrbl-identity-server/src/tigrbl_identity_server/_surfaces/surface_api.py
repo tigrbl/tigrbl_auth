@@ -5,10 +5,10 @@ from typing import Any, Callable, Final
 
 from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
-from tigrbl_identity_storage.tables.auth_session import login_api
 from tigrbl_identity_storage.tables.engine import dsn
 from tigrbl_identity_storage_runtime.account_surface import api as my_account_api
 from tigrbl_identity_storage_runtime.authorization import router as authorize_router
+from tigrbl_identity_storage_runtime.login import router as login_router
 from tigrbl_identity_storage_runtime.token_endpoint import router as token_router
 from tigrbl_identity_storage_runtime.client_registration import include_client_registration_endpoint
 from tigrbl_identity_storage_runtime.device_authorization import include_device_authorization_endpoint
@@ -44,7 +44,7 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "capabilities": ("admin-auth",),
         "router": admin_identities_api,
     },
-    {"mount_group": "login", "capabilities": ("login",), "router": login_api},
+    {"mount_group": "login", "capabilities": ("login",), "router": login_router},
     {
         "mount_group": "authorize",
         "capabilities": ("authorize",),

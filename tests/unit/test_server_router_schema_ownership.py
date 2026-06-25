@@ -43,7 +43,7 @@ ROUTER_DEPRECATION_TARGETS = {
     "auth_flows.py": "tigrbl_identity_storage.tables.auth_session",
     "authorize.py": "tigrbl_identity_storage.tables.auth_code",
     "device_authorization.py": "tigrbl_identity_storage.tables.device_code",
-    "login.py": "tigrbl_identity_storage.tables.auth_session",
+    "login.py": "tigrbl_identity_storage_runtime.login",
     "logout.py": "tigrbl_identity_storage.tables.logout_state",
     "my_account.py": "tigrbl_identity_storage.tables.user",
     "par.py": "tigrbl_identity_storage.tables.pushed_authorization_request",
@@ -250,7 +250,6 @@ def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
             "AuthSession",
             {
                 "list_account_sessions",
-                "login",
                 "revoke_account_session",
             },
         ),
@@ -299,6 +298,12 @@ def test_remaining_oauth_route_handlers_live_on_storage_table_modules(
 @pytest.mark.parametrize(
     ("runtime_module_name", "storage_module_name", "class_name", "route_names"),
     [
+        (
+            "tigrbl_identity_storage_runtime.login",
+            "tigrbl_identity_storage.tables.auth_session",
+            "AuthSession",
+            {"login"},
+        ),
         (
             "tigrbl_identity_storage_runtime.authorization",
             "tigrbl_identity_storage.tables.auth_code",
@@ -354,7 +359,10 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
     table_class = getattr(storage_module, class_name)
 
     assert hasattr(runtime_module, "router")
-    if runtime_module_name == "tigrbl_identity_storage_runtime.authorization":
+    if runtime_module_name in {
+        "tigrbl_identity_storage_runtime.authorization",
+        "tigrbl_identity_storage_runtime.login",
+    }:
         assert not hasattr(runtime_module, "api")
     else:
         assert hasattr(runtime_module, "api")

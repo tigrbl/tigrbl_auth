@@ -51,7 +51,7 @@ OWNER = StandardOwner(
 
 
 def _persistence():
-    from tigrbl_identity_storage.tables.auth_session._ops import (
+    from tigrbl_identity_storage.persistence import (
         bind_session_client_async,
         create_session_async,
         get_active_session_async,

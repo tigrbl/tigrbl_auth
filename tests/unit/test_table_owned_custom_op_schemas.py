@@ -29,7 +29,6 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
         TokenRecord,
         User,
     )
-    from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair as LoginTokenPair
     from tigrbl_identity_storage.tables.client_registration import (
         DynamicClientRegistrationIn,
         DynamicClientRegistrationManagementIn,
@@ -49,8 +48,13 @@ def test_custom_op_schemas_are_reachable_from_tigrbl_table_schema_namespace() ->
     )
     from tigrbl_identity_storage.tables.user import AdminSessionOut, CredsIn as AdminCredsIn
 
-    assert AuthSession.schemas.login.in_ is CredsIn
-    assert AuthSession.schemas.login.out is LoginTokenPair
+    from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair as LoginTokenPair
+    from tigrbl_identity_storage_runtime.login import login
+
+    assert not hasattr(AuthSession.schemas, "login")
+    assert CredsIn.__name__ == "CredsIn"
+    assert "CredsIn" in str(login.__annotations__.get("creds"))
+    assert LoginTokenPair.__name__ == "TokenPair"
     assert TokenRecord.schemas.token.out is TokenPair
     assert TokenRecord.schemas.refresh.in_ is RefreshIn
     assert TokenRecord.schemas.introspect.out is IntrospectOut
