@@ -42,7 +42,7 @@ from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_storage.tables.revoked_token._ops import (
+from tigrbl_identity_storage.persistence import (
     reset_token_state as _reset_token_state,
     reset_token_state_async as _reset_token_state_async,
 )

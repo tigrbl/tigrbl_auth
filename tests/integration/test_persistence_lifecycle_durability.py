@@ -13,14 +13,15 @@ from tigrbl_identity_storage.persistence import (
     get_active_session_async,
     get_session_async,
     get_token_record_async,
+    is_token_revoked_async,
     introspect_token_async,
     record_consent_async,
     revoke_consent_async,
+    revoke_token_async,
     rotate_session_cookie_secret_async,
     touch_session_async,
     upsert_token_record_async,
 )
-from tigrbl_identity_storage.tables.revoked_token._ops import is_token_revoked_async, revoke_token_async
 from tigrbl_auth.services.token_service import (
     JWTCoder,
     RefreshTokenReuseError,

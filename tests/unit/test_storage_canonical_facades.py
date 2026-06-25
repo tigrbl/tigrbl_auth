@@ -210,12 +210,13 @@ def test_executable_revocation_publisher_lives_above_storage() -> None:
     assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._op") is None
 
     runtime = importlib.import_module("tigrbl_identity_storage_runtime.revocation")
+    persistence = importlib.import_module("tigrbl_identity_storage.persistence")
     storage = importlib.import_module("tigrbl_identity_storage.tables.revoked_token")
-    storage_ops = importlib.import_module("tigrbl_identity_storage.tables.revoked_token._ops")
 
     assert runtime.api is runtime.router
     assert runtime.include_revocation_endpoint.__module__ == "tigrbl_identity_storage_runtime.revocation"
-    assert runtime.revoke_token_async is storage_ops.revoke_token_async
+    assert importlib.util.find_spec("tigrbl_identity_storage.tables.revoked_token._ops") is None
+    assert runtime.revoke_token_async is persistence.revoke_token_async
     assert not hasattr(storage, "api")
     assert not hasattr(storage, "router")
 

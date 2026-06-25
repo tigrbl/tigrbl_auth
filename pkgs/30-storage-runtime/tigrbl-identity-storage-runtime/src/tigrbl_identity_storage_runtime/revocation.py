@@ -6,10 +6,7 @@ from urllib.parse import parse_qs
 
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.framework import HTTPException, Request, TigrblApp, TigrblRouter, status
-from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
-from tigrbl_identity_storage.tables.revoked_token._ops import (
-    CANONICAL_REVOCATION_PATH,
-    RFC7009_SPEC_URL,
+from tigrbl_identity_storage.persistence import (
     is_revoked,
     is_revoked_async,
     is_token_revoked,
@@ -21,7 +18,11 @@ from tigrbl_identity_storage.tables.revoked_token._ops import (
     revoke_token,
     revoke_token_async,
 )
+from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
 from tigrbl_identity_storage.tables.revoked_token import RevocationOut
+
+RFC7009_SPEC_URL = "https://www.rfc-editor.org/rfc/rfc7009"
+CANONICAL_REVOCATION_PATH = "/revoke"
 
 api = router = TigrblRouter()
 
