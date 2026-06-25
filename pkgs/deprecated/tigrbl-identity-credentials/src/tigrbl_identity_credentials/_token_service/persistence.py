@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_identity_storage.tables.token_record._ops`."""
+"""Deprecated compatibility module for `tigrbl_identity_storage_runtime.token_persistence`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_credentials._token_service.persistence"
-_CANONICAL_MODULE = "tigrbl_identity_storage.tables.token_record._ops"
+_CANONICAL_MODULE = "tigrbl_identity_storage_runtime.token_persistence"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

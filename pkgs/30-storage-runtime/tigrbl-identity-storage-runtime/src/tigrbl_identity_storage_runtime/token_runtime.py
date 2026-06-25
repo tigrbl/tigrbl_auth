@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import base64
 from datetime import datetime, timezone
+import inspect
 from typing import Any
 from urllib.parse import parse_qs
 from uuid import UUID
 
+from pydantic import ValidationError
+from tigrbl_identity_core.errors import InvalidRefreshTokenError, InvalidTokenError, RefreshTokenReuseError
 from tigrbl_identity_runtime.deployment import deployment_from_request, resolve_deployment
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_jose.jwt_coder import JWTCoder
@@ -18,6 +22,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
         return str(value)[:8]
 from tigrbl_auth_protocol_oauth.standards.assertion_framework import (
     JWT_BEARER_GRANT_TYPE,
+    validate_assertion_grant_request,
 )
 from tigrbl_auth_protocol_oauth.standards.device_authorization import (
     DEVICE_CODE_EXPIRES_IN,
@@ -28,6 +33,31 @@ from tigrbl_auth_protocol_oauth.standards.device_authorization import (
 )
 from tigrbl_auth_protocol_oauth.standards.resource_indicators import select_resource_indicator
 from tigrbl_auth_protocol_oauth.standards.authorization_server_metadata import ISSUER
+from tigrbl_auth_protocol_oauth.standards.authorization_framework import (
+    RFC6749Error,
+    enforce_authorization_code_grant,
+    enforce_grant_type,
+    enforce_password_grant,
+)
+from tigrbl_auth_protocol_oauth.standards.jwt_client_auth import (
+    PRIVATE_KEY_JWT_AUTH_METHOD,
+    authenticate_client_assertion,
+)
+from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication import (
+    SUPPORTED_MTLS_AUTH_METHODS,
+    authenticate_mtls_client,
+    presented_certificate_pem,
+    presented_certificate_thumbprint,
+)
+from tigrbl_auth_protocol_oauth.standards.native_apps import validate_native_token_request
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
+    OAuthPolicyViolation,
+    dpop_proof_from_request,
+    runtime_security_profile,
+    validate_sender_constraint,
+)
+from tigrbl_auth_protocol_oauth.standards._rfc9700.security_profile import assert_token_request_allowed
+from tigrbl_auth_protocol_oauth.standards.proof_key_for_code_exchange import verify_code_challenge
 
 try:  # pragma: no cover - exercised with full runtime deps installed
     from tigrbl_identity_storage.framework import HTTPException, JSONResponse as _FrameworkJSONResponse, status
@@ -61,7 +91,7 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
     status = _FallbackStatus()
 
 try:  # pragma: no cover
-    from .._table import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
+    from tigrbl_identity_storage.tables.token_record import AuthorizationCodeGrantForm, PasswordGrantForm, TokenPair
 except Exception:  # pragma: no cover - dependency-light fallback
     from pydantic import BaseModel
 
@@ -106,6 +136,7 @@ except Exception:  # pragma: no cover - dependency-light fallback
 
 from tigrbl_identity_server.security.handler_records import (
     append_audit_event_record,
+    delete_handler_record,
     first_handler_record,
     issue_token_pair_records,
     read_handler_record,
@@ -113,12 +144,12 @@ from tigrbl_identity_server.security.handler_records import (
 )
 
 try:  # pragma: no cover
-    from ...auth_code import AuthCode
-    from ...auth_session import AuthSession
-    from ...client import Client
-    from ...client_registration import ClientRegistration
-    from ...device_code._table import DeviceCode
-    from ...user._table import User
+    from tigrbl_identity_storage.tables.auth_code import AuthCode
+    from tigrbl_identity_storage.tables.auth_session import AuthSession
+    from tigrbl_identity_storage.tables.client import Client
+    from tigrbl_identity_storage.tables.client_registration import ClientRegistration
+    from tigrbl_identity_storage.tables.device_code import DeviceCode
+    from tigrbl_identity_storage.tables.user import User
 except Exception:  # pragma: no cover - placeholders for dependency-light tests
     class Client:  # type: ignore[override]
         id = object()
@@ -357,3 +388,66 @@ async def handle_device_code_grant(
         },
     )
     return _token_pair_payload(access, refresh, token_type=sender_constraint.token_type)
+
+
+__all__ = [
+    "AuthCode",
+    "AuthSession",
+    "AuthorizationCodeGrantForm",
+    "DEVICE_CODE_GRANT_TYPE",
+    "HTTPException",
+    "ISSUER",
+    "InvalidRefreshTokenError",
+    "InvalidTokenError",
+    "JSONResponse",
+    "JWT_BEARER_GRANT_TYPE",
+    "OAuthPolicyViolation",
+    "PRIVATE_KEY_JWT_AUTH_METHOD",
+    "PasswordGrantForm",
+    "RFC6749Error",
+    "RefreshTokenReuseError",
+    "SUPPORTED_MTLS_AUTH_METHODS",
+    "UUID",
+    "User",
+    "ValidationError",
+    "_enforce_tls",
+    "_header",
+    "_json_error",
+    "_jwt",
+    "_load_client",
+    "_parse_request_form",
+    "_pwd_backend",
+    "_registered_token_endpoint_auth_method",
+    "_resolve_request_deployment",
+    "_resource_selection",
+    "_token_endpoint_audiences",
+    "_token_pair_payload",
+    "allowed_grant_types",
+    "append_audit_event_record",
+    "assert_token_request_allowed",
+    "authenticate_client_assertion",
+    "authenticate_mtls_client",
+    "base64",
+    "datetime",
+    "delete_handler_record",
+    "dpop_proof_from_request",
+    "enforce_authorization_code_grant",
+    "enforce_grant_type",
+    "enforce_password_grant",
+    "handle_device_code_grant",
+    "inspect",
+    "issue_token_pair_records",
+    "mint_id_token",
+    "oidc_hash",
+    "presented_certificate_pem",
+    "presented_certificate_thumbprint",
+    "read_handler_record",
+    "runtime_security_profile",
+    "settings",
+    "status",
+    "timezone",
+    "validate_assertion_grant_request",
+    "validate_native_token_request",
+    "validate_sender_constraint",
+    "verify_code_challenge",
+]

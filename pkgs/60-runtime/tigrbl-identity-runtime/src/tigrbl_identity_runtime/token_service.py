@@ -27,7 +27,7 @@ from tigrbl_identity_storage_runtime.session_service import (
     revoke_all_tokens_for_context,
     revoke_token_for_context,
 )
-from tigrbl_identity_storage.tables.token_record._ops import (
+from tigrbl_identity_storage_runtime.token_persistence import (
     TokenCoder,
     issue_persisted_token_pair,
     redeem_refresh_token,

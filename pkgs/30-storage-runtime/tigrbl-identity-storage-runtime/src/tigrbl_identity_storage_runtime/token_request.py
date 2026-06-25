@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ._runtime import (
+from .token_runtime import (
     AuthCode,
     AuthSession,
     AuthorizationCodeGrantForm,
@@ -61,7 +61,7 @@ from ._runtime import (
     validate_sender_constraint,
     verify_code_challenge,
 )
-from ._persistence import redeem_refresh_token
+from .token_persistence import redeem_refresh_token
 
 async def token_request(*, request, db):
     deployment = _resolve_request_deployment(request)

@@ -6,7 +6,14 @@ from typing import Any, Protocol
 from uuid import uuid4
 
 from tigrbl_identity_core.errors import InvalidRefreshTokenError, RefreshTokenReuseError
-from .._hooks import normalize_refresh_audience
+from tigrbl_identity_storage.tables._ops import token_hash
+from tigrbl_identity_storage.tables.token_record._hooks import normalize_refresh_audience
+from tigrbl_identity_storage.persistence import (
+    get_token_record_async,
+    mark_token_used_async,
+    revoke_refresh_family_async,
+    upsert_token_record_async,
+)
 
 
 class TokenCoder(Protocol):
@@ -43,9 +50,6 @@ async def issue_persisted_token_pair(
     delegation_provenance: dict[str, Any] | None = None,
     **extra: Any,
 ) -> tuple[str, str]:
-    from tigrbl_identity_storage.tables._ops import token_hash
-    from tigrbl_identity_storage.tables.token_record import _ops as token_record_ops
-
     access_token, refresh_token = await jwt.async_sign_pair(
         sub=sub,
         tid=tid,
@@ -66,7 +70,7 @@ async def issue_persisted_token_pair(
         refresh_claims["client_id"] = client_id
     family_id = refresh_family_id or str(uuid4())
     refresh_parent_hash = token_hash(refresh_parent_token) if refresh_parent_token else None
-    await token_record_ops.upsert_token_record_async(
+    await upsert_token_record_async(
         access_token,
         access_claims,
         token_kind="access",
@@ -74,7 +78,7 @@ async def issue_persisted_token_pair(
         refresh_family_id=family_id,
         refresh_parent_hash=refresh_parent_hash,
     )
-    await token_record_ops.upsert_token_record_async(
+    await upsert_token_record_async(
         refresh_token,
         refresh_claims,
         token_kind="refresh",
@@ -94,9 +98,7 @@ async def redeem_refresh_token(
     requested_audience: str | None = None,
     token_type: str = "bearer",
 ) -> dict[str, Any]:
-    from tigrbl_identity_storage.tables.token_record import _ops as token_record_ops
-
-    record = await token_record_ops.get_token_record_async(refresh_token)
+    record = await get_token_record_async(refresh_token)
     if record is None:
         raise InvalidRefreshTokenError("refresh token was not issued by this repository")
     if record.token_kind != "refresh":
@@ -106,7 +108,7 @@ async def redeem_refresh_token(
     family_id = str(record.refresh_family_id or "")
     if record.used_at is not None or record.refresh_successor_hash:
         if family_id:
-            await token_record_ops.revoke_refresh_family_async(family_id, reuse_token=refresh_token)
+            await revoke_refresh_family_async(family_id, reuse_token=refresh_token)
         raise RefreshTokenReuseError("refresh token replay detected")
     if not record.active or record.revoked_at is not None:
         raise InvalidRefreshTokenError("refresh token is inactive")
@@ -153,7 +155,7 @@ async def redeem_refresh_token(
         audience=next_audience,
         **extra_claims,
     )
-    await token_record_ops.mark_token_used_async(refresh_token, successor_token=next_refresh_token)
+    await mark_token_used_async(refresh_token, successor_token=next_refresh_token)
     return {
         "access_token": access_token,
         "refresh_token": next_refresh_token,

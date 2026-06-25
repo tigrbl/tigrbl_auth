@@ -47,10 +47,8 @@ from tigrbl_identity_storage.tables.revoked_token._ops import (
     reset_token_state_async as _reset_token_state_async,
 )
 from tigrbl_identity_storage.tables.token_record import IntrospectOut
-from tigrbl_identity_storage.tables.token_record._ops import (
-    introspect_token_record_async as _introspect_token_async,
-)
-from tigrbl_identity_storage.tables.token_record._ops import (
+from tigrbl_identity_storage.persistence import (
+    introspect_token_async as _introspect_token_async,
     remove_token_record_async,
     upsert_token_record_async as _record_token_async,
 )
