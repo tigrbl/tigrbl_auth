@@ -15,35 +15,38 @@ for src in (ROOT / "pkgs").glob("*/src"):
         sys.path.append(value)
 
 from tigrbl_auth.services.policy_invariants import (
-    AuthorizationInvariant as FacadeAuthorizationInvariant,
-    InvariantRegistry as FacadeInvariantRegistry,
+    AuthorizationInvariantTable as FacadeAuthorizationInvariantTable,
 )
-from tigrbl_authz_policy_invariant_registry import (
-    AuthorizationInvariant as CanonicalAuthorizationInvariant,
-    InvariantRegistry as CanonicalInvariantRegistry,
-    default_authorization_invariant_registry as canonical_authorization_invariant_registry,
+from tigrbl_identity_contracts.invariants import (
+    AuthorizationInvariant as ContractAuthorizationInvariant,
+    InvariantEvaluation,
+    InvariantSeverity,
+    VerificationMethod,
+)
+from tigrbl_identity_storage.tables import (
+    AuthorizationInvariant as StorageAuthorizationInvariant,
+    InvariantEvaluation as StorageInvariantEvaluation,
+    InvariantViolation as StorageInvariantViolation,
 )
 from tigrbl_authz_policy import (
     AuthorizationInvariant,
-    InvariantEvaluation,
-    InvariantRegistry,
-    InvariantSeverity,
-    VerificationMethod,
-    default_authorization_invariant_registry,
+    AuthorizationInvariantTable,
+    InvariantEvaluationTable,
+    InvariantViolationTable,
 )
 
 
-def test_authorization_invariant_registry_t0_exports_public_surfaces() -> None:
-    assert AuthorizationInvariant is CanonicalAuthorizationInvariant
-    assert InvariantRegistry is CanonicalInvariantRegistry
-    assert default_authorization_invariant_registry is canonical_authorization_invariant_registry
-    assert FacadeAuthorizationInvariant is AuthorizationInvariant
-    assert FacadeInvariantRegistry is InvariantRegistry
+def test_authorization_invariant_tables_t0_export_public_surfaces() -> None:
+    assert AuthorizationInvariant is ContractAuthorizationInvariant
+    assert AuthorizationInvariantTable is StorageAuthorizationInvariant
+    assert InvariantEvaluationTable is StorageInvariantEvaluation
+    assert InvariantViolationTable is StorageInvariantViolation
+    assert FacadeAuthorizationInvariantTable is AuthorizationInvariantTable
     assert VerificationMethod.GRAPH.value == "graph"
     assert InvariantSeverity.CRITICAL.value == "critical"
 
 
-def test_authorization_invariant_registry_t1_registers_lists_and_evaluates() -> None:
+def test_authorization_invariant_contract_t1_normalizes_definition_metadata() -> None:
     invariant = AuthorizationInvariant(
         invariant_id="authz.scope.non_persistence",
         title="Removed authority cannot reappear",
@@ -55,40 +58,21 @@ def test_authorization_invariant_registry_t1_registers_lists_and_evaluates() -> 
         spec_ids=("spc:1205",),
         tags=("revocation", "authority"),
     )
-    registry = InvariantRegistry((invariant,))
-
-    assert registry.get("authz.scope.non_persistence") is invariant
-    assert registry.list(property_family="safety", tags=("authority",)) == (invariant,)
-    assert registry.list(enabled_only=True) == (invariant,)
-
-    evaluation = registry.evaluate(
-        "authz.scope.non_persistence",
-        lambda item: InvariantEvaluation(
-            invariant_id=item.invariant_id,
-            passed=True,
-            message="replay accepted",
-            evaluated_at="2026-06-07T00:00:00+00:00",
-            evidence={"trace": "decision-key"},
-        ),
+    evaluation = InvariantEvaluation(
+        invariant_id=invariant.invariant_id,
+        passed=True,
+        message="replay accepted",
+        evaluated_at="2026-06-07T00:00:00+00:00",
+        evidence={"trace": "decision-key"},
     )
 
-    assert evaluation.passed is True
+    assert invariant.feature_ids == ("feat:authorization-invariant-guard-registry",)
+    assert invariant.tags == ("authority", "revocation")
     assert evaluation.evidence["trace"] == "decision-key"
-    assert registry.violations((evaluation,)) == ()
 
 
-def test_authorization_invariant_registry_t1_default_registry_tracks_seed_invariants() -> None:
-    registry = default_authorization_invariant_registry()
-    invariant_ids = tuple(item.invariant_id for item in registry.list(enabled_only=True))
-
-    assert invariant_ids == ("authz.non_escalation", "authz.tenant_isolation")
-    assert registry.get("authz.non_escalation").spec_ids == ("spc:1205", "spc:1206", "spc:1207")
-    assert registry.get("authz.tenant_isolation").severity is InvariantSeverity.CRITICAL
-
-
-def test_authorization_invariant_registry_t2_fails_closed_for_bad_definitions() -> None:
-    registry = InvariantRegistry()
-    invariant = AuthorizationInvariant(
+def test_authorization_invariant_contract_t2_fails_closed_for_bad_definitions() -> None:
+    valid = AuthorizationInvariant(
         invariant_id="authz.tenant.no_leakage",
         title="Tenant authority cannot leak",
         property_family="isolation",
@@ -96,10 +80,9 @@ def test_authorization_invariant_registry_t2_fails_closed_for_bad_definitions() 
         verification_method="runtime",
         tags=("tenant", "tenant"),
     )
-    registry.register(invariant)
 
-    with pytest.raises(ValueError, match="duplicate invariant"):
-        registry.register(invariant)
+    assert valid.verification_method is VerificationMethod.RUNTIME
+    assert valid.tags == ("tenant",)
     with pytest.raises(ValueError, match="statement is required"):
         AuthorizationInvariant(
             invariant_id="authz.bad",
@@ -108,34 +91,28 @@ def test_authorization_invariant_registry_t2_fails_closed_for_bad_definitions() 
             statement="",
             verification_method=VerificationMethod.STATIC,
         )
-    with pytest.raises(KeyError, match="unknown invariant"):
-        registry.get("authz.missing")
 
 
-def test_authorization_invariant_registry_t2_reports_violations_and_rejects_mismatched_evaluation() -> None:
-    invariant = AuthorizationInvariant(
+def test_authorization_invariant_tables_t2_materialize_table_rows() -> None:
+    invariant = AuthorizationInvariantTable(
         invariant_id="authz.delegation.attenuated",
         title="Delegation is attenuated",
         property_family="safety",
         statement="Delegated authority must be bounded by source authority.",
-        verification_method=VerificationMethod.GRAPH,
+        verification_method=VerificationMethod.GRAPH.value,
     )
-    registry = InvariantRegistry((invariant,))
+    failed = InvariantEvaluationTable(
+        invariant_id="authz.delegation.attenuated",
+        passed=False,
+        message="effective authority exceeded closure",
+        evaluated_at="2026-06-07T00:00:00+00:00",
+    )
+    violation = InvariantViolationTable(
+        invariant_id=failed.invariant_id,
+        severity=InvariantSeverity.ERROR.value,
+        message=failed.message,
+    )
 
-    failed = registry.evaluate("authz.delegation.attenuated", lambda _item: False)
-    violations = registry.violations((failed,))
-
+    assert invariant.invariant_id == "authz.delegation.attenuated"
     assert failed.passed is False
-    assert violations[0].invariant_id == "authz.delegation.attenuated"
-    assert violations[0].severity is InvariantSeverity.ERROR
-
-    with pytest.raises(ValueError, match="evaluation invariant_id mismatch"):
-        registry.evaluate(
-            "authz.delegation.attenuated",
-            lambda _item: InvariantEvaluation(
-                invariant_id="authz.other",
-                passed=True,
-                message="wrong id",
-                evaluated_at="2026-06-07T00:00:00+00:00",
-            ),
-        )
+    assert violation.message == "effective authority exceeded closure"

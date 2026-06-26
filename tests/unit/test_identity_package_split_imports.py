@@ -19,6 +19,9 @@ PKGS = ROOT / "pkgs"
 
 
 DEPRECATED_DIST_NAMES = {
+    "tigrbl-authz-policy-invariant-registry",
+    "tigrbl-identity-admin-federation-registry",
+    "tigrbl-identity-admin-policy-registry",
     "tigrbl-identity-credentials",
     "tigrbl-identity-policy",
     "tigrbl-identity-oauth",

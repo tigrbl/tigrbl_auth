@@ -60,12 +60,13 @@ from .governance_extension import (
 )
 from .assurance import (
     AuthorizationInvariant,
+    AuthorizationInvariantTable,
     InvariantEvaluation,
-    InvariantRegistry,
+    InvariantEvaluationTable,
     InvariantSeverity,
     InvariantViolation,
+    InvariantViolationTable,
     VerificationMethod,
-    default_authorization_invariant_registry,
 )
 from tigrbl_authz_policy_authority_derivation_graph import (
     AuthorityDerivationGraph,
@@ -162,6 +163,7 @@ __all__ = [
     "AdminPolicy",
     "AttributePolicy",
     "AuthorizationInvariant",
+    "AuthorizationInvariantTable",
     "AuthorizationReference",
     "AuthorizationSafetyPropertyEvaluator",
     "AuthorityClosure",
@@ -199,9 +201,10 @@ __all__ = [
     "EntitlementDefinition",
     "EntitlementManager",
     "InvariantEvaluation",
-    "InvariantRegistry",
+    "InvariantEvaluationTable",
     "InvariantSeverity",
     "InvariantViolation",
+    "InvariantViolationTable",
     "IntegrityReport",
     "LeastAuthorityDiff",
     "LivenessConvergenceReport",
@@ -254,7 +257,6 @@ __all__ = [
     "compare_authority_monotonicity",
     "compare_policy_version_decisions",
     "compute_authority_closure",
-    "default_authorization_invariant_registry",
     "diff_least_authority",
     "evaluate_liveness_convergence",
     "evaluate_residency_access",

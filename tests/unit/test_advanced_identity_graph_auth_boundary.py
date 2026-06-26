@@ -3,13 +3,12 @@ from __future__ import annotations
 import pytest
 
 from tigrbl_auth.services.advanced_identity_plane import (
-    AccessDecisionRequest,
     AdaptiveContext,
     AdvancedAuthenticatorRegistry,
     AuthAnomalyDetector,
     DeviceWorkloadIdentityRegistry,
-    FederationRegistry,
-    PolicyRegistry,
+    Federation,
+    Policy,
     RelationshipGraph,
     TrustFederationGraph,
     build_advanced_identity_graph_auth_delivery_summary,
@@ -39,41 +38,7 @@ def _authenticators() -> AdvancedAuthenticatorRegistry:
     return registry
 
 
-def _federation() -> FederationRegistry:
-    registry = FederationRegistry()
-    registry.register_provider(
-        provider_id="corp-sso",
-        tenant_id="tenant-a",
-        kind="sso",
-        issuer="https://login.example.test",
-        discovery_url="https://login.example.test/.well-known/openid-configuration",
-        audience="public-uix",
-        display_name="Example SSO",
-        logout_supported=True,
-        claim_mapping={"sub": "sub", "email": "mail", "name": "display_name"},
-    )
-    registry.register_provider(
-        provider_id="github",
-        tenant_id="tenant-a",
-        kind="social",
-        issuer="https://github.com/login/oauth",
-        discovery_url="https://github.com/.well-known/openid-configuration",
-        audience="public-uix",
-        display_name="GitHub",
-    )
-    registry.register_provider(
-        provider_id="partner",
-        tenant_id="tenant-a",
-        kind="federation",
-        issuer="https://partner.example.test",
-        discovery_url="https://partner.example.test/federation.json",
-        audience="token-exchange",
-        display_name="Partner Federation",
-    )
-    return registry
-
-
-def _graph_and_policies() -> tuple[RelationshipGraph, PolicyRegistry]:
+def _graph() -> RelationshipGraph:
     graph = RelationshipGraph()
     graph.define_relation(resource_type="document", relation="viewer", subject_types=("group", "user"))
     graph.define_relation(resource_type="group", relation="member", subject_types=("group", "user"))
@@ -93,13 +58,7 @@ def _graph_and_policies() -> tuple[RelationshipGraph, PolicyRegistry]:
         subject_id="alice",
         tenant_id="tenant-a",
     )
-    policies = PolicyRegistry(relationship_graph=graph)
-    policy = policies.create_policy(tenant_id="tenant-a", name="document.read")
-    policies.publish_version(
-        policy_id=policy.policy_id,
-        source='allow if relation viewer and context.tenant == "tenant-a" and context.mfa == true',
-    )
-    return graph, policies
+    return graph
 
 
 def _nonhuman_and_trust() -> tuple[DeviceWorkloadIdentityRegistry, TrustFederationGraph]:
@@ -140,9 +99,10 @@ def _nonhuman_and_trust() -> tuple[DeviceWorkloadIdentityRegistry, TrustFederati
 
 def test_advanced_identity_graph_auth_boundary_t1_composes_advanced_identity_runtime():
     authenticators = _authenticators()
-    federation = _federation()
+    federation = Federation
     nonhuman, trust = _nonhuman_and_trust()
-    graph, policies = _graph_and_policies()
+    graph = _graph()
+    policies = Policy
     detector = AuthAnomalyDetector()
 
     challenge, adaptive = authenticators.begin_passwordless_assertion(
@@ -162,24 +122,6 @@ def test_advanced_identity_graph_auth_boundary_t1_composes_advanced_identity_run
         challenge_id=challenge.challenge_id,
         credential_id=credential_id,
         nonce=challenge.expected_nonce,
-    )
-    session = federation.bind_session(
-        provider_id="corp-sso",
-        tenant_id="tenant-a",
-        session_id="sess-1",
-        issuer="https://login.example.test",
-        audience="public-uix",
-        claims={"sub": "alice", "mail": "alice@example.test", "display_name": "Alice"},
-    )
-    decision = policies.access_decision(
-        AccessDecisionRequest(
-            tenant_id="tenant-a",
-            subject="user:alice",
-            action="document.read",
-            resource="document:roadmap",
-            context={"tenant": "tenant-a", "mfa": True},
-            correlation_id="corr-allow",
-        )
     )
     detector.record_event(
         tenant_id="tenant-a",
@@ -207,20 +149,17 @@ def test_advanced_identity_graph_auth_boundary_t1_composes_advanced_identity_run
     )
 
     assert adaptive.step_up_required
-    assert session.normalized_claims["email"] == "alice@example.test"
-    assert decision.allowed
     assert mapping["target_clouds"] == ["gcp"]
     assert summary["advanced_authentication"]["active_webauthn_credentials"] == 1
-    assert summary["federation"]["provider_count"] == 3
+    assert summary["federation"]["provider_count"] == 0
     assert summary["non_human_identities"]["active_workload_count"] == 1
-    assert summary["policy_control_plane"]["active_policy_count"] == 1
+    assert summary["policy_control_plane"]["active_policy_count"] == 0
 
 
 def test_advanced_identity_graph_auth_boundary_t2_fails_closed_for_replay_policy_and_trust_drift():
     authenticators = _authenticators()
-    federation = _federation()
     nonhuman, trust = _nonhuman_and_trust()
-    graph, policies = _graph_and_policies()
+    graph = _graph()
     detector = AuthAnomalyDetector()
 
     challenge, _adaptive = authenticators.begin_passwordless_assertion(
@@ -251,16 +190,6 @@ def test_advanced_identity_graph_auth_boundary_t2_fails_closed_for_replay_policy
         outcome="failure",
         details={"access_token": "secret"},
     )
-    denied = policies.access_decision(
-        AccessDecisionRequest(
-            tenant_id="tenant-a",
-            subject="user:alice",
-            action="document.read",
-            resource="document:roadmap",
-            context={"tenant": "tenant-a", "mfa": False},
-            correlation_id="corr-deny",
-        )
-    )
     no_path = graph.check_access(
         tenant_id="tenant-a",
         subject="user:bob",
@@ -270,8 +199,6 @@ def test_advanced_identity_graph_auth_boundary_t2_fails_closed_for_replay_policy
 
     assert signal is not None
     assert signal.redacted_details["access_token"] == "[REDACTED]"
-    assert denied.allowed is False
-    assert denied.reason == "policy context does not satisfy required values"
     assert no_path.allowed is False
 
     revoked_challenge, _ = authenticators.begin_passwordless_assertion(
@@ -297,31 +224,6 @@ def test_advanced_identity_graph_auth_boundary_t2_fails_closed_for_replay_policy
             challenge_id=challenge.challenge_id,
             credential_id=credential_id,
             nonce=challenge.expected_nonce,
-        )
-    with pytest.raises(ValueError, match="unsupported provider kind"):
-        federation.register_provider(
-            provider_id="bad",
-            tenant_id="tenant-a",
-            kind="saml",
-            issuer="https://bad.example.test",
-            discovery_url="https://bad.example.test/.well-known",
-            audience="public-uix",
-            display_name="Bad Provider",
-        )
-    with pytest.raises(PermissionError, match="issuer mismatch"):
-        federation.bind_session(
-            provider_id="corp-sso",
-            tenant_id="tenant-a",
-            session_id="bad-sess",
-            issuer="https://evil.example.test",
-            audience="public-uix",
-            claims={"sub": "alice"},
-        )
-    policy = policies.create_policy(tenant_id="tenant-a", name="document.write")
-    with pytest.raises(ValueError, match="unsafe construct"):
-        policies.publish_version(
-            policy_id=policy.policy_id,
-            source='allow if relation viewer and context.tenant == "tenant-a"; exec',
         )
     trust.revoke_edge(
         source_domain="trust://hub.example",

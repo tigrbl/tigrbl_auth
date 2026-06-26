@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from .adaptive import evaluate_adaptive_context
 from .authenticators import AdvancedAuthenticatorRegistry
-from .authorization import PolicyRegistry, RelationshipGraph
-from .federation import FederationRegistry
+from .authorization import Policy, PolicyVersion, RelationshipGraph
+from .federation import Federation, FederatedSession, IdentityProvider
 from .identities import DeviceWorkloadIdentityRegistry
 from .models import (
     AccessDecisionRequest,
@@ -14,13 +14,9 @@ from .models import (
     AuthTelemetryEvent,
     AuthenticationChallenge,
     DeviceIdentity,
-    FederatedSession,
     GraphDecision,
-    IdentityProvider,
     MfaFactor,
     PasswordlessCredential,
-    PolicyDefinition,
-    PolicyVersion,
     RelationshipDefinition,
     RelationshipTuple,
     TrustDomain,
@@ -45,14 +41,13 @@ __all__ = [
     'AuthenticationChallenge',
     'DeviceIdentity',
     'DeviceWorkloadIdentityRegistry',
+    'Federation',
     'FederatedSession',
-    'FederationRegistry',
     'GraphDecision',
     'IdentityProvider',
     'MfaFactor',
     'PasswordlessCredential',
-    'PolicyDefinition',
-    'PolicyRegistry',
+    'Policy',
     'PolicyVersion',
     'RelationshipDefinition',
     'RelationshipGraph',

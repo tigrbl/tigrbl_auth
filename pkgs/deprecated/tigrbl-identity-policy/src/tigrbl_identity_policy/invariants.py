@@ -1,4 +1,4 @@
-"""Deprecated compatibility module for `tigrbl_authz_policy_invariant_registry`."""
+"""Deprecated compatibility module for `tigrbl_authz_policy`."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from importlib import import_module as _import_module
 import warnings as _warnings
 
 _DEPRECATED_MODULE = "tigrbl_identity_policy.invariants"
-_CANONICAL_MODULE = "tigrbl_authz_policy_invariant_registry"
+_CANONICAL_MODULE = "tigrbl_authz_policy"
 
 _warnings.warn(
     f"{_DEPRECATED_MODULE} is deprecated; import {_CANONICAL_MODULE} instead.",

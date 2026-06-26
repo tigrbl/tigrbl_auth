@@ -38,8 +38,6 @@ dependencies = [
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
-    "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
-    "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
     "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",

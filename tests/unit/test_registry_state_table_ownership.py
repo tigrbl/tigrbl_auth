@@ -44,13 +44,13 @@ def test_registry_tables_are_in_migration_chain() -> None:
     )
 
 
-def test_concrete_state_registries_are_marked_for_compatibility_only() -> None:
-    concrete_modules = {
+def test_deprecated_state_registries_are_marked_for_compatibility_only() -> None:
+    compatibility_modules = {
         "tigrbl_identity_admin_policy_registry": "PolicyRegistry",
         "tigrbl_identity_admin_federation_registry": "FederationRegistry",
         "tigrbl_authz_policy_invariant_registry": "InvariantRegistry",
     }
-    for module_name, class_name in concrete_modules.items():
+    for module_name, class_name in compatibility_modules.items():
         module = importlib.import_module(module_name)
         assert hasattr(module, class_name)
 

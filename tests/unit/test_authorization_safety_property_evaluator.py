@@ -6,25 +6,20 @@ from tigrbl_authz_policy import (
     AuthorizationInvariant,
     AuthorizationSafetyPropertyEvaluator,
     InvariantEvaluation,
-    InvariantRegistry,
     VerificationMethod,
 )
 
 
 def test_authorization_safety_property_evaluator_t1_reports_invariant_failures() -> None:
-    registry = InvariantRegistry(
-        (
-            AuthorizationInvariant(
-                invariant_id="authz.no_escalation",
-                title="No escalation",
-                property_family="safety",
-                statement="Authority cannot exceed granted closure.",
-                verification_method=VerificationMethod.GRAPH,
-            ),
-        )
+    invariant = AuthorizationInvariant(
+        invariant_id="authz.no_escalation",
+        title="No escalation",
+        property_family="safety",
+        statement="Authority cannot exceed granted closure.",
+        verification_method=VerificationMethod.GRAPH,
     )
 
-    result = AuthorizationSafetyPropertyEvaluator(registry).evaluate(
+    result = AuthorizationSafetyPropertyEvaluator((invariant,)).evaluate(
         (
             InvariantEvaluation(
                 invariant_id="authz.no_escalation",

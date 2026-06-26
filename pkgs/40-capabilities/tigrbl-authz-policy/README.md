@@ -30,7 +30,7 @@ from tigrbl_authz_policy import AuthorityRole, AuthorityScope
 from tigrbl_authz_policy import AdminGate, ABACAdministrator, DelegatedAdministrator
 from tigrbl_authz_policy import PolicyEngine, RBACAdministrator, ServiceIdentityRegistry
 from tigrbl_authz_policy import AuthorityDerivationGraph, PolicyDecisionEngine
-from tigrbl_authz_policy_invariant_registry import default_authorization_invariant_registry
+from tigrbl_authz_policy import AuthorizationInvariant, AuthorizationSafetyPropertyEvaluator
 
 assert AuthorityRole.ADMIN.value == "admin"
 scope = AuthorityScope("tenant-a", "client.read")
@@ -40,7 +40,15 @@ delegated = DelegatedAdministrator(db)
 engine = PolicyDecisionEngine()
 gate = AdminGate(app, deployment=deployment)
 orchestrator = PolicyEngine(db=db)
-invariants = default_authorization_invariant_registry()
+invariants = (
+    AuthorizationInvariant(
+        invariant_id="authz.non_escalation",
+        title="No escalation",
+        property_family="safety",
+        statement="Effective authority cannot exceed granted closure.",
+        verification_method="graph",
+    ),
+)
 rbac = RBACAdministrator(db)
 services = ServiceIdentityRegistry()
 ```

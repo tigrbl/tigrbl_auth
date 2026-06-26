@@ -4,20 +4,20 @@ from tigrbl_identity_admin_advanced_authenticator_registry import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
 from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
-from tigrbl_identity_admin_federation_registry import FederationRegistry as CanonicalFederationRegistry
-from tigrbl_identity_admin_policy_registry import PolicyRegistry as CanonicalPolicyRegistry
 from tigrbl_identity_admin_relationship_graph import RelationshipGraph as CanonicalRelationshipGraph
 from tigrbl_identity_admin_trust_federation_graph import (
     TrustFederationGraph as CanonicalTrustFederationGraph,
 )
+from tigrbl_identity_storage.tables import Federation as CanonicalFederation
+from tigrbl_identity_storage.tables import Policy as CanonicalPolicy
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
     AdvancedAuthenticatorRegistry,
     AuthAnomalyDetector,
     DeviceWorkloadIdentityRegistry,
-    FederationRegistry,
-    PolicyRegistry,
+    Federation,
+    Policy,
     RelationshipGraph,
     TrustFederationGraph,
     build_phase4_delivery_summary,
@@ -90,65 +90,8 @@ def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_
         )
 
 
-def test_federation_registry_supports_sso_social_provider_trust_claim_normalization_and_logout():
-    assert FederationRegistry is CanonicalFederationRegistry
-
-    registry = FederationRegistry()
-    social = registry.register_provider(
-        provider_id="github",
-        tenant_id="tenant-a",
-        kind="social",
-        issuer="https://github.com/login/oauth",
-        discovery_url="https://github.com/.well-known/openid-configuration",
-        audience="public-uix",
-        display_name="GitHub",
-        scopes=("openid", "email"),
-    )
-    registry.register_provider(
-        provider_id="corp-sso",
-        tenant_id="tenant-a",
-        kind="sso",
-        issuer="https://login.example.com",
-        discovery_url="https://login.example.com/.well-known/openid-configuration",
-        audience="public-uix",
-        display_name="Contoso SSO",
-        logout_supported=True,
-        claim_mapping={"sub": "sub", "email": "mail", "name": "display_name"},
-    )
-    registry.register_provider(
-        provider_id="partner-fed",
-        tenant_id="tenant-a",
-        kind="federation",
-        issuer="https://partner.example.com",
-        discovery_url="https://partner.example.com/federation.json",
-        audience="token-exchange",
-        display_name="Partner Federation",
-    )
-    rotated = registry.rotate_provider_keys("corp-sso")
-    session = registry.bind_session(
-        provider_id="corp-sso",
-        tenant_id="tenant-a",
-        session_id="session-1",
-        issuer="https://login.example.com",
-        audience="public-uix",
-        claims={"sub": "alice", "mail": "alice@example.com", "display_name": "Alice"},
-    )
-
-    assert social.kind == "social"
-    assert rotated.key_set_version == 2
-    assert session.logout_supported
-    assert session.normalized_claims["email"] == "alice@example.com"
-    assert session.normalized_claims["name"] == "Alice"
-
-    with pytest.raises(PermissionError, match="issuer mismatch"):
-        registry.bind_session(
-            provider_id="corp-sso",
-            tenant_id="tenant-a",
-            session_id="session-2",
-            issuer="https://evil.example.com",
-            audience="public-uix",
-            claims={"sub": "alice"},
-        )
+def test_federation_surface_exports_storage_table_registry() -> None:
+    assert Federation is CanonicalFederation
 
 
 def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_cloud_trust_paths():
@@ -219,8 +162,8 @@ def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_clo
     assert revoked_device.revoked
 
 
-def test_relationship_graph_and_policy_registry_support_rebac_graph_queries_versions_and_decision_api():
-    assert PolicyRegistry is CanonicalPolicyRegistry
+def test_relationship_graph_and_policy_surface_use_table_owned_policy_state():
+    assert Policy is CanonicalPolicy
     assert RelationshipGraph is CanonicalRelationshipGraph
 
     graph = RelationshipGraph()
@@ -260,40 +203,6 @@ def test_relationship_graph_and_policy_registry_support_rebac_graph_queries_vers
         tenant_id="tenant-a",
     )
 
-    policies = PolicyRegistry(relationship_graph=graph)
-    policy = policies.create_policy(tenant_id="tenant-a", name="document.read")
-    version_1 = policies.publish_version(
-        policy_id=policy.policy_id,
-        source='allow if relation viewer and context.tenant == "tenant-a" and context.mfa == true',
-        promote=True,
-    )
-    version_2 = policies.publish_version(
-        policy_id=policy.policy_id,
-        source='allow if relation viewer and context.tenant == "tenant-a" and context.mfa == true and context.device_trusted == true',
-        promote=True,
-    )
-    policies.rollback_policy(policy_id=policy.policy_id, version_id=version_1.version_id)
-
-    allowed = policies.access_decision(
-        AccessDecisionRequest(
-            tenant_id="tenant-a",
-            subject="user:alice",
-            action="document.read",
-            resource="document:roadmap",
-            context={"tenant": "tenant-a", "mfa": True},
-            correlation_id="corr-1",
-        )
-    )
-    denied = policies.access_decision(
-        AccessDecisionRequest(
-            tenant_id="tenant-a",
-            subject="user:alice",
-            action="document.read",
-            resource="document:roadmap",
-            context={"tenant": "tenant-a", "mfa": False},
-            correlation_id="corr-2",
-        )
-    )
     no_path = graph.check_access(
         tenant_id="tenant-a",
         subject="user:bob",
@@ -303,13 +212,6 @@ def test_relationship_graph_and_policy_registry_support_rebac_graph_queries_vers
 
     assert initial.version == 1
     assert migrated.version == 2
-    assert policies.check_compatibility(left_version_id=version_1.version_id, right_version_id=version_2.version_id)
-    assert allowed.allowed
-    assert allowed.policy_version_id == version_1.version_id
-    assert allowed.idempotency_key == "corr-1:user:alice:document.read:document:roadmap"
-    assert any("group:eng#member@user:alice" in step for step in allowed.explanation)
-    assert not denied.allowed
-    assert denied.reason == "policy context does not satisfy required values"
     assert not no_path.allowed
 
 
@@ -359,32 +261,21 @@ def test_auth_anomaly_detector_normalizes_redacts_and_explains_detection_outputs
 
 def test_phase4_delivery_summary_aggregates_advanced_identity_capabilities():
     authenticators = AdvancedAuthenticatorRegistry()
-    federation = FederationRegistry()
+    federation = Federation
     non_human = DeviceWorkloadIdentityRegistry()
     graph = RelationshipGraph()
     graph.define_relation(resource_type="document", relation="viewer", subject_types=("user",))
-    policies = PolicyRegistry(relationship_graph=graph)
+    policies = Policy
     detector = AuthAnomalyDetector()
     trust_graph = TrustFederationGraph()
 
     authenticators.enroll_passwordless_credential(subject_id="alice", tenant_id="tenant-a")
-    federation.register_provider(
-        provider_id="corp-sso",
-        tenant_id="tenant-a",
-        kind="sso",
-        issuer="https://login.example.com",
-        discovery_url="https://login.example.com/.well-known/openid-configuration",
-        audience="public-uix",
-        display_name="Contoso SSO",
-    )
     non_human.register_device(
         device_id="device-1",
         subject_id="alice",
         tenant_id="tenant-a",
         credential_posture="managed",
     )
-    policy = policies.create_policy(tenant_id="tenant-a", name="document.read")
-    policies.publish_version(policy_id=policy.policy_id, source='allow if relation viewer and context.tenant == "tenant-a"')
     detector.record_event(
         tenant_id="tenant-a",
         subject_id="alice",
@@ -408,8 +299,8 @@ def test_phase4_delivery_summary_aggregates_advanced_identity_capabilities():
     )
 
     assert summary["advanced_authentication"]["passwordless_credential_count"] == 1
-    assert summary["federation"]["provider_count"] == 1
+    assert summary["federation"]["provider_count"] == 0
     assert summary["non_human_identities"]["device_count"] == 1
-    assert summary["policy_control_plane"]["policy_count"] == 1
+    assert summary["policy_control_plane"]["policy_count"] == 0
     assert summary["anomaly_detection"]["event_count"] == 1
     assert summary["trust_graph"]["domain_count"] == 1

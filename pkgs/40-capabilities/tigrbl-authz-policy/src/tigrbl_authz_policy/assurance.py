@@ -4,15 +4,18 @@ from __future__ import annotations
 
 from typing import Iterable, Mapping
 
-from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
-from tigrbl_authz_policy_invariant_registry import (
+from tigrbl_identity_contracts.invariants import (
     AuthorizationInvariant,
     InvariantEvaluation,
-    InvariantRegistry,
     InvariantSeverity,
     InvariantViolation,
     VerificationMethod,
-    default_authorization_invariant_registry,
+)
+from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
+from tigrbl_identity_storage.tables import (
+    AuthorizationInvariant as AuthorizationInvariantTable,
+    InvariantEvaluation as InvariantEvaluationTable,
+    InvariantViolation as InvariantViolationTable,
 )
 from tigrbl_identity_contracts.correctness import (
     AuthorizationReference,
@@ -42,16 +45,16 @@ from tigrbl_authz_policy_authority_derivation_graph import AuthorityDerivationGr
 
 
 class AuthorizationSafetyPropertyEvaluator:
-    def __init__(self, registry: InvariantRegistry) -> None:
-        self.registry = registry
+    def __init__(self, invariants: Iterable[AuthorizationInvariant] = ()) -> None:
+        self.invariants = tuple(invariants)
 
     def evaluate(self, evaluations: Iterable[InvariantEvaluation]) -> SafetyPropertyResult:
         rows = tuple(sorted(evaluations, key=lambda item: item.invariant_id))
-        violations = self.registry.violations(rows)
+        violations = tuple(row for row in rows if not row.passed)
         return SafetyPropertyResult(
             passed=not violations,
             evaluations=rows,
-            failures=tuple(violation.message for violation in violations),
+            failures=tuple(row.message for row in violations),
         )
 
 
@@ -292,6 +295,7 @@ def evaluate_liveness_convergence(events: tuple[ConvergenceEvent, ...]) -> Liven
 
 __all__ = [
     "AuthorizationInvariant",
+    "AuthorizationInvariantTable",
     "AuthorizationReference",
     "AuthorizationSafetyPropertyEvaluator",
     "ControlPlaneCorrectnessReport",
@@ -302,9 +306,10 @@ __all__ = [
     "DecisionStabilityReport",
     "IntegrityReport",
     "InvariantEvaluation",
-    "InvariantRegistry",
+    "InvariantEvaluationTable",
     "InvariantSeverity",
     "InvariantViolation",
+    "InvariantViolationTable",
     "LivenessConvergenceReport",
     "PolicyDeterminismReport",
     "PolicyReplayCase",
@@ -318,7 +323,6 @@ __all__ = [
     "canonical_hash",
     "canonical_json",
     "compare_policy_version_decisions",
-    "default_authorization_invariant_registry",
     "evaluate_liveness_convergence",
     "replay_policy_determinism",
     "validate_authorization_referential_integrity",

@@ -45,7 +45,6 @@ dependencies = [
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
-    "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-release-contracts==0.1.0",
 ]
 [project.urls]

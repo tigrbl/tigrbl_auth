@@ -76,7 +76,7 @@ DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
     "tigrbl_identity_policy/_admin_gate/gate.py": "tigrbl_authz_policy.admin_gate",
     "tigrbl_identity_policy/_admin_gate/helpers.py": "tigrbl_authz_policy.admin_gate",
     "tigrbl_identity_policy/certification.py": "tigrbl_auth_release_certification.certification",
-    "tigrbl_identity_policy/invariants.py": "tigrbl_authz_policy_invariant_registry",
+    "tigrbl_identity_policy/invariants.py": "tigrbl_authz_policy",
     "tigrbl_identity_policy/release_posture.py": "tigrbl_auth_release_certification.release_posture",
 }
 
@@ -88,7 +88,6 @@ NON_TAXONOMY_CANONICAL_ROOTS = {
     "tigrbl_authz_policy_evaluators_default",
     "tigrbl_authz_policy_obligations_concrete",
     "tigrbl_authz_policy_rules_concrete",
-    "tigrbl_authz_policy_invariant_registry",
     "tigrbl_identity_credentials_concrete",
     "tigrbl_identity_identities_concrete",
     "tigrbl_identity_jose",
