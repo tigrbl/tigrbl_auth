@@ -114,6 +114,11 @@ from .control_correctness_report import ControlCorrectnessReport
 from .authz_verification_report import AuthzVerificationReport
 from .resource_server_contract import ResourceServerContract
 from .provider_artifact import ProviderArtifact
+from .identity_provider import IdentityProvider
+from .federated_session import FederatedSession
+from .authorization_invariant import AuthorizationInvariant
+from .invariant_evaluation import InvariantEvaluation
+from .invariant_violation import InvariantViolation
 from .operator_metadata import OperatorMetadata
 from .operator_record import OperatorRecord
 from .operator_transaction import OperatorTransaction
@@ -201,6 +206,11 @@ _TABLE_MODELS = (
     AuthzVerificationReport,
     ResourceServerContract,
     ProviderArtifact,
+    IdentityProvider,
+    FederatedSession,
+    AuthorizationInvariant,
+    InvariantEvaluation,
+    InvariantViolation,
     OperatorMetadata,
     OperatorRecord,
     OperatorTransaction,
@@ -357,6 +367,11 @@ __all__ = [
     "AuthzVerificationReport",
     "ResourceServerContract",
     "ProviderArtifact",
+    "IdentityProvider",
+    "FederatedSession",
+    "AuthorizationInvariant",
+    "InvariantEvaluation",
+    "InvariantViolation",
     "OperatorMetadata",
     "OperatorRecord",
     "OperatorTransaction",

@@ -14,6 +14,7 @@ REVISION_0007 = "0007_browser_session_cookie_and_auth_code_linkage"
 REVISION_0008 = "0008_refresh_token_family_state"
 REVISION_0009 = "0009_admin_identity_bootstrap_and_password_recovery"
 REVISION_0010 = "0010_realm_namespace_tables"
+REVISION_0019 = "0019_federation_and_invariant_tables"
 REVISION_0006 = "0006_key_rotation_and_audit_tables"
 SESSION_COLUMNS = {"session_state_salt", "cookie_secret_hash", "cookie_issued_at", "cookie_rotated_at"}
 AUTH_CODE_COLUMNS = {"session_id"}
@@ -75,8 +76,12 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             assert first.passed is True, backend
             await _assert_upgrade_state()
 
-            downgraded_latest = await downgrade_one_async()
-            assert downgraded_latest == REVISION_0010, backend
+            downgraded_newer_revisions: list[str] = []
+            while True:
+                downgraded_latest = await downgrade_one_async()
+                downgraded_newer_revisions.append(downgraded_latest)
+                if downgraded_latest == REVISION_0010:
+                    break
 
             downgraded_realm_namespace = await downgrade_one_async()
             assert downgraded_realm_namespace == REVISION_0009, backend
@@ -94,7 +99,9 @@ async def test_downgrade_then_reapply_is_schema_safe_on_sqlite_and_postgres(runt
             reapplied = await apply_all_async()
             assert reapplied.passed is True, backend
             await _assert_upgrade_state()
+            assert REVISION_0019 in set(first.applied) | set(first.pending_before) | {REVISION_0019}
             assert downgraded_latest in set(first.applied) | set(first.pending_before) | {downgraded_latest}
+            assert REVISION_0010 in downgraded_newer_revisions
             assert downgraded_realm_namespace in set(first.applied) | set(first.pending_before) | {downgraded_realm_namespace}
             assert downgraded_admin_identity in set(first.applied) | set(first.pending_before) | {downgraded_admin_identity}
             assert downgraded in set(first.applied) | set(first.pending_before) | {downgraded}
