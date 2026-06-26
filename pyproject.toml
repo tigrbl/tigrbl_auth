@@ -61,6 +61,9 @@ dependencies = [
     "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
+    "tigrbl-oauth-scope-matcher==0.4.0.dev2",
+    "tigrbl-oidc-claims-concrete==0.4.0.dev2",
+    "tigrbl-oidc-subject-strategy==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authz-policy-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
@@ -74,6 +77,12 @@ dependencies = [
     "tigrbl-security-mtls-cnf-binding-validator==0.1.0",
     "tigrbl-security-proof-dpop==0.1.0",
     "tigrbl-security-proof-pkce==0.1.0",
+    "tigrbl-security-auth-context-acr-basic==0.1.0",
+    "tigrbl-security-auth-context-amr-basic==0.1.0",
+    "tigrbl-security-claims-provider-local==0.1.0",
+    "tigrbl-security-subject-pairwise-provider==0.1.0",
+    "tigrbl-security-webfinger-provider==0.1.0",
+    "tigrbl-security-oidc-federation-provider==0.1.0",
     "tigrbl-security-sender-constraint-validator==0.1.0",
     "tigrbl-security-signing-pqc==0.1.0",
     "tigrbl-security-token-introspection-client==0.1.0",
@@ -219,6 +228,12 @@ tigrbl-security-dpop-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-
 tigrbl-security-mtls-cnf-binding-validator = { path = "pkgs/20-providers/tigrbl-security-mtls-cnf-binding-validator", editable = true }
 tigrbl-security-proof-dpop = { path = "pkgs/20-providers/tigrbl-security-proof-dpop", editable = true }
 tigrbl-security-proof-pkce = { path = "pkgs/20-providers/tigrbl-security-proof-pkce", editable = true }
+tigrbl-security-auth-context-acr-basic = { path = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic", editable = true }
+tigrbl-security-auth-context-amr-basic = { path = "pkgs/20-providers/tigrbl-security-auth-context-amr-basic", editable = true }
+tigrbl-security-claims-provider-local = { path = "pkgs/20-providers/tigrbl-security-claims-provider-local", editable = true }
+tigrbl-security-subject-pairwise-provider = { path = "pkgs/20-providers/tigrbl-security-subject-pairwise-provider", editable = true }
+tigrbl-security-webfinger-provider = { path = "pkgs/20-providers/tigrbl-security-webfinger-provider", editable = true }
+tigrbl-security-oidc-federation-provider = { path = "pkgs/20-providers/tigrbl-security-oidc-federation-provider", editable = true }
 tigrbl-security-sender-constraint-validator = { path = "pkgs/20-providers/tigrbl-security-sender-constraint-validator", editable = true }
 tigrbl-security-signing-pqc = { path = "pkgs/20-providers/tigrbl-security-signing-pqc", editable = true }
 tigrbl-security-token-introspection-client = { path = "pkgs/20-providers/tigrbl-security-token-introspection-client", editable = true }
@@ -226,6 +241,9 @@ tigrbl-security-token-jwks-cache = { path = "pkgs/20-providers/tigrbl-security-t
 tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
 tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
+tigrbl-oauth-scope-matcher = { path = "pkgs/10-concrete/tigrbl-oauth-scope-matcher", editable = true }
+tigrbl-oidc-claims-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-claims-concrete", editable = true }
+tigrbl-oidc-subject-strategy = { path = "pkgs/10-concrete/tigrbl-oidc-subject-strategy", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }
 tigrbl-auth-protocol-rp = { path = "pkgs/50-protocols/tigrbl-auth-protocol-rp", editable = true }
 tigrbl-authn-credentials = { path = "pkgs/40-capabilities/tigrbl-authn-credentials", editable = true }

@@ -25,6 +25,12 @@ from .keys import (
     WrappedKeyMaterial,
     WrapKeyRequest,
 )
+from .auth_context import (
+    AcrEvaluationRequest,
+    AcrEvaluationResult,
+    AmrEvaluationRequest,
+    AmrEvaluationResult,
+)
 from .types import (
     Alg,
     Artifact,
@@ -333,6 +339,24 @@ class IProvenanceArtifactBuilder(Protocol):
     ) -> DelegationProvenance | Mapping[str, Any]: ...
 
 
+class IPkceVerifier(Protocol):
+    """PKCE S256 verifier contract."""
+
+    def verify_challenge(self, *, verifier: str, challenge: str) -> bool: ...
+
+
+class IAcrEvaluator(Protocol):
+    """Authentication Context Class Reference evaluator."""
+
+    def evaluate_acr(self, request: AcrEvaluationRequest) -> AcrEvaluationResult: ...
+
+
+class IAmrEvaluator(Protocol):
+    """Authentication Methods References evaluator."""
+
+    def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult: ...
+
+
 __all__ = [
     "IArtifactCodec",
     "IArtifactIssuer",
@@ -354,6 +378,7 @@ __all__ = [
     "IKeyWrappingProvider",
     "IPublicKeyExporter",
     "IProvenanceArtifactBuilder",
+    "IPkceVerifier",
     "IRecipientSetEditor",
     "ISigningProvider",
     "ISenderConstraintValidator",
@@ -361,4 +386,6 @@ __all__ = [
     "ITokenIntrospectionTransport",
     "IVerificationKeyCache",
     "IVerificationKeyResolver",
+    "IAcrEvaluator",
+    "IAmrEvaluator",
 ]

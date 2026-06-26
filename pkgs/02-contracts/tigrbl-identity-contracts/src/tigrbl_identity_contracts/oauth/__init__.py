@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
+from importlib import import_module
 from typing import Any, Protocol
 
-from .protocols import OAuthGrantStatus
+from ..protocols import OAuthGrantStatus
 
 
 @dataclass(frozen=True, slots=True)
@@ -238,6 +239,42 @@ class ProtectedResourceVerifierContract:
         if self.revocation_check:
             payload["revocation_check"] = self.revocation_check
         return payload
+
+
+_LAZY_EXPORTS = {
+    "AuthorizationServerConfigPort": ".authorization_server",
+    "AuthorizationServerCreateRequest": ".authorization_server",
+    "AuthorizationServerMetadataPublisherPort": ".authorization_server",
+    "AuthorizationServerReadResponse": ".authorization_server",
+    "AuthorizationServerResolverPort": ".authorization_server",
+    "AuthorizationServerUpdateRequest": ".authorization_server",
+    "ConsentCreateRequest": ".consent",
+    "ConsentReadResponse": ".consent",
+    "ConsentServicePort": ".consent",
+    "ConsentUpdateRequest": ".consent",
+    "RefreshIn": ".refresh",
+    "RefreshTokenLifecyclePort": ".refresh",
+    "RevocationIn": ".revocation",
+    "RevocationOut": ".revocation",
+    "RevokedTokenReadResponse": ".revocation",
+    "ScopeMatchRequest": ".scope",
+    "ScopeMatchResult": ".scope",
+    "ScopeMatcherPort": ".scope",
+    "TokenExchangeRequest": ".exchange",
+    "TokenExchangeServicePort": ".exchange",
+    "TokenPair": ".refresh",
+    "TokenRecordReadResponse": ".refresh",
+    "TokenRevocationPort": ".revocation",
+}
+
+
+def __getattr__(name: str) -> Any:
+    if name not in _LAZY_EXPORTS:
+        raise AttributeError(name)
+    module = import_module(_LAZY_EXPORTS[name], __name__)
+    value = getattr(module, name)
+    globals()[name] = value
+    return value
 
 
 __all__ = [

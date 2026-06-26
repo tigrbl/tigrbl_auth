@@ -10,6 +10,7 @@ _SUBMODULES = (
     "audit_event",
     "auth_code",
     "auth_session",
+    "authorization_server",
     "client",
     "client_registration",
     "consent",

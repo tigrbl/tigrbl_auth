@@ -6,9 +6,13 @@ from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
 from tigrbl_security_trust_contracts import (
+    AcrEvaluationRequest,
+    AcrEvaluationResult,
     AttestKeyRequest,
     AttestationEvidence,
     Artifact,
+    AmrEvaluationRequest,
+    AmrEvaluationResult,
     CanonicalizeRequest,
     CapabilityMap,
     CertificateRequest,
@@ -125,6 +129,55 @@ class ProofOfPossessionDomainBase(
     CapabilityProviderBase, ArtifactIssuerBase, ArtifactVerifierBase
 ):
     """Domain composition for request-bound proof-of-possession providers."""
+
+
+class PkceVerifierBase(CapabilityProviderBase):
+    """Base for PKCE challenge verification providers."""
+
+    def verify_challenge(self, *, verifier: str, challenge: str) -> bool:
+        raise NotImplementedError
+
+
+class AcrEvaluatorBase(CapabilityProviderBase):
+    """Base for Authentication Context Class Reference evaluators."""
+
+    def evaluate_acr(self, request: AcrEvaluationRequest) -> AcrEvaluationResult:
+        raise NotImplementedError
+
+
+class AmrEvaluatorBase(CapabilityProviderBase):
+    """Base for Authentication Methods References evaluators."""
+
+    def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult:
+        raise NotImplementedError
+
+
+class ClaimsProviderBase(CapabilityProviderBase):
+    """Base for provider-style claims assembly."""
+
+    async def claims(self, request: Any) -> Any:
+        raise NotImplementedError
+
+
+class SubjectIdentifierStrategyBase(CapabilityProviderBase):
+    """Base for public, pairwise, transient, and opaque subject strategies."""
+
+    def derive(self, request: Any) -> Any:
+        raise NotImplementedError
+
+
+class WebFingerResolverBase(CapabilityProviderBase):
+    """Base for WebFinger discovery providers."""
+
+    async def resolve(self, request: Any) -> Any:
+        raise NotImplementedError
+
+
+class OidcFederationProviderBase(CapabilityProviderBase):
+    """Base for OIDC Federation trust providers."""
+
+    async def entity_statement(self, request: Any) -> Any:
+        raise NotImplementedError
 
 
 class TokenServiceDomainBase(

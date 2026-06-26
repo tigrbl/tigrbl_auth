@@ -13,8 +13,10 @@ from ..invariants import (
     InvariantViolation,
 )
 from ..authentication import ServiceIdentityAuthentication
+from .conditions import DynamicCondition
 from .decisions import PolicyDecision, PolicyTrace
 from .requests import PolicyRequest
+from .rules import PolicyRule
 
 
 class PolicyDecisionEnginePort(Protocol):
@@ -32,6 +34,18 @@ class PolicyDecisionEnginePort(Protocol):
     def decide_admin(self, request: PolicyRequest) -> PolicyDecision: ...
 
     def evaluate(self, request: PolicyRequest) -> PolicyDecision: ...
+
+
+class RuleEvaluatorPort(Protocol):
+    def evaluate_rule(self, rule: PolicyRule, request: PolicyRequest, /) -> PolicyDecision: ...
+
+
+class ConditionEvaluatorPort(Protocol):
+    def evaluate_condition(self, condition: DynamicCondition, request: PolicyRequest, /) -> bool: ...
+
+
+class AdminGatePort(Protocol):
+    async def authorize_admin_action(self, request: PolicyRequest, /) -> PolicyDecision: ...
 
 
 class RBACAdministratorPort(Protocol):
@@ -251,11 +265,14 @@ class InvariantRegistryPort(Protocol):
 
 __all__ = [
     "ABACAdministratorPort",
+    "AdminGatePort",
+    "ConditionEvaluatorPort",
     "DelegatedAdministratorPort",
     "InvariantEvaluator",
     "InvariantRegistryPort",
     "PolicyDecisionEnginePort",
     "PolicyEnginePort",
     "RBACAdministratorPort",
+    "RuleEvaluatorPort",
     "ServiceIdentityRegistryPort",
 ]

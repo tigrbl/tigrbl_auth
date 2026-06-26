@@ -28,6 +28,7 @@ from .client_registration import (
     DynamicClientRegistrationManagementIn,
     DynamicClientRegistrationOut,
 )
+from .authorization_server import AuthorizationServer
 from .principal import Principal
 from .service_identity import ServiceIdentity
 from .machine_identity import MachineIdentity
@@ -123,6 +124,7 @@ _TABLE_MODELS = (
     User,
     Client,
     ClientRegistration,
+    AuthorizationServer,
     Principal,
     ServiceIdentity,
     MachineIdentity,
@@ -272,6 +274,7 @@ __all__ = [
     "Client",
     "_CLIENT_ID_RE",
     "ClientRegistration",
+    "AuthorizationServer",
     "Principal",
     "ServiceIdentity",
     "MachineIdentity",

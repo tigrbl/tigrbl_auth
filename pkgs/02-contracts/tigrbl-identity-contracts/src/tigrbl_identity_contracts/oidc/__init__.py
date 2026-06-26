@@ -4,10 +4,11 @@ import html
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
+from importlib import import_module
 from typing import Any, Mapping, Protocol
 from uuid import UUID
 
-from .protocols import OidcSessionStatus
+from ..protocols import OidcSessionStatus
 
 _HEX_COLOR_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
 
@@ -128,6 +129,55 @@ class BackchannelReplayStorePort(Protocol):
     def register(self, jti: str, *, exp: datetime, now: datetime) -> None: ...
 
     def snapshot(self) -> Mapping[str, int]: ...
+
+
+_LAZY_EXPORTS = {
+    "AuthSessionCreateRequest": ".session",
+    "AuthSessionReadResponse": ".claims",
+    "ClaimDescriptor": ".claims",
+    "ClaimsProviderPort": ".claims",
+    "ClaimsRequest": ".claims",
+    "ClaimsResult": ".claims",
+    "ConsentReadResponse": ".claims",
+    "DiscoveryDocumentRequest": ".discovery",
+    "DiscoveryPublisherPort": ".discovery",
+    "FederationEntityStatementRequest": ".federation",
+    "FederationEntityStatementResult": ".federation",
+    "FrontChannelLogoutPort": ".logout",
+    "IdTokenIssuerPort": ".provider",
+    "IdTokenVerifierPort": ".provider",
+    "LogoutIn": ".logout",
+    "LogoutOut": ".logout",
+    "LogoutStateReadResponse": ".session",
+    "OidcFederationPort": ".federation",
+    "OpenIDProviderPort": ".provider",
+    "RealmReadResponse": ".discovery",
+    "RelyingPartyPort": ".relying_party",
+    "RpInitiatedLogoutPort": ".logout",
+    "SessionServicePort": ".session",
+    "SubjectAliasCreateRequest": ".subjects",
+    "SubjectAliasReadResponse": ".subjects",
+    "SubjectIdentifierKind": ".subjects",
+    "SubjectIdentifierRequest": ".subjects",
+    "SubjectIdentifierResult": ".subjects",
+    "SubjectIdentifierStrategyPort": ".subjects",
+    "UserInfoProviderPort": ".userinfo",
+    "UserInfoRequest": ".userinfo",
+    "UserInfoResult": ".userinfo",
+    "UserReadResponse": ".claims",
+    "WebFingerRequest": ".webfinger",
+    "WebFingerResolverPort": ".webfinger",
+    "WebFingerResult": ".webfinger",
+}
+
+
+def __getattr__(name: str) -> Any:
+    if name not in _LAZY_EXPORTS:
+        raise AttributeError(name)
+    module = import_module(_LAZY_EXPORTS[name], __name__)
+    value = getattr(module, name)
+    globals()[name] = value
+    return value
 
 
 __all__ = [

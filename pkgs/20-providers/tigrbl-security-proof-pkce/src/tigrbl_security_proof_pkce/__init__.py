@@ -15,7 +15,7 @@ from tigrbl_security_trust_contracts import (
     VerificationResult,
     VerifyRequest,
 )
-from tigrbl_security_trust_domain_bases import ProofOfPossessionDomainBase
+from tigrbl_security_trust_domain_bases import PkceVerifierBase, ProofOfPossessionDomainBase
 
 PKCE_SPEC_URL: Final = "https://www.rfc-editor.org/rfc/rfc7636"
 PKCE_CHALLENGE_METHOD: Final = "S256"
@@ -91,7 +91,7 @@ class PkceVerifier:
         }
 
 
-class PkceProofProvider(ProofOfPossessionDomainBase):
+class PkceProofProvider(PkceVerifierBase, ProofOfPossessionDomainBase):
     """Provider for issuing and verifying RFC 7636 PKCE S256 proof material."""
 
     def supports(self) -> CapabilityMap:
@@ -101,6 +101,9 @@ class PkceProofProvider(ProofOfPossessionDomainBase):
             modes=("pkce",),
             features=("rfc7636", "proof-key", "code-challenge"),
         )
+
+    def verify_challenge(self, *, verifier: str, challenge: str) -> bool:
+        return verify_pkce_s256_challenge(verifier, challenge)
 
     async def issue(self, request: IssueRequest) -> Artifact:
         length = int(request.opts.get("length", 64))
