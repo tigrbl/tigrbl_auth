@@ -1,4 +1,4 @@
-"""Executable DDL migration for durable policy repository state."""
+"""Executable DDL migration for durable policy table state."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from tigrbl_identity_storage.tables import (
     PolicyVersion,
 )
 
-revision = "0018_policy_repository_tables"
+revision = "0018_policy_tables"
 down_revision = "0017_authorization_server_table"
 branch_labels = None
 depends_on = None

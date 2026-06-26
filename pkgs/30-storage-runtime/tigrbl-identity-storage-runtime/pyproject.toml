@@ -36,7 +36,6 @@ dependencies = [
     "tigrbl-auth-protocol-oidc==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",
     "tigrbl-identity-jose==0.4.0.dev2",
-    "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-runtime==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",

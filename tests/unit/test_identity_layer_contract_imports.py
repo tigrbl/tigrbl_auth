@@ -22,12 +22,11 @@ def test_authorization_server_table_and_schema_exports() -> None:
         assert getattr(contract_schemas, name) is getattr(storage_schemas, name)
 
 
-def test_policy_repository_table_contract_and_runtime_exports() -> None:
+def test_policy_table_contract_exports() -> None:
     storage_tables = importlib.import_module("tigrbl_identity_storage.tables")
     storage_schemas = importlib.import_module("tigrbl_identity_storage.schemas")
     contract_schemas = importlib.import_module("tigrbl_identity_contracts.schemas")
     policy_contracts = importlib.import_module("tigrbl_identity_contracts.policy")
-    runtime = importlib.import_module("tigrbl_identity_storage_runtime.policy_repository")
 
     for table_name in (
         "Policy",
@@ -58,8 +57,6 @@ def test_policy_repository_table_contract_and_runtime_exports() -> None:
         "TargetMatcherPort",
     ):
         assert hasattr(policy_contracts, name)
-
-    assert hasattr(runtime, "StoragePolicyRepository")
 
 
 def test_oauth_contracts_use_storage_schema_lineage() -> None:

@@ -115,6 +115,7 @@ from .authz_verification_report import AuthzVerificationReport
 from .resource_server_contract import ResourceServerContract
 from .provider_artifact import ProviderArtifact
 from .identity_provider import IdentityProvider
+from .federation import Federation
 from .federated_session import FederatedSession
 from .authorization_invariant import AuthorizationInvariant
 from .invariant_evaluation import InvariantEvaluation
@@ -207,6 +208,7 @@ _TABLE_MODELS = (
     ResourceServerContract,
     ProviderArtifact,
     IdentityProvider,
+    Federation,
     FederatedSession,
     AuthorizationInvariant,
     InvariantEvaluation,
@@ -368,6 +370,7 @@ __all__ = [
     "ResourceServerContract",
     "ProviderArtifact",
     "IdentityProvider",
+    "Federation",
     "FederatedSession",
     "AuthorizationInvariant",
     "InvariantEvaluation",
