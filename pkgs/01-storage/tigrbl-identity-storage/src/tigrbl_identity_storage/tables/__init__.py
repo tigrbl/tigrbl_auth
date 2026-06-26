@@ -84,6 +84,11 @@ from .subject_alias import SubjectAlias
 from .role import Role
 from .attribute_policy import AttributePolicy
 from .policy_condition import PolicyCondition
+from .policy import Policy
+from .policy_version import PolicyVersion
+from .policy_set import PolicySet
+from .policy_set_member import PolicySetMember
+from .policy_target import PolicyTarget
 from .delegated_admin_scope import DelegatedAdminScope
 from .entitlement import Entitlement
 from .entitlement_assignment import EntitlementAssignment
@@ -166,6 +171,11 @@ _TABLE_MODELS = (
     Role,
     AttributePolicy,
     PolicyCondition,
+    Policy,
+    PolicyVersion,
+    PolicySet,
+    PolicySetMember,
+    PolicyTarget,
     DelegatedAdminScope,
     Entitlement,
     EntitlementAssignment,
@@ -317,6 +327,11 @@ __all__ = [
     "Role",
     "AttributePolicy",
     "PolicyCondition",
+    "Policy",
+    "PolicyVersion",
+    "PolicySet",
+    "PolicySetMember",
+    "PolicyTarget",
     "DelegatedAdminScope",
     "Entitlement",
     "EntitlementAssignment",

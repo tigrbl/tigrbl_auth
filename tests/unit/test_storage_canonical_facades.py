@@ -61,8 +61,13 @@ TABLE_MODULE_EXPORTS = {
     "key_attestation_evidence": ("KeyAttestationEvidence",),
     "logout_state": ("LogoutState",),
     "machine_identity": ("MachineIdentity",),
+    "policy": ("Policy",),
     "principal": ("Principal",),
     "principal_key_binding": ("PrincipalKeyBinding",),
+    "policy_set": ("PolicySet",),
+    "policy_set_member": ("PolicySetMember",),
+    "policy_target": ("PolicyTarget",),
+    "policy_version": ("PolicyVersion",),
     "pushed_authorization_request": (
         "PushedAuthorizationRequest",
         "DEFAULT_PAR_EXPIRY",

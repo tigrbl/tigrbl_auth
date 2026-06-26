@@ -1,6 +1,7 @@
 """Runtime helpers for composing Tigrbl identity storage with runtime engines."""
 
 from .migrations import *
+from .policy_repository import StoragePolicyRepository, create_storage_policy_repository
 
 __all__ = [
     "MigrationContract",
@@ -15,6 +16,8 @@ __all__ = [
     "downgrade_one_async",
     "expected_table_names",
     "iter_migration_modules",
+    "StoragePolicyRepository",
+    "create_storage_policy_repository",
     "verify_schema_async",
     "verify_schema_sync",
 ]
