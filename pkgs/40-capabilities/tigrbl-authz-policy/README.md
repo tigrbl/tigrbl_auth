@@ -12,7 +12,7 @@ tigrbl-authz-policy is the authorization-facing package name for authority, poli
 - Use it for authorization policy surfaces rather than credential verification or token signing.
 - It owns authority roles, RBAC, ABAC, delegation, policy replay, and decision audit concepts.
 - Administrator objects, `PolicyEngine`, `ServiceIdentityRegistry`, and `AdminGate` are implemented in this package as storage-backed programmatic surfaces.
-- Deterministic rule objects live in `tigrbl-authz-policy-concrete`; the decision engine, authority derivation graph, and invariant registry each live in their own 10-layer concrete package.
+- Deterministic rule objects live in `tigrbl-authz-policy-rules-concrete`; the decision engine, authority derivation graph, and invariant registry each live in their own 10-layer concrete package.
 - Canonical authz-policy surfaces live in this package; `tigrbl-identity-policy` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
@@ -30,7 +30,7 @@ from tigrbl_authz_policy import AuthorityRole, AuthorityScope
 from tigrbl_authz_policy import AdminGate, ABACAdministrator, DelegatedAdministrator
 from tigrbl_authz_policy import PolicyEngine, RBACAdministrator, ServiceIdentityRegistry
 from tigrbl_authz_policy import AuthorityDerivationGraph, PolicyDecisionEngine
-from tigrbl_authz_policy_concrete import default_authorization_invariant_registry
+from tigrbl_authz_policy_invariant_registry import default_authorization_invariant_registry
 
 assert AuthorityRole.ADMIN.value == "admin"
 scope = AuthorityScope("tenant-a", "client.read")
@@ -63,7 +63,7 @@ services = ServiceIdentityRegistry()
 ## Related Packages
 
 - [tigrbl-identity-policy](https://pypi.org/project/tigrbl-identity-policy/) remains a deprecated compatibility package.
-- [tigrbl-authz-policy-concrete](https://pypi.org/project/tigrbl-authz-policy-concrete/) owns deterministic rule implementations.
+- [tigrbl-authz-policy-rules-concrete](https://pypi.org/project/tigrbl-authz-policy-rules-concrete/) owns deterministic rule implementations.
 - [tigrbl-authz-policy-decision-engine](https://pypi.org/project/tigrbl-authz-policy-decision-engine/), [tigrbl-authz-policy-authority-derivation-graph](https://pypi.org/project/tigrbl-authz-policy-authority-derivation-graph/), and [tigrbl-authz-policy-invariant-registry](https://pypi.org/project/tigrbl-authz-policy-invariant-registry/) own their respective concrete implementations.
 - [tigrbl-identity-storage](https://pypi.org/project/tigrbl-identity-storage/) owns durable role, tenant membership, attribute policy, policy condition, and delegated admin scope records.
 - [tigrbl-authn-credentials](https://pypi.org/project/tigrbl-authn-credentials/) owns credential proof.

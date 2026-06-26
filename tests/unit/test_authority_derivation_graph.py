@@ -4,7 +4,7 @@ import tests.unit.formal_auth_helpers  # noqa: F401
 
 from tigrbl_auth.services.formal_authorization import AuthorityDerivationGraph as FacadeGraph
 from tigrbl_authz_policy import AuthorityDerivationGraph as PolicyGraph
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_rules_concrete import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityNode,

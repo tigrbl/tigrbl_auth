@@ -19,7 +19,7 @@ from tigrbl_identity_storage_runtime.operator_store import (
     validate_checksum,
     write_structured,
 )
-from tigrbl_authz_policy_concrete.provenance import (
+from tigrbl_security_authorization_provenance_builder import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )

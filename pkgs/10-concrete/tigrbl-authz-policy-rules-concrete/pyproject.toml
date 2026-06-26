@@ -1,20 +1,11 @@
 [project]
-name = "tigrbl-authz-policy-concrete"
+name = "tigrbl-authz-policy-rules-concrete"
 version = "0.4.0.dev2"
-description = "Concrete authorization policy rule dataclass variants for the Tigrbl auth package suite."
+description = "Concrete authorization policy rule variants."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-keywords = [
-    "tigrbl",
-    "authz",
-    "authorization",
-    "policy",
-    "concrete",
-    "rbac",
-    "abac",
-    "iam",
-]
+keywords = ["tigrbl", "identity", "auth", "security"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -31,21 +22,19 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-security-trust-contracts==0.1.0",
 ]
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tigrbl-authz-policy-concrete"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tigrbl-authz-policy-rules-concrete"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-authz-policy-concrete/"
+PyPI = "https://pypi.org/project/tigrbl-authz-policy-rules-concrete/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_authz_policy_concrete", from = "src" }]
+packages = [{ include = "tigrbl_authz_policy_rules_concrete", from = "src" }]

@@ -142,7 +142,8 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     import tigrbl_identity_contracts as control_contracts
     import tigrbl_identity_contracts as management_contracts
     import tigrbl_identity_contracts as user_contracts
-    import tigrbl_identity_concrete as concrete
+    import tigrbl_identity_credentials_concrete as credential_concrete
+    import tigrbl_identity_identities_concrete as identity_concrete
     from tigrbl_identity_admin._advanced_identity_plane import models as advanced_models
     from tigrbl_identity_admin._control_plane import models as legacy_admin_models
     from tigrbl_identity_admin_control_plane import models as admin_models
@@ -157,9 +158,9 @@ def test_admin_capability_models_are_contract_reexports() -> None:
     assert advanced_models.AdaptiveContext is control_contracts.AdaptiveContext
     assert advanced_models.AccessDecisionRequest is control_contracts.AccessDecisionRequest
     assert advanced_models.TrustPath is control_contracts.TrustPath
-    assert advanced_models.PasswordlessCredential is concrete.PasswordlessCredential
+    assert advanced_models.PasswordlessCredential is credential_concrete.PasswordlessCredential
     assert advanced_models.AuthenticationChallenge is user_contracts.AuthenticationChallenge
-    assert advanced_models.WorkloadIdentity is concrete.WorkloadIdentity
+    assert advanced_models.WorkloadIdentity is identity_concrete.WorkloadIdentity
     assert not hasattr(advanced_models, "AdvancedIdentityBoundaryFeature")
 
 
@@ -188,12 +189,20 @@ def test_advanced_identity_contracts_are_domain_packaged() -> None:
         ROOT
         / "pkgs"
         / "10-concrete"
-        / "tigrbl-identity-concrete"
+        / "tigrbl-identity-identities-concrete"
         / "src"
-        / "tigrbl_identity_concrete"
+        / "tigrbl_identity_identities_concrete"
     )
-    assert (concrete_root / "credentials.py").exists()
-    assert (concrete_root / "identities.py").exists()
+    credential_root = (
+        ROOT
+        / "pkgs"
+        / "10-concrete"
+        / "tigrbl-identity-credentials-concrete"
+        / "src"
+        / "tigrbl_identity_credentials_concrete"
+    )
+    assert (credential_root / "__init__.py").exists()
+    assert (concrete_root / "__init__.py").exists()
 
 
 def test_application_contracts_are_domain_packaged() -> None:
@@ -417,10 +426,10 @@ def test_policy_contracts_are_domain_packaged_without_old_owners() -> None:
         ROOT
         / "pkgs"
         / "10-concrete"
-        / "tigrbl-authz-policy-concrete"
+        / "tigrbl-authz-policy-rules-concrete"
         / "src"
-        / "tigrbl_authz_policy_concrete"
-        / "rules.py"
+        / "tigrbl_authz_policy_rules_concrete"
+        / "__init__.py"
     ).exists()
 
 

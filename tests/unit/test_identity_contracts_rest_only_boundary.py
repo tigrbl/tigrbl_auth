@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[2]
 TARGET_PACKAGES = (
     "tigrbl-identity-contracts",
     "tigrbl-identity-admin",
-    "tigrbl-identity-concrete",
+    "tigrbl-identity-credentials-concrete",
+    "tigrbl-identity-identities-concrete",
     "tigrbl-identity-server",
     "tigrbl-identity-runtime",
 )

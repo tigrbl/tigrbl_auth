@@ -17,7 +17,7 @@ from tigrbl_identity_contracts.principals import (
     TenantBoundary,
     TenantMembership,
 )
-from tigrbl_identity_concrete import (
+from tigrbl_identity_identities_concrete import (
     AdminIdentity,
     ClientIdentity,
     DeviceIdentity,

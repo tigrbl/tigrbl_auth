@@ -30,7 +30,7 @@ def test_jose_reusable_dataclasses_are_owner_reexports() -> None:
     import tigrbl_security_trust_contracts as security_trust_contracts
     import tigrbl_identity_contracts as user_contracts
     from tigrbl_identity_contracts.evidence.key_rotation import KeyRotationAuditEvidence
-    from tigrbl_identity_concrete.key_rotation_policy import (
+    from tigrbl_security_key_rotation_policy_contracts import (
         EffectiveKeyRotationPolicy,
         KeyRotationPolicyVersion,
     )

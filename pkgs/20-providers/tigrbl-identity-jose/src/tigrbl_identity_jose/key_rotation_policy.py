@@ -5,7 +5,7 @@ from typing import Callable, Iterable, Mapping
 
 from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_core.normalization import normal_tuple
-from tigrbl_identity_concrete.key_rotation_policy import (
+from tigrbl_security_key_rotation_policy_contracts import (
     EffectiveKeyRotationPolicy,
     KeyRotationPolicyVersion,
 )

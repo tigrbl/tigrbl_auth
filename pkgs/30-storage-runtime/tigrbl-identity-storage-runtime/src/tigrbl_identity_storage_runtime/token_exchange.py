@@ -10,7 +10,7 @@ from urllib.parse import parse_qs
 from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_runtime.deployment import deployment_from_request
 from tigrbl_identity_core.errors import InvalidTokenError
-from tigrbl_authz_policy_concrete.provenance import (
+from tigrbl_security_authorization_provenance_builder import (
     build_authorization_decision_trace,
     build_delegation_provenance,
 )

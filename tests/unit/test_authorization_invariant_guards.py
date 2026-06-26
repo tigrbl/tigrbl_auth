@@ -18,7 +18,7 @@ from tigrbl_auth.services.policy_invariants import (
     AuthorizationInvariant as FacadeAuthorizationInvariant,
     InvariantRegistry as FacadeInvariantRegistry,
 )
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_rules_concrete import (
     AuthorizationInvariant as CanonicalAuthorizationInvariant,
     InvariantRegistry as CanonicalInvariantRegistry,
     default_authorization_invariant_registry as canonical_authorization_invariant_registry,

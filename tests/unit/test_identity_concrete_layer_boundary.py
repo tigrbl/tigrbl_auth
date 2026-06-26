@@ -13,13 +13,19 @@ CONTRACTS_ROOT = (
     / "src"
     / "tigrbl_identity_contracts"
 )
-CONCRETE_ROOT = (
+CONCRETE_ROOTS = (
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-identity-concrete"
+    / "tigrbl-identity-identities-concrete"
     / "src"
-    / "tigrbl_identity_concrete"
+    / "tigrbl_identity_identities_concrete",
+    ROOT
+    / "pkgs"
+    / "10-concrete"
+    / "tigrbl-identity-credentials-concrete"
+    / "src"
+    / "tigrbl_identity_credentials_concrete",
 )
 
 
@@ -62,7 +68,8 @@ def test_contracts_do_not_own_concrete_identity_or_credential_variants() -> None
 
 
 def test_concrete_variants_subclass_contract_dataclasses() -> None:
-    import tigrbl_identity_concrete as concrete
+    import tigrbl_identity_credentials_concrete as credential_concrete
+    import tigrbl_identity_identities_concrete as identity_concrete
     import tigrbl_identity_contracts as contracts
 
     for name in (
@@ -74,7 +81,7 @@ def test_concrete_variants_subclass_contract_dataclasses() -> None:
         "UserIdentity",
         "WorkloadIdentity",
     ):
-        assert issubclass(getattr(concrete, name), contracts.Identity), name
+        assert issubclass(getattr(identity_concrete, name), contracts.Identity), name
 
     for name in (
         "ApiKeyCredential",
@@ -91,7 +98,7 @@ def test_concrete_variants_subclass_contract_dataclasses() -> None:
         "ServiceKeyCredential",
         "WebAuthnCredential",
     ):
-        assert issubclass(getattr(concrete, name), contracts.Credential), name
+        assert issubclass(getattr(credential_concrete, name), contracts.Credential), name
 
 
 def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
@@ -106,7 +113,8 @@ def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
 
     offenders = {
         str(path.relative_to(ROOT)): sorted(_imports(path) - allowed)
-        for path in CONCRETE_ROOT.rglob("*.py")
+        for root in CONCRETE_ROOTS
+        for path in root.rglob("*.py")
         if _imports(path) - allowed
     }
 

@@ -9,7 +9,7 @@ from tigrbl_identity_contracts.adaptive_access import AdaptiveContext, AdaptiveD
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_core.clock import utc_now, utc_now_iso
 
-from tigrbl_identity_concrete import MfaFactor, PasswordlessCredential, WebAuthnCredential
+from tigrbl_identity_credentials_concrete import MfaFactor, PasswordlessCredential, WebAuthnCredential
 
 
 AMR_VALUES = frozenset(

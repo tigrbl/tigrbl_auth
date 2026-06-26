@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from typing import Any, Mapping, Sequence
 
 from .base import CertificationError
-from tigrbl_identity_concrete import MachineIdentity
+from tigrbl_identity_identities_concrete import MachineIdentity
 from tigrbl_release_contracts import (
     AlgorithmPolicy,
     KeyBoundary,

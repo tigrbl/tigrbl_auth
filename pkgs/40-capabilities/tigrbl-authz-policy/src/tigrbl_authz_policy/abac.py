@@ -7,7 +7,7 @@ from tigrbl_identity_core.patterns import matches_dotted_pattern as _permission_
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
 from tigrbl_identity_contracts.policy.decisions import PolicyDecision
 from tigrbl_identity_storage.tables.attribute_policy import AttributePolicy as _StoredAttributePolicy
-from tigrbl_authz_policy_concrete import AttributePolicy
+from tigrbl_authz_policy_rules_concrete import AttributePolicy
 
 
 def _condition_contract(row: Any) -> DynamicCondition:

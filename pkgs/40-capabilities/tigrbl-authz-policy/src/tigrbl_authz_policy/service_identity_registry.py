@@ -6,7 +6,8 @@ from uuid import uuid4
 from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_core.patterns import matches_dotted_pattern as _permission_matches
 from tigrbl_identity_contracts.authentication import ServiceIdentityAuthentication
-from tigrbl_identity_concrete import ServiceCredential, ServiceIdentity
+from tigrbl_identity_credentials_concrete import ServiceCredential
+from tigrbl_identity_identities_concrete import ServiceIdentity
 
 
 class ServiceIdentityRegistry:

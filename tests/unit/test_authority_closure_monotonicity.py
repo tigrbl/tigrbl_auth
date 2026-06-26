@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tests.unit.formal_auth_helpers  # noqa: F401
 
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_rules_concrete import (
     AuthorityDerivationGraph,
     AuthorityEdge,
     AuthorityMutationKind,

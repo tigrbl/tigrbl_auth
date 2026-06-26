@@ -34,6 +34,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "bcrypt==5.0.0",
     "swarmauri_core==0.10.0",
     "swarmauri_crypto_jwe==0.3.0.dev5",
@@ -43,7 +44,6 @@ dependencies = [
     "swarmauri_signing_jws==0.3.0.dev31",
     "swarmauri_tokens_jwt==0.3.0.dev31",
     "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-concrete==0.4.0.dev2",
     "tigrbl-identity-core==0.4.0.dev2",
     "tigrbl-identity-author==0.4.0.dev2",
     "tigrbl-security-signing-pqc==0.1.0",

@@ -21,7 +21,7 @@ from tigrbl_identity_contracts.credentials import (
     CredentialVerificationError,
     IssuedCredential,
 )
-from tigrbl_identity_concrete import (
+from tigrbl_identity_credentials_concrete import (
     ApiKeyCredential,
     ClientSecretCredential,
     DpopKeyCredential,

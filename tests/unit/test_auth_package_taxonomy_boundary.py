@@ -83,12 +83,20 @@ DEPRECATED_MODULE_CANONICAL_IMPORT_ROOT = {
 NON_TAXONOMY_CANONICAL_ROOTS = {
     "tigrbl_auth_release_certification",
     "tigrbl_authz_policy_admin_gate",
-    "tigrbl_authz_policy_concrete",
+    "tigrbl_authz_policy_attributes_mapping",
+    "tigrbl_authz_policy_combiner_default",
+    "tigrbl_authz_policy_evaluators_default",
+    "tigrbl_authz_policy_obligations_concrete",
+    "tigrbl_authz_policy_rules_concrete",
     "tigrbl_authz_policy_invariant_registry",
+    "tigrbl_identity_credentials_concrete",
+    "tigrbl_identity_identities_concrete",
     "tigrbl_identity_jose",
     "tigrbl_identity_runtime",
     "tigrbl_identity_storage",
     "tigrbl_identity_storage_runtime",
+    "tigrbl_security_authorization_provenance_builder",
+    "tigrbl_security_key_rotation_policy_contracts",
 }
 
 CANONICAL_MODULE_RE = re.compile(r'_CANONICAL_MODULE\s*=\s*"([^"]+)"')

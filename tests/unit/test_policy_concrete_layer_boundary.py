@@ -13,13 +13,37 @@ CONTRACTS_ROOT = (
     / "src"
     / "tigrbl_identity_contracts"
 )
-CONCRETE_ROOT = (
+CONCRETE_ROOTS = (
     ROOT
     / "pkgs"
     / "10-concrete"
-    / "tigrbl-authz-policy-concrete"
+    / "tigrbl-authz-policy-rules-concrete"
     / "src"
-    / "tigrbl_authz_policy_concrete"
+    / "tigrbl_authz_policy_rules_concrete",
+    ROOT
+    / "pkgs"
+    / "10-concrete"
+    / "tigrbl-authz-policy-combiner-default"
+    / "src"
+    / "tigrbl_authz_policy_combiner_default",
+    ROOT
+    / "pkgs"
+    / "10-concrete"
+    / "tigrbl-authz-policy-evaluators-default"
+    / "src"
+    / "tigrbl_authz_policy_evaluators_default",
+    ROOT
+    / "pkgs"
+    / "10-concrete"
+    / "tigrbl-authz-policy-attributes-mapping"
+    / "src"
+    / "tigrbl_authz_policy_attributes_mapping",
+    ROOT
+    / "pkgs"
+    / "10-concrete"
+    / "tigrbl-authz-policy-obligations-concrete"
+    / "src"
+    / "tigrbl_authz_policy_obligations_concrete",
 )
 
 
@@ -50,7 +74,7 @@ def test_contracts_do_not_own_concrete_policy_rule_variants() -> None:
 
 
 def test_policy_variants_subclass_contract_dataclass() -> None:
-    import tigrbl_authz_policy_concrete as concrete
+    import tigrbl_authz_policy_rules_concrete as concrete
     from tigrbl_identity_contracts.policy.rules import PolicyRule
 
     for name in (
@@ -73,7 +97,8 @@ def test_policy_concrete_layer_only_imports_lower_contract_surfaces() -> None:
 
     offenders = {
         str(path.relative_to(ROOT)): sorted(_imports(path) - allowed)
-        for path in CONCRETE_ROOT.rglob("*.py")
+        for root in CONCRETE_ROOTS
+        for path in root.rglob("*.py")
         if _imports(path) - allowed
     }
 

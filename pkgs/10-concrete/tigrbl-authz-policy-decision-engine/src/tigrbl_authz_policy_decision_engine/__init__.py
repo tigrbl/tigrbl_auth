@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tigrbl_authz_policy_concrete import (
+from tigrbl_authz_policy_rules_concrete import (
     AdminPolicy,
     AttributePolicy,
     DelegationPolicy,

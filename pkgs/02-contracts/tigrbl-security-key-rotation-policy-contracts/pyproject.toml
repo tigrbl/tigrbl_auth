@@ -1,19 +1,11 @@
 [project]
-name = "tigrbl-identity-concrete"
-version = "0.4.0.dev2"
-description = "Concrete credential and identity dataclass variants for the Tigrbl identity package suite."
+name = "tigrbl-security-key-rotation-policy-contracts"
+version = "0.1.0"
+description = "Key rotation policy contract dataclasses."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
-keywords = [
-    "tigrbl",
-    "identity",
-    "concrete",
-    "credential",
-    "principal",
-    "machine-identity",
-    "iam",
-]
+keywords = ["tigrbl", "identity", "auth", "security"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -29,20 +21,18 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "tigrbl-identity-contracts==0.4.0.dev2",
-]
+dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"
 Repository = "https://github.com/tigrbl/tigrbl_auth"
-Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/10-concrete/tigrbl-identity-concrete"
+Source = "https://github.com/tigrbl/tigrbl_auth/tree/master/pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts"
 SSOT = "https://github.com/tigrbl/tigrbl_auth/blob/master/.ssot/registry.json"
-PyPI = "https://pypi.org/project/tigrbl-identity-concrete/"
+PyPI = "https://pypi.org/project/tigrbl-security-key-rotation-policy-contracts/"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_concrete", from = "src" }]
+packages = [{ include = "tigrbl_security_key_rotation_policy_contracts", from = "src" }]

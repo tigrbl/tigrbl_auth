@@ -46,7 +46,11 @@ PACKAGE_ROOTS = [
     "tigrbl_authn_credentials",
     "tigrbl_authz_policy_admin_gate",
     "tigrbl_authz_policy_authority_derivation_graph",
-    "tigrbl_authz_policy_concrete",
+    "tigrbl_authz_policy_attributes_mapping",
+    "tigrbl_authz_policy_combiner_default",
+    "tigrbl_authz_policy_evaluators_default",
+    "tigrbl_authz_policy_obligations_concrete",
+    "tigrbl_authz_policy_rules_concrete",
     "tigrbl_authz_policy_decision_engine",
     "tigrbl_authz_policy_invariant_registry",
     "tigrbl_authz_policy",
@@ -54,7 +58,8 @@ PACKAGE_ROOTS = [
     "tigrbl_authz_resource_server_verifier",
     "tigrbl_identity_core",
     "tigrbl_identity_contracts",
-    "tigrbl_identity_concrete",
+    "tigrbl_identity_credentials_concrete",
+    "tigrbl_identity_identities_concrete",
     "tigrbl_identity_admin_advanced_authenticator_registry",
     "tigrbl_identity_admin_auth_anomaly_detector",
     "tigrbl_identity_admin_control_plane",
@@ -78,6 +83,8 @@ PACKAGE_ROOTS = [
     "tigrbl_identity_resource_server",
     "tigrbl_identity_rp",
     "tigrbl_identity_testkit",
+    "tigrbl_security_authorization_provenance_builder",
+    "tigrbl_security_key_rotation_policy_contracts",
 ]
 
 DIST_TO_IMPORT_ROOT = {
@@ -99,7 +106,11 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-authn-credentials": "tigrbl_authn_credentials",
     "tigrbl-authz-policy-admin-gate": "tigrbl_authz_policy_admin_gate",
     "tigrbl-authz-policy-authority-derivation-graph": "tigrbl_authz_policy_authority_derivation_graph",
-    "tigrbl-authz-policy-concrete": "tigrbl_authz_policy_concrete",
+    "tigrbl-authz-policy-attributes-mapping": "tigrbl_authz_policy_attributes_mapping",
+    "tigrbl-authz-policy-combiner-default": "tigrbl_authz_policy_combiner_default",
+    "tigrbl-authz-policy-evaluators-default": "tigrbl_authz_policy_evaluators_default",
+    "tigrbl-authz-policy-obligations-concrete": "tigrbl_authz_policy_obligations_concrete",
+    "tigrbl-authz-policy-rules-concrete": "tigrbl_authz_policy_rules_concrete",
     "tigrbl-authz-policy-decision-engine": "tigrbl_authz_policy_decision_engine",
     "tigrbl-authz-policy-invariant-registry": "tigrbl_authz_policy_invariant_registry",
     "tigrbl-authz-policy": "tigrbl_authz_policy",
@@ -107,7 +118,8 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-authz-resource-server-verifier": "tigrbl_authz_resource_server_verifier",
     "tigrbl-identity-core": "tigrbl_identity_core",
     "tigrbl-identity-contracts": "tigrbl_identity_contracts",
-    "tigrbl-identity-concrete": "tigrbl_identity_concrete",
+    "tigrbl-identity-credentials-concrete": "tigrbl_identity_credentials_concrete",
+    "tigrbl-identity-identities-concrete": "tigrbl_identity_identities_concrete",
     "tigrbl-identity-admin-advanced-authenticator-registry": "tigrbl_identity_admin_advanced_authenticator_registry",
     "tigrbl-identity-admin-auth-anomaly-detector": "tigrbl_identity_admin_auth_anomaly_detector",
     "tigrbl-identity-admin-control-plane": "tigrbl_identity_admin_control_plane",
@@ -132,6 +144,8 @@ DIST_TO_IMPORT_ROOT = {
     "tigrbl-identity-rp": "tigrbl_identity_rp",
     "tigrbl-identity-testkit": "tigrbl_identity_testkit",
     "tigrbl-auth": "tigrbl_auth",
+    "tigrbl-security-authorization-provenance-builder": "tigrbl_security_authorization_provenance_builder",
+    "tigrbl-security-key-rotation-policy-contracts": "tigrbl_security_key_rotation_policy_contracts",
 }
 
 
@@ -295,14 +309,13 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
         / "tigrbl_identity_jose"
         / "jwt_runtime.py"
     ).read_text(encoding="utf-8")
-    storage_token_service_source = (
+    storage_token_hooks_source = (
         _package_path("tigrbl-identity-storage")
         / "src"
         / "tigrbl_identity_storage"
         / "tables"
         / "token_record"
-        / "_ops"
-        / "_persistence.py"
+        / "_hooks.py"
     ).read_text(encoding="utf-8")
     server_handler_source = (
         _package_path("tigrbl-identity-server")
@@ -319,7 +332,7 @@ def test_credentials_async_token_paths_use_async_persistence_hooks() -> None:
     assert "standards.introspection" not in runtime_source
     assert "register_token" not in runtime_source
     assert '"is_revoked_async": is_revoked_async' in runtime_source
-    assert "persist_token=False" in storage_token_service_source
+    assert "normalize_refresh_audience" in storage_token_hooks_source
     assert "persist_token=False" in server_handler_source
 
 

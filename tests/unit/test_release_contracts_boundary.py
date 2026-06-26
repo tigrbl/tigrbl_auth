@@ -17,7 +17,7 @@ for src in sorted((ROOT / "pkgs").glob("*/*/src")):
 
 def test_release_contracts_export_release_assurance_dtos() -> None:
     import tigrbl_release_contracts as contracts
-    import tigrbl_identity_concrete as concrete
+    import tigrbl_identity_identities_concrete as identity_concrete
     from tigrbl_auth_release_certification.certification import AlgorithmPolicy, CertificationError
     from tigrbl_auth_release_certification.certification import MachineIdentity
 
@@ -25,7 +25,7 @@ def test_release_contracts_export_release_assurance_dtos() -> None:
     assert CertificationError is contracts.CertificationError
     assert AlgorithmPolicy is contracts.AlgorithmPolicy
     assert not hasattr(contracts, "MachineIdentity")
-    assert MachineIdentity is concrete.MachineIdentity
+    assert MachineIdentity is identity_concrete.MachineIdentity
     assert contracts.RuntimeQualification(
         artifact_sha256="a",
         dependency_lock_sha256="b",

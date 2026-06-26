@@ -6,7 +6,7 @@ from typing import Any, Iterable, Mapping
 
 from tigrbl_identity_contracts.adaptive_access import TrustDomain, TrustEdge, TrustPath
 
-from tigrbl_identity_concrete import WorkloadIdentity
+from tigrbl_identity_identities_concrete import WorkloadIdentity
 
 
 class TrustFederationGraph:

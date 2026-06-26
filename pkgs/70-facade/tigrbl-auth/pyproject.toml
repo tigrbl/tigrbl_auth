@@ -32,6 +32,12 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-authz-policy-rules-concrete==0.4.0.dev2",
+    "tigrbl-authz-policy-combiner-default==0.4.0.dev2",
+    "tigrbl-authz-policy-evaluators-default==0.4.0.dev2",
+    "tigrbl-authz-policy-attributes-mapping==0.4.0.dev2",
+    "tigrbl-authz-policy-obligations-concrete==0.4.0.dev2",
+    "tigrbl-security-authorization-provenance-builder==0.1.0",
     "swarmauri_standard==0.10.0",
     "swarmauri_crypto_paramiko==0.4.0.dev5",
     "tigrbl-identity-admin==0.4.0.dev2",
@@ -46,7 +52,6 @@ dependencies = [
     "tigrbl-identity-principals==0.4.0.dev2",
     "tigrbl-identity-operator==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
-    "tigrbl-authz-policy-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
     "tigrbl-authz-policy==0.4.0.dev2",
     "tigrbl-authz-resource-server==0.4.0.dev2",

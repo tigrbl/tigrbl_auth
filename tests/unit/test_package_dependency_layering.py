@@ -18,6 +18,7 @@ PYTHON_PACKAGE_LAYERS = {
     "contracts": {
         "tigrbl-identity-contracts",
         "tigrbl-release-contracts",
+        "tigrbl-security-key-rotation-policy-contracts",
         "tigrbl-security-trust-contracts",
     },
     "bases": {
@@ -25,10 +26,17 @@ PYTHON_PACKAGE_LAYERS = {
     },
     "concrete": {
         "tigrbl-auth-protocol-oidc-backchannel-replay-store",
+        "tigrbl-oauth-scope-matcher",
+        "tigrbl-oidc-claims-concrete",
+        "tigrbl-oidc-subject-strategy",
         "tigrbl-authz-policy-authority-derivation-graph",
-        "tigrbl-authz-policy-concrete",
+        "tigrbl-authz-policy-attributes-mapping",
+        "tigrbl-authz-policy-combiner-default",
         "tigrbl-authz-policy-decision-engine",
+        "tigrbl-authz-policy-evaluators-default",
         "tigrbl-authz-policy-invariant-registry",
+        "tigrbl-authz-policy-obligations-concrete",
+        "tigrbl-authz-policy-rules-concrete",
         "tigrbl-identity-admin-advanced-authenticator-registry",
         "tigrbl-identity-admin-auth-anomaly-detector",
         "tigrbl-identity-admin-control-plane",
@@ -36,14 +44,22 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-admin-policy-registry",
         "tigrbl-identity-admin-relationship-graph",
         "tigrbl-identity-admin-trust-federation-graph",
-        "tigrbl-identity-concrete",
+        "tigrbl-identity-credentials-concrete",
+        "tigrbl-identity-identities-concrete",
     },
     "providers": {
         "tigrbl-identity-jose",
+        "tigrbl-security-authorization-provenance-builder",
         "tigrbl-security-certificate-mtls",
+        "tigrbl-security-auth-context-acr-basic",
+        "tigrbl-security-auth-context-amr-basic",
+        "tigrbl-security-claims-provider-local",
         "tigrbl-security-proof-dpop",
         "tigrbl-security-proof-pkce",
+        "tigrbl-security-oidc-federation-provider",
         "tigrbl-security-signing-pqc",
+        "tigrbl-security-subject-pairwise-provider",
+        "tigrbl-security-webfinger-provider",
         "tigrbl-authz-resource-server-verifier",
         "tigrbl-security-dpop-cnf-binding-validator",
         "tigrbl-security-mtls-cnf-binding-validator",
@@ -146,7 +162,7 @@ def _package_dir(package_name: str) -> Path:
 
 
 def _absolute_import_roots(path: Path) -> set[str]:
-    tree = ast.parse(path.read_text(encoding="utf-8"))
+    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
     roots: set[str] = set()
 
     for node in ast.walk(tree):

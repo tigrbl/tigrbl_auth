@@ -22,10 +22,10 @@ def test_policy_canonicalization_helpers_are_owned_by_identity_core() -> None:
 
 def test_policy_provenance_builders_are_concrete_backed() -> None:
     assert provenance.build_authorization_decision_trace.__module__ == (
-        "tigrbl_authz_policy_concrete.provenance"
+        "tigrbl_security_authorization_provenance_builder"
     )
     assert provenance.build_delegation_provenance.__module__ == (
-        "tigrbl_authz_policy_concrete.provenance"
+        "tigrbl_security_authorization_provenance_builder"
     )
 
 

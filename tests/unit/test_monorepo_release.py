@@ -38,7 +38,7 @@ REMOVED_HELPER_PACKAGES = {
 def test_monorepo_release_discovers_split_packages() -> None:
     packages = {item.name: item for item in discover_packages()}
 
-    assert len(packages) == 62
+    assert len(packages) == 78
     assert "tigrbl-auth-workspace" not in packages
     assert REMOVED_HELPER_PACKAGES.isdisjoint(packages)
     assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/02-contracts/tigrbl-identity-contracts"
@@ -46,8 +46,12 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-authz-policy-decision-engine"].path.as_posix() == (
         "pkgs/10-concrete/tigrbl-authz-policy-decision-engine"
     )
-    assert packages["tigrbl-authz-policy-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-authz-policy-concrete"
-    assert packages["tigrbl-identity-concrete"].path.as_posix() == "pkgs/10-concrete/tigrbl-identity-concrete"
+    assert packages["tigrbl-authz-policy-rules-concrete"].path.as_posix() == (
+        "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete"
+    )
+    assert packages["tigrbl-identity-identities-concrete"].path.as_posix() == (
+        "pkgs/10-concrete/tigrbl-identity-identities-concrete"
+    )
     assert packages["tigrbl-authz-resource-server-verifier"].path.as_posix() == (
         "pkgs/20-providers/tigrbl-authz-resource-server-verifier"
     )
@@ -100,7 +104,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
     payload = json.loads(completed.stdout)
     matrix = json.loads(payload["matrix"])
 
-    assert payload["count"] == "252"
+    assert payload["count"] == "299"
     names = {cell["name"] for cell in matrix}
     assert REMOVED_HELPER_PACKAGES.isdisjoint(names)
     assert "tigrbl-security-token-verification" not in names
@@ -111,7 +115,7 @@ def test_monorepo_release_builds_package_python_test_matrix() -> None:
         cell["python_version"]
         for cell in matrix
         if cell["name"] == "tigrbl-authz-resource-server-verifier"
-    } == {"3.10", "3.11", "3.12", "3.13", "3.14"}
+    } == {"3.10", "3.11", "3.12", "3.13"}
     testkit_cells = [cell for cell in matrix if cell["name"] == "tigrbl-identity-testkit"]
     assert len(testkit_cells) == 3
     assert all(cell["cross_cutting"] == "true" for cell in testkit_cells)
@@ -172,16 +176,15 @@ def test_monorepo_release_resolves_local_dependency_closure() -> None:
     assert REMOVED_HELPER_PACKAGES.isdisjoint(dependency_names)
     assert {
         "tigrbl-auth-protocol-oauth",
-        "tigrbl-authz-policy",
-        "tigrbl-authz-policy-concrete",
-        "tigrbl-authz-policy-decision-engine",
-        "tigrbl-authz-resource-server",
-        "tigrbl-authz-resource-server-verifier",
-        "tigrbl-identity-concrete",
+        "tigrbl-identity-author",
         "tigrbl-identity-contracts",
         "tigrbl-identity-core",
         "tigrbl-identity-jose",
-        "tigrbl-security-token-jwks-cache",
+        "tigrbl-identity-runtime",
+        "tigrbl-identity-storage",
+        "tigrbl-security-key-rotation-policy-contracts",
+        "tigrbl-security-proof-pkce",
+        "tigrbl-security-signing-pqc",
         "tigrbl-security-trust-contracts",
         "tigrbl-security-trust-domain-bases",
     }.issubset(dependency_names)
@@ -213,8 +216,8 @@ def test_monorepo_release_resolves_root_first_party_dependency_closure() -> None
     assert "tigrbl-authz-resource-server-verifier" in root_dependency_names
     assert "tigrbl-security-token-jwks-cache" in root_dependency_names
     assert "tigrbl-authz-policy-admin-gate" in root_dependency_names
-    assert "tigrbl-authz-policy-concrete" in root_dependency_names
-    assert "tigrbl-identity-concrete" in root_dependency_names
+    assert "tigrbl-authz-policy-rules-concrete" in root_dependency_names
+    assert "tigrbl-identity-identities-concrete" in root_dependency_names
     assert "tigrbl-identity-author" in root_dependency_names
     assert "tigrbl-auth-protocol-oauth" in root_dependency_names
     assert "tigrbl-identity-server" in root_dependency_names
