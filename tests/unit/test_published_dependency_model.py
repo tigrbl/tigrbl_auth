@@ -108,7 +108,8 @@ def test_pyproject_uses_published_pins_and_extras():
 
     assert "pqcrypto==0.4.0" not in jose_dependencies
     assert "tigrbl-security-signing-pqc==0.1.0" in jose_dependencies
-    assert "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2" in oidc_dependencies
+    assert "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2" not in oidc_dependencies
+    assert "tigrbl-identity-storage==0.4.0.dev2" in oidc_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in oidc_dependencies
     assert oidc_dependencies.isdisjoint(removed_helper_pins)
     assert "pqcrypto==0.4.0" not in facade_dependencies
@@ -132,7 +133,8 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-core==0.4.0.dev2" not in identity_credentials_dependencies
     assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_credentials_dependencies
     assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
-    assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-identities-concrete==0.4.0.dev2" in identity_admin_dependencies

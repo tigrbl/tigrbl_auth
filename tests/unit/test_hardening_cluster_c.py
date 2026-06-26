@@ -31,8 +31,8 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     runtime_security_profile,
     validate_sender_constraint,
 )
-from tigrbl_auth.standards.oidc import backchannel_logout, frontchannel_logout
-from tigrbl_auth.standards.oidc.discovery_metadata import build_openid_config
+from tigrbl_auth_protocol_oidc.standards import backchannel_logout, frontchannel_logout
+from tigrbl_auth_protocol_oidc.standards.discovery_metadata import build_openid_config
 
 
 def _generate_cert_pem() -> bytes:
@@ -173,6 +173,7 @@ async def test_frontchannel_descriptor_and_validation(monkeypatch: pytest.Monkey
 async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.MonkeyPatch) -> None:
     client_id = uuid4()
     logout_id = uuid4()
+    seen_jti: set[str] = set()
 
     class _Registration:
         registration_metadata = {
@@ -184,6 +185,22 @@ async def test_backchannel_logout_token_fallback_and_replay(monkeypatch: pytest.
         async def get_client_registration_async(self, resolved_client_id):
             assert resolved_client_id == client_id
             return _Registration()
+
+        async def register_backchannel_replay_async(
+            self,
+            *,
+            jti: str,
+            issuer: str,
+            client_id: str,
+            expires_at,
+            now,
+        ):
+            assert issuer == "https://issuer.example"
+            assert client_id
+            assert expires_at > now
+            if jti in seen_jti:
+                raise ValueError("replayed logout token")
+            seen_jti.add(jti)
 
     def _missing_jwt_coder_cls():
         raise RuntimeError("no runtime JWT coder in dependency-light checkpoint")

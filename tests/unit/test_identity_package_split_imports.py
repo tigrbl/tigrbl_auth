@@ -19,6 +19,7 @@ PKGS = ROOT / "pkgs"
 
 
 DEPRECATED_DIST_NAMES = {
+    "tigrbl-auth-protocol-oidc-backchannel-replay-store",
     "tigrbl-authz-policy-invariant-registry",
     "tigrbl-identity-admin-federation-registry",
     "tigrbl-identity-admin-policy-registry",
@@ -374,20 +375,26 @@ def test_oauth_introspection_exports_async_runtime_hooks() -> None:
     assert "register_token" not in runtime_source
 
 
-def test_oidc_backchannel_logout_uses_split_replay_store() -> None:
+def test_oidc_backchannel_logout_uses_storage_replay_table() -> None:
     _install_package_src_paths()
 
     backchannel_logout = importlib.import_module("tigrbl_auth_protocol_oidc.standards.backchannel_logout")
-    replay_store = importlib.import_module("tigrbl_auth_protocol_oidc_backchannel_replay_store")
-
-    assert isinstance(backchannel_logout._REPLAY_STORE, replay_store._BackchannelReplayStore)
-    assert "class _BackchannelReplayStore" not in (
+    tables = importlib.import_module("tigrbl_identity_storage.tables")
+    source = (
         _package_path("tigrbl-auth-protocol-oidc")
         / "src"
         / "tigrbl_auth_protocol_oidc"
         / "standards"
         / "backchannel_logout.py"
-    ).read_text(encoding="utf-8").split("=", 1)[0]
+    ).read_text(encoding="utf-8")
+
+    assert backchannel_logout.replay_store_snapshot() == {
+        "replay_store": "table:BackchannelLogoutReplay"
+    }
+    assert tables.TABLE_MODEL_BY_NAME["BackchannelLogoutReplay"] is tables.BackchannelLogoutReplay
+    assert "BackchannelLogoutReplay.handlers.register" in source
+    assert "_REPLAY_STORE" not in source
+    assert "tigrbl_auth_protocol_oidc_backchannel_replay_store" not in source
 
 
 def test_authorize_routes_use_opaque_browser_session_resolver() -> None:

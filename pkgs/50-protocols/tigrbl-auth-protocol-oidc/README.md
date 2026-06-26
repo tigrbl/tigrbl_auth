@@ -11,7 +11,7 @@ tigrbl-auth-protocol-oidc is the protocol-facing package name for OpenID Connect
 - Component kind: Auth protocol package
 - Use it for OIDC discovery, ID Token, UserInfo, session, logout, and claim protocol behavior.
 - Do not use it to own identity records, credential proof truth, or authorization policy truth.
-- Canonical OIDC protocol behavior lives in this package; deterministic Back-Channel Logout replay tracking lives in `tigrbl-auth-protocol-oidc-backchannel-replay-store`, and `tigrbl-identity-oidc` re-exports this package from `pkgs/deprecated` for compatibility.
+- Canonical OIDC protocol behavior lives in this package; deterministic Back-Channel Logout replay tracking is table-owned by `tigrbl-identity-storage` through `BackchannelLogoutReplay`, and `tigrbl-identity-oidc` re-exports this package from `pkgs/deprecated` for compatibility.
 
 ## Installation
 
@@ -39,7 +39,8 @@ runtime = OidcProviderRuntime(branding=TenantBrandingRegistry())
 ## Related Packages
 
 - [tigrbl-identity-oidc](https://pypi.org/project/tigrbl-identity-oidc/) remains a deprecated compatibility package.
-- [tigrbl-auth-protocol-oidc-backchannel-replay-store](https://pypi.org/project/tigrbl-auth-protocol-oidc-backchannel-replay-store/) owns deterministic replay tracking helpers used by OIDC Back-Channel Logout.
+- [tigrbl-identity-storage](https://pypi.org/project/tigrbl-identity-storage/) owns the `BackchannelLogoutReplay` table used by OIDC Back-Channel Logout.
+- [tigrbl-auth-protocol-oidc-backchannel-replay-store](https://pypi.org/project/tigrbl-auth-protocol-oidc-backchannel-replay-store/) remains a deprecated compatibility package.
 - [tigrbl-auth-protocol-oauth](https://pypi.org/project/tigrbl-auth-protocol-oauth/) owns OAuth protocol behavior.
 - [tigrbl-auth-protocol-rp](https://pypi.org/project/tigrbl-auth-protocol-rp/) owns relying-party protocol behavior.
 

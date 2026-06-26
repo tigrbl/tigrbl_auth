@@ -11,7 +11,6 @@ from types import SimpleNamespace
 from typing import Any, Final
 from uuid import UUID, uuid4
 
-from tigrbl_auth_protocol_oidc_backchannel_replay_store import _BackchannelReplayStore
 from tigrbl_identity_core.standards import StandardOwner, describe_owner
 from tigrbl_identity_runtime.settings import settings
 
@@ -20,8 +19,6 @@ _BACKCHANNEL_EVENT: Final[str] = "http://schemas.openid.net/event/backchannel-lo
 _DEFAULT_MAX_RETRIES: Final[int] = 3
 _ALLOWED_CLOCK_SKEW: Final[int] = 300
 
-
-_REPLAY_STORE = _BackchannelReplayStore()
 
 OWNER = StandardOwner(
     label="OIDC Back-Channel Logout",
@@ -36,6 +33,7 @@ OWNER = StandardOwner(
 
 
 def _persistence():
+    from tigrbl_identity_storage.tables.backchannel_logout_replay import BackchannelLogoutReplay
     from tigrbl_identity_storage.tables.client_registration import ClientRegistration
     from tigrbl_identity_storage.tables.engine import storage_session
     from tigrbl_identity_storage.tables.logout_state import LogoutState
@@ -57,9 +55,25 @@ def _persistence():
                 {"path_params": {"id": logout_id}, "payload": {"logout_id": logout_id, **kwargs}, "db": db}
             )
 
+    async def register_backchannel_replay_async(*, jti, issuer, client_id, expires_at, now):
+        async with storage_session() as db:
+            return await BackchannelLogoutReplay.handlers.register.core(
+                {
+                    "payload": {
+                        "jti": jti,
+                        "issuer": issuer,
+                        "client_id": str(client_id),
+                        "expires_at": expires_at,
+                        "now": now,
+                    },
+                    "db": db,
+                }
+            )
+
     return SimpleNamespace(
         get_client_registration_async=get_client_registration_async,
         mark_logout_channel_async=mark_logout_channel_async,
+        register_backchannel_replay_async=register_backchannel_replay_async,
     )
 
 
@@ -195,7 +209,13 @@ async def validate_backchannel_logout_token(
     if not jti:
         raise ValueError("logout token missing jti")
     expiry = datetime.fromtimestamp(int(exp), tz=timezone.utc) if exp is not None else current + timedelta(minutes=5)
-    _REPLAY_STORE.register(jti, exp=expiry, now=current)
+    await _persistence().register_backchannel_replay_async(
+        jti=jti,
+        issuer=effective_issuer,
+        client_id=str(client_id),
+        expires_at=expiry,
+        now=current,
+    )
     return claims
 
 
@@ -213,8 +233,8 @@ async def mark_backchannel_failed(logout_id: UUID, *, error: str | None = None, 
     )
 
 
-def replay_store_snapshot() -> dict[str, int]:
-    return _REPLAY_STORE.snapshot()
+def replay_store_snapshot() -> dict[str, str]:
+    return {"replay_store": "table:BackchannelLogoutReplay"}
 
 
 def describe() -> dict[str, object]:

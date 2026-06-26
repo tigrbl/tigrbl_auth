@@ -77,6 +77,7 @@ from .pushed_authorization_request import (
 from .consent import Consent
 from .audit_event import AuditEvent
 from .logout_state import LogoutIn, LogoutOut, LogoutState
+from .backchannel_logout_replay import BackchannelLogoutReplay
 from .key_rotation_event import KeyRotationEvent
 from .key_rotation_policy import KeyRotationPolicy
 from .tenant_membership import TenantMembership
@@ -170,6 +171,7 @@ _TABLE_MODELS = (
     Consent,
     AuditEvent,
     LogoutState,
+    BackchannelLogoutReplay,
     KeyRotationEvent,
     KeyRotationPolicy,
     TenantMembership,
@@ -332,6 +334,7 @@ __all__ = [
     "Consent",
     "AuditEvent",
     "LogoutState",
+    "BackchannelLogoutReplay",
     "KeyRotationEvent",
     "KeyRotationPolicy",
     "TenantMembership",

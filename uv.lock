@@ -2233,29 +2233,29 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
     { name = "tigrbl-auth-protocol-oauth" },
-    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-runtime" },
+    { name = "tigrbl-identity-storage" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
 name = "tigrbl-auth-protocol-oidc-backchannel-replay-store"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store" }
+source = { editable = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
 ]
@@ -2491,7 +2491,7 @@ requires-dist = [
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
     { name = "tigrbl-auth-protocol-oauth", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-auth-protocol-oidc", editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" },
-    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/10-concrete/tigrbl-auth-protocol-oidc-backchannel-replay-store" },
+    { name = "tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store" },
     { name = "tigrbl-auth-protocol-rp", editable = "pkgs/50-protocols/tigrbl-auth-protocol-rp" },
     { name = "tigrbl-auth-release-certification", editable = "pkgs/60-runtime/tigrbl-auth-release-certification" },
     { name = "tigrbl-authn-credentials", editable = "pkgs/40-capabilities/tigrbl-authn-credentials" },

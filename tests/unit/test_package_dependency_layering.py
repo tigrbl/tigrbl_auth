@@ -25,7 +25,6 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-security-trust-domain-bases",
     },
     "concrete": {
-        "tigrbl-auth-protocol-oidc-backchannel-replay-store",
         "tigrbl-oauth-scope-matcher",
         "tigrbl-oidc-claims-concrete",
         "tigrbl-oidc-subject-strategy",
@@ -101,6 +100,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-auth-api-tenant-admin",
     },
     "deprecated": {
+        "tigrbl-auth-protocol-oidc-backchannel-replay-store",
         "tigrbl-authz-policy-invariant-registry",
         "tigrbl-identity-admin-federation-registry",
         "tigrbl-identity-admin-policy-registry",
