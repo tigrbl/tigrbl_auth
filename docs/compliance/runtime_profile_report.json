@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260621T090301Z",
+  "generated_at": "20260623T193717Z",
   "deployment_profile": "baseline",
   "report_mode": "live-probe",
   "application_probe": {
@@ -59,7 +59,7 @@
     "missing_count": 2,
     "invalid_count": 0,
     "application_hash_invariant": true,
-    "pyproject_requires_python": ">=3.10,<3.13",
+    "pyproject_requires_python": ">=3.10,<3.15",
     "supported_python_versions": [
       "3.10",
       "3.11",
@@ -234,12 +234,6 @@
         "hypercorn==0.18.0"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/runner-hypercorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/runner-hypercorn.txt"
-      ],
       "tox_envs": [
         "py310-postgres-hypercorn",
         "py311-postgres-hypercorn",
@@ -405,12 +399,6 @@
         "tigrcorn==0.3.8; python_version >= '3.11'"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/runner-tigrcorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/runner-tigrcorn.txt"
-      ],
       "tox_envs": [
         "py311-tigrcorn",
         "py312-tigrcorn"
@@ -584,7 +572,7 @@
         "exit_code": 0,
         "launch_ready": true,
         "stdout": "{\n  \"application_probe\": {\n    \"app_factory\": \"tigrbl_identity_server.api.app.build_app\",\n    \"message\": \"Application factory materialized successfully with 19 active routes and 24 active targets.\",\n    \"passed\": true\n  },\n  \"command\": \"serve\",\n  \"launch_mode\": \"check\",\n  \"launch_ready\": true,\n  \"runner_profile_report_paths\": {\n    \"json\": \"docs//compliance//runtime_profile_report.json\",\n    \"md\": \"docs//compliance//runtime_profile_report.md\"\n  },\n  \"runner_registry\": [\n    {\n      \"available_module\": null,\n      \"capabilities\": [\n        {\n          \"description\": \"HTTP ASGI serving\",\n          \"name\": \"http\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"WebSocket ASGI serving\",\n          \"name\": \"websocket\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"ASGI lifespan integration\",\n          \"name\": \"lifespan\",\n          \"portable\": true\n        },\n        {\n          \"description\": \"Unix domain socket binding\",\n          \"name\u2026",
-        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=1c79c253ac88d7b17d446145ea676daf057c029da10126bb6e0bb22737bf4a92\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=bf30f7966091271ce319ef082ce15f2fdecb26e9ba010078b9de8a9a61ea0e98"
+        "stderr": "Generated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=78eae64fd47290d05359647a31b76db733126391f29e83b1a5e9ab41c9cb572f\nGenerated bootstrap admin API key for local control-plane surfaces. Set TIGRBL_AUTH_ADMIN_API_KEY to replace it. bootstrap_key_sha256=dd75ba2db8625373f25777e67cf4b808060d8bf0f1803d7ff2ceb8e97abee668"
       },
       "required_extra": "uvicorn",
       "profile_name": "sqlite-uvicorn",
@@ -598,12 +586,6 @@
         "uvicorn[standard]==0.41.0"
       ],
       "aggregate_runner_extra_present": true,
-      "constraints": [
-        "constraints/runner-uvicorn.txt"
-      ],
-      "constraints_present": [
-        "constraints/runner-uvicorn.txt"
-      ],
       "tox_envs": [
         "py310-sqlite-uvicorn",
         "py311-sqlite-uvicorn",

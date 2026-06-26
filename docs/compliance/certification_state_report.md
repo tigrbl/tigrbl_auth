@@ -22,7 +22,7 @@
 - clean_room_matrix_implemented: `True`
 - clean_room_matrix_executed_in_this_container: `False`
 - tox_manifest_present: `True`
-- test_constraints_manifest_present: `True`
+- test_extra_present: `True`
 - tigrcorn_pin_committed: `True`
 - operator_plane_backend: `sqlite-authoritative`
 - operator_plane_repo_mutation_dependency: `False`
@@ -45,7 +45,7 @@
 - in_scope_test_lanes_green: `False`
 - migration_portability_passed: `False`
 - tier3_evidence_rebuilt_from_validated_runs: `False`
-- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The fill-in external handoff template package is not present for the full supported peer-profile set.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.', 'Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.', 'Validated clean-room install matrix evidence is incomplete or missing.', 'Validated in-scope certification lane execution evidence is incomplete or missing.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.', 'Current generated public artifacts still drift from executable reality.', 'One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
+- open_gaps: `['Tier 4 independent peer validation is not complete for the retained boundary.', 'The fill-in external handoff template package is not present for the full supported peer-profile set.', 'The peer-bundle completeness gate is not satisfied for the declared peer-profile set.', 'One or more supported peer profiles have incomplete or invalid preserved external evidence bundles.', 'The runtime validation stack now executes real app-factory, serve-check, and HTTP surface probes in the clean-room matrix, but successful execution across the supported interpreter/profile matrix is not preserved in this container.', 'Tigrcorn is now pinned and included in the clean-room matrix for Python 3.11/3.12, but preserved independent validation artifacts remain absent.', 'Validated clean-room install matrix evidence is incomplete or missing.', 'Validated in-scope certification lane execution evidence is incomplete or missing.', 'Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.', 'Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.', 'Current generated public artifacts still drift from executable reality.', 'One or more exported package capabilities still lacks end-to-end verification in the current environment.', 'Release evidence can now be built only from a clean checkout, and the current workspace is dirty.']`
 
 ## Details
 
@@ -60,5 +60,5 @@
 - Migration upgrade → downgrade → reapply portability has not been preserved for both SQLite and PostgreSQL.
 - Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.
 - Current generated public artifacts still drift from executable reality.
-- One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.
+- One or more exported package capabilities still lacks end-to-end verification in the current environment.
 - Release evidence can now be built only from a clean checkout, and the current workspace is dirty.

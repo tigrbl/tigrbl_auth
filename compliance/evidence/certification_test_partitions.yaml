@@ -107,6 +107,7 @@ partitions:
   - tests/unit/test_authorization_safety_property_evaluator.py
   - tests/unit/test_authorize_id_token_hashes.py
   - tests/unit/test_authorize_response_modes.py
+  - tests/unit/test_authz_policy_table_ops_boundary.py
   - tests/unit/test_backends.py
   - tests/unit/test_bootstrap_secret_scrub.py
   - tests/unit/test_bootstrappable_user_defaults.py
@@ -128,6 +129,7 @@ partitions:
   - tests/unit/test_control_plane_correctness_properties.py
   - tests/unit/test_credentials_lifecycle_boundary.py
   - tests/unit/test_crypto.py
+  - tests/unit/test_crypto_key_storage_runtime_boundary.py
   - tests/unit/test_decision_stability_policy_versions.py
   - tests/unit/test_delegation_attenuation_proof.py
   - tests/unit/test_delegation_attenuation_robustness_t2.py
@@ -157,6 +159,7 @@ partitions:
   - tests/unit/test_identity_package_file_size_guard.py
   - tests/unit/test_identity_package_split_imports.py
   - tests/unit/test_identity_primitives_contracts_boundary.py
+  - tests/unit/test_identity_server_named_routers.py
   - tests/unit/test_jose_contract_reexports.py
   - tests/unit/test_jose_policy_boundary.py
   - tests/unit/test_jose_pqc_mldsa.py
@@ -193,7 +196,9 @@ partitions:
   - tests/unit/test_package_python_matrix_workflow.py
   - tests/unit/test_path_safety.py
   - tests/unit/test_peer_bundle_completeness.py
+  - tests/unit/test_pkce_provider_boundary.py
   - tests/unit/test_plane_contracts_boundary.py
+  - tests/unit/test_policy_canonicalization_ownership.py
   - tests/unit/test_policy_concrete_layer_boundary.py
   - tests/unit/test_policy_control_plane_phase3.py
   - tests/unit/test_policy_determinism_replay.py
@@ -281,6 +286,7 @@ partitions:
   - tests/unit/test_session_logout_cluster_b.py
   - tests/unit/test_ssot_dependency_maintenance_traceability.py
   - tests/unit/test_ssot_document_authority.py
+  - tests/unit/test_ssot_operator_vocabulary_boundary.py
   - tests/unit/test_ssot_registry_integrity.py
   - tests/unit/test_ssot_work_item_traceability.py
   - tests/unit/test_standard_owner_metadata.py
@@ -298,6 +304,7 @@ partitions:
   - tests/unit/test_tier3_validated_rebuild.py
   - tests/unit/test_tier4_checkpoint.py
   - tests/unit/test_tigrbl_auth_facade_ownership.py
+  - tests/unit/test_tigrbl_auth_plugin_package.py
   - tests/unit/test_tigrbl_bcp_direct_db_boundary.py
   - tests/unit/test_token_endpoint_minimal_storage.py
   - tests/unit/test_tox_pip_install.py

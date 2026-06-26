@@ -19,7 +19,7 @@
     "clean_room_matrix_implemented": true,
     "clean_room_matrix_executed_in_this_container": false,
     "tox_manifest_present": true,
-    "test_constraints_manifest_present": true,
+    "test_extra_present": true,
     "tigrcorn_pin_committed": true,
     "operator_plane_backend": "sqlite-authoritative",
     "operator_plane_repo_mutation_dependency": false,
@@ -103,7 +103,7 @@
       "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
       "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
       "Current generated public artifacts still drift from executable reality.",
-      "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
+      "One or more exported package capabilities still lacks end-to-end verification in the current environment.",
       "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
     ]
   },
@@ -119,7 +119,7 @@
     "Migration upgrade \u2192 downgrade \u2192 reapply portability has not been preserved for both SQLite and PostgreSQL.",
     "Tier 3 evidence has not yet been explicitly rebuilt from validated-run manifests.",
     "Current generated public artifacts still drift from executable reality.",
-    "One or more operator-visible package capabilities still lacks end-to-end verification in the current environment.",
+    "One or more exported package capabilities still lacks end-to-end verification in the current environment.",
     "Release evidence can now be built only from a clean checkout, and the current workspace is dirty."
   ]
 }

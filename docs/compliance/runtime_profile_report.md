@@ -1,6 +1,6 @@
 # Runtime Profile Report
 
-- Generated at: `20260621T090301Z`
+- Generated at: `20260623T193717Z`
 - Deployment profile: `baseline`
 - Report mode: `live-probe`
 - Validated artifact source: `None`
@@ -9,7 +9,7 @@
 - Missing profiles: `2`
 - Invalid profiles: `0`
 - Application hash invariant: `True`
-- Pyproject requires-python: `>=3.10,<3.13`
+- Pyproject requires-python: `>=3.10,<3.15`
 - Supported Python versions: `3.10, 3.11, 3.12`
 - Placeholder-supported runners: `0`
 - Declared CI-installable runners: `3`

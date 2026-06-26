@@ -1,5 +1,5 @@
 {
-  "generated_at": "20260621T090241Z",
+  "generated_at": "20260623T193631Z",
   "passed": true,
   "summary": {
     "static_manifest_passed": true,
@@ -7,7 +7,7 @@
     "profile": "base",
     "current_profile_identity": "base@py312",
     "environment_identity_present": true,
-    "current_python": "3.12.9",
+    "current_python": "3.12.5",
     "current_python_supported": true,
     "expected_supported_python_versions": [
       "3.10",
@@ -27,11 +27,11 @@
     "tox_envs_declare_install_probe": true,
     "workspace_sources_present": false,
     "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 30,
+    "first_party_workspace_source_count": 54,
     "forbidden_workspace_source_count": 0,
     "forbidden_dependency_reference_count": 0,
-    "base_dependency_count": 64,
-    "base_exact_pinned_dependency_count": 64,
+    "base_dependency_count": 88,
+    "base_exact_pinned_dependency_count": 88,
     "dependency_source": "pyproject.toml",
     "native_uv_lock_present": true,
     "install_profile_count": 14,
@@ -114,17 +114,40 @@
       "aiosqlite==0.22.1",
       "tigrbl-identity-contracts==0.4.0.dev2",
       "tigrbl-identity-concrete==0.4.0.dev2",
+      "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
+      "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
+      "tigrbl-identity-admin-control-plane==0.4.0.dev2",
+      "tigrbl-identity-admin-federation-registry==0.4.0.dev2",
+      "tigrbl-identity-admin-policy-registry==0.4.0.dev2",
+      "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
+      "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
+      "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
+      "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
       "tigrbl-authz-policy-concrete==0.4.0.dev2",
+      "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
+      "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
       "tigrbl-release-contracts==0.1.0",
+      "tigrbl-auth-release-certification==0.4.0.dev2",
       "tigrbl-security-trust-contracts==0.1.0",
       "tigrbl-security-trust-domain-bases==0.1.0",
+      "tigrbl-security-certificate-mtls==0.1.0",
+      "tigrbl-security-dpop-cnf-binding-validator==0.1.0",
+      "tigrbl-security-mtls-cnf-binding-validator==0.1.0",
+      "tigrbl-security-proof-dpop==0.1.0",
+      "tigrbl-security-proof-pkce==0.1.0",
+      "tigrbl-security-sender-constraint-validator==0.1.0",
       "tigrbl-security-signing-pqc==0.1.0",
+      "tigrbl-security-token-introspection-client==0.1.0",
+      "tigrbl-security-token-jwks-cache==0.1.0",
+      "tigrbl-authz-resource-server-verifier==0.4.0.dev2",
       "tigrbl-auth==0.4.0.dev2",
       "tigrbl-auth-protocol-oauth==0.4.0.dev2",
       "tigrbl-auth-protocol-oidc==0.4.0.dev2",
       "tigrbl-auth-protocol-rp==0.4.0.dev2",
       "tigrbl-authn-credentials==0.4.0.dev2",
+      "tigrbl-authz-policy-admin-gate==0.4.0.dev2",
       "tigrbl-authz-policy==0.4.0.dev2",
+      "tigrbl-auth-plugin==0.4.0.dev2",
       "tigrbl-authz-resource-server==0.4.0.dev2",
       "tigrbl-identity-cli==0.4.0.dev2",
       "tigrbl-identity-admin==0.4.0.dev2",
@@ -142,6 +165,7 @@
       "tigrbl-identity-runtime==0.4.0.dev2",
       "tigrbl-identity-server==0.4.0.dev2",
       "tigrbl-identity-storage==0.4.0.dev2",
+      "tigrbl-identity-storage-runtime==0.4.0.dev2",
       "tomli==2.4.0; python_version<'3.11'"
     ],
     "optional_dependencies": {
@@ -163,6 +187,33 @@
         "aiosqlite==0.22.1"
       ],
       "uvicorn": [
+        "tigrbl-identity-runtime[uvicorn]==0.4.0.dev2"
+      ],
+      "hypercorn": [
+        "tigrbl-identity-runtime[hypercorn]==0.4.0.dev2"
+      ],
+      "tigrcorn": [
+        "tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2"
+      ],
+      "servers": [
+        "tigrbl-identity-runtime[servers]==0.4.0.dev2"
+      ]
+    },
+    "workspace_sources_present": false,
+    "workspace_sources_declared": true,
+    "first_party_workspace_source_count": 54,
+    "forbidden_workspace_source_count": 0,
+    "forbidden_workspace_sources": {},
+    "forbidden_dependency_references": [],
+    "exact_pinned_dependency_count": 88,
+    "dependency_count": 88
+  },
+  "extras_consistency": {
+    "passed": true,
+    "mismatches": [],
+    "runtime_pyproject": "pkgs/60-runtime/tigrbl-identity-runtime/pyproject.toml",
+    "runtime_runner_extras": {
+      "uvicorn": [
         "uvicorn[standard]==0.41.0"
       ],
       "hypercorn": [
@@ -177,28 +228,144 @@
         "tigrcorn==0.3.8; python_version>='3.11'"
       ]
     },
-    "workspace_sources_present": false,
-    "workspace_sources_declared": true,
-    "first_party_workspace_source_count": 30,
-    "forbidden_workspace_source_count": 0,
-    "forbidden_workspace_sources": {},
-    "forbidden_dependency_references": [],
-    "exact_pinned_dependency_count": 64,
-    "dependency_count": 64
-  },
-  "constraints_consistency": {
-    "passed": true,
-    "mismatches": [],
-    "illegal_constraint_extras": {
-      "test": [],
-      "uvicorn": [],
-      "hypercorn": [],
-      "tigrcorn": []
+    "workspace_runner_extras": {
+      "uvicorn": [
+        "tigrbl-identity-runtime[uvicorn]==0.4.0.dev2"
+      ],
+      "hypercorn": [
+        "tigrbl-identity-runtime[hypercorn]==0.4.0.dev2"
+      ],
+      "tigrcorn": [
+        "tigrbl-identity-runtime[tigrcorn]==0.4.0.dev2"
+      ],
+      "servers": [
+        "tigrbl-identity-runtime[servers]==0.4.0.dev2"
+      ]
     },
-    "test_count": 8,
-    "uvicorn_count": 1,
-    "hypercorn_count": 1,
-    "tigrcorn_count": 1
+    "profile_extra_coverage": {
+      "base": {
+        "extras": [],
+        "missing_extras": [],
+        "passed": true
+      },
+      "sqlite-uvicorn": {
+        "extras": [
+          "sqlite",
+          "uvicorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "postgres-hypercorn": {
+        "extras": [
+          "postgres",
+          "hypercorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "tigrcorn": {
+        "extras": [
+          "tigrcorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "devtest": {
+        "extras": [
+          "test",
+          "sqlite",
+          "uvicorn"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "release-gates": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-core": {
+        "extras": [
+          "test"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-integration": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-conformance": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-security-negative": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-interop": {
+        "extras": [
+          "test",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "test-extension": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "migration-portability": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      },
+      "final-certification": {
+        "extras": [
+          "test",
+          "sqlite",
+          "postgres",
+          "servers"
+        ],
+        "missing_extras": [],
+        "passed": true
+      }
+    }
   },
   "uv_lock_consistency": {
     "passed": true,
@@ -252,98 +419,98 @@
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-sqlite-uvicorn]": {
         "profile": "sqlite-uvicorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-postgres-hypercorn]": {
         "profile": "postgres-hypercorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{311,312}-tigrcorn]": {
         "profile": "tigrcorn",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-devtest]": {
         "profile": "devtest",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-gates]": {
         "profile": "release-gates",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-test-core]": {
         "profile": "test-core",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-test-integration]": {
         "profile": "test-integration",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-test-conformance]": {
         "profile": "test-conformance",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-test-security-negative]": {
         "profile": "test-security-negative",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py{310,311,312}-test-interop]": {
         "profile": "test-interop",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-test-extension]": {
         "profile": "test-extension",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-migration-portability]": {
         "profile": "migration-portability",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       },
       "[testenv:py311-final-certification]": {
         "profile": "final-certification",
         "pip_check_present": true,
         "install_probe_present": true,
         "install_profile_variable_present": true,
-        "constraints_present": true
+        "extras_present": true
       }
     },
     "pip_check_ok_count": 14,
@@ -369,7 +536,6 @@
   },
   "profiles": {
     "base": {
-      "constraints": [],
       "extras": [],
       "expected_modules": [
         "tigrbl",
@@ -397,9 +563,6 @@
       ]
     },
     "sqlite-uvicorn": {
-      "constraints": [
-        "constraints/runner-uvicorn.txt"
-      ],
       "extras": [
         "sqlite",
         "uvicorn"
@@ -431,9 +594,6 @@
       ]
     },
     "postgres-hypercorn": {
-      "constraints": [
-        "constraints/runner-hypercorn.txt"
-      ],
       "extras": [
         "postgres",
         "hypercorn"
@@ -466,9 +626,6 @@
       ]
     },
     "tigrcorn": {
-      "constraints": [
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "tigrcorn"
       ],
@@ -499,10 +656,6 @@
       ]
     },
     "devtest": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -541,12 +694,6 @@
       ]
     },
     "release-gates": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -589,9 +736,6 @@
       ]
     },
     "test-core": {
-      "constraints": [
-        "constraints/test.txt"
-      ],
       "extras": [
         "test"
       ],
@@ -627,12 +771,6 @@
       ]
     },
     "test-integration": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -675,12 +813,6 @@
       ]
     },
     "test-conformance": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -723,12 +855,6 @@
       ]
     },
     "test-security-negative": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -771,12 +897,6 @@
       ]
     },
     "test-interop": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "servers"
@@ -816,12 +936,6 @@
       ]
     },
     "test-extension": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -864,12 +978,6 @@
       ]
     },
     "migration-portability": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -912,12 +1020,6 @@
       ]
     },
     "final-certification": {
-      "constraints": [
-        "constraints/test.txt",
-        "constraints/runner-uvicorn.txt",
-        "constraints/runner-hypercorn.txt",
-        "constraints/runner-tigrcorn.txt"
-      ],
       "extras": [
         "test",
         "sqlite",
@@ -963,10 +1065,10 @@
   "identity": "base@py312",
   "environment_identity": {
     "python_version": "3.12",
-    "python_full_version": "3.12.9",
+    "python_full_version": "3.12.5",
     "python_tag": "py312",
     "implementation": "CPython",
-    "implementation_version": "3.12.9",
+    "implementation_version": "3.12.5",
     "executable": ".venv/Scripts/python.exe",
     "platform": "Windows-10-10.0.19045-SP0",
     "platform_system": "Windows",
@@ -985,10 +1087,10 @@
     "identity": "base@py312",
     "environment_identity": {
       "python_version": "3.12",
-      "python_full_version": "3.12.9",
+      "python_full_version": "3.12.5",
       "python_tag": "py312",
       "implementation": "CPython",
-      "implementation_version": "3.12.9",
+      "implementation_version": "3.12.5",
       "executable": ".venv/Scripts/python.exe",
       "platform": "Windows-10-10.0.19045-SP0",
       "platform_system": "Windows",
@@ -1002,7 +1104,7 @@
       "test_lane": null,
       "runner": null
     },
-    "python": "3.12.9",
+    "python": "3.12.5",
     "python_supported": true,
     "module_results": [
       {

@@ -36,32 +36,32 @@
     "bootstrap_storage": {
       "label": "bootstrap storage",
       "passed": true,
-      "summary": "The operator plane materializes durable sqlite-backed storage outside the repository tree.",
+      "summary": "The storage-backed administration workflow materializes durable sqlite-backed state outside the repository tree.",
       "evidence": [
-        "tigrbl_auth/services/_operator_store.py",
+        "pkgs/01-storage/tigrbl-identity-storage/src/tigrbl_identity_storage/operator_store.py",
         "tests/unit/test_operator_control_plane.py"
       ],
       "details": {
         "schema_version": 1,
         "backend": "sqlite-authoritative",
-        "state_root": "<operator-state>/operator-state-a530a91be5ca2e9c",
-        "database_path": "<operator-state>/operator_plane.sqlite3",
-        "snapshot_root": "<operator-state>/snapshots",
-        "log_root": "<operator-state>/logs",
+        "state_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716",
+        "database_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/operator_plane.sqlite3",
+        "snapshot_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/snapshots",
+        "log_root": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs",
         "repo_mutation_dependency": false,
         "concurrency_model": "sqlite-wal-begin-immediate",
         "tenancy_enforced": true,
         "portability_schema_version": 3,
         "database_present": true,
-        "audit_log_path": "<operator-state>/audit-events.jsonl",
-        "transaction_log_path": "<operator-state>/transactions.jsonl",
-        "activity_log_path": "<operator-state>/activity.jsonl"
+        "audit_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/audit-events.jsonl",
+        "transaction_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/transactions.jsonl",
+        "activity_log_path": "<repo>/.pytest-tmp/operator-plane-state/operator-state-0b52b544fb41f716/logs/activity.jsonl"
       }
     },
     "register_manage_clients": {
       "label": "register/manage clients",
       "passed": true,
-      "summary": "Client records can be created, updated, listed, fetched, and deleted through the durable operator plane.",
+      "summary": "Client records can be created, updated, listed, fetched, and deleted through storage-backed administration workflows.",
       "evidence": [
         "tests/conformance/operator/test_cli_resource_lifecycle.py",
         "tests/unit/test_operator_control_plane.py"
@@ -85,7 +85,7 @@
     "rotate_publish_keys_jwks": {
       "label": "rotate and publish keys / JWKS",
       "passed": true,
-      "summary": "Operator key lifecycle workflows generate, rotate, retire, and publish JWKS artifacts.",
+      "summary": "Key lifecycle workflows generate, rotate, retire, and publish JWKS artifacts.",
       "evidence": [
         "tests/conformance/operator/test_cli_keys_lifecycle.py",
         "dist/jwks/jwks.json"
@@ -111,10 +111,10 @@
     "export_import_state": {
       "label": "export/import state",
       "passed": true,
-      "summary": "Portability workflows export a versioned artifact and import it into a new durable operator-plane state root.",
+      "summary": "Portability workflows export a versioned artifact and import it into a new storage-backed identity state root.",
       "evidence": [
         "tests/conformance/operator/test_cli_import_export.py",
-        "dist/feature-completeness-sandbox-uqhne5a2/exports/portable-export.json"
+        "dist/feature-completeness-sandbox-dll0uebm/exports/portable-export.json"
       ],
       "details": {
         "export_status": "exported",
@@ -157,10 +157,10 @@
       "summary": "Release bundles can be materialized, signed, and verified from repository state.",
       "evidence": [
         "tests/security/test_release_bundle_signing.py",
-        "dist/feature-completeness-sandbox-uqhne5a2/release-bundle"
+        "dist/feature-completeness-sandbox-dll0uebm/release-bundle"
       ],
       "details": {
-        "bundle_dir": "dist/feature-completeness-sandbox-uqhne5a2/release-bundle",
+        "bundle_dir": "dist/feature-completeness-sandbox-dll0uebm/release-bundle",
         "sign_status": "signed-ed25519-attested",
         "release_verbs": [
           "bundle",
@@ -192,7 +192,7 @@
           "missing_count": 2,
           "invalid_count": 0,
           "application_hash_invariant": true,
-          "pyproject_requires_python": ">=3.10,<3.13",
+          "pyproject_requires_python": ">=3.10,<3.15",
           "supported_python_versions": [
             "3.10",
             "3.11",

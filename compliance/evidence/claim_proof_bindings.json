@@ -3282,7 +3282,8 @@
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/security/test_crypto_boundary_governance.py",
         "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py"
+        "tests/unit/test_crypto.py",
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cli-operator-surface/"
@@ -8825,7 +8826,8 @@
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/security/test_crypto_boundary_governance.py",
         "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py"
+        "tests/unit/test_crypto.py",
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/oauth2-core/"
@@ -9096,7 +9098,8 @@
         "tests/negative/test_hardening_runtime_enforcement.py",
         "tests/security/test_crypto_boundary_governance.py",
         "tests/unit/test_backends.py",
-        "tests/unit/test_crypto.py"
+        "tests/unit/test_crypto.py",
+        "tests/unit/test_crypto_key_storage_runtime_boundary.py"
       ],
       "evidence_refs": [
         "compliance/evidence/tier3/cookies/",
