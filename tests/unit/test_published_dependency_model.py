@@ -133,6 +133,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-core==0.4.0.dev2" not in identity_credentials_dependencies
     assert "tigrbl-identity-jose==0.4.0.dev2" not in identity_credentials_dependencies
     assert "tigrbl-identity-admin-control-plane==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies

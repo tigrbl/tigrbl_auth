@@ -35,7 +35,6 @@ classifiers = [
 dependencies = [
     "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
     "tigrbl-identity-admin-control-plane==0.4.0.dev2",
     "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",

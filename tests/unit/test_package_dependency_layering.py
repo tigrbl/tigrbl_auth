@@ -35,7 +35,6 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-authz-policy-evaluators-default",
         "tigrbl-authz-policy-obligations-concrete",
         "tigrbl-authz-policy-rules-concrete",
-        "tigrbl-identity-admin-advanced-authenticator-registry",
         "tigrbl-identity-admin-auth-anomaly-detector",
         "tigrbl-identity-admin-control-plane",
         "tigrbl-identity-admin-relationship-graph",
@@ -102,6 +101,7 @@ PYTHON_PACKAGE_LAYERS = {
     "deprecated": {
         "tigrbl-auth-protocol-oidc-backchannel-replay-store",
         "tigrbl-authz-policy-invariant-registry",
+        "tigrbl-identity-admin-advanced-authenticator-registry",
         "tigrbl-identity-admin-federation-registry",
         "tigrbl-identity-admin-policy-registry",
         "tigrbl-identity-credentials",

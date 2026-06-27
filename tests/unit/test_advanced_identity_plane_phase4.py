@@ -1,6 +1,6 @@
 import pytest
 
-from tigrbl_identity_admin_advanced_authenticator_registry import (
+from tigrbl_identity_admin._advanced_identity_plane.authenticators import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
 from tigrbl_identity_admin_auth_anomaly_detector import AuthAnomalyDetector as CanonicalAuthAnomalyDetector
@@ -9,6 +9,8 @@ from tigrbl_identity_admin_trust_federation_graph import (
     TrustFederationGraph as CanonicalTrustFederationGraph,
 )
 from tigrbl_identity_storage.tables import Federation as CanonicalFederation
+from tigrbl_identity_storage.tables import AuthenticationChallenge as CanonicalAuthenticationChallenge
+from tigrbl_identity_storage.tables import CredentialMfaFactor, CredentialWebAuthnPasskey
 from tigrbl_identity_storage.tables import Policy as CanonicalPolicy
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
@@ -28,6 +30,9 @@ def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_
     assert AdvancedAuthenticatorRegistry is CanonicalAdvancedAuthenticatorRegistry
 
     registry = AdvancedAuthenticatorRegistry()
+    assert registry.challenge_table is CanonicalAuthenticationChallenge
+    assert registry.mfa_factor_table is CredentialMfaFactor
+    assert registry.webauthn_passkey_table is CredentialWebAuthnPasskey
     passwordless = registry.enroll_passwordless_credential(
         subject_id="alice",
         tenant_id="tenant-a",
@@ -88,6 +93,15 @@ def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_
             credential_id=webauthn.credential_id,
             nonce=challenge.expected_nonce,
         )
+
+
+def test_deprecated_advanced_authenticator_registry_reexports_admin_surface():
+    with pytest.warns(DeprecationWarning):
+        from tigrbl_identity_admin_advanced_authenticator_registry import (
+            AdvancedAuthenticatorRegistry as DeprecatedAdvancedAuthenticatorRegistry,
+        )
+
+    assert DeprecatedAdvancedAuthenticatorRegistry is AdvancedAuthenticatorRegistry
 
 
 def test_federation_surface_exports_storage_table_registry() -> None:

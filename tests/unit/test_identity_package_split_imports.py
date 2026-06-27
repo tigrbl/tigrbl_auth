@@ -21,6 +21,7 @@ PKGS = ROOT / "pkgs"
 DEPRECATED_DIST_NAMES = {
     "tigrbl-auth-protocol-oidc-backchannel-replay-store",
     "tigrbl-authz-policy-invariant-registry",
+    "tigrbl-identity-admin-advanced-authenticator-registry",
     "tigrbl-identity-admin-federation-registry",
     "tigrbl-identity-admin-policy-registry",
     "tigrbl-identity-credentials",

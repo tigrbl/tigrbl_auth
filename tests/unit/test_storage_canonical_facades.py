@@ -26,6 +26,7 @@ TABLE_MODULE_EXPORTS = {
     "audit_event": ("AuditEvent",),
     "auth_code": ("AuthCode",),
     "auth_session": ("AuthSession",),
+    "authentication_challenge": ("AuthenticationChallenge",),
     "authorization_server": ("AuthorizationServer",),
     "client": ("Client", "_CLIENT_ID_RE"),
     "client_registration": ("ClientRegistration",),

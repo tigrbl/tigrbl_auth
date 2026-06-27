@@ -2512,7 +2512,7 @@ requires-dist = [
     { name = "tigrbl-concrete", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
-    { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/10-concrete/tigrbl-identity-admin-advanced-authenticator-registry" },
+    { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-auth-anomaly-detector", editable = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector" },
     { name = "tigrbl-identity-admin-control-plane", editable = "pkgs/10-concrete/tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-federation-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-federation-registry" },
@@ -2894,7 +2894,6 @@ name = "tigrbl-identity-admin"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin" }
 dependencies = [
-    { name = "tigrbl-identity-admin-advanced-authenticator-registry" },
     { name = "tigrbl-identity-admin-auth-anomaly-detector" },
     { name = "tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-relationship-graph" },
@@ -2907,7 +2906,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "tigrbl-identity-admin-advanced-authenticator-registry", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin-auth-anomaly-detector", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin-control-plane", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-admin-relationship-graph", specifier = "==0.4.0.dev2" },
@@ -2921,19 +2919,13 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-admin-advanced-authenticator-registry"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-advanced-authenticator-registry" }
+source = { editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" }
 dependencies = [
-    { name = "tigrbl-identity-contracts" },
-    { name = "tigrbl-identity-core" },
-    { name = "tigrbl-identity-credentials-concrete" },
+    { name = "tigrbl-identity-admin" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
-    { name = "tigrbl-identity-credentials-concrete", specifier = "==0.4.0.dev2" },
-]
+requires-dist = [{ name = "tigrbl-identity-admin", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-identity-admin-auth-anomaly-detector"

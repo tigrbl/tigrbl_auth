@@ -1,14 +1,12 @@
 [project]
 name = "tigrbl-identity-admin-advanced-authenticator-registry"
 version = "0.4.0.dev2"
-description = "Concrete identity administration advanced authenticator registry."
+description = "Deprecated compatibility package for the advanced authenticator registry."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
-    "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-identity-contracts==0.4.0.dev2",
-    "tigrbl-identity-core==0.4.0.dev2",
+    "tigrbl-identity-admin==0.4.0.dev2",
 ]
 
 [build-system]

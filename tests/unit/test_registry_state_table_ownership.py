@@ -19,6 +19,7 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
         "InvariantEvaluation",
         "InvariantViolation",
         "BackchannelLogoutReplay",
+        "AuthenticationChallenge",
     ):
         assert name in tables.TABLE_MODEL_BY_NAME
         assert getattr(tables, name) is tables.TABLE_MODEL_BY_NAME[name]
@@ -53,6 +54,17 @@ def test_backchannel_replay_table_is_in_migration_chain() -> None:
     assert migration.down_revision == "0019_federation_and_invariant_tables"
     assert tuple(table.__name__ for table in migration.TABLES) == (
         "BackchannelLogoutReplay",
+    )
+
+
+def test_authentication_challenge_table_is_in_migration_chain() -> None:
+    migration = importlib.import_module(
+        "tigrbl_identity_storage.migrations.versions.0021_authentication_challenge_table"
+    )
+
+    assert migration.down_revision == "0020_backchannel_logout_replay_table"
+    assert tuple(table.__name__ for table in migration.TABLES) == (
+        "AuthenticationChallenge",
     )
 
 

@@ -1,0 +1,21 @@
+"""Executable DDL migration for advanced-authentication challenge state."""
+
+from __future__ import annotations
+
+from tigrbl_identity_storage.migrations.helpers import create_tables, drop_tables
+from tigrbl_identity_storage.tables import AuthenticationChallenge
+
+revision = "0021_authentication_challenge_table"
+down_revision = "0020_backchannel_logout_replay_table"
+branch_labels = None
+depends_on = None
+
+TABLES = (AuthenticationChallenge,)
+
+
+def upgrade(conn) -> None:
+    create_tables(conn, *TABLES)
+
+
+def downgrade(conn) -> None:
+    drop_tables(conn, *TABLES)
