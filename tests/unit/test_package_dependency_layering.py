@@ -22,6 +22,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-security-trust-contracts",
     },
     "bases": {
+        "tigrbl-identity-authenticator-bases",
         "tigrbl-security-trust-domain-bases",
     },
     "concrete": {
@@ -43,6 +44,18 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-identities-concrete",
     },
     "providers": {
+        "tigrbl-authenticator-api-key-local",
+        "tigrbl-authenticator-client-secret-local",
+        "tigrbl-authenticator-dpop-proof",
+        "tigrbl-authenticator-federated-oidc",
+        "tigrbl-authenticator-mtls-client-cert",
+        "tigrbl-authenticator-otp-local",
+        "tigrbl-authenticator-password-local",
+        "tigrbl-authenticator-recovery-code-local",
+        "tigrbl-authenticator-remote-introspection",
+        "tigrbl-authenticator-service-key-local",
+        "tigrbl-authenticator-session-local",
+        "tigrbl-authenticator-webauthn-local",
         "tigrbl-identity-jose",
         "tigrbl-security-authorization-provenance-builder",
         "tigrbl-security-certificate-mtls",
