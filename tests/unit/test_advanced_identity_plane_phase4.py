@@ -1,5 +1,6 @@
 import pytest
 
+import tigrbl_identity_admin._advanced_identity_plane.authenticators as authenticators_module
 from tigrbl_identity_admin._advanced_identity_plane.authenticators import (
     AdvancedAuthenticatorRegistry as CanonicalAdvancedAuthenticatorRegistry,
 )
@@ -8,6 +9,7 @@ from tigrbl_identity_admin_relationship_graph import RelationshipGraph as Canoni
 from tigrbl_identity_admin_trust_federation_graph import (
     TrustFederationGraph as CanonicalTrustFederationGraph,
 )
+from tigrbl_identity_runtime.settings import settings
 from tigrbl_identity_storage.tables import Federation as CanonicalFederation
 from tigrbl_identity_storage.tables import AuthenticationChallenge as CanonicalAuthenticationChallenge
 from tigrbl_identity_storage.tables import CredentialMfaFactor, CredentialWebAuthnPasskey
@@ -97,6 +99,24 @@ def test_advanced_authenticator_registry_supports_passwordless_webauthn_mfa_and_
             challenge_id=challenge.challenge_id,
             credential_id=webauthn.credential_id,
             nonce=challenge.expected_nonce,
+        )
+
+
+def test_advanced_authenticator_uses_canonical_webauthn_algorithm_registry(monkeypatch):
+    assert "WEBAUTHN_ALGORITHMS" not in authenticators_module.__dict__
+    assert (
+        AdvancedAuthenticatorRegistry.__init__.__kwdefaults__["webauthn_algorithm_validator"]
+        is authenticators_module.is_webauthn_algorithm
+    )
+
+    monkeypatch.setattr(settings, "enable_rfc8812", True)
+    registry = AdvancedAuthenticatorRegistry()
+    with pytest.raises(ValueError, match="unsupported WebAuthn algorithm"):
+        registry.register_webauthn_credential(
+            subject_id="alice",
+            tenant_id="tenant-a",
+            rp_id="auth.example.com",
+            algorithm="HS256",
         )
 
 

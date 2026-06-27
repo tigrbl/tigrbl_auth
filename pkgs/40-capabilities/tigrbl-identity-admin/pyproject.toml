@@ -40,6 +40,7 @@ dependencies = [
     "tigrbl-identity-admin-relationship-graph==0.4.0.dev2",
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-identity-jose==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
 ]
 

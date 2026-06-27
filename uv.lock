@@ -2905,6 +2905,7 @@ dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-credentials-concrete" },
     { name = "tigrbl-identity-identities-concrete" },
+    { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-storage" },
 ]
 
@@ -2917,6 +2918,7 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-credentials-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-jose", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]
 

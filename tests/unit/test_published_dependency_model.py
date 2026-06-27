@@ -145,6 +145,7 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-storage==0.4.0.dev2" in authority_graph_dependencies
     assert "tigrbl-identity-storage==0.4.0.dev2" in trust_graph_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
+    assert "tigrbl-identity-jose==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-identities-concrete==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-credentials-concrete==0.4.0.dev2" in identity_admin_dependencies

@@ -9,6 +9,7 @@ from tigrbl_identity_contracts.adaptive_access import AdaptiveContext, AdaptiveD
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_core.clock import utc_now, utc_now_iso
 from tigrbl_identity_credentials_concrete import MfaFactor, PasswordlessCredential, WebAuthnCredential
+from tigrbl_identity_jose.standards.rfc8812 import is_webauthn_algorithm
 from tigrbl_identity_storage.tables import (
     AuthenticationChallenge as AuthenticationChallengeTable,
     Credential,
@@ -42,29 +43,9 @@ AMR_VALUES = frozenset(
         "wia",
     }
 )
-WEBAUTHN_ALGORITHMS = frozenset(
-    {
-        "RS256",
-        "RS384",
-        "RS512",
-        "RS1",
-        "PS256",
-        "PS384",
-        "PS512",
-        "ES256",
-        "ES384",
-        "ES512",
-        "ES256K",
-    }
-)
-
 
 def _default_validate_amr_claim(amr: Sequence[str]) -> bool:
     return all(value in AMR_VALUES for value in amr)
-
-
-def _default_is_webauthn_algorithm(alg: object) -> bool:
-    return isinstance(alg, str) and alg.upper() in WEBAUTHN_ALGORITHMS
 
 
 def _evaluate_adaptive_context(context: AdaptiveContext) -> AdaptiveDecision:
@@ -123,7 +104,7 @@ class AdvancedAuthenticatorRegistry:
         self,
         *,
         amr_validator: Callable[[Sequence[str]], bool] = _default_validate_amr_claim,
-        webauthn_algorithm_validator: Callable[[object], bool] = _default_is_webauthn_algorithm,
+        webauthn_algorithm_validator: Callable[[object], bool] = is_webauthn_algorithm,
     ) -> None:
         self._amr_validator = amr_validator
         self._webauthn_algorithm_validator = webauthn_algorithm_validator
