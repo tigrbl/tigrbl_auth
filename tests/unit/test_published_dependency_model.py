@@ -91,6 +91,12 @@ def test_pyproject_uses_published_pins_and_extras():
         _load_package_pyproject("tigrbl-identity-identities-concrete")["project"]["dependencies"]
     )
     identity_admin_dependencies = set(_load_package_pyproject("tigrbl-identity-admin")["project"]["dependencies"])
+    authority_graph_dependencies = set(
+        _load_package_pyproject("tigrbl-authz-policy-authority-derivation-graph")["project"]["dependencies"]
+    )
+    trust_graph_dependencies = set(
+        _load_package_pyproject("tigrbl-identity-admin-trust-federation-graph")["project"]["dependencies"]
+    )
     authz_dependencies = set(_load_package_pyproject("tigrbl-authz-policy")["project"]["dependencies"])
     verifier_dependencies = set(_load_package_pyproject("tigrbl-authz-resource-server-verifier")["project"]["dependencies"])
     jwks_cache_dependencies = set(_load_package_pyproject("tigrbl-security-token-jwks-cache")["project"]["dependencies"])
@@ -136,6 +142,8 @@ def test_pyproject_uses_published_pins_and_extras():
     assert "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-policy-registry==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-admin-federation-registry==0.4.0.dev2" not in identity_admin_dependencies
+    assert "tigrbl-identity-storage==0.4.0.dev2" in authority_graph_dependencies
+    assert "tigrbl-identity-storage==0.4.0.dev2" in trust_graph_dependencies
     assert "tigrbl-identity-admin-relationship-graph==0.4.0.dev2" in identity_admin_dependencies
     assert "tigrbl-identity-concrete==0.4.0.dev2" not in identity_admin_dependencies
     assert "tigrbl-identity-identities-concrete==0.4.0.dev2" in identity_admin_dependencies

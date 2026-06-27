@@ -12,6 +12,11 @@ from tigrbl_identity_storage.tables import Federation as CanonicalFederation
 from tigrbl_identity_storage.tables import AuthenticationChallenge as CanonicalAuthenticationChallenge
 from tigrbl_identity_storage.tables import CredentialMfaFactor, CredentialWebAuthnPasskey
 from tigrbl_identity_storage.tables import Policy as CanonicalPolicy
+from tigrbl_identity_storage.tables import (
+    TrustFederationGraph as TrustFederationGraphTable,
+    TrustFederationGraphEdge,
+    TrustFederationGraphNode,
+)
 from tigrbl_auth.services.advanced_identity_plane import (
     AccessDecisionRequest,
     AdaptiveContext,
@@ -110,6 +115,9 @@ def test_federation_surface_exports_storage_table_registry() -> None:
 
 def test_device_and_workload_identities_support_lifecycle_rotation_and_cross_cloud_trust_paths():
     assert TrustFederationGraph is CanonicalTrustFederationGraph
+    assert TrustFederationGraph.graph_table is TrustFederationGraphTable
+    assert TrustFederationGraph.node_table is TrustFederationGraphNode
+    assert TrustFederationGraph.edge_table is TrustFederationGraphEdge
 
     identities = DeviceWorkloadIdentityRegistry()
     trust_graph = TrustFederationGraph()

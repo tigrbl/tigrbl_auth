@@ -18,6 +18,11 @@ from tigrbl_identity_contracts.authority import (
     LeastAuthorityDiff,
     authority_matches,
 )
+from tigrbl_identity_storage.tables import (
+    AuthorityDerivationGraph as AuthorityDerivationGraphTable,
+    AuthorityDerivationGraphEdge,
+    AuthorityDerivationGraphNode,
+)
 
 
 def normalize_authority_roles(values: Iterable[str | AuthorityRole] = ()) -> tuple[str, ...]:
@@ -40,6 +45,10 @@ def has_superuser_authority(values: Iterable[str | AuthorityRole] = ()) -> bool:
 
 
 class AuthorityDerivationGraph:
+    graph_table = AuthorityDerivationGraphTable
+    node_table = AuthorityDerivationGraphNode
+    edge_table = AuthorityDerivationGraphEdge
+
     def __init__(
         self,
         *,
@@ -136,6 +145,107 @@ class AuthorityDerivationGraph:
             paths=paths,
             failures=failures,
         )
+
+
+def _field(row: object, key: str, default: object = None) -> object:
+    if isinstance(row, Mapping):
+        return row.get(key, default)
+    return getattr(row, key, default)
+
+
+def _scope_payload(scope: AuthorityScope) -> dict[str, str]:
+    return {
+        "tenant_id": scope.tenant_id,
+        "realm": scope.realm,
+        "action": scope.action,
+        "resource": scope.resource,
+    }
+
+
+def _scope_from_payload(payload: Mapping[str, object]) -> AuthorityScope:
+    return AuthorityScope(
+        tenant_id=str(payload.get("tenant_id") or ""),
+        realm=str(payload.get("realm") or ""),
+        action=str(payload.get("action") or ""),
+        resource=str(payload.get("resource") or "*"),
+    )
+
+
+def authority_node_to_graph_node_payload(node: AuthorityNode, *, graph_id: object | None = None) -> dict[str, object]:
+    payload: dict[str, object] = {
+        "node_key": node.node_id,
+        "kind": node.kind,
+        "tenant_id": node.tenant_id or None,
+        "realm": node.realm or None,
+        "node_metadata": dict(node.attributes),
+    }
+    if graph_id is not None:
+        payload["graph_id"] = graph_id
+    return payload
+
+
+def authority_edge_to_graph_edge_payload(
+    edge: AuthorityEdge,
+    *,
+    graph_id: object | None = None,
+    src_id: object | None = None,
+    dst_id: object | None = None,
+) -> dict[str, object]:
+    payload: dict[str, object] = {
+        "edge_key": edge.edge_id,
+        "kind": edge.edge_type,
+        "policy_version": edge.policy_version or None,
+        "provenance_id": edge.provenance_id or None,
+        "scopes": [_scope_payload(scope) for scope in edge.scopes],
+        "constraints": list(edge.constraints),
+        "active": edge.active,
+        "revoked": not edge.active,
+        "edge_metadata": {
+            "source": edge.source,
+            "target": edge.target,
+        },
+    }
+    if edge.scopes:
+        payload["tenant_id"] = edge.scopes[0].tenant_id
+        payload["realm"] = edge.scopes[0].realm or None
+    if graph_id is not None:
+        payload["graph_id"] = graph_id
+    if src_id is not None:
+        payload["src_id"] = src_id
+    if dst_id is not None:
+        payload["dst_id"] = dst_id
+    return payload
+
+
+def graph_node_to_authority_node(row: object) -> AuthorityNode:
+    return AuthorityNode(
+        node_id=str(_field(row, "node_key") or ""),
+        kind=str(_field(row, "kind") or ""),
+        tenant_id=str(_field(row, "tenant_id") or ""),
+        realm=str(_field(row, "realm") or ""),
+        attributes=dict(_field(row, "node_metadata", {}) or {}),
+    )
+
+
+def graph_edge_to_authority_edge(
+    row: object,
+    *,
+    source: str | None = None,
+    target: str | None = None,
+) -> AuthorityEdge:
+    metadata = dict(_field(row, "edge_metadata", {}) or {})
+    scopes = tuple(_scope_from_payload(scope) for scope in (_field(row, "scopes", ()) or ()))
+    return AuthorityEdge(
+        edge_id=str(_field(row, "edge_key") or ""),
+        source=source or str(metadata.get("source") or ""),
+        target=target or str(metadata.get("target") or ""),
+        edge_type=str(_field(row, "kind") or ""),
+        scopes=scopes,
+        policy_version=str(_field(row, "policy_version") or ""),
+        provenance_id=str(_field(row, "provenance_id") or ""),
+        constraints=tuple(str(value) for value in (_field(row, "constraints", ()) or ())),
+        active=bool(_field(row, "active", True)) and not bool(_field(row, "revoked", False)),
+    )
 
 
 def validate_authority_graph_integrity(graph: AuthorityDerivationGraph) -> AuthorityGraphIntegrityReport:
@@ -244,11 +354,18 @@ __all__ = [
     "AuthorityReachabilityProof",
     "AuthorityRole",
     "AuthorityScope",
+    "AuthorityDerivationGraphTable",
     "LeastAuthorityDiff",
+    "AuthorityDerivationGraphNode",
+    "AuthorityDerivationGraphEdge",
     "authority_matches",
+    "authority_edge_to_graph_edge_payload",
+    "authority_node_to_graph_node_payload",
     "compare_authority_monotonicity",
     "compute_authority_closure",
     "diff_least_authority",
+    "graph_edge_to_authority_edge",
+    "graph_node_to_authority_node",
     "has_admin_authority",
     "has_owner_authority",
     "has_superuser_authority",

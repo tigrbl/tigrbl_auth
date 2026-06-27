@@ -20,6 +20,12 @@ def test_registry_state_has_storage_tables_without_runtime_repositories() -> Non
         "InvariantViolation",
         "BackchannelLogoutReplay",
         "AuthenticationChallenge",
+        "AuthorityDerivationGraph",
+        "AuthorityDerivationGraphNode",
+        "AuthorityDerivationGraphEdge",
+        "TrustFederationGraph",
+        "TrustFederationGraphNode",
+        "TrustFederationGraphEdge",
     ):
         assert name in tables.TABLE_MODEL_BY_NAME
         assert getattr(tables, name) is tables.TABLE_MODEL_BY_NAME[name]
@@ -65,6 +71,22 @@ def test_authentication_challenge_table_is_in_migration_chain() -> None:
     assert migration.down_revision == "0020_backchannel_logout_replay_table"
     assert tuple(table.__name__ for table in migration.TABLES) == (
         "AuthenticationChallenge",
+    )
+
+
+def test_authority_and_trust_graph_tables_are_in_migration_chain() -> None:
+    migration = importlib.import_module(
+        "tigrbl_identity_storage.migrations.versions.0022_authority_and_trust_graph_tables"
+    )
+
+    assert migration.down_revision == "0021_authentication_challenge_table"
+    assert tuple(table.__name__ for table in migration.TABLES) == (
+        "AuthorityDerivationGraph",
+        "AuthorityDerivationGraphNode",
+        "AuthorityDerivationGraphEdge",
+        "TrustFederationGraph",
+        "TrustFederationGraphNode",
+        "TrustFederationGraphEdge",
     )
 
 

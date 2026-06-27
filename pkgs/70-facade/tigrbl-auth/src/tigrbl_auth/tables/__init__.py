@@ -11,6 +11,7 @@ _SUBMODULES = (
     "auth_code",
     "auth_session",
     "authentication_challenge",
+    "authority_derivation_graph",
     "authorization_server",
     "client",
     "client_registration",
@@ -60,6 +61,7 @@ _SUBMODULES = (
     "tenant_membership",
     "tenant_residency",
     "token_record",
+    "trust_federation_graph",
     "user",
     "workload_identity",
 )

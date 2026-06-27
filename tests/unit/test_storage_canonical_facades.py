@@ -27,6 +27,11 @@ TABLE_MODULE_EXPORTS = {
     "auth_code": ("AuthCode",),
     "auth_session": ("AuthSession",),
     "authentication_challenge": ("AuthenticationChallenge",),
+    "authority_derivation_graph": (
+        "AuthorityDerivationGraph",
+        "AuthorityDerivationGraphNode",
+        "AuthorityDerivationGraphEdge",
+    ),
     "authorization_server": ("AuthorizationServer",),
     "client": ("Client", "_CLIENT_ID_RE"),
     "client_registration": ("ClientRegistration",),
@@ -83,6 +88,11 @@ TABLE_MODULE_EXPORTS = {
     "tenant_membership": ("TenantMembership",),
     "tenant_residency": ("TenantResidency",),
     "token_record": ("TokenRecord",),
+    "trust_federation_graph": (
+        "TrustFederationGraph",
+        "TrustFederationGraphNode",
+        "TrustFederationGraphEdge",
+    ),
     "user": ("User",),
     "workload_identity": ("WorkloadIdentity",),
 }

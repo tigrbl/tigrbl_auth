@@ -122,6 +122,16 @@ from .federated_session import FederatedSession
 from .authorization_invariant import AuthorizationInvariant
 from .invariant_evaluation import InvariantEvaluation
 from .invariant_violation import InvariantViolation
+from .authority_derivation_graph import (
+    AuthorityDerivationGraph,
+    AuthorityDerivationGraphEdge,
+    AuthorityDerivationGraphNode,
+)
+from .trust_federation_graph import (
+    TrustFederationGraph,
+    TrustFederationGraphEdge,
+    TrustFederationGraphNode,
+)
 from .operator_metadata import OperatorMetadata
 from .operator_record import OperatorRecord
 from .operator_transaction import OperatorTransaction
@@ -217,6 +227,12 @@ _TABLE_MODELS = (
     AuthorizationInvariant,
     InvariantEvaluation,
     InvariantViolation,
+    AuthorityDerivationGraph,
+    AuthorityDerivationGraphNode,
+    AuthorityDerivationGraphEdge,
+    TrustFederationGraph,
+    TrustFederationGraphNode,
+    TrustFederationGraphEdge,
     OperatorMetadata,
     OperatorRecord,
     OperatorTransaction,
@@ -381,6 +397,12 @@ __all__ = [
     "AuthorizationInvariant",
     "InvariantEvaluation",
     "InvariantViolation",
+    "AuthorityDerivationGraph",
+    "AuthorityDerivationGraphNode",
+    "AuthorityDerivationGraphEdge",
+    "TrustFederationGraph",
+    "TrustFederationGraphNode",
+    "TrustFederationGraphEdge",
     "OperatorMetadata",
     "OperatorRecord",
     "OperatorTransaction",

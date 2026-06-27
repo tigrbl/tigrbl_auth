@@ -2681,10 +2681,14 @@ version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-authority-derivation-graph" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-identity-storage" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-authz-policy-combiner-default"
@@ -3009,12 +3013,14 @@ source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-trust-federation-g
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-identities-concrete" },
+    { name = "tigrbl-identity-storage" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-identities-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
