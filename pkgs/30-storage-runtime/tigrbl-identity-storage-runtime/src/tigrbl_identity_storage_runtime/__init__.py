@@ -1,6 +1,7 @@
 """Runtime helpers for composing Tigrbl identity storage with runtime engines."""
 
 from .migrations import *
+from .topology_validation import *
 
 __all__ = [
     "MigrationContract",
@@ -17,4 +18,11 @@ __all__ = [
     "iter_migration_modules",
     "verify_schema_async",
     "verify_schema_sync",
+    "IdentityTopologySnapshot",
+    "IdentityTopologyValidationReport",
+    "ObservedIdentityTopology",
+    "collect_identity_topology_snapshot",
+    "observe_identity_topology",
+    "validate_identity_topology_db",
+    "validate_identity_topology_snapshot",
 ]

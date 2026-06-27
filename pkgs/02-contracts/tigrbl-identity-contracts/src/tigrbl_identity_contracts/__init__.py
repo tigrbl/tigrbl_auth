@@ -27,5 +27,6 @@ from .invariants import *
 from .liveness import *
 from .replay import *
 from .residency import *
+from .topology import *
 
 __all__ = [name for name in globals() if not name.startswith("_")]

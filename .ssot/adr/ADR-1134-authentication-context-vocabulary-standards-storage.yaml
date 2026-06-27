@@ -1,0 +1,43 @@
+schema_version: "0.4.0"
+kind: "adr"
+id: "adr:1134"
+number: 1134
+slug: "authentication-context-vocabulary-standards-storage"
+title: "Authentication context vocabulary is standards-backed storage"
+status: "accepted"
+origin: "repo-local"
+decision_date: null
+tags: []
+summary: "Authentication context vocabulary MUST be standards-backed durable data, not local in-memory enum sets or protocol-owned constants."
+supersedes: []
+superseded_by: []
+status_notes:
+  -
+    status: "accepted"
+    note: "Govern AAL, AMR, and phishing-resistant vocabulary before implementation."
+    at: "2026-06-27T05:39:01Z"
+references: []
+body: |-
+  ## Decision
+  
+  Authentication context vocabulary MUST be standards-backed durable data, not local in-memory enum sets or protocol-owned constants.
+  
+  The storage layer owns canonical registry tables for authentication context class values, authentication method reference values, and authenticator/session requirement properties. Initial seeded entries include NIST AAL values `aal1`, `aal2`, and `aal3`; OIDC/RFC8176 AMR values used by the suite; and the NIST `phishing-resistant` property.
+  
+  `phishing-resistant` is modeled as an authenticator/session property or policy requirement. It is not the same kind of value as an AAL and MUST NOT be represented as an ACR class.
+  
+  OIDC and OAuth protocol packages project agreed `acr` and `amr` values into tokens and claims; they do not own the vocabulary. Adaptive access evaluates required versus achieved authentication context from the same table-backed registry data and may trigger step-up when the achieved context is insufficient.
+  
+  ## Rationale
+  
+  The current surface mixes adaptive access, ACR, AMR, WebAuthn, and local vocabulary in higher-layer modules. That makes standards provenance unclear and lets protocols, capabilities, and concrete helpers invent overlapping meanings.
+  
+  NIST SP 800-63B defines AAL semantics and phishing-resistant authentication properties. OIDC defines `acr` and `amr` claim shapes but leaves value semantics to agreed profiles. Durable tables give the suite one registry surface while allowing in-memory engines during composition.
+  
+  ## Consequences
+  
+  Storage migrations and models must introduce canonical vocabulary tables and seed entries with source/provenance metadata.
+  
+  Advanced identity and adaptive access modules must consume registry-backed contracts instead of local AAL/AMR/property sets.
+  
+  Protocol packages may serialize `acr` and `amr` only from validated values. Boundary tests must reject local duplicate registries in higher layers.
