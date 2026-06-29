@@ -13,7 +13,6 @@ from cryptography.x509.oid import NameOID
 from tigrbl_auth.cli.artifacts import build_openapi_contract, deployment_from_options
 from tigrbl_auth.config.settings import settings
 from tigrbl_auth.standards.oauth2.dpop import (
-    clear_runtime_state,
     issue_nonce,
     jwk_from_public_key,
     jwk_thumbprint,
@@ -65,6 +64,33 @@ def _ed25519_keyref() -> SimpleNamespace:
     return SimpleNamespace(material=private_pem, public=public_pem)
 
 
+class _ReplayOps:
+    def __init__(self) -> None:
+        self.keys: set[tuple[str, str, str, str, str | None]] = set()
+
+    def check(self, claims, *, ttl_s: int = 300) -> bool:
+        key = (claims.jkt, claims.jti, claims.htm, claims.htu, claims.ath)
+        replayed = key in self.keys
+        self.keys.add(key)
+        return replayed
+
+
+class _NonceOps:
+    def __init__(self) -> None:
+        self.values: set[str] = set()
+
+    def issue(self, *, ttl_s: int = 300) -> str:
+        nonce = f"nonce-{len(self.values) + 1}"
+        self.values.add(nonce)
+        return nonce
+
+    def consume(self, nonce: str, *, now=None) -> bool:
+        if nonce not in self.values:
+            return False
+        self.values.remove(nonce)
+        return True
+
+
 def test_mtls_registration_auth_and_request_binding_helpers(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "enable_rfc8705", True)
     cert_pem = _generate_cert_pem()
@@ -87,10 +113,11 @@ def test_mtls_registration_auth_and_request_binding_helpers(monkeypatch: pytest.
 
 def test_dpop_fallback_round_trip_nonce_ath_and_replay(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "enable_rfc9449", True)
-    clear_runtime_state()
     keyref = _ed25519_keyref()
     jkt = jwk_thumbprint(jwk_from_public_key(keyref.public))
-    nonce = issue_nonce()
+    replay = _ReplayOps()
+    nonce_ops = _NonceOps()
+    nonce = issue_nonce(issuer=nonce_ops.issue)
     access_token = "capability-access-token"
     proof = make_proof(keyref, "POST", "https://rs.example.com/resource", access_token=access_token, nonce=nonce)
 
@@ -101,6 +128,8 @@ def test_dpop_fallback_round_trip_nonce_ath_and_replay(monkeypatch: pytest.Monke
         jkt=jkt,
         access_token=access_token,
         expected_nonce=nonce,
+        replay_checker=replay.check,
+        nonce_consumer=nonce_ops.consume,
     ) == jkt
 
     with pytest.raises(ValueError):
@@ -110,16 +139,22 @@ def test_dpop_fallback_round_trip_nonce_ath_and_replay(monkeypatch: pytest.Monke
             "https://rs.example.com/resource",
             jkt=jkt,
             access_token=access_token,
+            replay_checker=replay.check,
         )
 
 
 def test_dpop_rejects_ath_mismatch(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "enable_rfc9449", True)
-    clear_runtime_state()
     keyref = _ed25519_keyref()
     proof = make_proof(keyref, "GET", "https://rs.example.com/userinfo", access_token="token-a")
     with pytest.raises(ValueError):
-        verify_proof(proof, "GET", "https://rs.example.com/userinfo", access_token="token-b")
+        verify_proof(
+            proof,
+            "GET",
+            "https://rs.example.com/userinfo",
+            access_token="token-b",
+            replay_checker=_ReplayOps().check,
+        )
 
 
 def test_hardening_sender_constraint_policy_is_fail_closed(monkeypatch: pytest.MonkeyPatch) -> None:

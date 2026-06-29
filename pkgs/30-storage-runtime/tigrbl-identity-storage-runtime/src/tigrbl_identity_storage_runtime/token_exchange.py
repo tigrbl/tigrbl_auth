@@ -22,11 +22,13 @@ from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import (
     TOKEN_EXCHANGE_GRANT_TYPE,
     OAuthPolicyViolation,
     dpop_proof_from_request,
-    validate_sender_constraint,
+    validate_sender_constraint_async,
 )
+from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_replay, consume_dpop_nonce
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
-    from tigrbl_identity_storage.framework import Header, HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.framework import Depends, Header, HTTPException, Request, TigrblApp, TigrblRouter, status
+    from tigrbl_identity_storage.tables.engine import get_db
 except Exception:  # pragma: no cover - dependency-light fallback for checkpoint tests/evidence
     class _FallbackStatus:
         HTTP_400_BAD_REQUEST = 400
@@ -34,6 +36,9 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
 
     def Header(default: Any = None, alias: str | None = None):
         return default
+
+    def Depends(dependency):
+        return dependency
 
     class HTTPException(Exception):
         def __init__(self, status_code: int, detail: Any):
@@ -65,6 +70,9 @@ except Exception:  # pragma: no cover - dependency-light fallback for checkpoint
             self.router.routes.extend(getattr(router, 'routes', []))
 
     status = _FallbackStatus()
+
+    def get_db():
+        return None
 
 try:  # pragma: no cover
     from tigrbl_identity_storage.tables.audit_event import append_audit_event_async
@@ -164,7 +172,7 @@ def _hash_token(value: str | None) -> str | None:
 
 
 @api.route('/token/exchange', methods=['POST'])
-async def token_exchange(request: Request, dpop: str | None = Header(None, alias='DPoP')) -> dict[str, Any]:
+async def token_exchange(request: Request, dpop: str | None = Header(None, alias='DPoP'), db=Depends(get_db)) -> dict[str, Any]:
     deployment = deployment_from_request(request, settings)
     if not deployment.flag_enabled('enable_rfc8693'):
         raise HTTPException(status.HTTP_404_NOT_FOUND, f'RFC 8693 disabled: {RFC8693_SPEC_URL}')
@@ -193,10 +201,12 @@ async def token_exchange(request: Request, dpop: str | None = Header(None, alias
             raise HTTPException(status.HTTP_400_BAD_REQUEST, {'error': 'invalid_request', 'error_description': 'invalid actor_token'}) from exc
 
     try:
-        sender_constraint = validate_sender_constraint(
+        sender_constraint = await validate_sender_constraint_async(
             request,
             deployment,
             dpop_proof=_header_value(dpop) or dpop_proof_from_request(request),
+            replay_checker=lambda claims, ttl_s=300: check_and_store_dpop_replay(db, claims, ttl_s=ttl_s),
+            nonce_consumer=lambda nonce, now=None: consume_dpop_nonce(db, nonce, now=now),
         )
     except OAuthPolicyViolation as exc:
         raise HTTPException(exc.status_code, {'error': exc.error, 'error_description': exc.description}) from exc

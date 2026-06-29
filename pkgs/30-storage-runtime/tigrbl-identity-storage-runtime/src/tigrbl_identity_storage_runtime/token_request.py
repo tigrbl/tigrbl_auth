@@ -58,9 +58,10 @@ from .token_runtime import (
     timezone,
     validate_assertion_grant_request,
     validate_native_token_request,
-    validate_sender_constraint,
     verify_code_challenge,
 )
+from tigrbl_auth_protocol_oauth.standards.oauth_security_bcp import validate_sender_constraint_async
+from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_replay, consume_dpop_nonce
 from .token_persistence import redeem_refresh_token
 
 async def token_request(*, request, db):
@@ -185,7 +186,13 @@ async def token_request(*, request, db):
     request_audience = selection.audience if selection is not None else (str(data.get('audience') or '') or None)
 
     try:
-        sender_constraint = validate_sender_constraint(request, deployment, dpop_proof=dpop_proof)
+        sender_constraint = await validate_sender_constraint_async(
+            request,
+            deployment,
+            dpop_proof=dpop_proof,
+            replay_checker=lambda claims, ttl_s=300: check_and_store_dpop_replay(db, claims, ttl_s=ttl_s),
+            nonce_consumer=lambda nonce, now=None: consume_dpop_nonce(db, nonce, now=now),
+        )
     except OAuthPolicyViolation as exc:
         return JSONResponse({'error': exc.error, 'error_description': exc.description}, status_code=exc.status_code)
     except ValueError:

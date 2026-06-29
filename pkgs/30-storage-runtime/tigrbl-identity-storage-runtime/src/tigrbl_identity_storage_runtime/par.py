@@ -27,7 +27,8 @@ from tigrbl_auth_protocol_oauth.standards.mutual_tls_client_authentication impor
     authenticate_mtls_client,
     presented_certificate_pem,
 )
-from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof
+from tigrbl_auth_protocol_oauth.standards.dpop import verify_proof_async
+from tigrbl_identity_storage_runtime.dpop_state import check_and_store_dpop_replay, consume_dpop_nonce
 
 try:  # pragma: no cover - exercised with the full runtime stack installed
     from tigrbl_identity_storage.framework import Depends, HTTPException, TigrblApp, TigrblRouter, status
@@ -255,7 +256,13 @@ async def pushed_authorization_request(*, request, db):
     dpop_proof = dpop_proof_from_request(request)
     if dpop_proof:
         try:
-            params["_dpop_jkt"] = verify_proof(dpop_proof, getattr(request, "method", "POST"), str(getattr(request, "url", "")))
+            params["_dpop_jkt"] = await verify_proof_async(
+                dpop_proof,
+                getattr(request, "method", "POST"),
+                str(getattr(request, "url", "")),
+                replay_checker=lambda claims, ttl_s=300: check_and_store_dpop_replay(db, claims, ttl_s=ttl_s),
+                nonce_consumer=lambda nonce, now=None: consume_dpop_nonce(db, nonce, now=now),
+            )
         except ValueError as exc:
             raise HTTPException(status.HTTP_400_BAD_REQUEST, {"error": "invalid_dpop_proof", "error_description": str(exc)}) from exc
     cert_thumbprint = client_certificate_thumbprint_from_request(request)

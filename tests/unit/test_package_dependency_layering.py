@@ -41,6 +41,7 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-identity-admin-relationship-graph",
         "tigrbl-identity-admin-trust-federation-graph",
         "tigrbl-identity-credentials-concrete",
+        "tigrbl-identity-dpop-state-concrete",
         "tigrbl-identity-identities-concrete",
     },
     "providers": {

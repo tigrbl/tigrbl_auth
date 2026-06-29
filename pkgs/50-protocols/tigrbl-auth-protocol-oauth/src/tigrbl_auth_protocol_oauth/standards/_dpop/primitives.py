@@ -12,12 +12,8 @@ import asyncio
 import base64
 import hashlib
 import json
-import secrets
-import threading
-import time
 from typing import Any, Dict, Final
 from tigrbl_identity_core.standards import StandardOwner
-from tigrbl_security_trust_contracts import DPoPNonceRecord
 
 try:
     from cryptography.hazmat.primitives import serialization
@@ -64,80 +60,6 @@ OWNER = StandardOwner(
         "iat freshness checks, and replay-safe jti tracking."
     ),
 )
-
-
-class DPoPReplayStore:
-    def __init__(self) -> None:
-        self._entries: dict[str, int] = {}
-        self._lock = threading.RLock()
-
-    def _purge(self, *, now: int) -> None:
-        expired = [key for key, expiry in self._entries.items() if expiry <= now]
-        for key in expired:
-            self._entries.pop(key, None)
-
-    def check_and_store(self, key: str, *, now: int | None = None, ttl_s: int = _ALLOWED_SKEW) -> bool:
-        current = int(time.time()) if now is None else int(now)
-        with self._lock:
-            self._purge(now=current)
-            if key in self._entries:
-                return True
-            self._entries[key] = current + max(int(ttl_s), 1)
-            return False
-
-    def snapshot(self) -> dict[str, int]:
-        current = int(time.time())
-        with self._lock:
-            self._purge(now=current)
-            return dict(self._entries)
-
-    def clear(self) -> None:
-        with self._lock:
-            self._entries.clear()
-
-
-class DPoPNonceStore:
-    def __init__(self) -> None:
-        self._entries: dict[str, int] = {}
-        self._lock = threading.RLock()
-
-    def _purge(self, *, now: int) -> None:
-        expired = [key for key, expiry in self._entries.items() if expiry <= now]
-        for key in expired:
-            self._entries.pop(key, None)
-
-    def issue(self, *, ttl_s: int = _ALLOWED_SKEW) -> str:
-        nonce = secrets.token_urlsafe(24)
-        self.register(nonce, ttl_s=ttl_s)
-        return nonce
-
-    def register(self, nonce: str, *, ttl_s: int = _ALLOWED_SKEW) -> str:
-        current = int(time.time())
-        with self._lock:
-            self._purge(now=current)
-            self._entries[str(nonce)] = current + max(int(ttl_s), 1)
-        return str(nonce)
-
-    def consume(self, nonce: str, *, now: int | None = None) -> bool:
-        current = int(time.time()) if now is None else int(now)
-        with self._lock:
-            self._purge(now=current)
-            expiry = self._entries.pop(str(nonce), None)
-            return expiry is not None and expiry > current
-
-    def snapshot(self) -> dict[str, DPoPNonceRecord]:
-        current = int(time.time())
-        with self._lock:
-            self._purge(now=current)
-            return {key: DPoPNonceRecord(nonce=key, expires_at=expiry) for key, expiry in self._entries.items()}
-
-    def clear(self) -> None:
-        with self._lock:
-            self._entries.clear()
-
-
-DEFAULT_REPLAY_STORE = DPoPReplayStore()
-DEFAULT_NONCE_STORE = DPoPNonceStore()
 
 
 def _run_async(coro: Any) -> Any:
