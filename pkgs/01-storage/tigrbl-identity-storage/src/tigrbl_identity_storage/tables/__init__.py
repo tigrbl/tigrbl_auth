@@ -79,8 +79,20 @@ from .audit_event import AuditEvent
 from .logout_state import LogoutIn, LogoutOut, LogoutState
 from .backchannel_logout_replay import BackchannelLogoutReplay
 from .authentication_challenge import AuthenticationChallenge
-from .dpop_replay import DpopReplay
-from .dpop_nonce import DpopNonce
+from .dpop_replay import (
+    DpopReplay,
+    defineDpopReplayTableSpec,
+    deriveDpopReplayTable,
+    makeDpopReplayTable,
+    makeInMemoryDpopReplayTable,
+)
+from .dpop_nonce import (
+    DpopNonce,
+    defineDpopNonceTableSpec,
+    deriveDpopNonceTable,
+    makeDpopNonceTable,
+    makeInMemoryDpopNonceTable,
+)
 from .key_rotation_event import KeyRotationEvent
 from .key_rotation_policy import KeyRotationPolicy
 from .tenant_membership import TenantMembership
@@ -359,7 +371,15 @@ __all__ = [
     "BackchannelLogoutReplay",
     "AuthenticationChallenge",
     "DpopReplay",
+    "defineDpopReplayTableSpec",
+    "deriveDpopReplayTable",
+    "makeDpopReplayTable",
+    "makeInMemoryDpopReplayTable",
     "DpopNonce",
+    "defineDpopNonceTableSpec",
+    "deriveDpopNonceTable",
+    "makeDpopNonceTable",
+    "makeInMemoryDpopNonceTable",
     "KeyRotationEvent",
     "KeyRotationPolicy",
     "TenantMembership",

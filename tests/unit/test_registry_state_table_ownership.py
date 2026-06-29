@@ -108,8 +108,9 @@ def test_dpop_replay_and_nonce_tables_are_in_migration_chain() -> None:
 
 def test_dpop_tables_expose_define_derive_make_factories() -> None:
     from tigrbl.factories.engine import mem, sqlitef
-    from tigrbl_identity_storage.tables import DpopNonce, DpopReplay
-    from tigrbl_identity_dpop_state_concrete import (
+    from tigrbl_identity_storage.tables import (
+        DpopNonce,
+        DpopReplay,
         defineDpopNonceTableSpec,
         defineDpopReplayTableSpec,
         deriveDpopNonceTable,

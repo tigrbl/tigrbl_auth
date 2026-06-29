@@ -2373,7 +2373,6 @@ dependencies = [
     { name = "tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete" },
-    { name = "tigrbl-identity-dpop-state-concrete" },
     { name = "tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth" },
@@ -2552,7 +2551,6 @@ requires-dist = [
     { name = "tigrbl-identity-core", editable = "pkgs/00-primitives/tigrbl-identity-core" },
     { name = "tigrbl-identity-credentials", editable = "pkgs/deprecated/tigrbl-identity-credentials" },
     { name = "tigrbl-identity-credentials-concrete", editable = "pkgs/10-concrete/tigrbl-identity-credentials-concrete" },
-    { name = "tigrbl-identity-dpop-state-concrete", editable = "pkgs/10-concrete/tigrbl-identity-dpop-state-concrete" },
     { name = "tigrbl-identity-identities-concrete", editable = "pkgs/10-concrete/tigrbl-identity-identities-concrete" },
     { name = "tigrbl-identity-jose", editable = "pkgs/20-providers/tigrbl-identity-jose" },
     { name = "tigrbl-identity-oauth", editable = "pkgs/deprecated/tigrbl-identity-oauth" },
@@ -3325,21 +3323,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
-
-[[package]]
-name = "tigrbl-identity-dpop-state-concrete"
-version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-dpop-state-concrete" }
-dependencies = [
-    { name = "tigrbl" },
-    { name = "tigrbl-identity-storage" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "tigrbl", specifier = "==0.4.4.dev1" },
-    { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
-]
 
 [[package]]
 name = "tigrbl-identity-identities-concrete"

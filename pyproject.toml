@@ -60,7 +60,6 @@ dependencies = [
     "tigrbl-security-authorization-provenance-builder==0.1.0",
     "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
-    "tigrbl-identity-dpop-state-concrete==0.4.0.dev2",
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
@@ -301,7 +300,6 @@ tigrbl-authz-policy-obligations-concrete = { path = "pkgs/10-concrete/tigrbl-aut
 tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
-tigrbl-identity-dpop-state-concrete = { path = "pkgs/10-concrete/tigrbl-identity-dpop-state-concrete", editable = true }
 tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts", editable = true }
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector", editable = true }
