@@ -2523,9 +2523,9 @@ requires-dist = [
     { name = "tigrbl-authz-policy", editable = "pkgs/40-capabilities/tigrbl-authz-policy" },
     { name = "tigrbl-authz-policy-admin-gate", editable = "pkgs/40-capabilities/tigrbl-authz-policy-admin-gate" },
     { name = "tigrbl-authz-policy-attributes-mapping", editable = "pkgs/10-concrete/tigrbl-authz-policy-attributes-mapping" },
-    { name = "tigrbl-authz-policy-authority-derivation-graph", editable = "pkgs/10-concrete/tigrbl-authz-policy-authority-derivation-graph" },
+    { name = "tigrbl-authz-policy-authority-derivation-graph", editable = "pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph" },
     { name = "tigrbl-authz-policy-combiner-default", editable = "pkgs/10-concrete/tigrbl-authz-policy-combiner-default" },
-    { name = "tigrbl-authz-policy-decision-engine", editable = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine" },
+    { name = "tigrbl-authz-policy-decision-engine", editable = "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine" },
     { name = "tigrbl-authz-policy-evaluators-default", editable = "pkgs/10-concrete/tigrbl-authz-policy-evaluators-default" },
     { name = "tigrbl-authz-policy-invariant-registry", editable = "pkgs/deprecated/tigrbl-authz-policy-invariant-registry" },
     { name = "tigrbl-authz-policy-obligations-concrete", editable = "pkgs/10-concrete/tigrbl-authz-policy-obligations-concrete" },
@@ -2538,12 +2538,12 @@ requires-dist = [
     { name = "tigrbl-core", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-identity-admin", editable = "pkgs/40-capabilities/tigrbl-identity-admin" },
     { name = "tigrbl-identity-admin-advanced-authenticator-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry" },
-    { name = "tigrbl-identity-admin-auth-anomaly-detector", editable = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector" },
-    { name = "tigrbl-identity-admin-control-plane", editable = "pkgs/10-concrete/tigrbl-identity-admin-control-plane" },
+    { name = "tigrbl-identity-admin-auth-anomaly-detector", editable = "pkgs/40-capabilities/tigrbl-identity-admin-auth-anomaly-detector" },
+    { name = "tigrbl-identity-admin-control-plane", editable = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane" },
     { name = "tigrbl-identity-admin-federation-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-federation-registry" },
     { name = "tigrbl-identity-admin-policy-registry", editable = "pkgs/deprecated/tigrbl-identity-admin-policy-registry" },
-    { name = "tigrbl-identity-admin-relationship-graph", editable = "pkgs/10-concrete/tigrbl-identity-admin-relationship-graph" },
-    { name = "tigrbl-identity-admin-trust-federation-graph", editable = "pkgs/10-concrete/tigrbl-identity-admin-trust-federation-graph" },
+    { name = "tigrbl-identity-admin-relationship-graph", editable = "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph" },
+    { name = "tigrbl-identity-admin-trust-federation-graph", editable = "pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph" },
     { name = "tigrbl-identity-authenticator-bases", editable = "pkgs/05-bases/tigrbl-identity-authenticator-bases" },
     { name = "tigrbl-identity-author", editable = "pkgs/60-runtime/tigrbl-identity-author" },
     { name = "tigrbl-identity-cli", editable = "pkgs/60-runtime/tigrbl-identity-cli" },
@@ -2884,7 +2884,7 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-authz-policy-authority-derivation-graph"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-authority-derivation-graph" }
+source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy-authority-derivation-graph" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-storage" },
@@ -2910,7 +2910,7 @@ requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2
 [[package]]
 name = "tigrbl-authz-policy-decision-engine"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-authz-policy-decision-engine" }
+source = { editable = "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine" }
 dependencies = [
     { name = "tigrbl-authz-policy-rules-concrete" },
     { name = "tigrbl-identity-contracts" },
@@ -3142,7 +3142,7 @@ requires-dist = [{ name = "tigrbl-identity-admin", specifier = "==0.4.0.dev2" }]
 [[package]]
 name = "tigrbl-identity-admin-auth-anomaly-detector"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-auth-anomaly-detector" }
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-auth-anomaly-detector" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -3157,7 +3157,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-admin-control-plane"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-control-plane" }
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-control-plane" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -3202,7 +3202,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-admin-relationship-graph"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-relationship-graph" }
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-relationship-graph" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-core" },
@@ -3217,7 +3217,7 @@ requires-dist = [
 [[package]]
 name = "tigrbl-identity-admin-trust-federation-graph"
 version = "0.4.0.dev2"
-source = { editable = "pkgs/10-concrete/tigrbl-identity-admin-trust-federation-graph" }
+source = { editable = "pkgs/40-capabilities/tigrbl-identity-admin-trust-federation-graph" }
 dependencies = [
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-identity-identities-concrete" },

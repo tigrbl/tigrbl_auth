@@ -143,9 +143,9 @@ def test_admin_t2_tenant_isolation_delete_and_audit_guardrails() -> None:
 @pytest.mark.unit
 def test_admin_t2_public_boundary_has_no_forbidden_imports() -> None:
     files = [
-        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/__init__.py"),
-        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/models.py"),
-        Path("pkgs/10-concrete/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/service.py"),
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/__init__.py"),
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/models.py"),
+        Path("pkgs/40-capabilities/tigrbl-identity-admin-control-plane/src/tigrbl_identity_admin_control_plane/service.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/__init__.py"),
         Path("pkgs/40-capabilities/tigrbl-identity-admin/src/tigrbl_identity_admin/control_plane.py"),
     ]

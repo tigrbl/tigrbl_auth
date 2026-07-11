@@ -44,7 +44,7 @@ def test_monorepo_release_discovers_split_packages() -> None:
     assert packages["tigrbl-identity-contracts"].path.as_posix() == "pkgs/02-contracts/tigrbl-identity-contracts"
     assert packages["tigrbl-security-trust-domain-bases"].path.as_posix() == "pkgs/05-bases/tigrbl-security-trust-domain-bases"
     assert packages["tigrbl-authz-policy-decision-engine"].path.as_posix() == (
-        "pkgs/10-concrete/tigrbl-authz-policy-decision-engine"
+        "pkgs/40-capabilities/tigrbl-authz-policy-decision-engine"
     )
     assert packages["tigrbl-authz-policy-rules-concrete"].path.as_posix() == (
         "pkgs/10-concrete/tigrbl-authz-policy-rules-concrete"

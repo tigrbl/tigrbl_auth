@@ -1,11 +1,12 @@
 [project]
-name = "tigrbl-authz-policy-authority-derivation-graph"
+name = "tigrbl-identity-admin-trust-federation-graph"
 version = "0.4.0.dev2"
-description = "Concrete authorization authority derivation graph for the Tigrbl identity package suite."
+description = "Identity administration trust federation graph capability."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
 dependencies = [
+    "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-storage==0.4.0.dev2",
 ]
@@ -15,4 +16,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_authz_policy_authority_derivation_graph", from = "src" }]
+packages = [{ include = "tigrbl_identity_admin_trust_federation_graph", from = "src" }]
