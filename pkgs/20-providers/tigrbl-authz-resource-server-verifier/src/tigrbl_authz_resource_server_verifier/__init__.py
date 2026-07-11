@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Callable
 
+from tigrbl_resource_server_bases import ResourceServerVerifierBase
 from tigrbl_identity_contracts.resource_server import (
     AccessTokenClaims,
     FrameworkRequest,
@@ -34,7 +35,7 @@ def bearer_token_from_authorization(value: str | None) -> str | None:
     return token
 
 
-class ResourceServerVerifier:
+class ResourceServerVerifier(ResourceServerVerifierBase):
     """Validate protected-resource access-token claims and sender constraints."""
 
     def __init__(

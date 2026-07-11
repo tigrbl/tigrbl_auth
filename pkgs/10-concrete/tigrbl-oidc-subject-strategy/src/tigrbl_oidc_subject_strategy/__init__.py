@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 
+from tigrbl_oidc_bases import SubjectIdentifierStrategyBase
 from tigrbl_identity_contracts.oidc import (
     SubjectIdentifierKind,
     SubjectIdentifierRequest,
@@ -9,12 +10,12 @@ from tigrbl_identity_contracts.oidc import (
 )
 
 
-class PublicSubjectStrategy:
+class PublicSubjectStrategy(SubjectIdentifierStrategyBase):
     def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
         return SubjectIdentifierResult(str(request.subject), SubjectIdentifierKind.PUBLIC)
 
 
-class PairwiseSubjectStrategy:
+class PairwiseSubjectStrategy(SubjectIdentifierStrategyBase):
     def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
         sector = request.sector_identifier or request.issuer
         salt = request.salt or ""

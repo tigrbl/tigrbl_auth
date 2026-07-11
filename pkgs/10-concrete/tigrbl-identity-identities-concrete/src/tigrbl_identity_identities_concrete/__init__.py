@@ -6,7 +6,8 @@ from typing import Iterable
 from uuid import uuid4
 
 from tigrbl_identity_contracts.authority import AuthorityRole
-from tigrbl_identity_contracts.principals import Identity, PrincipalKind, PrincipalStatus
+from tigrbl_identity_contracts.principals import PrincipalKind, PrincipalStatus
+from tigrbl_identity_model_bases import IdentityBase
 
 
 def _new_identity_id() -> str:
@@ -25,24 +26,24 @@ def _clean_tuple(values: Iterable[str] = ()) -> tuple[str, ...]:
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class UserIdentity(Identity):
+class UserIdentity(IdentityBase):
     id: str = field(default_factory=_new_identity_id)
     kind: PrincipalKind = field(default=PrincipalKind.USER, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class AdminIdentity(Identity):
+class AdminIdentity(IdentityBase):
     id: str = field(default_factory=_new_identity_id)
     kind: PrincipalKind = field(default=PrincipalKind.USER, init=False)
 
     def __post_init__(self) -> None:
         roles = {AuthorityRole.ADMIN.value, *self.roles}
         object.__setattr__(self, "roles", tuple(sorted(roles)))
-        Identity.__post_init__(self)
+        IdentityBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ServiceIdentity(Identity):
+class ServiceIdentity(IdentityBase):
     id: str = ""
     subject: str = ""
     kind: PrincipalKind = field(default=PrincipalKind.SERVICE_IDENTITY, init=False)
@@ -61,17 +62,17 @@ class ServiceIdentity(Identity):
         object.__setattr__(self, "scopes", _clean_tuple(self.scopes))
         if not self.enabled:
             object.__setattr__(self, "status", PrincipalStatus.DISABLED)
-        Identity.__post_init__(self)
+        IdentityBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ClientIdentity(Identity):
+class ClientIdentity(IdentityBase):
     id: str = field(default_factory=_new_identity_id)
     kind: PrincipalKind = field(default=PrincipalKind.CLIENT_IDENTITY, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class MachineIdentity(Identity):
+class MachineIdentity(IdentityBase):
     id: str = ""
     subject: str = ""
     kind: PrincipalKind = field(default=PrincipalKind.MACHINE_IDENTITY, init=False)
@@ -88,11 +89,11 @@ class MachineIdentity(Identity):
         object.__setattr__(self, "id", self.id or subject_id)
         object.__setattr__(self, "subject", self.subject or subject_id)
         object.__setattr__(self, "allowed_audiences", frozenset(self.allowed_audiences))
-        Identity.__post_init__(self)
+        IdentityBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class WorkloadIdentity(Identity):
+class WorkloadIdentity(IdentityBase):
     id: str = ""
     subject: str = ""
     kind: PrincipalKind = field(default=PrincipalKind.WORKLOAD_IDENTITY, init=False)
@@ -112,11 +113,11 @@ class WorkloadIdentity(Identity):
         object.__setattr__(self, "subject", self.subject or f"workload:{workload_id}")
         if self.revoked:
             object.__setattr__(self, "status", PrincipalStatus.DISABLED)
-        Identity.__post_init__(self)
+        IdentityBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class DeviceIdentity(Identity):
+class DeviceIdentity(IdentityBase):
     id: str = ""
     subject: str = ""
     kind: PrincipalKind = field(default=PrincipalKind.DEVICE_IDENTITY, init=False)
@@ -136,7 +137,7 @@ class DeviceIdentity(Identity):
         object.__setattr__(self, "subject", self.subject or subject_id)
         if self.revoked:
             object.__setattr__(self, "status", PrincipalStatus.DISABLED)
-        Identity.__post_init__(self)
+        IdentityBase.__post_init__(self)
 
 
 __all__ = [

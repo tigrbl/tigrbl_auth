@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Iterable, Optional, Tuple
 from uuid import uuid4
 
+from tigrbl_jose_bases import JwtCoderBase
 from tigrbl_identity_contracts.tokens import (
     DEFAULT_ACCESS_TOKEN_TTL as _ACCESS_TTL,
     DEFAULT_REFRESH_TOKEN_TTL as _REFRESH_TTL,
@@ -20,7 +21,7 @@ from .pqc_jwt import (
 )
 
 
-class JWTCoder:
+class JWTCoder(JwtCoderBase):
     __slots__ = ("_svc", "_kid")
 
     def __init__(self, arg1: Any, arg2: Any):

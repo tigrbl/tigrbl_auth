@@ -4,6 +4,7 @@ import hashlib
 from dataclasses import replace
 from typing import Any, Iterable, Mapping
 
+from tigrbl_jose_bases import JoseKeySetBase
 from tigrbl_identity_core.base64url import base64url_encode
 from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_core.json_canonicalization import canonical_json_bytes
@@ -42,7 +43,7 @@ def validate_public_jwk(jwk: Mapping[str, Any]) -> None:
     validate_public_jwk_material(jwk)
 
 
-class JoseKeySet:
+class JoseKeySet(JoseKeySetBase):
     def __init__(self, keys: Iterable[JoseKey] = ()) -> None:
         self._keys: dict[str, JoseKey] = {}
         for key in keys:

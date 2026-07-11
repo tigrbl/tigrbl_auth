@@ -3,9 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Mapping
 
+from tigrbl_authz_policy_bases import PolicyRuleBase
 from tigrbl_identity_contracts.policy.conditions import DynamicCondition
 from tigrbl_identity_contracts.policy.kinds import PolicyKind
-from tigrbl_identity_contracts.policy.rules import PolicyRule
 
 
 def _clean_tuple(values: tuple[str, ...] | list[str]) -> tuple[str, ...]:
@@ -13,7 +13,7 @@ def _clean_tuple(values: tuple[str, ...] | list[str]) -> tuple[str, ...]:
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class RolePolicy(PolicyRule):
+class RolePolicy(PolicyRuleBase):
     kind: PolicyKind = field(default=PolicyKind.RBAC, init=False)
     role: str
     permissions: tuple[str, ...]
@@ -25,11 +25,11 @@ class RolePolicy(PolicyRule):
         object.__setattr__(self, "role", role)
         object.__setattr__(self, "policy_id", self.policy_id or role)
         object.__setattr__(self, "permissions", _clean_tuple(self.permissions))
-        PolicyRule.__post_init__(self)
+        PolicyRuleBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class AttributePolicy(PolicyRule):
+class AttributePolicy(PolicyRuleBase):
     kind: PolicyKind = field(default=PolicyKind.ABAC, init=False)
     required_attributes: Mapping[str, Any]
     action: str = ""
@@ -53,11 +53,11 @@ class AttributePolicy(PolicyRule):
         object.__setattr__(self, "permission", str(permission).strip())
         object.__setattr__(self, "required_attributes", dict(self.required_attributes))
         object.__setattr__(self, "dynamic_conditions", tuple(self.dynamic_conditions))
-        PolicyRule.__post_init__(self)
+        PolicyRuleBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class PermissionPolicy(PolicyRule):
+class PermissionPolicy(PolicyRuleBase):
     kind: PolicyKind = field(default=PolicyKind.PBAC, init=False)
     policy_id: str
     permissions: tuple[str, ...]
@@ -66,11 +66,11 @@ class PermissionPolicy(PolicyRule):
         if not str(self.policy_id).strip():
             raise ValueError("permission policy requires policy_id")
         object.__setattr__(self, "permissions", _clean_tuple(self.permissions))
-        PolicyRule.__post_init__(self)
+        PolicyRuleBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class DelegationPolicy(PolicyRule):
+class DelegationPolicy(PolicyRuleBase):
     kind: PolicyKind = field(default=PolicyKind.DELEGATION, init=False)
     delegate: str
     delegator: str
@@ -89,11 +89,11 @@ class DelegationPolicy(PolicyRule):
         object.__setattr__(self, "policy_id", self.policy_id or f"{delegator}->{delegate}")
         object.__setattr__(self, "tenant_ids", _clean_tuple(self.tenant_ids))
         object.__setattr__(self, "actions", _clean_tuple(self.actions))
-        PolicyRule.__post_init__(self)
+        PolicyRuleBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class AdminPolicy(PolicyRule):
+class AdminPolicy(PolicyRuleBase):
     kind: PolicyKind = field(default=PolicyKind.ADMIN, init=False)
     subject: str
     tenant_ids: tuple[str, ...]
@@ -108,7 +108,7 @@ class AdminPolicy(PolicyRule):
         object.__setattr__(self, "policy_id", self.policy_id or subject)
         object.__setattr__(self, "tenant_ids", _clean_tuple(self.tenant_ids))
         object.__setattr__(self, "actions", _clean_tuple(self.actions))
-        PolicyRule.__post_init__(self)
+        PolicyRuleBase.__post_init__(self)
 
 
 __all__ = [

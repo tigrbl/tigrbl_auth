@@ -25,6 +25,7 @@ from .correctness import *
 from .admin_resources import *
 from .governance import *
 from .invariants import *
+from .jose import *
 from .liveness import *
 from .replay import *
 from .residency import *

@@ -22,7 +22,14 @@ PYTHON_PACKAGE_LAYERS = {
         "tigrbl-security-trust-contracts",
     },
     "bases": {
+        "tigrbl-authz-policy-bases",
         "tigrbl-identity-authenticator-bases",
+        "tigrbl-identity-model-bases",
+        "tigrbl-jose-bases",
+        "tigrbl-oauth-bases",
+        "tigrbl-oidc-bases",
+        "tigrbl-resource-server-bases",
+        "tigrbl-security-provenance-bases",
         "tigrbl-security-trust-domain-bases",
     },
     "concrete": {

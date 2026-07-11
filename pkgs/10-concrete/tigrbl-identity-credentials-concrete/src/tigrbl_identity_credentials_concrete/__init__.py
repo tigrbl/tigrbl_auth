@@ -9,6 +9,7 @@ from tigrbl_identity_contracts.credentials import (
     CredentialKind,
     CredentialStatus,
 )
+from tigrbl_identity_model_bases import CredentialBase
 
 
 def _new_credential_id() -> str:
@@ -33,43 +34,43 @@ def _clean_mapping(value: Mapping[str, Any], field_name: str) -> dict[str, Any]:
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class PasswordCredential(Credential):
+class PasswordCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.PASSWORD, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class PasswordResetCredential(Credential):
+class PasswordResetCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.PASSWORD_RESET, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ApiKeyCredential(Credential):
+class ApiKeyCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.API_KEY, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ServiceKeyCredential(Credential):
+class ServiceKeyCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.SERVICE_KEY, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ClientSecretCredential(Credential):
+class ClientSecretCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.CLIENT_SECRET, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class MfaCredential(Credential):
+class MfaCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.MFA_FACTOR, init=False)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class PasskeyCredential(Credential):
+class PasskeyCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.PASSKEY_WEBAUTHN, init=False)
     credential_id: str
@@ -92,11 +93,11 @@ class PasskeyCredential(Credential):
                 "sign_count": int(self.sign_count),
             },
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class ServiceCredential(Credential):
+class ServiceCredential(CredentialBase):
     id: str = ""
     principal_id: str = ""
     kind: CredentialKind = field(default=CredentialKind.SERVICE_KEY, init=False)
@@ -124,11 +125,11 @@ class ServiceCredential(Credential):
             "status",
             CredentialStatus.REVOKED if self.revoked else self.status,
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class WebAuthnCredential(Credential):
+class WebAuthnCredential(CredentialBase):
     id: str = ""
     principal_id: str = ""
     kind: CredentialKind = field(default=CredentialKind.PASSKEY_WEBAUTHN, init=False)
@@ -167,11 +168,11 @@ class WebAuthnCredential(Credential):
                 "sign_count": int(self.sign_count),
             },
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class PasswordlessCredential(Credential):
+class PasswordlessCredential(CredentialBase):
     id: str = ""
     principal_id: str = ""
     kind: CredentialKind = field(default=CredentialKind.PASSWORD_RESET, init=False)
@@ -206,11 +207,11 @@ class PasswordlessCredential(Credential):
                 "recovery_codes": list(self.recovery_codes),
             },
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class MfaFactor(Credential):
+class MfaFactor(CredentialBase):
     id: str = ""
     principal_id: str = ""
     kind: CredentialKind = field(default=CredentialKind.MFA_FACTOR, init=False)
@@ -244,11 +245,11 @@ class MfaFactor(Credential):
                 "bound_credential_id": self.bound_credential_id,
             },
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class MtlsCertificateCredential(Credential):
+class MtlsCertificateCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.MTLS_CERTIFICATE, init=False)
     certificate_thumbprint: str
@@ -280,7 +281,7 @@ class MtlsCertificateCredential(Credential):
                 "san_email": list(self.san_email),
             },
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
     @property
     def confirmation_claim(self) -> dict[str, str]:
@@ -298,7 +299,7 @@ class MtlsCertificateCredential(Credential):
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
-class DpopKeyCredential(Credential):
+class DpopKeyCredential(CredentialBase):
     id: str = field(default_factory=_new_credential_id)
     kind: CredentialKind = field(default=CredentialKind.DPOP_KEY, init=False)
     jwk_thumbprint: str
@@ -314,7 +315,7 @@ class DpopKeyCredential(Credential):
             "metadata",
             {**dict(self.metadata), "public_jwk": dict(self.public_jwk)},
         )
-        Credential.__post_init__(self)
+        CredentialBase.__post_init__(self)
 
     @property
     def confirmation_claim(self) -> dict[str, str]:

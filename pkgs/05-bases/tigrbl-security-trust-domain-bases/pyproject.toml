@@ -19,7 +19,10 @@ classifiers = [
     "Typing :: Typed",
     "Topic :: Security",
 ]
-dependencies = ["tigrbl-security-trust-contracts==0.1.0"]
+dependencies = [
+    "tigrbl-identity-contracts==0.4.0.dev2",
+    "tigrbl-security-trust-contracts==0.1.0",
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

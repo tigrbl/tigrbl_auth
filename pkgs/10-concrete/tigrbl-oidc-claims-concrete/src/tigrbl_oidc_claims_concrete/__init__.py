@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from tigrbl_oidc_bases import ClaimsProviderBase
 from tigrbl_identity_contracts.oidc import ClaimsRequest, ClaimsResult
 
 
-class LocalClaimsProvider:
+class LocalClaimsProvider(ClaimsProviderBase):
     async def claims(self, request: ClaimsRequest, /) -> ClaimsResult:
         source: Mapping[str, Any] = {}
         if request.user is not None:

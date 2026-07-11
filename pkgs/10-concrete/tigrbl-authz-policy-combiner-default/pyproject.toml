@@ -22,6 +22,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-authz-policy-bases==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
 ]
 

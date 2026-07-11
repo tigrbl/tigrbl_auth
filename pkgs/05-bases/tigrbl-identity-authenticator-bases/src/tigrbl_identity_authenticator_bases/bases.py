@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from abc import ABC
+
 from tigrbl_identity_contracts.authentication import AuthenticationChallenge
 from tigrbl_identity_contracts.authenticators import (
     AuthenticationFactorClass,
@@ -12,12 +14,14 @@ from tigrbl_identity_contracts.authenticators import (
     AuthenticatorProperty,
     ChallengeFinishRequest,
     ChallengeStartRequest,
+    IAuthenticator,
+    IChallengeAuthenticator,
 )
 from tigrbl_identity_contracts.credentials import CredentialKind
 from tigrbl_security_trust_contracts import AmrValue
 
 
-class AuthenticatorBase:
+class AuthenticatorBase(IAuthenticator, ABC):
     """Base for a single authenticator ceremony or proof verifier."""
 
     kind: AuthenticatorKind | str
@@ -65,7 +69,7 @@ class AuthenticatorBase:
         raise NotImplementedError
 
 
-class ChallengeAuthenticatorBase(AuthenticatorBase):
+class ChallengeAuthenticatorBase(AuthenticatorBase, IChallengeAuthenticator, ABC):
     """Base for authenticators that require a start/finish challenge ceremony."""
 
     def __init__(self, **kwargs: object) -> None:

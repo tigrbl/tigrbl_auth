@@ -7,21 +7,39 @@ ROOT = Path(__file__).resolve().parents[2]
 PROVIDERS = ROOT / "pkgs" / "20-providers"
 
 TRUST_BASE_PROVIDER_PACKAGES = {
+    "tigrbl-authenticator-api-key-local",
+    "tigrbl-authenticator-client-secret-local",
+    "tigrbl-authenticator-dpop-proof",
+    "tigrbl-authenticator-federated-oidc",
+    "tigrbl-authenticator-mtls-client-cert",
+    "tigrbl-authenticator-otp-local",
+    "tigrbl-authenticator-password-local",
+    "tigrbl-authenticator-recovery-code-local",
+    "tigrbl-authenticator-remote-introspection",
+    "tigrbl-authenticator-service-key-local",
+    "tigrbl-authenticator-session-local",
+    "tigrbl-authenticator-webauthn-local",
+    "tigrbl-authz-resource-server-verifier",
+    "tigrbl-identity-jose",
+    "tigrbl-security-auth-context-acr-basic",
+    "tigrbl-security-auth-context-amr-basic",
+    "tigrbl-security-authorization-provenance-builder",
     "tigrbl-security-certificate-mtls",
+    "tigrbl-security-claims-provider-local",
     "tigrbl-security-dpop-cnf-binding-validator",
     "tigrbl-security-mtls-cnf-binding-validator",
+    "tigrbl-security-oidc-federation-provider",
     "tigrbl-security-proof-dpop",
     "tigrbl-security-proof-pkce",
     "tigrbl-security-sender-constraint-validator",
     "tigrbl-security-signing-pqc",
+    "tigrbl-security-subject-pairwise-provider",
     "tigrbl-security-token-introspection-client",
     "tigrbl-security-token-jwks-cache",
+    "tigrbl-security-webfinger-provider",
 }
 
-COMPOSITION_PROVIDER_PACKAGES = {
-    "tigrbl-authz-resource-server-verifier",
-    "tigrbl-identity-jose",
-}
+COMPOSITION_PROVIDER_PACKAGES: set[str] = set()
 
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:

@@ -5,6 +5,13 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
+from tigrbl_identity_contracts.oidc import (
+    ClaimsProviderPort,
+    OidcFederationPort,
+    SubjectIdentifierStrategyPort,
+    WebFingerResolverPort,
+)
+
 from tigrbl_security_trust_contracts import (
     AcrEvaluationRequest,
     AcrEvaluationResult,
@@ -58,17 +65,45 @@ from tigrbl_security_trust_contracts import (
     WrappedKeyMaterial,
     WrapKeyRequest,
     MTLSBinding,
+    IAcrEvaluator,
+    IAmrEvaluator,
+    IArtifactCodec,
+    IArtifactIssuer,
+    IArtifactOpener,
+    IArtifactVerifier,
+    IAttestationProvider,
+    ICapabilityProvider,
+    ICipherPolicy,
+    IConfirmationBindingValidator,
+    IEncryptionProvider,
+    IEntropySource,
+    IKeyDeriver,
+    IKeyDiscovery,
+    IKeyEncapsulationProvider,
+    IKeyExporter,
+    IKeyLifecycle,
+    IKeyLifecycleProvider,
+    IKeyResolver,
+    IKeyWrappingProvider,
+    IPkceVerifier,
+    IPublicKeyExporter,
+    IRecipientSetEditor,
+    ISenderConstraintValidator,
+    ISigningProvider,
+    ITokenIntrospectionClient,
+    IVerificationKeyCache,
+    IVerificationKeyResolver,
 )
 
 
-class CapabilityProviderBase(ABC):
+class CapabilityProviderBase(ICapabilityProvider, ABC):
     """Base for providers that advertise executable capability."""
 
     @abstractmethod
     def supports(self) -> CapabilityMap: ...
 
 
-class ArtifactCodecBase(ABC):
+class ArtifactCodecBase(IArtifactCodec, ABC):
     """Base for parsers and deterministic canonicalizers."""
 
     async def parse(self, request: ParseRequest) -> ParsedArtifact:
@@ -78,28 +113,28 @@ class ArtifactCodecBase(ABC):
         raise NotImplementedError
 
 
-class ArtifactIssuerBase(ABC):
+class ArtifactIssuerBase(IArtifactIssuer, ABC):
     """Base for providers that produce generic artifacts."""
 
     async def issue(self, request: IssueRequest) -> Artifact:
         raise NotImplementedError
 
 
-class ArtifactVerifierBase(ABC):
+class ArtifactVerifierBase(IArtifactVerifier, ABC):
     """Base for providers that verify generic artifacts."""
 
     async def verify(self, request: VerifyRequest) -> VerificationResult:
         raise NotImplementedError
 
 
-class ArtifactOpenerBase(ABC):
+class ArtifactOpenerBase(IArtifactOpener, ABC):
     """Base for providers that open protected artifacts."""
 
     async def open(self, request: OpenRequest) -> OpenResult:
         raise NotImplementedError
 
 
-class RecipientSetEditorBase(ABC):
+class RecipientSetEditorBase(IRecipientSetEditor, ABC):
     """Base for recipient-set mutation on multi-recipient envelopes."""
 
     async def rewrap(self, request: RewrapRequest) -> Artifact:
@@ -112,7 +147,7 @@ class SigningDomainBase(
     """Domain composition for detached or attached signing providers."""
 
 
-class SigningProviderBase(CapabilityProviderBase):
+class SigningProviderBase(ISigningProvider, CapabilityProviderBase):
     """Base for provider-neutral signing and signature verification."""
 
     async def sign(self, request: SignRequest) -> SignResult:
@@ -131,49 +166,49 @@ class ProofOfPossessionDomainBase(
     """Domain composition for request-bound proof-of-possession providers."""
 
 
-class PkceVerifierBase(CapabilityProviderBase):
+class PkceVerifierBase(IPkceVerifier, CapabilityProviderBase):
     """Base for PKCE challenge verification providers."""
 
     def verify_challenge(self, *, verifier: str, challenge: str) -> bool:
         raise NotImplementedError
 
 
-class AcrEvaluatorBase(CapabilityProviderBase):
+class AcrEvaluatorBase(IAcrEvaluator, CapabilityProviderBase):
     """Base for Authentication Context Class Reference evaluators."""
 
     def evaluate_acr(self, request: AcrEvaluationRequest) -> AcrEvaluationResult:
         raise NotImplementedError
 
 
-class AmrEvaluatorBase(CapabilityProviderBase):
+class AmrEvaluatorBase(IAmrEvaluator, CapabilityProviderBase):
     """Base for Authentication Methods References evaluators."""
 
     def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult:
         raise NotImplementedError
 
 
-class ClaimsProviderBase(CapabilityProviderBase):
+class ClaimsProviderBase(ClaimsProviderPort, CapabilityProviderBase):
     """Base for provider-style claims assembly."""
 
     async def claims(self, request: Any) -> Any:
         raise NotImplementedError
 
 
-class SubjectIdentifierStrategyBase(CapabilityProviderBase):
+class SubjectIdentifierStrategyBase(SubjectIdentifierStrategyPort, CapabilityProviderBase):
     """Base for public, pairwise, transient, and opaque subject strategies."""
 
     def derive(self, request: Any) -> Any:
         raise NotImplementedError
 
 
-class WebFingerResolverBase(CapabilityProviderBase):
+class WebFingerResolverBase(WebFingerResolverPort, CapabilityProviderBase):
     """Base for WebFinger discovery providers."""
 
     async def resolve(self, request: Any) -> Any:
         raise NotImplementedError
 
 
-class OidcFederationProviderBase(CapabilityProviderBase):
+class OidcFederationProviderBase(OidcFederationPort, CapabilityProviderBase):
     """Base for OIDC Federation trust providers."""
 
     async def entity_statement(self, request: Any) -> Any:
@@ -233,7 +268,16 @@ class MreCryptoDomainBase(
     """Domain composition for multi-recipient encryption providers."""
 
 
-class KeyProviderDomainBase(CapabilityProviderBase):
+class KeyProviderDomainBase(
+    IKeyResolver,
+    IKeyLifecycle,
+    IKeyLifecycleProvider,
+    IKeyDiscovery,
+    IKeyExporter,
+    IEntropySource,
+    IKeyDeriver,
+    CapabilityProviderBase,
+):
     """Domain composition for key lifecycle, resolution, discovery, export, entropy, and KDF."""
 
     async def resolve_key(
@@ -289,7 +333,7 @@ class KeyProviderDomainBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class KeyLifecycleProviderBase(CapabilityProviderBase):
+class KeyLifecycleProviderBase(IKeyLifecycleProvider, CapabilityProviderBase):
     """Base for provider-neutral key creation, import, rotation, and destruction."""
 
     async def create_key(self, spec: KeySpec) -> KeyHandle:
@@ -316,7 +360,7 @@ class KeyLifecycleProviderBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class KeyResolverBase(CapabilityProviderBase):
+class KeyResolverBase(IKeyResolver, CapabilityProviderBase):
     """Base for resolving opaque key references into provider handles."""
 
     async def resolve_key(
@@ -328,7 +372,7 @@ class KeyResolverBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class EncryptionProviderBase(CapabilityProviderBase):
+class EncryptionProviderBase(IEncryptionProvider, CapabilityProviderBase):
     """Base for data encryption and decryption providers."""
 
     async def encrypt(self, request: EncryptRequest) -> Artifact:
@@ -338,7 +382,7 @@ class EncryptionProviderBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class KeyWrappingProviderBase(CapabilityProviderBase):
+class KeyWrappingProviderBase(IKeyWrappingProvider, CapabilityProviderBase):
     """Base for key wrapping and unwrapping providers."""
 
     async def wrap_key(self, request: WrapKeyRequest) -> WrappedKeyMaterial:
@@ -348,7 +392,7 @@ class KeyWrappingProviderBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class KeyEncapsulationProviderBase(CapabilityProviderBase):
+class KeyEncapsulationProviderBase(IKeyEncapsulationProvider, CapabilityProviderBase):
     """Base for KEM encapsulation and decapsulation providers."""
 
     async def encapsulate(self, request: EncapsulateRequest) -> EncapsulationResult:
@@ -358,7 +402,7 @@ class KeyEncapsulationProviderBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class AttestationProviderBase(CapabilityProviderBase):
+class AttestationProviderBase(IAttestationProvider, CapabilityProviderBase):
     """Base for key attestation and evidence verification providers."""
 
     async def attest_key(self, request: AttestKeyRequest) -> AttestationEvidence:
@@ -371,7 +415,7 @@ class AttestationProviderBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class PublicKeyExporterBase(CapabilityProviderBase):
+class PublicKeyExporterBase(IPublicKeyExporter, CapabilityProviderBase):
     """Base for public key material export."""
 
     async def export_public_key(
@@ -394,7 +438,7 @@ class CryptoKeyProviderBase(
     """Composite base for providers that intentionally implement the full key surface."""
 
 
-class CipherPolicyDomainBase(CapabilityProviderBase):
+class CipherPolicyDomainBase(ICipherPolicy, CapabilityProviderBase):
     """Domain base for cipher-suite policy, defaults, dialect mapping, and linting."""
 
     @abstractmethod
@@ -437,7 +481,7 @@ class CipherPolicyDomainBase(CapabilityProviderBase):
         return tuple(issues)
 
 
-class ConfirmationBindingValidatorBase(CapabilityProviderBase):
+class ConfirmationBindingValidatorBase(IConfirmationBindingValidator, CapabilityProviderBase):
     """Base for proof confirmation validators such as DPoP or mTLS cnf checks."""
 
     @property
@@ -452,7 +496,7 @@ class ConfirmationBindingValidatorBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class SenderConstraintValidatorBase(CapabilityProviderBase):
+class SenderConstraintValidatorBase(ISenderConstraintValidator, CapabilityProviderBase):
     """Base for composing sender-constraint validation providers."""
 
     def validate(
@@ -467,14 +511,14 @@ class SenderConstraintValidatorBase(CapabilityProviderBase):
         raise NotImplementedError
 
 
-class VerificationKeyResolverBase(CapabilityProviderBase):
+class VerificationKeyResolverBase(IVerificationKeyResolver, CapabilityProviderBase):
     """Base for verification key resolution."""
 
     def get(self, key_id: str) -> Mapping[str, Any]:
         raise NotImplementedError
 
 
-class VerificationKeyCacheBase(VerificationKeyResolverBase):
+class VerificationKeyCacheBase(IVerificationKeyCache, VerificationKeyResolverBase):
     """Base for mutable verification-key caches independent of source format."""
 
     @property
@@ -489,7 +533,7 @@ class VerificationKeyCacheBase(VerificationKeyResolverBase):
             self.put(key_id, key)
 
 
-class TokenIntrospectionClientBase(CapabilityProviderBase):
+class TokenIntrospectionClientBase(ITokenIntrospectionClient, CapabilityProviderBase):
     """Base for provider-neutral token introspection clients."""
 
     def introspect(

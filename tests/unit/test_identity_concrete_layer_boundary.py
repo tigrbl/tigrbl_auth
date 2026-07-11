@@ -109,6 +109,7 @@ def test_concrete_layer_only_imports_lower_contract_surfaces() -> None:
         "typing",
         "uuid",
         "tigrbl_identity_contracts",
+        "tigrbl_identity_model_bases",
     }
 
     offenders = {

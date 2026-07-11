@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from tigrbl_jose_bases import JwePolicyBase
+
 
 @dataclass(frozen=True, slots=True)
-class JWEPolicy:
+class JWEPolicy(JwePolicyBase):
     alg: str = "dir"
     enc: str = "A256GCM"
     key_type: str = "oct"

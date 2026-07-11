@@ -5,7 +5,12 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from tigrbl_identity_core.json_canonicalization import canonical_hash, canonical_json
-from tigrbl_security_trust_contracts import AuthorizationDecisionTrace, DelegationProvenance
+from tigrbl_security_provenance_bases import ProvenanceArtifactBuilderBase
+from tigrbl_security_trust_contracts import (
+    AuthorizationDecisionTrace,
+    CapabilityMap,
+    DelegationProvenance,
+)
 
 
 def build_authorization_decision_trace(
@@ -122,9 +127,29 @@ def build_delegation_provenance(
     return provenance.as_dict()
 
 
+class DeterministicProvenanceArtifactBuilder(ProvenanceArtifactBuilderBase):
+    """Deterministic provider for authorization and delegation provenance."""
+
+    def supports(self) -> CapabilityMap:
+        return CapabilityMap(
+            ops={
+                "build_authorization_decision_trace": ("deterministic",),
+                "build_delegation_provenance": ("deterministic",),
+            },
+            features=("authorization-provenance", "delegation-lineage"),
+        )
+
+    def build_authorization_decision_trace(self, **kwargs: Any) -> dict[str, Any]:
+        return build_authorization_decision_trace(**kwargs)
+
+    def build_delegation_provenance(self, **kwargs: Any) -> dict[str, Any]:
+        return build_delegation_provenance(**kwargs)
+
+
 __all__ = [
     "AuthorizationDecisionTrace",
     "DelegationProvenance",
+    "DeterministicProvenanceArtifactBuilder",
     "build_authorization_decision_trace",
     "build_delegation_provenance",
     "canonical_hash",

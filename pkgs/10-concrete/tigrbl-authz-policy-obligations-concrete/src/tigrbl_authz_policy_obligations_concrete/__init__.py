@@ -2,20 +2,21 @@
 
 from __future__ import annotations
 
+from tigrbl_authz_policy_bases import AdviceHandlerBase, ObligationHandlerBase
 from tigrbl_identity_contracts.policy import Advice, Obligation, PolicyDecision
 
 
-class NoopObligationHandler:
+class NoopObligationHandler(ObligationHandlerBase):
     async def handle_obligation(self, obligation: Obligation, decision: PolicyDecision, /) -> None:
         return None
 
 
-class NoopAdviceHandler:
+class NoopAdviceHandler(AdviceHandlerBase):
     async def handle_advice(self, advice: Advice, decision: PolicyDecision, /) -> None:
         return None
 
 
-class CollectingObligationHandler:
+class CollectingObligationHandler(ObligationHandlerBase):
     def __init__(self) -> None:
         self.items: list[tuple[Obligation, PolicyDecision]] = []
 
@@ -23,7 +24,7 @@ class CollectingObligationHandler:
         self.items.append((obligation, decision))
 
 
-class CollectingAdviceHandler:
+class CollectingAdviceHandler(AdviceHandlerBase):
     def __init__(self) -> None:
         self.items: list[tuple[Advice, PolicyDecision]] = []
 

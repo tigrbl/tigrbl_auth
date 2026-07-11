@@ -28,7 +28,11 @@ ALLOWED_IMPORT_ROOTS = {
     "hashlib",
     "typing",
     "uuid",
+    "tigrbl_authz_policy_bases",
     "tigrbl_identity_contracts",
+    "tigrbl_identity_model_bases",
+    "tigrbl_oauth_bases",
+    "tigrbl_oidc_bases",
 }
 
 

@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from tigrbl_authz_policy_bases import AttributeResolverBase, AttributeSelectorBase
 from tigrbl_identity_contracts.policy import AttributeDesignator, AttributeSelector, PolicyRequest
 
 
-class MappingAttributeResolver:
+class MappingAttributeResolver(AttributeResolverBase):
     def resolve(self, designator: AttributeDesignator, request: PolicyRequest, /) -> Any:
         if designator.attribute_id in request.attributes:
             return request.attributes[designator.attribute_id]
@@ -16,7 +17,7 @@ class MappingAttributeResolver:
         return None
 
 
-class MappingAttributeSelector:
+class MappingAttributeSelector(AttributeSelectorBase):
     def select(self, selector: AttributeSelector, values: Mapping[str, Any], /) -> Any:
         current: Any = values
         for part in selector.path:

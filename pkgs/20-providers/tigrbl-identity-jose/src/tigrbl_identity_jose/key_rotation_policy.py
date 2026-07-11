@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Callable, Iterable, Mapping
 
+from tigrbl_jose_bases import KeyRotationAdministrationBase, KeyRotationPolicyBase
 from tigrbl_identity_core.clock import utc_now_iso
 from tigrbl_identity_core.normalization import normal_tuple
 from tigrbl_security_key_rotation_policy_contracts import (
@@ -18,7 +19,7 @@ class KeyRotationPolicyOverlapError(RuntimeError):
     pass
 
 
-class KeyRotationPolicyGovernance:
+class KeyRotationPolicyGovernance(KeyRotationPolicyBase):
     """Governance-plane store for immutable key rotation policy versions."""
 
     def __init__(self) -> None:
@@ -170,7 +171,7 @@ class KeyRotationPolicyGovernance:
 AuthorizationDecision = Callable[[Mapping[str, str]], str]
 
 
-class KeyRotationAdministration:
+class KeyRotationAdministration(KeyRotationAdministrationBase):
     """Administration-plane consumer for effective policy projections."""
 
     def __init__(

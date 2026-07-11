@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Mapping, Protocol
+from importlib import import_module
+from typing import TYPE_CHECKING, Any, Mapping, Protocol
 
-from ..schemas import AuthSessionReadResponse, ConsentReadResponse, UserReadResponse
+if TYPE_CHECKING:
+    from ..schemas import AuthSessionReadResponse, ConsentReadResponse, UserReadResponse
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,6 +36,12 @@ class ClaimsResult:
 
 class ClaimsProviderPort(Protocol):
     async def claims(self, request: ClaimsRequest, /) -> ClaimsResult: ...
+
+
+def __getattr__(name: str) -> object:
+    if name in {"AuthSessionReadResponse", "ConsentReadResponse", "UserReadResponse"}:
+        return getattr(import_module("..schemas", __package__), name)
+    raise AttributeError(name)
 
 
 __all__ = [

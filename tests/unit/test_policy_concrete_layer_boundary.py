@@ -92,6 +92,7 @@ def test_policy_concrete_layer_only_imports_lower_contract_surfaces() -> None:
         "__future__",
         "dataclasses",
         "typing",
+        "tigrbl_authz_policy_bases",
         "tigrbl_identity_contracts",
     }
 

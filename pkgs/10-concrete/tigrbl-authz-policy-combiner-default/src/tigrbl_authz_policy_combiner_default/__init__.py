@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+from tigrbl_authz_policy_bases import PolicyCombinerBase
 from tigrbl_identity_contracts.policy import CombiningAlgorithmKind, PolicyCombineRequest, PolicyDecision
 
 
-class DefaultPolicyCombiner:
+class DefaultPolicyCombiner(PolicyCombinerBase):
     def combine(self, request: PolicyCombineRequest, /) -> PolicyDecision:
         if not request.decisions:
             return PolicyDecision(False, "no policy decision", ())

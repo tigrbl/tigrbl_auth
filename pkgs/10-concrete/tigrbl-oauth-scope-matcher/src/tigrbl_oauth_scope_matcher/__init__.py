@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from tigrbl_oauth_bases import ScopeMatcherBase
 from tigrbl_identity_contracts.oauth import ScopeMatchRequest, ScopeMatchResult
 
 
-class DefaultScopeMatcher:
+class DefaultScopeMatcher(ScopeMatcherBase):
     def match(self, request: ScopeMatchRequest, /) -> ScopeMatchResult:
         granted = set(request.granted)
         required = set(request.required)

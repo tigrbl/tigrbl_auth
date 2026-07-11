@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Protocol
+from importlib import import_module
+from typing import TYPE_CHECKING, Protocol
 
-from ..schemas import SubjectAliasCreateRequest, SubjectAliasReadResponse
+if TYPE_CHECKING:
+    from ..schemas import SubjectAliasCreateRequest, SubjectAliasReadResponse
 
 
 class SubjectIdentifierKind(str, Enum):
@@ -34,6 +36,12 @@ class SubjectIdentifierResult:
 
 class SubjectIdentifierStrategyPort(Protocol):
     def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult: ...
+
+
+def __getattr__(name: str) -> object:
+    if name in {"SubjectAliasCreateRequest", "SubjectAliasReadResponse"}:
+        return getattr(import_module("..schemas", __package__), name)
+    raise AttributeError(name)
 
 
 __all__ = [
