@@ -52,6 +52,7 @@ from .key_attestation_evidence import KeyAttestationEvidence
 from .credential_ecosystem_registry import CredentialConfiguration,CredentialIssuer,WalletAttestation,WalletInstance,WalletKeyBinding,WalletRegistration
 from .credential_issuance_state import CredentialDeferredTransaction,CredentialIssuanceTransaction,CredentialNotification,CredentialOffer,CredentialStatusEntry,CredentialStatusList,CredentialStatusPublication
 from .presentation_state import PresentationConsent,PresentationReplay,PresentationTransaction,VerifierRegistration
+from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -188,6 +189,12 @@ _TABLE_MODELS = (
     PresentationTransaction,
     PresentationConsent,
     PresentationReplay,
+    AttestationEvidence,
+    AttestationResult,
+    AttestationReferenceManifest,
+    AttestationReferenceValue,
+    AttestationEndorsement,
+    AttestationAppraisalPolicy,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -374,6 +381,12 @@ __all__ = [
     "PresentationTransaction",
     "PresentationConsent",
     "PresentationReplay",
+    "AttestationEvidence",
+    "AttestationResult",
+    "AttestationReferenceManifest",
+    "AttestationReferenceValue",
+    "AttestationEndorsement",
+    "AttestationAppraisalPolicy",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
