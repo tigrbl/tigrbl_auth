@@ -53,6 +53,7 @@ from .credential_ecosystem_registry import CredentialConfiguration,CredentialIss
 from .credential_issuance_state import CredentialDeferredTransaction,CredentialIssuanceTransaction,CredentialNotification,CredentialOffer,CredentialStatusEntry,CredentialStatusList,CredentialStatusPublication
 from .presentation_state import PresentationConsent,PresentationReplay,PresentationTransaction,VerifierRegistration
 from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
+from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -195,6 +196,9 @@ _TABLE_MODELS = (
     AttestationReferenceValue,
     AttestationEndorsement,
     AttestationAppraisalPolicy,
+    SvidRecord,
+    SpiffeTrustBundle,
+    TrustDomainFederation,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -387,6 +391,9 @@ __all__ = [
     "AttestationReferenceValue",
     "AttestationEndorsement",
     "AttestationAppraisalPolicy",
+    "SvidRecord",
+    "SpiffeTrustBundle",
+    "TrustDomainFederation",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
