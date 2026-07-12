@@ -22,11 +22,15 @@ class AttributeSelector:
 
 
 class AttributeResolverPort(Protocol):
-    def resolve(self, designator: AttributeDesignator, request: PolicyRequest, /) -> Any: ...
+    def resolve(
+        self, designator: AttributeDesignator, request: PolicyRequest, /
+    ) -> Any: ...
 
 
 class AttributeSelectorPort(Protocol):
-    def select(self, selector: AttributeSelector, values: Mapping[str, Any], /) -> Any: ...
+    def select(
+        self, selector: AttributeSelector, values: Mapping[str, Any], /
+    ) -> Any: ...
 
 
 __all__ = [

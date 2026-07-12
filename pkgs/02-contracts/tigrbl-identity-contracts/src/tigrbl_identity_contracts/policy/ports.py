@@ -37,15 +37,21 @@ class PolicyDecisionEnginePort(Protocol):
 
 
 class RuleEvaluatorPort(Protocol):
-    def evaluate_rule(self, rule: PolicyRule, request: PolicyRequest, /) -> PolicyDecision: ...
+    def evaluate_rule(
+        self, rule: PolicyRule, request: PolicyRequest, /
+    ) -> PolicyDecision: ...
 
 
 class ConditionEvaluatorPort(Protocol):
-    def evaluate_condition(self, condition: DynamicCondition, request: PolicyRequest, /) -> bool: ...
+    def evaluate_condition(
+        self, condition: DynamicCondition, request: PolicyRequest, /
+    ) -> bool: ...
 
 
 class AdminGatePort(Protocol):
-    async def authorize_admin_action(self, request: PolicyRequest, /) -> PolicyDecision: ...
+    async def authorize_admin_action(
+        self, request: PolicyRequest, /
+    ) -> PolicyDecision: ...
 
 
 class RBACAdministratorPort(Protocol):

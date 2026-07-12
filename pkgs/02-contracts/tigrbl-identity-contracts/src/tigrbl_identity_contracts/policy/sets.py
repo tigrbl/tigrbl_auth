@@ -29,7 +29,9 @@ class PolicySetRepositoryPort(Protocol):
 
     async def remove_member(self, member_id: str, /) -> Any | None: ...
 
-    async def resolve_policy_set(self, policy_set_id: str, /) -> PolicySetResolution: ...
+    async def resolve_policy_set(
+        self, policy_set_id: str, /
+    ) -> PolicySetResolution: ...
 
 
 _SCHEMA_EXPORTS = {

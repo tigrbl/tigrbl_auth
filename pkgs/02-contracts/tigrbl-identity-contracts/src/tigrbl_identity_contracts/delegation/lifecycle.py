@@ -139,7 +139,8 @@ class DelegationGrantLifecycleEntry:
             realm=self.realm,
             policy_version=self.policy_version,
             provenance_id=self.provenance_id,
-            revoked=self.revoked_at is not None or self.status in TERMINAL_GRANT_STATUSES,
+            revoked=self.revoked_at is not None
+            or self.status in TERMINAL_GRANT_STATUSES,
             expires_at=self.expires_at.isoformat() if self.expires_at else None,
         )
 

@@ -21,11 +21,15 @@ class Advice:
 
 
 class ObligationHandlerPort(Protocol):
-    async def handle_obligation(self, obligation: Obligation, decision: PolicyDecision, /) -> None: ...
+    async def handle_obligation(
+        self, obligation: Obligation, decision: PolicyDecision, /
+    ) -> None: ...
 
 
 class AdviceHandlerPort(Protocol):
-    async def handle_advice(self, advice: Advice, decision: PolicyDecision, /) -> None: ...
+    async def handle_advice(
+        self, advice: Advice, decision: PolicyDecision, /
+    ) -> None: ...
 
 
 __all__ = ["Advice", "AdviceHandlerPort", "Obligation", "ObligationHandlerPort"]

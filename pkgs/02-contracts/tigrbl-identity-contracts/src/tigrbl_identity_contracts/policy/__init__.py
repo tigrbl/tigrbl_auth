@@ -18,5 +18,10 @@ from .targets import *
 from .prp import *
 from .pap import *
 from .versions import *
+from .capabilities import *
+from .entities import *
+from .evaluations import *
+from .search import *
+from .xacml_mapping import *
 
 __all__ = [name for name in globals() if not name.startswith("_")]

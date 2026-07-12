@@ -194,7 +194,9 @@ class ClaimsProviderBase(ClaimsProviderPort, CapabilityProviderBase):
         raise NotImplementedError
 
 
-class SubjectIdentifierStrategyBase(SubjectIdentifierStrategyPort, CapabilityProviderBase):
+class SubjectIdentifierStrategyBase(
+    SubjectIdentifierStrategyPort, CapabilityProviderBase
+):
     """Base for public, pairwise, transient, and opaque subject strategies."""
 
     def derive(self, request: Any) -> Any:
@@ -263,7 +265,10 @@ class CryptoDomainBase(CapabilityProviderBase, ArtifactIssuerBase, ArtifactOpene
 
 
 class MreCryptoDomainBase(
-    CapabilityProviderBase, ArtifactIssuerBase, ArtifactOpenerBase, RecipientSetEditorBase
+    CapabilityProviderBase,
+    ArtifactIssuerBase,
+    ArtifactOpenerBase,
+    RecipientSetEditorBase,
 ):
     """Domain composition for multi-recipient encryption providers."""
 
@@ -477,11 +482,15 @@ class CipherPolicyDomainBase(ICipherPolicy, CapabilityProviderBase):
                 issues.append(f"default_alg({op}) raised: {exc!r}")
                 continue
             if default not in set(allowed):
-                issues.append(f"default_alg({op})={default} not in supports().ops[{op}]")
+                issues.append(
+                    f"default_alg({op})={default} not in supports().ops[{op}]"
+                )
         return tuple(issues)
 
 
-class ConfirmationBindingValidatorBase(IConfirmationBindingValidator, CapabilityProviderBase):
+class ConfirmationBindingValidatorBase(
+    IConfirmationBindingValidator, CapabilityProviderBase
+):
     """Base for proof confirmation validators such as DPoP or mTLS cnf checks."""
 
     @property

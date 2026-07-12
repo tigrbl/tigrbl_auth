@@ -7,13 +7,12 @@ from tigrbl_identity_contracts.authorization_scopes import (
     ScopeMatchRequest,
     ScopeMatchResult,
 )
-
-
-class ScopeMatcherBase(ScopeMatcherPort, ABC):
-    def match(self, request: ScopeMatchRequest, /) -> ScopeMatchResult:
-        raise NotImplementedError
-
-
+from .interop import (
+    AuthzenEvaluationAdapterBase,
+    AuthzenSearchAdapterBase,
+    XacmlRequestMapperBase,
+    XacmlResponseMapperBase,
+)
 from tigrbl_identity_contracts.policy import (
     AdviceHandlerPort,
     Advice,
@@ -32,6 +31,11 @@ from tigrbl_identity_contracts.policy import (
     PolicyRule,
     RuleEvaluatorPort,
 )
+
+
+class ScopeMatcherBase(ScopeMatcherPort, ABC):
+    def match(self, request: ScopeMatchRequest, /) -> ScopeMatchResult:
+        raise NotImplementedError
 
 
 class PolicyRuleBase(PolicyRule):
@@ -83,6 +87,8 @@ class AdviceHandlerBase(AdviceHandlerPort, ABC):
 
 __all__ = [
     "AdviceHandlerBase",
+    "AuthzenEvaluationAdapterBase",
+    "AuthzenSearchAdapterBase",
     "AttributeResolverBase",
     "AttributeSelectorBase",
     "ConditionEvaluatorBase",
@@ -91,4 +97,6 @@ __all__ = [
     "PolicyRuleBase",
     "RuleEvaluatorBase",
     "ScopeMatcherBase",
+    "XacmlRequestMapperBase",
+    "XacmlResponseMapperBase",
 ]

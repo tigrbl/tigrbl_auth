@@ -25,11 +25,15 @@ class DelegationGrantSpec:
             raise ValueError("tenant_ids and actions are required")
         object.__setattr__(self, "tenant_ids", tuple(sorted(set(self.tenant_ids))))
         object.__setattr__(self, "actions", tuple(sorted(set(self.actions))))
-        object.__setattr__(self, "resources", tuple(sorted(set(self.resources or ("*",)))))
+        object.__setattr__(
+            self, "resources", tuple(sorted(set(self.resources or ("*",))))
+        )
 
     def scopes(self) -> tuple[AuthorityScope, ...]:
         return tuple(
-            AuthorityScope(tenant_id=tenant_id, realm=self.realm, action=action, resource=resource)
+            AuthorityScope(
+                tenant_id=tenant_id, realm=self.realm, action=action, resource=resource
+            )
             for tenant_id in self.tenant_ids
             for action in self.actions
             for resource in self.resources
