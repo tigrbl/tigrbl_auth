@@ -1,31 +1,22 @@
-from typing import Any, Mapping
-
-VC_CONTEXT_V2 = "https://www.w3.org/ns/credentials/v2"
-
-
-def _validate(value: Mapping[str, Any], expected: str) -> None:
-    contexts = value.get("@context")
-    types = value.get("type")
-    if not isinstance(contexts, list) or not contexts or contexts[0] != VC_CONTEXT_V2:
-        raise ValueError("VCDM 2.0 object must use the v2 base context first")
-    if not isinstance(types, list) or expected not in types:
-        raise ValueError(f"type must include {expected}")
-
-
-def validate_verifiable_credential(value: Mapping[str, Any]) -> None:
-    _validate(value, "VerifiableCredential")
-    if "issuer" not in value or not isinstance(
-        value.get("credentialSubject"), (dict, list)
-    ):
-        raise ValueError("credential requires issuer and credentialSubject")
-
-
-def validate_verifiable_presentation(value: Mapping[str, Any]) -> None:
-    _validate(value, "VerifiablePresentation")
-
+from .contexts import VCDM_2_RECOMMENDATION, VC_CONTEXT_V2, validate_contexts
+from .credentials import VerifiableCredential, parse_verifiable_credential
+from .presentations import VerifiablePresentation, parse_verifiable_presentation
+from .schemas import CredentialSchemaReference, parse_credential_schema
+from .status import CredentialStatusEntry, parse_credential_status
+from .validation import validate_verifiable_credential, validate_verifiable_presentation
 
 __all__ = [
+    "CredentialSchemaReference",
+    "CredentialStatusEntry",
+    "VCDM_2_RECOMMENDATION",
     "VC_CONTEXT_V2",
+    "VerifiableCredential",
+    "VerifiablePresentation",
+    "parse_credential_schema",
+    "parse_credential_status",
+    "parse_verifiable_credential",
+    "parse_verifiable_presentation",
+    "validate_contexts",
     "validate_verifiable_credential",
     "validate_verifiable_presentation",
 ]
