@@ -56,6 +56,7 @@ from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement
 from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
 from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
+from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -214,6 +215,9 @@ _TABLE_MODELS = (
     GnapContinuation,
     GnapClientInstance,
     GnapInteraction,
+    CertificateRecord,
+    TrustAnchor,
+    CertificateStatusSnapshot,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -422,6 +426,9 @@ __all__ = [
     "GnapContinuation",
     "GnapClientInstance",
     "GnapInteraction",
+    "CertificateRecord",
+    "TrustAnchor",
+    "CertificateStatusSnapshot",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
