@@ -18,7 +18,6 @@ from tigrbl_identity_storage.framework import (
 )
 
 
-
 class WorkloadIdentity(RestOltpTable, GUIDPk, Timestamped):
     __tablename__ = "workload_identities"
     __table_args__ = {"extend_existing": True, "schema": "authn"}
@@ -27,25 +26,63 @@ class WorkloadIdentity(RestOltpTable, GUIDPk, Timestamped):
         spec=ColumnSpec(
             storage=S(String(255), nullable=False, unique=True, index=True),
             field=F(constraints={"max_length": 255}, required_in=("create",)),
-            io=IO(in_verbs=("create", "update", "replace"), out_verbs=("read", "list"), filter_ops=("eq",)),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq",),
+            ),
         )
     )
     workload_subject: Mapped[str] = acol(
         spec=ColumnSpec(
             storage=S(String(1000), nullable=False, unique=True, index=True),
             field=F(constraints={"max_length": 1000}, required_in=("create",)),
-            io=IO(in_verbs=("create", "update", "replace"), out_verbs=("read", "list"), filter_ops=("eq", "ilike")),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq", "ilike"),
+            ),
         )
     )
-    tenant_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    realm_id: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    trust_domain: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    namespace: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    service_account: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    cloud_provider: Mapped[str | None] = acol(storage=S(String(64), nullable=True, index=True))
-    cloud_subject: Mapped[str | None] = acol(storage=S(String(1000), nullable=True, index=True))
-    image_digest: Mapped[str | None] = acol(storage=S(String(255), nullable=True, index=True))
-    status: Mapped[str] = acol(storage=S(String(32), nullable=False, default="active", index=True))
+    tenant_id: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    realm_id: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    trust_domain: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    spiffe_id: Mapped[str | None] = acol(
+        storage=S(String(1000), nullable=True, unique=True, index=True)
+    )
+    selector_digest: Mapped[str | None] = acol(
+        storage=S(String(128), nullable=True, index=True)
+    )
+    svid_type: Mapped[str | None] = acol(
+        storage=S(String(32), nullable=True, index=True)
+    )
+    bundle_version: Mapped[str | None] = acol(
+        storage=S(String(128), nullable=True, index=True)
+    )
+    namespace: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    service_account: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    cloud_provider: Mapped[str | None] = acol(
+        storage=S(String(64), nullable=True, index=True)
+    )
+    cloud_subject: Mapped[str | None] = acol(
+        storage=S(String(1000), nullable=True, index=True)
+    )
+    image_digest: Mapped[str | None] = acol(
+        storage=S(String(255), nullable=True, index=True)
+    )
+    status: Mapped[str] = acol(
+        storage=S(String(32), nullable=False, default="active", index=True)
+    )
     workload_metadata: Mapped[dict | None] = acol(storage=S(JSON, nullable=True))
 
 
