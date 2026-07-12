@@ -50,6 +50,7 @@ from .principal_key_binding import PrincipalKeyBinding
 from .key_envelope import KeyEnvelope
 from .key_attestation_evidence import KeyAttestationEvidence
 from .credential_ecosystem_registry import CredentialConfiguration,CredentialIssuer,WalletAttestation,WalletInstance,WalletKeyBinding,WalletRegistration
+from .credential_issuance_state import CredentialDeferredTransaction,CredentialIssuanceTransaction,CredentialNotification,CredentialOffer,CredentialStatusEntry,CredentialStatusList,CredentialStatusPublication
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -175,6 +176,13 @@ _TABLE_MODELS = (
     WalletInstance,
     WalletAttestation,
     WalletKeyBinding,
+    CredentialOffer,
+    CredentialIssuanceTransaction,
+    CredentialDeferredTransaction,
+    CredentialNotification,
+    CredentialStatusList,
+    CredentialStatusEntry,
+    CredentialStatusPublication,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -350,6 +358,13 @@ __all__ = [
     "WalletInstance",
     "WalletAttestation",
     "WalletKeyBinding",
+    "CredentialOffer",
+    "CredentialIssuanceTransaction",
+    "CredentialDeferredTransaction",
+    "CredentialNotification",
+    "CredentialStatusList",
+    "CredentialStatusEntry",
+    "CredentialStatusPublication",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
