@@ -87,7 +87,7 @@ FEATURE_FLAG_GROUPS: Final[dict[str, dict[str, object]]] = {
         "description": "Flags outside the certified core boundary by default.",
         "flags": {
             "enable_rfc7800": "RFC 7800 proof-of-possession JWT semantics",
-            "enable_rfc7952": "RFC 7952 SET",
+            "enable_rfc8417": "RFC 8417 Security Event Token (SET)",
             "enable_rfc8291": "RFC 8291 Web Push encryption",
             "enable_rfc8812": "RFC 8812 WebAuthn algorithm registrations",
             "enable_rfc8932": "RFC 8932 DNS privacy operational guidance",

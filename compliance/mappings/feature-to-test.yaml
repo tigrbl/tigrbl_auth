@@ -1984,7 +1984,7 @@ extension:dns-privacy:
 - tests/unit/test_rfc8932_dns_privacy.py
 - tests/unit/test_rfc8932_enhanced_metadata.py
 extension:set:
-- tests/unit/test_rfc7952_security_event_token.py
+- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
 extension:webauthn-passkeys:
 - tests/unit/test_rfc8812_webauthn_algorithms.py
 extension:webpush:
@@ -3356,7 +3356,7 @@ flag:enable_rfc7800:
 - tests/unit/test_cli_surface_checkpoint.py
 - tests/unit/test_operator_service_layer.py
 - tests/unit/test_runtime_launcher.py
-flag:enable_rfc7952:
+flag:enable_rfc8417:
 - tests/conformance/operator/test_cli_bootstrap_migrate.py
 - tests/conformance/operator/test_cli_import_export.py
 - tests/conformance/operator/test_cli_keys_lifecycle.py
@@ -3992,7 +3992,7 @@ target:rfc-7662:
 target:rfc-7800:
 - tests/unit/test_rfc7800_proof_of_possession.py
 target:rfc-7952:
-- tests/unit/test_rfc7952_security_event_token.py
+- pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
 target:rfc-8252:
 - tests/conformance/production/test_rfc8252_native_apps.py
 - tests/interop/test_peer_counterpart_catalog.py

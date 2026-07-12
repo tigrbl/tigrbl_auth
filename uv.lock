@@ -2430,6 +2430,7 @@ dependencies = [
     { name = "tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-security-webfinger-provider" },
+    { name = "tigrbl-set-concrete" },
     { name = "tigrbl-typing" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
@@ -2619,6 +2620,7 @@ requires-dist = [
     { name = "tigrbl-security-trust-contracts", editable = "pkgs/02-contracts/tigrbl-security-trust-contracts" },
     { name = "tigrbl-security-trust-domain-bases", editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" },
     { name = "tigrbl-security-webfinger-provider", editable = "pkgs/20-providers/tigrbl-security-webfinger-provider" },
+    { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
     { name = "tomli", marker = "python_full_version < '3.11'", specifier = "==2.4.0" },
 ]
@@ -4132,6 +4134,17 @@ requires-dist = [
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
     { name = "tigrbl-security-trust-domain-bases", specifier = "==0.1.0" },
 ]
+
+[[package]]
+name = "tigrbl-set-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-set-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-spec"

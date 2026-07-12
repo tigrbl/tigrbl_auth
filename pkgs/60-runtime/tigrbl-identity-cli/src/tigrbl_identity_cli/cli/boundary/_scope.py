@@ -41,7 +41,7 @@ PROFILE_NAMES = ("baseline", "production", "hardening")
 
 REQUIRED_SCOPE_FREEZE_PROHIBITED_EXPANSIONS = (
     "RFC 7800",
-    "RFC 7952",
+    "RFC 8417",
     "RFC 8291",
     "RFC 8812",
     "RFC 8932",

@@ -185,9 +185,9 @@ enable_rfc7662:
 - target:rfc-7662
 enable_rfc7800:
 - flag:enable_rfc7800
-enable_rfc7952:
+enable_rfc8417:
 - extension:set
-- flag:enable_rfc7952
+- flag:enable_rfc8417
 enable_rfc8252:
 - flag:enable_rfc8252
 - profile:fapi2-security

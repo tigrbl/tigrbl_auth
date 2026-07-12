@@ -27,7 +27,7 @@ def test_boundary_freeze_lists_required_prohibited_expansions() -> None:
     prohibited = set(freeze["prohibited_expansions"])
     assert {
         "RFC 7800",
-        "RFC 7952",
+        "RFC 8417",
         "RFC 8291",
         "RFC 8812",
         "RFC 8932",

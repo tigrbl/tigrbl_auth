@@ -89,7 +89,7 @@ DEFAULT_VALUES: Final[dict[str, Any]] = {
     "enable_oidc_backchannel_logout": True,
     "oauth21_alignment_mode": "tracked",
     "enable_rfc7800": False,
-    "enable_rfc7952": False,
+    "enable_rfc8417": False,
     "enable_rfc8291": False,
     "enable_rfc8812": False,
     "enable_rfc8932": False,

@@ -70,6 +70,7 @@ dependencies = [
     "tigrbl-identity-admin-trust-federation-graph==0.4.0.dev2",
     "tigrbl-auth-protocol-oidc-backchannel-replay-store==0.4.0.dev2",
     "tigrbl-oauth-scope-matcher==0.4.0.dev2",
+    "tigrbl-set-concrete==0.4.0.dev2",
     "tigrbl-oidc-claims-concrete==0.4.0.dev2",
     "tigrbl-oidc-subject-strategy==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
@@ -289,6 +290,7 @@ tigrbl-auth = { path = "pkgs/70-facade/tigrbl-auth", editable = true }
 tigrbl-auth-protocol-oauth = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oauth", editable = true }
 tigrbl-auth-protocol-oidc-backchannel-replay-store = { path = "pkgs/deprecated/tigrbl-auth-protocol-oidc-backchannel-replay-store", editable = true }
 tigrbl-oauth-scope-matcher = { path = "pkgs/10-concrete/tigrbl-oauth-scope-matcher", editable = true }
+tigrbl-set-concrete = { path = "pkgs/10-concrete/tigrbl-set-concrete", editable = true }
 tigrbl-oidc-claims-concrete = { path = "pkgs/10-concrete/tigrbl-oidc-claims-concrete", editable = true }
 tigrbl-oidc-subject-strategy = { path = "pkgs/10-concrete/tigrbl-oidc-subject-strategy", editable = true }
 tigrbl-auth-protocol-oidc = { path = "pkgs/50-protocols/tigrbl-auth-protocol-oidc", editable = true }

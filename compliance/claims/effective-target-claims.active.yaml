@@ -69,7 +69,7 @@ effective_deployment:
     surface_plugin_mode: public-only
     oauth21_alignment_mode: tracked
     enable_rfc7800: false
-    enable_rfc7952: false
+    enable_rfc8417: false
     enable_rfc8291: false
     enable_rfc8812: false
     enable_rfc8932: false

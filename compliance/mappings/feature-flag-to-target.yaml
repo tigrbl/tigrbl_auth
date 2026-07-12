@@ -879,9 +879,9 @@ enable_rfc7662:
 - RFC 9728
 enable_rfc7800:
 - CLI operator surface
-enable_rfc7952:
+enable_rfc8417:
 - CLI operator surface
-- RFC 7952
+- RFC 8417
 enable_rfc8252:
 - CLI operator surface
 - OIDC Back-Channel Logout

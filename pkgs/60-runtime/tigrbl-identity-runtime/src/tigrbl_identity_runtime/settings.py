@@ -356,7 +356,7 @@ class Settings(BaseSettings):
     # Extension and quarantined flags
     # ------------------------------------------------------------------
     enable_rfc7800: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC7800"))
-    enable_rfc7952: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC7952"))
+    enable_rfc8417: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8417"))
     enable_rfc8291: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8291"))
     enable_rfc8812: bool = Field(default=_env_bool("TIGRBL_AUTH_ENABLE_RFC8812"))
     enable_rfc8932: bool = Field(

@@ -11,12 +11,12 @@ targets:
   modules:
   - tigrbl_auth/standards/jose/rfc7800.py
 - id: set.core
-  label: RFC 7952
+  label: RFC 8417
   title: Security Event Token (SET)
   quarantine_reason: Outside the default OAuth 2.0 / OIDC auth-server certification
     boundary.
   modules:
-  - tigrbl_auth/extensions/rfc7952.py
+  - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
 - id: webpush.encryption
   label: RFC 8291
   title: Message Encryption for Web Push

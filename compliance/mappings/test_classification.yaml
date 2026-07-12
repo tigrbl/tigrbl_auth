@@ -221,7 +221,7 @@ categories:
   - tests/unit/test_rfc7662_token_introspection.py
   - tests/unit/test_rfc7662_unit.py
   - tests/unit/test_rfc7800_proof_of_possession.py
-  - tests/unit/test_rfc7952_security_event_token.py
+  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
   - tests/unit/test_rfc8037_eddsa.py
   - tests/unit/test_rfc8176_amr.py
   - tests/unit/test_rfc8252_native_app_redirects.py

@@ -63,7 +63,7 @@ The repository uses this artifact to keep targets, claims, active routes, contra
 
 ## Most common discrepancies
 
-- none
+- `owner-module-path-missing`: `48` targets
 
 ## Required boundary outputs present in this checkpoint
 

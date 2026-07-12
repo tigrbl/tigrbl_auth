@@ -43,9 +43,9 @@ RFC 7800:
   modules:
   - tigrbl_auth/standards/jose/rfc7800.py
   boundary: extension_quarantine
-RFC 7952:
+RFC 8417:
   modules:
-  - tigrbl_auth/extensions/rfc7952.py
+  - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
   boundary: extension_quarantine
 RFC 8291:
   modules:

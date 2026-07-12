@@ -389,7 +389,7 @@ cli-verb:verify:
 extension:dns-privacy:
 - RFC 8932
 extension:set:
-- RFC 7952
+- RFC 8417
 extension:webauthn-passkeys:
 - RFC 8812
 extension:webpush:
@@ -882,7 +882,7 @@ flag:enable_rfc7662:
 - CLI operator surface
 flag:enable_rfc7800:
 - CLI operator surface
-flag:enable_rfc7952:
+flag:enable_rfc8417:
 - CLI operator surface
 flag:enable_rfc8252:
 - CLI operator surface
@@ -1076,7 +1076,7 @@ target:rfc-7662:
 target:rfc-7800:
 - RFC 7800
 target:rfc-7952:
-- RFC 7952
+- RFC 8417
 target:rfc-8252:
 - RFC 8252
 target:rfc-8291:

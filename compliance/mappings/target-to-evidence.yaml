@@ -135,7 +135,7 @@ Confidential SPA profile pattern:
 - docs/compliance/TARGET_REALITY_MATRIX.md
 RFC 7800:
 - compliance/evidence/tier3/dpop/
-RFC 7952:
+RFC 8417:
 - compliance/evidence/tier3/jwt/
 RFC 8291:
 - compliance/evidence/tier3/jwe/

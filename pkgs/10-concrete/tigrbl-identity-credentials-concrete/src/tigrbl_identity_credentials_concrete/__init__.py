@@ -11,6 +11,11 @@ from tigrbl_identity_contracts.credentials import (
 )
 from tigrbl_identity_model_bases import CredentialBase
 
+from .mdoc import Mdoc, parse_mdoc
+from .sd_jwt_vc import SdJwtVc, parse_sd_jwt_vc
+from .vcdm import validate_verifiable_credential, validate_verifiable_presentation
+from .eat_corim import parse_corim, parse_eat
+
 
 def _new_credential_id() -> str:
     return str(uuid4())
@@ -346,4 +351,12 @@ __all__ = [
     "ServiceCredential",
     "ServiceKeyCredential",
     "WebAuthnCredential",
+    "Mdoc",
+    "SdJwtVc",
+    "parse_mdoc",
+    "parse_sd_jwt_vc",
+    "validate_verifiable_credential",
+    "validate_verifiable_presentation",
+    "parse_corim",
+    "parse_eat",
 ]

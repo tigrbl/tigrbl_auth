@@ -885,7 +885,7 @@ flag:enable_rfc7662:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc7800:
 - compliance/evidence/tier3/cli-operator-surface/
-flag:enable_rfc7952:
+flag:enable_rfc8417:
 - compliance/evidence/tier3/cli-operator-surface/
 flag:enable_rfc8252:
 - compliance/evidence/tier3/cli-operator-surface/

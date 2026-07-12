@@ -36,7 +36,7 @@ RUNTIME_STACK_SOURCE_PREFIXES = (
 )
 EXTENSION_TEST_PREFIXES = (
     "test_rfc7800_",
-    "test_rfc7952_",
+    "test_rfc8417_",
     "test_rfc8291_",
     "test_rfc8812_",
     "test_rfc8932_",

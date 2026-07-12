@@ -5,6 +5,9 @@ from typing import Any, Mapping
 from tigrbl_oidc_bases import ClaimsProviderBase
 from tigrbl_identity_contracts.oidc import ClaimsRequest, ClaimsResult
 
+from .eap import EapAcrValue, EapAmrValue, satisfies_eap_acr
+from .identity_assurance import parse_verified_claims, serialize_verified_claims
+
 
 class LocalClaimsProvider(ClaimsProviderBase):
     async def claims(self, request: ClaimsRequest, /) -> ClaimsResult:
@@ -24,4 +27,11 @@ class LocalClaimsProvider(ClaimsProviderBase):
         return ClaimsResult(claims=claims)
 
 
-__all__ = ["LocalClaimsProvider"]
+__all__ = [
+    "EapAcrValue",
+    "EapAmrValue",
+    "LocalClaimsProvider",
+    "parse_verified_claims",
+    "serialize_verified_claims",
+    "satisfies_eap_acr",
+]

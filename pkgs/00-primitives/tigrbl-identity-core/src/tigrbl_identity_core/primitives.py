@@ -12,6 +12,20 @@ RealmId = NewType("RealmId", str)
 PrincipalId = NewType("PrincipalId", str)
 ClientId = NewType("ClientId", str)
 CredentialId = NewType("CredentialId", str)
+IdentityId = NewType("IdentityId", str)
+TokenId = NewType("TokenId", str)
+PresentationId = NewType("PresentationId", str)
+AttestationId = NewType("AttestationId", str)
+ManifestId = NewType("ManifestId", str)
+CertificateId = NewType("CertificateId", str)
+WalletId = NewType("WalletId", str)
+WalletInstanceId = NewType("WalletInstanceId", str)
+WorkloadId = NewType("WorkloadId", str)
+TrustDomainId = NewType("TrustDomainId", str)
+CredentialTypeId = NewType("CredentialTypeId", str)
+StatusListId = NewType("StatusListId", str)
+TransactionId = NewType("TransactionId", str)
+KeyId = NewType("KeyId", str)
 Issuer = NewType("Issuer", str)
 Subject = NewType("Subject", str)
 Audience = NewType("Audience", str)
@@ -92,6 +106,20 @@ __all__ = [
     "ClientId",
     "ClientRef",
     "CredentialId",
+    "IdentityId",
+    "TokenId",
+    "PresentationId",
+    "AttestationId",
+    "ManifestId",
+    "CertificateId",
+    "WalletId",
+    "WalletInstanceId",
+    "WorkloadId",
+    "TrustDomainId",
+    "CredentialTypeId",
+    "StatusListId",
+    "TransactionId",
+    "KeyId",
     "Issuer",
     "PrincipalId",
     "PrincipalRef",

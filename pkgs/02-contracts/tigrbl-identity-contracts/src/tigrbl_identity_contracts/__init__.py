@@ -21,6 +21,12 @@ from .tokens import *
 from .admin import *
 from .admin_services import *
 from .adaptive_access import *
+from .assurance import *
+from .credential_artifacts import *
+from .attestation import *
+from .workload_identity import *
+from .decentralized import *
+from .policy_interop import *
 from .correctness import *
 from .admin_resources import *
 from .governance import *

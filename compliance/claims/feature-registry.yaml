@@ -1649,9 +1649,9 @@ features:
   source: tigrbl_identity_runtime.deployment
   scope: extension
   targets:
-  - RFC 7952
+  - RFC 8417
   required_flags:
-  - enable_rfc7952
+  - enable_rfc8417
   boundary: extension_quarantine
 - id: extension:webauthn-passkeys
   kind: extension
@@ -3389,16 +3389,16 @@ features:
   - CLI operator surface
   required_flags:
   - enable_rfc7800
-- id: flag:enable_rfc7952
+- id: flag:enable_rfc8417
   kind: setting-flag
-  title: enable_rfc7952
-  description: Settings-backed governance flag enable_rfc7952
+  title: enable_rfc8417
+  description: Settings-backed governance flag enable_rfc8417
   source: tigrbl_identity_runtime.settings
   scope: extension
   targets:
   - CLI operator surface
   required_flags:
-  - enable_rfc7952
+  - enable_rfc8417
 - id: flag:enable_rfc8252
   kind: setting-flag
   title: enable_rfc8252
@@ -4398,12 +4398,12 @@ features:
   profiles: []
 - id: target:rfc-7952
   kind: target
-  title: RFC 7952
+  title: RFC 8417
   description: Security Event Token (SET)
   source: compliance/targets/extension-targets.yaml
   scope: extension
   targets:
-  - RFC 7952
+  - RFC 8417
   required_flags: []
   profiles: []
 - id: target:rfc-8252

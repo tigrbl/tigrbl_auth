@@ -137,13 +137,13 @@ boundary_freeze:
   retained_target_identity_hash: b5caac77a8e8bc398c8d4679049f525d94ad701cd345eaa51498567972ce9f60
   retained_rfc_target_identity_hash: 0ad8e089ffb79da0729f5553d27762810d5e2819b43b6de2c6646f96e25ee60f
   retained_non_rfc_target_identity_hash: ed5c67dd36ad0698c670540dd5ad267b21ce46fe5e1ab97269539bca3d40b3be
-  deferred_target_identity_hash: e2352a870e3197dfd75cd0eb85e5d047ddc475e29801207414aada02d10e4e5f
+  deferred_target_identity_hash: b7426807796854ea03f91a3dc1c98df9734de3f80b486e3e21e04792b3e17590
   no_target_count_drift_during_closeout: true
   closeout_scope_expansion_requires_separate_program: true
   fully_featured_claim_boundary_fixed: true
   prohibited_expansions:
   - RFC 7800
-  - RFC 7952
+  - RFC 8417
   - RFC 8291
   - RFC 8812
   - RFC 8932
@@ -164,11 +164,11 @@ deferred_targets:
   reason: Optional hardening extension not yet promoted into the certified core boundary.
   modules:
   - tigrbl_auth/standards/jose/rfc7800.py
-- label: RFC 7952
+- label: RFC 8417
   kind: extension-quarantine
   reason: Outside the default OAuth 2.0 / OIDC auth-server certification boundary.
   modules:
-  - tigrbl_auth/extensions/rfc7952.py
+  - pkgs/10-concrete/tigrbl-set-concrete/src/tigrbl_set_concrete/__init__.py
 - label: RFC 8291
   kind: extension-quarantine
   reason: Web Push is not part of the certified auth-core boundary.
@@ -333,7 +333,8 @@ targets:
       - /authorize
       - /token
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 6750
   id: oauth2.bearer
   family: rfc
@@ -395,7 +396,8 @@ targets:
       - /userinfo
       - /introspect
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7636
   id: oauth2.pkce
   family: rfc
@@ -456,7 +458,8 @@ targets:
       - /authorize
       - /token
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8414
   id: oauth2.metadata
   family: rfc
@@ -507,7 +510,8 @@ targets:
       openapi_paths_present:
       - /.well-known/oauth-authorization-server
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8615
   id: http.well-known
   family: rfc
@@ -573,7 +577,8 @@ targets:
       - /.well-known/jwks.json
       - /.well-known/oauth-protected-resource
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7515
   id: jose.jws
   family: rfc
@@ -618,7 +623,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7516
   id: jose.jwe
   family: rfc
@@ -666,7 +672,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7517
   id: jose.jwk
   family: rfc
@@ -716,7 +723,8 @@ targets:
       openapi_paths_present:
       - /.well-known/jwks.json
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7518
   id: jose.jwa
   family: rfc
@@ -761,7 +769,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7519
   id: jose.jwt
   family: rfc
@@ -806,7 +815,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7009
   id: oauth2.revocation
   family: rfc
@@ -864,7 +874,8 @@ targets:
       openapi_paths_present:
       - /revoke
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7591
   id: oauth2.dynamic-registration
   family: rfc
@@ -921,7 +932,8 @@ targets:
       openapi_paths_present:
       - /register
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7592
   id: oauth2.registration-management
   family: rfc
@@ -980,7 +992,8 @@ targets:
       openapi_paths_present:
       - /register/{client_id}
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7662
   id: oauth2.introspection
   family: rfc
@@ -1036,7 +1049,8 @@ targets:
       openapi_paths_present:
       - /introspect
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8252
   id: oauth2.native-apps
   family: rfc
@@ -1107,7 +1121,8 @@ targets:
       - /register
       - /register/{client_id}
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8628
   id: oauth2.device
   family: rfc
@@ -1169,7 +1184,8 @@ targets:
       openapi_paths_present:
       - /device_authorization
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8693
   id: oauth2.token-exchange
   family: rfc
@@ -1231,7 +1247,8 @@ targets:
       openapi_paths_present:
       - /token/exchange
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8705
   id: oauth2.mtls
   family: rfc
@@ -1300,7 +1317,8 @@ targets:
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 8707
   id: oauth2.resource-indicators
   family: rfc
@@ -1373,7 +1391,8 @@ targets:
       - /par
       - /token/exchange
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9068
   id: oauth2.jwt-access-tokens
   family: rfc
@@ -1427,21 +1446,22 @@ targets:
       - /token
       openrpc_present: false
     production:
-      active_target: false
-      effective_claim: false
+      active_target: true
+      effective_claim: true
       openapi_paths_present:
       - /login
       - /token
       openrpc_present: false
     hardening:
-      active_target: false
-      effective_claim: false
+      active_target: true
+      effective_claim: true
       openapi_paths_present:
       - /login
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9101
   id: oauth2.jar
   family: rfc
@@ -1458,7 +1478,7 @@ targets:
   - tigrbl_auth/standards/oauth2/jar.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /authorize
@@ -1504,7 +1524,8 @@ targets:
       - /authorize
       - /par
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9126
   id: oauth2.par
   family: rfc
@@ -1563,7 +1584,8 @@ targets:
       openapi_paths_present:
       - /par
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9207
   id: oauth2.issuer-identification
   family: rfc
@@ -1581,7 +1603,7 @@ targets:
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /authorize
@@ -1626,7 +1648,8 @@ targets:
       - /authorize
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9396
   id: oauth2.rar
   family: rfc
@@ -1643,7 +1666,7 @@ targets:
   - tigrbl_auth/standards/oauth2/rar.py
   - tigrbl_auth/ops/authorize.py
   - tigrbl_auth/ops/par.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /authorize
@@ -1689,7 +1712,8 @@ targets:
       - /authorize
       - /par
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9449
   id: oauth2.dpop
   family: rfc
@@ -1754,7 +1778,8 @@ targets:
       - /token
       - /token/exchange
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 6265
   id: http.cookies
   family: rfc
@@ -1821,7 +1846,8 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7521
   id: oauth2.jwt-bearer-assertions
   family: rfc
@@ -1837,7 +1863,7 @@ targets:
   owner_modules:
   - tigrbl_auth/standards/oauth2/assertion_framework.py
   - tigrbl_auth/ops/token.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /token
@@ -1873,7 +1899,8 @@ targets:
       openapi_paths_present:
       - /token
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 7523
   id: oauth2.jwt-client-auth
   family: rfc
@@ -1891,7 +1918,7 @@ targets:
   - tigrbl_auth/ops/token.py
   - tigrbl_auth/ops/register.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /token
@@ -1935,7 +1962,8 @@ targets:
       - /register
       - /register/{client_id}
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9728
   id: oauth2.protected-resource-metadata
   family: rfc
@@ -1991,7 +2019,8 @@ targets:
       openapi_paths_present:
       - /.well-known/oauth-protected-resource
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: RFC 9700
   id: oauth2.security-bcp
   family: rfc
@@ -2010,7 +2039,7 @@ targets:
   - tigrbl_auth/ops/token.py
   - tigrbl_auth/standards/oidc/discovery.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   - tigrbl_auth/security/auth.py
   - tigrbl_auth/security/deps.py
   endpoint_surface:
@@ -2064,7 +2093,8 @@ targets:
       - /token
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC Core 1.0
   id: oidc.core
   family: oidc
@@ -2112,7 +2142,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC Discovery 1.0
   id: oidc.discovery
   family: oidc
@@ -2168,7 +2199,8 @@ targets:
       openapi_paths_present:
       - /.well-known/openid-configuration
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC UserInfo
   id: oidc.userinfo
   family: oidc
@@ -2219,7 +2251,8 @@ targets:
       openapi_paths_present:
       - /userinfo
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC Session Management
   id: oidc.session-management
   family: oidc
@@ -2290,7 +2323,8 @@ targets:
       - /authorize
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC RP-Initiated Logout
   id: oidc.rp-initiated-logout
   family: oidc
@@ -2349,7 +2383,8 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC Front-Channel Logout
   id: oidc.front-channel-logout
   family: oidc
@@ -2371,7 +2406,7 @@ targets:
   - tigrbl_auth/services/persistence.py
   - tigrbl_auth/api/rest/shared.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /logout
@@ -2410,7 +2445,8 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OIDC Back-Channel Logout
   id: oidc.back-channel-logout
   family: oidc
@@ -2432,7 +2468,7 @@ targets:
   - tigrbl_auth/services/persistence.py
   - tigrbl_auth/api/rest/shared.py
   - tigrbl_auth/standards/oidc/discovery_metadata.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current:
     - /logout
@@ -2471,7 +2507,8 @@ targets:
       openapi_paths_present:
       - /logout
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OpenAPI 3.1 / 3.2 compatible public contract
   id: openapi.public-http
   family: contract
@@ -2519,7 +2556,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: OpenRPC 1.4.x admin/control-plane contract
   id: openrpc.admin-plane
   family: contract
@@ -2538,8 +2576,7 @@ targets:
   - tigrbl_auth/api/rpc/methods
   - tigrbl_auth/api/rpc/schemas
   - tigrbl_auth/api/surfaces.py
-  - tigrbl_auth/cli/artifacts.py
-  - tigrbl_auth/cli/reports.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   endpoint_surface:
     current:
@@ -2574,7 +2611,8 @@ targets:
       effective_claim: false
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: ASGI 3 application package
   id: runtime.asgi3-application
   family: runtime
@@ -2598,7 +2636,7 @@ targets:
   - tigrbl_auth/runtime/base.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/registry.py
-  - tigrbl_auth/cli/runtime.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current: []
     target: []
@@ -2635,7 +2673,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: 'Runner profile: Uvicorn'
   id: runtime.runner-uvicorn
   family: runtime
@@ -2651,13 +2690,11 @@ targets:
   owner_modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/uvicorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
   endpoint_surface:
     current: []
     target: []
@@ -2694,7 +2731,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: 'Runner profile: Hypercorn'
   id: runtime.runner-hypercorn
   family: runtime
@@ -2710,13 +2748,11 @@ targets:
   owner_modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/hypercorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
   endpoint_surface:
     current: []
     target: []
@@ -2753,7 +2789,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: 'Runner profile: Tigrcorn'
   id: runtime.runner-tigrcorn
   family: runtime
@@ -2769,13 +2806,11 @@ targets:
   owner_modules:
   - tigrbl_auth/api/app.py
   - tigrbl_auth/gateway.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/config/deployment.py
   - tigrbl_auth/runtime/registry.py
   - tigrbl_auth/runtime/plan.py
   - tigrbl_auth/runtime/tigrcorn.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
   endpoint_surface:
     current: []
     target: []
@@ -2812,7 +2847,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: CLI operator surface
   id: operator.cli-surface
   family: operator
@@ -2826,11 +2862,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/runtime.py
-  - tigrbl_auth/cli/reports.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/operator_service.py
   - tigrbl_auth/services/audit_service.py
   - tigrbl_auth/services/client_service.py
@@ -2874,7 +2906,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: Bootstrap and migration lifecycle
   id: operator.bootstrap-migration
   family: operator
@@ -2888,10 +2921,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli/main.py
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/project_tree.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/persistence.py
   endpoint_surface:
     current: []
@@ -2926,7 +2956,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: Key lifecycle and JWKS publication
   id: operator.keys-jwks
   family: operator
@@ -2940,8 +2971,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/api/rpc/methods/keys.py
   - tigrbl_auth/standards/jose/rfc7517.py
   - tigrbl_auth/services/key_management.py
@@ -2980,7 +3010,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: Import/export portability
   id: operator.import-export
   family: operator
@@ -2994,8 +3025,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli/metadata.py
-  - tigrbl_auth/cli/handlers.py
+  - tigrbl_auth/cli
   - tigrbl_auth/services/import_export_service.py
   - tigrbl_auth/services/operator_service.py
   endpoint_surface:
@@ -3030,7 +3060,8 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
+  discrepancies:
+  - owner-module-path-missing
 - label: Release bundle and signature verification
   id: operator.release-bundle-signing
   family: operator
@@ -3044,9 +3075,7 @@ targets:
     status: evidenced-release-gated
     profile: baseline
   owner_modules:
-  - tigrbl_auth/cli/reports.py
-  - tigrbl_auth/cli/handlers.py
-  - tigrbl_auth/cli/artifacts.py
+  - tigrbl_auth/cli
   endpoint_surface:
     current: []
     target: []
@@ -3079,8 +3108,10 @@ targets:
       effective_claim: true
       openapi_paths_present: []
       openrpc_present: false
-  discrepancies: []
-discrepancy_summary: {}
+  discrepancies:
+  - owner-module-path-missing
+discrepancy_summary:
+  owner-module-path-missing: 48
 truthful_status:
   fully_certifiable: false
   fully_rfc_compliant: false

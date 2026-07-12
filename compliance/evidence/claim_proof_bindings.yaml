@@ -3672,10 +3672,10 @@ bindings:
 - claim_id: extension:set
   feature_id: extension:set
   targets:
-  - RFC 7952
+  - RFC 8417
   profile: null
   positive_tests:
-  - tests/unit/test_rfc7952_security_event_token.py
+  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
   negative_tests: []
   evidence_refs:
   - compliance/evidence/tier3/jwt/
@@ -5170,8 +5170,8 @@ bindings:
   evidence_refs:
   - compliance/evidence/tier3/cli-operator-surface/
   security_sensitive: false
-- claim_id: flag:enable_rfc7952
-  feature_id: flag:enable_rfc7952
+- claim_id: flag:enable_rfc8417
+  feature_id: flag:enable_rfc8417
   targets:
   - CLI operator surface
   profile: null
@@ -9435,10 +9435,10 @@ bindings:
 - claim_id: target:rfc-7952
   feature_id: target:rfc-7952
   targets:
-  - RFC 7952
+  - RFC 8417
   profile: null
   positive_tests:
-  - tests/unit/test_rfc7952_security_event_token.py
+  - pkgs/10-concrete/tigrbl-set-concrete/tests/test_rfc8417.py
   negative_tests:
   - tests/negative/test_certification_attack_paths.py
   - tests/negative/test_hardening_runtime_enforcement.py

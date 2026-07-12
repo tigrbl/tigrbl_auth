@@ -172,8 +172,8 @@ EXTENSION_REGISTRY: Final[dict[str, dict[str, Any]]] = {
         "boundary": "extension_quarantine",
     },
     "set": {
-        "flags": ("enable_rfc7952",),
-        "targets": ("RFC 7952",),
+        "flags": ("enable_rfc8417",),
+        "targets": ("RFC 8417",),
         "boundary": "extension_quarantine",
     },
     "webpush": {
