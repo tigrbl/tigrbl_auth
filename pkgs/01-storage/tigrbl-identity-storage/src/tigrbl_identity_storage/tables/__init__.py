@@ -54,6 +54,7 @@ from .credential_issuance_state import CredentialDeferredTransaction,CredentialI
 from .presentation_state import PresentationConsent,PresentationReplay,PresentationTransaction,VerifierRegistration
 from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
 from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
+from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -199,6 +200,10 @@ _TABLE_MODELS = (
     SvidRecord,
     SpiffeTrustBundle,
     TrustDomainFederation,
+    SecurityEvent,
+    SecurityEventSubscription,
+    SecurityEventDelivery,
+    SecurityEventReplay,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -394,6 +399,10 @@ __all__ = [
     "SvidRecord",
     "SpiffeTrustBundle",
     "TrustDomainFederation",
+    "SecurityEvent",
+    "SecurityEventSubscription",
+    "SecurityEventDelivery",
+    "SecurityEventReplay",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
