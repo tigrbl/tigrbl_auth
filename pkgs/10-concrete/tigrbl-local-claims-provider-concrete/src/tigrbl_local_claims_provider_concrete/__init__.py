@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
-from tigrbl_identity_contracts.oidc import ClaimsRequest, ClaimsResult
-from tigrbl_oidc_bases import ClaimsProviderBase
+from tigrbl_identity_contracts.claims import ClaimsRequest, ClaimsResult
+from tigrbl_identity_claims_bases import ClaimsProviderBase
 
 
 class LocalClaimsProvider(ClaimsProviderBase):

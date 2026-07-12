@@ -9,6 +9,8 @@ dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-oidc-bases==0.4.0.dev2",
     "tigrbl-local-claims-provider-concrete==0.4.0.dev2",
+    "tigrbl-eap-acr-concrete==0.4.0.dev2",
+    "tigrbl-identity-assurance-concrete==0.4.0.dev2",
 ]
 
 [build-system]

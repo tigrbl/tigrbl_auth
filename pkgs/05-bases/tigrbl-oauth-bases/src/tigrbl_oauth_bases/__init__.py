@@ -1,13 +1,5 @@
-"""Base classes for concrete OAuth implementations."""
+"""Compatibility exports for protocol-neutral authorization bases."""
 
-from abc import ABC
-
-from tigrbl_identity_contracts.oauth import ScopeMatcherPort, ScopeMatchRequest, ScopeMatchResult
-
-
-class ScopeMatcherBase(ScopeMatcherPort, ABC):
-    def match(self, request: ScopeMatchRequest, /) -> ScopeMatchResult:
-        raise NotImplementedError
-
+from tigrbl_authz_policy_bases import ScopeMatcherBase
 
 __all__ = ["ScopeMatcherBase"]

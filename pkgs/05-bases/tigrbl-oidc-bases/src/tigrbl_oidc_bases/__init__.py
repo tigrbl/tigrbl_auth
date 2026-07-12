@@ -1,25 +1,6 @@
-"""Base classes for concrete OIDC strategies."""
+"""Compatibility exports for protocol-neutral identity bases."""
 
-from abc import ABC
-
-from tigrbl_identity_contracts.oidc import (
-    ClaimsProviderPort,
-    ClaimsRequest,
-    ClaimsResult,
-    SubjectIdentifierRequest,
-    SubjectIdentifierResult,
-    SubjectIdentifierStrategyPort,
-)
-
-
-class ClaimsProviderBase(ClaimsProviderPort, ABC):
-    async def claims(self, request: ClaimsRequest, /) -> ClaimsResult:
-        raise NotImplementedError
-
-
-class SubjectIdentifierStrategyBase(SubjectIdentifierStrategyPort, ABC):
-    def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
-        raise NotImplementedError
-
+from tigrbl_identity_claims_bases import ClaimsProviderBase
+from tigrbl_identity_model_bases import SubjectIdentifierStrategyBase
 
 __all__ = ["ClaimsProviderBase", "SubjectIdentifierStrategyBase"]

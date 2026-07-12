@@ -99,6 +99,12 @@ dependencies = [
     "tigrbl-set-concrete==0.4.0.dev2",
     "tigrbl-oidc-claims-concrete==0.4.0.dev2",
     "tigrbl-oidc-subject-strategy==0.4.0.dev2",
+    "tigrbl-identity-claims-bases==0.4.0.dev2",
+    "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
+    "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
+    "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
+    "tigrbl-eap-acr-concrete==0.4.0.dev2",
+    "tigrbl-identity-assurance-concrete==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
@@ -342,6 +348,12 @@ tigrbl-authz-policy-obligations-concrete = { path = "pkgs/10-concrete/tigrbl-aut
 tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
+tigrbl-identity-claims-bases = { path = "pkgs/05-bases/tigrbl-identity-claims-bases", editable = true }
+tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
+tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
+tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
+tigrbl-eap-acr-concrete = { path = "pkgs/10-concrete/tigrbl-eap-acr-concrete", editable = true }
+tigrbl-identity-assurance-concrete = { path = "pkgs/10-concrete/tigrbl-identity-assurance-concrete", editable = true }
 tigrbl-user-identity-concrete = { path = "pkgs/10-concrete/tigrbl-user-identity-concrete", editable = true }
 tigrbl-admin-identity-concrete = { path = "pkgs/10-concrete/tigrbl-admin-identity-concrete", editable = true }
 tigrbl-service-identity-concrete = { path = "pkgs/10-concrete/tigrbl-service-identity-concrete", editable = true }

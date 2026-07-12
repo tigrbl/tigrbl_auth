@@ -9,6 +9,17 @@ from .artifacts import (
     PresentationBuilderBase,
 )
 from .normalization import clean_mapping, clean_tuple, new_model_id, required_text
+from abc import ABC
+from tigrbl_identity_contracts.subject_identifiers import (
+    SubjectIdentifierRequest,
+    SubjectIdentifierResult,
+    SubjectIdentifierStrategyPort,
+)
+
+
+class SubjectIdentifierStrategyBase(SubjectIdentifierStrategyPort, ABC):
+    def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
+        raise NotImplementedError
 
 
 class IdentityBase(Identity):
@@ -29,4 +40,5 @@ __all__ = [
     "clean_tuple",
     "new_model_id",
     "required_text",
+    "SubjectIdentifierStrategyBase",
 ]

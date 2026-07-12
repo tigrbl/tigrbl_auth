@@ -22,6 +22,9 @@ from .admin import *
 from .admin_services import *
 from .adaptive_access import *
 from .assurance import *
+from .authorization_scopes import *
+from .claims import *
+from .subject_identifiers import *
 from .credential_artifacts import *
 from .attestation import *
 from .workload_identity import *

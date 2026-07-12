@@ -2,6 +2,17 @@
 
 from abc import ABC
 from typing import Any, Mapping
+from tigrbl_identity_contracts.authorization_scopes import (
+    ScopeMatcherPort,
+    ScopeMatchRequest,
+    ScopeMatchResult,
+)
+
+
+class ScopeMatcherBase(ScopeMatcherPort, ABC):
+    def match(self, request: ScopeMatchRequest, /) -> ScopeMatchResult:
+        raise NotImplementedError
+
 
 from tigrbl_identity_contracts.policy import (
     AdviceHandlerPort,
@@ -28,7 +39,9 @@ class PolicyRuleBase(PolicyRule):
 
 
 class AttributeResolverBase(AttributeResolverPort, ABC):
-    def resolve(self, designator: AttributeDesignator, request: PolicyRequest, /) -> Any:
+    def resolve(
+        self, designator: AttributeDesignator, request: PolicyRequest, /
+    ) -> Any:
         raise NotImplementedError
 
 
@@ -43,17 +56,23 @@ class PolicyCombinerBase(PolicyCombinerPort, ABC):
 
 
 class ConditionEvaluatorBase(ConditionEvaluatorPort, ABC):
-    def evaluate_condition(self, condition: DynamicCondition, request: PolicyRequest, /) -> bool:
+    def evaluate_condition(
+        self, condition: DynamicCondition, request: PolicyRequest, /
+    ) -> bool:
         raise NotImplementedError
 
 
 class RuleEvaluatorBase(RuleEvaluatorPort, ABC):
-    def evaluate_rule(self, rule: PolicyRule, request: PolicyRequest, /) -> PolicyDecision:
+    def evaluate_rule(
+        self, rule: PolicyRule, request: PolicyRequest, /
+    ) -> PolicyDecision:
         raise NotImplementedError
 
 
 class ObligationHandlerBase(ObligationHandlerPort, ABC):
-    async def handle_obligation(self, obligation: Obligation, decision: PolicyDecision, /) -> None:
+    async def handle_obligation(
+        self, obligation: Obligation, decision: PolicyDecision, /
+    ) -> None:
         raise NotImplementedError
 
 
@@ -71,4 +90,5 @@ __all__ = [
     "PolicyCombinerBase",
     "PolicyRuleBase",
     "RuleEvaluatorBase",
+    "ScopeMatcherBase",
 ]

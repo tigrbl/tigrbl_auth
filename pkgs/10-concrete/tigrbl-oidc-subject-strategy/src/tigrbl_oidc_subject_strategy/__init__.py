@@ -1,26 +1,15 @@
-from __future__ import annotations
+"""Deprecated compatibility façade for protocol-neutral subject identifiers."""
 
-import hashlib
-
-from tigrbl_oidc_bases import SubjectIdentifierStrategyBase
-from tigrbl_identity_contracts.oidc import (
-    SubjectIdentifierKind,
-    SubjectIdentifierRequest,
-    SubjectIdentifierResult,
+from tigrbl_pairwise_subject_identifier_concrete import (
+    PairwiseSubjectIdentifierStrategy,
 )
+from tigrbl_public_subject_identifier_concrete import PublicSubjectIdentifierStrategy
 
-
-class PublicSubjectStrategy(SubjectIdentifierStrategyBase):
-    def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
-        return SubjectIdentifierResult(str(request.subject), SubjectIdentifierKind.PUBLIC)
-
-
-class PairwiseSubjectStrategy(SubjectIdentifierStrategyBase):
-    def derive(self, request: SubjectIdentifierRequest, /) -> SubjectIdentifierResult:
-        sector = request.sector_identifier or request.issuer
-        salt = request.salt or ""
-        digest = hashlib.sha256(f"{sector}\x1f{request.subject}\x1f{salt}".encode("utf-8")).hexdigest()
-        return SubjectIdentifierResult(digest, SubjectIdentifierKind.PAIRWISE)
-
-
-__all__ = ["PairwiseSubjectStrategy", "PublicSubjectStrategy"]
+PairwiseSubjectStrategy = PairwiseSubjectIdentifierStrategy
+PublicSubjectStrategy = PublicSubjectIdentifierStrategy
+__all__ = [
+    "PairwiseSubjectIdentifierStrategy",
+    "PairwiseSubjectStrategy",
+    "PublicSubjectIdentifierStrategy",
+    "PublicSubjectStrategy",
+]
