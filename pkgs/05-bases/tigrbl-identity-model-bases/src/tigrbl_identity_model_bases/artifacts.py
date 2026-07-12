@@ -18,7 +18,9 @@ from tigrbl_identity_contracts.credential_artifacts import (
 
 class CredentialIssuerBase(CredentialIssuer, ABC):
     @abstractmethod
-    def issue(self, claims: Mapping[str, Any], /, **options: Any) -> CredentialArtifact: ...
+    def issue(
+        self, claims: Mapping[str, Any], /, **options: Any
+    ) -> CredentialArtifact: ...
 
 
 class ArtifactVerifierBase(ArtifactVerifier, ABC):
@@ -28,7 +30,9 @@ class ArtifactVerifierBase(ArtifactVerifier, ABC):
 
 class PresentationBuilderBase(PresentationBuilder, ABC):
     @abstractmethod
-    def present(self, credentials: Sequence[CredentialArtifact], /, **options: Any) -> PresentationArtifact: ...
+    def present(
+        self, credentials: Sequence[CredentialArtifact], /, **options: Any
+    ) -> PresentationArtifact: ...
 
 
 __all__ = ["ArtifactVerifierBase", "CredentialIssuerBase", "PresentationBuilderBase"]

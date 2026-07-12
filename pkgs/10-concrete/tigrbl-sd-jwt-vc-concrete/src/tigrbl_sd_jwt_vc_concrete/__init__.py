@@ -1,7 +1,6 @@
-"""Structural SD-JWT VC processing; cryptographic verification is provider-owned."""
+"""Standalone structural SD-JWT VC concrete."""
 
 from __future__ import annotations
-
 import base64
 import json
 from dataclasses import dataclass
@@ -12,8 +11,7 @@ TYP = "dc+sd-jwt"
 
 
 def _decode_json(segment: str) -> Mapping[str, Any]:
-    padding = "=" * (-len(segment) % 4)
-    value = json.loads(base64.urlsafe_b64decode(segment + padding))
+    value = json.loads(base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4)))
     if not isinstance(value, dict):
         raise ValueError("JWT segment must contain a JSON object")
     return value

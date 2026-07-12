@@ -60,6 +60,32 @@ dependencies = [
     "tigrbl-security-authorization-provenance-builder==0.1.0",
     "tigrbl-identity-identities-concrete==0.4.0.dev2",
     "tigrbl-identity-credentials-concrete==0.4.0.dev2",
+    "tigrbl-user-identity-concrete==0.4.0.dev2",
+    "tigrbl-admin-identity-concrete==0.4.0.dev2",
+    "tigrbl-service-identity-concrete==0.4.0.dev2",
+    "tigrbl-client-identity-concrete==0.4.0.dev2",
+    "tigrbl-machine-identity-concrete==0.4.0.dev2",
+    "tigrbl-workload-identity-concrete==0.4.0.dev2",
+    "tigrbl-device-identity-concrete==0.4.0.dev2",
+    "tigrbl-password-credential-concrete==0.4.0.dev2",
+    "tigrbl-password-reset-credential-concrete==0.4.0.dev2",
+    "tigrbl-api-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-service-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-client-secret-credential-concrete==0.4.0.dev2",
+    "tigrbl-mfa-credential-concrete==0.4.0.dev2",
+    "tigrbl-passkey-credential-concrete==0.4.0.dev2",
+    "tigrbl-service-credential-concrete==0.4.0.dev2",
+    "tigrbl-webauthn-credential-concrete==0.4.0.dev2",
+    "tigrbl-passwordless-credential-concrete==0.4.0.dev2",
+    "tigrbl-mfa-factor-concrete==0.4.0.dev2",
+    "tigrbl-mtls-certificate-credential-concrete==0.4.0.dev2",
+    "tigrbl-dpop-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-local-claims-provider-concrete==0.4.0.dev2",
+    "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
+    "tigrbl-mdoc-concrete==0.4.0.dev2",
+    "tigrbl-vcdm-concrete==0.4.0.dev2",
+    "tigrbl-eat-concrete==0.4.0.dev2",
+    "tigrbl-corim-concrete==0.4.0.dev2",
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "tigrbl-identity-admin-advanced-authenticator-registry==0.4.0.dev2",
     "tigrbl-identity-admin-auth-anomaly-detector==0.4.0.dev2",
@@ -316,6 +342,32 @@ tigrbl-authz-policy-obligations-concrete = { path = "pkgs/10-concrete/tigrbl-aut
 tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/tigrbl-security-authorization-provenance-builder", editable = true }
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
+tigrbl-user-identity-concrete = { path = "pkgs/10-concrete/tigrbl-user-identity-concrete", editable = true }
+tigrbl-admin-identity-concrete = { path = "pkgs/10-concrete/tigrbl-admin-identity-concrete", editable = true }
+tigrbl-service-identity-concrete = { path = "pkgs/10-concrete/tigrbl-service-identity-concrete", editable = true }
+tigrbl-client-identity-concrete = { path = "pkgs/10-concrete/tigrbl-client-identity-concrete", editable = true }
+tigrbl-machine-identity-concrete = { path = "pkgs/10-concrete/tigrbl-machine-identity-concrete", editable = true }
+tigrbl-workload-identity-concrete = { path = "pkgs/10-concrete/tigrbl-workload-identity-concrete", editable = true }
+tigrbl-device-identity-concrete = { path = "pkgs/10-concrete/tigrbl-device-identity-concrete", editable = true }
+tigrbl-password-credential-concrete = { path = "pkgs/10-concrete/tigrbl-password-credential-concrete", editable = true }
+tigrbl-password-reset-credential-concrete = { path = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete", editable = true }
+tigrbl-api-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-api-key-credential-concrete", editable = true }
+tigrbl-service-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-service-key-credential-concrete", editable = true }
+tigrbl-client-secret-credential-concrete = { path = "pkgs/10-concrete/tigrbl-client-secret-credential-concrete", editable = true }
+tigrbl-mfa-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-credential-concrete", editable = true }
+tigrbl-passkey-credential-concrete = { path = "pkgs/10-concrete/tigrbl-passkey-credential-concrete", editable = true }
+tigrbl-service-credential-concrete = { path = "pkgs/10-concrete/tigrbl-service-credential-concrete", editable = true }
+tigrbl-webauthn-credential-concrete = { path = "pkgs/10-concrete/tigrbl-webauthn-credential-concrete", editable = true }
+tigrbl-passwordless-credential-concrete = { path = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete", editable = true }
+tigrbl-mfa-factor-concrete = { path = "pkgs/10-concrete/tigrbl-mfa-factor-concrete", editable = true }
+tigrbl-mtls-certificate-credential-concrete = { path = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete", editable = true }
+tigrbl-dpop-key-credential-concrete = { path = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete", editable = true }
+tigrbl-local-claims-provider-concrete = { path = "pkgs/10-concrete/tigrbl-local-claims-provider-concrete", editable = true }
+tigrbl-sd-jwt-vc-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete", editable = true }
+tigrbl-mdoc-concrete = { path = "pkgs/10-concrete/tigrbl-mdoc-concrete", editable = true }
+tigrbl-vcdm-concrete = { path = "pkgs/10-concrete/tigrbl-vcdm-concrete", editable = true }
+tigrbl-eat-concrete = { path = "pkgs/10-concrete/tigrbl-eat-concrete", editable = true }
+tigrbl-corim-concrete = { path = "pkgs/10-concrete/tigrbl-corim-concrete", editable = true }
 tigrbl-security-key-rotation-policy-contracts = { path = "pkgs/02-contracts/tigrbl-security-key-rotation-policy-contracts", editable = true }
 tigrbl-identity-admin-advanced-authenticator-registry = { path = "pkgs/deprecated/tigrbl-identity-admin-advanced-authenticator-registry", editable = true }
 tigrbl-identity-admin-auth-anomaly-detector = { path = "pkgs/40-capabilities/tigrbl-identity-admin-auth-anomaly-detector", editable = true }

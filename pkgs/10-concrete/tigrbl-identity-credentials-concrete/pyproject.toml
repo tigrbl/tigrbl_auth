@@ -24,6 +24,24 @@ classifiers = [
 dependencies = [
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-identity-model-bases==0.4.0.dev2",
+    "tigrbl-password-credential-concrete==0.4.0.dev2",
+    "tigrbl-password-reset-credential-concrete==0.4.0.dev2",
+    "tigrbl-api-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-service-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-client-secret-credential-concrete==0.4.0.dev2",
+    "tigrbl-mfa-credential-concrete==0.4.0.dev2",
+    "tigrbl-passkey-credential-concrete==0.4.0.dev2",
+    "tigrbl-service-credential-concrete==0.4.0.dev2",
+    "tigrbl-webauthn-credential-concrete==0.4.0.dev2",
+    "tigrbl-passwordless-credential-concrete==0.4.0.dev2",
+    "tigrbl-mfa-factor-concrete==0.4.0.dev2",
+    "tigrbl-mtls-certificate-credential-concrete==0.4.0.dev2",
+    "tigrbl-dpop-key-credential-concrete==0.4.0.dev2",
+    "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
+    "tigrbl-mdoc-concrete==0.4.0.dev2",
+    "tigrbl-vcdm-concrete==0.4.0.dev2",
+    "tigrbl-eat-concrete==0.4.0.dev2",
+    "tigrbl-corim-concrete==0.4.0.dev2",
 ]
 
 [project.urls]

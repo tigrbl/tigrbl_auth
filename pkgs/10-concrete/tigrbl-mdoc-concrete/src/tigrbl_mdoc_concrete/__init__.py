@@ -1,6 +1,4 @@
-"""Representation model for ISO/IEC 18013-5 mdoc issuer-signed data."""
-
-from __future__ import annotations
+"""Standalone ISO mdoc structural concrete."""
 
 from dataclasses import dataclass
 from typing import Any, Mapping
@@ -25,10 +23,16 @@ def parse_mdoc(value: Mapping[str, Any]) -> Mdoc:
     issuer_auth = issuer_signed.get("issuerAuth")
     if not isinstance(namespaces, Mapping) or not isinstance(issuer_auth, bytes):
         raise ValueError("issuerSigned requires nameSpaces and byte-valued issuerAuth")
-    normalized: dict[str, tuple[Mapping[str, Any], ...]] = {}
+    normalized = {}
     for name, items in namespaces.items():
-        if not isinstance(name, str) or not isinstance(items, (list, tuple)) or not all(isinstance(i, Mapping) for i in items):
-            raise ValueError("mdoc namespaces must map strings to issuer-signed item arrays")
+        if (
+            not isinstance(name, str)
+            or not isinstance(items, (list, tuple))
+            or not all(isinstance(i, Mapping) for i in items)
+        ):
+            raise ValueError(
+                "mdoc namespaces must map strings to issuer-signed item arrays"
+            )
         normalized[name] = tuple(dict(i) for i in items)
     device_signed = value.get("deviceSigned")
     if device_signed is not None and not isinstance(device_signed, Mapping):

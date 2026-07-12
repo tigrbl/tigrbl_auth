@@ -3,7 +3,12 @@
 from tigrbl_identity_contracts.credentials import Credential
 from tigrbl_identity_contracts.principals import Identity
 
-from .artifacts import ArtifactVerifierBase, CredentialIssuerBase, PresentationBuilderBase
+from .artifacts import (
+    ArtifactVerifierBase,
+    CredentialIssuerBase,
+    PresentationBuilderBase,
+)
+from .normalization import clean_mapping, clean_tuple, new_model_id, required_text
 
 
 class IdentityBase(Identity):
@@ -20,4 +25,8 @@ __all__ = [
     "CredentialIssuerBase",
     "IdentityBase",
     "PresentationBuilderBase",
+    "clean_mapping",
+    "clean_tuple",
+    "new_model_id",
+    "required_text",
 ]
