@@ -2569,6 +2569,10 @@ dependencies = [
     { name = "tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete" },
     { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-digital-credential-issuer-local" },
+    { name = "tigrbl-digital-credential-status-provider" },
+    { name = "tigrbl-digital-credential-trust-provider" },
+    { name = "tigrbl-digital-presentation-verifier" },
     { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eap-acr-concrete" },
     { name = "tigrbl-eat-concrete" },
@@ -2831,6 +2835,10 @@ requires-dist = [
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
     { name = "tigrbl-did-concrete", editable = "pkgs/10-concrete/tigrbl-did-concrete" },
     { name = "tigrbl-digital-credential-bases", editable = "pkgs/05-bases/tigrbl-digital-credential-bases" },
+    { name = "tigrbl-digital-credential-issuer-local", editable = "pkgs/20-providers/tigrbl-digital-credential-issuer-local" },
+    { name = "tigrbl-digital-credential-status-provider", editable = "pkgs/20-providers/tigrbl-digital-credential-status-provider" },
+    { name = "tigrbl-digital-credential-trust-provider", editable = "pkgs/20-providers/tigrbl-digital-credential-trust-provider" },
+    { name = "tigrbl-digital-presentation-verifier", editable = "pkgs/20-providers/tigrbl-digital-presentation-verifier" },
     { name = "tigrbl-dpop-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eap-acr-concrete", editable = "pkgs/10-concrete/tigrbl-eap-acr-concrete" },
     { name = "tigrbl-eat-concrete", editable = "pkgs/10-concrete/tigrbl-eat-concrete" },
@@ -3755,6 +3763,58 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-digital-credential-issuer-local"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-digital-credential-issuer-local" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-digital-credential-status-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-digital-credential-status-provider" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-digital-credential-trust-provider"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-digital-credential-trust-provider" }
+dependencies = [
+    { name = "tigrbl-security-trust-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" }]
+
+[[package]]
+name = "tigrbl-digital-presentation-verifier"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/20-providers/tigrbl-digital-presentation-verifier" }
+dependencies = [
+    { name = "tigrbl-digital-credential-bases" },
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-digital-credential-bases", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+]
 
 [[package]]
 name = "tigrbl-dpop-key-credential-concrete"
