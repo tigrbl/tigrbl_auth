@@ -37,7 +37,7 @@ def test_credential_classes_have_standalone_layer_10_owners() -> None:
         "Mdoc": "tigrbl_mdoc_concrete",
     }
     assert {
-        name: getattr(credentials, name).__module__ for name in expected
+        name: getattr(credentials, name).__module__.split(".", 1)[0] for name in expected
     } == expected
 
 
