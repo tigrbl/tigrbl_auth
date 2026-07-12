@@ -1,0 +1,10 @@
+[project]
+name="tigrbl-auth-protocol-jwt"
+version="0.4.0.dev2"
+requires-python=">=3.10,<3.15"
+dependencies=["tigrbl-identity-contracts==0.4.0.dev2","tigrbl-issuer-claim-concrete==0.4.0.dev2","tigrbl-subject-claim-concrete==0.4.0.dev2","tigrbl-audience-claim-concrete==0.4.0.dev2","tigrbl-expiration-claim-concrete==0.4.0.dev2","tigrbl-not-before-claim-concrete==0.4.0.dev2","tigrbl-issued-at-claim-concrete==0.4.0.dev2","tigrbl-jwt-id-claim-concrete==0.4.0.dev2"]
+[build-system]
+requires=["poetry-core>=1.0.0"]
+build-backend="poetry.core.masonry.api"
+[tool.poetry]
+packages=[{include="tigrbl_auth_protocol_jwt",from="src"}]

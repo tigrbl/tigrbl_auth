@@ -6,6 +6,7 @@ from tigrbl_identity_contracts.claims import (
     ClaimsRequest,
     ClaimsResult,
 )
+from .claim import ClaimBase
 
 
 class ClaimsProviderBase(ClaimsProviderPort, ABC):
@@ -13,4 +14,4 @@ class ClaimsProviderBase(ClaimsProviderPort, ABC):
         raise NotImplementedError
 
 
-__all__ = ["ClaimsProviderBase"]
+__all__ = ["ClaimBase", "ClaimsProviderBase"]

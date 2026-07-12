@@ -1,0 +1,31 @@
+from tigrbl_identity_contracts.claims import ClaimSet
+from tigrbl_audience_claim_concrete import AudienceClaim
+from tigrbl_expiration_claim_concrete import ExpirationClaim
+from tigrbl_issued_at_claim_concrete import IssuedAtClaim
+from tigrbl_issuer_claim_concrete import IssuerClaim
+from tigrbl_jwt_id_claim_concrete import JwtIdClaim
+from tigrbl_not_before_claim_concrete import NotBeforeClaim
+from tigrbl_subject_claim_concrete import SubjectClaim
+
+JWT_VERSION = "RFC 7519"
+JWT_CLAIM_CLASSES = (
+    IssuerClaim,
+    SubjectClaim,
+    AudienceClaim,
+    ExpirationClaim,
+    NotBeforeClaim,
+    IssuedAtClaim,
+    JwtIdClaim,
+)
+
+
+def compose_jwt_claim_set(*claims) -> ClaimSet:
+    unexpected = [
+        claim.name for claim in claims if not isinstance(claim, JWT_CLAIM_CLASSES)
+    ]
+    if unexpected:
+        raise ValueError(f"claims are not registered by {JWT_VERSION}: {unexpected}")
+    return ClaimSet(tuple(claims), "jwt", JWT_VERSION)
+
+
+__all__ = ["JWT_CLAIM_CLASSES", "JWT_VERSION", "compose_jwt_claim_set"]

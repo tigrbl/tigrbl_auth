@@ -100,6 +100,14 @@ dependencies = [
     "tigrbl-oidc-claims-concrete==0.4.0.dev2",
     "tigrbl-oidc-subject-strategy==0.4.0.dev2",
     "tigrbl-identity-claims-bases==0.4.0.dev2",
+    "tigrbl-issuer-claim-concrete==0.4.0.dev2",
+    "tigrbl-subject-claim-concrete==0.4.0.dev2",
+    "tigrbl-audience-claim-concrete==0.4.0.dev2",
+    "tigrbl-expiration-claim-concrete==0.4.0.dev2",
+    "tigrbl-not-before-claim-concrete==0.4.0.dev2",
+    "tigrbl-issued-at-claim-concrete==0.4.0.dev2",
+    "tigrbl-jwt-id-claim-concrete==0.4.0.dev2",
+    "tigrbl-auth-protocol-jwt==0.4.0.dev2",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
@@ -349,6 +357,14 @@ tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/t
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
 tigrbl-identity-claims-bases = { path = "pkgs/05-bases/tigrbl-identity-claims-bases", editable = true }
+tigrbl-issuer-claim-concrete = { path = "pkgs/10-concrete/tigrbl-issuer-claim-concrete", editable = true }
+tigrbl-subject-claim-concrete = { path = "pkgs/10-concrete/tigrbl-subject-claim-concrete", editable = true }
+tigrbl-audience-claim-concrete = { path = "pkgs/10-concrete/tigrbl-audience-claim-concrete", editable = true }
+tigrbl-expiration-claim-concrete = { path = "pkgs/10-concrete/tigrbl-expiration-claim-concrete", editable = true }
+tigrbl-not-before-claim-concrete = { path = "pkgs/10-concrete/tigrbl-not-before-claim-concrete", editable = true }
+tigrbl-issued-at-claim-concrete = { path = "pkgs/10-concrete/tigrbl-issued-at-claim-concrete", editable = true }
+tigrbl-jwt-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-id-claim-concrete", editable = true }
+tigrbl-auth-protocol-jwt = { path = "pkgs/50-protocols/tigrbl-auth-protocol-jwt", editable = true }
 tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
 tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
 tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
