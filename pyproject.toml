@@ -108,6 +108,23 @@ dependencies = [
     "tigrbl-issued-at-claim-concrete==0.4.0.dev2",
     "tigrbl-jwt-id-claim-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-jwt==0.4.0.dev2",
+    "tigrbl-authentication-time-claim-concrete==0.4.0.dev2",
+    "tigrbl-nonce-claim-concrete==0.4.0.dev2",
+    "tigrbl-authentication-context-claim-concrete==0.4.0.dev2",
+    "tigrbl-authentication-methods-claim-concrete==0.4.0.dev2",
+    "tigrbl-authorized-party-claim-concrete==0.4.0.dev2",
+    "tigrbl-confirmation-claim-concrete==0.4.0.dev2",
+    "tigrbl-scope-claim-concrete==0.4.0.dev2",
+    "tigrbl-client-id-claim-concrete==0.4.0.dev2",
+    "tigrbl-verified-claims-claim-concrete==0.4.0.dev2",
+    "tigrbl-credential-type-claim-concrete==0.4.0.dev2",
+    "tigrbl-credential-status-claim-concrete==0.4.0.dev2",
+    "tigrbl-security-events-claim-concrete==0.4.0.dev2",
+    "tigrbl-transaction-id-claim-concrete==0.4.0.dev2",
+    "tigrbl-eat-profile-claim-concrete==0.4.0.dev2",
+    "tigrbl-security-event-protocol-set==0.4.0.dev2",
+    "tigrbl-attestation-protocol-eat==0.4.0.dev2",
+    "tigrbl-credential-profile-sd-jwt-vc==0.4.0.dev2",
     "tigrbl-authorization-scope-set-matcher-concrete==0.4.0.dev2",
     "tigrbl-public-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
@@ -365,6 +382,23 @@ tigrbl-not-before-claim-concrete = { path = "pkgs/10-concrete/tigrbl-not-before-
 tigrbl-issued-at-claim-concrete = { path = "pkgs/10-concrete/tigrbl-issued-at-claim-concrete", editable = true }
 tigrbl-jwt-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-jwt-id-claim-concrete", editable = true }
 tigrbl-auth-protocol-jwt = { path = "pkgs/50-protocols/tigrbl-auth-protocol-jwt", editable = true }
+tigrbl-authentication-time-claim-concrete = { path = "pkgs/10-concrete/tigrbl-authentication-time-claim-concrete", editable = true }
+tigrbl-nonce-claim-concrete = { path = "pkgs/10-concrete/tigrbl-nonce-claim-concrete", editable = true }
+tigrbl-authentication-context-claim-concrete = { path = "pkgs/10-concrete/tigrbl-authentication-context-claim-concrete", editable = true }
+tigrbl-authentication-methods-claim-concrete = { path = "pkgs/10-concrete/tigrbl-authentication-methods-claim-concrete", editable = true }
+tigrbl-authorized-party-claim-concrete = { path = "pkgs/10-concrete/tigrbl-authorized-party-claim-concrete", editable = true }
+tigrbl-confirmation-claim-concrete = { path = "pkgs/10-concrete/tigrbl-confirmation-claim-concrete", editable = true }
+tigrbl-scope-claim-concrete = { path = "pkgs/10-concrete/tigrbl-scope-claim-concrete", editable = true }
+tigrbl-client-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-client-id-claim-concrete", editable = true }
+tigrbl-verified-claims-claim-concrete = { path = "pkgs/10-concrete/tigrbl-verified-claims-claim-concrete", editable = true }
+tigrbl-credential-type-claim-concrete = { path = "pkgs/10-concrete/tigrbl-credential-type-claim-concrete", editable = true }
+tigrbl-credential-status-claim-concrete = { path = "pkgs/10-concrete/tigrbl-credential-status-claim-concrete", editable = true }
+tigrbl-security-events-claim-concrete = { path = "pkgs/10-concrete/tigrbl-security-events-claim-concrete", editable = true }
+tigrbl-transaction-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete", editable = true }
+tigrbl-eat-profile-claim-concrete = { path = "pkgs/10-concrete/tigrbl-eat-profile-claim-concrete", editable = true }
+tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
+tigrbl-attestation-protocol-eat = { path = "pkgs/50-protocols/tigrbl-attestation-protocol-eat", editable = true }
+tigrbl-credential-profile-sd-jwt-vc = { path = "pkgs/50-protocols/tigrbl-credential-profile-sd-jwt-vc", editable = true }
 tigrbl-authorization-scope-set-matcher-concrete = { path = "pkgs/10-concrete/tigrbl-authorization-scope-set-matcher-concrete", editable = true }
 tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete", editable = true }
 tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }

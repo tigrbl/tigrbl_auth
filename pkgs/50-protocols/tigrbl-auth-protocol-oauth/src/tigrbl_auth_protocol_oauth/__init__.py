@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .claim_sets import OAUTH_EXTENSION_CLAIMS, compose_oauth_claim_set
 from .protocol import (
     DPoPProof,
     DeviceAuthorization,
@@ -24,6 +25,8 @@ __all__ = [
     "OAuthGrantStatus",
     "OAuthProtocolService",
     "OAuthRepositoryPort",
+    "OAUTH_EXTENSION_CLAIMS",
     "TokenExchangeResult",
+    "compose_oauth_claim_set",
     "sha256_thumbprint",
 ]
