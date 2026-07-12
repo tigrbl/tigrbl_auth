@@ -34,6 +34,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "tigrbl-jose-concrete==0.4.0.dev2",
     "tigrbl-jose-bases==0.4.0.dev2",
     "tigrbl-security-key-rotation-policy-contracts==0.1.0",
     "bcrypt==5.0.0",
