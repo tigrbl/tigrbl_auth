@@ -33,7 +33,9 @@ def str_tuple(values: Any, *, sort: bool = True) -> tuple[str, ...]:
 def normal_tuple(values: Iterable[str] | None) -> tuple[str, ...]:
     """Return a sorted tuple of non-empty stripped string values."""
 
-    return tuple(sorted({str(value).strip() for value in values or () if str(value).strip()}))
+    return tuple(
+        sorted({str(value).strip() for value in values or () if str(value).strip()})
+    )
 
 
 __all__ = ["normal_tuple", "pick_fields", "row_active", "row_value", "str_tuple"]

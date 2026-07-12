@@ -4,6 +4,20 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+from typing import Literal
+
+DigestAlgorithm = Literal["sha256", "sha384", "sha512"]
+
+
+def digest_bytes(data: bytes, algorithm: DigestAlgorithm = "sha256") -> bytes:
+    try:
+        return hashlib.new(algorithm, data).digest()
+    except ValueError as exc:
+        raise ValueError(f"unsupported digest algorithm: {algorithm}") from exc
+
+
+def digest_text(value: str, algorithm: DigestAlgorithm = "sha256") -> str:
+    return digest_bytes(value.encode("utf-8"), algorithm).hex()
 
 
 def sha256_text_digest(value: str) -> str:
@@ -30,4 +44,12 @@ def constant_time_digest_equal(left: bytes, right: bytes) -> bool:
     return hmac.compare_digest(left, right)
 
 
-__all__ = ["constant_time_digest_equal", "sha256_digest", "sha256_text_digest", "token_hash"]
+__all__ = [
+    "DigestAlgorithm",
+    "constant_time_digest_equal",
+    "digest_bytes",
+    "digest_text",
+    "sha256_digest",
+    "sha256_text_digest",
+    "token_hash",
+]

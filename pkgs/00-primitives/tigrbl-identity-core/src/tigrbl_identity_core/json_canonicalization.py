@@ -105,7 +105,9 @@ def _serialize(value: Any) -> str:
         return _serialize_object(value)
     if _is_json_sequence(value):
         return "[" + ",".join(_serialize(item) for item in value) + "]"
-    raise JCSCanonicalizationError(f"unsupported JCS JSON value: {type(value).__name__}")
+    raise JCSCanonicalizationError(
+        f"unsupported JCS JSON value: {type(value).__name__}"
+    )
 
 
 def _serialize_object(value: Mapping[Any, Any]) -> str:

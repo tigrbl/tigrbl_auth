@@ -11,7 +11,9 @@ def _as_posix(value: str) -> str:
     return value.replace("\\", "/")
 
 
-def safe_display_path(path: Path | str, repo_root: Path, *, external_label: str = "<local-path>") -> str:
+def safe_display_path(
+    path: Path | str, repo_root: Path, *, external_label: str = "<local-path>"
+) -> str:
     """Return a stable repo-safe path for user-facing reports and committed artifacts."""
 
     candidate = Path(path)
@@ -54,7 +56,9 @@ def sanitize_local_paths(value: Any, repo_root: Path) -> Any:
     """Recursively redact local absolute paths from generated repo artifacts."""
 
     if isinstance(value, dict):
-        return {key: sanitize_local_paths(item, repo_root) for key, item in value.items()}
+        return {
+            key: sanitize_local_paths(item, repo_root) for key, item in value.items()
+        }
     if isinstance(value, list):
         return [sanitize_local_paths(item, repo_root) for item in value]
     if isinstance(value, tuple):

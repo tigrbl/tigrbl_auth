@@ -81,6 +81,37 @@ class ClientRef:
 
 
 @dataclass(frozen=True, slots=True)
+class IdentityRef:
+    id: IdentityId
+    tenant_id: TenantId | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class CredentialRef:
+    id: CredentialId
+    identity_id: IdentityId | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class WalletRef:
+    id: WalletId
+    instance_id: WalletInstanceId | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class WorkloadRef:
+    id: WorkloadId
+    trust_domain_id: TrustDomainId | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class ArtifactRef:
+    id: str
+    kind: str
+    digest: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class Scope:
     values: tuple[ScopeValue, ...]
 
@@ -106,6 +137,11 @@ __all__ = [
     "ClientId",
     "ClientRef",
     "CredentialId",
+    "CredentialRef",
+    "IdentityRef",
+    "WalletRef",
+    "WorkloadRef",
+    "ArtifactRef",
     "IdentityId",
     "TokenId",
     "PresentationId",

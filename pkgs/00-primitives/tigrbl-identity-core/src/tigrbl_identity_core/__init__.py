@@ -3,9 +3,18 @@
 from __future__ import annotations
 
 from .base64url import base64url_decode, base64url_encode
-from .clock import Clock, FrozenClock, SystemClock, parse_time, unix_seconds, utc_now, utc_now_iso
+from .clock import (
+    Clock,
+    FrozenClock,
+    SystemClock,
+    parse_time,
+    unix_seconds,
+    utc_now,
+    utc_now_iso,
+)
 from .entity_keys import normalize_entity, tenant_key
-from .digests import sha256_text_digest, token_hash
+from .digests import digest_bytes, digest_text, sha256_text_digest, token_hash
+from .constant_time import bytes_equal, text_equal
 from .digests import constant_time_digest_equal, sha256_digest
 from .artifacts import (
     ArtifactKind,
@@ -27,7 +36,11 @@ from .media_types import (
     MediaType,
 )
 from .nonces import MIN_NONCE_BYTES, generate_nonce, nonce_equal, validate_nonce
-from .protocol_tags import PROTOCOL_TAGS, normalize_protocol_tag, normalize_protocol_tags
+from .protocol_tags import (
+    PROTOCOL_TAGS,
+    normalize_protocol_tag,
+    normalize_protocol_tags,
+)
 from .uris import require_absolute_uri
 from .errors import (
     IdentityAuthorizationError,
@@ -47,6 +60,11 @@ from .primitives import (
     Audience,
     ClientId,
     ClientRef,
+    CredentialRef,
+    IdentityRef,
+    WalletRef,
+    WorkloadRef,
+    ArtifactRef,
     CredentialId,
     IdentityId,
     TokenId,
@@ -100,6 +118,11 @@ __all__ = [
     "Clock",
     "ClientId",
     "ClientRef",
+    "CredentialRef",
+    "IdentityRef",
+    "WalletRef",
+    "WorkloadRef",
+    "ArtifactRef",
     "CredentialId",
     "CredentialFormat",
     "CredentialTypeId",
@@ -147,6 +170,10 @@ __all__ = [
     "base64url_decode",
     "base64url_encode",
     "constant_time_digest_equal",
+    "bytes_equal",
+    "text_equal",
+    "digest_bytes",
+    "digest_text",
     "canonicalize",
     "canonical_json_bytes",
     "describe_owner",

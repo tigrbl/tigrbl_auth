@@ -72,6 +72,12 @@ class LifecycleStatus(str, Enum):
 
 
 __all__ = [
-    "ArtifactKind", "AttestationKind", "CredentialFormat", "LifecycleStatus",
-    "ManifestKind", "PresentationKind", "TokenKind", "VerificationOutcome",
+    "ArtifactKind",
+    "AttestationKind",
+    "CredentialFormat",
+    "LifecycleStatus",
+    "ManifestKind",
+    "PresentationKind",
+    "TokenKind",
+    "VerificationOutcome",
 ]
