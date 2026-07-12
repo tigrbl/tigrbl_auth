@@ -84,6 +84,8 @@ dependencies = [
     "tigrbl-sd-jwt-vc-concrete==0.4.0.dev2",
     "tigrbl-jose-concrete==0.4.0.dev2",
     "tigrbl-sd-jwt-concrete==0.4.0.dev2",
+    "tigrbl-svid-concrete==0.4.0.dev2",
+    "tigrbl-did-concrete==0.4.0.dev2",
     "tigrbl-mdoc-concrete==0.4.0.dev2",
     "tigrbl-vcdm-concrete==0.4.0.dev2",
     "tigrbl-eat-concrete==0.4.0.dev2",
@@ -393,6 +395,8 @@ tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identit
 tigrbl-identity-claims-bases = { path = "pkgs/05-bases/tigrbl-identity-claims-bases", editable = true }
 tigrbl-jose-concrete = { path = "pkgs/10-concrete/tigrbl-jose-concrete", editable = true }
 tigrbl-sd-jwt-concrete = { path = "pkgs/10-concrete/tigrbl-sd-jwt-concrete", editable = true }
+tigrbl-svid-concrete = { path = "pkgs/10-concrete/tigrbl-svid-concrete", editable = true }
+tigrbl-did-concrete = { path = "pkgs/10-concrete/tigrbl-did-concrete", editable = true }
 tigrbl-digital-credential-bases = { path = "pkgs/05-bases/tigrbl-digital-credential-bases", editable = true }
 tigrbl-attestation-bases = { path = "pkgs/05-bases/tigrbl-attestation-bases", editable = true }
 tigrbl-security-event-bases = { path = "pkgs/05-bases/tigrbl-security-event-bases", editable = true }

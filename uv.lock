@@ -2567,6 +2567,7 @@ dependencies = [
     { name = "tigrbl-credential-status-claim-concrete" },
     { name = "tigrbl-credential-type-claim-concrete" },
     { name = "tigrbl-device-identity-concrete" },
+    { name = "tigrbl-did-concrete" },
     { name = "tigrbl-digital-credential-bases" },
     { name = "tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eap-acr-concrete" },
@@ -2671,6 +2672,7 @@ dependencies = [
     { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete" },
     { name = "tigrbl-subject-claim-concrete" },
+    { name = "tigrbl-svid-concrete" },
     { name = "tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete" },
@@ -2827,6 +2829,7 @@ requires-dist = [
     { name = "tigrbl-credential-status-claim-concrete", editable = "pkgs/10-concrete/tigrbl-credential-status-claim-concrete" },
     { name = "tigrbl-credential-type-claim-concrete", editable = "pkgs/10-concrete/tigrbl-credential-type-claim-concrete" },
     { name = "tigrbl-device-identity-concrete", editable = "pkgs/10-concrete/tigrbl-device-identity-concrete" },
+    { name = "tigrbl-did-concrete", editable = "pkgs/10-concrete/tigrbl-did-concrete" },
     { name = "tigrbl-digital-credential-bases", editable = "pkgs/05-bases/tigrbl-digital-credential-bases" },
     { name = "tigrbl-dpop-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-dpop-key-credential-concrete" },
     { name = "tigrbl-eap-acr-concrete", editable = "pkgs/10-concrete/tigrbl-eap-acr-concrete" },
@@ -2935,6 +2938,7 @@ requires-dist = [
     { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
     { name = "tigrbl-subject-claim-concrete", editable = "pkgs/10-concrete/tigrbl-subject-claim-concrete" },
+    { name = "tigrbl-svid-concrete", editable = "pkgs/10-concrete/tigrbl-svid-concrete" },
     { name = "tigrbl-title-claim-concrete", editable = "pkgs/10-concrete/tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete" },
@@ -3729,6 +3733,17 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-did-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-did-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-digital-credential-bases"
@@ -5339,6 +5354,21 @@ dependencies = [
 requires-dist = [
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
+name = "tigrbl-svid-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-svid-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-contracts" },
+    { name = "tigrbl-jose-concrete" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-jose-concrete", specifier = "==0.4.0.dev2" },
 ]
 
 [[package]]
