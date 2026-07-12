@@ -55,6 +55,7 @@ from .presentation_state import PresentationConsent,PresentationReplay,Presentat
 from .attestation_state import AttestationAppraisalPolicy,AttestationEndorsement,AttestationEvidence,AttestationReferenceManifest,AttestationReferenceValue,AttestationResult
 from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
 from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
+from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -204,6 +205,15 @@ _TABLE_MODELS = (
     SecurityEventSubscription,
     SecurityEventDelivery,
     SecurityEventReplay,
+    DidDocument,
+    DidDocumentVersion,
+    DidVerificationMethod,
+    DidService,
+    DidResolutionCache,
+    GnapGrant,
+    GnapContinuation,
+    GnapClientInstance,
+    GnapInteraction,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -403,6 +413,15 @@ __all__ = [
     "SecurityEventSubscription",
     "SecurityEventDelivery",
     "SecurityEventReplay",
+    "DidDocument",
+    "DidDocumentVersion",
+    "DidVerificationMethod",
+    "DidService",
+    "DidResolutionCache",
+    "GnapGrant",
+    "GnapContinuation",
+    "GnapClientInstance",
+    "GnapInteraction",
     "AuthSession",
     "AuthCode",
     "DeviceCode",
