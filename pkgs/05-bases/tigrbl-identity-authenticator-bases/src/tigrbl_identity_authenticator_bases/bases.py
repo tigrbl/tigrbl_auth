@@ -65,7 +65,9 @@ class AuthenticatorBase(IAuthenticator, ABC):
     def supported_amr(self) -> tuple[AmrValue | str, ...]:
         return self.amr
 
-    async def authenticate(self, request: AuthenticationRequest) -> AuthenticationResult:
+    async def authenticate(
+        self, request: AuthenticationRequest
+    ) -> AuthenticationResult:
         raise NotImplementedError
 
 
@@ -76,10 +78,14 @@ class ChallengeAuthenticatorBase(AuthenticatorBase, IChallengeAuthenticator, ABC
         kwargs.setdefault("challenge_based", True)
         super().__init__(**kwargs)  # type: ignore[arg-type]
 
-    async def start_challenge(self, request: ChallengeStartRequest) -> AuthenticationChallenge:
+    async def start_challenge(
+        self, request: ChallengeStartRequest
+    ) -> AuthenticationChallenge:
         raise NotImplementedError
 
-    async def finish_challenge(self, request: ChallengeFinishRequest) -> AuthenticationResult:
+    async def finish_challenge(
+        self, request: ChallengeFinishRequest
+    ) -> AuthenticationResult:
         raise NotImplementedError
 
 

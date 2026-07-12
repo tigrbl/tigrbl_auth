@@ -31,4 +31,24 @@ class AttestationAppraiser(Protocol):
     def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
 
 
-__all__ = ["AppraisalResult", "AttestationAppraiser", "AttestationEvidence", "ReferenceIntegrityManifest"]
+class EvidenceVerifierPort(Protocol):
+    def verify_evidence(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
+
+
+class AttestationAppraiserPort(Protocol):
+    def appraise(self, evidence: AttestationEvidence, /) -> AppraisalResult: ...
+
+
+class ReferenceMaterialProviderPort(Protocol):
+    def resolve_manifest(self, tag_identity: str, /) -> ReferenceIntegrityManifest: ...
+
+
+__all__ = [
+    "AppraisalResult",
+    "AttestationAppraiser",
+    "AttestationAppraiserPort",
+    "AttestationEvidence",
+    "EvidenceVerifierPort",
+    "ReferenceIntegrityManifest",
+    "ReferenceMaterialProviderPort",
+]

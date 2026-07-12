@@ -16,7 +16,9 @@ from tigrbl_security_trust_contracts import AmrValue
 class AmrEmitterMixin:
     amr_validator: Callable[[tuple[str, ...]], bool] | None = None
 
-    def normalize_amr(self, values: Iterable[AmrValue | str]) -> tuple[AmrValue | str, ...]:
+    def normalize_amr(
+        self, values: Iterable[AmrValue | str]
+    ) -> tuple[AmrValue | str, ...]:
         normalized = tuple(values)
         validator = getattr(self, "amr_validator", None)
         if validator is not None:
@@ -36,8 +38,14 @@ class AmrEmitterMixin:
         raw_claims: Mapping[str, Any] | None = None,
     ) -> AuthenticationEvidence:
         return AuthenticationEvidence(
-            amr=self.normalize_amr(amr if amr is not None else getattr(self, "amr", ())),
-            properties=tuple(properties if properties is not None else getattr(self, "properties", ())),
+            amr=self.normalize_amr(
+                amr if amr is not None else getattr(self, "amr", ())
+            ),
+            properties=tuple(
+                properties
+                if properties is not None
+                else getattr(self, "properties", ())
+            ),
             authenticator_kind=getattr(self, "kind", None),
             credential_kind=getattr(self, "credential_kind", None),
             credential_id=credential_id,
@@ -55,15 +63,21 @@ class CredentialKindMixin:
 
 
 class CredentialLookupMixin:
-    async def lookup_credential(self, credential_id: str | None, context: Mapping[str, Any]) -> Any:
+    async def lookup_credential(
+        self, credential_id: str | None, context: Mapping[str, Any]
+    ) -> Any:
         raise NotImplementedError
 
 
 class ChallengeLifecycleMixin:
-    async def load_challenge(self, challenge_id: str, context: Mapping[str, Any]) -> Any:
+    async def load_challenge(
+        self, challenge_id: str, context: Mapping[str, Any]
+    ) -> Any:
         raise NotImplementedError
 
-    async def consume_challenge(self, challenge: Any, context: Mapping[str, Any]) -> Any:
+    async def consume_challenge(
+        self, challenge: Any, context: Mapping[str, Any]
+    ) -> Any:
         raise NotImplementedError
 
 
@@ -73,7 +87,9 @@ class SecretVerifierMixin:
 
 
 class OtpVerifierMixin:
-    def verify_otp(self, code: str, secret: Any, *, context: Mapping[str, Any] | None = None) -> bool:
+    def verify_otp(
+        self, code: str, secret: Any, *, context: Mapping[str, Any] | None = None
+    ) -> bool:
         raise NotImplementedError
 
 
@@ -83,7 +99,9 @@ class RecoveryCodeVerifierMixin:
 
 
 class WebAuthnAssertionMixin:
-    async def verify_webauthn_assertion(self, assertion: Mapping[str, Any], credential: Any) -> Mapping[str, Any]:
+    async def verify_webauthn_assertion(
+        self, assertion: Mapping[str, Any], credential: Any
+    ) -> Mapping[str, Any]:
         raise NotImplementedError
 
 

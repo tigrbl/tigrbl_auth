@@ -100,6 +100,11 @@ dependencies = [
     "tigrbl-oidc-claims-concrete==0.4.0.dev2",
     "tigrbl-oidc-subject-strategy==0.4.0.dev2",
     "tigrbl-identity-claims-bases==0.4.0.dev2",
+    "tigrbl-digital-credential-bases==0.4.0.dev2",
+    "tigrbl-attestation-bases==0.4.0.dev2",
+    "tigrbl-security-event-bases==0.4.0.dev2",
+    "tigrbl-token-bases==0.4.0.dev2",
+    "tigrbl-authentication-assurance-bases==0.4.0.dev2",
     "tigrbl-issuer-claim-concrete==0.4.0.dev2",
     "tigrbl-subject-claim-concrete==0.4.0.dev2",
     "tigrbl-audience-claim-concrete==0.4.0.dev2",
@@ -374,6 +379,11 @@ tigrbl-security-authorization-provenance-builder = { path = "pkgs/20-providers/t
 tigrbl-identity-identities-concrete = { path = "pkgs/10-concrete/tigrbl-identity-identities-concrete", editable = true }
 tigrbl-identity-credentials-concrete = { path = "pkgs/10-concrete/tigrbl-identity-credentials-concrete", editable = true }
 tigrbl-identity-claims-bases = { path = "pkgs/05-bases/tigrbl-identity-claims-bases", editable = true }
+tigrbl-digital-credential-bases = { path = "pkgs/05-bases/tigrbl-digital-credential-bases", editable = true }
+tigrbl-attestation-bases = { path = "pkgs/05-bases/tigrbl-attestation-bases", editable = true }
+tigrbl-security-event-bases = { path = "pkgs/05-bases/tigrbl-security-event-bases", editable = true }
+tigrbl-token-bases = { path = "pkgs/05-bases/tigrbl-token-bases", editable = true }
+tigrbl-authentication-assurance-bases = { path = "pkgs/05-bases/tigrbl-authentication-assurance-bases", editable = true }
 tigrbl-issuer-claim-concrete = { path = "pkgs/10-concrete/tigrbl-issuer-claim-concrete", editable = true }
 tigrbl-subject-claim-concrete = { path = "pkgs/10-concrete/tigrbl-subject-claim-concrete", editable = true }
 tigrbl-audience-claim-concrete = { path = "pkgs/10-concrete/tigrbl-audience-claim-concrete", editable = true }
