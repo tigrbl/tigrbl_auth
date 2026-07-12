@@ -52,6 +52,16 @@ dependencies = [
     "tigrbl-authentication-methods-claim-concrete==0.4.0.dev2",
     "tigrbl-authorized-party-claim-concrete==0.4.0.dev2",
     "tigrbl-verified-claims-claim-concrete==0.4.0.dev2",
+    "tigrbl-place-of-birth-claim-concrete==0.4.0.dev2",
+    "tigrbl-nationalities-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-family-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-given-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-middle-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-salutation-claim-concrete==0.4.0.dev2",
+    "tigrbl-title-claim-concrete==0.4.0.dev2",
+    "tigrbl-msisdn-claim-concrete==0.4.0.dev2",
+    "tigrbl-also-known-as-claim-concrete==0.4.0.dev2",
+    "tigrbl-address-country-code-claim-concrete==0.4.0.dev2",
     "tigrbl-transaction-id-claim-concrete==0.4.0.dev2",
 ]
 [project.urls]

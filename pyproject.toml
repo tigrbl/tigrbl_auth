@@ -122,6 +122,16 @@ dependencies = [
     "tigrbl-scope-claim-concrete==0.4.0.dev2",
     "tigrbl-client-id-claim-concrete==0.4.0.dev2",
     "tigrbl-verified-claims-claim-concrete==0.4.0.dev2",
+    "tigrbl-place-of-birth-claim-concrete==0.4.0.dev2",
+    "tigrbl-nationalities-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-family-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-given-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-birth-middle-name-claim-concrete==0.4.0.dev2",
+    "tigrbl-salutation-claim-concrete==0.4.0.dev2",
+    "tigrbl-title-claim-concrete==0.4.0.dev2",
+    "tigrbl-msisdn-claim-concrete==0.4.0.dev2",
+    "tigrbl-also-known-as-claim-concrete==0.4.0.dev2",
+    "tigrbl-address-country-code-claim-concrete==0.4.0.dev2",
     "tigrbl-credential-type-claim-concrete==0.4.0.dev2",
     "tigrbl-credential-status-claim-concrete==0.4.0.dev2",
     "tigrbl-security-events-claim-concrete==0.4.0.dev2",
@@ -401,6 +411,16 @@ tigrbl-confirmation-claim-concrete = { path = "pkgs/10-concrete/tigrbl-confirmat
 tigrbl-scope-claim-concrete = { path = "pkgs/10-concrete/tigrbl-scope-claim-concrete", editable = true }
 tigrbl-client-id-claim-concrete = { path = "pkgs/10-concrete/tigrbl-client-id-claim-concrete", editable = true }
 tigrbl-verified-claims-claim-concrete = { path = "pkgs/10-concrete/tigrbl-verified-claims-claim-concrete", editable = true }
+tigrbl-place-of-birth-claim-concrete = { path = "pkgs/10-concrete/tigrbl-place-of-birth-claim-concrete", editable = true }
+tigrbl-nationalities-claim-concrete = { path = "pkgs/10-concrete/tigrbl-nationalities-claim-concrete", editable = true }
+tigrbl-birth-family-name-claim-concrete = { path = "pkgs/10-concrete/tigrbl-birth-family-name-claim-concrete", editable = true }
+tigrbl-birth-given-name-claim-concrete = { path = "pkgs/10-concrete/tigrbl-birth-given-name-claim-concrete", editable = true }
+tigrbl-birth-middle-name-claim-concrete = { path = "pkgs/10-concrete/tigrbl-birth-middle-name-claim-concrete", editable = true }
+tigrbl-salutation-claim-concrete = { path = "pkgs/10-concrete/tigrbl-salutation-claim-concrete", editable = true }
+tigrbl-title-claim-concrete = { path = "pkgs/10-concrete/tigrbl-title-claim-concrete", editable = true }
+tigrbl-msisdn-claim-concrete = { path = "pkgs/10-concrete/tigrbl-msisdn-claim-concrete", editable = true }
+tigrbl-also-known-as-claim-concrete = { path = "pkgs/10-concrete/tigrbl-also-known-as-claim-concrete", editable = true }
+tigrbl-address-country-code-claim-concrete = { path = "pkgs/10-concrete/tigrbl-address-country-code-claim-concrete", editable = true }
 tigrbl-credential-type-claim-concrete = { path = "pkgs/10-concrete/tigrbl-credential-type-claim-concrete", editable = true }
 tigrbl-credential-status-claim-concrete = { path = "pkgs/10-concrete/tigrbl-credential-status-claim-concrete", editable = true }
 tigrbl-security-events-claim-concrete = { path = "pkgs/10-concrete/tigrbl-security-events-claim-concrete", editable = true }

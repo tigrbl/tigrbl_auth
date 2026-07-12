@@ -2104,6 +2104,17 @@ wheels = [
 ]
 
 [[package]]
+name = "tigrbl-address-country-code-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-address-country-code-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-admin-identity-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-admin-identity-concrete" }
@@ -2117,6 +2128,17 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-also-known-as-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-also-known-as-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-api-key-credential-concrete"
@@ -2348,12 +2370,17 @@ name = "tigrbl-auth-protocol-oidc"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-oidc" }
 dependencies = [
+    { name = "tigrbl-address-country-code-claim-concrete" },
+    { name = "tigrbl-also-known-as-claim-concrete" },
     { name = "tigrbl-auth-protocol-oauth" },
     { name = "tigrbl-authentication-context-claim-concrete" },
     { name = "tigrbl-authentication-methods-claim-concrete" },
     { name = "tigrbl-authentication-time-claim-concrete" },
     { name = "tigrbl-authn-credentials" },
     { name = "tigrbl-authorized-party-claim-concrete" },
+    { name = "tigrbl-birth-family-name-claim-concrete" },
+    { name = "tigrbl-birth-given-name-claim-concrete" },
+    { name = "tigrbl-birth-middle-name-claim-concrete" },
     { name = "tigrbl-eap-acr-concrete" },
     { name = "tigrbl-identity-assurance-concrete" },
     { name = "tigrbl-identity-contracts" },
@@ -2362,21 +2389,31 @@ dependencies = [
     { name = "tigrbl-identity-runtime" },
     { name = "tigrbl-identity-storage" },
     { name = "tigrbl-local-claims-provider-concrete" },
+    { name = "tigrbl-msisdn-claim-concrete" },
+    { name = "tigrbl-nationalities-claim-concrete" },
     { name = "tigrbl-nonce-claim-concrete" },
     { name = "tigrbl-pairwise-subject-identifier-concrete" },
+    { name = "tigrbl-place-of-birth-claim-concrete" },
     { name = "tigrbl-public-subject-identifier-concrete" },
+    { name = "tigrbl-salutation-claim-concrete" },
+    { name = "tigrbl-title-claim-concrete" },
     { name = "tigrbl-transaction-id-claim-concrete" },
     { name = "tigrbl-verified-claims-claim-concrete" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-address-country-code-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-also-known-as-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-auth-protocol-oauth", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authentication-context-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authentication-methods-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authentication-time-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authn-credentials", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-authorized-party-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-birth-family-name-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-birth-given-name-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-birth-middle-name-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-eap-acr-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-assurance-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
@@ -2385,9 +2422,14 @@ requires-dist = [
     { name = "tigrbl-identity-runtime", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-storage", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-local-claims-provider-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-msisdn-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-nationalities-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-nonce-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-pairwise-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-place-of-birth-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-public-subject-identifier-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-salutation-claim-concrete", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-title-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-transaction-id-claim-concrete", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-verified-claims-claim-concrete", specifier = "==0.4.0.dev2" },
 ]
@@ -2461,7 +2503,9 @@ dependencies = [
     { name = "swarmauri-standard" },
     { name = "swarmauri-tokens-jwt" },
     { name = "tigrbl" },
+    { name = "tigrbl-address-country-code-claim-concrete" },
     { name = "tigrbl-admin-identity-concrete" },
+    { name = "tigrbl-also-known-as-claim-concrete" },
     { name = "tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms" },
     { name = "tigrbl-attestation-bases" },
@@ -2508,6 +2552,9 @@ dependencies = [
     { name = "tigrbl-authz-resource-server" },
     { name = "tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-base" },
+    { name = "tigrbl-birth-family-name-claim-concrete" },
+    { name = "tigrbl-birth-given-name-claim-concrete" },
+    { name = "tigrbl-birth-middle-name-claim-concrete" },
     { name = "tigrbl-canon" },
     { name = "tigrbl-client-id-claim-concrete" },
     { name = "tigrbl-client-identity-concrete" },
@@ -2567,7 +2614,9 @@ dependencies = [
     { name = "tigrbl-mdoc-concrete" },
     { name = "tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete" },
+    { name = "tigrbl-msisdn-claim-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete" },
+    { name = "tigrbl-nationalities-claim-concrete" },
     { name = "tigrbl-nonce-claim-concrete" },
     { name = "tigrbl-not-before-claim-concrete" },
     { name = "tigrbl-oauth-bases" },
@@ -2584,10 +2633,12 @@ dependencies = [
     { name = "tigrbl-password-credential-concrete" },
     { name = "tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete" },
+    { name = "tigrbl-place-of-birth-claim-concrete" },
     { name = "tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts" },
     { name = "tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime" },
+    { name = "tigrbl-salutation-claim-concrete" },
     { name = "tigrbl-scope-claim-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete" },
     { name = "tigrbl-security-auth-context-acr-basic" },
@@ -2618,6 +2669,7 @@ dependencies = [
     { name = "tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete" },
     { name = "tigrbl-subject-claim-concrete" },
+    { name = "tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete" },
     { name = "tigrbl-typing" },
@@ -2709,7 +2761,9 @@ requires-dist = [
     { name = "swarmauri-standard", specifier = "==0.10.0" },
     { name = "swarmauri-tokens-jwt", specifier = "==0.3.0.dev31" },
     { name = "tigrbl", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-address-country-code-claim-concrete", editable = "pkgs/10-concrete/tigrbl-address-country-code-claim-concrete" },
     { name = "tigrbl-admin-identity-concrete", editable = "pkgs/10-concrete/tigrbl-admin-identity-concrete" },
+    { name = "tigrbl-also-known-as-claim-concrete", editable = "pkgs/10-concrete/tigrbl-also-known-as-claim-concrete" },
     { name = "tigrbl-api-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-api-key-credential-concrete" },
     { name = "tigrbl-atoms", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-attestation-bases", editable = "pkgs/05-bases/tigrbl-attestation-bases" },
@@ -2756,6 +2810,9 @@ requires-dist = [
     { name = "tigrbl-authz-resource-server", editable = "pkgs/50-protocols/tigrbl-authz-resource-server" },
     { name = "tigrbl-authz-resource-server-verifier", editable = "pkgs/20-providers/tigrbl-authz-resource-server-verifier" },
     { name = "tigrbl-base", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-birth-family-name-claim-concrete", editable = "pkgs/10-concrete/tigrbl-birth-family-name-claim-concrete" },
+    { name = "tigrbl-birth-given-name-claim-concrete", editable = "pkgs/10-concrete/tigrbl-birth-given-name-claim-concrete" },
+    { name = "tigrbl-birth-middle-name-claim-concrete", editable = "pkgs/10-concrete/tigrbl-birth-middle-name-claim-concrete" },
     { name = "tigrbl-canon", specifier = "==0.4.4.dev1" },
     { name = "tigrbl-client-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-client-id-claim-concrete" },
     { name = "tigrbl-client-identity-concrete", editable = "pkgs/10-concrete/tigrbl-client-identity-concrete" },
@@ -2819,7 +2876,9 @@ requires-dist = [
     { name = "tigrbl-mdoc-concrete", editable = "pkgs/10-concrete/tigrbl-mdoc-concrete" },
     { name = "tigrbl-mfa-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-credential-concrete" },
     { name = "tigrbl-mfa-factor-concrete", editable = "pkgs/10-concrete/tigrbl-mfa-factor-concrete" },
+    { name = "tigrbl-msisdn-claim-concrete", editable = "pkgs/10-concrete/tigrbl-msisdn-claim-concrete" },
     { name = "tigrbl-mtls-certificate-credential-concrete", editable = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete" },
+    { name = "tigrbl-nationalities-claim-concrete", editable = "pkgs/10-concrete/tigrbl-nationalities-claim-concrete" },
     { name = "tigrbl-nonce-claim-concrete", editable = "pkgs/10-concrete/tigrbl-nonce-claim-concrete" },
     { name = "tigrbl-not-before-claim-concrete", editable = "pkgs/10-concrete/tigrbl-not-before-claim-concrete" },
     { name = "tigrbl-oauth-bases", editable = "pkgs/05-bases/tigrbl-oauth-bases" },
@@ -2836,10 +2895,12 @@ requires-dist = [
     { name = "tigrbl-password-credential-concrete", editable = "pkgs/10-concrete/tigrbl-password-credential-concrete" },
     { name = "tigrbl-password-reset-credential-concrete", editable = "pkgs/10-concrete/tigrbl-password-reset-credential-concrete" },
     { name = "tigrbl-passwordless-credential-concrete", editable = "pkgs/10-concrete/tigrbl-passwordless-credential-concrete" },
+    { name = "tigrbl-place-of-birth-claim-concrete", editable = "pkgs/10-concrete/tigrbl-place-of-birth-claim-concrete" },
     { name = "tigrbl-public-subject-identifier-concrete", editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" },
     { name = "tigrbl-release-contracts", editable = "pkgs/02-contracts/tigrbl-release-contracts" },
     { name = "tigrbl-resource-server-bases", editable = "pkgs/05-bases/tigrbl-resource-server-bases" },
     { name = "tigrbl-runtime", specifier = "==0.4.4.dev1" },
+    { name = "tigrbl-salutation-claim-concrete", editable = "pkgs/10-concrete/tigrbl-salutation-claim-concrete" },
     { name = "tigrbl-scope-claim-concrete", editable = "pkgs/10-concrete/tigrbl-scope-claim-concrete" },
     { name = "tigrbl-sd-jwt-vc-concrete", editable = "pkgs/10-concrete/tigrbl-sd-jwt-vc-concrete" },
     { name = "tigrbl-security-auth-context-acr-basic", editable = "pkgs/20-providers/tigrbl-security-auth-context-acr-basic" },
@@ -2870,6 +2931,7 @@ requires-dist = [
     { name = "tigrbl-service-key-credential-concrete", editable = "pkgs/10-concrete/tigrbl-service-key-credential-concrete" },
     { name = "tigrbl-set-concrete", editable = "pkgs/10-concrete/tigrbl-set-concrete" },
     { name = "tigrbl-subject-claim-concrete", editable = "pkgs/10-concrete/tigrbl-subject-claim-concrete" },
+    { name = "tigrbl-title-claim-concrete", editable = "pkgs/10-concrete/tigrbl-title-claim-concrete" },
     { name = "tigrbl-token-bases", editable = "pkgs/05-bases/tigrbl-token-bases" },
     { name = "tigrbl-transaction-id-claim-concrete", editable = "pkgs/10-concrete/tigrbl-transaction-id-claim-concrete" },
     { name = "tigrbl-typing", specifier = "==0.4.4.dev1" },
@@ -3439,6 +3501,39 @@ sdist = { url = "https://files.pythonhosted.org/packages/58/63/742aea83381ba3b54
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a8/10/decb45bdbf73bcff91b0fa0f3ad37ce5c1ecbf48f44f1dce8b5a55215512/tigrbl_base-0.4.4.dev1-py3-none-any.whl", hash = "sha256:7268155cc22c710cca2a8023e5e6e375e51aa09e5d41632411eb1a7c94ba9e3a", size = 49999, upload-time = "2026-06-19T17:14:35.498Z" },
 ]
+
+[[package]]
+name = "tigrbl-birth-family-name-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-birth-family-name-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-birth-given-name-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-birth-given-name-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
+name = "tigrbl-birth-middle-name-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-birth-middle-name-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-canon"
@@ -4409,6 +4504,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-msisdn-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-msisdn-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-mtls-certificate-credential-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-mtls-certificate-credential-concrete" }
@@ -4422,6 +4528,17 @@ requires-dist = [
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-model-bases", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-nationalities-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-nationalities-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-nonce-claim-concrete"
@@ -4666,6 +4783,17 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-place-of-birth-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-place-of-birth-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
+
+[[package]]
 name = "tigrbl-public-subject-identifier-concrete"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/10-concrete/tigrbl-public-subject-identifier-concrete" }
@@ -4712,6 +4840,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/f9/4a/39dd8a22b87e337da
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a8/c4/c05ca37d6fab6fa6a0510c0b71baa6dc64d4f81a9fa61afb84087b12c9b9/tigrbl_runtime-0.4.4.dev1-py3-none-any.whl", hash = "sha256:15231aec552680c50bc9f40d39e7926f90d501e47858880f350b9dcea783a594", size = 83328, upload-time = "2026-06-19T17:14:52.362Z" },
 ]
+
+[[package]]
+name = "tigrbl-salutation-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-salutation-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-scope-claim-concrete"
@@ -5179,6 +5318,17 @@ requires-dist = [
     { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-core", specifier = "==0.4.0.dev2" },
 ]
+
+[[package]]
+name = "tigrbl-title-claim-concrete"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/10-concrete/tigrbl-title-claim-concrete" }
+dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" }]
 
 [[package]]
 name = "tigrbl-token-bases"
