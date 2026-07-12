@@ -101,7 +101,9 @@ def coerce_key_operation(value: KeyOperation | str) -> KeyOperation:
     return KeyOperation(str(value))
 
 
-def normalize_key_usages(values: Sequence[KeyUsage | str] | KeyUsage | str | None) -> tuple[KeyUsage, ...]:
+def normalize_key_usages(
+    values: Sequence[KeyUsage | str] | KeyUsage | str | None,
+) -> tuple[KeyUsage, ...]:
     """Normalize usage values while preserving first-seen order."""
 
     if values is None or values == "" or values is False:
@@ -180,7 +182,12 @@ KEY_USAGE_SPECS: Mapping[KeyUsage, KeyUsageSpec] = {
     ),
     KeyUsage.TRANSPORT: KeyUsageSpec(
         usage=KeyUsage.TRANSPORT,
-        allowed_kinds=(KeyKind.SYMMETRIC, KeyKind.ASYMMETRIC, KeyKind.KEM, KeyKind.EXTERNAL),
+        allowed_kinds=(
+            KeyKind.SYMMETRIC,
+            KeyKind.ASYMMETRIC,
+            KeyKind.KEM,
+            KeyKind.EXTERNAL,
+        ),
         default_ops=(KeyOperation.ENCRYPT, KeyOperation.DECRYPT),
         max_ops=(
             KeyOperation.ENCRYPT,
@@ -192,13 +199,25 @@ KEY_USAGE_SPECS: Mapping[KeyUsage, KeyUsageSpec] = {
     KeyUsage.ATTESTATION: KeyUsageSpec(
         usage=KeyUsage.ATTESTATION,
         allowed_kinds=(KeyKind.ASYMMETRIC, KeyKind.EXTERNAL),
-        default_ops=(KeyOperation.ATTEST, KeyOperation.VERIFY_ATTESTATION, KeyOperation.EXPORT_PUBLIC),
-        max_ops=(KeyOperation.ATTEST, KeyOperation.VERIFY_ATTESTATION, KeyOperation.EXPORT_PUBLIC),
+        default_ops=(
+            KeyOperation.ATTEST,
+            KeyOperation.VERIFY_ATTESTATION,
+            KeyOperation.EXPORT_PUBLIC,
+        ),
+        max_ops=(
+            KeyOperation.ATTEST,
+            KeyOperation.VERIFY_ATTESTATION,
+            KeyOperation.EXPORT_PUBLIC,
+        ),
     ),
     KeyUsage.IDENTITY: KeyUsageSpec(
         usage=KeyUsage.IDENTITY,
         allowed_kinds=(KeyKind.ASYMMETRIC, KeyKind.EXTERNAL),
-        default_ops=(KeyOperation.SIGN, KeyOperation.VERIFY, KeyOperation.EXPORT_PUBLIC),
+        default_ops=(
+            KeyOperation.SIGN,
+            KeyOperation.VERIFY,
+            KeyOperation.EXPORT_PUBLIC,
+        ),
         max_ops=(KeyOperation.SIGN, KeyOperation.VERIFY, KeyOperation.EXPORT_PUBLIC),
     ),
 }
@@ -210,7 +229,9 @@ def key_usage_spec(usage: KeyUsage | str) -> KeyUsageSpec:
     return KEY_USAGE_SPECS[coerce_key_usage(usage)]
 
 
-def default_key_operations(usages: Sequence[KeyUsage | str] | KeyUsage | str | None) -> tuple[KeyOperation, ...]:
+def default_key_operations(
+    usages: Sequence[KeyUsage | str] | KeyUsage | str | None,
+) -> tuple[KeyOperation, ...]:
     """Return the union of default operations for the supplied usages."""
 
     operations: list[KeyOperation] = []
@@ -219,7 +240,9 @@ def default_key_operations(usages: Sequence[KeyUsage | str] | KeyUsage | str | N
     return _unique_ops(operations)
 
 
-def maximum_key_operations(usages: Sequence[KeyUsage | str] | KeyUsage | str | None) -> tuple[KeyOperation, ...]:
+def maximum_key_operations(
+    usages: Sequence[KeyUsage | str] | KeyUsage | str | None,
+) -> tuple[KeyOperation, ...]:
     """Return the union of maximum operations for the supplied usages."""
 
     operations: list[KeyOperation] = []
@@ -242,7 +265,9 @@ def resolve_key_allowed_operations(
         spec = key_usage_spec(usage)
         if normalized_kind not in spec.allowed_kinds:
             allowed = ", ".join(kind.value for kind in spec.allowed_kinds)
-            raise ValueError(f"key usage {usage.value!r} does not allow key kind {normalized_kind.value!r}; allowed: {allowed}")
+            raise ValueError(
+                f"key usage {usage.value!r} does not allow key kind {normalized_kind.value!r}; allowed: {allowed}"
+            )
 
     if allowed_ops is None:
         return default_key_operations(normalized_usages)
@@ -252,10 +277,16 @@ def resolve_key_allowed_operations(
         return normalized_ops
 
     max_ops = set(maximum_key_operations(normalized_usages))
-    illegal = [operation.value for operation in normalized_ops if operation not in max_ops]
+    illegal = [
+        operation.value for operation in normalized_ops if operation not in max_ops
+    ]
     if illegal:
-        allowed = ", ".join(operation.value for operation in maximum_key_operations(normalized_usages))
-        raise ValueError(f"key operations exceed usage maximum: {', '.join(illegal)}; allowed: {allowed}")
+        allowed = ", ".join(
+            operation.value for operation in maximum_key_operations(normalized_usages)
+        )
+        raise ValueError(
+            f"key operations exceed usage maximum: {', '.join(illegal)}; allowed: {allowed}"
+        )
     return normalized_ops
 
 

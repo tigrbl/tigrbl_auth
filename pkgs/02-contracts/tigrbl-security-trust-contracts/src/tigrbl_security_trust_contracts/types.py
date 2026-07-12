@@ -143,7 +143,9 @@ class ProofBinding:
         *,
         credential_id: str | None = None,
     ) -> "ProofBinding":
-        if not isinstance(jwk_thumbprint, str) and hasattr(jwk_thumbprint, "confirmation_claim"):
+        if not isinstance(jwk_thumbprint, str) and hasattr(
+            jwk_thumbprint, "confirmation_claim"
+        ):
             return cls(
                 "dpop",
                 getattr(jwk_thumbprint, "confirmation_claim"),

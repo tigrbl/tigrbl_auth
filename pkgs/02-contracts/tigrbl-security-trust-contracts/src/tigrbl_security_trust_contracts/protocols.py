@@ -167,7 +167,9 @@ class IKeyDiscovery(Protocol):
 
     async def list_versions(self, kid: str) -> tuple[int, ...]: ...
 
-    async def describe_key(self, kid: str, version: int | None = None) -> KeyDescriptor: ...
+    async def describe_key(
+        self, kid: str, version: int | None = None
+    ) -> KeyDescriptor: ...
 
 
 class IKeyExporter(Protocol):
@@ -316,13 +318,17 @@ class IVerificationKeyCache(IVerificationKeyResolver, Protocol):
 class ITokenIntrospectionTransport(Protocol):
     """Provider-neutral token introspection transport."""
 
-    def __call__(self, request: TokenIntrospectionRequest) -> TokenIntrospectionResult: ...
+    def __call__(
+        self, request: TokenIntrospectionRequest
+    ) -> TokenIntrospectionResult: ...
 
 
 class ITokenIntrospectionClient(Protocol):
     """Provider-neutral token introspection client."""
 
-    def introspect(self, request: TokenIntrospectionRequest) -> TokenIntrospectionResult: ...
+    def introspect(
+        self, request: TokenIntrospectionRequest
+    ) -> TokenIntrospectionResult: ...
 
 
 class IProvenanceArtifactBuilder(Protocol):
