@@ -23,4 +23,10 @@ class UserInfoProviderPort(Protocol):
     async def userinfo(self, request: UserInfoRequest, /) -> UserInfoResult: ...
 
 
-__all__ = ["ClaimsRequest", "ClaimsResult", "UserInfoProviderPort", "UserInfoRequest", "UserInfoResult"]
+__all__ = [
+    "ClaimsRequest",
+    "ClaimsResult",
+    "UserInfoProviderPort",
+    "UserInfoRequest",
+    "UserInfoResult",
+]

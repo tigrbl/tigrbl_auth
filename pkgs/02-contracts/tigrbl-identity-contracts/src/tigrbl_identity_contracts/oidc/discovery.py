@@ -17,7 +17,9 @@ class DiscoveryDocumentRequest:
 
 
 class DiscoveryPublisherPort(Protocol):
-    async def discovery_document(self, request: DiscoveryDocumentRequest, /) -> Mapping[str, Any]: ...
+    async def discovery_document(
+        self, request: DiscoveryDocumentRequest, /
+    ) -> Mapping[str, Any]: ...
 
 
 __all__ = [

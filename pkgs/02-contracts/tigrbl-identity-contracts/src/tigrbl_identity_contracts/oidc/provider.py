@@ -17,7 +17,9 @@ class IdTokenVerifierPort(Protocol):
 
 
 class OpenIDProviderPort(IdTokenIssuerPort, IdTokenVerifierPort, Protocol):
-    async def discovery_document(self, request: DiscoveryDocumentRequest, /) -> Mapping[str, Any]: ...
+    async def discovery_document(
+        self, request: DiscoveryDocumentRequest, /
+    ) -> Mapping[str, Any]: ...
 
     async def userinfo(self, request: UserInfoRequest, /) -> UserInfoResult: ...
 

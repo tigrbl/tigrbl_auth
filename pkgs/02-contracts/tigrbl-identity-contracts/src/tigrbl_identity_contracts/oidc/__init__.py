@@ -20,7 +20,13 @@ class OidcContractError(ValueError):
 @dataclass(frozen=True, slots=True)
 class LoginThemeAssetPolicy:
     allowed_asset_prefixes: tuple[str, ...] = ("/assets/",)
-    allowed_image_extensions: tuple[str, ...] = (".svg", ".png", ".jpg", ".jpeg", ".webp")
+    allowed_image_extensions: tuple[str, ...] = (
+        ".svg",
+        ".png",
+        ".jpg",
+        ".jpeg",
+        ".webp",
+    )
 
     def validate_asset_uri(self, uri: str | None) -> str | None:
         if uri is None or uri == "":
@@ -28,7 +34,9 @@ class LoginThemeAssetPolicy:
         if not any(uri.startswith(prefix) for prefix in self.allowed_asset_prefixes):
             raise OidcContractError("logo URI is outside the tenant asset policy")
         lower = uri.lower()
-        if not any(lower.endswith(extension) for extension in self.allowed_image_extensions):
+        if not any(
+            lower.endswith(extension) for extension in self.allowed_image_extensions
+        ):
             raise OidcContractError("logo URI extension is not allowed")
         if any(marker in uri for marker in ("..", "\\", "\x00", "\r", "\n")):
             raise OidcContractError("logo URI contains unsafe path characters")
@@ -44,7 +52,9 @@ class TenantBranding:
     allowed_asset_prefixes: tuple[str, ...] = ("/assets/",)
 
     def sanitized_logo_uri(self) -> str | None:
-        return LoginThemeAssetPolicy(self.allowed_asset_prefixes).validate_asset_uri(self.logo_uri)
+        return LoginThemeAssetPolicy(self.allowed_asset_prefixes).validate_asset_uri(
+            self.logo_uri
+        )
 
     def sanitized_display_name(self) -> str:
         value = self.display_name.strip()
@@ -132,6 +142,7 @@ class BackchannelReplayStorePort(Protocol):
 
 
 _LAZY_EXPORTS = {
+    "AuthenticatorEvidence": ".eap_acr",
     "AuthSessionCreateRequest": ".session",
     "AuthSessionReadResponse": ".claims",
     "ClaimDescriptor": ".claims",
@@ -139,6 +150,11 @@ _LAZY_EXPORTS = {
     "ClaimsRequest": ".claims",
     "ClaimsResult": ".claims",
     "ConsentReadResponse": ".claims",
+    "EapAcrEvaluationRequest": ".eap_acr",
+    "EapAcrEvaluationResult": ".eap_acr",
+    "EapAcrEvaluatorPort": ".eap_acr",
+    "EapAcrValue": ".eap_acr",
+    "EapAmrValue": ".eap_acr",
     "DiscoveryDocumentRequest": ".discovery",
     "DiscoveryPublisherPort": ".discovery",
     "FederationEntityStatementRequest": ".federation",
@@ -146,11 +162,17 @@ _LAZY_EXPORTS = {
     "FrontChannelLogoutPort": ".logout",
     "IdTokenIssuerPort": ".provider",
     "IdTokenVerifierPort": ".provider",
+    "IDENTITY_ASSURANCE_CLAIM_NAMES": ".identity_assurance_claims",
+    "IdentityAssuranceClaims": ".identity_assurance_claims",
+    "IdentityAssuranceClaimsProviderPort": ".identity_assurance",
+    "IdentityAssuranceRequest": ".identity_assurance",
+    "IdentityAssuranceResult": ".identity_assurance",
     "LogoutIn": ".logout",
     "LogoutOut": ".logout",
     "LogoutStateReadResponse": ".session",
     "OidcFederationPort": ".federation",
     "OpenIDProviderPort": ".provider",
+    "PlaceOfBirth": ".identity_assurance_claims",
     "RealmReadResponse": ".discovery",
     "RelyingPartyPort": ".relying_party",
     "RpInitiatedLogoutPort": ".logout",
@@ -165,6 +187,7 @@ _LAZY_EXPORTS = {
     "UserInfoRequest": ".userinfo",
     "UserInfoResult": ".userinfo",
     "UserReadResponse": ".claims",
+    "VerifiedClaimsValidatorPort": ".identity_assurance",
     "WebFingerRequest": ".webfinger",
     "WebFingerResolverPort": ".webfinger",
     "WebFingerResult": ".webfinger",
