@@ -1,21 +1,22 @@
-from typing import Any, Mapping
-from tigrbl_identity_contracts.attestation import ReferenceIntegrityManifest
+from .comid import ComidTag, parse_comid
+from .corim import CORIM_REVISION, CorimTag, parse_corim, parse_corim_tag
+from .coswid import CoswidTag, parse_coswid
+from .cotl import ConciseTrustList, parse_cotl
+from .cots import ConciseTrustStore, parse_cots
+from .validation import validate_corim_tag
 
-CORIM_REVISION = "draft-ietf-rats-corim-08"
-
-
-def parse_corim(value: Mapping[str, Any]) -> ReferenceIntegrityManifest:
-    tag_identity = value.get("tag-identity")
-    manifests = value.get("comids")
-    if not isinstance(tag_identity, (str, bytes)):
-        raise ValueError("CoRIM requires tag-identity")
-    if not isinstance(manifests, list) or not all(
-        isinstance(item, Mapping) for item in manifests
-    ):
-        raise ValueError("CoRIM requires a comids array")
-    return ReferenceIntegrityManifest(
-        str(tag_identity), tuple(dict(item) for item in manifests), value.get("signer")
-    )
-
-
-__all__ = ["CORIM_REVISION", "parse_corim"]
+__all__ = [
+    "CORIM_REVISION",
+    "ComidTag",
+    "ConciseTrustList",
+    "ConciseTrustStore",
+    "CorimTag",
+    "CoswidTag",
+    "parse_comid",
+    "parse_corim",
+    "parse_corim_tag",
+    "parse_coswid",
+    "parse_cotl",
+    "parse_cots",
+    "validate_corim_tag",
+]
