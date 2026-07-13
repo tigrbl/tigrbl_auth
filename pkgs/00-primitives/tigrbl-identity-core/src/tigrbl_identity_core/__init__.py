@@ -15,7 +15,16 @@ from .clock import (
 from .entity_keys import normalize_entity, tenant_key
 from .digests import digest_bytes, digest_text, sha256_text_digest, token_hash
 from .constant_time import bytes_equal, text_equal
-from .claims import ClaimType, ClaimValueType, RegisteredClaim
+from .claims import (
+    ClaimDisclosureMode,
+    ClaimIdentifier,
+    ClaimLabel,
+    ClaimNameKind,
+    ClaimSourceKind,
+    ClaimType,
+    ClaimValueType,
+    RegisteredClaim,
+)
 from .digests import constant_time_digest_equal, sha256_digest
 from .artifacts import (
     ArtifactKind,
@@ -119,6 +128,11 @@ __all__ = [
     "Clock",
     "ClaimType",
     "ClaimValueType",
+    "ClaimDisclosureMode",
+    "ClaimIdentifier",
+    "ClaimLabel",
+    "ClaimNameKind",
+    "ClaimSourceKind",
     "RegisteredClaim",
     "ClientId",
     "ClientRef",

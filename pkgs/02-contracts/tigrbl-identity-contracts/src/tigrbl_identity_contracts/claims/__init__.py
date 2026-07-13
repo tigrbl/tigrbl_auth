@@ -2,22 +2,55 @@
 
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Protocol, Sequence
-from tigrbl_identity_core import ClaimType, ClaimValueType
+from tigrbl_identity_core import (
+    ClaimDisclosureMode,
+    ClaimIdentifier,
+    ClaimLabel,
+    ClaimNameKind,
+    ClaimSourceKind,
+    ClaimType,
+    ClaimValueType,
+)
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimProvenance:
+    source_kind: ClaimSourceKind
+    source_id: str | None = None
+    evidence_reference: str | None = None
+    verified_at: str | None = None
+    assurance_framework: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimDisclosure:
+    mode: ClaimDisclosureMode = ClaimDisclosureMode.REQUESTED
+    purpose: str | None = None
+    consent_reference: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
 class Claim:
-    name: str
+    name: ClaimLabel
     value: Any
     claim_type: ClaimType
     value_type: ClaimValueType
     standards: tuple[str, ...] = ()
     required: bool = False
+    name_kind: ClaimNameKind = ClaimNameKind.SPECIFICATION
+    namespace: str | None = None
+    registry: str | None = None
+    provenance: ClaimProvenance | None = None
+    disclosure: ClaimDisclosure | None = None
+
+    @property
+    def identifier(self) -> ClaimIdentifier:
+        return ClaimIdentifier(self.name, self.name_kind, self.namespace, self.registry)
 
 
 @dataclass(frozen=True, slots=True)
 class ClaimDescriptor:
-    name: str
+    name: ClaimLabel
     source: str = "user"
     essential: bool = False
 
@@ -28,10 +61,10 @@ class ClaimSet:
     protocol: str | None = None
     version: str | None = None
 
-    def as_mapping(self) -> dict[str, Any]:
+    def as_mapping(self) -> dict[ClaimLabel, Any]:
         return {claim.name: claim.value for claim in self.claims}
 
-    def get(self, name: str) -> Claim | None:
+    def get(self, name: ClaimLabel) -> Claim | None:
         return next((claim for claim in self.claims if claim.name == name), None)
 
 
@@ -68,7 +101,9 @@ class ClaimSetComposerPort(Protocol):
 
 __all__ = [
     "Claim",
+    "ClaimDisclosure",
     "ClaimDescriptor",
+    "ClaimProvenance",
     "ClaimSet",
     "ClaimSetComposerPort",
     "ClaimValidatorPort",

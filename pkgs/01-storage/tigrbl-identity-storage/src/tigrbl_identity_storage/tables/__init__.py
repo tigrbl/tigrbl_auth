@@ -57,6 +57,7 @@ from .spiffe_state import SpiffeTrustBundle,SvidRecord,TrustDomainFederation
 from .security_event_state import SecurityEvent,SecurityEventDelivery,SecurityEventReplay,SecurityEventSubscription
 from .did_gnap_state import DidDocument,DidDocumentVersion,DidResolutionCache,DidService,DidVerificationMethod,GnapClientInstance,GnapContinuation,GnapGrant,GnapInteraction
 from .certificate_state import CertificateRecord,CertificateStatusSnapshot,TrustAnchor
+from .claim_state import ClaimDefinition,ClaimProvenanceRecord,ClaimReleasePolicy,ClaimSnapshot,ClaimSourceBinding
 from .auth_session import AuthSession, CredsIn, MyAccountSessionOut, TokenPair as LoginTokenPair
 from .auth_code import AuthCode
 from .device_code import DeviceAuthorizationIn, DeviceAuthorizationOut, DeviceCode
@@ -218,6 +219,11 @@ _TABLE_MODELS = (
     CertificateRecord,
     TrustAnchor,
     CertificateStatusSnapshot,
+    ClaimDefinition,
+    ClaimSourceBinding,
+    ClaimReleasePolicy,
+    ClaimProvenanceRecord,
+    ClaimSnapshot,
     AuthSession,
     AuthCode,
     DeviceCode,
@@ -429,6 +435,11 @@ __all__ = [
     "CertificateRecord",
     "TrustAnchor",
     "CertificateStatusSnapshot",
+    "ClaimDefinition",
+    "ClaimSourceBinding",
+    "ClaimReleasePolicy",
+    "ClaimProvenanceRecord",
+    "ClaimSnapshot",
     "AuthSession",
     "AuthCode",
     "DeviceCode",

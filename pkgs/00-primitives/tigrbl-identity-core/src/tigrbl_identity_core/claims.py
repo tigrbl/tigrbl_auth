@@ -1,6 +1,8 @@
 """Primitive claim taxonomy shared across token and credential families."""
 
+from dataclasses import dataclass
 from enum import StrEnum
+from typing import TypeAlias
 
 
 class ClaimType(StrEnum):
@@ -25,6 +27,63 @@ class ClaimValueType(StrEnum):
     TIMESTAMP = "timestamp"
     JSON_OBJECT = "json-object"
     JSON_VALUE = "json-value"
+
+
+class ClaimNameKind(StrEnum):
+    """Registration form of a claim identifier, not its semantic purpose."""
+
+    REGISTERED = "registered"
+    SPECIFICATION = "specification"
+    PROFILE = "profile"
+    PRIVATE = "private"
+    URI = "uri"
+    INTEGER_LABEL = "integer-label"
+    NAMESPACED = "namespaced"
+
+
+class ClaimSourceKind(StrEnum):
+    SUBJECT = "subject"
+    SESSION = "session"
+    CREDENTIAL = "credential"
+    ATTESTATION = "attestation"
+    DERIVED = "derived"
+    PROVIDER = "provider"
+    PRIVATE = "private"
+
+
+class ClaimDisclosureMode(StrEnum):
+    ALWAYS = "always"
+    REQUESTED = "requested"
+    CONSENTED = "consented"
+    SELECTIVE = "selective"
+    NEVER = "never"
+
+
+ClaimLabel: TypeAlias = str | int
+
+
+@dataclass(frozen=True, slots=True)
+class ClaimIdentifier:
+    """Carrier-neutral claim identifier.
+
+    ``label`` supports both JSON string names and CWT/COSE integer labels.
+    ``namespace`` covers mdoc namespaces and URI/profile qualified families.
+    """
+
+    label: ClaimLabel
+    kind: ClaimNameKind = ClaimNameKind.SPECIFICATION
+    namespace: str | None = None
+    registry: str | None = None
+
+    def __post_init__(self) -> None:
+        if isinstance(self.label, bool) or not isinstance(self.label, (str, int)):
+            raise TypeError("claim label must be a string or integer")
+        if isinstance(self.label, str) and not self.label:
+            raise ValueError("claim label must not be empty")
+        if self.kind is ClaimNameKind.INTEGER_LABEL and not isinstance(self.label, int):
+            raise ValueError("integer-label claims require an integer label")
+        if self.kind is ClaimNameKind.NAMESPACED and not self.namespace:
+            raise ValueError("namespaced claims require a namespace")
 
 
 class RegisteredClaim(StrEnum):
@@ -61,4 +120,13 @@ class RegisteredClaim(StrEnum):
     EAT_PROFILE = "eat_profile"
 
 
-__all__ = ["ClaimType", "ClaimValueType", "RegisteredClaim"]
+__all__ = [
+    "ClaimDisclosureMode",
+    "ClaimIdentifier",
+    "ClaimLabel",
+    "ClaimNameKind",
+    "ClaimSourceKind",
+    "ClaimType",
+    "ClaimValueType",
+    "RegisteredClaim",
+]
