@@ -6,6 +6,7 @@ from tigrbl_identity_storage_runtime import (
     RUNTIME_OPERATION_BY_ALIAS,
     RUNTIME_TABLE_BY_NAME,
     RUNTIME_TABLE_SPEC_BY_NAME,
+    activateRuntimeTableSpec,
     defineRuntimeTableSpec,
     deriveRuntimeTableSpec,
     makeRuntimeOperation,
@@ -56,3 +57,19 @@ def test_runtime_inventory_indexes_canonical_tables_and_operations() -> None:
     spec = RUNTIME_TABLE_SPEC_BY_NAME["ReplayReservation"]
     assert spec.model is ReplayReservation
     assert RUNTIME_OPERATION_BY_ALIAS[("ReplayReservation", "create")].table is ReplayReservation
+
+
+def test_runtime_activation_materializes_custom_operation_on_canonical_table() -> None:
+    operation = makeRuntimeOperation(alias="runtime_probe", handler=_reserve)
+    spec = deriveRuntimeTableSpec(ReplayReservation, operations=(operation,))
+    original = tuple(getattr(ReplayReservation, "__tigrbl_ops__", ()) or ())
+    try:
+        activateRuntimeTableSpec(spec)
+        assert ReplayReservation.ops.by_alias["runtime_probe"].alias == "runtime_probe"
+        assert ReplayReservation.handlers.runtime_probe.core is not None
+        assert ReplayReservation.schemas.runtime_probe is not None
+    finally:
+        ReplayReservation.__tigrbl_ops__ = original
+        from tigrbl import rebind
+
+        rebind(ReplayReservation)

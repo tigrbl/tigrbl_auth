@@ -4,6 +4,7 @@ from .define import *
 from .derive import *
 from .factories import *
 from .inventory import *
+from .initialize import *
 from .make import *
 from .migrations import *
 from .ops import *
@@ -22,6 +23,13 @@ __all__ = [
     "RUNTIME_TABLE_SPECS",
     "RUNTIME_TABLE_SPEC_BY_NAME",
     "RUNTIME_OPERATION_BY_ALIAS",
+    "activateRuntimeTableSpec",
+    "activate_runtime_table_spec",
+    "initializeIdentityRuntimeTables",
+    "initialize_identity_runtime_tables",
+    "runtimeOperations",
+    "runtime_operations",
+    "DURABLE_RUNTIME_TABLE_SPECS",
     "MigrationContract",
     "MigrationRevision",
     "MigrationResult",
