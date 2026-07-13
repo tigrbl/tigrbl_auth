@@ -50,10 +50,6 @@ def _attach_custom_op_schemas() -> None:
     set_schema(User, "admin_create_identity", in_=AdminIdentityProvisionIn, out=AdminIdentityOut)
     set_schema(User, "admin_update_identity", in_=AdminIdentityUpdateIn, out=AdminIdentityOut)
     set_schema(User, "admin_delete_identity", out=AdminIdentityOut)
-    set_schema(User, "get_account_profile", out=MyAccountProfileOut)
-    set_schema(User, "update_account_profile", in_=MyAccountProfileUpdateIn, out=MyAccountProfileOut)
-    set_schema(User, "change_account_password", in_=MyAccountPasswordChangeIn, out=MyAccountMutationOut)
-
     set_schema(Tenant, "admin_create_tenant", in_=AdminTenantProvisionIn, out=AdminTenantOut)
     set_schema(Tenant, "admin_update_tenant", in_=AdminTenantUpdateIn, out=AdminTenantOut)
     set_schema(Tenant, "admin_delete_tenant", out=AdminTenantOut)

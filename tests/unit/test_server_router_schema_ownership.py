@@ -107,10 +107,6 @@ def test_server_rest_router_bridges_warn_to_storage_owner(
                 "AdminIdentityOut",
                 "AdminIdentityProvisionIn",
                 "AdminIdentityUpdateIn",
-                "MyAccountMutationOut",
-                "MyAccountPasswordChangeIn",
-                "MyAccountProfileOut",
-                "MyAccountProfileUpdateIn",
             },
         ),
         (
@@ -244,32 +240,17 @@ def test_admin_auth_routes_live_in_server_runtime() -> None:
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
 
 
-@pytest.mark.parametrize(
-    ("module_name", "class_name", "route_names"),
-    [
-        (
-            "tigrbl_identity_storage.tables.user",
-            "User",
-            {
-                "get_account_profile",
-                "update_account_profile",
-                "change_account_password",
-            },
-        ),
-    ],
-)
-def test_my_account_route_handlers_live_on_storage_table_modules(
-    module_name: str, class_name: str, route_names: set[str]
-) -> None:
-    module = importlib.import_module(module_name)
-    table_class = getattr(module, class_name)
+def test_my_account_profile_routes_live_in_api_package() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_my_account.profiles")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    route_names = {"get_account_profile", "update_account_profile", "change_account_password"}
 
-    assert hasattr(module, "account_api")
-    assert hasattr(module, "account_router")
-    missing = sorted(name for name in route_names if not hasattr(module, name))
-    assert missing == []
-    missing_class_ops = sorted(name for name in route_names if not hasattr(table_class, name))
-    assert missing_class_ops == []
+    assert api_module.api is api_module.router
+    assert sorted(name for name in route_names if not hasattr(api_module, name)) == []
+    assert not hasattr(storage_module, "account_api")
+    assert not hasattr(storage_module, "account_router")
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module.User, name)) == []
 
 
 def test_my_account_session_routes_live_in_api_package() -> None:
@@ -401,7 +382,7 @@ def test_moved_oauth_publishers_live_above_storage_table_modules(
 
 
 def test_consent_account_routes_live_above_storage_table_module() -> None:
-    runtime_module = importlib.import_module("tigrbl_identity_storage_runtime.account_consent")
+    runtime_module = importlib.import_module("tigrbl_auth_api_my_account.consents")
     storage_module = importlib.import_module("tigrbl_identity_storage.tables.consent")
     table_class = storage_module.Consent
     route_names = {

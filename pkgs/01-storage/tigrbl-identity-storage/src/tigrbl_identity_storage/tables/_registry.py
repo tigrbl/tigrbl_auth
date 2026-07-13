@@ -15,10 +15,6 @@ from .user import (
     AdminPasswordResetRequestIn,
     AdminSessionOut,
     CredsIn as AdminCredsIn,
-    MyAccountMutationOut,
-    MyAccountPasswordChangeIn,
-    MyAccountProfileOut,
-    MyAccountProfileUpdateIn,
     User,
 )
 from .client import Client, _CLIENT_ID_RE

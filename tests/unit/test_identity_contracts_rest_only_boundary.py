@@ -121,10 +121,6 @@ def test_storage_tables_own_table_backed_rest_shapes() -> None:
             "AdminIdentityOut",
             "AdminIdentityProvisionIn",
             "AdminIdentityUpdateIn",
-            "MyAccountMutationOut",
-            "MyAccountPasswordChangeIn",
-            "MyAccountProfileOut",
-            "MyAccountProfileUpdateIn",
         },
     }
     for module_name, dto_names in table_modules.items():
@@ -133,14 +129,21 @@ def test_storage_tables_own_table_backed_rest_shapes() -> None:
             assert hasattr(module, dto_name), f"{module_name}.{dto_name}"
 
 
-def test_my_account_api_owns_session_rest_shape() -> None:
-    api_module = importlib.import_module("tigrbl_auth_api_my_account.sessions")
-    storage_module = importlib.import_module(
-        "tigrbl_identity_storage.tables.auth_session"
-    )
+def test_my_account_api_owns_its_rest_shapes() -> None:
+    api_module = importlib.import_module("tigrbl_auth_api_my_account")
+    session_storage = importlib.import_module("tigrbl_identity_storage.tables.auth_session")
+    user_storage = importlib.import_module("tigrbl_identity_storage.tables.user")
 
-    assert hasattr(api_module, "MyAccountSessionOut")
-    assert not hasattr(storage_module, "MyAccountSessionOut")
+    names = {
+        "MyAccountMutationOut",
+        "MyAccountPasswordChangeIn",
+        "MyAccountProfileOut",
+        "MyAccountProfileUpdateIn",
+        "MyAccountSessionOut",
+    }
+    assert sorted(name for name in names if not hasattr(api_module, name)) == []
+    assert sorted(name for name in names if hasattr(session_storage, name)) == []
+    assert sorted(name for name in names if hasattr(user_storage, name)) == []
 
 
 def test_table_backed_route_modules_do_not_import_contract_dtos() -> None:

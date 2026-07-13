@@ -70,33 +70,6 @@ class AdminIdentityUpdateIn(BaseModel):
     must_change_password: bool | None = None
 
 
-class MyAccountProfileOut(BaseModel):
-    id: str
-    tenant_id: str
-    username: str
-    email: str
-    is_active: bool = True
-    must_change_password: bool = False
-    roles: list[str] = Field(default_factory=list)
-    created_at: str | None = None
-    updated_at: str | None = None
-
-
-class MyAccountProfileUpdateIn(BaseModel):
-    username: _username | None = None
-    email: _email | None = None
-
-
-class MyAccountPasswordChangeIn(BaseModel):
-    current_password: _password
-    new_password: _password
-
-
-class MyAccountMutationOut(BaseModel):
-    status: str
-    id: str | None = None
-
-
 class CredsIn(BaseModel):
     identifier: constr(strip_whitespace=True, min_length=3, max_length=120)
     password: _password
@@ -266,16 +239,9 @@ async def lookup_by_identifier(cls: type[User], ctx: dict[str, Any]):
 
 
 admin_api = admin_router = TigrblRouter()
-account_api = account_router = TigrblRouter()
-MY_ACCOUNT_TAGS = ["My Account"]
 ADMIN_AUTH_TAGS = ["Admin Auth"]
 
 
-from ._account_route import (  # noqa: E402
-    change_account_password,
-    get_account_profile,
-    update_account_profile,
-)
 from ._admin_identity_route import (  # noqa: E402
     admin_create_identity,
     admin_delete_identity,
@@ -289,9 +255,6 @@ for _name, _func in {
     "admin_delete_identity": admin_delete_identity,
     "admin_list_identities": admin_list_identities,
     "admin_update_identity": admin_update_identity,
-    "change_account_password": change_account_password,
-    "get_account_profile": get_account_profile,
-    "update_account_profile": update_account_profile,
 }.items():
     setattr(User, _name, staticmethod(_func))
 
@@ -307,20 +270,11 @@ __all__ = [
     "CredsIn",
     "DEFAULT_BOOTSTRAP_SUPERUSER_ID",
     "DEFAULT_BOOTSTRAP_SUPERUSER_PASSWORD",
-    "MyAccountMutationOut",
-    "MyAccountPasswordChangeIn",
-    "MyAccountProfileOut",
-    "MyAccountProfileUpdateIn",
     "User",
     "admin_api",
     "admin_router",
-    "account_api",
-    "account_router",
     "admin_create_identity",
     "admin_delete_identity",
     "admin_list_identities",
     "admin_update_identity",
-    "change_account_password",
-    "get_account_profile",
-    "update_account_profile",
 ]

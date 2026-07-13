@@ -6,7 +6,6 @@ from typing import Any, Callable, Final
 from tigrbl import TigrblApp, TigrblRouter
 from tigrbl_identity_runtime.deployment import ResolvedDeployment, resolve_deployment
 from tigrbl_identity_storage.tables.engine import dsn
-from tigrbl_identity_storage_runtime.account_surface import api as my_account_api
 from tigrbl_identity_storage_runtime.authorization import router as authorize_router
 from tigrbl_identity_storage_runtime.login import router as login_router
 from tigrbl_identity_storage_runtime.token_endpoint import router as token_router
@@ -66,16 +65,6 @@ PUBLIC_ROUTER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (
         "router": authorize_router,
     },
     {"mount_group": "token", "capabilities": ("token",), "router": token_router},
-    {
-        "mount_group": "my_account",
-        "capabilities": (
-            "account-profile",
-            "account-sessions",
-            "account-consents",
-            "account-credentials",
-        ),
-        "router": my_account_api,
-    },
 )
 
 PUBLIC_PUBLISHER_BINDINGS: Final[tuple[dict[str, Any], ...]] = (

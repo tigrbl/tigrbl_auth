@@ -14,6 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from tigrbl_auth.config.deployment import DEFAULT_VALUES, resolve_deployment
 from tigrbl_auth.tables import AuthSession, Client, Consent, Tenant, User
 from tigrbl_identity_jose.key_management import hash_pw
+from tigrbl_secret_hashing_bcrypt_provider import BcryptSecretHasher
 
 ROOT = Path(__file__).resolve().parents[3]
 PKG_SRC = ROOT / "pkgs" / "80-apis" / "tigrbl-auth-api-my-account" / "src"
@@ -26,8 +27,8 @@ MY_ACCOUNT_API_CONTRACT = my_account_package.MY_ACCOUNT_API_CONTRACT
 build_app = my_account_package.build_app
 
 account_session_module = import_module("tigrbl_auth_api_my_account.sessions")
-account_consent_module = import_module("tigrbl_identity_storage_runtime.account_consent")
-account_user_module = import_module("tigrbl_identity_storage.tables.user")
+account_consent_module = import_module("tigrbl_auth_api_my_account.consents")
+account_user_module = import_module("tigrbl_auth_api_my_account.profiles")
 
 
 def _settings() -> SimpleNamespace:
@@ -290,3 +291,43 @@ async def test_my_account_handlers_are_current_subject_scoped(
 
     assert revoked.status == "revoked"
     assert revoked_consent.state == "revoked"
+
+
+@pytest.mark.asyncio
+async def test_my_account_password_change_uses_secret_provider(
+    db_session: AsyncSession,
+) -> None:
+    tenant_id = uuid4()
+    user_id = uuid4()
+    await _tenant(db_session, "password-change", tenant_id)
+    await _user(db_session, tenant_id, "password-account", user_id)
+    current_user = SimpleNamespace(id=user_id, tenant_id=tenant_id)
+
+    with pytest.raises(Exception) as invalid:
+        await account_user_module.change_account_password(
+            payload=account_user_module.MyAccountPasswordChangeIn(
+                current_password="WrongPass123!",
+                new_password="ReplacementPass123!",
+            ),
+            current_user=current_user,
+            db=db_session,
+        )
+    assert getattr(invalid.value, "status_code", None) == 400
+
+    changed = await account_user_module.change_account_password(
+        payload=account_user_module.MyAccountPasswordChangeIn(
+            current_password="CurrentPass123!",
+            new_password="ReplacementPass123!",
+        ),
+        current_user=current_user,
+        db=db_session,
+    )
+    db_session.expire_all()
+    row = await db_session.get(User, user_id)
+
+    assert changed.status == "changed"
+    assert row is not None
+    assert BcryptSecretHasher().verify_secret(
+        "ReplacementPass123!",
+        row.password_hash,
+    ).verified

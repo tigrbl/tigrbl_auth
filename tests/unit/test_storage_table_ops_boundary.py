@@ -37,7 +37,7 @@ RAW_HANDLER_ALLOWLIST = {
 }
 
 TABLE_ROUTE_FUNCTION_ALLOWLIST = {
-    "_user_account_routes.py": {
+    "profiles.py": {
         "change_account_password",
         "get_account_profile",
         "update_account_profile",
@@ -60,7 +60,7 @@ TABLE_ROUTE_FUNCTION_ALLOWLIST = {
     "auth_code.py": {
         "authorize",
     },
-    "consent.py": {
+    "consents.py": {
         "list_account_authorized_apps",
         "list_account_consents",
         "revoke_account_authorized_app",

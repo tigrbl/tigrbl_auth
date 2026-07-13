@@ -386,9 +386,7 @@ def test_executable_account_surface_composition_lives_above_storage() -> None:
         "tigrbl_identity_storage.tables.user._account_surface"
     ) is None
 
-    account_surface = importlib.import_module(
-        "tigrbl_identity_storage_runtime.account_surface"
-    )
+    account_surface = importlib.import_module("tigrbl_auth_api_my_account.routes")
 
     assert account_surface.api is account_surface.router
 

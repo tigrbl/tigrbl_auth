@@ -11,13 +11,14 @@ from tigrbl.runtime.status import HTTPException
 from tigrbl.security import Depends
 from tigrbl_identity_storage.tables import AuthSession, User
 from tigrbl_identity_storage.tables.engine import get_db
-from tigrbl_identity_storage.tables.user import (
-    MyAccountMutationOut,
-    _current_principal_dependency,
-    _not_found_uuid,
-)
 from tigrbl_identity_storage_runtime.ops.common import field_value, list_table_records
 from tigrbl_identity_storage_runtime.ops.sessions import terminate_session
+
+from .common import (
+    MyAccountMutationOut,
+    current_principal_dependency,
+    not_found_uuid,
+)
 
 
 class MyAccountSessionOut(BaseModel):
@@ -63,7 +64,7 @@ MY_ACCOUNT_TAGS = ["My Account"]
     tags=MY_ACCOUNT_TAGS,
 )
 async def list_account_sessions(
-    current_user: User = Depends(_current_principal_dependency),
+    current_user: User = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> list[MyAccountSessionOut]:
     rows = await list_table_records(
@@ -82,10 +83,10 @@ async def list_account_sessions(
 )
 async def revoke_account_session(
     session_id: str,
-    current_user: User = Depends(_current_principal_dependency),
+    current_user: User = Depends(current_principal_dependency),
     db: Any = Depends(get_db),
 ) -> MyAccountMutationOut:
-    identifier = _not_found_uuid(session_id, field="session")
+    identifier = not_found_uuid(session_id, field="session")
     rows = await list_table_records(
         AuthSession,
         db,
