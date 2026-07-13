@@ -31,11 +31,11 @@ def test_key_tables_are_storage_owned_and_exported() -> None:
     assert PrincipalKeyBinding.__tablename__ == "principal_key_bindings"
     assert KeyEnvelope.__tablename__ == "key_envelopes"
     assert KeyAttestationEvidence.__tablename__ == "key_attestation_evidence"
-    assert callable(CryptoKey.rotate_record)
+    assert callable(CryptoKey.handlers.update.core)
     assert not hasattr(CryptoKey, "sign")
     assert not hasattr(CryptoKey, "verify")
     assert not hasattr(CryptoKey, "publish_jwks")
-    assert callable(CryptoKeyVersion.create_version)
+    assert callable(CryptoKeyVersion.handlers.create.core)
 
 
 def test_key_usage_defaults_and_narrows_allowed_ops() -> None:

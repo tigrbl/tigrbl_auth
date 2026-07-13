@@ -33,10 +33,10 @@ async def test_storage_runtime_resolves_provider_and_signs_with_allowed_key(monk
         public_material={"kid": "kid-1", "kty": "OKP", "x": "pub"},
     )
 
-    async def _lookup(db, *, kid, tenant_id=None):
+    async def _lookup(model, db, filters):
         return row
 
-    monkeypatch.setattr(crypto_keys.CryptoKey, "lookup_by_kid", _lookup)
+    monkeypatch.setattr(crypto_keys, "first_record", _lookup)
 
     result = await crypto_keys.sign(
         object(),
@@ -62,10 +62,10 @@ async def test_storage_runtime_denies_operation_not_allowed_by_row(monkeypatch) 
         public_material={"kid": "kid-1", "kty": "OKP", "x": "pub"},
     )
 
-    async def _lookup(db, *, kid, tenant_id=None):
+    async def _lookup(model, db, filters):
         return row
 
-    monkeypatch.setattr(crypto_keys.CryptoKey, "lookup_by_kid", _lookup)
+    monkeypatch.setattr(crypto_keys, "first_record", _lookup)
 
     with pytest.raises(PermissionError):
         await crypto_keys.sign(object(), kid="kid-1", payload=b"payload", registry={"fake": provider})

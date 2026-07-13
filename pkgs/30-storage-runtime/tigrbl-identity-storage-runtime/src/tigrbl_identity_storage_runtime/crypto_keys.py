@@ -6,7 +6,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from tigrbl_identity_storage.tables import CryptoKey
-from tigrbl_identity_storage.tables._ops import create_record, first_record
+from tigrbl_identity_storage.tables._ops import create_record, first_record, update_record
 from tigrbl_security_trust_contracts import (
     AttestKeyRequest,
     DecapsulateRequest,
@@ -89,13 +89,16 @@ async def rotate_key(
     row = await _key_for_operation(db, kid=kid, operation="rotate")
     provider = _provider(row, registry=registry, ctx=ctx)
     handle = await provider.rotate_key(kid, spec_overrides=spec_overrides)
-    return await CryptoKey.rotate_record(
+    return await update_record(
+        CryptoKey,
         db,
-        kid=kid,
-        provider=getattr(handle, "provider", getattr(row, "provider", None)),
-        provider_key_ref=getattr(handle, "ref", None),
-        public_material=getattr(handle, "public_material", None),
-        public_material_format=getattr(handle, "public_material_format", None),
+        getattr(row, "id"),
+        {
+            "provider": getattr(handle, "provider", getattr(row, "provider", None)),
+            "provider_key_ref": getattr(handle, "ref", None),
+            "public_material": getattr(handle, "public_material", None),
+            "public_material_format": getattr(handle, "public_material_format", None),
+        },
     )
 
 

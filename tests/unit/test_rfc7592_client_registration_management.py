@@ -7,6 +7,8 @@ import pytest
 from tigrbl_auth import rfc7592
 from tigrbl_auth.tables import Client
 from sqlalchemy.exc import NoResultFound
+from tigrbl_identity_storage.tables._ops import create_record, delete_record, read_record, update_record
+from tigrbl_identity_jose.key_management import hash_pw
 
 
 def test_rfc7592_spec_url() -> None:
@@ -16,36 +18,20 @@ def test_rfc7592_spec_url() -> None:
 
 @pytest.mark.asyncio
 async def test_update_and_delete_client_via_server(db_session):
-    client = Client.new(
-        tenant_id=uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
-        client_id=str(uuid.uuid4()),
-        client_secret="secret",
-        redirects=["https://a.example/cb"],
-    )
-    db_session.add(client)
-    await db_session.commit()
+    client = await create_record(Client, db_session, {
+        "tenant_id": uuid.UUID("FFFFFFFF-0000-0000-0000-000000000000"),
+        "client_id": str(uuid.uuid4()),
+        "client_secret_hash": hash_pw("secret"),
+        "redirect_uris": "https://a.example/cb",
+    })
     client_id = client.id
-    await Client.handlers.update.core(
-        {
-            "payload": {
-                "ident": str(client_id),
-                "redirect_uris": "https://b.example/cb",
-            },
-            "db": db_session,
-        }
-    )
-    fetched = await Client.handlers.read.core(
-        {"payload": {"id": str(client_id)}, "db": db_session}
-    )
+    await update_record(Client, db_session, client_id, {"redirect_uris": "https://b.example/cb"})
+    fetched = await read_record(Client, db_session, client_id)
     assert fetched is not None
     uris = fetched.redirect_uris
     if isinstance(uris, str):
         uris = uris.split()
     assert "https://b.example/cb" in uris
-    await Client.handlers.delete.core(
-        {"payload": {"ident": str(client_id)}, "db": db_session}
-    )
+    await delete_record(Client, db_session, client_id)
     with pytest.raises(NoResultFound):
-        await Client.handlers.read.core(
-            {"payload": {"id": str(client_id)}, "db": db_session}
-        )
+        await read_record(Client, db_session, client_id)

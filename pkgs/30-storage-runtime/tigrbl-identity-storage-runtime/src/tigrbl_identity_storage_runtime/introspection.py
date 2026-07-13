@@ -233,13 +233,19 @@ async def _authorize_introspection_caller(
 def register_token(token: str, claims: Dict[str, Any] | None = None) -> str:
     payload = dict(claims or {})
     _FALLBACK_TOKENS[token] = payload
-    return _record_token(token, payload, token_kind=payload.get("kind"))
+    try:
+        return _record_token(token, payload, token_kind=payload.get("kind"))
+    except Exception:
+        return token
 
 
 async def register_token_async(token: str, claims: Dict[str, Any] | None = None) -> str:
     payload = dict(claims or {})
     _FALLBACK_TOKENS[token] = payload
-    return await _record_token_async(token, payload, token_kind=payload.get("kind"))
+    try:
+        return await _record_token_async(token, payload, token_kind=payload.get("kind"))
+    except Exception:
+        return token
 
 
 def unregister_token(token: str) -> None:
