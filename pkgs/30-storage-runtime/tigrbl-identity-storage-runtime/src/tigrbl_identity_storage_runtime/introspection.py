@@ -42,6 +42,9 @@ from tigrbl_identity_storage.tables._sync import run_async
 from tigrbl_identity_storage.tables.client import Client
 from tigrbl_identity_storage.tables.client_registration import ClientRegistration
 from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
+
+from .ops.clients import lookup_client
 from tigrbl_identity_storage.persistence import (
     reset_token_state as _reset_token_state,
     reset_token_state_async as _reset_token_state_async,
@@ -59,6 +62,7 @@ DEFAULT_TOKEN_ENDPOINT_AUTH_METHOD: Final[str] = "client_secret_basic"
 
 api = router = TigrblRouter()
 _FALLBACK_TOKENS: dict[str, dict[str, Any]] = {}
+client_secret_authentication = ClientSecretAuthenticationCapability(lookup_client)
 
 
 def _require_tls(request: Request, *, deployment: Any | None = None) -> None:
@@ -222,10 +226,11 @@ async def _authorize_introspection_caller(
     else:
         raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
 
-    secret_valid = client.verify_secret(client_secret)
-    if inspect.isawaitable(secret_valid):
-        secret_valid = await secret_valid
-    if not secret_valid:
+    secret_authentication = client_secret_authentication.verify_client_record(
+        client,
+        client_secret,
+    )
+    if not secret_authentication.authenticated:
         raise HTTPException(int(_HTTPStatus.UNAUTHORIZED), "invalid_client")
     return None
 

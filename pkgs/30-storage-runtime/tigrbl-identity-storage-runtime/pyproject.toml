@@ -41,6 +41,7 @@ dependencies = [
     "tigrbl-identity-storage==0.4.0.dev2",
     "tigrbl-identity-contracts==0.4.0.dev2",
     "tigrbl-replay-bases==0.4.0.dev2",
+    "tigrbl-principal-authentication==0.4.0.dev2",
     "tigrbl-security-trust-contracts==0.1.0",
 ]
 

@@ -31,7 +31,6 @@ from .token_runtime import (
     enforce_grant_type,
     enforce_password_grant,
     handle_device_code_grant,
-    inspect,
     issue_token_pair_records,
     mint_id_token,
     oidc_hash,
@@ -48,8 +47,11 @@ from .token_runtime import (
     verify_code_challenge,
 )
 from .token_persistence import redeem_refresh_token
+from tigrbl_principal_authentication import ClientSecretAuthenticationCapability
+from .ops.clients import lookup_client
 
 _IMPORTED_ISSUE_TOKEN_PAIR_RECORDS = issue_token_pair_records
+client_secret_authentication = ClientSecretAuthenticationCapability(lookup_client)
 
 
 def _token_pair_issuer():
@@ -145,10 +147,11 @@ async def token_request(*, request, db):
     elif client_secret:
         if policy.fapi_mode:
             return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, description='FAPI rejects shared-secret client authentication')
-        secret_valid = client.verify_secret(client_secret)
-        if inspect.isawaitable(secret_valid):
-            secret_valid = await secret_valid
-        if not secret_valid:
+        secret_authentication = client_secret_authentication.verify_client_record(
+            client,
+            client_secret,
+        )
+        if not secret_authentication.authenticated:
             return _json_error('invalid_client', status_code=status.HTTP_401_UNAUTHORIZED, headers={'WWW-Authenticate': 'Basic'})
 
     if data.get('client_id') and data['client_id'] != str(client_id):

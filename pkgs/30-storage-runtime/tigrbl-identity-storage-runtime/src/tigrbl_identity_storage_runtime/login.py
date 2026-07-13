@@ -7,8 +7,14 @@ from typing import Any
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, Request, TigrblRouter
 from tigrbl_identity_storage.tables.auth_session import CredsIn, TokenPair
 from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_principal_authentication import PasswordAuthenticationCapability
+
+from .ops.identities import lookup_identity_by_identifier
 
 router = TigrblRouter()
+password_authentication = PasswordAuthenticationCapability(
+    lookup_identity_by_identifier
+)
 
 
 async def login_user(*, request: Request, db: Any, identifier: str, password: str) -> Any:
@@ -23,13 +29,15 @@ async def login_user(*, request: Request, db: Any, identifier: str, password: st
         create_browser_session_record,
         issue_token_pair_records,
     )
-    from tigrbl_identity_server.security.user_lookup import first_user_by_filters
 
     _require_tls(request)
-    row = await first_user_by_filters(db, {"username": identifier})
-    if row is None:
-        row = await first_user_by_filters(db, {"email": identifier})
-    if row is None or not getattr(row, "is_active", True) or not row.verify_password(password):
+    authentication = await password_authentication.authenticate_password(
+        identifier=identifier,
+        password=password,
+        db=db,
+    )
+    row = authentication.record
+    if not authentication.authenticated or row is None:
         raise HTTPException(status_code=400, detail="invalid credentials")
 
     expires_at = datetime.now(timezone.utc) + timedelta(seconds=max(int(session_cookie_policy().max_age_seconds), 60))
@@ -109,4 +117,4 @@ async def login(
     )
 
 
-__all__ = ["login", "login_user", "router"]
+__all__ = ["login", "login_user", "password_authentication", "router"]

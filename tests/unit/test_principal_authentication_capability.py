@@ -73,3 +73,22 @@ async def test_client_secret_capability_supports_lookup_and_loaded_record() -> N
     assert accepted.authenticated is True
     assert accepted.record is record
     assert rejected.authenticated is False
+
+
+def test_token_and_introspection_callers_use_capability_not_model_method() -> None:
+    from tigrbl_identity_storage_runtime import introspection, token_request
+
+    hasher = BcryptSecretHasher()
+    record = {
+        "id": "client-1",
+        "is_active": True,
+        "client_secret_hash": hasher.hash_secret("correct").encoded,
+    }
+    assert token_request.client_secret_authentication.verify_client_record(
+        record,
+        "correct",
+    ).authenticated
+    assert introspection.client_secret_authentication.verify_client_record(
+        record,
+        "wrong",
+    ).authenticated is False
