@@ -26,7 +26,7 @@ PROVIDER_BASES = {
     "tigrbl_security_auth_context_acr_basic.BasicAcrEvaluator": "tigrbl_security_trust_domain_bases.AcrEvaluatorBase",
     "tigrbl_security_auth_context_amr_basic.BasicAmrEvaluator": "tigrbl_security_trust_domain_bases.AmrEvaluatorBase",
     "tigrbl_security_certificate_mtls.MtlsBindingValidator": "tigrbl_security_trust_domain_bases.CertificateServiceDomainBase",
-    "tigrbl_security_claims_provider_local.LocalSecurityClaimsProvider": "tigrbl_security_trust_domain_bases.ClaimsProviderBase",
+    "tigrbl_security_claims_provider_local.LocalSecurityClaimsProvider": "tigrbl_identity_claims_bases.ClaimsProviderBase",
     "tigrbl_security_dpop_cnf_binding_validator.DpopCnfBindingValidator": "tigrbl_security_trust_domain_bases.ConfirmationBindingValidatorBase",
     "tigrbl_security_mtls_cnf_binding_validator.MtlsCnfBindingValidator": "tigrbl_security_trust_domain_bases.ConfirmationBindingValidatorBase",
     "tigrbl_security_oidc_federation_provider.StaticOidcFederationProvider": "tigrbl_security_trust_domain_bases.OidcFederationProviderBase",

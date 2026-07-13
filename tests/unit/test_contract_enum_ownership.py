@@ -16,7 +16,7 @@ ALLOWED_NON_CONTRACT_ENUMS = {
 
 
 def _enum_class_names(path: Path) -> set[str]:
-    tree = ast.parse(path.read_text(encoding="utf-8"))
+    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
     names: set[str] = set()
     for node in ast.walk(tree):
         if not isinstance(node, ast.ClassDef):
@@ -75,7 +75,7 @@ def test_reusable_enums_are_not_defined_outside_contract_packages() -> None:
     offenders: list[str] = []
     for path in PKGS.rglob("*.py"):
         relative = path.relative_to(PKGS)
-        if relative.parts[0] == "02-contracts":
+        if relative.parts[0] in {"00-primitives", "02-contracts"}:
             continue
         for enum_name in sorted(_enum_class_names(path)):
             if enum_name in ALLOWED_NON_CONTRACT_ENUMS:

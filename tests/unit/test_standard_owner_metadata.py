@@ -37,6 +37,12 @@ def test_describe_owner_uses_consistent_payload_shape() -> None:
         "runtime_status": "example-runtime",
         "public_surface": ["/example"],
         "notes": "Example notes.",
+        "organization": None,
+        "version": None,
+        "status": None,
+        "specification_uri": None,
+        "protocol_tags": [],
+        "claimable": False,
         "spec_url": "https://example.test/spec",
     }
 

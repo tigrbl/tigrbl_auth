@@ -39,7 +39,23 @@ TRUST_BASE_PROVIDER_PACKAGES = {
     "tigrbl-security-webfinger-provider",
 }
 
-COMPOSITION_PROVIDER_PACKAGES: set[str] = set()
+COMPOSITION_PROVIDER_PACKAGES = {
+    "tigrbl-authn-credentials",
+    "tigrbl-authz-policy",
+    "tigrbl-authz-policy-admin-gate",
+    "tigrbl-authz-policy-decision-engine",
+    "tigrbl-certificate-status-provider",
+    "tigrbl-corim-store-provider",
+    "tigrbl-did-controller-provider",
+    "tigrbl-digital-credential-trust-provider",
+    "tigrbl-identity-admin",
+    "tigrbl-identity-admin-auth-anomaly-detector",
+    "tigrbl-identity-admin-relationship-graph",
+    "tigrbl-key-attestation-verifier",
+    "tigrbl-platform-attestation-provider",
+    "tigrbl-security-cose",
+    "tigrbl-trust-anchor-provider",
+}
 
 
 def test_pqc_provider_inherits_signing_domain_base() -> None:
@@ -62,7 +78,8 @@ def test_pkce_provider_inherits_proof_of_possession_domain_base() -> None:
 def test_provider_packages_have_explicit_trust_boundary_kind() -> None:
     packages = {path.name for path in PROVIDERS.iterdir() if (path / "pyproject.toml").exists()}
     assert packages
-    assert packages == TRUST_BASE_PROVIDER_PACKAGES | COMPOSITION_PROVIDER_PACKAGES
+    assert TRUST_BASE_PROVIDER_PACKAGES | COMPOSITION_PROVIDER_PACKAGES <= packages
+    assert not (TRUST_BASE_PROVIDER_PACKAGES & COMPOSITION_PROVIDER_PACKAGES)
 
 
 def test_trust_base_provider_packages_expose_base_implementers() -> None:

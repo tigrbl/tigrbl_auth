@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 from typing import Any, Mapping, Sequence
 
 from tigrbl_identity_contracts.oidc import (
-    ClaimsProviderPort,
     OidcFederationPort,
     SubjectIdentifierStrategyPort,
     WebFingerResolverPort,
@@ -184,13 +183,6 @@ class AmrEvaluatorBase(IAmrEvaluator, CapabilityProviderBase):
     """Base for Authentication Methods References evaluators."""
 
     def evaluate_amr(self, request: AmrEvaluationRequest) -> AmrEvaluationResult:
-        raise NotImplementedError
-
-
-class ClaimsProviderBase(ClaimsProviderPort, CapabilityProviderBase):
-    """Base for provider-style claims assembly."""
-
-    async def claims(self, request: Any) -> Any:
         raise NotImplementedError
 
 

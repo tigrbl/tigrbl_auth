@@ -6457,12 +6457,14 @@ name = "tigrbl-security-trust-domain-bases"
 version = "0.1.0"
 source = { editable = "pkgs/05-bases/tigrbl-security-trust-domain-bases" }
 dependencies = [
+    { name = "tigrbl-identity-claims-bases" },
     { name = "tigrbl-identity-contracts" },
     { name = "tigrbl-security-trust-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "tigrbl-identity-claims-bases", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-identity-contracts", specifier = "==0.4.0.dev2" },
     { name = "tigrbl-security-trust-contracts", specifier = "==0.1.0" },
 ]

@@ -16,7 +16,6 @@ from .bases import (
     CryptoKeyProviderBase,
     CryptoDomainBase,
     EncryptionProviderBase,
-    ClaimsProviderBase,
     KeyEncapsulationProviderBase,
     KeyLifecycleProviderBase,
     KeyProviderDomainBase,
@@ -39,6 +38,7 @@ from .bases import (
     VerificationKeyResolverBase,
     WebFingerResolverBase,
 )
+from tigrbl_identity_claims_bases import ClaimsProviderBase
 from .identity import (
     CertificatePathValidatorBase,
     DidResolverBase,

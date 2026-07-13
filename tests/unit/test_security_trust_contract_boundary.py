@@ -36,7 +36,8 @@ def test_security_trust_contracts_are_dependency_free_protocols() -> None:
         imports = _absolute_import_roots(path)
         assert imports <= {
             "__future__",
-            "dataclasses",
+        "dataclasses",
+        "datetime",
             "enum",
             "typing",
             "tigrbl_security_trust_contracts",
@@ -47,7 +48,9 @@ def test_security_trust_domain_bases_depend_only_on_contracts() -> None:
     metadata = tomllib.loads((BASES / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert metadata["project"]["dependencies"] == [
-        "tigrbl-security-trust-contracts==0.1.0"
+        "tigrbl-identity-claims-bases==0.4.0.dev2",
+        "tigrbl-identity-contracts==0.4.0.dev2",
+        "tigrbl-security-trust-contracts==0.1.0",
     ]
     for path in sorted((BASES / "src").rglob("*.py")):
         imports = _absolute_import_roots(path)
@@ -55,6 +58,8 @@ def test_security_trust_domain_bases_depend_only_on_contracts() -> None:
             "__future__",
             "abc",
             "typing",
+            "tigrbl_identity_claims_bases",
+            "tigrbl_identity_contracts",
             "tigrbl_security_trust_contracts",
             "tigrbl_security_trust_domain_bases",
         }, path
