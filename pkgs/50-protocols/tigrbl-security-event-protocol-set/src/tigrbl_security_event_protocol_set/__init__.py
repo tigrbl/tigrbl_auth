@@ -6,6 +6,10 @@ from tigrbl_jwt_id_claim_concrete import JwtIdClaim
 from tigrbl_security_events_claim_concrete import SecurityEventsClaim
 from tigrbl_subject_claim_concrete import SubjectClaim
 
+from .features import FEATURES_BY_VERSION, supports
+from .migrations import migrate_claims
+from .versions import CURRENT_VERSION, VERSION_HISTORY, SetVersion, select_version
+
 SET_CLAIM_CLASSES = (
     IssuerClaim,
     AudienceClaim,
@@ -22,7 +26,17 @@ def compose_set_claim_set(*claims) -> ClaimSet:
     missing = required - present
     if missing:
         raise ValueError(f"missing SET claims: {sorted(missing)}")
-    return ClaimSet(tuple(claims), "set", "RFC 8417")
+    return ClaimSet(tuple(claims), "set", "RFC8417")
 
 
-__all__ = ["SET_CLAIM_CLASSES", "compose_set_claim_set"]
+__all__ = [
+    "CURRENT_VERSION",
+    "FEATURES_BY_VERSION",
+    "SET_CLAIM_CLASSES",
+    "VERSION_HISTORY",
+    "SetVersion",
+    "compose_set_claim_set",
+    "migrate_claims",
+    "select_version",
+    "supports",
+]
