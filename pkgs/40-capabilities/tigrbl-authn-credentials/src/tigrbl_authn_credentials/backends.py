@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Any
 
 from tigrbl_identity_jose.key_management import verify_pw
 from tigrbl_identity_contracts.principals import PrincipalLike
-from tigrbl_identity_storage.tables._ops import first_record
-from tigrbl_identity_storage.tables import Client, CredentialApiKey, CredentialServiceKey, User
+from tigrbl_identity_storage.tables._ops import field, list_records
+from tigrbl_identity_storage.tables import (
+    Client,
+    CredentialApiKey,
+    CredentialServiceKey,
+    User,
+)
 
 
 class AuthError(Exception):
@@ -34,10 +40,32 @@ class PasswordBackend:
 
 class ApiKeyBackend:
     async def _get_key_row(self, db: Any, digest: str) -> CredentialApiKey | None:
-        return await first_record(CredentialApiKey, db, {"digest": digest, "status": "active"})
+        return self._valid_key(
+            await list_records(CredentialApiKey, db, {"digest": digest})
+        )
 
-    async def _get_service_key_row(self, db: Any, digest: str) -> CredentialServiceKey | None:
-        return await first_record(CredentialServiceKey, db, {"digest": digest, "status": "active"})
+    async def _get_service_key_row(
+        self, db: Any, digest: str
+    ) -> CredentialServiceKey | None:
+        return self._valid_key(
+            await list_records(CredentialServiceKey, db, {"digest": digest})
+        )
+
+    @staticmethod
+    def _valid_key(rows: list[Any]):
+        now = datetime.now(timezone.utc)
+        for row in rows:
+            status_value = field(row, "status", "active")
+            if isinstance(status_value, str) and status_value != "active":
+                continue
+            valid_from = field(row, "valid_from")
+            valid_to = field(row, "valid_to")
+            if isinstance(valid_from, datetime) and valid_from > now:
+                continue
+            if isinstance(valid_to, datetime) and valid_to <= now:
+                continue
+            return row
+        return None
 
     async def _resolve_user_principal(self, db: Any, key_row: Any) -> User | None:
         user = getattr(key_row, "user", None) or getattr(key_row, "_user", None)
@@ -47,7 +75,9 @@ class ApiKeyBackend:
         if principal_id in {None, ""}:
             return None
         try:
-            return await User.handlers.read.core({"path_params": {"id": principal_id}, "db": db})
+            return await User.handlers.read.core(
+                {"path_params": {"id": principal_id}, "db": db}
+            )
         except Exception:
             return None
 
@@ -55,7 +85,11 @@ class ApiKeyBackend:
         digest = CredentialApiKey.digest_of(api_key)
 
         key_row = await self._get_key_row(db, digest)
-        user = await self._resolve_user_principal(db, key_row) if key_row is not None else None
+        user = (
+            await self._resolve_user_principal(db, key_row)
+            if key_row is not None
+            else None
+        )
         if key_row and user:
             if not user.is_active:
                 raise AuthError("user is inactive")

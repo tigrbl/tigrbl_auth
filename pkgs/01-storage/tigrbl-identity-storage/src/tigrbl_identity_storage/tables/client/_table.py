@@ -28,21 +28,44 @@ class Client(ClientBase):
     tenant = relationship("Tenant", back_populates="clients")
 
     grant_types: Mapped[str] = acol(
-        spec=ColumnSpec(storage=S(String, nullable=False, default="authorization_code"), field=F(), io=IO())
+        spec=ColumnSpec(
+            storage=S(String, nullable=False, default="authorization_code"),
+            field=F(),
+            io=IO(),
+        )
     )
     response_types: Mapped[str] = acol(
-        spec=ColumnSpec(storage=S(String, nullable=False, default="code"), field=F(), io=IO())
+        spec=ColumnSpec(
+            storage=S(String, nullable=False, default="code"), field=F(), io=IO()
+        )
     )
 
+    @classmethod
+    async def authenticate(cls, db, *, client_secret: str):
+        from .._ops import field, list_records
+
+        if not client_secret:
+            return None
+        for row in await list_records(cls, db):
+            if not bool(field(row, "is_active", True)):
+                continue
+            verifier = getattr(row, "verify_secret", None)
+            if callable(verifier) and verifier(client_secret):
+                return row
+        return None
 
     def verify_secret(self, plain: str) -> bool:
         return verify_pw(plain, self.client_secret_hash)
 
-
     async def rotate_secret(self, db: Any, *, client_secret: str):
         from .._ops import record_id, update_record
 
-        return await update_record(type(self), db, record_id(self), {"client_secret_hash": hash_pw(client_secret)})
+        return await update_record(
+            type(self),
+            db,
+            record_id(self),
+            {"client_secret_hash": hash_pw(client_secret)},
+        )
 
     async def enable(self, db: Any):
         from .._ops import record_id, update_record
@@ -52,7 +75,9 @@ class Client(ClientBase):
     async def disable(self, db: Any):
         from .._ops import record_id, update_record
 
-        return await update_record(type(self), db, record_id(self), {"is_active": False})
+        return await update_record(
+            type(self), db, record_id(self), {"is_active": False}
+        )
 
 
 __all__ = ["Client", "_CLIENT_ID_RE"]

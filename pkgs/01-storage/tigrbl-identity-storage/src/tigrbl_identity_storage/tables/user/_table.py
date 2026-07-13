@@ -156,41 +156,74 @@ class User(UserBase, Bootstrappable):
         )
     )
     password_hash: Mapped[bytes | None] = acol(
-        spec=ColumnSpec(storage=S(LargeBinary(60)), io=IO(in_verbs=("create", "update", "replace")))
+        spec=ColumnSpec(
+            storage=S(LargeBinary(60)), io=IO(in_verbs=("create", "update", "replace"))
+        )
     )
     is_admin: Mapped[bool] = acol(
         spec=ColumnSpec(
             storage=S(Boolean, nullable=False, default=False),
             field=F(),
-            io=IO(in_verbs=("create", "update", "replace"), out_verbs=("read", "list"), filter_ops=("eq",)),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq",),
+            ),
         )
     )
     is_superuser: Mapped[bool] = acol(
         spec=ColumnSpec(
             storage=S(Boolean, nullable=False, default=False),
             field=F(),
-            io=IO(in_verbs=("create", "update", "replace"), out_verbs=("read", "list"), filter_ops=("eq",)),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq",),
+            ),
         )
     )
     must_change_password: Mapped[bool] = acol(
         spec=ColumnSpec(
             storage=S(Boolean, nullable=False, default=False),
             field=F(),
-            io=IO(in_verbs=("create", "update", "replace"), out_verbs=("read", "list"), filter_ops=("eq",)),
+            io=IO(
+                in_verbs=("create", "update", "replace"),
+                out_verbs=("read", "list"),
+                filter_ops=("eq",),
+            ),
         )
     )
     password_reset_token_hash: Mapped[str | None] = acol(
-        spec=ColumnSpec(storage=S(String(128), nullable=True, index=True), io=IO(in_verbs=("update", "replace")))
+        spec=ColumnSpec(
+            storage=S(String(128), nullable=True, index=True),
+            io=IO(in_verbs=("update", "replace")),
+        )
     )
     password_reset_expires_at: Mapped[dt.datetime | None] = acol(
-        spec=ColumnSpec(storage=S(TZDateTime, nullable=True), io=IO(in_verbs=("update", "replace"), out_verbs=("read",)))
+        spec=ColumnSpec(
+            storage=S(TZDateTime, nullable=True),
+            io=IO(in_verbs=("update", "replace"), out_verbs=("read",)),
+        )
     )
 
     tenant = relationship("Tenant", back_populates="users")
 
+    @classmethod
+    async def lookup_by_identifier(cls, db, *, identifier: str):
+        from .._ops import field, list_records
+
+        if not identifier:
+            return None
+        for row in await list_records(cls, db):
+            if not bool(field(row, "is_active", True)):
+                continue
+            if identifier in {field(row, "username"), field(row, "email")}:
+                return row
+        return None
 
     def verify_password(self, plain: str) -> bool:
         from tigrbl_identity_jose.key_management import verify_pw
+
         if self.password_hash is None:
             return False
         return verify_pw(plain, self.password_hash)
