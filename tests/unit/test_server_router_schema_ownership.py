@@ -165,17 +165,10 @@ def test_remaining_table_backed_rest_routers_import_schemas_from_table_modules(
         (
             "tigrbl_identity_storage.tables.user",
             {
-                "admin_change_password",
                 "admin_list_identities",
                 "admin_create_identity",
                 "admin_update_identity",
                 "admin_delete_identity",
-                "admin_forgot_password",
-                "admin_login",
-                "admin_login_browser_redirect",
-                "admin_logout",
-                "admin_reset_password",
-                "admin_session",
             },
         ),
         (
@@ -208,10 +201,10 @@ def test_admin_route_handlers_live_on_storage_table_modules(
     assert hasattr(module, "admin_router")
     missing = sorted(name for name in route_names if not hasattr(module, name))
     assert missing == []
-    missing_handler_ops = sorted(
-        name for name in route_names if not hasattr(table_class.handlers, name)
+    missing_class_routes = sorted(
+        name for name in route_names if not hasattr(table_class, name)
     )
-    assert missing_handler_ops == []
+    assert missing_class_routes == []
 
 
 def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
@@ -233,6 +226,23 @@ def test_tenant_admin_route_handlers_live_above_storage_table_module() -> None:
     assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
     assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
     assert sorted(name for name in route_names if hasattr(table_class, name)) == []
+
+
+def test_admin_auth_routes_live_in_server_runtime() -> None:
+    runtime_module = importlib.import_module("tigrbl_identity_server.admin_auth")
+    storage_module = importlib.import_module("tigrbl_identity_storage.tables.user")
+    route_names = {
+        "admin_change_password",
+        "admin_forgot_password",
+        "admin_login",
+        "admin_login_browser_redirect",
+        "admin_logout",
+        "admin_reset_password",
+        "admin_session",
+    }
+    assert runtime_module.admin_api is storage_module.admin_api
+    assert sorted(name for name in route_names if not hasattr(runtime_module, name)) == []
+    assert sorted(name for name in route_names if hasattr(storage_module, name)) == []
 
 
 @pytest.mark.parametrize(

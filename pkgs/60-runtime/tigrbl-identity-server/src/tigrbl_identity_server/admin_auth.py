@@ -6,8 +6,8 @@ from typing import Any
 
 from tigrbl_identity_storage.framework import Depends, HTTPException, JSONResponse, RedirectResponse, Request, Response, status
 
-from ..engine import get_db
-from ._table import (
+from tigrbl_identity_storage.tables.engine import get_db
+from tigrbl_identity_storage.tables.user._table import (
     ADMIN_AUTH_TAGS,
     AdminPasswordChangeIn,
     AdminPasswordResetCompleteIn,
@@ -17,7 +17,7 @@ from ._table import (
     User,
     admin_api,
 )
-from .._ops import first_record, read_record, update_record
+from tigrbl_identity_storage.tables._ops import first_record, read_record, update_record
 from tigrbl_identity_jose.key_management import hash_pw
 
 

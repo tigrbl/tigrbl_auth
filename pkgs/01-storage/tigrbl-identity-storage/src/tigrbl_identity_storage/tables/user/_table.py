@@ -276,15 +276,6 @@ from ._account_route import (  # noqa: E402
     get_account_profile,
     update_account_profile,
 )
-from ._admin_auth_route import (  # noqa: E402
-    admin_change_password,
-    admin_forgot_password,
-    admin_login,
-    admin_login_browser_redirect,
-    admin_logout,
-    admin_reset_password,
-    admin_session,
-)
 from ._admin_identity_route import (  # noqa: E402
     admin_create_identity,
     admin_delete_identity,
@@ -294,16 +285,9 @@ from ._admin_identity_route import (  # noqa: E402
 
 
 for _name, _func in {
-    "admin_change_password": admin_change_password,
     "admin_create_identity": admin_create_identity,
     "admin_delete_identity": admin_delete_identity,
-    "admin_forgot_password": admin_forgot_password,
     "admin_list_identities": admin_list_identities,
-    "admin_login": admin_login,
-    "admin_login_browser_redirect": admin_login_browser_redirect,
-    "admin_logout": admin_logout,
-    "admin_reset_password": admin_reset_password,
-    "admin_session": admin_session,
     "admin_update_identity": admin_update_identity,
     "change_account_password": change_account_password,
     "get_account_profile": get_account_profile,
@@ -330,18 +314,11 @@ __all__ = [
     "User",
     "admin_api",
     "admin_router",
-    "admin_change_password",
     "account_api",
     "account_router",
     "admin_create_identity",
     "admin_delete_identity",
-    "admin_forgot_password",
     "admin_list_identities",
-    "admin_login",
-    "admin_login_browser_redirect",
-    "admin_logout",
-    "admin_reset_password",
-    "admin_session",
     "admin_update_identity",
     "change_account_password",
     "get_account_profile",

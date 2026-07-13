@@ -13,7 +13,7 @@ import re
 from typing import Any, Final
 
 from tigrbl import TigrblRouter
-from tigrbl_identity_storage.tables.user import admin_api as admin_auth_api
+from tigrbl_identity_server.admin_auth import admin_api as admin_auth_api
 from tigrbl_identity_storage.tables.user import admin_api as admin_identities_api
 from tigrbl_identity_storage.tables.realm import admin_api as admin_realms_api
 from tigrbl_identity_storage_runtime.tenant_admin import router as admin_tenants_router
