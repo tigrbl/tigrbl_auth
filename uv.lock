@@ -2339,6 +2339,21 @@ requires-dist = [
 ]
 
 [[package]]
+name = "tigrbl-auth-profile-haip"
+version = "0.4.0.dev2"
+source = { editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" }
+dependencies = [
+    { name = "tigrbl-auth-protocol-oid4vci" },
+    { name = "tigrbl-auth-protocol-oid4vp" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "tigrbl-auth-protocol-oid4vci", specifier = "==0.4.0.dev2" },
+    { name = "tigrbl-auth-protocol-oid4vp", specifier = "==0.4.0.dev2" },
+]
+
+[[package]]
 name = "tigrbl-auth-protocol-authzen"
 version = "0.4.0.dev2"
 source = { editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" }
@@ -2597,6 +2612,7 @@ dependencies = [
     { name = "tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth" },
     { name = "tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-jwt" },
@@ -2892,6 +2908,7 @@ requires-dist = [
     { name = "tigrbl-audience-claim-concrete", editable = "pkgs/10-concrete/tigrbl-audience-claim-concrete" },
     { name = "tigrbl-auth", editable = "pkgs/70-facade/tigrbl-auth" },
     { name = "tigrbl-auth-plugin", editable = "pkgs/60-runtime/tigrbl-auth-plugin" },
+    { name = "tigrbl-auth-profile-haip", editable = "pkgs/50-protocols/tigrbl-auth-profile-haip" },
     { name = "tigrbl-auth-protocol-authzen", editable = "pkgs/50-protocols/tigrbl-auth-protocol-authzen" },
     { name = "tigrbl-auth-protocol-gnap", editable = "pkgs/50-protocols/tigrbl-auth-protocol-gnap" },
     { name = "tigrbl-auth-protocol-jwt", editable = "pkgs/50-protocols/tigrbl-auth-protocol-jwt" },
