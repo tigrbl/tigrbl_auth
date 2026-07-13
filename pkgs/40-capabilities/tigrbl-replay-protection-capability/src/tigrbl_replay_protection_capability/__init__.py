@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
+from tigrbl_capability import Capability
+from tigrbl_identity_contracts.capabilities import CapabilityMetadata
 from tigrbl_identity_contracts.replay import (
     ReplayReservationPort,
     ReplayReservationRequest,
@@ -25,7 +27,7 @@ class ReplayCapabilityDescriptor:
     limitations: tuple[str, ...] = ()
 
 
-class ReplayProtectionCapability:
+class ReplayProtectionCapability(Capability):
     capability_id = "security.replay-protection"
     version = "1.0"
 
@@ -38,6 +40,29 @@ class ReplayProtectionCapability:
     ) -> None:
         self._provider = provider
         self._namespaces = tuple(sorted(set(namespaces)))
+        persistence = str(getattr(provider, "persistence", "unknown"))
+        limitations = (
+            ("state-lost-on-restart", "not-shared-across-workers")
+            if persistence == "ephemeral-process-local"
+            else ()
+        )
+        super().__init__(
+            CapabilityMetadata(
+                capability_id=self.capability_id,
+                version=self.version,
+                operations=("check_and_reserve",),
+                guarantees=("atomic-reservation", "expiry"),
+                namespaces=self._namespaces,
+                dependencies=(
+                    str(getattr(provider, "provider_id", type(provider).__name__)),
+                ),
+                persistence=persistence,
+                ready=True,
+                healthy=True,
+                limitations=limitations,
+            )
+        )
+        self.bind("check_and_reserve", self.check_and_reserve, delegated=True)
 
     async def check_and_reserve(
         self, request: ReplayReservationRequest, /

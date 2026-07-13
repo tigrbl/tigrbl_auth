@@ -108,6 +108,7 @@ dependencies = [
     "tigrbl-cose-bases==0.4.0.dev2",
     "tigrbl-security-event-bases==0.4.0.dev2",
     "tigrbl-token-bases==0.4.0.dev2",
+    "tigrbl-capability-bases==0.4.0.dev2",
     "tigrbl-replay-bases==0.4.0.dev2",
     "tigrbl-authentication-assurance-bases==0.4.0.dev2",
     "tigrbl-claim-issuer-concrete==0.4.0.dev2",
@@ -192,6 +193,8 @@ dependencies = [
     "tigrbl-pairwise-subject-identifier-concrete==0.4.0.dev2",
     "tigrbl-eap-acr-concrete==0.4.0.dev2",
     "tigrbl-identity-assurance-concrete==0.4.0.dev2",
+    "tigrbl-capability==0.4.0.dev2",
+    "tigrbl-default-capability==0.4.0.dev2",
     "tigrbl-authz-policy-authority-derivation-graph==0.4.0.dev2",
     "tigrbl-authz-policy-decision-engine==0.4.0.dev2",
     "tigrbl-authz-policy-invariant-registry==0.4.0.dev2",
@@ -489,6 +492,7 @@ tigrbl-digital-credential-bases = { path = "pkgs/05-bases/tigrbl-digital-credent
 tigrbl-attestation-bases = { path = "pkgs/05-bases/tigrbl-attestation-bases", editable = true }
 tigrbl-security-event-bases = { path = "pkgs/05-bases/tigrbl-security-event-bases", editable = true }
 tigrbl-token-bases = { path = "pkgs/05-bases/tigrbl-token-bases", editable = true }
+tigrbl-capability-bases = { path = "pkgs/05-bases/tigrbl-capability-bases", editable = true }
 tigrbl-replay-bases = { path = "pkgs/05-bases/tigrbl-replay-bases", editable = true }
 tigrbl-authentication-assurance-bases = { path = "pkgs/05-bases/tigrbl-authentication-assurance-bases", editable = true }
 tigrbl-claim-issuer-concrete = { path = "pkgs/10-concrete/tigrbl-claim-issuer-concrete", editable = true }
@@ -573,6 +577,8 @@ tigrbl-public-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pu
 tigrbl-pairwise-subject-identifier-concrete = { path = "pkgs/10-concrete/tigrbl-pairwise-subject-identifier-concrete", editable = true }
 tigrbl-eap-acr-concrete = { path = "pkgs/10-concrete/tigrbl-eap-acr-concrete", editable = true }
 tigrbl-identity-assurance-concrete = { path = "pkgs/10-concrete/tigrbl-identity-assurance-concrete", editable = true }
+tigrbl-capability = { path = "pkgs/10-concrete/tigrbl-capability", editable = true }
+tigrbl-default-capability = { path = "pkgs/10-concrete/tigrbl-default-capability", editable = true }
 tigrbl-user-identity-concrete = { path = "pkgs/10-concrete/tigrbl-user-identity-concrete", editable = true }
 tigrbl-admin-identity-concrete = { path = "pkgs/10-concrete/tigrbl-admin-identity-concrete", editable = true }
 tigrbl-service-identity-concrete = { path = "pkgs/10-concrete/tigrbl-service-identity-concrete", editable = true }

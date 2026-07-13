@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any, Iterable, Mapping
 
+from tigrbl_capability import Capability
+from tigrbl_identity_contracts.capabilities import CapabilityMetadata
 from tigrbl_identity_contracts.audit.admin import AdminAuditEvent as _AdminAuditEvent
 from tigrbl_identity_contracts.credentials import Credential, CredentialKind
 from tigrbl_identity_contracts.policy.definitions import PolicyDefinition
@@ -22,8 +24,28 @@ from .models import (
 )
 
 
-class AdminControlPlane:
+class AdminControlPlane(Capability):
     def __init__(self) -> None:
+        super().__init__(
+            CapabilityMetadata(
+                capability_id="identity-admin.control-plane",
+                version="1.0",
+                operations=(
+                    "create_principal",
+                    "create_credential",
+                    "create_app",
+                    "create_service_identity",
+                    "create_resource_server",
+                    "create_policy",
+                    "get",
+                    "metadata",
+                    "list",
+                    "update",
+                    "delete",
+                ),
+                guarantees=("tenant-isolation", "audited-mutations"),
+            )
+        )
         self._metadata: dict[AdminResourceKind, dict[str, AdminResource]] = {
             kind: {} for kind in AdminResourceKind
         }
@@ -31,6 +53,8 @@ class AdminControlPlane:
             kind: {} for kind in AdminResourceKind
         }
         self._audit_events: list[_AdminAuditEvent] = []
+        for operation in self.emit_capability_metadata().operations:
+            self.bind(operation, getattr(self, operation))
 
     @property
     def audit_events(self) -> tuple[_AdminAuditEvent, ...]:

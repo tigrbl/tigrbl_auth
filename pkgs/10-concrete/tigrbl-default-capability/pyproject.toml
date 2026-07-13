@@ -1,7 +1,7 @@
 [project]
-name = "tigrbl-identity-admin-control-plane"
+name = "tigrbl-default-capability"
 version = "0.4.0.dev2"
-description = "Identity administration control-plane capability."
+description = "Opinionated generic default capability implementation."
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 license = "Apache-2.0"
@@ -15,4 +15,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-packages = [{ include = "tigrbl_identity_admin_control_plane", from = "src" }]
+packages = [{ include = "tigrbl_default_capability", from = "src" }]

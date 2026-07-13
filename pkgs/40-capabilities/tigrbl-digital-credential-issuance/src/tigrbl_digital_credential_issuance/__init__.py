@@ -1,3 +1,5 @@
+from tigrbl_capability import Capability
+from tigrbl_identity_contracts.capabilities import CapabilityMetadata
 from tigrbl_identity_contracts.digital_credentials import (
     CredentialConfiguration,
     CredentialIssuanceRequest,
@@ -8,15 +10,31 @@ from tigrbl_identity_contracts.digital_credentials import (
 )
 
 
-class DigitalCredentialIssuanceCapability:
+class DigitalCredentialIssuanceCapability(Capability):
     def __init__(
         self,
         issuer: CredentialIssuerPort,
         wallet_verifier: WalletAttestationVerifierPort | None = None,
     ):
+        dependencies = [type(issuer).__name__]
+        if wallet_verifier is not None:
+            dependencies.append(type(wallet_verifier).__name__)
+        super().__init__(
+            CapabilityMetadata(
+                capability_id="digital-credential.issuance",
+                version="1.0",
+                operations=("register_configuration", "offer", "issue"),
+                guarantees=("known-configuration-only", "wallet-policy-before-issuance"),
+                optional_features=("wallet-attestation",),
+                dependencies=tuple(dependencies),
+            )
+        )
         self._issuer = issuer
         self._wallet_verifier = wallet_verifier
         self._configurations: dict[str, CredentialConfiguration] = {}
+        self.bind("register_configuration", self.register_configuration)
+        self.bind("offer", self.offer)
+        self.bind("issue", self.issue, delegated=True)
 
     def register_configuration(self, configuration: CredentialConfiguration) -> None:
         if configuration.identifier in self._configurations:
