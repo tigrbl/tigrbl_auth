@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
-from .claim_sets import OAUTH_EXTENSION_CLAIMS, compose_oauth_claim_set
+from .claim_sets import (
+    OAUTH_DPOP_PROOF_CLAIMS,
+    OAUTH_EXTENSION_CLAIMS,
+    OAUTH_TOKEN_EXCHANGE_CLAIMS,
+    compose_dpop_proof_claim_set,
+    compose_oauth_claim_set,
+    compose_token_exchange_claim_set,
+)
 from .features import FEATURES_BY_VERSION, supports
 from .migrations import REMOVED_GRANTS, migrate_client
 from .protocol import (
@@ -30,10 +37,14 @@ __all__ = [
     "OAuthProtocolService",
     "OAuthRepositoryPort",
     "OAUTH_EXTENSION_CLAIMS",
+    "OAUTH_DPOP_PROOF_CLAIMS",
+    "OAUTH_TOKEN_EXCHANGE_CLAIMS",
     "FEATURES_BY_VERSION",
     "REMOVED_GRANTS",
     "TokenExchangeResult",
     "compose_oauth_claim_set",
+    "compose_dpop_proof_claim_set",
+    "compose_token_exchange_claim_set",
     "migrate_client",
     "select_version",
     "sha256_thumbprint",

@@ -47,6 +47,14 @@ dependencies = [
     "tigrbl-claim-client-id-concrete==0.4.0.dev2",
     "tigrbl-claim-confirmation-concrete==0.4.0.dev2",
     "tigrbl-claim-scope-concrete==0.4.0.dev2",
+    "tigrbl-claim-http-method-concrete==0.4.0.dev2",
+    "tigrbl-claim-http-uri-concrete==0.4.0.dev2",
+    "tigrbl-claim-access-token-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-actor-concrete==0.4.0.dev2",
+    "tigrbl-claim-may-act-concrete==0.4.0.dev2",
+    "tigrbl-claim-jwt-id-concrete==0.4.0.dev2",
+    "tigrbl-claim-issued-at-concrete==0.4.0.dev2",
+    "tigrbl-claim-nonce-concrete==0.4.0.dev2",
 ]
 [project.urls]
 Homepage = "https://github.com/tigrbl/tigrbl_auth"

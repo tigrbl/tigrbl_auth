@@ -140,6 +140,15 @@ dependencies = [
     "tigrbl-claim-security-events-concrete==0.4.0.dev2",
     "tigrbl-claim-transaction-id-concrete==0.4.0.dev2",
     "tigrbl-claim-eat-profile-concrete==0.4.0.dev2",
+    "tigrbl-claim-http-method-concrete==0.4.0.dev2",
+    "tigrbl-claim-http-uri-concrete==0.4.0.dev2",
+    "tigrbl-claim-access-token-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-sd-hash-concrete==0.4.0.dev2",
+    "tigrbl-claim-eat-nonce-concrete==0.4.0.dev2",
+    "tigrbl-claim-ueid-concrete==0.4.0.dev2",
+    "tigrbl-claim-eat-submodules-concrete==0.4.0.dev2",
+    "tigrbl-claim-actor-concrete==0.4.0.dev2",
+    "tigrbl-claim-may-act-concrete==0.4.0.dev2",
     "tigrbl-auth-protocol-gnap==0.4.0.dev2",
     "tigrbl-auth-profile-haip==0.4.0.dev2",
     "tigrbl-security-event-protocol-set==0.4.0.dev2",
@@ -476,6 +485,15 @@ tigrbl-claim-credential-status-concrete = { path = "pkgs/10-concrete/tigrbl-clai
 tigrbl-claim-security-events-concrete = { path = "pkgs/10-concrete/tigrbl-claim-security-events-concrete", editable = true }
 tigrbl-claim-transaction-id-concrete = { path = "pkgs/10-concrete/tigrbl-claim-transaction-id-concrete", editable = true }
 tigrbl-claim-eat-profile-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-profile-concrete", editable = true }
+tigrbl-claim-http-method-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-method-concrete", editable = true }
+tigrbl-claim-http-uri-concrete = { path = "pkgs/10-concrete/tigrbl-claim-http-uri-concrete", editable = true }
+tigrbl-claim-access-token-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-access-token-hash-concrete", editable = true }
+tigrbl-claim-sd-hash-concrete = { path = "pkgs/10-concrete/tigrbl-claim-sd-hash-concrete", editable = true }
+tigrbl-claim-eat-nonce-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-nonce-concrete", editable = true }
+tigrbl-claim-ueid-concrete = { path = "pkgs/10-concrete/tigrbl-claim-ueid-concrete", editable = true }
+tigrbl-claim-eat-submodules-concrete = { path = "pkgs/10-concrete/tigrbl-claim-eat-submodules-concrete", editable = true }
+tigrbl-claim-actor-concrete = { path = "pkgs/10-concrete/tigrbl-claim-actor-concrete", editable = true }
+tigrbl-claim-may-act-concrete = { path = "pkgs/10-concrete/tigrbl-claim-may-act-concrete", editable = true }
 tigrbl-auth-protocol-gnap = { path = "pkgs/50-protocols/tigrbl-auth-protocol-gnap", editable = true }
 tigrbl-auth-profile-haip = { path = "pkgs/50-protocols/tigrbl-auth-profile-haip", editable = true }
 tigrbl-security-event-protocol-set = { path = "pkgs/50-protocols/tigrbl-security-event-protocol-set", editable = true }
