@@ -125,7 +125,8 @@ async def upsert_token_record_async(
     digest = token_hash(token)
     async with storage_session() as db:
         await TokenRecord.handlers.persist_issued.core(
-                {
+            {
+                "payload": {
                     "token_hash": digest,
                     "claims": dict(claims or {}),
                     "token_kind": token_kind,
@@ -136,7 +137,8 @@ async def upsert_token_record_async(
                     "used_at": used_at,
                     "reuse_detected_at": reuse_detected_at,
                 },
-                db=db,
+                "db": db,
+            }
         )
     return digest
 
@@ -162,7 +164,14 @@ async def mark_token_used_async(token, *, successor_token=None, reason="refresh_
     successor_hash = token_hash(successor_token) if successor_token else None
     async with storage_session() as db:
         await TokenRecord.handlers.mark_rotated.core(
-            {"token_hash": digest, "successor_hash": successor_hash, "reason": reason}, db=db
+            {
+                "payload": {
+                    "token_hash": digest,
+                    "successor_hash": successor_hash,
+                    "reason": reason,
+                },
+                "db": db,
+            }
         )
     return digest
 
@@ -173,11 +182,19 @@ async def revoke_refresh_family_async(family_id, *, reason="refresh_token_reuse_
     reuse_hash = token_hash(reuse_token) if reuse_token else None
     async with storage_session() as db:
         rows = await TokenRecord.handlers.revoke_family.core(
-            {"refresh_family_id": family_id, "reason": reason, "reuse_token_hash": reuse_hash}, db=db
+            {
+                "payload": {
+                    "refresh_family_id": family_id,
+                    "reason": reason,
+                    "reuse_token_hash": reuse_hash,
+                },
+                "db": db,
+            }
         )
         for row in rows:
             await RevokedToken.handlers.record_hash.core(
-                    {
+                {
+                    "payload": {
                         "token_hash": getattr(row, "token_hash", None),
                         "token_type_hint": getattr(row, "token_type_hint", None),
                         "reason": reason,
@@ -186,7 +203,8 @@ async def revoke_refresh_family_async(family_id, *, reason="refresh_token_reuse_
                         "client_id": getattr(row, "client_id", None),
                         "expires_at": getattr(row, "expires_at", None),
                     },
-                    db=db,
+                    "db": db,
+                }
             )
     return len(rows)
 
@@ -195,9 +213,13 @@ async def introspect_token_async(token):
     digest = token_hash(token)
     try:
         async with storage_session() as db:
-            if await RevokedToken.handlers.is_hash_revoked.core({"token_hash": digest}, db=db):
+            if await RevokedToken.handlers.is_hash_revoked.core(
+                {"payload": {"token_hash": digest}, "db": db}
+            ):
                 return {"active": False}
-            return await TokenRecord.handlers.introspect.core({"token_hash": digest}, db=db)
+            return await TokenRecord.handlers.introspect.core(
+                {"payload": {"token_hash": digest}, "db": db}
+            )
     except Exception:
         # Protocol adapters may provide an explicitly scoped fallback store (for
         # example, the RFC 7662 in-memory test adapter).  An unavailable or
