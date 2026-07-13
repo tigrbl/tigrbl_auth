@@ -136,10 +136,13 @@ def _state_home() -> Path:
 
 def operator_state_root(repo_root: Path) -> Path:
     state_home = _state_home()
+    explicit_override = os.getenv("TIGRBL_AUTH_OPERATOR_STATE_DIR")
     try:
         resolved_repo = repo_root.resolve()
         resolved_home = state_home.resolve()
-        if resolved_home == resolved_repo or resolved_home.is_relative_to(resolved_repo):
+        if not explicit_override and (
+            resolved_home == resolved_repo or resolved_home.is_relative_to(resolved_repo)
+        ):
             state_home = resolved_repo.parent / "operator-plane-state"
     except OSError:
         pass

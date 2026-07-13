@@ -12,6 +12,7 @@ from .paths import (
 from .app import operator_store_session
 from tigrbl_identity_storage.tables._ops import (
     create_handler_record as _create_table_record,
+    delete_handler_record as _delete_table_record,
     field as _table_field,
     list_handler_records as _list_table_records,
 )
@@ -21,6 +22,21 @@ from tigrbl_identity_storage.tables.operator_audit_event import OperatorAuditEve
 from tigrbl_identity_storage.tables.operator_metadata import OperatorMetadata
 from tigrbl_identity_storage.tables.operator_record import OperatorRecord
 from tigrbl_identity_storage.tables.operator_transaction import OperatorTransaction
+
+
+async def _upsert_operator_metadata(db: Any, key: str, value: Any) -> None:
+    existing = await _list_table_records(OperatorMetadata, db, {"key": key})
+    for row in existing:
+        await _delete_table_record(OperatorMetadata, db, _table_field(row, "key"))
+    await _create_table_record(
+        OperatorMetadata,
+        db,
+        {
+            "key": key,
+            "value_json": json.dumps(value, sort_keys=True),
+            "updated_at": datetime.now(timezone.utc),
+        },
+    )
 
 
 def _load_records_from_snapshot(
@@ -53,7 +69,27 @@ async def _load_records_async(
     db_path = operator_database_path(repo_root)
     had_db = db_path.exists()
     async with operator_store_session(state_root) as db:
-        rows = await OperatorRecord.load_records(db, resource, tenant=tenant)
+        stored = await _list_table_records(OperatorRecord, db, {"resource": resource})
+        rows = {}
+        for row in stored:
+            row_tenant = _table_field(row, "tenant")
+            if tenant is not None and row_tenant != tenant:
+                continue
+            record_id = str(_table_field(row, "record_id"))
+            rows[record_id] = {
+                "id": record_id,
+                "resource": _table_field(row, "resource"),
+                "status": _table_field(row, "status"),
+                "enabled": bool(_table_field(row, "enabled")),
+                "created_at": _table_field(row, "created_at"),
+                "updated_at": _table_field(row, "updated_at"),
+                "actor": _table_field(row, "actor"),
+                "profile": _table_field(row, "profile"),
+                "tenant": row_tenant,
+                "issuer": _table_field(row, "issuer"),
+                "revision": int(_table_field(row, "revision") or 1),
+                "data": json.loads(_table_field(row, "data_json") or "{}"),
+            }
     if rows or had_db or db_path.exists():
         return rows
     return _load_records_from_snapshot(
@@ -373,18 +409,37 @@ async def _commit_mutation_async(
     audit_entry: Mapping[str, Any] | None = None,
 ) -> None:
     root = operator_state_root(context.repo_root)
-    changed_ids = {str(item) for item in list(transaction.get("changed_ids") or [])}
     async with operator_store_session(root) as db:
-        await OperatorRecord.replace_resource_records(
-            db,
-            resource=context.resource,
-            records=records,
-            tenant=context.tenant,
-            actor=context.actor,
-            changed_ids=changed_ids,
-            dry_run=context.dry_run,
-            now=utc_now(),
-        )
+        if not context.dry_run:
+            stored = await _list_table_records(
+                OperatorRecord, db, {"resource": context.resource}
+            )
+            for row in stored:
+                if context.tenant is not None and _table_field(row, "tenant") != context.tenant:
+                    continue
+                await _delete_table_record(OperatorRecord, db, _table_field(row, "id"))
+            for record_id, record in records.items():
+                if context.tenant is not None and record.get("tenant") != context.tenant:
+                    continue
+                await _create_table_record(
+                    OperatorRecord,
+                    db,
+                    {
+                        "id": OperatorRecord.store_id(context.resource, str(record_id)),
+                        "resource": context.resource,
+                        "record_id": str(record_id),
+                        "status": record.get("status", default_status(context.resource)),
+                        "enabled": bool(record.get("enabled", True)),
+                        "created_at": record.get("created_at") or utc_now(),
+                        "updated_at": record.get("updated_at") or utc_now(),
+                        "actor": context.actor or record.get("actor"),
+                        "profile": record.get("profile"),
+                        "tenant": record.get("tenant"),
+                        "issuer": record.get("issuer"),
+                        "revision": int(record.get("revision") or 1),
+                        "data_json": json.dumps(dict(record.get("data") or {}), sort_keys=True),
+                    },
+                )
         await _create_table_record(
             OperatorTransaction, db, _operator_transaction_record(transaction)
         )
@@ -406,13 +461,13 @@ async def _commit_mutation_async(
                 }
             ),
         )
-        await OperatorMetadata.upsert_metadata(
+        await _upsert_operator_metadata(
             db, "last_transaction_id", transaction.get("transaction_id")
         )
-        await OperatorMetadata.upsert_metadata(
+        await _upsert_operator_metadata(
             db, "last_transaction_status", transaction.get("status")
         )
-        await OperatorMetadata.upsert_metadata(db, "repo_mutation_dependency", False)
+        await _upsert_operator_metadata(db, "repo_mutation_dependency", False)
 
 
 def commit_mutation(
@@ -519,7 +574,7 @@ async def _ensure_operator_metadata_async(repo_root: Path) -> None:
     root = operator_state_root(repo_root)
     async with operator_store_session(root) as db:
         for key, value in _metadata_payload(repo_root).items():
-            await OperatorMetadata.upsert_metadata(db, key, value)
+            await _upsert_operator_metadata(db, key, value)
 
 
 def operator_store_summary(repo_root: Path) -> dict[str, Any]:
